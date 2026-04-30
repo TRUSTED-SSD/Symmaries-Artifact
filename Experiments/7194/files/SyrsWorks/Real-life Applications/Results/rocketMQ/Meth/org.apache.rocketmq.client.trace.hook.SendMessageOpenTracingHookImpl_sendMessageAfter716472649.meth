@@ -1,0 +1,37 @@
+void org.apache.rocketmq.client.trace.hook.SendMessageOpenTracingHookImpl:sendMessageAfter(org.apache.rocketmq.client.hook.SendMessageContext context)
+{
+io.opentracing.Span span;
+  java.lang.Object $stack3;
+  org.apache.rocketmq.client.producer.SendResult $stack4;
+  java.lang.String $stack6;
+  org.apache.rocketmq.client.producer.SendStatus $stack10;
+  org.apache.rocketmq.client.producer.SendStatus $stack11;
+  boolean $stack12;
+  if (context==null) goto label0;
+ $stack3 = context.getMqTraceContext();
+ if ($stack3!=null) goto label1;
+ label0:return;
+ label1:$stack4 = context.getSendResult();
+ if ($stack4!=null) goto label2;
+ return;
+ label2:$stack4 = context.getSendResult();
+ $stack6 = $stack4.getRegionId();
+ if ($stack6!=null) goto label3;
+ return;
+ label3:$stack3 = context.getMqTraceContext();
+ span=(io.opentracing.Span) $stack3;
+ $stack4 = context.getSendResult();
+ $stack10 = $stack4.getSendStatus();
+ $stack11=org.apache.rocketmq.client.producer.SendStatus.SEND_OK;
+ $stack12 = $stack10.equals((java.lang.Object)$stack11);
+ span.setTag("rocketmq.success",$stack12);
+ $stack4 = context.getSendResult();
+ $stack6 = $stack4.getMsgId();
+ span.setTag("rocketmq.mgs_id",$stack6);
+ $stack4 = context.getSendResult();
+ $stack6 = $stack4.getRegionId();
+ span.setTag("rocketmq.region_id",$stack6);
+ span.finish();
+ return;
+ } 
+

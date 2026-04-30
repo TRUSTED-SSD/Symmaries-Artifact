@@ -1,0 +1,28 @@
+void org.apache.rocketmq.store.dledger.DLedgerCommitLog:setMessageInfo(org.apache.rocketmq.common.message.MessageExtBrokerInner msg,int tranType)
+{
+java.net.InetSocketAddress bornSocketAddress;
+  long $stack5;
+  byte[] $stack6;
+  java.net.SocketAddress $stack8;
+  java.net.InetAddress $stack9;
+  boolean $stack10;
+  $stack5 = java.lang.System.currentTimeMillis();
+ msg.setStoreTimestamp($stack5);
+ $stack6 = msg.getBody();
+ tranType = org.apache.rocketmq.common.UtilAll.crc32($stack6);
+ msg.setBodyCRC(tranType);
+ $stack8 = msg.getBornHost();
+ bornSocketAddress=(java.net.InetSocketAddress) $stack8;
+ $stack9 = bornSocketAddress.getAddress();
+ $stack10=$stack9 instanceof java.net.Inet6Address;
+ if ($stack10==0) goto label0;
+ msg.setBornHostV6Flag();
+ label0:$stack8 = msg.getStoreHost();
+ bornSocketAddress=(java.net.InetSocketAddress) $stack8;
+ $stack9 = bornSocketAddress.getAddress();
+ $stack10=$stack9 instanceof java.net.Inet6Address;
+ if ($stack10==0) goto label1;
+ msg.setStoreHostAddressV6Flag();
+ label1:return;
+ } 
+

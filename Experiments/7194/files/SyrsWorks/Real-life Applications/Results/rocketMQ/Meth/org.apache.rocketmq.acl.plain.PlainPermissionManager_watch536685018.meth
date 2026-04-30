@@ -1,0 +1,26 @@
+void org.apache.rocketmq.acl.plain.PlainPermissionManager:watch()
+{
+org.apache.rocketmq.srvutil.AclFileWatchService $stack2;
+  org.apache.rocketmq.acl.plain.PlainPermissionManager$1 $stack3;
+  java.lang.String $stack4;
+  java.lang.String $stack5;
+  org.apache.rocketmq.logging.org.slf4j.Logger $stack6;
+  java.lang.Exception $stack7;
+  label0:$stack2=new org.apache.rocketmq.srvutil.AclFileWatchService;
+ $stack4=this.defaultAclDir;
+ $stack5=this.defaultAclFile;
+ $stack3=new org.apache.rocketmq.acl.plain.PlainPermissionManager$1;
+ $stack3#org.apache.rocketmq.acl.plain.PlainPermissionManager$1(this);
+ $stack2#org.apache.rocketmq.srvutil.AclFileWatchService($stack4,$stack5,(org.apache.rocketmq.srvutil.AclFileWatchService$Listener)$stack3);
+ $stack2.start();
+ $stack6=org.apache.rocketmq.acl.plain.PlainPermissionManager.log;
+ $stack6.info("Succeed to start AclFileWatchService");
+ this.isWatchStart=1;
+ label1:goto label2;
+ label3:$stack7 = catch;
+ $stack6=org.apache.rocketmq.acl.plain.PlainPermissionManager.log;
+ $stack6.error("Failed to start AclWatcherService",(java.lang.Throwable)$stack7);
+ label2:return;
+ catch java.lang.Exception: label0 - label1 : label3;
+} 
+

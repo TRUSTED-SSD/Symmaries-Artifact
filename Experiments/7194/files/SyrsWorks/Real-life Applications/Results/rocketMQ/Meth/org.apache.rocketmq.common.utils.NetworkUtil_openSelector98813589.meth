@@ -1,0 +1,42 @@
+static java.nio.channels.Selector org.apache.rocketmq.common.utils.NetworkUtil:openSelector()
+{
+java.nio.channels.Selector result;
+  java.io.Serializable providerClazz;
+  java.lang.reflect.Method method;
+  java.nio.channels.spi.SelectorProvider selectorProvider;
+  boolean $stack4;
+  java.lang.Class[] $stack9;
+  java.lang.Object[] $stack11;
+  java.lang.Object $stack12;
+  java.lang.Exception $stack14;
+  java.lang.Exception $stack15;
+  org.apache.rocketmq.logging.org.slf4j.Logger $stack16;
+  java.lang.Class tmp$35213265;
+  result=null;
+ $stack4 = org.apache.rocketmq.common.utils.NetworkUtil.isLinuxPlatform();
+ if ($stack4==0) goto label0;
+ label1:providerClazz = java.lang.Class.forName("sun.nio.ch.EPollSelectorProvider");
+ if (providerClazz==null) goto label2;
+ label3:$stack9=new java.lang.Class[0];
+ tmp$35213265=(java.lang.Class) providerClazz;
+ method = tmp$35213265.getMethod("provider",$stack9);
+ if (method==null) goto label4;
+ $stack11=new java.lang.Object[0];
+ $stack12 = method.invoke(null,$stack11);
+ selectorProvider=(java.nio.channels.spi.SelectorProvider) $stack12;
+ if (selectorProvider==null) goto label4;
+ result = selectorProvider.openSelector();
+ label4:goto label2;
+ label5:$stack15 = catch;
+ $stack16=org.apache.rocketmq.common.utils.NetworkUtil.log;
+ $stack16.warn("Open ePoll Selector for linux platform exception",(java.lang.Throwable)$stack15);
+ label2:goto label0;
+ label6:$stack14 = catch;
+ providerClazz=$stack14;
+ label0:if (result!=null) goto label7;
+ result = java.nio.channels.Selector.open();
+ label7:return  result;
+ catch java.lang.Exception: label3 - label4 : label5;
+catch java.lang.Exception: label1 - label2 : label6;
+} 
+

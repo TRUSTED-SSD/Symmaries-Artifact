@@ -1,0 +1,44 @@
+rifl.spec.ReferencePoint rifl.spec.java.JavaRIFLReader:readReferencePoint(org.w3c.dom.Element elem)
+{
+java.lang.String className;
+  java.lang.String methodName;
+  java.lang.String label;
+  boolean $stack8;
+  rifl.spec.java.JavaReferencePoint $stack11;
+  rifl.spec.RIFLIntegrityException $stack12;
+  java.lang.StringBuilder $stack13;
+  className = elem.getAttribute("class");
+ methodName = elem.getAttribute("method");
+ label = elem.getAttribute("label");
+ $stack8 = rifl.spec.java.JavaSyntaxChecker.isClassNameCorrect(className);
+ if ($stack8!=0) goto label0;
+ $stack12=new rifl.spec.RIFLIntegrityException;
+ $stack13=new java.lang.StringBuilder;
+ $stack13#java.lang.StringBuilder("Invalid class name: ");
+ $stack13 = $stack13.append(className);
+ className = $stack13.toString();
+ $stack12#rifl.spec.RIFLIntegrityException(className);
+ throw $stack12;
+ label0:$stack8 = rifl.spec.java.JavaSyntaxChecker.isMethodNameCorrect(methodName);
+ if ($stack8!=0) goto label1;
+ $stack12=new rifl.spec.RIFLIntegrityException;
+ $stack13=new java.lang.StringBuilder;
+ $stack13#java.lang.StringBuilder("Invalid method name: ");
+ $stack13 = $stack13.append(methodName);
+ className = $stack13.toString();
+ $stack12#rifl.spec.RIFLIntegrityException(className);
+ throw $stack12;
+ label1:$stack8 = rifl.spec.java.JavaSyntaxChecker.isLabelCorrect(label);
+ if ($stack8!=0) goto label2;
+ $stack12=new rifl.spec.RIFLIntegrityException;
+ $stack13=new java.lang.StringBuilder;
+ $stack13#java.lang.StringBuilder("Invalid label: ");
+ $stack13 = $stack13.append(label);
+ className = $stack13.toString();
+ $stack12#rifl.spec.RIFLIntegrityException(className);
+ throw $stack12;
+ label2:$stack11=new rifl.spec.java.JavaReferencePoint;
+ $stack11#rifl.spec.java.JavaReferencePoint(className,methodName,label);
+ return  $stack11;
+ } 
+

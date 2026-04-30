@@ -1,0 +1,12 @@
+static com.google.zxing.qrcode.decoder.Version com.google.zxing.qrcode.encoder.Encoder:recommendVersion(com.google.zxing.qrcode.decoder.ErrorCorrectionLevel ecLevel,com.google.zxing.qrcode.decoder.Mode mode,com.google.zxing.common.BitArray headerBits,com.google.zxing.common.BitArray dataBits)
+{
+int provisionalBitsNeeded;
+  com.google.zxing.qrcode.decoder.Version provisionalVersion;
+  provisionalVersion = com.google.zxing.qrcode.decoder.Version.getVersionForNumber(1);
+ provisionalBitsNeeded = com.google.zxing.qrcode.encoder.Encoder.calculateBitsNeeded(mode,headerBits,dataBits,provisionalVersion);
+ provisionalVersion = com.google.zxing.qrcode.encoder.Encoder.chooseVersion(provisionalBitsNeeded,ecLevel);
+ provisionalBitsNeeded = com.google.zxing.qrcode.encoder.Encoder.calculateBitsNeeded(mode,headerBits,dataBits,provisionalVersion);
+ provisionalVersion = com.google.zxing.qrcode.encoder.Encoder.chooseVersion(provisionalBitsNeeded,ecLevel);
+ return  provisionalVersion;
+ } 
+

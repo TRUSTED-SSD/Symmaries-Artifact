@@ -1,0 +1,129 @@
+    private static void loadConfFile(org.apache.commons.configuration.CompositeConfiguration, java.lang.String) throws java.lang.IllegalArgumentException
+    {
+        org.apache.commons.configuration.CompositeConfiguration conf;
+        java.lang.String confFile;
+        java.lang.Throwable loadedConf;
+        org.apache.commons.configuration.PropertiesConfiguration $stack3;
+        java.io.File $stack4;
+        java.net.URI $stack5;
+        java.net.URL $stack6;
+        org.slf4j.Logger $stack7;
+        java.lang.IllegalArgumentException $stack10;
+        java.lang.StringBuilder $stack11;
+        java.net.MalformedURLException $stack15;
+
+        conf := @parameter0: org.apache.commons.configuration.CompositeConfiguration;
+
+        confFile := @parameter1: java.lang.String;
+
+     label1:
+        $stack3 = new org.apache.commons.configuration.PropertiesConfiguration;
+/*107*/
+
+        $stack4 = new java.io.File;
+/*107*/
+
+        specialinvoke $stack4.<java.io.File: void <init>(java.lang.String)>(confFile);
+/*107*/
+
+        $stack5 = virtualinvoke $stack4.<java.io.File: java.net.URI toURI()>();
+/*108*/
+
+        $stack6 = virtualinvoke $stack5.<java.net.URI: java.net.URL toURL()>();
+/*108*/
+
+        specialinvoke $stack3.<org.apache.commons.configuration.PropertiesConfiguration: void <init>(java.net.URL)>($stack6);
+/*108*/
+
+        virtualinvoke conf.<org.apache.commons.configuration.CompositeConfiguration: void addConfiguration(org.apache.commons.configuration.Configuration)>($stack3);
+/*109*/
+
+     label2:
+        goto label5;
+/*116*/
+
+     label3:
+        $stack15 := @caughtexception;
+/*115*/
+
+        loadedConf = $stack15;
+/*110*/
+
+        $stack7 = <org.apache.bookkeeper.stream.server.StorageServer: org.slf4j.Logger log>;
+/*111*/
+
+        interfaceinvoke $stack7.<org.slf4j.Logger: void error(java.lang.String,java.lang.Object,java.lang.Object)>("Could not open configuration file {}", confFile, $stack15);
+/*111*/
+
+        $stack10 = new java.lang.IllegalArgumentException;
+/*112*/
+
+        $stack11 = new java.lang.StringBuilder;
+/*112*/
+
+        specialinvoke $stack11.<java.lang.StringBuilder: void <init>()>();
+/*112*/
+
+        $stack11 = virtualinvoke $stack11.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>("Could not open configuration file ");
+/*112*/
+
+        $stack11 = virtualinvoke $stack11.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>(confFile);
+/*112*/
+
+        confFile = virtualinvoke $stack11.<java.lang.StringBuilder: java.lang.String toString()>();
+/*112*/
+
+        specialinvoke $stack10.<java.lang.IllegalArgumentException: void <init>(java.lang.String,java.lang.Throwable)>(confFile, $stack15);
+/*112*/
+
+        throw $stack10;
+/*112*/
+
+     label4:
+        loadedConf := @caughtexception;
+/*118*/
+
+        $stack7 = <org.apache.bookkeeper.stream.server.StorageServer: org.slf4j.Logger log>;
+/*114*/
+
+        interfaceinvoke $stack7.<org.slf4j.Logger: void error(java.lang.String,java.lang.Object,java.lang.Object)>("Malformed configuration file {}", confFile, loadedConf);
+/*114*/
+
+        $stack10 = new java.lang.IllegalArgumentException;
+/*115*/
+
+        $stack11 = new java.lang.StringBuilder;
+/*115*/
+
+        specialinvoke $stack11.<java.lang.StringBuilder: void <init>()>();
+/*115*/
+
+        $stack11 = virtualinvoke $stack11.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>("Malformed configuration file ");
+/*115*/
+
+        $stack11 = virtualinvoke $stack11.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>(confFile);
+/*115*/
+
+        confFile = virtualinvoke $stack11.<java.lang.StringBuilder: java.lang.String toString()>();
+/*115*/
+
+        specialinvoke $stack10.<java.lang.IllegalArgumentException: void <init>(java.lang.String,java.lang.Throwable)>(confFile, loadedConf);
+/*115*/
+
+        throw $stack10;
+/*115*/
+
+     label5:
+        $stack7 = <org.apache.bookkeeper.stream.server.StorageServer: org.slf4j.Logger log>;
+/*117*/
+
+        interfaceinvoke $stack7.<org.slf4j.Logger: void info(java.lang.String,java.lang.Object)>("Loaded configuration file {}", confFile);
+/*117*/
+
+        return;
+/*118*/
+
+        catch java.net.MalformedURLException from label1 to label2 with label3;
+        catch org.apache.commons.configuration.ConfigurationException from label1 to label2 with label4;
+    }
+

@@ -1,0 +1,33 @@
+void org.apache.rocketmq.store.TransientStorePool:init()
+{
+int i;
+  java.nio.ByteBuffer byteBuffer;
+  long address;
+  int $stack6;
+  sun.nio.ch.DirectBuffer $stack9;
+  com.sun.jna.Pointer $stack11;
+  com.sun.jna.NativeLong $stack12;
+  org.apache.rocketmq.store.util.LibC $stack15;
+  java.util.Deque $stack17;
+  i=0;
+ label0:$stack6=this.poolSize;
+ if (i>=$stack6) goto label1;
+ $stack6=this.fileSize;
+ byteBuffer = java.nio.ByteBuffer.allocateDirect($stack6);
+ $stack9=(sun.nio.ch.DirectBuffer) byteBuffer;
+ address = $stack9.address();
+ $stack11=new com.sun.jna.Pointer;
+ $stack11#com.sun.jna.Pointer(address);
+ $stack15=org.apache.rocketmq.store.util.LibC.INSTANCE;
+ $stack12=new com.sun.jna.NativeLong;
+ $stack6=this.fileSize;
+ address=(long) $stack6;
+ $stack12#com.sun.jna.NativeLong(address);
+ $stack15.mlock($stack11,$stack12);
+ $stack17=this.availableBuffers;
+ $stack17.offer((java.lang.Object)byteBuffer);
+ i=(i+1);
+ goto label0;
+ label1:return;
+ } 
+

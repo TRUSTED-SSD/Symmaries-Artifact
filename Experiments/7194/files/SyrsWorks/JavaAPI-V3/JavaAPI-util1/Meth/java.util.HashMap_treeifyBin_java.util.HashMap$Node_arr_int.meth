@@ -1,0 +1,43 @@
+void java.util.HashMap:treeifyBin(java.util.HashMap$Node[] r1,int i0)
+{
+int i1;
+  int i2;
+  java.util.HashMap$TreeNode r2;
+  int $i3;
+  int $i4;
+  int $i5;
+  java.util.HashMap$Node $r4;
+  java.util.HashMap$Node $r5;
+  java.util.HashMap$Node r6;
+  java.util.HashMap$TreeNode r7;
+  java.util.HashMap$TreeNode r8;
+  if (r1==null) goto label0;
+ $i3=#r1;
+ i1=$i3;
+ if ($i3>=64) goto label1;
+ label0:this.resize();
+ goto label2;
+ label1:$i4=(i1-1);
+ $i5=($i4 & i0);
+ i2=$i5;
+ $r4=r1[$i5];
+ r6=$r4;
+ if ($r4==null) goto label2;
+ r7=null;
+ r8=null;
+ label3:r2 = this.replacementTreeNode(r6,null);
+ if (r8!=null) goto label4;
+ r7=r2;
+ goto label5;
+ label4:r2.prev=r8;
+ r8.next=r2;
+ label5:r8=r2;
+ $r5=r6.next;
+ r6=$r5;
+ if ($r5!=null) goto label3;
+ r1[i2]=r7;
+ if (r7==null) goto label2;
+ r7.treeify(r1);
+ label2:return;
+ }  
+

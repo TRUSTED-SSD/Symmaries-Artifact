@@ -1,0 +1,30 @@
+void org.apache.rocketmq.client.trace.hook.ConsumeMessageOpenTracingHookImpl:consumeMessageAfter(org.apache.rocketmq.client.hook.ConsumeMessageContext context)
+{
+java.util.List spanList;
+  java.util.Iterator l3;
+  io.opentracing.Span span;
+  boolean $stack7;
+  java.lang.Object $stack8;
+  if (context==null) goto label0;
+ spanList = context.getMsgList();
+ if (spanList==null) goto label0;
+ spanList = context.getMsgList();
+ $stack7 = spanList.isEmpty();
+ if ($stack7==0) goto label1;
+ label0:return;
+ label1:$stack8 = context.getMqTraceContext();
+ spanList=(java.util.List) $stack8;
+ if (spanList!=null) goto label2;
+ return;
+ label2:l3 = spanList.iterator();
+ label3:$stack7 = l3.hasNext();
+ if ($stack7==0) goto label4;
+ $stack8 = l3.next();
+ span=(io.opentracing.Span) $stack8;
+ $stack7 = context.isSuccess();
+ span.setTag("rocketmq.success",$stack7);
+ span.finish();
+ goto label3;
+ label4:return;
+ } 
+

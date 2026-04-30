@@ -1,0 +1,22 @@
+org.apache.bookkeeper.stats.OpStatsLogger org.apache.bookkeeper.stats.CachingStatsLogger:getOpStatsLogger(java.lang.String name)
+{
+org.apache.bookkeeper.stats.OpStatsLogger opStatsLogger;
+  org.apache.bookkeeper.stats.OpStatsLogger oldOpStatsLogger;
+  java.util.concurrent.ConcurrentMap $stack5;
+  java.lang.Object $stack6;
+  org.apache.bookkeeper.stats.StatsLogger $stack7;
+  $stack5=this.opStatsLoggers;
+ $stack6 = $stack5.get((java.lang.Object)name);
+ opStatsLogger=(org.apache.bookkeeper.stats.OpStatsLogger) $stack6;
+ if (null!=opStatsLogger) goto label0;
+ $stack7=this.underlying;
+ opStatsLogger = $stack7.getOpStatsLogger(name);
+ $stack5=this.opStatsLoggers;
+ $stack6 = $stack5.putIfAbsent((java.lang.Object)name,(java.lang.Object)opStatsLogger);
+ oldOpStatsLogger=(org.apache.bookkeeper.stats.OpStatsLogger) $stack6;
+ if (null!=oldOpStatsLogger) goto label1;
+ goto label0;
+ label1:opStatsLogger=oldOpStatsLogger;
+ label0:return  opStatsLogger;
+ } 
+

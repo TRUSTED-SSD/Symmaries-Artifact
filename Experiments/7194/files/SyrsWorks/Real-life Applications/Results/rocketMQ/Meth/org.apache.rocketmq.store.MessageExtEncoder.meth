@@ -1,0 +1,19 @@
+org.apache.rocketmq.store.MessageExtEncoder(int maxMessageBodySize)
+{
+io.netty.buffer.UnpooledByteBufAllocator alloc;
+  int maxMessageSize;
+  io.netty.buffer.ByteBuf $stack5;
+  this#java.lang.Object();
+ alloc=io.netty.buffer.UnpooledByteBufAllocator.DEFAULT;
+ maxMessageSize=(2147483647-maxMessageBodySize);
+ if (maxMessageSize<65536) goto label0;
+ maxMessageSize=(maxMessageBodySize+65536);
+ goto label1;
+ label0:maxMessageSize=2147483647;
+ label1:$stack5 = alloc.directBuffer(maxMessageSize);
+ this.byteBuf=$stack5;
+ this.maxMessageBodySize=maxMessageBodySize;
+ this.maxMessageSize=maxMessageSize;
+ return;
+ } 
+

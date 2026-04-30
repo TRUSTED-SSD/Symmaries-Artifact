@@ -1,0 +1,26 @@
+boolean org.apache.rocketmq.store.ha.DefaultHAClient:transferFromMaster()
+{
+boolean result;
+  java.nio.channels.Selector $stack3;
+  long $stack7;
+  org.apache.rocketmq.logging.org.slf4j.Logger $stack8;
+  java.lang.Long $stack10;
+  result = this#org.apache.rocketmq.store.ha.DefaultHAClient:isTimeToReportOffset();
+ if (result==0) goto label0;
+ $stack8=org.apache.rocketmq.store.ha.DefaultHAClient.log;
+ $stack7=this.currentReportedOffset;
+ $stack10 = java.lang.Long.valueOf($stack7);
+ $stack8.info("Slave report current offset {}",(java.lang.Object)$stack10);
+ $stack7=this.currentReportedOffset;
+ result = this#org.apache.rocketmq.store.ha.DefaultHAClient:reportSlaveMaxOffset($stack7);
+ if (result!=0) goto label0;
+ return  0;
+ label0:$stack3=this.selector;
+ $stack3.select(1000L);
+ result = this#org.apache.rocketmq.store.ha.DefaultHAClient:processReadEvent();
+ if (result!=0) goto label1;
+ return  0;
+ label1:result = this#org.apache.rocketmq.store.ha.DefaultHAClient:reportSlaveMaxOffsetPlus();
+ return  result;
+ } 
+

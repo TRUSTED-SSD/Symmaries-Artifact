@@ -1,0 +1,25 @@
+java.nio.file.attribute.FileTime org.apache.bookkeeper.tls.FileModifiedTimeUpdater:updateLastModifiedTime()
+{
+java.nio.file.Path p;
+  java.lang.String $stack3;
+  java.lang.String[] $stack4;
+  java.nio.file.LinkOption[] $stack7;
+  java.nio.file.attribute.FileTime $stack8;
+  java.io.IOException $stack9;
+  org.slf4j.Logger $stack11;
+  $stack3=this.fileName;
+ if ($stack3==null) goto label0;
+ $stack3=this.fileName;
+ $stack4=new java.lang.String[0];
+ p = java.nio.file.Paths.get($stack3,$stack4);
+ label1:$stack7=new java.nio.file.LinkOption[0];
+ $stack8 = java.nio.file.Files.getLastModifiedTime(p,$stack7);
+ label2:return  $stack8;
+ label3:$stack9 = catch;
+ $stack11=org.apache.bookkeeper.tls.FileModifiedTimeUpdater.LOG;
+ $stack3=this.fileName;
+ $stack11.error("Unable to fetch lastModified time for file {}: ",(java.lang.Object)$stack3,(java.lang.Object)$stack9);
+ label0:return  null;
+ catch java.io.IOException: label1 - label2 : label3;
+} 
+

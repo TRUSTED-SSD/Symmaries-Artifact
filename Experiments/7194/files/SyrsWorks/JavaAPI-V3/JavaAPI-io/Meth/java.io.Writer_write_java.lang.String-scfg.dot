@@ -1,0 +1,30 @@
+digraph G {
+  node [shape=box, ];
+  "pc0_js1" [label="〈$i0 = r1.length (), js1〉\n\
+tt", ];
+  "pc1_js1" [label="〈this.write (r1, 0, $i0), js1〉\n\
+pc ⊔ level(this) ⊔ obj_level(this) ⊑ ⊥ ∧ level($i0) ⊔ level(r1) ⊔ level(this) ⊔ obj_level(r1) ⊔ obj_level(this) ⊑ ⊥",
+             ];
+  "pc2_js1" [label="〈return, js1〉", ];
+  "pc3_js1" [label="〈sink, js1〉\n\
+obj_level(r1) ⊑ ret(obj_level(r1))' ∧ obj_level(this) ⊑ ret(obj_level(this))' ∧ (ret(r1.><r1)' ∨ ¬r1.><r1) ∧ (ret(r1.><this)' ∨ ¬r1.><this) ∧ (ret(this.><r1)' ∨ ¬this.><r1) ∧ (ret(this.><this)' ∨ ¬this.><this)",
+             ];
+  
+  
+  "pc0_js1" -> "pc1_js1" [label="tt,\n\
+{r1.><this := if r1.><r1 then r1.><this ∨ this.><r1 else r1.><this,\n\
+ this.><this := if r1.><r1 then this.><this ∨ this.><r1 ∧ (r1.><this ∨ this.><r1) else this.><this,\n\
+ level($i0) := pc ⊔ level(r1) ⊔ obj_level(r1)}",
+                          ];
+  "pc1_js1" -> "pc2_js1" [label="tt,\n\
+{r1.><r1 := r1.><r1 ∨ r1.><this ∨ r1.><r1 ∧ this.><r1 ∨ (if this.><r1 then r1.><r1 ∨ r1.><this else r1.><r1) ∨ (if this.><r1 ∨ this.><this then r1.><r1 ∨ r1.><this ∧ (r1.><this ∨ this.><r1) else r1.><r1) ∨ (if r1.><this ∨ r1.><r1 ∧ this.><r1 ∨ (if this.><r1 then r1.><r1 else r1.><this) then r1.><r1 ∨ r1.><this ∨ this.><r1 else r1.><r1),\n\
+ r1.><this := r1.><this ∨ r1.><r1 ∧ this.><r1 ∨ (if this.><r1 then r1.><r1 else r1.><this) ∨ (if this.><r1 then r1.><this ∨ r1.><this ∧ (r1.><this ∨ this.><r1) else r1.><this) ∨ (if r1.><r1 ∨ r1.><this ∨ r1.><r1 ∧ this.><r1 then r1.><this ∨ this.><r1 else r1.><this),\n\
+ this.><r1 := (if this.><r1 ∨ this.><this then r1.><this ∨ this.><r1 else this.><r1) ∨ (if r1.><this ∨ r1.><r1 ∧ this.><r1 ∨ (if this.><r1 then r1.><r1 else r1.><this) then this.><r1 ∨ this.><r1 ∧ (r1.><this ∨ this.><r1) else this.><r1),\n\
+ this.><this := this.><r1 ∨ this.><this ∨ (if this.><r1 then r1.><this ∨ this.><r1 ∨ this.><this else this.><this) ∨ (if r1.><r1 ∨ r1.><this ∨ r1.><r1 ∧ this.><r1 then this.><this ∨ this.><r1 ∧ (r1.><this ∨ this.><r1) else this.><this) ∨ (if r1.><this ∨ r1.><r1 ∧ this.><r1 ∨ (if this.><r1 then r1.><r1 else r1.><this) then this.><r1 ∨ this.><this else this.><this),\n\
+ obj_level(r1) := obj_level(r1) ⊔ (if this.><r1 then pc ⊔ level(r1) ⊔ level(this) ⊔ obj_level(r1) ⊔ obj_level(this) else ⊥) ⊔ (if this.><r1 then if this.><r1 ∧ pc ⊔ level(r1) ⊔ level(this) ⊔ obj_level(r1) ⊔ obj_level(this) = ⊤ then ⊤ else if this.><r1 ∧ pc ⊔ level(r1) ⊔ level(this) ⊔ obj_level(r1) ⊔ obj_level(this) = ⊥ then obj_level(this) else ⊥ else obj_level(r1)) ⊔ (if if r1.><this then pc ⊔ level(r1) ⊔ level(this) ⊔ obj_level(r1) ⊔ obj_level(this) = ⊥ else ¬r1.><r1 ∨ ¬this.><r1 then obj_level(r1) else if r1.><r1 ∧ this.><r1 ∧ ¬r1.><this ∧ pc ⊔ level(r1) ⊔ level(this) ⊔ obj_level(r1) ⊔ obj_level(this) = ⊥ then obj_level(this) else if if r1.><this then pc ⊔ level(r1) ⊔ level(this) ⊔ obj_level(r1) ⊔ obj_level(this) = ⊤ else r1.><r1 ∧ this.><r1 ∧ pc ⊔ level(r1) ⊔ level(this) ⊔ obj_level(r1) ⊔ obj_level(this) = ⊤ then ⊤ else ⊥),\n\
+ obj_level(this) := pc ⊔ level(r1) ⊔ level(this) ⊔ obj_level(r1) ⊔ obj_level(this) ⊔ (if r1.><this ∨ this.><r1 then obj_level(r1) ⊔ (if this.><r1 then if this.><r1 ∧ pc ⊔ level(r1) ⊔ level(this) ⊔ obj_level(r1) ⊔ obj_level(this) = ⊤ then ⊤ else if this.><r1 ∧ pc ⊔ level(r1) ⊔ level(this) ⊔ obj_level(r1) ⊔ obj_level(this) = ⊥ then obj_level(this) else ⊥ else obj_level(r1)) ⊔ (if if r1.><this then pc ⊔ level(r1) ⊔ level(this) ⊔ obj_level(r1) ⊔ obj_level(this) = ⊥ else ¬r1.><r1 ∨ ¬this.><r1 then obj_level(r1) else if r1.><r1 ∧ this.><r1 ∧ ¬r1.><this ∧ pc ⊔ level(r1) ⊔ level(this) ⊔ obj_level(r1) ⊔ obj_level(this) = ⊥ then obj_level(this) else if if r1.><this then pc ⊔ level(r1) ⊔ level(this) ⊔ obj_level(r1) ⊔ obj_level(this) = ⊤ else r1.><r1 ∧ this.><r1 ∧ pc ⊔ level(r1) ⊔ level(this) ⊔ obj_level(r1) ⊔ obj_level(this) = ⊤ then ⊤ else ⊥) else ⊥)}",
+                          ];
+  "pc2_js1" -> "pc3_js1" [label="tt,\n\
+{ϕ := S2}", ];
+  
+  }

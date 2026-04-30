@@ -1,0 +1,22 @@
+org.apache.bookkeeper.feature.Feature org.apache.bookkeeper.feature.CacheableFeatureProvider:getFeature(java.lang.String name)
+{
+org.apache.bookkeeper.feature.Feature feature;
+  org.apache.bookkeeper.feature.Feature oldFeature;
+  java.util.concurrent.ConcurrentMap $stack5;
+  java.lang.Object $stack6;
+  java.lang.String $stack7;
+  $stack5=this.features;
+ $stack6 = $stack5.get((java.lang.Object)name);
+ feature=(org.apache.bookkeeper.feature.Feature) $stack6;
+ if (null!=feature) goto label0;
+ $stack7 = this.makeName(name);
+ feature = this.makeFeature($stack7);
+ $stack5=this.features;
+ $stack6 = $stack5.putIfAbsent((java.lang.Object)name,(java.lang.Object)feature);
+ oldFeature=(org.apache.bookkeeper.feature.Feature) $stack6;
+ if (null!=oldFeature) goto label1;
+ goto label0;
+ label1:feature=oldFeature;
+ label0:return  feature;
+ } 
+

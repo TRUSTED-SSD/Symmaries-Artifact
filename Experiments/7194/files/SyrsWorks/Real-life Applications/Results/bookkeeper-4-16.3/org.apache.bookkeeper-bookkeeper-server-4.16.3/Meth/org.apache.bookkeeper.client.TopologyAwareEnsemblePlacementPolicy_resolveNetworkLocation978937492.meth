@@ -1,0 +1,34 @@
+java.lang.String org.apache.bookkeeper.client.TopologyAwareEnsemblePlacementPolicy:resolveNetworkLocation(org.apache.bookkeeper.net.BookieId addr)
+{
+org.apache.bookkeeper.net.BookieNode historyBookie;
+  org.apache.bookkeeper.proto.BookieAddressResolver $stack4;
+  org.apache.bookkeeper.net.DNSToSwitchMapping $stack5;
+  org.apache.bookkeeper.net.BookieSocketAddress $stack6;
+  java.lang.String $stack7;
+  org.apache.bookkeeper.proto.BookieAddressResolver$BookieIdNotResolvedException $stack8;
+  java.util.Map $stack9;
+  java.lang.Object $stack10;
+  java.lang.Object[] $stack11;
+  org.slf4j.Logger $stack12;
+  label0:$stack5=this.dnsResolver;
+ $stack4=this.bookieAddressResolver;
+ $stack6 = $stack4.resolve(addr);
+ $stack7 = org.apache.bookkeeper.net.NetUtils.resolveNetworkLocation($stack5,$stack6);
+ label1:return  $stack7;
+ label2:$stack8 = catch;
+ $stack9=this.historyBookies;
+ $stack10 = $stack9.get((java.lang.Object)addr);
+ historyBookie=(org.apache.bookkeeper.net.BookieNode) $stack10;
+ if (null==historyBookie) goto label3;
+ $stack7 = historyBookie.getNetworkLocation();
+ return  $stack7;
+ label3:$stack12=org.apache.bookkeeper.client.TopologyAwareEnsemblePlacementPolicy.LOG;
+ $stack11=new java.lang.Object[3];
+ $stack11[0]=addr;
+ $stack11[1]="/default-region/default-rack";
+ $stack11[2]=$stack8;
+ $stack12.error("Cannot resolve bookieId {} to a network address, resolving as {}",$stack11);
+ return  "/default-region/default-rack";
+ catch org.apache.bookkeeper.proto.BookieAddressResolver$BookieIdNotResolvedException: label0 - label1 : label2;
+} 
+

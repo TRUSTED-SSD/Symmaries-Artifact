@@ -1,0 +1,36 @@
+java.lang.String org.apache.kerby.kerberos.kerb.type.base.PrincipalName:makeSingleName()
+{
+java.util.List names;
+  java.lang.StringBuilder sb;
+  boolean isFirst;
+  java.util.Iterator l4;
+  java.lang.String name;
+  boolean $stack9;
+  java.lang.Object $stack18;
+  names = this.getNameStrings();
+ sb=new java.lang.StringBuilder;
+ sb#java.lang.StringBuilder();
+ isFirst=1;
+ l4 = names.iterator();
+ label0:$stack9 = l4.hasNext();
+ if ($stack9==0) goto label1;
+ $stack18 = l4.next();
+ name=(java.lang.String) $stack18;
+ if (isFirst==0) goto label2;
+ isFirst=0;
+ goto label3;
+ label2:sb.append((char)47);
+ label3:sb.append(name);
+ goto label0;
+ label1:name=this.realm;
+ if (name==null) goto label4;
+ name=this.realm;
+ isFirst = name.isEmpty();
+ if (isFirst!=0) goto label4;
+ sb.append((char)64);
+ name=this.realm;
+ sb.append(name);
+ label4:name = sb.toString();
+ return  name;
+ } 
+

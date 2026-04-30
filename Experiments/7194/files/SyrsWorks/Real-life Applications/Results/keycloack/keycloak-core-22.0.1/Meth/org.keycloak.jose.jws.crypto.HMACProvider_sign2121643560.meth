@@ -1,0 +1,24 @@
+static byte[] org.keycloak.jose.jws.crypto.HMACProvider:sign(byte[] @data,org.keycloak.jose.jws.Algorithm algorithm,byte[] sharedSecret)
+{
+javax.crypto.Mac mac;
+  javax.crypto.spec.SecretKeySpec $stack5;
+  java.lang.String $stack6;
+  java.lang.Exception $stack8;
+  java.lang.RuntimeException $stack9;
+  byte[] data;
+data=@data;
+label0:mac = org.keycloak.jose.jws.crypto.HMACProvider.getMAC(algorithm);
+ $stack5=new javax.crypto.spec.SecretKeySpec;
+ $stack6 = mac.getAlgorithm();
+ $stack5#javax.crypto.spec.SecretKeySpec(sharedSecret,$stack6);
+ mac.init((java.security.Key)$stack5);
+ mac.update(data);
+ data = mac.doFinal();
+ label1:return  data;
+ label2:$stack8 = catch;
+ $stack9=new java.lang.RuntimeException;
+ $stack9#java.lang.RuntimeException((java.lang.Throwable)$stack8);
+ throw $stack9;
+ catch java.lang.Exception: label0 - label1 : label2;
+} 
+

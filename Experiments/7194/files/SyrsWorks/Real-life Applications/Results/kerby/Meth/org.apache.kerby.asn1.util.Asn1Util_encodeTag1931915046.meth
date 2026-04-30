@@ -1,0 +1,40 @@
+static void org.apache.kerby.asn1.util.Asn1Util:encodeTag(java.nio.ByteBuffer buffer,org.apache.kerby.asn1.Tag tag)
+{
+int flags;
+  int tagNo;
+  byte[] tmpBytes;
+  byte $stack9;
+  int $stack11;
+  flags = tag.tagFlags();
+ tagNo = tag.tagNo();
+ if (tagNo>=31) goto label0;
+ tagNo=(flags | tagNo);
+ $stack9=(byte) tagNo;
+ buffer.put($stack9);
+ goto label1;
+ label0:flags=(flags | 31);
+ $stack9=(byte) flags;
+ buffer.put($stack9);
+ if (tagNo>=128) goto label2;
+ $stack9=(byte) tagNo;
+ buffer.put($stack9);
+ goto label1;
+ label2:tmpBytes=new byte[5];
+ flags=#tmpBytes;
+ flags=(flags+-1);
+ $stack11=(tagNo & 127);
+ $stack9=(byte) $stack11;
+ tmpBytes[flags]=$stack9;
+ label3:tagNo=(tagNo>>7);
+ flags=(flags+-1);
+ $stack11=(tagNo & 127);
+ $stack11=($stack11 | 128);
+ $stack9=(byte) $stack11;
+ tmpBytes[flags]=$stack9;
+ if (tagNo>127) goto label3;
+ tagNo=#tmpBytes;
+ tagNo=(tagNo-flags);
+ buffer.put(tmpBytes,flags,tagNo);
+ label1:return;
+ } 
+

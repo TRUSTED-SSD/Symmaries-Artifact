@@ -1,0 +1,65 @@
+    public void evaluate() throws java.lang.Throwable
+    {
+        org.junit.internal.runners.statements.FailOnTimeout this;
+        org.junit.internal.runners.statements.FailOnTimeout$CallableStatement callable;
+        java.util.concurrent.FutureTask task;
+        java.lang.Thread thread;
+        java.lang.Throwable throwable;
+        java.lang.ThreadGroup $stack7;
+
+        this := @this: org.junit.internal.runners.statements.FailOnTimeout;
+
+        callable = new org.junit.internal.runners.statements.FailOnTimeout$CallableStatement;
+/*120*/
+
+        specialinvoke callable.<org.junit.internal.runners.statements.FailOnTimeout$CallableStatement: void <init>(org.junit.internal.runners.statements.FailOnTimeout,org.junit.internal.runners.statements.FailOnTimeout$1)>(this, null);
+/*120*/
+
+        task = new java.util.concurrent.FutureTask;
+/*121*/
+
+        specialinvoke task.<java.util.concurrent.FutureTask: void <init>(java.util.concurrent.Callable)>(callable);
+/*121*/
+
+        $stack7 = new java.lang.ThreadGroup;
+/*122*/
+
+        specialinvoke $stack7.<java.lang.ThreadGroup: void <init>(java.lang.String)>("FailOnTimeoutGroup");
+/*122*/
+
+        this.<org.junit.internal.runners.statements.FailOnTimeout: java.lang.ThreadGroup threadGroup> = $stack7;
+/*122*/
+
+        thread = new java.lang.Thread;
+/*123*/
+
+        $stack7 = this.<org.junit.internal.runners.statements.FailOnTimeout: java.lang.ThreadGroup threadGroup>;
+/*123*/
+
+        specialinvoke thread.<java.lang.Thread: void <init>(java.lang.ThreadGroup,java.lang.Runnable,java.lang.String)>($stack7, task, "Time-limited test");
+/*123*/
+
+        virtualinvoke thread.<java.lang.Thread: void setDaemon(boolean)>(1);
+/*124*/
+
+        virtualinvoke thread.<java.lang.Thread: void start()>();
+/*125*/
+
+        virtualinvoke callable.<org.junit.internal.runners.statements.FailOnTimeout$CallableStatement: void awaitStarted()>();
+/*126*/
+
+        throwable = specialinvoke this.<org.junit.internal.runners.statements.FailOnTimeout: java.lang.Throwable getResult(java.util.concurrent.FutureTask,java.lang.Thread)>(task, thread);
+/*127*/
+/*127*/
+
+        if throwable == null goto label1;
+/*128*/
+
+        throw throwable;
+/*129*/
+
+     label1:
+        return;
+/*131*/
+    }
+

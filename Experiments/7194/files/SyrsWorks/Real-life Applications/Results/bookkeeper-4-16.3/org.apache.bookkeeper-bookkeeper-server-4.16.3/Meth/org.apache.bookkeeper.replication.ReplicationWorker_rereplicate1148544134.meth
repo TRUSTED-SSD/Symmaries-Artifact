@@ -1,0 +1,44 @@
+boolean org.apache.bookkeeper.replication.ReplicationWorker:rereplicate()
+{
+long ledgerIdToReplicate;
+  com.google.common.base.Stopwatch stopwatch;
+  boolean success;
+  java.lang.Throwable l7;
+  org.apache.bookkeeper.meta.LedgerUnderreplicationManager $stack10;
+  java.util.concurrent.TimeUnit $stack15;
+  org.apache.bookkeeper.stats.OpStatsLogger $stack18;
+  $stack10=this.underreplicationManager;
+ ledgerIdToReplicate = $stack10.getLedgerToRereplicate();
+ stopwatch = com.google.common.base.Stopwatch.createStarted();
+ success=0;
+ label0:success = this#org.apache.bookkeeper.replication.ReplicationWorker:rereplicate(ledgerIdToReplicate);
+ label1:stopwatch = stopwatch.stop();
+ $stack15=java.util.concurrent.TimeUnit.MILLISECONDS;
+ ledgerIdToReplicate = stopwatch.elapsed($stack15);
+ if (success==0) goto label2;
+ $stack18=this.rereplicateOpStats;
+ $stack15=java.util.concurrent.TimeUnit.MILLISECONDS;
+ $stack18.registerSuccessfulEvent(ledgerIdToReplicate,$stack15);
+ goto label3;
+ label2:$stack18=this.rereplicateOpStats;
+ $stack15=java.util.concurrent.TimeUnit.MILLISECONDS;
+ $stack18.registerFailedEvent(ledgerIdToReplicate,$stack15);
+ label3:goto label4;
+ label5:l7 = catch;
+ label6:stopwatch = stopwatch.stop();
+ $stack15=java.util.concurrent.TimeUnit.MILLISECONDS;
+ ledgerIdToReplicate = stopwatch.elapsed($stack15);
+ if (0==0) goto label7;
+ $stack18=this.rereplicateOpStats;
+ $stack15=java.util.concurrent.TimeUnit.MILLISECONDS;
+ $stack18.registerSuccessfulEvent(ledgerIdToReplicate,$stack15);
+ goto label8;
+ label7:$stack18=this.rereplicateOpStats;
+ $stack15=java.util.concurrent.TimeUnit.MILLISECONDS;
+ $stack18.registerFailedEvent(ledgerIdToReplicate,$stack15);
+ label8:throw l7;
+ label4:return  success;
+ catch java.lang.Throwable: label0 - label1 : label5;
+catch java.lang.Throwable: label5 - label6 : label5;
+} 
+

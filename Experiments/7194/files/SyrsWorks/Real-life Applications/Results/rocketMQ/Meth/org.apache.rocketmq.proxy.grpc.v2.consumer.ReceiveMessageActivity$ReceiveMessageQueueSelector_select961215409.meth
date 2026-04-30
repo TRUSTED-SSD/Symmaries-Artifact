@@ -1,0 +1,25 @@
+org.apache.rocketmq.proxy.service.route.AddressableMessageQueue org.apache.rocketmq.proxy.grpc.v2.consumer.ReceiveMessageActivity$ReceiveMessageQueueSelector:select(org.apache.rocketmq.proxy.common.ProxyContext ctx,org.apache.rocketmq.proxy.service.route.MessageQueueView messageQueueView)
+{
+java.lang.Object addressableMessageQueue;
+  org.apache.rocketmq.proxy.service.route.MessageQueueSelector messageQueueSelector;
+  java.lang.String $stack6;
+  boolean $stack7;
+  java.lang.Throwable $stack13;
+  org.apache.rocketmq.proxy.service.route.AddressableMessageQueue tmp$8756147;
+  label0:addressableMessageQueue=null;
+ messageQueueSelector = messageQueueView.getReadSelector();
+ $stack6=this.brokerName;
+ $stack7 = org.apache.commons.lang3.StringUtils.isNotBlank((java.lang.CharSequence)$stack6);
+ if ($stack7==0) goto label1;
+ $stack6=this.brokerName;
+ addressableMessageQueue = messageQueueSelector.getQueueByBrokerName($stack6);
+ label1:if (addressableMessageQueue!=null) goto label2;
+ addressableMessageQueue = messageQueueSelector.selectOne((boolean)1);
+ label2:tmp$8756147=(org.apache.rocketmq.proxy.service.route.AddressableMessageQueue) addressableMessageQueue;
+ return  tmp$8756147;
+ label3:$stack13 = catch;
+ addressableMessageQueue=$stack13;
+ return  null;
+ catch java.lang.Throwable: label0 - label2 : label3;
+} 
+

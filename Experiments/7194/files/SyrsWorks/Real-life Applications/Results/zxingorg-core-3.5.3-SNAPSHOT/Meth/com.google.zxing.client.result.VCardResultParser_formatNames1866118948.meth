@@ -1,0 +1,52 @@
+static void com.google.zxing.client.result.VCardResultParser:formatNames(java.lang.Iterable names)
+{
+java.util.Iterator l1;
+  java.util.List list;
+  java.lang.String name;
+  java.lang.String[] components;
+  int start;
+  int end;
+  int componentIndex;
+  java.lang.StringBuilder newName;
+  boolean $stack10;
+  java.lang.Object $stack11;
+  int $stack22;
+  java.lang.String $stack45;
+  if (names==null) goto label0;
+ l1 = names.iterator();
+ label1:$stack10 = l1.hasNext();
+ if ($stack10==0) goto label0;
+ $stack11 = l1.next();
+ list=(java.util.List) $stack11;
+ $stack11 = list.get(0);
+ name=(java.lang.String) $stack11;
+ components=new java.lang.String[5];
+ start=0;
+ componentIndex=0;
+ label2:end=#components;
+ end=(end-1);
+ if (componentIndex>=end) goto label3;
+ $stack22 = name.indexOf(59,start);
+ end=$stack22;
+ if ($stack22<0) goto label3;
+ $stack45 = name.substring(start,$stack22);
+ components[componentIndex]=$stack45;
+ componentIndex=(componentIndex+1);
+ start=($stack22+1);
+ goto label2;
+ label3:name = name.substring(start);
+ components[componentIndex]=name;
+ newName=new java.lang.StringBuilder;
+ newName#java.lang.StringBuilder(100);
+ com.google.zxing.client.result.VCardResultParser.maybeAppendComponent(components,3,newName);
+ com.google.zxing.client.result.VCardResultParser.maybeAppendComponent(components,1,newName);
+ com.google.zxing.client.result.VCardResultParser.maybeAppendComponent(components,2,newName);
+ com.google.zxing.client.result.VCardResultParser.maybeAppendComponent(components,0,newName);
+ com.google.zxing.client.result.VCardResultParser.maybeAppendComponent(components,4,newName);
+ name = newName.toString();
+ name = name.trim();
+ list.set(0,(java.lang.Object)name);
+ goto label1;
+ label0:return;
+ } 
+

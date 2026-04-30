@@ -1,0 +1,35 @@
+void org.apache.bookkeeper.common.component.ComponentInfoPublisher:publishEndpoint(org.apache.bookkeeper.common.component.ComponentInfoPublisher$EndpointInfo endpoint)
+{
+org.apache.bookkeeper.common.component.ComponentInfoPublisher$EndpointInfo exists;
+  org.slf4j.Logger $stack3;
+  boolean $stack4;
+  java.util.Map $stack5;
+  java.lang.String $stack6;
+  java.lang.Object $stack7;
+  java.lang.IllegalStateException $stack8;
+  java.lang.StringBuilder $stack9;
+  $stack3=org.apache.bookkeeper.common.component.ComponentInfoPublisher.log;
+ $stack4 = $stack3.isDebugEnabled();
+ if ($stack4==0) goto label0;
+ $stack3=org.apache.bookkeeper.common.component.ComponentInfoPublisher.log;
+ dummyClass.lowSink("publishEndpoint {} on {}");
+$stack3.debug("publishEndpoint {} on {}",(java.lang.Object)endpoint,(java.lang.Object)this);
+ label0:$stack5=this.endpoints;
+ $stack6 = org.apache.bookkeeper.common.component.ComponentInfoPublisher$EndpointInfo.access$000(endpoint);
+ $stack7 = $stack5.put((java.lang.Object)$stack6,(java.lang.Object)endpoint);
+ exists=(org.apache.bookkeeper.common.component.ComponentInfoPublisher$EndpointInfo) $stack7;
+ if (exists==null) goto label1;
+ $stack8=new java.lang.IllegalStateException;
+ $stack9=new java.lang.StringBuilder;
+ $stack9#java.lang.StringBuilder();
+ $stack9 = $stack9.append("An endpoint with id ");
+ $stack6 = org.apache.bookkeeper.common.component.ComponentInfoPublisher$EndpointInfo.access$000(endpoint);
+ $stack9 = $stack9.append($stack6);
+ $stack9 = $stack9.append(" has already been published: ");
+ $stack9 = $stack9.append((java.lang.Object)exists);
+ $stack6 = $stack9.toString();
+ $stack8#java.lang.IllegalStateException($stack6);
+ throw $stack8;
+ label1:return;
+ } 
+

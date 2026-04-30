@@ -1,0 +1,45 @@
+static boolean org.apache.bookkeeper.bookie.BookieImpl:cleanDir(java.io.File @dir)
+{
+java.io.File[] files;
+  int l3;
+  int l4;
+  boolean delete;
+  java.lang.StringBuilder $stack9;
+  org.slf4j.Logger $stack10;
+  java.lang.String $stack13;
+  java.io.File dir;
+dir=@dir;
+delete = dir.exists();
+ if (delete==0) goto label0;
+ files = dir.listFiles();
+ if (files==null) goto label1;
+ l3=#files;
+ l4=0;
+ label2:if (l4>=l3) goto label1;
+ dir=files[l4];
+ delete = org.apache.commons.io.FileUtils.deleteQuietly(dir);
+ if (delete!=0) goto label3;
+ $stack10=org.apache.bookkeeper.bookie.BookieImpl.LOG;
+ $stack9=new java.lang.StringBuilder;
+ $stack9#java.lang.StringBuilder();
+ $stack9 = $stack9.append("Not able to delete ");
+ $stack9 = $stack9.append((java.lang.Object)dir);
+ $stack13 = $stack9.toString();
+ $stack10.error($stack13);
+ return  0;
+ label3:l4=(l4+1);
+ goto label2;
+ label1:goto label4;
+ label0:delete = dir.mkdirs();
+ if (delete!=0) goto label4;
+ $stack10=org.apache.bookkeeper.bookie.BookieImpl.LOG;
+ $stack9=new java.lang.StringBuilder;
+ $stack9#java.lang.StringBuilder();
+ $stack9 = $stack9.append("Not able to create the directory ");
+ $stack9 = $stack9.append((java.lang.Object)dir);
+ $stack13 = $stack9.toString();
+ $stack10.error($stack13);
+ return  0;
+ label4:return  1;
+ } 
+

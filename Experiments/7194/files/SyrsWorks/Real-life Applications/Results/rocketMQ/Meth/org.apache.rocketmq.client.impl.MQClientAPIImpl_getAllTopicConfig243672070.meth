@@ -1,0 +1,40 @@
+org.apache.rocketmq.remoting.protocol.body.TopicConfigSerializeWrapper org.apache.rocketmq.client.impl.MQClientAPIImpl:getAllTopicConfig(java.lang.String addr,long timeoutMillis)
+{
+org.apache.rocketmq.remoting.protocol.RemotingCommand request;
+  org.apache.rocketmq.client.ClientConfig $stack7;
+  org.apache.rocketmq.remoting.RemotingClient $stack8;
+  boolean $stack9;
+  java.lang.String $stack10;
+  int $stack13;
+  byte[] $stack14;
+  java.lang.Object $stack15;
+  org.apache.rocketmq.remoting.protocol.body.TopicConfigSerializeWrapper $stack16;
+  org.apache.rocketmq.client.exception.MQBrokerException $stack17;
+  java.lang.AssertionError $stack21;
+  request = org.apache.rocketmq.remoting.protocol.RemotingCommand.createRequestCommand(21,null);
+ $stack8=this.remotingClient;
+ $stack7=this.clientConfig;
+ $stack9 = $stack7.isVipChannelEnabled();
+ $stack10 = org.apache.rocketmq.common.MixAll.brokerVIPChannel($stack9,addr);
+ request = $stack8.invokeSync($stack10,request,timeoutMillis);
+ $stack9=org.apache.rocketmq.client.impl.MQClientAPIImpl.$assertionsDisabled;
+ if ($stack9!=0) goto label0;
+ if (request!=null) goto label0;
+ $stack21=new java.lang.AssertionError;
+ $stack21#java.lang.AssertionError();
+ throw $stack21;
+ label0:$stack13 = request.getCode();
+ switch [$stack13]
+if 0 goto label1;
+goto label2;
+ label1:$stack14 = request.getBody();
+ $stack15 = org.apache.rocketmq.remoting.protocol.RemotingSerializable.decode($stack14,org.apache.rocketmq.remoting.protocol.body.TopicConfigSerializeWrapper);
+ $stack16=(org.apache.rocketmq.remoting.protocol.body.TopicConfigSerializeWrapper) $stack15;
+ return  $stack16;
+ label2:$stack17=new org.apache.rocketmq.client.exception.MQBrokerException;
+ $stack13 = request.getCode();
+ $stack10 = request.getRemark();
+ $stack17#org.apache.rocketmq.client.exception.MQBrokerException($stack13,$stack10,addr);
+ throw $stack17;
+ } 
+

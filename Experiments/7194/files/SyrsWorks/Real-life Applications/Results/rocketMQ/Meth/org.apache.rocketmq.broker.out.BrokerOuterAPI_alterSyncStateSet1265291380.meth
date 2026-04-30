@@ -1,0 +1,55 @@
+org.apache.rocketmq.remoting.protocol.body.SyncStateSet org.apache.rocketmq.broker.out.BrokerOuterAPI:alterSyncStateSet(java.lang.String @controllerAddress,java.lang.String brokerName,java.lang.String masterAddress,int masterEpoch,java.util.Set newSyncStateSet,int syncStateSetEpoch)
+{
+org.apache.rocketmq.remoting.protocol.RemotingCommand request;
+  org.apache.rocketmq.remoting.protocol.header.controller.AlterSyncStateSetRequestHeader $stack10;
+  org.apache.rocketmq.remoting.protocol.body.SyncStateSet $stack12;
+  byte[] $stack13;
+  org.apache.rocketmq.remoting.RemotingClient $stack14;
+  boolean $stack16;
+  org.apache.rocketmq.client.exception.MQBrokerException $stack18;
+  java.lang.Object $stack22;
+  java.lang.AssertionError $stack27;
+  java.lang.String controllerAddress;
+controllerAddress=@controllerAddress;
+$stack10=new org.apache.rocketmq.remoting.protocol.header.controller.AlterSyncStateSetRequestHeader;
+ $stack10#org.apache.rocketmq.remoting.protocol.header.controller.AlterSyncStateSetRequestHeader(brokerName,masterAddress,masterEpoch);
+ request = org.apache.rocketmq.remoting.protocol.RemotingCommand.createRequestCommand(1001,(org.apache.rocketmq.remoting.CommandCustomHeader)$stack10);
+ $stack12=new org.apache.rocketmq.remoting.protocol.body.SyncStateSet;
+ $stack12#org.apache.rocketmq.remoting.protocol.body.SyncStateSet(newSyncStateSet,syncStateSetEpoch);
+ $stack13 = $stack12.encode();
+ request.setBody($stack13);
+ $stack14=this.remotingClient;
+ request = $stack14.invokeSync(controllerAddress,request,3000L);
+ $stack16=org.apache.rocketmq.broker.out.BrokerOuterAPI.$assertionsDisabled;
+ if ($stack16!=0) goto label0;
+ if (request!=null) goto label0;
+ $stack27=new java.lang.AssertionError;
+ $stack27#java.lang.AssertionError();
+ throw $stack27;
+ label0:masterEpoch = request.getCode();
+ switch [masterEpoch]
+if 0 goto label1;
+if 1 goto label2;
+goto label3;
+ label1:$stack16=org.apache.rocketmq.broker.out.BrokerOuterAPI.$assertionsDisabled;
+ if ($stack16!=0) goto label4;
+ $stack13 = request.getBody();
+ if ($stack13!=null) goto label4;
+ $stack27=new java.lang.AssertionError;
+ $stack27#java.lang.AssertionError();
+ throw $stack27;
+ label4:$stack13 = request.getBody();
+ $stack22 = org.apache.rocketmq.remoting.protocol.RemotingSerializable.decode($stack13,org.apache.rocketmq.remoting.protocol.body.SyncStateSet);
+ $stack12=(org.apache.rocketmq.remoting.protocol.body.SyncStateSet) $stack22;
+ return  $stack12;
+ label2:$stack18=new org.apache.rocketmq.client.exception.MQBrokerException;
+ masterEpoch = request.getCode();
+ $stack18#org.apache.rocketmq.client.exception.MQBrokerException(masterEpoch,"Controller leader was changed");
+ throw $stack18;
+ label3:$stack18=new org.apache.rocketmq.client.exception.MQBrokerException;
+ masterEpoch = request.getCode();
+ controllerAddress = request.getRemark();
+ $stack18#org.apache.rocketmq.client.exception.MQBrokerException(masterEpoch,controllerAddress);
+ throw $stack18;
+ } 
+

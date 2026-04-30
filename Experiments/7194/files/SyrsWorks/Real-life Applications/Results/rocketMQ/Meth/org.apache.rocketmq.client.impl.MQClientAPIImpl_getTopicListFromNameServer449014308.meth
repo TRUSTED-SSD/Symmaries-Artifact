@@ -1,0 +1,37 @@
+org.apache.rocketmq.remoting.protocol.body.TopicList org.apache.rocketmq.client.impl.MQClientAPIImpl:getTopicListFromNameServer(long timeoutMillis)
+{
+org.apache.rocketmq.remoting.protocol.RemotingCommand request;
+  byte[] body;
+  org.apache.rocketmq.remoting.RemotingClient $stack7;
+  boolean $stack9;
+  int $stack10;
+  org.apache.rocketmq.client.exception.MQClientException $stack12;
+  java.lang.String $stack14;
+  java.lang.Object $stack15;
+  org.apache.rocketmq.remoting.protocol.body.TopicList $stack16;
+  java.lang.AssertionError $stack20;
+  request = org.apache.rocketmq.remoting.protocol.RemotingCommand.createRequestCommand(206,null);
+ $stack7=this.remotingClient;
+ request = $stack7.invokeSync(null,request,timeoutMillis);
+ $stack9=org.apache.rocketmq.client.impl.MQClientAPIImpl.$assertionsDisabled;
+ if ($stack9!=0) goto label0;
+ if (request!=null) goto label0;
+ $stack20=new java.lang.AssertionError;
+ $stack20#java.lang.AssertionError();
+ throw $stack20;
+ label0:$stack10 = request.getCode();
+ switch [$stack10]
+if 0 goto label1;
+goto label2;
+ label1:body = request.getBody();
+ if (body==null) goto label2;
+ $stack15 = org.apache.rocketmq.remoting.protocol.RemotingSerializable.decode(body,org.apache.rocketmq.remoting.protocol.body.TopicList);
+ $stack16=(org.apache.rocketmq.remoting.protocol.body.TopicList) $stack15;
+ return  $stack16;
+ label2:$stack12=new org.apache.rocketmq.client.exception.MQClientException;
+ $stack10 = request.getCode();
+ $stack14 = request.getRemark();
+ $stack12#org.apache.rocketmq.client.exception.MQClientException($stack10,$stack14);
+ throw $stack12;
+ } 
+

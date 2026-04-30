@@ -1,0 +1,44 @@
+org.apache.rocketmq.remoting.protocol.RemotingCommand org.apache.rocketmq.broker.processor.AdminBrokerProcessor:getBrokerEpochCache(io.netty.channel.ChannelHandlerContext ctx,org.apache.rocketmq.remoting.protocol.RemotingCommand @request)
+{
+org.apache.rocketmq.broker.controller.ReplicasManager replicasManager;
+  org.apache.rocketmq.common.BrokerConfig brokerConfig;
+  org.apache.rocketmq.broker.BrokerController $stack7;
+  boolean $stack9;
+  org.apache.rocketmq.remoting.protocol.body.EpochEntryCache $stack12;
+  java.lang.String $stack13;
+  java.lang.String $stack14;
+  long $stack15;
+  java.util.List $stack16;
+  org.apache.rocketmq.store.MessageStore $stack18;
+  long $stack19;
+  byte[] $stack21;
+  java.lang.AssertionError $stack36;
+  org.apache.rocketmq.remoting.protocol.RemotingCommand request;
+request=@request;
+$stack7=this.brokerController;
+ replicasManager = $stack7.getReplicasManager();
+ $stack9=org.apache.rocketmq.broker.processor.AdminBrokerProcessor.$assertionsDisabled;
+ if ($stack9!=0) goto label0;
+ if (replicasManager!=null) goto label0;
+ $stack36=new java.lang.AssertionError;
+ $stack36#java.lang.AssertionError();
+ throw $stack36;
+ label0:$stack7=this.brokerController;
+ brokerConfig = $stack7.getBrokerConfig();
+ $stack12=new org.apache.rocketmq.remoting.protocol.body.EpochEntryCache;
+ $stack13 = brokerConfig.getBrokerClusterName();
+ $stack14 = brokerConfig.getBrokerName();
+ $stack15 = brokerConfig.getBrokerId();
+ $stack16 = replicasManager.getEpochEntries();
+ $stack7=this.brokerController;
+ $stack18 = $stack7.getMessageStore();
+ $stack19 = $stack18.getMaxPhyOffset();
+ $stack12#org.apache.rocketmq.remoting.protocol.body.EpochEntryCache($stack13,$stack14,$stack15,$stack16,$stack19);
+ request = org.apache.rocketmq.remoting.protocol.RemotingCommand.createResponseCommand(null);
+ $stack21 = $stack12.encode();
+ request.setBody($stack21);
+ request.setCode(0);
+ request.setRemark(null);
+ return  request;
+ } 
+

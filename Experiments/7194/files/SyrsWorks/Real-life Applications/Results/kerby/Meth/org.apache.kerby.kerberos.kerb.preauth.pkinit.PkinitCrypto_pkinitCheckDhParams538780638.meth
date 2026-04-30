@@ -1,0 +1,31 @@
+static boolean org.apache.kerby.kerberos.kerb.preauth.pkinit.PkinitCrypto:pkinitCheckDhParams(javax.crypto.spec.DHParameterSpec dh1,org.apache.kerby.x509.type.DhParameter dh2)
+{
+java.math.BigInteger $stack2;
+  java.math.BigInteger $stack3;
+  boolean $stack4;
+  org.slf4j.Logger $stack8;
+  int $stack11;
+  java.lang.Integer $stack12;
+  $stack2 = dh1.getP();
+ $stack3 = dh2.getP();
+ $stack4 = $stack2.equals((java.lang.Object)$stack3);
+ if ($stack4!=0) goto label0;
+ $stack8=org.apache.kerby.kerberos.kerb.preauth.pkinit.PkinitCrypto.LOG;
+ $stack8.error("p is not well-known group dhparameter");
+ return  0;
+ label0:$stack2 = dh1.getG();
+ $stack3 = dh2.getG();
+ $stack4 = $stack2.equals((java.lang.Object)$stack3);
+ if ($stack4!=0) goto label1;
+ $stack8=org.apache.kerby.kerberos.kerb.preauth.pkinit.PkinitCrypto.LOG;
+ $stack8.error("bad g dhparameter");
+ return  0;
+ label1:$stack8=org.apache.kerby.kerberos.kerb.preauth.pkinit.PkinitCrypto.LOG;
+ $stack2 = dh1.getP();
+ $stack11 = $stack2.bitLength();
+ $stack12 = java.lang.Integer.valueOf($stack11);
+ dummyClass.lowSink("Good dhparams {}");
+$stack8.info("Good dhparams {}",(java.lang.Object)$stack12);
+ return  1;
+ } 
+

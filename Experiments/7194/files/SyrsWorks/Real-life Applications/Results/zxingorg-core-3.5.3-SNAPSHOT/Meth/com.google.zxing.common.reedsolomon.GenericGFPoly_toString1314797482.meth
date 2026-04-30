@@ -1,0 +1,55 @@
+java.lang.String com.google.zxing.common.reedsolomon.GenericGFPoly:toString()
+{
+java.lang.StringBuilder result;
+  int degree;
+  int coefficient;
+  boolean $stack5;
+  java.lang.String $stack11;
+  int $stack14;
+  com.google.zxing.common.reedsolomon.GenericGF $stack15;
+  $stack5 = this.isZero();
+ if ($stack5==0) goto label0;
+ return  "0";
+ label0:result=new java.lang.StringBuilder;
+ degree = this.getDegree();
+ degree=(8 * degree);
+ result#java.lang.StringBuilder(degree);
+ degree = this.getDegree();
+ label1:if (degree<0) goto label2;
+ coefficient = this.getCoefficient(degree);
+ if (coefficient==0) goto label3;
+ if (coefficient>=0) goto label4;
+ $stack14 = this.getDegree();
+ if (degree!=$stack14) goto label5;
+ result.append("-");
+ goto label6;
+ label5:result.append(" - ");
+ label6:coefficient= ! (coefficient);
+ goto label7;
+ label4:$stack14 = result.length();
+ if ($stack14<=0) goto label7;
+ result.append(" + ");
+ label7:if (degree==0) goto label8;
+ if (coefficient==1) goto label9;
+ label8:$stack15=this.field;
+ coefficient = $stack15.log(coefficient);
+ if (coefficient!=0) goto label10;
+ result.append((char)49);
+ goto label9;
+ label10:if (coefficient!=1) goto label11;
+ result.append((char)97);
+ goto label9;
+ label11:result.append("a^");
+ result.append(coefficient);
+ label9:if (degree==0) goto label3;
+ if (degree!=1) goto label12;
+ result.append((char)120);
+ goto label3;
+ label12:result.append("x^");
+ result.append(degree);
+ label3:degree=(degree+-1);
+ goto label1;
+ label2:$stack11 = result.toString();
+ return  $stack11;
+ } 
+

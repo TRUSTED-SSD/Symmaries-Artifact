@@ -1,0 +1,9 @@
+long org.apache.bookkeeper.bookie.storage.ldb.DbLedgerStorage:addEntry (
+  io.netty.buffer.ByteBuf entry) {
+  p0: io.netty.buffer.ByteBuf () -> level;
+  p1: java.util.concurrent.locks.StampedLock () -> level;
+  guard = pc = ⊥;
+  ret(level()) = level(entry) ⊔ level(this) ⊔ obj_level(entry) ⊔ obj_level(this);
+  ret(obj_level(entry)) = p0 ⊔ p1 ⊔ level(entry) ⊔ level(this) ⊔ obj_level(entry) ⊔ obj_level(this);
+  ret(obj_level(this)) = p0 ⊔ p1 ⊔ level(entry) ⊔ level(this) ⊔ obj_level(entry) ⊔ obj_level(this);
+}

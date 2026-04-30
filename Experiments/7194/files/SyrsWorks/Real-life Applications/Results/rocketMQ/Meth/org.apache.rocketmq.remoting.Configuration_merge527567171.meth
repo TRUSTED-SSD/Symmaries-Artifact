@@ -1,0 +1,36 @@
+void org.apache.rocketmq.remoting.Configuration:merge(java.util.Properties from,java.util.Properties to)
+{
+java.util.Iterator l3;
+  java.util.Map$Entry next;
+  java.lang.Object fromObj;
+  java.lang.Object toObj;
+  java.util.Set $stack7;
+  boolean $stack9;
+  java.lang.Object[] $stack21;
+  org.apache.rocketmq.logging.org.slf4j.Logger $stack22;
+  java.lang.Object $stack25;
+  $stack7 = from.entrySet();
+ l3 = $stack7.iterator();
+ label0:$stack9 = l3.hasNext();
+ if ($stack9==0) goto label1;
+ fromObj = l3.next();
+ next=(java.util.Map$Entry) fromObj;
+ fromObj = next.getValue();
+ toObj = next.getKey();
+ toObj = to.get(toObj);
+ if (toObj==null) goto label2;
+ $stack9 = toObj.equals(fromObj);
+ if ($stack9!=0) goto label2;
+ $stack22=this.log;
+ $stack21=new java.lang.Object[3];
+ $stack25 = next.getKey();
+ $stack21[0]=$stack25;
+ $stack21[1]=toObj;
+ $stack21[2]=fromObj;
+ $stack22.info("Replace, key: {}, value: {} -> {}",$stack21);
+ label2:toObj = next.getKey();
+ to.put(toObj,fromObj);
+ goto label0;
+ label1:return;
+ } 
+

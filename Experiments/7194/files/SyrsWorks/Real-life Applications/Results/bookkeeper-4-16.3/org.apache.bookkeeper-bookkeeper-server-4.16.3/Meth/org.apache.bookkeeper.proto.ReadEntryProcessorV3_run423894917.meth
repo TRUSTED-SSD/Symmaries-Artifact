@@ -1,0 +1,55 @@
+void org.apache.bookkeeper.proto.ReadEntryProcessorV3:run()
+{
+org.apache.bookkeeper.proto.BookkeeperProtocol$ReadResponse readResponse;
+  org.apache.bookkeeper.proto.BookieRequestProcessor $stack2;
+  org.apache.bookkeeper.proto.RequestStats $stack3;
+  org.apache.bookkeeper.stats.OpStatsLogger $stack4;
+  long $stack5;
+  java.util.concurrent.TimeUnit $stack7;
+  org.apache.bookkeeper.proto.BookieRequestHandler $stack8;
+  io.netty.channel.ChannelHandlerContext $stack9;
+  io.netty.channel.Channel $stack10;
+  boolean $stack11;
+  org.apache.bookkeeper.proto.BookkeeperProtocol$ReadResponse$Builder $stack13;
+  org.apache.bookkeeper.proto.BookkeeperProtocol$StatusCode $stack18;
+  org.slf4j.Logger $stack21;
+  $stack2=this.requestProcessor;
+ $stack3 = $stack2.getRequestStats();
+ $stack4 = $stack3.getReadEntrySchedulingDelayStats();
+ $stack5=this.enqueueNanos;
+ $stack5 = org.apache.bookkeeper.util.MathUtils.elapsedNanos($stack5);
+ $stack7=java.util.concurrent.TimeUnit.NANOSECONDS;
+ $stack4.registerSuccessfulEvent($stack5,$stack7);
+ $stack8=this.requestHandler;
+ $stack9 = $stack8.ctx();
+ $stack10 = $stack9.channel();
+ $stack11 = $stack10.isOpen();
+ if ($stack11!=0) goto label0;
+ $stack21=org.apache.bookkeeper.proto.ReadEntryProcessorV3.LOG;
+ $stack11 = $stack21.isDebugEnabled();
+ if ($stack11==0) goto label1;
+ $stack21=org.apache.bookkeeper.proto.ReadEntryProcessorV3.LOG;
+ $stack8=this.requestHandler;
+ $stack9 = $stack8.ctx();
+ $stack10 = $stack9.channel();
+ dummyClass.lowSink("Dropping read request for closed channel: {}");
+$stack21.debug("Dropping read request for closed channel: {}",(java.lang.Object)$stack10);
+ label1:$stack2=this.requestProcessor;
+ $stack2.onReadRequestFinish();
+ return;
+ label0:$stack11 = this.isVersionCompatible();
+ if ($stack11!=0) goto label2;
+ $stack13 = org.apache.bookkeeper.proto.BookkeeperProtocol$ReadResponse.newBuilder();
+ $stack5=this.ledgerId;
+ $stack13 = $stack13.setLedgerId($stack5);
+ $stack5=this.entryId;
+ $stack13 = $stack13.setEntryId($stack5);
+ $stack18=org.apache.bookkeeper.proto.BookkeeperProtocol$StatusCode.EBADVERSION;
+ $stack13 = $stack13.setStatus($stack18);
+ readResponse = $stack13.build();
+ this.sendResponse(readResponse);
+ return;
+ label2:this.executeOp();
+ return;
+ } 
+

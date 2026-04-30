@@ -1,0 +1,38 @@
+static int com.google.zxing.oned.UPCEANReader:getStandardUPCEANChecksum(java.lang.CharSequence s)
+{
+int length;
+  int sum;
+  int i;
+  int digit;
+  char $stack8;
+  com.google.zxing.FormatException $stack9;
+  length = s.length();
+ sum=0;
+ i=(length-1);
+ label0:if (i<0) goto label1;
+ $stack8 = s.charAt(i);
+ digit=($stack8-48);
+ if (digit<0) goto label2;
+ if (digit<=9) goto label3;
+ label2:$stack9 = com.google.zxing.FormatException.getFormatInstance();
+ throw $stack9;
+ label3:sum=(sum+digit);
+ i=(i+-2);
+ goto label0;
+ label1:sum=(sum * 3);
+ i=(length-2);
+ label4:if (i<0) goto label5;
+ $stack8 = s.charAt(i);
+ digit=($stack8-48);
+ if (digit<0) goto label6;
+ if (digit<=9) goto label7;
+ label6:$stack9 = com.google.zxing.FormatException.getFormatInstance();
+ throw $stack9;
+ label7:sum=(sum+digit);
+ i=(i+-2);
+ goto label4;
+ label5:length=(1000-sum);
+ length=(length%10);
+ return  length;
+ } 
+

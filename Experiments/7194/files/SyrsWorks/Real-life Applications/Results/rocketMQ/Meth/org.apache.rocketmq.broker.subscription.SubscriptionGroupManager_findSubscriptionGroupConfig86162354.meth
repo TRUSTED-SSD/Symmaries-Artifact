@@ -1,0 +1,49 @@
+org.apache.rocketmq.remoting.protocol.subscription.SubscriptionGroupConfig org.apache.rocketmq.broker.subscription.SubscriptionGroupManager:findSubscriptionGroupConfig(java.lang.String @group)
+{
+org.apache.rocketmq.remoting.protocol.subscription.SubscriptionGroupConfig subscriptionGroupConfig;
+  java.util.concurrent.ConcurrentMap $stack6;
+  java.lang.Object $stack7;
+  org.apache.rocketmq.broker.BrokerController $stack8;
+  org.apache.rocketmq.common.BrokerConfig $stack9;
+  boolean $stack10;
+  org.apache.rocketmq.store.MessageStore $stack15;
+  org.apache.rocketmq.remoting.protocol.DataVersion $stack16;
+  long $stack20;
+  org.apache.rocketmq.logging.org.slf4j.Logger $stack24;
+  org.apache.rocketmq.remoting.protocol.subscription.SubscriptionGroupConfig $stack35;
+  java.lang.String group;
+group=@group;
+$stack6=this.subscriptionGroupTable;
+ $stack7 = $stack6.get((java.lang.Object)group);
+ subscriptionGroupConfig=(org.apache.rocketmq.remoting.protocol.subscription.SubscriptionGroupConfig) $stack7;
+ if (null!=subscriptionGroupConfig) goto label0;
+ $stack8=this.brokerController;
+ $stack9 = $stack8.getBrokerConfig();
+ $stack10 = $stack9.isAutoCreateSubscriptionGroup();
+ if ($stack10!=0) goto label1;
+ $stack10 = org.apache.rocketmq.common.MixAll.isSysConsumerGroup(group);
+ if ($stack10==0) goto label0;
+ label1:subscriptionGroupConfig=new org.apache.rocketmq.remoting.protocol.subscription.SubscriptionGroupConfig;
+ subscriptionGroupConfig#org.apache.rocketmq.remoting.protocol.subscription.SubscriptionGroupConfig();
+ subscriptionGroupConfig.setGroupName(group);
+ $stack6=this.subscriptionGroupTable;
+ $stack7 = $stack6.putIfAbsent((java.lang.Object)group,(java.lang.Object)subscriptionGroupConfig);
+ $stack35=(org.apache.rocketmq.remoting.protocol.subscription.SubscriptionGroupConfig) $stack7;
+ if (null!=$stack35) goto label2;
+ $stack24=org.apache.rocketmq.broker.subscription.SubscriptionGroupManager.log;
+ group = subscriptionGroupConfig.toString();
+ $stack24.info("auto create a subscription group, {}",(java.lang.Object)group);
+ label2:$stack8=this.brokerController;
+ $stack15 = $stack8.getMessageStore();
+ if ($stack15==null) goto label3;
+ $stack8=this.brokerController;
+ $stack15 = $stack8.getMessageStore();
+ $stack20 = $stack15.getStateMachineVersion();
+ goto label4;
+ label3:$stack20=0L;
+ label4:$stack16=this.dataVersion;
+ $stack16.nextVersion($stack20);
+ this.persist();
+ label0:return  subscriptionGroupConfig;
+ } 
+

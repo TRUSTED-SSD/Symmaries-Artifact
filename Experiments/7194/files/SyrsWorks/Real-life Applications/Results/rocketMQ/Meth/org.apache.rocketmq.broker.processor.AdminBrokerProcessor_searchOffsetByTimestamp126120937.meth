@@ -1,0 +1,43 @@
+org.apache.rocketmq.remoting.protocol.RemotingCommand org.apache.rocketmq.broker.processor.AdminBrokerProcessor:searchOffsetByTimestamp(io.netty.channel.ChannelHandlerContext ctx,org.apache.rocketmq.remoting.protocol.RemotingCommand @request)
+{
+org.apache.rocketmq.remoting.protocol.RemotingCommand response;
+  org.apache.rocketmq.remoting.protocol.header.SearchOffsetResponseHeader responseHeader;
+  org.apache.rocketmq.remoting.protocol.header.SearchOffsetRequestHeader requestHeader;
+  org.apache.rocketmq.remoting.protocol.statictopic.TopicQueueMappingContext mappingContext;
+  long offset;
+  org.apache.rocketmq.remoting.CommandCustomHeader $stack11;
+  org.apache.rocketmq.broker.BrokerController $stack13;
+  org.apache.rocketmq.broker.topic.TopicQueueMappingManager $stack14;
+  org.apache.rocketmq.store.MessageStore $stack18;
+  java.lang.String $stack19;
+  java.lang.Integer $stack20;
+  int $stack21;
+  java.lang.Long $stack22;
+  org.apache.rocketmq.remoting.protocol.RemotingCommand request;
+request=@request;
+response = org.apache.rocketmq.remoting.protocol.RemotingCommand.createResponseCommand(org.apache.rocketmq.remoting.protocol.header.SearchOffsetResponseHeader);
+ $stack11 = response.readCustomHeader();
+ responseHeader=(org.apache.rocketmq.remoting.protocol.header.SearchOffsetResponseHeader) $stack11;
+ $stack11 = request.decodeCommandCustomHeader(org.apache.rocketmq.remoting.protocol.header.SearchOffsetRequestHeader);
+ requestHeader=(org.apache.rocketmq.remoting.protocol.header.SearchOffsetRequestHeader) $stack11;
+ $stack13=this.brokerController;
+ $stack14 = $stack13.getTopicQueueMappingManager();
+ mappingContext = $stack14.buildTopicQueueMappingContext((org.apache.rocketmq.remoting.rpc.TopicRequestHeader)requestHeader);
+ request = this#org.apache.rocketmq.broker.processor.AdminBrokerProcessor:rewriteRequestForStaticTopic(requestHeader,mappingContext);
+ if (request==null) goto label0;
+ return  request;
+ label0:$stack13=this.brokerController;
+ $stack18 = $stack13.getMessageStore();
+ $stack19 = requestHeader.getTopic();
+ $stack20 = requestHeader.getQueueId();
+ $stack21 = $stack20.intValue();
+ $stack22 = requestHeader.getTimestamp();
+ offset = $stack22.longValue();
+ offset = $stack18.getOffsetInQueueByTime($stack19,$stack21,offset);
+ $stack22 = java.lang.Long.valueOf(offset);
+ responseHeader.setOffset($stack22);
+ response.setCode(0);
+ response.setRemark(null);
+ return  response;
+ } 
+

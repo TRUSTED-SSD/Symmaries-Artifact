@@ -1,0 +1,17 @@
+org.apache.rocketmq.common.message.MessageQueue org.apache.rocketmq.client.producer.selector.SelectMessageQueueByHash:select(java.util.List mqs,org.apache.rocketmq.common.message.Message msg,java.lang.Object @arg)
+{
+int value;
+  int $stack6;
+  org.apache.rocketmq.common.message.MessageQueue $stack8;
+  java.lang.Object arg;
+arg=@arg;
+value = arg.hashCode();
+ $stack6 = mqs.size();
+ value=(value%$stack6);
+ if (value>=0) goto label0;
+ value = java.lang.Math.abs(value);
+ label0:arg = mqs.get(value);
+ $stack8=(org.apache.rocketmq.common.message.MessageQueue) arg;
+ return  $stack8;
+ } 
+

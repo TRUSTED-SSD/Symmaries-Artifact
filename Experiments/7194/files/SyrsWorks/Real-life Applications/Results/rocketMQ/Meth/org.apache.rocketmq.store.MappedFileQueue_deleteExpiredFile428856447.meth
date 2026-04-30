@@ -1,0 +1,38 @@
+void org.apache.rocketmq.store.MappedFileQueue:deleteExpiredFile(java.util.List files)
+{
+java.util.Iterator iterator;
+  org.apache.rocketmq.store.logfile.MappedFile cur;
+  boolean $stack4;
+  java.util.concurrent.CopyOnWriteArrayList $stack7;
+  org.apache.rocketmq.logging.org.slf4j.Logger $stack9;
+  java.lang.Object $stack10;
+  java.lang.String $stack16;
+  java.lang.Exception $stack17;
+  $stack4 = files.isEmpty();
+ if ($stack4!=0) goto label0;
+ iterator = files.iterator();
+ label1:$stack4 = iterator.hasNext();
+ if ($stack4==0) goto label2;
+ $stack10 = iterator.next();
+ cur=(org.apache.rocketmq.store.logfile.MappedFile) $stack10;
+ $stack7=this.mappedFiles;
+ $stack4 = $stack7.contains((java.lang.Object)cur);
+ if ($stack4!=0) goto label3;
+ iterator.remove();
+ $stack9=org.apache.rocketmq.store.MappedFileQueue.log;
+ $stack16 = cur.getFileName();
+ $stack9.info("This mappedFile {} is not contained by mappedFiles, so skip it.",(java.lang.Object)$stack16);
+ label3:goto label1;
+ label2:$stack7=this.mappedFiles;
+ $stack4 = $stack7.removeAll((java.util.Collection)files);
+ if ($stack4!=0) goto label4;
+ $stack9=org.apache.rocketmq.store.MappedFileQueue.log;
+ $stack9.error("deleteExpiredFile remove failed.");
+ label4:goto label0;
+ label5:$stack17 = catch;
+ $stack9=org.apache.rocketmq.store.MappedFileQueue.log;
+ $stack9.error("deleteExpiredFile has exception.",(java.lang.Throwable)$stack17);
+ label0:return;
+ catch java.lang.Exception: label2 - label4 : label5;
+} 
+

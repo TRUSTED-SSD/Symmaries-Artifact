@@ -1,0 +1,33 @@
+void org.apache.bookkeeper.bookie.storage.directentrylogger.DirectCompactionEntryLog:abort()
+{
+java.io.File $stack2;
+  java.nio.file.Path $stack3;
+  java.io.IOException $stack8;
+  org.apache.bookkeeper.slogger.Slogger $stack10;
+  org.apache.bookkeeper.bookie.storage.directentrylogger.Events $stack12;
+  java.io.IOException $stack14;
+  label0:$stack2=this.compactingFile;
+ $stack3 = $stack2.toPath();
+ java.nio.file.Files.deleteIfExists($stack3);
+ label1:goto label2;
+ label3:$stack8 = catch;
+ $stack10=this.slog;
+ $stack2=this.compactingFile;
+ $stack10 = $stack10.kv((java.lang.Object)"compactingFile",(java.lang.Object)$stack2);
+ $stack12=org.apache.bookkeeper.bookie.storage.directentrylogger.Events.COMPACTION_ABORT_EXCEPTION;
+ $stack10.warn((java.lang.Enum)$stack12,(java.lang.Throwable)$stack8);
+ label2:$stack2=this.compactedFile;
+ $stack3 = $stack2.toPath();
+ java.nio.file.Files.deleteIfExists($stack3);
+ label4:goto label5;
+ label6:$stack14 = catch;
+ $stack10=this.slog;
+ $stack2=this.compactedFile;
+ $stack10 = $stack10.kv((java.lang.Object)"compactedFile",(java.lang.Object)$stack2);
+ $stack12=org.apache.bookkeeper.bookie.storage.directentrylogger.Events.COMPACTION_ABORT_EXCEPTION;
+ $stack10.warn((java.lang.Enum)$stack12,(java.lang.Throwable)$stack14);
+ label5:return;
+ catch java.io.IOException: label0 - label1 : label3;
+catch java.io.IOException: label2 - label4 : label6;
+} 
+

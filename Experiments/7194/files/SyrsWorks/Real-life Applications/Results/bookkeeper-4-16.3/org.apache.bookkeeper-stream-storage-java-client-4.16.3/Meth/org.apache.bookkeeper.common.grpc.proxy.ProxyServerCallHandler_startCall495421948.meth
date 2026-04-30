@@ -1,0 +1,25 @@
+io.grpc.ServerCall$Listener org.apache.bookkeeper.common.grpc.proxy.ProxyServerCallHandler:startCall(io.grpc.ServerCall serverCall,io.grpc.Metadata headers)
+{
+io.grpc.Channel channel;
+  io.grpc.ClientCall clientCall;
+  org.apache.bookkeeper.common.grpc.proxy.ProxyCall proxyCall;
+  org.apache.bookkeeper.common.grpc.proxy.ChannelFinder $stack6;
+  io.grpc.MethodDescriptor $stack8;
+  io.grpc.CallOptions $stack9;
+  org.apache.bookkeeper.common.grpc.proxy.ProxyCall$ResponseProxy $stack12;
+  org.apache.bookkeeper.common.grpc.proxy.ProxyCall$RequestProxy $stack13;
+  $stack6=this.finder;
+ channel = $stack6.findChannel(serverCall,headers);
+ $stack8 = serverCall.getMethodDescriptor();
+ $stack9=this.callOptions;
+ clientCall = channel.newCall($stack8,$stack9);
+ proxyCall=new org.apache.bookkeeper.common.grpc.proxy.ProxyCall;
+ proxyCall#org.apache.bookkeeper.common.grpc.proxy.ProxyCall(serverCall,clientCall);
+ $stack12 = proxyCall.getClientCallListener();
+ clientCall.start((io.grpc.ClientCall$Listener)$stack12,headers);
+ serverCall.request(1);
+ clientCall.request(1);
+ $stack13 = proxyCall.getServerCallListener();
+ return  $stack13;
+ } 
+

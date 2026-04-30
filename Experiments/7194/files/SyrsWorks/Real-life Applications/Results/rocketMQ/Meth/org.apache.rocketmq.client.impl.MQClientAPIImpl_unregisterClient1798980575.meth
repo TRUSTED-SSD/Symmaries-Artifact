@@ -1,0 +1,37 @@
+void org.apache.rocketmq.client.impl.MQClientAPIImpl:unregisterClient(java.lang.String addr,java.lang.String @clientID,java.lang.String producerGroup,java.lang.String consumerGroup,long timeoutMillis)
+{
+org.apache.rocketmq.remoting.protocol.header.UnregisterClientRequestHeader requestHeader;
+  org.apache.rocketmq.remoting.protocol.RemotingCommand request;
+  org.apache.rocketmq.remoting.RemotingClient $stack12;
+  boolean $stack14;
+  int $stack15;
+  org.apache.rocketmq.client.exception.MQBrokerException $stack16;
+  java.lang.AssertionError $stack20;
+  java.lang.String clientID;
+clientID=@clientID;
+requestHeader=new org.apache.rocketmq.remoting.protocol.header.UnregisterClientRequestHeader;
+ requestHeader#org.apache.rocketmq.remoting.protocol.header.UnregisterClientRequestHeader();
+ requestHeader.setClientID(clientID);
+ requestHeader.setProducerGroup(producerGroup);
+ requestHeader.setConsumerGroup(consumerGroup);
+ request = org.apache.rocketmq.remoting.protocol.RemotingCommand.createRequestCommand(35,(org.apache.rocketmq.remoting.CommandCustomHeader)requestHeader);
+ $stack12=this.remotingClient;
+ request = $stack12.invokeSync(addr,request,timeoutMillis);
+ $stack14=org.apache.rocketmq.client.impl.MQClientAPIImpl.$assertionsDisabled;
+ if ($stack14!=0) goto label0;
+ if (request!=null) goto label0;
+ $stack20=new java.lang.AssertionError;
+ $stack20#java.lang.AssertionError();
+ throw $stack20;
+ label0:$stack15 = request.getCode();
+ switch [$stack15]
+if 0 goto label1;
+goto label2;
+ label1:return;
+ label2:$stack16=new org.apache.rocketmq.client.exception.MQBrokerException;
+ $stack15 = request.getCode();
+ clientID = request.getRemark();
+ $stack16#org.apache.rocketmq.client.exception.MQBrokerException($stack15,clientID,addr);
+ throw $stack16;
+ } 
+

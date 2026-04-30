@@ -1,0 +1,41 @@
+    org.junit.runner.notification.RunListener wrapIfNotThreadSafe(org.junit.runner.notification.RunListener)
+    {
+        org.junit.runner.notification.RunNotifier this;
+        org.junit.runner.notification.RunListener listener, $stack4;
+        java.lang.Class $stack2;
+        boolean $stack3;
+        org.junit.runner.notification.SynchronizedRunListener tmp$1770133956;
+
+        this := @this: org.junit.runner.notification.RunNotifier;
+
+        listener := @parameter0: org.junit.runner.notification.RunListener;
+
+        $stack2 = virtualinvoke listener.<java.lang.Object: java.lang.Class getClass()>();
+/*50*/
+
+        $stack3 = virtualinvoke $stack2.<java.lang.Class: boolean isAnnotationPresent(java.lang.Class)>(class "Lorg/junit/runner/notification/RunListener$ThreadSafe;");
+/*50*/
+
+        if $stack3 == 0 goto label1;
+/*50*/
+
+        $stack4 = listener;
+/*50*/
+
+        goto label2;
+/*50*/
+
+     label1:
+        tmp$1770133956 = new org.junit.runner.notification.SynchronizedRunListener;
+/*50*/
+
+        $stack4 = tmp$1770133956;
+
+        specialinvoke tmp$1770133956.<org.junit.runner.notification.SynchronizedRunListener: void <init>(org.junit.runner.notification.RunListener,java.lang.Object)>(listener, this);
+/*50*/
+
+     label2:
+        return $stack4;
+/*50*/
+    }
+

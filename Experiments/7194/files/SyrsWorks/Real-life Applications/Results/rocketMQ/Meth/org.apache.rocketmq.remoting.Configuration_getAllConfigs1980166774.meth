@@ -1,0 +1,33 @@
+java.util.Properties org.apache.rocketmq.remoting.Configuration:getAllConfigs()
+{
+java.io.Serializable e;
+  java.util.concurrent.locks.ReadWriteLock $stack3;
+  java.util.concurrent.locks.Lock $stack4;
+  java.lang.InterruptedException $stack7;
+  org.apache.rocketmq.logging.org.slf4j.Logger $stack8;
+  java.lang.Throwable $stack9;
+  java.util.Properties tmp$2074077819;
+  label0:$stack3=this.readWriteLock;
+ $stack4 = $stack3.readLock();
+ $stack4.lockInterruptibly();
+ label1:e=this.allConfigs;
+ label2:$stack3=this.readWriteLock;
+ $stack4 = $stack3.readLock();
+ $stack4.unlock();
+ label3:tmp$2074077819=(java.util.Properties) e;
+ return  tmp$2074077819;
+ label4:$stack9 = catch;
+ $stack3=this.readWriteLock;
+ $stack4 = $stack3.readLock();
+ $stack4.unlock();
+ throw $stack9;
+ label5:$stack7 = catch;
+ e=$stack7;
+ $stack8=this.log;
+ $stack8.error("getAllConfigs lock error");
+ return  null;
+ catch java.lang.Throwable: label1 - label2 : label4;
+catch java.lang.InterruptedException: label0 - label3 : label5;
+catch java.lang.InterruptedException: label4 - label5 : label5;
+} 
+

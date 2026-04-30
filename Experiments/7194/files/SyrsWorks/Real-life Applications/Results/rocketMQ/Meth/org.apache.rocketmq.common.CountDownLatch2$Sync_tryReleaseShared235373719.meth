@@ -1,0 +1,18 @@
+boolean org.apache.rocketmq.common.CountDownLatch2$Sync:tryReleaseShared(int releases)
+{
+int nextc;
+  boolean $stack5;
+  label0:releases = this.getState();
+ if (releases!=0) goto label1;
+ return  0;
+ label1:nextc=(releases-1);
+ $stack5 = this.compareAndSetState(releases,nextc);
+ if ($stack5==0) goto label2;
+ if (nextc!=0) goto label3;
+ $stack5=1;
+ goto label4;
+ label3:$stack5=0;
+ label4:return  $stack5;
+ label2:goto label0;
+ } 
+

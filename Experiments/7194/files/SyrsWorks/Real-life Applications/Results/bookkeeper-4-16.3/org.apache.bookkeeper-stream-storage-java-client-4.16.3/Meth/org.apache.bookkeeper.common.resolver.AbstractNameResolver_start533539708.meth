@@ -1,0 +1,28 @@
+void org.apache.bookkeeper.common.resolver.AbstractNameResolver:start(io.grpc.NameResolver$Listener @listener)
+{
+io.grpc.NameResolver$Listener $stack2;
+  org.apache.bookkeeper.common.util.SharedResourceManager $stack3;
+  org.apache.bookkeeper.common.util.SharedResourceManager$Resource $stack4;
+  java.lang.Object $stack5;
+  java.util.concurrent.ExecutorService $stack6;
+  boolean $stack9;
+  io.grpc.NameResolver$Listener listener;
+listener=@listener;
+$stack2=this.listener;
+ if (null!=$stack2) goto label0;
+ $stack9=1;
+ goto label1;
+ label0:$stack9=0;
+ label1:com.google.common.base.Preconditions.checkState($stack9,(java.lang.Object)"Resolver already started");
+ $stack3 = org.apache.bookkeeper.common.util.SharedResourceManager.shared();
+ $stack4=this.executorService;
+ $stack5 = $stack3.get($stack4);
+ $stack6=(java.util.concurrent.ExecutorService) $stack5;
+ this.executor=$stack6;
+ $stack5 = com.google.common.base.Preconditions.checkNotNull((java.lang.Object)listener,(java.lang.Object)"Listener is null");
+ listener=(io.grpc.NameResolver$Listener) $stack5;
+ this.listener=listener;
+ this#org.apache.bookkeeper.common.resolver.AbstractNameResolver:resolve();
+ return;
+ } 
+

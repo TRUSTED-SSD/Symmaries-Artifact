@@ -1,0 +1,38 @@
+void org.apache.rocketmq.broker.processor.PullMessageProcessor:tryCommitOffset(boolean brokerAllowSuspend,org.apache.rocketmq.remoting.protocol.header.PullMessageRequestHeader requestHeader,long nextOffset,java.lang.String clientAddress)
+{
+boolean hasCommitOffsetFlag;
+  org.apache.rocketmq.broker.BrokerController $stack8;
+  org.apache.rocketmq.broker.offset.ConsumerOffsetManager $stack9;
+  java.lang.String $stack10;
+  java.lang.String $stack11;
+  java.lang.Integer $stack12;
+  int $stack13;
+  java.lang.Long $stack23;
+  $stack8=this.brokerController;
+ $stack9 = $stack8.getConsumerOffsetManager();
+ $stack10 = requestHeader.getConsumerGroup();
+ $stack11 = requestHeader.getTopic();
+ $stack12 = requestHeader.getQueueId();
+ $stack13 = $stack12.intValue();
+ $stack9#org.apache.rocketmq.broker.offset.ConsumerOffsetManager(clientAddress,$stack10,$stack11,$stack13,nextOffset);
+ $stack12 = requestHeader.getSysFlag();
+ $stack13 = $stack12.intValue();
+ hasCommitOffsetFlag = org.apache.rocketmq.common.sysflag.PullSysFlag.hasCommitOffsetFlag($stack13);
+ if (brokerAllowSuspend==0) goto label0;
+ if (hasCommitOffsetFlag==0) goto label0;
+ brokerAllowSuspend=1;
+ goto label1;
+ label0:brokerAllowSuspend=0;
+ label1:if (brokerAllowSuspend==0) goto label2;
+ $stack8=this.brokerController;
+ $stack9 = $stack8.getConsumerOffsetManager();
+ $stack10 = requestHeader.getConsumerGroup();
+ $stack11 = requestHeader.getTopic();
+ $stack12 = requestHeader.getQueueId();
+ $stack13 = $stack12.intValue();
+ $stack23 = requestHeader.getCommitOffset();
+ nextOffset = $stack23.longValue();
+ $stack9.commitOffset(clientAddress,$stack10,$stack11,$stack13,nextOffset);
+ label2:return;
+ } 
+

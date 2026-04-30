@@ -1,0 +1,31 @@
+java.lang.Long org.apache.bookkeeper.client.LedgerFragment:getLastStoredEntryId(int bookieIndex)
+{
+long lastEntry;
+  int i;
+  java.util.List $stack5;
+  int $stack6;
+  java.lang.Long $stack7;
+  long $stack8;
+  byte $stack9;
+  org.apache.bookkeeper.client.DistributionSchedule $stack11;
+  boolean $stack12;
+  lastEntry=this.lastKnownEntryId;
+ i=0;
+ label0:$stack5=this.ensemble;
+ $stack6 = $stack5.size();
+ if (i>=$stack6) goto label1;
+ $stack8=this.firstEntryId;
+ $stack9=(lastEntry cmp $stack8);
+ if ($stack9<0) goto label1;
+ $stack11=this.schedule;
+ $stack12 = $stack11.hasEntry(lastEntry,bookieIndex);
+ if ($stack12==0) goto label2;
+ $stack7 = java.lang.Long.valueOf(lastEntry);
+ return  $stack7;
+ label2:lastEntry=(lastEntry-1L);
+ i=(i+1);
+ goto label0;
+ label1:$stack7 = java.lang.Long.valueOf(-1L);
+ return  $stack7;
+ } 
+

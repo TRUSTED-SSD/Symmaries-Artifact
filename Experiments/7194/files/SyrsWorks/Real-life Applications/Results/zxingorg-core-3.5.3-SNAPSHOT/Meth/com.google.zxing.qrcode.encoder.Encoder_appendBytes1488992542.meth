@@ -1,0 +1,36 @@
+static void com.google.zxing.qrcode.encoder.Encoder:appendBytes(java.lang.String @content,com.google.zxing.qrcode.decoder.Mode mode,com.google.zxing.common.BitArray bits,java.nio.charset.Charset encoding)
+{
+int[] $stack4;
+  int $stack5;
+  com.google.zxing.WriterException $stack9;
+  java.lang.StringBuilder $stack10;
+  java.lang.String content;
+content=@content;
+$stack4=com.google.zxing.qrcode.encoder.Encoder$1.$SwitchMap$com$google$zxing$qrcode$decoder$Mode;
+ $stack5 = mode.ordinal();
+ $stack5=$stack4[$stack5];
+ switch [$stack5]
+if 0 goto label0;
+if 1 goto label1;
+if 2 goto label2;
+if 3 goto label3;
+goto label4;
+ label0:com.google.zxing.qrcode.encoder.Encoder.appendNumericBytes((java.lang.CharSequence)content,bits);
+ goto label5;
+ label1:com.google.zxing.qrcode.encoder.Encoder.appendAlphanumericBytes((java.lang.CharSequence)content,bits);
+ goto label5;
+ label2:com.google.zxing.qrcode.encoder.Encoder.append8BitBytes(content,bits,encoding);
+ goto label5;
+ label3:com.google.zxing.qrcode.encoder.Encoder.appendKanjiBytes(content,bits);
+ goto label5;
+ label4:$stack9=new com.google.zxing.WriterException;
+ $stack10=new java.lang.StringBuilder;
+ $stack10#java.lang.StringBuilder();
+ $stack10 = $stack10.append("Invalid mode: ");
+ $stack10 = $stack10.append((java.lang.Object)mode);
+ content = $stack10.toString();
+ $stack9#com.google.zxing.WriterException(content);
+ throw $stack9;
+ label5:return;
+ } 
+

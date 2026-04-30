@@ -1,0 +1,55 @@
+static void org.apache.rocketmq.tools.command.message.PrintMessageByQueueCommand:printCalculateByTag(java.util.Map tagCalmap,boolean calByTag)
+{
+java.util.ArrayList list;
+  java.util.Iterator l3;
+  java.lang.Object entry;
+  java.util.Set $stack7;
+  java.lang.Object[] $stack13;
+  java.io.PrintStream $stack14;
+  java.lang.String $stack17;
+  java.util.concurrent.atomic.AtomicLong $stack19;
+  org.apache.rocketmq.tools.command.message.PrintMessageByQueueCommand$TagCountBean $stack23;
+  java.lang.Object $stack24;
+  java.util.ArrayList tmp$264208961;
+  java.util.Map$Entry tmp$1869186001;
+  if (calByTag!=0) goto label0;
+ return;
+ label0:tmp$264208961=new java.util.ArrayList;
+ list=tmp$264208961;
+ tmp$264208961#java.util.ArrayList();
+ list=tmp$264208961;
+ $stack7 = tagCalmap.entrySet();
+ l3 = $stack7.iterator();
+ label1:calByTag = l3.hasNext();
+ if (calByTag==0) goto label2;
+ entry = l3.next();
+ entry=(java.util.Map$Entry) entry;
+ $stack23=new org.apache.rocketmq.tools.command.message.PrintMessageByQueueCommand$TagCountBean;
+ tmp$1869186001=(java.util.Map$Entry) entry;
+ $stack24 = tmp$1869186001.getKey();
+ $stack17=(java.lang.String) $stack24;
+ tmp$1869186001=(java.util.Map$Entry) entry;
+ entry = tmp$1869186001.getValue();
+ $stack19=(java.util.concurrent.atomic.AtomicLong) entry;
+ $stack23#org.apache.rocketmq.tools.command.message.PrintMessageByQueueCommand$TagCountBean($stack17,$stack19);
+ tmp$264208961.add((java.lang.Object)$stack23);
+ goto label1;
+ label2:java.util.Collections.sort((java.util.List)tmp$264208961);
+ l3 = tmp$264208961.iterator();
+ label3:calByTag = l3.hasNext();
+ if (calByTag==0) goto label4;
+ entry = l3.next();
+ entry=(org.apache.rocketmq.tools.command.message.PrintMessageByQueueCommand$TagCountBean) entry;
+ $stack14=java.lang.System.out;
+ $stack13=new java.lang.Object[2];
+ $stack23=(org.apache.rocketmq.tools.command.message.PrintMessageByQueueCommand$TagCountBean) entry;
+ $stack17 = $stack23.getTag();
+ $stack13[0]=$stack17;
+ $stack23=(org.apache.rocketmq.tools.command.message.PrintMessageByQueueCommand$TagCountBean) entry;
+ $stack19 = $stack23.getCount();
+ $stack13[1]=$stack19;
+ $stack14.printf("Tag: %-30s Count: %s%n",$stack13);
+ goto label3;
+ label4:return;
+ } 
+

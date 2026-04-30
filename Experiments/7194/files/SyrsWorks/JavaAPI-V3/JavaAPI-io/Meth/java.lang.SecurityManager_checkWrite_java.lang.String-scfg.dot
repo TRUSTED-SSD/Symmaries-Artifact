@@ -1,0 +1,33 @@
+digraph G {
+  node [shape=box, ];
+  "pc0_js1" [label="〈$r2 = new java.io.FilePermission, js1〉", ];
+  "pc1_js1" [label="〈$r2#java.io.FilePermission.init (r1, \"write\"), js1〉\n\
+ff",
+             ];
+  "pc2_js1" [label="〈this.checkPermission ((java.security.Permission) $r2), js1〉\n\
+tt",
+             ];
+  "pc3_js1" [label="〈return, js1〉", ];
+  "pc4_js1" [label="〈sink, js1〉\n\
+obj_level(r1) ⊑ ret(obj_level(r1))' ∧ obj_level(this) ⊑ ret(obj_level(this))' ∧ (ret(r1.><r1)' ∨ ¬r1.><r1)",
+             ];
+  
+  
+  "pc0_js1" -> "pc1_js1" [label="tt,\n\
+{$r2.><$r2 := ff,\n\
+ $r2.><r1 := ff,\n\
+ r1.><$r2 := ff,\n\
+ level($r2) := pc,\n\
+ obj_level($r2) := pc}",
+                          ];
+  "pc1_js1" -> "pc2_js1" [label="tt,\n\
+{}", ];
+  "pc2_js1" -> "pc3_js1" [label="tt,\n\
+{$r2.><$r2 := tt,\n\
+ $r2.><r1 := ff,\n\
+ obj_level($r2) := pc}",
+                          ];
+  "pc3_js1" -> "pc4_js1" [label="tt,\n\
+{ϕ := S3}", ];
+  
+  }

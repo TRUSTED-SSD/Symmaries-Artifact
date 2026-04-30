@@ -1,0 +1,40 @@
+void org.apache.rocketmq.tools.admin.DefaultMQAdminExtImpl:shutdown()
+{
+org.apache.rocketmq.common.ServiceState $stack1;
+  int[] $stack2;
+  int $stack3;
+  org.apache.rocketmq.tools.admin.DefaultMQAdminExt $stack5;
+  org.apache.rocketmq.client.impl.factory.MQClientInstance $stack6;
+  java.lang.String $stack7;
+  org.apache.rocketmq.logging.org.slf4j.Logger $stack10;
+  java.util.concurrent.ThreadPoolExecutor $stack14;
+  $stack2=org.apache.rocketmq.tools.admin.DefaultMQAdminExtImpl$8.$SwitchMap$org$apache$rocketmq$common$ServiceState;
+ $stack1=this.serviceState;
+ $stack3 = $stack1.ordinal();
+ $stack3=$stack2[$stack3];
+ switch [$stack3]
+if 0 goto label0;
+if 1 goto label1;
+if 2 goto label2;
+if 3 goto label3;
+goto label2;
+ label0:goto label2;
+ label1:$stack6=this.mqClientInstance;
+ $stack5=this.defaultMQAdminExt;
+ $stack7 = $stack5.getAdminExtGroup();
+ $stack6.unregisterAdminExt($stack7);
+ $stack6=this.mqClientInstance;
+ $stack6.shutdown();
+ $stack10=this.logger;
+ $stack5=this.defaultMQAdminExt;
+ $stack7 = $stack5.getAdminExtGroup();
+ $stack10.info("the adminExt [{}] shutdown OK",(java.lang.Object)$stack7);
+ $stack1=org.apache.rocketmq.common.ServiceState.SHUTDOWN_ALREADY;
+ this.serviceState=$stack1;
+ $stack14=this.threadPoolExecutor;
+ $stack14.shutdown();
+ goto label2;
+ label3:goto label2;
+ label2:return;
+ } 
+

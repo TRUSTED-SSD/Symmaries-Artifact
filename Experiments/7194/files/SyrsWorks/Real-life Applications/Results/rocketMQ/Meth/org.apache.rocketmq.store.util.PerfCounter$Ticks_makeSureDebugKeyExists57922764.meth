@@ -1,0 +1,29 @@
+java.util.concurrent.atomic.AtomicLong org.apache.rocketmq.store.util.PerfCounter$Ticks:makeSureDebugKeyExists(java.lang.String key)
+{
+java.util.concurrent.atomic.AtomicLong lastTimeMs;
+  java.util.Map $stack3;
+  java.lang.Object $stack4;
+  int $stack10;
+  int $stack11;
+  $stack3=this.keyFreqs;
+ $stack4 = $stack3.get((java.lang.Object)key);
+ lastTimeMs=(java.util.concurrent.atomic.AtomicLong) $stack4;
+ if (null!=lastTimeMs) goto label0;
+ $stack3=this.keyFreqs;
+ $stack10 = $stack3.size();
+ $stack11=this.maxKeyNumDebug;
+ $stack11=($stack11+100);
+ if ($stack10<$stack11) goto label1;
+ lastTimeMs=this.defaultTime;
+ return  lastTimeMs;
+ label1:lastTimeMs=new java.util.concurrent.atomic.AtomicLong;
+ lastTimeMs#java.util.concurrent.atomic.AtomicLong(0L);
+ $stack3=this.keyFreqs;
+ $stack3.put((java.lang.Object)key,(java.lang.Object)lastTimeMs);
+ label0:$stack3=this.keyFreqs;
+ lastTimeMs=this.defaultTime;
+ $stack4 = $stack3.getOrDefault((java.lang.Object)key,(java.lang.Object)lastTimeMs);
+ lastTimeMs=(java.util.concurrent.atomic.AtomicLong) $stack4;
+ return  lastTimeMs;
+ } 
+

@@ -1,0 +1,26 @@
+void org.apache.rocketmq.common.consistenthash.ConsistentHashRouter:removeNode(org.apache.rocketmq.common.consistenthash.Node pNode)
+{
+java.util.Iterator it;
+  java.lang.Long key;
+  org.apache.rocketmq.common.consistenthash.VirtualNode virtualNode;
+  java.util.SortedMap $stack5;
+  java.util.Set $stack6;
+  boolean $stack8;
+  java.lang.Object $stack9;
+  $stack5=this.ring;
+ $stack6 = $stack5.keySet();
+ it = $stack6.iterator();
+ label0:$stack8 = it.hasNext();
+ if ($stack8==0) goto label1;
+ $stack9 = it.next();
+ key=(java.lang.Long) $stack9;
+ $stack5=this.ring;
+ $stack9 = $stack5.get((java.lang.Object)key);
+ virtualNode=(org.apache.rocketmq.common.consistenthash.VirtualNode) $stack9;
+ $stack8 = virtualNode.isVirtualNodeOf(pNode);
+ if ($stack8==0) goto label2;
+ it.remove();
+ label2:goto label0;
+ label1:return;
+ } 
+

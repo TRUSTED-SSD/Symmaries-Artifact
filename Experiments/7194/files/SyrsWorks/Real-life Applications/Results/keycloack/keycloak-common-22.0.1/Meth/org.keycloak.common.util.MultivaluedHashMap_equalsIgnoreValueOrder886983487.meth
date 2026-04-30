@@ -1,0 +1,35 @@
+boolean org.keycloak.common.util.MultivaluedHashMap:equalsIgnoreValueOrder(org.keycloak.common.util.MultivaluedHashMap omap)
+{
+java.util.Iterator l2;
+  java.util.Map$Entry e;
+  java.util.List list;
+  java.util.List olist;
+  java.util.Set $stack6;
+  java.util.Set $stack7;
+  boolean $stack8;
+  java.lang.Object $stack12;
+  if (this!=omap) goto label0;
+ return  1;
+ label0:$stack6 = this.keySet();
+ $stack7 = omap.keySet();
+ $stack8 = $stack6.equals((java.lang.Object)$stack7);
+ if ($stack8!=0) goto label1;
+ return  0;
+ label1:$stack6 = this.entrySet();
+ l2 = $stack6.iterator();
+ label2:$stack8 = l2.hasNext();
+ if ($stack8==0) goto label3;
+ $stack12 = l2.next();
+ e=(java.util.Map$Entry) $stack12;
+ $stack12 = e.getValue();
+ list=(java.util.List) $stack12;
+ $stack12 = e.getKey();
+ $stack12 = omap.get($stack12);
+ olist=(java.util.List) $stack12;
+ $stack8 = org.keycloak.common.util.CollectionUtil.collectionEquals((java.util.Collection)list,(java.util.Collection)olist);
+ if ($stack8!=0) goto label4;
+ return  0;
+ label4:goto label2;
+ label3:return  1;
+ } 
+

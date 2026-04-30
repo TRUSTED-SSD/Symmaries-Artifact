@@ -1,0 +1,58 @@
+void org.apache.rocketmq.store.DefaultMessageStore$MainBatchDispatchRequestService:lambda$pollBatchDispatchRequest$0(org.apache.rocketmq.store.DefaultMessageStore$BatchDispatchRequest task)
+{
+java.nio.ByteBuffer tmpByteBuffer;
+  java.util.ArrayList dispatchRequestList;
+  org.apache.rocketmq.store.DispatchRequest dispatchRequest;
+  int $stack7;
+  int $stack10;
+  boolean $stack14;
+  org.apache.rocketmq.store.DefaultMessageStore $stack15;
+  org.apache.rocketmq.store.DefaultMessageStore$DispatchRequestOrderlyQueue $stack16;
+  long $stack17;
+  org.apache.rocketmq.store.DispatchRequest[] $stack19;
+  java.lang.Object[] $stack20;
+  java.util.concurrent.atomic.AtomicInteger $stack23;
+  org.apache.rocketmq.store.CommitLog $stack26;
+  org.apache.rocketmq.logging.org.slf4j.Logger $stack29;
+  java.lang.Exception $stack32;
+  label0:tmpByteBuffer = org.apache.rocketmq.store.DefaultMessageStore$BatchDispatchRequest.access$1500(task);
+ tmpByteBuffer = tmpByteBuffer.duplicate();
+ $stack7 = org.apache.rocketmq.store.DefaultMessageStore$BatchDispatchRequest.access$1600(task);
+ tmpByteBuffer.position($stack7);
+ $stack7 = org.apache.rocketmq.store.DefaultMessageStore$BatchDispatchRequest.access$1600(task);
+ $stack10 = org.apache.rocketmq.store.DefaultMessageStore$BatchDispatchRequest.access$1700(task);
+ $stack7=($stack7+$stack10);
+ tmpByteBuffer.limit($stack7);
+ dispatchRequestList=new java.util.ArrayList;
+ dispatchRequestList#java.util.ArrayList();
+ label1:$stack14 = tmpByteBuffer.hasRemaining();
+ if ($stack14==0) goto label2;
+ $stack15=this.this$0;
+ $stack26 = org.apache.rocketmq.store.DefaultMessageStore.access$200($stack15);
+ dispatchRequest = $stack26.checkMessageAndReturnSize(tmpByteBuffer,(boolean)0,(boolean)0,(boolean)0);
+ $stack14 = dispatchRequest.isSuccess();
+ if ($stack14==0) goto label3;
+ dispatchRequestList.add((java.lang.Object)dispatchRequest);
+ goto label4;
+ label3:$stack29 = org.apache.rocketmq.store.DefaultMessageStore.access$600();
+ $stack29.error("[BUG]read total count not equals msg total size.");
+ label4:goto label1;
+ label2:$stack15=this.this$0;
+ $stack16 = org.apache.rocketmq.store.DefaultMessageStore.access$1900($stack15);
+ $stack17 = org.apache.rocketmq.store.DefaultMessageStore$BatchDispatchRequest.access$1800(task);
+ $stack7 = dispatchRequestList.size();
+ $stack19=new org.apache.rocketmq.store.DispatchRequest[$stack7];
+ $stack20 = dispatchRequestList.toArray((java.lang.Object[])$stack19);
+ $stack19=(org.apache.rocketmq.store.DispatchRequest[]) $stack20;
+ $stack16#org.apache.rocketmq.store.DefaultMessageStore$DispatchRequestOrderlyQueue($stack17,$stack19);
+ $stack15=this.this$0;
+ $stack23 = org.apache.rocketmq.store.DefaultMessageStore.access$2000($stack15);
+ $stack23.getAndDecrement();
+ label5:goto label6;
+ label7:$stack32 = catch;
+ $stack29 = org.apache.rocketmq.store.DefaultMessageStore.access$600();
+ $stack29.error("There is an exception in task execution.",(java.lang.Throwable)$stack32);
+ label6:return;
+ catch java.lang.Exception: label0 - label5 : label7;
+} 
+

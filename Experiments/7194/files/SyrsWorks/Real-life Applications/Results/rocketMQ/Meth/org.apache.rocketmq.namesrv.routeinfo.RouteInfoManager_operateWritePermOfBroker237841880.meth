@@ -1,0 +1,39 @@
+int org.apache.rocketmq.namesrv.routeinfo.RouteInfoManager:operateWritePermOfBroker(java.lang.String brokerName,int requestCode)
+{
+int topicCnt;
+  java.util.Iterator l4;
+  java.util.Map$Entry entry;
+  java.util.Map qdMap;
+  org.apache.rocketmq.remoting.protocol.route.QueueData qd;
+  int perm;
+  java.util.Set $stack10;
+  boolean $stack12;
+  java.lang.Object $stack13;
+  topicCnt=0;
+ qdMap=this.topicQueueTable;
+ $stack10 = qdMap.entrySet();
+ l4 = $stack10.iterator();
+ label0:$stack12 = l4.hasNext();
+ if ($stack12==0) goto label1;
+ $stack13 = l4.next();
+ entry=(java.util.Map$Entry) $stack13;
+ $stack13 = entry.getValue();
+ qdMap=(java.util.Map) $stack13;
+ $stack13 = qdMap.get((java.lang.Object)brokerName);
+ qd=(org.apache.rocketmq.remoting.protocol.route.QueueData) $stack13;
+ if (qd!=null) goto label2;
+ goto label0;
+ label2:perm = qd.getPerm();
+ switch [requestCode]
+if 0 goto label3;
+if 1 goto label4;
+goto label5;
+ label3:perm=(perm & -3);
+ goto label5;
+ label4:perm=6;
+ label5:qd.setPerm(perm);
+ topicCnt=(topicCnt+1);
+ goto label0;
+ label1:return  topicCnt;
+ } 
+

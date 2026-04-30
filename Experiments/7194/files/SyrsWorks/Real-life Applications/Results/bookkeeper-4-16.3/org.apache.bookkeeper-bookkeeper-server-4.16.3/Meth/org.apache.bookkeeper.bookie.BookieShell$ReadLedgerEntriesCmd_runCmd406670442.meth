@@ -1,0 +1,46 @@
+int org.apache.bookkeeper.bookie.BookieShell$ReadLedgerEntriesCmd:runCmd(org.apache.commons.cli.CommandLine cmdLine)
+{
+long ledgerId;
+  long firstEntry;
+  long lastEntry;
+  boolean printMsg;
+  boolean forceRecovery;
+  java.lang.String bookieAddress;
+  org.apache.bookkeeper.tools.cli.commands.bookie.ReadLedgerCommand$ReadLedgerFlags flags;
+  org.apache.bookkeeper.bookie.BookieShell $stack13;
+  boolean $stack19;
+  org.apache.bookkeeper.tools.cli.commands.bookie.ReadLedgerCommand $stack20;
+  org.apache.bookkeeper.util.LedgerIdFormatter $stack23;
+  org.apache.bookkeeper.util.EntryFormatter $stack24;
+  org.apache.bookkeeper.conf.ServerConfiguration $stack33;
+  $stack13=this.this$0;
+ ledgerId = org.apache.bookkeeper.bookie.BookieShell.access$000($stack13,cmdLine,"ledgerid",-1L);
+ firstEntry = org.apache.bookkeeper.bookie.BookieShell.access$200(cmdLine,"firstentryid",0L);
+ lastEntry = org.apache.bookkeeper.bookie.BookieShell.access$200(cmdLine,"lastentryid",-1L);
+ printMsg = cmdLine.hasOption("m");
+ forceRecovery = cmdLine.hasOption("r");
+ $stack19 = cmdLine.hasOption("b");
+ if ($stack19==0) goto label0;
+ bookieAddress = cmdLine.getOptionValue("b");
+ goto label1;
+ label0:bookieAddress=null;
+ label1:$stack20=new org.apache.bookkeeper.tools.cli.commands.bookie.ReadLedgerCommand;
+ $stack13=this.this$0;
+ $stack24=$stack13.entryFormatter;
+ $stack13=this.this$0;
+ $stack23=$stack13.ledgerIdFormatter;
+ $stack20#org.apache.bookkeeper.tools.cli.commands.bookie.ReadLedgerCommand($stack24,$stack23);
+ flags=new org.apache.bookkeeper.tools.cli.commands.bookie.ReadLedgerCommand$ReadLedgerFlags;
+ flags#org.apache.bookkeeper.tools.cli.commands.bookie.ReadLedgerCommand$ReadLedgerFlags();
+ flags.bookieAddresss(bookieAddress);
+ flags.firstEntryId(firstEntry);
+ flags.forceRecovery(forceRecovery);
+ flags.lastEntryId(lastEntry);
+ flags.ledgerId(ledgerId);
+ flags.msg(printMsg);
+ $stack13=this.this$0;
+ $stack33=$stack13.bkConf;
+ $stack20#org.apache.bookkeeper.tools.cli.commands.bookie.ReadLedgerCommand($stack33,flags);
+ return  0;
+ } 
+

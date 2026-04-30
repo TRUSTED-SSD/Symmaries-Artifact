@@ -1,0 +1,32 @@
+static org.apache.rocketmq.common.attribute.TopicMessageType org.apache.rocketmq.broker.metrics.BrokerMetricsManager:getMessageType(org.apache.rocketmq.remoting.protocol.header.SendMessageRequestHeader requestHeader)
+{
+java.util.Map properties;
+  java.lang.String traFlag;
+  org.apache.rocketmq.common.attribute.TopicMessageType topicMessageType;
+  java.lang.Object $stack6;
+  boolean $stack7;
+  traFlag = requestHeader.getProperties();
+ properties = org.apache.rocketmq.common.message.MessageDecoder.string2messageProperties(traFlag);
+ $stack6 = properties.get((java.lang.Object)"TRAN_MSG");
+ traFlag=(java.lang.String) $stack6;
+ topicMessageType=org.apache.rocketmq.common.attribute.TopicMessageType.NORMAL;
+ $stack7 = java.lang.Boolean.parseBoolean(traFlag);
+ if ($stack7==0) goto label0;
+ topicMessageType=org.apache.rocketmq.common.attribute.TopicMessageType.TRANSACTION;
+ goto label1;
+ label0:$stack7 = properties.containsKey((java.lang.Object)"__SHARDINGKEY");
+ if ($stack7==0) goto label2;
+ topicMessageType=org.apache.rocketmq.common.attribute.TopicMessageType.FIFO;
+ goto label1;
+ label2:$stack6 = properties.get((java.lang.Object)"__STARTDELIVERTIME");
+ if ($stack6!=null) goto label3;
+ $stack6 = properties.get((java.lang.Object)"DELAY");
+ if ($stack6!=null) goto label3;
+ $stack6 = properties.get((java.lang.Object)"TIMER_DELIVER_MS");
+ if ($stack6!=null) goto label3;
+ $stack6 = properties.get((java.lang.Object)"TIMER_DELAY_SEC");
+ if ($stack6==null) goto label1;
+ label3:topicMessageType=org.apache.rocketmq.common.attribute.TopicMessageType.DELAY;
+ label1:return  topicMessageType;
+ } 
+

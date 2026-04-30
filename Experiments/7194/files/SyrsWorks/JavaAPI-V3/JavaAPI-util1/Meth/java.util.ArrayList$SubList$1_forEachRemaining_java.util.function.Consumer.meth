@@ -1,0 +1,53 @@
+void java.util.ArrayList$SubList$1:forEachRemaining(java.util.function.Consumer r1)
+{
+int i0;
+  java.lang.Object[] r2;
+  java.util.ArrayList$SubList $r4;
+  java.util.ArrayList$SubList $r5;
+  java.util.ArrayList $r6;
+  int $i1;
+  int $i2;
+  int $i3;
+  java.util.ArrayList$SubList $r7;
+  int $i4;
+  int $i5;
+  int $i7;
+  int $i8;
+  int $i9;
+  java.lang.Object $r8;
+  java.util.ConcurrentModificationException $r9;
+  int i10;
+  java.util.Objects.requireNonNull((java.lang.Object)r1);
+ $r4=this.this$1;
+ i0=$r4.size;
+ i10=this.cursor;
+ if (i10<i0) goto label0;
+ return;
+ label0:$r5=this.this$1;
+ $r6=$r5.this$0;
+ r2=$r6.elementData;
+ $i1=this.val$offset;
+ $i3=($i1+i10);
+ $i2=#r2;
+ if ($i3<$i2) goto label1;
+ $r9=new java.util.ConcurrentModificationException;
+ $r9#java.util.ConcurrentModificationException:init();
+ throw $r9;
+ label1:if (i10==i0) goto label2;
+ $r7=this.this$1;
+ $i5=$r7.modCount;
+ $i4=this.expectedModCount;
+ if ($i5!=$i4) goto label2;
+ $i8=this.val$offset;
+ $i7=i10;
+ i10=(i10+1);
+ $i9=($i8+$i7);
+ $r8=r2[$i9];
+ r1.accept($r8);
+ goto label1;
+ label2:this.cursor=i10;
+ this.lastRet=i10;
+ this.checkForComodification();
+ return;
+ }  
+

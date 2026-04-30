@@ -1,0 +1,29 @@
+void org.apache.rocketmq.namesrv.NamesrvController:shutdown()
+{
+org.apache.rocketmq.remoting.RemotingClient $stack1;
+  org.apache.rocketmq.remoting.RemotingServer $stack2;
+  java.util.concurrent.ExecutorService $stack3;
+  java.util.concurrent.ScheduledExecutorService $stack5;
+  org.apache.rocketmq.namesrv.routeinfo.RouteInfoManager $stack7;
+  org.apache.rocketmq.srvutil.FileWatchService $stack8;
+  $stack1=this.remotingClient;
+ $stack1.shutdown();
+ $stack2=this.remotingServer;
+ $stack2.shutdown();
+ $stack3=this.defaultExecutor;
+ $stack3.shutdown();
+ $stack3=this.clientRequestExecutor;
+ $stack3.shutdown();
+ $stack5=this.scheduledExecutorService;
+ $stack5.shutdown();
+ $stack5=this.scanExecutorService;
+ $stack5.shutdown();
+ $stack7=this.routeInfoManager;
+ $stack7.shutdown();
+ $stack8=this.fileWatchService;
+ if ($stack8==null) goto label0;
+ $stack8=this.fileWatchService;
+ $stack8.shutdown();
+ label0:return;
+ } 
+

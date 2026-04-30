@@ -1,0 +1,21 @@
+boolean org.apache.bookkeeper.bookie.IndexPersistenceMgr:waitForLastAddConfirmedUpdate(long ledgerId,long previousLAC,org.apache.bookkeeper.common.util.Watcher watcher)
+{
+org.apache.bookkeeper.bookie.FileInfoBackingCache$CachedFileInfo fi;
+  boolean l7;
+  java.lang.Throwable l8;
+  java.lang.Long $stack9;
+  fi=null;
+ label0:$stack9 = java.lang.Long.valueOf(ledgerId);
+ fi = this.getFileInfo($stack9,null);
+ l7 = fi.waitForLastAddConfirmedUpdate(previousLAC,watcher);
+ label1:if (null==fi) goto label2;
+ fi.release();
+ label2:return  l7;
+ label3:l8 = catch;
+ label4:if (null==fi) goto label5;
+ fi.release();
+ label5:throw l8;
+ catch java.lang.Throwable: label0 - label1 : label3;
+catch java.lang.Throwable: label3 - label4 : label3;
+} 
+

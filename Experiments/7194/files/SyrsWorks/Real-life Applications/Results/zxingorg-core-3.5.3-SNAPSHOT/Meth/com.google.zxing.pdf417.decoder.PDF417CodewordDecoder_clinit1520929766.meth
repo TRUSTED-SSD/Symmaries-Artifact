@@ -1,0 +1,44 @@
+static com.google.zxing.pdf417.decoder.PDF417CodewordDecoder
+{
+int i;
+  int currentSymbol;
+  int currentBit;
+  int j;
+  float size;
+  int[] $stack5;
+  float[][] $stack7;
+  int $stack12;
+  float[] $stack17;
+  $stack5=com.google.zxing.pdf417.PDF417Common.SYMBOL_TABLE;
+ i=#$stack5;
+ $stack7= new float[i][8];
+ com.google.zxing.pdf417.decoder.PDF417CodewordDecoder.RATIOS_TABLE=$stack7;
+ i=0;
+ label0:$stack5=com.google.zxing.pdf417.PDF417Common.SYMBOL_TABLE;
+ currentSymbol=#$stack5;
+ if (i>=currentSymbol) goto label1;
+ $stack5=com.google.zxing.pdf417.PDF417Common.SYMBOL_TABLE;
+ currentSymbol=$stack5[i];
+ currentBit=(currentSymbol & 1);
+ j=0;
+ label2:if (j>=8) goto label3;
+ size=0.0F;
+ label4:$stack12=(currentSymbol & 1);
+ if ($stack12!=currentBit) goto label5;
+ size=(size+1.0F);
+ currentSymbol=(currentSymbol>>1);
+ goto label4;
+ label5:currentBit=(currentSymbol & 1);
+ $stack7=com.google.zxing.pdf417.decoder.PDF417CodewordDecoder.RATIOS_TABLE;
+ $stack17=$stack7[i];
+ $stack12=(8-j);
+ $stack12=($stack12-1);
+ size=(size/17.0F);
+ $stack17[$stack12]=size;
+ j=(j+1);
+ goto label2;
+ label3:i=(i+1);
+ goto label0;
+ label1:return;
+ } 
+

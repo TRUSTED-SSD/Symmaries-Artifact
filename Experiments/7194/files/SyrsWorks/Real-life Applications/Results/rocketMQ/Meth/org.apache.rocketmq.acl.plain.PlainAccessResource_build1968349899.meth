@@ -1,0 +1,34 @@
+static org.apache.rocketmq.acl.plain.PlainAccessResource org.apache.rocketmq.acl.plain.PlainAccessResource:build(org.apache.rocketmq.common.PlainAccessConfig plainAccessConfig,org.apache.rocketmq.acl.plain.RemoteAddressStrategy remoteAddressStrategy)
+{
+org.apache.rocketmq.acl.plain.PlainAccessResource plainAccessResource;
+  java.lang.String $stack4;
+  boolean $stack7;
+  byte $stack9;
+  java.lang.Boolean $stack12;
+  java.util.List $stack13;
+  plainAccessResource=new org.apache.rocketmq.acl.plain.PlainAccessResource;
+ plainAccessResource#org.apache.rocketmq.acl.plain.PlainAccessResource();
+ $stack4 = plainAccessConfig.getAccessKey();
+ plainAccessResource.setAccessKey($stack4);
+ $stack4 = plainAccessConfig.getSecretKey();
+ plainAccessResource.setSecretKey($stack4);
+ $stack4 = plainAccessConfig.getWhiteRemoteAddress();
+ plainAccessResource.setWhiteRemoteAddress($stack4);
+ $stack7 = plainAccessConfig.isAdmin();
+ plainAccessResource.setAdmin($stack7);
+ $stack4 = plainAccessConfig.getDefaultGroupPerm();
+ $stack9 = org.apache.rocketmq.acl.common.Permission.parsePermFromString($stack4);
+ plainAccessResource.setDefaultGroupPerm($stack9);
+ $stack4 = plainAccessConfig.getDefaultTopicPerm();
+ $stack9 = org.apache.rocketmq.acl.common.Permission.parsePermFromString($stack4);
+ plainAccessResource.setDefaultTopicPerm($stack9);
+ $stack12 = java.lang.Boolean.valueOf((boolean)0);
+ $stack13 = plainAccessConfig.getGroupPerms();
+ org.apache.rocketmq.acl.common.Permission.parseResourcePerms(plainAccessResource,$stack12,$stack13);
+ $stack12 = java.lang.Boolean.valueOf((boolean)1);
+ $stack13 = plainAccessConfig.getTopicPerms();
+ org.apache.rocketmq.acl.common.Permission.parseResourcePerms(plainAccessResource,$stack12,$stack13);
+ plainAccessResource.setRemoteAddressStrategy(remoteAddressStrategy);
+ return  plainAccessResource;
+ } 
+

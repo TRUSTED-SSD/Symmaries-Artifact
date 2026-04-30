@@ -1,0 +1,24 @@
+org.apache.rocketmq.remoting.protocol.heartbeat.SubscriptionData org.apache.rocketmq.proxy.grpc.v2.client.ClientActivity:buildSubscriptionData(java.lang.String topicName,apache.rocketmq.v2.FilterExpression filterExpression)
+{
+java.lang.String expression;
+  java.lang.String expressionType;
+  org.apache.rocketmq.proxy.grpc.v2.common.GrpcConverter $stack7;
+  apache.rocketmq.v2.FilterType $stack8;
+  org.apache.rocketmq.remoting.protocol.heartbeat.SubscriptionData $stack10;
+  java.lang.Exception $stack11;
+  org.apache.rocketmq.proxy.grpc.v2.common.GrpcProxyException $stack12;
+  apache.rocketmq.v2.Code $stack13;
+  expression = filterExpression.getExpression();
+ $stack7 = org.apache.rocketmq.proxy.grpc.v2.common.GrpcConverter.getInstance();
+ $stack8 = filterExpression.getType();
+ expressionType = $stack7.buildExpressionType($stack8);
+ label0:$stack10 = org.apache.rocketmq.remoting.protocol.filter.FilterAPI.build(topicName,expression,expressionType);
+ label1:return  $stack10;
+ label2:$stack11 = catch;
+ $stack12=new org.apache.rocketmq.proxy.grpc.v2.common.GrpcProxyException;
+ $stack13=apache.rocketmq.v2.Code.ILLEGAL_FILTER_EXPRESSION;
+ $stack12#org.apache.rocketmq.proxy.grpc.v2.common.GrpcProxyException($stack13,"expression format is not correct",(java.lang.Throwable)$stack11);
+ throw $stack12;
+ catch java.lang.Exception: label0 - label1 : label2;
+} 
+

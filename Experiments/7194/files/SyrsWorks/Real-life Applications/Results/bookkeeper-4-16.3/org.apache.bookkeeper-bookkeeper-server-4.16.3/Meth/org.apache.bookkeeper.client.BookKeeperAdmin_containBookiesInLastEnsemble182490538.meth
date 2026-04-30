@@ -1,0 +1,22 @@
+static boolean org.apache.bookkeeper.client.BookKeeperAdmin:containBookiesInLastEnsemble(org.apache.bookkeeper.client.api.LedgerMetadata lm,java.util.Set bookies)
+{
+java.lang.Long lastKey;
+  java.util.List lastEnsemble;
+  java.util.NavigableMap $stack4;
+  int $stack5;
+  java.lang.Object $stack7;
+  boolean $stack10;
+  $stack4 = lm.getAllEnsembles();
+ $stack5 = $stack4.size();
+ if ($stack5>0) goto label0;
+ return  0;
+ label0:$stack4 = lm.getAllEnsembles();
+ $stack7 = $stack4.lastKey();
+ lastKey=(java.lang.Long) $stack7;
+ $stack4 = lm.getAllEnsembles();
+ $stack7 = $stack4.get((java.lang.Object)lastKey);
+ lastEnsemble=(java.util.List) $stack7;
+ $stack10 = org.apache.bookkeeper.client.BookKeeperAdmin.containBookies(lastEnsemble,bookies);
+ return  $stack10;
+ } 
+

@@ -1,0 +1,55 @@
+static boolean org.greenrobot.eventbus.util.ErrorDialogManager:isSupportActivity(android.app.Activity activity)
+{
+boolean isSupport;
+  java.lang.Class c;
+  java.lang.String name;
+  boolean $stack7;
+  int $stack12;
+  java.lang.RuntimeException $stack13;
+  java.lang.StringBuilder $stack16;
+  isSupport=0;
+ c = activity.getClass();
+ c = c.getSuperclass();
+ label0:if (c!=null) goto label1;
+ $stack13=new java.lang.RuntimeException;
+ $stack16=new java.lang.StringBuilder;
+ $stack16#java.lang.StringBuilder();
+ $stack16 = $stack16.append("Illegal activity type: ");
+ c = activity.getClass();
+ $stack16 = $stack16.append((java.lang.Object)c);
+ name = $stack16.toString();
+ $stack13#java.lang.RuntimeException(name);
+ throw $stack13;
+ label1:name = c.getName();
+ $stack7 = name.equals((java.lang.Object)"android.support.v4.app.FragmentActivity");
+ if ($stack7==0) goto label2;
+ isSupport=1;
+ goto label3;
+ label2:$stack7 = name.startsWith("com.actionbarsherlock.app");
+ if ($stack7==0) goto label4;
+ $stack7 = name.endsWith(".SherlockActivity");
+ if ($stack7!=0) goto label5;
+ $stack7 = name.endsWith(".SherlockListActivity");
+ if ($stack7!=0) goto label5;
+ $stack7 = name.endsWith(".SherlockPreferenceActivity");
+ if ($stack7==0) goto label4;
+ label5:$stack13=new java.lang.RuntimeException;
+ $stack16=new java.lang.StringBuilder;
+ $stack16#java.lang.StringBuilder();
+ $stack16 = $stack16.append("Please use SherlockFragmentActivity. Illegal activity: ");
+ $stack16 = $stack16.append(name);
+ name = $stack16.toString();
+ $stack13#java.lang.RuntimeException(name);
+ throw $stack13;
+ label4:$stack7 = name.equals((java.lang.Object)"android.app.Activity");
+ if ($stack7==0) goto label6;
+ $stack12=android.os.Build$VERSION.SDK_INT;
+ if ($stack12>=11) goto label3;
+ $stack13=new java.lang.RuntimeException;
+ $stack13#java.lang.RuntimeException("Illegal activity without fragment support. Either use Android 3.0+ or android.support.v4.app.FragmentActivity.");
+ throw $stack13;
+ label6:c = c.getSuperclass();
+ goto label0;
+ label3:return  isSupport;
+ } 
+

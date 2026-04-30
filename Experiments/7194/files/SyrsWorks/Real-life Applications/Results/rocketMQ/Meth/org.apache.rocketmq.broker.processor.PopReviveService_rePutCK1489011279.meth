@@ -1,0 +1,41 @@
+void org.apache.rocketmq.broker.processor.PopReviveService:rePutCK(org.apache.rocketmq.store.pop.PopCheckPoint oldCK,org.apache.rocketmq.common.Pair pair)
+{
+org.apache.rocketmq.store.pop.PopCheckPoint newCk;
+  org.apache.rocketmq.common.message.MessageExtBrokerInner ckMsg;
+  long $stack6;
+  java.lang.Object $stack8;
+  java.lang.Long $stack9;
+  java.lang.String $stack11;
+  int $stack13;
+  org.apache.rocketmq.broker.BrokerController $stack14;
+  org.apache.rocketmq.broker.processor.PopMessageProcessor $stack15;
+  org.apache.rocketmq.store.MessageStore $stack19;
+  newCk=new org.apache.rocketmq.store.pop.PopCheckPoint;
+ newCk#org.apache.rocketmq.store.pop.PopCheckPoint();
+ newCk.setBitMap(0);
+ newCk.setNum((byte)1);
+ $stack6 = oldCK.getPopTime();
+ newCk.setPopTime($stack6);
+ $stack6 = oldCK.getInvisibleTime();
+ newCk.setInvisibleTime($stack6);
+ $stack8 = pair.getObject1();
+ $stack9=(java.lang.Long) $stack8;
+ $stack6 = $stack9.longValue();
+ newCk.setStartOffset($stack6);
+ $stack11 = oldCK.getCId();
+ newCk.setCId($stack11);
+ $stack11 = oldCK.getTopic();
+ newCk.setTopic($stack11);
+ $stack13 = oldCK.getQueueId();
+ newCk.setQueueId($stack13);
+ newCk.addDiff(0);
+ $stack14=this.brokerController;
+ $stack15 = $stack14.getPopMessageProcessor();
+ $stack13=this.queueId;
+ ckMsg = $stack15.buildCkMsg(newCk,$stack13);
+ $stack14=this.brokerController;
+ $stack19 = $stack14.getMessageStore();
+ $stack19.putMessage(ckMsg);
+ return;
+ } 
+

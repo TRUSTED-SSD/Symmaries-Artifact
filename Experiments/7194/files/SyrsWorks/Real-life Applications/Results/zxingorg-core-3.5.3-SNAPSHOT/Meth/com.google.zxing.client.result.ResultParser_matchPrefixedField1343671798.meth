@@ -1,0 +1,57 @@
+static java.lang.String[] com.google.zxing.client.result.ResultParser:matchPrefixedField(java.lang.String prefix,java.lang.String rawText,char endChar,boolean trim)
+{
+java.util.ArrayList matches;
+  int i;
+  int max;
+  int start;
+  boolean more;
+  java.lang.String element;
+  java.lang.String[] $stack12;
+  java.lang.Object[] $stack13;
+  int $stack21;
+  matches=null;
+ i=0;
+ max = rawText.length();
+ label0:if (i>=max) goto label1;
+ i = rawText.indexOf(prefix,i);
+ if (i>=0) goto label2;
+ goto label1;
+ label2:start = prefix.length();
+ i=(i+start);
+ start=i;
+ more=1;
+ label3:if (more==0) goto label4;
+ i = rawText.indexOf((int)endChar,i);
+ if (i>=0) goto label5;
+ i = rawText.length();
+ more=0;
+ goto label3;
+ label5:$stack21 = com.google.zxing.client.result.ResultParser.countPrecedingBackslashes((java.lang.CharSequence)rawText,i);
+ $stack21=($stack21%2);
+ if ($stack21==0) goto label6;
+ i=(i+1);
+ goto label3;
+ label6:if (matches!=null) goto label7;
+ matches=new java.util.ArrayList;
+ matches#java.util.ArrayList(3);
+ label7:element = rawText.substring(start,i);
+ element = com.google.zxing.client.result.ResultParser.unescapeBackslash(element);
+ if (trim==0) goto label8;
+ element = element.trim();
+ label8:more = element.isEmpty();
+ if (more!=0) goto label9;
+ matches.add((java.lang.Object)element);
+ label9:i=(i+1);
+ more=0;
+ goto label3;
+ label4:goto label0;
+ label1:if (matches==null) goto label10;
+ trim = matches.isEmpty();
+ if (trim==0) goto label11;
+ label10:return  null;
+ label11:$stack12=com.google.zxing.client.result.ResultParser.EMPTY_STR_ARRAY;
+ $stack13 = matches.toArray((java.lang.Object[])$stack12);
+ $stack12=(java.lang.String[]) $stack13;
+ return  $stack12;
+ } 
+

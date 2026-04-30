@@ -1,0 +1,32 @@
+java.util.Set org.apache.bookkeeper.client.ZoneawareEnsemblePlacementPolicyImpl:getZonesOfNeighboringNodesInEnsemble(java.util.List currentEnsemble,int indexOfNode,int numOfNeighboringNodes)
+{
+java.util.HashSet zonesOfNeighboringNodes;
+  int ensembleSize;
+  int i;
+  int index;
+  org.apache.bookkeeper.net.BookieId addrofNode;
+  java.lang.String zoneOfNode;
+  java.lang.Object $stack14;
+  org.apache.bookkeeper.client.ZoneawareEnsemblePlacementPolicyImpl$ZoneAwareNodeLocation $stack15;
+  zonesOfNeighboringNodes=new java.util.HashSet;
+ zonesOfNeighboringNodes#java.util.HashSet();
+ ensembleSize = currentEnsemble.size();
+ i=(-1 * numOfNeighboringNodes);
+ label0:if (i>numOfNeighboringNodes) goto label1;
+ if (i!=0) goto label2;
+ goto label3;
+ label2:index=(indexOfNode+i);
+ index=(index+ensembleSize);
+ index=(index%ensembleSize);
+ $stack14 = currentEnsemble.get(index);
+ addrofNode=(org.apache.bookkeeper.net.BookieId) $stack14;
+ if (addrofNode!=null) goto label4;
+ goto label3;
+ label4:$stack15 = this.getZoneAwareNodeLocation(addrofNode);
+ zoneOfNode = $stack15.getZone();
+ zonesOfNeighboringNodes.add((java.lang.Object)zoneOfNode);
+ label3:i=(i+1);
+ goto label0;
+ label1:return  zonesOfNeighboringNodes;
+ } 
+

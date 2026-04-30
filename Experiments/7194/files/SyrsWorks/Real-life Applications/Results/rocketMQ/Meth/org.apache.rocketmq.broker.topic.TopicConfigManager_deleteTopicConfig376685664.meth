@@ -1,0 +1,22 @@
+void org.apache.rocketmq.broker.topic.TopicConfigManager:deleteTopicConfig(java.lang.String topic)
+{
+org.apache.rocketmq.common.TopicConfig old;
+  java.util.concurrent.ConcurrentMap $stack3;
+  java.lang.Object $stack4;
+  org.apache.rocketmq.logging.org.slf4j.Logger $stack5;
+  org.apache.rocketmq.remoting.protocol.DataVersion $stack7;
+  $stack3=this.topicConfigTable;
+ $stack4 = $stack3.remove((java.lang.Object)topic);
+ old=(org.apache.rocketmq.common.TopicConfig) $stack4;
+ if (old==null) goto label0;
+ $stack5=org.apache.rocketmq.broker.topic.TopicConfigManager.log;
+ $stack5.info("delete topic config OK, topic: {}",(java.lang.Object)old);
+ $stack7=this.dataVersion;
+ $stack7.nextVersion();
+ this.persist();
+ goto label1;
+ label0:$stack5=org.apache.rocketmq.broker.topic.TopicConfigManager.log;
+ $stack5.warn("delete topic config failed, topic: {} not exists",(java.lang.Object)topic);
+ label1:return;
+ } 
+

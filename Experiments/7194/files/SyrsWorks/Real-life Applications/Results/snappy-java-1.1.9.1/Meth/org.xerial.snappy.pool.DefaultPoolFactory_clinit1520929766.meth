@@ -1,0 +1,17 @@
+static org.xerial.snappy.pool.DefaultPoolFactory
+{
+java.lang.String $stack0;
+  java.lang.String $stack1;
+  boolean $stack2;
+  org.xerial.snappy.pool.BufferPool $stack3;
+  $stack0="true";
+ $stack1 = java.lang.System.getProperty("org.xerial.snappy.pool.disable");
+ $stack2 = $stack0.equalsIgnoreCase($stack1);
+ if ($stack2==0) goto label0;
+ $stack3 = org.xerial.snappy.pool.QuiescentBufferPool.getInstance();
+ goto label1;
+ label0:$stack3 = org.xerial.snappy.pool.CachingBufferPool.getInstance();
+ label1:org.xerial.snappy.pool.DefaultPoolFactory.defaultPool=$stack3;
+ return;
+ } 
+

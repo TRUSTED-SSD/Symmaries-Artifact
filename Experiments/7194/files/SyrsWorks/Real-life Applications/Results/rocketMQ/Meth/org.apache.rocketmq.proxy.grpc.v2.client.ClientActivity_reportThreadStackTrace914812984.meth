@@ -1,0 +1,46 @@
+void org.apache.rocketmq.proxy.grpc.v2.client.ClientActivity:reportThreadStackTrace(org.apache.rocketmq.proxy.common.ProxyContext ctx,apache.rocketmq.v2.Status status,apache.rocketmq.v2.ThreadStackTrace request)
+{
+java.lang.String nonce;
+  java.lang.String threadStack;
+  java.util.concurrent.CompletableFuture responseFuture;
+  org.apache.rocketmq.remoting.protocol.body.ConsumerRunningInfo runningInfo;
+  org.apache.rocketmq.proxy.grpc.v2.channel.GrpcChannelManager $stack10;
+  apache.rocketmq.v2.Code $stack12;
+  apache.rocketmq.v2.Code $stack13;
+  boolean $stack14;
+  org.apache.rocketmq.proxy.service.relay.ProxyRelayResult $stack18;
+  java.lang.Throwable $stack25;
+  nonce = request.getNonce();
+ threadStack = request.getThreadStackTrace();
+ $stack10=this.grpcChannelManager;
+ responseFuture = $stack10.getAndRemoveResponseFuture(nonce);
+ if (responseFuture==null) goto label0;
+ label1:$stack12 = status.getCode();
+ $stack13=apache.rocketmq.v2.Code.OK;
+ $stack14 = $stack12.equals((java.lang.Object)$stack13);
+ if ($stack14==0) goto label2;
+ runningInfo=new org.apache.rocketmq.remoting.protocol.body.ConsumerRunningInfo;
+ runningInfo#org.apache.rocketmq.remoting.protocol.body.ConsumerRunningInfo();
+ runningInfo.setJstack(threadStack);
+ $stack18=new org.apache.rocketmq.proxy.service.relay.ProxyRelayResult;
+ $stack18#org.apache.rocketmq.proxy.service.relay.ProxyRelayResult(0,"",(java.lang.Object)runningInfo);
+ responseFuture.complete((java.lang.Object)$stack18);
+ goto label3;
+ label2:$stack12 = status.getCode();
+ $stack13=apache.rocketmq.v2.Code.VERIFY_FIFO_MESSAGE_UNSUPPORTED;
+ $stack14 = $stack12.equals((java.lang.Object)$stack13);
+ if ($stack14==0) goto label4;
+ $stack18=new org.apache.rocketmq.proxy.service.relay.ProxyRelayResult;
+ $stack18#org.apache.rocketmq.proxy.service.relay.ProxyRelayResult(16,"forbidden to verify message",null);
+ responseFuture.complete((java.lang.Object)$stack18);
+ goto label3;
+ label4:$stack18=new org.apache.rocketmq.proxy.service.relay.ProxyRelayResult;
+ $stack18#org.apache.rocketmq.proxy.service.relay.ProxyRelayResult(1,"verify message failed",null);
+ responseFuture.complete((java.lang.Object)$stack18);
+ label3:goto label0;
+ label5:$stack25 = catch;
+ responseFuture.completeExceptionally($stack25);
+ label0:return;
+ catch java.lang.Throwable: label1 - label3 : label5;
+} 
+

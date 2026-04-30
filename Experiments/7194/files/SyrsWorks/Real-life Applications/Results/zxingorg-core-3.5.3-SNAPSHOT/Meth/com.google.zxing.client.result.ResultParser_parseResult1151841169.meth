@@ -1,0 +1,25 @@
+static com.google.zxing.client.result.ParsedResult com.google.zxing.client.result.ResultParser:parseResult(com.google.zxing.Result theResult)
+{
+com.google.zxing.client.result.ResultParser[] l1;
+  int l2;
+  int l3;
+  com.google.zxing.client.result.ResultParser parser;
+  com.google.zxing.client.result.ParsedResult result;
+  com.google.zxing.client.result.TextParsedResult $stack6;
+  java.lang.String $stack7;
+  l1=com.google.zxing.client.result.ResultParser.PARSERS;
+ l2=#l1;
+ l3=0;
+ label0:if (l3>=l2) goto label1;
+ parser=l1[l3];
+ result = parser.parse(theResult);
+ if (result==null) goto label2;
+ return  result;
+ label2:l3=(l3+1);
+ goto label0;
+ label1:$stack6=new com.google.zxing.client.result.TextParsedResult;
+ $stack7 = theResult.getText();
+ $stack6#com.google.zxing.client.result.TextParsedResult($stack7,null);
+ return  $stack6;
+ } 
+

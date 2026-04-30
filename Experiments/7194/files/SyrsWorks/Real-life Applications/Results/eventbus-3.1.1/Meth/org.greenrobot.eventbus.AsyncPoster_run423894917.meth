@@ -1,0 +1,17 @@
+void org.greenrobot.eventbus.AsyncPoster:run()
+{
+org.greenrobot.eventbus.PendingPost pendingPost;
+  org.greenrobot.eventbus.PendingPostQueue $stack2;
+  org.greenrobot.eventbus.EventBus $stack4;
+  java.lang.IllegalStateException $stack5;
+  $stack2=this.queue;
+ pendingPost = $stack2.poll();
+ if (pendingPost!=null) goto label0;
+ $stack5=new java.lang.IllegalStateException;
+ $stack5#java.lang.IllegalStateException("No pending post available");
+ throw $stack5;
+ label0:$stack4=this.eventBus;
+ $stack4.invokeSubscriber(pendingPost);
+ return;
+ } 
+

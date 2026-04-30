@@ -1,0 +1,16 @@
+java.util.concurrent.CompletableFuture org.apache.rocketmq.proxy.service.message.ClusterMessageService:changeInvisibleTime(org.apache.rocketmq.proxy.common.ProxyContext ctx,org.apache.rocketmq.common.consumer.ReceiptHandle handle,java.lang.String @messageId,org.apache.rocketmq.remoting.protocol.header.ChangeInvisibleTimeRequestHeader requestHeader,long timeoutMillis)
+{
+org.apache.rocketmq.proxy.service.mqclient.MQClientAPIFactory $stack7;
+  org.apache.rocketmq.proxy.service.mqclient.MQClientAPIExt $stack8;
+  java.lang.String $stack10;
+  java.util.concurrent.CompletableFuture $stack11;
+  java.lang.String messageId;
+messageId=@messageId;
+$stack7=this.mqClientAPIFactory;
+ $stack8 = $stack7.getClient();
+ messageId = this.resolveBrokerAddrInReceiptHandle(handle);
+ $stack10 = handle.getBrokerName();
+ $stack11 = $stack8.changeInvisibleTimeAsync(messageId,$stack10,requestHeader,timeoutMillis);
+ return  $stack11;
+ } 
+

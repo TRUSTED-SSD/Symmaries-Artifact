@@ -1,0 +1,32 @@
+void org.apache.bookkeeper.stats.prometheus.PrometheusTextFormat:writeSum(java.io.Writer @w,org.apache.bookkeeper.stats.prometheus.DataSketchesOpStatsLogger opStat,java.lang.String @name,java.lang.Boolean success)
+{
+java.io.Writer $stack5;
+  java.util.Map $stack10;
+  boolean $stack11;
+  long $stack14;
+  double $stack15;
+  java.lang.String name;
+java.io.Writer w;
+w=@w;
+name=@name;
+$stack5 = w.append((java.lang.CharSequence)name);
+ $stack5 = $stack5.append((java.lang.CharSequence)"_sum{success=\"");
+ name = success.toString();
+ $stack5 = $stack5.append((java.lang.CharSequence)name);
+ $stack5.append((java.lang.CharSequence)"\"");
+ $stack10 = opStat.getLabels();
+ $stack11 = $stack10.isEmpty();
+ if ($stack11!=0) goto label0;
+ w.append((java.lang.CharSequence)", ");
+ $stack10 = opStat.getLabels();
+ this#org.apache.bookkeeper.stats.prometheus.PrometheusTextFormat:writeLabelsNoBraces(w,$stack10);
+ label0:w = w.append((java.lang.CharSequence)"} ");
+ $stack11 = success.booleanValue();
+ $stack14 = opStat.getSum($stack11);
+ $stack15=(double) $stack14;
+ name = java.lang.Double.toString($stack15);
+ w = w.append((java.lang.CharSequence)name);
+ w.append((char)10);
+ return;
+ } 
+

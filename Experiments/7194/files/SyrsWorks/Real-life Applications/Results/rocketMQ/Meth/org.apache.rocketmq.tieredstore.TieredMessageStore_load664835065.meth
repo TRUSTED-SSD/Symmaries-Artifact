@@ -1,0 +1,22 @@
+boolean org.apache.rocketmq.tieredstore.TieredMessageStore:load()
+{
+boolean loadContainer;
+  boolean loadNextStore;
+  org.apache.rocketmq.tieredstore.container.TieredContainerManager $stack4;
+  org.apache.rocketmq.store.MessageStore $stack6;
+  org.apache.rocketmq.tieredstore.TieredDispatcher $stack8;
+  $stack4=this.containerManager;
+ loadContainer = $stack4.load();
+ $stack6=this.next;
+ loadNextStore = $stack6.load();
+ if (loadContainer==0) goto label0;
+ if (loadNextStore==0) goto label0;
+ loadContainer=1;
+ goto label1;
+ label0:loadContainer=0;
+ label1:if (loadContainer==0) goto label2;
+ $stack8=this.dispatcher;
+ $stack8.start();
+ label2:return  loadContainer;
+ } 
+

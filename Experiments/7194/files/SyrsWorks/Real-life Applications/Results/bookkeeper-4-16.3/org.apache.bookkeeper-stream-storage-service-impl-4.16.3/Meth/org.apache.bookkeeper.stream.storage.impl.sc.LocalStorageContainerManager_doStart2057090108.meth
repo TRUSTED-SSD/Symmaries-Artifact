@@ -1,0 +1,24 @@
+void org.apache.bookkeeper.stream.storage.impl.sc.LocalStorageContainerManager:doStart()
+{
+java.util.ArrayList futures;
+  int scId;
+  int $stack5;
+  java.util.concurrent.CompletableFuture $stack6;
+  long $stack8;
+  org.apache.bookkeeper.stream.storage.api.sc.StorageContainerRegistry $stack9;
+  scId=this.numStorageContainers;
+ futures = com.google.common.collect.Lists.newArrayListWithExpectedSize(scId);
+ scId=0;
+ label0:$stack5=this.numStorageContainers;
+ if (scId>=$stack5) goto label1;
+ $stack9=this.registry;
+ $stack8=(long) scId;
+ $stack6 = $stack9.startStorageContainer($stack8);
+ futures.add((java.lang.Object)$stack6);
+ scId=(scId+1);
+ goto label0;
+ label1:$stack6 = org.apache.bookkeeper.common.concurrent.FutureUtils.collect((java.util.List)futures);
+ $stack6.join();
+ return;
+ } 
+

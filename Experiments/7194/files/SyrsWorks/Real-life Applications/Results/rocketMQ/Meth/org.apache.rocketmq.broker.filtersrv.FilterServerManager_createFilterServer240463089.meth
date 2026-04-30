@@ -1,0 +1,25 @@
+void org.apache.rocketmq.broker.filtersrv.FilterServerManager:createFilterServer()
+{
+int more;
+  java.lang.String cmd;
+  int i;
+  org.apache.rocketmq.broker.BrokerController $stack4;
+  org.apache.rocketmq.common.BrokerConfig $stack5;
+  java.util.concurrent.ConcurrentMap $stack7;
+  org.apache.rocketmq.logging.org.slf4j.Logger $stack10;
+  $stack4=this.brokerController;
+ $stack5 = $stack4.getBrokerConfig();
+ more = $stack5.getFilterServerNums();
+ $stack7=this.filterServerTable;
+ i = $stack7.size();
+ more=(more-i);
+ cmd = this#org.apache.rocketmq.broker.filtersrv.FilterServerManager:buildStartCommand();
+ i=0;
+ label0:if (i>=more) goto label1;
+ $stack10=org.apache.rocketmq.broker.filtersrv.FilterServerManager.log;
+ org.apache.rocketmq.broker.filtersrv.FilterServerUtil.callShell(cmd,$stack10);
+ i=(i+1);
+ goto label0;
+ label1:return;
+ } 
+

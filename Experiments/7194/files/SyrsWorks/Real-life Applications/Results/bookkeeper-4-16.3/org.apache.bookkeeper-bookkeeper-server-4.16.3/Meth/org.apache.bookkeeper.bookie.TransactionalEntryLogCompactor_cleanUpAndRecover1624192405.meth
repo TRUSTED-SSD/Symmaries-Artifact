@@ -1,0 +1,27 @@
+void org.apache.bookkeeper.bookie.TransactionalEntryLogCompactor:cleanUpAndRecover()
+{
+java.util.Iterator l1;
+  org.apache.bookkeeper.bookie.storage.CompactionEntryLog log;
+  org.apache.bookkeeper.bookie.storage.EntryLogger $stack4;
+  java.util.Collection $stack5;
+  boolean $stack7;
+  java.lang.Object $stack8;
+  org.slf4j.Logger $stack9;
+  org.apache.bookkeeper.bookie.TransactionalEntryLogCompactor$UpdateIndexPhase $stack10;
+  $stack4=this.entryLogger;
+ $stack5 = $stack4.incompleteCompactionLogs();
+ l1 = $stack5.iterator();
+ label0:$stack7 = l1.hasNext();
+ if ($stack7==0) goto label1;
+ $stack8 = l1.next();
+ log=(org.apache.bookkeeper.bookie.storage.CompactionEntryLog) $stack8;
+ $stack9=org.apache.bookkeeper.bookie.TransactionalEntryLogCompactor.LOG;
+ dummyClass.lowSink("Found compacted log file {} has partially flushed index, recovering index.");
+$stack9.info("Found compacted log file {} has partially flushed index, recovering index.",(java.lang.Object)log);
+ $stack10=new org.apache.bookkeeper.bookie.TransactionalEntryLogCompactor$UpdateIndexPhase;
+ $stack10#org.apache.bookkeeper.bookie.TransactionalEntryLogCompactor$UpdateIndexPhase(this,log,1);
+ $stack10.run();
+ goto label0;
+ label1:return;
+ } 
+

@@ -1,0 +1,56 @@
+void org.apache.rocketmq.broker.topic.TopicConfigManager:updateTopicConfig(org.apache.rocketmq.common.TopicConfig topicConfig)
+{
+java.util.Map newAttributes;
+  java.util.Map currentAttributes;
+  org.apache.rocketmq.common.TopicConfig old;
+  java.lang.Object $stack8;
+  java.lang.String $stack10;
+  java.util.concurrent.ConcurrentMap $stack12;
+  boolean $stack15;
+  com.google.common.collect.ImmutableMap $stack16;
+  com.google.common.collect.ImmutableMap $stack17;
+  org.apache.rocketmq.logging.org.slf4j.Logger $stack22;
+  org.apache.rocketmq.broker.BrokerController $stack23;
+  org.apache.rocketmq.store.MessageStore $stack24;
+  org.apache.rocketmq.remoting.protocol.DataVersion $stack25;
+  long $stack29;
+  com.google.common.base.Preconditions.checkNotNull((java.lang.Object)topicConfig,(java.lang.Object)"topicConfig shouldn\'t be null");
+ newAttributes = this#org.apache.rocketmq.broker.topic.TopicConfigManager:request(topicConfig);
+ $stack10 = topicConfig.getTopicName();
+ currentAttributes = this#org.apache.rocketmq.broker.topic.TopicConfigManager:current($stack10);
+ $stack12=this.topicConfigTable;
+ $stack10 = topicConfig.getTopicName();
+ $stack8 = $stack12.get((java.lang.Object)$stack10);
+ if ($stack8!=null) goto label0;
+ $stack15=1;
+ goto label1;
+ label0:$stack15=0;
+ label1:$stack16 = com.google.common.collect.ImmutableMap.copyOf(currentAttributes);
+ $stack17 = com.google.common.collect.ImmutableMap.copyOf(newAttributes);
+ newAttributes = this#org.apache.rocketmq.broker.topic.TopicConfigManager:alterCurrentAttributes($stack15,$stack16,$stack17);
+ topicConfig.setAttributes(newAttributes);
+ $stack12=this.topicConfigTable;
+ $stack10 = topicConfig.getTopicName();
+ $stack8 = $stack12.put((java.lang.Object)$stack10,(java.lang.Object)topicConfig);
+ old=(org.apache.rocketmq.common.TopicConfig) $stack8;
+ if (old==null) goto label2;
+ $stack22=org.apache.rocketmq.broker.topic.TopicConfigManager.log;
+ $stack22.info("update topic config, old:[{}] new:[{}]",(java.lang.Object)old,(java.lang.Object)topicConfig);
+ goto label3;
+ label2:$stack22=org.apache.rocketmq.broker.topic.TopicConfigManager.log;
+ $stack22.info("create new topic [{}]",(java.lang.Object)topicConfig);
+ label3:$stack23=this.brokerController;
+ $stack24 = $stack23.getMessageStore();
+ if ($stack24==null) goto label4;
+ $stack23=this.brokerController;
+ $stack24 = $stack23.getMessageStore();
+ $stack29 = $stack24.getStateMachineVersion();
+ goto label5;
+ label4:$stack29=0L;
+ label5:$stack25=this.dataVersion;
+ $stack25.nextVersion($stack29);
+ $stack10 = topicConfig.getTopicName();
+ this.persist($stack10,(java.lang.Object)topicConfig);
+ return;
+ } 
+

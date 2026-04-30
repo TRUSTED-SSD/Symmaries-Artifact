@@ -1,0 +1,22 @@
+boolean org.apache.rocketmq.broker.processor.DefaultPullMessageResultHandler:channelIsWritable(io.netty.channel.Channel channel,org.apache.rocketmq.remoting.protocol.header.PullMessageRequestHeader requestHeader)
+{
+org.apache.rocketmq.broker.BrokerController $stack3;
+  org.apache.rocketmq.common.BrokerConfig $stack4;
+  boolean $stack5;
+  org.apache.rocketmq.logging.org.slf4j.Logger $stack8;
+  java.net.SocketAddress $stack10;
+  java.lang.String $stack11;
+  $stack3=this.brokerController;
+ $stack4 = $stack3.getBrokerConfig();
+ $stack5 = $stack4.isEnableNetWorkFlowControl();
+ if ($stack5==0) goto label0;
+ $stack5 = channel.isWritable();
+ if ($stack5!=0) goto label0;
+ $stack8=org.apache.rocketmq.broker.processor.DefaultPullMessageResultHandler.log;
+ $stack10 = channel.remoteAddress();
+ $stack11 = requestHeader.getConsumerGroup();
+ $stack8.warn("channel {} not writable ,cid {}",(java.lang.Object)$stack10,(java.lang.Object)$stack11);
+ return  0;
+ label0:return  1;
+ } 
+

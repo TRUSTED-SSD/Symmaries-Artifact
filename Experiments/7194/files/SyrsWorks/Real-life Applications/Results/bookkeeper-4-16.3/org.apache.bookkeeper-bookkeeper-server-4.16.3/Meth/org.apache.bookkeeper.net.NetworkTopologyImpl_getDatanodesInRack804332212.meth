@@ -1,0 +1,47 @@
+java.util.List org.apache.bookkeeper.net.NetworkTopologyImpl:getDatanodesInRack(java.lang.String @loc)
+{
+org.apache.bookkeeper.net.NetworkTopologyImpl$InnerNode rack;
+  java.util.ArrayList l3;
+  java.lang.Throwable l4;
+  java.util.concurrent.locks.ReadWriteLock $stack5;
+  java.util.concurrent.locks.Lock $stack6;
+  java.lang.String $stack8;
+  boolean $stack9;
+  org.apache.bookkeeper.net.Node $stack11;
+  java.util.List $stack13;
+  java.lang.String loc;
+loc=@loc;
+$stack5=this.netlock;
+ $stack6 = $stack5.readLock();
+ $stack6.lock();
+ label0:loc = org.apache.bookkeeper.net.NodeBase.normalize(loc);
+ $stack8="";
+ $stack9 = $stack8.equals((java.lang.Object)loc);
+ if ($stack9!=0) goto label1;
+ loc = loc.substring(1);
+ label1:rack=this.clusterMap;
+ $stack11 = org.apache.bookkeeper.net.NetworkTopologyImpl$InnerNode.access$000(rack,loc);
+ rack=(org.apache.bookkeeper.net.NetworkTopologyImpl$InnerNode) $stack11;
+ if (rack!=null) goto label2;
+ l3=null;
+ label3:$stack5=this.netlock;
+ $stack6 = $stack5.readLock();
+ $stack6.unlock();
+ return  null;
+ label2:l3=new java.util.ArrayList;
+ $stack13 = rack.getChildren();
+ l3#java.util.ArrayList((java.util.Collection)$stack13);
+ label4:$stack5=this.netlock;
+ $stack6 = $stack5.readLock();
+ $stack6.unlock();
+ return  l3;
+ label5:l4 = catch;
+ label6:$stack5=this.netlock;
+ $stack6 = $stack5.readLock();
+ $stack6.unlock();
+ throw l4;
+ catch java.lang.Throwable: label0 - label3 : label5;
+catch java.lang.Throwable: label2 - label4 : label5;
+catch java.lang.Throwable: label5 - label6 : label5;
+} 
+

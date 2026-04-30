@@ -1,0 +1,33 @@
+org.apache.rocketmq.store.logfile.MappedFile org.apache.rocketmq.store.MappedFileQueue:tryCreateMappedFile(long createOffset)
+{
+java.lang.String nextFilePath;
+  java.lang.String nextNextFilePath;
+  java.lang.StringBuilder $stack5;
+  int $stack18;
+  long $stack19;
+  org.apache.rocketmq.store.logfile.MappedFile $stack24;
+  $stack5=new java.lang.StringBuilder;
+ $stack5#java.lang.StringBuilder();
+ nextFilePath=this.storePath;
+ $stack5 = $stack5.append(nextFilePath);
+ nextFilePath=java.io.File.separator;
+ $stack5 = $stack5.append(nextFilePath);
+ nextFilePath = org.apache.rocketmq.common.UtilAll.offset2FileName(createOffset);
+ $stack5 = $stack5.append(nextFilePath);
+ nextFilePath = $stack5.toString();
+ $stack5=new java.lang.StringBuilder;
+ $stack5#java.lang.StringBuilder();
+ nextNextFilePath=this.storePath;
+ $stack5 = $stack5.append(nextNextFilePath);
+ nextNextFilePath=java.io.File.separator;
+ $stack5 = $stack5.append(nextNextFilePath);
+ $stack18=this.mappedFileSize;
+ $stack19=(long) $stack18;
+ createOffset=(createOffset+$stack19);
+ nextNextFilePath = org.apache.rocketmq.common.UtilAll.offset2FileName(createOffset);
+ $stack5 = $stack5.append(nextNextFilePath);
+ nextNextFilePath = $stack5.toString();
+ $stack24 = this.doCreateMappedFile(nextFilePath,nextNextFilePath);
+ return  $stack24;
+ } 
+

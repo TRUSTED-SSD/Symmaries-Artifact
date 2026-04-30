@@ -1,0 +1,20 @@
+digraph G {
+  node [shape=box, ];
+  "pc0_js1" [label="〈$i1 = java.lang.Character.toUpperCase ((int) c0), js1〉\n\
+pc ⊔ level(c0) = ⊥",
+             ];
+  "pc1_js1" [label="〈$c2 = (char) $i1, js1〉", ];
+  "pc2_js1" [label="〈return $c2, js1〉", ];
+  "pc3_js1" [label="〈sink, js1〉\n\
+ϕ ≠ S2 ∨ pc ⊔ level($c2) ⊑ ret(level())'",
+             ];
+  
+  
+  "pc0_js1" -> "pc1_js1" [label="tt,\n\
+{level($i1) := ⊤}", ];
+  "pc1_js1" -> "pc2_js1" [label="tt,\n\
+{level($c2) := ⊤}", ];
+  "pc2_js1" -> "pc3_js1" [label="tt,\n\
+{ϕ := S2}", ];
+  
+  }

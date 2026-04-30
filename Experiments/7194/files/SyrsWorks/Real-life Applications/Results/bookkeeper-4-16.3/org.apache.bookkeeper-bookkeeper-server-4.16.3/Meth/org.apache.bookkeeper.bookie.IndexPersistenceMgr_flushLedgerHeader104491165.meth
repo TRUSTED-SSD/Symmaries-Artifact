@@ -1,0 +1,33 @@
+void org.apache.bookkeeper.bookie.IndexPersistenceMgr:flushLedgerHeader(long ledger)
+{
+org.apache.bookkeeper.bookie.FileInfoBackingCache$CachedFileInfo fi;
+  org.apache.bookkeeper.bookie.Bookie$NoLedgerException nle;
+  java.lang.Throwable l5;
+  java.lang.Long $stack6;
+  org.slf4j.Logger $stack9;
+  fi=null;
+ label0:$stack6 = java.lang.Long.valueOf(ledger);
+ fi = this.getFileInfo($stack6,null);
+ this#org.apache.bookkeeper.bookie.IndexPersistenceMgr:relocateIndexFileAndFlushHeader(ledger,(org.apache.bookkeeper.bookie.FileInfo)fi);
+ label1:if (null==fi) goto label2;
+ fi.release();
+ goto label2;
+ label3:nle = catch;
+ $stack9=org.apache.bookkeeper.bookie.IndexPersistenceMgr.LOG;
+ $stack6 = java.lang.Long.valueOf(ledger);
+ dummyClass.lowSink("No ledger {} found when flushing header.");
+$stack9.info("No ledger {} found when flushing header.",(java.lang.Object)$stack6);
+ label4:if (null==fi) goto label5;
+ fi.release();
+ label5:return;
+ label6:l5 = catch;
+ label7:if (null==fi) goto label8;
+ fi.release();
+ label8:throw l5;
+ label2:return;
+ catch org.apache.bookkeeper.bookie.Bookie$NoLedgerException: label0 - label1 : label3;
+catch java.lang.Throwable: label0 - label1 : label6;
+catch java.lang.Throwable: label3 - label4 : label6;
+catch java.lang.Throwable: label6 - label7 : label6;
+} 
+

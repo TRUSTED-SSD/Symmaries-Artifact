@@ -1,0 +1,44 @@
+void org.apache.bookkeeper.bookie.InterleavedLedgerStorage:flushOrCheckpoint(boolean isCheckpointFlush)
+{
+boolean flushFailed;
+  org.apache.bookkeeper.bookie.LedgerCache $stack4;
+  org.apache.bookkeeper.bookie.DefaultEntryLogger $stack5;
+  java.io.IOException $stack6;
+  org.apache.bookkeeper.bookie.LedgerDirsManager$NoWritableLedgerDirException $stack8;
+  org.slf4j.Logger $stack10;
+  org.apache.bookkeeper.bookie.LedgerDirsManager$NoWritableLedgerDirException $stack12;
+  java.io.IOException $stack13;
+  flushFailed=0;
+ label0:$stack4=this.ledgerCache;
+ $stack4.flushLedger((boolean)1);
+ label1:goto label2;
+ label3:$stack12 = catch;
+ throw $stack12;
+ label4:$stack6 = catch;
+ $stack10=org.apache.bookkeeper.bookie.InterleavedLedgerStorage.LOG;
+ $stack10.error("Exception flushing Ledger cache",(java.lang.Throwable)$stack6);
+ flushFailed=1;
+ label2:if (isCheckpointFlush==0) goto label5;
+ $stack5=this.entryLogger;
+ $stack5.checkpoint();
+ goto label6;
+ label5:$stack5=this.entryLogger;
+ $stack5.flush();
+ label6:goto label7;
+ label8:$stack8 = catch;
+ throw $stack8;
+ label9:$stack13 = catch;
+ $stack10=org.apache.bookkeeper.bookie.InterleavedLedgerStorage.LOG;
+ $stack10.error("Exception flushing Ledger",(java.lang.Throwable)$stack13);
+ flushFailed=1;
+ label7:if (flushFailed==0) goto label10;
+ $stack6=new java.io.IOException;
+ $stack6#java.io.IOException("Flushing to storage failed, check logs");
+ throw $stack6;
+ label10:return;
+ catch org.apache.bookkeeper.bookie.LedgerDirsManager$NoWritableLedgerDirException: label0 - label1 : label3;
+catch java.io.IOException: label0 - label1 : label4;
+catch org.apache.bookkeeper.bookie.LedgerDirsManager$NoWritableLedgerDirException: label2 - label6 : label8;
+catch java.io.IOException: label2 - label6 : label9;
+} 
+

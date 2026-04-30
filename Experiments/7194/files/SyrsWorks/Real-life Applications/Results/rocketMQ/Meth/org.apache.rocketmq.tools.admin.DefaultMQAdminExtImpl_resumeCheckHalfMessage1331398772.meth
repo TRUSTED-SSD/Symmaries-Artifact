@@ -1,0 +1,19 @@
+boolean org.apache.rocketmq.tools.admin.DefaultMQAdminExtImpl:resumeCheckHalfMessage(java.lang.String msgId)
+{
+org.apache.rocketmq.common.message.MessageExt msg;
+  org.apache.rocketmq.client.impl.factory.MQClientInstance $stack4;
+  org.apache.rocketmq.client.impl.MQClientAPIImpl $stack5;
+  java.net.SocketAddress $stack6;
+  java.lang.String $stack7;
+  long $stack8;
+  boolean $stack9;
+  msg = this.viewMessage(msgId);
+ $stack4=this.mqClientInstance;
+ $stack5 = $stack4.getMQClientAPIImpl();
+ $stack6 = msg.getStoreHost();
+ $stack7 = org.apache.rocketmq.common.utils.NetworkUtil.socketAddress2String($stack6);
+ $stack8=this.timeoutMillis;
+ $stack9 = $stack5.resumeCheckHalfMessage($stack7,msgId,$stack8);
+ return  $stack9;
+ } 
+

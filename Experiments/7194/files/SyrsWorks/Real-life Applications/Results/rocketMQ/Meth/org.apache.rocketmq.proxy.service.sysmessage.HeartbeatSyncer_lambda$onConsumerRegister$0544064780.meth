@@ -1,0 +1,48 @@
+void org.apache.rocketmq.proxy.service.sysmessage.HeartbeatSyncer:lambda$onConsumerRegister$0(org.apache.rocketmq.broker.client.ClientChannelInfo clientChannelInfo,java.lang.String consumerGroup,org.apache.rocketmq.remoting.protocol.heartbeat.ConsumeType consumeType,org.apache.rocketmq.remoting.protocol.heartbeat.MessageModel messageModel,org.apache.rocketmq.common.consumer.ConsumeFromWhere consumeFromWhere,java.util.Set subList)
+{
+org.apache.rocketmq.proxy.processor.channel.RemoteChannel remoteChannel;
+  org.apache.rocketmq.proxy.service.sysmessage.HeartbeatSyncerData data;
+  io.netty.channel.Channel $stack9;
+  org.apache.rocketmq.proxy.service.sysmessage.HeartbeatType $stack12;
+  java.lang.String $stack13;
+  org.apache.rocketmq.remoting.protocol.LanguageCode $stack14;
+  int $stack15;
+  java.lang.String $stack16;
+  java.lang.String $stack17;
+  org.apache.rocketmq.logging.org.slf4j.Logger $stack18;
+  java.lang.Throwable $stack21;
+  java.lang.Object[] $stack22;
+  label0:$stack9 = clientChannelInfo.getChannel();
+ remoteChannel = org.apache.rocketmq.proxy.processor.channel.RemoteChannel.create($stack9);
+ if (remoteChannel!=null) goto label1;
+ label2:return;
+ label1:data=new org.apache.rocketmq.proxy.service.sysmessage.HeartbeatSyncerData;
+ $stack12=org.apache.rocketmq.proxy.service.sysmessage.HeartbeatType.REGISTER;
+ $stack13 = clientChannelInfo.getClientId();
+ $stack14 = clientChannelInfo.getLanguage();
+ $stack15 = clientChannelInfo.getVersion();
+ $stack16=this.localProxyId;
+ $stack17 = remoteChannel.encode();
+ data#org.apache.rocketmq.proxy.service.sysmessage.HeartbeatSyncerData($stack12,$stack13,$stack14,$stack15,consumerGroup,consumeType,messageModel,consumeFromWhere,$stack16,$stack17);
+ data.setSubscriptionDataSet(subList);
+ $stack18=org.apache.rocketmq.proxy.service.sysmessage.AbstractSystemMessageSyncer.log;
+ $stack13 = this.getBroadcastTopicName();
+ $stack18.debug("sync register heart beat. topic:{}, data:{}",(java.lang.Object)$stack13,(java.lang.Object)data);
+ this.sendSystemMessage((java.lang.Object)data);
+ label3:goto label4;
+ label5:$stack21 = catch;
+ $stack18=org.apache.rocketmq.proxy.service.sysmessage.AbstractSystemMessageSyncer.log;
+ $stack22=new java.lang.Object[7];
+ $stack22[0]=consumerGroup;
+ $stack22[1]=clientChannelInfo;
+ $stack22[2]=consumeType;
+ $stack22[3]=messageModel;
+ $stack22[4]=consumeFromWhere;
+ $stack22[5]=subList;
+ $stack22[6]=$stack21;
+ $stack18.error("heartbeat register broadcast failed. group:{}, clientChannelInfo:{}, consumeType:{}, messageModel:{}, consumeFromWhere:{}, subList:{}",$stack22);
+ label4:return;
+ catch java.lang.Throwable: label0 - label2 : label5;
+catch java.lang.Throwable: label1 - label3 : label5;
+} 
+

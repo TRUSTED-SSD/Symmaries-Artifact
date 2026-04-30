@@ -1,0 +1,28 @@
+void org.apache.rocketmq.broker.processor.AbstractSendMessageProcessor:executeSendMessageHookBefore(org.apache.rocketmq.broker.mqtrace.SendMessageContext context)
+{
+java.util.Iterator l2;
+  org.apache.rocketmq.broker.mqtrace.SendMessageHook hook;
+  java.lang.Throwable e;
+  boolean $stack5;
+  java.util.List $stack6;
+  java.lang.Object $stack9;
+  org.apache.rocketmq.common.AbortProcessException $stack12;
+  $stack5 = this.hasSendMessageHook();
+ if ($stack5==0) goto label0;
+ $stack6=this.sendMessageHookList;
+ l2 = $stack6.iterator();
+ label1:$stack5 = l2.hasNext();
+ if ($stack5==0) goto label0;
+ $stack9 = l2.next();
+ hook=(org.apache.rocketmq.broker.mqtrace.SendMessageHook) $stack9;
+ label2:hook.sendMessageBefore(context);
+ label3:goto label4;
+ label5:$stack12 = catch;
+ throw $stack12;
+ label6:e = catch;
+ label4:goto label1;
+ label0:return;
+ catch org.apache.rocketmq.common.AbortProcessException: label2 - label3 : label5;
+catch java.lang.Throwable: label2 - label3 : label6;
+} 
+

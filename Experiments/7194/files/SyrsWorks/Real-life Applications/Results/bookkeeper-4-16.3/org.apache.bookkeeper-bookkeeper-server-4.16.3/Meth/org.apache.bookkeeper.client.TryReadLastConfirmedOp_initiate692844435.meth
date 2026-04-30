@@ -1,0 +1,28 @@
+void org.apache.bookkeeper.client.TryReadLastConfirmedOp:initiate()
+{
+int i;
+  java.util.List $stack2;
+  int $stack3;
+  org.apache.bookkeeper.proto.BookieClient $stack5;
+  java.lang.Object $stack6;
+  org.apache.bookkeeper.client.LedgerHandle $stack7;
+  org.apache.bookkeeper.net.BookieId $stack8;
+  long $stack9;
+  java.lang.Integer $stack11;
+  i=0;
+ label0:$stack2=this.currentEnsemble;
+ $stack3 = $stack2.size();
+ if (i>=$stack3) goto label1;
+ $stack5=this.bookieClient;
+ $stack2=this.currentEnsemble;
+ $stack6 = $stack2.get(i);
+ $stack8=(org.apache.bookkeeper.net.BookieId) $stack6;
+ $stack7=this.lh;
+ $stack9=$stack7.ledgerId;
+ $stack11 = java.lang.Integer.valueOf(i);
+ $stack5.readEntry($stack8,$stack9,-1L,(org.apache.bookkeeper.proto.BookkeeperInternalCallbacks$ReadEntryCallback)this,(java.lang.Object)$stack11,0);
+ i=(i+1);
+ goto label0;
+ label1:return;
+ } 
+

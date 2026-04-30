@@ -1,0 +1,45 @@
+boolean org.keycloak.adapters.NodesRegistrationManagement:sendUnregistrationEvent(org.keycloak.adapters.KeycloakDeployment deployment)
+{
+java.lang.String host;
+  org.keycloak.adapters.ServerRequest$HttpFailure failure;
+  org.jboss.logging.Logger $stack4;
+  java.lang.StringBuilder $stack9;
+  int $stack12;
+  java.io.IOException $stack23;
+  $stack4=org.keycloak.adapters.NodesRegistrationManagement.log;
+ $stack4.debug((java.lang.Object)"Sending Unregistration event right now");
+ host = org.keycloak.common.util.HostUtils.getHostName();
+ label0:org.keycloak.adapters.ServerRequest.invokeUnregisterNode(deployment,host);
+ $stack4=org.keycloak.adapters.NodesRegistrationManagement.log;
+ $stack4.debugf("Node \'%s\' successfully unregistered from Keycloak",(java.lang.Object)host);
+ label1:return  1;
+ label2:failure = catch;
+ $stack4=org.keycloak.adapters.NodesRegistrationManagement.log;
+ $stack4.error((java.lang.Object)"failed to unregister node from keycloak");
+ $stack4=org.keycloak.adapters.NodesRegistrationManagement.log;
+ $stack9=new java.lang.StringBuilder;
+ $stack9#java.lang.StringBuilder();
+ $stack9 = $stack9.append("status from server: ");
+ $stack12 = failure.getStatus();
+ $stack9 = $stack9.append($stack12);
+ host = $stack9.toString();
+ $stack4.error((java.lang.Object)host);
+ host = failure.getError();
+ if (host==null) goto label3;
+ $stack4=org.keycloak.adapters.NodesRegistrationManagement.log;
+ $stack9=new java.lang.StringBuilder;
+ $stack9#java.lang.StringBuilder();
+ $stack9 = $stack9.append("   ");
+ host = failure.getError();
+ $stack9 = $stack9.append(host);
+ host = $stack9.toString();
+ $stack4.error((java.lang.Object)host);
+ label3:return  0;
+ label4:$stack23 = catch;
+ $stack4=org.keycloak.adapters.NodesRegistrationManagement.log;
+ $stack4.error((java.lang.Object)"failed to unregister node from keycloak",(java.lang.Throwable)$stack23);
+ return  0;
+ catch org.keycloak.adapters.ServerRequest$HttpFailure: label0 - label1 : label2;
+catch java.io.IOException: label0 - label1 : label4;
+} 
+

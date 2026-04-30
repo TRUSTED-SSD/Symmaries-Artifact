@@ -1,0 +1,33 @@
+java.util.Set java.security.Provider:entrySet()
+{
+java.util.Set $r1;
+  int $i0;
+  java.util.Set $r2;
+  java.lang.RuntimeException $r3;
+  int $i1;
+  int $i2;
+  java.util.Set $r4;
+  java.util.Map $r5;
+  java.util.Set $r6;
+  this#java.security.Provider:checkInitialized();
+ $r1=this.entrySet;
+ if ($r1!=null) goto label0;
+ $i1=this.entrySetCallCount;
+ $i2=($i1+1);
+ this.entrySetCallCount=$i2;
+ if ($i1!=0) goto label1;
+ $r5 = java.util.Collections.unmodifiableMap((java.util.Map)this);
+ $r6 = $r5.entrySet();
+ this.entrySet=$r6;
+ goto label0;
+ label1:$r4 = this#java.util.Hashtable:entrySet();
+ return  $r4;
+ label0:$i0=this.entrySetCallCount;
+ if ($i0==2) goto label2;
+ $r3=new java.lang.RuntimeException;
+ $r3#java.lang.RuntimeException:init("Internal error.");
+ throw $r3;
+ label2:$r2=this.entrySet;
+ return  $r2;
+ }  
+

@@ -1,0 +1,25 @@
+void org.apache.kerby.kerberos.kerb.server.impl.DefaultInternalKdcServerImpl:doStart()
+{
+org.apache.kerby.kerberos.kerb.transport.TransportPair tpair;
+  java.util.concurrent.ExecutorService $stack2;
+  org.apache.kerby.kerberos.kerb.server.impl.DefaultInternalKdcServerImpl$1 $stack3;
+  org.apache.kerby.kerberos.kerb.transport.KdcNetwork $stack4;
+  org.apache.kerby.kerberos.kerb.server.KdcSetting $stack5;
+  this#org.apache.kerby.kerberos.kerb.server.impl.AbstractInternalKdcServer();
+ this#org.apache.kerby.kerberos.kerb.server.impl.DefaultInternalKdcServerImpl:prepareHandler();
+ $stack2 = java.util.concurrent.Executors.newCachedThreadPool();
+ this.executor=$stack2;
+ $stack3=new org.apache.kerby.kerberos.kerb.server.impl.DefaultInternalKdcServerImpl$1;
+ $stack3#org.apache.kerby.kerberos.kerb.server.impl.DefaultInternalKdcServerImpl$1(this);
+ this.network=$stack3;
+ $stack4=this.network;
+ $stack4.init();
+ $stack5 = this.getSetting();
+ tpair = org.apache.kerby.kerberos.kerb.server.KdcUtil.getTransportPair($stack5);
+ $stack4=this.network;
+ $stack4.listen(tpair);
+ $stack4=this.network;
+ $stack4.start();
+ return;
+ } 
+

@@ -1,0 +1,38 @@
+com.google.zxing.common.reedsolomon.GenericGFPoly com.google.zxing.common.reedsolomon.GenericGFPoly:multiplyByMonomial(int degree,int coefficient)
+{
+com.google.zxing.common.reedsolomon.GenericGFPoly $this;
+  int size;
+  int[] product;
+  com.google.zxing.common.reedsolomon.GenericGFPoly $stack8;
+  com.google.zxing.common.reedsolomon.GenericGF $stack9;
+  int[] $stack10;
+  int $stack11;
+  java.lang.IllegalArgumentException $stack18;
+  $this= this;
+ if (degree>=0) goto label0;
+ $stack18=new java.lang.IllegalArgumentException;
+ $stack18#java.lang.IllegalArgumentException();
+ throw $stack18;
+ label0:if (coefficient!=0) goto label1;
+ $stack9=$this.field;
+ $this = $stack9.getZero();
+ return  $this;
+ label1:product=$this.coefficients;
+ size=#product;
+ degree=(size+degree);
+ product=new int[degree];
+ degree=0;
+ label2:if (degree>=size) goto label3;
+ $stack9=$this.field;
+ $stack10=$this.coefficients;
+ $stack11=$stack10[degree];
+ $stack11 = $stack9.multiply($stack11,coefficient);
+ product[degree]=$stack11;
+ degree=(degree+1);
+ goto label2;
+ label3:$stack8=new com.google.zxing.common.reedsolomon.GenericGFPoly;
+ $stack9=$this.field;
+ $stack8#com.google.zxing.common.reedsolomon.GenericGFPoly($stack9,product);
+ return  $stack8;
+ } 
+

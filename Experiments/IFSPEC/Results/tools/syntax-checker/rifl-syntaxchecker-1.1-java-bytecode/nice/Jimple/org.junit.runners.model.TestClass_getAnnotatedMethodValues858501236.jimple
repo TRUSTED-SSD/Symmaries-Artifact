@@ -1,0 +1,119 @@
+    public java.util.List getAnnotatedMethodValues(java.lang.Object, java.lang.Class, java.lang.Class)
+    {
+        org.junit.runners.model.TestClass this;
+        java.lang.Object test, fieldValue;
+        java.lang.Class annotationClass, valueClass;
+        java.util.ArrayList results;
+        java.util.Iterator i$;
+        org.junit.runners.model.FrameworkMethod each;
+        java.util.List $stack9;
+        boolean $stack11;
+        java.lang.Object[] $stack16;
+        java.lang.Throwable $stack20;
+        java.lang.RuntimeException $stack21;
+        java.lang.StringBuilder $stack22;
+        java.lang.String $stack24;
+
+        this := @this: org.junit.runners.model.TestClass;
+
+        test := @parameter0: java.lang.Object;
+
+        annotationClass := @parameter1: java.lang.Class;
+
+        valueClass := @parameter2: java.lang.Class;
+
+        results = new java.util.ArrayList;
+/*244*/
+
+        specialinvoke results.<java.util.ArrayList: void <init>()>();
+/*244*/
+
+        $stack9 = virtualinvoke this.<org.junit.runners.model.TestClass: java.util.List getAnnotatedMethods(java.lang.Class)>(annotationClass);
+/*245*/
+
+        i$ = interfaceinvoke $stack9.<java.util.List: java.util.Iterator iterator()>();
+/*245*/
+/*245*/
+
+     label1:
+        $stack11 = interfaceinvoke i$.<java.util.Iterator: boolean hasNext()>();
+/*245*/
+
+        if $stack11 == 0 goto label6;
+/*245*/
+
+        fieldValue = interfaceinvoke i$.<java.util.Iterator: java.lang.Object next()>();
+/*264*/
+
+        each = (org.junit.runners.model.FrameworkMethod) fieldValue;
+/*264*/
+
+     label2:
+        annotationClass = virtualinvoke each.<org.junit.runners.model.FrameworkMethod: java.lang.Class getReturnType()>();
+/*255*/
+
+        $stack11 = virtualinvoke valueClass.<java.lang.Class: boolean isAssignableFrom(java.lang.Class)>(annotationClass);
+/*255*/
+
+        if $stack11 == 0 goto label3;
+/*255*/
+
+        $stack16 = newarray (java.lang.Object)[0];
+/*256*/
+
+        fieldValue = virtualinvoke each.<org.junit.runners.model.FrameworkMethod: java.lang.Object invokeExplosively(java.lang.Object,java.lang.Object[])>(test, $stack16);
+/*256*/
+/*256*/
+
+        fieldValue = virtualinvoke valueClass.<java.lang.Class: java.lang.Object cast(java.lang.Object)>(fieldValue);
+/*257*/
+
+        interfaceinvoke results.<java.util.List: boolean add(java.lang.Object)>(fieldValue);
+/*257*/
+
+     label3:
+        goto label5;
+/*262*/
+
+     label4:
+        $stack20 := @caughtexception;
+/*262*/
+
+        $stack21 = new java.lang.RuntimeException;
+/*260*/
+
+        $stack22 = new java.lang.StringBuilder;
+/*260*/
+
+        specialinvoke $stack22.<java.lang.StringBuilder: void <init>()>();
+/*260*/
+
+        $stack22 = virtualinvoke $stack22.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>("Exception in ");
+/*260*/
+
+        $stack24 = virtualinvoke each.<org.junit.runners.model.FrameworkMethod: java.lang.String getName()>();
+/*260*/
+
+        $stack22 = virtualinvoke $stack22.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>($stack24);
+/*260*/
+
+        $stack24 = virtualinvoke $stack22.<java.lang.StringBuilder: java.lang.String toString()>();
+/*260*/
+
+        specialinvoke $stack21.<java.lang.RuntimeException: void <init>(java.lang.String,java.lang.Throwable)>($stack24, $stack20);
+/*260*/
+
+        throw $stack21;
+/*260*/
+
+     label5:
+        goto label1;
+/*262*/
+
+     label6:
+        return results;
+/*264*/
+
+        catch java.lang.Throwable from label2 to label3 with label4;
+    }
+

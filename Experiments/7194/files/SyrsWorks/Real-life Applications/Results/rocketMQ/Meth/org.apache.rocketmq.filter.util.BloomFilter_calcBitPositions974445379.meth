@@ -1,0 +1,38 @@
+int[] org.apache.rocketmq.filter.util.BloomFilter:calcBitPositions(java.lang.String str)
+{
+int[] bitPositions;
+  long hash64;
+  int hash1;
+  int hash2;
+  int i;
+  int combinedHash;
+  com.google.common.hash.HashFunction $stack10;
+  java.nio.charset.Charset $stack11;
+  com.google.common.hash.HashCode $stack12;
+  int $stack15;
+  int $stack17;
+  hash1=this.k;
+ bitPositions=new int[hash1];
+ $stack10 = com.google.common.hash.Hashing.murmur3_128();
+ $stack11=org.apache.rocketmq.filter.util.BloomFilter.UTF_8;
+ $stack12 = $stack10.hashString((java.lang.CharSequence)str,$stack11);
+ hash64 = $stack12.asLong();
+ hash1=(int) hash64;
+ hash64=(hash64>>>32);
+ hash2=(int) hash64;
+ i=1;
+ label0:$stack15=this.k;
+ if (i>$stack15) goto label1;
+ $stack15=(i * hash2);
+ combinedHash=(hash1+$stack15);
+ if (combinedHash>=0) goto label2;
+ combinedHash=(!combinedHash & -1) |(!-1 & combinedHash);
+ label2:$stack15=(i-1);
+ $stack17=this.m;
+ combinedHash=(combinedHash%$stack17);
+ bitPositions[$stack15]=combinedHash;
+ i=(i+1);
+ goto label0;
+ label1:return  bitPositions;
+ } 
+

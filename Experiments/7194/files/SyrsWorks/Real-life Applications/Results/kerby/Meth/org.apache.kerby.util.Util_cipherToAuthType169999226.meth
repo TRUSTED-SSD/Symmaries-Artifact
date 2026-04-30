@@ -1,0 +1,45 @@
+static java.lang.String org.apache.kerby.util.Util:cipherToAuthType(java.lang.String @cipher)
+{
+java.util.StringTokenizer st;
+  java.lang.StringBuilder buf;
+  java.lang.String $stack5;
+  boolean $stack6;
+  java.lang.IllegalArgumentException $stack8;
+  java.lang.String cipher;
+cipher=@cipher;
+if (cipher!=null) goto label0;
+ return  null;
+ label0:st=new java.util.StringTokenizer;
+ $stack5 = cipher.trim();
+ st#java.util.StringTokenizer($stack5,"_");
+ $stack6 = st.hasMoreTokens();
+ if ($stack6==0) goto label1;
+ st.nextToken();
+ label1:$stack6 = st.hasMoreTokens();
+ if ($stack6==0) goto label2;
+ cipher = st.nextToken();
+ buf=new java.lang.StringBuilder;
+ buf#java.lang.StringBuilder();
+ buf.append(cipher);
+ $stack6 = st.hasMoreTokens();
+ if ($stack6==0) goto label3;
+ cipher = st.nextToken();
+ label4:$stack5="WITH";
+ $stack6 = $stack5.equalsIgnoreCase(cipher);
+ if ($stack6!=0) goto label3;
+ buf.append((char)95);
+ buf.append(cipher);
+ cipher = st.nextToken();
+ goto label4;
+ label3:cipher = buf.toString();
+ return  cipher;
+ label2:$stack8=new java.lang.IllegalArgumentException;
+ buf=new java.lang.StringBuilder;
+ buf#java.lang.StringBuilder();
+ buf = buf.append("not a valid cipher: ");
+ buf = buf.append(cipher);
+ cipher = buf.toString();
+ $stack8#java.lang.IllegalArgumentException(cipher);
+ throw $stack8;
+ } 
+

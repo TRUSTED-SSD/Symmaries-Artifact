@@ -1,0 +1,19 @@
+void org.apache.rocketmq.store.StoreCheckpoint:shutdown()
+{
+java.nio.MappedByteBuffer $stack2;
+  java.nio.channels.FileChannel $stack3;
+  java.io.IOException $stack4;
+  org.apache.rocketmq.logging.org.slf4j.Logger $stack5;
+  this.flush();
+ $stack2=this.mappedByteBuffer;
+ org.apache.rocketmq.common.UtilAll.cleanBuffer((java.nio.ByteBuffer)$stack2);
+ label0:$stack3=this.fileChannel;
+ $stack3.close();
+ label1:goto label2;
+ label3:$stack4 = catch;
+ $stack5=org.apache.rocketmq.store.StoreCheckpoint.log;
+ $stack5.error("Failed to properly close the channel",(java.lang.Throwable)$stack4);
+ label2:return;
+ catch java.io.IOException: label0 - label1 : label3;
+} 
+

@@ -1,0 +1,13 @@
+void org.apache.rocketmq.tieredstore.container.TieredMessageQueueContainer:shutdown()
+{
+org.apache.rocketmq.tieredstore.container.TieredCommitLog $stack1;
+  org.apache.rocketmq.tieredstore.container.TieredConsumeQueue $stack2;
+  this.closed=1;
+ $stack1=this.commitLog;
+ $stack1.commit((boolean)1);
+ $stack2=this.consumeQueue;
+ $stack2.commit((boolean)1);
+ this.flushMetadata();
+ return;
+ } 
+

@@ -1,0 +1,35 @@
+org.keycloak.adapters.spi.AuthOutcome org.keycloak.adapters.QueryParameterTokenRequestAuthenticator:authenticate(org.keycloak.adapters.spi.HttpFacade exchange)
+{
+org.keycloak.adapters.KeycloakDeployment $stack2;
+  boolean $stack3;
+  java.lang.String $stack4;
+  org.jboss.logging.Logger $stack6;
+  org.keycloak.adapters.OIDCAuthenticationError$Reason $stack7;
+  org.keycloak.adapters.spi.AuthChallenge $stack8;
+  org.keycloak.adapters.spi.AuthOutcome $stack9;
+  $stack2=this.deployment;
+ $stack3 = $stack2.isOAuthQueryParameterEnabled();
+ if ($stack3!=0) goto label0;
+ $stack9=org.keycloak.adapters.spi.AuthOutcome.NOT_ATTEMPTED;
+ return  $stack9;
+ label0:this.tokenString=null;
+ $stack4 = this.getAccessTokenFromQueryParameter(exchange);
+ this.tokenString=$stack4;
+ $stack4=this.tokenString;
+ if ($stack4==null) goto label1;
+ $stack4=this.tokenString;
+ $stack4 = $stack4.trim();
+ $stack3 = $stack4.isEmpty();
+ if ($stack3==0) goto label2;
+ label1:$stack6=this.log;
+ $stack6.debug((java.lang.Object)"Token is not present in query");
+ $stack7=org.keycloak.adapters.OIDCAuthenticationError$Reason.NO_QUERY_PARAMETER_ACCESS_TOKEN;
+ $stack8 = this.challengeResponse(exchange,$stack7,null,null);
+ this.challenge=$stack8;
+ $stack9=org.keycloak.adapters.spi.AuthOutcome.NOT_ATTEMPTED;
+ return  $stack9;
+ label2:$stack4=this.tokenString;
+ $stack9 = this.authenticateToken(exchange,$stack4);
+ return  $stack9;
+ } 
+

@@ -1,0 +1,50 @@
+void org.apache.rocketmq.proxy.grpc.v2.channel.GrpcChannelManager:scanExpireResultFuture()
+{
+org.apache.rocketmq.proxy.config.ProxyConfig proxyConfig;
+  long timeOutMs;
+  java.util.Set nonceSet;
+  java.util.Iterator l5;
+  java.lang.String nonce;
+  org.apache.rocketmq.proxy.grpc.v2.channel.GrpcChannelManager$ResultFuture resultFuture;
+  java.util.concurrent.TimeUnit $stack9;
+  java.util.concurrent.ConcurrentMap $stack12;
+  boolean $stack15;
+  java.lang.Object $stack16;
+  long $stack19;
+  long $stack20;
+  byte $stack22;
+  org.apache.rocketmq.proxy.service.relay.ProxyRelayResult $stack26;
+  java.util.concurrent.CompletableFuture $stack27;
+  proxyConfig = org.apache.rocketmq.proxy.config.ConfigurationManager.getProxyConfig();
+ $stack9=java.util.concurrent.TimeUnit.SECONDS;
+ timeOutMs = proxyConfig.getGrpcProxyRelayRequestTimeoutInSeconds();
+ timeOutMs = $stack9.toMillis(timeOutMs);
+ $stack12=this.resultNonceFutureMap;
+ nonceSet = $stack12.keySet();
+ l5 = nonceSet.iterator();
+ label0:$stack15 = l5.hasNext();
+ if ($stack15==0) goto label1;
+ $stack16 = l5.next();
+ nonce=(java.lang.String) $stack16;
+ $stack12=this.resultNonceFutureMap;
+ $stack16 = $stack12.get((java.lang.Object)nonce);
+ resultFuture=(org.apache.rocketmq.proxy.grpc.v2.channel.GrpcChannelManager$ResultFuture) $stack16;
+ if (resultFuture!=null) goto label2;
+ goto label0;
+ label2:$stack19 = java.lang.System.currentTimeMillis();
+ $stack20=resultFuture.createTime;
+ $stack19=($stack19-$stack20);
+ $stack22=($stack19 cmp timeOutMs);
+ if ($stack22<=0) goto label3;
+ $stack12=this.resultNonceFutureMap;
+ $stack16 = $stack12.remove((java.lang.Object)nonce);
+ resultFuture=(org.apache.rocketmq.proxy.grpc.v2.channel.GrpcChannelManager$ResultFuture) $stack16;
+ if (resultFuture==null) goto label3;
+ $stack27=resultFuture.future;
+ $stack26=new org.apache.rocketmq.proxy.service.relay.ProxyRelayResult;
+ $stack26#org.apache.rocketmq.proxy.service.relay.ProxyRelayResult(2,"call remote timeout",null);
+ $stack27.complete((java.lang.Object)$stack26);
+ label3:goto label0;
+ label1:return;
+ } 
+

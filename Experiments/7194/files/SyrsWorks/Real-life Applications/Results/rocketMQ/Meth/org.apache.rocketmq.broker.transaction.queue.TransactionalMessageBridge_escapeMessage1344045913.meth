@@ -1,0 +1,31 @@
+boolean org.apache.rocketmq.broker.transaction.queue.TransactionalMessageBridge:escapeMessage(org.apache.rocketmq.common.message.MessageExtBrokerInner messageInner)
+{
+org.apache.rocketmq.store.PutMessageResult putMessageResult;
+  org.apache.rocketmq.broker.BrokerController $stack3;
+  org.apache.rocketmq.broker.failover.EscapeBridge $stack4;
+  java.lang.Object[] $stack6;
+  org.apache.rocketmq.logging.org.slf4j.Logger $stack7;
+  java.lang.String $stack10;
+  int $stack12;
+  java.lang.Integer $stack13;
+  boolean $stack16;
+  $stack3=this.brokerController;
+ $stack4 = $stack3.getEscapeBridge();
+ putMessageResult = $stack4.putMessage(messageInner);
+ if (putMessageResult==null) goto label0;
+ $stack16 = putMessageResult.isOk();
+ if ($stack16==0) goto label0;
+ return  1;
+ label0:$stack7=org.apache.rocketmq.broker.transaction.queue.TransactionalMessageBridge.LOGGER;
+ $stack6=new java.lang.Object[3];
+ $stack10 = messageInner.getTopic();
+ $stack6[0]=$stack10;
+ $stack12 = messageInner.getQueueId();
+ $stack13 = java.lang.Integer.valueOf($stack12);
+ $stack6[1]=$stack13;
+ $stack10 = messageInner.getMsgId();
+ $stack6[2]=$stack10;
+ $stack7.error("Escaping message failed, topic: {}, queueId: {}, msgId: {}",$stack6);
+ return  0;
+ } 
+

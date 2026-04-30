@@ -1,0 +1,57 @@
+org.apache.rocketmq.proxy.service.LocalServiceManager(org.apache.rocketmq.broker.BrokerController brokerController,org.apache.rocketmq.remoting.RPCHook rpcHook)
+{
+org.apache.rocketmq.common.ThreadFactoryImpl $stack3;
+  java.util.concurrent.ScheduledExecutorService $stack4;
+  org.apache.rocketmq.proxy.service.channel.ChannelManager $stack5;
+  org.apache.rocketmq.proxy.service.message.LocalMessageService $stack6;
+  org.apache.rocketmq.proxy.service.mqclient.MQClientAPIFactory $stack8;
+  org.apache.rocketmq.proxy.service.mqclient.DoNothingClientRemotingProcessor $stack9;
+  org.apache.rocketmq.proxy.service.route.LocalTopicRouteService $stack13;
+  org.apache.rocketmq.proxy.service.transaction.LocalTransactionService $stack15;
+  org.apache.rocketmq.common.BrokerConfig $stack16;
+  org.apache.rocketmq.proxy.service.relay.LocalProxyRelayService $stack17;
+  org.apache.rocketmq.proxy.service.transaction.TransactionService $stack18;
+  org.apache.rocketmq.proxy.service.metadata.LocalMetadataService $stack19;
+  org.apache.rocketmq.proxy.service.admin.DefaultAdminService $stack20;
+  this#org.apache.rocketmq.proxy.common.AbstractStartAndShutdown();
+ $stack3=new org.apache.rocketmq.common.ThreadFactoryImpl;
+ $stack3#org.apache.rocketmq.common.ThreadFactoryImpl("LocalServiceManagerScheduledThread");
+ $stack4 = java.util.concurrent.Executors.newSingleThreadScheduledExecutor((java.util.concurrent.ThreadFactory)$stack3);
+ this.scheduledExecutorService=$stack4;
+ this.brokerController=brokerController;
+ $stack5=new org.apache.rocketmq.proxy.service.channel.ChannelManager;
+ $stack5#org.apache.rocketmq.proxy.service.channel.ChannelManager();
+ this.channelManager=$stack5;
+ $stack6=new org.apache.rocketmq.proxy.service.message.LocalMessageService;
+ $stack5=this.channelManager;
+ $stack6#org.apache.rocketmq.proxy.service.message.LocalMessageService(brokerController,$stack5,rpcHook);
+ this.messageService=$stack6;
+ $stack8=new org.apache.rocketmq.proxy.service.mqclient.MQClientAPIFactory;
+ $stack9=new org.apache.rocketmq.proxy.service.mqclient.DoNothingClientRemotingProcessor;
+ $stack9#org.apache.rocketmq.proxy.service.mqclient.DoNothingClientRemotingProcessor(null);
+ $stack4=this.scheduledExecutorService;
+ $stack8#org.apache.rocketmq.proxy.service.mqclient.MQClientAPIFactory("LocalMQClient_",1,(org.apache.rocketmq.client.impl.ClientRemotingProcessor)$stack9,rpcHook,$stack4);
+ this.mqClientAPIFactory=$stack8;
+ $stack13=new org.apache.rocketmq.proxy.service.route.LocalTopicRouteService;
+ $stack8=this.mqClientAPIFactory;
+ $stack13#org.apache.rocketmq.proxy.service.route.LocalTopicRouteService(brokerController,$stack8);
+ this.topicRouteService=$stack13;
+ $stack15=new org.apache.rocketmq.proxy.service.transaction.LocalTransactionService;
+ $stack16 = brokerController.getBrokerConfig();
+ $stack15#org.apache.rocketmq.proxy.service.transaction.LocalTransactionService($stack16);
+ this.transactionService=$stack15;
+ $stack17=new org.apache.rocketmq.proxy.service.relay.LocalProxyRelayService;
+ $stack18=this.transactionService;
+ $stack17#org.apache.rocketmq.proxy.service.relay.LocalProxyRelayService(brokerController,$stack18);
+ this.proxyRelayService=$stack17;
+ $stack19=new org.apache.rocketmq.proxy.service.metadata.LocalMetadataService;
+ $stack19#org.apache.rocketmq.proxy.service.metadata.LocalMetadataService(brokerController);
+ this.metadataService=$stack19;
+ $stack20=new org.apache.rocketmq.proxy.service.admin.DefaultAdminService;
+ $stack8=this.mqClientAPIFactory;
+ $stack20#org.apache.rocketmq.proxy.service.admin.DefaultAdminService($stack8);
+ this.adminService=$stack20;
+ this.init();
+ return;
+ } 
+

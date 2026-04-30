@@ -1,0 +1,53 @@
+org.apache.rocketmq.client.consumer.PullResult org.apache.rocketmq.client.impl.MQClientAPIImpl:processPullResponse(org.apache.rocketmq.remoting.protocol.RemotingCommand response,java.lang.String addr)
+{
+org.apache.rocketmq.client.consumer.PullStatus pullStatus;
+  org.apache.rocketmq.remoting.protocol.header.PullMessageResponseHeader responseHeader;
+  int $stack5;
+  org.apache.rocketmq.remoting.CommandCustomHeader $stack6;
+  org.apache.rocketmq.client.impl.consumer.PullResultExt $stack7;
+  java.lang.Long $stack8;
+  long $stack9;
+  long $stack11;
+  long $stack13;
+  long $stack16;
+  byte[] $stack17;
+  org.apache.rocketmq.client.exception.MQBrokerException $stack29;
+  java.lang.String $stack31;
+  pullStatus=org.apache.rocketmq.client.consumer.PullStatus.NO_NEW_MSG;
+ $stack5 = response.getCode();
+ switch [$stack5]
+if 0 goto label0;
+if 1 goto label1;
+if 2 goto label2;
+if 3 goto label3;
+goto label4;
+ label0:pullStatus=org.apache.rocketmq.client.consumer.PullStatus.FOUND;
+ goto label5;
+ label1:pullStatus=org.apache.rocketmq.client.consumer.PullStatus.NO_NEW_MSG;
+ goto label5;
+ label2:pullStatus=org.apache.rocketmq.client.consumer.PullStatus.NO_MATCHED_MSG;
+ goto label5;
+ label3:pullStatus=org.apache.rocketmq.client.consumer.PullStatus.OFFSET_ILLEGAL;
+ goto label5;
+ label4:$stack29=new org.apache.rocketmq.client.exception.MQBrokerException;
+ $stack5 = response.getCode();
+ $stack31 = response.getRemark();
+ $stack29#org.apache.rocketmq.client.exception.MQBrokerException($stack5,$stack31,addr);
+ throw $stack29;
+ label5:$stack6 = response.decodeCommandCustomHeader(org.apache.rocketmq.remoting.protocol.header.PullMessageResponseHeader);
+ responseHeader=(org.apache.rocketmq.remoting.protocol.header.PullMessageResponseHeader) $stack6;
+ $stack7=new org.apache.rocketmq.client.impl.consumer.PullResultExt;
+ $stack8 = responseHeader.getNextBeginOffset();
+ $stack9 = $stack8.longValue();
+ $stack8 = responseHeader.getMinOffset();
+ $stack11 = $stack8.longValue();
+ $stack8 = responseHeader.getMaxOffset();
+ $stack13 = $stack8.longValue();
+ $stack8 = responseHeader.getSuggestWhichBrokerId();
+ $stack16 = $stack8.longValue();
+ $stack17 = response.getBody();
+ $stack8 = responseHeader.getOffsetDelta();
+ $stack7#org.apache.rocketmq.client.impl.consumer.PullResultExt(pullStatus,$stack9,$stack11,$stack13,null,$stack16,$stack17,$stack8);
+ return  $stack7;
+ } 
+

@@ -1,0 +1,16 @@
+org.apache.rocketmq.remoting.protocol.RemotingCommand org.apache.rocketmq.broker.processor.PullMessageProcessor:rewriteResponseForStaticTopic (
+  org.apache.rocketmq.remoting.protocol.header.PullMessageRequestHeader
+    requestHeader,
+  org.apache.rocketmq.remoting.protocol.header.PullMessageResponseHeader
+    responseHeader,
+  org.apache.rocketmq.remoting.protocol.statictopic.TopicQueueMappingContext
+    mappingContext,
+  int code) {
+  guard = tt;
+  ret(level()) = ⊥;
+  ret(obj_level()) = level(code) ⊔ level(mappingContext) ⊔ level(requestHeader) ⊔ level(responseHeader) ⊔ obj_level(mappingContext) ⊔ obj_level(requestHeader) ⊔ obj_level(responseHeader);
+  ret(obj_level(mappingContext)) = level(code) ⊔ level(mappingContext) ⊔ level(requestHeader) ⊔ level(responseHeader) ⊔ obj_level(mappingContext) ⊔ obj_level(requestHeader) ⊔ obj_level(responseHeader);
+  ret(obj_level(requestHeader)) = level(code) ⊔ level(mappingContext) ⊔ level(requestHeader) ⊔ level(responseHeader) ⊔ obj_level(mappingContext) ⊔ obj_level(requestHeader) ⊔ obj_level(responseHeader);
+  ret(obj_level(responseHeader)) = level(code) ⊔ level(mappingContext) ⊔ level(requestHeader) ⊔ level(responseHeader) ⊔ obj_level(mappingContext) ⊔ obj_level(requestHeader) ⊔ obj_level(responseHeader);
+  ret(obj_level(this)) = level(code) ⊔ level(mappingContext) ⊔ level(requestHeader) ⊔ level(responseHeader) ⊔ obj_level(mappingContext) ⊔ obj_level(requestHeader) ⊔ obj_level(responseHeader) ⊔ obj_level(this);
+}

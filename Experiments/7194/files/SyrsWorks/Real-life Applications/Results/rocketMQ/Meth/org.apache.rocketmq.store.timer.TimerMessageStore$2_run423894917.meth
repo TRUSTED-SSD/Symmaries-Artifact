@@ -1,0 +1,41 @@
+void org.apache.rocketmq.store.timer.TimerMessageStore$2:run()
+{
+long minPy;
+  int checkOffset;
+  org.apache.rocketmq.store.timer.TimerMessageStore $stack4;
+  org.apache.rocketmq.store.MessageStore $stack5;
+  boolean $stack6;
+  org.apache.rocketmq.store.timer.TimerLog $stack11;
+  org.apache.rocketmq.store.MappedFileQueue $stack15;
+  org.apache.rocketmq.store.DefaultMessageStore $stack19;
+  org.apache.rocketmq.common.BrokerConfig $stack20;
+  java.lang.Exception $stack28;
+  org.apache.rocketmq.logging.org.slf4j.Logger $stack29;
+  $stack4=this.this$0;
+ $stack5 = org.apache.rocketmq.store.timer.TimerMessageStore.access$000($stack4);
+ $stack6=$stack5 instanceof org.apache.rocketmq.store.DefaultMessageStore;
+ if ($stack6==0) goto label0;
+ $stack4=this.this$0;
+ $stack5 = org.apache.rocketmq.store.timer.TimerMessageStore.access$000($stack4);
+ $stack19=(org.apache.rocketmq.store.DefaultMessageStore) $stack5;
+ $stack20 = $stack19.getBrokerConfig();
+ $stack6 = $stack20.isInBrokerContainer();
+ if ($stack6==0) goto label0;
+ label0:$stack4=this.this$0;
+ $stack5 = org.apache.rocketmq.store.timer.TimerMessageStore.access$000($stack4);
+ minPy = $stack5.getMinPhyOffset();
+ $stack4=this.this$0;
+ $stack11 = org.apache.rocketmq.store.timer.TimerMessageStore.access$100($stack4);
+ checkOffset = $stack11.getOffsetForLastUnit();
+ $stack4=this.this$0;
+ $stack11 = org.apache.rocketmq.store.timer.TimerMessageStore.access$100($stack4);
+ $stack15 = $stack11.getMappedFileQueue();
+ $stack15.deleteExpiredFileByOffsetForTimerLog(minPy,checkOffset,52);
+ label1:goto label2;
+ label3:$stack28 = catch;
+ $stack29 = org.apache.rocketmq.store.timer.TimerMessageStore.access$200();
+ $stack29.error("Error in cleaning timerlog",(java.lang.Throwable)$stack28);
+ label2:return;
+ catch java.lang.Exception: label0 - label1 : label3;
+} 
+

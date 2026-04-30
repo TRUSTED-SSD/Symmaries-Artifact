@@ -1,0 +1,25 @@
+static java.util.HashSet org.apache.bookkeeper.discover.ZKRegistrationClient:convertToBookieAddresses(java.util.List children)
+{
+java.util.HashSet newBookieAddrs;
+  java.util.Iterator l2;
+  java.lang.String bookieAddrString;
+  org.apache.bookkeeper.net.BookieId bookieAddr;
+  boolean $stack7;
+  java.lang.Object $stack8;
+  java.lang.String $stack9;
+  newBookieAddrs = com.google.common.collect.Sets.newHashSet();
+ l2 = children.iterator();
+ label0:$stack7 = l2.hasNext();
+ if ($stack7==0) goto label1;
+ $stack8 = l2.next();
+ bookieAddrString=(java.lang.String) $stack8;
+ $stack9="readonly";
+ $stack7 = $stack9.equals((java.lang.Object)bookieAddrString);
+ if ($stack7==0) goto label2;
+ goto label0;
+ label2:bookieAddr = org.apache.bookkeeper.net.BookieId.parse(bookieAddrString);
+ newBookieAddrs.add((java.lang.Object)bookieAddr);
+ goto label0;
+ label1:return  newBookieAddrs;
+ } 
+

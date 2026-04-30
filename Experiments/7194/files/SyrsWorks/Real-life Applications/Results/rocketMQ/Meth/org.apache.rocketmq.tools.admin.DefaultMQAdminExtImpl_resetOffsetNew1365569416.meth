@@ -1,0 +1,16 @@
+void org.apache.rocketmq.tools.admin.DefaultMQAdminExtImpl:resetOffsetNew(java.lang.String consumerGroup,java.lang.String topic,long timestamp)
+{
+org.apache.rocketmq.client.exception.MQClientException e;
+  int $stack9;
+  label0:this.resetOffsetByTimestamp(topic,consumerGroup,timestamp,(boolean)1);
+ label1:goto label2;
+ label3:e = catch;
+ $stack9 = e.getResponseCode();
+ if (206!=$stack9) goto label4;
+ this.resetOffsetByTimestampOld(consumerGroup,topic,timestamp,(boolean)1);
+ return;
+ label4:throw e;
+ label2:return;
+ catch org.apache.rocketmq.client.exception.MQClientException: label0 - label1 : label3;
+} 
+

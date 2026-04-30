@@ -1,0 +1,21 @@
+java.security.cert.X509Certificate org.keycloak.common.crypto.PemUtilsProvider:decodeCertificate(java.lang.String cert)
+{
+byte[] der;
+  java.io.ByteArrayInputStream $stack5;
+  java.security.cert.X509Certificate $stack6;
+  java.lang.Exception $stack7;
+  org.keycloak.common.util.PemException $stack8;
+  if (cert!=null) goto label0;
+ return  null;
+ label0:der = this.pemToDer(cert);
+ $stack5=new java.io.ByteArrayInputStream;
+ $stack5#java.io.ByteArrayInputStream(der);
+ $stack6 = org.keycloak.common.util.DerUtils.decodeCertificate((java.io.InputStream)$stack5);
+ label1:return  $stack6;
+ label2:$stack7 = catch;
+ $stack8=new org.keycloak.common.util.PemException;
+ $stack8#org.keycloak.common.util.PemException((java.lang.Throwable)$stack7);
+ throw $stack8;
+ catch java.lang.Exception: label0 - label1 : label2;
+} 
+

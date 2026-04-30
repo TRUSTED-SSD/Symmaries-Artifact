@@ -1,0 +1,42 @@
+org.apache.rocketmq.common.message.MessageExtBrokerInner org.apache.rocketmq.broker.processor.PopMessageProcessor:buildCkMsg(org.apache.rocketmq.store.pop.PopCheckPoint ck,int reviveQid)
+{
+org.apache.rocketmq.common.message.MessageExtBrokerInner msgInner;
+  java.lang.String $stack5;
+  java.nio.charset.Charset $stack7;
+  byte[] $stack8;
+  long $stack9;
+  org.apache.rocketmq.broker.BrokerController $stack10;
+  java.net.InetSocketAddress $stack11;
+  long $stack15;
+  java.util.Map $stack17;
+  msgInner=new org.apache.rocketmq.common.message.MessageExtBrokerInner;
+ msgInner#org.apache.rocketmq.common.message.MessageExtBrokerInner();
+ $stack5=this.reviveTopic;
+ msgInner.setTopic($stack5);
+ $stack5 = com.alibaba.fastjson.JSON.toJSONString((java.lang.Object)ck);
+ $stack7=org.apache.rocketmq.common.utils.DataConverter.charset;
+ $stack8 = $stack5.getBytes($stack7);
+ msgInner.setBody($stack8);
+ msgInner.setQueueId(reviveQid);
+ msgInner.setTags("ck");
+ $stack9 = java.lang.System.currentTimeMillis();
+ msgInner.setBornTimestamp($stack9);
+ $stack10=this.brokerController;
+ $stack11 = $stack10.getStoreHost();
+ msgInner.setBornHost((java.net.SocketAddress)$stack11);
+ $stack10=this.brokerController;
+ $stack11 = $stack10.getStoreHost();
+ msgInner.setStoreHost((java.net.SocketAddress)$stack11);
+ $stack9 = ck.getReviveTime();
+ $stack15=org.apache.rocketmq.common.PopAckConstants.ackTimeInterval;
+ $stack9=($stack9-$stack15);
+ msgInner.setDeliverTimeMs($stack9);
+ $stack17 = msgInner.getProperties();
+ $stack5 = org.apache.rocketmq.broker.processor.PopMessageProcessor.genCkUniqueId(ck);
+ $stack17.put((java.lang.Object)"UNIQ_KEY",(java.lang.Object)$stack5);
+ $stack17 = msgInner.getProperties();
+ $stack5 = org.apache.rocketmq.common.message.MessageDecoder.messageProperties2String($stack17);
+ msgInner.setPropertiesString($stack5);
+ return  msgInner;
+ } 
+

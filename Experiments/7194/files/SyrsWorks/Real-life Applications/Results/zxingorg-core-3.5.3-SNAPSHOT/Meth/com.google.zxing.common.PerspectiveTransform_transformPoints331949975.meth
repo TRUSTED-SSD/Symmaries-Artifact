@@ -1,0 +1,57 @@
+void com.google.zxing.common.PerspectiveTransform:transformPoints(float[] points)
+{
+float a11;
+  float a12;
+  float a13;
+  float a21;
+  float a22;
+  float a23;
+  float a31;
+  float a32;
+  float a33;
+  int maxI;
+  int i;
+  float x;
+  float y;
+  float denominator;
+  int $stack17;
+  float $stack19;
+  float $stack22;
+  a11=this.a11;
+ a12=this.a12;
+ a13=this.a13;
+ a21=this.a21;
+ a22=this.a22;
+ a23=this.a23;
+ a31=this.a31;
+ a32=this.a32;
+ a33=this.a33;
+ maxI=#points;
+ maxI=(maxI-1);
+ i=0;
+ label0:if (i>=maxI) goto label1;
+ x=points[i];
+ $stack17=(i+1);
+ y=points[$stack17];
+ $stack19=(a13 * x);
+ denominator=(a23 * y);
+ denominator=($stack19+denominator);
+ denominator=(denominator+a33);
+ $stack22=(a11 * x);
+ $stack19=(a21 * y);
+ $stack19=($stack22+$stack19);
+ $stack19=($stack19+a31);
+ $stack19=($stack19/denominator);
+ points[i]=$stack19;
+ $stack17=(i+1);
+ x=(a12 * x);
+ y=(a22 * y);
+ y=(x+y);
+ y=(y+a32);
+ y=(y/denominator);
+ points[$stack17]=y;
+ i=(i+2);
+ goto label0;
+ label1:return;
+ } 
+

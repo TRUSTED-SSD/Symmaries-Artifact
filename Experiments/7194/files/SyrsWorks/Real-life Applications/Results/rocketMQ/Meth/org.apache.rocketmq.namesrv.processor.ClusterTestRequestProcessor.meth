@@ -1,0 +1,31 @@
+org.apache.rocketmq.namesrv.processor.ClusterTestRequestProcessor(org.apache.rocketmq.namesrv.NamesrvController namesrvController,java.lang.String productEnvName)
+{
+org.apache.rocketmq.tools.admin.DefaultMQAdminExt $stack4;
+  java.lang.StringBuilder $stack5;
+  java.lang.String $stack9;
+  org.apache.rocketmq.client.exception.MQClientException $stack12;
+  org.apache.rocketmq.logging.org.slf4j.Logger $stack13;
+  this#org.apache.rocketmq.namesrv.processor.ClientRequestProcessor(namesrvController);
+ this.productEnvName=productEnvName;
+ $stack4=new org.apache.rocketmq.tools.admin.DefaultMQAdminExt;
+ $stack4#org.apache.rocketmq.tools.admin.DefaultMQAdminExt();
+ this.adminExt=$stack4;
+ $stack4=this.adminExt;
+ $stack5=new java.lang.StringBuilder;
+ $stack5#java.lang.StringBuilder();
+ $stack5 = $stack5.append("CLUSTER_TEST_NS_INS_");
+ $stack5 = $stack5.append(productEnvName);
+ $stack9 = $stack5.toString();
+ $stack4.setInstanceName($stack9);
+ $stack4=this.adminExt;
+ $stack4.setUnitName(productEnvName);
+ label0:$stack4=this.adminExt;
+ $stack4.start();
+ label1:goto label2;
+ label3:$stack12 = catch;
+ $stack13=org.apache.rocketmq.namesrv.processor.ClusterTestRequestProcessor.log;
+ $stack13.error("Failed to start processor",(java.lang.Throwable)$stack12);
+ label2:return;
+ catch org.apache.rocketmq.client.exception.MQClientException: label0 - label1 : label3;
+} 
+

@@ -1,0 +1,33 @@
+void org.apache.rocketmq.broker.controller.ReplicasManager$1:run()
+{
+java.lang.Boolean value;
+  org.apache.rocketmq.broker.controller.ReplicasManager $stack2;
+  org.apache.rocketmq.broker.out.BrokerOuterAPI $stack3;
+  java.lang.String $stack4;
+  boolean $stack5;
+  java.util.concurrent.ConcurrentMap $stack7;
+  java.lang.Object $stack9;
+  org.apache.rocketmq.logging.org.slf4j.Logger $stack10;
+  $stack2=this.this$0;
+ $stack3 = org.apache.rocketmq.broker.controller.ReplicasManager.access$000($stack2);
+ $stack4=this.val$address;
+ $stack5 = $stack3.checkAddressReachable($stack4);
+ if ($stack5==0) goto label0;
+ $stack2=this.this$0;
+ $stack7 = org.apache.rocketmq.broker.controller.ReplicasManager.access$100($stack2);
+ $stack4=this.val$address;
+ value = java.lang.Boolean.valueOf((boolean)1);
+ $stack7.putIfAbsent((java.lang.Object)$stack4,(java.lang.Object)value);
+ goto label1;
+ label0:$stack2=this.this$0;
+ $stack7 = org.apache.rocketmq.broker.controller.ReplicasManager.access$100($stack2);
+ $stack4=this.val$address;
+ $stack9 = $stack7.remove((java.lang.Object)$stack4);
+ value=(java.lang.Boolean) $stack9;
+ if (value==null) goto label1;
+ $stack10 = org.apache.rocketmq.broker.controller.ReplicasManager.access$200();
+ $stack4=this.val$address;
+ $stack10.warn("scanAvailableControllerAddresses remove unconnected address {}",(java.lang.Object)$stack4);
+ label1:return;
+ } 
+

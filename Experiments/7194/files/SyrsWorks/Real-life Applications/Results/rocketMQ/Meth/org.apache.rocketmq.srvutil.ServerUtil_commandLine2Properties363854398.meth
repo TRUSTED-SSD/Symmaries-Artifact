@@ -1,0 +1,26 @@
+static java.util.Properties org.apache.rocketmq.srvutil.ServerUtil:commandLine2Properties(org.apache.commons.cli.CommandLine commandLine)
+{
+java.util.Properties properties;
+  org.apache.commons.cli.Option[] opts;
+  int l4;
+  int l5;
+  org.apache.commons.cli.Option opt;
+  java.lang.String name;
+  java.lang.String value;
+  properties=new java.util.Properties;
+ properties#java.util.Properties();
+ opts = commandLine.getOptions();
+ if (opts==null) goto label0;
+ l4=#opts;
+ l5=0;
+ label1:if (l5>=l4) goto label0;
+ opt=opts[l5];
+ name = opt.getLongOpt();
+ value = commandLine.getOptionValue(name);
+ if (value==null) goto label2;
+ properties.setProperty(name,value);
+ label2:l5=(l5+1);
+ goto label1;
+ label0:return  properties;
+ } 
+

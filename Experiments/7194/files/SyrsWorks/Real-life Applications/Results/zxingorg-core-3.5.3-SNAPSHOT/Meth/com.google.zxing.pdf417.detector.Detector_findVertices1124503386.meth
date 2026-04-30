@@ -1,0 +1,43 @@
+static com.google.zxing.ResultPoint[] com.google.zxing.pdf417.detector.Detector:findVertices(com.google.zxing.common.BitMatrix matrix,int startRow,int startColumn)
+{
+int height;
+  int width;
+  com.google.zxing.ResultPoint[] result;
+  int minHeight;
+  int[] $stack11;
+  com.google.zxing.ResultPoint[] $stack12;
+  com.google.zxing.ResultPoint $stack14;
+  float $stack19;
+  height = matrix.getHeight();
+ width = matrix.getWidth();
+ result=new com.google.zxing.ResultPoint[8];
+ minHeight=10;
+ $stack11=com.google.zxing.pdf417.detector.Detector.START_PATTERN;
+ $stack12 = com.google.zxing.pdf417.detector.Detector.findRowsWithPattern(matrix,height,width,startRow,startColumn,10,$stack11);
+ $stack11=com.google.zxing.pdf417.detector.Detector.INDEXES_START_PATTERN;
+ com.google.zxing.pdf417.detector.Detector.copyToResult(result,$stack12,$stack11);
+ $stack14=result[4];
+ if ($stack14==null) goto label0;
+ $stack14=result[4];
+ $stack19 = $stack14.getX();
+ startColumn=(int) $stack19;
+ $stack14=result[4];
+ $stack19 = $stack14.getY();
+ startRow=(int) $stack19;
+ $stack14=result[5];
+ if ($stack14==null) goto label0;
+ $stack14=result[5];
+ $stack19 = $stack14.getY();
+ minHeight=(int) $stack19;
+ minHeight=(minHeight-startRow);
+ $stack19=(float) minHeight;
+ $stack19=($stack19 * 0.5F);
+ $stack19 = java.lang.Math.max($stack19,10.0F);
+ minHeight=(int) $stack19;
+ label0:$stack11=com.google.zxing.pdf417.detector.Detector.STOP_PATTERN;
+ $stack12 = com.google.zxing.pdf417.detector.Detector.findRowsWithPattern(matrix,height,width,startRow,startColumn,minHeight,$stack11);
+ $stack11=com.google.zxing.pdf417.detector.Detector.INDEXES_STOP_PATTERN;
+ com.google.zxing.pdf417.detector.Detector.copyToResult(result,$stack12,$stack11);
+ return  result;
+ } 
+

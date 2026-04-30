@@ -1,0 +1,32 @@
+java.nio.ByteBuffer org.apache.rocketmq.remoting.protocol.RemotingCommand:encode()
+{
+int length;
+  byte[] headerData;
+  java.nio.ByteBuffer result;
+  byte[] $stack6;
+  int $stack7;
+  org.apache.rocketmq.remoting.protocol.SerializeType $stack10;
+  headerData = this#org.apache.rocketmq.remoting.protocol.RemotingCommand:headerEncode();
+ length=#headerData;
+ length=(4+length);
+ $stack6=this.body;
+ if ($stack6==null) goto label0;
+ $stack6=this.body;
+ $stack7=#$stack6;
+ length=(length+$stack7);
+ label0:$stack7=(4+length);
+ result = java.nio.ByteBuffer.allocate($stack7);
+ result.putInt(length);
+ length=#headerData;
+ $stack10=this.serializeTypeCurrentRPC;
+ length = org.apache.rocketmq.remoting.protocol.RemotingCommand.markProtocolType(length,$stack10);
+ result.putInt(length);
+ result.put(headerData);
+ headerData=this.body;
+ if (headerData==null) goto label1;
+ headerData=this.body;
+ result.put(headerData);
+ label1:result.flip();
+ return  result;
+ } 
+

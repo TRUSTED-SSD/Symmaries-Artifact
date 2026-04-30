@@ -1,0 +1,28 @@
+static org.junit.runner.manipulation.Filter org.junit.runner.FilterFactories:createFilterFromFilterSpec(org.junit.runner.Request request,java.lang.String @filterSpec)
+{
+org.junit.runner.Description topLevelDescription;
+  java.lang.String[] tuple;
+  org.junit.runner.Runner $stack4;
+  boolean $stack6;
+  org.junit.runner.FilterFactoryParams $stack8;
+  java.lang.String $stack10;
+  org.junit.runner.manipulation.Filter $stack11;
+  java.lang.String filterSpec;
+filterSpec=@filterSpec;
+$stack4 = request.getRunner();
+ topLevelDescription = $stack4.getDescription();
+ $stack6 = filterSpec.contains((java.lang.CharSequence)"=");
+ if ($stack6==0) goto label0;
+ tuple = filterSpec.split("=",2);
+ goto label1;
+ label0:tuple=new java.lang.String[2];
+ tuple[0]=filterSpec;
+ tuple[1]="";
+ label1:$stack10=tuple[0];
+ $stack8=new org.junit.runner.FilterFactoryParams;
+ filterSpec=tuple[1];
+ $stack8#org.junit.runner.FilterFactoryParams(topLevelDescription,filterSpec);
+ $stack11 = org.junit.runner.FilterFactories.createFilter($stack10,$stack8);
+ return  $stack11;
+ } 
+

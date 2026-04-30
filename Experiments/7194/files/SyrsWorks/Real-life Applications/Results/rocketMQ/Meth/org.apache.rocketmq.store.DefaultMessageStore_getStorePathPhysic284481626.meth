@@ -1,0 +1,23 @@
+java.lang.String org.apache.rocketmq.store.DefaultMessageStore:getStorePathPhysic()
+{
+java.lang.String storePathPhysic;
+  org.apache.rocketmq.store.config.MessageStoreConfig $stack2;
+  boolean $stack3;
+  org.apache.rocketmq.store.CommitLog $stack6;
+  org.apache.rocketmq.store.dledger.DLedgerCommitLog $stack7;
+  io.openmessaging.storage.dledger.DLedgerServer $stack8;
+  io.openmessaging.storage.dledger.DLedgerConfig $stack9;
+  $stack2 = this.getMessageStoreConfig();
+ $stack3 = $stack2.isEnableDLegerCommitLog();
+ if ($stack3==0) goto label0;
+ $stack6 = this.getCommitLog();
+ $stack7=(org.apache.rocketmq.store.dledger.DLedgerCommitLog) $stack6;
+ $stack8 = $stack7.getdLedgerServer();
+ $stack9 = $stack8.getdLedgerConfig();
+ storePathPhysic = $stack9.getDataStorePath();
+ goto label1;
+ label0:$stack2 = this.getMessageStoreConfig();
+ storePathPhysic = $stack2.getStorePathCommitLog();
+ label1:return  storePathPhysic;
+ } 
+

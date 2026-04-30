@@ -1,0 +1,41 @@
+void rifl.spec.TestRIFLReader:testReadDomainAssignment()
+{
+java.util.HashMap da;
+  rifl.spec.RIFLReader $stack3;
+  org.w3c.dom.Document $stack4;
+  int $stack6;
+  long $stack7;
+  rifl.spec.Domain $stack8;
+  rifl.spec.Assignable $stack9;
+  java.lang.Object $stack10;
+  da=new java.util.HashMap;
+ da#java.util.HashMap();
+ this.testReadDomains();
+ this.testReadInterfaceSpecification();
+ $stack3=this.reader;
+ $stack4 = rifl.spec.TestRIFLReader.toDoc("<riflspec><domainassignment>\t\t  <assign handle=\"cmdinputhandle\" domain=\"top\" />         <assign handle=\"cmdoutputhandle\" domain=\"bottom\" />         <assign handle=\"envinputhandle\" domain=\"bottom\" /></domainassignment></riflspec>");
+ $stack3.readDomainAssignment($stack4,(java.util.Map)da);
+ $stack6 = da.size();
+ $stack7=(long) $stack6;
+ org.junit.Assert.assertEquals(3L,$stack7);
+ $stack8=new rifl.spec.Domain;
+ $stack8#rifl.spec.Domain("top");
+ $stack9=new rifl.spec.Assignable;
+ $stack9#rifl.spec.Assignable("cmdinputhandle",null);
+ $stack10 = da.get((java.lang.Object)$stack9);
+ org.junit.Assert.assertEquals((java.lang.Object)$stack8,$stack10);
+ $stack8=new rifl.spec.Domain;
+ $stack8#rifl.spec.Domain("bottom");
+ $stack9=new rifl.spec.Assignable;
+ $stack9#rifl.spec.Assignable("cmdoutputhandle",null);
+ $stack10 = da.get((java.lang.Object)$stack9);
+ org.junit.Assert.assertEquals((java.lang.Object)$stack8,$stack10);
+ $stack8=new rifl.spec.Domain;
+ $stack8#rifl.spec.Domain("bottom");
+ $stack9=new rifl.spec.Assignable;
+ $stack9#rifl.spec.Assignable("envinputhandle",null);
+ $stack10 = da.get((java.lang.Object)$stack9);
+ org.junit.Assert.assertEquals((java.lang.Object)$stack8,$stack10);
+ return;
+ } 
+

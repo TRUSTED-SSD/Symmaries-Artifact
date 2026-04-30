@@ -1,0 +1,32 @@
+boolean org.apache.rocketmq.store.ha.autoswitch.AutoSwitchHAConnection$WriteSocketService:transferData(int maxTransferSize)
+{
+boolean result;
+  org.apache.rocketmq.store.SelectMappedBufferResult $stack3;
+  java.nio.ByteBuffer $stack4;
+  java.nio.channels.SocketChannel $stack5;
+  org.apache.rocketmq.store.ha.io.HAWriter $stack6;
+  $stack3=this.selectMappedBufferResult;
+ if (null==$stack3) goto label0;
+ if (maxTransferSize<0) goto label0;
+ $stack3=this.selectMappedBufferResult;
+ $stack4 = $stack3.getByteBuffer();
+ $stack4.limit(maxTransferSize);
+ label0:$stack6=this.haWriter;
+ $stack5=this.socketChannel;
+ $stack4=this.byteBufferHeader;
+ result = $stack6.write($stack5,$stack4);
+ if (result!=0) goto label1;
+ return  0;
+ label1:$stack3=this.selectMappedBufferResult;
+ if (null!=$stack3) goto label2;
+ return  1;
+ label2:$stack6=this.haWriter;
+ $stack5=this.socketChannel;
+ $stack3=this.selectMappedBufferResult;
+ $stack4 = $stack3.getByteBuffer();
+ result = $stack6.write($stack5,$stack4);
+ if (result==0) goto label3;
+ this.releaseData();
+ label3:return  result;
+ } 
+

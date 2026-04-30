@@ -1,0 +1,13 @@
+void org.apache.rocketmq.proxy.service.ClusterServiceManager$ProducerChangeListenerImpl:handle(org.apache.rocketmq.broker.client.ProducerGroupEvent event,java.lang.String group,org.apache.rocketmq.broker.client.ClientChannelInfo clientChannelInfo)
+{
+org.apache.rocketmq.broker.client.ProducerGroupEvent $stack4;
+  org.apache.rocketmq.proxy.service.ClusterServiceManager $stack5;
+  org.apache.rocketmq.proxy.service.transaction.TransactionService $stack6;
+  $stack4=org.apache.rocketmq.broker.client.ProducerGroupEvent.GROUP_UNREGISTER;
+ if (event!=$stack4) goto label0;
+ $stack5=this.this$0;
+ $stack6 = $stack5.getTransactionService();
+ $stack6.unSubscribeAllTransactionTopic(group);
+ label0:return;
+ } 
+

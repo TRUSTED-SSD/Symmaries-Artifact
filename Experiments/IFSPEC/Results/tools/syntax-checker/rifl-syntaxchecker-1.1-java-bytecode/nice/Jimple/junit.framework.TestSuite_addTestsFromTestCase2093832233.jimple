@@ -1,0 +1,217 @@
+    private void addTestsFromTestCase(java.lang.Class)
+    {
+        junit.framework.TestSuite this;
+        java.lang.Class theClass, $stack13, tmp$149067269;
+        java.io.Serializable e;
+        java.util.ArrayList names, tmp$1612120856;
+        java.lang.reflect.Method[] arr$;
+        int len$, i$;
+        java.lang.reflect.Method each;
+        java.lang.String $stack8;
+        boolean $stack11;
+        java.util.Vector $stack15;
+        java.lang.StringBuilder $stack17;
+        junit.framework.Test $stack22;
+        java.lang.NoSuchMethodException $stack35;
+
+        this := @this: junit.framework.TestSuite;
+
+        theClass := @parameter0: java.lang.Class;
+
+        $stack8 = virtualinvoke theClass.<java.lang.Class: java.lang.String getName()>();
+/*133*/
+
+        this.<junit.framework.TestSuite: java.lang.String fName> = $stack8;
+/*133*/
+
+     label01:
+        staticinvoke <junit.framework.TestSuite: java.lang.reflect.Constructor getTestConstructor(java.lang.Class)>(theClass);
+/*135*/
+
+     label02:
+        goto label04;
+/*139*/
+
+     label03:
+        $stack35 := @caughtexception;
+/*143*/
+
+        e = $stack35;
+/*136*/
+
+        $stack17 = new java.lang.StringBuilder;
+/*137*/
+
+        specialinvoke $stack17.<java.lang.StringBuilder: void <init>()>();
+/*137*/
+
+        $stack17 = virtualinvoke $stack17.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>("Class ");
+/*137*/
+
+        $stack8 = virtualinvoke theClass.<java.lang.Class: java.lang.String getName()>();
+/*137*/
+
+        $stack17 = virtualinvoke $stack17.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>($stack8);
+/*137*/
+
+        $stack17 = virtualinvoke $stack17.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>(" has no public constructor TestCase(String name) or TestCase()");
+/*137*/
+
+        $stack8 = virtualinvoke $stack17.<java.lang.StringBuilder: java.lang.String toString()>();
+/*137*/
+
+        $stack22 = staticinvoke <junit.framework.TestSuite: junit.framework.Test warning(java.lang.String)>($stack8);
+/*137*/
+
+        virtualinvoke this.<junit.framework.TestSuite: void addTest(junit.framework.Test)>($stack22);
+/*137*/
+
+        return;
+/*138*/
+
+     label04:
+        len$ = virtualinvoke theClass.<java.lang.Class: int getModifiers()>();
+/*141*/
+
+        $stack11 = staticinvoke <java.lang.reflect.Modifier: boolean isPublic(int)>(len$);
+/*141*/
+
+        if $stack11 != 0 goto label05;
+/*141*/
+
+        $stack17 = new java.lang.StringBuilder;
+/*142*/
+
+        specialinvoke $stack17.<java.lang.StringBuilder: void <init>()>();
+/*142*/
+
+        $stack17 = virtualinvoke $stack17.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>("Class ");
+/*142*/
+
+        $stack8 = virtualinvoke theClass.<java.lang.Class: java.lang.String getName()>();
+/*142*/
+
+        $stack17 = virtualinvoke $stack17.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>($stack8);
+/*142*/
+
+        $stack17 = virtualinvoke $stack17.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>(" is not public");
+/*142*/
+
+        $stack8 = virtualinvoke $stack17.<java.lang.StringBuilder: java.lang.String toString()>();
+/*142*/
+
+        $stack22 = staticinvoke <junit.framework.TestSuite: junit.framework.Test warning(java.lang.String)>($stack8);
+/*142*/
+
+        virtualinvoke this.<junit.framework.TestSuite: void addTest(junit.framework.Test)>($stack22);
+/*142*/
+
+        return;
+/*143*/
+
+     label05:
+        e = theClass;
+/*146*/
+
+        tmp$1612120856 = new java.util.ArrayList;
+/*147*/
+
+        names = tmp$1612120856;
+
+        specialinvoke tmp$1612120856.<java.util.ArrayList: void <init>()>();
+/*147*/
+
+        names = tmp$1612120856;
+/*147*/
+
+     label06:
+        $stack13 = class "Ljunit/framework/Test;";
+/*148*/
+
+        tmp$149067269 = (java.lang.Class) e;
+
+        $stack11 = virtualinvoke $stack13.<java.lang.Class: boolean isAssignableFrom(java.lang.Class)>(tmp$149067269);
+/*148*/
+
+        if $stack11 == 0 goto label09;
+/*148*/
+
+        $stack13 = (java.lang.Class) e;
+
+        arr$ = staticinvoke <org.junit.internal.MethodSorter: java.lang.reflect.Method[] getDeclaredMethods(java.lang.Class)>($stack13);
+/*149*/
+/*149*/
+
+        len$ = lengthof arr$;
+/*149*/
+
+        i$ = 0;
+/*149*/
+
+     label07:
+        if i$ >= len$ goto label08;
+/*149*/
+
+        each = arr$[i$];
+/*148*/
+
+        specialinvoke this.<junit.framework.TestSuite: void addTestMethod(java.lang.reflect.Method,java.util.List,java.lang.Class)>(each, tmp$1612120856, theClass);
+/*150*/
+
+        i$ = i$ + 1;
+/*149*/
+
+        goto label07;
+/*149*/
+
+     label08:
+        $stack13 = (java.lang.Class) e;
+
+        e = virtualinvoke $stack13.<java.lang.Class: java.lang.Class getSuperclass()>();
+/*152*/
+/*152*/
+
+        goto label06;
+/*152*/
+
+     label09:
+        $stack15 = this.<junit.framework.TestSuite: java.util.Vector fTests>;
+/*154*/
+
+        len$ = virtualinvoke $stack15.<java.util.Vector: int size()>();
+/*154*/
+
+        if len$ != 0 goto label10;
+/*154*/
+
+        $stack17 = new java.lang.StringBuilder;
+/*155*/
+
+        specialinvoke $stack17.<java.lang.StringBuilder: void <init>()>();
+/*155*/
+
+        $stack17 = virtualinvoke $stack17.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>("No tests found in ");
+/*155*/
+
+        $stack8 = virtualinvoke theClass.<java.lang.Class: java.lang.String getName()>();
+/*155*/
+
+        $stack17 = virtualinvoke $stack17.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>($stack8);
+/*155*/
+
+        $stack8 = virtualinvoke $stack17.<java.lang.StringBuilder: java.lang.String toString()>();
+/*155*/
+
+        $stack22 = staticinvoke <junit.framework.TestSuite: junit.framework.Test warning(java.lang.String)>($stack8);
+/*155*/
+
+        virtualinvoke this.<junit.framework.TestSuite: void addTest(junit.framework.Test)>($stack22);
+/*155*/
+
+     label10:
+        return;
+/*157*/
+
+        catch java.lang.NoSuchMethodException from label01 to label02 with label03;
+    }
+

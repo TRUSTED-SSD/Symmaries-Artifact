@@ -1,0 +1,25 @@
+void org.apache.rocketmq.tieredstore.container.TieredFileQueue:lambda$loadFromMetadata$0(org.apache.rocketmq.tieredstore.metadata.FileSegmentMetadata metadata)
+{
+org.apache.rocketmq.tieredstore.provider.TieredFileSegment segment;
+  int $stack3;
+  long $stack4;
+  java.util.List $stack10;
+  $stack3 = metadata.getStatus();
+ if ($stack3!=2) goto label0;
+ return;
+ label0:$stack4 = metadata.getBaseOffset();
+ segment = this#org.apache.rocketmq.tieredstore.container.TieredFileQueue:newSegment($stack4,(boolean)0);
+ $stack4 = metadata.getSize();
+ segment.initPosition($stack4);
+ $stack4 = metadata.getBeginTimestamp();
+ segment.setBeginTimestamp($stack4);
+ $stack4 = metadata.getEndTimestamp();
+ segment.setEndTimestamp($stack4);
+ $stack3 = metadata.getStatus();
+ if ($stack3!=1) goto label1;
+ segment.setFull((boolean)0);
+ label1:$stack10=this.fileSegmentList;
+ $stack10.add((java.lang.Object)segment);
+ return;
+ } 
+

@@ -1,0 +1,21 @@
+void org.apache.rocketmq.filter.util.BloomFilter:hashTo(org.apache.rocketmq.filter.util.BloomFilterData filterData,org.apache.rocketmq.filter.util.BitsArray bits)
+{
+boolean $stack3;
+  int[] $stack4;
+  java.lang.IllegalArgumentException $stack5;
+  java.lang.Object[] $stack6;
+  java.lang.String $stack7;
+  $stack3 = this.isValid(filterData);
+ if ($stack3!=0) goto label0;
+ $stack5=new java.lang.IllegalArgumentException;
+ $stack6=new java.lang.Object[2];
+ $stack6[0]=filterData;
+ $stack6[1]=this;
+ $stack7 = java.lang.String.format("Bloom filter data may not belong to this filter! %s, %s",$stack6);
+ $stack5#java.lang.IllegalArgumentException($stack7);
+ throw $stack5;
+ label0:$stack4 = filterData.getBitPos();
+ this#org.apache.rocketmq.filter.util.BloomFilter($stack4,bits);
+ return;
+ } 
+

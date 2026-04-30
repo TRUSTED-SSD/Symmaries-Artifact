@@ -1,0 +1,85 @@
+    private rifl.spec.Category readCategory(org.w3c.dom.Element) throws rifl.spec.RIFLIntegrityException
+    {
+        rifl.spec.RIFLReader this;
+        org.w3c.dom.Element categoryElem;
+        java.lang.String name;
+        rifl.spec.Category category;
+        java.util.Iterator l5;
+        rifl.spec.CatSrcSnk catSrcSnk;
+        org.w3c.dom.NodeList $stack9;
+        java.lang.Iterable $stack10;
+        boolean $stack12;
+        java.lang.Object $stack13;
+        java.util.Set $stack15;
+        java.lang.Object[] $stack18;
+
+        this := @this: rifl.spec.RIFLReader;
+
+        categoryElem := @parameter0: org.w3c.dom.Element;
+
+        name = interfaceinvoke categoryElem.<org.w3c.dom.Element: java.lang.String getAttribute(java.lang.String)>("name");
+/*206*/
+/*206*/
+
+        category = new rifl.spec.Category;
+/*207*/
+
+        specialinvoke category.<rifl.spec.Category: void <init>(java.lang.String)>(name);
+/*207*/
+
+        $stack9 = interfaceinvoke categoryElem.<org.w3c.dom.Element: org.w3c.dom.NodeList getChildNodes()>();
+/*208*/
+
+        $stack10 = staticinvoke <rifl.spec.RIFLReader: java.lang.Iterable getElementList(org.w3c.dom.NodeList)>($stack9);
+/*208*/
+
+        l5 = interfaceinvoke $stack10.<java.lang.Iterable: java.util.Iterator iterator()>();
+/*208*/
+/*208*/
+
+        goto label2;
+/*208*/
+
+     label1:
+        $stack13 = interfaceinvoke l5.<java.util.Iterator: java.lang.Object next()>();
+/*208*/
+
+        categoryElem = (org.w3c.dom.Element) $stack13;
+/*208*/
+
+        catSrcSnk = specialinvoke this.<rifl.spec.RIFLReader: rifl.spec.CatSrcSnk readCategoryTree(org.w3c.dom.Element)>(categoryElem);
+/*209*/
+/*209*/
+
+        $stack15 = category.<rifl.spec.Category: java.util.Set catSrcSnks>;
+/*210*/
+
+        $stack12 = interfaceinvoke $stack15.<java.util.Set: boolean add(java.lang.Object)>(catSrcSnk);
+/*210*/
+
+        if $stack12 != 0 goto label2;
+/*210*/
+
+        $stack18 = newarray (java.lang.Object)[1];
+/*211*/
+
+        $stack18[0] = catSrcSnk;
+/*211*/
+
+        name = staticinvoke <java.lang.String: java.lang.String format(java.lang.String,java.lang.Object[])>("Duplicate declaration of \'%s\'. Duplicate ignored.", $stack18);
+/*211*/
+
+        staticinvoke <rifl.spec.RIFLReader: void warn(java.lang.String)>(name);
+/*211*/
+
+     label2:
+        $stack12 = interfaceinvoke l5.<java.util.Iterator: boolean hasNext()>();
+/*208*/
+
+        if $stack12 != 0 goto label1;
+/*208*/
+
+        return category;
+/*214*/
+    }
+

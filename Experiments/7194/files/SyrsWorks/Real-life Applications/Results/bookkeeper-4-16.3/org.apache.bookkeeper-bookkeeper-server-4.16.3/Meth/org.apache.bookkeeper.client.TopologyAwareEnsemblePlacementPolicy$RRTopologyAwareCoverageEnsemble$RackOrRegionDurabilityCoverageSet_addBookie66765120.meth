@@ -1,0 +1,31 @@
+void org.apache.bookkeeper.client.TopologyAwareEnsemblePlacementPolicy$RRTopologyAwareCoverageEnsemble$RackOrRegionDurabilityCoverageSet:addBookie(org.apache.bookkeeper.net.BookieNode candidate)
+{
+java.lang.String candidateRackOrRegion;
+  int oldCount;
+  org.apache.bookkeeper.client.TopologyAwareEnsemblePlacementPolicy$RRTopologyAwareCoverageEnsemble $stack4;
+  boolean $stack7;
+  java.util.HashMap $stack8;
+  java.lang.Object $stack10;
+  java.lang.Integer $stack13;
+  $stack4=this.this$0;
+ oldCount=$stack4.distanceFromLeaves;
+ candidateRackOrRegion = candidate.getNetworkLocation(oldCount);
+ $stack7 = candidateRackOrRegion.startsWith("/");
+ if ($stack7==0) goto label0;
+ candidateRackOrRegion = candidateRackOrRegion.substring(1);
+ goto label0;
+ label0:oldCount=0;
+ $stack8=this.allocationToRacksOrRegions;
+ $stack10 = $stack8.get((java.lang.Object)candidateRackOrRegion);
+ if (null==$stack10) goto label1;
+ $stack8=this.allocationToRacksOrRegions;
+ $stack10 = $stack8.get((java.lang.Object)candidateRackOrRegion);
+ $stack13=(java.lang.Integer) $stack10;
+ oldCount = $stack13.intValue();
+ label1:$stack8=this.allocationToRacksOrRegions;
+ oldCount=(oldCount+1);
+ $stack13 = java.lang.Integer.valueOf(oldCount);
+ $stack8.put((java.lang.Object)candidateRackOrRegion,(java.lang.Object)$stack13);
+ return;
+ } 
+

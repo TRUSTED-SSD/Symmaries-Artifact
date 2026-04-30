@@ -1,0 +1,57 @@
+byte[] org.apache.bookkeeper.statelib.impl.mvcc.MVCCRecordCoder:encode(org.apache.bookkeeper.statelib.impl.mvcc.MVCCRecord record)
+{
+org.apache.bookkeeper.stream.proto.kv.store.KeyMeta meta;
+  int metaLen;
+  int valLen;
+  int totalLen;
+  byte[] data;
+  io.netty.buffer.ByteBuf buf;
+  com.google.protobuf.CodedOutputStream out;
+  org.apache.bookkeeper.stream.proto.kv.store.KeyMeta$Builder $stack10;
+  long $stack11;
+  org.apache.bookkeeper.stream.proto.kv.store.ValueType $stack17;
+  io.netty.buffer.ByteBuf $stack28;
+  java.io.IOException $stack39;
+  org.apache.bookkeeper.statelib.api.exceptions.StateStoreRuntimeException $stack40;
+  $stack10 = org.apache.bookkeeper.stream.proto.kv.store.KeyMeta.newBuilder();
+ $stack11 = record.getCreateRev();
+ $stack10 = $stack10.setCreateRevision($stack11);
+ $stack11 = record.getModRev();
+ $stack10 = $stack10.setModRevision($stack11);
+ $stack11 = record.getVersion();
+ $stack10 = $stack10.setVersion($stack11);
+ $stack17 = record.getValueType();
+ $stack10 = $stack10.setValueType($stack17);
+ $stack11 = record.getExpireTime();
+ $stack10 = $stack10.setExpireTime($stack11);
+ meta = $stack10.build();
+ metaLen = meta.getSerializedSize();
+ buf = record.getValue();
+ valLen = buf.readableBytes();
+dummyClass.highSourceMutint(valLen);
+ totalLen=(4+metaLen);
+ totalLen=(totalLen+4);
+ totalLen=(totalLen+valLen);
+ data=new byte[totalLen];
+ buf = io.netty.buffer.Unpooled.wrappedBuffer(data);
+ buf.writerIndex(0);
+ buf.writeInt(metaLen);
+ out = com.google.protobuf.CodedOutputStream.newInstance(data,4,metaLen);
+ label0:meta.writeTo(out);
+ label1:goto label2;
+ label3:$stack39 = catch;
+ $stack40=new org.apache.bookkeeper.statelib.api.exceptions.StateStoreRuntimeException;
+ $stack40#org.apache.bookkeeper.statelib.api.exceptions.StateStoreRuntimeException("Failed to serialize key metadata",(java.lang.Throwable)$stack39);
+ throw $stack40;
+ label2:totalLen = buf.writerIndex();
+ metaLen=(totalLen+metaLen);
+ buf.writerIndex(metaLen);
+ buf.writeInt(valLen);
+ $stack28 = record.getValue();
+ $stack28 = $stack28.slice();
+ buf.writeBytes($stack28);
+ io.netty.util.ReferenceCountUtil.release((java.lang.Object)buf);
+ return  data;
+ catch java.io.IOException: label0 - label1 : label3;
+} 
+

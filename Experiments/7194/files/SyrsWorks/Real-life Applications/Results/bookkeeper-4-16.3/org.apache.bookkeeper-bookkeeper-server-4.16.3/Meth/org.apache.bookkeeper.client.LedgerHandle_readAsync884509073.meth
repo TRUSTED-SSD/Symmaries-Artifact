@@ -1,0 +1,52 @@
+java.util.concurrent.CompletableFuture org.apache.bookkeeper.client.LedgerHandle:readAsync(long firstEntry,long lastEntry)
+{
+byte $stack5;
+  java.lang.Object[] $stack6;
+  long $stack7;
+  org.slf4j.Logger $stack8;
+  java.lang.Long $stack11;
+  org.apache.bookkeeper.client.BKException$BKIncorrectParameterException $stack16;
+  java.util.concurrent.CompletableFuture $stack17;
+  org.apache.bookkeeper.client.BKException$BKReadException $stack35;
+  $stack5=(firstEntry cmp 0L);
+ if ($stack5<0) goto label0;
+ $stack5=(firstEntry cmp lastEntry);
+ if ($stack5<=0) goto label1;
+ label0:$stack8=org.apache.bookkeeper.client.LedgerHandle.LOG;
+ $stack6=new java.lang.Object[3];
+ $stack7=this.ledgerId;
+ $stack11 = java.lang.Long.valueOf($stack7);
+ $stack6[0]=$stack11;
+ $stack11 = java.lang.Long.valueOf(firstEntry);
+ $stack6[1]=$stack11;
+ $stack11 = java.lang.Long.valueOf(lastEntry);
+ $stack6[2]=$stack11;
+ $stack8.error("IncorrectParameterException on ledgerId:{} firstEntry:{} lastEntry:{}",$stack6);
+ $stack16=new org.apache.bookkeeper.client.BKException$BKIncorrectParameterException;
+ $stack16#org.apache.bookkeeper.client.BKException$BKIncorrectParameterException();
+ $stack17 = org.apache.bookkeeper.common.concurrent.FutureUtils.exception((java.lang.Throwable)$stack16);
+ return  $stack17;
+ label1:$stack7=this.lastAddConfirmed;
+ $stack5=(lastEntry cmp $stack7);
+ if ($stack5<=0) goto label2;
+ $stack8=org.apache.bookkeeper.client.LedgerHandle.LOG;
+ $stack6=new java.lang.Object[4];
+ $stack7=this.ledgerId;
+ $stack11 = java.lang.Long.valueOf($stack7);
+ $stack6[0]=$stack11;
+ $stack11 = java.lang.Long.valueOf(firstEntry);
+ $stack6[1]=$stack11;
+ $stack11 = java.lang.Long.valueOf(lastEntry);
+ $stack6[2]=$stack11;
+ firstEntry=this.lastAddConfirmed;
+ $stack11 = java.lang.Long.valueOf(firstEntry);
+ $stack6[3]=$stack11;
+ $stack8.error("ReadAsync exception on ledgerId:{} firstEntry:{} lastEntry:{} lastAddConfirmed:{}",$stack6);
+ $stack35=new org.apache.bookkeeper.client.BKException$BKReadException;
+ $stack35#org.apache.bookkeeper.client.BKException$BKReadException();
+ $stack17 = org.apache.bookkeeper.common.concurrent.FutureUtils.exception((java.lang.Throwable)$stack35);
+ return  $stack17;
+ label2:$stack17 = this.readEntriesInternalAsync(firstEntry,lastEntry,(boolean)0);
+ return  $stack17;
+ } 
+

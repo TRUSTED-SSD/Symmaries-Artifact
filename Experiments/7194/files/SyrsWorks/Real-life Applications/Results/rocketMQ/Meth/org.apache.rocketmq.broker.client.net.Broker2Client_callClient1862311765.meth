@@ -1,0 +1,12 @@
+org.apache.rocketmq.remoting.protocol.RemotingCommand org.apache.rocketmq.broker.client.net.Broker2Client:callClient(io.netty.channel.Channel channel,org.apache.rocketmq.remoting.protocol.RemotingCommand @request)
+{
+org.apache.rocketmq.broker.BrokerController $stack3;
+  org.apache.rocketmq.remoting.RemotingServer $stack4;
+  org.apache.rocketmq.remoting.protocol.RemotingCommand request;
+request=@request;
+$stack3=this.brokerController;
+ $stack4 = $stack3.getRemotingServer();
+ request = $stack4.invokeSync(channel,request,10000L);
+ return  request;
+ } 
+

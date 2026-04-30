@@ -1,0 +1,23 @@
+boolean org.apache.rocketmq.store.CommitLog$GroupCheckService:isAsyncRequestsFull()
+{
+java.util.List $stack1;
+  int $stack2;
+  org.apache.rocketmq.store.CommitLog $stack3;
+  org.apache.rocketmq.store.DefaultMessageStore $stack4;
+  org.apache.rocketmq.store.config.MessageStoreConfig $stack5;
+  int $stack6;
+  boolean $stack8;
+  $stack1=this.requestsWrite;
+ $stack2 = $stack1.size();
+ $stack3=this.this$0;
+ $stack4=$stack3.defaultMessageStore;
+ $stack5 = $stack4.getMessageStoreConfig();
+ $stack6 = $stack5.getMaxAsyncPutMessageRequests();
+ $stack6=($stack6 * 2);
+ if ($stack2<=$stack6) goto label0;
+ $stack8=1;
+ goto label1;
+ label0:$stack8=0;
+ label1:return  $stack8;
+ } 
+

@@ -1,0 +1,23 @@
+static long org.apache.bookkeeper.bookie.DefaultEntryLogger:fileName2LogId(java.lang.String @fileName)
+{
+long $stack2;
+  boolean $stack3;
+  java.lang.String[] $stack6;
+  java.lang.Exception $stack7;
+  org.slf4j.Logger $stack8;
+  java.lang.String fileName;
+fileName=@fileName;
+if (fileName==null) goto label0;
+ $stack3 = fileName.contains((java.lang.CharSequence)".");
+ if ($stack3==0) goto label0;
+ $stack6 = fileName.split("\\.");
+ fileName=$stack6[0];
+ label0:$stack2 = java.lang.Long.parseLong(fileName,16);
+ label1:return  $stack2;
+ label2:$stack7 = catch;
+ $stack8=org.apache.bookkeeper.bookie.DefaultEntryLogger.LOG;
+ $stack8.error("Invalid log file name {} found when trying to convert to logId.",(java.lang.Object)fileName,(java.lang.Object)$stack7);
+ return  -1L;
+ catch java.lang.Exception: label0 - label1 : label2;
+} 
+

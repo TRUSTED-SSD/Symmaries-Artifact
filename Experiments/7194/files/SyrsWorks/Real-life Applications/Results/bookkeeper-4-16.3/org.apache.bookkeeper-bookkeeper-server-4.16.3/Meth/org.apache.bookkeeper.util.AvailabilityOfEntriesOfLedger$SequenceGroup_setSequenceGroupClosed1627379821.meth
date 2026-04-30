@@ -1,0 +1,29 @@
+void org.apache.bookkeeper.util.AvailabilityOfEntriesOfLedger$SequenceGroup:setSequenceGroupClosed()
+{
+long $stack1;
+  long $stack2;
+  byte $stack4;
+  int $stack7;
+  this.isSequenceGroupClosed=1;
+ $stack2=this.lastSequenceStart;
+ $stack1=this.firstSequenceStart;
+ $stack1=($stack2-$stack1);
+ $stack4=($stack1 cmp 0L);
+ if ($stack4!=0) goto label0;
+ $stack7=this.sequenceSize;
+ $stack1=(long) $stack7;
+ goto label1;
+ label0:$stack2=this.lastSequenceStart;
+ $stack1=this.firstSequenceStart;
+ $stack2=($stack2-$stack1);
+ $stack7=this.sequencePeriod;
+ $stack1=(long) $stack7;
+ $stack1=($stack2/$stack1);
+ $stack2=($stack1+1L);
+ $stack7=this.sequenceSize;
+ $stack1=(long) $stack7;
+ $stack1=($stack2 * $stack1);
+ label1:this.numOfEntriesInSequenceGroup=$stack1;
+ return;
+ } 
+

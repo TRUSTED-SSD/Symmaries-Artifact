@@ -1,0 +1,23 @@
+org.apache.rocketmq.remoting.protocol.RemotingCommand org.apache.rocketmq.container.BrokerContainerProcessor:processRequest(io.netty.channel.ChannelHandlerContext ctx,org.apache.rocketmq.remoting.protocol.RemotingCommand @request)
+{
+int $stack3;
+  org.apache.rocketmq.remoting.protocol.RemotingCommand request;
+request=@request;
+$stack3 = request.getCode();
+ switch [$stack3]
+if 0 goto label0;
+if 1 goto label1;
+if 2 goto label2;
+if 3 goto label3;
+goto label4;
+ label2:request = this#org.apache.rocketmq.container.BrokerContainerProcessor:addBroker(ctx,request);
+ return  request;
+ label3:request = this#org.apache.rocketmq.container.BrokerContainerProcessor:removeBroker(ctx,request);
+ return  request;
+ label1:request = this#org.apache.rocketmq.container.BrokerContainerProcessor:getBrokerConfig(ctx,request);
+ return  request;
+ label0:request = this#org.apache.rocketmq.container.BrokerContainerProcessor:updateBrokerConfig(ctx,request);
+ return  request;
+ label4:return  null;
+ } 
+

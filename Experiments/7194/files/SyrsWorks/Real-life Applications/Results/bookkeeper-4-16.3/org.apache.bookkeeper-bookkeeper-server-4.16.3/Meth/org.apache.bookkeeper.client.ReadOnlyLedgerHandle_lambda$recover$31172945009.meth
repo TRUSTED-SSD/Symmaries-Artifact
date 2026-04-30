@@ -1,0 +1,22 @@
+java.util.concurrent.CompletionStage org.apache.bookkeeper.client.ReadOnlyLedgerHandle:lambda$recover$3(org.apache.bookkeeper.proto.BookkeeperInternalCallbacks$ReadEntryListener listener,org.apache.bookkeeper.versioning.Versioned metadata)
+{
+java.lang.Object $stack3;
+  org.apache.bookkeeper.client.api.LedgerMetadata $stack4;
+  boolean $stack5;
+  org.apache.bookkeeper.client.LedgerRecoveryOp $stack6;
+  org.apache.bookkeeper.client.ClientContext $stack7;
+  java.util.concurrent.CompletableFuture $stack9;
+  $stack3 = metadata.getValue();
+ $stack4=(org.apache.bookkeeper.client.api.LedgerMetadata) $stack3;
+ $stack5 = $stack4.isClosed();
+ if ($stack5==0) goto label0;
+ $stack9 = java.util.concurrent.CompletableFuture.completedFuture((java.lang.Object)this);
+ return  $stack9;
+ label0:$stack6=new org.apache.bookkeeper.client.LedgerRecoveryOp;
+ $stack7=this.clientCtx;
+ $stack6#org.apache.bookkeeper.client.LedgerRecoveryOp((org.apache.bookkeeper.client.LedgerHandle)this,$stack7);
+ $stack6 = $stack6.setEntryListener(listener);
+ $stack9 = $stack6.initiate();
+ return  $stack9;
+ } 
+

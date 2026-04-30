@@ -1,0 +1,29 @@
+void org.apache.bookkeeper.client.PendingWriteLacOp:sendWriteLacRequest(int bookieIndex)
+{
+org.apache.bookkeeper.client.ClientContext $stack2;
+  org.apache.bookkeeper.proto.BookieClient $stack3;
+  java.util.List $stack4;
+  java.lang.Object $stack5;
+  org.apache.bookkeeper.client.LedgerHandle $stack6;
+  org.apache.bookkeeper.net.BookieId $stack8;
+  long $stack9;
+  byte[] $stack10;
+  long $stack11;
+  org.apache.bookkeeper.util.ByteBufList $stack12;
+  java.lang.Integer $stack13;
+  $stack2=this.clientCtx;
+ $stack3 = $stack2.getBookieClient();
+ $stack4=this.currentEnsemble;
+ $stack5 = $stack4.get(bookieIndex);
+ $stack8=(org.apache.bookkeeper.net.BookieId) $stack5;
+ $stack6=this.lh;
+ $stack9=$stack6.ledgerId;
+ $stack6=this.lh;
+ $stack10=$stack6.ledgerKey;
+ $stack11=this.lac;
+ $stack12=this.toSend;
+ $stack13 = java.lang.Integer.valueOf(bookieIndex);
+ $stack3.writeLac($stack8,$stack9,$stack10,$stack11,$stack12,(org.apache.bookkeeper.proto.BookkeeperInternalCallbacks$WriteLacCallback)this,(java.lang.Object)$stack13);
+ return;
+ } 
+

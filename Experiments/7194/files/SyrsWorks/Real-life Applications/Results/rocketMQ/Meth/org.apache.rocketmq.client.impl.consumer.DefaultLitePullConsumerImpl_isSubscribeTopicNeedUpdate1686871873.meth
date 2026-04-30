@@ -1,0 +1,21 @@
+boolean org.apache.rocketmq.client.impl.consumer.DefaultLitePullConsumerImpl:isSubscribeTopicNeedUpdate(java.lang.String topic)
+{
+java.util.concurrent.ConcurrentMap subTable;
+  org.apache.rocketmq.client.impl.consumer.RebalanceImpl $stack3;
+  boolean $stack5;
+  $stack3=this.rebalanceImpl;
+ subTable = $stack3.getSubscriptionInner();
+ if (subTable==null) goto label0;
+ $stack5 = subTable.containsKey((java.lang.Object)topic);
+ if ($stack5==0) goto label0;
+ $stack3=this.rebalanceImpl;
+ subTable=$stack3.topicSubscribeInfoTable;
+ $stack5 = subTable.containsKey((java.lang.Object)topic);
+ if ($stack5!=0) goto label1;
+ $stack5=1;
+ goto label2;
+ label1:$stack5=0;
+ label2:return  $stack5;
+ label0:return  0;
+ } 
+

@@ -1,0 +1,55 @@
+    public org.junit.runner.Description getDescription()
+    {
+        org.junit.runners.ParentRunner this;
+        org.junit.runner.Description description, $stack11;
+        java.util.Iterator i$;
+        java.lang.Object child;
+        java.lang.String $stack4;
+        java.lang.'annotation'.Annotation[] $stack5;
+        java.util.Collection $stack7;
+        boolean $stack9;
+
+        this := @this: org.junit.runners.ParentRunner;
+
+        $stack4 = virtualinvoke this.<org.junit.runners.ParentRunner: java.lang.String getName()>();
+/*349*/
+
+        $stack5 = virtualinvoke this.<org.junit.runners.ParentRunner: java.lang.'annotation'.Annotation[] getRunnerAnnotations()>();
+/*349*/
+
+        description = staticinvoke <org.junit.runner.Description: org.junit.runner.Description createSuiteDescription(java.lang.String,java.lang.'annotation'.Annotation[])>($stack4, $stack5);
+/*349*/
+/*349*/
+
+        $stack7 = specialinvoke this.<org.junit.runners.ParentRunner: java.util.Collection getFilteredChildren()>();
+/*351*/
+
+        i$ = interfaceinvoke $stack7.<java.util.Collection: java.util.Iterator iterator()>();
+/*351*/
+/*351*/
+
+     label1:
+        $stack9 = interfaceinvoke i$.<java.util.Iterator: boolean hasNext()>();
+/*351*/
+
+        if $stack9 == 0 goto label2;
+/*351*/
+
+        child = interfaceinvoke i$.<java.util.Iterator: java.lang.Object next()>();
+/*354*/
+/*354*/
+
+        $stack11 = virtualinvoke this.<org.junit.runners.ParentRunner: org.junit.runner.Description describeChild(java.lang.Object)>(child);
+/*352*/
+
+        virtualinvoke description.<org.junit.runner.Description: void addChild(org.junit.runner.Description)>($stack11);
+/*352*/
+
+        goto label1;
+/*352*/
+
+     label2:
+        return description;
+/*354*/
+    }
+

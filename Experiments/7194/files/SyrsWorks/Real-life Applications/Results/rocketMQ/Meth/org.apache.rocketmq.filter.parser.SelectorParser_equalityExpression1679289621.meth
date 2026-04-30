@@ -1,0 +1,73 @@
+org.apache.rocketmq.filter.expression.Expression org.apache.rocketmq.filter.parser.SelectorParser:equalityExpression()
+{
+org.apache.rocketmq.filter.expression.Expression left;
+  org.apache.rocketmq.filter.expression.Expression right;
+  int $stack4;
+  int[] $stack17;
+  boolean $stack18;
+  org.apache.rocketmq.filter.parser.ParseException $stack28;
+  left = this.comparisonExpression();
+ label0:$stack4=this.jjNtk;
+ if ($stack4!=-1) goto label1;
+ $stack4 = this#org.apache.rocketmq.filter.parser.SelectorParser:jj_ntk();
+ goto label2;
+ label1:$stack4=this.jjNtk;
+ label2:switch [$stack4]
+if 0 goto label3;
+if 1 goto label3;
+if 2 goto label3;
+goto label4;
+ label3:goto label5;
+ label4:$stack17=this.jjLa1;
+ $stack4=this.jjGen;
+ $stack17[2]=$stack4;
+ goto label6;
+ label5:$stack4=this.jjNtk;
+ if ($stack4!=-1) goto label7;
+ $stack4 = this#org.apache.rocketmq.filter.parser.SelectorParser:jj_ntk();
+ goto label8;
+ label7:$stack4=this.jjNtk;
+ label8:switch [$stack4]
+if 0 goto label9;
+if 1 goto label10;
+goto label11;
+ label9:this#org.apache.rocketmq.filter.parser.SelectorParser:jj_consume_token(22);
+ right = this.comparisonExpression();
+ left = org.apache.rocketmq.filter.expression.ComparisonExpression.createEqual(left,right);
+ goto label0;
+ label10:this#org.apache.rocketmq.filter.parser.SelectorParser:jj_consume_token(23);
+ right = this.comparisonExpression();
+ left = org.apache.rocketmq.filter.expression.ComparisonExpression.createNotEqual(left,right);
+ goto label0;
+ label11:$stack17=this.jjLa1;
+ $stack4=this.jjGen;
+ $stack17[3]=$stack4;
+ $stack18 = this#org.apache.rocketmq.filter.parser.SelectorParser:jj_2_1(2);
+ if ($stack18==0) goto label12;
+ this#org.apache.rocketmq.filter.parser.SelectorParser:jj_consume_token(16);
+ this#org.apache.rocketmq.filter.parser.SelectorParser:jj_consume_token(15);
+ left = org.apache.rocketmq.filter.expression.ComparisonExpression.createIsNull(left);
+ goto label0;
+ label12:$stack4=this.jjNtk;
+ if ($stack4!=-1) goto label13;
+ $stack4 = this#org.apache.rocketmq.filter.parser.SelectorParser:jj_ntk();
+ goto label14;
+ label13:$stack4=this.jjNtk;
+ label14:switch [$stack4]
+if 0 goto label15;
+goto label16;
+ label15:this#org.apache.rocketmq.filter.parser.SelectorParser:jj_consume_token(16);
+ this#org.apache.rocketmq.filter.parser.SelectorParser:jj_consume_token(8);
+ this#org.apache.rocketmq.filter.parser.SelectorParser:jj_consume_token(15);
+ left = org.apache.rocketmq.filter.expression.ComparisonExpression.createIsNotNull(left);
+ goto label0;
+ label16:$stack17=this.jjLa1;
+ $stack4=this.jjGen;
+ $stack17[4]=$stack4;
+ this#org.apache.rocketmq.filter.parser.SelectorParser:jj_consume_token(-1);
+ $stack28=new org.apache.rocketmq.filter.parser.ParseException;
+ $stack28#org.apache.rocketmq.filter.parser.ParseException();
+ throw $stack28;
+ label6:return  left;
+ } 
+

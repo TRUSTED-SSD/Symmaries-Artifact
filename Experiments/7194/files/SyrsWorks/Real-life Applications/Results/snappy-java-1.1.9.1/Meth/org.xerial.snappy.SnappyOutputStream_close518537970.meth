@@ -1,0 +1,38 @@
+void org.xerial.snappy.SnappyOutputStream:close()
+{
+boolean $stack2;
+  java.io.OutputStream $stack3;
+  byte[] $stack4;
+  org.xerial.snappy.buffer.BufferAllocator $stack5;
+  java.lang.Throwable $stack8;
+  $stack2=this.closed;
+ if ($stack2==0) goto label0;
+ return;
+ label0:this.flush();
+ $stack3=this.out;
+ $stack3.close();
+ label1:this.closed=1;
+ $stack5=this.inputBufferAllocator;
+ $stack4=this.inputBuffer;
+ $stack5.release($stack4);
+ $stack5=this.outputBufferAllocator;
+ $stack4=this.outputBuffer;
+ $stack5.release($stack4);
+ this.inputBuffer=null;
+ this.outputBuffer=null;
+ goto label2;
+ label3:$stack8 = catch;
+ this.closed=1;
+ $stack5=this.inputBufferAllocator;
+ $stack4=this.inputBuffer;
+ $stack5.release($stack4);
+ $stack5=this.outputBufferAllocator;
+ $stack4=this.outputBuffer;
+ $stack5.release($stack4);
+ this.inputBuffer=null;
+ this.outputBuffer=null;
+ throw $stack8;
+ label2:return;
+ catch java.lang.Throwable: label0 - label1 : label3;
+} 
+

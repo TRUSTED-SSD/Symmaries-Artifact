@@ -1,0 +1,20 @@
+static void org.apache.bookkeeper.util.collections.ConcurrentOpenHashSet$Section:insertValueNoLock(java.lang.Object[] values,java.lang.Object value)
+{
+int bucket;
+  long $stack4;
+  java.lang.Object $stack8;
+  java.lang.Object $stack14;
+  $stack4 = org.apache.bookkeeper.util.collections.ConcurrentOpenHashSet.hash(value);
+ bucket=(int) $stack4;
+ label0:$stack4=(long) bucket;
+ bucket=#values;
+ bucket = org.apache.bookkeeper.util.collections.ConcurrentOpenHashSet.signSafeMod($stack4,bucket);
+ $stack14=values[bucket];
+ $stack8 = org.apache.bookkeeper.util.collections.ConcurrentOpenHashSet.access$500();
+ if ($stack14!=$stack8) goto label1;
+ values[bucket]=value;
+ return;
+ label1:bucket=(bucket+1);
+ goto label0;
+ } 
+

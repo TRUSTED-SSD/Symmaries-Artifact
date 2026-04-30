@@ -1,0 +1,46 @@
+void org.apache.rocketmq.client.consumer.store.LocalFileOffsetStore:load()
+{
+org.apache.rocketmq.client.consumer.store.OffsetSerializeWrapper offsetSerializeWrapper;
+  java.util.Iterator l2;
+  java.util.Map$Entry mqEntry;
+  java.util.concurrent.atomic.AtomicLong offset;
+  java.util.concurrent.ConcurrentMap $stack6;
+  java.util.concurrent.ConcurrentMap $stack8;
+  java.util.Set $stack10;
+  boolean $stack12;
+  java.lang.Object $stack13;
+  java.lang.Object[] $stack15;
+  java.lang.String $stack16;
+  org.apache.rocketmq.logging.org.slf4j.Logger $stack17;
+  long $stack22;
+  java.lang.Long $stack23;
+  offsetSerializeWrapper = this#org.apache.rocketmq.client.consumer.store.LocalFileOffsetStore:readLocalOffset();
+ if (offsetSerializeWrapper==null) goto label0;
+ $stack6 = offsetSerializeWrapper.getOffsetTable();
+ if ($stack6==null) goto label0;
+ $stack6=this.offsetTable;
+ $stack8 = offsetSerializeWrapper.getOffsetTable();
+ $stack6.putAll((java.util.Map)$stack8);
+ $stack6 = offsetSerializeWrapper.getOffsetTable();
+ $stack10 = $stack6.entrySet();
+ l2 = $stack10.iterator();
+ label1:$stack12 = l2.hasNext();
+ if ($stack12==0) goto label0;
+ $stack13 = l2.next();
+ mqEntry=(java.util.Map$Entry) $stack13;
+ $stack13 = mqEntry.getValue();
+ offset=(java.util.concurrent.atomic.AtomicLong) $stack13;
+ $stack17=org.apache.rocketmq.client.consumer.store.LocalFileOffsetStore.log;
+ $stack15=new java.lang.Object[3];
+ $stack16=this.groupName;
+ $stack15[0]=$stack16;
+ $stack13 = mqEntry.getKey();
+ $stack15[1]=$stack13;
+ $stack22 = offset.get();
+ $stack23 = java.lang.Long.valueOf($stack22);
+ $stack15[2]=$stack23;
+ $stack17.info("load consumer\'s offset, {} {} {}",$stack15);
+ goto label1;
+ label0:return;
+ } 
+

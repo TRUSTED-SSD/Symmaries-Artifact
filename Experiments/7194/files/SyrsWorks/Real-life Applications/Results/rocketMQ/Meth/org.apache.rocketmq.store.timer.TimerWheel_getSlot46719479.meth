@@ -1,0 +1,23 @@
+org.apache.rocketmq.store.timer.Slot org.apache.rocketmq.store.timer.TimerWheel:getSlot(long timeMs)
+{
+org.apache.rocketmq.store.timer.Slot slot;
+  int $stack5;
+  long $stack6;
+  long $stack11;
+  byte $stack12;
+  slot = this.getRawSlot(timeMs);
+ $stack11=slot.timeMs;
+ $stack5=this.precisionMs;
+ $stack6=(long) $stack5;
+ $stack6=(timeMs/$stack6);
+ $stack5=this.precisionMs;
+ timeMs=(long) $stack5;
+ timeMs=($stack6 * timeMs);
+ $stack12=($stack11 cmp timeMs);
+ if ($stack12==0) goto label0;
+ slot=new org.apache.rocketmq.store.timer.Slot;
+ slot#org.apache.rocketmq.store.timer.Slot(-1L,-1L,-1L);
+ return  slot;
+ label0:return  slot;
+ } 
+

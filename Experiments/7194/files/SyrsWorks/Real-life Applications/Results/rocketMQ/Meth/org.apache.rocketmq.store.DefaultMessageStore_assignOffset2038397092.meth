@@ -1,0 +1,13 @@
+void org.apache.rocketmq.store.DefaultMessageStore:assignOffset(org.apache.rocketmq.common.message.MessageExtBrokerInner msg,short messageNum)
+{
+int tranType;
+  org.apache.rocketmq.store.queue.ConsumeQueueStore $stack6;
+  tranType = msg.getSysFlag();
+ tranType = org.apache.rocketmq.common.sysflag.MessageSysFlag.getTransactionValue(tranType);
+ if (tranType==0) goto label0;
+ if (tranType!=8) goto label1;
+ label0:$stack6=this.consumeQueueStore;
+ $stack6.assignQueueOffset(msg,messageNum);
+ label1:return;
+ } 
+

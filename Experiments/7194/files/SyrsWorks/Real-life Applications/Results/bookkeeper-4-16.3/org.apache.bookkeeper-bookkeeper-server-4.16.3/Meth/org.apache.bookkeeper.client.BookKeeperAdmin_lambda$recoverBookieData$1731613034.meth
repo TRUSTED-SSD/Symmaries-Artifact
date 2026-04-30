@@ -1,0 +1,29 @@
+static void org.apache.bookkeeper.client.BookKeeperAdmin:lambda$recoverBookieData$1(long lid,int rc,java.lang.Object ctx)
+{
+org.apache.bookkeeper.client.BookKeeperAdmin$SyncObject syncObject;
+  org.apache.bookkeeper.client.BookKeeperAdmin$SyncObject l5;
+  java.lang.Throwable l6;
+  org.slf4j.Logger $stack7;
+  java.lang.Long $stack9;
+  java.lang.Object $stack10;
+  $stack7=org.apache.bookkeeper.client.BookKeeperAdmin.LOG;
+ $stack9 = java.lang.Long.valueOf(lid);
+ $stack10 = org.apache.bookkeeper.client.api.BKException.codeLogger(rc);
+ dummyClass.lowSink("Recover bookie for {} completed with rc : {}");
+$stack7.info("Recover bookie for {} completed with rc : {}",(java.lang.Object)$stack9,$stack10);
+ syncObject=(org.apache.bookkeeper.client.BookKeeperAdmin$SyncObject) ctx;
+ l5=syncObject;
+ monitorenter syncObject;
+ label0:syncObject.rc=rc;
+ syncObject.value=1;
+ syncObject.notify();
+ monitorexit syncObject;
+ label1:goto label2;
+ label3:l6 = catch;
+ monitorexit syncObject;
+ label4:throw l6;
+ label2:return;
+ catch java.lang.Throwable: label0 - label1 : label3;
+catch java.lang.Throwable: label3 - label4 : label3;
+} 
+

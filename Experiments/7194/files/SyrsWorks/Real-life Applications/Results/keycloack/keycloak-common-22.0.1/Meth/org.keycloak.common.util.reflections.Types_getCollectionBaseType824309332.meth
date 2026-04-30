@@ -1,0 +1,32 @@
+static java.lang.Class org.keycloak.common.util.reflections.Types:getCollectionBaseType(java.lang.Class @type,java.lang.reflect.Type @genericType)
+{
+boolean $stack4;
+  java.lang.reflect.Type[] $stack10;
+  java.lang.reflect.ParameterizedType tmp$142393648;
+  java.lang.reflect.GenericArrayType tmp$2098302262;
+  java.lang.reflect.Type genericType;
+java.lang.Class type;
+type=@type;
+genericType=@genericType;
+$stack4=genericType instanceof java.lang.reflect.ParameterizedType;
+ if ($stack4==0) goto label0;
+ genericType=(java.lang.reflect.ParameterizedType) genericType;
+ tmp$142393648=(java.lang.reflect.ParameterizedType) genericType;
+ $stack10 = tmp$142393648.getActualTypeArguments();
+ genericType=$stack10[0];
+ type = org.keycloak.common.util.reflections.Types.getRawType(genericType);
+ return  type;
+ label0:$stack4=genericType instanceof java.lang.reflect.GenericArrayType;
+ if ($stack4==0) goto label1;
+ genericType=(java.lang.reflect.GenericArrayType) genericType;
+ tmp$2098302262=(java.lang.reflect.GenericArrayType) genericType;
+ genericType = tmp$2098302262.getGenericComponentType();
+ type = org.keycloak.common.util.reflections.Types.getRawType(genericType);
+ return  type;
+ label1:$stack4 = type.isArray();
+ if ($stack4==0) goto label2;
+ type = type.getComponentType();
+ return  type;
+ label2:return  null;
+ } 
+

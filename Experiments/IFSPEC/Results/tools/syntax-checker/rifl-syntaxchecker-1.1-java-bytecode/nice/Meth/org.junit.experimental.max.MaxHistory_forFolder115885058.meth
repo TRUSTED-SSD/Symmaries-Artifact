@@ -1,0 +1,18 @@
+static org.junit.experimental.max.MaxHistory org.junit.experimental.max.MaxHistory:forFolder(java.io.File file)
+{
+boolean $stack2;
+  org.junit.experimental.max.MaxHistory $stack3;
+  org.junit.experimental.max.CouldNotReadCoreException $stack5;
+  $stack2 = file.exists();
+ if ($stack2==0) goto label0;
+ label1:$stack3 = org.junit.experimental.max.MaxHistory.readHistory(file);
+ label2:return  $stack3;
+ label3:$stack5 = catch;
+ $stack5.printStackTrace();
+ file.delete();
+ label0:$stack3=new org.junit.experimental.max.MaxHistory;
+ $stack3#org.junit.experimental.max.MaxHistory(file);
+ return  $stack3;
+ catch org.junit.experimental.max.CouldNotReadCoreException: label1 - label2 : label3;
+} 
+

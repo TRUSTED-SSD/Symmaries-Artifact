@@ -1,0 +1,45 @@
+boolean java.util.IdentityHashMap$KeySpliterator:tryAdvance(java.util.function.Consumer r1)
+{
+java.lang.Object[] r2;
+  int i0;
+  java.lang.Object r3;
+  java.util.IdentityHashMap $r4;
+  int $i1;
+  int $i2;
+  int $i3;
+  int $i4;
+  java.lang.Object $r5;
+  java.util.IdentityHashMap $r6;
+  int $i5;
+  int $i6;
+  java.util.ConcurrentModificationException $r7;
+  java.lang.NullPointerException $r8;
+  if (r1!=null) goto label0;
+ $r8=new java.lang.NullPointerException;
+ $r8#java.lang.NullPointerException:init();
+ throw $r8;
+ label0:$r4=this.map;
+ r2=$r4.table;
+ i0 = this.getFence();
+ label1:$i1=this.index;
+ if ($i1>=i0) goto label2;
+ $i2=this.index;
+ r3=r2[$i2];
+ $i3=this.index;
+ $i4=($i3+2);
+ this.index=$i4;
+ if (r3==null) goto label3;
+ $r5 = java.util.IdentityHashMap.unmaskNull(r3);
+ r1.accept($r5);
+ $r6=this.map;
+ $i6=$r6.modCount;
+ $i5=this.expectedModCount;
+ if ($i6==$i5) goto label4;
+ $r7=new java.util.ConcurrentModificationException;
+ $r7#java.util.ConcurrentModificationException:init();
+ throw $r7;
+ label4:return  1;
+ label3:goto label1;
+ label2:return  0;
+ }  
+

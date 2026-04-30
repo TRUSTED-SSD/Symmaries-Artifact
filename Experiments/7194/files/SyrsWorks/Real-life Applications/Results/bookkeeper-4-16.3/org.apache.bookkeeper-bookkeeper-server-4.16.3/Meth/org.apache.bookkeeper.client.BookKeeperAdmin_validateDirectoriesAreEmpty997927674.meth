@@ -1,0 +1,24 @@
+static boolean org.apache.bookkeeper.client.BookKeeperAdmin:validateDirectoriesAreEmpty(java.io.File[] dirs,java.lang.String typeOfDir)
+{
+int l3;
+  int l4;
+  java.io.File dir;
+  java.io.File[] dirFiles;
+  int $stack10;
+  org.slf4j.Logger $stack11;
+  l3=#dirs;
+ l4=0;
+ label0:if (l4>=l3) goto label1;
+ dir=dirs[l4];
+ dirFiles = dir.listFiles();
+ if (dirFiles==null) goto label2;
+ $stack10=#dirFiles;
+ if ($stack10==0) goto label2;
+ $stack11=org.apache.bookkeeper.client.BookKeeperAdmin.LOG;
+ $stack11.error("{}: {} is existing and its not empty, try formatting the bookie",(java.lang.Object)typeOfDir,(java.lang.Object)dir);
+ return  0;
+ label2:l4=(l4+1);
+ goto label0;
+ label1:return  1;
+ } 
+

@@ -1,0 +1,18 @@
+boolean org.apache.rocketmq.store.ReferenceResource:hold()
+{
+boolean $stack1;
+  java.util.concurrent.atomic.AtomicLong $stack2;
+  long $stack3;
+  byte $stack4;
+  $stack1 = this.isAvailable();
+ if ($stack1==0) goto label0;
+ $stack2=this.refCount;
+ $stack3 = $stack2.getAndIncrement();
+ $stack4=($stack3 cmp 0L);
+ if ($stack4<=0) goto label1;
+ return  1;
+ label1:$stack2=this.refCount;
+ $stack2.getAndDecrement();
+ label0:return  0;
+ } 
+

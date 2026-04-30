@@ -1,0 +1,19 @@
+boolean org.apache.bookkeeper.client.PendingAddOp:maybeTimeout()
+{
+long $stack1;
+  org.apache.bookkeeper.client.ClientContext $stack3;
+  org.apache.bookkeeper.client.ClientInternalConf $stack4;
+  long $stack5;
+  byte $stack6;
+  $stack1=this.requestTimeNanos;
+ $stack1 = org.apache.bookkeeper.util.MathUtils.elapsedNanos($stack1);
+ $stack3=this.clientCtx;
+ $stack4 = $stack3.getConf();
+ $stack5=$stack4.addEntryQuorumTimeoutNanos;
+ $stack6=($stack1 cmp $stack5);
+ if ($stack6<0) goto label0;
+ this.timeoutQuorumWait();
+ return  1;
+ label0:return  0;
+ } 
+

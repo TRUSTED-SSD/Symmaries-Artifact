@@ -1,0 +1,15 @@
+void org.apache.bookkeeper.proto.BookieClientImpl:addEntry(org.apache.bookkeeper.net.BookieId addr,long ledgerId,byte[] masterKey,long entryId,io.netty.util.ReferenceCounted toSend,org.apache.bookkeeper.proto.BookkeeperInternalCallbacks$WriteCallback cb,java.lang.Object ctx,int options,boolean allowFastFail,java.util.EnumSet writeFlags)
+{
+org.apache.bookkeeper.proto.PerChannelBookieClientPool client;
+  org.apache.bookkeeper.proto.BookieClientImpl$ChannelReadyForAddEntryCallback $stack16;
+  client = this.lookupClient(addr);
+ if (client!=null) goto label0;
+ options = this#org.apache.bookkeeper.proto.BookieClientImpl:getRc(-8);
+ this#org.apache.bookkeeper.proto.BookieClientImpl:completeAdd(options,ledgerId,entryId,addr,cb,ctx);
+ return;
+ label0:toSend.retain();
+ $stack16 = org.apache.bookkeeper.proto.BookieClientImpl$ChannelReadyForAddEntryCallback.create(this,toSend,ledgerId,entryId,addr,ctx,cb,options,masterKey,allowFastFail,writeFlags);
+ client.obtain((org.apache.bookkeeper.proto.BookkeeperInternalCallbacks$GenericCallback)$stack16,ledgerId);
+ return;
+ } 
+

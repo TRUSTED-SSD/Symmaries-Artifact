@@ -1,0 +1,58 @@
+java.util.List org.apache.bookkeeper.client.TopologyAwareEnsemblePlacementPolicy$DNSResolverDecorator:resolve(java.util.List @names)
+{
+java.lang.String defaultRack;
+  java.util.List rNames;
+  int i;
+  java.util.function.Supplier $stack5;
+  java.lang.Object $stack6;
+  org.apache.bookkeeper.net.DNSToSwitchMapping $stack8;
+  org.slf4j.Logger $stack10;
+  java.util.ArrayList $stack11;
+  int $stack13;
+  org.apache.bookkeeper.stats.Counter $stack14;
+  java.util.List names;
+names=@names;
+if (names!=null) goto label0;
+ names = java.util.Collections.emptyList();
+ return  names;
+ label0:$stack5=this.defaultRackSupplier;
+ $stack6 = $stack5.get();
+ defaultRack=(java.lang.String) $stack6;
+ com.google.common.base.Preconditions.checkNotNull((java.lang.Object)defaultRack,(java.lang.Object)"Default rack cannot be null");
+ $stack8=this.resolver;
+ rNames = $stack8.resolve(names);
+ if (rNames==null) goto label1;
+ i = rNames.size();
+ $stack13 = names.size();
+ if (i!=$stack13) goto label1;
+ i=0;
+ label2:$stack13 = rNames.size();
+ if (i>=$stack13) goto label3;
+ $stack6 = rNames.get(i);
+ if ($stack6!=null) goto label4;
+ $stack10=org.apache.bookkeeper.client.TopologyAwareEnsemblePlacementPolicy.LOG;
+ $stack6 = names.get(i);
+ $stack10.warn("Failed to resolve network location for {}, using default rack for it : {}.",$stack6,(java.lang.Object)defaultRack);
+ $stack14=this.failedToResolveNetworkLocationCounter;
+ $stack14.inc();
+ rNames.set(i,(java.lang.Object)defaultRack);
+ label4:i=(i+1);
+ goto label2;
+ label3:return  rNames;
+ label1:$stack10=org.apache.bookkeeper.client.TopologyAwareEnsemblePlacementPolicy.LOG;
+ $stack10.warn("Failed to resolve network location for {}, using default rack for them : {}.",(java.lang.Object)names,(java.lang.Object)defaultRack);
+ $stack11=new java.util.ArrayList;
+ i = names.size();
+ $stack11#java.util.ArrayList(i);
+ rNames=$stack11;
+ i=0;
+ label5:$stack13 = names.size();
+ if (i>=$stack13) goto label6;
+ $stack14=this.failedToResolveNetworkLocationCounter;
+ $stack14.inc();
+ $stack11.add((java.lang.Object)defaultRack);
+ i=(i+1);
+ goto label5;
+ label6:return  $stack11;
+ } 
+

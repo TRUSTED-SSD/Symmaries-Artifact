@@ -1,0 +1,28 @@
+static java.lang.String org.keycloak.adapters.CookieTokenStore:getCookiePath(org.keycloak.adapters.KeycloakDeployment deployment,org.keycloak.adapters.spi.HttpFacade facade)
+{
+java.lang.String path;
+  java.lang.String contextPath;
+  java.lang.StringBuilder cookiePath;
+  boolean $stack8;
+  path = deployment.getAdapterStateCookiePath();
+ if (path!=null) goto label0;
+ path="";
+ goto label1;
+ label0:path = deployment.getAdapterStateCookiePath();
+ path = path.trim();
+ label1:$stack8 = path.startsWith("/");
+ if ($stack8==0) goto label2;
+ return  path;
+ label2:contextPath = org.keycloak.adapters.CookieTokenStore.getContextPath(facade);
+ cookiePath=new java.lang.StringBuilder;
+ cookiePath#java.lang.StringBuilder(contextPath);
+ $stack8 = contextPath.endsWith("/");
+ if ($stack8!=0) goto label3;
+ $stack8 = path.isEmpty();
+ if ($stack8!=0) goto label3;
+ cookiePath.append("/");
+ label3:cookiePath = cookiePath.append(path);
+ path = cookiePath.toString();
+ return  path;
+ } 
+

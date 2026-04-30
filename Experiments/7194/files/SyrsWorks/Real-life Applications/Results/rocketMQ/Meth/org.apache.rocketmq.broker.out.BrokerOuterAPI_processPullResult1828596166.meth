@@ -1,0 +1,52 @@
+org.apache.rocketmq.client.consumer.PullResult org.apache.rocketmq.broker.out.BrokerOuterAPI:processPullResult(org.apache.rocketmq.client.impl.consumer.PullResultExt pullResult,java.lang.String brokerName,int queueId)
+{
+java.nio.ByteBuffer byteBuffer;
+  java.util.List msgList;
+  java.util.Iterator l6;
+  org.apache.rocketmq.common.message.MessageExt msg;
+  java.lang.String traFlag;
+  org.apache.rocketmq.client.consumer.PullStatus $stack9;
+  org.apache.rocketmq.client.consumer.PullStatus $stack10;
+  byte[] $stack11;
+  boolean $stack15;
+  java.lang.Object $stack19;
+  long $stack23;
+  java.lang.Long $stack28;
+  long $stack32;
+  $stack9=org.apache.rocketmq.client.consumer.PullStatus.FOUND;
+ $stack10 = pullResult.getPullStatus();
+ if ($stack9!=$stack10) goto label0;
+ $stack11 = pullResult.getMessageBinary();
+ byteBuffer = java.nio.ByteBuffer.wrap($stack11);
+ msgList = org.apache.rocketmq.common.message.MessageDecoder.decodesBatch(byteBuffer,(boolean)1,(boolean)1,(boolean)1);
+ l6 = msgList.iterator();
+ label1:$stack15 = l6.hasNext();
+ if ($stack15==0) goto label2;
+ $stack19 = l6.next();
+ msg=(org.apache.rocketmq.common.message.MessageExt) $stack19;
+ traFlag = msg.getProperty("TRAN_MSG");
+ $stack15 = java.lang.Boolean.parseBoolean(traFlag);
+ if ($stack15==0) goto label3;
+ traFlag = msg.getProperty("UNIQ_KEY");
+ msg.setTransactionId(traFlag);
+ label3:$stack23 = pullResult.getMinOffset();
+ traFlag = java.lang.Long.toString($stack23);
+ org.apache.rocketmq.common.message.MessageAccessor.putProperty((org.apache.rocketmq.common.message.Message)msg,"MIN_OFFSET",traFlag);
+ $stack23 = pullResult.getMaxOffset();
+ traFlag = java.lang.Long.toString($stack23);
+ org.apache.rocketmq.common.message.MessageAccessor.putProperty((org.apache.rocketmq.common.message.Message)msg,"MAX_OFFSET",traFlag);
+ msg.setBrokerName(brokerName);
+ msg.setQueueId(queueId);
+ $stack28 = pullResult.getOffsetDelta();
+ if ($stack28==null) goto label4;
+ $stack28 = pullResult.getOffsetDelta();
+ $stack23 = $stack28.longValue();
+ $stack32 = msg.getQueueOffset();
+ $stack23=($stack23+$stack32);
+ msg.setQueueOffset($stack23);
+ label4:goto label1;
+ label2:pullResult.setMsgFoundList(msgList);
+ label0:pullResult.setMessageBinary(null);
+ return  pullResult;
+ } 
+

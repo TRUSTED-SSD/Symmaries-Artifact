@@ -1,0 +1,42 @@
+javax.security.auth.login.LoginContext org.apache.bookkeeper.sasl.SASLClientProviderFactory:loginClient()
+{
+boolean systemRole;
+  java.lang.String configurationEntry;
+  javax.security.auth.login.LoginContext loginContext;
+  org.apache.bookkeeper.conf.ClientConfiguration $stack5;
+  java.lang.String $stack7;
+  javax.security.auth.login.Configuration $stack11;
+  org.apache.bookkeeper.sasl.SaslClientState$ClientCallbackHandler $stack14;
+  org.slf4j.Logger $stack15;
+  javax.security.auth.login.AppConfigurationEntry[] $stack19;
+  javax.security.auth.login.LoginException $stack20;
+  configurationEntry="system";
+ $stack5=this.clientConfiguration;
+ $stack7 = $stack5.getClientRole();
+ systemRole = configurationEntry.equals((java.lang.Object)$stack7);
+ if (systemRole==0) goto label0;
+ $stack5=this.clientConfiguration;
+ configurationEntry = $stack5.getString("saslJaasAuditorSectionName","Auditor");
+ goto label1;
+ label0:$stack5=this.clientConfiguration;
+ configurationEntry = $stack5.getString("saslJaasClientSectionName","BookKeeper");
+ label1:$stack11 = javax.security.auth.login.Configuration.getConfiguration();
+ $stack19 = $stack11.getAppConfigurationEntry(configurationEntry);
+ if ($stack19!=null) goto label2;
+ $stack15=org.apache.bookkeeper.sasl.SASLClientProviderFactory.LOG;
+ dummyClass.lowSink("No JAAS Configuration found with section BookKeeper");
+$stack15.info("No JAAS Configuration found with section BookKeeper");
+ return  null;
+ label2:loginContext=new javax.security.auth.login.LoginContext;
+ $stack14=new org.apache.bookkeeper.sasl.SaslClientState$ClientCallbackHandler;
+ $stack14#org.apache.bookkeeper.sasl.SaslClientState$ClientCallbackHandler(null);
+ loginContext#javax.security.auth.login.LoginContext(configurationEntry,(javax.security.auth.callback.CallbackHandler)$stack14);
+ loginContext.login();
+ label3:return  loginContext;
+ label4:$stack20 = catch;
+ $stack15=org.apache.bookkeeper.sasl.SASLClientProviderFactory.LOG;
+ $stack15.error("Error JAAS Configuration subject",(java.lang.Throwable)$stack20);
+ return  null;
+ catch javax.security.auth.login.LoginException: label2 - label3 : label4;
+} 
+

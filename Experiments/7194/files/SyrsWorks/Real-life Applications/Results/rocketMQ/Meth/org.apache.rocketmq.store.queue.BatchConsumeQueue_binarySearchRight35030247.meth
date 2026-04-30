@@ -1,0 +1,33 @@
+static int org.apache.rocketmq.store.queue.BatchConsumeQueue:binarySearchRight(java.nio.ByteBuffer byteBuffer,int left,int right,int unitSize,int unitShift,long targetValue)
+{
+int mid;
+  long tmpValue;
+  int $stack13;
+  byte $stack15;
+  mid=-1;
+ label0:if (left>right) goto label1;
+ mid=(left+right);
+ mid=(mid/2);
+ mid = org.apache.rocketmq.store.queue.BatchConsumeQueue.ceil(mid);
+ $stack13=(mid+unitShift);
+ tmpValue = byteBuffer.getLong($stack13);
+ if (mid!=right) goto label2;
+ $stack15=(tmpValue cmp targetValue);
+ if ($stack15<0) goto label3;
+ return  mid;
+ label3:return  -1;
+ label2:if (mid!=left) goto label4;
+ $stack15=(tmpValue cmp targetValue);
+ if ($stack15<0) goto label5;
+ return  mid;
+ label5:left=(mid+unitSize);
+ goto label6;
+ label4:$stack15=(tmpValue cmp targetValue);
+ if ($stack15>=0) goto label7;
+ left=(mid+unitSize);
+ goto label6;
+ label7:right=mid;
+ label6:goto label0;
+ label1:return  -1;
+ } 
+

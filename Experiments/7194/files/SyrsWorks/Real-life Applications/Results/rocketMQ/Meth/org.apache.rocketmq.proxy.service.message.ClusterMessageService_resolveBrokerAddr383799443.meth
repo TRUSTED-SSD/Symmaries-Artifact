@@ -1,0 +1,26 @@
+java.lang.String org.apache.rocketmq.proxy.service.message.ClusterMessageService:resolveBrokerAddr(java.lang.String @brokerName)
+{
+org.apache.rocketmq.proxy.service.route.TopicRouteService $stack3;
+  java.lang.String $stack4;
+  java.lang.Throwable $stack5;
+  org.apache.rocketmq.proxy.common.ProxyException $stack6;
+  java.lang.StringBuilder $stack7;
+  org.apache.rocketmq.proxy.common.ProxyExceptionCode $stack8;
+  java.lang.String brokerName;
+brokerName=@brokerName;
+label0:$stack3=this.topicRouteService;
+ $stack4 = $stack3.getBrokerAddr(brokerName);
+ label1:return  $stack4;
+ label2:$stack5 = catch;
+ $stack6=new org.apache.rocketmq.proxy.common.ProxyException;
+ $stack8=org.apache.rocketmq.proxy.common.ProxyExceptionCode.INVALID_BROKER_NAME;
+ $stack7=new java.lang.StringBuilder;
+ $stack7#java.lang.StringBuilder();
+ $stack7 = $stack7.append("cannot find broker ");
+ $stack7 = $stack7.append(brokerName);
+ brokerName = $stack7.toString();
+ $stack6#org.apache.rocketmq.proxy.common.ProxyException($stack8,brokerName,$stack5);
+ throw $stack6;
+ catch java.lang.Throwable: label0 - label1 : label2;
+} 
+

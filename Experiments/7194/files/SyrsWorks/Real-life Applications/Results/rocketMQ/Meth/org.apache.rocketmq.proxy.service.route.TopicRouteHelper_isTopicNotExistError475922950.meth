@@ -1,0 +1,35 @@
+static boolean org.apache.rocketmq.proxy.service.route.TopicRouteHelper:isTopicNotExistError(java.lang.Throwable @e)
+{
+int code;
+  boolean $stack4;
+  org.apache.rocketmq.client.exception.MQClientException $stack6;
+  org.apache.rocketmq.client.exception.MQBrokerException $stack15;
+  java.lang.Throwable e;
+e=@e;
+$stack4=e instanceof org.apache.rocketmq.client.exception.MQBrokerException;
+ if ($stack4==0) goto label0;
+ $stack15=(org.apache.rocketmq.client.exception.MQBrokerException) e;
+ code = $stack15.getResponseCode();
+ if (code!=17) goto label0;
+ return  1;
+ label0:$stack4=e instanceof org.apache.rocketmq.client.exception.MQClientException;
+ if ($stack4==0) goto label1;
+ $stack6=(org.apache.rocketmq.client.exception.MQClientException) e;
+ code = $stack6.getResponseCode();
+ if (code==17) goto label2;
+ if (code!=10005) goto label3;
+ label2:return  1;
+ label3:e = e.getCause();
+ $stack4=e instanceof org.apache.rocketmq.client.exception.MQClientException;
+ if ($stack4==0) goto label1;
+ $stack6=(org.apache.rocketmq.client.exception.MQClientException) e;
+ code = $stack6.getResponseCode();
+ if (code==17) goto label4;
+ if (code!=10005) goto label5;
+ label4:$stack4=1;
+ goto label6;
+ label5:$stack4=0;
+ label6:return  $stack4;
+ label1:return  0;
+ } 
+

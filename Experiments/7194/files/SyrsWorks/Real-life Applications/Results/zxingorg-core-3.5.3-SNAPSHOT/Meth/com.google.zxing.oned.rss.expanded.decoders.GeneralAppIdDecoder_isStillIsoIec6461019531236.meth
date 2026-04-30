@@ -1,0 +1,38 @@
+boolean com.google.zxing.oned.rss.expanded.decoders.GeneralAppIdDecoder:isStillIsoIec646(int pos)
+{
+int fiveBitValue;
+  com.google.zxing.common.BitArray $stack5;
+  int $stack7;
+  boolean $stack17;
+  fiveBitValue=(pos+5);
+ $stack5=this.information;
+ $stack7 = $stack5.getSize();
+ if (fiveBitValue<=$stack7) goto label0;
+ return  0;
+ label0:fiveBitValue = this.extractNumericValueFromBitArray(pos,5);
+ if (fiveBitValue<5) goto label1;
+ if (fiveBitValue>=16) goto label1;
+ return  1;
+ label1:fiveBitValue=(pos+7);
+ $stack5=this.information;
+ $stack7 = $stack5.getSize();
+ if (fiveBitValue<=$stack7) goto label2;
+ return  0;
+ label2:fiveBitValue = this.extractNumericValueFromBitArray(pos,7);
+ if (fiveBitValue<64) goto label3;
+ if (fiveBitValue>=116) goto label3;
+ return  1;
+ label3:fiveBitValue=(pos+8);
+ $stack5=this.information;
+ $stack7 = $stack5.getSize();
+ if (fiveBitValue<=$stack7) goto label4;
+ return  0;
+ label4:pos = this.extractNumericValueFromBitArray(pos,8);
+ if (pos<232) goto label5;
+ if (pos>=253) goto label5;
+ $stack17=1;
+ goto label6;
+ label5:$stack17=0;
+ label6:return  $stack17;
+ } 
+

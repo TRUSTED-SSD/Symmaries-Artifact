@@ -1,0 +1,20 @@
+void org.apache.bookkeeper.bookie.BookieImpl$6:diskWritable(java.io.File disk)
+{
+org.apache.bookkeeper.bookie.BookieImpl $stack2;
+  org.apache.bookkeeper.conf.ServerConfiguration $stack3;
+  boolean $stack4;
+  org.apache.bookkeeper.bookie.StateManager $stack6;
+  $stack2=this.this$0;
+ $stack3=$stack2.conf;
+ $stack4 = $stack3.isReadOnlyModeOnAnyDiskFullEnabled();
+ if ($stack4==0) goto label0;
+ return;
+ label0:$stack2=this.this$0;
+ $stack6=$stack2.stateManager;
+ $stack6.setHighPriorityWritesAvailability((boolean)1);
+ $stack2=this.this$0;
+ $stack6=$stack2.stateManager;
+ $stack6.transitionToWritableMode();
+ return;
+ } 
+

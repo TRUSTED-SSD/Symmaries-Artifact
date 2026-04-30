@@ -1,0 +1,39 @@
+void org.apache.rocketmq.client.impl.consumer.DefaultLitePullConsumerImpl:initMQClientFactory()
+{
+boolean registerOK;
+  org.apache.rocketmq.client.impl.MQClientManager $stack2;
+  org.apache.rocketmq.remoting.RPCHook $stack3;
+  org.apache.rocketmq.client.consumer.DefaultLitePullConsumer $stack4;
+  org.apache.rocketmq.client.impl.factory.MQClientInstance $stack5;
+  java.lang.String $stack8;
+  org.apache.rocketmq.common.ServiceState $stack10;
+  org.apache.rocketmq.client.exception.MQClientException $stack11;
+  java.lang.StringBuilder $stack12;
+  $stack2 = org.apache.rocketmq.client.impl.MQClientManager.getInstance();
+ $stack4=this.defaultLitePullConsumer;
+ $stack3=this.rpcHook;
+ $stack5 = $stack2.getOrCreateMQClientInstance((org.apache.rocketmq.client.ClientConfig)$stack4,$stack3);
+ this.mQClientFactory=$stack5;
+ $stack5=this.mQClientFactory;
+ $stack4=this.defaultLitePullConsumer;
+ $stack8 = $stack4.getConsumerGroup();
+ registerOK = $stack5.registerConsumer($stack8,(org.apache.rocketmq.client.impl.consumer.MQConsumerInner)this);
+ if (registerOK!=0) goto label0;
+ $stack10=org.apache.rocketmq.common.ServiceState.CREATE_JUST;
+ this.serviceState=$stack10;
+ $stack11=new org.apache.rocketmq.client.exception.MQClientException;
+ $stack12=new java.lang.StringBuilder;
+ $stack12#java.lang.StringBuilder();
+ $stack12 = $stack12.append("The consumer group[");
+ $stack4=this.defaultLitePullConsumer;
+ $stack8 = $stack4.getConsumerGroup();
+ $stack12 = $stack12.append($stack8);
+ $stack12 = $stack12.append("] has been created before, specify another name please.");
+ $stack8 = org.apache.rocketmq.common.help.FAQUrl.suggestTodo("https://rocketmq.apache.org/docs/bestPractice/06FAQ");
+ $stack12 = $stack12.append($stack8);
+ $stack8 = $stack12.toString();
+ $stack11#org.apache.rocketmq.client.exception.MQClientException($stack8,null);
+ throw $stack11;
+ label0:return;
+ } 
+

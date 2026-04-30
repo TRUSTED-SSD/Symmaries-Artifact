@@ -1,0 +1,26 @@
+digraph G {
+  node [shape=box, ];
+  "pc0_js1" [label="〈$d1 = (double) i0, js1〉", ];
+  "pc1_js1" [label="〈$d0 = (double) f0, js1〉", ];
+  "pc2_js1" [label="〈$d2 = $d1 * $d0, js1〉", ];
+  "pc3_js1" [label="〈$i1 = (int) $d2, js1〉", ];
+  "pc4_js1" [label="〈return $i1, js1〉", ];
+  "pc5_js1" [label="〈sink, js1〉\n\
+ϕ ≠ S4 ∨ pc ⊔ level($i1) ⊑ ret(level())'",
+             ];
+  
+  
+  "pc0_js1" -> "pc1_js1" [label="tt,\n\
+{level($d1) := pc ⊔ level(i0)}", ];
+  "pc1_js1" -> "pc2_js1" [label="tt,\n\
+{level($d0) := pc ⊔ level(f0)}", ];
+  "pc2_js1" -> "pc3_js1" [label="tt,\n\
+{level($d2) := pc ⊔ level(f0) ⊔ level(i0)}",
+                          ];
+  "pc3_js1" -> "pc4_js1" [label="tt,\n\
+{level($i1) := pc ⊔ level(f0) ⊔ level(i0)}",
+                          ];
+  "pc4_js1" -> "pc5_js1" [label="tt,\n\
+{ϕ := S4}", ];
+  
+  }

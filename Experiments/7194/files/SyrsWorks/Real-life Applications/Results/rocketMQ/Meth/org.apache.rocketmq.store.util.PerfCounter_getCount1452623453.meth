@@ -1,0 +1,26 @@
+long org.apache.rocketmq.store.util.PerfCounter:getCount(int from,int to)
+{
+long tmp;
+  java.util.concurrent.atomic.AtomicInteger[] $stack10;
+  int $stack11;
+  java.util.concurrent.atomic.AtomicInteger $stack14;
+  long $stack16;
+  tmp=(long) from;
+ from = this#org.apache.rocketmq.store.util.PerfCounter:getIndex(tmp);
+ tmp=(long) to;
+ to = this#org.apache.rocketmq.store.util.PerfCounter:getIndex(tmp);
+ tmp=0L;
+ label0:if (from>to) goto label1;
+ $stack10=this.count;
+ $stack11=#$stack10;
+ if (from>=$stack11) goto label1;
+ $stack10=this.count;
+ $stack14=$stack10[from];
+ $stack11 = $stack14.get();
+ $stack16=(long) $stack11;
+ tmp=(tmp+$stack16);
+ from=(from+1);
+ goto label0;
+ label1:return  tmp;
+ } 
+

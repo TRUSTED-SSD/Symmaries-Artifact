@@ -1,0 +1,54 @@
+static org.apache.bookkeeper.util.LocalBookKeeper org.apache.bookkeeper.util.LocalBookKeeper:getLocalBookiesInternal(org.apache.bookkeeper.conf.ServerConfiguration conf,java.lang.String @zkHost,int zkPort,int numBookies,boolean shouldStartZK,boolean stopOnExit,java.lang.String dirSuffix,java.lang.String zkDataDir,java.lang.String localBookiesConfigDirName)
+{
+org.apache.bookkeeper.util.LocalBookKeeper lb;
+  java.io.File zkDataDirFile;
+  java.lang.String $stack12;
+  java.lang.String $stack13;
+  org.apache.bookkeeper.shims.zk.ZooKeeperServerShim $stack18;
+  java.io.IOException $stack32;
+  java.lang.StringBuilder $stack33;
+  java.lang.String zkHost;
+zkHost=@zkHost;
+$stack12 = conf.getLedgerManagerLayoutStringFromFactoryClass();
+ $stack13 = conf.getZkLedgersRootPath();
+ $stack12 = org.apache.bookkeeper.util.LocalBookKeeper.newMetadataServiceUri(zkHost,zkPort,$stack12,$stack13);
+ conf.setMetadataServiceUri($stack12);
+ lb=new org.apache.bookkeeper.util.LocalBookKeeper;
+ lb#org.apache.bookkeeper.util.LocalBookKeeper(numBookies,conf,localBookiesConfigDirName,stopOnExit,dirSuffix,zkHost,zkPort);
+ if (shouldStartZK==0) goto label0;
+ zkDataDirFile=null;
+ if (zkDataDir==null) goto label1;
+ zkDataDirFile=new java.io.File;
+ zkDataDirFile#java.io.File(zkDataDir);
+ shouldStartZK = zkDataDirFile.exists();
+ if (shouldStartZK==0) goto label2;
+ shouldStartZK = zkDataDirFile.isFile();
+ if (shouldStartZK==0) goto label2;
+ $stack32=new java.io.IOException;
+ $stack33=new java.lang.StringBuilder;
+ $stack33#java.lang.StringBuilder();
+ $stack33 = $stack33.append("Unable to create zkDataDir, since there is a file at ");
+ zkHost = zkDataDirFile.getAbsolutePath();
+ $stack33 = $stack33.append(zkHost);
+ zkHost = $stack33.toString();
+ $stack32#java.io.IOException(zkHost);
+ throw $stack32;
+ label2:shouldStartZK = zkDataDirFile.exists();
+ if (shouldStartZK!=0) goto label1;
+ shouldStartZK = zkDataDirFile.mkdirs();
+ if (shouldStartZK!=0) goto label1;
+ $stack32=new java.io.IOException;
+ $stack33=new java.lang.StringBuilder;
+ $stack33#java.lang.StringBuilder();
+ $stack33 = $stack33.append("Unable to create zkDataDir - ");
+ zkHost = zkDataDirFile.getAbsolutePath();
+ $stack33 = $stack33.append(zkHost);
+ zkHost = $stack33.toString();
+ $stack32#java.io.IOException(zkHost);
+ throw $stack32;
+ label1:zkDataDirFile = org.apache.bookkeeper.util.IOUtils.createTempDir("zookeeper",dirSuffix,zkDataDirFile);
+ $stack18 = org.apache.bookkeeper.util.LocalBookKeeper.runZookeeper(1000,zkPort,zkDataDirFile);
+ lb#org.apache.bookkeeper.util.LocalBookKeeper:setZooKeeperShim($stack18,zkDataDirFile);
+ label0:return  lb;
+ } 
+

@@ -1,0 +1,30 @@
+void java.util.ArrayList:writeObject(java.io.ObjectOutputStream r1)
+{
+int i0;
+  int $i1;
+  int $i2;
+  int $i3;
+  java.util.ConcurrentModificationException $r2;
+  java.lang.Object[] $r3;
+  java.lang.Object $r4;
+  int i4;
+  i0=this.modCount;
+ r1.defaultWriteObject();
+ $i1=this.size;
+ r1.writeInt($i1);
+ i4=0;
+ label0:$i2=this.size;
+ if (i4>=$i2) goto label1;
+ $r3=this.elementData;
+ $r4=$r3[i4];
+ r1.writeObject($r4);
+ i4=(i4+1);
+ goto label0;
+ label1:$i3=this.modCount;
+ if ($i3==i0) goto label2;
+ $r2=new java.util.ConcurrentModificationException;
+ $r2#java.util.ConcurrentModificationException:init();
+ throw $r2;
+ label2:return;
+ }  
+

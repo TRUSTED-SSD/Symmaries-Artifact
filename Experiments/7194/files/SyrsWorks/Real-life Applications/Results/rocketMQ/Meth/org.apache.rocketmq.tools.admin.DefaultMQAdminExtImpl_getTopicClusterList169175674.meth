@@ -1,0 +1,40 @@
+java.util.Set org.apache.rocketmq.tools.admin.DefaultMQAdminExtImpl:getTopicClusterList(java.lang.String @topic)
+{
+java.util.HashSet clusterSet;
+  org.apache.rocketmq.remoting.protocol.body.ClusterInfo clusterInfo;
+  org.apache.rocketmq.remoting.protocol.route.TopicRouteData topicRouteData;
+  org.apache.rocketmq.remoting.protocol.route.BrokerData brokerData;
+  java.util.Iterator it;
+  java.util.Map$Entry next;
+  java.util.List $stack12;
+  java.lang.Object $stack13;
+  java.util.Map $stack15;
+  java.util.Set $stack16;
+  boolean $stack18;
+  java.lang.String topic;
+topic=@topic;
+clusterSet=new java.util.HashSet;
+ clusterSet#java.util.HashSet();
+ clusterInfo = this.examineBrokerClusterInfo();
+ topicRouteData = this.examineTopicRouteInfo(topic);
+ $stack12 = topicRouteData.getBrokerDatas();
+ $stack13 = $stack12.get(0);
+ brokerData=(org.apache.rocketmq.remoting.protocol.route.BrokerData) $stack13;
+ topic = brokerData.getBrokerName();
+ $stack15 = clusterInfo.getClusterAddrTable();
+ $stack16 = $stack15.entrySet();
+ it = $stack16.iterator();
+ label0:$stack18 = it.hasNext();
+ if ($stack18==0) goto label1;
+ $stack13 = it.next();
+ next=(java.util.Map$Entry) $stack13;
+ $stack13 = next.getValue();
+ $stack16=(java.util.Set) $stack13;
+ $stack18 = $stack16.contains((java.lang.Object)topic);
+ if ($stack18==0) goto label2;
+ $stack13 = next.getKey();
+ clusterSet.add($stack13);
+ label2:goto label0;
+ label1:return  clusterSet;
+ } 
+

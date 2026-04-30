@@ -1,0 +1,75 @@
+    protected void doClose() throws java.io.IOException
+    {
+        org.apache.bookkeeper.stream.server.service.RegistrationServiceProvider this;
+        org.apache.bookkeeper.discover.RegistrationClient $stack2;
+        org.apache.bookkeeper.zookeeper.ZooKeeperClient $stack3;
+        java.util.concurrent.ScheduledExecutorService $stack4;
+        java.lang.InterruptedException $stack10;
+        java.lang.Thread $stack11;
+        java.lang.String $stack12;
+        org.slf4j.Logger $stack13;
+
+        this := @this: org.apache.bookkeeper.stream.server.service.RegistrationServiceProvider;
+
+        $stack2 = this.<org.apache.bookkeeper.stream.server.service.RegistrationServiceProvider: org.apache.bookkeeper.discover.RegistrationClient client>;
+/*120*/
+
+        if null == $stack2 goto label1;
+/*120*/
+
+        $stack2 = this.<org.apache.bookkeeper.stream.server.service.RegistrationServiceProvider: org.apache.bookkeeper.discover.RegistrationClient client>;
+/*121*/
+
+        interfaceinvoke $stack2.<org.apache.bookkeeper.discover.RegistrationClient: void close()>();
+/*121*/
+
+     label1:
+        $stack3 = this.<org.apache.bookkeeper.stream.server.service.RegistrationServiceProvider: org.apache.bookkeeper.zookeeper.ZooKeeperClient zkClient>;
+/*123*/
+
+        if null == $stack3 goto label5;
+/*123*/
+
+     label2:
+        $stack3 = this.<org.apache.bookkeeper.stream.server.service.RegistrationServiceProvider: org.apache.bookkeeper.zookeeper.ZooKeeperClient zkClient>;
+/*125*/
+
+        virtualinvoke $stack3.<org.apache.bookkeeper.zookeeper.ZooKeeperClient: void close()>();
+/*125*/
+
+     label3:
+        goto label5;
+/*129*/
+
+     label4:
+        $stack10 := @caughtexception;
+/*123*/
+
+        $stack11 = staticinvoke <java.lang.Thread: java.lang.Thread currentThread()>();
+/*127*/
+
+        virtualinvoke $stack11.<java.lang.Thread: void interrupt()>();
+/*127*/
+
+        $stack13 = <org.apache.bookkeeper.stream.server.service.RegistrationServiceProvider: org.slf4j.Logger log>;
+/*128*/
+
+        $stack12 = this.<org.apache.bookkeeper.stream.server.service.RegistrationServiceProvider: java.lang.String zkServers>;
+/*128*/
+
+        interfaceinvoke $stack13.<org.slf4j.Logger: void warn(java.lang.String,java.lang.Object,java.lang.Object)>("Interrupted at closing zookeeper client to {}", $stack12, $stack10);
+/*128*/
+
+     label5:
+        $stack4 = this.<org.apache.bookkeeper.stream.server.service.RegistrationServiceProvider: java.util.concurrent.ScheduledExecutorService regExecutor>;
+/*131*/
+
+        interfaceinvoke $stack4.<java.util.concurrent.ScheduledExecutorService: void shutdown()>();
+/*131*/
+
+        return;
+/*132*/
+
+        catch java.lang.InterruptedException from label2 to label3 with label4;
+    }
+

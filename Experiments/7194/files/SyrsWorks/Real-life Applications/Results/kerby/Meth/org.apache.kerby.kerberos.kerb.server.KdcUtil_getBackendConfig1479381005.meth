@@ -1,0 +1,35 @@
+static org.apache.kerby.kerberos.kerb.identity.backend.BackendConfig org.apache.kerby.kerberos.kerb.server.KdcUtil:getBackendConfig(java.io.File @confDir)
+{
+org.apache.kerby.kerberos.kerb.identity.backend.BackendConfig backendConfig;
+  java.io.IOException e;
+  java.io.File $stack4;
+  boolean $stack5;
+  org.apache.kerby.kerberos.kerb.KrbException $stack8;
+  java.lang.StringBuilder $stack9;
+  java.lang.String $stack11;
+  java.io.File confDir;
+confDir=@confDir;
+$stack4=new java.io.File;
+ $stack4#java.io.File(confDir,"backend.conf");
+ confDir=$stack4;
+ $stack5 = $stack4.exists();
+ if ($stack5==0) goto label0;
+ backendConfig=new org.apache.kerby.kerberos.kerb.identity.backend.BackendConfig;
+ backendConfig#org.apache.kerby.kerberos.kerb.identity.backend.BackendConfig();
+ label1:backendConfig.addIniConfig($stack4);
+ label2:goto label3;
+ label4:e = catch;
+ $stack8=new org.apache.kerby.kerberos.kerb.KrbException;
+ $stack9=new java.lang.StringBuilder;
+ $stack9#java.lang.StringBuilder();
+ $stack9 = $stack9.append("Can not load the backend configuration file ");
+ $stack11 = $stack4.getAbsolutePath();
+ $stack9 = $stack9.append($stack11);
+ $stack11 = $stack9.toString();
+ $stack8#org.apache.kerby.kerberos.kerb.KrbException($stack11);
+ throw $stack8;
+ label3:return  backendConfig;
+ label0:return  null;
+ catch java.io.IOException: label1 - label2 : label4;
+} 
+

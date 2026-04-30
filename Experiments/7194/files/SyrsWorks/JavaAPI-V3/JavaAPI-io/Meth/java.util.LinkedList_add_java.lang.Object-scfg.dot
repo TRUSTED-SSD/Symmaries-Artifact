@@ -1,0 +1,22 @@
+digraph G {
+  node [shape=box, ];
+  "pc0_js1" [label="〈this.linkLast (r1), js1〉\n\
+tt", ];
+  "pc1_js1" [label="〈return 1, js1〉", ];
+  "pc2_js1" [label="〈sink, js1〉\n\
+obj_level(r1) ⊑ ret(obj_level(r1))' ∧ obj_level(this) ⊑ ret(obj_level(this))' ∧ (ret(r1.><r1)' ∨ ¬r1.><r1) ∧ (ret(r1.><this)' ∨ ¬r1.><this) ∧ (ret(this.><r1)' ∨ ¬this.><r1) ∧ (ret(this.><this)' ∨ ¬this.><this) ∧ (ϕ ≠ S1 ∨ pc ⊑ ret(level())')",
+             ];
+  
+  
+  "pc0_js1" -> "pc1_js1" [label="tt,\n\
+{r1.><r1 := r1~this ∨ r1.><r1 ∨ r1.><this ∨ this.><r1 ∨ (r1~this ∨ r1.><this) ∧ (r1~this ∨ r1.><this ∨ this.><r1) ∨ (if r1~this ∨ r1.><this ∨ this.><r1 then r1~this ∨ r1.><r1 ∨ r1.><this ∨ this.><r1 else r1.><r1),\n\
+ r1.><this := r1~this ∨ r1.><this ∨ this.><r1 ∨ (r1~this ∨ r1.><this) ∧ (r1~this ∨ r1.><this ∨ this.><r1) ∨ (if r1~this ∨ r1.><r1 ∨ r1.><this ∨ this.><r1 then r1~this ∨ r1.><this ∨ this.><r1 else r1.><this),\n\
+ this.><r1 := tt,\n\
+ this.><this := tt,\n\
+ obj_level(r1) := obj_level(r1) ⊔ (if this.><r1 then pc ⊔ level(r1) ⊔ level(this) ⊔ obj_level(this) else if r1.><this then pc ⊔ level(r1) ⊔ level(this) ⊔ obj_level(r1) else if r1~this ∧ level(r1) = ⊥ ∧ level(this) = ⊥ ∧ obj_level(r1) = ⊥ then pc else if obj_level(r1) = ⊤ ∨ (if level(this) = ⊤ then r1~this else r1~this ∧ level(r1) = ⊤ ∧ level(this) = ⊥) then ⊤ else ⊥) ⊔ (if r1~this ∨ this.><r1 then pc ⊔ level(r1) ⊔ level(this) ⊔ obj_level(r1) ⊔ obj_level(this) else ⊥),\n\
+ obj_level(this) := pc ⊔ level(r1) ⊔ level(this) ⊔ obj_level(r1) ⊔ obj_level(this) ⊔ (if r1~this ∨ r1.><this ∨ this.><r1 then if this.><r1 then pc ⊔ level(r1) ⊔ level(this) ⊔ obj_level(this) else if r1.><this then pc ⊔ level(r1) ⊔ level(this) ⊔ obj_level(r1) else if r1~this ∧ level(r1) = ⊥ ∧ level(this) = ⊥ ∧ obj_level(r1) = ⊥ then pc else if obj_level(r1) = ⊤ ∨ (if level(this) = ⊤ then r1~this else r1~this ∧ level(r1) = ⊤ ∧ level(this) = ⊥) then ⊤ else ⊥ else ⊥)}",
+                          ];
+  "pc1_js1" -> "pc2_js1" [label="tt,\n\
+{ϕ := S1}", ];
+  
+  }

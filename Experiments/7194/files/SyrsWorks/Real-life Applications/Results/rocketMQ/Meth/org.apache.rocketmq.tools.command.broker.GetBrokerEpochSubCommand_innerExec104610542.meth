@@ -1,0 +1,30 @@
+void org.apache.rocketmq.tools.command.broker.GetBrokerEpochSubCommand:innerExec(org.apache.commons.cli.CommandLine commandLine,org.apache.commons.cli.Options options,org.apache.rocketmq.tools.admin.DefaultMQAdminExt defaultMQAdminExt)
+{
+java.lang.String brokerName;
+  java.util.Set brokers;
+  boolean $stack6;
+  java.lang.StringBuilder $stack8;
+  $stack6 = commandLine.hasOption((char)98);
+ if ($stack6==0) goto label0;
+ brokerName = commandLine.getOptionValue((char)98);
+ brokerName = brokerName.trim();
+ brokers = org.apache.rocketmq.tools.command.CommandUtil.fetchMasterAndSlaveAddrByBrokerName((org.apache.rocketmq.tools.admin.MQAdminExt)defaultMQAdminExt,brokerName);
+ this#org.apache.rocketmq.tools.command.broker.GetBrokerEpochSubCommand:printData(brokers,defaultMQAdminExt);
+ goto label1;
+ label0:$stack6 = commandLine.hasOption((char)99);
+ if ($stack6==0) goto label2;
+ brokerName = commandLine.getOptionValue((char)99);
+ brokerName = brokerName.trim();
+ brokers = org.apache.rocketmq.tools.command.CommandUtil.fetchMasterAndSlaveAddrByClusterName((org.apache.rocketmq.tools.admin.MQAdminExt)defaultMQAdminExt,brokerName);
+ this#org.apache.rocketmq.tools.command.broker.GetBrokerEpochSubCommand:printData(brokers,defaultMQAdminExt);
+ goto label1;
+ label2:$stack8=new java.lang.StringBuilder;
+ $stack8#java.lang.StringBuilder();
+ $stack8 = $stack8.append("mqadmin ");
+ brokerName = this.commandName();
+ $stack8 = $stack8.append(brokerName);
+ brokerName = $stack8.toString();
+ org.apache.rocketmq.srvutil.ServerUtil.printCommandLineHelp(brokerName,options);
+ label1:return;
+ } 
+

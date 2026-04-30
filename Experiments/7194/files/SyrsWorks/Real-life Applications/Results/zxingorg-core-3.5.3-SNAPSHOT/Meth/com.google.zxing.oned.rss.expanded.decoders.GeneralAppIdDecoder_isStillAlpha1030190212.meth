@@ -1,0 +1,29 @@
+boolean com.google.zxing.oned.rss.expanded.decoders.GeneralAppIdDecoder:isStillAlpha(int pos)
+{
+int fiveBitValue;
+  com.google.zxing.common.BitArray $stack4;
+  int $stack6;
+  boolean $stack12;
+  fiveBitValue=(pos+5);
+ $stack4=this.information;
+ $stack6 = $stack4.getSize();
+ if (fiveBitValue<=$stack6) goto label0;
+ return  0;
+ label0:fiveBitValue = this.extractNumericValueFromBitArray(pos,5);
+ if (fiveBitValue<5) goto label1;
+ if (fiveBitValue>=16) goto label1;
+ return  1;
+ label1:fiveBitValue=(pos+6);
+ $stack4=this.information;
+ $stack6 = $stack4.getSize();
+ if (fiveBitValue<=$stack6) goto label2;
+ return  0;
+ label2:pos = this.extractNumericValueFromBitArray(pos,6);
+ if (pos<16) goto label3;
+ if (pos>=63) goto label3;
+ $stack12=1;
+ goto label4;
+ label3:$stack12=0;
+ label4:return  $stack12;
+ } 
+

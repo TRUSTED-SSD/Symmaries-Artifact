@@ -1,0 +1,30 @@
+static void JavaRIFLChecker:main(java.lang.String[] args)
+{
+rifl.spec.RIFLSpecification rifl;
+  int $stack4;
+  java.io.FileInputStream $stack5;
+  java.lang.String $stack6;
+  rifl.spec.java.JavaRIFLReader $stack7;
+  java.io.PrintStream $stack9;
+  java.lang.Exception $stack16;
+  $stack4=#args;
+ if ($stack4==1) goto label0;
+ $stack9=java.lang.System.out;
+ $stack9.println("Call this program with a relative or absolute path to a RIFL XML file to check its syntax.");
+ label0:$stack5=new java.io.FileInputStream;
+ $stack6=args[0];
+ $stack5#java.io.FileInputStream($stack6);
+ $stack7=new rifl.spec.java.JavaRIFLReader;
+ $stack7#rifl.spec.java.JavaRIFLReader();
+ rifl = $stack7.readRIFLSpecification((java.io.InputStream)$stack5);
+ $stack9=java.lang.System.out;
+ $stack9.println((java.lang.Object)rifl);
+ label1:goto label2;
+ label3:$stack16 = catch;
+ $stack9=java.lang.System.err;
+ $stack6 = $stack16.getMessage();
+ $stack9.println($stack6);
+ label2:return;
+ catch java.lang.Exception: label0 - label1 : label3;
+} 
+

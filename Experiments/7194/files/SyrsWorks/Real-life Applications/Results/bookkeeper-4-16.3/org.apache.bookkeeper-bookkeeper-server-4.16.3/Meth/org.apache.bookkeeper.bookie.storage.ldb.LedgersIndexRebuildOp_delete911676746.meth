@@ -1,0 +1,16 @@
+void org.apache.bookkeeper.bookie.storage.ldb.LedgersIndexRebuildOp:delete(java.nio.file.Path @path)
+{
+java.io.IOException $stack3;
+  org.slf4j.Logger $stack4;
+  java.nio.file.Path path;
+path=@path;
+label0:java.nio.file.Files.delete(path);
+ label1:goto label2;
+ label3:$stack3 = catch;
+ $stack4=org.apache.bookkeeper.bookie.storage.ldb.LedgersIndexRebuildOp.LOG;
+ path = path.toAbsolutePath();
+ $stack4.warn("Unable to delete {}",(java.lang.Object)path,(java.lang.Object)$stack3);
+ label2:return;
+ catch java.io.IOException: label0 - label1 : label3;
+} 
+

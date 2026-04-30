@@ -1,0 +1,24 @@
+void org.apache.bookkeeper.proto.ReadLacProcessorV3:sendResponse(org.apache.bookkeeper.proto.BookkeeperProtocol$ReadLacResponse readLacResponse)
+{
+org.apache.bookkeeper.proto.BookkeeperProtocol$Response$Builder response;
+  org.apache.bookkeeper.proto.BookkeeperProtocol$BKPacketHeader $stack4;
+  org.apache.bookkeeper.proto.BookkeeperProtocol$StatusCode $stack6;
+  org.apache.bookkeeper.proto.BookkeeperProtocol$Response $stack10;
+  org.apache.bookkeeper.proto.BookieRequestProcessor $stack11;
+  org.apache.bookkeeper.proto.RequestStats $stack12;
+  org.apache.bookkeeper.stats.OpStatsLogger $stack13;
+  response = org.apache.bookkeeper.proto.BookkeeperProtocol$Response.newBuilder();
+ $stack4 = this.getHeader();
+ response = response.setHeader($stack4);
+ $stack6 = readLacResponse.getStatus();
+ response = response.setStatus($stack6);
+ response = response.setReadLacResponse(readLacResponse);
+ $stack6 = response.getStatus();
+ $stack10 = response.build();
+ $stack11=this.requestProcessor;
+ $stack12 = $stack11.getRequestStats();
+ $stack13 = $stack12.getReadLacRequestStats();
+ this.sendResponse($stack6,(java.lang.Object)$stack10,$stack13);
+ return;
+ } 
+

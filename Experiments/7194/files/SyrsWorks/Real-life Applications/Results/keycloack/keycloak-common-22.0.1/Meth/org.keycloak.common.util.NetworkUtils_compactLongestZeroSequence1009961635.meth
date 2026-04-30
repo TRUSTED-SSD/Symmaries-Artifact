@@ -1,0 +1,39 @@
+static void org.keycloak.common.util.NetworkUtils:compactLongestZeroSequence(int[] hexRepresentatoin)
+{
+int bestRunStart;
+  int bestRunLen;
+  boolean inRun;
+  int runStart;
+  int i;
+  int runLen;
+  bestRunStart=-1;
+ bestRunLen=-1;
+ inRun=0;
+ runStart=-1;
+ i=0;
+ label0:runLen=#hexRepresentatoin;
+ if (i>=runLen) goto label1;
+ runLen=hexRepresentatoin[i];
+ if (runLen!=0) goto label2;
+ if (inRun!=0) goto label3;
+ runStart=i;
+ inRun=1;
+ goto label3;
+ label2:if (inRun==0) goto label3;
+ inRun=0;
+ runLen=(i-runStart);
+ if (bestRunLen>=0) goto label4;
+ bestRunStart=runStart;
+ bestRunLen=runLen;
+ goto label3;
+ label4:if (runLen<=bestRunLen) goto label3;
+ bestRunStart=runStart;
+ bestRunLen=runLen;
+ label3:i=(i+1);
+ goto label0;
+ label1:if (bestRunStart<0) goto label5;
+ bestRunLen=(bestRunStart+bestRunLen);
+ java.util.Arrays.fill(hexRepresentatoin,bestRunStart,bestRunLen,-1);
+ label5:return;
+ } 
+

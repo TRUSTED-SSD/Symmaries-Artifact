@@ -1,0 +1,55 @@
+    private static java.util.List getAnnotatedMembers(java.util.Map, java.lang.Class, boolean)
+    {
+        java.util.Map map;
+        java.lang.Class type;
+        boolean fillIfAbsent, $stack4;
+        java.util.List members;
+        java.lang.Object $stack5;
+        java.util.ArrayList $stack11;
+
+        map := @parameter0: java.util.Map;
+
+        type := @parameter1: java.lang.Class;
+
+        fillIfAbsent := @parameter2: boolean;
+
+        $stack4 = interfaceinvoke map.<java.util.Map: boolean containsKey(java.lang.Object)>(type);
+/*158*/
+
+        if $stack4 != 0 goto label1;
+/*158*/
+
+        if fillIfAbsent == 0 goto label1;
+/*162*/
+
+        $stack11 = new java.util.ArrayList;
+/*159*/
+
+        specialinvoke $stack11.<java.util.ArrayList: void <init>()>();
+/*159*/
+
+        interfaceinvoke map.<java.util.Map: java.lang.Object put(java.lang.Object,java.lang.Object)>(type, $stack11);
+/*159*/
+
+     label1:
+        $stack5 = interfaceinvoke map.<java.util.Map: java.lang.Object get(java.lang.Object)>(type);
+/*161*/
+
+        members = (java.util.List) $stack5;
+/*161*/
+/*161*/
+
+        if members != null goto label2;
+/*162*/
+
+        members = staticinvoke <java.util.Collections: java.util.List emptyList()>();
+/*162*/
+
+        goto label2;
+/*162*/
+
+     label2:
+        return members;
+/*162*/
+    }
+

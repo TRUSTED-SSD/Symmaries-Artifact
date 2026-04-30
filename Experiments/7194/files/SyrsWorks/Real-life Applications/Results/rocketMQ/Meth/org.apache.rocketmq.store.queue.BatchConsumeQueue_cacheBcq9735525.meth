@@ -1,0 +1,45 @@
+void org.apache.rocketmq.store.queue.BatchConsumeQueue:cacheBcq(org.apache.rocketmq.store.logfile.MappedFile bcq)
+{
+java.lang.Object min;
+  java.util.concurrent.ConcurrentSkipListMap $stack4;
+  long $stack5;
+  java.lang.Long $stack6;
+  org.apache.rocketmq.store.logfile.MappedFile $stack7;
+  java.lang.Exception $stack14;
+  java.lang.Object[] $stack15;
+  java.lang.String $stack16;
+  int $stack17;
+  org.apache.rocketmq.logging.org.slf4j.Logger $stack18;
+  java.lang.Integer $stack21;
+  org.apache.rocketmq.store.queue.BatchOffsetIndex tmp$884625896;
+  label0:min = this.getMinMsgOffset(bcq,(boolean)0,(boolean)1);
+ $stack4=this.offsetCache;
+ tmp$884625896=(org.apache.rocketmq.store.queue.BatchOffsetIndex) min;
+ $stack5 = tmp$884625896.getMsgOffset();
+ $stack6 = java.lang.Long.valueOf($stack5);
+ tmp$884625896=(org.apache.rocketmq.store.queue.BatchOffsetIndex) min;
+ $stack7 = tmp$884625896.getMappedFile();
+ $stack4.put((java.lang.Object)$stack6,(java.lang.Object)$stack7);
+ $stack4=this.timeCache;
+ tmp$884625896=(org.apache.rocketmq.store.queue.BatchOffsetIndex) min;
+ $stack5 = tmp$884625896.getStoreTimestamp();
+ $stack6 = java.lang.Long.valueOf($stack5);
+ tmp$884625896=(org.apache.rocketmq.store.queue.BatchOffsetIndex) min;
+ $stack7 = tmp$884625896.getMappedFile();
+ $stack4.put((java.lang.Object)$stack6,(java.lang.Object)$stack7);
+ label1:goto label2;
+ label3:$stack14 = catch;
+ min=$stack14;
+ $stack18=org.apache.rocketmq.store.queue.BatchConsumeQueue.log;
+ $stack15=new java.lang.Object[3];
+ $stack16=this.topic;
+ $stack15[0]=$stack16;
+ $stack17=this.queueId;
+ $stack21 = java.lang.Integer.valueOf($stack17);
+ $stack15[1]=$stack21;
+ $stack15[2]=bcq;
+ $stack18.error("Failed caching offset and time on BCQ [Topic: {}, QueueId: {}, File: {}]",$stack15);
+ label2:return;
+ catch java.lang.Exception: label0 - label1 : label3;
+} 
+

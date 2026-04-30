@@ -1,0 +1,34 @@
+long org.apache.rocketmq.broker.pagecache.OneMessageTransfer:transferTo(java.nio.channels.WritableByteChannel target,long position)
+{
+java.nio.ByteBuffer $stack4;
+  boolean $stack5;
+  org.apache.rocketmq.store.SelectMappedBufferResult $stack6;
+  int $stack12;
+  long $stack13;
+  $stack4=this.byteBufferHeader;
+ $stack5 = $stack4.hasRemaining();
+ if ($stack5==0) goto label0;
+ position=this.transferred;
+ $stack4=this.byteBufferHeader;
+ $stack12 = target.write($stack4);
+ $stack13=(long) $stack12;
+ position=(position+$stack13);
+ this.transferred=position;
+ position=this.transferred;
+ return  position;
+ label0:$stack6=this.selectMappedBufferResult;
+ $stack4 = $stack6.getByteBuffer();
+ $stack5 = $stack4.hasRemaining();
+ if ($stack5==0) goto label1;
+ position=this.transferred;
+ $stack6=this.selectMappedBufferResult;
+ $stack4 = $stack6.getByteBuffer();
+ $stack12 = target.write($stack4);
+ $stack13=(long) $stack12;
+ position=(position+$stack13);
+ this.transferred=position;
+ position=this.transferred;
+ return  position;
+ label1:return  0L;
+ } 
+

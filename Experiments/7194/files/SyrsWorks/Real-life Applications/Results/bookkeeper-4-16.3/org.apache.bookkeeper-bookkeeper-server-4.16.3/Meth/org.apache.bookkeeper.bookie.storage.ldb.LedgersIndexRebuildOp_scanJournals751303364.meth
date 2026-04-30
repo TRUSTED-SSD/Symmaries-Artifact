@@ -1,0 +1,36 @@
+void org.apache.bookkeeper.bookie.storage.ldb.LedgersIndexRebuildOp:scanJournals(java.util.Set ledgers)
+{
+java.util.Iterator l2;
+  org.apache.bookkeeper.bookie.Journal journal;
+  java.util.List journalIds;
+  java.util.Iterator l5;
+  java.lang.Long journalId;
+  org.apache.bookkeeper.conf.ServerConfiguration $stack7;
+  boolean $stack10;
+  java.lang.Object $stack11;
+  java.io.File $stack12;
+  org.apache.bookkeeper.bookie.storage.ldb.LedgersIndexRebuildOp$2 $stack13;
+  long $stack19;
+  $stack7=this.conf;
+ journalIds = this#org.apache.bookkeeper.bookie.storage.ldb.LedgersIndexRebuildOp:getJournals($stack7);
+ l2 = journalIds.iterator();
+ label0:$stack10 = l2.hasNext();
+ if ($stack10==0) goto label1;
+ $stack11 = l2.next();
+ journal=(org.apache.bookkeeper.bookie.Journal) $stack11;
+ $stack12 = journal.getJournalDirectory();
+ $stack13=new org.apache.bookkeeper.bookie.storage.ldb.LedgersIndexRebuildOp$2;
+ $stack13#org.apache.bookkeeper.bookie.storage.ldb.LedgersIndexRebuildOp$2(this);
+ journalIds = org.apache.bookkeeper.bookie.Journal.listJournalIds($stack12,(org.apache.bookkeeper.bookie.Journal$JournalIdFilter)$stack13);
+ l5 = journalIds.iterator();
+ label2:$stack10 = l5.hasNext();
+ if ($stack10==0) goto label3;
+ $stack11 = l5.next();
+ journalId=(java.lang.Long) $stack11;
+ $stack19 = journalId.longValue();
+ this#org.apache.bookkeeper.bookie.storage.ldb.LedgersIndexRebuildOp:scanJournal(journal,$stack19,ledgers);
+ goto label2;
+ label3:goto label0;
+ label1:return;
+ } 
+

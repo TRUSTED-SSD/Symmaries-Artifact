@@ -1,0 +1,22 @@
+org.apache.rocketmq.client.producer.TransactionSendResult org.apache.rocketmq.client.producer.TransactionMQProducer:sendMessageInTransaction(org.apache.rocketmq.common.message.Message msg,java.lang.Object arg)
+{
+org.apache.rocketmq.client.producer.TransactionListener $stack3;
+  java.lang.String $stack4;
+  java.lang.String $stack5;
+  org.apache.rocketmq.client.impl.producer.DefaultMQProducerImpl $stack7;
+  org.apache.rocketmq.client.producer.TransactionSendResult $stack8;
+  org.apache.rocketmq.client.exception.MQClientException $stack9;
+  $stack3=this.transactionListener;
+ if (null!=$stack3) goto label0;
+ $stack9=new org.apache.rocketmq.client.exception.MQClientException;
+ $stack9#org.apache.rocketmq.client.exception.MQClientException("TransactionListener is null",null);
+ throw $stack9;
+ label0:$stack4 = this.getNamespace();
+ $stack5 = msg.getTopic();
+ $stack4 = org.apache.rocketmq.remoting.protocol.NamespaceUtil.wrapNamespace($stack4,$stack5);
+ msg.setTopic($stack4);
+ $stack7=this.defaultMQProducerImpl;
+ $stack8 = $stack7.sendMessageInTransaction(msg,null,arg);
+ return  $stack8;
+ } 
+

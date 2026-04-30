@@ -1,0 +1,48 @@
+static java.lang.Class org.keycloak.common.util.reflections.Reflections:resolveListType(java.lang.reflect.Field field,java.lang.Object @instance)
+{
+java.lang.reflect.Type genericType;
+  java.lang.Class $stack4;
+  java.lang.Class $stack5;
+  boolean $stack6;
+  java.lang.reflect.ParameterizedType $stack18;
+  java.lang.Object $stack20;
+  java.lang.Object[] tmp$321845861;
+  java.util.List tmp$1383447529;
+  java.lang.Object instance;
+instance=@instance;
+$stack4=java.util.List;
+ $stack5 = field.getType();
+ $stack6 = $stack4.isAssignableFrom($stack5);
+ if ($stack6!=0) goto label0;
+ return  null;
+ label0:genericType = field.getGenericType();
+ $stack6=genericType instanceof java.lang.reflect.ParameterizedType;
+ if ($stack6==0) goto label1;
+ $stack4=java.lang.reflect.ParameterizedType;
+ instance = $stack4.cast((java.lang.Object)genericType);
+ $stack18=(java.lang.reflect.ParameterizedType) instance;
+ instance = $stack18.getActualTypeArguments();
+ tmp$321845861=(java.lang.Object[]) instance;
+ $stack20=tmp$321845861[0];
+ $stack6=$stack20 instanceof java.lang.Class;
+ if ($stack6==0) goto label2;
+ tmp$321845861=(java.lang.Object[]) instance;
+ instance=tmp$321845861[0];
+ $stack4=(java.lang.Class) instance;
+ return  $stack4;
+ label2:goto label3;
+ label1:if (instance==null) goto label3;
+ $stack4=java.util.List;
+ instance = field.get(instance);
+ instance = $stack4.cast(instance);
+ instance=(java.util.List) instance;
+ tmp$1383447529=(java.util.List) instance;
+ $stack6 = tmp$1383447529.isEmpty();
+ if ($stack6!=0) goto label3;
+ tmp$1383447529=(java.util.List) instance;
+ instance = tmp$1383447529.get(0);
+ $stack4 = instance.getClass();
+ return  $stack4;
+ label3:return  java.lang.Object;
+ } 
+

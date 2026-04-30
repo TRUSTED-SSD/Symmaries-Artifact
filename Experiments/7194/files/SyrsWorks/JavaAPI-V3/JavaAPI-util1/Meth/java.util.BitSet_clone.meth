@@ -1,0 +1,30 @@
+java.lang.Object java.util.BitSet:clone()
+{
+boolean $z0;
+  java.lang.Object $r1;
+  long[] $r2;
+  java.lang.Object $r3;
+  long[] $r4;
+  java.lang.CloneNotSupportedException $r6;
+  java.lang.InternalError $r7;
+  java.util.BitSet r8;
+  java.lang.CloneNotSupportedException r9;
+  $z0=this.sizeIsSticky;
+ if ($z0!=0) goto label0;
+ this#java.util.BitSet:trimToSize();
+ label0:$r1 = this#java.lang.Object:native_clone();
+ r8=(java.util.BitSet) $r1;
+ $r2=this.words;
+ $r3 = $r2.native_clone();
+ $r4=(long[]) $r3;
+ r8.words=$r4;
+ r8#java.util.BitSet:checkInvariants();
+ label1:return  r8;
+ label2:$r6 = catch;
+ r9=$r6;
+ $r7=new java.lang.InternalError;
+ $r7#java.lang.InternalError:init((java.lang.Throwable)r9);
+ throw $r7;
+ catch java.lang.CloneNotSupportedException: label0 - label1 : label2;
+}  
+

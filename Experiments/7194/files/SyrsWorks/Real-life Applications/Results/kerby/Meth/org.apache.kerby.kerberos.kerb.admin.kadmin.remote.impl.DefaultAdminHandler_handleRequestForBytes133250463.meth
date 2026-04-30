@@ -1,0 +1,22 @@
+byte[] org.apache.kerby.kerberos.kerb.admin.kadmin.remote.impl.DefaultAdminHandler:handleRequestForBytes(org.apache.kerby.kerberos.kerb.admin.kadmin.remote.request.AdminRequest adminRequest,org.xnio.sasl.SaslWrapper sasl)
+{
+org.apache.kerby.kerberos.kerb.transport.KrbTransport transport;
+  byte[] keytabFileBytes;
+  java.nio.ByteBuffer receiveMessage;
+  java.io.IOException $stack12;
+  org.apache.kerby.kerberos.kerb.KrbException $stack13;
+  this#org.apache.kerby.kerberos.kerb.admin.kadmin.remote.AdminHandler:handleRequest(adminRequest,sasl);
+ transport = adminRequest.getTransport();
+ label0:receiveMessage = transport.receiveMessage();
+ keytabFileBytes = sasl.unwrap(receiveMessage);
+ receiveMessage = java.nio.ByteBuffer.wrap(keytabFileBytes);
+ keytabFileBytes = this#org.apache.kerby.kerberos.kerb.admin.kadmin.remote.AdminHandler:onResponseMessageForBytesArray(adminRequest,receiveMessage);
+ label1:goto label2;
+ label3:$stack12 = catch;
+ $stack13=new org.apache.kerby.kerberos.kerb.KrbException;
+ $stack13#org.apache.kerby.kerberos.kerb.KrbException("Admin receives response message failed",(java.lang.Throwable)$stack12);
+ throw $stack13;
+ label2:return  keytabFileBytes;
+ catch java.io.IOException: label0 - label1 : label3;
+} 
+

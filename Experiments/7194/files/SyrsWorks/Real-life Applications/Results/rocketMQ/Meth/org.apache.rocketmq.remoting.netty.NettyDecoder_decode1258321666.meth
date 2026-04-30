@@ -1,0 +1,54 @@
+java.lang.Object org.apache.rocketmq.remoting.netty.NettyDecoder:decode(io.netty.channel.ChannelHandlerContext ctx,io.netty.buffer.ByteBuf in)
+{
+io.netty.buffer.ByteBuf frame;
+  com.google.common.base.Stopwatch timer;
+  org.apache.rocketmq.remoting.protocol.RemotingCommand cmd;
+  java.lang.Throwable l7;
+  java.lang.Object $stack9;
+  java.lang.Exception $stack18;
+  java.lang.StringBuilder $stack19;
+  org.apache.rocketmq.logging.org.slf4j.Logger $stack20;
+  io.netty.channel.Channel $stack22;
+  java.lang.String $stack23;
+  frame=null;
+ timer = com.google.common.base.Stopwatch.createStarted();
+ label0:$stack9 = this#io.netty.handler.codec.LengthFieldBasedFrameDecoder:decode(ctx,in);
+ frame=(io.netty.buffer.ByteBuf) $stack9;
+ if (null!=frame) goto label1;
+ cmd=null;
+ label2:if (null==frame) goto label3;
+ frame.release();
+ label3:return  null;
+ label1:cmd = org.apache.rocketmq.remoting.protocol.RemotingCommand.decode(frame);
+ cmd.setProcessTimer(timer);
+ label4:if (null==frame) goto label5;
+ frame.release();
+ label5:return  cmd;
+ label6:$stack18 = catch;
+ $stack20=org.apache.rocketmq.remoting.netty.NettyDecoder.log;
+ $stack19=new java.lang.StringBuilder;
+ $stack19#java.lang.StringBuilder();
+ $stack19 = $stack19.append("decode exception, ");
+ $stack22 = ctx.channel();
+ $stack23 = org.apache.rocketmq.remoting.common.RemotingHelper.parseChannelRemoteAddr($stack22);
+ $stack19 = $stack19.append($stack23);
+ $stack23 = $stack19.toString();
+ $stack20.error($stack23,(java.lang.Throwable)$stack18);
+ $stack22 = ctx.channel();
+ org.apache.rocketmq.remoting.common.RemotingHelper.closeChannel($stack22);
+ label7:if (null==frame) goto label8;
+ frame.release();
+ goto label8;
+ label9:l7 = catch;
+ label10:if (null==frame) goto label11;
+ frame.release();
+ label11:throw l7;
+ label8:return  null;
+ catch java.lang.Exception: label0 - label2 : label6;
+catch java.lang.Exception: label1 - label4 : label6;
+catch java.lang.Throwable: label0 - label2 : label9;
+catch java.lang.Throwable: label1 - label4 : label9;
+catch java.lang.Throwable: label6 - label7 : label9;
+catch java.lang.Throwable: label9 - label10 : label9;
+} 
+

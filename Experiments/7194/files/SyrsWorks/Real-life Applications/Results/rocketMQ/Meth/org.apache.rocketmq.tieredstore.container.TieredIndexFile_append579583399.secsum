@@ -1,0 +1,10 @@
+org.apache.rocketmq.tieredstore.common.AppendResult org.apache.rocketmq.tieredstore.container.TieredIndexFile:append (
+  org.apache.rocketmq.common.message.MessageQueue mq, int topicId,
+  java.lang.String @key, long offset, int size, long timeStamp) {
+  guard = tt;
+  ret(level()) = pc ⊔ level(@key) ⊔ level(mq) ⊔ level(this) ⊔ obj_level(mq) ⊔ obj_level(this);
+  ret(obj_level()) = pc ⊔ level(@key) ⊔ level(mq) ⊔ level(offset) ⊔ level(size) ⊔ level(this) ⊔ level(timeStamp) ⊔ level(topicId) ⊔ obj_level(mq) ⊔ obj_level(this);
+  ret(obj_level(@key)) = pc ⊔ level(@key) ⊔ level(mq) ⊔ level(offset) ⊔ level(size) ⊔ level(this) ⊔ level(timeStamp) ⊔ level(topicId) ⊔ obj_level(@key) ⊔ obj_level(mq) ⊔ obj_level(this);
+  ret(obj_level(mq)) = pc ⊔ level(@key) ⊔ level(mq) ⊔ level(offset) ⊔ level(size) ⊔ level(this) ⊔ level(timeStamp) ⊔ level(topicId) ⊔ obj_level(mq) ⊔ obj_level(this);
+  ret(obj_level(this)) = pc ⊔ level(@key) ⊔ level(mq) ⊔ level(offset) ⊔ level(size) ⊔ level(this) ⊔ level(timeStamp) ⊔ level(topicId) ⊔ obj_level(mq) ⊔ obj_level(this);
+}

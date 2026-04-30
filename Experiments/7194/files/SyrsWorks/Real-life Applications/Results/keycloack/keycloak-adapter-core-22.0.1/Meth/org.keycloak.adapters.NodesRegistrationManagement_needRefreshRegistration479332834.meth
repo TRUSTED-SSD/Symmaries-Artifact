@@ -1,0 +1,26 @@
+boolean org.keycloak.adapters.NodesRegistrationManagement:needRefreshRegistration(java.lang.String registrationUri,org.keycloak.adapters.KeycloakDeployment resolvedDeployment)
+{
+org.keycloak.adapters.NodesRegistrationManagement$NodeRegistrationContext currentRegistration;
+  java.util.Map $stack4;
+  java.lang.Object $stack5;
+  java.lang.Integer $stack6;
+  int $stack7;
+  int $stack8;
+  boolean $stack11;
+  $stack4=this.nodeRegistrations;
+ $stack5 = $stack4.get((java.lang.Object)registrationUri);
+ currentRegistration=(org.keycloak.adapters.NodesRegistrationManagement$NodeRegistrationContext) $stack5;
+ if (currentRegistration!=null) goto label0;
+ return  1;
+ label0:$stack6 = org.keycloak.adapters.NodesRegistrationManagement$NodeRegistrationContext.access$100(currentRegistration);
+ $stack7 = $stack6.intValue();
+ $stack8 = resolvedDeployment.getRegisterNodePeriod();
+ $stack7=($stack7+$stack8);
+ $stack8 = org.keycloak.common.util.Time.currentTime();
+ if ($stack7>=$stack8) goto label1;
+ $stack11=1;
+ goto label2;
+ label1:$stack11=0;
+ label2:return  $stack11;
+ } 
+

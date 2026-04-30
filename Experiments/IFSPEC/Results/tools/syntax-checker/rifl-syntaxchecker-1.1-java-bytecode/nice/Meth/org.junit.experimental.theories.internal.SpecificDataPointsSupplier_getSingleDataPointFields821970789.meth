@@ -1,0 +1,36 @@
+java.util.Collection org.junit.experimental.theories.internal.SpecificDataPointsSupplier:getSingleDataPointFields(org.junit.experimental.theories.ParameterSignature sig)
+{
+java.util.Collection fields;
+  java.lang.String requestedName;
+  java.util.ArrayList fieldsWithMatchingNames;
+  java.util.Iterator i$;
+  java.lang.reflect.Field field;
+  java.lang.String[] fieldNames;
+  java.lang.annotation.Annotation $stack9;
+  org.junit.experimental.theories.FromDataPoints $stack10;
+  boolean $stack14;
+  java.lang.Object $stack15;
+  org.junit.experimental.theories.DataPoint $stack17;
+  java.util.List $stack19;
+  fields = this#org.junit.experimental.theories.internal.AllMembersSupplier:getSingleDataPointFields(sig);
+ $stack9 = sig.getAnnotation(org.junit.experimental.theories.FromDataPoints);
+ $stack10=(org.junit.experimental.theories.FromDataPoints) $stack9;
+ requestedName = $stack10.value();
+ fieldsWithMatchingNames=new java.util.ArrayList;
+ fieldsWithMatchingNames#java.util.ArrayList();
+ i$ = fields.iterator();
+ label0:$stack14 = i$.hasNext();
+ if ($stack14==0) goto label1;
+ $stack15 = i$.next();
+ field=(java.lang.reflect.Field) $stack15;
+ $stack9 = field.getAnnotation(org.junit.experimental.theories.DataPoint);
+ $stack17=(org.junit.experimental.theories.DataPoint) $stack9;
+ fieldNames = $stack17.value();
+ $stack19 = java.util.Arrays.asList((java.lang.Object[])fieldNames);
+ $stack14 = $stack19.contains((java.lang.Object)requestedName);
+ if ($stack14==0) goto label2;
+ fieldsWithMatchingNames.add((java.lang.Object)field);
+ label2:goto label0;
+ label1:return  fieldsWithMatchingNames;
+ } 
+

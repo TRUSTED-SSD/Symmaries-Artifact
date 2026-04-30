@@ -1,0 +1,50 @@
+void org.apache.rocketmq.client.impl.consumer.ProcessQueue:makeMessageToConsumeAgain(java.util.List msgs)
+{
+java.util.Iterator e;
+  org.apache.rocketmq.common.message.MessageExt msg;
+  java.lang.Throwable l4;
+  java.util.concurrent.locks.ReadWriteLock $stack5;
+  java.util.concurrent.locks.Lock $stack6;
+  boolean $stack8;
+  java.lang.Object $stack11;
+  java.util.TreeMap $stack12;
+  long $stack13;
+  java.lang.Long $stack14;
+  java.lang.InterruptedException $stack21;
+  org.apache.rocketmq.logging.org.slf4j.Logger $stack22;
+  label0:$stack5=this.treeMapLock;
+ $stack6 = $stack5.writeLock();
+ $stack6.lockInterruptibly();
+ label1:e = msgs.iterator();
+ label2:$stack8 = e.hasNext();
+ if ($stack8==0) goto label3;
+ $stack11 = e.next();
+ msg=(org.apache.rocketmq.common.message.MessageExt) $stack11;
+ $stack12=this.consumingMsgOrderlyTreeMap;
+ $stack13 = msg.getQueueOffset();
+ $stack14 = java.lang.Long.valueOf($stack13);
+ $stack12.remove((java.lang.Object)$stack14);
+ $stack12=this.msgTreeMap;
+ $stack13 = msg.getQueueOffset();
+ $stack14 = java.lang.Long.valueOf($stack13);
+ $stack12.put((java.lang.Object)$stack14,(java.lang.Object)msg);
+ goto label2;
+ label3:$stack5=this.treeMapLock;
+ $stack6 = $stack5.writeLock();
+ $stack6.unlock();
+ goto label4;
+ label5:l4 = catch;
+ label6:$stack5=this.treeMapLock;
+ $stack6 = $stack5.writeLock();
+ $stack6.unlock();
+ throw l4;
+ label4:goto label7;
+ label8:$stack21 = catch;
+ $stack22=this.log;
+ $stack22.error("makeMessageToCosumeAgain exception",(java.lang.Throwable)$stack21);
+ label7:return;
+ catch java.lang.Throwable: label1 - label3 : label5;
+catch java.lang.Throwable: label5 - label6 : label5;
+catch java.lang.InterruptedException: label0 - label4 : label8;
+} 
+

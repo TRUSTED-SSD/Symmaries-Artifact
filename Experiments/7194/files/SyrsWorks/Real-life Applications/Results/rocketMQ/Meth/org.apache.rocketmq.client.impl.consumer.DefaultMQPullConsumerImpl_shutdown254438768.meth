@@ -1,0 +1,37 @@
+void org.apache.rocketmq.client.impl.consumer.DefaultMQPullConsumerImpl:shutdown()
+{
+org.apache.rocketmq.common.ServiceState $stack1;
+  int[] $stack2;
+  int $stack3;
+  org.apache.rocketmq.client.consumer.DefaultMQPullConsumer $stack5;
+  org.apache.rocketmq.client.impl.factory.MQClientInstance $stack6;
+  java.lang.String $stack7;
+  org.apache.rocketmq.logging.org.slf4j.Logger $stack10;
+  $stack2=org.apache.rocketmq.client.impl.consumer.DefaultMQPullConsumerImpl$2.$SwitchMap$org$apache$rocketmq$common$ServiceState;
+ $stack1=this.serviceState;
+ $stack3 = $stack1.ordinal();
+ $stack3=$stack2[$stack3];
+ switch [$stack3]
+if 0 goto label0;
+if 1 goto label1;
+if 2 goto label2;
+goto label3;
+ label0:goto label3;
+ label1:this.persistConsumerOffset();
+ $stack6=this.mQClientFactory;
+ $stack5=this.defaultMQPullConsumer;
+ $stack7 = $stack5.getConsumerGroup();
+ $stack6.unregisterConsumer($stack7);
+ $stack6=this.mQClientFactory;
+ $stack6.shutdown();
+ $stack10=org.apache.rocketmq.client.impl.consumer.DefaultMQPullConsumerImpl.log;
+ $stack5=this.defaultMQPullConsumer;
+ $stack7 = $stack5.getConsumerGroup();
+ $stack10.info("the consumer [{}] shutdown OK",(java.lang.Object)$stack7);
+ $stack1=org.apache.rocketmq.common.ServiceState.SHUTDOWN_ALREADY;
+ this.serviceState=$stack1;
+ goto label3;
+ label2:goto label3;
+ label3:return;
+ } 
+

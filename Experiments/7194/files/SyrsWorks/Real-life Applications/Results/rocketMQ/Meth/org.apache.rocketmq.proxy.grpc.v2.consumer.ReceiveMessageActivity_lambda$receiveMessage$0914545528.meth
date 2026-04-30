@@ -1,0 +1,53 @@
+void org.apache.rocketmq.proxy.grpc.v2.consumer.ReceiveMessageActivity:lambda$receiveMessage$0(org.apache.rocketmq.proxy.config.ProxyConfig proxyConfig,apache.rocketmq.v2.ReceiveMessageRequest request,java.lang.String group,java.lang.String topic,org.apache.rocketmq.proxy.common.ProxyContext ctx,org.apache.rocketmq.proxy.grpc.v2.consumer.ReceiveMessageResponseStreamWriter writer,org.apache.rocketmq.client.consumer.PopResult popResult)
+{
+java.util.List messageExtList;
+  java.util.Iterator l9;
+  org.apache.rocketmq.common.message.MessageExt messageExt;
+  java.lang.String receiptHandle;
+  boolean $stack13;
+  org.apache.rocketmq.client.consumer.PopStatus $stack19;
+  org.apache.rocketmq.client.consumer.PopStatus $stack20;
+  java.lang.Object $stack25;
+  int $stack29;
+  java.lang.String $stack30;
+  long $stack31;
+  int $stack32;
+  org.apache.rocketmq.proxy.processor.ReceiptHandleProcessor $stack33;
+  org.apache.rocketmq.proxy.grpc.v2.channel.GrpcChannelManager $stack34;
+  org.apache.rocketmq.proxy.grpc.v2.channel.GrpcClientChannel $stack36;
+  org.apache.rocketmq.proxy.common.MessageReceiptHandle tmp$886110124;
+  io.netty.channel.Channel tmp$1134576203;
+  $stack13 = proxyConfig.isEnableProxyAutoRenew();
+ if ($stack13==0) goto label0;
+ $stack13 = request.getAutoRenew();
+ if ($stack13==0) goto label0;
+ $stack19=org.apache.rocketmq.client.consumer.PopStatus.FOUND;
+ $stack20 = popResult.getPopStatus();
+ $stack13 = $stack19.equals((java.lang.Object)$stack20);
+ if ($stack13==0) goto label0;
+ messageExtList = popResult.getMsgFoundList();
+ l9 = messageExtList.iterator();
+ label1:$stack13 = l9.hasNext();
+ if ($stack13==0) goto label0;
+ $stack25 = l9.next();
+ messageExt=(org.apache.rocketmq.common.message.MessageExt) $stack25;
+ receiptHandle = messageExt.getProperty("POP_CK");
+ if (receiptHandle==null) goto label2;
+ tmp$886110124=new org.apache.rocketmq.proxy.common.MessageReceiptHandle;
+ $stack29 = messageExt.getQueueId();
+ $stack30 = messageExt.getMsgId();
+ $stack31 = messageExt.getQueueOffset();
+ $stack32 = messageExt.getReconsumeTimes();
+ tmp$886110124#org.apache.rocketmq.proxy.common.MessageReceiptHandle(group,topic,$stack29,receiptHandle,$stack30,$stack31,$stack32);
+ $stack33=this.receiptHandleProcessor;
+ $stack34=this.grpcChannelManager;
+ $stack30 = ctx.getClientID();
+ $stack36 = $stack34.getChannel($stack30);
+ $stack30 = messageExt.getMsgId();
+ tmp$1134576203=(io.netty.channel.Channel) $stack36;
+ $stack33.addReceiptHandle(tmp$1134576203,group,$stack30,receiptHandle,tmp$886110124);
+ label2:goto label1;
+ label0:writer.writeAndComplete(ctx,request,popResult);
+ return;
+ } 
+

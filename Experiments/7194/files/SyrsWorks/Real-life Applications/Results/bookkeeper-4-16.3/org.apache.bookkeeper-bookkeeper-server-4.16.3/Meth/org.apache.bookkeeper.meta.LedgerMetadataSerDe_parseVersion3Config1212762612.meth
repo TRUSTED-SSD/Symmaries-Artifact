@@ -1,0 +1,32 @@
+static org.apache.bookkeeper.client.api.LedgerMetadata org.apache.bookkeeper.meta.LedgerMetadataSerDe:parseVersion3Config(long ledgerId,java.io.InputStream is,java.util.Optional metadataStoreCtime)
+{
+org.apache.bookkeeper.client.LedgerMetadataBuilder builder;
+  org.apache.bookkeeper.proto.DataFormats$LedgerMetadataFormat$Builder formatBuilder;
+  org.apache.bookkeeper.proto.DataFormats$LedgerMetadataFormat data;
+  boolean $stack11;
+  org.apache.bookkeeper.client.api.LedgerMetadata $stack15;
+  java.lang.Object $stack16;
+  java.lang.Long $stack17;
+  org.apache.bookkeeper.client.LedgerMetadataBuilder $stack19;
+  builder = org.apache.bookkeeper.client.LedgerMetadataBuilder.create();
+ builder = builder.withId(ledgerId);
+ builder = builder.withMetadataFormatVersion(3);
+ formatBuilder = org.apache.bookkeeper.proto.DataFormats$LedgerMetadataFormat.newBuilder();
+ formatBuilder.mergeDelimitedFrom(is);
+ data = formatBuilder.build();
+ org.apache.bookkeeper.meta.LedgerMetadataSerDe.decodeFormat(data,builder);
+ $stack11 = data.hasCtime();
+ if ($stack11==0) goto label0;
+ builder.storingCreationTime((boolean)1);
+ goto label1;
+ label0:$stack11 = metadataStoreCtime.isPresent();
+ if ($stack11==0) goto label1;
+ $stack16 = metadataStoreCtime.get();
+ $stack17=(java.lang.Long) $stack16;
+ ledgerId = $stack17.longValue();
+ $stack19 = builder.withCreationTime(ledgerId);
+ $stack19.storingCreationTime((boolean)0);
+ label1:$stack15 = builder.build();
+ return  $stack15;
+ } 
+

@@ -1,0 +1,42 @@
+static org.w3c.dom.Element rifl.spec.RIFLReader:getChildElement(org.w3c.dom.Element elem)
+{
+java.lang.Object it;
+  org.w3c.dom.Element child;
+  org.w3c.dom.NodeList $stack3;
+  java.lang.Iterable $stack4;
+  java.lang.Object $stack6;
+  boolean $stack7;
+  java.lang.StringBuilder $stack9;
+  java.lang.String $stack11;
+  java.util.NoSuchElementException $stack12;
+  java.lang.IllegalArgumentException tmp$1146528670;
+  java.util.Iterator tmp$1649570285;
+  label0:$stack3 = elem.getChildNodes();
+ $stack4 = rifl.spec.RIFLReader.getElementList($stack3);
+ it = $stack4.iterator();
+ tmp$1649570285=(java.util.Iterator) it;
+ $stack6 = tmp$1649570285.next();
+ child=(org.w3c.dom.Element) $stack6;
+ tmp$1649570285=(java.util.Iterator) it;
+ $stack7 = tmp$1649570285.hasNext();
+ if ($stack7==0) goto label1;
+ tmp$1146528670=new java.lang.IllegalArgumentException;
+ $stack9=new java.lang.StringBuilder;
+ $stack9#java.lang.StringBuilder("The given element has more than one child: ");
+ $stack9 = $stack9.append((java.lang.Object)elem);
+ $stack11 = $stack9.toString();
+ tmp$1146528670#java.lang.IllegalArgumentException($stack11);
+ throw tmp$1146528670;
+ label1:return  child;
+ label2:$stack12 = catch;
+ it=$stack12;
+ tmp$1146528670=new java.lang.IllegalArgumentException;
+ $stack9=new java.lang.StringBuilder;
+ $stack9#java.lang.StringBuilder("The given element has no child: ");
+ $stack9 = $stack9.append((java.lang.Object)elem);
+ $stack11 = $stack9.toString();
+ tmp$1146528670#java.lang.IllegalArgumentException($stack11);
+ throw tmp$1146528670;
+ catch java.util.NoSuchElementException: label0 - label1 : label2;
+} 
+

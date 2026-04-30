@@ -1,0 +1,33 @@
+org.keycloak.TokenVerifier org.keycloak.TokenVerifier:audience(java.lang.String[] expectedAudiences)
+{
+org.keycloak.TokenVerifier $this;
+  org.keycloak.TokenVerifier$AudienceCheck[] audienceChecks;
+  int i;
+  org.keycloak.TokenVerifier$AudienceCheck $stack5;
+  int $stack12;
+  java.lang.String $stack15;
+  $this= this;
+ if (expectedAudiences==null) goto label0;
+ i=#expectedAudiences;
+ if (i!=0) goto label1;
+ label0:audienceChecks=new org.keycloak.TokenVerifier$AudienceCheck[1];
+ $stack5=new org.keycloak.TokenVerifier$AudienceCheck;
+ $stack5#org.keycloak.TokenVerifier$AudienceCheck(null);
+ audienceChecks[0]=$stack5;
+ $this = $this#org.keycloak.TokenVerifier:replaceCheck(org.keycloak.TokenVerifier$AudienceCheck,(boolean)1,(org.keycloak.TokenVerifier$Predicate[])audienceChecks);
+ return  $this;
+ label1:i=#expectedAudiences;
+ audienceChecks=new org.keycloak.TokenVerifier$AudienceCheck[i];
+ i=0;
+ label2:$stack12=#expectedAudiences;
+ if (i>=$stack12) goto label3;
+ $stack5=new org.keycloak.TokenVerifier$AudienceCheck;
+ $stack15=expectedAudiences[i];
+ $stack5#org.keycloak.TokenVerifier$AudienceCheck($stack15);
+ audienceChecks[i]=$stack5;
+ i=(i+1);
+ goto label2;
+ label3:$this = $this#org.keycloak.TokenVerifier:replaceCheck(org.keycloak.TokenVerifier$AudienceCheck,(boolean)1,(org.keycloak.TokenVerifier$Predicate[])audienceChecks);
+ return  $this;
+ } 
+

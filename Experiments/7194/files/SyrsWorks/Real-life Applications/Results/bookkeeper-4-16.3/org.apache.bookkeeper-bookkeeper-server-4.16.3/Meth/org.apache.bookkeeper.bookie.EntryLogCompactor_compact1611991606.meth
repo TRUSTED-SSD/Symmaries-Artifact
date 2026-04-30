@@ -1,0 +1,40 @@
+boolean org.apache.bookkeeper.bookie.EntryLogCompactor:compact(org.apache.bookkeeper.bookie.EntryLogMetadata entryLogMeta)
+{
+org.apache.bookkeeper.bookie.storage.EntryLogger $stack3;
+  long $stack4;
+  org.apache.bookkeeper.bookie.EntryLogCompactor$CompactionScannerFactory $stack5;
+  org.apache.bookkeeper.bookie.storage.EntryLogScanner $stack6;
+  org.slf4j.Logger $stack8;
+  java.lang.Long $stack11;
+  org.apache.bookkeeper.bookie.AbstractLogCompactor$LogRemovalListener $stack12;
+  java.io.IOException $stack14;
+  org.apache.bookkeeper.bookie.LedgerDirsManager$NoWritableLedgerDirException $stack16;
+  label0:$stack3=this.entryLogger;
+ $stack4 = entryLogMeta.getEntryLogId();
+ $stack5=this.scannerFactory;
+ $stack6 = $stack5.newScanner(entryLogMeta);
+ $stack3.scanEntryLog($stack4,$stack6);
+ $stack5=this.scannerFactory;
+ $stack5.flush();
+ $stack8=org.apache.bookkeeper.bookie.EntryLogCompactor.LOG;
+ $stack4 = entryLogMeta.getEntryLogId();
+ $stack11 = java.lang.Long.valueOf($stack4);
+ dummyClass.lowSink("Removing entry log {} after compaction");
+$stack8.info("Removing entry log {} after compaction",(java.lang.Object)$stack11);
+ $stack12=this.logRemovalListener;
+ $stack4 = entryLogMeta.getEntryLogId();
+ $stack12.removeEntryLog($stack4);
+ label1:goto label2;
+ label3:$stack16 = catch;
+ $stack8=org.apache.bookkeeper.bookie.EntryLogCompactor.LOG;
+ $stack8.warn("No writable ledger directory available, aborting compaction",(java.lang.Throwable)$stack16);
+ return  0;
+ label4:$stack14 = catch;
+ $stack8=org.apache.bookkeeper.bookie.EntryLogCompactor.LOG;
+ $stack8.error("Error compacting entry log. Log won\'t be deleted",(java.lang.Throwable)$stack14);
+ return  0;
+ label2:return  1;
+ catch org.apache.bookkeeper.bookie.LedgerDirsManager$NoWritableLedgerDirException: label0 - label1 : label3;
+catch java.io.IOException: label0 - label1 : label4;
+} 
+

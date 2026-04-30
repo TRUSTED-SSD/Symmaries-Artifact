@@ -1,0 +1,49 @@
+static java.lang.String org.apache.rocketmq.common.MixAll:getLocalhostByNetworkInterface()
+{
+java.util.ArrayList candidatesHost;
+  java.util.Enumeration enumeration;
+  java.net.NetworkInterface networkInterface;
+  java.util.Enumeration addrs;
+  java.net.InetAddress address;
+  boolean $stack7;
+  java.lang.Object $stack9;
+  java.lang.String $stack10;
+  java.lang.String $stack13;
+  candidatesHost=new java.util.ArrayList;
+ candidatesHost#java.util.ArrayList();
+ enumeration = java.net.NetworkInterface.getNetworkInterfaces();
+ label0:$stack7 = enumeration.hasMoreElements();
+ if ($stack7==0) goto label1;
+ $stack9 = enumeration.nextElement();
+ networkInterface=(java.net.NetworkInterface) $stack9;
+ $stack10="docker0";
+ $stack13 = networkInterface.getName();
+ $stack7 = $stack10.equals((java.lang.Object)$stack13);
+ if ($stack7!=0) goto label0;
+ $stack7 = networkInterface.isUp();
+ if ($stack7!=0) goto label2;
+ goto label0;
+ label2:addrs = networkInterface.getInetAddresses();
+ label3:$stack7 = addrs.hasMoreElements();
+ if ($stack7==0) goto label4;
+ $stack9 = addrs.nextElement();
+ address=(java.net.InetAddress) $stack9;
+ $stack7 = address.isLoopbackAddress();
+ if ($stack7==0) goto label5;
+ goto label3;
+ label5:$stack7=address instanceof java.net.Inet6Address;
+ if ($stack7==0) goto label6;
+ $stack10 = address.getHostAddress();
+ candidatesHost.add((java.lang.Object)$stack10);
+ goto label3;
+ label6:$stack10 = address.getHostAddress();
+ return  $stack10;
+ label4:goto label0;
+ label1:$stack7 = candidatesHost.isEmpty();
+ if ($stack7!=0) goto label7;
+ $stack9 = candidatesHost.get(0);
+ $stack10=(java.lang.String) $stack9;
+ return  $stack10;
+ label7:return  null;
+ } 
+

@@ -1,0 +1,20 @@
+long org.apache.rocketmq.client.impl.consumer.PullAPIWrapper:recalculatePullFromWhichNode(org.apache.rocketmq.common.message.MessageQueue mq)
+{
+java.util.concurrent.atomic.AtomicLong suggest;
+  boolean $stack3;
+  java.util.concurrent.ConcurrentMap $stack4;
+  java.lang.Object $stack5;
+  long $stack6;
+  $stack3 = this.isConnectBrokerByUser();
+ if ($stack3==0) goto label0;
+ $stack6=this.defaultBrokerId;
+ return  $stack6;
+ label0:$stack4=this.pullFromWhichNodeTable;
+ $stack5 = $stack4.get((java.lang.Object)mq);
+ suggest=(java.util.concurrent.atomic.AtomicLong) $stack5;
+ if (suggest==null) goto label1;
+ $stack6 = suggest.get();
+ return  $stack6;
+ label1:return  0L;
+ } 
+

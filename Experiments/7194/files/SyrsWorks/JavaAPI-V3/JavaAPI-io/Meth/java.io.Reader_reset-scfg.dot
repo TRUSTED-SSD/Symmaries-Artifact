@@ -1,0 +1,29 @@
+digraph G {
+  node [shape=box, ];
+  "pc0_js1" [label="〈$r1 = new java.io.IOException, js1〉", ];
+  "pc1_js1" [label="〈$r1#java.io.IOException.init (\"reset() not supported\"), js1〉\n\
+tt",
+             ];
+  "pc2_js1" [label="〈throw $r1, js1〉", ];
+  "pc3_js1" [label="〈sink, js1〉\n\
+obj_level(this) ⊑ ret(obj_level(this))' ∧ (ret(this.><this)' ∨ ¬this.><this)",
+             ];
+  
+  
+  "pc0_js1" -> "pc1_js1" [label="tt,\n\
+{$r1.><$r1 := ff,\n\
+ $r1.><this := ff,\n\
+ this.><$r1 := ff,\n\
+ level($r1) := pc,\n\
+ obj_level($r1) := pc}",
+                          ];
+  "pc1_js1" -> "pc2_js1" [label="tt,\n\
+{$r1.><$r1 := ff,\n\
+ $r1.><this := ff,\n\
+ this.><$r1 := ff,\n\
+ obj_level($r1) := pc}",
+                          ];
+  "pc2_js1" -> "pc3_js1" [label="tt,\n\
+{ϕ := S2}", ];
+  
+  }

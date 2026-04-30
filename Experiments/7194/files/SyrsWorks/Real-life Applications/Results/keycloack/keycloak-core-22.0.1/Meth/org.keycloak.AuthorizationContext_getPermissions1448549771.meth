@@ -1,0 +1,23 @@
+java.util.List org.keycloak.AuthorizationContext:getPermissions()
+{
+org.keycloak.representations.AccessToken$Authorization authorization;
+  org.keycloak.representations.AccessToken $stack2;
+  java.util.ArrayList $stack5;
+  java.util.Collection $stack6;
+  java.util.List $stack7;
+  $stack2=this.authzToken;
+ if ($stack2!=null) goto label0;
+ $stack7 = java.util.Collections.emptyList();
+ return  $stack7;
+ label0:$stack2=this.authzToken;
+ authorization = $stack2.getAuthorization();
+ if (authorization!=null) goto label1;
+ $stack7 = java.util.Collections.emptyList();
+ return  $stack7;
+ label1:$stack5=new java.util.ArrayList;
+ $stack6 = authorization.getPermissions();
+ $stack5#java.util.ArrayList($stack6);
+ $stack7 = java.util.Collections.unmodifiableList((java.util.List)$stack5);
+ return  $stack7;
+ } 
+

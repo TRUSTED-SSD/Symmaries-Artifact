@@ -1,0 +1,28 @@
+long org.apache.bookkeeper.bookie.DefaultEntryLogger:getLastLogIdInDir(java.io.File dir)
+{
+java.util.ArrayList currentIds;
+  org.apache.commons.lang3.tuple.Pair largestGap;
+  java.util.List $stack5;
+  boolean $stack6;
+  java.lang.Object $stack11;
+  java.lang.Integer $stack12;
+  int $stack13;
+  long $stack15;
+  currentIds=new java.util.ArrayList;
+ currentIds#java.util.ArrayList();
+ $stack5 = org.apache.bookkeeper.util.LedgerDirUtil.logIdsInDirectory(dir);
+ currentIds.addAll((java.util.Collection)$stack5);
+ $stack5 = org.apache.bookkeeper.util.LedgerDirUtil.compactedLogIdsInDirectory(dir);
+ currentIds.addAll((java.util.Collection)$stack5);
+ $stack6 = currentIds.isEmpty();
+ if ($stack6==0) goto label0;
+ return  -1L;
+ label0:largestGap = org.apache.bookkeeper.util.LedgerDirUtil.findLargestGap((java.util.List)currentIds);
+ $stack11 = largestGap.getLeft();
+ $stack12=(java.lang.Integer) $stack11;
+ $stack13 = $stack12.intValue();
+ $stack13=($stack13-1);
+ $stack15=(long) $stack13;
+ return  $stack15;
+ } 
+

@@ -1,0 +1,25 @@
+void org.apache.rocketmq.store.ha.autoswitch.AutoSwitchHAService:setSyncStateSet(java.util.Set syncStateSet)
+{
+java.util.concurrent.locks.Lock writeLock;
+  java.util.concurrent.locks.ReadWriteLock $stack4;
+  java.util.concurrent.CopyOnWriteArraySet $stack6;
+  long $stack9;
+  java.lang.Throwable $stack10;
+  $stack4=this.readWriteLock;
+ writeLock = $stack4.writeLock();
+ label0:writeLock.lock();
+ $stack6=this.syncStateSet;
+ $stack6.clear();
+ $stack6=this.syncStateSet;
+ $stack6.addAll((java.util.Collection)syncStateSet);
+ $stack9 = this#org.apache.rocketmq.store.ha.autoswitch.AutoSwitchHAService:computeConfirmOffset();
+ this.confirmOffset=$stack9;
+ label1:writeLock.unlock();
+ goto label2;
+ label3:$stack10 = catch;
+ writeLock.unlock();
+ throw $stack10;
+ label2:return;
+ catch java.lang.Throwable: label0 - label1 : label3;
+} 
+

@@ -1,0 +1,23 @@
+boolean org.apache.rocketmq.common.queue.RoundQueue:put(java.lang.Object e)
+{
+boolean ok;
+  java.util.Queue $stack3;
+  boolean $stack4;
+  int $stack6;
+  int $stack7;
+  ok=0;
+ $stack3=this.queue;
+ $stack4 = $stack3.contains(e);
+ if ($stack4!=0) goto label0;
+ $stack3=this.queue;
+ $stack6 = $stack3.size();
+ $stack7=this.capacity;
+ if ($stack6<$stack7) goto label1;
+ $stack3=this.queue;
+ $stack3.poll();
+ label1:$stack3=this.queue;
+ $stack3.add(e);
+ ok=1;
+ label0:return  ok;
+ } 
+

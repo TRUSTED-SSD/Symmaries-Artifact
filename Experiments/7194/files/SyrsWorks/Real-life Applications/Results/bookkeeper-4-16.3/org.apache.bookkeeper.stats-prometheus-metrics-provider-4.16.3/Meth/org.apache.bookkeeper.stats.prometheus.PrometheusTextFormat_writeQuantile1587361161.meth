@@ -1,0 +1,32 @@
+void org.apache.bookkeeper.stats.prometheus.PrometheusTextFormat:writeQuantile(java.io.Writer @w,org.apache.bookkeeper.stats.prometheus.DataSketchesOpStatsLogger opStat,java.lang.String @name,java.lang.Boolean success,double quantile)
+{
+java.io.Writer $stack7;
+  java.util.Map $stack15;
+  boolean $stack16;
+  java.lang.String name;
+java.io.Writer w;
+w=@w;
+name=@name;
+$stack7 = w.append((java.lang.CharSequence)name);
+ $stack7 = $stack7.append((java.lang.CharSequence)"{success=\"");
+ name = success.toString();
+ $stack7 = $stack7.append((java.lang.CharSequence)name);
+ $stack7 = $stack7.append((java.lang.CharSequence)"\",quantile=\"");
+ name = java.lang.Double.toString(quantile);
+ $stack7 = $stack7.append((java.lang.CharSequence)name);
+ $stack7.append((java.lang.CharSequence)"\"");
+ $stack15 = opStat.getLabels();
+ $stack16 = $stack15.isEmpty();
+ if ($stack16!=0) goto label0;
+ w.append((java.lang.CharSequence)", ");
+ $stack15 = opStat.getLabels();
+ this#org.apache.bookkeeper.stats.prometheus.PrometheusTextFormat:writeLabelsNoBraces(w,$stack15);
+ label0:w = w.append((java.lang.CharSequence)"} ");
+ $stack16 = success.booleanValue();
+ quantile = opStat.getQuantileValue($stack16,quantile);
+ name = java.lang.Double.toString(quantile);
+ w = w.append((java.lang.CharSequence)name);
+ w.append((char)10);
+ return;
+ } 
+

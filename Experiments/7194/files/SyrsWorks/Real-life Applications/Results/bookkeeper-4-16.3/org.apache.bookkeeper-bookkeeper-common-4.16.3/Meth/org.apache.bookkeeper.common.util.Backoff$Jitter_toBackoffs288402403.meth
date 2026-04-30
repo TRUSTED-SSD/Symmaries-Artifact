@@ -1,0 +1,38 @@
+java.util.stream.Stream org.apache.bookkeeper.common.util.Backoff$Jitter:toBackoffs()
+{
+java.util.stream.Stream backoffStream;
+  org.apache.bookkeeper.common.util.Backoff$Jitter$Type $stack2;
+  int[] $stack3;
+  int $stack4;
+  long $stack6;
+  long $stack7;
+  byte $stack10;
+  $stack3=org.apache.bookkeeper.common.util.Backoff$1.$SwitchMap$org$apache$bookkeeper$common$util$Backoff$Jitter$Type;
+ $stack2=this.type;
+ $stack4 = $stack2.ordinal();
+ $stack4=$stack3[$stack4];
+ switch [$stack4]
+if 0 goto label0;
+if 1 goto label1;
+if 2 goto label2;
+goto label2;
+ label0:$stack7=this.startMs;
+ $stack6=this.maxMs;
+ backoffStream = org.apache.bookkeeper.common.util.Backoff.decorrelatedJittered($stack7,$stack6);
+ goto label3;
+ label1:$stack7=this.startMs;
+ $stack6=this.maxMs;
+ backoffStream = org.apache.bookkeeper.common.util.Backoff.equalJittered($stack7,$stack6);
+ goto label3;
+ label2:$stack7=this.startMs;
+ $stack6=this.maxMs;
+ backoffStream = org.apache.bookkeeper.common.util.Backoff.exponentialJittered($stack7,$stack6);
+ label3:$stack6=this.limit;
+ $stack10=($stack6 cmp 0L);
+ if ($stack10<0) goto label4;
+ $stack6=this.limit;
+ backoffStream = backoffStream.limit($stack6);
+ return  backoffStream;
+ label4:return  backoffStream;
+ } 
+

@@ -1,0 +1,29 @@
+void org.apache.kerby.asn1.type.Asn1Boolean:toValue()
+{
+byte[] bytes;
+  byte $stack3;
+  short $stack5;
+  boolean $stack6;
+  java.lang.Boolean $stack7;
+  bytes = this.getBytes();
+ $stack3=bytes[0];
+ if ($stack3!=0) goto label0;
+ $stack7 = java.lang.Boolean.valueOf((boolean)0);
+ this.setValue((java.lang.Object)$stack7);
+ goto label1;
+ label0:$stack3=bytes[0];
+ $stack5=($stack3 & 255);
+ if ($stack5!=255) goto label2;
+ $stack7 = java.lang.Boolean.valueOf((boolean)1);
+ this.setValue((java.lang.Object)$stack7);
+ goto label1;
+ label2:$stack6 = this.isBER();
+ if ($stack6==0) goto label3;
+ $stack7 = java.lang.Boolean.valueOf((boolean)1);
+ this.setValue((java.lang.Object)$stack7);
+ goto label1;
+ label3:$stack7 = java.lang.Boolean.valueOf((boolean)0);
+ this.setValue((java.lang.Object)$stack7);
+ label1:return;
+ } 
+

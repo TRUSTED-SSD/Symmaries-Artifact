@@ -1,0 +1,20 @@
+void org.apache.rocketmq.client.impl.MQClientAPIImpl:queryMessage(java.lang.String @addr,org.apache.rocketmq.remoting.protocol.header.QueryMessageRequestHeader requestHeader,long timeoutMillis,org.apache.rocketmq.remoting.InvokeCallback invokeCallback,java.lang.Boolean isUnqiueKey)
+{
+org.apache.rocketmq.remoting.protocol.RemotingCommand request;
+  java.lang.String $stack10;
+  org.apache.rocketmq.client.ClientConfig $stack11;
+  org.apache.rocketmq.remoting.RemotingClient $stack12;
+  boolean $stack13;
+  java.lang.String addr;
+addr=@addr;
+request = org.apache.rocketmq.remoting.protocol.RemotingCommand.createRequestCommand(12,(org.apache.rocketmq.remoting.CommandCustomHeader)requestHeader);
+ $stack10 = isUnqiueKey.toString();
+ request.addExtField("_UNIQUE_KEY_QUERY",$stack10);
+ $stack12=this.remotingClient;
+ $stack11=this.clientConfig;
+ $stack13 = $stack11.isVipChannelEnabled();
+ addr = org.apache.rocketmq.common.MixAll.brokerVIPChannel($stack13,addr);
+ $stack12.invokeAsync(addr,request,timeoutMillis,invokeCallback);
+ return;
+ } 
+

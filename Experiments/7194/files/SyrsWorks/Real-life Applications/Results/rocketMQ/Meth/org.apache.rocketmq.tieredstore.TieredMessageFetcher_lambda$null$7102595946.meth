@@ -1,0 +1,32 @@
+static void org.apache.rocketmq.tieredstore.TieredMessageFetcher:lambda$null$7(java.nio.ByteBuffer @msgBuffer,org.apache.rocketmq.store.GetMessageResult result,org.apache.commons.lang3.tuple.Pair pair)
+{
+java.lang.Object $stack4;
+  java.lang.Integer $stack5;
+  int $stack6;
+  org.apache.rocketmq.store.SelectMappedBufferResult $stack13;
+  long $stack17;
+  java.nio.ByteBuffer msgBuffer;
+msgBuffer=@msgBuffer;
+$stack4 = pair.getLeft();
+ $stack5=(java.lang.Integer) $stack4;
+ $stack6 = $stack5.intValue();
+ msgBuffer.position($stack6);
+ msgBuffer = msgBuffer.slice();
+ $stack4 = pair.getRight();
+ $stack5=(java.lang.Integer) $stack4;
+ $stack6 = $stack5.intValue();
+ msgBuffer.limit($stack6);
+ $stack13=new org.apache.rocketmq.store.SelectMappedBufferResult;
+ $stack4 = pair.getLeft();
+ $stack5=(java.lang.Integer) $stack4;
+ $stack6 = $stack5.intValue();
+ $stack17=(long) $stack6;
+ $stack4 = pair.getRight();
+ $stack5=(java.lang.Integer) $stack4;
+ $stack6 = $stack5.intValue();
+ $stack13#org.apache.rocketmq.store.SelectMappedBufferResult($stack17,msgBuffer,$stack6,null);
+ $stack17 = org.apache.rocketmq.tieredstore.util.MessageBufferUtil.getQueueOffset(msgBuffer);
+ result.addMessage($stack13,$stack17);
+ return;
+ } 
+

@@ -1,0 +1,33 @@
+io.netty.buffer.ByteBuf org.apache.bookkeeper.bookie.storage.ldb.WriteCache:get(long ledgerId,long entryId)
+{
+org.apache.bookkeeper.util.collections.ConcurrentLongLongPairHashMap$LongPair result;
+  int size;
+  io.netty.buffer.ByteBuf entry;
+  int localOffset;
+  int segmentIdx;
+  org.apache.bookkeeper.util.collections.ConcurrentLongLongPairHashMap $stack12;
+  io.netty.buffer.ByteBufAllocator $stack15;
+  io.netty.buffer.ByteBuf[] $stack22;
+  io.netty.buffer.ByteBuf $stack23;
+  $stack12=this.index;
+ result = $stack12.get(ledgerId,entryId);
+ if (result!=null) goto label0;
+ return  null;
+ label0:ledgerId=result.first;
+ entryId=result.second;
+ size=(int) entryId;
+ $stack15=this.allocator;
+ entry = $stack15.buffer(size,size);
+ entryId=this.segmentOffsetMask;
+ entryId=(ledgerId & entryId);
+ localOffset=(int) entryId;
+ entryId=this.segmentOffsetBits;
+ segmentIdx=(int) entryId;
+ ledgerId=(ledgerId>>>segmentIdx);
+ segmentIdx=(int) ledgerId;
+ $stack22=this.cacheSegments;
+ $stack23=$stack22[segmentIdx];
+ entry.writeBytes($stack23,localOffset,size);
+ return  entry;
+ } 
+

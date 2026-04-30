@@ -1,0 +1,18 @@
+org.apache.rocketmq.client.producer.DefaultMQProducer org.apache.rocketmq.client.trace.AsyncTraceDispatcher:getAndCreateTraceProducer(org.apache.rocketmq.remoting.RPCHook rpcHook)
+{
+org.apache.rocketmq.client.producer.DefaultMQProducer traceProducerInstance;
+  java.lang.String $stack4;
+  int $stack5;
+  traceProducerInstance=this.traceProducer;
+ if (traceProducerInstance!=null) goto label0;
+ traceProducerInstance=new org.apache.rocketmq.client.producer.DefaultMQProducer;
+ traceProducerInstance#org.apache.rocketmq.client.producer.DefaultMQProducer(rpcHook);
+ $stack4 = this#org.apache.rocketmq.client.trace.AsyncTraceDispatcher:genGroupNameForTrace();
+ traceProducerInstance.setProducerGroup($stack4);
+ traceProducerInstance.setSendMsgTimeout(5000);
+ traceProducerInstance.setVipChannelEnabled((boolean)0);
+ $stack5=this.maxMsgSize;
+ traceProducerInstance.setMaxMessageSize($stack5);
+ label0:return  traceProducerInstance;
+ } 
+

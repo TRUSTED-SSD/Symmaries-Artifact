@@ -1,0 +1,37 @@
+digraph G {
+  node [shape=box, ];
+  "pc0_js1" [label="〈$r1 = this.nextEntry (), js1〉\n\
+pc ⊔ level(this) ⊔ obj_level(this) = ⊥",
+             ];
+  "pc1_js1" [label="〈$r2 = $r1.value, js1〉", ];
+  "pc2_js1" [label="〈return $r2, js1〉", ];
+  "pc3_js1" [label="〈sink, js1〉\n\
+obj_level(this) ⊑ ret(obj_level(this))' ∧ (ret(this.><this)' ∨ ¬this.><this) ∧ (ϕ ≠ S2 ∨ obj_level($r2) ⊑ ret(obj_level())' ∧ pc ⊔ level($r2) ⊑ ret(level())' ∧ (ret(~this)' ∨ ¬$r2~this) ∧ (ret(.><this)' ∨ ¬this.><$r2) ∧ (ret(this.><)' ∨ ¬$r2.><this))",
+             ];
+  
+  
+  "pc0_js1" -> "pc1_js1" [label="tt,\n\
+{$r2.><$r2 := ff,\n\
+ $r2.><this := ff,\n\
+ this.><$r2 := ff,\n\
+ this.><this := tt,\n\
+ level($r1) := pc,\n\
+ obj_level($r1) := ⊤,\n\
+ obj_level($r2) := ⊥,\n\
+ obj_level(this) := ⊤}",
+                          ];
+  "pc1_js1" -> "pc2_js1" [label="tt,\n\
+{$r1~$r2 := ff,\n\
+ $r2~this := ff,\n\
+ $r1.><$r2 := tt,\n\
+ $r2.><$r1 := ff,\n\
+ $r2.><$r2 := ff,\n\
+ $r2.><this := ff,\n\
+ this.><$r2 := ff,\n\
+ level($r2) := ⊤,\n\
+ obj_level($r2) := ⊤}",
+                          ];
+  "pc2_js1" -> "pc3_js1" [label="tt,\n\
+{ϕ := S2}", ];
+  
+  }

@@ -1,0 +1,38 @@
+org.apache.rocketmq.remoting.protocol.body.ConsumerConnection org.apache.rocketmq.client.impl.MQClientAPIImpl:getConsumerConnectionList(java.lang.String addr,java.lang.String @consumerGroup,long timeoutMillis)
+{
+org.apache.rocketmq.remoting.protocol.header.GetConsumerConnectionListRequestHeader requestHeader;
+  org.apache.rocketmq.remoting.protocol.RemotingCommand request;
+  org.apache.rocketmq.client.ClientConfig $stack10;
+  org.apache.rocketmq.remoting.RemotingClient $stack11;
+  boolean $stack12;
+  int $stack15;
+  byte[] $stack16;
+  java.lang.Object $stack17;
+  org.apache.rocketmq.remoting.protocol.body.ConsumerConnection $stack18;
+  org.apache.rocketmq.client.exception.MQBrokerException $stack19;
+  java.lang.String consumerGroup;
+consumerGroup=@consumerGroup;
+requestHeader=new org.apache.rocketmq.remoting.protocol.header.GetConsumerConnectionListRequestHeader;
+ requestHeader#org.apache.rocketmq.remoting.protocol.header.GetConsumerConnectionListRequestHeader();
+ requestHeader.setConsumerGroup(consumerGroup);
+ request = org.apache.rocketmq.remoting.protocol.RemotingCommand.createRequestCommand(203,(org.apache.rocketmq.remoting.CommandCustomHeader)requestHeader);
+ $stack11=this.remotingClient;
+ $stack10=this.clientConfig;
+ $stack12 = $stack10.isVipChannelEnabled();
+ consumerGroup = org.apache.rocketmq.common.MixAll.brokerVIPChannel($stack12,addr);
+ request = $stack11.invokeSync(consumerGroup,request,timeoutMillis);
+ $stack15 = request.getCode();
+ switch [$stack15]
+if 0 goto label0;
+goto label1;
+ label0:$stack16 = request.getBody();
+ $stack17 = org.apache.rocketmq.remoting.protocol.RemotingSerializable.decode($stack16,org.apache.rocketmq.remoting.protocol.body.ConsumerConnection);
+ $stack18=(org.apache.rocketmq.remoting.protocol.body.ConsumerConnection) $stack17;
+ return  $stack18;
+ label1:$stack19=new org.apache.rocketmq.client.exception.MQBrokerException;
+ $stack15 = request.getCode();
+ consumerGroup = request.getRemark();
+ $stack19#org.apache.rocketmq.client.exception.MQBrokerException($stack15,consumerGroup,addr);
+ throw $stack19;
+ } 
+

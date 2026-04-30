@@ -1,0 +1,121 @@
+    protected rifl.spec.abstractbytecode.AbstractBytecodeField readField(org.w3c.dom.Element, boolean) throws rifl.spec.RIFLIntegrityException
+    {
+        rifl.spec.abstractbytecode.AbstractBytecodeRIFLReader this;
+        org.w3c.dom.Element elem;
+        boolean isSource, $stack7;
+        java.lang.String className, fieldName;
+        rifl.spec.abstractbytecode.AbstractBytecodeField $stack10;
+        rifl.spec.RIFLIntegrityException $stack11;
+        java.lang.StringBuilder $stack12;
+
+        this := @this: rifl.spec.abstractbytecode.AbstractBytecodeRIFLReader;
+
+        elem := @parameter0: org.w3c.dom.Element;
+
+        isSource := @parameter1: boolean;
+
+        className = interfaceinvoke elem.<org.w3c.dom.Element: java.lang.String getAttribute(java.lang.String)>("class");
+/*111*/
+/*111*/
+
+        fieldName = interfaceinvoke elem.<org.w3c.dom.Element: java.lang.String getAttribute(java.lang.String)>("name");
+/*112*/
+/*112*/
+
+        $stack7 = staticinvoke <rifl.spec.abstractbytecode.AbstractBytecodeSyntaxChecker: boolean isArrayClassNameCorrect(java.lang.String)>(className);
+/*114*/
+
+        if $stack7 == 0 goto label1;
+/*114*/
+
+        $stack7 = virtualinvoke fieldName.<java.lang.String: boolean equals(java.lang.Object)>("content");
+/*115*/
+
+        if $stack7 != 0 goto label1;
+/*115*/
+
+        $stack7 = virtualinvoke fieldName.<java.lang.String: boolean equals(java.lang.Object)>("length");
+/*120*/
+
+        if $stack7 != 0 goto label1;
+/*120*/
+
+        $stack11 = new rifl.spec.RIFLIntegrityException;
+/*116*/
+
+        specialinvoke $stack11.<rifl.spec.RIFLIntegrityException: void <init>(java.lang.String)>("If class name of field is an array class, fields may only be content or length.");
+/*116*/
+
+        throw $stack11;
+/*116*/
+
+     label1:
+        $stack7 = staticinvoke <rifl.spec.abstractbytecode.AbstractBytecodeSyntaxChecker: boolean isClassNameCorrect(java.lang.String)>(className);
+/*120*/
+
+        if $stack7 != 0 goto label2;
+/*120*/
+
+        $stack7 = staticinvoke <rifl.spec.abstractbytecode.AbstractBytecodeSyntaxChecker: boolean isArrayClassNameCorrect(java.lang.String)>(className);
+/*121*/
+
+        if $stack7 != 0 goto label2;
+/*121*/
+
+        $stack11 = new rifl.spec.RIFLIntegrityException;
+/*122*/
+
+        $stack12 = new java.lang.StringBuilder;
+/*122*/
+
+        specialinvoke $stack12.<java.lang.StringBuilder: void <init>(java.lang.String)>("Invalid class name: ");
+/*122*/
+
+        $stack12 = virtualinvoke $stack12.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>(className);
+/*122*/
+
+        className = virtualinvoke $stack12.<java.lang.StringBuilder: java.lang.String toString()>();
+/*122*/
+
+        specialinvoke $stack11.<rifl.spec.RIFLIntegrityException: void <init>(java.lang.String)>(className);
+/*122*/
+
+        throw $stack11;
+/*122*/
+
+     label2:
+        $stack7 = staticinvoke <rifl.spec.abstractbytecode.AbstractBytecodeSyntaxChecker: boolean isFieldNameCorrect(java.lang.String)>(fieldName);
+/*125*/
+
+        if $stack7 != 0 goto label3;
+/*125*/
+
+        $stack11 = new rifl.spec.RIFLIntegrityException;
+/*126*/
+
+        $stack12 = new java.lang.StringBuilder;
+/*126*/
+
+        specialinvoke $stack12.<java.lang.StringBuilder: void <init>(java.lang.String)>("Invalid field name: ");
+/*126*/
+
+        $stack12 = virtualinvoke $stack12.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>(fieldName);
+/*126*/
+
+        className = virtualinvoke $stack12.<java.lang.StringBuilder: java.lang.String toString()>();
+/*126*/
+
+        specialinvoke $stack11.<rifl.spec.RIFLIntegrityException: void <init>(java.lang.String)>(className);
+/*126*/
+
+        throw $stack11;
+/*126*/
+
+     label3:
+        $stack10 = virtualinvoke this.<rifl.spec.abstractbytecode.AbstractBytecodeRIFLReader: rifl.spec.abstractbytecode.AbstractBytecodeField createField(java.lang.String,java.lang.String,boolean)>(className, fieldName, isSource);
+/*129*/
+
+        return $stack10;
+/*129*/
+    }
+

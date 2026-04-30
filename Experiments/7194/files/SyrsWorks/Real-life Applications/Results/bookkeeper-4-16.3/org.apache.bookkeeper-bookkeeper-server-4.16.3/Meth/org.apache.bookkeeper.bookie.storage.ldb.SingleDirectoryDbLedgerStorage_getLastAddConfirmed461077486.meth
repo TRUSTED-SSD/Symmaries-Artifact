@@ -1,0 +1,35 @@
+long org.apache.bookkeeper.bookie.storage.ldb.SingleDirectoryDbLedgerStorage:getLastAddConfirmed(long ledgerId)
+{
+org.apache.bookkeeper.bookie.storage.ldb.TransientLedgerInfo ledgerInfo;
+  long lac;
+  io.netty.buffer.ByteBuf bb;
+  java.lang.Throwable l7;
+  org.apache.bookkeeper.util.collections.ConcurrentLongHashMap $stack8;
+  java.lang.Object $stack9;
+  byte $stack10;
+  this#org.apache.bookkeeper.bookie.storage.ldb.SingleDirectoryDbLedgerStorage:throwIfLimbo(ledgerId);
+ $stack8=this.transientLedgerInfoCache;
+ $stack9 = $stack8.get(ledgerId);
+ ledgerInfo=(org.apache.bookkeeper.bookie.storage.ldb.TransientLedgerInfo) $stack9;
+ if (null==ledgerInfo) goto label0;
+ lac = ledgerInfo.getLastAddConfirmed();
+ goto label1;
+ label0:lac=-9223372036854775808L;
+ label1:$stack10=(lac cmp -9223372036854775808L);
+ if ($stack10!=0) goto label2;
+ bb = this.getEntry(ledgerId,-1L);
+ label3:bb.skipBytes(16);
+ lac = bb.readLong();
+dummyClass.highSourceMut(lac);
+ ledgerInfo = this#org.apache.bookkeeper.bookie.storage.ldb.SingleDirectoryDbLedgerStorage:getOrAddLedgerInfo(ledgerId);
+ lac = ledgerInfo.setLastAddConfirmed(lac);
+ label4:io.netty.util.ReferenceCountUtil.release((java.lang.Object)bb);
+ goto label2;
+ label5:l7 = catch;
+ label6:io.netty.util.ReferenceCountUtil.release((java.lang.Object)bb);
+ throw l7;
+ label2:return  lac;
+ catch java.lang.Throwable: label3 - label4 : label5;
+catch java.lang.Throwable: label5 - label6 : label5;
+} 
+

@@ -1,0 +1,39 @@
+com.google.zxing.common.BitArray com.google.zxing.aztec.encoder.State:toBitArray(byte[] text)
+{
+com.google.zxing.aztec.encoder.State $this;
+  java.util.ArrayList symbols;
+  java.lang.Object token;
+  int i;
+  com.google.zxing.common.BitArray $stack8;
+  com.google.zxing.aztec.encoder.Token $stack11;
+  java.util.ArrayList tmp$1139937596;
+  com.google.zxing.common.BitArray tmp$473320118;
+  $this= this;
+ tmp$1139937596=new java.util.ArrayList;
+ symbols=tmp$1139937596;
+ tmp$1139937596#java.util.ArrayList();
+ symbols=tmp$1139937596;
+ i=#text;
+ $this = $this.endBinaryShift(i);
+ token=$this.token;
+ label0:if (token==null) goto label1;
+ tmp$1139937596.add(token);
+ $stack11=(com.google.zxing.aztec.encoder.Token) token;
+ token = $stack11.getPrevious();
+ goto label0;
+ label1:tmp$473320118=new com.google.zxing.common.BitArray;
+ tmp$473320118#com.google.zxing.common.BitArray();
+ token=tmp$473320118;
+ i = tmp$1139937596.size();
+ i=(i-1);
+ label2:if (i<0) goto label3;
+ token = tmp$1139937596.get(i);
+ $stack11=(com.google.zxing.aztec.encoder.Token) token;
+ $stack8=(com.google.zxing.common.BitArray) tmp$473320118;
+ $stack11.appendTo($stack8,text);
+ i=(i+-1);
+ goto label2;
+ label3:$stack8=(com.google.zxing.common.BitArray) tmp$473320118;
+ return  $stack8;
+ } 
+

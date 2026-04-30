@@ -1,0 +1,57 @@
+boolean org.apache.rocketmq.client.impl.consumer.RebalancePushImpl:removeUnnecessaryMessageQueue(org.apache.rocketmq.common.message.MessageQueue mq,org.apache.rocketmq.client.impl.consumer.ProcessQueue pq)
+{
+boolean e;
+  java.lang.Throwable l4;
+  org.apache.rocketmq.client.impl.consumer.DefaultMQPushConsumerImpl $stack5;
+  org.apache.rocketmq.client.consumer.store.OffsetStore $stack6;
+  org.apache.rocketmq.remoting.protocol.heartbeat.MessageModel $stack12;
+  org.apache.rocketmq.remoting.protocol.heartbeat.MessageModel $stack13;
+  java.util.concurrent.locks.Lock $stack16;
+  java.util.concurrent.TimeUnit $stack17;
+  org.apache.rocketmq.logging.org.slf4j.Logger $stack19;
+  long $stack21;
+  java.lang.Long $stack22;
+  java.lang.Exception $stack27;
+  $stack5=this.defaultMQPushConsumerImpl;
+ $stack6 = $stack5.getOffsetStore();
+ $stack6.persist(mq);
+ $stack5=this.defaultMQPushConsumerImpl;
+ $stack6 = $stack5.getOffsetStore();
+ $stack6.removeOffset(mq);
+ $stack5=this.defaultMQPushConsumerImpl;
+ e = $stack5.isConsumeOrderly();
+ if (e==0) goto label0;
+ $stack12=org.apache.rocketmq.remoting.protocol.heartbeat.MessageModel.CLUSTERING;
+ $stack5=this.defaultMQPushConsumerImpl;
+ $stack13 = $stack5.messageModel();
+ e = $stack12.equals((java.lang.Object)$stack13);
+ if (e==0) goto label0;
+ label1:$stack16 = pq.getConsumeLock();
+ $stack17=java.util.concurrent.TimeUnit.MILLISECONDS;
+ e = $stack16.tryLock(1000L,$stack17);
+ if (e==0) goto label2;
+ label3:e = this#org.apache.rocketmq.client.impl.consumer.RebalancePushImpl:unlockDelay(mq,pq);
+ label4:$stack16 = pq.getConsumeLock();
+ $stack16.unlock();
+ label5:return  e;
+ label6:l4 = catch;
+ label7:$stack16 = pq.getConsumeLock();
+ $stack16.unlock();
+ throw l4;
+ label2:$stack19=org.apache.rocketmq.client.impl.consumer.RebalanceImpl.log;
+ $stack21 = pq.getTryUnlockTimes();
+ $stack22 = java.lang.Long.valueOf($stack21);
+ $stack19.warn("[WRONG]mq is consuming, so can not unlock it, {}. maybe hanged for a while, {}",(java.lang.Object)mq,(java.lang.Object)$stack22);
+ pq.incTryUnlockTimes();
+ label8:goto label9;
+ label10:$stack27 = catch;
+ $stack19=org.apache.rocketmq.client.impl.consumer.RebalanceImpl.log;
+ $stack19.error("removeUnnecessaryMessageQueue Exception",(java.lang.Throwable)$stack27);
+ label9:return  0;
+ label0:return  1;
+ catch java.lang.Throwable: label3 - label4 : label6;
+catch java.lang.Throwable: label6 - label7 : label6;
+catch java.lang.Exception: label1 - label5 : label10;
+catch java.lang.Exception: label6 - label8 : label10;
+} 
+

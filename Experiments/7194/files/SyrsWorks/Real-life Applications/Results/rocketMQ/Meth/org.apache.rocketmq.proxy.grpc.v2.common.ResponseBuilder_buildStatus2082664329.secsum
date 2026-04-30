@@ -1,0 +1,9 @@
+apache.rocketmq.v2.Status org.apache.rocketmq.proxy.grpc.v2.common.ResponseBuilder:buildStatus (
+  apache.rocketmq.v2.Code code, java.lang.String message) {
+  guard = tt;
+  ret(level()) = pc ⊔ level(code) ⊔ level(message) ⊔ obj_level(code) ⊔ obj_level(message);
+  ret(obj_level()) = pc ⊔ level(code) ⊔ level(message) ⊔ obj_level(code) ⊔ obj_level(message);
+  ret(obj_level(code)) = obj_level(code);
+  ret(obj_level(message)) = obj_level(message);
+  ret(obj_level(this)) = obj_level(this);
+}

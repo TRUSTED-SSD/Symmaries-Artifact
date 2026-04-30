@@ -1,0 +1,150 @@
+    protected void printFailures(org.junit.runner.Result)
+    {
+        org.junit.internal.TextListener this;
+        org.junit.runner.Result result;
+        java.util.List failures;
+        int i, $stack21;
+        java.util.Iterator i$;
+        org.junit.runner.notification.Failure each;
+        java.io.PrintStream $stack9;
+        java.lang.StringBuilder $stack10;
+        java.lang.String $stack15;
+        boolean $stack17;
+        java.lang.Object $stack18;
+
+        this := @this: org.junit.internal.TextListener;
+
+        result := @parameter0: org.junit.runner.Result;
+
+        failures = virtualinvoke result.<org.junit.runner.Result: java.util.List getFailures()>();
+/*60*/
+/*60*/
+
+        i = interfaceinvoke failures.<java.util.List: int size()>();
+/*61*/
+
+        if i != 0 goto label1;
+/*61*/
+
+        return;
+/*62*/
+
+     label1:
+        i = interfaceinvoke failures.<java.util.List: int size()>();
+/*64*/
+
+        if i != 1 goto label2;
+/*64*/
+
+        $stack9 = specialinvoke this.<org.junit.internal.TextListener: java.io.PrintStream getWriter()>();
+/*65*/
+
+        $stack10 = new java.lang.StringBuilder;
+/*65*/
+
+        specialinvoke $stack10.<java.lang.StringBuilder: void <init>()>();
+/*65*/
+
+        $stack10 = virtualinvoke $stack10.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>("There was ");
+/*65*/
+
+        i = interfaceinvoke failures.<java.util.List: int size()>();
+/*65*/
+
+        $stack10 = virtualinvoke $stack10.<java.lang.StringBuilder: java.lang.StringBuilder append(int)>(i);
+/*65*/
+
+        $stack10 = virtualinvoke $stack10.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>(" failure:");
+/*65*/
+
+        $stack15 = virtualinvoke $stack10.<java.lang.StringBuilder: java.lang.String toString()>();
+/*65*/
+
+        virtualinvoke $stack9.<java.io.PrintStream: void println(java.lang.String)>($stack15);
+/*65*/
+
+        goto label3;
+/*65*/
+
+     label2:
+        $stack9 = specialinvoke this.<org.junit.internal.TextListener: java.io.PrintStream getWriter()>();
+/*67*/
+
+        $stack10 = new java.lang.StringBuilder;
+/*67*/
+
+        specialinvoke $stack10.<java.lang.StringBuilder: void <init>()>();
+/*67*/
+
+        $stack10 = virtualinvoke $stack10.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>("There were ");
+/*67*/
+
+        i = interfaceinvoke failures.<java.util.List: int size()>();
+/*67*/
+
+        $stack10 = virtualinvoke $stack10.<java.lang.StringBuilder: java.lang.StringBuilder append(int)>(i);
+/*67*/
+
+        $stack10 = virtualinvoke $stack10.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>(" failures:");
+/*67*/
+
+        $stack15 = virtualinvoke $stack10.<java.lang.StringBuilder: java.lang.String toString()>();
+/*67*/
+
+        virtualinvoke $stack9.<java.io.PrintStream: void println(java.lang.String)>($stack15);
+/*67*/
+
+     label3:
+        i = 1;
+/*69*/
+/*69*/
+
+        i$ = interfaceinvoke failures.<java.util.List: java.util.Iterator iterator()>();
+/*70*/
+/*70*/
+
+     label4:
+        $stack17 = interfaceinvoke i$.<java.util.Iterator: boolean hasNext()>();
+/*70*/
+
+        if $stack17 == 0 goto label5;
+/*70*/
+
+        $stack18 = interfaceinvoke i$.<java.util.Iterator: java.lang.Object next()>();
+/*73*/
+
+        each = (org.junit.runner.notification.Failure) $stack18;
+/*73*/
+
+        $stack10 = new java.lang.StringBuilder;
+/*71*/
+
+        specialinvoke $stack10.<java.lang.StringBuilder: void <init>()>();
+/*71*/
+
+        $stack10 = virtualinvoke $stack10.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>("");
+/*71*/
+
+        $stack21 = i;
+/*71*/
+
+        i = i + 1;
+/*71*/
+
+        $stack10 = virtualinvoke $stack10.<java.lang.StringBuilder: java.lang.StringBuilder append(int)>($stack21);
+/*71*/
+
+        $stack15 = virtualinvoke $stack10.<java.lang.StringBuilder: java.lang.String toString()>();
+/*71*/
+
+        virtualinvoke this.<org.junit.internal.TextListener: void printFailure(org.junit.runner.notification.Failure,java.lang.String)>(each, $stack15);
+/*71*/
+
+        goto label4;
+/*71*/
+
+     label5:
+        return;
+/*73*/
+    }
+

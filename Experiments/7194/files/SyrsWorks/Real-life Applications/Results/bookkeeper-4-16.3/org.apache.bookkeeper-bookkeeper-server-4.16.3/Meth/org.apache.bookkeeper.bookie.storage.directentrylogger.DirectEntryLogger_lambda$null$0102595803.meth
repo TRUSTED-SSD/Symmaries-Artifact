@@ -1,0 +1,26 @@
+void org.apache.bookkeeper.bookie.storage.directentrylogger.DirectEntryLogger:lambda$null$0(com.google.common.cache.RemovalNotification notification)
+{
+java.io.IOException ioe;
+  java.lang.Object $stack3;
+  org.apache.bookkeeper.bookie.storage.directentrylogger.LogReader $stack4;
+  org.apache.bookkeeper.bookie.storage.directentrylogger.DirectEntryLoggerStats $stack5;
+  org.apache.bookkeeper.stats.Counter $stack6;
+  org.apache.bookkeeper.slogger.Slogger $stack8;
+  org.apache.bookkeeper.bookie.storage.directentrylogger.Events $stack12;
+  label0:$stack3 = notification.getValue();
+ $stack4=(org.apache.bookkeeper.bookie.storage.directentrylogger.LogReader) $stack3;
+ $stack4.close();
+ $stack5=this.stats;
+ $stack6 = $stack5.getCloseReaderCounter();
+ $stack6.inc();
+ label1:goto label2;
+ label3:ioe = catch;
+ $stack8=this.slog;
+ $stack3 = notification.getKey();
+ $stack8 = $stack8.kv((java.lang.Object)"logID",$stack3);
+ $stack12=org.apache.bookkeeper.bookie.storage.directentrylogger.Events.READER_CLOSE_ERROR;
+ $stack8.error((java.lang.Enum)$stack12);
+ label2:return;
+ catch java.io.IOException: label0 - label1 : label3;
+} 
+

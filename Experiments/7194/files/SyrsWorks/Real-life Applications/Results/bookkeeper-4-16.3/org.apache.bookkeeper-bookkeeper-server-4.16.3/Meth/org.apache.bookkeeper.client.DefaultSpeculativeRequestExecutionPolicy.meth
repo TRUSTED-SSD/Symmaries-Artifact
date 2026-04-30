@@ -1,0 +1,28 @@
+org.apache.bookkeeper.client.DefaultSpeculativeRequestExecutionPolicy(int firstSpeculativeRequestTimeout,int maxSpeculativeRequestTimeout,float backoffMultiplier)
+{
+byte $stack4;
+  double $stack5;
+  double $stack6;
+  long $stack8;
+  java.lang.IllegalArgumentException $stack10;
+  this#java.lang.Object();
+ this.firstSpeculativeRequestTimeout=firstSpeculativeRequestTimeout;
+ this.maxSpeculativeRequestTimeout=maxSpeculativeRequestTimeout;
+ this.backoffMultiplier=backoffMultiplier;
+ $stack4=(backoffMultiplier cmpg 0.0F);
+ if ($stack4>0) goto label0;
+ $stack10=new java.lang.IllegalArgumentException;
+ $stack10#java.lang.IllegalArgumentException("Invalid value provided for backoffMultiplier");
+ throw $stack10;
+ label0:$stack6=(double) maxSpeculativeRequestTimeout;
+ $stack5=(double) backoffMultiplier;
+ $stack5=($stack6 * $stack5);
+ $stack8 = java.lang.Math.round($stack5);
+ $stack4=($stack8 cmp 2147483647L);
+ if ($stack4<=0) goto label1;
+ $stack10=new java.lang.IllegalArgumentException;
+ $stack10#java.lang.IllegalArgumentException("Invalid values for maxSpeculativeRequestTimeout and backoffMultiplier");
+ throw $stack10;
+ label1:return;
+ } 
+

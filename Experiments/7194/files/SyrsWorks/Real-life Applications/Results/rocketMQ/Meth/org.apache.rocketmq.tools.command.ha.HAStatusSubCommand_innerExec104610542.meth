@@ -1,0 +1,37 @@
+void org.apache.rocketmq.tools.command.ha.HAStatusSubCommand:innerExec(org.apache.commons.cli.CommandLine commandLine,org.apache.commons.cli.Options options,org.apache.rocketmq.tools.admin.DefaultMQAdminExt defaultMQAdminExt)
+{
+java.lang.String addr;
+  java.util.Set masterSet;
+  java.util.Iterator l6;
+  boolean $stack8;
+  java.lang.StringBuilder $stack10;
+  java.lang.Object $stack20;
+  $stack8 = commandLine.hasOption((char)98);
+ if ($stack8==0) goto label0;
+ addr = commandLine.getOptionValue((char)98);
+ addr = addr.trim();
+ this#org.apache.rocketmq.tools.command.ha.HAStatusSubCommand:printStatus(addr,defaultMQAdminExt);
+ goto label1;
+ label0:$stack8 = commandLine.hasOption((char)99);
+ if ($stack8==0) goto label2;
+ addr = commandLine.getOptionValue((char)99);
+ addr = addr.trim();
+ masterSet = org.apache.rocketmq.tools.command.CommandUtil.fetchMasterAddrByClusterName((org.apache.rocketmq.tools.admin.MQAdminExt)defaultMQAdminExt,addr);
+ l6 = masterSet.iterator();
+ label3:$stack8 = l6.hasNext();
+ if ($stack8==0) goto label4;
+ $stack20 = l6.next();
+ addr=(java.lang.String) $stack20;
+ this#org.apache.rocketmq.tools.command.ha.HAStatusSubCommand:printStatus(addr,defaultMQAdminExt);
+ goto label3;
+ label4:goto label1;
+ label2:$stack10=new java.lang.StringBuilder;
+ $stack10#java.lang.StringBuilder();
+ $stack10 = $stack10.append("mqadmin ");
+ addr = this.commandName();
+ $stack10 = $stack10.append(addr);
+ addr = $stack10.toString();
+ org.apache.rocketmq.srvutil.ServerUtil.printCommandLineHelp(addr,options);
+ label1:return;
+ } 
+

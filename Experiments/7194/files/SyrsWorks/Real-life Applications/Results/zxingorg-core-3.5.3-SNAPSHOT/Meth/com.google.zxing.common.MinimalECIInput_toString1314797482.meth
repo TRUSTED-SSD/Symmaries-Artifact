@@ -1,0 +1,37 @@
+java.lang.String com.google.zxing.common.MinimalECIInput:toString()
+{
+java.lang.StringBuilder result;
+  int i;
+  int $stack4;
+  java.lang.String $stack5;
+  boolean $stack6;
+  char $stack7;
+  result=new java.lang.StringBuilder;
+ result#java.lang.StringBuilder();
+ i=0;
+ label0:$stack4 = this.length();
+ if (i>=$stack4) goto label1;
+ if (i<=0) goto label2;
+ result.append(", ");
+ label2:$stack6 = this.isECI(i);
+ if ($stack6==0) goto label3;
+ result.append("ECI(");
+ $stack4 = this.getECIValue(i);
+ result.append($stack4);
+ result.append((char)41);
+ goto label4;
+ label3:$stack7 = this.charAt(i);
+ if ($stack7>=128) goto label5;
+ result.append((char)39);
+ $stack7 = this.charAt(i);
+ result.append($stack7);
+ result.append((char)39);
+ goto label4;
+ label5:$stack7 = this.charAt(i);
+ result.append((int)$stack7);
+ label4:i=(i+1);
+ goto label0;
+ label1:$stack5 = result.toString();
+ return  $stack5;
+ } 
+

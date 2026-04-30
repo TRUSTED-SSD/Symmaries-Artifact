@@ -1,0 +1,26 @@
+java.net.URL org.apache.rocketmq.common.logging.DefaultJoranConfiguratorExt:findURLOfDefaultConfigurationFile(boolean updateStatus)
+{
+java.lang.ClassLoader myClassLoader;
+  java.net.URL url;
+  java.util.Iterator l4;
+  java.lang.String configFile;
+  java.util.List $stack8;
+  boolean $stack10;
+  java.lang.Object $stack11;
+  myClassLoader = org.apache.rocketmq.logging.ch.qos.logback.core.util.Loader.getClassLoaderOfObject((java.lang.Object)this);
+ url = this#org.apache.rocketmq.common.logging.DefaultJoranConfiguratorExt:findConfigFileURLFromSystemProperties(myClassLoader,updateStatus);
+ if (url==null) goto label0;
+ return  url;
+ label0:$stack8=this.configFiles;
+ l4 = $stack8.iterator();
+ label1:$stack10 = l4.hasNext();
+ if ($stack10==0) goto label2;
+ $stack11 = l4.next();
+ configFile=(java.lang.String) $stack11;
+ url = this#org.apache.rocketmq.common.logging.DefaultJoranConfiguratorExt:getResource(configFile,myClassLoader,updateStatus);
+ if (url==null) goto label3;
+ return  url;
+ label3:goto label1;
+ label2:return  null;
+ } 
+

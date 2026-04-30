@@ -1,0 +1,32 @@
+org.apache.rocketmq.remoting.protocol.header.PullMessageRequestHeader org.apache.rocketmq.store.kv.MessageFetcher:createPullMessageRequest(java.lang.String topic,int queueId,long queueOffset,long subVersion)
+{
+int sysFlag;
+  org.apache.rocketmq.remoting.protocol.header.PullMessageRequestHeader requestHeader;
+  java.lang.String $stack11;
+  java.lang.Integer $stack12;
+  java.lang.Long $stack13;
+  sysFlag = org.apache.rocketmq.common.sysflag.PullSysFlag.buildSysFlag((boolean)0,(boolean)0,(boolean)0,(boolean)0,(boolean)1);
+ requestHeader=new org.apache.rocketmq.remoting.protocol.header.PullMessageRequestHeader;
+ requestHeader#org.apache.rocketmq.remoting.protocol.header.PullMessageRequestHeader();
+ $stack11 = this#org.apache.rocketmq.store.kv.MessageFetcher:getConsumerGroup(topic,queueId);
+ requestHeader.setConsumerGroup($stack11);
+ requestHeader.setTopic(topic);
+ $stack12 = java.lang.Integer.valueOf(queueId);
+ requestHeader.setQueueId($stack12);
+ $stack13 = java.lang.Long.valueOf(queueOffset);
+ requestHeader.setQueueOffset($stack13);
+ $stack12 = java.lang.Integer.valueOf(10);
+ requestHeader.setMaxMsgNums($stack12);
+ $stack12 = java.lang.Integer.valueOf(sysFlag);
+ requestHeader.setSysFlag($stack12);
+ $stack13 = java.lang.Long.valueOf(0L);
+ requestHeader.setCommitOffset($stack13);
+ $stack13 = java.lang.Long.valueOf(20000L);
+ requestHeader.setSuspendTimeoutMillis($stack13);
+ $stack13 = java.lang.Long.valueOf(subVersion);
+ requestHeader.setSubVersion($stack13);
+ $stack12 = java.lang.Integer.valueOf(2147483647);
+ requestHeader.setMaxMsgBytes($stack12);
+ return  requestHeader;
+ } 
+

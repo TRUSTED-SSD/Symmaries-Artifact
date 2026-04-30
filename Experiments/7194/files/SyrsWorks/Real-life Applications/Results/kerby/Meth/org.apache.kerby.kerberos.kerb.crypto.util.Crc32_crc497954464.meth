@@ -1,0 +1,25 @@
+static long org.apache.kerby.kerberos.kerb.crypto.util.Crc32:crc(long initial,byte[] data,int start,int len)
+{
+int i;
+  int idx;
+  byte $stack10;
+  long $stack11;
+  long[] $stack15;
+  i=0;
+ label0:if (i>=len) goto label1;
+ idx=(start+i);
+ $stack10=data[idx];
+ $stack11=(long) $stack10;
+ $stack11=(!$stack11 & initial) |(!initial & $stack11);
+ $stack11=($stack11 & 255L);
+ idx=(int) $stack11;
+ initial=(initial & 4294967295L);
+ $stack11=(initial>>>8);
+ $stack15=org.apache.kerby.kerberos.kerb.crypto.util.Crc32.table;
+ initial=$stack15[idx];
+ initial=(!$stack11 & initial) |(!initial & $stack11);
+ i=(i+1);
+ goto label0;
+ label1:return  initial;
+ } 
+

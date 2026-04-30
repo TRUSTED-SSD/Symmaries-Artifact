@@ -1,0 +1,28 @@
+static java.util.Map com.google.zxing.client.result.ResultParser:parseNameValuePairs(java.lang.String @uri)
+{
+int paramStart;
+  java.util.HashMap result;
+  java.lang.String[] l3;
+  int l5;
+  java.util.regex.Pattern $stack10;
+  java.lang.String uri;
+uri=@uri;
+paramStart = uri.indexOf(63);
+ if (paramStart>=0) goto label0;
+ return  null;
+ label0:result=new java.util.HashMap;
+ result#java.util.HashMap(3);
+ $stack10=com.google.zxing.client.result.ResultParser.AMPERSAND;
+ paramStart=(paramStart+1);
+ uri = uri.substring(paramStart);
+ l3 = $stack10.split((java.lang.CharSequence)uri);
+ paramStart=#l3;
+ l5=0;
+ label1:if (l5>=paramStart) goto label2;
+ uri=l3[l5];
+ com.google.zxing.client.result.ResultParser.appendKeyValue((java.lang.CharSequence)uri,(java.util.Map)result);
+ l5=(l5+1);
+ goto label1;
+ label2:return  result;
+ } 
+

@@ -1,0 +1,36 @@
+java.lang.Integer org.apache.bookkeeper.client.RackawareEnsemblePlacementPolicyImpl$1:getSample()
+{
+java.lang.Integer l1;
+  org.apache.bookkeeper.client.RackawareEnsemblePlacementPolicyImpl $stack3;
+  java.util.concurrent.locks.ReentrantReadWriteLock $stack4;
+  java.util.concurrent.locks.ReentrantReadWriteLock$ReadLock $stack5;
+  org.apache.bookkeeper.net.NetworkTopology $stack8;
+  java.lang.String $stack9;
+  java.util.Set $stack10;
+  int $stack11;
+  java.lang.Throwable $stack16;
+  $stack3=this.this$0;
+ $stack4=$stack3.rwLock;
+ $stack5 = $stack4.readLock();
+ $stack5.lock();
+ label0:$stack3=this.this$0;
+ $stack8=$stack3.topology;
+ $stack3=this.this$0;
+ $stack9 = $stack3.getDefaultRack();
+ $stack10 = java.util.Collections.emptySet();
+ $stack11 = $stack8.countNumOfAvailableNodes($stack9,(java.util.Collection)$stack10);
+ l1 = java.lang.Integer.valueOf($stack11);
+ label1:$stack3=this.this$0;
+ $stack4=$stack3.rwLock;
+ $stack5 = $stack4.readLock();
+ $stack5.unlock();
+ return  l1;
+ label2:$stack16 = catch;
+ $stack3=this.this$0;
+ $stack4=$stack3.rwLock;
+ $stack5 = $stack4.readLock();
+ $stack5.unlock();
+ throw $stack16;
+ catch java.lang.Throwable: label0 - label1 : label2;
+} 
+

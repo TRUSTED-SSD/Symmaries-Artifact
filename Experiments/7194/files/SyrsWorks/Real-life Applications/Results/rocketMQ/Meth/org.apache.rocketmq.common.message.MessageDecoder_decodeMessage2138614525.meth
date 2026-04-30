@@ -1,0 +1,31 @@
+static org.apache.rocketmq.common.message.Message org.apache.rocketmq.common.message.MessageDecoder:decodeMessage(java.nio.ByteBuffer byteBuffer)
+{
+org.apache.rocketmq.common.message.Message message;
+  int flag;
+  byte[] body;
+  short propertiesLen;
+  java.lang.String $stack16;
+  java.nio.charset.Charset $stack17;
+  java.util.Map $stack18;
+  message=new org.apache.rocketmq.common.message.Message;
+ message#org.apache.rocketmq.common.message.Message();
+ byteBuffer.getInt();
+ byteBuffer.getInt();
+ byteBuffer.getInt();
+ flag = byteBuffer.getInt();
+ message.setFlag(flag);
+ flag = byteBuffer.getInt();
+ body=new byte[flag];
+ byteBuffer.get(body);
+ message.setBody(body);
+ propertiesLen = byteBuffer.getShort();
+ body=new byte[propertiesLen];
+ byteBuffer.get(body);
+ $stack16=new java.lang.String;
+ $stack17=org.apache.rocketmq.common.message.MessageDecoder.CHARSET_UTF8;
+ $stack16#java.lang.String(body,$stack17);
+ $stack18 = org.apache.rocketmq.common.message.MessageDecoder.string2messageProperties($stack16);
+ message.setProperties($stack18);
+ return  message;
+ } 
+

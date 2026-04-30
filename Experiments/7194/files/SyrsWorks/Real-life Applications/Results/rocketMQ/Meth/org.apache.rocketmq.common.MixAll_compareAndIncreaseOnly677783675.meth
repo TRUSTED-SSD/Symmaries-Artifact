@@ -1,0 +1,16 @@
+static boolean org.apache.rocketmq.common.MixAll:compareAndIncreaseOnly(java.util.concurrent.atomic.AtomicLong target,long value)
+{
+long prev;
+  boolean updated;
+  byte $stack7;
+  prev = target.get();
+ label0:$stack7=(value cmp prev);
+ if ($stack7<=0) goto label1;
+ updated = target.compareAndSet(prev,value);
+ if (updated==0) goto label2;
+ return  1;
+ label2:prev = target.get();
+ goto label0;
+ label1:return  0;
+ } 
+

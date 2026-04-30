@@ -1,0 +1,20 @@
+void org.apache.bookkeeper.bookie.SortedLedgerStorage:initialize(org.apache.bookkeeper.conf.ServerConfiguration conf,org.apache.bookkeeper.meta.LedgerManager ledgerManager,org.apache.bookkeeper.bookie.LedgerDirsManager ledgerDirsManager,org.apache.bookkeeper.bookie.LedgerDirsManager indexDirsManager,org.apache.bookkeeper.stats.StatsLogger statsLogger,io.netty.buffer.ByteBufAllocator allocator)
+{
+org.apache.bookkeeper.bookie.InterleavedLedgerStorage $stack7;
+  com.google.common.util.concurrent.ThreadFactoryBuilder $stack8;
+  java.util.concurrent.ThreadFactory $stack11;
+  java.util.concurrent.ScheduledExecutorService $stack12;
+  this.conf=conf;
+ this.statsLogger=statsLogger;
+ $stack7=this.interleavedLedgerStorage;
+ $stack7.initializeWithEntryLogListener(conf,ledgerManager,ledgerDirsManager,indexDirsManager,(org.apache.bookkeeper.bookie.DefaultEntryLogger$EntryLogListener)this,statsLogger,allocator);
+ $stack8=new com.google.common.util.concurrent.ThreadFactoryBuilder;
+ $stack8#com.google.common.util.concurrent.ThreadFactoryBuilder();
+ $stack8 = $stack8.setNameFormat("SortedLedgerStorage-%d");
+ $stack8 = $stack8.setPriority(7);
+ $stack11 = $stack8.build();
+ $stack12 = java.util.concurrent.Executors.newSingleThreadScheduledExecutor($stack11);
+ this.scheduler=$stack12;
+ return;
+ } 
+

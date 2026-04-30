@@ -1,0 +1,15 @@
+java.lang.String org.apache.bookkeeper.statelib.impl.rocksdb.checkpoint.CheckpointFile:getRemotePath(java.lang.String @dbPrefix,java.lang.String checkpointId,boolean enableChecksum)
+{
+boolean $stack4;
+  java.io.File $stack5;
+  java.lang.String dbPrefix;
+dbPrefix=@dbPrefix;
+$stack4=this.isSstFile;
+ if ($stack4==0) goto label0;
+ dbPrefix = this.getRemoteSstPath(dbPrefix,enableChecksum);
+ return  dbPrefix;
+ label0:$stack5=this.file;
+ dbPrefix = org.apache.bookkeeper.statelib.impl.rocksdb.RocksUtils.getDestPath(dbPrefix,checkpointId,$stack5);
+ return  dbPrefix;
+ } 
+

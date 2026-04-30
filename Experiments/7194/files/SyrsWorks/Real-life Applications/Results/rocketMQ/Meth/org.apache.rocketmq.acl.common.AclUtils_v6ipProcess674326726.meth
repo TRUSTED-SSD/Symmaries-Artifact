@@ -1,0 +1,30 @@
+static java.lang.String org.apache.rocketmq.acl.common.AclUtils:v6ipProcess(java.lang.String @netaddress)
+{
+byte part;
+  boolean isAsterisk;
+  boolean isMinus;
+  int lastColon;
+  java.lang.String $stack21;
+  java.lang.String netaddress;
+netaddress=@netaddress;
+isAsterisk = org.apache.rocketmq.acl.common.AclUtils.isAsterisk(netaddress);
+ isMinus = org.apache.rocketmq.acl.common.AclUtils.isMinus(netaddress);
+ if (isAsterisk==0) goto label0;
+ if (isMinus==0) goto label0;
+ part=6;
+ lastColon = netaddress.lastIndexOf(58);
+ $stack21 = netaddress.substring(0,lastColon);
+ lastColon = $stack21.lastIndexOf(58);
+ netaddress = netaddress.substring(0,lastColon);
+ goto label1;
+ label0:if (isAsterisk!=0) goto label2;
+ if (isMinus!=0) goto label2;
+ part=8;
+ goto label1;
+ label2:part=7;
+ lastColon = netaddress.lastIndexOf(58);
+ netaddress = netaddress.substring(0,lastColon);
+ label1:netaddress = org.apache.rocketmq.acl.common.AclUtils.expandIP(netaddress,(int)part);
+ return  netaddress;
+ } 
+

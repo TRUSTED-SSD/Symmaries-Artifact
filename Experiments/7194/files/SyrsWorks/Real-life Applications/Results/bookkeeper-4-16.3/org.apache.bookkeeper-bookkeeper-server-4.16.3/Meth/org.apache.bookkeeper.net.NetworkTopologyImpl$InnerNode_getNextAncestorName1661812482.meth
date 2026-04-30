@@ -1,0 +1,33 @@
+java.lang.String org.apache.bookkeeper.net.NetworkTopologyImpl$InnerNode:getNextAncestorName(org.apache.bookkeeper.net.Node n)
+{
+java.lang.String name;
+  int index;
+  boolean $stack4;
+  java.lang.String $stack6;
+  char $stack9;
+  java.lang.IllegalArgumentException $stack18;
+  java.lang.StringBuilder $stack19;
+  $stack4 = this.isAncestor(n);
+ if ($stack4!=0) goto label0;
+ $stack18=new java.lang.IllegalArgumentException;
+ $stack19=new java.lang.StringBuilder;
+ $stack19#java.lang.StringBuilder();
+ $stack19 = $stack19.append((java.lang.Object)this);
+ $stack19 = $stack19.append("is not an ancestor of ");
+ $stack19 = $stack19.append((java.lang.Object)n);
+ name = $stack19.toString();
+ $stack18#java.lang.IllegalArgumentException(name);
+ throw $stack18;
+ label0:name = n.getNetworkLocation();
+ $stack6 = org.apache.bookkeeper.net.NodeBase.getPath((org.apache.bookkeeper.net.Node)this);
+ index = $stack6.length();
+ name = name.substring(index);
+ $stack9 = name.charAt(0);
+ if ($stack9!=47) goto label1;
+ name = name.substring(1);
+ label1:index = name.indexOf(47);
+ if (index==-1) goto label2;
+ name = name.substring(0,index);
+ label2:return  name;
+ } 
+

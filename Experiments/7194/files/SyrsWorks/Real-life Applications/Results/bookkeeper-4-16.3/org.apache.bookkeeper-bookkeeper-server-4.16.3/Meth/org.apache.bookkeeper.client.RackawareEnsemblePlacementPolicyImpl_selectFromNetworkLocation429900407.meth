@@ -1,0 +1,25 @@
+org.apache.bookkeeper.net.BookieNode org.apache.bookkeeper.client.RackawareEnsemblePlacementPolicyImpl:selectFromNetworkLocation(java.lang.String networkLoc,java.util.Set excludeRacks,java.util.Set excludeBookies,org.apache.bookkeeper.client.ITopologyAwareEnsemblePlacementPolicy$Predicate predicate,org.apache.bookkeeper.client.ITopologyAwareEnsemblePlacementPolicy$Ensemble ensemble,boolean fallbackToRandom)
+{
+org.apache.bookkeeper.client.BKException$BKNotEnoughBookiesException e;
+  org.apache.bookkeeper.net.BookieNode $stack8;
+  java.lang.Object[] $stack10;
+  org.apache.bookkeeper.net.NetworkTopology $stack11;
+  org.slf4j.Logger $stack12;
+  java.util.Set $stack15;
+  label0:$stack8 = this.selectRandomFromRack(networkLoc,excludeBookies,predicate,ensemble);
+ label1:return  $stack8;
+ label2:e = catch;
+ $stack12=org.apache.bookkeeper.client.RackawareEnsemblePlacementPolicyImpl.LOG;
+ $stack10=new java.lang.Object[4];
+ $stack10[0]=networkLoc;
+ $stack11=this.topology;
+ $stack15 = $stack11.getLeaves(networkLoc);
+ $stack10[1]=$stack15;
+ $stack10[2]=excludeBookies;
+ $stack10[3]=ensemble;
+ $stack12.warn("Failed to choose a bookie node from network location {}, the bookies in the network location are {}, excluded bookies {}, current ensemble {}, fallback to choose bookie randomly from the cluster.",$stack10);
+ $stack8 = this.selectFromNetworkLocation(excludeRacks,excludeBookies,predicate,ensemble,fallbackToRandom);
+ return  $stack8;
+ catch org.apache.bookkeeper.client.BKException$BKNotEnoughBookiesException: label0 - label1 : label2;
+} 
+

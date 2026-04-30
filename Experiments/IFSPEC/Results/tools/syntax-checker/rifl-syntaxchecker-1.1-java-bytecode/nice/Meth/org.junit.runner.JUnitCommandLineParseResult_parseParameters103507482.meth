@@ -1,0 +1,35 @@
+void org.junit.runner.JUnitCommandLineParseResult:parseParameters(java.lang.String[] args)
+{
+int len$;
+  int i$;
+  java.lang.String arg;
+  java.util.List $stack7;
+  java.lang.Class $stack8;
+  java.lang.ClassNotFoundException $stack12;
+  java.lang.IllegalArgumentException $stack13;
+  java.lang.StringBuilder $stack14;
+  len$=#args;
+ i$=0;
+ label0:if (i$>=len$) goto label1;
+ arg=args[i$];
+ label2:$stack7=this.classes;
+ $stack8 = org.junit.internal.Classes.getClass(arg);
+ $stack7.add((java.lang.Object)$stack8);
+ label3:goto label4;
+ label5:$stack12 = catch;
+ $stack7=this.parserErrors;
+ $stack13=new java.lang.IllegalArgumentException;
+ $stack14=new java.lang.StringBuilder;
+ $stack14#java.lang.StringBuilder();
+ $stack14 = $stack14.append("Could not find class [");
+ $stack14 = $stack14.append(arg);
+ $stack14 = $stack14.append("]");
+ arg = $stack14.toString();
+ $stack13#java.lang.IllegalArgumentException(arg,(java.lang.Throwable)$stack12);
+ $stack7.add((java.lang.Object)$stack13);
+ label4:i$=(i$+1);
+ goto label0;
+ label1:return;
+ catch java.lang.ClassNotFoundException: label2 - label3 : label5;
+} 
+

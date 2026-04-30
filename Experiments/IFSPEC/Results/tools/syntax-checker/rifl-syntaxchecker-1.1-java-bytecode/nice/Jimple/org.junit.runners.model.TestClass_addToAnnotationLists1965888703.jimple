@@ -1,0 +1,78 @@
+    protected static void addToAnnotationLists(org.junit.runners.model.FrameworkMember, java.util.Map)
+    {
+        org.junit.runners.model.FrameworkMember member;
+        java.util.Map map;
+        java.lang.'annotation'.Annotation[] arr$;
+        int len$, i$;
+        java.lang.'annotation'.Annotation each;
+        java.lang.Class type;
+        java.util.List members;
+        boolean $stack11;
+
+        member := @parameter0: org.junit.runners.model.FrameworkMember;
+
+        map := @parameter1: java.util.Map;
+
+        arr$ = virtualinvoke member.<org.junit.runners.model.FrameworkMember: java.lang.'annotation'.Annotation[] getAnnotations()>();
+/*84*/
+/*84*/
+
+        len$ = lengthof arr$;
+/*84*/
+
+        i$ = 0;
+/*84*/
+
+     label1:
+        if i$ >= len$ goto label5;
+/*84*/
+
+        each = arr$[i$];
+/*96*/
+
+        type = interfaceinvoke each.<java.lang.'annotation'.Annotation: java.lang.Class annotationType()>();
+/*85*/
+/*85*/
+
+        members = staticinvoke <org.junit.runners.model.TestClass: java.util.List getAnnotatedMembers(java.util.Map,java.lang.Class,boolean)>(map, type, 1);
+/*86*/
+/*86*/
+
+        $stack11 = virtualinvoke member.<org.junit.runners.model.FrameworkMember: boolean isShadowedBy(java.util.List)>(members);
+/*87*/
+
+        if $stack11 == 0 goto label2;
+/*87*/
+
+        return;
+/*88*/
+
+     label2:
+        $stack11 = staticinvoke <org.junit.runners.model.TestClass: boolean runsTopToBottom(java.lang.Class)>(type);
+/*90*/
+
+        if $stack11 == 0 goto label3;
+/*90*/
+
+        interfaceinvoke members.<java.util.List: void add(int,java.lang.Object)>(0, member);
+/*91*/
+
+        goto label4;
+/*91*/
+
+     label3:
+        interfaceinvoke members.<java.util.List: boolean add(java.lang.Object)>(member);
+/*93*/
+
+     label4:
+        i$ = i$ + 1;
+/*84*/
+
+        goto label1;
+/*84*/
+
+     label5:
+        return;
+/*96*/
+    }
+

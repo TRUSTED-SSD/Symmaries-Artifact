@@ -1,0 +1,89 @@
+    public static java.lang.String getFilteredTrace(java.lang.String)
+    {
+        java.lang.String stack, line, $stack12;
+        java.io.StringWriter sw;
+        java.io.PrintWriter pw;
+        java.io.BufferedReader br;
+        java.lang.Exception IOException;
+        boolean $stack7;
+        java.io.StringReader $stack10;
+
+        stack := @parameter0: java.lang.String;
+
+        $stack7 = staticinvoke <junit.runner.BaseTestRunner: boolean showStackRaw()>();
+/*278*/
+
+        if $stack7 == 0 goto label1;
+/*278*/
+
+        return stack;
+/*279*/
+
+     label1:
+        sw = new java.io.StringWriter;
+/*282*/
+
+        specialinvoke sw.<java.io.StringWriter: void <init>()>();
+/*282*/
+
+        pw = new java.io.PrintWriter;
+/*283*/
+
+        specialinvoke pw.<java.io.PrintWriter: void <init>(java.io.Writer)>(sw);
+/*283*/
+
+        $stack10 = new java.io.StringReader;
+/*284*/
+
+        specialinvoke $stack10.<java.io.StringReader: void <init>(java.lang.String)>(stack);
+/*284*/
+
+        br = new java.io.BufferedReader;
+/*285*/
+
+        specialinvoke br.<java.io.BufferedReader: void <init>(java.io.Reader)>($stack10);
+/*285*/
+
+     label2:
+        $stack12 = virtualinvoke br.<java.io.BufferedReader: java.lang.String readLine()>();
+/*289*/
+
+        line = $stack12;
+/*289*/
+
+        if $stack12 == null goto label3;
+/*289*/
+
+        $stack7 = staticinvoke <junit.runner.BaseTestRunner: boolean filterLine(java.lang.String)>($stack12);
+/*290*/
+
+        if $stack7 != 0 goto label2;
+/*290*/
+
+        virtualinvoke pw.<java.io.PrintWriter: void println(java.lang.String)>($stack12);
+/*291*/
+
+        goto label2;
+/*291*/
+
+     label3:
+        goto label5;
+/*296*/
+
+     label4:
+        IOException := @caughtexception;
+/*279*/
+
+        return stack;
+/*295*/
+
+     label5:
+        stack = virtualinvoke sw.<java.io.StringWriter: java.lang.String toString()>();
+/*297*/
+
+        return stack;
+/*297*/
+
+        catch java.lang.Exception from label2 to label3 with label4;
+    }
+

@@ -1,0 +1,39 @@
+org.apache.rocketmq.broker.BrokerController org.apache.rocketmq.container.BrokerContainer:findBrokerControllerByBrokerName(java.lang.String brokerName)
+{
+java.util.Iterator l2;
+  org.apache.rocketmq.broker.BrokerController brokerController;
+  java.util.concurrent.ConcurrentMap $stack4;
+  java.util.Collection $stack5;
+  boolean $stack7;
+  java.lang.Object $stack12;
+  org.apache.rocketmq.common.BrokerConfig $stack13;
+  java.lang.String $stack14;
+  $stack4=this.masterBrokerControllers;
+ $stack5 = $stack4.values();
+ l2 = $stack5.iterator();
+ label0:$stack7 = l2.hasNext();
+ if ($stack7==0) goto label1;
+ $stack12 = l2.next();
+ brokerController=(org.apache.rocketmq.broker.BrokerController) $stack12;
+ $stack13 = brokerController.getBrokerConfig();
+ $stack14 = $stack13.getBrokerName();
+ $stack7 = $stack14.equals((java.lang.Object)brokerName);
+ if ($stack7==0) goto label2;
+ return  brokerController;
+ label2:goto label0;
+ label1:$stack4=this.slaveBrokerControllers;
+ $stack5 = $stack4.values();
+ l2 = $stack5.iterator();
+ label3:$stack7 = l2.hasNext();
+ if ($stack7==0) goto label4;
+ $stack12 = l2.next();
+ brokerController=(org.apache.rocketmq.broker.BrokerController) $stack12;
+ $stack13 = brokerController.getBrokerConfig();
+ $stack14 = $stack13.getBrokerName();
+ $stack7 = $stack14.equals((java.lang.Object)brokerName);
+ if ($stack7==0) goto label5;
+ return  brokerController;
+ label5:goto label3;
+ label4:return  null;
+ } 
+

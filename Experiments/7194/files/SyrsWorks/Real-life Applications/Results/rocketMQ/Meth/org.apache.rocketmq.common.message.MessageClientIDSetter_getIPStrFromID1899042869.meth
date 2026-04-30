@@ -1,0 +1,15 @@
+static java.lang.String org.apache.rocketmq.common.message.MessageClientIDSetter:getIPStrFromID(java.lang.String @msgID)
+{
+byte[] ipBytes;
+  int $stack3;
+  java.lang.String msgID;
+msgID=@msgID;
+ipBytes = org.apache.rocketmq.common.message.MessageClientIDSetter.getIPFromID(msgID);
+ $stack3=#ipBytes;
+ if ($stack3!=16) goto label0;
+ msgID = org.apache.rocketmq.common.UtilAll.ipToIPv6Str(ipBytes);
+ return  msgID;
+ label0:msgID = org.apache.rocketmq.common.UtilAll.ipToIPv4Str(ipBytes);
+ return  msgID;
+ } 
+

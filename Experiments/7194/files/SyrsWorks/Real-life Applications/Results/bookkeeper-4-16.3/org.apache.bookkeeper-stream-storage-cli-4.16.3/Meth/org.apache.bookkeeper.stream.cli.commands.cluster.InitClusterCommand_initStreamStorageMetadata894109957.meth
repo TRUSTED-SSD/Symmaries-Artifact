@@ -1,0 +1,17 @@
+void org.apache.bookkeeper.stream.cli.commands.cluster.InitClusterCommand:initStreamStorageMetadata(java.lang.String metadataServiceHosts,java.lang.String ledgersUri,int numStorageContainers)
+{
+org.apache.bookkeeper.stream.storage.impl.cluster.ZkClusterInitializer $stack5;
+  java.net.URI $stack6;
+  boolean $stack7;
+  org.slf4j.Logger $stack8;
+  $stack5=new org.apache.bookkeeper.stream.storage.impl.cluster.ZkClusterInitializer;
+ $stack5#org.apache.bookkeeper.stream.storage.impl.cluster.ZkClusterInitializer(metadataServiceHosts);
+ $stack6 = java.net.URI.create(ledgersUri);
+ $stack7 = $stack5.initializeCluster($stack6,numStorageContainers);
+ if ($stack7==0) goto label0;
+ $stack8=org.apache.bookkeeper.stream.cli.commands.cluster.InitClusterCommand.log;
+ dummyClass.lowSink("Successfully initialized stream storage metadata at {}:{}");
+$stack8.info("Successfully initialized stream storage metadata at {}:{}",(java.lang.Object)metadataServiceHosts,(java.lang.Object)"/stream");
+ label0:return;
+ } 
+

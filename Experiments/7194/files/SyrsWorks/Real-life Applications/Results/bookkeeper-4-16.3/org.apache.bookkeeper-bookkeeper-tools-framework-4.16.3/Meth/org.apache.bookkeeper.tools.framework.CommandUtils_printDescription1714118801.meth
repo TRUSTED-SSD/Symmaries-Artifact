@@ -1,0 +1,41 @@
+static void org.apache.bookkeeper.tools.framework.CommandUtils:printDescription(java.io.PrintStream printer,int firstLineIndent,int indent,java.lang.String @description)
+{
+byte max;
+  java.lang.String[] words;
+  int current;
+  int i;
+  java.lang.String description;
+description=@description;
+max=79;
+ words = description.split(" ");
+ current=indent;
+ i=0;
+ org.apache.bookkeeper.tools.framework.CommandUtils.printIndent(printer,firstLineIndent);
+ label0:firstLineIndent=#words;
+ if (i>=firstLineIndent) goto label1;
+ description=words[i];
+ firstLineIndent = description.length();
+ if (firstLineIndent>79) goto label2;
+ firstLineIndent = description.length();
+ firstLineIndent=(current+firstLineIndent);
+ if (firstLineIndent>79) goto label3;
+ label2:if (i==0) goto label4;
+ dummyClass.lowSink(" ");
+printer.print(" ");
+ label4:dummyClass.lowSink(description);
+printer.print(description);
+ firstLineIndent = description.length();
+ firstLineIndent=(firstLineIndent+1);
+ current=(current+firstLineIndent);
+ goto label5;
+ label3:printer.println();
+ org.apache.bookkeeper.tools.framework.CommandUtils.printIndent(printer,indent);
+ dummyClass.lowSink(description);
+printer.print(description);
+ current=indent;
+ label5:i=(i+1);
+ goto label0;
+ label1:printer.println();
+ return;
+ } 
+

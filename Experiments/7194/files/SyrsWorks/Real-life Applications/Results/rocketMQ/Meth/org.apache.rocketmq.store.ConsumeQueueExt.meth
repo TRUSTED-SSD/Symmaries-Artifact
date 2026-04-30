@@ -1,0 +1,35 @@
+org.apache.rocketmq.store.ConsumeQueueExt(java.lang.String @topic,int queueId,java.lang.String @storePath,int mappedFileSize,int bitMapLength)
+{
+java.lang.StringBuilder $stack7;
+  org.apache.rocketmq.store.MappedFileQueue $stack17;
+  java.nio.ByteBuffer $stack19;
+  java.lang.String storePath;
+java.lang.String topic;
+topic=@topic;
+storePath=@storePath;
+this#java.lang.Object();
+ this.storePath=storePath;
+ this.mappedFileSize=mappedFileSize;
+ this.topic=topic;
+ this.queueId=queueId;
+ $stack7=new java.lang.StringBuilder;
+ $stack7#java.lang.StringBuilder();
+ storePath=this.storePath;
+ $stack7 = $stack7.append(storePath);
+ storePath=java.io.File.separator;
+ $stack7 = $stack7.append(storePath);
+ $stack7 = $stack7.append(topic);
+ topic=java.io.File.separator;
+ $stack7 = $stack7.append(topic);
+ $stack7 = $stack7.append(queueId);
+ topic = $stack7.toString();
+ $stack17=new org.apache.rocketmq.store.MappedFileQueue;
+ $stack17#org.apache.rocketmq.store.MappedFileQueue(topic,mappedFileSize,null);
+ this.mappedFileQueue=$stack17;
+ if (bitMapLength<=0) goto label0;
+ queueId=(bitMapLength/8);
+ $stack19 = java.nio.ByteBuffer.allocate(queueId);
+ this.tempContainer=$stack19;
+ label0:return;
+ } 
+

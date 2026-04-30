@@ -1,0 +1,45 @@
+void org.apache.rocketmq.tieredstore.container.TieredFileQueue:lambda$destroyExpiredFile$5(org.apache.rocketmq.tieredstore.metadata.FileSegmentMetadata metadata)
+{
+org.apache.rocketmq.tieredstore.provider.TieredFileSegment fileSegment;
+  int $stack3;
+  long $stack4;
+  boolean $stack6;
+  org.apache.rocketmq.tieredstore.metadata.TieredMetadataStore $stack7;
+  org.apache.rocketmq.logging.org.slf4j.Logger $stack8;
+  java.lang.String $stack10;
+  java.lang.Exception $stack11;
+  java.lang.Object[] $stack12;
+  org.apache.rocketmq.common.message.MessageQueue $stack13;
+  java.lang.Integer $stack21;
+  org.apache.rocketmq.tieredstore.provider.TieredFileSegment$FileSegmentType $stack22;
+  $stack3 = metadata.getStatus();
+ if ($stack3!=2) goto label0;
+ label1:$stack4 = metadata.getBaseOffset();
+ fileSegment = this#org.apache.rocketmq.tieredstore.container.TieredFileQueue:newSegment($stack4,(boolean)0);
+ fileSegment.destroyFile();
+ $stack6 = fileSegment.exists();
+ if ($stack6!=0) goto label2;
+ $stack7=this.metadataStore;
+ $stack7.deleteFileSegment(fileSegment);
+ $stack8=org.apache.rocketmq.tieredstore.container.TieredFileQueue.logger;
+ $stack10 = fileSegment.getPath();
+ $stack8.info("expired file {} is been destroyed",(java.lang.Object)$stack10);
+ label2:goto label0;
+ label3:$stack11 = catch;
+ $stack8=org.apache.rocketmq.tieredstore.container.TieredFileQueue.logger;
+ $stack12=new java.lang.Object[4];
+ $stack13=this.messageQueue;
+ $stack10 = $stack13.getTopic();
+ $stack12[0]=$stack10;
+ $stack13=this.messageQueue;
+ $stack3 = $stack13.getQueueId();
+ $stack21 = java.lang.Integer.valueOf($stack3);
+ $stack12[1]=$stack21;
+ $stack22=this.fileType;
+ $stack12[2]=$stack22;
+ $stack12[3]=$stack11;
+ $stack8.error("destroy expired failed: topic: {}, queue: {}, file type: {}",$stack12);
+ label0:return;
+ catch java.lang.Exception: label1 - label2 : label3;
+} 
+

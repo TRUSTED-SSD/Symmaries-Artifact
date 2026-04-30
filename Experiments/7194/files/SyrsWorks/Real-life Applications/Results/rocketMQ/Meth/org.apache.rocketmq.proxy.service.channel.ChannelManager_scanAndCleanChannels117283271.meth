@@ -1,0 +1,36 @@
+void org.apache.rocketmq.proxy.service.channel.ChannelManager:scanAndCleanChannels()
+{
+java.util.Iterator iterator;
+  java.util.Map$Entry entry;
+  java.util.concurrent.ConcurrentMap $stack3;
+  java.util.Set $stack4;
+  boolean $stack6;
+  java.lang.Object $stack7;
+  org.apache.rocketmq.proxy.service.channel.SimpleChannel $stack9;
+  java.lang.Throwable $stack14;
+  org.apache.rocketmq.logging.org.slf4j.Logger $stack15;
+  label0:$stack3=this.clientIdChannelMap;
+ $stack4 = $stack3.entrySet();
+ iterator = $stack4.iterator();
+ label1:$stack6 = iterator.hasNext();
+ if ($stack6==0) goto label2;
+ $stack7 = iterator.next();
+ entry=(java.util.Map$Entry) $stack7;
+ $stack7 = entry.getValue();
+ $stack9=(org.apache.rocketmq.proxy.service.channel.SimpleChannel) $stack7;
+ $stack6 = $stack9.isActive();
+ if ($stack6!=0) goto label3;
+ iterator.remove();
+ goto label4;
+ label3:$stack7 = entry.getValue();
+ $stack9=(org.apache.rocketmq.proxy.service.channel.SimpleChannel) $stack7;
+ $stack9.clearExpireContext();
+ label4:goto label1;
+ label2:goto label5;
+ label6:$stack14 = catch;
+ $stack15=org.apache.rocketmq.proxy.service.channel.ChannelManager.log;
+ $stack15.error("Unexpected exception",$stack14);
+ label5:return;
+ catch java.lang.Throwable: label0 - label2 : label6;
+} 
+

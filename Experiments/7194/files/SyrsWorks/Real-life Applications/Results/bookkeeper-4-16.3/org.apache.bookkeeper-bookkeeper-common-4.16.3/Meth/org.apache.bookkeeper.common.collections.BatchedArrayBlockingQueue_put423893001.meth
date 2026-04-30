@@ -1,0 +1,27 @@
+void org.apache.bookkeeper.common.collections.BatchedArrayBlockingQueue:put(java.lang.Object e)
+{
+java.util.concurrent.locks.ReentrantLock $stack3;
+  int $stack4;
+  int $stack5;
+  java.util.concurrent.locks.Condition $stack7;
+  java.lang.Throwable $stack10;
+  $stack3=this.lock;
+ $stack3.lockInterruptibly();
+ label0:$stack5=this.size;
+ $stack4=this.capacity;
+ if ($stack5!=$stack4) goto label1;
+ $stack7=this.notFull;
+ $stack7.await();
+ goto label0;
+ label1:this#org.apache.bookkeeper.common.collections.BatchedArrayBlockingQueue:enqueueOne(e);
+ label2:$stack3=this.lock;
+ $stack3.unlock();
+ goto label3;
+ label4:$stack10 = catch;
+ $stack3=this.lock;
+ $stack3.unlock();
+ throw $stack10;
+ label3:return;
+ catch java.lang.Throwable: label0 - label2 : label4;
+} 
+

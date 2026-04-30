@@ -1,0 +1,55 @@
+void com.google.zxing.common.BitMatrix:rotate90()
+{
+int newWidth;
+  int newHeight;
+  int newRowSize;
+  int[] newBits;
+  int y;
+  int x;
+  int offset;
+  int $stack17;
+  int[] $stack18;
+  int $stack29;
+  newWidth=this.height;
+ newHeight=this.width;
+ newRowSize=(newWidth+31);
+ newRowSize=(newRowSize/32);
+ y=(newRowSize * newHeight);
+ newBits=new int[y];
+ y=0;
+ label0:x=this.height;
+ if (y>=x) goto label1;
+ x=0;
+ label2:offset=this.width;
+ if (x>=offset) goto label3;
+ offset=this.rowSize;
+ $stack17=(y * offset);
+ offset=(x/32);
+ offset=($stack17+offset);
+ $stack18=this.bits;
+ $stack17=$stack18[offset];
+ offset=(x & 31);
+ offset=($stack17>>>offset);
+ offset=(offset & 1);
+ if (offset==0) goto label4;
+ offset=(newHeight-1);
+ offset=(offset-x);
+ $stack17=(offset * newRowSize);
+ offset=(y/32);
+ offset=($stack17+offset);
+ $stack17=newBits[offset];
+ $stack29=(y & 31);
+ $stack29=(1<<$stack29);
+ $stack17=($stack17 | $stack29);
+ newBits[offset]=$stack17;
+ label4:x=(x+1);
+ goto label2;
+ label3:y=(y+1);
+ goto label0;
+ label1:this.width=newWidth;
+ this.height=newHeight;
+ this.rowSize=newRowSize;
+ this.bits=newBits;
+ return;
+ } 
+

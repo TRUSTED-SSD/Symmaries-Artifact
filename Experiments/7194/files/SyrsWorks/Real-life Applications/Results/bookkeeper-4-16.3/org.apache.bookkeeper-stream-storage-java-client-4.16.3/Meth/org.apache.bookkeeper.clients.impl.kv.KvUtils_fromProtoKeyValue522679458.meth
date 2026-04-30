@@ -1,0 +1,32 @@
+static org.apache.bookkeeper.api.kv.result.KeyValue org.apache.bookkeeper.clients.impl.kv.KvUtils:fromProtoKeyValue(org.apache.bookkeeper.stream.proto.kv.KeyValue kv,org.apache.bookkeeper.api.kv.impl.result.KeyValueFactory kvFactory)
+{
+org.apache.bookkeeper.api.kv.impl.result.KeyValueImpl $stack2;
+  com.google.protobuf.ByteString $stack3;
+  java.nio.ByteBuffer $stack4;
+  io.netty.buffer.ByteBuf $stack5;
+  boolean $stack11;
+  long $stack13;
+  $stack2 = kvFactory.newKv();
+ $stack3 = kv.getKey();
+ $stack4 = $stack3.asReadOnlyByteBuffer();
+dummyClass.highSourceMut($stack4);
+ $stack5 = io.netty.buffer.Unpooled.wrappedBuffer($stack4);
+ $stack2 = $stack2.key((java.lang.Object)$stack5);
+ $stack3 = kv.getValue();
+ $stack4 = $stack3.asReadOnlyByteBuffer();
+dummyClass.highSourceMut($stack4);
+ $stack5 = io.netty.buffer.Unpooled.wrappedBuffer($stack4);
+ $stack2 = $stack2.value((java.lang.Object)$stack5);
+ $stack11 = kv.getIsNumber();
+ $stack2 = $stack2.isNumber($stack11);
+ $stack13 = kv.getNumberValue();
+ $stack2 = $stack2.numberValue($stack13);
+ $stack13 = kv.getCreateRevision();
+ $stack2 = $stack2.createRevision($stack13);
+ $stack13 = kv.getModRevision();
+ $stack2 = $stack2.modifiedRevision($stack13);
+ $stack13 = kv.getVersion();
+ $stack2 = $stack2.version($stack13);
+ return  $stack2;
+ } 
+

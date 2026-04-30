@@ -1,0 +1,45 @@
+boolean org.apache.rocketmq.store.DefaultMessageStore:isTheBatchFull(int sizePy,int unitBatchNum,int maxMsgNums,long maxMsgSize,int bufferTotal,int messageTotal,boolean isInMem)
+{
+long $stack11;
+  byte $stack12;
+  org.apache.rocketmq.store.config.MessageStoreConfig $stack13;
+  if (0==bufferTotal) goto label0;
+ if (0!=messageTotal) goto label1;
+ label0:return  0;
+ label1:unitBatchNum=(messageTotal+unitBatchNum);
+ if (unitBatchNum<=maxMsgNums) goto label2;
+ return  1;
+ label2:unitBatchNum=(bufferTotal+sizePy);
+ $stack11=(long) unitBatchNum;
+ $stack12=($stack11 cmp maxMsgSize);
+ if ($stack12<=0) goto label3;
+ return  1;
+ label3:if (isInMem==0) goto label4;
+ sizePy=(bufferTotal+sizePy);
+ $stack13=this.messageStoreConfig;
+ unitBatchNum = $stack13.getMaxTransferBytesOnMessageInMemory();
+ if (sizePy<=unitBatchNum) goto label5;
+ return  1;
+ label5:$stack13=this.messageStoreConfig;
+ sizePy = $stack13.getMaxTransferCountOnMessageInMemory();
+ sizePy=(sizePy-1);
+ if (messageTotal<=sizePy) goto label6;
+ isInMem=1;
+ goto label7;
+ label6:isInMem=0;
+ label7:return  isInMem;
+ label4:sizePy=(bufferTotal+sizePy);
+ $stack13=this.messageStoreConfig;
+ unitBatchNum = $stack13.getMaxTransferBytesOnMessageInDisk();
+ if (sizePy<=unitBatchNum) goto label8;
+ return  1;
+ label8:$stack13=this.messageStoreConfig;
+ sizePy = $stack13.getMaxTransferCountOnMessageInDisk();
+ sizePy=(sizePy-1);
+ if (messageTotal<=sizePy) goto label9;
+ isInMem=1;
+ goto label10;
+ label9:isInMem=0;
+ label10:return  isInMem;
+ } 
+

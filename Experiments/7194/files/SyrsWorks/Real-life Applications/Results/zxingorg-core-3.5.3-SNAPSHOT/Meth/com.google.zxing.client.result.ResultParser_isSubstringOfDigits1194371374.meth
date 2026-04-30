@@ -1,0 +1,25 @@
+static boolean com.google.zxing.client.result.ResultParser:isSubstringOfDigits(java.lang.CharSequence @value,int offset,int length)
+{
+int $stack4;
+  java.util.regex.Pattern $stack5;
+  java.util.regex.Matcher $stack7;
+  boolean $stack8;
+  java.lang.CharSequence value;
+value=@value;
+if (value==null) goto label0;
+ if (length>0) goto label1;
+ label0:return  0;
+ label1:length=(offset+length);
+ $stack4 = value.length();
+ if ($stack4<length) goto label2;
+ $stack5=com.google.zxing.client.result.ResultParser.DIGITS;
+ value = value.subSequence(offset,length);
+ $stack7 = $stack5.matcher(value);
+ $stack8 = $stack7.matches();
+ if ($stack8==0) goto label2;
+ $stack8=1;
+ goto label3;
+ label2:$stack8=0;
+ label3:return  $stack8;
+ } 
+

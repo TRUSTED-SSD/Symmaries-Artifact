@@ -1,0 +1,67 @@
+    private void addSinglePointFields(org.junit.experimental.theories.ParameterSignature, java.util.List)
+    {
+        org.junit.experimental.theories.internal.AllMembersSupplier this;
+        org.junit.experimental.theories.ParameterSignature sig;
+        java.util.List list;
+        java.util.Iterator i$;
+        java.lang.reflect.Field field;
+        java.lang.Object value;
+        java.util.Collection $stack6;
+        boolean $stack8;
+        java.lang.String $stack13;
+        org.junit.experimental.theories.PotentialAssignment $stack14;
+
+        this := @this: org.junit.experimental.theories.internal.AllMembersSupplier;
+
+        sig := @parameter0: org.junit.experimental.theories.ParameterSignature;
+
+        list := @parameter1: java.util.List;
+
+        $stack6 = virtualinvoke this.<org.junit.experimental.theories.internal.AllMembersSupplier: java.util.Collection getSingleDataPointFields(org.junit.experimental.theories.ParameterSignature)>(sig);
+/*113*/
+
+        i$ = interfaceinvoke $stack6.<java.util.Collection: java.util.Iterator iterator()>();
+/*113*/
+/*113*/
+
+     label1:
+        $stack8 = interfaceinvoke i$.<java.util.Iterator: boolean hasNext()>();
+/*113*/
+
+        if $stack8 == 0 goto label3;
+/*113*/
+
+        value = interfaceinvoke i$.<java.util.Iterator: java.lang.Object next()>();
+/*120*/
+
+        field = (java.lang.reflect.Field) value;
+/*120*/
+
+        value = specialinvoke this.<org.junit.experimental.theories.internal.AllMembersSupplier: java.lang.Object getStaticFieldValue(java.lang.reflect.Field)>(field);
+/*114*/
+/*114*/
+
+        $stack8 = virtualinvoke sig.<org.junit.experimental.theories.ParameterSignature: boolean canAcceptValue(java.lang.Object)>(value);
+/*116*/
+
+        if $stack8 == 0 goto label2;
+/*116*/
+
+        $stack13 = virtualinvoke field.<java.lang.reflect.Field: java.lang.String getName()>();
+/*117*/
+
+        $stack14 = staticinvoke <org.junit.experimental.theories.PotentialAssignment: org.junit.experimental.theories.PotentialAssignment forValue(java.lang.String,java.lang.Object)>($stack13, value);
+/*117*/
+
+        interfaceinvoke list.<java.util.List: boolean add(java.lang.Object)>($stack14);
+/*117*/
+
+     label2:
+        goto label1;
+/*119*/
+
+     label3:
+        return;
+/*120*/
+    }
+

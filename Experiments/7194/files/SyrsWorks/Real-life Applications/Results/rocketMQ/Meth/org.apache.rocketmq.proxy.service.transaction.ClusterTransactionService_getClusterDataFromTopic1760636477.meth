@@ -1,0 +1,44 @@
+java.util.Set org.apache.rocketmq.proxy.service.transaction.ClusterTransactionService:getClusterDataFromTopic(java.lang.String topic)
+{
+org.apache.rocketmq.proxy.service.route.MessageQueueView messageQueue;
+  java.util.List brokerDataList;
+  java.util.HashSet res;
+  java.util.Iterator l5;
+  org.apache.rocketmq.remoting.protocol.route.BrokerData brokerData;
+  org.apache.rocketmq.proxy.service.route.TopicRouteService $stack7;
+  org.apache.rocketmq.remoting.protocol.route.TopicRouteData $stack9;
+  boolean $stack13;
+  java.lang.Object $stack14;
+  org.apache.rocketmq.proxy.service.transaction.ClusterTransactionService$ClusterData $stack15;
+  java.lang.String $stack16;
+  java.util.Set $stack19;
+  java.lang.Throwable $stack20;
+  org.apache.rocketmq.logging.org.slf4j.Logger $stack21;
+  label0:$stack7=this.topicRouteService;
+ messageQueue = $stack7.getAllMessageQueueView(topic);
+ $stack9 = messageQueue.getTopicRouteData();
+ brokerDataList = $stack9.getBrokerDatas();
+ if (brokerDataList!=null) goto label1;
+ $stack19 = java.util.Collections.emptySet();
+ label2:return  $stack19;
+ label1:res = com.google.common.collect.Sets.newHashSet();
+ l5 = brokerDataList.iterator();
+ label3:$stack13 = l5.hasNext();
+ if ($stack13==0) goto label4;
+ $stack14 = l5.next();
+ brokerData=(org.apache.rocketmq.remoting.protocol.route.BrokerData) $stack14;
+ $stack15=new org.apache.rocketmq.proxy.service.transaction.ClusterTransactionService$ClusterData;
+ $stack16 = brokerData.getCluster();
+ $stack15#org.apache.rocketmq.proxy.service.transaction.ClusterTransactionService$ClusterData($stack16);
+ res.add((java.lang.Object)$stack15);
+ goto label3;
+ label4:return  res;
+ label5:$stack20 = catch;
+ $stack21=org.apache.rocketmq.proxy.service.transaction.ClusterTransactionService.log;
+ $stack21.error("get cluster data failed in txHeartBeat. topic: {}, err: {}",(java.lang.Object)topic,(java.lang.Object)$stack20);
+ $stack19 = java.util.Collections.emptySet();
+ return  $stack19;
+ catch java.lang.Throwable: label0 - label2 : label5;
+catch java.lang.Throwable: label1 - label4 : label5;
+} 
+

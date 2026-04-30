@@ -1,0 +1,51 @@
+org.apache.rocketmq.proxy.service.metadata.ClusterMetadataService(org.apache.rocketmq.proxy.service.route.TopicRouteService topicRouteService,org.apache.rocketmq.proxy.service.mqclient.MQClientAPIFactory mqClientAPIFactory)
+{
+org.apache.rocketmq.proxy.config.ProxyConfig config;
+  int $stack5;
+  int $stack6;
+  java.util.concurrent.TimeUnit $stack8;
+  int $stack10;
+  java.util.concurrent.ThreadPoolExecutor $stack11;
+  com.google.common.cache.CacheBuilder $stack12;
+  long $stack14;
+  org.apache.rocketmq.proxy.service.metadata.ClusterMetadataService$ClusterTopicConfigCacheLoader $stack20;
+  com.google.common.cache.LoadingCache $stack21;
+  org.apache.rocketmq.proxy.service.metadata.ClusterMetadataService$ClusterSubscriptionGroupConfigCacheLoader $stack30;
+  this#org.apache.rocketmq.proxy.common.AbstractStartAndShutdown();
+ this.topicRouteService=topicRouteService;
+ this.mqClientAPIFactory=mqClientAPIFactory;
+ config = org.apache.rocketmq.proxy.config.ConfigurationManager.getProxyConfig();
+ $stack5 = config.getMetadataThreadPoolNums();
+ $stack6 = config.getMetadataThreadPoolNums();
+ $stack8=java.util.concurrent.TimeUnit.MILLISECONDS;
+ $stack10 = config.getMetadataThreadPoolQueueCapacity();
+ $stack11 = org.apache.rocketmq.common.thread.ThreadPoolMonitor.createAndMonitor($stack5,$stack6,60000L,$stack8,"MetadataCacheRefresh",$stack10);
+ this.cacheRefreshExecutor=$stack11;
+ $stack12 = com.google.common.cache.CacheBuilder.newBuilder();
+ $stack5 = config.getTopicConfigCacheMaxNum();
+ $stack14=(long) $stack5;
+ $stack12 = $stack12.maximumSize($stack14);
+ $stack5 = config.getTopicConfigCacheExpiredInSeconds();
+ $stack14=(long) $stack5;
+ $stack8=java.util.concurrent.TimeUnit.SECONDS;
+ $stack12 = $stack12.refreshAfterWrite($stack14,$stack8);
+ $stack20=new org.apache.rocketmq.proxy.service.metadata.ClusterMetadataService$ClusterTopicConfigCacheLoader;
+ $stack20#org.apache.rocketmq.proxy.service.metadata.ClusterMetadataService$ClusterTopicConfigCacheLoader(this);
+ $stack21 = $stack12.build((com.google.common.cache.CacheLoader)$stack20);
+ this.topicConfigCache=$stack21;
+ $stack12 = com.google.common.cache.CacheBuilder.newBuilder();
+ $stack5 = config.getSubscriptionGroupConfigCacheMaxNum();
+ $stack14=(long) $stack5;
+ $stack12 = $stack12.maximumSize($stack14);
+ $stack5 = config.getSubscriptionGroupConfigCacheExpiredInSeconds();
+ $stack14=(long) $stack5;
+ $stack8=java.util.concurrent.TimeUnit.SECONDS;
+ $stack12 = $stack12.refreshAfterWrite($stack14,$stack8);
+ $stack30=new org.apache.rocketmq.proxy.service.metadata.ClusterMetadataService$ClusterSubscriptionGroupConfigCacheLoader;
+ $stack30#org.apache.rocketmq.proxy.service.metadata.ClusterMetadataService$ClusterSubscriptionGroupConfigCacheLoader(this);
+ $stack21 = $stack12.build((com.google.common.cache.CacheLoader)$stack30);
+ this.subscriptionGroupConfigCache=$stack21;
+ this#org.apache.rocketmq.proxy.service.metadata.ClusterMetadataService();
+ return;
+ } 
+

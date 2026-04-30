@@ -1,0 +1,42 @@
+void org.apache.bookkeeper.bookie.UncleanShutdownDetectionImpl:registerCleanShutdown()
+{
+java.util.Iterator l1;
+  java.io.File ledgerDir;
+  java.io.File dirtyFile;
+  boolean deleted;
+  org.apache.bookkeeper.bookie.LedgerDirsManager $stack5;
+  java.util.List $stack6;
+  java.lang.Object $stack9;
+  org.slf4j.Logger $stack12;
+  java.lang.String $stack14;
+  java.lang.Throwable $stack20;
+  $stack5=this.ledgerDirsManager;
+ $stack6 = $stack5.getAllLedgerDirs();
+ l1 = $stack6.iterator();
+ label0:deleted = l1.hasNext();
+ if (deleted==0) goto label1;
+ $stack9 = l1.next();
+ ledgerDir=(java.io.File) $stack9;
+ label2:dirtyFile=new java.io.File;
+ dirtyFile#java.io.File(ledgerDir,"DIRTY");
+ deleted = dirtyFile.exists();
+ if (deleted==0) goto label3;
+ deleted = dirtyFile.delete();
+ if (deleted!=0) goto label4;
+ $stack12=org.apache.bookkeeper.bookie.UncleanShutdownDetectionImpl.LOG;
+ $stack14 = ledgerDir.getAbsolutePath();
+ $stack12.error("Unable to register a clean shutdown. The dirty file of  ledger dir {} could not be deleted.",(java.lang.Object)$stack14);
+ label4:goto label5;
+ label3:$stack12=org.apache.bookkeeper.bookie.UncleanShutdownDetectionImpl.LOG;
+ $stack14 = ledgerDir.getAbsolutePath();
+ $stack12.error("Unable to register a clean shutdown. The dirty file of  ledger dir {} does not exist.",(java.lang.Object)$stack14);
+ label5:goto label6;
+ label7:$stack20 = catch;
+ $stack12=org.apache.bookkeeper.bookie.UncleanShutdownDetectionImpl.LOG;
+ $stack14 = ledgerDir.getAbsolutePath();
+ $stack12.error("Unable to register a clean shutdown. An error occurred while deleting  the dirty file of ledger dir {}.",(java.lang.Object)$stack14,(java.lang.Object)$stack20);
+ label6:goto label0;
+ label1:return;
+ catch java.lang.Throwable: label2 - label5 : label7;
+} 
+

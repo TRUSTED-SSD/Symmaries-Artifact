@@ -1,0 +1,32 @@
+java.util.Set org.apache.bookkeeper.client.ZoneawareEnsemblePlacementPolicyImpl:getBookiesToConsider(java.util.Set excludeBookies)
+{
+java.util.Set leaves;
+  java.util.HashSet bookiesToConsider;
+  org.apache.bookkeeper.net.BookieNode bookieNode;
+  java.util.Iterator l5;
+  org.apache.bookkeeper.net.Node leaf;
+  org.apache.bookkeeper.net.NetworkTopology $stack7;
+  boolean $stack11;
+  java.lang.Object $stack12;
+  org.apache.bookkeeper.net.BookieId $stack15;
+  $stack7=this.topology;
+ leaves = $stack7.getLeaves("");
+ bookiesToConsider=new java.util.HashSet;
+ bookiesToConsider#java.util.HashSet();
+ l5 = leaves.iterator();
+ label0:$stack11 = l5.hasNext();
+ if ($stack11==0) goto label1;
+ $stack12 = l5.next();
+ leaf=(org.apache.bookkeeper.net.Node) $stack12;
+ $stack11=leaf instanceof org.apache.bookkeeper.net.BookieNode;
+ if ($stack11==0) goto label2;
+ bookieNode=(org.apache.bookkeeper.net.BookieNode) leaf;
+ $stack15 = bookieNode.getAddr();
+ $stack11 = excludeBookies.contains((java.lang.Object)$stack15);
+ if ($stack11==0) goto label3;
+ goto label0;
+ label3:bookiesToConsider.add((java.lang.Object)bookieNode);
+ label2:goto label0;
+ label1:return  bookiesToConsider;
+ } 
+

@@ -1,0 +1,54 @@
+org.apache.bookkeeper.client.WeightedRandomSelection org.apache.bookkeeper.client.RackawareEnsemblePlacementPolicyImpl:prepareForWeightedSelection(java.util.List leaves)
+{
+java.util.HashMap rackMap;
+  java.lang.Object wRSelection;
+  org.apache.bookkeeper.net.Node n;
+  org.apache.bookkeeper.net.BookieNode bookie;
+  boolean $stack8;
+  int $stack9;
+  java.lang.Object $stack12;
+  java.util.Map $stack14;
+  java.util.HashMap tmp$529144760;
+  org.apache.bookkeeper.client.BookieInfoReader$BookieInfo tmp$1774872099;
+  org.apache.bookkeeper.client.WeightedRandomSelectionImpl tmp$1939340266;
+  java.util.Iterator tmp$1878464099;
+  org.apache.bookkeeper.client.WeightedRandomSelection tmp$1110430315;
+  tmp$529144760=new java.util.HashMap;
+ rackMap=tmp$529144760;
+ tmp$529144760#java.util.HashMap();
+ rackMap=tmp$529144760;
+ wRSelection = leaves.iterator();
+ label0:tmp$1878464099=(java.util.Iterator) wRSelection;
+ $stack8 = tmp$1878464099.hasNext();
+ if ($stack8==0) goto label1;
+ tmp$1878464099=(java.util.Iterator) wRSelection;
+ $stack12 = tmp$1878464099.next();
+ n=(org.apache.bookkeeper.net.Node) $stack12;
+ $stack8=n instanceof org.apache.bookkeeper.net.BookieNode;
+ if ($stack8!=0) goto label2;
+ goto label0;
+ label2:bookie=(org.apache.bookkeeper.net.BookieNode) n;
+ $stack14=this.bookieInfoMap;
+ $stack8 = $stack14.containsKey((java.lang.Object)bookie);
+ if ($stack8==0) goto label3;
+ $stack14=this.bookieInfoMap;
+ $stack12 = $stack14.get((java.lang.Object)bookie);
+ tmp$529144760.put((java.lang.Object)bookie,$stack12);
+ goto label4;
+ label3:tmp$1774872099=new org.apache.bookkeeper.client.BookieInfoReader$BookieInfo;
+ tmp$1774872099#org.apache.bookkeeper.client.BookieInfoReader$BookieInfo();
+ tmp$529144760.put((java.lang.Object)bookie,(java.lang.Object)tmp$1774872099);
+ label4:goto label0;
+ label1:$stack9 = tmp$529144760.size();
+ if ($stack9!=0) goto label5;
+ return  null;
+ label5:tmp$1939340266=new org.apache.bookkeeper.client.WeightedRandomSelectionImpl;
+ $stack9=this.maxWeightMultiple;
+ tmp$1939340266#org.apache.bookkeeper.client.WeightedRandomSelectionImpl($stack9);
+ wRSelection=tmp$1939340266;
+ tmp$1110430315=(org.apache.bookkeeper.client.WeightedRandomSelection) tmp$1939340266;
+ tmp$1110430315.updateMap((java.util.Map)tmp$529144760);
+ tmp$1110430315=(org.apache.bookkeeper.client.WeightedRandomSelection) tmp$1939340266;
+ return  tmp$1110430315;
+ } 
+

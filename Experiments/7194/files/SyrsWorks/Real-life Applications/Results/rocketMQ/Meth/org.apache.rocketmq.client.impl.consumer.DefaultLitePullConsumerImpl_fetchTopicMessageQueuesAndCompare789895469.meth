@@ -1,0 +1,40 @@
+void org.apache.rocketmq.client.impl.consumer.DefaultLitePullConsumerImpl:fetchTopicMessageQueuesAndCompare()
+{
+java.util.Iterator l1;
+  java.util.Map$Entry entry;
+  java.lang.String topic;
+  org.apache.rocketmq.client.consumer.TopicMessageQueueChangeListener topicMessageQueueChangeListener;
+  java.util.Set oldMessageQueues;
+  java.util.Set newMessageQueues;
+  java.util.Map $stack8;
+  boolean $stack11;
+  java.lang.Object $stack12;
+  $stack8=this.topicMessageQueueChangeListenerMap;
+ oldMessageQueues = $stack8.entrySet();
+ l1 = oldMessageQueues.iterator();
+ label0:$stack11 = l1.hasNext();
+ if ($stack11==0) goto label1;
+ $stack12 = l1.next();
+ entry=(java.util.Map$Entry) $stack12;
+ $stack12 = entry.getKey();
+ topic=(java.lang.String) $stack12;
+ $stack12 = entry.getValue();
+ topicMessageQueueChangeListener=(org.apache.rocketmq.client.consumer.TopicMessageQueueChangeListener) $stack12;
+ $stack8=this.messageQueuesForTopic;
+ $stack12 = $stack8.get((java.lang.Object)topic);
+ oldMessageQueues=(java.util.Set) $stack12;
+ newMessageQueues = this.fetchMessageQueues(topic);
+ $stack11 = this#org.apache.rocketmq.client.impl.consumer.DefaultLitePullConsumerImpl:isSetEqual(newMessageQueues,oldMessageQueues);
+ if ($stack11!=0) goto label2;
+ $stack11=1;
+ goto label3;
+ label2:$stack11=0;
+ label3:if ($stack11==0) goto label4;
+ $stack8=this.messageQueuesForTopic;
+ $stack8.put((java.lang.Object)topic,(java.lang.Object)newMessageQueues);
+ if (topicMessageQueueChangeListener==null) goto label4;
+ topicMessageQueueChangeListener.onChanged(topic,newMessageQueues);
+ label4:goto label0;
+ label1:return;
+ } 
+

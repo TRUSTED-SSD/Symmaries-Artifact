@@ -1,0 +1,47 @@
+void org.apache.bookkeeper.stream.server.grpc.GrpcStorageContainerService:getStorageContainerEndpoint(org.apache.bookkeeper.stream.proto.storage.GetStorageContainerEndpointRequest request,io.grpc.stub.StreamObserver responseObserver)
+{
+org.apache.bookkeeper.stream.proto.storage.GetStorageContainerEndpointResponse$Builder responseBuilder;
+  int i;
+  org.apache.bookkeeper.stream.proto.common.Endpoint endpoint;
+  org.apache.bookkeeper.stream.proto.storage.OneStorageContainerEndpointResponse$Builder oneRespBuilder;
+  org.apache.bookkeeper.stream.proto.storage.StatusCode $stack8;
+  int $stack10;
+  org.apache.bookkeeper.stream.proto.storage.GetStorageContainerEndpointResponse $stack11;
+  org.apache.bookkeeper.stream.storage.api.StorageContainerStore $stack12;
+  org.apache.bookkeeper.stream.storage.api.sc.StorageContainerRoutingService $stack13;
+  org.apache.bookkeeper.stream.proto.storage.OneStorageContainerEndpointRequest $stack14;
+  long $stack15;
+  org.apache.bookkeeper.stream.proto.storage.StorageContainerEndpoint$Builder $stack26;
+  responseBuilder = org.apache.bookkeeper.stream.proto.storage.GetStorageContainerEndpointResponse.newBuilder();
+ $stack8=org.apache.bookkeeper.stream.proto.storage.StatusCode.SUCCESS;
+ responseBuilder = responseBuilder.setStatusCode($stack8);
+ i=0;
+ label0:$stack10 = request.getRequestsCount();
+ if (i>=$stack10) goto label1;
+ $stack12=this.storageContainerStore;
+ $stack13 = $stack12.getRoutingService();
+ $stack14 = request.getRequests(i);
+ $stack15 = $stack14.getStorageContainer();
+ endpoint = $stack13.getStorageContainer($stack15);
+ if (null==endpoint) goto label2;
+ oneRespBuilder = org.apache.bookkeeper.stream.proto.storage.OneStorageContainerEndpointResponse.newBuilder();
+ $stack8=org.apache.bookkeeper.stream.proto.storage.StatusCode.SUCCESS;
+ oneRespBuilder = oneRespBuilder.setStatusCode($stack8);
+ $stack26 = org.apache.bookkeeper.stream.proto.storage.StorageContainerEndpoint.newBuilder();
+ $stack26 = $stack26.setRwEndpoint(endpoint);
+ $stack26 = $stack26.addRoEndpoint(endpoint);
+ $stack26 = $stack26.setRevision(0L);
+ oneRespBuilder = oneRespBuilder.setEndpoint($stack26);
+ goto label3;
+ label2:oneRespBuilder = org.apache.bookkeeper.stream.proto.storage.OneStorageContainerEndpointResponse.newBuilder();
+ $stack8=org.apache.bookkeeper.stream.proto.storage.StatusCode.INTERNAL_SERVER_ERROR;
+ oneRespBuilder = oneRespBuilder.setStatusCode($stack8);
+ label3:responseBuilder = responseBuilder.addResponses(oneRespBuilder);
+ i=(i+1);
+ goto label0;
+ label1:$stack11 = responseBuilder.build();
+ responseObserver.onNext((java.lang.Object)$stack11);
+ responseObserver.onCompleted();
+ return;
+ } 
+

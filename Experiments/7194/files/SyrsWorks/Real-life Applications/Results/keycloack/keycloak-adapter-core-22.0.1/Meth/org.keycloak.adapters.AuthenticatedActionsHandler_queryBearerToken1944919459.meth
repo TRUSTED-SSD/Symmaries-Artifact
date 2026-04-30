@@ -1,0 +1,48 @@
+void org.keycloak.adapters.AuthenticatedActionsHandler:queryBearerToken()
+{
+org.keycloak.adapters.OIDCHttpFacade $stack2;
+  org.jboss.logging.Logger $stack3;
+  org.keycloak.adapters.spi.HttpFacade$Request $stack5;
+  java.lang.String $stack6;
+  boolean $stack7;
+  org.keycloak.adapters.spi.HttpFacade$Response $stack9;
+  java.io.OutputStream $stack14;
+  org.keycloak.KeycloakSecurityContext $stack16;
+  byte[] $stack18;
+  java.io.IOException $stack21;
+  java.lang.RuntimeException $stack22;
+  $stack3=org.keycloak.adapters.AuthenticatedActionsHandler.log;
+ $stack2=this.facade;
+ $stack5 = $stack2.getRequest();
+ $stack6 = $stack5.getURI();
+ $stack3.debugv("queryBearerToken {0}",(java.lang.Object)$stack6);
+ $stack7 = this.abortTokenResponse();
+ if ($stack7==0) goto label0;
+ return;
+ label0:$stack2=this.facade;
+ $stack9 = $stack2.getResponse();
+ $stack9.setStatus(200);
+ $stack2=this.facade;
+ $stack9 = $stack2.getResponse();
+ $stack9.setHeader("Content-Type","text/plain");
+ label1:$stack2=this.facade;
+ $stack9 = $stack2.getResponse();
+ $stack14 = $stack9.getOutputStream();
+ $stack2=this.facade;
+ $stack16 = $stack2.getSecurityContext();
+ $stack6 = $stack16.getTokenString();
+ $stack18 = $stack6.getBytes();
+ dummyClass.lowSink($stack18);
+$stack14.write($stack18);
+ label2:goto label3;
+ label4:$stack21 = catch;
+ $stack22=new java.lang.RuntimeException;
+ $stack22#java.lang.RuntimeException((java.lang.Throwable)$stack21);
+ throw $stack22;
+ label3:$stack2=this.facade;
+ $stack9 = $stack2.getResponse();
+ $stack9.end();
+ return;
+ catch java.io.IOException: label1 - label2 : label4;
+} 
+

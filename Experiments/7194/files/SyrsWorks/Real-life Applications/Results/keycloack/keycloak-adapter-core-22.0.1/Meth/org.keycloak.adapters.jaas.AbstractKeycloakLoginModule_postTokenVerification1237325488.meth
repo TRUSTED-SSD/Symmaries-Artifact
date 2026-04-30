@@ -1,0 +1,35 @@
+org.keycloak.adapters.jaas.AbstractKeycloakLoginModule$Auth org.keycloak.adapters.jaas.AbstractKeycloakLoginModule:postTokenVerification(java.lang.String tokenString,org.keycloak.representations.AccessToken token)
+{
+boolean verifyCaller;
+  org.keycloak.adapters.RefreshableKeycloakSecurityContext skSession;
+  java.lang.String principalName;
+  java.util.Set roles;
+  org.keycloak.adapters.KeycloakDeployment $stack8;
+  org.keycloak.KeycloakPrincipal $stack15;
+  org.keycloak.adapters.jaas.AbstractKeycloakLoginModule$Auth $stack17;
+  java.lang.IllegalStateException $stack18;
+  $stack8=this.deployment;
+ verifyCaller = $stack8.isUseResourceRoleMappings();
+ if (verifyCaller==0) goto label0;
+ $stack8=this.deployment;
+ principalName = $stack8.getResourceName();
+ verifyCaller = token.isVerifyCaller(principalName);
+ goto label1;
+ label0:verifyCaller = token.isVerifyCaller();
+ label1:if (verifyCaller==0) goto label2;
+ $stack18=new java.lang.IllegalStateException;
+ $stack18#java.lang.IllegalStateException("VerifyCaller not supported yet in login module");
+ throw $stack18;
+ label2:skSession=new org.keycloak.adapters.RefreshableKeycloakSecurityContext;
+ $stack8=this.deployment;
+ skSession#org.keycloak.adapters.RefreshableKeycloakSecurityContext($stack8,null,tokenString,token,null,null,null);
+ $stack8=this.deployment;
+ principalName = org.keycloak.adapters.AdapterUtils.getPrincipalName($stack8,token);
+ $stack15=new org.keycloak.KeycloakPrincipal;
+ $stack15#org.keycloak.KeycloakPrincipal(principalName,(org.keycloak.KeycloakSecurityContext)skSession);
+ roles = org.keycloak.adapters.AdapterUtils.getRolesFromSecurityContext(skSession);
+ $stack17=new org.keycloak.adapters.jaas.AbstractKeycloakLoginModule$Auth;
+ $stack17#org.keycloak.adapters.jaas.AbstractKeycloakLoginModule$Auth($stack15,roles,tokenString);
+ return  $stack17;
+ } 
+

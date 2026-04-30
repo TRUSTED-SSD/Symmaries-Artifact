@@ -1,0 +1,58 @@
+static java.util.List org.apache.rocketmq.proxy.service.route.MessageQueueSelector:buildRead(org.apache.rocketmq.proxy.service.route.TopicRouteWrapper topicRoute)
+{
+java.util.HashSet queueSet;
+  java.util.List qds;
+  java.util.Iterator l3;
+  org.apache.rocketmq.remoting.protocol.route.QueueData qd;
+  java.lang.String brokerAddr;
+  int i;
+  boolean $stack11;
+  java.util.stream.Stream $stack12;
+  java.util.stream.Collector $stack14;
+  java.lang.Object $stack15;
+  int $stack23;
+  org.apache.rocketmq.proxy.service.route.AddressableMessageQueue $stack24;
+  org.apache.rocketmq.common.message.MessageQueue $stack25;
+  java.lang.String $stack26;
+  java.lang.String $stack27;
+  java.util.ArrayList $stack31;
+  queueSet=new java.util.HashSet;
+ queueSet#java.util.HashSet();
+ qds = topicRoute.getQueueDatas();
+ if (qds!=null) goto label0;
+ $stack31=new java.util.ArrayList;
+ $stack31#java.util.ArrayList();
+ return  $stack31;
+ label0:l3 = qds.iterator();
+ label1:$stack11 = l3.hasNext();
+ if ($stack11==0) goto label2;
+ $stack15 = l3.next();
+ qd=(org.apache.rocketmq.remoting.protocol.route.QueueData) $stack15;
+ i = qd.getPerm();
+ $stack11 = org.apache.rocketmq.common.constant.PermName.isReadable(i);
+ if ($stack11==0) goto label3;
+ brokerAddr = qd.getBrokerName();
+ brokerAddr = topicRoute.getMasterAddrPrefer(brokerAddr);
+ if (brokerAddr!=null) goto label4;
+ goto label1;
+ label4:i=0;
+ label5:$stack23 = qd.getReadQueueNums();
+ if (i>=$stack23) goto label3;
+ $stack24=new org.apache.rocketmq.proxy.service.route.AddressableMessageQueue;
+ $stack25=new org.apache.rocketmq.common.message.MessageQueue;
+ $stack26 = topicRoute.getTopicName();
+ $stack27 = qd.getBrokerName();
+ $stack25#org.apache.rocketmq.common.message.MessageQueue($stack26,$stack27,i);
+ $stack24#org.apache.rocketmq.proxy.service.route.AddressableMessageQueue($stack25,brokerAddr);
+ queueSet.add((java.lang.Object)$stack24);
+ i=(i+1);
+ goto label5;
+ label3:goto label1;
+ label2:$stack12 = queueSet.stream();
+ $stack12 = $stack12.sorted();
+ $stack14 = java.util.stream.Collectors.toList();
+ $stack15 = $stack12.collect($stack14);
+ qds=(java.util.List) $stack15;
+ return  qds;
+ } 
+

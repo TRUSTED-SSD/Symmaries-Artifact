@@ -1,0 +1,19 @@
+long org.apache.rocketmq.store.CommitLog:getMinOffset()
+{
+org.apache.rocketmq.store.logfile.MappedFile mappedFile;
+  org.apache.rocketmq.store.MappedFileQueue $stack2;
+  boolean $stack4;
+  long $stack5;
+  $stack2=this.mappedFileQueue;
+ mappedFile = $stack2.getFirstMappedFile();
+ if (mappedFile==null) goto label0;
+ $stack4 = mappedFile.isAvailable();
+ if ($stack4==0) goto label1;
+ $stack5 = mappedFile.getFileFromOffset();
+ return  $stack5;
+ label1:$stack5 = mappedFile.getFileFromOffset();
+ $stack5 = this.rollNextFile($stack5);
+ return  $stack5;
+ label0:return  -1L;
+ } 
+

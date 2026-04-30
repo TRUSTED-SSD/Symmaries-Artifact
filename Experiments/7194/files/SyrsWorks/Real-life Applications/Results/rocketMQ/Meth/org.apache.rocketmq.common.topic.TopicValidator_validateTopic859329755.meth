@@ -1,0 +1,25 @@
+static org.apache.rocketmq.common.topic.TopicValidator$ValidateTopicResult org.apache.rocketmq.common.topic.TopicValidator:validateTopic(java.lang.String topic)
+{
+boolean $stack1;
+  int $stack3;
+  org.apache.rocketmq.common.topic.TopicValidator$ValidateTopicResult $stack4;
+  $stack1 = org.apache.rocketmq.common.UtilAll.isBlank(topic);
+ if ($stack1==0) goto label0;
+ $stack4=new org.apache.rocketmq.common.topic.TopicValidator$ValidateTopicResult;
+ $stack4#org.apache.rocketmq.common.topic.TopicValidator$ValidateTopicResult(0,"The specified topic is blank.");
+ return  $stack4;
+ label0:$stack1 = org.apache.rocketmq.common.topic.TopicValidator.isTopicOrGroupIllegal(topic);
+ if ($stack1==0) goto label1;
+ $stack4=new org.apache.rocketmq.common.topic.TopicValidator$ValidateTopicResult;
+ $stack4#org.apache.rocketmq.common.topic.TopicValidator$ValidateTopicResult(0,"The specified topic contains illegal characters, allowing only ^[%|a-zA-Z0-9_-]+$");
+ return  $stack4;
+ label1:$stack3 = topic.length();
+ if ($stack3<=127) goto label2;
+ $stack4=new org.apache.rocketmq.common.topic.TopicValidator$ValidateTopicResult;
+ $stack4#org.apache.rocketmq.common.topic.TopicValidator$ValidateTopicResult(0,"The specified topic is longer than topic max length.");
+ return  $stack4;
+ label2:$stack4=new org.apache.rocketmq.common.topic.TopicValidator$ValidateTopicResult;
+ $stack4#org.apache.rocketmq.common.topic.TopicValidator$ValidateTopicResult(1,"");
+ return  $stack4;
+ } 
+

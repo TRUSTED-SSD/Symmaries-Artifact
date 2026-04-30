@@ -1,0 +1,27 @@
+java.lang.Integer org.greenrobot.eventbus.util.ExceptionToResourceMapping:mapThrowable(java.lang.Throwable throwable)
+{
+java.lang.Throwable throwableToCheck;
+  int depthToGo;
+  java.lang.Integer resId;
+  java.lang.StringBuilder $stack7;
+  java.lang.String $stack11;
+  throwableToCheck=throwable;
+ depthToGo=20;
+ label0:resId = this.mapThrowableFlat(throwableToCheck);
+ if (resId==null) goto label1;
+ return  resId;
+ label1:throwableToCheck = throwableToCheck.getCause();
+ depthToGo=(depthToGo+-1);
+ if (depthToGo<=0) goto label2;
+ if (throwableToCheck==throwable) goto label2;
+ if (throwableToCheck!=null) goto label3;
+ label2:$stack7=new java.lang.StringBuilder;
+ $stack7#java.lang.StringBuilder();
+ $stack7 = $stack7.append("No specific message resource ID found for ");
+ $stack7 = $stack7.append((java.lang.Object)throwable);
+ $stack11 = $stack7.toString();
+ android.util.Log.d("EventBus",$stack11);
+ return  null;
+ label3:goto label0;
+ } 
+

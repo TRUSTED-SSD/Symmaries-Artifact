@@ -1,0 +1,20 @@
+java.lang.Long org.apache.bookkeeper.bookie.IndexPersistenceMgr:getLastAddConfirmed(long ledgerId)
+{
+org.apache.bookkeeper.bookie.FileInfoBackingCache$CachedFileInfo fi;
+  java.lang.Long l4;
+  java.lang.Throwable l5;
+  fi=null;
+ label0:l4 = java.lang.Long.valueOf(ledgerId);
+ fi = this.getFileInfo(l4,null);
+ l4 = fi.getLastAddConfirmed();
+ label1:if (null==fi) goto label2;
+ fi.release();
+ label2:return  l4;
+ label3:l5 = catch;
+ label4:if (null==fi) goto label5;
+ fi.release();
+ label5:throw l5;
+ catch java.lang.Throwable: label0 - label1 : label3;
+catch java.lang.Throwable: label3 - label4 : label3;
+} 
+

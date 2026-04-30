@@ -1,0 +1,40 @@
+org.apache.rocketmq.common.message.MessageExtBrokerInner org.apache.rocketmq.store.timer.TimerMessageStore:convert(org.apache.rocketmq.common.message.MessageExt messageExt,long enqueueTime,boolean needRoll)
+{
+byte $stack6;
+  java.lang.StringBuilder $stack7;
+  java.lang.String $stack12;
+  org.apache.rocketmq.common.message.MessageExtBrokerInner $stack20;
+  int $stack24;
+  $stack6=(enqueueTime cmp -1L);
+ if ($stack6==0) goto label0;
+ $stack7=new java.lang.StringBuilder;
+ $stack7#java.lang.StringBuilder();
+ $stack7 = $stack7.append(enqueueTime);
+ $stack7 = $stack7.append("");
+ $stack12 = $stack7.toString();
+ org.apache.rocketmq.common.message.MessageAccessor.putProperty((org.apache.rocketmq.common.message.Message)messageExt,"TIMER_ENQUEUE_MS",$stack12);
+ label0:if (needRoll==0) goto label1;
+ $stack12 = messageExt.getProperty("TIMER_ROLL_TIMES");
+ if ($stack12==null) goto label2;
+ $stack7=new java.lang.StringBuilder;
+ $stack7#java.lang.StringBuilder();
+ $stack12 = messageExt.getProperty("TIMER_ROLL_TIMES");
+ $stack24 = java.lang.Integer.parseInt($stack12);
+ $stack24=($stack24+1);
+ $stack7 = $stack7.append($stack24);
+ $stack7 = $stack7.append("");
+ $stack12 = $stack7.toString();
+ org.apache.rocketmq.common.message.MessageAccessor.putProperty((org.apache.rocketmq.common.message.Message)messageExt,"TIMER_ROLL_TIMES",$stack12);
+ goto label1;
+ label2:org.apache.rocketmq.common.message.MessageAccessor.putProperty((org.apache.rocketmq.common.message.Message)messageExt,"TIMER_ROLL_TIMES","1");
+ label1:$stack7=new java.lang.StringBuilder;
+ $stack7#java.lang.StringBuilder();
+ enqueueTime = java.lang.System.currentTimeMillis();
+ $stack7 = $stack7.append(enqueueTime);
+ $stack7 = $stack7.append("");
+ $stack12 = $stack7.toString();
+ org.apache.rocketmq.common.message.MessageAccessor.putProperty((org.apache.rocketmq.common.message.Message)messageExt,"TIMER_DEQUEUE_MS",$stack12);
+ $stack20 = this#org.apache.rocketmq.store.timer.TimerMessageStore:convertMessage(messageExt,needRoll);
+ return  $stack20;
+ } 
+

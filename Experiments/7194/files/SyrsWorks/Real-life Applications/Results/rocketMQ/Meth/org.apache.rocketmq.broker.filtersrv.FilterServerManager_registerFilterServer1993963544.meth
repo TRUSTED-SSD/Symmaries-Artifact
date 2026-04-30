@@ -1,0 +1,26 @@
+void org.apache.rocketmq.broker.filtersrv.FilterServerManager:registerFilterServer(io.netty.channel.Channel channel,java.lang.String filterServerAddr)
+{
+org.apache.rocketmq.broker.filtersrv.FilterServerManager$FilterServerInfo filterServerInfo;
+  java.util.concurrent.ConcurrentMap $stack4;
+  java.lang.Object $stack5;
+  long $stack7;
+  org.apache.rocketmq.logging.org.slf4j.Logger $stack10;
+  $stack4=this.filterServerTable;
+ $stack5 = $stack4.get((java.lang.Object)channel);
+ filterServerInfo=(org.apache.rocketmq.broker.filtersrv.FilterServerManager$FilterServerInfo) $stack5;
+ if (filterServerInfo==null) goto label0;
+ $stack7 = java.lang.System.currentTimeMillis();
+ filterServerInfo.setLastUpdateTimestamp($stack7);
+ goto label1;
+ label0:filterServerInfo=new org.apache.rocketmq.broker.filtersrv.FilterServerManager$FilterServerInfo;
+ filterServerInfo#org.apache.rocketmq.broker.filtersrv.FilterServerManager$FilterServerInfo();
+ filterServerInfo.setFilterServerAddr(filterServerAddr);
+ $stack7 = java.lang.System.currentTimeMillis();
+ filterServerInfo.setLastUpdateTimestamp($stack7);
+ $stack4=this.filterServerTable;
+ $stack4.put((java.lang.Object)channel,(java.lang.Object)filterServerInfo);
+ $stack10=org.apache.rocketmq.broker.filtersrv.FilterServerManager.log;
+ $stack10.info("Receive a New Filter Server<{}>",(java.lang.Object)filterServerAddr);
+ label1:return;
+ } 
+

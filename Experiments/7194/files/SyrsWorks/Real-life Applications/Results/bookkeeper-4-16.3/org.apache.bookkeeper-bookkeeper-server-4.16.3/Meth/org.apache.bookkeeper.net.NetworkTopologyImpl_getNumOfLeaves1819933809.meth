@@ -1,0 +1,24 @@
+int org.apache.bookkeeper.net.NetworkTopologyImpl:getNumOfLeaves()
+{
+int l1;
+  java.util.concurrent.locks.ReadWriteLock $stack3;
+  java.util.concurrent.locks.Lock $stack4;
+  org.apache.bookkeeper.net.NetworkTopologyImpl$InnerNode $stack5;
+  java.lang.Throwable $stack9;
+  $stack3=this.netlock;
+ $stack4 = $stack3.readLock();
+ $stack4.lock();
+ label0:$stack5=this.clusterMap;
+ l1 = $stack5.getNumOfLeaves();
+ label1:$stack3=this.netlock;
+ $stack4 = $stack3.readLock();
+ $stack4.unlock();
+ return  l1;
+ label2:$stack9 = catch;
+ $stack3=this.netlock;
+ $stack4 = $stack3.readLock();
+ $stack4.unlock();
+ throw $stack9;
+ catch java.lang.Throwable: label0 - label1 : label2;
+} 
+

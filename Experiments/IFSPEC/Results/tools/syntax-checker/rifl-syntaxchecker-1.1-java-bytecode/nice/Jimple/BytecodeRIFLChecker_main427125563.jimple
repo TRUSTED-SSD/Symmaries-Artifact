@@ -1,0 +1,75 @@
+    public static void main(java.lang.String[])
+    {
+        java.lang.String[] args;
+        rifl.spec.RIFLSpecification rifl;
+        int $stack4;
+        java.io.FileInputStream $stack5;
+        java.lang.String $stack6;
+        rifl.spec.dalvik.DalvikRIFLReader $stack7;
+        java.io.PrintStream $stack9;
+        java.lang.Exception $stack16;
+
+        args := @parameter0: java.lang.String[];
+
+        $stack4 = lengthof args;
+/*42*/
+
+        if $stack4 == 1 goto label1;
+/*42*/
+
+        $stack9 = <java.lang.System: java.io.PrintStream out>;
+/*43*/
+
+        virtualinvoke $stack9.<java.io.PrintStream: void println(java.lang.String)>("Call this program with a relative or absolute path to a RIFL XML file to check its syntax.");
+/*43*/
+
+     label1:
+        $stack5 = new java.io.FileInputStream;
+/*47*/
+
+        $stack6 = args[0];
+/*47*/
+
+        specialinvoke $stack5.<java.io.FileInputStream: void <init>(java.lang.String)>($stack6);
+/*47*/
+
+        $stack7 = new rifl.spec.dalvik.DalvikRIFLReader;
+/*48*/
+
+        specialinvoke $stack7.<rifl.spec.dalvik.DalvikRIFLReader: void <init>()>();
+/*48*/
+
+        rifl = virtualinvoke $stack7.<rifl.spec.dalvik.DalvikRIFLReader: rifl.spec.RIFLSpecification readRIFLSpecification(java.io.InputStream)>($stack5);
+/*49*/
+/*49*/
+
+        $stack9 = <java.lang.System: java.io.PrintStream out>;
+/*50*/
+
+        virtualinvoke $stack9.<java.io.PrintStream: void println(java.lang.Object)>(rifl);
+/*50*/
+
+     label2:
+        goto label4;
+/*51*/
+
+     label3:
+        $stack16 := @caughtexception;
+/*51*/
+
+        $stack9 = <java.lang.System: java.io.PrintStream err>;
+/*52*/
+
+        $stack6 = virtualinvoke $stack16.<java.lang.Exception: java.lang.String getMessage()>();
+/*52*/
+
+        virtualinvoke $stack9.<java.io.PrintStream: void println(java.lang.String)>($stack6);
+/*52*/
+
+     label4:
+        return;
+/*54*/
+
+        catch java.lang.Exception from label1 to label2 with label3;
+    }
+

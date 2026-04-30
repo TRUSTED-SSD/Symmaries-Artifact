@@ -1,0 +1,41 @@
+com.google.zxing.ResultPoint com.google.zxing.common.detector.WhiteRectangleDetector:getBlackPointOnSegment(float aX,float aY,float bX,float bY)
+{
+int dist;
+  int i;
+  int x;
+  int y;
+  float $stack11;
+  com.google.zxing.common.BitMatrix $stack25;
+  boolean $stack26;
+  com.google.zxing.ResultPoint $stack29;
+  $stack11 = com.google.zxing.common.detector.MathUtils.distance(aX,aY,bX,bY);
+ dist = com.google.zxing.common.detector.MathUtils.round($stack11);
+ $stack11=(bX-aX);
+ bX=(float) dist;
+ bX=($stack11/bX);
+ $stack11=(bY-aY);
+ bY=(float) dist;
+ bY=($stack11/bY);
+ i=0;
+ label0:if (i>=dist) goto label1;
+ $stack11=(float) i;
+ $stack11=($stack11 * bX);
+ $stack11=(aX+$stack11);
+ x = com.google.zxing.common.detector.MathUtils.round($stack11);
+ $stack11=(float) i;
+ $stack11=($stack11 * bY);
+ $stack11=(aY+$stack11);
+ y = com.google.zxing.common.detector.MathUtils.round($stack11);
+ $stack25=this.image;
+ $stack26 = $stack25.get(x,y);
+ if ($stack26==0) goto label2;
+ $stack29=new com.google.zxing.ResultPoint;
+ aY=(float) x;
+ aX=(float) y;
+ $stack29#com.google.zxing.ResultPoint(aY,aX);
+ return  $stack29;
+ label2:i=(i+1);
+ goto label0;
+ label1:return  null;
+ } 
+

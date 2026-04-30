@@ -1,0 +1,23 @@
+javax.crypto.Mac org.apache.bookkeeper.proto.checksum.MacDigestManager$1:initialValue()
+{
+byte[] macKey;
+  javax.crypto.Mac mac;
+  org.apache.bookkeeper.proto.checksum.MacDigestManager $stack4;
+  javax.crypto.spec.SecretKeySpec $stack7;
+  java.security.GeneralSecurityException $stack9;
+  org.slf4j.Logger $stack10;
+  label0:$stack4=this.this$0;
+ macKey=$stack4.passwd;
+ macKey = org.apache.bookkeeper.proto.checksum.MacDigestManager.genDigest("mac",macKey);
+ $stack7=new javax.crypto.spec.SecretKeySpec;
+ $stack7#javax.crypto.spec.SecretKeySpec(macKey,"HmacSHA1");
+ mac = javax.crypto.Mac.getInstance("HmacSHA1");
+ mac.init((java.security.Key)$stack7);
+ label1:return  mac;
+ label2:$stack9 = catch;
+ $stack10 = org.apache.bookkeeper.proto.checksum.MacDigestManager.access$000();
+ $stack10.error("Couldn\'t not get mac instance",(java.lang.Throwable)$stack9);
+ return  null;
+ catch java.security.GeneralSecurityException: label0 - label1 : label2;
+} 
+

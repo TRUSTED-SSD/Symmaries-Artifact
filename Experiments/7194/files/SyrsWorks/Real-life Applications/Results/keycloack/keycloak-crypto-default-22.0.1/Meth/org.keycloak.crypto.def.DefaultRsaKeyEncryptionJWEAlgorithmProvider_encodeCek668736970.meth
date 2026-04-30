@@ -1,0 +1,11 @@
+byte[] org.keycloak.crypto.def.DefaultRsaKeyEncryptionJWEAlgorithmProvider:encodeCek(org.keycloak.jose.jwe.enc.JWEEncryptionProvider encryptionProvider,org.keycloak.jose.jwe.JWEKeyStorage keyStorage,java.security.Key publicKey)
+{
+javax.crypto.Cipher cipher;
+  byte[] cekBytes;
+  cipher = this#org.keycloak.crypto.def.DefaultRsaKeyEncryptionJWEAlgorithmProvider:getCipherProvider();
+ this.initCipher(cipher,1,publicKey);
+ cekBytes = keyStorage.getCekBytes();
+ cekBytes = cipher.doFinal(cekBytes);
+ return  cekBytes;
+ } 
+

@@ -1,0 +1,33 @@
+void org.apache.bookkeeper.common.component.ComponentStarter$ComponentShutdownHook:run()
+{
+java.lang.Throwable e;
+  org.slf4j.Logger $stack2;
+  org.apache.bookkeeper.common.component.LifecycleComponent $stack3;
+  java.lang.String $stack5;
+  java.util.concurrent.CompletableFuture $stack11;
+  $stack2 = org.apache.bookkeeper.common.component.ComponentStarter.access$000();
+ $stack3=this.component;
+ $stack5 = $stack3.getName();
+ dummyClass.lowSink("Closing component {} in shutdown hook.");
+$stack2.info("Closing component {} in shutdown hook.",(java.lang.Object)$stack5);
+ label0:$stack3=this.component;
+ $stack3.close();
+ $stack2 = org.apache.bookkeeper.common.component.ComponentStarter.access$000();
+ $stack3=this.component;
+ $stack5 = $stack3.getName();
+ dummyClass.lowSink("Closed component {} in shutdown hook successfully. Exiting.");
+$stack2.info("Closed component {} in shutdown hook successfully. Exiting.",(java.lang.Object)$stack5);
+ $stack11=this.future;
+ org.apache.bookkeeper.common.concurrent.FutureUtils.complete($stack11,null);
+ label1:goto label2;
+ label3:e = catch;
+ $stack2 = org.apache.bookkeeper.common.component.ComponentStarter.access$000();
+ $stack3=this.component;
+ $stack5 = $stack3.getName();
+ $stack2.error("Failed to close component {} in shutdown hook gracefully, Exiting anyway",(java.lang.Object)$stack5,(java.lang.Object)e);
+ $stack11=this.future;
+ $stack11.completeExceptionally(e);
+ label2:return;
+ catch java.lang.Throwable: label0 - label1 : label3;
+} 
+

@@ -1,0 +1,36 @@
+static org.apache.bookkeeper.util.HardLink$OSType org.apache.bookkeeper.util.HardLink:getOSType()
+{
+java.lang.String osName;
+  boolean $stack2;
+  org.apache.bookkeeper.util.HardLink$OSType $stack4;
+  osName = java.lang.System.getProperty("os.name");
+ $stack2 = osName.contains((java.lang.CharSequence)"Windows");
+ if ($stack2==0) goto label0;
+ $stack2 = osName.contains((java.lang.CharSequence)"XP");
+ if ($stack2!=0) goto label1;
+ $stack2 = osName.contains((java.lang.CharSequence)"2003");
+ if ($stack2!=0) goto label1;
+ $stack2 = osName.contains((java.lang.CharSequence)"Vista");
+ if ($stack2!=0) goto label1;
+ $stack2 = osName.contains((java.lang.CharSequence)"Windows_7");
+ if ($stack2!=0) goto label1;
+ $stack2 = osName.contains((java.lang.CharSequence)"Windows 7");
+ if ($stack2!=0) goto label1;
+ $stack2 = osName.contains((java.lang.CharSequence)"Windows7");
+ if ($stack2==0) goto label0;
+ label1:$stack4=org.apache.bookkeeper.util.HardLink$OSType.OS_TYPE_WINXP;
+ return  $stack4;
+ label0:$stack2 = osName.contains((java.lang.CharSequence)"SunOS");
+ if ($stack2!=0) goto label2;
+ $stack2 = osName.contains((java.lang.CharSequence)"Solaris");
+ if ($stack2==0) goto label3;
+ label2:$stack4=org.apache.bookkeeper.util.HardLink$OSType.OS_TYPE_SOLARIS;
+ return  $stack4;
+ label3:$stack2 = osName.contains((java.lang.CharSequence)"Mac");
+ if ($stack2==0) goto label4;
+ $stack4=org.apache.bookkeeper.util.HardLink$OSType.OS_TYPE_MAC;
+ return  $stack4;
+ label4:$stack4=org.apache.bookkeeper.util.HardLink$OSType.OS_TYPE_UNIX;
+ return  $stack4;
+ } 
+

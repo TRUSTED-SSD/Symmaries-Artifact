@@ -1,0 +1,51 @@
+void org.apache.rocketmq.proxy.service.sysmessage.AbstractSystemMessageSyncer:start()
+{
+org.apache.rocketmq.remoting.RPCHook rpcHook;
+  org.apache.rocketmq.client.consumer.DefaultMQPushConsumer $stack4;
+  java.lang.String $stack6;
+  org.apache.rocketmq.common.consumer.ConsumeFromWhere $stack7;
+  org.apache.rocketmq.remoting.protocol.heartbeat.MessageModel $stack9;
+  java.lang.String $stack13;
+  org.apache.rocketmq.client.exception.MQClientException $stack16;
+  org.apache.rocketmq.proxy.common.ProxyException $stack17;
+  java.lang.StringBuilder $stack18;
+  org.apache.rocketmq.proxy.common.ProxyExceptionCode $stack19;
+  this.createSysTopic();
+ rpcHook = this.getRpcHook();
+ $stack4=new org.apache.rocketmq.client.consumer.DefaultMQPushConsumer;
+ $stack6 = this.getSystemMessageConsumerId();
+ $stack4#org.apache.rocketmq.client.consumer.DefaultMQPushConsumer(null,$stack6,rpcHook);
+ this.defaultMQPushConsumer=$stack4;
+ $stack4=this.defaultMQPushConsumer;
+ $stack7=org.apache.rocketmq.common.consumer.ConsumeFromWhere.CONSUME_FROM_LAST_OFFSET;
+ $stack4.setConsumeFromWhere($stack7);
+ $stack4=this.defaultMQPushConsumer;
+ $stack9=org.apache.rocketmq.remoting.protocol.heartbeat.MessageModel.BROADCASTING;
+ $stack4.setMessageModel($stack9);
+ label0:$stack4=this.defaultMQPushConsumer;
+ $stack6 = this.getBroadcastTopicName();
+ $stack13 = this.getSubTag();
+ $stack4.subscribe($stack6,$stack13);
+ label1:goto label2;
+ label3:$stack16 = catch;
+ $stack17=new org.apache.rocketmq.proxy.common.ProxyException;
+ $stack19=org.apache.rocketmq.proxy.common.ProxyExceptionCode.INTERNAL_SERVER_ERROR;
+ $stack18=new java.lang.StringBuilder;
+ $stack18#java.lang.StringBuilder();
+ $stack18 = $stack18.append("subscribe to broadcast topic ");
+ $stack6 = this.getBroadcastTopicName();
+ $stack18 = $stack18.append($stack6);
+ $stack18 = $stack18.append(" failed. ");
+ $stack6 = $stack16.getMessage();
+ $stack18 = $stack18.append($stack6);
+ $stack6 = $stack18.toString();
+ $stack17#org.apache.rocketmq.proxy.common.ProxyException($stack19,$stack6);
+ throw $stack17;
+ label2:$stack4=this.defaultMQPushConsumer;
+ $stack4.registerMessageListener((org.apache.rocketmq.client.consumer.listener.MessageListenerConcurrently)this);
+ $stack4=this.defaultMQPushConsumer;
+ $stack4.start();
+ return;
+ catch org.apache.rocketmq.client.exception.MQClientException: label0 - label1 : label3;
+} 
+

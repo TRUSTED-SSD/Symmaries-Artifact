@@ -1,0 +1,34 @@
+org.apache.kerby.kerberos.kerb.server.preauth.PreauthHandle org.apache.kerby.kerberos.kerb.server.preauth.PreauthHandler:findHandle(org.apache.kerby.kerberos.kerb.server.request.KdcRequest kdcRequest,org.apache.kerby.kerberos.kerb.type.pa.PaDataType paType)
+{
+org.apache.kerby.kerberos.kerb.server.preauth.PreauthContext preauthContext;
+  java.util.Iterator l4;
+  org.apache.kerby.kerberos.kerb.server.preauth.PreauthHandle handle;
+  org.apache.kerby.kerberos.kerb.type.pa.PaDataType[] l6;
+  int l7;
+  int l8;
+  org.apache.kerby.kerberos.kerb.type.pa.PaDataType pt;
+  java.util.List $stack11;
+  boolean $stack13;
+  java.lang.Object $stack14;
+  org.apache.kerby.kerberos.kerb.server.preauth.KdcPreauth $stack15;
+  preauthContext = kdcRequest.getPreauthContext();
+ $stack11 = preauthContext.getHandles();
+ l4 = $stack11.iterator();
+ label0:$stack13 = l4.hasNext();
+ if ($stack13==0) goto label1;
+ $stack14 = l4.next();
+ handle=(org.apache.kerby.kerberos.kerb.server.preauth.PreauthHandle) $stack14;
+ $stack15=handle.preauth;
+ l6 = $stack15.getPaTypes();
+ l7=#l6;
+ l8=0;
+ label2:if (l8>=l7) goto label3;
+ pt=l6[l8];
+ if (pt!=paType) goto label4;
+ return  handle;
+ label4:l8=(l8+1);
+ goto label2;
+ label3:goto label0;
+ label1:return  null;
+ } 
+

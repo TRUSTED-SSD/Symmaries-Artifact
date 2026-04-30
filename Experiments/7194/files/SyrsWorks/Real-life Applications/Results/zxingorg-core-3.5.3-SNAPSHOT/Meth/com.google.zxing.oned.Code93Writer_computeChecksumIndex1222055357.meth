@@ -1,0 +1,27 @@
+static int com.google.zxing.oned.Code93Writer:computeChecksumIndex(java.lang.String contents,int maxWeight)
+{
+int weight;
+  int total;
+  int i;
+  int indexInString;
+  java.lang.String $stack8;
+  char $stack9;
+  weight=1;
+ total=0;
+ i = contents.length();
+ i=(i-1);
+ label0:if (i<0) goto label1;
+ $stack8="0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ-. $/+%abcd*";
+ $stack9 = contents.charAt(i);
+ indexInString = $stack8.indexOf((int)$stack9);
+ indexInString=(indexInString * weight);
+ total=(total+indexInString);
+ weight=(weight+1);
+ if (weight<=maxWeight) goto label2;
+ weight=1;
+ label2:i=(i+-1);
+ goto label0;
+ label1:maxWeight=(total%47);
+ return  maxWeight;
+ } 
+

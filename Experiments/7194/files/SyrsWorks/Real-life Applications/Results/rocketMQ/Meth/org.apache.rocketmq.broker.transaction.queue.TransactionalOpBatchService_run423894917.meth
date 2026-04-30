@@ -1,0 +1,35 @@
+void org.apache.rocketmq.broker.transaction.queue.TransactionalOpBatchService:run()
+{
+long checkInterval;
+  org.apache.rocketmq.logging.org.slf4j.Logger $stack5;
+  org.apache.rocketmq.broker.BrokerController $stack6;
+  org.apache.rocketmq.common.BrokerConfig $stack7;
+  int $stack8;
+  long $stack9;
+  boolean $stack11;
+  byte $stack15;
+  $stack5=org.apache.rocketmq.broker.transaction.queue.TransactionalOpBatchService.LOGGER;
+ $stack5.info("Start transaction op batch thread!");
+ $stack6=this.brokerController;
+ $stack7 = $stack6.getBrokerConfig();
+ $stack8 = $stack7.getTransactionOpBatchInterval();
+ checkInterval=(long) $stack8;
+ $stack9 = java.lang.System.currentTimeMillis();
+ checkInterval=($stack9+checkInterval);
+ this.wakeupTimestamp=checkInterval;
+ label0:$stack11 = this.isStopped();
+ if ($stack11!=0) goto label1;
+ checkInterval=this.wakeupTimestamp;
+ $stack9 = java.lang.System.currentTimeMillis();
+ checkInterval=(checkInterval-$stack9);
+ $stack15=(checkInterval cmp 0L);
+ if ($stack15>0) goto label2;
+ checkInterval=0L;
+ this.wakeup();
+ label2:this.waitForRunning(checkInterval);
+ goto label0;
+ label1:$stack5=org.apache.rocketmq.broker.transaction.queue.TransactionalOpBatchService.LOGGER;
+ $stack5.info("End transaction op batch thread!");
+ return;
+ } 
+

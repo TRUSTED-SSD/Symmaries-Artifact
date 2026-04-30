@@ -1,0 +1,28 @@
+void org.apache.rocketmq.client.impl.producer.DefaultMQProducerImpl:request(org.apache.rocketmq.common.message.Message msg,org.apache.rocketmq.client.producer.RequestCallback requestCallback,long timeout)
+{
+long beginTimestamp;
+  java.lang.String correlationId;
+  org.apache.rocketmq.client.producer.RequestResponseFuture requestResponseFuture;
+  org.apache.rocketmq.client.producer.RequestFutureHolder $stack14;
+  java.util.concurrent.ConcurrentHashMap $stack15;
+  long $stack17;
+  org.apache.rocketmq.client.impl.producer.DefaultMQProducerImpl$7 $stack18;
+  org.apache.rocketmq.client.impl.CommunicationMode $stack19;
+  beginTimestamp = java.lang.System.currentTimeMillis();
+ this#org.apache.rocketmq.client.impl.producer.DefaultMQProducerImpl:prepareSendRequest(msg,timeout);
+ correlationId = msg.getProperty("CORRELATION_ID");
+ requestResponseFuture=new org.apache.rocketmq.client.producer.RequestResponseFuture;
+ requestResponseFuture#org.apache.rocketmq.client.producer.RequestResponseFuture(correlationId,timeout,requestCallback);
+ $stack14 = org.apache.rocketmq.client.producer.RequestFutureHolder.getInstance();
+ $stack15 = $stack14.getRequestFutureTable();
+ $stack15.put((java.lang.Object)correlationId,(java.lang.Object)requestResponseFuture);
+ $stack17 = java.lang.System.currentTimeMillis();
+ beginTimestamp=($stack17-beginTimestamp);
+ $stack19=org.apache.rocketmq.client.impl.CommunicationMode.ASYNC;
+ $stack18=new org.apache.rocketmq.client.impl.producer.DefaultMQProducerImpl$7;
+ $stack18#org.apache.rocketmq.client.impl.producer.DefaultMQProducerImpl$7(this,requestResponseFuture,correlationId);
+ timeout=(timeout-beginTimestamp);
+ this#org.apache.rocketmq.client.impl.producer.DefaultMQProducerImpl(msg,$stack19,(org.apache.rocketmq.client.producer.SendCallback)$stack18,timeout);
+ return;
+ } 
+

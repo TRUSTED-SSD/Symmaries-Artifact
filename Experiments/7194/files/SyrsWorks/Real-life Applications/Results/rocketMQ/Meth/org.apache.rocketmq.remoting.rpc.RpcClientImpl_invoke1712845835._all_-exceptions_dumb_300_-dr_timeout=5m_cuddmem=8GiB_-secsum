@@ -1,0 +1,10 @@
+java.util.concurrent.Future org.apache.rocketmq.remoting.rpc.RpcClientImpl:invoke (
+  org.apache.rocketmq.common.message.MessageQueue mq,
+  org.apache.rocketmq.remoting.rpc.RpcRequest request, long timeoutMs) {
+  guard = tt;
+  ret(level()) = level(mq) ⊔ level(request) ⊔ level(this) ⊔ level(timeoutMs) ⊔ obj_level(mq) ⊔ obj_level(request) ⊔ obj_level(this);
+  ret(obj_level()) = level(mq) ⊔ level(request) ⊔ level(this) ⊔ level(timeoutMs) ⊔ obj_level(mq) ⊔ obj_level(request) ⊔ obj_level(this);
+  ret(obj_level(mq)) = level(mq) ⊔ level(this) ⊔ obj_level(mq) ⊔ obj_level(request) ⊔ obj_level(this);
+  ret(obj_level(request)) = level(mq) ⊔ level(this) ⊔ obj_level(mq) ⊔ obj_level(request) ⊔ obj_level(this);
+  ret(obj_level(this)) = level(mq) ⊔ level(this) ⊔ obj_level(mq) ⊔ obj_level(request) ⊔ obj_level(this);
+}

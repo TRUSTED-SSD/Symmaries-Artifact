@@ -1,0 +1,52 @@
+void org.apache.bookkeeper.bookie.storage.ldb.PersistentEntryLogMetadataMap:put(long entryLogId,org.apache.bookkeeper.bookie.EntryLogMetadata entryLogMeta)
+{
+org.apache.bookkeeper.bookie.storage.ldb.LongWrapper key;
+  java.lang.Throwable l6;
+  io.netty.util.concurrent.FastThreadLocal $stack8;
+  java.lang.Object $stack9;
+  java.io.ByteArrayOutputStream $stack10;
+  java.io.DataOutputStream $stack13;
+  org.apache.bookkeeper.bookie.storage.ldb.KeyValueStorage $stack15;
+  byte[] $stack16;
+  byte[] $stack19;
+  java.lang.Exception $stack21;
+  org.slf4j.Logger $stack22;
+  java.lang.Long $stack24;
+  org.apache.bookkeeper.bookie.BookieException$EntryLogMetadataMapException $stack25;
+  this.throwIfClosed();
+ key = org.apache.bookkeeper.bookie.storage.ldb.LongWrapper.get(entryLogId);
+ label0:$stack8=org.apache.bookkeeper.bookie.storage.ldb.PersistentEntryLogMetadataMap.baos;
+ $stack9 = $stack8.get();
+ $stack10=(java.io.ByteArrayOutputStream) $stack9;
+ $stack10.reset();
+ label1:$stack8=org.apache.bookkeeper.bookie.storage.ldb.PersistentEntryLogMetadataMap.dataos;
+ $stack9 = $stack8.get();
+ $stack13=(java.io.DataOutputStream) $stack9;
+ entryLogMeta#org.apache.bookkeeper.bookie.EntryLogMetadata($stack13);
+ $stack15=this.metadataMapDB;
+ $stack16=key.array;
+ $stack8=org.apache.bookkeeper.bookie.storage.ldb.PersistentEntryLogMetadataMap.baos;
+ $stack9 = $stack8.get();
+ $stack10=(java.io.ByteArrayOutputStream) $stack9;
+ $stack19 = $stack10.toByteArray();
+ $stack15.put($stack16,$stack19);
+ label2:goto label3;
+ label4:$stack21 = catch;
+ $stack22=org.apache.bookkeeper.bookie.storage.ldb.PersistentEntryLogMetadataMap.log;
+ $stack24 = java.lang.Long.valueOf(entryLogId);
+ $stack22.error("Failed to serialize entrylog-metadata, entryLogId {}",(java.lang.Object)$stack24);
+ $stack25=new org.apache.bookkeeper.bookie.BookieException$EntryLogMetadataMapException;
+ $stack25#org.apache.bookkeeper.bookie.BookieException$EntryLogMetadataMapException((java.lang.Throwable)$stack21);
+ throw $stack25;
+ label3:key.recycle();
+ goto label5;
+ label6:l6 = catch;
+ label7:key.recycle();
+ throw l6;
+ label5:return;
+ catch java.lang.IllegalStateException: label1 - label2 : label4;
+catch java.io.IOException: label1 - label2 : label4;
+catch java.lang.Throwable: label0 - label3 : label6;
+catch java.lang.Throwable: label6 - label7 : label6;
+} 
+

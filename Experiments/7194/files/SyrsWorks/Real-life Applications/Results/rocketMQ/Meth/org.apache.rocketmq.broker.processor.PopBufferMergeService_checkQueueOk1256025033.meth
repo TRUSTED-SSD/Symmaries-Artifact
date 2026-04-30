@@ -1,0 +1,30 @@
+boolean org.apache.rocketmq.broker.processor.PopBufferMergeService:checkQueueOk(org.apache.rocketmq.broker.processor.PopBufferMergeService$PopCheckPointWrapper pointWrapper)
+{
+org.apache.rocketmq.broker.processor.PopBufferMergeService$QueueWithTime queue;
+  java.util.concurrent.ConcurrentHashMap $stack3;
+  java.lang.String $stack4;
+  java.lang.Object $stack5;
+  java.util.concurrent.LinkedBlockingDeque $stack6;
+  int $stack7;
+  org.apache.rocketmq.broker.BrokerController $stack8;
+  org.apache.rocketmq.common.BrokerConfig $stack9;
+  int $stack10;
+  boolean $stack11;
+  $stack3=this.commitOffsets;
+ $stack4 = pointWrapper.getLockKey();
+ $stack5 = $stack3.get((java.lang.Object)$stack4);
+ queue=(org.apache.rocketmq.broker.processor.PopBufferMergeService$QueueWithTime) $stack5;
+ if (queue!=null) goto label0;
+ return  1;
+ label0:$stack6 = queue.get();
+ $stack7 = $stack6.size();
+ $stack8=this.brokerController;
+ $stack9 = $stack8.getBrokerConfig();
+ $stack10 = $stack9.getPopCkOffsetMaxQueueSize();
+ if ($stack7>=$stack10) goto label1;
+ $stack11=1;
+ goto label2;
+ label1:$stack11=0;
+ label2:return  $stack11;
+ } 
+

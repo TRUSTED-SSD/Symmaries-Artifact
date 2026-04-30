@@ -1,0 +1,53 @@
+int com.google.zxing.aztec.detector.Detector:sampleLine(com.google.zxing.ResultPoint p1,com.google.zxing.ResultPoint p2,int size)
+{
+int result;
+  float d;
+  float moduleSize;
+  float px;
+  float py;
+  float dx;
+  int i;
+  float $stack17;
+  float $stack21;
+  com.google.zxing.common.BitMatrix $stack27;
+  int $stack28;
+  int $stack32;
+  boolean $stack33;
+  result=0;
+ d = com.google.zxing.aztec.detector.Detector.distance(p1,p2);
+ px=(float) size;
+ moduleSize=(d/px);
+ px = p1.getX();
+ py = p1.getY();
+ dx = p2.getX();
+ $stack17 = p1.getX();
+ dx=(dx-$stack17);
+ dx=(moduleSize * dx);
+ dx=(dx/d);
+ $stack17 = p2.getY();
+ $stack21 = p1.getY();
+ $stack17=($stack17-$stack21);
+ moduleSize=(moduleSize * $stack17);
+ d=(moduleSize/d);
+ i=0;
+ label0:if (i>=size) goto label1;
+ $stack27=this.image;
+ moduleSize=(float) i;
+ moduleSize=(moduleSize * dx);
+ moduleSize=(px+moduleSize);
+ $stack28 = com.google.zxing.common.detector.MathUtils.round(moduleSize);
+ moduleSize=(float) i;
+ moduleSize=(moduleSize * d);
+ moduleSize=(py+moduleSize);
+ $stack32 = com.google.zxing.common.detector.MathUtils.round(moduleSize);
+ $stack33 = $stack27.get($stack28,$stack32);
+ if ($stack33==0) goto label2;
+ $stack28=(size-i);
+ $stack28=($stack28-1);
+ $stack28=(1<<$stack28);
+ result=(result | $stack28);
+ label2:i=(i+1);
+ goto label0;
+ label1:return  result;
+ } 
+

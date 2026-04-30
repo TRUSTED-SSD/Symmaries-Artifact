@@ -1,0 +1,17 @@
+AccountOwner (Account l1) {
+  guard = tt;
+  ret(obj_level(l1)) = if obj_level(this) = ⊤ then if l1.><this ∧ ¬this.><l1 ∧ obj_level(l1) = ⊥ then pc else if this.><l1 ∨ obj_level(l1) = ⊤ then ⊤ else ⊥ else if obj_level(l1) = ⊥ ∧ obj_level(this) = ⊥ ∧ (if this.><l1 then if l1.><this then level(l1) ⊔ level(this) else level(this) = ⊥ else l1.><this ∧ level(l1) ⊔ level(this) = ⊥) then pc else if obj_level(this) = ⊥ ∧ (obj_level(l1) = ⊤ ∨ (if this.><l1 then if l1.><this then level(l1) ⊔ level(this) else level(this) = ⊤ else l1.><this ∧ level(l1) ⊔ level(this) = ⊤)) then ⊤ else ⊥;
+  ret(obj_level(this)) = pc ⊔ level(l1) ⊔ level(this) ⊔ obj_level(l1) ⊔ obj_level(this);
+  ret(l1.><l1) = l1.><l1 ∨ l1.><this;
+  ret(l1.><this) = l1.><this;
+  ret(this.><l1) = tt;
+  ret(this.><this) = l1.><this ∨ this.><l1 ∨ this.><this;
+  exc(level()) = ⊥;
+  exc(obj_level()) = ⊥;
+  exc(obj_level(l1)) = if obj_level(this) = ⊤ then if l1.><this ∧ ¬this.><l1 ∧ obj_level(l1) = ⊥ then pc else if this.><l1 ∨ obj_level(l1) = ⊤ then ⊤ else ⊥ else if obj_level(l1) = ⊥ ∧ obj_level(this) = ⊥ ∧ (if this.><l1 then if l1.><this then level(l1) ⊔ level(this) else level(this) = ⊥ else l1.><this ∧ level(l1) ⊔ level(this) = ⊥) then pc else if obj_level(this) = ⊥ ∧ (obj_level(l1) = ⊤ ∨ (if this.><l1 then if l1.><this then level(l1) ⊔ level(this) else level(this) = ⊤ else l1.><this ∧ level(l1) ⊔ level(this) = ⊤)) then ⊤ else ⊥;
+  exc(obj_level(this)) = pc ⊔ level(l1) ⊔ level(this) ⊔ obj_level(l1) ⊔ obj_level(this);
+  exc(l1.><l1) = l1.><l1 ∨ l1.><this;
+  exc(l1.><this) = l1.><this;
+  exc(this.><l1) = tt;
+  exc(this.><this) = l1.><this ∨ this.><l1 ∨ this.><this;
+}

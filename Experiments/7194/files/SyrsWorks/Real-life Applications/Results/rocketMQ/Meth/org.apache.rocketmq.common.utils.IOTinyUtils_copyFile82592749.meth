@@ -1,0 +1,58 @@
+static void org.apache.rocketmq.common.utils.IOTinyUtils:copyFile(java.lang.String source,java.lang.String target)
+{
+java.io.File sf;
+  java.io.File tf;
+  java.nio.channels.FileChannel sc;
+  java.nio.channels.FileChannel tc;
+  java.lang.Throwable l6;
+  boolean $stack8;
+  java.io.File $stack10;
+  java.io.FileOutputStream $stack13;
+  java.io.FileInputStream $stack15;
+  long $stack18;
+  java.lang.RuntimeException $stack32;
+  java.lang.IllegalArgumentException $stack33;
+  sf=new java.io.File;
+ sf#java.io.File(source);
+ $stack8 = sf.exists();
+ if ($stack8!=0) goto label0;
+ $stack33=new java.lang.IllegalArgumentException;
+ $stack33#java.lang.IllegalArgumentException("source file does not exist.");
+ throw $stack33;
+ label0:tf=new java.io.File;
+ tf#java.io.File(target);
+ $stack10 = tf.getParentFile();
+ $stack10.mkdirs();
+ $stack8 = tf.exists();
+ if ($stack8!=0) goto label1;
+ $stack8 = tf.createNewFile();
+ if ($stack8!=0) goto label1;
+ $stack32=new java.lang.RuntimeException;
+ $stack32#java.lang.RuntimeException("failed to create target file.");
+ throw $stack32;
+ label1:sc=null;
+ tc=null;
+ label2:$stack13=new java.io.FileOutputStream;
+ $stack13#java.io.FileOutputStream(tf);
+ tc = $stack13.getChannel();
+ $stack15=new java.io.FileInputStream;
+ $stack15#java.io.FileInputStream(sf);
+ sc = $stack15.getChannel();
+ $stack18 = sc.size();
+ sc.transferTo(0L,$stack18,(java.nio.channels.WritableByteChannel)tc);
+ label3:if (null==sc) goto label4;
+ sc.close();
+ label4:if (null==tc) goto label5;
+ tc.close();
+ goto label5;
+ label6:l6 = catch;
+ label7:if (null==sc) goto label8;
+ sc.close();
+ label8:if (null==tc) goto label9;
+ tc.close();
+ label9:throw l6;
+ label5:return;
+ catch java.lang.Throwable: label2 - label3 : label6;
+catch java.lang.Throwable: label6 - label7 : label6;
+} 
+

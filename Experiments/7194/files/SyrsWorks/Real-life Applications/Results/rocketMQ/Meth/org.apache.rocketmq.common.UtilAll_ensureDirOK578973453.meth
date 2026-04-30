@@ -1,0 +1,28 @@
+static void org.apache.rocketmq.common.UtilAll:ensureDirOK(java.lang.String @dirName)
+{
+java.lang.String[] l2;
+  int l3;
+  int l4;
+  java.lang.String $stack6;
+  boolean $stack7;
+  java.lang.String dirName;
+dirName=@dirName;
+if (dirName==null) goto label0;
+ $stack6=org.apache.rocketmq.common.MixAll.MULTI_PATH_SPLITTER;
+ $stack7 = dirName.contains((java.lang.CharSequence)$stack6);
+ if ($stack7==0) goto label1;
+ dirName = dirName.trim();
+ $stack6=org.apache.rocketmq.common.MixAll.MULTI_PATH_SPLITTER;
+ l2 = dirName.split($stack6);
+ l3=#l2;
+ l4=0;
+ label2:if (l4>=l3) goto label3;
+ dirName=l2[l4];
+ org.apache.rocketmq.common.UtilAll.createDirIfNotExist(dirName);
+ l4=(l4+1);
+ goto label2;
+ label3:goto label0;
+ label1:org.apache.rocketmq.common.UtilAll.createDirIfNotExist(dirName);
+ label0:return;
+ } 
+

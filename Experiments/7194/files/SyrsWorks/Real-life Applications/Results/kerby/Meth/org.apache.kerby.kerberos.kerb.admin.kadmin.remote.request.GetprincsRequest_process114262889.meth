@@ -1,0 +1,47 @@
+void org.apache.kerby.kerberos.kerb.admin.kadmin.remote.request.GetprincsRequest:process()
+{
+org.apache.kerby.kerberos.kerb.admin.message.GetprincsReq getprincsReq;
+  org.apache.kerby.xdr.XdrFieldInfo[] xdrFieldInfos;
+  org.apache.kerby.kerberos.kerb.admin.message.AdminMessageCode value;
+  byte[] encodeBytes;
+  java.nio.ByteBuffer e;
+  org.apache.kerby.xdr.XdrFieldInfo $stack7;
+  org.apache.kerby.kerberos.kerb.admin.message.AdminMessageType $stack8;
+  org.apache.kerby.xdr.XdrDataType $stack9;
+  java.lang.Integer $stack15;
+  java.lang.String $stack17;
+  java.io.IOException $stack23;
+  org.apache.kerby.kerberos.kerb.KrbException $stack24;
+  getprincsReq=new org.apache.kerby.kerberos.kerb.admin.message.GetprincsReq;
+ getprincsReq#org.apache.kerby.kerberos.kerb.admin.message.GetprincsReq();
+ xdrFieldInfos=new org.apache.kerby.xdr.XdrFieldInfo[3];
+ $stack7=new org.apache.kerby.xdr.XdrFieldInfo;
+ $stack9=org.apache.kerby.xdr.XdrDataType.ENUM;
+ $stack8=org.apache.kerby.kerberos.kerb.admin.message.AdminMessageType.GET_PRINCS_REQ;
+ $stack7#org.apache.kerby.xdr.XdrFieldInfo(0,$stack9,(java.lang.Object)$stack8);
+ xdrFieldInfos[0]=$stack7;
+ $stack7=new org.apache.kerby.xdr.XdrFieldInfo;
+ $stack9=org.apache.kerby.xdr.XdrDataType.INTEGER;
+ $stack15 = java.lang.Integer.valueOf(1);
+ $stack7#org.apache.kerby.xdr.XdrFieldInfo(1,$stack9,(java.lang.Object)$stack15);
+ xdrFieldInfos[1]=$stack7;
+ $stack7=new org.apache.kerby.xdr.XdrFieldInfo;
+ $stack9=org.apache.kerby.xdr.XdrDataType.STRING;
+ $stack17=this.globString;
+ $stack7#org.apache.kerby.xdr.XdrFieldInfo(2,$stack9,(java.lang.Object)$stack17);
+ xdrFieldInfos[2]=$stack7;
+ value=new org.apache.kerby.kerberos.kerb.admin.message.AdminMessageCode;
+ value#org.apache.kerby.kerberos.kerb.admin.message.AdminMessageCode(xdrFieldInfos);
+ label0:encodeBytes = value.encode();
+ label1:goto label2;
+ label3:$stack23 = catch;
+ $stack24=new org.apache.kerby.kerberos.kerb.KrbException;
+ $stack24#org.apache.kerby.kerberos.kerb.KrbException("Xdr encode error when generate get principals request.",(java.lang.Throwable)$stack23);
+ throw $stack24;
+ label2:e = java.nio.ByteBuffer.wrap(encodeBytes);
+ getprincsReq.setMessageBuffer(e);
+ this.setAdminReq((org.apache.kerby.kerberos.kerb.admin.message.AdminReq)getprincsReq);
+ return;
+ catch java.io.IOException: label0 - label1 : label3;
+} 
+

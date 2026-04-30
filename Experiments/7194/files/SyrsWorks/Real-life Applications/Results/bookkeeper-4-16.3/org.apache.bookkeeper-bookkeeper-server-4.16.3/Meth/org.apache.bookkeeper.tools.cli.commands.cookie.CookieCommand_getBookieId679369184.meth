@@ -1,0 +1,43 @@
+org.apache.bookkeeper.net.BookieId org.apache.bookkeeper.tools.cli.commands.cookie.CookieCommand:getBookieId(org.apache.bookkeeper.tools.framework.CliFlags cmdFlags)
+{
+java.lang.String bookieId;
+  java.util.List $stack4;
+  int $stack5;
+  java.lang.Object $stack7;
+  org.apache.bookkeeper.net.BookieSocketAddress $stack8;
+  org.apache.bookkeeper.net.BookieId $stack9;
+  boolean $stack10;
+  java.net.UnknownHostException $stack16;
+  org.apache.bookkeeper.tools.framework.CliSpec $stack17;
+  java.io.PrintStream $stack18;
+  java.lang.StringBuilder $stack19;
+  $stack4=cmdFlags.arguments;
+ $stack5 = $stack4.size();
+ if ($stack5!=1) goto label0;
+ $stack10=1;
+ goto label1;
+ label0:$stack10=0;
+ label1:com.google.common.base.Preconditions.checkArgument($stack10,(java.lang.Object)"No bookie id or more bookie ids is specified");
+ $stack4=cmdFlags.arguments;
+ $stack7 = $stack4.get(0);
+ bookieId=(java.lang.String) $stack7;
+ label2:$stack8=new org.apache.bookkeeper.net.BookieSocketAddress;
+ $stack8#org.apache.bookkeeper.net.BookieSocketAddress(bookieId);
+ label3:goto label4;
+ label5:$stack16 = catch;
+ $stack17=this.spec;
+ $stack18 = $stack17.console();
+ $stack19=new java.lang.StringBuilder;
+ $stack19#java.lang.StringBuilder();
+ $stack19 = $stack19.append("Invalid bookie id \'");
+ $stack19 = $stack19.append(bookieId);
+ $stack19 = $stack19.append("\'is used to create cookie. Bookie id should be in the format of \'<hostname>:<port>\'");
+ bookieId = $stack19.toString();
+ dummyClass.lowSink(bookieId);
+$stack18.println(bookieId);
+ throw $stack16;
+ label4:$stack9 = org.apache.bookkeeper.net.BookieId.parse(bookieId);
+ return  $stack9;
+ catch java.net.UnknownHostException: label2 - label3 : label5;
+} 
+

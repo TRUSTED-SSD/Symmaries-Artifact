@@ -1,0 +1,20 @@
+java.lang.String org.apache.bookkeeper.client.RegionAwareEnsemblePlacementPolicy:parseBookieRegion(org.apache.bookkeeper.net.BookieId addr)
+{
+java.lang.String networkLocation;
+  java.lang.String[] parts;
+  java.lang.String $stack5;
+  boolean $stack6;
+  int $stack8;
+  networkLocation = this.resolveNetworkLocation(addr);
+ $stack5="/default-region/default-rack";
+ $stack6 = $stack5.equals((java.lang.Object)networkLocation);
+ if ($stack6==0) goto label0;
+ return  "UnknownRegion";
+ label0:parts = networkLocation.split("/");
+ $stack8=#parts;
+ if ($stack8>1) goto label1;
+ return  "UnknownRegion";
+ label1:networkLocation=parts[1];
+ return  networkLocation;
+ } 
+

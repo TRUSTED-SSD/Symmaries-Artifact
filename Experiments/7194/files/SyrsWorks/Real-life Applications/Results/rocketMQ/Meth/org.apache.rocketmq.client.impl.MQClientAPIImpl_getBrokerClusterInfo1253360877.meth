@@ -1,0 +1,36 @@
+org.apache.rocketmq.remoting.protocol.body.ClusterInfo org.apache.rocketmq.client.impl.MQClientAPIImpl:getBrokerClusterInfo(long timeoutMillis)
+{
+org.apache.rocketmq.remoting.protocol.RemotingCommand request;
+  org.apache.rocketmq.remoting.RemotingClient $stack6;
+  boolean $stack8;
+  int $stack9;
+  byte[] $stack10;
+  java.lang.Object $stack11;
+  org.apache.rocketmq.remoting.protocol.body.ClusterInfo $stack12;
+  org.apache.rocketmq.client.exception.MQBrokerException $stack13;
+  java.lang.String $stack15;
+  java.lang.AssertionError $stack17;
+  request = org.apache.rocketmq.remoting.protocol.RemotingCommand.createRequestCommand(106,null);
+ $stack6=this.remotingClient;
+ request = $stack6.invokeSync(null,request,timeoutMillis);
+ $stack8=org.apache.rocketmq.client.impl.MQClientAPIImpl.$assertionsDisabled;
+ if ($stack8!=0) goto label0;
+ if (request!=null) goto label0;
+ $stack17=new java.lang.AssertionError;
+ $stack17#java.lang.AssertionError();
+ throw $stack17;
+ label0:$stack9 = request.getCode();
+ switch [$stack9]
+if 0 goto label1;
+goto label2;
+ label1:$stack10 = request.getBody();
+ $stack11 = org.apache.rocketmq.remoting.protocol.RemotingSerializable.decode($stack10,org.apache.rocketmq.remoting.protocol.body.ClusterInfo);
+ $stack12=(org.apache.rocketmq.remoting.protocol.body.ClusterInfo) $stack11;
+ return  $stack12;
+ label2:$stack13=new org.apache.rocketmq.client.exception.MQBrokerException;
+ $stack9 = request.getCode();
+ $stack15 = request.getRemark();
+ $stack13#org.apache.rocketmq.client.exception.MQBrokerException($stack9,$stack15);
+ throw $stack13;
+ } 
+

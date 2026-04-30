@@ -1,0 +1,25 @@
+void org.apache.bookkeeper.client.ReadLastConfirmedAndEntryOp$SequenceReadRequest:logErrorAndReattemptRead(int bookieIndex,org.apache.bookkeeper.net.BookieId host,java.lang.String errMsg,int rc)
+{
+java.util.BitSet $stack7;
+  boolean $stack8;
+  java.util.List $stack12;
+  org.slf4j.Logger $stack13;
+  this#org.apache.bookkeeper.client.ReadLastConfirmedAndEntryOp$ReadLACAndEntryRequest(bookieIndex,host,errMsg,rc);
+ bookieIndex = this#org.apache.bookkeeper.client.ReadLastConfirmedAndEntryOp$SequenceReadRequest:getReplicaIndex(bookieIndex);
+ if (bookieIndex!=-1) goto label0;
+ $stack13=org.apache.bookkeeper.client.ReadLastConfirmedAndEntryOp.LOG;
+ $stack12=this.ensemble;
+ $stack13.error("Received error from a host which is not in the ensemble {} {}.",(java.lang.Object)host,(java.lang.Object)$stack12);
+ return;
+ label0:if (0!=rc) goto label1;
+ $stack7=this.emptyResponseReplicas;
+ $stack7.set(bookieIndex);
+ goto label2;
+ label1:$stack7=this.erroredReplicas;
+ $stack7.set(bookieIndex);
+ label2:$stack8 = this#org.apache.bookkeeper.client.ReadLastConfirmedAndEntryOp$SequenceReadRequest:readsOutstanding();
+ if ($stack8!=0) goto label3;
+ this.sendNextRead();
+ label3:return;
+ } 
+

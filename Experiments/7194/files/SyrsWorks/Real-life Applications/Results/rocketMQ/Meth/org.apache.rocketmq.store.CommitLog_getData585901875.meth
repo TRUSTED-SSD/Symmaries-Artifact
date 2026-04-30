@@ -1,0 +1,30 @@
+boolean org.apache.rocketmq.store.CommitLog:getData(long offset,int size,java.nio.ByteBuffer byteBuffer)
+{
+int mappedFileSize;
+  org.apache.rocketmq.store.logfile.MappedFile mappedFile;
+  org.apache.rocketmq.store.DefaultMessageStore $stack8;
+  org.apache.rocketmq.store.config.MessageStoreConfig $stack9;
+  byte $stack11;
+  org.apache.rocketmq.store.MappedFileQueue $stack12;
+  long $stack14;
+  boolean $stack16;
+  $stack8=this.defaultMessageStore;
+ $stack9 = $stack8.getMessageStoreConfig();
+ mappedFileSize = $stack9.getMappedFileSizeCommitLog();
+ $stack12=this.mappedFileQueue;
+ $stack14=offset;
+ $stack11=(offset cmp 0L);
+ if ($stack11!=0) goto label0;
+ $stack16=1;
+ goto label1;
+ label0:$stack16=0;
+ label1:mappedFile = $stack12.findMappedFileByOffset($stack14,$stack16);
+ if (mappedFile==null) goto label2;
+ $stack14=(long) mappedFileSize;
+ offset=(offset%$stack14);
+ mappedFileSize=(int) offset;
+ $stack16 = mappedFile.getData(mappedFileSize,size,byteBuffer);
+ return  $stack16;
+ label2:return  0;
+ } 
+

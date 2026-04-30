@@ -1,0 +1,29 @@
+static long org.apache.rocketmq.tools.command.stats.StatsAllSubCommand:compute24HourSum(org.apache.rocketmq.remoting.protocol.body.BrokerStatsData bsd)
+{
+org.apache.rocketmq.remoting.protocol.body.BrokerStatsItem $stack1;
+  long $stack2;
+  byte $stack3;
+  $stack1 = bsd.getStatsDay();
+ $stack2 = $stack1.getSum();
+ $stack3=($stack2 cmp 0L);
+ if ($stack3==0) goto label0;
+ $stack1 = bsd.getStatsDay();
+ $stack2 = $stack1.getSum();
+ return  $stack2;
+ label0:$stack1 = bsd.getStatsHour();
+ $stack2 = $stack1.getSum();
+ $stack3=($stack2 cmp 0L);
+ if ($stack3==0) goto label1;
+ $stack1 = bsd.getStatsHour();
+ $stack2 = $stack1.getSum();
+ return  $stack2;
+ label1:$stack1 = bsd.getStatsMinute();
+ $stack2 = $stack1.getSum();
+ $stack3=($stack2 cmp 0L);
+ if ($stack3==0) goto label2;
+ $stack1 = bsd.getStatsMinute();
+ $stack2 = $stack1.getSum();
+ return  $stack2;
+ label2:return  0L;
+ } 
+

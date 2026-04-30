@@ -1,0 +1,16 @@
+static boolean org.apache.kerby.kerberos.kerb.preauth.pkinit.PkinitCrypto:checkDHWellknown(org.apache.kerby.kerberos.kerb.preauth.pkinit.PkinitPlgCryptoContext cryptoctx,org.apache.kerby.x509.type.DhParameter dhParameter,int dhPrimeBits)
+{
+boolean valid;
+  javax.crypto.spec.DHParameterSpec $stack4;
+  valid=0;
+ switch [dhPrimeBits]
+if 0 goto label0;
+if 1 goto label0;
+if 2 goto label0;
+goto label1;
+ label0:$stack4 = cryptoctx.createDHParameterSpec(dhPrimeBits);
+ valid = org.apache.kerby.kerberos.kerb.preauth.pkinit.PkinitCrypto.pkinitCheckDhParams($stack4,dhParameter);
+ goto label1;
+ label1:return  valid;
+ } 
+

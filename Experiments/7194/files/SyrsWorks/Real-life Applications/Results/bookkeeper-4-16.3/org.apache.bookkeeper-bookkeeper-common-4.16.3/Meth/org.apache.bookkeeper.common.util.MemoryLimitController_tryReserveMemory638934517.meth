@@ -1,0 +1,25 @@
+boolean org.apache.bookkeeper.common.util.MemoryLimitController:tryReserveMemory(long size)
+{
+long current;
+  long newUsage;
+  java.util.concurrent.atomic.AtomicLong $stack7;
+  long $stack9;
+  byte $stack10;
+  boolean $stack12;
+  label0:$stack7=this.currentUsage;
+ current = $stack7.get();
+ newUsage=(current+size);
+ $stack9=this.memoryLimit;
+ $stack10=(current cmp $stack9);
+ if ($stack10<=0) goto label1;
+ $stack9=this.memoryLimit;
+ $stack10=($stack9 cmp 0L);
+ if ($stack10<=0) goto label1;
+ return  0;
+ label1:$stack7=this.currentUsage;
+ $stack12 = $stack7.compareAndSet(current,newUsage);
+ if ($stack12==0) goto label2;
+ return  1;
+ label2:goto label0;
+ } 
+

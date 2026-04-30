@@ -1,0 +1,28 @@
+junit.framework.Test junit.framework.TestSuite:testCaseForClass(java.lang.Class @each)
+{
+junit.framework.TestSuite $this;
+  java.lang.Class $stack2;
+  boolean $stack3;
+  java.lang.StringBuilder $stack4;
+  java.lang.String $stack5;
+  junit.framework.Test $stack9;
+  java.lang.Class each;
+each=@each;
+$this= this;
+ $stack2=junit.framework.TestCase;
+ $stack3 = $stack2.isAssignableFrom(each);
+ if ($stack3==0) goto label0;
+ $this=new junit.framework.TestSuite;
+ each = each.asSubclass(junit.framework.TestCase);
+ $this#junit.framework.TestSuite(each);
+ return  $this;
+ label0:$stack4=new java.lang.StringBuilder;
+ $stack4#java.lang.StringBuilder();
+ $stack5 = each.getCanonicalName();
+ $stack4 = $stack4.append($stack5);
+ $stack4 = $stack4.append(" does not extend TestCase");
+ $stack5 = $stack4.toString();
+ $stack9 = junit.framework.TestSuite.warning($stack5);
+ return  $stack9;
+ } 
+

@@ -1,0 +1,34 @@
+static int[] com.google.zxing.aztec.encoder.Encoder:bitsToWords(com.google.zxing.common.BitArray stuffedBits,int wordSize,int totalWords)
+{
+int[] message;
+  int n;
+  int value;
+  int j;
+  int $stack11;
+  boolean $stack13;
+  message=new int[totalWords];
+ totalWords=0;
+ n = stuffedBits.getSize();
+ n=(n/wordSize);
+ label0:if (totalWords>=n) goto label1;
+ value=0;
+ j=0;
+ label2:if (j>=wordSize) goto label3;
+ $stack11=(totalWords * wordSize);
+ $stack11=($stack11+j);
+ $stack13 = stuffedBits.get($stack11);
+ if ($stack13==0) goto label4;
+ $stack11=(wordSize-j);
+ $stack11=($stack11-1);
+ $stack11=(1<<$stack11);
+ goto label5;
+ label4:$stack11=0;
+ label5:value=(value | $stack11);
+ j=(j+1);
+ goto label2;
+ label3:message[totalWords]=value;
+ totalWords=(totalWords+1);
+ goto label0;
+ label1:return  message;
+ } 
+

@@ -1,0 +1,32 @@
+static void org.apache.rocketmq.proxy.remoting.channel.RemotingChannel:lambda$processConsumeMessageDirectly$2(java.util.concurrent.CompletableFuture responseFuture,org.apache.rocketmq.remoting.protocol.RemotingCommand response)
+{
+org.apache.rocketmq.remoting.protocol.body.ConsumeMessageDirectlyResult result;
+  int $stack4;
+  java.lang.Object[] $stack5;
+  java.lang.Integer $stack9;
+  java.lang.String $stack11;
+  java.lang.RuntimeException $stack13;
+  byte[] $stack15;
+  java.lang.Object $stack16;
+  org.apache.rocketmq.proxy.service.relay.ProxyRelayResult $stack17;
+  $stack4 = response.getCode();
+ if ($stack4!=0) goto label0;
+ $stack15 = response.getBody();
+ $stack16 = org.apache.rocketmq.remoting.protocol.RemotingSerializable.decode($stack15,org.apache.rocketmq.remoting.protocol.body.ConsumeMessageDirectlyResult);
+ result=(org.apache.rocketmq.remoting.protocol.body.ConsumeMessageDirectlyResult) $stack16;
+ $stack17=new org.apache.rocketmq.proxy.service.relay.ProxyRelayResult;
+ $stack17#org.apache.rocketmq.proxy.service.relay.ProxyRelayResult(0,"",(java.lang.Object)result);
+ responseFuture.complete((java.lang.Object)$stack17);
+ label0:$stack5=new java.lang.Object[2];
+ $stack4 = response.getCode();
+ $stack9 = java.lang.Integer.valueOf($stack4);
+ $stack5[0]=$stack9;
+ $stack11 = response.getRemark();
+ $stack5[1]=$stack11;
+ $stack13=new java.lang.RuntimeException;
+ $stack11 = java.lang.String.format("consume message directly failed, code:%s remark:%s",$stack5);
+ $stack13#java.lang.RuntimeException($stack11);
+ responseFuture.completeExceptionally((java.lang.Throwable)$stack13);
+ return;
+ } 
+

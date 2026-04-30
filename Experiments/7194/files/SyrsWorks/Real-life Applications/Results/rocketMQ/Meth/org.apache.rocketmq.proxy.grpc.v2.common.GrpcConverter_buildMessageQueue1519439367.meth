@@ -1,0 +1,36 @@
+apache.rocketmq.v2.MessageQueue org.apache.rocketmq.proxy.grpc.v2.common.GrpcConverter:buildMessageQueue(org.apache.rocketmq.common.message.MessageExt messageExt,java.lang.String @brokerName)
+{
+apache.rocketmq.v2.Broker broker;
+  boolean $stack5;
+  apache.rocketmq.v2.MessageQueue$Builder $stack6;
+  int $stack7;
+  apache.rocketmq.v2.Resource$Builder $stack9;
+  apache.rocketmq.v2.Resource $stack16;
+  apache.rocketmq.v2.MessageQueue $stack19;
+  apache.rocketmq.v2.Broker$Builder $stack20;
+  java.lang.String brokerName;
+brokerName=@brokerName;
+broker = apache.rocketmq.v2.Broker.getDefaultInstance();
+ $stack5 = org.apache.commons.lang3.StringUtils.isEmpty((java.lang.CharSequence)brokerName);
+ if ($stack5!=0) goto label0;
+ $stack20 = apache.rocketmq.v2.Broker.newBuilder();
+ $stack20 = $stack20.setName(brokerName);
+ $stack20 = $stack20.setId(0);
+ broker = $stack20.build();
+ label0:$stack6 = apache.rocketmq.v2.MessageQueue.newBuilder();
+ $stack7 = messageExt.getQueueId();
+ $stack6 = $stack6.setId($stack7);
+ $stack9 = apache.rocketmq.v2.Resource.newBuilder();
+ brokerName = messageExt.getTopic();
+ brokerName = org.apache.rocketmq.remoting.protocol.NamespaceUtil.withoutNamespace(brokerName);
+ $stack9 = $stack9.setName(brokerName);
+ brokerName = messageExt.getTopic();
+ brokerName = org.apache.rocketmq.remoting.protocol.NamespaceUtil.getNamespaceFromResource(brokerName);
+ $stack9 = $stack9.setResourceNamespace(brokerName);
+ $stack16 = $stack9.build();
+ $stack6 = $stack6.setTopic($stack16);
+ $stack6 = $stack6.setBroker(broker);
+ $stack19 = $stack6.build();
+ return  $stack19;
+ } 
+

@@ -1,0 +1,35 @@
+org.apache.bookkeeper.clients.impl.internal.MetaRangeClientImpl org.apache.bookkeeper.clients.impl.internal.StorageServerClientManagerImpl:openMetaRangeClient(org.apache.bookkeeper.stream.proto.StreamProperties streamProps)
+{
+org.apache.bookkeeper.clients.impl.internal.MetaRangeClientImpl client;
+  org.apache.bookkeeper.clients.impl.internal.MetaRangeClientImpl oldClient;
+  java.util.concurrent.ConcurrentMap $stack5;
+  long $stack6;
+  java.lang.Long $stack7;
+  java.lang.Object $stack8;
+  org.apache.bookkeeper.clients.impl.container.StorageContainerChannelManager $stack10;
+  org.apache.bookkeeper.common.util.OrderedScheduler $stack11;
+  org.apache.bookkeeper.clients.impl.internal.StreamMetadataCache $stack16;
+  $stack5=this.metaRangeClients;
+ $stack6 = streamProps.getStreamId();
+ $stack7 = java.lang.Long.valueOf($stack6);
+ $stack8 = $stack5.get((java.lang.Object)$stack7);
+ client=(org.apache.bookkeeper.clients.impl.internal.MetaRangeClientImpl) $stack8;
+ if (null==client) goto label0;
+ return  client;
+ label0:client=new org.apache.bookkeeper.clients.impl.internal.MetaRangeClientImpl;
+ $stack11=this.scheduler;
+ $stack10=this.scChannelManager;
+ client#org.apache.bookkeeper.clients.impl.internal.MetaRangeClientImpl(streamProps,$stack11,$stack10);
+ $stack5=this.metaRangeClients;
+ $stack6 = streamProps.getStreamId();
+ $stack7 = java.lang.Long.valueOf($stack6);
+ $stack8 = $stack5.putIfAbsent((java.lang.Object)$stack7,(java.lang.Object)client);
+ oldClient=(org.apache.bookkeeper.clients.impl.internal.MetaRangeClientImpl) $stack8;
+ if (null==oldClient) goto label1;
+ return  oldClient;
+ label1:$stack16=this.streamMetadataCache;
+ $stack6 = streamProps.getStreamId();
+ $stack16.putStreamProperties($stack6,streamProps);
+ return  client;
+ } 
+

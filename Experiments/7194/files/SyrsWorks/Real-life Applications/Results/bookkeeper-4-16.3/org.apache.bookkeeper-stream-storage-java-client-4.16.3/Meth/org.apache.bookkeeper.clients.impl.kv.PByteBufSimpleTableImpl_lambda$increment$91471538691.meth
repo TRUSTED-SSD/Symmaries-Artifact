@@ -1,0 +1,24 @@
+java.util.concurrent.CompletableFuture org.apache.bookkeeper.clients.impl.kv.PByteBufSimpleTableImpl:lambda$increment$9(io.netty.buffer.ByteBuf pKey,io.netty.buffer.ByteBuf lKey,long amount,org.apache.bookkeeper.api.kv.options.IncrementOption option)
+{
+io.grpc.Channel $stack6;
+  io.grpc.MethodDescriptor $stack7;
+  io.grpc.CallOptions $stack8;
+  io.grpc.ClientCall $stack9;
+  org.apache.bookkeeper.stream.proto.kv.rpc.IncrementRequest$Builder $stack10;
+  org.apache.bookkeeper.stream.proto.kv.rpc.RoutingHeader$Builder $stack11;
+  org.apache.bookkeeper.stream.proto.kv.rpc.IncrementRequest $stack13;
+  com.google.common.util.concurrent.ListenableFuture $stack14;
+  java.util.concurrent.CompletableFuture $stack15;
+  $stack6 = this#org.apache.bookkeeper.clients.impl.kv.PByteBufSimpleTableImpl:getChannel(pKey);
+ $stack7 = org.apache.bookkeeper.stream.proto.kv.rpc.TableServiceGrpc.getIncrementMethod();
+ $stack8 = this.getCallOptions();
+ $stack9 = $stack6.newCall($stack7,$stack8);
+ $stack10 = org.apache.bookkeeper.clients.impl.kv.KvUtils.newIncrementRequest(lKey,amount,option);
+ $stack11 = this#org.apache.bookkeeper.clients.impl.kv.PByteBufSimpleTableImpl:newRoutingHeader(pKey);
+ $stack10 = $stack10.setHeader($stack11);
+ $stack13 = $stack10.build();
+ $stack14 = io.grpc.stub.ClientCalls.futureUnaryCall($stack9,(java.lang.Object)$stack13);
+ $stack15 = org.apache.bookkeeper.common.util.ListenableFutures.fromListenableFuture($stack14);
+ return  $stack15;
+ } 
+

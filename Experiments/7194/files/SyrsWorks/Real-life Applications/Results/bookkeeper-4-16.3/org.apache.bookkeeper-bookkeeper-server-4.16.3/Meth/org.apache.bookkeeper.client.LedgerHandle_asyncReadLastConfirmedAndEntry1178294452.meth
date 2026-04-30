@@ -1,0 +1,49 @@
+void org.apache.bookkeeper.client.LedgerHandle:asyncReadLastConfirmedAndEntry(long entryId,long timeOutInMillis,boolean parallel,org.apache.bookkeeper.client.AsyncCallback$ReadLastConfirmedAndEntryCallback cb,java.lang.Object ctx)
+{
+boolean isClosed;
+  long lac;
+  org.apache.bookkeeper.client.LedgerHandle innercb;
+  org.apache.bookkeeper.client.api.LedgerMetadata metadata;
+  java.lang.Throwable l13;
+  byte $stack20;
+  org.apache.bookkeeper.client.LedgerHandle$11 $stack21;
+  org.apache.bookkeeper.client.ReadLastConfirmedAndEntryOp $stack22;
+  org.apache.bookkeeper.client.ClientContext $stack23;
+  java.util.List $stack24;
+  org.apache.bookkeeper.client.LedgerHandle$10 $stack27;
+  innercb=this;
+ monitorenter this;
+ label0:metadata = this.getLedgerMetadata();
+ isClosed = metadata.isClosed();
+ lac = metadata.getLastEntryId();
+ monitorexit this;
+ label1:goto label2;
+ label3:l13 = catch;
+ monitorexit this;
+ label4:throw l13;
+ label2:if (isClosed==0) goto label5;
+ $stack20=(entryId cmp lac);
+ if ($stack20<=0) goto label6;
+ cb.readLastConfirmedAndEntryComplete(0,lac,null,ctx);
+ return;
+ label5:lac = this.getLastAddConfirmed();
+ label6:$stack20=(entryId cmp lac);
+ if ($stack20>0) goto label7;
+ $stack27=new org.apache.bookkeeper.client.LedgerHandle$10;
+ $stack27#org.apache.bookkeeper.client.LedgerHandle$10(this,cb);
+ this.asyncReadEntries(entryId,entryId,(org.apache.bookkeeper.client.AsyncCallback$ReadCallback)$stack27,ctx);
+ return;
+ label7:$stack21=new org.apache.bookkeeper.client.LedgerHandle$11;
+ $stack21#org.apache.bookkeeper.client.LedgerHandle$11(this,cb,ctx);
+ $stack22=new org.apache.bookkeeper.client.ReadLastConfirmedAndEntryOp;
+ $stack23=this.clientCtx;
+ $stack24 = this.getCurrentEnsemble();
+ entryId=(entryId-1L);
+ $stack22#org.apache.bookkeeper.client.ReadLastConfirmedAndEntryOp(this,$stack23,$stack24,(org.apache.bookkeeper.client.ReadLastConfirmedAndEntryOp$LastConfirmedAndEntryCallback)$stack21,entryId,timeOutInMillis);
+ $stack22 = $stack22.parallelRead(parallel);
+ $stack22#org.apache.bookkeeper.client.ReadLastConfirmedAndEntryOp();
+ return;
+ catch java.lang.Throwable: label0 - label1 : label3;
+catch java.lang.Throwable: label3 - label4 : label3;
+} 
+

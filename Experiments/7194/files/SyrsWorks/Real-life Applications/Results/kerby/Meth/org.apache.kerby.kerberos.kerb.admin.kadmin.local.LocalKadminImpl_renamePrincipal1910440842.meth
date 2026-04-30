@@ -1,0 +1,49 @@
+void org.apache.kerby.kerberos.kerb.admin.kadmin.local.LocalKadminImpl:renamePrincipal(java.lang.String @oldPrincipalName,java.lang.String @newPrincipalName)
+{
+org.apache.kerby.kerberos.kerb.request.KrbIdentity oldIdentity;
+  org.apache.kerby.kerberos.kerb.identity.backend.IdentityBackend $stack7;
+  org.apache.kerby.kerberos.kerb.type.base.PrincipalName $stack12;
+  org.apache.kerby.kerberos.kerb.KrbException $stack15;
+  java.lang.StringBuilder $stack16;
+  java.lang.String oldPrincipalName;
+java.lang.String newPrincipalName;
+newPrincipalName=@newPrincipalName;
+oldPrincipalName=@oldPrincipalName;
+oldPrincipalName = this#org.apache.kerby.kerberos.kerb.admin.kadmin.local.LocalKadminImpl:fixPrincipal(oldPrincipalName);
+ newPrincipalName = this#org.apache.kerby.kerberos.kerb.admin.kadmin.local.LocalKadminImpl:fixPrincipal(newPrincipalName);
+ $stack7=this.backend;
+ oldIdentity = $stack7.getIdentity(newPrincipalName);
+ if (oldIdentity==null) goto label0;
+ $stack15=new org.apache.kerby.kerberos.kerb.KrbException;
+ $stack16=new java.lang.StringBuilder;
+ $stack16#java.lang.StringBuilder();
+ $stack16 = $stack16.append("Principal \"");
+ oldPrincipalName = oldIdentity.getPrincipalName();
+ $stack16 = $stack16.append(oldPrincipalName);
+ $stack16 = $stack16.append("\" is already exist.");
+ oldPrincipalName = $stack16.toString();
+ $stack15#org.apache.kerby.kerberos.kerb.KrbException(oldPrincipalName);
+ throw $stack15;
+ label0:$stack7=this.backend;
+ oldIdentity = $stack7.getIdentity(oldPrincipalName);
+ if (oldIdentity!=null) goto label1;
+ $stack15=new org.apache.kerby.kerberos.kerb.KrbException;
+ $stack16=new java.lang.StringBuilder;
+ $stack16#java.lang.StringBuilder();
+ $stack16 = $stack16.append("Principal \"");
+ $stack16 = $stack16.append(oldPrincipalName);
+ $stack16 = $stack16.append("\" does not exist.");
+ oldPrincipalName = $stack16.toString();
+ $stack15#org.apache.kerby.kerberos.kerb.KrbException(oldPrincipalName);
+ throw $stack15;
+ label1:$stack7=this.backend;
+ $stack7.deleteIdentity(oldPrincipalName);
+ oldIdentity.setPrincipalName(newPrincipalName);
+ $stack12=new org.apache.kerby.kerberos.kerb.type.base.PrincipalName;
+ $stack12#org.apache.kerby.kerberos.kerb.type.base.PrincipalName(newPrincipalName);
+ oldIdentity.setPrincipal($stack12);
+ $stack7=this.backend;
+ $stack7.addIdentity(oldIdentity);
+ return;
+ } 
+

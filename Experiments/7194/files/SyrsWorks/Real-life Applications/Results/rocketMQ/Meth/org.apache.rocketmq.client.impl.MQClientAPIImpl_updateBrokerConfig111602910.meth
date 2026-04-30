@@ -1,0 +1,36 @@
+void org.apache.rocketmq.client.impl.MQClientAPIImpl:updateBrokerConfig(java.lang.String addr,java.util.Properties properties,long timeoutMillis)
+{
+org.apache.rocketmq.remoting.protocol.RemotingCommand request;
+  java.lang.String str;
+  int $stack10;
+  byte[] $stack11;
+  org.apache.rocketmq.client.ClientConfig $stack12;
+  org.apache.rocketmq.remoting.RemotingClient $stack13;
+  boolean $stack14;
+  org.apache.rocketmq.client.exception.MQBrokerException $stack18;
+  org.apache.rocketmq.client.Validators.checkBrokerConfig(properties);
+ request = org.apache.rocketmq.remoting.protocol.RemotingCommand.createRequestCommand(25,null);
+ str = org.apache.rocketmq.common.MixAll.properties2String(properties);
+ if (str==null) goto label0;
+ $stack10 = str.length();
+ if ($stack10<=0) goto label0;
+ $stack11 = str.getBytes("UTF-8");
+ request.setBody($stack11);
+ $stack13=this.remotingClient;
+ $stack12=this.clientConfig;
+ $stack14 = $stack12.isVipChannelEnabled();
+ str = org.apache.rocketmq.common.MixAll.brokerVIPChannel($stack14,addr);
+ request = $stack13.invokeSync(str,request,timeoutMillis);
+ $stack10 = request.getCode();
+ switch [$stack10]
+if 0 goto label1;
+goto label2;
+ label1:return;
+ label2:$stack18=new org.apache.rocketmq.client.exception.MQBrokerException;
+ $stack10 = request.getCode();
+ str = request.getRemark();
+ $stack18#org.apache.rocketmq.client.exception.MQBrokerException($stack10,str,addr);
+ throw $stack18;
+ label0:return;
+ } 
+

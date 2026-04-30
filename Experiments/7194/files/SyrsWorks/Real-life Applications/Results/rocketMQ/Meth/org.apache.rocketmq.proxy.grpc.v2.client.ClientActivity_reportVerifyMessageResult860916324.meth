@@ -1,0 +1,23 @@
+void org.apache.rocketmq.proxy.grpc.v2.client.ClientActivity:reportVerifyMessageResult(org.apache.rocketmq.proxy.common.ProxyContext ctx,apache.rocketmq.v2.Status status,apache.rocketmq.v2.VerifyMessageResult request)
+{
+java.lang.String nonce;
+  java.util.concurrent.CompletableFuture responseFuture;
+  org.apache.rocketmq.remoting.protocol.body.ConsumeMessageDirectlyResult result;
+  org.apache.rocketmq.proxy.grpc.v2.channel.GrpcChannelManager $stack8;
+  org.apache.rocketmq.proxy.service.relay.ProxyRelayResult $stack11;
+  java.lang.Throwable $stack13;
+  nonce = request.getNonce();
+ $stack8=this.grpcChannelManager;
+ responseFuture = $stack8.getAndRemoveResponseFuture(nonce);
+ if (responseFuture==null) goto label0;
+ label1:result = this.buildConsumeMessageDirectlyResult(status,request);
+ $stack11=new org.apache.rocketmq.proxy.service.relay.ProxyRelayResult;
+ $stack11#org.apache.rocketmq.proxy.service.relay.ProxyRelayResult(0,"",(java.lang.Object)result);
+ responseFuture.complete((java.lang.Object)$stack11);
+ label2:goto label0;
+ label3:$stack13 = catch;
+ responseFuture.completeExceptionally($stack13);
+ label0:return;
+ catch java.lang.Throwable: label1 - label2 : label3;
+} 
+

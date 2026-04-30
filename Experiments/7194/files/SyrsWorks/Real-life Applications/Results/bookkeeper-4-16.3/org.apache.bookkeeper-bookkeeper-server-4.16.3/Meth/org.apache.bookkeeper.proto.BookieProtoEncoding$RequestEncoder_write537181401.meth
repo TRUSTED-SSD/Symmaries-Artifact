@@ -1,0 +1,47 @@
+void org.apache.bookkeeper.proto.BookieProtoEncoding$RequestEncoder:write(io.netty.channel.ChannelHandlerContext ctx,java.lang.Object @msg,io.netty.channel.ChannelPromise promise)
+{
+org.slf4j.Logger $stack4;
+  boolean $stack5;
+  io.netty.channel.Channel $stack13;
+  java.lang.Class $stack14;
+  java.lang.String $stack15;
+  org.apache.bookkeeper.proto.BookieProtoEncoding$EnDecoder $stack17;
+  io.netty.buffer.ByteBufAllocator $stack18;
+  java.lang.Object msg;
+msg=@msg;
+$stack4 = org.apache.bookkeeper.proto.BookieProtoEncoding.access$000();
+ $stack5 = $stack4.isTraceEnabled();
+ if ($stack5==0) goto label0;
+ $stack4 = org.apache.bookkeeper.proto.BookieProtoEncoding.access$000();
+ $stack13 = ctx.channel();
+ dummyClass.lowSink("Encode request {} to channel {}.");
+$stack4.trace("Encode request {} to channel {}.",msg,(java.lang.Object)$stack13);
+ label0:$stack5=msg instanceof io.netty.buffer.ByteBuf;
+ if ($stack5!=0) goto label1;
+ $stack5=msg instanceof org.apache.bookkeeper.util.ByteBufList;
+ if ($stack5==0) goto label2;
+ label1:ctx.write(msg,promise);
+ goto label3;
+ label2:$stack5=msg instanceof org.apache.bookkeeper.proto.BookkeeperProtocol$Request;
+ if ($stack5==0) goto label4;
+ $stack17=this.reqV3;
+ $stack18 = ctx.alloc();
+ msg = $stack17.encode(msg,$stack18);
+ ctx.write(msg,promise);
+ goto label3;
+ label4:$stack5=msg instanceof org.apache.bookkeeper.proto.BookieProtocol$Request;
+ if ($stack5==0) goto label5;
+ $stack17=this.reqPreV3;
+ $stack18 = ctx.alloc();
+ msg = $stack17.encode(msg,$stack18);
+ ctx.write(msg,promise);
+ goto label3;
+ label5:$stack4 = org.apache.bookkeeper.proto.BookieProtoEncoding.access$000();
+ $stack13 = ctx.channel();
+ $stack14 = msg.getClass();
+ $stack15 = $stack14.getName();
+ $stack4.error("Invalid request to encode to {}: {}",(java.lang.Object)$stack13,(java.lang.Object)$stack15);
+ ctx.write(msg,promise);
+ label3:return;
+ } 
+

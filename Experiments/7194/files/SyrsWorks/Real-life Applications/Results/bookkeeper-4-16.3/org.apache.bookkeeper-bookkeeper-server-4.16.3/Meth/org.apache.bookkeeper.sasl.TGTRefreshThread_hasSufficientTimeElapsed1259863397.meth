@@ -1,0 +1,20 @@
+boolean org.apache.bookkeeper.sasl.TGTRefreshThread:hasSufficientTimeElapsed()
+{
+long now;
+  long $stack4;
+  byte $stack6;
+  org.slf4j.Logger $stack7;
+  java.lang.Long $stack9;
+  now = java.lang.System.currentTimeMillis();
+ $stack4 = this.getLastLogin();
+ $stack4=(now-$stack4);
+ $stack6=($stack4 cmp 60000L);
+ if ($stack6>=0) goto label0;
+ $stack7=org.apache.bookkeeper.sasl.TGTRefreshThread.LOG;
+ $stack9 = java.lang.Long.valueOf(60L);
+ $stack7.warn("Not attempting to re-login since the last re-login was attempted less than {} seconds before.",(java.lang.Object)$stack9);
+ return  0;
+ label0:this.setLastLogin(now);
+ return  1;
+ } 
+

@@ -1,0 +1,41 @@
+static void com.google.zxing.pdf417.encoder.PDF417HighLevelEncoder:encodingECI(int eci,java.lang.StringBuilder @sb)
+{
+com.google.zxing.WriterException $stack2;
+  java.lang.String $stack6;
+  char $stack9;
+  int $stack12;
+  java.lang.StringBuilder sb;
+sb=@sb;
+if (eci<0) goto label0;
+ if (eci>=900) goto label0;
+ sb.append((char)927);
+ $stack9=(char) eci;
+ sb.append($stack9);
+ goto label1;
+ label0:if (eci>=810900) goto label2;
+ sb.append((char)926);
+ $stack12=(eci/900);
+ $stack12=($stack12-1);
+ $stack9=(char) $stack12;
+ sb.append($stack9);
+ eci=(eci%900);
+ $stack9=(char) eci;
+ sb.append($stack9);
+ goto label1;
+ label2:if (eci>=811800) goto label3;
+ sb.append((char)925);
+ eci=(810900-eci);
+ $stack9=(char) eci;
+ sb.append($stack9);
+ goto label1;
+ label3:$stack2=new com.google.zxing.WriterException;
+ sb=new java.lang.StringBuilder;
+ sb#java.lang.StringBuilder();
+ sb = sb.append("ECI number not in valid range from 0..811799, but was ");
+ sb = sb.append(eci);
+ $stack6 = sb.toString();
+ $stack2#com.google.zxing.WriterException($stack6);
+ throw $stack2;
+ label1:return;
+ } 
+

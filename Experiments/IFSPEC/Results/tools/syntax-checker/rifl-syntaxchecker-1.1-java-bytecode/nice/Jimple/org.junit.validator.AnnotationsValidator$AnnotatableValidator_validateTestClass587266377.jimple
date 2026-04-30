@@ -1,0 +1,57 @@
+    public java.util.List validateTestClass(org.junit.runners.model.TestClass)
+    {
+        org.junit.validator.AnnotationsValidator$AnnotatableValidator this;
+        org.junit.runners.model.TestClass testClass;
+        java.util.ArrayList validationErrors;
+        java.util.Iterator i$;
+        org.junit.runners.model.Annotatable annotatable;
+        java.util.List additionalErrors;
+        java.lang.Iterable $stack7;
+        boolean $stack9;
+        java.lang.Object $stack10;
+
+        this := @this: org.junit.validator.AnnotationsValidator$AnnotatableValidator;
+
+        testClass := @parameter0: org.junit.runners.model.TestClass;
+
+        validationErrors = new java.util.ArrayList;
+/*52*/
+
+        specialinvoke validationErrors.<java.util.ArrayList: void <init>()>();
+/*52*/
+
+        $stack7 = virtualinvoke this.<org.junit.validator.AnnotationsValidator$AnnotatableValidator: java.lang.Iterable getAnnotatablesForTestClass(org.junit.runners.model.TestClass)>(testClass);
+/*53*/
+
+        i$ = interfaceinvoke $stack7.<java.lang.Iterable: java.util.Iterator iterator()>();
+/*53*/
+/*53*/
+
+     label1:
+        $stack9 = interfaceinvoke i$.<java.util.Iterator: boolean hasNext()>();
+/*53*/
+
+        if $stack9 == 0 goto label2;
+/*53*/
+
+        $stack10 = interfaceinvoke i$.<java.util.Iterator: java.lang.Object next()>();
+/*57*/
+
+        annotatable = (org.junit.runners.model.Annotatable) $stack10;
+/*57*/
+
+        additionalErrors = specialinvoke this.<org.junit.validator.AnnotationsValidator$AnnotatableValidator: java.util.List validateAnnotatable(org.junit.runners.model.Annotatable)>(annotatable);
+/*54*/
+/*54*/
+
+        interfaceinvoke validationErrors.<java.util.List: boolean addAll(java.util.Collection)>(additionalErrors);
+/*55*/
+
+        goto label1;
+/*56*/
+
+     label2:
+        return validationErrors;
+/*57*/
+    }
+

@@ -1,0 +1,21 @@
+void org.apache.bookkeeper.proto.AuthHandler$ClientSideHandler:authenticationError(io.netty.channel.ChannelHandlerContext ctx,int errorCode)
+{
+org.slf4j.Logger $stack3;
+  java.lang.Integer $stack5;
+  org.apache.bookkeeper.proto.AuthHandler$AuthenticationException $stack6;
+  java.lang.StringBuilder $stack7;
+  java.lang.String $stack10;
+  $stack3=org.apache.bookkeeper.proto.AuthHandler.LOG;
+ $stack5 = java.lang.Integer.valueOf(errorCode);
+ $stack3.error("Error processing auth message, erroring connection {}",(java.lang.Object)$stack5);
+ $stack6=new org.apache.bookkeeper.proto.AuthHandler$AuthenticationException;
+ $stack7=new java.lang.StringBuilder;
+ $stack7#java.lang.StringBuilder();
+ $stack7 = $stack7.append("Auth failed with error ");
+ $stack7 = $stack7.append(errorCode);
+ $stack10 = $stack7.toString();
+ $stack6#org.apache.bookkeeper.proto.AuthHandler$AuthenticationException($stack10);
+ ctx.fireExceptionCaught((java.lang.Throwable)$stack6);
+ return;
+ } 
+

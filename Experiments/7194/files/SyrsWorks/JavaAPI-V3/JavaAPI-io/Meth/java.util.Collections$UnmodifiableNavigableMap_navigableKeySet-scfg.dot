@@ -1,0 +1,62 @@
+digraph G {
+  node [shape=box, ];
+  "pc0_js1" [label="〈$r1 = this.nm, js1〉", ];
+  "pc1_js1" [label="〈$r2 = $r1.navigableKeySet (), js1〉\n\
+tt", ];
+  "pc2_js1" [label="〈$r3 = java.util.Collections.unmodifiableNavigableSet ($r2), js1〉\n\
+tt",
+             ];
+  "pc3_js1" [label="〈return $r3, js1〉", ];
+  "pc4_js1" [label="〈sink, js1〉\n\
+obj_level(this) ⊑ ret(obj_level(this))' ∧ (ret(this.><this)' ∨ ¬this.><this) ∧ (ϕ ≠ S3 ∨ obj_level($r3) ⊑ ret(obj_level())' ∧ pc ⊔ level($r3) ⊑ ret(level())' ∧ (ret(.><this)' ∨ ¬this.><$r3) ∧ (ret(this.><)' ∨ ¬$r3.><this))",
+             ];
+  
+  
+  "pc0_js1" -> "pc1_js1" [label="tt,\n\
+{$r1~this := this.><this,\n\
+ $r1.><$r1 := ff,\n\
+ $r1.><$r2 := ff,\n\
+ $r1.><$r3 := ff,\n\
+ $r1.><this := this.><this,\n\
+ $r2.><$r1 := ff,\n\
+ $r3.><$r1 := ff,\n\
+ this.><$r1 := tt,\n\
+ level($r1) := pc ⊔ level(this) ⊔ obj_level(this),\n\
+ obj_level($r1) := obj_level(this)}",
+                          ];
+  "pc1_js1" -> "pc2_js1" [label="tt,\n\
+{$r1.><$r1 := tt,\n\
+ $r1.><$r3 := ff,\n\
+ $r1.><this := tt,\n\
+ $r3.><$r3 := ff,\n\
+ $r3.><this := ff,\n\
+ this.><$r1 := tt,\n\
+ this.><$r3 := ff,\n\
+ this.><this := tt,\n\
+ level($r2) := pc ⊔ level(this) ⊔ obj_level(this),\n\
+ obj_level($r1) := pc ⊔ level(this) ⊔ obj_level(this),\n\
+ obj_level($r2) := pc ⊔ level(this) ⊔ obj_level(this),\n\
+ obj_level($r3) := ⊥,\n\
+ obj_level(this) := pc ⊔ level(this) ⊔ obj_level(this)}",
+                          ];
+  "pc2_js1" -> "pc3_js1" [label="tt,\n\
+{$r2~$r3 := ff,\n\
+ $r1.><$r1 := tt,\n\
+ $r1.><$r3 := ff,\n\
+ $r1.><this := tt,\n\
+ $r2.><$r1 := ff,\n\
+ $r2.><$r3 := ff,\n\
+ $r2.><this := ff,\n\
+ $r3.><$r1 := ff,\n\
+ $r3.><$r2 := ff,\n\
+ $r3.><this := ff,\n\
+ this.><$r1 := tt,\n\
+ this.><$r3 := ff,\n\
+ this.><this := tt,\n\
+ level($r3) := pc,\n\
+ obj_level($r3) := pc ⊔ level($r2) ⊔ obj_level($r2)}",
+                          ];
+  "pc3_js1" -> "pc4_js1" [label="tt,\n\
+{ϕ := S3}", ];
+  
+  }

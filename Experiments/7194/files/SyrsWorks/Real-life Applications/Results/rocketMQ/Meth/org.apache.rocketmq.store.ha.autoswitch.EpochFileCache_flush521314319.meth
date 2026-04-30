@@ -1,0 +1,39 @@
+void org.apache.rocketmq.store.ha.autoswitch.EpochFileCache:flush()
+{
+java.util.concurrent.locks.Lock $stack3;
+  org.apache.rocketmq.common.utils.CheckpointFile $stack4;
+  java.util.ArrayList $stack6;
+  java.util.TreeMap $stack7;
+  java.util.Collection $stack8;
+  java.lang.Throwable $stack11;
+  java.io.IOException $stack13;
+  org.apache.rocketmq.logging.org.slf4j.Logger $stack14;
+  $stack3=this.writeLock;
+ $stack3.lock();
+ label0:$stack4=this.ccheckpoint;
+ if ($stack4==null) goto label1;
+ $stack6=new java.util.ArrayList;
+ $stack7=this.epochMap;
+ $stack8 = $stack7.values();
+ $stack6#java.util.ArrayList($stack8);
+ $stack4=this.ccheckpoint;
+ $stack4#org.apache.rocketmq.common.utils.CheckpointFile((java.util.List)$stack6);
+ label1:$stack3=this.writeLock;
+ $stack3.unlock();
+ goto label2;
+ label3:$stack13 = catch;
+ $stack14=org.apache.rocketmq.store.ha.autoswitch.EpochFileCache.log;
+ $stack14.error("Error happen when flush epochEntries to epochCheckpointFile",(java.lang.Throwable)$stack13);
+ label4:$stack3=this.writeLock;
+ $stack3.unlock();
+ goto label2;
+ label5:$stack11 = catch;
+ $stack3=this.writeLock;
+ $stack3.unlock();
+ throw $stack11;
+ label2:return;
+ catch java.io.IOException: label0 - label1 : label3;
+catch java.lang.Throwable: label0 - label1 : label5;
+catch java.lang.Throwable: label3 - label4 : label5;
+} 
+

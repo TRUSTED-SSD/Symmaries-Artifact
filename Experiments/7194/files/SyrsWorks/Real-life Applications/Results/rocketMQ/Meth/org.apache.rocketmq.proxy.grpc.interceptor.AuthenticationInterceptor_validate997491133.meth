@@ -1,0 +1,29 @@
+void org.apache.rocketmq.proxy.grpc.interceptor.AuthenticationInterceptor:validate(org.apache.rocketmq.acl.common.AuthenticationHeader authenticationHeader,io.grpc.Metadata headers,com.google.protobuf.GeneratedMessageV3 messageV3)
+{
+java.util.Iterator l4;
+  org.apache.rocketmq.acl.AccessValidator accessValidator;
+  org.apache.rocketmq.acl.AccessResource accessResource;
+  org.apache.rocketmq.acl.plain.PlainAccessResource plainAccessResource;
+  java.util.List $stack8;
+  boolean $stack10;
+  java.lang.Object $stack11;
+  io.grpc.Metadata$Key $stack15;
+  java.lang.String $stack16;
+  $stack8=this.accessValidatorList;
+ l4 = $stack8.iterator();
+ label0:$stack10 = l4.hasNext();
+ if ($stack10==0) goto label1;
+ $stack11 = l4.next();
+ accessValidator=(org.apache.rocketmq.acl.AccessValidator) $stack11;
+ accessResource = accessValidator.parse(messageV3,authenticationHeader);
+ accessValidator.validate(accessResource);
+ $stack10=accessResource instanceof org.apache.rocketmq.acl.plain.PlainAccessResource;
+ if ($stack10==0) goto label2;
+ plainAccessResource=(org.apache.rocketmq.acl.plain.PlainAccessResource) accessResource;
+ $stack15=org.apache.rocketmq.proxy.grpc.interceptor.InterceptorConstants.AUTHORIZATION_AK;
+ $stack16 = plainAccessResource.getAccessKey();
+ headers.put($stack15,(java.lang.Object)$stack16);
+ label2:goto label0;
+ label1:return;
+ } 
+

@@ -1,0 +1,28 @@
+static io.netty.buffer.ByteBuf org.apache.bookkeeper.proto.BookieProtoEncoding:serializeProtobuf(com.google.protobuf.MessageLite msg,io.netty.buffer.ByteBufAllocator allocator)
+{
+int size;
+  int frameSize;
+  io.netty.buffer.ByteBuf buf;
+  int $stack9;
+  java.nio.ByteBuffer $stack10;
+  com.google.protobuf.CodedOutputStream $stack11;
+  java.io.IOException $stack13;
+  java.lang.RuntimeException $stack14;
+  size = msg.getSerializedSize();
+ frameSize=(size+4);
+ buf = allocator.directBuffer(frameSize,frameSize);
+ buf.writeInt(size);
+ label0:$stack9 = buf.writerIndex();
+ $stack10 = buf.nioBuffer($stack9,size);
+ $stack11 = com.google.protobuf.CodedOutputStream.newInstance($stack10);
+ msg.writeTo($stack11);
+ label1:goto label2;
+ label3:$stack13 = catch;
+ $stack14=new java.lang.RuntimeException;
+ $stack14#java.lang.RuntimeException((java.lang.Throwable)$stack13);
+ throw $stack14;
+ label2:buf.writerIndex(frameSize);
+ return  buf;
+ catch java.io.IOException: label0 - label1 : label3;
+} 
+

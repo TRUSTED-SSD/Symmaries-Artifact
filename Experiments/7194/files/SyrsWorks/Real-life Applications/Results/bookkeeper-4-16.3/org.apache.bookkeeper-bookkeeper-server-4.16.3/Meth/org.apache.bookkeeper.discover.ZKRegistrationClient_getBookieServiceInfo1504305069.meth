@@ -1,0 +1,27 @@
+java.util.concurrent.CompletableFuture org.apache.bookkeeper.discover.ZKRegistrationClient:getBookieServiceInfo(org.apache.bookkeeper.net.BookieId bookieId)
+{
+org.apache.bookkeeper.versioning.Versioned resultFromCache;
+  java.util.concurrent.ConcurrentHashMap $stack3;
+  java.lang.Object $stack4;
+  org.slf4j.Logger $stack5;
+  boolean $stack6;
+  org.apache.bookkeeper.client.BKException$BKBookieHandleNotAvailableException $stack7;
+  java.util.concurrent.CompletableFuture $stack8;
+  $stack3=this.bookieServiceInfoCache;
+ $stack4 = $stack3.get((java.lang.Object)bookieId);
+ resultFromCache=(org.apache.bookkeeper.versioning.Versioned) $stack4;
+ $stack5=org.apache.bookkeeper.discover.ZKRegistrationClient.log;
+ $stack6 = $stack5.isDebugEnabled();
+ if ($stack6==0) goto label0;
+ $stack5=org.apache.bookkeeper.discover.ZKRegistrationClient.log;
+ dummyClass.lowSink("getBookieServiceInfo {} -> {}");
+$stack5.debug("getBookieServiceInfo {} -> {}",(java.lang.Object)bookieId,(java.lang.Object)resultFromCache);
+ label0:if (resultFromCache==null) goto label1;
+ $stack8 = java.util.concurrent.CompletableFuture.completedFuture((java.lang.Object)resultFromCache);
+ return  $stack8;
+ label1:$stack7=new org.apache.bookkeeper.client.BKException$BKBookieHandleNotAvailableException;
+ $stack7#org.apache.bookkeeper.client.BKException$BKBookieHandleNotAvailableException();
+ $stack8 = org.apache.bookkeeper.common.concurrent.FutureUtils.exception((java.lang.Throwable)$stack7);
+ return  $stack8;
+ } 
+

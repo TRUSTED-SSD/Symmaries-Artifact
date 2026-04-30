@@ -1,0 +1,31 @@
+void org.apache.rocketmq.client.impl.factory.MQClientInstance:doRebalance()
+{
+java.util.Iterator l1;
+  java.util.Map$Entry entry;
+  org.apache.rocketmq.client.impl.consumer.MQConsumerInner impl;
+  java.util.concurrent.ConcurrentMap $stack5;
+  java.util.Set $stack6;
+  boolean $stack8;
+  java.lang.Object $stack9;
+  java.lang.Throwable $stack12;
+  org.apache.rocketmq.logging.org.slf4j.Logger $stack13;
+  $stack5=this.consumerTable;
+ $stack6 = $stack5.entrySet();
+ l1 = $stack6.iterator();
+ label0:$stack8 = l1.hasNext();
+ if ($stack8==0) goto label1;
+ $stack9 = l1.next();
+ entry=(java.util.Map$Entry) $stack9;
+ $stack9 = entry.getValue();
+ impl=(org.apache.rocketmq.client.impl.consumer.MQConsumerInner) $stack9;
+ if (impl==null) goto label2;
+ label3:impl.doRebalance();
+ label4:goto label2;
+ label5:$stack12 = catch;
+ $stack13=org.apache.rocketmq.client.impl.factory.MQClientInstance.log;
+ $stack13.error("doRebalance exception",$stack12);
+ label2:goto label0;
+ label1:return;
+ catch java.lang.Throwable: label3 - label4 : label5;
+} 
+

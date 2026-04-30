@@ -1,0 +1,127 @@
+    private static void readPreferences()
+    {
+        java.io.FileInputStream is, $stack4;
+        java.io.IOException e1, $stack10, $stack11, $stack13;
+        java.lang.Throwable l2;
+        java.io.File $stack5;
+        java.util.Properties $stack6, $stack7;
+
+        is = null;
+/*230*/
+
+     label01:
+        $stack4 = new java.io.FileInputStream;
+/*232*/
+
+        $stack5 = staticinvoke <junit.runner.BaseTestRunner: java.io.File getPreferencesFile()>();
+/*232*/
+
+        specialinvoke $stack4.<java.io.FileInputStream: void <init>(java.io.File)>($stack5);
+/*232*/
+
+        is = $stack4;
+/*232*/
+
+        $stack6 = new java.util.Properties;
+/*233*/
+
+        $stack7 = staticinvoke <junit.runner.BaseTestRunner: java.util.Properties getPreferences()>();
+/*233*/
+
+        specialinvoke $stack6.<java.util.Properties: void <init>(java.util.Properties)>($stack7);
+/*233*/
+
+        staticinvoke <junit.runner.BaseTestRunner: void setPreferences(java.util.Properties)>($stack6);
+/*233*/
+
+        $stack6 = staticinvoke <junit.runner.BaseTestRunner: java.util.Properties getPreferences()>();
+/*234*/
+
+        virtualinvoke $stack6.<java.util.Properties: void load(java.io.InputStream)>($stack4);
+/*234*/
+
+     label02:
+        if $stack4 == null goto label03;
+/*238*/
+
+        virtualinvoke $stack4.<java.io.InputStream: void close()>();
+/*239*/
+
+     label03:
+        goto label14;
+/*242*/
+
+     label04:
+        e1 := @caughtexception;
+/*242*/
+
+        goto label14;
+/*243*/
+
+     label05:
+        $stack11 := @caughtexception;
+/*244*/
+
+        e1 = $stack11;
+/*235*/
+
+     label06:
+        if is == null goto label07;
+/*238*/
+
+        virtualinvoke is.<java.io.InputStream: void close()>();
+/*239*/
+
+     label07:
+        goto label14;
+/*242*/
+
+     label08:
+        $stack10 := @caughtexception;
+/*244*/
+
+        e1 = $stack10;
+/*241*/
+
+        goto label14;
+/*243*/
+
+     label09:
+        l2 := @caughtexception;
+/*242*/
+
+     label10:
+        if is == null goto label11;
+/*238*/
+
+        virtualinvoke is.<java.io.InputStream: void close()>();
+/*239*/
+
+     label11:
+        goto label13;
+/*242*/
+
+     label12:
+        $stack13 := @caughtexception;
+/*242*/
+
+        e1 = $stack13;
+/*241*/
+
+     label13:
+        throw l2;
+/*242*/
+
+     label14:
+        return;
+/*244*/
+
+        catch java.io.IOException from label02 to label03 with label04;
+        catch java.io.IOException from label01 to label02 with label05;
+        catch java.io.IOException from label06 to label07 with label08;
+        catch java.lang.Throwable from label01 to label02 with label09;
+        catch java.lang.Throwable from label05 to label06 with label09;
+        catch java.io.IOException from label10 to label11 with label12;
+        catch java.lang.Throwable from label09 to label10 with label09;
+    }
+

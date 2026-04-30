@@ -1,0 +1,20 @@
+void org.apache.bookkeeper.statelib.impl.rocksdb.checkpoint.CheckpointFile:finalize(org.apache.bookkeeper.statelib.api.checkpoint.CheckpointStore checkpointStore,java.lang.String dbPrefix,java.lang.String checkpointId,boolean enableChecksum,boolean enableNonChecksumCompatibility)
+{
+java.lang.String destSstTempPath;
+  java.lang.String destSstPath;
+  java.io.File $stack8;
+  boolean $stack9;
+  $stack8=this.file;
+ $stack9 = org.apache.bookkeeper.statelib.impl.rocksdb.RocksUtils.isSstFile($stack8);
+ if ($stack9!=0) goto label0;
+ return;
+ label0:destSstTempPath = this.getName();
+ destSstTempPath = org.apache.bookkeeper.statelib.impl.rocksdb.RocksUtils.getDestPath(dbPrefix,checkpointId,destSstTempPath);
+ destSstPath = this.getRemoteSstPath(dbPrefix,enableChecksum);
+ checkpointStore.rename(destSstTempPath,destSstPath);
+ if (enableChecksum==0) goto label1;
+ if (enableNonChecksumCompatibility==0) goto label1;
+ this.copyToRemoteWithoutChecksum(checkpointStore,dbPrefix,checkpointId);
+ label1:return;
+ } 
+

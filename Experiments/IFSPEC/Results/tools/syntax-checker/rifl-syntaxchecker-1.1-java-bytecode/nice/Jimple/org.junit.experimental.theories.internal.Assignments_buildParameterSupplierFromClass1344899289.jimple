@@ -1,0 +1,91 @@
+    private org.junit.experimental.theories.ParameterSupplier buildParameterSupplierFromClass(java.lang.Class) throws java.lang.Exception
+    {
+        org.junit.experimental.theories.internal.Assignments this;
+        java.lang.Class 'cls', $stack15;
+        java.lang.reflect.Constructor[] arr$;
+        int len$, i$, $stack12;
+        java.lang.reflect.Constructor constructor;
+        java.lang.Class[] parameterTypes;
+        java.lang.Object $stack9;
+        org.junit.experimental.theories.ParameterSupplier $stack10;
+        boolean $stack16;
+        java.lang.Object[] $stack17;
+        org.junit.runners.model.TestClass $stack18;
+
+        this := @this: org.junit.experimental.theories.internal.Assignments;
+
+        'cls' := @parameter0: java.lang.Class;
+
+        arr$ = virtualinvoke 'cls'.<java.lang.Class: java.lang.reflect.Constructor[] getConstructors()>();
+/*115*/
+/*113*/
+/*113*/
+
+        len$ = lengthof arr$;
+/*115*/
+
+        i$ = 0;
+/*115*/
+
+     label1:
+        if i$ >= len$ goto label3;
+/*115*/
+
+        constructor = arr$[i$];
+/*123*/
+
+        parameterTypes = virtualinvoke constructor.<java.lang.reflect.Constructor: java.lang.Class[] getParameterTypes()>();
+/*116*/
+/*116*/
+
+        $stack12 = lengthof parameterTypes;
+/*117*/
+
+        if $stack12 != 1 goto label2;
+/*117*/
+
+        $stack15 = parameterTypes[0];
+/*115*/
+
+        $stack16 = virtualinvoke $stack15.<java.lang.Object: boolean equals(java.lang.Object)>(class "Lorg/junit/runners/model/TestClass;");
+/*115*/
+
+        if $stack16 == 0 goto label2;
+/*115*/
+
+        $stack17 = newarray (java.lang.Object)[1];
+/*119*/
+
+        $stack18 = this.<org.junit.experimental.theories.internal.Assignments: org.junit.runners.model.TestClass clazz>;
+/*119*/
+
+        $stack17[0] = $stack18;
+/*119*/
+
+        $stack9 = virtualinvoke constructor.<java.lang.reflect.Constructor: java.lang.Object newInstance(java.lang.Object[])>($stack17);
+/*119*/
+
+        $stack10 = (org.junit.experimental.theories.ParameterSupplier) $stack9;
+/*119*/
+
+        return $stack10;
+/*119*/
+
+     label2:
+        i$ = i$ + 1;
+/*115*/
+
+        goto label1;
+/*115*/
+
+     label3:
+        $stack9 = virtualinvoke 'cls'.<java.lang.Class: java.lang.Object newInstance()>();
+/*123*/
+
+        $stack10 = (org.junit.experimental.theories.ParameterSupplier) $stack9;
+/*123*/
+
+        return $stack10;
+/*123*/
+    }
+

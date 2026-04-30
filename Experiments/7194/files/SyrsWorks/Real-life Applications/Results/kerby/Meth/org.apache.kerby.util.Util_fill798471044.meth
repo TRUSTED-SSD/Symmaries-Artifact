@@ -1,0 +1,36 @@
+static int[] org.apache.kerby.util.Util:fill(byte[] buf,int offset,java.io.InputStream in)
+{
+int read;
+  int lastRead;
+  int[] $stack8;
+  int $stack10;
+  int $stack11;
+  read=#buf;
+ read=(read-offset);
+ dummyClass.highSourceMut(buf);
+read = in.read(buf,offset,read);
+dummyClass.highSourceMut(read);
+ lastRead=read;
+ if (read!=-1) goto label0;
+ read=0;
+ label0:if (lastRead==-1) goto label1;
+ $stack11=(read+offset);
+ $stack10=#buf;
+ if ($stack11>=$stack10) goto label1;
+ lastRead=(offset+read);
+ $stack10=#buf;
+ $stack10=($stack10-read);
+ $stack10=($stack10-offset);
+ dummyClass.highSourceMut(buf);
+lastRead = in.read(buf,lastRead,$stack10);
+dummyClass.highSourceMut(lastRead);
+ if (lastRead==-1) goto label0;
+ read=(read+lastRead);
+ goto label0;
+ label1:$stack8=new int[2];
+ offset=(offset+read);
+ $stack8[0]=offset;
+ $stack8[1]=lastRead;
+ return  $stack8;
+ } 
+

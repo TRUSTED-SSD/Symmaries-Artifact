@@ -1,0 +1,37 @@
+boolean org.apache.rocketmq.remoting.protocol.RemotingCommand:isFieldNullable(java.lang.reflect.Field field)
+{
+java.lang.annotation.Annotation annotation;
+  java.util.Map l3;
+  java.lang.Throwable l4;
+  boolean $stack6;
+  java.lang.Object $stack8;
+  java.lang.Boolean $stack9;
+  java.util.Map $stack12;
+  l3=org.apache.rocketmq.remoting.protocol.RemotingCommand.NULLABLE_FIELD_CACHE;
+ $stack6 = l3.containsKey((java.lang.Object)field);
+ if ($stack6!=0) goto label0;
+ annotation = field.getAnnotation(org.apache.rocketmq.remoting.annotation.CFNotNull);
+ $stack12=org.apache.rocketmq.remoting.protocol.RemotingCommand.NULLABLE_FIELD_CACHE;
+ l3=$stack12;
+ monitorenter $stack12;
+ label1:$stack12=org.apache.rocketmq.remoting.protocol.RemotingCommand.NULLABLE_FIELD_CACHE;
+ if (annotation!=null) goto label2;
+ $stack6=1;
+ goto label3;
+ label2:$stack6=0;
+ label3:$stack9 = java.lang.Boolean.valueOf($stack6);
+ $stack12.put((java.lang.Object)field,(java.lang.Object)$stack9);
+ monitorexit l3;
+ label4:goto label0;
+ label5:l4 = catch;
+ monitorexit l3;
+ label6:throw l4;
+ label0:l3=org.apache.rocketmq.remoting.protocol.RemotingCommand.NULLABLE_FIELD_CACHE;
+ $stack8 = l3.get((java.lang.Object)field);
+ $stack9=(java.lang.Boolean) $stack8;
+ $stack6 = $stack9.booleanValue();
+ return  $stack6;
+ catch java.lang.Throwable: label1 - label4 : label5;
+catch java.lang.Throwable: label5 - label6 : label5;
+} 
+

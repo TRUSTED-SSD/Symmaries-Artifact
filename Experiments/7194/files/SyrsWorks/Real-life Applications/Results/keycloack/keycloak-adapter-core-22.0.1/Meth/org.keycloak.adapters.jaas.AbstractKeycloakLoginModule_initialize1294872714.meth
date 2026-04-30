@@ -1,0 +1,43 @@
+void org.keycloak.adapters.jaas.AbstractKeycloakLoginModule:initialize(javax.security.auth.Subject subject,javax.security.auth.callback.CallbackHandler callbackHandler,java.util.Map sharedState,java.util.Map options)
+{
+java.lang.String configFile;
+  java.lang.Object $stack6;
+  java.lang.String $stack8;
+  org.jboss.logging.Logger $stack9;
+  java.lang.StringBuilder $stack10;
+  java.util.concurrent.ConcurrentMap $stack19;
+  org.keycloak.adapters.KeycloakDeployment $stack21;
+  this.subject=subject;
+ this.callbackHandler=callbackHandler;
+ $stack6 = options.get((java.lang.Object)"keycloak-config-file");
+ configFile=(java.lang.String) $stack6;
+ $stack6 = options.get((java.lang.Object)"role-principal-class");
+ $stack8=(java.lang.String) $stack6;
+ this.rolePrincipalClass=$stack8;
+ $stack9 = this.getLogger();
+ $stack10=new java.lang.StringBuilder;
+ $stack10#java.lang.StringBuilder();
+ $stack10 = $stack10.append("Declared options: keycloak-config-file=");
+ $stack10 = $stack10.append(configFile);
+ $stack10 = $stack10.append(", ");
+ $stack10 = $stack10.append("role-principal-class");
+ $stack10 = $stack10.append("=");
+ $stack8=this.rolePrincipalClass;
+ $stack10 = $stack10.append($stack8);
+ $stack8 = $stack10.toString();
+ $stack9.debug((java.lang.Object)$stack8);
+ if (configFile==null) goto label0;
+ $stack19=org.keycloak.adapters.jaas.AbstractKeycloakLoginModule.deployments;
+ $stack6 = $stack19.get((java.lang.Object)configFile);
+ $stack21=(org.keycloak.adapters.KeycloakDeployment) $stack6;
+ this.deployment=$stack21;
+ $stack21=this.deployment;
+ if ($stack21!=null) goto label0;
+ $stack21 = this.resolveDeployment(configFile);
+ this.deployment=$stack21;
+ $stack19=org.keycloak.adapters.jaas.AbstractKeycloakLoginModule.deployments;
+ $stack21=this.deployment;
+ $stack19.putIfAbsent((java.lang.Object)configFile,(java.lang.Object)$stack21);
+ label0:return;
+ } 
+

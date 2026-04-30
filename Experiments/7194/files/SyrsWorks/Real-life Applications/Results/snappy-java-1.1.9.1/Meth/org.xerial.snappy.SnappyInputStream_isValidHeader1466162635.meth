@@ -1,0 +1,33 @@
+static boolean org.xerial.snappy.SnappyInputStream:isValidHeader(byte[] l0)
+{
+org.xerial.snappy.SnappyCodec l1;
+  java.io.ByteArrayInputStream $stack2;
+  boolean $stack4;
+  int $stack5;
+  org.xerial.snappy.SnappyIOException $stack6;
+  java.lang.Object[] $stack7;
+  org.xerial.snappy.SnappyErrorCode $stack9;
+  java.lang.Integer $stack12;
+  java.lang.String $stack15;
+  $stack2=new java.io.ByteArrayInputStream;
+ $stack2#java.io.ByteArrayInputStream(l0);
+ l1 = org.xerial.snappy.SnappyCodec.readHeader((java.io.InputStream)$stack2);
+ $stack4 = l1.isValidMagicHeader();
+ if ($stack4==0) goto label0;
+ $stack5=l1.version;
+ if ($stack5>=1) goto label1;
+ $stack6=new org.xerial.snappy.SnappyIOException;
+ $stack9=org.xerial.snappy.SnappyErrorCode.INCOMPATIBLE_VERSION;
+ $stack7=new java.lang.Object[2];
+ $stack5=l1.version;
+ $stack12 = java.lang.Integer.valueOf($stack5);
+ $stack7[0]=$stack12;
+ $stack12 = java.lang.Integer.valueOf(1);
+ $stack7[1]=$stack12;
+ $stack15 = java.lang.String.format("Compressed with an incompatible codec version %d. At least version %d is required",$stack7);
+ $stack6#org.xerial.snappy.SnappyIOException($stack9,$stack15);
+ throw $stack6;
+ label1:return  1;
+ label0:return  0;
+ } 
+

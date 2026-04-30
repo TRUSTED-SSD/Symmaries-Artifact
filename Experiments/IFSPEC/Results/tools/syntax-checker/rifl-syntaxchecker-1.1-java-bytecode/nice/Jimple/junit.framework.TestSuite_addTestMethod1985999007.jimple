@@ -1,0 +1,99 @@
+    private void addTestMethod(java.lang.reflect.Method, java.util.List, java.lang.Class)
+    {
+        junit.framework.TestSuite this;
+        java.lang.reflect.Method m;
+        java.util.List names;
+        java.lang.Class theClass;
+        java.lang.String name;
+        boolean $stack6;
+        junit.framework.Test $stack9;
+        java.lang.StringBuilder $stack11;
+
+        this := @this: junit.framework.TestSuite;
+
+        m := @parameter0: java.lang.reflect.Method;
+
+        names := @parameter1: java.util.List;
+
+        theClass := @parameter2: java.lang.Class;
+
+        name = virtualinvoke m.<java.lang.reflect.Method: java.lang.String getName()>();
+/*296*/
+/*296*/
+
+        $stack6 = interfaceinvoke names.<java.util.List: boolean contains(java.lang.Object)>(name);
+/*297*/
+
+        if $stack6 == 0 goto label1;
+/*297*/
+
+        return;
+/*298*/
+
+     label1:
+        $stack6 = specialinvoke this.<junit.framework.TestSuite: boolean isPublicTestMethod(java.lang.reflect.Method)>(m);
+/*300*/
+
+        if $stack6 != 0 goto label3;
+/*300*/
+
+        $stack6 = specialinvoke this.<junit.framework.TestSuite: boolean isTestMethod(java.lang.reflect.Method)>(m);
+/*301*/
+
+        if $stack6 == 0 goto label2;
+/*301*/
+
+        $stack11 = new java.lang.StringBuilder;
+/*302*/
+
+        specialinvoke $stack11.<java.lang.StringBuilder: void <init>()>();
+/*302*/
+
+        $stack11 = virtualinvoke $stack11.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>("Test method isn\'t public: ");
+/*302*/
+
+        name = virtualinvoke m.<java.lang.reflect.Method: java.lang.String getName()>();
+/*302*/
+
+        $stack11 = virtualinvoke $stack11.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>(name);
+/*302*/
+
+        $stack11 = virtualinvoke $stack11.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>("(");
+/*302*/
+
+        name = virtualinvoke theClass.<java.lang.Class: java.lang.String getCanonicalName()>();
+/*302*/
+
+        $stack11 = virtualinvoke $stack11.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>(name);
+/*302*/
+
+        $stack11 = virtualinvoke $stack11.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>(")");
+/*302*/
+
+        name = virtualinvoke $stack11.<java.lang.StringBuilder: java.lang.String toString()>();
+/*302*/
+
+        $stack9 = staticinvoke <junit.framework.TestSuite: junit.framework.Test warning(java.lang.String)>(name);
+/*302*/
+
+        virtualinvoke this.<junit.framework.TestSuite: void addTest(junit.framework.Test)>($stack9);
+/*302*/
+
+     label2:
+        return;
+/*304*/
+
+     label3:
+        interfaceinvoke names.<java.util.List: boolean add(java.lang.Object)>(name);
+/*306*/
+
+        $stack9 = staticinvoke <junit.framework.TestSuite: junit.framework.Test createTest(java.lang.Class,java.lang.String)>(theClass, name);
+/*307*/
+
+        virtualinvoke this.<junit.framework.TestSuite: void addTest(junit.framework.Test)>($stack9);
+/*307*/
+
+        return;
+/*308*/
+    }
+

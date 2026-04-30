@@ -1,0 +1,48 @@
+org.apache.bookkeeper.discover.ZKRegistrationClient(org.apache.zookeeper.ZooKeeper zk,java.lang.String @ledgersRootPath,java.util.concurrent.ScheduledExecutorService scheduler,boolean bookieAddressTracking)
+{
+java.util.concurrent.ConcurrentHashMap $stack5;
+  java.lang.StringBuilder $stack6;
+  java.lang.String $stack10;
+  org.apache.bookkeeper.discover.ZKRegistrationClient$BookieServiceInfoCacheInvalidationWatcher $stack22;
+  java.lang.String ledgersRootPath;
+ledgersRootPath=@ledgersRootPath;
+this#java.lang.Object();
+ this.watchWritableBookiesTask=null;
+ this.watchReadOnlyBookiesTask=null;
+ $stack5=new java.util.concurrent.ConcurrentHashMap;
+ $stack5#java.util.concurrent.ConcurrentHashMap();
+ this.bookieServiceInfoCache=$stack5;
+ this.zk=zk;
+ this.scheduler=scheduler;
+ this.bookieAddressTracking=bookieAddressTracking;
+ if (bookieAddressTracking==0) goto label0;
+ $stack22=new org.apache.bookkeeper.discover.ZKRegistrationClient$BookieServiceInfoCacheInvalidationWatcher;
+ $stack22#org.apache.bookkeeper.discover.ZKRegistrationClient$BookieServiceInfoCacheInvalidationWatcher(this,null);
+ goto label1;
+ label0:$stack22=null;
+ label1:this.bookieServiceInfoCacheInvalidation=$stack22;
+ $stack6=new java.lang.StringBuilder;
+ $stack6#java.lang.StringBuilder();
+ $stack6 = $stack6.append(ledgersRootPath);
+ $stack6 = $stack6.append("/");
+ $stack6 = $stack6.append("available");
+ $stack10 = $stack6.toString();
+ this.bookieRegistrationPath=$stack10;
+ $stack6=new java.lang.StringBuilder;
+ $stack6#java.lang.StringBuilder();
+ $stack6 = $stack6.append(ledgersRootPath);
+ $stack6 = $stack6.append("/");
+ $stack6 = $stack6.append("cookies");
+ ledgersRootPath = $stack6.toString();
+ this.bookieAllRegistrationPath=ledgersRootPath;
+ $stack6=new java.lang.StringBuilder;
+ $stack6#java.lang.StringBuilder();
+ ledgersRootPath=this.bookieRegistrationPath;
+ $stack6 = $stack6.append(ledgersRootPath);
+ $stack6 = $stack6.append("/");
+ $stack6 = $stack6.append("readonly");
+ ledgersRootPath = $stack6.toString();
+ this.bookieReadonlyRegistrationPath=ledgersRootPath;
+ return;
+ } 
+

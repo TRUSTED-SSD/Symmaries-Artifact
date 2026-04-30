@@ -1,0 +1,11 @@
+org.apache.rocketmq.remoting.protocol.body.RegisterBrokerBody org.apache.rocketmq.namesrv.processor.DefaultRequestProcessor:extractRegisterBrokerBodyFromRequest (
+  org.apache.rocketmq.remoting.protocol.RemotingCommand request,
+  org.apache.rocketmq.remoting.protocol.header.namesrv.RegisterBrokerRequestHeader
+    requestHeader) {
+  guard = tt;
+  ret(level()) = level(request) ⊔ level(requestHeader) ⊔ obj_level(request) ⊔ obj_level(requestHeader);
+  ret(obj_level()) = level(request) ⊔ level(requestHeader) ⊔ obj_level(request) ⊔ obj_level(requestHeader);
+  ret(obj_level(request)) = obj_level(request);
+  ret(obj_level(requestHeader)) = obj_level(requestHeader);
+  ret(obj_level(this)) = obj_level(this);
+}

@@ -1,0 +1,48 @@
+digraph G {
+  node [shape=box, ];
+  "pc0_js1" [label="〈this.flush (), js1〉\n\
+tt", ];
+  "pc1_js1" [label="〈this#java.io.ObjectOutputStream.clear (), js1〉\n\
+tt",
+             ];
+  "pc2_js1" [label="〈$r1 = this.bout, js1〉", ];
+  "pc3_js1" [label="〈$r1.close (), js1〉\n\
+pc ⊔ level($r1) ⊔ obj_level($r1) = ⊥",
+             ];
+  "pc4_js1" [label="〈return, js1〉", ];
+  "pc5_js1" [label="〈sink, js1〉\n\
+obj_level(this) ⊑ ret(obj_level(this))' ∧ (ret(this.><this)' ∨ ¬this.><this)",
+             ];
+  
+  
+  "pc0_js1" -> "pc1_js1" [label="tt,\n\
+{$r1.><$r1 := ff,\n\
+ this.><$r1 := ff,\n\
+ obj_level($r1) := ⊥,\n\
+ obj_level(this) := pc ⊔ level(this) ⊔ obj_level(this)}",
+                          ];
+  "pc1_js1" -> "pc2_js1" [label="tt,\n\
+{$r1.><$r1 := ff,\n\
+ this.><$r1 := ff,\n\
+ this.><this := tt,\n\
+ obj_level($r1) := ⊥,\n\
+ obj_level(this) := pc ⊔ level(this) ⊔ obj_level(this)}",
+                          ];
+  "pc2_js1" -> "pc3_js1" [label="tt,\n\
+{$r1.><$r1 := ff,\n\
+ $r1.><this := tt,\n\
+ this.><$r1 := tt,\n\
+ level($r1) := pc ⊔ level(this) ⊔ obj_level(this),\n\
+ obj_level($r1) := obj_level(this)}",
+                          ];
+  "pc3_js1" -> "pc4_js1" [label="tt,\n\
+{$r1.><$r1 := tt,\n\
+ $r1.><this := tt,\n\
+ this.><this := tt,\n\
+ obj_level($r1) := ⊤,\n\
+ obj_level(this) := ⊤}",
+                          ];
+  "pc4_js1" -> "pc5_js1" [label="tt,\n\
+{ϕ := S4}", ];
+  
+  }

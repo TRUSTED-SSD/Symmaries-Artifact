@@ -1,0 +1,24 @@
+void org.apache.rocketmq.broker.BrokerController:shutdown()
+{
+java.util.Iterator l1;
+  java.util.concurrent.ScheduledFuture scheduledFuture;
+  java.util.List $stack3;
+  boolean $stack5;
+  org.apache.rocketmq.broker.out.BrokerOuterAPI $stack6;
+  java.lang.Object $stack8;
+  this.shutdownBasicService();
+ $stack3=this.scheduledFutures;
+ l1 = $stack3.iterator();
+ label0:$stack5 = l1.hasNext();
+ if ($stack5==0) goto label1;
+ $stack8 = l1.next();
+ scheduledFuture=(java.util.concurrent.ScheduledFuture) $stack8;
+ scheduledFuture.cancel((boolean)1);
+ goto label0;
+ label1:$stack6=this.brokerOuterAPI;
+ if ($stack6==null) goto label2;
+ $stack6=this.brokerOuterAPI;
+ $stack6.shutdown();
+ label2:return;
+ } 
+

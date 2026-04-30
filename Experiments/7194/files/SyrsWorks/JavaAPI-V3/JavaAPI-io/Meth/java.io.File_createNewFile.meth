@@ -1,0 +1,24 @@
+boolean java.io.File:createNewFile()
+{
+java.lang.SecurityManager r1;
+  boolean $z0;
+  java.lang.String $r2;
+  java.io.FileSystem $r3;
+  boolean $z1;
+  java.io.IOException $r4;
+  java.lang.String $r5;
+  r1 = java.lang.System.getSecurityManager();
+ if (r1==null) goto label0;
+ $r5=this.path;
+ r1.checkWrite($r5);
+ label0:$z0 = this.isInvalid();
+ if ($z0==0) goto label1;
+ $r4=new java.io.IOException;
+ $r4#java.io.IOException:init("Invalid file path");
+ throw $r4;
+ label1:$r3=java.io.File.fs;
+ $r2=this.path;
+ $z1 = $r3.createFileExclusively($r2);
+ return  $z1;
+ }  
+

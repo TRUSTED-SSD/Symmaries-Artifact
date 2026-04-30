@@ -1,0 +1,19 @@
+void org.apache.bookkeeper.util.AvailabilityOfEntriesOfLedger:addEntryToAvailabileEntriesOfLedger(long entryId)
+{
+boolean $stack3;
+  $stack3 = this#org.apache.bookkeeper.util.AvailabilityOfEntriesOfLedger:isCurSequenceInitialized();
+ if ($stack3!=0) goto label0;
+ this#org.apache.bookkeeper.util.AvailabilityOfEntriesOfLedger:initializeCurSequence(entryId);
+ goto label1;
+ label0:$stack3 = this#org.apache.bookkeeper.util.AvailabilityOfEntriesOfLedger:isEntryExistingInCurSequence(entryId);
+ if ($stack3==0) goto label2;
+ goto label1;
+ label2:$stack3 = this#org.apache.bookkeeper.util.AvailabilityOfEntriesOfLedger:isEntryAppendableToCurSequence(entryId);
+ if ($stack3==0) goto label3;
+ this#org.apache.bookkeeper.util.AvailabilityOfEntriesOfLedger:incrementCurSequenceSize();
+ goto label1;
+ label3:this#org.apache.bookkeeper.util.AvailabilityOfEntriesOfLedger:addCurSequenceToSequenceGroup();
+ this#org.apache.bookkeeper.util.AvailabilityOfEntriesOfLedger:initializeCurSequence(entryId);
+ label1:return;
+ } 
+

@@ -1,0 +1,34 @@
+void org.apache.rocketmq.broker.slave.SlaveSynchronize:syncTimerCheckPoint()
+{
+java.lang.String masterAddrBak;
+  org.apache.rocketmq.store.timer.TimerCheckpoint checkpoint$$;
+  org.apache.rocketmq.broker.BrokerController $stack3;
+  org.apache.rocketmq.broker.out.BrokerOuterAPI $stack4;
+  org.apache.rocketmq.store.timer.TimerCheckpoint $stack8;
+  long $stack11;
+  java.lang.Exception $stack15;
+  org.apache.rocketmq.logging.org.slf4j.Logger $stack16;
+  masterAddrBak=this.masterAddr;
+ if (masterAddrBak==null) goto label0;
+ label1:$stack3=this.brokerController;
+ $stack4 = $stack3.getBrokerOuterAPI();
+ checkpoint$$ = $stack4.getTimerCheckPoint(masterAddrBak);
+ $stack3=this.brokerController;
+ $stack8 = $stack3.getTimerCheckpoint();
+ if (null==$stack8) goto label2;
+ $stack3=this.brokerController;
+ $stack8 = $stack3.getTimerCheckpoint();
+ $stack11 = checkpoint$$.getLastReadTimeMs();
+ $stack8.setLastReadTimeMs($stack11);
+ $stack3=this.brokerController;
+ $stack8 = $stack3.getTimerCheckpoint();
+ $stack11 = checkpoint$$.getMasterTimerQueueOffset();
+ $stack8.setMasterTimerQueueOffset($stack11);
+ label2:goto label0;
+ label3:$stack15 = catch;
+ $stack16=org.apache.rocketmq.broker.slave.SlaveSynchronize.LOGGER;
+ $stack16.error("SyncSubscriptionGroup Exception, {}",(java.lang.Object)masterAddrBak,(java.lang.Object)$stack15);
+ label0:return;
+ catch java.lang.Exception: label1 - label2 : label3;
+} 
+

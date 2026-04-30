@@ -1,0 +1,36 @@
+com.google.zxing.common.DecoderResult com.google.zxing.aztec.decoder.Decoder:decode(com.google.zxing.aztec.AztecDetectorResult detectorResult)
+{
+com.google.zxing.common.BitMatrix matrix;
+  boolean[] rawbits;
+  com.google.zxing.aztec.decoder.Decoder$CorrectedBitsResult correctedBits;
+  byte[] rawBytes;
+  java.lang.String result;
+  com.google.zxing.common.DecoderResult decoderResult;
+  java.lang.Object[] $stack16;
+  int $stack20;
+  java.lang.Integer $stack21;
+  java.lang.String $stack22;
+  this.ddata=detectorResult;
+ matrix = detectorResult.getBits();
+ rawbits = this#com.google.zxing.aztec.decoder.Decoder:extractBits(matrix);
+ correctedBits = this#com.google.zxing.aztec.decoder.Decoder:correctBits(rawbits);
+ rawbits = com.google.zxing.aztec.decoder.Decoder$CorrectedBitsResult.access$000(correctedBits);
+ rawBytes = com.google.zxing.aztec.decoder.Decoder.convertBoolArrayToByteArray(rawbits);
+ rawbits = com.google.zxing.aztec.decoder.Decoder$CorrectedBitsResult.access$000(correctedBits);
+ result = com.google.zxing.aztec.decoder.Decoder.getEncodedData(rawbits);
+ decoderResult=new com.google.zxing.common.DecoderResult;
+ $stack16=new java.lang.Object[1];
+ $stack20 = com.google.zxing.aztec.decoder.Decoder$CorrectedBitsResult.access$100(correctedBits);
+ $stack21 = java.lang.Integer.valueOf($stack20);
+ $stack16[0]=$stack21;
+ $stack22 = java.lang.String.format("%d%%",$stack16);
+ decoderResult#com.google.zxing.common.DecoderResult(rawBytes,result,null,$stack22);
+ rawbits = com.google.zxing.aztec.decoder.Decoder$CorrectedBitsResult.access$000(correctedBits);
+ $stack20=#rawbits;
+ decoderResult.setNumBits($stack20);
+ $stack20 = com.google.zxing.aztec.decoder.Decoder$CorrectedBitsResult.access$200(correctedBits);
+ $stack21 = java.lang.Integer.valueOf($stack20);
+ decoderResult.setErrorsCorrected($stack21);
+ return  decoderResult;
+ } 
+

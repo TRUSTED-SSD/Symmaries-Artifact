@@ -1,0 +1,19 @@
+boolean org.apache.bookkeeper.bookie.Cookie:verifyLedgerDirs(org.apache.bookkeeper.bookie.Cookie c,boolean checkIfSuperSet)
+{
+java.lang.String $stack3;
+  java.lang.String[] $stack4;
+  java.lang.String[] $stack6;
+  java.lang.String $stack9;
+  if (checkIfSuperSet!=0) goto label0;
+ $stack9=this.ledgerDirs;
+ $stack3=c.ledgerDirs;
+ checkIfSuperSet = $stack9.equals((java.lang.Object)$stack3);
+ return  checkIfSuperSet;
+ label0:$stack3=this.ledgerDirs;
+ $stack4 = org.apache.bookkeeper.bookie.Cookie.decodeDirPathFromCookie($stack3);
+ $stack3=c.ledgerDirs;
+ $stack6 = org.apache.bookkeeper.bookie.Cookie.decodeDirPathFromCookie($stack3);
+ checkIfSuperSet = this#org.apache.bookkeeper.bookie.Cookie:isSuperSet($stack4,$stack6);
+ return  checkIfSuperSet;
+ } 
+

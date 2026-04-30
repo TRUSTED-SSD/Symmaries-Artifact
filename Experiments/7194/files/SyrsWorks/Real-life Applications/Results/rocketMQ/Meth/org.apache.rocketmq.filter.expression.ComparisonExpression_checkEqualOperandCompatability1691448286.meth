@@ -1,0 +1,28 @@
+static void org.apache.rocketmq.filter.expression.ComparisonExpression:checkEqualOperandCompatability(org.apache.rocketmq.filter.expression.Expression left,org.apache.rocketmq.filter.expression.Expression right)
+{
+boolean $stack2;
+  java.lang.RuntimeException $stack6;
+  java.lang.StringBuilder $stack7;
+  java.lang.String $stack13;
+  $stack2=left instanceof org.apache.rocketmq.filter.expression.ConstantExpression;
+ if ($stack2==0) goto label0;
+ $stack2=right instanceof org.apache.rocketmq.filter.expression.ConstantExpression;
+ if ($stack2==0) goto label0;
+ $stack2=left instanceof org.apache.rocketmq.filter.expression.BooleanExpression;
+ if ($stack2==0) goto label0;
+ $stack2=right instanceof org.apache.rocketmq.filter.expression.BooleanExpression;
+ if ($stack2!=0) goto label0;
+ $stack6=new java.lang.RuntimeException;
+ $stack7=new java.lang.StringBuilder;
+ $stack7#java.lang.StringBuilder();
+ $stack7 = $stack7.append("\'");
+ $stack7 = $stack7.append((java.lang.Object)left);
+ $stack7 = $stack7.append("\' cannot be compared with \'");
+ $stack7 = $stack7.append((java.lang.Object)right);
+ $stack7 = $stack7.append("\'");
+ $stack13 = $stack7.toString();
+ $stack6#java.lang.RuntimeException($stack13);
+ throw $stack6;
+ label0:return;
+ } 
+

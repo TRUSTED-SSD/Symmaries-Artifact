@@ -1,0 +1,51 @@
+static void org.apache.bookkeeper.statelib.impl.rocksdb.checkpoint.RocksCheckpointer:cleanupLocalCheckpoints(java.io.File @dbPath,java.lang.String checkpointToExclude)
+{
+java.lang.String[] l4;
+  int l5;
+  int l6;
+  java.lang.String checkpoint$$;
+  java.io.File $stack9;
+  boolean $stack11;
+  java.lang.String $stack12;
+  java.lang.String[] $stack13;
+  java.nio.file.Path $stack14;
+  com.google.common.io.RecursiveDeleteOption[] $stack15;
+  com.google.common.io.RecursiveDeleteOption $stack16;
+  java.io.IOException $stack19;
+  java.lang.Object[] $stack20;
+  org.slf4j.Logger $stack21;
+  java.io.File dbPath;
+dbPath=@dbPath;
+$stack9=new java.io.File;
+ $stack9#java.io.File(dbPath,"checkpoints");
+ dbPath=$stack9;
+ l4 = $stack9.list();
+ l5=#l4;
+ l6=0;
+ label0:if (l6>=l5) goto label1;
+ checkpoint$$=l4[l6];
+ $stack11 = checkpoint$$.equals((java.lang.Object)checkpointToExclude);
+ if ($stack11==0) goto label2;
+ goto label3;
+ label2:$stack12 = $stack9.getAbsolutePath();
+ $stack13=new java.lang.String[1];
+ $stack13[0]=checkpoint$$;
+ $stack14 = java.nio.file.Paths.get($stack12,$stack13);
+ $stack15=new com.google.common.io.RecursiveDeleteOption[1];
+ $stack16=com.google.common.io.RecursiveDeleteOption.ALLOW_INSECURE;
+ $stack15[0]=$stack16;
+ com.google.common.io.MoreFiles.deleteRecursively($stack14,$stack15);
+ label4:goto label3;
+ label5:$stack19 = catch;
+ $stack21=org.apache.bookkeeper.statelib.impl.rocksdb.checkpoint.RocksCheckpointer.log;
+ $stack20=new java.lang.Object[3];
+ $stack20[0]=checkpoint$$;
+ $stack20[1]=$stack9;
+ $stack20[2]=$stack19;
+ $stack21.warn("Failed to remove unused checkpoint {} from {}",$stack20);
+ label3:l6=(l6+1);
+ goto label0;
+ label1:return;
+ catch java.io.IOException: label2 - label4 : label5;
+} 
+

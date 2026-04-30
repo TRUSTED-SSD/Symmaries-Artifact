@@ -1,0 +1,33 @@
+void org.apache.bookkeeper.bookie.DefaultEntryLogger$EntryLoggerCompactionEntryLog:markCompacted()
+{
+java.io.File $stack1;
+  boolean $stack2;
+  java.io.IOException $stack3;
+  java.lang.StringBuilder $stack4;
+  java.lang.String $stack8;
+  org.apache.bookkeeper.bookie.DefaultEntryLogger $stack11;
+  java.io.File $stack13;
+  $stack1=this.compactingLogFile;
+ $stack2 = $stack1.exists();
+ if ($stack2==0) goto label0;
+ $stack1=this.compactedLogFile;
+ $stack2 = $stack1.exists();
+ if ($stack2!=0) goto label1;
+ $stack13=this.compactingLogFile;
+ $stack1=this.compactedLogFile;
+ org.apache.bookkeeper.util.HardLink.createHardLink($stack13,$stack1);
+ goto label1;
+ label0:$stack3=new java.io.IOException;
+ $stack4=new java.lang.StringBuilder;
+ $stack4#java.lang.StringBuilder();
+ $stack4 = $stack4.append("Compaction log doesn\'t exist any more after flush: ");
+ $stack1=this.compactingLogFile;
+ $stack4 = $stack4.append((java.lang.Object)$stack1);
+ $stack8 = $stack4.toString();
+ $stack3#java.io.IOException($stack8);
+ throw $stack3;
+ label1:$stack11=this.this$0;
+ org.apache.bookkeeper.bookie.DefaultEntryLogger.access$200($stack11);
+ return;
+ } 
+

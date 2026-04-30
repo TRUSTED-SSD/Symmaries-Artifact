@@ -1,0 +1,39 @@
+void org.apache.bookkeeper.sasl.SASLClientAuthProvider:process(org.apache.bookkeeper.auth.AuthToken @m,org.apache.bookkeeper.auth.AuthCallbacks$GenericCallback @cb)
+{
+byte[] responseToken;
+  org.apache.bookkeeper.sasl.SaslClientState $stack5;
+  boolean $stack6;
+  javax.security.sasl.SaslException $stack19;
+  org.slf4j.Logger $stack20;
+  org.apache.bookkeeper.auth.AuthCallbacks$GenericCallback cb;
+org.apache.bookkeeper.auth.AuthToken m;
+m=@m;
+cb=@cb;
+$stack5=this.client;
+ $stack6 = $stack5.isComplete();
+ if ($stack6==0) goto label0;
+ cb=this.completeCb;
+ cb.operationComplete(0,null);
+ return;
+ label0:responseToken = m.getData();
+ $stack5=this.client;
+ responseToken = $stack5.evaluateChallenge(responseToken);
+ if (responseToken!=null) goto label1;
+ responseToken=new byte[0];
+ label1:m = org.apache.bookkeeper.auth.AuthToken.wrap(responseToken);
+ cb.operationComplete(0,(java.lang.Object)m);
+ $stack5=this.client;
+ $stack6 = $stack5.isComplete();
+ if ($stack6==0) goto label2;
+ cb=this.completeCb;
+ cb.operationComplete(0,null);
+ label2:goto label3;
+ label4:$stack19 = catch;
+ $stack20=org.apache.bookkeeper.sasl.SASLClientAuthProvider.LOG;
+ $stack20.error("Error on SASL client",(java.lang.Throwable)$stack19);
+ cb=this.completeCb;
+ cb.operationComplete(-102,null);
+ label3:return;
+ catch javax.security.sasl.SaslException: label0 - label2 : label4;
+} 
+

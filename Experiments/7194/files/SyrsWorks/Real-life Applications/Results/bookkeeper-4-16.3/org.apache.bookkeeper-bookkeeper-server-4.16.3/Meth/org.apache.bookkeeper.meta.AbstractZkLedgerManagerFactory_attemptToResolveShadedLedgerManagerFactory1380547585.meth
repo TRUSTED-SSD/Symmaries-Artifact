@@ -1,0 +1,46 @@
+static java.lang.Class org.apache.bookkeeper.meta.AbstractZkLedgerManagerFactory:attemptToResolveShadedLedgerManagerFactory(org.apache.bookkeeper.conf.AbstractConfiguration conf,java.lang.String @lmfClassName,java.lang.Throwable cause)
+{
+java.lang.String shadedPrefix;
+  boolean $stack5;
+  java.io.IOException $stack6;
+  java.lang.StringBuilder $stack7;
+  java.lang.Object[] $stack12;
+  org.slf4j.Logger $stack13;
+  java.lang.Class $stack14;
+  java.lang.ClassNotFoundException $stack15;
+  java.lang.String lmfClassName;
+lmfClassName=@lmfClassName;
+$stack5 = conf.isShadedLedgerManagerFactoryClassAllowed();
+ if ($stack5==0) goto label0;
+ shadedPrefix = conf.getShadedLedgerManagerFactoryClassPrefix();
+ $stack13=org.apache.bookkeeper.meta.AbstractZkLedgerManagerFactory.log;
+ $stack12=new java.lang.Object[3];
+ $stack12[0]=lmfClassName;
+ $stack12[1]=shadedPrefix;
+ $stack12[2]=lmfClassName;
+ $stack13.warn("Failed to instantiate ledger manager factory {}, trying its shaded class {}{}",$stack12);
+ label1:$stack14 = org.apache.bookkeeper.meta.AbstractZkLedgerManagerFactory.resolveShadedLedgerManagerFactory(lmfClassName,shadedPrefix);
+ label2:return  $stack14;
+ label3:$stack15 = catch;
+ $stack6=new java.io.IOException;
+ $stack7=new java.lang.StringBuilder;
+ $stack7#java.lang.StringBuilder();
+ $stack7 = $stack7.append("Failed to instantiate ledger manager factory ");
+ $stack7 = $stack7.append(lmfClassName);
+ $stack7 = $stack7.append(" and its shaded class ");
+ $stack7 = $stack7.append(shadedPrefix);
+ $stack7 = $stack7.append(lmfClassName);
+ lmfClassName = $stack7.toString();
+ $stack6#java.io.IOException(lmfClassName,(java.lang.Throwable)$stack15);
+ throw $stack6;
+ label0:$stack6=new java.io.IOException;
+ $stack7=new java.lang.StringBuilder;
+ $stack7#java.lang.StringBuilder();
+ $stack7 = $stack7.append("Failed to instantiate ledger manager factory ");
+ $stack7 = $stack7.append(lmfClassName);
+ lmfClassName = $stack7.toString();
+ $stack6#java.io.IOException(lmfClassName,cause);
+ throw $stack6;
+ catch java.lang.ClassNotFoundException: label1 - label2 : label3;
+} 
+

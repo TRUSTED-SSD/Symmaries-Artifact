@@ -1,0 +1,31 @@
+boolean org.apache.rocketmq.store.MultiPathMappedFileQueue:load()
+{
+java.util.Set storePathSet;
+  java.util.ArrayList files;
+  java.util.Iterator l3;
+  java.lang.String path;
+  java.io.File[] ls;
+  java.util.Set $stack8;
+  boolean $stack9;
+  java.lang.Object $stack14;
+  java.io.File $stack15;
+  storePathSet = this#org.apache.rocketmq.store.MultiPathMappedFileQueue:getPaths();
+ $stack8 = this#org.apache.rocketmq.store.MultiPathMappedFileQueue:getReadonlyPaths();
+ storePathSet.addAll((java.util.Collection)$stack8);
+ files=new java.util.ArrayList;
+ files#java.util.ArrayList();
+ l3 = storePathSet.iterator();
+ label0:$stack9 = l3.hasNext();
+ if ($stack9==0) goto label1;
+ $stack14 = l3.next();
+ path=(java.lang.String) $stack14;
+ $stack15=new java.io.File;
+ $stack15#java.io.File(path);
+ ls = $stack15.listFiles();
+ if (ls==null) goto label2;
+ java.util.Collections.addAll((java.util.Collection)files,(java.lang.Object[])ls);
+ label2:goto label0;
+ label1:$stack9 = this.doLoad((java.util.List)files);
+ return  $stack9;
+ } 
+

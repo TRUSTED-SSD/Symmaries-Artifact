@@ -1,0 +1,80 @@
+digraph G {
+  node [shape=box, ];
+  "pc0_js1" [label="〈$r5 = java.lang.Long.toString (l0, 10), js1〉\n\
+tt", ];
+  "pc1_js1" [label="〈r4 = $r5.toCharArray (), js1〉\n\
+tt", ];
+  "pc2_js1" [label="〈$r6 = this#java.util.Formatter$FormatSpecifier.localizedMagnitude (r1, r4, r2, i1, r3), js1〉\n\
+pc ⊑ ⊥ ∧ level(i1) ⊔ level(r1) ⊔ level(r2) ⊔ level(r3) ⊔ level(r4) ⊔ level(this) ⊔ obj_level(r1) ⊔ obj_level(r2) ⊔ obj_level(r3) ⊔ obj_level(r4) ⊔ obj_level(this) ⊑ ⊥",
+             ];
+  "pc3_js1" [label="〈return $r6, js1〉", ];
+  "pc4_js1" [label="〈sink, js1〉\n\
+obj_level(r1) ⊑ ret(obj_level(r1))' ∧ obj_level(r2) ⊑ ret(obj_level(r2))' ∧ obj_level(r3) ⊑ ret(obj_level(r3))' ∧ obj_level(this) ⊑ ret(obj_level(this))' ∧ (ret(r1.><r1)' ∨ ¬r1.><r1) ∧ (ret(r1.><r3)' ∨ ¬r1.><r3) ∧ (ret(r1.><this)' ∨ ¬r1.><this) ∧ (ret(r3.><r1)' ∨ ¬r3.><r1) ∧ (ret(r3.><r2)' ∨ ¬r3.><r2) ∧ (ret(r3.><r3)' ∨ ¬r3.><r3) ∧ (ret(r3.><this)' ∨ ¬r3.><this) ∧ (ret(this.><r1)' ∨ ¬this.><r1) ∧ (ret(this.><r2)' ∨ ¬this.><r2) ∧ (ret(this.><r3)' ∨ ¬this.><r3) ∧ (ret(this.><this)' ∨ ¬this.><this) ∧ (ϕ ≠ S3 ∨ obj_level($r6) ⊑ ret(obj_level())' ∧ pc ⊔ level($r6) ⊑ ret(level())' ∧ (ret(~r1)' ∨ ¬$r6~r1) ∧ (ret(.><r1)' ∨ ¬r1.><$r6) ∧ (ret(.><r3)' ∨ ¬r3.><$r6) ∧ (ret(.><this)' ∨ ¬this.><$r6) ∧ (ret(r1.><)' ∨ ¬$r6.><r1) ∧ (ret(r3.><)' ∨ ¬$r6.><r3) ∧ (ret(this.><)' ∨ ¬$r6.><this))",
+             ];
+  
+  
+  "pc0_js1" -> "pc1_js1" [label="tt,\n\
+{level($r5) := pc ⊔ level(l0),\n\
+ obj_level($r5) := pc ⊔ level(l0)}",
+                          ];
+  "pc1_js1" -> "pc2_js1" [label="tt,\n\
+{$r5.><$r6 := ff,\n\
+ $r5.><r1 := ff,\n\
+ $r5.><r3 := ff,\n\
+ $r5.><this := ff,\n\
+ $r6.><$r6 := ff,\n\
+ $r6.><r1 := ff,\n\
+ $r6.><r3 := ff,\n\
+ $r6.><this := ff,\n\
+ r1.><$r6 := ff,\n\
+ r3.><$r6 := ff,\n\
+ this.><$r6 := ff,\n\
+ level(r4) := pc,\n\
+ obj_level(r4) := pc ⊔ level(l0)}",
+                          ];
+  "pc2_js1" -> "pc3_js1" [label="tt,\n\
+{$r6~r1 := tt,\n\
+ $r5.><$r5 := ff,\n\
+ $r5.><$r6 := ff,\n\
+ $r5.><r1 := ff,\n\
+ $r5.><r3 := ff,\n\
+ $r5.><r4 := ff,\n\
+ $r5.><this := ff,\n\
+ $r6.><$r5 := ff,\n\
+ $r6.><r1 := r1.><r1,\n\
+ $r6.><r3 := r1.><r3,\n\
+ $r6.><r4 := ff,\n\
+ $r6.><this := r1.><this,\n\
+ r1.><$r5 := ff,\n\
+ r1.><$r6 := r1.><r1,\n\
+ r1.><r1 := tt,\n\
+ r1.><r3 := tt,\n\
+ r1.><r4 := tt,\n\
+ r1.><this := tt,\n\
+ r3.><$r5 := ff,\n\
+ r3.><$r6 := r3.><r1,\n\
+ r3.><r1 := tt,\n\
+ r3.><r2 := tt,\n\
+ r3.><r3 := tt,\n\
+ r3.><r4 := tt,\n\
+ r3.><this := tt,\n\
+ this.><$r5 := ff,\n\
+ this.><$r6 := this.><r1,\n\
+ this.><r1 := tt,\n\
+ this.><r2 := tt,\n\
+ this.><r3 := tt,\n\
+ this.><r4 := tt,\n\
+ this.><this := tt,\n\
+ level($r6) := ⊤,\n\
+ obj_level($r5) := pc ⊔ level(l0),\n\
+ obj_level($r6) := ⊤,\n\
+ obj_level(r1) := ⊤,\n\
+ obj_level(r2) := ⊤,\n\
+ obj_level(r3) := ⊤,\n\
+ obj_level(r4) := ⊤,\n\
+ obj_level(this) := ⊤}",
+                          ];
+  "pc3_js1" -> "pc4_js1" [label="tt,\n\
+{ϕ := S3}", ];
+  
+  }

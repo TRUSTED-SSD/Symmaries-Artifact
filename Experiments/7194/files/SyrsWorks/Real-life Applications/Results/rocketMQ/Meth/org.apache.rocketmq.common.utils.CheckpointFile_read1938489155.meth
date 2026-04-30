@@ -1,0 +1,25 @@
+java.util.List org.apache.rocketmq.common.utils.CheckpointFile:read()
+{
+java.lang.Object result;
+  java.lang.String $stack2;
+  boolean $stack4;
+  java.io.IOException $stack8;
+  java.util.List $stack10;
+  java.util.Collection tmp$113473732;
+  label0:$stack2=this.filePath;
+ result = this#org.apache.rocketmq.common.utils.CheckpointFile:read($stack2);
+ tmp$113473732=(java.util.Collection) result;
+ $stack4 = org.apache.commons.collections.CollectionUtils.isEmpty(tmp$113473732);
+ if ($stack4==0) goto label1;
+ $stack2 = this.getBackFilePath();
+ result = this#org.apache.rocketmq.common.utils.CheckpointFile:read($stack2);
+ label1:$stack10=(java.util.List) result;
+ return  $stack10;
+ label2:$stack8 = catch;
+ result=$stack8;
+ $stack2 = this.getBackFilePath();
+ $stack10 = this#org.apache.rocketmq.common.utils.CheckpointFile:read($stack2);
+ return  $stack10;
+ catch java.io.IOException: label0 - label1 : label2;
+} 
+

@@ -1,0 +1,29 @@
+int org.apache.rocketmq.broker.processor.PopBufferMergeService:getOffsetTotalSize()
+{
+int count;
+  java.util.Iterator iterator;
+  java.util.Map$Entry entry;
+  java.util.concurrent.LinkedBlockingDeque queue;
+  java.util.concurrent.ConcurrentHashMap $stack5;
+  java.util.Set $stack6;
+  boolean $stack8;
+  java.lang.Object $stack9;
+  org.apache.rocketmq.broker.processor.PopBufferMergeService$QueueWithTime $stack11;
+  int $stack13;
+  count=0;
+ $stack5=this.commitOffsets;
+ $stack6 = $stack5.entrySet();
+ iterator = $stack6.iterator();
+ label0:$stack8 = iterator.hasNext();
+ if ($stack8==0) goto label1;
+ $stack9 = iterator.next();
+ entry=(java.util.Map$Entry) $stack9;
+ $stack9 = entry.getValue();
+ $stack11=(org.apache.rocketmq.broker.processor.PopBufferMergeService$QueueWithTime) $stack9;
+ queue = $stack11.get();
+ $stack13 = queue.size();
+ count=(count+$stack13);
+ goto label0;
+ label1:return  count;
+ } 
+

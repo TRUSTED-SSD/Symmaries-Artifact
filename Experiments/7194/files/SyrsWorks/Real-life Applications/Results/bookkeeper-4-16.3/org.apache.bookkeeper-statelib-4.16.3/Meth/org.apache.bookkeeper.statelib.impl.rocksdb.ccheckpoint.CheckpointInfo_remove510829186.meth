@@ -1,0 +1,35 @@
+void org.apache.bookkeeper.statelib.impl.rocksdb.ccheckpoint.CheckpointInfo:remove(java.io.File @dbPath)
+{
+java.nio.file.Path checkpointPath;
+  java.io.File $stack4;
+  boolean $stack5;
+  com.google.common.io.RecursiveDeleteOption[] $stack6;
+  com.google.common.io.RecursiveDeleteOption $stack7;
+  java.io.IOException $stack8;
+  java.lang.Object[] $stack9;
+  java.lang.String $stack10;
+  org.slf4j.Logger $stack11;
+  java.io.File dbPath;
+dbPath=@dbPath;
+label0:checkpointPath = this.getCheckpointPath(dbPath);
+ $stack4 = checkpointPath.toFile();
+ $stack5 = $stack4.exists();
+ if ($stack5==0) goto label1;
+ $stack6=new com.google.common.io.RecursiveDeleteOption[1];
+ $stack7=com.google.common.io.RecursiveDeleteOption.ALLOW_INSECURE;
+ $stack6[0]=$stack7;
+ com.google.common.io.MoreFiles.deleteRecursively(checkpointPath,$stack6);
+ label1:goto label2;
+ label3:$stack8 = catch;
+ $stack11=org.apache.bookkeeper.statelib.impl.rocksdb.ccheckpoint.CheckpointInfo.log;
+ $stack9=new java.lang.Object[3];
+ $stack10=this.id;
+ $stack9[0]=$stack10;
+ dbPath = this.getCheckpointBaseDir(dbPath);
+ $stack9[1]=dbPath;
+ $stack9[2]=$stack8;
+ $stack11.warn("Failed to remove unused checkpoint {} from {}",$stack9);
+ label2:return;
+ catch java.io.IOException: label0 - label1 : label3;
+} 
+

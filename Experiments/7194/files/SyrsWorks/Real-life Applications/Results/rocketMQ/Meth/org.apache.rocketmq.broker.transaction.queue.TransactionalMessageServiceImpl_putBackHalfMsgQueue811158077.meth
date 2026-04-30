@@ -1,0 +1,58 @@
+boolean org.apache.rocketmq.broker.transaction.queue.TransactionalMessageServiceImpl:putBackHalfMsgQueue(org.apache.rocketmq.common.message.MessageExt msgExt,long offset)
+{
+org.apache.rocketmq.store.PutMessageResult putMessageResult;
+  java.lang.Object[] $stack6;
+  org.apache.rocketmq.logging.org.slf4j.Logger $stack7;
+  java.lang.String $stack10;
+  int $stack12;
+  java.lang.Integer $stack13;
+  org.apache.rocketmq.store.PutMessageStatus $stack16;
+  org.apache.rocketmq.store.PutMessageStatus $stack17;
+  org.apache.rocketmq.store.AppendMessageResult $stack23;
+  long $stack24;
+  java.lang.Long $stack33;
+  putMessageResult = this#org.apache.rocketmq.broker.transaction.queue.TransactionalMessageServiceImpl:putBackToHalfQueueReturnResult(msgExt);
+ if (putMessageResult==null) goto label0;
+ $stack16 = putMessageResult.getPutMessageStatus();
+ $stack17=org.apache.rocketmq.store.PutMessageStatus.PUT_OK;
+ if ($stack16!=$stack17) goto label0;
+ $stack23 = putMessageResult.getAppendMessageResult();
+ $stack24 = $stack23.getLogicsOffset();
+ msgExt.setQueueOffset($stack24);
+ $stack23 = putMessageResult.getAppendMessageResult();
+ $stack24 = $stack23.getWroteOffset();
+ msgExt.setCommitLogOffset($stack24);
+ $stack23 = putMessageResult.getAppendMessageResult();
+ $stack10 = $stack23.getMsgId();
+ msgExt.setMsgId($stack10);
+ $stack7=org.apache.rocketmq.broker.transaction.queue.TransactionalMessageServiceImpl.log;
+ $stack6=new java.lang.Object[6];
+ $stack33 = java.lang.Long.valueOf(offset);
+ $stack6[0]=$stack33;
+ offset = msgExt.getQueueOffset();
+ $stack33 = java.lang.Long.valueOf(offset);
+ $stack6[1]=$stack33;
+ offset = msgExt.getCommitLogOffset();
+ $stack33 = java.lang.Long.valueOf(offset);
+ $stack6[2]=$stack33;
+ $stack10 = msgExt.getMsgId();
+ $stack6[3]=$stack10;
+ $stack10 = msgExt.getUserProperty("UNIQ_KEY");
+ $stack6[4]=$stack10;
+ $stack10 = msgExt.getTopic();
+ $stack6[5]=$stack10;
+ $stack7.debug("Send check message, the offset={} restored in queueOffset={} commitLogOffset={} newMsgId={} realMsgId={} topic={}",$stack6);
+ return  1;
+ label0:$stack7=org.apache.rocketmq.broker.transaction.queue.TransactionalMessageServiceImpl.log;
+ $stack6=new java.lang.Object[3];
+ $stack10 = msgExt.getTopic();
+ $stack6[0]=$stack10;
+ $stack12 = msgExt.getQueueId();
+ $stack13 = java.lang.Integer.valueOf($stack12);
+ $stack6[1]=$stack13;
+ $stack10 = msgExt.getMsgId();
+ $stack6[2]=$stack10;
+ $stack7.error("PutBackToHalfQueueReturnResult write failed, topic: {}, queueId: {}, msgId: {}",$stack6);
+ return  0;
+ } 
+

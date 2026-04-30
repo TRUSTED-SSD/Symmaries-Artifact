@@ -1,0 +1,44 @@
+java.lang.String org.junit.ComparisonFailure$ComparisonCompactor:compact(java.lang.String @message)
+{
+org.junit.ComparisonFailure$ComparisonCompactor$DiffExtractor extractor;
+  java.lang.String compactedPrefix;
+  java.lang.String compactedSuffix;
+  java.lang.String $stack7;
+  boolean $stack15;
+  java.lang.StringBuilder $stack19;
+  java.lang.String message;
+message=@message;
+compactedSuffix=this.expected;
+ if (compactedSuffix==null) goto label0;
+ compactedSuffix=this.actual;
+ if (compactedSuffix==null) goto label0;
+ $stack7=this.expected;
+ compactedSuffix=this.actual;
+ $stack15 = $stack7.equals((java.lang.Object)compactedSuffix);
+ if ($stack15==0) goto label1;
+ label0:$stack7=this.expected;
+ compactedSuffix=this.actual;
+ message = org.junit.Assert.format(message,(java.lang.Object)$stack7,(java.lang.Object)compactedSuffix);
+ return  message;
+ label1:extractor=new org.junit.ComparisonFailure$ComparisonCompactor$DiffExtractor;
+ extractor#org.junit.ComparisonFailure$ComparisonCompactor$DiffExtractor(this,null);
+ compactedPrefix = extractor.compactPrefix();
+ compactedSuffix = extractor.compactSuffix();
+ $stack19=new java.lang.StringBuilder;
+ $stack19#java.lang.StringBuilder();
+ $stack19 = $stack19.append(compactedPrefix);
+ $stack7 = extractor.expectedDiff();
+ $stack19 = $stack19.append($stack7);
+ $stack19 = $stack19.append(compactedSuffix);
+ $stack7 = $stack19.toString();
+ $stack19=new java.lang.StringBuilder;
+ $stack19#java.lang.StringBuilder();
+ $stack19 = $stack19.append(compactedPrefix);
+ compactedPrefix = extractor.actualDiff();
+ $stack19 = $stack19.append(compactedPrefix);
+ $stack19 = $stack19.append(compactedSuffix);
+ compactedSuffix = $stack19.toString();
+ message = org.junit.Assert.format(message,(java.lang.Object)$stack7,(java.lang.Object)compactedSuffix);
+ return  message;
+ } 
+

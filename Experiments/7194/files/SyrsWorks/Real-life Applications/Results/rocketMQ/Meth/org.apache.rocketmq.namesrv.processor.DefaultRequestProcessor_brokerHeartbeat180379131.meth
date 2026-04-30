@@ -1,0 +1,22 @@
+org.apache.rocketmq.remoting.protocol.RemotingCommand org.apache.rocketmq.namesrv.processor.DefaultRequestProcessor:brokerHeartbeat(io.netty.channel.ChannelHandlerContext ctx,org.apache.rocketmq.remoting.protocol.RemotingCommand request)
+{
+org.apache.rocketmq.remoting.protocol.RemotingCommand response;
+  org.apache.rocketmq.remoting.protocol.header.namesrv.BrokerHeartbeatRequestHeader requestHeader;
+  org.apache.rocketmq.remoting.CommandCustomHeader $stack6;
+  org.apache.rocketmq.namesrv.NamesrvController $stack7;
+  org.apache.rocketmq.namesrv.routeinfo.RouteInfoManager $stack8;
+  java.lang.String $stack9;
+  java.lang.String $stack10;
+  response = org.apache.rocketmq.remoting.protocol.RemotingCommand.createResponseCommand(null);
+ $stack6 = request.decodeCommandCustomHeader(org.apache.rocketmq.remoting.protocol.header.namesrv.BrokerHeartbeatRequestHeader);
+ requestHeader=(org.apache.rocketmq.remoting.protocol.header.namesrv.BrokerHeartbeatRequestHeader) $stack6;
+ $stack7=this.namesrvController;
+ $stack8 = $stack7.getRouteInfoManager();
+ $stack9 = requestHeader.getClusterName();
+ $stack10 = requestHeader.getBrokerAddr();
+ $stack8.updateBrokerInfoUpdateTimestamp($stack9,$stack10);
+ response.setCode(0);
+ response.setRemark(null);
+ return  response;
+ } 
+

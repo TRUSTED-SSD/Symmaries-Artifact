@@ -1,0 +1,39 @@
+org.apache.rocketmq.common.statistics.StatisticsItem(java.lang.String statKind,java.lang.String statObject,java.lang.String[] itemNames)
+{
+java.util.concurrent.atomic.AtomicLong[] accs;
+  int i;
+  java.security.InvalidParameterException $stack6;
+  int $stack9;
+  java.util.concurrent.atomic.AtomicLong $stack10;
+  long $stack12;
+  this#java.lang.Object();
+ if (itemNames==null) goto label0;
+ i=#itemNames;
+ if (i>0) goto label1;
+ label0:$stack6=new java.security.InvalidParameterException;
+ $stack6#java.security.InvalidParameterException("StatisticsItem \"itemNames\" is empty");
+ throw $stack6;
+ label1:this.statKind=statKind;
+ this.statObject=statObject;
+ this.itemNames=itemNames;
+ i=#itemNames;
+ accs=new java.util.concurrent.atomic.AtomicLong[i];
+ i=0;
+ label2:$stack9=#itemNames;
+ if (i>=$stack9) goto label3;
+ $stack10=new java.util.concurrent.atomic.AtomicLong;
+ $stack10#java.util.concurrent.atomic.AtomicLong(0L);
+ accs[i]=$stack10;
+ i=(i+1);
+ goto label2;
+ label3:this.itemAccumulates=accs;
+ $stack10=new java.util.concurrent.atomic.AtomicLong;
+ $stack10#java.util.concurrent.atomic.AtomicLong();
+ this.invokeTimes=$stack10;
+ $stack10=new java.util.concurrent.atomic.AtomicLong;
+ $stack12 = java.lang.System.currentTimeMillis();
+ $stack10#java.util.concurrent.atomic.AtomicLong($stack12);
+ this.lastTimeStamp=$stack10;
+ return;
+ } 
+

@@ -1,0 +1,32 @@
+java.util.List org.apache.rocketmq.proxy.processor.ProducerProcessor:lambda$sendMessage$0(org.apache.rocketmq.remoting.protocol.header.SendMessageRequestHeader requestHeader,java.lang.String producerGroup,org.apache.rocketmq.proxy.service.route.AddressableMessageQueue messageQueue,java.util.List messageList,java.util.List sendResultList)
+{
+java.util.Iterator l6;
+  org.apache.rocketmq.client.producer.SendResult sendResult;
+  int tranType;
+  boolean $stack10;
+  java.lang.Object $stack11;
+  java.lang.Integer $stack12;
+  org.apache.rocketmq.client.producer.SendStatus $stack15;
+  org.apache.rocketmq.client.producer.SendStatus $stack16;
+  java.lang.String $stack19;
+  l6 = sendResultList.iterator();
+ label0:$stack10 = l6.hasNext();
+ if ($stack10==0) goto label1;
+ $stack11 = l6.next();
+ sendResult=(org.apache.rocketmq.client.producer.SendResult) $stack11;
+ $stack12 = requestHeader.getSysFlag();
+ tranType = $stack12.intValue();
+ tranType = org.apache.rocketmq.common.sysflag.MessageSysFlag.getTransactionValue(tranType);
+ $stack15=org.apache.rocketmq.client.producer.SendStatus.SEND_OK;
+ $stack16 = sendResult.getSendStatus();
+ $stack10 = $stack15.equals((java.lang.Object)$stack16);
+ if ($stack10==0) goto label2;
+ if (tranType!=4) goto label2;
+ $stack19 = sendResult.getTransactionId();
+ $stack10 = org.apache.commons.lang3.StringUtils.isNotBlank((java.lang.CharSequence)$stack19);
+ if ($stack10==0) goto label2;
+ this.fillTransactionData(producerGroup,messageQueue,sendResult,messageList);
+ label2:goto label0;
+ label1:return  sendResultList;
+ } 
+

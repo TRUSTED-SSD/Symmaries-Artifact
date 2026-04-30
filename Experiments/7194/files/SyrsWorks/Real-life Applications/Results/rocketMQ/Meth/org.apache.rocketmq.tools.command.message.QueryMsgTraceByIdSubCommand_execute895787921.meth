@@ -1,0 +1,53 @@
+void org.apache.rocketmq.tools.command.message.QueryMsgTraceByIdSubCommand:execute(org.apache.commons.cli.CommandLine commandLine,org.apache.commons.cli.Options options,org.apache.rocketmq.remoting.RPCHook rpcHook)
+{
+org.apache.rocketmq.tools.admin.DefaultMQAdminExt defaultMQAdminExt;
+  java.lang.String msgId;
+  java.lang.String traceTopic;
+  java.lang.Throwable l7;
+  long $stack9;
+  boolean $stack13;
+  java.lang.String $stack15;
+  java.lang.Exception $stack27;
+  org.apache.rocketmq.tools.command.SubCommandException $stack28;
+  java.lang.StringBuilder $stack29;
+  java.lang.Class $stack30;
+  defaultMQAdminExt=new org.apache.rocketmq.tools.admin.DefaultMQAdminExt;
+ defaultMQAdminExt#org.apache.rocketmq.tools.admin.DefaultMQAdminExt(rpcHook);
+ $stack9 = java.lang.System.currentTimeMillis();
+ msgId = java.lang.Long.toString($stack9);
+ defaultMQAdminExt.setInstanceName(msgId);
+ label0:msgId = commandLine.getOptionValue((char)105);
+ msgId = msgId.trim();
+ traceTopic="RMQ_SYS_TRACE_TOPIC";
+ $stack13 = commandLine.hasOption((char)116);
+ if ($stack13==0) goto label1;
+ traceTopic = commandLine.getOptionValue((char)116);
+ traceTopic = traceTopic.trim();
+ label1:$stack13 = commandLine.hasOption((char)110);
+ if ($stack13==0) goto label2;
+ $stack15 = commandLine.getOptionValue((char)110);
+ $stack15 = $stack15.trim();
+ defaultMQAdminExt.setNamesrvAddr($stack15);
+ label2:this#org.apache.rocketmq.tools.command.message.QueryMsgTraceByIdSubCommand:queryTraceByMsgId(defaultMQAdminExt,traceTopic,msgId);
+ label3:defaultMQAdminExt.shutdown();
+ goto label4;
+ label5:$stack27 = catch;
+ $stack28=new org.apache.rocketmq.tools.command.SubCommandException;
+ $stack29=new java.lang.StringBuilder;
+ $stack29#java.lang.StringBuilder();
+ $stack30 = this.getClass();
+ msgId = $stack30.getSimpleName();
+ $stack29 = $stack29.append(msgId);
+ $stack29 = $stack29.append("command failed");
+ msgId = $stack29.toString();
+ $stack28#org.apache.rocketmq.tools.command.SubCommandException(msgId,(java.lang.Throwable)$stack27);
+ throw $stack28;
+ label6:l7 = catch;
+ label7:defaultMQAdminExt.shutdown();
+ throw l7;
+ label4:return;
+ catch java.lang.Exception: label0 - label3 : label5;
+catch java.lang.Throwable: label0 - label3 : label6;
+catch java.lang.Throwable: label5 - label7 : label6;
+} 
+

@@ -1,0 +1,21 @@
+java.lang.Object org.apache.bookkeeper.common.collections.BlockingMpscQueue:take()
+{
+int idleCounter;
+  java.lang.Object item;
+  boolean $stack4;
+  org.jctools.queues.MessagePassingQueue$WaitStrategy $stack5;
+  java.lang.InterruptedException $stack9;
+  idleCounter=0;
+ label0:item = this.relaxedPoll();
+ if (item!=null) goto label1;
+ $stack4 = java.lang.Thread.interrupted();
+ if ($stack4==0) goto label2;
+ $stack9=new java.lang.InterruptedException;
+ $stack9#java.lang.InterruptedException();
+ throw $stack9;
+ label2:$stack5=org.apache.bookkeeper.common.collections.BlockingMpscQueue.WAIT_STRATEGY;
+ idleCounter = $stack5.idle(idleCounter);
+ goto label0;
+ label1:return  item;
+ } 
+

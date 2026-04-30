@@ -1,0 +1,30 @@
+boolean org.apache.bookkeeper.bookie.datainteg.DataIntegrityCheckImpl:isEntryMissing(org.apache.bookkeeper.bookie.datainteg.WriteSets writeSets,java.util.NavigableMap bookieIndices,long ledgerId,long entryId)
+{
+int bookieIndexForEntry;
+  java.lang.Long $stack8;
+  java.util.Map$Entry $stack9;
+  java.lang.Object $stack10;
+  java.lang.Integer $stack11;
+  com.google.common.collect.ImmutableList $stack13;
+  boolean $stack15;
+  org.apache.bookkeeper.bookie.LedgerStorage $stack16;
+  $stack8 = java.lang.Long.valueOf(entryId);
+ $stack9 = bookieIndices.floorEntry((java.lang.Object)$stack8);
+ $stack10 = $stack9.getValue();
+ $stack11=(java.lang.Integer) $stack10;
+ bookieIndexForEntry = $stack11.intValue();
+ if (bookieIndexForEntry>=0) goto label0;
+ return  0;
+ label0:$stack13 = writeSets.getForEntry(entryId);
+ $stack11 = java.lang.Integer.valueOf(bookieIndexForEntry);
+ $stack15 = $stack13.contains((java.lang.Object)$stack11);
+ if ($stack15==0) goto label1;
+ $stack16=this.ledgerStorage;
+ $stack15 = $stack16.entryExists(ledgerId,entryId);
+ if ($stack15!=0) goto label1;
+ $stack15=1;
+ goto label2;
+ label1:$stack15=0;
+ label2:return  $stack15;
+ } 
+

@@ -1,0 +1,54 @@
+    private java.util.List parseCategories(java.lang.String) throws java.lang.ClassNotFoundException
+    {
+        org.junit.experimental.categories.CategoryFilterFactory this;
+        java.lang.String categories;
+        java.util.ArrayList categoryClasses;
+        java.lang.String[] arr$;
+        int len$, i$;
+        java.lang.Class categoryClass;
+
+        this := @this: org.junit.experimental.categories.CategoryFilterFactory;
+
+        categories := @parameter0: java.lang.String;
+
+        categoryClasses = new java.util.ArrayList;
+/*37*/
+
+        specialinvoke categoryClasses.<java.util.ArrayList: void <init>()>();
+/*37*/
+
+        arr$ = virtualinvoke categories.<java.lang.String: java.lang.String[] split(java.lang.String)>(",");
+/*39*/
+/*39*/
+
+        len$ = lengthof arr$;
+/*39*/
+
+        i$ = 0;
+/*39*/
+
+     label1:
+        if i$ >= len$ goto label2;
+/*39*/
+
+        categories = arr$[i$];
+/*45*/
+
+        categoryClass = staticinvoke <org.junit.internal.Classes: java.lang.Class getClass(java.lang.String)>(categories);
+/*40*/
+/*40*/
+
+        interfaceinvoke categoryClasses.<java.util.List: boolean add(java.lang.Object)>(categoryClass);
+/*42*/
+
+        i$ = i$ + 1;
+/*39*/
+
+        goto label1;
+/*39*/
+
+     label2:
+        return categoryClasses;
+/*45*/
+    }
+

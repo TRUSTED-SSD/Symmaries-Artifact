@@ -1,0 +1,27 @@
+static org.apache.bookkeeper.client.impl.LastConfirmedAndEntryImpl org.apache.bookkeeper.client.impl.LastConfirmedAndEntryImpl:create(long lac,org.apache.bookkeeper.client.LedgerEntry entry)
+{
+org.apache.bookkeeper.client.impl.LastConfirmedAndEntryImpl entryImpl;
+  io.netty.util.Recycler $stack4;
+  java.lang.Object $stack5;
+  java.lang.Long $stack6;
+  long $stack8;
+  long $stack9;
+  io.netty.buffer.ByteBuf $stack10;
+  org.apache.bookkeeper.client.impl.LedgerEntryImpl $stack11;
+  $stack4=org.apache.bookkeeper.client.impl.LastConfirmedAndEntryImpl.RECYCLER;
+ $stack5 = $stack4.get();
+ entryImpl=(org.apache.bookkeeper.client.impl.LastConfirmedAndEntryImpl) $stack5;
+ $stack6 = java.lang.Long.valueOf(lac);
+ entryImpl.lac=$stack6;
+ if (null!=entry) goto label0;
+ entryImpl.entry=null;
+ goto label1;
+ label0:lac = entry.getLedgerId();
+ $stack8 = entry.getEntryId();
+ $stack9 = entry.getLength();
+ $stack10 = entry.getEntryBuffer();
+ $stack11 = org.apache.bookkeeper.client.impl.LedgerEntryImpl.create(lac,$stack8,$stack9,$stack10);
+ entryImpl.entry=$stack11;
+ label1:return  entryImpl;
+ } 
+

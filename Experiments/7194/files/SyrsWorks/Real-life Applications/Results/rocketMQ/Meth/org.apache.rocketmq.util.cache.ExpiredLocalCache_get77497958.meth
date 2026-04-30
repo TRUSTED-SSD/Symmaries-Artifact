@@ -1,0 +1,18 @@
+java.lang.Object org.apache.rocketmq.util.cache.ExpiredLocalCache:get(java.lang.Object @key)
+{
+org.apache.rocketmq.util.cache.CacheObject object;
+  java.lang.Object ret;
+  com.googlecode.concurrentlinkedhashmap.ConcurrentLinkedHashMap $stack4;
+  java.lang.Object key;
+key=@key;
+$stack4=this.cache;
+ ret = $stack4.get(key);
+ object=(org.apache.rocketmq.util.cache.CacheObject) ret;
+ if (object!=null) goto label0;
+ return  null;
+ label0:ret = object.getTarget();
+ if (ret!=null) goto label1;
+ key = this.delete(key);
+ label1:return  ret;
+ } 
+

@@ -1,0 +1,45 @@
+org.keycloak.adapters.spi.AuthOutcome org.keycloak.adapters.OAuthRequestAuthenticator:authenticate()
+{
+java.lang.String code;
+  org.jboss.logging.Logger $stack4;
+  org.keycloak.adapters.spi.AuthChallenge $stack5;
+  org.keycloak.adapters.spi.AuthOutcome $stack7;
+  java.lang.StringBuilder $stack14;
+  java.lang.String $stack18;
+  org.keycloak.adapters.OIDCAuthenticationError$Reason $stack19;
+  code = this.getCode();
+ if (code!=null) goto label0;
+ $stack4=org.keycloak.adapters.OAuthRequestAuthenticator.log;
+ $stack4.debug((java.lang.Object)"there was no code");
+ code = this.getError();
+ if (code==null) goto label1;
+ $stack4=org.keycloak.adapters.OAuthRequestAuthenticator.log;
+ $stack14=new java.lang.StringBuilder;
+ $stack14#java.lang.StringBuilder();
+ $stack14 = $stack14.append("There was an error: ");
+ $stack14 = $stack14.append(code);
+ $stack18 = $stack14.toString();
+ $stack4.warn((java.lang.Object)$stack18);
+ $stack19=org.keycloak.adapters.OIDCAuthenticationError$Reason.OAUTH_ERROR;
+ $stack5 = this.challenge(400,$stack19,code);
+ this.challenge=$stack5;
+ $stack7=org.keycloak.adapters.spi.AuthOutcome.FAILED;
+ return  $stack7;
+ label1:$stack4=org.keycloak.adapters.OAuthRequestAuthenticator.log;
+ $stack4.debug((java.lang.Object)"redirecting to auth server");
+ $stack5 = this.loginRedirect();
+ this.challenge=$stack5;
+ $stack7=org.keycloak.adapters.spi.AuthOutcome.NOT_ATTEMPTED;
+ return  $stack7;
+ label0:$stack4=org.keycloak.adapters.OAuthRequestAuthenticator.log;
+ $stack4.debug((java.lang.Object)"there was a code, resolving");
+ $stack5 = this.resolveCode(code);
+ this.challenge=$stack5;
+ $stack5=this.challenge;
+ if ($stack5==null) goto label2;
+ $stack7=org.keycloak.adapters.spi.AuthOutcome.FAILED;
+ return  $stack7;
+ label2:$stack7=org.keycloak.adapters.spi.AuthOutcome.AUTHENTICATED;
+ return  $stack7;
+ } 
+

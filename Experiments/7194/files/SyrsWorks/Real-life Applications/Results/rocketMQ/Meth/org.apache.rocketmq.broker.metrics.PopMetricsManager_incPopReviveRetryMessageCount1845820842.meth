@@ -1,0 +1,19 @@
+static void org.apache.rocketmq.broker.metrics.PopMetricsManager:incPopReviveRetryMessageCount(org.apache.rocketmq.store.pop.PopCheckPoint checkPoint,org.apache.rocketmq.store.PutMessageStatus status)
+{
+io.opentelemetry.api.common.AttributesBuilder builder;
+  io.opentelemetry.api.common.Attributes attributes;
+  java.lang.String $stack6;
+  io.opentelemetry.api.metrics.LongCounter $stack15;
+  builder = org.apache.rocketmq.broker.metrics.PopMetricsManager.newAttributesBuilder();
+ $stack6 = checkPoint.getCId();
+ builder = builder.put("consumer_group",$stack6);
+ $stack6 = checkPoint.getTopic();
+ builder = builder.put("topic",$stack6);
+ $stack6 = status.name();
+ builder = builder.put("put_status",$stack6);
+ attributes = builder.build();
+ $stack15=org.apache.rocketmq.broker.metrics.PopMetricsManager.popReviveRetryMessageTotal;
+ $stack15.add(1L,attributes);
+ return;
+ } 
+

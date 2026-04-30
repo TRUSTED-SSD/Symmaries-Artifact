@@ -1,0 +1,32 @@
+java.lang.Void org.apache.bookkeeper.stream.server.service.BookieWatchService:lambda$doStart$0(org.apache.bookkeeper.meta.MetadataClientDriver clientDriver)
+{
+org.apache.bookkeeper.discover.RegistrationClient $stack3;
+  int $stack4;
+  java.lang.Exception $stack6;
+  org.slf4j.Logger $stack8;
+  java.lang.Integer $stack10;
+  java.lang.RuntimeException $stack11;
+  java.lang.StringBuilder $stack12;
+  java.lang.String $stack17;
+  label0:$stack3 = clientDriver.getRegistrationClient();
+ $stack4=this.minNumBookies;
+ org.apache.bookkeeper.stream.server.service.BookieWatchService.waitingForNumBookies($stack3,$stack4);
+ label1:return  null;
+ label2:$stack6 = catch;
+ $stack8=org.apache.bookkeeper.stream.server.service.BookieWatchService.log;
+ $stack4=this.minNumBookies;
+ $stack10 = java.lang.Integer.valueOf($stack4);
+ $stack8.error("Encountered exceptions on waiting {} bookies to be alive",(java.lang.Object)$stack10);
+ $stack11=new java.lang.RuntimeException;
+ $stack12=new java.lang.StringBuilder;
+ $stack12#java.lang.StringBuilder();
+ $stack12 = $stack12.append("Encountered exceptions on waiting ");
+ $stack4=this.minNumBookies;
+ $stack12 = $stack12.append($stack4);
+ $stack12 = $stack12.append(" bookies to be alive");
+ $stack17 = $stack12.toString();
+ $stack11#java.lang.RuntimeException($stack17,(java.lang.Throwable)$stack6);
+ label3:throw $stack11;
+ catch java.lang.Exception: label0 - label1 : label2;
+} 
+

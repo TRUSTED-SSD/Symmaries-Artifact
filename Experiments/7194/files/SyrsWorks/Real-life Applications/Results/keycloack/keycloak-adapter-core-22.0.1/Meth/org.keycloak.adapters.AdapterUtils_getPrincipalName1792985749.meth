@@ -1,0 +1,50 @@
+static java.lang.String org.keycloak.adapters.AdapterUtils:getPrincipalName(org.keycloak.adapters.KeycloakDeployment deployment,org.keycloak.representations.AccessToken token)
+{
+java.lang.String attr;
+  java.lang.String name;
+  java.lang.String $stack5;
+  boolean $stack6;
+  attr="sub";
+ name = deployment.getPrincipalAttribute();
+ if (name==null) goto label0;
+ attr = deployment.getPrincipalAttribute();
+ label0:name=null;
+ $stack5="sub";
+ $stack6 = $stack5.equals((java.lang.Object)attr);
+ if ($stack6==0) goto label1;
+ name = token.getSubject();
+ goto label2;
+ label1:$stack5="email";
+ $stack6 = $stack5.equals((java.lang.Object)attr);
+ if ($stack6==0) goto label3;
+ name = token.getEmail();
+ goto label2;
+ label3:$stack5="preferred_username";
+ $stack6 = $stack5.equals((java.lang.Object)attr);
+ if ($stack6==0) goto label4;
+ name = token.getPreferredUsername();
+ goto label2;
+ label4:$stack5="name";
+ $stack6 = $stack5.equals((java.lang.Object)attr);
+ if ($stack6==0) goto label5;
+ name = token.getName();
+ goto label2;
+ label5:$stack5="given_name";
+ $stack6 = $stack5.equals((java.lang.Object)attr);
+ if ($stack6==0) goto label6;
+ name = token.getGivenName();
+ goto label2;
+ label6:$stack5="family_name";
+ $stack6 = $stack5.equals((java.lang.Object)attr);
+ if ($stack6==0) goto label7;
+ name = token.getFamilyName();
+ goto label2;
+ label7:$stack5="nickname";
+ $stack6 = $stack5.equals((java.lang.Object)attr);
+ if ($stack6==0) goto label2;
+ name = token.getNickName();
+ label2:if (name!=null) goto label8;
+ name = token.getSubject();
+ label8:return  name;
+ } 
+

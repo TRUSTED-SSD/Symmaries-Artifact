@@ -1,0 +1,27 @@
+java.lang.String org.apache.rocketmq.proxy.service.route.ClusterTopicRouteService:getBrokerAddr(java.lang.String @brokerName)
+{
+java.util.List brokerDataList;
+  org.apache.rocketmq.proxy.service.route.MessageQueueView $stack3;
+  org.apache.rocketmq.remoting.protocol.route.TopicRouteData $stack4;
+  boolean $stack6;
+  java.lang.Object $stack7;
+  org.apache.rocketmq.remoting.protocol.route.BrokerData $stack8;
+  java.util.HashMap $stack9;
+  java.lang.Long $stack10;
+  java.lang.String brokerName;
+brokerName=@brokerName;
+$stack3 = this.getAllMessageQueueView(brokerName);
+ $stack4 = $stack3.getTopicRouteData();
+ brokerDataList = $stack4.getBrokerDatas();
+ $stack6 = brokerDataList.isEmpty();
+ if ($stack6==0) goto label0;
+ return  null;
+ label0:$stack7 = brokerDataList.get(0);
+ $stack8=(org.apache.rocketmq.remoting.protocol.route.BrokerData) $stack7;
+ $stack9 = $stack8.getBrokerAddrs();
+ $stack10 = java.lang.Long.valueOf(0L);
+ $stack7 = $stack9.get((java.lang.Object)$stack10);
+ brokerName=(java.lang.String) $stack7;
+ return  brokerName;
+ } 
+

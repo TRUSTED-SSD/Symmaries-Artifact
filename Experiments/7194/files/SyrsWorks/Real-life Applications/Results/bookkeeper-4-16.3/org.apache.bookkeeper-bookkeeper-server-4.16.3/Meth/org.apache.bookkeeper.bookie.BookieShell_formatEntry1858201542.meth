@@ -1,0 +1,36 @@
+void org.apache.bookkeeper.bookie.BookieShell:formatEntry(org.apache.bookkeeper.client.LedgerEntry entry,boolean printMsg)
+{
+long ledgerId;
+  long entryId;
+  long entrySize;
+  java.lang.StringBuilder $stack12;
+  java.io.PrintStream $stack13;
+  org.apache.bookkeeper.util.LedgerIdFormatter $stack15;
+  java.lang.String $stack16;
+  org.apache.bookkeeper.util.EntryFormatter $stack24;
+  byte[] $stack25;
+  ledgerId = entry.getLedgerId();
+ entryId = entry.getEntryId();
+ entrySize = entry.getLength();
+ $stack13=java.lang.System.out;
+ $stack12=new java.lang.StringBuilder;
+ $stack12#java.lang.StringBuilder();
+ $stack12 = $stack12.append("--------- Lid=");
+ $stack15=this.ledgerIdFormatter;
+ $stack16 = $stack15.formatLedgerId(ledgerId);
+ $stack12 = $stack12.append($stack16);
+ $stack12 = $stack12.append(", Eid=");
+ $stack12 = $stack12.append(entryId);
+ $stack12 = $stack12.append(", EntrySize=");
+ $stack12 = $stack12.append(entrySize);
+ $stack12 = $stack12.append(" ---------");
+ $stack16 = $stack12.toString();
+ dummyClass.lowSink($stack16);
+$stack13.println($stack16);
+ if (printMsg==0) goto label0;
+ $stack24=this.entryFormatter;
+ $stack25 = entry.getEntry();
+ $stack24.formatEntry($stack25);
+ label0:return;
+ } 
+

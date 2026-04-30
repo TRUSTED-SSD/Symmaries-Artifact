@@ -1,0 +1,31 @@
+static java.lang.Class org.junit.internal.matchers.TypeSafeMatcher:findExpectedType(java.lang.Class @fromClass)
+{
+java.lang.reflect.Method[] arr$;
+  int len$;
+  int i$;
+  java.lang.reflect.Method method;
+  java.lang.Error $stack6;
+  boolean $stack11;
+  java.lang.Class[] $stack14;
+  java.lang.Class fromClass;
+fromClass=@fromClass;
+label0:if (fromClass==java.lang.Object) goto label1;
+ arr$ = org.junit.internal.MethodSorter.getDeclaredMethods(fromClass);
+ len$=#arr$;
+ i$=0;
+ label2:if (i$>=len$) goto label3;
+ method=arr$[i$];
+ $stack11 = org.junit.internal.matchers.TypeSafeMatcher.isMatchesSafelyMethod(method);
+ if ($stack11==0) goto label4;
+ $stack14 = method.getParameterTypes();
+ fromClass=$stack14[0];
+ return  fromClass;
+ label4:i$=(i$+1);
+ goto label2;
+ label3:fromClass = fromClass.getSuperclass();
+ goto label0;
+ label1:$stack6=new java.lang.Error;
+ $stack6#java.lang.Error("Cannot determine correct type for matchesSafely() method.");
+ throw $stack6;
+ } 
+

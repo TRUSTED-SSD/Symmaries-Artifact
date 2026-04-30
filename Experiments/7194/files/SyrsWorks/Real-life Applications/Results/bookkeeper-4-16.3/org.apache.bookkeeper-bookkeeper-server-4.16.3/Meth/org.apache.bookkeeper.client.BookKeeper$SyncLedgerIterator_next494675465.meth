@@ -1,0 +1,30 @@
+long org.apache.bookkeeper.client.BookKeeper$SyncLedgerIterator:next()
+{
+org.apache.bookkeeper.client.BookKeeper$ListLedgersResultImpl $stack1;
+  java.util.Iterator $stack2;
+  org.apache.bookkeeper.meta.LedgerManager$LedgerRangeIterator $stack3;
+  org.apache.bookkeeper.meta.LedgerManager$LedgerRange $stack4;
+  java.util.Set $stack5;
+  java.lang.Object $stack8;
+  java.lang.Long $stack9;
+  long $stack10;
+  boolean $stack12;
+  $stack1=this.parent;
+ $stack1.checkClosed();
+ $stack2=this.currentRange;
+ if ($stack2==null) goto label0;
+ $stack2=this.currentRange;
+ $stack12 = $stack2.hasNext();
+ if ($stack12!=0) goto label1;
+ label0:$stack3=this.iterator;
+ $stack4 = $stack3.next();
+ $stack5 = $stack4.getLedgers();
+ $stack2 = $stack5.iterator();
+ this.currentRange=$stack2;
+ label1:$stack2=this.currentRange;
+ $stack8 = $stack2.next();
+ $stack9=(java.lang.Long) $stack8;
+ $stack10 = $stack9.longValue();
+ return  $stack10;
+ } 
+

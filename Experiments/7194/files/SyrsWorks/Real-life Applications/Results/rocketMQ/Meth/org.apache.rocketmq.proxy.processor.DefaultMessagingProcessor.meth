@@ -1,0 +1,49 @@
+org.apache.rocketmq.proxy.processor.DefaultMessagingProcessor(org.apache.rocketmq.proxy.service.ServiceManager serviceManager)
+{
+org.apache.rocketmq.proxy.config.ProxyConfig proxyConfig;
+  int $stack4;
+  int $stack5;
+  java.util.concurrent.TimeUnit $stack7;
+  int $stack9;
+  java.util.concurrent.ThreadPoolExecutor $stack10;
+  org.apache.rocketmq.proxy.processor.ProducerProcessor $stack18;
+  org.apache.rocketmq.proxy.processor.ConsumerProcessor $stack20;
+  org.apache.rocketmq.proxy.processor.TransactionProcessor $stack22;
+  org.apache.rocketmq.proxy.processor.ClientProcessor $stack23;
+  org.apache.rocketmq.proxy.processor.RequestBrokerProcessor $stack24;
+  this#org.apache.rocketmq.proxy.common.AbstractStartAndShutdown();
+ proxyConfig = org.apache.rocketmq.proxy.config.ConfigurationManager.getProxyConfig();
+ $stack4 = proxyConfig.getProducerProcessorThreadPoolNums();
+ $stack5 = proxyConfig.getProducerProcessorThreadPoolNums();
+ $stack7=java.util.concurrent.TimeUnit.MINUTES;
+ $stack9 = proxyConfig.getProducerProcessorThreadPoolQueueCapacity();
+ $stack10 = org.apache.rocketmq.common.thread.ThreadPoolMonitor.createAndMonitor($stack4,$stack5,1L,$stack7,"ProducerProcessorExecutor",$stack9);
+ this.producerProcessorExecutor=$stack10;
+ $stack4 = proxyConfig.getConsumerProcessorThreadPoolNums();
+ $stack5 = proxyConfig.getConsumerProcessorThreadPoolNums();
+ $stack7=java.util.concurrent.TimeUnit.MINUTES;
+ $stack9 = proxyConfig.getConsumerProcessorThreadPoolQueueCapacity();
+ $stack10 = org.apache.rocketmq.common.thread.ThreadPoolMonitor.createAndMonitor($stack4,$stack5,1L,$stack7,"ConsumerProcessorExecutor",$stack9);
+ this.consumerProcessorExecutor=$stack10;
+ this.serviceManager=serviceManager;
+ $stack18=new org.apache.rocketmq.proxy.processor.ProducerProcessor;
+ $stack10=this.producerProcessorExecutor;
+ $stack18#org.apache.rocketmq.proxy.processor.ProducerProcessor((org.apache.rocketmq.proxy.processor.MessagingProcessor)this,serviceManager,(java.util.concurrent.ExecutorService)$stack10);
+ this.producerProcessor=$stack18;
+ $stack20=new org.apache.rocketmq.proxy.processor.ConsumerProcessor;
+ $stack10=this.consumerProcessorExecutor;
+ $stack20#org.apache.rocketmq.proxy.processor.ConsumerProcessor((org.apache.rocketmq.proxy.processor.MessagingProcessor)this,serviceManager,(java.util.concurrent.ExecutorService)$stack10);
+ this.consumerProcessor=$stack20;
+ $stack22=new org.apache.rocketmq.proxy.processor.TransactionProcessor;
+ $stack22#org.apache.rocketmq.proxy.processor.TransactionProcessor((org.apache.rocketmq.proxy.processor.MessagingProcessor)this,serviceManager);
+ this.transactionProcessor=$stack22;
+ $stack23=new org.apache.rocketmq.proxy.processor.ClientProcessor;
+ $stack23#org.apache.rocketmq.proxy.processor.ClientProcessor((org.apache.rocketmq.proxy.processor.MessagingProcessor)this,serviceManager);
+ this.clientProcessor=$stack23;
+ $stack24=new org.apache.rocketmq.proxy.processor.RequestBrokerProcessor;
+ $stack24#org.apache.rocketmq.proxy.processor.RequestBrokerProcessor((org.apache.rocketmq.proxy.processor.MessagingProcessor)this,serviceManager);
+ this.requestBrokerProcessor=$stack24;
+ this#org.apache.rocketmq.proxy.processor.DefaultMessagingProcessor();
+ return;
+ } 
+

@@ -1,0 +1,43 @@
+com.scurrilous.circe.crc.NormalByteCrc(java.lang.String algorithm,int bitWidth,int poly,int init,int xorOut)
+{
+int crc;
+  int j;
+  byte[] $stack11;
+  byte $stack17;
+  int $stack21;
+  java.lang.IllegalArgumentException $stack26;
+  this#com.scurrilous.circe.crc.AbstractIntCrc(algorithm,bitWidth,init,xorOut);
+ $stack11=new byte[256];
+ this.table=$stack11;
+ if (bitWidth<=8) goto label0;
+ $stack26=new java.lang.IllegalArgumentException;
+ $stack26#java.lang.IllegalArgumentException("invalid CRC width");
+ throw $stack26;
+ label0:init=(1<<bitWidth);
+ init=(init-1);
+ xorOut=(8-bitWidth);
+ poly=(poly<<xorOut);
+ xorOut=0;
+ label1:if (xorOut>=256) goto label2;
+ crc=xorOut;
+ j=0;
+ label3:if (j>=8) goto label4;
+ $stack21=(crc & 128);
+ if ($stack21==0) goto label5;
+ crc=(crc<<1);
+ crc=(!crc & poly) |(!poly & crc);
+ goto label6;
+ label5:crc=(crc<<1);
+ label6:j=(j+1);
+ goto label3;
+ label4:$stack11=this.table;
+ j=(8-bitWidth);
+ j=(crc>>j);
+ j=(j & init);
+ $stack17=(byte) j;
+ $stack11[xorOut]=$stack17;
+ xorOut=(xorOut+1);
+ goto label1;
+ label2:return;
+ } 
+

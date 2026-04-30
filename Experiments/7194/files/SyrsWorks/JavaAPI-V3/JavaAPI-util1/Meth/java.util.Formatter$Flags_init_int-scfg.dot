@@ -1,0 +1,20 @@
+digraph G {
+  node [shape=box, ];
+  "pc0_js1" [label="〈this#java.lang.Object.init (), js1〉\n\
+tt", ];
+  "pc1_js1" [label="〈this.flags = i0, js1〉", ];
+  "pc2_js1" [label="〈return this, js1〉", ];
+  "pc3_js1" [label="〈sink, js1〉\n\
+obj_level(this) ⊑ ret(obj_level(this))' ∧ (ϕ ≠ S2 ∨ ret(~this)' ∧ obj_level(this) ⊑ ret(obj_level())' ∧ pc ⊔ level(this) ⊑ ret(level())')",
+             ];
+  
+  
+  "pc0_js1" -> "pc1_js1" [label="tt,\n\
+{}", ];
+  "pc1_js1" -> "pc2_js1" [label="tt,\n\
+{obj_level(this) := pc ⊔ level(i0) ⊔ obj_level(this)}",
+                          ];
+  "pc2_js1" -> "pc3_js1" [label="tt,\n\
+{ϕ := S2}", ];
+  
+  }

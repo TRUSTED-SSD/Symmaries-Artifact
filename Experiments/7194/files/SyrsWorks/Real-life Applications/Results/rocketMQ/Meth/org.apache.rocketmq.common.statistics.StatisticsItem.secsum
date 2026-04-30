@@ -1,0 +1,12 @@
+org.apache.rocketmq.common.statistics.StatisticsItem (java.lang.String
+                                                        statKind,
+                                                      java.lang.String
+                                                        statObject,
+                                                      java.lang.String[]
+                                                        itemNames) {
+  guard = tt;
+  ret(obj_level(itemNames)) = if obj_level(this) = ⊥ ∧ (if obj_level(statKind) = ⊥ then level(this) ⊔ obj_level(itemNames) = ⊥ else obj_level(statKind) = ⊤ ∧ level(itemNames) ⊔ level(this) ⊔ obj_level(itemNames) = ⊥) then pc else obj_level(this) ⊔ (if obj_level(statKind) = ⊥ then level(this) ⊔ obj_level(itemNames) else obj_level(statKind) ⊓ (level(itemNames) ⊔ level(this) ⊔ obj_level(itemNames)));
+  ret(obj_level(statKind)) = pc ⊔ level(this) ⊔ obj_level(statKind) ⊔ obj_level(this);
+  ret(obj_level(statObject)) = pc ⊔ level(this) ⊔ obj_level(statKind) ⊔ obj_level(this);
+  ret(obj_level(this)) = pc ⊔ level(itemNames) ⊔ level(statKind) ⊔ level(statObject) ⊔ level(this) ⊔ obj_level(itemNames) ⊔ obj_level(statKind) ⊔ obj_level(this);
+}

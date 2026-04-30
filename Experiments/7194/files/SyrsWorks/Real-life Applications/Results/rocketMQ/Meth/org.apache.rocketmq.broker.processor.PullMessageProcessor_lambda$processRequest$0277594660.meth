@@ -1,0 +1,14 @@
+org.apache.rocketmq.remoting.protocol.RemotingCommand org.apache.rocketmq.broker.processor.PullMessageProcessor:lambda$processRequest$0(org.apache.rocketmq.remoting.protocol.RemotingCommand @finalResponse,org.apache.rocketmq.remoting.protocol.RemotingCommand request,org.apache.rocketmq.remoting.protocol.header.PullMessageRequestHeader requestHeader,io.netty.channel.Channel channel,org.apache.rocketmq.remoting.protocol.heartbeat.SubscriptionData finalSubscriptionData,org.apache.rocketmq.remoting.protocol.subscription.SubscriptionGroupConfig subscriptionGroupConfig,boolean brokerAllowSuspend,org.apache.rocketmq.store.MessageFilter messageFilter,org.apache.rocketmq.remoting.protocol.statictopic.TopicQueueMappingContext mappingContext,org.apache.rocketmq.store.GetMessageResult result)
+{
+org.apache.rocketmq.broker.plugin.PullMessageResultHandler $stack11;
+  org.apache.rocketmq.remoting.protocol.RemotingCommand finalResponse;
+finalResponse=@finalResponse;
+if (null!=result) goto label0;
+ finalResponse.setCode(1);
+ finalResponse.setRemark("store getMessage return null");
+ return  finalResponse;
+ label0:$stack11=this.pullMessageResultHandler;
+ finalResponse = $stack11.handle(result,request,requestHeader,channel,finalSubscriptionData,subscriptionGroupConfig,brokerAllowSuspend,messageFilter,finalResponse,mappingContext);
+ return  finalResponse;
+ } 
+

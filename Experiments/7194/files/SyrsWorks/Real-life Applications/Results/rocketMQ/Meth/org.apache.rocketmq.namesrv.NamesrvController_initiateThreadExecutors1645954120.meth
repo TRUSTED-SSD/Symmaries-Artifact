@@ -1,0 +1,46 @@
+void org.apache.rocketmq.namesrv.NamesrvController:initiateThreadExecutors()
+{
+java.util.concurrent.LinkedBlockingQueue $stack1;
+  org.apache.rocketmq.common.namesrv.NamesrvConfig $stack2;
+  int $stack3;
+  org.apache.rocketmq.namesrv.NamesrvController$1 $stack4;
+  int $stack8;
+  org.apache.rocketmq.common.ThreadFactoryImpl $stack9;
+  java.util.concurrent.TimeUnit $stack11;
+  java.util.concurrent.BlockingQueue $stack12;
+  org.apache.rocketmq.namesrv.NamesrvController$2 $stack16;
+  $stack1=new java.util.concurrent.LinkedBlockingQueue;
+ $stack2=this.namesrvConfig;
+ $stack3 = $stack2.getDefaultThreadPoolQueueCapacity();
+ $stack1#java.util.concurrent.LinkedBlockingQueue($stack3);
+ this.defaultThreadPoolQueue=$stack1;
+ $stack4=new org.apache.rocketmq.namesrv.NamesrvController$1;
+ $stack2=this.namesrvConfig;
+ $stack3 = $stack2.getDefaultThreadPoolNums();
+ $stack2=this.namesrvConfig;
+ $stack8 = $stack2.getDefaultThreadPoolNums();
+ $stack11=java.util.concurrent.TimeUnit.MILLISECONDS;
+ $stack12=this.defaultThreadPoolQueue;
+ $stack9=new org.apache.rocketmq.common.ThreadFactoryImpl;
+ $stack9#org.apache.rocketmq.common.ThreadFactoryImpl("RemotingExecutorThread_");
+ $stack4#org.apache.rocketmq.namesrv.NamesrvController$1(this,$stack3,$stack8,60000L,$stack11,$stack12,(java.util.concurrent.ThreadFactory)$stack9);
+ this.defaultExecutor=$stack4;
+ $stack1=new java.util.concurrent.LinkedBlockingQueue;
+ $stack2=this.namesrvConfig;
+ $stack3 = $stack2.getClientRequestThreadPoolQueueCapacity();
+ $stack1#java.util.concurrent.LinkedBlockingQueue($stack3);
+ this.clientRequestThreadPoolQueue=$stack1;
+ $stack16=new org.apache.rocketmq.namesrv.NamesrvController$2;
+ $stack2=this.namesrvConfig;
+ $stack3 = $stack2.getClientRequestThreadPoolNums();
+ $stack2=this.namesrvConfig;
+ $stack8 = $stack2.getClientRequestThreadPoolNums();
+ $stack11=java.util.concurrent.TimeUnit.MILLISECONDS;
+ $stack12=this.clientRequestThreadPoolQueue;
+ $stack9=new org.apache.rocketmq.common.ThreadFactoryImpl;
+ $stack9#org.apache.rocketmq.common.ThreadFactoryImpl("ClientRequestExecutorThread_");
+ $stack16#org.apache.rocketmq.namesrv.NamesrvController$2(this,$stack3,$stack8,60000L,$stack11,$stack12,(java.util.concurrent.ThreadFactory)$stack9);
+ this.clientRequestExecutor=$stack16;
+ return;
+ } 
+

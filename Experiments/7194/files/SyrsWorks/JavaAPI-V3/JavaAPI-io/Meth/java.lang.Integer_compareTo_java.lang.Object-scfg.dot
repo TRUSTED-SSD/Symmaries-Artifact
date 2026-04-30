@@ -1,0 +1,25 @@
+digraph G {
+  node [shape=box, ];
+  "pc0_js1" [label="〈$r2 = (java.lang.Integer) r1, js1〉", ];
+  "pc1_js1" [label="〈$i0 = this.compareTo ($r2), js1〉\n\
+tt", ];
+  "pc2_js1" [label="〈return $i0, js1〉", ];
+  "pc3_js1" [label="〈sink, js1〉\n\
+obj_level(r1) ⊑ ret(obj_level(r1))' ∧ obj_level(this) ⊑ ret(obj_level(this))' ∧ (ret(r1.><r1)' ∨ ¬r1.><r1) ∧ (ret(r1.><this)' ∨ ¬r1.><this) ∧ (ϕ ≠ S2 ∨ pc ⊔ level($i0) ⊑ ret(level())')",
+             ];
+  
+  
+  "pc0_js1" -> "pc1_js1" [label="tt,\n\
+{$r2~r1 := tt,\n\
+ $r2~this := r1~this,\n\
+ r1.><$r2 := r1.><r1,\n\
+ level($r2) := pc ⊔ level(r1),\n\
+ obj_level($r2) := obj_level(r1)}",
+                          ];
+  "pc1_js1" -> "pc2_js1" [label="tt,\n\
+{level($i0) := pc ⊔ level(r1) ⊔ level(this) ⊔ obj_level(r1) ⊔ obj_level(this)}",
+                          ];
+  "pc2_js1" -> "pc3_js1" [label="tt,\n\
+{ϕ := S2}", ];
+  
+  }

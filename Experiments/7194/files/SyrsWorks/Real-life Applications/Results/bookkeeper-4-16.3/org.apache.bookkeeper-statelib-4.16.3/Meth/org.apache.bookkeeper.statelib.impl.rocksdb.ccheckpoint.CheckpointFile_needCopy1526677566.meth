@@ -1,0 +1,31 @@
+boolean org.apache.bookkeeper.statelib.impl.rocksdb.ccheckpoint.CheckpointFile:needCopy(org.apache.bookkeeper.statelib.api.ccheckpoint.CheckpointStore checkpointStore,java.lang.String @dbPrefix,boolean enableChecksum)
+{
+java.io.IOException e;
+  boolean $stack6;
+  java.lang.Object[] $stack10;
+  java.io.File $stack11;
+  org.slf4j.Logger $stack12;
+  java.lang.String dbPrefix;
+dbPrefix=@dbPrefix;
+$stack6=this.isSstFile;
+ if ($stack6!=0) goto label0;
+ return  1;
+ label0:dbPrefix = this.getRemoteSstPath(dbPrefix,enableChecksum);
+ label1:enableChecksum = checkpointStore.fileExists(dbPrefix);
+ if (enableChecksum==0) goto label2;
+ label3:return  0;
+ label2:goto label4;
+ label5:e = catch;
+ $stack12=org.apache.bookkeeper.statelib.impl.rocksdb.ccheckpoint.CheckpointFile.log;
+ $stack10=new java.lang.Object[3];
+ $stack11=this.file;
+ dbPrefix = $stack11.getName();
+ $stack10[0]=dbPrefix;
+ dbPrefix = e.getMessage();
+ $stack10[1]=dbPrefix;
+ $stack10[2]=e;
+ $stack12.error("Failed fileExists {} {}",$stack10);
+ label4:return  1;
+ catch java.io.IOException: label1 - label3 : label5;
+} 
+

@@ -1,0 +1,58 @@
+    protected org.junit.runners.model.Statement withPotentialTimeout(org.junit.runners.model.FrameworkMethod, java.lang.Object, org.junit.runners.model.Statement)
+    {
+        org.junit.runners.BlockJUnit4ClassRunner this;
+        org.junit.runners.model.FrameworkMethod method;
+        java.lang.Object test;
+        org.junit.runners.model.Statement next;
+        long timeout;
+        java.lang.'annotation'.Annotation $stack6;
+        org.junit.Test $stack7;
+        byte $stack9;
+        org.junit.internal.runners.statements.FailOnTimeout$Builder $stack10;
+        java.util.concurrent.TimeUnit $stack11;
+        org.junit.internal.runners.statements.FailOnTimeout $stack13;
+
+        this := @this: org.junit.runners.BlockJUnit4ClassRunner;
+
+        method := @parameter0: org.junit.runners.model.FrameworkMethod;
+
+        test := @parameter1: java.lang.Object;
+
+        next := @parameter2: org.junit.runners.model.Statement;
+
+        $stack6 = virtualinvoke method.<org.junit.runners.model.FrameworkMethod: java.lang.'annotation'.Annotation getAnnotation(java.lang.Class)>(class "Lorg/junit/Test;");
+/*314*/
+
+        $stack7 = (org.junit.Test) $stack6;
+/*314*/
+
+        timeout = specialinvoke this.<org.junit.runners.BlockJUnit4ClassRunner: long getTimeout(org.junit.Test)>($stack7);
+/*314*/
+/*314*/
+
+        $stack9 = timeout cmp 0L;
+/*315*/
+
+        if $stack9 > 0 goto label1;
+/*315*/
+
+        return next;
+/*316*/
+
+     label1:
+        $stack10 = staticinvoke <org.junit.internal.runners.statements.FailOnTimeout: org.junit.internal.runners.statements.FailOnTimeout$Builder builder()>();
+/*318*/
+
+        $stack11 = <java.util.concurrent.TimeUnit: java.util.concurrent.TimeUnit MILLISECONDS>;
+/*318*/
+
+        $stack10 = virtualinvoke $stack10.<org.junit.internal.runners.statements.FailOnTimeout$Builder: org.junit.internal.runners.statements.FailOnTimeout$Builder withTimeout(long,java.util.concurrent.TimeUnit)>(timeout, $stack11);
+/*318*/
+
+        $stack13 = virtualinvoke $stack10.<org.junit.internal.runners.statements.FailOnTimeout$Builder: org.junit.internal.runners.statements.FailOnTimeout build(org.junit.runners.model.Statement)>(next);
+/*318*/
+
+        return $stack13;
+/*318*/
+    }
+

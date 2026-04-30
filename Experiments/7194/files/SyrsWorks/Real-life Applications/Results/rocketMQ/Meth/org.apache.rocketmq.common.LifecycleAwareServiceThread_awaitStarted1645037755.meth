@@ -1,0 +1,42 @@
+void org.apache.rocketmq.common.LifecycleAwareServiceThread:awaitStarted(long timeout)
+{
+java.util.concurrent.atomic.AtomicBoolean l5;
+  long duration;
+  java.lang.Throwable l8;
+  java.util.concurrent.TimeUnit $stack10;
+  java.util.concurrent.atomic.AtomicBoolean $stack12;
+  boolean $stack14;
+  long $stack18;
+  byte $stack19;
+  duration = java.lang.System.nanoTime();
+ $stack10=java.util.concurrent.TimeUnit.MILLISECONDS;
+ timeout = $stack10.toNanos(timeout);
+ timeout=(duration+timeout);
+ $stack12=this.started;
+ l5=$stack12;
+ monitorenter $stack12;
+ label0:$stack12=this.started;
+ $stack14 = $stack12.get();
+ if ($stack14!=0) goto label1;
+ duration = java.lang.System.nanoTime();
+ duration=(timeout-duration);
+ $stack10=java.util.concurrent.TimeUnit.MILLISECONDS;
+ $stack18 = $stack10.toNanos(1L);
+ $stack19=(duration cmp $stack18);
+ if ($stack19>=0) goto label2;
+ goto label1;
+ label2:$stack12=this.started;
+ $stack10=java.util.concurrent.TimeUnit.NANOSECONDS;
+ duration = $stack10.toMillis(duration);
+ $stack12.wait(duration);
+ goto label0;
+ label1:monitorexit l5;
+ label3:goto label4;
+ label5:l8 = catch;
+ monitorexit l5;
+ label6:throw l8;
+ label4:return;
+ catch java.lang.Throwable: label0 - label3 : label5;
+catch java.lang.Throwable: label5 - label6 : label5;
+} 
+

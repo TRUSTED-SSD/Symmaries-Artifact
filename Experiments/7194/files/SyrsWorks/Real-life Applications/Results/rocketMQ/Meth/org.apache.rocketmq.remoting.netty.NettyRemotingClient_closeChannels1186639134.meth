@@ -1,0 +1,29 @@
+void org.apache.rocketmq.remoting.netty.NettyRemotingClient:closeChannels(java.util.List addrList)
+{
+java.util.Iterator l2;
+  java.lang.String addr;
+  org.apache.rocketmq.remoting.netty.NettyRemotingClient$ChannelWrapper cw;
+  boolean $stack6;
+  java.util.HashSet $stack7;
+  java.lang.Object $stack8;
+  java.util.concurrent.ConcurrentMap $stack9;
+  io.netty.channel.Channel $stack11;
+  l2 = addrList.iterator();
+ label0:$stack6 = l2.hasNext();
+ if ($stack6==0) goto label1;
+ $stack8 = l2.next();
+ addr=(java.lang.String) $stack8;
+ $stack9=this.channelTables;
+ $stack8 = $stack9.get((java.lang.Object)addr);
+ cw=(org.apache.rocketmq.remoting.netty.NettyRemotingClient$ChannelWrapper) $stack8;
+ if (cw!=null) goto label2;
+ goto label0;
+ label2:$stack11 = org.apache.rocketmq.remoting.netty.NettyRemotingClient$ChannelWrapper.access$500(cw);
+ this.closeChannel(addr,$stack11);
+ goto label0;
+ label1:$stack7=new java.util.HashSet;
+ $stack7#java.util.HashSet((java.util.Collection)addrList);
+ this#org.apache.rocketmq.remoting.netty.NettyRemotingClient:interruptPullRequests((java.util.Set)$stack7);
+ return;
+ } 
+

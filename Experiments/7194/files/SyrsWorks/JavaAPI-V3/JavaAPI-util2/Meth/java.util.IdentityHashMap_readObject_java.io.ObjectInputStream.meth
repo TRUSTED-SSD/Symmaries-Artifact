@@ -1,0 +1,41 @@
+void java.util.IdentityHashMap:readObject(java.io.ObjectInputStream r1)
+{
+int i0;
+  int i1;
+  java.lang.Object r2;
+  java.lang.Object r3;
+  sun.misc.JavaOISAccess $r5;
+  int $i2;
+  java.io.StreamCorruptedException $r6;
+  java.lang.StringBuilder $r7;
+  java.lang.StringBuilder $r8;
+  java.lang.StringBuilder $r9;
+  java.lang.String $r10;
+  int i3;
+  r1.readFields();
+ i0 = r1.readInt();
+ if (i0>=0) goto label0;
+ $r6=new java.io.StreamCorruptedException;
+ $r7=new java.lang.StringBuilder;
+ $r7#java.lang.StringBuilder:init();
+ $r8 = $r7.append("Illegal mappings count: ");
+ $r9 = $r8.append(i0);
+ $r10 = $r9.toString();
+ $r6#java.io.StreamCorruptedException:init($r10);
+ throw $r6;
+ label0:i1 = java.util.IdentityHashMap.capacity(i0);
+ $r5 = sun.misc.SharedSecrets.getJavaOISAccess();
+ $i2=(i1 * 2);
+ $r5.checkArray(r1,java.lang.Object[],$i2);
+ this.size=i0;
+ this#java.util.IdentityHashMap:init(i1);
+ i3=0;
+ label1:if (i3>=i0) goto label2;
+ r2 = r1.readObject();
+ r3 = r1.readObject();
+ this#java.util.IdentityHashMap:putForCreate(r2,r3);
+ i3=(i3+1);
+ goto label1;
+ label2:return;
+ }  
+

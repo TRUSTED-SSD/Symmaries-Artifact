@@ -1,0 +1,75 @@
+    private java.util.List getCauses(java.lang.Throwable)
+    {
+        org.junit.internal.runners.ErrorReportingRunner this;
+        java.lang.Throwable cause;
+        boolean $stack2;
+        java.lang.Throwable[] $stack5;
+        java.util.List $stack6;
+        org.junit.internal.runners.InitializationError $stack7;
+        org.junit.runners.model.InitializationError $stack9;
+
+        this := @this: org.junit.internal.runners.ErrorReportingRunner;
+
+        cause := @parameter0: java.lang.Throwable;
+
+        $stack2 = cause instanceof java.lang.reflect.InvocationTargetException;
+/*44*/
+
+        if $stack2 == 0 goto label1;
+/*44*/
+
+        cause = virtualinvoke cause.<java.lang.Throwable: java.lang.Throwable getCause()>();
+/*45*/
+
+        $stack6 = specialinvoke this.<org.junit.internal.runners.ErrorReportingRunner: java.util.List getCauses(java.lang.Throwable)>(cause);
+/*45*/
+
+        return $stack6;
+/*45*/
+
+     label1:
+        $stack2 = cause instanceof org.junit.runners.model.InitializationError;
+/*47*/
+
+        if $stack2 == 0 goto label2;
+/*47*/
+
+        $stack9 = (org.junit.runners.model.InitializationError) cause;
+/*48*/
+
+        $stack6 = virtualinvoke $stack9.<org.junit.runners.model.InitializationError: java.util.List getCauses()>();
+/*48*/
+
+        return $stack6;
+/*48*/
+
+     label2:
+        $stack2 = cause instanceof org.junit.internal.runners.InitializationError;
+/*50*/
+
+        if $stack2 == 0 goto label3;
+/*50*/
+
+        $stack7 = (org.junit.internal.runners.InitializationError) cause;
+/*51*/
+
+        $stack6 = virtualinvoke $stack7.<org.junit.internal.runners.InitializationError: java.util.List getCauses()>();
+/*51*/
+
+        return $stack6;
+/*51*/
+
+     label3:
+        $stack5 = newarray (java.lang.Throwable)[1];
+/*54*/
+
+        $stack5[0] = cause;
+/*54*/
+
+        $stack6 = staticinvoke <java.util.Arrays: java.util.List asList(java.lang.Object[])>($stack5);
+/*54*/
+
+        return $stack6;
+/*54*/
+    }
+

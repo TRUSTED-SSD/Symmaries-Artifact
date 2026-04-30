@@ -1,0 +1,18 @@
+static java.lang.String org.apache.rocketmq.common.utils.ChannelUtil:getRemoteIp(io.netty.channel.Channel channel)
+{
+java.net.InetSocketAddress inetSocketAddress;
+  java.net.InetAddress inetAddr;
+  java.net.SocketAddress $stack3;
+  java.lang.String $stack5;
+  $stack3 = channel.remoteAddress();
+ inetSocketAddress=(java.net.InetSocketAddress) $stack3;
+ if (inetSocketAddress!=null) goto label0;
+ return  "";
+ label0:inetAddr = inetSocketAddress.getAddress();
+ if (inetAddr==null) goto label1;
+ $stack5 = inetAddr.getHostAddress();
+ goto label2;
+ label1:$stack5 = inetSocketAddress.getHostName();
+ label2:return  $stack5;
+ } 
+

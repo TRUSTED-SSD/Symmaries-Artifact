@@ -1,0 +1,107 @@
+    protected rifl.spec.abstractbytecode.AbstractBytecodeAccessPath readAccessPath(org.w3c.dom.Element, boolean) throws rifl.spec.RIFLIntegrityException
+    {
+        rifl.spec.abstractbytecode.AbstractBytecodeRIFLReader this;
+        org.w3c.dom.Element elem;
+        boolean isSource;
+        org.w3c.dom.Node parameterNode, $stack17;
+        rifl.spec.abstractbytecode.AbstractBytecodeParameter parameter;
+        java.util.ArrayList fields;
+        rifl.spec.abstractbytecode.AbstractBytecodeField field;
+        short $stack9;
+        rifl.spec.abstractbytecode.AbstractBytecodeAccessPath $stack25;
+        rifl.spec.RIFLIntegrityException $stack26;
+
+        this := @this: rifl.spec.abstractbytecode.AbstractBytecodeRIFLReader;
+
+        elem := @parameter0: org.w3c.dom.Element;
+
+        isSource := @parameter1: boolean;
+
+        if isSource != 0 goto label1;
+/*171*/
+
+        $stack26 = new rifl.spec.RIFLIntegrityException;
+/*172*/
+
+        specialinvoke $stack26.<rifl.spec.RIFLIntegrityException: void <init>(java.lang.String)>("Access paths cannot be sinks!");
+/*172*/
+
+        throw $stack26;
+/*172*/
+
+     label1:
+        parameterNode = interfaceinvoke elem.<org.w3c.dom.Element: org.w3c.dom.Node getFirstChild()>();
+/*174*/
+/*174*/
+
+        goto label3;
+/*176*/
+
+     label2:
+        parameterNode = interfaceinvoke parameterNode.<org.w3c.dom.Node: org.w3c.dom.Node getNextSibling()>();
+/*177*/
+/*177*/
+
+     label3:
+        $stack9 = interfaceinvoke parameterNode.<org.w3c.dom.Node: short getNodeType()>();
+/*176*/
+
+        if $stack9 != 1 goto label2;
+/*176*/
+
+        elem = (org.w3c.dom.Element) parameterNode;
+/*180*/
+
+        parameter = virtualinvoke this.<rifl.spec.abstractbytecode.AbstractBytecodeRIFLReader: rifl.spec.abstractbytecode.AbstractBytecodeParameter readParameter(org.w3c.dom.Element,boolean)>(elem, 1);
+/*180*/
+/*180*/
+
+        fields = new java.util.ArrayList;
+/*182*/
+
+        specialinvoke fields.<java.util.ArrayList: void <init>()>();
+/*182*/
+
+        parameterNode = interfaceinvoke parameterNode.<org.w3c.dom.Node: org.w3c.dom.Node getNextSibling()>();
+/*183*/
+/*183*/
+
+        goto label6;
+/*185*/
+
+     label4:
+        $stack9 = interfaceinvoke parameterNode.<org.w3c.dom.Node: short getNodeType()>();
+/*186*/
+
+        if $stack9 != 1 goto label5;
+/*186*/
+
+        elem = (org.w3c.dom.Element) parameterNode;
+/*187*/
+
+        field = virtualinvoke this.<rifl.spec.abstractbytecode.AbstractBytecodeRIFLReader: rifl.spec.abstractbytecode.AbstractBytecodeField readField(org.w3c.dom.Element,boolean)>(elem, 1);
+/*187*/
+/*187*/
+
+        interfaceinvoke fields.<java.util.List: boolean add(java.lang.Object)>(field);
+/*188*/
+
+     label5:
+        parameterNode = interfaceinvoke parameterNode.<org.w3c.dom.Node: org.w3c.dom.Node getNextSibling()>();
+/*191*/
+/*191*/
+
+     label6:
+        $stack17 = interfaceinvoke parameterNode.<org.w3c.dom.Node: org.w3c.dom.Node getNextSibling()>();
+/*185*/
+
+        if $stack17 != null goto label4;
+/*185*/
+
+        $stack25 = virtualinvoke this.<rifl.spec.abstractbytecode.AbstractBytecodeRIFLReader: rifl.spec.abstractbytecode.AbstractBytecodeAccessPath createAccessPath(rifl.spec.abstractbytecode.AbstractBytecodeParameter,java.util.List)>(parameter, fields);
+/*194*/
+
+        return $stack25;
+/*194*/
+    }
+

@@ -1,0 +1,50 @@
+java.util.Map org.apache.rocketmq.tools.command.consumer.ConsumerProgressSubCommand:getMessageQueueAllocationResult(org.apache.rocketmq.tools.admin.DefaultMQAdminExt defaultMQAdminExt,java.lang.String groupName)
+{
+java.util.HashMap results;
+  org.apache.rocketmq.remoting.protocol.body.ConsumerConnection consumerConnection;
+  java.util.Iterator l5;
+  org.apache.rocketmq.remoting.protocol.body.Connection connection;
+  java.lang.String clientId;
+  org.apache.rocketmq.remoting.protocol.body.ConsumerRunningInfo consumerRunningInfo;
+  java.util.Iterator l9;
+  org.apache.rocketmq.common.message.MessageQueue messageQueue;
+  java.util.HashSet $stack13;
+  boolean $stack15;
+  java.lang.Object $stack16;
+  java.util.TreeMap $stack19;
+  java.util.Set $stack20;
+  java.lang.String[] $stack25;
+  java.lang.String $stack26;
+  java.lang.Exception $stack29;
+  org.apache.rocketmq.logging.org.slf4j.Logger $stack30;
+  results=new java.util.HashMap;
+ results#java.util.HashMap();
+ label0:consumerConnection = defaultMQAdminExt.examineConsumerConnectionInfo(groupName);
+ $stack13 = consumerConnection.getConnectionSet();
+ l5 = $stack13.iterator();
+ label1:$stack15 = l5.hasNext();
+ if ($stack15==0) goto label2;
+ $stack16 = l5.next();
+ connection=(org.apache.rocketmq.remoting.protocol.body.Connection) $stack16;
+ clientId = connection.getClientId();
+ consumerRunningInfo = defaultMQAdminExt.getConsumerRunningInfo(groupName,clientId,(boolean)0,(boolean)0);
+ $stack19 = consumerRunningInfo.getMqTable();
+ $stack20 = $stack19.keySet();
+ l9 = $stack20.iterator();
+ label3:$stack15 = l9.hasNext();
+ if ($stack15==0) goto label4;
+ $stack16 = l9.next();
+ messageQueue=(org.apache.rocketmq.common.message.MessageQueue) $stack16;
+ $stack25 = clientId.split("@");
+ $stack26=$stack25[0];
+ results.put((java.lang.Object)messageQueue,(java.lang.Object)$stack26);
+ goto label3;
+ label4:goto label1;
+ label2:goto label5;
+ label6:$stack29 = catch;
+ $stack30=org.apache.rocketmq.tools.command.consumer.ConsumerProgressSubCommand.log;
+ $stack30.error("getMqAllocationsResult error, ",(java.lang.Throwable)$stack29);
+ label5:return  results;
+ catch java.lang.Exception: label0 - label2 : label6;
+} 
+

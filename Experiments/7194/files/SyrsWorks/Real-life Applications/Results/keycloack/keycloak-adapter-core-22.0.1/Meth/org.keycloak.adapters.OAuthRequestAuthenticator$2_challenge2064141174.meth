@@ -1,0 +1,20 @@
+boolean org.keycloak.adapters.OAuthRequestAuthenticator$2:challenge(org.keycloak.adapters.spi.HttpFacade exchange)
+{
+org.keycloak.adapters.OIDCAuthenticationError $stack3;
+  java.lang.String $stack4;
+  org.keycloak.adapters.OIDCAuthenticationError$Reason $stack5;
+  org.keycloak.adapters.spi.HttpFacade$Request $stack6;
+  org.keycloak.adapters.spi.HttpFacade$Response $stack7;
+  int $stack8;
+  $stack3=new org.keycloak.adapters.OIDCAuthenticationError;
+ $stack5=this.val$reason;
+ $stack4=this.val$description;
+ $stack3#org.keycloak.adapters.OIDCAuthenticationError($stack5,$stack4);
+ $stack6 = exchange.getRequest();
+ $stack6.setError((org.keycloak.adapters.spi.AuthenticationError)$stack3);
+ $stack7 = exchange.getResponse();
+ $stack8=this.val$code;
+ $stack7.sendError($stack8);
+ return  1;
+ } 
+

@@ -1,0 +1,26 @@
+java.util.concurrent.CompletableFuture org.apache.bookkeeper.clients.impl.container.StorageContainerChannel:getStorageContainerChannelFuture()
+{
+java.util.concurrent.CompletableFuture channelFuture;
+  org.apache.bookkeeper.clients.impl.container.StorageContainerChannel l2;
+  java.lang.Throwable l3;
+  l2=this;
+ monitorenter this;
+ label0:channelFuture=this.rsChannelFuture;
+ if (null==channelFuture) goto label1;
+ channelFuture=this.rsChannelFuture;
+ monitorexit this;
+ label2:return  channelFuture;
+ label1:channelFuture = org.apache.bookkeeper.common.concurrent.FutureUtils.createFuture();
+ this.rsChannelFuture=channelFuture;
+ monitorexit this;
+ label3:goto label4;
+ label5:l3 = catch;
+ monitorexit this;
+ label6:throw l3;
+ label4:this#org.apache.bookkeeper.clients.impl.container.StorageContainerChannel();
+ return  channelFuture;
+ catch java.lang.Throwable: label0 - label2 : label5;
+catch java.lang.Throwable: label1 - label3 : label5;
+catch java.lang.Throwable: label5 - label6 : label5;
+} 
+

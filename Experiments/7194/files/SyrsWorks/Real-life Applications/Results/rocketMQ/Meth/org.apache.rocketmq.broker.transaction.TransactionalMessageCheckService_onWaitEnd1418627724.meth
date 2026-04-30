@@ -1,0 +1,34 @@
+void org.apache.rocketmq.broker.transaction.TransactionalMessageCheckService:onWaitEnd()
+{
+long timeout;
+  int checkMax;
+  long begin;
+  org.apache.rocketmq.broker.BrokerController $stack6;
+  org.apache.rocketmq.common.BrokerConfig $stack7;
+  org.apache.rocketmq.logging.org.slf4j.Logger $stack13;
+  java.lang.Long $stack15;
+  org.apache.rocketmq.broker.transaction.TransactionalMessageService $stack17;
+  org.apache.rocketmq.broker.transaction.AbstractTransactionalMessageCheckListener $stack19;
+  $stack6=this.brokerController;
+ $stack7 = $stack6.getBrokerConfig();
+ timeout = $stack7.getTransactionTimeOut();
+ $stack6=this.brokerController;
+ $stack7 = $stack6.getBrokerConfig();
+ checkMax = $stack7.getTransactionCheckMax();
+ begin = java.lang.System.currentTimeMillis();
+ $stack13=org.apache.rocketmq.broker.transaction.TransactionalMessageCheckService.log;
+ $stack15 = java.lang.Long.valueOf(begin);
+ $stack13.info("Begin to check prepare message, begin time:{}",(java.lang.Object)$stack15);
+ $stack6=this.brokerController;
+ $stack17 = $stack6.getTransactionalMessageService();
+ $stack6=this.brokerController;
+ $stack19 = $stack6.getTransactionalMessageCheckListener();
+ $stack17.check(timeout,checkMax,$stack19);
+ $stack13=org.apache.rocketmq.broker.transaction.TransactionalMessageCheckService.log;
+ timeout = java.lang.System.currentTimeMillis();
+ begin=(timeout-begin);
+ $stack15 = java.lang.Long.valueOf(begin);
+ $stack13.info("End to check prepare message, consumed time:{}",(java.lang.Object)$stack15);
+ return;
+ } 
+

@@ -1,0 +1,30 @@
+digraph G {
+  node [shape=box, ];
+  "pc0_js1" [label="〈$i0 = #r1, js1〉", ];
+  "pc1_js1" [label="〈$r2 = this.get (r1, 0, $i0), js1〉\n\
+tt", ];
+  "pc2_js1" [label="〈return $r2, js1〉", ];
+  "pc3_js1" [label="〈sink, js1〉\n\
+obj_level(r1) ⊑ ret(obj_level(r1))' ∧ obj_level(this) ⊑ ret(obj_level(this))' ∧ (ret(this.><r1)' ∨ ¬this.><r1) ∧ (ret(this.><this)' ∨ ¬this.><this) ∧ (ϕ ≠ S2 ∨ obj_level($r2) ⊑ ret(obj_level())' ∧ pc ⊔ level($r2) ⊑ ret(level())' ∧ (ret(~this)' ∨ ¬$r2~this) ∧ (ret(.><this)' ∨ ¬this.><$r2) ∧ (ret(r1.><)' ∨ ¬$r2.><r1) ∧ (ret(this.><)' ∨ ¬$r2.><this))",
+             ];
+  
+  
+  "pc0_js1" -> "pc1_js1" [label="tt,\n\
+{level($i0) := pc ⊔ level(r1) ⊔ obj_level(r1)}",
+                          ];
+  "pc1_js1" -> "pc2_js1" [label="tt,\n\
+{$r2~this := tt,\n\
+ $r2.><r1 := this.><r1,\n\
+ $r2.><this := this.><this,\n\
+ this.><$r2 := this.><this,\n\
+ this.><r1 := ff,\n\
+ this.><this := if this.><r1 then this.><r1 ∨ this.><this else this.><this,\n\
+ level($r2) := pc ⊔ level(r1) ⊔ level(this) ⊔ obj_level(r1) ⊔ obj_level(this),\n\
+ obj_level($r2) := pc ⊔ level(r1) ⊔ obj_level(r1) ⊔ (if this.><r1 then level(this) ⊔ obj_level(this) else level(this) ⊔ obj_level(this)),\n\
+ obj_level(r1) := pc ⊔ level(r1) ⊔ level(this) ⊔ obj_level(r1) ⊔ obj_level(this) ⊔ (if this.><r1 then if this.><r1 ∧ pc ⊔ level(r1) ⊔ obj_level(r1) = ⊥ ∧ level(this) ⊔ obj_level(this) = ⊥ then pc else if if pc ⊔ level(r1) ⊔ obj_level(r1) = ⊤ then this.><r1 ∨ obj_level(this) = ⊤ else pc ⊔ level(r1) ⊔ obj_level(r1) = ⊥ ∧ if this.><r1 then level(this) ⊔ obj_level(this) else obj_level(this) = ⊤ then ⊤ else ⊥ else ⊥),\n\
+ obj_level(this) := obj_level(this) ⊔ (if this.><r1 then pc ⊔ level(r1) ⊔ level(this) ⊔ obj_level(r1) ⊔ obj_level(this) else ⊥) ⊔ (if this.><r1 ∧ pc ⊔ level(r1) ⊔ obj_level(r1) = ⊥ ∧ level(this) ⊔ obj_level(this) = ⊥ then pc else if if pc ⊔ level(r1) ⊔ obj_level(r1) = ⊤ then this.><r1 ∨ obj_level(this) = ⊤ else pc ⊔ level(r1) ⊔ obj_level(r1) = ⊥ ∧ if this.><r1 then level(this) ⊔ obj_level(this) else obj_level(this) = ⊤ then ⊤ else ⊥)}",
+                          ];
+  "pc2_js1" -> "pc3_js1" [label="tt,\n\
+{ϕ := S2}", ];
+  
+  }

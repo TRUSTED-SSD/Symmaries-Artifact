@@ -1,0 +1,15 @@
+java.lang.String org.apache.rocketmq.controller.elect.impl.DefaultElectPolicy:elect(java.lang.String clusterName,java.util.Set syncStateBrokers,java.util.Set allReplicaBrokers,java.lang.String oldMaster,java.lang.String preferBrokerAddr)
+{
+java.lang.String newMaster;
+  boolean $stack7;
+  newMaster=null;
+ if (syncStateBrokers==null) goto label0;
+ newMaster = this#org.apache.rocketmq.controller.elect.impl.DefaultElectPolicy:tryElect(clusterName,syncStateBrokers,oldMaster,preferBrokerAddr);
+ label0:$stack7 = org.apache.commons.lang3.StringUtils.isNotEmpty((java.lang.CharSequence)newMaster);
+ if ($stack7==0) goto label1;
+ return  newMaster;
+ label1:if (allReplicaBrokers==null) goto label2;
+ newMaster = this#org.apache.rocketmq.controller.elect.impl.DefaultElectPolicy:tryElect(clusterName,allReplicaBrokers,oldMaster,preferBrokerAddr);
+ label2:return  newMaster;
+ } 
+

@@ -1,0 +1,38 @@
+void org.apache.bookkeeper.statelib.impl.journal.AbstractStateStoreWithJournal:lambda$replayJournal$12(java.util.concurrent.CompletableFuture future,long startingTxId,org.apache.distributedlog.LogRecordWithDLSN record,java.lang.Throwable @exc)
+{
+java.lang.String msg;
+  byte $stack7;
+  long $stack8;
+  java.lang.Object[] $stack10;
+  java.lang.Long $stack14;
+  org.slf4j.Logger $stack19;
+  org.apache.bookkeeper.statelib.api.exceptions.InvalidStateStoreException $stack20;
+  java.lang.Throwable exc;
+exc=@exc;
+if (exc==null) goto label0;
+ exc = exc.getCause();
+ org.apache.bookkeeper.common.concurrent.FutureUtils.completeExceptionally(future,exc);
+ return;
+ label0:$stack7=(startingTxId cmp -1L);
+ if ($stack7==0) goto label1;
+ $stack8 = record.getTransactionId();
+ $stack7=(startingTxId cmp $stack8);
+ if ($stack7==0) goto label1;
+ $stack10=new java.lang.Object[3];
+ $stack8 = record.getTransactionId();
+ $stack14 = java.lang.Long.valueOf($stack8);
+ $stack10[0]=$stack14;
+ $stack14 = java.lang.Long.valueOf(startingTxId);
+ $stack10[1]=$stack14;
+ msg=this.name;
+ $stack10[2]=msg;
+ msg = java.lang.String.format("replayJournal failed: Invalid starting transaction %d expecting %d for stream %s",$stack10);
+ $stack19=org.apache.bookkeeper.statelib.impl.journal.AbstractStateStoreWithJournal.log;
+ $stack19.error(msg);
+ $stack20=new org.apache.bookkeeper.statelib.api.exceptions.InvalidStateStoreException;
+ $stack20#org.apache.bookkeeper.statelib.api.exceptions.InvalidStateStoreException(msg);
+ org.apache.bookkeeper.common.concurrent.FutureUtils.completeExceptionally(future,(java.lang.Throwable)$stack20);
+ return;
+ label1:return;
+ } 
+

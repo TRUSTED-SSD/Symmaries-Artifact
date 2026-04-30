@@ -1,0 +1,26 @@
+org.apache.bookkeeper.bookie.storage.directentrylogger.Buffer(org.apache.bookkeeper.common.util.nativeio.NativeIO nativeIO,io.netty.buffer.ByteBufAllocator allocator,int bufferSize)
+{
+long $stack4;
+  boolean $stack5;
+  io.netty.buffer.ByteBuf $stack6;
+  java.nio.ByteBuffer $stack8;
+  java.nio.ByteOrder $stack9;
+  this#java.lang.Object();
+ this.pointer=0L;
+ $stack4=(long) bufferSize;
+ $stack5 = org.apache.bookkeeper.bookie.storage.directentrylogger.Buffer.isAligned($stack4);
+ com.google.common.base.Preconditions.checkArgument($stack5,"Buffer size not aligned %d",bufferSize);
+ this.allocator=allocator;
+ $stack6 = this#org.apache.bookkeeper.bookie.storage.directentrylogger.Buffer:allocateAligned(4096,bufferSize);
+ this.buffer=$stack6;
+ this.nativeIO=nativeIO;
+ this.bufferSize=bufferSize;
+ $stack6=this.buffer;
+ $stack8 = $stack6.nioBuffer(0,bufferSize);
+ this.byteBuffer=$stack8;
+ $stack8=this.byteBuffer;
+ $stack9=java.nio.ByteOrder.BIG_ENDIAN;
+ $stack8.order($stack9);
+ return;
+ } 
+

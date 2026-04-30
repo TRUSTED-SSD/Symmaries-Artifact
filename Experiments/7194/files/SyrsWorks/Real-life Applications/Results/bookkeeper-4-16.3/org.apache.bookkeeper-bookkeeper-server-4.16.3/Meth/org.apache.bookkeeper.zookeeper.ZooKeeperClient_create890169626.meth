@@ -1,0 +1,19 @@
+java.lang.String org.apache.bookkeeper.zookeeper.ZooKeeperClient:create(java.lang.String @path,byte[] data,java.util.List acl,org.apache.zookeeper.CreateMode createMode)
+{
+org.apache.bookkeeper.zookeeper.ZooKeeperClient$9 $stack5;
+  org.apache.bookkeeper.stats.OpStatsLogger $stack6;
+  com.google.common.util.concurrent.RateLimiter $stack7;
+  org.apache.bookkeeper.zookeeper.RetryPolicy $stack8;
+  java.lang.Object $stack9;
+  java.lang.String path;
+path=@path;
+$stack5=new org.apache.bookkeeper.zookeeper.ZooKeeperClient$9;
+ $stack5#org.apache.bookkeeper.zookeeper.ZooKeeperClient$9(this,path,data,acl,createMode);
+ $stack8=this.operationRetryPolicy;
+ $stack7=this.rateLimiter;
+ $stack6=this.createStats;
+ $stack9 = org.apache.bookkeeper.zookeeper.ZooWorker.syncCallWithRetries(this,(org.apache.bookkeeper.zookeeper.ZooWorker$ZooCallable)$stack5,$stack8,$stack7,$stack6);
+ path=(java.lang.String) $stack9;
+ return  path;
+ } 
+

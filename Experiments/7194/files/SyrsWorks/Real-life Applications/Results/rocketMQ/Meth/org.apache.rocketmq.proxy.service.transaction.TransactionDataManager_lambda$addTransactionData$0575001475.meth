@@ -1,0 +1,21 @@
+static java.util.NavigableSet org.apache.rocketmq.proxy.service.transaction.TransactionDataManager:lambda$addTransactionData$0(org.apache.rocketmq.proxy.service.transaction.TransactionData transactionData,java.lang.String key,java.util.NavigableSet @dataSet)
+{
+int $stack4;
+  org.apache.rocketmq.proxy.config.ProxyConfig $stack5;
+  int $stack6;
+  java.util.concurrent.ConcurrentSkipListSet $stack9;
+  java.util.NavigableSet dataSet;
+dataSet=@dataSet;
+if (dataSet!=null) goto label0;
+ $stack9=new java.util.concurrent.ConcurrentSkipListSet;
+ $stack9#java.util.concurrent.ConcurrentSkipListSet();
+ dataSet=$stack9;
+ label0:dataSet.add((java.lang.Object)transactionData);
+ $stack4 = dataSet.size();
+ $stack5 = org.apache.rocketmq.proxy.config.ConfigurationManager.getProxyConfig();
+ $stack6 = $stack5.getTransactionDataMaxNum();
+ if ($stack4<=$stack6) goto label1;
+ dataSet.pollFirst();
+ label1:return  dataSet;
+ } 
+

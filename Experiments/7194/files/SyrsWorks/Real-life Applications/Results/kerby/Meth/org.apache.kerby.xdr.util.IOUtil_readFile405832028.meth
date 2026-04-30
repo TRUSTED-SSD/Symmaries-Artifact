@@ -1,0 +1,29 @@
+static java.lang.String org.apache.kerby.xdr.util.IOUtil:readFile(java.io.File file)
+{
+long len;
+  byte[] buf;
+  java.io.InputStream is;
+  byte $stack6;
+  int $stack8;
+  java.nio.file.Path $stack9;
+  java.nio.file.OpenOption[] $stack10;
+  java.lang.String $stack12;
+  java.io.IOException $stack13;
+  len=0L;
+ len = file.length();
+ $stack6=(len cmp 2147483647L);
+ if ($stack6<0) goto label0;
+ $stack13=new java.io.IOException;
+ $stack13#java.io.IOException("Too large file, unexpected!");
+ throw $stack13;
+ label0:len = file.length();
+ $stack8=(int) len;
+ buf=new byte[$stack8];
+ $stack9 = file.toPath();
+ $stack10=new java.nio.file.OpenOption[0];
+ is = java.nio.file.Files.newInputStream($stack9,$stack10);
+ org.apache.kerby.xdr.util.IOUtil.readInputStream(is,buf);
+ $stack12 = org.apache.kerby.xdr.util.Utf8.toString(buf);
+ return  $stack12;
+ } 
+

@@ -1,0 +1,11 @@
+org.apache.rocketmq.common.message.MessageQueue org.apache.rocketmq.client.producer.selector.SelectMessageQueueByRandom:select (
+  java.util.List mqs, org.apache.rocketmq.common.message.Message msg,
+  java.lang.Object @arg) {
+  guard = tt;
+  ret(level()) = pc ⊔ level(mqs) ⊔ level(this) ⊔ obj_level(mqs);
+  ret(obj_level()) = pc ⊔ level(mqs) ⊔ level(this) ⊔ obj_level(mqs);
+  ret(obj_level(@arg)) = pc ⊔ level(mqs) ⊔ level(this) ⊔ obj_level(@arg);
+  ret(obj_level(mqs)) = pc ⊔ level(mqs) ⊔ level(this) ⊔ obj_level(mqs);
+  ret(obj_level(msg)) = pc ⊔ level(mqs) ⊔ level(this) ⊔ obj_level(msg);
+  ret(obj_level(this)) = pc ⊔ level(mqs) ⊔ level(this) ⊔ obj_level(mqs);
+}

@@ -1,0 +1,43 @@
+void org.xerial.snappy.SnappyInputStream:readHeader()
+{
+int l1;
+  int l2;
+  byte[] $stack3;
+  boolean $stack9;
+  org.xerial.snappy.SnappyIOException $stack13;
+  org.xerial.snappy.SnappyErrorCode $stack14;
+  byte[] $stack18;
+  java.io.InputStream $stack19;
+  l1=0;
+ label0:$stack3=this.header;
+ l2=#$stack3;
+ if (l1>=l2) goto label1;
+ $stack19=this.in;
+ $stack18=this.header;
+ $stack3=this.header;
+ l2=#$stack3;
+ l2=(l2-l1);
+ dummyClass.highSourceMut($stack18);
+l2 = $stack19.read($stack18,l1,l2);
+dummyClass.highSourceMut(l2);
+ if (l2!=-1) goto label2;
+ goto label1;
+ label2:l1=(l1+l2);
+ goto label0;
+ label1:if (l1!=0) goto label3;
+ $stack13=new org.xerial.snappy.SnappyIOException;
+ $stack14=org.xerial.snappy.SnappyErrorCode.EMPTY_INPUT;
+ $stack13#org.xerial.snappy.SnappyIOException($stack14,"Cannot decompress empty stream");
+ throw $stack13;
+ label3:$stack3=this.header;
+ l2=#$stack3;
+ if (l1<l2) goto label4;
+ $stack3=this.header;
+ $stack9 = org.xerial.snappy.SnappyCodec.hasMagicHeaderPrefix($stack3);
+ if ($stack9!=0) goto label5;
+ label4:$stack3=this.header;
+ this#org.xerial.snappy.SnappyInputStream($stack3,l1);
+ return;
+ label5:return;
+ } 
+

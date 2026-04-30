@@ -1,0 +1,27 @@
+void org.apache.bookkeeper.bookie.storage.ldb.DbLedgerStorage:shutdown()
+{
+java.util.Iterator l1;
+  org.apache.bookkeeper.bookie.LedgerStorage ls;
+  java.util.List $stack3;
+  boolean $stack5;
+  java.util.concurrent.ExecutorService $stack6;
+  java.lang.Object $stack11;
+  $stack3=this.ledgerStorageList;
+ l1 = $stack3.iterator();
+ label0:$stack5 = l1.hasNext();
+ if ($stack5==0) goto label1;
+ $stack11 = l1.next();
+ ls=(org.apache.bookkeeper.bookie.LedgerStorage) $stack11;
+ ls.shutdown();
+ goto label0;
+ label1:$stack6=this.entryLoggerWriteExecutor;
+ if ($stack6==null) goto label2;
+ $stack6=this.entryLoggerWriteExecutor;
+ $stack6.shutdown();
+ label2:$stack6=this.entryLoggerFlushExecutor;
+ if ($stack6==null) goto label3;
+ $stack6=this.entryLoggerFlushExecutor;
+ $stack6.shutdown();
+ label3:return;
+ } 
+

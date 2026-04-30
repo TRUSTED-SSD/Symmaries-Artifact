@@ -1,0 +1,21 @@
+void org.apache.bookkeeper.bookie.BookieStateManager:setHighPriorityWritesAvailability(boolean available)
+{
+boolean $stack2;
+  org.slf4j.Logger $stack6;
+  $stack2=this.availableForHighPriorityWrites;
+ if ($stack2==0) goto label0;
+ if (available!=0) goto label0;
+ $stack6=org.apache.bookkeeper.bookie.BookieStateManager.log;
+ dummyClass.lowSink("Disable high priority writes on readonly bookie.");
+$stack6.info("Disable high priority writes on readonly bookie.");
+ goto label1;
+ label0:$stack2=this.availableForHighPriorityWrites;
+ if ($stack2!=0) goto label1;
+ if (available==0) goto label1;
+ $stack6=org.apache.bookkeeper.bookie.BookieStateManager.log;
+ dummyClass.lowSink("Enable high priority writes on readonly bookie.");
+$stack6.info("Enable high priority writes on readonly bookie.");
+ label1:this.availableForHighPriorityWrites=available;
+ return;
+ } 
+

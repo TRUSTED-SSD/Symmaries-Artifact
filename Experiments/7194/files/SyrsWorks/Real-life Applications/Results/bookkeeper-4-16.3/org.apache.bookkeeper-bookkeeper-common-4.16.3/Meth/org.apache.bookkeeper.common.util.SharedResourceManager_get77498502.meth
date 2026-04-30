@@ -1,0 +1,20 @@
+java.lang.Object org.apache.bookkeeper.common.util.SharedResourceManager:get(org.apache.bookkeeper.common.util.SharedResourceManager$Resource resource)
+{
+org.apache.bookkeeper.common.util.SharedResourceManager$Instance instance;
+  java.util.IdentityHashMap $stack3;
+  java.lang.Object $stack4;
+  $stack3=this.instances;
+ $stack4 = $stack3.get((java.lang.Object)resource);
+ instance=(org.apache.bookkeeper.common.util.SharedResourceManager$Instance) $stack4;
+ if (null!=instance) goto label0;
+ instance=new org.apache.bookkeeper.common.util.SharedResourceManager$Instance;
+ $stack4 = resource.create();
+ instance#org.apache.bookkeeper.common.util.SharedResourceManager$Instance($stack4);
+ $stack3=this.instances;
+ $stack3.put((java.lang.Object)resource,(java.lang.Object)instance);
+ label0:instance.cancelDestroyTask();
+ instance.retain();
+ $stack4 = org.apache.bookkeeper.common.util.SharedResourceManager$Instance.access$000(instance);
+ return  $stack4;
+ } 
+

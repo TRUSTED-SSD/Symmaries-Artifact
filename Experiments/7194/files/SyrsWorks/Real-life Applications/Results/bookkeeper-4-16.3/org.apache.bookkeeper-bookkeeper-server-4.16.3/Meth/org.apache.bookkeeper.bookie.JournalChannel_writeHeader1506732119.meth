@@ -1,0 +1,41 @@
+void org.apache.bookkeeper.bookie.JournalChannel:writeHeader(org.apache.bookkeeper.bookie.Journal$BufferedChannelBuilder bcBuilder,int writeBufferSize)
+{
+java.nio.ByteBuffer bb;
+  int $stack5;
+  byte[] $stack8;
+  java.nio.channels.FileChannel $stack13;
+  org.apache.bookkeeper.bookie.BufferedChannel $stack16;
+  long $stack17;
+  long $stack20;
+  short $stack25;
+  $stack5=this.formatVersion;
+ if (4!=$stack5) goto label0;
+ $stack25=8;
+ goto label1;
+ label0:$stack25=512;
+ label1:bb = java.nio.ByteBuffer.allocate((int)$stack25);
+ org.apache.bookkeeper.util.ZeroBuffer.put(bb);
+ bb.clear();
+ $stack8=this.magicWord;
+ bb.put($stack8);
+ $stack5=this.formatVersion;
+ bb.putInt($stack5);
+ bb.clear();
+ $stack13=this.fc;
+ $stack13.write(bb);
+ $stack13=this.fc;
+ $stack16 = bcBuilder.create($stack13,writeBufferSize);
+ this.bc=$stack16;
+ this.forceWrite((boolean)1);
+ $stack17=this.preAllocSize;
+ this.nextPrealloc=$stack17;
+ $stack13=this.fc;
+ bb=this.zeros;
+ $stack20=this.nextPrealloc;
+ writeBufferSize=this.journalAlignSize;
+ $stack17=(long) writeBufferSize;
+ $stack17=($stack20-$stack17);
+ $stack13.write(bb,$stack17);
+ return;
+ } 
+

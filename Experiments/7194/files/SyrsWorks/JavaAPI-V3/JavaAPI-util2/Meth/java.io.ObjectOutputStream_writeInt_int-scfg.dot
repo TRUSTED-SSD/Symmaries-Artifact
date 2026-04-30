@@ -1,0 +1,27 @@
+digraph G {
+  node [shape=box, ];
+  "pc0_js1" [label="〈$r1 = this.bout, js1〉", ];
+  "pc1_js1" [label="〈$r1.writeInt (i0), js1〉\n\
+tt", ];
+  "pc2_js1" [label="〈return, js1〉", ];
+  "pc3_js1" [label="〈sink, js1〉\n\
+obj_level(this) ⊑ ret(obj_level(this))' ∧ (ret(this.><this)' ∨ ¬this.><this)",
+             ];
+  
+  
+  "pc0_js1" -> "pc1_js1" [label="tt,\n\
+{$r1.><$r1 := ff,\n\
+ $r1.><this := this.><this,\n\
+ this.><$r1 := tt,\n\
+ level($r1) := pc ⊔ level(this) ⊔ obj_level(this),\n\
+ obj_level($r1) := obj_level(this)}",
+                          ];
+  "pc1_js1" -> "pc2_js1" [label="tt,\n\
+{$r1.><this := this.><this,\n\
+ obj_level($r1) := pc ⊔ level(i0) ⊔ level(this) ⊔ obj_level(this),\n\
+ obj_level(this) := pc ⊔ level(i0) ⊔ level(this) ⊔ obj_level(this)}",
+                          ];
+  "pc2_js1" -> "pc3_js1" [label="tt,\n\
+{ϕ := S2}", ];
+  
+  }

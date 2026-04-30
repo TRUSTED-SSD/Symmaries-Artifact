@@ -1,0 +1,54 @@
+void org.apache.rocketmq.client.impl.MQClientAPIImpl:updateControllerConfig(java.util.Properties properties,java.util.List controllers,long timeoutMillis)
+{
+java.lang.String str;
+  org.apache.rocketmq.remoting.protocol.RemotingCommand request;
+  org.apache.rocketmq.remoting.protocol.RemotingCommand errResponse;
+  java.util.Iterator l8;
+  org.apache.rocketmq.remoting.protocol.RemotingCommand response;
+  int $stack12;
+  boolean $stack13;
+  byte[] $stack15;
+  org.apache.rocketmq.client.exception.MQClientException $stack18;
+  java.lang.Object $stack21;
+  org.apache.rocketmq.remoting.RemotingClient $stack22;
+  java.lang.AssertionError $stack28;
+  str = org.apache.rocketmq.common.MixAll.properties2String(properties);
+ $stack12 = str.length();
+ if ($stack12<1) goto label0;
+ if (controllers==null) goto label0;
+ $stack13 = controllers.isEmpty();
+ if ($stack13==0) goto label1;
+ label0:return;
+ label1:request = org.apache.rocketmq.remoting.protocol.RemotingCommand.createRequestCommand(1009,null);
+ $stack15 = str.getBytes("UTF-8");
+ request.setBody($stack15);
+ errResponse=null;
+ l8 = controllers.iterator();
+ label2:$stack13 = l8.hasNext();
+ if ($stack13==0) goto label3;
+ $stack21 = l8.next();
+ str=(java.lang.String) $stack21;
+ $stack22=this.remotingClient;
+ response = $stack22.invokeSync(str,request,timeoutMillis);
+ $stack13=org.apache.rocketmq.client.impl.MQClientAPIImpl.$assertionsDisabled;
+ if ($stack13!=0) goto label4;
+ if (response!=null) goto label4;
+ $stack28=new java.lang.AssertionError;
+ $stack28#java.lang.AssertionError();
+ throw $stack28;
+ label4:$stack12 = response.getCode();
+ switch [$stack12]
+if 0 goto label5;
+goto label6;
+ label5:goto label7;
+ label6:errResponse=response;
+ label7:goto label2;
+ label3:if (errResponse==null) goto label8;
+ $stack18=new org.apache.rocketmq.client.exception.MQClientException;
+ $stack12 = errResponse.getCode();
+ str = errResponse.getRemark();
+ $stack18#org.apache.rocketmq.client.exception.MQClientException($stack12,str);
+ throw $stack18;
+ label8:return;
+ } 
+

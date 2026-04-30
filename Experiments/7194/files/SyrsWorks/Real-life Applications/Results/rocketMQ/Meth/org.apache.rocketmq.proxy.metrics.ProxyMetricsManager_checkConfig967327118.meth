@@ -1,0 +1,31 @@
+boolean org.apache.rocketmq.proxy.metrics.ProxyMetricsManager:checkConfig()
+{
+org.apache.rocketmq.common.BrokerConfig$MetricsExporterType exporterType;
+  org.apache.rocketmq.proxy.config.ProxyConfig $stack2;
+  boolean $stack5;
+  int[] $stack6;
+  int $stack7;
+  java.lang.String $stack10;
+  $stack2=org.apache.rocketmq.proxy.metrics.ProxyMetricsManager.proxyConfig;
+ if ($stack2!=null) goto label0;
+ return  0;
+ label0:$stack2=org.apache.rocketmq.proxy.metrics.ProxyMetricsManager.proxyConfig;
+ exporterType = $stack2.getMetricsExporterType();
+ $stack5 = exporterType.isEnable();
+ if ($stack5!=0) goto label1;
+ return  0;
+ label1:$stack6=org.apache.rocketmq.proxy.metrics.ProxyMetricsManager$1.$SwitchMap$org$apache$rocketmq$common$BrokerConfig$MetricsExporterType;
+ $stack7 = exporterType.ordinal();
+ $stack7=$stack6[$stack7];
+ switch [$stack7]
+if 0 goto label2;
+if 1 goto label3;
+goto label4;
+ label2:$stack2=org.apache.rocketmq.proxy.metrics.ProxyMetricsManager.proxyConfig;
+ $stack10 = $stack2.getMetricsGrpcExporterTarget();
+ $stack5 = org.apache.commons.lang3.StringUtils.isNotBlank((java.lang.CharSequence)$stack10);
+ return  $stack5;
+ label3:return  1;
+ label4:return  0;
+ } 
+

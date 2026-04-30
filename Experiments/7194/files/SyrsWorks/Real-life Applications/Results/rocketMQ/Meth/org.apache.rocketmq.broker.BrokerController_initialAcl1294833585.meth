@@ -1,0 +1,42 @@
+void org.apache.rocketmq.broker.BrokerController:initialAcl()
+{
+java.util.List accessValidators;
+  java.util.Iterator l2;
+  org.apache.rocketmq.acl.AccessValidator validator;
+  org.apache.rocketmq.common.BrokerConfig $stack5;
+  boolean $stack6;
+  java.lang.Object $stack11;
+  java.util.Map $stack12;
+  java.lang.Class $stack13;
+  org.apache.rocketmq.broker.BrokerController$19 $stack15;
+  org.apache.rocketmq.logging.org.slf4j.Logger $stack17;
+  org.apache.rocketmq.acl.plain.PlainAccessValidator $stack18;
+  $stack5=this.brokerConfig;
+ $stack6 = $stack5.isAclEnable();
+ if ($stack6!=0) goto label0;
+ $stack17=org.apache.rocketmq.broker.BrokerController.LOG;
+ $stack17.info("The broker dose not enable acl");
+ return;
+ label0:accessValidators = org.apache.rocketmq.common.utils.ServiceProvider.load(org.apache.rocketmq.acl.AccessValidator);
+ $stack6 = accessValidators.isEmpty();
+ if ($stack6==0) goto label1;
+ $stack17=org.apache.rocketmq.broker.BrokerController.LOG;
+ $stack17.info("ServiceProvider loaded no AccessValidator, using default org.apache.rocketmq.acl.plain.PlainAccessValidator");
+ $stack18=new org.apache.rocketmq.acl.plain.PlainAccessValidator;
+ $stack18#org.apache.rocketmq.acl.plain.PlainAccessValidator();
+ accessValidators.add((java.lang.Object)$stack18);
+ label1:l2 = accessValidators.iterator();
+ label2:$stack6 = l2.hasNext();
+ if ($stack6==0) goto label3;
+ $stack11 = l2.next();
+ validator=(org.apache.rocketmq.acl.AccessValidator) $stack11;
+ $stack12=this.accessValidatorMap;
+ $stack13 = validator.getClass();
+ $stack12.put((java.lang.Object)$stack13,(java.lang.Object)validator);
+ $stack15=new org.apache.rocketmq.broker.BrokerController$19;
+ $stack15#org.apache.rocketmq.broker.BrokerController$19(this,validator);
+ this.registerServerRPCHook((org.apache.rocketmq.remoting.RPCHook)$stack15);
+ goto label2;
+ label3:return;
+ } 
+

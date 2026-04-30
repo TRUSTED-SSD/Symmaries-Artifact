@@ -1,0 +1,26 @@
+void org.apache.bookkeeper.proto.GetListOfEntriesOfLedgerProcessorV3:run()
+{
+org.apache.bookkeeper.proto.BookkeeperProtocol$GetListOfEntriesOfLedgerResponse listOfEntriesOfLedgerResponse;
+  org.apache.bookkeeper.proto.BookkeeperProtocol$Response$Builder response;
+  org.apache.bookkeeper.proto.BookkeeperProtocol$Response resp;
+  org.apache.bookkeeper.proto.BookkeeperProtocol$BKPacketHeader $stack6;
+  org.apache.bookkeeper.proto.BookkeeperProtocol$StatusCode $stack8;
+  org.apache.bookkeeper.proto.BookieRequestProcessor $stack13;
+  org.apache.bookkeeper.proto.RequestStats $stack14;
+  org.apache.bookkeeper.stats.OpStatsLogger $stack15;
+  listOfEntriesOfLedgerResponse = this#org.apache.bookkeeper.proto.GetListOfEntriesOfLedgerProcessorV3:getListOfEntriesOfLedgerResponse();
+ response = org.apache.bookkeeper.proto.BookkeeperProtocol$Response.newBuilder();
+ $stack6 = this.getHeader();
+ response = response.setHeader($stack6);
+ $stack8 = listOfEntriesOfLedgerResponse.getStatus();
+ response = response.setStatus($stack8);
+ response = response.setGetListOfEntriesOfLedgerResponse(listOfEntriesOfLedgerResponse);
+ resp = response.build();
+ $stack8 = listOfEntriesOfLedgerResponse.getStatus();
+ $stack13=this.requestProcessor;
+ $stack14 = $stack13.getRequestStats();
+ $stack15=$stack14.getListOfEntriesOfLedgerRequestStats;
+ this.sendResponse($stack8,(java.lang.Object)resp,$stack15);
+ return;
+ } 
+

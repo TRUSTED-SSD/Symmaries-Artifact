@@ -1,0 +1,34 @@
+void io.openmessaging.rocketmq.promise.DefaultPromise:timeoutSoCancel()
+{
+java.lang.Object l1;
+  java.lang.Throwable l2;
+  java.lang.Object $stack3;
+  boolean $stack4;
+  io.openmessaging.rocketmq.promise.FutureState $stack5;
+  java.lang.RuntimeException $stack6;
+  $stack3=this.lock;
+ l1=$stack3;
+ monitorenter $stack3;
+ label0:$stack4 = this#io.openmessaging.rocketmq.promise.DefaultPromise:isDoing();
+ if ($stack4!=0) goto label1;
+ monitorexit $stack3;
+ label2:return;
+ label1:$stack5=io.openmessaging.rocketmq.promise.FutureState.CANCELLED;
+ this.state=$stack5;
+ $stack6=new java.lang.RuntimeException;
+ $stack6#java.lang.RuntimeException("Get request result is timeout or interrupted");
+ this.exception=$stack6;
+ $stack3=this.lock;
+ $stack3.notifyAll();
+ monitorexit l1;
+ label3:goto label4;
+ label5:l2 = catch;
+ monitorexit l1;
+ label6:throw l2;
+ label4:this#io.openmessaging.rocketmq.promise.DefaultPromise:notifyListeners();
+ return;
+ catch java.lang.Throwable: label0 - label2 : label5;
+catch java.lang.Throwable: label1 - label3 : label5;
+catch java.lang.Throwable: label5 - label6 : label5;
+} 
+

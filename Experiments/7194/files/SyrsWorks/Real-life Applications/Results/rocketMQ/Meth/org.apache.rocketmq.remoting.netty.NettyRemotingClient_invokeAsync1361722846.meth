@@ -1,0 +1,51 @@
+void org.apache.rocketmq.remoting.netty.NettyRemotingClient:invokeAsync(java.lang.String addr,org.apache.rocketmq.remoting.protocol.RemotingCommand request,long timeoutMillis,org.apache.rocketmq.remoting.InvokeCallback invokeCallback)
+{
+long beginStartTime;
+  io.netty.channel.Channel channel;
+  org.apache.rocketmq.remoting.exception.RemotingConnectException $stack13;
+  boolean $stack14;
+  long $stack19;
+  byte $stack20;
+  org.apache.rocketmq.remoting.netty.NettyRemotingClient$InvokeCallbackWrapper $stack21;
+  org.apache.rocketmq.remoting.exception.RemotingTooMuchRequestException $stack23;
+  java.lang.StringBuilder $stack24;
+  java.lang.String $stack28;
+  org.apache.rocketmq.remoting.exception.RemotingSendRequestException $stack29;
+  org.apache.rocketmq.logging.org.slf4j.Logger $stack30;
+  beginStartTime = java.lang.System.currentTimeMillis();
+ channel = this#org.apache.rocketmq.remoting.netty.NettyRemotingClient:getAndCreateChannel(addr);
+ if (channel==null) goto label0;
+ $stack14 = channel.isActive();
+ if ($stack14==0) goto label0;
+ label1:this.doBeforeRpcHooks(addr,request);
+ $stack19 = java.lang.System.currentTimeMillis();
+ beginStartTime=($stack19-beginStartTime);
+ $stack20=(timeoutMillis cmp beginStartTime);
+ if ($stack20>=0) goto label2;
+ $stack23=new org.apache.rocketmq.remoting.exception.RemotingTooMuchRequestException;
+ $stack24=new java.lang.StringBuilder;
+ $stack24#java.lang.StringBuilder();
+ $stack24 = $stack24.append("invokeAsync call the addr[");
+ $stack24 = $stack24.append(addr);
+ $stack24 = $stack24.append("] timeout");
+ $stack28 = $stack24.toString();
+ $stack23#org.apache.rocketmq.remoting.exception.RemotingTooMuchRequestException($stack28);
+ throw $stack23;
+ label2:timeoutMillis=(timeoutMillis-beginStartTime);
+ $stack21=new org.apache.rocketmq.remoting.netty.NettyRemotingClient$InvokeCallbackWrapper;
+ $stack21#org.apache.rocketmq.remoting.netty.NettyRemotingClient$InvokeCallbackWrapper(this,invokeCallback,addr);
+ this.invokeAsyncImpl(channel,request,timeoutMillis,(org.apache.rocketmq.remoting.InvokeCallback)$stack21);
+ label3:goto label4;
+ label5:$stack29 = catch;
+ $stack30=org.apache.rocketmq.remoting.netty.NettyRemotingClient.LOGGER;
+ $stack30.warn("invokeAsync: send request exception, so close the channel[{}]",(java.lang.Object)addr);
+ this.closeChannel(addr,channel);
+ throw $stack29;
+ label0:this.closeChannel(addr,channel);
+ $stack13=new org.apache.rocketmq.remoting.exception.RemotingConnectException;
+ $stack13#org.apache.rocketmq.remoting.exception.RemotingConnectException(addr);
+ throw $stack13;
+ label4:return;
+ catch org.apache.rocketmq.remoting.exception.RemotingSendRequestException: label1 - label3 : label5;
+} 
+

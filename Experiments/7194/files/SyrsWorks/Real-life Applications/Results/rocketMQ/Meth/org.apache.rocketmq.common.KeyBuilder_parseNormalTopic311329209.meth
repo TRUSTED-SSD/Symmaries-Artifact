@@ -1,0 +1,23 @@
+static java.lang.String org.apache.rocketmq.common.KeyBuilder:parseNormalTopic(java.lang.String @topic,java.lang.String @cid)
+{
+boolean $stack2;
+  java.lang.StringBuilder $stack3;
+  int $stack8;
+  java.lang.String cid;
+java.lang.String topic;
+topic=@topic;
+cid=@cid;
+$stack2 = topic.startsWith("%RETRY%");
+ if ($stack2==0) goto label0;
+ $stack3=new java.lang.StringBuilder;
+ $stack3#java.lang.StringBuilder();
+ $stack3 = $stack3.append("%RETRY%");
+ $stack3 = $stack3.append(cid);
+ $stack3 = $stack3.append("_");
+ cid = $stack3.toString();
+ $stack8 = cid.length();
+ topic = topic.substring($stack8);
+ return  topic;
+ label0:return  topic;
+ } 
+

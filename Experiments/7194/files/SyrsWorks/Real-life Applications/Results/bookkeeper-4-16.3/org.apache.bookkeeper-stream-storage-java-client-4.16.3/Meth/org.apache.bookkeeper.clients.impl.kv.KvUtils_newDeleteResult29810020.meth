@@ -1,0 +1,14 @@
+static org.apache.bookkeeper.api.kv.result.DeleteResult org.apache.bookkeeper.clients.impl.kv.KvUtils:newDeleteResult(org.apache.bookkeeper.stream.proto.kv.rpc.DeleteRangeResponse response,org.apache.bookkeeper.api.kv.impl.result.ResultFactory resultFactory,org.apache.bookkeeper.api.kv.impl.result.KeyValueFactory kvFactory)
+{
+org.apache.bookkeeper.api.kv.impl.result.DeleteResultImpl $stack3;
+  long $stack4;
+  java.util.List $stack6;
+  $stack3 = resultFactory.newDeleteResult(-1L);
+ $stack4 = response.getDeleted();
+ $stack3 = $stack3.numDeleted($stack4);
+ $stack6 = response.getPrevKvsList();
+ $stack6 = org.apache.bookkeeper.clients.impl.kv.KvUtils.fromProtoKeyValues($stack6,kvFactory);
+ $stack3 = $stack3.prevKvs($stack6);
+ return  $stack3;
+ } 
+

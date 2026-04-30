@@ -1,0 +1,88 @@
+    private java.util.List createRunnersForParameters(java.lang.Iterable, java.lang.String, org.junit.runners.parameterized.ParametersRunnerFactory) throws org.junit.runners.model.InitializationError, java.lang.Exception
+    {
+        org.junit.runners.Parameterized this;
+        java.lang.Iterable allParameters;
+        java.lang.String namePattern;
+        org.junit.runners.parameterized.ParametersRunnerFactory runnerFactory;
+        java.lang.Object tests;
+        java.util.ArrayList runners, tmp$759020803;
+        java.util.Iterator i$;
+        org.junit.runners.parameterized.TestWithParameters test;
+        boolean $stack11;
+        org.junit.runner.Runner $stack13;
+        java.lang.ClassCastException $stack16;
+        java.lang.Exception $stack17;
+        java.util.List tmp$1994214242;
+
+        this := @this: org.junit.runners.Parameterized;
+
+        allParameters := @parameter0: java.lang.Iterable;
+
+        namePattern := @parameter1: java.lang.String;
+
+        runnerFactory := @parameter2: org.junit.runners.parameterized.ParametersRunnerFactory;
+
+     label1:
+        tests = specialinvoke this.<org.junit.runners.Parameterized: java.util.List createTestsForParameters(java.lang.Iterable,java.lang.String)>(allParameters, namePattern);
+/*309*/
+/*309*/
+
+        tmp$759020803 = new java.util.ArrayList;
+/*311*/
+
+        runners = tmp$759020803;
+
+        specialinvoke tmp$759020803.<java.util.ArrayList: void <init>()>();
+/*311*/
+
+        runners = tmp$759020803;
+/*311*/
+
+        tmp$1994214242 = (java.util.List) tests;
+
+        i$ = interfaceinvoke tmp$1994214242.<java.util.List: java.util.Iterator iterator()>();
+/*312*/
+/*312*/
+
+     label2:
+        $stack11 = interfaceinvoke i$.<java.util.Iterator: boolean hasNext()>();
+/*312*/
+
+        if $stack11 == 0 goto label3;
+/*312*/
+
+        tests = interfaceinvoke i$.<java.util.Iterator: java.lang.Object next()>();
+/*316*/
+
+        test = (org.junit.runners.parameterized.TestWithParameters) tests;
+/*316*/
+
+        $stack13 = interfaceinvoke runnerFactory.<org.junit.runners.parameterized.ParametersRunnerFactory: org.junit.runner.Runner createRunnerForTestWithParameters(org.junit.runners.parameterized.TestWithParameters)>(test);
+/*313*/
+
+        interfaceinvoke tmp$759020803.<java.util.List: boolean add(java.lang.Object)>($stack13);
+/*313*/
+
+        goto label2;
+/*313*/
+
+     label3:
+        return tmp$759020803;
+/*316*/
+
+     label4:
+        $stack16 := @caughtexception;
+/*313*/
+
+        tests = $stack16;
+/*317*/
+
+        $stack17 = specialinvoke this.<org.junit.runners.Parameterized: java.lang.Exception parametersMethodReturnedWrongType()>();
+/*318*/
+
+        throw $stack17;
+/*318*/
+
+        catch java.lang.ClassCastException from label1 to label3 with label4;
+    }
+

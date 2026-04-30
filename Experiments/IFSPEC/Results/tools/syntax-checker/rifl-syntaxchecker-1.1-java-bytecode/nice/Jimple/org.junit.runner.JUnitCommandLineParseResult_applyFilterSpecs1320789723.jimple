@@ -1,0 +1,65 @@
+    private org.junit.runner.Request applyFilterSpecs(org.junit.runner.Request)
+    {
+        org.junit.runner.JUnitCommandLineParseResult this;
+        org.junit.runner.Request request;
+        java.util.Iterator i$;
+        java.lang.String filterSpec;
+        org.junit.runner.manipulation.Filter filter;
+        java.util.List $stack5;
+        boolean $stack7;
+        java.lang.Object $stack8;
+        org.junit.runner.FilterFactory$FilterNotCreatedException $stack12;
+
+        this := @this: org.junit.runner.JUnitCommandLineParseResult;
+
+        request := @parameter0: org.junit.runner.Request;
+
+     label1:
+        $stack5 = this.<org.junit.runner.JUnitCommandLineParseResult: java.util.List filterSpecs>;
+/*128*/
+
+        i$ = interfaceinvoke $stack5.<java.util.List: java.util.Iterator iterator()>();
+/*128*/
+/*128*/
+
+     label2:
+        $stack7 = interfaceinvoke i$.<java.util.Iterator: boolean hasNext()>();
+/*128*/
+
+        if $stack7 == 0 goto label3;
+/*128*/
+
+        $stack8 = interfaceinvoke i$.<java.util.Iterator: java.lang.Object next()>();
+/*133*/
+
+        filterSpec = (java.lang.String) $stack8;
+/*133*/
+
+        filter = staticinvoke <org.junit.runner.FilterFactories: org.junit.runner.manipulation.Filter createFilterFromFilterSpec(org.junit.runner.Request,java.lang.String)>(request, filterSpec);
+/*129*/
+/*129*/
+
+        request = virtualinvoke request.<org.junit.runner.Request: org.junit.runner.Request filterWith(org.junit.runner.manipulation.Filter)>(filter);
+/*131*/
+/*131*/
+
+        goto label2;
+/*132*/
+
+     label3:
+        return request;
+/*133*/
+
+     label4:
+        $stack12 := @caughtexception;
+/*132*/
+
+        request = specialinvoke this.<org.junit.runner.JUnitCommandLineParseResult: org.junit.runner.Request errorReport(java.lang.Throwable)>($stack12);
+/*135*/
+
+        return request;
+/*135*/
+
+        catch org.junit.runner.FilterFactory$FilterNotCreatedException from label1 to label3 with label4;
+    }
+

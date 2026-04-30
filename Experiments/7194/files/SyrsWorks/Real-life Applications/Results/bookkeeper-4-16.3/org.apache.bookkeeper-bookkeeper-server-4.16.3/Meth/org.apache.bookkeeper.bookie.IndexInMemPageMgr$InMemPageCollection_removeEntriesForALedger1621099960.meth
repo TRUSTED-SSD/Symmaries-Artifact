@@ -1,0 +1,30 @@
+void org.apache.bookkeeper.bookie.IndexInMemPageMgr$InMemPageCollection:removeEntriesForALedger(long ledgerId)
+{
+java.util.concurrent.ConcurrentMap lPages;
+  java.util.Iterator l4;
+  java.util.Map$Entry pageEntry;
+  org.apache.bookkeeper.bookie.LedgerEntryPage lep;
+  java.lang.Long $stack8;
+  java.lang.Object $stack9;
+  java.util.Set $stack10;
+  boolean $stack12;
+  lPages=this.pages;
+ $stack8 = java.lang.Long.valueOf(ledgerId);
+ $stack9 = lPages.remove((java.lang.Object)$stack8);
+ lPages=(java.util.concurrent.ConcurrentMap) $stack9;
+ if (null==lPages) goto label0;
+ $stack10 = lPages.entrySet();
+ l4 = $stack10.iterator();
+ label1:$stack12 = l4.hasNext();
+ if ($stack12==0) goto label0;
+ $stack9 = l4.next();
+ pageEntry=(java.util.Map$Entry) $stack9;
+ $stack9 = pageEntry.getValue();
+ lep=(org.apache.bookkeeper.bookie.LedgerEntryPage) $stack9;
+ lep.usePage();
+ lep.markDeleted();
+ lep.releasePage();
+ goto label1;
+ label0:return;
+ } 
+

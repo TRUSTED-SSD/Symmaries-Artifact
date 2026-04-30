@@ -1,0 +1,42 @@
+void org.apache.rocketmq.proxy.processor.ProducerProcessor:fillTransactionData(java.lang.String producerGroup,org.apache.rocketmq.proxy.service.route.AddressableMessageQueue messageQueue,org.apache.rocketmq.client.producer.SendResult sendResult,java.util.List messageList)
+{
+org.apache.rocketmq.common.message.MessageId id;
+  java.lang.String $stack6;
+  org.apache.rocketmq.proxy.service.ServiceManager $stack9;
+  org.apache.rocketmq.proxy.service.transaction.TransactionService $stack10;
+  long $stack12;
+  long $stack13;
+  java.lang.String $stack14;
+  java.lang.Object $stack15;
+  org.apache.rocketmq.common.message.Message $stack16;
+  java.lang.Throwable $stack28;
+  java.lang.Object[] $stack29;
+  org.apache.rocketmq.logging.org.slf4j.Logger $stack30;
+  label0:$stack6 = sendResult.getOffsetMsgId();
+ if ($stack6==null) goto label1;
+ $stack6 = sendResult.getOffsetMsgId();
+ id = org.apache.rocketmq.common.message.MessageDecoder.decodeMessageId($stack6);
+ goto label2;
+ label1:$stack6 = sendResult.getMsgId();
+ id = org.apache.rocketmq.common.message.MessageDecoder.decodeMessageId($stack6);
+ label2:$stack9=this.serviceManager;
+ $stack10 = $stack9.getTransactionService();
+ $stack6 = messageQueue.getBrokerName();
+ $stack12 = sendResult.getQueueOffset();
+ $stack13 = id.getOffset();
+ $stack14 = sendResult.getTransactionId();
+ $stack15 = messageList.get(0);
+ $stack16=(org.apache.rocketmq.common.message.Message) $stack15;
+ $stack10.addTransactionDataByBrokerName($stack6,producerGroup,$stack12,$stack13,$stack14,$stack16);
+ label3:goto label4;
+ label5:$stack28 = catch;
+ $stack30=org.apache.rocketmq.proxy.processor.ProducerProcessor.log;
+ $stack29=new java.lang.Object[3];
+ $stack29[0]=messageQueue;
+ $stack29[1]=sendResult;
+ $stack29[2]=$stack28;
+ $stack30.warn("fillTransactionData failed. messageQueue: {}, sendResult: {}",$stack29);
+ label4:return;
+ catch java.lang.Throwable: label0 - label3 : label5;
+} 
+

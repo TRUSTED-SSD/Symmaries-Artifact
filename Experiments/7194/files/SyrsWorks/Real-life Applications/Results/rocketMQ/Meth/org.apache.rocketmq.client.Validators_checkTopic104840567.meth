@@ -1,0 +1,35 @@
+static void org.apache.rocketmq.client.Validators:checkTopic(java.lang.String @topic)
+{
+boolean $stack1;
+  int $stack2;
+  org.apache.rocketmq.client.exception.MQClientException $stack4;
+  java.lang.Object[] $stack5;
+  java.lang.Integer $stack11;
+  java.lang.String topic;
+topic=@topic;
+$stack1 = org.apache.rocketmq.common.UtilAll.isBlank(topic);
+ if ($stack1==0) goto label0;
+ $stack4=new org.apache.rocketmq.client.exception.MQClientException;
+ $stack4#org.apache.rocketmq.client.exception.MQClientException("The specified topic is blank",null);
+ throw $stack4;
+ label0:$stack2 = topic.length();
+ if ($stack2<=127) goto label1;
+ $stack4=new org.apache.rocketmq.client.exception.MQClientException;
+ $stack5=new java.lang.Object[1];
+ $stack11 = java.lang.Integer.valueOf(127);
+ $stack5[0]=$stack11;
+ topic = java.lang.String.format("The specified topic is longer than topic max length %d.",$stack5);
+ $stack4#org.apache.rocketmq.client.exception.MQClientException(topic,null);
+ throw $stack4;
+ label1:$stack1 = org.apache.rocketmq.common.topic.TopicValidator.isTopicOrGroupIllegal(topic);
+ if ($stack1==0) goto label2;
+ $stack4=new org.apache.rocketmq.client.exception.MQClientException;
+ $stack5=new java.lang.Object[2];
+ $stack5[0]=topic;
+ $stack5[1]="^[%|a-zA-Z0-9_-]+$";
+ topic = java.lang.String.format("The specified topic[%s] contains illegal characters, allowing only %s",$stack5);
+ $stack4#org.apache.rocketmq.client.exception.MQClientException(topic,null);
+ throw $stack4;
+ label2:return;
+ } 
+

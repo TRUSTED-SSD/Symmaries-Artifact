@@ -1,0 +1,47 @@
+    public void finished()
+    {
+        org.junit.experimental.ParallelComputer$1 this;
+        java.util.concurrent.ExecutorService $stack2;
+        java.util.concurrent.TimeUnit $stack3;
+        java.lang.InterruptedException $stack6;
+        java.io.PrintStream $stack7;
+
+        this := @this: org.junit.experimental.ParallelComputer$1;
+
+     label1:
+        $stack2 = this.<org.junit.experimental.ParallelComputer$1: java.util.concurrent.ExecutorService fService>;
+/*43*/
+
+        interfaceinvoke $stack2.<java.util.concurrent.ExecutorService: void shutdown()>();
+/*43*/
+
+        $stack2 = this.<org.junit.experimental.ParallelComputer$1: java.util.concurrent.ExecutorService fService>;
+/*44*/
+
+        $stack3 = <java.util.concurrent.TimeUnit: java.util.concurrent.TimeUnit NANOSECONDS>;
+/*44*/
+
+        interfaceinvoke $stack2.<java.util.concurrent.ExecutorService: boolean awaitTermination(long,java.util.concurrent.TimeUnit)>(9223372036854775807L, $stack3);
+/*44*/
+
+     label2:
+        goto label4;
+/*47*/
+
+     label3:
+        $stack6 := @caughtexception;
+/*48*/
+
+        $stack7 = <java.lang.System: java.io.PrintStream err>;
+/*46*/
+
+        virtualinvoke $stack6.<java.lang.InterruptedException: void printStackTrace(java.io.PrintStream)>($stack7);
+/*46*/
+
+     label4:
+        return;
+/*48*/
+
+        catch java.lang.InterruptedException from label1 to label2 with label3;
+    }
+

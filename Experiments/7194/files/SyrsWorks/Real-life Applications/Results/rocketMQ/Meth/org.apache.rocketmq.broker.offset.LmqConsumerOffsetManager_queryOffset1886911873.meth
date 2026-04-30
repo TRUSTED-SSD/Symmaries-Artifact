@@ -1,0 +1,29 @@
+long org.apache.rocketmq.broker.offset.LmqConsumerOffsetManager:queryOffset(java.lang.String @group,java.lang.String topic,int queueId)
+{
+java.lang.Long offset;
+  boolean $stack6;
+  java.lang.StringBuilder $stack7;
+  java.util.concurrent.ConcurrentHashMap $stack12;
+  java.lang.Object $stack13;
+  long $stack14;
+  java.lang.String group;
+group=@group;
+$stack6 = org.apache.rocketmq.common.MixAll.isLmq(group);
+ if ($stack6!=0) goto label0;
+ $stack14 = this#org.apache.rocketmq.broker.offset.ConsumerOffsetManager:queryOffset(group,topic,queueId);
+ return  $stack14;
+ label0:$stack7=new java.lang.StringBuilder;
+ $stack7#java.lang.StringBuilder();
+ $stack7 = $stack7.append(topic);
+ $stack7 = $stack7.append("@");
+ $stack7 = $stack7.append(group);
+ group = $stack7.toString();
+ $stack12=this.lmqOffsetTable;
+ $stack13 = $stack12.get((java.lang.Object)group);
+ offset=(java.lang.Long) $stack13;
+ if (offset==null) goto label1;
+ $stack14 = offset.longValue();
+ return  $stack14;
+ label1:return  -1L;
+ } 
+

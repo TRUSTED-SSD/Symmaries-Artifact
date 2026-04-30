@@ -1,0 +1,19 @@
+long org.apache.rocketmq.store.DefaultMessageStore:computeDeliverTimestamp(int delayLevel,long storeTimestamp)
+{
+java.lang.Long time;
+  java.util.concurrent.ConcurrentMap $stack5;
+  java.lang.Integer $stack6;
+  java.lang.Object $stack7;
+  long $stack9;
+  $stack5=this.delayLevelTable;
+ $stack6 = java.lang.Integer.valueOf(delayLevel);
+ $stack7 = $stack5.get((java.lang.Object)$stack6);
+ time=(java.lang.Long) $stack7;
+ if (time==null) goto label0;
+ $stack9 = time.longValue();
+ storeTimestamp=($stack9+storeTimestamp);
+ return  storeTimestamp;
+ label0:storeTimestamp=(storeTimestamp+1000L);
+ return  storeTimestamp;
+ } 
+

@@ -1,0 +1,30 @@
+byte[] org.apache.kerby.kerberos.kerb.crypto.enc.KeKiCmacEnc:prf(byte[] @key,byte[] seed)
+{
+byte[] prfConst;
+  java.nio.charset.Charset $stack5;
+  java.lang.String $stack6;
+  org.apache.kerby.kerberos.kerb.type.base.EncryptionType $stack8;
+  org.apache.kerby.kerberos.kerb.crypto.EncTypeHandler $stack9;
+  int $stack10;
+  org.apache.kerby.kerberos.kerb.crypto.enc.EncryptProvider $stack11;
+  int $stack12;
+  org.apache.kerby.kerberos.kerb.crypto.key.DkKeyMaker $stack13;
+  byte[] key;
+key=@key;
+$stack6="prf";
+ $stack5=java.nio.charset.StandardCharsets.UTF_8;
+ prfConst = $stack6.getBytes($stack5);
+ $stack8 = this.eType();
+ $stack9 = org.apache.kerby.kerberos.kerb.crypto.EncryptionHandler.getEncHandler($stack8);
+ $stack10 = $stack9.prfSize();
+ $stack11 = this.encProvider();
+ $stack12 = $stack11.blockSize();
+ if ($stack10==$stack12) goto label0;
+ return  null;
+ label0:$stack13=this.km;
+ key = $stack13.dk(key,prfConst);
+ $stack11 = this.encProvider();
+ key = org.apache.kerby.kerberos.kerb.crypto.util.Cmac.cmac($stack11,key,seed);
+ return  key;
+ } 
+

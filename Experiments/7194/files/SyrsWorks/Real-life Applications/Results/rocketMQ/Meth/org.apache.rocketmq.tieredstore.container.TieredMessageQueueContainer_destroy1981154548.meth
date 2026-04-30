@@ -1,0 +1,27 @@
+void org.apache.rocketmq.tieredstore.container.TieredMessageQueueContainer:destroy()
+{
+org.apache.rocketmq.tieredstore.container.TieredCommitLog $stack2;
+  org.apache.rocketmq.tieredstore.container.TieredConsumeQueue $stack3;
+  org.apache.rocketmq.common.message.MessageQueue $stack4;
+  org.apache.rocketmq.tieredstore.metadata.TieredMetadataStore $stack5;
+  java.lang.Exception $stack8;
+  org.apache.rocketmq.logging.org.slf4j.Logger $stack9;
+  this.closed=1;
+ $stack2=this.commitLog;
+ $stack2.destroy();
+ $stack3=this.consumeQueue;
+ $stack3.destroy();
+ label0:$stack5=this.metadataStore;
+ $stack4=this.messageQueue;
+ $stack5.deleteFileSegment($stack4);
+ $stack5=this.metadataStore;
+ $stack4=this.messageQueue;
+ $stack5.deleteQueue($stack4);
+ label1:goto label2;
+ label3:$stack8 = catch;
+ $stack9=org.apache.rocketmq.tieredstore.container.TieredMessageQueueContainer.LOGGER;
+ $stack9.error("TieredMessageQueueContainer#destroy: clean metadata failed: ",(java.lang.Throwable)$stack8);
+ label2:return;
+ catch java.lang.Exception: label0 - label1 : label3;
+} 
+

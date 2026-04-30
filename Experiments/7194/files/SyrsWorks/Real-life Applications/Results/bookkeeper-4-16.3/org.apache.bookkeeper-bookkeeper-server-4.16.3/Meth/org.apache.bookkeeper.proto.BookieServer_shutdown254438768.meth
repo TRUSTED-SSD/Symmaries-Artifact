@@ -1,0 +1,28 @@
+void org.apache.bookkeeper.proto.BookieServer:shutdown()
+{
+org.slf4j.Logger $stack1;
+  org.apache.bookkeeper.proto.BookieNettyServer $stack2;
+  boolean $stack3;
+  org.apache.bookkeeper.processor.RequestProcessor $stack4;
+  org.apache.bookkeeper.bookie.Bookie $stack5;
+  int $stack6;
+  org.apache.bookkeeper.bookie.UncleanShutdownDetection $stack7;
+  $stack1=org.apache.bookkeeper.proto.BookieServer.LOG;
+ dummyClass.lowSink("Shutting down BookieServer");
+$stack1.info("Shutting down BookieServer");
+ $stack2=this.nettyServer;
+ $stack2.shutdown();
+ $stack3=this.running;
+ if ($stack3!=0) goto label0;
+ return;
+ label0:$stack4=this.requestProcessor;
+ $stack4.close();
+ $stack5=this.bookie;
+ $stack6 = $stack5.shutdown();
+ this.exitCode=$stack6;
+ $stack7=this.uncleanShutdownDetection;
+ $stack7.registerCleanShutdown();
+ this.running=0;
+ return;
+ } 
+

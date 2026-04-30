@@ -1,0 +1,36 @@
+boolean org.apache.rocketmq.client.impl.consumer.ConsumeMessageConcurrentlyService:sendMessageBack(org.apache.rocketmq.common.message.MessageExt msg,org.apache.rocketmq.client.consumer.listener.ConsumeConcurrentlyContext context)
+{
+int delayLevel;
+  org.apache.rocketmq.client.consumer.DefaultMQPushConsumer $stack6;
+  java.lang.String $stack7;
+  org.apache.rocketmq.client.impl.consumer.DefaultMQPushConsumerImpl $stack9;
+  org.apache.rocketmq.common.message.MessageQueue $stack11;
+  java.lang.Exception $stack13;
+  java.lang.StringBuilder $stack14;
+  org.apache.rocketmq.logging.org.slf4j.Logger $stack15;
+  delayLevel = context.getDelayLevelWhenNextConsume();
+ $stack6=this.defaultMQPushConsumer;
+ $stack7 = msg.getTopic();
+ $stack7 = $stack6.withNamespace($stack7);
+ msg.setTopic($stack7);
+ label0:$stack9=this.defaultMQPushConsumerImpl;
+ $stack6=this.defaultMQPushConsumer;
+ $stack11 = context.getMessageQueue();
+ $stack11 = $stack6.queueWithNamespace($stack11);
+ $stack9.sendMessageBack(msg,delayLevel,$stack11);
+ label1:return  1;
+ label2:$stack13 = catch;
+ $stack15=org.apache.rocketmq.client.impl.consumer.ConsumeMessageConcurrentlyService.log;
+ $stack14=new java.lang.StringBuilder;
+ $stack14#java.lang.StringBuilder();
+ $stack14 = $stack14.append("sendMessageBack exception, group: ");
+ $stack7=this.consumerGroup;
+ $stack14 = $stack14.append($stack7);
+ $stack14 = $stack14.append(" msg: ");
+ $stack14 = $stack14.append((java.lang.Object)msg);
+ $stack7 = $stack14.toString();
+ $stack15.error($stack7,(java.lang.Throwable)$stack13);
+ return  0;
+ catch java.lang.Exception: label0 - label1 : label2;
+} 
+

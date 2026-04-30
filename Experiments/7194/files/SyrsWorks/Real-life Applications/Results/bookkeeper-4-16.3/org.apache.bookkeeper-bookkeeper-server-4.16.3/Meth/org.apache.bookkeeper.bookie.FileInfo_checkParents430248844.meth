@@ -1,0 +1,25 @@
+static void org.apache.bookkeeper.bookie.FileInfo:checkParents(java.io.File @f)
+{
+boolean $stack3;
+  java.io.IOException $stack5;
+  java.lang.StringBuilder $stack6;
+  java.lang.String $stack9;
+  java.io.File f;
+f=@f;
+f = f.getParentFile();
+ $stack3 = f.exists();
+ if ($stack3==0) goto label0;
+ return;
+ label0:$stack3 = f.mkdirs();
+ if ($stack3!=0) goto label1;
+ $stack5=new java.io.IOException;
+ $stack6=new java.lang.StringBuilder;
+ $stack6#java.lang.StringBuilder();
+ $stack6 = $stack6.append("Couldn\'t mkdirs for ");
+ $stack6 = $stack6.append((java.lang.Object)f);
+ $stack9 = $stack6.toString();
+ $stack5#java.io.IOException($stack9);
+ throw $stack5;
+ label1:return;
+ } 
+

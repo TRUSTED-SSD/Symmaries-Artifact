@@ -1,0 +1,52 @@
+static byte org.apache.rocketmq.acl.common.Permission:parsePermFromString(java.lang.String @permString)
+{
+byte l2;
+  int $stack4;
+  boolean $stack5;
+  java.lang.String permString;
+permString=@permString;
+if (permString!=null) goto label0;
+ return  1;
+ label0:permString = permString.trim();
+ l2=-1;
+ $stack4 = permString.hashCode();
+ switch [$stack4]
+if 0 goto label1;
+if 1 goto label2;
+if 2 goto label3;
+if 3 goto label4;
+if 4 goto label5;
+goto label6;
+ label2:$stack5 = permString.equals((java.lang.Object)"PUB");
+ if ($stack5==0) goto label6;
+ l2=0;
+ goto label6;
+ label3:$stack5 = permString.equals((java.lang.Object)"SUB");
+ if ($stack5==0) goto label6;
+ l2=1;
+ goto label6;
+ label5:$stack5 = permString.equals((java.lang.Object)"PUB|SUB");
+ if ($stack5==0) goto label6;
+ l2=2;
+ goto label6;
+ label1:$stack5 = permString.equals((java.lang.Object)"SUB|PUB");
+ if ($stack5==0) goto label6;
+ l2=3;
+ goto label6;
+ label4:$stack5 = permString.equals((java.lang.Object)"DENY");
+ if ($stack5==0) goto label6;
+ l2=4;
+ label6:switch [l2]
+if 0 goto label7;
+if 1 goto label8;
+if 2 goto label9;
+if 3 goto label9;
+if 4 goto label10;
+goto label11;
+ label7:return  4;
+ label8:return  8;
+ label9:return  12;
+ label10:return  1;
+ label11:return  1;
+ } 
+

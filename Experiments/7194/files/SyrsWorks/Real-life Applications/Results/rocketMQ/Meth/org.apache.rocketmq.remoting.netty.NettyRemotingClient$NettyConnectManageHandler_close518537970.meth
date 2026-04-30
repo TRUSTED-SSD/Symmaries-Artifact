@@ -1,0 +1,32 @@
+void org.apache.rocketmq.remoting.netty.NettyRemotingClient$NettyConnectManageHandler:close(io.netty.channel.ChannelHandlerContext ctx,io.netty.channel.ChannelPromise promise)
+{
+java.lang.String remoteAddress;
+  io.netty.channel.Channel $stack4;
+  org.apache.rocketmq.logging.org.slf4j.Logger $stack6;
+  org.apache.rocketmq.remoting.netty.NettyRemotingClient $stack7;
+  org.apache.rocketmq.remoting.ChannelEventListener $stack12;
+  org.apache.rocketmq.remoting.netty.NettyEvent $stack13;
+  org.apache.rocketmq.remoting.netty.NettyEventType $stack15;
+  $stack4 = ctx.channel();
+ remoteAddress = org.apache.rocketmq.remoting.common.RemotingHelper.parseChannelRemoteAddr($stack4);
+ $stack6 = org.apache.rocketmq.remoting.netty.NettyRemotingClient.access$200();
+ $stack6.info("NETTY CLIENT PIPELINE: CLOSE {}",(java.lang.Object)remoteAddress);
+ $stack7=this.this$0;
+ $stack4 = ctx.channel();
+ $stack7.closeChannel($stack4);
+ this#io.netty.channel.ChannelDuplexHandler:close(ctx,promise);
+ $stack7=this.this$0;
+ $stack4 = ctx.channel();
+ $stack7.failFast($stack4);
+ $stack7=this.this$0;
+ $stack12 = org.apache.rocketmq.remoting.netty.NettyRemotingClient.access$900($stack7);
+ if ($stack12==null) goto label0;
+ $stack7=this.this$0;
+ $stack13=new org.apache.rocketmq.remoting.netty.NettyEvent;
+ $stack15=org.apache.rocketmq.remoting.netty.NettyEventType.CLOSE;
+ $stack4 = ctx.channel();
+ $stack13#org.apache.rocketmq.remoting.netty.NettyEvent($stack15,remoteAddress,$stack4);
+ $stack7.putNettyEvent($stack13);
+ label0:return;
+ } 
+

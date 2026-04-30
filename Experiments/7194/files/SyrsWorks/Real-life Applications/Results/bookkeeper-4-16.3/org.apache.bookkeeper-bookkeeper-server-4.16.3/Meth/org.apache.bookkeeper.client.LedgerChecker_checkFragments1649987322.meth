@@ -1,0 +1,55 @@
+void org.apache.bookkeeper.client.LedgerChecker:checkFragments(java.util.Set fragments,org.apache.bookkeeper.proto.BookkeeperInternalCallbacks$GenericCallback cb,long percentageOfLedgerFragmentToBeVerified)
+{
+org.apache.bookkeeper.client.LedgerChecker$FullLedgerCallback allFragmentsCb;
+  java.util.Iterator l6;
+  org.apache.bookkeeper.client.LedgerFragment r;
+  org.apache.bookkeeper.client.LedgerChecker$InvalidFragmentException ife;
+  int $stack9;
+  long $stack12;
+  boolean $stack14;
+  java.lang.Object $stack15;
+  org.slf4j.Logger $stack16;
+  java.lang.Long $stack18;
+  org.apache.bookkeeper.client.BKException $stack25;
+  java.lang.InterruptedException $stack29;
+  $stack9 = fragments.size();
+ if ($stack9!=0) goto label0;
+ cb.operationComplete(0,(java.lang.Object)fragments);
+ return;
+ label0:allFragmentsCb=new org.apache.bookkeeper.client.LedgerChecker$FullLedgerCallback;
+ $stack9 = fragments.size();
+ $stack12=(long) $stack9;
+ allFragmentsCb#org.apache.bookkeeper.client.LedgerChecker$FullLedgerCallback($stack12,cb);
+ l6 = fragments.iterator();
+ label1:$stack14 = l6.hasNext();
+ if ($stack14==0) goto label2;
+ $stack15 = l6.next();
+ r=(org.apache.bookkeeper.client.LedgerFragment) $stack15;
+ $stack16=org.apache.bookkeeper.client.LedgerChecker.LOG;
+ $stack14 = $stack16.isDebugEnabled();
+ if ($stack14==0) goto label3;
+ $stack16=org.apache.bookkeeper.client.LedgerChecker.LOG;
+ dummyClass.lowSink("Checking fragment {}");
+$stack16.debug("Checking fragment {}",(java.lang.Object)r);
+ label3:$stack18 = java.lang.Long.valueOf(percentageOfLedgerFragmentToBeVerified);
+ this#org.apache.bookkeeper.client.LedgerChecker:verifyLedgerFragment(r,(org.apache.bookkeeper.proto.BookkeeperInternalCallbacks$GenericCallback)allFragmentsCb,$stack18);
+ label4:goto label5;
+ label6:ife = catch;
+ $stack16=org.apache.bookkeeper.client.LedgerChecker.LOG;
+ $stack16.error("Invalid fragment found : {}",(java.lang.Object)r);
+ allFragmentsCb.operationComplete(-14,r);
+ goto label5;
+ label7:$stack25 = catch;
+ $stack16=org.apache.bookkeeper.client.LedgerChecker.LOG;
+ $stack16.error("BKException when checking fragment : {}",(java.lang.Object)r,(java.lang.Object)$stack25);
+ goto label5;
+ label8:$stack29 = catch;
+ $stack16=org.apache.bookkeeper.client.LedgerChecker.LOG;
+ $stack16.error("InterruptedException when checking fragment : {}",(java.lang.Object)r,(java.lang.Object)$stack29);
+ label5:goto label1;
+ label2:return;
+ catch org.apache.bookkeeper.client.LedgerChecker$InvalidFragmentException: label3 - label4 : label6;
+catch org.apache.bookkeeper.client.BKException: label3 - label4 : label7;
+catch java.lang.InterruptedException: label3 - label4 : label8;
+} 
+

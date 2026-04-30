@@ -1,0 +1,39 @@
+static char[] java.lang.StringCoding:decode(byte[] r0,int i0,int i1)
+{
+java.lang.String r1;
+  java.nio.charset.Charset $r2;
+  char[] $r3;
+  java.io.UnsupportedEncodingException $r4;
+  char[] $r5;
+  java.io.UnsupportedEncodingException $r6;
+  java.lang.StringBuilder $r7;
+  java.lang.StringBuilder $r8;
+  java.lang.String $r9;
+  java.lang.StringBuilder $r10;
+  java.lang.String $r11;
+  java.io.UnsupportedEncodingException r12;
+  java.io.UnsupportedEncodingException r13;
+  $r2 = java.nio.charset.Charset.defaultCharset();
+ r1 = $r2.name();
+ label0:$r3 = java.lang.StringCoding.decode(r1,r0,i0,i1);
+ label1:return  $r3;
+ label2:$r4 = catch;
+ r12=$r4;
+ java.lang.StringCoding.warnUnsupportedCharset(r1);
+ label3:$r5 = java.lang.StringCoding.decode("ISO-8859-1",r0,i0,i1);
+ label4:return  $r5;
+ label5:$r6 = catch;
+ r13=$r6;
+ $r7=new java.lang.StringBuilder;
+ $r7#java.lang.StringBuilder:init();
+ $r8 = $r7.append("ISO-8859-1 charset not available: ");
+ $r9 = r13.toString();
+ $r10 = $r8.append($r9);
+ $r11 = $r10.toString();
+ sun.misc.MessageUtils.err($r11);
+ java.lang.System.exit(1);
+ return  null;
+ catch java.io.UnsupportedEncodingException: label0 - label1 : label2;
+catch java.io.UnsupportedEncodingException: label3 - label4 : label5;
+}  
+

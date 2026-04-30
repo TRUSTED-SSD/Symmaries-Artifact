@@ -1,0 +1,28 @@
+java.util.concurrent.CompletableFuture org.apache.rocketmq.proxy.grpc.v2.channel.GrpcClientChannel:processConsumeMessageDirectly(org.apache.rocketmq.remoting.protocol.RemotingCommand command,org.apache.rocketmq.remoting.protocol.header.ConsumeMessageDirectlyResultRequestHeader header,org.apache.rocketmq.common.message.MessageExt messageExt,java.util.concurrent.CompletableFuture @responseFuture)
+{
+apache.rocketmq.v2.TelemetryCommand$Builder $stack5;
+  apache.rocketmq.v2.VerifyMessageCommand$Builder $stack6;
+  org.apache.rocketmq.proxy.grpc.v2.channel.GrpcChannelManager $stack7;
+  java.lang.String $stack8;
+  org.apache.rocketmq.proxy.grpc.v2.common.GrpcConverter $stack10;
+  apache.rocketmq.v2.Message $stack11;
+  apache.rocketmq.v2.VerifyMessageCommand $stack13;
+  apache.rocketmq.v2.TelemetryCommand $stack15;
+  java.util.concurrent.CompletableFuture responseFuture;
+responseFuture=@responseFuture;
+$stack5 = apache.rocketmq.v2.TelemetryCommand.newBuilder();
+ $stack6 = apache.rocketmq.v2.VerifyMessageCommand.newBuilder();
+ $stack7=this.grpcChannelManager;
+ $stack8 = $stack7.addResponseFuture(responseFuture);
+ $stack6 = $stack6.setNonce($stack8);
+ $stack10 = org.apache.rocketmq.proxy.grpc.v2.common.GrpcConverter.getInstance();
+ $stack11 = $stack10.buildMessage(messageExt);
+ $stack6 = $stack6.setMessage($stack11);
+ $stack13 = $stack6.build();
+ $stack5 = $stack5.setVerifyMessageCommand($stack13);
+ $stack15 = $stack5.build();
+ this#org.apache.rocketmq.proxy.grpc.v2.channel.GrpcClientChannel($stack15);
+ responseFuture = java.util.concurrent.CompletableFuture.completedFuture(null);
+ return  responseFuture;
+ } 
+

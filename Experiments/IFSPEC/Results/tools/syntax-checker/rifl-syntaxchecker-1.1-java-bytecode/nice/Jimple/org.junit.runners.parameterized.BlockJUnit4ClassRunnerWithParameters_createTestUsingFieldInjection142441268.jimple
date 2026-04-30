@@ -1,0 +1,232 @@
+    private java.lang.Object createTestUsingFieldInjection() throws java.lang.Exception
+    {
+        org.junit.runners.parameterized.BlockJUnit4ClassRunnerWithParameters this;
+        java.util.List annotatedFieldsByParameter;
+        java.lang.Object testClassInstance, $stack18;
+        java.util.Iterator i$;
+        org.junit.runners.model.FrameworkField each;
+        java.lang.reflect.Field field;
+        org.junit.runners.Parameterized$Parameter 'annotation';
+        int index, $stack12;
+        java.lang.Object[] $stack11;
+        org.junit.runners.model.TestClass $stack13;
+        java.lang.Class $stack14;
+        boolean $stack17;
+        java.lang.'annotation'.Annotation $stack20;
+        java.lang.Exception $stack25;
+        java.lang.StringBuilder $stack26;
+        java.lang.String $stack35;
+        java.lang.IllegalArgumentException $stack36;
+
+        this := @this: org.junit.runners.parameterized.BlockJUnit4ClassRunnerWithParameters;
+
+        annotatedFieldsByParameter = specialinvoke this.<org.junit.runners.parameterized.BlockJUnit4ClassRunnerWithParameters: java.util.List getAnnotatedFieldsByParameter()>();
+/*47*/
+/*47*/
+
+        index = interfaceinvoke annotatedFieldsByParameter.<java.util.List: int size()>();
+/*48*/
+
+        $stack11 = this.<org.junit.runners.parameterized.BlockJUnit4ClassRunnerWithParameters: java.lang.Object[] parameters>;
+/*48*/
+
+        $stack12 = lengthof $stack11;
+/*48*/
+
+        if index == $stack12 goto label1;
+/*48*/
+
+        $stack25 = new java.lang.Exception;
+/*49*/
+
+        $stack26 = new java.lang.StringBuilder;
+/*49*/
+
+        specialinvoke $stack26.<java.lang.StringBuilder: void <init>()>();
+/*49*/
+
+        $stack26 = virtualinvoke $stack26.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>("Wrong number of parameters and @Parameter fields. @Parameter fields counted: ");
+/*49*/
+
+        index = interfaceinvoke annotatedFieldsByParameter.<java.util.List: int size()>();
+/*49*/
+
+        $stack26 = virtualinvoke $stack26.<java.lang.StringBuilder: java.lang.StringBuilder append(int)>(index);
+/*49*/
+
+        $stack26 = virtualinvoke $stack26.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>(", available parameters: ");
+/*49*/
+
+        $stack11 = this.<org.junit.runners.parameterized.BlockJUnit4ClassRunnerWithParameters: java.lang.Object[] parameters>;
+/*49*/
+
+        index = lengthof $stack11;
+/*49*/
+
+        $stack26 = virtualinvoke $stack26.<java.lang.StringBuilder: java.lang.StringBuilder append(int)>(index);
+/*49*/
+
+        $stack26 = virtualinvoke $stack26.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>(".");
+/*49*/
+
+        $stack35 = virtualinvoke $stack26.<java.lang.StringBuilder: java.lang.String toString()>();
+/*49*/
+
+        specialinvoke $stack25.<java.lang.Exception: void <init>(java.lang.String)>($stack35);
+/*49*/
+
+        throw $stack25;
+/*49*/
+
+     label1:
+        $stack13 = virtualinvoke this.<org.junit.runners.parameterized.BlockJUnit4ClassRunnerWithParameters: org.junit.runners.model.TestClass getTestClass()>();
+/*56*/
+
+        $stack14 = virtualinvoke $stack13.<org.junit.runners.model.TestClass: java.lang.Class getJavaClass()>();
+/*56*/
+
+        testClassInstance = virtualinvoke $stack14.<java.lang.Class: java.lang.Object newInstance()>();
+/*56*/
+/*56*/
+
+        i$ = interfaceinvoke annotatedFieldsByParameter.<java.util.List: java.util.Iterator iterator()>();
+/*57*/
+/*57*/
+
+     label2:
+        $stack17 = interfaceinvoke i$.<java.util.Iterator: boolean hasNext()>();
+/*57*/
+
+        if $stack17 == 0 goto label7;
+/*57*/
+
+        $stack18 = interfaceinvoke i$.<java.util.Iterator: java.lang.Object next()>();
+/*73*/
+
+        each = (org.junit.runners.model.FrameworkField) $stack18;
+/*73*/
+
+        field = virtualinvoke each.<org.junit.runners.model.FrameworkField: java.lang.reflect.Field getField()>();
+/*58*/
+/*58*/
+
+        $stack20 = virtualinvoke field.<java.lang.reflect.Field: java.lang.'annotation'.Annotation getAnnotation(java.lang.Class)>(class "Lorg/junit/runners/Parameterized$Parameter;");
+/*59*/
+
+        'annotation' = (org.junit.runners.Parameterized$Parameter) $stack20;
+/*59*/
+
+        index = interfaceinvoke 'annotation'.<org.junit.runners.Parameterized$Parameter: int value()>();
+/*60*/
+/*60*/
+
+     label3:
+        $stack11 = this.<org.junit.runners.parameterized.BlockJUnit4ClassRunnerWithParameters: java.lang.Object[] parameters>;
+/*62*/
+
+        $stack18 = $stack11[index];
+/*62*/
+
+        virtualinvoke field.<java.lang.reflect.Field: void set(java.lang.Object,java.lang.Object)>(testClassInstance, $stack18);
+/*62*/
+
+     label4:
+        goto label6;
+/*71*/
+
+     label5:
+        $stack36 := @caughtexception;
+/*49*/
+
+        $stack25 = new java.lang.Exception;
+/*64*/
+
+        $stack26 = new java.lang.StringBuilder;
+/*64*/
+
+        specialinvoke $stack26.<java.lang.StringBuilder: void <init>()>();
+/*64*/
+
+        $stack13 = virtualinvoke this.<org.junit.runners.parameterized.BlockJUnit4ClassRunnerWithParameters: org.junit.runners.model.TestClass getTestClass()>();
+/*64*/
+
+        $stack35 = virtualinvoke $stack13.<org.junit.runners.model.TestClass: java.lang.String getName()>();
+/*64*/
+
+        $stack26 = virtualinvoke $stack26.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>($stack35);
+/*64*/
+
+        $stack26 = virtualinvoke $stack26.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>(": Trying to set ");
+/*64*/
+
+        $stack35 = virtualinvoke field.<java.lang.reflect.Field: java.lang.String getName()>();
+/*64*/
+
+        $stack26 = virtualinvoke $stack26.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>($stack35);
+/*64*/
+
+        $stack26 = virtualinvoke $stack26.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>(" with the value ");
+/*64*/
+
+        $stack11 = this.<org.junit.runners.parameterized.BlockJUnit4ClassRunnerWithParameters: java.lang.Object[] parameters>;
+/*64*/
+
+        testClassInstance = $stack11[index];
+/*64*/
+
+        $stack26 = virtualinvoke $stack26.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.Object)>(testClassInstance);
+/*64*/
+
+        $stack26 = virtualinvoke $stack26.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>(" that is not the right type (");
+/*64*/
+
+        $stack11 = this.<org.junit.runners.parameterized.BlockJUnit4ClassRunnerWithParameters: java.lang.Object[] parameters>;
+/*64*/
+
+        testClassInstance = $stack11[index];
+/*64*/
+
+        $stack14 = virtualinvoke testClassInstance.<java.lang.Object: java.lang.Class getClass()>();
+/*64*/
+
+        $stack35 = virtualinvoke $stack14.<java.lang.Class: java.lang.String getSimpleName()>();
+/*64*/
+
+        $stack26 = virtualinvoke $stack26.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>($stack35);
+/*64*/
+
+        $stack26 = virtualinvoke $stack26.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>(" instead of ");
+/*64*/
+
+        $stack14 = virtualinvoke field.<java.lang.reflect.Field: java.lang.Class getType()>();
+/*64*/
+
+        $stack35 = virtualinvoke $stack14.<java.lang.Class: java.lang.String getSimpleName()>();
+/*64*/
+
+        $stack26 = virtualinvoke $stack26.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>($stack35);
+/*64*/
+
+        $stack26 = virtualinvoke $stack26.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>(").");
+/*64*/
+
+        $stack35 = virtualinvoke $stack26.<java.lang.StringBuilder: java.lang.String toString()>();
+/*64*/
+
+        specialinvoke $stack25.<java.lang.Exception: void <init>(java.lang.String,java.lang.Throwable)>($stack35, $stack36);
+/*64*/
+
+        throw $stack25;
+/*64*/
+
+     label6:
+        goto label2;
+/*72*/
+
+     label7:
+        return testClassInstance;
+/*73*/
+
+        catch java.lang.IllegalArgumentException from label3 to label4 with label5;
+    }
+

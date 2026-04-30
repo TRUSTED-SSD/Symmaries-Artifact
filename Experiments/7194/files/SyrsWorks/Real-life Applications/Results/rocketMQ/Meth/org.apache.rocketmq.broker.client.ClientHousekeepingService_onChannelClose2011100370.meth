@@ -1,0 +1,22 @@
+void org.apache.rocketmq.broker.client.ClientHousekeepingService:onChannelClose(java.lang.String remoteAddr,io.netty.channel.Channel channel)
+{
+org.apache.rocketmq.broker.BrokerController $stack3;
+  org.apache.rocketmq.broker.client.ProducerManager $stack4;
+  org.apache.rocketmq.broker.client.ConsumerManager $stack7;
+  org.apache.rocketmq.broker.filtersrv.FilterServerManager $stack10;
+  org.apache.rocketmq.store.stats.BrokerStatsManager $stack12;
+  $stack3=this.brokerController;
+ $stack4 = $stack3.getProducerManager();
+ $stack4.doChannelCloseEvent(remoteAddr,channel);
+ $stack3=this.brokerController;
+ $stack7 = $stack3.getConsumerManager();
+ $stack7.doChannelCloseEvent(remoteAddr,channel);
+ $stack3=this.brokerController;
+ $stack10 = $stack3.getFilterServerManager();
+ $stack10.doChannelCloseEvent(remoteAddr,channel);
+ $stack3=this.brokerController;
+ $stack12 = $stack3.getBrokerStatsManager();
+ $stack12.incChannelCloseNum();
+ return;
+ } 
+

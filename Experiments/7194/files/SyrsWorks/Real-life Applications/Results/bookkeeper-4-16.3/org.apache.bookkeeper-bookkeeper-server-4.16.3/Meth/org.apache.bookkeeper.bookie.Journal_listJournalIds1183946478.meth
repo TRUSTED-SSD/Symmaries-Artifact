@@ -1,0 +1,47 @@
+static java.util.List org.apache.bookkeeper.bookie.Journal:listJournalIds(java.io.File @journalDir,org.apache.bookkeeper.bookie.Journal$JournalIdFilter filter)
+{
+java.io.File[] logFiles;
+  java.util.ArrayList logs;
+  int l5;
+  int l6;
+  java.lang.String name;
+  long id;
+  java.util.List $stack13;
+  boolean $stack17;
+  java.lang.String[] $stack18;
+  java.lang.Long $stack20;
+  java.io.File journalDir;
+journalDir=@journalDir;
+logFiles = journalDir.listFiles();
+ if (logFiles==null) goto label0;
+ l5=#logFiles;
+ if (l5!=0) goto label1;
+ label0:$stack13 = java.util.Collections.emptyList();
+ return  $stack13;
+ label1:logs=new java.util.ArrayList;
+ logs#java.util.ArrayList();
+ l5=#logFiles;
+ l6=0;
+ label2:if (l6>=l5) goto label3;
+ journalDir=logFiles[l6];
+ name = journalDir.getName();
+ $stack17 = name.endsWith(".txn");
+ if ($stack17!=0) goto label4;
+ goto label5;
+ label4:$stack18 = name.split("\\.");
+ name=$stack18[0];
+ id = java.lang.Long.parseLong(name,16);
+ if (filter==null) goto label6;
+ $stack17 = filter.accept(id);
+ if ($stack17==0) goto label5;
+ $stack20 = java.lang.Long.valueOf(id);
+ logs.add((java.lang.Object)$stack20);
+ goto label5;
+ label6:$stack20 = java.lang.Long.valueOf(id);
+ logs.add((java.lang.Object)$stack20);
+ label5:l6=(l6+1);
+ goto label2;
+ label3:java.util.Collections.sort((java.util.List)logs);
+ return  logs;
+ } 
+

@@ -1,0 +1,32 @@
+void com.google.zxing.common.BitMatrix:rotate180()
+{
+com.google.zxing.common.BitArray topRow;
+  com.google.zxing.common.BitArray bottomRow;
+  int maxHeight;
+  int i;
+  int bottomRowIndex;
+  topRow=new com.google.zxing.common.BitArray;
+ maxHeight=this.width;
+ topRow#com.google.zxing.common.BitArray(maxHeight);
+ bottomRow=new com.google.zxing.common.BitArray;
+ maxHeight=this.width;
+ bottomRow#com.google.zxing.common.BitArray(maxHeight);
+ maxHeight=this.height;
+ maxHeight=(maxHeight+1);
+ maxHeight=(maxHeight/2);
+ i=0;
+ label0:if (i>=maxHeight) goto label1;
+ topRow = this.getRow(i,topRow);
+ bottomRowIndex=this.height;
+ bottomRowIndex=(bottomRowIndex-1);
+ bottomRowIndex=(bottomRowIndex-i);
+ bottomRow = this.getRow(bottomRowIndex,bottomRow);
+ topRow.reverse();
+ bottomRow.reverse();
+ this#com.google.zxing.common.BitMatrix(i,bottomRow);
+ this#com.google.zxing.common.BitMatrix(bottomRowIndex,topRow);
+ i=(i+1);
+ goto label0;
+ label1:return;
+ } 
+

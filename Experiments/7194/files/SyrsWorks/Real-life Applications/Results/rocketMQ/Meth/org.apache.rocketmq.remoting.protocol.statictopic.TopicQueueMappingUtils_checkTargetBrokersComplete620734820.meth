@@ -1,0 +1,40 @@
+static void org.apache.rocketmq.remoting.protocol.statictopic.TopicQueueMappingUtils:checkTargetBrokersComplete(java.util.Set targetBrokers,java.util.Map brokerConfigMap)
+{
+java.util.Iterator l2;
+  java.lang.String broker;
+  java.util.Set $stack4;
+  boolean $stack6;
+  java.lang.Object $stack7;
+  org.apache.rocketmq.remoting.protocol.statictopic.TopicConfigAndQueueMapping $stack9;
+  org.apache.rocketmq.remoting.protocol.statictopic.TopicQueueMappingDetail $stack10;
+  java.util.concurrent.ConcurrentMap $stack11;
+  java.lang.RuntimeException $stack15;
+  java.lang.StringBuilder $stack16;
+  $stack4 = brokerConfigMap.keySet();
+ l2 = $stack4.iterator();
+ label0:$stack6 = l2.hasNext();
+ if ($stack6==0) goto label1;
+ $stack7 = l2.next();
+ broker=(java.lang.String) $stack7;
+ $stack7 = brokerConfigMap.get((java.lang.Object)broker);
+ $stack9=(org.apache.rocketmq.remoting.protocol.statictopic.TopicConfigAndQueueMapping) $stack7;
+ $stack10 = $stack9.getMappingDetail();
+ $stack11 = $stack10.getHostedQueues();
+ $stack6 = $stack11.isEmpty();
+ if ($stack6==0) goto label2;
+ goto label0;
+ label2:$stack6 = targetBrokers.contains((java.lang.Object)broker);
+ if ($stack6!=0) goto label3;
+ $stack15=new java.lang.RuntimeException;
+ $stack16=new java.lang.StringBuilder;
+ $stack16#java.lang.StringBuilder();
+ $stack16 = $stack16.append("The existed broker ");
+ $stack16 = $stack16.append(broker);
+ $stack16 = $stack16.append(" dose not in target brokers ");
+ broker = $stack16.toString();
+ $stack15#java.lang.RuntimeException(broker);
+ throw $stack15;
+ label3:goto label0;
+ label1:return;
+ } 
+

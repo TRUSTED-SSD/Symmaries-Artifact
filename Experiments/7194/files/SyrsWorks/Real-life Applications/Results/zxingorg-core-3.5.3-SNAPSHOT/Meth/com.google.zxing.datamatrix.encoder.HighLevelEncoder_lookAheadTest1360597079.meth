@@ -1,0 +1,35 @@
+static int com.google.zxing.datamatrix.encoder.HighLevelEncoder:lookAheadTest(java.lang.CharSequence msg,int startpos,int currentMode)
+{
+int newMode;
+  int $stack9;
+  char $stack11;
+  boolean $stack12;
+  newMode = com.google.zxing.datamatrix.encoder.HighLevelEncoder.lookAheadTestIntern(msg,startpos,currentMode);
+ if (currentMode!=3) goto label0;
+ if (newMode!=3) goto label0;
+ currentMode=(startpos+3);
+ $stack9 = msg.length();
+ currentMode = java.lang.Math.min(currentMode,$stack9);
+ label1:if (startpos>=currentMode) goto label2;
+ $stack11 = msg.charAt(startpos);
+ $stack12 = com.google.zxing.datamatrix.encoder.HighLevelEncoder.isNativeX12($stack11);
+ if ($stack12!=0) goto label3;
+ return  0;
+ label3:startpos=(startpos+1);
+ goto label1;
+ label2:goto label4;
+ label0:if (currentMode!=4) goto label4;
+ if (newMode!=4) goto label4;
+ currentMode=(startpos+4);
+ $stack9 = msg.length();
+ currentMode = java.lang.Math.min(currentMode,$stack9);
+ label5:if (startpos>=currentMode) goto label4;
+ $stack11 = msg.charAt(startpos);
+ $stack12 = com.google.zxing.datamatrix.encoder.HighLevelEncoder.isNativeEDIFACT($stack11);
+ if ($stack12!=0) goto label6;
+ return  0;
+ label6:startpos=(startpos+1);
+ goto label5;
+ label4:return  newMode;
+ } 
+

@@ -1,0 +1,33 @@
+void org.greenrobot.eventbus.EventBus:register(java.lang.Object subscriber)
+{
+java.lang.Class subscriberClass;
+  java.util.List subscriberMethods;
+  org.greenrobot.eventbus.EventBus l4;
+  java.util.Iterator l5;
+  org.greenrobot.eventbus.SubscriberMethod subscriberMethod;
+  java.lang.Throwable l7;
+  org.greenrobot.eventbus.SubscriberMethodFinder $stack9;
+  boolean $stack13;
+  java.lang.Object $stack15;
+  subscriberClass = subscriber.getClass();
+ $stack9=this.subscriberMethodFinder;
+ subscriberMethods = $stack9.findSubscriberMethods(subscriberClass);
+ l4=this;
+ monitorenter this;
+ label0:l5 = subscriberMethods.iterator();
+ label1:$stack13 = l5.hasNext();
+ if ($stack13==0) goto label2;
+ $stack15 = l5.next();
+ subscriberMethod=(org.greenrobot.eventbus.SubscriberMethod) $stack15;
+ this#org.greenrobot.eventbus.EventBus(subscriber,subscriberMethod);
+ goto label1;
+ label2:monitorexit this;
+ label3:goto label4;
+ label5:l7 = catch;
+ monitorexit this;
+ label6:throw l7;
+ label4:return;
+ catch java.lang.Throwable: label0 - label3 : label5;
+catch java.lang.Throwable: label5 - label6 : label5;
+} 
+

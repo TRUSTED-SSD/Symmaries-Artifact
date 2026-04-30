@@ -1,0 +1,50 @@
+    protected void doStart()
+    {
+        org.apache.bookkeeper.stream.server.grpc.GrpcServer this;
+        java.io.IOException e;
+        io.grpc.Server $stack2;
+        org.slf4j.Logger $stack5;
+        org.apache.bookkeeper.stream.server.exceptions.StorageServerRuntimeException tmp$1533699372;
+        java.lang.Throwable tmp$1707370695;
+
+        this := @this: org.apache.bookkeeper.stream.server.grpc.GrpcServer;
+
+     label1:
+        $stack2 = this.<org.apache.bookkeeper.stream.server.grpc.GrpcServer: io.grpc.Server grpcServer>;
+/*110*/
+
+        virtualinvoke $stack2.<io.grpc.Server: io.grpc.Server start()>();
+/*110*/
+
+     label2:
+        goto label4;
+/*114*/
+
+     label3:
+        e := @caughtexception;
+/*115*/
+
+        $stack5 = <org.apache.bookkeeper.stream.server.grpc.GrpcServer: org.slf4j.Logger log>;
+/*112*/
+
+        interfaceinvoke $stack5.<org.slf4j.Logger: void error(java.lang.String,java.lang.Throwable)>("Failed to start grpc server", e);
+/*112*/
+
+        tmp$1533699372 = new org.apache.bookkeeper.stream.server.exceptions.StorageServerRuntimeException;
+/*113*/
+
+        specialinvoke tmp$1533699372.<org.apache.bookkeeper.stream.server.exceptions.StorageServerRuntimeException: void <init>(java.lang.String,java.lang.Throwable)>("Failed to start grpc server", e);
+/*113*/
+
+        tmp$1707370695 = (java.lang.Throwable) tmp$1533699372;
+
+        throw tmp$1707370695;
+/*113*/
+
+     label4:
+        return;
+/*115*/
+
+        catch java.io.IOException from label1 to label2 with label3;
+    }
+

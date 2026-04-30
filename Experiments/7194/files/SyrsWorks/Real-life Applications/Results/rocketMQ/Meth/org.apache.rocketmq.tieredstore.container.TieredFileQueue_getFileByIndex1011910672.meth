@@ -1,0 +1,36 @@
+org.apache.rocketmq.tieredstore.provider.TieredFileSegment org.apache.rocketmq.tieredstore.container.TieredFileQueue:getFileByIndex(int index)
+{
+org.apache.rocketmq.tieredstore.provider.TieredFileSegment l2;
+  java.util.concurrent.locks.ReentrantReadWriteLock $stack4;
+  java.util.concurrent.locks.ReentrantReadWriteLock$ReadLock $stack5;
+  java.util.List $stack6;
+  int $stack7;
+  java.lang.Object $stack11;
+  java.lang.Throwable $stack14;
+  $stack4=this.fileSegmentLock;
+ $stack5 = $stack4.readLock();
+ $stack5.lock();
+ label0:$stack6=this.fileSegmentList;
+ $stack7 = $stack6.size();
+ if (index>=$stack7) goto label1;
+ $stack6=this.fileSegmentList;
+ $stack11 = $stack6.get(index);
+ l2=(org.apache.rocketmq.tieredstore.provider.TieredFileSegment) $stack11;
+ label2:$stack4=this.fileSegmentLock;
+ $stack5 = $stack4.readLock();
+ $stack5.unlock();
+ return  l2;
+ label1:l2=null;
+ label3:$stack4=this.fileSegmentLock;
+ $stack5 = $stack4.readLock();
+ $stack5.unlock();
+ return  null;
+ label4:$stack14 = catch;
+ $stack4=this.fileSegmentLock;
+ $stack5 = $stack4.readLock();
+ $stack5.unlock();
+ throw $stack14;
+ catch java.lang.Throwable: label0 - label2 : label4;
+catch java.lang.Throwable: label1 - label3 : label4;
+} 
+

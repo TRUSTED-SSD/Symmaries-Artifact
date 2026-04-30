@@ -1,0 +1,47 @@
+void java.util.Formatter$FormatSpecifier:printString(java.lang.Object r1,java.util.Locale r2)
+{
+boolean $z0;
+  java.util.Formatter$Flags $r3;
+  java.util.Formatter$Flags $r4;
+  boolean $z1;
+  java.lang.String $r5;
+  java.util.Formatter$Flags $r6;
+  java.util.Locale $r7;
+  java.util.Formatter$Flags $r8;
+  java.util.Formattable $r9;
+  int $i0;
+  int $i1;
+  int $i2;
+  java.util.Formatter $r10;
+  java.lang.Appendable $r11;
+  java.util.Formatter r12;
+  $z0=r1 instanceof java.util.Formattable;
+ if ($z0==0) goto label0;
+ r12=this.this$0;
+ $r7 = r12.locale();
+ if ($r7==r2) goto label1;
+ $r10=new java.util.Formatter;
+ $r11 = r12.out();
+ $r10#java.util.Formatter:init($r11,r2);
+ r12=$r10;
+ label1:$r9=(java.util.Formattable) r1;
+ $r8=this.f;
+ $i0 = $r8.valueOf();
+ $i2=this.width;
+ $i1=this.precision;
+ $r9.formatTo(r12,$i0,$i2,$i1);
+ goto label2;
+ label0:$r4=this.f;
+ $r3=java.util.Formatter$Flags.ALTERNATE;
+ $z1 = $r4.contains($r3);
+ if ($z1==0) goto label3;
+ $r6=java.util.Formatter$Flags.ALTERNATE;
+ this#java.util.Formatter$FormatSpecifier:failMismatch($r6,(char)115);
+ label3:if (r1!=null) goto label4;
+ this#java.util.Formatter$FormatSpecifier:print("null");
+ goto label2;
+ label4:$r5 = r1.toString();
+ this#java.util.Formatter$FormatSpecifier:print($r5);
+ label2:return;
+ }  
+

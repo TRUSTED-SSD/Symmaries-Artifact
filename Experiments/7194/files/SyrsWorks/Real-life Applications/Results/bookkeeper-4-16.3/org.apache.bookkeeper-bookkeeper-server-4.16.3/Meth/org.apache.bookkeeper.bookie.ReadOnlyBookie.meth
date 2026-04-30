@@ -1,0 +1,25 @@
+org.apache.bookkeeper.bookie.ReadOnlyBookie(org.apache.bookkeeper.conf.ServerConfiguration conf,org.apache.bookkeeper.discover.RegistrationManager registrationManager,org.apache.bookkeeper.bookie.LedgerStorage storage,org.apache.bookkeeper.util.DiskChecker diskChecker,org.apache.bookkeeper.bookie.LedgerDirsManager ledgerDirsManager,org.apache.bookkeeper.bookie.LedgerDirsManager indexDirsManager,org.apache.bookkeeper.stats.StatsLogger statsLogger,io.netty.buffer.ByteBufAllocator allocator,java.util.function.Supplier bookieServiceInfoProvider)
+{
+java.lang.String err;
+  boolean $stack11;
+  org.slf4j.Logger $stack12;
+  java.io.IOException $stack13;
+  org.apache.bookkeeper.bookie.StateManager $stack14;
+  this#org.apache.bookkeeper.bookie.BookieImpl(conf,registrationManager,storage,diskChecker,ledgerDirsManager,indexDirsManager,statsLogger,allocator,bookieServiceInfoProvider);
+ $stack11 = conf.isReadOnlyModeEnabled();
+ if ($stack11==0) goto label0;
+ $stack14=this.stateManager;
+ $stack14.forceToReadOnly();
+ goto label1;
+ label0:err="Try to init ReadOnly Bookie, while ReadOnly mode is not enabled";
+ $stack12=org.apache.bookkeeper.bookie.ReadOnlyBookie.LOG;
+ $stack12.error("Try to init ReadOnly Bookie, while ReadOnly mode is not enabled");
+ $stack13=new java.io.IOException;
+ $stack13#java.io.IOException("Try to init ReadOnly Bookie, while ReadOnly mode is not enabled");
+ throw $stack13;
+ label1:$stack12=org.apache.bookkeeper.bookie.ReadOnlyBookie.LOG;
+ dummyClass.lowSink("Running bookie in force readonly mode.");
+$stack12.info("Running bookie in force readonly mode.");
+ return;
+ } 
+

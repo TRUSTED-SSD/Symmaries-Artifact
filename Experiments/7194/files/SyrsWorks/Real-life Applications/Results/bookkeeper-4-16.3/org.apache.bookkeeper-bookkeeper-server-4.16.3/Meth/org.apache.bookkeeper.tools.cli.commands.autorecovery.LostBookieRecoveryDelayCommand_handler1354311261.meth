@@ -1,0 +1,51 @@
+boolean org.apache.bookkeeper.tools.cli.commands.autorecovery.LostBookieRecoveryDelayCommand:handler(org.apache.bookkeeper.conf.ServerConfiguration conf,org.apache.bookkeeper.tools.cli.commands.autorecovery.LostBookieRecoveryDelayCommand$LBRDFlags flags)
+{
+boolean getter;
+  boolean setter;
+  org.apache.bookkeeper.client.BookKeeperAdmin admin;
+  int lostBookieRecoveryDelay;
+  java.lang.Throwable l8;
+  org.apache.bookkeeper.conf.ClientConfiguration $stack11;
+  org.slf4j.Logger $stack14;
+  java.lang.Integer $stack16;
+  getter = org.apache.bookkeeper.tools.cli.commands.autorecovery.LostBookieRecoveryDelayCommand$LBRDFlags.access$000(flags);
+ setter=0;
+ lostBookieRecoveryDelay = org.apache.bookkeeper.tools.cli.commands.autorecovery.LostBookieRecoveryDelayCommand$LBRDFlags.access$100(flags);
+ if (lostBookieRecoveryDelay==0) goto label0;
+ setter=1;
+ label0:if (getter!=0) goto label1;
+ if (setter==0) goto label2;
+ label1:if (getter==0) goto label3;
+ if (setter==0) goto label3;
+ label2:$stack14=org.apache.bookkeeper.tools.cli.commands.autorecovery.LostBookieRecoveryDelayCommand.LOG;
+ $stack14.error("One and only one of -get and -set must be specified");
+ return  0;
+ label3:$stack11=new org.apache.bookkeeper.conf.ClientConfiguration;
+ $stack11#org.apache.bookkeeper.conf.ClientConfiguration((org.apache.bookkeeper.conf.AbstractConfiguration)conf);
+ admin=new org.apache.bookkeeper.client.BookKeeperAdmin;
+ admin#org.apache.bookkeeper.client.BookKeeperAdmin($stack11);
+ label4:if (getter==0) goto label5;
+ lostBookieRecoveryDelay = admin.getLostBookieRecoveryDelay();
+ $stack14=org.apache.bookkeeper.tools.cli.commands.autorecovery.LostBookieRecoveryDelayCommand.LOG;
+ $stack16 = java.lang.Integer.valueOf(lostBookieRecoveryDelay);
+ dummyClass.lowSink("LostBookieRecoveryDelay value in ZK: {}");
+$stack14.info("LostBookieRecoveryDelay value in ZK: {}",(java.lang.Object)$stack16);
+ goto label6;
+ label5:lostBookieRecoveryDelay = org.apache.bookkeeper.tools.cli.commands.autorecovery.LostBookieRecoveryDelayCommand$LBRDFlags.access$100(flags);
+ admin.setLostBookieRecoveryDelay(lostBookieRecoveryDelay);
+ $stack14=org.apache.bookkeeper.tools.cli.commands.autorecovery.LostBookieRecoveryDelayCommand.LOG;
+ $stack16 = java.lang.Integer.valueOf(lostBookieRecoveryDelay);
+ dummyClass.lowSink("Successfully set LostBookieRecoveryDelay value in ZK: {}");
+$stack14.info("Successfully set LostBookieRecoveryDelay value in ZK: {}",(java.lang.Object)$stack16);
+ label6:if (admin==null) goto label7;
+ admin.close();
+ goto label7;
+ label8:l8 = catch;
+ label9:if (admin==null) goto label10;
+ admin.close();
+ label10:throw l8;
+ label7:return  1;
+ catch java.lang.Throwable: label4 - label6 : label8;
+catch java.lang.Throwable: label8 - label9 : label8;
+} 
+

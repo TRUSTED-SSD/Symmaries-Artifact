@@ -1,0 +1,34 @@
+static java.lang.Class org.apache.bookkeeper.common.util.ReflectionUtils:forName(java.lang.String @className,java.lang.Class @xface)
+{
+java.lang.Class theCls;
+  boolean $stack5;
+  java.lang.RuntimeException $stack7;
+  java.lang.StringBuilder $stack8;
+  java.lang.ClassNotFoundException $stack14;
+  java.lang.String className;
+java.lang.Class xface;
+xface=@xface;
+className=@className;
+label0:theCls = java.lang.Class.forName(className);
+ label1:goto label2;
+ label3:$stack14 = catch;
+ $stack7=new java.lang.RuntimeException;
+ $stack7#java.lang.RuntimeException((java.lang.Throwable)$stack14);
+ throw $stack7;
+ label2:$stack5 = xface.isAssignableFrom(theCls);
+ if ($stack5!=0) goto label4;
+ $stack7=new java.lang.RuntimeException;
+ $stack8=new java.lang.StringBuilder;
+ $stack8#java.lang.StringBuilder();
+ $stack8 = $stack8.append(className);
+ $stack8 = $stack8.append(" not ");
+ className = xface.getName();
+ $stack8 = $stack8.append(className);
+ className = $stack8.toString();
+ $stack7#java.lang.RuntimeException(className);
+ throw $stack7;
+ label4:xface = theCls.asSubclass(xface);
+ return  xface;
+ catch java.lang.ClassNotFoundException: label0 - label1 : label3;
+} 
+

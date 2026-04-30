@@ -1,0 +1,258 @@
+    protected void validateFields(java.util.List)
+    {
+        org.junit.runners.parameterized.BlockJUnit4ClassRunnerWithParameters this;
+        java.util.List errors, annotatedFieldsByParameter;
+        int[] usedIndices;
+        java.util.Iterator i$;
+        org.junit.runners.model.FrameworkField each;
+        int index, $stack51;
+        boolean $stack7;
+        java.lang.StringBuilder $stack16;
+        java.lang.String $stack22;
+        java.lang.Object $stack31;
+        java.lang.reflect.Field $stack32;
+        java.lang.'annotation'.Annotation $stack33;
+        org.junit.runners.Parameterized$Parameter $stack34;
+        java.lang.Exception tmp$1445987940;
+
+        this := @this: org.junit.runners.parameterized.BlockJUnit4ClassRunnerWithParameters;
+
+        errors := @parameter0: java.util.List;
+
+        specialinvoke this.<org.junit.runners.BlockJUnit4ClassRunner: void validateFields(java.util.List)>(errors);
+/*96*/
+
+        $stack7 = specialinvoke this.<org.junit.runners.parameterized.BlockJUnit4ClassRunnerWithParameters: boolean fieldsAreAnnotated()>();
+/*97*/
+
+        if $stack7 == 0 goto label9;
+/*97*/
+
+        annotatedFieldsByParameter = specialinvoke this.<org.junit.runners.parameterized.BlockJUnit4ClassRunnerWithParameters: java.util.List getAnnotatedFieldsByParameter()>();
+/*98*/
+/*98*/
+
+        index = interfaceinvoke annotatedFieldsByParameter.<java.util.List: int size()>();
+/*99*/
+
+        usedIndices = newarray (int)[index];
+/*99*/
+
+        i$ = interfaceinvoke annotatedFieldsByParameter.<java.util.List: java.util.Iterator iterator()>();
+/*100*/
+/*100*/
+
+     label1:
+        $stack7 = interfaceinvoke i$.<java.util.Iterator: boolean hasNext()>();
+/*100*/
+
+        if $stack7 == 0 goto label5;
+/*100*/
+
+        $stack31 = interfaceinvoke i$.<java.util.Iterator: java.lang.Object next()>();
+/*113*/
+
+        each = (org.junit.runners.model.FrameworkField) $stack31;
+/*113*/
+
+        $stack32 = virtualinvoke each.<org.junit.runners.model.FrameworkField: java.lang.reflect.Field getField()>();
+/*101*/
+
+        $stack33 = virtualinvoke $stack32.<java.lang.reflect.Field: java.lang.'annotation'.Annotation getAnnotation(java.lang.Class)>(class "Lorg/junit/runners/Parameterized$Parameter;");
+/*101*/
+
+        $stack34 = (org.junit.runners.Parameterized$Parameter) $stack33;
+/*101*/
+
+        index = interfaceinvoke $stack34.<org.junit.runners.Parameterized$Parameter: int value()>();
+/*101*/
+/*101*/
+
+        if index < 0 goto label2;
+/*103*/
+
+        $stack51 = interfaceinvoke annotatedFieldsByParameter.<java.util.List: int size()>();
+/*112*/
+
+        $stack51 = $stack51 - 1;
+/*112*/
+
+        if index <= $stack51 goto label3;
+/*112*/
+
+     label2:
+        tmp$1445987940 = new java.lang.Exception;
+/*104*/
+
+        $stack16 = new java.lang.StringBuilder;
+/*104*/
+
+        specialinvoke $stack16.<java.lang.StringBuilder: void <init>()>();
+/*104*/
+
+        $stack16 = virtualinvoke $stack16.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>("Invalid @Parameter value: ");
+/*104*/
+
+        $stack16 = virtualinvoke $stack16.<java.lang.StringBuilder: java.lang.StringBuilder append(int)>(index);
+/*104*/
+
+        $stack16 = virtualinvoke $stack16.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>(". @Parameter fields counted: ");
+/*104*/
+
+        index = interfaceinvoke annotatedFieldsByParameter.<java.util.List: int size()>();
+/*104*/
+
+        $stack16 = virtualinvoke $stack16.<java.lang.StringBuilder: java.lang.StringBuilder append(int)>(index);
+/*104*/
+
+        $stack16 = virtualinvoke $stack16.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>(". Please use an index between 0 and ");
+/*104*/
+
+        index = interfaceinvoke annotatedFieldsByParameter.<java.util.List: int size()>();
+/*104*/
+
+        index = index - 1;
+/*104*/
+
+        $stack16 = virtualinvoke $stack16.<java.lang.StringBuilder: java.lang.StringBuilder append(int)>(index);
+/*104*/
+
+        $stack16 = virtualinvoke $stack16.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>(".");
+/*104*/
+
+        $stack22 = virtualinvoke $stack16.<java.lang.StringBuilder: java.lang.String toString()>();
+/*104*/
+
+        specialinvoke tmp$1445987940.<java.lang.Exception: void <init>(java.lang.String)>($stack22);
+/*104*/
+
+        interfaceinvoke errors.<java.util.List: boolean add(java.lang.Object)>(tmp$1445987940);
+/*104*/
+
+        goto label4;
+/*104*/
+
+     label3:
+        $stack51 = usedIndices[index];
+/*110*/
+
+        $stack51 = $stack51 + 1;
+/*110*/
+
+        usedIndices[index] = $stack51;
+/*110*/
+
+     label4:
+        goto label1;
+/*112*/
+
+     label5:
+        i$ = (java.util.Iterator) 0;
+
+        i$ = null;
+/*113*/
+
+     label6:
+        index = lengthof usedIndices;
+/*113*/
+
+        $stack51 = (int) i$;
+
+        if $stack51 >= index goto label9;
+/*113*/
+
+        index = (int) i$;
+
+        each = usedIndices[index];
+/*114*/
+
+        if each != 0 goto label7;
+/*115*/
+
+        tmp$1445987940 = new java.lang.Exception;
+/*116*/
+
+        $stack16 = new java.lang.StringBuilder;
+/*116*/
+
+        specialinvoke $stack16.<java.lang.StringBuilder: void <init>()>();
+/*116*/
+
+        $stack16 = virtualinvoke $stack16.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>("@Parameter(");
+/*116*/
+
+        index = (int) i$;
+
+        $stack16 = virtualinvoke $stack16.<java.lang.StringBuilder: java.lang.StringBuilder append(int)>(index);
+/*116*/
+
+        $stack16 = virtualinvoke $stack16.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>(") is never used.");
+/*116*/
+
+        $stack22 = virtualinvoke $stack16.<java.lang.StringBuilder: java.lang.String toString()>();
+/*116*/
+
+        specialinvoke tmp$1445987940.<java.lang.Exception: void <init>(java.lang.String)>($stack22);
+/*116*/
+
+        interfaceinvoke errors.<java.util.List: boolean add(java.lang.Object)>(tmp$1445987940);
+/*116*/
+
+        goto label8;
+/*116*/
+
+     label7:
+        index = (int) each;
+
+        if index <= 1 goto label8;
+/*118*/
+
+        tmp$1445987940 = new java.lang.Exception;
+/*119*/
+
+        $stack16 = new java.lang.StringBuilder;
+/*119*/
+
+        specialinvoke $stack16.<java.lang.StringBuilder: void <init>()>();
+/*119*/
+
+        $stack16 = virtualinvoke $stack16.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>("@Parameter(");
+/*119*/
+
+        index = (int) i$;
+
+        $stack16 = virtualinvoke $stack16.<java.lang.StringBuilder: java.lang.StringBuilder append(int)>(index);
+/*119*/
+
+        $stack16 = virtualinvoke $stack16.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>(") is used more than once (");
+/*119*/
+
+        index = (int) each;
+
+        $stack16 = virtualinvoke $stack16.<java.lang.StringBuilder: java.lang.StringBuilder append(int)>(index);
+/*119*/
+
+        $stack16 = virtualinvoke $stack16.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>(").");
+/*119*/
+
+        $stack22 = virtualinvoke $stack16.<java.lang.StringBuilder: java.lang.String toString()>();
+/*119*/
+
+        specialinvoke tmp$1445987940.<java.lang.Exception: void <init>(java.lang.String)>($stack22);
+/*119*/
+
+        interfaceinvoke errors.<java.util.List: boolean add(java.lang.Object)>(tmp$1445987940);
+/*119*/
+
+     label8:
+        i$ = i$ + 1;
+/*113*/
+
+        goto label6;
+/*113*/
+
+     label9:
+        return;
+/*124*/
+    }
+

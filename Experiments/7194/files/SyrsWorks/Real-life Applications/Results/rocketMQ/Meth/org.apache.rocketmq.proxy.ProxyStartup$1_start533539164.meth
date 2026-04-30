@@ -1,0 +1,44 @@
+void org.apache.rocketmq.proxy.ProxyStartup$1:start()
+{
+java.lang.String tip;
+  org.apache.rocketmq.broker.BrokerController $stack2;
+  java.lang.StringBuilder $stack3;
+  org.apache.rocketmq.common.BrokerConfig $stack6;
+  org.apache.rocketmq.remoting.protocol.SerializeType $stack14;
+  java.lang.String $stack20;
+  org.apache.rocketmq.logging.org.slf4j.Logger $stack21;
+  $stack2=this.val$brokerController;
+ $stack2.start();
+ $stack3=new java.lang.StringBuilder;
+ $stack3#java.lang.StringBuilder();
+ $stack3 = $stack3.append("The broker[");
+ $stack2=this.val$brokerController;
+ $stack6 = $stack2.getBrokerConfig();
+ tip = $stack6.getBrokerName();
+ $stack3 = $stack3.append(tip);
+ $stack3 = $stack3.append(", ");
+ $stack2=this.val$brokerController;
+ tip = $stack2.getBrokerAddr();
+ $stack3 = $stack3.append(tip);
+ $stack3 = $stack3.append("] boot success. serializeType=");
+ $stack14 = org.apache.rocketmq.remoting.protocol.RemotingCommand.getSerializeTypeConfigInThisServer();
+ $stack3 = $stack3.append((java.lang.Object)$stack14);
+ tip = $stack3.toString();
+ $stack2=this.val$brokerController;
+ $stack6 = $stack2.getBrokerConfig();
+ $stack20 = $stack6.getNamesrvAddr();
+ if (null==$stack20) goto label0;
+ $stack3=new java.lang.StringBuilder;
+ $stack3#java.lang.StringBuilder();
+ $stack3 = $stack3.append(tip);
+ $stack3 = $stack3.append(" and name server is ");
+ $stack2=this.val$brokerController;
+ $stack6 = $stack2.getBrokerConfig();
+ tip = $stack6.getNamesrvAddr();
+ $stack3 = $stack3.append(tip);
+ tip = $stack3.toString();
+ label0:$stack21 = org.apache.rocketmq.proxy.ProxyStartup.access$100();
+ $stack21.info(tip);
+ return;
+ } 
+

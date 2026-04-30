@@ -1,0 +1,14 @@
+byte[] org.apache.kerby.kerberos.kerb.crypto.enc.Rc4HmacEnc:makeUsageKey(byte[] @key,int usage)
+{
+byte[] salt;
+  boolean $stack4;
+  org.apache.kerby.kerberos.kerb.crypto.cksum.HashProvider $stack6;
+  byte[] key;
+key=@key;
+$stack4=this.exportable;
+ salt = org.apache.kerby.kerberos.kerb.crypto.util.Rc4.getSalt(usage,$stack4);
+ $stack6 = this.hashProvider();
+ key = org.apache.kerby.kerberos.kerb.crypto.util.Hmac.hmac($stack6,key,salt);
+ return  key;
+ } 
+

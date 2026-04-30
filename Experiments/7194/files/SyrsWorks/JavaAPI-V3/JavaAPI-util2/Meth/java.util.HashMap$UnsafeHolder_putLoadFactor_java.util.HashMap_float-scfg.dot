@@ -1,0 +1,28 @@
+digraph G {
+  node [shape=box, ];
+  "pc0_js1" [label="〈$r1 = java.util.HashMap$UnsafeHolder.unsafe, js1〉", ];
+  "pc1_js1" [label="〈$l0 = java.util.HashMap$UnsafeHolder.LF_OFFSET, js1〉",
+             ];
+  "pc2_js1" [label="〈$r1.native_putFloat ((java.lang.Object) r0, $l0, f0), js1〉\n\
+tt",
+             ];
+  "pc3_js1" [label="〈return, js1〉", ];
+  "pc4_js1" [label="〈sink, js1〉\n\
+obj_level(r0) ⊑ ret(obj_level(r0))' ∧ (ret(r0.><r0)' ∨ ¬r0.><r0)",
+             ];
+  
+  
+  "pc0_js1" -> "pc1_js1" [label="tt,\n\
+{r0.><$r1 := ff,\n\
+ level($r1) := pc,\n\
+ obj_level($r1) := ⊥}",
+                          ];
+  "pc1_js1" -> "pc2_js1" [label="tt,\n\
+{level($l0) := pc}", ];
+  "pc2_js1" -> "pc3_js1" [label="tt,\n\
+{obj_level($r1) := pc ⊔ level(f0) ⊔ level(r0) ⊔ obj_level(r0)}",
+                          ];
+  "pc3_js1" -> "pc4_js1" [label="tt,\n\
+{ϕ := S3}", ];
+  
+  }

@@ -1,0 +1,47 @@
+static java.lang.String org.apache.rocketmq.common.attribute.AttributeParser:parseToString(java.util.Map attributes)
+{
+java.util.ArrayList kvs;
+  java.util.Iterator l2;
+  java.util.Map$Entry entry;
+  java.lang.String value;
+  int $stack5;
+  java.util.Set $stack7;
+  boolean $stack9;
+  java.lang.Object $stack11;
+  java.lang.StringBuilder $stack14;
+  if (attributes==null) goto label0;
+ $stack5 = attributes.size();
+ if ($stack5!=0) goto label1;
+ label0:return  "";
+ label1:kvs=new java.util.ArrayList;
+ kvs#java.util.ArrayList();
+ $stack7 = attributes.entrySet();
+ l2 = $stack7.iterator();
+ label2:$stack9 = l2.hasNext();
+ if ($stack9==0) goto label3;
+ $stack11 = l2.next();
+ entry=(java.util.Map$Entry) $stack11;
+ $stack11 = entry.getValue();
+ value=(java.lang.String) $stack11;
+ $stack9 = com.google.common.base.Strings.isNullOrEmpty(value);
+ if ($stack9==0) goto label4;
+ $stack11 = entry.getKey();
+ value=(java.lang.String) $stack11;
+ kvs.add((java.lang.Object)value);
+ goto label5;
+ label4:$stack14=new java.lang.StringBuilder;
+ $stack14#java.lang.StringBuilder();
+ $stack11 = entry.getKey();
+ value=(java.lang.String) $stack11;
+ $stack14 = $stack14.append(value);
+ $stack14 = $stack14.append("=");
+ $stack11 = entry.getValue();
+ value=(java.lang.String) $stack11;
+ $stack14 = $stack14.append(value);
+ value = $stack14.toString();
+ kvs.add((java.lang.Object)value);
+ label5:goto label2;
+ label3:value = java.lang.String.join((java.lang.CharSequence)",",(java.lang.Iterable)kvs);
+ return  value;
+ } 
+

@@ -1,0 +1,30 @@
+void org.apache.bookkeeper.replication.Auditor:scheduleBookieCheckTask()
+{
+long bookieCheckInterval;
+  org.apache.bookkeeper.conf.ServerConfiguration $stack3;
+  byte $stack5;
+  org.slf4j.Logger $stack6;
+  java.lang.Long $stack8;
+  java.util.concurrent.TimeUnit $stack9;
+  org.apache.bookkeeper.replication.AuditorBookieCheckTask $stack10;
+  java.util.concurrent.ScheduledExecutorService $stack11;
+  $stack3=this.conf;
+ bookieCheckInterval = $stack3.getAuditorPeriodicBookieCheckInterval();
+ $stack5=(bookieCheckInterval cmp 0L);
+ if ($stack5!=0) goto label0;
+ $stack6=org.apache.bookkeeper.replication.Auditor.LOG;
+ dummyClass.lowSink("Auditor periodic bookie checking disabled, running once check now anyhow");
+$stack6.info("Auditor periodic bookie checking disabled, running once check now anyhow");
+ this.submitBookieCheckTask();
+ goto label1;
+ label0:$stack6=org.apache.bookkeeper.replication.Auditor.LOG;
+ $stack8 = java.lang.Long.valueOf(bookieCheckInterval);
+ dummyClass.lowSink("Auditor periodic bookie checking enabled \'auditorPeriodicBookieCheckInterval\' {} seconds");
+$stack6.info("Auditor periodic bookie checking enabled \'auditorPeriodicBookieCheckInterval\' {} seconds",(java.lang.Object)$stack8);
+ $stack11=this.executor;
+ $stack10=this.auditorBookieCheckTask;
+ $stack9=java.util.concurrent.TimeUnit.SECONDS;
+ $stack11.scheduleAtFixedRate((java.lang.Runnable)$stack10,0L,bookieCheckInterval,$stack9);
+ label1:return;
+ } 
+

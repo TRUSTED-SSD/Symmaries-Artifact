@@ -1,0 +1,31 @@
+org.apache.bookkeeper.meta.LongZkLedgerIdGenerator(org.apache.zookeeper.ZooKeeper zk,java.lang.String @ledgersPath,java.lang.String idGenZnodeName,org.apache.bookkeeper.meta.ZkLedgerIdGenerator shortIdGen,java.util.List zkAcls)
+{
+boolean $stack6;
+  java.lang.StringBuilder $stack7;
+  java.util.ArrayList $stack12;
+  org.apache.bookkeeper.meta.LongZkLedgerIdGenerator$HighOrderLedgerIdGenPathStatus $stack13;
+  java.lang.String ledgersPath;
+ledgersPath=@ledgersPath;
+this#java.lang.Object();
+ this.zk=zk;
+ $stack6 = org.apache.commons.lang.StringUtils.isBlank(idGenZnodeName);
+ if ($stack6==0) goto label0;
+ this.ledgerIdGenPath=ledgersPath;
+ goto label1;
+ label0:$stack7=new java.lang.StringBuilder;
+ $stack7#java.lang.StringBuilder();
+ $stack7 = $stack7.append(ledgersPath);
+ $stack7 = $stack7.append("/");
+ $stack7 = $stack7.append(idGenZnodeName);
+ ledgersPath = $stack7.toString();
+ this.ledgerIdGenPath=ledgersPath;
+ label1:this.shortIdGen=shortIdGen;
+ $stack12=new java.util.ArrayList;
+ $stack12#java.util.ArrayList();
+ this.highOrderDirectories=$stack12;
+ $stack13=org.apache.bookkeeper.meta.LongZkLedgerIdGenerator$HighOrderLedgerIdGenPathStatus.UNKNOWN;
+ this.ledgerIdGenPathStatus=$stack13;
+ this.zkAcls=zkAcls;
+ return;
+ } 
+

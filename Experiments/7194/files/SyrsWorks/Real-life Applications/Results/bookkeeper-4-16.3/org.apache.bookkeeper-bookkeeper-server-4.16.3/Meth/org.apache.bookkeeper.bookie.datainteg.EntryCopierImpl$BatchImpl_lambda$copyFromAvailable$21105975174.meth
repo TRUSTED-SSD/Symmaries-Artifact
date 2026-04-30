@@ -1,0 +1,38 @@
+void org.apache.bookkeeper.bookie.datainteg.EntryCopierImpl$BatchImpl:lambda$copyFromAvailable$2(java.util.concurrent.CompletableFuture promise,io.netty.buffer.ByteBuf buffer,java.lang.Throwable @exception)
+{
+long length;
+  int $stack7;
+  org.apache.bookkeeper.bookie.datainteg.EntryCopierImpl $stack8;
+  org.apache.bookkeeper.bookie.LedgerStorage $stack9;
+  java.lang.Long $stack11;
+  java.lang.Throwable $stack15;
+  java.lang.Throwable $stack18;
+  java.lang.Throwable exception;
+exception=@exception;
+if (exception==null) goto label0;
+ promise.completeExceptionally(exception);
+ goto label1;
+ label0:$stack7 = buffer.readableBytes();
+dummyClass.highSourceMut($stack7);
+ length=(long) $stack7;
+ $stack8=this.this$0;
+ $stack9 = org.apache.bookkeeper.bookie.datainteg.EntryCopierImpl.access$300($stack8);
+ $stack9.addEntry(buffer);
+ $stack11 = java.lang.Long.valueOf(length);
+ promise.complete((java.lang.Object)$stack11);
+ label2:io.netty.util.ReferenceCountUtil.release((java.lang.Object)buffer);
+ goto label1;
+ label3:$stack15 = catch;
+ promise.completeExceptionally($stack15);
+ label4:io.netty.util.ReferenceCountUtil.release((java.lang.Object)buffer);
+ goto label1;
+ label5:$stack18 = catch;
+ exception=$stack18;
+ label6:io.netty.util.ReferenceCountUtil.release((java.lang.Object)buffer);
+ throw $stack18;
+ label1:return;
+ catch java.lang.Throwable: label0 - label2 : label3;
+catch java.lang.Throwable: label3 - label4 : label5;
+catch java.lang.Throwable: label5 - label6 : label5;
+} 
+

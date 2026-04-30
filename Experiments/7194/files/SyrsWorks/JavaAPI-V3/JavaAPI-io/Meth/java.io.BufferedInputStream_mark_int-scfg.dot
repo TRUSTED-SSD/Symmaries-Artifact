@@ -1,0 +1,24 @@
+digraph G {
+  node [shape=box, ];
+  "pc0_js1" [label="〈this.marklimit = i0, js1〉", ];
+  "pc1_js1" [label="〈$i1 = this.pos, js1〉", ];
+  "pc2_js1" [label="〈this.markpos = $i1, js1〉", ];
+  "pc3_js1" [label="〈return, js1〉", ];
+  "pc4_js1" [label="〈sink, js1〉\n\
+obj_level(this) ⊑ ret(obj_level(this))' ∧ (ret(this.><this)' ∨ ¬this.><this)",
+             ];
+  
+  
+  "pc0_js1" -> "pc1_js1" [label="tt,\n\
+{obj_level(this) := pc ⊔ level(i0) ⊔ obj_level(this)}",
+                          ];
+  "pc1_js1" -> "pc2_js1" [label="tt,\n\
+{level($i1) := pc ⊔ level(this) ⊔ obj_level(this)}",
+                          ];
+  "pc2_js1" -> "pc3_js1" [label="tt,\n\
+{obj_level(this) := pc ⊔ level($i1) ⊔ obj_level(this)}",
+                          ];
+  "pc3_js1" -> "pc4_js1" [label="tt,\n\
+{ϕ := S3}", ];
+  
+  }

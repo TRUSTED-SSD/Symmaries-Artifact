@@ -1,0 +1,43 @@
+    public org.junit.runner.Request sortRequest(org.junit.runner.Request)
+    {
+        org.junit.experimental.max.MaxCore this;
+        org.junit.runner.Request request;
+        java.util.List leaves;
+        boolean $stack3;
+        org.junit.experimental.max.MaxHistory $stack5;
+        java.util.Comparator $stack6;
+
+        this := @this: org.junit.experimental.max.MaxCore;
+
+        request := @parameter0: org.junit.runner.Request;
+
+        $stack3 = request instanceof org.junit.internal.requests.SortingRequest;
+/*96*/
+
+        if $stack3 == 0 goto label1;
+/*96*/
+
+        return request;
+/*98*/
+
+     label1:
+        leaves = specialinvoke this.<org.junit.experimental.max.MaxCore: java.util.List findLeaves(org.junit.runner.Request)>(request);
+/*100*/
+/*100*/
+
+        $stack5 = this.<org.junit.experimental.max.MaxCore: org.junit.experimental.max.MaxHistory history>;
+/*101*/
+
+        $stack6 = virtualinvoke $stack5.<org.junit.experimental.max.MaxHistory: java.util.Comparator testComparator()>();
+/*101*/
+
+        staticinvoke <java.util.Collections: void sort(java.util.List,java.util.Comparator)>(leaves, $stack6);
+/*101*/
+
+        request = specialinvoke this.<org.junit.experimental.max.MaxCore: org.junit.runner.Request constructLeafRequest(java.util.List)>(leaves);
+/*102*/
+
+        return request;
+/*102*/
+    }
+

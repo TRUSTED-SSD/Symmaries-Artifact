@@ -1,0 +1,26 @@
+com.google.zxing.client.result.URIParsedResult com.google.zxing.client.result.URIResultParser:parse(com.google.zxing.Result result)
+{
+java.lang.String rawText;
+  boolean $stack4;
+  com.google.zxing.client.result.URIParsedResult $stack5;
+  rawText = com.google.zxing.client.result.ResultParser.getMassagedText(result);
+ $stack4 = rawText.startsWith("URL:");
+ if ($stack4!=0) goto label0;
+ $stack4 = rawText.startsWith("URI:");
+ if ($stack4==0) goto label1;
+ label0:$stack5=new com.google.zxing.client.result.URIParsedResult;
+ rawText = rawText.substring(4);
+ rawText = rawText.trim();
+ $stack5#com.google.zxing.client.result.URIParsedResult(rawText,null);
+ return  $stack5;
+ label1:rawText = rawText.trim();
+ $stack4 = com.google.zxing.client.result.URIResultParser.isBasicallyValidURI(rawText);
+ if ($stack4==0) goto label2;
+ $stack4 = com.google.zxing.client.result.URIResultParser.isPossiblyMaliciousURI(rawText);
+ if ($stack4==0) goto label3;
+ label2:return  null;
+ label3:$stack5=new com.google.zxing.client.result.URIParsedResult;
+ $stack5#com.google.zxing.client.result.URIParsedResult(rawText,null);
+ return  $stack5;
+ } 
+

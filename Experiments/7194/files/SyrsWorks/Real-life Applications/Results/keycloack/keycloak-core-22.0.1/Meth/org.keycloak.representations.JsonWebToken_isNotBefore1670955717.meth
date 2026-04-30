@@ -1,0 +1,25 @@
+boolean org.keycloak.representations.JsonWebToken:isNotBefore(int allowedTimeSkew)
+{
+java.lang.Long $stack2;
+  int $stack3;
+  long $stack6;
+  long $stack7;
+  byte $stack8;
+  boolean $stack9;
+  $stack2=this.nbf;
+ if ($stack2==null) goto label0;
+ $stack3 = org.keycloak.common.util.Time.currentTime();
+ allowedTimeSkew=($stack3+allowedTimeSkew);
+ $stack6=(long) allowedTimeSkew;
+ $stack2=this.nbf;
+ $stack7 = $stack2.longValue();
+ $stack8=($stack6 cmp $stack7);
+ if ($stack8<0) goto label1;
+ $stack9=1;
+ goto label2;
+ label1:$stack9=0;
+ goto label2;
+ label0:$stack9=1;
+ label2:return  $stack9;
+ } 
+

@@ -1,0 +1,25 @@
+org.apache.rocketmq.store.SelectMappedBufferResult org.apache.rocketmq.store.DefaultMessageStore:selectOneMessageByOffset(long commitLogOffset)
+{
+org.apache.rocketmq.store.SelectMappedBufferResult sbr;
+  int size;
+  org.apache.rocketmq.store.SelectMappedBufferResult l5;
+  java.lang.Throwable l6;
+  org.apache.rocketmq.store.CommitLog $stack7;
+  java.nio.ByteBuffer $stack9;
+  $stack7=this.commitLog;
+ sbr = $stack7.getMessage(commitLogOffset,4);
+ if (null==sbr) goto label0;
+ label1:$stack9 = sbr.getByteBuffer();
+ size = $stack9.getInt();
+ $stack7=this.commitLog;
+ l5 = $stack7.getMessage(commitLogOffset,size);
+ label2:sbr.release();
+ return  l5;
+ label3:l6 = catch;
+ label4:sbr.release();
+ throw l6;
+ label0:return  null;
+ catch java.lang.Throwable: label1 - label2 : label3;
+catch java.lang.Throwable: label3 - label4 : label3;
+} 
+

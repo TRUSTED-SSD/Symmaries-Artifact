@@ -1,0 +1,31 @@
+org.apache.rocketmq.remoting.protocol.RemotingCommand org.apache.rocketmq.namesrv.processor.DefaultRequestProcessor:putKVConfig(io.netty.channel.ChannelHandlerContext ctx,org.apache.rocketmq.remoting.protocol.RemotingCommand request)
+{
+org.apache.rocketmq.remoting.protocol.RemotingCommand response;
+  org.apache.rocketmq.remoting.protocol.header.namesrv.PutKVConfigRequestHeader requestHeader;
+  org.apache.rocketmq.remoting.CommandCustomHeader $stack6;
+  java.lang.String $stack7;
+  org.apache.rocketmq.namesrv.NamesrvController $stack9;
+  org.apache.rocketmq.namesrv.kvconfig.KVConfigManager $stack10;
+  java.lang.String $stack12;
+  java.lang.String $stack13;
+  response = org.apache.rocketmq.remoting.protocol.RemotingCommand.createResponseCommand(null);
+ $stack6 = request.decodeCommandCustomHeader(org.apache.rocketmq.remoting.protocol.header.namesrv.PutKVConfigRequestHeader);
+ requestHeader=(org.apache.rocketmq.remoting.protocol.header.namesrv.PutKVConfigRequestHeader) $stack6;
+ $stack7 = requestHeader.getNamespace();
+ if ($stack7==null) goto label0;
+ $stack7 = requestHeader.getKey();
+ if ($stack7!=null) goto label1;
+ label0:response.setCode(1);
+ response.setRemark("namespace or key is null");
+ return  response;
+ label1:$stack9=this.namesrvController;
+ $stack10 = $stack9.getKvConfigManager();
+ $stack7 = requestHeader.getNamespace();
+ $stack12 = requestHeader.getKey();
+ $stack13 = requestHeader.getValue();
+ $stack10.putKVConfig($stack7,$stack12,$stack13);
+ response.setCode(0);
+ response.setRemark(null);
+ return  response;
+ } 
+

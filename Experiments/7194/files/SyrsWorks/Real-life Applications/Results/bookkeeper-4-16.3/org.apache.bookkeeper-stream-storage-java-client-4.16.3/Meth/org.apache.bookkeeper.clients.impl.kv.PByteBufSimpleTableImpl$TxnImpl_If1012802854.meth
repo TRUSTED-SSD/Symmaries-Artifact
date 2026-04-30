@@ -1,0 +1,22 @@
+org.apache.bookkeeper.api.kv.Txn org.apache.bookkeeper.clients.impl.kv.PByteBufSimpleTableImpl$TxnImpl:If(org.apache.bookkeeper.api.kv.op.CompareOp[] cmps)
+{
+int l3;
+  int l4;
+  org.apache.bookkeeper.api.kv.op.CompareOp cmp$$;
+  org.apache.bookkeeper.stream.proto.kv.rpc.TxnRequest$Builder $stack6;
+  org.apache.bookkeeper.stream.proto.kv.rpc.Compare$Builder $stack7;
+  java.util.List $stack9;
+  l3=#cmps;
+ l4=0;
+ label0:if (l4>=l3) goto label1;
+ cmp$$=cmps[l4];
+ $stack6=this.txnBuilder;
+ $stack7 = org.apache.bookkeeper.clients.impl.kv.KvUtils.toProtoCompare(cmp$$);
+ $stack6.addCompare($stack7);
+ $stack9=this.resourcesToRelease;
+ $stack9.add((java.lang.Object)cmp$$);
+ l4=(l4+1);
+ goto label0;
+ label1:return  this;
+ } 
+

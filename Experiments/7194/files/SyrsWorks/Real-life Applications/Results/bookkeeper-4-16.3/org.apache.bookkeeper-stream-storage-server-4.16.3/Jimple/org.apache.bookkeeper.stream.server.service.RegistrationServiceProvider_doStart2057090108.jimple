@@ -1,0 +1,144 @@
+    protected void doStart()
+    {
+        org.apache.bookkeeper.stream.server.service.RegistrationServiceProvider this;
+        java.lang.Exception e;
+        org.apache.bookkeeper.zookeeper.ZooKeeperClient $stack2;
+        org.apache.bookkeeper.zookeeper.ZooKeeperClient$Builder $stack3;
+        org.apache.bookkeeper.zookeeper.RetryPolicy $stack4;
+        java.lang.String $stack6;
+        org.apache.bookkeeper.stats.StatsLogger $stack8;
+        org.apache.bookkeeper.discover.ZKRegistrationClient $stack12;
+        boolean $stack13;
+        java.util.concurrent.ScheduledExecutorService $stack14;
+        java.lang.Throwable $stack17;
+        org.slf4j.Logger $stack20;
+        java.lang.InterruptedException $stack21;
+        java.lang.Thread $stack22;
+
+        this := @this: org.apache.bookkeeper.stream.server.service.RegistrationServiceProvider;
+
+     label1:
+        $stack2 = this.<org.apache.bookkeeper.stream.server.service.RegistrationServiceProvider: org.apache.bookkeeper.zookeeper.ZooKeeperClient zkClient>;
+/*93*/
+
+        if null != $stack2 goto label7;
+/*93*/
+
+     label2:
+        $stack3 = staticinvoke <org.apache.bookkeeper.zookeeper.ZooKeeperClient: org.apache.bookkeeper.zookeeper.ZooKeeperClient$Builder newBuilder()>();
+/*95*/
+
+        $stack4 = this.<org.apache.bookkeeper.stream.server.service.RegistrationServiceProvider: org.apache.bookkeeper.zookeeper.RetryPolicy bkZkRetryPolicy>;
+/*96*/
+
+        $stack3 = virtualinvoke $stack3.<org.apache.bookkeeper.zookeeper.ZooKeeperClient$Builder: org.apache.bookkeeper.zookeeper.ZooKeeperClient$Builder operationRetryPolicy(org.apache.bookkeeper.zookeeper.RetryPolicy)>($stack4);
+/*96*/
+
+        $stack6 = this.<org.apache.bookkeeper.stream.server.service.RegistrationServiceProvider: java.lang.String zkServers>;
+/*97*/
+
+        $stack3 = virtualinvoke $stack3.<org.apache.bookkeeper.zookeeper.ZooKeeperClient$Builder: org.apache.bookkeeper.zookeeper.ZooKeeperClient$Builder connectString(java.lang.String)>($stack6);
+/*97*/
+
+        $stack8 = this.<org.apache.bookkeeper.stream.server.service.RegistrationServiceProvider: org.apache.bookkeeper.stats.StatsLogger statsLogger>;
+/*98*/
+
+        $stack8 = interfaceinvoke $stack8.<org.apache.bookkeeper.stats.StatsLogger: org.apache.bookkeeper.stats.StatsLogger scope(java.lang.String)>("zk");
+/*98*/
+
+        $stack3 = virtualinvoke $stack3.<org.apache.bookkeeper.zookeeper.ZooKeeperClient$Builder: org.apache.bookkeeper.zookeeper.ZooKeeperClient$Builder statsLogger(org.apache.bookkeeper.stats.StatsLogger)>($stack8);
+/*98*/
+
+        $stack2 = virtualinvoke $stack3.<org.apache.bookkeeper.zookeeper.ZooKeeperClient$Builder: org.apache.bookkeeper.zookeeper.ZooKeeperClient build()>();
+/*99*/
+
+        this.<org.apache.bookkeeper.stream.server.service.RegistrationServiceProvider: org.apache.bookkeeper.zookeeper.ZooKeeperClient zkClient> = $stack2;
+/*99*/
+
+     label3:
+        goto label6;
+/*107*/
+
+     label4:
+        $stack21 := @caughtexception;
+/*106*/
+
+        e = $stack21;
+/*100*/
+
+        $stack22 = staticinvoke <java.lang.Thread: java.lang.Thread currentThread()>();
+/*101*/
+
+        virtualinvoke $stack22.<java.lang.Thread: void interrupt()>();
+/*101*/
+
+        $stack20 = <org.apache.bookkeeper.stream.server.service.RegistrationServiceProvider: org.slf4j.Logger log>;
+/*102*/
+
+        $stack6 = this.<org.apache.bookkeeper.stream.server.service.RegistrationServiceProvider: java.lang.String zkServers>;
+/*102*/
+
+        interfaceinvoke $stack20.<org.slf4j.Logger: void error(java.lang.String,java.lang.Object,java.lang.Object)>("Interrupted at creating zookeeper client to {}", $stack6, $stack21);
+/*102*/
+
+        throw $stack21;
+/*103*/
+
+     label5:
+        e := @caughtexception;
+/*90*/
+
+        $stack20 = <org.apache.bookkeeper.stream.server.service.RegistrationServiceProvider: org.slf4j.Logger log>;
+/*105*/
+
+        $stack6 = this.<org.apache.bookkeeper.stream.server.service.RegistrationServiceProvider: java.lang.String zkServers>;
+/*105*/
+
+        interfaceinvoke $stack20.<org.slf4j.Logger: void error(java.lang.String,java.lang.Object,java.lang.Object)>("Failed to create zookeeper client to {}", $stack6, e);
+/*105*/
+
+        throw e;
+/*106*/
+
+     label6:
+        $stack12 = new org.apache.bookkeeper.discover.ZKRegistrationClient;
+/*108*/
+
+        $stack2 = this.<org.apache.bookkeeper.stream.server.service.RegistrationServiceProvider: org.apache.bookkeeper.zookeeper.ZooKeeperClient zkClient>;
+/*108*/
+
+        $stack6 = this.<org.apache.bookkeeper.stream.server.service.RegistrationServiceProvider: java.lang.String regPath>;
+/*108*/
+
+        $stack14 = this.<org.apache.bookkeeper.stream.server.service.RegistrationServiceProvider: java.util.concurrent.ScheduledExecutorService regExecutor>;
+/*108*/
+
+        $stack13 = this.<org.apache.bookkeeper.stream.server.service.RegistrationServiceProvider: boolean bookieAddresschangeTracking>;
+/*108*/
+
+        specialinvoke $stack12.<org.apache.bookkeeper.discover.ZKRegistrationClient: void <init>(org.apache.zookeeper.ZooKeeper,java.lang.String,java.util.concurrent.ScheduledExecutorService,boolean)>($stack2, $stack6, $stack14, $stack13);
+/*108*/
+
+        this.<org.apache.bookkeeper.stream.server.service.RegistrationServiceProvider: org.apache.bookkeeper.discover.RegistrationClient client> = $stack12;
+/*108*/
+
+     label7:
+        goto label9;
+/*90*/
+
+     label8:
+        $stack17 := @caughtexception;
+/*90*/
+
+        throw $stack17;
+/*90*/
+
+     label9:
+        return;
+/*110*/
+
+        catch java.lang.InterruptedException from label2 to label3 with label4;
+        catch java.lang.Exception from label2 to label3 with label5;
+        catch java.lang.Throwable from label1 to label7 with label8;
+    }
+

@@ -1,0 +1,48 @@
+long org.apache.bookkeeper.bookie.FileInfo:setLastAddConfirmed(long lac)
+{
+long lacToReturn;
+  boolean changed;
+  org.apache.bookkeeper.bookie.FileInfo l6;
+  java.lang.Throwable l7;
+  java.lang.Long $stack9;
+  org.slf4j.Logger $stack14;
+  boolean $stack15;
+  java.util.function.Function $stack16;
+  java.lang.Long $stack22;
+  byte $stack26;
+  changed=0;
+ l6=this;
+ monitorenter this;
+ label0:$stack9=this.lac;
+ if (null==$stack9) goto label1;
+ $stack9=this.lac;
+ lacToReturn = $stack9.longValue();
+ $stack26=(lacToReturn cmp lac);
+ if ($stack26>=0) goto label2;
+ label1:$stack9 = java.lang.Long.valueOf(lac);
+ this.lac=$stack9;
+ changed=1;
+ label2:$stack9=this.lac;
+ lacToReturn = $stack9.longValue();
+ monitorexit this;
+ label3:goto label4;
+ label5:l7 = catch;
+ monitorexit this;
+ label6:throw l7;
+ label4:$stack14=org.apache.bookkeeper.bookie.FileInfo.LOG;
+ $stack15 = $stack14.isTraceEnabled();
+ if ($stack15==0) goto label7;
+ $stack14=org.apache.bookkeeper.bookie.FileInfo.LOG;
+ $stack9 = java.lang.Long.valueOf(lacToReturn);
+ $stack22 = java.lang.Long.valueOf(lac);
+ dummyClass.lowSink("Updating LAC {} , {}");
+$stack14.trace("Updating LAC {} , {}",(java.lang.Object)$stack9,(java.lang.Object)$stack22);
+ label7:if (changed==0) goto label8;
+ $stack16=org.apache.bookkeeper.bookie.LastAddConfirmedUpdateNotification.FUNC;
+ $stack9 = java.lang.Long.valueOf(lacToReturn);
+ this.notifyWatchers($stack16,(java.lang.Object)$stack9);
+ label8:return  lacToReturn;
+ catch java.lang.Throwable: label0 - label3 : label5;
+catch java.lang.Throwable: label5 - label6 : label5;
+} 
+

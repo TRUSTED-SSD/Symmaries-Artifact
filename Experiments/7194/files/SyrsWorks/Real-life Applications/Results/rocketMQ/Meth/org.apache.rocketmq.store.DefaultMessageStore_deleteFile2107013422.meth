@@ -1,0 +1,25 @@
+void org.apache.rocketmq.store.DefaultMessageStore:deleteFile(java.lang.String @fileName)
+{
+boolean result;
+  java.io.File $stack4;
+  java.lang.StringBuilder $stack6;
+  org.apache.rocketmq.logging.org.slf4j.Logger $stack7;
+  java.lang.String fileName;
+fileName=@fileName;
+$stack4=new java.io.File;
+ $stack4#java.io.File(fileName);
+ result = $stack4.delete();
+ $stack7=org.apache.rocketmq.store.DefaultMessageStore.LOGGER;
+ $stack6=new java.lang.StringBuilder;
+ $stack6#java.lang.StringBuilder();
+ $stack6 = $stack6.append(fileName);
+ if (result==0) goto label0;
+ fileName=" delete OK";
+ goto label1;
+ label0:fileName=" delete Failed";
+ label1:$stack6 = $stack6.append(fileName);
+ fileName = $stack6.toString();
+ $stack7.info(fileName);
+ return;
+ } 
+

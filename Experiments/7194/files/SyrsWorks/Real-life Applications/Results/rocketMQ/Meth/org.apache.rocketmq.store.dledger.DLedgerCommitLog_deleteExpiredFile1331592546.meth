@@ -1,0 +1,45 @@
+int org.apache.rocketmq.store.dledger.DLedgerCommitLog:deleteExpiredFile(long expiredTime,int deleteFilesInterval,long intervalForcibly,boolean cleanImmediately)
+{
+org.apache.rocketmq.store.logfile.MappedFile mappedFile;
+  org.apache.rocketmq.store.MappedFileQueue $stack11;
+  java.util.List $stack12;
+  boolean $stack13;
+  int $stack17;
+  org.apache.rocketmq.logging.org.slf4j.Logger $stack20;
+  java.lang.String $stack22;
+  byte $stack25;
+  $stack11=this.mappedFileQueue;
+ $stack12 = $stack11.getMappedFiles();
+ $stack13 = $stack12.isEmpty();
+ if ($stack13==0) goto label0;
+ this#org.apache.rocketmq.store.dledger.DLedgerCommitLog:refreshConfig();
+ return  2147483647;
+ label0:this#org.apache.rocketmq.store.dledger.DLedgerCommitLog:disableDeleteDledger();
+ deleteFilesInterval = this#org.apache.rocketmq.store.CommitLog:deleteExpiredFile(expiredTime,deleteFilesInterval,intervalForcibly,cleanImmediately);
+ if (deleteFilesInterval>0) goto label1;
+ $stack11=this.mappedFileQueue;
+ $stack12 = $stack11.getMappedFiles();
+ $stack17 = $stack12.size();
+ if ($stack17==1) goto label2;
+ label1:return  deleteFilesInterval;
+ label2:$stack11=this.mappedFileQueue;
+ mappedFile = $stack11.getLastMappedFile();
+ $stack20=org.apache.rocketmq.store.CommitLog.log;
+ $stack22 = mappedFile.getFileName();
+ $stack20.info("Try to delete the last old commitlog file {}",(java.lang.Object)$stack22);
+ intervalForcibly = mappedFile.getLastModifiedTimestamp();
+ expiredTime=(intervalForcibly+expiredTime);
+ intervalForcibly = java.lang.System.currentTimeMillis();
+ $stack25=(intervalForcibly cmp expiredTime);
+ if ($stack25>=0) goto label3;
+ if (cleanImmediately==0) goto label4;
+ label3:cleanImmediately = mappedFile.destroy(10000L);
+ if (cleanImmediately!=0) goto label5;
+ io.openmessaging.storage.dledger.utils.DLedgerUtils.sleep(1000L);
+ goto label3;
+ label5:$stack11=this.mappedFileQueue;
+ $stack12 = $stack11.getMappedFiles();
+ $stack12.remove((java.lang.Object)mappedFile);
+ label4:return  1;
+ } 
+

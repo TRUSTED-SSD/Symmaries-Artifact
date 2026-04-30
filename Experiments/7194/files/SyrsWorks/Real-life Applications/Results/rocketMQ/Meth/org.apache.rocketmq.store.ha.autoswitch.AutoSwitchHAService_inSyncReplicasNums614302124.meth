@@ -1,0 +1,21 @@
+int org.apache.rocketmq.store.ha.autoswitch.AutoSwitchHAService:inSyncReplicasNums(long masterPutWhere)
+{
+java.util.concurrent.locks.Lock readLock;
+  int l4;
+  java.lang.Throwable l5;
+  java.util.concurrent.locks.ReadWriteLock $stack6;
+  java.util.concurrent.CopyOnWriteArraySet $stack8;
+  $stack6=this.readWriteLock;
+ readLock = $stack6.readLock();
+ label0:readLock.lock();
+ $stack8=this.syncStateSet;
+ l4 = $stack8.size();
+ label1:readLock.unlock();
+ return  l4;
+ label2:l5 = catch;
+ label3:readLock.unlock();
+ throw l5;
+ catch java.lang.Throwable: label0 - label1 : label2;
+catch java.lang.Throwable: label2 - label3 : label2;
+} 
+

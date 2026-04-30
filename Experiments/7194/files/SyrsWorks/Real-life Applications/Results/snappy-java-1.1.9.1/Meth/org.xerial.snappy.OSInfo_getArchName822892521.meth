@@ -1,0 +1,29 @@
+static java.lang.String org.xerial.snappy.OSInfo:getArchName()
+{
+java.lang.String l0;
+  java.lang.String l1;
+  boolean $stack3;
+  java.util.Locale $stack5;
+  java.util.HashMap $stack7;
+  java.lang.Object $stack11;
+  l0 = java.lang.System.getProperty("os.arch");
+ $stack3 = org.xerial.snappy.OSInfo.isAndroid();
+ if ($stack3==0) goto label0;
+ return  "android-arm";
+ label0:$stack3 = l0.startsWith("arm");
+ if ($stack3==0) goto label1;
+ l0 = org.xerial.snappy.OSInfo.resolveArmArchType();
+ goto label2;
+ label1:$stack5=java.util.Locale.US;
+ l1 = l0.toLowerCase($stack5);
+ $stack7=org.xerial.snappy.OSInfo.archMapping;
+ $stack3 = $stack7.containsKey((java.lang.Object)l1);
+ if ($stack3==0) goto label2;
+ $stack7=org.xerial.snappy.OSInfo.archMapping;
+ $stack11 = $stack7.get((java.lang.Object)l1);
+ l0=(java.lang.String) $stack11;
+ return  l0;
+ label2:l0 = org.xerial.snappy.OSInfo.translateArchNameToFolderName(l0);
+ return  l0;
+ } 
+

@@ -1,0 +1,35 @@
+void org.apache.rocketmq.store.stats.BrokerStats:record()
+{
+long $stack1;
+  org.apache.rocketmq.store.MessageStore $stack3;
+  org.apache.rocketmq.store.stats.BrokerStatsManager $stack4;
+  long $stack10;
+  org.apache.rocketmq.logging.org.slf4j.Logger $stack12;
+  java.lang.Long $stack14;
+  $stack1=this.msgPutTotalTodayMorning;
+ this.msgPutTotalYesterdayMorning=$stack1;
+ $stack1=this.msgGetTotalTodayMorning;
+ this.msgGetTotalYesterdayMorning=$stack1;
+ $stack3=this.defaultMessageStore;
+ $stack4 = $stack3.getBrokerStatsManager();
+ $stack1 = $stack4.getBrokerPutNumsWithoutSystemTopic();
+ this.msgPutTotalTodayMorning=$stack1;
+ $stack3=this.defaultMessageStore;
+ $stack4 = $stack3.getBrokerStatsManager();
+ $stack1 = $stack4.getBrokerGetNumsWithoutSystemTopic();
+ this.msgGetTotalTodayMorning=$stack1;
+ $stack12=org.apache.rocketmq.store.stats.BrokerStats.log;
+ $stack10=this.msgPutTotalTodayMorning;
+ $stack1=this.msgPutTotalYesterdayMorning;
+ $stack1=($stack10-$stack1);
+ $stack14 = java.lang.Long.valueOf($stack1);
+ $stack12.info("yesterday put message total: {}",(java.lang.Object)$stack14);
+ $stack12=org.apache.rocketmq.store.stats.BrokerStats.log;
+ $stack10=this.msgGetTotalTodayMorning;
+ $stack1=this.msgGetTotalYesterdayMorning;
+ $stack1=($stack10-$stack1);
+ $stack14 = java.lang.Long.valueOf($stack1);
+ $stack12.info("yesterday get message total: {}",(java.lang.Object)$stack14);
+ return;
+ } 
+

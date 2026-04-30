@@ -1,0 +1,19 @@
+java.util.concurrent.CompletableFuture org.apache.rocketmq.proxy.service.mqclient.MQClientAPIExt:updateConsumerOffsetOneWay(java.lang.String brokerAddr,org.apache.rocketmq.remoting.protocol.header.UpdateConsumerOffsetRequestHeader header,long timeoutMillis)
+{
+java.util.concurrent.CompletableFuture future;
+  org.apache.rocketmq.remoting.protocol.RemotingCommand request;
+  org.apache.rocketmq.remoting.RemotingClient $stack9;
+  java.lang.Throwable $stack11;
+  future=new java.util.concurrent.CompletableFuture;
+ future#java.util.concurrent.CompletableFuture();
+ label0:request = org.apache.rocketmq.remoting.protocol.RemotingCommand.createRequestCommand(15,(org.apache.rocketmq.remoting.CommandCustomHeader)header);
+ $stack9 = this.getRemotingClient();
+ $stack9.invokeOneway(brokerAddr,request,timeoutMillis);
+ future.complete(null);
+ label1:goto label2;
+ label3:$stack11 = catch;
+ future.completeExceptionally($stack11);
+ label2:return  future;
+ catch java.lang.Throwable: label0 - label1 : label3;
+} 
+

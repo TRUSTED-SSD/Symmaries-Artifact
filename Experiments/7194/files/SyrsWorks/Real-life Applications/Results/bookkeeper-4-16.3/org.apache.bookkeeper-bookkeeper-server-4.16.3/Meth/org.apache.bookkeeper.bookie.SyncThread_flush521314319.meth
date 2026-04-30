@@ -1,0 +1,46 @@
+void org.apache.bookkeeper.bookie.SyncThread:flush()
+{
+org.apache.bookkeeper.bookie.CheckpointSource$Checkpoint checkpoint$$;
+  org.apache.bookkeeper.bookie.CheckpointSource $stack3;
+  org.apache.bookkeeper.bookie.LedgerStorage $stack5;
+  boolean $stack6;
+  org.slf4j.Logger $stack7;
+  org.apache.bookkeeper.bookie.LedgerDirsManager$NoWritableLedgerDirException $stack9;
+  org.apache.bookkeeper.bookie.LedgerDirsManager$LedgerDirsListener $stack11;
+  java.io.IOException $stack12;
+  java.io.IOException $stack14;
+  $stack3=this.checkpointSource;
+ checkpoint$$ = $stack3.newCheckpoint();
+ label0:$stack5=this.ledgerStorage;
+ $stack5.flush();
+ label1:goto label2;
+ label3:$stack9 = catch;
+ $stack7=org.apache.bookkeeper.bookie.SyncThread.log;
+ $stack7.error("No writeable ledger directories",(java.lang.Throwable)$stack9);
+ $stack11=this.dirsListener;
+ $stack11.allDisksFull((boolean)1);
+ return;
+ label4:$stack12 = catch;
+ $stack7=org.apache.bookkeeper.bookie.SyncThread.log;
+ $stack7.error("Exception flushing ledgers",(java.lang.Throwable)$stack12);
+ return;
+ label2:$stack6=this.disableCheckpoint;
+ if ($stack6==0) goto label5;
+ return;
+ label5:$stack7=org.apache.bookkeeper.bookie.SyncThread.log;
+ dummyClass.lowSink("Flush ledger storage at checkpoint {}.");
+$stack7.info("Flush ledger storage at checkpoint {}.",(java.lang.Object)checkpoint$$);
+ label6:$stack3=this.checkpointSource;
+ $stack3.checkpointComplete(checkpoint$$,(boolean)0);
+ label7:goto label8;
+ label9:$stack14 = catch;
+ $stack7=org.apache.bookkeeper.bookie.SyncThread.log;
+ $stack7.error("Exception marking checkpoint as complete",(java.lang.Throwable)$stack14);
+ $stack11=this.dirsListener;
+ $stack11.allDisksFull((boolean)1);
+ label8:return;
+ catch org.apache.bookkeeper.bookie.LedgerDirsManager$NoWritableLedgerDirException: label0 - label1 : label3;
+catch java.io.IOException: label0 - label1 : label4;
+catch java.io.IOException: label6 - label7 : label9;
+} 
+

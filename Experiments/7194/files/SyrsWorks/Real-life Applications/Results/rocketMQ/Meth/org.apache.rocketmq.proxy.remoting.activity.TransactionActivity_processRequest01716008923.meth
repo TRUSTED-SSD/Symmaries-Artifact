@@ -1,0 +1,40 @@
+org.apache.rocketmq.remoting.protocol.RemotingCommand org.apache.rocketmq.proxy.remoting.activity.TransactionActivity:processRequest0(io.netty.channel.ChannelHandlerContext ctx,org.apache.rocketmq.remoting.protocol.RemotingCommand request,org.apache.rocketmq.proxy.common.ProxyContext context)
+{
+org.apache.rocketmq.remoting.protocol.RemotingCommand response;
+  org.apache.rocketmq.remoting.protocol.header.EndTransactionRequestHeader requestHeader;
+  org.apache.rocketmq.proxy.processor.TransactionStatus transactionStatus;
+  org.apache.rocketmq.remoting.CommandCustomHeader $stack8;
+  java.lang.Integer $stack9;
+  int $stack10;
+  org.apache.rocketmq.proxy.processor.MessagingProcessor $stack11;
+  java.lang.String $stack12;
+  java.lang.String $stack13;
+  java.lang.String $stack14;
+  java.lang.Boolean $stack15;
+  boolean $stack16;
+  response = org.apache.rocketmq.remoting.protocol.RemotingCommand.createResponseCommand(null);
+ response.setCode(0);
+ response.setRemark(null);
+ $stack8 = request.decodeCommandCustomHeader(org.apache.rocketmq.remoting.protocol.header.EndTransactionRequestHeader);
+ requestHeader=(org.apache.rocketmq.remoting.protocol.header.EndTransactionRequestHeader) $stack8;
+ transactionStatus=org.apache.rocketmq.proxy.processor.TransactionStatus.UNKNOWN;
+ $stack9 = requestHeader.getCommitOrRollback();
+ $stack10 = $stack9.intValue();
+ switch [$stack10]
+if 0 goto label0;
+if 1 goto label1;
+goto label2;
+ label0:transactionStatus=org.apache.rocketmq.proxy.processor.TransactionStatus.COMMIT;
+ goto label2;
+ label1:transactionStatus=org.apache.rocketmq.proxy.processor.TransactionStatus.ROLLBACK;
+ goto label2;
+ label2:$stack11=this.messagingProcessor;
+ $stack12 = requestHeader.getTransactionId();
+ $stack13 = requestHeader.getMsgId();
+ $stack14 = requestHeader.getProducerGroup();
+ $stack15 = requestHeader.getFromTransactionCheck();
+ $stack16 = $stack15.booleanValue();
+ $stack11.endTransaction(context,$stack12,$stack13,$stack14,transactionStatus,$stack16);
+ return  response;
+ } 
+

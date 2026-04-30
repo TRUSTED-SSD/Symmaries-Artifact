@@ -1,0 +1,31 @@
+void org.apache.bookkeeper.bookie.storage.ldb.WriteCache:lambda$forEach$0(long ledgerId,long entryId,long offset,long length)
+{
+org.apache.bookkeeper.util.collections.ConcurrentLongHashSet $stack9;
+  boolean $stack10;
+  int $stack11;
+  long[] $stack12;
+  $stack9=this.deletedLedgers;
+ $stack10 = $stack9.contains(ledgerId);
+ if ($stack10==0) goto label0;
+ return;
+ label0:$stack12=this.sortedEntries;
+ $stack11=this.sortedEntriesIdx;
+ $stack12[$stack11]=ledgerId;
+ $stack12=this.sortedEntries;
+ $stack11=this.sortedEntriesIdx;
+ $stack11=($stack11+1);
+ $stack12[$stack11]=entryId;
+ $stack12=this.sortedEntries;
+ $stack11=this.sortedEntriesIdx;
+ $stack11=($stack11+2);
+ $stack12[$stack11]=offset;
+ $stack12=this.sortedEntries;
+ $stack11=this.sortedEntriesIdx;
+ $stack11=($stack11+3);
+ $stack12[$stack11]=length;
+ $stack11=this.sortedEntriesIdx;
+ $stack11=($stack11+4);
+ this.sortedEntriesIdx=$stack11;
+ return;
+ } 
+

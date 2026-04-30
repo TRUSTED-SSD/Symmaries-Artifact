@@ -1,0 +1,36 @@
+void org.apache.bookkeeper.client.PendingAddOp:recyclePendAddOpObject()
+{
+io.netty.buffer.ByteBuf $stack1;
+  org.apache.bookkeeper.client.DistributionSchedule$AckSet $stack2;
+  java.util.Set $stack3;
+  io.netty.util.Recycler$Handle $stack4;
+  this.entryId=-1L;
+ this.currentLedgerLength=-1L;
+ $stack1=this.payload;
+ if ($stack1==null) goto label0;
+ $stack1=this.payload;
+ io.netty.util.ReferenceCountUtil.release((java.lang.Object)$stack1);
+ this.payload=null;
+ label0:this.cb=null;
+ this.ctx=null;
+ this.ensemble=null;
+ $stack2=this.ackSet;
+ $stack2.recycle();
+ this.ackSet=null;
+ this.lh=null;
+ this.clientCtx=null;
+ this.isRecoveryAdd=0;
+ this.completed=0;
+ this.pendingWriteRequests=0;
+ this.callbackTriggered=0;
+ this.hasRun=0;
+ this.allowFailFast=0;
+ this.writeFlags=null;
+ $stack3=this.addEntrySuccessBookies;
+ $stack3.clear();
+ this.writeDelayedStartTime=-1L;
+ $stack4=this.recyclerHandle;
+ $stack4.recycle((java.lang.Object)this);
+ return;
+ } 
+

@@ -1,0 +1,26 @@
+boolean org.apache.rocketmq.store.DefaultMessageStore:estimateInMemByCommitOffset(long offsetPy,long maxOffsetPy)
+{
+long memory;
+  org.apache.rocketmq.store.config.MessageStoreConfig $stack8;
+  double $stack9;
+  int $stack10;
+  double $stack11;
+  byte $stack15;
+  boolean $stack16;
+  memory=org.apache.rocketmq.store.StoreUtil.TOTAL_PHYSICAL_MEMORY_SIZE;
+ $stack9=(double) memory;
+ $stack8=this.messageStoreConfig;
+ $stack10 = $stack8.getAccessMessageInMemoryMaxRatio();
+ $stack11=(double) $stack10;
+ $stack11=($stack11/100.0);
+ $stack9=($stack9 * $stack11);
+ memory=(long) $stack9;
+ offsetPy=(maxOffsetPy-offsetPy);
+ $stack15=(offsetPy cmp memory);
+ if ($stack15>0) goto label0;
+ $stack16=1;
+ goto label1;
+ label0:$stack16=0;
+ label1:return  $stack16;
+ } 
+

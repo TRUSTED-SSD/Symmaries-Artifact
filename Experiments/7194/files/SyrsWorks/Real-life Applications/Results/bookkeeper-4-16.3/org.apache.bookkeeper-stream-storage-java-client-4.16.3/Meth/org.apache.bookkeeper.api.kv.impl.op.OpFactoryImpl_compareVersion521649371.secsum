@@ -1,0 +1,10 @@
+org.apache.bookkeeper.api.kv.op.CompareOp org.apache.bookkeeper.api.kv.impl.op.OpFactoryImpl:compareVersion (
+  org.apache.bookkeeper.api.kv.op.CompareResult result, java.lang.Object key,
+  long version) {
+  guard = tt;
+  ret(level()) = obj_level(this);
+  ret(obj_level()) = level(version) ⊔ obj_level(this);
+  ret(obj_level(key)) = level(key) ⊔ level(result) ⊔ level(version) ⊔ obj_level(key);
+  ret(obj_level(result)) = level(key) ⊔ level(result) ⊔ level(version) ⊔ obj_level(key);
+  ret(obj_level(this)) = level(key) ⊔ level(result) ⊔ level(version) ⊔ obj_level(key);
+}

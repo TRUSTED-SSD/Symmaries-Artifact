@@ -1,0 +1,39 @@
+static org.apache.rocketmq.proxy.common.ReceiptHandleGroup$HandleData org.apache.rocketmq.proxy.common.ReceiptHandleGroup:lambda$put$1(org.apache.rocketmq.proxy.common.MessageReceiptHandle value,long timeout,java.lang.String handleKey,org.apache.rocketmq.proxy.common.ReceiptHandleGroup$HandleData @handleData)
+{
+org.apache.rocketmq.proxy.common.ReceiptHandleGroup$HandleData l5;
+  java.lang.Throwable l6;
+  boolean $stack8;
+  org.apache.rocketmq.proxy.common.ProxyException $stack13;
+  org.apache.rocketmq.proxy.common.ProxyExceptionCode $stack14;
+  org.apache.rocketmq.proxy.common.ReceiptHandleGroup$HandleData handleData;
+handleData=@handleData;
+if (handleData==null) goto label0;
+ $stack8 = org.apache.rocketmq.proxy.common.ReceiptHandleGroup$HandleData.access$100(handleData);
+ if ($stack8==0) goto label1;
+ label0:handleData=new org.apache.rocketmq.proxy.common.ReceiptHandleGroup$HandleData;
+ handleData#org.apache.rocketmq.proxy.common.ReceiptHandleGroup$HandleData(value);
+ return  handleData;
+ label1:$stack8 = handleData.lock(timeout);
+ if ($stack8!=0) goto label2;
+ $stack13=new org.apache.rocketmq.proxy.common.ProxyException;
+ $stack14=org.apache.rocketmq.proxy.common.ProxyExceptionCode.INTERNAL_SERVER_ERROR;
+ $stack13#org.apache.rocketmq.proxy.common.ProxyException($stack14,"try to put handle failed");
+ throw $stack13;
+ label2:$stack8 = org.apache.rocketmq.proxy.common.ReceiptHandleGroup$HandleData.access$100(handleData);
+ if ($stack8==0) goto label3;
+ l5=new org.apache.rocketmq.proxy.common.ReceiptHandleGroup$HandleData;
+ l5#org.apache.rocketmq.proxy.common.ReceiptHandleGroup$HandleData(value);
+ label4:handleData.unlock();
+ return  l5;
+ label3:org.apache.rocketmq.proxy.common.ReceiptHandleGroup$HandleData.access$002(handleData,value);
+ label5:handleData.unlock();
+ goto label6;
+ label7:l6 = catch;
+ label8:handleData.unlock();
+ throw l6;
+ label6:return  handleData;
+ catch java.lang.Throwable: label2 - label4 : label7;
+catch java.lang.Throwable: label3 - label5 : label7;
+catch java.lang.Throwable: label7 - label8 : label7;
+} 
+

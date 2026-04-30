@@ -1,0 +1,19 @@
+void org.apache.rocketmq.store.ha.autoswitch.EpochFileCache:initCacheFromEntries(java.util.List entries)
+{
+java.util.concurrent.locks.Lock $stack3;
+  java.lang.Throwable $stack5;
+  $stack3=this.writeLock;
+ $stack3.lock();
+ label0:this#org.apache.rocketmq.store.ha.autoswitch.EpochFileCache:initEntries(entries);
+ this#org.apache.rocketmq.store.ha.autoswitch.EpochFileCache:flush();
+ label1:$stack3=this.writeLock;
+ $stack3.unlock();
+ goto label2;
+ label3:$stack5 = catch;
+ $stack3=this.writeLock;
+ $stack3.unlock();
+ throw $stack5;
+ label2:return;
+ catch java.lang.Throwable: label0 - label1 : label3;
+} 
+

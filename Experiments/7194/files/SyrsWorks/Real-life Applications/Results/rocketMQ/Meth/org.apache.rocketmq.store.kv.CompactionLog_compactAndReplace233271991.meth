@@ -1,0 +1,47 @@
+void org.apache.rocketmq.store.kv.CompactionLog:compactAndReplace(org.apache.rocketmq.store.kv.CompactionLog$ProcessFileList compactFiles)
+{
+long startTime;
+  org.apache.rocketmq.store.kv.CompactionLog$OffsetMap offsetMap;
+  boolean $stack5;
+  java.util.List $stack7;
+  org.apache.rocketmq.store.kv.CompactionLog$TopicPartitionLog $stack10;
+  org.apache.rocketmq.store.kv.CompactionLog$TopicPartitionLog $stack11;
+  org.apache.rocketmq.store.kv.CompactionPositionMgr $stack13;
+  java.lang.String $stack14;
+  int $stack15;
+  long $stack16;
+  org.apache.rocketmq.logging.org.slf4j.Logger $stack19;
+  java.util.concurrent.TimeUnit $stack21;
+  java.lang.Long $stack25;
+  if (compactFiles==null) goto label0;
+ $stack5 = compactFiles.isEmpty();
+ if ($stack5==0) goto label1;
+ label0:return;
+ label1:startTime = java.lang.System.nanoTime();
+ $stack7=compactFiles.newFiles;
+ offsetMap = this.getOffsetMap($stack7);
+ $stack7=compactFiles.toCompactFiles;
+ this.compaction($stack7,offsetMap);
+ $stack7=compactFiles.toCompactFiles;
+ $stack11=this.current;
+ $stack10=this.compacting;
+ this#org.apache.rocketmq.store.kv.CompactionLog($stack7,$stack11,$stack10);
+ $stack13=this.positionMgr;
+ $stack14=this.topic;
+ $stack15=this.queueId;
+ $stack16 = org.apache.rocketmq.store.kv.CompactionLog$OffsetMap.access$000(offsetMap);
+ $stack13.setOffset($stack14,$stack15,$stack16);
+ $stack13=this.positionMgr;
+ $stack13.persist();
+ $stack10=this.compacting;
+ $stack10.clean((boolean)0,(boolean)0);
+ $stack19=org.apache.rocketmq.store.kv.CompactionLog.log;
+ $stack21=java.util.concurrent.TimeUnit.NANOSECONDS;
+ $stack16 = java.lang.System.nanoTime();
+ startTime=($stack16-startTime);
+ startTime = $stack21.toMillis(startTime);
+ $stack25 = java.lang.Long.valueOf(startTime);
+ $stack19.info("this compaction elapsed {} milliseconds",(java.lang.Object)$stack25);
+ return;
+ } 
+

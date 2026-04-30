@@ -1,0 +1,31 @@
+boolean org.apache.bookkeeper.replication.ReplicationWorker:checkFragmentRepeat(java.util.Set fragments,org.apache.bookkeeper.client.LedgerFragment needChecked)
+{
+java.util.Iterator l3;
+  org.apache.bookkeeper.client.LedgerFragment fragment;
+  boolean $stack6;
+  java.lang.Object $stack7;
+  long $stack8;
+  long $stack9;
+  byte $stack10;
+  l3 = fragments.iterator();
+ label0:$stack6 = l3.hasNext();
+ if ($stack6==0) goto label1;
+ $stack7 = l3.next();
+ fragment=(org.apache.bookkeeper.client.LedgerFragment) $stack7;
+ $stack8 = fragment.getLedgerId();
+ $stack9 = needChecked.getLedgerId();
+ $stack10=($stack8 cmp $stack9);
+ if ($stack10!=0) goto label2;
+ $stack8 = fragment.getFirstEntryId();
+ $stack9 = needChecked.getFirstEntryId();
+ $stack10=($stack8 cmp $stack9);
+ if ($stack10!=0) goto label2;
+ $stack8 = fragment.getLastKnownEntryId();
+ $stack9 = needChecked.getLastKnownEntryId();
+ $stack10=($stack8 cmp $stack9);
+ if ($stack10!=0) goto label2;
+ return  1;
+ label2:goto label0;
+ label1:return  0;
+ } 
+

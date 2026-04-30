@@ -1,0 +1,23 @@
+static org.apache.kerby.kerberos.kerb.provider.TokenProvider org.apache.kerby.kerberos.kerb.KrbRuntime:getTokenProvider(java.lang.String tokenType)
+{
+org.apache.kerby.kerberos.kerb.provider.TokenProvider $stack1;
+  java.lang.RuntimeException $stack5;
+  java.lang.String $stack7;
+  boolean $stack8;
+  $stack1=org.apache.kerby.kerberos.kerb.KrbRuntime.tokenProvider;
+ if ($stack1==null) goto label0;
+ $stack1=org.apache.kerby.kerberos.kerb.KrbRuntime.tokenProvider;
+ $stack7 = $stack1.getTokenType();
+ $stack8 = tokenType.equals((java.lang.Object)$stack7);
+ if ($stack8!=0) goto label1;
+ label0:$stack1 = org.apache.kerby.kerberos.kerb.TokenProviderRegistry.createProvider(tokenType);
+ org.apache.kerby.kerberos.kerb.KrbRuntime.tokenProvider=$stack1;
+ label1:$stack1=org.apache.kerby.kerberos.kerb.KrbRuntime.tokenProvider;
+ if ($stack1!=null) goto label2;
+ $stack5=new java.lang.RuntimeException;
+ $stack5#java.lang.RuntimeException("No token provider is available");
+ throw $stack5;
+ label2:$stack1=org.apache.kerby.kerberos.kerb.KrbRuntime.tokenProvider;
+ return  $stack1;
+ } 
+

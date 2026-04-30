@@ -1,0 +1,31 @@
+io.netty.buffer.ByteBuf org.apache.bookkeeper.bookie.DefaultEntryLogger:readEntrySize(long ledgerId,long entryId,long entryLogId,long pos,org.apache.bookkeeper.bookie.BufferedReadChannel fc)
+{
+io.netty.buffer.ByteBuf sizeBuff;
+  java.io.IOException e;
+  io.netty.util.concurrent.FastThreadLocal $stack14;
+  java.lang.Object $stack15;
+  int $stack17;
+  int $stack18;
+  org.apache.bookkeeper.bookie.DefaultEntryLogger$EntryLookupException$MissingEntryException $stack19;
+  org.apache.bookkeeper.bookie.DefaultEntryLogger$EntryLookupException$MissingLogFileException $stack21;
+  $stack14=this.sizeBuffer;
+ $stack15 = $stack14.get();
+ sizeBuff=(io.netty.buffer.ByteBuf) $stack15;
+ sizeBuff.clear();
+ pos=(pos-4L);
+ label0:$stack17 = this#org.apache.bookkeeper.bookie.DefaultEntryLogger:readFromLogChannel(entryLogId,fc,sizeBuff,pos);
+ $stack18 = sizeBuff.capacity();
+ if ($stack17==$stack18) goto label1;
+ $stack19=new org.apache.bookkeeper.bookie.DefaultEntryLogger$EntryLookupException$MissingEntryException;
+ $stack19#org.apache.bookkeeper.bookie.DefaultEntryLogger$EntryLookupException$MissingEntryException(ledgerId,entryId,entryLogId,pos);
+ throw $stack19;
+ label1:goto label2;
+ label3:e = catch;
+ $stack21=new org.apache.bookkeeper.bookie.DefaultEntryLogger$EntryLookupException$MissingLogFileException;
+ $stack21#org.apache.bookkeeper.bookie.DefaultEntryLogger$EntryLookupException$MissingLogFileException(ledgerId,entryId,entryLogId,pos);
+ throw $stack21;
+ label2:return  sizeBuff;
+ catch org.apache.bookkeeper.bookie.BufferedChannelBase$BufferedChannelClosedException: label0 - label1 : label3;
+catch java.nio.channels.AsynchronousCloseException: label0 - label1 : label3;
+} 
+

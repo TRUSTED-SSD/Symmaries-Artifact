@@ -1,0 +1,53 @@
+org.apache.rocketmq.remoting.protocol.RemotingCommand org.apache.rocketmq.proxy.remoting.activity.SendMessageActivity:sendMessage(io.netty.channel.ChannelHandlerContext ctx,org.apache.rocketmq.remoting.protocol.RemotingCommand @request,org.apache.rocketmq.proxy.common.ProxyContext context)
+{
+org.apache.rocketmq.remoting.protocol.header.SendMessageRequestHeader requestHeader;
+  java.lang.String topic;
+  java.util.Map property;
+  org.apache.rocketmq.common.attribute.TopicMessageType messageType;
+  org.apache.rocketmq.common.attribute.TopicMessageType topicMessageType;
+  java.lang.String $stack11;
+  org.apache.rocketmq.proxy.config.ProxyConfig $stack14;
+  boolean $stack15;
+  java.time.Duration $stack17;
+  long $stack18;
+  org.apache.rocketmq.proxy.processor.MessagingProcessor $stack28;
+  org.apache.rocketmq.proxy.processor.validator.TopicMessageTypeValidator $stack31;
+  org.apache.rocketmq.proxy.service.metadata.MetadataService $stack36;
+  org.apache.rocketmq.remoting.protocol.RemotingCommand request;
+request=@request;
+requestHeader = org.apache.rocketmq.remoting.protocol.header.SendMessageRequestHeader.parseRequestHeader(request);
+ topic = requestHeader.getTopic();
+ $stack11 = requestHeader.getProperties();
+ property = org.apache.rocketmq.common.message.MessageDecoder.string2messageProperties($stack11);
+ messageType = org.apache.rocketmq.common.attribute.TopicMessageType.parseFromMessageProperty(property);
+ $stack14 = org.apache.rocketmq.proxy.config.ConfigurationManager.getProxyConfig();
+ $stack15 = $stack14.isEnableTopicMessageTypeCheck();
+ if ($stack15==0) goto label0;
+ $stack31=this.topicMessageTypeValidator;
+ if ($stack31==null) goto label0;
+ $stack15 = org.apache.rocketmq.remoting.protocol.NamespaceUtil.isRetryTopic(topic);
+ if ($stack15!=0) goto label0;
+ $stack15 = org.apache.rocketmq.remoting.protocol.NamespaceUtil.isDLQTopic(topic);
+ if ($stack15!=0) goto label0;
+ $stack28=this.messagingProcessor;
+ $stack36 = $stack28.getMetadataService();
+ topicMessageType = $stack36.getTopicMessageType(topic);
+ $stack31=this.topicMessageTypeValidator;
+ $stack31.validate(topicMessageType,messageType);
+ label0:$stack15 = org.apache.rocketmq.remoting.protocol.NamespaceUtil.isRetryTopic(topic);
+ if ($stack15!=0) goto label1;
+ $stack15 = org.apache.rocketmq.remoting.protocol.NamespaceUtil.isDLQTopic(topic);
+ if ($stack15!=0) goto label1;
+ topicMessageType=org.apache.rocketmq.common.attribute.TopicMessageType.TRANSACTION;
+ $stack15 = topicMessageType.equals((java.lang.Object)messageType);
+ if ($stack15==0) goto label1;
+ $stack28=this.messagingProcessor;
+ topic = requestHeader.getProducerGroup();
+ $stack11 = requestHeader.getTopic();
+ $stack28.addTransactionSubscription(context,topic,$stack11);
+ label1:$stack17 = java.time.Duration.ofSeconds(3L);
+ $stack18 = $stack17.toMillis();
+ request = this.request(ctx,request,context,$stack18);
+ return  request;
+ } 
+

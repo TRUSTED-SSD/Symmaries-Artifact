@@ -1,0 +1,17 @@
+static void org.keycloak.common.util.ServerCookie:maybeQuote(int version,java.lang.StringBuffer buf,java.lang.String @value)
+{
+boolean $stack3;
+  java.lang.String value;
+value=@value;
+$stack3 = org.keycloak.common.util.ServerCookie.isToken(value);
+ if ($stack3==0) goto label0;
+ buf.append(value);
+ goto label1;
+ label0:buf.append((char)34);
+ version = value.length();
+ value = org.keycloak.common.util.ServerCookie.escapeDoubleQuotes(value,0,version);
+ buf.append(value);
+ buf.append((char)34);
+ label1:return;
+ } 
+

@@ -1,0 +1,27 @@
+java.util.TreeMap$Entry java.util.TreeMap$PrivateEntryIterator:prevEntry()
+{
+java.util.TreeMap$Entry r1;
+  java.util.TreeMap $r2;
+  int $i0;
+  int $i1;
+  java.util.TreeMap$Entry $r3;
+  java.util.ConcurrentModificationException $r4;
+  java.util.NoSuchElementException $r5;
+  r1=this.next;
+ if (r1!=null) goto label0;
+ $r5=new java.util.NoSuchElementException;
+ $r5#java.util.NoSuchElementException:init();
+ throw $r5;
+ label0:$r2=this.this$0;
+ $i0 = java.util.TreeMap.access$100($r2);
+ $i1=this.expectedModCount;
+ if ($i0==$i1) goto label1;
+ $r4=new java.util.ConcurrentModificationException;
+ $r4#java.util.ConcurrentModificationException:init();
+ throw $r4;
+ label1:$r3 = java.util.TreeMap.predecessor(r1);
+ this.next=$r3;
+ this.lastReturned=r1;
+ return  r1;
+ }  
+

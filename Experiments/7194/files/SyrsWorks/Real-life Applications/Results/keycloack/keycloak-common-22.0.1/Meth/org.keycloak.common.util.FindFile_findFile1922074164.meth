@@ -1,0 +1,44 @@
+static java.io.InputStream org.keycloak.common.util.FindFile:findFile(java.lang.String @keycloakConfigFile)
+{
+java.lang.String classPathLocation;
+  java.io.InputStream is;
+  boolean $stack3;
+  java.io.FileInputStream $stack4;
+  java.lang.Class $stack6;
+  java.lang.ClassLoader $stack7;
+  java.lang.RuntimeException $stack9;
+  java.lang.StringBuilder $stack10;
+  java.lang.Thread $stack14;
+  java.io.FileNotFoundException $stack18;
+  java.lang.String keycloakConfigFile;
+keycloakConfigFile=@keycloakConfigFile;
+$stack3 = keycloakConfigFile.startsWith("classpath:");
+ if ($stack3==0) goto label0;
+ classPathLocation = keycloakConfigFile.replace((java.lang.CharSequence)"classpath:",(java.lang.CharSequence)"");
+ $stack6=org.keycloak.common.util.FindFile;
+ $stack7 = $stack6.getClassLoader();
+ is = $stack7.getResourceAsStream(classPathLocation);
+ if (is!=null) goto label1;
+ $stack14 = java.lang.Thread.currentThread();
+ $stack7 = $stack14.getContextClassLoader();
+ is = $stack7.getResourceAsStream(classPathLocation);
+ label1:if (is==null) goto label2;
+ return  is;
+ label2:$stack9=new java.lang.RuntimeException;
+ $stack10=new java.lang.StringBuilder;
+ $stack10#java.lang.StringBuilder();
+ $stack10 = $stack10.append("Unable to find config from classpath: ");
+ $stack10 = $stack10.append(keycloakConfigFile);
+ keycloakConfigFile = $stack10.toString();
+ $stack9#java.lang.RuntimeException(keycloakConfigFile);
+ throw $stack9;
+ label0:$stack4=new java.io.FileInputStream;
+ $stack4#java.io.FileInputStream(keycloakConfigFile);
+ label3:return  $stack4;
+ label4:$stack18 = catch;
+ $stack9=new java.lang.RuntimeException;
+ $stack9#java.lang.RuntimeException((java.lang.Throwable)$stack18);
+ throw $stack9;
+ catch java.io.FileNotFoundException: label0 - label3 : label4;
+} 
+

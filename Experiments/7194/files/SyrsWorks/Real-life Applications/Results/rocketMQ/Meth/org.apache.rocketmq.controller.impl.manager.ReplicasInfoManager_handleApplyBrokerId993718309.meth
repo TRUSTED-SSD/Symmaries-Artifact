@@ -1,0 +1,25 @@
+void org.apache.rocketmq.controller.impl.manager.ReplicasInfoManager:handleApplyBrokerId(org.apache.rocketmq.controller.impl.event.ApplyBrokerIdEvent event)
+{
+java.lang.String brokerName;
+  org.apache.rocketmq.controller.impl.manager.BrokerInfo brokerInfo;
+  boolean $stack5;
+  java.util.Map $stack6;
+  java.lang.Object $stack7;
+  long $stack11;
+  java.lang.Long $stack12;
+  brokerName = event.getBrokerName();
+ $stack5 = this#org.apache.rocketmq.controller.impl.manager.ReplicasInfoManager:isContainsBroker(brokerName);
+ if ($stack5==0) goto label0;
+ $stack6=this.replicaInfoTable;
+ $stack7 = $stack6.get((java.lang.Object)brokerName);
+ brokerInfo=(org.apache.rocketmq.controller.impl.manager.BrokerInfo) $stack7;
+ brokerName = event.getBrokerAddress();
+ $stack5 = brokerInfo.isBrokerExist(brokerName);
+ if ($stack5!=0) goto label0;
+ brokerName = event.getBrokerAddress();
+ $stack11 = event.getNewBrokerId();
+ $stack12 = java.lang.Long.valueOf($stack11);
+ brokerInfo.addBroker(brokerName,$stack12);
+ label0:return;
+ } 
+

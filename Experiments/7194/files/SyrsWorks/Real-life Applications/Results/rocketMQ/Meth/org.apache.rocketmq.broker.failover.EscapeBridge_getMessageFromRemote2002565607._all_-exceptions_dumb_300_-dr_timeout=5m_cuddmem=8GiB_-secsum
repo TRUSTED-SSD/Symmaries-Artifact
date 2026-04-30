@@ -1,0 +1,10 @@
+org.apache.rocketmq.common.message.MessageExt org.apache.rocketmq.broker.failover.EscapeBridge:getMessageFromRemote (
+  java.lang.String topic, long offset, int queueId,
+  java.lang.String brokerName) {
+  guard = tt;
+  ret(level()) = level(brokerName) ⊔ level(offset) ⊔ level(queueId) ⊔ level(this) ⊔ level(topic) ⊔ obj_level(brokerName) ⊔ obj_level(this);
+  ret(obj_level()) = level(brokerName) ⊔ level(offset) ⊔ level(queueId) ⊔ level(this) ⊔ level(topic) ⊔ obj_level(brokerName) ⊔ obj_level(this);
+  ret(obj_level(brokerName)) = level(brokerName) ⊔ level(offset) ⊔ level(queueId) ⊔ level(this) ⊔ level(topic) ⊔ obj_level(brokerName) ⊔ obj_level(this);
+  ret(obj_level(this)) = level(brokerName) ⊔ level(offset) ⊔ level(queueId) ⊔ level(this) ⊔ level(topic) ⊔ obj_level(brokerName) ⊔ obj_level(this);
+  ret(obj_level(topic)) = level(brokerName) ⊔ level(offset) ⊔ level(queueId) ⊔ level(this) ⊔ level(topic) ⊔ obj_level(brokerName) ⊔ obj_level(this);
+}

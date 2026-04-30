@@ -1,0 +1,34 @@
+static void org.apache.kerby.kerberos.kerb.admin.kadmin.local.AdminHelper:updateIdentity(org.apache.kerby.kerberos.kerb.request.KrbIdentity identity,org.apache.kerby.KOptions kOptions)
+{
+java.util.Date date;
+  org.apache.kerby.kerberos.kerb.admin.kadmin.KadminOption $stack3;
+  boolean $stack4;
+  java.lang.Boolean $stack10;
+  org.apache.kerby.kerberos.kerb.type.KerberosTime $stack18;
+  long $stack19;
+  $stack3=org.apache.kerby.kerberos.kerb.admin.kadmin.KadminOption.EXPIRE;
+ $stack4 = kOptions.contains((org.apache.kerby.KOption)$stack3);
+ if ($stack4==0) goto label0;
+ $stack3=org.apache.kerby.kerberos.kerb.admin.kadmin.KadminOption.EXPIRE;
+ date = kOptions.getDateOption((org.apache.kerby.KOption)$stack3);
+ $stack18=new org.apache.kerby.kerberos.kerb.type.KerberosTime;
+ $stack19 = date.getTime();
+ $stack18#org.apache.kerby.kerberos.kerb.type.KerberosTime($stack19);
+ identity.setExpireTime($stack18);
+ label0:$stack3=org.apache.kerby.kerberos.kerb.admin.kadmin.KadminOption.DISABLED;
+ $stack4 = kOptions.contains((org.apache.kerby.KOption)$stack3);
+ if ($stack4==0) goto label1;
+ $stack3=org.apache.kerby.kerberos.kerb.admin.kadmin.KadminOption.DISABLED;
+ $stack10 = java.lang.Boolean.valueOf((boolean)0);
+ $stack4 = kOptions.getBooleanOption((org.apache.kerby.KOption)$stack3,$stack10);
+ identity.setDisabled($stack4);
+ label1:$stack3=org.apache.kerby.kerberos.kerb.admin.kadmin.KadminOption.LOCKED;
+ $stack4 = kOptions.contains((org.apache.kerby.KOption)$stack3);
+ if ($stack4==0) goto label2;
+ $stack3=org.apache.kerby.kerberos.kerb.admin.kadmin.KadminOption.LOCKED;
+ $stack10 = java.lang.Boolean.valueOf((boolean)0);
+ $stack4 = kOptions.getBooleanOption((org.apache.kerby.KOption)$stack3,$stack10);
+ identity.setLocked($stack4);
+ label2:return;
+ } 
+

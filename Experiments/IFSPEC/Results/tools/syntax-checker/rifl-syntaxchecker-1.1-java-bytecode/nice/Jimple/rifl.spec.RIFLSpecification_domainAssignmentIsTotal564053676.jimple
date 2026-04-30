@@ -1,0 +1,71 @@
+    private void domainAssignmentIsTotal() throws rifl.spec.RIFLIntegrityException
+    {
+        rifl.spec.RIFLSpecification this;
+        rifl.spec.Assignable assignable;
+        java.util.Iterator l2;
+        java.lang.String msg;
+        java.util.Set $stack4;
+        boolean $stack6;
+        java.lang.Object $stack7;
+        java.util.Map $stack8;
+        java.lang.Object[] $stack11;
+        rifl.spec.RIFLIntegrityException $stack13;
+
+        this := @this: rifl.spec.RIFLSpecification;
+
+        $stack4 = this.<rifl.spec.RIFLSpecification: java.util.Set interfaceSpec>;
+/*163*/
+
+        l2 = interfaceinvoke $stack4.<java.util.Set: java.util.Iterator iterator()>();
+/*163*/
+/*163*/
+
+        goto label2;
+/*163*/
+
+     label1:
+        $stack7 = interfaceinvoke l2.<java.util.Iterator: java.lang.Object next()>();
+/*163*/
+
+        assignable = (rifl.spec.Assignable) $stack7;
+/*163*/
+
+        $stack8 = this.<rifl.spec.RIFLSpecification: java.util.Map domainAssignment>;
+/*164*/
+
+        $stack6 = interfaceinvoke $stack8.<java.util.Map: boolean containsKey(java.lang.Object)>(assignable);
+/*164*/
+
+        if $stack6 != 0 goto label2;
+/*164*/
+
+        $stack11 = newarray (java.lang.Object)[1];
+/*165*/
+
+        $stack11[0] = assignable;
+/*165*/
+
+        msg = staticinvoke <java.lang.String: java.lang.String format(java.lang.String,java.lang.Object[])>("Domain assignment is not total: %s is missing.", $stack11);
+/*165*/
+/*165*/
+
+        $stack13 = new rifl.spec.RIFLIntegrityException;
+/*166*/
+
+        specialinvoke $stack13.<rifl.spec.RIFLIntegrityException: void <init>(java.lang.String)>(msg);
+/*166*/
+
+        throw $stack13;
+/*166*/
+
+     label2:
+        $stack6 = interfaceinvoke l2.<java.util.Iterator: boolean hasNext()>();
+/*163*/
+
+        if $stack6 != 0 goto label1;
+/*163*/
+
+        return;
+/*169*/
+    }
+

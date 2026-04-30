@@ -1,0 +1,31 @@
+void org.apache.rocketmq.namesrv.NamesrvController:printWaterMark()
+{
+java.lang.Object[] $stack1;
+  java.util.concurrent.BlockingQueue $stack2;
+  org.apache.rocketmq.logging.org.slf4j.Logger $stack3;
+  int $stack6;
+  java.lang.Integer $stack7;
+  long $stack10;
+  java.lang.Long $stack11;
+  $stack3=org.apache.rocketmq.namesrv.NamesrvController.WATER_MARK_LOG;
+ $stack1=new java.lang.Object[4];
+ $stack2=this.clientRequestThreadPoolQueue;
+ $stack6 = $stack2.size();
+ $stack7 = java.lang.Integer.valueOf($stack6);
+ $stack1[0]=$stack7;
+ $stack2=this.clientRequestThreadPoolQueue;
+ $stack10 = this#org.apache.rocketmq.namesrv.NamesrvController:headSlowTimeMills($stack2);
+ $stack11 = java.lang.Long.valueOf($stack10);
+ $stack1[1]=$stack11;
+ $stack2=this.defaultThreadPoolQueue;
+ $stack6 = $stack2.size();
+ $stack7 = java.lang.Integer.valueOf($stack6);
+ $stack1[2]=$stack7;
+ $stack2=this.defaultThreadPoolQueue;
+ $stack10 = this#org.apache.rocketmq.namesrv.NamesrvController:headSlowTimeMills($stack2);
+ $stack11 = java.lang.Long.valueOf($stack10);
+ $stack1[3]=$stack11;
+ $stack3.info("[WATERMARK] ClientQueueSize:{} ClientQueueSlowTime:{} DefaultQueueSize:{} DefaultQueueSlowTime:{}",$stack1);
+ return;
+ } 
+

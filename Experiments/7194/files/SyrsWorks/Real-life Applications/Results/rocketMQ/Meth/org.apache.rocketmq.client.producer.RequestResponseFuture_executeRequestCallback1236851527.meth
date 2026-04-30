@@ -1,0 +1,22 @@
+void org.apache.rocketmq.client.producer.RequestResponseFuture:executeRequestCallback()
+{
+org.apache.rocketmq.client.producer.RequestCallback $stack1;
+  boolean $stack2;
+  java.lang.Throwable $stack3;
+  org.apache.rocketmq.common.message.Message $stack8;
+  $stack1=this.requestCallback;
+ if ($stack1==null) goto label0;
+ $stack2=this.sendRequestOk;
+ if ($stack2==0) goto label1;
+ $stack3=this.cause;
+ if ($stack3!=null) goto label1;
+ $stack1=this.requestCallback;
+ $stack8=this.responseMsg;
+ $stack1.onSuccess($stack8);
+ goto label0;
+ label1:$stack1=this.requestCallback;
+ $stack3=this.cause;
+ $stack1.onException($stack3);
+ label0:return;
+ } 
+

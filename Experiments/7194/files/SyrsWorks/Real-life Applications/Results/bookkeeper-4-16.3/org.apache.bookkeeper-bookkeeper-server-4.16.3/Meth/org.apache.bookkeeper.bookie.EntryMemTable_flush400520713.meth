@@ -1,0 +1,18 @@
+long org.apache.bookkeeper.bookie.EntryMemTable:flush(org.apache.bookkeeper.bookie.SkipListFlusher flusher)
+{
+long flushSize;
+  org.apache.bookkeeper.bookie.CheckpointSource$Checkpoint $stack4;
+  java.util.concurrent.atomic.AtomicBoolean $stack6;
+  java.io.IOException $stack7;
+  label0:$stack4=org.apache.bookkeeper.bookie.CheckpointSource$Checkpoint.MAX;
+ flushSize = this.flushSnapshot(flusher,$stack4);
+ $stack6=this.previousFlushSucceeded;
+ $stack6.set((boolean)1);
+ label1:return  flushSize;
+ label2:$stack7 = catch;
+ $stack6=this.previousFlushSucceeded;
+ $stack6.set((boolean)0);
+ throw $stack7;
+ catch java.io.IOException: label0 - label1 : label2;
+} 
+

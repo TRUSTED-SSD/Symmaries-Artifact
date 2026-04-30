@@ -1,0 +1,29 @@
+static java.lang.String org.keycloak.common.util.UriUtils:getHost(java.lang.String @uri)
+{
+java.net.URISyntaxException url;
+  java.net.URI $stack2;
+  java.lang.String $stack3;
+  java.lang.IllegalArgumentException $stack5;
+  java.lang.StringBuilder $stack6;
+  java.lang.String uri;
+uri=@uri;
+label0:if (uri!=null) goto label1;
+ label2:return  null;
+ label1:$stack2=new java.net.URI;
+ $stack2#java.net.URI(uri);
+ $stack3 = $stack2.getHost();
+ label3:return  $stack3;
+ label4:url = catch;
+ $stack5=new java.lang.IllegalArgumentException;
+ $stack6=new java.lang.StringBuilder;
+ $stack6#java.lang.StringBuilder();
+ $stack6 = $stack6.append("URI \'");
+ $stack6 = $stack6.append(uri);
+ $stack6 = $stack6.append("\' is not valid.");
+ uri = $stack6.toString();
+ $stack5#java.lang.IllegalArgumentException(uri);
+ throw $stack5;
+ catch java.net.URISyntaxException: label0 - label2 : label4;
+catch java.net.URISyntaxException: label1 - label3 : label4;
+} 
+

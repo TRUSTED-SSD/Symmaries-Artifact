@@ -1,0 +1,40 @@
+boolean java.util.TreeMap$DescendingKeySpliterator:tryAdvance(java.util.function.Consumer r1)
+{
+java.util.TreeMap$Entry r2;
+  int $i0;
+  java.util.TreeMap$Entry $r3;
+  java.util.TreeMap$Entry $r4;
+  java.util.TreeMap$Entry $r5;
+  java.lang.Object $r6;
+  java.util.TreeMap $r7;
+  int $i1;
+  int $i2;
+  java.util.ConcurrentModificationException $r8;
+  java.lang.NullPointerException $r9;
+  if (r1!=null) goto label0;
+ $r9=new java.lang.NullPointerException;
+ $r9#java.lang.NullPointerException:init();
+ throw $r9;
+ label0:$i0=this.est;
+ if ($i0>=0) goto label1;
+ this.getEstimate();
+ label1:$r3=this.current;
+ r2=$r3;
+ if ($r3==null) goto label2;
+ $r4=this.fence;
+ if (r2!=$r4) goto label3;
+ label2:return  0;
+ label3:$r5 = java.util.TreeMap.predecessor(r2);
+ this.current=$r5;
+ $r6=r2.key;
+ r1.accept($r6);
+ $r7=this.tree;
+ $i1 = java.util.TreeMap.access$100($r7);
+ $i2=this.expectedModCount;
+ if ($i1==$i2) goto label4;
+ $r8=new java.util.ConcurrentModificationException;
+ $r8#java.util.ConcurrentModificationException:init();
+ throw $r8;
+ label4:return  1;
+ }  
+

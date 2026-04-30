@@ -1,0 +1,21 @@
+void org.apache.rocketmq.proxy.grpc.v2.client.ClientActivity$ProducerChangeListenerImpl:handle(org.apache.rocketmq.broker.client.ProducerGroupEvent event,java.lang.String @group,org.apache.rocketmq.broker.client.ClientChannelInfo clientChannelInfo)
+{
+org.apache.rocketmq.broker.client.ProducerGroupEvent $stack4;
+  org.apache.rocketmq.proxy.grpc.v2.client.ClientActivity $stack5;
+  org.apache.rocketmq.proxy.grpc.v2.channel.GrpcChannelManager $stack6;
+  org.apache.rocketmq.proxy.grpc.v2.common.GrpcClientSettingsManager $stack10;
+  java.lang.String group;
+group=@group;
+$stack4=org.apache.rocketmq.broker.client.ProducerGroupEvent.CLIENT_UNREGISTER;
+ if (event!=$stack4) goto label0;
+ $stack5=this.this$0;
+ $stack6 = org.apache.rocketmq.proxy.grpc.v2.client.ClientActivity.access$300($stack5);
+ group = clientChannelInfo.getClientId();
+ $stack6.removeChannel(group);
+ $stack5=this.this$0;
+ $stack10 = org.apache.rocketmq.proxy.grpc.v2.client.ClientActivity.access$400($stack5);
+ group = clientChannelInfo.getClientId();
+ $stack10.removeClientSettings(group);
+ label0:return;
+ } 
+

@@ -1,0 +1,44 @@
+static java.lang.String org.apache.bookkeeper.net.NetUtils:resolveNetworkLocation(org.apache.bookkeeper.net.DNSToSwitchMapping dnsResolver,org.apache.bookkeeper.net.BookieSocketAddress addr)
+{
+java.util.ArrayList names;
+  java.net.InetSocketAddress inetSocketAddress;
+  java.lang.Object inetAddress;
+  boolean $stack7;
+  java.lang.String $stack9;
+  int $stack13;
+  java.util.ArrayList tmp$1214645426;
+  java.net.InetAddress tmp$1084099675;
+  java.util.List tmp$1488281274;
+  tmp$1214645426=new java.util.ArrayList;
+ names=tmp$1214645426;
+ tmp$1214645426#java.util.ArrayList(1);
+ names=tmp$1214645426;
+ inetSocketAddress = addr.getSocketAddress();
+ $stack7 = dnsResolver.useHostName();
+ if ($stack7==0) goto label0;
+ $stack9 = addr.getHostName();
+ tmp$1214645426.add((java.lang.Object)$stack9);
+ goto label1;
+ label0:inetAddress = inetSocketAddress.getAddress();
+ if (null!=inetAddress) goto label2;
+ $stack9 = addr.getHostName();
+ tmp$1214645426.add((java.lang.Object)$stack9);
+ goto label1;
+ label2:tmp$1084099675=(java.net.InetAddress) inetAddress;
+ $stack9 = tmp$1084099675.getHostAddress();
+ tmp$1214645426.add((java.lang.Object)$stack9);
+ label1:inetAddress = dnsResolver.resolve((java.util.List)tmp$1214645426);
+ com.google.common.base.Preconditions.checkNotNull(inetAddress,(java.lang.Object)"DNS Resolver should not return null response.");
+ tmp$1488281274=(java.util.List) inetAddress;
+ $stack13 = tmp$1488281274.size();
+ if ($stack13!=1) goto label3;
+ $stack7=1;
+ goto label4;
+ label3:$stack7=0;
+ label4:com.google.common.base.Preconditions.checkState($stack7,(java.lang.Object)"Expected exactly one element");
+ tmp$1488281274=(java.util.List) inetAddress;
+ inetAddress = tmp$1488281274.get(0);
+ $stack9=(java.lang.String) inetAddress;
+ return  $stack9;
+ } 
+

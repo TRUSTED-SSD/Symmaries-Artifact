@@ -1,0 +1,48 @@
+    private void recursiveDelete(java.io.File)
+    {
+        org.junit.rules.TemporaryFolder this;
+        java.io.File file, each;
+        java.io.File[] files;
+        int len$, i$;
+
+        this := @this: org.junit.rules.TemporaryFolder;
+
+        file := @parameter0: java.io.File;
+
+        files = virtualinvoke file.<java.io.File: java.io.File[] listFiles()>();
+/*162*/
+/*162*/
+
+        if files == null goto label2;
+/*163*/
+
+        len$ = lengthof files;
+/*164*/
+
+        i$ = 0;
+/*164*/
+
+     label1:
+        if i$ >= len$ goto label2;
+/*164*/
+
+        each = files[i$];
+/*169*/
+
+        specialinvoke this.<org.junit.rules.TemporaryFolder: void recursiveDelete(java.io.File)>(each);
+/*165*/
+
+        i$ = i$ + 1;
+/*164*/
+
+        goto label1;
+/*164*/
+
+     label2:
+        virtualinvoke file.<java.io.File: boolean delete()>();
+/*168*/
+
+        return;
+/*169*/
+    }
+

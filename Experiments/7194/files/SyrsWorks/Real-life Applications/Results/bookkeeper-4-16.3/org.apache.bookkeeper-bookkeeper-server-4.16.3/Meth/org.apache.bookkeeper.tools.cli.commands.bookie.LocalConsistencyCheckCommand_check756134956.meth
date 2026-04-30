@@ -1,0 +1,53 @@
+boolean org.apache.bookkeeper.tools.cli.commands.bookie.LocalConsistencyCheckCommand:check(org.apache.bookkeeper.conf.ServerConfiguration conf)
+{
+org.apache.bookkeeper.bookie.LedgerStorage ledgerStorage;
+  java.util.List errors;
+  java.util.Iterator l5;
+  org.apache.bookkeeper.bookie.LedgerStorage$DetectedInconsistency error;
+  org.slf4j.Logger $stack7;
+  org.apache.bookkeeper.conf.ServerConfiguration $stack8;
+  java.util.Optional $stack10;
+  int $stack12;
+  boolean $stack16;
+  java.lang.Object $stack17;
+  java.lang.Object[] $stack18;
+  long $stack22;
+  java.lang.Long $stack23;
+  java.lang.Exception $stack28;
+  $stack7=org.apache.bookkeeper.tools.cli.commands.bookie.LocalConsistencyCheckCommand.LOG;
+ dummyClass.lowSink("=== Performing local consistency check ===");
+$stack7.info("=== Performing local consistency check ===");
+ $stack8=new org.apache.bookkeeper.conf.ServerConfiguration;
+ $stack8#org.apache.bookkeeper.conf.ServerConfiguration((org.apache.bookkeeper.conf.AbstractConfiguration)conf);
+ ledgerStorage = org.apache.bookkeeper.bookie.BookieImpl.mountLedgerStorageOffline($stack8,null);
+ $stack10 = java.util.Optional.empty();
+ errors = ledgerStorage.localConsistencyCheck($stack10);
+ $stack12 = errors.size();
+ if ($stack12<=0) goto label0;
+ $stack7=org.apache.bookkeeper.tools.cli.commands.bookie.LocalConsistencyCheckCommand.LOG;
+ dummyClass.lowSink("=== Check returned errors: ===");
+$stack7.info("=== Check returned errors: ===");
+ l5 = errors.iterator();
+ label1:$stack16 = l5.hasNext();
+ if ($stack16==0) goto label2;
+ $stack17 = l5.next();
+ error=(org.apache.bookkeeper.bookie.LedgerStorage$DetectedInconsistency) $stack17;
+ $stack7=org.apache.bookkeeper.tools.cli.commands.bookie.LocalConsistencyCheckCommand.LOG;
+ $stack18=new java.lang.Object[3];
+ $stack22 = error.getLedgerId();
+ $stack23 = java.lang.Long.valueOf($stack22);
+ $stack18[0]=$stack23;
+ $stack22 = error.getEntryId();
+ $stack23 = java.lang.Long.valueOf($stack22);
+ $stack18[1]=$stack23;
+ $stack28 = error.getException();
+ $stack18[2]=$stack28;
+ $stack7.error("Ledger {}, entry {}: ",$stack18);
+ goto label1;
+ label2:return  0;
+ label0:$stack7=org.apache.bookkeeper.tools.cli.commands.bookie.LocalConsistencyCheckCommand.LOG;
+ dummyClass.lowSink("=== Check passed ===");
+$stack7.info("=== Check passed ===");
+ return  1;
+ } 
+

@@ -1,0 +1,35 @@
+void com.google.zxing.oned.rss.expanded.decoders.AI013x0x1xDecoder:encodeCompressedDate(java.lang.StringBuilder buf,int currentPos)
+{
+int numericDate;
+  int month;
+  com.google.zxing.oned.rss.expanded.decoders.GeneralAppIdDecoder $stack7;
+  java.lang.String $stack10;
+  int $stack14;
+  $stack7 = this.getGeneralDecoder();
+ numericDate = $stack7.extractNumericValueFromBitArray(currentPos,16);
+ if (numericDate!=38400) goto label0;
+ return;
+ label0:buf.append((char)40);
+ $stack10=this.dateCode;
+ buf.append($stack10);
+ buf.append((char)41);
+ currentPos=(numericDate%32);
+ numericDate=(numericDate/32);
+ month=(numericDate%12);
+ month=(month+1);
+ numericDate=(numericDate/12);
+ $stack14=(numericDate/10);
+ if ($stack14!=0) goto label1;
+ buf.append((char)48);
+ label1:buf.append(numericDate);
+ numericDate=(month/10);
+ if (numericDate!=0) goto label2;
+ buf.append((char)48);
+ label2:buf.append(month);
+ month=(currentPos/10);
+ if (month!=0) goto label3;
+ buf.append((char)48);
+ label3:buf.append(currentPos);
+ return;
+ } 
+

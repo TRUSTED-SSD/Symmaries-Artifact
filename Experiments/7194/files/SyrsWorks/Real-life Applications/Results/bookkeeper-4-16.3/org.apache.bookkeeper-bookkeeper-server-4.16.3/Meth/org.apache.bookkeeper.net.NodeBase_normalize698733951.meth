@@ -1,0 +1,33 @@
+static java.lang.String org.apache.bookkeeper.net.NodeBase:normalize(java.lang.String @path)
+{
+int len;
+  char $stack3;
+  int $stack5;
+  java.lang.IllegalArgumentException $stack9;
+  java.lang.StringBuilder $stack10;
+  java.lang.String path;
+path=@path;
+if (path==null) goto label0;
+ len = path.length();
+ if (len!=0) goto label1;
+ label0:return  "";
+ label1:$stack3 = path.charAt(0);
+ if ($stack3==47) goto label2;
+ $stack9=new java.lang.IllegalArgumentException;
+ $stack10=new java.lang.StringBuilder;
+ $stack10#java.lang.StringBuilder();
+ $stack10 = $stack10.append("Network Location path does not start with /: ");
+ $stack10 = $stack10.append(path);
+ path = $stack10.toString();
+ $stack9#java.lang.IllegalArgumentException(path);
+ throw $stack9;
+ label2:len = path.length();
+ $stack5=(len-1);
+ $stack3 = path.charAt($stack5);
+ if ($stack3!=47) goto label3;
+ len=(len-1);
+ path = path.substring(0,len);
+ return  path;
+ label3:return  path;
+ } 
+

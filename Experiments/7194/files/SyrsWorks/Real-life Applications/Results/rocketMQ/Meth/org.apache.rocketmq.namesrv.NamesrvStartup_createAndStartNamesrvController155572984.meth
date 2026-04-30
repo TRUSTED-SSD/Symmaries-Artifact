@@ -1,0 +1,32 @@
+static org.apache.rocketmq.namesrv.NamesrvController org.apache.rocketmq.namesrv.NamesrvStartup:createAndStartNamesrvController()
+{
+org.apache.rocketmq.namesrv.NamesrvController controller;
+  org.apache.rocketmq.remoting.netty.NettyServerConfig serverConfig;
+  java.lang.String tip;
+  java.lang.Object[] $stack6;
+  org.apache.rocketmq.remoting.protocol.SerializeType $stack9;
+  int $stack13;
+  java.lang.Integer $stack14;
+  org.apache.rocketmq.logging.org.slf4j.Logger $stack16;
+  java.io.PrintStream $stack18;
+  controller = org.apache.rocketmq.namesrv.NamesrvStartup.createNamesrvController();
+ org.apache.rocketmq.namesrv.NamesrvStartup.start(controller);
+ serverConfig = controller.getNettyServerConfig();
+ $stack6=new java.lang.Object[3];
+ $stack9 = org.apache.rocketmq.remoting.protocol.RemotingCommand.getSerializeTypeConfigInThisServer();
+ $stack6[0]=$stack9;
+ tip = serverConfig.getBindAddress();
+ $stack6[1]=tip;
+ $stack13 = serverConfig.getListenPort();
+ $stack14 = java.lang.Integer.valueOf($stack13);
+ $stack6[2]=$stack14;
+ tip = java.lang.String.format("The Name Server boot success. serializeType=%s, address %s:%d",$stack6);
+ $stack16=org.apache.rocketmq.namesrv.NamesrvStartup.log;
+ $stack16.info(tip);
+ $stack18=java.lang.System.out;
+ $stack6=new java.lang.Object[1];
+ $stack6[0]=tip;
+ $stack18.printf("%s%n",$stack6);
+ return  controller;
+ } 
+

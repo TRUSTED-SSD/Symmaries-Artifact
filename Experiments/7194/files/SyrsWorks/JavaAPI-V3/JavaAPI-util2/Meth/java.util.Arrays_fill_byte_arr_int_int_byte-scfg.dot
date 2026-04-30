@@ -1,0 +1,56 @@
+digraph G {
+  node [shape=box, ];
+  "pc0_js1" [label="〈$i3 = #r0, js1〉", ];
+  "pc1_js1" [label="〈java.util.Arrays.rangeCheck ($i3, i0, i1), js1〉\n\
+tt",
+             ];
+  "pc2_js1" [label="〈i4 = i0, js1〉", ];
+  "pc3_js1" [label="〈label0: if (i4 >= i1) goto label1, js1〉", ];
+  "pc4_js1" [label="〈r0[i4] = b2, js1〉", ];
+  "pc5_js1" [label="〈i4 = i4 + 1, js1〉", ];
+  "pc6_js1" [label="〈goto label0, js1〉", ];
+  "pc7_js1" [label="〈label1: return, js1〉", ];
+  "pc7_js2" [label="〈label1: return, js2〉", ];
+  "pc8_js1" [label="〈sink, js1〉\n\
+obj_level(r0) ⊑ ret(obj_level(r0))'",
+             ];
+  
+  
+  "pc0_js1" -> "pc1_js1" [label="tt,\n\
+{level($i3) := pc ⊔ level(r0) ⊔ obj_level(r0)}",
+                          ];
+  "pc1_js1" -> "pc2_js1" [label="tt,\n\
+{}", ];
+  "pc2_js1" -> "pc3_js1" [label="tt,\n\
+{level(i4) := pc ⊔ level(i0)}", ];
+  "pc3_js1" -> "pc4_js1" [label="υ ∧ ¬ω ∨ ¬τ ∧ ¬υ ∧ level(i1) ⊔ level(i4) ⊐ pc ∨ ¬τ ∧ ¬υ ∧ level(i1) ⊔ level(i4) ⊑ pc,\n\
+{pc := if ¬(¬τ ∧ ¬υ ∧ level(i1) ⊔ level(i4) ⊐ pc) ∨ υ ∧ ¬ω then pc else pc ⊔ level(i1) ⊔ level(i4),\n\
+ obj_level(r0)' := if ¬(¬τ ∧ ¬υ ∧ level(i1) ⊔ level(i4) ⊐ pc) ∨ υ ∧ ¬ω then obj_level(r0)' else obj_level(r0),\n\
+ hr := if ¬(¬τ ∧ ¬υ ∧ level(i1) ⊔ level(i4) ⊐ pc) ∨ υ ∧ ¬ω then hr else P3}",
+                          ];
+  "pc3_js1" -> "pc7_js1" [label="υ ∧ ω ∨ τ ∧ ¬υ ∧ level(i1) ⊔ level(i4) ⊐ pc ∨ τ ∧ ¬υ ∧ level(i1) ⊔ level(i4) ⊑ pc,\n\
+{pc := if ¬(τ ∧ ¬υ ∧ level(i1) ⊔ level(i4) ⊐ pc) ∨ υ ∧ ω then pc else pc ⊔ level(i1) ⊔ level(i4),\n\
+ obj_level(r0)' := if ¬(τ ∧ ¬υ ∧ level(i1) ⊔ level(i4) ⊐ pc) ∨ υ ∧ ω then obj_level(r0)' else obj_level(r0),\n\
+ hr := if ¬(τ ∧ ¬υ ∧ level(i1) ⊔ level(i4) ⊐ pc) ∨ υ ∧ ω then hr else P3}",
+                          ];
+  "pc4_js1" -> "pc5_js1" [label="tt,\n\
+{obj_level(r0) := pc ⊔ obj_level(r0) ⊔ (if υ then ⊥ else level(b2) ⊔ level(i4))}",
+                          ];
+  "pc5_js1" -> "pc6_js1" [label="tt,\n\
+{level(i4) := pc ⊔ level(i4)}", ];
+  "pc6_js1" -> "pc3_js1" [label="tt,\n\
+{}", ];
+  "pc7_js1" -> "pc3_js1" [label="¬υ ∧ hr = P3,\n\
+{υ := tt,\n\
+ obj_level(r0) := obj_level(r0)',\n\
+ obj_level(r0)' := obj_level(r0)}",
+                          ];
+  "pc7_js1" -> "pc7_js2" [label="hr ≠ P3 ∨ υ ∧ hr = P3,\n\
+{υ := ¬(υ ∧ hr = P3) ∧ (if hr = P3 then υ ∧ ¬(υ ∧ hr = P3) else υ),\n\
+ pc := if ¬(hr ≠ P3 ∨ ¬(υ ∧ hr = P3)) ∨ υ ∧ hr = P3 then ⊥ else pc,\n\
+ hr := if ¬(hr ≠ P3 ∨ ¬(υ ∧ hr = P3)) ∨ υ ∧ hr = P3 then P. else hr}",
+                          ];
+  "pc7_js2" -> "pc8_js1" [label="tt,\n\
+{ϕ := S7}", ];
+  
+  }

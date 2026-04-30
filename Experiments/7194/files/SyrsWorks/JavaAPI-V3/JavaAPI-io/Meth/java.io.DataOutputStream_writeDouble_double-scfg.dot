@@ -1,0 +1,22 @@
+digraph G {
+  node [shape=box, ];
+  "pc0_js1" [label="〈$l0 = java.lang.Double.doubleToLongBits (d0), js1〉\n\
+tt",
+             ];
+  "pc1_js1" [label="〈this.writeLong ($l0), js1〉\n\
+pc ⊔ level($l0) ⊔ level(this) ⊔ obj_level(this) = ⊥",
+             ];
+  "pc2_js1" [label="〈return, js1〉", ];
+  "pc3_js1" [label="〈sink, js1〉\n\
+obj_level(this) ⊑ ret(obj_level(this))' ∧ (ret(this.><this)' ∨ ¬this.><this)",
+             ];
+  
+  
+  "pc0_js1" -> "pc1_js1" [label="tt,\n\
+{level($l0) := pc ⊔ level(d0)}", ];
+  "pc1_js1" -> "pc2_js1" [label="tt,\n\
+{this.><this := tt}", ];
+  "pc2_js1" -> "pc3_js1" [label="tt,\n\
+{ϕ := S2}", ];
+  
+  }

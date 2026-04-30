@@ -1,0 +1,28 @@
+int org.apache.rocketmq.tieredstore.provider.TieredFileSegment$TieredFileSegmentInputStream:readCoda()
+{
+org.apache.rocketmq.tieredstore.provider.TieredFileSegment$FileSegmentType $stack1;
+  org.apache.rocketmq.tieredstore.provider.TieredFileSegment$FileSegmentType $stack2;
+  java.nio.ByteBuffer $stack3;
+  boolean $stack5;
+  int $stack6;
+  byte $stack9;
+  short $stack10;
+  $stack2=this.fileType;
+ $stack1=org.apache.rocketmq.tieredstore.provider.TieredFileSegment$FileSegmentType.COMMIT_LOG;
+ if ($stack2!=$stack1) goto label0;
+ $stack3=this.codaBuffer;
+ if ($stack3!=null) goto label1;
+ label0:return  -1;
+ label1:$stack3=this.codaBuffer;
+ $stack5 = $stack3.hasRemaining();
+ if ($stack5!=0) goto label2;
+ return  -1;
+ label2:$stack6=this.readBytes;
+ $stack6=($stack6+1);
+ this.readBytes=$stack6;
+ $stack3=this.codaBuffer;
+ $stack9 = $stack3.get();
+ $stack10=($stack9 & 255);
+ return  $stack10;
+ } 
+

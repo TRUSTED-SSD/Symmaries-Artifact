@@ -1,0 +1,38 @@
+static void org.apache.kerby.kerberos.kerb.preauth.pkinit.PkinitCrypto:serverCheckDH(org.apache.kerby.kerberos.kerb.preauth.pkinit.PluginOpts pluginOpts,org.apache.kerby.kerberos.kerb.preauth.pkinit.PkinitPlgCryptoContext cryptoctx,org.apache.kerby.x509.type.DhParameter dhParameter)
+{
+int dhPrimeBits;
+  java.lang.String errMsg;
+  java.math.BigInteger $stack5;
+  int $stack7;
+  boolean $stack8;
+  org.apache.kerby.kerberos.kerb.KrbException $stack9;
+  org.apache.kerby.kerberos.kerb.KrbErrorCode $stack10;
+  java.lang.StringBuilder $stack11;
+  org.slf4j.Logger $stack18;
+  $stack5 = dhParameter.getP();
+ dhPrimeBits = $stack5.bitLength();
+ $stack7 = pluginOpts.getDhMinBits();
+ if (dhPrimeBits>=$stack7) goto label0;
+ $stack11=new java.lang.StringBuilder;
+ $stack11#java.lang.StringBuilder();
+ $stack11 = $stack11.append("client sent dh params with ");
+ $stack11 = $stack11.append(dhPrimeBits);
+ $stack11 = $stack11.append("bits, we require ");
+ dhPrimeBits = pluginOpts.getDhMinBits();
+ $stack11 = $stack11.append(dhPrimeBits);
+ errMsg = $stack11.toString();
+ $stack18=org.apache.kerby.kerberos.kerb.preauth.pkinit.PkinitCrypto.LOG;
+ $stack18.error(errMsg);
+ $stack9=new org.apache.kerby.kerberos.kerb.KrbException;
+ $stack10=org.apache.kerby.kerberos.kerb.KrbErrorCode.KDC_ERR_DH_KEY_PARAMETERS_NOT_ACCEPTED;
+ $stack9#org.apache.kerby.kerberos.kerb.KrbException($stack10,errMsg);
+ throw $stack9;
+ label0:$stack8 = org.apache.kerby.kerberos.kerb.preauth.pkinit.PkinitCrypto.checkDHWellknown(cryptoctx,dhParameter,dhPrimeBits);
+ if ($stack8!=0) goto label1;
+ $stack9=new org.apache.kerby.kerberos.kerb.KrbException;
+ $stack10=org.apache.kerby.kerberos.kerb.KrbErrorCode.KDC_ERR_DH_KEY_PARAMETERS_NOT_ACCEPTED;
+ $stack9#org.apache.kerby.kerberos.kerb.KrbException($stack10);
+ throw $stack9;
+ label1:return;
+ } 
+

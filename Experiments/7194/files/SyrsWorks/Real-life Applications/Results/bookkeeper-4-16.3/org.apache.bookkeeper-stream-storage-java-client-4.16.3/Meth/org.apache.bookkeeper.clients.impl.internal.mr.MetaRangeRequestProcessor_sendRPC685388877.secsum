@@ -1,0 +1,10 @@
+com.google.common.util.concurrent.ListenableFuture org.apache.bookkeeper.clients.impl.internal.mr.MetaRangeRequestProcessor:sendRPC (
+  org.apache.bookkeeper.clients.impl.channel.StorageServerChannel rsChannel,
+  org.apache.bookkeeper.stream.proto.storage.GetActiveRangesRequest request) {
+  guard = tt;
+  ret(level()) = level(request) ⊔ level(rsChannel) ⊔ obj_level(request) ⊔ obj_level(rsChannel);
+  ret(obj_level()) = level(request) ⊔ level(rsChannel) ⊔ obj_level(request) ⊔ obj_level(rsChannel);
+  ret(obj_level(request)) = level(request) ⊔ level(rsChannel) ⊔ obj_level(request) ⊔ obj_level(rsChannel);
+  ret(obj_level(rsChannel)) = level(request) ⊔ level(rsChannel) ⊔ obj_level(request) ⊔ obj_level(rsChannel);
+  ret(obj_level(this)) = level(request) ⊔ level(rsChannel) ⊔ obj_level(request) ⊔ obj_level(rsChannel) ⊔ obj_level(this);
+}

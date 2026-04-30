@@ -1,0 +1,37 @@
+void org.apache.rocketmq.broker.processor.PopInflightMessageCounter:clearInFlightMessageNumByGroupName(java.lang.String group)
+{
+java.util.Set topicGroupKey;
+  java.util.Iterator l3;
+  java.lang.String key;
+  org.apache.rocketmq.common.Pair topicAndGroup;
+  java.util.Map $stack6;
+  boolean $stack9;
+  java.lang.Object $stack10;
+  java.lang.String $stack15;
+  org.apache.rocketmq.logging.org.slf4j.Logger $stack19;
+  java.lang.Object $stack22;
+  $stack6=this.topicInFlightMessageNum;
+ topicGroupKey = $stack6.keySet();
+ l3 = topicGroupKey.iterator();
+ label0:$stack9 = l3.hasNext();
+ if ($stack9==0) goto label1;
+ $stack10 = l3.next();
+ key=(java.lang.String) $stack10;
+ $stack9 = key.contains((java.lang.CharSequence)group);
+ if ($stack9==0) goto label2;
+ topicAndGroup = org.apache.rocketmq.broker.processor.PopInflightMessageCounter.splitKey(key);
+ if (topicAndGroup==null) goto label2;
+ $stack10 = topicAndGroup.getObject2();
+ $stack15=(java.lang.String) $stack10;
+ $stack9 = $stack15.equals((java.lang.Object)group);
+ if ($stack9==0) goto label2;
+ $stack6=this.topicInFlightMessageNum;
+ $stack6.remove((java.lang.Object)key);
+ $stack19=org.apache.rocketmq.broker.processor.PopInflightMessageCounter.log;
+ $stack10 = topicAndGroup.getObject1();
+ $stack22 = topicAndGroup.getObject2();
+ $stack19.info("PopInflightMessageCounter#clearInFlightMessageNumByGroupName: clean by group, topic={}, group={}",$stack10,$stack22);
+ label2:goto label0;
+ label1:return;
+ } 
+

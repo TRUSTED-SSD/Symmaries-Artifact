@@ -1,0 +1,27 @@
+void org.apache.rocketmq.broker.subscription.SubscriptionGroupManager:decode(java.lang.String jsonString)
+{
+org.apache.rocketmq.broker.subscription.SubscriptionGroupManager obj;
+  java.lang.Object $stack3;
+  java.util.concurrent.ConcurrentMap $stack4;
+  java.util.concurrent.ConcurrentMap $stack5;
+  org.apache.rocketmq.remoting.protocol.DataVersion $stack7;
+  org.apache.rocketmq.remoting.protocol.DataVersion $stack8;
+  if (jsonString==null) goto label0;
+ $stack3 = org.apache.rocketmq.remoting.protocol.RemotingSerializable.fromJson(jsonString,org.apache.rocketmq.broker.subscription.SubscriptionGroupManager);
+ obj=(org.apache.rocketmq.broker.subscription.SubscriptionGroupManager) $stack3;
+ if (obj==null) goto label0;
+ $stack5=this.subscriptionGroupTable;
+ $stack4=obj.subscriptionGroupTable;
+ $stack5.putAll((java.util.Map)$stack4);
+ $stack4=obj.forbiddenTable;
+ if ($stack4==null) goto label1;
+ $stack5=this.forbiddenTable;
+ $stack4=obj.forbiddenTable;
+ $stack5.putAll((java.util.Map)$stack4);
+ label1:$stack8=this.dataVersion;
+ $stack7=obj.dataVersion;
+ $stack8.assignNewOne($stack7);
+ this#org.apache.rocketmq.broker.subscription.SubscriptionGroupManager:printLoadDataWhenFirstBoot(obj);
+ label0:return;
+ } 
+

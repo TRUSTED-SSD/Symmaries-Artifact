@@ -1,0 +1,37 @@
+void org.apache.rocketmq.broker.out.BrokerOuterAPI:lambda$pullMessageFromSpecificBrokerAsync$3(java.util.concurrent.CompletableFuture pullResultFuture,java.lang.String brokerAddr,java.lang.String brokerName,int queueId,org.apache.rocketmq.remoting.netty.ResponseFuture responseFuture)
+{
+java.lang.Object pullResultExt;
+  java.lang.Throwable $stack7;
+  org.apache.rocketmq.remoting.protocol.RemotingCommand $stack8;
+  org.apache.rocketmq.client.consumer.PullStatus $stack14;
+  java.lang.Exception $stack19;
+  java.util.ArrayList tmp$1025697499;
+  org.apache.rocketmq.client.consumer.PullResult tmp$749148926;
+  org.apache.rocketmq.client.impl.consumer.PullResultExt tmp$377080839;
+  $stack7 = responseFuture.getCause();
+ if ($stack7==null) goto label0;
+ tmp$749148926=new org.apache.rocketmq.client.consumer.PullResult;
+ $stack14=org.apache.rocketmq.client.consumer.PullStatus.NO_MATCHED_MSG;
+ tmp$1025697499=new java.util.ArrayList;
+ tmp$1025697499#java.util.ArrayList();
+ tmp$749148926#org.apache.rocketmq.client.consumer.PullResult($stack14,-1L,-1L,-1L,(java.util.List)tmp$1025697499);
+ pullResultFuture.complete((java.lang.Object)tmp$749148926);
+ return;
+ label0:$stack8 = responseFuture.getResponseCommand();
+ pullResultExt = this#org.apache.rocketmq.broker.out.BrokerOuterAPI:processPullResponse($stack8,brokerAddr);
+ tmp$377080839=(org.apache.rocketmq.client.impl.consumer.PullResultExt) pullResultExt;
+ this#org.apache.rocketmq.broker.out.BrokerOuterAPI:processPullResult(tmp$377080839,brokerName,queueId);
+ pullResultFuture.complete(pullResultExt);
+ label1:goto label2;
+ label3:$stack19 = catch;
+ pullResultExt=$stack19;
+ tmp$749148926=new org.apache.rocketmq.client.consumer.PullResult;
+ $stack14=org.apache.rocketmq.client.consumer.PullStatus.NO_MATCHED_MSG;
+ tmp$1025697499=new java.util.ArrayList;
+ tmp$1025697499#java.util.ArrayList();
+ tmp$749148926#org.apache.rocketmq.client.consumer.PullResult($stack14,-1L,-1L,-1L,(java.util.List)tmp$1025697499);
+ pullResultFuture.complete((java.lang.Object)tmp$749148926);
+ label2:return;
+ catch java.lang.Exception: label0 - label1 : label3;
+} 
+

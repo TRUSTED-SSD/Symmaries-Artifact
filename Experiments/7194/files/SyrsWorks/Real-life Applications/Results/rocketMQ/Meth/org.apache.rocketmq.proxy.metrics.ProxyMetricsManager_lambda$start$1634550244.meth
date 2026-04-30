@@ -1,0 +1,21 @@
+static io.opentelemetry.sdk.metrics.data.AggregationTemporality org.apache.rocketmq.proxy.metrics.ProxyMetricsManager:lambda$start$1(io.opentelemetry.sdk.metrics.InstrumentType type)
+{
+org.apache.rocketmq.proxy.config.ProxyConfig $stack1;
+  boolean $stack2;
+  io.opentelemetry.sdk.metrics.data.AggregationTemporality $stack3;
+  io.opentelemetry.sdk.metrics.InstrumentType $stack4;
+  $stack1=org.apache.rocketmq.proxy.metrics.ProxyMetricsManager.proxyConfig;
+ $stack2 = $stack1.isMetricsInDelta();
+ if ($stack2==0) goto label0;
+ $stack4=io.opentelemetry.sdk.metrics.InstrumentType.COUNTER;
+ if (type==$stack4) goto label1;
+ $stack4=io.opentelemetry.sdk.metrics.InstrumentType.OBSERVABLE_COUNTER;
+ if (type==$stack4) goto label1;
+ $stack4=io.opentelemetry.sdk.metrics.InstrumentType.HISTOGRAM;
+ if (type!=$stack4) goto label0;
+ label1:$stack3=io.opentelemetry.sdk.metrics.data.AggregationTemporality.DELTA;
+ return  $stack3;
+ label0:$stack3=io.opentelemetry.sdk.metrics.data.AggregationTemporality.CUMULATIVE;
+ return  $stack3;
+ } 
+

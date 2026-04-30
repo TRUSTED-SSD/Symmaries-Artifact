@@ -1,0 +1,22 @@
+void org.apache.rocketmq.container.InnerBrokerController:initializeRemotingServer()
+{
+org.apache.rocketmq.container.BrokerContainer $stack1;
+  org.apache.rocketmq.remoting.RemotingServer $stack2;
+  org.apache.rocketmq.common.BrokerConfig $stack3;
+  int $stack4;
+  $stack1=this.brokerContainer;
+ $stack2 = $stack1.getRemotingServer();
+ $stack3=this.brokerConfig;
+ $stack4 = $stack3.getListenPort();
+ $stack2 = $stack2.newRemotingServer($stack4);
+ this.remotingServer=$stack2;
+ $stack1=this.brokerContainer;
+ $stack2 = $stack1.getRemotingServer();
+ $stack3=this.brokerConfig;
+ $stack4 = $stack3.getListenPort();
+ $stack4=($stack4-2);
+ $stack2 = $stack2.newRemotingServer($stack4);
+ this.fastRemotingServer=$stack2;
+ return;
+ } 
+

@@ -1,0 +1,44 @@
+int com.google.zxing.oned.CodaBarReader:findStartPattern()
+{
+int i;
+  int charOffset;
+  int j;
+  com.google.zxing.NotFoundException $stack6;
+  char[] $stack10;
+  char $stack11;
+  char[] $stack12;
+  boolean $stack13;
+  int $stack14;
+  int[] $stack16;
+  i=1;
+ label0:charOffset=this.counterLength;
+ if (i>=charOffset) goto label1;
+ charOffset = this#com.google.zxing.oned.CodaBarReader:toNarrowWidePattern(i);
+ if (charOffset==-1) goto label2;
+ $stack12=com.google.zxing.oned.CodaBarReader.STARTEND_ENCODING;
+ $stack10=com.google.zxing.oned.CodaBarReader.ALPHABET;
+ $stack11=$stack10[charOffset];
+ $stack13 = com.google.zxing.oned.CodaBarReader.arrayContains($stack12,$stack11);
+ if ($stack13==0) goto label2;
+ charOffset=0;
+ j=i;
+ label3:$stack14=(i+7);
+ if (j>=$stack14) goto label4;
+ $stack16=this.counters;
+ $stack14=$stack16[j];
+ charOffset=(charOffset+$stack14);
+ j=(j+1);
+ goto label3;
+ label4:if (i==1) goto label5;
+ $stack16=this.counters;
+ j=(i-1);
+ j=$stack16[j];
+ charOffset=(charOffset/2);
+ if (j<charOffset) goto label2;
+ label5:return  i;
+ label2:i=(i+2);
+ goto label0;
+ label1:$stack6 = com.google.zxing.NotFoundException.getNotFoundInstance();
+ throw $stack6;
+ } 
+

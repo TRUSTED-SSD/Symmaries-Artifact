@@ -1,0 +1,48 @@
+java.util.NavigableSet org.apache.rocketmq.proxy.service.transaction.TransactionDataManager:lambda$cleanExpireTransactionData$3(long currTimestamp,java.lang.String transactionIdKey,java.util.NavigableSet dataSet)
+{
+java.util.Iterator iterator;
+  java.lang.Object data;
+  boolean $stack8;
+  java.util.concurrent.atomic.AtomicLong $stack11;
+  java.util.concurrent.atomic.AtomicLong $stack12;
+  long $stack14;
+  byte $stack18;
+  java.util.NoSuchElementException $stack21;
+  java.util.NoSuchElementException $stack23;
+  org.apache.rocketmq.proxy.service.transaction.TransactionData tmp$2057059782;
+  iterator = dataSet.iterator();
+ label0:$stack8 = iterator.hasNext();
+ if ($stack8==0) goto label1;
+ label2:data = iterator.next();
+ data=(org.apache.rocketmq.proxy.service.transaction.TransactionData) data;
+ tmp$2057059782=(org.apache.rocketmq.proxy.service.transaction.TransactionData) data;
+ $stack14 = tmp$2057059782.getExpireTime();
+ $stack18=($stack14 cmp currTimestamp);
+ if ($stack18>=0) goto label3;
+ iterator.remove();
+ goto label4;
+ label3:goto label1;
+ label4:goto label0;
+ label5:$stack23 = catch;
+ data=$stack23;
+ goto label1;
+ label1:$stack8 = dataSet.isEmpty();
+ if ($stack8==0) goto label6;
+ return  null;
+ label6:data = dataSet.last();
+ data=(org.apache.rocketmq.proxy.service.transaction.TransactionData) data;
+ $stack12=this.maxTransactionDataExpireTime;
+ $stack11=this.maxTransactionDataExpireTime;
+ currTimestamp = $stack11.get();
+ tmp$2057059782=(org.apache.rocketmq.proxy.service.transaction.TransactionData) data;
+ $stack14 = tmp$2057059782.getExpireTime();
+ currTimestamp = java.lang.Math.max(currTimestamp,$stack14);
+ $stack12.set(currTimestamp);
+ label7:goto label8;
+ label9:$stack21 = catch;
+ data=$stack21;
+ label8:return  dataSet;
+ catch java.util.NoSuchElementException: label2 - label3 : label5;
+catch java.util.NoSuchElementException: label6 - label7 : label9;
+} 
+

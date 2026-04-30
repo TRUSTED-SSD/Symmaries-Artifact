@@ -1,0 +1,47 @@
+void org.apache.bookkeeper.proto.BookieServer:validateUser(org.apache.bookkeeper.conf.ServerConfiguration conf)
+{
+java.lang.String currentUser;
+  java.lang.String[] propertyValue;
+  java.io.Serializable errorMsg;
+  int l5;
+  int l6;
+  boolean $stack8;
+  java.lang.StringBuilder $stack11;
+  org.slf4j.Logger $stack18;
+  org.apache.bookkeeper.bookie.BookieException$BookieUnauthorizedAccessException tmp$907264637;
+  java.io.Serializable[] tmp$427020804;
+  java.lang.String tmp$1427064032;
+  $stack8 = conf.containsKey("permittedStartupUsers");
+ if ($stack8==0) goto label0;
+ currentUser = java.lang.System.getProperty("user.name");
+ propertyValue = conf.getPermittedStartupUsers();
+ errorMsg=propertyValue;
+ l5=#propertyValue;
+ l6=0;
+ label1:if (l6>=l5) goto label2;
+ tmp$427020804=(java.io.Serializable[]) propertyValue;
+ errorMsg=tmp$427020804[l6];
+ tmp$1427064032=(java.lang.String) errorMsg;
+ $stack8 = tmp$1427064032.equals((java.lang.Object)currentUser);
+ if ($stack8==0) goto label3;
+ return;
+ label3:l6=(l6+1);
+ goto label1;
+ label2:$stack11=new java.lang.StringBuilder;
+ $stack11#java.lang.StringBuilder();
+ $stack11 = $stack11.append("System cannot start because current user isn\'t in permittedStartupUsers. Current user: ");
+ $stack11 = $stack11.append(currentUser);
+ $stack11 = $stack11.append(" permittedStartupUsers: ");
+ currentUser = java.util.Arrays.toString((java.lang.Object[])propertyValue);
+ $stack11 = $stack11.append(currentUser);
+ errorMsg = $stack11.toString();
+ $stack18=org.apache.bookkeeper.proto.BookieServer.LOG;
+ currentUser=(java.lang.String) errorMsg;
+ $stack18.error(currentUser);
+ tmp$907264637=new org.apache.bookkeeper.bookie.BookieException$BookieUnauthorizedAccessException;
+ currentUser=(java.lang.String) errorMsg;
+ tmp$907264637#org.apache.bookkeeper.bookie.BookieException$BookieUnauthorizedAccessException(currentUser);
+ throw tmp$907264637;
+ label0:return;
+ } 
+

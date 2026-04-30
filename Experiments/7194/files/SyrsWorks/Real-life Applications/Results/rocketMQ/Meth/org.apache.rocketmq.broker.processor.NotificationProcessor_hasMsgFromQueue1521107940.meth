@@ -1,0 +1,38 @@
+boolean org.apache.rocketmq.broker.processor.NotificationProcessor:hasMsgFromQueue(boolean isRetry,org.apache.rocketmq.remoting.protocol.header.NotificationRequestHeader requestHeader,int queueId)
+{
+java.lang.String topic;
+  long offset;
+  org.apache.rocketmq.broker.BrokerController $stack9;
+  org.apache.rocketmq.broker.offset.ConsumerOrderInfoManager $stack10;
+  java.lang.String $stack12;
+  boolean $stack13;
+  org.apache.rocketmq.store.MessageStore $stack18;
+  long $stack19;
+  byte $stack20;
+  $stack9=this.brokerController;
+ $stack10 = $stack9.getConsumerOrderInfoManager();
+ topic = requestHeader.getTopic();
+ $stack12 = requestHeader.getConsumerGroup();
+ $stack13 = $stack10.checkBlock(topic,$stack12,queueId,0L);
+ if ($stack13==0) goto label0;
+ return  0;
+ label0:if (isRetry==0) goto label1;
+ topic = requestHeader.getTopic();
+ $stack12 = requestHeader.getConsumerGroup();
+ topic = org.apache.rocketmq.common.KeyBuilder.buildPopRetryTopic(topic,$stack12);
+ goto label2;
+ label1:topic = requestHeader.getTopic();
+ label2:$stack12 = requestHeader.getConsumerGroup();
+ offset = this#org.apache.rocketmq.broker.processor.NotificationProcessor:getPopOffset(topic,$stack12,queueId);
+ $stack9=this.brokerController;
+ $stack18 = $stack9.getMessageStore();
+ $stack19 = $stack18.getMaxOffsetInQueue(topic,queueId);
+ offset=($stack19-offset);
+ $stack20=(offset cmp 0L);
+ if ($stack20<=0) goto label3;
+ isRetry=1;
+ goto label4;
+ label3:isRetry=0;
+ label4:return  isRetry;
+ } 
+

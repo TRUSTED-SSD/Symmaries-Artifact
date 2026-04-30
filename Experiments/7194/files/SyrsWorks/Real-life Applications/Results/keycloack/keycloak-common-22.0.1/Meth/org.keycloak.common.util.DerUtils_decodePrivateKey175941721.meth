@@ -1,0 +1,24 @@
+static java.security.PrivateKey org.keycloak.common.util.DerUtils:decodePrivateKey(java.io.InputStream is)
+{
+java.io.DataInputStream dis;
+  byte[] keyBytes;
+  java.security.KeyFactory kf;
+  int $stack6;
+  java.security.spec.PKCS8EncodedKeySpec $stack7;
+  org.keycloak.common.crypto.CryptoProvider $stack8;
+  java.security.PrivateKey $stack10;
+  dis=new java.io.DataInputStream;
+ dis#java.io.DataInputStream(is);
+ $stack6 = dis.available();
+ keyBytes=new byte[$stack6];
+ dummyClass.highSourceMut(keyBytes);
+dis.readFully(keyBytes);
+ dis.close();
+ $stack7=new java.security.spec.PKCS8EncodedKeySpec;
+ $stack7#java.security.spec.PKCS8EncodedKeySpec(keyBytes);
+ $stack8 = org.keycloak.common.crypto.CryptoIntegration.getProvider();
+ kf = $stack8.getKeyFactory("RSA");
+ $stack10 = kf.generatePrivate((java.security.spec.KeySpec)$stack7);
+ return  $stack10;
+ } 
+

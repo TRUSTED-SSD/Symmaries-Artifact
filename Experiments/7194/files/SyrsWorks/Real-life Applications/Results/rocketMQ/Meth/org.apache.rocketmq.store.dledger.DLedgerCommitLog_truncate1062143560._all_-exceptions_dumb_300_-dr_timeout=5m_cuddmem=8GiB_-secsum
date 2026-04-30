@@ -1,0 +1,8 @@
+io.openmessaging.storage.dledger.store.file.SelectMmapBufferResult org.apache.rocketmq.store.dledger.DLedgerCommitLog:truncate (
+  io.openmessaging.storage.dledger.store.file.SelectMmapBufferResult sbr) {
+  guard = tt;
+  ret(level()) = level(sbr);
+  ret(obj_level()) = level(sbr) ⊔ obj_level(sbr) ⊔ obj_level(this);
+  ret(obj_level(sbr)) = level(sbr) ⊔ obj_level(sbr) ⊔ obj_level(this);
+  ret(obj_level(this)) = level(sbr) ⊔ obj_level(sbr) ⊔ obj_level(this);
+}

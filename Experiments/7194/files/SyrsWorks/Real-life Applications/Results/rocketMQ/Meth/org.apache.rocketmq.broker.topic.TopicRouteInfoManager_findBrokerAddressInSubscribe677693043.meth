@@ -1,0 +1,58 @@
+java.lang.String org.apache.rocketmq.broker.topic.TopicRouteInfoManager:findBrokerAddressInSubscribe(java.lang.String brokerName,long brokerId,boolean onlyThisBroker)
+{
+java.lang.String brokerAddr;
+  boolean found;
+  java.util.Map map;
+  boolean slave;
+  java.util.Map$Entry entry;
+  java.util.concurrent.ConcurrentMap $stack10;
+  java.lang.Object $stack11;
+  java.lang.Long $stack14;
+  byte $stack16;
+  java.util.Set $stack17;
+  java.util.Iterator $stack18;
+  if (brokerName!=null) goto label0;
+ return  null;
+ label0:brokerAddr=null;
+ found=0;
+ $stack10=this.brokerAddrTable;
+ $stack11 = $stack10.get((java.lang.Object)brokerName);
+ map=(java.util.Map) $stack11;
+ if (map==null) goto label1;
+ slave = map.isEmpty();
+ if (slave!=0) goto label1;
+ $stack14 = java.lang.Long.valueOf(brokerId);
+ $stack11 = map.get((java.lang.Object)$stack14);
+ brokerAddr=(java.lang.String) $stack11;
+ $stack16=(brokerId cmp 0L);
+ if ($stack16==0) goto label2;
+ slave=1;
+ goto label3;
+ label2:slave=0;
+ label3:if (brokerAddr==null) goto label4;
+ found=1;
+ goto label5;
+ label4:found=0;
+ label5:if (found!=0) goto label6;
+ if (slave==0) goto label6;
+ brokerId=(brokerId+1L);
+ $stack14 = java.lang.Long.valueOf(brokerId);
+ $stack11 = map.get((java.lang.Object)$stack14);
+ brokerAddr=(java.lang.String) $stack11;
+ if (brokerAddr==null) goto label7;
+ slave=1;
+ goto label8;
+ label7:slave=0;
+ label8:found=slave;
+ label6:if (found!=0) goto label1;
+ if (onlyThisBroker!=0) goto label1;
+ $stack17 = map.entrySet();
+ $stack18 = $stack17.iterator();
+ $stack11 = $stack18.next();
+ entry=(java.util.Map$Entry) $stack11;
+ $stack11 = entry.getValue();
+ brokerAddr=(java.lang.String) $stack11;
+ found=1;
+ label1:return  brokerAddr;
+ } 
+

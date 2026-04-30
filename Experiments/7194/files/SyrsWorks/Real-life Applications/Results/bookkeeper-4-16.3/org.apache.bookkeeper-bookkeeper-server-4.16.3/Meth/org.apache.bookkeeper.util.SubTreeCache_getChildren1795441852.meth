@@ -1,0 +1,22 @@
+java.util.List org.apache.bookkeeper.util.SubTreeCache:getChildren(java.lang.String path)
+{
+org.apache.bookkeeper.util.SubTreeCache$SubTreeNode node;
+  java.util.Map $stack3;
+  java.lang.Object $stack4;
+  java.util.List $stack5;
+  org.apache.bookkeeper.util.SubTreeCache$TreeProvider $stack7;
+  $stack3=this.cachedNodes;
+ $stack4 = $stack3.get((java.lang.Object)path);
+ node=(org.apache.bookkeeper.util.SubTreeCache$SubTreeNode) $stack4;
+ if (null!=node) goto label0;
+ node=new org.apache.bookkeeper.util.SubTreeCache$SubTreeNode;
+ node#org.apache.bookkeeper.util.SubTreeCache$SubTreeNode(this,path);
+ $stack7=this.provider;
+ $stack5 = $stack7.getChildren(path,(org.apache.zookeeper.Watcher)node);
+ org.apache.bookkeeper.util.SubTreeCache$SubTreeNode.access$100(node,$stack5);
+ $stack3=this.cachedNodes;
+ $stack3.put((java.lang.Object)path,(java.lang.Object)node);
+ label0:$stack5 = org.apache.bookkeeper.util.SubTreeCache$SubTreeNode.access$200(node);
+ return  $stack5;
+ } 
+

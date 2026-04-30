@@ -1,0 +1,23 @@
+void junit.framework.TestResult:addError(junit.framework.Test test,java.lang.Throwable e)
+{
+java.util.Iterator i$;
+  junit.framework.TestListener each;
+  junit.framework.TestFailure $stack5;
+  java.util.List $stack6;
+  boolean $stack7;
+  java.lang.Object $stack11;
+  $stack6=this.fErrors;
+ $stack5=new junit.framework.TestFailure;
+ $stack5#junit.framework.TestFailure(test,e);
+ $stack6.add((java.lang.Object)$stack5);
+ $stack6 = this#junit.framework.TestResult:cloneListeners();
+ i$ = $stack6.iterator();
+ label0:$stack7 = i$.hasNext();
+ if ($stack7==0) goto label1;
+ $stack11 = i$.next();
+ each=(junit.framework.TestListener) $stack11;
+ each.addError(test,e);
+ goto label0;
+ label1:return;
+ } 
+

@@ -1,0 +1,37 @@
+java.lang.String org.apache.bookkeeper.bookie.Cookie:toString()
+{
+org.apache.bookkeeper.proto.DataFormats$CookieFormat$Builder builder;
+  java.lang.StringBuilder b;
+  int $stack3;
+  java.lang.String $stack5;
+  java.lang.StringBuilder $stack14;
+  org.apache.bookkeeper.proto.DataFormats$CookieFormat $stack16;
+  $stack3=this.layoutVersion;
+ if ($stack3>3) goto label0;
+ $stack5 = this#org.apache.bookkeeper.bookie.Cookie:toStringVersion3();
+ return  $stack5;
+ label0:builder = org.apache.bookkeeper.proto.DataFormats$CookieFormat.newBuilder();
+ $stack5=this.bookieId;
+ builder.setBookieHost($stack5);
+ $stack5=this.journalDirs;
+ builder.setJournalDir($stack5);
+ $stack5=this.ledgerDirs;
+ builder.setLedgerDirs($stack5);
+ $stack5=this.instanceId;
+ if (null==$stack5) goto label1;
+ $stack5=this.instanceId;
+ builder.setInstanceId($stack5);
+ label1:$stack5=this.indexDirs;
+ if (null==$stack5) goto label2;
+ $stack5=this.indexDirs;
+ builder.setIndexDirs($stack5);
+ label2:b=new java.lang.StringBuilder;
+ b#java.lang.StringBuilder();
+ $stack14 = b.append(5);
+ $stack14.append("\n");
+ $stack16 = builder.build();
+ b.append((java.lang.Object)$stack16);
+ $stack5 = b.toString();
+ return  $stack5;
+ } 
+

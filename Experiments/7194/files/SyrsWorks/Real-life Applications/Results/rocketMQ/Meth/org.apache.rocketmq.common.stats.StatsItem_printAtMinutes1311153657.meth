@@ -1,0 +1,27 @@
+void org.apache.rocketmq.common.stats.StatsItem:printAtMinutes()
+{
+org.apache.rocketmq.common.stats.StatsSnapshot ss;
+  java.util.LinkedList $stack2;
+  java.lang.StringBuilder $stack4;
+  org.apache.rocketmq.logging.org.slf4j.Logger $stack5;
+  java.lang.Object[] $stack6;
+  java.lang.String $stack7;
+  $stack2=this.csListMinute;
+ ss = org.apache.rocketmq.common.stats.StatsItem.computeStatsData($stack2);
+ $stack5=this.logger;
+ $stack4=new java.lang.StringBuilder;
+ $stack4#java.lang.StringBuilder();
+ $stack6=new java.lang.Object[2];
+ $stack7=this.statsName;
+ $stack6[0]=$stack7;
+ $stack7=this.statsKey;
+ $stack6[1]=$stack7;
+ $stack7 = java.lang.String.format("[%s] [%s] Stats In One Minute, ",$stack6);
+ $stack4 = $stack4.append($stack7);
+ $stack7 = this.statPrintDetail(ss);
+ $stack4 = $stack4.append($stack7);
+ $stack7 = $stack4.toString();
+ $stack5.info($stack7);
+ return;
+ } 
+

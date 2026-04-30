@@ -1,0 +1,34 @@
+void java.util.HashSet:writeObject(java.io.ObjectOutputStream r1)
+{
+java.util.Iterator r2;
+  java.lang.Object r3;
+  java.util.HashMap $r4;
+  int $i0;
+  java.util.HashMap $r5;
+  float $f0;
+  java.util.HashMap $r6;
+  int $i1;
+  java.util.HashMap $r7;
+  java.util.Set $r8;
+  boolean $z0;
+  r1.defaultWriteObject();
+ $r4=this.map;
+ $i0 = $r4.capacity();
+ r1.writeInt($i0);
+ $r5=this.map;
+ $f0 = $r5.loadFactor();
+ r1.writeFloat($f0);
+ $r6=this.map;
+ $i1 = $r6.size();
+ r1.writeInt($i1);
+ $r7=this.map;
+ $r8 = $r7.keySet();
+ r2 = $r8.iterator();
+ label0:$z0 = r2.hasNext();
+ if ($z0==0) goto label1;
+ r3 = r2.next();
+ r1.writeObject(r3);
+ goto label0;
+ label1:return;
+ }  
+

@@ -1,0 +1,41 @@
+org.apache.rocketmq.remoting.protocol.body.RegisterBrokerBody org.apache.rocketmq.namesrv.processor.DefaultRequestProcessor:extractRegisterBrokerBodyFromRequest(org.apache.rocketmq.remoting.protocol.RemotingCommand request,org.apache.rocketmq.remoting.protocol.header.namesrv.RegisterBrokerRequestHeader requestHeader)
+{
+org.apache.rocketmq.remoting.protocol.body.RegisterBrokerBody registerBrokerBody;
+  org.apache.rocketmq.common.MQVersion$Version brokerVersion;
+  byte[] $stack6;
+  org.apache.rocketmq.remoting.protocol.body.TopicConfigAndMappingSerializeWrapper $stack7;
+  org.apache.rocketmq.remoting.protocol.DataVersion $stack8;
+  java.util.concurrent.atomic.AtomicLong $stack9;
+  int $stack14;
+  boolean $stack17;
+  java.lang.Exception $stack20;
+  org.apache.rocketmq.remoting.exception.RemotingCommandException $stack21;
+  registerBrokerBody=new org.apache.rocketmq.remoting.protocol.body.RegisterBrokerBody;
+ registerBrokerBody#org.apache.rocketmq.remoting.protocol.body.RegisterBrokerBody();
+ $stack6 = request.getBody();
+ if ($stack6==null) goto label0;
+ label1:$stack14 = request.getVersion();
+ brokerVersion = org.apache.rocketmq.common.MQVersion.value2Version($stack14);
+ $stack6 = request.getBody();
+ $stack17 = requestHeader.isCompressed();
+ registerBrokerBody = org.apache.rocketmq.remoting.protocol.body.RegisterBrokerBody.decode($stack6,$stack17,brokerVersion);
+ label2:goto label3;
+ label4:$stack20 = catch;
+ $stack21=new org.apache.rocketmq.remoting.exception.RemotingCommandException;
+ $stack21#org.apache.rocketmq.remoting.exception.RemotingCommandException("Failed to decode RegisterBrokerBody",(java.lang.Throwable)$stack20);
+ throw $stack21;
+ label0:$stack7 = registerBrokerBody.getTopicConfigSerializeWrapper();
+ $stack8 = $stack7.getDataVersion();
+ $stack9=new java.util.concurrent.atomic.AtomicLong;
+ $stack9#java.util.concurrent.atomic.AtomicLong(0L);
+ $stack8.setCounter($stack9);
+ $stack7 = registerBrokerBody.getTopicConfigSerializeWrapper();
+ $stack8 = $stack7.getDataVersion();
+ $stack8.setTimestamp(0L);
+ $stack7 = registerBrokerBody.getTopicConfigSerializeWrapper();
+ $stack8 = $stack7.getDataVersion();
+ $stack8.setStateVersion(0L);
+ label3:return  registerBrokerBody;
+ catch java.lang.Exception: label1 - label2 : label4;
+} 
+

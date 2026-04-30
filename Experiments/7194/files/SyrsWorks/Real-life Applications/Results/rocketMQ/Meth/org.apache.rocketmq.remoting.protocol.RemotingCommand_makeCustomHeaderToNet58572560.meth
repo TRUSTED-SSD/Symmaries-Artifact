@@ -1,0 +1,54 @@
+void org.apache.rocketmq.remoting.protocol.RemotingCommand:makeCustomHeaderToNet()
+{
+java.lang.reflect.Field[] fields;
+  int l3;
+  int l4;
+  java.lang.reflect.Field field;
+  java.lang.String name;
+  java.lang.Object value;
+  org.apache.rocketmq.remoting.CommandCustomHeader $stack9;
+  java.lang.Class $stack11;
+  java.util.HashMap $stack13;
+  int $stack14;
+  boolean $stack15;
+  java.lang.String $stack23;
+  java.lang.Exception $stack30;
+  org.apache.rocketmq.logging.org.slf4j.Logger $stack31;
+  $stack9=this.customHeader;
+ if ($stack9==null) goto label0;
+ $stack9=this.customHeader;
+ $stack11 = $stack9.getClass();
+ fields = this.getClazzFields($stack11);
+ $stack13=this.extFields;
+ if (null!=$stack13) goto label1;
+ $stack13=new java.util.HashMap;
+ $stack13#java.util.HashMap();
+ this.extFields=$stack13;
+ label1:l3=#fields;
+ l4=0;
+ label2:if (l4>=l3) goto label0;
+ field=fields[l4];
+ $stack14 = field.getModifiers();
+ $stack15 = java.lang.reflect.Modifier.isStatic($stack14);
+ if ($stack15!=0) goto label3;
+ name = field.getName();
+ $stack15 = name.startsWith("this");
+ if ($stack15!=0) goto label3;
+ value=null;
+ label4:field.setAccessible((boolean)1);
+ $stack9=this.customHeader;
+ value = field.get((java.lang.Object)$stack9);
+ label5:goto label6;
+ label7:$stack30 = catch;
+ $stack31=org.apache.rocketmq.remoting.protocol.RemotingCommand.log;
+ $stack31.error("Failed to access field [{}]",(java.lang.Object)name,(java.lang.Object)$stack30);
+ label6:if (value==null) goto label3;
+ $stack13=this.extFields;
+ $stack23 = value.toString();
+ $stack13.put((java.lang.Object)name,(java.lang.Object)$stack23);
+ label3:l4=(l4+1);
+ goto label2;
+ label0:return;
+ catch java.lang.Exception: label4 - label5 : label7;
+} 
+

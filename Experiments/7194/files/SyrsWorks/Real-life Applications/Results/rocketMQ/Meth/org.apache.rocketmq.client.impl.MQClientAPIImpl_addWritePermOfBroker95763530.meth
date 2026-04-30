@@ -1,0 +1,42 @@
+int org.apache.rocketmq.client.impl.MQClientAPIImpl:addWritePermOfBroker(java.lang.String @nameSrvAddr,java.lang.String brokerName,long timeoutMillis)
+{
+org.apache.rocketmq.remoting.protocol.header.namesrv.AddWritePermOfBrokerRequestHeader requestHeader;
+  org.apache.rocketmq.remoting.protocol.RemotingCommand request;
+  org.apache.rocketmq.remoting.protocol.header.namesrv.AddWritePermOfBrokerResponseHeader responseHeader;
+  org.apache.rocketmq.remoting.RemotingClient $stack11;
+  boolean $stack13;
+  int $stack14;
+  org.apache.rocketmq.remoting.CommandCustomHeader $stack15;
+  java.lang.Integer $stack16;
+  org.apache.rocketmq.client.exception.MQClientException $stack18;
+  java.lang.AssertionError $stack22;
+  java.lang.String nameSrvAddr;
+nameSrvAddr=@nameSrvAddr;
+requestHeader=new org.apache.rocketmq.remoting.protocol.header.namesrv.AddWritePermOfBrokerRequestHeader;
+ requestHeader#org.apache.rocketmq.remoting.protocol.header.namesrv.AddWritePermOfBrokerRequestHeader();
+ requestHeader.setBrokerName(brokerName);
+ request = org.apache.rocketmq.remoting.protocol.RemotingCommand.createRequestCommand(327,(org.apache.rocketmq.remoting.CommandCustomHeader)requestHeader);
+ $stack11=this.remotingClient;
+ request = $stack11.invokeSync(nameSrvAddr,request,timeoutMillis);
+ $stack13=org.apache.rocketmq.client.impl.MQClientAPIImpl.$assertionsDisabled;
+ if ($stack13!=0) goto label0;
+ if (request!=null) goto label0;
+ $stack22=new java.lang.AssertionError;
+ $stack22#java.lang.AssertionError();
+ throw $stack22;
+ label0:$stack14 = request.getCode();
+ switch [$stack14]
+if 0 goto label1;
+goto label2;
+ label1:$stack15 = request.decodeCommandCustomHeader(org.apache.rocketmq.remoting.protocol.header.namesrv.AddWritePermOfBrokerResponseHeader);
+ responseHeader=(org.apache.rocketmq.remoting.protocol.header.namesrv.AddWritePermOfBrokerResponseHeader) $stack15;
+ $stack16 = responseHeader.getAddTopicCount();
+ $stack14 = $stack16.intValue();
+ return  $stack14;
+ label2:$stack18=new org.apache.rocketmq.client.exception.MQClientException;
+ $stack14 = request.getCode();
+ nameSrvAddr = request.getRemark();
+ $stack18#org.apache.rocketmq.client.exception.MQClientException($stack14,nameSrvAddr);
+ throw $stack18;
+ } 
+

@@ -1,0 +1,15 @@
+java.lang.String org.apache.bookkeeper.client.RegionAwareEnsemblePlacementPolicy:getRegion(org.apache.bookkeeper.net.BookieId addr)
+{
+java.lang.String region;
+  java.util.concurrent.ConcurrentMap $stack3;
+  java.lang.Object $stack4;
+  $stack3=this.address2Region;
+ $stack4 = $stack3.get((java.lang.Object)addr);
+ region=(java.lang.String) $stack4;
+ if (null!=region) goto label0;
+ region = this.parseBookieRegion(addr);
+ $stack3=this.address2Region;
+ $stack3.putIfAbsent((java.lang.Object)addr,(java.lang.Object)region);
+ label0:return  region;
+ } 
+

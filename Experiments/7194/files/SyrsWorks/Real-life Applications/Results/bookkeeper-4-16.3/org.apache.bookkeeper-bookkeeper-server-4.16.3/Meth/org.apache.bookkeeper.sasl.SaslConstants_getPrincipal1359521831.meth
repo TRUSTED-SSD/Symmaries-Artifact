@@ -1,0 +1,31 @@
+static java.lang.String org.apache.bookkeeper.sasl.SaslConstants:getPrincipal(java.lang.String @configurationEntry)
+{
+javax.security.auth.login.AppConfigurationEntry[] entries;
+  int l3;
+  int l4;
+  javax.security.auth.login.AppConfigurationEntry entry;
+  javax.security.auth.login.Configuration $stack6;
+  java.util.Map $stack8;
+  java.lang.Object $stack9;
+  java.lang.String configurationEntry;
+configurationEntry=@configurationEntry;
+$stack6 = javax.security.auth.login.Configuration.getConfiguration();
+ entries = $stack6.getAppConfigurationEntry(configurationEntry);
+ if (entries!=null) goto label0;
+ return  null;
+ label0:l3=#entries;
+ l4=0;
+ label1:if (l4>=l3) goto label2;
+ entry=entries[l4];
+ $stack8 = entry.getOptions();
+ $stack9 = $stack8.get((java.lang.Object)"principal");
+ if ($stack9==null) goto label3;
+ $stack8 = entry.getOptions();
+ $stack9 = $stack8.get((java.lang.Object)"principal");
+ configurationEntry=(java.lang.String) $stack9;
+ return  configurationEntry;
+ label3:l4=(l4+1);
+ goto label1;
+ label2:return  null;
+ } 
+

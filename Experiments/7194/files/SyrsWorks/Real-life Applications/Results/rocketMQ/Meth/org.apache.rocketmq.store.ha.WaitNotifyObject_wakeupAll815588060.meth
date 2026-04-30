@@ -1,0 +1,42 @@
+void org.apache.rocketmq.store.ha.WaitNotifyObject:wakeupAll()
+{
+boolean needNotify;
+  java.lang.Object l2;
+  java.util.Map$Entry entry;
+  java.lang.Throwable l4;
+  java.util.concurrent.ConcurrentHashMap $stack5;
+  java.util.Set $stack6;
+  boolean $stack8;
+  java.lang.Object $stack11;
+  java.util.concurrent.atomic.AtomicBoolean $stack13;
+  java.util.Iterator tmp$450762105;
+  needNotify=0;
+ $stack5=this.waitingThreadTable;
+ $stack6 = $stack5.entrySet();
+ l2 = $stack6.iterator();
+ label0:tmp$450762105=(java.util.Iterator) l2;
+ $stack8 = tmp$450762105.hasNext();
+ if ($stack8==0) goto label1;
+ tmp$450762105=(java.util.Iterator) l2;
+ $stack11 = tmp$450762105.next();
+ entry=(java.util.Map$Entry) $stack11;
+ $stack11 = entry.getValue();
+ $stack13=(java.util.concurrent.atomic.AtomicBoolean) $stack11;
+ $stack8 = $stack13.compareAndSet((boolean)0,(boolean)1);
+ if ($stack8==0) goto label2;
+ needNotify=1;
+ label2:goto label0;
+ label1:if (needNotify==0) goto label3;
+ l2=this;
+ monitorenter this;
+ label4:this.notifyAll();
+ monitorexit this;
+ label5:goto label3;
+ label6:l4 = catch;
+ monitorexit this;
+ label7:throw l4;
+ label3:return;
+ catch java.lang.Throwable: label4 - label5 : label6;
+catch java.lang.Throwable: label6 - label7 : label6;
+} 
+

@@ -1,0 +1,19 @@
+boolean org.apache.rocketmq.store.ha.DefaultHAService:isInSyncSlave(long masterPutWhere,org.apache.rocketmq.store.ha.HAConnection conn)
+{
+long $stack4;
+  org.apache.rocketmq.store.DefaultMessageStore $stack5;
+  org.apache.rocketmq.store.config.MessageStoreConfig $stack7;
+  int $stack8;
+  byte $stack10;
+  $stack4 = conn.getSlaveAckOffset();
+ masterPutWhere=(masterPutWhere-$stack4);
+ $stack5=this.defaultMessageStore;
+ $stack7 = $stack5.getMessageStoreConfig();
+ $stack8 = $stack7.getHaMaxGapNotInSync();
+ $stack4=(long) $stack8;
+ $stack10=(masterPutWhere cmp $stack4);
+ if ($stack10>=0) goto label0;
+ return  1;
+ label0:return  0;
+ } 
+

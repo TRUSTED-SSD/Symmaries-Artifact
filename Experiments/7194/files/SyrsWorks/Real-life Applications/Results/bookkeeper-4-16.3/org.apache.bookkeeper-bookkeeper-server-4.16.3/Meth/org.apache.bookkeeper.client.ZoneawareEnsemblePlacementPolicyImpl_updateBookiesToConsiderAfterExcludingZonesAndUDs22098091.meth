@@ -1,0 +1,28 @@
+void org.apache.bookkeeper.client.ZoneawareEnsemblePlacementPolicyImpl:updateBookiesToConsiderAfterExcludingZonesAndUDs(java.util.Set bookiesToConsiderAfterExcludingUDs,java.util.Set @bookiesToConsider,java.util.HashMap excludingUDsOfZonesToConsider)
+{
+java.util.Iterator l4;
+  org.apache.bookkeeper.net.BookieNode bookieToConsider;
+  org.apache.bookkeeper.client.ZoneawareEnsemblePlacementPolicyImpl$ZoneAwareNodeLocation nodeLocation;
+  boolean $stack8;
+  java.lang.Object $stack9;
+  java.lang.String $stack11;
+  java.util.Set bookiesToConsider;
+bookiesToConsider=@bookiesToConsider;
+l4 = bookiesToConsider.iterator();
+ label0:$stack8 = l4.hasNext();
+ if ($stack8==0) goto label1;
+ $stack9 = l4.next();
+ bookieToConsider=(org.apache.bookkeeper.net.BookieNode) $stack9;
+ nodeLocation = this.getZoneAwareNodeLocation(bookieToConsider);
+ $stack11 = nodeLocation.getZone();
+ $stack9 = excludingUDsOfZonesToConsider.get((java.lang.Object)$stack11);
+ bookiesToConsider=(java.util.Set) $stack9;
+ $stack11 = nodeLocation.getUpgradeDomain();
+ $stack8 = bookiesToConsider.contains((java.lang.Object)$stack11);
+ if ($stack8==0) goto label2;
+ goto label0;
+ label2:bookiesToConsiderAfterExcludingUDs.add((java.lang.Object)bookieToConsider);
+ goto label0;
+ label1:return;
+ } 
+

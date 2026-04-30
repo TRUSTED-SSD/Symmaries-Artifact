@@ -1,0 +1,34 @@
+static org.apache.rocketmq.proxy.processor.channel.RemoteChannel org.apache.rocketmq.proxy.processor.channel.RemoteChannelSerializer:decodeFromJson(java.lang.String jsonData)
+{
+com.alibaba.fastjson.JSONObject jsonObject;
+  boolean $stack2;
+  org.apache.rocketmq.proxy.processor.channel.RemoteChannel $stack4;
+  java.lang.String $stack5;
+  java.lang.String $stack6;
+  java.lang.String $stack7;
+  java.lang.Object $stack8;
+  org.apache.rocketmq.proxy.processor.channel.ChannelProtocolType $stack9;
+  java.lang.String $stack11;
+  java.lang.Throwable $stack12;
+  org.apache.rocketmq.logging.org.slf4j.Logger $stack13;
+  $stack2 = org.apache.commons.lang3.StringUtils.isBlank((java.lang.CharSequence)jsonData);
+ if ($stack2==0) goto label0;
+ return  null;
+ label0:jsonObject = com.alibaba.fastjson.JSON.parseObject(jsonData);
+ $stack4=new org.apache.rocketmq.proxy.processor.channel.RemoteChannel;
+ $stack5 = jsonObject.getString("remoteProxyIp");
+ $stack6 = jsonObject.getString("remoteAddress");
+ $stack7 = jsonObject.getString("localAddress");
+ $stack8 = jsonObject.getObject("type",org.apache.rocketmq.proxy.processor.channel.ChannelProtocolType);
+ $stack9=(org.apache.rocketmq.proxy.processor.channel.ChannelProtocolType) $stack8;
+ $stack8 = jsonObject.getObject("extendAttribute",java.lang.String);
+ $stack11=(java.lang.String) $stack8;
+ $stack4#org.apache.rocketmq.proxy.processor.channel.RemoteChannel($stack5,$stack6,$stack7,$stack9,$stack11);
+ label1:return  $stack4;
+ label2:$stack12 = catch;
+ $stack13=org.apache.rocketmq.proxy.processor.channel.RemoteChannelSerializer.log;
+ $stack13.error("decode remote channel data failed. data:{}",(java.lang.Object)jsonData,(java.lang.Object)$stack12);
+ return  null;
+ catch java.lang.Throwable: label0 - label1 : label2;
+} 
+

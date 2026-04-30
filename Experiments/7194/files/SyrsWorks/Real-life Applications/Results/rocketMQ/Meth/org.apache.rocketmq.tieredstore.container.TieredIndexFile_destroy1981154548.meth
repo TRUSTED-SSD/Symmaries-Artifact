@@ -1,0 +1,42 @@
+void org.apache.rocketmq.tieredstore.container.TieredIndexFile:destroy()
+{
+java.io.File compactFile;
+  java.util.concurrent.Future $stack3;
+  boolean $stack4;
+  org.apache.rocketmq.store.logfile.MappedFile $stack5;
+  java.lang.StringBuilder $stack7;
+  org.apache.rocketmq.tieredstore.common.TieredMessageStoreConfig $stack8;
+  java.lang.String $stack9;
+  org.apache.rocketmq.tieredstore.container.TieredFileQueue $stack20;
+  $stack3=this.inflightCompactFuture;
+ $stack3.cancel((boolean)1);
+ $stack5=this.preMappedFile;
+ if ($stack5==null) goto label0;
+ $stack5=this.preMappedFile;
+ $stack5.destroy(-1L);
+ label0:$stack5=this.curMappedFile;
+ if ($stack5==null) goto label1;
+ $stack5=this.curMappedFile;
+ $stack5.destroy(-1L);
+ label1:$stack7=new java.lang.StringBuilder;
+ $stack7#java.lang.StringBuilder();
+ $stack8=this.storeConfig;
+ $stack9 = $stack8.getStorePathRootDir();
+ $stack7 = $stack7.append($stack9);
+ $stack9=java.io.File.separator;
+ $stack7 = $stack7.append($stack9);
+ $stack7 = $stack7.append("tiered_index_file");
+ $stack9=java.io.File.separator;
+ $stack7 = $stack7.append($stack9);
+ $stack7 = $stack7.append("2222");
+ compactFile=new java.io.File;
+ $stack9 = $stack7.toString();
+ compactFile#java.io.File($stack9);
+ $stack4 = compactFile.exists();
+ if ($stack4==0) goto label2;
+ compactFile.delete();
+ label2:$stack20=this.fileQueue;
+ $stack20.destroy();
+ return;
+ } 
+

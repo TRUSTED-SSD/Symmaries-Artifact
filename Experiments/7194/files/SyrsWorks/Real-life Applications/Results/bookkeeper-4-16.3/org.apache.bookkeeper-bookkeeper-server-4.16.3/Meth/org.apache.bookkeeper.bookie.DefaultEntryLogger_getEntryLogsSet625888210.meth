@@ -1,0 +1,55 @@
+java.util.Set org.apache.bookkeeper.bookie.DefaultEntryLogger:getEntryLogsSet()
+{
+java.util.TreeSet entryLogs;
+  org.apache.bookkeeper.bookie.DefaultEntryLogger$3 logFileFilter;
+  java.util.Iterator l3;
+  java.io.File d;
+  java.io.File[] files;
+  int l7;
+  int l8;
+  java.lang.Long entryLogId;
+  org.apache.bookkeeper.bookie.LedgerDirsManager $stack13;
+  java.util.List $stack14;
+  boolean $stack16;
+  java.lang.Object $stack17;
+  java.lang.String $stack20;
+  java.lang.String[] $stack21;
+  long $stack23;
+  java.io.IOException $stack28;
+  java.lang.StringBuilder $stack29;
+  entryLogs = com.google.common.collect.Sets.newTreeSet();
+ logFileFilter=new org.apache.bookkeeper.bookie.DefaultEntryLogger$3;
+ logFileFilter#org.apache.bookkeeper.bookie.DefaultEntryLogger$3(this);
+ $stack13=this.ledgerDirsManager;
+ $stack14 = $stack13.getAllLedgerDirs();
+ l3 = $stack14.iterator();
+ label0:$stack16 = l3.hasNext();
+ if ($stack16==0) goto label1;
+ $stack17 = l3.next();
+ d=(java.io.File) $stack17;
+ files = d.listFiles((java.io.FilenameFilter)logFileFilter);
+ if (files!=null) goto label2;
+ $stack28=new java.io.IOException;
+ $stack29=new java.lang.StringBuilder;
+ $stack29#java.lang.StringBuilder();
+ $stack29 = $stack29.append("Failed to get list of files in directory ");
+ $stack29 = $stack29.append((java.lang.Object)d);
+ $stack20 = $stack29.toString();
+ $stack28#java.io.IOException($stack20);
+ throw $stack28;
+ label2:l7=#files;
+ l8=0;
+ label3:if (l8>=l7) goto label4;
+ d=files[l8];
+ $stack20 = d.getName();
+ $stack21 = $stack20.split(".log");
+ $stack20=$stack21[0];
+ $stack23 = java.lang.Long.parseLong($stack20,16);
+ entryLogId = java.lang.Long.valueOf($stack23);
+ entryLogs.add((java.lang.Object)entryLogId);
+ l8=(l8+1);
+ goto label3;
+ label4:goto label0;
+ label1:return  entryLogs;
+ } 
+

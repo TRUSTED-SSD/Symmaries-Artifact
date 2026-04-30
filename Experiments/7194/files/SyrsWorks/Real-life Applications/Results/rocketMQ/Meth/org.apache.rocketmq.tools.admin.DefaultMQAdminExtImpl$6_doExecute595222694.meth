@@ -1,0 +1,55 @@
+org.apache.rocketmq.tools.admin.common.AdminToolResult org.apache.rocketmq.tools.admin.DefaultMQAdminExtImpl$6:doExecute()
+{
+java.util.concurrent.CopyOnWriteArrayList spanSet;
+  org.apache.rocketmq.remoting.protocol.route.TopicRouteData topicRouteData;
+  java.util.concurrent.CountDownLatch latch;
+  java.util.Iterator l4;
+  org.apache.rocketmq.remoting.protocol.route.BrokerData bd;
+  java.lang.String $stack7;
+  org.apache.rocketmq.tools.admin.DefaultMQAdminExtImpl $stack8;
+  org.apache.rocketmq.tools.admin.common.AdminToolResult $stack10;
+  java.util.List $stack11;
+  int $stack14;
+  boolean $stack20;
+  long $stack22;
+  java.util.concurrent.TimeUnit $stack23;
+  java.lang.Object $stack26;
+  org.apache.rocketmq.tools.admin.DefaultMQAdminExtImpl$6$1 $stack28;
+  java.util.concurrent.ThreadPoolExecutor $stack29;
+  spanSet=new java.util.concurrent.CopyOnWriteArrayList;
+ spanSet#java.util.concurrent.CopyOnWriteArrayList();
+ $stack8=this.this$0;
+ $stack7=this.val$topic;
+ topicRouteData = $stack8.examineTopicRouteInfo($stack7);
+ if (topicRouteData==null) goto label0;
+ $stack11 = topicRouteData.getBrokerDatas();
+ if ($stack11==null) goto label0;
+ $stack11 = topicRouteData.getBrokerDatas();
+ $stack14 = $stack11.size();
+ if ($stack14!=0) goto label1;
+ label0:$stack10 = org.apache.rocketmq.tools.admin.common.AdminToolResult.success((java.lang.Object)spanSet);
+ return  $stack10;
+ label1:latch=new java.util.concurrent.CountDownLatch;
+ $stack11 = topicRouteData.getBrokerDatas();
+ $stack14 = $stack11.size();
+ latch#java.util.concurrent.CountDownLatch($stack14);
+ $stack11 = topicRouteData.getBrokerDatas();
+ l4 = $stack11.iterator();
+ label2:$stack20 = l4.hasNext();
+ if ($stack20==0) goto label3;
+ $stack26 = l4.next();
+ bd=(org.apache.rocketmq.remoting.protocol.route.BrokerData) $stack26;
+ $stack8=this.this$0;
+ $stack29=$stack8.threadPoolExecutor;
+ $stack28=new org.apache.rocketmq.tools.admin.DefaultMQAdminExtImpl$6$1;
+ $stack28#org.apache.rocketmq.tools.admin.DefaultMQAdminExtImpl$6$1(this,bd,(java.util.List)spanSet,latch);
+ $stack29.submit((java.lang.Runnable)$stack28);
+ goto label2;
+ label3:$stack8=this.this$0;
+ $stack22 = org.apache.rocketmq.tools.admin.DefaultMQAdminExtImpl.access$000($stack8);
+ $stack23=java.util.concurrent.TimeUnit.MILLISECONDS;
+ latch.await($stack22,$stack23);
+ $stack10 = org.apache.rocketmq.tools.admin.common.AdminToolResult.success((java.lang.Object)spanSet);
+ return  $stack10;
+ } 
+

@@ -1,0 +1,17 @@
+long org.apache.rocketmq.store.timer.TimerMetrics:addAndGet(java.lang.String topic,int value)
+{
+org.apache.rocketmq.store.timer.TimerMetrics$Metric pair;
+  org.apache.rocketmq.remoting.protocol.DataVersion $stack5;
+  long $stack6;
+  java.util.concurrent.atomic.AtomicLong $stack7;
+  pair = this.getTopicPair(topic);
+ $stack5 = this.getDataVersion();
+ $stack5.nextVersion();
+ $stack6 = java.lang.System.currentTimeMillis();
+ pair.setTimeStamp($stack6);
+ $stack7 = pair.getCount();
+ $stack6=(long) value;
+ $stack6 = $stack7.addAndGet($stack6);
+ return  $stack6;
+ } 
+

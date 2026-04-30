@@ -1,0 +1,60 @@
+    public void <init>(org.apache.bookkeeper.conf.ServerConfiguration, org.apache.bookkeeper.stream.server.conf.DLConfiguration, org.apache.bookkeeper.stats.StatsLogger)
+    {
+        org.apache.bookkeeper.stream.server.service.CuratorProviderService this;
+        org.apache.bookkeeper.conf.ServerConfiguration bkServerConf;
+        org.apache.bookkeeper.stream.server.conf.DLConfiguration conf;
+        org.apache.bookkeeper.stats.StatsLogger statsLogger;
+        java.lang.String $stack4;
+        org.apache.curator.retry.ExponentialBackoffRetry $stack5;
+        int $stack6, $stack8;
+        org.apache.curator.RetryPolicy $stack9;
+        org.apache.curator.framework.CuratorFramework $stack11;
+
+        this := @this: org.apache.bookkeeper.stream.server.service.CuratorProviderService;
+
+        bkServerConf := @parameter0: org.apache.bookkeeper.conf.ServerConfiguration;
+
+        conf := @parameter1: org.apache.bookkeeper.stream.server.conf.DLConfiguration;
+
+        statsLogger := @parameter2: org.apache.bookkeeper.stats.StatsLogger;
+
+        specialinvoke this.<org.apache.bookkeeper.common.component.AbstractLifecycleComponent: void <init>(java.lang.String,org.apache.bookkeeper.common.conf.ComponentConfiguration,org.apache.bookkeeper.stats.StatsLogger)>("curator-provider", conf, statsLogger);
+/*49*/
+
+        $stack4 = staticinvoke <org.apache.bookkeeper.meta.zk.ZKMetadataDriverBase: java.lang.String resolveZkServers(org.apache.bookkeeper.conf.AbstractConfiguration)>(bkServerConf);
+/*50*/
+
+        this.<org.apache.bookkeeper.stream.server.service.CuratorProviderService: java.lang.String zkServers> = $stack4;
+/*50*/
+
+        $stack5 = new org.apache.curator.retry.ExponentialBackoffRetry;
+/*51*/
+
+        $stack6 = virtualinvoke bkServerConf.<org.apache.bookkeeper.conf.ServerConfiguration: int getZkRetryBackoffStartMs()>();
+/*52*/
+
+        $stack8 = virtualinvoke bkServerConf.<org.apache.bookkeeper.conf.ServerConfiguration: int getZkRetryBackoffMaxMs()>();
+/*54*/
+
+        specialinvoke $stack5.<org.apache.curator.retry.ExponentialBackoffRetry: void <init>(int,int,int)>($stack6, 2147483647, $stack8);
+/*54*/
+
+        this.<org.apache.bookkeeper.stream.server.service.CuratorProviderService: org.apache.curator.RetryPolicy curatorRetryPolicy> = $stack5;
+/*54*/
+
+        $stack4 = this.<org.apache.bookkeeper.stream.server.service.CuratorProviderService: java.lang.String zkServers>;
+/*56*/
+
+        $stack9 = this.<org.apache.bookkeeper.stream.server.service.CuratorProviderService: org.apache.curator.RetryPolicy curatorRetryPolicy>;
+/*56*/
+
+        $stack11 = staticinvoke <org.apache.curator.framework.CuratorFrameworkFactory: org.apache.curator.framework.CuratorFramework newClient(java.lang.String,org.apache.curator.RetryPolicy)>($stack4, $stack9);
+/*56*/
+
+        this.<org.apache.bookkeeper.stream.server.service.CuratorProviderService: org.apache.curator.framework.CuratorFramework curatorClient> = $stack11;
+/*56*/
+
+        return;
+/*57*/
+    }
+

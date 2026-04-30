@@ -1,0 +1,44 @@
+com.google.zxing.pdf417.decoder.ec.ModulusGF(int modulus,int generator)
+{
+int x;
+  int i;
+  int[] $stack5;
+  com.google.zxing.pdf417.decoder.ec.ModulusPoly $stack8;
+  int[] $stack14;
+  this#java.lang.Object();
+ this.modulus=modulus;
+ $stack5=new int[modulus];
+ this.expTable=$stack5;
+ $stack5=new int[modulus];
+ this.logTable=$stack5;
+ x=1;
+ i=0;
+ label0:if (i>=modulus) goto label1;
+ $stack5=this.expTable;
+ $stack5[i]=x;
+ x=(x * generator);
+ x=(x%modulus);
+ i=(i+1);
+ goto label0;
+ label1:i=0;
+ label2:generator=(modulus-1);
+ if (i>=generator) goto label3;
+ $stack14=this.logTable;
+ $stack5=this.expTable;
+ generator=$stack5[i];
+ $stack14[generator]=i;
+ i=(i+1);
+ goto label2;
+ label3:$stack8=new com.google.zxing.pdf417.decoder.ec.ModulusPoly;
+ $stack5=new int[1];
+ $stack5[0]=0;
+ $stack8#com.google.zxing.pdf417.decoder.ec.ModulusPoly(this,$stack5);
+ this.zero=$stack8;
+ $stack8=new com.google.zxing.pdf417.decoder.ec.ModulusPoly;
+ $stack5=new int[1];
+ $stack5[0]=1;
+ $stack8#com.google.zxing.pdf417.decoder.ec.ModulusPoly(this,$stack5);
+ this.one=$stack8;
+ return;
+ } 
+

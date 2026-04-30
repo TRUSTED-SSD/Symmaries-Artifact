@@ -1,0 +1,23 @@
+static org.apache.bookkeeper.stream.proto.kv.rpc.PutRequest$Builder org.apache.bookkeeper.clients.impl.kv.KvUtils:toProtoPutRequest(org.apache.bookkeeper.api.kv.op.PutOp op)
+{
+org.apache.bookkeeper.stream.proto.kv.rpc.PutRequest$Builder $stack1;
+  org.apache.bookkeeper.api.kv.options.PutOption $stack2;
+  boolean $stack3;
+  java.lang.Object $stack5;
+  io.netty.buffer.ByteBuf $stack6;
+  com.google.protobuf.ByteString $stack7;
+  $stack1 = org.apache.bookkeeper.stream.proto.kv.rpc.PutRequest.newBuilder();
+ $stack2 = op.option();
+ $stack3 = $stack2.prevKv();
+ $stack1 = $stack1.setPrevKv($stack3);
+ $stack5 = op.key();
+ $stack6=(io.netty.buffer.ByteBuf) $stack5;
+ $stack7 = org.apache.bookkeeper.clients.impl.kv.KvUtils.toProtoKey($stack6);
+ $stack1 = $stack1.setKey($stack7);
+ $stack5 = op.value();
+ $stack6=(io.netty.buffer.ByteBuf) $stack5;
+ $stack7 = org.apache.bookkeeper.clients.impl.kv.KvUtils.toProtoKey($stack6);
+ $stack1 = $stack1.setValue($stack7);
+ return  $stack1;
+ } 
+

@@ -1,0 +1,48 @@
+org.apache.rocketmq.common.statistics.StatisticsItem org.apache.rocketmq.common.statistics.StatisticsItem:snapshot()
+{
+org.apache.rocketmq.common.statistics.StatisticsItem ret;
+  int i;
+  java.lang.String[] $stack4;
+  java.lang.String $stack5;
+  java.lang.String $stack6;
+  java.util.concurrent.atomic.AtomicLong[] $stack7;
+  int $stack11;
+  java.util.concurrent.atomic.AtomicLong $stack12;
+  java.util.concurrent.atomic.AtomicLong $stack13;
+  long $stack14;
+  java.util.concurrent.atomic.AtomicLong[] $stack21;
+  ret=new org.apache.rocketmq.common.statistics.StatisticsItem;
+ $stack6=this.statKind;
+ $stack5=this.statObject;
+ $stack4=this.itemNames;
+ ret#org.apache.rocketmq.common.statistics.StatisticsItem($stack6,$stack5,$stack4);
+ $stack7=this.itemAccumulates;
+ i=#$stack7;
+ $stack7=new java.util.concurrent.atomic.AtomicLong[i];
+ ret.itemAccumulates=$stack7;
+ i=0;
+ label0:$stack7=this.itemAccumulates;
+ $stack11=#$stack7;
+ if (i>=$stack11) goto label1;
+ $stack21=ret.itemAccumulates;
+ $stack12=new java.util.concurrent.atomic.AtomicLong;
+ $stack7=this.itemAccumulates;
+ $stack13=$stack7[i];
+ $stack14 = $stack13.get();
+ $stack12#java.util.concurrent.atomic.AtomicLong($stack14);
+ $stack21[i]=$stack12;
+ i=(i+1);
+ goto label0;
+ label1:$stack12=new java.util.concurrent.atomic.AtomicLong;
+ $stack13=this.invokeTimes;
+ $stack14 = $stack13.longValue();
+ $stack12#java.util.concurrent.atomic.AtomicLong($stack14);
+ ret.invokeTimes=$stack12;
+ $stack12=new java.util.concurrent.atomic.AtomicLong;
+ $stack13=this.lastTimeStamp;
+ $stack14 = $stack13.longValue();
+ $stack12#java.util.concurrent.atomic.AtomicLong($stack14);
+ ret.lastTimeStamp=$stack12;
+ return  ret;
+ } 
+

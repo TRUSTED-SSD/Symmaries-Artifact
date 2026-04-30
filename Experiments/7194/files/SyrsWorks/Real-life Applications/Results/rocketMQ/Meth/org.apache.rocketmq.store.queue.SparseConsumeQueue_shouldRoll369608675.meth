@@ -1,0 +1,27 @@
+boolean org.apache.rocketmq.store.queue.SparseConsumeQueue:shouldRoll()
+{
+org.apache.rocketmq.store.MappedFileQueue $stack1;
+  org.apache.rocketmq.store.logfile.MappedFile $stack2;
+  boolean $stack5;
+  int $stack8;
+  int $stack11;
+  $stack1=this.mappedFileQueue;
+ $stack2 = $stack1.getLastMappedFile();
+ if ($stack2!=null) goto label0;
+ return  1;
+ label0:$stack1=this.mappedFileQueue;
+ $stack2 = $stack1.getLastMappedFile();
+ $stack5 = $stack2.isFull();
+ if ($stack5==0) goto label1;
+ return  1;
+ label1:$stack1=this.mappedFileQueue;
+ $stack2 = $stack1.getLastMappedFile();
+ $stack8 = $stack2.getWrotePosition();
+ $stack8=($stack8+46);
+ $stack1=this.mappedFileQueue;
+ $stack11 = $stack1.getMappedFileSize();
+ if ($stack8<=$stack11) goto label2;
+ return  1;
+ label2:return  0;
+ } 
+

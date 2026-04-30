@@ -1,0 +1,36 @@
+static int com.google.zxing.pdf417.decoder.PDF417ScanningDecoder:adjustCodewordStartColumn(com.google.zxing.common.BitMatrix image,int minColumn,int maxColumn,boolean leftToRight,int codewordStartColumn,int imageRow)
+{
+int correctedStartColumn;
+  byte increment;
+  int i;
+  boolean $stack12;
+  int $stack16;
+  correctedStartColumn=codewordStartColumn;
+ if (leftToRight==0) goto label0;
+ increment=-1;
+ goto label1;
+ label0:increment=1;
+ label1:i=0;
+ label2:if (i>=2) goto label3;
+ label4:if (leftToRight==0) goto label5;
+ if (correctedStartColumn<minColumn) goto label6;
+ goto label7;
+ label5:if (correctedStartColumn>=maxColumn) goto label6;
+ label7:$stack12 = image.get(correctedStartColumn,imageRow);
+ if (leftToRight!=$stack12) goto label6;
+ $stack16=(codewordStartColumn-correctedStartColumn);
+ $stack16 = java.lang.Math.abs($stack16);
+ if ($stack16<=2) goto label8;
+ return  codewordStartColumn;
+ label8:correctedStartColumn=(correctedStartColumn+increment);
+ goto label4;
+ label6:increment= ! (increment);
+ if (leftToRight!=0) goto label9;
+ leftToRight=1;
+ goto label10;
+ label9:leftToRight=0;
+ label10:i=(i+1);
+ goto label2;
+ label3:return  correctedStartColumn;
+ } 
+

@@ -1,0 +1,30 @@
+void org.apache.bookkeeper.stream.server.service.RegistrationServiceProvider:doClose()
+{
+org.apache.bookkeeper.discover.RegistrationClient $stack2;
+  org.apache.bookkeeper.zookeeper.ZooKeeperClient $stack3;
+  java.util.concurrent.ScheduledExecutorService $stack4;
+  java.lang.InterruptedException $stack10;
+  java.lang.Thread $stack11;
+  java.lang.String $stack12;
+  org.slf4j.Logger $stack13;
+  $stack2=this.client;
+ if (null==$stack2) goto label0;
+ $stack2=this.client;
+ $stack2.close();
+ label0:$stack3=this.zkClient;
+ if (null==$stack3) goto label1;
+ label2:$stack3=this.zkClient;
+ $stack3.close();
+ label3:goto label1;
+ label4:$stack10 = catch;
+ $stack11 = java.lang.Thread.currentThread();
+ $stack11.interrupt();
+ $stack13=org.apache.bookkeeper.stream.server.service.RegistrationServiceProvider.log;
+ $stack12=this.zkServers;
+ $stack13.warn("Interrupted at closing zookeeper client to {}",(java.lang.Object)$stack12,(java.lang.Object)$stack10);
+ label1:$stack4=this.regExecutor;
+ $stack4.shutdown();
+ return;
+ catch java.lang.InterruptedException: label2 - label3 : label4;
+} 
+

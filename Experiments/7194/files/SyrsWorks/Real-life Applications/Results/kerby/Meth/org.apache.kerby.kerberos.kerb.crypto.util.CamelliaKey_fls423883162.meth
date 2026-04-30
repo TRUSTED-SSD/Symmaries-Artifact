@@ -1,0 +1,38 @@
+void org.apache.kerby.kerberos.kerb.crypto.util.CamelliaKey:fls(int[] s,int[] fkey,int keyoff)
+{
+int $stack4;
+  int $stack6;
+  int $stack9;
+  $stack9=s[1];
+ $stack6=s[0];
+ $stack4=(0+keyoff);
+ $stack4=fkey[$stack4];
+ $stack6=($stack6 & $stack4);
+ $stack6 = org.apache.kerby.kerberos.kerb.crypto.util.CamelliaKey.leftRotate($stack6,1);
+ $stack9=(!$stack9 & $stack6) |(!$stack6 & $stack9);
+ s[1]=$stack9;
+ $stack9=s[0];
+ $stack6=(1+keyoff);
+ $stack4=fkey[$stack6];
+ $stack6=s[1];
+ $stack6=($stack4 | $stack6);
+ $stack9=(!$stack9 & $stack6) |(!$stack6 & $stack9);
+ s[0]=$stack9;
+ $stack9=s[2];
+ $stack6=(3+keyoff);
+ $stack4=fkey[$stack6];
+ $stack6=s[3];
+ $stack6=($stack4 | $stack6);
+ $stack9=(!$stack9 & $stack6) |(!$stack6 & $stack9);
+ s[2]=$stack9;
+ $stack9=s[3];
+ keyoff=(2+keyoff);
+ $stack6=fkey[keyoff];
+ keyoff=s[2];
+ keyoff=($stack6 & keyoff);
+ keyoff = org.apache.kerby.kerberos.kerb.crypto.util.CamelliaKey.leftRotate(keyoff,1);
+ keyoff=(!$stack9 & keyoff) |(!keyoff & $stack9);
+ s[3]=keyoff;
+ return;
+ } 
+

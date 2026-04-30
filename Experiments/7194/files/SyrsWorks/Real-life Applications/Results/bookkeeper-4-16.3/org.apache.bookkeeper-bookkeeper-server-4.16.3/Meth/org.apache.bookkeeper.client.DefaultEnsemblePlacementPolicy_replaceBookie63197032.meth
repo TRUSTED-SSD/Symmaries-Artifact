@@ -1,0 +1,23 @@
+org.apache.bookkeeper.client.EnsemblePlacementPolicy$PlacementResult org.apache.bookkeeper.client.DefaultEnsemblePlacementPolicy:replaceBookie(int ensembleSize,int writeQuorumSize,int ackQuorumSize,java.util.Map customMetadata,java.util.List currentEnsemble,org.apache.bookkeeper.net.BookieId bookieToReplace,java.util.Set excludeBookies)
+{
+java.util.List addresses;
+  org.apache.bookkeeper.net.BookieId candidateAddr;
+  java.util.ArrayList newEnsemble;
+  org.apache.bookkeeper.client.EnsemblePlacementPolicy$PlacementResult $stack12;
+  java.lang.Object $stack13;
+  org.apache.bookkeeper.client.EnsemblePlacementPolicy$PlacementPolicyAdherence $stack18;
+  excludeBookies.addAll((java.util.Collection)currentEnsemble);
+ $stack12 = this.newEnsemble(1,1,1,customMetadata,excludeBookies);
+ $stack13 = $stack12.getResult();
+ addresses=(java.util.List) $stack13;
+ $stack13 = addresses.get(0);
+ candidateAddr=(org.apache.bookkeeper.net.BookieId) $stack13;
+ newEnsemble=new java.util.ArrayList;
+ newEnsemble#java.util.ArrayList((java.util.Collection)currentEnsemble);
+ ensembleSize = currentEnsemble.indexOf((java.lang.Object)bookieToReplace);
+ newEnsemble.set(ensembleSize,(java.lang.Object)candidateAddr);
+ $stack18 = this.isEnsembleAdheringToPlacementPolicy((java.util.List)newEnsemble,writeQuorumSize,ackQuorumSize);
+ $stack12 = org.apache.bookkeeper.client.EnsemblePlacementPolicy$PlacementResult.of((java.lang.Object)candidateAddr,$stack18);
+ return  $stack12;
+ } 
+

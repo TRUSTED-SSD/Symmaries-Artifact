@@ -1,0 +1,55 @@
+org.apache.bookkeeper.stats.prometheus.DataSketchesOpStatsLogger org.apache.bookkeeper.stats.prometheus.ThreadScopedDataSketchesStatsLogger:getStatsLogger()
+{
+org.apache.bookkeeper.stats.prometheus.DataSketchesOpStatsLogger statsLogger;
+  org.apache.bookkeeper.stats.ThreadRegistry$ThreadPoolThread tpt;
+  java.util.HashMap threadScopedlabels;
+  java.lang.ThreadLocal $stack4;
+  java.lang.Object $stack5;
+  boolean $stack6;
+  java.util.Map $stack9;
+  java.lang.String $stack11;
+  int $stack14;
+  org.apache.bookkeeper.stats.prometheus.PrometheusMetricsProvider $stack17;
+  org.apache.bookkeeper.stats.prometheus.ScopeContext $stack18;
+  org.apache.bookkeeper.stats.prometheus.ScopeContext $stack19;
+  java.util.concurrent.ConcurrentMap $stack20;
+  $stack4=this.statsLoggers;
+ $stack5 = $stack4.get();
+ statsLogger=(org.apache.bookkeeper.stats.prometheus.DataSketchesOpStatsLogger) $stack5;
+ $stack6 = statsLogger.isThreadInitialized();
+ if ($stack6!=0) goto label0;
+ tpt = org.apache.bookkeeper.stats.ThreadRegistry.get();
+ if (tpt!=null) goto label1;
+ $stack4=this.statsLoggers;
+ statsLogger=this.defaultStatsLogger;
+ $stack4.set((java.lang.Object)statsLogger);
+ $stack17=this.provider;
+ $stack20=$stack17.opStats;
+ $stack18=new org.apache.bookkeeper.stats.prometheus.ScopeContext;
+ $stack19=this.scopeContext;
+ $stack11 = $stack19.getScope();
+ $stack9=this.originalLabels;
+ $stack18#org.apache.bookkeeper.stats.prometheus.ScopeContext($stack11,$stack9);
+ statsLogger=this.defaultStatsLogger;
+ $stack20.put((java.lang.Object)$stack18,(java.lang.Object)statsLogger);
+ statsLogger=this.defaultStatsLogger;
+ return  statsLogger;
+ label1:threadScopedlabels=new java.util.HashMap;
+ $stack9=this.originalLabels;
+ threadScopedlabels#java.util.HashMap($stack9);
+ $stack11 = tpt.getThreadPool();
+ threadScopedlabels.put((java.lang.Object)"threadPool",(java.lang.Object)$stack11);
+ $stack14 = tpt.getOrdinal();
+ $stack11 = java.lang.String.valueOf($stack14);
+ threadScopedlabels.put((java.lang.Object)"thread",(java.lang.Object)$stack11);
+ statsLogger.initializeThread((java.util.Map)threadScopedlabels);
+ $stack17=this.provider;
+ $stack20=$stack17.opStats;
+ $stack18=new org.apache.bookkeeper.stats.prometheus.ScopeContext;
+ $stack19=this.scopeContext;
+ $stack11 = $stack19.getScope();
+ $stack18#org.apache.bookkeeper.stats.prometheus.ScopeContext($stack11,(java.util.Map)threadScopedlabels);
+ $stack20.put((java.lang.Object)$stack18,(java.lang.Object)statsLogger);
+ label0:return  statsLogger;
+ } 
+

@@ -1,0 +1,129 @@
+    private void allUsedNamesAreDeclared() throws rifl.spec.RIFLIntegrityException
+    {
+        rifl.spec.RIFLSpecification this;
+        java.util.Map$Entry entry;
+        java.util.Iterator l2, l4;
+        rifl.spec.Domain dom;
+        java.util.Map $stack5;
+        java.util.Set $stack6;
+        boolean $stack8;
+        java.lang.Object $stack9;
+        rifl.spec.Assignable $stack11;
+
+        this := @this: rifl.spec.RIFLSpecification;
+
+        $stack5 = this.<rifl.spec.RIFLSpecification: java.util.Map domainAssignment>;
+/*130*/
+
+        $stack6 = interfaceinvoke $stack5.<java.util.Map: java.util.Set entrySet()>();
+/*130*/
+
+        l2 = interfaceinvoke $stack6.<java.util.Set: java.util.Iterator iterator()>();
+/*130*/
+/*130*/
+
+        goto label2;
+/*130*/
+
+     label1:
+        $stack9 = interfaceinvoke l2.<java.util.Iterator: java.lang.Object next()>();
+/*130*/
+
+        entry = (java.util.Map$Entry) $stack9;
+/*130*/
+
+        $stack9 = interfaceinvoke entry.<java.util.Map$Entry: java.lang.Object getKey()>();
+/*131*/
+
+        $stack11 = (rifl.spec.Assignable) $stack9;
+/*131*/
+
+        specialinvoke this.<rifl.spec.RIFLSpecification: void checkDeclarationOfAssignable(rifl.spec.Assignable,java.lang.String)>($stack11, "The domain assignment refers to an undeclared assignable: \'%s\'.");
+/*131*/
+
+        $stack9 = interfaceinvoke entry.<java.util.Map$Entry: java.lang.Object getValue()>();
+/*133*/
+
+        dom = (rifl.spec.Domain) $stack9;
+/*133*/
+
+        specialinvoke this.<rifl.spec.RIFLSpecification: void checkDeclarationOfDomain(rifl.spec.Domain,java.lang.String)>(dom, "The domain assignment refers to an undeclared domain: \'%s\'.");
+/*133*/
+
+     label2:
+        $stack8 = interfaceinvoke l2.<java.util.Iterator: boolean hasNext()>();
+/*130*/
+
+        if $stack8 != 0 goto label1;
+/*130*/
+
+        $stack5 = this.<rifl.spec.RIFLSpecification: java.util.Map flowRelation>;
+/*138*/
+
+        $stack6 = interfaceinvoke $stack5.<java.util.Map: java.util.Set entrySet()>();
+/*138*/
+
+        l2 = interfaceinvoke $stack6.<java.util.Set: java.util.Iterator iterator()>();
+/*138*/
+/*138*/
+
+        goto label6;
+/*138*/
+
+     label3:
+        $stack9 = interfaceinvoke l2.<java.util.Iterator: java.lang.Object next()>();
+/*138*/
+
+        entry = (java.util.Map$Entry) $stack9;
+/*138*/
+
+        $stack9 = interfaceinvoke entry.<java.util.Map$Entry: java.lang.Object getKey()>();
+/*139*/
+
+        dom = (rifl.spec.Domain) $stack9;
+/*139*/
+
+        specialinvoke this.<rifl.spec.RIFLSpecification: void checkDeclarationOfDomain(rifl.spec.Domain,java.lang.String)>(dom, "The flow relation refers to an undeclared domain: \'%s\'.");
+/*139*/
+
+        $stack9 = interfaceinvoke entry.<java.util.Map$Entry: java.lang.Object getValue()>();
+/*141*/
+
+        $stack6 = (java.util.Set) $stack9;
+/*141*/
+
+        l4 = interfaceinvoke $stack6.<java.util.Set: java.util.Iterator iterator()>();
+/*141*/
+/*141*/
+
+        goto label5;
+/*141*/
+
+     label4:
+        $stack9 = interfaceinvoke l4.<java.util.Iterator: java.lang.Object next()>();
+/*141*/
+
+        dom = (rifl.spec.Domain) $stack9;
+/*141*/
+
+        specialinvoke this.<rifl.spec.RIFLSpecification: void checkDeclarationOfDomain(rifl.spec.Domain,java.lang.String)>(dom, "The flow relation refers to an undeclared domain: \'%s\'.");
+/*142*/
+
+     label5:
+        $stack8 = interfaceinvoke l4.<java.util.Iterator: boolean hasNext()>();
+/*141*/
+
+        if $stack8 != 0 goto label4;
+/*141*/
+
+     label6:
+        $stack8 = interfaceinvoke l2.<java.util.Iterator: boolean hasNext()>();
+/*138*/
+
+        if $stack8 != 0 goto label3;
+/*138*/
+
+        return;
+/*146*/
+    }
+

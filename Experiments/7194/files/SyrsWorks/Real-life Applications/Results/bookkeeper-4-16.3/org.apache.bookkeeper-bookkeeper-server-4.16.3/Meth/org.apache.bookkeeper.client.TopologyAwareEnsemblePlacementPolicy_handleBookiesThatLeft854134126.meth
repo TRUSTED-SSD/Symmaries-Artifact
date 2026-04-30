@@ -1,0 +1,48 @@
+void org.apache.bookkeeper.client.TopologyAwareEnsemblePlacementPolicy:handleBookiesThatLeft(java.util.Set leftBookies)
+{
+java.util.Iterator l2;
+  org.apache.bookkeeper.net.BookieId addr;
+  org.apache.bookkeeper.net.BookieNode node;
+  boolean $stack6;
+  java.lang.Object $stack7;
+  java.util.Map $stack8;
+  org.apache.bookkeeper.net.NetworkTopology $stack11;
+  org.apache.bookkeeper.stats.OpStatsLogger $stack13;
+  org.slf4j.Logger $stack14;
+  java.lang.Throwable $stack21;
+  l2 = leftBookies.iterator();
+ label0:$stack6 = l2.hasNext();
+ if ($stack6==0) goto label1;
+ $stack7 = l2.next();
+ addr=(org.apache.bookkeeper.net.BookieId) $stack7;
+ label2:$stack8=this.knownBookies;
+ $stack7 = $stack8.remove((java.lang.Object)addr);
+ node=(org.apache.bookkeeper.net.BookieNode) $stack7;
+ if (null==node) goto label3;
+ $stack11=this.topology;
+ $stack11.remove((org.apache.bookkeeper.net.Node)node);
+ $stack6=this.isWeighted;
+ if ($stack6==0) goto label4;
+ $stack8=this.bookieInfoMap;
+ $stack8.remove((java.lang.Object)node);
+ label4:$stack13=this.bookiesLeftCounter;
+ $stack13.registerSuccessfulValue(1L);
+ $stack14=org.apache.bookkeeper.client.TopologyAwareEnsemblePlacementPolicy.LOG;
+ $stack6 = $stack14.isDebugEnabled();
+ if ($stack6==0) goto label3;
+ $stack14=org.apache.bookkeeper.client.TopologyAwareEnsemblePlacementPolicy.LOG;
+ dummyClass.lowSink("Cluster changed : bookie {} left from cluster.");
+$stack14.debug("Cluster changed : bookie {} left from cluster.",(java.lang.Object)addr);
+ label3:goto label5;
+ label6:$stack21 = catch;
+ $stack14=org.apache.bookkeeper.client.TopologyAwareEnsemblePlacementPolicy.LOG;
+ $stack14.error("Unexpected exception while handling leaving bookie {}",(java.lang.Object)addr,(java.lang.Object)$stack21);
+ $stack13=this.bookiesLeftCounter;
+ if ($stack13==null) goto label5;
+ $stack13=this.bookiesLeftCounter;
+ $stack13.registerFailedValue(1L);
+ label5:goto label0;
+ label1:return;
+ catch java.lang.Throwable: label2 - label3 : label6;
+} 
+

@@ -1,0 +1,28 @@
+void rifl.spec.dalvik.TestDalvikRIFLReader:testReadField()
+{
+rifl.spec.dalvik.DalvikField field;
+  rifl.spec.dalvik.TestableDalvikRIFLReader $stack2;
+  org.w3c.dom.Document $stack3;
+  org.w3c.dom.NodeList $stack4;
+  org.w3c.dom.Node $stack5;
+  org.w3c.dom.Element $stack6;
+  rifl.spec.SrcSnk $stack7;
+  java.lang.String $stack8;
+  boolean $stack10;
+  $stack2=this.reader;
+ $stack3 = rifl.spec.TestRIFLReader.toDoc("<riflspec><source>  <field class=\"Lde/spp_rs3/Main;\" name=\"secret\"/></source></riflspec>");
+ $stack4 = $stack3.getElementsByTagName("source");
+ $stack5 = $stack4.item(0);
+ $stack6=(org.w3c.dom.Element) $stack5;
+ $stack7 = $stack2.read($stack6,(boolean)0);
+ field=(rifl.spec.dalvik.DalvikField) $stack7;
+ org.junit.Assert.assertNotNull((java.lang.Object)field);
+ $stack8=field.className;
+ org.junit.Assert.assertEquals((java.lang.Object)"Lde/spp_rs3/Main;",(java.lang.Object)$stack8);
+ $stack8=field.fieldName;
+ org.junit.Assert.assertEquals((java.lang.Object)"secret",(java.lang.Object)$stack8);
+ $stack10 = field.isSource();
+ org.junit.Assert.assertFalse($stack10);
+ return;
+ } 
+

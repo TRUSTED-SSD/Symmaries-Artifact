@@ -1,0 +1,24 @@
+void org.apache.kerby.kerberos.kerb.type.base.PrincipalName:fromNameString(java.lang.String @nameString)
+{
+int realmPos;
+  java.lang.String nameParts;
+  java.lang.String[] $stack14;
+  java.util.List $stack15;
+  java.lang.String nameString;
+nameString=@nameString;
+if (nameString!=null) goto label0;
+ return;
+ label0:realmPos = nameString.indexOf(64);
+ if (realmPos==-1) goto label1;
+ nameParts = nameString.substring(0,realmPos);
+ realmPos=(realmPos+1);
+ nameString = nameString.substring(realmPos);
+ this.realm=nameString;
+ goto label2;
+ label1:nameParts=nameString;
+ label2:$stack14 = nameParts.split("\\/");
+ $stack15 = java.util.Arrays.asList((java.lang.Object[])$stack14);
+ this.setNameStrings($stack15);
+ return;
+ } 
+

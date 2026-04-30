@@ -1,0 +1,26 @@
+java.nio.channels.FileChannel org.apache.bookkeeper.bookie.DefaultFileChannel:getFileChannel()
+{
+org.apache.bookkeeper.bookie.DefaultFileChannel l1;
+  java.lang.Throwable l2;
+  java.io.RandomAccessFile $stack4;
+  java.nio.channels.FileChannel $stack6;
+  java.io.File $stack9;
+  l1=this;
+ monitorenter this;
+ label0:$stack4=this.randomAccessFile;
+ if ($stack4!=null) goto label1;
+ $stack4=new java.io.RandomAccessFile;
+ $stack9=this.file;
+ $stack4#java.io.RandomAccessFile($stack9,"rw");
+ this.randomAccessFile=$stack4;
+ label1:$stack4=this.randomAccessFile;
+ $stack6 = $stack4.getChannel();
+ monitorexit this;
+ label2:return  $stack6;
+ label3:l2 = catch;
+ monitorexit this;
+ label4:throw l2;
+ catch java.lang.Throwable: label0 - label2 : label3;
+catch java.lang.Throwable: label3 - label4 : label3;
+} 
+

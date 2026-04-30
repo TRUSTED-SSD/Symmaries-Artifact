@@ -1,0 +1,18 @@
+java.util.List org.apache.bookkeeper.zookeeper.ZooKeeperClient:multi(java.lang.Iterable ops)
+{
+org.apache.bookkeeper.zookeeper.ZooKeeperClient$2 $stack2;
+  org.apache.bookkeeper.stats.OpStatsLogger $stack3;
+  com.google.common.util.concurrent.RateLimiter $stack4;
+  org.apache.bookkeeper.zookeeper.RetryPolicy $stack5;
+  java.lang.Object $stack6;
+  java.util.List $stack7;
+  $stack2=new org.apache.bookkeeper.zookeeper.ZooKeeperClient$2;
+ $stack2#org.apache.bookkeeper.zookeeper.ZooKeeperClient$2(this,ops);
+ $stack5=this.operationRetryPolicy;
+ $stack4=this.rateLimiter;
+ $stack3=this.multiStats;
+ $stack6 = org.apache.bookkeeper.zookeeper.ZooWorker.syncCallWithRetries(this,(org.apache.bookkeeper.zookeeper.ZooWorker$ZooCallable)$stack2,$stack5,$stack4,$stack3);
+ $stack7=(java.util.List) $stack6;
+ return  $stack7;
+ } 
+

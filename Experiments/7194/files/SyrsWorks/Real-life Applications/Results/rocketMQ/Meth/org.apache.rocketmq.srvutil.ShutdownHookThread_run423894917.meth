@@ -1,0 +1,56 @@
+void org.apache.rocketmq.srvutil.ShutdownHookThread:run()
+{
+org.apache.rocketmq.srvutil.ShutdownHookThread l1;
+  long beginTime;
+  java.lang.Throwable l6;
+  java.lang.StringBuilder $stack8;
+  org.apache.rocketmq.logging.org.slf4j.Logger $stack9;
+  java.util.concurrent.atomic.AtomicInteger $stack11;
+  int $stack12;
+  java.lang.String $stack15;
+  boolean $stack16;
+  java.util.concurrent.Callable $stack19;
+  long $stack21;
+  java.lang.Exception $stack27;
+  l1=this;
+ monitorenter this;
+ label0:$stack9=this.log;
+ $stack8=new java.lang.StringBuilder;
+ $stack8#java.lang.StringBuilder();
+ $stack8 = $stack8.append("shutdown hook was invoked, ");
+ $stack11=this.shutdownTimes;
+ $stack12 = $stack11.incrementAndGet();
+ $stack8 = $stack8.append($stack12);
+ $stack8 = $stack8.append(" times.");
+ $stack15 = $stack8.toString();
+ $stack9.info($stack15);
+ $stack16=this.hasShutdown;
+ if ($stack16!=0) goto label1;
+ this.hasShutdown=1;
+ beginTime = java.lang.System.currentTimeMillis();
+ label2:$stack19=this.callback;
+ $stack19.call();
+ label3:goto label4;
+ label5:$stack27 = catch;
+ $stack9=this.log;
+ $stack9.error("shutdown hook callback invoked failure.",(java.lang.Throwable)$stack27);
+ label4:$stack21 = java.lang.System.currentTimeMillis();
+ $stack9=this.log;
+ $stack8=new java.lang.StringBuilder;
+ $stack8#java.lang.StringBuilder();
+ $stack8 = $stack8.append("shutdown hook done, consuming time total(ms): ");
+ beginTime=($stack21-beginTime);
+ $stack8 = $stack8.append(beginTime);
+ $stack15 = $stack8.toString();
+ $stack9.info($stack15);
+ label1:monitorexit this;
+ label6:goto label7;
+ label8:l6 = catch;
+ monitorexit this;
+ label9:throw l6;
+ label7:return;
+ catch java.lang.Exception: label2 - label3 : label5;
+catch java.lang.Throwable: label0 - label6 : label8;
+catch java.lang.Throwable: label8 - label9 : label8;
+} 
+

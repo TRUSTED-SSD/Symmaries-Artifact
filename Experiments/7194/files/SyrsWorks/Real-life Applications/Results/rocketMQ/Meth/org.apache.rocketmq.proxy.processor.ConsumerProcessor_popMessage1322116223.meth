@@ -1,0 +1,30 @@
+java.util.concurrent.CompletableFuture org.apache.rocketmq.proxy.processor.ConsumerProcessor:popMessage(org.apache.rocketmq.proxy.common.ProxyContext ctx,org.apache.rocketmq.proxy.processor.QueueSelector queueSelector,java.lang.String consumerGroup,java.lang.String topic,int maxMsgNums,long invisibleTime,long pollTime,int initMode,org.apache.rocketmq.remoting.protocol.heartbeat.SubscriptionData subscriptionData,boolean fifo,org.apache.rocketmq.proxy.processor.PopMessageResultFilter popMessageResultFilter,long timeoutMillis)
+{
+java.util.concurrent.CompletableFuture future;
+  org.apache.rocketmq.proxy.service.route.AddressableMessageQueue messageQueue;
+  org.apache.rocketmq.proxy.service.ServiceManager $stack19;
+  org.apache.rocketmq.proxy.service.route.TopicRouteService $stack20;
+  org.apache.rocketmq.proxy.service.route.MessageQueueView $stack21;
+  java.util.concurrent.CompletableFuture $stack23;
+  org.apache.rocketmq.proxy.common.ProxyException $stack24;
+  org.apache.rocketmq.proxy.common.ProxyExceptionCode $stack25;
+  java.lang.Throwable $stack26;
+  future=new java.util.concurrent.CompletableFuture;
+ future#java.util.concurrent.CompletableFuture();
+ label0:$stack19=this.serviceManager;
+ $stack20 = $stack19.getTopicRouteService();
+ $stack21 = $stack20.getCurrentMessageQueueView(topic);
+ messageQueue = queueSelector.select(ctx,$stack21);
+ if (messageQueue!=null) goto label1;
+ $stack24=new org.apache.rocketmq.proxy.common.ProxyException;
+ $stack25=org.apache.rocketmq.proxy.common.ProxyExceptionCode.FORBIDDEN;
+ $stack24#org.apache.rocketmq.proxy.common.ProxyException($stack25,"no readable queue");
+ throw $stack24;
+ label1:$stack23 = this.popMessage(ctx,messageQueue,consumerGroup,topic,maxMsgNums,invisibleTime,pollTime,initMode,subscriptionData,fifo,popMessageResultFilter,timeoutMillis);
+ label2:return  $stack23;
+ label3:$stack26 = catch;
+ future.completeExceptionally($stack26);
+ return  future;
+ catch java.lang.Throwable: label0 - label2 : label3;
+} 
+

@@ -1,0 +1,53 @@
+static java.lang.Throwable org.apache.bookkeeper.clients.impl.internal.ProtocolInternalUtils:createRootRangeException(java.lang.String @streamName,org.apache.bookkeeper.stream.proto.storage.StatusCode statusCode)
+{
+int[] $stack2;
+  int $stack3;
+  org.apache.bookkeeper.clients.exceptions.InvalidNamespaceNameException $stack5;
+  org.apache.bookkeeper.clients.exceptions.StreamNotFoundException $stack6;
+  org.apache.bookkeeper.clients.exceptions.StreamExistsException $stack7;
+  org.apache.bookkeeper.clients.exceptions.InvalidStreamNameException $stack8;
+  org.apache.bookkeeper.clients.exceptions.NamespaceNotFoundException $stack9;
+  org.apache.bookkeeper.clients.exceptions.NamespaceExistsException $stack10;
+  org.apache.bookkeeper.clients.exceptions.ClientException $stack12;
+  java.lang.StringBuilder $stack13;
+  java.lang.String streamName;
+streamName=@streamName;
+$stack2=org.apache.bookkeeper.clients.impl.internal.ProtocolInternalUtils$1.$SwitchMap$org$apache$bookkeeper$stream$proto$storage$StatusCode;
+ $stack3 = statusCode.ordinal();
+ $stack3=$stack2[$stack3];
+ switch [$stack3]
+if 0 goto label0;
+if 1 goto label1;
+if 2 goto label2;
+if 3 goto label3;
+if 4 goto label4;
+if 5 goto label5;
+goto label6;
+ label0:$stack5=new org.apache.bookkeeper.clients.exceptions.InvalidNamespaceNameException;
+ $stack5#org.apache.bookkeeper.clients.exceptions.InvalidNamespaceNameException(streamName);
+ return  $stack5;
+ label1:$stack10=new org.apache.bookkeeper.clients.exceptions.NamespaceExistsException;
+ $stack10#org.apache.bookkeeper.clients.exceptions.NamespaceExistsException(streamName);
+ return  $stack10;
+ label2:$stack9=new org.apache.bookkeeper.clients.exceptions.NamespaceNotFoundException;
+ $stack9#org.apache.bookkeeper.clients.exceptions.NamespaceNotFoundException(streamName);
+ return  $stack9;
+ label3:$stack8=new org.apache.bookkeeper.clients.exceptions.InvalidStreamNameException;
+ $stack8#org.apache.bookkeeper.clients.exceptions.InvalidStreamNameException(streamName);
+ return  $stack8;
+ label4:$stack7=new org.apache.bookkeeper.clients.exceptions.StreamExistsException;
+ $stack7#org.apache.bookkeeper.clients.exceptions.StreamExistsException(streamName);
+ return  $stack7;
+ label5:$stack6=new org.apache.bookkeeper.clients.exceptions.StreamNotFoundException;
+ $stack6#org.apache.bookkeeper.clients.exceptions.StreamNotFoundException(streamName);
+ return  $stack6;
+ label6:$stack12=new org.apache.bookkeeper.clients.exceptions.ClientException;
+ $stack13=new java.lang.StringBuilder;
+ $stack13#java.lang.StringBuilder();
+ $stack13 = $stack13.append("fail to access its root range : code = ");
+ $stack13 = $stack13.append((java.lang.Object)statusCode);
+ streamName = $stack13.toString();
+ $stack12#org.apache.bookkeeper.clients.exceptions.ClientException(streamName);
+ return  $stack12;
+ } 
+

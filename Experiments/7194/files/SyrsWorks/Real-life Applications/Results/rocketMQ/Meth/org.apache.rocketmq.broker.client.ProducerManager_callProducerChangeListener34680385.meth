@@ -1,0 +1,25 @@
+void org.apache.rocketmq.broker.client.ProducerManager:callProducerChangeListener(org.apache.rocketmq.broker.client.ProducerGroupEvent event,java.lang.String group,org.apache.rocketmq.broker.client.ClientChannelInfo clientChannelInfo)
+{
+java.util.Iterator l4;
+  org.apache.rocketmq.broker.client.ProducerChangeListener listener;
+  java.util.List $stack7;
+  boolean $stack9;
+  java.lang.Object $stack10;
+  java.lang.Throwable $stack12;
+  org.apache.rocketmq.logging.org.slf4j.Logger $stack13;
+  $stack7=this.producerChangeListenerList;
+ l4 = $stack7.iterator();
+ label0:$stack9 = l4.hasNext();
+ if ($stack9==0) goto label1;
+ $stack10 = l4.next();
+ listener=(org.apache.rocketmq.broker.client.ProducerChangeListener) $stack10;
+ label2:listener.handle(event,group,clientChannelInfo);
+ label3:goto label4;
+ label5:$stack12 = catch;
+ $stack13=org.apache.rocketmq.broker.client.ProducerManager.log;
+ $stack13.error("err when call producerChangeListener",$stack12);
+ label4:goto label0;
+ label1:return;
+ catch java.lang.Throwable: label2 - label3 : label5;
+} 
+

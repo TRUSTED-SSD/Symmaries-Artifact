@@ -1,0 +1,23 @@
+void org.apache.rocketmq.store.ha.autoswitch.AutoSwitchHAClient:shutdown()
+{
+org.apache.rocketmq.store.ha.HAConnectionState $stack2;
+  org.apache.rocketmq.store.ha.FlowMonitor $stack3;
+  java.nio.channels.Selector $stack4;
+  java.io.IOException $stack5;
+  org.apache.rocketmq.logging.org.slf4j.Logger $stack6;
+  $stack2=org.apache.rocketmq.store.ha.HAConnectionState.SHUTDOWN;
+ this.changeCurrentState($stack2);
+ $stack3=this.flowMonitor;
+ $stack3.shutdown();
+ this#org.apache.rocketmq.common.ServiceThread();
+ this.closeMaster();
+ label0:$stack4=this.selector;
+ $stack4.close();
+ label1:goto label2;
+ label3:$stack5 = catch;
+ $stack6=org.apache.rocketmq.store.ha.autoswitch.AutoSwitchHAClient.LOGGER;
+ $stack6.warn("Close the selector of AutoSwitchHAClient error, ",(java.lang.Throwable)$stack5);
+ label2:return;
+ catch java.io.IOException: label0 - label1 : label3;
+} 
+

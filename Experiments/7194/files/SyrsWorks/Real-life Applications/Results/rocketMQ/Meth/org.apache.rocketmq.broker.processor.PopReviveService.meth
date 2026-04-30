@@ -1,0 +1,22 @@
+org.apache.rocketmq.broker.processor.PopReviveService(org.apache.rocketmq.broker.BrokerController brokerController,java.lang.String reviveTopic,int queueId)
+{
+java.util.TreeMap $stack4;
+  java.util.NavigableMap $stack5;
+  org.apache.rocketmq.broker.offset.ConsumerOffsetManager $stack6;
+  long $stack7;
+  this#org.apache.rocketmq.common.ServiceThread();
+ this.currentReviveMessageTimestamp=-1L;
+ this.shouldRunPopRevive=0;
+ $stack4=new java.util.TreeMap;
+ $stack4#java.util.TreeMap();
+ $stack5 = java.util.Collections.synchronizedNavigableMap((java.util.NavigableMap)$stack4);
+ this.inflightReviveRequestMap=$stack5;
+ this.queueId=queueId;
+ this.brokerController=brokerController;
+ this.reviveTopic=reviveTopic;
+ $stack6 = brokerController.getConsumerOffsetManager();
+ $stack7 = $stack6.queryOffset("CID_RMQ_SYS_REVIVE_GROUP",reviveTopic,queueId);
+ this.reviveOffset=$stack7;
+ return;
+ } 
+

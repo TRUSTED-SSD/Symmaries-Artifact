@@ -1,0 +1,30 @@
+void org.apache.bookkeeper.tools.cli.commands.bookie.UpdateBookieInLedgerCommand$1:progress(long updated,long issued)
+{
+long $stack5;
+  byte $stack6;
+  java.util.concurrent.TimeUnit $stack8;
+  long $stack11;
+  org.slf4j.Logger $stack13;
+  java.lang.Long $stack15;
+  java.lang.Long $stack16;
+  $stack5=this.val$printProgress;
+ $stack6=($stack5 cmp 0L);
+ if ($stack6>0) goto label0;
+ return;
+ label0:$stack8=java.util.concurrent.TimeUnit.MILLISECONDS;
+ $stack5=this.lastReport;
+ $stack5 = org.apache.bookkeeper.util.MathUtils.elapsedMSec($stack5);
+ $stack5 = $stack8.toSeconds($stack5);
+ $stack11=this.val$printProgress;
+ $stack6=($stack5 cmp $stack11);
+ if ($stack6<0) goto label1;
+ $stack13=org.apache.bookkeeper.tools.cli.commands.bookie.UpdateBookieInLedgerCommand.LOG;
+ $stack15 = java.lang.Long.valueOf(issued);
+ $stack16 = java.lang.Long.valueOf(updated);
+ dummyClass.lowSink("Number of ledgers issued={}, updated={}");
+$stack13.info("Number of ledgers issued={}, updated={}",(java.lang.Object)$stack15,(java.lang.Object)$stack16);
+ updated = org.apache.bookkeeper.util.MathUtils.nowInNano();
+ this.lastReport=updated;
+ label1:return;
+ } 
+

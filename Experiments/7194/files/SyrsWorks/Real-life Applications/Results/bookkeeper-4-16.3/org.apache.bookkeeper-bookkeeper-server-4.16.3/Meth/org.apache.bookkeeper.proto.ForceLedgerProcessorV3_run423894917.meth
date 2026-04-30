@@ -1,0 +1,27 @@
+void org.apache.bookkeeper.proto.ForceLedgerProcessorV3:run()
+{
+org.apache.bookkeeper.proto.BookkeeperProtocol$ForceLedgerResponse forceLedgerResponse;
+  org.apache.bookkeeper.proto.BookkeeperProtocol$Response$Builder response;
+  org.apache.bookkeeper.proto.BookkeeperProtocol$Response resp;
+  org.apache.bookkeeper.proto.BookkeeperProtocol$BKPacketHeader $stack6;
+  org.apache.bookkeeper.proto.BookkeeperProtocol$StatusCode $stack8;
+  org.apache.bookkeeper.proto.BookieRequestProcessor $stack13;
+  org.apache.bookkeeper.proto.RequestStats $stack14;
+  org.apache.bookkeeper.stats.OpStatsLogger $stack15;
+  forceLedgerResponse = this#org.apache.bookkeeper.proto.ForceLedgerProcessorV3:getForceLedgerResponse();
+ if (null==forceLedgerResponse) goto label0;
+ response = org.apache.bookkeeper.proto.BookkeeperProtocol$Response.newBuilder();
+ $stack6 = this.getHeader();
+ response = response.setHeader($stack6);
+ $stack8 = forceLedgerResponse.getStatus();
+ response = response.setStatus($stack8);
+ response = response.setForceLedgerResponse(forceLedgerResponse);
+ resp = response.build();
+ $stack8 = forceLedgerResponse.getStatus();
+ $stack13=this.requestProcessor;
+ $stack14 = $stack13.getRequestStats();
+ $stack15 = $stack14.getForceLedgerRequestStats();
+ this.sendResponse($stack8,(java.lang.Object)resp,$stack15);
+ label0:return;
+ } 
+

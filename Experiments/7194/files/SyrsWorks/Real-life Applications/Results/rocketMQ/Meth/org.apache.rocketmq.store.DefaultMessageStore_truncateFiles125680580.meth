@@ -1,0 +1,19 @@
+boolean org.apache.rocketmq.store.DefaultMessageStore:truncateFiles(long offsetToTruncate)
+{
+long $stack3;
+  byte $stack4;
+  boolean $stack5;
+  org.apache.rocketmq.logging.org.slf4j.Logger $stack6;
+  $stack3 = this.getMaxPhyOffset();
+ $stack4=(offsetToTruncate cmp $stack3);
+ if ($stack4<0) goto label0;
+ return  1;
+ label0:$stack5 = this.isOffsetAligned(offsetToTruncate);
+ if ($stack5!=0) goto label1;
+ $stack6=org.apache.rocketmq.store.DefaultMessageStore.LOGGER;
+ $stack6.error("Offset {} not align, truncate failed, need manual fix");
+ return  0;
+ label1:this.truncateDirtyFiles(offsetToTruncate);
+ return  1;
+ } 
+

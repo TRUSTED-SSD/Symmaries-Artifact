@@ -1,0 +1,36 @@
+long org.apache.rocketmq.tieredstore.TieredMessageFetcher:getOffsetInQueueByTime(java.lang.String topic,int queueId,long timestamp,org.apache.rocketmq.tieredstore.common.BoundaryType type)
+{
+org.apache.rocketmq.tieredstore.container.TieredMessageQueueContainer container;
+  org.apache.rocketmq.common.message.MessageQueue $stack8;
+  java.lang.String $stack9;
+  org.apache.rocketmq.tieredstore.container.TieredContainerManager $stack10;
+  long $stack12;
+  java.lang.Exception $stack13;
+  java.lang.Object[] $stack14;
+  org.apache.rocketmq.logging.org.slf4j.Logger $stack15;
+  java.lang.Integer $stack18;
+  java.lang.Long $stack20;
+  $stack10=this.containerManager;
+ $stack8=new org.apache.rocketmq.common.message.MessageQueue;
+ $stack9=this.brokerName;
+ $stack8#org.apache.rocketmq.common.message.MessageQueue(topic,$stack9,queueId);
+ container = $stack10.getMQContainer($stack8);
+ if (container!=null) goto label0;
+ return  -1L;
+ label0:$stack12 = container.binarySearchInQueueByTime(timestamp,type);
+ label1:return  $stack12;
+ label2:$stack13 = catch;
+ $stack15=org.apache.rocketmq.tieredstore.TieredMessageFetcher.LOGGER;
+ $stack14=new java.lang.Object[5];
+ $stack14[0]=topic;
+ $stack18 = java.lang.Integer.valueOf(queueId);
+ $stack14[1]=$stack18;
+ $stack20 = java.lang.Long.valueOf(timestamp);
+ $stack14[2]=$stack20;
+ $stack14[3]=type;
+ $stack14[4]=$stack13;
+ $stack15.error("TieredMessageFetcher#getOffsetInQueueByTime: get offset in queue by time failed: topic: {}, queue: {}, timestamp: {}, type: {}",$stack14);
+ return  -1L;
+ catch java.lang.Exception: label0 - label1 : label2;
+} 
+

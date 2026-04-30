@@ -1,0 +1,40 @@
+void org.apache.bookkeeper.bookie.EntryLogCompactor$CompactionScannerFactory:flush()
+{
+java.util.List $stack2;
+  boolean $stack3;
+  org.apache.bookkeeper.bookie.EntryLogCompactor $stack4;
+  org.apache.bookkeeper.bookie.storage.EntryLogger $stack5;
+  org.apache.bookkeeper.bookie.CompactableLedgerStorage $stack8;
+  org.slf4j.Logger $stack12;
+  java.lang.Throwable $stack15;
+  $stack2=this.offsets;
+ $stack3 = $stack2.isEmpty();
+ if ($stack3==0) goto label0;
+ $stack12 = org.apache.bookkeeper.bookie.EntryLogCompactor.access$100();
+ $stack3 = $stack12.isDebugEnabled();
+ if ($stack3==0) goto label1;
+ $stack12 = org.apache.bookkeeper.bookie.EntryLogCompactor.access$100();
+ dummyClass.lowSink("Skipping entry log flushing, as there are no offset!");
+$stack12.debug("Skipping entry log flushing, as there are no offset!");
+ label1:return;
+ label0:$stack4=this.this$0;
+ $stack5=$stack4.entryLogger;
+ $stack5.flush();
+ $stack4=this.this$0;
+ $stack8=$stack4.ledgerStorage;
+ $stack2=this.offsets;
+ $stack8.updateEntriesLocations((java.lang.Iterable)$stack2);
+ $stack4=this.this$0;
+ $stack8=$stack4.ledgerStorage;
+ $stack8.flushEntriesLocationsIndex();
+ label2:$stack2=this.offsets;
+ $stack2.clear();
+ goto label3;
+ label4:$stack15 = catch;
+ $stack2=this.offsets;
+ $stack2.clear();
+ throw $stack15;
+ label3:return;
+ catch java.lang.Throwable: label0 - label2 : label4;
+} 
+

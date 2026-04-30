@@ -1,0 +1,21 @@
+void org.apache.bookkeeper.bookie.EntryLogManagerForEntryLogPerLedger$EntryLogsPerLedgerCounter:removedLedgerFromEntryLogMapCache(java.lang.Long ledgerId,com.google.common.cache.RemovalCause cause)
+{
+org.apache.bookkeeper.stats.Counter $stack3;
+  com.google.common.cache.RemovalCause $stack4;
+  boolean $stack5;
+  $stack3=this.numOfWriteActiveLedgers;
+ $stack3.dec();
+ $stack4=com.google.common.cache.RemovalCause.EXPIRED;
+ $stack5 = cause.equals((java.lang.Object)$stack4);
+ if ($stack5==0) goto label0;
+ $stack3=this.numOfWriteLedgersRemovedCacheExpiry;
+ $stack3.inc();
+ goto label1;
+ label0:$stack4=com.google.common.cache.RemovalCause.SIZE;
+ $stack5 = cause.equals((java.lang.Object)$stack4);
+ if ($stack5==0) goto label1;
+ $stack3=this.numOfWriteLedgersRemovedCacheMaxSize;
+ $stack3.inc();
+ label1:return;
+ } 
+

@@ -1,0 +1,25 @@
+java.nio.CharBuffer java.nio.CharBuffer:put(char[] r1,int i0,int i1)
+{
+int i2;
+  int $i3;
+  int $i4;
+  char $c5;
+  java.nio.BufferOverflowException $r3;
+  int i6;
+  $i3=#r1;
+ java.nio.Buffer.checkBounds(i0,i1,$i3);
+ $i4 = this.remaining();
+ if (i1<=$i4) goto label0;
+ $r3=new java.nio.BufferOverflowException;
+ $r3#java.nio.BufferOverflowException:init();
+ throw $r3;
+ label0:i2=(i0+i1);
+ i6=i0;
+ label1:if (i6>=i2) goto label2;
+ $c5=r1[i6];
+ this.put($c5);
+ i6=(i6+1);
+ goto label1;
+ label2:return  this;
+ }  
+

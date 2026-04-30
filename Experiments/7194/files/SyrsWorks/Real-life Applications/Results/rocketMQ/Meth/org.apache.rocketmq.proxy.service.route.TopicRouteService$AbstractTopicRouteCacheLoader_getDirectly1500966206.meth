@@ -1,0 +1,37 @@
+org.apache.rocketmq.proxy.service.route.MessageQueueView org.apache.rocketmq.proxy.service.route.TopicRouteService$AbstractTopicRouteCacheLoader:getDirectly(java.lang.String topic)
+{
+java.lang.Object topicRouteData;
+  org.apache.rocketmq.proxy.service.route.MessageQueueView tmp;
+  boolean $stack5;
+  org.apache.rocketmq.logging.org.slf4j.Logger $stack8;
+  java.lang.Exception $stack9;
+  org.apache.rocketmq.proxy.service.route.MessageQueueView tmp$599374716;
+  org.apache.rocketmq.remoting.protocol.route.TopicRouteData tmp$1169058770;
+  java.lang.Throwable tmp$90119602;
+  label0:topicRouteData = this.loadTopicRouteData(topic);
+ tmp$1169058770=(org.apache.rocketmq.remoting.protocol.route.TopicRouteData) topicRouteData;
+ $stack5 = org.apache.rocketmq.proxy.service.route.TopicRouteService.isTopicRouteValid(tmp$1169058770);
+ if ($stack5==0) goto label1;
+ tmp$599374716=new org.apache.rocketmq.proxy.service.route.MessageQueueView;
+ tmp=tmp$599374716;
+ tmp$1169058770=(org.apache.rocketmq.remoting.protocol.route.TopicRouteData) topicRouteData;
+ tmp$599374716#org.apache.rocketmq.proxy.service.route.MessageQueueView(topic,tmp$1169058770);
+ tmp=tmp$599374716;
+ $stack8 = org.apache.rocketmq.proxy.service.route.TopicRouteService.access$100();
+ $stack8.info("load topic route from namesrv. topic: {}, queue: {}",(java.lang.Object)topic,(java.lang.Object)tmp$599374716);
+ label2:return  tmp$599374716;
+ label1:tmp=org.apache.rocketmq.proxy.service.route.MessageQueueView.WRAPPED_EMPTY_QUEUE;
+ label3:return  tmp;
+ label4:$stack9 = catch;
+ topicRouteData=$stack9;
+ tmp$90119602=(java.lang.Throwable) $stack9;
+ $stack5 = org.apache.rocketmq.proxy.service.route.TopicRouteHelper.isTopicNotExistError(tmp$90119602);
+ if ($stack5==0) goto label5;
+ tmp=org.apache.rocketmq.proxy.service.route.MessageQueueView.WRAPPED_EMPTY_QUEUE;
+ return  tmp;
+ label5:tmp$90119602=(java.lang.Throwable) $stack9;
+ throw tmp$90119602;
+ catch java.lang.Exception: label0 - label2 : label4;
+catch java.lang.Exception: label1 - label3 : label4;
+} 
+

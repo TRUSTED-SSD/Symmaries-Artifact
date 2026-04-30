@@ -1,0 +1,25 @@
+void org.apache.bookkeeper.proto.DefaultPerChannelBookieClientPool:close(boolean wait)
+{
+int i;
+  org.apache.bookkeeper.proto.PerChannelBookieClient[] $stack3;
+  int $stack4;
+  org.apache.bookkeeper.proto.PerChannelBookieClient $stack6;
+  org.apache.bookkeeper.proto.PerChannelBookieClient[] $stack8;
+  i=0;
+ label0:$stack3=this.clients;
+ $stack4=#$stack3;
+ if (i>=$stack4) goto label1;
+ $stack3=this.clients;
+ $stack6=$stack3[i];
+ $stack6.close(wait);
+ $stack8=this.clients;
+ $stack3=this.clientsV3Enforced;
+ if ($stack8==$stack3) goto label2;
+ $stack3=this.clientsV3Enforced;
+ $stack6=$stack3[i];
+ $stack6.close(wait);
+ label2:i=(i+1);
+ goto label0;
+ label1:return;
+ } 
+

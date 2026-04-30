@@ -1,0 +1,48 @@
+org.apache.rocketmq.remoting.protocol.RemotingCommand org.apache.rocketmq.broker.processor.SendMessageProcessor:preSend(io.netty.channel.ChannelHandlerContext ctx,org.apache.rocketmq.remoting.protocol.RemotingCommand request,org.apache.rocketmq.remoting.protocol.header.SendMessageRequestHeader requestHeader)
+{
+org.apache.rocketmq.remoting.protocol.RemotingCommand response;
+  long startTimestamp;
+  int $stack8;
+  org.apache.rocketmq.broker.BrokerController $stack9;
+  org.apache.rocketmq.common.BrokerConfig $stack11;
+  java.lang.String $stack12;
+  boolean $stack16;
+  org.apache.rocketmq.logging.org.slf4j.Logger $stack18;
+  org.apache.rocketmq.store.MessageStore $stack23;
+  long $stack24;
+  byte $stack25;
+  java.lang.Object[] $stack27;
+  response = org.apache.rocketmq.remoting.protocol.RemotingCommand.createResponseCommand(org.apache.rocketmq.remoting.protocol.header.SendMessageResponseHeader);
+ $stack8 = request.getOpaque();
+ response.setOpaque($stack8);
+ $stack9=this.brokerController;
+ $stack11 = $stack9.getBrokerConfig();
+ $stack12 = $stack11.getRegionId();
+ response.addExtField("MSG_REGION",$stack12);
+ $stack9=this.brokerController;
+ $stack11 = $stack9.getBrokerConfig();
+ $stack16 = $stack11.isTraceOn();
+ $stack12 = java.lang.String.valueOf($stack16);
+ response.addExtField("TRACE_ON",$stack12);
+ $stack18=org.apache.rocketmq.broker.processor.AbstractSendMessageProcessor.LOGGER;
+ $stack18.debug("Receive SendMessage request command {}",(java.lang.Object)request);
+ $stack9=this.brokerController;
+ $stack11 = $stack9.getBrokerConfig();
+ startTimestamp = $stack11.getStartAcceptSendRequestTimeStamp();
+ $stack9=this.brokerController;
+ $stack23 = $stack9.getMessageStore();
+ $stack24 = $stack23.now();
+ $stack25=($stack24 cmp startTimestamp);
+ if ($stack25>=0) goto label0;
+ response.setCode(1);
+ $stack27=new java.lang.Object[1];
+ $stack12 = org.apache.rocketmq.common.UtilAll.timeMillisToHumanString2(startTimestamp);
+ $stack27[0]=$stack12;
+ $stack12 = java.lang.String.format("broker unable to service, until %s",$stack27);
+ response.setRemark($stack12);
+ return  response;
+ label0:response.setCode(-1);
+ this#org.apache.rocketmq.broker.processor.AbstractSendMessageProcessor:msgCheck(ctx,requestHeader,request,response);
+ return  response;
+ } 
+

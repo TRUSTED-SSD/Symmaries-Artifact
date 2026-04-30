@@ -1,0 +1,11 @@
+java.lang.String org.apache.rocketmq.store.ConsumeQueue:queueKey (java.lang.String
+                                                                    @queueName,
+                                                                  org.apache.rocketmq.common.message.MessageExtBrokerInner
+                                                                    msgInner) {
+  guard = tt;
+  ret(level()) = level(@queueName) ⊔ level(msgInner) ⊔ obj_level(@queueName) ⊔ obj_level(msgInner);
+  ret(obj_level()) = level(@queueName) ⊔ level(msgInner) ⊔ obj_level(@queueName) ⊔ obj_level(msgInner);
+  ret(obj_level(@queueName)) = level(@queueName) ⊔ level(msgInner) ⊔ obj_level(@queueName) ⊔ obj_level(msgInner);
+  ret(obj_level(msgInner)) = level(@queueName) ⊔ level(msgInner) ⊔ obj_level(@queueName) ⊔ obj_level(msgInner);
+  ret(obj_level(this)) = level(@queueName) ⊔ level(msgInner) ⊔ obj_level(@queueName) ⊔ obj_level(msgInner) ⊔ obj_level(this);
+}

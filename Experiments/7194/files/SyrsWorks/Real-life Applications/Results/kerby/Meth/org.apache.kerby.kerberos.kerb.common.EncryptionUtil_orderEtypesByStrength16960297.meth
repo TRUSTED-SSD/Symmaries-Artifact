@@ -1,0 +1,37 @@
+static java.util.List org.apache.kerby.kerberos.kerb.common.EncryptionUtil:orderEtypesByStrength(java.util.List etypes)
+{
+java.util.ArrayList ordered;
+  java.util.Iterator l2;
+  java.lang.String algo;
+  java.util.Iterator l4;
+  org.apache.kerby.kerberos.kerb.type.base.EncryptionType encType;
+  java.lang.String foundAlgo;
+  int $stack8;
+  java.util.Map $stack9;
+  java.util.Collection $stack10;
+  boolean $stack12;
+  java.lang.Object $stack13;
+  ordered=new java.util.ArrayList;
+ $stack8 = etypes.size();
+ ordered#java.util.ArrayList($stack8);
+ $stack9=org.apache.kerby.kerberos.kerb.common.EncryptionUtil.CIPHER_ALGO_MAP;
+ $stack10 = $stack9.values();
+ l2 = $stack10.iterator();
+ label0:$stack12 = l2.hasNext();
+ if ($stack12==0) goto label1;
+ $stack13 = l2.next();
+ algo=(java.lang.String) $stack13;
+ l4 = etypes.iterator();
+ label2:$stack12 = l4.hasNext();
+ if ($stack12==0) goto label3;
+ $stack13 = l4.next();
+ encType=(org.apache.kerby.kerberos.kerb.type.base.EncryptionType) $stack13;
+ foundAlgo = org.apache.kerby.kerberos.kerb.common.EncryptionUtil.getAlgoNameFromEncType(encType);
+ $stack12 = algo.equals((java.lang.Object)foundAlgo);
+ if ($stack12==0) goto label4;
+ ordered.add((java.lang.Object)encType);
+ label4:goto label2;
+ label3:goto label0;
+ label1:return  ordered;
+ } 
+

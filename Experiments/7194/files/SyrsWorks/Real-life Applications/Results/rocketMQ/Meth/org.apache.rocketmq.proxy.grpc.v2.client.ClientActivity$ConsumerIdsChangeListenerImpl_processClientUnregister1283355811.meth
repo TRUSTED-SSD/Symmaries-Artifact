@@ -1,0 +1,46 @@
+void org.apache.rocketmq.proxy.grpc.v2.client.ClientActivity$ConsumerIdsChangeListenerImpl:processClientUnregister(java.lang.String group,java.lang.Object[] @args)
+{
+org.apache.rocketmq.broker.client.ClientChannelInfo clientChannelInfo;
+  org.apache.rocketmq.proxy.grpc.v2.channel.GrpcClientChannel removedChannel;
+  int $stack5;
+  java.lang.Object $stack6;
+  boolean $stack7;
+  io.netty.channel.Channel $stack9;
+  org.apache.rocketmq.proxy.grpc.v2.client.ClientActivity $stack11;
+  org.apache.rocketmq.proxy.grpc.v2.channel.GrpcChannelManager $stack12;
+  java.lang.String $stack13;
+  org.apache.rocketmq.logging.org.slf4j.Logger $stack15;
+  java.lang.Boolean $stack19;
+  java.lang.Object[] args;
+args=@args;
+if (args==null) goto label0;
+ $stack5=#args;
+ if ($stack5>=1) goto label1;
+ label0:return;
+ label1:$stack6=args[0];
+ $stack7=$stack6 instanceof org.apache.rocketmq.broker.client.ClientChannelInfo;
+ if ($stack7==0) goto label2;
+ $stack6=args[0];
+ clientChannelInfo=(org.apache.rocketmq.broker.client.ClientChannelInfo) $stack6;
+ $stack9 = clientChannelInfo.getChannel();
+ $stack7 = org.apache.rocketmq.proxy.common.channel.ChannelHelper.isRemote($stack9);
+ if ($stack7==0) goto label3;
+ return;
+ label3:$stack11=this.this$0;
+ $stack12 = org.apache.rocketmq.proxy.grpc.v2.client.ClientActivity.access$100($stack11);
+ $stack13 = clientChannelInfo.getClientId();
+ removedChannel = $stack12.removeChannel($stack13);
+ $stack15 = org.apache.rocketmq.proxy.grpc.v2.client.ClientActivity.access$000();
+ args=new java.lang.Object[3];
+ args[0]=group;
+ args[1]=clientChannelInfo;
+ if (removedChannel==null) goto label4;
+ $stack7=1;
+ goto label5;
+ label4:$stack7=0;
+ label5:$stack19 = java.lang.Boolean.valueOf($stack7);
+ args[2]=$stack19;
+ $stack15.info("remove grpc channel when client unregister. group:{}, clientChannelInfo:{}, removed:{}",args);
+ label2:return;
+ } 
+

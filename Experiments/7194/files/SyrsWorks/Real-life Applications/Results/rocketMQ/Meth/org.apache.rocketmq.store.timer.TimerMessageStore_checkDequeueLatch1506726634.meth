@@ -1,0 +1,38 @@
+void org.apache.rocketmq.store.timer.TimerMessageStore:checkDequeueLatch(java.util.concurrent.CountDownLatch latch,long delayedTime)
+{
+int checkNum;
+  java.util.concurrent.TimeUnit $stack5;
+  boolean $stack6;
+  java.util.concurrent.BlockingQueue $stack7;
+  int $stack8;
+  org.apache.rocketmq.logging.org.slf4j.Logger $stack14;
+  java.lang.Long $stack16;
+  $stack5=java.util.concurrent.TimeUnit.SECONDS;
+ $stack6 = latch.await(1L,$stack5);
+ if ($stack6==0) goto label0;
+ return;
+ label0:checkNum=0;
+ label1:$stack7=this.dequeuePutQueue;
+ $stack8 = $stack7.size();
+ if ($stack8>0) goto label2;
+ $stack6 = this.checkStateForGetMessages(1);
+ if ($stack6==0) goto label2;
+ $stack6 = this.checkStateForPutMessages(1);
+ if ($stack6!=0) goto label3;
+ goto label2;
+ label3:checkNum=(checkNum+1);
+ if (checkNum<2) goto label2;
+ goto label4;
+ label2:$stack5=java.util.concurrent.TimeUnit.SECONDS;
+ $stack6 = latch.await(1L,$stack5);
+ if ($stack6==0) goto label1;
+ goto label4;
+ label4:$stack5=java.util.concurrent.TimeUnit.SECONDS;
+ $stack6 = latch.await(1L,$stack5);
+ if ($stack6!=0) goto label5;
+ $stack14=org.apache.rocketmq.store.timer.TimerMessageStore.LOGGER;
+ $stack16 = java.lang.Long.valueOf(delayedTime);
+ $stack14.warn("Check latch failed delayedTime:{}",(java.lang.Object)$stack16);
+ label5:return;
+ } 
+

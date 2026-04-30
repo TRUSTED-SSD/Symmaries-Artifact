@@ -1,0 +1,52 @@
+void org.apache.rocketmq.common.logging.DefaultJoranConfiguratorExt:multiplicityWarning(java.lang.String resourceName,java.lang.ClassLoader classLoader)
+{
+java.util.Set urlSet;
+  java.util.Iterator e;
+  java.net.URL url;
+  int $stack7;
+  java.lang.StringBuilder $stack8;
+  java.lang.String $stack12;
+  boolean $stack14;
+  java.lang.Object $stack15;
+  java.io.IOException $stack25;
+  urlSet=null;
+ label0:urlSet = org.apache.rocketmq.logging.ch.qos.logback.core.util.Loader.getResources(resourceName,classLoader);
+ label1:goto label2;
+ label3:$stack25 = catch;
+ $stack8=new java.lang.StringBuilder;
+ $stack8#java.lang.StringBuilder();
+ $stack8 = $stack8.append("Failed to get url list for resource [");
+ $stack8 = $stack8.append(resourceName);
+ $stack8 = $stack8.append("]");
+ $stack12 = $stack8.toString();
+ this.addError($stack12,(java.lang.Throwable)$stack25);
+ label2:if (urlSet==null) goto label4;
+ $stack7 = urlSet.size();
+ if ($stack7<=1) goto label4;
+ $stack8=new java.lang.StringBuilder;
+ $stack8#java.lang.StringBuilder();
+ $stack8 = $stack8.append("Resource [");
+ $stack8 = $stack8.append(resourceName);
+ $stack8 = $stack8.append("] occurs multiple times on the classpath.");
+ $stack12 = $stack8.toString();
+ this.addWarn($stack12);
+ e = urlSet.iterator();
+ label5:$stack14 = e.hasNext();
+ if ($stack14==0) goto label4;
+ $stack15 = e.next();
+ url=(java.net.URL) $stack15;
+ $stack8=new java.lang.StringBuilder;
+ $stack8#java.lang.StringBuilder();
+ $stack8 = $stack8.append("Resource [");
+ $stack8 = $stack8.append(resourceName);
+ $stack8 = $stack8.append("] occurs at [");
+ $stack12 = url.toString();
+ $stack8 = $stack8.append($stack12);
+ $stack8 = $stack8.append("]");
+ $stack12 = $stack8.toString();
+ this.addWarn($stack12);
+ goto label5;
+ label4:return;
+ catch java.io.IOException: label0 - label1 : label3;
+} 
+

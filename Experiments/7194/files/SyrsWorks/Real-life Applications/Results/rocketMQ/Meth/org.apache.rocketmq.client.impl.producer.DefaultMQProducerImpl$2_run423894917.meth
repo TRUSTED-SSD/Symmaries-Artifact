@@ -1,0 +1,44 @@
+void org.apache.rocketmq.client.impl.producer.DefaultMQProducerImpl$2:run()
+{
+org.apache.rocketmq.client.producer.TransactionCheckListener transactionCheckListener;
+  org.apache.rocketmq.client.producer.TransactionListener transactionListener;
+  org.apache.rocketmq.client.producer.LocalTransactionState localTransactionState;
+  java.lang.Throwable exception;
+  org.apache.rocketmq.client.impl.producer.DefaultMQProducerImpl $stack6;
+  org.apache.rocketmq.logging.org.slf4j.Logger $stack11;
+  java.lang.String $stack12;
+  org.apache.rocketmq.common.message.MessageExt $stack13;
+  $stack6=this.this$0;
+ transactionCheckListener = $stack6.checkListener();
+ $stack6=this.this$0;
+ transactionListener = $stack6.getCheckListener();
+ if (transactionCheckListener!=null) goto label0;
+ if (transactionListener==null) goto label1;
+ label0:localTransactionState=org.apache.rocketmq.client.producer.LocalTransactionState.UNKNOW;
+ exception=null;
+ label2:if (transactionCheckListener==null) goto label3;
+ $stack13=this.message;
+ localTransactionState = transactionCheckListener.checkLocalTransactionState($stack13);
+ goto label4;
+ label3:$stack6=this.this$0;
+ $stack11 = org.apache.rocketmq.client.impl.producer.DefaultMQProducerImpl.access$100($stack6);
+ $stack12=this.group;
+ $stack11.debug("TransactionCheckListener is null, used new check API, producerGroup={}",(java.lang.Object)$stack12);
+ $stack13=this.message;
+ localTransactionState = transactionListener.checkLocalTransaction($stack13);
+ label4:goto label5;
+ label6:exception = catch;
+ $stack6=this.this$0;
+ $stack11 = org.apache.rocketmq.client.impl.producer.DefaultMQProducerImpl.access$100($stack6);
+ $stack11.error("Broker call checkTransactionState, but checkLocalTransactionState exception",exception);
+ label5:$stack12=this.group;
+ this#org.apache.rocketmq.client.impl.producer.DefaultMQProducerImpl$2:processTransactionState(localTransactionState,$stack12,exception);
+ goto label7;
+ label1:$stack6=this.this$0;
+ $stack11 = org.apache.rocketmq.client.impl.producer.DefaultMQProducerImpl.access$100($stack6);
+ $stack12=this.group;
+ $stack11.warn("CheckTransactionState, pick transactionCheckListener by group[{}] failed",(java.lang.Object)$stack12);
+ label7:return;
+ catch java.lang.Throwable: label2 - label4 : label6;
+} 
+

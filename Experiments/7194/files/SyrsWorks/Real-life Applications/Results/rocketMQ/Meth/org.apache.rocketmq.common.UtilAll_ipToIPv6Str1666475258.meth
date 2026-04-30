@@ -1,0 +1,35 @@
+static java.lang.String org.apache.rocketmq.common.UtilAll:ipToIPv6Str(byte[] ip)
+{
+java.lang.StringBuilder sb;
+  int i;
+  java.lang.String hex;
+  int $stack6;
+  byte $stack8;
+  short $stack9;
+  i=#ip;
+ if (i==16) goto label0;
+ return  null;
+ label0:sb=new java.lang.StringBuilder;
+ sb#java.lang.StringBuilder();
+ i=0;
+ label1:$stack6=#ip;
+ if (i>=$stack6) goto label2;
+ $stack8=ip[i];
+ $stack9=($stack8 & 255);
+ hex = java.lang.Integer.toHexString((int)$stack9);
+ $stack6 = hex.length();
+ if ($stack6>=2) goto label3;
+ sb.append(0);
+ label3:sb.append(hex);
+ $stack6=(i%2);
+ if ($stack6!=1) goto label4;
+ $stack6=#ip;
+ $stack6=($stack6-1);
+ if (i>=$stack6) goto label4;
+ sb.append(":");
+ label4:i=(i+1);
+ goto label1;
+ label2:hex = sb.toString();
+ return  hex;
+ } 
+

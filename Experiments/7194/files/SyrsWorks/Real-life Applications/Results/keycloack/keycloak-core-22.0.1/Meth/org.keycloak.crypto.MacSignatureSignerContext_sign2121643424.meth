@@ -1,0 +1,27 @@
+byte[] org.keycloak.crypto.MacSignatureSignerContext:sign(byte[] @data)
+{
+javax.crypto.Mac mac;
+  org.keycloak.crypto.KeyWrapper $stack3;
+  java.lang.String $stack4;
+  javax.crypto.SecretKey $stack8;
+  java.lang.Exception $stack10;
+  org.keycloak.crypto.SignatureException $stack11;
+  byte[] data;
+data=@data;
+label0:$stack3=this.key;
+ $stack4 = $stack3.getAlgorithmOrDefault();
+ $stack4 = org.keycloak.crypto.JavaAlgorithm.getJavaAlgorithm($stack4);
+ mac = javax.crypto.Mac.getInstance($stack4);
+ $stack3=this.key;
+ $stack8 = $stack3.getSecretKey();
+ mac.init((java.security.Key)$stack8);
+ mac.update(data);
+ data = mac.doFinal();
+ label1:return  data;
+ label2:$stack10 = catch;
+ $stack11=new org.keycloak.crypto.SignatureException;
+ $stack11#org.keycloak.crypto.SignatureException("Signing failed",(java.lang.Throwable)$stack10);
+ throw $stack11;
+ catch java.lang.Exception: label0 - label1 : label2;
+} 
+

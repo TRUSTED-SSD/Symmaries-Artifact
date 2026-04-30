@@ -1,0 +1,36 @@
+void org.apache.rocketmq.common.statistics.StatisticsItemScheduledIncrementPrinter:schedule(org.apache.rocketmq.common.statistics.StatisticsItem item)
+{
+java.util.concurrent.ScheduledFuture future;
+  java.lang.String $stack4;
+  java.lang.String $stack5;
+  org.apache.rocketmq.common.statistics.StatisticsItemScheduledIncrementPrinter$StatisticsItemSampleBrief $stack6;
+  java.lang.String[] $stack7;
+  org.apache.rocketmq.common.statistics.StatisticsItemScheduledIncrementPrinter$1 $stack8;
+  java.util.concurrent.ScheduledExecutorService $stack9;
+  long $stack10;
+  java.util.concurrent.TimeUnit $stack11;
+  long $stack12;
+  org.apache.rocketmq.common.statistics.StatisticsItemScheduledIncrementPrinter$2 $stack14;
+  $stack4 = item.getStatKind();
+ $stack5 = item.getStatObject();
+ $stack6=new org.apache.rocketmq.common.statistics.StatisticsItemScheduledIncrementPrinter$StatisticsItemSampleBrief;
+ $stack7=this.tpsItemNames;
+ $stack6#org.apache.rocketmq.common.statistics.StatisticsItemScheduledIncrementPrinter$StatisticsItemSampleBrief(item,$stack7);
+ this#org.apache.rocketmq.common.statistics.StatisticsItemScheduledIncrementPrinter:setItemSampleBrief($stack4,$stack5,$stack6);
+ $stack9=this.executor;
+ $stack8=new org.apache.rocketmq.common.statistics.StatisticsItemScheduledIncrementPrinter$1;
+ $stack8#org.apache.rocketmq.common.statistics.StatisticsItemScheduledIncrementPrinter$1(this,item);
+ $stack10 = this.getInitialDelay();
+ $stack12=this.interval;
+ $stack11=java.util.concurrent.TimeUnit.MILLISECONDS;
+ future = $stack9.scheduleAtFixedRate((java.lang.Runnable)$stack8,$stack10,$stack12,$stack11);
+ this.addFuture((java.lang.Object)item,(java.util.concurrent.Future)future);
+ $stack9=this.executor;
+ $stack14=new org.apache.rocketmq.common.statistics.StatisticsItemScheduledIncrementPrinter$2;
+ $stack14#org.apache.rocketmq.common.statistics.StatisticsItemScheduledIncrementPrinter$2(this,item);
+ $stack11=java.util.concurrent.TimeUnit.MILLISECONDS;
+ future = $stack9.scheduleAtFixedRate((java.lang.Runnable)$stack14,1000L,1000L,$stack11);
+ this.addFuture((java.lang.Object)item,(java.util.concurrent.Future)future);
+ return;
+ } 
+

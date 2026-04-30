@@ -1,0 +1,18 @@
+io.grpc.netty.shaded.io.netty.channel.ChannelHandler org.apache.rocketmq.proxy.grpc.OptionalSSLProtocolNegotiator:newHandler(io.grpc.netty.shaded.io.grpc.netty.GrpcHttp2ConnectionHandler grpcHttp2ConnectionHandler)
+{
+io.grpc.netty.shaded.io.netty.channel.ChannelHandler plaintext;
+  io.grpc.netty.shaded.io.netty.channel.ChannelHandler ssl;
+  io.grpc.netty.shaded.io.grpc.netty.InternalProtocolNegotiator$ProtocolNegotiator $stack4;
+  io.grpc.netty.shaded.io.netty.handler.ssl.SslContext $stack6;
+  org.apache.rocketmq.proxy.grpc.OptionalSSLProtocolNegotiator$PortUnificationServerHandler tmp$1346644595;
+  $stack4 = io.grpc.netty.shaded.io.grpc.netty.InternalProtocolNegotiators.serverPlaintext();
+ plaintext = $stack4.newHandler(grpcHttp2ConnectionHandler);
+ $stack6=this.sslContext;
+ $stack4 = io.grpc.netty.shaded.io.grpc.netty.InternalProtocolNegotiators.serverTls($stack6);
+ ssl = $stack4.newHandler(grpcHttp2ConnectionHandler);
+ tmp$1346644595=new org.apache.rocketmq.proxy.grpc.OptionalSSLProtocolNegotiator$PortUnificationServerHandler;
+ tmp$1346644595#org.apache.rocketmq.proxy.grpc.OptionalSSLProtocolNegotiator$PortUnificationServerHandler(ssl,plaintext);
+ plaintext=(io.grpc.netty.shaded.io.netty.channel.ChannelHandler) tmp$1346644595;
+ return  plaintext;
+ } 
+

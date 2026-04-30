@@ -1,0 +1,25 @@
+void org.apache.bookkeeper.bookie.DefaultEntryLogger:createNewCompactionLog()
+{
+java.lang.Object l1;
+  java.lang.Throwable l2;
+  java.lang.Object $stack3;
+  org.apache.bookkeeper.bookie.DefaultEntryLogger$BufferedLogChannel $stack4;
+  org.apache.bookkeeper.bookie.EntryLogManager $stack6;
+  $stack3=this.compactionLogLock;
+ l1=$stack3;
+ monitorenter $stack3;
+ label0:$stack4=this.compactionLogChannel;
+ if ($stack4!=null) goto label1;
+ $stack6=this.entryLogManager;
+ $stack4 = $stack6.createNewLogForCompaction();
+ this.compactionLogChannel=$stack4;
+ label1:monitorexit $stack3;
+ label2:goto label3;
+ label4:l2 = catch;
+ monitorexit $stack3;
+ label5:throw l2;
+ label3:return;
+ catch java.lang.Throwable: label0 - label2 : label4;
+catch java.lang.Throwable: label4 - label5 : label4;
+} 
+

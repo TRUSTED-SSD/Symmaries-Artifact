@@ -1,0 +1,120 @@
+    protected rifl.spec.ReferencePoint readReferencePoint(org.w3c.dom.Element) throws rifl.spec.RIFLIntegrityException
+    {
+        rifl.spec.java.JavaRIFLReader this;
+        org.w3c.dom.Element elem;
+        java.lang.String className, methodName, label;
+        boolean $stack8;
+        rifl.spec.java.JavaReferencePoint $stack11;
+        rifl.spec.RIFLIntegrityException $stack12;
+        java.lang.StringBuilder $stack13;
+
+        this := @this: rifl.spec.java.JavaRIFLReader;
+
+        elem := @parameter0: org.w3c.dom.Element;
+
+        className = interfaceinvoke elem.<org.w3c.dom.Element: java.lang.String getAttribute(java.lang.String)>("class");
+/*220*/
+/*220*/
+
+        methodName = interfaceinvoke elem.<org.w3c.dom.Element: java.lang.String getAttribute(java.lang.String)>("method");
+/*221*/
+/*221*/
+
+        label = interfaceinvoke elem.<org.w3c.dom.Element: java.lang.String getAttribute(java.lang.String)>("label");
+/*222*/
+/*222*/
+
+        $stack8 = staticinvoke <rifl.spec.java.JavaSyntaxChecker: boolean isClassNameCorrect(java.lang.String)>(className);
+/*224*/
+
+        if $stack8 != 0 goto label1;
+/*224*/
+
+        $stack12 = new rifl.spec.RIFLIntegrityException;
+/*225*/
+
+        $stack13 = new java.lang.StringBuilder;
+/*225*/
+
+        specialinvoke $stack13.<java.lang.StringBuilder: void <init>(java.lang.String)>("Invalid class name: ");
+/*225*/
+
+        $stack13 = virtualinvoke $stack13.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>(className);
+/*225*/
+
+        className = virtualinvoke $stack13.<java.lang.StringBuilder: java.lang.String toString()>();
+/*225*/
+
+        specialinvoke $stack12.<rifl.spec.RIFLIntegrityException: void <init>(java.lang.String)>(className);
+/*225*/
+
+        throw $stack12;
+/*225*/
+
+     label1:
+        $stack8 = staticinvoke <rifl.spec.java.JavaSyntaxChecker: boolean isMethodNameCorrect(java.lang.String)>(methodName);
+/*228*/
+
+        if $stack8 != 0 goto label2;
+/*228*/
+
+        $stack12 = new rifl.spec.RIFLIntegrityException;
+/*229*/
+
+        $stack13 = new java.lang.StringBuilder;
+/*229*/
+
+        specialinvoke $stack13.<java.lang.StringBuilder: void <init>(java.lang.String)>("Invalid method name: ");
+/*229*/
+
+        $stack13 = virtualinvoke $stack13.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>(methodName);
+/*229*/
+
+        className = virtualinvoke $stack13.<java.lang.StringBuilder: java.lang.String toString()>();
+/*229*/
+
+        specialinvoke $stack12.<rifl.spec.RIFLIntegrityException: void <init>(java.lang.String)>(className);
+/*229*/
+
+        throw $stack12;
+/*229*/
+
+     label2:
+        $stack8 = staticinvoke <rifl.spec.java.JavaSyntaxChecker: boolean isLabelCorrect(java.lang.String)>(label);
+/*232*/
+
+        if $stack8 != 0 goto label3;
+/*232*/
+
+        $stack12 = new rifl.spec.RIFLIntegrityException;
+/*233*/
+
+        $stack13 = new java.lang.StringBuilder;
+/*233*/
+
+        specialinvoke $stack13.<java.lang.StringBuilder: void <init>(java.lang.String)>("Invalid label: ");
+/*233*/
+
+        $stack13 = virtualinvoke $stack13.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>(label);
+/*233*/
+
+        className = virtualinvoke $stack13.<java.lang.StringBuilder: java.lang.String toString()>();
+/*233*/
+
+        specialinvoke $stack12.<rifl.spec.RIFLIntegrityException: void <init>(java.lang.String)>(className);
+/*233*/
+
+        throw $stack12;
+/*233*/
+
+     label3:
+        $stack11 = new rifl.spec.java.JavaReferencePoint;
+/*236*/
+
+        specialinvoke $stack11.<rifl.spec.java.JavaReferencePoint: void <init>(java.lang.String,java.lang.String,java.lang.String)>(className, methodName, label);
+/*236*/
+
+        return $stack11;
+/*236*/
+    }
+

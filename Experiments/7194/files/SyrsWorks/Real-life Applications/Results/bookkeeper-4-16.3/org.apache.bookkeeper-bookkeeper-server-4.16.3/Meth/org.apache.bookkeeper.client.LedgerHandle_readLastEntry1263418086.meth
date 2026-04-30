@@ -1,0 +1,28 @@
+org.apache.bookkeeper.client.LedgerEntry org.apache.bookkeeper.client.LedgerHandle:readLastEntry()
+{
+long lastEntryId;
+  java.util.concurrent.CompletableFuture result;
+  byte $stack5;
+  org.apache.bookkeeper.client.SyncCallbackUtils$SyncReadCallback $stack7;
+  java.lang.Object $stack8;
+  java.util.Enumeration $stack9;
+  org.apache.bookkeeper.client.LedgerEntry $stack11;
+  org.apache.bookkeeper.client.BKException$BKNoSuchEntryException $stack12;
+  lastEntryId = this.getLastAddConfirmed();
+ $stack5=(lastEntryId cmp 0L);
+ if ($stack5>=0) goto label0;
+ $stack12=new org.apache.bookkeeper.client.BKException$BKNoSuchEntryException;
+ $stack12#org.apache.bookkeeper.client.BKException$BKNoSuchEntryException();
+ throw $stack12;
+ label0:result=new java.util.concurrent.CompletableFuture;
+ result#java.util.concurrent.CompletableFuture();
+ $stack7=new org.apache.bookkeeper.client.SyncCallbackUtils$SyncReadCallback;
+ $stack7#org.apache.bookkeeper.client.SyncCallbackUtils$SyncReadCallback(result);
+ this.asyncReadEntries(lastEntryId,lastEntryId,(org.apache.bookkeeper.client.AsyncCallback$ReadCallback)$stack7,null);
+ $stack8 = org.apache.bookkeeper.client.SyncCallbackUtils.waitForResult(result);
+ $stack9=(java.util.Enumeration) $stack8;
+ $stack8 = $stack9.nextElement();
+ $stack11=(org.apache.bookkeeper.client.LedgerEntry) $stack8;
+ return  $stack11;
+ } 
+

@@ -1,0 +1,56 @@
+long org.apache.bookkeeper.bookie.FileInfo:write(java.nio.ByteBuffer[] buffs,long position)
+{
+long total;
+  long rc;
+  java.lang.Throwable l8;
+  java.nio.channels.FileChannel $stack12;
+  int $stack14;
+  java.nio.ByteBuffer $stack16;
+  byte $stack21;
+  java.io.IOException $stack30;
+  this.checkOpen((boolean)1);
+ total=0L;
+ label0:$stack12=this.fc;
+ rc=(position+1024L);
+ $stack12.position(rc);
+ label1:$stack14=#buffs;
+ $stack14=($stack14-1);
+ $stack16=buffs[$stack14];
+ $stack14 = $stack16.remaining();
+ if ($stack14<=0) goto label2;
+ $stack12=this.fc;
+ rc = $stack12.write(buffs);
+ $stack21=(rc cmp 0L);
+ if ($stack21>0) goto label3;
+ $stack30=new java.io.IOException;
+ $stack30#java.io.IOException("Short write");
+ throw $stack30;
+ label3:total=(total+rc);
+ goto label1;
+ label2:$stack12=this.fc;
+ $stack12.force((boolean)1);
+ position=(position+1024L);
+ rc=(position+total);
+ position=this.size;
+ $stack21=(rc cmp position);
+ if ($stack21<=0) goto label4;
+ this.size=rc;
+ label4:goto label5;
+ label6:l8 = catch;
+ label7:$stack12=this.fc;
+ $stack12.force((boolean)1);
+ position=(position+1024L);
+ position=(position+total);
+ total=this.size;
+ $stack21=(position cmp total);
+ if ($stack21<=0) goto label8;
+ this.size=position;
+ label8:throw l8;
+ label5:$stack12=this.fc;
+ position = $stack12.size();
+ this.sizeSinceLastWrite=position;
+ return  total;
+ catch java.lang.Throwable: label0 - label2 : label6;
+catch java.lang.Throwable: label6 - label7 : label6;
+} 
+

@@ -1,0 +1,48 @@
+void org.xerial.snappy.SnappyFramedOutputStream:writeCompressed(java.nio.ByteBuffer @l1)
+{
+byte[] l2;
+  int l3;
+  int l4;
+  int l5;
+  java.util.zip.Checksum $stack8;
+  java.nio.ByteBuffer $stack10;
+  java.nio.ByteBuffer $stack19;
+  double $stack23;
+  double $stack24;
+  byte $stack27;
+  java.nio.channels.WritableByteChannel $stack29;
+  java.nio.ByteBuffer l1;
+l1=@l1;
+l2 = l1.array();
+ l3 = l1.remaining();
+ $stack8=this.crc32;
+ l4 = org.xerial.snappy.SnappyFramed.maskedCrc32c($stack8,l2,0,l3);
+ $stack10=this.directInputBuffer;
+ $stack10.clear();
+ $stack10=this.directInputBuffer;
+ $stack10.put(l1);
+ $stack10=this.directInputBuffer;
+ $stack10.flip();
+ $stack10=this.outputBuffer;
+ $stack10.clear();
+ $stack19=this.directInputBuffer;
+ $stack10=this.outputBuffer;
+ org.xerial.snappy.Snappy.compress($stack19,$stack10);
+ $stack10=this.outputBuffer;
+ l5 = $stack10.remaining();
+ $stack24=(double) l5;
+ $stack23=(double) l3;
+ $stack24=($stack24/$stack23);
+ $stack23=this.minCompressionRatio;
+ $stack27=($stack24 cmpg $stack23);
+ if ($stack27>0) goto label0;
+ $stack29=this.out;
+ l1=this.outputBuffer;
+ this#org.xerial.snappy.SnappyFramedOutputStream:writeBlock($stack29,l1,(boolean)1,l4);
+ goto label1;
+ label0:l1.flip();
+ $stack29=this.out;
+ this#org.xerial.snappy.SnappyFramedOutputStream:writeBlock($stack29,l1,(boolean)0,l4);
+ label1:return;
+ } 
+

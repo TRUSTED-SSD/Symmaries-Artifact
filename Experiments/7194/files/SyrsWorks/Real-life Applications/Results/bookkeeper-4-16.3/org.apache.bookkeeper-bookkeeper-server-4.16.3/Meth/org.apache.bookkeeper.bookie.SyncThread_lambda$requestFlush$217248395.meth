@@ -1,0 +1,36 @@
+void org.apache.bookkeeper.bookie.SyncThread:lambda$requestFlush$2()
+{
+long startTime;
+  java.lang.Throwable l4;
+  org.apache.bookkeeper.stats.Counter $stack6;
+  java.util.concurrent.TimeUnit $stack8;
+  java.lang.Throwable $stack9;
+  org.slf4j.Logger $stack14;
+  startTime = java.lang.System.nanoTime();
+ label0:this#org.apache.bookkeeper.bookie.SyncThread:flush();
+ label1:$stack6=this.syncExecutorTime;
+ startTime = org.apache.bookkeeper.common.util.MathUtils.elapsedNanos(startTime);
+ $stack8=java.util.concurrent.TimeUnit.NANOSECONDS;
+ $stack6.addLatency(startTime,$stack8);
+ goto label2;
+ label3:l4 = catch;
+ $stack14=org.apache.bookkeeper.bookie.SyncThread.log;
+ $stack14.error("Exception flushing ledgers ",l4);
+ label4:$stack6=this.syncExecutorTime;
+ startTime = org.apache.bookkeeper.common.util.MathUtils.elapsedNanos(startTime);
+ $stack8=java.util.concurrent.TimeUnit.NANOSECONDS;
+ $stack6.addLatency(startTime,$stack8);
+ goto label2;
+ label5:$stack9 = catch;
+ l4=$stack9;
+ label6:$stack6=this.syncExecutorTime;
+ startTime = org.apache.bookkeeper.common.util.MathUtils.elapsedNanos(startTime);
+ $stack8=java.util.concurrent.TimeUnit.NANOSECONDS;
+ $stack6.addLatency(startTime,$stack8);
+ throw $stack9;
+ label2:return;
+ catch java.lang.Throwable: label0 - label1 : label3;
+catch java.lang.Throwable: label3 - label4 : label5;
+catch java.lang.Throwable: label5 - label6 : label5;
+} 
+

@@ -1,0 +1,21 @@
+void org.apache.rocketmq.store.ha.autoswitch.AutoSwitchHAService:removeConnection(org.apache.rocketmq.store.ha.HAConnection conn)
+{
+java.util.Set syncStateSet;
+  java.lang.String slave;
+  org.apache.rocketmq.store.DefaultMessageStore $stack4;
+  boolean $stack5;
+  org.apache.rocketmq.store.ha.autoswitch.AutoSwitchHAConnection $stack7;
+  $stack4=this.defaultMessageStore;
+ $stack5 = $stack4.isShutdown();
+ if ($stack5!=0) goto label0;
+ syncStateSet = this.getSyncStateSet();
+ $stack7=(org.apache.rocketmq.store.ha.autoswitch.AutoSwitchHAConnection) conn;
+ slave = $stack7.getSlaveAddress();
+ $stack5 = syncStateSet.contains((java.lang.Object)slave);
+ if ($stack5==0) goto label0;
+ syncStateSet.remove((java.lang.Object)slave);
+ this#org.apache.rocketmq.store.ha.autoswitch.AutoSwitchHAService(syncStateSet);
+ label0:this#org.apache.rocketmq.store.ha.DefaultHAService(conn);
+ return;
+ } 
+

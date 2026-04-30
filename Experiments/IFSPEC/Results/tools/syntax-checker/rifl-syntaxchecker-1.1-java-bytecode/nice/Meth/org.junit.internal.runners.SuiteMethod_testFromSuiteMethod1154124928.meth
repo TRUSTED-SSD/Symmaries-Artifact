@@ -1,0 +1,41 @@
+static junit.framework.Test org.junit.internal.runners.SuiteMethod:testFromSuiteMethod(java.lang.Class klass)
+{
+java.lang.reflect.Method suiteMethod;
+  junit.framework.Test suite;
+  java.lang.Class[] $stack4;
+  int $stack6;
+  boolean $stack7;
+  java.lang.Object[] $stack8;
+  java.lang.Object $stack9;
+  java.lang.Exception $stack10;
+  java.lang.StringBuilder $stack11;
+  java.lang.String $stack12;
+  java.lang.reflect.InvocationTargetException $stack16;
+  java.lang.Throwable $stack17;
+  suiteMethod=null;
+ suite=null;
+ label0:$stack4=new java.lang.Class[0];
+ suiteMethod = klass.getMethod("suite",$stack4);
+ $stack6 = suiteMethod.getModifiers();
+ $stack7 = java.lang.reflect.Modifier.isStatic($stack6);
+ if ($stack7!=0) goto label1;
+ $stack10=new java.lang.Exception;
+ $stack11=new java.lang.StringBuilder;
+ $stack11#java.lang.StringBuilder();
+ $stack12 = klass.getName();
+ $stack11 = $stack11.append($stack12);
+ $stack11 = $stack11.append(".suite() must be static");
+ $stack12 = $stack11.toString();
+ $stack10#java.lang.Exception($stack12);
+ throw $stack10;
+ label1:$stack8=new java.lang.Object[0];
+ $stack9 = suiteMethod.invoke(null,$stack8);
+ suite=(junit.framework.Test) $stack9;
+ label2:goto label3;
+ label4:$stack16 = catch;
+ $stack17 = $stack16.getCause();
+ throw $stack17;
+ label3:return  suite;
+ catch java.lang.reflect.InvocationTargetException: label0 - label2 : label4;
+} 
+

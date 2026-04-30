@@ -1,0 +1,37 @@
+void org.apache.rocketmq.broker.dledger.DLedgerRoleChangeHandler:handleSlaveSynchronize(org.apache.rocketmq.store.config.BrokerRole role)
+{
+org.apache.rocketmq.store.config.BrokerRole $stack2;
+  java.util.concurrent.Future $stack3;
+  org.apache.rocketmq.broker.BrokerController $stack4;
+  org.apache.rocketmq.broker.slave.SlaveSynchronize $stack5;
+  java.util.concurrent.ScheduledExecutorService $stack14;
+  org.apache.rocketmq.broker.dledger.DLedgerRoleChangeHandler$2 $stack15;
+  java.util.concurrent.TimeUnit $stack16;
+  java.util.concurrent.ScheduledFuture $stack17;
+  $stack2=org.apache.rocketmq.store.config.BrokerRole.SLAVE;
+ if (role!=$stack2) goto label0;
+ $stack3=this.slaveSyncFuture;
+ if (null==$stack3) goto label1;
+ $stack3=this.slaveSyncFuture;
+ $stack3.cancel((boolean)0);
+ label1:$stack4=this.brokerController;
+ $stack5 = $stack4.getSlaveSynchronize();
+ $stack5.setMasterAddr(null);
+ $stack4=this.brokerController;
+ $stack14 = $stack4.getScheduledExecutorService();
+ $stack15=new org.apache.rocketmq.broker.dledger.DLedgerRoleChangeHandler$2;
+ $stack15#org.apache.rocketmq.broker.dledger.DLedgerRoleChangeHandler$2(this);
+ $stack16=java.util.concurrent.TimeUnit.MILLISECONDS;
+ $stack17 = $stack14.scheduleAtFixedRate((java.lang.Runnable)$stack15,3000L,3000L,$stack16);
+ this.slaveSyncFuture=$stack17;
+ goto label2;
+ label0:$stack3=this.slaveSyncFuture;
+ if (null==$stack3) goto label3;
+ $stack3=this.slaveSyncFuture;
+ $stack3.cancel((boolean)0);
+ label3:$stack4=this.brokerController;
+ $stack5 = $stack4.getSlaveSynchronize();
+ $stack5.setMasterAddr(null);
+ label2:return;
+ } 
+

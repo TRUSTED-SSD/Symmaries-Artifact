@@ -1,0 +1,38 @@
+org.apache.rocketmq.proxy.grpc.v2.channel.GrpcClientChannel org.apache.rocketmq.proxy.grpc.v2.client.ClientActivity:registerProducer(org.apache.rocketmq.proxy.common.ProxyContext ctx,java.lang.String topicName)
+{
+java.lang.String clientId;
+  org.apache.rocketmq.remoting.protocol.LanguageCode languageCode;
+  org.apache.rocketmq.proxy.grpc.v2.channel.GrpcClientChannel channel;
+  org.apache.rocketmq.common.attribute.TopicMessageType topicMessageType;
+  java.lang.String $stack9;
+  org.apache.rocketmq.proxy.grpc.v2.channel.GrpcChannelManager $stack11;
+  int $stack15;
+  org.apache.rocketmq.proxy.processor.MessagingProcessor $stack16;
+  org.apache.rocketmq.proxy.service.metadata.MetadataService $stack18;
+  org.apache.rocketmq.common.attribute.TopicMessageType $stack20;
+  boolean $stack21;
+  org.apache.rocketmq.broker.client.ClientChannelInfo tmp$1924228000;
+  io.netty.channel.Channel tmp$669800838;
+  clientId = ctx.getClientID();
+ $stack9 = ctx.getLanguage();
+ languageCode = org.apache.rocketmq.remoting.protocol.LanguageCode.valueOf($stack9);
+ $stack11=this.grpcChannelManager;
+ channel = $stack11.createChannel(ctx,clientId);
+ tmp$1924228000=new org.apache.rocketmq.broker.client.ClientChannelInfo;
+ $stack9 = ctx.getClientVersion();
+ $stack15 = this#org.apache.rocketmq.proxy.grpc.v2.client.ClientActivity:parseClientVersion($stack9);
+ tmp$669800838=(io.netty.channel.Channel) channel;
+ tmp$1924228000#org.apache.rocketmq.broker.client.ClientChannelInfo(tmp$669800838,clientId,languageCode,$stack15);
+ $stack16=this.messagingProcessor;
+ $stack16.registerProducer(ctx,topicName,tmp$1924228000);
+ $stack16=this.messagingProcessor;
+ $stack18 = $stack16.getMetadataService();
+ topicMessageType = $stack18.getTopicMessageType(topicName);
+ $stack20=org.apache.rocketmq.common.attribute.TopicMessageType.TRANSACTION;
+ $stack21 = $stack20.equals((java.lang.Object)topicMessageType);
+ if ($stack21==0) goto label0;
+ $stack16=this.messagingProcessor;
+ $stack16.addTransactionSubscription(ctx,topicName,topicName);
+ label0:return  channel;
+ } 
+

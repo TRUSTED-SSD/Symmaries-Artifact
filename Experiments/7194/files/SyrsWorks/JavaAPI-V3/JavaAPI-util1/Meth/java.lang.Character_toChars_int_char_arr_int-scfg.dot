@@ -1,0 +1,123 @@
+digraph G {
+  node [shape=box, ];
+  "pc0_js1" [label="〈$z0 = java.lang.Character.isBmpCodePoint (i0), js1〉\n\
+tt",
+             ];
+  "pc1_js1" [label="〈if ($z0 == 0) goto label0, js1〉", ];
+  "pc2_js1" [label="〈$c2 = (char) i0, js1〉", ];
+  "pc3_js1" [label="〈r0[i1] = $c2, js1〉", ];
+  "pc4_js1" [label="〈return 1, js1〉", ];
+  "pc5_js1" [label="〈label0: $z1 = java.lang.Character.isValidCodePoint (i0), js1〉\n\
+tt",
+             ];
+  "pc6_js1" [label="〈if ($z1 == 0) goto label1, js1〉", ];
+  "pc7_js1" [label="〈java.lang.Character.toSurrogates (i0, r0, i1), js1〉\n\
+tt",
+             ];
+  "pc8_js1" [label="〈return 2, js1〉", ];
+  "pc9_js1" [label="〈label1: $r1 = new java.lang.IllegalArgumentException, js1〉",
+             ];
+  "pc10_js1" [label="〈$r1#java.lang.IllegalArgumentException.init (), js1〉\n\
+tt",
+              ];
+  "pc11_js1" [label="〈throw $r1, js1〉", ];
+  "pc12_js1" [label="〈sink, js1〉", ];
+  "pc12_js2" [label="〈sink, js2〉\n\
+obj_level(r0) ⊑ ret(obj_level(r0))' ∧ (ϕ ≠ S11 ∨ pc ⊔ level($r1) ⊑ ret(level())') ∧ (ϕ ≠ S4 ∨ pc ⊑ ret(level())') ∧ (ϕ ≠ S8 ∨ pc ⊑ ret(level())')",
+              ];
+  
+  
+  "pc0_js1" -> "pc1_js1" [label="tt,\n\
+{level($z0) := pc ⊔ level(i0)}", ];
+  "pc1_js1" -> "pc2_js1" [label="υ ∧ ¬ω ∨ ¬τ ∧ ¬υ ∧ level($z0) ⊐ pc ∨ ¬τ ∧ ¬υ ∧ level($z0) ⊑ pc,\n\
+{$r1.><$r1' := if ¬(¬τ ∧ ¬υ ∧ level($z0) ⊐ pc) ∨ υ ∧ ¬ω then $r1.><$r1' else $r1.><$r1,\n\
+ $r1.><r0' := if ¬(¬τ ∧ ¬υ ∧ level($z0) ⊐ pc) ∨ υ ∧ ¬ω then $r1.><r0' else $r1.><r0,\n\
+ pc := if ¬(¬τ ∧ ¬υ ∧ level($z0) ⊐ pc) ∨ υ ∧ ¬ω then pc else pc ⊔ level($z0),\n\
+ obj_level($r1)' := if ¬(¬τ ∧ ¬υ ∧ level($z0) ⊐ pc) ∨ υ ∧ ¬ω then obj_level($r1)' else obj_level($r1),\n\
+ obj_level(r0)' := if ¬(¬τ ∧ ¬υ ∧ level($z0) ⊐ pc) ∨ υ ∧ ¬ω then obj_level(r0)' else obj_level(r0),\n\
+ hr := if ¬(¬τ ∧ ¬υ ∧ level($z0) ⊐ pc) ∨ υ ∧ ¬ω then hr else P1}",
+                          ];
+  "pc1_js1" -> "pc5_js1" [label="υ ∧ ω ∨ τ ∧ ¬υ ∧ level($z0) ⊐ pc ∨ τ ∧ ¬υ ∧ level($z0) ⊑ pc,\n\
+{$r1.><$r1' := if ¬(τ ∧ ¬υ ∧ level($z0) ⊐ pc) ∨ υ ∧ ω then $r1.><$r1' else $r1.><$r1,\n\
+ $r1.><r0' := if ¬(τ ∧ ¬υ ∧ level($z0) ⊐ pc) ∨ υ ∧ ω then $r1.><r0' else $r1.><r0,\n\
+ pc := if ¬(τ ∧ ¬υ ∧ level($z0) ⊐ pc) ∨ υ ∧ ω then pc else pc ⊔ level($z0),\n\
+ obj_level($r1)' := if ¬(τ ∧ ¬υ ∧ level($z0) ⊐ pc) ∨ υ ∧ ω then obj_level($r1)' else obj_level($r1),\n\
+ obj_level(r0)' := if ¬(τ ∧ ¬υ ∧ level($z0) ⊐ pc) ∨ υ ∧ ω then obj_level(r0)' else obj_level(r0),\n\
+ hr := if ¬(τ ∧ ¬υ ∧ level($z0) ⊐ pc) ∨ υ ∧ ω then hr else P1}",
+                          ];
+  "pc2_js1" -> "pc3_js1" [label="tt,\n\
+{level($c2) := pc ⊔ (if υ then level($c2) else level(i0))}",
+                          ];
+  "pc3_js1" -> "pc4_js1" [label="tt,\n\
+{obj_level($r1) := obj_level($r1) ⊔ (if $r1.><r0 then pc ⊔ (if υ then ⊥ else level($c2) ⊔ level(i1)) else ⊥),\n\
+ obj_level(r0) := pc ⊔ obj_level(r0) ⊔ (if υ then ⊥ else level($c2) ⊔ level(i1))}",
+                          ];
+  "pc4_js1" -> "pc12_js1" [label="tt,\n\
+{ϕ := S4}", ];
+  "pc5_js1" -> "pc6_js1" [label="tt,\n\
+{level($z1) := pc ⊔ (if υ then level($z1) else pc ⊔ level(i0))}",
+                          ];
+  "pc6_js1" -> "pc7_js1" [label="υ ∧ ¬ω ∨ ¬τ ∧ ¬υ ∧ level($z1) ⊐ pc ∨ ¬τ ∧ ¬υ ∧ level($z1) ⊑ pc,\n\
+{$r1.><$r1' := if ¬(¬τ ∧ ¬υ ∧ level($z1) ⊐ pc) ∨ υ ∧ ¬ω then $r1.><$r1' else $r1.><$r1,\n\
+ $r1.><r0' := if ¬(¬τ ∧ ¬υ ∧ level($z1) ⊐ pc) ∨ υ ∧ ¬ω then $r1.><r0' else $r1.><r0,\n\
+ pc := if ¬(¬τ ∧ ¬υ ∧ level($z1) ⊐ pc) ∨ υ ∧ ¬ω then pc else pc ⊔ level($z1),\n\
+ obj_level($r1)' := if ¬(¬τ ∧ ¬υ ∧ level($z1) ⊐ pc) ∨ υ ∧ ¬ω then obj_level($r1)' else obj_level($r1),\n\
+ obj_level(r0)' := if ¬(¬τ ∧ ¬υ ∧ level($z1) ⊐ pc) ∨ υ ∧ ¬ω then obj_level(r0)' else obj_level(r0),\n\
+ hr := if ¬(¬τ ∧ ¬υ ∧ level($z1) ⊐ pc) ∨ υ ∧ ¬ω then hr else P6}",
+                          ];
+  "pc6_js1" -> "pc9_js1" [label="υ ∧ ω ∨ τ ∧ ¬υ ∧ level($z1) ⊐ pc ∨ τ ∧ ¬υ ∧ level($z1) ⊑ pc,\n\
+{$r1.><$r1' := if ¬(τ ∧ ¬υ ∧ level($z1) ⊐ pc) ∨ υ ∧ ω then $r1.><$r1' else $r1.><$r1,\n\
+ $r1.><r0' := if ¬(τ ∧ ¬υ ∧ level($z1) ⊐ pc) ∨ υ ∧ ω then $r1.><r0' else $r1.><r0,\n\
+ pc := if ¬(τ ∧ ¬υ ∧ level($z1) ⊐ pc) ∨ υ ∧ ω then pc else pc ⊔ level($z1),\n\
+ obj_level($r1)' := if ¬(τ ∧ ¬υ ∧ level($z1) ⊐ pc) ∨ υ ∧ ω then obj_level($r1)' else obj_level($r1),\n\
+ obj_level(r0)' := if ¬(τ ∧ ¬υ ∧ level($z1) ⊐ pc) ∨ υ ∧ ω then obj_level(r0)' else obj_level(r0),\n\
+ hr := if ¬(τ ∧ ¬υ ∧ level($z1) ⊐ pc) ∨ υ ∧ ω then hr else P6}",
+                          ];
+  "pc7_js1" -> "pc8_js1" [label="tt,\n\
+{obj_level($r1) := obj_level($r1) ⊔ (if $r1.><r0 then if pc ⊔ level(i0) ⊔ level(i1) ⊔ obj_level(r0) ⊑ if υ then pc else ⊤ then pc ⊔ level(i0) ⊔ level(i1) ⊔ obj_level(r0) else if υ then pc else ⊤ else ⊥),\n\
+ obj_level(r0) := obj_level(r0) ⊔ (if pc ⊔ level(i0) ⊔ level(i1) ⊔ obj_level(r0) ⊑ if υ then pc else ⊤ then pc ⊔ level(i0) ⊔ level(i1) ⊔ obj_level(r0) else if υ then pc else ⊤)}",
+                          ];
+  "pc8_js1" -> "pc12_js1" [label="tt,\n\
+{ϕ := S8}", ];
+  "pc9_js1" -> "pc10_js1" [label="tt,\n\
+{$r1.><$r1 := ff,\n\
+ $r1.><r0 := ff,\n\
+ level($r1) := pc ⊔ (if υ then level($r1) else ⊥),\n\
+ obj_level($r1) := pc}",
+                           ];
+  "pc10_js1" -> "pc11_js1" [label="tt,\n\
+{$r1.><$r1 := ff,\n\
+ $r1.><r0 := ff,\n\
+ obj_level($r1) := obj_level($r1) ⊔ (if pc ⊔ level($r1) ⊔ obj_level($r1) ⊑ if υ then pc else ⊤ then pc ⊔ level($r1) ⊔ obj_level($r1) else if υ then pc else ⊤)}",
+                            ];
+  "pc11_js1" -> "pc12_js1" [label="tt,\n\
+{ϕ := S11}", ];
+  "pc12_js1" -> "pc1_js1" [label="¬υ ∧ hr = P1,\n\
+{υ := tt,\n\
+ $r1.><$r1 := $r1.><$r1',\n\
+ $r1.><r0 := $r1.><r0',\n\
+ $r1.><$r1' := $r1.><$r1,\n\
+ $r1.><r0' := $r1.><r0,\n\
+ obj_level($r1) := obj_level($r1)',\n\
+ obj_level(r0) := obj_level(r0)',\n\
+ obj_level($r1)' := obj_level($r1),\n\
+ obj_level(r0)' := obj_level(r0)}",
+                           ];
+  "pc12_js1" -> "pc6_js1" [label="¬υ ∧ hr = P6,\n\
+{υ := tt,\n\
+ $r1.><$r1 := $r1.><$r1',\n\
+ $r1.><r0 := $r1.><r0',\n\
+ $r1.><$r1' := $r1.><$r1,\n\
+ $r1.><r0' := $r1.><r0,\n\
+ obj_level($r1) := obj_level($r1)',\n\
+ obj_level(r0) := obj_level(r0)',\n\
+ obj_level($r1)' := obj_level($r1),\n\
+ obj_level(r0)' := obj_level(r0)}",
+                           ];
+  "pc12_js1" -> "pc12_js2" [label="¬(hr = P1 ∨ hr = P6) ∨ υ ∧ (hr = P1 ∨ hr = P6),\n\
+{υ := υ ∧ ¬(υ ∧ (hr = P1 ∨ hr = P6)),\n\
+ obj_level($r1) := if υ ∧ (hr = P1 ∨ hr = P6) then obj_level($r1) ⊔ (if $r1.><r0 then obj_level(r0) else ⊥) else obj_level($r1),\n\
+ hr := if υ ∧ (hr = P1 ∨ hr = P6) then P. else hr}",
+                            ];
+  
+  }

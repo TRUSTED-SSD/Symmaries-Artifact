@@ -1,0 +1,24 @@
+void org.apache.rocketmq.client.impl.producer.DefaultMQProducerImpl:makeSureStateOK()
+{
+org.apache.rocketmq.common.ServiceState $stack1;
+  org.apache.rocketmq.common.ServiceState $stack2;
+  org.apache.rocketmq.client.exception.MQClientException $stack3;
+  java.lang.StringBuilder $stack4;
+  java.lang.String $stack8;
+  $stack2=this.serviceState;
+ $stack1=org.apache.rocketmq.common.ServiceState.RUNNING;
+ if ($stack2==$stack1) goto label0;
+ $stack3=new org.apache.rocketmq.client.exception.MQClientException;
+ $stack4=new java.lang.StringBuilder;
+ $stack4#java.lang.StringBuilder();
+ $stack4 = $stack4.append("The producer service state not OK, ");
+ $stack1=this.serviceState;
+ $stack4 = $stack4.append((java.lang.Object)$stack1);
+ $stack8 = org.apache.rocketmq.common.help.FAQUrl.suggestTodo("https://rocketmq.apache.org/docs/bestPractice/06FAQ");
+ $stack4 = $stack4.append($stack8);
+ $stack8 = $stack4.toString();
+ $stack3#org.apache.rocketmq.client.exception.MQClientException($stack8,null);
+ throw $stack3;
+ label0:return;
+ } 
+

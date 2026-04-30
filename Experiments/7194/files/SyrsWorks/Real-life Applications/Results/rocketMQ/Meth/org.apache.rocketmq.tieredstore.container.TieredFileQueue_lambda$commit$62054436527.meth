@@ -1,0 +1,45 @@
+void org.apache.rocketmq.tieredstore.container.TieredFileQueue:lambda$commit$6(org.apache.rocketmq.tieredstore.provider.TieredFileSegment segment,java.lang.Boolean success)
+{
+org.apache.rocketmq.tieredstore.metadata.TieredMetadataStore $stack4;
+  boolean $stack6;
+  java.util.List $stack8;
+  java.lang.Exception $stack10;
+  java.lang.Object[] $stack11;
+  org.apache.rocketmq.common.message.MessageQueue $stack12;
+  org.apache.rocketmq.logging.org.slf4j.Logger $stack13;
+  java.lang.String $stack16;
+  int $stack19;
+  java.lang.Integer $stack20;
+  org.apache.rocketmq.tieredstore.provider.TieredFileSegment$FileSegmentType $stack21;
+  long $stack23;
+  java.lang.Long $stack24;
+  label0:$stack4=this.metadataStore;
+ $stack4.updateFileSegment(segment);
+ label1:goto label2;
+ label3:$stack10 = catch;
+ $stack13=org.apache.rocketmq.tieredstore.container.TieredFileQueue.logger;
+ $stack11=new java.lang.Object[5];
+ $stack12=this.messageQueue;
+ $stack16 = $stack12.getTopic();
+ $stack11[0]=$stack16;
+ $stack12=this.messageQueue;
+ $stack19 = $stack12.getQueueId();
+ $stack20 = java.lang.Integer.valueOf($stack19);
+ $stack11[1]=$stack20;
+ $stack21=this.fileType;
+ $stack11[2]=$stack21;
+ $stack23 = segment.getBaseOffset();
+ $stack24 = java.lang.Long.valueOf($stack23);
+ $stack11[3]=$stack24;
+ $stack11[4]=$stack10;
+ $stack13.error("update file segment metadata failed: topic: {}, queue: {}, file type: {}, base offset: {}",$stack11);
+ label2:$stack6 = segment.isFull();
+ if ($stack6==0) goto label4;
+ $stack6 = segment.needCommit();
+ if ($stack6!=0) goto label4;
+ $stack8=this.needCommitFileSegmentList;
+ $stack8.remove((java.lang.Object)segment);
+ label4:return;
+ catch java.lang.Exception: label0 - label1 : label3;
+} 
+

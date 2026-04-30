@@ -1,0 +1,25 @@
+void org.apache.rocketmq.store.index.IndexService:flush(org.apache.rocketmq.store.index.IndexFile f)
+{
+long indexMsgTimestamp;
+  boolean $stack4;
+  byte $stack5;
+  org.apache.rocketmq.store.DefaultMessageStore $stack6;
+  org.apache.rocketmq.store.StoreCheckpoint $stack7;
+  if (null!=f) goto label0;
+ return;
+ label0:indexMsgTimestamp=0L;
+ $stack4 = f.isWriteFull();
+ if ($stack4==0) goto label1;
+ indexMsgTimestamp = f.getEndTimestamp();
+ label1:f.flush();
+ $stack5=(indexMsgTimestamp cmp 0L);
+ if ($stack5<=0) goto label2;
+ $stack6=this.defaultMessageStore;
+ $stack7 = $stack6.getStoreCheckpoint();
+ $stack7.setIndexMsgTimestamp(indexMsgTimestamp);
+ $stack6=this.defaultMessageStore;
+ $stack7 = $stack6.getStoreCheckpoint();
+ $stack7.flush();
+ label2:return;
+ } 
+

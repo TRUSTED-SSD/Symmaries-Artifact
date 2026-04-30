@@ -1,0 +1,30 @@
+void org.apache.rocketmq.container.ContainerClientHouseKeepingService:onChannelOperation(org.apache.rocketmq.container.ContainerClientHouseKeepingService$CallbackCode callbackCode,java.lang.String remoteAddr,io.netty.channel.Channel channel)
+{
+java.util.Collection masterBrokers;
+  java.util.Collection slaveBrokers;
+  java.util.Iterator l6;
+  org.apache.rocketmq.broker.BrokerController masterBroker;
+  org.apache.rocketmq.container.IBrokerContainer $stack8;
+  boolean $stack13;
+  java.lang.Object $stack16;
+  $stack8=this.brokerContainer;
+ masterBrokers = $stack8.getMasterBrokers();
+ $stack8=this.brokerContainer;
+ slaveBrokers = $stack8.getSlaveBrokers();
+ l6 = masterBrokers.iterator();
+ label0:$stack13 = l6.hasNext();
+ if ($stack13==0) goto label1;
+ $stack16 = l6.next();
+ masterBroker=(org.apache.rocketmq.broker.BrokerController) $stack16;
+ this#org.apache.rocketmq.container.ContainerClientHouseKeepingService:brokerOperation(masterBroker,callbackCode,remoteAddr,channel);
+ goto label0;
+ label1:l6 = slaveBrokers.iterator();
+ label2:$stack13 = l6.hasNext();
+ if ($stack13==0) goto label3;
+ $stack16 = l6.next();
+ masterBroker=(org.apache.rocketmq.container.InnerSalveBrokerController) $stack16;
+ this#org.apache.rocketmq.container.ContainerClientHouseKeepingService:brokerOperation(masterBroker,callbackCode,remoteAddr,channel);
+ goto label2;
+ label3:return;
+ } 
+

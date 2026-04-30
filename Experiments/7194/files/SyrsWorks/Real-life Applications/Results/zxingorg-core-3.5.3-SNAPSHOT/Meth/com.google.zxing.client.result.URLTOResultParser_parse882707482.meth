@@ -1,0 +1,27 @@
+com.google.zxing.client.result.URIParsedResult com.google.zxing.client.result.URLTOResultParser:parse(com.google.zxing.Result result)
+{
+java.lang.String rawText;
+  int titleEnd;
+  boolean $stack7;
+  java.lang.String $stack9;
+  com.google.zxing.client.result.URIParsedResult $stack12;
+  rawText = com.google.zxing.client.result.ResultParser.getMassagedText(result);
+ $stack7 = rawText.startsWith("urlto:");
+ if ($stack7!=0) goto label0;
+ $stack7 = rawText.startsWith("URLTO:");
+ if ($stack7!=0) goto label0;
+ return  null;
+ label0:titleEnd = rawText.indexOf(58,6);
+ if (titleEnd>=0) goto label1;
+ return  null;
+ label1:if (titleEnd>6) goto label2;
+ $stack9=null;
+ goto label3;
+ label2:$stack9 = rawText.substring(6,titleEnd);
+ label3:titleEnd=(titleEnd+1);
+ $stack12=new com.google.zxing.client.result.URIParsedResult;
+ rawText = rawText.substring(titleEnd);
+ $stack12#com.google.zxing.client.result.URIParsedResult(rawText,$stack9);
+ return  $stack12;
+ } 
+

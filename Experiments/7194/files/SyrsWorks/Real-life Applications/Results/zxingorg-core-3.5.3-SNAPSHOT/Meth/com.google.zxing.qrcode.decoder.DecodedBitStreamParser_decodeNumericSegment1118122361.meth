@@ -1,0 +1,57 @@
+static void com.google.zxing.qrcode.decoder.DecodedBitStreamParser:decodeNumericSegment(com.google.zxing.common.BitSource bits,java.lang.StringBuilder result,int count)
+{
+int threeDigitsBits;
+  char $stack6;
+  com.google.zxing.FormatException $stack8;
+  int $stack22;
+  label0:if (count<3) goto label1;
+ threeDigitsBits = bits.available();
+ if (threeDigitsBits>=10) goto label2;
+ $stack8 = com.google.zxing.FormatException.getFormatInstance();
+ throw $stack8;
+ label2:threeDigitsBits = bits.readBits(10);
+ if (threeDigitsBits<1000) goto label3;
+ $stack8 = com.google.zxing.FormatException.getFormatInstance();
+ throw $stack8;
+ label3:$stack22=(threeDigitsBits/100);
+ $stack6 = com.google.zxing.qrcode.decoder.DecodedBitStreamParser.toAlphaNumericChar($stack22);
+ result.append($stack6);
+ $stack22=(threeDigitsBits/10);
+ $stack22=($stack22%10);
+ $stack6 = com.google.zxing.qrcode.decoder.DecodedBitStreamParser.toAlphaNumericChar($stack22);
+ result.append($stack6);
+ threeDigitsBits=(threeDigitsBits%10);
+ $stack6 = com.google.zxing.qrcode.decoder.DecodedBitStreamParser.toAlphaNumericChar(threeDigitsBits);
+ result.append($stack6);
+ count=(count+-3);
+ goto label0;
+ label1:if (count!=2) goto label4;
+ count = bits.available();
+ if (count>=7) goto label5;
+ $stack8 = com.google.zxing.FormatException.getFormatInstance();
+ throw $stack8;
+ label5:threeDigitsBits = bits.readBits(7);
+ if (threeDigitsBits<100) goto label6;
+ $stack8 = com.google.zxing.FormatException.getFormatInstance();
+ throw $stack8;
+ label6:count=(threeDigitsBits/10);
+ $stack6 = com.google.zxing.qrcode.decoder.DecodedBitStreamParser.toAlphaNumericChar(count);
+ result.append($stack6);
+ count=(threeDigitsBits%10);
+ $stack6 = com.google.zxing.qrcode.decoder.DecodedBitStreamParser.toAlphaNumericChar(count);
+ result.append($stack6);
+ goto label7;
+ label4:if (count!=1) goto label7;
+ count = bits.available();
+ if (count>=4) goto label8;
+ $stack8 = com.google.zxing.FormatException.getFormatInstance();
+ throw $stack8;
+ label8:threeDigitsBits = bits.readBits(4);
+ if (threeDigitsBits<10) goto label9;
+ $stack8 = com.google.zxing.FormatException.getFormatInstance();
+ throw $stack8;
+ label9:$stack6 = com.google.zxing.qrcode.decoder.DecodedBitStreamParser.toAlphaNumericChar(threeDigitsBits);
+ result.append($stack6);
+ label7:return;
+ } 
+

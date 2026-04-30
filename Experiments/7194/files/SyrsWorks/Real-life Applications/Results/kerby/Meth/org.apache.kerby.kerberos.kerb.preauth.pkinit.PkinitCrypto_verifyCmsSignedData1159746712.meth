@@ -1,0 +1,31 @@
+static void org.apache.kerby.kerberos.kerb.preauth.pkinit.PkinitCrypto:verifyCmsSignedData(org.apache.kerby.kerberos.kerb.preauth.pkinit.CmsMessageType cmsMsgType,org.apache.kerby.cms.type.SignedData signedData)
+{
+java.lang.String oid;
+  java.lang.String etype;
+  org.apache.kerby.cms.type.EncapsulatedContentInfo $stack5;
+  boolean $stack7;
+  org.slf4j.Logger $stack8;
+  org.apache.kerby.kerberos.kerb.KrbException $stack9;
+  org.apache.kerby.kerberos.kerb.KrbErrorCode $stack10;
+  oid = org.apache.kerby.kerberos.kerb.preauth.pkinit.PkinitCrypto.pkinitType2OID(cmsMsgType);
+ if (oid!=null) goto label0;
+ $stack9=new org.apache.kerby.kerberos.kerb.KrbException;
+ $stack9#org.apache.kerby.kerberos.kerb.KrbException("Can\'t get the right oid ");
+ throw $stack9;
+ label0:$stack5 = signedData.getEncapContentInfo();
+ etype = $stack5.getContentType();
+ $stack7 = oid.equals((java.lang.Object)etype);
+ if ($stack7==0) goto label1;
+ $stack8=org.apache.kerby.kerberos.kerb.preauth.pkinit.PkinitCrypto.LOG;
+ dummyClass.lowSink("CMS Verification successful");
+$stack8.info("CMS Verification successful");
+ goto label2;
+ label1:$stack8=org.apache.kerby.kerberos.kerb.preauth.pkinit.PkinitCrypto.LOG;
+ $stack8.error("Wrong oid in eContentType");
+ $stack9=new org.apache.kerby.kerberos.kerb.KrbException;
+ $stack10=org.apache.kerby.kerberos.kerb.KrbErrorCode.KDC_ERR_PREAUTH_FAILED;
+ $stack9#org.apache.kerby.kerberos.kerb.KrbException($stack10,"Wrong oid in eContentType");
+ throw $stack9;
+ label2:return;
+ } 
+

@@ -1,0 +1,34 @@
+int org.apache.bookkeeper.bookie.BookieShell$ListUnderreplicatedCmd:runCmd(org.apache.commons.cli.CommandLine cmdLine)
+{
+java.lang.String includingBookieId;
+  java.lang.String excludingBookieId;
+  boolean printMissingReplica;
+  boolean printReplicationWorkerId;
+  boolean onlyDisplayLedgerCount;
+  org.apache.bookkeeper.tools.cli.commands.autorecovery.ListUnderReplicatedCommand$LURFlags flags;
+  org.apache.bookkeeper.tools.cli.commands.autorecovery.ListUnderReplicatedCommand $stack20;
+  org.apache.bookkeeper.bookie.BookieShell $stack21;
+  org.apache.bookkeeper.util.LedgerIdFormatter $stack22;
+  org.apache.bookkeeper.conf.ServerConfiguration $stack24;
+  includingBookieId = cmdLine.getOptionValue("missingreplica");
+ excludingBookieId = cmdLine.getOptionValue("excludingmissingreplica");
+ printMissingReplica = cmdLine.hasOption("printmissingreplica");
+ printReplicationWorkerId = cmdLine.hasOption("printreplicationworkerid");
+ onlyDisplayLedgerCount = cmdLine.hasOption("onlydisplayledgercount");
+ flags=new org.apache.bookkeeper.tools.cli.commands.autorecovery.ListUnderReplicatedCommand$LURFlags;
+ flags#org.apache.bookkeeper.tools.cli.commands.autorecovery.ListUnderReplicatedCommand$LURFlags();
+ flags = flags.missingReplica(includingBookieId);
+ flags = flags.excludingMissingReplica(excludingBookieId);
+ flags = flags.printMissingReplica(printMissingReplica);
+ flags = flags.printReplicationWorkerId(printReplicationWorkerId);
+ flags = flags.onlyDisplayLedgerCount(onlyDisplayLedgerCount);
+ $stack20=new org.apache.bookkeeper.tools.cli.commands.autorecovery.ListUnderReplicatedCommand;
+ $stack21=this.this$0;
+ $stack22=$stack21.ledgerIdFormatter;
+ $stack20#org.apache.bookkeeper.tools.cli.commands.autorecovery.ListUnderReplicatedCommand($stack22);
+ $stack21=this.this$0;
+ $stack24=$stack21.bkConf;
+ printMissingReplica = $stack20.apply($stack24,flags);
+ return  0;
+ } 
+

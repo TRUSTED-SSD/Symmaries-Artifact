@@ -1,0 +1,41 @@
+void org.apache.rocketmq.client.impl.consumer.DefaultLitePullConsumerImpl:shutdown()
+{
+org.apache.rocketmq.common.ServiceState $stack1;
+  int[] $stack2;
+  int $stack3;
+  org.apache.rocketmq.client.consumer.DefaultLitePullConsumer $stack5;
+  org.apache.rocketmq.client.impl.factory.MQClientInstance $stack6;
+  java.lang.String $stack7;
+  java.util.concurrent.ScheduledThreadPoolExecutor $stack8;
+  java.util.concurrent.ScheduledExecutorService $stack9;
+  org.apache.rocketmq.logging.org.slf4j.Logger $stack13;
+  $stack2=org.apache.rocketmq.client.impl.consumer.DefaultLitePullConsumerImpl$4.$SwitchMap$org$apache$rocketmq$common$ServiceState;
+ $stack1=this.serviceState;
+ $stack3 = $stack1.ordinal();
+ $stack3=$stack2[$stack3];
+ switch [$stack3]
+if 0 goto label0;
+if 1 goto label1;
+goto label2;
+ label0:goto label2;
+ label1:this.persistConsumerOffset();
+ $stack6=this.mQClientFactory;
+ $stack5=this.defaultLitePullConsumer;
+ $stack7 = $stack5.getConsumerGroup();
+ $stack6.unregisterConsumer($stack7);
+ $stack8=this.scheduledThreadPoolExecutor;
+ $stack8.shutdown();
+ $stack9=this.scheduledExecutorService;
+ $stack9.shutdown();
+ $stack6=this.mQClientFactory;
+ $stack6.shutdown();
+ $stack1=org.apache.rocketmq.common.ServiceState.SHUTDOWN_ALREADY;
+ this.serviceState=$stack1;
+ $stack13=org.apache.rocketmq.client.impl.consumer.DefaultLitePullConsumerImpl.log;
+ $stack5=this.defaultLitePullConsumer;
+ $stack7 = $stack5.getConsumerGroup();
+ $stack13.info("the consumer [{}] shutdown OK",(java.lang.Object)$stack7);
+ goto label2;
+ label2:return;
+ } 
+

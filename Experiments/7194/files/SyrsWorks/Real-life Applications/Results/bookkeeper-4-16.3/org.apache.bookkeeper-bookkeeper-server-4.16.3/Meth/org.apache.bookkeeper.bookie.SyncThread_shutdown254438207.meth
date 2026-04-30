@@ -1,0 +1,30 @@
+void org.apache.bookkeeper.bookie.SyncThread:shutdown()
+{
+long start;
+  long now;
+  org.slf4j.Logger $stack5;
+  java.util.concurrent.ScheduledExecutorService $stack7;
+  java.util.concurrent.TimeUnit $stack9;
+  boolean $stack11;
+  java.lang.Long $stack16;
+  $stack5=org.apache.bookkeeper.bookie.SyncThread.log;
+ dummyClass.lowSink("Shutting down SyncThread");
+$stack5.info("Shutting down SyncThread");
+ this#org.apache.bookkeeper.bookie.SyncThread();
+ $stack7=this.executor;
+ $stack7.shutdown();
+ start = java.lang.System.currentTimeMillis();
+ label0:$stack7=this.executor;
+ $stack9=java.util.concurrent.TimeUnit.MINUTES;
+ $stack11 = $stack7.awaitTermination(5L,$stack9);
+ if ($stack11!=0) goto label1;
+ now = java.lang.System.currentTimeMillis();
+ $stack5=org.apache.bookkeeper.bookie.SyncThread.log;
+ now=(now-start);
+ $stack16 = java.lang.Long.valueOf(now);
+ dummyClass.lowSink("SyncThread taking a long time to shutdown. Has taken {} milliseconds so far");
+$stack5.info("SyncThread taking a long time to shutdown. Has taken {} milliseconds so far",(java.lang.Object)$stack16);
+ goto label0;
+ label1:return;
+ } 
+

@@ -1,0 +1,44 @@
+void org.apache.rocketmq.store.MappedFileQueue:checkSelf()
+{
+java.util.ArrayList mappedFiles;
+  java.util.Iterator iterator;
+  org.apache.rocketmq.store.logfile.MappedFile pre;
+  org.apache.rocketmq.store.logfile.MappedFile cur;
+  java.util.concurrent.CopyOnWriteArrayList $stack6;
+  boolean $stack7;
+  java.lang.Object $stack10;
+  long $stack12;
+  long $stack13;
+  int $stack14;
+  byte $stack17;
+  org.apache.rocketmq.logging.org.slf4j.Logger $stack19;
+  java.lang.String $stack21;
+  java.lang.String $stack22;
+  mappedFiles=new java.util.ArrayList;
+ $stack6=this.mappedFiles;
+ mappedFiles#java.util.ArrayList((java.util.Collection)$stack6);
+ $stack7 = mappedFiles.isEmpty();
+ if ($stack7!=0) goto label0;
+ iterator = mappedFiles.iterator();
+ pre=null;
+ label1:$stack7 = iterator.hasNext();
+ if ($stack7==0) goto label0;
+ $stack10 = iterator.next();
+ cur=(org.apache.rocketmq.store.logfile.MappedFile) $stack10;
+ if (pre==null) goto label2;
+ $stack12 = cur.getFileFromOffset();
+ $stack13 = pre.getFileFromOffset();
+ $stack13=($stack12-$stack13);
+ $stack14=this.mappedFileSize;
+ $stack12=(long) $stack14;
+ $stack17=($stack13 cmp $stack12);
+ if ($stack17==0) goto label2;
+ $stack19=org.apache.rocketmq.store.MappedFileQueue.LOG_ERROR;
+ $stack21 = pre.getFileName();
+ $stack22 = cur.getFileName();
+ $stack19.error("[BUG]The mappedFile queue\'s data is damaged, the adjacent mappedFile\'s offset don\'t match. pre file {}, cur file {}",(java.lang.Object)$stack21,(java.lang.Object)$stack22);
+ label2:pre=cur;
+ goto label1;
+ label0:return;
+ } 
+

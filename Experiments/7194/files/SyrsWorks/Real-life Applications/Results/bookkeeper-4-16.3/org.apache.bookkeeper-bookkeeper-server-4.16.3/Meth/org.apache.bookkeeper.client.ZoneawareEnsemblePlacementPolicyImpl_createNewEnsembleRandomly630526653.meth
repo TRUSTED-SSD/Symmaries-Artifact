@@ -1,0 +1,39 @@
+org.apache.bookkeeper.client.EnsemblePlacementPolicy$PlacementResult org.apache.bookkeeper.client.ZoneawareEnsemblePlacementPolicyImpl:createNewEnsembleRandomly(java.util.List newEnsemble,int writeQuorumSize,int ackQuorumSize,java.util.Map customMetadata,java.util.Set @excludeBookies)
+{
+int ensembleSize;
+  int i;
+  org.apache.bookkeeper.net.BookieNode candidateNode;
+  int $stack13;
+  org.apache.bookkeeper.client.EnsemblePlacementPolicy$PlacementPolicyAdherence $stack14;
+  org.apache.bookkeeper.client.EnsemblePlacementPolicy$PlacementResult $stack15;
+  org.apache.bookkeeper.net.BookieId $stack17;
+  org.slf4j.Logger $stack22;
+  java.lang.Integer $stack25;
+  org.apache.bookkeeper.client.BKException$BKNotEnoughBookiesException $stack26;
+  java.util.Set excludeBookies;
+excludeBookies=@excludeBookies;
+ensembleSize = newEnsemble.size();
+ excludeBookies = this#org.apache.bookkeeper.client.ZoneawareEnsemblePlacementPolicyImpl:getBookiesToConsider(excludeBookies);
+ i = excludeBookies.size();
+ $stack13 = newEnsemble.size();
+ if (i>=$stack13) goto label0;
+ $stack22=org.apache.bookkeeper.client.ZoneawareEnsemblePlacementPolicyImpl.LOG;
+ writeQuorumSize = newEnsemble.size();
+ $stack25 = java.lang.Integer.valueOf(writeQuorumSize);
+ $stack22.error("Not enough bookies are available to form ensemble of size: {}",(java.lang.Object)$stack25);
+ $stack26=new org.apache.bookkeeper.client.BKException$BKNotEnoughBookiesException;
+ $stack26#org.apache.bookkeeper.client.BKException$BKNotEnoughBookiesException();
+ throw $stack26;
+ label0:i=0;
+ label1:if (i>=ensembleSize) goto label2;
+ candidateNode = this#org.apache.bookkeeper.client.ZoneawareEnsemblePlacementPolicyImpl:selectCandidateNode(excludeBookies);
+ $stack17 = candidateNode.getAddr();
+ newEnsemble.set(i,(java.lang.Object)$stack17);
+ excludeBookies.remove((java.lang.Object)candidateNode);
+ i=(i+1);
+ goto label1;
+ label2:$stack14 = this.isEnsembleAdheringToPlacementPolicy(newEnsemble,writeQuorumSize,ackQuorumSize);
+ $stack15 = org.apache.bookkeeper.client.EnsemblePlacementPolicy$PlacementResult.of((java.lang.Object)newEnsemble,$stack14);
+ return  $stack15;
+ } 
+

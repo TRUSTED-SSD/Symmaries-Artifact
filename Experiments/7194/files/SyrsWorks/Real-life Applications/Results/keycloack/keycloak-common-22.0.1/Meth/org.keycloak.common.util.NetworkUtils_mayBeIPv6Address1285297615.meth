@@ -1,0 +1,35 @@
+static boolean org.keycloak.common.util.NetworkUtils:mayBeIPv6Address(java.lang.String input)
+{
+boolean result;
+  int colonsCounter;
+  int length;
+  int i;
+  char c;
+  if (input!=null) goto label0;
+ return  0;
+ label0:result=0;
+ colonsCounter=0;
+ length = input.length();
+ i=0;
+ label1:if (i>=length) goto label2;
+ c = input.charAt(i);
+ if (c==46) goto label2;
+ if (c!=37) goto label3;
+ goto label2;
+ label3:if (c<48) goto label4;
+ if (c<=57) goto label5;
+ label4:if (c<97) goto label6;
+ if (c<=102) goto label5;
+ label6:if (c<65) goto label7;
+ if (c<=70) goto label5;
+ label7:if (c==58) goto label5;
+ return  0;
+ label5:if (c!=58) goto label8;
+ colonsCounter=(colonsCounter+1);
+ label8:i=(i+1);
+ goto label1;
+ label2:if (colonsCounter<2) goto label9;
+ result=1;
+ label9:return  result;
+ } 
+

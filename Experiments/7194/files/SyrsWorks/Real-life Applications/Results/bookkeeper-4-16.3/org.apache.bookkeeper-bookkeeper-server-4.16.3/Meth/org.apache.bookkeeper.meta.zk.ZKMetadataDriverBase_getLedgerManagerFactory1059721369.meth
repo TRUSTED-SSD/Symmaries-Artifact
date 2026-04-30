@@ -1,0 +1,36 @@
+org.apache.bookkeeper.meta.LedgerManagerFactory org.apache.bookkeeper.meta.zk.ZKMetadataDriverBase:getLedgerManagerFactory()
+{
+org.apache.bookkeeper.meta.LedgerManagerFactory $stack2;
+  org.apache.bookkeeper.meta.LayoutManager $stack4;
+  org.apache.bookkeeper.conf.AbstractConfiguration $stack5;
+  java.lang.Throwable $stack8;
+  java.lang.InterruptedException $stack9;
+  java.lang.Thread $stack10;
+  java.io.IOException $stack11;
+  org.apache.bookkeeper.meta.exceptions.MetadataException $stack12;
+  org.apache.bookkeeper.meta.exceptions.Code $stack13;
+  label0:$stack2=this.lmFactory;
+ if (null!=$stack2) goto label1;
+ label2:$stack5=this.conf;
+ $stack4=this.layoutManager;
+ $stack2 = org.apache.bookkeeper.meta.AbstractZkLedgerManagerFactory.newLedgerManagerFactory($stack5,$stack4);
+ this.lmFactory=$stack2;
+ label3:goto label1;
+ label4:$stack11 = catch;
+ $stack12=new org.apache.bookkeeper.meta.exceptions.MetadataException;
+ $stack13=org.apache.bookkeeper.meta.exceptions.Code.METADATA_SERVICE_ERROR;
+ $stack12#org.apache.bookkeeper.meta.exceptions.MetadataException($stack13,"Failed to initialized ledger manager factory",(java.lang.Throwable)$stack11);
+ throw $stack12;
+ label5:$stack9 = catch;
+ $stack10 = java.lang.Thread.currentThread();
+ $stack10.interrupt();
+ throw $stack9;
+ label1:$stack2=this.lmFactory;
+ label6:return  $stack2;
+ label7:$stack8 = catch;
+ throw $stack8;
+ catch java.io.IOException: label2 - label3 : label4;
+catch java.lang.InterruptedException: label2 - label3 : label5;
+catch java.lang.Throwable: label0 - label6 : label7;
+} 
+

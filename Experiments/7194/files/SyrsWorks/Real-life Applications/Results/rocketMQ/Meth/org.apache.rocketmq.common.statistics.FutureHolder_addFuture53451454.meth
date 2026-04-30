@@ -1,0 +1,25 @@
+void org.apache.rocketmq.common.statistics.FutureHolder:addFuture(java.lang.Object @t,java.util.concurrent.Future future)
+{
+java.util.concurrent.BlockingQueue list;
+  java.util.concurrent.BlockingQueue old;
+  java.util.concurrent.ConcurrentMap $stack5;
+  java.lang.Object $stack6;
+  java.util.concurrent.LinkedBlockingQueue $stack8;
+  java.lang.Object t;
+t=@t;
+$stack5=this.futureMap;
+ $stack6 = $stack5.get(t);
+ list=(java.util.concurrent.BlockingQueue) $stack6;
+ if (list!=null) goto label0;
+ $stack8=new java.util.concurrent.LinkedBlockingQueue;
+ $stack8#java.util.concurrent.LinkedBlockingQueue();
+ list=$stack8;
+ $stack5=this.futureMap;
+ t = $stack5.putIfAbsent(t,(java.lang.Object)$stack8);
+ old=(java.util.concurrent.BlockingQueue) t;
+ if (old==null) goto label0;
+ list=old;
+ label0:list.add((java.lang.Object)future);
+ return;
+ } 
+

@@ -1,0 +1,32 @@
+junit.framework.Test junit.framework.JUnit4TestAdapterCache:createTest(org.junit.runner.Description @description)
+{
+junit.framework.TestSuite suite;
+  java.util.Iterator i$;
+  boolean $stack5;
+  java.lang.String $stack7;
+  java.util.ArrayList $stack8;
+  java.lang.Object $stack11;
+  junit.framework.Test $stack12;
+  junit.framework.JUnit4TestCaseFacade $stack14;
+  org.junit.runner.Description description;
+description=@description;
+$stack5 = description.isTest();
+ if ($stack5==0) goto label0;
+ $stack14=new junit.framework.JUnit4TestCaseFacade;
+ $stack14#junit.framework.JUnit4TestCaseFacade(description);
+ return  $stack14;
+ label0:suite=new junit.framework.TestSuite;
+ $stack7 = description.getDisplayName();
+ suite#junit.framework.TestSuite($stack7);
+ $stack8 = description.getChildren();
+ i$ = $stack8.iterator();
+ label1:$stack5 = i$.hasNext();
+ if ($stack5==0) goto label2;
+ $stack11 = i$.next();
+ description=(org.junit.runner.Description) $stack11;
+ $stack12 = this.asTest(description);
+ suite.addTest($stack12);
+ goto label1;
+ label2:return  suite;
+ } 
+

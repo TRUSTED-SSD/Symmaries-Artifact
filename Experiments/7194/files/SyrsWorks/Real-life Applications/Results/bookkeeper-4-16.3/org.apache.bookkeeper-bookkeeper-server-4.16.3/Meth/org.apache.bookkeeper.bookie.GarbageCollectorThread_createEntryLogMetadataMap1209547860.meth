@@ -1,0 +1,49 @@
+org.apache.bookkeeper.bookie.EntryLogMetadataMap org.apache.bookkeeper.bookie.GarbageCollectorThread:createEntryLogMetadataMap()
+{
+java.lang.String baseDir;
+  java.io.IOException e;
+  org.apache.bookkeeper.conf.ServerConfiguration $stack3;
+  boolean $stack4;
+  org.apache.bookkeeper.bookie.InMemoryEntryLogMetadataMap $stack5;
+  org.apache.bookkeeper.bookie.storage.ldb.PersistentEntryLogMetadataMap $stack11;
+  org.apache.bookkeeper.bookie.LedgerDirsManager $stack13;
+  java.util.List $stack14;
+  java.lang.Object $stack15;
+  java.io.File $stack16;
+  java.lang.StringBuilder $stack21;
+  org.slf4j.Logger $stack22;
+  $stack3=this.conf;
+ $stack4 = $stack3.isGcEntryLogMetadataCacheEnabled();
+ if ($stack4==0) goto label0;
+ $stack3=this.conf;
+ baseDir = $stack3.getGcEntryLogMetadataCachePath();
+ $stack4 = com.google.common.base.Strings.isNullOrEmpty(baseDir);
+ if ($stack4==0) goto label1;
+ $stack13=this.ledgerDirsManager;
+ $stack14 = $stack13.getAllLedgerDirs();
+ $stack15 = $stack14.get(0);
+ $stack16=(java.io.File) $stack15;
+ baseDir = $stack16.getPath();
+ goto label2;
+ label1:$stack3=this.conf;
+ baseDir = $stack3.getGcEntryLogMetadataCachePath();
+ label2:$stack11=new org.apache.bookkeeper.bookie.storage.ldb.PersistentEntryLogMetadataMap;
+ $stack3=this.conf;
+ $stack11#org.apache.bookkeeper.bookie.storage.ldb.PersistentEntryLogMetadataMap(baseDir,$stack3);
+ label3:return  $stack11;
+ label4:e = catch;
+ $stack22=org.apache.bookkeeper.bookie.GarbageCollectorThread.LOG;
+ $stack21=new java.lang.StringBuilder;
+ $stack21#java.lang.StringBuilder();
+ $stack21 = $stack21.append(baseDir);
+ $stack21 = $stack21.append("/");
+ $stack21 = $stack21.append("metadata-cache");
+ baseDir = $stack21.toString();
+ $stack22.error("Failed to initialize persistent-metadata-map , clean up {}",(java.lang.Object)baseDir,(java.lang.Object)e);
+ throw e;
+ label0:$stack5=new org.apache.bookkeeper.bookie.InMemoryEntryLogMetadataMap;
+ $stack5#org.apache.bookkeeper.bookie.InMemoryEntryLogMetadataMap();
+ return  $stack5;
+ catch java.io.IOException: label2 - label3 : label4;
+} 
+

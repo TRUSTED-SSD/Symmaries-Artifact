@@ -1,0 +1,43 @@
+void org.apache.bookkeeper.stream.server.service.BookieService:doStop()
+{
+org.apache.bookkeeper.proto.BookieServer $stack2;
+  org.apache.bookkeeper.discover.RegistrationManager $stack3;
+  org.apache.bookkeeper.meta.LedgerManager $stack4;
+  org.apache.bookkeeper.meta.LedgerManagerFactory $stack5;
+  org.apache.bookkeeper.meta.MetadataBookieDriver $stack6;
+  java.lang.Exception $stack17;
+  org.slf4j.Logger $stack18;
+  java.lang.Exception $stack19;
+  $stack2=this.bs;
+ if (null==$stack2) goto label0;
+ $stack2=this.bs;
+ $stack2.shutdown();
+ label0:$stack3=this.rm;
+ if ($stack3==null) goto label1;
+ $stack3=this.rm;
+ $stack3.close();
+ label1:$stack4=this.ledgerManager;
+ if ($stack4==null) goto label2;
+ label3:$stack4=this.ledgerManager;
+ $stack4.close();
+ label4:goto label2;
+ label5:$stack19 = catch;
+ $stack18=org.apache.bookkeeper.stream.server.service.BookieService.log;
+ $stack18.error("Error shutting down ledger manager",(java.lang.Throwable)$stack19);
+ label2:$stack5=this.lmFactory;
+ if ($stack5==null) goto label6;
+ label7:$stack5=this.lmFactory;
+ $stack5.close();
+ label8:goto label6;
+ label9:$stack17 = catch;
+ $stack18=org.apache.bookkeeper.stream.server.service.BookieService.log;
+ $stack18.error("Error shutting down ledger manager factory",(java.lang.Throwable)$stack17);
+ label6:$stack6=this.metadataDriver;
+ if (null==$stack6) goto label10;
+ $stack6=this.metadataDriver;
+ $stack6.close();
+ label10:return;
+ catch java.lang.Exception: label3 - label4 : label5;
+catch java.lang.Exception: label7 - label8 : label9;
+} 
+

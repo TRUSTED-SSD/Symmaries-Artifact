@@ -1,0 +1,35 @@
+static java.lang.Exception org.apache.bookkeeper.clients.impl.internal.ProtocolInternalUtils:createMetaRangeException(java.lang.String @name,org.apache.bookkeeper.stream.proto.storage.StatusCode statusCode)
+{
+int[] $stack2;
+  int $stack3;
+  org.apache.bookkeeper.clients.exceptions.StreamNotFoundException $stack5;
+  org.apache.bookkeeper.clients.exceptions.StreamExistsException $stack6;
+  org.apache.bookkeeper.clients.exceptions.InternalServerException $stack7;
+  java.lang.StringBuilder $stack8;
+  java.lang.String name;
+name=@name;
+$stack2=org.apache.bookkeeper.clients.impl.internal.ProtocolInternalUtils$1.$SwitchMap$org$apache$bookkeeper$stream$proto$storage$StatusCode;
+ $stack3 = statusCode.ordinal();
+ $stack3=$stack2[$stack3];
+ switch [$stack3]
+if 0 goto label0;
+if 1 goto label1;
+goto label2;
+ label0:$stack6=new org.apache.bookkeeper.clients.exceptions.StreamExistsException;
+ $stack6#org.apache.bookkeeper.clients.exceptions.StreamExistsException(name);
+ return  $stack6;
+ label1:$stack5=new org.apache.bookkeeper.clients.exceptions.StreamNotFoundException;
+ $stack5#org.apache.bookkeeper.clients.exceptions.StreamNotFoundException(name);
+ return  $stack5;
+ label2:$stack7=new org.apache.bookkeeper.clients.exceptions.InternalServerException;
+ $stack8=new java.lang.StringBuilder;
+ $stack8#java.lang.StringBuilder();
+ $stack8 = $stack8.append("Encountered internal server exception on stream ");
+ $stack8 = $stack8.append(name);
+ $stack8 = $stack8.append(" : code = ");
+ $stack8 = $stack8.append((java.lang.Object)statusCode);
+ name = $stack8.toString();
+ $stack7#org.apache.bookkeeper.clients.exceptions.InternalServerException(name);
+ return  $stack7;
+ } 
+

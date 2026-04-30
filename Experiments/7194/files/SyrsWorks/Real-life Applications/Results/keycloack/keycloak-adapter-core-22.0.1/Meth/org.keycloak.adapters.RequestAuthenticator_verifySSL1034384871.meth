@@ -1,0 +1,38 @@
+boolean org.keycloak.adapters.RequestAuthenticator:verifySSL()
+{
+org.keycloak.adapters.spi.HttpFacade $stack1;
+  org.keycloak.adapters.spi.HttpFacade$Request $stack2;
+  boolean $stack3;
+  org.keycloak.adapters.KeycloakDeployment $stack4;
+  org.keycloak.common.enums.SslRequired $stack5;
+  java.lang.String $stack8;
+  org.jboss.logging.Logger $stack12;
+  java.lang.Boolean $stack19;
+  java.lang.String $stack22;
+  $stack1=this.facade;
+ $stack2 = $stack1.getRequest();
+ $stack3 = $stack2.isSecure();
+ if ($stack3!=0) goto label0;
+ $stack4=this.deployment;
+ $stack5 = $stack4.getSslRequired();
+ $stack1=this.facade;
+ $stack2 = $stack1.getRequest();
+ $stack8 = $stack2.getRemoteAddr();
+ $stack3 = $stack5.isRequired($stack8);
+ if ($stack3==0) goto label0;
+ $stack12=org.keycloak.adapters.RequestAuthenticator.log;
+ $stack1=this.facade;
+ $stack2 = $stack1.getRequest();
+ $stack8 = $stack2.getRemoteAddr();
+ $stack1=this.facade;
+ $stack2 = $stack1.getRequest();
+ $stack3 = $stack2.isSecure();
+ $stack19 = java.lang.Boolean.valueOf($stack3);
+ $stack4=this.deployment;
+ $stack5 = $stack4.getSslRequired();
+ $stack22 = $stack5.name();
+ $stack12.warnf("SSL is required to authenticate. Remote address %s is secure: %s, SSL required for: %s .",(java.lang.Object)$stack8,(java.lang.Object)$stack19,(java.lang.Object)$stack22);
+ return  1;
+ label0:return  0;
+ } 
+

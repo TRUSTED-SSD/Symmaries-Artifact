@@ -1,0 +1,31 @@
+void java.util.LinkedHashMap:replaceAll(java.util.function.BiFunction r1)
+{
+int i0;
+  int $i1;
+  java.util.ConcurrentModificationException $r2;
+  java.lang.Object $r3;
+  java.lang.Object $r4;
+  java.lang.Object $r5;
+  java.lang.NullPointerException $r6;
+  java.util.LinkedHashMap$Entry r7;
+  if (r1!=null) goto label0;
+ $r6=new java.lang.NullPointerException;
+ $r6#java.lang.NullPointerException:init();
+ throw $r6;
+ label0:i0=this.modCount;
+ r7=this.head;
+ label1:if (r7==null) goto label2;
+ $r4=r7.key;
+ $r3=r7.value;
+ $r5 = r1.apply($r4,$r3);
+ r7.value=$r5;
+ r7=r7.after;
+ goto label1;
+ label2:$i1=this.modCount;
+ if ($i1==i0) goto label3;
+ $r2=new java.util.ConcurrentModificationException;
+ $r2#java.util.ConcurrentModificationException:init();
+ throw $r2;
+ label3:return;
+ }  
+

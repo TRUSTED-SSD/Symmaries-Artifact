@@ -1,0 +1,40 @@
+java.lang.String junit.framework.ComparisonCompactor:compactString(java.lang.String @source)
+{
+java.lang.StringBuilder $stack3;
+  int $stack5;
+  int $stack6;
+  int $stack7;
+  java.lang.String $stack23;
+  java.lang.String source;
+source=@source;
+$stack3=new java.lang.StringBuilder;
+ $stack3#java.lang.StringBuilder();
+ $stack3 = $stack3.append("[");
+ $stack5=this.fPrefix;
+ $stack6 = source.length();
+ $stack7=this.fSuffix;
+ $stack6=($stack6-$stack7);
+ $stack6=($stack6+1);
+ source = source.substring($stack5,$stack6);
+ $stack3 = $stack3.append(source);
+ $stack3 = $stack3.append("]");
+ source = $stack3.toString();
+ $stack5=this.fPrefix;
+ if ($stack5<=0) goto label0;
+ $stack3=new java.lang.StringBuilder;
+ $stack3#java.lang.StringBuilder();
+ $stack23 = this#junit.framework.ComparisonCompactor:computeCommonPrefix();
+ $stack3 = $stack3.append($stack23);
+ $stack3 = $stack3.append(source);
+ source = $stack3.toString();
+ label0:$stack5=this.fSuffix;
+ if ($stack5<=0) goto label1;
+ $stack3=new java.lang.StringBuilder;
+ $stack3#java.lang.StringBuilder();
+ $stack3 = $stack3.append(source);
+ source = this#junit.framework.ComparisonCompactor:computeCommonSuffix();
+ $stack3 = $stack3.append(source);
+ source = $stack3.toString();
+ label1:return  source;
+ } 
+

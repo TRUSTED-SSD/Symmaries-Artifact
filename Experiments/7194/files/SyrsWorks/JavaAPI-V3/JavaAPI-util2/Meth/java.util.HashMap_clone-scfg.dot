@@ -1,0 +1,106 @@
+digraph G {
+  node [shape=box, ];
+  "pc0_js1" [label="〈label0: $r3 = this#java.util.AbstractMap.clone (), js1〉\n\
+tt",
+             ];
+  "pc1_js1" [label="〈r1 = (java.util.HashMap) $r3, js1〉", ];
+  "pc2_js1" [label="〈label1: goto label2, js1〉", ];
+  "pc8_js1" [label="〈label2: r1.reinitialize (), js1〉\n\
+tt", ];
+  "pc9_js1" [label="〈r1.putMapEntries ((java.util.Map) this, (boolean) 0), js1〉\n\
+pc ⊑ ⊥ ∧ level(r1) ⊔ level(this) ⊔ obj_level(r1) ⊔ obj_level(this) ⊑ ⊥",
+             ];
+  "pc10_js1" [label="〈return r1, js1〉", ];
+  "pc11_js1" [label="〈sink, js1〉\n\
+obj_level(this) ⊑ ret(obj_level(this))' ∧ (ret(this.><this)' ∨ ¬this.><this) ∧ (ϕ ≠ S10 ∨ obj_level(r1) ⊑ ret(obj_level())' ∧ pc ⊔ level(r1) ⊑ ret(level())' ∧ (ret(~this)' ∨ ¬r1~this) ∧ (ret(.><this)' ∨ ¬this.><r1) ∧ (ret(this.><)' ∨ ¬r1.><this)) ∧ (ϕ ≠ S7 ∨ obj_level($r5) ⊑ ret(obj_level())' ∧ pc ⊔ level($r5) ⊑ ret(level())' ∧ (ret(.><this)' ∨ ¬this.><$r5))",
+              ];
+  
+  
+  "pc0_js1" -> "pc1_js1" [label="tt,\n\
+{$r3~$r4 := ff,\n\
+ $r3~$r5 := ff,\n\
+ $r3~r1 := ff,\n\
+ $r3~r2 := ff,\n\
+ $r3~this := ff,\n\
+ $r3.><$r4 := ff,\n\
+ $r3.><$r5 := ff,\n\
+ $r3.><r1 := ff,\n\
+ $r3.><r2 := ff,\n\
+ $r3.><this := ff,\n\
+ r1.><$r3 := ff,\n\
+ r1.><$r4 := ff,\n\
+ r1.><$r5 := ff,\n\
+ r1.><r1 := ff,\n\
+ r1.><r2 := ff,\n\
+ r1.><this := ff,\n\
+ this.><$r3 := ff,\n\
+ this.><r1 := ff,\n\
+ level($r3) := pc,\n\
+ obj_level($r3) := pc ⊔ obj_level(this)}",
+                          ];
+  "pc1_js1" -> "pc2_js1" [label="tt,\n\
+{$r3~r1 := tt,\n\
+ r1~this := ff,\n\
+ $r3.><r1 := ff,\n\
+ r1.><$r3 := ff,\n\
+ r1.><$r4 := ff,\n\
+ r1.><$r5 := ff,\n\
+ r1.><r1 := ff,\n\
+ r1.><r2 := ff,\n\
+ r1.><this := ff,\n\
+ this.><r1 := ff,\n\
+ level(r1) := pc,\n\
+ obj_level(r1) := pc ⊔ obj_level(this)}",
+                          ];
+  "pc2_js1" -> "pc8_js1" [label="tt,\n\
+{}", ];
+  "pc8_js1" -> "pc9_js1" [label="tt,\n\
+{$r3.><$r3 := ff,\n\
+ $r3.><$r4 := ff,\n\
+ $r3.><$r5 := ff,\n\
+ $r3.><r1 := ff,\n\
+ $r3.><r2 := ff,\n\
+ $r3.><this := ff,\n\
+ r1.><$r3 := ff,\n\
+ r1.><this := ff,\n\
+ this.><$r3 := ff,\n\
+ this.><$r4 := ff,\n\
+ this.><$r5 := ff,\n\
+ this.><r1 := ff,\n\
+ this.><r2 := ff,\n\
+ obj_level($r3) := pc ⊔ obj_level(this),\n\
+ obj_level($r4) := ⊥,\n\
+ obj_level($r5) := ⊥,\n\
+ obj_level(r1) := pc ⊔ obj_level(this),\n\
+ obj_level(r2) := ⊥}",
+                          ];
+  "pc9_js1" -> "pc10_js1" [label="tt,\n\
+{$r3.><$r3 := tt,\n\
+ $r3.><$r4 := ff,\n\
+ $r3.><$r5 := ff,\n\
+ $r3.><r1 := tt,\n\
+ $r3.><r2 := ff,\n\
+ $r3.><this := tt,\n\
+ r1.><$r3 := tt,\n\
+ r1.><$r4 := ff,\n\
+ r1.><$r5 := ff,\n\
+ r1.><r1 := tt,\n\
+ r1.><r2 := ff,\n\
+ r1.><this := tt,\n\
+ this.><$r3 := tt,\n\
+ this.><$r4 := ff,\n\
+ this.><$r5 := ff,\n\
+ this.><r1 := tt,\n\
+ this.><r2 := ff,\n\
+ this.><this := tt,\n\
+ obj_level($r3) := ⊤,\n\
+ obj_level($r4) := ⊥,\n\
+ obj_level($r5) := ⊥,\n\
+ obj_level(r1) := ⊤,\n\
+ obj_level(r2) := ⊥,\n\
+ obj_level(this) := ⊤}",
+                           ];
+  "pc10_js1" -> "pc11_js1" [label="tt,\n\
+{ϕ := S10}", ];
+  
+  }

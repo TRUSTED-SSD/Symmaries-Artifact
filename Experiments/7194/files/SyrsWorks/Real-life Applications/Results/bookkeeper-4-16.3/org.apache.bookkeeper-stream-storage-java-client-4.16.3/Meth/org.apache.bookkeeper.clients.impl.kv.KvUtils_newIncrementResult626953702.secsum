@@ -1,0 +1,11 @@
+static org.apache.bookkeeper.api.kv.result.IncrementResult org.apache.bookkeeper.clients.impl.kv.KvUtils:newIncrementResult (
+  org.apache.bookkeeper.stream.proto.kv.rpc.IncrementResponse response,
+  org.apache.bookkeeper.api.kv.impl.result.ResultFactory resultFactory,
+  org.apache.bookkeeper.api.kv.impl.result.KeyValueFactory kvFactory) {
+  guard = tt;
+  ret(level()) = obj_level(resultFactory);
+  ret(obj_level()) = level(response) ⊔ obj_level(response) ⊔ obj_level(resultFactory);
+  ret(obj_level(kvFactory)) = level(response) ⊔ obj_level(kvFactory) ⊔ obj_level(response) ⊔ obj_level(resultFactory);
+  ret(obj_level(response)) = level(response) ⊔ obj_level(response) ⊔ obj_level(resultFactory);
+  ret(obj_level(resultFactory)) = level(response) ⊔ obj_level(response) ⊔ obj_level(resultFactory);
+}

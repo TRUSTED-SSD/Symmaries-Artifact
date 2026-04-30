@@ -1,0 +1,31 @@
+void org.apache.rocketmq.client.impl.consumer.DefaultLitePullConsumerImpl:resetTopic(java.util.List msgList)
+{
+java.util.Iterator l2;
+  org.apache.rocketmq.common.message.MessageExt messageExt;
+  int $stack4;
+  boolean $stack6;
+  java.lang.Object $stack7;
+  org.apache.rocketmq.client.consumer.DefaultLitePullConsumer $stack8;
+  java.lang.String $stack10;
+  java.lang.String $stack14;
+  if (null==msgList) goto label0;
+ $stack4 = msgList.size();
+ if ($stack4!=0) goto label1;
+ label0:return;
+ label1:l2 = msgList.iterator();
+ label2:$stack6 = l2.hasNext();
+ if ($stack6==0) goto label3;
+ $stack7 = l2.next();
+ messageExt=(org.apache.rocketmq.common.message.MessageExt) $stack7;
+ $stack8=this.defaultLitePullConsumer;
+ $stack10 = $stack8.getNamespace();
+ if (null==$stack10) goto label4;
+ $stack10 = messageExt.getTopic();
+ $stack8=this.defaultLitePullConsumer;
+ $stack14 = $stack8.getNamespace();
+ $stack10 = org.apache.rocketmq.remoting.protocol.NamespaceUtil.withoutNamespace($stack10,$stack14);
+ messageExt.setTopic($stack10);
+ label4:goto label2;
+ label3:return;
+ } 
+

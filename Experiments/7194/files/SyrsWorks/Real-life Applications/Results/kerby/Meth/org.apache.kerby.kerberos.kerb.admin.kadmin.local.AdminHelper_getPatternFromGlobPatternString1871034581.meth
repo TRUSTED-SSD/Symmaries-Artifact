@@ -1,0 +1,36 @@
+static java.util.regex.Pattern org.apache.kerby.kerberos.kerb.admin.kadmin.local.AdminHelper:getPatternFromGlobPatternString(java.lang.String @globString)
+{
+java.util.regex.PatternSyntaxException e;
+  boolean $stack3;
+  java.lang.StringBuilder $stack8;
+  java.util.regex.Pattern $stack13;
+  org.apache.kerby.kerberos.kerb.KrbException $stack14;
+  java.lang.String globString;
+globString=@globString;
+if (globString==null) goto label0;
+ $stack3 = globString.equals((java.lang.Object)"");
+ if ($stack3==0) goto label1;
+ label0:return  null;
+ label1:$stack3 = java.util.regex.Pattern.matches("^[0-9A-Za-z._/@*?\\[\\]\\-]+$",(java.lang.CharSequence)globString);
+ if ($stack3!=0) goto label2;
+ $stack14=new org.apache.kerby.kerberos.kerb.KrbException;
+ $stack14#org.apache.kerby.kerberos.kerb.KrbException("Glob pattern string contains invalid character");
+ throw $stack14;
+ label2:globString = globString.replaceAll("\\.","\\\\.");
+ globString = globString.replaceAll("\\?",".");
+ globString = globString.replaceAll("\\*",".*");
+ $stack8=new java.lang.StringBuilder;
+ $stack8#java.lang.StringBuilder();
+ $stack8 = $stack8.append("^");
+ $stack8 = $stack8.append(globString);
+ $stack8 = $stack8.append("$");
+ globString = $stack8.toString();
+ label3:$stack13 = java.util.regex.Pattern.compile(globString);
+ label4:return  $stack13;
+ label5:e = catch;
+ $stack14=new org.apache.kerby.kerberos.kerb.KrbException;
+ $stack14#org.apache.kerby.kerberos.kerb.KrbException("Invalid glob pattern string");
+ throw $stack14;
+ catch java.util.regex.PatternSyntaxException: label3 - label4 : label5;
+} 
+

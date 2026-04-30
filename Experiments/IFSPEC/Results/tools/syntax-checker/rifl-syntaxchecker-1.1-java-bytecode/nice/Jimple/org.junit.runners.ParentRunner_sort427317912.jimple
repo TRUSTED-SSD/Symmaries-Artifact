@@ -1,0 +1,110 @@
+    public void sort(org.junit.runner.manipulation.Sorter)
+    {
+        org.junit.runners.ParentRunner this;
+        org.junit.runner.manipulation.Sorter sorter;
+        java.lang.Object l2, i$, each;
+        java.lang.Throwable l5;
+        java.util.Collection $stack7;
+        boolean $stack9;
+        java.util.Comparator $stack12;
+        java.util.ArrayList tmp$1217855132;
+        java.util.Iterator tmp$1857246968;
+        java.util.List tmp$532361749;
+
+        this := @this: org.junit.runners.ParentRunner;
+
+        sorter := @parameter0: org.junit.runner.manipulation.Sorter;
+
+        i$ = this.<org.junit.runners.ParentRunner: java.lang.Object childrenLock>;
+/*400*/
+
+        l2 = i$;
+/*400*/
+
+        entermonitor i$;
+/*400*/
+
+     label1:
+        $stack7 = specialinvoke this.<org.junit.runners.ParentRunner: java.util.Collection getFilteredChildren()>();
+/*401*/
+
+        i$ = interfaceinvoke $stack7.<java.util.Collection: java.util.Iterator iterator()>();
+/*401*/
+/*401*/
+
+     label2:
+        tmp$1857246968 = (java.util.Iterator) i$;
+
+        $stack9 = interfaceinvoke tmp$1857246968.<java.util.Iterator: boolean hasNext()>();
+/*401*/
+
+        if $stack9 == 0 goto label3;
+/*401*/
+
+        tmp$1857246968 = (java.util.Iterator) i$;
+
+        each = interfaceinvoke tmp$1857246968.<java.util.Iterator: java.lang.Object next()>();
+/*408*/
+/*408*/
+
+        virtualinvoke sorter.<org.junit.runner.manipulation.Sorter: void apply(java.lang.Object)>(each);
+/*402*/
+
+        goto label2;
+/*402*/
+
+     label3:
+        tmp$1217855132 = new java.util.ArrayList;
+/*404*/
+
+        $stack7 = specialinvoke this.<org.junit.runners.ParentRunner: java.util.Collection getFilteredChildren()>();
+/*404*/
+
+        specialinvoke tmp$1217855132.<java.util.ArrayList: void <init>(java.util.Collection)>($stack7);
+/*404*/
+
+        i$ = tmp$1217855132;
+/*404*/
+
+        $stack12 = specialinvoke this.<org.junit.runners.ParentRunner: java.util.Comparator comparator(org.junit.runner.manipulation.Sorter)>(sorter);
+/*405*/
+
+        tmp$532361749 = (java.util.List) tmp$1217855132;
+
+        staticinvoke <java.util.Collections: void sort(java.util.List,java.util.Comparator)>(tmp$532361749, $stack12);
+/*405*/
+
+        $stack7 = (java.util.Collection) tmp$1217855132;
+
+        $stack7 = staticinvoke <java.util.Collections: java.util.Collection unmodifiableCollection(java.util.Collection)>($stack7);
+/*406*/
+
+        this.<org.junit.runners.ParentRunner: java.util.Collection filteredChildren> = $stack7;
+/*406*/
+
+        exitmonitor l2;
+/*407*/
+
+     label4:
+        goto label7;
+/*407*/
+
+     label5:
+        l5 := @caughtexception;
+/*402*/
+
+        exitmonitor l2;
+/*402*/
+
+     label6:
+        throw l5;
+/*402*/
+
+     label7:
+        return;
+/*408*/
+
+        catch java.lang.Throwable from label1 to label4 with label5;
+        catch java.lang.Throwable from label5 to label6 with label5;
+    }
+

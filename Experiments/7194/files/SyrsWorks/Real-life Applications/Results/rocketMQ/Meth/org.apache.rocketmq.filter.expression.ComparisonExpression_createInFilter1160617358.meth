@@ -1,0 +1,23 @@
+static org.apache.rocketmq.filter.expression.BooleanExpression org.apache.rocketmq.filter.expression.ComparisonExpression:createInFilter(org.apache.rocketmq.filter.expression.Expression left,java.util.List elements)
+{
+boolean $stack2;
+  org.apache.rocketmq.filter.expression.PropertyExpression $stack3;
+  org.apache.rocketmq.filter.expression.BooleanExpression $stack4;
+  java.lang.RuntimeException $stack5;
+  java.lang.StringBuilder $stack6;
+  java.lang.String $stack9;
+  $stack2=left instanceof org.apache.rocketmq.filter.expression.PropertyExpression;
+ if ($stack2!=0) goto label0;
+ $stack5=new java.lang.RuntimeException;
+ $stack6=new java.lang.StringBuilder;
+ $stack6#java.lang.StringBuilder();
+ $stack6 = $stack6.append("Expected a property for In expression, got: ");
+ $stack6 = $stack6.append((java.lang.Object)left);
+ $stack9 = $stack6.toString();
+ $stack5#java.lang.RuntimeException($stack9);
+ throw $stack5;
+ label0:$stack3=(org.apache.rocketmq.filter.expression.PropertyExpression) left;
+ $stack4 = org.apache.rocketmq.filter.expression.UnaryExpression.createInExpression($stack3,elements,(boolean)0);
+ return  $stack4;
+ } 
+

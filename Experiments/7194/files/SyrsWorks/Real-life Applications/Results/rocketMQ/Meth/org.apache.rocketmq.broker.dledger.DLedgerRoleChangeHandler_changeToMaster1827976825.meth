@@ -1,0 +1,44 @@
+void org.apache.rocketmq.broker.dledger.DLedgerRoleChangeHandler:changeToMaster(org.apache.rocketmq.store.config.BrokerRole role)
+{
+java.lang.Throwable l2;
+  org.apache.rocketmq.store.config.BrokerRole $stack3;
+  org.apache.rocketmq.broker.BrokerController $stack4;
+  org.apache.rocketmq.logging.org.slf4j.Logger $stack5;
+  org.apache.rocketmq.common.BrokerConfig $stack7;
+  java.lang.String $stack8;
+  org.apache.rocketmq.store.config.MessageStoreConfig $stack13;
+  org.apache.rocketmq.broker.BrokerController $stack15;
+  boolean $stack19;
+  $stack3=org.apache.rocketmq.store.config.BrokerRole.SLAVE;
+ if (role!=$stack3) goto label0;
+ return;
+ label0:$stack5=org.apache.rocketmq.broker.dledger.DLedgerRoleChangeHandler.LOGGER;
+ $stack4=this.brokerController;
+ $stack7 = $stack4.getBrokerConfig();
+ $stack8 = $stack7.getBrokerName();
+ $stack5.info("Begin to change to master brokerName={}",(java.lang.Object)$stack8);
+ this#org.apache.rocketmq.broker.dledger.DLedgerRoleChangeHandler:handleSlaveSynchronize(role);
+ $stack4=this.brokerController;
+ $stack4.changeSpecialServiceStatus((boolean)1);
+ $stack4=this.brokerController;
+ $stack7 = $stack4.getBrokerConfig();
+ $stack7.setBrokerId(0L);
+ $stack4=this.brokerController;
+ $stack13 = $stack4.getMessageStoreConfig();
+ $stack13.setBrokerRole(role);
+ label1:$stack15=this.brokerController;
+ $stack4=this.brokerController;
+ $stack7 = $stack4.getBrokerConfig();
+ $stack19 = $stack7.isForceRegister();
+ $stack15#org.apache.rocketmq.broker.BrokerController(1,1,$stack19);
+ label2:goto label3;
+ label4:l2 = catch;
+ label3:$stack5=org.apache.rocketmq.broker.dledger.DLedgerRoleChangeHandler.LOGGER;
+ $stack4=this.brokerController;
+ $stack7 = $stack4.getBrokerConfig();
+ $stack8 = $stack7.getBrokerName();
+ $stack5.info("Finish to change to master brokerName={}",(java.lang.Object)$stack8);
+ return;
+ catch java.lang.Throwable: label1 - label2 : label4;
+} 
+

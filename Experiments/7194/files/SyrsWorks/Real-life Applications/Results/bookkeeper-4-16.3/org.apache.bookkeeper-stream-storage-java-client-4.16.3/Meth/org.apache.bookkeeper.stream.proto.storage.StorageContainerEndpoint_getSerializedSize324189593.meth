@@ -1,0 +1,52 @@
+int org.apache.bookkeeper.stream.proto.storage.StorageContainerEndpoint:getSerializedSize()
+{
+int size;
+  int i;
+  long $stack3;
+  byte $stack4;
+  org.apache.bookkeeper.stream.proto.common.Endpoint $stack7;
+  java.util.List $stack8;
+  int $stack9;
+  com.google.protobuf.UnknownFieldSet $stack10;
+  java.lang.Object $stack14;
+  com.google.protobuf.MessageLite $stack15;
+  size=this.memoizedSize;
+ if (size==-1) goto label0;
+ return  size;
+ label0:size=0;
+ $stack3=this.storageContainerId_;
+ $stack4=($stack3 cmp 0L);
+ if ($stack4==0) goto label1;
+ $stack3=this.storageContainerId_;
+ i = com.google.protobuf.CodedOutputStream.computeInt64Size(1,$stack3);
+ size=(0+i);
+ label1:$stack3=this.revision_;
+ $stack4=($stack3 cmp 0L);
+ if ($stack4==0) goto label2;
+ $stack3=this.revision_;
+ i = com.google.protobuf.CodedOutputStream.computeInt64Size(2,$stack3);
+ size=(size+i);
+ label2:$stack7=this.rwEndpoint_;
+ if ($stack7==null) goto label3;
+ $stack7 = this.getRwEndpoint();
+ $stack15=(com.google.protobuf.MessageLite) $stack7;
+ i = com.google.protobuf.CodedOutputStream.computeMessageSize(3,$stack15);
+ size=(size+i);
+ label3:i=0;
+ label4:$stack8=this.roEndpoint_;
+ $stack9 = $stack8.size();
+ if (i>=$stack9) goto label5;
+ $stack8=this.roEndpoint_;
+ $stack14 = $stack8.get(i);
+ $stack15=(com.google.protobuf.MessageLite) $stack14;
+ $stack9 = com.google.protobuf.CodedOutputStream.computeMessageSize(4,$stack15);
+ size=(size+$stack9);
+ i=(i+1);
+ goto label4;
+ label5:$stack10 = this.getUnknownFields();
+ i = $stack10.getSerializedSize();
+ size=(size+i);
+ this.memoizedSize=size;
+ return  size;
+ } 
+

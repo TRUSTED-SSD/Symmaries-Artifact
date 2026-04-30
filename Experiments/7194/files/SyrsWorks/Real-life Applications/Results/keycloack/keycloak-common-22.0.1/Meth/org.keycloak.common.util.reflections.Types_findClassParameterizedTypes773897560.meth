@@ -1,0 +1,37 @@
+static java.lang.reflect.Type[] org.keycloak.common.util.reflections.Types:findClassParameterizedTypes(java.lang.Class root,java.lang.reflect.ParameterizedType @rootType,java.lang.Class searchedForClass)
+{
+java.util.Map typeVarMap;
+  java.lang.Class superclass;
+  java.lang.reflect.Type genericSuper;
+  java.lang.Object intfParam;
+  java.lang.reflect.Type[] types;
+  boolean $stack9;
+  java.lang.reflect.ParameterizedType rootType;
+rootType=@rootType;
+superclass=java.lang.Object;
+ $stack9 = superclass.equals((java.lang.Object)root);
+ if ($stack9==0) goto label0;
+ return  null;
+ label0:typeVarMap = org.keycloak.common.util.reflections.Types.populateParameterizedMap(root,rootType);
+ superclass = root.getSuperclass();
+ genericSuper = root.getGenericSuperclass();
+ $stack9 = superclass.equals((java.lang.Object)searchedForClass);
+ if ($stack9==0) goto label1;
+ types = org.keycloak.common.util.reflections.Types.extractTypes(typeVarMap,genericSuper);
+ return  types;
+ label1:$stack9=genericSuper instanceof java.lang.reflect.ParameterizedType;
+ if ($stack9==0) goto label2;
+ intfParam=(java.lang.reflect.ParameterizedType) genericSuper;
+ rootType=(java.lang.reflect.ParameterizedType) intfParam;
+ types = org.keycloak.common.util.reflections.Types.findClassParameterizedTypes(superclass,rootType,searchedForClass);
+ if (types==null) goto label3;
+ types = org.keycloak.common.util.reflections.Types.extractTypeVariables(typeVarMap,types);
+ return  types;
+ label3:goto label4;
+ label2:intfParam = org.keycloak.common.util.reflections.Types.findClassParameterizedTypes(superclass,null,searchedForClass);
+ if (intfParam==null) goto label4;
+ types=(java.lang.reflect.Type[]) intfParam;
+ return  types;
+ label4:return  null;
+ } 
+

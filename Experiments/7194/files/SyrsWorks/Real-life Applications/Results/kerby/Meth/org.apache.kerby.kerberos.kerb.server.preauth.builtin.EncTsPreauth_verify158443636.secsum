@@ -1,0 +1,11 @@
+boolean org.apache.kerby.kerberos.kerb.server.preauth.builtin.EncTsPreauth:verify (
+  org.apache.kerby.kerberos.kerb.server.request.KdcRequest kdcRequest,
+  org.apache.kerby.kerberos.kerb.preauth.PluginRequestContext requestContext,
+  org.apache.kerby.kerberos.kerb.type.pa.PaDataEntry paData) {
+  guard = tt;
+  ret(level()) = pc ⊔ level(kdcRequest) ⊔ level(paData) ⊔ obj_level(kdcRequest) ⊔ obj_level(paData);
+  ret(obj_level(kdcRequest)) = pc ⊔ level(kdcRequest) ⊔ level(paData) ⊔ obj_level(kdcRequest) ⊔ obj_level(paData);
+  ret(obj_level(paData)) = pc ⊔ level(kdcRequest) ⊔ level(paData) ⊔ obj_level(kdcRequest) ⊔ obj_level(paData);
+  ret(obj_level(requestContext)) = pc ⊔ level(kdcRequest) ⊔ level(paData) ⊔ obj_level(kdcRequest) ⊔ obj_level(paData) ⊔ obj_level(requestContext);
+  ret(obj_level(this)) = pc ⊔ level(kdcRequest) ⊔ level(paData) ⊔ obj_level(kdcRequest) ⊔ obj_level(paData) ⊔ obj_level(this);
+}

@@ -1,0 +1,57 @@
+void org.apache.bookkeeper.util.collections.ConcurrentLongLongPairHashMap$Section:rehash(int newCapacity)
+{
+long[] newTable;
+  int i;
+  long storedKey1;
+  long storedKey2;
+  long storedValue1;
+  long storedValue2;
+  long[] $stack13;
+  int $stack14;
+  float $stack17;
+  float $stack18;
+  byte $stack33;
+  i=(4 * newCapacity);
+ newTable=new long[i];
+ java.util.Arrays.fill(newTable,-1L);
+ i=0;
+ label0:$stack13=this.table;
+ $stack14=#$stack13;
+ if (i>=$stack14) goto label1;
+ $stack13=this.table;
+ storedKey1=$stack13[i];
+ $stack13=this.table;
+ $stack14=(i+1);
+ storedKey2=$stack13[$stack14];
+ $stack13=this.table;
+ $stack14=(i+2);
+ storedValue1=$stack13[$stack14];
+ $stack13=this.table;
+ $stack14=(i+3);
+ storedValue2=$stack13[$stack14];
+ $stack33=(storedKey1 cmp -1L);
+ if ($stack33==0) goto label2;
+ $stack33=(storedKey1 cmp -2L);
+ if ($stack33==0) goto label2;
+ org.apache.bookkeeper.util.collections.ConcurrentLongLongPairHashMap$Section.insertKeyValueNoLock(newTable,newCapacity,storedKey1,storedKey2,storedValue1,storedValue2);
+ label2:i=(i+4);
+ goto label0;
+ label1:this.table=newTable;
+ i=this.size;
+ this.usedBuckets=i;
+ this.capacity=newCapacity;
+ newCapacity=this.capacity;
+ $stack18=(float) newCapacity;
+ $stack17=this.mapFillFactor;
+ $stack17=($stack18 * $stack17);
+ newCapacity=(int) $stack17;
+ this.resizeThresholdUp=newCapacity;
+ newCapacity=this.capacity;
+ $stack18=(float) newCapacity;
+ $stack17=this.mapIdleFactor;
+ $stack17=($stack18 * $stack17);
+ newCapacity=(int) $stack17;
+ this.resizeThresholdBelow=newCapacity;
+ return;
+ } 
+

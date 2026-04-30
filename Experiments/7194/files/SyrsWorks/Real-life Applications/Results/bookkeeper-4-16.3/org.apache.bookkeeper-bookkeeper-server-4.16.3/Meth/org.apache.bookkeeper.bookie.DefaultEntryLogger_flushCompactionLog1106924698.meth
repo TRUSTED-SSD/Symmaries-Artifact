@@ -1,0 +1,44 @@
+void org.apache.bookkeeper.bookie.DefaultEntryLogger:flushCompactionLog()
+{
+java.lang.Object l1;
+  java.lang.Throwable l2;
+  java.lang.Object $stack3;
+  org.apache.bookkeeper.bookie.DefaultEntryLogger$BufferedLogChannel $stack4;
+  java.io.IOException $stack5;
+  org.slf4j.Logger $stack9;
+  java.io.File $stack11;
+  long $stack13;
+  java.lang.Long $stack14;
+  $stack3=this.compactionLogLock;
+ l1=$stack3;
+ monitorenter $stack3;
+ label0:$stack4=this.compactionLogChannel;
+ if ($stack4==null) goto label1;
+ $stack4=this.compactionLogChannel;
+ $stack4.appendLedgersMap();
+ $stack4=this.compactionLogChannel;
+ $stack4.flushAndForceWrite((boolean)0);
+ $stack9=org.apache.bookkeeper.bookie.DefaultEntryLogger.LOG;
+ $stack4=this.compactionLogChannel;
+ $stack11 = $stack4.getLogFile();
+ $stack4=this.compactionLogChannel;
+ $stack13 = $stack4.getLogId();
+ $stack14 = java.lang.Long.valueOf($stack13);
+ dummyClass.lowSink("Flushed compaction log file {} with logId {}.");
+$stack9.info("Flushed compaction log file {} with logId {}.",(java.lang.Object)$stack11,(java.lang.Object)$stack14);
+ $stack4=this.compactionLogChannel;
+ $stack4.close();
+ goto label2;
+ label1:$stack5=new java.io.IOException;
+ $stack5#java.io.IOException("Failed to flush compaction log which has already been removed.");
+ throw $stack5;
+ label2:monitorexit $stack3;
+ label3:goto label4;
+ label5:l2 = catch;
+ monitorexit $stack3;
+ label6:throw l2;
+ label4:return;
+ catch java.lang.Throwable: label0 - label3 : label5;
+catch java.lang.Throwable: label5 - label6 : label5;
+} 
+

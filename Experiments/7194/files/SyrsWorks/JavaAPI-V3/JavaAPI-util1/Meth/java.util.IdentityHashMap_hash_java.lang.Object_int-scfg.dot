@@ -1,0 +1,37 @@
+digraph G {
+  node [shape=box, ];
+  "pc0_js1" [label="〈i1 = java.lang.System.native_identityHashCode (r0), js1〉\n\
+tt",
+             ];
+  "pc1_js1" [label="〈$i3 = i1 << 1, js1〉", ];
+  "pc2_js1" [label="〈$i2 = i1 << 8, js1〉", ];
+  "pc3_js1" [label="〈$i5 = $i3 - $i2, js1〉", ];
+  "pc4_js1" [label="〈$i4 = i0 - 1, js1〉", ];
+  "pc5_js1" [label="〈$i6 = $i5 & $i4, js1〉", ];
+  "pc6_js1" [label="〈return $i6, js1〉", ];
+  "pc7_js1" [label="〈sink, js1〉\n\
+obj_level(r0) ⊑ ret(obj_level(r0))' ∧ (ret(r0.><r0)' ∨ ¬r0.><r0) ∧ (ϕ ≠ S6 ∨ pc ⊔ level($i6) ⊑ ret(level())')",
+             ];
+  
+  
+  "pc0_js1" -> "pc1_js1" [label="tt,\n\
+{level(i1) := pc ⊔ level(r0) ⊔ obj_level(r0)}",
+                          ];
+  "pc1_js1" -> "pc2_js1" [label="tt,\n\
+{level($i3) := pc ⊔ level(r0) ⊔ obj_level(r0)}",
+                          ];
+  "pc2_js1" -> "pc3_js1" [label="tt,\n\
+{level($i2) := pc ⊔ level(r0) ⊔ obj_level(r0)}",
+                          ];
+  "pc3_js1" -> "pc4_js1" [label="tt,\n\
+{level($i5) := pc ⊔ level(r0) ⊔ obj_level(r0)}",
+                          ];
+  "pc4_js1" -> "pc5_js1" [label="tt,\n\
+{level($i4) := pc ⊔ level(i0)}", ];
+  "pc5_js1" -> "pc6_js1" [label="tt,\n\
+{level($i6) := pc ⊔ level(i0) ⊔ level(r0) ⊔ obj_level(r0)}",
+                          ];
+  "pc6_js1" -> "pc7_js1" [label="tt,\n\
+{ϕ := S6}", ];
+  
+  }

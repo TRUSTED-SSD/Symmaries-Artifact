@@ -1,0 +1,56 @@
+static java.lang.String com.google.zxing.datamatrix.encoder.EdifactEncoder:encodeToCodewords(java.lang.CharSequence sb)
+{
+int len;
+  char c1;
+  char c2;
+  char c3;
+  int v;
+  java.lang.StringBuilder res;
+  int $stack14;
+  int $stack20;
+  java.lang.String $stack25;
+  char $stack31;
+  java.lang.IllegalStateException $stack62;
+  len = sb.length();
+ if (len!=0) goto label0;
+ $stack62=new java.lang.IllegalStateException;
+ $stack62#java.lang.IllegalStateException("StringBuilder must not be empty");
+ throw $stack62;
+ label0:c1 = sb.charAt(0);
+ if (len<2) goto label1;
+ c2 = sb.charAt(1);
+ goto label2;
+ label1:c2=0;
+ label2:if (len<3) goto label3;
+ c3 = sb.charAt(2);
+ goto label4;
+ label3:c3=0;
+ label4:if (len<4) goto label5;
+ $stack31 = sb.charAt(3);
+ goto label6;
+ label5:$stack31=0;
+ label6:$stack14=(c1<<18);
+ v=(c2<<12);
+ $stack14=($stack14+v);
+ v=(c3<<6);
+ v=($stack14+v);
+ v=(v+$stack31);
+ $stack14=(v>>16);
+ $stack14=($stack14 & 255);
+ $stack20=(v>>8);
+ $stack20=($stack20 & 255);
+ c1=(char) $stack20;
+ v=(v & 255);
+ c2=(char) v;
+ res=new java.lang.StringBuilder;
+ res#java.lang.StringBuilder(3);
+ c3=(char) $stack14;
+ res.append(c3);
+ if (len<2) goto label7;
+ res.append(c1);
+ label7:if (len<3) goto label8;
+ res.append(c2);
+ label8:$stack25 = res.toString();
+ return  $stack25;
+ } 
+

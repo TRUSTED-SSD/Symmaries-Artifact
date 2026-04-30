@@ -1,0 +1,36 @@
+static java.lang.String org.apache.bookkeeper.statelib.impl.rocksdb.ccheckpoint.CheckpointFile$CheckpointFileBuilder:computeChecksum(java.io.File file)
+{
+java.lang.String ckSum;
+  java.io.IOException e;
+  java.lang.StringBuilder $stack3;
+  long $stack5;
+  com.google.common.io.ByteSource $stack8;
+  com.google.common.hash.HashFunction $stack9;
+  com.google.common.hash.HashCode $stack10;
+  org.slf4j.Logger $stack13;
+  java.lang.Object[] $stack14;
+  java.lang.String $stack17;
+  $stack3=new java.lang.StringBuilder;
+ $stack3#java.lang.StringBuilder();
+ $stack3 = $stack3.append("invalid-");
+ $stack5 = java.lang.System.currentTimeMillis();
+ $stack3 = $stack3.append($stack5);
+ ckSum = $stack3.toString();
+ label0:$stack8 = com.google.common.io.Files.asByteSource(file);
+ $stack9 = com.google.common.hash.Hashing.sha256();
+ $stack10 = $stack8.hash($stack9);
+ ckSum = $stack10.toString();
+ label1:return  ckSum;
+ label2:e = catch;
+ $stack13 = org.apache.bookkeeper.statelib.impl.rocksdb.ccheckpoint.CheckpointFile.access$000();
+ $stack14=new java.lang.Object[3];
+ $stack17 = file.getName();
+ $stack14[0]=$stack17;
+ $stack17 = e.getMessage();
+ $stack14[1]=$stack17;
+ $stack14[2]=e;
+ $stack13.error("Failed to get checksum for file {} {}",$stack14);
+ return  ckSum;
+ catch java.io.IOException: label0 - label1 : label2;
+} 
+

@@ -1,0 +1,54 @@
+void org.apache.bookkeeper.proto.BKStats$OpStats:updateLatency(long latency)
+{
+int bucket;
+  byte $stack4;
+  double $stack5;
+  double $stack6;
+  long $stack8;
+  long[] $stack17;
+  org.slf4j.Logger $stack32;
+  $stack4=(latency cmp 0L);
+ if ($stack4>=0) goto label0;
+ $stack32 = org.apache.bookkeeper.proto.BKStats.access$000();
+ $stack32.warn("Latency time coming negative");
+ return;
+ label0:$stack6=this.totalLatency;
+ $stack5=(double) latency;
+ $stack5=($stack6+$stack5);
+ this.totalLatency=$stack5;
+ $stack8=this.numSuccessOps;
+ $stack8=($stack8+1L);
+ this.numSuccessOps=$stack8;
+ $stack8=this.minLatency;
+ $stack4=(latency cmp $stack8);
+ if ($stack4>=0) goto label1;
+ this.minLatency=latency;
+ label1:$stack8=this.maxLatency;
+ $stack4=(latency cmp $stack8);
+ if ($stack4<=0) goto label2;
+ this.maxLatency=latency;
+ label2:$stack4=(latency cmp 100L);
+ if ($stack4>0) goto label3;
+ latency=(latency/10L);
+ bucket=(int) latency;
+ goto label4;
+ label3:$stack4=(latency cmp 1000L);
+ if ($stack4>0) goto label5;
+ latency=(latency/100L);
+ bucket=(int) latency;
+ bucket=(9+bucket);
+ goto label4;
+ label5:$stack4=(latency cmp 10000L);
+ if ($stack4>0) goto label6;
+ latency=(latency/1000L);
+ bucket=(int) latency;
+ bucket=(18+bucket);
+ goto label4;
+ label6:bucket=28;
+ label4:$stack17=this.latencyBuckets;
+ latency=$stack17[bucket];
+ latency=(latency+1L);
+ $stack17[bucket]=latency;
+ return;
+ } 
+

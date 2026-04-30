@@ -1,0 +1,25 @@
+java.lang.Long org.apache.bookkeeper.common.router.AbstractHashRouter:getRoutingKey(java.lang.Object key)
+{
+io.netty.buffer.ByteBuf keyData;
+  java.lang.Long l3;
+  java.lang.Throwable l4;
+  int $stack6;
+  int $stack7;
+  long[] $stack8;
+  long $stack9;
+  keyData = this.getRoutingKeyData(key);
+ label0:$stack6 = keyData.readerIndex();
+ $stack7 = keyData.readableBytes();
+dummyClass.highSourceMut($stack7);
+ $stack8 = org.apache.bookkeeper.common.hash.Murmur3.hash128(keyData,$stack6,$stack7,383242705L);
+ $stack9=$stack8[0];
+ l3 = java.lang.Long.valueOf($stack9);
+ label1:io.netty.util.ReferenceCountUtil.release((java.lang.Object)keyData);
+ return  l3;
+ label2:l4 = catch;
+ label3:io.netty.util.ReferenceCountUtil.release((java.lang.Object)keyData);
+ throw l4;
+ catch java.lang.Throwable: label0 - label1 : label2;
+catch java.lang.Throwable: label2 - label3 : label2;
+} 
+

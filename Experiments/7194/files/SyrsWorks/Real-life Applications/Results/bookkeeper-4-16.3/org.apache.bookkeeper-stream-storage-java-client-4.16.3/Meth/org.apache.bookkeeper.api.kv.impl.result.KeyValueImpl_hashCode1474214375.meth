@@ -1,0 +1,58 @@
+int org.apache.bookkeeper.api.kv.impl.result.KeyValueImpl:hashCode()
+{
+byte PRIME;
+  int result;
+  long $createRevision;
+  java.lang.Object $key;
+  long $stack14;
+  int $stack17;
+  boolean $stack29;
+  PRIME=59;
+ $createRevision = this.createRevision();
+ $stack17=(1 * 59);
+ $stack14=($createRevision>>>32);
+ $createRevision=(!$stack14 & $createRevision) |(!$createRevision & $stack14);
+ result=(int) $createRevision;
+ result=($stack17+result);
+ $createRevision = this.modifiedRevision();
+ $stack17=(result * 59);
+ $stack14=($createRevision>>>32);
+ $createRevision=(!$stack14 & $createRevision) |(!$createRevision & $stack14);
+ result=(int) $createRevision;
+ result=($stack17+result);
+ $createRevision = this.version();
+ $stack17=(result * 59);
+ $stack14=($createRevision>>>32);
+ $createRevision=(!$stack14 & $createRevision) |(!$createRevision & $stack14);
+ result=(int) $createRevision;
+ result=($stack17+result);
+ result=(result * 59);
+ $stack29 = this.isNumber();
+ if ($stack29==0) goto label0;
+ PRIME=79;
+ goto label1;
+ label0:PRIME=97;
+ label1:$createRevision = this.numberValue();
+ result=(result+PRIME);
+ $stack17=(result * 59);
+ $stack14=($createRevision>>>32);
+ $createRevision=(!$stack14 & $createRevision) |(!$createRevision & $stack14);
+ result=(int) $createRevision;
+ $key = this.key();
+ result=($stack17+result);
+ result=(result * 59);
+ if ($key!=null) goto label2;
+ $stack17=43;
+ goto label3;
+ label2:$stack17 = $key.hashCode();
+ label3:$key = this.value();
+ result=(result+$stack17);
+ result=(result * 59);
+ if ($key!=null) goto label4;
+ $stack17=43;
+ goto label5;
+ label4:$stack17 = $key.hashCode();
+ label5:result=(result+$stack17);
+ return  result;
+ } 
+

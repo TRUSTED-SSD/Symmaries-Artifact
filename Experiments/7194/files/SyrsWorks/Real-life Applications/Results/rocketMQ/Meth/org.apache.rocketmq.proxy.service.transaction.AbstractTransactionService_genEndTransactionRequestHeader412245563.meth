@@ -1,0 +1,35 @@
+org.apache.rocketmq.proxy.service.transaction.EndTransactionRequestData org.apache.rocketmq.proxy.service.transaction.AbstractTransactionService:genEndTransactionRequestHeader(java.lang.String @producerGroup,java.lang.Integer commitOrRollback,boolean fromTransactionCheck,java.lang.String msgId,java.lang.String transactionId)
+{
+org.apache.rocketmq.proxy.service.transaction.TransactionData transactionData;
+  org.apache.rocketmq.remoting.protocol.header.EndTransactionRequestHeader header;
+  org.apache.rocketmq.proxy.service.transaction.TransactionDataManager $stack8;
+  java.lang.Boolean $stack11;
+  long $stack12;
+  java.lang.Long $stack13;
+  org.apache.rocketmq.proxy.service.transaction.EndTransactionRequestData $stack16;
+  java.lang.String producerGroup;
+producerGroup=@producerGroup;
+$stack8=this.transactionDataManager;
+ transactionData = $stack8.pollNoExpireTransactionData(producerGroup,transactionId);
+ if (transactionData!=null) goto label0;
+ return  null;
+ label0:header=new org.apache.rocketmq.remoting.protocol.header.EndTransactionRequestHeader;
+ header#org.apache.rocketmq.remoting.protocol.header.EndTransactionRequestHeader();
+ header.setProducerGroup(producerGroup);
+ header.setCommitOrRollback(commitOrRollback);
+ $stack11 = java.lang.Boolean.valueOf(fromTransactionCheck);
+ header.setFromTransactionCheck($stack11);
+ header.setMsgId(msgId);
+ header.setTransactionId(transactionId);
+ $stack12 = transactionData.getTranStateTableOffset();
+ $stack13 = java.lang.Long.valueOf($stack12);
+ header.setTranStateTableOffset($stack13);
+ $stack12 = transactionData.getCommitLogOffset();
+ $stack13 = java.lang.Long.valueOf($stack12);
+ header.setCommitLogOffset($stack13);
+ $stack16=new org.apache.rocketmq.proxy.service.transaction.EndTransactionRequestData;
+ producerGroup = transactionData.getBrokerName();
+ $stack16#org.apache.rocketmq.proxy.service.transaction.EndTransactionRequestData(producerGroup,header);
+ return  $stack16;
+ } 
+

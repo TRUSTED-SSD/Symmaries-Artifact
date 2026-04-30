@@ -1,0 +1,28 @@
+org.junit.experimental.categories.Categories(java.lang.Class klass,org.junit.runners.model.RunnerBuilder builder)
+{
+java.util.Set included;
+  java.util.Set excluded;
+  boolean isAnyIncluded;
+  boolean isAnyExcluded;
+  org.junit.experimental.categories.Categories$CategoryFilter $stack11;
+  org.junit.runner.Description $stack12;
+  org.junit.runner.manipulation.NoTestsRemainException $stack13;
+  org.junit.runners.model.InitializationError $stack14;
+  this#org.junit.runners.Suite(klass,builder);
+ label0:included = org.junit.experimental.categories.Categories.getIncludedCategory(klass);
+ excluded = org.junit.experimental.categories.Categories.getExcludedCategory(klass);
+ isAnyIncluded = org.junit.experimental.categories.Categories.isAnyIncluded(klass);
+ isAnyExcluded = org.junit.experimental.categories.Categories.isAnyExcluded(klass);
+ $stack11 = org.junit.experimental.categories.Categories$CategoryFilter.categoryFilter(isAnyIncluded,included,isAnyExcluded,excluded);
+ this.filter((org.junit.runner.manipulation.Filter)$stack11);
+ label1:goto label2;
+ label3:$stack13 = catch;
+ $stack14=new org.junit.runners.model.InitializationError;
+ $stack14#org.junit.runners.model.InitializationError((java.lang.Throwable)$stack13);
+ throw $stack14;
+ label2:$stack12 = this.getDescription();
+ org.junit.experimental.categories.Categories.assertNoCategorizedDescendentsOfUncategorizeableParents($stack12);
+ return;
+ catch org.junit.runner.manipulation.NoTestsRemainException: label0 - label1 : label3;
+} 
+

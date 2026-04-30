@@ -1,0 +1,52 @@
+static org.apache.rocketmq.common.utils.HttpTinyClient$HttpResult org.apache.rocketmq.common.utils.HttpTinyClient:httpPost(java.lang.String @url,java.util.List headers,java.util.List paramValues,java.lang.String encoding,long readTimeoutMs)
+{
+java.lang.String encodedContent;
+  java.net.HttpURLConnection conn;
+  int respCode;
+  org.apache.rocketmq.common.utils.HttpTinyClient$HttpResult l10;
+  java.lang.Throwable l11;
+  java.net.URL $stack13;
+  java.net.URLConnection $stack14;
+  java.io.OutputStream $stack16;
+  byte[] $stack17;
+  java.io.InputStream $stack19;
+  java.lang.String url;
+url=@url;
+encodedContent = org.apache.rocketmq.common.utils.HttpTinyClient.encodingParams(paramValues,encoding);
+ conn=null;
+ label0:$stack13=new java.net.URL;
+ $stack13#java.net.URL(url);
+ $stack14 = $stack13.openConnection();
+ conn=(java.net.HttpURLConnection) $stack14;
+ conn.setRequestMethod("POST");
+ conn.setConnectTimeout(3000);
+ respCode=(int) readTimeoutMs;
+ conn.setReadTimeout(respCode);
+ conn.setDoOutput((boolean)1);
+ conn.setDoInput((boolean)1);
+ org.apache.rocketmq.common.utils.HttpTinyClient.setHeaders(conn,headers,encoding);
+ $stack16 = conn.getOutputStream();
+ $stack17 = encodedContent.getBytes("UTF-8");
+ dummyClass.lowSink($stack17);
+$stack16.write($stack17);
+ respCode = conn.getResponseCode();
+ url=null;
+ if (200!=respCode) goto label1;
+ $stack19 = conn.getInputStream();
+ url = org.apache.rocketmq.common.utils.IOTinyUtils.toString($stack19,encoding);
+ goto label2;
+ label1:$stack19 = conn.getErrorStream();
+ url = org.apache.rocketmq.common.utils.IOTinyUtils.toString($stack19,encoding);
+ label2:l10=new org.apache.rocketmq.common.utils.HttpTinyClient$HttpResult;
+ l10#org.apache.rocketmq.common.utils.HttpTinyClient$HttpResult(respCode,url);
+ label3:if (null==conn) goto label4;
+ conn.disconnect();
+ label4:return  l10;
+ label5:l11 = catch;
+ label6:if (null==conn) goto label7;
+ conn.disconnect();
+ label7:throw l11;
+ catch java.lang.Throwable: label0 - label3 : label5;
+catch java.lang.Throwable: label5 - label6 : label5;
+} 
+

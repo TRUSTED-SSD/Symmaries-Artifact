@@ -1,0 +1,31 @@
+org.apache.rocketmq.common.message.MessageExt org.apache.rocketmq.client.impl.MQAdminImpl:viewMessage(java.lang.String @msgId)
+{
+org.apache.rocketmq.common.message.MessageId messageId;
+  java.lang.Exception e;
+  org.apache.rocketmq.client.impl.factory.MQClientInstance $stack5;
+  org.apache.rocketmq.client.impl.MQClientAPIImpl $stack6;
+  java.net.SocketAddress $stack7;
+  long $stack9;
+  long $stack10;
+  org.apache.rocketmq.common.message.MessageExt $stack11;
+  org.apache.rocketmq.client.exception.MQClientException $stack13;
+  java.lang.String msgId;
+msgId=@msgId;
+messageId=null;
+ label0:messageId = org.apache.rocketmq.common.message.MessageDecoder.decodeMessageId(msgId);
+ label1:goto label2;
+ label3:e = catch;
+ $stack13=new org.apache.rocketmq.client.exception.MQClientException;
+ $stack13#org.apache.rocketmq.client.exception.MQClientException(208,"query message by id finished, but no message.");
+ throw $stack13;
+ label2:$stack5=this.mQClientFactory;
+ $stack6 = $stack5.getMQClientAPIImpl();
+ $stack7 = messageId.getAddress();
+ msgId = org.apache.rocketmq.common.utils.NetworkUtil.socketAddress2String($stack7);
+ $stack9 = messageId.getOffset();
+ $stack10=this.timeoutMillis;
+ $stack11 = $stack6.viewMessage(msgId,$stack9,$stack10);
+ return  $stack11;
+ catch java.lang.Exception: label0 - label1 : label3;
+} 
+

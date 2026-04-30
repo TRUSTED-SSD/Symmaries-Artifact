@@ -1,0 +1,39 @@
+java.lang.Object org.apache.rocketmq.store.queue.SparseConsumeQueue:getMax(org.apache.rocketmq.store.logfile.MappedFile mappedFile,java.util.function.Function function)
+{
+java.nio.ByteBuffer byteBuffer;
+  int i;
+  long offset;
+  int size;
+  long tagsCode;
+  short batchSize;
+  byte $stack25;
+  java.lang.Object $stack29;
+  if (mappedFile==null) goto label0;
+ i = mappedFile.getReadPosition();
+ if (i>=46) goto label1;
+ label0:return  null;
+ label1:byteBuffer = mappedFile.sliceByteBuffer();
+ i = mappedFile.getReadPosition();
+ i=(i-46);
+ label2:if (i<0) goto label3;
+ byteBuffer.position(i);
+ offset = byteBuffer.getLong();
+ size = byteBuffer.getInt();
+ byteBuffer.getLong();
+ byteBuffer.getLong();
+ tagsCode = byteBuffer.getLong();
+ batchSize = byteBuffer.getShort();
+ $stack25=(offset cmp 0L);
+ if ($stack25<0) goto label4;
+ if (size<=0) goto label4;
+ $stack25=(tagsCode cmp 0L);
+ if ($stack25<0) goto label4;
+ if (batchSize<=0) goto label4;
+ byteBuffer.position(i);
+ $stack29 = function.apply((java.lang.Object)byteBuffer);
+ return  $stack29;
+ label4:i=(i+-46);
+ goto label2;
+ label3:return  null;
+ } 
+

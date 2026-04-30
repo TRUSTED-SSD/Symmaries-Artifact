@@ -1,0 +1,9 @@
+java.util.Set org.apache.bookkeeper.client.RackawareEnsemblePlacementPolicy:onClusterChanged (
+  java.util.Set writableBookies, java.util.Set readOnlyBookies) {
+  guard = tt;
+  ret(level()) = pc ⊔ level(readOnlyBookies) ⊔ level(this) ⊔ level(writableBookies) ⊔ obj_level(readOnlyBookies) ⊔ obj_level(this);
+  ret(obj_level()) = pc ⊔ level(readOnlyBookies) ⊔ level(this) ⊔ level(writableBookies) ⊔ obj_level(readOnlyBookies) ⊔ obj_level(this);
+  ret(obj_level(readOnlyBookies)) = if obj_level(readOnlyBookies) ⊔ obj_level(this) = ⊤ ∨ pc ≠ ⊤ ∧ level(this) = ⊤ ∧ obj_level(readOnlyBookies) = ⊥ ∧ obj_level(this) = ⊥ then ⊤ else ⊥;
+  ret(obj_level(this)) = if obj_level(readOnlyBookies) ⊔ obj_level(this) = ⊤ ∨ pc ≠ ⊤ ∧ level(this) = ⊤ ∧ obj_level(readOnlyBookies) = ⊥ ∧ obj_level(this) = ⊥ then ⊤ else ⊥;
+  ret(obj_level(writableBookies)) = if obj_level(readOnlyBookies) ⊔ obj_level(this) = ⊤ ∨ pc ≠ ⊤ ∧ level(this) = ⊤ ∧ obj_level(readOnlyBookies) = ⊥ ∧ obj_level(this) = ⊥ then ⊤ else ⊥;
+}

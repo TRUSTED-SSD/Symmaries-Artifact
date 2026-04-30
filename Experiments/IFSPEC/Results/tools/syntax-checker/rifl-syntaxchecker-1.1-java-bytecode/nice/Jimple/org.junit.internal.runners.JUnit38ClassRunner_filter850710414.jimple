@@ -1,0 +1,135 @@
+    public void filter(org.junit.runner.manipulation.Filter) throws org.junit.runner.manipulation.NoTestsRemainException
+    {
+        org.junit.internal.runners.JUnit38ClassRunner this;
+        org.junit.runner.manipulation.Filter filter;
+        java.lang.Object adapter;
+        junit.framework.TestSuite filtered, tmp$415222127;
+        int n, i;
+        junit.framework.Test test;
+        boolean $stack8;
+        java.lang.String $stack13;
+        org.junit.runner.Description $stack18;
+        org.junit.runner.manipulation.NoTestsRemainException tmp$539693240;
+        org.junit.runner.manipulation.Filterable tmp$231282902;
+
+        this := @this: org.junit.internal.runners.JUnit38ClassRunner;
+
+        filter := @parameter0: org.junit.runner.manipulation.Filter;
+
+        test = specialinvoke this.<org.junit.internal.runners.JUnit38ClassRunner: junit.framework.Test getTest()>();
+/*146*/
+
+        $stack8 = test instanceof org.junit.runner.manipulation.Filterable;
+/*146*/
+
+        if $stack8 == 0 goto label1;
+/*146*/
+
+        test = specialinvoke this.<org.junit.internal.runners.JUnit38ClassRunner: junit.framework.Test getTest()>();
+/*147*/
+
+        adapter = (org.junit.runner.manipulation.Filterable) test;
+/*147*/
+
+        tmp$231282902 = (org.junit.runner.manipulation.Filterable) adapter;
+
+        interfaceinvoke tmp$231282902.<org.junit.runner.manipulation.Filterable: void filter(org.junit.runner.manipulation.Filter)>(filter);
+/*148*/
+
+        goto label5;
+/*149*/
+
+     label1:
+        test = specialinvoke this.<org.junit.internal.runners.JUnit38ClassRunner: junit.framework.Test getTest()>();
+/*146*/
+
+        $stack8 = test instanceof junit.framework.TestSuite;
+/*146*/
+
+        if $stack8 == 0 goto label5;
+/*146*/
+
+        test = specialinvoke this.<org.junit.internal.runners.JUnit38ClassRunner: junit.framework.Test getTest()>();
+/*150*/
+
+        adapter = (junit.framework.TestSuite) test;
+/*150*/
+
+        tmp$415222127 = new junit.framework.TestSuite;
+/*151*/
+
+        filtered = tmp$415222127;
+
+        filtered = (junit.framework.TestSuite) adapter;
+
+        $stack13 = virtualinvoke filtered.<junit.framework.TestSuite: java.lang.String getName()>();
+/*151*/
+
+        specialinvoke tmp$415222127.<junit.framework.TestSuite: void <init>(java.lang.String)>($stack13);
+/*151*/
+
+        filtered = tmp$415222127;
+/*151*/
+
+        tmp$415222127 = (junit.framework.TestSuite) adapter;
+
+        n = virtualinvoke tmp$415222127.<junit.framework.TestSuite: int testCount()>();
+/*152*/
+/*152*/
+
+        i = 0;
+/*153*/
+
+     label2:
+        if i >= n goto label4;
+/*153*/
+
+        tmp$415222127 = (junit.framework.TestSuite) adapter;
+
+        test = virtualinvoke tmp$415222127.<junit.framework.TestSuite: junit.framework.Test testAt(int)>(i);
+/*154*/
+/*154*/
+
+        $stack18 = staticinvoke <org.junit.internal.runners.JUnit38ClassRunner: org.junit.runner.Description makeDescription(junit.framework.Test)>(test);
+/*155*/
+
+        $stack8 = virtualinvoke filter.<org.junit.runner.manipulation.Filter: boolean shouldRun(org.junit.runner.Description)>($stack18);
+/*155*/
+
+        if $stack8 == 0 goto label3;
+/*155*/
+
+        virtualinvoke filtered.<junit.framework.TestSuite: void addTest(junit.framework.Test)>(test);
+/*156*/
+
+     label3:
+        i = i + 1;
+/*153*/
+
+        goto label2;
+/*153*/
+
+     label4:
+        specialinvoke this.<org.junit.internal.runners.JUnit38ClassRunner: void setTest(junit.framework.Test)>(filtered);
+/*159*/
+
+        n = virtualinvoke filtered.<junit.framework.TestSuite: int testCount()>();
+/*160*/
+
+        if n != 0 goto label5;
+/*160*/
+
+        tmp$539693240 = new org.junit.runner.manipulation.NoTestsRemainException;
+/*161*/
+
+        specialinvoke tmp$539693240.<org.junit.runner.manipulation.NoTestsRemainException: void <init>()>();
+/*161*/
+
+        throw tmp$539693240;
+/*161*/
+
+     label5:
+        return;
+/*164*/
+    }
+

@@ -1,0 +1,10 @@
+org.apache.bookkeeper.auth.BookieAuthProvider org.apache.bookkeeper.auth.AuthProviderFactoryFactory$AuthenticationDisabledAuthProviderFactory:newProvider (
+  org.apache.bookkeeper.proto.BookieConnectionPeer addr,
+  org.apache.bookkeeper.auth.AuthCallbacks$GenericCallback completeCb) {
+  guard = pc ⊔ level(completeCb) ⊔ obj_level(completeCb) = ⊥;
+  ret(level()) = ⊥;
+  ret(obj_level()) = level(addr) ⊔ level(this) ⊔ obj_level(addr) ⊔ obj_level(this);
+  ret(obj_level(addr)) = level(addr) ⊔ level(this) ⊔ obj_level(addr) ⊔ obj_level(this);
+  ret(obj_level(completeCb)) = level(addr) ⊔ level(this) ⊔ obj_level(addr) ⊔ obj_level(this);
+  ret(obj_level(this)) = level(addr) ⊔ level(this) ⊔ obj_level(addr) ⊔ obj_level(this);
+}

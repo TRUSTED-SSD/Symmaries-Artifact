@@ -1,0 +1,69 @@
+    public void run(org.junit.runner.notification.RunNotifier)
+    {
+        org.junit.runners.ParentRunner this;
+        org.junit.runner.notification.RunNotifier notifier;
+        org.junit.internal.runners.model.EachTestNotifier testNotifier;
+        org.junit.runners.model.Statement statement;
+        org.junit.runner.Description $stack5;
+        org.junit.runner.notification.StoppedByUserException $stack7;
+        java.lang.Throwable $stack8;
+        org.junit.internal.AssumptionViolatedException $stack9;
+
+        this := @this: org.junit.runners.ParentRunner;
+
+        notifier := @parameter0: org.junit.runner.notification.RunNotifier;
+
+        testNotifier = new org.junit.internal.runners.model.EachTestNotifier;
+/*359*/
+
+        $stack5 = virtualinvoke this.<org.junit.runners.ParentRunner: org.junit.runner.Description getDescription()>();
+/*359*/
+
+        specialinvoke testNotifier.<org.junit.internal.runners.model.EachTestNotifier: void <init>(org.junit.runner.notification.RunNotifier,org.junit.runner.Description)>(notifier, $stack5);
+/*359*/
+
+     label1:
+        statement = virtualinvoke this.<org.junit.runners.ParentRunner: org.junit.runners.model.Statement classBlock(org.junit.runner.notification.RunNotifier)>(notifier);
+/*362*/
+/*362*/
+
+        virtualinvoke statement.<org.junit.runners.model.Statement: void evaluate()>();
+/*363*/
+
+     label2:
+        goto label6;
+/*370*/
+
+     label3:
+        $stack9 := @caughtexception;
+/*371*/
+
+        virtualinvoke testNotifier.<org.junit.internal.runners.model.EachTestNotifier: void addFailedAssumption(org.junit.internal.AssumptionViolatedException)>($stack9);
+/*365*/
+
+        goto label6;
+/*370*/
+
+     label4:
+        $stack7 := @caughtexception;
+/*371*/
+
+        throw $stack7;
+/*367*/
+
+     label5:
+        $stack8 := @caughtexception;
+/*367*/
+
+        virtualinvoke testNotifier.<org.junit.internal.runners.model.EachTestNotifier: void addFailure(java.lang.Throwable)>($stack8);
+/*369*/
+
+     label6:
+        return;
+/*371*/
+
+        catch org.junit.internal.AssumptionViolatedException from label1 to label2 with label3;
+        catch org.junit.runner.notification.StoppedByUserException from label1 to label2 with label4;
+        catch java.lang.Throwable from label1 to label2 with label5;
+    }
+

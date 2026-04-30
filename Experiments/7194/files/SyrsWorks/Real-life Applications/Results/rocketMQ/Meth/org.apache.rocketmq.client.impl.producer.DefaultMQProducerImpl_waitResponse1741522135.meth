@@ -1,0 +1,40 @@
+org.apache.rocketmq.common.message.Message org.apache.rocketmq.client.impl.producer.DefaultMQProducerImpl:waitResponse(org.apache.rocketmq.common.message.Message msg,long timeout,org.apache.rocketmq.client.producer.RequestResponseFuture requestResponseFuture,long cost)
+{
+org.apache.rocketmq.common.message.Message responseMessage;
+  boolean $stack10;
+  org.apache.rocketmq.client.exception.MQClientException $stack11;
+  java.lang.StringBuilder $stack12;
+  java.lang.String $stack14;
+  java.lang.Throwable $stack18;
+  org.apache.rocketmq.client.exception.RequestTimeoutException $stack19;
+  cost=(timeout-cost);
+ responseMessage = requestResponseFuture.waitResponseMessage(cost);
+ if (responseMessage!=null) goto label0;
+ $stack10 = requestResponseFuture.isSendRequestOk();
+ if ($stack10==0) goto label1;
+ $stack19=new org.apache.rocketmq.client.exception.RequestTimeoutException;
+ $stack12=new java.lang.StringBuilder;
+ $stack12#java.lang.StringBuilder();
+ $stack12 = $stack12.append("send request message to <");
+ $stack14 = msg.getTopic();
+ $stack12 = $stack12.append($stack14);
+ $stack12 = $stack12.append("> OK, but wait reply message timeout, ");
+ $stack12 = $stack12.append(timeout);
+ $stack12 = $stack12.append(" ms.");
+ $stack14 = $stack12.toString();
+ $stack19#org.apache.rocketmq.client.exception.RequestTimeoutException(10006,$stack14);
+ throw $stack19;
+ label1:$stack11=new org.apache.rocketmq.client.exception.MQClientException;
+ $stack12=new java.lang.StringBuilder;
+ $stack12#java.lang.StringBuilder();
+ $stack12 = $stack12.append("send request message to <");
+ $stack14 = msg.getTopic();
+ $stack12 = $stack12.append($stack14);
+ $stack12 = $stack12.append("> fail");
+ $stack14 = $stack12.toString();
+ $stack18 = requestResponseFuture.getCause();
+ $stack11#org.apache.rocketmq.client.exception.MQClientException($stack14,$stack18);
+ throw $stack11;
+ label0:return  responseMessage;
+ } 
+

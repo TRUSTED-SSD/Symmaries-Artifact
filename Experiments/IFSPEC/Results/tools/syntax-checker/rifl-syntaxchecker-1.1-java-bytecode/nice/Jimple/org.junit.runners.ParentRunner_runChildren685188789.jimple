@@ -1,0 +1,76 @@
+    private void runChildren(org.junit.runner.notification.RunNotifier)
+    {
+        org.junit.runners.ParentRunner this;
+        org.junit.runner.notification.RunNotifier notifier;
+        org.junit.runners.model.RunnerScheduler currentScheduler;
+        java.util.Iterator i$;
+        java.lang.Object each;
+        java.lang.Throwable l5;
+        java.util.Collection $stack6;
+        boolean $stack8;
+        org.junit.runners.ParentRunner$3 $stack10;
+
+        this := @this: org.junit.runners.ParentRunner;
+
+        notifier := @parameter0: org.junit.runner.notification.RunNotifier;
+
+        currentScheduler = this.<org.junit.runners.ParentRunner: org.junit.runners.model.RunnerScheduler scheduler>;
+/*285*/
+
+     label1:
+        $stack6 = specialinvoke this.<org.junit.runners.ParentRunner: java.util.Collection getFilteredChildren()>();
+/*287*/
+
+        i$ = interfaceinvoke $stack6.<java.util.Collection: java.util.Iterator iterator()>();
+/*287*/
+/*287*/
+
+     label2:
+        $stack8 = interfaceinvoke i$.<java.util.Iterator: boolean hasNext()>();
+/*287*/
+
+        if $stack8 == 0 goto label3;
+/*287*/
+
+        each = interfaceinvoke i$.<java.util.Iterator: java.lang.Object next()>();
+/*297*/
+/*297*/
+
+        $stack10 = new org.junit.runners.ParentRunner$3;
+/*288*/
+
+        specialinvoke $stack10.<org.junit.runners.ParentRunner$3: void <init>(org.junit.runners.ParentRunner,java.lang.Object,org.junit.runner.notification.RunNotifier)>(this, each, notifier);
+/*288*/
+
+        interfaceinvoke currentScheduler.<org.junit.runners.model.RunnerScheduler: void schedule(java.lang.Runnable)>($stack10);
+/*288*/
+
+        goto label2;
+/*288*/
+
+     label3:
+        interfaceinvoke currentScheduler.<org.junit.runners.model.RunnerScheduler: void finished()>();
+/*295*/
+
+        goto label6;
+/*296*/
+
+     label4:
+        l5 := @caughtexception;
+/*288*/
+
+     label5:
+        interfaceinvoke currentScheduler.<org.junit.runners.model.RunnerScheduler: void finished()>();
+/*295*/
+
+        throw l5;
+/*295*/
+
+     label6:
+        return;
+/*297*/
+
+        catch java.lang.Throwable from label1 to label3 with label4;
+        catch java.lang.Throwable from label4 to label5 with label4;
+    }
+

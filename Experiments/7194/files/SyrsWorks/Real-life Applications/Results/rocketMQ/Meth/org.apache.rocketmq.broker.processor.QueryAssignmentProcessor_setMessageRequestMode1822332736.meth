@@ -1,0 +1,30 @@
+org.apache.rocketmq.remoting.protocol.RemotingCommand org.apache.rocketmq.broker.processor.QueryAssignmentProcessor:setMessageRequestMode(io.netty.channel.ChannelHandlerContext ctx,org.apache.rocketmq.remoting.protocol.RemotingCommand request)
+{
+org.apache.rocketmq.remoting.protocol.RemotingCommand response;
+  org.apache.rocketmq.remoting.protocol.body.SetMessageRequestModeRequestBody requestBody;
+  java.lang.String topic;
+  java.lang.String consumerGroup;
+  byte[] $stack8;
+  java.lang.Object $stack9;
+  boolean $stack11;
+  org.apache.rocketmq.broker.loadbalance.MessageRequestModeManager $stack13;
+  response = org.apache.rocketmq.remoting.protocol.RemotingCommand.createResponseCommand(null);
+ $stack8 = request.getBody();
+ $stack9 = org.apache.rocketmq.remoting.protocol.RemotingSerializable.decode($stack8,org.apache.rocketmq.remoting.protocol.body.SetMessageRequestModeRequestBody);
+ requestBody=(org.apache.rocketmq.remoting.protocol.body.SetMessageRequestModeRequestBody) $stack9;
+ topic = requestBody.getTopic();
+ $stack11 = topic.startsWith("%RETRY%");
+ if ($stack11==0) goto label0;
+ response.setCode(16);
+ response.setRemark("retry topic is not allowed to set mode");
+ return  response;
+ label0:consumerGroup = requestBody.getConsumerGroup();
+ $stack13=this.messageRequestModeManager;
+ $stack13.setMessageRequestMode(topic,consumerGroup,requestBody);
+ $stack13=this.messageRequestModeManager;
+ $stack13.persist();
+ response.setCode(0);
+ response.setRemark(null);
+ return  response;
+ } 
+

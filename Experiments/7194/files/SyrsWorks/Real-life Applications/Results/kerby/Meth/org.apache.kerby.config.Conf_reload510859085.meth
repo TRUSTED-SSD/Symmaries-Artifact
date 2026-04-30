@@ -1,0 +1,24 @@
+void org.apache.kerby.config.Conf:reload()
+{
+java.util.Iterator l1;
+  org.apache.kerby.config.ConfigLoader loader;
+  org.apache.kerby.config.Config loaded;
+  org.apache.kerby.config.ConfigImpl $stack4;
+  java.util.List $stack5;
+  boolean $stack7;
+  java.lang.Object $stack8;
+  $stack4=this.config;
+ $stack4.reset();
+ $stack5=this.resourceConfigs;
+ l1 = $stack5.iterator();
+ label0:$stack7 = l1.hasNext();
+ if ($stack7==0) goto label1;
+ $stack8 = l1.next();
+ loader=(org.apache.kerby.config.ConfigLoader) $stack8;
+ loaded = loader.load();
+ $stack4=this.config;
+ $stack4.add(loaded);
+ goto label0;
+ label1:return;
+ } 
+

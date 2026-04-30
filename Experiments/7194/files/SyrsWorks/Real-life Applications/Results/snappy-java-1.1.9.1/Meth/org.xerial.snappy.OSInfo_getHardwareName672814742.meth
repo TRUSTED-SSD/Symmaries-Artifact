@@ -1,0 +1,54 @@
+static java.lang.String org.xerial.snappy.OSInfo:getHardwareName()
+{
+java.lang.Process l0;
+  java.io.InputStream l1;
+  boolean l2;
+  java.io.ByteArrayOutputStream l3;
+  byte[] l4;
+  java.lang.String l5;
+  java.lang.Throwable l6;
+  java.lang.Runtime $stack7;
+  int $stack9;
+  java.lang.Throwable $stack20;
+  java.lang.StringBuilder $stack21;
+  java.io.PrintStream $stack22;
+  label0:$stack7 = java.lang.Runtime.getRuntime();
+ l0 = $stack7.exec("uname -m");
+ l0.waitFor();
+ l1 = l0.getInputStream();
+ label1:l2=0;
+ l3=new java.io.ByteArrayOutputStream;
+ l3#java.io.ByteArrayOutputStream();
+ l4=new byte[32];
+ label2:$stack9=#l4;
+ dummyClass.highSourceMut(l4);
+$stack9 = l1.read(l4,0,$stack9);
+dummyClass.highSourceMut($stack9);
+ if ($stack9<0) goto label3;
+ l3.write(l4,0,$stack9);
+ goto label2;
+ label3:l5 = l3.toString();
+ label4:if (l1==null) goto label5;
+ l1.close();
+ label5:return  l5;
+ label6:l6 = catch;
+ label7:if (l1==null) goto label8;
+ l1.close();
+ label8:throw l6;
+ label9:$stack20 = catch;
+ $stack22=java.lang.System.err;
+ $stack21=new java.lang.StringBuilder;
+ $stack21#java.lang.StringBuilder();
+ $stack21 = $stack21.append("Error while running uname -m: ");
+ l5 = $stack20.getMessage();
+ $stack21 = $stack21.append(l5);
+ l5 = $stack21.toString();
+ dummyClass.lowSink(l5);
+$stack22.println(l5);
+ return  "unknown";
+ catch java.lang.Throwable: label1 - label4 : label6;
+catch java.lang.Throwable: label6 - label7 : label6;
+catch java.lang.Throwable: label0 - label5 : label9;
+catch java.lang.Throwable: label6 - label9 : label9;
+} 
+

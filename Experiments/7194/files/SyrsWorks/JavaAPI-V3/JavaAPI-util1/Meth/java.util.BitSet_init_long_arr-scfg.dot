@@ -1,0 +1,45 @@
+digraph G {
+  node [shape=box, ];
+  "pc0_js1" [label="〈this#java.lang.Object.init (), js1〉\n\
+tt", ];
+  "pc1_js1" [label="〈this.wordsInUse = 0, js1〉", ];
+  "pc2_js1" [label="〈this.sizeIsSticky = 0, js1〉", ];
+  "pc3_js1" [label="〈this.words = r1, js1〉", ];
+  "pc4_js1" [label="〈$i0 = #r1, js1〉", ];
+  "pc5_js1" [label="〈this.wordsInUse = $i0, js1〉", ];
+  "pc6_js1" [label="〈this#java.util.BitSet.checkInvariants (), js1〉\n\
+tt",
+             ];
+  "pc7_js1" [label="〈return this, js1〉", ];
+  "pc8_js1" [label="〈sink, js1〉\n\
+obj_level(r1) ⊑ ret(obj_level(r1))' ∧ obj_level(this) ⊑ ret(obj_level(this))' ∧ (ret(this.><r1)' ∨ ¬this.><r1) ∧ (ret(this.><this)' ∨ ¬this.><this) ∧ (ϕ ≠ S7 ∨ ret(~this)' ∧ obj_level(this) ⊑ ret(obj_level())' ∧ pc ⊔ level(this) ⊑ ret(level())' ∧ (ret(.><this)' ∨ ¬this.><this) ∧ (ret(r1.><)' ∨ ¬this.><r1) ∧ (ret(this.><)' ∨ ¬this.><this))",
+             ];
+  
+  
+  "pc0_js1" -> "pc1_js1" [label="tt,\n\
+{this.><r1 := ff,\n\
+ this.><this := ff}",
+                          ];
+  "pc1_js1" -> "pc2_js1" [label="tt,\n\
+{obj_level(this) := pc ⊔ obj_level(this)}",
+                          ];
+  "pc2_js1" -> "pc3_js1" [label="tt,\n\
+{obj_level(this) := pc ⊔ obj_level(this)}",
+                          ];
+  "pc3_js1" -> "pc4_js1" [label="tt,\n\
+{this.><r1 := tt,\n\
+ this.><this := ff,\n\
+ obj_level(this) := pc ⊔ level(r1) ⊔ obj_level(r1) ⊔ obj_level(this)}",
+                          ];
+  "pc4_js1" -> "pc5_js1" [label="tt,\n\
+{level($i0) := pc ⊔ level(r1) ⊔ obj_level(r1)}",
+                          ];
+  "pc5_js1" -> "pc6_js1" [label="tt,\n\
+{obj_level(this) := pc ⊔ level(r1) ⊔ obj_level(r1) ⊔ obj_level(this)}",
+                          ];
+  "pc6_js1" -> "pc7_js1" [label="tt,\n\
+{}", ];
+  "pc7_js1" -> "pc8_js1" [label="tt,\n\
+{ϕ := S7}", ];
+  
+  }

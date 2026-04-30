@@ -1,0 +1,52 @@
+int java.util.BitSet:nextSetBit(int i0)
+{
+int $i1;
+  long[] $r1;
+  long $l2;
+  long $l3;
+  byte $b4;
+  int $i5;
+  long[] $r2;
+  int $i6;
+  int $i7;
+  int $i8;
+  java.lang.IndexOutOfBoundsException $r3;
+  java.lang.StringBuilder $r4;
+  java.lang.StringBuilder $r5;
+  java.lang.StringBuilder $r6;
+  java.lang.String $r7;
+  int i9;
+  long l10;
+  if (i0>=0) goto label0;
+ $r3=new java.lang.IndexOutOfBoundsException;
+ $r4=new java.lang.StringBuilder;
+ $r4#java.lang.StringBuilder:init();
+ $r5 = $r4.append("fromIndex < 0: ");
+ $r6 = $r5.append(i0);
+ $r7 = $r6.toString();
+ $r3#java.lang.IndexOutOfBoundsException:init($r7);
+ throw $r3;
+ label0:this#java.util.BitSet:checkInvariants();
+ i9 = java.util.BitSet.wordIndex(i0);
+ $i1=this.wordsInUse;
+ if (i9<$i1) goto label1;
+ return  -1;
+ label1:$r1=this.words;
+ $l3=$r1[i9];
+ $l2=(-1L<<i0);
+ l10=($l3 & $l2);
+ label2:$b4=(l10 cmp 0L);
+ if ($b4==0) goto label3;
+ $i6=(i9 * 64);
+ $i7 = java.lang.Long.numberOfTrailingZeros(l10);
+ $i8=($i6+$i7);
+ return  $i8;
+ label3:i9=(i9+1);
+ $i5=this.wordsInUse;
+ if (i9!=$i5) goto label4;
+ return  -1;
+ label4:$r2=this.words;
+ l10=$r2[i9];
+ goto label2;
+ }  
+

@@ -1,0 +1,25 @@
+boolean org.hamcrest.core.IsCollectionContaining:matchesSafely(java.lang.Iterable collection,org.hamcrest.Description mismatchDescription)
+{
+boolean isPastFirst;
+  java.util.Iterator i$;
+  java.lang.Object item;
+  boolean $stack7;
+  org.hamcrest.Matcher $stack9;
+  isPastFirst=0;
+ i$ = collection.iterator();
+ label0:$stack7 = i$.hasNext();
+ if ($stack7==0) goto label1;
+ item = i$.next();
+ $stack9=this.elementMatcher;
+ $stack7 = $stack9.matches(item);
+ if ($stack7==0) goto label2;
+ return  1;
+ label2:if (isPastFirst==0) goto label3;
+ mismatchDescription.appendText(", ");
+ label3:$stack9=this.elementMatcher;
+ $stack9.describeMismatch(item,mismatchDescription);
+ isPastFirst=1;
+ goto label0;
+ label1:return  0;
+ } 
+

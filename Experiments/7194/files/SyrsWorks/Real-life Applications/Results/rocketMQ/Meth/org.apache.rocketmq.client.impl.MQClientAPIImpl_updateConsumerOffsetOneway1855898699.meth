@@ -1,0 +1,17 @@
+void org.apache.rocketmq.client.impl.MQClientAPIImpl:updateConsumerOffsetOneway(java.lang.String @addr,org.apache.rocketmq.remoting.protocol.header.UpdateConsumerOffsetRequestHeader requestHeader,long timeoutMillis)
+{
+org.apache.rocketmq.remoting.protocol.RemotingCommand request;
+  org.apache.rocketmq.client.ClientConfig $stack7;
+  org.apache.rocketmq.remoting.RemotingClient $stack8;
+  boolean $stack9;
+  java.lang.String addr;
+addr=@addr;
+request = org.apache.rocketmq.remoting.protocol.RemotingCommand.createRequestCommand(15,(org.apache.rocketmq.remoting.CommandCustomHeader)requestHeader);
+ $stack8=this.remotingClient;
+ $stack7=this.clientConfig;
+ $stack9 = $stack7.isVipChannelEnabled();
+ addr = org.apache.rocketmq.common.MixAll.brokerVIPChannel($stack9,addr);
+ $stack8.invokeOneway(addr,request,timeoutMillis);
+ return;
+ } 
+

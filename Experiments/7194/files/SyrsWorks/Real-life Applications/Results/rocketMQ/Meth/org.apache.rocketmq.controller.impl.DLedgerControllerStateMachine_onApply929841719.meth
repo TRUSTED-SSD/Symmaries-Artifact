@@ -1,0 +1,35 @@
+void org.apache.rocketmq.controller.impl.DLedgerControllerStateMachine:onApply(io.openmessaging.storage.dledger.statemachine.CommittedEntryIterator iterator)
+{
+int applyingSize;
+  io.openmessaging.storage.dledger.entry.DLedgerEntry entry;
+  byte[] body;
+  org.apache.rocketmq.controller.impl.event.EventMessage event;
+  boolean $stack6;
+  org.apache.rocketmq.logging.org.slf4j.Logger $stack7;
+  java.lang.Integer $stack9;
+  java.lang.String $stack10;
+  int $stack14;
+  org.apache.rocketmq.controller.impl.event.EventSerializer $stack15;
+  org.apache.rocketmq.controller.impl.manager.ReplicasInfoManager $stack17;
+  applyingSize=0;
+ label0:$stack6 = iterator.hasNext();
+ if ($stack6==0) goto label1;
+ entry = iterator.next();
+dummyClass.highSourceMut(entry);
+ body = entry.getBody();
+ if (body==null) goto label2;
+ $stack14=#body;
+ if ($stack14<=0) goto label2;
+ $stack15=this.eventSerializer;
+ event = $stack15.deserialize(body);
+ $stack17=this.replicasInfoManager;
+ $stack17.applyEvent(event);
+ label2:applyingSize=(applyingSize+1);
+ goto label0;
+ label1:$stack7=org.apache.rocketmq.controller.impl.DLedgerControllerStateMachine.log;
+ $stack9 = java.lang.Integer.valueOf(applyingSize);
+ $stack10=this.dLedgerId;
+ $stack7.info("Apply {} events on controller {}",(java.lang.Object)$stack9,(java.lang.Object)$stack10);
+ return;
+ } 
+

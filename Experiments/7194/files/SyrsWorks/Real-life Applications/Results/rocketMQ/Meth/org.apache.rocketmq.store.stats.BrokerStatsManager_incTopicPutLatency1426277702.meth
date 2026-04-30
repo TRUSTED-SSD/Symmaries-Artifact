@@ -1,0 +1,29 @@
+void org.apache.rocketmq.store.stats.BrokerStatsManager:incTopicPutLatency(java.lang.String @topic,int queueId,int incValue)
+{
+java.lang.StringBuilder statsKey;
+  java.lang.StringBuilder $stack6;
+  java.util.HashMap $stack9;
+  java.lang.Object $stack10;
+  org.apache.rocketmq.common.stats.StatsItemSet $stack11;
+  int $stack14;
+  java.lang.String topic;
+topic=@topic;
+if (topic==null) goto label0;
+ statsKey=new java.lang.StringBuilder;
+ $stack14 = topic.length();
+ $stack14=($stack14+6);
+ statsKey#java.lang.StringBuilder($stack14);
+ goto label1;
+ label0:statsKey=new java.lang.StringBuilder;
+ statsKey#java.lang.StringBuilder(6);
+ label1:$stack6 = statsKey.append(queueId);
+ $stack6 = $stack6.append("@");
+ $stack6.append(topic);
+ $stack9=this.statsTable;
+ $stack10 = $stack9.get((java.lang.Object)"TOPIC_PUT_LATENCY");
+ $stack11=(org.apache.rocketmq.common.stats.StatsItemSet) $stack10;
+ topic = statsKey.toString();
+ $stack11.addValue(topic,incValue,1);
+ return;
+ } 
+

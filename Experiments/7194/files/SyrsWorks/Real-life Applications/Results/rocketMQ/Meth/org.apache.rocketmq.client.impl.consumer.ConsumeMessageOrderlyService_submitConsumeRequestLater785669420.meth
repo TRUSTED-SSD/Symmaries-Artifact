@@ -1,0 +1,26 @@
+void org.apache.rocketmq.client.impl.consumer.ConsumeMessageOrderlyService:submitConsumeRequestLater(org.apache.rocketmq.client.impl.consumer.ProcessQueue processQueue,org.apache.rocketmq.common.message.MessageQueue messageQueue,long suspendTimeMillis)
+{
+byte $stack7;
+  org.apache.rocketmq.client.impl.consumer.ConsumeMessageOrderlyService$3 $stack10;
+  java.util.concurrent.ScheduledExecutorService $stack11;
+  java.util.concurrent.TimeUnit $stack12;
+  org.apache.rocketmq.client.consumer.DefaultMQPushConsumer $stack19;
+  $stack7=(suspendTimeMillis cmp -1L);
+ if ($stack7!=0) goto label0;
+ $stack19=this.defaultMQPushConsumer;
+ suspendTimeMillis = $stack19.getSuspendCurrentQueueTimeMillis();
+ label0:$stack7=(suspendTimeMillis cmp 10L);
+ if ($stack7>=0) goto label1;
+ suspendTimeMillis=10L;
+ goto label2;
+ label1:$stack7=(suspendTimeMillis cmp 30000L);
+ if ($stack7<=0) goto label2;
+ suspendTimeMillis=30000L;
+ label2:$stack11=this.scheduledExecutorService;
+ $stack10=new org.apache.rocketmq.client.impl.consumer.ConsumeMessageOrderlyService$3;
+ $stack10#org.apache.rocketmq.client.impl.consumer.ConsumeMessageOrderlyService$3(this,processQueue,messageQueue);
+ $stack12=java.util.concurrent.TimeUnit.MILLISECONDS;
+ $stack11.schedule((java.lang.Runnable)$stack10,suspendTimeMillis,$stack12);
+ return;
+ } 
+

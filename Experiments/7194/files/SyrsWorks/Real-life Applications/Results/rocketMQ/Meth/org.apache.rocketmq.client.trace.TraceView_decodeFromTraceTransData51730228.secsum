@@ -1,0 +1,9 @@
+static java.util.List org.apache.rocketmq.client.trace.TraceView:decodeFromTraceTransData (
+  java.lang.String key,
+  org.apache.rocketmq.common.message.MessageExt messageExt) {
+  guard = tt;
+  ret(level()) = pc ⊔ level(messageExt) ⊔ obj_level(messageExt);
+  ret(obj_level()) = pc ⊔ level(messageExt) ⊔ obj_level(key) ⊔ obj_level(messageExt);
+  ret(obj_level(key)) = pc ⊔ level(messageExt) ⊔ obj_level(key) ⊔ obj_level(messageExt);
+  ret(obj_level(messageExt)) = pc ⊔ level(messageExt) ⊔ obj_level(key) ⊔ obj_level(messageExt);
+}

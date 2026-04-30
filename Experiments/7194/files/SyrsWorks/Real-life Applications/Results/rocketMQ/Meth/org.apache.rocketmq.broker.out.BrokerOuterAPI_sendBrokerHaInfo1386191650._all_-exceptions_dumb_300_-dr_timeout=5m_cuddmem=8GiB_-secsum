@@ -1,0 +1,9 @@
+void org.apache.rocketmq.broker.out.BrokerOuterAPI:sendBrokerHaInfo (
+  java.lang.String @brokerAddr, java.lang.String masterHaAddr,
+  long brokerInitMaxOffset, java.lang.String masterAddr) {
+  guard = tt;
+  ret(obj_level(@brokerAddr)) = level(brokerInitMaxOffset) ⊔ level(masterAddr) ⊔ level(masterHaAddr) ⊔ obj_level(@brokerAddr);
+  ret(obj_level(masterAddr)) = level(brokerInitMaxOffset) ⊔ level(masterAddr) ⊔ level(masterHaAddr) ⊔ obj_level(masterAddr);
+  ret(obj_level(masterHaAddr)) = level(brokerInitMaxOffset) ⊔ level(masterAddr) ⊔ level(masterHaAddr) ⊔ obj_level(masterAddr);
+  ret(obj_level(this)) = level(brokerInitMaxOffset) ⊔ level(masterAddr) ⊔ level(masterHaAddr) ⊔ obj_level(masterAddr) ⊔ obj_level(this);
+}

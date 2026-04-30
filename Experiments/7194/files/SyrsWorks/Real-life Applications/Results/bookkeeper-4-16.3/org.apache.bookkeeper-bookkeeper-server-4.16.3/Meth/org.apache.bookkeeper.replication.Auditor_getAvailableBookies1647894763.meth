@@ -1,0 +1,29 @@
+java.util.List org.apache.bookkeeper.replication.Auditor:getAvailableBookies()
+{
+java.util.Collection availableBkAddresses;
+  java.util.Collection readOnlyBkAddresses;
+  java.util.ArrayList availableBookies;
+  java.util.Iterator l4;
+  org.apache.bookkeeper.net.BookieId addr;
+  org.apache.bookkeeper.client.BookKeeperAdmin $stack6;
+  boolean $stack10;
+  java.lang.Object $stack14;
+  java.lang.String $stack15;
+  $stack6=this.admin;
+ availableBkAddresses = $stack6.getAvailableBookies();
+ $stack6=this.admin;
+ readOnlyBkAddresses = $stack6.getReadOnlyBookies();
+ availableBkAddresses.addAll(readOnlyBkAddresses);
+ availableBookies=new java.util.ArrayList;
+ availableBookies#java.util.ArrayList();
+ l4 = availableBkAddresses.iterator();
+ label0:$stack10 = l4.hasNext();
+ if ($stack10==0) goto label1;
+ $stack14 = l4.next();
+ addr=(org.apache.bookkeeper.net.BookieId) $stack14;
+ $stack15 = addr.toString();
+ availableBookies.add((java.lang.Object)$stack15);
+ goto label0;
+ label1:return  availableBookies;
+ } 
+

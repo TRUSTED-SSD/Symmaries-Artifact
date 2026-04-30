@@ -1,0 +1,26 @@
+boolean org.apache.bookkeeper.common.component.Lifecycle:moveToStarted()
+{
+org.apache.bookkeeper.common.component.Lifecycle$State localState;
+  org.apache.bookkeeper.common.component.Lifecycle$State $stack2;
+  java.lang.IllegalStateException $stack7;
+  localState=this.state;
+ $stack2=org.apache.bookkeeper.common.component.Lifecycle$State.INITIALIZED;
+ if (localState==$stack2) goto label0;
+ $stack2=org.apache.bookkeeper.common.component.Lifecycle$State.STOPPED;
+ if (localState!=$stack2) goto label1;
+ label0:localState=org.apache.bookkeeper.common.component.Lifecycle$State.STARTED;
+ this.state=localState;
+ return  1;
+ label1:$stack2=org.apache.bookkeeper.common.component.Lifecycle$State.STARTED;
+ if (localState!=$stack2) goto label2;
+ return  0;
+ label2:$stack2=org.apache.bookkeeper.common.component.Lifecycle$State.CLOSED;
+ if (localState!=$stack2) goto label3;
+ $stack7=new java.lang.IllegalStateException;
+ $stack7#java.lang.IllegalStateException("Can\'t move to started state when closed");
+ throw $stack7;
+ label3:$stack7=new java.lang.IllegalStateException;
+ $stack7#java.lang.IllegalStateException("Can\'t move to started with unknown state");
+ throw $stack7;
+ } 
+

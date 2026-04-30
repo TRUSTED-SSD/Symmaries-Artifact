@@ -1,0 +1,34 @@
+char org.apache.rocketmq.filter.parser.SimpleCharStream:readChar()
+{
+char c;
+  int $stack2;
+  int $stack5;
+  char[] $stack7;
+  $stack2=this.inBuf;
+ if ($stack2<=0) goto label0;
+ $stack2=this.inBuf;
+ $stack2=($stack2-1);
+ this.inBuf=$stack2;
+ $stack2=this.bufpos;
+ $stack2=($stack2+1);
+ this.bufpos=$stack2;
+ $stack5=this.bufsize;
+ if ($stack2!=$stack5) goto label1;
+ this.bufpos=0;
+ label1:$stack7=this.buffer;
+ $stack2=this.bufpos;
+ c=$stack7[$stack2];
+ return  c;
+ label0:$stack2=this.bufpos;
+ $stack2=($stack2+1);
+ this.bufpos=$stack2;
+ $stack5=this.maxNextCharInd;
+ if ($stack2<$stack5) goto label2;
+ this.FillBuff();
+ label2:$stack7=this.buffer;
+ $stack2=this.bufpos;
+ c=$stack7[$stack2];
+ this.UpdateLineColumn(c);
+ return  c;
+ } 
+

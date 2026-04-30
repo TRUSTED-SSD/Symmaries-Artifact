@@ -1,0 +1,38 @@
+char java.io.ObjectInputStream$BlockDataInputStream:readChar()
+{
+char c0;
+  boolean $z0;
+  int $i1;
+  int $i2;
+  int $i3;
+  int $i4;
+  byte[] $r1;
+  int $i5;
+  int $i6;
+  java.io.DataInputStream $r2;
+  char $c7;
+  byte[] $r3;
+  java.io.ObjectInputStream$PeekInputStream $r4;
+  $z0=this.blkmode;
+ if ($z0!=0) goto label0;
+ this.pos=0;
+ $r4=this.in;
+ $r3=this.buf;
+ $r4.readFully($r3,0,2);
+ goto label1;
+ label0:$i2=this.end;
+ $i1=this.pos;
+ $i3=($i2-$i1);
+ if ($i3>=2) goto label1;
+ $r2=this.din;
+ $c7 = $r2.readChar();
+ return  $c7;
+ label1:$r1=this.buf;
+ $i4=this.pos;
+ c0 = java.io.Bits.getChar($r1,$i4);
+ $i5=this.pos;
+ $i6=($i5+2);
+ this.pos=$i6;
+ return  c0;
+ }  
+

@@ -1,0 +1,52 @@
+void org.apache.bookkeeper.sasl.TGTRefreshThread:reLogin()
+{
+javax.security.auth.login.LoginContext login;
+  java.lang.Class l2;
+  java.lang.Throwable l3;
+  org.apache.bookkeeper.sasl.JAASCredentialsContainer $stack4;
+  boolean $stack6;
+  org.slf4j.Logger $stack8;
+  java.lang.String $stack10;
+  javax.security.auth.Subject $stack15;
+  javax.security.auth.login.LoginException $stack22;
+  $stack4=this.container;
+ login = $stack4.getLogin();
+ if (login!=null) goto label0;
+ $stack22=new javax.security.auth.login.LoginException;
+ $stack22#javax.security.auth.login.LoginException("login must be done first");
+ throw $stack22;
+ label0:$stack6 = this#org.apache.bookkeeper.sasl.TGTRefreshThread:hasSufficientTimeElapsed();
+ if ($stack6!=0) goto label1;
+ return;
+ label1:$stack8=org.apache.bookkeeper.sasl.TGTRefreshThread.LOG;
+ $stack4=this.container;
+ $stack10 = $stack4.getPrincipal();
+ dummyClass.lowSink("Initiating logout for {}");
+$stack8.info("Initiating logout for {}",(java.lang.Object)$stack10);
+ l2=org.apache.zookeeper.Login;
+ monitorenter org.apache.zookeeper.Login;
+ label2:login.logout();
+ login=new javax.security.auth.login.LoginContext;
+ $stack4=this.container;
+ $stack10 = $stack4.getLoginContextName();
+ $stack4=this.container;
+ $stack15 = $stack4.getSubject();
+ login#javax.security.auth.login.LoginContext($stack10,$stack15);
+ $stack8=org.apache.bookkeeper.sasl.TGTRefreshThread.LOG;
+ $stack4=this.container;
+ $stack10 = $stack4.getPrincipal();
+ dummyClass.lowSink("Initiating re-login for {}");
+$stack8.info("Initiating re-login for {}",(java.lang.Object)$stack10);
+ login.login();
+ $stack4=this.container;
+ $stack4.setLogin(login);
+ monitorexit org.apache.zookeeper.Login;
+ label3:goto label4;
+ label5:l3 = catch;
+ monitorexit org.apache.zookeeper.Login;
+ label6:throw l3;
+ label4:return;
+ catch java.lang.Throwable: label2 - label3 : label5;
+catch java.lang.Throwable: label5 - label6 : label5;
+} 
+

@@ -1,0 +1,42 @@
+void org.apache.rocketmq.client.impl.MQClientAPIImpl:setMessageRequestMode(java.lang.String @brokerAddr,java.lang.String topic,java.lang.String consumerGroup,org.apache.rocketmq.common.message.MessageRequestMode mode,int popShareQueueNum,long timeoutMillis)
+{
+org.apache.rocketmq.remoting.protocol.RemotingCommand request;
+  org.apache.rocketmq.remoting.protocol.body.SetMessageRequestModeRequestBody requestBody;
+  byte[] $stack13;
+  org.apache.rocketmq.client.ClientConfig $stack14;
+  org.apache.rocketmq.remoting.RemotingClient $stack15;
+  boolean $stack16;
+  org.apache.rocketmq.client.exception.MQClientException $stack22;
+  java.lang.AssertionError $stack26;
+  java.lang.String brokerAddr;
+brokerAddr=@brokerAddr;
+request = org.apache.rocketmq.remoting.protocol.RemotingCommand.createRequestCommand(401,null);
+ requestBody=new org.apache.rocketmq.remoting.protocol.body.SetMessageRequestModeRequestBody;
+ requestBody#org.apache.rocketmq.remoting.protocol.body.SetMessageRequestModeRequestBody();
+ requestBody.setTopic(topic);
+ requestBody.setConsumerGroup(consumerGroup);
+ requestBody.setMode(mode);
+ requestBody.setPopShareQueueNum(popShareQueueNum);
+ $stack13 = requestBody.encode();
+ request.setBody($stack13);
+ $stack15=this.remotingClient;
+ $stack14=this.clientConfig;
+ $stack16 = $stack14.isVipChannelEnabled();
+ brokerAddr = org.apache.rocketmq.common.MixAll.brokerVIPChannel($stack16,brokerAddr);
+ request = $stack15.invokeSync(brokerAddr,request,timeoutMillis);
+ $stack16=org.apache.rocketmq.client.impl.MQClientAPIImpl.$assertionsDisabled;
+ if ($stack16!=0) goto label0;
+ if (request!=null) goto label0;
+ $stack26=new java.lang.AssertionError;
+ $stack26#java.lang.AssertionError();
+ throw $stack26;
+ label0:popShareQueueNum = request.getCode();
+ if (0==popShareQueueNum) goto label1;
+ $stack22=new org.apache.rocketmq.client.exception.MQClientException;
+ popShareQueueNum = request.getCode();
+ brokerAddr = request.getRemark();
+ $stack22#org.apache.rocketmq.client.exception.MQClientException(popShareQueueNum,brokerAddr);
+ throw $stack22;
+ label1:return;
+ } 
+

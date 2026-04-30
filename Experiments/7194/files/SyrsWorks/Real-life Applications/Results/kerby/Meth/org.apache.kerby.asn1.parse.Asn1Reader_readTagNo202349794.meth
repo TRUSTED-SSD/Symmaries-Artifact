@@ -1,0 +1,29 @@
+int org.apache.kerby.asn1.parse.Asn1Reader:readTagNo(int tagFlags)
+{
+short b;
+  byte $stack4;
+  short $stack5;
+  java.io.IOException $stack16;
+  tagFlags=(tagFlags & 31);
+ if (tagFlags!=31) goto label0;
+ tagFlags=0;
+ $stack4 = this.readByte();
+ b=($stack4 & 255);
+ $stack5=(b & 127);
+ if ($stack5!=0) goto label1;
+ $stack16=new java.io.IOException;
+ $stack16#java.io.IOException("Invalid high tag number found");
+ throw $stack16;
+ label1:if (b<0) goto label2;
+ $stack5=(b & 128);
+ if ($stack5==0) goto label2;
+ b=(b & 127);
+ tagFlags=(tagFlags | b);
+ tagFlags=(tagFlags<<7);
+ b = this.readByte();
+ goto label1;
+ label2:b=(b & 127);
+ tagFlags=(tagFlags | b);
+ label0:return  tagFlags;
+ } 
+

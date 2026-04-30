@@ -1,0 +1,22 @@
+void org.apache.rocketmq.store.DefaultMessageStore$CorrectLogicOffsetService:doCorrect(org.apache.rocketmq.store.queue.ConsumeQueueInterface logic,long minPhyOffset)
+{
+int sleepIntervalWhenCorrectMinOffset;
+  java.lang.InterruptedException l5;
+  org.apache.rocketmq.store.DefaultMessageStore $stack6;
+  org.apache.rocketmq.store.queue.ConsumeQueueStore $stack7;
+  org.apache.rocketmq.store.config.MessageStoreConfig $stack10;
+  $stack6=this.this$0;
+ $stack7 = org.apache.rocketmq.store.DefaultMessageStore.access$1000($stack6);
+ $stack7.deleteExpiredFile(logic,minPhyOffset);
+ $stack6=this.this$0;
+ $stack10 = $stack6.getMessageStoreConfig();
+ sleepIntervalWhenCorrectMinOffset = $stack10.getCorrectLogicMinOffsetSleepInterval();
+ if (sleepIntervalWhenCorrectMinOffset<=0) goto label0;
+ label1:minPhyOffset=(long) sleepIntervalWhenCorrectMinOffset;
+ java.lang.Thread.sleep(minPhyOffset);
+ label2:goto label0;
+ label3:l5 = catch;
+ label0:return;
+ catch java.lang.InterruptedException: label1 - label2 : label3;
+} 
+

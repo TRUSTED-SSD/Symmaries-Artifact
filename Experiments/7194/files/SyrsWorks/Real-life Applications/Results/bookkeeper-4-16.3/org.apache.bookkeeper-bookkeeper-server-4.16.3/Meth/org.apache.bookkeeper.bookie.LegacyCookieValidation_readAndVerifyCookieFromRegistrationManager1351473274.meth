@@ -1,0 +1,32 @@
+static org.apache.bookkeeper.versioning.Versioned org.apache.bookkeeper.bookie.LegacyCookieValidation:readAndVerifyCookieFromRegistrationManager(org.apache.bookkeeper.bookie.Cookie masterCookie,org.apache.bookkeeper.discover.RegistrationManager rm,java.util.List addresses,boolean allowExpansion)
+{
+org.apache.bookkeeper.versioning.Versioned rmCookie;
+  java.util.Iterator l5;
+  org.apache.bookkeeper.net.BookieId address;
+  org.apache.bookkeeper.bookie.BookieException$CookieNotFoundException e;
+  boolean $stack9;
+  java.lang.Object $stack10;
+  org.apache.bookkeeper.bookie.Cookie $stack13;
+  rmCookie=null;
+ l5 = addresses.iterator();
+ label0:$stack9 = l5.hasNext();
+ if ($stack9==0) goto label1;
+ $stack10 = l5.next();
+ address=(org.apache.bookkeeper.net.BookieId) $stack10;
+ label2:rmCookie = org.apache.bookkeeper.bookie.Cookie.readFromRegistrationManager(rm,address);
+ if (allowExpansion==0) goto label3;
+ $stack10 = rmCookie.getValue();
+ $stack13=(org.apache.bookkeeper.bookie.Cookie) $stack10;
+ masterCookie.verifyIsSuperSet($stack13);
+ goto label4;
+ label3:$stack10 = rmCookie.getValue();
+ $stack13=(org.apache.bookkeeper.bookie.Cookie) $stack10;
+ masterCookie.verify($stack13);
+ label4:goto label5;
+ label6:e = catch;
+ goto label0;
+ label5:goto label0;
+ label1:return  rmCookie;
+ catch org.apache.bookkeeper.bookie.BookieException$CookieNotFoundException: label2 - label4 : label6;
+} 
+

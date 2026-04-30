@@ -1,0 +1,23 @@
+static org.apache.bookkeeper.client.BookKeeper org.apache.bookkeeper.replication.Auditor:createBookKeeperClientThrowUnavailableException(org.apache.bookkeeper.conf.ServerConfiguration conf)
+{
+org.apache.bookkeeper.client.BookKeeper $stack2;
+  java.io.IOException $stack3;
+  org.apache.bookkeeper.replication.ReplicationException$UnavailableException $stack4;
+  java.lang.InterruptedException $stack5;
+  java.lang.Thread $stack6;
+  label0:$stack2 = org.apache.bookkeeper.replication.Auditor.createBookKeeperClient(conf);
+ label1:return  $stack2;
+ label2:$stack5 = catch;
+ $stack6 = java.lang.Thread.currentThread();
+ $stack6.interrupt();
+ $stack4=new org.apache.bookkeeper.replication.ReplicationException$UnavailableException;
+ $stack4#org.apache.bookkeeper.replication.ReplicationException$UnavailableException("Failed to create bookkeeper client",(java.lang.Throwable)$stack5);
+ throw $stack4;
+ label3:$stack3 = catch;
+ $stack4=new org.apache.bookkeeper.replication.ReplicationException$UnavailableException;
+ $stack4#org.apache.bookkeeper.replication.ReplicationException$UnavailableException("Failed to create bookkeeper client",(java.lang.Throwable)$stack3);
+ throw $stack4;
+ catch java.lang.InterruptedException: label0 - label1 : label2;
+catch java.io.IOException: label0 - label1 : label3;
+} 
+

@@ -1,0 +1,13 @@
+org.apache.rocketmq.client.producer.SendResult org.apache.rocketmq.client.impl.MQClientAPIImpl:sendMessageSync (
+  java.lang.String addr, java.lang.String brokerName,
+  org.apache.rocketmq.common.message.Message msg, long timeoutMillis,
+  org.apache.rocketmq.remoting.protocol.RemotingCommand @request) {
+  guard = level(@request) ⊔ level(addr) ⊔ level(brokerName) ⊔ level(msg) ⊔ level(this) ⊔ level(timeoutMillis) ⊔ obj_level(@request) ⊔ obj_level(brokerName) ⊔ obj_level(msg) ⊔ obj_level(this) = ⊥;
+  ret(level()) = ⊤;
+  ret(obj_level()) = ⊤;
+  ret(obj_level(@request)) = ⊤;
+  ret(obj_level(addr)) = ⊤;
+  ret(obj_level(brokerName)) = ⊤;
+  ret(obj_level(msg)) = ⊤;
+  ret(obj_level(this)) = ⊤;
+}

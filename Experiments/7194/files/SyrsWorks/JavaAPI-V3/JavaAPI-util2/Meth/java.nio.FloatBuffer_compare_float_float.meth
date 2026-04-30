@@ -1,0 +1,32 @@
+static int java.nio.FloatBuffer:compare(float f0,float f1)
+{
+byte $b0;
+  byte $b1;
+  byte $b2;
+  boolean $z0;
+  boolean $z1;
+  byte $b3;
+  $b0=(f0 cmpg f1);
+ if ($b0>=0) goto label0;
+ $b3=-1;
+ goto label1;
+ label0:$b1=(f0 cmpl f1);
+ if ($b1<=0) goto label2;
+ $b3=1;
+ goto label1;
+ label2:$b2=(f0 cmpl f1);
+ if ($b2!=0) goto label3;
+ $b3=0;
+ goto label1;
+ label3:$z0 = java.lang.Float.isNaN(f0);
+ if ($z0==0) goto label4;
+ $z1 = java.lang.Float.isNaN(f1);
+ if ($z1==0) goto label5;
+ $b3=0;
+ goto label1;
+ label5:$b3=1;
+ goto label1;
+ label4:$b3=-1;
+ label1:return  $b3;
+ }  
+

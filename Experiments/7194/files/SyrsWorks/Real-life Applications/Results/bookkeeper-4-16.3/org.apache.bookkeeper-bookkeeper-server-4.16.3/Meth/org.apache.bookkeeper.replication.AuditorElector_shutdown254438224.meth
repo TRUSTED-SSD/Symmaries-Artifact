@@ -1,0 +1,45 @@
+void org.apache.bookkeeper.replication.AuditorElector:shutdown()
+{
+org.apache.bookkeeper.replication.AuditorElector e;
+  java.lang.Throwable l2;
+  java.util.concurrent.ExecutorService $stack4;
+  boolean $stack5;
+  org.apache.bookkeeper.replication.Auditor $stack8;
+  org.apache.bookkeeper.client.BookKeeper $stack10;
+  org.apache.bookkeeper.client.BKException $stack16;
+  org.slf4j.Logger $stack17;
+  e=this;
+ monitorenter this;
+ label0:$stack4=this.executor;
+ $stack5 = $stack4.isShutdown();
+ if ($stack5==0) goto label1;
+ monitorexit this;
+ label2:return;
+ label1:this#org.apache.bookkeeper.replication.AuditorElector:submitShutdownTask();
+ $stack4=this.executor;
+ $stack4.shutdown();
+ monitorexit this;
+ label3:goto label4;
+ label5:l2 = catch;
+ monitorexit this;
+ label6:throw l2;
+ label4:$stack8=this.auditor;
+ if ($stack8==null) goto label7;
+ $stack8=this.auditor;
+ $stack8#org.apache.bookkeeper.replication.Auditor();
+ this.auditor=null;
+ label7:$stack5=this.ownBkc;
+ if ($stack5==0) goto label8;
+ label9:$stack10=this.bkc;
+ $stack10.close();
+ label10:goto label8;
+ label11:$stack16 = catch;
+ $stack17=org.apache.bookkeeper.replication.AuditorElector.LOG;
+ $stack17.warn("Failed to close bookkeeper client",(java.lang.Throwable)$stack16);
+ label8:return;
+ catch java.lang.Throwable: label0 - label2 : label5;
+catch java.lang.Throwable: label1 - label3 : label5;
+catch java.lang.Throwable: label5 - label6 : label5;
+catch org.apache.bookkeeper.client.BKException: label9 - label10 : label11;
+} 
+

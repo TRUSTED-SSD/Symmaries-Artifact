@@ -1,0 +1,63 @@
+    public java.lang.Class getTestClass()
+    {
+        org.junit.runner.Description this;
+        java.lang.String name;
+        java.lang.ClassNotFoundException e;
+        java.lang.Class $stack3;
+        java.lang.ClassLoader $stack7;
+
+        this := @this: org.junit.runner.Description;
+
+        $stack3 = this.<org.junit.runner.Description: java.lang.Class fTestClass>;
+/*280*/
+
+        if $stack3 == null goto label1;
+/*280*/
+
+        $stack3 = this.<org.junit.runner.Description: java.lang.Class fTestClass>;
+/*281*/
+
+        return $stack3;
+/*281*/
+
+     label1:
+        name = virtualinvoke this.<org.junit.runner.Description: java.lang.String getClassName()>();
+/*283*/
+/*283*/
+
+        if name != null goto label2;
+/*284*/
+
+        return null;
+/*285*/
+
+     label2:
+        $stack3 = virtualinvoke this.<java.lang.Object: java.lang.Class getClass()>();
+/*288*/
+
+        $stack7 = virtualinvoke $stack3.<java.lang.Class: java.lang.ClassLoader getClassLoader()>();
+/*288*/
+
+        $stack3 = staticinvoke <java.lang.Class: java.lang.Class forName(java.lang.String,boolean,java.lang.ClassLoader)>(name, 0, $stack7);
+/*288*/
+
+        this.<org.junit.runner.Description: java.lang.Class fTestClass> = $stack3;
+/*288*/
+
+        $stack3 = this.<org.junit.runner.Description: java.lang.Class fTestClass>;
+/*289*/
+
+     label3:
+        return $stack3;
+/*289*/
+
+     label4:
+        e := @caughtexception;
+/*281*/
+
+        return null;
+/*291*/
+
+        catch java.lang.ClassNotFoundException from label2 to label3 with label4;
+    }
+

@@ -1,0 +1,39 @@
+void org.apache.bookkeeper.http.vertx.VertxAbstractHandler:processRequest(org.apache.bookkeeper.http.service.HttpEndpointService httpEndpointService,io.vertx.ext.web.RoutingContext context)
+{
+io.vertx.core.http.HttpServerRequest httpRequest;
+  io.vertx.core.http.HttpServerResponse httpResponse;
+  org.apache.bookkeeper.http.service.HttpServiceRequest request;
+  org.apache.bookkeeper.http.service.HttpServiceResponse response;
+  java.lang.Exception e;
+  org.apache.bookkeeper.http.HttpServer$Method $stack11;
+  java.util.Map $stack13;
+  io.vertx.ext.web.RequestBody $stack15;
+  java.lang.String $stack16;
+  int $stack19;
+  org.apache.bookkeeper.http.service.ErrorHttpService $stack24;
+  httpRequest = context.request();
+ httpResponse = context.response();
+ request=new org.apache.bookkeeper.http.service.HttpServiceRequest;
+ request#org.apache.bookkeeper.http.service.HttpServiceRequest();
+ $stack11 = this.convertMethod(httpRequest);
+ request = request.setMethod($stack11);
+ $stack13 = this.convertParams(httpRequest);
+ request = request.setParams($stack13);
+ $stack15 = context.body();
+ $stack16 = $stack15.asString();
+ request = request.setBody($stack16);
+ response=null;
+ label0:response = httpEndpointService.handle(request);
+ label1:goto label2;
+ label3:e = catch;
+ $stack24=new org.apache.bookkeeper.http.service.ErrorHttpService;
+ $stack24#org.apache.bookkeeper.http.service.ErrorHttpService();
+ response = $stack24.handle(request);
+ label2:$stack19 = response.getStatusCode();
+ httpResponse.setStatusCode($stack19);
+ $stack16 = response.getBody();
+ httpResponse.end($stack16);
+ return;
+ catch java.lang.Exception: label0 - label1 : label3;
+} 
+

@@ -1,0 +1,38 @@
+com.google.zxing.oned.rss.expanded.decoders.DecodedInformation com.google.zxing.oned.rss.expanded.decoders.GeneralAppIdDecoder:decodeGeneralPurposeField(int pos,java.lang.String @remaining)
+{
+com.google.zxing.oned.rss.expanded.decoders.DecodedInformation lastDecoded;
+  java.lang.StringBuilder $stack4;
+  com.google.zxing.oned.rss.expanded.decoders.CurrentParsingState $stack5;
+  boolean $stack12;
+  com.google.zxing.oned.rss.expanded.decoders.DecodedInformation $stack15;
+  int $stack20;
+  java.lang.String remaining;
+remaining=@remaining;
+$stack4=this.buffer;
+ $stack4.setLength(0);
+ if (remaining==null) goto label0;
+ $stack4=this.buffer;
+ $stack4.append(remaining);
+ label0:$stack5=this.current;
+ $stack5.setPosition(pos);
+ lastDecoded = this#com.google.zxing.oned.rss.expanded.decoders.GeneralAppIdDecoder:parseBlocks();
+ if (lastDecoded==null) goto label1;
+ $stack12 = lastDecoded.isRemaining();
+ if ($stack12==0) goto label1;
+ $stack15=new com.google.zxing.oned.rss.expanded.decoders.DecodedInformation;
+ $stack5=this.current;
+ pos = $stack5.getPosition();
+ $stack4=this.buffer;
+ remaining = $stack4.toString();
+ $stack20 = lastDecoded.getRemainingValue();
+ $stack15#com.google.zxing.oned.rss.expanded.decoders.DecodedInformation(pos,remaining,$stack20);
+ return  $stack15;
+ label1:lastDecoded=new com.google.zxing.oned.rss.expanded.decoders.DecodedInformation;
+ $stack5=this.current;
+ pos = $stack5.getPosition();
+ $stack4=this.buffer;
+ remaining = $stack4.toString();
+ lastDecoded#com.google.zxing.oned.rss.expanded.decoders.DecodedInformation(pos,remaining);
+ return  lastDecoded;
+ } 
+

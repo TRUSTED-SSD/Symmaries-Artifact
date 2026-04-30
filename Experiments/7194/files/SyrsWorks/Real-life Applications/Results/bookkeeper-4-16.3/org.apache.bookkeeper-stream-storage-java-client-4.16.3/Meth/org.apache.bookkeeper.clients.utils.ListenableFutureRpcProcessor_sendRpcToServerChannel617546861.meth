@@ -1,0 +1,20 @@
+void org.apache.bookkeeper.clients.utils.ListenableFutureRpcProcessor:sendRpcToServerChannel(org.apache.bookkeeper.clients.impl.channel.StorageServerChannel rsChannel)
+{
+java.lang.Object request;
+  com.google.common.util.concurrent.ListenableFuture $stack5;
+  java.util.concurrent.ScheduledExecutorService $stack6;
+  java.lang.Exception $stack7;
+  java.util.concurrent.CompletableFuture $stack8;
+  label0:request = this.createRequest();
+ label1:goto label2;
+ label3:$stack7 = catch;
+ $stack8=this.resultFuture;
+ $stack8.completeExceptionally((java.lang.Throwable)$stack7);
+ return;
+ label2:$stack5 = this.sendRPC(rsChannel,request);
+ $stack6=this.executor;
+ com.google.common.util.concurrent.Futures.addCallback($stack5,(com.google.common.util.concurrent.FutureCallback)this,(java.util.concurrent.Executor)$stack6);
+ return;
+ catch java.lang.Exception: label0 - label1 : label3;
+} 
+

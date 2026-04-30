@@ -1,0 +1,37 @@
+int[] com.google.zxing.common.reedsolomon.ReedSolomonDecoder:findErrorLocations(com.google.zxing.common.reedsolomon.GenericGFPoly errorLocator)
+{
+int numErrors;
+  int[] result;
+  int e;
+  int i;
+  com.google.zxing.common.reedsolomon.GenericGF $stack7;
+  int $stack8;
+  com.google.zxing.common.reedsolomon.ReedSolomonException $stack9;
+  numErrors = errorLocator.getDegree();
+ if (numErrors!=1) goto label0;
+ result=new int[1];
+ numErrors = errorLocator.getCoefficient(1);
+ result[0]=numErrors;
+ return  result;
+ label0:result=new int[numErrors];
+ e=0;
+ i=1;
+ label1:$stack7=this.field;
+ $stack8 = $stack7.getSize();
+ if (i>=$stack8) goto label2;
+ if (e>=numErrors) goto label2;
+ $stack8 = errorLocator.evaluateAt(i);
+ if ($stack8!=0) goto label3;
+ $stack7=this.field;
+ $stack8 = $stack7.inverse(i);
+ result[e]=$stack8;
+ e=(e+1);
+ label3:i=(i+1);
+ goto label1;
+ label2:if (e==numErrors) goto label4;
+ $stack9=new com.google.zxing.common.reedsolomon.ReedSolomonException;
+ $stack9#com.google.zxing.common.reedsolomon.ReedSolomonException("Error locator degree does not match number of roots");
+ throw $stack9;
+ label4:return  result;
+ } 
+

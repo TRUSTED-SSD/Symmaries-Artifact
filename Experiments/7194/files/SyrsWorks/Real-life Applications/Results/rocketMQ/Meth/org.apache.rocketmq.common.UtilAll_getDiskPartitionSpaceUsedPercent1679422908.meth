@@ -1,0 +1,54 @@
+static double org.apache.rocketmq.common.UtilAll:getDiskPartitionSpaceUsedPercent(java.lang.String path)
+{
+java.io.File file;
+  long totalSpace;
+  long usedSpace;
+  long entireSpace;
+  org.apache.rocketmq.logging.org.slf4j.Logger $stack14;
+  boolean $stack15;
+  byte $stack19;
+  long $stack22;
+  double $stack27;
+  java.lang.Exception $stack40;
+  if (null==path) goto label0;
+ $stack15 = path.isEmpty();
+ if ($stack15==0) goto label1;
+ label0:$stack14=org.apache.rocketmq.common.UtilAll.STORE_LOG;
+ $stack14.error("Error when measuring disk space usage, path is null or empty, path : {}",(java.lang.Object)path);
+ return  -1.0;
+ label1:file=new java.io.File;
+ file#java.io.File(path);
+ $stack15 = file.exists();
+ if ($stack15!=0) goto label2;
+ $stack14=org.apache.rocketmq.common.UtilAll.STORE_LOG;
+ $stack14.error("Error when measuring disk space usage, file doesn\'t exist on this path: {}",(java.lang.Object)path);
+ label3:return  -1.0;
+ label2:totalSpace = file.getTotalSpace();
+ $stack19=(totalSpace cmp 0L);
+ if ($stack19<=0) goto label4;
+ usedSpace = file.getFreeSpace();
+ usedSpace=(totalSpace-usedSpace);
+ totalSpace = file.getUsableSpace();
+ entireSpace=(usedSpace+totalSpace);
+ totalSpace=0L;
+ $stack22=(usedSpace * 100L);
+ $stack22=($stack22%entireSpace);
+ $stack19=($stack22 cmp 0L);
+ if ($stack19==0) goto label5;
+ totalSpace=1L;
+ label5:usedSpace=(usedSpace * 100L);
+ usedSpace=(usedSpace/entireSpace);
+ totalSpace=(usedSpace+totalSpace);
+ $stack27=(double) totalSpace;
+ $stack27=($stack27/100.0);
+ label6:return  $stack27;
+ label4:goto label7;
+ label8:$stack40 = catch;
+ $stack14=org.apache.rocketmq.common.UtilAll.STORE_LOG;
+ $stack14.error("Error when measuring disk space usage, got exception: :",(java.lang.Throwable)$stack40);
+ return  -1.0;
+ label7:return  -1.0;
+ catch java.lang.Exception: label1 - label3 : label8;
+catch java.lang.Exception: label2 - label6 : label8;
+} 
+

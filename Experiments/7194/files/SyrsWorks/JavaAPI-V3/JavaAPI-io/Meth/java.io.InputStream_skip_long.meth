@@ -1,0 +1,36 @@
+long java.io.InputStream:skip(long l0)
+{
+int i1;
+  int i2;
+  byte[] r1;
+  byte $b3;
+  long $l4;
+  byte $b5;
+  long $l6;
+  long $l7;
+  long $l8;
+  int $i9;
+  long $l10;
+  long l11;
+  l11=l0;
+ $b3=(l0 cmp 0L);
+ if ($b3>0) goto label0;
+ return  0L;
+ label0:$l4 = java.lang.Math.min(2048L,l11);
+ i2=(int) $l4;
+ r1=new byte[i2];
+ label1:$b5=(l11 cmp 0L);
+ if ($b5<=0) goto label2;
+ $l7=(long) i2;
+ $l8 = java.lang.Math.min($l7,l11);
+ $i9=(int) $l8;
+ i1 = this.read(r1,0,$i9);
+ if (i1>=0) goto label3;
+ goto label2;
+ label3:$l10=(long) i1;
+ l11=(l11-$l10);
+ goto label1;
+ label2:$l6=(l0-l11);
+ return  $l6;
+ }  
+

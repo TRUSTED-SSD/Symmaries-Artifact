@@ -1,0 +1,46 @@
+void org.apache.rocketmq.broker.slave.SlaveSynchronize:syncDelayOffset()
+{
+java.lang.String masterAddrBak;
+  java.lang.String delayOffset;
+  java.lang.String fileName;
+  org.apache.rocketmq.broker.BrokerController $stack5;
+  boolean $stack7;
+  org.apache.rocketmq.broker.out.BrokerOuterAPI $stack9;
+  org.apache.rocketmq.logging.org.slf4j.Logger $stack11;
+  org.apache.rocketmq.store.config.MessageStoreConfig $stack13;
+  org.apache.rocketmq.broker.schedule.ScheduleMessageService $stack17;
+  java.lang.Exception $stack21;
+  java.io.IOException $stack23;
+  masterAddrBak=this.masterAddr;
+ if (masterAddrBak==null) goto label0;
+ $stack5=this.brokerController;
+ delayOffset = $stack5.getBrokerAddr();
+ $stack7 = masterAddrBak.equals((java.lang.Object)delayOffset);
+ if ($stack7!=0) goto label0;
+ label1:$stack5=this.brokerController;
+ $stack9 = $stack5.getBrokerOuterAPI();
+ delayOffset = $stack9.getAllDelayOffset(masterAddrBak);
+ if (delayOffset==null) goto label2;
+ $stack5=this.brokerController;
+ $stack13 = $stack5.getMessageStoreConfig();
+ fileName = $stack13.getStorePathRootDir();
+ fileName = org.apache.rocketmq.store.config.StorePathConfigHelper.getDelayOffsetStorePath(fileName);
+ label3:org.apache.rocketmq.common.MixAll.string2File(delayOffset,fileName);
+ $stack5=this.brokerController;
+ $stack17 = $stack5.getScheduleMessageService();
+ $stack17.load();
+ label4:goto label2;
+ label5:$stack23 = catch;
+ $stack11=org.apache.rocketmq.broker.slave.SlaveSynchronize.LOGGER;
+ $stack11.error("Persist file Exception, {}",(java.lang.Object)fileName,(java.lang.Object)$stack23);
+ label2:$stack11=org.apache.rocketmq.broker.slave.SlaveSynchronize.LOGGER;
+ $stack11.info("Update slave delay offset from master, {}",(java.lang.Object)masterAddrBak);
+ label6:goto label0;
+ label7:$stack21 = catch;
+ $stack11=org.apache.rocketmq.broker.slave.SlaveSynchronize.LOGGER;
+ $stack11.error("SyncDelayOffset Exception, {}",(java.lang.Object)masterAddrBak,(java.lang.Object)$stack21);
+ label0:return;
+ catch java.io.IOException: label3 - label4 : label5;
+catch java.lang.Exception: label1 - label6 : label7;
+} 
+

@@ -1,0 +1,27 @@
+org.apache.bookkeeper.stream.proto.kv.store.CheckpointMetadata org.apache.bookkeeper.statelib.impl.rocksdb.ccheckpoint.CheckpointInfo$1:restore(java.lang.String @dbName,java.io.File dbPath,org.apache.bookkeeper.statelib.api.ccheckpoint.CheckpointStore store,java.time.Duration maxIdle)
+{
+java.nio.file.Path $stack6;
+  java.nio.file.attribute.FileAttribute[] $stack7;
+  java.io.IOException $stack9;
+  org.apache.bookkeeper.statelib.api.exceptions.StateStoreException $stack10;
+  java.lang.StringBuilder $stack11;
+  java.lang.String dbName;
+dbName=@dbName;
+label0:$stack6 = this.getCheckpointPath(dbPath);
+ $stack7=new java.nio.file.attribute.FileAttribute[0];
+ java.nio.file.Files.createDirectories($stack6,$stack7);
+ this.updateCurrent(dbPath);
+ label1:goto label2;
+ label3:$stack9 = catch;
+ $stack10=new org.apache.bookkeeper.statelib.api.exceptions.StateStoreException;
+ $stack11=new java.lang.StringBuilder;
+ $stack11#java.lang.StringBuilder();
+ $stack11 = $stack11.append("Failed to create dir ");
+ $stack11 = $stack11.append(dbName);
+ dbName = $stack11.toString();
+ $stack10#org.apache.bookkeeper.statelib.api.exceptions.StateStoreException(dbName,(java.lang.Throwable)$stack9);
+ throw $stack10;
+ label2:return  null;
+ catch java.io.IOException: label0 - label1 : label3;
+} 
+

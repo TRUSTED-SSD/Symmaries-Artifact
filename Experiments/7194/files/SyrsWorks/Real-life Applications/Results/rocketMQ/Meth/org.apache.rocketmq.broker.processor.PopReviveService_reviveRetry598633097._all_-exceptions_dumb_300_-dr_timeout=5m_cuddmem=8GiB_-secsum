@@ -1,0 +1,9 @@
+boolean org.apache.rocketmq.broker.processor.PopReviveService:reviveRetry (
+  org.apache.rocketmq.store.pop.PopCheckPoint popCheckPoint,
+  org.apache.rocketmq.common.message.MessageExt messageExt) {
+  guard = level(messageExt) ⊔ level(popCheckPoint) ⊔ level(this) ⊔ obj_level(messageExt) ⊔ obj_level(popCheckPoint) ⊔ obj_level(this) = ⊥;
+  ret(level()) = ⊥;
+  ret(obj_level(messageExt)) = ⊤;
+  ret(obj_level(popCheckPoint)) = ⊤;
+  ret(obj_level(this)) = ⊤;
+}

@@ -1,0 +1,9 @@
+boolean org.apache.bookkeeper.net.NetworkTopologyImpl:isSameParents (
+  org.apache.bookkeeper.net.Node @node1,
+  org.apache.bookkeeper.net.Node @node2) {
+  guard = tt;
+  ret(level()) = pc ⊔ level(@node1) ⊔ level(@node2) ⊔ obj_level(@node1);
+  ret(obj_level(@node1)) = if obj_level(@node1) = ⊤ ∨ pc ≠ ⊤ ∧ obj_level(@node1) = ⊥ ∧ obj_level(this) = ⊤ ∧ level(@node1) ⊔ level(@node2) = ⊤ then ⊤ else ⊥;
+  ret(obj_level(@node2)) = if obj_level(@node1) = ⊤ ∨ pc ≠ ⊤ ∧ obj_level(@node1) = ⊥ ∧ obj_level(this) = ⊤ ∧ level(@node1) ⊔ level(@node2) = ⊤ then ⊤ else ⊥;
+  ret(obj_level(this)) = if obj_level(this) = ⊤ ∨ pc ≠ ⊤ ∧ obj_level(@node1) = ⊤ ∧ obj_level(this) = ⊥ then ⊤ else ⊥;
+}

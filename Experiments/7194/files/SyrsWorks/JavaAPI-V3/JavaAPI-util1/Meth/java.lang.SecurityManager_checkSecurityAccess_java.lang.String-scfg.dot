@@ -1,0 +1,40 @@
+digraph G {
+  node [shape=box, ];
+  "pc0_js1" [label="〈$r2 = new java.security.SecurityPermission, js1〉", ];
+  "pc1_js1" [label="〈$r2#java.security.SecurityPermission.init (r1), js1〉\n\
+tt",
+             ];
+  "pc2_js1" [label="〈this.checkPermission ((java.security.Permission) $r2), js1〉\n\
+tt",
+             ];
+  "pc3_js1" [label="〈return, js1〉", ];
+  "pc4_js1" [label="〈sink, js1〉\n\
+obj_level(r1) ⊑ ret(obj_level(r1))' ∧ obj_level(this) ⊑ ret(obj_level(this))' ∧ (ret(r1.><r1)' ∨ ¬r1.><r1)",
+             ];
+  
+  
+  "pc0_js1" -> "pc1_js1" [label="tt,\n\
+{$r2.><$r2 := ff,\n\
+ $r2.><r1 := ff,\n\
+ r1.><$r2 := ff,\n\
+ level($r2) := pc,\n\
+ obj_level($r2) := pc}",
+                          ];
+  "pc1_js1" -> "pc2_js1" [label="tt,\n\
+{$r2.><$r2 := tt,\n\
+ $r2.><r1 := tt,\n\
+ r1.><$r2 := r1.><r1,\n\
+ obj_level($r2) := pc ⊔ level(r1) ⊔ obj_level(r1),\n\
+ obj_level(r1) := pc ⊔ level(r1) ⊔ obj_level(r1)}",
+                          ];
+  "pc2_js1" -> "pc3_js1" [label="tt,\n\
+{$r2.><$r2 := tt,\n\
+ $r2.><r1 := tt,\n\
+ r1.><r1 := r1.><$r2 ∨ r1.><r1,\n\
+ obj_level($r2) := pc ⊔ obj_level($r2),\n\
+ obj_level(r1) := pc ⊔ obj_level($r2) ⊔ obj_level(r1)}",
+                          ];
+  "pc3_js1" -> "pc4_js1" [label="tt,\n\
+{ϕ := S3}", ];
+  
+  }

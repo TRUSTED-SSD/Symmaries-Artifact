@@ -1,0 +1,183 @@
+    protected void runTestMethod()
+    {
+        org.junit.internal.runners.MethodRoadie this;
+        java.lang.Throwable actual;
+        java.lang.String message;
+        java.lang.Object $stack4;
+        org.junit.internal.runners.TestMethod $stack5;
+        boolean $stack7;
+        java.lang.AssertionError $stack8;
+        java.lang.StringBuilder $stack9;
+        java.lang.Class $stack12;
+        java.lang.reflect.InvocationTargetException $stack17;
+        java.lang.Exception $stack36;
+
+        this := @this: org.junit.internal.runners.MethodRoadie;
+
+     label1:
+        $stack5 = this.<org.junit.internal.runners.MethodRoadie: org.junit.internal.runners.TestMethod testMethod>;
+/*108*/
+
+        $stack4 = this.<org.junit.internal.runners.MethodRoadie: java.lang.Object test>;
+/*108*/
+
+        virtualinvoke $stack5.<org.junit.internal.runners.TestMethod: void invoke(java.lang.Object)>($stack4);
+/*108*/
+
+        $stack5 = this.<org.junit.internal.runners.MethodRoadie: org.junit.internal.runners.TestMethod testMethod>;
+/*109*/
+
+        $stack7 = virtualinvoke $stack5.<org.junit.internal.runners.TestMethod: boolean expectsException()>();
+/*109*/
+
+        if $stack7 == 0 goto label2;
+/*109*/
+
+        $stack8 = new java.lang.AssertionError;
+/*110*/
+
+        $stack9 = new java.lang.StringBuilder;
+/*110*/
+
+        specialinvoke $stack9.<java.lang.StringBuilder: void <init>()>();
+/*110*/
+
+        $stack9 = virtualinvoke $stack9.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>("Expected exception: ");
+/*110*/
+
+        $stack5 = this.<org.junit.internal.runners.MethodRoadie: org.junit.internal.runners.TestMethod testMethod>;
+/*110*/
+
+        $stack12 = virtualinvoke $stack5.<org.junit.internal.runners.TestMethod: java.lang.Class getExpectedException()>();
+/*110*/
+
+        message = virtualinvoke $stack12.<java.lang.Class: java.lang.String getName()>();
+/*110*/
+
+        $stack9 = virtualinvoke $stack9.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>(message);
+/*110*/
+
+        message = virtualinvoke $stack9.<java.lang.StringBuilder: java.lang.String toString()>();
+/*110*/
+
+        specialinvoke $stack8.<java.lang.AssertionError: void <init>(java.lang.Object)>(message);
+/*110*/
+
+        virtualinvoke this.<org.junit.internal.runners.MethodRoadie: void addFailure(java.lang.Throwable)>($stack8);
+/*110*/
+
+     label2:
+        goto label8;
+/*125*/
+
+     label3:
+        $stack17 := @caughtexception;
+/*126*/
+
+        actual = virtualinvoke $stack17.<java.lang.reflect.InvocationTargetException: java.lang.Throwable getTargetException()>();
+/*113*/
+/*113*/
+
+        $stack7 = actual instanceof org.junit.internal.AssumptionViolatedException;
+/*114*/
+
+        if $stack7 == 0 goto label4;
+/*114*/
+
+        return;
+/*115*/
+
+     label4:
+        $stack5 = this.<org.junit.internal.runners.MethodRoadie: org.junit.internal.runners.TestMethod testMethod>;
+/*116*/
+
+        $stack7 = virtualinvoke $stack5.<org.junit.internal.runners.TestMethod: boolean expectsException()>();
+/*116*/
+
+        if $stack7 != 0 goto label5;
+/*116*/
+
+        virtualinvoke this.<org.junit.internal.runners.MethodRoadie: void addFailure(java.lang.Throwable)>(actual);
+/*117*/
+
+        goto label6;
+/*117*/
+
+     label5:
+        $stack5 = this.<org.junit.internal.runners.MethodRoadie: org.junit.internal.runners.TestMethod testMethod>;
+/*118*/
+
+        $stack7 = virtualinvoke $stack5.<org.junit.internal.runners.TestMethod: boolean isUnexpected(java.lang.Throwable)>(actual);
+/*118*/
+
+        if $stack7 == 0 goto label6;
+/*118*/
+
+        $stack9 = new java.lang.StringBuilder;
+/*119*/
+
+        specialinvoke $stack9.<java.lang.StringBuilder: void <init>()>();
+/*119*/
+
+        $stack9 = virtualinvoke $stack9.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>("Unexpected exception, expected<");
+/*119*/
+
+        $stack5 = this.<org.junit.internal.runners.MethodRoadie: org.junit.internal.runners.TestMethod testMethod>;
+/*119*/
+
+        $stack12 = virtualinvoke $stack5.<org.junit.internal.runners.TestMethod: java.lang.Class getExpectedException()>();
+/*119*/
+
+        message = virtualinvoke $stack12.<java.lang.Class: java.lang.String getName()>();
+/*119*/
+
+        $stack9 = virtualinvoke $stack9.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>(message);
+/*119*/
+
+        $stack9 = virtualinvoke $stack9.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>("> but was<");
+/*119*/
+
+        $stack12 = virtualinvoke actual.<java.lang.Object: java.lang.Class getClass()>();
+/*119*/
+
+        message = virtualinvoke $stack12.<java.lang.Class: java.lang.String getName()>();
+/*119*/
+
+        $stack9 = virtualinvoke $stack9.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>(message);
+/*119*/
+
+        $stack9 = virtualinvoke $stack9.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>(">");
+/*119*/
+
+        message = virtualinvoke $stack9.<java.lang.StringBuilder: java.lang.String toString()>();
+/*119*/
+/*119*/
+
+        $stack36 = new java.lang.Exception;
+/*121*/
+
+        specialinvoke $stack36.<java.lang.Exception: void <init>(java.lang.String,java.lang.Throwable)>(message, actual);
+/*121*/
+
+        virtualinvoke this.<org.junit.internal.runners.MethodRoadie: void addFailure(java.lang.Throwable)>($stack36);
+/*121*/
+
+     label6:
+        goto label8;
+/*125*/
+
+     label7:
+        actual := @caughtexception;
+/*125*/
+
+        virtualinvoke this.<org.junit.internal.runners.MethodRoadie: void addFailure(java.lang.Throwable)>(actual);
+/*124*/
+
+     label8:
+        return;
+/*126*/
+
+        catch java.lang.reflect.InvocationTargetException from label1 to label2 with label3;
+        catch java.lang.Throwable from label1 to label2 with label7;
+    }
+

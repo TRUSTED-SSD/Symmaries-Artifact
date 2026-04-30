@@ -1,0 +1,22 @@
+void org.apache.rocketmq.client.impl.MQClientAPIImpl:execRpcHooksAfterRequest(org.apache.rocketmq.remoting.netty.ResponseFuture responseFuture)
+{
+org.apache.rocketmq.remoting.netty.NettyRemotingClient remotingClient;
+  org.apache.rocketmq.remoting.protocol.RemotingCommand response;
+  org.apache.rocketmq.remoting.RemotingClient $stack4;
+  boolean $stack5;
+  io.netty.channel.Channel $stack8;
+  java.lang.String $stack9;
+  org.apache.rocketmq.remoting.protocol.RemotingCommand $stack10;
+  $stack4=this.remotingClient;
+ $stack5=$stack4 instanceof org.apache.rocketmq.remoting.netty.NettyRemotingClient;
+ if ($stack5==0) goto label0;
+ $stack4=this.remotingClient;
+ remotingClient=(org.apache.rocketmq.remoting.netty.NettyRemotingClient) $stack4;
+ response = responseFuture.getResponseCommand();
+ $stack8 = responseFuture.getChannel();
+ $stack9 = org.apache.rocketmq.remoting.common.RemotingHelper.parseChannelRemoteAddr($stack8);
+ $stack10 = responseFuture.getRequestCommand();
+ remotingClient.doAfterRpcHooks($stack9,$stack10,response);
+ label0:return;
+ } 
+

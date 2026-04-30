@@ -1,0 +1,26 @@
+org.apache.bookkeeper.bookie.storage.CompactionEntryLog org.apache.bookkeeper.bookie.storage.directentrylogger.DirectEntryLogger:newCompactionLog(long srcLogId)
+{
+int dstLogId;
+  org.apache.bookkeeper.bookie.storage.EntryLogIds $stack4;
+  org.apache.bookkeeper.slogger.Slogger $stack6;
+  io.netty.buffer.ByteBufAllocator $stack7;
+  org.apache.bookkeeper.common.util.nativeio.NativeIO $stack8;
+  org.apache.bookkeeper.bookie.storage.directentrylogger.BufferPool $stack9;
+  java.util.concurrent.ExecutorService $stack10;
+  java.io.File $stack12;
+  int $stack13;
+  org.apache.bookkeeper.bookie.storage.CompactionEntryLog $stack14;
+  $stack4=this.ids;
+ dstLogId = $stack4.nextId();
+ $stack13=(int) srcLogId;
+ $stack12=this.ledgerDir;
+ srcLogId=this.maxFileSize;
+ $stack10=this.writeExecutor;
+ $stack9=this.writeBuffers;
+ $stack8=this.nativeIO;
+ $stack7=this.allocator;
+ $stack6=this.slog;
+ $stack14 = org.apache.bookkeeper.bookie.storage.directentrylogger.DirectCompactionEntryLog.newLog($stack13,dstLogId,$stack12,srcLogId,$stack10,$stack9,$stack8,$stack7,$stack6);
+ return  $stack14;
+ } 
+

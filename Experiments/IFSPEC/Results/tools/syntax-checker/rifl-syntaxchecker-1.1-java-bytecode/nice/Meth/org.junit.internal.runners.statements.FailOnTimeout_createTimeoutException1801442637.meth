@@ -1,0 +1,48 @@
+java.lang.Exception org.junit.internal.runners.statements.FailOnTimeout:createTimeoutException(java.lang.Thread thread)
+{
+java.lang.StackTraceElement[] stackTrace;
+  java.lang.Thread stuckThread;
+  org.junit.runners.model.TestTimedOutException currThreadException;
+  java.lang.Exception stuckThreadException;
+  boolean $stack7;
+  java.util.concurrent.TimeUnit $stack9;
+  long $stack10;
+  java.lang.StringBuilder $stack12;
+  java.lang.String $stack14;
+  org.junit.runners.model.MultipleFailureException $stack18;
+  java.lang.Throwable[] $stack19;
+  java.util.List $stack20;
+  stackTrace = thread.getStackTrace();
+ $stack7=this.lookForStuckThread;
+ if ($stack7==0) goto label0;
+ stuckThread = this#org.junit.internal.runners.statements.FailOnTimeout:getStuckThread(thread);
+ goto label1;
+ label0:stuckThread=null;
+ label1:currThreadException=new org.junit.runners.model.TestTimedOutException;
+ $stack10=this.timeout;
+ $stack9=this.timeUnit;
+ currThreadException#org.junit.runners.model.TestTimedOutException($stack10,$stack9);
+ if (stackTrace==null) goto label2;
+ currThreadException.setStackTrace(stackTrace);
+ thread.interrupt();
+ label2:if (stuckThread==null) goto label3;
+ stuckThreadException=new java.lang.Exception;
+ $stack12=new java.lang.StringBuilder;
+ $stack12#java.lang.StringBuilder();
+ $stack12 = $stack12.append("Appears to be stuck in thread ");
+ $stack14 = stuckThread.getName();
+ $stack12 = $stack12.append($stack14);
+ $stack14 = $stack12.toString();
+ stuckThreadException#java.lang.Exception($stack14);
+ stackTrace = this#org.junit.internal.runners.statements.FailOnTimeout:getStackTrace(stuckThread);
+ stuckThreadException.setStackTrace(stackTrace);
+ $stack18=new org.junit.runners.model.MultipleFailureException;
+ $stack19=new java.lang.Throwable[2];
+ $stack19[0]=currThreadException;
+ $stack19[1]=stuckThreadException;
+ $stack20 = java.util.Arrays.asList((java.lang.Object[])$stack19);
+ $stack18#org.junit.runners.model.MultipleFailureException($stack20);
+ return  $stack18;
+ label3:return  currThreadException;
+ } 
+

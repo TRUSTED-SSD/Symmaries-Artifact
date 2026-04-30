@@ -1,0 +1,22 @@
+int org.apache.kerby.asn1.parse.Asn1ParseResult:getHeaderLength()
+{
+int bodyLen;
+  org.apache.kerby.asn1.parse.Asn1Header $stack4;
+  org.apache.kerby.asn1.Tag $stack5;
+  int $stack6;
+  boolean $stack9;
+  bodyLen = this.getBodyLength();
+ $stack4=this.header;
+ $stack5 = $stack4.getTag();
+ $stack6 = $stack5.tagNo();
+ $stack6 = org.apache.kerby.asn1.util.Asn1Util.lengthOfTagLength($stack6);
+ $stack4=this.header;
+ $stack9 = $stack4.isDefinitiveLength();
+ if ($stack9==0) goto label0;
+ bodyLen = org.apache.kerby.asn1.util.Asn1Util.lengthOfBodyLength(bodyLen);
+ goto label1;
+ label0:bodyLen=1;
+ label1:bodyLen=($stack6+bodyLen);
+ return  bodyLen;
+ } 
+

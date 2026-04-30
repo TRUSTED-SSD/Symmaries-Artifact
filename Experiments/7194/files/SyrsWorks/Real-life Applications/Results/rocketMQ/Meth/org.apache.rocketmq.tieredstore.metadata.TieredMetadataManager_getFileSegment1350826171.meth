@@ -1,0 +1,63 @@
+org.apache.rocketmq.tieredstore.metadata.FileSegmentMetadata org.apache.rocketmq.tieredstore.metadata.TieredMetadataManager:getFileSegment(org.apache.rocketmq.tieredstore.provider.TieredFileSegment fileSegment)
+{
+int[] $stack2;
+  org.apache.rocketmq.tieredstore.provider.TieredFileSegment$FileSegmentType $stack3;
+  int $stack4;
+  java.util.concurrent.ConcurrentMap $stack6;
+  org.apache.rocketmq.common.message.MessageQueue $stack7;
+  boolean $stack8;
+  java.lang.Object $stack11;
+  long $stack13;
+  java.lang.Long $stack14;
+  org.apache.rocketmq.tieredstore.metadata.FileSegmentMetadata $stack16;
+  $stack2=org.apache.rocketmq.tieredstore.metadata.TieredMetadataManager$1.$SwitchMap$org$apache$rocketmq$tieredstore$provider$TieredFileSegment$FileSegmentType;
+ $stack3 = fileSegment.getFileType();
+ $stack4 = $stack3.ordinal();
+ $stack4=$stack2[$stack4];
+ switch [$stack4]
+if 0 goto label0;
+if 1 goto label1;
+if 2 goto label2;
+goto label3;
+ label0:$stack6=this.commitLogFileSegmentTable;
+ $stack7 = fileSegment.getMessageQueue();
+ $stack8 = $stack6.containsKey((java.lang.Object)$stack7);
+ if ($stack8==0) goto label3;
+ $stack6=this.commitLogFileSegmentTable;
+ $stack7 = fileSegment.getMessageQueue();
+ $stack11 = $stack6.get((java.lang.Object)$stack7);
+ $stack6=(java.util.concurrent.ConcurrentMap) $stack11;
+ $stack13 = fileSegment.getBaseOffset();
+ $stack14 = java.lang.Long.valueOf($stack13);
+ $stack11 = $stack6.get((java.lang.Object)$stack14);
+ $stack16=(org.apache.rocketmq.tieredstore.metadata.FileSegmentMetadata) $stack11;
+ return  $stack16;
+ label1:$stack6=this.consumeQueueFileSegmentTable;
+ $stack7 = fileSegment.getMessageQueue();
+ $stack8 = $stack6.containsKey((java.lang.Object)$stack7);
+ if ($stack8==0) goto label3;
+ $stack6=this.consumeQueueFileSegmentTable;
+ $stack7 = fileSegment.getMessageQueue();
+ $stack11 = $stack6.get((java.lang.Object)$stack7);
+ $stack6=(java.util.concurrent.ConcurrentMap) $stack11;
+ $stack13 = fileSegment.getBaseOffset();
+ $stack14 = java.lang.Long.valueOf($stack13);
+ $stack11 = $stack6.get((java.lang.Object)$stack14);
+ $stack16=(org.apache.rocketmq.tieredstore.metadata.FileSegmentMetadata) $stack11;
+ return  $stack16;
+ label2:$stack6=this.indexFileSegmentTable;
+ $stack7 = fileSegment.getMessageQueue();
+ $stack8 = $stack6.containsKey((java.lang.Object)$stack7);
+ if ($stack8==0) goto label3;
+ $stack6=this.indexFileSegmentTable;
+ $stack7 = fileSegment.getMessageQueue();
+ $stack11 = $stack6.get((java.lang.Object)$stack7);
+ $stack6=(java.util.concurrent.ConcurrentMap) $stack11;
+ $stack13 = fileSegment.getBaseOffset();
+ $stack14 = java.lang.Long.valueOf($stack13);
+ $stack11 = $stack6.get((java.lang.Object)$stack14);
+ $stack16=(org.apache.rocketmq.tieredstore.metadata.FileSegmentMetadata) $stack11;
+ return  $stack16;
+ label3:return  null;
+ } 
+

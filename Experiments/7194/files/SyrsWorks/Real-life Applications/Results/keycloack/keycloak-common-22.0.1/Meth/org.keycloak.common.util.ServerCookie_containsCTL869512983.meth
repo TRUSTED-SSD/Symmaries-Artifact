@@ -1,0 +1,20 @@
+static boolean org.keycloak.common.util.ServerCookie:containsCTL(java.lang.String value,int version)
+{
+int i;
+  char c;
+  if (value!=null) goto label0;
+ return  0;
+ label0:version = value.length();
+ i=0;
+ label1:if (i>=version) goto label2;
+ c = value.charAt(i);
+ if (c<32) goto label3;
+ if (c<127) goto label4;
+ label3:if (c!=9) goto label5;
+ goto label4;
+ label5:return  1;
+ label4:i=(i+1);
+ goto label1;
+ label2:return  0;
+ } 
+

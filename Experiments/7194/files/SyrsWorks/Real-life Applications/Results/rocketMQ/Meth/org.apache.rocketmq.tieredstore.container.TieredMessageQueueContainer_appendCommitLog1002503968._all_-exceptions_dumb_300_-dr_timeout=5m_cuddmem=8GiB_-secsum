@@ -1,0 +1,8 @@
+org.apache.rocketmq.tieredstore.common.AppendResult org.apache.rocketmq.tieredstore.container.TieredMessageQueueContainer:appendCommitLog (
+  java.nio.ByteBuffer message) {
+  guard = tt;
+  ret(level()) = level(message) ⊔ level(this) ⊔ obj_level(message) ⊔ obj_level(this);
+  ret(obj_level()) = level(message) ⊔ level(this) ⊔ obj_level(message) ⊔ obj_level(this);
+  ret(obj_level(message)) = obj_level(message);
+  ret(obj_level(this)) = obj_level(this);
+}

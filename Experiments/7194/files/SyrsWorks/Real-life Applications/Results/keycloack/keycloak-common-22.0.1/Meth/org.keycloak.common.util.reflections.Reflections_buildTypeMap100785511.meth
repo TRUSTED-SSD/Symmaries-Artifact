@@ -1,0 +1,39 @@
+static java.util.Map org.keycloak.common.util.reflections.Reflections:buildTypeMap(java.util.Set types)
+{
+java.util.HashMap map;
+  java.util.Iterator l2;
+  java.lang.reflect.Type type;
+  boolean $stack6;
+  java.lang.Object $stack7;
+  java.lang.reflect.ParameterizedType $stack12;
+  java.lang.reflect.Type $stack13;
+  java.lang.Class $stack17;
+  map=new java.util.HashMap;
+ map#java.util.HashMap();
+ l2 = types.iterator();
+ label0:$stack6 = l2.hasNext();
+ if ($stack6==0) goto label1;
+ $stack7 = l2.next();
+ type=(java.lang.reflect.Type) $stack7;
+ $stack6=type instanceof java.lang.Class;
+ if ($stack6==0) goto label2;
+ $stack17=(java.lang.Class) type;
+ map.put((java.lang.Object)$stack17,(java.lang.Object)type);
+ goto label3;
+ label2:$stack6=type instanceof java.lang.reflect.ParameterizedType;
+ if ($stack6==0) goto label4;
+ $stack12=(java.lang.reflect.ParameterizedType) type;
+ $stack13 = $stack12.getRawType();
+ $stack6=$stack13 instanceof java.lang.Class;
+ if ($stack6==0) goto label3;
+ $stack12=(java.lang.reflect.ParameterizedType) type;
+ $stack13 = $stack12.getRawType();
+ $stack17=(java.lang.Class) $stack13;
+ map.put((java.lang.Object)$stack17,(java.lang.Object)type);
+ goto label3;
+ label4:$stack6=type instanceof java.lang.reflect.TypeVariable;
+ if ($stack6==0) goto label3;
+ label3:goto label0;
+ label1:return  map;
+ } 
+

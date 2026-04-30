@@ -1,0 +1,25 @@
+boolean org.xerial.snappy.SnappyFramedInputStream:readBlockHeader()
+{
+int l1;
+  java.nio.ByteBuffer $stack2;
+  java.nio.channels.ReadableByteChannel $stack5;
+  int $stack8;
+  java.io.EOFException $stack11;
+  $stack2=this.frameHeader;
+ $stack2.clear();
+ $stack5=this.rbc;
+ $stack2=this.frameHeader;
+ l1 = org.xerial.snappy.SnappyFramed.readBytes($stack5,$stack2);
+ if (l1!=-1) goto label0;
+ return  0;
+ label0:$stack2=this.frameHeader;
+ $stack8 = $stack2.capacity();
+ if (l1>=$stack8) goto label1;
+ $stack11=new java.io.EOFException;
+ $stack11#java.io.EOFException("encountered EOF while reading block header");
+ throw $stack11;
+ label1:$stack2=this.frameHeader;
+ $stack2.flip();
+ return  1;
+ } 
+

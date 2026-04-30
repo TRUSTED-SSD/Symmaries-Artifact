@@ -1,0 +1,58 @@
+java.util.Formatter$FormatString[] java.util.Formatter:parse(java.lang.String r1)
+{
+java.util.ArrayList r2;
+  java.util.regex.Matcher r3;
+  int i0;
+  java.util.ArrayList $r4;
+  java.util.regex.Pattern $r5;
+  int $i1;
+  java.util.Formatter$FormatString[] $r6;
+  java.lang.Object[] $r7;
+  java.util.Formatter$FormatString[] $r8;
+  boolean $z0;
+  java.util.Formatter$FixedString $r9;
+  java.lang.String $r10;
+  int $i2;
+  java.util.Formatter$FormatSpecifier $r11;
+  int $i3;
+  java.util.Formatter$FixedString $r12;
+  int $i4;
+  java.lang.String $r13;
+  int i5;
+  $r4=new java.util.ArrayList;
+ $r4#java.util.ArrayList:init();
+ r2=$r4;
+ $r5=java.util.Formatter.fsPattern;
+ r3 = $r5.matcher((java.lang.CharSequence)r1);
+ i5=0;
+ i0 = r1.length();
+ label0:if (i5>=i0) goto label1;
+ $z0 = r3.find(i5);
+ if ($z0==0) goto label2;
+ $i2 = r3.start();
+ if ($i2==i5) goto label3;
+ $i3 = r3.start();
+ java.util.Formatter.checkText(r1,i5,$i3);
+ $r12=new java.util.Formatter$FixedString;
+ $i4 = r3.start();
+ $r13 = r1.substring(i5,$i4);
+ $r12#java.util.Formatter$FixedString:init(this,$r13);
+ r2.add((java.lang.Object)$r12);
+ label3:$r11=new java.util.Formatter$FormatSpecifier;
+ $r11#java.util.Formatter$FormatSpecifier:init(this,r3);
+ r2.add((java.lang.Object)$r11);
+ i5 = r3.end();
+ goto label0;
+ label2:java.util.Formatter.checkText(r1,i5,i0);
+ $r9=new java.util.Formatter$FixedString;
+ $r10 = r1.substring(i5);
+ $r9#java.util.Formatter$FixedString:init(this,$r10);
+ r2.add((java.lang.Object)$r9);
+ goto label1;
+ label1:$i1 = r2.size();
+ $r6=new java.util.Formatter$FormatString[$i1];
+ $r7 = r2.toArray((java.lang.Object[])$r6);
+ $r8=(java.util.Formatter$FormatString[]) $r7;
+ return  $r8;
+ }  
+

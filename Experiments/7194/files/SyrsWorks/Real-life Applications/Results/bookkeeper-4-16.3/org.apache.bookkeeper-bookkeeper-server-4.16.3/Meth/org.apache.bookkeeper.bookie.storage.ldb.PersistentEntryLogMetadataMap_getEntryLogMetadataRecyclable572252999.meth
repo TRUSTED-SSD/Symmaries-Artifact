@@ -1,0 +1,43 @@
+org.apache.bookkeeper.bookie.EntryLogMetadata$EntryLogMetadataRecyclable org.apache.bookkeeper.bookie.storage.ldb.PersistentEntryLogMetadataMap:getEntryLogMetadataRecyclable(byte[] value)
+{
+java.io.ByteArrayInputStream localBais;
+  java.io.DataInputStream localDatais;
+  java.io.ByteArrayInputStream newBais;
+  io.netty.util.concurrent.FastThreadLocal $stack5;
+  java.lang.Object $stack6;
+  int $stack9;
+  int $stack10;
+  java.io.DataInputStream $stack19;
+  org.apache.bookkeeper.bookie.EntryLogMetadata$EntryLogMetadataRecyclable $stack23;
+  $stack5=org.apache.bookkeeper.bookie.storage.ldb.PersistentEntryLogMetadataMap.bais;
+ $stack6 = $stack5.get();
+ localBais=(java.io.ByteArrayInputStream) $stack6;
+ $stack5=org.apache.bookkeeper.bookie.storage.ldb.PersistentEntryLogMetadataMap.datais;
+ $stack6 = $stack5.get();
+ localDatais=(java.io.DataInputStream) $stack6;
+ $stack9 = localBais.available();
+ $stack10=#value;
+ if ($stack9>=$stack10) goto label0;
+ localBais.close();
+ localDatais.close();
+ newBais=new java.io.ByteArrayInputStream;
+ newBais#java.io.ByteArrayInputStream(value);
+ $stack5=org.apache.bookkeeper.bookie.storage.ldb.PersistentEntryLogMetadataMap.bais;
+ $stack5.set((java.lang.Object)newBais);
+ $stack5=org.apache.bookkeeper.bookie.storage.ldb.PersistentEntryLogMetadataMap.datais;
+ $stack19=new java.io.DataInputStream;
+ $stack19#java.io.DataInputStream((java.io.InputStream)newBais);
+ $stack5.set((java.lang.Object)$stack19);
+ goto label1;
+ label0:$stack9=#value;
+ dummyClass.highSourceMut(value);
+localBais.read(value,0,$stack9);
+ label1:localBais.reset();
+ localDatais.reset();
+ $stack5=org.apache.bookkeeper.bookie.storage.ldb.PersistentEntryLogMetadataMap.datais;
+ $stack6 = $stack5.get();
+ localDatais=(java.io.DataInputStream) $stack6;
+ $stack23 = org.apache.bookkeeper.bookie.EntryLogMetadata.deserialize(localDatais);
+ return  $stack23;
+ } 
+

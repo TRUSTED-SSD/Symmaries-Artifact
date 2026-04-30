@@ -1,0 +1,36 @@
+void org.apache.rocketmq.client.impl.MQClientAPIImpl:resetMasterFlushOffset(java.lang.String brokerAddr,long masterFlushOffset)
+{
+org.apache.rocketmq.remoting.protocol.header.ResetMasterFlushOffsetHeader requestHeader;
+  org.apache.rocketmq.remoting.protocol.RemotingCommand request;
+  java.lang.Long $stack8;
+  org.apache.rocketmq.remoting.RemotingClient $stack10;
+  boolean $stack12;
+  int $stack13;
+  org.apache.rocketmq.client.exception.MQBrokerException $stack14;
+  java.lang.String $stack16;
+  java.lang.AssertionError $stack18;
+  requestHeader=new org.apache.rocketmq.remoting.protocol.header.ResetMasterFlushOffsetHeader;
+ requestHeader#org.apache.rocketmq.remoting.protocol.header.ResetMasterFlushOffsetHeader();
+ $stack8 = java.lang.Long.valueOf(masterFlushOffset);
+ requestHeader.setMasterFlushOffset($stack8);
+ request = org.apache.rocketmq.remoting.protocol.RemotingCommand.createRequestCommand(908,(org.apache.rocketmq.remoting.CommandCustomHeader)requestHeader);
+ $stack10=this.remotingClient;
+ request = $stack10.invokeSync(brokerAddr,request,3000L);
+ $stack12=org.apache.rocketmq.client.impl.MQClientAPIImpl.$assertionsDisabled;
+ if ($stack12!=0) goto label0;
+ if (request!=null) goto label0;
+ $stack18=new java.lang.AssertionError;
+ $stack18#java.lang.AssertionError();
+ throw $stack18;
+ label0:$stack13 = request.getCode();
+ switch [$stack13]
+if 0 goto label1;
+goto label2;
+ label1:return;
+ label2:$stack14=new org.apache.rocketmq.client.exception.MQBrokerException;
+ $stack13 = request.getCode();
+ $stack16 = request.getRemark();
+ $stack14#org.apache.rocketmq.client.exception.MQBrokerException($stack13,$stack16,brokerAddr);
+ throw $stack14;
+ } 
+

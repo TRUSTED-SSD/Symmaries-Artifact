@@ -1,0 +1,27 @@
+void org.apache.bookkeeper.client.LedgerDeleteOp:lambda$initiate$0(java.lang.Void ignore,java.lang.Throwable exception)
+{
+long $stack3;
+  org.apache.bookkeeper.stats.OpStatsLogger $stack4;
+  java.util.concurrent.TimeUnit $stack6;
+  org.apache.bookkeeper.client.AsyncCallback$DeleteCallback $stack7;
+  int $stack8;
+  java.lang.Object $stack9;
+  if (exception==null) goto label0;
+ $stack4=this.deleteOpLogger;
+ $stack3=this.startTime;
+ $stack3 = org.apache.bookkeeper.util.MathUtils.elapsedNanos($stack3);
+ $stack6=java.util.concurrent.TimeUnit.NANOSECONDS;
+ $stack4.registerFailedEvent($stack3,$stack6);
+ goto label1;
+ label0:$stack4=this.deleteOpLogger;
+ $stack3=this.startTime;
+ $stack3 = org.apache.bookkeeper.util.MathUtils.elapsedNanos($stack3);
+ $stack6=java.util.concurrent.TimeUnit.NANOSECONDS;
+ $stack4.registerSuccessfulEvent($stack3,$stack6);
+ label1:$stack7=this.cb;
+ $stack8 = org.apache.bookkeeper.client.BKException.getExceptionCode(exception);
+ $stack9=this.ctx;
+ $stack7.deleteComplete($stack8,$stack9);
+ return;
+ } 
+

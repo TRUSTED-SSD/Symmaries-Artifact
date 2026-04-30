@@ -1,0 +1,37 @@
+int org.junit.internal.ComparisonCriteria:assertArraysAreSameLength(java.lang.Object expecteds,java.lang.Object actuals,java.lang.String @header)
+{
+int actualsLength;
+  int expectedsLength;
+  java.lang.StringBuilder $stack8;
+  java.lang.String $stack19;
+  java.lang.String header;
+header=@header;
+if (expecteds!=null) goto label0;
+ $stack8=new java.lang.StringBuilder;
+ $stack8#java.lang.StringBuilder();
+ $stack8 = $stack8.append(header);
+ $stack8 = $stack8.append("expected array was null");
+ $stack19 = $stack8.toString();
+ org.junit.Assert.fail($stack19);
+ label0:if (actuals!=null) goto label1;
+ $stack8=new java.lang.StringBuilder;
+ $stack8#java.lang.StringBuilder();
+ $stack8 = $stack8.append(header);
+ $stack8 = $stack8.append("actual array was null");
+ $stack19 = $stack8.toString();
+ org.junit.Assert.fail($stack19);
+ label1:actualsLength = java.lang.reflect.Array.getLength(actuals);
+ expectedsLength = java.lang.reflect.Array.getLength(expecteds);
+ if (actualsLength==expectedsLength) goto label2;
+ $stack8=new java.lang.StringBuilder;
+ $stack8#java.lang.StringBuilder();
+ $stack8 = $stack8.append(header);
+ $stack8 = $stack8.append("array lengths differed, expected.length=");
+ $stack8 = $stack8.append(expectedsLength);
+ $stack8 = $stack8.append(" actual.length=");
+ $stack8 = $stack8.append(actualsLength);
+ header = $stack8.toString();
+ org.junit.Assert.fail(header);
+ label2:return  expectedsLength;
+ } 
+

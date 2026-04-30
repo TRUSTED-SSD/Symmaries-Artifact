@@ -1,0 +1,32 @@
+void org.apache.rocketmq.client.impl.producer.DefaultMQProducerImpl:initTransactionEnv()
+{
+org.apache.rocketmq.client.producer.TransactionMQProducer producer;
+  org.apache.rocketmq.client.producer.DefaultMQProducer $stack2;
+  java.util.concurrent.ExecutorService $stack3;
+  java.util.concurrent.LinkedBlockingQueue $stack4;
+  int $stack5;
+  java.util.concurrent.ThreadPoolExecutor $stack6;
+  int $stack8;
+  java.util.concurrent.BlockingQueue $stack9;
+  java.util.concurrent.TimeUnit $stack10;
+  $stack2=this.defaultMQProducer;
+ producer=(org.apache.rocketmq.client.producer.TransactionMQProducer) $stack2;
+ $stack3 = producer.getExecutorService();
+ if ($stack3==null) goto label0;
+ $stack3 = producer.getExecutorService();
+ this.checkExecutor=$stack3;
+ goto label1;
+ label0:$stack4=new java.util.concurrent.LinkedBlockingQueue;
+ $stack5 = producer.getCheckRequestHoldMax();
+ $stack4#java.util.concurrent.LinkedBlockingQueue($stack5);
+ this.checkRequestQueue=$stack4;
+ $stack6=new java.util.concurrent.ThreadPoolExecutor;
+ $stack5 = producer.getCheckThreadPoolMinSize();
+ $stack8 = producer.getCheckThreadPoolMaxSize();
+ $stack10=java.util.concurrent.TimeUnit.MILLISECONDS;
+ $stack9=this.checkRequestQueue;
+ $stack6#java.util.concurrent.ThreadPoolExecutor($stack5,$stack8,60000L,$stack10,$stack9);
+ this.checkExecutor=$stack6;
+ label1:return;
+ } 
+

@@ -1,0 +1,21 @@
+int org.apache.rocketmq.store.CommitLog:calcNeedAckNums(int inSyncReplicas)
+{
+int needAckNums;
+  org.apache.rocketmq.store.DefaultMessageStore $stack3;
+  org.apache.rocketmq.store.config.MessageStoreConfig $stack4;
+  boolean $stack8;
+  $stack3=this.defaultMessageStore;
+ $stack4 = $stack3.getMessageStoreConfig();
+ needAckNums = $stack4.getInSyncReplicas();
+ $stack3=this.defaultMessageStore;
+ $stack4 = $stack3.getMessageStoreConfig();
+ $stack8 = $stack4.isEnableAutoInSyncReplicas();
+ if ($stack8==0) goto label0;
+ needAckNums = java.lang.Math.min(needAckNums,inSyncReplicas);
+ $stack3=this.defaultMessageStore;
+ $stack4 = $stack3.getMessageStoreConfig();
+ inSyncReplicas = $stack4.getMinInSyncReplicas();
+ needAckNums = java.lang.Math.max(needAckNums,inSyncReplicas);
+ label0:return  needAckNums;
+ } 
+

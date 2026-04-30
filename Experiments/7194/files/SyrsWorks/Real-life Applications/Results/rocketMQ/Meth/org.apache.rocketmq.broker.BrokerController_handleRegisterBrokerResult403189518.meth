@@ -1,0 +1,39 @@
+void org.apache.rocketmq.broker.BrokerController:handleRegisterBrokerResult(java.util.List registerBrokerResultList,boolean checkOrderConfig)
+{
+java.util.Iterator l3;
+  org.apache.rocketmq.remoting.protocol.namesrv.RegisterBrokerResult registerBrokerResult;
+  boolean $stack6;
+  java.lang.Object $stack7;
+  org.apache.rocketmq.broker.slave.SlaveSynchronize $stack10;
+  java.lang.String $stack11;
+  org.apache.rocketmq.broker.topic.TopicConfigManager $stack12;
+  org.apache.rocketmq.remoting.protocol.body.KVTable $stack13;
+  org.apache.rocketmq.store.MessageStore $stack18;
+  l3 = registerBrokerResultList.iterator();
+ label0:$stack6 = l3.hasNext();
+ if ($stack6==0) goto label1;
+ $stack7 = l3.next();
+ registerBrokerResult=(org.apache.rocketmq.remoting.protocol.namesrv.RegisterBrokerResult) $stack7;
+ if (registerBrokerResult==null) goto label2;
+ $stack6=this.updateMasterHAServerAddrPeriodically;
+ if ($stack6==0) goto label3;
+ $stack11 = registerBrokerResult.getHaServerAddr();
+ if ($stack11==null) goto label3;
+ $stack18=this.messageStore;
+ $stack11 = registerBrokerResult.getHaServerAddr();
+ $stack18.updateHaMasterAddress($stack11);
+ $stack18=this.messageStore;
+ $stack11 = registerBrokerResult.getMasterAddr();
+ $stack18.updateMasterAddress($stack11);
+ label3:$stack10=this.slaveSynchronize;
+ $stack11 = registerBrokerResult.getMasterAddr();
+ $stack10.setMasterAddr($stack11);
+ if (checkOrderConfig==0) goto label1;
+ $stack12 = this.getTopicConfigManager();
+ $stack13 = registerBrokerResult.getKvTable();
+ $stack12.updateOrderTopicConfig($stack13);
+ goto label1;
+ label2:goto label0;
+ label1:return;
+ } 
+

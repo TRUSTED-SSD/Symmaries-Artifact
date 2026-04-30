@@ -1,0 +1,49 @@
+    private static boolean isAssignableToAnyOf(java.lang.Class[], java.lang.Object)
+    {
+        java.lang.Class[] typeArray;
+        java.lang.Object target;
+        int len$, i$;
+        java.lang.Class type, $stack6;
+        boolean $stack7;
+
+        typeArray := @parameter0: java.lang.Class[];
+
+        target := @parameter1: java.lang.Object;
+
+        len$ = lengthof typeArray;
+/*166*/
+
+        i$ = 0;
+/*166*/
+
+     label1:
+        if i$ >= len$ goto label3;
+/*166*/
+
+        type = typeArray[i$];
+/*171*/
+
+        $stack6 = virtualinvoke target.<java.lang.Object: java.lang.Class getClass()>();
+/*167*/
+
+        $stack7 = virtualinvoke type.<java.lang.Class: boolean isAssignableFrom(java.lang.Class)>($stack6);
+/*167*/
+
+        if $stack7 == 0 goto label2;
+/*167*/
+
+        return 1;
+/*168*/
+
+     label2:
+        i$ = i$ + 1;
+/*166*/
+
+        goto label1;
+/*166*/
+
+     label3:
+        return 0;
+/*171*/
+    }
+

@@ -1,0 +1,44 @@
+void org.apache.rocketmq.tools.command.broker.BrokerStatusSubCommand:printBrokerRuntimeStats(org.apache.rocketmq.tools.admin.DefaultMQAdminExt defaultMQAdminExt,java.lang.String brokerAddr,boolean printBroker)
+{
+org.apache.rocketmq.remoting.protocol.body.KVTable kvTable;
+  java.util.TreeMap tmp;
+  java.util.Iterator it;
+  java.util.Map$Entry next;
+  java.util.HashMap $stack10;
+  java.util.Set $stack11;
+  boolean $stack13;
+  java.lang.Object $stack14;
+  java.lang.Object[] $stack15;
+  java.io.PrintStream $stack16;
+  kvTable = defaultMQAdminExt.fetchBrokerRuntimeStats(brokerAddr);
+ tmp=new java.util.TreeMap;
+ tmp#java.util.TreeMap();
+ $stack10 = kvTable.getTable();
+ tmp.putAll((java.util.Map)$stack10);
+ $stack11 = tmp.entrySet();
+ it = $stack11.iterator();
+ label0:$stack13 = it.hasNext();
+ if ($stack13==0) goto label1;
+ $stack14 = it.next();
+ next=(java.util.Map$Entry) $stack14;
+ if (printBroker==0) goto label2;
+ $stack16=java.lang.System.out;
+ $stack15=new java.lang.Object[3];
+ $stack15[0]=brokerAddr;
+ $stack14 = next.getKey();
+ $stack15[1]=$stack14;
+ $stack14 = next.getValue();
+ $stack15[2]=$stack14;
+ $stack16.printf("%-24s %-32s: %s%n",$stack15);
+ goto label3;
+ label2:$stack16=java.lang.System.out;
+ $stack15=new java.lang.Object[2];
+ $stack14 = next.getKey();
+ $stack15[0]=$stack14;
+ $stack14 = next.getValue();
+ $stack15[1]=$stack14;
+ $stack16.printf("%-32s: %s%n",$stack15);
+ label3:goto label0;
+ label1:return;
+ } 
+

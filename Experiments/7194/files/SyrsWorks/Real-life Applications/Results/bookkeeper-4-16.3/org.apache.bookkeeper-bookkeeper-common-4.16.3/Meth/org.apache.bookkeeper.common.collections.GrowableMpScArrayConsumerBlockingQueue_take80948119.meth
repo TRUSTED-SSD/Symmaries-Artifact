@@ -1,0 +1,23 @@
+java.lang.Object org.apache.bookkeeper.common.collections.GrowableMpScArrayConsumerBlockingQueue:take()
+{
+int $stack1;
+  java.lang.Object $stack2;
+  java.lang.Thread $stack3;
+  boolean $stack6;
+  java.lang.InterruptedException $stack7;
+  label0:$stack1 = this.size();
+ if ($stack1!=0) goto label1;
+ $stack3 = java.lang.Thread.currentThread();
+ this.waitingConsumer=$stack3;
+ $stack1 = this.size();
+ if ($stack1!=0) goto label0;
+ java.util.concurrent.locks.LockSupport.park();
+ $stack6 = java.lang.Thread.interrupted();
+ if ($stack6==0) goto label0;
+ $stack7=new java.lang.InterruptedException;
+ $stack7#java.lang.InterruptedException();
+ throw $stack7;
+ label1:$stack2 = this.poll();
+ return  $stack2;
+ } 
+

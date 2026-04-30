@@ -1,0 +1,28 @@
+java.lang.String org.apache.rocketmq.client.ClientConfig:buildMQClientId()
+{
+java.lang.StringBuilder sb;
+  java.lang.String $stack3;
+  boolean $stack9;
+  org.apache.rocketmq.remoting.protocol.RequestType $stack13;
+  sb=new java.lang.StringBuilder;
+ sb#java.lang.StringBuilder();
+ $stack3 = this.getClientIP();
+ sb.append($stack3);
+ sb.append("@");
+ $stack3 = this.getInstanceName();
+ sb.append($stack3);
+ $stack3=this.unitName;
+ $stack9 = org.apache.rocketmq.common.UtilAll.isBlank($stack3);
+ if ($stack9!=0) goto label0;
+ sb.append("@");
+ $stack3=this.unitName;
+ sb.append($stack3);
+ label0:$stack9=this.enableStreamRequestType;
+ if ($stack9==0) goto label1;
+ sb.append("@");
+ $stack13=org.apache.rocketmq.remoting.protocol.RequestType.STREAM;
+ sb.append((java.lang.Object)$stack13);
+ label1:$stack3 = sb.toString();
+ return  $stack3;
+ } 
+

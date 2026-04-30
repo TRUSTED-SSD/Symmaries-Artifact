@@ -1,0 +1,126 @@
+    public void getStorageContainerEndpoint(org.apache.bookkeeper.stream.proto.storage.GetStorageContainerEndpointRequest, io.grpc.stub.StreamObserver)
+    {
+        org.apache.bookkeeper.stream.server.grpc.GrpcStorageContainerService this;
+        org.apache.bookkeeper.stream.proto.storage.GetStorageContainerEndpointRequest request;
+        io.grpc.stub.StreamObserver responseObserver;
+        org.apache.bookkeeper.stream.proto.storage.GetStorageContainerEndpointResponse$Builder responseBuilder;
+        int i, $stack10;
+        org.apache.bookkeeper.stream.proto.common.Endpoint endpoint;
+        org.apache.bookkeeper.stream.proto.storage.OneStorageContainerEndpointResponse$Builder oneRespBuilder;
+        org.apache.bookkeeper.stream.proto.storage.StatusCode $stack8;
+        org.apache.bookkeeper.stream.proto.storage.GetStorageContainerEndpointResponse $stack11;
+        org.apache.bookkeeper.stream.storage.api.StorageContainerStore $stack12;
+        org.apache.bookkeeper.stream.storage.api.sc.StorageContainerRoutingService $stack13;
+        org.apache.bookkeeper.stream.proto.storage.OneStorageContainerEndpointRequest $stack14;
+        long $stack15;
+        org.apache.bookkeeper.stream.proto.storage.StorageContainerEndpoint$Builder $stack26;
+
+        this := @this: org.apache.bookkeeper.stream.server.grpc.GrpcStorageContainerService;
+
+        request := @parameter0: org.apache.bookkeeper.stream.proto.storage.GetStorageContainerEndpointRequest;
+
+        responseObserver := @parameter1: io.grpc.stub.StreamObserver;
+
+        responseBuilder = staticinvoke <org.apache.bookkeeper.stream.proto.storage.GetStorageContainerEndpointResponse: org.apache.bookkeeper.stream.proto.storage.GetStorageContainerEndpointResponse$Builder newBuilder()>();
+/*43*/
+
+        $stack8 = <org.apache.bookkeeper.stream.proto.storage.StatusCode: org.apache.bookkeeper.stream.proto.storage.StatusCode SUCCESS>;
+/*44*/
+
+        responseBuilder = virtualinvoke responseBuilder.<org.apache.bookkeeper.stream.proto.storage.GetStorageContainerEndpointResponse$Builder: org.apache.bookkeeper.stream.proto.storage.GetStorageContainerEndpointResponse$Builder setStatusCode(org.apache.bookkeeper.stream.proto.storage.StatusCode)>($stack8);
+/*44*/
+/*44*/
+
+        i = 0;
+/*45*/
+
+     label1:
+        $stack10 = virtualinvoke request.<org.apache.bookkeeper.stream.proto.storage.GetStorageContainerEndpointRequest: int getRequestsCount()>();
+/*45*/
+
+        if i >= $stack10 goto label4;
+/*45*/
+
+        $stack12 = this.<org.apache.bookkeeper.stream.server.grpc.GrpcStorageContainerService: org.apache.bookkeeper.stream.storage.api.StorageContainerStore storageContainerStore>;
+/*47*/
+
+        $stack13 = interfaceinvoke $stack12.<org.apache.bookkeeper.stream.storage.api.StorageContainerStore: org.apache.bookkeeper.stream.storage.api.sc.StorageContainerRoutingService getRoutingService()>();
+/*47*/
+
+        $stack14 = virtualinvoke request.<org.apache.bookkeeper.stream.proto.storage.GetStorageContainerEndpointRequest: org.apache.bookkeeper.stream.proto.storage.OneStorageContainerEndpointRequest getRequests(int)>(i);
+/*48*/
+
+        $stack15 = virtualinvoke $stack14.<org.apache.bookkeeper.stream.proto.storage.OneStorageContainerEndpointRequest: long getStorageContainer()>();
+/*48*/
+
+        endpoint = interfaceinvoke $stack13.<org.apache.bookkeeper.stream.storage.api.sc.StorageContainerRoutingService: org.apache.bookkeeper.stream.proto.common.Endpoint getStorageContainer(long)>($stack15);
+/*48*/
+/*48*/
+
+        if null == endpoint goto label2;
+/*50*/
+
+        oneRespBuilder = staticinvoke <org.apache.bookkeeper.stream.proto.storage.OneStorageContainerEndpointResponse: org.apache.bookkeeper.stream.proto.storage.OneStorageContainerEndpointResponse$Builder newBuilder()>();
+/*51*/
+
+        $stack8 = <org.apache.bookkeeper.stream.proto.storage.StatusCode: org.apache.bookkeeper.stream.proto.storage.StatusCode SUCCESS>;
+/*52*/
+
+        oneRespBuilder = virtualinvoke oneRespBuilder.<org.apache.bookkeeper.stream.proto.storage.OneStorageContainerEndpointResponse$Builder: org.apache.bookkeeper.stream.proto.storage.OneStorageContainerEndpointResponse$Builder setStatusCode(org.apache.bookkeeper.stream.proto.storage.StatusCode)>($stack8);
+/*52*/
+
+        $stack26 = staticinvoke <org.apache.bookkeeper.stream.proto.storage.StorageContainerEndpoint: org.apache.bookkeeper.stream.proto.storage.StorageContainerEndpoint$Builder newBuilder()>();
+/*54*/
+
+        $stack26 = virtualinvoke $stack26.<org.apache.bookkeeper.stream.proto.storage.StorageContainerEndpoint$Builder: org.apache.bookkeeper.stream.proto.storage.StorageContainerEndpoint$Builder setRwEndpoint(org.apache.bookkeeper.stream.proto.common.Endpoint)>(endpoint);
+/*55*/
+
+        $stack26 = virtualinvoke $stack26.<org.apache.bookkeeper.stream.proto.storage.StorageContainerEndpoint$Builder: org.apache.bookkeeper.stream.proto.storage.StorageContainerEndpoint$Builder addRoEndpoint(org.apache.bookkeeper.stream.proto.common.Endpoint)>(endpoint);
+/*56*/
+
+        $stack26 = virtualinvoke $stack26.<org.apache.bookkeeper.stream.proto.storage.StorageContainerEndpoint$Builder: org.apache.bookkeeper.stream.proto.storage.StorageContainerEndpoint$Builder setRevision(long)>(0L);
+/*57*/
+
+        oneRespBuilder = virtualinvoke oneRespBuilder.<org.apache.bookkeeper.stream.proto.storage.OneStorageContainerEndpointResponse$Builder: org.apache.bookkeeper.stream.proto.storage.OneStorageContainerEndpointResponse$Builder setEndpoint(org.apache.bookkeeper.stream.proto.storage.StorageContainerEndpoint$Builder)>($stack26);
+/*53*/
+/*53*/
+
+        goto label3;
+/*53*/
+
+     label2:
+        oneRespBuilder = staticinvoke <org.apache.bookkeeper.stream.proto.storage.OneStorageContainerEndpointResponse: org.apache.bookkeeper.stream.proto.storage.OneStorageContainerEndpointResponse$Builder newBuilder()>();
+/*59*/
+
+        $stack8 = <org.apache.bookkeeper.stream.proto.storage.StatusCode: org.apache.bookkeeper.stream.proto.storage.StatusCode INTERNAL_SERVER_ERROR>;
+/*60*/
+
+        oneRespBuilder = virtualinvoke oneRespBuilder.<org.apache.bookkeeper.stream.proto.storage.OneStorageContainerEndpointResponse$Builder: org.apache.bookkeeper.stream.proto.storage.OneStorageContainerEndpointResponse$Builder setStatusCode(org.apache.bookkeeper.stream.proto.storage.StatusCode)>($stack8);
+/*60*/
+/*60*/
+
+     label3:
+        responseBuilder = virtualinvoke responseBuilder.<org.apache.bookkeeper.stream.proto.storage.GetStorageContainerEndpointResponse$Builder: org.apache.bookkeeper.stream.proto.storage.GetStorageContainerEndpointResponse$Builder addResponses(org.apache.bookkeeper.stream.proto.storage.OneStorageContainerEndpointResponse$Builder)>(oneRespBuilder);
+/*62*/
+/*62*/
+
+        i = i + 1;
+/*45*/
+
+        goto label1;
+/*45*/
+
+     label4:
+        $stack11 = virtualinvoke responseBuilder.<org.apache.bookkeeper.stream.proto.storage.GetStorageContainerEndpointResponse$Builder: org.apache.bookkeeper.stream.proto.storage.GetStorageContainerEndpointResponse build()>();
+/*64*/
+
+        interfaceinvoke responseObserver.<io.grpc.stub.StreamObserver: void onNext(java.lang.Object)>($stack11);
+/*64*/
+
+        interfaceinvoke responseObserver.<io.grpc.stub.StreamObserver: void onCompleted()>();
+/*65*/
+
+        return;
+/*66*/
+    }
+

@@ -1,0 +1,20 @@
+static int com.google.zxing.qrcode.encoder.Encoder:chooseMaskPattern(com.google.zxing.common.BitArray bits,com.google.zxing.qrcode.decoder.ErrorCorrectionLevel ecLevel,com.google.zxing.qrcode.decoder.Version version,com.google.zxing.qrcode.encoder.ByteMatrix matrix)
+{
+int minPenalty;
+  int bestMaskPattern;
+  int maskPattern;
+  int penalty;
+  minPenalty=2147483647;
+ bestMaskPattern=-1;
+ maskPattern=0;
+ label0:if (maskPattern>=8) goto label1;
+ com.google.zxing.qrcode.encoder.MatrixUtil.buildMatrix(bits,ecLevel,version,maskPattern,matrix);
+ penalty = com.google.zxing.qrcode.encoder.Encoder.calculateMaskPenalty(matrix);
+ if (penalty>=minPenalty) goto label2;
+ minPenalty=penalty;
+ bestMaskPattern=maskPattern;
+ label2:maskPattern=(maskPattern+1);
+ goto label0;
+ label1:return  bestMaskPattern;
+ } 
+

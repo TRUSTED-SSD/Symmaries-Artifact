@@ -1,0 +1,50 @@
+void org.apache.kerby.kerberos.kerb.common.Krb5Parser:printSection(java.util.Map @map)
+{
+java.util.Iterator iter;
+  java.util.Map$Entry entry;
+  java.lang.String key;
+  java.lang.Object value;
+  java.util.Set $stack7;
+  boolean $stack9;
+  java.lang.StringBuilder $stack13;
+  java.io.PrintStream $stack14;
+  java.lang.String $stack18;
+  java.lang.RuntimeException $stack20;
+  java.util.Map map;
+map=@map;
+$stack7 = map.entrySet();
+ iter = $stack7.iterator();
+ label0:$stack9 = iter.hasNext();
+ if ($stack9==0) goto label1;
+ value = iter.next();
+ entry=(java.util.Map$Entry) value;
+ value = entry.getKey();
+ key=(java.lang.String) value;
+ value = entry.getValue();
+ $stack14=java.lang.System.out;
+ $stack13=new java.lang.StringBuilder;
+ $stack13#java.lang.StringBuilder();
+ $stack13 = $stack13.append("[");
+ $stack13 = $stack13.append(key);
+ $stack13 = $stack13.append("]");
+ $stack18 = $stack13.toString();
+ dummyClass.lowSink($stack18);
+$stack14.println($stack18);
+ $stack9=value instanceof java.util.Map;
+ if ($stack9==0) goto label2;
+ map=(java.util.Map) value;
+ this#org.apache.kerby.kerberos.kerb.common.Krb5Parser:printEntry(map,0);
+ goto label3;
+ label2:$stack20=new java.lang.RuntimeException;
+ $stack13=new java.lang.StringBuilder;
+ $stack13#java.lang.StringBuilder();
+ $stack13 = $stack13.append("Unable to print contents of [");
+ $stack13 = $stack13.append(key);
+ $stack13 = $stack13.append("]");
+ key = $stack13.toString();
+ $stack20#java.lang.RuntimeException(key);
+ throw $stack20;
+ label3:goto label0;
+ label1:return;
+ } 
+

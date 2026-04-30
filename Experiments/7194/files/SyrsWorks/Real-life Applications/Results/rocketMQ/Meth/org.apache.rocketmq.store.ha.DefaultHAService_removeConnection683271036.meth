@@ -1,0 +1,23 @@
+void org.apache.rocketmq.store.ha.DefaultHAService:removeConnection(org.apache.rocketmq.store.ha.HAConnection conn)
+{
+java.util.List l2;
+  java.lang.Throwable l3;
+  org.apache.rocketmq.store.ha.HAConnectionStateNotificationService $stack4;
+  java.util.List $stack6;
+  $stack4=this.haConnectionStateNotificationService;
+ $stack4.checkConnectionStateAndNotify(conn);
+ $stack6=this.connectionList;
+ l2=$stack6;
+ monitorenter $stack6;
+ label0:$stack6=this.connectionList;
+ $stack6.remove((java.lang.Object)conn);
+ monitorexit l2;
+ label1:goto label2;
+ label3:l3 = catch;
+ monitorexit l2;
+ label4:throw l3;
+ label2:return;
+ catch java.lang.Throwable: label0 - label1 : label3;
+catch java.lang.Throwable: label3 - label4 : label3;
+} 
+

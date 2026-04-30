@@ -1,0 +1,32 @@
+boolean org.apache.rocketmq.store.ha.autoswitch.AutoSwitchHAClient:transferFromMaster()
+{
+boolean result;
+  java.nio.channels.Selector $stack3;
+  java.nio.ByteBuffer $stack5;
+  java.nio.channels.SocketChannel $stack6;
+  org.apache.rocketmq.store.ha.io.AbstractHAReader $stack7;
+  long $stack10;
+  org.apache.rocketmq.logging.org.slf4j.Logger $stack11;
+  java.lang.Long $stack13;
+  result = this#org.apache.rocketmq.store.ha.autoswitch.AutoSwitchHAClient:isTimeToReportOffset();
+ if (result==0) goto label0;
+ $stack11=org.apache.rocketmq.store.ha.autoswitch.AutoSwitchHAClient.LOGGER;
+ $stack10=this.currentReportedOffset;
+ $stack13 = java.lang.Long.valueOf($stack10);
+ $stack11.info("Slave report current offset {}",(java.lang.Object)$stack13);
+ $stack10=this.currentReportedOffset;
+ result = this#org.apache.rocketmq.store.ha.autoswitch.AutoSwitchHAClient:reportSlaveOffset($stack10);
+ if (result!=0) goto label0;
+ return  0;
+ label0:$stack3=this.selector;
+ $stack3.select(1000L);
+ $stack7=this.haReader;
+ $stack6=this.socketChannel;
+ $stack5=this.byteBufferRead;
+ result = $stack7.read($stack6,$stack5);
+ if (result!=0) goto label1;
+ return  0;
+ label1:result = this#org.apache.rocketmq.store.ha.autoswitch.AutoSwitchHAClient:reportSlaveMaxOffset();
+ return  result;
+ } 
+

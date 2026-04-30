@@ -1,0 +1,37 @@
+    private void validateFolderName(java.lang.String) throws java.io.IOException
+    {
+        org.junit.rules.TemporaryFolder this;
+        java.lang.String folderName;
+        java.io.File $stack4;
+        java.io.IOException $stack6;
+
+        this := @this: org.junit.rules.TemporaryFolder;
+
+        folderName := @parameter0: java.lang.String;
+
+        $stack4 = new java.io.File;
+/*114*/
+
+        specialinvoke $stack4.<java.io.File: void <init>(java.lang.String)>(folderName);
+/*114*/
+
+        folderName = virtualinvoke $stack4.<java.io.File: java.lang.String getParent()>();
+/*115*/
+
+        if folderName == null goto label1;
+/*115*/
+
+        $stack6 = new java.io.IOException;
+/*118*/
+
+        specialinvoke $stack6.<java.io.IOException: void <init>(java.lang.String)>("Folder name cannot consist of multiple path components separated by a file separator. Please use newFolder(\'MyParentFolder\',\'MyFolder\') to create hierarchies of folders");
+/*118*/
+
+        throw $stack6;
+/*118*/
+
+     label1:
+        return;
+/*120*/
+    }
+

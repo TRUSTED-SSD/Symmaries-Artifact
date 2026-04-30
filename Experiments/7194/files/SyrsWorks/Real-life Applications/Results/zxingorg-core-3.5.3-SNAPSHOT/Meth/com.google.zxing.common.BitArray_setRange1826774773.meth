@@ -1,0 +1,45 @@
+void com.google.zxing.common.BitArray:setRange(int start,int end)
+{
+int firstInt;
+  int lastInt;
+  int i;
+  int firstBit;
+  java.lang.IllegalArgumentException $stack9;
+  int $stack11;
+  int $stack12;
+  int[] $stack13;
+  if (end<start) goto label0;
+ if (start<0) goto label0;
+ firstInt=this.size;
+ if (end<=firstInt) goto label1;
+ label0:$stack9=new java.lang.IllegalArgumentException;
+ $stack9#java.lang.IllegalArgumentException();
+ throw $stack9;
+ label1:if (end!=start) goto label2;
+ return;
+ label2:end=(end+-1);
+ firstInt=(start/32);
+ lastInt=(end/32);
+ i=firstInt;
+ label3:if (i>lastInt) goto label4;
+ if (i<=firstInt) goto label5;
+ firstBit=0;
+ goto label6;
+ label5:firstBit=(start & 31);
+ label6:if (i>=lastInt) goto label7;
+ $stack12=31;
+ goto label8;
+ label7:$stack12=(end & 31);
+ label8:$stack12=(2<<$stack12);
+ $stack11=(1<<firstBit);
+ $stack13=this.bits;
+ firstBit=i;
+ firstBit=$stack13[i];
+ $stack12=($stack12-$stack11);
+ $stack12=(firstBit | $stack12);
+ $stack13[i]=$stack12;
+ i=(i+1);
+ goto label3;
+ label4:return;
+ } 
+

@@ -1,0 +1,40 @@
+static long org.apache.kerby.util.Base64:getEncodeLength(byte[] pArray,int chunkSize,byte[] chunkSeparator)
+{
+long len;
+  long mod;
+  int $stack9;
+  byte $stack12;
+  long $stack19;
+  boolean $stack24;
+  chunkSize=(chunkSize/4);
+ chunkSize=(chunkSize * 4);
+ $stack9=#pArray;
+ len=(long) $stack9;
+ len=(len * 4L);
+ len=(len/3L);
+ mod=(len%4L);
+ $stack12=(mod cmp 0L);
+ if ($stack12==0) goto label0;
+ mod=(4L-mod);
+ len=(len+mod);
+ label0:if (chunkSize<=0) goto label1;
+ mod=(long) chunkSize;
+ mod=(len%mod);
+ $stack12=(mod cmp 0L);
+ if ($stack12!=0) goto label2;
+ $stack24=1;
+ goto label3;
+ label2:$stack24=0;
+ label3:mod=(long) chunkSize;
+ $stack19=(len/mod);
+ chunkSize=#chunkSeparator;
+ mod=(long) chunkSize;
+ mod=($stack19 * mod);
+ len=(len+mod);
+ if ($stack24!=0) goto label1;
+ chunkSize=#chunkSeparator;
+ mod=(long) chunkSize;
+ len=(len+mod);
+ label1:return  len;
+ } 
+

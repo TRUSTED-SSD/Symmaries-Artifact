@@ -1,0 +1,36 @@
+static com.beust.jcommander.JCommander org.apache.bookkeeper.tools.framework.Cli:setupCli(java.lang.String @cmdPath,org.apache.bookkeeper.tools.framework.CliSpec spec,java.util.Map commandMap)
+{
+com.beust.jcommander.JCommander commander;
+  java.util.Iterator usageBuilder;
+  org.apache.bookkeeper.tools.framework.Command cmd;
+  org.apache.bookkeeper.tools.framework.CliFlags $stack8;
+  java.util.Set $stack9;
+  boolean $stack11;
+  java.lang.StringBuilder $stack12;
+  com.beust.jcommander.IUsageFormatter $stack13;
+  java.lang.Object $stack14;
+  java.lang.String cmdPath;
+cmdPath=@cmdPath;
+commander=new com.beust.jcommander.JCommander;
+ commander#com.beust.jcommander.JCommander();
+ commander.setProgramName(cmdPath);
+ $stack8 = spec.flags();
+ if (null==$stack8) goto label0;
+ $stack8 = spec.flags();
+ commander.addObject((java.lang.Object)$stack8);
+ label0:$stack9 = spec.commands();
+ usageBuilder = $stack9.iterator();
+ label1:$stack11 = usageBuilder.hasNext();
+ if ($stack11==0) goto label2;
+ $stack14 = usageBuilder.next();
+ cmd=(org.apache.bookkeeper.tools.framework.Command) $stack14;
+ cmdPath = cmd.name();
+ commandMap.put((java.lang.Object)cmdPath,(java.lang.Object)cmd);
+ goto label1;
+ label2:$stack12=new java.lang.StringBuilder;
+ $stack12#java.lang.StringBuilder();
+ $stack13 = commander.getUsageFormatter();
+ $stack13.usage($stack12);
+ return  commander;
+ } 
+

@@ -1,0 +1,39 @@
+void org.apache.rocketmq.broker.out.BrokerOuterAPI$1:run0()
+{
+org.apache.rocketmq.remoting.protocol.RemotingCommand request;
+  org.apache.rocketmq.remoting.protocol.header.namesrv.QueryDataVersionRequestHeader $stack3;
+  org.apache.rocketmq.remoting.protocol.DataVersion $stack5;
+  byte[] $stack6;
+  org.apache.rocketmq.broker.out.BrokerOuterAPI $stack7;
+  org.apache.rocketmq.remoting.RemotingClient $stack8;
+  int $stack9;
+  long $stack10;
+  java.lang.String $stack11;
+  java.lang.Exception $stack12;
+  org.apache.rocketmq.logging.org.slf4j.Logger $stack13;
+  java.lang.StringBuilder $stack14;
+  $stack3=this.val$requestHeader;
+ request = org.apache.rocketmq.remoting.protocol.RemotingCommand.createRequestCommand(322,(org.apache.rocketmq.remoting.CommandCustomHeader)$stack3);
+ $stack5=this.val$dataVersion;
+ $stack6 = $stack5.encode();
+ request.setBody($stack6);
+ label0:$stack7=this.this$0;
+ $stack8 = org.apache.rocketmq.broker.out.BrokerOuterAPI.access$000($stack7);
+ $stack11=this.val$namesrvAddr;
+ $stack9=this.val$timeoutMillis;
+ $stack10=(long) $stack9;
+ $stack8.invokeOneway($stack11,request,$stack10);
+ label1:goto label2;
+ label3:$stack12 = catch;
+ $stack13 = org.apache.rocketmq.broker.out.BrokerOuterAPI.access$100();
+ $stack14=new java.lang.StringBuilder;
+ $stack14#java.lang.StringBuilder();
+ $stack14 = $stack14.append("sendHeartbeat Exception ");
+ $stack11=this.val$namesrvAddr;
+ $stack14 = $stack14.append($stack11);
+ $stack11 = $stack14.toString();
+ $stack13.error($stack11,(java.lang.Throwable)$stack12);
+ label2:return;
+ catch java.lang.Exception: label0 - label1 : label3;
+} 
+

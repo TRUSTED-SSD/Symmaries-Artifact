@@ -1,0 +1,21 @@
+static java.lang.String org.apache.rocketmq.remoting.common.RemotingHelper:parseChannelRemoteAddr0(io.netty.channel.Channel channel)
+{
+java.net.SocketAddress remote;
+  java.lang.String addr;
+  int index;
+  remote = channel.remoteAddress();
+ if (remote==null) goto label0;
+ addr = remote.toString();
+ goto label1;
+ label0:addr="";
+ label1:index = addr.length();
+ if (index<=0) goto label2;
+ index = addr.lastIndexOf("/");
+ if (index<0) goto label3;
+ index=(index+1);
+ addr = addr.substring(index);
+ return  addr;
+ label3:return  addr;
+ label2:return  "";
+ } 
+

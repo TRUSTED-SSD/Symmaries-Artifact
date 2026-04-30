@@ -1,0 +1,44 @@
+java.util.Spliterator java.util.LinkedList$LLSpliterator:trySplit()
+{
+int i0;
+  java.lang.Object[] r1;
+  java.util.LinkedList$Node $r2;
+  int $i1;
+  int $i2;
+  java.util.Spliterator $r3;
+  java.util.LinkedList$Node r4;
+  int i3;
+  int i4;
+  int $i5;
+  java.lang.Object $r5;
+  java.util.LinkedList$Node $r6;
+  i0 = this.getEst();
+ if (i0<=1) goto label0;
+ $r2=this.current;
+ r4=$r2;
+ if ($r2==null) goto label0;
+ $i1=this.batch;
+ i3=($i1+1024);
+ if (i3<=i0) goto label1;
+ i3=i0;
+ label1:if (i3<=33554432) goto label2;
+ i3=33554432;
+ label2:r1=new java.lang.Object[i3];
+ i4=0;
+ label3:$i5=i4;
+ i4=(i4+1);
+ $r5=r4.item;
+ r1[$i5]=$r5;
+ $r6=r4.next;
+ r4=$r6;
+ if ($r6==null) goto label4;
+ if (i4<i3) goto label3;
+ label4:this.current=r4;
+ this.batch=i4;
+ $i2=(i0-i4);
+ this.est=$i2;
+ $r3 = java.util.Spliterators.spliterator(r1,0,i4,16);
+ return  $r3;
+ label0:return  null;
+ }  
+

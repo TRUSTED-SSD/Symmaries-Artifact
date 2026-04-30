@@ -1,0 +1,53 @@
+void org.apache.rocketmq.client.impl.MQClientAPIImpl:onExceptionImpl(java.lang.String @brokerName,org.apache.rocketmq.common.message.Message msg,long timeoutMillis,org.apache.rocketmq.remoting.protocol.RemotingCommand request,org.apache.rocketmq.client.producer.SendCallback sendCallback,org.apache.rocketmq.client.impl.producer.TopicPublishInfo topicPublishInfo,org.apache.rocketmq.client.impl.factory.MQClientInstance instance,int timesTotal,java.util.concurrent.atomic.AtomicInteger curTimes,java.lang.Exception e,org.apache.rocketmq.client.hook.SendMessageContext context,boolean needRetry,org.apache.rocketmq.client.impl.producer.DefaultMQProducerImpl @producer)
+{
+int tmp;
+  java.io.Serializable retryBrokerName;
+  java.lang.Comparable mqChosen;
+  java.lang.Object[] $stack24;
+  org.apache.rocketmq.logging.org.slf4j.Logger $stack25;
+  java.lang.Integer $stack28;
+  java.lang.Exception $stack59;
+  org.apache.rocketmq.common.message.MessageQueue tmp$2077657481;
+  java.lang.String tmp$1969537611;
+  java.lang.String brokerName;
+org.apache.rocketmq.client.impl.producer.DefaultMQProducerImpl producer;
+producer=@producer;
+brokerName=@brokerName;
+tmp = curTimes.incrementAndGet();
+ if (needRetry==0) goto label0;
+ if (tmp>timesTotal) goto label0;
+ retryBrokerName=brokerName;
+ if (topicPublishInfo==null) goto label1;
+ mqChosen = producer.selectOneMessageQueue(topicPublishInfo,brokerName);
+ tmp$2077657481=(org.apache.rocketmq.common.message.MessageQueue) mqChosen;
+ retryBrokerName = instance.getBrokerNameFromMessageQueue(tmp$2077657481);
+ label1:brokerName=(java.lang.String) retryBrokerName;
+ mqChosen = instance.findBrokerAddressInPublish(brokerName);
+ $stack25=org.apache.rocketmq.client.impl.MQClientAPIImpl.log;
+ $stack24=new java.lang.Object[5];
+ $stack28 = java.lang.Integer.valueOf(tmp);
+ $stack24[0]=$stack28;
+ brokerName = msg.getTopic();
+ $stack24[1]=brokerName;
+ $stack24[2]=mqChosen;
+ $stack24[3]=retryBrokerName;
+ $stack24[4]=e;
+ $stack25.warn("async send msg by retry {} times. topic={}, brokerAddr={}, brokerName={}",$stack24);
+ tmp = org.apache.rocketmq.remoting.protocol.RemotingCommand.createNewRequestId();
+ request.setOpaque(tmp);
+ brokerName=(java.lang.String) mqChosen;
+ tmp$1969537611=(java.lang.String) retryBrokerName;
+ this#org.apache.rocketmq.client.impl.MQClientAPIImpl:sendMessageAsync(brokerName,tmp$1969537611,msg,timeoutMillis,request,sendCallback,topicPublishInfo,instance,timesTotal,curTimes,context,producer);
+ goto label2;
+ label0:if (context==null) goto label3;
+ context.setException(e);
+ producer = context.getProducer();
+ producer.executeSendMessageHookAfter(context);
+ label3:sendCallback.onException((java.lang.Throwable)e);
+ label4:goto label2;
+ label5:$stack59 = catch;
+ retryBrokerName=$stack59;
+ label2:return;
+ catch java.lang.Exception: label3 - label4 : label5;
+} 
+

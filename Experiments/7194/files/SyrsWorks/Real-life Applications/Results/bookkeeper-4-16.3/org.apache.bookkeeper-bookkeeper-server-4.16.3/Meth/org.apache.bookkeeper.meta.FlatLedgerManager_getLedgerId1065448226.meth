@@ -1,0 +1,25 @@
+long org.apache.bookkeeper.meta.FlatLedgerManager:getLedgerId(java.lang.String @nodeName)
+{
+long ledgerId;
+  java.lang.String[] parts;
+  java.lang.String $stack5;
+  int $stack7;
+  java.lang.NumberFormatException $stack11;
+  java.io.IOException $stack12;
+  java.lang.String nodeName;
+nodeName=@nodeName;
+label0:$stack5=this.ledgerPrefix;
+ parts = nodeName.split($stack5);
+ $stack7=#parts;
+ $stack7=($stack7-1);
+ nodeName=parts[$stack7];
+ ledgerId = java.lang.Long.parseLong(nodeName);
+ label1:goto label2;
+ label3:$stack11 = catch;
+ $stack12=new java.io.IOException;
+ $stack12#java.io.IOException((java.lang.Throwable)$stack11);
+ throw $stack12;
+ label2:return  ledgerId;
+ catch java.lang.NumberFormatException: label0 - label1 : label3;
+} 
+

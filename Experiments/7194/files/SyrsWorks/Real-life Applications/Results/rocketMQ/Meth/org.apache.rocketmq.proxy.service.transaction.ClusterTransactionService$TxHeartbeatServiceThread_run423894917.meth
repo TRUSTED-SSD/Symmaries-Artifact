@@ -1,0 +1,19 @@
+void org.apache.rocketmq.proxy.service.transaction.ClusterTransactionService$TxHeartbeatServiceThread:run()
+{
+boolean $stack1;
+  java.util.concurrent.TimeUnit $stack2;
+  org.apache.rocketmq.proxy.config.ProxyConfig $stack3;
+  int $stack4;
+  long $stack5;
+  label0:$stack1 = this.isStopped();
+ if ($stack1!=0) goto label1;
+ $stack2=java.util.concurrent.TimeUnit.SECONDS;
+ $stack3 = org.apache.rocketmq.proxy.config.ConfigurationManager.getProxyConfig();
+ $stack4 = $stack3.getTransactionHeartbeatPeriodSecond();
+ $stack5=(long) $stack4;
+ $stack5 = $stack2.toMillis($stack5);
+ this.waitForRunning($stack5);
+ goto label0;
+ label1:return;
+ } 
+

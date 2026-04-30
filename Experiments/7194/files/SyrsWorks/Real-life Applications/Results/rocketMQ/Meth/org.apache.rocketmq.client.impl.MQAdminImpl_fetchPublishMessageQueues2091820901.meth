@@ -1,0 +1,47 @@
+java.util.List org.apache.rocketmq.client.impl.MQAdminImpl:fetchPublishMessageQueues(java.lang.String @topic)
+{
+org.apache.rocketmq.remoting.protocol.route.TopicRouteData topicRouteData;
+  org.apache.rocketmq.client.impl.producer.TopicPublishInfo topicPublishInfo;
+  org.apache.rocketmq.client.impl.factory.MQClientInstance $stack4;
+  org.apache.rocketmq.client.impl.MQClientAPIImpl $stack5;
+  long $stack6;
+  org.apache.rocketmq.client.exception.MQClientException $stack8;
+  java.lang.StringBuilder $stack9;
+  boolean $stack14;
+  java.util.List $stack15;
+  java.lang.Exception $stack17;
+  java.lang.String topic;
+topic=@topic;
+label0:$stack4=this.mQClientFactory;
+ $stack5 = $stack4.getMQClientAPIImpl();
+ $stack6=this.timeoutMillis;
+ topicRouteData = $stack5.getTopicRouteInfoFromNameServer(topic,$stack6);
+ if (topicRouteData==null) goto label1;
+ topicPublishInfo = org.apache.rocketmq.client.impl.factory.MQClientInstance.topicRouteData2TopicPublishInfo(topic,topicRouteData);
+ if (topicPublishInfo==null) goto label1;
+ $stack14 = topicPublishInfo.ok();
+ if ($stack14==0) goto label1;
+ $stack15 = topicPublishInfo.getMessageQueueList();
+ $stack15 = this.parsePublishMessageQueues($stack15);
+ label2:return  $stack15;
+ label1:goto label3;
+ label4:$stack17 = catch;
+ $stack8=new org.apache.rocketmq.client.exception.MQClientException;
+ $stack9=new java.lang.StringBuilder;
+ $stack9#java.lang.StringBuilder();
+ $stack9 = $stack9.append("Can not find Message Queue for this topic, ");
+ $stack9 = $stack9.append(topic);
+ topic = $stack9.toString();
+ $stack8#org.apache.rocketmq.client.exception.MQClientException(topic,(java.lang.Throwable)$stack17);
+ throw $stack8;
+ label3:$stack8=new org.apache.rocketmq.client.exception.MQClientException;
+ $stack9=new java.lang.StringBuilder;
+ $stack9#java.lang.StringBuilder();
+ $stack9 = $stack9.append("Unknow why, Can not find Message Queue for this topic, ");
+ $stack9 = $stack9.append(topic);
+ topic = $stack9.toString();
+ $stack8#org.apache.rocketmq.client.exception.MQClientException(topic,null);
+ throw $stack8;
+ catch java.lang.Exception: label0 - label2 : label4;
+} 
+

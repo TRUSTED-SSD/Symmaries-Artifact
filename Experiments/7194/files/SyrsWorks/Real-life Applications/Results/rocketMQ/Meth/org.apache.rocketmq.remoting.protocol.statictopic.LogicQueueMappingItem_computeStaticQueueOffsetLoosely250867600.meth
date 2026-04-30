@@ -1,0 +1,34 @@
+long org.apache.rocketmq.remoting.protocol.statictopic.LogicQueueMappingItem:computeStaticQueueOffsetLoosely(long physicalQueueOffset)
+{
+long $stack3;
+  byte $stack4;
+  long $stack8;
+  $stack3=this.logicOffset;
+ $stack4=($stack3 cmp 0L);
+ if ($stack4>=0) goto label0;
+ return  -1L;
+ label0:$stack3=this.startOffset;
+ $stack4=(physicalQueueOffset cmp $stack3);
+ if ($stack4>=0) goto label1;
+ physicalQueueOffset=this.logicOffset;
+ return  physicalQueueOffset;
+ label1:$stack8=this.endOffset;
+ $stack3=this.startOffset;
+ $stack4=($stack8 cmp $stack3);
+ if ($stack4<0) goto label2;
+ $stack3=this.endOffset;
+ $stack4=($stack3 cmp physicalQueueOffset);
+ if ($stack4>=0) goto label2;
+ physicalQueueOffset=this.logicOffset;
+ $stack8=this.endOffset;
+ $stack3=this.startOffset;
+ $stack3=($stack8-$stack3);
+ physicalQueueOffset=(physicalQueueOffset+$stack3);
+ return  physicalQueueOffset;
+ label2:$stack3=this.logicOffset;
+ $stack8=this.startOffset;
+ physicalQueueOffset=(physicalQueueOffset-$stack8);
+ physicalQueueOffset=($stack3+physicalQueueOffset);
+ return  physicalQueueOffset;
+ } 
+

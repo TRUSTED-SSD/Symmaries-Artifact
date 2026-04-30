@@ -1,0 +1,87 @@
+    public java.util.List getParentCategories(rifl.spec.CatSrcSnk)
+    {
+        rifl.utils.InterfaceSpecificationAccessor this;
+        rifl.spec.CatSrcSnk catSrcSnk;
+        java.util.ArrayList parents;
+        rifl.spec.Category parent;
+        java.util.HashMap $stack4;
+        boolean $stack5;
+        java.lang.Object $stack8;
+        java.lang.IllegalArgumentException $stack13;
+        java.lang.StringBuilder $stack14;
+        java.lang.String $stack16;
+
+        this := @this: rifl.utils.InterfaceSpecificationAccessor;
+
+        catSrcSnk := @parameter0: rifl.spec.CatSrcSnk;
+
+        $stack4 = this.<rifl.utils.InterfaceSpecificationAccessor: java.util.HashMap parentCategories>;
+/*159*/
+
+        $stack5 = virtualinvoke $stack4.<java.util.HashMap: boolean containsKey(java.lang.Object)>(catSrcSnk);
+/*159*/
+
+        if $stack5 != 0 goto label1;
+/*159*/
+
+        $stack13 = new java.lang.IllegalArgumentException;
+/*160*/
+
+        $stack14 = new java.lang.StringBuilder;
+/*160*/
+
+        specialinvoke $stack14.<java.lang.StringBuilder: void <init>(java.lang.String)>("Unknown category, source, or sink: ");
+/*160*/
+
+        $stack14 = virtualinvoke $stack14.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.Object)>(catSrcSnk);
+/*160*/
+
+        $stack16 = virtualinvoke $stack14.<java.lang.StringBuilder: java.lang.String toString()>();
+/*160*/
+
+        specialinvoke $stack13.<java.lang.IllegalArgumentException: void <init>(java.lang.String)>($stack16);
+/*160*/
+
+        throw $stack13;
+/*160*/
+
+     label1:
+        parents = new java.util.ArrayList;
+/*162*/
+
+        specialinvoke parents.<java.util.ArrayList: void <init>()>();
+/*162*/
+
+        $stack4 = this.<rifl.utils.InterfaceSpecificationAccessor: java.util.HashMap parentCategories>;
+/*163*/
+
+        $stack8 = virtualinvoke $stack4.<java.util.HashMap: java.lang.Object get(java.lang.Object)>(catSrcSnk);
+/*163*/
+
+        parent = (rifl.spec.Category) $stack8;
+/*163*/
+
+        goto label3;
+/*164*/
+
+     label2:
+        virtualinvoke parents.<java.util.ArrayList: boolean add(java.lang.Object)>(parent);
+/*165*/
+
+        $stack4 = this.<rifl.utils.InterfaceSpecificationAccessor: java.util.HashMap parentCategories>;
+/*166*/
+
+        $stack8 = virtualinvoke $stack4.<java.util.HashMap: java.lang.Object get(java.lang.Object)>(parent);
+/*166*/
+
+        parent = (rifl.spec.Category) $stack8;
+/*166*/
+
+     label3:
+        if parent != null goto label2;
+/*164*/
+
+        return parents;
+/*168*/
+    }
+

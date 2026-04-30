@@ -1,0 +1,63 @@
+java.lang.String org.apache.bookkeeper.bookie.BookieException:getMessage(int code)
+{
+java.lang.String err;
+  java.lang.String reason;
+  java.lang.Object[] $stack5;
+  java.lang.Throwable $stack7;
+  switch [code]
+if 0 goto label0;
+if 1 goto label1;
+if 2 goto label2;
+if 3 goto label3;
+if 4 goto label4;
+if 5 goto label5;
+if 6 goto label6;
+if 7 goto label7;
+if 8 goto label8;
+if 9 goto label9;
+if 10 goto label10;
+if 11 goto label11;
+if 12 goto label12;
+goto label13;
+ label12:err="No problem";
+ goto label14;
+ label11:err="Error while reading ledger";
+ goto label14;
+ label10:err="Ledger has been fenced; No more entries can be added";
+ goto label14;
+ label9:err="Invalid environment cookie found";
+ goto label14;
+ label8:err="Error performing an upgrade operation ";
+ goto label14;
+ label7:err="Disk Partition Duplication is not allowed";
+ goto label14;
+ label6:err="Cookie not found";
+ goto label14;
+ label2:err="Cookie already exists";
+ goto label14;
+ label1:err="Error in accessing Entry-log metadata map";
+ goto label14;
+ label5:err="Error performing metadata operations";
+ goto label14;
+ label4:err="Unknown bookie id";
+ goto label14;
+ label3:err="Operation rejected";
+ goto label14;
+ label0:err="Unable to respond, ledger is in unknown state";
+ goto label14;
+ label13:err="Invalid operation";
+ label14:reason = this#java.lang.Throwable:getMessage();
+ if (reason!=null) goto label15;
+ $stack7 = this#java.lang.Throwable:getCause();
+ if ($stack7==null) goto label15;
+ $stack7 = this#java.lang.Throwable:getCause();
+ reason = $stack7.getMessage();
+ label15:if (reason!=null) goto label16;
+ return  err;
+ label16:$stack5=new java.lang.Object[2];
+ $stack5[0]=err;
+ $stack5[1]=reason;
+ err = java.lang.String.format("%s [%s]",$stack5);
+ return  err;
+ } 
+

@@ -1,0 +1,31 @@
+org.apache.bookkeeper.net.BookieId org.apache.bookkeeper.client.PendingReadOp$SequenceReadRequest:maybeSendSpeculativeRead(java.util.BitSet heardFrom)
+{
+java.util.BitSet sentTo;
+  org.apache.bookkeeper.client.PendingReadOp $stack3;
+  int $stack4;
+  org.apache.bookkeeper.client.api.LedgerMetadata $stack5;
+  int $stack6;
+  org.apache.bookkeeper.client.ClientContext $stack10;
+  org.apache.bookkeeper.client.BookKeeperClientStats $stack11;
+  org.apache.bookkeeper.stats.Counter $stack12;
+  org.apache.bookkeeper.net.BookieId $stack13;
+  $stack4=this.nextReplicaIndexToReadFrom;
+ $stack3=this.this$0;
+ $stack5 = $stack3.getLedgerMetadata();
+ $stack6 = $stack5.getWriteQuorumSize();
+ if ($stack4<$stack6) goto label0;
+ return  null;
+ label0:sentTo = this#org.apache.bookkeeper.client.PendingReadOp$SequenceReadRequest:getSentToBitSet();
+ sentTo.and(heardFrom);
+ $stack4 = sentTo.cardinality();
+ if ($stack4!=0) goto label1;
+ $stack3=this.this$0;
+ $stack10=$stack3.clientCtx;
+ $stack11 = $stack10.getClientStats();
+ $stack12 = $stack11.getSpeculativeReadCounter();
+ $stack12.inc();
+ $stack13 = this.sendNextRead();
+ return  $stack13;
+ label1:return  null;
+ } 
+

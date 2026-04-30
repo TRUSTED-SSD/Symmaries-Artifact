@@ -1,0 +1,47 @@
+org.apache.rocketmq.remoting.protocol.body.ConsumerConnection org.apache.rocketmq.tools.admin.DefaultMQAdminExtImpl:examineConsumerConnectionInfo(java.lang.String consumerGroup)
+{
+org.apache.rocketmq.remoting.protocol.body.ConsumerConnection result;
+  java.lang.String topic;
+  java.util.List brokers;
+  org.apache.rocketmq.remoting.protocol.route.BrokerData brokerData;
+  org.apache.rocketmq.remoting.protocol.route.TopicRouteData $stack9;
+  java.util.Random $stack11;
+  int $stack12;
+  java.lang.Object $stack14;
+  java.util.HashSet $stack15;
+  boolean $stack16;
+  org.apache.rocketmq.logging.org.slf4j.Logger $stack17;
+  org.apache.rocketmq.client.exception.MQClientException $stack18;
+  org.apache.rocketmq.client.impl.factory.MQClientInstance $stack22;
+  org.apache.rocketmq.client.impl.MQClientAPIImpl $stack23;
+  long $stack24;
+  result=new org.apache.rocketmq.remoting.protocol.body.ConsumerConnection;
+ result#org.apache.rocketmq.remoting.protocol.body.ConsumerConnection();
+ topic = org.apache.rocketmq.common.MixAll.getRetryTopic(consumerGroup);
+ $stack9 = this.examineTopicRouteInfo(topic);
+ brokers = $stack9.getBrokerDatas();
+ $stack11=this.random;
+ $stack12 = brokers.size();
+ $stack12 = $stack11.nextInt($stack12);
+ $stack14 = brokers.get($stack12);
+ brokerData=(org.apache.rocketmq.remoting.protocol.route.BrokerData) $stack14;
+ topic=null;
+ if (brokerData==null) goto label0;
+ topic = brokerData.selectBrokerAddr();
+ $stack16 = org.apache.commons.lang3.StringUtils.isNotBlank((java.lang.CharSequence)topic);
+ if ($stack16==0) goto label0;
+ $stack22=this.mqClientInstance;
+ $stack23 = $stack22.getMQClientAPIImpl();
+ $stack24=this.timeoutMillis;
+ result = $stack23.getConsumerConnectionList(topic,consumerGroup,$stack24);
+ label0:$stack15 = result.getConnectionSet();
+ $stack16 = $stack15.isEmpty();
+ if ($stack16==0) goto label1;
+ $stack17=this.logger;
+ $stack17.warn("the consumer group not online. brokerAddr={}, group={}",(java.lang.Object)topic,(java.lang.Object)consumerGroup);
+ $stack18=new org.apache.rocketmq.client.exception.MQClientException;
+ $stack18#org.apache.rocketmq.client.exception.MQClientException(206,"Not found the consumer group connection");
+ throw $stack18;
+ label1:return  result;
+ } 
+

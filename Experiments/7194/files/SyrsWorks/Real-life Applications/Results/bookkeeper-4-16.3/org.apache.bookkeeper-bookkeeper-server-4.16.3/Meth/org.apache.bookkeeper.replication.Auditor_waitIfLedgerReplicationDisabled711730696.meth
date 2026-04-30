@@ -1,0 +1,20 @@
+void org.apache.bookkeeper.replication.Auditor:waitIfLedgerReplicationDisabled()
+{
+org.apache.bookkeeper.replication.ReplicationEnableCb cb;
+  org.apache.bookkeeper.meta.LedgerUnderreplicationManager $stack2;
+  boolean $stack3;
+  org.slf4j.Logger $stack5;
+  $stack2=this.ledgerUnderreplicationManager;
+ $stack3 = $stack2.isLedgerReplicationEnabled();
+ if ($stack3!=0) goto label0;
+ cb=new org.apache.bookkeeper.replication.ReplicationEnableCb;
+ cb#org.apache.bookkeeper.replication.ReplicationEnableCb();
+ $stack5=org.apache.bookkeeper.replication.Auditor.LOG;
+ dummyClass.lowSink("LedgerReplication is disabled externally through Zookeeper, since DISABLE_NODE ZNode is created, so waiting untill it is enabled");
+$stack5.info("LedgerReplication is disabled externally through Zookeeper, since DISABLE_NODE ZNode is created, so waiting untill it is enabled");
+ $stack2=this.ledgerUnderreplicationManager;
+ $stack2.notifyLedgerReplicationEnabled((org.apache.bookkeeper.proto.BookkeeperInternalCallbacks$GenericCallback)cb);
+ cb.await();
+ label0:return;
+ } 
+

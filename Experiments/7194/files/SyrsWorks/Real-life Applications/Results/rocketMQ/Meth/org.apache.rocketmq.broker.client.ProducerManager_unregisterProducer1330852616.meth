@@ -1,0 +1,40 @@
+void org.apache.rocketmq.broker.client.ProducerManager:unregisterProducer(java.lang.String group,org.apache.rocketmq.broker.client.ClientChannelInfo clientChannelInfo)
+{
+java.util.concurrent.ConcurrentHashMap channelTable;
+  org.apache.rocketmq.broker.client.ClientChannelInfo old;
+  java.lang.Object $stack6;
+  boolean $stack7;
+  io.netty.channel.Channel $stack8;
+  java.util.concurrent.ConcurrentHashMap $stack10;
+  java.lang.String $stack11;
+  org.apache.rocketmq.broker.client.ProducerGroupEvent $stack16;
+  org.apache.rocketmq.logging.org.slf4j.Logger $stack17;
+  channelTable=this.groupChannelTable;
+ $stack6 = channelTable.get((java.lang.Object)group);
+ channelTable=(java.util.concurrent.ConcurrentHashMap) $stack6;
+ if (null==channelTable) goto label0;
+ $stack7 = channelTable.isEmpty();
+ if ($stack7!=0) goto label0;
+ $stack8 = clientChannelInfo.getChannel();
+ $stack6 = channelTable.remove((java.lang.Object)$stack8);
+ old=(org.apache.rocketmq.broker.client.ClientChannelInfo) $stack6;
+ $stack10=this.clientChannelTable;
+ $stack11 = clientChannelInfo.getClientId();
+ $stack10.remove((java.lang.Object)$stack11);
+ if (old==null) goto label1;
+ $stack17=org.apache.rocketmq.broker.client.ProducerManager.log;
+ $stack11 = clientChannelInfo.toString();
+ $stack17.info("unregister a producer[{}] from groupChannelTable {}",(java.lang.Object)group,(java.lang.Object)$stack11);
+ $stack16=org.apache.rocketmq.broker.client.ProducerGroupEvent.CLIENT_UNREGISTER;
+ this#org.apache.rocketmq.broker.client.ProducerManager:callProducerChangeListener($stack16,group,clientChannelInfo);
+ label1:$stack7 = channelTable.isEmpty();
+ if ($stack7==0) goto label0;
+ channelTable=this.groupChannelTable;
+ channelTable.remove((java.lang.Object)group);
+ $stack16=org.apache.rocketmq.broker.client.ProducerGroupEvent.GROUP_UNREGISTER;
+ this#org.apache.rocketmq.broker.client.ProducerManager:callProducerChangeListener($stack16,group,null);
+ $stack17=org.apache.rocketmq.broker.client.ProducerManager.log;
+ $stack17.info("unregister a producer group[{}] from groupChannelTable",(java.lang.Object)group);
+ label0:return;
+ } 
+

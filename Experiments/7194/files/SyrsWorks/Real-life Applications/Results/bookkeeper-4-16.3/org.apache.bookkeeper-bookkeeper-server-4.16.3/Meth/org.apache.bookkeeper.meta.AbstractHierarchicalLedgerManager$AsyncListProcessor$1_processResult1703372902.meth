@@ -1,0 +1,37 @@
+void org.apache.bookkeeper.meta.AbstractHierarchicalLedgerManager$AsyncListProcessor$1:processResult(int rc,java.lang.String path,java.lang.Object @ctx)
+{
+int $stack7;
+  java.util.concurrent.atomic.AtomicInteger $stack8;
+  java.util.List $stack11;
+  org.apache.bookkeeper.meta.AbstractHierarchicalLedgerManager$AsyncListProcessor $stack13;
+  org.apache.bookkeeper.meta.AbstractHierarchicalLedgerManager$AsyncListProcessor$1$1 $stack14;
+  java.util.concurrent.ScheduledExecutorService $stack15;
+  org.apache.zookeeper.AsyncCallback$VoidCallback $stack19;
+  java.lang.Object ctx;
+ctx=@ctx;
+$stack7=this.val$successRc;
+ if (rc==$stack7) goto label0;
+ $stack19=this.val$finalCb;
+ rc=this.val$failureRc;
+ ctx=this.val$context;
+ $stack19.processResult(rc,null,ctx);
+ return;
+ label0:$stack8=this.val$current;
+ rc = $stack8.incrementAndGet();
+ $stack7=this.val$size;
+ if (rc<$stack7) goto label1;
+ $stack19=this.val$finalCb;
+ rc=this.val$successRc;
+ ctx=this.val$context;
+ $stack19.processResult(rc,null,ctx);
+ return;
+ label1:$stack11=this.val$data;
+ ctx = $stack11.get(rc);
+ $stack13=this.this$0;
+ $stack15=$stack13.scheduler;
+ $stack14=new org.apache.bookkeeper.meta.AbstractHierarchicalLedgerManager$AsyncListProcessor$1$1;
+ $stack14#org.apache.bookkeeper.meta.AbstractHierarchicalLedgerManager$AsyncListProcessor$1$1(this,ctx,(org.apache.zookeeper.AsyncCallback$VoidCallback)this);
+ $stack15.submit((java.lang.Runnable)$stack14);
+ return;
+ } 
+

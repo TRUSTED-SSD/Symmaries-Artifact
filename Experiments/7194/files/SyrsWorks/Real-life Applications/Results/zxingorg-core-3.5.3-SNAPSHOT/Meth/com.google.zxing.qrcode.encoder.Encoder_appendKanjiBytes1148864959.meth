@@ -1,0 +1,53 @@
+static void com.google.zxing.qrcode.encoder.Encoder:appendKanjiBytes(java.lang.String content,com.google.zxing.common.BitArray bits)
+{
+byte[] bytes;
+  int maxI;
+  int i;
+  short byte1;
+  short byte2;
+  int code;
+  int subtracted;
+  java.nio.charset.Charset $stack10;
+  byte $stack15;
+  com.google.zxing.WriterException $stack24;
+  $stack10=com.google.zxing.common.StringUtils.SHIFT_JIS_CHARSET;
+ bytes = content.getBytes($stack10);
+ maxI=#bytes;
+ maxI=(maxI%2);
+ if (maxI==0) goto label0;
+ $stack24=new com.google.zxing.WriterException;
+ $stack24#com.google.zxing.WriterException("Kanji byte size not even");
+ throw $stack24;
+ label0:maxI=#bytes;
+ maxI=(maxI-1);
+ i=0;
+ label1:if (i>=maxI) goto label2;
+ $stack15=bytes[i];
+ byte1=($stack15 & 255);
+ subtracted=(i+1);
+ $stack15=bytes[subtracted];
+ byte2=($stack15 & 255);
+ subtracted=(byte1<<8);
+ code=(subtracted | byte2);
+ subtracted=-1;
+ if (code<33088) goto label3;
+ if (code>40956) goto label3;
+ subtracted=(code-33088);
+ goto label4;
+ label3:if (code<57408) goto label4;
+ if (code>60351) goto label4;
+ subtracted=(code-49472);
+ label4:if (subtracted!=-1) goto label5;
+ $stack24=new com.google.zxing.WriterException;
+ $stack24#com.google.zxing.WriterException("Invalid byte sequence");
+ throw $stack24;
+ label5:code=(subtracted>>8);
+ code=(code * 192);
+ subtracted=(subtracted & 255);
+ subtracted=(code+subtracted);
+ bits.appendBits(subtracted,13);
+ i=(i+2);
+ goto label1;
+ label2:return;
+ } 
+

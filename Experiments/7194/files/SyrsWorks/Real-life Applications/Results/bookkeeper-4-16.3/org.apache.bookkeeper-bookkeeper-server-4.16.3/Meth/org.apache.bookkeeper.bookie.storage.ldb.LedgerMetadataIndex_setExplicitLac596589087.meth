@@ -1,0 +1,41 @@
+void org.apache.bookkeeper.bookie.storage.ldb.LedgerMetadataIndex:setExplicitLac(long ledgerId,io.netty.buffer.ByteBuf lac)
+{
+org.apache.bookkeeper.bookie.storage.ldb.DbLedgerStorageDataFormats$LedgerData ledgerData;
+  org.apache.bookkeeper.util.collections.ConcurrentLongHashMap $stack6;
+  java.lang.Object $stack7;
+  org.apache.bookkeeper.bookie.storage.ldb.DbLedgerStorageDataFormats$LedgerData$Builder $stack8;
+  java.nio.ByteBuffer $stack9;
+  com.google.protobuf.ByteString $stack10;
+  org.slf4j.Logger $stack15;
+  boolean $stack16;
+  java.util.AbstractMap$SimpleEntry $stack17;
+  java.util.concurrent.ConcurrentLinkedQueue $stack18;
+  java.lang.Long $stack19;
+  $stack6=this.ledgers;
+ $stack7 = $stack6.get(ledgerId);
+ ledgerData=(org.apache.bookkeeper.bookie.storage.ldb.DbLedgerStorageDataFormats$LedgerData) $stack7;
+ if (ledgerData==null) goto label0;
+ $stack8 = org.apache.bookkeeper.bookie.storage.ldb.DbLedgerStorageDataFormats$LedgerData.newBuilder(ledgerData);
+ $stack9 = lac.nioBuffer();
+ $stack10 = com.google.protobuf.ByteString.copyFrom($stack9);
+ $stack8 = $stack8.setExplicitLac($stack10);
+ ledgerData = $stack8.build();
+ $stack6=this.ledgers;
+ $stack7 = $stack6.put(ledgerId,(java.lang.Object)ledgerData);
+ if ($stack7!=null) goto label1;
+ return;
+ label1:$stack15=org.apache.bookkeeper.bookie.storage.ldb.LedgerMetadataIndex.log;
+ $stack16 = $stack15.isDebugEnabled();
+ if ($stack16==0) goto label2;
+ $stack15=org.apache.bookkeeper.bookie.storage.ldb.LedgerMetadataIndex.log;
+ $stack19 = java.lang.Long.valueOf(ledgerId);
+ dummyClass.lowSink("Set explicitLac on ledger {}");
+$stack15.debug("Set explicitLac on ledger {}",(java.lang.Object)$stack19);
+ label2:$stack18=this.pendingLedgersUpdates;
+ $stack17=new java.util.AbstractMap$SimpleEntry;
+ $stack19 = java.lang.Long.valueOf(ledgerId);
+ $stack17#java.util.AbstractMap$SimpleEntry((java.lang.Object)$stack19,(java.lang.Object)ledgerData);
+ $stack18.add((java.lang.Object)$stack17);
+ label0:return;
+ } 
+

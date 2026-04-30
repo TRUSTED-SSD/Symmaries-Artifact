@@ -1,0 +1,31 @@
+void org.apache.rocketmq.broker.client.net.Broker2Client:checkProducerTransactionState(java.lang.String @group,io.netty.channel.Channel channel,org.apache.rocketmq.remoting.protocol.header.CheckTransactionStateRequestHeader requestHeader,org.apache.rocketmq.common.message.MessageExt messageExt)
+{
+org.apache.rocketmq.remoting.protocol.RemotingCommand request;
+  byte[] $stack8;
+  org.apache.rocketmq.broker.BrokerController $stack9;
+  org.apache.rocketmq.remoting.RemotingServer $stack10;
+  java.lang.Exception $stack11;
+  java.lang.Object[] $stack12;
+  org.apache.rocketmq.logging.org.slf4j.Logger $stack13;
+  java.lang.String group;
+group=@group;
+request = org.apache.rocketmq.remoting.protocol.RemotingCommand.createRequestCommand(39,(org.apache.rocketmq.remoting.CommandCustomHeader)requestHeader);
+ $stack8 = org.apache.rocketmq.common.message.MessageDecoder.encode(messageExt,(boolean)0);
+ request.setBody($stack8);
+ label0:$stack9=this.brokerController;
+ $stack10 = $stack9.getRemotingServer();
+ $stack10.invokeOneway(channel,request,10L);
+ label1:goto label2;
+ label3:$stack11 = catch;
+ $stack13=org.apache.rocketmq.broker.client.net.Broker2Client.log;
+ $stack12=new java.lang.Object[3];
+ $stack12[0]=group;
+ group = messageExt.getMsgId();
+ $stack12[1]=group;
+ group = $stack11.toString();
+ $stack12[2]=group;
+ $stack13.error("Check transaction failed because invoke producer exception. group={}, msgId={}, error={}",$stack12);
+ label2:return;
+ catch java.lang.Exception: label0 - label1 : label3;
+} 
+

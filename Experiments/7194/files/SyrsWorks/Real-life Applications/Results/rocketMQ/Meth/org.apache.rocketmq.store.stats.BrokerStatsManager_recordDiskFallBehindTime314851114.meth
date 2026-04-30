@@ -1,0 +1,15 @@
+void org.apache.rocketmq.store.stats.BrokerStatsManager:recordDiskFallBehindTime(java.lang.String @group,java.lang.String topic,int queueId,long fallBehind)
+{
+org.apache.rocketmq.common.stats.MomentStatsItemSet $stack8;
+  org.apache.rocketmq.common.stats.MomentStatsItem $stack9;
+  java.util.concurrent.atomic.AtomicLong $stack10;
+  java.lang.String group;
+group=@group;
+group = this.buildStatsKey(queueId,topic,group);
+ $stack8=this.momentStatsItemSetFallTime;
+ $stack9 = $stack8.getAndCreateStatsItem(group);
+ $stack10 = $stack9.getValue();
+ $stack10.set(fallBehind);
+ return;
+ } 
+

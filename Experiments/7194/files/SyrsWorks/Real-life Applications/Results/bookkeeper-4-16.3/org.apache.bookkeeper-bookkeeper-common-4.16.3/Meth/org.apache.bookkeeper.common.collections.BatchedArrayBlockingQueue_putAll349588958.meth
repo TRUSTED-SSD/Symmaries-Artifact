@@ -1,0 +1,56 @@
+int org.apache.bookkeeper.common.collections.BatchedArrayBlockingQueue:putAll(java.util.List c)
+{
+int availableCapacity;
+  int producerIdx;
+  int i;
+  java.lang.Throwable l6;
+  java.util.concurrent.locks.ReentrantLock $stack7;
+  java.util.concurrent.locks.Condition $stack18;
+  java.lang.Object[] $stack24;
+  java.lang.Object $stack25;
+  int $stack26;
+  $stack7=this.lock;
+ $stack7.lockInterruptibly();
+ label0:producerIdx=this.size;
+ availableCapacity=this.capacity;
+ if (producerIdx!=availableCapacity) goto label1;
+ $stack18=this.notFull;
+ $stack18.await();
+ goto label0;
+ label1:producerIdx=this.capacity;
+ availableCapacity=this.size;
+ availableCapacity=(producerIdx-availableCapacity);
+ producerIdx = c.size();
+ availableCapacity = java.lang.Math.min(availableCapacity,producerIdx);
+ producerIdx=this.producerIdx;
+ i=0;
+ label2:if (i>=availableCapacity) goto label3;
+ $stack24=this.data;
+ $stack25 = c.get(i);
+ $stack24[producerIdx]=$stack25;
+ producerIdx=(producerIdx+1);
+ $stack26=this.capacity;
+ if (producerIdx!=$stack26) goto label4;
+ producerIdx=0;
+ label4:i=(i+1);
+ goto label2;
+ label3:this.producerIdx=producerIdx;
+ producerIdx=this.size;
+ if (producerIdx!=0) goto label5;
+ $stack18=this.notEmpty;
+ $stack18.signalAll();
+ label5:producerIdx=this.size;
+ producerIdx=(producerIdx+availableCapacity);
+ this.size=producerIdx;
+ i=availableCapacity;
+ label6:$stack7=this.lock;
+ $stack7.unlock();
+ return  availableCapacity;
+ label7:l6 = catch;
+ label8:$stack7=this.lock;
+ $stack7.unlock();
+ throw l6;
+ catch java.lang.Throwable: label0 - label6 : label7;
+catch java.lang.Throwable: label7 - label8 : label7;
+} 
+

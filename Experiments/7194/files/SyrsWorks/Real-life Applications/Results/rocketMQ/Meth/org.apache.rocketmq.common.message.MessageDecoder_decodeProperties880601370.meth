@@ -1,0 +1,52 @@
+static java.util.Map org.apache.rocketmq.common.message.MessageDecoder:decodeProperties(java.nio.ByteBuffer byteBuffer)
+{
+int sysFlag;
+  int magicCode;
+  org.apache.rocketmq.common.message.MessageVersion version;
+  byte bornhostLength;
+  short propertiesLength;
+  byte[] properties;
+  java.lang.String $stack33;
+  java.nio.charset.Charset $stack34;
+  java.util.Map $stack35;
+  byte $stack36;
+  sysFlag = byteBuffer.getInt(36);
+ magicCode = byteBuffer.getInt(4);
+ version = org.apache.rocketmq.common.message.MessageVersion.valueOfMagicCode(magicCode);
+ magicCode=(sysFlag & 16);
+ if (magicCode!=0) goto label0;
+ bornhostLength=8;
+ goto label1;
+ label0:bornhostLength=20;
+ label1:sysFlag=(sysFlag & 32);
+ if (sysFlag!=0) goto label2;
+ $stack36=8;
+ goto label3;
+ label2:$stack36=20;
+ label3:sysFlag=(48+bornhostLength);
+ sysFlag=(sysFlag+8);
+ sysFlag=(sysFlag+$stack36);
+ sysFlag=(sysFlag+4);
+ magicCode=(sysFlag+8);
+ sysFlag=(magicCode+4);
+ magicCode = byteBuffer.getInt(magicCode);
+ sysFlag=(sysFlag+magicCode);
+ byteBuffer.position(sysFlag);
+ magicCode = version.getTopicLengthSize();
+ sysFlag=(sysFlag+magicCode);
+ magicCode = version.getTopicLength(byteBuffer);
+ sysFlag=(sysFlag+magicCode);
+ propertiesLength = byteBuffer.getShort(sysFlag);
+ sysFlag=(sysFlag+2);
+ byteBuffer.position(sysFlag);
+ if (propertiesLength<=0) goto label4;
+ properties=new byte[propertiesLength];
+ byteBuffer.get(properties);
+ $stack33=new java.lang.String;
+ $stack34=org.apache.rocketmq.common.message.MessageDecoder.CHARSET_UTF8;
+ $stack33#java.lang.String(properties,$stack34);
+ $stack35 = org.apache.rocketmq.common.message.MessageDecoder.string2messageProperties($stack33);
+ return  $stack35;
+ label4:return  null;
+ } 
+

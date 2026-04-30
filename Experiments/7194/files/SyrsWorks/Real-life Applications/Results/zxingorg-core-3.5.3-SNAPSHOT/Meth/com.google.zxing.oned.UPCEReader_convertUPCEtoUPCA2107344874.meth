@@ -1,0 +1,47 @@
+static java.lang.String com.google.zxing.oned.UPCEReader:convertUPCEtoUPCA(java.lang.String @upce)
+{
+char[] upceChars;
+  java.lang.StringBuilder result;
+  char lastChar;
+  int $stack11;
+  java.lang.String upce;
+upce=@upce;
+upceChars=new char[6];
+ upce.getChars(1,7,upceChars,0);
+ result=new java.lang.StringBuilder;
+ result#java.lang.StringBuilder(12);
+ lastChar = upce.charAt(0);
+ result.append(lastChar);
+ lastChar=upceChars[5];
+ switch [lastChar]
+if 0 goto label0;
+if 1 goto label0;
+if 2 goto label0;
+if 3 goto label1;
+if 4 goto label2;
+goto label3;
+ label0:result.append(upceChars,0,2);
+ result.append(lastChar);
+ result.append("0000");
+ result.append(upceChars,2,3);
+ goto label4;
+ label1:result.append(upceChars,0,3);
+ result.append("00000");
+ result.append(upceChars,3,2);
+ goto label4;
+ label2:result.append(upceChars,0,4);
+ result.append("00000");
+ lastChar=upceChars[4];
+ result.append(lastChar);
+ goto label4;
+ label3:result.append(upceChars,0,5);
+ result.append("0000");
+ result.append(lastChar);
+ label4:$stack11 = upce.length();
+ if ($stack11<8) goto label5;
+ lastChar = upce.charAt(7);
+ result.append(lastChar);
+ label5:upce = result.toString();
+ return  upce;
+ } 
+

@@ -1,0 +1,39 @@
+void org.apache.rocketmq.client.impl.MQClientAPIImpl:deleteSubscriptionGroup(java.lang.String @addr,java.lang.String groupName,boolean removeOffset,long timeoutMillis)
+{
+org.apache.rocketmq.remoting.protocol.header.DeleteSubscriptionGroupRequestHeader requestHeader;
+  org.apache.rocketmq.remoting.protocol.RemotingCommand request;
+  org.apache.rocketmq.client.ClientConfig $stack11;
+  org.apache.rocketmq.remoting.RemotingClient $stack12;
+  int $stack17;
+  org.apache.rocketmq.client.exception.MQClientException $stack18;
+  java.lang.AssertionError $stack22;
+  java.lang.String addr;
+addr=@addr;
+requestHeader=new org.apache.rocketmq.remoting.protocol.header.DeleteSubscriptionGroupRequestHeader;
+ requestHeader#org.apache.rocketmq.remoting.protocol.header.DeleteSubscriptionGroupRequestHeader();
+ requestHeader.setGroupName(groupName);
+ requestHeader.setCleanOffset(removeOffset);
+ request = org.apache.rocketmq.remoting.protocol.RemotingCommand.createRequestCommand(207,(org.apache.rocketmq.remoting.CommandCustomHeader)requestHeader);
+ $stack12=this.remotingClient;
+ $stack11=this.clientConfig;
+ removeOffset = $stack11.isVipChannelEnabled();
+ addr = org.apache.rocketmq.common.MixAll.brokerVIPChannel(removeOffset,addr);
+ request = $stack12.invokeSync(addr,request,timeoutMillis);
+ removeOffset=org.apache.rocketmq.client.impl.MQClientAPIImpl.$assertionsDisabled;
+ if (removeOffset!=0) goto label0;
+ if (request!=null) goto label0;
+ $stack22=new java.lang.AssertionError;
+ $stack22#java.lang.AssertionError();
+ throw $stack22;
+ label0:$stack17 = request.getCode();
+ switch [$stack17]
+if 0 goto label1;
+goto label2;
+ label1:return;
+ label2:$stack18=new org.apache.rocketmq.client.exception.MQClientException;
+ $stack17 = request.getCode();
+ addr = request.getRemark();
+ $stack18#org.apache.rocketmq.client.exception.MQClientException($stack17,addr);
+ throw $stack18;
+ } 
+

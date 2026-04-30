@@ -1,0 +1,17 @@
+void org.apache.rocketmq.store.MessageExtEncoder:updateEncoderBufferCapacity(int newMaxMessageBodySize)
+{
+io.netty.buffer.ByteBuf $stack4;
+  this.maxMessageBodySize=newMaxMessageBodySize;
+ newMaxMessageBodySize=(2147483647-newMaxMessageBodySize);
+ if (newMaxMessageBodySize<65536) goto label0;
+ newMaxMessageBodySize=this.maxMessageBodySize;
+ newMaxMessageBodySize=(newMaxMessageBodySize+65536);
+ goto label1;
+ label0:newMaxMessageBodySize=2147483647;
+ label1:this.maxMessageSize=newMaxMessageBodySize;
+ $stack4=this.byteBuf;
+ newMaxMessageBodySize=this.maxMessageSize;
+ $stack4.capacity(newMaxMessageBodySize);
+ return;
+ } 
+

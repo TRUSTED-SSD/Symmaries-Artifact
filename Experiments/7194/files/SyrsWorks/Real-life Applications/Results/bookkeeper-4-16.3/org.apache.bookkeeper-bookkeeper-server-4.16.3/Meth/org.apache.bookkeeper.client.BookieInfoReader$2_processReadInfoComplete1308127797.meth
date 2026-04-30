@@ -1,0 +1,57 @@
+void org.apache.bookkeeper.client.BookieInfoReader$2:processReadInfoComplete(int rc,org.apache.bookkeeper.client.BookieInfoReader$BookieInfo bInfo,java.lang.Object @ctx)
+{
+org.apache.bookkeeper.client.BookieInfoReader l4;
+  org.apache.bookkeeper.net.BookieId b;
+  java.lang.Throwable l6;
+  org.apache.bookkeeper.client.BookieInfoReader $stack7;
+  org.slf4j.Logger $stack8;
+  boolean $stack9;
+  org.apache.bookkeeper.client.BookieInfoReader$BookieInfoMap $stack11;
+  int $stack17;
+  java.lang.Object ctx;
+ctx=@ctx;
+$stack7=this.this$0;
+ l4=$stack7;
+ monitorenter $stack7;
+ label0:b=(org.apache.bookkeeper.net.BookieId) ctx;
+ if (rc==0) goto label1;
+ $stack8 = org.apache.bookkeeper.client.BookieInfoReader.access$000();
+ $stack9 = $stack8.isErrorEnabled();
+ if ($stack9==0) goto label2;
+ $stack8 = org.apache.bookkeeper.client.BookieInfoReader.access$000();
+ ctx = org.apache.bookkeeper.client.api.BKException.codeLogger(rc);
+ $stack8.error("Reading bookie info from bookie {} failed due to {}",(java.lang.Object)b,ctx);
+ label2:$stack7=this.this$0;
+ $stack11 = org.apache.bookkeeper.client.BookieInfoReader.access$400($stack7);
+ $stack11.clearInfo(b);
+ $stack7=this.this$0;
+ org.apache.bookkeeper.client.BookieInfoReader.access$808($stack7);
+ goto label3;
+ label1:$stack8 = org.apache.bookkeeper.client.BookieInfoReader.access$000();
+ $stack9 = $stack8.isDebugEnabled();
+ if ($stack9==0) goto label4;
+ $stack8 = org.apache.bookkeeper.client.BookieInfoReader.access$000();
+ dummyClass.lowSink("Bookie Info for bookie {} is {}");
+$stack8.debug("Bookie Info for bookie {} is {}",(java.lang.Object)b,(java.lang.Object)bInfo);
+ label4:$stack7=this.this$0;
+ $stack11 = org.apache.bookkeeper.client.BookieInfoReader.access$400($stack7);
+ $stack11.gotInfo(b,bInfo);
+ label3:$stack7=this.this$0;
+ org.apache.bookkeeper.client.BookieInfoReader.access$908($stack7);
+ $stack7=this.this$0;
+ rc = org.apache.bookkeeper.client.BookieInfoReader.access$1000($stack7);
+ $stack7=this.this$0;
+ $stack17 = org.apache.bookkeeper.client.BookieInfoReader.access$900($stack7);
+ if (rc!=$stack17) goto label5;
+ $stack7=this.this$0;
+ $stack7.onExit();
+ label5:monitorexit l4;
+ label6:goto label7;
+ label8:l6 = catch;
+ monitorexit l4;
+ label9:throw l6;
+ label7:return;
+ catch java.lang.Throwable: label0 - label6 : label8;
+catch java.lang.Throwable: label8 - label9 : label8;
+} 
+

@@ -1,0 +1,47 @@
+io.netty.buffer.ByteBuf org.apache.bookkeeper.common.allocator.impl.ByteBufAllocatorImpl:newDirectBuffer(int initialCapacity,int maxCapacity,boolean canFallbackToHeap)
+{
+java.lang.OutOfMemoryError e;
+  org.apache.bookkeeper.common.allocator.PoolingPolicy $stack6;
+  org.apache.bookkeeper.common.allocator.PoolingPolicy $stack7;
+  io.netty.buffer.ByteBufAllocator $stack8;
+  io.netty.buffer.ByteBuf $stack9;
+  java.lang.OutOfMemoryError $stack12;
+  java.util.function.Consumer $stack13;
+  java.lang.OutOfMemoryError $stack14;
+  org.apache.bookkeeper.common.allocator.OutOfMemoryPolicy $stack18;
+  org.apache.bookkeeper.common.allocator.OutOfMemoryPolicy $stack19;
+  $stack7=this.poolingPolicy;
+ $stack6=org.apache.bookkeeper.common.allocator.PoolingPolicy.PooledDirect;
+ if ($stack7!=$stack6) goto label0;
+ label1:$stack8=this.pooledAllocator;
+ $stack9 = $stack8.directBuffer(initialCapacity,maxCapacity);
+ label2:return  $stack9;
+ label3:e = catch;
+ if (canFallbackToHeap==0) goto label4;
+ $stack19=this.outOfMemoryPolicy;
+ $stack18=org.apache.bookkeeper.common.allocator.OutOfMemoryPolicy.FallbackToHeap;
+ if ($stack19!=$stack18) goto label4;
+ label5:$stack8=this.unpooledAllocator;
+ $stack9 = $stack8.heapBuffer(initialCapacity,maxCapacity);
+ label6:return  $stack9;
+ label7:$stack12 = catch;
+ e=$stack12;
+ $stack13=this.outOfMemoryListener;
+ $stack13.accept((java.lang.Object)$stack12);
+ throw $stack12;
+ label4:$stack13=this.outOfMemoryListener;
+ $stack13.accept((java.lang.Object)e);
+ throw e;
+ label0:$stack8=this.unpooledAllocator;
+ $stack9 = $stack8.directBuffer(initialCapacity,maxCapacity);
+ label8:return  $stack9;
+ label9:$stack14 = catch;
+ e=$stack14;
+ $stack13=this.outOfMemoryListener;
+ $stack13.accept((java.lang.Object)$stack14);
+ throw $stack14;
+ catch java.lang.OutOfMemoryError: label1 - label2 : label3;
+catch java.lang.OutOfMemoryError: label5 - label6 : label7;
+catch java.lang.OutOfMemoryError: label0 - label8 : label9;
+} 
+

@@ -1,0 +1,47 @@
+org.apache.bookkeeper.sasl.SASLClientAuthProvider(org.apache.bookkeeper.proto.ClientConnectionPeer addr,org.apache.bookkeeper.auth.AuthCallbacks$GenericCallback completeCb,javax.security.auth.Subject subject)
+{
+java.net.SocketAddress remoteAddr;
+  java.lang.String hostname;
+  java.net.InetSocketAddress inetSocketAddress;
+  boolean $stack8;
+  java.net.InetAddress $stack9;
+  org.apache.bookkeeper.sasl.SaslClientState $stack11;
+  org.slf4j.Logger $stack12;
+  java.lang.StringBuilder $stack14;
+  java.io.IOException $stack26;
+  this#java.lang.Object();
+ this.completeCb=completeCb;
+ label0:remoteAddr = addr.getRemoteAddr();
+ $stack8=remoteAddr instanceof java.net.InetSocketAddress;
+ if ($stack8==0) goto label1;
+ inetSocketAddress=(java.net.InetSocketAddress) remoteAddr;
+ hostname = inetSocketAddress.getHostName();
+ goto label2;
+ label1:$stack9 = java.net.InetAddress.getLocalHost();
+ hostname = $stack9.getHostName();
+ label2:$stack11=new org.apache.bookkeeper.sasl.SaslClientState;
+ $stack11#org.apache.bookkeeper.sasl.SaslClientState(hostname,subject);
+ this.client=$stack11;
+ $stack12=org.apache.bookkeeper.sasl.SASLClientAuthProvider.LOG;
+ $stack8 = $stack12.isDebugEnabled();
+ if ($stack8==0) goto label3;
+ $stack12=org.apache.bookkeeper.sasl.SASLClientAuthProvider.LOG;
+ $stack14=new java.lang.StringBuilder;
+ $stack14#java.lang.StringBuilder();
+ $stack14 = $stack14.append("SASLClientAuthProvider Boot ");
+ $stack11=this.client;
+ $stack14 = $stack14.append((java.lang.Object)$stack11);
+ $stack14 = $stack14.append(" for ");
+ $stack14 = $stack14.append(hostname);
+ hostname = $stack14.toString();
+ dummyClass.lowSink(hostname);
+$stack12.debug(hostname);
+ label3:goto label4;
+ label5:$stack26 = catch;
+ $stack12=org.apache.bookkeeper.sasl.SASLClientAuthProvider.LOG;
+ $stack12.error("Error while booting SASL client",(java.lang.Throwable)$stack26);
+ completeCb.operationComplete(-102,null);
+ label4:return;
+ catch java.io.IOException: label0 - label3 : label5;
+} 
+

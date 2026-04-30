@@ -1,0 +1,44 @@
+rifl.spec.java.JavaParameter rifl.spec.java.JavaRIFLReader:readParameter(org.w3c.dom.Element elem,boolean isSource)
+{
+java.lang.String className;
+  java.lang.String methodName;
+  java.lang.String paramIndex;
+  boolean $stack9;
+  rifl.spec.java.JavaParameter $stack12;
+  rifl.spec.RIFLIntegrityException $stack13;
+  java.lang.StringBuilder $stack14;
+  className = elem.getAttribute("class");
+ methodName = elem.getAttribute("method");
+ paramIndex = elem.getAttribute("parameter");
+ $stack9 = rifl.spec.java.JavaSyntaxChecker.isClassNameCorrect(className);
+ if ($stack9!=0) goto label0;
+ $stack13=new rifl.spec.RIFLIntegrityException;
+ $stack14=new java.lang.StringBuilder;
+ $stack14#java.lang.StringBuilder("Invalid class name: ");
+ $stack14 = $stack14.append(className);
+ className = $stack14.toString();
+ $stack13#rifl.spec.RIFLIntegrityException(className);
+ throw $stack13;
+ label0:$stack9 = rifl.spec.java.JavaSyntaxChecker.isMethodNameCorrect(methodName);
+ if ($stack9!=0) goto label1;
+ $stack13=new rifl.spec.RIFLIntegrityException;
+ $stack14=new java.lang.StringBuilder;
+ $stack14#java.lang.StringBuilder("Invalid method name: ");
+ $stack14 = $stack14.append(methodName);
+ className = $stack14.toString();
+ $stack13#rifl.spec.RIFLIntegrityException(className);
+ throw $stack13;
+ label1:$stack9 = rifl.spec.java.JavaSyntaxChecker.isParameterIndexCorrect(paramIndex);
+ if ($stack9!=0) goto label2;
+ $stack13=new rifl.spec.RIFLIntegrityException;
+ $stack14=new java.lang.StringBuilder;
+ $stack14#java.lang.StringBuilder("Invalid parameter index: ");
+ $stack14 = $stack14.append(paramIndex);
+ className = $stack14.toString();
+ $stack13#rifl.spec.RIFLIntegrityException(className);
+ throw $stack13;
+ label2:$stack12=new rifl.spec.java.JavaParameter;
+ $stack12#rifl.spec.java.JavaParameter(className,methodName,paramIndex,isSource);
+ return  $stack12;
+ } 
+

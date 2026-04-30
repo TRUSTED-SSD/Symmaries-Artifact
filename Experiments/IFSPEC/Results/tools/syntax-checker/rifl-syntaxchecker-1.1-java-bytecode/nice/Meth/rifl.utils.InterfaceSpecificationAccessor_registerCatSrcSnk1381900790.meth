@@ -1,0 +1,48 @@
+void rifl.utils.InterfaceSpecificationAccessor:registerCatSrcSnk(rifl.spec.Assignable assignable,rifl.spec.Category category,rifl.spec.CatSrcSnk catSrcSnk)
+{
+rifl.spec.CatSrcSnk old;
+  java.lang.String msg;
+  java.util.HashMap $stack6;
+  boolean $stack8;
+  java.lang.Object $stack11;
+  java.lang.Object[] $stack19;
+  java.lang.StringBuilder $stack24;
+  java.io.PrintStream $stack31;
+  $stack6=this.identifiables;
+ msg = catSrcSnk.getName();
+ $stack8 = $stack6.containsKey((java.lang.Object)msg);
+ if ($stack8==0) goto label0;
+ $stack6=this.identifiables;
+ msg = catSrcSnk.getName();
+ $stack11 = $stack6.get((java.lang.Object)msg);
+ old=(rifl.spec.CatSrcSnk) $stack11;
+ msg="The source or sink with the name %s is declared under multiple categories or assignables. This interface specification accessor supports only uniquely declared sources and sinks. It will use only the one defined under assignable %s%s.";
+ $stack19=new java.lang.Object[3];
+ $stack19[0]=catSrcSnk;
+ $stack6=this.parentAssignables;
+ $stack11 = $stack6.get((java.lang.Object)old);
+ $stack19[1]=$stack11;
+ if (category!=null) goto label1;
+ msg="";
+ goto label2;
+ label1:$stack24=new java.lang.StringBuilder;
+ $stack24#java.lang.StringBuilder("and category ");
+ $stack6=this.parentCategories;
+ $stack11 = $stack6.get((java.lang.Object)old);
+ $stack24 = $stack24.append($stack11);
+ msg = $stack24.toString();
+ label2:$stack19[2]=msg;
+ msg = java.lang.String.format("The source or sink with the name %s is declared under multiple categories or assignables. This interface specification accessor supports only uniquely declared sources and sinks. It will use only the one defined under assignable %s%s.",$stack19);
+ $stack31=java.lang.System.err;
+ $stack31.println(msg);
+ goto label3;
+ label0:$stack6=this.identifiables;
+ msg = catSrcSnk.getName();
+ $stack6.put((java.lang.Object)msg,(java.lang.Object)catSrcSnk);
+ $stack6=this.parentCategories;
+ $stack6.put((java.lang.Object)catSrcSnk,(java.lang.Object)category);
+ $stack6=this.parentAssignables;
+ $stack6.put((java.lang.Object)catSrcSnk,(java.lang.Object)assignable);
+ label3:return;
+ } 
+

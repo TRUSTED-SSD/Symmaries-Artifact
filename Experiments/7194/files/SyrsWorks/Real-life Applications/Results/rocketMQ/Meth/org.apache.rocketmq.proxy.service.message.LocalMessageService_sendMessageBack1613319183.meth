@@ -1,0 +1,38 @@
+java.util.concurrent.CompletableFuture org.apache.rocketmq.proxy.service.message.LocalMessageService:sendMessageBack(org.apache.rocketmq.proxy.common.ProxyContext ctx,org.apache.rocketmq.common.consumer.ReceiptHandle handle,java.lang.String messageId,org.apache.rocketmq.remoting.protocol.header.ConsumerSendMsgBackRequestHeader requestHeader,long timeoutMillis)
+{
+org.apache.rocketmq.proxy.service.channel.SimpleChannel channel;
+  io.netty.channel.ChannelHandlerContext channelHandlerContext;
+  org.apache.rocketmq.proxy.service.message.LocalRemotingCommand command;
+  java.util.concurrent.CompletableFuture future;
+  java.lang.Object response;
+  org.apache.rocketmq.proxy.service.channel.ChannelManager $stack12;
+  org.apache.rocketmq.broker.BrokerController $stack17;
+  org.apache.rocketmq.broker.processor.SendMessageProcessor $stack18;
+  java.lang.Exception $stack21;
+  org.apache.rocketmq.logging.org.slf4j.Logger $stack22;
+  java.util.concurrent.CompletableFuture tmp$635155732;
+  java.lang.Throwable tmp$446644589;
+  $stack12=this.channelManager;
+ channel = $stack12.createChannel(ctx);
+ channelHandlerContext = channel.getChannelHandlerContext();
+ command = org.apache.rocketmq.proxy.service.message.LocalRemotingCommand.createRequestCommand(36,(org.apache.rocketmq.remoting.CommandCustomHeader)requestHeader);
+ tmp$635155732=new java.util.concurrent.CompletableFuture;
+ future=tmp$635155732;
+ tmp$635155732#java.util.concurrent.CompletableFuture();
+ future=tmp$635155732;
+ label0:$stack17=this.brokerController;
+ $stack18 = $stack17.getSendMessageProcessor();
+ response = $stack18.processRequest(channelHandlerContext,(org.apache.rocketmq.remoting.protocol.RemotingCommand)command);
+ tmp$635155732.complete(response);
+ label1:goto label2;
+ label3:$stack21 = catch;
+ response=$stack21;
+ $stack22=org.apache.rocketmq.proxy.service.message.LocalMessageService.log;
+ tmp$446644589=(java.lang.Throwable) $stack21;
+ $stack22.error("Fail to process sendMessageBack command",tmp$446644589);
+ tmp$446644589=(java.lang.Throwable) $stack21;
+ tmp$635155732.completeExceptionally(tmp$446644589);
+ label2:return  tmp$635155732;
+ catch java.lang.Exception: label0 - label1 : label3;
+} 
+

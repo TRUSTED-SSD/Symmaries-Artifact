@@ -1,0 +1,10 @@
+java.lang.Boolean org.apache.bookkeeper.tools.framework.CliCommandGroup:apply (
+  org.apache.bookkeeper.tools.framework.CliFlags globalFlags,
+  java.lang.String[] args) {
+  guard = tt;
+  ret(level()) = pc ⊔ level(args) ⊔ level(globalFlags) ⊔ obj_level(args) ⊔ obj_level(globalFlags);
+  ret(obj_level()) = pc ⊔ level(args) ⊔ level(globalFlags) ⊔ obj_level(args) ⊔ obj_level(globalFlags);
+  ret(obj_level(args)) = pc ⊔ level(globalFlags) ⊔ obj_level(args) ⊔ obj_level(globalFlags);
+  ret(obj_level(globalFlags)) = if obj_level(this) = ⊥ then pc ⊔ level(globalFlags) ⊔ obj_level(args) ⊔ obj_level(globalFlags) else if obj_level(this) = ⊤ ∧ level(args) ⊔ level(globalFlags) ⊔ obj_level(args) ⊔ obj_level(globalFlags) = ⊥ then pc else obj_level(this) ⊓ (level(args) ⊔ level(globalFlags) ⊔ obj_level(args) ⊔ obj_level(globalFlags));
+  ret(obj_level(this)) = pc ⊔ level(globalFlags) ⊔ obj_level(args) ⊔ obj_level(globalFlags) ⊔ obj_level(this);
+}

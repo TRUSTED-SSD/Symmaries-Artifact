@@ -1,0 +1,12 @@
+org.apache.rocketmq.proxy.common.MessageReceiptHandle org.apache.rocketmq.proxy.processor.ReceiptHandleProcessor:removeReceiptHandle (
+  io.netty.channel.Channel channel, java.lang.String group,
+  java.lang.String msgID, java.lang.String receiptHandle) {
+  guard = tt;
+  ret(level()) = level(channel) ⊔ level(group) ⊔ level(msgID) ⊔ level(receiptHandle) ⊔ level(this) ⊔ obj_level(channel) ⊔ obj_level(receiptHandle) ⊔ obj_level(this);
+  ret(obj_level()) = level(channel) ⊔ level(group) ⊔ level(msgID) ⊔ level(receiptHandle) ⊔ level(this) ⊔ obj_level(channel) ⊔ obj_level(receiptHandle) ⊔ obj_level(this);
+  ret(obj_level(channel)) = level(channel) ⊔ level(group) ⊔ level(this) ⊔ obj_level(channel) ⊔ obj_level(group) ⊔ obj_level(this);
+  ret(obj_level(group)) = level(channel) ⊔ level(group) ⊔ level(this) ⊔ obj_level(channel) ⊔ obj_level(msgID) ⊔ obj_level(this);
+  ret(obj_level(msgID)) = level(channel) ⊔ level(group) ⊔ level(this) ⊔ obj_level(channel) ⊔ obj_level(msgID) ⊔ obj_level(this);
+  ret(obj_level(receiptHandle)) = level(channel) ⊔ level(group) ⊔ level(this) ⊔ obj_level(channel) ⊔ obj_level(msgID) ⊔ obj_level(this);
+  ret(obj_level(this)) = level(channel) ⊔ level(group) ⊔ level(this) ⊔ obj_level(channel) ⊔ obj_level(msgID) ⊔ obj_level(this);
+}

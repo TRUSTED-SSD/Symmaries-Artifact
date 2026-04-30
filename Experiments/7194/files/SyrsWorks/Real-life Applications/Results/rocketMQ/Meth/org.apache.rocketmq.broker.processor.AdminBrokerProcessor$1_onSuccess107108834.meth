@@ -1,0 +1,36 @@
+void org.apache.rocketmq.broker.processor.AdminBrokerProcessor$1:onSuccess(java.util.Set lockOKMQSet)
+{
+java.util.Iterator l2;
+  org.apache.rocketmq.common.message.MessageQueue mq;
+  boolean $stack5;
+  java.util.concurrent.CountDownLatch $stack6;
+  java.lang.Object $stack7;
+  java.util.concurrent.ConcurrentMap $stack8;
+  java.util.concurrent.ConcurrentMap $stack11;
+  java.lang.Integer $stack13;
+  int $stack14;
+  l2 = lockOKMQSet.iterator();
+ label0:$stack5 = l2.hasNext();
+ if ($stack5==0) goto label1;
+ $stack7 = l2.next();
+ mq=(org.apache.rocketmq.common.message.MessageQueue) $stack7;
+ $stack8=this.val$mqLockMap;
+ $stack5 = $stack8.containsKey((java.lang.Object)mq);
+ if ($stack5!=0) goto label2;
+ $stack8=this.val$mqLockMap;
+ $stack13 = java.lang.Integer.valueOf(0);
+ $stack8.put((java.lang.Object)mq,(java.lang.Object)$stack13);
+ label2:$stack11=this.val$mqLockMap;
+ $stack8=this.val$mqLockMap;
+ $stack7 = $stack8.get((java.lang.Object)mq);
+ $stack13=(java.lang.Integer) $stack7;
+ $stack14 = $stack13.intValue();
+ $stack14=($stack14+1);
+ $stack13 = java.lang.Integer.valueOf($stack14);
+ $stack11.put((java.lang.Object)mq,(java.lang.Object)$stack13);
+ goto label0;
+ label1:$stack6=this.val$countDownLatch;
+ $stack6.countDown();
+ return;
+ } 
+

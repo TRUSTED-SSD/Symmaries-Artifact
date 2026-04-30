@@ -1,0 +1,52 @@
+static java.lang.String org.apache.bookkeeper.common.net.ServiceURI:validateHostName(java.lang.String @serviceName,java.lang.String hostname)
+{
+java.lang.String[] parts;
+  java.lang.NumberFormatException nfe;
+  int $stack5;
+  boolean $stack9;
+  java.lang.StringBuilder $stack11;
+  java.lang.IllegalArgumentException $stack18;
+  java.lang.String serviceName;
+serviceName=@serviceName;
+parts = hostname.split(":");
+ $stack5=#parts;
+ if ($stack5<3) goto label0;
+ $stack18=new java.lang.IllegalArgumentException;
+ $stack11=new java.lang.StringBuilder;
+ $stack11#java.lang.StringBuilder();
+ $stack11 = $stack11.append("Invalid hostname : ");
+ $stack11 = $stack11.append(hostname);
+ serviceName = $stack11.toString();
+ $stack18#java.lang.IllegalArgumentException(serviceName);
+ throw $stack18;
+ label0:$stack5=#parts;
+ if ($stack5!=2) goto label1;
+ label2:serviceName=parts[1];
+ java.lang.Integer.parseUnsignedInt(serviceName);
+ label3:goto label4;
+ label5:nfe = catch;
+ $stack18=new java.lang.IllegalArgumentException;
+ $stack11=new java.lang.StringBuilder;
+ $stack11#java.lang.StringBuilder();
+ $stack11 = $stack11.append("Invalid hostname : ");
+ $stack11 = $stack11.append(hostname);
+ serviceName = $stack11.toString();
+ $stack18#java.lang.IllegalArgumentException(serviceName);
+ throw $stack18;
+ label4:return  hostname;
+ label1:$stack5=#parts;
+ if ($stack5!=1) goto label6;
+ serviceName = serviceName.toLowerCase();
+ $stack9 = serviceName.equals((java.lang.Object)"bk");
+ if ($stack9==0) goto label6;
+ $stack11=new java.lang.StringBuilder;
+ $stack11#java.lang.StringBuilder();
+ $stack11 = $stack11.append(hostname);
+ $stack11 = $stack11.append(":");
+ $stack11 = $stack11.append(4181);
+ serviceName = $stack11.toString();
+ return  serviceName;
+ label6:return  hostname;
+ catch java.lang.NumberFormatException: label2 - label3 : label5;
+} 
+

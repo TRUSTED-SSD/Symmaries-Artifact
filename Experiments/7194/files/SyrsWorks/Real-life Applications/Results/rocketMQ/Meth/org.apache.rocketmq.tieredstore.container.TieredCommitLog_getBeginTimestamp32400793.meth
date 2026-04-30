@@ -1,0 +1,18 @@
+long org.apache.rocketmq.tieredstore.container.TieredCommitLog:getBeginTimestamp()
+{
+org.apache.rocketmq.tieredstore.provider.TieredFileSegment firstIndexFile;
+  long beginTimestamp;
+  org.apache.rocketmq.tieredstore.container.TieredFileQueue $stack4;
+  byte $stack7;
+  $stack4=this.fileQueue;
+ firstIndexFile = $stack4.getFileByIndex(0);
+ if (firstIndexFile!=null) goto label0;
+ return  -1L;
+ label0:beginTimestamp = firstIndexFile.getBeginTimestamp();
+ $stack7=(beginTimestamp cmp 9223372036854775807L);
+ if ($stack7==0) goto label1;
+ goto label2;
+ label1:beginTimestamp=-1L;
+ label2:return  beginTimestamp;
+ } 
+

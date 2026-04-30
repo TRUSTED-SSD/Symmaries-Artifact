@@ -1,0 +1,32 @@
+int java.lang.String:indexOfSupplementary(int i0,int i1)
+{
+char[] r1;
+  char c2;
+  char c3;
+  int i4;
+  boolean $z0;
+  int $i5;
+  char $c6;
+  int $i7;
+  char $c8;
+  int i9;
+  $z0 = java.lang.Character.isValidCodePoint(i0);
+ if ($z0==0) goto label0;
+ r1=this.value;
+ c2 = java.lang.Character.highSurrogate(i0);
+ c3 = java.lang.Character.lowSurrogate(i0);
+ $i5=#r1;
+ i4=($i5-1);
+ i9=i1;
+ label1:if (i9>=i4) goto label0;
+ $c6=r1[i9];
+ if ($c6!=c2) goto label2;
+ $i7=(i9+1);
+ $c8=r1[$i7];
+ if ($c8!=c3) goto label2;
+ return  i9;
+ label2:i9=(i9+1);
+ goto label1;
+ label0:return  -1;
+ }  
+

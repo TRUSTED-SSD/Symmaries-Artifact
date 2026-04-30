@@ -1,0 +1,27 @@
+void org.keycloak.adapters.HttpClientBuilder:configureProxyForAuthServerIfProvided(org.keycloak.representations.adapters.config.AdapterHttpClientConfig adapterConfig)
+{
+java.net.URI uri;
+  java.lang.String $stack3;
+  boolean $stack6;
+  org.apache.http.HttpHost $stack9;
+  int $stack11;
+  java.lang.String $stack12;
+  if (adapterConfig==null) goto label0;
+ $stack3 = adapterConfig.getProxyUrl();
+ if ($stack3==null) goto label0;
+ $stack3 = adapterConfig.getProxyUrl();
+ $stack3 = $stack3.trim();
+ $stack6 = $stack3.isEmpty();
+ if ($stack6==0) goto label1;
+ label0:return;
+ label1:$stack3 = adapterConfig.getProxyUrl();
+ uri = java.net.URI.create($stack3);
+ $stack9=new org.apache.http.HttpHost;
+ $stack3 = uri.getHost();
+ $stack11 = uri.getPort();
+ $stack12 = uri.getScheme();
+ $stack9#org.apache.http.HttpHost($stack3,$stack11,$stack12);
+ this.proxyHost=$stack9;
+ return;
+ } 
+

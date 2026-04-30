@@ -1,0 +1,37 @@
+org.apache.rocketmq.remoting.protocol.RemotingCommand org.apache.rocketmq.namesrv.processor.DefaultRequestProcessor:getAllTopicListFromNameserver(io.netty.channel.ChannelHandlerContext ctx,org.apache.rocketmq.remoting.protocol.RemotingCommand @request)
+{
+boolean enableAllTopicList;
+  byte[] body;
+  org.apache.rocketmq.namesrv.NamesrvController $stack7;
+  org.apache.rocketmq.common.namesrv.NamesrvConfig $stack8;
+  org.apache.rocketmq.logging.org.slf4j.Logger $stack10;
+  io.netty.channel.Channel $stack12;
+  java.net.SocketAddress $stack13;
+  java.lang.Boolean $stack14;
+  org.apache.rocketmq.namesrv.routeinfo.RouteInfoManager $stack16;
+  org.apache.rocketmq.remoting.protocol.body.TopicList $stack17;
+  org.apache.rocketmq.remoting.protocol.RemotingCommand request;
+request=@request;
+request = org.apache.rocketmq.remoting.protocol.RemotingCommand.createResponseCommand(null);
+ $stack7=this.namesrvController;
+ $stack8 = $stack7.getNamesrvConfig();
+ enableAllTopicList = $stack8.isEnableAllTopicList();
+ $stack10=org.apache.rocketmq.namesrv.processor.DefaultRequestProcessor.log;
+ $stack12 = ctx.channel();
+ $stack13 = $stack12.remoteAddress();
+ $stack14 = java.lang.Boolean.valueOf(enableAllTopicList);
+ $stack10.warn("getAllTopicListFromNameserver {} enable {}",(java.lang.Object)$stack13,(java.lang.Object)$stack14);
+ if (enableAllTopicList==0) goto label0;
+ $stack7=this.namesrvController;
+ $stack16 = $stack7.getRouteInfoManager();
+ $stack17 = $stack16.getAllTopicList();
+ body = $stack17.encode();
+ request.setBody(body);
+ request.setCode(0);
+ request.setRemark(null);
+ goto label1;
+ label0:request.setCode(1);
+ request.setRemark("disable");
+ label1:return  request;
+ } 
+

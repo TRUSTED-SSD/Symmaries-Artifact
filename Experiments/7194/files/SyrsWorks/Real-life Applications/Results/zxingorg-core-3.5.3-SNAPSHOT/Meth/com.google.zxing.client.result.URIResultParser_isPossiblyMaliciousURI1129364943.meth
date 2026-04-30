@@ -1,0 +1,19 @@
+static boolean com.google.zxing.client.result.URIResultParser:isPossiblyMaliciousURI(java.lang.String uri)
+{
+java.util.regex.Pattern $stack1;
+  java.util.regex.Matcher $stack2;
+  boolean $stack3;
+  $stack1=com.google.zxing.client.result.URIResultParser.ALLOWED_URI_CHARS_PATTERN;
+ $stack2 = $stack1.matcher((java.lang.CharSequence)uri);
+ $stack3 = $stack2.matches();
+ if ($stack3==0) goto label0;
+ $stack1=com.google.zxing.client.result.URIResultParser.USER_IN_HOST;
+ $stack2 = $stack1.matcher((java.lang.CharSequence)uri);
+ $stack3 = $stack2.find();
+ if ($stack3==0) goto label1;
+ label0:$stack3=1;
+ goto label2;
+ label1:$stack3=0;
+ label2:return  $stack3;
+ } 
+

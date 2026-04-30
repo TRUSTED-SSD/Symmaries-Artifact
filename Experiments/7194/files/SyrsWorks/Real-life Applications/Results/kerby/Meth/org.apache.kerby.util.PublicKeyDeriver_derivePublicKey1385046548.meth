@@ -1,0 +1,55 @@
+static java.security.PublicKey org.apache.kerby.util.PublicKeyDeriver:derivePublicKey(java.security.PrivateKey @key)
+{
+java.lang.Object keyParams;
+  java.math.BigInteger g;
+  java.math.BigInteger p;
+  java.math.BigInteger q;
+  java.math.BigInteger x;
+  boolean $stack9;
+  java.security.KeyFactory $stack15;
+  java.security.PublicKey $stack16;
+  java.security.spec.DSAPublicKeySpec tmp$1794001936;
+  java.security.spec.RSAPublicKeySpec tmp$140955320;
+  java.security.KeyException tmp$1908338249;
+  java.security.interfaces.DSAPrivateKey tmp$1273133232;
+  java.security.interfaces.DSAParams tmp$599168034;
+  java.security.interfaces.RSAPrivateCrtKey tmp$1822173042;
+  java.security.PrivateKey key;
+key=@key;
+$stack9=key instanceof java.security.interfaces.DSAPrivateKey;
+ if ($stack9==0) goto label0;
+ key=(java.security.interfaces.DSAPrivateKey) key;
+ tmp$1273133232=(java.security.interfaces.DSAPrivateKey) key;
+ keyParams = tmp$1273133232.getParams();
+ tmp$599168034=(java.security.interfaces.DSAParams) keyParams;
+ g = tmp$599168034.getG();
+ tmp$599168034=(java.security.interfaces.DSAParams) keyParams;
+ p = tmp$599168034.getP();
+ tmp$599168034=(java.security.interfaces.DSAParams) keyParams;
+ q = tmp$599168034.getQ();
+ tmp$1273133232=(java.security.interfaces.DSAPrivateKey) key;
+ x = tmp$1273133232.getX();
+ x = q.modPow(x,p);
+ tmp$1794001936=new java.security.spec.DSAPublicKeySpec;
+ tmp$1794001936#java.security.spec.DSAPublicKeySpec(x,p,q,g);
+ $stack15 = java.security.KeyFactory.getInstance("DSA");
+ $stack16 = $stack15.generatePublic((java.security.spec.KeySpec)tmp$1794001936);
+ return  $stack16;
+ label0:$stack9=key instanceof java.security.interfaces.RSAPrivateCrtKey;
+ if ($stack9==0) goto label1;
+ key=(java.security.interfaces.RSAPrivateCrtKey) key;
+ tmp$1822173042=(java.security.interfaces.RSAPrivateCrtKey) key;
+ keyParams = tmp$1822173042.getModulus();
+ tmp$1822173042=(java.security.interfaces.RSAPrivateCrtKey) key;
+ g = tmp$1822173042.getPublicExponent();
+ tmp$140955320=new java.security.spec.RSAPublicKeySpec;
+ p=(java.math.BigInteger) keyParams;
+ tmp$140955320#java.security.spec.RSAPublicKeySpec(p,g);
+ $stack15 = java.security.KeyFactory.getInstance("RSA");
+ $stack16 = $stack15.generatePublic((java.security.spec.KeySpec)tmp$140955320);
+ return  $stack16;
+ label1:tmp$1908338249=new java.security.KeyException;
+ tmp$1908338249#java.security.KeyException("Private key was not a DSA or RSA key");
+ throw tmp$1908338249;
+ } 
+

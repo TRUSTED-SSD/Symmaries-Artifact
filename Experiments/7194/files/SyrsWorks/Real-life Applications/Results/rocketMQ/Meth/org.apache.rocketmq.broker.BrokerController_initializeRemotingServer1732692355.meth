@@ -1,0 +1,29 @@
+void org.apache.rocketmq.broker.BrokerController:initializeRemotingServer()
+{
+org.apache.rocketmq.remoting.netty.NettyServerConfig fastConfig;
+  int listeningPort;
+  org.apache.rocketmq.remoting.netty.NettyRemotingServer $stack3;
+  org.apache.rocketmq.broker.client.ClientHousekeepingService $stack4;
+  java.lang.Object $stack7;
+  org.apache.rocketmq.remoting.netty.NettyServerConfig $stack8;
+  $stack3=new org.apache.rocketmq.remoting.netty.NettyRemotingServer;
+ fastConfig=this.nettyServerConfig;
+ $stack4=this.clientHousekeepingService;
+ $stack3#org.apache.rocketmq.remoting.netty.NettyRemotingServer(fastConfig,(org.apache.rocketmq.remoting.ChannelEventListener)$stack4);
+ this.remotingServer=$stack3;
+ fastConfig=this.nettyServerConfig;
+ $stack7 = fastConfig.clone();
+ fastConfig=(org.apache.rocketmq.remoting.netty.NettyServerConfig) $stack7;
+ $stack8=this.nettyServerConfig;
+ listeningPort = $stack8.getListenPort();
+ listeningPort=(listeningPort-2);
+ if (listeningPort>=0) goto label0;
+ listeningPort=0;
+ label0:fastConfig.setListenPort(listeningPort);
+ $stack3=new org.apache.rocketmq.remoting.netty.NettyRemotingServer;
+ $stack4=this.clientHousekeepingService;
+ $stack3#org.apache.rocketmq.remoting.netty.NettyRemotingServer(fastConfig,(org.apache.rocketmq.remoting.ChannelEventListener)$stack4);
+ this.fastRemotingServer=$stack3;
+ return;
+ } 
+

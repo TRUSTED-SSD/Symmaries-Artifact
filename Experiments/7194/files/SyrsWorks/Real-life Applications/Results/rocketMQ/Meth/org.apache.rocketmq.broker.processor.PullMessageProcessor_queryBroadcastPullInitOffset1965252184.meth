@@ -1,0 +1,49 @@
+long org.apache.rocketmq.broker.processor.PullMessageProcessor:queryBroadcastPullInitOffset(java.lang.String topic,java.lang.String group,int queueId,org.apache.rocketmq.remoting.protocol.header.PullMessageRequestHeader requestHeader,io.netty.channel.Channel channel)
+{
+org.apache.rocketmq.broker.client.ConsumerGroupInfo consumerGroupInfo;
+  boolean proxyPullBroadcast;
+  java.lang.String clientId;
+  org.apache.rocketmq.broker.client.ClientChannelInfo clientChannelInfo;
+  org.apache.rocketmq.broker.BrokerController $stack10;
+  org.apache.rocketmq.common.BrokerConfig $stack11;
+  org.apache.rocketmq.broker.client.ConsumerManager $stack14;
+  org.apache.rocketmq.remoting.protocol.RequestSource $stack16;
+  int $stack17;
+  java.lang.Integer $stack18;
+  java.lang.Integer $stack19;
+  boolean $stack21;
+  org.apache.rocketmq.broker.offset.BroadcastOffsetManager $stack25;
+  java.lang.Long $stack26;
+  long $stack27;
+  $stack10=this.brokerController;
+ $stack11 = $stack10.getBrokerConfig();
+ proxyPullBroadcast = $stack11.isEnableBroadcastOffsetStore();
+ if (proxyPullBroadcast!=0) goto label0;
+ return  -1L;
+ label0:$stack10=this.brokerController;
+ $stack14 = $stack10.getConsumerManager();
+ consumerGroupInfo = $stack14.getConsumerGroupInfo(group);
+ $stack16=org.apache.rocketmq.remoting.protocol.RequestSource.PROXY_FOR_BROADCAST;
+ $stack17 = $stack16.getValue();
+ $stack18 = java.lang.Integer.valueOf($stack17);
+ $stack19 = requestHeader.getRequestSource();
+ proxyPullBroadcast = java.util.Objects.equals((java.lang.Object)$stack18,(java.lang.Object)$stack19);
+ $stack21 = this#org.apache.rocketmq.broker.processor.PullMessageProcessor:isBroadcast(proxyPullBroadcast,consumerGroupInfo);
+ if ($stack21==0) goto label1;
+ if (proxyPullBroadcast==0) goto label2;
+ clientId = requestHeader.getProxyFrowardClientId();
+ goto label3;
+ label2:clientChannelInfo = consumerGroupInfo.findChannel(channel);
+ if (clientChannelInfo!=null) goto label4;
+ return  -1L;
+ label4:clientId = clientChannelInfo.getClientId();
+ label3:$stack10=this.brokerController;
+ $stack25 = $stack10.getBroadcastOffsetManager();
+ $stack26 = requestHeader.getQueueOffset();
+ $stack27 = $stack26.longValue();
+ $stack26 = $stack25.queryInitOffset(topic,group,queueId,clientId,$stack27,proxyPullBroadcast);
+ $stack27 = $stack26.longValue();
+ return  $stack27;
+ label1:return  -1L;
+ } 
+

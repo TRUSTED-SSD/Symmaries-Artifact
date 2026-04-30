@@ -1,0 +1,53 @@
+void org.apache.rocketmq.client.impl.consumer.RebalanceImpl:unlock(org.apache.rocketmq.common.message.MessageQueue mq,boolean oneway)
+{
+org.apache.rocketmq.client.impl.FindBrokerResult findBrokerResult;
+  org.apache.rocketmq.remoting.protocol.body.UnlockBatchRequestBody requestBody;
+  org.apache.rocketmq.client.impl.factory.MQClientInstance $stack6;
+  org.apache.rocketmq.client.impl.factory.MQClientInstance $stack7;
+  java.lang.String $stack8;
+  java.util.Set $stack14;
+  org.apache.rocketmq.client.impl.MQClientAPIImpl $stack17;
+  java.lang.Object[] $stack19;
+  org.apache.rocketmq.logging.org.slf4j.Logger $stack22;
+  java.lang.Exception $stack26;
+  java.lang.StringBuilder $stack27;
+  $stack7=this.mQClientFactory;
+ $stack6=this.mQClientFactory;
+ $stack8 = $stack6.getBrokerNameFromMessageQueue(mq);
+ findBrokerResult = $stack7.findBrokerAddressInSubscribe($stack8,0L,(boolean)1);
+ if (findBrokerResult==null) goto label0;
+ requestBody=new org.apache.rocketmq.remoting.protocol.body.UnlockBatchRequestBody;
+ requestBody#org.apache.rocketmq.remoting.protocol.body.UnlockBatchRequestBody();
+ $stack8=this.consumerGroup;
+ requestBody.setConsumerGroup($stack8);
+ $stack6=this.mQClientFactory;
+ $stack8 = $stack6.getClientId();
+ requestBody.setClientId($stack8);
+ $stack14 = requestBody.getMqSet();
+ $stack14.add((java.lang.Object)mq);
+ label1:$stack6=this.mQClientFactory;
+ $stack17 = $stack6.getMQClientAPIImpl();
+ $stack8 = findBrokerResult.getBrokerAddr();
+ $stack17.unlockBatchMQ($stack8,requestBody,1000L,oneway);
+ $stack22=org.apache.rocketmq.client.impl.consumer.RebalanceImpl.log;
+ $stack19=new java.lang.Object[3];
+ $stack8=this.consumerGroup;
+ $stack19[0]=$stack8;
+ $stack6=this.mQClientFactory;
+ $stack8 = $stack6.getClientId();
+ $stack19[1]=$stack8;
+ $stack19[2]=mq;
+ $stack22.warn("unlock messageQueue. group:{}, clientId:{}, mq:{}",$stack19);
+ label2:goto label0;
+ label3:$stack26 = catch;
+ $stack22=org.apache.rocketmq.client.impl.consumer.RebalanceImpl.log;
+ $stack27=new java.lang.StringBuilder;
+ $stack27#java.lang.StringBuilder();
+ $stack27 = $stack27.append("unlockBatchMQ exception, ");
+ $stack27 = $stack27.append((java.lang.Object)mq);
+ $stack8 = $stack27.toString();
+ $stack22.error($stack8,(java.lang.Throwable)$stack26);
+ label0:return;
+ catch java.lang.Exception: label1 - label2 : label3;
+} 
+

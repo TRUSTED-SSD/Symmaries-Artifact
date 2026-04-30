@@ -1,0 +1,30 @@
+void org.apache.bookkeeper.util.DiskChecker:validateThreshold(float diskSpaceThreshold,float diskSpaceWarnThreshold)
+{
+byte $stack3;
+  java.lang.IllegalArgumentException $stack4;
+  java.lang.StringBuilder $stack5;
+  java.lang.String $stack11;
+  float $stack18;
+  double $stack19;
+  $stack3=(diskSpaceThreshold cmpg 0.0F);
+ if ($stack3<=0) goto label0;
+ $stack3=(diskSpaceThreshold cmpl 1.0F);
+ if ($stack3>=0) goto label0;
+ $stack18=(diskSpaceWarnThreshold-diskSpaceThreshold);
+ $stack19=(double) $stack18;
+ $stack3=($stack19 cmpl 1.0E-6);
+ if ($stack3<=0) goto label1;
+ label0:$stack4=new java.lang.IllegalArgumentException;
+ $stack5=new java.lang.StringBuilder;
+ $stack5#java.lang.StringBuilder();
+ $stack5 = $stack5.append("Disk space threashold: ");
+ $stack5 = $stack5.append(diskSpaceThreshold);
+ $stack5 = $stack5.append(" and warn threshold: ");
+ $stack5 = $stack5.append(diskSpaceWarnThreshold);
+ $stack5 = $stack5.append(" are not valid. Should be > 0 and < 1 and diskSpaceThreshold >= diskSpaceWarnThreshold");
+ $stack11 = $stack5.toString();
+ $stack4#java.lang.IllegalArgumentException($stack11);
+ throw $stack4;
+ label1:return;
+ } 
+

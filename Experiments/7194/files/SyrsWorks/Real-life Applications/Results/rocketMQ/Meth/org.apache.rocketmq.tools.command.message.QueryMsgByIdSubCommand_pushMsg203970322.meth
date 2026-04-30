@@ -1,0 +1,29 @@
+void org.apache.rocketmq.tools.command.message.QueryMsgByIdSubCommand:pushMsg(org.apache.rocketmq.tools.admin.DefaultMQAdminExt defaultMQAdminExt,java.lang.String consumerGroup,java.lang.String clientId,java.lang.String msgId)
+{
+org.apache.rocketmq.remoting.protocol.body.ConsumerRunningInfo consumerRunningInfo;
+  org.apache.rocketmq.remoting.protocol.body.ConsumeMessageDirectlyResult result;
+  java.lang.Object[] $stack8;
+  java.io.PrintStream $stack9;
+  boolean $stack11;
+  java.lang.Exception $stack20;
+  label0:consumerRunningInfo = defaultMQAdminExt.getConsumerRunningInfo(consumerGroup,clientId,(boolean)0,(boolean)0);
+ if (consumerRunningInfo==null) goto label1;
+ $stack11 = org.apache.rocketmq.remoting.protocol.body.ConsumerRunningInfo.isPushType(consumerRunningInfo);
+ if ($stack11==0) goto label1;
+ result = defaultMQAdminExt.consumeMessageDirectly(consumerGroup,clientId,msgId);
+ $stack9=java.lang.System.out;
+ $stack8=new java.lang.Object[1];
+ $stack8[0]=result;
+ $stack9.printf("%s",$stack8);
+ goto label2;
+ label1:$stack9=java.lang.System.out;
+ $stack8=new java.lang.Object[1];
+ $stack8[0]=clientId;
+ $stack9.printf("this %s client is not push consumer ,not support direct push \n",$stack8);
+ label2:goto label3;
+ label4:$stack20 = catch;
+ $stack20.printStackTrace();
+ label3:return;
+ catch java.lang.Exception: label0 - label2 : label4;
+} 
+

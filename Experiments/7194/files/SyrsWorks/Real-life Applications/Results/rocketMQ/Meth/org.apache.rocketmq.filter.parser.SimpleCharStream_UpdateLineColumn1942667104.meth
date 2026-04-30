@@ -1,0 +1,63 @@
+void org.apache.rocketmq.filter.parser.SimpleCharStream:UpdateLineColumn(char c)
+{
+int $stack2;
+  boolean $stack4;
+  int $stack7;
+  int[] $stack8;
+  int $stack22;
+  int $stack23;
+  $stack2=this.column;
+ $stack2=($stack2+1);
+ this.column=$stack2;
+ $stack4=this.prevCharIsLF;
+ if ($stack4==0) goto label0;
+ this.prevCharIsLF=0;
+ $stack2=this.line;
+ this.column=1;
+ $stack2=($stack2+1);
+ this.line=$stack2;
+ goto label1;
+ label0:$stack4=this.prevCharIsCR;
+ if ($stack4==0) goto label1;
+ this.prevCharIsCR=0;
+ if (c!=10) goto label2;
+ this.prevCharIsLF=1;
+ goto label1;
+ label2:$stack2=this.line;
+ this.column=1;
+ $stack2=($stack2+1);
+ this.line=$stack2;
+ label1:switch [c]
+if 0 goto label3;
+if 1 goto label4;
+if 2 goto label5;
+if 3 goto label5;
+if 4 goto label6;
+goto label5;
+ label6:this.prevCharIsCR=1;
+ goto label5;
+ label4:this.prevCharIsLF=1;
+ goto label5;
+ label3:$stack2=this.column;
+ $stack2=($stack2-1);
+ this.column=$stack2;
+ $stack2=this.column;
+ $stack7=this.tabSize;
+ $stack23=this.column;
+ $stack22=this.tabSize;
+ $stack22=($stack23%$stack22);
+ $stack7=($stack7-$stack22);
+ $stack2=($stack2+$stack7);
+ this.column=$stack2;
+ goto label5;
+ label5:$stack8=this.bufline;
+ $stack7=this.bufpos;
+ $stack2=this.line;
+ $stack8[$stack7]=$stack2;
+ $stack8=this.bufcolumn;
+ $stack7=this.bufpos;
+ $stack2=this.column;
+ $stack8[$stack7]=$stack2;
+ return;
+ } 
+

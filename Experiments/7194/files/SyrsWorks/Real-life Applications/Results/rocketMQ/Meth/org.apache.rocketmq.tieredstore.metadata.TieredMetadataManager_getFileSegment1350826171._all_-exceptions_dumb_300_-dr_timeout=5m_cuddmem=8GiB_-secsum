@@ -1,0 +1,8 @@
+org.apache.rocketmq.tieredstore.metadata.FileSegmentMetadata org.apache.rocketmq.tieredstore.metadata.TieredMetadataManager:getFileSegment (
+  org.apache.rocketmq.tieredstore.provider.TieredFileSegment fileSegment) {
+  guard = tt;
+  ret(level()) = level(fileSegment) ⊔ level(this) ⊔ obj_level(fileSegment) ⊔ obj_level(this);
+  ret(obj_level()) = level(fileSegment) ⊔ level(this) ⊔ obj_level(fileSegment) ⊔ obj_level(this);
+  ret(obj_level(fileSegment)) = level(fileSegment) ⊔ level(this) ⊔ obj_level(fileSegment) ⊔ obj_level(this);
+  ret(obj_level(this)) = level(fileSegment) ⊔ level(this) ⊔ obj_level(fileSegment) ⊔ obj_level(this);
+}

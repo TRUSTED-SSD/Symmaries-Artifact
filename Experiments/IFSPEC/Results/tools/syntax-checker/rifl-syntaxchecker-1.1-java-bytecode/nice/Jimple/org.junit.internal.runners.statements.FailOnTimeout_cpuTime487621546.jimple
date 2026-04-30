@@ -1,0 +1,45 @@
+    private long cpuTime(java.lang.Thread)
+    {
+        org.junit.internal.runners.statements.FailOnTimeout this;
+        java.lang.Thread thr;
+        java.lang.management.ThreadMXBean mxBean;
+        java.lang.UnsupportedOperationException e;
+        boolean $stack5;
+        long $stack6;
+
+        this := @this: org.junit.internal.runners.statements.FailOnTimeout;
+
+        thr := @parameter0: java.lang.Thread;
+
+        mxBean = staticinvoke <java.lang.management.ManagementFactory: java.lang.management.ThreadMXBean getThreadMXBean()>();
+/*282*/
+/*282*/
+
+        $stack5 = interfaceinvoke mxBean.<java.lang.management.ThreadMXBean: boolean isThreadCpuTimeSupported()>();
+/*283*/
+
+        if $stack5 == 0 goto label4;
+/*283*/
+
+     label1:
+        $stack6 = virtualinvoke thr.<java.lang.Thread: long getId()>();
+/*285*/
+
+        $stack6 = interfaceinvoke mxBean.<java.lang.management.ThreadMXBean: long getThreadCpuTime(long)>($stack6);
+/*285*/
+
+     label2:
+        return $stack6;
+/*285*/
+
+     label3:
+        e := @caughtexception;
+/*285*/
+
+     label4:
+        return 0L;
+/*289*/
+
+        catch java.lang.UnsupportedOperationException from label1 to label2 with label3;
+    }
+

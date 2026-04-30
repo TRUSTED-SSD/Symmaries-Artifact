@@ -1,0 +1,28 @@
+org.keycloak.jose.jwe.JWE org.keycloak.jose.jwe.JWE:getProcessedJWE(org.keycloak.jose.jwe.alg.JWEAlgorithmProvider algorithmProvider,org.keycloak.jose.jwe.enc.JWEEncryptionProvider encryptionProvider)
+{
+byte[] decodedCek;
+  org.keycloak.jose.jwe.JWEKeyStorage $stack4;
+  java.lang.String $stack5;
+  java.security.Key $stack8;
+  java.lang.IllegalArgumentException $stack11;
+  if (algorithmProvider!=null) goto label0;
+ $stack11=new java.lang.IllegalArgumentException;
+ $stack11#java.lang.IllegalArgumentException("No provider for alg ");
+ throw $stack11;
+ label0:if (encryptionProvider!=null) goto label1;
+ $stack11=new java.lang.IllegalArgumentException;
+ $stack11#java.lang.IllegalArgumentException("No provider for enc ");
+ throw $stack11;
+ label1:$stack4=this.keyStorage;
+ $stack4.setEncryptionProvider(encryptionProvider);
+ $stack5=this.base64Cek;
+ decodedCek = org.keycloak.common.util.Base64Url.decode($stack5);
+ $stack4=this.keyStorage;
+ $stack8 = $stack4.getDecryptionKey();
+ decodedCek = algorithmProvider.decodeCek(decodedCek,$stack8);
+ $stack4=this.keyStorage;
+ $stack4.setCEKBytes(decodedCek);
+ encryptionProvider.verifyAndDecodeJwe(this);
+ return  this;
+ } 
+

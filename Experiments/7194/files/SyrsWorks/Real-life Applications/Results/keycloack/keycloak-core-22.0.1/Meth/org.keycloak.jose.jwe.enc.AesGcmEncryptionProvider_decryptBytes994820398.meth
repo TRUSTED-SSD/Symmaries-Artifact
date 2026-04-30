@@ -1,0 +1,17 @@
+byte[] org.keycloak.jose.jwe.enc.AesGcmEncryptionProvider:decryptBytes(byte[] @encryptedBytes,byte[] ivBytes,java.security.Key aesKey,byte[] aad)
+{
+javax.crypto.Cipher cipher;
+  org.keycloak.common.crypto.CryptoProvider $stack7;
+  javax.crypto.spec.GCMParameterSpec $stack9;
+  byte[] encryptedBytes;
+encryptedBytes=@encryptedBytes;
+$stack7 = org.keycloak.common.crypto.CryptoIntegration.getProvider();
+ cipher = $stack7.getAesGcmCipher();
+ $stack9=new javax.crypto.spec.GCMParameterSpec;
+ $stack9#javax.crypto.spec.GCMParameterSpec(128,ivBytes);
+ cipher.init(2,aesKey,(java.security.spec.AlgorithmParameterSpec)$stack9);
+ cipher.updateAAD(aad);
+ encryptedBytes = cipher.doFinal(encryptedBytes);
+ return  encryptedBytes;
+ } 
+

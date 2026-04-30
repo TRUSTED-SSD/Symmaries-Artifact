@@ -1,0 +1,48 @@
+    protected static org.w3c.dom.Document toDoc(java.lang.String)
+    {
+        java.lang.String source;
+        java.io.ByteArrayInputStream $stack2;
+        javax.xml.parsers.DocumentBuilder $stack3;
+        byte[] $stack4;
+        org.w3c.dom.Document $stack5;
+        java.lang.Exception $stack6;
+        java.lang.RuntimeException $stack7;
+
+        source := @parameter0: java.lang.String;
+
+     label1:
+        $stack3 = <rifl.spec.TestRIFLReader: javax.xml.parsers.DocumentBuilder builder>;
+/*303*/
+
+        $stack2 = new java.io.ByteArrayInputStream;
+/*303*/
+
+        $stack4 = virtualinvoke source.<java.lang.String: byte[] getBytes(java.lang.String)>("UTF-8");
+/*303*/
+
+        specialinvoke $stack2.<java.io.ByteArrayInputStream: void <init>(byte[])>($stack4);
+/*303*/
+
+        $stack5 = virtualinvoke $stack3.<javax.xml.parsers.DocumentBuilder: org.w3c.dom.Document parse(java.io.InputStream)>($stack2);
+/*303*/
+
+     label2:
+        return $stack5;
+/*303*/
+
+     label3:
+        $stack6 := @caughtexception;
+/*303*/
+
+        $stack7 = new java.lang.RuntimeException;
+/*305*/
+
+        specialinvoke $stack7.<java.lang.RuntimeException: void <init>(java.lang.Throwable)>($stack6);
+/*305*/
+
+        throw $stack7;
+/*305*/
+
+        catch java.lang.Exception from label1 to label2 with label3;
+    }
+

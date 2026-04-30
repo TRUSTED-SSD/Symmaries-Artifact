@@ -1,0 +1,23 @@
+void org.apache.rocketmq.tieredstore.container.TieredMessageQueueContainer:initOffset(long offset)
+{
+org.apache.rocketmq.tieredstore.container.TieredConsumeQueue $stack3;
+  boolean $stack4;
+  long $stack7;
+  org.apache.rocketmq.tieredstore.metadata.QueueMetadata $stack11;
+  $stack3=this.consumeQueue;
+ $stack4 = $stack3.isInitialized();
+ if ($stack4!=0) goto label0;
+ $stack11=this.queueMetadata;
+ $stack11.setMinOffset(offset);
+ $stack11=this.queueMetadata;
+ $stack11.setMaxOffset(offset);
+ label0:$stack3=this.consumeQueue;
+ $stack4 = $stack3.isInitialized();
+ if ($stack4!=0) goto label1;
+ $stack3=this.consumeQueue;
+ $stack7=(offset * 20L);
+ $stack3.setBaseOffset($stack7);
+ label1:this.dispatchOffset=offset;
+ return;
+ } 
+

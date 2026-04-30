@@ -1,0 +1,42 @@
+void org.apache.bookkeeper.client.BookieInfoReader$3:getBookieInfoComplete(int rc,org.apache.bookkeeper.client.BookieInfoReader$BookieInfo bInfo,java.lang.Object @ctx)
+{
+org.apache.bookkeeper.net.BookieId b;
+  org.slf4j.Logger $stack5;
+  boolean $stack6;
+  java.util.concurrent.ConcurrentMap $stack7;
+  java.util.concurrent.atomic.AtomicInteger $stack9;
+  int $stack12;
+  java.util.concurrent.CountDownLatch $stack13;
+  long $stack16;
+  java.lang.Long $stack17;
+  java.lang.Object ctx;
+ctx=@ctx;
+b=(org.apache.bookkeeper.net.BookieId) ctx;
+ if (rc==0) goto label0;
+ $stack5 = org.apache.bookkeeper.client.BookieInfoReader.access$000();
+ $stack6 = $stack5.isErrorEnabled();
+ if ($stack6==0) goto label1;
+ $stack5 = org.apache.bookkeeper.client.BookieInfoReader.access$000();
+ ctx = org.apache.bookkeeper.client.api.BKException.codeLogger(rc);
+ $stack5.error("Reading bookie info from bookie {} failed due to {}",(java.lang.Object)b,ctx);
+ goto label1;
+ label0:$stack5 = org.apache.bookkeeper.client.BookieInfoReader.access$000();
+ $stack6 = $stack5.isDebugEnabled();
+ if ($stack6==0) goto label2;
+ $stack5 = org.apache.bookkeeper.client.BookieInfoReader.access$000();
+ $stack16 = bInfo.getFreeDiskSpace();
+ $stack17 = java.lang.Long.valueOf($stack16);
+ dummyClass.lowSink("Free disk space on bookie {} is {}.");
+$stack5.debug("Free disk space on bookie {} is {}.",(java.lang.Object)b,(java.lang.Object)$stack17);
+ label2:$stack7=this.val$map;
+ $stack7.put((java.lang.Object)b,(java.lang.Object)bInfo);
+ label1:$stack9=this.val$totalCompleted;
+ rc = $stack9.incrementAndGet();
+ $stack9=this.val$totalSent;
+ $stack12 = $stack9.get();
+ if (rc!=$stack12) goto label3;
+ $stack13=this.val$latch;
+ $stack13.countDown();
+ label3:return;
+ } 
+

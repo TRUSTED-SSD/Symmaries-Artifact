@@ -1,0 +1,28 @@
+void org.apache.rocketmq.remoting.netty.NettyRemotingClient:updateChannelLastResponseTime(java.lang.String @addr)
+{
+org.apache.rocketmq.remoting.netty.NettyRemotingClient$ChannelWrapper channelWrapper;
+  java.util.concurrent.ConcurrentMap $stack4;
+  java.lang.Object $stack5;
+  boolean $stack6;
+  org.apache.rocketmq.logging.org.slf4j.Logger $stack7;
+  java.util.concurrent.atomic.AtomicReference $stack8;
+  java.lang.String addr;
+addr=@addr;
+if (addr!=null) goto label0;
+ $stack8=this.namesrvAddrChoosed;
+ $stack5 = $stack8.get();
+ addr=(java.lang.String) $stack5;
+ label0:if (addr!=null) goto label1;
+ $stack7=org.apache.rocketmq.remoting.netty.NettyRemotingClient.LOGGER;
+ $stack7.warn("[updateChannelLastResponseTime] could not find address!!");
+ return;
+ label1:$stack4=this.channelTables;
+ $stack5 = $stack4.get((java.lang.Object)addr);
+ channelWrapper=(org.apache.rocketmq.remoting.netty.NettyRemotingClient$ChannelWrapper) $stack5;
+ if (channelWrapper==null) goto label2;
+ $stack6 = channelWrapper.isOK();
+ if ($stack6==0) goto label2;
+ channelWrapper.updateLastResponseTime();
+ label2:return;
+ } 
+

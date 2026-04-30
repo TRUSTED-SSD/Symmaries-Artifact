@@ -1,0 +1,52 @@
+static org.apache.rocketmq.common.compression.CompressionType org.apache.rocketmq.common.compression.CompressionType:of(java.lang.String @name)
+{
+java.lang.String l1;
+  byte l2;
+  int $stack5;
+  boolean $stack6;
+  org.apache.rocketmq.common.compression.CompressionType $stack7;
+  java.lang.RuntimeException $stack10;
+  java.lang.StringBuilder $stack11;
+  java.lang.String name;
+name=@name;
+l1 = name.trim();
+ l1 = l1.toUpperCase();
+ l2=-1;
+ $stack5 = l1.hashCode();
+ switch [$stack5]
+if 0 goto label0;
+if 1 goto label1;
+if 2 goto label2;
+goto label3;
+ label0:$stack6 = l1.equals((java.lang.Object)"LZ4");
+ if ($stack6==0) goto label3;
+ l2=0;
+ goto label3;
+ label2:$stack6 = l1.equals((java.lang.Object)"ZSTD");
+ if ($stack6==0) goto label3;
+ l2=1;
+ goto label3;
+ label1:$stack6 = l1.equals((java.lang.Object)"ZLIB");
+ if ($stack6==0) goto label3;
+ l2=2;
+ label3:switch [l2]
+if 0 goto label4;
+if 1 goto label5;
+if 2 goto label6;
+goto label7;
+ label4:$stack7=org.apache.rocketmq.common.compression.CompressionType.LZ4;
+ return  $stack7;
+ label5:$stack7=org.apache.rocketmq.common.compression.CompressionType.ZSTD;
+ return  $stack7;
+ label6:$stack7=org.apache.rocketmq.common.compression.CompressionType.ZLIB;
+ return  $stack7;
+ label7:$stack10=new java.lang.RuntimeException;
+ $stack11=new java.lang.StringBuilder;
+ $stack11#java.lang.StringBuilder();
+ $stack11 = $stack11.append("Unsupported compress type name: ");
+ $stack11 = $stack11.append(name);
+ name = $stack11.toString();
+ $stack10#java.lang.RuntimeException(name);
+ throw $stack10;
+ } 
+

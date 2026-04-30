@@ -1,0 +1,40 @@
+void java.nio.charset.CoderResult:throwException()
+{
+int $i0;
+  java.nio.charset.UnmappableCharacterException $r1;
+  int $i1;
+  java.nio.charset.MalformedInputException $r2;
+  int $i2;
+  java.nio.BufferOverflowException $r3;
+  java.nio.BufferUnderflowException $r4;
+  boolean $z0;
+  java.lang.AssertionError $r5;
+  $i0=this.type;
+ switch [$i0]
+if 0 goto label0;
+if 1 goto label1;
+if 2 goto label2;
+if 3 goto label3;
+goto label4;
+ label0:$r4=new java.nio.BufferUnderflowException;
+ $r4#java.nio.BufferUnderflowException:init();
+ throw $r4;
+ label1:$r3=new java.nio.BufferOverflowException;
+ $r3#java.nio.BufferOverflowException:init();
+ throw $r3;
+ label2:$r2=new java.nio.charset.MalformedInputException;
+ $i2=this.length;
+ $r2#java.nio.charset.MalformedInputException:init($i2);
+ throw $r2;
+ label3:$r1=new java.nio.charset.UnmappableCharacterException;
+ $i1=this.length;
+ $r1#java.nio.charset.UnmappableCharacterException:init($i1);
+ throw $r1;
+ label4:$z0=java.nio.charset.CoderResult.$assertionsDisabled;
+ if ($z0!=0) goto label5;
+ $r5=new java.lang.AssertionError;
+ $r5#java.lang.AssertionError:init();
+ throw $r5;
+ label5:return;
+ }  
+

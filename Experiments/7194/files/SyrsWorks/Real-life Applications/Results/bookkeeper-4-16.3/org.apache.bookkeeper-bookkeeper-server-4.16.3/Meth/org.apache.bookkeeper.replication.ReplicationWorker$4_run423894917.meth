@@ -1,0 +1,24 @@
+void org.apache.bookkeeper.replication.ReplicationWorker$4:run()
+{
+org.apache.bookkeeper.replication.ReplicationWorker $stack2;
+  org.apache.bookkeeper.meta.LedgerUnderreplicationManager $stack3;
+  long $stack4;
+  org.apache.bookkeeper.replication.ReplicationException$UnavailableException $stack5;
+  org.slf4j.Logger $stack6;
+  java.lang.Long $stack9;
+  label0:$stack2=this.this$0;
+ $stack3 = org.apache.bookkeeper.replication.ReplicationWorker.access$600($stack2);
+ $stack4=this.val$ledgerId;
+ $stack3.releaseUnderreplicatedLedger($stack4);
+ label1:goto label2;
+ label3:$stack5 = catch;
+ $stack6 = org.apache.bookkeeper.replication.ReplicationWorker.access$300();
+ $stack4=this.val$ledgerId;
+ $stack9 = java.lang.Long.valueOf($stack4);
+ $stack6.error("UnavailableException while replicating fragments of ledger {}",(java.lang.Object)$stack9,(java.lang.Object)$stack5);
+ $stack2=this.this$0;
+ $stack2.shutdown();
+ label2:return;
+ catch org.apache.bookkeeper.replication.ReplicationException$UnavailableException: label0 - label1 : label3;
+} 
+

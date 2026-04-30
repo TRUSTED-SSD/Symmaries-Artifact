@@ -1,0 +1,55 @@
+java.lang.String org.apache.bookkeeper.net.AbstractDNSToSwitchMapping:dumpTopology()
+{
+java.util.Map rack;
+  java.lang.StringBuilder builder;
+  java.util.HashSet switches;
+  java.util.Iterator l4;
+  java.util.Map$Entry entry;
+  java.lang.StringBuilder $stack8;
+  java.lang.String $stack12;
+  java.util.Set $stack15;
+  boolean $stack17;
+  int $stack19;
+  java.lang.Object $stack27;
+  rack = this.getSwitchMap();
+ builder=new java.lang.StringBuilder;
+ builder#java.lang.StringBuilder();
+ $stack8 = builder.append("Mapping: ");
+ $stack8 = $stack8.append((java.lang.Object)this);
+ $stack8.append("\n");
+ if (rack==null) goto label0;
+ builder.append("Map:\n");
+ switches=new java.util.HashSet;
+ switches#java.util.HashSet();
+ $stack15 = rack.entrySet();
+ l4 = $stack15.iterator();
+ label1:$stack17 = l4.hasNext();
+ if ($stack17==0) goto label2;
+ $stack27 = l4.next();
+ entry=(java.util.Map$Entry) $stack27;
+ $stack8 = builder.append("  ");
+ $stack27 = entry.getKey();
+ $stack12=(java.lang.String) $stack27;
+ $stack8 = $stack8.append($stack12);
+ $stack8 = $stack8.append(" -> ");
+ $stack27 = entry.getValue();
+ $stack12=(java.lang.String) $stack27;
+ $stack8 = $stack8.append($stack12);
+ $stack8.append("\n");
+ $stack27 = entry.getValue();
+ switches.add($stack27);
+ goto label1;
+ label2:$stack8 = builder.append("Nodes: ");
+ $stack19 = rack.size();
+ $stack8 = $stack8.append($stack19);
+ $stack8.append("\n");
+ $stack8 = builder.append("Switches: ");
+ $stack19 = switches.size();
+ $stack8 = $stack8.append($stack19);
+ $stack8.append("\n");
+ goto label3;
+ label0:builder.append("No topology information");
+ label3:$stack12 = builder.toString();
+ return  $stack12;
+ } 
+

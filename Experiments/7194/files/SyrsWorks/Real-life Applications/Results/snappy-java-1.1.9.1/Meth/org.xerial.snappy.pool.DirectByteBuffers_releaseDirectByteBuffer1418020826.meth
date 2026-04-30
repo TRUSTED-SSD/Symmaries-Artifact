@@ -1,0 +1,38 @@
+static void org.xerial.snappy.pool.DirectByteBuffers:releaseDirectByteBuffer(java.nio.ByteBuffer l0)
+{
+boolean $stack2;
+  java.lang.invoke.MethodHandle $stack3;
+  java.lang.Class $stack4;
+  org.xerial.snappy.pool.DirectByteBuffers$2 $stack6;
+  java.lang.AssertionError $stack8;
+  java.lang.Throwable $stack10;
+  java.lang.String $stack12;
+  java.util.logging.Logger $stack13;
+  java.util.logging.Level $stack14;
+  $stack2=org.xerial.snappy.pool.DirectByteBuffers.$assertionsDisabled;
+ if ($stack2!=0) goto label0;
+ if (l0==null) goto label1;
+ $stack2 = l0.isDirect();
+ if ($stack2!=0) goto label0;
+ label1:$stack8=new java.lang.AssertionError;
+ $stack8#java.lang.AssertionError();
+ throw $stack8;
+ label0:$stack3=org.xerial.snappy.pool.DirectByteBuffers.CLEAN_HANDLE;
+ if ($stack3==null) goto label2;
+ $stack4=org.xerial.snappy.pool.DirectByteBuffers.DIRECT_BUFFER_CLAZZ;
+ $stack2 = $stack4.isInstance((java.lang.Object)l0);
+ if ($stack2==0) goto label2;
+ label3:$stack6=new org.xerial.snappy.pool.DirectByteBuffers$2;
+ $stack6#org.xerial.snappy.pool.DirectByteBuffers$2(l0);
+ java.security.AccessController.doPrivileged((java.security.PrivilegedExceptionAction)$stack6);
+ label4:goto label2;
+ label5:$stack10 = catch;
+ $stack4=org.xerial.snappy.pool.DirectByteBuffers;
+ $stack12 = $stack4.getName();
+ $stack13 = java.util.logging.Logger.getLogger($stack12);
+ $stack14=java.util.logging.Level.FINE;
+ $stack13.log($stack14,"Exception occurred attempting to clean up Sun specific DirectByteBuffer.",$stack10);
+ label2:return;
+ catch java.lang.Throwable: label3 - label4 : label5;
+} 
+

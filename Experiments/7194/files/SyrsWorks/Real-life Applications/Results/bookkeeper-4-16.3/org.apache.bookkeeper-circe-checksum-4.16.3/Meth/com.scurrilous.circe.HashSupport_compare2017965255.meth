@@ -1,0 +1,42 @@
+static int com.scurrilous.circe.HashSupport:compare(java.util.EnumSet set1,java.util.EnumSet set2)
+{
+java.util.Iterator i1;
+  java.util.Iterator i2;
+  int floor;
+  int p1;
+  int p2;
+  boolean $stack9;
+  java.lang.Object $stack15;
+  com.scurrilous.circe.HashSupport $stack16;
+  i1 = set1.iterator();
+ i2 = set2.iterator();
+ floor=0;
+ label0:$stack9 = i1.hasNext();
+ if ($stack9!=0) goto label1;
+ $stack9 = i2.hasNext();
+ if ($stack9==0) goto label2;
+ label1:$stack9 = i1.hasNext();
+ if ($stack9==0) goto label3;
+ $stack15 = i1.next();
+ $stack16=(com.scurrilous.circe.HashSupport) $stack15;
+ p1 = $stack16.getPriority();
+ goto label4;
+ label3:p1=110;
+ label4:if (p1==floor) goto label1;
+ label5:$stack9 = i2.hasNext();
+ if ($stack9==0) goto label6;
+ $stack15 = i2.next();
+ $stack16=(com.scurrilous.circe.HashSupport) $stack15;
+ p2 = $stack16.getPriority();
+ goto label7;
+ label6:p2=110;
+ label7:if (p2==floor) goto label5;
+ if (p1>=p2) goto label8;
+ return  -1;
+ label8:if (p1<=p2) goto label9;
+ return  1;
+ label9:floor=p1;
+ goto label0;
+ label2:return  0;
+ } 
+

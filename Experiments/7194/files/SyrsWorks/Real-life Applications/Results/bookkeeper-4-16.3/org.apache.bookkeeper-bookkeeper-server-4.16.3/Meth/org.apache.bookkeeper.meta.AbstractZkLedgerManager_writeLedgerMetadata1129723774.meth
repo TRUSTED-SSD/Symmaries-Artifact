@@ -1,0 +1,43 @@
+java.util.concurrent.CompletableFuture org.apache.bookkeeper.meta.AbstractZkLedgerManager:writeLedgerMetadata(long ledgerId,org.apache.bookkeeper.client.api.LedgerMetadata metadata,org.apache.bookkeeper.versioning.Version currentVersion)
+{
+java.util.concurrent.CompletableFuture promise;
+  org.apache.bookkeeper.versioning.LongVersion zv;
+  byte[] data;
+  boolean $stack10;
+  org.apache.bookkeeper.meta.LedgerMetadataSerDe $stack11;
+  org.apache.zookeeper.ZooKeeper $stack13;
+  java.lang.String $stack14;
+  long $stack15;
+  org.apache.bookkeeper.meta.AbstractZkLedgerManager$5 $stack16;
+  int $stack17;
+  org.apache.bookkeeper.client.BKException$BKMetadataVersionException $stack18;
+  java.io.IOException $stack20;
+  org.apache.bookkeeper.client.BKException$BKMetadataSerializationException $stack21;
+  promise=new java.util.concurrent.CompletableFuture;
+ promise#java.util.concurrent.CompletableFuture();
+ $stack10=currentVersion instanceof org.apache.bookkeeper.versioning.LongVersion;
+ if ($stack10!=0) goto label0;
+ $stack18=new org.apache.bookkeeper.client.BKException$BKMetadataVersionException;
+ $stack18#org.apache.bookkeeper.client.BKException$BKMetadataVersionException();
+ promise.completeExceptionally((java.lang.Throwable)$stack18);
+ return  promise;
+ label0:zv=(org.apache.bookkeeper.versioning.LongVersion) currentVersion;
+ label1:$stack11=this.serDe;
+ data = $stack11.serialize(metadata);
+ label2:goto label3;
+ label4:$stack20 = catch;
+ $stack21=new org.apache.bookkeeper.client.BKException$BKMetadataSerializationException;
+ $stack21#org.apache.bookkeeper.client.BKException$BKMetadataSerializationException((java.lang.Throwable)$stack20);
+ promise.completeExceptionally((java.lang.Throwable)$stack21);
+ return  promise;
+ label3:$stack13=this.zk;
+ $stack14 = this.getLedgerPath(ledgerId);
+ $stack15 = zv.getLongVersion();
+ $stack17=(int) $stack15;
+ $stack16=new org.apache.bookkeeper.meta.AbstractZkLedgerManager$5;
+ $stack16#org.apache.bookkeeper.meta.AbstractZkLedgerManager$5(this,promise,metadata,ledgerId);
+ $stack13.setData($stack14,data,$stack17,(org.apache.zookeeper.AsyncCallback$StatCallback)$stack16,null);
+ return  promise;
+ catch java.io.IOException: label1 - label2 : label4;
+} 
+

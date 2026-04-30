@@ -1,0 +1,29 @@
+void org.apache.bookkeeper.client.LedgerHandle$10:readComplete(int rc,org.apache.bookkeeper.client.LedgerHandle @lh,java.util.Enumeration seq,java.lang.Object ctx)
+{
+org.apache.bookkeeper.client.AsyncCallback$ReadLastConfirmedAndEntryCallback $stack5;
+  boolean $stack6;
+  long $stack9;
+  java.lang.Object $stack13;
+  org.apache.bookkeeper.client.LedgerEntry $stack14;
+  org.apache.bookkeeper.client.LedgerHandle lh;
+lh=@lh;
+if (0!=rc) goto label0;
+ $stack6 = seq.hasMoreElements();
+ if ($stack6==0) goto label1;
+ $stack5=this.val$cb;
+ lh=this.this$0;
+ $stack9 = lh.getLastAddConfirmed();
+ $stack13 = seq.nextElement();
+ $stack14=(org.apache.bookkeeper.client.LedgerEntry) $stack13;
+ $stack5.readLastConfirmedAndEntryComplete(rc,$stack9,$stack14,ctx);
+ goto label2;
+ label1:$stack5=this.val$cb;
+ lh=this.this$0;
+ $stack9 = lh.getLastAddConfirmed();
+ $stack5.readLastConfirmedAndEntryComplete(rc,$stack9,null,ctx);
+ goto label2;
+ label0:$stack5=this.val$cb;
+ $stack5.readLastConfirmedAndEntryComplete(rc,-1L,null,ctx);
+ label2:return;
+ } 
+

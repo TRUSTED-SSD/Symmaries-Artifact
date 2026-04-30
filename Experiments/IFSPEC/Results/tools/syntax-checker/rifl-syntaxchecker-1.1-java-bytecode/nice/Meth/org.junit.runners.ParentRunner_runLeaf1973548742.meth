@@ -1,0 +1,32 @@
+void org.junit.runners.ParentRunner:runLeaf(org.junit.runners.model.Statement statement,org.junit.runner.Description description,org.junit.runner.notification.RunNotifier notifier)
+{
+org.junit.internal.runners.model.EachTestNotifier eachNotifier;
+  java.lang.Throwable l6;
+  org.junit.internal.AssumptionViolatedException $stack9;
+  java.lang.Throwable $stack10;
+  eachNotifier=new org.junit.internal.runners.model.EachTestNotifier;
+ eachNotifier#org.junit.internal.runners.model.EachTestNotifier(notifier,description);
+ eachNotifier.fireTestStarted();
+ label0:statement.evaluate();
+ label1:eachNotifier.fireTestFinished();
+ goto label2;
+ label3:$stack9 = catch;
+ eachNotifier.addFailedAssumption($stack9);
+ label4:eachNotifier.fireTestFinished();
+ goto label2;
+ label5:l6 = catch;
+ eachNotifier.addFailure(l6);
+ label6:eachNotifier.fireTestFinished();
+ goto label2;
+ label7:$stack10 = catch;
+ l6=$stack10;
+ label8:eachNotifier.fireTestFinished();
+ throw $stack10;
+ label2:return;
+ catch org.junit.internal.AssumptionViolatedException: label0 - label1 : label3;
+catch java.lang.Throwable: label0 - label1 : label5;
+catch java.lang.Throwable: label3 - label4 : label7;
+catch java.lang.Throwable: label5 - label6 : label7;
+catch java.lang.Throwable: label7 - label8 : label7;
+} 
+

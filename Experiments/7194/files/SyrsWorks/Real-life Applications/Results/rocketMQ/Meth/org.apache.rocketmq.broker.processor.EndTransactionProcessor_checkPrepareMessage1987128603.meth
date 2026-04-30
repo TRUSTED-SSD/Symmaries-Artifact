@@ -1,0 +1,43 @@
+org.apache.rocketmq.remoting.protocol.RemotingCommand org.apache.rocketmq.broker.processor.EndTransactionProcessor:checkPrepareMessage(org.apache.rocketmq.common.message.MessageExt msgExt,org.apache.rocketmq.remoting.protocol.header.EndTransactionRequestHeader requestHeader)
+{
+org.apache.rocketmq.remoting.protocol.RemotingCommand response;
+  java.lang.String pgroupRead;
+  java.lang.String $stack7;
+  boolean $stack8;
+  long $stack9;
+  java.lang.Long $stack10;
+  long $stack11;
+  byte $stack12;
+  response = org.apache.rocketmq.remoting.protocol.RemotingCommand.createResponseCommand(null);
+ if (msgExt==null) goto label0;
+ pgroupRead = msgExt.getProperty("PGROUP");
+ $stack7 = requestHeader.getProducerGroup();
+ $stack8 = pgroupRead.equals((java.lang.Object)$stack7);
+ if ($stack8!=0) goto label1;
+ response.setCode(1);
+ response.setRemark("The producer group wrong");
+ return  response;
+ label1:$stack9 = msgExt.getQueueOffset();
+ $stack10 = requestHeader.getTranStateTableOffset();
+ $stack11 = $stack10.longValue();
+ $stack12=($stack9 cmp $stack11);
+ if ($stack12==0) goto label2;
+ response.setCode(1);
+ response.setRemark("The transaction state table offset wrong");
+ return  response;
+ label2:$stack9 = msgExt.getCommitLogOffset();
+ $stack10 = requestHeader.getCommitLogOffset();
+ $stack11 = $stack10.longValue();
+ $stack12=($stack9 cmp $stack11);
+ if ($stack12==0) goto label3;
+ response.setCode(1);
+ response.setRemark("The commit log offset wrong");
+ return  response;
+ label3:goto label4;
+ label0:response.setCode(1);
+ response.setRemark("Find prepared transaction message failed");
+ return  response;
+ label4:response.setCode(0);
+ return  response;
+ } 
+

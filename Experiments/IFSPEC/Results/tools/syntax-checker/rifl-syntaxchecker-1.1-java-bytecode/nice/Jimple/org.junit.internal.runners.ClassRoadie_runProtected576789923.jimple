@@ -1,0 +1,54 @@
+    public void runProtected()
+    {
+        org.junit.internal.runners.ClassRoadie this;
+        org.junit.internal.runners.FailedBefore e;
+        java.lang.Throwable l2;
+
+        this := @this: org.junit.internal.runners.ClassRoadie;
+
+     label1:
+        specialinvoke this.<org.junit.internal.runners.ClassRoadie: void runBefores()>();
+/*43*/
+
+        virtualinvoke this.<org.junit.internal.runners.ClassRoadie: void runUnprotected()>();
+/*44*/
+
+     label2:
+        specialinvoke this.<org.junit.internal.runners.ClassRoadie: void runAfters()>();
+/*47*/
+
+        goto label7;
+/*48*/
+
+     label3:
+        e := @caughtexception;
+/*47*/
+
+     label4:
+        specialinvoke this.<org.junit.internal.runners.ClassRoadie: void runAfters()>();
+/*47*/
+
+        goto label7;
+/*48*/
+
+     label5:
+        l2 := @caughtexception;
+/*49*/
+
+     label6:
+        specialinvoke this.<org.junit.internal.runners.ClassRoadie: void runAfters()>();
+/*47*/
+
+        throw l2;
+/*47*/
+
+     label7:
+        return;
+/*49*/
+
+        catch org.junit.internal.runners.FailedBefore from label1 to label2 with label3;
+        catch java.lang.Throwable from label1 to label2 with label5;
+        catch java.lang.Throwable from label3 to label4 with label5;
+        catch java.lang.Throwable from label5 to label6 with label5;
+    }
+

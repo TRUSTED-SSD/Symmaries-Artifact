@@ -1,0 +1,37 @@
+org.apache.bookkeeper.client.DistributionSchedule$WriteSet org.apache.bookkeeper.client.RegionAwareEnsemblePlacementPolicy:reorderReadSequence(java.util.List ensemble,org.apache.bookkeeper.client.BookiesHealthInfo bookiesHealthInfo,org.apache.bookkeeper.client.DistributionSchedule$WriteSet @writeSet)
+{
+java.util.HashMap writeSetWithRegion;
+  int i;
+  int idx;
+  java.lang.String $stack7;
+  java.lang.String $stack8;
+  boolean $stack9;
+  java.lang.Integer $stack15;
+  java.lang.Object $stack16;
+  org.apache.bookkeeper.net.BookieId $stack17;
+  org.apache.bookkeeper.client.DistributionSchedule$WriteSet writeSet;
+writeSet=@writeSet;
+$stack8="UnknownRegion";
+ $stack7=this.myRegion;
+ $stack9 = $stack8.equals((java.lang.Object)$stack7);
+ if ($stack9==0) goto label0;
+ writeSet = this#org.apache.bookkeeper.client.RackawareEnsemblePlacementPolicy:reorderReadSequence(ensemble,bookiesHealthInfo,writeSet);
+ return  writeSet;
+ label0:writeSetWithRegion=new java.util.HashMap;
+ writeSetWithRegion#java.util.HashMap();
+ i=0;
+ label1:idx = writeSet.size();
+ if (i>=idx) goto label2;
+ idx = writeSet.get(i);
+ $stack15 = java.lang.Integer.valueOf(idx);
+ $stack16 = ensemble.get(idx);
+ $stack17=(org.apache.bookkeeper.net.BookieId) $stack16;
+ $stack7 = this.getRegion($stack17);
+ writeSetWithRegion.put((java.lang.Object)$stack15,(java.lang.Object)$stack7);
+ i=(i+1);
+ goto label1;
+ label2:$stack7=this.myRegion;
+ writeSet = this#org.apache.bookkeeper.client.RackawareEnsemblePlacementPolicyImpl:reorderReadSequenceWithRegion(ensemble,writeSet,(java.util.Map)writeSetWithRegion,bookiesHealthInfo,(boolean)1,$stack7,2);
+ return  writeSet;
+ } 
+

@@ -1,0 +1,30 @@
+static org.apache.rocketmq.common.attribute.TopicMessageType org.apache.rocketmq.common.attribute.TopicMessageType:parseFromMessageProperty(java.util.Map messageProperty)
+{
+java.lang.String isTrans;
+  java.lang.String isTransValue;
+  java.lang.Object $stack3;
+  boolean $stack4;
+  org.apache.rocketmq.common.attribute.TopicMessageType $stack6;
+  $stack3 = messageProperty.get((java.lang.Object)"TRAN_MSG");
+ isTrans=(java.lang.String) $stack3;
+ isTransValue="true";
+ $stack4 = isTransValue.equals((java.lang.Object)isTrans);
+ if ($stack4==0) goto label0;
+ $stack6=org.apache.rocketmq.common.attribute.TopicMessageType.TRANSACTION;
+ return  $stack6;
+ label0:$stack3 = messageProperty.get((java.lang.Object)"DELAY");
+ if ($stack3!=null) goto label1;
+ $stack3 = messageProperty.get((java.lang.Object)"TIMER_DELIVER_MS");
+ if ($stack3!=null) goto label1;
+ $stack3 = messageProperty.get((java.lang.Object)"TIMER_DELAY_SEC");
+ if ($stack3==null) goto label2;
+ label1:$stack6=org.apache.rocketmq.common.attribute.TopicMessageType.DELAY;
+ return  $stack6;
+ label2:$stack3 = messageProperty.get((java.lang.Object)"__SHARDINGKEY");
+ if ($stack3==null) goto label3;
+ $stack6=org.apache.rocketmq.common.attribute.TopicMessageType.FIFO;
+ return  $stack6;
+ label3:$stack6=org.apache.rocketmq.common.attribute.TopicMessageType.NORMAL;
+ return  $stack6;
+ } 
+

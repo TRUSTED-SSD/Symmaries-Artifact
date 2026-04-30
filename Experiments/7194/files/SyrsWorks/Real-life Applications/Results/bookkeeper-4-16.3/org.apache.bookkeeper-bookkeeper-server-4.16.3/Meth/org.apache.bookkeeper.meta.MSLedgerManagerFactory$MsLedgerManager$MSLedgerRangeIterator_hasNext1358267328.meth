@@ -1,0 +1,31 @@
+boolean org.apache.bookkeeper.meta.MSLedgerManagerFactory$MsLedgerManager$MSLedgerRangeIterator:hasNext()
+{
+java.lang.InterruptedException ie;
+  java.util.concurrent.CountDownLatch $stack2;
+  org.apache.bookkeeper.metastore.MetastoreCursor $stack3;
+  boolean $stack5;
+  java.io.IOException $stack6;
+  org.slf4j.Logger $stack8;
+  java.lang.Thread $stack9;
+  label0:$stack2=this.openCursorLatch;
+ $stack2.await();
+ label1:goto label2;
+ label3:ie = catch;
+ $stack8 = org.apache.bookkeeper.meta.MSLedgerManagerFactory.access$000();
+ $stack8.error("Interrupted waiting for cursor to open",(java.lang.Throwable)ie);
+ $stack9 = java.lang.Thread.currentThread();
+ $stack9.interrupt();
+ $stack6=new java.io.IOException;
+ $stack6#java.io.IOException("Interrupted waiting to read range",(java.lang.Throwable)ie);
+ throw $stack6;
+ label2:$stack3=this.cursor;
+ if ($stack3!=null) goto label4;
+ $stack6=new java.io.IOException;
+ $stack6#java.io.IOException("Failed to open ledger range cursor, check logs");
+ throw $stack6;
+ label4:$stack3=this.cursor;
+ $stack5 = $stack3.hasMoreEntries();
+ return  $stack5;
+ catch java.lang.InterruptedException: label0 - label1 : label3;
+} 
+

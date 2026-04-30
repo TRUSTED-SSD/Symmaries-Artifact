@@ -1,0 +1,18 @@
+void org.apache.rocketmq.store.ha.autoswitch.AutoSwitchHAConnection:changeTransferEpochToNext(org.apache.rocketmq.remoting.protocol.EpochEntry entry)
+{
+int $stack2;
+  long $stack3;
+  org.apache.rocketmq.store.ha.autoswitch.EpochFileCache $stack5;
+  int $stack6;
+  $stack2 = entry.getEpoch();
+ this.currentTransferEpoch=$stack2;
+ $stack3 = entry.getEndOffset();
+ this.currentTransferEpochEndOffset=$stack3;
+ $stack2 = entry.getEpoch();
+ $stack5=this.epochCache;
+ $stack6 = $stack5.lastEpoch();
+ if ($stack2!=$stack6) goto label0;
+ this.currentTransferEpochEndOffset=-1L;
+ label0:return;
+ } 
+

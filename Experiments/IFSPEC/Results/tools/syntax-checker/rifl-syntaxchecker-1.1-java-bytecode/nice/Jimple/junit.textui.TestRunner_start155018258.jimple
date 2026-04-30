@@ -1,0 +1,235 @@
+    public junit.framework.TestResult start(java.lang.String[]) throws java.lang.Exception
+    {
+        junit.textui.TestRunner this;
+        java.lang.String[] args;
+        java.lang.String testCase, method, $stack15;
+        boolean wait, $stack9;
+        int i, lastIndex;
+        junit.framework.TestResult $stack12;
+        java.lang.Exception $stack14, tmp$1180713466;
+        java.lang.StringBuilder $stack25;
+        java.io.PrintStream $stack26;
+        junit.framework.Test tmp$1934748029;
+
+        this := @this: junit.textui.TestRunner;
+
+        args := @parameter0: java.lang.String[];
+
+        testCase = "";
+/*153*/
+
+        method = "";
+/*154*/
+
+        wait = 0;
+/*155*/
+
+        i = 0;
+/*157*/
+
+     label01:
+        lastIndex = lengthof args;
+/*157*/
+
+        if i >= lastIndex goto label07;
+/*157*/
+
+        $stack15 = args[i];
+/*158*/
+
+        $stack9 = virtualinvoke $stack15.<java.lang.String: boolean equals(java.lang.Object)>("-wait");
+/*158*/
+
+        if $stack9 == 0 goto label02;
+/*158*/
+
+        wait = 1;
+/*159*/
+
+        goto label06;
+/*159*/
+
+     label02:
+        $stack15 = args[i];
+/*160*/
+
+        $stack9 = virtualinvoke $stack15.<java.lang.String: boolean equals(java.lang.Object)>("-c");
+/*160*/
+
+        if $stack9 == 0 goto label03;
+/*160*/
+
+        i = i + 1;
+/*161*/
+
+        testCase = args[i];
+/*161*/
+
+        testCase = virtualinvoke this.<junit.textui.TestRunner: java.lang.String extractClassName(java.lang.String)>(testCase);
+/*161*/
+/*161*/
+
+        goto label06;
+/*161*/
+
+     label03:
+        $stack15 = args[i];
+/*162*/
+
+        $stack9 = virtualinvoke $stack15.<java.lang.String: boolean equals(java.lang.Object)>("-m");
+/*162*/
+
+        if $stack9 == 0 goto label04;
+/*162*/
+
+        i = i + 1;
+/*163*/
+
+        method = args[i];
+/*163*/
+
+        lastIndex = virtualinvoke method.<java.lang.String: int lastIndexOf(int)>(46);
+/*164*/
+/*164*/
+
+        testCase = virtualinvoke method.<java.lang.String: java.lang.String substring(int,int)>(0, lastIndex);
+/*165*/
+/*165*/
+
+        lastIndex = lastIndex + 1;
+/*166*/
+
+        method = virtualinvoke method.<java.lang.String: java.lang.String substring(int)>(lastIndex);
+/*166*/
+/*166*/
+
+        goto label06;
+/*167*/
+
+     label04:
+        $stack15 = args[i];
+/*162*/
+
+        $stack9 = virtualinvoke $stack15.<java.lang.String: boolean equals(java.lang.Object)>("-v");
+/*162*/
+
+        if $stack9 == 0 goto label05;
+/*162*/
+
+        $stack26 = <java.lang.System: java.io.PrintStream err>;
+/*168*/
+
+        $stack25 = new java.lang.StringBuilder;
+/*168*/
+
+        specialinvoke $stack25.<java.lang.StringBuilder: void <init>()>();
+/*168*/
+
+        $stack25 = virtualinvoke $stack25.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>("JUnit ");
+/*168*/
+
+        $stack15 = staticinvoke <junit.runner.Version: java.lang.String id()>();
+/*168*/
+
+        $stack25 = virtualinvoke $stack25.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>($stack15);
+/*168*/
+
+        $stack25 = virtualinvoke $stack25.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>(" by Kent Beck and Erich Gamma");
+/*168*/
+
+        $stack15 = virtualinvoke $stack25.<java.lang.StringBuilder: java.lang.String toString()>();
+/*168*/
+
+        virtualinvoke $stack26.<java.io.PrintStream: void println(java.lang.String)>($stack15);
+/*168*/
+
+        goto label06;
+/*168*/
+
+     label05:
+        testCase = args[i];
+/*170*/
+
+     label06:
+        i = i + 1;
+/*157*/
+
+        goto label01;
+/*157*/
+
+     label07:
+        $stack9 = virtualinvoke testCase.<java.lang.String: boolean equals(java.lang.Object)>("");
+/*174*/
+
+        if $stack9 == 0 goto label08;
+/*174*/
+
+        $stack14 = new java.lang.Exception;
+/*175*/
+
+        specialinvoke $stack14.<java.lang.Exception: void <init>(java.lang.String)>("Usage: TestRunner [-wait] testCaseName, where name is the name of the TestCase class");
+/*175*/
+
+        throw $stack14;
+/*175*/
+
+     label08:
+        $stack9 = virtualinvoke method.<java.lang.String: boolean equals(java.lang.Object)>("");
+/*179*/
+
+        if $stack9 != 0 goto label10;
+/*179*/
+
+        $stack12 = virtualinvoke this.<junit.textui.TestRunner: junit.framework.TestResult runSingleMethod(java.lang.String,java.lang.String,boolean)>(testCase, method, wait);
+/*180*/
+
+     label09:
+        return $stack12;
+/*180*/
+
+     label10:
+        tmp$1934748029 = virtualinvoke this.<junit.textui.TestRunner: junit.framework.Test getTest(java.lang.String)>(testCase);
+
+        i = (int) tmp$1934748029;
+
+        tmp$1934748029 = (junit.framework.Test) i;
+
+        $stack12 = virtualinvoke this.<junit.textui.TestRunner: junit.framework.TestResult doRun(junit.framework.Test,boolean)>(tmp$1934748029, wait);
+/*183*/
+
+     label11:
+        return $stack12;
+/*183*/
+
+     label12:
+        $stack14 := @caughtexception;
+/*157*/
+
+        tmp$1180713466 = new java.lang.Exception;
+/*185*/
+
+        $stack25 = new java.lang.StringBuilder;
+/*185*/
+
+        specialinvoke $stack25.<java.lang.StringBuilder: void <init>()>();
+/*185*/
+
+        $stack25 = virtualinvoke $stack25.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>("Could not create and run test suite: ");
+/*185*/
+
+        $stack25 = virtualinvoke $stack25.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.Object)>($stack14);
+/*185*/
+
+        testCase = virtualinvoke $stack25.<java.lang.StringBuilder: java.lang.String toString()>();
+/*185*/
+
+        specialinvoke tmp$1180713466.<java.lang.Exception: void <init>(java.lang.String)>(testCase);
+/*185*/
+
+        throw tmp$1180713466;
+/*185*/
+
+        catch java.lang.Exception from label08 to label09 with label12;
+        catch java.lang.Exception from label10 to label11 with label12;
+    }
+

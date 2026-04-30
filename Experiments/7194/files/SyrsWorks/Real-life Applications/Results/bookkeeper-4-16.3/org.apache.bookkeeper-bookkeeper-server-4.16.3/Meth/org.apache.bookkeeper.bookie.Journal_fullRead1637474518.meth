@@ -1,0 +1,15 @@
+static int org.apache.bookkeeper.bookie.Journal:fullRead(org.apache.bookkeeper.bookie.JournalChannel fc,java.nio.ByteBuffer bb)
+{
+int total;
+  int rc;
+  total=0;
+ label0:rc = bb.remaining();
+ if (rc<=0) goto label1;
+ rc = fc.read(bb);
+ if (rc>0) goto label2;
+ return  total;
+ label2:total=(total+rc);
+ goto label0;
+ label1:return  total;
+ } 
+

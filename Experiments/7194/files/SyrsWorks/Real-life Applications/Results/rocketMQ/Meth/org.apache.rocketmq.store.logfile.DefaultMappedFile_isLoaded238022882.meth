@@ -1,0 +1,48 @@
+boolean org.apache.rocketmq.store.logfile.DefaultMappedFile:isLoaded(long position,int size)
+{
+java.lang.reflect.Method $stack6;
+  java.nio.MappedByteBuffer $stack7;
+  sun.nio.ch.DirectBuffer $stack8;
+  long $stack9;
+  java.lang.Object[] $stack10;
+  java.lang.Long $stack15;
+  java.lang.Integer $stack17;
+  java.lang.Object $stack22;
+  java.lang.Boolean $stack23;
+  boolean $stack24;
+  java.lang.Exception $stack25;
+  java.io.File $stack26;
+  org.apache.rocketmq.logging.org.slf4j.Logger $stack27;
+  java.lang.String $stack29;
+  $stack6=org.apache.rocketmq.store.logfile.DefaultMappedFile.IS_LOADED_METHOD;
+ if ($stack6!=null) goto label0;
+ return  1;
+ label0:$stack7=this.mappedByteBuffer;
+ $stack8=(sun.nio.ch.DirectBuffer) $stack7;
+ $stack9 = $stack8.address();
+ position=($stack9+position);
+ $stack6=org.apache.rocketmq.store.logfile.DefaultMappedFile.IS_LOADED_METHOD;
+ $stack7=this.mappedByteBuffer;
+ $stack10=new java.lang.Object[3];
+ position = org.apache.rocketmq.store.logfile.DefaultMappedFile.mappingAddr(position);
+ $stack15 = java.lang.Long.valueOf(position);
+ $stack10[0]=$stack15;
+ $stack17 = java.lang.Integer.valueOf(size);
+ $stack10[1]=$stack17;
+ position=(long) size;
+ size = org.apache.rocketmq.store.logfile.DefaultMappedFile.pageCount(position);
+ $stack17 = java.lang.Integer.valueOf(size);
+ $stack10[2]=$stack17;
+ $stack22 = $stack6.invoke((java.lang.Object)$stack7,$stack10);
+ $stack23=(java.lang.Boolean) $stack22;
+ $stack24 = $stack23.booleanValue();
+ label1:return  $stack24;
+ label2:$stack25 = catch;
+ $stack27=org.apache.rocketmq.store.logfile.DefaultMappedFile.log;
+ $stack26=this.file;
+ $stack29 = $stack26.getAbsolutePath();
+ $stack27.info("invoke isLoaded0 of file {} error:",(java.lang.Object)$stack29,(java.lang.Object)$stack25);
+ return  1;
+ catch java.lang.Exception: label0 - label1 : label2;
+} 
+

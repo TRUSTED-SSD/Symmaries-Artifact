@@ -1,0 +1,41 @@
+static java.lang.String org.keycloak.common.util.reflections.Reflections:buildInvokeMethodErrorMessage(java.lang.reflect.Method method,java.lang.Object @obj,java.lang.Object[] args)
+{
+java.lang.StringBuilder message;
+  int i;
+  java.lang.Object[] $stack6;
+  java.lang.String $stack9;
+  java.lang.StringBuilder $stack11;
+  int $stack13;
+  java.lang.StringBuilder $stack17;
+  java.lang.Object obj;
+obj=@obj;
+message=new java.lang.StringBuilder;
+ $stack6=new java.lang.Object[2];
+ $stack9 = method.getName();
+ $stack6[0]=$stack9;
+ $stack6[1]=obj;
+ $stack9 = java.lang.String.format("Exception invoking method [%s] on object [%s], using arguments [",$stack6);
+ message#java.lang.StringBuilder($stack9);
+ if (args==null) goto label0;
+ i=0;
+ label1:$stack13=#args;
+ if (i>=$stack13) goto label0;
+ $stack11=message;
+ $stack17=new java.lang.StringBuilder;
+ $stack17#java.lang.StringBuilder();
+ if (i<=0) goto label2;
+ $stack9=",";
+ goto label3;
+ label2:$stack9="";
+ label3:$stack17 = $stack17.append($stack9);
+ obj=args[i];
+ $stack17 = $stack17.append(obj);
+ $stack9 = $stack17.toString();
+ $stack11.append($stack9);
+ i=(i+1);
+ goto label1;
+ label0:message.append("]");
+ $stack9 = message.toString();
+ return  $stack9;
+ } 
+

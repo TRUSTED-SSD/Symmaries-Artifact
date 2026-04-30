@@ -1,0 +1,35 @@
+void org.apache.bookkeeper.meta.MSLedgerManagerFactory$MsLedgerManager$5:complete(int rc,org.apache.bookkeeper.metastore.MetastoreCursor cursor,java.lang.Object @ctx)
+{
+org.apache.bookkeeper.metastore.MSException$Code $stack4;
+  int $stack5;
+  boolean $stack6;
+  org.apache.zookeeper.AsyncCallback$VoidCallback $stack10;
+  org.apache.bookkeeper.proto.BookkeeperInternalCallbacks$Processor $stack11;
+  org.apache.bookkeeper.meta.MSLedgerManagerFactory$MsLedgerManager $stack12;
+  java.lang.Object ctx;
+ctx=@ctx;
+$stack4=org.apache.bookkeeper.metastore.MSException$Code.OK;
+ $stack5 = $stack4.getCode();
+ if ($stack5==rc) goto label0;
+ $stack10=this.val$finalCb;
+ rc=this.val$failureRc;
+ ctx=this.val$context;
+ $stack10.processResult(rc,null,ctx);
+ return;
+ label0:$stack6 = cursor.hasMoreEntries();
+ if ($stack6!=0) goto label1;
+ $stack10=this.val$finalCb;
+ rc=this.val$successRc;
+ ctx=this.val$context;
+ $stack10.processResult(rc,null,ctx);
+ return;
+ label1:$stack12=this.this$0;
+ $stack11=this.val$processor;
+ $stack10=this.val$finalCb;
+ ctx=this.val$context;
+ $stack5=this.val$successRc;
+ rc=this.val$failureRc;
+ $stack12.asyncProcessLedgers(cursor,$stack11,$stack10,ctx,$stack5,rc);
+ return;
+ } 
+

@@ -1,0 +1,42 @@
+java.util.List org.apache.rocketmq.broker.out.BrokerOuterAPI:dnsLookupAddressByDomain(java.lang.String domain)
+{
+java.util.ArrayList addressList;
+  int index;
+  java.lang.String portStr;
+  java.lang.String domainStr;
+  java.net.InetAddress[] l7;
+  int l9;
+  java.net.InetAddress address;
+  org.apache.rocketmq.logging.org.slf4j.Logger $stack16;
+  java.lang.StringBuilder $stack17;
+  java.lang.Exception $stack25;
+  addressList=new java.util.ArrayList;
+ addressList#java.util.ArrayList();
+ label0:java.security.Security.setProperty("networkaddress.cache.ttl","10");
+ index = domain.indexOf(":");
+ portStr = domain.substring(index);
+ domainStr = domain.substring(0,index);
+ l7 = java.net.InetAddress.getAllByName(domainStr);
+ index=#l7;
+ l9=0;
+ label1:if (l9>=index) goto label2;
+ address=l7[l9];
+ $stack17=new java.lang.StringBuilder;
+ $stack17#java.lang.StringBuilder();
+ domainStr = address.getHostAddress();
+ $stack17 = $stack17.append(domainStr);
+ $stack17 = $stack17.append(portStr);
+ domainStr = $stack17.toString();
+ addressList.add((java.lang.Object)domainStr);
+ l9=(l9+1);
+ goto label1;
+ label2:$stack16=org.apache.rocketmq.broker.out.BrokerOuterAPI.LOGGER;
+ $stack16.info("dns lookup address by domain success, domain={}, result={}",(java.lang.Object)domain,(java.lang.Object)addressList);
+ label3:goto label4;
+ label5:$stack25 = catch;
+ $stack16=org.apache.rocketmq.broker.out.BrokerOuterAPI.LOGGER;
+ $stack16.error("dns lookup address by domain error, domain={}",(java.lang.Object)domain,(java.lang.Object)$stack25);
+ label4:return  addressList;
+ catch java.lang.Exception: label0 - label3 : label5;
+} 
+

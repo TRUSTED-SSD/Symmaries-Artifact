@@ -1,0 +1,49 @@
+void org.apache.rocketmq.store.logfile.DefaultMappedFile:munlock()
+{
+long beginTime;
+  long address;
+  int ret;
+  java.nio.MappedByteBuffer $stack8;
+  sun.nio.ch.DirectBuffer $stack9;
+  com.sun.jna.Pointer $stack12;
+  com.sun.jna.NativeLong $stack13;
+  long $stack15;
+  org.apache.rocketmq.store.util.LibC $stack16;
+  java.lang.Object[] $stack18;
+  org.apache.rocketmq.logging.org.slf4j.Logger $stack19;
+  java.lang.Long $stack22;
+  java.lang.String $stack23;
+  int $stack24;
+  java.lang.Integer $stack26;
+  beginTime = java.lang.System.currentTimeMillis();
+ $stack8=this.mappedByteBuffer;
+ $stack9=(sun.nio.ch.DirectBuffer) $stack8;
+ $stack9=(sun.nio.ch.DirectBuffer) $stack9;
+ address = $stack9.address();
+ $stack12=new com.sun.jna.Pointer;
+ $stack12#com.sun.jna.Pointer(address);
+ $stack16=org.apache.rocketmq.store.util.LibC.INSTANCE;
+ $stack13=new com.sun.jna.NativeLong;
+ ret=this.fileSize;
+ $stack15=(long) ret;
+ $stack13#com.sun.jna.NativeLong($stack15);
+ ret = $stack16.munlock($stack12,$stack13);
+ $stack19=org.apache.rocketmq.store.logfile.DefaultMappedFile.log;
+ $stack18=new java.lang.Object[5];
+ $stack22 = java.lang.Long.valueOf(address);
+ $stack18[0]=$stack22;
+ $stack23=this.fileName;
+ $stack18[1]=$stack23;
+ $stack24=this.fileSize;
+ $stack26 = java.lang.Integer.valueOf($stack24);
+ $stack18[2]=$stack26;
+ $stack26 = java.lang.Integer.valueOf(ret);
+ $stack18[3]=$stack26;
+ address = java.lang.System.currentTimeMillis();
+ beginTime=(address-beginTime);
+ $stack22 = java.lang.Long.valueOf(beginTime);
+ $stack18[4]=$stack22;
+ $stack19.info("munlock {} {} {} ret = {} time consuming = {}",$stack18);
+ return;
+ } 
+

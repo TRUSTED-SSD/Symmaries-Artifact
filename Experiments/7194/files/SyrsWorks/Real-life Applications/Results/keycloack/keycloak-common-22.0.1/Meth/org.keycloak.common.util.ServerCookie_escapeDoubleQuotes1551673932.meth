@@ -1,0 +1,40 @@
+static java.lang.String org.keycloak.common.util.ServerCookie:escapeDoubleQuotes(java.lang.String @s,int beginIndex,int endIndex)
+{
+java.lang.StringBuffer b;
+  char c;
+  int $stack6;
+  java.lang.StringBuffer $stack12;
+  java.lang.IllegalArgumentException $stack20;
+  java.lang.String s;
+s=@s;
+if (s==null) goto label0;
+ $stack6 = s.length();
+ if ($stack6==0) goto label0;
+ $stack6 = s.indexOf(34);
+ if ($stack6!=-1) goto label1;
+ label0:return  s;
+ label1:b=new java.lang.StringBuffer;
+ b#java.lang.StringBuffer();
+ label2:if (beginIndex>=endIndex) goto label3;
+ c = s.charAt(beginIndex);
+ if (c!=92) goto label4;
+ b.append(c);
+ beginIndex=(beginIndex+1);
+ if (beginIndex<endIndex) goto label5;
+ $stack20=new java.lang.IllegalArgumentException;
+ $stack20#java.lang.IllegalArgumentException("Invalid escape character in cookie value.");
+ throw $stack20;
+ label5:c = s.charAt(beginIndex);
+ b.append(c);
+ goto label6;
+ label4:if (c!=34) goto label7;
+ $stack12 = b.append((char)92);
+ $stack12.append((char)34);
+ goto label6;
+ label7:b.append(c);
+ label6:beginIndex=(beginIndex+1);
+ goto label2;
+ label3:s = b.toString();
+ return  s;
+ } 
+

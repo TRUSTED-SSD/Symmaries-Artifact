@@ -1,0 +1,36 @@
+com.google.zxing.ResultPoint[] com.google.zxing.datamatrix.detector.Detector:detectSolid2(com.google.zxing.ResultPoint[] points)
+{
+com.google.zxing.ResultPoint pointA;
+  com.google.zxing.ResultPoint pointB;
+  com.google.zxing.ResultPoint pointC;
+  com.google.zxing.ResultPoint pointD;
+  int tr;
+  com.google.zxing.ResultPoint pointBs;
+  com.google.zxing.ResultPoint pointCs;
+  int trCD;
+  pointA=points[0];
+ pointB=points[1];
+ pointC=points[2];
+ pointD=points[3];
+ tr = this#com.google.zxing.datamatrix.detector.Detector:transitionsBetween(pointA,pointD);
+ trCD=(tr+1);
+ trCD=(trCD * 4);
+ pointBs = com.google.zxing.datamatrix.detector.Detector.shiftPoint(pointB,pointC,trCD);
+ tr=(tr+1);
+ tr=(tr * 4);
+ pointCs = com.google.zxing.datamatrix.detector.Detector.shiftPoint(pointC,pointB,tr);
+ tr = this#com.google.zxing.datamatrix.detector.Detector:transitionsBetween(pointBs,pointA);
+ trCD = this#com.google.zxing.datamatrix.detector.Detector:transitionsBetween(pointCs,pointD);
+ if (tr>=trCD) goto label0;
+ points[0]=pointA;
+ points[1]=pointB;
+ points[2]=pointC;
+ points[3]=pointD;
+ goto label1;
+ label0:points[0]=pointB;
+ points[1]=pointC;
+ points[2]=pointD;
+ points[3]=pointA;
+ label1:return  points;
+ } 
+

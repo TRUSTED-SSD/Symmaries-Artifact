@@ -1,0 +1,31 @@
+rifl.spec.CatSrcSnk rifl.spec.RIFLReader:readCategoryTree(org.w3c.dom.Element catSrcSnkElem)
+{
+java.lang.String type;
+  boolean $stack4;
+  rifl.spec.RIFLIntegrityException $stack7;
+  java.lang.StringBuilder $stack8;
+  rifl.spec.SrcSnk $stack12;
+  rifl.spec.Category $stack14;
+  type = catSrcSnkElem.getNodeName();
+ $stack4 = type.equals((java.lang.Object)"category");
+ if ($stack4==0) goto label0;
+ $stack14 = this#rifl.spec.RIFLReader:readCategory(catSrcSnkElem);
+ return  $stack14;
+ label0:$stack4 = type.equals((java.lang.Object)"source");
+ if ($stack4==0) goto label1;
+ $stack12 = this.readSource(catSrcSnkElem);
+ return  $stack12;
+ label1:$stack4 = type.equals((java.lang.Object)"sink");
+ if ($stack4==0) goto label2;
+ $stack12 = this.readSink(catSrcSnkElem);
+ return  $stack12;
+ label2:$stack7=new rifl.spec.RIFLIntegrityException;
+ $stack8=new java.lang.StringBuilder;
+ $stack8#java.lang.StringBuilder("Unknown element: ");
+ type = catSrcSnkElem.getLocalName();
+ $stack8 = $stack8.append(type);
+ type = $stack8.toString();
+ $stack7#rifl.spec.RIFLIntegrityException(type);
+ throw $stack7;
+ } 
+

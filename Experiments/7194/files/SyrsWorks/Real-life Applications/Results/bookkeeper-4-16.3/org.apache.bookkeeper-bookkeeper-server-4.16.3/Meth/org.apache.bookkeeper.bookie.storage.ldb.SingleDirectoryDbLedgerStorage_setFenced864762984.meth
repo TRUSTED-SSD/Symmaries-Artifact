@@ -1,0 +1,27 @@
+boolean org.apache.bookkeeper.bookie.storage.ldb.SingleDirectoryDbLedgerStorage:setFenced(long ledgerId)
+{
+boolean changed;
+  org.apache.bookkeeper.bookie.storage.ldb.TransientLedgerInfo ledgerInfo;
+  org.slf4j.Logger $stack5;
+  org.apache.bookkeeper.bookie.storage.ldb.LedgerMetadataIndex $stack7;
+  org.apache.bookkeeper.util.collections.ConcurrentLongHashMap $stack9;
+  java.lang.Object $stack10;
+  java.lang.Long $stack14;
+  $stack5=org.apache.bookkeeper.bookie.storage.ldb.SingleDirectoryDbLedgerStorage.log;
+ changed = $stack5.isDebugEnabled();
+ if (changed==0) goto label0;
+ $stack5=org.apache.bookkeeper.bookie.storage.ldb.SingleDirectoryDbLedgerStorage.log;
+ $stack14 = java.lang.Long.valueOf(ledgerId);
+ dummyClass.lowSink("Set fenced. ledger: {}");
+$stack5.debug("Set fenced. ledger: {}",(java.lang.Object)$stack14);
+ label0:$stack7=this.ledgerIndex;
+ changed = $stack7.setFenced(ledgerId);
+ if (changed==0) goto label1;
+ $stack9=this.transientLedgerInfoCache;
+ $stack10 = $stack9.get(ledgerId);
+ ledgerInfo=(org.apache.bookkeeper.bookie.storage.ldb.TransientLedgerInfo) $stack10;
+ if (null==ledgerInfo) goto label1;
+ ledgerInfo.notifyWatchers(9223372036854775807L);
+ label1:return  changed;
+ } 
+

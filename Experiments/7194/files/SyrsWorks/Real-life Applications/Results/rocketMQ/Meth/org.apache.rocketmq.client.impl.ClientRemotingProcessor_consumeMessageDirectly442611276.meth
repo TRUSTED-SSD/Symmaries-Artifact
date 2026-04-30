@@ -1,0 +1,37 @@
+org.apache.rocketmq.remoting.protocol.RemotingCommand org.apache.rocketmq.client.impl.ClientRemotingProcessor:consumeMessageDirectly(io.netty.channel.ChannelHandlerContext ctx,org.apache.rocketmq.remoting.protocol.RemotingCommand request)
+{
+org.apache.rocketmq.remoting.protocol.RemotingCommand response;
+  org.apache.rocketmq.remoting.protocol.header.ConsumeMessageDirectlyResultRequestHeader requestHeader;
+  org.apache.rocketmq.common.message.MessageExt msg;
+  org.apache.rocketmq.remoting.protocol.body.ConsumeMessageDirectlyResult result;
+  org.apache.rocketmq.remoting.CommandCustomHeader $stack8;
+  byte[] $stack9;
+  java.nio.ByteBuffer $stack10;
+  org.apache.rocketmq.client.impl.factory.MQClientInstance $stack12;
+  java.lang.String $stack13;
+  java.lang.String $stack14;
+  java.lang.Object[] $stack16;
+  response = org.apache.rocketmq.remoting.protocol.RemotingCommand.createResponseCommand(null);
+ $stack8 = request.decodeCommandCustomHeader(org.apache.rocketmq.remoting.protocol.header.ConsumeMessageDirectlyResultRequestHeader);
+ requestHeader=(org.apache.rocketmq.remoting.protocol.header.ConsumeMessageDirectlyResultRequestHeader) $stack8;
+ $stack9 = request.getBody();
+ $stack10 = java.nio.ByteBuffer.wrap($stack9);
+ msg = org.apache.rocketmq.common.message.MessageDecoder.decode($stack10);
+ $stack12=this.mqClientFactory;
+ $stack13 = requestHeader.getConsumerGroup();
+ $stack14 = requestHeader.getBrokerName();
+ result = $stack12.consumeMessageDirectly(msg,$stack13,$stack14);
+ if (null==result) goto label0;
+ response.setCode(0);
+ $stack9 = result.encode();
+ response.setBody($stack9);
+ goto label1;
+ label0:response.setCode(1);
+ $stack16=new java.lang.Object[1];
+ $stack13 = requestHeader.getConsumerGroup();
+ $stack16[0]=$stack13;
+ $stack13 = java.lang.String.format("The Consumer Group <%s> not exist in this consumer",$stack16);
+ response.setRemark($stack13);
+ label1:return  response;
+ } 
+

@@ -1,0 +1,51 @@
+int org.apache.rocketmq.common.statistics.StatisticsBrief:getSlotIndex(long num)
+{
+int index;
+  int i;
+  long rangeMax;
+  int slotNum;
+  long rangeMin;
+  long[][] $stack10;
+  long[] $stack13;
+  long $stack16;
+  byte $stack17;
+  int $stack32;
+  index=0;
+ i=0;
+ label0:$stack10=this.topPercentileMeta;
+ slotNum=#$stack10;
+ if (i>=slotNum) goto label1;
+ $stack10=this.topPercentileMeta;
+ $stack13=$stack10[i];
+ rangeMax=$stack13[0];
+ $stack10=this.topPercentileMeta;
+ $stack13=$stack10[i];
+ $stack16=$stack13[1];
+ slotNum=(int) $stack16;
+ if (i<=0) goto label2;
+ $stack10=this.topPercentileMeta;
+ $stack32=(i-1);
+ $stack13=$stack10[$stack32];
+ $stack16=$stack13[0];
+ goto label3;
+ label2:$stack16=0L;
+ label3:rangeMin=$stack16;
+ $stack17=($stack16 cmp num);
+ if ($stack17>0) goto label4;
+ $stack17=(num cmp rangeMax);
+ if ($stack17>=0) goto label4;
+ $stack16=(long) index;
+ num=(num-rangeMin);
+ rangeMin=(rangeMax-rangeMin);
+ rangeMax=(long) slotNum;
+ rangeMax=(rangeMin/rangeMax);
+ num=(num/rangeMax);
+ num=($stack16+num);
+ index=(int) num;
+ goto label1;
+ label4:index=(index+slotNum);
+ i=(i+1);
+ goto label0;
+ label1:return  index;
+ } 
+

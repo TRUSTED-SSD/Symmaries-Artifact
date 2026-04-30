@@ -1,0 +1,39 @@
+java.util.List org.apache.kerby.kerberos.kerb.keytab.Keytab:readEntries(org.apache.kerby.kerberos.kerb.keytab.KeytabInputStream kis)
+{
+java.util.ArrayList entries;
+  int bytesLeft;
+  int entrySize;
+  org.apache.kerby.kerberos.kerb.keytab.KeytabEntry entry;
+  int $stack10;
+  java.io.IOException $stack20;
+  java.lang.StringBuilder $stack21;
+  java.lang.String $stack24;
+  entries=new java.util.ArrayList;
+ entries#java.util.ArrayList();
+ bytesLeft = kis.available();
+ label0:if (bytesLeft<=0) goto label1;
+ entrySize = kis.readInt();
+dummyClass.highSourceMut(entrySize);
+ $stack10 = kis.available();
+ if ($stack10>=entrySize) goto label2;
+ $stack20=new java.io.IOException;
+ $stack21=new java.lang.StringBuilder;
+ $stack21#java.lang.StringBuilder();
+ $stack21 = $stack21.append("Bad input stream with less data than expected: ");
+ $stack21 = $stack21.append(entrySize);
+ $stack24 = $stack21.toString();
+ $stack20#java.io.IOException($stack24);
+ throw $stack20;
+ label2:entry = this#org.apache.kerby.kerberos.kerb.keytab.Keytab:readEntry(kis,entrySize);
+ entries.add((java.lang.Object)entry);
+ bytesLeft=(bytesLeft-4);
+ $stack10 = kis.available();
+ bytesLeft=(bytesLeft-$stack10);
+ if (bytesLeft==entrySize) goto label3;
+ entrySize=(entrySize-bytesLeft);
+ kis.skipBytes(entrySize);
+ label3:bytesLeft = kis.available();
+ goto label0;
+ label1:return  entries;
+ } 
+

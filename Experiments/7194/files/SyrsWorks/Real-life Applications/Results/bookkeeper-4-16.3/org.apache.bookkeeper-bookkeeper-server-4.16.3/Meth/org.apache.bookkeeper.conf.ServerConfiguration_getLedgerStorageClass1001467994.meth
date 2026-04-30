@@ -1,0 +1,22 @@
+java.lang.String org.apache.bookkeeper.conf.ServerConfiguration:getLedgerStorageClass()
+{
+java.lang.String ledgerStorageClass;
+  org.apache.bookkeeper.common.conf.ConfigKey $stack2;
+  java.lang.Class $stack4;
+  java.lang.String $stack5;
+  boolean $stack6;
+  org.apache.commons.configuration.Configuration tmp$1490597911;
+  $stack2=org.apache.bookkeeper.conf.ServerConfiguration.LEDGER_STORAGE_CLASS_KEY;
+ tmp$1490597911=(org.apache.commons.configuration.Configuration) this;
+ ledgerStorageClass = $stack2.getString(tmp$1490597911);
+ $stack4=org.apache.bookkeeper.bookie.SortedLedgerStorage;
+ $stack5 = $stack4.getName();
+ $stack6 = ledgerStorageClass.equals((java.lang.Object)$stack5);
+ if ($stack6==0) goto label0;
+ $stack6 = this.getSortedLedgerStorageEnabled();
+ if ($stack6!=0) goto label0;
+ $stack4=org.apache.bookkeeper.bookie.InterleavedLedgerStorage;
+ ledgerStorageClass = $stack4.getName();
+ label0:return  ledgerStorageClass;
+ } 
+

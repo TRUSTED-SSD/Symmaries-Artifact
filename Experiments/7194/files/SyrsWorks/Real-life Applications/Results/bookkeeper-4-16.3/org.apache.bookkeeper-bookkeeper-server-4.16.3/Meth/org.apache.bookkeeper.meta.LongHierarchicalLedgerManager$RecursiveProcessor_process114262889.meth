@@ -1,0 +1,55 @@
+void org.apache.bookkeeper.meta.LongHierarchicalLedgerManager$RecursiveProcessor:process(java.lang.String lNode,org.apache.zookeeper.AsyncCallback$VoidCallback cb)
+{
+java.lang.String nodePath;
+  java.lang.StringBuilder $stack4;
+  int $stack10;
+  int $stack13;
+  java.lang.Object $stack14;
+  org.apache.bookkeeper.proto.BookkeeperInternalCallbacks$Processor $stack15;
+  org.apache.bookkeeper.meta.LongHierarchicalLedgerManager $stack16;
+  org.apache.bookkeeper.meta.LongHierarchicalLedgerManager$RecursiveProcessor $stack17;
+  int $stack23;
+  org.apache.bookkeeper.meta.LongHierarchicalLedgerManager $stack25;
+  boolean $stack30;
+  $stack4=new java.lang.StringBuilder;
+ $stack4#java.lang.StringBuilder();
+ nodePath=this.path;
+ $stack4 = $stack4.append(nodePath);
+ $stack4 = $stack4.append("/");
+ $stack4 = $stack4.append(lNode);
+ nodePath = $stack4.toString();
+ $stack10=this.level;
+ if ($stack10!=0) goto label0;
+ $stack16=this.this$0;
+ $stack30 = $stack16.isLedgerParentNode(lNode);
+ if ($stack30!=0) goto label0;
+ $stack10=this.successRc;
+ $stack14=this.context;
+ cb.processResult($stack10,null,$stack14);
+ return;
+ label0:$stack10=this.level;
+ if ($stack10>=3) goto label1;
+ $stack25=this.this$0;
+ $stack17=new org.apache.bookkeeper.meta.LongHierarchicalLedgerManager$RecursiveProcessor;
+ $stack16=this.this$0;
+ $stack10=this.level;
+ $stack23=($stack10+1);
+ $stack15=this.processor;
+ $stack14=this.context;
+ $stack13=this.successRc;
+ $stack10=this.failureRc;
+ $stack17#org.apache.bookkeeper.meta.LongHierarchicalLedgerManager$RecursiveProcessor($stack16,$stack23,nodePath,$stack15,$stack14,$stack13,$stack10);
+ $stack14=this.context;
+ $stack13=this.successRc;
+ $stack10=this.failureRc;
+ $stack25.asyncProcessLevelNodes(nodePath,(org.apache.bookkeeper.proto.BookkeeperInternalCallbacks$Processor)$stack17,cb,$stack14,$stack13,$stack10);
+ goto label2;
+ label1:$stack16=this.this$0;
+ $stack15=this.processor;
+ $stack14=this.context;
+ $stack13=this.successRc;
+ $stack10=this.failureRc;
+ $stack16.asyncProcessLedgersInSingleNode(nodePath,$stack15,cb,$stack14,$stack13,$stack10);
+ label2:return;
+ } 
+

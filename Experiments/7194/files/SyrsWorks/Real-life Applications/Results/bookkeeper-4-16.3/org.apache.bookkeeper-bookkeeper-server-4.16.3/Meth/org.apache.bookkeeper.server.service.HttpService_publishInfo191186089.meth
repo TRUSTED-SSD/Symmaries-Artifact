@@ -1,0 +1,23 @@
+void org.apache.bookkeeper.server.service.HttpService:publishInfo(org.apache.bookkeeper.common.component.ComponentInfoPublisher componentInfoPublisher)
+{
+org.apache.bookkeeper.common.conf.ComponentConfiguration $stack3;
+  org.apache.bookkeeper.server.conf.BookieConfiguration $stack4;
+  org.apache.bookkeeper.conf.ServerConfiguration $stack5;
+  boolean $stack6;
+  org.apache.bookkeeper.common.component.ComponentInfoPublisher$EndpointInfo $stack7;
+  int $stack12;
+  $stack3=this.conf;
+ $stack4=(org.apache.bookkeeper.server.conf.BookieConfiguration) $stack3;
+ $stack5 = $stack4.getServerConf();
+ $stack6 = $stack5.isHttpServerEnabled();
+ if ($stack6==0) goto label0;
+ $stack7=new org.apache.bookkeeper.common.component.ComponentInfoPublisher$EndpointInfo;
+ $stack3=this.conf;
+ $stack4=(org.apache.bookkeeper.server.conf.BookieConfiguration) $stack3;
+ $stack5 = $stack4.getServerConf();
+ $stack12 = $stack5.getHttpServerPort();
+ $stack7#org.apache.bookkeeper.common.component.ComponentInfoPublisher$EndpointInfo("httpserver",$stack12,"0.0.0.0","http",null,null);
+ componentInfoPublisher.publishEndpoint($stack7);
+ label0:return;
+ } 
+

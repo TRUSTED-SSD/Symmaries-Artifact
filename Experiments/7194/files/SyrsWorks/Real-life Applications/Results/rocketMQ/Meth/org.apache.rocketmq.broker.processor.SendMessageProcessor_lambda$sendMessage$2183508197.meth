@@ -1,0 +1,12 @@
+void org.apache.rocketmq.broker.processor.SendMessageProcessor:lambda$sendMessage$2(org.apache.rocketmq.remoting.protocol.RemotingCommand response,org.apache.rocketmq.remoting.protocol.RemotingCommand request,org.apache.rocketmq.common.message.MessageExtBrokerInner finalMsgInner,org.apache.rocketmq.remoting.protocol.header.SendMessageResponseHeader responseHeader,org.apache.rocketmq.broker.mqtrace.SendMessageContext sendMessageContext,io.netty.channel.ChannelHandlerContext ctx,int finalQueueIdInt,long beginTimeMillis,org.apache.rocketmq.remoting.protocol.statictopic.TopicQueueMappingContext mappingContext,org.apache.rocketmq.remoting.protocol.header.SendMessageRequestHeader requestHeader,org.apache.rocketmq.broker.processor.SendMessageCallback sendMessageCallback,org.apache.rocketmq.store.PutMessageResult putMessageResult)
+{
+org.apache.rocketmq.remoting.protocol.RemotingCommand responseFuture;
+  org.apache.rocketmq.common.attribute.TopicMessageType $stack15;
+  $stack15 = org.apache.rocketmq.broker.metrics.BrokerMetricsManager.getMessageType(requestHeader);
+ responseFuture = this#org.apache.rocketmq.broker.processor.SendMessageProcessor:handlePutMessageResult(putMessageResult,response,request,(org.apache.rocketmq.common.message.MessageExt)finalMsgInner,responseHeader,sendMessageContext,ctx,finalQueueIdInt,beginTimeMillis,mappingContext,$stack15);
+ if (responseFuture==null) goto label0;
+ this.doResponse(ctx,request,responseFuture);
+ label0:sendMessageCallback.onComplete(sendMessageContext,response);
+ return;
+ } 
+

@@ -1,0 +1,48 @@
+void org.apache.rocketmq.broker.topic.TopicConfigManager:updateTopicUnitFlag(java.lang.String topic,boolean unit)
+{
+org.apache.rocketmq.common.TopicConfig topicConfig;
+  int oldTopicSysFlag;
+  java.util.concurrent.ConcurrentMap $stack7;
+  java.lang.Object $stack8;
+  int $stack10;
+  org.apache.rocketmq.logging.org.slf4j.Logger $stack11;
+  java.lang.Integer $stack13;
+  java.lang.Integer $stack15;
+  org.apache.rocketmq.broker.BrokerController $stack18;
+  org.apache.rocketmq.store.MessageStore $stack19;
+  org.apache.rocketmq.remoting.protocol.DataVersion $stack20;
+  long $stack24;
+  $stack7=this.topicConfigTable;
+ $stack8 = $stack7.get((java.lang.Object)topic);
+ topicConfig=(org.apache.rocketmq.common.TopicConfig) $stack8;
+ if (topicConfig==null) goto label0;
+ oldTopicSysFlag = topicConfig.getTopicSysFlag();
+ if (unit==0) goto label1;
+ $stack10 = org.apache.rocketmq.common.sysflag.TopicSysFlag.setUnitFlag(oldTopicSysFlag);
+ topicConfig.setTopicSysFlag($stack10);
+ goto label2;
+ label1:$stack10 = org.apache.rocketmq.common.sysflag.TopicSysFlag.clearUnitFlag(oldTopicSysFlag);
+ topicConfig.setTopicSysFlag($stack10);
+ label2:$stack11=org.apache.rocketmq.broker.topic.TopicConfigManager.log;
+ $stack13 = java.lang.Integer.valueOf(oldTopicSysFlag);
+ oldTopicSysFlag = topicConfig.getTopicSysFlag();
+ $stack15 = java.lang.Integer.valueOf(oldTopicSysFlag);
+ $stack11.info("update topic sys flag. oldTopicSysFlag={}, newTopicSysFlag={}",(java.lang.Object)$stack13,(java.lang.Object)$stack15);
+ $stack7=this.topicConfigTable;
+ $stack7.put((java.lang.Object)topic,(java.lang.Object)topicConfig);
+ $stack18=this.brokerController;
+ $stack19 = $stack18.getMessageStore();
+ if ($stack19==null) goto label3;
+ $stack18=this.brokerController;
+ $stack19 = $stack18.getMessageStore();
+ $stack24 = $stack19.getStateMachineVersion();
+ goto label4;
+ label3:$stack24=0L;
+ label4:$stack20=this.dataVersion;
+ $stack20.nextVersion($stack24);
+ this.persist();
+ $stack18=this.brokerController;
+ $stack18.registerBrokerAll((boolean)0,(boolean)1,(boolean)1);
+ label0:return;
+ } 
+

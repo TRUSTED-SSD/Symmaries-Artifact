@@ -1,0 +1,39 @@
+void org.apache.kerby.kerberos.kerb.transport.KdcNetwork:checkUdpMessage()
+{
+java.net.InetSocketAddress fromAddress;
+  org.apache.kerby.kerberos.kerb.transport.KdcUdpTransport transport;
+  java.nio.channels.DatagramChannel $stack3;
+  boolean $stack4;
+  java.nio.ByteBuffer $stack5;
+  java.net.SocketAddress $stack7;
+  java.util.Map $stack10;
+  java.lang.Object $stack11;
+  $stack3=this.udpServer;
+ $stack4 = $stack3.isOpen();
+ if ($stack4!=0) goto label0;
+ return;
+ label0:$stack3=this.udpServer;
+ $stack5=this.recvBuffer;
+ $stack7 = $stack3.receive($stack5);
+ fromAddress=(java.net.InetSocketAddress) $stack7;
+ if (fromAddress==null) goto label1;
+ $stack5=this.recvBuffer;
+ $stack5.flip();
+ $stack10=this.transports;
+ $stack11 = $stack10.get((java.lang.Object)fromAddress);
+ transport=(org.apache.kerby.kerberos.kerb.transport.KdcUdpTransport) $stack11;
+ if (transport!=null) goto label2;
+ transport=new org.apache.kerby.kerberos.kerb.transport.KdcUdpTransport;
+ $stack3=this.udpServer;
+ transport#org.apache.kerby.kerberos.kerb.transport.KdcUdpTransport($stack3,fromAddress);
+ $stack5=this.recvBuffer;
+ transport.onRecvMessage($stack5);
+ this.onNewTransport((org.apache.kerby.kerberos.kerb.transport.KrbTransport)transport);
+ goto label3;
+ label2:$stack5=this.recvBuffer;
+ transport.onRecvMessage($stack5);
+ label3:$stack5 = java.nio.ByteBuffer.allocate(65507);
+ this.recvBuffer=$stack5;
+ label1:return;
+ } 
+

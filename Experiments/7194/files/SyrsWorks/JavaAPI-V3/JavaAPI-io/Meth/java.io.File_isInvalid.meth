@@ -1,0 +1,26 @@
+boolean java.io.File:isInvalid()
+{
+java.io.FileSystem $r1;
+  boolean $z0;
+  java.io.File$PathStatus r2;
+  java.io.File$PathStatus $r3;
+  java.io.File$PathStatus $r4;
+  boolean $z1;
+  r2=this.status;
+ if (r2!=null) goto label0;
+ $r1=java.io.File.fs;
+ $z0 = $r1.isInvalid(this);
+ if ($z0==0) goto label1;
+ $r3=java.io.File$PathStatus.INVALID;
+ goto label2;
+ label1:$r3=java.io.File$PathStatus.CHECKED;
+ label2:r2=$r3;
+ this.status=r2;
+ label0:$r4=java.io.File$PathStatus.INVALID;
+ if (r2!=$r4) goto label3;
+ $z1=1;
+ goto label4;
+ label3:$z1=0;
+ label4:return  $z1;
+ }  
+

@@ -1,0 +1,20 @@
+org.apache.bookkeeper.sasl.SASLBookieAuthProvider(org.apache.bookkeeper.proto.BookieConnectionPeer addr,org.apache.bookkeeper.auth.AuthCallbacks$GenericCallback completeCb,org.apache.bookkeeper.conf.ServerConfiguration serverConfiguration,javax.security.auth.Subject subject,java.util.regex.Pattern allowedIdsPattern)
+{
+org.apache.bookkeeper.sasl.SaslServerState $stack7;
+  java.lang.Exception $stack8;
+  org.slf4j.Logger $stack9;
+  this#java.lang.Object();
+ this.completeCb=completeCb;
+ label0:$stack7=new org.apache.bookkeeper.sasl.SaslServerState;
+ $stack7#org.apache.bookkeeper.sasl.SaslServerState(serverConfiguration,subject,allowedIdsPattern);
+ this.server=$stack7;
+ label1:goto label2;
+ label3:$stack8 = catch;
+ $stack9=org.apache.bookkeeper.sasl.SASLBookieAuthProvider.LOG;
+ $stack9.error("Error while booting SASL server",(java.lang.Throwable)$stack8);
+ completeCb.operationComplete(-102,null);
+ label2:return;
+ catch java.io.IOException: label0 - label1 : label3;
+catch javax.security.auth.login.LoginException: label0 - label1 : label3;
+} 
+

@@ -1,0 +1,26 @@
+void org.apache.bookkeeper.bookie.DefaultEntryLogger$EntryLoggerCompactionEntryLog:finalizeAndCleanup()
+{
+java.io.File $stack1;
+  boolean $stack2;
+  org.slf4j.Logger $stack7;
+  $stack1=this.compactedLogFile;
+ $stack2 = $stack1.exists();
+ if ($stack2==0) goto label0;
+ $stack1=this.compactedLogFile;
+ $stack2 = $stack1.delete();
+ if ($stack2!=0) goto label0;
+ $stack7 = org.apache.bookkeeper.bookie.DefaultEntryLogger.access$300();
+ $stack1=this.compactedLogFile;
+ $stack7.warn("Could not delete file: {}",(java.lang.Object)$stack1);
+ label0:$stack1=this.compactingLogFile;
+ $stack2 = $stack1.exists();
+ if ($stack2==0) goto label1;
+ $stack1=this.compactingLogFile;
+ $stack2 = $stack1.delete();
+ if ($stack2!=0) goto label1;
+ $stack7 = org.apache.bookkeeper.bookie.DefaultEntryLogger.access$300();
+ $stack1=this.compactingLogFile;
+ $stack7.warn("Could not delete file: {}",(java.lang.Object)$stack1);
+ label1:return;
+ } 
+

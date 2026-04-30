@@ -1,0 +1,38 @@
+static java.lang.Long org.apache.rocketmq.tieredstore.TieredMessageStore:lambda$getEarliestMessageTimeAsync$2(java.lang.String topic,com.google.common.base.Stopwatch stopwatch,int queueId,long finalNextEarliestMessageTime,java.lang.Long @time)
+{
+io.opentelemetry.api.common.Attributes latencyAttributes;
+  io.opentelemetry.api.common.AttributesBuilder $stack7;
+  java.util.concurrent.TimeUnit $stack11;
+  io.opentelemetry.api.metrics.LongHistogram $stack12;
+  long $stack13;
+  byte $stack15;
+  org.apache.rocketmq.logging.org.slf4j.Logger $stack19;
+  java.lang.Integer $stack21;
+  java.lang.Long time;
+time=@time;
+$stack7 = org.apache.rocketmq.tieredstore.metrics.TieredStoreMetricsManager.newAttributesBuilder();
+ $stack7 = $stack7.put("operation","get_earliest_message_time");
+ $stack7 = $stack7.put("topic",topic);
+ latencyAttributes = $stack7.build();
+ $stack12=org.apache.rocketmq.tieredstore.metrics.TieredStoreMetricsManager.apiLatency;
+ $stack11=java.util.concurrent.TimeUnit.MILLISECONDS;
+ $stack13 = stopwatch.elapsed($stack11);
+ $stack12.record($stack13,latencyAttributes);
+ $stack13 = time.longValue();
+ $stack15=($stack13 cmp 0L);
+ if ($stack15>=0) goto label0;
+ $stack19=org.apache.rocketmq.tieredstore.TieredMessageStore.logger;
+ $stack21 = java.lang.Integer.valueOf(queueId);
+ $stack19.debug("TieredMessageStore#getEarliestMessageTimeAsync: get earliest message time failed, try to get earliest message time from next store: topic: {}, queue: {}",(java.lang.Object)topic,(java.lang.Object)$stack21);
+ $stack15=(finalNextEarliestMessageTime cmp 9223372036854775807L);
+ if ($stack15==0) goto label1;
+ goto label2;
+ label1:finalNextEarliestMessageTime=-1L;
+ label2:time = java.lang.Long.valueOf(finalNextEarliestMessageTime);
+ return  time;
+ label0:$stack13 = time.longValue();
+ finalNextEarliestMessageTime = java.lang.Math.min(finalNextEarliestMessageTime,$stack13);
+ time = java.lang.Long.valueOf(finalNextEarliestMessageTime);
+ return  time;
+ } 
+

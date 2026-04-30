@@ -1,0 +1,22 @@
+boolean org.apache.bookkeeper.tools.cli.commands.autorecovery.TriggerAuditCommand:handler(org.apache.bookkeeper.conf.ServerConfiguration configuration)
+{
+org.apache.bookkeeper.client.BookKeeperAdmin admin;
+  java.lang.Throwable l4;
+  org.apache.bookkeeper.conf.ClientConfiguration $stack5;
+  $stack5=new org.apache.bookkeeper.conf.ClientConfiguration;
+ $stack5#org.apache.bookkeeper.conf.ClientConfiguration((org.apache.bookkeeper.conf.AbstractConfiguration)configuration);
+ admin=new org.apache.bookkeeper.client.BookKeeperAdmin;
+ admin#org.apache.bookkeeper.client.BookKeeperAdmin($stack5);
+ label0:admin.triggerAudit();
+ label1:if (admin==null) goto label2;
+ admin.close();
+ goto label2;
+ label3:l4 = catch;
+ label4:if (admin==null) goto label5;
+ admin.close();
+ label5:throw l4;
+ label2:return  1;
+ catch java.lang.Throwable: label0 - label1 : label3;
+catch java.lang.Throwable: label3 - label4 : label3;
+} 
+

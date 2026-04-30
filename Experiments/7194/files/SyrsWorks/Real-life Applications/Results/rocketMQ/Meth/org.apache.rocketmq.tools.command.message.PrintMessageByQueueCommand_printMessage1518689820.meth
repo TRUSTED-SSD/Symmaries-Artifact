@@ -1,0 +1,38 @@
+static void org.apache.rocketmq.tools.command.message.PrintMessageByQueueCommand:printMessage(java.util.List msgs,java.lang.String charsetName,boolean printMsg,boolean printBody)
+{
+java.util.Iterator l4;
+  org.apache.rocketmq.common.message.MessageExt msg;
+  java.lang.Object $stack9;
+  java.lang.Object[] $stack10;
+  java.io.PrintStream $stack11;
+  java.lang.String $stack14;
+  byte[] $stack19;
+  java.io.UnsupportedEncodingException $stack20;
+  if (printMsg!=0) goto label0;
+ return;
+ label0:l4 = msgs.iterator();
+ label1:printMsg = l4.hasNext();
+ if (printMsg==0) goto label2;
+ $stack9 = l4.next();
+ msg=(org.apache.rocketmq.common.message.MessageExt) $stack9;
+ label3:$stack11=java.lang.System.out;
+ $stack10=new java.lang.Object[3];
+ $stack14 = msg.getMsgId();
+ $stack10[0]=$stack14;
+ $stack10[1]=msg;
+ if (printBody==0) goto label4;
+ $stack14=new java.lang.String;
+ $stack19 = msg.getBody();
+ $stack14#java.lang.String($stack19,charsetName);
+ goto label5;
+ label4:$stack14="NOT PRINT BODY";
+ label5:$stack10[2]=$stack14;
+ $stack11.printf("MSGID: %s %s BODY: %s%n",$stack10);
+ label6:goto label7;
+ label8:$stack20 = catch;
+ $stack20.printStackTrace();
+ label7:goto label1;
+ label2:return;
+ catch java.io.UnsupportedEncodingException: label3 - label6 : label8;
+} 
+

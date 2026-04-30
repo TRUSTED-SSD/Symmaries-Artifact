@@ -1,0 +1,49 @@
+void org.apache.rocketmq.broker.transaction.queue.DefaultTransactionalMessageCheckListener:resolveDiscardMsg(org.apache.rocketmq.common.message.MessageExt msgExt)
+{
+org.apache.rocketmq.common.message.MessageExtBrokerInner brokerInner;
+  org.apache.rocketmq.store.PutMessageResult putMessageResult;
+  org.apache.rocketmq.logging.org.slf4j.Logger $stack4;
+  org.apache.rocketmq.broker.BrokerController $stack6;
+  org.apache.rocketmq.store.MessageStore $stack7;
+  java.lang.String $stack11;
+  java.lang.String $stack12;
+  org.apache.rocketmq.store.PutMessageStatus $stack13;
+  org.apache.rocketmq.store.PutMessageStatus $stack14;
+  java.lang.Object[] $stack17;
+  long $stack21;
+  java.lang.Long $stack22;
+  java.lang.Exception $stack28;
+  $stack4=org.apache.rocketmq.broker.transaction.queue.DefaultTransactionalMessageCheckListener.log;
+ $stack4.error("MsgExt:{} has been checked too many times, so discard it by moving it to system topic TRANS_CHECK_MAXTIME_TOPIC",(java.lang.Object)msgExt);
+ label0:brokerInner = this#org.apache.rocketmq.broker.transaction.queue.DefaultTransactionalMessageCheckListener:toMessageExtBrokerInner(msgExt);
+ $stack6 = this.getBrokerController();
+ $stack7 = $stack6.getMessageStore();
+ putMessageResult = $stack7.putMessage(brokerInner);
+ if (putMessageResult==null) goto label1;
+ $stack13 = putMessageResult.getPutMessageStatus();
+ $stack14=org.apache.rocketmq.store.PutMessageStatus.PUT_OK;
+ if ($stack13!=$stack14) goto label1;
+ $stack4=org.apache.rocketmq.broker.transaction.queue.DefaultTransactionalMessageCheckListener.log;
+ $stack17=new java.lang.Object[3];
+ $stack21 = msgExt.getQueueOffset();
+ $stack22 = java.lang.Long.valueOf($stack21);
+ $stack17[0]=$stack22;
+ $stack21 = msgExt.getCommitLogOffset();
+ $stack22 = java.lang.Long.valueOf($stack21);
+ $stack17[1]=$stack22;
+ $stack11 = msgExt.getUserProperty("REAL_TOPIC");
+ $stack17[2]=$stack11;
+ $stack4.info("Put checked-too-many-time half message to TRANS_CHECK_MAXTIME_TOPIC OK. Restored in queueOffset={}, commitLogOffset={}, real topic={}",$stack17);
+ goto label2;
+ label1:$stack4=org.apache.rocketmq.broker.transaction.queue.DefaultTransactionalMessageCheckListener.log;
+ $stack11 = msgExt.getTopic();
+ $stack12 = msgExt.getMsgId();
+ $stack4.error("Put checked-too-many-time half message to TRANS_CHECK_MAXTIME_TOPIC failed, real topic={}, msgId={}",(java.lang.Object)$stack11,(java.lang.Object)$stack12);
+ label2:goto label3;
+ label4:$stack28 = catch;
+ $stack4=org.apache.rocketmq.broker.transaction.queue.DefaultTransactionalMessageCheckListener.log;
+ $stack4.warn("Put checked-too-many-time message to TRANS_CHECK_MAXTIME_TOPIC error. {}",(java.lang.Throwable)$stack28);
+ label3:return;
+ catch java.lang.Exception: label0 - label2 : label4;
+} 
+

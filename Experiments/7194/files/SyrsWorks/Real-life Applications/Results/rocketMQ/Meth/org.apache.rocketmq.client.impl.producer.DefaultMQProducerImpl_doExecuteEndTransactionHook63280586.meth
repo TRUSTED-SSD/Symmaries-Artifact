@@ -1,0 +1,26 @@
+void org.apache.rocketmq.client.impl.producer.DefaultMQProducerImpl:doExecuteEndTransactionHook(org.apache.rocketmq.common.message.Message msg,java.lang.String @msgId,java.lang.String brokerAddr,org.apache.rocketmq.client.producer.LocalTransactionState state,boolean fromTransactionCheck)
+{
+org.apache.rocketmq.client.hook.EndTransactionContext context;
+  boolean $stack7;
+  org.apache.rocketmq.client.producer.DefaultMQProducer $stack9;
+  java.lang.String $stack10;
+  java.lang.String msgId;
+msgId=@msgId;
+$stack7 = this.hasEndTransactionHook();
+ if ($stack7==0) goto label0;
+ context=new org.apache.rocketmq.client.hook.EndTransactionContext;
+ context#org.apache.rocketmq.client.hook.EndTransactionContext();
+ $stack9=this.defaultMQProducer;
+ $stack10 = $stack9.getProducerGroup();
+ context.setProducerGroup($stack10);
+ context.setBrokerAddr(brokerAddr);
+ context.setMessage(msg);
+ context.setMsgId(msgId);
+ msgId = msg.getTransactionId();
+ context.setTransactionId(msgId);
+ context.setTransactionState(state);
+ context.setFromTransactionCheck(fromTransactionCheck);
+ this.executeEndTransactionHook(context);
+ label0:return;
+ } 
+

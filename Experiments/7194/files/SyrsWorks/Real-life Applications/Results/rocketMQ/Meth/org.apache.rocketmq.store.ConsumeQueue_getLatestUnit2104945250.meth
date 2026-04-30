@@ -1,0 +1,19 @@
+org.apache.rocketmq.store.queue.CqUnit org.apache.rocketmq.store.ConsumeQueue:getLatestUnit()
+{
+org.apache.rocketmq.store.queue.ReferredIterator it;
+  org.apache.rocketmq.store.MappedFileQueue $stack2;
+  long $stack3;
+  java.lang.Object $stack7;
+  org.apache.rocketmq.store.queue.CqUnit $stack8;
+  $stack2=this.mappedFileQueue;
+ $stack3 = $stack2.getMaxOffset();
+ $stack3=($stack3/20L);
+ $stack3=($stack3-1L);
+ it = this.iterateFrom($stack3);
+ if (it!=null) goto label0;
+ return  null;
+ label0:$stack7 = it.nextAndRelease();
+ $stack8=(org.apache.rocketmq.store.queue.CqUnit) $stack7;
+ return  $stack8;
+ } 
+

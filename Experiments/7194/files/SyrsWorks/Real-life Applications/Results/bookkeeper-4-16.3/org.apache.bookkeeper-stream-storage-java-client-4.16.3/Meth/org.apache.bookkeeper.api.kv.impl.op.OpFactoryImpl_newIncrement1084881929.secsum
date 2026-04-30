@@ -1,0 +1,10 @@
+org.apache.bookkeeper.api.kv.op.IncrementOp org.apache.bookkeeper.api.kv.impl.op.OpFactoryImpl:newIncrement (
+  java.lang.Object key, long amount,
+  org.apache.bookkeeper.api.kv.options.IncrementOption option) {
+  guard = tt;
+  ret(level()) = obj_level(this);
+  ret(obj_level()) = level(amount) ⊔ level(key) ⊔ level(option) ⊔ obj_level(key);
+  ret(obj_level(key)) = level(amount) ⊔ level(key) ⊔ level(option) ⊔ obj_level(key);
+  ret(obj_level(option)) = level(amount) ⊔ level(key) ⊔ level(option) ⊔ obj_level(key);
+  ret(obj_level(this)) = level(amount) ⊔ level(key) ⊔ level(option) ⊔ obj_level(key);
+}

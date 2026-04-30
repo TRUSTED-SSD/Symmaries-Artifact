@@ -1,0 +1,44 @@
+long org.apache.rocketmq.broker.out.BrokerOuterAPI:getMinOffset(java.lang.String @addr,java.lang.String topic,int queueId,boolean isOnlyThisBroker)
+{
+org.apache.rocketmq.remoting.protocol.header.GetMinOffsetRequestHeader requestHeader;
+  org.apache.rocketmq.remoting.protocol.RemotingCommand request;
+  org.apache.rocketmq.remoting.protocol.header.GetMinOffsetResponseHeader responseHeader;
+  java.lang.Integer $stack10;
+  org.apache.rocketmq.remoting.RemotingClient $stack12;
+  org.apache.rocketmq.remoting.CommandCustomHeader $stack16;
+  java.lang.Long $stack17;
+  long $stack18;
+  org.apache.rocketmq.client.exception.MQBrokerException $stack19;
+  java.lang.AssertionError $stack23;
+  java.lang.String addr;
+addr=@addr;
+requestHeader=new org.apache.rocketmq.remoting.protocol.header.GetMinOffsetRequestHeader;
+ requestHeader#org.apache.rocketmq.remoting.protocol.header.GetMinOffsetRequestHeader();
+ requestHeader.setTopic(topic);
+ $stack10 = java.lang.Integer.valueOf(queueId);
+ requestHeader.setQueueId($stack10);
+ request = org.apache.rocketmq.remoting.protocol.RemotingCommand.createRequestCommand(31,(org.apache.rocketmq.remoting.CommandCustomHeader)requestHeader);
+ $stack12=this.remotingClient;
+ request = $stack12.invokeSync(addr,request,3000L);
+ isOnlyThisBroker=org.apache.rocketmq.broker.out.BrokerOuterAPI.$assertionsDisabled;
+ if (isOnlyThisBroker!=0) goto label0;
+ if (request!=null) goto label0;
+ $stack23=new java.lang.AssertionError;
+ $stack23#java.lang.AssertionError();
+ throw $stack23;
+ label0:queueId = request.getCode();
+ switch [queueId]
+if 0 goto label1;
+goto label2;
+ label1:$stack16 = request.decodeCommandCustomHeader(org.apache.rocketmq.remoting.protocol.header.GetMinOffsetResponseHeader);
+ responseHeader=(org.apache.rocketmq.remoting.protocol.header.GetMinOffsetResponseHeader) $stack16;
+ $stack17 = responseHeader.getOffset();
+ $stack18 = $stack17.longValue();
+ return  $stack18;
+ label2:$stack19=new org.apache.rocketmq.client.exception.MQBrokerException;
+ queueId = request.getCode();
+ addr = request.getRemark();
+ $stack19#org.apache.rocketmq.client.exception.MQBrokerException(queueId,addr);
+ throw $stack19;
+ } 
+

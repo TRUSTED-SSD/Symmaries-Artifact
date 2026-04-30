@@ -1,0 +1,37 @@
+void java.io.File:readObject(java.io.ObjectInputStream r1)
+{
+java.io.ObjectInputStream$GetField r2;
+  char c0;
+  java.lang.String r3;
+  java.lang.Object $r4;
+  char $c1;
+  java.io.FileSystem $r5;
+  long $l2;
+  sun.misc.Unsafe $r6;
+  java.io.FileSystem $r7;
+  sun.misc.Unsafe $r8;
+  long $l3;
+  int $i4;
+  char $c5;
+  java.lang.String r9;
+  r2 = r1.readFields();
+ $r4 = r2.get("path",null);
+ r9=(java.lang.String) $r4;
+ c0 = r1.readChar();
+ $c1=java.io.File.separatorChar;
+ if (c0==$c1) goto label0;
+ $c5=java.io.File.separatorChar;
+ r9 = r9.replace(c0,$c5);
+ label0:$r5=java.io.File.fs;
+ r3 = $r5.normalize(r9);
+ $r6=java.io.File.UNSAFE;
+ $l2=java.io.File.PATH_OFFSET;
+ $r6.native_putObject((java.lang.Object)this,$l2,(java.lang.Object)r3);
+ $r8=java.io.File.UNSAFE;
+ $l3=java.io.File.PREFIX_LENGTH_OFFSET;
+ $r7=java.io.File.fs;
+ $i4 = $r7.prefixLength(r3);
+ $r8.native_putIntVolatile((java.lang.Object)this,$l3,$i4);
+ return;
+ }  
+

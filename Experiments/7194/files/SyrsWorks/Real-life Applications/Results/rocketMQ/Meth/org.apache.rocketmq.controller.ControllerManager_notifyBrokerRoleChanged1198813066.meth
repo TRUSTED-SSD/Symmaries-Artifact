@@ -1,0 +1,51 @@
+void org.apache.rocketmq.controller.ControllerManager:notifyBrokerRoleChanged(org.apache.rocketmq.remoting.protocol.header.controller.ElectMasterResponseHeader electMasterResult,java.lang.String clusterName)
+{
+org.apache.rocketmq.remoting.protocol.body.BrokerMemberGroup memberGroup;
+  java.lang.String master;
+  java.util.Iterator l6;
+  java.util.Map$Entry broker;
+  java.lang.CharSequence[] $stack10;
+  boolean $stack11;
+  java.util.Set $stack13;
+  java.lang.Object $stack16;
+  java.lang.String $stack18;
+  org.apache.rocketmq.controller.BrokerHeartbeatManager $stack21;
+  java.lang.Long $stack28;
+  java.util.Map $stack32;
+  memberGroup = electMasterResult.getBrokerMemberGroup();
+ if (memberGroup==null) goto label0;
+ master = electMasterResult.getNewMasterAddress();
+ $stack10=new java.lang.CharSequence[1];
+ $stack10[0]=master;
+ $stack11 = org.apache.commons.lang3.StringUtils.isNoneEmpty($stack10);
+ if ($stack11==0) goto label1;
+ $stack21=this.heartbeatManager;
+ $stack11 = $stack21.isBrokerActive(clusterName,master);
+ if ($stack11==0) goto label1;
+ $stack28 = java.lang.Long.valueOf(0L);
+ this.doNotifyBrokerRoleChanged(master,$stack28,electMasterResult);
+ label1:$stack32 = memberGroup.getBrokerAddrs();
+ $stack13 = $stack32.entrySet();
+ l6 = $stack13.iterator();
+ label2:$stack11 = l6.hasNext();
+ if ($stack11==0) goto label0;
+ $stack16 = l6.next();
+ broker=(java.util.Map$Entry) $stack16;
+ $stack16 = broker.getValue();
+ $stack18=(java.lang.String) $stack16;
+ $stack11 = $stack18.equals((java.lang.Object)master);
+ if ($stack11!=0) goto label3;
+ $stack21=this.heartbeatManager;
+ $stack16 = broker.getValue();
+ $stack18=(java.lang.String) $stack16;
+ $stack11 = $stack21.isBrokerActive(clusterName,$stack18);
+ if ($stack11==0) goto label3;
+ $stack16 = broker.getValue();
+ $stack18=(java.lang.String) $stack16;
+ $stack16 = broker.getKey();
+ $stack28=(java.lang.Long) $stack16;
+ this.doNotifyBrokerRoleChanged($stack18,$stack28,electMasterResult);
+ label3:goto label2;
+ label0:return;
+ } 
+

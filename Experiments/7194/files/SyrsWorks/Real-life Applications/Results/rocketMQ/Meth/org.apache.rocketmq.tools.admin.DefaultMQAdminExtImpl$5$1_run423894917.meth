@@ -1,0 +1,58 @@
+void org.apache.rocketmq.tools.admin.DefaultMQAdminExtImpl$5$1:run()
+{
+java.lang.String addr;
+  org.apache.rocketmq.remoting.protocol.body.TopicList topicList;
+  org.apache.rocketmq.remoting.protocol.route.BrokerData $stack4;
+  java.util.concurrent.CountDownLatch $stack6;
+  org.apache.rocketmq.tools.admin.DefaultMQAdminExtImpl$5 $stack7;
+  org.apache.rocketmq.tools.admin.DefaultMQAdminExtImpl $stack8;
+  org.apache.rocketmq.client.impl.factory.MQClientInstance $stack9;
+  org.apache.rocketmq.client.impl.MQClientAPIImpl $stack10;
+  java.lang.String $stack14;
+  long $stack15;
+  org.apache.rocketmq.remoting.protocol.body.TopicList $stack17;
+  java.util.Set $stack18;
+  java.util.Set $stack19;
+  java.lang.Exception $stack22;
+  org.apache.rocketmq.logging.org.slf4j.Logger $stack25;
+  java.lang.Throwable $stack29;
+  label0:$stack4=this.val$bd;
+ addr = $stack4.selectBrokerAddr();
+ if (addr==null) goto label1;
+ $stack7=this.this$1;
+ $stack8=$stack7.this$0;
+ $stack9 = org.apache.rocketmq.tools.admin.DefaultMQAdminExtImpl.access$100($stack8);
+ $stack10 = $stack9.getMQClientAPIImpl();
+ $stack7=this.this$1;
+ $stack14=$stack7.val$group;
+ $stack7=this.this$1;
+ $stack8=$stack7.this$0;
+ $stack15 = org.apache.rocketmq.tools.admin.DefaultMQAdminExtImpl.access$000($stack8);
+ topicList = $stack10.queryTopicsByConsumer(addr,$stack14,$stack15);
+ $stack17=this.val$result;
+ $stack18 = $stack17.getTopicList();
+ $stack19 = topicList.getTopicList();
+ $stack18.addAll((java.util.Collection)$stack19);
+ label1:$stack6=this.val$latch;
+ $stack6.countDown();
+ goto label2;
+ label3:$stack22 = catch;
+ $stack7=this.this$1;
+ $stack8=$stack7.this$0;
+ $stack25 = org.apache.rocketmq.tools.admin.DefaultMQAdminExtImpl.access$200($stack8);
+ $stack7=this.this$1;
+ addr=$stack7.val$group;
+ $stack25.error("queryTopicsByConsumer error. group={}",(java.lang.Object)addr,(java.lang.Object)$stack22);
+ label4:$stack6=this.val$latch;
+ $stack6.countDown();
+ goto label2;
+ label5:$stack29 = catch;
+ $stack6=this.val$latch;
+ $stack6.countDown();
+ throw $stack29;
+ label2:return;
+ catch java.lang.Exception: label0 - label1 : label3;
+catch java.lang.Throwable: label0 - label1 : label5;
+catch java.lang.Throwable: label3 - label4 : label5;
+} 
+

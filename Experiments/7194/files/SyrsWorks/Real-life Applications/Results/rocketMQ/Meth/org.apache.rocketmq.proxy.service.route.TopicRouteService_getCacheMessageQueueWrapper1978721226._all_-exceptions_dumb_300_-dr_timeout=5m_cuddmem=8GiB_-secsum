@@ -1,0 +1,9 @@
+static org.apache.rocketmq.proxy.service.route.MessageQueueView org.apache.rocketmq.proxy.service.route.TopicRouteService:getCacheMessageQueueWrapper (
+  com.github.benmanes.caffeine.cache.LoadingCache topicCache,
+  java.lang.String @key) {
+  guard = tt;
+  ret(level()) = level(@key) ⊔ level(topicCache) ⊔ obj_level(@key) ⊔ obj_level(topicCache);
+  ret(obj_level()) = level(@key) ⊔ level(topicCache) ⊔ obj_level(@key) ⊔ obj_level(topicCache);
+  ret(obj_level(@key)) = level(@key) ⊔ obj_level(@key);
+  ret(obj_level(topicCache)) = level(@key) ⊔ level(topicCache) ⊔ obj_level(@key) ⊔ obj_level(topicCache);
+}

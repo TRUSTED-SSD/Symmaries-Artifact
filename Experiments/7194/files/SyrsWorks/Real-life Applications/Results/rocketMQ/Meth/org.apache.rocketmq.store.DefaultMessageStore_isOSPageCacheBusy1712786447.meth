@@ -1,0 +1,26 @@
+boolean org.apache.rocketmq.store.DefaultMessageStore:isOSPageCacheBusy()
+{
+long begin;
+  org.apache.rocketmq.store.CommitLog $stack5;
+  org.apache.rocketmq.common.SystemClock $stack7;
+  long $stack8;
+  byte $stack9;
+  org.apache.rocketmq.store.config.MessageStoreConfig $stack10;
+  boolean $stack13;
+  $stack5 = this.getCommitLog();
+ begin = $stack5.getBeginTimeInLock();
+ $stack7=this.systemClock;
+ $stack8 = $stack7.now();
+ begin=($stack8-begin);
+ $stack9=(begin cmp 10000000L);
+ if ($stack9>=0) goto label0;
+ $stack10=this.messageStoreConfig;
+ $stack8 = $stack10.getOsPageCacheBusyTimeOutMills();
+ $stack9=(begin cmp $stack8);
+ if ($stack9<=0) goto label0;
+ $stack13=1;
+ goto label1;
+ label0:$stack13=0;
+ label1:return  $stack13;
+ } 
+

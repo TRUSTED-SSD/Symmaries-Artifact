@@ -1,0 +1,36 @@
+org.apache.rocketmq.client.consumer.store.OffsetSerializeWrapper org.apache.rocketmq.client.consumer.store.LocalFileOffsetStore:readLocalOffset()
+{
+java.lang.String content;
+  org.apache.rocketmq.client.consumer.store.OffsetSerializeWrapper e;
+  java.lang.String $stack4;
+  int $stack7;
+  java.lang.Object $stack8;
+  java.lang.Exception $stack10;
+  org.apache.rocketmq.logging.org.slf4j.Logger $stack11;
+  java.io.IOException $stack13;
+  content=null;
+ label0:$stack4=this.storePath;
+ content = org.apache.rocketmq.common.MixAll.file2String($stack4);
+ label1:goto label2;
+ label3:$stack13 = catch;
+ $stack11=org.apache.rocketmq.client.consumer.store.LocalFileOffsetStore.log;
+ $stack11.warn("Load local offset store file exception",(java.lang.Throwable)$stack13);
+ label2:if (null==content) goto label4;
+ $stack7 = content.length();
+ if ($stack7!=0) goto label5;
+ label4:e = this#org.apache.rocketmq.client.consumer.store.LocalFileOffsetStore:readLocalOffsetBak();
+ return  e;
+ label5:e=null;
+ label6:$stack8 = org.apache.rocketmq.remoting.protocol.RemotingSerializable.fromJson(content,org.apache.rocketmq.client.consumer.store.OffsetSerializeWrapper);
+ e=(org.apache.rocketmq.client.consumer.store.OffsetSerializeWrapper) $stack8;
+ label7:goto label8;
+ label9:$stack10 = catch;
+ $stack11=org.apache.rocketmq.client.consumer.store.LocalFileOffsetStore.log;
+ $stack11.warn("readLocalOffset Exception, and try to correct",(java.lang.Throwable)$stack10);
+ e = this#org.apache.rocketmq.client.consumer.store.LocalFileOffsetStore:readLocalOffsetBak();
+ return  e;
+ label8:return  e;
+ catch java.io.IOException: label0 - label1 : label3;
+catch java.lang.Exception: label6 - label7 : label9;
+} 
+

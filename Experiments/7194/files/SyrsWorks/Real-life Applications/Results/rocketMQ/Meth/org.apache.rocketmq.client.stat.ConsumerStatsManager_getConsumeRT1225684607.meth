@@ -1,0 +1,32 @@
+org.apache.rocketmq.common.stats.StatsSnapshot org.apache.rocketmq.client.stat.ConsumerStatsManager:getConsumeRT(java.lang.String @group,java.lang.String topic)
+{
+org.apache.rocketmq.common.stats.StatsSnapshot statsData;
+  java.lang.StringBuilder $stack4;
+  org.apache.rocketmq.common.stats.StatsItemSet $stack5;
+  java.lang.String $stack9;
+  long $stack12;
+  byte $stack13;
+  java.lang.String group;
+group=@group;
+$stack5=this.topicAndGroupConsumeRT;
+ $stack4=new java.lang.StringBuilder;
+ $stack4#java.lang.StringBuilder();
+ $stack4 = $stack4.append(topic);
+ $stack4 = $stack4.append("@");
+ $stack4 = $stack4.append(group);
+ $stack9 = $stack4.toString();
+ statsData = $stack5.getStatsDataInMinute($stack9);
+ $stack12 = statsData.getSum();
+ $stack13=(0L cmp $stack12);
+ if ($stack13!=0) goto label0;
+ $stack5=this.topicAndGroupConsumeRT;
+ $stack4=new java.lang.StringBuilder;
+ $stack4#java.lang.StringBuilder();
+ $stack4 = $stack4.append(topic);
+ $stack4 = $stack4.append("@");
+ $stack4 = $stack4.append(group);
+ group = $stack4.toString();
+ statsData = $stack5.getStatsDataInHour(group);
+ label0:return  statsData;
+ } 
+

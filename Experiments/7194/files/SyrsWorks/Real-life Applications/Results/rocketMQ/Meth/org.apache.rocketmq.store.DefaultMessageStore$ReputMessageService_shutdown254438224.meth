@@ -1,0 +1,35 @@
+void org.apache.rocketmq.store.DefaultMessageStore$ReputMessageService:shutdown()
+{
+int i;
+  java.lang.InterruptedException l2;
+  boolean $stack3;
+  org.apache.rocketmq.logging.org.slf4j.Logger $stack4;
+  org.apache.rocketmq.store.DefaultMessageStore $stack5;
+  org.apache.rocketmq.store.CommitLog $stack7;
+  long $stack8;
+  java.lang.Long $stack9;
+  java.lang.Long $stack11;
+  i=0;
+ label0:if (i>=50) goto label1;
+ $stack3 = this.isCommitLogAvailable();
+ if ($stack3==0) goto label1;
+ label2:java.lang.Thread.sleep(100L);
+ label3:goto label4;
+ label5:l2 = catch;
+ label4:i=(i+1);
+ goto label0;
+ label1:$stack3 = this.isCommitLogAvailable();
+ if ($stack3==0) goto label6;
+ $stack4 = org.apache.rocketmq.store.DefaultMessageStore.access$600();
+ $stack5=this.this$0;
+ $stack7 = org.apache.rocketmq.store.DefaultMessageStore.access$200($stack5);
+ $stack8 = $stack7.getMaxOffset();
+ $stack9 = java.lang.Long.valueOf($stack8);
+ $stack8=this.reputFromOffset;
+ $stack11 = java.lang.Long.valueOf($stack8);
+ $stack4.warn("shutdown ReputMessageService, but CommitLog have not finish to be dispatched, CommitLog max offset={}, reputFromOffset={}",(java.lang.Object)$stack9,(java.lang.Object)$stack11);
+ label6:this#org.apache.rocketmq.common.ServiceThread();
+ return;
+ catch java.lang.InterruptedException: label2 - label3 : label5;
+} 
+

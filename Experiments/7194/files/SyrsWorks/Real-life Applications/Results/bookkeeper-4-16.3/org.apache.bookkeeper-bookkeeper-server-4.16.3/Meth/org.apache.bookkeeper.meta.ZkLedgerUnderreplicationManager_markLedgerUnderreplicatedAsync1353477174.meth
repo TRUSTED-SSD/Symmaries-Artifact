@@ -1,0 +1,25 @@
+java.util.concurrent.CompletableFuture org.apache.bookkeeper.meta.ZkLedgerUnderreplicationManager:markLedgerUnderreplicatedAsync(long ledgerId,java.util.Collection missingReplicas)
+{
+java.util.List zkAcls;
+  java.lang.String znode;
+  java.util.concurrent.CompletableFuture createFuture;
+  org.slf4j.Logger $stack7;
+  boolean $stack8;
+  org.apache.bookkeeper.conf.AbstractConfiguration $stack9;
+  java.lang.Long $stack15;
+  $stack7=org.apache.bookkeeper.meta.ZkLedgerUnderreplicationManager.LOG;
+ $stack8 = $stack7.isDebugEnabled();
+ if ($stack8==0) goto label0;
+ $stack7=org.apache.bookkeeper.meta.ZkLedgerUnderreplicationManager.LOG;
+ $stack15 = java.lang.Long.valueOf(ledgerId);
+ dummyClass.lowSink("markLedgerUnderreplicated(ledgerId={}, missingReplica={})");
+$stack7.debug("markLedgerUnderreplicated(ledgerId={}, missingReplica={})",(java.lang.Object)$stack15,(java.lang.Object)missingReplicas);
+ label0:$stack9=this.conf;
+ zkAcls = org.apache.bookkeeper.util.ZkUtils.getACLs($stack9);
+ znode = this#org.apache.bookkeeper.meta.ZkLedgerUnderreplicationManager:getUrLedgerZnode(ledgerId);
+ createFuture=new java.util.concurrent.CompletableFuture;
+ createFuture#java.util.concurrent.CompletableFuture();
+ this#org.apache.bookkeeper.meta.ZkLedgerUnderreplicationManager(znode,missingReplicas,zkAcls,createFuture);
+ return  createFuture;
+ } 
+

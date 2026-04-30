@@ -1,0 +1,33 @@
+void org.apache.rocketmq.remoting.rpc.ClientMetadata:refreshClusterInfo(org.apache.rocketmq.remoting.protocol.body.ClusterInfo clusterInfo)
+{
+java.util.Iterator l2;
+  java.util.Map$Entry entry;
+  java.util.Map $stack4;
+  java.util.Set $stack6;
+  boolean $stack8;
+  java.lang.Object $stack9;
+  java.util.concurrent.ConcurrentMap $stack10;
+  java.lang.Object $stack12;
+  org.apache.rocketmq.remoting.protocol.route.BrokerData $stack13;
+  java.util.HashMap $stack14;
+  if (clusterInfo==null) goto label0;
+ $stack4 = clusterInfo.getBrokerAddrTable();
+ if ($stack4!=null) goto label1;
+ label0:return;
+ label1:$stack4 = clusterInfo.getBrokerAddrTable();
+ $stack6 = $stack4.entrySet();
+ l2 = $stack6.iterator();
+ label2:$stack8 = l2.hasNext();
+ if ($stack8==0) goto label3;
+ $stack9 = l2.next();
+ entry=(java.util.Map$Entry) $stack9;
+ $stack10=this.brokerAddrTable;
+ $stack9 = entry.getKey();
+ $stack12 = entry.getValue();
+ $stack13=(org.apache.rocketmq.remoting.protocol.route.BrokerData) $stack12;
+ $stack14 = $stack13.getBrokerAddrs();
+ $stack10.put($stack9,(java.lang.Object)$stack14);
+ goto label2;
+ label3:return;
+ } 
+

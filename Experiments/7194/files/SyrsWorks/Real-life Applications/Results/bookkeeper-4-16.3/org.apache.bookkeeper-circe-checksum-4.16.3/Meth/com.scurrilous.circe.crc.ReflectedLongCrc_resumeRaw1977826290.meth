@@ -1,0 +1,24 @@
+long com.scurrilous.circe.crc.ReflectedLongCrc:resumeRaw(long crc,byte[] input,int index,int length)
+{
+int i;
+  int $stack7;
+  byte $stack8;
+  long $stack9;
+  long[] $stack13;
+  i=0;
+ label0:if (i>=length) goto label1;
+ $stack13=this.table;
+ $stack7=(index+i);
+ $stack8=input[$stack7];
+ $stack9=(long) $stack8;
+ $stack9=(!crc & $stack9) |(!$stack9 & crc);
+ $stack7=(int) $stack9;
+ $stack7=($stack7 & 255);
+ $stack9=$stack13[$stack7];
+ crc=(crc>>>8);
+ crc=(!$stack9 & crc) |(!crc & $stack9);
+ i=(i+1);
+ goto label0;
+ label1:return  crc;
+ } 
+

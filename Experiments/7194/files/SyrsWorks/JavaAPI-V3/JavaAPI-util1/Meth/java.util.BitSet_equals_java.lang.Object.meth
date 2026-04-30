@@ -1,0 +1,40 @@
+boolean java.util.BitSet:equals(java.lang.Object r1)
+{
+java.util.BitSet r2;
+  boolean $z0;
+  int $i0;
+  int $i1;
+  int $i2;
+  long[] $r3;
+  long[] $r4;
+  long $l3;
+  long $l4;
+  byte $b5;
+  int i6;
+  $z0=r1 instanceof java.util.BitSet;
+ if ($z0!=0) goto label0;
+ return  0;
+ label0:if (this!=r1) goto label1;
+ return  1;
+ label1:r2=(java.util.BitSet) r1;
+ this#java.util.BitSet:checkInvariants();
+ r2#java.util.BitSet:checkInvariants();
+ $i1=this.wordsInUse;
+ $i0=r2.wordsInUse;
+ if ($i1==$i0) goto label2;
+ return  0;
+ label2:i6=0;
+ label3:$i2=this.wordsInUse;
+ if (i6>=$i2) goto label4;
+ $r3=this.words;
+ $l4=$r3[i6];
+ $r4=r2.words;
+ $l3=$r4[i6];
+ $b5=($l4 cmp $l3);
+ if ($b5==0) goto label5;
+ return  0;
+ label5:i6=(i6+1);
+ goto label3;
+ label4:return  1;
+ }  
+

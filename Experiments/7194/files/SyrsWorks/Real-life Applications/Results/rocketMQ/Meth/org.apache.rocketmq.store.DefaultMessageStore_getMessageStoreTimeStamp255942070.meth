@@ -1,0 +1,12 @@
+long org.apache.rocketmq.store.DefaultMessageStore:getMessageStoreTimeStamp(java.lang.String topic,int queueId,long consumeQueueOffset)
+{
+org.apache.rocketmq.store.queue.ConsumeQueueInterface logicQueue;
+  org.apache.rocketmq.store.queue.CqUnit $stack7;
+  logicQueue = this.findConsumeQueue(topic,queueId);
+ if (logicQueue==null) goto label0;
+ $stack7 = logicQueue.get(consumeQueueOffset);
+ consumeQueueOffset = this.getStoreTime($stack7);
+ return  consumeQueueOffset;
+ label0:return  -1L;
+ } 
+

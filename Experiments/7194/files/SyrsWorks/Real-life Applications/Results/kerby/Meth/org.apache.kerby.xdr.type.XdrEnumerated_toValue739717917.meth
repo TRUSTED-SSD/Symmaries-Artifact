@@ -1,0 +1,36 @@
+void org.apache.kerby.xdr.type.XdrEnumerated:toValue()
+{
+byte[] intBytes;
+  int iVal;
+  org.apache.kerby.xdr.EnumType[] l4;
+  int l5;
+  int l6;
+  org.apache.kerby.xdr.EnumType val;
+  java.math.BigInteger $stack10;
+  int $stack14;
+  java.nio.ByteBuffer $stack17;
+  intBytes = this.getBytes();
+ iVal=#intBytes;
+ if (iVal==4) goto label0;
+ $stack17 = java.nio.ByteBuffer.allocate(4);
+ intBytes = this.getBytes();
+ $stack17 = $stack17.put(intBytes,0,4);
+ intBytes = $stack17.array();
+ this.setBytes(intBytes);
+ label0:$stack10=new java.math.BigInteger;
+ intBytes = this.getBytes();
+ $stack10#java.math.BigInteger(intBytes);
+ iVal = $stack10.intValue();
+ l4 = this.getAllEnumValues();
+ l5=#l4;
+ l6=0;
+ label1:if (l6>=l5) goto label2;
+ val=l4[l6];
+ $stack14 = val.getValue();
+ if ($stack14!=iVal) goto label3;
+ this.setValue((java.lang.Object)val);
+ label3:l6=(l6+1);
+ goto label1;
+ label2:return;
+ } 
+

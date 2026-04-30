@@ -1,0 +1,57 @@
+void org.apache.bookkeeper.proto.PerChannelBookieClient$ReadLacCompletion:handleV3Response(org.apache.bookkeeper.proto.BookkeeperProtocol$Response response)
+{
+org.apache.bookkeeper.proto.BookkeeperProtocol$ReadLacResponse readLacResponse;
+  io.netty.buffer.ByteBuf lacBuffer;
+  io.netty.buffer.ByteBuf lastEntryBuffer;
+  org.apache.bookkeeper.proto.BookkeeperProtocol$StatusCode status;
+  int rc;
+  org.apache.bookkeeper.proto.BookkeeperProtocol$StatusCode $stack9;
+  boolean $stack11;
+  org.slf4j.Logger $stack13;
+  org.apache.bookkeeper.proto.BookkeeperInternalCallbacks$ReadLacCallback $stack16;
+  long $stack17;
+  java.lang.Object $stack20;
+  java.lang.Object[] $stack21;
+  java.lang.Long $stack24;
+  com.google.protobuf.ByteString $stack34;
+  java.nio.ByteBuffer $stack35;
+  readLacResponse = response.getReadLacResponse();
+ lacBuffer=io.netty.buffer.Unpooled.EMPTY_BUFFER;
+ lastEntryBuffer=io.netty.buffer.Unpooled.EMPTY_BUFFER;
+ status = response.getStatus();
+ $stack9=org.apache.bookkeeper.proto.BookkeeperProtocol$StatusCode.EOK;
+ if (status!=$stack9) goto label0;
+ status = readLacResponse.getStatus();
+ goto label1;
+ label0:status = response.getStatus();
+ label1:$stack11 = readLacResponse.hasLacBody();
+ if ($stack11==0) goto label2;
+ $stack34 = readLacResponse.getLacBody();
+ $stack35 = $stack34.asReadOnlyByteBuffer();
+dummyClass.highSourceMut($stack35);
+ lacBuffer = io.netty.buffer.Unpooled.wrappedBuffer($stack35);
+ label2:$stack11 = readLacResponse.hasLastEntryBody();
+ if ($stack11==0) goto label3;
+ $stack34 = readLacResponse.getLastEntryBody();
+ $stack35 = $stack34.asReadOnlyByteBuffer();
+dummyClass.highSourceMut($stack35);
+ lastEntryBuffer = io.netty.buffer.Unpooled.wrappedBuffer($stack35);
+ label3:$stack13=org.apache.bookkeeper.proto.PerChannelBookieClient.LOG;
+ $stack11 = $stack13.isDebugEnabled();
+ if ($stack11==0) goto label4;
+ $stack21=new java.lang.Object[2];
+ $stack21[0]="ledgerId";
+ $stack17=this.ledgerId;
+ $stack24 = java.lang.Long.valueOf($stack17);
+ $stack21[1]=$stack24;
+ this.logResponse(status,$stack21);
+ label4:rc = this.convertStatus(status,-1);
+ $stack16=this.cb;
+ $stack17=this.ledgerId;
+ lacBuffer = lacBuffer.slice();
+ lastEntryBuffer = lastEntryBuffer.slice();
+ $stack20=this.ctx;
+ $stack16.readLacComplete(rc,$stack17,lacBuffer,lastEntryBuffer,$stack20);
+ return;
+ } 
+

@@ -1,0 +1,41 @@
+long org.apache.rocketmq.common.statistics.StatisticsBrief:getSlotTPValue(int index)
+{
+int i;
+  int slotNum;
+  long metaRangeMax;
+  long metaRangeMin;
+  long[][] $stack9;
+  long[] $stack12;
+  long $stack19;
+  i=0;
+ label0:$stack9=this.topPercentileMeta;
+ slotNum=#$stack9;
+ if (i>=slotNum) goto label1;
+ $stack9=this.topPercentileMeta;
+ $stack12=$stack9[i];
+ metaRangeMin=$stack12[1];
+ slotNum=(int) metaRangeMin;
+ if (index>=slotNum) goto label2;
+ $stack9=this.topPercentileMeta;
+ $stack12=$stack9[i];
+ metaRangeMax=$stack12[0];
+ metaRangeMin=0L;
+ if (i<=0) goto label3;
+ $stack9=this.topPercentileMeta;
+ i=(i-1);
+ $stack12=$stack9[i];
+ metaRangeMin=$stack12[0];
+ label3:$stack19=(metaRangeMax-metaRangeMin);
+ metaRangeMax=(long) slotNum;
+ $stack19=($stack19/metaRangeMax);
+ index=(index+1);
+ metaRangeMax=(long) index;
+ metaRangeMax=($stack19 * metaRangeMax);
+ metaRangeMin=(metaRangeMin+metaRangeMax);
+ return  metaRangeMin;
+ label2:index=(index-slotNum);
+ i=(i+1);
+ goto label0;
+ label1:return  2147483647L;
+ } 
+

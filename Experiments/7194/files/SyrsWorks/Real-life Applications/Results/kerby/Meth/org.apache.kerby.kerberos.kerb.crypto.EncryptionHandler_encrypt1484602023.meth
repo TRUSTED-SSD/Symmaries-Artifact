@@ -1,0 +1,26 @@
+static org.apache.kerby.kerberos.kerb.type.base.EncryptedData org.apache.kerby.kerberos.kerb.crypto.EncryptionHandler:encrypt(byte[] @plainText,org.apache.kerby.kerberos.kerb.type.base.EncryptionKey key,org.apache.kerby.kerberos.kerb.type.base.KeyUsage usage)
+{
+org.apache.kerby.kerberos.kerb.crypto.EncTypeHandler handler;
+  org.apache.kerby.kerberos.kerb.type.base.EncryptedData ed;
+  org.apache.kerby.kerberos.kerb.type.base.EncryptionType $stack6;
+  byte[] $stack8;
+  int $stack9;
+  byte[] plainText;
+plainText=@plainText;
+$stack6 = key.getKeyType();
+ handler = org.apache.kerby.kerberos.kerb.crypto.EncryptionHandler.getEncHandler($stack6);
+ $stack8 = key.getKeyData();
+ $stack9 = usage.getValue();
+ plainText = handler.encrypt(plainText,$stack8,$stack9);
+ ed=new org.apache.kerby.kerberos.kerb.type.base.EncryptedData;
+ ed#org.apache.kerby.kerberos.kerb.type.base.EncryptedData();
+ ed.setCipher(plainText);
+ $stack6 = key.getKeyType();
+ ed.setEType($stack6);
+ $stack9 = key.getKvno();
+ if ($stack9<=0) goto label0;
+ $stack9 = key.getKvno();
+ ed.setKvno($stack9);
+ label0:return  ed;
+ } 
+

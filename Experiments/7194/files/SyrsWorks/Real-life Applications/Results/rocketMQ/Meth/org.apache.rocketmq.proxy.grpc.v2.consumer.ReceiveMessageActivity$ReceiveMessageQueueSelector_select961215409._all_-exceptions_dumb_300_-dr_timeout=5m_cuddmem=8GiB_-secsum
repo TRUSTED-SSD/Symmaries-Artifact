@@ -1,0 +1,10 @@
+org.apache.rocketmq.proxy.service.route.AddressableMessageQueue org.apache.rocketmq.proxy.grpc.v2.consumer.ReceiveMessageActivity$ReceiveMessageQueueSelector:select (
+  org.apache.rocketmq.proxy.common.ProxyContext ctx,
+  org.apache.rocketmq.proxy.service.route.MessageQueueView messageQueueView) {
+  guard = tt;
+  ret(level()) = level(messageQueueView) ⊔ level(this) ⊔ obj_level(messageQueueView) ⊔ obj_level(this);
+  ret(obj_level()) = level(messageQueueView) ⊔ level(this) ⊔ obj_level(messageQueueView) ⊔ obj_level(this);
+  ret(obj_level(ctx)) = level(messageQueueView) ⊔ level(this) ⊔ obj_level(ctx) ⊔ obj_level(messageQueueView) ⊔ obj_level(this);
+  ret(obj_level(messageQueueView)) = level(messageQueueView) ⊔ level(this) ⊔ obj_level(messageQueueView) ⊔ obj_level(this);
+  ret(obj_level(this)) = level(messageQueueView) ⊔ level(this) ⊔ obj_level(messageQueueView) ⊔ obj_level(this);
+}

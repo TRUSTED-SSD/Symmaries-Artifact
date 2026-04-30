@@ -1,0 +1,15 @@
+void org.greenrobot.eventbus.AsyncPoster:enqueue(org.greenrobot.eventbus.Subscription subscription,java.lang.Object event)
+{
+org.greenrobot.eventbus.PendingPost pendingPost;
+  org.greenrobot.eventbus.PendingPostQueue $stack5;
+  org.greenrobot.eventbus.EventBus $stack6;
+  java.util.concurrent.ExecutorService $stack7;
+  pendingPost = org.greenrobot.eventbus.PendingPost.obtainPendingPost(subscription,event);
+ $stack5=this.queue;
+ $stack5.enqueue(pendingPost);
+ $stack6=this.eventBus;
+ $stack7 = $stack6.getExecutorService();
+ $stack7.execute((java.lang.Runnable)this);
+ return;
+ } 
+

@@ -1,0 +1,50 @@
+static org.apache.bookkeeper.common.conf.ConfigDef org.apache.bookkeeper.common.conf.ConfigDef:of(java.lang.Class configClass)
+{
+org.apache.bookkeeper.common.conf.ConfigDef$Builder builder;
+  java.lang.reflect.Field[] l3;
+  int l4;
+  int l5;
+  java.lang.reflect.Field field;
+  org.apache.bookkeeper.common.conf.ConfigDef $stack10;
+  int $stack11;
+  boolean $stack12;
+  java.lang.Class $stack15;
+  java.lang.Object $stack17;
+  org.apache.bookkeeper.common.conf.ConfigKey $stack18;
+  java.lang.IllegalAccessException $stack20;
+  java.lang.Object[] $stack21;
+  org.slf4j.Logger $stack22;
+  java.lang.String $stack25;
+  builder = org.apache.bookkeeper.common.conf.ConfigDef.builder();
+ l3 = configClass.getDeclaredFields();
+ l4=#l3;
+ l5=0;
+ label0:if (l5>=l4) goto label1;
+ field=l3[l5];
+ $stack11 = field.getModifiers();
+ $stack12 = java.lang.reflect.Modifier.isStatic($stack11);
+ if ($stack12==0) goto label2;
+ $stack15 = field.getType();
+ $stack12 = $stack15.equals((java.lang.Object)org.apache.bookkeeper.common.conf.ConfigKey);
+ if ($stack12==0) goto label2;
+ field.setAccessible((boolean)1);
+ label3:$stack17 = field.get(null);
+ $stack18=(org.apache.bookkeeper.common.conf.ConfigKey) $stack17;
+ builder#org.apache.bookkeeper.common.conf.ConfigDef$Builder($stack18);
+ label4:goto label2;
+ label5:$stack20 = catch;
+ $stack22=org.apache.bookkeeper.common.conf.ConfigDef.log;
+ $stack21=new java.lang.Object[3];
+ $stack25 = configClass.getSimpleName();
+ $stack21[0]=$stack25;
+ $stack25 = field.getName();
+ $stack21[1]=$stack25;
+ $stack21[2]=$stack20;
+ $stack22.error("Illegal to access {}#{}",$stack21);
+ label2:l5=(l5+1);
+ goto label0;
+ label1:$stack10 = builder.build();
+ return  $stack10;
+ catch java.lang.IllegalAccessException: label3 - label4 : label5;
+} 
+

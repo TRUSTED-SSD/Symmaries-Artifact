@@ -1,0 +1,25 @@
+org.apache.bookkeeper.client.LedgerEntry org.apache.bookkeeper.client.BookKeeperAdmin$LedgerEntriesIterator:next()
+{
+org.apache.bookkeeper.client.LedgerEntry entry;
+  long $stack2;
+  byte $stack3;
+  long $stack7;
+  java.util.NoSuchElementException $stack16;
+  $stack2=this.lastEntryId;
+ $stack3=($stack2 cmp -1L);
+ if ($stack3<=0) goto label0;
+ $stack7=this.nextEntryId;
+ $stack2=this.lastEntryId;
+ $stack3=($stack7 cmp $stack2);
+ if ($stack3<=0) goto label0;
+ $stack16=new java.util.NoSuchElementException;
+ $stack16#java.util.NoSuchElementException();
+ throw $stack16;
+ label0:$stack2=this.nextEntryId;
+ $stack2=($stack2+1L);
+ this.nextEntryId=$stack2;
+ entry=this.currentEntry;
+ this.currentEntry=null;
+ return  entry;
+ } 
+

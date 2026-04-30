@@ -1,0 +1,33 @@
+boolean org.apache.rocketmq.broker.BrokerPreOnlineService:futureWaitAction(boolean result,org.apache.rocketmq.remoting.protocol.body.BrokerMemberGroup brokerMemberGroup)
+{
+long minBrokerId;
+  org.apache.rocketmq.broker.BrokerController $stack5;
+  org.apache.rocketmq.common.BrokerConfig $stack6;
+  byte $stack8;
+  org.apache.rocketmq.logging.org.slf4j.Logger $stack9;
+  java.util.Map $stack10;
+  java.lang.Long $stack14;
+  java.lang.Object $stack15;
+  java.lang.String $stack16;
+  if (result!=0) goto label0;
+ $stack9=org.apache.rocketmq.broker.BrokerPreOnlineService.LOGGER;
+ $stack9.error("wait for handshake completion failed, HA connection lost");
+ return  0;
+ label0:$stack5=this.brokerController;
+ $stack6 = $stack5.getBrokerConfig();
+ minBrokerId = $stack6.getBrokerId();
+ $stack8=(minBrokerId cmp 0L);
+ if ($stack8==0) goto label1;
+ $stack9=org.apache.rocketmq.broker.BrokerPreOnlineService.LOGGER;
+ $stack9.info("slave preOnline complete, start service");
+ $stack10 = brokerMemberGroup.getBrokerAddrs();
+ minBrokerId = this#org.apache.rocketmq.broker.BrokerPreOnlineService:getMinBrokerId($stack10);
+ $stack5=this.brokerController;
+ $stack10 = brokerMemberGroup.getBrokerAddrs();
+ $stack14 = java.lang.Long.valueOf(minBrokerId);
+ $stack15 = $stack10.get((java.lang.Object)$stack14);
+ $stack16=(java.lang.String) $stack15;
+ $stack5.startService(minBrokerId,$stack16);
+ label1:return  1;
+ } 
+

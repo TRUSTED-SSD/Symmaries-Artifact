@@ -1,0 +1,29 @@
+static void org.junit.runners.model.TestClass:addToAnnotationLists(org.junit.runners.model.FrameworkMember member,java.util.Map map)
+{
+java.lang.annotation.Annotation[] arr$;
+  int len$;
+  int i$;
+  java.lang.annotation.Annotation each;
+  java.lang.Class type;
+  java.util.List members;
+  boolean $stack11;
+  arr$ = member.getAnnotations();
+ len$=#arr$;
+ i$=0;
+ label0:if (i$>=len$) goto label1;
+ each=arr$[i$];
+ type = each.annotationType();
+ members = org.junit.runners.model.TestClass.getAnnotatedMembers(map,type,(boolean)1);
+ $stack11 = member.isShadowedBy(members);
+ if ($stack11==0) goto label2;
+ return;
+ label2:$stack11 = org.junit.runners.model.TestClass.runsTopToBottom(type);
+ if ($stack11==0) goto label3;
+ members.add(0,(java.lang.Object)member);
+ goto label4;
+ label3:members.add((java.lang.Object)member);
+ label4:i$=(i$+1);
+ goto label0;
+ label1:return;
+ } 
+

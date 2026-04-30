@@ -1,0 +1,19 @@
+static long org.apache.rocketmq.store.logfile.DefaultMappedFile:mappingAddr(long addr)
+{
+long offset;
+  int $stack4;
+  byte $stack6;
+  long $stack8;
+  $stack4=org.apache.rocketmq.store.logfile.DefaultMappedFile.UNSAFE_PAGE_SIZE;
+ offset=(long) $stack4;
+ offset=(addr%offset);
+ $stack6=(offset cmp 0L);
+ if ($stack6<0) goto label0;
+ goto label1;
+ label0:$stack4=org.apache.rocketmq.store.logfile.DefaultMappedFile.UNSAFE_PAGE_SIZE;
+ $stack8=(long) $stack4;
+ offset=($stack8+offset);
+ label1:addr=(addr-offset);
+ return  addr;
+ } 
+

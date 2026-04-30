@@ -1,0 +1,19 @@
+static void org.apache.rocketmq.store.metrics.DefaultStoreMetricsManager:lambda$init$3(org.apache.rocketmq.store.DefaultMessageStore messageStore,io.opentelemetry.api.metrics.ObservableLongMeasurement measurement)
+{
+long earliestMessageTime;
+  byte $stack5;
+  long $stack6;
+  io.opentelemetry.api.common.AttributesBuilder $stack8;
+  io.opentelemetry.api.common.Attributes $stack9;
+  earliestMessageTime = messageStore.getEarliestMessageTime();
+ $stack5=(earliestMessageTime cmp 0L);
+ if ($stack5>0) goto label0;
+ return;
+ label0:$stack6 = java.lang.System.currentTimeMillis();
+ earliestMessageTime=($stack6-earliestMessageTime);
+ $stack8 = org.apache.rocketmq.store.metrics.DefaultStoreMetricsManager.newAttributesBuilder();
+ $stack9 = $stack8.build();
+ measurement.record(earliestMessageTime,$stack9);
+ return;
+ } 
+

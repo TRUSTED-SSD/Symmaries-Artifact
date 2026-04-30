@@ -1,0 +1,55 @@
+void org.junit.internal.TextListener:printFailures(org.junit.runner.Result result)
+{
+java.util.List failures;
+  int i;
+  java.util.Iterator i$;
+  org.junit.runner.notification.Failure each;
+  java.io.PrintStream $stack9;
+  java.lang.StringBuilder $stack10;
+  java.lang.String $stack15;
+  boolean $stack17;
+  java.lang.Object $stack18;
+  int $stack21;
+  failures = result.getFailures();
+ i = failures.size();
+ if (i!=0) goto label0;
+ return;
+ label0:i = failures.size();
+ if (i!=1) goto label1;
+ $stack9 = this#org.junit.internal.TextListener:getWriter();
+ $stack10=new java.lang.StringBuilder;
+ $stack10#java.lang.StringBuilder();
+ $stack10 = $stack10.append("There was ");
+ i = failures.size();
+ $stack10 = $stack10.append(i);
+ $stack10 = $stack10.append(" failure:");
+ $stack15 = $stack10.toString();
+ $stack9.println($stack15);
+ goto label2;
+ label1:$stack9 = this#org.junit.internal.TextListener:getWriter();
+ $stack10=new java.lang.StringBuilder;
+ $stack10#java.lang.StringBuilder();
+ $stack10 = $stack10.append("There were ");
+ i = failures.size();
+ $stack10 = $stack10.append(i);
+ $stack10 = $stack10.append(" failures:");
+ $stack15 = $stack10.toString();
+ $stack9.println($stack15);
+ label2:i=1;
+ i$ = failures.iterator();
+ label3:$stack17 = i$.hasNext();
+ if ($stack17==0) goto label4;
+ $stack18 = i$.next();
+ each=(org.junit.runner.notification.Failure) $stack18;
+ $stack10=new java.lang.StringBuilder;
+ $stack10#java.lang.StringBuilder();
+ $stack10 = $stack10.append("");
+ $stack21=i;
+ i=(i+1);
+ $stack10 = $stack10.append($stack21);
+ $stack15 = $stack10.toString();
+ this.printFailure(each,$stack15);
+ goto label3;
+ label4:return;
+ } 
+

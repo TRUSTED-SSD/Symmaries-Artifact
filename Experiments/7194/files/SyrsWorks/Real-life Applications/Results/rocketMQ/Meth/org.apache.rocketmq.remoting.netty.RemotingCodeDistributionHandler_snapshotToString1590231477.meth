@@ -1,0 +1,50 @@
+java.lang.String org.apache.rocketmq.remoting.netty.RemotingCodeDistributionHandler:snapshotToString(java.util.Map distribution)
+{
+java.lang.StringBuilder sb;
+  boolean first;
+  java.util.Iterator l4;
+  java.util.Map$Entry entry;
+  java.lang.StringBuilder $stack7;
+  java.lang.String $stack8;
+  java.util.Set $stack13;
+  boolean $stack15;
+  java.lang.Object $stack16;
+  java.lang.Long $stack19;
+  long $stack20;
+  byte $stack21;
+  sb=new java.lang.StringBuilder;
+ sb#java.lang.StringBuilder("{");
+ if (null==distribution) goto label0;
+ first = distribution.isEmpty();
+ if (first!=0) goto label0;
+ first=1;
+ $stack13 = distribution.entrySet();
+ l4 = $stack13.iterator();
+ label1:$stack15 = l4.hasNext();
+ if ($stack15==0) goto label0;
+ $stack16 = l4.next();
+ entry=(java.util.Map$Entry) $stack16;
+ $stack16 = entry.getValue();
+ $stack19=(java.lang.Long) $stack16;
+ $stack20 = $stack19.longValue();
+ $stack21=(0L cmp $stack20);
+ if ($stack21!=0) goto label2;
+ goto label1;
+ label2:$stack7=sb;
+ if (first==0) goto label3;
+ $stack8="";
+ goto label4;
+ label3:$stack8=", ";
+ label4:$stack7 = $stack7.append($stack8);
+ $stack16 = entry.getKey();
+ $stack7 = $stack7.append($stack16);
+ $stack7 = $stack7.append(":");
+ $stack16 = entry.getValue();
+ $stack7.append($stack16);
+ first=0;
+ goto label1;
+ label0:sb.append("}");
+ $stack8 = sb.toString();
+ return  $stack8;
+ } 
+

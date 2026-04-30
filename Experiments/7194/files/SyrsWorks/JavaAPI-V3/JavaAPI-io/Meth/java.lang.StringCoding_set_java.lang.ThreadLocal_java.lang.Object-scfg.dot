@@ -1,0 +1,44 @@
+digraph G {
+  node [shape=box, ];
+  "pc0_js1" [label="〈$r2 = new java.lang.ref.SoftReference, js1〉", ];
+  "pc1_js1" [label="〈$r2#java.lang.ref.SoftReference.init (r1), js1〉\n\
+tt",
+             ];
+  "pc2_js1" [label="〈r0.set ((java.lang.Object) $r2), js1〉\n\
+tt", ];
+  "pc3_js1" [label="〈return, js1〉", ];
+  "pc4_js1" [label="〈sink, js1〉\n\
+obj_level(r0) ⊑ ret(obj_level(r0))' ∧ obj_level(r1) ⊑ ret(obj_level(r1))' ∧ (ret(r1.><r0)' ∨ ¬r1.><r0) ∧ (ret(r1.><r1)' ∨ ¬r1.><r1)",
+             ];
+  
+  
+  "pc0_js1" -> "pc1_js1" [label="tt,\n\
+{$r2~r1 := ff,\n\
+ $r2.><$r2 := ff,\n\
+ $r2.><r0 := ff,\n\
+ $r2.><r1 := ff,\n\
+ r1.><$r2 := ff,\n\
+ level($r2) := pc,\n\
+ obj_level($r2) := pc}",
+                          ];
+  "pc1_js1" -> "pc2_js1" [label="tt,\n\
+{$r2~r1 := ff,\n\
+ r0~r1 := ff,\n\
+ $r2.><$r2 := ff,\n\
+ $r2.><r0 := ff,\n\
+ $r2.><r1 := ff,\n\
+ r1.><$r2 := ff,\n\
+ r1.><r0 := r1.><r0 ∨ (if r1.><r1 then r0~r1 ∨ r1.><r0 else r1.><r0),\n\
+ obj_level($r2) := pc ⊔ level(r1) ⊔ obj_level(r1)}",
+                          ];
+  "pc2_js1" -> "pc3_js1" [label="tt,\n\
+{$r2.><$r2 := ff,\n\
+ $r2.><r1 := ff,\n\
+ r1.><$r2 := ff,\n\
+ obj_level(r0) := pc ⊔ level(r0) ⊔ obj_level($r2) ⊔ obj_level(r0),\n\
+ obj_level(r1) := obj_level(r1) ⊔ (if r1.><r0 then pc ⊔ level(r0) ⊔ obj_level($r2) ⊔ obj_level(r0) else ⊥)}",
+                          ];
+  "pc3_js1" -> "pc4_js1" [label="tt,\n\
+{ϕ := S3}", ];
+  
+  }

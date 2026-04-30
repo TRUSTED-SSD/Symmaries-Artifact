@@ -1,0 +1,30 @@
+static int[] com.google.zxing.oned.UPCEANReader:findStartGuardPattern(com.google.zxing.common.BitArray row)
+{
+boolean foundStart;
+  int[] startRange;
+  int nextStart;
+  int[] counters;
+  int start;
+  int quietStart;
+  foundStart=0;
+ startRange=null;
+ nextStart=0;
+ counters=com.google.zxing.oned.UPCEANReader.START_END_PATTERN;
+ start=#counters;
+ counters=new int[start];
+ label0:if (foundStart!=0) goto label1;
+ startRange=com.google.zxing.oned.UPCEANReader.START_END_PATTERN;
+ start=#startRange;
+ java.util.Arrays.fill(counters,0,start,0);
+ startRange=com.google.zxing.oned.UPCEANReader.START_END_PATTERN;
+ startRange = com.google.zxing.oned.UPCEANReader.findGuardPattern(row,nextStart,(boolean)0,startRange,counters);
+ start=startRange[0];
+ nextStart=startRange[1];
+ quietStart=(nextStart-start);
+ quietStart=(start-quietStart);
+ if (quietStart<0) goto label2;
+ foundStart = row.isRange(quietStart,start,(boolean)0);
+ label2:goto label0;
+ label1:return  startRange;
+ } 
+

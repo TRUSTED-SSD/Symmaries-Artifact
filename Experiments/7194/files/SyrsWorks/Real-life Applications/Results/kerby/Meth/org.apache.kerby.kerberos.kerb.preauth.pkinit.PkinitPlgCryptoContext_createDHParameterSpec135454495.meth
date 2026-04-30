@@ -1,0 +1,34 @@
+javax.crypto.spec.DHParameterSpec org.apache.kerby.kerberos.kerb.preauth.pkinit.PkinitPlgCryptoContext:createDHParameterSpec(int dhSize)
+{
+java.math.BigInteger g;
+  java.math.BigInteger p;
+  javax.crypto.spec.DHParameterSpec $stack6;
+  org.apache.kerby.kerberos.kerb.KrbException $stack11;
+  java.lang.StringBuilder $stack12;
+  java.lang.String $stack15;
+  g = java.math.BigInteger.valueOf(2L);
+ p=null;
+ switch [dhSize]
+if 0 goto label0;
+if 1 goto label1;
+if 2 goto label2;
+goto label3;
+ label0:p = this.getPkinit1024Prime();
+ goto label4;
+ label1:p = this.getPkinit2048Prime();
+ goto label4;
+ label2:p = this.getPkinit4096Prime();
+ goto label4;
+ label3:$stack11=new org.apache.kerby.kerberos.kerb.KrbException;
+ $stack12=new java.lang.StringBuilder;
+ $stack12#java.lang.StringBuilder();
+ $stack12 = $stack12.append("Unsupported dh size:");
+ $stack12 = $stack12.append(dhSize);
+ $stack15 = $stack12.toString();
+ $stack11#org.apache.kerby.kerberos.kerb.KrbException($stack15);
+ throw $stack11;
+ label4:$stack6=new javax.crypto.spec.DHParameterSpec;
+ $stack6#javax.crypto.spec.DHParameterSpec(p,g);
+ return  $stack6;
+ } 
+

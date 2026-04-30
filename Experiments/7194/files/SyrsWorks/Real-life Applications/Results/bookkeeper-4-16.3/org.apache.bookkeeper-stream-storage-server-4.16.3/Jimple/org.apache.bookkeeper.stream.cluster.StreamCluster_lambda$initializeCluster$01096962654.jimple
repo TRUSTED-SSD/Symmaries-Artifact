@@ -1,0 +1,164 @@
+    private static java.lang.Object lambda$initializeCluster$0(org.apache.bookkeeper.meta.MetadataBookieDriver)
+    {
+        org.apache.bookkeeper.meta.MetadataBookieDriver driver;
+        org.apache.bookkeeper.discover.RegistrationManager rm;
+        null_type l2, tmp$274844113;
+        boolean initialized;
+        java.lang.Throwable l4, $stack11, $stack14, $stack17;
+        org.slf4j.Logger $stack8;
+        java.lang.Exception $stack15;
+        org.apache.bookkeeper.stream.storage.exceptions.StorageRuntimeException tmp$1521705569;
+        java.lang.NullPointerException soot0;
+
+        driver := @parameter0: org.apache.bookkeeper.meta.MetadataBookieDriver;
+
+     label01:
+        rm = interfaceinvoke driver.<org.apache.bookkeeper.meta.MetadataBookieDriver: org.apache.bookkeeper.discover.RegistrationManager createRegistrationManager()>();
+/*147*/
+/*147*/
+
+        l2 = null;
+/*147*/
+
+     label02:
+        initialized = interfaceinvoke rm.<org.apache.bookkeeper.discover.RegistrationManager: boolean initNewCluster()>();
+/*148*/
+/*148*/
+
+        if initialized == 0 goto label03;
+/*149*/
+
+        $stack8 = <org.apache.bookkeeper.stream.cluster.StreamCluster: org.slf4j.Logger log>;
+/*150*/
+
+        interfaceinvoke $stack8.<org.slf4j.Logger: void info(java.lang.String)>("Successfully initialized the segment storage");
+/*150*/
+
+        goto label04;
+/*150*/
+
+     label03:
+        $stack8 = <org.apache.bookkeeper.stream.cluster.StreamCluster: org.slf4j.Logger log>;
+/*152*/
+
+        interfaceinvoke $stack8.<org.slf4j.Logger: void info(java.lang.String)>("The segment storage was already initialized");
+/*152*/
+
+     label04:
+        if rm == null goto label17;
+/*154*/
+
+        if null == null goto label08;
+/*157*/
+
+     label05:
+        interfaceinvoke rm.<org.apache.bookkeeper.discover.RegistrationManager: void close()>();
+/*156*/
+
+     label06:
+        goto label17;
+/*156*/
+
+     label07:
+        l4 := @caughtexception;
+/*154*/
+
+        soot0 = new java.lang.NullPointerException;
+
+        specialinvoke soot0.<java.lang.NullPointerException: void <init>(java.lang.String)>("This statement would have triggered an Exception: virtualinvoke l2.<java.lang.Throwable: void addSuppressed(java.lang.Throwable)>($stack13)");
+
+        throw soot0;
+
+     label08:
+        interfaceinvoke rm.<org.apache.bookkeeper.discover.RegistrationManager: void close()>();
+/*157*/
+
+        goto label17;
+/*157*/
+
+     label09:
+        $stack14 := @caughtexception;
+/*156*/
+
+        initialized = (boolean) $stack14;
+
+        tmp$274844113 = (null_type) initialized;
+
+        l2 = tmp$274844113;
+/*147*/
+
+        l4 = (java.lang.Throwable) initialized;
+
+        throw l4;
+/*147*/
+
+     label10:
+        $stack11 := @caughtexception;
+/*154*/
+
+        l4 = $stack11;
+/*154*/
+
+     label11:
+        if rm == null goto label16;
+/*154*/
+
+        if l2 == null goto label15;
+/*154*/
+
+     label12:
+        interfaceinvoke rm.<org.apache.bookkeeper.discover.RegistrationManager: void close()>();
+/*154*/
+
+     label13:
+        goto label16;
+/*154*/
+
+     label14:
+        $stack17 := @caughtexception;
+/*155*/
+
+        soot0 = new java.lang.NullPointerException;
+
+        specialinvoke soot0.<java.lang.NullPointerException: void <init>(java.lang.String)>("This statement would have triggered an Exception: virtualinvoke l2.<java.lang.Throwable: void addSuppressed(java.lang.Throwable)>($stack17)");
+
+        throw soot0;
+
+     label15:
+        interfaceinvoke rm.<org.apache.bookkeeper.discover.RegistrationManager: void close()>();
+/*154*/
+
+     label16:
+        throw $stack11;
+/*154*/
+
+     label17:
+        goto label19;
+/*156*/
+
+     label18:
+        $stack15 := @caughtexception;
+/*147*/
+
+        tmp$1521705569 = new org.apache.bookkeeper.stream.storage.exceptions.StorageRuntimeException;
+/*155*/
+
+        specialinvoke tmp$1521705569.<org.apache.bookkeeper.stream.storage.exceptions.StorageRuntimeException: void <init>(java.lang.String,java.lang.Throwable)>("Failed to initialize the segment storage", $stack15);
+/*155*/
+
+        l4 = (java.lang.Throwable) tmp$1521705569;
+
+        throw l4;
+/*155*/
+
+     label19:
+        return null;
+/*157*/
+
+        catch java.lang.Throwable from label05 to label06 with label07;
+        catch java.lang.Throwable from label02 to label04 with label09;
+        catch java.lang.Throwable from label12 to label13 with label14;
+        catch java.lang.Throwable from label09 to label11 with label10;
+        catch java.lang.Exception from label01 to label17 with label18;
+    }
+

@@ -1,0 +1,29 @@
+void org.apache.rocketmq.client.impl.consumer.DefaultLitePullConsumerImpl:startPullTask(java.util.Collection mqSet)
+{
+java.util.Iterator l2;
+  org.apache.rocketmq.common.message.MessageQueue messageQueue;
+  org.apache.rocketmq.client.impl.consumer.DefaultLitePullConsumerImpl$PullTaskImpl pullTask;
+  boolean $stack6;
+  java.lang.Object $stack7;
+  java.util.concurrent.ConcurrentMap $stack8;
+  java.util.concurrent.TimeUnit $stack14;
+  java.util.concurrent.ScheduledThreadPoolExecutor $stack15;
+  l2 = mqSet.iterator();
+ label0:$stack6 = l2.hasNext();
+ if ($stack6==0) goto label1;
+ $stack7 = l2.next();
+ messageQueue=(org.apache.rocketmq.common.message.MessageQueue) $stack7;
+ $stack8=this.taskTable;
+ $stack6 = $stack8.containsKey((java.lang.Object)messageQueue);
+ if ($stack6!=0) goto label2;
+ pullTask=new org.apache.rocketmq.client.impl.consumer.DefaultLitePullConsumerImpl$PullTaskImpl;
+ pullTask#org.apache.rocketmq.client.impl.consumer.DefaultLitePullConsumerImpl$PullTaskImpl(this,messageQueue);
+ $stack8=this.taskTable;
+ $stack8.put((java.lang.Object)messageQueue,(java.lang.Object)pullTask);
+ $stack15=this.scheduledThreadPoolExecutor;
+ $stack14=java.util.concurrent.TimeUnit.MILLISECONDS;
+ $stack15.schedule((java.lang.Runnable)pullTask,0L,$stack14);
+ label2:goto label0;
+ label1:return;
+ } 
+

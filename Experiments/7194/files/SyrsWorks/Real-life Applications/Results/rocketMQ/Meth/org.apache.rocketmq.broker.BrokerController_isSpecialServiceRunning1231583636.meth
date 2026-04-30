@@ -1,0 +1,20 @@
+boolean org.apache.rocketmq.broker.BrokerController:isSpecialServiceRunning()
+{
+boolean $stack1;
+  org.apache.rocketmq.broker.processor.AckMessageProcessor $stack2;
+  $stack1 = this.isScheduleServiceStart();
+ if ($stack1==0) goto label0;
+ $stack1 = this.isTransactionCheckServiceStart();
+ if ($stack1==0) goto label0;
+ return  1;
+ label0:$stack2=this.ackMessageProcessor;
+ if ($stack2==null) goto label1;
+ $stack2=this.ackMessageProcessor;
+ $stack1 = $stack2.isPopReviveServiceRunning();
+ if ($stack1==0) goto label1;
+ $stack1=1;
+ goto label2;
+ label1:$stack1=0;
+ label2:return  $stack1;
+ } 
+

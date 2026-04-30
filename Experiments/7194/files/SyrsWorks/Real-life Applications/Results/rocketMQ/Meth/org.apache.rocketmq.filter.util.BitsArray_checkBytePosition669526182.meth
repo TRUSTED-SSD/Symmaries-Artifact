@@ -1,0 +1,27 @@
+void org.apache.rocketmq.filter.util.BitsArray:checkBytePosition(int bytePos,org.apache.rocketmq.filter.util.BitsArray bitsArray)
+{
+int $stack3;
+  java.lang.IllegalArgumentException $stack4;
+  java.lang.StringBuilder $stack6;
+  byte[] $stack8;
+  java.lang.String $stack11;
+  this.checkInitialized(bitsArray);
+ $stack3 = bitsArray.byteLength();
+ if (bytePos<=$stack3) goto label0;
+ $stack4=new java.lang.IllegalArgumentException;
+ $stack6=new java.lang.StringBuilder;
+ $stack6#java.lang.StringBuilder();
+ $stack6 = $stack6.append("BytePos is greater than ");
+ $stack8=this.bytes;
+ bytePos=#$stack8;
+ $stack6 = $stack6.append(bytePos);
+ $stack11 = $stack6.toString();
+ $stack4#java.lang.IllegalArgumentException($stack11);
+ throw $stack4;
+ label0:if (bytePos>=0) goto label1;
+ $stack4=new java.lang.IllegalArgumentException;
+ $stack4#java.lang.IllegalArgumentException("BytePos is less than 0");
+ throw $stack4;
+ label1:return;
+ } 
+

@@ -1,0 +1,23 @@
+static org.apache.rocketmq.proxy.processor.DefaultMessagingProcessor org.apache.rocketmq.proxy.processor.DefaultMessagingProcessor:createForClusterMode()
+{
+org.apache.rocketmq.remoting.RPCHook rpcHook;
+  org.apache.rocketmq.proxy.config.ProxyConfig $stack1;
+  boolean $stack2;
+  org.apache.rocketmq.proxy.processor.DefaultMessagingProcessor $stack3;
+  java.lang.StringBuilder $stack4;
+  java.lang.String $stack5;
+  rpcHook=null;
+ $stack1 = org.apache.rocketmq.proxy.config.ConfigurationManager.getProxyConfig();
+ $stack2 = $stack1.isEnableAclRpcHookForClusterMode();
+ if ($stack2==0) goto label0;
+ $stack4=new java.lang.StringBuilder;
+ $stack4#java.lang.StringBuilder();
+ $stack5=org.apache.rocketmq.proxy.processor.DefaultMessagingProcessor.ROCKETMQ_HOME;
+ $stack4 = $stack4.append($stack5);
+ $stack4 = $stack4.append("/conf/tools.yml");
+ $stack5 = $stack4.toString();
+ rpcHook = org.apache.rocketmq.acl.common.AclUtils.getAclRPCHook($stack5);
+ label0:$stack3 = org.apache.rocketmq.proxy.processor.DefaultMessagingProcessor.createForClusterMode(rpcHook);
+ return  $stack3;
+ } 
+

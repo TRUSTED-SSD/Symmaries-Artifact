@@ -1,0 +1,27 @@
+org.apache.kerby.kerberos.kerb.request.KrbIdentity org.apache.kerby.kerberos.kerb.identity.backend.AbstractIdentityBackend:getIdentity(java.lang.String principalName)
+{
+org.apache.kerby.kerberos.kerb.request.KrbIdentity identity;
+  java.lang.IllegalArgumentException $stack3;
+  boolean $stack4;
+  org.slf4j.Logger $stack5;
+  java.lang.String $stack9;
+  if (principalName==null) goto label0;
+ $stack4 = principalName.isEmpty();
+ if ($stack4==0) goto label1;
+ label0:$stack3=new java.lang.IllegalArgumentException;
+ $stack3#java.lang.IllegalArgumentException("Invalid principal name");
+ throw $stack3;
+ label1:$stack5=org.apache.kerby.kerberos.kerb.identity.backend.AbstractIdentityBackend.logger;
+ dummyClass.lowSink("getIdentity called, principalName = {}");
+$stack5.debug("getIdentity called, principalName = {}",(java.lang.Object)principalName);
+ identity = this.doGetIdentity(principalName);
+ $stack5=org.apache.kerby.kerberos.kerb.identity.backend.AbstractIdentityBackend.logger;
+ if (identity==null) goto label2;
+ $stack9="successful";
+ goto label3;
+ label2:$stack9="failed";
+ label3:dummyClass.lowSink("getIdentity {}, principalName = {}");
+$stack5.debug("getIdentity {}, principalName = {}",(java.lang.Object)$stack9,(java.lang.Object)principalName);
+ return  identity;
+ } 
+

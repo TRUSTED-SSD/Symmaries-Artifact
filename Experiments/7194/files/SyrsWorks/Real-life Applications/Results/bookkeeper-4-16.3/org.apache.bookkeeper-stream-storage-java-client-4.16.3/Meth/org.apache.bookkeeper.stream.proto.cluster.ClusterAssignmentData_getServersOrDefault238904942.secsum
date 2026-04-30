@@ -1,0 +1,11 @@
+org.apache.bookkeeper.stream.proto.cluster.ServerAssignmentData org.apache.bookkeeper.stream.proto.cluster.ClusterAssignmentData:getServersOrDefault (
+  java.lang.String key,
+  org.apache.bookkeeper.stream.proto.cluster.ServerAssignmentData
+    @defaultValue) {
+  guard = tt;
+  ret(level()) = level(@defaultValue) ⊔ level(key) ⊔ obj_level(key) ⊔ obj_level(this);
+  ret(obj_level()) = level(key) ⊔ obj_level(@defaultValue) ⊔ obj_level(key) ⊔ obj_level(this);
+  ret(obj_level(@defaultValue)) = level(key) ⊔ obj_level(@defaultValue) ⊔ obj_level(key) ⊔ obj_level(this);
+  ret(obj_level(key)) = level(key) ⊔ obj_level(key) ⊔ obj_level(this);
+  ret(obj_level(this)) = level(key) ⊔ obj_level(key) ⊔ obj_level(this);
+}

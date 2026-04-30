@@ -1,0 +1,34 @@
+org.apache.bookkeeper.meta.LedgerManagerFactory org.apache.bookkeeper.meta.FlatLedgerManagerFactory:initialize(org.apache.bookkeeper.conf.AbstractConfiguration conf,org.apache.bookkeeper.meta.LayoutManager layoutManager,int factoryVersion)
+{
+org.apache.bookkeeper.meta.ZkLayoutManager $stack4;
+  org.apache.zookeeper.ZooKeeper $stack5;
+  java.io.IOException $stack8;
+  java.lang.StringBuilder $stack9;
+  java.lang.String $stack12;
+  boolean $stack13;
+  if (layoutManager==null) goto label0;
+ $stack13=layoutManager instanceof org.apache.bookkeeper.meta.ZkLayoutManager;
+ if ($stack13==0) goto label1;
+ label0:$stack13=1;
+ goto label2;
+ label1:$stack13=0;
+ label2:com.google.common.base.Preconditions.checkArgument($stack13);
+ if (1==factoryVersion) goto label3;
+ $stack8=new java.io.IOException;
+ $stack9=new java.lang.StringBuilder;
+ $stack9#java.lang.StringBuilder();
+ $stack9 = $stack9.append("Incompatible layout version found : ");
+ $stack9 = $stack9.append(factoryVersion);
+ $stack12 = $stack9.toString();
+ $stack8#java.io.IOException($stack12);
+ throw $stack8;
+ label3:this.conf=conf;
+ if (layoutManager!=null) goto label4;
+ $stack5=null;
+ goto label5;
+ label4:$stack4=(org.apache.bookkeeper.meta.ZkLayoutManager) layoutManager;
+ $stack5 = $stack4.getZk();
+ label5:this.zk=$stack5;
+ return  this;
+ } 
+

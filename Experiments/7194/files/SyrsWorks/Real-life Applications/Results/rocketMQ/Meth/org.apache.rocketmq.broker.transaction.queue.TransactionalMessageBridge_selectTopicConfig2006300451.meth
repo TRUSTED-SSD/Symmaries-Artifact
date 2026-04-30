@@ -1,0 +1,15 @@
+org.apache.rocketmq.common.TopicConfig org.apache.rocketmq.broker.transaction.queue.TransactionalMessageBridge:selectTopicConfig(java.lang.String topic)
+{
+org.apache.rocketmq.common.TopicConfig topicConfig;
+  org.apache.rocketmq.broker.BrokerController $stack3;
+  org.apache.rocketmq.broker.topic.TopicConfigManager $stack4;
+  $stack3=this.brokerController;
+ $stack4 = $stack3.getTopicConfigManager();
+ topicConfig = $stack4.selectTopicConfig(topic);
+ if (topicConfig!=null) goto label0;
+ $stack3=this.brokerController;
+ $stack4 = $stack3.getTopicConfigManager();
+ topicConfig = $stack4.createTopicInSendMessageBackMethod(topic,1,6,0);
+ label0:return  topicConfig;
+ } 
+

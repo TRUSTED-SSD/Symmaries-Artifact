@@ -1,0 +1,34 @@
+org.apache.rocketmq.proxy.grpc.v2.channel.GrpcClientChannel org.apache.rocketmq.proxy.grpc.v2.client.ClientActivity:registerConsumer(org.apache.rocketmq.proxy.common.ProxyContext ctx,java.lang.String consumerGroup,apache.rocketmq.v2.ClientType clientType,java.util.List subscriptionEntryList,boolean updateSubscription)
+{
+java.lang.String clientId;
+  org.apache.rocketmq.remoting.protocol.LanguageCode languageCode;
+  org.apache.rocketmq.proxy.grpc.v2.channel.GrpcClientChannel channel;
+  java.lang.String $stack11;
+  org.apache.rocketmq.proxy.grpc.v2.channel.GrpcChannelManager $stack13;
+  int $stack17;
+  org.apache.rocketmq.proxy.processor.MessagingProcessor $stack18;
+  org.apache.rocketmq.remoting.protocol.heartbeat.ConsumeType $stack19;
+  org.apache.rocketmq.remoting.protocol.heartbeat.MessageModel $stack20;
+  org.apache.rocketmq.common.consumer.ConsumeFromWhere $stack21;
+  java.util.Set $stack22;
+  org.apache.rocketmq.broker.client.ClientChannelInfo tmp$1120397576;
+  io.netty.channel.Channel tmp$2049189494;
+  clientId = ctx.getClientID();
+ $stack11 = ctx.getLanguage();
+ languageCode = org.apache.rocketmq.remoting.protocol.LanguageCode.valueOf($stack11);
+ $stack13=this.grpcChannelManager;
+ channel = $stack13.createChannel(ctx,clientId);
+ tmp$1120397576=new org.apache.rocketmq.broker.client.ClientChannelInfo;
+ $stack11 = ctx.getClientVersion();
+ $stack17 = this#org.apache.rocketmq.proxy.grpc.v2.client.ClientActivity:parseClientVersion($stack11);
+ tmp$2049189494=(io.netty.channel.Channel) channel;
+ tmp$1120397576#org.apache.rocketmq.broker.client.ClientChannelInfo(tmp$2049189494,clientId,languageCode,$stack17);
+ $stack18=this.messagingProcessor;
+ $stack19 = this.buildConsumeType(clientType);
+ $stack20=org.apache.rocketmq.remoting.protocol.heartbeat.MessageModel.CLUSTERING;
+ $stack21=org.apache.rocketmq.common.consumer.ConsumeFromWhere.CONSUME_FROM_LAST_OFFSET;
+ $stack22 = this.buildSubscriptionDataSet(subscriptionEntryList);
+ $stack18.registerConsumer(ctx,consumerGroup,tmp$1120397576,$stack19,$stack20,$stack21,$stack22,updateSubscription);
+ return  channel;
+ } 
+

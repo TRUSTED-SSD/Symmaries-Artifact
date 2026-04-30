@@ -1,0 +1,27 @@
+void org.apache.bookkeeper.bookie.LedgerDirsMonitor:shutdown()
+{
+org.slf4j.Logger $stack1;
+  java.util.concurrent.ScheduledFuture $stack2;
+  java.util.concurrent.ScheduledExecutorService $stack3;
+  boolean $stack6;
+  $stack1=org.apache.bookkeeper.bookie.LedgerDirsMonitor.LOG;
+ dummyClass.lowSink("Shutting down LedgerDirsMonitor");
+$stack1.info("Shutting down LedgerDirsMonitor");
+ $stack2=this.checkTask;
+ if (null==$stack2) goto label0;
+ $stack2=this.checkTask;
+ $stack6 = $stack2.cancel((boolean)1);
+ if ($stack6==0) goto label0;
+ $stack1=org.apache.bookkeeper.bookie.LedgerDirsMonitor.LOG;
+ $stack6 = $stack1.isDebugEnabled();
+ if ($stack6==0) goto label0;
+ $stack1=org.apache.bookkeeper.bookie.LedgerDirsMonitor.LOG;
+ dummyClass.lowSink("Failed to cancel check task in LedgerDirsMonitor");
+$stack1.debug("Failed to cancel check task in LedgerDirsMonitor");
+ label0:$stack3=this.executor;
+ if (null==$stack3) goto label1;
+ $stack3=this.executor;
+ $stack3.shutdown();
+ label1:return;
+ } 
+

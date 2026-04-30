@@ -1,0 +1,25 @@
+void org.hamcrest.TypeSafeMatcher:describeMismatch(java.lang.Object item,org.hamcrest.Description @description)
+{
+java.lang.Class $stack3;
+  boolean $stack4;
+  java.lang.String $stack7;
+  org.hamcrest.Description description;
+description=@description;
+if (item!=null) goto label0;
+ this#org.hamcrest.BaseMatcher:describeMismatch(item,description);
+ goto label1;
+ label0:$stack3=this.expectedType;
+ $stack4 = $stack3.isInstance(item);
+ if ($stack4!=0) goto label2;
+ description = description.appendText("was a ");
+ $stack3 = item.getClass();
+ $stack7 = $stack3.getName();
+ description = description.appendText($stack7);
+ description = description.appendText(" (");
+ description = description.appendValue(item);
+ description.appendText(")");
+ goto label1;
+ label2:this.describeMismatchSafely(item,description);
+ label1:return;
+ } 
+

@@ -1,0 +1,33 @@
+void org.apache.rocketmq.client.impl.consumer.DefaultMQPushConsumerImpl:tryResetPopRetryTopic(java.util.List msgs,java.lang.String consumerGroup)
+{
+java.lang.String popRetryPrefix;
+  java.util.Iterator l4;
+  org.apache.rocketmq.common.message.MessageExt msg;
+  java.lang.String normalTopic;
+  java.lang.StringBuilder $stack7;
+  boolean $stack13;
+  java.lang.Object $stack14;
+  $stack7=new java.lang.StringBuilder;
+ $stack7#java.lang.StringBuilder();
+ $stack7 = $stack7.append("%RETRY%");
+ $stack7 = $stack7.append(consumerGroup);
+ $stack7 = $stack7.append("_");
+ popRetryPrefix = $stack7.toString();
+ l4 = msgs.iterator();
+ label0:$stack13 = l4.hasNext();
+ if ($stack13==0) goto label1;
+ $stack14 = l4.next();
+ msg=(org.apache.rocketmq.common.message.MessageExt) $stack14;
+ normalTopic = msg.getTopic();
+ $stack13 = normalTopic.startsWith(popRetryPrefix);
+ if ($stack13==0) goto label2;
+ normalTopic = msg.getTopic();
+ normalTopic = org.apache.rocketmq.common.KeyBuilder.parseNormalTopic(normalTopic,consumerGroup);
+ if (normalTopic==null) goto label2;
+ $stack13 = normalTopic.isEmpty();
+ if ($stack13!=0) goto label2;
+ msg.setTopic(normalTopic);
+ label2:goto label0;
+ label1:return;
+ } 
+

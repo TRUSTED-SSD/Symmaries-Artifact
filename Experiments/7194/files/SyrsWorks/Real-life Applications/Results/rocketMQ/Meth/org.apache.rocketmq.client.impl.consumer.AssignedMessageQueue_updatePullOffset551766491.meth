@@ -1,0 +1,17 @@
+void org.apache.rocketmq.client.impl.consumer.AssignedMessageQueue:updatePullOffset(org.apache.rocketmq.common.message.MessageQueue messageQueue,long offset,org.apache.rocketmq.client.impl.consumer.ProcessQueue processQueue)
+{
+org.apache.rocketmq.client.impl.consumer.AssignedMessageQueue$MessageQueueState messageQueueState;
+  java.util.concurrent.ConcurrentHashMap $stack6;
+  java.lang.Object $stack7;
+  org.apache.rocketmq.client.impl.consumer.ProcessQueue $stack8;
+  $stack6=this.assignedMessageQueueState;
+ $stack7 = $stack6.get((java.lang.Object)messageQueue);
+ messageQueueState=(org.apache.rocketmq.client.impl.consumer.AssignedMessageQueue$MessageQueueState) $stack7;
+ if (messageQueueState==null) goto label0;
+ $stack8 = messageQueueState.getProcessQueue();
+ if ($stack8==processQueue) goto label1;
+ return;
+ label1:messageQueueState.setPullOffset(offset);
+ label0:return;
+ } 
+

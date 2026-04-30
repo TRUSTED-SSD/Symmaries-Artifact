@@ -1,0 +1,31 @@
+void org.apache.rocketmq.store.kv.CompactionService:putRequest(org.apache.rocketmq.store.DispatchRequest request)
+{
+java.lang.String topic;
+  java.util.Optional topicConfig;
+  org.apache.rocketmq.common.attribute.CleanupPolicy policy;
+  int queueId;
+  long physicalOffset;
+  org.apache.rocketmq.store.DefaultMessageStore $stack10;
+  org.apache.rocketmq.common.attribute.CleanupPolicy $stack13;
+  boolean $stack14;
+  org.apache.rocketmq.store.kv.CompactionService$TopicPartitionOffset $stack17;
+  java.util.concurrent.LinkedBlockingQueue $stack18;
+  if (request!=null) goto label0;
+ return;
+ label0:topic = request.getTopic();
+ $stack10=this.defaultMessageStore;
+ topicConfig = $stack10.getTopicConfig(topic);
+ policy = org.apache.rocketmq.common.utils.CleanupPolicyUtils.getDeletePolicy(topicConfig);
+ $stack13=org.apache.rocketmq.common.attribute.CleanupPolicy.COMPACTION;
+ $stack14 = java.util.Objects.equals((java.lang.Object)policy,(java.lang.Object)$stack13);
+ if ($stack14==0) goto label1;
+ queueId = request.getQueueId();
+ physicalOffset = request.getCommitLogOffset();
+ $stack17=new org.apache.rocketmq.store.kv.CompactionService$TopicPartitionOffset;
+ $stack17#org.apache.rocketmq.store.kv.CompactionService$TopicPartitionOffset(topic,queueId,physicalOffset);
+ $stack18=this.compactionMsgQ;
+ $stack18.offer((java.lang.Object)$stack17);
+ this.wakeup();
+ label1:return;
+ } 
+

@@ -1,0 +1,56 @@
+org.apache.rocketmq.tools.admin.common.AdminToolResult org.apache.rocketmq.tools.admin.DefaultMQAdminExtImpl$5:doExecute()
+{
+java.lang.String retryTopic;
+  org.apache.rocketmq.remoting.protocol.route.TopicRouteData topicRouteData;
+  org.apache.rocketmq.remoting.protocol.body.TopicList result;
+  java.util.concurrent.CountDownLatch latch;
+  java.util.Iterator l5;
+  org.apache.rocketmq.remoting.protocol.route.BrokerData bd;
+  org.apache.rocketmq.tools.admin.DefaultMQAdminExtImpl $stack9;
+  org.apache.rocketmq.tools.admin.common.AdminToolsResultCodeEnum $stack11;
+  org.apache.rocketmq.tools.admin.common.AdminToolResult $stack12;
+  java.util.List $stack13;
+  boolean $stack14;
+  int $stack18;
+  long $stack23;
+  java.util.concurrent.TimeUnit $stack24;
+  java.lang.Object $stack27;
+  org.apache.rocketmq.tools.admin.DefaultMQAdminExtImpl$5$1 $stack29;
+  java.util.concurrent.ThreadPoolExecutor $stack30;
+  retryTopic=this.val$group;
+ retryTopic = org.apache.rocketmq.common.MixAll.getRetryTopic(retryTopic);
+ $stack9=this.this$0;
+ topicRouteData = $stack9.examineTopicRouteInfo(retryTopic);
+ if (topicRouteData==null) goto label0;
+ $stack13 = topicRouteData.getBrokerDatas();
+ $stack14 = org.apache.commons.collections.CollectionUtils.isEmpty((java.util.Collection)$stack13);
+ if ($stack14==0) goto label1;
+ label0:$stack11=org.apache.rocketmq.tools.admin.common.AdminToolsResultCodeEnum.TOPIC_ROUTE_INFO_NOT_EXIST;
+ $stack12 = org.apache.rocketmq.tools.admin.common.AdminToolResult.failure($stack11,"router info not found.");
+ return  $stack12;
+ label1:result=new org.apache.rocketmq.remoting.protocol.body.TopicList;
+ result#org.apache.rocketmq.remoting.protocol.body.TopicList();
+ latch=new java.util.concurrent.CountDownLatch;
+ $stack13 = topicRouteData.getBrokerDatas();
+ $stack18 = $stack13.size();
+ latch#java.util.concurrent.CountDownLatch($stack18);
+ $stack13 = topicRouteData.getBrokerDatas();
+ l5 = $stack13.iterator();
+ label2:$stack14 = l5.hasNext();
+ if ($stack14==0) goto label3;
+ $stack27 = l5.next();
+ bd=(org.apache.rocketmq.remoting.protocol.route.BrokerData) $stack27;
+ $stack9=this.this$0;
+ $stack30=$stack9.threadPoolExecutor;
+ $stack29=new org.apache.rocketmq.tools.admin.DefaultMQAdminExtImpl$5$1;
+ $stack29#org.apache.rocketmq.tools.admin.DefaultMQAdminExtImpl$5$1(this,bd,result,latch);
+ $stack30.submit((java.lang.Runnable)$stack29);
+ goto label2;
+ label3:$stack9=this.this$0;
+ $stack23 = org.apache.rocketmq.tools.admin.DefaultMQAdminExtImpl.access$000($stack9);
+ $stack24=java.util.concurrent.TimeUnit.MILLISECONDS;
+ latch.await($stack23,$stack24);
+ $stack12 = org.apache.rocketmq.tools.admin.common.AdminToolResult.success((java.lang.Object)result);
+ return  $stack12;
+ } 
+

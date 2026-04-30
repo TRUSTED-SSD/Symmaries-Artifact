@@ -1,0 +1,23 @@
+void org.apache.rocketmq.store.CommitLog$GroupCommitService:swapRequests()
+{
+java.util.LinkedList tmp;
+  org.apache.rocketmq.store.PutMessageSpinLock $stack3;
+  java.util.LinkedList $stack4;
+  java.lang.Throwable $stack6;
+  $stack3=this.lock;
+ $stack3.lock();
+ label0:tmp=this.requestsWrite;
+ $stack4=this.requestsRead;
+ this.requestsWrite=$stack4;
+ this.requestsRead=tmp;
+ label1:$stack3=this.lock;
+ $stack3.unlock();
+ goto label2;
+ label3:$stack6 = catch;
+ $stack3=this.lock;
+ $stack3.unlock();
+ throw $stack6;
+ label2:return;
+ catch java.lang.Throwable: label0 - label1 : label3;
+} 
+

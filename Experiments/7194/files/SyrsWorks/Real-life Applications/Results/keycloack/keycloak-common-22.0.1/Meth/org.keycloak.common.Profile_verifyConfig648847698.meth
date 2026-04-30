@@ -1,0 +1,52 @@
+static void org.keycloak.common.Profile:verifyConfig(java.util.Map features)
+{
+java.util.Iterator l1;
+  org.keycloak.common.Profile$Feature f;
+  java.util.Iterator l3;
+  org.keycloak.common.Profile$Feature d;
+  java.util.Set $stack5;
+  boolean $stack7;
+  java.lang.Object $stack8;
+  java.lang.Boolean $stack10;
+  org.keycloak.common.profile.ProfileException $stack22;
+  java.lang.StringBuilder $stack23;
+  java.lang.String $stack25;
+  $stack5 = features.keySet();
+ l1 = $stack5.iterator();
+ label0:$stack7 = l1.hasNext();
+ if ($stack7==0) goto label1;
+ $stack8 = l1.next();
+ f=(org.keycloak.common.Profile$Feature) $stack8;
+ $stack8 = features.get((java.lang.Object)f);
+ $stack10=(java.lang.Boolean) $stack8;
+ $stack7 = $stack10.booleanValue();
+ if ($stack7==0) goto label2;
+ $stack5 = f.getDependencies();
+ if ($stack5==null) goto label2;
+ $stack5 = f.getDependencies();
+ l3 = $stack5.iterator();
+ label3:$stack7 = l3.hasNext();
+ if ($stack7==0) goto label2;
+ $stack8 = l3.next();
+ d=(org.keycloak.common.Profile$Feature) $stack8;
+ $stack8 = features.get((java.lang.Object)d);
+ $stack10=(java.lang.Boolean) $stack8;
+ $stack7 = $stack10.booleanValue();
+ if ($stack7!=0) goto label4;
+ $stack22=new org.keycloak.common.profile.ProfileException;
+ $stack23=new java.lang.StringBuilder;
+ $stack23#java.lang.StringBuilder();
+ $stack23 = $stack23.append("Feature ");
+ $stack25 = f.getKey();
+ $stack23 = $stack23.append($stack25);
+ $stack23 = $stack23.append(" depends on disabled feature ");
+ $stack25 = d.getKey();
+ $stack23 = $stack23.append($stack25);
+ $stack25 = $stack23.toString();
+ $stack22#org.keycloak.common.profile.ProfileException($stack25);
+ throw $stack22;
+ label4:goto label3;
+ label2:goto label0;
+ label1:return;
+ } 
+

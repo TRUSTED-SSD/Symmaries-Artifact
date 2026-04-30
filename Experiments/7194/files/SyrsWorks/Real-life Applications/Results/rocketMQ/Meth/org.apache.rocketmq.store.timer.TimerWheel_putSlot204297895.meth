@@ -1,0 +1,31 @@
+void org.apache.rocketmq.store.timer.TimerWheel:putSlot(long timeMs,long firstPos,long lastPos)
+{
+java.lang.ThreadLocal $stack7;
+  java.lang.Object $stack8;
+  java.nio.ByteBuffer $stack9;
+  int $stack10;
+  long $stack16;
+  $stack7=this.localBuffer;
+ $stack8 = $stack7.get();
+ $stack9=(java.nio.ByteBuffer) $stack8;
+ $stack10 = this.getSlotIndex(timeMs);
+ $stack10=($stack10 * 32);
+ $stack9.position($stack10);
+ $stack7=this.localBuffer;
+ $stack8 = $stack7.get();
+ $stack9=(java.nio.ByteBuffer) $stack8;
+ $stack10=this.precisionMs;
+ $stack16=(long) $stack10;
+ timeMs=(timeMs/$stack16);
+ $stack9.putLong(timeMs);
+ $stack7=this.localBuffer;
+ $stack8 = $stack7.get();
+ $stack9=(java.nio.ByteBuffer) $stack8;
+ $stack9.putLong(firstPos);
+ $stack7=this.localBuffer;
+ $stack8 = $stack7.get();
+ $stack9=(java.nio.ByteBuffer) $stack8;
+ $stack9.putLong(lastPos);
+ return;
+ } 
+

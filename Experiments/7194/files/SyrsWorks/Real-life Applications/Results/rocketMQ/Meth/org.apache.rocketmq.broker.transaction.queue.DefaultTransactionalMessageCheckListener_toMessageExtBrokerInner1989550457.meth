@@ -1,0 +1,53 @@
+org.apache.rocketmq.common.message.MessageExtBrokerInner org.apache.rocketmq.broker.transaction.queue.DefaultTransactionalMessageCheckListener:toMessageExtBrokerInner(org.apache.rocketmq.common.message.MessageExt msgExt)
+{
+org.apache.rocketmq.common.TopicConfig topicConfig;
+  int queueId;
+  org.apache.rocketmq.common.message.MessageExtBrokerInner inner;
+  org.apache.rocketmq.broker.BrokerController $stack5;
+  org.apache.rocketmq.broker.topic.TopicConfigManager $stack6;
+  java.util.concurrent.ThreadLocalRandom $stack8;
+  java.lang.String $stack11;
+  byte[] $stack12;
+  int $stack13;
+  java.util.Map $stack14;
+  long $stack18;
+  java.net.SocketAddress $stack20;
+  $stack5 = this.getBrokerController();
+ $stack6 = $stack5.getTopicConfigManager();
+ topicConfig = $stack6.createTopicOfTranCheckMaxTime(1,6);
+ $stack8 = java.util.concurrent.ThreadLocalRandom.current();
+ queueId = $stack8.nextInt(99999999);
+ queueId=(queueId%1);
+ inner=new org.apache.rocketmq.common.message.MessageExtBrokerInner;
+ inner#org.apache.rocketmq.common.message.MessageExtBrokerInner();
+ $stack11 = topicConfig.getTopicName();
+ inner.setTopic($stack11);
+ $stack12 = msgExt.getBody();
+ inner.setBody($stack12);
+ $stack13 = msgExt.getFlag();
+ inner.setFlag($stack13);
+ $stack14 = msgExt.getProperties();
+ org.apache.rocketmq.common.message.MessageAccessor.setProperties((org.apache.rocketmq.common.message.Message)inner,$stack14);
+ $stack14 = msgExt.getProperties();
+ $stack11 = org.apache.rocketmq.common.message.MessageDecoder.messageProperties2String($stack14);
+ inner.setPropertiesString($stack11);
+ $stack11 = msgExt.getTags();
+ $stack18 = org.apache.rocketmq.common.message.MessageExtBrokerInner.tagsString2tagsCode($stack11);
+ inner.setTagsCode($stack18);
+ inner.setQueueId(queueId);
+ queueId = msgExt.getSysFlag();
+ inner.setSysFlag(queueId);
+ $stack20 = msgExt.getBornHost();
+ inner.setBornHost($stack20);
+ $stack18 = msgExt.getBornTimestamp();
+ inner.setBornTimestamp($stack18);
+ $stack20 = msgExt.getStoreHost();
+ inner.setStoreHost($stack20);
+ queueId = msgExt.getReconsumeTimes();
+ inner.setReconsumeTimes(queueId);
+ $stack11 = msgExt.getMsgId();
+ inner.setMsgId($stack11);
+ inner.setWaitStoreMsgOK((boolean)0);
+ return  inner;
+ } 
+

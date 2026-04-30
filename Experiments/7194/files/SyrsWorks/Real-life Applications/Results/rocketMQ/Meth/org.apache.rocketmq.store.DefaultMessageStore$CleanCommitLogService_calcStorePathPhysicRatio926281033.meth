@@ -1,0 +1,45 @@
+double org.apache.rocketmq.store.DefaultMessageStore$CleanCommitLogService:calcStorePathPhysicRatio()
+{
+java.util.HashSet fullStorePath;
+  java.lang.String storePath;
+  double minPhysicRatio;
+  java.lang.String[] l6;
+  int l7;
+  int l8;
+  double physicRatio;
+  org.apache.rocketmq.store.DefaultMessageStore $stack13;
+  java.lang.String $stack16;
+  org.apache.rocketmq.store.CommitLog $stack19;
+  boolean $stack20;
+  double $stack22;
+  byte $stack23;
+  fullStorePath=new java.util.HashSet;
+ fullStorePath#java.util.HashSet();
+ $stack13=this.this$0;
+ storePath = $stack13.getStorePathPhysic();
+ storePath = storePath.trim();
+ $stack16=org.apache.rocketmq.common.MixAll.MULTI_PATH_SPLITTER;
+ minPhysicRatio=100.0;
+ l6 = storePath.split($stack16);
+ l7=#l6;
+ l8=0;
+ label0:if (l8>=l7) goto label1;
+ storePath=l6[l8];
+ $stack20 = org.apache.rocketmq.common.UtilAll.isPathExists(storePath);
+ if ($stack20==0) goto label2;
+ physicRatio = org.apache.rocketmq.common.UtilAll.getDiskPartitionSpaceUsedPercent(storePath);
+ goto label3;
+ label2:physicRatio=-1.0;
+ label3:minPhysicRatio = java.lang.Math.min(minPhysicRatio,physicRatio);
+ $stack22 = this.getDiskSpaceCleanForciblyRatio();
+ $stack23=(physicRatio cmpl $stack22);
+ if ($stack23<=0) goto label4;
+ fullStorePath.add((java.lang.Object)storePath);
+ label4:l8=(l8+1);
+ goto label0;
+ label1:$stack13=this.this$0;
+ $stack19 = org.apache.rocketmq.store.DefaultMessageStore.access$200($stack13);
+ $stack19.setFullStorePaths((java.util.Set)fullStorePath);
+ return  minPhysicRatio;
+ } 
+

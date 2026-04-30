@@ -1,0 +1,36 @@
+org.apache.rocketmq.remoting.protocol.RemotingCommand org.apache.rocketmq.broker.processor.AdminBrokerProcessor:getTimerMetrics(io.netty.channel.ChannelHandlerContext ctx,org.apache.rocketmq.remoting.protocol.RemotingCommand @request)
+{
+org.apache.rocketmq.store.timer.TimerMessageStore timerMessageStore;
+  org.apache.rocketmq.broker.BrokerController $stack6;
+  org.apache.rocketmq.store.MessageStore $stack7;
+  org.apache.rocketmq.store.timer.TimerMetrics $stack9;
+  java.lang.String $stack10;
+  java.nio.charset.Charset $stack11;
+  byte[] $stack12;
+  org.apache.rocketmq.logging.org.slf4j.Logger $stack13;
+  io.netty.channel.Channel $stack15;
+  java.net.SocketAddress $stack16;
+  org.apache.rocketmq.remoting.protocol.RemotingCommand request;
+request=@request;
+request = org.apache.rocketmq.remoting.protocol.RemotingCommand.createResponseCommand(1,"Unknown");
+ $stack6=this.brokerController;
+ $stack7 = $stack6.getMessageStore();
+ timerMessageStore = $stack7.getTimerMessageStore();
+ if (null!=timerMessageStore) goto label0;
+ $stack13=org.apache.rocketmq.broker.processor.AdminBrokerProcessor.LOGGER;
+ $stack15 = ctx.channel();
+ $stack16 = $stack15.remoteAddress();
+ $stack13.error("The timer message store is null, client: {}",(java.lang.Object)$stack16);
+ request.setCode(1);
+ request.setRemark("The timer message store is null");
+ return  request;
+ label0:$stack9 = timerMessageStore.getTimerMetrics();
+ $stack10 = $stack9.encode();
+ $stack11=java.nio.charset.StandardCharsets.UTF_8;
+ $stack12 = $stack10.getBytes($stack11);
+ request.setBody($stack12);
+ request.setCode(0);
+ request.setRemark(null);
+ return  request;
+ } 
+

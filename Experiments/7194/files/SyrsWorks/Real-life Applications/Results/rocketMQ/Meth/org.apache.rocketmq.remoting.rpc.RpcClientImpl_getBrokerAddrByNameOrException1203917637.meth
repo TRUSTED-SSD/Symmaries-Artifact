@@ -1,0 +1,22 @@
+java.lang.String org.apache.rocketmq.remoting.rpc.RpcClientImpl:getBrokerAddrByNameOrException(java.lang.String @bname)
+{
+java.lang.String addr;
+  org.apache.rocketmq.remoting.rpc.ClientMetadata $stack3;
+  org.apache.rocketmq.remoting.rpc.RpcException $stack5;
+  java.lang.StringBuilder $stack6;
+  java.lang.String bname;
+bname=@bname;
+$stack3=this.clientMetadata;
+ addr = $stack3.findMasterBrokerAddr(bname);
+ if (addr!=null) goto label0;
+ $stack5=new org.apache.rocketmq.remoting.rpc.RpcException;
+ $stack6=new java.lang.StringBuilder;
+ $stack6#java.lang.StringBuilder();
+ $stack6 = $stack6.append("cannot find addr for broker ");
+ $stack6 = $stack6.append(bname);
+ bname = $stack6.toString();
+ $stack5#org.apache.rocketmq.remoting.rpc.RpcException(1,bname);
+ throw $stack5;
+ label0:return  addr;
+ } 
+

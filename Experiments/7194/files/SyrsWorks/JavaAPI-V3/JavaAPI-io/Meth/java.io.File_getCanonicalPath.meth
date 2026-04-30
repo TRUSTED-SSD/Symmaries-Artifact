@@ -1,0 +1,20 @@
+java.lang.String java.io.File:getCanonicalPath()
+{
+boolean $z0;
+  java.io.FileSystem $r1;
+  java.io.FileSystem $r2;
+  java.lang.String $r3;
+  java.lang.String $r4;
+  java.io.IOException $r5;
+  $z0 = this.isInvalid();
+ if ($z0==0) goto label0;
+ $r5=new java.io.IOException;
+ $r5#java.io.IOException:init("Invalid file path");
+ throw $r5;
+ label0:$r2=java.io.File.fs;
+ $r1=java.io.File.fs;
+ $r3 = $r1.resolve(this);
+ $r4 = $r2.canonicalize($r3);
+ return  $r4;
+ }  
+

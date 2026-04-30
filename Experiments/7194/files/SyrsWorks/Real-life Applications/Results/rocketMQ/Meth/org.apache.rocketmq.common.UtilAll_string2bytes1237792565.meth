@@ -1,0 +1,39 @@
+static byte[] org.apache.rocketmq.common.UtilAll:string2bytes(java.lang.String @hexString)
+{
+int length;
+  char[] hexChars;
+  byte[] d;
+  int i;
+  int pos;
+  boolean $stack6;
+  char $stack10;
+  byte $stack11;
+  int $stack14;
+  java.lang.String hexString;
+hexString=@hexString;
+if (hexString==null) goto label0;
+ $stack6 = hexString.equals((java.lang.Object)"");
+ if ($stack6==0) goto label1;
+ label0:return  null;
+ label1:hexString = hexString.toUpperCase();
+ length = hexString.length();
+ length=(length/2);
+ hexChars = hexString.toCharArray();
+ d=new byte[length];
+ i=0;
+ label2:if (i>=length) goto label3;
+ pos=(i * 2);
+ $stack10=hexChars[pos];
+ $stack11 = org.apache.rocketmq.common.UtilAll.charToByte($stack10);
+ $stack14=($stack11<<4);
+ pos=(pos+1);
+ $stack10=hexChars[pos];
+ $stack11 = org.apache.rocketmq.common.UtilAll.charToByte($stack10);
+ $stack14=($stack14 | $stack11);
+ $stack11=(byte) $stack14;
+ d[i]=$stack11;
+ i=(i+1);
+ goto label2;
+ label3:return  d;
+ } 
+

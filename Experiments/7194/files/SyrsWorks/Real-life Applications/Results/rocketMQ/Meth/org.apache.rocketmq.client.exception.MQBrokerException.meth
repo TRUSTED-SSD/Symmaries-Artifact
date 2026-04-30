@@ -1,0 +1,30 @@
+org.apache.rocketmq.client.exception.MQBrokerException(int responseCode,java.lang.String errorMessage,java.lang.String brokerAddr)
+{
+java.lang.StringBuilder $stack4;
+  java.lang.String $stack6;
+  java.lang.StringBuilder $stack13;
+  $stack4=new java.lang.StringBuilder;
+ $stack4#java.lang.StringBuilder();
+ $stack4 = $stack4.append("CODE: ");
+ $stack6 = org.apache.rocketmq.common.UtilAll.responseCode2String(responseCode);
+ $stack4 = $stack4.append($stack6);
+ $stack4 = $stack4.append("  DESC: ");
+ $stack4 = $stack4.append(errorMessage);
+ if (brokerAddr==null) goto label0;
+ $stack13=new java.lang.StringBuilder;
+ $stack13#java.lang.StringBuilder();
+ $stack13 = $stack13.append(" BROKER: ");
+ $stack13 = $stack13.append(brokerAddr);
+ $stack6 = $stack13.toString();
+ goto label1;
+ label0:$stack6="";
+ label1:$stack4 = $stack4.append($stack6);
+ $stack6 = $stack4.toString();
+ $stack6 = org.apache.rocketmq.common.help.FAQUrl.attachDefaultURL($stack6);
+ this#java.lang.Exception($stack6);
+ this.responseCode=responseCode;
+ this.errorMessage=errorMessage;
+ this.brokerAddr=brokerAddr;
+ return;
+ } 
+

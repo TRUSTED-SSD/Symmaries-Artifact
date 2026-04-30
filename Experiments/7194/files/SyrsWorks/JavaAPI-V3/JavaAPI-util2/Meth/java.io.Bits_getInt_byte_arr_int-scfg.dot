@@ -1,0 +1,73 @@
+digraph G {
+  node [shape=box, ];
+  "pc0_js1" [label="〈$i1 = i0 + 3, js1〉", ];
+  "pc1_js1" [label="〈$b2 = r0[$i1], js1〉", ];
+  "pc2_js1" [label="〈$s7 = $b2 & 255, js1〉", ];
+  "pc3_js1" [label="〈$i3 = i0 + 2, js1〉", ];
+  "pc4_js1" [label="〈$b4 = r0[$i3], js1〉", ];
+  "pc5_js1" [label="〈$s5 = $b4 & 255, js1〉", ];
+  "pc6_js1" [label="〈$i6 = $s5 << 8, js1〉", ];
+  "pc7_js1" [label="〈$i12 = $s7 + $i6, js1〉", ];
+  "pc8_js1" [label="〈$i8 = i0 + 1, js1〉", ];
+  "pc9_js1" [label="〈$b9 = r0[$i8], js1〉", ];
+  "pc10_js1" [label="〈$s10 = $b9 & 255, js1〉", ];
+  "pc11_js1" [label="〈$i11 = $s10 << 16, js1〉", ];
+  "pc12_js1" [label="〈$i15 = $i12 + $i11, js1〉", ];
+  "pc13_js1" [label="〈$b13 = r0[i0], js1〉", ];
+  "pc14_js1" [label="〈$i14 = $b13 << 24, js1〉", ];
+  "pc15_js1" [label="〈$i16 = $i15 + $i14, js1〉", ];
+  "pc16_js1" [label="〈return $i16, js1〉", ];
+  "pc17_js1" [label="〈sink, js1〉\n\
+obj_level(r0) ⊑ ret(obj_level(r0))' ∧ (ϕ ≠ S16 ∨ pc ⊔ level($i16) ⊑ ret(level())')",
+              ];
+  
+  
+  "pc0_js1" -> "pc1_js1" [label="tt,\n\
+{level($i1) := pc ⊔ level(i0)}", ];
+  "pc1_js1" -> "pc2_js1" [label="tt,\n\
+{level($b2) := pc ⊔ level(i0) ⊔ level(r0) ⊔ obj_level(r0)}",
+                          ];
+  "pc2_js1" -> "pc3_js1" [label="tt,\n\
+{level($s7) := pc ⊔ level(i0) ⊔ level(r0) ⊔ obj_level(r0)}",
+                          ];
+  "pc3_js1" -> "pc4_js1" [label="tt,\n\
+{level($i3) := pc ⊔ level(i0)}", ];
+  "pc4_js1" -> "pc5_js1" [label="tt,\n\
+{level($b4) := pc ⊔ level(i0) ⊔ level(r0) ⊔ obj_level(r0)}",
+                          ];
+  "pc5_js1" -> "pc6_js1" [label="tt,\n\
+{level($s5) := pc ⊔ level(i0) ⊔ level(r0) ⊔ obj_level(r0)}",
+                          ];
+  "pc6_js1" -> "pc7_js1" [label="tt,\n\
+{level($i6) := pc ⊔ level(i0) ⊔ level(r0) ⊔ obj_level(r0)}",
+                          ];
+  "pc7_js1" -> "pc8_js1" [label="tt,\n\
+{level($i12) := pc ⊔ level(i0) ⊔ level(r0) ⊔ obj_level(r0)}",
+                          ];
+  "pc8_js1" -> "pc9_js1" [label="tt,\n\
+{level($i8) := pc ⊔ level(i0)}", ];
+  "pc9_js1" -> "pc10_js1" [label="tt,\n\
+{level($b9) := pc ⊔ level(i0) ⊔ level(r0) ⊔ obj_level(r0)}",
+                           ];
+  "pc10_js1" -> "pc11_js1" [label="tt,\n\
+{level($s10) := pc ⊔ level(i0) ⊔ level(r0) ⊔ obj_level(r0)}",
+                            ];
+  "pc11_js1" -> "pc12_js1" [label="tt,\n\
+{level($i11) := pc ⊔ level(i0) ⊔ level(r0) ⊔ obj_level(r0)}",
+                            ];
+  "pc12_js1" -> "pc13_js1" [label="tt,\n\
+{level($i15) := pc ⊔ level(i0) ⊔ level(r0) ⊔ obj_level(r0)}",
+                            ];
+  "pc13_js1" -> "pc14_js1" [label="tt,\n\
+{level($b13) := pc ⊔ level(i0) ⊔ level(r0) ⊔ obj_level(r0)}",
+                            ];
+  "pc14_js1" -> "pc15_js1" [label="tt,\n\
+{level($i14) := pc ⊔ level(i0) ⊔ level(r0) ⊔ obj_level(r0)}",
+                            ];
+  "pc15_js1" -> "pc16_js1" [label="tt,\n\
+{level($i16) := pc ⊔ level(i0) ⊔ level(r0) ⊔ obj_level(r0)}",
+                            ];
+  "pc16_js1" -> "pc17_js1" [label="tt,\n\
+{ϕ := S16}", ];
+  
+  }

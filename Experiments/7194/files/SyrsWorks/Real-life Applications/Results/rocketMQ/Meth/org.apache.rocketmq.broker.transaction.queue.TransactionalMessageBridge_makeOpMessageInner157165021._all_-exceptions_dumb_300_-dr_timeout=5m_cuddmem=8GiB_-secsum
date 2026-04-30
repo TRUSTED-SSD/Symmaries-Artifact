@@ -1,0 +1,10 @@
+org.apache.rocketmq.common.message.MessageExtBrokerInner org.apache.rocketmq.broker.transaction.queue.TransactionalMessageBridge:makeOpMessageInner (
+  org.apache.rocketmq.common.message.Message message,
+  org.apache.rocketmq.common.message.MessageQueue messageQueue) {
+  guard = tt;
+  ret(level()) = ⊥;
+  ret(obj_level()) = level(message) ⊔ level(messageQueue) ⊔ level(this) ⊔ obj_level(message) ⊔ obj_level(messageQueue) ⊔ obj_level(this);
+  ret(obj_level(message)) = level(message) ⊔ level(messageQueue) ⊔ level(this) ⊔ obj_level(message) ⊔ obj_level(messageQueue) ⊔ obj_level(this);
+  ret(obj_level(messageQueue)) = level(message) ⊔ level(messageQueue) ⊔ level(this) ⊔ obj_level(message) ⊔ obj_level(messageQueue) ⊔ obj_level(this);
+  ret(obj_level(this)) = level(message) ⊔ level(messageQueue) ⊔ level(this) ⊔ obj_level(message) ⊔ obj_level(messageQueue) ⊔ obj_level(this);
+}

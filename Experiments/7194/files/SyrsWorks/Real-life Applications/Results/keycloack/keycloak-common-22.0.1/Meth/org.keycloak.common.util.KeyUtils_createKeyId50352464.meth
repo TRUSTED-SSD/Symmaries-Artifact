@@ -1,0 +1,19 @@
+static java.lang.String org.keycloak.common.util.KeyUtils:createKeyId(java.security.Key key)
+{
+java.security.MessageDigest $stack2;
+  byte[] $stack3;
+  java.lang.String $stack5;
+  java.security.NoSuchAlgorithmException $stack6;
+  java.lang.RuntimeException $stack7;
+  label0:$stack2 = java.security.MessageDigest.getInstance("SHA-256");
+ $stack3 = key.getEncoded();
+ $stack3 = $stack2.digest($stack3);
+ $stack5 = org.keycloak.common.util.Base64Url.encode($stack3);
+ label1:return  $stack5;
+ label2:$stack6 = catch;
+ $stack7=new java.lang.RuntimeException;
+ $stack7#java.lang.RuntimeException((java.lang.Throwable)$stack6);
+ throw $stack7;
+ catch java.security.NoSuchAlgorithmException: label0 - label1 : label2;
+} 
+

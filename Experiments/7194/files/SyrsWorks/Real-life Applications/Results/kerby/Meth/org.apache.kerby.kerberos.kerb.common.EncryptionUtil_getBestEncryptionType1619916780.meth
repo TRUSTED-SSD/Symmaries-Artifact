@@ -1,0 +1,37 @@
+static org.apache.kerby.kerberos.kerb.type.base.EncryptionType org.apache.kerby.kerberos.kerb.common.EncryptionUtil:getBestEncryptionType(java.util.List requestedTypes,java.util.List configuredTypes)
+{
+java.util.Iterator l2;
+  org.apache.kerby.kerberos.kerb.type.base.EncryptionType configuredType;
+  int configuredTypeValue;
+  java.util.Iterator l5;
+  boolean $stack8;
+  java.lang.Object $stack11;
+  int $stack17;
+  l2 = configuredTypes.iterator();
+ label0:$stack8 = l2.hasNext();
+ if ($stack8==0) goto label1;
+ $stack11 = l2.next();
+ configuredType=(org.apache.kerby.kerberos.kerb.type.base.EncryptionType) $stack11;
+ $stack8 = requestedTypes.contains((java.lang.Object)configuredType);
+ if ($stack8==0) goto label2;
+ return  configuredType;
+ label2:goto label0;
+ label1:l2 = configuredTypes.iterator();
+ label3:$stack8 = l2.hasNext();
+ if ($stack8==0) goto label4;
+ $stack11 = l2.next();
+ configuredType=(org.apache.kerby.kerberos.kerb.type.base.EncryptionType) $stack11;
+ configuredTypeValue = configuredType.getValue();
+ l5 = requestedTypes.iterator();
+ label5:$stack8 = l5.hasNext();
+ if ($stack8==0) goto label6;
+ $stack11 = l5.next();
+ configuredType=(org.apache.kerby.kerberos.kerb.type.base.EncryptionType) $stack11;
+ $stack17 = configuredType.getValue();
+ if (configuredTypeValue!=$stack17) goto label7;
+ return  configuredType;
+ label7:goto label5;
+ label6:goto label3;
+ label4:return  null;
+ } 
+

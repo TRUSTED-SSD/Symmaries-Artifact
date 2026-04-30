@@ -1,0 +1,40 @@
+org.apache.rocketmq.remoting.protocol.RemotingCommand org.apache.rocketmq.namesrv.processor.DefaultRequestProcessor:addWritePermOfBroker(io.netty.channel.ChannelHandlerContext ctx,org.apache.rocketmq.remoting.protocol.RemotingCommand request)
+{
+org.apache.rocketmq.remoting.protocol.RemotingCommand response;
+  org.apache.rocketmq.remoting.protocol.header.namesrv.AddWritePermOfBrokerResponseHeader responseHeader;
+  org.apache.rocketmq.remoting.protocol.header.namesrv.AddWritePermOfBrokerRequestHeader requestHeader;
+  int addTopicCnt;
+  org.apache.rocketmq.remoting.CommandCustomHeader $stack8;
+  org.apache.rocketmq.namesrv.NamesrvController $stack10;
+  org.apache.rocketmq.namesrv.routeinfo.RouteInfoManager $stack11;
+  java.lang.String $stack12;
+  java.lang.Object[] $stack14;
+  org.apache.rocketmq.logging.org.slf4j.Logger $stack15;
+  io.netty.channel.Channel $stack20;
+  java.lang.Integer $stack23;
+  response = org.apache.rocketmq.remoting.protocol.RemotingCommand.createResponseCommand(org.apache.rocketmq.remoting.protocol.header.namesrv.AddWritePermOfBrokerResponseHeader);
+ $stack8 = response.readCustomHeader();
+ responseHeader=(org.apache.rocketmq.remoting.protocol.header.namesrv.AddWritePermOfBrokerResponseHeader) $stack8;
+ $stack8 = request.decodeCommandCustomHeader(org.apache.rocketmq.remoting.protocol.header.namesrv.AddWritePermOfBrokerRequestHeader);
+ requestHeader=(org.apache.rocketmq.remoting.protocol.header.namesrv.AddWritePermOfBrokerRequestHeader) $stack8;
+ $stack10=this.namesrvController;
+ $stack11 = $stack10.getRouteInfoManager();
+ $stack12 = requestHeader.getBrokerName();
+ addTopicCnt = $stack11.addWritePermOfBrokerByLock($stack12);
+ $stack15=org.apache.rocketmq.namesrv.processor.DefaultRequestProcessor.log;
+ $stack14=new java.lang.Object[3];
+ $stack12 = requestHeader.getBrokerName();
+ $stack14[0]=$stack12;
+ $stack20 = ctx.channel();
+ $stack12 = org.apache.rocketmq.remoting.common.RemotingHelper.parseChannelRemoteAddr($stack20);
+ $stack14[1]=$stack12;
+ $stack23 = java.lang.Integer.valueOf(addTopicCnt);
+ $stack14[2]=$stack23;
+ $stack15.info("add write perm of broker[{}], client: {}, {}",$stack14);
+ $stack23 = java.lang.Integer.valueOf(addTopicCnt);
+ responseHeader.setAddTopicCount($stack23);
+ response.setCode(0);
+ response.setRemark(null);
+ return  response;
+ } 
+

@@ -1,0 +1,48 @@
+org.apache.rocketmq.remoting.protocol.RemotingCommand org.apache.rocketmq.client.impl.ClientRemotingProcessor:resetOffset(io.netty.channel.ChannelHandlerContext ctx,org.apache.rocketmq.remoting.protocol.RemotingCommand request)
+{
+org.apache.rocketmq.remoting.protocol.header.ResetOffsetRequestHeader requestHeader;
+  java.util.Map offsetTable;
+  org.apache.rocketmq.remoting.protocol.body.ResetOffsetBody body;
+  org.apache.rocketmq.remoting.CommandCustomHeader $stack6;
+  java.lang.Object[] $stack7;
+  org.apache.rocketmq.logging.org.slf4j.Logger $stack8;
+  io.netty.channel.Channel $stack11;
+  java.lang.String $stack12;
+  long $stack18;
+  java.lang.Long $stack19;
+  java.util.HashMap $stack20;
+  byte[] $stack21;
+  org.apache.rocketmq.client.impl.factory.MQClientInstance $stack22;
+  java.lang.String $stack24;
+  java.lang.Object $stack26;
+  $stack6 = request.decodeCommandCustomHeader(org.apache.rocketmq.remoting.protocol.header.ResetOffsetRequestHeader);
+ requestHeader=(org.apache.rocketmq.remoting.protocol.header.ResetOffsetRequestHeader) $stack6;
+ $stack8=this.logger;
+ $stack7=new java.lang.Object[4];
+ $stack11 = ctx.channel();
+ $stack12 = org.apache.rocketmq.remoting.common.RemotingHelper.parseChannelRemoteAddr($stack11);
+ $stack7[0]=$stack12;
+ $stack12 = requestHeader.getTopic();
+ $stack7[1]=$stack12;
+ $stack12 = requestHeader.getGroup();
+ $stack7[2]=$stack12;
+ $stack18 = requestHeader.getTimestamp();
+ $stack19 = java.lang.Long.valueOf($stack18);
+ $stack7[3]=$stack19;
+ $stack8.info("invoke reset offset operation from broker. brokerAddr={}, topic={}, group={}, timestamp={}",$stack7);
+ $stack20=new java.util.HashMap;
+ $stack20#java.util.HashMap();
+ offsetTable=$stack20;
+ $stack21 = request.getBody();
+ if ($stack21==null) goto label0;
+ $stack21 = request.getBody();
+ $stack26 = org.apache.rocketmq.remoting.protocol.RemotingSerializable.decode($stack21,org.apache.rocketmq.remoting.protocol.body.ResetOffsetBody);
+ body=(org.apache.rocketmq.remoting.protocol.body.ResetOffsetBody) $stack26;
+ offsetTable = body.getOffsetTable();
+ label0:$stack22=this.mqClientFactory;
+ $stack12 = requestHeader.getTopic();
+ $stack24 = requestHeader.getGroup();
+ $stack22.resetOffset($stack12,$stack24,offsetTable);
+ return  null;
+ } 
+

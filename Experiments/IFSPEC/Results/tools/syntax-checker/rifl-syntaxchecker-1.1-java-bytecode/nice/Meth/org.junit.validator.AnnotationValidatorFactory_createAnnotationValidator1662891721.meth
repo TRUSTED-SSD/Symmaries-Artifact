@@ -1,0 +1,49 @@
+org.junit.validator.AnnotationValidator org.junit.validator.AnnotationValidatorFactory:createAnnotationValidator(org.junit.validator.ValidateWith validateWithAnnotation)
+{
+org.junit.validator.AnnotationValidator validator;
+  java.lang.Class clazz;
+  java.util.concurrent.ConcurrentHashMap $stack5;
+  java.lang.Object $stack6;
+  java.lang.IllegalArgumentException $stack14;
+  java.lang.StringBuilder $stack15;
+  java.lang.String $stack18;
+  java.lang.Exception $stack21;
+  java.lang.RuntimeException $stack22;
+  $stack5=org.junit.validator.AnnotationValidatorFactory.VALIDATORS_FOR_ANNOTATION_TYPES;
+ $stack6 = $stack5.get((java.lang.Object)validateWithAnnotation);
+ validator=(org.junit.validator.AnnotationValidator) $stack6;
+ if (validator==null) goto label0;
+ return  validator;
+ label0:clazz = validateWithAnnotation.value();
+ if (clazz!=null) goto label1;
+ $stack14=new java.lang.IllegalArgumentException;
+ $stack15=new java.lang.StringBuilder;
+ $stack15#java.lang.StringBuilder();
+ $stack15 = $stack15.append("Can\'t create validator, value is null in annotation ");
+ clazz = validateWithAnnotation.getClass();
+ $stack18 = clazz.getName();
+ $stack15 = $stack15.append($stack18);
+ $stack18 = $stack15.toString();
+ $stack14#java.lang.IllegalArgumentException($stack18);
+ throw $stack14;
+ label1:$stack6 = clazz.newInstance();
+ validator=(org.junit.validator.AnnotationValidator) $stack6;
+ $stack5=org.junit.validator.AnnotationValidatorFactory.VALIDATORS_FOR_ANNOTATION_TYPES;
+ $stack5.putIfAbsent((java.lang.Object)validateWithAnnotation,(java.lang.Object)validator);
+ $stack5=org.junit.validator.AnnotationValidatorFactory.VALIDATORS_FOR_ANNOTATION_TYPES;
+ $stack6 = $stack5.get((java.lang.Object)validateWithAnnotation);
+ validator=(org.junit.validator.AnnotationValidator) $stack6;
+ label2:return  validator;
+ label3:$stack21 = catch;
+ $stack22=new java.lang.RuntimeException;
+ $stack15=new java.lang.StringBuilder;
+ $stack15#java.lang.StringBuilder();
+ $stack15 = $stack15.append("Exception received when creating AnnotationValidator class ");
+ $stack18 = clazz.getName();
+ $stack15 = $stack15.append($stack18);
+ $stack18 = $stack15.toString();
+ $stack22#java.lang.RuntimeException($stack18,(java.lang.Throwable)$stack21);
+ throw $stack22;
+ catch java.lang.Exception: label1 - label2 : label3;
+} 
+

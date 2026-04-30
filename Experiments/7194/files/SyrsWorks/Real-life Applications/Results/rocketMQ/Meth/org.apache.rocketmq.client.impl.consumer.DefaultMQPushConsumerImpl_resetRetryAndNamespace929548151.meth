@@ -1,0 +1,36 @@
+void org.apache.rocketmq.client.impl.consumer.DefaultMQPushConsumerImpl:resetRetryAndNamespace(java.util.List msgs,java.lang.String @consumerGroup)
+{
+java.util.Iterator l4;
+  org.apache.rocketmq.common.message.MessageExt msg;
+  java.lang.String retryTopic;
+  boolean $stack9;
+  java.lang.Object $stack10;
+  org.apache.rocketmq.client.consumer.DefaultMQPushConsumer $stack12;
+  java.lang.String $stack18;
+  java.lang.String consumerGroup;
+consumerGroup=@consumerGroup;
+consumerGroup = org.apache.rocketmq.common.MixAll.getRetryTopic(consumerGroup);
+ l4 = msgs.iterator();
+ label0:$stack9 = l4.hasNext();
+ if ($stack9==0) goto label1;
+ $stack10 = l4.next();
+ msg=(org.apache.rocketmq.common.message.MessageExt) $stack10;
+ retryTopic = msg.getProperty("RETRY_TOPIC");
+ if (retryTopic==null) goto label2;
+ $stack18 = msg.getTopic();
+ $stack9 = consumerGroup.equals((java.lang.Object)$stack18);
+ if ($stack9==0) goto label2;
+ msg.setTopic(retryTopic);
+ label2:$stack12=this.defaultMQPushConsumer;
+ retryTopic = $stack12.getNamespace();
+ $stack9 = org.apache.commons.lang3.StringUtils.isNotEmpty((java.lang.CharSequence)retryTopic);
+ if ($stack9==0) goto label3;
+ retryTopic = msg.getTopic();
+ $stack12=this.defaultMQPushConsumer;
+ $stack18 = $stack12.getNamespace();
+ retryTopic = org.apache.rocketmq.remoting.protocol.NamespaceUtil.withoutNamespace(retryTopic,$stack18);
+ msg.setTopic(retryTopic);
+ label3:goto label0;
+ label1:return;
+ } 
+

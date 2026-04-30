@@ -1,0 +1,37 @@
+static java.lang.String org.apache.kerby.util.HexUtil:bytesToHex(byte[] bytes)
+{
+int len;
+  char[] hexChars;
+  short v;
+  int $stack6;
+  java.lang.String $stack7;
+  byte $stack8;
+  short $stack9;
+  char[] $stack10;
+  char $stack11;
+  len=#bytes;
+ len=(len * 2);
+ hexChars=new char[len];
+ len=0;
+ label0:$stack6=#bytes;
+ if (len>=$stack6) goto label1;
+ $stack8=bytes[len];
+ v=($stack8 & 255);
+ $stack6=(len * 2);
+ $stack10=org.apache.kerby.util.HexUtil.HEX_CHARS;
+ $stack9=(v>>>4);
+ $stack11=$stack10[$stack9];
+ hexChars[$stack6]=$stack11;
+ $stack6=(len * 2);
+ $stack6=($stack6+1);
+ $stack10=org.apache.kerby.util.HexUtil.HEX_CHARS;
+ v=(v & 15);
+ $stack11=$stack10[v];
+ hexChars[$stack6]=$stack11;
+ len=(len+1);
+ goto label0;
+ label1:$stack7=new java.lang.String;
+ $stack7#java.lang.String(hexChars);
+ return  $stack7;
+ } 
+

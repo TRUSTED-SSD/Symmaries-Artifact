@@ -1,0 +1,110 @@
+    void readEscapeHatches(org.w3c.dom.Document, java.util.Set) throws rifl.spec.RIFLIntegrityException
+    {
+        rifl.spec.RIFLReader this;
+        org.w3c.dom.Document doc;
+        java.util.Set escapeHatches;
+        org.w3c.dom.Element hatchesElem, expressionElem;
+        java.util.Iterator l5;
+        rifl.spec.DeclassificationExpression expression;
+        rifl.spec.ReferencePoint referencePoint;
+        org.w3c.dom.NodeList $stack13;
+        java.lang.Iterable $stack14;
+        boolean $stack16;
+        java.lang.Object $stack17;
+        org.w3c.dom.Node $stack19;
+        rifl.spec.Domain $stack24;
+        java.lang.String $stack25;
+        rifl.spec.EscapeHatch $stack26;
+
+        this := @this: rifl.spec.RIFLReader;
+
+        doc := @parameter0: org.w3c.dom.Document;
+
+        escapeHatches := @parameter1: java.util.Set;
+
+        hatchesElem = staticinvoke <rifl.spec.RIFLReader: org.w3c.dom.Element getElement(org.w3c.dom.Document,java.lang.String)>(doc, "hatches");
+/*255*/
+/*255*/
+
+        if hatchesElem != null goto label1;
+/*257*/
+
+        return;
+/*258*/
+
+     label1:
+        $stack13 = interfaceinvoke hatchesElem.<org.w3c.dom.Element: org.w3c.dom.NodeList getChildNodes()>();
+/*260*/
+
+        $stack14 = staticinvoke <rifl.spec.RIFLReader: java.lang.Iterable getElementList(org.w3c.dom.NodeList)>($stack13);
+/*260*/
+
+        l5 = interfaceinvoke $stack14.<java.lang.Iterable: java.util.Iterator iterator()>();
+/*260*/
+/*260*/
+
+        goto label3;
+/*260*/
+
+     label2:
+        $stack17 = interfaceinvoke l5.<java.util.Iterator: java.lang.Object next()>();
+/*260*/
+
+        hatchesElem = (org.w3c.dom.Element) $stack17;
+/*260*/
+
+        $stack13 = interfaceinvoke hatchesElem.<org.w3c.dom.Element: org.w3c.dom.NodeList getElementsByTagName(java.lang.String)>("expression");
+/*261*/
+
+        $stack19 = interfaceinvoke $stack13.<org.w3c.dom.NodeList: org.w3c.dom.Node item(int)>(0);
+/*261*/
+
+        expressionElem = (org.w3c.dom.Element) $stack19;
+/*261*/
+
+        expression = virtualinvoke this.<rifl.spec.RIFLReader: rifl.spec.DeclassificationExpression readExpression(org.w3c.dom.Element)>(expressionElem);
+/*262*/
+/*262*/
+
+        $stack13 = interfaceinvoke hatchesElem.<org.w3c.dom.Element: org.w3c.dom.NodeList getElementsByTagName(java.lang.String)>("referencepoint");
+/*264*/
+
+        $stack19 = interfaceinvoke $stack13.<org.w3c.dom.NodeList: org.w3c.dom.Node item(int)>(0);
+/*264*/
+
+        expressionElem = (org.w3c.dom.Element) $stack19;
+/*264*/
+
+        referencePoint = virtualinvoke this.<rifl.spec.RIFLReader: rifl.spec.ReferencePoint readReferencePoint(org.w3c.dom.Element)>(expressionElem);
+/*265*/
+/*265*/
+
+        $stack24 = new rifl.spec.Domain;
+/*267*/
+
+        $stack25 = interfaceinvoke hatchesElem.<org.w3c.dom.Element: java.lang.String getAttribute(java.lang.String)>("to");
+/*267*/
+
+        specialinvoke $stack24.<rifl.spec.Domain: void <init>(java.lang.String)>($stack25);
+/*267*/
+
+        $stack26 = new rifl.spec.EscapeHatch;
+/*269*/
+
+        specialinvoke $stack26.<rifl.spec.EscapeHatch: void <init>(rifl.spec.DeclassificationExpression,rifl.spec.ReferencePoint,rifl.spec.Domain)>(expression, referencePoint, $stack24);
+/*269*/
+
+        interfaceinvoke escapeHatches.<java.util.Set: boolean add(java.lang.Object)>($stack26);
+/*270*/
+
+     label3:
+        $stack16 = interfaceinvoke l5.<java.util.Iterator: boolean hasNext()>();
+/*260*/
+
+        if $stack16 != 0 goto label2;
+/*260*/
+
+        return;
+/*272*/
+    }
+

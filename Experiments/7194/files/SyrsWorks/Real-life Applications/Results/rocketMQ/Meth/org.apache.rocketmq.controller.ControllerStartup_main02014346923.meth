@@ -1,0 +1,32 @@
+static org.apache.rocketmq.controller.ControllerManager org.apache.rocketmq.controller.ControllerStartup:main0(java.lang.String[] args)
+{
+org.apache.rocketmq.controller.ControllerManager controller;
+  java.lang.String tip;
+  java.lang.StringBuilder $stack5;
+  org.apache.rocketmq.remoting.protocol.SerializeType $stack7;
+  org.apache.rocketmq.logging.org.slf4j.Logger $stack10;
+  java.lang.Object[] $stack11;
+  java.io.PrintStream $stack12;
+  java.lang.Throwable $stack14;
+  label0:controller = org.apache.rocketmq.controller.ControllerStartup.createControllerManager(args);
+ org.apache.rocketmq.controller.ControllerStartup.start(controller);
+ $stack5=new java.lang.StringBuilder;
+ $stack5#java.lang.StringBuilder();
+ $stack5 = $stack5.append("The Controller Server boot success. serializeType=");
+ $stack7 = org.apache.rocketmq.remoting.protocol.RemotingCommand.getSerializeTypeConfigInThisServer();
+ $stack5 = $stack5.append((java.lang.Object)$stack7);
+ tip = $stack5.toString();
+ $stack10=org.apache.rocketmq.controller.ControllerStartup.log;
+ $stack10.info(tip);
+ $stack12=java.lang.System.out;
+ $stack11=new java.lang.Object[1];
+ $stack11[0]=tip;
+ $stack12.printf("%s%n",$stack11);
+ label1:return  controller;
+ label2:$stack14 = catch;
+ $stack14.printStackTrace();
+ java.lang.System.exit(-1);
+ return  null;
+ catch java.lang.Throwable: label0 - label1 : label2;
+} 
+

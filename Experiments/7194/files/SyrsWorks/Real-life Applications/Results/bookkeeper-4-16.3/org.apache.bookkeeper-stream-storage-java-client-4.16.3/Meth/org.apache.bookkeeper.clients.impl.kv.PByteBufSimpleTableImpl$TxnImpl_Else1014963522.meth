@@ -1,0 +1,22 @@
+org.apache.bookkeeper.api.kv.Txn org.apache.bookkeeper.clients.impl.kv.PByteBufSimpleTableImpl$TxnImpl:Else(org.apache.bookkeeper.api.kv.op.Op[] ops)
+{
+int l3;
+  int l4;
+  org.apache.bookkeeper.api.kv.op.Op op;
+  org.apache.bookkeeper.stream.proto.kv.rpc.TxnRequest$Builder $stack6;
+  org.apache.bookkeeper.stream.proto.kv.rpc.RequestOp$Builder $stack7;
+  java.util.List $stack9;
+  l3=#ops;
+ l4=0;
+ label0:if (l4>=l3) goto label1;
+ op=ops[l4];
+ $stack6=this.txnBuilder;
+ $stack7 = org.apache.bookkeeper.clients.impl.kv.KvUtils.toProtoRequest(op);
+ $stack6.addFailure($stack7);
+ $stack9=this.resourcesToRelease;
+ $stack9.add((java.lang.Object)op);
+ l4=(l4+1);
+ goto label0;
+ label1:return  this;
+ } 
+

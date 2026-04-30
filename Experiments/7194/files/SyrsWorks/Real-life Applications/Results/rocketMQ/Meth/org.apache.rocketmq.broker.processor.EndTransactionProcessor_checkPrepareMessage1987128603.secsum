@@ -1,0 +1,11 @@
+org.apache.rocketmq.remoting.protocol.RemotingCommand org.apache.rocketmq.broker.processor.EndTransactionProcessor:checkPrepareMessage (
+  org.apache.rocketmq.common.message.MessageExt msgExt,
+  org.apache.rocketmq.remoting.protocol.header.EndTransactionRequestHeader
+    requestHeader) {
+  guard = tt;
+  ret(level()) = pc ⊔ level(msgExt) ⊔ level(requestHeader) ⊔ obj_level(msgExt) ⊔ obj_level(requestHeader);
+  ret(obj_level()) = pc ⊔ level(msgExt) ⊔ level(requestHeader) ⊔ obj_level(msgExt) ⊔ obj_level(requestHeader);
+  ret(obj_level(msgExt)) = pc ⊔ level(msgExt) ⊔ level(requestHeader) ⊔ obj_level(msgExt) ⊔ obj_level(requestHeader);
+  ret(obj_level(requestHeader)) = pc ⊔ level(msgExt) ⊔ level(requestHeader) ⊔ obj_level(msgExt) ⊔ obj_level(requestHeader);
+  ret(obj_level(this)) = pc ⊔ level(msgExt) ⊔ level(requestHeader) ⊔ obj_level(msgExt) ⊔ obj_level(requestHeader) ⊔ obj_level(this);
+}

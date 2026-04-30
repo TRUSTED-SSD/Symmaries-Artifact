@@ -1,0 +1,33 @@
+boolean org.apache.bookkeeper.common.conf.validators.RangeValidator:validate(java.lang.String name,java.lang.Object value)
+{
+java.lang.Number n;
+  boolean $stack4;
+  java.lang.Number $stack5;
+  double $stack7;
+  double $stack9;
+  byte $stack10;
+  $stack4=value instanceof java.lang.Number;
+ if ($stack4==0) goto label0;
+ n=(java.lang.Number) value;
+ $stack5=this.min;
+ if ($stack5==null) goto label1;
+ $stack7 = n.doubleValue();
+ $stack5=this.min;
+ $stack9 = $stack5.doubleValue();
+ $stack10=($stack7 cmpg $stack9);
+ if ($stack10>=0) goto label1;
+ return  0;
+ label1:$stack5=this.max;
+ if ($stack5==null) goto label2;
+ $stack7 = n.doubleValue();
+ n=this.max;
+ $stack9 = n.doubleValue();
+ $stack10=($stack7 cmpg $stack9);
+ if ($stack10>0) goto label3;
+ label2:$stack4=1;
+ goto label4;
+ label3:$stack4=0;
+ label4:return  $stack4;
+ label0:return  0;
+ } 
+

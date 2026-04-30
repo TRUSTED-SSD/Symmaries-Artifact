@@ -1,0 +1,24 @@
+static org.apache.rocketmq.remoting.protocol.header.SendMessageRequestHeader org.apache.rocketmq.remoting.protocol.header.SendMessageRequestHeader:parseRequestHeader(org.apache.rocketmq.remoting.protocol.RemotingCommand request)
+{
+org.apache.rocketmq.remoting.protocol.header.SendMessageRequestHeaderV2 requestHeaderV2;
+  org.apache.rocketmq.remoting.protocol.header.SendMessageRequestHeader requestHeader;
+  int $stack3;
+  org.apache.rocketmq.remoting.CommandCustomHeader $stack4;
+  requestHeaderV2=null;
+ requestHeader=null;
+ $stack3 = request.getCode();
+ switch [$stack3]
+if 0 goto label0;
+if 1 goto label1;
+if 2 goto label1;
+goto label2;
+ label1:$stack4 = request.decodeCommandCustomHeader(org.apache.rocketmq.remoting.protocol.header.SendMessageRequestHeaderV2);
+ requestHeaderV2=(org.apache.rocketmq.remoting.protocol.header.SendMessageRequestHeaderV2) $stack4;
+ label0:if (null!=requestHeaderV2) goto label3;
+ $stack4 = request.decodeCommandCustomHeader(org.apache.rocketmq.remoting.protocol.header.SendMessageRequestHeader);
+ requestHeader=(org.apache.rocketmq.remoting.protocol.header.SendMessageRequestHeader) $stack4;
+ goto label2;
+ label3:requestHeader = org.apache.rocketmq.remoting.protocol.header.SendMessageRequestHeaderV2.createSendMessageRequestHeaderV1(requestHeaderV2);
+ label2:return  requestHeader;
+ } 
+

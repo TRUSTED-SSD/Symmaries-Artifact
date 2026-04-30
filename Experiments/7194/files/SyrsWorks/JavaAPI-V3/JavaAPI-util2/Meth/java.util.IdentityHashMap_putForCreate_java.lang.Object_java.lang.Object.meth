@@ -1,0 +1,29 @@
+void java.util.IdentityHashMap:putForCreate(java.lang.Object r1,java.lang.Object r2)
+{
+java.lang.Object r3;
+  java.lang.Object[] r4;
+  int i0;
+  java.lang.Object r5;
+  java.lang.Object $r6;
+  int $i1;
+  java.io.StreamCorruptedException $r7;
+  int i2;
+  r3 = java.util.IdentityHashMap.maskNull(r1);
+ r4=this.table;
+ i0=#r4;
+ i2 = java.util.IdentityHashMap.hash(r3,i0);
+ label0:$r6=r4[i2];
+ r5=$r6;
+ if ($r6==null) goto label1;
+ if (r5!=r3) goto label2;
+ $r7=new java.io.StreamCorruptedException;
+ $r7#java.io.StreamCorruptedException:init();
+ throw $r7;
+ label2:i2 = java.util.IdentityHashMap.nextKeyIndex(i2,i0);
+ goto label0;
+ label1:r4[i2]=r3;
+ $i1=(i2+1);
+ r4[$i1]=r2;
+ return;
+ }  
+

@@ -1,0 +1,38 @@
+static void org.apache.rocketmq.filter.expression.ComparisonExpression:checkLessThanOperand(org.apache.rocketmq.filter.expression.Expression expr)
+{
+java.lang.Object value;
+  boolean $stack2;
+  java.lang.RuntimeException $stack4;
+  java.lang.StringBuilder $stack5;
+  java.lang.String $stack9;
+  org.apache.rocketmq.filter.expression.ConstantExpression $stack10;
+  $stack2=expr instanceof org.apache.rocketmq.filter.expression.ConstantExpression;
+ if ($stack2==0) goto label0;
+ $stack10=(org.apache.rocketmq.filter.expression.ConstantExpression) expr;
+ value = $stack10.getValue();
+ $stack2=value instanceof java.lang.Number;
+ if ($stack2==0) goto label1;
+ return;
+ label1:$stack4=new java.lang.RuntimeException;
+ $stack5=new java.lang.StringBuilder;
+ $stack5#java.lang.StringBuilder();
+ $stack5 = $stack5.append("Value \'");
+ $stack5 = $stack5.append((java.lang.Object)expr);
+ $stack5 = $stack5.append("\' cannot be compared.");
+ $stack9 = $stack5.toString();
+ $stack4#java.lang.RuntimeException($stack9);
+ throw $stack4;
+ label0:$stack2=expr instanceof org.apache.rocketmq.filter.expression.BooleanExpression;
+ if ($stack2==0) goto label2;
+ $stack4=new java.lang.RuntimeException;
+ $stack5=new java.lang.StringBuilder;
+ $stack5#java.lang.StringBuilder();
+ $stack5 = $stack5.append("Value \'");
+ $stack5 = $stack5.append((java.lang.Object)expr);
+ $stack5 = $stack5.append("\' cannot be compared.");
+ $stack9 = $stack5.toString();
+ $stack4#java.lang.RuntimeException($stack9);
+ throw $stack4;
+ label2:return;
+ } 
+

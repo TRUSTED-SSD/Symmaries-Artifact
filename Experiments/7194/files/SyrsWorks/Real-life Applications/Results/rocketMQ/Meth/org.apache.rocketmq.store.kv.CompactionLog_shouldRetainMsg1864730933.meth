@@ -1,0 +1,38 @@
+boolean org.apache.rocketmq.store.kv.CompactionLog:shouldRetainMsg(org.apache.rocketmq.common.message.MessageExt msgExt,org.apache.rocketmq.store.kv.CompactionLog$OffsetMap map)
+{
+java.lang.String key;
+  boolean hasBody;
+  long $stack6;
+  long $stack7;
+  byte $stack8;
+  org.apache.rocketmq.logging.org.slf4j.Logger $stack11;
+  byte[] $stack15;
+  boolean $stack18;
+  $stack6 = msgExt.getQueueOffset();
+ $stack7 = map.getLastOffset();
+ $stack8=($stack6 cmp $stack7);
+ if ($stack8<=0) goto label0;
+ return  1;
+ label0:key = msgExt.getKeys();
+ hasBody = org.apache.commons.lang3.StringUtils.isNotBlank((java.lang.CharSequence)key);
+ if (hasBody==0) goto label1;
+ $stack6 = msgExt.getQueueOffset();
+ $stack7 = map.get(key);
+ $stack8=($stack6 cmp $stack7);
+ if ($stack8<0) goto label2;
+ $stack18=1;
+ goto label3;
+ label2:$stack18=0;
+ label3:$stack15 = msgExt.getBody();
+ hasBody = org.apache.commons.lang3.ArrayUtils.isNotEmpty($stack15);
+ if ($stack18==0) goto label4;
+ if (hasBody==0) goto label4;
+ hasBody=1;
+ goto label5;
+ label4:hasBody=0;
+ label5:return  hasBody;
+ label1:$stack11=org.apache.rocketmq.store.kv.CompactionLog.log;
+ $stack11.error("message has no keys");
+ return  0;
+ } 
+

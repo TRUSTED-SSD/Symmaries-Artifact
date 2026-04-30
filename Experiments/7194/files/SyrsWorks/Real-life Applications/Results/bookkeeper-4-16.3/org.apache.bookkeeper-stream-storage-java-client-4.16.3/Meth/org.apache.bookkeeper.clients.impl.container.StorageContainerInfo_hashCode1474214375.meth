@@ -1,0 +1,39 @@
+int org.apache.bookkeeper.clients.impl.container.StorageContainerInfo:hashCode()
+{
+byte PRIME;
+  int result;
+  long $groupId;
+  org.apache.bookkeeper.stream.proto.common.Endpoint $writeEndpoint;
+  java.util.List $readEndpoints;
+  long $stack10;
+  int $stack13;
+  PRIME=59;
+ $groupId = this.getGroupId();
+ $stack13=(1 * 59);
+ $stack10=($groupId>>>32);
+ $groupId=(!$stack10 & $groupId) |(!$groupId & $stack10);
+ result=(int) $groupId;
+ result=($stack13+result);
+ $groupId = this.getRevision();
+ $stack13=(result * 59);
+ $stack10=($groupId>>>32);
+ $groupId=(!$stack10 & $groupId) |(!$groupId & $stack10);
+ result=(int) $groupId;
+ result=($stack13+result);
+ $writeEndpoint = this.getWriteEndpoint();
+ result=(result * 59);
+ if ($writeEndpoint!=null) goto label0;
+ $stack13=43;
+ goto label1;
+ label0:$stack13 = $writeEndpoint.hashCode();
+ label1:$readEndpoints = this.getReadEndpoints();
+ result=(result+$stack13);
+ result=(result * 59);
+ if ($readEndpoints!=null) goto label2;
+ $stack13=43;
+ goto label3;
+ label2:$stack13 = $readEndpoints.hashCode();
+ label3:result=(result+$stack13);
+ return  result;
+ } 
+

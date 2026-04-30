@@ -1,0 +1,30 @@
+org.apache.rocketmq.remoting.protocol.subscription.SubscriptionGroupConfig org.apache.rocketmq.proxy.service.metadata.ClusterMetadataService$ClusterSubscriptionGroupConfigCacheLoader:getDirectly(java.lang.String consumerGroup)
+{
+org.apache.rocketmq.proxy.config.ProxyConfig config;
+  java.lang.String clusterName;
+  java.util.Optional brokerDataOptional;
+  org.apache.rocketmq.proxy.service.metadata.ClusterMetadataService $stack8;
+  boolean $stack10;
+  org.apache.rocketmq.remoting.protocol.subscription.SubscriptionGroupConfig $stack11;
+  java.lang.Object $stack12;
+  org.apache.rocketmq.remoting.protocol.route.BrokerData $stack13;
+  org.apache.rocketmq.proxy.service.mqclient.MQClientAPIFactory $stack16;
+  org.apache.rocketmq.proxy.service.mqclient.MQClientAPIExt $stack17;
+  config = org.apache.rocketmq.proxy.config.ConfigurationManager.getProxyConfig();
+ clusterName = config.getRocketMQClusterName();
+ $stack8=this.this$0;
+ brokerDataOptional = $stack8.findOneBroker(clusterName);
+ $stack10 = brokerDataOptional.isPresent();
+ if ($stack10==0) goto label0;
+ $stack12 = brokerDataOptional.get();
+ $stack13=(org.apache.rocketmq.remoting.protocol.route.BrokerData) $stack12;
+ clusterName = $stack13.selectBrokerAddr();
+ $stack8=this.this$0;
+ $stack16 = org.apache.rocketmq.proxy.service.metadata.ClusterMetadataService.access$000($stack8);
+ $stack17 = $stack16.getClient();
+ $stack11 = $stack17.getSubscriptionGroupConfig(clusterName,consumerGroup,3000L);
+ return  $stack11;
+ label0:$stack11=org.apache.rocketmq.proxy.service.metadata.ClusterMetadataService.EMPTY_SUBSCRIPTION_GROUP_CONFIG;
+ return  $stack11;
+ } 
+

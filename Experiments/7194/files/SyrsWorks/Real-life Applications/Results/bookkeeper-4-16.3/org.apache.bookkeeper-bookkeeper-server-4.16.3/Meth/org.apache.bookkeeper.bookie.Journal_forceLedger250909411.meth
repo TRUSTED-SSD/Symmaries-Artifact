@@ -1,0 +1,21 @@
+void org.apache.bookkeeper.bookie.Journal:forceLedger(long ledgerId,org.apache.bookkeeper.proto.BookkeeperInternalCallbacks$WriteCallback cb,java.lang.Object ctx)
+{
+org.apache.bookkeeper.common.collections.BatchedBlockingQueue $stack5;
+  long $stack9;
+  org.apache.bookkeeper.bookie.stats.JournalStats $stack10;
+  org.apache.bookkeeper.stats.OpStatsLogger $stack11;
+  org.apache.bookkeeper.stats.Counter $stack12;
+  org.apache.bookkeeper.bookie.Journal$QueueEntry $stack13;
+  $stack5=this.queue;
+ $stack9 = org.apache.bookkeeper.util.MathUtils.nowInNano();
+ $stack10=this.journalStats;
+ $stack11 = $stack10.getJournalForceLedgerStats();
+ $stack12=this.callbackTime;
+ $stack13 = org.apache.bookkeeper.bookie.Journal$QueueEntry.create(null,(boolean)0,ledgerId,-16384L,cb,ctx,$stack9,$stack11,$stack12);
+ $stack5.add((java.lang.Object)$stack13);
+ $stack10=this.journalStats;
+ $stack12 = $stack10.getJournalQueueSize();
+ $stack12.inc();
+ return;
+ } 
+

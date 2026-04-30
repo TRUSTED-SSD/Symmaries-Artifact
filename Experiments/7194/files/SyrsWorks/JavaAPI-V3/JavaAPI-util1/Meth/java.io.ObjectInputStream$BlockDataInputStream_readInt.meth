@@ -1,0 +1,38 @@
+int java.io.ObjectInputStream$BlockDataInputStream:readInt()
+{
+int i0;
+  boolean $z0;
+  int $i1;
+  int $i2;
+  int $i3;
+  int $i4;
+  byte[] $r1;
+  int $i5;
+  int $i6;
+  java.io.DataInputStream $r2;
+  int $i7;
+  byte[] $r3;
+  java.io.ObjectInputStream$PeekInputStream $r4;
+  $z0=this.blkmode;
+ if ($z0!=0) goto label0;
+ this.pos=0;
+ $r4=this.in;
+ $r3=this.buf;
+ $r4.readFully($r3,0,4);
+ goto label1;
+ label0:$i2=this.end;
+ $i1=this.pos;
+ $i3=($i2-$i1);
+ if ($i3>=4) goto label1;
+ $r2=this.din;
+ $i7 = $r2.readInt();
+ return  $i7;
+ label1:$r1=this.buf;
+ $i4=this.pos;
+ i0 = java.io.Bits.getInt($r1,$i4);
+ $i5=this.pos;
+ $i6=($i5+4);
+ this.pos=$i6;
+ return  i0;
+ }  
+

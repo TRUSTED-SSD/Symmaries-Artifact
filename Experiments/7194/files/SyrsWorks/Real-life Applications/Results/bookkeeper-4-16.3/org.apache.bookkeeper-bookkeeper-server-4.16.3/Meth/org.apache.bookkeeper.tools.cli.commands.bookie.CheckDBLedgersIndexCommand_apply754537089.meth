@@ -1,0 +1,34 @@
+boolean org.apache.bookkeeper.tools.cli.commands.bookie.CheckDBLedgersIndexCommand:apply(org.apache.bookkeeper.conf.ServerConfiguration @conf,org.apache.bookkeeper.tools.cli.commands.bookie.CheckDBLedgersIndexCommand$CheckLedgersIndexFlags cmdFlags)
+{
+boolean success;
+  org.slf4j.Logger $stack5;
+  org.apache.bookkeeper.conf.ServerConfiguration $stack6;
+  org.apache.bookkeeper.bookie.storage.ldb.LedgersIndexCheckOp $stack7;
+  java.io.IOException $stack13;
+  org.apache.bookkeeper.conf.ServerConfiguration conf;
+conf=@conf;
+$stack5=org.apache.bookkeeper.tools.cli.commands.bookie.CheckDBLedgersIndexCommand.LOG;
+ dummyClass.lowSink("=== Checking DBStorage ledgers index by running a read scan ===");
+$stack5.info("=== Checking DBStorage ledgers index by running a read scan ===");
+ $stack6=new org.apache.bookkeeper.conf.ServerConfiguration;
+ $stack6#org.apache.bookkeeper.conf.ServerConfiguration((org.apache.bookkeeper.conf.AbstractConfiguration)conf);
+ conf=$stack6;
+ label0:$stack7=new org.apache.bookkeeper.bookie.storage.ldb.LedgersIndexCheckOp;
+ success = org.apache.bookkeeper.tools.cli.commands.bookie.CheckDBLedgersIndexCommand$CheckLedgersIndexFlags.access$000(cmdFlags);
+ $stack7#org.apache.bookkeeper.bookie.storage.ldb.LedgersIndexCheckOp($stack6,success);
+ success = $stack7.initiate();
+ if (success==0) goto label1;
+ $stack5=org.apache.bookkeeper.tools.cli.commands.bookie.CheckDBLedgersIndexCommand.LOG;
+ dummyClass.lowSink("-- Done checking DBStorage ledgers index --");
+$stack5.info("-- Done checking DBStorage ledgers index --");
+ goto label2;
+ label1:$stack5=org.apache.bookkeeper.tools.cli.commands.bookie.CheckDBLedgersIndexCommand.LOG;
+ dummyClass.lowSink("-- Aborted checking DBStorage ledgers index --");
+$stack5.info("-- Aborted checking DBStorage ledgers index --");
+ label2:return  success;
+ label3:$stack13 = catch;
+ $stack13.printStackTrace();
+ return  0;
+ catch java.io.IOException: label0 - label2 : label3;
+} 
+

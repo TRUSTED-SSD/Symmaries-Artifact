@@ -1,0 +1,52 @@
+static java.util.Properties org.apache.rocketmq.common.MixAll:object2Properties(java.lang.Object object)
+{
+java.util.Properties properties;
+  java.lang.Class objectClass;
+  java.lang.reflect.Field[] l4;
+  int l5;
+  int l6;
+  java.lang.reflect.Field field;
+  java.lang.String name;
+  java.lang.Object value;
+  java.lang.Class $stack14;
+  int $stack24;
+  boolean $stack25;
+  java.lang.String $stack29;
+  java.lang.IllegalAccessException $stack31;
+  org.apache.rocketmq.logging.org.slf4j.Logger $stack32;
+  properties=new java.util.Properties;
+ properties#java.util.Properties();
+ objectClass = object.getClass();
+ label0:l4 = objectClass.getDeclaredFields();
+ l5=#l4;
+ l6=0;
+ label1:if (l6>=l5) goto label2;
+ field=l4[l6];
+ $stack24 = field.getModifiers();
+ $stack25 = java.lang.reflect.Modifier.isStatic($stack24);
+ if ($stack25!=0) goto label3;
+ name = field.getName();
+ $stack25 = name.startsWith("this");
+ if ($stack25!=0) goto label3;
+ value=null;
+ label4:field.setAccessible((boolean)1);
+ value = field.get(object);
+ label5:goto label6;
+ label7:$stack31 = catch;
+ $stack32=org.apache.rocketmq.common.MixAll.log;
+ $stack32.error("Failed to handle properties",(java.lang.Throwable)$stack31);
+ label6:if (value==null) goto label3;
+ $stack29 = value.toString();
+ properties.setProperty(name,$stack29);
+ label3:l6=(l6+1);
+ goto label1;
+ label2:if (objectClass==java.lang.Object) goto label8;
+ $stack14 = objectClass.getSuperclass();
+ if ($stack14!=java.lang.Object) goto label9;
+ goto label8;
+ label9:objectClass = objectClass.getSuperclass();
+ goto label0;
+ label8:return  properties;
+ catch java.lang.IllegalAccessException: label4 - label5 : label7;
+} 
+

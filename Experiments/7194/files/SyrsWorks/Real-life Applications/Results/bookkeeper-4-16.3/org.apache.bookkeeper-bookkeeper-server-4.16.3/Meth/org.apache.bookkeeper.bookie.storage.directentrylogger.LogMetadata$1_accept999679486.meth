@@ -1,0 +1,46 @@
+void org.apache.bookkeeper.bookie.storage.directentrylogger.LogMetadata$1:accept(long ledgerId,long size)
+{
+int batchSize;
+  boolean $stack6;
+  io.netty.buffer.ByteBuf $stack7;
+  org.apache.bookkeeper.bookie.storage.directentrylogger.LogWriter $stack16;
+  java.io.IOException $stack36;
+  java.lang.RuntimeException $stack37;
+  $stack6=this.startNewBatch;
+ if ($stack6==0) goto label0;
+ batchSize=this.remainingLedgers;
+ batchSize = java.lang.Math.min(batchSize,10000);
+ $stack7=this.val$serializedMap;
+ $stack7.clear();
+ $stack7=this.val$serializedMap;
+ $stack7.writeLong(-1L);
+ $stack7=this.val$serializedMap;
+ $stack7.writeLong(-2L);
+ $stack7=this.val$serializedMap;
+ $stack7.writeInt(batchSize);
+ this.startNewBatch=0;
+ this.remainingInBatch=batchSize;
+ label0:$stack7=this.val$serializedMap;
+ $stack7.writeLong(ledgerId);
+ $stack7=this.val$serializedMap;
+ $stack7.writeLong(size);
+ batchSize=this.remainingLedgers;
+ batchSize=(batchSize-1);
+ this.remainingLedgers=batchSize;
+ batchSize=this.remainingInBatch;
+ batchSize=(batchSize-1);
+ this.remainingInBatch=batchSize;
+ if (batchSize!=0) goto label1;
+ label2:$stack16=this.val$writer;
+ $stack7=this.val$serializedMap;
+ $stack16.writeDelimited($stack7);
+ label3:goto label4;
+ label5:$stack36 = catch;
+ $stack37=new java.lang.RuntimeException;
+ $stack37#java.lang.RuntimeException((java.lang.Throwable)$stack36);
+ throw $stack37;
+ label4:this.startNewBatch=1;
+ label1:return;
+ catch java.io.IOException: label2 - label3 : label5;
+} 
+

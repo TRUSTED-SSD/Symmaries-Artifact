@@ -1,0 +1,24 @@
+static boolean com.google.zxing.oned.UPCEANReader:checkStandardUPCEANChecksum(java.lang.CharSequence @s)
+{
+int length;
+  int check;
+  char $stack5;
+  boolean $stack10;
+  java.lang.CharSequence s;
+s=@s;
+length = s.length();
+ if (length!=0) goto label0;
+ return  0;
+ label0:check=(length-1);
+ $stack5 = s.charAt(check);
+ check = java.lang.Character.digit($stack5,10);
+ length=(length-1);
+ s = s.subSequence(0,length);
+ length = com.google.zxing.oned.UPCEANReader.getStandardUPCEANChecksum(s);
+ if (length!=check) goto label1;
+ $stack10=1;
+ goto label2;
+ label1:$stack10=0;
+ label2:return  $stack10;
+ } 
+

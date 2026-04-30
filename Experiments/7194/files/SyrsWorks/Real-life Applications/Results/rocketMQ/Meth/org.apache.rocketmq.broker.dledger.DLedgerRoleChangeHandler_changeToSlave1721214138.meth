@@ -1,0 +1,51 @@
+void org.apache.rocketmq.broker.dledger.DLedgerRoleChangeHandler:changeToSlave(int brokerId)
+{
+java.lang.Throwable l2;
+  org.apache.rocketmq.broker.BrokerController $stack3;
+  org.apache.rocketmq.logging.org.slf4j.Logger $stack4;
+  org.apache.rocketmq.common.BrokerConfig $stack6;
+  java.lang.String $stack7;
+  java.lang.Integer $stack8;
+  long $stack11;
+  org.apache.rocketmq.store.config.MessageStoreConfig $stack13;
+  org.apache.rocketmq.store.config.BrokerRole $stack14;
+  org.apache.rocketmq.broker.BrokerController $stack18;
+  boolean $stack22;
+  $stack4=org.apache.rocketmq.broker.dledger.DLedgerRoleChangeHandler.LOGGER;
+ $stack3=this.brokerController;
+ $stack6 = $stack3.getBrokerConfig();
+ $stack7 = $stack6.getBrokerName();
+ $stack8 = java.lang.Integer.valueOf(brokerId);
+ $stack4.info("Begin to change to slave brokerName={} brokerId={}",(java.lang.Object)$stack7,(java.lang.Object)$stack8);
+ $stack3=this.brokerController;
+ $stack6 = $stack3.getBrokerConfig();
+ if (brokerId!=0) goto label0;
+ $stack11=1L;
+ goto label1;
+ label0:$stack11=(long) brokerId;
+ label1:$stack6.setBrokerId($stack11);
+ $stack3=this.brokerController;
+ $stack13 = $stack3.getMessageStoreConfig();
+ $stack14=org.apache.rocketmq.store.config.BrokerRole.SLAVE;
+ $stack13.setBrokerRole($stack14);
+ $stack3=this.brokerController;
+ $stack3.changeSpecialServiceStatus((boolean)0);
+ $stack14=org.apache.rocketmq.store.config.BrokerRole.SLAVE;
+ this#org.apache.rocketmq.broker.dledger.DLedgerRoleChangeHandler:handleSlaveSynchronize($stack14);
+ label2:$stack18=this.brokerController;
+ $stack3=this.brokerController;
+ $stack6 = $stack3.getBrokerConfig();
+ $stack22 = $stack6.isForceRegister();
+ $stack18#org.apache.rocketmq.broker.BrokerController(1,1,$stack22);
+ label3:goto label4;
+ label5:l2 = catch;
+ label4:$stack4=org.apache.rocketmq.broker.dledger.DLedgerRoleChangeHandler.LOGGER;
+ $stack3=this.brokerController;
+ $stack6 = $stack3.getBrokerConfig();
+ $stack7 = $stack6.getBrokerName();
+ $stack8 = java.lang.Integer.valueOf(brokerId);
+ $stack4.info("Finish to change to slave brokerName={} brokerId={}",(java.lang.Object)$stack7,(java.lang.Object)$stack8);
+ return;
+ catch java.lang.Throwable: label2 - label3 : label5;
+} 
+

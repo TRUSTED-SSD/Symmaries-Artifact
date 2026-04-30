@@ -1,0 +1,13 @@
+org.apache.rocketmq.filter.expression.UnaryInExpression (org.apache.rocketmq.filter.expression.Expression
+                                                           left,
+                                                         org.apache.rocketmq.filter.constant.UnaryType
+                                                           unaryType,
+                                                         java.util.Collection
+                                                           inList,
+                                                         boolean not) {
+  guard = tt;
+  ret(obj_level(inList)) = level(inList) ⊔ level(not) ⊔ obj_level(inList) ⊔ obj_level(this);
+  ret(obj_level(left)) = level(inList) ⊔ level(not) ⊔ obj_level(inList) ⊔ obj_level(left);
+  ret(obj_level(this)) = level(inList) ⊔ level(not) ⊔ obj_level(inList) ⊔ obj_level(this);
+  ret(obj_level(unaryType)) = level(inList) ⊔ level(not) ⊔ obj_level(inList) ⊔ obj_level(this) ⊔ obj_level(unaryType);
+}

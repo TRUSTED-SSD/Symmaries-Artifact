@@ -1,0 +1,30 @@
+org.apache.rocketmq.store.logfile.MappedFile org.apache.rocketmq.store.MappedFileQueue:getMappedFileByTime(long timestamp)
+{
+java.lang.Object[] mfs;
+  int i;
+  org.apache.rocketmq.store.logfile.MappedFile mappedFile;
+  int $stack7;
+  java.lang.Object $stack10;
+  long $stack13;
+  byte $stack14;
+  mfs = this.copyMappedFiles(0);
+ if (null!=mfs) goto label0;
+ return  null;
+ label0:i=0;
+ label1:$stack7=#mfs;
+ if (i>=$stack7) goto label2;
+ $stack10=mfs[i];
+ mappedFile=(org.apache.rocketmq.store.logfile.MappedFile) $stack10;
+ $stack13 = mappedFile.getLastModifiedTimestamp();
+ $stack14=($stack13 cmp timestamp);
+ if ($stack14<0) goto label3;
+ return  mappedFile;
+ label3:i=(i+1);
+ goto label1;
+ label2:i=#mfs;
+ i=(i-1);
+ $stack10=mfs[i];
+ mappedFile=(org.apache.rocketmq.store.logfile.MappedFile) $stack10;
+ return  mappedFile;
+ } 
+

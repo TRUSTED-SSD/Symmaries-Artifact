@@ -1,0 +1,34 @@
+boolean org.apache.rocketmq.tools.admin.DefaultMQAdminExtImpl:cleanUnusedTopic(java.lang.String @cluster)
+{
+boolean result;
+  org.apache.rocketmq.remoting.protocol.body.ClusterInfo clusterInfo;
+  java.lang.String[] l4;
+  int l5;
+  int l6;
+  boolean $stack9;
+  org.apache.rocketmq.client.exception.MQBrokerException $stack15;
+  org.apache.rocketmq.logging.org.slf4j.Logger $stack16;
+  java.lang.String cluster;
+cluster=@cluster;
+result=0;
+ label0:clusterInfo = this.examineBrokerClusterInfo();
+ $stack9 = org.apache.commons.lang3.StringUtils.isEmpty((java.lang.CharSequence)cluster);
+ if ($stack9==0) goto label1;
+ l4 = clusterInfo.retrieveAllClusterNames();
+ l5=#l4;
+ l6=0;
+ label2:if (l6>=l5) goto label3;
+ cluster=l4[l6];
+ result = this.cleanUnusedTopicByCluster(clusterInfo,cluster);
+ l6=(l6+1);
+ goto label2;
+ label3:goto label4;
+ label1:result = this.cleanUnusedTopicByCluster(clusterInfo,cluster);
+ label4:goto label5;
+ label6:$stack15 = catch;
+ $stack16=this.logger;
+ $stack16.error("cleanExpiredConsumerQueue error.",(java.lang.Throwable)$stack15);
+ label5:return  result;
+ catch org.apache.rocketmq.client.exception.MQBrokerException: label0 - label4 : label6;
+} 
+

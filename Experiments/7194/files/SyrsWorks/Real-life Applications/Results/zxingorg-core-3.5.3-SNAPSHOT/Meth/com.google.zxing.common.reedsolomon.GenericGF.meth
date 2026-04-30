@@ -1,0 +1,49 @@
+com.google.zxing.common.reedsolomon.GenericGF(int primitive,int size,int b)
+{
+int x;
+  int[] $stack6;
+  com.google.zxing.common.reedsolomon.GenericGFPoly $stack9;
+  int[] $stack15;
+  int $stack22;
+  this#java.lang.Object();
+ this.primitive=primitive;
+ this.size=size;
+ this.generatorBase=b;
+ $stack6=new int[size];
+ this.expTable=$stack6;
+ $stack6=new int[size];
+ this.logTable=$stack6;
+ x=1;
+ b=0;
+ label0:if (b>=size) goto label1;
+ $stack6=this.expTable;
+ $stack6[b]=x;
+ x=(x * 2);
+ if (x<size) goto label2;
+ x=(!x & primitive) |(!primitive & x);
+ $stack22=(size-1);
+ x=(x & $stack22);
+ label2:b=(b+1);
+ goto label0;
+ label1:b=0;
+ label3:primitive=(size-1);
+ if (b>=primitive) goto label4;
+ $stack15=this.logTable;
+ $stack6=this.expTable;
+ primitive=$stack6[b];
+ $stack15[primitive]=b;
+ b=(b+1);
+ goto label3;
+ label4:$stack9=new com.google.zxing.common.reedsolomon.GenericGFPoly;
+ $stack6=new int[1];
+ $stack6[0]=0;
+ $stack9#com.google.zxing.common.reedsolomon.GenericGFPoly(this,$stack6);
+ this.zero=$stack9;
+ $stack9=new com.google.zxing.common.reedsolomon.GenericGFPoly;
+ $stack6=new int[1];
+ $stack6[0]=1;
+ $stack9#com.google.zxing.common.reedsolomon.GenericGFPoly(this,$stack6);
+ this.one=$stack9;
+ return;
+ } 
+

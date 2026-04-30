@@ -1,0 +1,32 @@
+org.apache.rocketmq.remoting.protocol.RemotingCommand org.apache.rocketmq.broker.processor.AdminBrokerProcessor:updateAndCreateSubscriptionGroup(io.netty.channel.ChannelHandlerContext ctx,org.apache.rocketmq.remoting.protocol.RemotingCommand request)
+{
+org.apache.rocketmq.remoting.protocol.RemotingCommand response;
+  org.apache.rocketmq.remoting.protocol.subscription.SubscriptionGroupConfig config;
+  boolean $stack6;
+  org.apache.rocketmq.logging.org.slf4j.Logger $stack7;
+  io.netty.channel.Channel $stack9;
+  java.lang.String $stack10;
+  byte[] $stack11;
+  java.lang.Object $stack12;
+  org.apache.rocketmq.broker.BrokerController $stack13;
+  org.apache.rocketmq.broker.subscription.SubscriptionGroupManager $stack14;
+  response = org.apache.rocketmq.remoting.protocol.RemotingCommand.createResponseCommand(null);
+ $stack6 = this#org.apache.rocketmq.broker.processor.AdminBrokerProcessor:validateSlave(response);
+ if ($stack6==0) goto label0;
+ return  response;
+ label0:$stack7=org.apache.rocketmq.broker.processor.AdminBrokerProcessor.LOGGER;
+ $stack9 = ctx.channel();
+ $stack10 = org.apache.rocketmq.remoting.common.RemotingHelper.parseChannelRemoteAddr($stack9);
+ $stack7.info("AdminBrokerProcessor#updateAndCreateSubscriptionGroup called by {}",(java.lang.Object)$stack10);
+ $stack11 = request.getBody();
+ $stack12 = org.apache.rocketmq.remoting.protocol.RemotingSerializable.decode($stack11,org.apache.rocketmq.remoting.protocol.subscription.SubscriptionGroupConfig);
+ config=(org.apache.rocketmq.remoting.protocol.subscription.SubscriptionGroupConfig) $stack12;
+ if (config==null) goto label1;
+ $stack13=this.brokerController;
+ $stack14 = $stack13.getSubscriptionGroupManager();
+ $stack14.updateSubscriptionGroupConfig(config);
+ label1:response.setCode(0);
+ response.setRemark(null);
+ return  response;
+ } 
+

@@ -1,0 +1,44 @@
+boolean org.apache.rocketmq.broker.transaction.queue.TransactionalMessageServiceImpl:checkPrepareQueueOffset(java.util.HashMap removeMap,java.util.List doneOpOffset,org.apache.rocketmq.common.message.MessageExt msgExt,java.lang.String checkImmunityTimeStr)
+{
+java.lang.String prepareQueueOffsetStr;
+  long prepareQueueOffset;
+  java.lang.Long $stack11;
+  byte $stack13;
+  boolean $stack15;
+  java.lang.Object $stack18;
+  java.lang.Object[] $stack23;
+  org.apache.rocketmq.logging.org.slf4j.Logger $stack24;
+  prepareQueueOffsetStr = msgExt.getUserProperty("TRAN_PREPARED_QUEUE_OFFSET");
+ if (null!=prepareQueueOffsetStr) goto label0;
+ $stack15 = this#org.apache.rocketmq.broker.transaction.queue.TransactionalMessageServiceImpl:putImmunityMsgBackToHalfQueue(msgExt);
+ return  $stack15;
+ label0:$stack11 = this#org.apache.rocketmq.broker.transaction.queue.TransactionalMessageServiceImpl:getLong(prepareQueueOffsetStr);
+ prepareQueueOffset = $stack11.longValue();
+ $stack13=(-1L cmp prepareQueueOffset);
+ if ($stack13!=0) goto label1;
+ return  0;
+ label1:$stack11 = java.lang.Long.valueOf(prepareQueueOffset);
+ $stack15 = removeMap.containsKey((java.lang.Object)$stack11);
+ if ($stack15==0) goto label2;
+ $stack11 = java.lang.Long.valueOf(prepareQueueOffset);
+ $stack18 = removeMap.remove((java.lang.Object)$stack11);
+ $stack11=(java.lang.Long) $stack18;
+ prepareQueueOffset = $stack11.longValue();
+ $stack11 = java.lang.Long.valueOf(prepareQueueOffset);
+ doneOpOffset.add((java.lang.Object)$stack11);
+ $stack24=org.apache.rocketmq.broker.transaction.queue.TransactionalMessageServiceImpl.log;
+ $stack23=new java.lang.Object[4];
+ prepareQueueOffsetStr = msgExt.getUserProperty("REAL_TOPIC");
+ $stack23[0]=prepareQueueOffsetStr;
+ prepareQueueOffsetStr = msgExt.getUserProperty("UNIQ_KEY");
+ $stack23[1]=prepareQueueOffsetStr;
+ $stack23[2]=checkImmunityTimeStr;
+ prepareQueueOffset = msgExt.getQueueOffset();
+ $stack11 = java.lang.Long.valueOf(prepareQueueOffset);
+ $stack23[3]=$stack11;
+ $stack24.info("removeMap contain prepareQueueOffset. real_topic={},uniqKey={},immunityTime={},offset={}",$stack23);
+ return  1;
+ label2:$stack15 = this#org.apache.rocketmq.broker.transaction.queue.TransactionalMessageServiceImpl:putImmunityMsgBackToHalfQueue(msgExt);
+ return  $stack15;
+ } 
+

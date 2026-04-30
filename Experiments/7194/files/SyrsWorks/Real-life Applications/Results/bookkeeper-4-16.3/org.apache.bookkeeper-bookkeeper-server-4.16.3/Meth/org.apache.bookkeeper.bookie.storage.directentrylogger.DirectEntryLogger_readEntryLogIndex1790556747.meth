@@ -1,0 +1,57 @@
+org.apache.bookkeeper.bookie.EntryLogMetadata org.apache.bookkeeper.bookie.storage.directentrylogger.DirectEntryLogger:readEntryLogIndex(long logId)
+{
+org.apache.bookkeeper.bookie.storage.directentrylogger.LogReader reader;
+  java.lang.Object l4;
+  java.lang.Object l5;
+  java.lang.Throwable l7;
+  byte $stack9;
+  int $stack10;
+  boolean $stack14;
+  java.lang.Throwable $stack22;
+  java.lang.Throwable $stack23;
+  java.lang.Throwable $stack25;
+  org.apache.bookkeeper.bookie.EntryLogMetadata tmp$1378246062;
+  $stack9=(logId cmp 2147483647L);
+ if ($stack9>=0) goto label0;
+ $stack14=1;
+ goto label1;
+ label0:$stack14=0;
+ label1:com.google.common.base.Preconditions.checkArgument($stack14,"Entry log id must be an int [%d]",logId);
+ $stack10=(int) logId;
+ reader = this.newDirectReader($stack10);
+ l4=null;
+ label2:l5 = org.apache.bookkeeper.bookie.storage.directentrylogger.LogMetadata.read(reader);
+ label3:if (reader==null) goto label4;
+ if (null==null) goto label5;
+ label6:reader.close();
+ label7:goto label4;
+ label8:l7 = catch;
+ $stack25=(java.lang.Throwable) null;
+ $stack25.addSuppressed(l7);
+ goto label4;
+ label5:reader.close();
+ label4:tmp$1378246062=(org.apache.bookkeeper.bookie.EntryLogMetadata) l5;
+ return  tmp$1378246062;
+ label9:$stack25 = catch;
+ l5=$stack25;
+ l4=$stack25;
+ l7=(java.lang.Throwable) $stack25;
+ throw l7;
+ label10:$stack23 = catch;
+ l7=$stack23;
+ label11:if (reader==null) goto label12;
+ if (l4==null) goto label13;
+ label14:reader.close();
+ label15:goto label12;
+ label16:$stack22 = catch;
+ $stack25=(java.lang.Throwable) l4;
+ $stack25.addSuppressed($stack22);
+ goto label12;
+ label13:reader.close();
+ label12:throw $stack23;
+ catch java.lang.Throwable: label6 - label7 : label8;
+catch java.lang.Throwable: label2 - label3 : label9;
+catch java.lang.Throwable: label14 - label15 : label16;
+catch java.lang.Throwable: label9 - label11 : label10;
+} 
+

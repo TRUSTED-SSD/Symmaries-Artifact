@@ -1,0 +1,31 @@
+void org.apache.rocketmq.common.attribute.LongRangeAttribute:verify(java.lang.String @value)
+{
+long l;
+  long $stack5;
+  byte $stack6;
+  java.lang.RuntimeException $stack7;
+  java.lang.Object[] $stack8;
+  java.lang.Long $stack12;
+  java.lang.String value;
+value=@value;
+l = java.lang.Long.parseLong(value);
+ $stack5=this.min;
+ $stack6=(l cmp $stack5);
+ if ($stack6<0) goto label0;
+ $stack5=this.max;
+ $stack6=(l cmp $stack5);
+ if ($stack6<=0) goto label1;
+ label0:$stack7=new java.lang.RuntimeException;
+ $stack8=new java.lang.Object[2];
+ l=this.min;
+ $stack12 = java.lang.Long.valueOf(l);
+ $stack8[0]=$stack12;
+ l=this.max;
+ $stack12 = java.lang.Long.valueOf(l);
+ $stack8[1]=$stack12;
+ value = java.lang.String.format("value is not in range(%d, %d)",$stack8);
+ $stack7#java.lang.RuntimeException(value);
+ throw $stack7;
+ label1:return;
+ } 
+

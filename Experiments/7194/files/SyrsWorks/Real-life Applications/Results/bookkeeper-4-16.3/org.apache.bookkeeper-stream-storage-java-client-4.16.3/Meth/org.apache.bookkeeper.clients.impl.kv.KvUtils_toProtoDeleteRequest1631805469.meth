@@ -1,0 +1,27 @@
+static org.apache.bookkeeper.stream.proto.kv.rpc.DeleteRangeRequest$Builder org.apache.bookkeeper.clients.impl.kv.KvUtils:toProtoDeleteRequest(org.apache.bookkeeper.api.kv.op.DeleteOp op)
+{
+org.apache.bookkeeper.stream.proto.kv.rpc.DeleteRangeRequest$Builder builder;
+  java.lang.Object $stack3;
+  io.netty.buffer.ByteBuf $stack4;
+  com.google.protobuf.ByteString $stack5;
+  org.apache.bookkeeper.api.kv.options.DeleteOption $stack7;
+  boolean $stack8;
+  builder = org.apache.bookkeeper.stream.proto.kv.rpc.DeleteRangeRequest.newBuilder();
+ $stack3 = op.key();
+ $stack4=(io.netty.buffer.ByteBuf) $stack3;
+ $stack5 = org.apache.bookkeeper.clients.impl.kv.KvUtils.toProtoKey($stack4);
+ builder = builder.setKey($stack5);
+ $stack7 = op.option();
+ $stack8 = $stack7.prevKv();
+ builder = builder.setPrevKv($stack8);
+ $stack7 = op.option();
+ $stack3 = $stack7.endKey();
+ if (null==$stack3) goto label0;
+ $stack7 = op.option();
+ $stack3 = $stack7.endKey();
+ $stack4=(io.netty.buffer.ByteBuf) $stack3;
+ $stack5 = org.apache.bookkeeper.clients.impl.kv.KvUtils.toProtoKey($stack4);
+ builder.setRangeEnd($stack5);
+ label0:return  builder;
+ } 
+

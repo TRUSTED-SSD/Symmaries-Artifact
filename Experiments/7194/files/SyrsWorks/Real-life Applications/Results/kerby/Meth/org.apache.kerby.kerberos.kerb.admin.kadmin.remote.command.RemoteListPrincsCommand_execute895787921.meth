@@ -1,0 +1,56 @@
+void org.apache.kerby.kerberos.kerb.admin.kadmin.remote.command.RemoteListPrincsCommand:execute(java.lang.String @input)
+{
+java.lang.String[] items;
+  java.util.List principalLists;
+  java.lang.Object exp;
+  int $stack7;
+  org.apache.kerby.kerberos.kerb.admin.kadmin.remote.AdminClient $stack9;
+  java.io.PrintStream $stack13;
+  boolean $stack15;
+  java.lang.Object $stack16;
+  java.util.Iterator tmp$1446222996;
+  java.lang.String input;
+input=@input;
+items = input.split("\\s+");
+ $stack7=#items;
+ if ($stack7<=2) goto label0;
+ $stack13=java.lang.System.err;
+ dummyClass.lowSink("Usage: list_principals [expression]\n\t\'expression\' is a shell-style glob expression that can contain the wild-card characters ?, *, and [].\tExample:\n\t\tlist_principals [expression]\n");
+$stack13.println("Usage: list_principals [expression]\n\t\'expression\' is a shell-style glob expression that can contain the wild-card characters ?, *, and [].\tExample:\n\t\tlist_principals [expression]\n");
+ return;
+ label0:principalLists=null;
+ $stack7=#items;
+ if ($stack7!=1) goto label1;
+ $stack9=this.adminClient;
+ principalLists = $stack9.requestGetprincs();
+ goto label2;
+ label1:exp=items[1];
+ $stack9=this.adminClient;
+ input=(java.lang.String) exp;
+ principalLists = $stack9.requestGetprincsWithExp(input);
+ label2:$stack7 = principalLists.size();
+ if ($stack7==0) goto label3;
+ $stack7 = principalLists.size();
+ if ($stack7!=1) goto label4;
+ exp = principalLists.get(0);
+ input=(java.lang.String) exp;
+ $stack15 = input.isEmpty();
+ if ($stack15==0) goto label4;
+ label3:return;
+ label4:$stack13=java.lang.System.out;
+ dummyClass.lowSink("Principals are listed:");
+$stack13.println("Principals are listed:");
+ exp = principalLists.iterator();
+ label5:tmp$1446222996=(java.util.Iterator) exp;
+ $stack15 = tmp$1446222996.hasNext();
+ if ($stack15==0) goto label6;
+ tmp$1446222996=(java.util.Iterator) exp;
+ $stack16 = tmp$1446222996.next();
+ input=(java.lang.String) $stack16;
+ $stack13=java.lang.System.out;
+ dummyClass.lowSink(input);
+$stack13.println(input);
+ goto label5;
+ label6:return;
+ } 
+

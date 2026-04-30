@@ -1,0 +1,25 @@
+static java.lang.String org.apache.bookkeeper.net.DNS:resolveLocalHostIPAddress()
+{
+java.lang.String address;
+  java.net.UnknownHostException e;
+  java.net.UnknownHostException noLocalHostAddressException;
+  java.net.InetAddress $stack3;
+  org.slf4j.Logger $stack6;
+  label0:$stack3 = java.net.InetAddress.getLocalHost();
+ address = $stack3.getHostAddress();
+ label1:goto label2;
+ label3:e = catch;
+ $stack6=org.apache.bookkeeper.net.DNS.LOG;
+ $stack6.warn("Unable to determine address of the host-falling back to \"localhost\" address",(java.lang.Throwable)e);
+ label4:$stack3 = java.net.InetAddress.getByName("localhost");
+ address = $stack3.getHostAddress();
+ label5:goto label2;
+ label6:noLocalHostAddressException = catch;
+ $stack6=org.apache.bookkeeper.net.DNS.LOG;
+ $stack6.error("Unable to determine local loopback address of \"localhost\" -this system\'s network configuration is unsupported",(java.lang.Throwable)e);
+ address=null;
+ label2:return  address;
+ catch java.net.UnknownHostException: label0 - label1 : label3;
+catch java.net.UnknownHostException: label4 - label5 : label6;
+} 
+

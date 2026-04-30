@@ -1,0 +1,36 @@
+static void org.apache.rocketmq.proxy.service.mqclient.MQClientAPIExt:lambda$lockBatchMQWithFuture$9(java.util.concurrent.CompletableFuture future,org.apache.rocketmq.remoting.netty.ResponseFuture responseFuture)
+{
+org.apache.rocketmq.remoting.protocol.RemotingCommand response;
+  org.apache.rocketmq.remoting.protocol.body.LockBatchResponseBody responseBody;
+  java.util.Set messageQueues;
+  org.apache.rocketmq.client.exception.MQClientException $stack6;
+  int $stack8;
+  org.apache.rocketmq.client.exception.MQBrokerException $stack9;
+  java.lang.String $stack11;
+  byte[] $stack13;
+  java.lang.Object $stack14;
+  java.lang.Throwable $stack20;
+  response = responseFuture.getResponseCommand();
+ if (response==null) goto label0;
+ $stack8 = response.getCode();
+ if ($stack8!=0) goto label1;
+ label2:$stack13 = response.getBody();
+ $stack14 = org.apache.rocketmq.remoting.protocol.RemotingSerializable.decode($stack13,org.apache.rocketmq.remoting.protocol.body.LockBatchResponseBody);
+ responseBody=(org.apache.rocketmq.remoting.protocol.body.LockBatchResponseBody) $stack14;
+ messageQueues = responseBody.getLockOKMQSet();
+ future.complete((java.lang.Object)messageQueues);
+ label3:goto label1;
+ label4:$stack20 = catch;
+ future.completeExceptionally($stack20);
+ label1:$stack9=new org.apache.rocketmq.client.exception.MQBrokerException;
+ $stack8 = response.getCode();
+ $stack11 = response.getRemark();
+ $stack9#org.apache.rocketmq.client.exception.MQBrokerException($stack8,$stack11);
+ future.completeExceptionally((java.lang.Throwable)$stack9);
+ goto label5;
+ label0:$stack6 = org.apache.rocketmq.proxy.service.mqclient.MQClientAPIExt.processNullResponseErr(responseFuture);
+ future.completeExceptionally((java.lang.Throwable)$stack6);
+ label5:return;
+ catch java.lang.Throwable: label2 - label3 : label4;
+} 
+

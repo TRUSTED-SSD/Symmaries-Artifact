@@ -1,0 +1,26 @@
+static void org.apache.rocketmq.tieredstore.container.TieredContainerManager:lambda$null$0(org.apache.rocketmq.tieredstore.container.TieredMessageQueueContainer container)
+{
+org.apache.rocketmq.common.message.MessageQueue mq;
+  java.lang.Throwable $stack3;
+  java.lang.Object[] $stack5;
+  org.apache.rocketmq.logging.org.slf4j.Logger $stack6;
+  java.lang.String $stack9;
+  int $stack11;
+  java.lang.Integer $stack12;
+  label0:container.commitCommitLog();
+ label1:goto label2;
+ label3:$stack3 = catch;
+ mq = container.getMessageQueue();
+ $stack6=org.apache.rocketmq.tieredstore.container.TieredContainerManager.logger;
+ $stack5=new java.lang.Object[3];
+ $stack9 = mq.getTopic();
+ $stack5[0]=$stack9;
+ $stack11 = mq.getQueueId();
+ $stack12 = java.lang.Integer.valueOf($stack11);
+ $stack5[1]=$stack12;
+ $stack5[2]=$stack3;
+ $stack6.error("commit commitLog periodically failed: topic: {}, queue: {}",$stack5);
+ label2:return;
+ catch java.lang.Throwable: label0 - label1 : label3;
+} 
+

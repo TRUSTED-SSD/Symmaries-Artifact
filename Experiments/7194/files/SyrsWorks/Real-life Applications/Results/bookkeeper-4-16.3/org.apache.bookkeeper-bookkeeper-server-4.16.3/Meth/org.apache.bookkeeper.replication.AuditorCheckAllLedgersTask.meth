@@ -1,0 +1,36 @@
+org.apache.bookkeeper.replication.AuditorCheckAllLedgersTask(org.apache.bookkeeper.conf.ServerConfiguration conf,org.apache.bookkeeper.replication.AuditorStats auditorStats,org.apache.bookkeeper.client.BookKeeperAdmin admin,org.apache.bookkeeper.meta.LedgerManager ledgerManager,org.apache.bookkeeper.meta.LedgerUnderreplicationManager ledgerUnderreplicationManager,org.apache.bookkeeper.replication.AuditorTask$ShutdownTaskHandler shutdownTaskHandler,java.util.function.BiConsumer hasAuditCheckTask)
+{
+int $stack8;
+  java.util.concurrent.Semaphore $stack9;
+  org.apache.bookkeeper.replication.AuditorCheckAllLedgersTask$1 $stack13;
+  java.util.concurrent.ExecutorService $stack14;
+  org.slf4j.Logger $stack15;
+  org.apache.bookkeeper.replication.ReplicationException$UnavailableException $stack16;
+  this#org.apache.bookkeeper.replication.AuditorTask(conf,auditorStats,admin,ledgerManager,ledgerUnderreplicationManager,shutdownTaskHandler,hasAuditCheckTask);
+ $stack8 = conf.getAuditorMaxNumberOfConcurrentOpenLedgerOperations();
+ if ($stack8>0) goto label0;
+ $stack15=org.apache.bookkeeper.replication.AuditorCheckAllLedgersTask.LOG;
+ $stack15.error("auditorMaxNumberOfConcurrentOpenLedgerOperations should be greater than 0");
+ $stack16=new org.apache.bookkeeper.replication.ReplicationException$UnavailableException;
+ $stack16#org.apache.bookkeeper.replication.ReplicationException$UnavailableException("auditorMaxNumberOfConcurrentOpenLedgerOperations should be greater than 0");
+ throw $stack16;
+ label0:$stack9=new java.util.concurrent.Semaphore;
+ $stack8 = conf.getAuditorMaxNumberOfConcurrentOpenLedgerOperations();
+ $stack9#java.util.concurrent.Semaphore($stack8);
+ this.openLedgerNoRecoverySemaphore=$stack9;
+ $stack8 = conf.getAuditorAcquireConcurrentOpenLedgerOperationsTimeoutMSec();
+ if ($stack8>=0) goto label1;
+ $stack15=org.apache.bookkeeper.replication.AuditorCheckAllLedgersTask.LOG;
+ $stack15.error("auditorAcquireConcurrentOpenLedgerOperationsTimeoutMSec should be greater than or equal to 0");
+ $stack16=new org.apache.bookkeeper.replication.ReplicationException$UnavailableException;
+ $stack16#org.apache.bookkeeper.replication.ReplicationException$UnavailableException("auditorAcquireConcurrentOpenLedgerOperationsTimeoutMSec should be greater than or equal to 0");
+ throw $stack16;
+ label1:$stack8 = conf.getAuditorAcquireConcurrentOpenLedgerOperationsTimeoutMSec();
+ this.openLedgerNoRecoverySemaphoreWaitTimeoutMSec=$stack8;
+ $stack13=new org.apache.bookkeeper.replication.AuditorCheckAllLedgersTask$1;
+ $stack13#org.apache.bookkeeper.replication.AuditorCheckAllLedgersTask$1(this);
+ $stack14 = java.util.concurrent.Executors.newSingleThreadExecutor((java.util.concurrent.ThreadFactory)$stack13);
+ this.ledgerCheckerExecutor=$stack14;
+ return;
+ } 
+

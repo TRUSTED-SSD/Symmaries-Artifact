@@ -1,0 +1,19 @@
+static org.apache.bookkeeper.proto.ReadEntryProcessor org.apache.bookkeeper.proto.ReadEntryProcessor:create(org.apache.bookkeeper.proto.BookieProtocol$ReadRequest request,org.apache.bookkeeper.proto.BookieRequestHandler requestHandler,org.apache.bookkeeper.proto.BookieRequestProcessor requestProcessor,java.util.concurrent.ExecutorService fenceThreadPool,boolean throttleReadResponses)
+{
+org.apache.bookkeeper.proto.ReadEntryProcessor rep;
+  io.netty.util.Recycler $stack6;
+  java.lang.Object $stack7;
+  io.netty.channel.ChannelHandlerContext $stack8;
+  io.netty.channel.Channel $stack9;
+  $stack6=org.apache.bookkeeper.proto.ReadEntryProcessor.RECYCLER;
+ $stack7 = $stack6.get();
+ rep=(org.apache.bookkeeper.proto.ReadEntryProcessor) $stack7;
+ rep.init((org.apache.bookkeeper.proto.BookieProtocol$Request)request,requestHandler,requestProcessor);
+ rep.fenceThreadPool=fenceThreadPool;
+ rep.throttleReadResponses=throttleReadResponses;
+ $stack8 = requestHandler.ctx();
+ $stack9 = $stack8.channel();
+ requestProcessor.onReadRequestStart($stack9);
+ return  rep;
+ } 
+

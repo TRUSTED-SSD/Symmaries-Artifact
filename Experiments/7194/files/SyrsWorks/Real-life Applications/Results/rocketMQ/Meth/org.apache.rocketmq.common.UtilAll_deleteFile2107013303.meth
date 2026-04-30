@@ -1,0 +1,28 @@
+static void org.apache.rocketmq.common.UtilAll:deleteFile(java.io.File file)
+{
+java.io.File[] l2;
+  int l3;
+  int l4;
+  java.io.File file1;
+  boolean $stack6;
+  $stack6 = file.exists();
+ if ($stack6!=0) goto label0;
+ return;
+ label0:$stack6 = file.isFile();
+ if ($stack6==0) goto label1;
+ file.delete();
+ goto label2;
+ label1:$stack6 = file.isDirectory();
+ if ($stack6==0) goto label2;
+ l2 = file.listFiles();
+ l3=#l2;
+ l4=0;
+ label3:if (l4>=l3) goto label4;
+ file1=l2[l4];
+ org.apache.rocketmq.common.UtilAll.deleteFile(file1);
+ l4=(l4+1);
+ goto label3;
+ label4:file.delete();
+ label2:return;
+ } 
+

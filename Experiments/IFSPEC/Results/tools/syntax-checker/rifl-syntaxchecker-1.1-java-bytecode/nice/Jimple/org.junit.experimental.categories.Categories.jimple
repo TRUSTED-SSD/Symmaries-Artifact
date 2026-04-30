@@ -1,0 +1,74 @@
+    public void <init>(java.lang.Class, org.junit.runners.model.RunnerBuilder) throws org.junit.runners.model.InitializationError
+    {
+        org.junit.experimental.categories.Categories this;
+        java.lang.Class klass;
+        org.junit.runners.model.RunnerBuilder builder;
+        java.util.Set included, excluded;
+        boolean isAnyIncluded, isAnyExcluded;
+        org.junit.experimental.categories.Categories$CategoryFilter $stack11;
+        org.junit.runner.Description $stack12;
+        org.junit.runner.manipulation.NoTestsRemainException $stack13;
+        org.junit.runners.model.InitializationError $stack14;
+
+        this := @this: org.junit.experimental.categories.Categories;
+
+        klass := @parameter0: java.lang.Class;
+
+        builder := @parameter1: org.junit.runners.model.RunnerBuilder;
+
+        specialinvoke this.<org.junit.runners.Suite: void <init>(java.lang.Class,org.junit.runners.model.RunnerBuilder)>(klass, builder);
+/*307*/
+
+     label1:
+        included = staticinvoke <org.junit.experimental.categories.Categories: java.util.Set getIncludedCategory(java.lang.Class)>(klass);
+/*309*/
+/*309*/
+
+        excluded = staticinvoke <org.junit.experimental.categories.Categories: java.util.Set getExcludedCategory(java.lang.Class)>(klass);
+/*310*/
+/*310*/
+
+        isAnyIncluded = staticinvoke <org.junit.experimental.categories.Categories: boolean isAnyIncluded(java.lang.Class)>(klass);
+/*311*/
+/*311*/
+
+        isAnyExcluded = staticinvoke <org.junit.experimental.categories.Categories: boolean isAnyExcluded(java.lang.Class)>(klass);
+/*312*/
+/*312*/
+
+        $stack11 = staticinvoke <org.junit.experimental.categories.Categories$CategoryFilter: org.junit.experimental.categories.Categories$CategoryFilter categoryFilter(boolean,java.util.Set,boolean,java.util.Set)>(isAnyIncluded, included, isAnyExcluded, excluded);
+/*314*/
+
+        virtualinvoke this.<org.junit.experimental.categories.Categories: void filter(org.junit.runner.manipulation.Filter)>($stack11);
+/*314*/
+
+     label2:
+        goto label4;
+/*317*/
+
+     label3:
+        $stack13 := @caughtexception;
+/*319*/
+
+        $stack14 = new org.junit.runners.model.InitializationError;
+/*316*/
+
+        specialinvoke $stack14.<org.junit.runners.model.InitializationError: void <init>(java.lang.Throwable)>($stack13);
+/*316*/
+
+        throw $stack14;
+/*316*/
+
+     label4:
+        $stack12 = virtualinvoke this.<org.junit.experimental.categories.Categories: org.junit.runner.Description getDescription()>();
+/*318*/
+
+        staticinvoke <org.junit.experimental.categories.Categories: void assertNoCategorizedDescendentsOfUncategorizeableParents(org.junit.runner.Description)>($stack12);
+/*318*/
+
+        return;
+/*319*/
+
+        catch org.junit.runner.manipulation.NoTestsRemainException from label1 to label2 with label3;
+    }
+

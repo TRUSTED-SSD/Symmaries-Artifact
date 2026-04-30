@@ -1,0 +1,41 @@
+com.google.zxing.common.BitMatrix com.google.zxing.common.HybridBinarizer:getBlackMatrix()
+{
+com.google.zxing.LuminanceSource source;
+  int width;
+  int height;
+  byte[] luminances;
+  int subWidth;
+  int subHeight;
+  int[][] blackPoints;
+  com.google.zxing.common.BitMatrix newMatrix;
+  int $stack20;
+  newMatrix=this.matrix;
+ if (newMatrix==null) goto label0;
+ newMatrix=this.matrix;
+ return  newMatrix;
+ label0:source = this.getLuminanceSource();
+ width = source.getWidth();
+ height = source.getHeight();
+ if (width<40) goto label1;
+ if (height<40) goto label1;
+ luminances = source.getMatrix();
+ subWidth=(width>>3);
+ subHeight=(width & 7);
+ if (subHeight==0) goto label2;
+ subWidth=(subWidth+1);
+ label2:subHeight=(height>>3);
+ $stack20=(height & 7);
+ if ($stack20==0) goto label3;
+ subHeight=(subHeight+1);
+ label3:blackPoints = com.google.zxing.common.HybridBinarizer.calculateBlackPoints(luminances,subWidth,subHeight,width,height);
+ newMatrix=new com.google.zxing.common.BitMatrix;
+ newMatrix#com.google.zxing.common.BitMatrix(width,height);
+ com.google.zxing.common.HybridBinarizer.calculateThresholdForBlock(luminances,subWidth,subHeight,width,height,blackPoints,newMatrix);
+ this.matrix=newMatrix;
+ goto label4;
+ label1:newMatrix = this#com.google.zxing.common.GlobalHistogramBinarizer:getBlackMatrix();
+ this.matrix=newMatrix;
+ label4:newMatrix=this.matrix;
+ return  newMatrix;
+ } 
+

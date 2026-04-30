@@ -1,0 +1,35 @@
+void com.google.zxing.datamatrix.encoder.DefaultPlacement:module(int row,int col,int pos,int bit)
+{
+java.lang.CharSequence $stack6;
+  boolean $stack12;
+  int $stack14;
+  char $stack24;
+  if (row>=0) goto label0;
+ $stack14=this.numrows;
+ row=(row+$stack14);
+ $stack14=this.numrows;
+ $stack14=($stack14+4);
+ $stack14=($stack14%8);
+ $stack14=(4-$stack14);
+ col=(col+$stack14);
+ label0:if (col>=0) goto label1;
+ $stack14=this.numcols;
+ col=(col+$stack14);
+ $stack14=this.numcols;
+ $stack14=($stack14+4);
+ $stack14=($stack14%8);
+ $stack14=(4-$stack14);
+ row=(row+$stack14);
+ label1:$stack6=this.codewords;
+ $stack24 = $stack6.charAt(pos);
+ pos=(8-bit);
+ pos=(1<<pos);
+ pos=($stack24 & pos);
+ if (pos==0) goto label2;
+ $stack12=1;
+ goto label3;
+ label2:$stack12=0;
+ label3:this#com.google.zxing.datamatrix.encoder.DefaultPlacement:setBit(col,row,$stack12);
+ return;
+ } 
+

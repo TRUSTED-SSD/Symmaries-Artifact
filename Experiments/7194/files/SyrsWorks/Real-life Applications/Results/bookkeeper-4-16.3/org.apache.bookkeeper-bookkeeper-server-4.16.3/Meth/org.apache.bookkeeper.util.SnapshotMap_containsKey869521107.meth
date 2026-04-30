@@ -1,0 +1,32 @@
+boolean org.apache.bookkeeper.util.SnapshotMap:containsKey(java.lang.Object key)
+{
+boolean l2;
+  java.util.concurrent.locks.ReentrantReadWriteLock $stack4;
+  java.util.concurrent.locks.ReentrantReadWriteLock$ReadLock $stack5;
+  java.util.Map $stack6;
+  boolean $stack9;
+  java.util.NavigableMap $stack10;
+  java.lang.Throwable $stack15;
+  $stack4=this.lock;
+ $stack5 = $stack4.readLock();
+ $stack5.lock();
+ label0:$stack6=this.updates;
+ l2 = $stack6.containsKey(key);
+ $stack6=this.updatesToMerge;
+ $stack9 = $stack6.containsKey(key);
+ l2=(l2 | $stack9);
+ $stack10=this.snapshot;
+ $stack9 = $stack10.containsKey(key);
+ l2=(l2 | $stack9);
+ label1:$stack4=this.lock;
+ $stack5 = $stack4.readLock();
+ $stack5.unlock();
+ return  l2;
+ label2:$stack15 = catch;
+ $stack4=this.lock;
+ $stack5 = $stack4.readLock();
+ $stack5.unlock();
+ throw $stack15;
+ catch java.lang.Throwable: label0 - label1 : label2;
+} 
+

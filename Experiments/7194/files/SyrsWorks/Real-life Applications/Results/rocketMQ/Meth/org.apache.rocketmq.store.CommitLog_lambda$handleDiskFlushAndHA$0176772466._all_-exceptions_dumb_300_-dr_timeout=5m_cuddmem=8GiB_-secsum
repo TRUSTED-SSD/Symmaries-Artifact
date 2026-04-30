@@ -1,0 +1,11 @@
+static org.apache.rocketmq.store.PutMessageResult org.apache.rocketmq.store.CommitLog:lambda$handleDiskFlushAndHA$0 (
+  org.apache.rocketmq.store.PutMessageResult putMessageResult,
+  org.apache.rocketmq.store.PutMessageStatus @flushStatus,
+  org.apache.rocketmq.store.PutMessageStatus replicaStatus) {
+  guard = tt;
+  ret(level()) = level(putMessageResult);
+  ret(obj_level()) = level(@flushStatus) ⊔ level(replicaStatus) ⊔ obj_level(putMessageResult) ⊔ obj_level(replicaStatus);
+  ret(obj_level(@flushStatus)) = level(@flushStatus) ⊔ level(replicaStatus) ⊔ obj_level(putMessageResult) ⊔ obj_level(replicaStatus);
+  ret(obj_level(putMessageResult)) = level(@flushStatus) ⊔ level(replicaStatus) ⊔ obj_level(putMessageResult) ⊔ obj_level(replicaStatus);
+  ret(obj_level(replicaStatus)) = level(@flushStatus) ⊔ level(replicaStatus) ⊔ obj_level(putMessageResult) ⊔ obj_level(replicaStatus);
+}

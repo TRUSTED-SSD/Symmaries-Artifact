@@ -1,0 +1,33 @@
+org.apache.rocketmq.tieredstore.container.TieredMessageQueueContainer org.apache.rocketmq.tieredstore.container.TieredContainerManager:lambda$getOrCreateMQContainer$9(org.apache.rocketmq.common.message.MessageQueue messageQueue,org.apache.rocketmq.common.message.MessageQueue mq)
+{
+org.apache.rocketmq.logging.org.slf4j.Logger $stack4;
+  java.lang.String $stack6;
+  int $stack7;
+  java.lang.Integer $stack8;
+  org.apache.rocketmq.tieredstore.container.TieredMessageQueueContainer $stack9;
+  org.apache.rocketmq.tieredstore.common.TieredMessageStoreConfig $stack10;
+  java.lang.Exception $stack11;
+  java.lang.Object[] $stack12;
+  label0:$stack4=org.apache.rocketmq.tieredstore.container.TieredContainerManager.logger;
+ $stack6 = messageQueue.getTopic();
+ $stack7 = messageQueue.getQueueId();
+ $stack8 = java.lang.Integer.valueOf($stack7);
+ $stack4.info("TieredContainerManager#getOrCreateMQContainer: try to create new container: topic: {}, queueId: {}",(java.lang.Object)$stack6,(java.lang.Object)$stack8);
+ $stack9=new org.apache.rocketmq.tieredstore.container.TieredMessageQueueContainer;
+ $stack10=this.storeConfig;
+ $stack9#org.apache.rocketmq.tieredstore.container.TieredMessageQueueContainer(mq,$stack10);
+ label1:return  $stack9;
+ label2:$stack11 = catch;
+ $stack4=org.apache.rocketmq.tieredstore.container.TieredContainerManager.logger;
+ $stack12=new java.lang.Object[3];
+ $stack6 = messageQueue.getTopic();
+ $stack12[0]=$stack6;
+ $stack7 = messageQueue.getQueueId();
+ $stack8 = java.lang.Integer.valueOf($stack7);
+ $stack12[1]=$stack8;
+ $stack12[2]=$stack11;
+ $stack4.error("TieredContainerManager#getOrCreateMQContainer: create new container failed: topic: {}, queueId: {}",$stack12);
+ return  null;
+ catch java.lang.Exception: label0 - label1 : label2;
+} 
+

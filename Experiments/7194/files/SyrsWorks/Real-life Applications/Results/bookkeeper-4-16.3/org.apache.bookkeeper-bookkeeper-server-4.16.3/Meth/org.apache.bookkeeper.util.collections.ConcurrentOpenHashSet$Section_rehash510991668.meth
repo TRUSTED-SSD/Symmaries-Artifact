@@ -1,0 +1,44 @@
+void org.apache.bookkeeper.util.collections.ConcurrentOpenHashSet$Section:rehash(int newCapacity)
+{
+java.lang.Object[] newValues;
+  int i;
+  java.lang.Object storedValue;
+  java.lang.Object[] $stack6;
+  int $stack7;
+  float $stack10;
+  float $stack11;
+  java.lang.Object $stack20;
+  newValues=new java.lang.Object[newCapacity];
+ newValues=(java.lang.Object[]) newValues;
+ i=0;
+ label0:$stack6=this.values;
+ $stack7=#$stack6;
+ if (i>=$stack7) goto label1;
+ $stack6=this.values;
+ storedValue=$stack6[i];
+ $stack20 = org.apache.bookkeeper.util.collections.ConcurrentOpenHashSet.access$500();
+ if (storedValue==$stack20) goto label2;
+ $stack20 = org.apache.bookkeeper.util.collections.ConcurrentOpenHashSet.access$600();
+ if (storedValue==$stack20) goto label2;
+ org.apache.bookkeeper.util.collections.ConcurrentOpenHashSet$Section.insertValueNoLock(newValues,storedValue);
+ label2:i=(i+1);
+ goto label0;
+ label1:this.values=newValues;
+ i=this.size;
+ this.usedBuckets=i;
+ this.capacity=newCapacity;
+ newCapacity=this.capacity;
+ $stack11=(float) newCapacity;
+ $stack10=this.mapFillFactor;
+ $stack10=($stack11 * $stack10);
+ newCapacity=(int) $stack10;
+ this.resizeThresholdUp=newCapacity;
+ newCapacity=this.capacity;
+ $stack11=(float) newCapacity;
+ $stack10=this.mapIdleFactor;
+ $stack10=($stack11 * $stack10);
+ newCapacity=(int) $stack10;
+ this.resizeThresholdBelow=newCapacity;
+ return;
+ } 
+

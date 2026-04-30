@@ -1,0 +1,40 @@
+static org.apache.kerby.kerberos.kerb.keytab.Keytab org.apache.kerby.kerberos.kerb.admin.kadmin.local.AdminHelper:createOrLoadKeytab(java.io.File keytabFile)
+{
+org.apache.kerby.kerberos.kerb.keytab.Keytab keytab;
+  boolean $stack3;
+  org.apache.kerby.kerberos.kerb.KrbException $stack7;
+  java.lang.StringBuilder $stack8;
+  java.lang.String $stack10;
+  java.io.IOException $stack13;
+  label0:$stack3 = keytabFile.exists();
+ if ($stack3!=0) goto label1;
+ $stack3 = keytabFile.createNewFile();
+ if ($stack3!=0) goto label2;
+ $stack7=new org.apache.kerby.kerberos.kerb.KrbException;
+ $stack8=new java.lang.StringBuilder;
+ $stack8#java.lang.StringBuilder();
+ $stack8 = $stack8.append("Failed to create keytab file ");
+ $stack10 = keytabFile.getAbsolutePath();
+ $stack8 = $stack8.append($stack10);
+ $stack10 = $stack8.toString();
+ $stack7#org.apache.kerby.kerberos.kerb.KrbException($stack10);
+ throw $stack7;
+ label2:keytab=new org.apache.kerby.kerberos.kerb.keytab.Keytab;
+ keytab#org.apache.kerby.kerberos.kerb.keytab.Keytab();
+ goto label3;
+ label1:keytab = org.apache.kerby.kerberos.kerb.keytab.Keytab.loadKeytab(keytabFile);
+ label3:goto label4;
+ label5:$stack13 = catch;
+ $stack7=new org.apache.kerby.kerberos.kerb.KrbException;
+ $stack8=new java.lang.StringBuilder;
+ $stack8#java.lang.StringBuilder();
+ $stack8 = $stack8.append("Failed to load or create keytab ");
+ $stack10 = keytabFile.getAbsolutePath();
+ $stack8 = $stack8.append($stack10);
+ $stack10 = $stack8.toString();
+ $stack7#org.apache.kerby.kerberos.kerb.KrbException($stack10,(java.lang.Throwable)$stack13);
+ throw $stack7;
+ label4:return  keytab;
+ catch java.io.IOException: label0 - label3 : label5;
+} 
+

@@ -1,0 +1,53 @@
+digraph G {
+  node [shape=box, ];
+  "pc0_js1" [label="〈if (z0 == 0) goto label0, js1〉", ];
+  "pc1_js1" [label="〈$z1 = 1, js1〉", ];
+  "pc2_js1" [label="〈goto label1, js1〉", ];
+  "pc3_js1" [label="〈label0: $z1 = 0, js1〉", ];
+  "pc4_js1" [label="〈label1: $b1 = (byte) $z1, js1〉", ];
+  "pc4_js2" [label="〈label1: $b1 = (byte) $z1, js2〉", ];
+  "pc5_js1" [label="〈r0[i0] = $b1, js1〉", ];
+  "pc6_js1" [label="〈return, js1〉", ];
+  "pc7_js1" [label="〈sink, js1〉\n\
+obj_level(r0) ⊑ ret(obj_level(r0))'",
+             ];
+  
+  
+  "pc0_js1" -> "pc1_js1" [label="υ ∧ ¬ω ∨ ¬τ ∧ ¬υ ∧ level(z0) ⊐ pc ∨ ¬τ ∧ ¬υ ∧ level(z0) ⊑ pc,\n\
+{pc := if ¬(¬τ ∧ ¬υ ∧ level(z0) ⊐ pc) ∨ υ ∧ ¬ω then pc else pc ⊔ level(z0),\n\
+ obj_level(r0)' := if ¬(¬τ ∧ ¬υ ∧ level(z0) ⊐ pc) ∨ υ ∧ ¬ω then obj_level(r0)' else obj_level(r0),\n\
+ hr := if ¬(¬τ ∧ ¬υ ∧ level(z0) ⊐ pc) ∨ υ ∧ ¬ω then hr else P0}",
+                          ];
+  "pc0_js1" -> "pc3_js1" [label="υ ∧ ω ∨ τ ∧ ¬υ ∧ level(z0) ⊐ pc ∨ τ ∧ ¬υ ∧ level(z0) ⊑ pc,\n\
+{pc := if ¬(τ ∧ ¬υ ∧ level(z0) ⊐ pc) ∨ υ ∧ ω then pc else pc ⊔ level(z0),\n\
+ obj_level(r0)' := if ¬(τ ∧ ¬υ ∧ level(z0) ⊐ pc) ∨ υ ∧ ω then obj_level(r0)' else obj_level(r0),\n\
+ hr := if ¬(τ ∧ ¬υ ∧ level(z0) ⊐ pc) ∨ υ ∧ ω then hr else P0}",
+                          ];
+  "pc1_js1" -> "pc2_js1" [label="tt,\n\
+{level($z1) := pc ⊔ (if υ then level($z1) else ⊥)}",
+                          ];
+  "pc2_js1" -> "pc4_js1" [label="tt,\n\
+{}", ];
+  "pc3_js1" -> "pc4_js1" [label="tt,\n\
+{level($z1) := pc ⊔ (if υ then level($z1) else ⊥)}",
+                          ];
+  "pc4_js1" -> "pc0_js1" [label="¬υ ∧ hr = P0,\n\
+{υ := tt,\n\
+ obj_level(r0) := obj_level(r0)',\n\
+ obj_level(r0)' := obj_level(r0)}",
+                          ];
+  "pc4_js1" -> "pc4_js2" [label="hr ≠ P0 ∨ υ ∧ hr = P0,\n\
+{υ := υ ∧ ¬(υ ∧ hr = P0),\n\
+ pc := if υ ∧ hr = P0 then ⊥ else pc,\n\
+ hr := if υ ∧ hr = P0 then P. else hr}",
+                          ];
+  "pc4_js2" -> "pc5_js1" [label="tt,\n\
+{level($b1) := pc ⊔ (if υ then ⊥ else level($z1))}",
+                          ];
+  "pc5_js1" -> "pc6_js1" [label="tt,\n\
+{obj_level(r0) := pc ⊔ obj_level(r0) ⊔ (if υ then ⊥ else level($b1) ⊔ level(i0))}",
+                          ];
+  "pc6_js1" -> "pc7_js1" [label="tt,\n\
+{ϕ := S6}", ];
+  
+  }

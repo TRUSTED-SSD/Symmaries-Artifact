@@ -1,0 +1,21 @@
+void org.apache.rocketmq.store.StoreCheckpoint:flush()
+{
+long $stack1;
+  java.nio.MappedByteBuffer $stack2;
+  $stack2=this.mappedByteBuffer;
+ $stack1=this.physicMsgTimestamp;
+ $stack2.putLong(0,$stack1);
+ $stack2=this.mappedByteBuffer;
+ $stack1=this.logicsMsgTimestamp;
+ $stack2.putLong(8,$stack1);
+ $stack2=this.mappedByteBuffer;
+ $stack1=this.indexMsgTimestamp;
+ $stack2.putLong(16,$stack1);
+ $stack2=this.mappedByteBuffer;
+ $stack1=this.masterFlushedOffset;
+ $stack2.putLong(24,$stack1);
+ $stack2=this.mappedByteBuffer;
+ $stack2.force();
+ return;
+ } 
+

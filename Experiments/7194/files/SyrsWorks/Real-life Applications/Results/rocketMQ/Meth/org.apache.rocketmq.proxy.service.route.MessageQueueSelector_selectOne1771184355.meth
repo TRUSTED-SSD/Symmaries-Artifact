@@ -1,0 +1,15 @@
+org.apache.rocketmq.proxy.service.route.AddressableMessageQueue org.apache.rocketmq.proxy.service.route.MessageQueueSelector:selectOne(boolean onlyBroker)
+{
+java.util.concurrent.atomic.AtomicInteger $stack3;
+  int $stack4;
+  org.apache.rocketmq.proxy.service.route.AddressableMessageQueue $stack5;
+  if (onlyBroker==0) goto label0;
+ $stack3=this.brokerIndex;
+ $stack4 = $stack3.getAndIncrement();
+ goto label1;
+ label0:$stack3=this.queueIndex;
+ $stack4 = $stack3.getAndIncrement();
+ label1:$stack5 = this.selectOneByIndex($stack4,onlyBroker);
+ return  $stack5;
+ } 
+

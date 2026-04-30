@@ -1,0 +1,34 @@
+digraph G {
+  node [shape=box, ];
+  "pc0_js1" [label="〈$r1 = this.mant, js1〉", ];
+  "pc1_js1" [label="〈$r2 = this#java.util.Formatter$FormatSpecifier$BigDecimalLayout.toCharArray ($r1), js1〉\n\
+tt",
+             ];
+  "pc2_js1" [label="〈return $r2, js1〉", ];
+  "pc3_js1" [label="〈sink, js1〉\n\
+obj_level(this) ⊑ ret(obj_level(this))' ∧ (ret(this.><this)' ∨ ¬this.><this) ∧ (ϕ ≠ S2 ∨ obj_level($r2) ⊑ ret(obj_level())' ∧ pc ⊔ level($r2) ⊑ ret(level())' ∧ (ret(.><this)' ∨ ¬this.><$r2))",
+             ];
+  
+  
+  "pc0_js1" -> "pc1_js1" [label="tt,\n\
+{$r1.><$r1 := ff,\n\
+ $r1.><$r2 := ff,\n\
+ $r1.><this := this.><this,\n\
+ this.><$r1 := tt,\n\
+ level($r1) := pc ⊔ level(this) ⊔ obj_level(this),\n\
+ obj_level($r1) := obj_level(this)}",
+                          ];
+  "pc1_js1" -> "pc2_js1" [label="tt,\n\
+{$r1.><$r1 := this.><this,\n\
+ $r1.><this := this.><this,\n\
+ this.><$r1 := tt,\n\
+ this.><this := tt,\n\
+ level($r2) := pc ⊔ level(this) ⊔ obj_level(this),\n\
+ obj_level($r1) := obj_level(this) ⊔ (if if pc ⊔ level(this) ⊔ obj_level(this) = ⊥ then obj_level(this) else obj_level(this) ⊓ (pc ⊔ level(this) ⊔ obj_level(this)) = ⊤ then ⊤ else ⊥),\n\
+ obj_level($r2) := pc ⊔ level(this) ⊔ obj_level(this),\n\
+ obj_level(this) := obj_level(this) ⊔ (if if pc ⊔ level(this) ⊔ obj_level(this) = ⊥ then obj_level(this) else obj_level(this) ⊓ (pc ⊔ level(this) ⊔ obj_level(this)) = ⊤ then ⊤ else ⊥)}",
+                          ];
+  "pc2_js1" -> "pc3_js1" [label="tt,\n\
+{ϕ := S2}", ];
+  
+  }

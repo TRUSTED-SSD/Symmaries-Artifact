@@ -1,0 +1,65 @@
+java.util.List org.apache.rocketmq.proxy.service.message.LocalMessageService:lambda$sendMessage$0(java.lang.String @messageId,org.apache.rocketmq.remoting.protocol.header.SendMessageRequestHeader requestHeader,org.apache.rocketmq.remoting.protocol.RemotingCommand r)
+{
+org.apache.rocketmq.client.producer.SendResult sendResult;
+  org.apache.rocketmq.remoting.protocol.header.SendMessageResponseHeader responseHeader;
+  org.apache.rocketmq.client.producer.SendStatus sendStatus;
+  org.apache.rocketmq.remoting.CommandCustomHeader $stack8;
+  int $stack9;
+  org.apache.rocketmq.common.message.MessageQueue $stack10;
+  org.apache.rocketmq.broker.BrokerController $stack12;
+  org.apache.rocketmq.common.BrokerConfig $stack13;
+  java.lang.String $stack14;
+  java.lang.Integer $stack15;
+  java.lang.Long $stack17;
+  long $stack18;
+  java.util.List $stack21;
+  org.apache.rocketmq.proxy.common.ProxyException $stack37;
+  org.apache.rocketmq.proxy.common.ProxyExceptionCode $stack38;
+  java.lang.String messageId;
+messageId=@messageId;
+sendResult=new org.apache.rocketmq.client.producer.SendResult;
+ sendResult#org.apache.rocketmq.client.producer.SendResult();
+ $stack8 = r.readCustomHeader();
+ responseHeader=(org.apache.rocketmq.remoting.protocol.header.SendMessageResponseHeader) $stack8;
+ $stack9 = r.getCode();
+ switch [$stack9]
+if 0 goto label0;
+if 1 goto label1;
+if 2 goto label2;
+if 3 goto label3;
+goto label4;
+ label1:sendStatus=org.apache.rocketmq.client.producer.SendStatus.FLUSH_DISK_TIMEOUT;
+ goto label5;
+ label3:sendStatus=org.apache.rocketmq.client.producer.SendStatus.FLUSH_SLAVE_TIMEOUT;
+ goto label5;
+ label2:sendStatus=org.apache.rocketmq.client.producer.SendStatus.SLAVE_NOT_AVAILABLE;
+ goto label5;
+ label0:sendStatus=org.apache.rocketmq.client.producer.SendStatus.SEND_OK;
+ goto label5;
+ label4:$stack37=new org.apache.rocketmq.proxy.common.ProxyException;
+ $stack38=org.apache.rocketmq.proxy.common.ProxyExceptionCode.INTERNAL_SERVER_ERROR;
+ messageId = r.getRemark();
+ $stack37#org.apache.rocketmq.proxy.common.ProxyException($stack38,messageId);
+ throw $stack37;
+ label5:sendResult.setSendStatus(sendStatus);
+ sendResult.setMsgId(messageId);
+ $stack10=new org.apache.rocketmq.common.message.MessageQueue;
+ messageId = requestHeader.getTopic();
+ $stack12=this.brokerController;
+ $stack13 = $stack12.getBrokerConfig();
+ $stack14 = $stack13.getBrokerName();
+ $stack15 = requestHeader.getQueueId();
+ $stack9 = $stack15.intValue();
+ $stack10#org.apache.rocketmq.common.message.MessageQueue(messageId,$stack14,$stack9);
+ sendResult.setMessageQueue($stack10);
+ $stack17 = responseHeader.getQueueOffset();
+ $stack18 = $stack17.longValue();
+ sendResult.setQueueOffset($stack18);
+ messageId = responseHeader.getTransactionId();
+ sendResult.setTransactionId(messageId);
+ messageId = responseHeader.getMsgId();
+ sendResult.setOffsetMsgId(messageId);
+ $stack21 = java.util.Collections.singletonList((java.lang.Object)sendResult);
+ return  $stack21;
+ } 
+

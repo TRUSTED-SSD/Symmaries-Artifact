@@ -1,0 +1,41 @@
+void org.apache.bookkeeper.zookeeper.ZooKeeperClient:onExpired()
+{
+java.util.concurrent.atomic.AtomicBoolean $stack2;
+  boolean $stack3;
+  org.slf4j.Logger $stack4;
+  long $stack6;
+  java.lang.String $stack7;
+  java.lang.String $stack8;
+  java.util.concurrent.Callable $stack9;
+  java.util.concurrent.ExecutorService $stack10;
+  java.util.concurrent.RejectedExecutionException $stack12;
+  java.lang.Exception $stack16;
+  $stack2=this.closed;
+ $stack3 = $stack2.get();
+ if ($stack3==0) goto label0;
+ return;
+ label0:$stack4=org.apache.bookkeeper.zookeeper.ZooKeeperClient.logger;
+ $stack6 = this.getSessionId();
+ $stack7 = java.lang.Long.toHexString($stack6);
+ $stack8=this.connectString;
+ dummyClass.lowSink("ZooKeeper session {} is expired from {}.");
+$stack4.info("ZooKeeper session {} is expired from {}.",(java.lang.Object)$stack7,(java.lang.Object)$stack8);
+ label1:$stack10=this.connectExecutor;
+ $stack9=this.clientCreator;
+ $stack10.submit($stack9);
+ label2:goto label3;
+ label4:$stack12 = catch;
+ $stack2=this.closed;
+ $stack3 = $stack2.get();
+ if ($stack3!=0) goto label5;
+ $stack4=org.apache.bookkeeper.zookeeper.ZooKeeperClient.logger;
+ $stack4.error("ZooKeeper reconnect task is rejected : ",(java.lang.Throwable)$stack12);
+ label5:goto label3;
+ label6:$stack16 = catch;
+ $stack4=org.apache.bookkeeper.zookeeper.ZooKeeperClient.logger;
+ $stack4.error("Failed to submit zookeeper reconnect task due to runtime exception : ",(java.lang.Throwable)$stack16);
+ label3:return;
+ catch java.util.concurrent.RejectedExecutionException: label1 - label2 : label4;
+catch java.lang.Exception: label1 - label2 : label6;
+} 
+

@@ -1,0 +1,21 @@
+java.lang.String org.keycloak.adapters.jetty.Jetty94RequestAuthenticator:changeHttpSessionId(boolean create)
+{
+org.eclipse.jetty.server.Request request;
+  javax.servlet.http.HttpSession session;
+  org.keycloak.adapters.KeycloakDeployment $stack5;
+  java.lang.String $stack7;
+  request=this.request;
+ session = request.getSession((boolean)0);
+ if (session!=null) goto label0;
+ session = request.getSession((boolean)1);
+ $stack7 = session.getId();
+ return  $stack7;
+ label0:$stack5=this.deployment;
+ create = $stack5.isTurnOffChangeSessionIdOnLogin();
+ if (create!=0) goto label1;
+ $stack7 = request.changeSessionId();
+ return  $stack7;
+ label1:$stack7 = session.getId();
+ return  $stack7;
+ } 
+

@@ -1,0 +1,27 @@
+org.apache.rocketmq.store.logfile.MappedFile org.apache.rocketmq.store.MappedFileQueue:getFirstMappedFile()
+{
+org.apache.rocketmq.store.logfile.MappedFile mappedFileFirst;
+  java.lang.IndexOutOfBoundsException e;
+  java.util.concurrent.CopyOnWriteArrayList $stack3;
+  boolean $stack4;
+  java.lang.Object $stack6;
+  java.lang.Exception $stack9;
+  org.apache.rocketmq.logging.org.slf4j.Logger $stack10;
+  mappedFileFirst=null;
+ $stack3=this.mappedFiles;
+ $stack4 = $stack3.isEmpty();
+ if ($stack4!=0) goto label0;
+ label1:$stack3=this.mappedFiles;
+ $stack6 = $stack3.get(0);
+ mappedFileFirst=(org.apache.rocketmq.store.logfile.MappedFile) $stack6;
+ label2:goto label0;
+ label3:e = catch;
+ goto label0;
+ label4:$stack9 = catch;
+ $stack10=org.apache.rocketmq.store.MappedFileQueue.log;
+ $stack10.error("getFirstMappedFile has exception.",(java.lang.Throwable)$stack9);
+ label0:return  mappedFileFirst;
+ catch java.lang.IndexOutOfBoundsException: label1 - label2 : label3;
+catch java.lang.Exception: label1 - label2 : label4;
+} 
+

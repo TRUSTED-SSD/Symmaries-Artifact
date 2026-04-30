@@ -1,0 +1,16 @@
+long org.apache.bookkeeper.bookie.EntryLogManagerForEntryLogPerLedger:addEntry(long ledger,io.netty.buffer.ByteBuf entry,boolean rollLog)
+{
+java.util.concurrent.locks.Lock lock;
+  java.lang.Throwable l8;
+  lock = this.getLock(ledger);
+ lock.lock();
+ label0:ledger = this#org.apache.bookkeeper.bookie.EntryLogManagerBase:addEntry(ledger,entry,rollLog);
+ label1:lock.unlock();
+ return  ledger;
+ label2:l8 = catch;
+ label3:lock.unlock();
+ throw l8;
+ catch java.lang.Throwable: label0 - label1 : label2;
+catch java.lang.Throwable: label2 - label3 : label2;
+} 
+

@@ -1,0 +1,25 @@
+static boolean org.apache.rocketmq.remoting.protocol.NamespaceUtil:isAlreadyWithNamespace(java.lang.String @resource,java.lang.String @namespace)
+{
+boolean $stack3;
+  java.lang.StringBuilder $stack8;
+  java.lang.String resource;
+java.lang.String namespace;
+namespace=@namespace;
+resource=@resource;
+$stack3 = org.apache.commons.lang3.StringUtils.isEmpty((java.lang.CharSequence)namespace);
+ if ($stack3!=0) goto label0;
+ $stack3 = org.apache.commons.lang3.StringUtils.isEmpty((java.lang.CharSequence)resource);
+ if ($stack3!=0) goto label0;
+ $stack3 = org.apache.rocketmq.remoting.protocol.NamespaceUtil.isSystemResource(resource);
+ if ($stack3==0) goto label1;
+ label0:return  0;
+ label1:resource = org.apache.rocketmq.remoting.protocol.NamespaceUtil.withOutRetryAndDLQ(resource);
+ $stack8=new java.lang.StringBuilder;
+ $stack8#java.lang.StringBuilder();
+ $stack8 = $stack8.append(namespace);
+ $stack8 = $stack8.append((char)37);
+ namespace = $stack8.toString();
+ $stack3 = resource.startsWith(namespace);
+ return  $stack3;
+ } 
+

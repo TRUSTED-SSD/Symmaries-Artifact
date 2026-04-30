@@ -1,0 +1,46 @@
+java.util.Set org.apache.rocketmq.client.impl.MQClientAPIImpl:queryAssignment(java.lang.String @addr,java.lang.String topic,java.lang.String consumerGroup,java.lang.String clientId,java.lang.String strategyName,org.apache.rocketmq.remoting.protocol.heartbeat.MessageModel messageModel,long timeoutMillis)
+{
+org.apache.rocketmq.remoting.protocol.body.QueryAssignmentRequestBody requestBody;
+  org.apache.rocketmq.remoting.protocol.RemotingCommand request;
+  org.apache.rocketmq.remoting.protocol.body.QueryAssignmentResponseBody queryAssignmentResponseBody;
+  byte[] $stack15;
+  org.apache.rocketmq.client.ClientConfig $stack16;
+  org.apache.rocketmq.remoting.RemotingClient $stack17;
+  boolean $stack18;
+  int $stack21;
+  java.lang.Object $stack23;
+  java.util.Set $stack24;
+  org.apache.rocketmq.client.exception.MQBrokerException $stack25;
+  java.lang.String addr;
+addr=@addr;
+requestBody=new org.apache.rocketmq.remoting.protocol.body.QueryAssignmentRequestBody;
+ requestBody#org.apache.rocketmq.remoting.protocol.body.QueryAssignmentRequestBody();
+ requestBody.setTopic(topic);
+ requestBody.setConsumerGroup(consumerGroup);
+ requestBody.setClientId(clientId);
+ requestBody.setMessageModel(messageModel);
+ requestBody.setStrategyName(strategyName);
+ request = org.apache.rocketmq.remoting.protocol.RemotingCommand.createRequestCommand(400,null);
+ $stack15 = requestBody.encode();
+ request.setBody($stack15);
+ $stack17=this.remotingClient;
+ $stack16=this.clientConfig;
+ $stack18 = $stack16.isVipChannelEnabled();
+ addr = org.apache.rocketmq.common.MixAll.brokerVIPChannel($stack18,addr);
+ request = $stack17.invokeSync(addr,request,timeoutMillis);
+ $stack21 = request.getCode();
+ switch [$stack21]
+if 0 goto label0;
+goto label1;
+ label0:$stack15 = request.getBody();
+ $stack23 = org.apache.rocketmq.remoting.protocol.RemotingSerializable.decode($stack15,org.apache.rocketmq.remoting.protocol.body.QueryAssignmentResponseBody);
+ queryAssignmentResponseBody=(org.apache.rocketmq.remoting.protocol.body.QueryAssignmentResponseBody) $stack23;
+ $stack24 = queryAssignmentResponseBody.getMessageQueueAssignments();
+ return  $stack24;
+ label1:$stack25=new org.apache.rocketmq.client.exception.MQBrokerException;
+ $stack21 = request.getCode();
+ addr = request.getRemark();
+ $stack25#org.apache.rocketmq.client.exception.MQBrokerException($stack21,addr);
+ throw $stack25;
+ } 
+

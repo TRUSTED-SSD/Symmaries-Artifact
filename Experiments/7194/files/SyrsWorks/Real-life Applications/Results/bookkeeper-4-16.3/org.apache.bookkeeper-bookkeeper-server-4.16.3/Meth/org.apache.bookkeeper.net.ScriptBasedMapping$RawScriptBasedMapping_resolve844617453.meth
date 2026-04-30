@@ -1,0 +1,52 @@
+java.util.List org.apache.bookkeeper.net.ScriptBasedMapping$RawScriptBasedMapping:resolve(java.util.List names)
+{
+java.util.ArrayList m;
+  java.lang.String output;
+  java.util.StringTokenizer allSwitchInfo;
+  int $stack7;
+  boolean $stack8;
+  int $stack14;
+  java.lang.StringBuilder $stack15;
+  org.slf4j.Logger $stack16;
+  m=new java.util.ArrayList;
+ $stack7 = names.size();
+ m#java.util.ArrayList($stack7);
+ $stack8 = names.isEmpty();
+ if ($stack8==0) goto label0;
+ return  m;
+ label0:output=this.scriptName;
+ if (output!=null) goto label1;
+ return  null;
+ label1:output = this#org.apache.bookkeeper.net.ScriptBasedMapping$RawScriptBasedMapping:runResolveCommand(names);
+ if (output==null) goto label2;
+ allSwitchInfo=new java.util.StringTokenizer;
+ allSwitchInfo#java.util.StringTokenizer(output);
+ label3:$stack8 = allSwitchInfo.hasMoreTokens();
+ if ($stack8==0) goto label4;
+ output = allSwitchInfo.nextToken();
+ m.add((java.lang.Object)output);
+ goto label3;
+ label4:$stack7 = m.size();
+ $stack14 = names.size();
+ if ($stack7==$stack14) goto label5;
+ $stack16=org.apache.bookkeeper.net.ScriptBasedMapping$RawScriptBasedMapping.LOG;
+ $stack15=new java.lang.StringBuilder;
+ $stack15#java.lang.StringBuilder();
+ $stack15 = $stack15.append("Script ");
+ output=this.scriptName;
+ $stack15 = $stack15.append(output);
+ $stack15 = $stack15.append(" returned ");
+ $stack7 = m.size();
+ $stack15 = $stack15.append($stack7);
+ $stack15 = $stack15.append(" values when ");
+ $stack7 = names.size();
+ $stack15 = $stack15.append($stack7);
+ $stack15 = $stack15.append(" were expected.");
+ output = $stack15.toString();
+ $stack16.error(output);
+ return  null;
+ label5:goto label6;
+ label2:return  null;
+ label6:return  m;
+ } 
+

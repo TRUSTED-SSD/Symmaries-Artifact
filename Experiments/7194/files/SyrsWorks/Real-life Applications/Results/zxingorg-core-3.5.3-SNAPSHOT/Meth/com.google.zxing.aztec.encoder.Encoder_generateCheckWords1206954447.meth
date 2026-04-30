@@ -1,0 +1,32 @@
+static com.google.zxing.common.BitArray com.google.zxing.aztec.encoder.Encoder:generateCheckWords(com.google.zxing.common.BitArray @bitArray,int totalBits,int wordSize)
+{
+int messageSizeInWords;
+  int totalWords;
+  int[] messageWords;
+  com.google.zxing.common.reedsolomon.ReedSolomonEncoder $stack14;
+  com.google.zxing.common.reedsolomon.GenericGF $stack15;
+  com.google.zxing.common.BitArray bitArray;
+bitArray=@bitArray;
+messageSizeInWords = bitArray.getSize();
+ messageSizeInWords=(messageSizeInWords/wordSize);
+ $stack14=new com.google.zxing.common.reedsolomon.ReedSolomonEncoder;
+ $stack15 = com.google.zxing.aztec.encoder.Encoder.getGF(wordSize);
+ $stack14#com.google.zxing.common.reedsolomon.ReedSolomonEncoder($stack15);
+ totalWords=(totalBits/wordSize);
+ messageWords = com.google.zxing.aztec.encoder.Encoder.bitsToWords(bitArray,wordSize,totalWords);
+ messageSizeInWords=(totalWords-messageSizeInWords);
+ $stack14#com.google.zxing.common.reedsolomon.ReedSolomonEncoder(messageWords,messageSizeInWords);
+ totalBits=(totalBits%wordSize);
+ bitArray=new com.google.zxing.common.BitArray;
+ bitArray#com.google.zxing.common.BitArray();
+ bitArray.appendBits(0,totalBits);
+ totalBits=#messageWords;
+ messageSizeInWords=0;
+ label0:if (messageSizeInWords>=totalBits) goto label1;
+ totalWords=messageWords[messageSizeInWords];
+ bitArray.appendBits(totalWords,wordSize);
+ messageSizeInWords=(messageSizeInWords+1);
+ goto label0;
+ label1:return  bitArray;
+ } 
+

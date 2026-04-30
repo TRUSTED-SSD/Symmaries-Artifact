@@ -1,0 +1,28 @@
+long org.apache.bookkeeper.bookie.SortedLedgerStorage:addEntry(io.netty.buffer.ByteBuf entry)
+{
+long ledgerId;
+  long entryId;
+  long lac;
+  int $stack8;
+  org.apache.bookkeeper.bookie.EntryMemTable $stack17;
+  java.nio.ByteBuffer $stack18;
+  org.apache.bookkeeper.bookie.InterleavedLedgerStorage $stack20;
+  org.apache.bookkeeper.bookie.LedgerCache $stack21;
+  $stack8 = entry.readerIndex();
+ $stack8=($stack8+0);
+ ledgerId = entry.getLong($stack8);
+ $stack8 = entry.readerIndex();
+ $stack8=($stack8+8);
+ entryId = entry.getLong($stack8);
+ $stack8 = entry.readerIndex();
+ $stack8=($stack8+16);
+ lac = entry.getLong($stack8);
+ $stack17=this.memTable;
+ $stack18 = entry.nioBuffer();
+ $stack17#org.apache.bookkeeper.bookie.EntryMemTable(ledgerId,entryId,$stack18,(org.apache.bookkeeper.bookie.CacheCallback)this);
+ $stack20=this.interleavedLedgerStorage;
+ $stack21=$stack20.ledgerCache;
+ $stack21.updateLastAddConfirmed(ledgerId,lac);
+ return  entryId;
+ } 
+

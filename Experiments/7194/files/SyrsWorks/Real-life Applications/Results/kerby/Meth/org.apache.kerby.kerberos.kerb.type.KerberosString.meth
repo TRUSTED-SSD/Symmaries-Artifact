@@ -1,0 +1,32 @@
+org.apache.kerby.kerberos.kerb.type.KerberosString(java.lang.String @value)
+{
+char[] l2;
+  int l3;
+  int l4;
+  char c;
+  java.lang.IllegalArgumentException $stack10;
+  java.lang.StringBuilder $stack11;
+  java.lang.String value;
+value=@value;
+this#org.apache.kerby.asn1.type.Asn1GeneralString(value);
+ if (value==null) goto label0;
+ l2 = value.toCharArray();
+ l3=#l2;
+ l4=0;
+ label1:if (l4>=l3) goto label0;
+ c=l2[l4];
+ c=(c & 65408);
+ if (c==0) goto label2;
+ $stack10=new java.lang.IllegalArgumentException;
+ $stack11=new java.lang.StringBuilder;
+ $stack11#java.lang.StringBuilder();
+ $stack11 = $stack11.append("The value contains non ASCII chars ");
+ $stack11 = $stack11.append(value);
+ value = $stack11.toString();
+ $stack10#java.lang.IllegalArgumentException(value);
+ throw $stack10;
+ label2:l4=(l4+1);
+ goto label1;
+ label0:return;
+ } 
+

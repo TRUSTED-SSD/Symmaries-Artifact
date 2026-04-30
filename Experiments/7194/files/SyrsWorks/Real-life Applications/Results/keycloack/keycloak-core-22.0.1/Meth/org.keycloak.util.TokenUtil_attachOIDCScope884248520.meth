@@ -1,0 +1,21 @@
+static java.lang.String org.keycloak.util.TokenUtil:attachOIDCScope(java.lang.String @scopeParam)
+{
+boolean $stack1;
+  java.lang.StringBuilder $stack3;
+  java.lang.String scopeParam;
+scopeParam=@scopeParam;
+if (scopeParam==null) goto label0;
+ $stack1 = scopeParam.isEmpty();
+ if ($stack1==0) goto label1;
+ label0:return  "openid";
+ label1:$stack1 = org.keycloak.util.TokenUtil.hasScope(scopeParam,"openid");
+ if ($stack1==0) goto label2;
+ return  scopeParam;
+ label2:$stack3=new java.lang.StringBuilder;
+ $stack3#java.lang.StringBuilder();
+ $stack3 = $stack3.append("openid ");
+ $stack3 = $stack3.append(scopeParam);
+ scopeParam = $stack3.toString();
+ return  scopeParam;
+ } 
+

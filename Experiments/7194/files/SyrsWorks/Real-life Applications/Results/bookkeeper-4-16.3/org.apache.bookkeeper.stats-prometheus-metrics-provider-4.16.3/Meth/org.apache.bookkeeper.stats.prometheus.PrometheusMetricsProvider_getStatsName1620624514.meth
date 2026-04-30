@@ -1,0 +1,19 @@
+java.lang.String org.apache.bookkeeper.stats.prometheus.PrometheusMetricsProvider:getStatsName(java.lang.String[] statsComponents)
+{
+java.lang.String completeName;
+  int $stack3;
+  boolean $stack5;
+  $stack3=#statsComponents;
+ if ($stack3!=0) goto label0;
+ return  "";
+ label0:completeName=statsComponents[0];
+ $stack5 = completeName.isEmpty();
+ if ($stack5==0) goto label1;
+ $stack3=#statsComponents;
+ completeName = org.apache.commons.lang.StringUtils.join((java.lang.Object[])statsComponents,(char)95,1,$stack3);
+ goto label2;
+ label1:completeName = org.apache.commons.lang.StringUtils.join((java.lang.Object[])statsComponents,(char)95);
+ label2:completeName = io.prometheus.client.Collector.sanitizeMetricName(completeName);
+ return  completeName;
+ } 
+

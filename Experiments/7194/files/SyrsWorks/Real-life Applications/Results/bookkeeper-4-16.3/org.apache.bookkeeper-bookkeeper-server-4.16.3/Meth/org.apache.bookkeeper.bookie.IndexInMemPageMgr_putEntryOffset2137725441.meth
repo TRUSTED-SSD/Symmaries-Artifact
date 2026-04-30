@@ -1,0 +1,45 @@
+void org.apache.bookkeeper.bookie.IndexInMemPageMgr:putEntryOffset(long ledger,long entry,long offset)
+{
+int offsetInPage;
+  org.apache.bookkeeper.bookie.LedgerEntryPage lep;
+  org.apache.bookkeeper.bookie.FileInfo$FileInfoDeletedException e;
+  java.lang.Throwable l12;
+  long $stack14;
+  boolean $stack18;
+  int $stack19;
+  java.lang.AssertionError $stack26;
+  org.apache.bookkeeper.bookie.Bookie$NoLedgerException $stack28;
+  offsetInPage=this.entriesPerPage;
+ $stack14=(long) offsetInPage;
+ $stack14=(entry%$stack14);
+ offsetInPage=(int) $stack14;
+ $stack14=(long) offsetInPage;
+ entry=(entry-$stack14);
+ lep=null;
+ label0:lep = this.getLedgerEntryPage(ledger,entry);
+ $stack18=org.apache.bookkeeper.bookie.IndexInMemPageMgr.$assertionsDisabled;
+ if ($stack18!=0) goto label1;
+ if (lep!=null) goto label1;
+ $stack26=new java.lang.AssertionError;
+ $stack26#java.lang.AssertionError();
+ throw $stack26;
+ label1:$stack19 = org.apache.bookkeeper.bookie.LedgerEntryPage.getIndexEntrySize();
+ offsetInPage=(offsetInPage * $stack19);
+ lep.setOffset(offset,offsetInPage);
+ label2:if (null==lep) goto label3;
+ lep.releasePage();
+ goto label3;
+ label4:e = catch;
+ $stack28=new org.apache.bookkeeper.bookie.Bookie$NoLedgerException;
+ $stack28#org.apache.bookkeeper.bookie.Bookie$NoLedgerException(ledger);
+ throw $stack28;
+ label5:l12 = catch;
+ label6:if (null==lep) goto label7;
+ lep.releasePage();
+ label7:throw l12;
+ label3:return;
+ catch org.apache.bookkeeper.bookie.FileInfo$FileInfoDeletedException: label0 - label2 : label4;
+catch java.lang.Throwable: label0 - label2 : label5;
+catch java.lang.Throwable: label4 - label6 : label5;
+} 
+

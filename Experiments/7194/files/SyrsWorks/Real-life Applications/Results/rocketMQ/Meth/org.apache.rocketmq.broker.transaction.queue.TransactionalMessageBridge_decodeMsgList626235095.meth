@@ -1,0 +1,32 @@
+java.util.List org.apache.rocketmq.broker.transaction.queue.TransactionalMessageBridge:decodeMsgList(org.apache.rocketmq.store.GetMessageResult getMessageResult)
+{
+java.util.ArrayList foundList;
+  java.util.List messageBufferList;
+  java.util.Iterator l4;
+  java.nio.ByteBuffer bb;
+  org.apache.rocketmq.common.message.MessageExt msgExt;
+  java.lang.Throwable l7;
+  boolean $stack11;
+  java.lang.Object $stack12;
+  foundList=new java.util.ArrayList;
+ foundList#java.util.ArrayList();
+ label0:messageBufferList = getMessageResult.getMessageBufferList();
+ l4 = messageBufferList.iterator();
+ label1:$stack11 = l4.hasNext();
+ if ($stack11==0) goto label2;
+ $stack12 = l4.next();
+ bb=(java.nio.ByteBuffer) $stack12;
+ msgExt = org.apache.rocketmq.common.message.MessageDecoder.decode(bb,(boolean)1,(boolean)0);
+ if (msgExt==null) goto label3;
+ foundList.add((java.lang.Object)msgExt);
+ label3:goto label1;
+ label2:getMessageResult.release();
+ goto label4;
+ label5:l7 = catch;
+ label6:getMessageResult.release();
+ throw l7;
+ label4:return  foundList;
+ catch java.lang.Throwable: label0 - label2 : label5;
+catch java.lang.Throwable: label5 - label6 : label5;
+} 
+

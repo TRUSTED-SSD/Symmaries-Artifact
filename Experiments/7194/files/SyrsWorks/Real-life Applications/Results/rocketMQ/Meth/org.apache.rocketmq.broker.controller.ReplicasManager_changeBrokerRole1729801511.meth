@@ -1,0 +1,21 @@
+void org.apache.rocketmq.broker.controller.ReplicasManager:changeBrokerRole(java.lang.String newMasterAddress,int newMasterEpoch,int syncStateSetEpoch,long brokerId)
+{
+java.lang.CharSequence[] $stack6;
+  boolean $stack7;
+  int $stack8;
+  java.lang.String $stack9;
+  $stack6=new java.lang.CharSequence[1];
+ $stack6[0]=newMasterAddress;
+ $stack7 = org.apache.commons.lang3.StringUtils.isNoneEmpty($stack6);
+ if ($stack7==0) goto label0;
+ $stack8=this.masterEpoch;
+ if (newMasterEpoch<=$stack8) goto label0;
+ $stack9=this.localAddress;
+ $stack7 = org.apache.commons.lang3.StringUtils.equals((java.lang.CharSequence)newMasterAddress,(java.lang.CharSequence)$stack9);
+ if ($stack7==0) goto label1;
+ this#org.apache.rocketmq.broker.controller.ReplicasManager(newMasterEpoch,syncStateSetEpoch);
+ goto label0;
+ label1:this#org.apache.rocketmq.broker.controller.ReplicasManager(newMasterAddress,newMasterEpoch,brokerId);
+ label0:return;
+ } 
+

@@ -1,0 +1,38 @@
+void com.google.zxing.PlanarYUVLuminanceSource:reverseHorizontal(int width,int height)
+{
+byte[] yuvData;
+  int y;
+  int rowStart;
+  int middle;
+  int x1;
+  int x2;
+  byte temp;
+  byte $stack19;
+  yuvData=this.yuvData;
+ y=0;
+ middle=this.top;
+ rowStart=this.dataWidth;
+ middle=(middle * rowStart);
+ rowStart=this.left;
+ rowStart=(middle+rowStart);
+ label0:if (y>=height) goto label1;
+ middle=(width/2);
+ middle=(rowStart+middle);
+ x1=rowStart;
+ x2=(rowStart+width);
+ x2=(x2-1);
+ label2:if (x1>=middle) goto label3;
+ temp=yuvData[x1];
+ $stack19=yuvData[x2];
+ yuvData[x1]=$stack19;
+ yuvData[x2]=temp;
+ x1=(x1+1);
+ x2=(x2+-1);
+ goto label2;
+ label3:y=(y+1);
+ middle=this.dataWidth;
+ rowStart=(rowStart+middle);
+ goto label0;
+ label1:return;
+ } 
+

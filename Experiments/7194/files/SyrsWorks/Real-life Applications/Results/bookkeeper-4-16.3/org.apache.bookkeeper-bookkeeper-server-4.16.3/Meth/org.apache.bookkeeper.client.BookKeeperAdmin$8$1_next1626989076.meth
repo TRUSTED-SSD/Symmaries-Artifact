@@ -1,0 +1,40 @@
+java.lang.Long org.apache.bookkeeper.client.BookKeeperAdmin$8$1:next()
+{
+java.io.IOException e;
+  java.util.Iterator $stack2;
+  org.apache.bookkeeper.client.BookKeeperAdmin$8 $stack3;
+  org.apache.bookkeeper.meta.LedgerManager$LedgerRangeIterator $stack4;
+  org.apache.bookkeeper.meta.LedgerManager$LedgerRange $stack5;
+  java.util.Set $stack6;
+  java.lang.Object $stack9;
+  java.lang.Long $stack10;
+  boolean $stack12;
+  org.slf4j.Logger $stack16;
+  java.util.NoSuchElementException $stack17;
+  java.lang.String $stack18;
+  label0:$stack2=this.currentRange;
+ if ($stack2==null) goto label1;
+ $stack2=this.currentRange;
+ $stack12 = $stack2.hasNext();
+ if ($stack12!=0) goto label2;
+ label1:$stack3=this.this$1;
+ $stack4=$stack3.val$iterator;
+ $stack5 = $stack4.next();
+ $stack6 = $stack5.getLedgers();
+ $stack2 = $stack6.iterator();
+ this.currentRange=$stack2;
+ label2:goto label3;
+ label4:e = catch;
+ $stack16 = org.apache.bookkeeper.client.BookKeeperAdmin.access$000();
+ $stack16.error("Error while reading the next element",(java.lang.Throwable)e);
+ $stack17=new java.util.NoSuchElementException;
+ $stack18 = e.getMessage();
+ $stack17#java.util.NoSuchElementException($stack18);
+ throw $stack17;
+ label3:$stack2=this.currentRange;
+ $stack9 = $stack2.next();
+ $stack10=(java.lang.Long) $stack9;
+ return  $stack10;
+ catch java.io.IOException: label0 - label2 : label4;
+} 
+

@@ -1,0 +1,34 @@
+void com.google.zxing.datamatrix.encoder.X12Encoder:encode(com.google.zxing.datamatrix.encoder.EncoderContext context)
+{
+java.lang.StringBuilder buffer;
+  char c;
+  int count;
+  boolean $stack7;
+  java.lang.String $stack15;
+  int $stack17;
+  buffer=new java.lang.StringBuilder;
+ buffer#java.lang.StringBuilder();
+ label0:$stack7 = context.hasMoreCharacters();
+ if ($stack7==0) goto label1;
+ c = context.getCurrentChar();
+ count=context.pos;
+ count=(count+1);
+ context.pos=count;
+ this.encodeChar(c,buffer);
+ count = buffer.length();
+ count=(count%3);
+ if (count!=0) goto label2;
+ com.google.zxing.datamatrix.encoder.C40Encoder.writeNextTriplet(context,buffer);
+ $stack15 = context.getMessage();
+ count=context.pos;
+ $stack17 = this.getEncodingMode();
+ count = com.google.zxing.datamatrix.encoder.HighLevelEncoder.lookAheadTest((java.lang.CharSequence)$stack15,count,$stack17);
+ $stack17 = this.getEncodingMode();
+ if (count==$stack17) goto label2;
+ context.signalEncoderChange(0);
+ goto label1;
+ label2:goto label0;
+ label1:this.handleEOD(context,buffer);
+ return;
+ } 
+

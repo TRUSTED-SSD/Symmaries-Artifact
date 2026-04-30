@@ -1,0 +1,25 @@
+void org.apache.rocketmq.store.ha.WaitNotifyObject:removeFromWaitingThreadTable()
+{
+long currentThreadId;
+  org.apache.rocketmq.store.ha.WaitNotifyObject l3;
+  java.lang.Throwable l4;
+  java.lang.Thread $stack5;
+  java.util.concurrent.ConcurrentHashMap $stack8;
+  java.lang.Long $stack9;
+  $stack5 = java.lang.Thread.currentThread();
+ currentThreadId = $stack5.getId();
+ l3=this;
+ monitorenter this;
+ label0:$stack8=this.waitingThreadTable;
+ $stack9 = java.lang.Long.valueOf(currentThreadId);
+ $stack8.remove((java.lang.Object)$stack9);
+ monitorexit this;
+ label1:goto label2;
+ label3:l4 = catch;
+ monitorexit this;
+ label4:throw l4;
+ label2:return;
+ catch java.lang.Throwable: label0 - label1 : label3;
+catch java.lang.Throwable: label3 - label4 : label3;
+} 
+

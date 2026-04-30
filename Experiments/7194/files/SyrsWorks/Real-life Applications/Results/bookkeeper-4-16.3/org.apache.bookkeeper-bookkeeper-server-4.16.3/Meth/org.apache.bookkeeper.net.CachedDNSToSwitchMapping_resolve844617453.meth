@@ -1,0 +1,25 @@
+java.util.List org.apache.bookkeeper.net.CachedDNSToSwitchMapping:resolve(java.util.List @names)
+{
+java.util.List uncachedHosts;
+  java.util.List resolvedHosts;
+  java.util.ArrayList $stack6;
+  int $stack7;
+  boolean $stack8;
+  org.apache.bookkeeper.net.DNSToSwitchMapping $stack10;
+  java.util.List names;
+names=@names;
+names = org.apache.bookkeeper.net.NetUtils.normalizeHostNames((java.util.Collection)names);
+ $stack6=new java.util.ArrayList;
+ $stack7 = names.size();
+ $stack6#java.util.ArrayList($stack7);
+ $stack8 = names.isEmpty();
+ if ($stack8==0) goto label0;
+ return  $stack6;
+ label0:uncachedHosts = this#org.apache.bookkeeper.net.CachedDNSToSwitchMapping:getUncachedHosts(names);
+ $stack10=this.rawMapping;
+ resolvedHosts = $stack10.resolve(uncachedHosts);
+ this#org.apache.bookkeeper.net.CachedDNSToSwitchMapping:cacheResolvedHosts(uncachedHosts,resolvedHosts);
+ names = this#org.apache.bookkeeper.net.CachedDNSToSwitchMapping:getCachedHosts(names);
+ return  names;
+ } 
+

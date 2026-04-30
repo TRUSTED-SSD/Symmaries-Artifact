@@ -1,0 +1,29 @@
+void org.apache.rocketmq.store.kv.CompactionLog$TopicPartitionLog:roll()
+{
+org.apache.rocketmq.store.logfile.MappedFile mappedFile;
+  long baseOffset;
+  org.apache.rocketmq.store.logfile.MappedFile cqFile;
+  org.apache.rocketmq.store.MappedFileQueue $stack5;
+  org.apache.rocketmq.store.queue.SparseConsumeQueue $stack8;
+  java.util.List $stack12;
+  java.io.IOException $stack14;
+  $stack5=this.mappedFileQueue;
+ mappedFile = $stack5.getLastMappedFile(0L);
+ if (mappedFile!=null) goto label0;
+ $stack14=new java.io.IOException;
+ $stack14#java.io.IOException("create new file error");
+ throw $stack14;
+ label0:baseOffset = mappedFile.getFileFromOffset();
+ $stack8=this.consumeQueue;
+ cqFile = $stack8.createFile(baseOffset);
+ if (cqFile!=null) goto label1;
+ mappedFile.destroy(1000L);
+ $stack5=this.mappedFileQueue;
+ $stack12 = $stack5.getMappedFiles();
+ $stack12.remove((java.lang.Object)mappedFile);
+ $stack14=new java.io.IOException;
+ $stack14#java.io.IOException("create new consumeQueue file error");
+ throw $stack14;
+ label1:return;
+ } 
+

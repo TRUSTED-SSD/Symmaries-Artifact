@@ -1,0 +1,58 @@
+boolean org.apache.rocketmq.store.queue.ConsumeQueueStore:loadConsumeQueues(java.lang.String storePath,org.apache.rocketmq.common.attribute.CQType cqType)
+{
+java.io.File[] fileTopicList;
+  int l6;
+  int l7;
+  java.io.File fileTopic;
+  java.lang.String topic;
+  java.io.File[] fileQueueIdList;
+  int l12;
+  int l13;
+  int queueId;
+  java.lang.Object e;
+  org.apache.rocketmq.logging.org.slf4j.Logger $stack19;
+  java.lang.String $stack27;
+  boolean $stack30;
+  java.lang.NumberFormatException $stack33;
+  java.io.File tmp$734269177;
+  org.apache.rocketmq.store.queue.ConsumeQueueInterface tmp$1378163241;
+  tmp$734269177=new java.io.File;
+ fileTopic=tmp$734269177;
+ tmp$734269177#java.io.File(storePath);
+ fileTopicList = tmp$734269177.listFiles();
+ if (fileTopicList==null) goto label0;
+ l6=#fileTopicList;
+ l7=0;
+ label1:if (l7>=l6) goto label0;
+ fileTopic=fileTopicList[l7];
+ topic = fileTopic.getName();
+ fileQueueIdList = fileTopic.listFiles();
+ if (fileQueueIdList==null) goto label2;
+ l12=#fileQueueIdList;
+ l13=0;
+ label3:if (l13>=l12) goto label2;
+ fileTopic=fileQueueIdList[l13];
+ label4:$stack27 = fileTopic.getName();
+ queueId = java.lang.Integer.parseInt($stack27);
+ label5:goto label6;
+ label7:$stack33 = catch;
+ e=$stack33;
+ goto label8;
+ label6:this#org.apache.rocketmq.store.queue.ConsumeQueueStore:queueTypeShouldBe(topic,cqType);
+ e = this#org.apache.rocketmq.store.queue.ConsumeQueueStore:createConsumeQueueByType(cqType,topic,queueId,storePath);
+ tmp$1378163241=(org.apache.rocketmq.store.queue.ConsumeQueueInterface) e;
+ this#org.apache.rocketmq.store.queue.ConsumeQueueStore:putConsumeQueue(topic,queueId,tmp$1378163241);
+ tmp$1378163241=(org.apache.rocketmq.store.queue.ConsumeQueueInterface) e;
+ $stack30 = this.load(tmp$1378163241);
+ if ($stack30!=0) goto label8;
+ return  0;
+ label8:l13=(l13+1);
+ goto label3;
+ label2:l7=(l7+1);
+ goto label1;
+ label0:$stack19=org.apache.rocketmq.store.queue.ConsumeQueueStore.log;
+ $stack19.info("load {} all over, OK",(java.lang.Object)cqType);
+ return  1;
+ catch java.lang.NumberFormatException: label4 - label5 : label7;
+} 
+

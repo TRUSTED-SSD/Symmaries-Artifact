@@ -1,0 +1,24 @@
+void org.apache.rocketmq.client.consumer.store.RemoteBrokerOffsetStore:removeOffset(org.apache.rocketmq.common.message.MessageQueue mq)
+{
+java.util.concurrent.ConcurrentMap $stack2;
+  java.lang.Object[] $stack4;
+  java.lang.String $stack5;
+  org.apache.rocketmq.logging.org.slf4j.Logger $stack7;
+  int $stack10;
+  java.lang.Integer $stack11;
+  if (mq==null) goto label0;
+ $stack2=this.offsetTable;
+ $stack2.remove((java.lang.Object)mq);
+ $stack7=org.apache.rocketmq.client.consumer.store.RemoteBrokerOffsetStore.log;
+ $stack4=new java.lang.Object[3];
+ $stack5=this.groupName;
+ $stack4[0]=$stack5;
+ $stack4[1]=mq;
+ $stack2=this.offsetTable;
+ $stack10 = $stack2.size();
+ $stack11 = java.lang.Integer.valueOf($stack10);
+ $stack4[2]=$stack11;
+ $stack7.info("remove unnecessary messageQueue offset. group={}, mq={}, offsetTableSize={}",$stack4);
+ label0:return;
+ } 
+

@@ -1,0 +1,51 @@
+int org.apache.bookkeeper.bookie.BookieShell$LedgerMetadataCmd:runCmd(org.apache.commons.cli.CommandLine cmdLine)
+{
+long ledgerId;
+  org.apache.bookkeeper.tools.cli.commands.client.LedgerMetaDataCommand$LedgerMetadataFlag flag;
+  org.apache.bookkeeper.bookie.BookieShell $stack6;
+  byte $stack8;
+  boolean $stack9;
+  org.apache.bookkeeper.tools.cli.commands.client.LedgerMetaDataCommand $stack16;
+  org.apache.bookkeeper.util.LedgerIdFormatter $stack18;
+  org.apache.bookkeeper.conf.ServerConfiguration $stack20;
+  java.lang.String $stack22;
+  java.io.PrintStream $stack41;
+  $stack6=this.this$0;
+ ledgerId = org.apache.bookkeeper.bookie.BookieShell.access$000($stack6,cmdLine,"ledgerid",-1L);
+ $stack8=(ledgerId cmp -1L);
+ if ($stack8!=0) goto label0;
+ $stack41=java.lang.System.err;
+ dummyClass.lowSink("Must specify a ledger id");
+$stack41.println("Must specify a ledger id");
+ return  -1;
+ label0:$stack9 = cmdLine.hasOption("dumptofile");
+ if ($stack9==0) goto label1;
+ $stack9 = cmdLine.hasOption("restorefromfile");
+ if ($stack9==0) goto label1;
+ $stack41=java.lang.System.err;
+ dummyClass.lowSink("Only one of --dumptofile and --restorefromfile can be specified");
+$stack41.println("Only one of --dumptofile and --restorefromfile can be specified");
+ return  -2;
+ label1:flag=new org.apache.bookkeeper.tools.cli.commands.client.LedgerMetaDataCommand$LedgerMetadataFlag;
+ flag#org.apache.bookkeeper.tools.cli.commands.client.LedgerMetaDataCommand$LedgerMetadataFlag();
+ flag.ledgerId(ledgerId);
+ $stack9 = cmdLine.hasOption("dumptofile");
+ if ($stack9==0) goto label2;
+ $stack22 = cmdLine.getOptionValue("dumptofile");
+ flag.dumpToFile($stack22);
+ label2:$stack9 = cmdLine.hasOption("restorefromfile");
+ if ($stack9==0) goto label3;
+ $stack22 = cmdLine.getOptionValue("restorefromfile");
+ flag.restoreFromFile($stack22);
+ label3:$stack9 = cmdLine.hasOption("update");
+ flag.update($stack9);
+ $stack16=new org.apache.bookkeeper.tools.cli.commands.client.LedgerMetaDataCommand;
+ $stack6=this.this$0;
+ $stack18=$stack6.ledgerIdFormatter;
+ $stack16#org.apache.bookkeeper.tools.cli.commands.client.LedgerMetaDataCommand($stack18);
+ $stack6=this.this$0;
+ $stack20=$stack6.bkConf;
+ $stack16#org.apache.bookkeeper.tools.cli.commands.client.LedgerMetaDataCommand($stack20,flag);
+ return  0;
+ } 
+

@@ -1,0 +1,31 @@
+static void com.google.zxing.client.result.VCardResultParser:maybeAppendFragment(java.io.ByteArrayOutputStream fragmentBuffer,java.lang.String @charset,java.lang.StringBuilder result)
+{
+byte[] fragmentBytes;
+  java.io.UnsupportedEncodingException e;
+  int $stack6;
+  java.lang.String $stack8;
+  java.nio.charset.Charset $stack11;
+  java.lang.String charset;
+charset=@charset;
+$stack6 = fragmentBuffer.size();
+ if ($stack6<=0) goto label0;
+ fragmentBytes = fragmentBuffer.toByteArray();
+ if (charset!=null) goto label1;
+ charset=new java.lang.String;
+ $stack11=java.nio.charset.StandardCharsets.UTF_8;
+ charset#java.lang.String(fragmentBytes,$stack11);
+ goto label2;
+ label1:$stack8=new java.lang.String;
+ $stack8#java.lang.String(fragmentBytes,charset);
+ charset=$stack8;
+ label3:goto label2;
+ label4:e = catch;
+ charset=new java.lang.String;
+ $stack11=java.nio.charset.StandardCharsets.UTF_8;
+ charset#java.lang.String(fragmentBytes,$stack11);
+ label2:fragmentBuffer.reset();
+ result.append(charset);
+ label0:return;
+ catch java.io.UnsupportedEncodingException: label1 - label3 : label4;
+} 
+

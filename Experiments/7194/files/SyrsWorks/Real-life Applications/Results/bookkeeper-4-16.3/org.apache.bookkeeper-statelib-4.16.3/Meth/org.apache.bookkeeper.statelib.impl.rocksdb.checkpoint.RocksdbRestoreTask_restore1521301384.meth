@@ -1,0 +1,51 @@
+void org.apache.bookkeeper.statelib.impl.rocksdb.checkpoint.RocksdbRestoreTask:restore(java.lang.String @checkpointId,org.apache.bookkeeper.stream.proto.kv.store.CheckpointMetadata metadata)
+{
+java.io.File checkpointedDir;
+  java.io.IOException files;
+  java.io.File $stack6;
+  boolean $stack7;
+  java.lang.String $stack9;
+  java.lang.String[] $stack10;
+  java.nio.file.Path $stack11;
+  java.nio.file.attribute.FileAttribute[] $stack12;
+  java.util.List $stack18;
+  java.lang.Object[] $stack21;
+  org.slf4j.Logger $stack22;
+  org.apache.bookkeeper.statelib.api.exceptions.StateStoreException $stack23;
+  java.lang.StringBuilder $stack24;
+  java.lang.String checkpointId;
+checkpointId=@checkpointId;
+checkpointedDir=new java.io.File;
+ $stack6=this.checkpointDir;
+ checkpointedDir#java.io.File($stack6,checkpointId);
+ label0:$stack7 = checkpointedDir.exists();
+ if ($stack7!=0) goto label1;
+ $stack9 = checkpointedDir.getAbsolutePath();
+ $stack10=new java.lang.String[0];
+ $stack11 = java.nio.file.Paths.get($stack9,$stack10);
+ $stack12=new java.nio.file.attribute.FileAttribute[0];
+ java.nio.file.Files.createDirectories($stack11,$stack12);
+ label1:$stack18 = this.getCheckpointFiles(checkpointedDir,metadata);
+ this#org.apache.bookkeeper.statelib.impl.rocksdb.checkpoint.RocksdbRestoreTask:copyFilesFromRemote(checkpointId,$stack18);
+ label2:goto label3;
+ label4:files = catch;
+ $stack22=org.apache.bookkeeper.statelib.impl.rocksdb.checkpoint.RocksdbRestoreTask.log;
+ $stack21=new java.lang.Object[3];
+ $stack21[0]=checkpointId;
+ $stack21[1]=checkpointedDir;
+ $stack21[2]=files;
+ $stack22.error("Failed to restore checkpoint {} to local directory {}",$stack21);
+ $stack23=new org.apache.bookkeeper.statelib.api.exceptions.StateStoreException;
+ $stack24=new java.lang.StringBuilder;
+ $stack24#java.lang.StringBuilder();
+ $stack24 = $stack24.append("Failed to restore checkpoint ");
+ $stack24 = $stack24.append(checkpointId);
+ $stack24 = $stack24.append(" to local directory ");
+ $stack24 = $stack24.append((java.lang.Object)checkpointedDir);
+ checkpointId = $stack24.toString();
+ $stack23#org.apache.bookkeeper.statelib.api.exceptions.StateStoreException(checkpointId,(java.lang.Throwable)files);
+ throw $stack23;
+ label3:return;
+ catch java.io.IOException: label0 - label2 : label4;
+} 
+

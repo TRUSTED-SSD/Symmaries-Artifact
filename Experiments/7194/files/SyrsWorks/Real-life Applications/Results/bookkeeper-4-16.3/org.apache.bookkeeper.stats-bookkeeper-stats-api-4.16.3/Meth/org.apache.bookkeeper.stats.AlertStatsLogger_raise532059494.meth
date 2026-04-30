@@ -1,0 +1,24 @@
+void org.apache.bookkeeper.stats.AlertStatsLogger:raise(java.lang.String @msg,java.lang.Object[] args)
+{
+org.apache.bookkeeper.stats.Counter $stack3;
+  org.slf4j.Logger $stack5;
+  java.lang.Exception $stack7;
+  java.lang.String msg;
+msg=@msg;
+this#org.apache.bookkeeper.stats.AlertStatsLogger:initializeCountersIfNeeded();
+ $stack3=this.globalCounter;
+ $stack3.inc();
+ $stack3=this.scopedCounter;
+ if (null==$stack3) goto label0;
+ $stack3=this.scopedCounter;
+ $stack3.inc();
+ label0:$stack5=org.apache.bookkeeper.stats.AlertStatsLogger.logger;
+ msg = this#org.apache.bookkeeper.stats.AlertStatsLogger:format(msg);
+ $stack5.error(msg,args);
+ $stack5=org.apache.bookkeeper.stats.AlertStatsLogger.logger;
+ $stack7=new java.lang.Exception;
+ $stack7#java.lang.Exception();
+ $stack5.error("fake exception to generate stack trace",(java.lang.Throwable)$stack7);
+ return;
+ } 
+

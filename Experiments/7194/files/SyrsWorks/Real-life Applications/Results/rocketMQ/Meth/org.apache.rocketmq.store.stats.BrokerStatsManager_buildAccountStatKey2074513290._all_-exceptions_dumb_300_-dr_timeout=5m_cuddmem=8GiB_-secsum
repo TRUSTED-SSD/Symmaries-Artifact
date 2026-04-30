@@ -1,0 +1,13 @@
+java.lang.String org.apache.rocketmq.store.stats.BrokerStatsManager:buildAccountStatKey (
+  java.lang.String @owner, java.lang.String instanceId,
+  java.lang.String topic, java.lang.String group, java.lang.String msgType) {
+  guard = tt;
+  ret(level()) = level(@owner) ⊔ level(group) ⊔ level(instanceId) ⊔ level(msgType) ⊔ level(topic) ⊔ obj_level(@owner);
+  ret(obj_level()) = level(@owner) ⊔ level(group) ⊔ level(instanceId) ⊔ level(msgType) ⊔ level(topic) ⊔ obj_level(@owner);
+  ret(obj_level(@owner)) = level(@owner) ⊔ level(group) ⊔ level(instanceId) ⊔ level(msgType) ⊔ level(topic) ⊔ obj_level(@owner);
+  ret(obj_level(group)) = level(@owner) ⊔ level(group) ⊔ level(instanceId) ⊔ level(msgType) ⊔ level(topic) ⊔ obj_level(@owner);
+  ret(obj_level(instanceId)) = level(@owner) ⊔ level(group) ⊔ level(instanceId) ⊔ level(msgType) ⊔ level(topic) ⊔ obj_level(@owner);
+  ret(obj_level(msgType)) = level(@owner) ⊔ level(group) ⊔ level(instanceId) ⊔ level(topic) ⊔ obj_level(@owner);
+  ret(obj_level(this)) = level(@owner) ⊔ level(group) ⊔ level(instanceId) ⊔ level(msgType) ⊔ level(topic) ⊔ obj_level(@owner) ⊔ obj_level(this);
+  ret(obj_level(topic)) = level(@owner) ⊔ level(group) ⊔ level(instanceId) ⊔ level(msgType) ⊔ level(topic) ⊔ obj_level(@owner);
+}

@@ -1,0 +1,8 @@
+long org.apache.rocketmq.broker.offset.ConsumerOffsetManager:queryOffset (
+  java.lang.String @group, java.lang.String topic, int queueId) {
+  guard = tt;
+  ret(level()) = level(@group) ⊔ level(queueId) ⊔ level(this) ⊔ level(topic) ⊔ obj_level(@group) ⊔ obj_level(this);
+  ret(obj_level(@group)) = level(@group) ⊔ level(queueId) ⊔ level(this) ⊔ level(topic) ⊔ obj_level(@group) ⊔ obj_level(this);
+  ret(obj_level(this)) = level(@group) ⊔ level(queueId) ⊔ level(this) ⊔ level(topic) ⊔ obj_level(@group) ⊔ obj_level(this);
+  ret(obj_level(topic)) = level(@group) ⊔ level(queueId) ⊔ level(this) ⊔ level(topic) ⊔ obj_level(@group) ⊔ obj_level(this);
+}

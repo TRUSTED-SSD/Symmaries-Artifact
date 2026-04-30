@@ -1,0 +1,32 @@
+void org.apache.bookkeeper.proto.ReadEntryProcessorV3:getFenceResponse(org.apache.bookkeeper.proto.BookkeeperProtocol$ReadResponse$Builder readResponse,io.netty.buffer.ByteBuf entryBody,boolean fenceResult)
+{
+org.apache.bookkeeper.proto.BookkeeperProtocol$StatusCode status;
+  java.nio.ByteBuffer $stack5;
+  com.google.protobuf.ByteString $stack6;
+  org.apache.bookkeeper.proto.BookieRequestProcessor $stack8;
+  org.apache.bookkeeper.proto.RequestStats $stack9;
+  org.apache.bookkeeper.stats.OpStatsLogger $stack10;
+  com.google.common.base.Stopwatch $stack11;
+  if (fenceResult!=0) goto label0;
+ status=org.apache.bookkeeper.proto.BookkeeperProtocol$StatusCode.EIO;
+ $stack8=this.requestProcessor;
+ $stack9 = $stack8.getRequestStats();
+ $stack10 = $stack9.getFenceReadWaitStats();
+ $stack11=this.lastPhaseStartTime;
+ this.registerFailedEvent($stack10,$stack11);
+ goto label1;
+ label0:status=org.apache.bookkeeper.proto.BookkeeperProtocol$StatusCode.EOK;
+ $stack5 = entryBody.nioBuffer();
+ $stack6 = com.google.protobuf.ByteString.copyFrom($stack5);
+ readResponse.setBody($stack6);
+ $stack8=this.requestProcessor;
+ $stack9 = $stack8.getRequestStats();
+ $stack10 = $stack9.getFenceReadWaitStats();
+ $stack11=this.lastPhaseStartTime;
+ this.registerSuccessfulEvent($stack10,$stack11);
+ label1:if (null==entryBody) goto label2;
+ io.netty.util.ReferenceCountUtil.release((java.lang.Object)entryBody);
+ label2:readResponse.setStatus(status);
+ return;
+ } 
+

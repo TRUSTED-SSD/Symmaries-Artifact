@@ -1,0 +1,23 @@
+void org.greenrobot.eventbus.EventBus:postSticky(java.lang.Object event)
+{
+java.util.Map l2;
+  java.lang.Throwable l3;
+  java.util.Map $stack4;
+  java.lang.Class $stack6;
+  $stack4=this.stickyEvents;
+ l2=$stack4;
+ monitorenter $stack4;
+ label0:$stack4=this.stickyEvents;
+ $stack6 = event.getClass();
+ $stack4.put((java.lang.Object)$stack6,event);
+ monitorexit l2;
+ label1:goto label2;
+ label3:l3 = catch;
+ monitorexit l2;
+ label4:throw l3;
+ label2:this.post(event);
+ return;
+ catch java.lang.Throwable: label0 - label1 : label3;
+catch java.lang.Throwable: label3 - label4 : label3;
+} 
+

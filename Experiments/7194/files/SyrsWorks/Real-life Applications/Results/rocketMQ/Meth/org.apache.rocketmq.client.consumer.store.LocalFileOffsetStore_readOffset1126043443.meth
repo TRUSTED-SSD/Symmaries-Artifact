@@ -1,0 +1,55 @@
+long org.apache.rocketmq.client.consumer.store.LocalFileOffsetStore:readOffset(org.apache.rocketmq.common.message.MessageQueue mq,org.apache.rocketmq.client.consumer.store.ReadOffsetType type)
+{
+java.lang.Object offset;
+  java.io.Serializable e;
+  int[] $stack5;
+  int $stack6;
+  java.util.concurrent.ConcurrentMap $stack8;
+  org.apache.rocketmq.client.consumer.store.ReadOffsetType $stack10;
+  long $stack16;
+  org.apache.rocketmq.client.exception.MQClientException $stack24;
+  java.util.concurrent.atomic.AtomicLong tmp$901715658;
+  org.apache.rocketmq.client.consumer.store.OffsetSerializeWrapper tmp$1182123896;
+  if (mq==null) goto label0;
+ $stack5=org.apache.rocketmq.client.consumer.store.LocalFileOffsetStore$1.$SwitchMap$org$apache$rocketmq$client$consumer$store$ReadOffsetType;
+ $stack6 = type.ordinal();
+ $stack6=$stack5[$stack6];
+ switch [$stack6]
+if 0 goto label1;
+if 1 goto label1;
+if 2 goto label2;
+goto label0;
+ label1:$stack8=this.offsetTable;
+ offset = $stack8.get((java.lang.Object)mq);
+ offset=(java.util.concurrent.atomic.AtomicLong) offset;
+ if (offset==null) goto label3;
+ tmp$901715658=(java.util.concurrent.atomic.AtomicLong) offset;
+ $stack16 = tmp$901715658.get();
+ return  $stack16;
+ label3:$stack10=org.apache.rocketmq.client.consumer.store.ReadOffsetType.READ_FROM_MEMORY;
+ if ($stack10!=type) goto label2;
+ return  -1L;
+ label2:offset = this#org.apache.rocketmq.client.consumer.store.LocalFileOffsetStore:readLocalOffset();
+ label4:goto label5;
+ label6:$stack24 = catch;
+ e=$stack24;
+ return  -1L;
+ label5:if (offset==null) goto label0;
+ tmp$1182123896=(org.apache.rocketmq.client.consumer.store.OffsetSerializeWrapper) offset;
+ $stack8 = tmp$1182123896.getOffsetTable();
+ if ($stack8==null) goto label0;
+ tmp$1182123896=(org.apache.rocketmq.client.consumer.store.OffsetSerializeWrapper) offset;
+ $stack8 = tmp$1182123896.getOffsetTable();
+ offset = $stack8.get((java.lang.Object)mq);
+ e=(java.util.concurrent.atomic.AtomicLong) offset;
+ if (e==null) goto label0;
+ tmp$901715658=(java.util.concurrent.atomic.AtomicLong) e;
+ $stack16 = tmp$901715658.get();
+ this.updateOffset(mq,$stack16,(boolean)0);
+ tmp$901715658=(java.util.concurrent.atomic.AtomicLong) e;
+ $stack16 = tmp$901715658.get();
+ return  $stack16;
+ label0:return  -1L;
+ catch org.apache.rocketmq.client.exception.MQClientException: label2 - label4 : label6;
+} 
+

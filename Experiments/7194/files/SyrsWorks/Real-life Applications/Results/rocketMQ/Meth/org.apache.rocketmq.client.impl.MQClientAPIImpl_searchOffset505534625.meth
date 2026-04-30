@@ -1,0 +1,54 @@
+long org.apache.rocketmq.client.impl.MQClientAPIImpl:searchOffset(java.lang.String addr,org.apache.rocketmq.common.message.MessageQueue messageQueue,long timestamp,long timeoutMillis)
+{
+org.apache.rocketmq.remoting.protocol.header.SearchOffsetRequestHeader requestHeader;
+  org.apache.rocketmq.remoting.protocol.RemotingCommand request;
+  org.apache.rocketmq.remoting.protocol.header.SearchOffsetResponseHeader responseHeader;
+  java.lang.String $stack12;
+  int $stack13;
+  java.lang.Integer $stack14;
+  java.lang.Long $stack16;
+  org.apache.rocketmq.client.ClientConfig $stack18;
+  org.apache.rocketmq.remoting.RemotingClient $stack19;
+  boolean $stack20;
+  org.apache.rocketmq.remoting.CommandCustomHeader $stack25;
+  org.apache.rocketmq.client.exception.MQBrokerException $stack28;
+  java.lang.AssertionError $stack32;
+  requestHeader=new org.apache.rocketmq.remoting.protocol.header.SearchOffsetRequestHeader;
+ requestHeader#org.apache.rocketmq.remoting.protocol.header.SearchOffsetRequestHeader();
+ $stack12 = messageQueue.getTopic();
+ requestHeader.setTopic($stack12);
+ $stack13 = messageQueue.getQueueId();
+ $stack14 = java.lang.Integer.valueOf($stack13);
+ requestHeader.setQueueId($stack14);
+ $stack12 = messageQueue.getBrokerName();
+ requestHeader.setBname($stack12);
+ $stack16 = java.lang.Long.valueOf(timestamp);
+ requestHeader.setTimestamp($stack16);
+ request = org.apache.rocketmq.remoting.protocol.RemotingCommand.createRequestCommand(29,(org.apache.rocketmq.remoting.CommandCustomHeader)requestHeader);
+ $stack19=this.remotingClient;
+ $stack18=this.clientConfig;
+ $stack20 = $stack18.isVipChannelEnabled();
+ $stack12 = org.apache.rocketmq.common.MixAll.brokerVIPChannel($stack20,addr);
+ request = $stack19.invokeSync($stack12,request,timeoutMillis);
+ $stack20=org.apache.rocketmq.client.impl.MQClientAPIImpl.$assertionsDisabled;
+ if ($stack20!=0) goto label0;
+ if (request!=null) goto label0;
+ $stack32=new java.lang.AssertionError;
+ $stack32#java.lang.AssertionError();
+ throw $stack32;
+ label0:$stack13 = request.getCode();
+ switch [$stack13]
+if 0 goto label1;
+goto label2;
+ label1:$stack25 = request.decodeCommandCustomHeader(org.apache.rocketmq.remoting.protocol.header.SearchOffsetResponseHeader);
+ responseHeader=(org.apache.rocketmq.remoting.protocol.header.SearchOffsetResponseHeader) $stack25;
+ $stack16 = responseHeader.getOffset();
+ timestamp = $stack16.longValue();
+ return  timestamp;
+ label2:$stack28=new org.apache.rocketmq.client.exception.MQBrokerException;
+ $stack13 = request.getCode();
+ $stack12 = request.getRemark();
+ $stack28#org.apache.rocketmq.client.exception.MQBrokerException($stack13,$stack12,addr);
+ throw $stack28;
+ } 
+

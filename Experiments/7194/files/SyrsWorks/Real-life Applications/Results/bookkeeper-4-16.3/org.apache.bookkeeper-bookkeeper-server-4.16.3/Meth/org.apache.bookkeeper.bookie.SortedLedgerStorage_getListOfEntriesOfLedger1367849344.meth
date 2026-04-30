@@ -1,0 +1,14 @@
+java.util.PrimitiveIterator$OfLong org.apache.bookkeeper.bookie.SortedLedgerStorage:getListOfEntriesOfLedger(long ledgerId)
+{
+java.util.PrimitiveIterator$OfLong entriesInMemtableItr;
+  java.util.PrimitiveIterator$OfLong entriesFromILSItr;
+  org.apache.bookkeeper.bookie.EntryMemTable $stack5;
+  org.apache.bookkeeper.bookie.InterleavedLedgerStorage $stack7;
+  $stack5=this.memTable;
+ entriesInMemtableItr = $stack5.getListOfEntriesOfLedger(ledgerId);
+ $stack7=this.interleavedLedgerStorage;
+ entriesFromILSItr = $stack7.getListOfEntriesOfLedger(ledgerId);
+ entriesInMemtableItr = org.apache.bookkeeper.util.IteratorUtility.mergePrimitiveLongIterator(entriesInMemtableItr,entriesFromILSItr);
+ return  entriesInMemtableItr;
+ } 
+

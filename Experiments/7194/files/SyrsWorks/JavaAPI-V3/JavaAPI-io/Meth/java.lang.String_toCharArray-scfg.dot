@@ -1,0 +1,61 @@
+digraph G {
+  node [shape=box, ];
+  "pc0_js1" [label="〈$r2 = this.value, js1〉", ];
+  "pc1_js1" [label="〈$i0 = #$r2, js1〉", ];
+  "pc2_js1" [label="〈r1 = new (char)[$i0], js1〉", ];
+  "pc3_js1" [label="〈$r4 = this.value, js1〉", ];
+  "pc4_js1" [label="〈$r3 = this.value, js1〉", ];
+  "pc5_js1" [label="〈$i1 = #$r3, js1〉", ];
+  "pc6_js1" [label="〈java.lang.System.native_arraycopy ((java.lang.Object) $r4, 0, (java.lang.Object) r1, 0, $i1), js1〉\n\
+tt",
+             ];
+  "pc7_js1" [label="〈return r1, js1〉", ];
+  "pc8_js1" [label="〈sink, js1〉\n\
+obj_level(this) ⊑ ret(obj_level(this))' ∧ (ret(this.><this)' ∨ ¬this.><this) ∧ (ϕ ≠ S7 ∨ obj_level(r1) ⊑ ret(obj_level())' ∧ pc ⊔ level(r1) ⊑ ret(level())' ∧ (ret(.><this)' ∨ ¬this.><r1))",
+             ];
+  
+  
+  "pc0_js1" -> "pc1_js1" [label="tt,\n\
+{$r2~$r3 := ff,\n\
+ $r2~$r4 := ff,\n\
+ $r2~r1 := ff,\n\
+ this.><$r2 := tt,\n\
+ level($r2) := pc ⊔ level(this) ⊔ obj_level(this),\n\
+ obj_level($r2) := obj_level(this)}",
+                          ];
+  "pc1_js1" -> "pc2_js1" [label="tt,\n\
+{level($i0) := pc ⊔ level(this) ⊔ obj_level(this)}",
+                          ];
+  "pc2_js1" -> "pc3_js1" [label="tt,\n\
+{$r2~r1 := ff,\n\
+ $r3~r1 := ff,\n\
+ $r4~r1 := ff,\n\
+ this.><r1 := ff,\n\
+ level(r1) := pc,\n\
+ obj_level(r1) := pc ⊔ level(this) ⊔ obj_level(this)}",
+                          ];
+  "pc3_js1" -> "pc4_js1" [label="tt,\n\
+{$r2~$r4 := tt,\n\
+ $r3~$r4 := ff,\n\
+ $r4~r1 := ff,\n\
+ this.><$r4 := tt,\n\
+ level($r4) := pc ⊔ level(this) ⊔ obj_level(this),\n\
+ obj_level($r4) := obj_level(this)}",
+                          ];
+  "pc4_js1" -> "pc5_js1" [label="tt,\n\
+{$r2~$r3 := tt,\n\
+ $r3~$r4 := tt,\n\
+ $r3~r1 := ff,\n\
+ this.><$r3 := tt,\n\
+ level($r3) := pc ⊔ level(this) ⊔ obj_level(this),\n\
+ obj_level($r3) := obj_level(this)}",
+                          ];
+  "pc5_js1" -> "pc6_js1" [label="tt,\n\
+{level($i1) := pc ⊔ level(this) ⊔ obj_level(this)}",
+                          ];
+  "pc6_js1" -> "pc7_js1" [label="tt,\n\
+{}", ];
+  "pc7_js1" -> "pc8_js1" [label="tt,\n\
+{ϕ := S7}", ];
+  
+  }

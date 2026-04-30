@@ -1,0 +1,17 @@
+org.apache.bookkeeper.client.EnsemblePlacementPolicy$PlacementResult org.apache.bookkeeper.client.ZoneawareEnsemblePlacementPolicy:newEnsemble(int ensembleSize,int writeQuorumSize,int ackQuorumSize,java.util.Map customMetadata,java.util.Set excludeBookies)
+{
+org.apache.bookkeeper.client.EnsemblePlacementPolicy$PlacementResult $stack7;
+  org.apache.bookkeeper.client.BKException$BKNotEnoughBookiesException $stack8;
+  org.apache.bookkeeper.client.ZoneawareEnsemblePlacementPolicyImpl $stack9;
+  label0:$stack7 = this#org.apache.bookkeeper.client.ZoneawareEnsemblePlacementPolicyImpl:newEnsemble(ensembleSize,writeQuorumSize,ackQuorumSize,customMetadata,excludeBookies);
+ label1:return  $stack7;
+ label2:$stack8 = catch;
+ $stack9=this.slave;
+ if ($stack9!=null) goto label3;
+ throw $stack8;
+ label3:$stack9=this.slave;
+ $stack7 = $stack9.newEnsemble(ensembleSize,writeQuorumSize,ackQuorumSize,customMetadata,excludeBookies);
+ return  $stack7;
+ catch org.apache.bookkeeper.client.BKException$BKNotEnoughBookiesException: label0 - label1 : label2;
+} 
+

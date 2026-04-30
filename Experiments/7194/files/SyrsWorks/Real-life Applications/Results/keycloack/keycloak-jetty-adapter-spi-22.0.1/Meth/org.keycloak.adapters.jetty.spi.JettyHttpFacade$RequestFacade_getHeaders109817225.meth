@@ -1,0 +1,26 @@
+java.util.List org.keycloak.adapters.jetty.spi.JettyHttpFacade$RequestFacade:getHeaders(java.lang.String @name)
+{
+java.util.Enumeration headers;
+  java.util.ArrayList list;
+  org.keycloak.adapters.jetty.spi.JettyHttpFacade $stack4;
+  org.eclipse.jetty.server.Request $stack5;
+  boolean $stack8;
+  java.lang.Object $stack9;
+  java.lang.String name;
+name=@name;
+$stack4=this.this$0;
+ $stack5=$stack4.request;
+ headers = $stack5.getHeaders(name);
+ if (headers!=null) goto label0;
+ return  null;
+ label0:list=new java.util.ArrayList;
+ list#java.util.ArrayList();
+ label1:$stack8 = headers.hasMoreElements();
+ if ($stack8==0) goto label2;
+ $stack9 = headers.nextElement();
+ name=(java.lang.String) $stack9;
+ list.add((java.lang.Object)name);
+ goto label1;
+ label2:return  list;
+ } 
+

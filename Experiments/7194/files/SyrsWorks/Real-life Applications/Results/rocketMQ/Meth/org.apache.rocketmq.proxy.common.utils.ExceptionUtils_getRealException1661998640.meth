@@ -1,0 +1,16 @@
+static java.lang.Throwable org.apache.rocketmq.proxy.common.utils.ExceptionUtils:getRealException(java.lang.Throwable @throwable)
+{
+boolean $stack1;
+  java.lang.Throwable $stack2;
+  java.lang.Throwable throwable;
+throwable=@throwable;
+$stack1=throwable instanceof java.util.concurrent.CompletionException;
+ if ($stack1!=0) goto label0;
+ $stack1=throwable instanceof java.util.concurrent.ExecutionException;
+ if ($stack1==0) goto label1;
+ label0:$stack2 = throwable.getCause();
+ if ($stack2==null) goto label1;
+ throwable = throwable.getCause();
+ label1:return  throwable;
+ } 
+

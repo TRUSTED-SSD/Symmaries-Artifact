@@ -1,0 +1,54 @@
+boolean org.keycloak.representations.idm.authorization.Permission:equals(java.lang.Object @o)
+{
+org.keycloak.representations.idm.authorization.Permission that;
+  java.util.Iterator l3;
+  java.lang.String scope;
+  java.lang.Class $stack5;
+  java.lang.Class $stack6;
+  boolean $stack7;
+  java.lang.String $stack10;
+  java.util.Set $stack12;
+  java.lang.Object o;
+o=@o;
+if (this!=o) goto label0;
+ return  1;
+ label0:if (o==null) goto label1;
+ $stack5 = this.getClass();
+ $stack6 = o.getClass();
+ $stack7 = $stack5.isAssignableFrom($stack6);
+ if ($stack7!=0) goto label2;
+ label1:return  0;
+ label2:that=(org.keycloak.representations.idm.authorization.Permission) o;
+ scope = this.getResourceId();
+ if (scope!=null) goto label3;
+ scope = this.getResourceName();
+ if (scope==null) goto label4;
+ label3:scope = this.getResourceId();
+ $stack10=that.resourceId;
+ $stack7 = scope.equals((java.lang.Object)$stack10);
+ if ($stack7!=0) goto label5;
+ return  0;
+ label5:$stack12 = this.getScopes();
+ $stack7 = $stack12.isEmpty();
+ if ($stack7==0) goto label6;
+ $stack12 = that.getScopes();
+ $stack7 = $stack12.isEmpty();
+ if ($stack7==0) goto label6;
+ return  1;
+ label4:scope=that.resourceId;
+ if (scope==null) goto label6;
+ return  0;
+ label6:$stack12 = that.getScopes();
+ l3 = $stack12.iterator();
+ label7:$stack7 = l3.hasNext();
+ if ($stack7==0) goto label8;
+ o = l3.next();
+ scope=(java.lang.String) o;
+ $stack12 = this.getScopes();
+ $stack7 = $stack12.contains((java.lang.Object)scope);
+ if ($stack7==0) goto label9;
+ return  1;
+ label9:goto label7;
+ label8:return  0;
+ } 
+

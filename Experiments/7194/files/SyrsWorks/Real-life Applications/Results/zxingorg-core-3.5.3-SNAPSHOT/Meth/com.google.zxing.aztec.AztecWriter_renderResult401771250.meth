@@ -1,0 +1,49 @@
+static com.google.zxing.common.BitMatrix com.google.zxing.aztec.AztecWriter:renderResult(com.google.zxing.aztec.encoder.AztecCode code,int width,int height)
+{
+com.google.zxing.common.BitMatrix input;
+  int inputWidth;
+  int inputHeight;
+  int outputWidth;
+  int leftPadding;
+  com.google.zxing.common.BitMatrix output;
+  int inputX;
+  int outputX;
+  boolean $stack31;
+  java.lang.IllegalStateException $stack37;
+  input = code.getMatrix();
+ if (input!=null) goto label0;
+ $stack37=new java.lang.IllegalStateException;
+ $stack37#java.lang.IllegalStateException();
+ throw $stack37;
+ label0:inputWidth = input.getWidth();
+ inputHeight = input.getHeight();
+ outputWidth = java.lang.Math.max(width,inputWidth);
+ height = java.lang.Math.max(height,inputHeight);
+ leftPadding=(outputWidth/inputWidth);
+ width=(height/inputHeight);
+ width = java.lang.Math.min(leftPadding,width);
+ leftPadding=(inputWidth * width);
+ leftPadding=(outputWidth-leftPadding);
+ leftPadding=(leftPadding/2);
+ inputX=(inputHeight * width);
+ inputX=(height-inputX);
+ output=new com.google.zxing.common.BitMatrix;
+ output#com.google.zxing.common.BitMatrix(outputWidth,height);
+ height=0;
+ outputWidth=(inputX/2);
+ label1:if (height>=inputHeight) goto label2;
+ inputX=0;
+ outputX=leftPadding;
+ label3:if (inputX>=inputWidth) goto label4;
+ $stack31 = input.get(inputX,height);
+ if ($stack31==0) goto label5;
+ output.setRegion(outputX,outputWidth,width,width);
+ label5:inputX=(inputX+1);
+ outputX=(outputX+width);
+ goto label3;
+ label4:height=(height+1);
+ outputWidth=(outputWidth+width);
+ goto label1;
+ label2:return  output;
+ } 
+

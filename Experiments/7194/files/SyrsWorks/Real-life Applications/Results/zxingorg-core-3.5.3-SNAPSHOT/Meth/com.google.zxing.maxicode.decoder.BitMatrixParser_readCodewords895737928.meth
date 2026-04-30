@@ -1,0 +1,47 @@
+byte[] com.google.zxing.maxicode.decoder.BitMatrixParser:readCodewords()
+{
+byte[] result;
+  int height;
+  int width;
+  int y;
+  int[] bitnrRow;
+  int x;
+  int bit;
+  com.google.zxing.common.BitMatrix $stack8;
+  int[][] $stack12;
+  boolean $stack18;
+  int $stack19;
+  byte $stack23;
+  byte $stack24;
+  result=new byte[144];
+ $stack8=this.bitMatrix;
+ height = $stack8.getHeight();
+ $stack8=this.bitMatrix;
+ width = $stack8.getWidth();
+ y=0;
+ label0:if (y>=height) goto label1;
+ $stack12=com.google.zxing.maxicode.decoder.BitMatrixParser.BITNR;
+ bitnrRow=$stack12[y];
+ x=0;
+ label2:if (x>=width) goto label3;
+ bit=bitnrRow[x];
+ if (bit<0) goto label4;
+ $stack8=this.bitMatrix;
+ $stack18 = $stack8.get(x,y);
+ if ($stack18==0) goto label4;
+ $stack19=(bit/6);
+ $stack24=result[$stack19];
+ bit=(bit%6);
+ bit=(5-bit);
+ bit=(1<<bit);
+ $stack23=(byte) bit;
+ $stack23=($stack24 | $stack23);
+ $stack23=(byte) $stack23;
+ result[$stack19]=$stack23;
+ label4:x=(x+1);
+ goto label2;
+ label3:y=(y+1);
+ goto label0;
+ label1:return  result;
+ } 
+

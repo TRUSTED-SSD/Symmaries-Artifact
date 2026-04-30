@@ -1,0 +1,56 @@
+org.apache.rocketmq.remoting.protocol.body.TopicConfigSerializeWrapper org.apache.rocketmq.tools.admin.DefaultMQAdminExtImpl:getUserTopicConfig(java.lang.String @brokerAddr,boolean specialTopic,long timeoutMillis)
+{
+org.apache.rocketmq.remoting.protocol.body.TopicConfigSerializeWrapper topicConfigSerializeWrapper;
+  org.apache.rocketmq.remoting.protocol.body.TopicList topicList;
+  java.util.Iterator iterator;
+  org.apache.rocketmq.common.TopicConfig topicConfig;
+  org.apache.rocketmq.client.impl.factory.MQClientInstance $stack10;
+  org.apache.rocketmq.client.impl.MQClientAPIImpl $stack11;
+  java.util.concurrent.ConcurrentMap $stack13;
+  java.util.Set $stack14;
+  boolean $stack16;
+  java.lang.Object $stack17;
+  java.util.Map$Entry $stack18;
+  int $stack26;
+  java.lang.CharSequence[] $stack29;
+  java.lang.String brokerAddr;
+brokerAddr=@brokerAddr;
+topicConfigSerializeWrapper = this.getAllTopicConfig(brokerAddr,timeoutMillis);
+ $stack10=this.mqClientInstance;
+ $stack11 = $stack10.getMQClientAPIImpl();
+ topicList = $stack11.getSystemTopicListFromBroker(brokerAddr,timeoutMillis);
+ $stack13 = topicConfigSerializeWrapper.getTopicConfigTable();
+ $stack14 = $stack13.entrySet();
+ iterator = $stack14.iterator();
+ label0:$stack16 = iterator.hasNext();
+ if ($stack16==0) goto label1;
+ $stack17 = iterator.next();
+ $stack18=(java.util.Map$Entry) $stack17;
+ $stack17 = $stack18.getValue();
+ topicConfig=(org.apache.rocketmq.common.TopicConfig) $stack17;
+ $stack14 = topicList.getTopicList();
+ brokerAddr = topicConfig.getTopicName();
+ $stack16 = $stack14.contains((java.lang.Object)brokerAddr);
+ if ($stack16!=0) goto label2;
+ brokerAddr = topicConfig.getTopicName();
+ $stack16 = org.apache.rocketmq.common.topic.TopicValidator.isSystemTopic(brokerAddr);
+ if ($stack16==0) goto label3;
+ label2:iterator.remove();
+ goto label4;
+ label3:if (specialTopic!=0) goto label5;
+ brokerAddr = topicConfig.getTopicName();
+ $stack29=new java.lang.CharSequence[2];
+ $stack29[0]="%RETRY%";
+ $stack29[1]="%DLQ%";
+ $stack16 = org.apache.commons.lang3.StringUtils.startsWithAny((java.lang.CharSequence)brokerAddr,$stack29);
+ if ($stack16==0) goto label5;
+ iterator.remove();
+ goto label4;
+ label5:$stack26 = topicConfig.getPerm();
+ $stack16 = org.apache.rocketmq.common.constant.PermName.isValid($stack26);
+ if ($stack16!=0) goto label4;
+ iterator.remove();
+ label4:goto label0;
+ label1:return  topicConfigSerializeWrapper;
+ } 
+

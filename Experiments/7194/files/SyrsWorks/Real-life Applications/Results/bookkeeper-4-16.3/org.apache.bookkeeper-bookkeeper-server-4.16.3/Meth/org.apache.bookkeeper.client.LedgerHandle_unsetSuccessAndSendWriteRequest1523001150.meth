@@ -1,0 +1,28 @@
+void org.apache.bookkeeper.client.LedgerHandle:unsetSuccessAndSendWriteRequest(java.util.List ensemble,java.util.Set bookies)
+{
+java.util.Iterator l3;
+  org.apache.bookkeeper.client.PendingAddOp pendingAddOp;
+  java.util.Iterator l5;
+  java.lang.Integer bookieIndex;
+  java.util.Queue $stack7;
+  boolean $stack9;
+  java.lang.Object $stack10;
+  int $stack15;
+  $stack7=this.pendingAddOps;
+ l3 = $stack7.iterator();
+ label0:$stack9 = l3.hasNext();
+ if ($stack9==0) goto label1;
+ $stack10 = l3.next();
+ pendingAddOp=(org.apache.bookkeeper.client.PendingAddOp) $stack10;
+ l5 = bookies.iterator();
+ label2:$stack9 = l5.hasNext();
+ if ($stack9==0) goto label3;
+ $stack10 = l5.next();
+ bookieIndex=(java.lang.Integer) $stack10;
+ $stack15 = bookieIndex.intValue();
+ pendingAddOp.unsetSuccessAndSendWriteRequest(ensemble,$stack15);
+ goto label2;
+ label3:goto label0;
+ label1:return;
+ } 
+

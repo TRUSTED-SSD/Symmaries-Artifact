@@ -1,0 +1,20 @@
+boolean org.apache.rocketmq.client.impl.factory.MQClientInstance:registerAdminExt(java.lang.String group,org.apache.rocketmq.client.admin.MQAdminExtInner @admin)
+{
+java.util.concurrent.ConcurrentMap $stack4;
+  java.lang.Object $stack5;
+  org.apache.rocketmq.logging.org.slf4j.Logger $stack6;
+  org.apache.rocketmq.client.admin.MQAdminExtInner admin;
+admin=@admin;
+if (null==group) goto label0;
+ if (null!=admin) goto label1;
+ label0:return  0;
+ label1:$stack4=this.adminExtTable;
+ $stack5 = $stack4.putIfAbsent((java.lang.Object)group,(java.lang.Object)admin);
+ admin=(org.apache.rocketmq.client.admin.MQAdminExtInner) $stack5;
+ if (admin==null) goto label2;
+ $stack6=org.apache.rocketmq.client.impl.factory.MQClientInstance.log;
+ $stack6.warn("the admin group[{}] exist already.",(java.lang.Object)group);
+ return  0;
+ label2:return  1;
+ } 
+

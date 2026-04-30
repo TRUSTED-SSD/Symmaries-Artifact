@@ -1,0 +1,171 @@
+    private static org.junit.runner.Description makeDescription(junit.framework.Test)
+    {
+        junit.framework.Test test;
+        java.lang.Object tc;
+        org.junit.runner.Description description, made;
+        int n, i;
+        boolean $stack7;
+        java.lang.Class $stack11;
+        java.lang.String $stack16;
+        java.lang.'annotation'.Annotation[] $stack18;
+        junit.framework.TestCase tmp$1505812568;
+        junit.framework.TestSuite tmp$1782655417;
+        org.junit.runner.Describable tmp$105034817;
+        junit.extensions.TestDecorator tmp$934817596;
+
+        test := @parameter0: junit.framework.Test;
+
+        $stack7 = test instanceof junit.framework.TestCase;
+/*99*/
+
+        if $stack7 == 0 goto label1;
+/*99*/
+
+        tc = (junit.framework.TestCase) test;
+/*100*/
+
+        $stack11 = virtualinvoke tc.<java.lang.Object: java.lang.Class getClass()>();
+/*101*/
+
+        tmp$1505812568 = (junit.framework.TestCase) tc;
+
+        $stack16 = virtualinvoke tmp$1505812568.<junit.framework.TestCase: java.lang.String getName()>();
+/*101*/
+
+        tmp$1505812568 = (junit.framework.TestCase) tc;
+
+        $stack18 = staticinvoke <org.junit.internal.runners.JUnit38ClassRunner: java.lang.'annotation'.Annotation[] getAnnotations(junit.framework.TestCase)>(tmp$1505812568);
+/*101*/
+
+        description = staticinvoke <org.junit.runner.Description: org.junit.runner.Description createTestDescription(java.lang.Class,java.lang.String,java.lang.'annotation'.Annotation[])>($stack11, $stack16, $stack18);
+/*101*/
+
+        return description;
+/*101*/
+
+     label1:
+        $stack7 = test instanceof junit.framework.TestSuite;
+/*103*/
+
+        if $stack7 == 0 goto label6;
+/*103*/
+
+        tc = (junit.framework.TestSuite) test;
+/*104*/
+
+        tmp$1782655417 = (junit.framework.TestSuite) tc;
+
+        $stack16 = virtualinvoke tmp$1782655417.<junit.framework.TestSuite: java.lang.String getName()>();
+/*105*/
+
+        if $stack16 != null goto label2;
+/*105*/
+
+        tmp$1782655417 = (junit.framework.TestSuite) tc;
+
+        $stack16 = staticinvoke <org.junit.internal.runners.JUnit38ClassRunner: java.lang.String createSuiteDescription(junit.framework.TestSuite)>(tmp$1782655417);
+/*108*/
+
+        goto label3;
+/*108*/
+
+     label2:
+        tmp$1782655417 = (junit.framework.TestSuite) tc;
+
+        $stack16 = virtualinvoke tmp$1782655417.<junit.framework.TestSuite: java.lang.String getName()>();
+/*105*/
+
+     label3:
+        $stack18 = newarray (java.lang.'annotation'.Annotation)[0];
+/*106*/
+
+        description = staticinvoke <org.junit.runner.Description: org.junit.runner.Description createSuiteDescription(java.lang.String,java.lang.'annotation'.Annotation[])>($stack16, $stack18);
+/*106*/
+/*106*/
+
+        tmp$1782655417 = (junit.framework.TestSuite) tc;
+
+        n = virtualinvoke tmp$1782655417.<junit.framework.TestSuite: int testCount()>();
+/*107*/
+/*107*/
+
+        i = 0;
+/*108*/
+/*108*/
+
+     label4:
+        if i >= n goto label5;
+/*108*/
+
+        tmp$1782655417 = (junit.framework.TestSuite) tc;
+
+        test = virtualinvoke tmp$1782655417.<junit.framework.TestSuite: junit.framework.Test testAt(int)>(i);
+/*109*/
+
+        made = staticinvoke <org.junit.internal.runners.JUnit38ClassRunner: org.junit.runner.Description makeDescription(junit.framework.Test)>(test);
+/*109*/
+/*109*/
+
+        virtualinvoke description.<org.junit.runner.Description: void addChild(org.junit.runner.Description)>(made);
+/*110*/
+
+        i = i + 1;
+/*108*/
+
+        goto label4;
+/*108*/
+
+     label5:
+        return description;
+/*112*/
+
+     label6:
+        $stack7 = test instanceof org.junit.runner.Describable;
+/*113*/
+
+        if $stack7 == 0 goto label7;
+/*113*/
+
+        tc = (org.junit.runner.Describable) test;
+/*114*/
+
+        tmp$105034817 = (org.junit.runner.Describable) tc;
+
+        description = interfaceinvoke tmp$105034817.<org.junit.runner.Describable: org.junit.runner.Description getDescription()>();
+/*115*/
+
+        return description;
+/*115*/
+
+     label7:
+        $stack7 = test instanceof junit.extensions.TestDecorator;
+/*116*/
+
+        if $stack7 == 0 goto label8;
+/*116*/
+
+        tc = (junit.extensions.TestDecorator) test;
+/*117*/
+
+        tmp$934817596 = (junit.extensions.TestDecorator) tc;
+
+        test = virtualinvoke tmp$934817596.<junit.extensions.TestDecorator: junit.framework.Test getTest()>();
+/*118*/
+
+        description = staticinvoke <org.junit.internal.runners.JUnit38ClassRunner: org.junit.runner.Description makeDescription(junit.framework.Test)>(test);
+/*118*/
+
+        return description;
+/*118*/
+
+     label8:
+        $stack11 = virtualinvoke test.<java.lang.Object: java.lang.Class getClass()>();
+/*121*/
+
+        description = staticinvoke <org.junit.runner.Description: org.junit.runner.Description createSuiteDescription(java.lang.Class)>($stack11);
+/*121*/
+
+        return description;
+/*121*/
+    }
+

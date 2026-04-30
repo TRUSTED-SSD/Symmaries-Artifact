@@ -1,0 +1,20 @@
+org.apache.rocketmq.tieredstore.common.InflightRequestFuture org.apache.rocketmq.tieredstore.container.TieredMessageQueueContainer:getInflightRequest(java.lang.String group,long offset,int batchSize)
+{
+org.apache.rocketmq.tieredstore.common.InflightRequestFuture future;
+  org.apache.rocketmq.tieredstore.common.InflightRequestKey $stack6;
+  java.util.concurrent.ConcurrentMap $stack7;
+  java.lang.Object $stack8;
+  boolean $stack10;
+  $stack7=this.inFlightRequestMap;
+ $stack6=new org.apache.rocketmq.tieredstore.common.InflightRequestKey;
+ $stack6#org.apache.rocketmq.tieredstore.common.InflightRequestKey(group);
+ $stack8 = $stack7.get((java.lang.Object)$stack6);
+ future=(org.apache.rocketmq.tieredstore.common.InflightRequestFuture) $stack8;
+ if (future==null) goto label0;
+ $stack10 = future.isAllDone();
+ if ($stack10!=0) goto label0;
+ return  future;
+ label0:future = this.getInflightRequest(offset,batchSize);
+ return  future;
+ } 
+

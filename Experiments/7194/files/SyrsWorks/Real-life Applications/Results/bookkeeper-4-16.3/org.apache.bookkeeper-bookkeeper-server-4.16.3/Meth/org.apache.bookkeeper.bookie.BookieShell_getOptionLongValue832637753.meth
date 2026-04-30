@@ -1,0 +1,31 @@
+static long org.apache.bookkeeper.bookie.BookieShell:getOptionLongValue(org.apache.commons.cli.CommandLine cmdLine,java.lang.String @option,long defaultVal)
+{
+java.lang.String val;
+  java.lang.NumberFormatException nfe;
+  boolean $stack6;
+  long $stack8;
+  java.lang.StringBuilder $stack10;
+  java.io.PrintStream $stack11;
+  java.lang.String option;
+option=@option;
+$stack6 = cmdLine.hasOption(option);
+ if ($stack6==0) goto label0;
+ val = cmdLine.getOptionValue(option);
+ label1:$stack8 = java.lang.Long.parseLong(val);
+ label2:return  $stack8;
+ label3:nfe = catch;
+ $stack11=java.lang.System.err;
+ $stack10=new java.lang.StringBuilder;
+ $stack10#java.lang.StringBuilder();
+ $stack10 = $stack10.append("ERROR: invalid value for option ");
+ $stack10 = $stack10.append(option);
+ $stack10 = $stack10.append(" : ");
+ $stack10 = $stack10.append(val);
+ option = $stack10.toString();
+ dummyClass.lowSink(option);
+$stack11.println(option);
+ return  defaultVal;
+ label0:return  defaultVal;
+ catch java.lang.NumberFormatException: label1 - label2 : label3;
+} 
+

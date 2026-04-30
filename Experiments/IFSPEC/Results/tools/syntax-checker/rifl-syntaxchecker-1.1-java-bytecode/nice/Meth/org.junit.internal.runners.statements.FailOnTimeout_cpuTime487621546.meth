@@ -1,0 +1,17 @@
+long org.junit.internal.runners.statements.FailOnTimeout:cpuTime(java.lang.Thread thr)
+{
+java.lang.management.ThreadMXBean mxBean;
+  java.lang.UnsupportedOperationException e;
+  boolean $stack5;
+  long $stack6;
+  mxBean = java.lang.management.ManagementFactory.getThreadMXBean();
+ $stack5 = mxBean.isThreadCpuTimeSupported();
+ if ($stack5==0) goto label0;
+ label1:$stack6 = thr.getId();
+ $stack6 = mxBean.getThreadCpuTime($stack6);
+ label2:return  $stack6;
+ label3:e = catch;
+ label0:return  0L;
+ catch java.lang.UnsupportedOperationException: label1 - label2 : label3;
+} 
+

@@ -1,0 +1,36 @@
+void java.util.ArrayDeque$DeqSpliterator:forEachRemaining(java.util.function.Consumer r1)
+{
+java.lang.Object[] r2;
+  int i0;
+  int i1;
+  java.lang.Object r3;
+  java.util.ArrayDeque $r4;
+  int $i2;
+  int $i3;
+  java.util.ConcurrentModificationException $r5;
+  java.lang.NullPointerException $r6;
+  int i4;
+  if (r1!=null) goto label0;
+ $r6=new java.lang.NullPointerException;
+ $r6#java.lang.NullPointerException:init();
+ throw $r6;
+ label0:$r4=this.deq;
+ r2=$r4.elements;
+ $i2=#r2;
+ i0=($i2-1);
+ i1 = this#java.util.ArrayDeque$DeqSpliterator:getFence();
+ i4=this.index;
+ this.index=i1;
+ label1:if (i4==i1) goto label2;
+ r3=r2[i4];
+ $i3=(i4+1);
+ i4=($i3 & i0);
+ if (r3!=null) goto label3;
+ $r5=new java.util.ConcurrentModificationException;
+ $r5#java.util.ConcurrentModificationException:init();
+ throw $r5;
+ label3:r1.accept(r3);
+ goto label1;
+ label2:return;
+ }  
+

@@ -1,0 +1,43 @@
+void org.apache.rocketmq.proxy.service.sysmessage.HeartbeatSyncer:lambda$onConsumerUnRegister$1(org.apache.rocketmq.broker.client.ClientChannelInfo clientChannelInfo,java.lang.String consumerGroup)
+{
+org.apache.rocketmq.proxy.processor.channel.RemoteChannel remoteChannel;
+  org.apache.rocketmq.proxy.service.sysmessage.HeartbeatSyncerData data;
+  io.netty.channel.Channel $stack5;
+  org.apache.rocketmq.proxy.service.sysmessage.HeartbeatType $stack8;
+  java.lang.String $stack9;
+  org.apache.rocketmq.remoting.protocol.LanguageCode $stack10;
+  int $stack11;
+  java.lang.String $stack15;
+  java.lang.String $stack16;
+  org.apache.rocketmq.logging.org.slf4j.Logger $stack17;
+  java.lang.Throwable $stack20;
+  java.lang.Object[] $stack21;
+  label0:$stack5 = clientChannelInfo.getChannel();
+ remoteChannel = org.apache.rocketmq.proxy.processor.channel.RemoteChannel.create($stack5);
+ if (remoteChannel!=null) goto label1;
+ label2:return;
+ label1:data=new org.apache.rocketmq.proxy.service.sysmessage.HeartbeatSyncerData;
+ $stack8=org.apache.rocketmq.proxy.service.sysmessage.HeartbeatType.UNREGISTER;
+ $stack9 = clientChannelInfo.getClientId();
+ $stack10 = clientChannelInfo.getLanguage();
+ $stack11 = clientChannelInfo.getVersion();
+ $stack15=this.localProxyId;
+ $stack16 = remoteChannel.encode();
+ data#org.apache.rocketmq.proxy.service.sysmessage.HeartbeatSyncerData($stack8,$stack9,$stack10,$stack11,consumerGroup,null,null,null,$stack15,$stack16);
+ $stack17=org.apache.rocketmq.proxy.service.sysmessage.AbstractSystemMessageSyncer.log;
+ $stack9 = this.getBroadcastTopicName();
+ $stack17.debug("sync unregister heart beat. topic:{}, data:{}",(java.lang.Object)$stack9,(java.lang.Object)data);
+ this.sendSystemMessage((java.lang.Object)data);
+ label3:goto label4;
+ label5:$stack20 = catch;
+ $stack17=org.apache.rocketmq.proxy.service.sysmessage.AbstractSystemMessageSyncer.log;
+ $stack21=new java.lang.Object[3];
+ $stack21[0]=consumerGroup;
+ $stack21[1]=clientChannelInfo;
+ $stack21[2]=$stack20;
+ $stack17.error("heartbeat unregister broadcast failed. group:{}, clientChannelInfo:{}, consumeType:{}",$stack21);
+ label4:return;
+ catch java.lang.Throwable: label0 - label2 : label5;
+catch java.lang.Throwable: label1 - label3 : label5;
+} 
+

@@ -1,0 +1,18 @@
+boolean org.apache.bookkeeper.bookie.SortedLedgerStorage:ledgerExists(long ledgerId)
+{
+org.apache.bookkeeper.bookie.EntryKeyValue kv;
+  org.apache.bookkeeper.bookie.InterleavedLedgerStorage $stack4;
+  boolean $stack5;
+  org.apache.bookkeeper.bookie.EntryMemTable $stack6;
+  $stack4=this.interleavedLedgerStorage;
+ $stack5 = $stack4.ledgerExists(ledgerId);
+ if ($stack5!=0) goto label0;
+ $stack6=this.memTable;
+ kv = $stack6.getLastEntry(ledgerId);
+ if (null!=kv) goto label0;
+ $stack4=this.interleavedLedgerStorage;
+ $stack5 = $stack4.ledgerExists(ledgerId);
+ return  $stack5;
+ label0:return  1;
+ } 
+

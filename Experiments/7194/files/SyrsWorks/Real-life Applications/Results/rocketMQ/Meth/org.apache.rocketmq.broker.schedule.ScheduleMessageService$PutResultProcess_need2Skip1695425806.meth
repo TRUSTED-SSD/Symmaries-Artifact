@@ -1,0 +1,23 @@
+boolean org.apache.rocketmq.broker.schedule.ScheduleMessageService$PutResultProcess:need2Skip()
+{
+int maxResendNum2Blocked;
+  org.apache.rocketmq.broker.schedule.ScheduleMessageService $stack2;
+  org.apache.rocketmq.broker.BrokerController $stack3;
+  org.apache.rocketmq.store.MessageStore $stack4;
+  org.apache.rocketmq.store.config.MessageStoreConfig $stack5;
+  int $stack8;
+  boolean $stack9;
+  $stack2=this.this$0;
+ $stack3 = org.apache.rocketmq.broker.schedule.ScheduleMessageService.access$300($stack2);
+ $stack4 = $stack3.getMessageStore();
+ $stack5 = $stack4.getMessageStoreConfig();
+ maxResendNum2Blocked = $stack5.getScheduleAsyncDeliverMaxResendNum2Blocked();
+ $stack8=this.resendCount;
+ maxResendNum2Blocked=(maxResendNum2Blocked * 2);
+ if ($stack8<=maxResendNum2Blocked) goto label0;
+ $stack9=1;
+ goto label1;
+ label0:$stack9=0;
+ label1:return  $stack9;
+ } 
+

@@ -1,0 +1,57 @@
+void org.apache.rocketmq.namesrv.routeinfo.RouteInfoManager:scanNotActiveBroker()
+{
+java.util.Iterator e;
+  java.util.Map$Entry next;
+  long last;
+  long timeoutMillis;
+  org.apache.rocketmq.logging.org.slf4j.Logger $stack7;
+  java.util.Map $stack8;
+  java.util.Set $stack9;
+  boolean $stack11;
+  java.lang.Object $stack12;
+  org.apache.rocketmq.namesrv.routeinfo.BrokerLiveInfo $stack14;
+  long $stack20;
+  byte $stack21;
+  io.netty.channel.Channel $stack25;
+  java.lang.Long $stack29;
+  org.apache.rocketmq.common.BrokerAddrInfo $stack31;
+  java.lang.Exception $stack32;
+  label0:$stack7=org.apache.rocketmq.namesrv.routeinfo.RouteInfoManager.log;
+ $stack7.info("start scanNotActiveBroker");
+ $stack8=this.brokerLiveTable;
+ $stack9 = $stack8.entrySet();
+ e = $stack9.iterator();
+ label1:$stack11 = e.hasNext();
+ if ($stack11==0) goto label2;
+ $stack12 = e.next();
+ next=(java.util.Map$Entry) $stack12;
+ $stack12 = next.getValue();
+ $stack14=(org.apache.rocketmq.namesrv.routeinfo.BrokerLiveInfo) $stack12;
+ last = $stack14.getLastUpdateTimestamp();
+ $stack12 = next.getValue();
+ $stack14=(org.apache.rocketmq.namesrv.routeinfo.BrokerLiveInfo) $stack12;
+ timeoutMillis = $stack14.getHeartbeatTimeoutMillis();
+ last=(last+timeoutMillis);
+ $stack20 = java.lang.System.currentTimeMillis();
+ $stack21=(last cmp $stack20);
+ if ($stack21>=0) goto label3;
+ $stack12 = next.getValue();
+ $stack14=(org.apache.rocketmq.namesrv.routeinfo.BrokerLiveInfo) $stack12;
+ $stack25 = $stack14.getChannel();
+ org.apache.rocketmq.remoting.common.RemotingHelper.closeChannel($stack25);
+ $stack7=org.apache.rocketmq.namesrv.routeinfo.RouteInfoManager.log;
+ $stack12 = next.getKey();
+ $stack29 = java.lang.Long.valueOf(timeoutMillis);
+ $stack7.warn("The broker channel expired, {} {}ms",$stack12,(java.lang.Object)$stack29);
+ $stack12 = next.getKey();
+ $stack31=(org.apache.rocketmq.common.BrokerAddrInfo) $stack12;
+ this#org.apache.rocketmq.namesrv.routeinfo.RouteInfoManager($stack31);
+ label3:goto label1;
+ label2:goto label4;
+ label5:$stack32 = catch;
+ $stack7=org.apache.rocketmq.namesrv.routeinfo.RouteInfoManager.log;
+ $stack7.error("scanNotActiveBroker exception",(java.lang.Throwable)$stack32);
+ label4:return;
+ catch java.lang.Exception: label0 - label2 : label5;
+} 
+

@@ -1,0 +1,55 @@
+void org.apache.bookkeeper.util.collections.ConcurrentLongLongHashMap$Section:cleanBucket(int bucket)
+{
+int nextInArray;
+  long[] $stack3;
+  int $stack4;
+  long $stack8;
+  byte $stack9;
+  nextInArray=(bucket+2);
+ $stack3=this.table;
+ $stack4=#$stack3;
+ $stack4=($stack4-1);
+ nextInArray=(nextInArray & $stack4);
+ $stack3=this.table;
+ $stack8=$stack3[nextInArray];
+ $stack9=($stack8 cmp -1L);
+ if ($stack9!=0) goto label0;
+ $stack3=this.table;
+ $stack3[bucket]=-1L;
+ $stack3=this.table;
+ nextInArray=(bucket+1);
+ $stack3[nextInArray]=-1L;
+ nextInArray=this.usedBuckets;
+ nextInArray=(nextInArray-1);
+ this.usedBuckets=nextInArray;
+ bucket=(bucket-2);
+ $stack3=this.table;
+ nextInArray=#$stack3;
+ nextInArray=(nextInArray-1);
+ bucket=(bucket & nextInArray);
+ label1:$stack3=this.table;
+ $stack8=$stack3[bucket];
+ $stack9=($stack8 cmp -2L);
+ if ($stack9!=0) goto label2;
+ $stack3=this.table;
+ $stack3[bucket]=-1L;
+ $stack3=this.table;
+ nextInArray=(bucket+1);
+ $stack3[nextInArray]=-1L;
+ nextInArray=this.usedBuckets;
+ nextInArray=(nextInArray-1);
+ this.usedBuckets=nextInArray;
+ bucket=(bucket-2);
+ $stack3=this.table;
+ nextInArray=#$stack3;
+ nextInArray=(nextInArray-1);
+ bucket=(bucket & nextInArray);
+ goto label1;
+ label0:$stack3=this.table;
+ $stack3[bucket]=-2L;
+ $stack3=this.table;
+ bucket=(bucket+1);
+ $stack3[bucket]=-1L;
+ label2:return;
+ } 
+

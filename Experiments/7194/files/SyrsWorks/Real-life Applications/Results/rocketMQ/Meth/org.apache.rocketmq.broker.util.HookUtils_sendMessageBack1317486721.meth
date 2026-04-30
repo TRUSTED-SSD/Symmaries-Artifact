@@ -1,0 +1,33 @@
+static boolean org.apache.rocketmq.broker.util.HookUtils:sendMessageBack(org.apache.rocketmq.broker.BrokerController brokerController,java.util.List msgList,java.lang.String brokerName,java.lang.String brokerAddr)
+{
+java.util.Iterator it;
+  org.apache.rocketmq.common.message.MessageExt msg;
+  boolean $stack7;
+  java.lang.Object $stack8;
+  org.apache.rocketmq.broker.out.BrokerOuterAPI $stack9;
+  java.lang.Exception $stack12;
+  java.lang.Object[] $stack13;
+  org.apache.rocketmq.logging.org.slf4j.Logger $stack14;
+  label0:it = msgList.iterator();
+ label1:$stack7 = it.hasNext();
+ if ($stack7==0) goto label2;
+ $stack8 = it.next();
+ msg=(org.apache.rocketmq.common.message.MessageExt) $stack8;
+ msg.setWaitStoreMsgOK((boolean)0);
+ $stack9 = brokerController.getBrokerOuterAPI();
+ $stack9.sendMessageToSpecificBroker(brokerAddr,brokerName,msg,"InnerSendMessageBackGroup",3000L);
+ it.remove();
+ goto label1;
+ label2:goto label3;
+ label4:$stack12 = catch;
+ $stack14=org.apache.rocketmq.broker.util.HookUtils.LOG;
+ $stack13=new java.lang.Object[3];
+ $stack13[0]=brokerName;
+ $stack13[1]=brokerAddr;
+ $stack13[2]=$stack12;
+ $stack14.error("send message back to broker {} addr {} failed",$stack13);
+ return  0;
+ label3:return  1;
+ catch java.lang.Exception: label0 - label2 : label4;
+} 
+

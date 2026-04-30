@@ -1,0 +1,40 @@
+org.apache.rocketmq.proxy.service.route.AddressableMessageQueue org.apache.rocketmq.proxy.service.route.MessageQueueSelector:selectNextOne(org.apache.rocketmq.proxy.service.route.AddressableMessageQueue last)
+{
+boolean onlyBroker;
+  org.apache.rocketmq.proxy.service.route.AddressableMessageQueue newOne;
+  int count;
+  int i;
+  java.util.List $stack7;
+  java.lang.String $stack10;
+  java.lang.String $stack11;
+  boolean $stack12;
+  int $stack14;
+  int $stack15;
+  count = last.getQueueId();
+ if (count>=0) goto label0;
+ onlyBroker=1;
+ goto label1;
+ label0:onlyBroker=0;
+ label1:newOne=last;
+ if (onlyBroker==0) goto label2;
+ $stack7=this.brokerActingQueues;
+ count = $stack7.size();
+ goto label3;
+ label2:$stack7=this.queues;
+ count = $stack7.size();
+ label3:i=0;
+ label4:if (i>=count) goto label5;
+ newOne = this.selectOne(onlyBroker);
+ $stack10 = newOne.getBrokerName();
+ $stack11 = last.getBrokerName();
+ $stack12 = $stack10.equals((java.lang.Object)$stack11);
+ if ($stack12==0) goto label5;
+ $stack14 = newOne.getQueueId();
+ $stack15 = last.getQueueId();
+ if ($stack14==$stack15) goto label6;
+ goto label5;
+ label6:i=(i+1);
+ goto label4;
+ label5:return  newOne;
+ } 
+

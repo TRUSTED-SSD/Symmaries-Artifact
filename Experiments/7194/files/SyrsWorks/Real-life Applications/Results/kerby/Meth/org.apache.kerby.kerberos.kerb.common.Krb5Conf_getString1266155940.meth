@@ -1,0 +1,28 @@
+java.lang.String org.apache.kerby.kerberos.kerb.common.Krb5Conf:getString(org.apache.kerby.config.ConfigKey key,boolean useDefault,java.lang.String[] sections)
+{
+java.lang.String value;
+  int l6;
+  int l7;
+  java.lang.String section;
+  org.apache.kerby.config.Config subConfig;
+  java.lang.Object $stack12;
+  value = this.getString(key,(boolean)0);
+ if (value!=null) goto label0;
+ l6=#sections;
+ l7=0;
+ label1:if (l7>=l6) goto label0;
+ section=sections[l7];
+ subConfig = this.getConfig(section);
+ if (subConfig==null) goto label2;
+ value = subConfig.getString(key,(boolean)0);
+ if (value==null) goto label2;
+ goto label0;
+ label2:l7=(l7+1);
+ goto label1;
+ label0:if (value!=null) goto label3;
+ if (useDefault==0) goto label3;
+ $stack12 = key.getDefaultValue();
+ value=(java.lang.String) $stack12;
+ label3:return  value;
+ } 
+

@@ -1,0 +1,22 @@
+void org.apache.bookkeeper.statelib.impl.journal.AbstractStateStoreWithJournal:closeLocalStore()
+{
+org.apache.bookkeeper.statelib.api.StateStore $stack2;
+  org.apache.bookkeeper.statelib.api.exceptions.StateStoreException $stack5;
+  org.slf4j.Logger $stack6;
+  java.lang.String $stack8;
+  $stack2=this.localStore;
+ if (null!=$stack2) goto label0;
+ return;
+ label0:$stack2=this.localStore;
+ $stack2.flush();
+ label1:goto label2;
+ label3:$stack5 = catch;
+ $stack6=org.apache.bookkeeper.statelib.impl.journal.AbstractStateStoreWithJournal.log;
+ $stack8 = this.name();
+ $stack6.warn("Fail to flush local state store {}",(java.lang.Object)$stack8,(java.lang.Object)$stack5);
+ label2:$stack2=this.localStore;
+ $stack2.close();
+ return;
+ catch org.apache.bookkeeper.statelib.api.exceptions.StateStoreException: label0 - label1 : label3;
+} 
+

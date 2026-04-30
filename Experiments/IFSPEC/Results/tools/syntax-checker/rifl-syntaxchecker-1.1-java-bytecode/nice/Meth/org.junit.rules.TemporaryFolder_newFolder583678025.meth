@@ -1,0 +1,37 @@
+java.io.File org.junit.rules.TemporaryFolder:newFolder(java.lang.String[] folderNames)
+{
+java.io.File file;
+  int i;
+  java.lang.String folderName;
+  int $stack6;
+  java.io.File $stack7;
+  boolean $stack8;
+  java.io.IOException $stack12;
+  java.lang.StringBuilder $stack13;
+  file = this.getRoot();
+ i=0;
+ label0:$stack6=#folderNames;
+ if (i>=$stack6) goto label1;
+ folderName=folderNames[i];
+ this#org.junit.rules.TemporaryFolder:validateFolderName(folderName);
+ $stack7=new java.io.File;
+ $stack7#java.io.File(file,folderName);
+ file=$stack7;
+ $stack8 = $stack7.mkdir();
+ if ($stack8!=0) goto label2;
+ $stack8 = this#org.junit.rules.TemporaryFolder:isLastElementInArray(i,folderNames);
+ if ($stack8==0) goto label2;
+ $stack12=new java.io.IOException;
+ $stack13=new java.lang.StringBuilder;
+ $stack13#java.lang.StringBuilder();
+ $stack13 = $stack13.append("a folder with the name \'");
+ $stack13 = $stack13.append(folderName);
+ $stack13 = $stack13.append("\' already exists");
+ folderName = $stack13.toString();
+ $stack12#java.io.IOException(folderName);
+ throw $stack12;
+ label2:i=(i+1);
+ goto label0;
+ label1:return  file;
+ } 
+

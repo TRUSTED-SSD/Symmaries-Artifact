@@ -1,0 +1,48 @@
+org.apache.bookkeeper.bookie.ScanAndCompareGarbageCollector(org.apache.bookkeeper.meta.LedgerManager ledgerManager,org.apache.bookkeeper.bookie.CompactableLedgerStorage ledgerStorage,org.apache.bookkeeper.conf.ServerConfiguration conf,org.apache.bookkeeper.stats.StatsLogger statsLogger)
+{
+org.apache.bookkeeper.net.BookieId $stack5;
+  long $stack6;
+  byte $stack9;
+  int $stack10;
+  java.lang.Object[] $stack11;
+  boolean $stack12;
+  org.slf4j.Logger $stack13;
+  java.lang.Boolean $stack16;
+  java.lang.Long $stack19;
+  java.lang.Integer $stack22;
+  this#java.lang.Object();
+ this.ledgerManager=ledgerManager;
+ this.ledgerStorage=ledgerStorage;
+ this.conf=conf;
+ this.statsLogger=statsLogger;
+ $stack5 = org.apache.bookkeeper.bookie.BookieImpl.getBookieId(conf);
+ this.selfBookieAddress=$stack5;
+ $stack6 = conf.getGcOverreplicatedLedgerWaitTimeMillis();
+ this.gcOverReplicatedLedgerIntervalMillis=$stack6;
+ $stack6 = java.lang.System.currentTimeMillis();
+ this.lastOverReplicatedLedgerGcTimeMillis=$stack6;
+ $stack6=this.gcOverReplicatedLedgerIntervalMillis;
+ $stack9=($stack6 cmp 0L);
+ if ($stack9<=0) goto label0;
+ this.enableGcOverReplicatedLedger=1;
+ label0:$stack10 = conf.getGcOverreplicatedLedgerMaxConcurrentRequests();
+ this.maxConcurrentRequests=$stack10;
+ $stack13=org.apache.bookkeeper.bookie.ScanAndCompareGarbageCollector.LOG;
+ $stack11=new java.lang.Object[3];
+ $stack12=this.enableGcOverReplicatedLedger;
+ $stack16 = java.lang.Boolean.valueOf($stack12);
+ $stack11[0]=$stack16;
+ $stack6=this.gcOverReplicatedLedgerIntervalMillis;
+ $stack19 = java.lang.Long.valueOf($stack6);
+ $stack11[1]=$stack19;
+ $stack10=this.maxConcurrentRequests;
+ $stack22 = java.lang.Integer.valueOf($stack10);
+ $stack11[2]=$stack22;
+ dummyClass.lowSink("Over Replicated Ledger Deletion : enabled={}, interval={}, maxConcurrentRequests={}");
+$stack13.info("Over Replicated Ledger Deletion : enabled={}, interval={}, maxConcurrentRequests={}",$stack11);
+ $stack12 = conf.getVerifyMetadataOnGC();
+ this.verifyMetadataOnGc=$stack12;
+ this.activeLedgerCounter=0;
+ return;
+ } 
+

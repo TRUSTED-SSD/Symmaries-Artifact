@@ -1,0 +1,100 @@
+    void run()
+    {
+        org.junit.runner.notification.RunNotifier$SafeNotifier this;
+        int capacity;
+        java.util.ArrayList safeListeners, failures;
+        java.util.Iterator i$;
+        org.junit.runner.notification.RunListener listener;
+        java.util.List $stack7;
+        boolean $stack13;
+        org.junit.runner.notification.RunNotifier $stack14;
+        java.lang.Object $stack15;
+        java.lang.Exception $stack18;
+        org.junit.runner.notification.Failure $stack19;
+        org.junit.runner.Description $stack20;
+
+        this := @this: org.junit.runner.notification.RunNotifier$SafeNotifier;
+
+        $stack7 = this.<org.junit.runner.notification.RunNotifier$SafeNotifier: java.util.List currentListeners>;
+/*67*/
+
+        capacity = interfaceinvoke $stack7.<java.util.List: int size()>();
+/*67*/
+/*67*/
+
+        safeListeners = new java.util.ArrayList;
+/*68*/
+
+        specialinvoke safeListeners.<java.util.ArrayList: void <init>(int)>(capacity);
+/*68*/
+
+        failures = new java.util.ArrayList;
+/*69*/
+
+        specialinvoke failures.<java.util.ArrayList: void <init>(int)>(capacity);
+/*69*/
+
+        $stack7 = this.<org.junit.runner.notification.RunNotifier$SafeNotifier: java.util.List currentListeners>;
+/*70*/
+
+        i$ = interfaceinvoke $stack7.<java.util.List: java.util.Iterator iterator()>();
+/*70*/
+/*70*/
+
+     label1:
+        $stack13 = interfaceinvoke i$.<java.util.Iterator: boolean hasNext()>();
+/*70*/
+
+        if $stack13 == 0 goto label6;
+/*70*/
+
+        $stack15 = interfaceinvoke i$.<java.util.Iterator: java.lang.Object next()>();
+/*79*/
+
+        listener = (org.junit.runner.notification.RunListener) $stack15;
+/*79*/
+
+     label2:
+        virtualinvoke this.<org.junit.runner.notification.RunNotifier$SafeNotifier: void notifyListener(org.junit.runner.notification.RunListener)>(listener);
+/*72*/
+
+        virtualinvoke safeListeners.<java.util.ArrayList: boolean add(java.lang.Object)>(listener);
+/*73*/
+
+     label3:
+        goto label5;
+/*76*/
+
+     label4:
+        $stack18 := @caughtexception;
+/*76*/
+
+        $stack19 = new org.junit.runner.notification.Failure;
+/*75*/
+
+        $stack20 = <org.junit.runner.Description: org.junit.runner.Description TEST_MECHANISM>;
+/*75*/
+
+        specialinvoke $stack19.<org.junit.runner.notification.Failure: void <init>(org.junit.runner.Description,java.lang.Throwable)>($stack20, $stack18);
+/*75*/
+
+        virtualinvoke failures.<java.util.ArrayList: boolean add(java.lang.Object)>($stack19);
+/*75*/
+
+     label5:
+        goto label1;
+/*76*/
+
+     label6:
+        $stack14 = this.<org.junit.runner.notification.RunNotifier$SafeNotifier: org.junit.runner.notification.RunNotifier this$0>;
+/*78*/
+
+        staticinvoke <org.junit.runner.notification.RunNotifier: void access$100(org.junit.runner.notification.RunNotifier,java.util.List,java.util.List)>($stack14, safeListeners, failures);
+/*78*/
+
+        return;
+/*79*/
+
+        catch java.lang.Exception from label2 to label3 with label4;
+    }
+

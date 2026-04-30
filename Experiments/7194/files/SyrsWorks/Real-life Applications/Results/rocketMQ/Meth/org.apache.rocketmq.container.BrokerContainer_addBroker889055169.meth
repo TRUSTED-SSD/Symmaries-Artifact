@@ -1,0 +1,32 @@
+org.apache.rocketmq.container.InnerBrokerController org.apache.rocketmq.container.BrokerContainer:addBroker(org.apache.rocketmq.common.BrokerConfig brokerConfig,org.apache.rocketmq.store.config.MessageStoreConfig storeConfig)
+{
+boolean $stack3;
+  long $stack4;
+  byte $stack5;
+  org.apache.rocketmq.store.config.BrokerRole $stack8;
+  org.apache.rocketmq.store.config.BrokerRole $stack9;
+  org.apache.rocketmq.container.InnerSalveBrokerController $stack11;
+  org.apache.rocketmq.container.InnerBrokerController $stack16;
+  $stack3 = storeConfig.isEnableDLegerCommitLog();
+ if ($stack3==0) goto label0;
+ $stack16 = this.addDLedgerBroker(brokerConfig,storeConfig);
+ return  $stack16;
+ label0:$stack4 = brokerConfig.getBrokerId();
+ $stack5=($stack4 cmp 0L);
+ if ($stack5!=0) goto label1;
+ $stack8 = storeConfig.getBrokerRole();
+ $stack9=org.apache.rocketmq.store.config.BrokerRole.SLAVE;
+ if ($stack8==$stack9) goto label1;
+ $stack16 = this.addMasterBroker(brokerConfig,storeConfig);
+ return  $stack16;
+ label1:$stack4 = brokerConfig.getBrokerId();
+ $stack5=($stack4 cmp 0L);
+ if ($stack5==0) goto label2;
+ $stack8 = storeConfig.getBrokerRole();
+ $stack9=org.apache.rocketmq.store.config.BrokerRole.SLAVE;
+ if ($stack8!=$stack9) goto label2;
+ $stack11 = this.addSlaveBroker(brokerConfig,storeConfig);
+ return  $stack11;
+ label2:return  null;
+ } 
+

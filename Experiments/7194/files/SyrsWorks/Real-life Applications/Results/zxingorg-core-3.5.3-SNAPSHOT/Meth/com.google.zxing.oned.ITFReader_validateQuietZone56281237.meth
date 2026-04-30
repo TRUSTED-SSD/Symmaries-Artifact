@@ -1,0 +1,23 @@
+void com.google.zxing.oned.ITFReader:validateQuietZone(com.google.zxing.common.BitArray row,int startPattern)
+{
+int quietCount;
+  com.google.zxing.NotFoundException $stack7;
+  boolean $stack9;
+  quietCount=this.narrowLineWidth;
+ quietCount=(quietCount * 10);
+ quietCount = java.lang.Math.min(quietCount,startPattern);
+ startPattern=(startPattern-1);
+ label0:if (quietCount<=0) goto label1;
+ if (startPattern<0) goto label1;
+ $stack9 = row.get(startPattern);
+ if ($stack9==0) goto label2;
+ goto label1;
+ label2:quietCount=(quietCount+-1);
+ startPattern=(startPattern+-1);
+ goto label0;
+ label1:if (quietCount==0) goto label3;
+ $stack7 = com.google.zxing.NotFoundException.getNotFoundInstance();
+ throw $stack7;
+ label3:return;
+ } 
+

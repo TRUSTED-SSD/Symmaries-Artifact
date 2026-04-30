@@ -1,0 +1,34 @@
+void org.apache.rocketmq.broker.controller.ReplicasManager:updateControllerAddr()
+{
+java.lang.String controllerPaths;
+  java.lang.String[] controllers;
+  org.apache.rocketmq.common.BrokerConfig $stack3;
+  boolean $stack4;
+  java.util.List $stack9;
+  int $stack10;
+  java.lang.AssertionError $stack13;
+  org.apache.rocketmq.broker.out.BrokerOuterAPI $stack15;
+  $stack3=this.brokerConfig;
+ $stack4 = $stack3.isFetchControllerAddrByDnsLookup();
+ if ($stack4==0) goto label0;
+ $stack15=this.brokerOuterAPI;
+ $stack3=this.brokerConfig;
+ controllerPaths = $stack3.getControllerAddr();
+ $stack9 = $stack15.dnsLookupAddressByDomain(controllerPaths);
+ this.controllerAddresses=$stack9;
+ goto label1;
+ label0:$stack3=this.brokerConfig;
+ controllerPaths = $stack3.getControllerAddr();
+ controllers = controllerPaths.split(";");
+ $stack4=org.apache.rocketmq.broker.controller.ReplicasManager.$assertionsDisabled;
+ if ($stack4!=0) goto label2;
+ $stack10=#controllers;
+ if ($stack10>0) goto label2;
+ $stack13=new java.lang.AssertionError;
+ $stack13#java.lang.AssertionError();
+ throw $stack13;
+ label2:$stack9 = java.util.Arrays.asList((java.lang.Object[])controllers);
+ this.controllerAddresses=$stack9;
+ label1:return;
+ } 
+

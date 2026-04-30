@@ -1,0 +1,49 @@
+java.util.EnumSet org.apache.bookkeeper.bookie.storage.ldb.SingleDirectoryDbLedgerStorage:getStorageStateFlags()
+{
+int flags;
+  java.util.EnumSet flagsEnum;
+  java.util.Iterator l3;
+  java.util.Map$Entry e;
+  int value;
+  org.apache.bookkeeper.bookie.storage.ldb.LedgerMetadataIndex $stack6;
+  java.util.Map $stack9;
+  java.util.Set $stack10;
+  boolean $stack12;
+  java.lang.StringBuilder $stack13;
+  java.lang.String $stack17;
+  java.lang.Object $stack22;
+  java.lang.Integer $stack24;
+  int $stack26;
+  $stack6=this.ledgerIndex;
+ flags = $stack6.getStorageStateFlags();
+ flagsEnum = java.util.EnumSet.noneOf(org.apache.bookkeeper.bookie.LedgerStorage$StorageState);
+ $stack9=org.apache.bookkeeper.bookie.storage.ldb.SingleDirectoryDbLedgerStorage.stateBitmaps;
+ $stack10 = $stack9.entrySet();
+ l3 = $stack10.iterator();
+ label0:$stack12 = l3.hasNext();
+ if ($stack12==0) goto label1;
+ $stack22 = l3.next();
+ e=(java.util.Map$Entry) $stack22;
+ $stack22 = e.getValue();
+ $stack24=(java.lang.Integer) $stack22;
+ value = $stack24.intValue();
+ $stack26=(flags & value);
+ if ($stack26!=value) goto label2;
+ $stack22 = e.getKey();
+ flagsEnum.add($stack22);
+ label2:value=(!value & -1) |(!-1 & value);
+ flags=(flags & value);
+ goto label0;
+ label1:if (flags!=0) goto label3;
+ $stack12=1;
+ goto label4;
+ label3:$stack12=0;
+ label4:$stack13=new java.lang.StringBuilder;
+ $stack13#java.lang.StringBuilder();
+ $stack13 = $stack13.append("Unknown storage state flag found ");
+ $stack13 = $stack13.append(flags);
+ $stack17 = $stack13.toString();
+ com.google.common.base.Preconditions.checkState($stack12,(java.lang.Object)$stack17);
+ return  flagsEnum;
+ } 
+

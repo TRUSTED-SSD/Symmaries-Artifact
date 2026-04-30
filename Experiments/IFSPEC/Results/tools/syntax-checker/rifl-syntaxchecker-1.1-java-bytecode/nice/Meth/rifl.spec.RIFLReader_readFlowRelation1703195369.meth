@@ -1,0 +1,49 @@
+void rifl.spec.RIFLReader:readFlowRelation(org.w3c.dom.Document doc,java.util.Map flowRelation)
+{
+org.w3c.dom.Element flowrelationElem;
+  java.util.Iterator l5;
+  rifl.spec.Domain from;
+  rifl.spec.Domain to;
+  org.w3c.dom.NodeList $stack9;
+  java.lang.Iterable $stack10;
+  boolean $stack12;
+  java.lang.Object $stack13;
+  java.util.Map $stack14;
+  java.lang.String $stack15;
+  java.util.Set $stack22;
+  java.lang.Object[] $stack25;
+  java.util.LinkedHashSet $stack27;
+  flowrelationElem = rifl.spec.RIFLReader.getElement(doc,"flowrelation");
+ $stack9 = flowrelationElem.getChildNodes();
+ $stack10 = rifl.spec.RIFLReader.getElementList($stack9);
+ l5 = $stack10.iterator();
+ goto label0;
+ label1:$stack13 = l5.next();
+ flowrelationElem=(org.w3c.dom.Element) $stack13;
+ $stack14=this.domains;
+ $stack15 = flowrelationElem.getAttribute("from");
+ $stack13 = $stack14.get((java.lang.Object)$stack15);
+ from=(rifl.spec.Domain) $stack13;
+ $stack14=this.domains;
+ $stack15 = flowrelationElem.getAttribute("to");
+ $stack13 = $stack14.get((java.lang.Object)$stack15);
+ to=(rifl.spec.Domain) $stack13;
+ $stack12 = flowRelation.containsKey((java.lang.Object)from);
+ if ($stack12!=0) goto label2;
+ $stack27=new java.util.LinkedHashSet;
+ $stack27#java.util.LinkedHashSet();
+ flowRelation.put((java.lang.Object)from,(java.lang.Object)$stack27);
+ label2:$stack13 = flowRelation.get((java.lang.Object)from);
+ $stack22=(java.util.Set) $stack13;
+ $stack12 = $stack22.add((java.lang.Object)to);
+ if ($stack12!=0) goto label0;
+ $stack25=new java.lang.Object[2];
+ $stack25[0]=from;
+ $stack25[1]=to;
+ $stack15 = java.lang.String.format("Duplicate flow in flow relation: (%s, %s). Duplicate ignored.",$stack25);
+ rifl.spec.RIFLReader.warn($stack15);
+ label0:$stack12 = l5.hasNext();
+ if ($stack12!=0) goto label1;
+ return;
+ } 
+

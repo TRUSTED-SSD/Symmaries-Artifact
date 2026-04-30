@@ -1,0 +1,57 @@
+int org.apache.bookkeeper.common.collections.BatchedArrayBlockingQueue:internalPutAll(java.lang.Object[] a,int offset,int len)
+{
+int availableCapacity;
+  int firstSpan;
+  int secondSpan;
+  java.lang.Throwable l10;
+  java.util.concurrent.locks.ReentrantLock $stack11;
+  java.lang.Object[] $stack20;
+  java.util.concurrent.locks.Condition $stack26;
+  $stack11=this.lock;
+ $stack11.lockInterruptibly();
+ label0:secondSpan=this.size;
+ availableCapacity=this.capacity;
+ if (secondSpan!=availableCapacity) goto label1;
+ $stack26=this.notFull;
+ $stack26.await();
+ goto label0;
+ label1:secondSpan=this.capacity;
+ availableCapacity=this.size;
+ availableCapacity=(secondSpan-availableCapacity);
+ len = java.lang.Math.min(availableCapacity,len);
+ availableCapacity=this.producerIdx;
+ secondSpan=this.capacity;
+ secondSpan=(secondSpan-availableCapacity);
+ firstSpan = java.lang.Math.min(len,secondSpan);
+ $stack20=this.data;
+ java.lang.System.arraycopy((java.lang.Object)a,offset,(java.lang.Object)$stack20,availableCapacity,firstSpan);
+ availableCapacity=(availableCapacity+firstSpan);
+ secondSpan=(len-firstSpan);
+ if (secondSpan<=0) goto label2;
+ offset=(offset+firstSpan);
+ $stack20=this.data;
+ java.lang.System.arraycopy((java.lang.Object)a,offset,(java.lang.Object)$stack20,0,secondSpan);
+ availableCapacity=secondSpan;
+ label2:offset=this.capacity;
+ if (availableCapacity!=offset) goto label3;
+ availableCapacity=0;
+ label3:this.producerIdx=availableCapacity;
+ offset=this.size;
+ if (offset!=0) goto label4;
+ $stack26=this.notEmpty;
+ $stack26.signalAll();
+ label4:offset=this.size;
+ offset=(offset+len);
+ this.size=offset;
+ offset=len;
+ label5:$stack11=this.lock;
+ $stack11.unlock();
+ return  len;
+ label6:l10 = catch;
+ label7:$stack11=this.lock;
+ $stack11.unlock();
+ throw l10;
+ catch java.lang.Throwable: label0 - label5 : label6;
+catch java.lang.Throwable: label6 - label7 : label6;
+} 
+

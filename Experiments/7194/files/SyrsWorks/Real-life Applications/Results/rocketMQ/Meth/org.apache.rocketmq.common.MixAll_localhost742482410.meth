@@ -1,0 +1,33 @@
+static java.lang.String org.apache.rocketmq.common.MixAll:localhost()
+{
+java.lang.Throwable e;
+  java.io.Serializable candidatesHost;
+  java.net.InetAddress $stack2;
+  java.lang.String $stack3;
+  java.lang.StringBuilder $stack7;
+  java.lang.Exception $stack12;
+  java.lang.RuntimeException tmp$2090808851;
+  label0:$stack2 = java.net.InetAddress.getLocalHost();
+ $stack3 = $stack2.getHostAddress();
+ label1:return  $stack3;
+ label2:e = catch;
+ label3:candidatesHost = org.apache.rocketmq.common.MixAll.getLocalhostByNetworkInterface();
+ if (candidatesHost==null) goto label4;
+ label5:$stack3=(java.lang.String) candidatesHost;
+ return  $stack3;
+ label4:goto label6;
+ label7:$stack12 = catch;
+ candidatesHost=$stack12;
+ label6:tmp$2090808851=new java.lang.RuntimeException;
+ $stack7=new java.lang.StringBuilder;
+ $stack7#java.lang.StringBuilder();
+ $stack7 = $stack7.append("InetAddress java.net.InetAddress.getLocalHost() throws UnknownHostException");
+ $stack3 = org.apache.rocketmq.common.help.FAQUrl.suggestTodo("https://rocketmq.apache.org/docs/bestPractice/06FAQ");
+ $stack7 = $stack7.append($stack3);
+ $stack3 = $stack7.toString();
+ tmp$2090808851#java.lang.RuntimeException($stack3,e);
+ throw tmp$2090808851;
+ catch java.lang.Throwable: label0 - label1 : label2;
+catch java.lang.Exception: label3 - label5 : label7;
+} 
+

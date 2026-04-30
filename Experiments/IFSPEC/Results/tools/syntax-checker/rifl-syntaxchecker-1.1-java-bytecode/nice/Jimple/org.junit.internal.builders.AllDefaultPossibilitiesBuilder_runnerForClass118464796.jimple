@@ -1,0 +1,93 @@
+    public org.junit.runner.Runner runnerForClass(java.lang.Class) throws java.lang.Throwable
+    {
+        org.junit.internal.builders.AllDefaultPossibilitiesBuilder this;
+        java.lang.Class testClass;
+        java.util.List builders;
+        java.util.Iterator i$;
+        org.junit.runners.model.RunnerBuilder each;
+        org.junit.runner.Runner runner;
+        org.junit.runners.model.RunnerBuilder[] $stack6;
+        org.junit.internal.builders.IgnoredBuilder $stack8;
+        org.junit.internal.builders.AnnotatedBuilder $stack10;
+        org.junit.internal.builders.JUnit3Builder $stack14;
+        org.junit.internal.builders.JUnit4Builder $stack16;
+        boolean $stack19;
+        java.lang.Object $stack20;
+
+        this := @this: org.junit.internal.builders.AllDefaultPossibilitiesBuilder;
+
+        testClass := @parameter0: java.lang.Class;
+
+        $stack6 = newarray (org.junit.runners.model.RunnerBuilder)[5];
+/*18*/
+
+        $stack8 = virtualinvoke this.<org.junit.internal.builders.AllDefaultPossibilitiesBuilder: org.junit.internal.builders.IgnoredBuilder ignoredBuilder()>();
+/*18*/
+
+        $stack6[0] = $stack8;
+/*18*/
+
+        $stack10 = virtualinvoke this.<org.junit.internal.builders.AllDefaultPossibilitiesBuilder: org.junit.internal.builders.AnnotatedBuilder annotatedBuilder()>();
+/*18*/
+
+        $stack6[1] = $stack10;
+/*18*/
+
+        each = virtualinvoke this.<org.junit.internal.builders.AllDefaultPossibilitiesBuilder: org.junit.runners.model.RunnerBuilder suiteMethodBuilder()>();
+/*18*/
+
+        $stack6[2] = each;
+/*18*/
+
+        $stack14 = virtualinvoke this.<org.junit.internal.builders.AllDefaultPossibilitiesBuilder: org.junit.internal.builders.JUnit3Builder junit3Builder()>();
+/*18*/
+
+        $stack6[3] = $stack14;
+/*18*/
+
+        $stack16 = virtualinvoke this.<org.junit.internal.builders.AllDefaultPossibilitiesBuilder: org.junit.internal.builders.JUnit4Builder junit4Builder()>();
+/*18*/
+
+        $stack6[4] = $stack16;
+/*18*/
+
+        builders = staticinvoke <java.util.Arrays: java.util.List asList(java.lang.Object[])>($stack6);
+/*18*/
+/*18*/
+
+        i$ = interfaceinvoke builders.<java.util.List: java.util.Iterator iterator()>();
+/*25*/
+/*25*/
+
+     label1:
+        $stack19 = interfaceinvoke i$.<java.util.Iterator: boolean hasNext()>();
+/*25*/
+
+        if $stack19 == 0 goto label3;
+/*25*/
+
+        $stack20 = interfaceinvoke i$.<java.util.Iterator: java.lang.Object next()>();
+/*31*/
+
+        each = (org.junit.runners.model.RunnerBuilder) $stack20;
+/*31*/
+
+        runner = virtualinvoke each.<org.junit.runners.model.RunnerBuilder: org.junit.runner.Runner safeRunnerForClass(java.lang.Class)>(testClass);
+/*26*/
+/*26*/
+
+        if runner == null goto label2;
+/*27*/
+
+        return runner;
+/*28*/
+
+     label2:
+        goto label1;
+/*30*/
+
+     label3:
+        return null;
+/*31*/
+    }
+

@@ -1,0 +1,10 @@
+org.apache.kerby.kerberos.kerb.type.ad.AuthorizationData org.apache.kerby.kerberos.kerb.server.request.TicketIssuer:makeAuthorizationData (
+  org.apache.kerby.kerberos.kerb.server.request.KdcRequest kdcRequest,
+  org.apache.kerby.kerberos.kerb.type.ticket.EncTicketPart encTicketPart) {
+  guard = pc ⊔ level(kdcRequest) ⊔ level(this) ⊔ obj_level(kdcRequest) ⊔ obj_level(this) = ⊥;
+  ret(level()) = ⊥;
+  ret(obj_level()) = ⊤;
+  ret(obj_level(encTicketPart)) = ⊤;
+  ret(obj_level(kdcRequest)) = ⊤;
+  ret(obj_level(this)) = ⊤;
+}

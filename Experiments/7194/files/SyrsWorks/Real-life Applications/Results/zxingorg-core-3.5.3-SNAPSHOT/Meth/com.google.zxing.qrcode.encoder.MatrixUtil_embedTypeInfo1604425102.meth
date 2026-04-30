@@ -1,0 +1,41 @@
+static void com.google.zxing.qrcode.encoder.MatrixUtil:embedTypeInfo(com.google.zxing.qrcode.decoder.ErrorCorrectionLevel ecLevel,int maskPattern,com.google.zxing.qrcode.encoder.ByteMatrix matrix)
+{
+com.google.zxing.common.BitArray typeInfoBits;
+  boolean bit;
+  int[] coordinates;
+  int x1;
+  int y1;
+  int[][] $stack17;
+  int $stack20;
+  typeInfoBits=new com.google.zxing.common.BitArray;
+ typeInfoBits#com.google.zxing.common.BitArray();
+ com.google.zxing.qrcode.encoder.MatrixUtil.makeTypeInfoBits(ecLevel,maskPattern,typeInfoBits);
+ maskPattern=0;
+ label0:x1 = typeInfoBits.getSize();
+ if (maskPattern>=x1) goto label1;
+ x1 = typeInfoBits.getSize();
+ x1=(x1-1);
+ x1=(x1-maskPattern);
+ bit = typeInfoBits.get(x1);
+ $stack17=com.google.zxing.qrcode.encoder.MatrixUtil.TYPE_INFO_COORDINATES;
+ coordinates=$stack17[maskPattern];
+ x1=coordinates[0];
+ y1=coordinates[1];
+ matrix.set(x1,y1,bit);
+ if (maskPattern>=8) goto label2;
+ x1 = matrix.getWidth();
+ x1=(x1-maskPattern);
+ x1=(x1-1);
+ y1=8;
+ goto label3;
+ label2:x1=8;
+ y1 = matrix.getHeight();
+ $stack20=(y1-7);
+ y1=(maskPattern-8);
+ y1=($stack20+y1);
+ label3:matrix.set(x1,y1,bit);
+ maskPattern=(maskPattern+1);
+ goto label0;
+ label1:return;
+ } 
+

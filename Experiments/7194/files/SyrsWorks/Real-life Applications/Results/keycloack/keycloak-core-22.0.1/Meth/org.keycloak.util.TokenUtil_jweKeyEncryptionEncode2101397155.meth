@@ -1,0 +1,15 @@
+static java.lang.String org.keycloak.util.TokenUtil:jweKeyEncryptionEncode(java.security.Key encryptionKEK,byte[] contentBytes,org.keycloak.jose.jwe.JWEHeader jweHeader,org.keycloak.jose.jwe.alg.JWEAlgorithmProvider jweAlgorithmProvider,org.keycloak.jose.jwe.enc.JWEEncryptionProvider jweEncryptionProvider)
+{
+org.keycloak.jose.jwe.JWE jwe;
+  java.lang.String encodedContent;
+  org.keycloak.jose.jwe.JWEKeyStorage $stack10;
+  jwe=new org.keycloak.jose.jwe.JWE;
+ jwe#org.keycloak.jose.jwe.JWE();
+ jwe = jwe.header(jweHeader);
+ jwe = jwe.content(contentBytes);
+ $stack10 = jwe.getKeyStorage();
+ $stack10.setEncryptionKey(encryptionKEK);
+ encodedContent = jwe.encodeJwe(jweAlgorithmProvider,jweEncryptionProvider);
+ return  encodedContent;
+ } 
+

@@ -1,0 +1,31 @@
+java.lang.String org.apache.bookkeeper.stats.AlertStatsLogger:format(java.lang.String @msg)
+{
+boolean $stack2;
+  java.lang.StringBuilder $stack3;
+  java.lang.String $stack5;
+  java.lang.StringBuilder $stack9;
+  java.lang.String msg;
+msg=@msg;
+$stack2 = msg.startsWith("ALERT!: ");
+ if ($stack2==0) goto label0;
+ goto label1;
+ label0:$stack3=new java.lang.StringBuilder;
+ $stack3#java.lang.StringBuilder();
+ $stack3 = $stack3.append("ALERT!: ");
+ $stack5=this.scope;
+ if ($stack5==null) goto label2;
+ $stack9=new java.lang.StringBuilder;
+ $stack9#java.lang.StringBuilder();
+ $stack9 = $stack9.append("(");
+ $stack5=this.scope;
+ $stack9 = $stack9.append($stack5);
+ $stack9 = $stack9.append("):");
+ $stack5 = $stack9.toString();
+ goto label3;
+ label2:$stack5="";
+ label3:$stack3 = $stack3.append($stack5);
+ $stack3 = $stack3.append(msg);
+ msg = $stack3.toString();
+ label1:return  msg;
+ } 
+

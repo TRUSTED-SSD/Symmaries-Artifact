@@ -1,0 +1,121 @@
+    private void validateParameterSupplier(java.lang.Class, java.util.List)
+    {
+        org.junit.experimental.theories.Theories this;
+        java.lang.Class supplierClass, $stack10;
+        java.util.List errors;
+        java.lang.reflect.Constructor[] constructors;
+        java.lang.Class[] paramTypes;
+        int $stack6;
+        java.lang.reflect.Constructor $stack7;
+        boolean $stack11;
+        java.lang.Error $stack12;
+        java.lang.StringBuilder $stack13;
+        java.lang.String $stack15;
+
+        this := @this: org.junit.experimental.theories.Theories;
+
+        supplierClass := @parameter0: java.lang.Class;
+
+        errors := @parameter1: java.util.List;
+
+        constructors = virtualinvoke supplierClass.<java.lang.Class: java.lang.reflect.Constructor[] getConstructors()>();
+/*140*/
+/*140*/
+
+        $stack6 = lengthof constructors;
+/*142*/
+
+        if $stack6 == 1 goto label1;
+/*142*/
+
+        $stack12 = new java.lang.Error;
+/*143*/
+
+        $stack13 = new java.lang.StringBuilder;
+/*143*/
+
+        specialinvoke $stack13.<java.lang.StringBuilder: void <init>()>();
+/*143*/
+
+        $stack13 = virtualinvoke $stack13.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>("ParameterSupplier ");
+/*143*/
+
+        $stack15 = virtualinvoke supplierClass.<java.lang.Class: java.lang.String getName()>();
+/*143*/
+
+        $stack13 = virtualinvoke $stack13.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>($stack15);
+/*143*/
+
+        $stack13 = virtualinvoke $stack13.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>(" must have only one constructor (either empty or taking only a TestClass)");
+/*143*/
+
+        $stack15 = virtualinvoke $stack13.<java.lang.StringBuilder: java.lang.String toString()>();
+/*143*/
+
+        specialinvoke $stack12.<java.lang.Error: void <init>(java.lang.String)>($stack15);
+/*143*/
+
+        interfaceinvoke errors.<java.util.List: boolean add(java.lang.Object)>($stack12);
+/*143*/
+
+        goto label2;
+/*143*/
+
+     label1:
+        $stack7 = constructors[0];
+/*146*/
+
+        paramTypes = virtualinvoke $stack7.<java.lang.reflect.Constructor: java.lang.Class[] getParameterTypes()>();
+/*146*/
+/*146*/
+
+        $stack6 = lengthof paramTypes;
+/*147*/
+
+        if $stack6 == 0 goto label2;
+/*147*/
+
+        $stack10 = paramTypes[0];
+/*152*/
+
+        $stack11 = virtualinvoke $stack10.<java.lang.Object: boolean equals(java.lang.Object)>(class "Lorg/junit/runners/model/TestClass;");
+/*152*/
+
+        if $stack11 != 0 goto label2;
+/*152*/
+
+        $stack12 = new java.lang.Error;
+/*148*/
+
+        $stack13 = new java.lang.StringBuilder;
+/*148*/
+
+        specialinvoke $stack13.<java.lang.StringBuilder: void <init>()>();
+/*148*/
+
+        $stack13 = virtualinvoke $stack13.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>("ParameterSupplier ");
+/*148*/
+
+        $stack15 = virtualinvoke supplierClass.<java.lang.Class: java.lang.String getName()>();
+/*148*/
+
+        $stack13 = virtualinvoke $stack13.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>($stack15);
+/*148*/
+
+        $stack13 = virtualinvoke $stack13.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>(" constructor must take either nothing or a single TestClass instance");
+/*148*/
+
+        $stack15 = virtualinvoke $stack13.<java.lang.StringBuilder: java.lang.String toString()>();
+/*148*/
+
+        specialinvoke $stack12.<java.lang.Error: void <init>(java.lang.String)>($stack15);
+/*148*/
+
+        interfaceinvoke errors.<java.util.List: boolean add(java.lang.Object)>($stack12);
+/*148*/
+
+     label2:
+        return;
+/*152*/
+    }
+

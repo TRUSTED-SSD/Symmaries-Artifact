@@ -1,0 +1,27 @@
+void org.apache.bookkeeper.client.LedgerHandle:asyncReadUnconfirmedEntries(long firstEntry,long lastEntry,org.apache.bookkeeper.client.AsyncCallback$ReadCallback cb,java.lang.Object ctx)
+{
+byte $stack7;
+  java.lang.Object[] $stack8;
+  long $stack9;
+  org.slf4j.Logger $stack10;
+  java.lang.Long $stack13;
+  $stack7=(firstEntry cmp 0L);
+ if ($stack7<0) goto label0;
+ $stack7=(firstEntry cmp lastEntry);
+ if ($stack7<=0) goto label1;
+ label0:$stack10=org.apache.bookkeeper.client.LedgerHandle.LOG;
+ $stack8=new java.lang.Object[3];
+ $stack9=this.ledgerId;
+ $stack13 = java.lang.Long.valueOf($stack9);
+ $stack8[0]=$stack13;
+ $stack13 = java.lang.Long.valueOf(firstEntry);
+ $stack8[1]=$stack13;
+ $stack13 = java.lang.Long.valueOf(lastEntry);
+ $stack8[2]=$stack13;
+ $stack10.error("IncorrectParameterException on ledgerId:{} firstEntry:{} lastEntry:{}",$stack8);
+ cb.readComplete(-14,this,null,ctx);
+ return;
+ label1:this#org.apache.bookkeeper.client.LedgerHandle(firstEntry,lastEntry,cb,ctx,0);
+ return;
+ } 
+

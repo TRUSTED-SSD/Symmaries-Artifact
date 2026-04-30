@@ -1,0 +1,105 @@
+    private void findLeaves(org.junit.runner.Description, org.junit.runner.Description, java.util.List)
+    {
+        org.junit.experimental.max.MaxCore this;
+        org.junit.runner.Description parent, description;
+        java.util.List results;
+        java.util.Iterator i$;
+        java.util.ArrayList $stack6;
+        boolean $stack7;
+        java.lang.Object $stack11;
+        java.lang.String $stack13;
+        java.lang.StringBuilder $stack16;
+        java.lang.'annotation'.Annotation[] $stack20;
+
+        this := @this: org.junit.experimental.max.MaxCore;
+
+        parent := @parameter0: org.junit.runner.Description;
+
+        description := @parameter1: org.junit.runner.Description;
+
+        results := @parameter2: java.util.List;
+
+        $stack6 = virtualinvoke description.<org.junit.runner.Description: java.util.ArrayList getChildren()>();
+/*169*/
+
+        $stack7 = virtualinvoke $stack6.<java.util.ArrayList: boolean isEmpty()>();
+/*169*/
+
+        if $stack7 == 0 goto label2;
+/*169*/
+
+        $stack13 = virtualinvoke description.<org.junit.runner.Description: java.lang.String toString()>();
+/*170*/
+
+        $stack7 = virtualinvoke $stack13.<java.lang.String: boolean equals(java.lang.Object)>("warning(junit.framework.TestSuite$1)");
+/*170*/
+
+        if $stack7 == 0 goto label1;
+/*170*/
+
+        $stack16 = new java.lang.StringBuilder;
+/*171*/
+
+        specialinvoke $stack16.<java.lang.StringBuilder: void <init>()>();
+/*171*/
+
+        $stack16 = virtualinvoke $stack16.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>("malformed JUnit 3 test class: ");
+/*171*/
+
+        $stack16 = virtualinvoke $stack16.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.Object)>(parent);
+/*171*/
+
+        $stack13 = virtualinvoke $stack16.<java.lang.StringBuilder: java.lang.String toString()>();
+/*171*/
+
+        $stack20 = newarray (java.lang.'annotation'.Annotation)[0];
+/*171*/
+
+        parent = staticinvoke <org.junit.runner.Description: org.junit.runner.Description createSuiteDescription(java.lang.String,java.lang.'annotation'.Annotation[])>($stack13, $stack20);
+/*171*/
+
+        interfaceinvoke results.<java.util.List: boolean add(java.lang.Object)>(parent);
+/*171*/
+
+        goto label4;
+/*171*/
+
+     label1:
+        interfaceinvoke results.<java.util.List: boolean add(java.lang.Object)>(description);
+/*173*/
+
+        goto label4;
+/*173*/
+
+     label2:
+        $stack6 = virtualinvoke description.<org.junit.runner.Description: java.util.ArrayList getChildren()>();
+/*176*/
+
+        i$ = virtualinvoke $stack6.<java.util.ArrayList: java.util.Iterator iterator()>();
+/*176*/
+/*176*/
+
+     label3:
+        $stack7 = interfaceinvoke i$.<java.util.Iterator: boolean hasNext()>();
+/*176*/
+
+        if $stack7 == 0 goto label4;
+/*176*/
+
+        $stack11 = interfaceinvoke i$.<java.util.Iterator: java.lang.Object next()>();
+/*180*/
+
+        parent = (org.junit.runner.Description) $stack11;
+/*180*/
+
+        specialinvoke this.<org.junit.experimental.max.MaxCore: void findLeaves(org.junit.runner.Description,org.junit.runner.Description,java.util.List)>(description, parent, results);
+/*177*/
+
+        goto label3;
+/*177*/
+
+     label4:
+        return;
+/*180*/
+    }
+

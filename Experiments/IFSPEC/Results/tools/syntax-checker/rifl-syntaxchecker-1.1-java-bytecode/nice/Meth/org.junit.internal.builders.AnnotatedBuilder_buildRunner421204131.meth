@@ -1,0 +1,46 @@
+org.junit.runner.Runner org.junit.internal.builders.AnnotatedBuilder:buildRunner(java.lang.Class runnerClass,java.lang.Class testClass)
+{
+java.lang.NoSuchMethodException e;
+  java.lang.String simpleName;
+  java.lang.Class[] $stack6;
+  java.lang.reflect.Constructor $stack7;
+  java.lang.Object[] $stack8;
+  java.lang.Object $stack9;
+  org.junit.runner.Runner $stack10;
+  java.lang.NoSuchMethodException $stack11;
+  org.junit.runners.model.InitializationError $stack13;
+  org.junit.runners.model.RunnerBuilder $stack20;
+  label0:$stack6=new java.lang.Class[1];
+ $stack6[0]=java.lang.Class;
+ $stack7 = runnerClass.getConstructor($stack6);
+ $stack8=new java.lang.Object[1];
+ $stack8[0]=testClass;
+ $stack9 = $stack7.newInstance($stack8);
+ $stack10=(org.junit.runner.Runner) $stack9;
+ label1:return  $stack10;
+ label2:e = catch;
+ label3:$stack6=new java.lang.Class[2];
+ $stack6[0]=java.lang.Class;
+ $stack6[1]=org.junit.runners.model.RunnerBuilder;
+ $stack7 = runnerClass.getConstructor($stack6);
+ $stack8=new java.lang.Object[2];
+ $stack8[0]=testClass;
+ $stack20=this.suiteBuilder;
+ $stack8[1]=$stack20;
+ $stack9 = $stack7.newInstance($stack8);
+ $stack10=(org.junit.runner.Runner) $stack9;
+ label4:return  $stack10;
+ label5:$stack11 = catch;
+ e=$stack11;
+ simpleName = runnerClass.getSimpleName();
+ $stack13=new org.junit.runners.model.InitializationError;
+ $stack8=new java.lang.Object[2];
+ $stack8[0]=simpleName;
+ $stack8[1]=simpleName;
+ simpleName = java.lang.String.format("Custom runner class %s should have a public constructor with signature %s(Class testClass)",$stack8);
+ $stack13#org.junit.runners.model.InitializationError(simpleName);
+ throw $stack13;
+ catch java.lang.NoSuchMethodException: label0 - label1 : label2;
+catch java.lang.NoSuchMethodException: label3 - label4 : label5;
+} 
+

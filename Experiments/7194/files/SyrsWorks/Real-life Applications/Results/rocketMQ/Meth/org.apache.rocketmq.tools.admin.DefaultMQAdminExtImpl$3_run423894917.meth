@@ -1,0 +1,54 @@
+void org.apache.rocketmq.tools.admin.DefaultMQAdminExtImpl$3:run()
+{
+org.apache.rocketmq.tools.admin.DefaultMQAdminExtImpl $stack3;
+  org.apache.rocketmq.client.impl.factory.MQClientInstance $stack4;
+  org.apache.rocketmq.client.impl.MQClientAPIImpl $stack5;
+  java.lang.String $stack7;
+  java.lang.String $stack8;
+  long $stack9;
+  java.util.List $stack11;
+  java.util.concurrent.CountDownLatch $stack13;
+  java.lang.Exception $stack14;
+  org.apache.rocketmq.logging.org.slf4j.Logger $stack16;
+  java.lang.Object[] $stack17;
+  java.lang.Throwable $stack24;
+  label0:$stack3=this.this$0;
+ $stack4 = org.apache.rocketmq.tools.admin.DefaultMQAdminExtImpl.access$100($stack3);
+ $stack5 = $stack4.getMQClientAPIImpl();
+ $stack7=this.val$addr;
+ $stack8=this.val$topic;
+ $stack3=this.this$0;
+ $stack9 = org.apache.rocketmq.tools.admin.DefaultMQAdminExtImpl.access$000($stack3);
+ $stack5.deleteTopicInBroker($stack7,$stack8,$stack9);
+ $stack11=this.val$successList;
+ $stack7=this.val$addr;
+ $stack11.add((java.lang.Object)$stack7);
+ label1:$stack13=this.val$latch;
+ $stack13.countDown();
+ goto label2;
+ label3:$stack14 = catch;
+ $stack3=this.this$0;
+ $stack16 = org.apache.rocketmq.tools.admin.DefaultMQAdminExtImpl.access$200($stack3);
+ $stack17=new java.lang.Object[3];
+ $stack7=this.val$topic;
+ $stack17[0]=$stack7;
+ $stack7=this.val$addr;
+ $stack17[1]=$stack7;
+ $stack17[2]=$stack14;
+ $stack16.error("deleteTopicInBroker error. topic={}, broker={}",$stack17);
+ $stack11=this.val$failureList;
+ $stack7=this.val$addr;
+ $stack11.add((java.lang.Object)$stack7);
+ label4:$stack13=this.val$latch;
+ $stack13.countDown();
+ goto label2;
+ label5:$stack24 = catch;
+ $stack13=this.val$latch;
+ $stack13.countDown();
+ throw $stack24;
+ label2:return;
+ catch java.lang.Exception: label0 - label1 : label3;
+catch java.lang.Throwable: label0 - label1 : label5;
+catch java.lang.Throwable: label3 - label4 : label5;
+} 
+

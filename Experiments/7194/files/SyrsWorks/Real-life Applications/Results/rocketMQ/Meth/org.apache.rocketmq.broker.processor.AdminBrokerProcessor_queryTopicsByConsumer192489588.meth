@@ -1,0 +1,31 @@
+org.apache.rocketmq.remoting.protocol.RemotingCommand org.apache.rocketmq.broker.processor.AdminBrokerProcessor:queryTopicsByConsumer(io.netty.channel.ChannelHandlerContext ctx,org.apache.rocketmq.remoting.protocol.RemotingCommand request)
+{
+org.apache.rocketmq.remoting.protocol.RemotingCommand response;
+  org.apache.rocketmq.remoting.protocol.header.QueryTopicsByConsumerRequestHeader requestHeader;
+  java.util.Set topics;
+  org.apache.rocketmq.remoting.protocol.body.TopicList topicList;
+  byte[] body;
+  org.apache.rocketmq.remoting.CommandCustomHeader $stack9;
+  org.apache.rocketmq.broker.BrokerController $stack10;
+  org.apache.rocketmq.broker.offset.ConsumerOffsetManager $stack11;
+  java.lang.String $stack12;
+  response = org.apache.rocketmq.remoting.protocol.RemotingCommand.createResponseCommand(null);
+ $stack9 = request.decodeCommandCustomHeader(org.apache.rocketmq.remoting.protocol.header.QueryTopicsByConsumerRequestHeader);
+ requestHeader=(org.apache.rocketmq.remoting.protocol.header.QueryTopicsByConsumerRequestHeader) $stack9;
+ $stack10=this.brokerController;
+ $stack11 = $stack10.getConsumerOffsetManager();
+ $stack12 = requestHeader.getGroup();
+ topics = $stack11.whichTopicByConsumer($stack12);
+ topicList=new org.apache.rocketmq.remoting.protocol.body.TopicList;
+ topicList#org.apache.rocketmq.remoting.protocol.body.TopicList();
+ topicList.setTopicList(topics);
+ $stack10=this.brokerController;
+ $stack12 = $stack10.getBrokerAddr();
+ topicList.setBrokerAddr($stack12);
+ body = topicList.encode();
+ response.setBody(body);
+ response.setCode(0);
+ response.setRemark(null);
+ return  response;
+ } 
+

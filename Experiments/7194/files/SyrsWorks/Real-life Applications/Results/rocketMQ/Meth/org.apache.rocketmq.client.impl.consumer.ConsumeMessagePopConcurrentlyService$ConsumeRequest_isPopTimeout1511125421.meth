@@ -1,0 +1,30 @@
+boolean org.apache.rocketmq.client.impl.consumer.ConsumeMessagePopConcurrentlyService$ConsumeRequest:isPopTimeout()
+{
+long current;
+  java.util.List $stack3;
+  int $stack4;
+  byte $stack6;
+  long $stack11;
+  boolean $stack15;
+  $stack3=this.msgs;
+ $stack4 = $stack3.size();
+ if ($stack4==0) goto label0;
+ current=this.popTime;
+ $stack6=(current cmp 0L);
+ if ($stack6<=0) goto label0;
+ current=this.invisibleTime;
+ $stack6=(current cmp 0L);
+ if ($stack6>0) goto label1;
+ label0:return  1;
+ label1:current = java.lang.System.currentTimeMillis();
+ $stack11=this.popTime;
+ $stack11=(current-$stack11);
+ current=this.invisibleTime;
+ $stack6=($stack11 cmp current);
+ if ($stack6<0) goto label2;
+ $stack15=1;
+ goto label3;
+ label2:$stack15=0;
+ label3:return  $stack15;
+ } 
+

@@ -1,0 +1,45 @@
+static java.lang.Object org.keycloak.common.util.KerberosSerializationUtils:deserialize(java.lang.String serialized)
+{
+byte[] bytes;
+  java.io.ByteArrayInputStream bis;
+  java.io.ObjectInputStream in;
+  java.lang.Object l4;
+  java.lang.Throwable l6;
+  java.io.ObjectInputStream $stack10;
+  org.keycloak.common.util.DelegatingSerializationFilter$FilterPatternBuilder $stack11;
+  java.io.IOException $stack18;
+  java.io.IOException $stack20;
+  bytes = org.keycloak.common.util.Base64.decode(serialized);
+ bis=new java.io.ByteArrayInputStream;
+ bis#java.io.ByteArrayInputStream(bytes);
+ in=null;
+ label0:$stack10=new java.io.ObjectInputStream;
+ $stack10#java.io.ObjectInputStream((java.io.InputStream)bis);
+ in=$stack10;
+ $stack11 = org.keycloak.common.util.DelegatingSerializationFilter.builder();
+ $stack11 = $stack11.addAllowedClass(javax.security.auth.kerberos.KerberosTicket);
+ $stack11 = $stack11.addAllowedClass(javax.security.auth.kerberos.KerberosPrincipal);
+ $stack11 = $stack11.addAllowedClass(java.net.InetAddress);
+ $stack11 = $stack11.addAllowedPattern("javax.security.auth.kerberos.KeyImpl");
+ $stack11.setFilter($stack10);
+ l4 = $stack10.readObject();
+dummyClass.highSourceMut(l4);
+ label1:if ($stack10==null) goto label2;
+ $stack10.close();
+ label2:goto label3;
+ label4:$stack20 = catch;
+ $stack20.printStackTrace();
+ label3:return  l4;
+ label5:l6 = catch;
+ label6:if (in==null) goto label7;
+ in.close();
+ label7:goto label8;
+ label9:$stack18 = catch;
+ $stack18.printStackTrace();
+ label8:throw l6;
+ catch java.io.IOException: label1 - label2 : label4;
+catch java.lang.Throwable: label0 - label1 : label5;
+catch java.io.IOException: label6 - label7 : label9;
+catch java.lang.Throwable: label5 - label6 : label5;
+} 
+

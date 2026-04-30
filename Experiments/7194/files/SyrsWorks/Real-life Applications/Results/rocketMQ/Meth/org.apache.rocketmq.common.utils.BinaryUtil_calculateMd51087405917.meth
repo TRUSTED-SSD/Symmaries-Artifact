@@ -1,0 +1,20 @@
+static byte[] org.apache.rocketmq.common.utils.BinaryUtil:calculateMd5(byte[] @binaryData)
+{
+java.security.MessageDigest messageDigest;
+  java.security.NoSuchAlgorithmException e;
+  java.lang.RuntimeException $stack6;
+  byte[] binaryData;
+binaryData=@binaryData;
+messageDigest=null;
+ label0:messageDigest = java.security.MessageDigest.getInstance("MD5");
+ label1:goto label2;
+ label3:e = catch;
+ $stack6=new java.lang.RuntimeException;
+ $stack6#java.lang.RuntimeException("MD5 algorithm not found.");
+ throw $stack6;
+ label2:messageDigest.update(binaryData);
+ binaryData = messageDigest.digest();
+ return  binaryData;
+ catch java.security.NoSuchAlgorithmException: label0 - label1 : label3;
+} 
+

@@ -1,0 +1,31 @@
+void org.apache.rocketmq.client.impl.consumer.DefaultLitePullConsumerImpl:removePullTask(java.lang.String topic)
+{
+java.util.Iterator it;
+  java.util.Map$Entry next;
+  java.util.concurrent.ConcurrentMap $stack4;
+  java.util.Set $stack5;
+  boolean $stack7;
+  java.lang.Object $stack8;
+  org.apache.rocketmq.common.message.MessageQueue $stack10;
+  java.lang.String $stack11;
+  org.apache.rocketmq.client.impl.consumer.DefaultLitePullConsumerImpl$PullTaskImpl $stack15;
+  $stack4=this.taskTable;
+ $stack5 = $stack4.entrySet();
+ it = $stack5.iterator();
+ label0:$stack7 = it.hasNext();
+ if ($stack7==0) goto label1;
+ $stack8 = it.next();
+ next=(java.util.Map$Entry) $stack8;
+ $stack8 = next.getKey();
+ $stack10=(org.apache.rocketmq.common.message.MessageQueue) $stack8;
+ $stack11 = $stack10.getTopic();
+ $stack7 = $stack11.equals((java.lang.Object)topic);
+ if ($stack7==0) goto label2;
+ $stack8 = next.getValue();
+ $stack15=(org.apache.rocketmq.client.impl.consumer.DefaultLitePullConsumerImpl$PullTaskImpl) $stack8;
+ $stack15.setCancelled((boolean)1);
+ it.remove();
+ label2:goto label0;
+ label1:return;
+ } 
+

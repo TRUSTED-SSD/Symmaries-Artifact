@@ -1,0 +1,48 @@
+java.util.Set org.apache.bookkeeper.client.ZoneawareEnsemblePlacementPolicyImpl:getZonesToExcludeToMaintainMinZones(java.util.List currentEnsemble,int indexOfNode,int writeQuorumSize)
+{
+int ensSize;
+  java.util.HashSet zonesToExclude;
+  java.util.HashSet zonesInWriteQuorum;
+  int i;
+  int j;
+  int indexInEnsemble;
+  org.apache.bookkeeper.net.BookieId bookieAddr;
+  org.apache.bookkeeper.client.ZoneawareEnsemblePlacementPolicyImpl$ZoneAwareNodeLocation nodeLocation;
+  java.lang.Object $stack24;
+  java.lang.String $stack26;
+  ensSize = currentEnsemble.size();
+ zonesToExclude=new java.util.HashSet;
+ zonesToExclude#java.util.HashSet();
+ zonesInWriteQuorum=new java.util.HashSet;
+ zonesInWriteQuorum#java.util.HashSet();
+ i=(writeQuorumSize-1);
+ i= ! (i);
+ label0:if (i>0) goto label1;
+ zonesInWriteQuorum.clear();
+ j=0;
+ label2:if (j>=writeQuorumSize) goto label3;
+ indexInEnsemble=(i+j);
+ indexInEnsemble=(indexInEnsemble+indexOfNode);
+ indexInEnsemble=(indexInEnsemble+ensSize);
+ indexInEnsemble=(indexInEnsemble%ensSize);
+ if (indexInEnsemble!=indexOfNode) goto label4;
+ goto label5;
+ label4:$stack24 = currentEnsemble.get(indexInEnsemble);
+ bookieAddr=(org.apache.bookkeeper.net.BookieId) $stack24;
+ if (bookieAddr!=null) goto label6;
+ goto label5;
+ label6:nodeLocation = this.getZoneAwareNodeLocation(bookieAddr);
+ $stack26 = nodeLocation.getZone();
+ zonesInWriteQuorum.add((java.lang.Object)$stack26);
+ label5:j=(j+1);
+ goto label2;
+ label3:j = zonesInWriteQuorum.size();
+ indexInEnsemble=this.minNumZonesPerWriteQuorum;
+ indexInEnsemble=(indexInEnsemble-1);
+ if (j>indexInEnsemble) goto label7;
+ zonesToExclude.addAll((java.util.Collection)zonesInWriteQuorum);
+ label7:i=(i+1);
+ goto label0;
+ label1:return  zonesToExclude;
+ } 
+

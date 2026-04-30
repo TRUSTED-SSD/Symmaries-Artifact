@@ -1,0 +1,36 @@
+boolean java.io.File:mkdirs()
+{
+boolean $z0;
+  boolean $z1;
+  boolean $z2;
+  boolean $z3;
+  boolean $z4;
+  java.io.IOException $r1;
+  java.io.File r2;
+  java.io.File r3;
+  boolean $z5;
+  $z0 = this.exists();
+ if ($z0==0) goto label0;
+ return  0;
+ label0:$z1 = this.mkdir();
+ if ($z1==0) goto label1;
+ return  1;
+ label1:r2 = this.getCanonicalFile();
+ label2:goto label3;
+ label4:$r1 = catch;
+ return  0;
+ label3:r3 = r2.getParentFile();
+ if (r3==null) goto label5;
+ $z2 = r3.mkdirs();
+ if ($z2!=0) goto label6;
+ $z4 = r3.exists();
+ if ($z4==0) goto label5;
+ label6:$z3 = r2.mkdir();
+ if ($z3==0) goto label5;
+ $z5=1;
+ goto label7;
+ label5:$z5=0;
+ label7:return  $z5;
+ catch java.io.IOException: label1 - label2 : label4;
+}  
+

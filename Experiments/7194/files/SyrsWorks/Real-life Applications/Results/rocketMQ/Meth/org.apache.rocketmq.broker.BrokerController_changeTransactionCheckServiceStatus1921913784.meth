@@ -1,0 +1,21 @@
+void org.apache.rocketmq.broker.BrokerController:changeTransactionCheckServiceStatus(boolean shouldStart)
+{
+boolean $stack2;
+  org.apache.rocketmq.logging.org.slf4j.Logger $stack3;
+  java.lang.Boolean $stack5;
+  org.apache.rocketmq.broker.transaction.TransactionalMessageCheckService $stack6;
+  $stack2=this.isTransactionCheckServiceStart;
+ if ($stack2==shouldStart) goto label0;
+ $stack3=org.apache.rocketmq.broker.BrokerController.LOG;
+ $stack5 = java.lang.Boolean.valueOf(shouldStart);
+ $stack3.info("TransactionCheckService status changed to {}",(java.lang.Object)$stack5);
+ if (shouldStart==0) goto label1;
+ $stack6=this.transactionalMessageCheckService;
+ $stack6.start();
+ goto label2;
+ label1:$stack6=this.transactionalMessageCheckService;
+ $stack6.shutdown((boolean)1);
+ label2:this.isTransactionCheckServiceStart=shouldStart;
+ label0:return;
+ } 
+

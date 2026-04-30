@@ -1,0 +1,43 @@
+static byte[] org.apache.rocketmq.acl.common.AclSigner:sign(byte[] @data,byte[] key,org.apache.rocketmq.acl.common.SigningAlgorithm algorithm)
+{
+java.lang.Object mac;
+  java.lang.String message;
+  java.lang.Exception $stack10;
+  java.lang.Object[] $stack11;
+  java.lang.Integer $stack14;
+  org.apache.rocketmq.logging.org.slf4j.Logger $stack18;
+  javax.crypto.spec.SecretKeySpec tmp$1543844933;
+  org.apache.rocketmq.acl.common.AclException tmp$1737099591;
+  javax.crypto.Mac tmp$30466843;
+  java.lang.Throwable tmp$996085011;
+  byte[] data;
+data=@data;
+label0:message = algorithm.toString();
+ mac = javax.crypto.Mac.getInstance(message);
+ tmp$1543844933=new javax.crypto.spec.SecretKeySpec;
+ message = algorithm.toString();
+ tmp$1543844933#javax.crypto.spec.SecretKeySpec(key,message);
+ tmp$30466843=(javax.crypto.Mac) mac;
+ tmp$30466843.init((java.security.Key)tmp$1543844933);
+ tmp$30466843=(javax.crypto.Mac) mac;
+ data = tmp$30466843.doFinal(data);
+ label1:return  data;
+ label2:$stack10 = catch;
+ mac=$stack10;
+ $stack11=new java.lang.Object[2];
+ $stack14 = java.lang.Integer.valueOf(10015);
+ $stack11[0]=$stack14;
+ $stack10=(java.lang.Exception) $stack10;
+ message = $stack10.getMessage();
+ $stack11[1]=message;
+ message = java.lang.String.format("[%s:signature-failed] unable to calculate a request signature. error=%s",$stack11);
+ $stack18=org.apache.rocketmq.acl.common.AclSigner.log;
+ tmp$996085011=(java.lang.Throwable) mac;
+ $stack18.error(message,tmp$996085011);
+ tmp$1737099591=new org.apache.rocketmq.acl.common.AclException;
+ tmp$996085011=(java.lang.Throwable) mac;
+ tmp$1737099591#org.apache.rocketmq.acl.common.AclException("CAL_SIGNATURE_FAILED",10015,message,tmp$996085011);
+ throw tmp$1737099591;
+ catch java.lang.Exception: label0 - label1 : label2;
+} 
+

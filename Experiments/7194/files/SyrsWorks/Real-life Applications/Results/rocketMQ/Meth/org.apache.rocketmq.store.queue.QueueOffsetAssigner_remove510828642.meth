@@ -1,0 +1,23 @@
+void org.apache.rocketmq.store.queue.QueueOffsetAssigner:remove(java.lang.String topic,java.lang.Integer queueId)
+{
+java.lang.String topicQueueKey;
+  java.lang.StringBuilder $stack4;
+  java.util.concurrent.ConcurrentMap $stack9;
+  org.apache.rocketmq.logging.org.slf4j.Logger $stack15;
+  $stack4=new java.lang.StringBuilder;
+ $stack4#java.lang.StringBuilder();
+ $stack4 = $stack4.append(topic);
+ $stack4 = $stack4.append("-");
+ $stack4 = $stack4.append((java.lang.Object)queueId);
+ topicQueueKey = $stack4.toString();
+ $stack9=this.topicQueueTable;
+ $stack9.remove((java.lang.Object)topicQueueKey);
+ $stack9=this.batchTopicQueueTable;
+ $stack9.remove((java.lang.Object)topicQueueKey);
+ $stack9=this.lmqTopicQueueTable;
+ $stack9.remove((java.lang.Object)topicQueueKey);
+ $stack15=org.apache.rocketmq.store.queue.QueueOffsetAssigner.log;
+ $stack15.info("removeQueueFromTopicQueueTable OK Topic: {} QueueId: {}",(java.lang.Object)topic,(java.lang.Object)queueId);
+ return;
+ } 
+

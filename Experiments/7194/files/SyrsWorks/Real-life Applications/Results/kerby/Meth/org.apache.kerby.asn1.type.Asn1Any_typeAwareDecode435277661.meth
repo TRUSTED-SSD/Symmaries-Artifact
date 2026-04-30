@@ -1,0 +1,33 @@
+void org.apache.kerby.asn1.type.Asn1Any:typeAwareDecode(java.lang.Class t)
+{
+org.apache.kerby.asn1.type.Asn1Type result;
+  java.lang.Object $stack4;
+  org.apache.kerby.asn1.parse.Asn1ParseResult $stack5;
+  boolean $stack6;
+  org.apache.kerby.asn1.Asn1FieldInfo $stack8;
+  org.apache.kerby.asn1.TaggingOption $stack10;
+  java.lang.Exception $stack15;
+  java.io.IOException $stack16;
+  label0:$stack4 = t.newInstance();
+ result=(org.apache.kerby.asn1.type.Asn1Type) $stack4;
+ label1:goto label2;
+ label3:$stack15 = catch;
+ $stack16=new java.io.IOException;
+ $stack16#java.io.IOException("No default constructor?",(java.lang.Throwable)$stack15);
+ throw $stack16;
+ label2:$stack5=this.parseResult;
+ $stack6 = $stack5.isContextSpecific();
+ if ($stack6==0) goto label4;
+ $stack5=this.parseResult;
+ $stack8=this.decodeInfo;
+ $stack10 = $stack8.getTaggingOption();
+ org.apache.kerby.asn1.Asn1Binder.bindWithTagging($stack5,result,$stack10);
+ goto label5;
+ label4:$stack5=this.parseResult;
+ org.apache.kerby.asn1.Asn1Binder.bind($stack5,result);
+ label5:this.setValue((java.lang.Object)result);
+ this.isBlindlyDecoded=0;
+ return;
+ catch java.lang.Exception: label0 - label1 : label3;
+} 
+

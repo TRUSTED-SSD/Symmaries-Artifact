@@ -1,0 +1,24 @@
+static org.apache.bookkeeper.bookie.LedgerStorage org.apache.bookkeeper.bookie.LedgerStorageFactory:createLedgerStorage(java.lang.String @name)
+{
+java.lang.Object $stack2;
+  org.apache.bookkeeper.bookie.LedgerStorage $stack3;
+  java.lang.Throwable $stack4;
+  java.io.IOException $stack5;
+  java.lang.StringBuilder $stack6;
+  java.lang.String name;
+name=@name;
+label0:$stack2 = org.apache.bookkeeper.common.util.ReflectionUtils.newInstance(name,org.apache.bookkeeper.bookie.LedgerStorage);
+ $stack3=(org.apache.bookkeeper.bookie.LedgerStorage) $stack2;
+ label1:return  $stack3;
+ label2:$stack4 = catch;
+ $stack5=new java.io.IOException;
+ $stack6=new java.lang.StringBuilder;
+ $stack6#java.lang.StringBuilder();
+ $stack6 = $stack6.append("Failed to instantiate ledger storage : ");
+ $stack6 = $stack6.append(name);
+ name = $stack6.toString();
+ $stack5#java.io.IOException(name,$stack4);
+ throw $stack5;
+ catch java.lang.Throwable: label0 - label1 : label2;
+} 
+

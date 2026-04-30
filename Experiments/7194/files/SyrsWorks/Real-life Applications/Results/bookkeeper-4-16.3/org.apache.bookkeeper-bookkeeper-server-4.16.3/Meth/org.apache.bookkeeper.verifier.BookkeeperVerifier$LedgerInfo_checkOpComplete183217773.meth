@@ -1,0 +1,41 @@
+void org.apache.bookkeeper.verifier.BookkeeperVerifier$LedgerInfo:checkOpComplete(java.util.function.Consumer cb)
+{
+int $stack2;
+  java.lang.Object[] $stack3;
+  long $stack4;
+  java.io.PrintStream $stack5;
+  java.lang.Long $stack8;
+  java.util.TreeSet $stack9;
+  java.lang.Integer $stack12;
+  boolean $stack16;
+  java.util.function.Consumer $stack24;
+  $stack2=this.readsInProgress;
+ if ($stack2!=0) goto label0;
+ $stack9=this.writesInProgress;
+ $stack16 = $stack9.isEmpty();
+ if ($stack16==0) goto label0;
+ $stack24=this.onLastOp;
+ if ($stack24==null) goto label0;
+ $stack5=java.lang.System.out;
+ $stack3=new java.lang.Object[0];
+ $stack5.format("checkOpComplete: done%n",$stack3);
+ $stack24=this.onLastOp;
+ $stack24.accept((java.lang.Object)cb);
+ this.onLastOp=null;
+ goto label1;
+ label0:$stack5=java.lang.System.out;
+ $stack3=new java.lang.Object[3];
+ $stack4=this.ledgerID;
+ $stack8 = java.lang.Long.valueOf($stack4);
+ $stack3[0]=$stack8;
+ $stack9=this.writesInProgress;
+ $stack3[1]=$stack9;
+ $stack2=this.readsInProgress;
+ $stack12 = java.lang.Integer.valueOf($stack2);
+ $stack3[2]=$stack12;
+ $stack5.format("checkOpComplete: ledger %d, writesInProgress %s, readsInProgress %d%n",$stack3);
+ $stack12 = java.lang.Integer.valueOf(0);
+ cb.accept((java.lang.Object)$stack12);
+ label1:return;
+ } 
+

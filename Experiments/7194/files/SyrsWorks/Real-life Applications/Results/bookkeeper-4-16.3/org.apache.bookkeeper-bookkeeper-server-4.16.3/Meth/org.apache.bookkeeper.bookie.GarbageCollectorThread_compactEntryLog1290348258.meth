@@ -1,0 +1,37 @@
+void org.apache.bookkeeper.bookie.GarbageCollectorThread:compactEntryLog(org.apache.bookkeeper.bookie.EntryLogMetadata entryLogMeta)
+{
+java.util.concurrent.atomic.AtomicBoolean $stack4;
+  boolean $stack5;
+  org.apache.bookkeeper.bookie.AbstractLogCompactor $stack6;
+  java.lang.Throwable $stack9;
+  java.lang.Exception $stack11;
+  org.slf4j.Logger $stack12;
+  long $stack14;
+  java.lang.Long $stack15;
+  $stack4=this.compacting;
+ $stack5 = $stack4.compareAndSet((boolean)0,(boolean)1);
+ if ($stack5!=0) goto label0;
+ return;
+ label0:$stack6=this.compactor;
+ $stack6.compact(entryLogMeta);
+ label1:$stack4=this.compacting;
+ $stack4.set((boolean)0);
+ goto label2;
+ label3:$stack11 = catch;
+ $stack12=org.apache.bookkeeper.bookie.GarbageCollectorThread.LOG;
+ $stack14 = entryLogMeta.getEntryLogId();
+ $stack15 = java.lang.Long.valueOf($stack14);
+ $stack12.error("Failed to compact entry log {} due to unexpected error",(java.lang.Object)$stack15,(java.lang.Object)$stack11);
+ label4:$stack4=this.compacting;
+ $stack4.set((boolean)0);
+ goto label2;
+ label5:$stack9 = catch;
+ $stack4=this.compacting;
+ $stack4.set((boolean)0);
+ throw $stack9;
+ label2:return;
+ catch java.lang.Exception: label0 - label1 : label3;
+catch java.lang.Throwable: label0 - label1 : label5;
+catch java.lang.Throwable: label3 - label4 : label5;
+} 
+

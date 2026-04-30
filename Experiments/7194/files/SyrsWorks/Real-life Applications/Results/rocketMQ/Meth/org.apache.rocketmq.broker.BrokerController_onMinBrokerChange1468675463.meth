@@ -1,0 +1,53 @@
+void org.apache.rocketmq.broker.BrokerController:onMinBrokerChange(long minBrokerId,java.lang.String minBrokerAddr,java.lang.String offlineBrokerAddr,java.lang.String masterHaAddr)
+{
+java.lang.Object[] $stack6;
+  long $stack7;
+  org.apache.rocketmq.logging.org.slf4j.Logger $stack8;
+  java.lang.Long $stack11;
+  java.lang.String $stack12;
+  org.apache.rocketmq.common.BrokerConfig $stack15;
+  long $stack17;
+  byte $stack18;
+  org.apache.rocketmq.broker.longpolling.PullRequestHoldService $stack22;
+  org.apache.rocketmq.broker.slave.SlaveSynchronize $stack25;
+  boolean $stack27;
+  $stack8=org.apache.rocketmq.broker.BrokerController.LOG;
+ $stack6=new java.lang.Object[4];
+ $stack7=this.minBrokerIdInGroup;
+ $stack11 = java.lang.Long.valueOf($stack7);
+ $stack6[0]=$stack11;
+ $stack12=this.minBrokerAddrInGroup;
+ $stack6[1]=$stack12;
+ $stack11 = java.lang.Long.valueOf(minBrokerId);
+ $stack6[2]=$stack11;
+ $stack6[3]=minBrokerAddr;
+ $stack8.info("Min broker changed, old: {}-{}, new {}-{}",$stack6);
+ this.minBrokerIdInGroup=minBrokerId;
+ this.minBrokerAddrInGroup=minBrokerAddr;
+ $stack15=this.brokerConfig;
+ $stack7 = $stack15.getBrokerId();
+ $stack17=this.minBrokerIdInGroup;
+ $stack18=($stack7 cmp $stack17);
+ if ($stack18!=0) goto label0;
+ $stack27=1;
+ goto label1;
+ label0:$stack27=0;
+ label1:this.changeSpecialServiceStatus($stack27);
+ if (offlineBrokerAddr==null) goto label2;
+ $stack25=this.slaveSynchronize;
+ $stack12 = $stack25.getMasterAddr();
+ $stack27 = offlineBrokerAddr.equals((java.lang.Object)$stack12);
+ if ($stack27==0) goto label2;
+ this#org.apache.rocketmq.broker.BrokerController:onMasterOffline();
+ label2:$stack18=(minBrokerId cmp 0L);
+ if ($stack18!=0) goto label3;
+ if (minBrokerAddr==null) goto label3;
+ this#org.apache.rocketmq.broker.BrokerController:onMasterOnline(minBrokerAddr,masterHaAddr);
+ label3:minBrokerId=this.minBrokerIdInGroup;
+ $stack18=(minBrokerId cmp 0L);
+ if ($stack18!=0) goto label4;
+ $stack22=this.pullRequestHoldService;
+ $stack22.notifyMasterOnline();
+ label4:return;
+ } 
+

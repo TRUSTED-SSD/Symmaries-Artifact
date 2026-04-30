@@ -1,0 +1,45 @@
+void org.apache.rocketmq.store.index.IndexHeader:load()
+{
+int $stack1;
+  java.nio.ByteBuffer $stack2;
+  java.util.concurrent.atomic.AtomicLong $stack3;
+  long $stack4;
+  java.util.concurrent.atomic.AtomicInteger $stack19;
+  $stack3=this.beginTimestamp;
+ $stack2=this.byteBuffer;
+ $stack1=org.apache.rocketmq.store.index.IndexHeader.beginTimestampIndex;
+ $stack4 = $stack2.getLong($stack1);
+ $stack3.set($stack4);
+ $stack3=this.endTimestamp;
+ $stack2=this.byteBuffer;
+ $stack1=org.apache.rocketmq.store.index.IndexHeader.endTimestampIndex;
+ $stack4 = $stack2.getLong($stack1);
+ $stack3.set($stack4);
+ $stack3=this.beginPhyOffset;
+ $stack2=this.byteBuffer;
+ $stack1=org.apache.rocketmq.store.index.IndexHeader.beginPhyoffsetIndex;
+ $stack4 = $stack2.getLong($stack1);
+ $stack3.set($stack4);
+ $stack3=this.endPhyOffset;
+ $stack2=this.byteBuffer;
+ $stack1=org.apache.rocketmq.store.index.IndexHeader.endPhyoffsetIndex;
+ $stack4 = $stack2.getLong($stack1);
+ $stack3.set($stack4);
+ $stack19=this.hashSlotCount;
+ $stack2=this.byteBuffer;
+ $stack1=org.apache.rocketmq.store.index.IndexHeader.hashSlotcountIndex;
+ $stack1 = $stack2.getInt($stack1);
+ $stack19.set($stack1);
+ $stack19=this.indexCount;
+ $stack2=this.byteBuffer;
+ $stack1=org.apache.rocketmq.store.index.IndexHeader.indexCountIndex;
+ $stack1 = $stack2.getInt($stack1);
+ $stack19.set($stack1);
+ $stack19=this.indexCount;
+ $stack1 = $stack19.get();
+ if ($stack1>0) goto label0;
+ $stack19=this.indexCount;
+ $stack19.set(1);
+ label0:return;
+ } 
+

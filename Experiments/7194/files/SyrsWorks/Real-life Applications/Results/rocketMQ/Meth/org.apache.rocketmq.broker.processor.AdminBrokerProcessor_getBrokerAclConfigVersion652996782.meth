@@ -1,0 +1,44 @@
+org.apache.rocketmq.remoting.protocol.RemotingCommand org.apache.rocketmq.broker.processor.AdminBrokerProcessor:getBrokerAclConfigVersion(io.netty.channel.ChannelHandlerContext ctx,org.apache.rocketmq.remoting.protocol.RemotingCommand @request)
+{
+org.apache.rocketmq.remoting.protocol.header.GetBrokerAclConfigResponseHeader responseHeader;
+  org.apache.rocketmq.acl.AccessValidator accessValidator;
+  org.apache.rocketmq.remoting.CommandCustomHeader $stack7;
+  org.apache.rocketmq.broker.BrokerController $stack8;
+  java.util.Map $stack9;
+  java.lang.Object $stack10;
+  java.lang.String $stack11;
+  org.apache.rocketmq.common.BrokerConfig $stack15;
+  java.lang.Exception $stack20;
+  org.apache.rocketmq.logging.org.slf4j.Logger $stack21;
+  org.apache.rocketmq.remoting.protocol.RemotingCommand request;
+request=@request;
+request = org.apache.rocketmq.remoting.protocol.RemotingCommand.createResponseCommand(org.apache.rocketmq.remoting.protocol.header.GetBrokerAclConfigResponseHeader);
+ $stack7 = request.readCustomHeader();
+ responseHeader=(org.apache.rocketmq.remoting.protocol.header.GetBrokerAclConfigResponseHeader) $stack7;
+ label0:$stack8=this.brokerController;
+ $stack9 = $stack8.getAccessValidatorMap();
+ $stack10 = $stack9.get((java.lang.Object)org.apache.rocketmq.acl.plain.PlainAccessValidator);
+ accessValidator=(org.apache.rocketmq.acl.AccessValidator) $stack10;
+ $stack11 = accessValidator.getAclConfigVersion();
+ responseHeader.setVersion($stack11);
+ $stack8=this.brokerController;
+ $stack11 = $stack8.getBrokerAddr();
+ responseHeader.setBrokerAddr($stack11);
+ $stack8=this.brokerController;
+ $stack15 = $stack8.getBrokerConfig();
+ $stack11 = $stack15.getBrokerName();
+ responseHeader.setBrokerName($stack11);
+ $stack8=this.brokerController;
+ $stack15 = $stack8.getBrokerConfig();
+ $stack11 = $stack15.getBrokerClusterName();
+ responseHeader.setClusterName($stack11);
+ request.setCode(0);
+ request.setRemark(null);
+ label1:return  request;
+ label2:$stack20 = catch;
+ $stack21=org.apache.rocketmq.broker.processor.AdminBrokerProcessor.LOGGER;
+ $stack21.error("Failed to generate a proper getBrokerAclConfigVersion response",(java.lang.Throwable)$stack20);
+ return  null;
+ catch java.lang.Exception: label0 - label1 : label2;
+} 
+

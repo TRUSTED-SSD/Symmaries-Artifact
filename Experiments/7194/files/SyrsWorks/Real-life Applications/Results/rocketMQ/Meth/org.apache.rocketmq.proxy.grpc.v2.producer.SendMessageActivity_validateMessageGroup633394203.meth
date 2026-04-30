@@ -1,0 +1,49 @@
+void org.apache.rocketmq.proxy.grpc.v2.producer.SendMessageActivity:validateMessageGroup(java.lang.String @messageGroup)
+{
+int maxSize;
+  boolean $stack3;
+  org.apache.rocketmq.proxy.config.ProxyConfig $stack5;
+  java.nio.charset.Charset $stack7;
+  byte[] $stack8;
+  int $stack9;
+  org.apache.rocketmq.proxy.grpc.v2.common.GrpcValidator $stack10;
+  org.apache.rocketmq.proxy.grpc.v2.common.GrpcProxyException $stack12;
+  apache.rocketmq.v2.Code $stack13;
+  java.lang.StringBuilder $stack15;
+  java.lang.String messageGroup;
+messageGroup=@messageGroup;
+$stack3 = org.apache.commons.lang3.StringUtils.isNotEmpty((java.lang.CharSequence)messageGroup);
+ if ($stack3==0) goto label0;
+ $stack3 = org.apache.commons.lang3.StringUtils.isBlank((java.lang.CharSequence)messageGroup);
+ if ($stack3==0) goto label1;
+ $stack12=new org.apache.rocketmq.proxy.grpc.v2.common.GrpcProxyException;
+ $stack13=apache.rocketmq.v2.Code.ILLEGAL_MESSAGE_GROUP;
+ $stack12#org.apache.rocketmq.proxy.grpc.v2.common.GrpcProxyException($stack13,"message group cannot be the char sequence of whitespace");
+ throw $stack12;
+ label1:$stack5 = org.apache.rocketmq.proxy.config.ConfigurationManager.getProxyConfig();
+ maxSize = $stack5.getMaxMessageGroupSize();
+ if (maxSize>0) goto label2;
+ return;
+ label2:$stack7=java.nio.charset.StandardCharsets.UTF_8;
+ $stack8 = messageGroup.getBytes($stack7);
+ $stack9=#$stack8;
+ if ($stack9<maxSize) goto label3;
+ $stack12=new org.apache.rocketmq.proxy.grpc.v2.common.GrpcProxyException;
+ $stack13=apache.rocketmq.v2.Code.ILLEGAL_MESSAGE_GROUP;
+ $stack15=new java.lang.StringBuilder;
+ $stack15#java.lang.StringBuilder();
+ $stack15 = $stack15.append("message group exceed the max size ");
+ $stack15 = $stack15.append(maxSize);
+ messageGroup = $stack15.toString();
+ $stack12#org.apache.rocketmq.proxy.grpc.v2.common.GrpcProxyException($stack13,messageGroup);
+ throw $stack12;
+ label3:$stack10 = org.apache.rocketmq.proxy.grpc.v2.common.GrpcValidator.getInstance();
+ $stack3 = $stack10.containControlCharacter(messageGroup);
+ if ($stack3==0) goto label0;
+ $stack12=new org.apache.rocketmq.proxy.grpc.v2.common.GrpcProxyException;
+ $stack13=apache.rocketmq.v2.Code.ILLEGAL_MESSAGE_GROUP;
+ $stack12#org.apache.rocketmq.proxy.grpc.v2.common.GrpcProxyException($stack13,"message group cannot contain control character");
+ throw $stack12;
+ label0:return;
+ } 
+

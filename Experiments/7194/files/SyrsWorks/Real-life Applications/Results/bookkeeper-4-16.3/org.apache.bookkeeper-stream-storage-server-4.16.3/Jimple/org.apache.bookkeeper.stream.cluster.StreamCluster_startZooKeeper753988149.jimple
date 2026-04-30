@@ -1,0 +1,132 @@
+    private void startZooKeeper() throws java.lang.Exception
+    {
+        org.apache.bookkeeper.stream.cluster.StreamCluster this;
+        org.apache.commons.lang3.tuple.Pair zkServerAndPort;
+        org.apache.bookkeeper.stream.cluster.StreamClusterSpec $stack3;
+        boolean $stack4;
+        java.io.File $stack5, $stack7;
+        int $stack9;
+        java.lang.Object $stack11;
+        org.apache.bookkeeper.shims.zk.ZooKeeperServerShim $stack12;
+        java.lang.Integer $stack14;
+        org.slf4j.Logger $stack17;
+        java.lang.StringBuilder $stack20;
+        java.lang.String $stack25;
+        org.apache.bookkeeper.common.net.ServiceURI $stack26;
+
+        this := @this: org.apache.bookkeeper.stream.cluster.StreamCluster;
+
+        $stack3 = this.<org.apache.bookkeeper.stream.cluster.StreamCluster: org.apache.bookkeeper.stream.cluster.StreamClusterSpec spec>;
+/*112*/
+
+        $stack4 = virtualinvoke $stack3.<org.apache.bookkeeper.stream.cluster.StreamClusterSpec: boolean shouldStartZooKeeper()>();
+/*112*/
+
+        if $stack4 != 0 goto label1;
+/*112*/
+
+        $stack3 = this.<org.apache.bookkeeper.stream.cluster.StreamCluster: org.apache.bookkeeper.stream.cluster.StreamClusterSpec spec>;
+/*113*/
+
+        $stack26 = $stack3.<org.apache.bookkeeper.stream.cluster.StreamClusterSpec: org.apache.bookkeeper.common.net.ServiceURI metadataServiceUri>;
+/*113*/
+
+        $stack11 = staticinvoke <com.google.common.base.Preconditions: java.lang.Object checkNotNull(java.lang.Object,java.lang.Object)>($stack26, "No metadata service uri is configured while configuring not to start zookeeper");
+/*113*/
+
+        $stack26 = (org.apache.bookkeeper.common.net.ServiceURI) $stack11;
+/*113*/
+
+        this.<org.apache.bookkeeper.stream.cluster.StreamCluster: org.apache.bookkeeper.common.net.ServiceURI metadataServiceUri> = $stack26;
+/*113*/
+
+        return;
+/*115*/
+
+     label1:
+        $stack5 = new java.io.File;
+/*118*/
+
+        $stack3 = this.<org.apache.bookkeeper.stream.cluster.StreamCluster: org.apache.bookkeeper.stream.cluster.StreamClusterSpec spec>;
+/*118*/
+
+        $stack7 = virtualinvoke $stack3.<org.apache.bookkeeper.stream.cluster.StreamClusterSpec: java.io.File storageRootDir()>();
+/*118*/
+
+        specialinvoke $stack5.<java.io.File: void <init>(java.io.File,java.lang.String)>($stack7, "zookeeper");
+/*118*/
+
+        $stack3 = this.<org.apache.bookkeeper.stream.cluster.StreamCluster: org.apache.bookkeeper.stream.cluster.StreamClusterSpec spec>;
+/*120*/
+
+        $stack9 = virtualinvoke $stack3.<org.apache.bookkeeper.stream.cluster.StreamClusterSpec: int zkPort()>();
+/*120*/
+
+        zkServerAndPort = staticinvoke <org.apache.distributedlog.LocalDLMEmulator: org.apache.commons.lang3.tuple.Pair runZookeeperOnAnyPort(int,java.io.File)>($stack9, $stack5);
+/*120*/
+/*120*/
+
+        $stack11 = virtualinvoke zkServerAndPort.<org.apache.commons.lang3.tuple.Pair: java.lang.Object getLeft()>();
+/*121*/
+
+        $stack12 = (org.apache.bookkeeper.shims.zk.ZooKeeperServerShim) $stack11;
+/*121*/
+
+        this.<org.apache.bookkeeper.stream.cluster.StreamCluster: org.apache.bookkeeper.shims.zk.ZooKeeperServerShim zks> = $stack12;
+/*121*/
+
+        $stack11 = virtualinvoke zkServerAndPort.<org.apache.commons.lang3.tuple.Pair: java.lang.Object getRight()>();
+/*122*/
+
+        $stack14 = (java.lang.Integer) $stack11;
+/*122*/
+
+        $stack9 = virtualinvoke $stack14.<java.lang.Integer: int intValue()>();
+/*122*/
+
+        this.<org.apache.bookkeeper.stream.cluster.StreamCluster: int zkPort> = $stack9;
+/*122*/
+
+        $stack17 = <org.apache.bookkeeper.stream.cluster.StreamCluster: org.slf4j.Logger log>;
+/*123*/
+
+        $stack9 = this.<org.apache.bookkeeper.stream.cluster.StreamCluster: int zkPort>;
+/*123*/
+
+        $stack14 = staticinvoke <java.lang.Integer: java.lang.Integer valueOf(int)>($stack9);
+/*123*/
+
+        interfaceinvoke $stack17.<org.slf4j.Logger: void info(java.lang.String,java.lang.Object)>("Started zookeeper at port {}.", $stack14);
+/*123*/
+
+        $stack20 = new java.lang.StringBuilder;
+/*124*/
+
+        specialinvoke $stack20.<java.lang.StringBuilder: void <init>()>();
+/*124*/
+
+        $stack20 = virtualinvoke $stack20.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>("zk://127.0.0.1:");
+/*124*/
+
+        $stack9 = this.<org.apache.bookkeeper.stream.cluster.StreamCluster: int zkPort>;
+/*124*/
+
+        $stack20 = virtualinvoke $stack20.<java.lang.StringBuilder: java.lang.StringBuilder append(int)>($stack9);
+/*124*/
+
+        $stack20 = virtualinvoke $stack20.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>("/ledgers");
+/*124*/
+
+        $stack25 = virtualinvoke $stack20.<java.lang.StringBuilder: java.lang.String toString()>();
+/*124*/
+
+        $stack26 = staticinvoke <org.apache.bookkeeper.common.net.ServiceURI: org.apache.bookkeeper.common.net.ServiceURI create(java.lang.String)>($stack25);
+/*124*/
+
+        this.<org.apache.bookkeeper.stream.cluster.StreamCluster: org.apache.bookkeeper.common.net.ServiceURI metadataServiceUri> = $stack26;
+/*124*/
+
+        return;
+/*126*/
+    }
+

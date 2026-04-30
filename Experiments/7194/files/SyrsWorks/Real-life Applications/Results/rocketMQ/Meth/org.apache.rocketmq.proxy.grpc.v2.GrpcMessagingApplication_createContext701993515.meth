@@ -1,0 +1,46 @@
+org.apache.rocketmq.proxy.common.ProxyContext org.apache.rocketmq.proxy.grpc.v2.GrpcMessagingApplication:createContext()
+{
+io.grpc.Context ctx;
+  io.grpc.Metadata headers;
+  org.apache.rocketmq.proxy.common.ProxyContext context;
+  io.grpc.Context$Key $stack5;
+  java.lang.Object $stack6;
+  io.grpc.Metadata$Key $stack8;
+  java.lang.String $stack9;
+  io.grpc.Deadline $stack26;
+  java.util.concurrent.TimeUnit $stack28;
+  long $stack29;
+  java.lang.Long $stack30;
+  ctx = io.grpc.Context.current();
+ $stack5=org.apache.rocketmq.proxy.grpc.interceptor.InterceptorConstants.METADATA;
+ $stack6 = $stack5.get(ctx);
+ headers=(io.grpc.Metadata) $stack6;
+ context = org.apache.rocketmq.proxy.common.ProxyContext.create();
+ $stack8=org.apache.rocketmq.proxy.grpc.interceptor.InterceptorConstants.LOCAL_ADDRESS;
+ $stack9 = this.getDefaultStringMetadataInfo(headers,$stack8);
+ context = context.setLocalAddress($stack9);
+ $stack8=org.apache.rocketmq.proxy.grpc.interceptor.InterceptorConstants.REMOTE_ADDRESS;
+ $stack9 = this.getDefaultStringMetadataInfo(headers,$stack8);
+ context = context.setRemoteAddress($stack9);
+ $stack8=org.apache.rocketmq.proxy.grpc.interceptor.InterceptorConstants.CLIENT_ID;
+ $stack9 = this.getDefaultStringMetadataInfo(headers,$stack8);
+ context = context.setClientID($stack9);
+ $stack8=org.apache.rocketmq.proxy.grpc.interceptor.InterceptorConstants.LANGUAGE;
+ $stack9 = this.getDefaultStringMetadataInfo(headers,$stack8);
+ context = context.setLanguage($stack9);
+ $stack8=org.apache.rocketmq.proxy.grpc.interceptor.InterceptorConstants.CLIENT_VERSION;
+ $stack9 = this.getDefaultStringMetadataInfo(headers,$stack8);
+ context = context.setClientVersion($stack9);
+ $stack8=org.apache.rocketmq.proxy.grpc.interceptor.InterceptorConstants.RPC_NAME;
+ $stack9 = this.getDefaultStringMetadataInfo(headers,$stack8);
+ context = context.setAction($stack9);
+ $stack26 = ctx.getDeadline();
+ if ($stack26==null) goto label0;
+ $stack26 = ctx.getDeadline();
+ $stack28=java.util.concurrent.TimeUnit.MILLISECONDS;
+ $stack29 = $stack26.timeRemaining($stack28);
+ $stack30 = java.lang.Long.valueOf($stack29);
+ context.setRemainingMs($stack30);
+ label0:return  context;
+ } 
+

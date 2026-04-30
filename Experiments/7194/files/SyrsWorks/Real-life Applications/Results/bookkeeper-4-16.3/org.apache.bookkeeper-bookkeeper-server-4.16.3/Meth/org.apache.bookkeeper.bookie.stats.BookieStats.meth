@@ -1,0 +1,40 @@
+org.apache.bookkeeper.bookie.stats.BookieStats(org.apache.bookkeeper.stats.StatsLogger statsLogger,int numJournalDirs,int maxJournalQueueSize)
+{
+org.apache.bookkeeper.stats.Counter $stack4;
+  org.apache.bookkeeper.stats.OpStatsLogger $stack7;
+  org.apache.bookkeeper.bookie.stats.BookieStats$1 $stack13;
+  org.apache.bookkeeper.stats.Gauge $stack14;
+  org.apache.bookkeeper.bookie.stats.BookieStats$2 $stack15;
+  this#java.lang.Object();
+ this.statsLogger=statsLogger;
+ $stack4 = statsLogger.getCounter("WRITE_BYTES");
+ this.writeBytes=$stack4;
+ $stack4 = statsLogger.getCounter("READ_BYTES");
+ this.readBytes=$stack4;
+ $stack4 = statsLogger.getCounter("BOOKIE_FORCE_LEDGER");
+ this.forceLedgerOps=$stack4;
+ $stack7 = statsLogger.getOpStatsLogger("BOOKIE_ADD_ENTRY");
+ this.addEntryStats=$stack7;
+ $stack7 = statsLogger.getOpStatsLogger("BOOKIE_RECOVERY_ADD_ENTRY");
+ this.recoveryAddEntryStats=$stack7;
+ $stack7 = statsLogger.getOpStatsLogger("BOOKIE_READ_ENTRY");
+ this.readEntryStats=$stack7;
+ $stack7 = statsLogger.getOpStatsLogger("BOOKIE_GET_LIST_OF_ENTRIES_OF_LEDGER");
+ this.getListOfEntriesOfLedgerStats=$stack7;
+ $stack7 = statsLogger.getOpStatsLogger("BOOKIE_ADD_ENTRY_BYTES");
+ this.addBytesStats=$stack7;
+ $stack7 = statsLogger.getOpStatsLogger("BOOKIE_READ_ENTRY_BYTES");
+ this.readBytesStats=$stack7;
+ $stack13=new org.apache.bookkeeper.bookie.stats.BookieStats$1;
+ $stack13#org.apache.bookkeeper.bookie.stats.BookieStats$1(this,numJournalDirs);
+ this.journalDirsGauge=$stack13;
+ $stack14=this.journalDirsGauge;
+ statsLogger.registerGauge("JOURNAL_DIRS",$stack14);
+ $stack15=new org.apache.bookkeeper.bookie.stats.BookieStats$2;
+ $stack15#org.apache.bookkeeper.bookie.stats.BookieStats$2(this,maxJournalQueueSize);
+ this.journalQueueMaxQueueSizeGauge=$stack15;
+ $stack14=this.journalQueueMaxQueueSizeGauge;
+ statsLogger.registerGauge("JOURNAL_QUEUE_MAX_SIZE",$stack14);
+ return;
+ } 
+

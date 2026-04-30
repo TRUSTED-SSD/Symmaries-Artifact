@@ -1,0 +1,24 @@
+void org.apache.rocketmq.proxy.service.transaction.ClusterTransactionService:replaceTransactionSubscription(java.lang.String group,java.util.List topicList)
+{
+java.util.HashSet clusterDataSet;
+  java.util.Iterator l4;
+  java.lang.String topic;
+  boolean $stack8;
+  java.util.Map $stack9;
+  java.lang.Object $stack10;
+  java.util.Set $stack12;
+  clusterDataSet=new java.util.HashSet;
+ clusterDataSet#java.util.HashSet();
+ l4 = topicList.iterator();
+ label0:$stack8 = l4.hasNext();
+ if ($stack8==0) goto label1;
+ $stack10 = l4.next();
+ topic=(java.lang.String) $stack10;
+ $stack12 = this#org.apache.rocketmq.proxy.service.transaction.ClusterTransactionService:getClusterDataFromTopic(topic);
+ clusterDataSet.addAll((java.util.Collection)$stack12);
+ goto label0;
+ label1:$stack9=this.groupClusterData;
+ $stack9.put((java.lang.Object)group,(java.lang.Object)clusterDataSet);
+ return;
+ } 
+

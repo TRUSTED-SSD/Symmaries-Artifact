@@ -1,0 +1,67 @@
+    protected void doGet(javax.servlet.http.HttpServletRequest, javax.servlet.http.HttpServletResponse) throws java.io.IOException
+    {
+        securibench.micro.session.Session3 this;
+        javax.servlet.http.HttpServletRequest l1;
+        javax.servlet.http.HttpServletResponse l2;
+        java.lang.String l3;
+        javax.servlet.http.HttpSession l4;
+        java.util.Enumeration l5;
+        java.io.PrintWriter l8;
+        boolean $stack12;
+        java.lang.Object $stack13;
+
+        this := @this: securibench.micro.session.Session3;
+
+        l1 := @parameter0: javax.servlet.http.HttpServletRequest;
+
+        l2 := @parameter1: javax.servlet.http.HttpServletResponse;
+
+        l3 = interfaceinvoke l1.<javax.servlet.http.HttpServletRequest: java.lang.String getParameter(java.lang.String)>("name");
+/*25*/
+/*25*/
+
+        l4 = interfaceinvoke l1.<javax.servlet.http.HttpServletRequest: javax.servlet.http.HttpSession getSession()>();
+/*26*/
+/*26*/
+
+        interfaceinvoke l4.<javax.servlet.http.HttpSession: void setAttribute(java.lang.String,java.lang.Object)>("name", l3);
+/*27*/
+
+        l5 = interfaceinvoke l4.<javax.servlet.http.HttpSession: java.util.Enumeration getAttributeNames()>();
+/*28*/
+/*28*/
+
+     label1:
+        $stack12 = interfaceinvoke l5.<java.util.Enumeration: boolean hasMoreElements()>();
+/*29*/
+
+        if $stack12 == 0 goto label2;
+/*29*/
+
+        $stack13 = interfaceinvoke l5.<java.util.Enumeration: java.lang.Object nextElement()>();
+/*30*/
+
+        l3 = (java.lang.String) $stack13;
+/*30*/
+
+        $stack13 = interfaceinvoke l4.<javax.servlet.http.HttpSession: java.lang.Object getAttribute(java.lang.String)>(l3);
+/*31*/
+
+        l3 = (java.lang.String) $stack13;
+/*31*/
+
+        l8 = interfaceinvoke l2.<javax.servlet.http.HttpServletResponse: java.io.PrintWriter getWriter()>();
+/*33*/
+/*33*/
+
+        virtualinvoke l8.<java.io.PrintWriter: void println(java.lang.String)>(l3);
+/*34*/
+
+        goto label1;
+/*35*/
+
+     label2:
+        return;
+/*36*/
+    }
+

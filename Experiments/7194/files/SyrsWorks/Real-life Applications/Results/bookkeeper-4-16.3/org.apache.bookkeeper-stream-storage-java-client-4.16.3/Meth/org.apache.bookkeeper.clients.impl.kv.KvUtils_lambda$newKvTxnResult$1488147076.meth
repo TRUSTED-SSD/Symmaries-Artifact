@@ -1,0 +1,44 @@
+static org.apache.bookkeeper.api.kv.result.Result org.apache.bookkeeper.clients.impl.kv.KvUtils:lambda$newKvTxnResult$1(org.apache.bookkeeper.api.kv.impl.result.ResultFactory resultFactory,org.apache.bookkeeper.api.kv.impl.result.KeyValueFactory kvFactory,org.apache.bookkeeper.stream.proto.kv.rpc.ResponseOp op)
+{
+int[] $stack3;
+  org.apache.bookkeeper.stream.proto.kv.rpc.ResponseOp$ResponseCase $stack4;
+  int $stack5;
+  org.apache.bookkeeper.stream.proto.kv.rpc.PutResponse $stack7;
+  org.apache.bookkeeper.api.kv.result.PutResult $stack8;
+  org.apache.bookkeeper.stream.proto.kv.rpc.DeleteRangeResponse $stack9;
+  org.apache.bookkeeper.api.kv.result.DeleteResult $stack10;
+  org.apache.bookkeeper.stream.proto.kv.rpc.RangeResponse $stack11;
+  org.apache.bookkeeper.api.kv.result.RangeResult $stack12;
+  java.lang.IllegalArgumentException $stack16;
+  java.lang.StringBuilder $stack17;
+  java.lang.String $stack22;
+  $stack3=org.apache.bookkeeper.clients.impl.kv.KvUtils$1.$SwitchMap$org$apache$bookkeeper$stream$proto$kv$rpc$ResponseOp$ResponseCase;
+ $stack4 = op.getResponseCase();
+ $stack5 = $stack4.ordinal();
+ $stack5=$stack3[$stack5];
+ switch [$stack5]
+if 0 goto label0;
+if 1 goto label1;
+if 2 goto label2;
+goto label3;
+ label0:$stack7 = op.getResponsePut();
+ $stack8 = org.apache.bookkeeper.clients.impl.kv.KvUtils.newPutResult($stack7,resultFactory,kvFactory);
+ return  $stack8;
+ label1:$stack11 = op.getResponseRange();
+ $stack12 = org.apache.bookkeeper.clients.impl.kv.KvUtils.newRangeResult($stack11,resultFactory,kvFactory);
+ return  $stack12;
+ label2:$stack9 = op.getResponseDeleteRange();
+ $stack10 = org.apache.bookkeeper.clients.impl.kv.KvUtils.newDeleteResult($stack9,resultFactory,kvFactory);
+ return  $stack10;
+ label3:$stack16=new java.lang.IllegalArgumentException;
+ $stack17=new java.lang.StringBuilder;
+ $stack17#java.lang.StringBuilder();
+ $stack17 = $stack17.append("Unknown response type \'");
+ $stack4 = op.getResponseCase();
+ $stack17 = $stack17.append((java.lang.Object)$stack4);
+ $stack17 = $stack17.append("\'");
+ $stack22 = $stack17.toString();
+ $stack16#java.lang.IllegalArgumentException($stack22);
+ throw $stack16;
+ } 
+

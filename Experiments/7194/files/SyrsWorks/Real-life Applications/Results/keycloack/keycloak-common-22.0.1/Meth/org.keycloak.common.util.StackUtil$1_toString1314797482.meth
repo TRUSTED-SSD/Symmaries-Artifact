@@ -1,0 +1,52 @@
+java.lang.String org.keycloak.common.util.StackUtil$1:toString()
+{
+java.lang.StringBuilder sb;
+  java.lang.StackTraceElement[] stackTrace;
+  boolean stackTraceStarted;
+  int endIndex;
+  java.lang.StackTraceElement st;
+  java.lang.Throwable $stack7;
+  int $stack9;
+  java.lang.String $stack10;
+  java.util.regex.Pattern $stack11;
+  java.util.regex.Matcher $stack13;
+  boolean $stack14;
+  java.lang.StringBuilder $stack18;
+  java.lang.Class $stack23;
+  java.lang.String $stack25;
+  sb=new java.lang.StringBuilder;
+ sb#java.lang.StringBuilder();
+ $stack7=new java.lang.Throwable;
+ $stack7#java.lang.Throwable();
+ stackTrace = $stack7.getStackTrace();
+ stackTraceStarted=0;
+ endIndex=0;
+ label0:$stack9=#stackTrace;
+ if (endIndex>=$stack9) goto label1;
+ st=stackTrace[endIndex];
+ if (stackTraceStarted!=0) goto label2;
+ $stack23 = this.getClass();
+ $stack10 = $stack23.getName();
+ $stack25 = st.getClassName();
+ stackTraceStarted = $stack10.equals((java.lang.Object)$stack25);
+ endIndex=(endIndex+1);
+ goto label3;
+ label2:$stack11 = org.keycloak.common.util.StackUtil.access$000();
+ $stack10 = st.getClassName();
+ $stack13 = $stack11.matcher((java.lang.CharSequence)$stack10);
+ $stack14 = $stack13.find();
+ if ($stack14==0) goto label4;
+ goto label3;
+ label4:$stack10 = st.getClassName();
+ $stack14 = $stack10.startsWith("org.jboss.resteasy");
+ if ($stack14==0) goto label5;
+ goto label1;
+ label5:$stack10=this.val$prefix;
+ $stack18 = sb.append($stack10);
+ $stack18.append((java.lang.Object)st);
+ label3:endIndex=(endIndex+1);
+ goto label0;
+ label1:$stack10 = sb.toString();
+ return  $stack10;
+ } 
+

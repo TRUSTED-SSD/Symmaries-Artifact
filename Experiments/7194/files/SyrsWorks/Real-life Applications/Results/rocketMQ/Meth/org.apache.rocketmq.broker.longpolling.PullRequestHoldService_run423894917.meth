@@ -1,0 +1,58 @@
+void org.apache.rocketmq.broker.longpolling.PullRequestHoldService:run()
+{
+long beginLockTimestamp;
+  org.apache.rocketmq.logging.org.slf4j.Logger $stack5;
+  java.lang.String $stack7;
+  boolean $stack8;
+  org.apache.rocketmq.broker.BrokerController $stack12;
+  org.apache.rocketmq.common.BrokerConfig $stack13;
+  org.apache.rocketmq.common.SystemClock $stack18;
+  long $stack21;
+  byte $stack22;
+  java.lang.Long $stack26;
+  java.lang.Throwable $stack34;
+  java.lang.StringBuilder $stack35;
+  $stack5=org.apache.rocketmq.broker.longpolling.PullRequestHoldService.log;
+ $stack7 = this.getServiceName();
+ $stack5.info("{} service started",(java.lang.Object)$stack7);
+ label0:$stack8 = this.isStopped();
+ if ($stack8!=0) goto label1;
+ label2:$stack12=this.brokerController;
+ $stack13 = $stack12.getBrokerConfig();
+ $stack8 = $stack13.isLongPollingEnable();
+ if ($stack8==0) goto label3;
+ this.waitForRunning(5000L);
+ goto label4;
+ label3:$stack12=this.brokerController;
+ $stack13 = $stack12.getBrokerConfig();
+ beginLockTimestamp = $stack13.getShortPollingTimeMills();
+ this.waitForRunning(beginLockTimestamp);
+ label4:$stack18=this.systemClock;
+ beginLockTimestamp = $stack18.now();
+ this.checkHoldRequest();
+ $stack18=this.systemClock;
+ $stack21 = $stack18.now();
+ beginLockTimestamp=($stack21-beginLockTimestamp);
+ $stack22=(beginLockTimestamp cmp 5000L);
+ if ($stack22<=0) goto label5;
+ $stack5=org.apache.rocketmq.broker.longpolling.PullRequestHoldService.log;
+ $stack26 = java.lang.Long.valueOf(beginLockTimestamp);
+ $stack5.warn("PullRequestHoldService: check hold pull request cost {}ms",(java.lang.Object)$stack26);
+ label5:goto label0;
+ label6:$stack34 = catch;
+ $stack5=org.apache.rocketmq.broker.longpolling.PullRequestHoldService.log;
+ $stack35=new java.lang.StringBuilder;
+ $stack35#java.lang.StringBuilder();
+ $stack7 = this.getServiceName();
+ $stack35 = $stack35.append($stack7);
+ $stack35 = $stack35.append(" service has exception. ");
+ $stack7 = $stack35.toString();
+ $stack5.warn($stack7,$stack34);
+ goto label0;
+ label1:$stack5=org.apache.rocketmq.broker.longpolling.PullRequestHoldService.log;
+ $stack7 = this.getServiceName();
+ $stack5.info("{} service end",(java.lang.Object)$stack7);
+ return;
+ catch java.lang.Throwable: label2 - label5 : label6;
+} 
+

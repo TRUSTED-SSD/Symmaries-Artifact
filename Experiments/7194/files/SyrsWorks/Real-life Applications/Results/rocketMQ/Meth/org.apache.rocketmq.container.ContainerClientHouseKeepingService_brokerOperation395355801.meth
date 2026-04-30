@@ -1,0 +1,41 @@
+void org.apache.rocketmq.container.ContainerClientHouseKeepingService:brokerOperation(org.apache.rocketmq.broker.BrokerController brokerController,org.apache.rocketmq.container.ContainerClientHouseKeepingService$CallbackCode callbackCode,java.lang.String remoteAddr,io.netty.channel.Channel channel)
+{
+boolean removed;
+  org.apache.rocketmq.container.ContainerClientHouseKeepingService$CallbackCode $stack6;
+  org.apache.rocketmq.broker.client.ProducerManager $stack7;
+  org.apache.rocketmq.broker.client.ConsumerManager $stack9;
+  boolean $stack10;
+  int[] $stack11;
+  int $stack12;
+  org.apache.rocketmq.store.stats.BrokerStatsManager $stack14;
+  $stack6=org.apache.rocketmq.container.ContainerClientHouseKeepingService$CallbackCode.CONNECT;
+ if (callbackCode!=$stack6) goto label0;
+ $stack14 = brokerController.getBrokerStatsManager();
+ $stack14.incChannelConnectNum();
+ return;
+ label0:$stack7 = brokerController.getProducerManager();
+ removed = $stack7.doChannelCloseEvent(remoteAddr,channel);
+ $stack9 = brokerController.getConsumerManager();
+ $stack10 = $stack9.doChannelCloseEvent(remoteAddr,channel);
+ removed=(removed & $stack10);
+ if (removed==0) goto label1;
+ $stack11=org.apache.rocketmq.container.ContainerClientHouseKeepingService$1.$SwitchMap$org$apache$rocketmq$container$ContainerClientHouseKeepingService$CallbackCode;
+ $stack12 = callbackCode.ordinal();
+ $stack12=$stack11[$stack12];
+ switch [$stack12]
+if 0 goto label2;
+if 1 goto label3;
+if 2 goto label4;
+goto label1;
+ label2:$stack14 = brokerController.getBrokerStatsManager();
+ $stack14.incChannelCloseNum();
+ goto label1;
+ label3:$stack14 = brokerController.getBrokerStatsManager();
+ $stack14.incChannelExceptionNum();
+ goto label1;
+ label4:$stack14 = brokerController.getBrokerStatsManager();
+ $stack14.incChannelIdleNum();
+ goto label1;
+ label1:return;
+ } 
+

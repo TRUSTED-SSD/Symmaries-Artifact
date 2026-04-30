@@ -1,0 +1,18 @@
+void org.apache.rocketmq.store.ha.autoswitch.AutoSwitchHAConnection:shutdown()
+{
+org.apache.rocketmq.store.ha.HAConnectionState $stack1;
+  org.apache.rocketmq.store.ha.FlowMonitor $stack2;
+  org.apache.rocketmq.store.ha.autoswitch.AutoSwitchHAConnection$AbstractWriteSocketService $stack3;
+  org.apache.rocketmq.store.ha.autoswitch.AutoSwitchHAConnection$ReadSocketService $stack4;
+  $stack1=org.apache.rocketmq.store.ha.HAConnectionState.SHUTDOWN;
+ this.changeCurrentState($stack1);
+ $stack2=this.flowMonitor;
+ $stack2.shutdown((boolean)1);
+ $stack3=this.writeSocketService;
+ $stack3.shutdown((boolean)1);
+ $stack4=this.readSocketService;
+ $stack4.shutdown((boolean)1);
+ this.close();
+ return;
+ } 
+

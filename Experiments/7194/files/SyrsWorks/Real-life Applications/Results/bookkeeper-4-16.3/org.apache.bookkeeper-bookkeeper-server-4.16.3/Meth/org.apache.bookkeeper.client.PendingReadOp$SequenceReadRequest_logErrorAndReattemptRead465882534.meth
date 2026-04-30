@@ -1,0 +1,33 @@
+void org.apache.bookkeeper.client.PendingReadOp$SequenceReadRequest:logErrorAndReattemptRead(int bookieIndex,org.apache.bookkeeper.net.BookieId host,java.lang.String errMsg,int rc)
+{
+org.apache.bookkeeper.client.DistributionSchedule$WriteSet $stack6;
+  java.util.BitSet $stack8;
+  org.apache.bookkeeper.client.PendingReadOp $stack9;
+  boolean $stack10;
+  org.slf4j.Logger $stack18;
+  java.util.List $stack19;
+  this#org.apache.bookkeeper.client.PendingReadOp$LedgerEntryRequest(bookieIndex,host,errMsg,rc);
+ $stack6=this.writeSet;
+ bookieIndex = $stack6.indexOf(bookieIndex);
+ if (bookieIndex!=-1) goto label0;
+ $stack18 = org.apache.bookkeeper.client.PendingReadOp.access$000();
+ $stack19=this.ensemble;
+ $stack18.error("Received error from a host which is not in the ensemble {} {}.",(java.lang.Object)host,(java.lang.Object)$stack19);
+ return;
+ label0:$stack8=this.erroredReplicas;
+ $stack8.set(bookieIndex);
+ $stack9=this.this$0;
+ $stack10=$stack9.isRecoveryRead;
+ if ($stack10==0) goto label1;
+ rc=this.numBookiesMissingEntry;
+ $stack9=this.this$0;
+ bookieIndex=$stack9.requiredBookiesMissingEntryForRecovery;
+ if (rc<bookieIndex) goto label1;
+ this.fail(-13);
+ return;
+ label1:$stack10 = this#org.apache.bookkeeper.client.PendingReadOp$SequenceReadRequest:readsOutstanding();
+ if ($stack10!=0) goto label2;
+ this.sendNextRead();
+ label2:return;
+ } 
+

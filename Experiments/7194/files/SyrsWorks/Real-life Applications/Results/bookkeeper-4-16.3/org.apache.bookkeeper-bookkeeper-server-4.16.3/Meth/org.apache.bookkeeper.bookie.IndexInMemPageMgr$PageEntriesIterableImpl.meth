@@ -1,0 +1,31 @@
+org.apache.bookkeeper.bookie.IndexInMemPageMgr$PageEntriesIterableImpl(org.apache.bookkeeper.bookie.IndexInMemPageMgr l1,long ledgerId)
+{
+org.apache.bookkeeper.bookie.IndexPersistenceMgr $stack4;
+  java.lang.Long $stack5;
+  org.apache.bookkeeper.bookie.FileInfoBackingCache$CachedFileInfo $stack6;
+  int $stack7;
+  long $stack9;
+  long $stack10;
+  long $stack12;
+  this.this$0=l1;
+ this#java.lang.Object();
+ this.curEntry=0L;
+ this.ledgerId=ledgerId;
+ $stack4 = org.apache.bookkeeper.bookie.IndexInMemPageMgr.access$800(l1);
+ $stack5 = java.lang.Long.valueOf(ledgerId);
+ $stack6 = $stack4.getFileInfo($stack5,null);
+ this.fi=$stack6;
+ $stack7=l1.entriesPerPage;
+ $stack9=(long) $stack7;
+ $stack6=this.fi;
+ $stack10 = $stack6.size();
+ $stack7=l1.pageSize;
+ $stack12=(long) $stack7;
+ $stack10=($stack10/$stack12);
+ $stack9=($stack9 * $stack10);
+ ledgerId = l1.getLastEntryInMem(ledgerId);
+ ledgerId = java.lang.Long.max($stack9,ledgerId);
+ this.totalEntries=ledgerId;
+ return;
+ } 
+

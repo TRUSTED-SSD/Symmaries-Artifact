@@ -1,0 +1,58 @@
+void org.apache.rocketmq.broker.processor.PopMessageProcessor:notifyLongPollingRequestIfNeed(java.lang.String topic,java.lang.String group,int queueId)
+{
+long popBufferOffset;
+  long consumerOffset;
+  long maxOffset;
+  boolean notifySuccess;
+  org.apache.rocketmq.broker.BrokerController $stack13;
+  org.apache.rocketmq.broker.processor.PopMessageProcessor $stack14;
+  org.apache.rocketmq.broker.processor.PopBufferMergeService $stack15;
+  org.apache.rocketmq.broker.offset.ConsumerOffsetManager $stack18;
+  org.apache.rocketmq.store.MessageStore $stack21;
+  byte $stack24;
+  org.apache.rocketmq.broker.processor.NotificationProcessor $stack29;
+  org.apache.rocketmq.common.BrokerConfig $stack31;
+  boolean $stack32;
+  java.lang.Object[] $stack33;
+  org.apache.rocketmq.logging.org.slf4j.Logger $stack34;
+  java.lang.Integer $stack37;
+  java.lang.Boolean $stack39;
+  $stack13=this.brokerController;
+ $stack14 = $stack13.getPopMessageProcessor();
+ $stack15 = $stack14.getPopBufferMergeService();
+ popBufferOffset = $stack15.getLatestOffset(topic,group,queueId);
+ $stack13=this.brokerController;
+ $stack18 = $stack13.getConsumerOffsetManager();
+ consumerOffset = $stack18.queryOffset(group,topic,queueId);
+ $stack13=this.brokerController;
+ $stack21 = $stack13.getMessageStore();
+ maxOffset = $stack21.getMaxOffsetInQueue(topic,queueId);
+ popBufferOffset = java.lang.Math.max(popBufferOffset,consumerOffset);
+ $stack24=(maxOffset cmp popBufferOffset);
+ if ($stack24<=0) goto label0;
+ $stack13=this.brokerController;
+ $stack14 = $stack13.getPopMessageProcessor();
+ notifySuccess = $stack14.notifyMessageArriving(topic,group,-1);
+ if (notifySuccess!=0) goto label1;
+ $stack13=this.brokerController;
+ $stack14 = $stack13.getPopMessageProcessor();
+ notifySuccess = $stack14.notifyMessageArriving(topic,group,queueId);
+ label1:$stack13=this.brokerController;
+ $stack29 = $stack13.getNotificationProcessor();
+ $stack29.notifyMessageArriving(topic,queueId);
+ $stack13=this.brokerController;
+ $stack31 = $stack13.getBrokerConfig();
+ $stack32 = $stack31.isEnablePopLog();
+ if ($stack32==0) goto label0;
+ $stack34=org.apache.rocketmq.broker.processor.PopMessageProcessor.POP_LOGGER;
+ $stack33=new java.lang.Object[4];
+ $stack33[0]=topic;
+ $stack33[1]=group;
+ $stack37 = java.lang.Integer.valueOf(queueId);
+ $stack33[2]=$stack37;
+ $stack39 = java.lang.Boolean.valueOf(notifySuccess);
+ $stack33[3]=$stack39;
+ $stack34.info("notify long polling request. topic:{}, group:{}, queueId:{}, success:{}",$stack33);
+ label0:return;
+ } 
+

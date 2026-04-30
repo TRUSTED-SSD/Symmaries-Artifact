@@ -1,0 +1,31 @@
+java.lang.Object java.util.WeakHashMap:get(java.lang.Object r1)
+{
+java.lang.Object r2;
+  int i0;
+  java.util.WeakHashMap$Entry[] r3;
+  int i1;
+  int $i2;
+  int $i3;
+  java.lang.Object $r4;
+  boolean $z0;
+  java.lang.Object $r5;
+  java.util.WeakHashMap$Entry r6;
+  r2 = java.util.WeakHashMap.maskNull(r1);
+ i0 = this.hash(r2);
+ r3 = this#java.util.WeakHashMap:getTable();
+ $i2=#r3;
+ i1 = java.util.WeakHashMap.indexFor(i0,$i2);
+ r6=r3[i1];
+ label0:if (r6==null) goto label1;
+ $i3=r6.hash;
+ if ($i3!=i0) goto label2;
+ $r4 = r6.get();
+ $z0 = java.util.WeakHashMap.eq(r2,$r4);
+ if ($z0==0) goto label2;
+ $r5=r6.value;
+ return  $r5;
+ label2:r6=r6.next;
+ goto label0;
+ label1:return  null;
+ }  
+

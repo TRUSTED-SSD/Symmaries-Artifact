@@ -1,0 +1,22 @@
+static void org.apache.rocketmq.remoting.netty.NettyRemotingAbstract:lambda$invokeOnewayImpl$5(org.apache.rocketmq.remoting.common.SemaphoreReleaseOnlyOnce once,io.netty.channel.Channel channel,io.netty.channel.ChannelFuture f)
+{
+boolean $stack3;
+  java.lang.StringBuilder $stack4;
+  org.apache.rocketmq.logging.org.slf4j.Logger $stack5;
+  java.net.SocketAddress $stack7;
+  java.lang.String $stack10;
+  once.release();
+ $stack3 = f.isSuccess();
+ if ($stack3!=0) goto label0;
+ $stack5=org.apache.rocketmq.remoting.netty.NettyRemotingAbstract.log;
+ $stack4=new java.lang.StringBuilder;
+ $stack4#java.lang.StringBuilder();
+ $stack4 = $stack4.append("send a request command to channel <");
+ $stack7 = channel.remoteAddress();
+ $stack4 = $stack4.append((java.lang.Object)$stack7);
+ $stack4 = $stack4.append("> failed.");
+ $stack10 = $stack4.toString();
+ $stack5.warn($stack10);
+ label0:return;
+ } 
+

@@ -1,0 +1,42 @@
+static java.util.List org.apache.bookkeeper.stream.protocol.util.ProtoUtils:split(long streamId,int numInitialRanges,long nextRangeId,org.apache.bookkeeper.stream.protocol.util.StorageContainerPlacementPolicy placementPolicy)
+{
+long rangeSize;
+  long startKey;
+  java.util.ArrayList ranges;
+  int idx;
+  long endKey;
+  long rangeId;
+  int $stack23;
+  org.apache.bookkeeper.stream.proto.RangeProperties$Builder $stack25;
+  org.apache.bookkeeper.stream.proto.RangeProperties $stack44;
+  numInitialRanges = java.lang.Math.max(2,numInitialRanges);
+ idx=(numInitialRanges%2);
+ if (idx==0) goto label0;
+ numInitialRanges=(numInitialRanges+1);
+ label0:idx=(numInitialRanges/2);
+ rangeSize=(long) idx;
+ rangeSize=(9223372036854775807L/rangeSize);
+ startKey=-9223372036854775808L;
+ ranges = com.google.common.collect.Lists.newArrayListWithExpectedSize(numInitialRanges);
+ idx=0;
+ label1:if (idx>=numInitialRanges) goto label2;
+ endKey=(startKey+rangeSize);
+ $stack23=(numInitialRanges-1);
+ if ($stack23!=idx) goto label3;
+ endKey=9223372036854775807L;
+ label3:rangeId=nextRangeId;
+ nextRangeId=(nextRangeId+1L);
+ $stack25 = org.apache.bookkeeper.stream.proto.RangeProperties.newBuilder();
+ $stack25 = $stack25.setStartHashKey(startKey);
+ $stack25 = $stack25.setEndHashKey(endKey);
+ startKey = placementPolicy.placeStreamRange(streamId,rangeId);
+ $stack25 = $stack25.setStorageContainerId(startKey);
+ $stack25 = $stack25.setRangeId(rangeId);
+ startKey=endKey;
+ $stack44 = $stack25.build();
+ ranges.add((java.lang.Object)$stack44);
+ idx=(idx+1);
+ goto label1;
+ label2:return  ranges;
+ } 
+

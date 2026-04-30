@@ -1,0 +1,44 @@
+org.apache.rocketmq.store.PutMessageResult org.apache.rocketmq.broker.failover.EscapeBridge:transformSendResult2PutResult(org.apache.rocketmq.client.producer.SendResult sendResult)
+{
+int[] $stack2;
+  org.apache.rocketmq.client.producer.SendStatus $stack3;
+  int $stack4;
+  org.apache.rocketmq.store.PutMessageResult $stack6;
+  org.apache.rocketmq.store.PutMessageStatus $stack7;
+  if (sendResult!=null) goto label0;
+ $stack6=new org.apache.rocketmq.store.PutMessageResult;
+ $stack7=org.apache.rocketmq.store.PutMessageStatus.PUT_TO_REMOTE_BROKER_FAIL;
+ $stack6#org.apache.rocketmq.store.PutMessageResult($stack7,null,1);
+ return  $stack6;
+ label0:$stack2=org.apache.rocketmq.broker.failover.EscapeBridge$1.$SwitchMap$org$apache$rocketmq$client$producer$SendStatus;
+ $stack3 = sendResult.getSendStatus();
+ $stack4 = $stack3.ordinal();
+ $stack4=$stack2[$stack4];
+ switch [$stack4]
+if 0 goto label1;
+if 1 goto label2;
+if 2 goto label3;
+if 3 goto label4;
+goto label5;
+ label1:$stack6=new org.apache.rocketmq.store.PutMessageResult;
+ $stack7=org.apache.rocketmq.store.PutMessageStatus.PUT_OK;
+ $stack6#org.apache.rocketmq.store.PutMessageResult($stack7,null,1);
+ return  $stack6;
+ label2:$stack6=new org.apache.rocketmq.store.PutMessageResult;
+ $stack7=org.apache.rocketmq.store.PutMessageStatus.SLAVE_NOT_AVAILABLE;
+ $stack6#org.apache.rocketmq.store.PutMessageResult($stack7,null,1);
+ return  $stack6;
+ label3:$stack6=new org.apache.rocketmq.store.PutMessageResult;
+ $stack7=org.apache.rocketmq.store.PutMessageStatus.FLUSH_DISK_TIMEOUT;
+ $stack6#org.apache.rocketmq.store.PutMessageResult($stack7,null,1);
+ return  $stack6;
+ label4:$stack6=new org.apache.rocketmq.store.PutMessageResult;
+ $stack7=org.apache.rocketmq.store.PutMessageStatus.FLUSH_SLAVE_TIMEOUT;
+ $stack6#org.apache.rocketmq.store.PutMessageResult($stack7,null,1);
+ return  $stack6;
+ label5:$stack6=new org.apache.rocketmq.store.PutMessageResult;
+ $stack7=org.apache.rocketmq.store.PutMessageStatus.PUT_TO_REMOTE_BROKER_FAIL;
+ $stack6#org.apache.rocketmq.store.PutMessageResult($stack7,null,1);
+ return  $stack6;
+ } 
+

@@ -1,0 +1,26 @@
+org.apache.bookkeeper.clients.impl.channel.StorageServerChannel org.apache.bookkeeper.clients.impl.channel.StorageServerChannelManager:getChannel(org.apache.bookkeeper.stream.proto.common.Endpoint endpoint)
+{
+org.apache.bookkeeper.clients.impl.channel.StorageServerChannel l2;
+  java.util.concurrent.locks.ReentrantReadWriteLock $stack4;
+  java.util.concurrent.locks.ReentrantReadWriteLock$ReadLock $stack5;
+  java.util.concurrent.ConcurrentMap $stack6;
+  java.lang.Object $stack7;
+  java.lang.Throwable $stack10;
+  $stack4=this.lock;
+ $stack5 = $stack4.readLock();
+ $stack5.lock();
+ label0:$stack6=this.channels;
+ $stack7 = $stack6.get((java.lang.Object)endpoint);
+ l2=(org.apache.bookkeeper.clients.impl.channel.StorageServerChannel) $stack7;
+ label1:$stack4=this.lock;
+ $stack5 = $stack4.readLock();
+ $stack5.unlock();
+ return  l2;
+ label2:$stack10 = catch;
+ $stack4=this.lock;
+ $stack5 = $stack4.readLock();
+ $stack5.unlock();
+ throw $stack10;
+ catch java.lang.Throwable: label0 - label1 : label2;
+} 
+

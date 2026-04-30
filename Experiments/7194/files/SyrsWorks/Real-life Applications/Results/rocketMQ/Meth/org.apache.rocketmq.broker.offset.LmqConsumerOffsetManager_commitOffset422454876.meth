@@ -1,0 +1,24 @@
+void org.apache.rocketmq.broker.offset.LmqConsumerOffsetManager:commitOffset(java.lang.String @clientHost,java.lang.String group,java.lang.String topic,int queueId,long offset)
+{
+boolean $stack8;
+  java.lang.StringBuilder $stack9;
+  java.util.concurrent.ConcurrentHashMap $stack14;
+  java.lang.Long $stack15;
+  java.lang.String clientHost;
+clientHost=@clientHost;
+$stack8 = org.apache.rocketmq.common.MixAll.isLmq(group);
+ if ($stack8!=0) goto label0;
+ this#org.apache.rocketmq.broker.offset.ConsumerOffsetManager(clientHost,group,topic,queueId,offset);
+ return;
+ label0:$stack9=new java.lang.StringBuilder;
+ $stack9#java.lang.StringBuilder();
+ $stack9 = $stack9.append(topic);
+ $stack9 = $stack9.append("@");
+ $stack9 = $stack9.append(group);
+ clientHost = $stack9.toString();
+ $stack14=this.lmqOffsetTable;
+ $stack15 = java.lang.Long.valueOf(offset);
+ $stack14.put((java.lang.Object)clientHost,(java.lang.Object)$stack15);
+ return;
+ } 
+

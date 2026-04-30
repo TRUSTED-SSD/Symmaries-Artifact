@@ -1,0 +1,9 @@
+boolean org.apache.rocketmq.broker.filter.ExpressionMessageFilter:isMatchedByConsumeQueue (
+  java.lang.Long tagsCode,
+  org.apache.rocketmq.store.ConsumeQueueExt$CqExtUnit cqExtUnit) {
+  guard = tt;
+  ret(level()) = level(tagsCode) ⊔ level(this) ⊔ obj_level(tagsCode) ⊔ obj_level(this);
+  ret(obj_level(cqExtUnit)) = level(this) ⊔ obj_level(cqExtUnit) ⊔ obj_level(this);
+  ret(obj_level(tagsCode)) = level(tagsCode) ⊔ obj_level(tagsCode);
+  ret(obj_level(this)) = level(cqExtUnit) ⊔ level(tagsCode) ⊔ level(this) ⊔ obj_level(cqExtUnit) ⊔ obj_level(tagsCode) ⊔ obj_level(this);
+}

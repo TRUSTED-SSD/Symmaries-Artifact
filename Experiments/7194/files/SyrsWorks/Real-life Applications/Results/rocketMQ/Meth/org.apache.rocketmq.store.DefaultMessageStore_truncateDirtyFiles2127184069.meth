@@ -1,0 +1,39 @@
+void org.apache.rocketmq.store.DefaultMessageStore:truncateDirtyFiles(long offsetToTruncate)
+{
+long oldReputFromOffset;
+  byte $stack6;
+  org.apache.rocketmq.store.DefaultMessageStore$ReputMessageService $stack7;
+  org.apache.rocketmq.store.CommitLog $stack10;
+  org.apache.rocketmq.store.config.MessageStoreConfig $stack11;
+  boolean $stack12;
+  org.apache.rocketmq.store.DefaultMessageStore$ConcurrentReputMessageService $stack13;
+  oldReputFromOffset = this.getMaxPhyOffset();
+ $stack6=(offsetToTruncate cmp oldReputFromOffset);
+ if ($stack6<0) goto label0;
+ return;
+ label0:$stack7=this.reputMessageService;
+ $stack7.shutdown();
+ $stack7=this.reputMessageService;
+ oldReputFromOffset = $stack7.getReputFromOffset();
+ $stack10=this.commitLog;
+ $stack10.truncateDirtyFiles(offsetToTruncate);
+ this.truncateDirtyLogicFiles(offsetToTruncate);
+ this.recoverTopicQueueTable();
+ $stack11=this.messageStoreConfig;
+ $stack12 = $stack11.isEnableBuildConsumeQueueConcurrently();
+ if ($stack12!=0) goto label1;
+ $stack7=new org.apache.rocketmq.store.DefaultMessageStore$ReputMessageService;
+ $stack7#org.apache.rocketmq.store.DefaultMessageStore$ReputMessageService(this);
+ this.reputMessageService=$stack7;
+ goto label2;
+ label1:$stack13=new org.apache.rocketmq.store.DefaultMessageStore$ConcurrentReputMessageService;
+ $stack13#org.apache.rocketmq.store.DefaultMessageStore$ConcurrentReputMessageService(this);
+ this.reputMessageService=$stack13;
+ label2:$stack7=this.reputMessageService;
+ offsetToTruncate = java.lang.Math.min(oldReputFromOffset,offsetToTruncate);
+ $stack7.setReputFromOffset(offsetToTruncate);
+ $stack7=this.reputMessageService;
+ $stack7.start();
+ return;
+ } 
+

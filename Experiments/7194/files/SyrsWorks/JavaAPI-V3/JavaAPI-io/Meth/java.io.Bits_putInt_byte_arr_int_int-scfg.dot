@@ -1,0 +1,58 @@
+digraph G {
+  node [shape=box, ];
+  "pc0_js1" [label="〈$i3 = i0 + 3, js1〉", ];
+  "pc1_js1" [label="〈$b2 = (byte) i1, js1〉", ];
+  "pc2_js1" [label="〈r0[$i3] = $b2, js1〉", ];
+  "pc3_js1" [label="〈$i6 = i0 + 2, js1〉", ];
+  "pc4_js1" [label="〈$i4 = i1 >>> 8, js1〉", ];
+  "pc5_js1" [label="〈$b5 = (byte) $i4, js1〉", ];
+  "pc6_js1" [label="〈r0[$i6] = $b5, js1〉", ];
+  "pc7_js1" [label="〈$i9 = i0 + 1, js1〉", ];
+  "pc8_js1" [label="〈$i7 = i1 >>> 16, js1〉", ];
+  "pc9_js1" [label="〈$b8 = (byte) $i7, js1〉", ];
+  "pc10_js1" [label="〈r0[$i9] = $b8, js1〉", ];
+  "pc11_js1" [label="〈$i10 = i1 >>> 24, js1〉", ];
+  "pc12_js1" [label="〈$b11 = (byte) $i10, js1〉", ];
+  "pc13_js1" [label="〈r0[i0] = $b11, js1〉", ];
+  "pc14_js1" [label="〈return, js1〉", ];
+  "pc15_js1" [label="〈sink, js1〉\n\
+obj_level(r0) ⊑ ret(obj_level(r0))'",
+              ];
+  
+  
+  "pc0_js1" -> "pc1_js1" [label="tt,\n\
+{level($i3) := pc ⊔ level(i0)}", ];
+  "pc1_js1" -> "pc2_js1" [label="tt,\n\
+{level($b2) := pc ⊔ level(i1)}", ];
+  "pc2_js1" -> "pc3_js1" [label="tt,\n\
+{obj_level(r0) := pc ⊔ level(i0) ⊔ level(i1) ⊔ obj_level(r0)}",
+                          ];
+  "pc3_js1" -> "pc4_js1" [label="tt,\n\
+{level($i6) := pc ⊔ level(i0)}", ];
+  "pc4_js1" -> "pc5_js1" [label="tt,\n\
+{level($i4) := pc ⊔ level(i1)}", ];
+  "pc5_js1" -> "pc6_js1" [label="tt,\n\
+{level($b5) := pc ⊔ level(i1)}", ];
+  "pc6_js1" -> "pc7_js1" [label="tt,\n\
+{obj_level(r0) := pc ⊔ level(i0) ⊔ level(i1) ⊔ obj_level(r0)}",
+                          ];
+  "pc7_js1" -> "pc8_js1" [label="tt,\n\
+{level($i9) := pc ⊔ level(i0)}", ];
+  "pc8_js1" -> "pc9_js1" [label="tt,\n\
+{level($i7) := pc ⊔ level(i1)}", ];
+  "pc9_js1" -> "pc10_js1" [label="tt,\n\
+{level($b8) := pc ⊔ level(i1)}", ];
+  "pc10_js1" -> "pc11_js1" [label="tt,\n\
+{obj_level(r0) := pc ⊔ level(i0) ⊔ level(i1) ⊔ obj_level(r0)}",
+                            ];
+  "pc11_js1" -> "pc12_js1" [label="tt,\n\
+{level($i10) := pc ⊔ level(i1)}", ];
+  "pc12_js1" -> "pc13_js1" [label="tt,\n\
+{level($b11) := pc ⊔ level(i1)}", ];
+  "pc13_js1" -> "pc14_js1" [label="tt,\n\
+{obj_level(r0) := pc ⊔ level(i0) ⊔ level(i1) ⊔ obj_level(r0)}",
+                            ];
+  "pc14_js1" -> "pc15_js1" [label="tt,\n\
+{ϕ := S14}", ];
+  
+  }

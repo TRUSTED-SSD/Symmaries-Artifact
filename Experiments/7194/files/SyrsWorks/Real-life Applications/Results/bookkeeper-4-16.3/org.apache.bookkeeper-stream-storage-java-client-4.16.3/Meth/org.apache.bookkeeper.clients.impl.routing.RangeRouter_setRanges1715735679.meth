@@ -1,0 +1,39 @@
+org.apache.bookkeeper.clients.impl.internal.api.HashStreamRanges org.apache.bookkeeper.clients.impl.routing.RangeRouter:setRanges(org.apache.bookkeeper.clients.impl.internal.api.HashStreamRanges @ranges)
+{
+long stamp;
+  org.apache.bookkeeper.clients.impl.internal.api.HashStreamRanges oldRanges;
+  java.lang.Throwable l6;
+  java.util.concurrent.locks.StampedLock $stack7;
+  long $stack11;
+  long $stack13;
+  byte $stack14;
+  org.apache.bookkeeper.clients.impl.internal.api.HashStreamRanges ranges;
+ranges=@ranges;
+$stack7=this.lock;
+ stamp = $stack7.writeLock();
+ label0:oldRanges=this.ranges;
+ if (oldRanges==null) goto label1;
+ $stack11 = ranges.getMaxRangeId();
+ oldRanges=this.ranges;
+ $stack13 = oldRanges.getMaxRangeId();
+ $stack14=($stack11 cmp $stack13);
+ if ($stack14<=0) goto label2;
+ label1:oldRanges=this.ranges;
+ this.ranges=ranges;
+ ranges=oldRanges;
+ label3:$stack7=this.lock;
+ $stack7.unlockWrite(stamp);
+ return  oldRanges;
+ label2:oldRanges=null;
+ label4:$stack7=this.lock;
+ $stack7.unlockWrite(stamp);
+ return  null;
+ label5:l6 = catch;
+ label6:$stack7=this.lock;
+ $stack7.unlockWrite(stamp);
+ throw l6;
+ catch java.lang.Throwable: label0 - label3 : label5;
+catch java.lang.Throwable: label2 - label4 : label5;
+catch java.lang.Throwable: label5 - label6 : label5;
+} 
+

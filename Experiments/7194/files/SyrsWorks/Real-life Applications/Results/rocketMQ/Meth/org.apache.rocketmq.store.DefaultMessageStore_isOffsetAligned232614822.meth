@@ -1,0 +1,17 @@
+boolean org.apache.rocketmq.store.DefaultMessageStore:isOffsetAligned(long offset)
+{
+org.apache.rocketmq.store.SelectMappedBufferResult mappedBufferResult;
+  org.apache.rocketmq.store.DispatchRequest dispatchRequest;
+  org.apache.rocketmq.store.CommitLog $stack6;
+  java.nio.ByteBuffer $stack7;
+  boolean $stack9;
+  mappedBufferResult = this.getCommitLogData(offset);
+ if (mappedBufferResult!=null) goto label0;
+ return  1;
+ label0:$stack6=this.commitLog;
+ $stack7 = mappedBufferResult.getByteBuffer();
+ dispatchRequest = $stack6.checkMessageAndReturnSize($stack7,(boolean)1,(boolean)0);
+ $stack9 = dispatchRequest.isSuccess();
+ return  $stack9;
+ } 
+

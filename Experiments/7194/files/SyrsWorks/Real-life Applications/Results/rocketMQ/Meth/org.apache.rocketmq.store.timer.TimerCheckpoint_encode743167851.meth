@@ -1,0 +1,29 @@
+static java.nio.ByteBuffer org.apache.rocketmq.store.timer.TimerCheckpoint:encode(org.apache.rocketmq.store.timer.TimerCheckpoint another)
+{
+java.nio.ByteBuffer byteBuffer;
+  long $stack3;
+  org.apache.rocketmq.remoting.protocol.DataVersion $stack11;
+  java.util.concurrent.atomic.AtomicLong $stack18;
+  byteBuffer = java.nio.ByteBuffer.allocate(56);
+ $stack3 = another.getLastReadTimeMs();
+ byteBuffer.putLong($stack3);
+ $stack3 = another.getLastTimerLogFlushPos();
+ byteBuffer.putLong($stack3);
+ $stack3 = another.getLastTimerQueueOffset();
+ byteBuffer.putLong($stack3);
+ $stack3 = another.getMasterTimerQueueOffset();
+ byteBuffer.putLong($stack3);
+ $stack11 = another.getDataVersion();
+ $stack3 = $stack11.getStateVersion();
+ byteBuffer.putLong($stack3);
+ $stack11 = another.getDataVersion();
+ $stack3 = $stack11.getTimestamp();
+ byteBuffer.putLong($stack3);
+ $stack11 = another.getDataVersion();
+ $stack18 = $stack11.getCounter();
+ $stack3 = $stack18.get();
+ byteBuffer.putLong($stack3);
+ byteBuffer.flip();
+ return  byteBuffer;
+ } 
+

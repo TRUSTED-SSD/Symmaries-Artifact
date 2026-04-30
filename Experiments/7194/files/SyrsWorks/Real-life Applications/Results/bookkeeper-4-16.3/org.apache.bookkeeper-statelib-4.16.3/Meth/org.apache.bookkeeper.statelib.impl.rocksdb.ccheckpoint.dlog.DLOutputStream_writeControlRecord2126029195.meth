@@ -1,0 +1,30 @@
+java.util.concurrent.CompletableFuture org.apache.bookkeeper.statelib.impl.rocksdb.ccheckpoint.dlog.DLOutputStream:writeControlRecord()
+{
+org.apache.distributedlog.LogRecord record;
+  org.apache.bookkeeper.statelib.impl.rocksdb.ccheckpoint.dlog.DLOutputStream l2;
+  java.lang.Throwable l3;
+  byte[] $stack6;
+  long $stack7;
+  io.netty.buffer.ByteBuf $stack8;
+  org.apache.distributedlog.api.AsyncLogWriter $stack10;
+  java.util.concurrent.CompletableFuture $stack11;
+  l2=this;
+ monitorenter this;
+ label0:record=new org.apache.distributedlog.LogRecord;
+ $stack7=this.writePos;
+ $stack6=org.apache.bookkeeper.statelib.impl.rocksdb.ccheckpoint.dlog.DLOutputStream.CONTROL_RECORD_CONTENT;
+ $stack8 = io.netty.buffer.Unpooled.wrappedBuffer($stack6);
+ record#org.apache.distributedlog.LogRecord($stack7,$stack8);
+ record.setControl();
+ monitorexit this;
+ label1:goto label2;
+ label3:l3 = catch;
+ monitorexit this;
+ label4:throw l3;
+ label2:$stack10=this.writer;
+ $stack11 = $stack10.write(record);
+ return  $stack11;
+ catch java.lang.Throwable: label0 - label1 : label3;
+catch java.lang.Throwable: label3 - label4 : label3;
+} 
+

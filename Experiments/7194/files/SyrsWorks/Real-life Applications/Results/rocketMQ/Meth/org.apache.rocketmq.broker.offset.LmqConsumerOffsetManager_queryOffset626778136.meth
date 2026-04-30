@@ -1,0 +1,33 @@
+java.util.Map org.apache.rocketmq.broker.offset.LmqConsumerOffsetManager:queryOffset(java.lang.String @group,java.lang.String topic)
+{
+java.util.HashMap map;
+  java.lang.Long offset;
+  boolean $stack6;
+  java.lang.StringBuilder $stack8;
+  java.util.concurrent.ConcurrentHashMap $stack13;
+  java.lang.Object $stack14;
+  java.lang.Integer $stack15;
+  java.util.Map $stack18;
+  java.lang.String group;
+group=@group;
+$stack6 = org.apache.rocketmq.common.MixAll.isLmq(group);
+ if ($stack6!=0) goto label0;
+ $stack18 = this#org.apache.rocketmq.broker.offset.ConsumerOffsetManager:queryOffset(group,topic);
+ return  $stack18;
+ label0:map=new java.util.HashMap;
+ map#java.util.HashMap();
+ $stack8=new java.lang.StringBuilder;
+ $stack8#java.lang.StringBuilder();
+ $stack8 = $stack8.append(topic);
+ $stack8 = $stack8.append("@");
+ $stack8 = $stack8.append(group);
+ group = $stack8.toString();
+ $stack13=this.lmqOffsetTable;
+ $stack14 = $stack13.get((java.lang.Object)group);
+ offset=(java.lang.Long) $stack14;
+ if (offset==null) goto label1;
+ $stack15 = java.lang.Integer.valueOf(0);
+ map.put((java.lang.Object)$stack15,(java.lang.Object)offset);
+ label1:return  map;
+ } 
+

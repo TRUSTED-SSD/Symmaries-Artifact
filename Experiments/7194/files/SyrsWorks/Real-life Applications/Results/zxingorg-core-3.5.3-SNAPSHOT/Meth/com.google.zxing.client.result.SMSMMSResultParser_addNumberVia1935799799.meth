@@ -1,0 +1,25 @@
+static void com.google.zxing.client.result.SMSMMSResultParser:addNumberVia(java.util.Collection numbers,java.util.Collection vias,java.lang.String @numberPart)
+{
+int numberEnd;
+  java.lang.String $stack7;
+  boolean $stack8;
+  java.lang.String numberPart;
+numberPart=@numberPart;
+numberEnd = numberPart.indexOf(59);
+ if (numberEnd>=0) goto label0;
+ numbers.add((java.lang.Object)numberPart);
+ vias.add(null);
+ goto label1;
+ label0:$stack7 = numberPart.substring(0,numberEnd);
+ numbers.add((java.lang.Object)$stack7);
+ numberEnd=(numberEnd+1);
+ numberPart = numberPart.substring(numberEnd);
+ $stack8 = numberPart.startsWith("via=");
+ if ($stack8==0) goto label2;
+ numberPart = numberPart.substring(4);
+ goto label3;
+ label2:numberPart=null;
+ label3:vias.add((java.lang.Object)numberPart);
+ label1:return;
+ } 
+

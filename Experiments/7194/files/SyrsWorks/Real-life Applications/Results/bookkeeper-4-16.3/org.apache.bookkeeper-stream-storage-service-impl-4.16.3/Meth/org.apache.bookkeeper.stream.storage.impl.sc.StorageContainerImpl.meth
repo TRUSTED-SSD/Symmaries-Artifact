@@ -1,0 +1,28 @@
+org.apache.bookkeeper.stream.storage.impl.sc.StorageContainerImpl(org.apache.bookkeeper.stream.storage.api.sc.StorageContainerServiceFactory serviceFactory,long scId)
+{
+org.apache.bookkeeper.stream.storage.impl.sc.Channel404 $stack4;
+  org.apache.bookkeeper.stream.storage.api.sc.StorageContainerService $stack5;
+  java.lang.StringBuilder $stack6;
+  java.lang.String $stack9;
+  java.util.Collection $stack12;
+  io.grpc.Server $stack13;
+  this#java.lang.Object();
+ $stack4 = org.apache.bookkeeper.stream.storage.impl.sc.Channel404.of();
+ this.channel=$stack4;
+ this.scId=scId;
+ $stack5 = serviceFactory.createStorageContainerService(scId);
+ this.service=$stack5;
+ $stack6=new java.lang.StringBuilder;
+ $stack6#java.lang.StringBuilder();
+ $stack6 = $stack6.append("container-");
+ $stack6 = $stack6.append(scId);
+ $stack9 = $stack6.toString();
+ this.containerName=$stack9;
+ $stack9=this.containerName;
+ $stack5=this.service;
+ $stack12 = $stack5.getRegisteredServices();
+ $stack13 = org.apache.bookkeeper.stream.storage.impl.sc.StorageContainerImpl.buildGrpcServer($stack9,$stack12);
+ this.grpcServer=$stack13;
+ return;
+ } 
+

@@ -1,0 +1,32 @@
+int org.apache.bookkeeper.bookie.BookieShell$EndpointInfoCmd:runCmd(org.apache.commons.cli.CommandLine cmdLine)
+{
+org.apache.bookkeeper.tools.cli.commands.bookies.EndpointInfoCommand$EndpointInfoFlags flags;
+  java.lang.String bookieId;
+  boolean result;
+  org.apache.bookkeeper.tools.cli.commands.bookies.EndpointInfoCommand $stack6;
+  org.apache.bookkeeper.bookie.BookieShell $stack11;
+  org.apache.bookkeeper.conf.ServerConfiguration $stack12;
+  byte $stack14;
+  org.slf4j.Logger $stack15;
+  $stack6=new org.apache.bookkeeper.tools.cli.commands.bookies.EndpointInfoCommand;
+ $stack6#org.apache.bookkeeper.tools.cli.commands.bookies.EndpointInfoCommand();
+ flags=new org.apache.bookkeeper.tools.cli.commands.bookies.EndpointInfoCommand$EndpointInfoFlags;
+ flags#org.apache.bookkeeper.tools.cli.commands.bookies.EndpointInfoCommand$EndpointInfoFlags();
+ bookieId = cmdLine.getOptionValue("bookieid");
+ flags.bookie(bookieId);
+ result = org.apache.commons.lang.StringUtils.isBlank(bookieId);
+ if (result==0) goto label0;
+ $stack15=org.apache.bookkeeper.bookie.BookieShell.LOG;
+ $stack15.error("Invalid argument list!");
+ this.printUsage();
+ return  -1;
+ label0:$stack11=this.this$0;
+ $stack12=$stack11.bkConf;
+ result = $stack6.apply($stack12,flags);
+ if (result==0) goto label1;
+ $stack14=0;
+ goto label2;
+ label1:$stack14=-1;
+ label2:return  $stack14;
+ } 
+

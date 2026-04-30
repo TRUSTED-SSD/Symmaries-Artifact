@@ -1,0 +1,42 @@
+java.util.Iterator org.apache.bookkeeper.metastore.InMemoryMetastoreCursor:unsafeReadEntries(int numEntries)
+{
+java.util.ArrayList entries;
+  int nCount;
+  java.util.Map$Entry entry;
+  org.apache.bookkeeper.versioning.Versioned value;
+  java.lang.String key;
+  java.util.Iterator $stack9;
+  boolean $stack10;
+  java.lang.Object $stack14;
+  org.apache.bookkeeper.metastore.Value $stack17;
+  org.apache.bookkeeper.versioning.Version $stack18;
+  java.util.Set $stack19;
+  org.apache.bookkeeper.metastore.MetastoreTableItem $stack22;
+  entries=new java.util.ArrayList;
+ entries#java.util.ArrayList();
+ nCount=0;
+ label0:$stack9=this.iter;
+ $stack10 = $stack9.hasNext();
+ if ($stack10==0) goto label1;
+ if (nCount>=numEntries) goto label1;
+ $stack9=this.iter;
+ $stack14 = $stack9.next();
+ entry=(java.util.Map$Entry) $stack14;
+ $stack14 = entry.getValue();
+ value=(org.apache.bookkeeper.versioning.Versioned) $stack14;
+ $stack14 = value.getValue();
+ $stack17=(org.apache.bookkeeper.metastore.Value) $stack14;
+ $stack18 = value.getVersion();
+ $stack19=this.fields;
+ value = org.apache.bookkeeper.metastore.InMemoryMetastoreTable.cloneValue($stack17,$stack18,$stack19);
+ $stack14 = entry.getKey();
+ key=(java.lang.String) $stack14;
+ $stack22=new org.apache.bookkeeper.metastore.MetastoreTableItem;
+ $stack22#org.apache.bookkeeper.metastore.MetastoreTableItem(key,value);
+ entries.add((java.lang.Object)$stack22);
+ nCount=(nCount+1);
+ goto label0;
+ label1:$stack9 = entries.iterator();
+ return  $stack9;
+ } 
+

@@ -1,0 +1,8 @@
+java.lang.String org.keycloak.adapters.pep.HttpAuthzRequest:getFirstParam (
+  java.lang.String @name) {
+  guard = tt;
+  ret(level()) = pc ⊔ level(@name) ⊔ obj_level(@name) ⊔ obj_level(this);
+  ret(obj_level()) = pc ⊔ level(@name) ⊔ obj_level(@name) ⊔ obj_level(this);
+  ret(obj_level(@name)) = if obj_level(@name) = ⊤ ∨ pc ≠ ⊤ ∧ (if obj_level(this) = ⊤ then obj_level(@name) = ⊥ else level(@name) = ⊤ ∧ obj_level(@name) = ⊥ ∧ obj_level(this) = ⊥) then ⊤ else ⊥;
+  ret(obj_level(this)) = obj_level(this);
+}

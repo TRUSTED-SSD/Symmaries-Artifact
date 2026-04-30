@@ -1,0 +1,22 @@
+static int com.google.zxing.qrcode.encoder.MatrixUtil:calculateBCHCode(int value,int poly)
+{
+int msbSetInPoly;
+  int $stack4;
+  java.lang.IllegalArgumentException $stack11;
+  if (poly!=0) goto label0;
+ $stack11=new java.lang.IllegalArgumentException;
+ $stack11#java.lang.IllegalArgumentException("0 polynomial");
+ throw $stack11;
+ label0:msbSetInPoly = com.google.zxing.qrcode.encoder.MatrixUtil.findMSBSet(poly);
+ $stack4=(msbSetInPoly-1);
+ value=(value<<$stack4);
+ label1:$stack4 = com.google.zxing.qrcode.encoder.MatrixUtil.findMSBSet(value);
+ if ($stack4<msbSetInPoly) goto label2;
+ $stack4 = com.google.zxing.qrcode.encoder.MatrixUtil.findMSBSet(value);
+ $stack4=($stack4-msbSetInPoly);
+ $stack4=(poly<<$stack4);
+ value=(!value & $stack4) |(!$stack4 & value);
+ goto label1;
+ label2:return  value;
+ } 
+

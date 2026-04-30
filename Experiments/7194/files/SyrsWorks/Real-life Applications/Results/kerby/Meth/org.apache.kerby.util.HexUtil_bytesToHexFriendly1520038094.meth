@@ -1,0 +1,46 @@
+static java.lang.String org.apache.kerby.util.HexUtil:bytesToHexFriendly(byte[] bytes)
+{
+int len;
+  char[] hexChars;
+  short v;
+  int $stack6;
+  java.lang.String $stack8;
+  byte $stack9;
+  short $stack11;
+  char[] $stack12;
+  char $stack13;
+  len=#bytes;
+ len=(len * 2);
+ $stack6=#bytes;
+ len=(len+$stack6);
+ len=(len+2);
+ hexChars=new char[len];
+ hexChars[0]=48;
+ hexChars[1]=120;
+ len=0;
+ label0:$stack6=#bytes;
+ if (len>=$stack6) goto label1;
+ $stack9=bytes[len];
+ v=($stack9 & 255);
+ $stack6=(len * 3);
+ $stack6=($stack6+2);
+ $stack12=org.apache.kerby.util.HexUtil.HEX_CHARS;
+ $stack11=(v>>>4);
+ $stack13=$stack12[$stack11];
+ hexChars[$stack6]=$stack13;
+ $stack6=(len * 3);
+ $stack6=($stack6+3);
+ $stack12=org.apache.kerby.util.HexUtil.HEX_CHARS;
+ v=(v & 15);
+ $stack13=$stack12[v];
+ hexChars[$stack6]=$stack13;
+ $stack6=(len * 3);
+ $stack6=($stack6+4);
+ hexChars[$stack6]=32;
+ len=(len+1);
+ goto label0;
+ label1:$stack8=new java.lang.String;
+ $stack8#java.lang.String(hexChars);
+ return  $stack8;
+ } 
+

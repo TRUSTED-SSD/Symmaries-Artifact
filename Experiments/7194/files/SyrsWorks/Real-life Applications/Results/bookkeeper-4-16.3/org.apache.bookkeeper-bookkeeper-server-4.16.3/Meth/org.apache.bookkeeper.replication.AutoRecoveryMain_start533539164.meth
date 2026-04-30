@@ -1,0 +1,21 @@
+void org.apache.bookkeeper.replication.AutoRecoveryMain:start()
+{
+org.apache.bookkeeper.replication.AuditorElector $stack1;
+  org.apache.bookkeeper.replication.ReplicationWorker $stack3;
+  java.lang.Thread$UncaughtExceptionHandler $stack4;
+  org.apache.bookkeeper.replication.AutoRecoveryMain$AutoRecoveryDeathWatcher $stack5;
+  $stack1=this.auditorElector;
+ $stack1.start();
+ $stack3=this.replicationWorker;
+ $stack3.start();
+ $stack4=this.uncaughtExceptionHandler;
+ if (null==$stack4) goto label0;
+ $stack5=this.deathWatcher;
+ $stack4=this.uncaughtExceptionHandler;
+ $stack5.setUncaughtExceptionHandler($stack4);
+ label0:$stack5=this.deathWatcher;
+ $stack5.start();
+ this.running=1;
+ return;
+ } 
+

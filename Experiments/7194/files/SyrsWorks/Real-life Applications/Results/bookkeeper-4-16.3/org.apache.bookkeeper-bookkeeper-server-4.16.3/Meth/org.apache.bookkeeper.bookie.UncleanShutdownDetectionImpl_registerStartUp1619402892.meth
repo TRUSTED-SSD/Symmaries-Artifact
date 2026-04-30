@@ -1,0 +1,43 @@
+void org.apache.bookkeeper.bookie.UncleanShutdownDetectionImpl:registerStartUp()
+{
+java.util.Iterator l1;
+  java.io.File ledgerDir;
+  java.io.IOException dirtyFile;
+  org.apache.bookkeeper.bookie.LedgerDirsManager $stack4;
+  java.util.List $stack5;
+  boolean $stack7;
+  java.lang.Object $stack8;
+  java.io.File $stack9;
+  org.slf4j.Logger $stack11;
+  java.lang.String $stack13;
+  $stack4=this.ledgerDirsManager;
+ $stack5 = $stack4.getAllLedgerDirs();
+ l1 = $stack5.iterator();
+ label0:$stack7 = l1.hasNext();
+ if ($stack7==0) goto label1;
+ $stack8 = l1.next();
+ ledgerDir=(java.io.File) $stack8;
+ label2:$stack9=new java.io.File;
+ $stack9#java.io.File(ledgerDir,"DIRTY");
+ $stack7 = $stack9.createNewFile();
+ if ($stack7==0) goto label3;
+ $stack11=org.apache.bookkeeper.bookie.UncleanShutdownDetectionImpl.LOG;
+ $stack13 = ledgerDir.getAbsolutePath();
+ dummyClass.lowSink("Created dirty file in ledger dir: {}");
+$stack11.info("Created dirty file in ledger dir: {}",(java.lang.Object)$stack13);
+ goto label4;
+ label3:$stack11=org.apache.bookkeeper.bookie.UncleanShutdownDetectionImpl.LOG;
+ $stack13 = ledgerDir.getAbsolutePath();
+ dummyClass.lowSink("Dirty file already exists in ledger dir: {}");
+$stack11.info("Dirty file already exists in ledger dir: {}",(java.lang.Object)$stack13);
+ label4:goto label5;
+ label6:dirtyFile = catch;
+ $stack11=org.apache.bookkeeper.bookie.UncleanShutdownDetectionImpl.LOG;
+ $stack13 = ledgerDir.getAbsolutePath();
+ $stack11.error("Unable to register start-up (so an unclean shutdown cannot be detected). Dirty file of ledger dir {} could not be created.",(java.lang.Object)$stack13,(java.lang.Object)dirtyFile);
+ throw dirtyFile;
+ label5:goto label0;
+ label1:return;
+ catch java.io.IOException: label2 - label4 : label6;
+} 
+

@@ -1,0 +1,48 @@
+void com.google.zxing.common.BitMatrix:setRegion(int left,int top,int width,int height)
+{
+int offset;
+  int x;
+  java.lang.IllegalArgumentException $stack10;
+  int $stack18;
+  int[] $stack20;
+  int $stack21;
+  int $stack23;
+  if (top<0) goto label0;
+ if (left>=0) goto label1;
+ label0:$stack10=new java.lang.IllegalArgumentException;
+ $stack10#java.lang.IllegalArgumentException("Left and top must be nonnegative");
+ throw $stack10;
+ label1:if (height<1) goto label2;
+ if (width>=1) goto label3;
+ label2:$stack10=new java.lang.IllegalArgumentException;
+ $stack10#java.lang.IllegalArgumentException("Height and width must be at least 1");
+ throw $stack10;
+ label3:width=(left+width);
+ height=(top+height);
+ offset=this.height;
+ if (height>offset) goto label4;
+ offset=this.width;
+ if (width<=offset) goto label5;
+ label4:$stack10=new java.lang.IllegalArgumentException;
+ $stack10#java.lang.IllegalArgumentException("The region must fit inside the matrix");
+ throw $stack10;
+ label5:if (top>=height) goto label6;
+ offset=this.rowSize;
+ offset=(top * offset);
+ x=left;
+ label7:if (x>=width) goto label8;
+ $stack20=this.bits;
+ $stack18=(x/32);
+ $stack18=(offset+$stack18);
+ $stack23=$stack20[$stack18];
+ $stack21=(x & 31);
+ $stack21=(1<<$stack21);
+ $stack23=($stack23 | $stack21);
+ $stack20[$stack18]=$stack23;
+ x=(x+1);
+ goto label7;
+ label8:top=(top+1);
+ goto label5;
+ label6:return;
+ } 
+

@@ -1,0 +1,31 @@
+java.lang.String org.apache.bookkeeper.net.NetworkTopologyImpl:toString()
+{
+java.lang.StringBuilder tree;
+  int numOfLeaves;
+  int i;
+  java.lang.String $stack13;
+  org.apache.bookkeeper.net.NetworkTopologyImpl$InnerNode $stack14;
+  org.apache.bookkeeper.net.Node $stack15;
+  tree=new java.lang.StringBuilder;
+ tree#java.lang.StringBuilder();
+ tree.append("Number of racks: ");
+ numOfLeaves=this.numOfRacks;
+ tree.append(numOfLeaves);
+ tree.append("\n");
+ numOfLeaves = this.getNumOfLeaves();
+ tree.append("Expected number of leaves:");
+ tree.append(numOfLeaves);
+ tree.append("\n");
+ i=0;
+ label0:if (i>=numOfLeaves) goto label1;
+ $stack14=this.clusterMap;
+ $stack15 = $stack14.getLeaf(i,null);
+ $stack13 = org.apache.bookkeeper.net.NodeBase.getPath($stack15);
+ tree.append($stack13);
+ tree.append("\n");
+ i=(i+1);
+ goto label0;
+ label1:$stack13 = tree.toString();
+ return  $stack13;
+ } 
+

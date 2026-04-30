@@ -1,0 +1,26 @@
+void org.apache.rocketmq.common.statistics.StatisticsBriefInterceptor:inc(long[] itemValues)
+{
+int i;
+  int indexOfItem;
+  int[] $stack4;
+  int $stack7;
+  org.apache.rocketmq.common.statistics.StatisticsBrief[] $stack10;
+  long $stack11;
+  org.apache.rocketmq.common.statistics.StatisticsBrief $stack12;
+  i=0;
+ label0:$stack4=this.indexOfItems;
+ indexOfItem=#$stack4;
+ if (i>=indexOfItem) goto label1;
+ $stack4=this.indexOfItems;
+ indexOfItem=$stack4[i];
+ $stack7=#itemValues;
+ if (indexOfItem>=$stack7) goto label2;
+ $stack10=this.statisticsBriefs;
+ $stack12=$stack10[i];
+ $stack11=itemValues[indexOfItem];
+ $stack12.sample($stack11);
+ label2:i=(i+1);
+ goto label0;
+ label1:return;
+ } 
+

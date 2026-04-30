@@ -1,0 +1,29 @@
+void org.apache.kerby.kerberos.kerb.server.impl.DefaultKdcHandler:run()
+{
+java.nio.ByteBuffer message;
+  org.apache.kerby.kerberos.kerb.transport.KrbTransport $stack2;
+  org.slf4j.Logger $stack6;
+  java.io.IOException $stack8;
+  label0:$stack2=this.transport;
+ message = $stack2.receiveMessage();
+ if (message!=null) goto label1;
+ $stack6=org.apache.kerby.kerberos.kerb.server.impl.DefaultKdcHandler.logger;
+ dummyClass.lowSink("No valid request recved. Disconnect actively");
+$stack6.debug("No valid request recved. Disconnect actively");
+ $stack2=this.transport;
+ $stack2.release();
+ label2:goto label3;
+ label1:this.handleMessage(message);
+ label4:goto label0;
+ label5:$stack8 = catch;
+ $stack2=this.transport;
+ $stack2.release();
+ $stack6=org.apache.kerby.kerberos.kerb.server.impl.DefaultKdcHandler.logger;
+ dummyClass.lowSink("Transport or decoding error occurred, disconnecting abnormally");
+$stack6.debug("Transport or decoding error occurred, disconnecting abnormally",(java.lang.Throwable)$stack8);
+ goto label3;
+ label3:return;
+ catch java.io.IOException: label0 - label2 : label5;
+catch java.io.IOException: label1 - label4 : label5;
+} 
+

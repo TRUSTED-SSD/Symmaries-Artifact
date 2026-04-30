@@ -1,0 +1,10 @@
+org.apache.bookkeeper.feature.Feature org.apache.bookkeeper.conf.AbstractConfiguration:getFeature (
+  java.lang.String configProperty,
+  org.apache.bookkeeper.feature.Feature @defaultValue) {
+  guard = tt;
+  ret(level()) = pc ⊔ level(@defaultValue) ⊔ level(configProperty) ⊔ level(this) ⊔ obj_level(configProperty) ⊔ obj_level(this);
+  ret(obj_level()) = pc ⊔ level(configProperty) ⊔ level(this) ⊔ obj_level(@defaultValue) ⊔ obj_level(configProperty) ⊔ obj_level(this);
+  ret(obj_level(@defaultValue)) = if obj_level(@defaultValue) = ⊤ ∨ pc ≠ ⊤ ∧ (if obj_level(this) = ⊥ then if obj_level(configProperty) = ⊥ then obj_level(@defaultValue) = ⊥ ∧ level(configProperty) ⊔ level(this) = ⊤ else obj_level(@defaultValue) = ⊥ ∧ obj_level(configProperty) = ⊤ else obj_level(@defaultValue) = ⊥ ∧ obj_level(this) = ⊤) then ⊤ else ⊥;
+  ret(obj_level(configProperty)) = if obj_level(configProperty) = ⊤ ∨ pc ≠ ⊤ ∧ (if obj_level(this) = ⊥ then obj_level(configProperty) = ⊥ ∧ level(configProperty) ⊔ level(this) = ⊤ else obj_level(configProperty) = ⊥ ∧ obj_level(this) = ⊤) then ⊤ else ⊥;
+  ret(obj_level(this)) = pc ⊔ level(configProperty) ⊔ level(this) ⊔ obj_level(configProperty) ⊔ obj_level(this);
+}

@@ -1,0 +1,34 @@
+long org.apache.bookkeeper.client.LedgerFragment:getFirstStoredEntryId()
+{
+long firstEntry;
+  java.util.Iterator l3;
+  int bookieIndex;
+  java.lang.Long firstStoredEntryForBookie;
+  java.util.Set $stack6;
+  boolean $stack8;
+  java.lang.Object $stack9;
+  java.lang.Integer $stack10;
+  long $stack13;
+  byte $stack14;
+  firstEntry=-1L;
+ $stack6=this.bookieIndexes;
+ l3 = $stack6.iterator();
+ label0:$stack8 = l3.hasNext();
+ if ($stack8==0) goto label1;
+ $stack9 = l3.next();
+ $stack10=(java.lang.Integer) $stack9;
+ bookieIndex = $stack10.intValue();
+ firstStoredEntryForBookie = this.getFirstStoredEntryId(bookieIndex);
+ $stack13 = firstStoredEntryForBookie.longValue();
+ $stack14=($stack13 cmp -1L);
+ if ($stack14==0) goto label2;
+ $stack14=(firstEntry cmp -1L);
+ if ($stack14!=0) goto label3;
+ firstEntry = firstStoredEntryForBookie.longValue();
+ goto label2;
+ label3:$stack13 = firstStoredEntryForBookie.longValue();
+ firstEntry = java.lang.Math.min(firstEntry,$stack13);
+ label2:goto label0;
+ label1:return  firstEntry;
+ } 
+

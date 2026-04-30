@@ -1,0 +1,35 @@
+void org.apache.bookkeeper.common.util.MemoryLimitController:releaseMemory(long size)
+{
+long newUsage;
+  java.lang.Throwable l5;
+  java.util.concurrent.atomic.AtomicLong $stack7;
+  long $stack10;
+  byte $stack11;
+  java.util.concurrent.locks.ReentrantLock $stack14;
+  java.util.concurrent.locks.Condition $stack15;
+  $stack7=this.currentUsage;
+ newUsage= ! (size);
+ newUsage = $stack7.addAndGet(newUsage);
+ $stack10=(newUsage+size);
+ size=this.memoryLimit;
+ $stack11=($stack10 cmp size);
+ if ($stack11<=0) goto label0;
+ size=this.memoryLimit;
+ $stack11=(newUsage cmp size);
+ if ($stack11>0) goto label0;
+ $stack14=this.mutex;
+ $stack14.lock();
+ label1:$stack15=this.condition;
+ $stack15.signalAll();
+ label2:$stack14=this.mutex;
+ $stack14.unlock();
+ goto label0;
+ label3:l5 = catch;
+ label4:$stack14=this.mutex;
+ $stack14.unlock();
+ throw l5;
+ label0:return;
+ catch java.lang.Throwable: label1 - label2 : label3;
+catch java.lang.Throwable: label3 - label4 : label3;
+} 
+

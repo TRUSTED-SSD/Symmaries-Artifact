@@ -1,0 +1,38 @@
+org.apache.rocketmq.common.message.MessageBatch org.apache.rocketmq.client.producer.DefaultMQProducer:batch(java.util.Collection msgs)
+{
+org.apache.rocketmq.common.message.MessageBatch msgBatch;
+  java.util.Iterator e;
+  org.apache.rocketmq.common.message.Message message;
+  boolean $stack7;
+  byte[] $stack8;
+  java.lang.String $stack9;
+  java.lang.Object $stack11;
+  java.lang.Exception $stack15;
+  org.apache.rocketmq.client.exception.MQClientException $stack16;
+  label0:msgBatch = org.apache.rocketmq.common.message.MessageBatch.generateFromList(msgs);
+ e = msgBatch.iterator();
+ label1:$stack7 = e.hasNext();
+ if ($stack7==0) goto label2;
+ $stack11 = e.next();
+ message=(org.apache.rocketmq.common.message.Message) $stack11;
+ org.apache.rocketmq.client.Validators.checkMessage(message,this);
+ org.apache.rocketmq.common.message.MessageClientIDSetter.setUniqID(message);
+ $stack9 = message.getTopic();
+ $stack9 = this.withNamespace($stack9);
+ message.setTopic($stack9);
+ goto label1;
+ label2:org.apache.rocketmq.common.message.MessageClientIDSetter.setUniqID((org.apache.rocketmq.common.message.Message)msgBatch);
+ $stack8 = msgBatch.encode();
+ msgBatch.setBody($stack8);
+ label3:goto label4;
+ label5:$stack15 = catch;
+ $stack16=new org.apache.rocketmq.client.exception.MQClientException;
+ $stack16#org.apache.rocketmq.client.exception.MQClientException("Failed to initiate the MessageBatch",(java.lang.Throwable)$stack15);
+ throw $stack16;
+ label4:$stack9 = msgBatch.getTopic();
+ $stack9 = this.withNamespace($stack9);
+ msgBatch.setTopic($stack9);
+ return  msgBatch;
+ catch java.lang.Exception: label0 - label3 : label5;
+} 
+

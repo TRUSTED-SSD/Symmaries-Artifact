@@ -1,0 +1,21 @@
+boolean org.apache.rocketmq.broker.processor.PullMessageProcessor:rejectRequest()
+{
+org.apache.rocketmq.broker.BrokerController $stack1;
+  org.apache.rocketmq.common.BrokerConfig $stack2;
+  boolean $stack3;
+  org.apache.rocketmq.store.config.MessageStoreConfig $stack5;
+  org.apache.rocketmq.store.config.BrokerRole $stack6;
+  org.apache.rocketmq.store.config.BrokerRole $stack7;
+  $stack1=this.brokerController;
+ $stack2 = $stack1.getBrokerConfig();
+ $stack3 = $stack2.isSlaveReadEnable();
+ if ($stack3!=0) goto label0;
+ $stack1=this.brokerController;
+ $stack5 = $stack1.getMessageStoreConfig();
+ $stack6 = $stack5.getBrokerRole();
+ $stack7=org.apache.rocketmq.store.config.BrokerRole.SLAVE;
+ if ($stack6!=$stack7) goto label0;
+ return  1;
+ label0:return  0;
+ } 
+

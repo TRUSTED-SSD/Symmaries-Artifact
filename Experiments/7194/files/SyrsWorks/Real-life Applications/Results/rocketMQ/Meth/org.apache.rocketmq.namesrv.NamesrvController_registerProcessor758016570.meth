@@ -1,0 +1,34 @@
+void org.apache.rocketmq.namesrv.NamesrvController:registerProcessor()
+{
+org.apache.rocketmq.common.namesrv.NamesrvConfig $stack2;
+  boolean $stack3;
+  org.apache.rocketmq.namesrv.processor.ClientRequestProcessor $stack4;
+  java.util.concurrent.ExecutorService $stack5;
+  org.apache.rocketmq.remoting.RemotingServer $stack6;
+  org.apache.rocketmq.namesrv.processor.DefaultRequestProcessor $stack7;
+  org.apache.rocketmq.namesrv.processor.ClusterTestRequestProcessor $stack10;
+  java.lang.String $stack13;
+  $stack2=this.namesrvConfig;
+ $stack3 = $stack2.isClusterTest();
+ if ($stack3==0) goto label0;
+ $stack6=this.remotingServer;
+ $stack10=new org.apache.rocketmq.namesrv.processor.ClusterTestRequestProcessor;
+ $stack2=this.namesrvConfig;
+ $stack13 = $stack2.getProductEnvName();
+ $stack10#org.apache.rocketmq.namesrv.processor.ClusterTestRequestProcessor(this,$stack13);
+ $stack5=this.defaultExecutor;
+ $stack6.registerDefaultProcessor((org.apache.rocketmq.remoting.netty.NettyRequestProcessor)$stack10,$stack5);
+ goto label1;
+ label0:$stack4=new org.apache.rocketmq.namesrv.processor.ClientRequestProcessor;
+ $stack4#org.apache.rocketmq.namesrv.processor.ClientRequestProcessor(this);
+ $stack6=this.remotingServer;
+ $stack5=this.clientRequestExecutor;
+ $stack6.registerProcessor(105,(org.apache.rocketmq.remoting.netty.NettyRequestProcessor)$stack4,$stack5);
+ $stack6=this.remotingServer;
+ $stack7=new org.apache.rocketmq.namesrv.processor.DefaultRequestProcessor;
+ $stack7#org.apache.rocketmq.namesrv.processor.DefaultRequestProcessor(this);
+ $stack5=this.defaultExecutor;
+ $stack6.registerDefaultProcessor((org.apache.rocketmq.remoting.netty.NettyRequestProcessor)$stack7,$stack5);
+ label1:return;
+ } 
+

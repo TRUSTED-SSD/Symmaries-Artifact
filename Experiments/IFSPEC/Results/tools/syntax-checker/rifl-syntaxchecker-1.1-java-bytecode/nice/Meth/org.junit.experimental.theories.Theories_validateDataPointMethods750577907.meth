@@ -1,0 +1,57 @@
+void org.junit.experimental.theories.Theories:validateDataPointMethods(java.util.List errors)
+{
+java.lang.reflect.Method[] arr$;
+  int len$;
+  int i$;
+  java.lang.reflect.Method method;
+  org.junit.runners.model.TestClass $stack7;
+  java.lang.Class $stack8;
+  java.lang.annotation.Annotation $stack10;
+  int $stack11;
+  boolean $stack12;
+  java.lang.Error $stack17;
+  java.lang.StringBuilder $stack18;
+  java.lang.String $stack20;
+  $stack7 = this.getTestClass();
+ $stack8 = $stack7.getJavaClass();
+ arr$ = $stack8.getDeclaredMethods();
+ len$=#arr$;
+ i$=0;
+ label0:if (i$>=len$) goto label1;
+ method=arr$[i$];
+ $stack10 = method.getAnnotation(org.junit.experimental.theories.DataPoint);
+ if ($stack10!=null) goto label2;
+ $stack10 = method.getAnnotation(org.junit.experimental.theories.DataPoints);
+ if ($stack10!=null) goto label2;
+ goto label3;
+ label2:$stack11 = method.getModifiers();
+ $stack12 = java.lang.reflect.Modifier.isStatic($stack11);
+ if ($stack12!=0) goto label4;
+ $stack17=new java.lang.Error;
+ $stack18=new java.lang.StringBuilder;
+ $stack18#java.lang.StringBuilder();
+ $stack18 = $stack18.append("DataPoint method ");
+ $stack20 = method.getName();
+ $stack18 = $stack18.append($stack20);
+ $stack18 = $stack18.append(" must be static");
+ $stack20 = $stack18.toString();
+ $stack17#java.lang.Error($stack20);
+ errors.add((java.lang.Object)$stack17);
+ label4:$stack11 = method.getModifiers();
+ $stack12 = java.lang.reflect.Modifier.isPublic($stack11);
+ if ($stack12!=0) goto label3;
+ $stack17=new java.lang.Error;
+ $stack18=new java.lang.StringBuilder;
+ $stack18#java.lang.StringBuilder();
+ $stack18 = $stack18.append("DataPoint method ");
+ $stack20 = method.getName();
+ $stack18 = $stack18.append($stack20);
+ $stack18 = $stack18.append(" must be public");
+ $stack20 = $stack18.toString();
+ $stack17#java.lang.Error($stack20);
+ errors.add((java.lang.Object)$stack17);
+ label3:i$=(i$+1);
+ goto label0;
+ label1:return;
+ } 
+

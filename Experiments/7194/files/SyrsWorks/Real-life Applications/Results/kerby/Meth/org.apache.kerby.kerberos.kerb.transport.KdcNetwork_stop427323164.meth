@@ -1,0 +1,30 @@
+void org.apache.kerby.kerberos.kerb.transport.KdcNetwork:stop()
+{
+java.net.ServerSocket $stack2;
+  java.nio.channels.DatagramChannel $stack3;
+  java.io.IOException $stack7;
+  java.lang.StringBuilder $stack8;
+  org.slf4j.Logger $stack9;
+  java.lang.String $stack12;
+  label0:$stack2=this.tcpServer;
+ if ($stack2==null) goto label1;
+ $stack2=this.tcpServer;
+ $stack2.close();
+ label1:$stack3=this.udpServer;
+ if ($stack3==null) goto label2;
+ $stack3=this.udpServer;
+ $stack3.close();
+ label2:goto label3;
+ label4:$stack7 = catch;
+ $stack9=org.apache.kerby.kerberos.kerb.transport.KdcNetwork.LOG;
+ $stack8=new java.lang.StringBuilder;
+ $stack8#java.lang.StringBuilder();
+ $stack8 = $stack8.append("KDC network stopping error ");
+ $stack8 = $stack8.append((java.lang.Object)$stack7);
+ $stack12 = $stack8.toString();
+ $stack9.warn($stack12);
+ label3:this.isStopped=1;
+ return;
+ catch java.io.IOException: label0 - label2 : label4;
+} 
+

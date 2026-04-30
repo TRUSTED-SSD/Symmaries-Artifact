@@ -1,0 +1,45 @@
+void org.apache.rocketmq.client.trace.AsyncTraceDispatcher$AsyncDataSendTask:sendTraceDataByMQ(java.util.Set @keySet,java.lang.String data,java.lang.String traceTopic)
+{
+org.apache.rocketmq.common.message.Message message;
+  org.apache.rocketmq.client.trace.AsyncTraceDispatcher$AsyncDataSendTask$1 callback;
+  java.nio.charset.Charset $stack8;
+  byte[] $stack9;
+  org.apache.rocketmq.client.trace.AsyncTraceDispatcher $stack10;
+  org.apache.rocketmq.client.producer.DefaultMQProducer $stack11;
+  org.apache.rocketmq.client.impl.producer.DefaultMQProducerImpl $stack12;
+  boolean $stack15;
+  org.apache.rocketmq.client.trace.AsyncTraceDispatcher$AsyncDataSendTask$2 $stack18;
+  java.lang.Exception $stack21;
+  org.apache.rocketmq.logging.org.slf4j.Logger $stack22;
+  java.util.Set keySet;
+keySet=@keySet;
+message=new org.apache.rocketmq.common.message.Message;
+ $stack8=java.nio.charset.StandardCharsets.UTF_8;
+ $stack9 = data.getBytes($stack8);
+ message#org.apache.rocketmq.common.message.Message(traceTopic,$stack9);
+ message.setKeys((java.util.Collection)keySet);
+ label0:$stack10=this.this$0;
+ $stack11 = org.apache.rocketmq.client.trace.AsyncTraceDispatcher.access$700($stack10);
+ $stack12 = $stack11.getDefaultMQProducerImpl();
+ keySet = this#org.apache.rocketmq.client.trace.AsyncTraceDispatcher$AsyncDataSendTask:tryGetMessageQueueBrokerSet($stack12,traceTopic);
+ callback=new org.apache.rocketmq.client.trace.AsyncTraceDispatcher$AsyncDataSendTask$1;
+ callback#org.apache.rocketmq.client.trace.AsyncTraceDispatcher$AsyncDataSendTask$1(this,data);
+ $stack15 = keySet.isEmpty();
+ if ($stack15==0) goto label1;
+ $stack10=this.this$0;
+ $stack11 = org.apache.rocketmq.client.trace.AsyncTraceDispatcher.access$700($stack10);
+ $stack11.send(message,(org.apache.rocketmq.client.producer.SendCallback)callback,5000L);
+ goto label2;
+ label1:$stack10=this.this$0;
+ $stack11 = org.apache.rocketmq.client.trace.AsyncTraceDispatcher.access$700($stack10);
+ $stack18=new org.apache.rocketmq.client.trace.AsyncTraceDispatcher$AsyncDataSendTask$2;
+ $stack18#org.apache.rocketmq.client.trace.AsyncTraceDispatcher$AsyncDataSendTask$2(this);
+ $stack11.send(message,(org.apache.rocketmq.client.producer.MessageQueueSelector)$stack18,(java.lang.Object)keySet,(org.apache.rocketmq.client.producer.SendCallback)callback);
+ label2:goto label3;
+ label4:$stack21 = catch;
+ $stack22 = org.apache.rocketmq.client.trace.AsyncTraceDispatcher.access$300();
+ $stack22.error("send trace data failed, the traceData is {}",(java.lang.Object)data,(java.lang.Object)$stack21);
+ label3:return;
+ catch java.lang.Exception: label0 - label2 : label4;
+} 
+

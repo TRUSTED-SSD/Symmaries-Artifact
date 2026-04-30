@@ -1,0 +1,21 @@
+java.util.concurrent.CompletableFuture org.apache.rocketmq.proxy.service.message.ClusterMessageService:requestOneway(org.apache.rocketmq.proxy.common.ProxyContext ctx,java.lang.String @brokerName,org.apache.rocketmq.remoting.protocol.RemotingCommand request,long timeoutMillis)
+{
+org.apache.rocketmq.proxy.service.route.TopicRouteService $stack7;
+  org.apache.rocketmq.proxy.service.mqclient.MQClientAPIFactory $stack9;
+  org.apache.rocketmq.proxy.service.mqclient.MQClientAPIExt $stack10;
+  java.util.concurrent.CompletableFuture $stack11;
+  java.lang.Throwable $stack12;
+  java.lang.String brokerName;
+brokerName=@brokerName;
+label0:$stack7=this.topicRouteService;
+ brokerName = $stack7.getBrokerAddr(brokerName);
+ $stack9=this.mqClientAPIFactory;
+ $stack10 = $stack9.getClient();
+ $stack11 = $stack10.invokeOneway(brokerName,request,timeoutMillis);
+ label1:return  $stack11;
+ label2:$stack12 = catch;
+ $stack11 = org.apache.rocketmq.proxy.common.utils.FutureUtils.completeExceptionally($stack12);
+ return  $stack11;
+ catch java.lang.Throwable: label0 - label1 : label2;
+} 
+

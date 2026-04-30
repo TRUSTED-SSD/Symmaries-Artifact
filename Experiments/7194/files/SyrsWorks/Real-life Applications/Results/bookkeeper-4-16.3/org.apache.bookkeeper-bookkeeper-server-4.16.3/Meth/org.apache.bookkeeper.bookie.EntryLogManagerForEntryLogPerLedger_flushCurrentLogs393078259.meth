@@ -1,0 +1,20 @@
+void org.apache.bookkeeper.bookie.EntryLogManagerForEntryLogPerLedger:flushCurrentLogs()
+{
+java.util.Set copyOfCurrentLogsWithDirInfo;
+  java.util.Iterator l2;
+  org.apache.bookkeeper.bookie.EntryLogManagerForEntryLogPerLedger$BufferedLogChannelWithDirInfo logChannelWithDirInfo;
+  boolean $stack6;
+  java.lang.Object $stack7;
+  org.apache.bookkeeper.bookie.DefaultEntryLogger$BufferedLogChannel $stack8;
+  copyOfCurrentLogsWithDirInfo = this.getCopyOfCurrentLogs();
+ l2 = copyOfCurrentLogsWithDirInfo.iterator();
+ label0:$stack6 = l2.hasNext();
+ if ($stack6==0) goto label1;
+ $stack7 = l2.next();
+ logChannelWithDirInfo=(org.apache.bookkeeper.bookie.EntryLogManagerForEntryLogPerLedger$BufferedLogChannelWithDirInfo) $stack7;
+ $stack8 = logChannelWithDirInfo.getLogChannel();
+ this.flushLogChannel($stack8,(boolean)1);
+ goto label0;
+ label1:return;
+ } 
+

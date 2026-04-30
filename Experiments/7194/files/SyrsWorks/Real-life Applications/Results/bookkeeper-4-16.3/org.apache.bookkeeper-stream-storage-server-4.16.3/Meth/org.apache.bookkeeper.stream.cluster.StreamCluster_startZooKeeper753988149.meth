@@ -1,0 +1,55 @@
+void org.apache.bookkeeper.stream.cluster.StreamCluster:startZooKeeper()
+{
+org.apache.commons.lang3.tuple.Pair zkServerAndPort;
+  org.apache.bookkeeper.stream.cluster.StreamClusterSpec $stack3;
+  boolean $stack4;
+  java.io.File $stack5;
+  java.io.File $stack7;
+  int $stack9;
+  java.lang.Object $stack11;
+  org.apache.bookkeeper.shims.zk.ZooKeeperServerShim $stack12;
+  java.lang.Integer $stack14;
+  org.slf4j.Logger $stack17;
+  java.lang.StringBuilder $stack20;
+  java.lang.String $stack25;
+  org.apache.bookkeeper.common.net.ServiceURI $stack26;
+  $stack3=this.spec;
+ $stack4 = $stack3.shouldStartZooKeeper();
+ if ($stack4!=0) goto label0;
+ $stack3=this.spec;
+ $stack26=$stack3.metadataServiceUri;
+ $stack11 = com.google.common.base.Preconditions.checkNotNull((java.lang.Object)$stack26,(java.lang.Object)"No metadata service uri is configured while configuring not to start zookeeper");
+ $stack26=(org.apache.bookkeeper.common.net.ServiceURI) $stack11;
+ this.metadataServiceUri=$stack26;
+ return;
+ label0:$stack5=new java.io.File;
+ $stack3=this.spec;
+ $stack7 = $stack3.storageRootDir();
+ $stack5#java.io.File($stack7,"zookeeper");
+ $stack3=this.spec;
+ $stack9 = $stack3.zkPort();
+ zkServerAndPort = org.apache.distributedlog.LocalDLMEmulator.runZookeeperOnAnyPort($stack9,$stack5);
+ $stack11 = zkServerAndPort.getLeft();
+ $stack12=(org.apache.bookkeeper.shims.zk.ZooKeeperServerShim) $stack11;
+ this.zks=$stack12;
+ $stack11 = zkServerAndPort.getRight();
+ $stack14=(java.lang.Integer) $stack11;
+ $stack9 = $stack14.intValue();
+ this.zkPort=$stack9;
+ $stack17=org.apache.bookkeeper.stream.cluster.StreamCluster.log;
+ $stack9=this.zkPort;
+ $stack14 = java.lang.Integer.valueOf($stack9);
+ dummyClass.lowSink("Started zookeeper at port {}.");
+$stack17.info("Started zookeeper at port {}.",(java.lang.Object)$stack14);
+ $stack20=new java.lang.StringBuilder;
+ $stack20#java.lang.StringBuilder();
+ $stack20 = $stack20.append("zk://127.0.0.1:");
+ $stack9=this.zkPort;
+ $stack20 = $stack20.append($stack9);
+ $stack20 = $stack20.append("/ledgers");
+ $stack25 = $stack20.toString();
+ $stack26 = org.apache.bookkeeper.common.net.ServiceURI.create($stack25);
+ this.metadataServiceUri=$stack26;
+ return;
+ } 
+

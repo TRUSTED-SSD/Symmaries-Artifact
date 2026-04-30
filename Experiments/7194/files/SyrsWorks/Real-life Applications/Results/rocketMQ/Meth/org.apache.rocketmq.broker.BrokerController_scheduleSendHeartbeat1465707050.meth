@@ -1,0 +1,25 @@
+void org.apache.rocketmq.broker.BrokerController:scheduleSendHeartbeat()
+{
+org.apache.rocketmq.broker.BrokerController$22 $stack1;
+  java.util.List $stack2;
+  java.util.concurrent.ScheduledExecutorService $stack3;
+  org.apache.rocketmq.common.BrokerIdentity $stack4;
+  org.apache.rocketmq.common.BrokerConfig $stack5;
+  int $stack7;
+  java.util.concurrent.TimeUnit $stack8;
+  long $stack9;
+  java.util.concurrent.ScheduledFuture $stack10;
+  $stack2=this.scheduledFutures;
+ $stack3=this.brokerHeartbeatExecutorService;
+ $stack1=new org.apache.rocketmq.broker.BrokerController$22;
+ $stack4 = this.getBrokerIdentity();
+ $stack1#org.apache.rocketmq.broker.BrokerController$22(this,$stack4);
+ $stack5=this.brokerConfig;
+ $stack7 = $stack5.getBrokerHeartbeatInterval();
+ $stack9=(long) $stack7;
+ $stack8=java.util.concurrent.TimeUnit.MILLISECONDS;
+ $stack10 = $stack3.scheduleAtFixedRate((java.lang.Runnable)$stack1,1000L,$stack9,$stack8);
+ $stack2.add((java.lang.Object)$stack10);
+ return;
+ } 
+

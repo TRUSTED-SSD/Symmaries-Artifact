@@ -1,0 +1,22 @@
+org.apache.rocketmq.broker.latency.BrokerFastFailure(org.apache.rocketmq.broker.BrokerController brokerController)
+{
+long $stack2;
+  java.util.concurrent.ScheduledThreadPoolExecutor $stack3;
+  org.apache.rocketmq.common.ThreadFactoryImpl $stack4;
+  org.apache.rocketmq.common.BrokerConfig $stack8;
+  this#java.lang.Object();
+ $stack2 = java.lang.System.currentTimeMillis();
+ this.jstackTime=$stack2;
+ this.brokerController=brokerController;
+ $stack3=new java.util.concurrent.ScheduledThreadPoolExecutor;
+ $stack4=new org.apache.rocketmq.common.ThreadFactoryImpl;
+ if (brokerController!=null) goto label0;
+ $stack8=null;
+ goto label1;
+ label0:$stack8 = brokerController.getBrokerConfig();
+ label1:$stack4#org.apache.rocketmq.common.ThreadFactoryImpl("BrokerFastFailureScheduledThread",1,(org.apache.rocketmq.common.BrokerIdentity)$stack8);
+ $stack3#java.util.concurrent.ScheduledThreadPoolExecutor(1,(java.util.concurrent.ThreadFactory)$stack4);
+ this.scheduledExecutorService=$stack3;
+ return;
+ } 
+

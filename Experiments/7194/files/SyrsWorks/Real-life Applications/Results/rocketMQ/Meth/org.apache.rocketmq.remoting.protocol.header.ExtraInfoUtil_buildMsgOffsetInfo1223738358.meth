@@ -1,0 +1,37 @@
+static void org.apache.rocketmq.remoting.protocol.header.ExtraInfoUtil:buildMsgOffsetInfo(java.lang.StringBuilder @stringBuilder,boolean retry,int queueId,java.util.List msgOffsets)
+{
+int $stack5;
+  java.lang.StringBuilder $stack6;
+  java.lang.Object $stack11;
+  java.lang.String $stack18;
+  java.lang.StringBuilder stringBuilder;
+stringBuilder=@stringBuilder;
+if (stringBuilder!=null) goto label0;
+ stringBuilder=new java.lang.StringBuilder;
+ stringBuilder#java.lang.StringBuilder(64);
+ label0:$stack5 = stringBuilder.length();
+ if ($stack5<=0) goto label1;
+ stringBuilder.append(";");
+ label1:$stack6=stringBuilder;
+ if (retry==0) goto label2;
+ $stack18="1";
+ goto label3;
+ label2:$stack18="0";
+ label3:$stack6 = $stack6.append($stack18);
+ $stack6 = $stack6.append(" ");
+ $stack6 = $stack6.append(queueId);
+ $stack6.append(" ");
+ queueId=0;
+ label4:$stack5 = msgOffsets.size();
+ if (queueId>=$stack5) goto label5;
+ $stack11 = msgOffsets.get(queueId);
+ stringBuilder.append($stack11);
+ $stack5 = msgOffsets.size();
+ $stack5=($stack5-1);
+ if (queueId>=$stack5) goto label6;
+ stringBuilder.append(",");
+ label6:queueId=(queueId+1);
+ goto label4;
+ label5:return;
+ } 
+

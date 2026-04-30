@@ -1,0 +1,58 @@
+void org.apache.rocketmq.client.impl.MQClientAPIImpl:createPlainAccessConfig(java.lang.String @addr,org.apache.rocketmq.common.PlainAccessConfig plainAccessConfig,long timeoutMillis)
+{
+org.apache.rocketmq.remoting.protocol.header.CreateAccessConfigRequestHeader requestHeader;
+  org.apache.rocketmq.remoting.protocol.RemotingCommand request;
+  java.lang.String $stack9;
+  boolean $stack11;
+  java.util.List $stack15;
+  org.apache.rocketmq.client.ClientConfig $stack20;
+  org.apache.rocketmq.remoting.RemotingClient $stack21;
+  int $stack26;
+  org.apache.rocketmq.client.exception.MQClientException $stack27;
+  java.lang.AssertionError $stack31;
+  java.lang.String addr;
+addr=@addr;
+requestHeader=new org.apache.rocketmq.remoting.protocol.header.CreateAccessConfigRequestHeader;
+ requestHeader#org.apache.rocketmq.remoting.protocol.header.CreateAccessConfigRequestHeader();
+ $stack9 = plainAccessConfig.getAccessKey();
+ requestHeader.setAccessKey($stack9);
+ $stack9 = plainAccessConfig.getSecretKey();
+ requestHeader.setSecretKey($stack9);
+ $stack11 = plainAccessConfig.isAdmin();
+ requestHeader.setAdmin($stack11);
+ $stack9 = plainAccessConfig.getDefaultGroupPerm();
+ requestHeader.setDefaultGroupPerm($stack9);
+ $stack9 = plainAccessConfig.getDefaultTopicPerm();
+ requestHeader.setDefaultTopicPerm($stack9);
+ $stack9 = plainAccessConfig.getWhiteRemoteAddress();
+ requestHeader.setWhiteRemoteAddress($stack9);
+ $stack15 = plainAccessConfig.getTopicPerms();
+ $stack9 = org.apache.rocketmq.common.UtilAll.join($stack15,",");
+ requestHeader.setTopicPerms($stack9);
+ $stack15 = plainAccessConfig.getGroupPerms();
+ $stack9 = org.apache.rocketmq.common.UtilAll.join($stack15,",");
+ requestHeader.setGroupPerms($stack9);
+ request = org.apache.rocketmq.remoting.protocol.RemotingCommand.createRequestCommand(50,(org.apache.rocketmq.remoting.CommandCustomHeader)requestHeader);
+ $stack21=this.remotingClient;
+ $stack20=this.clientConfig;
+ $stack11 = $stack20.isVipChannelEnabled();
+ addr = org.apache.rocketmq.common.MixAll.brokerVIPChannel($stack11,addr);
+ request = $stack21.invokeSync(addr,request,timeoutMillis);
+ $stack11=org.apache.rocketmq.client.impl.MQClientAPIImpl.$assertionsDisabled;
+ if ($stack11!=0) goto label0;
+ if (request!=null) goto label0;
+ $stack31=new java.lang.AssertionError;
+ $stack31#java.lang.AssertionError();
+ throw $stack31;
+ label0:$stack26 = request.getCode();
+ switch [$stack26]
+if 0 goto label1;
+goto label2;
+ label1:return;
+ label2:$stack27=new org.apache.rocketmq.client.exception.MQClientException;
+ $stack26 = request.getCode();
+ addr = request.getRemark();
+ $stack27#org.apache.rocketmq.client.exception.MQClientException($stack26,addr);
+ throw $stack27;
+ } 
+

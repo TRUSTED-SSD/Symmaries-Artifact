@@ -1,0 +1,44 @@
+    private static javax.xml.parsers.DocumentBuilder createNonValidatingBuilder(javax.xml.parsers.DocumentBuilderFactory)
+    {
+        javax.xml.parsers.DocumentBuilderFactory factory;
+        javax.xml.parsers.DocumentBuilder builder;
+        javax.xml.parsers.ParserConfigurationException $stack4;
+        java.lang.RuntimeException $stack5;
+
+        factory := @parameter0: javax.xml.parsers.DocumentBuilderFactory;
+
+        virtualinvoke factory.<javax.xml.parsers.DocumentBuilderFactory: void setValidating(boolean)>(0);
+/*426*/
+
+        virtualinvoke factory.<javax.xml.parsers.DocumentBuilderFactory: void setNamespaceAware(boolean)>(0);
+/*427*/
+
+     label1:
+        builder = virtualinvoke factory.<javax.xml.parsers.DocumentBuilderFactory: javax.xml.parsers.DocumentBuilder newDocumentBuilder()>();
+/*431*/
+/*431*/
+
+     label2:
+        goto label4;
+/*432*/
+
+     label3:
+        $stack4 := @caughtexception;
+/*436*/
+
+        $stack5 = new java.lang.RuntimeException;
+/*433*/
+
+        specialinvoke $stack5.<java.lang.RuntimeException: void <init>(java.lang.Throwable)>($stack4);
+/*433*/
+
+        throw $stack5;
+/*433*/
+
+     label4:
+        return builder;
+/*436*/
+
+        catch javax.xml.parsers.ParserConfigurationException from label1 to label2 with label3;
+    }
+

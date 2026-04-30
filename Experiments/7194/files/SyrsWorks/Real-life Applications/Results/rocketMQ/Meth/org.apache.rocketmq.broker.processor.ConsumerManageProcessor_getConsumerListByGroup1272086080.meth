@@ -1,0 +1,58 @@
+org.apache.rocketmq.remoting.protocol.RemotingCommand org.apache.rocketmq.broker.processor.ConsumerManageProcessor:getConsumerListByGroup(io.netty.channel.ChannelHandlerContext ctx,org.apache.rocketmq.remoting.protocol.RemotingCommand request)
+{
+org.apache.rocketmq.remoting.protocol.RemotingCommand response;
+  org.apache.rocketmq.remoting.protocol.header.GetConsumerListByGroupRequestHeader requestHeader;
+  org.apache.rocketmq.broker.client.ConsumerGroupInfo consumerGroupInfo;
+  java.util.List clientIds;
+  org.apache.rocketmq.remoting.protocol.header.GetConsumerListByGroupResponseBody body;
+  org.apache.rocketmq.remoting.CommandCustomHeader $stack9;
+  org.apache.rocketmq.broker.BrokerController $stack10;
+  org.apache.rocketmq.broker.client.ConsumerManager $stack11;
+  java.lang.String $stack12;
+  org.apache.rocketmq.logging.org.slf4j.Logger $stack14;
+  io.netty.channel.Channel $stack17;
+  java.lang.String $stack18;
+  java.lang.StringBuilder $stack19;
+  boolean $stack25;
+  byte[] $stack38;
+  response = org.apache.rocketmq.remoting.protocol.RemotingCommand.createResponseCommand(org.apache.rocketmq.remoting.protocol.header.GetConsumerListByGroupResponseHeader);
+ $stack9 = request.decodeCommandCustomHeader(org.apache.rocketmq.remoting.protocol.header.GetConsumerListByGroupRequestHeader);
+ requestHeader=(org.apache.rocketmq.remoting.protocol.header.GetConsumerListByGroupRequestHeader) $stack9;
+ $stack10=this.brokerController;
+ $stack11 = $stack10.getConsumerManager();
+ $stack12 = requestHeader.getConsumerGroup();
+ consumerGroupInfo = $stack11.getConsumerGroupInfo($stack12);
+ if (consumerGroupInfo==null) goto label0;
+ clientIds = consumerGroupInfo.getAllClientId();
+ $stack25 = clientIds.isEmpty();
+ if ($stack25!=0) goto label1;
+ body=new org.apache.rocketmq.remoting.protocol.header.GetConsumerListByGroupResponseBody;
+ body#org.apache.rocketmq.remoting.protocol.header.GetConsumerListByGroupResponseBody();
+ body.setConsumerIdList(clientIds);
+ $stack38 = body.encode();
+ response.setBody($stack38);
+ response.setCode(0);
+ response.setRemark(null);
+ return  response;
+ label1:$stack14=org.apache.rocketmq.broker.processor.ConsumerManageProcessor.LOGGER;
+ $stack12 = requestHeader.getConsumerGroup();
+ $stack17 = ctx.channel();
+ $stack18 = org.apache.rocketmq.remoting.common.RemotingHelper.parseChannelRemoteAddr($stack17);
+ $stack14.warn("getAllClientId failed, {} {}",(java.lang.Object)$stack12,(java.lang.Object)$stack18);
+ goto label2;
+ label0:$stack14=org.apache.rocketmq.broker.processor.ConsumerManageProcessor.LOGGER;
+ $stack12 = requestHeader.getConsumerGroup();
+ $stack17 = ctx.channel();
+ $stack18 = org.apache.rocketmq.remoting.common.RemotingHelper.parseChannelRemoteAddr($stack17);
+ $stack14.warn("getConsumerGroupInfo failed, {} {}",(java.lang.Object)$stack12,(java.lang.Object)$stack18);
+ label2:response.setCode(1);
+ $stack19=new java.lang.StringBuilder;
+ $stack19#java.lang.StringBuilder();
+ $stack19 = $stack19.append("no consumer for this group, ");
+ $stack12 = requestHeader.getConsumerGroup();
+ $stack19 = $stack19.append($stack12);
+ $stack12 = $stack19.toString();
+ response.setRemark($stack12);
+ return  response;
+ } 
+

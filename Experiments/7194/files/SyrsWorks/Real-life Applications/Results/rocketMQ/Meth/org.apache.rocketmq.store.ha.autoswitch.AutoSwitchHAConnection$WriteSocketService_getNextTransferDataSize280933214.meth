@@ -1,0 +1,22 @@
+int org.apache.rocketmq.store.ha.autoswitch.AutoSwitchHAConnection$WriteSocketService:getNextTransferDataSize()
+{
+org.apache.rocketmq.store.SelectMappedBufferResult selectResult;
+  org.apache.rocketmq.store.ha.autoswitch.AutoSwitchHAConnection $stack2;
+  org.apache.rocketmq.store.ha.autoswitch.AutoSwitchHAService $stack3;
+  org.apache.rocketmq.store.DefaultMessageStore $stack4;
+  long $stack5;
+  int $stack7;
+  $stack2=this.this$0;
+ $stack3 = org.apache.rocketmq.store.ha.autoswitch.AutoSwitchHAConnection.access$100($stack2);
+ $stack4 = $stack3.getDefaultMessageStore();
+ $stack5=this.nextTransferFromWhere;
+ selectResult = $stack4.getCommitLogData($stack5);
+ if (selectResult==null) goto label0;
+ $stack7 = selectResult.getSize();
+ if ($stack7>0) goto label1;
+ label0:return  0;
+ label1:this.selectMappedBufferResult=selectResult;
+ $stack7 = selectResult.getSize();
+ return  $stack7;
+ } 
+

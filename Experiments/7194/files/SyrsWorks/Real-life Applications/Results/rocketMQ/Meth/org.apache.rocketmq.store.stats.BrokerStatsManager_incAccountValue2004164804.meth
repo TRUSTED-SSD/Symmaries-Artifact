@@ -1,0 +1,15 @@
+void org.apache.rocketmq.store.stats.BrokerStatsManager:incAccountValue(java.lang.String key,java.lang.String @accountOwnerParent,java.lang.String accountOwnerSelf,java.lang.String instanceId,java.lang.String group,java.lang.String topic,java.lang.String msgType,int incValue)
+{
+java.util.HashMap $stack11;
+  java.lang.Object $stack12;
+  org.apache.rocketmq.common.stats.StatsItemSet $stack13;
+  java.lang.String accountOwnerParent;
+accountOwnerParent=@accountOwnerParent;
+accountOwnerParent = this.buildAccountStatsKey(accountOwnerParent,accountOwnerSelf,instanceId,topic,group,msgType);
+ $stack11=this.statsTable;
+ $stack12 = $stack11.get((java.lang.Object)key);
+ $stack13=(org.apache.rocketmq.common.stats.StatsItemSet) $stack12;
+ $stack13.addValue(accountOwnerParent,incValue,1);
+ return;
+ } 
+

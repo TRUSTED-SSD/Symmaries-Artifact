@@ -1,0 +1,19 @@
+org.apache.rocketmq.remoting.protocol.RemotingCommand org.apache.rocketmq.namesrv.processor.DefaultRequestProcessor:getSystemTopicListFromNs(io.netty.channel.ChannelHandlerContext ctx,org.apache.rocketmq.remoting.protocol.RemotingCommand @request)
+{
+org.apache.rocketmq.remoting.protocol.body.TopicList systemTopicList;
+  byte[] body;
+  org.apache.rocketmq.namesrv.NamesrvController $stack7;
+  org.apache.rocketmq.namesrv.routeinfo.RouteInfoManager $stack8;
+  org.apache.rocketmq.remoting.protocol.RemotingCommand request;
+request=@request;
+request = org.apache.rocketmq.remoting.protocol.RemotingCommand.createResponseCommand(null);
+ $stack7=this.namesrvController;
+ $stack8 = $stack7.getRouteInfoManager();
+ systemTopicList = $stack8.getSystemTopicList();
+ body = systemTopicList.encode();
+ request.setBody(body);
+ request.setCode(0);
+ request.setRemark(null);
+ return  request;
+ } 
+

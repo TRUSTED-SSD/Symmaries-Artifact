@@ -1,0 +1,53 @@
+void org.apache.rocketmq.tools.command.broker.ResetMasterFlushOffsetSubCommand:execute(org.apache.commons.cli.CommandLine commandLine,org.apache.commons.cli.Options options,org.apache.rocketmq.remoting.RPCHook rpcHook)
+{
+org.apache.rocketmq.tools.admin.DefaultMQAdminExt defaultMQAdminExt;
+  java.lang.String brokerAddr;
+  long masterFlushOffset;
+  java.lang.Throwable l8;
+  java.lang.String $stack14;
+  java.lang.Object[] $stack17;
+  java.io.PrintStream $stack18;
+  java.lang.Long $stack21;
+  java.lang.Exception $stack23;
+  org.apache.rocketmq.tools.command.SubCommandException $stack24;
+  java.lang.StringBuilder $stack25;
+  java.lang.Class $stack26;
+  defaultMQAdminExt=new org.apache.rocketmq.tools.admin.DefaultMQAdminExt;
+ defaultMQAdminExt#org.apache.rocketmq.tools.admin.DefaultMQAdminExt(rpcHook);
+ masterFlushOffset = java.lang.System.currentTimeMillis();
+ brokerAddr = java.lang.Long.toString(masterFlushOffset);
+ defaultMQAdminExt.setInstanceName(brokerAddr);
+ label0:defaultMQAdminExt.start();
+ brokerAddr = commandLine.getOptionValue((char)98);
+ brokerAddr = brokerAddr.trim();
+ $stack14 = commandLine.getOptionValue((char)111);
+ $stack14 = $stack14.trim();
+ masterFlushOffset = java.lang.Long.parseLong($stack14);
+ defaultMQAdminExt.resetMasterFlushOffset(brokerAddr,masterFlushOffset);
+ $stack18=java.lang.System.out;
+ $stack17=new java.lang.Object[1];
+ $stack21 = java.lang.Long.valueOf(masterFlushOffset);
+ $stack17[0]=$stack21;
+ $stack18.printf("reset master flush offset to %d success%n",$stack17);
+ label1:defaultMQAdminExt.shutdown();
+ goto label2;
+ label3:$stack23 = catch;
+ $stack24=new org.apache.rocketmq.tools.command.SubCommandException;
+ $stack25=new java.lang.StringBuilder;
+ $stack25#java.lang.StringBuilder();
+ $stack26 = this.getClass();
+ brokerAddr = $stack26.getSimpleName();
+ $stack25 = $stack25.append(brokerAddr);
+ $stack25 = $stack25.append(" command failed");
+ brokerAddr = $stack25.toString();
+ $stack24#org.apache.rocketmq.tools.command.SubCommandException(brokerAddr,(java.lang.Throwable)$stack23);
+ throw $stack24;
+ label4:l8 = catch;
+ label5:defaultMQAdminExt.shutdown();
+ throw l8;
+ label2:return;
+ catch java.lang.Exception: label0 - label1 : label3;
+catch java.lang.Throwable: label0 - label1 : label4;
+catch java.lang.Throwable: label3 - label5 : label4;
+} 
+

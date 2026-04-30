@@ -1,0 +1,11 @@
+org.apache.rocketmq.remoting.protocol.RemotingCommand org.apache.rocketmq.broker.client.net.Broker2Client:getConsumeStatus (
+  java.lang.String @topic, java.lang.String @group,
+  java.lang.String originClientId) {
+  guard = tt;
+  ret(level()) = pc ⊔ level(@group) ⊔ level(@topic) ⊔ level(originClientId) ⊔ level(this) ⊔ obj_level(@group) ⊔ obj_level(this);
+  ret(obj_level()) = ⊤;
+  ret(obj_level(@group)) = pc ⊔ level(@group) ⊔ level(@topic) ⊔ level(originClientId) ⊔ level(this) ⊔ obj_level(@group) ⊔ obj_level(this);
+  ret(obj_level(@topic)) = pc ⊔ level(@group) ⊔ level(@topic) ⊔ level(originClientId) ⊔ level(this) ⊔ obj_level(@group) ⊔ obj_level(this);
+  ret(obj_level(originClientId)) = pc ⊔ level(@group) ⊔ level(@topic) ⊔ level(originClientId) ⊔ level(this) ⊔ obj_level(@group) ⊔ obj_level(this);
+  ret(obj_level(this)) = ⊤;
+}

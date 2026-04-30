@@ -1,0 +1,41 @@
+void org.apache.rocketmq.proxy.remoting.protocol.http2proxy.Http2ProtocolProxyHandler$1:initChannel(io.netty.channel.Channel @ch)
+{
+org.apache.rocketmq.proxy.remoting.protocol.http2proxy.Http2ProtocolProxyHandler $stack2;
+  io.netty.handler.ssl.SslContext $stack3;
+  io.netty.channel.ChannelPipeline $stack4;
+  java.lang.Object[] $stack5;
+  io.netty.buffer.ByteBufAllocator $stack15;
+  org.apache.rocketmq.proxy.config.ProxyConfig $stack16;
+  java.lang.Integer $stack18;
+  int $stack19;
+  io.netty.handler.ssl.SslHandler $stack20;
+  org.apache.rocketmq.proxy.remoting.protocol.http2proxy.Http2ProxyBackendHandler tmp$1050775572;
+  io.netty.channel.ChannelHandler[] tmp$1783243647;
+  io.netty.channel.Channel ch;
+ch=@ch;
+$stack2=this.this$0;
+ $stack3 = org.apache.rocketmq.proxy.remoting.protocol.http2proxy.Http2ProtocolProxyHandler.access$000($stack2);
+ if ($stack3==null) goto label0;
+ $stack4 = ch.pipeline();
+ $stack5=new io.netty.channel.ChannelHandler[1];
+ $stack2=this.this$0;
+ $stack3 = org.apache.rocketmq.proxy.remoting.protocol.http2proxy.Http2ProtocolProxyHandler.access$000($stack2);
+ $stack15 = ch.alloc();
+ $stack16=this.val$config;
+ $stack18 = $stack16.getGrpcServerPort();
+ $stack19 = $stack18.intValue();
+ $stack20 = $stack3.newHandler($stack15,"127.0.0.1",$stack19);
+ $stack5[0]=$stack20;
+ tmp$1783243647=(io.netty.channel.ChannelHandler[]) $stack5;
+ $stack4.addLast(tmp$1783243647);
+ label0:$stack4 = ch.pipeline();
+ $stack5=new io.netty.channel.ChannelHandler[1];
+ tmp$1050775572=new org.apache.rocketmq.proxy.remoting.protocol.http2proxy.Http2ProxyBackendHandler;
+ ch=this.val$inboundChannel;
+ tmp$1050775572#org.apache.rocketmq.proxy.remoting.protocol.http2proxy.Http2ProxyBackendHandler(ch);
+ $stack5[0]=tmp$1050775572;
+ tmp$1783243647=(io.netty.channel.ChannelHandler[]) $stack5;
+ $stack4.addLast(tmp$1783243647);
+ return;
+ } 
+

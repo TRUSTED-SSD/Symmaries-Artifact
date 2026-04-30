@@ -1,0 +1,54 @@
+org.keycloak.common.util.KeycloakUriBuilder org.keycloak.common.util.KeycloakUriBuilder:schemeSpecificPart(java.lang.String @ssp)
+{
+java.lang.StringBuilder sb;
+  java.net.URI uri;
+  java.lang.String $stack5;
+  int $stack12;
+  java.lang.StringBuilder $stack34;
+  java.lang.IllegalArgumentException $stack43;
+  java.lang.String ssp;
+ssp=@ssp;
+if (ssp!=null) goto label0;
+ $stack43=new java.lang.IllegalArgumentException;
+ $stack43#java.lang.IllegalArgumentException("schemeSpecificPart was null");
+ throw $stack43;
+ label0:sb=new java.lang.StringBuilder;
+ sb#java.lang.StringBuilder();
+ $stack5=this.scheme;
+ if ($stack5==null) goto label1;
+ $stack5=this.scheme;
+ $stack34 = sb.append($stack5);
+ $stack34.append((char)58);
+ label1:if (ssp==null) goto label2;
+ sb.append(ssp);
+ label2:ssp=this.fragment;
+ if (ssp==null) goto label3;
+ ssp=this.fragment;
+ $stack12 = ssp.length();
+ if ($stack12<=0) goto label3;
+ $stack34 = sb.append((char)35);
+ ssp=this.fragment;
+ $stack34.append(ssp);
+ label3:ssp = sb.toString();
+ uri = java.net.URI.create(ssp);
+ ssp = uri.getRawSchemeSpecificPart();
+ if (ssp==null) goto label4;
+ ssp = uri.getRawPath();
+ if (ssp!=null) goto label4;
+ ssp = uri.getRawSchemeSpecificPart();
+ this.ssp=ssp;
+ goto label5;
+ label4:this.ssp=null;
+ ssp = uri.getRawUserInfo();
+ this.userInfo=ssp;
+ ssp = uri.getHost();
+ this.host=ssp;
+ $stack12 = uri.getPort();
+ this.port=$stack12;
+ ssp = uri.getRawPath();
+ this.path=ssp;
+ ssp = uri.getRawQuery();
+ this.query=ssp;
+ label5:return  this;
+ } 
+

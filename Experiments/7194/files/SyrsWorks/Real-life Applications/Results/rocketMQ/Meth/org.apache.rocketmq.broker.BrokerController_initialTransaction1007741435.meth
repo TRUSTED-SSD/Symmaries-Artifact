@@ -1,0 +1,48 @@
+void org.apache.rocketmq.broker.BrokerController:initialTransaction()
+{
+java.lang.Object $stack1;
+  org.apache.rocketmq.broker.transaction.TransactionalMessageService $stack2;
+  org.apache.rocketmq.broker.transaction.AbstractTransactionalMessageCheckListener $stack5;
+  org.apache.rocketmq.broker.transaction.TransactionalMessageCheckService $stack8;
+  org.apache.rocketmq.broker.transaction.queue.DefaultTransactionalMessageCheckListener $stack9;
+  java.lang.Class $stack10;
+  org.apache.rocketmq.logging.org.slf4j.Logger $stack11;
+  java.lang.String $stack13;
+  org.apache.rocketmq.broker.transaction.queue.TransactionalMessageServiceImpl $stack18;
+  org.apache.rocketmq.broker.transaction.queue.TransactionalMessageBridge $stack19;
+  org.apache.rocketmq.store.MessageStore $stack20;
+  $stack1 = org.apache.rocketmq.common.utils.ServiceProvider.loadClass(org.apache.rocketmq.broker.transaction.TransactionalMessageService);
+ $stack2=(org.apache.rocketmq.broker.transaction.TransactionalMessageService) $stack1;
+ this.transactionalMessageService=$stack2;
+ $stack2=this.transactionalMessageService;
+ if (null!=$stack2) goto label0;
+ $stack18=new org.apache.rocketmq.broker.transaction.queue.TransactionalMessageServiceImpl;
+ $stack19=new org.apache.rocketmq.broker.transaction.queue.TransactionalMessageBridge;
+ $stack20 = this.getMessageStore();
+ $stack19#org.apache.rocketmq.broker.transaction.queue.TransactionalMessageBridge(this,$stack20);
+ $stack18#org.apache.rocketmq.broker.transaction.queue.TransactionalMessageServiceImpl($stack19);
+ this.transactionalMessageService=$stack18;
+ $stack11=org.apache.rocketmq.broker.BrokerController.LOG;
+ $stack10=org.apache.rocketmq.broker.transaction.queue.TransactionalMessageServiceImpl;
+ $stack13 = $stack10.getSimpleName();
+ $stack11.warn("Load default transaction message hook service: {}",(java.lang.Object)$stack13);
+ label0:$stack1 = org.apache.rocketmq.common.utils.ServiceProvider.loadClass(org.apache.rocketmq.broker.transaction.AbstractTransactionalMessageCheckListener);
+ $stack5=(org.apache.rocketmq.broker.transaction.AbstractTransactionalMessageCheckListener) $stack1;
+ this.transactionalMessageCheckListener=$stack5;
+ $stack5=this.transactionalMessageCheckListener;
+ if (null!=$stack5) goto label1;
+ $stack9=new org.apache.rocketmq.broker.transaction.queue.DefaultTransactionalMessageCheckListener;
+ $stack9#org.apache.rocketmq.broker.transaction.queue.DefaultTransactionalMessageCheckListener();
+ this.transactionalMessageCheckListener=$stack9;
+ $stack11=org.apache.rocketmq.broker.BrokerController.LOG;
+ $stack10=org.apache.rocketmq.broker.transaction.queue.DefaultTransactionalMessageCheckListener;
+ $stack13 = $stack10.getSimpleName();
+ $stack11.warn("Load default discard message hook service: {}",(java.lang.Object)$stack13);
+ label1:$stack5=this.transactionalMessageCheckListener;
+ $stack5.setBrokerController(this);
+ $stack8=new org.apache.rocketmq.broker.transaction.TransactionalMessageCheckService;
+ $stack8#org.apache.rocketmq.broker.transaction.TransactionalMessageCheckService(this);
+ this.transactionalMessageCheckService=$stack8;
+ return;
+ } 
+

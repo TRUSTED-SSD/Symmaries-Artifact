@@ -1,0 +1,27 @@
+static org.apache.rocketmq.proxy.common.ReceiptHandleGroup$HandleData org.apache.rocketmq.proxy.common.ReceiptHandleGroup:lambda$remove$3(long timeout,java.util.concurrent.atomic.AtomicReference res,java.lang.String handleKey,org.apache.rocketmq.proxy.common.ReceiptHandleGroup$HandleData handleData)
+{
+java.lang.Throwable l6;
+  boolean $stack7;
+  org.apache.rocketmq.proxy.common.MessageReceiptHandle $stack10;
+  org.apache.rocketmq.proxy.common.ProxyException $stack14;
+  org.apache.rocketmq.proxy.common.ProxyExceptionCode $stack15;
+  $stack7 = handleData.lock(timeout);
+ if ($stack7!=0) goto label0;
+ $stack14=new org.apache.rocketmq.proxy.common.ProxyException;
+ $stack15=org.apache.rocketmq.proxy.common.ProxyExceptionCode.INTERNAL_SERVER_ERROR;
+ $stack14#org.apache.rocketmq.proxy.common.ProxyException($stack15,"try to remove and get handle failed");
+ throw $stack14;
+ label0:$stack7 = org.apache.rocketmq.proxy.common.ReceiptHandleGroup$HandleData.access$100(handleData);
+ if ($stack7!=0) goto label1;
+ org.apache.rocketmq.proxy.common.ReceiptHandleGroup$HandleData.access$102(handleData,(boolean)1);
+ $stack10 = org.apache.rocketmq.proxy.common.ReceiptHandleGroup$HandleData.access$000(handleData);
+ res.set((java.lang.Object)$stack10);
+ label1:handleData.unlock();
+ return  null;
+ label2:l6 = catch;
+ label3:handleData.unlock();
+ throw l6;
+ catch java.lang.Throwable: label0 - label1 : label2;
+catch java.lang.Throwable: label2 - label3 : label2;
+} 
+

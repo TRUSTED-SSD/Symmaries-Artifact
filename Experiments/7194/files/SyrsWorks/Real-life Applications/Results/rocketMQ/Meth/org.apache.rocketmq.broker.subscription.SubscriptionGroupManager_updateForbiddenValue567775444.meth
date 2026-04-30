@@ -1,0 +1,54 @@
+void org.apache.rocketmq.broker.subscription.SubscriptionGroupManager:updateForbiddenValue(java.lang.String group,java.lang.String topic,java.lang.Integer forbidden)
+{
+java.util.concurrent.ConcurrentMap topicsPermMap;
+  java.lang.Integer old;
+  java.lang.Object $stack7;
+  org.apache.rocketmq.logging.org.slf4j.Logger $stack8;
+  int $stack9;
+  java.lang.Object[] $stack13;
+  org.apache.rocketmq.remoting.protocol.DataVersion $stack18;
+  java.util.concurrent.ConcurrentHashMap $stack23;
+  if (forbidden==null) goto label0;
+ $stack9 = forbidden.intValue();
+ if ($stack9>0) goto label1;
+ label0:topicsPermMap=this.forbiddenTable;
+ topicsPermMap.remove((java.lang.Object)group);
+ $stack8=org.apache.rocketmq.broker.subscription.SubscriptionGroupManager.log;
+ $stack8.info("clear group forbidden, {}@{} ",(java.lang.Object)group,(java.lang.Object)topic);
+ return;
+ label1:topicsPermMap=this.forbiddenTable;
+ $stack7 = topicsPermMap.get((java.lang.Object)group);
+ topicsPermMap=(java.util.concurrent.ConcurrentMap) $stack7;
+ if (topicsPermMap!=null) goto label2;
+ topicsPermMap=this.forbiddenTable;
+ $stack23=new java.util.concurrent.ConcurrentHashMap;
+ $stack23#java.util.concurrent.ConcurrentHashMap();
+ topicsPermMap.putIfAbsent((java.lang.Object)group,(java.lang.Object)$stack23);
+ topicsPermMap=this.forbiddenTable;
+ $stack7 = topicsPermMap.get((java.lang.Object)group);
+ topicsPermMap=(java.util.concurrent.ConcurrentMap) $stack7;
+ label2:$stack7 = topicsPermMap.put((java.lang.Object)topic,(java.lang.Object)forbidden);
+ old=(java.lang.Integer) $stack7;
+ if (old==null) goto label3;
+ $stack8=org.apache.rocketmq.broker.subscription.SubscriptionGroupManager.log;
+ $stack13=new java.lang.Object[4];
+ $stack13[0]=group;
+ $stack13[1]=topic;
+ $stack13[2]=old;
+ $stack13[3]=forbidden;
+ $stack8.info("set group forbidden, {}@{} old: {} new: {}",$stack13);
+ goto label4;
+ label3:$stack8=org.apache.rocketmq.broker.subscription.SubscriptionGroupManager.log;
+ $stack13=new java.lang.Object[4];
+ $stack13[0]=group;
+ $stack13[1]=topic;
+ old = java.lang.Integer.valueOf(0);
+ $stack13[2]=old;
+ $stack13[3]=forbidden;
+ $stack8.info("set group forbidden, {}@{} old: {} new: {}",$stack13);
+ label4:$stack18=this.dataVersion;
+ $stack18.nextVersion();
+ this.persist();
+ return;
+ } 
+

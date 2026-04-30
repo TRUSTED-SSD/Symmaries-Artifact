@@ -1,0 +1,42 @@
+void org.apache.bookkeeper.bookie.FileInfo:writeHeader()
+{
+java.nio.ByteBuffer bb;
+  int $stack3;
+  java.nio.ByteBuffer $stack4;
+  byte[] $stack7;
+  java.nio.channels.FileChannel $stack16;
+  bb = java.nio.ByteBuffer.allocate(1024);
+ $stack3=org.apache.bookkeeper.bookie.FileInfo.SIGNATURE;
+ bb.putInt($stack3);
+ $stack3=this.headerVersion;
+ bb.putInt($stack3);
+ $stack7=this.masterKey;
+ $stack3=#$stack7;
+ bb.putInt($stack3);
+ $stack7=this.masterKey;
+ bb.put($stack7);
+ $stack3=this.stateBits;
+ bb.putInt($stack3);
+ $stack3=this.headerVersion;
+ if ($stack3<1) goto label0;
+ $stack4=this.explicitLac;
+ if ($stack4==null) goto label1;
+ $stack4=this.explicitLac;
+ $stack4.rewind();
+ $stack4=this.explicitLac;
+ $stack3 = $stack4.capacity();
+ bb.putInt($stack3);
+ $stack4=this.explicitLac;
+ bb.put($stack4);
+ $stack4=this.explicitLac;
+ $stack4.rewind();
+ goto label0;
+ label1:bb.putInt(0);
+ label0:bb.rewind();
+ $stack16=this.fc;
+ $stack16.position(0L);
+ $stack16=this.fc;
+ $stack16.write(bb);
+ return;
+ } 
+

@@ -1,0 +1,50 @@
+java.util.Map org.apache.bookkeeper.replication.BookieLedgerIndexer:getBookieToLedgerIndex()
+{
+java.util.concurrent.ConcurrentHashMap bookie2ledgersMap;
+  java.util.concurrent.CountDownLatch ledgerCollectorLatch;
+  java.util.ArrayList resultCode;
+  org.apache.bookkeeper.replication.BookieLedgerIndexer$1 $stack8;
+  org.apache.bookkeeper.replication.BookieLedgerIndexer$2 $stack10;
+  org.apache.bookkeeper.meta.LedgerManager $stack11;
+  java.lang.Integer $stack12;
+  boolean $stack13;
+  org.apache.bookkeeper.replication.ReplicationException$BKAuditException $stack14;
+  java.lang.Object $stack16;
+  int $stack18;
+  org.apache.bookkeeper.client.BKException $stack19;
+  java.lang.InterruptedException $stack20;
+  java.lang.Thread $stack21;
+  bookie2ledgersMap=new java.util.concurrent.ConcurrentHashMap;
+ bookie2ledgersMap#java.util.concurrent.ConcurrentHashMap();
+ ledgerCollectorLatch=new java.util.concurrent.CountDownLatch;
+ ledgerCollectorLatch#java.util.concurrent.CountDownLatch(1);
+ $stack8=new org.apache.bookkeeper.replication.BookieLedgerIndexer$1;
+ $stack8#org.apache.bookkeeper.replication.BookieLedgerIndexer$1(this,bookie2ledgersMap);
+ resultCode=new java.util.ArrayList;
+ resultCode#java.util.ArrayList(1);
+ $stack11=this.ledgerManager;
+ $stack10=new org.apache.bookkeeper.replication.BookieLedgerIndexer$2;
+ $stack10#org.apache.bookkeeper.replication.BookieLedgerIndexer$2(this,(java.util.List)resultCode,ledgerCollectorLatch);
+ $stack11.asyncProcessLedgers((org.apache.bookkeeper.proto.BookkeeperInternalCallbacks$Processor)$stack8,(org.apache.zookeeper.AsyncCallback$VoidCallback)$stack10,null,0,-1);
+ label0:ledgerCollectorLatch.await();
+ label1:goto label2;
+ label3:$stack20 = catch;
+ $stack21 = java.lang.Thread.currentThread();
+ $stack21.interrupt();
+ $stack14=new org.apache.bookkeeper.replication.ReplicationException$BKAuditException;
+ $stack14#org.apache.bookkeeper.replication.ReplicationException$BKAuditException("Exception while getting the bookie-ledgers",(java.lang.Throwable)$stack20);
+ throw $stack14;
+ label2:$stack12 = java.lang.Integer.valueOf(0);
+ $stack13 = resultCode.contains((java.lang.Object)$stack12);
+ if ($stack13!=0) goto label4;
+ $stack14=new org.apache.bookkeeper.replication.ReplicationException$BKAuditException;
+ $stack16 = resultCode.get(0);
+ $stack12=(java.lang.Integer) $stack16;
+ $stack18 = $stack12.intValue();
+ $stack19 = org.apache.bookkeeper.client.BKException.create($stack18);
+ $stack14#org.apache.bookkeeper.replication.ReplicationException$BKAuditException("Exception while getting the bookie-ledgers",(java.lang.Throwable)$stack19);
+ throw $stack14;
+ label4:return  bookie2ledgersMap;
+ catch java.lang.InterruptedException: label0 - label1 : label3;
+} 
+

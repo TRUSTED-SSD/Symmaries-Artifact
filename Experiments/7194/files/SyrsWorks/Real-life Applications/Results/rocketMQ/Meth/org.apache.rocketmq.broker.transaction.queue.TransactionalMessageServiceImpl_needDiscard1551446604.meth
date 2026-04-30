@@ -1,0 +1,18 @@
+boolean org.apache.rocketmq.broker.transaction.queue.TransactionalMessageServiceImpl:needDiscard(org.apache.rocketmq.common.message.MessageExt msgExt,int transactionCheckMax)
+{
+java.lang.String checkTimes;
+  int checkTime;
+  java.lang.Integer $stack8;
+  checkTimes = msgExt.getProperty("TRANSACTION_CHECK_TIMES");
+ checkTime=1;
+ if (null==checkTimes) goto label0;
+ $stack8 = this#org.apache.rocketmq.broker.transaction.queue.TransactionalMessageServiceImpl:getInt(checkTimes);
+ checkTime = $stack8.intValue();
+ if (checkTime<transactionCheckMax) goto label1;
+ return  1;
+ label1:checkTime=(checkTime+1);
+ label0:checkTimes = java.lang.String.valueOf(checkTime);
+ msgExt.putUserProperty("TRANSACTION_CHECK_TIMES",checkTimes);
+ return  0;
+ } 
+

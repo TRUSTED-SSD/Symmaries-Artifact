@@ -1,0 +1,26 @@
+static java.math.BigInteger MyClass:compute (java.math.BigInteger l0,
+                                             java.math.BigInteger l1) {
+  guard = tt;
+  ret(level()) = pc ⊔ level(l0) ⊔ level(l1) ⊔ obj_level(l0);
+  ret(obj_level()) = pc ⊔ level(l0) ⊔ obj_level(l0) ⊔ obj_level(l1);
+  ret(obj_level(l0)) = pc ⊔ level(l0) ⊔ obj_level(l0);
+  ret(obj_level(l1)) = if level(l0) = ⊥ ∧ (if l1.><l0 then obj_level(l1) = ⊥ else if l0.><l1 then obj_level(l0) = ⊥ else l0~l1 ∧ obj_level(l1) = ⊥) then pc else if if level(l0) = ⊤ then l0~l1 ∨ l0.><l1 ∨ l1.><l0 ∨ obj_level(l1) = ⊤ else level(l0) = ⊥ ∧ if l1.><l0 ∨ ¬l0.><l1 then obj_level(l1) else obj_level(l0) = ⊤ then ⊤ else ⊥;
+  ret(~l0) = tt;
+  ret(~l1) = tt;
+  ret(.><l0) = tt;
+  ret(.><l1) = l0~l1 ∨ l1.><l0 ∨ l1.><l1;
+  ret(l0.><) = tt;
+  ret(l0.><l0) = tt;
+  ret(l0.><l1) = l0~l1 ∨ l0.><l1 ∨ l1.><l0;
+  ret(l1.><) = l0~l1 ∨ l0.><l1 ∨ l1.><l0 ∨ l1.><l1;
+  ret(l1.><l0) = l0~l1 ∨ l1.><l0;
+  ret(l1.><l1) = l0~l1 ∨ l1.><l0 ∨ l1.><l1;
+  exc(level()) = pc ⊔ level(l0) ⊔ obj_level(l0);
+  exc(obj_level()) = pc ⊔ level(l0) ⊔ obj_level(l0);
+  exc(obj_level(l0)) = pc ⊔ level(l0) ⊔ obj_level(l0);
+  exc(obj_level(l1)) = if level(l0) = ⊥ ∧ (if l1.><l0 then obj_level(l1) = ⊥ else if l0.><l1 then obj_level(l0) = ⊥ else l0~l1 ∧ obj_level(l1) = ⊥) then pc else if if level(l0) = ⊤ then l0~l1 ∨ l0.><l1 ∨ l1.><l0 ∨ obj_level(l1) = ⊤ else level(l0) = ⊥ ∧ if l1.><l0 ∨ ¬l0.><l1 then obj_level(l1) else obj_level(l0) = ⊤ then ⊤ else ⊥;
+  exc(l0.><l0) = tt;
+  exc(l0.><l1) = l0~l1 ∨ l0.><l1 ∨ l1.><l0;
+  exc(l1.><l0) = l0~l1 ∨ l1.><l0;
+  exc(l1.><l1) = l0~l1 ∨ l1.><l0 ∨ l1.><l1;
+}

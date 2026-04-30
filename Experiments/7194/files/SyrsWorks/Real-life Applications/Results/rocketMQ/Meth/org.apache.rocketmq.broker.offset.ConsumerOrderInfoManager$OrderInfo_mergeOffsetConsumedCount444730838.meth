@@ -1,0 +1,56 @@
+void org.apache.rocketmq.broker.offset.ConsumerOrderInfoManager$OrderInfo:mergeOffsetConsumedCount(java.util.List @preOffsetList,java.util.Map @prevOffsetConsumedCount)
+{
+java.util.HashMap offsetConsumedCount;
+  java.util.HashSet preQueueOffsetSet;
+  int i;
+  long queueOffset;
+  int count;
+  java.lang.Integer preCount;
+  java.lang.Long $stack16;
+  boolean $stack17;
+  java.lang.Object $stack21;
+  java.util.HashMap $stack34;
+  java.util.Map prevOffsetConsumedCount;
+java.util.List preOffsetList;
+preOffsetList=@preOffsetList;
+prevOffsetConsumedCount=@prevOffsetConsumedCount;
+offsetConsumedCount=new java.util.HashMap;
+ offsetConsumedCount#java.util.HashMap();
+ if (prevOffsetConsumedCount!=null) goto label0;
+ $stack34=new java.util.HashMap;
+ $stack34#java.util.HashMap();
+ prevOffsetConsumedCount=$stack34;
+ label0:preQueueOffsetSet=new java.util.HashSet;
+ preQueueOffsetSet#java.util.HashSet();
+ i=0;
+ label1:count = preOffsetList.size();
+ if (i>=count) goto label2;
+ queueOffset = org.apache.rocketmq.broker.offset.ConsumerOrderInfoManager$OrderInfo.getQueueOffset(preOffsetList,i);
+ $stack16 = java.lang.Long.valueOf(queueOffset);
+ preQueueOffsetSet.add((java.lang.Object)$stack16);
+ i=(i+1);
+ goto label1;
+ label2:i=0;
+ label3:preOffsetList=this.offsetList;
+ count = preOffsetList.size();
+ if (i>=count) goto label4;
+ queueOffset = this.getQueueOffset(i);
+ $stack16 = java.lang.Long.valueOf(queueOffset);
+ $stack17 = preQueueOffsetSet.contains((java.lang.Object)$stack16);
+ if ($stack17==0) goto label5;
+ count=1;
+ $stack16 = java.lang.Long.valueOf(queueOffset);
+ $stack21 = prevOffsetConsumedCount.get((java.lang.Object)$stack16);
+ preCount=(java.lang.Integer) $stack21;
+ if (preCount==null) goto label6;
+ count = preCount.intValue();
+ count=(count+1);
+ label6:$stack16 = java.lang.Long.valueOf(queueOffset);
+ preCount = java.lang.Integer.valueOf(count);
+ offsetConsumedCount.put((java.lang.Object)$stack16,(java.lang.Object)preCount);
+ label5:i=(i+1);
+ goto label3;
+ label4:this.offsetConsumedCount=offsetConsumedCount;
+ return;
+ } 
+

@@ -1,0 +1,25 @@
+ReviewProcess$Review (ReviewProcess l1, ReviewProcess$1 l2) {
+  guard = pc ⊔ level(l1) ⊔ level(this) ⊔ obj_level(l1) ⊔ obj_level(this) = ⊥;
+  ret(obj_level(l1)) = ⊤;
+  ret(obj_level(l2)) = ⊤;
+  ret(obj_level(this)) = ⊤;
+  ret(l1.~>l1) = tt;
+  ret(l1.~>l2) = l1.~>l2 ∨ this.~>l2;
+  ret(l1.~>this) = tt;
+  ret(this.~>l1) = tt;
+  ret(this.~>l2) = l1.~>l2 ∨ this.~>l2;
+  ret(this.~>this) = tt;
+  exc(level()) = ⊤;
+  exc(obj_level()) = ⊤;
+  exc(obj_level(l1)) = ⊤;
+  exc(obj_level(l2)) = ⊤;
+  exc(obj_level(this)) = ⊤;
+  exc(.~>l1) = ff;
+  exc(.~>this) = ff;
+  exc(l1.~>l1) = tt;
+  exc(l1.~>l2) = l1.~>l2 ∨ this.~>l2;
+  exc(l1.~>this) = tt;
+  exc(this.~>l1) = tt;
+  exc(this.~>l2) = l1.~>l2 ∨ this.~>l2;
+  exc(this.~>this) = tt;
+}

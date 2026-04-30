@@ -1,0 +1,61 @@
+void org.apache.rocketmq.client.impl.consumer.DefaultLitePullConsumerImpl:start()
+{
+org.apache.rocketmq.common.ServiceState $stack1;
+  int[] $stack2;
+  int $stack3;
+  org.apache.rocketmq.client.consumer.DefaultLitePullConsumer $stack6;
+  org.apache.rocketmq.remoting.protocol.heartbeat.MessageModel $stack7;
+  org.apache.rocketmq.remoting.protocol.heartbeat.MessageModel $stack8;
+  org.apache.rocketmq.client.impl.factory.MQClientInstance $stack9;
+  org.apache.rocketmq.logging.org.slf4j.Logger $stack12;
+  java.lang.String $stack14;
+  org.apache.rocketmq.client.exception.MQClientException $stack25;
+  java.lang.StringBuilder $stack26;
+  $stack2=org.apache.rocketmq.client.impl.consumer.DefaultLitePullConsumerImpl$4.$SwitchMap$org$apache$rocketmq$common$ServiceState;
+ $stack1=this.serviceState;
+ $stack3 = $stack1.ordinal();
+ $stack3=$stack2[$stack3];
+ switch [$stack3]
+if 0 goto label0;
+if 1 goto label1;
+if 2 goto label1;
+if 3 goto label1;
+goto label2;
+ label0:$stack1=org.apache.rocketmq.common.ServiceState.START_FAILED;
+ this.serviceState=$stack1;
+ this#org.apache.rocketmq.client.impl.consumer.DefaultLitePullConsumerImpl:checkConfig();
+ $stack6=this.defaultLitePullConsumer;
+ $stack7 = $stack6.getMessageModel();
+ $stack8=org.apache.rocketmq.remoting.protocol.heartbeat.MessageModel.CLUSTERING;
+ if ($stack7!=$stack8) goto label3;
+ $stack6=this.defaultLitePullConsumer;
+ $stack6.changeInstanceNameToPID();
+ label3:this#org.apache.rocketmq.client.impl.consumer.DefaultLitePullConsumerImpl:initMQClientFactory();
+ this#org.apache.rocketmq.client.impl.consumer.DefaultLitePullConsumerImpl:initRebalanceImpl();
+ this#org.apache.rocketmq.client.impl.consumer.DefaultLitePullConsumerImpl:initPullAPIWrapper();
+ this#org.apache.rocketmq.client.impl.consumer.DefaultLitePullConsumerImpl:initOffsetStore();
+ $stack9=this.mQClientFactory;
+ $stack9.start();
+ this#org.apache.rocketmq.client.impl.consumer.DefaultLitePullConsumerImpl:startScheduleTask();
+ $stack1=org.apache.rocketmq.common.ServiceState.RUNNING;
+ this.serviceState=$stack1;
+ $stack12=org.apache.rocketmq.client.impl.consumer.DefaultLitePullConsumerImpl.log;
+ $stack6=this.defaultLitePullConsumer;
+ $stack14 = $stack6.getConsumerGroup();
+ $stack12.info("the consumer [{}] start OK",(java.lang.Object)$stack14);
+ this#org.apache.rocketmq.client.impl.consumer.DefaultLitePullConsumerImpl:operateAfterRunning();
+ goto label2;
+ label1:$stack25=new org.apache.rocketmq.client.exception.MQClientException;
+ $stack26=new java.lang.StringBuilder;
+ $stack26#java.lang.StringBuilder();
+ $stack26 = $stack26.append("The PullConsumer service state not OK, maybe started once, ");
+ $stack1=this.serviceState;
+ $stack26 = $stack26.append((java.lang.Object)$stack1);
+ $stack14 = org.apache.rocketmq.common.help.FAQUrl.suggestTodo("https://rocketmq.apache.org/docs/bestPractice/06FAQ");
+ $stack26 = $stack26.append($stack14);
+ $stack14 = $stack26.toString();
+ $stack25#org.apache.rocketmq.client.exception.MQClientException($stack14,null);
+ throw $stack25;
+ label2:return;
+ } 
+

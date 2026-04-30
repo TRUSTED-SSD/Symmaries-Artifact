@@ -1,0 +1,42 @@
+org.apache.rocketmq.client.impl.consumer.ConsumeMessagePopConcurrentlyService$ConsumeRequest(org.apache.rocketmq.client.impl.consumer.ConsumeMessagePopConcurrentlyService this$0,java.util.List msgs,org.apache.rocketmq.client.impl.consumer.PopProcessQueue processQueue,org.apache.rocketmq.common.message.MessageQueue messageQueue)
+{
+java.lang.String extraInfo;
+  java.lang.String[] extraInfoStrs;
+  java.lang.Object $stack7;
+  org.apache.rocketmq.common.message.MessageExt $stack8;
+  java.lang.Long $stack11;
+  long $stack12;
+  java.lang.Throwable $stack15;
+  org.apache.rocketmq.logging.org.slf4j.Logger $stack16;
+  java.lang.StringBuilder $stack17;
+  this.this$0=this$0;
+ this#java.lang.Object();
+ this.popTime=0L;
+ this.invisibleTime=0L;
+ this.msgs=msgs;
+ this.processQueue=processQueue;
+ this.messageQueue=messageQueue;
+ label0:$stack7 = msgs.get(0);
+ $stack8=(org.apache.rocketmq.common.message.MessageExt) $stack7;
+ extraInfo = $stack8.getProperty("POP_CK");
+ extraInfoStrs = org.apache.rocketmq.remoting.protocol.header.ExtraInfoUtil.split(extraInfo);
+ $stack11 = org.apache.rocketmq.remoting.protocol.header.ExtraInfoUtil.getPopTime(extraInfoStrs);
+ $stack12 = $stack11.longValue();
+ this.popTime=$stack12;
+ $stack11 = org.apache.rocketmq.remoting.protocol.header.ExtraInfoUtil.getInvisibleTime(extraInfoStrs);
+ $stack12 = $stack11.longValue();
+ this.invisibleTime=$stack12;
+ label1:goto label2;
+ label3:$stack15 = catch;
+ $stack16 = org.apache.rocketmq.client.impl.consumer.ConsumeMessagePopConcurrentlyService.access$000();
+ $stack17=new java.lang.StringBuilder;
+ $stack17#java.lang.StringBuilder();
+ $stack17 = $stack17.append("parse extra info error. msg:");
+ $stack7 = msgs.get(0);
+ $stack17 = $stack17.append($stack7);
+ extraInfo = $stack17.toString();
+ $stack16.error(extraInfo,$stack15);
+ label2:return;
+ catch java.lang.Throwable: label0 - label1 : label3;
+} 
+

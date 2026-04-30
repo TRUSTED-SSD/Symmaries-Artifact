@@ -1,0 +1,150 @@
+    private void validateDataPointMethods(java.util.List)
+    {
+        org.junit.experimental.theories.Theories this;
+        java.util.List errors;
+        java.lang.reflect.Method[] arr$;
+        int len$, i$, $stack11;
+        java.lang.reflect.Method method;
+        org.junit.runners.model.TestClass $stack7;
+        java.lang.Class $stack8;
+        java.lang.'annotation'.Annotation $stack10;
+        boolean $stack12;
+        java.lang.Error $stack17;
+        java.lang.StringBuilder $stack18;
+        java.lang.String $stack20;
+
+        this := @this: org.junit.experimental.theories.Theories;
+
+        errors := @parameter0: java.util.List;
+
+        $stack7 = virtualinvoke this.<org.junit.experimental.theories.Theories: org.junit.runners.model.TestClass getTestClass()>();
+/*100*/
+
+        $stack8 = virtualinvoke $stack7.<org.junit.runners.model.TestClass: java.lang.Class getJavaClass()>();
+/*100*/
+
+        arr$ = virtualinvoke $stack8.<java.lang.Class: java.lang.reflect.Method[] getDeclaredMethods()>();
+/*102*/
+/*100*/
+/*100*/
+
+        len$ = lengthof arr$;
+/*102*/
+
+        i$ = 0;
+/*102*/
+
+     label1:
+        if i$ >= len$ goto label5;
+/*102*/
+
+        method = arr$[i$];
+/*113*/
+
+        $stack10 = virtualinvoke method.<java.lang.reflect.Method: java.lang.'annotation'.Annotation getAnnotation(java.lang.Class)>(class "Lorg/junit/experimental/theories/DataPoint;");
+/*103*/
+
+        if $stack10 != null goto label2;
+/*103*/
+
+        $stack10 = virtualinvoke method.<java.lang.reflect.Method: java.lang.'annotation'.Annotation getAnnotation(java.lang.Class)>(class "Lorg/junit/experimental/theories/DataPoints;");
+/*109*/
+
+        if $stack10 != null goto label2;
+/*109*/
+
+        goto label4;
+/*104*/
+
+     label2:
+        $stack11 = virtualinvoke method.<java.lang.reflect.Method: int getModifiers()>();
+/*106*/
+
+        $stack12 = staticinvoke <java.lang.reflect.Modifier: boolean isStatic(int)>($stack11);
+/*106*/
+
+        if $stack12 != 0 goto label3;
+/*106*/
+
+        $stack17 = new java.lang.Error;
+/*107*/
+
+        $stack18 = new java.lang.StringBuilder;
+/*107*/
+
+        specialinvoke $stack18.<java.lang.StringBuilder: void <init>()>();
+/*107*/
+
+        $stack18 = virtualinvoke $stack18.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>("DataPoint method ");
+/*107*/
+
+        $stack20 = virtualinvoke method.<java.lang.reflect.Method: java.lang.String getName()>();
+/*107*/
+
+        $stack18 = virtualinvoke $stack18.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>($stack20);
+/*107*/
+
+        $stack18 = virtualinvoke $stack18.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>(" must be static");
+/*107*/
+
+        $stack20 = virtualinvoke $stack18.<java.lang.StringBuilder: java.lang.String toString()>();
+/*107*/
+
+        specialinvoke $stack17.<java.lang.Error: void <init>(java.lang.String)>($stack20);
+/*107*/
+
+        interfaceinvoke errors.<java.util.List: boolean add(java.lang.Object)>($stack17);
+/*107*/
+
+     label3:
+        $stack11 = virtualinvoke method.<java.lang.reflect.Method: int getModifiers()>();
+/*109*/
+
+        $stack12 = staticinvoke <java.lang.reflect.Modifier: boolean isPublic(int)>($stack11);
+/*109*/
+
+        if $stack12 != 0 goto label4;
+/*109*/
+
+        $stack17 = new java.lang.Error;
+/*110*/
+
+        $stack18 = new java.lang.StringBuilder;
+/*110*/
+
+        specialinvoke $stack18.<java.lang.StringBuilder: void <init>()>();
+/*110*/
+
+        $stack18 = virtualinvoke $stack18.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>("DataPoint method ");
+/*110*/
+
+        $stack20 = virtualinvoke method.<java.lang.reflect.Method: java.lang.String getName()>();
+/*110*/
+
+        $stack18 = virtualinvoke $stack18.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>($stack20);
+/*110*/
+
+        $stack18 = virtualinvoke $stack18.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>(" must be public");
+/*110*/
+
+        $stack20 = virtualinvoke $stack18.<java.lang.StringBuilder: java.lang.String toString()>();
+/*110*/
+
+        specialinvoke $stack17.<java.lang.Error: void <init>(java.lang.String)>($stack20);
+/*110*/
+
+        interfaceinvoke errors.<java.util.List: boolean add(java.lang.Object)>($stack17);
+/*110*/
+
+     label4:
+        i$ = i$ + 1;
+/*102*/
+
+        goto label1;
+/*102*/
+
+     label5:
+        return;
+/*113*/
+    }
+

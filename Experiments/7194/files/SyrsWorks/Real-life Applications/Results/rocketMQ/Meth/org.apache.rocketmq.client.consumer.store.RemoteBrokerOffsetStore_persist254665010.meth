@@ -1,0 +1,45 @@
+void org.apache.rocketmq.client.consumer.store.RemoteBrokerOffsetStore:persist(org.apache.rocketmq.common.message.MessageQueue mq)
+{
+java.util.concurrent.atomic.AtomicLong offset;
+  java.util.concurrent.ConcurrentMap $stack4;
+  java.lang.Object $stack5;
+  long $stack6;
+  java.lang.Object[] $stack7;
+  java.lang.String $stack8;
+  org.apache.rocketmq.client.impl.factory.MQClientInstance $stack9;
+  org.apache.rocketmq.logging.org.slf4j.Logger $stack10;
+  java.lang.Long $stack16;
+  java.lang.Exception $stack17;
+  java.lang.StringBuilder $stack18;
+  $stack4=this.offsetTable;
+ $stack5 = $stack4.get((java.lang.Object)mq);
+ offset=(java.util.concurrent.atomic.AtomicLong) $stack5;
+ if (offset==null) goto label0;
+ label1:$stack6 = offset.get();
+ this#org.apache.rocketmq.client.consumer.store.RemoteBrokerOffsetStore:updateConsumeOffsetToBroker(mq,$stack6);
+ $stack10=org.apache.rocketmq.client.consumer.store.RemoteBrokerOffsetStore.log;
+ $stack7=new java.lang.Object[4];
+ $stack8=this.groupName;
+ $stack7[0]=$stack8;
+ $stack9=this.mQClientFactory;
+ $stack8 = $stack9.getClientId();
+ $stack7[1]=$stack8;
+ $stack7[2]=mq;
+ $stack6 = offset.get();
+ $stack16 = java.lang.Long.valueOf($stack6);
+ $stack7[3]=$stack16;
+ $stack10.info("[persist] Group: {} ClientId: {} updateConsumeOffsetToBroker {} {}",$stack7);
+ label2:goto label0;
+ label3:$stack17 = catch;
+ $stack10=org.apache.rocketmq.client.consumer.store.RemoteBrokerOffsetStore.log;
+ $stack18=new java.lang.StringBuilder;
+ $stack18#java.lang.StringBuilder();
+ $stack18 = $stack18.append("updateConsumeOffsetToBroker exception, ");
+ $stack8 = mq.toString();
+ $stack18 = $stack18.append($stack8);
+ $stack8 = $stack18.toString();
+ $stack10.error($stack8,(java.lang.Throwable)$stack17);
+ label0:return;
+ catch java.lang.Exception: label1 - label2 : label3;
+} 
+

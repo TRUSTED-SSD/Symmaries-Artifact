@@ -1,0 +1,51 @@
+void org.apache.bookkeeper.bookie.BookieImpl:checkEnvironment()
+{
+java.util.ArrayList allLedgerDirs;
+  java.util.Iterator l2;
+  java.io.File journalDirectory;
+  org.apache.bookkeeper.bookie.LedgerDirsManager $stack5;
+  java.util.List $stack6;
+  int $stack7;
+  int $stack10;
+  boolean $stack14;
+  org.apache.bookkeeper.bookie.LedgerDirsManager $stack16;
+  java.lang.Object $stack23;
+  allLedgerDirs=new java.util.ArrayList;
+ $stack5=this.ledgerDirsManager;
+ $stack6 = $stack5.getAllLedgerDirs();
+ $stack7 = $stack6.size();
+ $stack5=this.indexDirsManager;
+ $stack6 = $stack5.getAllLedgerDirs();
+ $stack10 = $stack6.size();
+ $stack7=($stack7+$stack10);
+ allLedgerDirs#java.util.ArrayList($stack7);
+ $stack5=this.ledgerDirsManager;
+ $stack6 = $stack5.getAllLedgerDirs();
+ allLedgerDirs.addAll((java.util.Collection)$stack6);
+ $stack16=this.indexDirsManager;
+ $stack5=this.ledgerDirsManager;
+ if ($stack16==$stack5) goto label0;
+ $stack5=this.indexDirsManager;
+ $stack6 = $stack5.getAllLedgerDirs();
+ allLedgerDirs.addAll((java.util.Collection)$stack6);
+ label0:$stack6=this.journalDirectories;
+ l2 = $stack6.iterator();
+ label1:$stack14 = l2.hasNext();
+ if ($stack14==0) goto label2;
+ $stack23 = l2.next();
+ journalDirectory=(java.io.File) $stack23;
+ org.apache.bookkeeper.bookie.BookieImpl.checkDirectoryStructure(journalDirectory);
+ goto label1;
+ label2:l2 = allLedgerDirs.iterator();
+ label3:$stack14 = l2.hasNext();
+ if ($stack14==0) goto label4;
+ $stack23 = l2.next();
+ journalDirectory=(java.io.File) $stack23;
+ org.apache.bookkeeper.bookie.BookieImpl.checkDirectoryStructure(journalDirectory);
+ goto label3;
+ label4:this#org.apache.bookkeeper.bookie.BookieImpl((java.util.List)allLedgerDirs);
+ $stack6=this.journalDirectories;
+ this#org.apache.bookkeeper.bookie.BookieImpl($stack6);
+ return;
+ } 
+

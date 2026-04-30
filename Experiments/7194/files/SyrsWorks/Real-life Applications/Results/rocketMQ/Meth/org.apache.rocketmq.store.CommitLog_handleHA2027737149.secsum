@@ -1,0 +1,11 @@
+java.util.concurrent.CompletableFuture org.apache.rocketmq.store.CommitLog:handleHA (
+  org.apache.rocketmq.store.AppendMessageResult result,
+  org.apache.rocketmq.store.PutMessageResult putMessageResult,
+  int needAckNums) {
+  guard = tt;
+  ret(level()) = pc ⊔ level(needAckNums) ⊔ level(this) ⊔ obj_level(this);
+  ret(obj_level()) = pc ⊔ level(needAckNums) ⊔ level(this) ⊔ obj_level(this);
+  ret(obj_level(putMessageResult)) = pc ⊔ level(needAckNums) ⊔ level(this) ⊔ obj_level(putMessageResult) ⊔ obj_level(this);
+  ret(obj_level(result)) = pc ⊔ level(needAckNums) ⊔ level(this) ⊔ obj_level(result) ⊔ obj_level(this);
+  ret(obj_level(this)) = pc ⊔ level(needAckNums) ⊔ level(this) ⊔ obj_level(this);
+}

@@ -1,0 +1,55 @@
+void org.apache.rocketmq.client.impl.MQClientAPIImpl:consumerSendMessageBack(java.lang.String addr,java.lang.String @brokerName,org.apache.rocketmq.common.message.MessageExt msg,java.lang.String @consumerGroup,int delayLevel,long timeoutMillis,int maxConsumeRetryTimes)
+{
+org.apache.rocketmq.remoting.protocol.header.ConsumerSendMsgBackRequestHeader requestHeader;
+  org.apache.rocketmq.remoting.protocol.RemotingCommand request;
+  long $stack15;
+  java.lang.Long $stack16;
+  java.lang.Integer $stack17;
+  org.apache.rocketmq.client.ClientConfig $stack20;
+  org.apache.rocketmq.remoting.RemotingClient $stack21;
+  boolean $stack22;
+  org.apache.rocketmq.client.exception.MQBrokerException $stack27;
+  java.lang.AssertionError $stack31;
+  java.lang.String consumerGroup;
+java.lang.String brokerName;
+brokerName=@brokerName;
+consumerGroup=@consumerGroup;
+requestHeader=new org.apache.rocketmq.remoting.protocol.header.ConsumerSendMsgBackRequestHeader;
+ requestHeader#org.apache.rocketmq.remoting.protocol.header.ConsumerSendMsgBackRequestHeader();
+ request = org.apache.rocketmq.remoting.protocol.RemotingCommand.createRequestCommand(36,(org.apache.rocketmq.remoting.CommandCustomHeader)requestHeader);
+ requestHeader.setGroup(consumerGroup);
+ consumerGroup = msg.getTopic();
+ requestHeader.setOriginTopic(consumerGroup);
+ $stack15 = msg.getCommitLogOffset();
+ $stack16 = java.lang.Long.valueOf($stack15);
+ requestHeader.setOffset($stack16);
+ $stack17 = java.lang.Integer.valueOf(delayLevel);
+ requestHeader.setDelayLevel($stack17);
+ consumerGroup = msg.getMsgId();
+ requestHeader.setOriginMsgId(consumerGroup);
+ $stack17 = java.lang.Integer.valueOf(maxConsumeRetryTimes);
+ requestHeader.setMaxReconsumeTimes($stack17);
+ requestHeader.setBname(brokerName);
+ $stack21=this.remotingClient;
+ $stack20=this.clientConfig;
+ $stack22 = $stack20.isVipChannelEnabled();
+ brokerName = org.apache.rocketmq.common.MixAll.brokerVIPChannel($stack22,addr);
+ request = $stack21.invokeSync(brokerName,request,timeoutMillis);
+ $stack22=org.apache.rocketmq.client.impl.MQClientAPIImpl.$assertionsDisabled;
+ if ($stack22!=0) goto label0;
+ if (request!=null) goto label0;
+ $stack31=new java.lang.AssertionError;
+ $stack31#java.lang.AssertionError();
+ throw $stack31;
+ label0:delayLevel = request.getCode();
+ switch [delayLevel]
+if 0 goto label1;
+goto label2;
+ label1:return;
+ label2:$stack27=new org.apache.rocketmq.client.exception.MQBrokerException;
+ delayLevel = request.getCode();
+ brokerName = request.getRemark();
+ $stack27#org.apache.rocketmq.client.exception.MQBrokerException(delayLevel,brokerName,addr);
+ throw $stack27;
+ } 
+

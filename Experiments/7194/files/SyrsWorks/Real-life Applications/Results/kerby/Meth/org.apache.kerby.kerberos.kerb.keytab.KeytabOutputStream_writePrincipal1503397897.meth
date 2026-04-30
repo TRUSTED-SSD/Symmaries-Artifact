@@ -1,0 +1,28 @@
+void org.apache.kerby.kerberos.kerb.keytab.KeytabOutputStream:writePrincipal(org.apache.kerby.kerberos.kerb.type.base.PrincipalName principal,int version)
+{
+java.util.List nameStrings;
+  java.lang.String realm;
+  java.util.Iterator l6;
+  java.util.List $stack9;
+  boolean $stack13;
+  org.apache.kerby.kerberos.kerb.type.base.NameType $stack14;
+  java.lang.Object $stack16;
+  nameStrings = principal.getNameStrings();
+ $stack9 = principal.getNameStrings();
+ version = $stack9.size();
+ realm = principal.getRealm();
+ this.writeShort(version);
+ this.writeCountedString(realm);
+ l6 = nameStrings.iterator();
+ label0:$stack13 = l6.hasNext();
+ if ($stack13==0) goto label1;
+ $stack16 = l6.next();
+ realm=(java.lang.String) $stack16;
+ this.writeCountedString(realm);
+ goto label0;
+ label1:$stack14 = principal.getNameType();
+ version = $stack14.getValue();
+ this.writeInt(version);
+ return;
+ } 
+

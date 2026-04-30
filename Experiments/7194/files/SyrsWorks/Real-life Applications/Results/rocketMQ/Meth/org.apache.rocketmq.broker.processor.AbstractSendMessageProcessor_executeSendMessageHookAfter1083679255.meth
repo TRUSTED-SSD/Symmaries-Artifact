@@ -1,0 +1,47 @@
+void org.apache.rocketmq.broker.processor.AbstractSendMessageProcessor:executeSendMessageHookAfter(org.apache.rocketmq.remoting.protocol.RemotingCommand response,org.apache.rocketmq.broker.mqtrace.SendMessageContext context)
+{
+java.util.Iterator l3;
+  org.apache.rocketmq.broker.mqtrace.SendMessageHook hook;
+  java.lang.Object responseHeader;
+  boolean $stack6;
+  java.util.List $stack7;
+  org.apache.rocketmq.remoting.CommandCustomHeader $stack12;
+  java.lang.String $stack13;
+  java.lang.Integer $stack14;
+  java.lang.Long $stack15;
+  int $stack16;
+  java.lang.Throwable $stack20;
+  org.apache.rocketmq.remoting.protocol.header.SendMessageResponseHeader tmp$1094986328;
+  $stack6 = this.hasSendMessageHook();
+ if ($stack6==0) goto label0;
+ $stack7=this.sendMessageHookList;
+ l3 = $stack7.iterator();
+ label1:$stack6 = l3.hasNext();
+ if ($stack6==0) goto label0;
+ responseHeader = l3.next();
+ hook=(org.apache.rocketmq.broker.mqtrace.SendMessageHook) responseHeader;
+ label2:if (response==null) goto label3;
+ $stack12 = response.readCustomHeader();
+ responseHeader=(org.apache.rocketmq.remoting.protocol.header.SendMessageResponseHeader) $stack12;
+ tmp$1094986328=(org.apache.rocketmq.remoting.protocol.header.SendMessageResponseHeader) responseHeader;
+ $stack13 = tmp$1094986328.getMsgId();
+ context.setMsgId($stack13);
+ tmp$1094986328=(org.apache.rocketmq.remoting.protocol.header.SendMessageResponseHeader) responseHeader;
+ $stack14 = tmp$1094986328.getQueueId();
+ context.setQueueId($stack14);
+ tmp$1094986328=(org.apache.rocketmq.remoting.protocol.header.SendMessageResponseHeader) responseHeader;
+ $stack15 = tmp$1094986328.getQueueOffset();
+ context.setQueueOffset($stack15);
+ $stack16 = response.getCode();
+ context.setCode($stack16);
+ $stack13 = response.getRemark();
+ context.setErrorMsg($stack13);
+ label3:hook.sendMessageAfter(context);
+ label4:goto label5;
+ label6:$stack20 = catch;
+ responseHeader=$stack20;
+ label5:goto label1;
+ label0:return;
+ catch java.lang.Throwable: label2 - label4 : label6;
+} 
+

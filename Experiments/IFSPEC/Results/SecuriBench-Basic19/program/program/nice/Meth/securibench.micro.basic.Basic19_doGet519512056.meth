@@ -1,0 +1,54 @@
+void securibench.micro.basic.Basic19:doGet(javax.servlet.http.HttpServletRequest l1,javax.servlet.http.HttpServletResponse l2)
+{
+java.lang.String l3;
+  java.sql.Connection l4;
+  java.sql.SQLException l5;
+  java.lang.Throwable l6;
+  java.lang.StringBuilder $stack10;
+  java.sql.SQLException $stack16;
+  java.sql.SQLException $stack18;
+  java.io.PrintStream $stack19;
+  java.sql.SQLException $stack20;
+  l3 = l1.getParameter("name");
+ l4=null;
+ label0:l4 = java.sql.DriverManager.getConnection("jdbc:dtF:E. coli;USR=dtfadm;PWD=dtfadm;Create=always;APPL=GIVE;DType=FILE");
+ $stack10=new java.lang.StringBuilder;
+ $stack10#java.lang.StringBuilder();
+ $stack10 = $stack10.append("select * from Users where name=");
+ $stack10 = $stack10.append(l3);
+ l3 = $stack10.toString();
+ dummyClass.lowSink(l3);
+/*l4.prepareStatement(l3);*/
+ label1:if (l4==null) goto label2;
+ l4.close();
+ label2:goto label3;
+ label4:l5 = catch;
+ l5.printStackTrace();
+ goto label3;
+ label5:$stack18 = catch;
+ l5=$stack18;
+ $stack19=java.lang.System.err;
+ $stack19.println("An error occurred");
+ label6:if (l4==null) goto label7;
+ l4.close();
+ label7:goto label3;
+ label8:$stack16 = catch;
+ $stack16.printStackTrace();
+ goto label3;
+ label9:l6 = catch;
+ label10:if (l4==null) goto label11;
+ l4.close();
+ label11:goto label12;
+ label13:$stack20 = catch;
+ $stack20.printStackTrace();
+ label12:throw l6;
+ label3:return;
+ catch java.sql.SQLException: label1 - label2 : label4;
+catch java.sql.SQLException: label0 - label1 : label5;
+catch java.sql.SQLException: label6 - label7 : label8;
+catch java.lang.Throwable: label0 - label1 : label9;
+catch java.lang.Throwable: label5 - label6 : label9;
+catch java.sql.SQLException: label10 - label11 : label13;
+catch java.lang.Throwable: label9 - label10 : label9;
+} 
+

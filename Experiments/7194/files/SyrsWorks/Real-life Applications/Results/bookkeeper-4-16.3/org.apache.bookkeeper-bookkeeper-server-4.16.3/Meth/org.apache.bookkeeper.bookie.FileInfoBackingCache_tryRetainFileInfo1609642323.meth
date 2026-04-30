@@ -1,0 +1,28 @@
+static org.apache.bookkeeper.bookie.FileInfoBackingCache$CachedFileInfo org.apache.bookkeeper.bookie.FileInfoBackingCache:tryRetainFileInfo(org.apache.bookkeeper.bookie.FileInfoBackingCache$CachedFileInfo fi)
+{
+boolean retained;
+  org.apache.bookkeeper.bookie.Bookie$NoLedgerException $stack4;
+  long $stack5;
+  java.io.IOException $stack6;
+  java.lang.StringBuilder $stack7;
+  java.lang.String $stack11;
+  retained = fi.tryRetain();
+ if (retained!=0) goto label0;
+ $stack6=new java.io.IOException;
+ $stack7=new java.lang.StringBuilder;
+ $stack7#java.lang.StringBuilder();
+ $stack7 = $stack7.append("FileInfo ");
+ $stack7 = $stack7.append((java.lang.Object)fi);
+ $stack7 = $stack7.append(" is already marked dead");
+ $stack11 = $stack7.toString();
+ $stack6#java.io.IOException($stack11);
+ throw $stack6;
+ label0:retained = fi.isDeleted();
+ if (retained==0) goto label1;
+ $stack4=new org.apache.bookkeeper.bookie.Bookie$NoLedgerException;
+ $stack5=fi.ledgerId;
+ $stack4#org.apache.bookkeeper.bookie.Bookie$NoLedgerException($stack5);
+ throw $stack4;
+ label1:return  fi;
+ } 
+

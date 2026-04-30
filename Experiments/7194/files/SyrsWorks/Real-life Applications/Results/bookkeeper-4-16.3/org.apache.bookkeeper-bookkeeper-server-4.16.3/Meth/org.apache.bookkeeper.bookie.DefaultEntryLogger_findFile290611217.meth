@@ -1,0 +1,43 @@
+java.io.File org.apache.bookkeeper.bookie.DefaultEntryLogger:findFile(long logId)
+{
+java.util.Iterator l3;
+  java.io.File d;
+  org.apache.bookkeeper.bookie.LedgerDirsManager $stack6;
+  java.util.List $stack7;
+  boolean $stack9;
+  java.io.FileNotFoundException $stack10;
+  java.lang.StringBuilder $stack11;
+  java.lang.String $stack13;
+  java.lang.Object $stack16;
+  java.io.File $stack17;
+  $stack6=this.ledgerDirsManager;
+ $stack7 = $stack6.getAllLedgerDirs();
+ l3 = $stack7.iterator();
+ label0:$stack9 = l3.hasNext();
+ if ($stack9==0) goto label1;
+ $stack16 = l3.next();
+ d=(java.io.File) $stack16;
+ $stack17=new java.io.File;
+ $stack11=new java.lang.StringBuilder;
+ $stack11#java.lang.StringBuilder();
+ $stack13 = java.lang.Long.toHexString(logId);
+ $stack11 = $stack11.append($stack13);
+ $stack11 = $stack11.append(".log");
+ $stack13 = $stack11.toString();
+ $stack17#java.io.File(d,$stack13);
+ d=$stack17;
+ $stack9 = $stack17.exists();
+ if ($stack9==0) goto label2;
+ return  $stack17;
+ label2:goto label0;
+ label1:$stack10=new java.io.FileNotFoundException;
+ $stack11=new java.lang.StringBuilder;
+ $stack11#java.lang.StringBuilder();
+ $stack11 = $stack11.append("No file for log ");
+ $stack13 = java.lang.Long.toHexString(logId);
+ $stack11 = $stack11.append($stack13);
+ $stack13 = $stack11.toString();
+ $stack10#java.io.FileNotFoundException($stack13);
+ throw $stack10;
+ } 
+

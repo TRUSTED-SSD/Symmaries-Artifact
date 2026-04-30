@@ -1,0 +1,17 @@
+boolean org.apache.rocketmq.proxy.service.admin.DefaultAdminService:topicExist(java.lang.String topic)
+{
+boolean topicExist;
+  org.apache.rocketmq.remoting.protocol.route.TopicRouteData topicRouteData;
+  java.lang.Throwable e;
+  label0:topicRouteData = this.getTopicRouteDataDirectlyFromNameServer(topic);
+ if (topicRouteData==null) goto label1;
+ topicExist=1;
+ goto label2;
+ label1:topicExist=0;
+ label2:goto label3;
+ label4:e = catch;
+ topicExist=0;
+ label3:return  topicExist;
+ catch java.lang.Throwable: label0 - label2 : label4;
+} 
+

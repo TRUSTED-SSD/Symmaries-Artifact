@@ -1,0 +1,39 @@
+org.apache.kerby.kerberos.kerb.type.base.PrincipalName org.apache.kerby.kerberos.kerb.keytab.KeytabInputStream:readPrincipal(int version)
+{
+int numComponents;
+  java.lang.String realm;
+  java.util.ArrayList nameStrings;
+  java.io.Serializable component;
+  org.apache.kerby.kerberos.kerb.type.base.PrincipalName principal;
+  java.lang.Integer $stack12;
+  java.util.ArrayList tmp$162661054;
+  org.apache.kerby.kerberos.kerb.type.base.PrincipalName tmp$56202138;
+  org.apache.kerby.kerberos.kerb.type.base.NameType tmp$894629969;
+  numComponents = this.readShort();
+dummyClass.highSourceMut(numComponents);
+ if (version!=1281) goto label0;
+ numComponents=(numComponents+-1);
+ label0:realm = this.readCountedString();
+ tmp$162661054=new java.util.ArrayList;
+ nameStrings=tmp$162661054;
+ tmp$162661054#java.util.ArrayList();
+ nameStrings=tmp$162661054;
+ version=0;
+ label1:if (version>=numComponents) goto label2;
+ component = this.readCountedString();
+ tmp$162661054.add((java.lang.Object)component);
+ version=(version+1);
+ goto label1;
+ label2:version = this.readInt();
+dummyClass.highSourceMut(version);
+ $stack12 = java.lang.Integer.valueOf(version);
+ component = org.apache.kerby.kerberos.kerb.type.base.NameType.fromValue($stack12);
+ tmp$56202138=new org.apache.kerby.kerberos.kerb.type.base.PrincipalName;
+ principal=tmp$56202138;
+ tmp$894629969=(org.apache.kerby.kerberos.kerb.type.base.NameType) component;
+ tmp$56202138#org.apache.kerby.kerberos.kerb.type.base.PrincipalName((java.util.List)tmp$162661054,tmp$894629969);
+ principal=tmp$56202138;
+ tmp$56202138.setRealm(realm);
+ return  tmp$56202138;
+ } 
+

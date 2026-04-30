@@ -1,0 +1,35 @@
+boolean org.apache.bookkeeper.client.PendingReadOp$SequenceReadRequest:complete(int bookieIndex,org.apache.bookkeeper.net.BookieId @host,io.netty.buffer.ByteBuf buffer)
+{
+boolean completed;
+  int i;
+  int slowBookieIndex;
+  org.apache.bookkeeper.client.DistributionSchedule$WriteSet $stack13;
+  java.util.List $stack15;
+  java.lang.Object $stack16;
+  org.apache.bookkeeper.client.PendingReadOp $stack17;
+  org.apache.bookkeeper.client.ClientContext $stack18;
+  org.apache.bookkeeper.client.EnsemblePlacementPolicy $stack19;
+  long $stack20;
+  org.apache.bookkeeper.net.BookieId host;
+host=@host;
+completed = this#org.apache.bookkeeper.client.PendingReadOp$LedgerEntryRequest:complete(bookieIndex,host,buffer);
+ if (completed==0) goto label0;
+ bookieIndex = this#org.apache.bookkeeper.client.PendingReadOp$SequenceReadRequest:getNextReplicaIndexToReadFrom();
+ i=0;
+ label1:slowBookieIndex=(bookieIndex-1);
+ if (i>=slowBookieIndex) goto label0;
+ $stack13=this.writeSet;
+ slowBookieIndex = $stack13.get(i);
+ $stack15=this.ensemble;
+ $stack16 = $stack15.get(slowBookieIndex);
+ host=(org.apache.bookkeeper.net.BookieId) $stack16;
+ $stack17=this.this$0;
+ $stack18=$stack17.clientCtx;
+ $stack19 = $stack18.getPlacementPolicy();
+ $stack20=this.eId;
+ $stack19.registerSlowBookie(host,$stack20);
+ i=(i+1);
+ goto label1;
+ label0:return  completed;
+ } 
+

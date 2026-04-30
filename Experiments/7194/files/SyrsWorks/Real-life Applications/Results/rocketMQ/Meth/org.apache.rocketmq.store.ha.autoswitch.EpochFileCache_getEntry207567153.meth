@@ -1,0 +1,39 @@
+org.apache.rocketmq.remoting.protocol.EpochEntry org.apache.rocketmq.store.ha.autoswitch.EpochFileCache:getEntry(int epoch)
+{
+org.apache.rocketmq.remoting.protocol.EpochEntry entry;
+  java.lang.Throwable l4;
+  java.util.concurrent.locks.Lock $stack5;
+  java.util.TreeMap $stack6;
+  java.lang.Integer $stack7;
+  boolean $stack8;
+  java.lang.Object $stack12;
+  org.apache.rocketmq.remoting.protocol.EpochEntry $stack13;
+  $stack5=this.readLock;
+ $stack5.lock();
+ label0:$stack6=this.epochMap;
+ $stack7 = java.lang.Integer.valueOf(epoch);
+ $stack8 = $stack6.containsKey((java.lang.Object)$stack7);
+ if ($stack8==0) goto label1;
+ $stack6=this.epochMap;
+ $stack7 = java.lang.Integer.valueOf(epoch);
+ $stack12 = $stack6.get((java.lang.Object)$stack7);
+ entry=(org.apache.rocketmq.remoting.protocol.EpochEntry) $stack12;
+ $stack13=new org.apache.rocketmq.remoting.protocol.EpochEntry;
+ $stack13#org.apache.rocketmq.remoting.protocol.EpochEntry(entry);
+ entry=$stack13;
+ label2:$stack5=this.readLock;
+ $stack5.unlock();
+ return  $stack13;
+ label1:entry=null;
+ label3:$stack5=this.readLock;
+ $stack5.unlock();
+ return  null;
+ label4:l4 = catch;
+ label5:$stack5=this.readLock;
+ $stack5.unlock();
+ throw l4;
+ catch java.lang.Throwable: label0 - label2 : label4;
+catch java.lang.Throwable: label1 - label3 : label4;
+catch java.lang.Throwable: label4 - label5 : label4;
+} 
+

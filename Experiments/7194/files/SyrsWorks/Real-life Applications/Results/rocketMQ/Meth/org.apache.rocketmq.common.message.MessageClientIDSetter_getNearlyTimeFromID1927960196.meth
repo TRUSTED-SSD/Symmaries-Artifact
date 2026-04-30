@@ -1,0 +1,47 @@
+static java.util.Date org.apache.rocketmq.common.message.MessageClientIDSetter:getNearlyTimeFromID(java.lang.String msgID)
+{
+java.nio.ByteBuffer buf;
+  byte[] bytes;
+  long spanMS;
+  java.util.Calendar cal;
+  long now;
+  long monStartTime;
+  int $stack13;
+  long $stack26;
+  byte $stack27;
+  java.util.Date $stack29;
+  buf = java.nio.ByteBuffer.allocate(8);
+ bytes = org.apache.rocketmq.common.UtilAll.string2bytes(msgID);
+ $stack13=#bytes;
+ if ($stack13!=28) goto label0;
+ $stack27=16;
+ goto label1;
+ label0:$stack27=4;
+ label1:buf.put((byte)0);
+ buf.put((byte)0);
+ buf.put((byte)0);
+ buf.put((byte)0);
+ $stack13=($stack27+2);
+ $stack13=($stack13+4);
+ buf.put(bytes,$stack13,4);
+ buf.position(0);
+ spanMS = buf.getLong();
+ cal = java.util.Calendar.getInstance();
+ now = cal.getTimeInMillis();
+ cal.set(5,1);
+ cal.set(11,0);
+ cal.set(12,0);
+ cal.set(13,0);
+ cal.set(14,0);
+ monStartTime = cal.getTimeInMillis();
+ $stack26=(monStartTime+spanMS);
+ $stack27=($stack26 cmp now);
+ if ($stack27<0) goto label2;
+ cal.add(2,-1);
+ monStartTime = cal.getTimeInMillis();
+ label2:spanMS=(monStartTime+spanMS);
+ cal.setTimeInMillis(spanMS);
+ $stack29 = cal.getTime();
+ return  $stack29;
+ } 
+

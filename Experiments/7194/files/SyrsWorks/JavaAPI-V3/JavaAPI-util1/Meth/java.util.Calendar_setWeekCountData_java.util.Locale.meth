@@ -1,0 +1,28 @@
+void java.util.Calendar:setWeekCountData(java.util.Locale r1)
+{
+java.util.concurrent.ConcurrentMap $r2;
+  java.lang.Object $r3;
+  int $i0;
+  int $i1;
+  int $i2;
+  int $i3;
+  java.util.concurrent.ConcurrentMap $r4;
+  int[] r6;
+  $r2=java.util.Calendar.cachedLocaleData;
+ $r3 = $r2.get((java.lang.Object)r1);
+ r6=(int[]) $r3;
+ if (r6!=null) goto label0;
+ r6=new int[2];
+ $i2 = sun.util.locale.provider.CalendarDataUtility.retrieveFirstDayOfWeek(r1);
+ r6[0]=$i2;
+ $i3 = sun.util.locale.provider.CalendarDataUtility.retrieveMinimalDaysInFirstWeek(r1);
+ r6[1]=$i3;
+ $r4=java.util.Calendar.cachedLocaleData;
+ $r4.putIfAbsent((java.lang.Object)r1,(java.lang.Object)r6);
+ label0:$i0=r6[0];
+ this.firstDayOfWeek=$i0;
+ $i1=r6[1];
+ this.minimalDaysInFirstWeek=$i1;
+ return;
+ }  
+

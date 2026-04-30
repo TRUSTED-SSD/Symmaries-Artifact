@@ -1,0 +1,49 @@
+void org.greenrobot.eventbus.util.AsyncExecutor$1:run()
+{
+java.lang.Exception e;
+  java.lang.Object event;
+  org.greenrobot.eventbus.util.AsyncExecutor$RunnableEx $stack4;
+  java.lang.Exception $stack5;
+  org.greenrobot.eventbus.util.AsyncExecutor $stack6;
+  org.greenrobot.eventbus.EventBus $stack7;
+  org.greenrobot.eventbus.Logger $stack8;
+  java.util.logging.Level $stack9;
+  java.lang.RuntimeException $stack10;
+  java.lang.reflect.Constructor $stack13;
+  java.lang.Object[] $stack14;
+  boolean $stack16;
+  org.greenrobot.eventbus.util.HasExecutionScope $stack20;
+  java.lang.Object $stack21;
+  label0:$stack4=this.val$runnable;
+ $stack4.run();
+ label1:goto label2;
+ label3:e = catch;
+ label4:$stack6=this.this$0;
+ $stack13 = org.greenrobot.eventbus.util.AsyncExecutor.access$200($stack6);
+ $stack14=new java.lang.Object[1];
+ $stack14[0]=e;
+ event = $stack13.newInstance($stack14);
+ label5:goto label6;
+ label7:$stack5 = catch;
+ $stack6=this.this$0;
+ $stack7 = org.greenrobot.eventbus.util.AsyncExecutor.access$300($stack6);
+ $stack8 = $stack7.getLogger();
+ $stack9=java.util.logging.Level.SEVERE;
+ $stack8.log($stack9,"Original exception:",(java.lang.Throwable)e);
+ $stack10=new java.lang.RuntimeException;
+ $stack10#java.lang.RuntimeException("Could not create failure event",(java.lang.Throwable)$stack5);
+ throw $stack10;
+ label6:$stack16=event instanceof org.greenrobot.eventbus.util.HasExecutionScope;
+ if ($stack16==0) goto label8;
+ $stack20=(org.greenrobot.eventbus.util.HasExecutionScope) event;
+ $stack6=this.this$0;
+ $stack21 = org.greenrobot.eventbus.util.AsyncExecutor.access$400($stack6);
+ $stack20.setExecutionScope($stack21);
+ label8:$stack6=this.this$0;
+ $stack7 = org.greenrobot.eventbus.util.AsyncExecutor.access$300($stack6);
+ $stack7.post(event);
+ label2:return;
+ catch java.lang.Exception: label0 - label1 : label3;
+catch java.lang.Exception: label4 - label5 : label7;
+} 
+

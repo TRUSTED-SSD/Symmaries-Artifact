@@ -1,0 +1,23 @@
+java.lang.String org.apache.bookkeeper.conf.AbstractConfiguration:getMetadataServiceUri()
+{
+java.lang.String serviceUri;
+  java.lang.String ledgerManagerType;
+  java.lang.String zkServers;
+  boolean $stack5;
+  java.lang.Object[] $stack9;
+  serviceUri = this.getString("metadataServiceUri");
+ $stack5 = org.apache.commons.lang.StringUtils.isBlank(serviceUri);
+ if ($stack5==0) goto label0;
+ ledgerManagerType = this.getLedgerManagerLayoutStringFromFactoryClass();
+ zkServers = this.getZkServers();
+ if (null==zkServers) goto label0;
+ $stack9=new java.lang.Object[3];
+ $stack9[0]=ledgerManagerType;
+ serviceUri = zkServers.replace((java.lang.CharSequence)",",(java.lang.CharSequence)";");
+ $stack9[1]=serviceUri;
+ serviceUri = this.getZkLedgersRootPath();
+ $stack9[2]=serviceUri;
+ serviceUri = java.lang.String.format("zk+%s://%s%s",$stack9);
+ label0:return  serviceUri;
+ } 
+

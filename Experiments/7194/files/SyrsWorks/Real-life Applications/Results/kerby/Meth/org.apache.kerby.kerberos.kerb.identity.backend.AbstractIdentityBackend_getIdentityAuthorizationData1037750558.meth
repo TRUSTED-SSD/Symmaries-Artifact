@@ -1,0 +1,26 @@
+org.apache.kerby.kerberos.kerb.type.ad.AuthorizationData org.apache.kerby.kerberos.kerb.identity.backend.AbstractIdentityBackend:getIdentityAuthorizationData(org.apache.kerby.kerberos.kerb.request.KdcClientRequest kdcClientRequest,org.apache.kerby.kerberos.kerb.type.ticket.EncTicketPart encTicketPart)
+{
+org.apache.kerby.kerberos.kerb.type.ad.AuthorizationData authData;
+  org.slf4j.Logger $stack4;
+  org.apache.kerby.kerberos.kerb.type.base.PrincipalName $stack6;
+  java.lang.String $stack10;
+  java.lang.IllegalArgumentException $stack13;
+  if (kdcClientRequest!=null) goto label0;
+ $stack13=new java.lang.IllegalArgumentException;
+ $stack13#java.lang.IllegalArgumentException("Invalid identity");
+ throw $stack13;
+ label0:$stack4=org.apache.kerby.kerberos.kerb.identity.backend.AbstractIdentityBackend.logger;
+ $stack6 = kdcClientRequest.getClientPrincipal();
+ dummyClass.lowSink("getIdentityAuthorizationData called, krbIdentity = {}");
+$stack4.debug("getIdentityAuthorizationData called, krbIdentity = {}",(java.lang.Object)$stack6);
+ authData = this.doGetIdentityAuthorizationData(kdcClientRequest,encTicketPart);
+ $stack4=org.apache.kerby.kerberos.kerb.identity.backend.AbstractIdentityBackend.logger;
+ if (authData==null) goto label1;
+ $stack10="successful";
+ goto label2;
+ label1:$stack10="failed";
+ label2:dummyClass.lowSink("getIdentityAuthorizationData {}, authData = {}");
+$stack4.debug("getIdentityAuthorizationData {}, authData = {}",(java.lang.Object)$stack10,(java.lang.Object)authData);
+ return  authData;
+ } 
+

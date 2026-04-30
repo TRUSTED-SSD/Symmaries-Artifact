@@ -1,0 +1,49 @@
+org.apache.rocketmq.proxy.service.route.TopicRouteService(org.apache.rocketmq.proxy.service.mqclient.MQClientAPIFactory mqClientAPIFactory)
+{
+org.apache.rocketmq.proxy.config.ProxyConfig config;
+  org.apache.rocketmq.proxy.service.route.TopicRouteService$TopicRouteCacheLoader $stack3;
+  org.apache.rocketmq.common.ThreadFactoryImpl $stack5;
+  java.util.concurrent.ScheduledExecutorService $stack6;
+  int $stack7;
+  int $stack8;
+  java.util.concurrent.TimeUnit $stack10;
+  int $stack12;
+  java.util.concurrent.ThreadPoolExecutor $stack13;
+  com.github.benmanes.caffeine.cache.Caffeine $stack14;
+  long $stack16;
+  org.apache.rocketmq.proxy.service.route.TopicRouteService$1 $stack24;
+  com.github.benmanes.caffeine.cache.LoadingCache $stack25;
+  this#org.apache.rocketmq.proxy.common.AbstractStartAndShutdown();
+ $stack3=new org.apache.rocketmq.proxy.service.route.TopicRouteService$TopicRouteCacheLoader;
+ $stack3#org.apache.rocketmq.proxy.service.route.TopicRouteService$TopicRouteCacheLoader(this);
+ this.topicRouteCacheLoader=$stack3;
+ config = org.apache.rocketmq.proxy.config.ConfigurationManager.getProxyConfig();
+ $stack5=new org.apache.rocketmq.common.ThreadFactoryImpl;
+ $stack5#org.apache.rocketmq.common.ThreadFactoryImpl("TopicRouteService_");
+ $stack6 = java.util.concurrent.Executors.newSingleThreadScheduledExecutor((java.util.concurrent.ThreadFactory)$stack5);
+ this.scheduledExecutorService=$stack6;
+ $stack7 = config.getTopicRouteServiceThreadPoolNums();
+ $stack8 = config.getTopicRouteServiceThreadPoolNums();
+ $stack10=java.util.concurrent.TimeUnit.MILLISECONDS;
+ $stack12 = config.getTopicRouteServiceThreadPoolQueueCapacity();
+ $stack13 = org.apache.rocketmq.common.thread.ThreadPoolMonitor.createAndMonitor($stack7,$stack8,60000L,$stack10,"TopicRouteCacheRefresh",$stack12);
+ this.cacheRefreshExecutor=$stack13;
+ this.mqClientAPIFactory=mqClientAPIFactory;
+ $stack14 = com.github.benmanes.caffeine.cache.Caffeine.newBuilder();
+ $stack7 = config.getTopicRouteServiceCacheMaxNum();
+ $stack16=(long) $stack7;
+ $stack14 = $stack14.maximumSize($stack16);
+ $stack7 = config.getTopicRouteServiceCacheExpiredInSeconds();
+ $stack16=(long) $stack7;
+ $stack10=java.util.concurrent.TimeUnit.SECONDS;
+ $stack14 = $stack14.refreshAfterWrite($stack16,$stack10);
+ $stack13=this.cacheRefreshExecutor;
+ $stack14 = $stack14.executor((java.util.concurrent.Executor)$stack13);
+ $stack24=new org.apache.rocketmq.proxy.service.route.TopicRouteService$1;
+ $stack24#org.apache.rocketmq.proxy.service.route.TopicRouteService$1(this);
+ $stack25 = $stack14.build((com.github.benmanes.caffeine.cache.CacheLoader)$stack24);
+ this.topicCache=$stack25;
+ this#org.apache.rocketmq.proxy.service.route.TopicRouteService();
+ return;
+ } 
+

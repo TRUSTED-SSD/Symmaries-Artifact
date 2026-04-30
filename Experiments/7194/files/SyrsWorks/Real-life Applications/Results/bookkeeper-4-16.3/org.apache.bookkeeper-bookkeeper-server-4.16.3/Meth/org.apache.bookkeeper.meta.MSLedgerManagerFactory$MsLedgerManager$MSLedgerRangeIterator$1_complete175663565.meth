@@ -1,0 +1,23 @@
+void org.apache.bookkeeper.meta.MSLedgerManagerFactory$MsLedgerManager$MSLedgerRangeIterator$1:complete(int rc,org.apache.bookkeeper.metastore.MetastoreCursor newCursor,java.lang.Object ctx)
+{
+org.apache.bookkeeper.metastore.MSException$Code $stack4;
+  int $stack5;
+  org.apache.bookkeeper.meta.MSLedgerManagerFactory$MsLedgerManager$MSLedgerRangeIterator $stack6;
+  java.util.concurrent.CountDownLatch $stack8;
+  org.slf4j.Logger $stack9;
+  java.lang.Integer $stack11;
+  $stack4=org.apache.bookkeeper.metastore.MSException$Code.OK;
+ $stack5 = $stack4.getCode();
+ if ($stack5==rc) goto label0;
+ $stack9 = org.apache.bookkeeper.meta.MSLedgerManagerFactory.access$000();
+ $stack11 = java.lang.Integer.valueOf(rc);
+ $stack9.error("Error opening cursor for ledger range iterator {}",(java.lang.Object)$stack11);
+ goto label1;
+ label0:$stack6=this.this$1;
+ $stack6.cursor=newCursor;
+ label1:$stack6=this.this$1;
+ $stack8=$stack6.openCursorLatch;
+ $stack8.countDown();
+ return;
+ } 
+

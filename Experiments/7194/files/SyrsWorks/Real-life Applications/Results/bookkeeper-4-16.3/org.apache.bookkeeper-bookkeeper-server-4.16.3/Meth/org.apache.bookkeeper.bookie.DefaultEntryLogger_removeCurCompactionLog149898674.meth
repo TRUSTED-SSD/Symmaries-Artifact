@@ -1,0 +1,46 @@
+void org.apache.bookkeeper.bookie.DefaultEntryLogger:removeCurCompactionLog()
+{
+java.lang.Object l1;
+  java.lang.Throwable l3;
+  java.lang.Object $stack4;
+  org.apache.bookkeeper.bookie.DefaultEntryLogger$BufferedLogChannel $stack5;
+  java.io.File $stack8;
+  boolean $stack9;
+  org.slf4j.Logger $stack12;
+  java.io.IOException $stack18;
+  long $stack22;
+  java.lang.Long $stack23;
+  $stack4=this.compactionLogLock;
+ l1=$stack4;
+ monitorenter $stack4;
+ label0:$stack5=this.compactionLogChannel;
+ if ($stack5==null) goto label1;
+ $stack5=this.compactionLogChannel;
+ $stack8 = $stack5.getLogFile();
+ $stack9 = $stack8.delete();
+ if ($stack9!=0) goto label2;
+ $stack12=org.apache.bookkeeper.bookie.DefaultEntryLogger.LOG;
+ $stack5=this.compactionLogChannel;
+ $stack8 = $stack5.getLogFile();
+ $stack12.warn("Could not delete compaction log file {}",(java.lang.Object)$stack8);
+ label2:$stack5=this.compactionLogChannel;
+ $stack5.close();
+ label3:goto label4;
+ label5:$stack18 = catch;
+ $stack12=org.apache.bookkeeper.bookie.DefaultEntryLogger.LOG;
+ $stack5=this.compactionLogChannel;
+ $stack22 = $stack5.getLogId();
+ $stack23 = java.lang.Long.valueOf($stack22);
+ $stack12.error("Failed to close file channel for compaction log {}",(java.lang.Object)$stack23,(java.lang.Object)$stack18);
+ label4:this.compactionLogChannel=null;
+ label1:monitorexit $stack4;
+ label6:goto label7;
+ label8:l3 = catch;
+ monitorexit $stack4;
+ label9:throw l3;
+ label7:return;
+ catch java.io.IOException: label2 - label3 : label5;
+catch java.lang.Throwable: label0 - label6 : label8;
+catch java.lang.Throwable: label8 - label9 : label8;
+} 
+

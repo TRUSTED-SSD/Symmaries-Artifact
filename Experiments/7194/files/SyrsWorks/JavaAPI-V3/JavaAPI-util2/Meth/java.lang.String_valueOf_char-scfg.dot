@@ -1,0 +1,51 @@
+digraph G {
+  node [shape=box, ];
+  "pc0_js1" [label="〈$r1 = new (char)[1], js1〉", ];
+  "pc1_js1" [label="〈$r1[0] = c0, js1〉", ];
+  "pc2_js1" [label="〈r0 = $r1, js1〉", ];
+  "pc3_js1" [label="〈$r2 = new java.lang.String, js1〉", ];
+  "pc4_js1" [label="〈$r2#java.lang.String.init (r0, (boolean) 1), js1〉\n\
+tt",
+             ];
+  "pc5_js1" [label="〈return $r2, js1〉", ];
+  "pc6_js1" [label="〈sink, js1〉\n\
+ϕ ≠ S5 ∨ obj_level($r2) ⊑ ret(obj_level())' ∧ pc ⊔ level($r2) ⊑ ret(level())'",
+             ];
+  
+  
+  "pc0_js1" -> "pc1_js1" [label="tt,\n\
+{$r1~r0 := ff,\n\
+ $r2.><$r1 := ff,\n\
+ level($r1) := pc,\n\
+ obj_level($r1) := pc}",
+                          ];
+  "pc1_js1" -> "pc2_js1" [label="tt,\n\
+{obj_level($r1) := pc ⊔ level(c0),\n\
+ obj_level($r2) := ⊥,\n\
+ obj_level(r0) := ⊥}",
+                          ];
+  "pc2_js1" -> "pc3_js1" [label="tt,\n\
+{$r1~r0 := tt,\n\
+ $r2.><r0 := ff,\n\
+ level(r0) := pc,\n\
+ obj_level(r0) := pc ⊔ level(c0)}",
+                          ];
+  "pc3_js1" -> "pc4_js1" [label="tt,\n\
+{$r2.><$r1 := ff,\n\
+ $r2.><$r2 := ff,\n\
+ $r2.><r0 := ff,\n\
+ level($r2) := pc,\n\
+ obj_level($r2) := pc}",
+                          ];
+  "pc4_js1" -> "pc5_js1" [label="tt,\n\
+{$r2.><$r1 := tt,\n\
+ $r2.><$r2 := ff,\n\
+ $r2.><r0 := tt,\n\
+ obj_level($r1) := pc ⊔ level(c0),\n\
+ obj_level($r2) := pc ⊔ level(c0),\n\
+ obj_level(r0) := pc ⊔ level(c0)}",
+                          ];
+  "pc5_js1" -> "pc6_js1" [label="tt,\n\
+{ϕ := S5}", ];
+  
+  }

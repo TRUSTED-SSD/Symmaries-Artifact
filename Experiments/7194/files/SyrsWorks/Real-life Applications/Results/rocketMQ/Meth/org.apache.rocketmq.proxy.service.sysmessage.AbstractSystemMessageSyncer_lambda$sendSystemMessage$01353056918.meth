@@ -1,0 +1,29 @@
+void org.apache.rocketmq.proxy.service.sysmessage.AbstractSystemMessageSyncer:lambda$sendSystemMessage$0(java.lang.Object data,org.apache.rocketmq.client.producer.SendResult result,java.lang.Throwable throwable)
+{
+org.apache.rocketmq.client.producer.SendStatus $stack4;
+  org.apache.rocketmq.client.producer.SendStatus $stack5;
+  java.lang.Object[] $stack6;
+  org.apache.rocketmq.logging.org.slf4j.Logger $stack7;
+  java.lang.String $stack10;
+  if (throwable==null) goto label0;
+ $stack7=org.apache.rocketmq.proxy.service.sysmessage.AbstractSystemMessageSyncer.log;
+ $stack6=new java.lang.Object[3];
+ $stack6[0]=data;
+ $stack10 = this.getBroadcastTopicName();
+ $stack6[1]=$stack10;
+ $stack6[2]=throwable;
+ $stack7.error("send system message failed. data: {}, topic: {}",$stack6);
+ return;
+ label0:$stack4=org.apache.rocketmq.client.producer.SendStatus.SEND_OK;
+ $stack5 = result.getSendStatus();
+ if ($stack4==$stack5) goto label1;
+ $stack7=org.apache.rocketmq.proxy.service.sysmessage.AbstractSystemMessageSyncer.log;
+ $stack6=new java.lang.Object[3];
+ $stack6[0]=data;
+ $stack10 = this.getBroadcastTopicName();
+ $stack6[1]=$stack10;
+ $stack6[2]=result;
+ $stack7.error("send system message failed. data: {}, topic: {}, sendResult:{}",$stack6);
+ label1:return;
+ } 
+

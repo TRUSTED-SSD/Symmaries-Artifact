@@ -1,0 +1,31 @@
+org.apache.kerby.asn1.Tag org.apache.kerby.asn1.TaggingOption:getTag(boolean isTaggedConstructed)
+{
+boolean $stack5;
+  int $stack7;
+  org.apache.kerby.asn1.Tag $stack8;
+  byte $stack10;
+  int $stack13;
+  org.apache.kerby.asn1.TagClass $stack14;
+  $stack5=this.isImplicit;
+ if ($stack5==0) goto label0;
+ if (isTaggedConstructed==0) goto label1;
+ label0:isTaggedConstructed=1;
+ goto label2;
+ label1:isTaggedConstructed=0;
+ label2:$stack5=this.isAppSpecific;
+ if ($stack5==0) goto label3;
+ $stack14=org.apache.kerby.asn1.TagClass.APPLICATION;
+ goto label4;
+ label3:$stack14=org.apache.kerby.asn1.TagClass.CONTEXT_SPECIFIC;
+ label4:$stack7 = $stack14.getValue();
+ if (isTaggedConstructed==0) goto label5;
+ $stack10=32;
+ goto label6;
+ label5:$stack10=0;
+ label6:$stack8=new org.apache.kerby.asn1.Tag;
+ $stack13=($stack7 | $stack10);
+ $stack7=this.tagNo;
+ $stack8#org.apache.kerby.asn1.Tag($stack13,$stack7);
+ return  $stack8;
+ } 
+

@@ -1,0 +1,32 @@
+long org.apache.bookkeeper.bookie.EntryLogManagerBase:addEntry(long ledger,io.netty.buffer.ByteBuf entry,boolean rollLog)
+{
+int entrySize;
+  org.apache.bookkeeper.bookie.DefaultEntryLogger$BufferedLogChannel logChannel;
+  io.netty.buffer.ByteBuf sizeBuffer;
+  long pos;
+  io.netty.util.concurrent.FastThreadLocal $stack12;
+  java.lang.Object $stack13;
+  int $stack15;
+  long $stack18;
+  entrySize = entry.readableBytes();
+dummyClass.highSourceMut(entrySize);
+ entrySize=(entrySize+4);
+ logChannel = this.getCurrentLogForLedgerForAddEntry(ledger,entrySize,rollLog);
+ $stack12=this.sizeBufferForAdd;
+ $stack13 = $stack12.get();
+ sizeBuffer=(io.netty.buffer.ByteBuf) $stack13;
+ sizeBuffer.clear();
+ $stack15 = entry.readableBytes();
+dummyClass.highSourceMut($stack15);
+ sizeBuffer.writeInt($stack15);
+ logChannel.write(sizeBuffer);
+ pos = logChannel.position();
+ logChannel.write(entry);
+ $stack18=(long) entrySize;
+ logChannel.registerWrittenEntry(ledger,$stack18);
+ ledger = logChannel.getLogId();
+ ledger=(ledger<<32);
+ ledger=(ledger | pos);
+ return  ledger;
+ } 
+

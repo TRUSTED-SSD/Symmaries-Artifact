@@ -1,0 +1,31 @@
+rifl.spec.Domain rifl.utils.RIFLInformationFlowPolicy:getDomainForName(java.lang.String @name)
+{
+rifl.spec.CatSrcSnk catSrcSnk;
+  java.lang.Object msg;
+  rifl.utils.InterfaceSpecificationAccessor $stack4;
+  rifl.spec.RIFLSpecification $stack8;
+  java.util.Map $stack9;
+  rifl.spec.Domain $stack11;
+  java.lang.Object[] $stack12;
+  java.lang.IllegalArgumentException tmp$858936682;
+  java.lang.String name;
+name=@name;
+$stack4=this.isa;
+ catSrcSnk = $stack4.getCatSrcSnkForName(name);
+ if (catSrcSnk!=null) goto label0;
+ $stack12=new java.lang.Object[1];
+ $stack12[0]=name;
+ msg = java.lang.String.format("No domain, category, source or sink with the name %s exists.",$stack12);
+ tmp$858936682=new java.lang.IllegalArgumentException;
+ name=(java.lang.String) msg;
+ tmp$858936682#java.lang.IllegalArgumentException(name);
+ throw tmp$858936682;
+ label0:$stack4=this.isa;
+ msg = $stack4.getParentAssignable(catSrcSnk);
+ $stack8=this.rifl;
+ $stack9=$stack8.domainAssignment;
+ msg = $stack9.get(msg);
+ $stack11=(rifl.spec.Domain) msg;
+ return  $stack11;
+ } 
+

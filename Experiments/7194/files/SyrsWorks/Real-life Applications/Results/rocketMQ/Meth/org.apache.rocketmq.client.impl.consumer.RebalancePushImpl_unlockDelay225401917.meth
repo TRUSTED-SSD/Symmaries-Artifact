@@ -1,0 +1,31 @@
+boolean org.apache.rocketmq.client.impl.consumer.RebalancePushImpl:unlockDelay(org.apache.rocketmq.common.message.MessageQueue mq,org.apache.rocketmq.client.impl.consumer.ProcessQueue pq)
+{
+boolean $stack3;
+  org.apache.rocketmq.logging.org.slf4j.Logger $stack4;
+  int $stack6;
+  java.lang.Integer $stack7;
+  org.apache.rocketmq.client.impl.consumer.DefaultMQPushConsumerImpl $stack8;
+  org.apache.rocketmq.client.impl.factory.MQClientInstance $stack9;
+  java.util.concurrent.ScheduledExecutorService $stack10;
+  org.apache.rocketmq.client.impl.consumer.RebalancePushImpl$1 $stack11;
+  java.util.concurrent.TimeUnit $stack12;
+  long $stack13;
+  $stack3 = pq.hasTempMessage();
+ if ($stack3==0) goto label0;
+ $stack4=org.apache.rocketmq.client.impl.consumer.RebalanceImpl.log;
+ $stack6 = mq.hashCode();
+ $stack7 = java.lang.Integer.valueOf($stack6);
+ $stack4.info("[{}]unlockDelay, begin {} ",(java.lang.Object)$stack7,(java.lang.Object)mq);
+ $stack8=this.defaultMQPushConsumerImpl;
+ $stack9 = $stack8.getmQClientFactory();
+ $stack10 = $stack9.getScheduledExecutorService();
+ $stack11=new org.apache.rocketmq.client.impl.consumer.RebalancePushImpl$1;
+ $stack11#org.apache.rocketmq.client.impl.consumer.RebalancePushImpl$1(this,mq);
+ $stack13=org.apache.rocketmq.client.impl.consumer.RebalancePushImpl.UNLOCK_DELAY_TIME_MILLS;
+ $stack12=java.util.concurrent.TimeUnit.MILLISECONDS;
+ $stack10.schedule((java.lang.Runnable)$stack11,$stack13,$stack12);
+ goto label1;
+ label0:this.unlock(mq,(boolean)1);
+ label1:return  1;
+ } 
+

@@ -1,0 +1,10 @@
+boolean org.apache.rocketmq.store.kv.CompactionLog:shouldRetainMsg (org.apache.rocketmq.common.message.MessageExt
+                                                                    msgExt,
+                                                                    org.apache.rocketmq.store.kv.CompactionLog$OffsetMap
+                                                                    map) {
+  guard = tt;
+  ret(level()) = ⊥;
+  ret(obj_level(map)) = level(map) ⊔ level(msgExt) ⊔ obj_level(map) ⊔ obj_level(msgExt);
+  ret(obj_level(msgExt)) = level(map) ⊔ level(msgExt) ⊔ obj_level(map) ⊔ obj_level(msgExt);
+  ret(obj_level(this)) = level(map) ⊔ level(msgExt) ⊔ obj_level(map) ⊔ obj_level(msgExt) ⊔ obj_level(this);
+}

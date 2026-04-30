@@ -1,0 +1,27 @@
+void org.apache.rocketmq.client.impl.consumer.ConsumeMessageOrderlyService:resetNamespace(java.util.List msgs)
+{
+java.util.Iterator l2;
+  org.apache.rocketmq.common.message.MessageExt msg;
+  boolean $stack5;
+  java.lang.Object $stack6;
+  org.apache.rocketmq.client.consumer.DefaultMQPushConsumer $stack7;
+  java.lang.String $stack8;
+  java.lang.String $stack13;
+  l2 = msgs.iterator();
+ label0:$stack5 = l2.hasNext();
+ if ($stack5==0) goto label1;
+ $stack6 = l2.next();
+ msg=(org.apache.rocketmq.common.message.MessageExt) $stack6;
+ $stack7=this.defaultMQPushConsumer;
+ $stack8 = $stack7.getNamespace();
+ $stack5 = org.apache.commons.lang3.StringUtils.isNotEmpty((java.lang.CharSequence)$stack8);
+ if ($stack5==0) goto label2;
+ $stack8 = msg.getTopic();
+ $stack7=this.defaultMQPushConsumer;
+ $stack13 = $stack7.getNamespace();
+ $stack8 = org.apache.rocketmq.remoting.protocol.NamespaceUtil.withoutNamespace($stack8,$stack13);
+ msg.setTopic($stack8);
+ label2:goto label0;
+ label1:return;
+ } 
+

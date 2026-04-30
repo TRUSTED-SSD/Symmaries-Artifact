@@ -1,0 +1,34 @@
+org.apache.bookkeeper.client.EnsemblePlacementPolicy$PlacementResult org.apache.bookkeeper.client.ZoneawareEnsemblePlacementPolicyImpl:selectBookieRandomly(java.util.List newEnsemble,org.apache.bookkeeper.net.BookieId @bookieToReplace,java.util.Set @excludeBookies,int writeQuorumSize,int ackQuorumSize)
+{
+java.util.HashSet bookiesToExcludeIncludingEnsemble;
+  int bookieToReplaceIndex;
+  boolean $stack11;
+  org.apache.bookkeeper.net.BookieNode $stack15;
+  org.apache.bookkeeper.client.EnsemblePlacementPolicy$PlacementPolicyAdherence $stack18;
+  org.apache.bookkeeper.client.EnsemblePlacementPolicy$PlacementResult $stack19;
+  org.slf4j.Logger $stack20;
+  org.apache.bookkeeper.client.BKException$BKNotEnoughBookiesException $stack21;
+  java.util.Set excludeBookies;
+org.apache.bookkeeper.net.BookieId bookieToReplace;
+bookieToReplace=@bookieToReplace;
+excludeBookies=@excludeBookies;
+bookiesToExcludeIncludingEnsemble=new java.util.HashSet;
+ bookiesToExcludeIncludingEnsemble#java.util.HashSet((java.util.Collection)excludeBookies);
+ bookiesToExcludeIncludingEnsemble.addAll((java.util.Collection)newEnsemble);
+ excludeBookies = this#org.apache.bookkeeper.client.ZoneawareEnsemblePlacementPolicyImpl:getBookiesToConsider((java.util.Set)bookiesToExcludeIncludingEnsemble);
+ bookieToReplaceIndex = newEnsemble.indexOf((java.lang.Object)bookieToReplace);
+ $stack11 = excludeBookies.isEmpty();
+ if ($stack11==0) goto label0;
+ $stack20=org.apache.bookkeeper.client.ZoneawareEnsemblePlacementPolicyImpl.LOG;
+ $stack20.error("There is no bookie available to replace a bookie");
+ $stack21=new org.apache.bookkeeper.client.BKException$BKNotEnoughBookiesException;
+ $stack21#org.apache.bookkeeper.client.BKException$BKNotEnoughBookiesException();
+ throw $stack21;
+ label0:$stack15 = this#org.apache.bookkeeper.client.ZoneawareEnsemblePlacementPolicyImpl:selectCandidateNode(excludeBookies);
+ bookieToReplace = $stack15.getAddr();
+ newEnsemble.set(bookieToReplaceIndex,(java.lang.Object)bookieToReplace);
+ $stack18 = this.isEnsembleAdheringToPlacementPolicy(newEnsemble,writeQuorumSize,ackQuorumSize);
+ $stack19 = org.apache.bookkeeper.client.EnsemblePlacementPolicy$PlacementResult.of((java.lang.Object)bookieToReplace,$stack18);
+ return  $stack19;
+ } 
+

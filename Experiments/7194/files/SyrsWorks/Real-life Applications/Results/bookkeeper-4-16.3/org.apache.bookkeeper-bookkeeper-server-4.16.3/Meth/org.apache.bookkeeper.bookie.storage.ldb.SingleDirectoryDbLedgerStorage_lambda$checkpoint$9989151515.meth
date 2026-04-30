@@ -1,0 +1,25 @@
+void org.apache.bookkeeper.bookie.storage.ldb.SingleDirectoryDbLedgerStorage:lambda$checkpoint$9()
+{
+org.slf4j.Logger $stack2;
+  boolean $stack3;
+  org.apache.bookkeeper.bookie.storage.ldb.EntryLocationIndex $stack4;
+  org.apache.bookkeeper.bookie.storage.ldb.LedgerMetadataIndex $stack5;
+  java.lang.Throwable $stack9;
+  label0:$stack2=org.apache.bookkeeper.bookie.storage.ldb.SingleDirectoryDbLedgerStorage.log;
+ $stack3 = $stack2.isDebugEnabled();
+ if ($stack3==0) goto label1;
+ $stack2=org.apache.bookkeeper.bookie.storage.ldb.SingleDirectoryDbLedgerStorage.log;
+ dummyClass.lowSink("Removing deleted ledgers from db indexes");
+$stack2.debug("Removing deleted ledgers from db indexes");
+ label1:$stack4=this.entryLocationIndex;
+ $stack4.removeOffsetFromDeletedLedgers();
+ $stack5=this.ledgerIndex;
+ $stack5.removeDeletedLedgers();
+ label2:goto label3;
+ label4:$stack9 = catch;
+ $stack2=org.apache.bookkeeper.bookie.storage.ldb.SingleDirectoryDbLedgerStorage.log;
+ $stack2.warn("Failed to cleanup db indexes",$stack9);
+ label3:return;
+ catch java.lang.Throwable: label0 - label2 : label4;
+} 
+

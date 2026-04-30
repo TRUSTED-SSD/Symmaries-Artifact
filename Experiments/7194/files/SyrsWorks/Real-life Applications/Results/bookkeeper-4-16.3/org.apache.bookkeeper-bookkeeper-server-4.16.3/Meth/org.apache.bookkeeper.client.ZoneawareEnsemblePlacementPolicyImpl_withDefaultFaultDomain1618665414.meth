@@ -1,0 +1,39 @@
+org.apache.bookkeeper.client.ZoneawareEnsemblePlacementPolicyImpl org.apache.bookkeeper.client.ZoneawareEnsemblePlacementPolicyImpl:withDefaultFaultDomain(java.lang.String defaultFaultDomain)
+{
+java.lang.String[] parts;
+  java.lang.String $stack4;
+  int $stack6;
+  org.apache.bookkeeper.client.ZoneawareEnsemblePlacementPolicyImpl$ZoneAwareNodeLocation $stack7;
+  java.lang.StringBuilder $stack8;
+  java.lang.String $stack15;
+  org.slf4j.Logger $stack18;
+  java.lang.IllegalArgumentException $stack19;
+  com.google.common.base.Preconditions.checkNotNull((java.lang.Object)defaultFaultDomain,(java.lang.Object)"Default fault domain cannot be null");
+ $stack4 = org.apache.bookkeeper.net.NodeBase.normalize(defaultFaultDomain);
+ parts = org.apache.commons.lang3.StringUtils.split($stack4,(char)47);
+ $stack6=#parts;
+ if ($stack6==2) goto label0;
+ $stack18=org.apache.bookkeeper.client.ZoneawareEnsemblePlacementPolicyImpl.LOG;
+ $stack18.error("provided defaultFaultDomain: {} is not valid",(java.lang.Object)defaultFaultDomain);
+ $stack19=new java.lang.IllegalArgumentException;
+ $stack19#java.lang.IllegalArgumentException("invalid defaultFaultDomain");
+ throw $stack19;
+ label0:$stack7=new org.apache.bookkeeper.client.ZoneawareEnsemblePlacementPolicyImpl$ZoneAwareNodeLocation;
+ $stack8=new java.lang.StringBuilder;
+ $stack8#java.lang.StringBuilder();
+ $stack8 = $stack8.append("/");
+ $stack4=parts[0];
+ $stack8 = $stack8.append($stack4);
+ $stack4 = $stack8.toString();
+ $stack8=new java.lang.StringBuilder;
+ $stack8#java.lang.StringBuilder();
+ $stack8 = $stack8.append("/");
+ $stack15=parts[1];
+ $stack8 = $stack8.append($stack15);
+ $stack15 = $stack8.toString();
+ $stack7#org.apache.bookkeeper.client.ZoneawareEnsemblePlacementPolicyImpl$ZoneAwareNodeLocation($stack4,$stack15);
+ this.unresolvedNodeLocation=$stack7;
+ this.defaultFaultDomain=defaultFaultDomain;
+ return  this;
+ } 
+

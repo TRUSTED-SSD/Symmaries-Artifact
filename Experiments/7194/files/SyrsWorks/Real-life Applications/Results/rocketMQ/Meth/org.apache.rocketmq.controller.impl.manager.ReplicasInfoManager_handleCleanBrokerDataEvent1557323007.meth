@@ -1,0 +1,52 @@
+void org.apache.rocketmq.controller.impl.manager.ReplicasInfoManager:handleCleanBrokerDataEvent(org.apache.rocketmq.controller.impl.event.CleanBrokerDataEvent event)
+{
+java.lang.String brokerName;
+  java.util.Set brokerAddressSet;
+  org.apache.rocketmq.controller.impl.manager.BrokerInfo brokerInfo;
+  org.apache.rocketmq.controller.impl.manager.SyncStateInfo syncStateInfo;
+  java.util.Iterator l6;
+  java.lang.String brokerAddress;
+  java.util.Map $stack10;
+  java.lang.Object $stack11;
+  boolean $stack14;
+  java.util.HashMap $stack22;
+  brokerName = event.getBrokerName();
+ brokerAddressSet = event.getBrokerAddressSet();
+ if (null==brokerAddressSet) goto label0;
+ $stack14 = brokerAddressSet.isEmpty();
+ if ($stack14==0) goto label1;
+ label0:$stack10=this.replicaInfoTable;
+ $stack10.remove((java.lang.Object)brokerName);
+ $stack10=this.syncStateSetInfoTable;
+ $stack10.remove((java.lang.Object)brokerName);
+ return;
+ label1:$stack14 = this#org.apache.rocketmq.controller.impl.manager.ReplicasInfoManager:isContainsBroker(brokerName);
+ if ($stack14!=0) goto label2;
+ return;
+ label2:$stack10=this.replicaInfoTable;
+ $stack11 = $stack10.get((java.lang.Object)brokerName);
+ brokerInfo=(org.apache.rocketmq.controller.impl.manager.BrokerInfo) $stack11;
+ $stack10=this.syncStateSetInfoTable;
+ $stack11 = $stack10.get((java.lang.Object)brokerName);
+ syncStateInfo=(org.apache.rocketmq.controller.impl.manager.SyncStateInfo) $stack11;
+ l6 = brokerAddressSet.iterator();
+ label3:$stack14 = l6.hasNext();
+ if ($stack14==0) goto label4;
+ $stack11 = l6.next();
+ brokerAddress=(java.lang.String) $stack11;
+ brokerInfo.removeBrokerAddress(brokerAddress);
+ syncStateInfo.removeSyncState(brokerAddress);
+ goto label3;
+ label4:$stack22 = brokerInfo.getBrokerIdTable();
+ $stack14 = $stack22.isEmpty();
+ if ($stack14==0) goto label5;
+ $stack10=this.replicaInfoTable;
+ $stack10.remove((java.lang.Object)brokerName);
+ label5:brokerAddressSet = syncStateInfo.getSyncStateSet();
+ $stack14 = brokerAddressSet.isEmpty();
+ if ($stack14==0) goto label6;
+ $stack10=this.syncStateSetInfoTable;
+ $stack10.remove((java.lang.Object)brokerName);
+ label6:return;
+ } 
+

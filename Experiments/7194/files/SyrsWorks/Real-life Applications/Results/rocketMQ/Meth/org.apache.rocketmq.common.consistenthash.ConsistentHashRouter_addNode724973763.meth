@@ -1,0 +1,39 @@
+void org.apache.rocketmq.common.consistenthash.ConsistentHashRouter:addNode(org.apache.rocketmq.common.consistenthash.Node pNode,int vNodeCount)
+{
+int existingReplicas;
+  int i;
+  org.apache.rocketmq.common.consistenthash.VirtualNode vNode;
+  int $stack8;
+  java.util.SortedMap $stack9;
+  org.apache.rocketmq.common.consistenthash.HashFunction $stack10;
+  java.lang.String $stack11;
+  long $stack12;
+  java.lang.Long $stack13;
+  java.lang.IllegalArgumentException $stack17;
+  java.lang.StringBuilder $stack18;
+  if (vNodeCount>=0) goto label0;
+ $stack17=new java.lang.IllegalArgumentException;
+ $stack18=new java.lang.StringBuilder;
+ $stack18#java.lang.StringBuilder();
+ $stack18 = $stack18.append("illegal virtual node counts :");
+ $stack18 = $stack18.append(vNodeCount);
+ $stack11 = $stack18.toString();
+ $stack17#java.lang.IllegalArgumentException($stack11);
+ throw $stack17;
+ label0:existingReplicas = this.getExistingReplicas(pNode);
+ i=0;
+ label1:if (i>=vNodeCount) goto label2;
+ vNode=new org.apache.rocketmq.common.consistenthash.VirtualNode;
+ $stack8=(i+existingReplicas);
+ vNode#org.apache.rocketmq.common.consistenthash.VirtualNode(pNode,$stack8);
+ $stack9=this.ring;
+ $stack10=this.hashFunction;
+ $stack11 = vNode.getKey();
+ $stack12 = $stack10.hash($stack11);
+ $stack13 = java.lang.Long.valueOf($stack12);
+ $stack9.put((java.lang.Object)$stack13,(java.lang.Object)vNode);
+ i=(i+1);
+ goto label1;
+ label2:return;
+ } 
+

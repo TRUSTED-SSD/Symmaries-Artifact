@@ -1,0 +1,24 @@
+void org.apache.rocketmq.proxy.processor.validator.DefaultTopicMessageTypeValidator:validate(org.apache.rocketmq.common.attribute.TopicMessageType topicMessageType,org.apache.rocketmq.common.attribute.TopicMessageType messageType)
+{
+java.lang.String errorInfo;
+  org.apache.rocketmq.common.attribute.TopicMessageType $stack4;
+  boolean $stack5;
+  java.lang.Object[] $stack6;
+  org.apache.rocketmq.proxy.common.ProxyException $stack8;
+  org.apache.rocketmq.proxy.common.ProxyExceptionCode $stack9;
+  $stack4=org.apache.rocketmq.common.attribute.TopicMessageType.UNSPECIFIED;
+ $stack5 = messageType.equals((java.lang.Object)$stack4);
+ if ($stack5!=0) goto label0;
+ $stack5 = messageType.equals((java.lang.Object)topicMessageType);
+ if ($stack5!=0) goto label1;
+ label0:$stack6=new java.lang.Object[2];
+ $stack6[0]=topicMessageType;
+ $stack6[1]=messageType;
+ errorInfo = java.lang.String.format("TopicMessageType validate failed, topic type is %s, message type is %s",$stack6);
+ $stack8=new org.apache.rocketmq.proxy.common.ProxyException;
+ $stack9=org.apache.rocketmq.proxy.common.ProxyExceptionCode.MESSAGE_PROPERTY_CONFLICT_WITH_TYPE;
+ $stack8#org.apache.rocketmq.proxy.common.ProxyException($stack9,errorInfo);
+ throw $stack8;
+ label1:return;
+ } 
+

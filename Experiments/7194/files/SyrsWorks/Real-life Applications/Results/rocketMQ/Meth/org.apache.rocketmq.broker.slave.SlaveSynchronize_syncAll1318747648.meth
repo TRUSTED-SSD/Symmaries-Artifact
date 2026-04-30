@@ -1,0 +1,18 @@
+void org.apache.rocketmq.broker.slave.SlaveSynchronize:syncAll()
+{
+org.apache.rocketmq.broker.BrokerController $stack1;
+  org.apache.rocketmq.store.config.MessageStoreConfig $stack2;
+  boolean $stack3;
+  this#org.apache.rocketmq.broker.slave.SlaveSynchronize:syncTopicConfig();
+ this#org.apache.rocketmq.broker.slave.SlaveSynchronize:syncConsumerOffset();
+ this#org.apache.rocketmq.broker.slave.SlaveSynchronize:syncDelayOffset();
+ this#org.apache.rocketmq.broker.slave.SlaveSynchronize:syncSubscriptionGroupConfig();
+ this#org.apache.rocketmq.broker.slave.SlaveSynchronize:syncMessageRequestMode();
+ $stack1=this.brokerController;
+ $stack2 = $stack1.getMessageStoreConfig();
+ $stack3 = $stack2.isTimerWheelEnable();
+ if ($stack3==0) goto label0;
+ this#org.apache.rocketmq.broker.slave.SlaveSynchronize:syncTimerMetrics();
+ label0:return;
+ } 
+

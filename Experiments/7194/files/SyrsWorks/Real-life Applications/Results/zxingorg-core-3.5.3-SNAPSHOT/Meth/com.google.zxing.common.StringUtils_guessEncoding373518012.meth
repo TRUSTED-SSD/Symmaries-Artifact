@@ -1,0 +1,23 @@
+static java.lang.String com.google.zxing.common.StringUtils:guessEncoding(byte[] bytes,java.util.Map hints)
+{
+java.nio.charset.Charset c;
+  java.nio.charset.Charset $stack4;
+  boolean $stack5;
+  java.lang.String $stack10;
+  c = com.google.zxing.common.StringUtils.guessCharset(bytes,hints);
+ $stack4=com.google.zxing.common.StringUtils.SHIFT_JIS_CHARSET;
+ $stack5 = c.equals((java.lang.Object)$stack4);
+ if ($stack5==0) goto label0;
+ return  "SJIS";
+ label0:$stack4=java.nio.charset.StandardCharsets.UTF_8;
+ $stack5 = c.equals((java.lang.Object)$stack4);
+ if ($stack5==0) goto label1;
+ return  "UTF8";
+ label1:$stack4=java.nio.charset.StandardCharsets.ISO_8859_1;
+ $stack5 = c.equals((java.lang.Object)$stack4);
+ if ($stack5==0) goto label2;
+ return  "ISO8859_1";
+ label2:$stack10 = c.name();
+ return  $stack10;
+ } 
+

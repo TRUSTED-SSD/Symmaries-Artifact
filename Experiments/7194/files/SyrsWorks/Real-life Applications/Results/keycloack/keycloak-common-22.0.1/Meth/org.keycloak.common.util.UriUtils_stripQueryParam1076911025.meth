@@ -1,0 +1,19 @@
+static java.lang.String org.keycloak.common.util.UriUtils:stripQueryParam(java.lang.String @url,java.lang.String @name)
+{
+java.lang.StringBuilder $stack2;
+  java.lang.String name;
+java.lang.String url;
+url=@url;
+name=@name;
+$stack2=new java.lang.StringBuilder;
+ $stack2#java.lang.StringBuilder();
+ $stack2 = $stack2.append("[\\?&]");
+ $stack2 = $stack2.append(name);
+ $stack2 = $stack2.append("=[^&]*$|");
+ $stack2 = $stack2.append(name);
+ $stack2 = $stack2.append("=[^&]*&");
+ name = $stack2.toString();
+ url = url.replaceFirst(name,"");
+ return  url;
+ } 
+

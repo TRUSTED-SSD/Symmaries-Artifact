@@ -1,0 +1,31 @@
+io.netty.buffer.ByteBuf org.apache.bookkeeper.bookie.IndexPersistenceMgr:getExplicitLac(long ledgerId)
+{
+org.apache.bookkeeper.bookie.FileInfoBackingCache$CachedFileInfo fi;
+  io.netty.buffer.ByteBuf e;
+  java.lang.Throwable l6;
+  java.lang.Long $stack7;
+  java.io.IOException $stack11;
+  org.slf4j.Logger $stack12;
+  fi=null;
+ label0:$stack7 = java.lang.Long.valueOf(ledgerId);
+ fi = this.getFileInfo($stack7,null);
+ e = fi.getExplicitLac();
+ label1:if (null==fi) goto label2;
+ fi.release();
+ label2:return  e;
+ label3:$stack11 = catch;
+ $stack12=org.apache.bookkeeper.bookie.IndexPersistenceMgr.LOG;
+ $stack12.error("Exception during getLastAddConfirmed",(java.lang.Throwable)$stack11);
+ label4:if (null==fi) goto label5;
+ fi.release();
+ label5:return  null;
+ label6:l6 = catch;
+ label7:if (null==fi) goto label8;
+ fi.release();
+ label8:throw l6;
+ catch java.io.IOException: label0 - label1 : label3;
+catch java.lang.Throwable: label0 - label1 : label6;
+catch java.lang.Throwable: label3 - label4 : label6;
+catch java.lang.Throwable: label6 - label7 : label6;
+} 
+

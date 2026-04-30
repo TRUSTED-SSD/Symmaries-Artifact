@@ -1,0 +1,25 @@
+static org.apache.bookkeeper.common.util.nativeio.NativeIOJni
+{
+boolean $stack1;
+  java.lang.RuntimeException $stack3;
+  java.lang.Exception $stack4;
+  label0:$stack1=org.apache.commons.lang3.SystemUtils.IS_OS_MAC_OSX;
+ if ($stack1==0) goto label1;
+ org.apache.bookkeeper.common.util.nativeio.NativeUtils.loadLibraryFromJar("/lib/libnative-io.jnilib");
+ goto label2;
+ label1:$stack1=org.apache.commons.lang3.SystemUtils.IS_OS_LINUX;
+ if ($stack1==0) goto label3;
+ org.apache.bookkeeper.common.util.nativeio.NativeUtils.loadLibraryFromJar("/lib/libnative-io.so");
+ goto label2;
+ label3:$stack3=new java.lang.RuntimeException;
+ $stack3#java.lang.RuntimeException("OS not supported by Native-IO utils");
+ throw $stack3;
+ label2:goto label4;
+ label5:$stack4 = catch;
+ $stack3=new java.lang.RuntimeException;
+ $stack3#java.lang.RuntimeException((java.lang.Throwable)$stack4);
+ throw $stack3;
+ label4:return;
+ catch java.lang.Exception: label0 - label2 : label5;
+} 
+

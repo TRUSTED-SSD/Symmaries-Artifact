@@ -1,0 +1,25 @@
+org.greenrobot.eventbus.EventBus org.greenrobot.eventbus.EventBusBuilder:installDefaultEventBus()
+{
+java.lang.Class l1;
+  java.lang.Throwable l2;
+  org.greenrobot.eventbus.EventBus $stack3;
+  org.greenrobot.eventbus.EventBusException $stack7;
+  l1=org.greenrobot.eventbus.EventBus;
+ monitorenter org.greenrobot.eventbus.EventBus;
+ label0:$stack3=org.greenrobot.eventbus.EventBus.defaultInstance;
+ if ($stack3==null) goto label1;
+ $stack7=new org.greenrobot.eventbus.EventBusException;
+ $stack7#org.greenrobot.eventbus.EventBusException("Default instance already exists. It may be only set once before it\'s used the first time to ensure consistent behavior.");
+ throw $stack7;
+ label1:$stack3 = this.build();
+ org.greenrobot.eventbus.EventBus.defaultInstance=$stack3;
+ $stack3=org.greenrobot.eventbus.EventBus.defaultInstance;
+ monitorexit org.greenrobot.eventbus.EventBus;
+ label2:return  $stack3;
+ label3:l2 = catch;
+ monitorexit org.greenrobot.eventbus.EventBus;
+ label4:throw l2;
+ catch java.lang.Throwable: label0 - label2 : label3;
+catch java.lang.Throwable: label3 - label4 : label3;
+} 
+

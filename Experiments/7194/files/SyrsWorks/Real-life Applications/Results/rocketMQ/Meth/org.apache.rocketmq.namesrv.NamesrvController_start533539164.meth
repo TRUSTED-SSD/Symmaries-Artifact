@@ -1,0 +1,43 @@
+void org.apache.rocketmq.namesrv.NamesrvController:start()
+{
+org.apache.rocketmq.remoting.RemotingServer $stack1;
+  org.apache.rocketmq.remoting.netty.NettyServerConfig $stack2;
+  int $stack4;
+  java.lang.StringBuilder $stack5;
+  org.apache.rocketmq.remoting.RemotingClient $stack6;
+  java.lang.String $stack7;
+  java.util.List $stack14;
+  org.apache.rocketmq.srvutil.FileWatchService $stack16;
+  org.apache.rocketmq.namesrv.routeinfo.RouteInfoManager $stack17;
+  $stack1=this.remotingServer;
+ $stack1.start();
+ $stack2=this.nettyServerConfig;
+ $stack4 = $stack2.getListenPort();
+ if (0!=$stack4) goto label0;
+ $stack2=this.nettyServerConfig;
+ $stack1=this.remotingServer;
+ $stack4 = $stack1.localListenPort();
+ $stack2.setListenPort($stack4);
+ label0:$stack6=this.remotingClient;
+ $stack5=new java.lang.StringBuilder;
+ $stack5#java.lang.StringBuilder();
+ $stack7 = org.apache.rocketmq.common.utils.NetworkUtil.getLocalAddress();
+ $stack5 = $stack5.append($stack7);
+ $stack5 = $stack5.append(":");
+ $stack2=this.nettyServerConfig;
+ $stack4 = $stack2.getListenPort();
+ $stack5 = $stack5.append($stack4);
+ $stack7 = $stack5.toString();
+ $stack14 = java.util.Collections.singletonList((java.lang.Object)$stack7);
+ $stack6.updateNameServerAddressList($stack14);
+ $stack6=this.remotingClient;
+ $stack6.start();
+ $stack16=this.fileWatchService;
+ if ($stack16==null) goto label1;
+ $stack16=this.fileWatchService;
+ $stack16.start();
+ label1:$stack17=this.routeInfoManager;
+ $stack17.start();
+ return;
+ } 
+

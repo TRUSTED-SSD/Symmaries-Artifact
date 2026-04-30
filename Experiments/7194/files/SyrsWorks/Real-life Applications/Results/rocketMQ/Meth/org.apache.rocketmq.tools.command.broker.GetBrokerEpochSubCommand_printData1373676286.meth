@@ -1,0 +1,58 @@
+void org.apache.rocketmq.tools.command.broker.GetBrokerEpochSubCommand:printData(java.util.Set brokers,org.apache.rocketmq.tools.admin.DefaultMQAdminExt defaultMQAdminExt)
+{
+java.util.Iterator l3;
+  java.lang.String brokerAddr;
+  org.apache.rocketmq.remoting.protocol.body.EpochEntryCache epochCache;
+  java.util.List epochList;
+  int i;
+  org.apache.rocketmq.remoting.protocol.EpochEntry epochEntry;
+  boolean $stack10;
+  java.lang.Object $stack11;
+  java.lang.Object[] $stack13;
+  java.io.PrintStream $stack14;
+  java.lang.String $stack17;
+  long $stack21;
+  java.lang.Long $stack22;
+  int $stack25;
+  l3 = brokers.iterator();
+ label0:$stack10 = l3.hasNext();
+ if ($stack10==0) goto label1;
+ $stack11 = l3.next();
+ brokerAddr=(java.lang.String) $stack11;
+ epochCache = defaultMQAdminExt.getBrokerEpochCache(brokerAddr);
+ $stack14=java.lang.System.out;
+ $stack13=new java.lang.Object[4];
+ $stack17 = epochCache.getClusterName();
+ $stack13[0]=$stack17;
+ $stack17 = epochCache.getBrokerName();
+ $stack13[1]=$stack17;
+ $stack13[2]=brokerAddr;
+ $stack21 = epochCache.getBrokerId();
+ $stack22 = java.lang.Long.valueOf($stack21);
+ $stack13[3]=$stack22;
+ $stack14.printf("\n#clusterName\t%s\n#brokerName\t%s\n#brokerAddr\t%s\n#brokerId\t%d",$stack13);
+ epochList = epochCache.getEpochList();
+ i=0;
+ label2:$stack25 = epochList.size();
+ if (i>=$stack25) goto label3;
+ $stack11 = epochList.get(i);
+ epochEntry=(org.apache.rocketmq.remoting.protocol.EpochEntry) $stack11;
+ $stack25 = epochList.size();
+ $stack25=($stack25-1);
+ if (i!=$stack25) goto label4;
+ $stack21 = epochCache.getMaxOffset();
+ epochEntry.setEndOffset($stack21);
+ label4:$stack14=java.lang.System.out;
+ $stack13=new java.lang.Object[1];
+ brokerAddr = epochEntry.toString();
+ $stack13[0]=brokerAddr;
+ $stack14.printf("\n#Epoch: %s",$stack13);
+ i=(i+1);
+ goto label2;
+ label3:$stack14=java.lang.System.out;
+ dummyClass.lowSink("\n");
+$stack14.print("\n");
+ goto label0;
+ label1:return;
+ } 
+

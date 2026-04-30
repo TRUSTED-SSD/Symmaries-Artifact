@@ -1,0 +1,39 @@
+void org.apache.rocketmq.client.impl.consumer.AssignedMessageQueue:removeAssignedMessageQueue(java.lang.String topic)
+{
+java.util.concurrent.ConcurrentHashMap l2;
+  java.util.Iterator it;
+  java.util.Map$Entry next;
+  java.lang.Throwable l5;
+  java.util.concurrent.ConcurrentHashMap $stack6;
+  java.util.Set $stack8;
+  boolean $stack10;
+  java.lang.Object $stack12;
+  org.apache.rocketmq.common.message.MessageQueue $stack14;
+  java.lang.String $stack15;
+  $stack6=this.assignedMessageQueueState;
+ l2=$stack6;
+ monitorenter $stack6;
+ label0:$stack6=this.assignedMessageQueueState;
+ $stack8 = $stack6.entrySet();
+ it = $stack8.iterator();
+ label1:$stack10 = it.hasNext();
+ if ($stack10==0) goto label2;
+ $stack12 = it.next();
+ next=(java.util.Map$Entry) $stack12;
+ $stack12 = next.getKey();
+ $stack14=(org.apache.rocketmq.common.message.MessageQueue) $stack12;
+ $stack15 = $stack14.getTopic();
+ $stack10 = $stack15.equals((java.lang.Object)topic);
+ if ($stack10==0) goto label3;
+ it.remove();
+ label3:goto label1;
+ label2:monitorexit l2;
+ label4:goto label5;
+ label6:l5 = catch;
+ monitorexit l2;
+ label7:throw l5;
+ label5:return;
+ catch java.lang.Throwable: label0 - label4 : label6;
+catch java.lang.Throwable: label6 - label7 : label6;
+} 
+

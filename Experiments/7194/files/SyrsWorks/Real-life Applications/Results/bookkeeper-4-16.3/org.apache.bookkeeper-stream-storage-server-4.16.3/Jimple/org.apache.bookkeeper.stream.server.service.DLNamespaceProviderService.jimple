@@ -1,0 +1,123 @@
+    public void <init>(org.apache.bookkeeper.conf.ServerConfiguration, org.apache.bookkeeper.stream.server.conf.DLConfiguration, org.apache.bookkeeper.stats.StatsLogger)
+    {
+        org.apache.bookkeeper.stream.server.service.DLNamespaceProviderService this;
+        org.apache.bookkeeper.conf.ServerConfiguration bkServerConf;
+        org.apache.bookkeeper.stream.server.conf.DLConfiguration conf;
+        org.apache.bookkeeper.stats.StatsLogger statsLogger;
+        java.lang.Object[] $stack4;
+        java.lang.String $stack7;
+        java.net.URI $stack11;
+        org.apache.distributedlog.DistributedLogConfiguration $stack12;
+        org.apache.distributedlog.config.DynamicDistributedLogConfiguration $stack29;
+        org.apache.commons.configuration.Configuration tmp$1283052866;
+
+        this := @this: org.apache.bookkeeper.stream.server.service.DLNamespaceProviderService;
+
+        bkServerConf := @parameter0: org.apache.bookkeeper.conf.ServerConfiguration;
+
+        conf := @parameter1: org.apache.bookkeeper.stream.server.conf.DLConfiguration;
+
+        statsLogger := @parameter2: org.apache.bookkeeper.stats.StatsLogger;
+
+        specialinvoke this.<org.apache.bookkeeper.common.component.AbstractLifecycleComponent: void <init>(java.lang.String,org.apache.bookkeeper.common.conf.ComponentConfiguration,org.apache.bookkeeper.stats.StatsLogger)>("namespace-provider", conf, statsLogger);
+/*82*/
+
+        $stack4 = newarray (java.lang.Object)[2];
+/*84*/
+
+        $stack7 = staticinvoke <org.apache.bookkeeper.meta.zk.ZKMetadataDriverBase: java.lang.String resolveZkServers(org.apache.bookkeeper.conf.AbstractConfiguration)>(bkServerConf);
+/*85*/
+
+        $stack4[0] = $stack7;
+/*85*/
+
+        $stack7 = staticinvoke <org.apache.bookkeeper.stream.storage.StorageConstants: java.lang.String getStoragePath(java.lang.String)>("/stream");
+/*86*/
+
+        $stack4[1] = $stack7;
+/*86*/
+
+        $stack7 = staticinvoke <java.lang.String: java.lang.String format(java.lang.String,java.lang.Object[])>("distributedlog://%s%s", $stack4);
+/*84*/
+
+        $stack11 = staticinvoke <java.net.URI: java.net.URI create(java.lang.String)>($stack7);
+/*84*/
+
+        this.<org.apache.bookkeeper.stream.server.service.DLNamespaceProviderService: java.net.URI dlogUri> = $stack11;
+/*84*/
+
+        this.<org.apache.bookkeeper.stream.server.service.DLNamespaceProviderService: org.apache.bookkeeper.conf.ServerConfiguration bkServerConf> = bkServerConf;
+/*87*/
+
+        $stack12 = new org.apache.distributedlog.DistributedLogConfiguration;
+/*88*/
+
+        specialinvoke $stack12.<org.apache.distributedlog.DistributedLogConfiguration: void <init>()>();
+/*88*/
+
+        this.<org.apache.bookkeeper.stream.server.service.DLNamespaceProviderService: org.apache.distributedlog.DistributedLogConfiguration dlConf> = $stack12;
+/*88*/
+
+        $stack12 = this.<org.apache.bookkeeper.stream.server.service.DLNamespaceProviderService: org.apache.distributedlog.DistributedLogConfiguration dlConf>;
+/*89*/
+
+        tmp$1283052866 = (org.apache.commons.configuration.Configuration) conf;
+
+        virtualinvoke $stack12.<org.apache.distributedlog.DistributedLogConfiguration: void loadConf(org.apache.commons.configuration.Configuration)>(tmp$1283052866);
+/*89*/
+
+        $stack12 = this.<org.apache.bookkeeper.stream.server.service.DLNamespaceProviderService: org.apache.distributedlog.DistributedLogConfiguration dlConf>;
+/*91*/
+
+        virtualinvoke $stack12.<org.apache.distributedlog.DistributedLogConfiguration: org.apache.distributedlog.DistributedLogConfiguration setWriteLockEnabled(boolean)>(0);
+/*91*/
+
+        $stack12 = this.<org.apache.bookkeeper.stream.server.service.DLNamespaceProviderService: org.apache.distributedlog.DistributedLogConfiguration dlConf>;
+/*93*/
+
+        virtualinvoke $stack12.<org.apache.distributedlog.DistributedLogConfiguration: org.apache.distributedlog.DistributedLogConfiguration setImmediateFlushEnabled(boolean)>(0);
+/*93*/
+
+        $stack12 = this.<org.apache.bookkeeper.stream.server.service.DLNamespaceProviderService: org.apache.distributedlog.DistributedLogConfiguration dlConf>;
+/*94*/
+
+        virtualinvoke $stack12.<org.apache.distributedlog.DistributedLogConfiguration: org.apache.distributedlog.DistributedLogConfiguration setOutputBufferSize(int)>(524288);
+/*94*/
+
+        $stack12 = this.<org.apache.bookkeeper.stream.server.service.DLNamespaceProviderService: org.apache.distributedlog.DistributedLogConfiguration dlConf>;
+/*95*/
+
+        virtualinvoke $stack12.<org.apache.distributedlog.DistributedLogConfiguration: org.apache.distributedlog.DistributedLogConfiguration setPeriodicFlushFrequencyMilliSeconds(int)>(2);
+/*95*/
+
+        $stack12 = this.<org.apache.bookkeeper.stream.server.service.DLNamespaceProviderService: org.apache.distributedlog.DistributedLogConfiguration dlConf>;
+/*97*/
+
+        virtualinvoke $stack12.<org.apache.distributedlog.DistributedLogConfiguration: org.apache.distributedlog.DistributedLogConfiguration setExplicitTruncationByApplication(boolean)>(1);
+/*97*/
+
+        $stack12 = this.<org.apache.bookkeeper.stream.server.service.DLNamespaceProviderService: org.apache.distributedlog.DistributedLogConfiguration dlConf>;
+/*99*/
+
+        virtualinvoke $stack12.<org.apache.distributedlog.DistributedLogConfiguration: org.apache.distributedlog.DistributedLogConfiguration setLogSegmentRollingConcurrency(int)>(1);
+/*99*/
+
+        $stack12 = this.<org.apache.bookkeeper.stream.server.service.DLNamespaceProviderService: org.apache.distributedlog.DistributedLogConfiguration dlConf>;
+/*100*/
+
+        virtualinvoke $stack12.<org.apache.distributedlog.DistributedLogConfiguration: org.apache.distributedlog.DistributedLogConfiguration setMaxLogSegmentBytes(long)>(268435456L);
+/*100*/
+
+        $stack12 = this.<org.apache.bookkeeper.stream.server.service.DLNamespaceProviderService: org.apache.distributedlog.DistributedLogConfiguration dlConf>;
+/*101*/
+
+        $stack29 = staticinvoke <org.apache.distributedlog.util.ConfUtils: org.apache.distributedlog.config.DynamicDistributedLogConfiguration getConstDynConf(org.apache.distributedlog.DistributedLogConfiguration)>($stack12);
+/*101*/
+
+        this.<org.apache.bookkeeper.stream.server.service.DLNamespaceProviderService: org.apache.distributedlog.config.DynamicDistributedLogConfiguration dlDynConf> = $stack29;
+/*101*/
+
+        return;
+/*102*/
+    }
+

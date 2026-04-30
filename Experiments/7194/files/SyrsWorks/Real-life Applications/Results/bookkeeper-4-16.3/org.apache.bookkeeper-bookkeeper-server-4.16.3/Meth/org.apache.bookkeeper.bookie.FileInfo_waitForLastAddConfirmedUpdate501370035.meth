@@ -1,0 +1,29 @@
+boolean org.apache.bookkeeper.bookie.FileInfo:waitForLastAddConfirmedUpdate(long previousLAC,org.apache.bookkeeper.common.util.Watcher watcher)
+{
+java.lang.Long $stack4;
+  boolean $stack5;
+  org.slf4j.Logger $stack7;
+  java.lang.Long $stack12;
+  long $stack15;
+  byte $stack16;
+  $stack4=this.lac;
+ if (null==$stack4) goto label0;
+ $stack4=this.lac;
+ $stack15 = $stack4.longValue();
+ $stack16=($stack15 cmp previousLAC);
+ if ($stack16>0) goto label1;
+ label0:$stack5=this.isClosed;
+ if ($stack5==0) goto label2;
+ label1:$stack7=org.apache.bookkeeper.bookie.FileInfo.LOG;
+ $stack5 = $stack7.isTraceEnabled();
+ if ($stack5==0) goto label3;
+ $stack7=org.apache.bookkeeper.bookie.FileInfo.LOG;
+ $stack4=this.lac;
+ $stack12 = java.lang.Long.valueOf(previousLAC);
+ dummyClass.lowSink("Wait For LAC {} , {}");
+$stack7.trace("Wait For LAC {} , {}",(java.lang.Object)$stack4,(java.lang.Object)$stack12);
+ label3:return  0;
+ label2:this.addWatcher(watcher);
+ return  1;
+ } 
+

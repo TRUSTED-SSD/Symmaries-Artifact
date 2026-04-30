@@ -1,0 +1,21 @@
+digraph G {
+  node [shape=box, ];
+  "pc0_js1" [label="〈this#java.lang.AbstractStringBuilder.append (r1, i0, i1), js1〉\n\
+tt",
+             ];
+  "pc1_js1" [label="〈return this, js1〉", ];
+  "pc2_js1" [label="〈sink, js1〉\n\
+obj_level(r1) ⊑ ret(obj_level(r1))' ∧ obj_level(this) ⊑ ret(obj_level(this))' ∧ (ret(this.><r1)' ∨ ¬this.><r1) ∧ (ret(this.><this)' ∨ ¬this.><this) ∧ (ϕ ≠ S1 ∨ ret(~this)' ∧ obj_level(this) ⊑ ret(obj_level())' ∧ pc ⊔ level(this) ⊑ ret(level())' ∧ (ret(.><this)' ∨ ¬this.><this) ∧ (ret(r1.><)' ∨ ¬this.><r1) ∧ (ret(this.><)' ∨ ¬this.><this))",
+             ];
+  
+  
+  "pc0_js1" -> "pc1_js1" [label="tt,\n\
+{this.><r1 := ff,\n\
+ this.><this := if this.><r1 then this.><r1 ∨ this.><this else this.><this,\n\
+ obj_level(r1) := obj_level(r1) ⊔ (if this.><r1 then pc ⊔ level(i1) ⊔ level(this) ⊔ obj_level(this) else ⊥) ⊔ (if this.><r1 ∧ level(i1) = ⊥ ∧ level(this) ⊔ obj_level(this) = ⊥ then pc else if if level(i1) = ⊥ then if this.><r1 then level(this) ⊔ obj_level(this) else obj_level(r1) = ⊤ else level(i1) = ⊤ ∧ (this.><r1 ∨ obj_level(r1) = ⊤) then ⊤ else ⊥),\n\
+ obj_level(this) := pc ⊔ level(i1) ⊔ level(this) ⊔ obj_level(this) ⊔ (if this.><r1 then if this.><r1 ∧ level(i1) = ⊥ ∧ level(this) ⊔ obj_level(this) = ⊥ then pc else if if level(i1) = ⊥ then if this.><r1 then level(this) ⊔ obj_level(this) else obj_level(r1) = ⊤ else level(i1) = ⊤ ∧ (this.><r1 ∨ obj_level(r1) = ⊤) then ⊤ else ⊥ else ⊥)}",
+                          ];
+  "pc1_js1" -> "pc2_js1" [label="tt,\n\
+{ϕ := S1}", ];
+  
+  }

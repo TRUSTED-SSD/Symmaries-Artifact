@@ -1,0 +1,38 @@
+java.util.Properties org.apache.rocketmq.client.impl.MQClientAPIImpl:getBrokerConfig(java.lang.String @addr,long timeoutMillis)
+{
+org.apache.rocketmq.remoting.protocol.RemotingCommand request;
+  org.apache.rocketmq.remoting.RemotingClient $stack7;
+  boolean $stack9;
+  int $stack10;
+  byte[] $stack12;
+  java.util.Properties $stack13;
+  org.apache.rocketmq.client.exception.MQBrokerException $stack14;
+  java.lang.String $stack16;
+  java.lang.AssertionError $stack18;
+  java.lang.String addr;
+addr=@addr;
+request = org.apache.rocketmq.remoting.protocol.RemotingCommand.createRequestCommand(26,null);
+ $stack7=this.remotingClient;
+ request = $stack7.invokeSync(addr,request,timeoutMillis);
+ $stack9=org.apache.rocketmq.client.impl.MQClientAPIImpl.$assertionsDisabled;
+ if ($stack9!=0) goto label0;
+ if (request!=null) goto label0;
+ $stack18=new java.lang.AssertionError;
+ $stack18#java.lang.AssertionError();
+ throw $stack18;
+ label0:$stack10 = request.getCode();
+ switch [$stack10]
+if 0 goto label1;
+goto label2;
+ label1:addr=new java.lang.String;
+ $stack12 = request.getBody();
+ addr#java.lang.String($stack12,"UTF-8");
+ $stack13 = org.apache.rocketmq.common.MixAll.string2Properties(addr);
+ return  $stack13;
+ label2:$stack14=new org.apache.rocketmq.client.exception.MQBrokerException;
+ $stack10 = request.getCode();
+ $stack16 = request.getRemark();
+ $stack14#org.apache.rocketmq.client.exception.MQBrokerException($stack10,$stack16,addr);
+ throw $stack14;
+ } 
+

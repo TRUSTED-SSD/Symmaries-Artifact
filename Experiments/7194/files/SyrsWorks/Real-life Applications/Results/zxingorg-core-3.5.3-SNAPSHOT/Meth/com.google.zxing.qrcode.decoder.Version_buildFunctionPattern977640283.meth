@@ -1,0 +1,55 @@
+com.google.zxing.common.BitMatrix com.google.zxing.qrcode.decoder.Version:buildFunctionPattern()
+{
+int dimension;
+  com.google.zxing.common.BitMatrix bitMatrix;
+  int max;
+  int x;
+  int i;
+  int y;
+  int[] $stack11;
+  int $stack22;
+  dimension = this.getDimensionForVersion();
+ bitMatrix=new com.google.zxing.common.BitMatrix;
+ bitMatrix#com.google.zxing.common.BitMatrix(dimension);
+ bitMatrix.setRegion(0,0,9,9);
+ max=(dimension-8);
+ bitMatrix.setRegion(max,0,8,9);
+ max=(dimension-8);
+ bitMatrix.setRegion(0,max,9,8);
+ $stack11=this.alignmentPatternCenters;
+ max=#$stack11;
+ x=0;
+ label0:if (x>=max) goto label1;
+ $stack11=this.alignmentPatternCenters;
+ i=$stack11[x];
+ i=(i-2);
+ y=0;
+ label2:if (y>=max) goto label3;
+ if (x!=0) goto label4;
+ if (y==0) goto label5;
+ $stack22=(max-1);
+ if (y==$stack22) goto label5;
+ label4:$stack22=(max-1);
+ if (x!=$stack22) goto label6;
+ if (y==0) goto label5;
+ label6:$stack11=this.alignmentPatternCenters;
+ $stack22=$stack11[y];
+ $stack22=($stack22-2);
+ bitMatrix.setRegion($stack22,i,5,5);
+ label5:y=(y+1);
+ goto label2;
+ label3:x=(x+1);
+ goto label0;
+ label1:max=(dimension-17);
+ bitMatrix.setRegion(6,9,1,max);
+ max=(dimension-17);
+ bitMatrix.setRegion(9,6,max,1);
+ max=this.versionNumber;
+ if (max<=6) goto label7;
+ max=(dimension-11);
+ bitMatrix.setRegion(max,0,3,6);
+ dimension=(dimension-11);
+ bitMatrix.setRegion(0,dimension,6,3);
+ label7:return  bitMatrix;
+ } 
+

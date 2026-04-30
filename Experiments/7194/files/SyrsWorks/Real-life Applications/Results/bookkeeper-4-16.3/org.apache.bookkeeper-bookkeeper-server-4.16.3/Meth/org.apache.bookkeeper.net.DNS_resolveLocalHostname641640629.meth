@@ -1,0 +1,17 @@
+static java.lang.String org.apache.bookkeeper.net.DNS:resolveLocalHostname()
+{
+java.lang.String localhost;
+  java.net.InetAddress $stack2;
+  java.net.UnknownHostException $stack4;
+  org.slf4j.Logger $stack5;
+  label0:$stack2 = java.net.InetAddress.getLocalHost();
+ localhost = $stack2.getCanonicalHostName();
+ label1:goto label2;
+ label3:$stack4 = catch;
+ $stack5=org.apache.bookkeeper.net.DNS.LOG;
+ $stack5.warn("Unable to determine local hostname -falling back to \"localhost\"",(java.lang.Throwable)$stack4);
+ localhost="localhost";
+ label2:return  localhost;
+ catch java.net.UnknownHostException: label0 - label1 : label3;
+} 
+

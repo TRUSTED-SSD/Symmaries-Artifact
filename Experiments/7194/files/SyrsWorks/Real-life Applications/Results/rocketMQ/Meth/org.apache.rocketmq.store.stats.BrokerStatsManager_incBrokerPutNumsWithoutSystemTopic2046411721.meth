@@ -1,0 +1,25 @@
+void org.apache.rocketmq.store.stats.BrokerStatsManager:incBrokerPutNumsWithoutSystemTopic(java.lang.String @topic,int incValue)
+{
+boolean $stack3;
+  java.util.HashMap $stack4;
+  java.lang.Object $stack5;
+  org.apache.rocketmq.common.stats.StatsItemSet $stack7;
+  org.apache.rocketmq.common.stats.StatsItem $stack8;
+  java.util.concurrent.atomic.LongAdder $stack9;
+  long $stack10;
+  java.lang.String topic;
+topic=@topic;
+$stack3 = org.apache.rocketmq.common.topic.TopicValidator.isSystemTopic(topic);
+ if ($stack3==0) goto label0;
+ return;
+ label0:$stack4=this.statsTable;
+ $stack5 = $stack4.get((java.lang.Object)"BROKER_PUT_NUMS_WITHOUT_SYSTEM_TOPIC");
+ $stack7=(org.apache.rocketmq.common.stats.StatsItemSet) $stack5;
+ topic=this.clusterName;
+ $stack8 = $stack7.getAndCreateStatsItem(topic);
+ $stack9 = $stack8.getValue();
+ $stack10=(long) incValue;
+ $stack9.add($stack10);
+ return;
+ } 
+

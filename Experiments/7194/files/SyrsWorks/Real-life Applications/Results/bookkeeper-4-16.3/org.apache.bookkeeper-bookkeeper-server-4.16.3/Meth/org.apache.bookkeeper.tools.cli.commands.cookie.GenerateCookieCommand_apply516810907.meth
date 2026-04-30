@@ -1,0 +1,58 @@
+void org.apache.bookkeeper.tools.cli.commands.cookie.GenerateCookieCommand:apply(org.apache.bookkeeper.discover.RegistrationManager rm,org.apache.bookkeeper.tools.cli.commands.cookie.GenerateCookieCommand$Flags cmdFlags)
+{
+org.apache.bookkeeper.net.BookieId bookieId;
+  java.lang.String instanceId;
+  org.apache.bookkeeper.bookie.Cookie$Builder builder;
+  java.lang.String $stack12;
+  boolean $stack14;
+  java.lang.String[] $stack19;
+  java.io.File $stack25;
+  org.apache.bookkeeper.tools.framework.CliSpec $stack27;
+  java.io.PrintStream $stack28;
+  java.lang.StringBuilder $stack29;
+  org.apache.bookkeeper.bookie.Cookie $stack40;
+  bookieId = this.getBookieId((org.apache.bookkeeper.tools.framework.CliFlags)cmdFlags);
+ instanceId = org.apache.bookkeeper.tools.cli.commands.cookie.GenerateCookieCommand$Flags.access$000(cmdFlags);
+ if (null!=instanceId) goto label0;
+ instanceId = rm.getClusterInstanceId();
+ goto label1;
+ label0:instanceId = org.apache.bookkeeper.tools.cli.commands.cookie.GenerateCookieCommand$Flags.access$000(cmdFlags);
+ label1:builder = org.apache.bookkeeper.bookie.Cookie.newBuilder();
+ $stack12 = bookieId.toString();
+ builder.setBookieId($stack12);
+ $stack14 = org.apache.commons.lang3.StringUtils.isEmpty((java.lang.CharSequence)instanceId);
+ if ($stack14==0) goto label2;
+ builder.setInstanceId(null);
+ goto label3;
+ label2:builder.setInstanceId(instanceId);
+ label3:instanceId = org.apache.bookkeeper.tools.cli.commands.cookie.GenerateCookieCommand$Flags.access$100(cmdFlags);
+ builder.setJournalDirs(instanceId);
+ instanceId = org.apache.bookkeeper.tools.cli.commands.cookie.GenerateCookieCommand$Flags.access$200(cmdFlags);
+ $stack19 = instanceId.split(",");
+ instanceId = org.apache.bookkeeper.bookie.Cookie.encodeDirPaths($stack19);
+ builder.setLedgerDirs(instanceId);
+ instanceId = org.apache.bookkeeper.tools.cli.commands.cookie.GenerateCookieCommand$Flags.access$300(cmdFlags);
+ $stack14 = org.apache.commons.lang3.StringUtils.isNotBlank((java.lang.CharSequence)instanceId);
+ if ($stack14==0) goto label4;
+ instanceId = org.apache.bookkeeper.tools.cli.commands.cookie.GenerateCookieCommand$Flags.access$300(cmdFlags);
+ $stack19 = instanceId.split(",");
+ instanceId = org.apache.bookkeeper.bookie.Cookie.encodeDirPaths($stack19);
+ builder.setIndexDirs(instanceId);
+ label4:$stack40 = builder.build();
+ $stack25=new java.io.File;
+ instanceId = org.apache.bookkeeper.tools.cli.commands.cookie.GenerateCookieCommand$Flags.access$400(cmdFlags);
+ $stack25#java.io.File(instanceId);
+ $stack40.writeToFile($stack25);
+ $stack27=this.spec;
+ $stack28 = $stack27.console();
+ $stack29=new java.lang.StringBuilder;
+ $stack29#java.lang.StringBuilder();
+ $stack29 = $stack29.append("Successfully saved the generated cookie to ");
+ instanceId = org.apache.bookkeeper.tools.cli.commands.cookie.GenerateCookieCommand$Flags.access$400(cmdFlags);
+ $stack29 = $stack29.append(instanceId);
+ instanceId = $stack29.toString();
+ dummyClass.lowSink(instanceId);
+$stack28.println(instanceId);
+ return;
+ } 
+

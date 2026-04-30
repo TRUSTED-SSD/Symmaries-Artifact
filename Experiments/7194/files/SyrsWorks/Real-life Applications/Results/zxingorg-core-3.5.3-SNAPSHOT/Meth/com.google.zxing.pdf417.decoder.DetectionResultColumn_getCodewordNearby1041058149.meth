@@ -1,0 +1,33 @@
+com.google.zxing.pdf417.decoder.Codeword com.google.zxing.pdf417.decoder.DetectionResultColumn:getCodewordNearby(int imageRow)
+{
+com.google.zxing.pdf417.decoder.Codeword codeword;
+  int i;
+  int nearImageRow;
+  com.google.zxing.pdf417.decoder.Codeword[] $stack8;
+  int $stack9;
+  codeword = this.getCodeword(imageRow);
+ if (codeword==null) goto label0;
+ return  codeword;
+ label0:i=1;
+ label1:if (i>=5) goto label2;
+ nearImageRow = this.imageRowToCodewordIndex(imageRow);
+ nearImageRow=(nearImageRow-i);
+ if (nearImageRow<0) goto label3;
+ $stack8=this.codewords;
+ codeword=$stack8[nearImageRow];
+ if (codeword==null) goto label3;
+ return  codeword;
+ label3:nearImageRow = this.imageRowToCodewordIndex(imageRow);
+ nearImageRow=(nearImageRow+i);
+ $stack8=this.codewords;
+ $stack9=#$stack8;
+ if (nearImageRow>=$stack9) goto label4;
+ $stack8=this.codewords;
+ codeword=$stack8[nearImageRow];
+ if (codeword==null) goto label4;
+ return  codeword;
+ label4:i=(i+1);
+ goto label1;
+ label2:return  null;
+ } 
+

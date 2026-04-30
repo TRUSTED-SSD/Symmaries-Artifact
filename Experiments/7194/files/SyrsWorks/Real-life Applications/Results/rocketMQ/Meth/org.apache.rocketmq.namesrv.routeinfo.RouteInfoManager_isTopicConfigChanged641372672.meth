@@ -1,0 +1,23 @@
+boolean org.apache.rocketmq.namesrv.routeinfo.RouteInfoManager:isTopicConfigChanged(java.lang.String clusterName,java.lang.String brokerAddr,org.apache.rocketmq.remoting.protocol.DataVersion dataVersion,java.lang.String brokerName,java.lang.String topic)
+{
+boolean isChange;
+  java.util.Map queueDataMap;
+  java.lang.Object $stack10;
+  isChange = this.isBrokerTopicConfigChanged(clusterName,brokerAddr,dataVersion);
+ if (isChange==0) goto label0;
+ return  1;
+ label0:queueDataMap=this.topicQueueTable;
+ $stack10 = queueDataMap.get((java.lang.Object)topic);
+ queueDataMap=(java.util.Map) $stack10;
+ if (queueDataMap==null) goto label1;
+ isChange = queueDataMap.isEmpty();
+ if (isChange==0) goto label2;
+ label1:return  1;
+ label2:isChange = queueDataMap.containsKey((java.lang.Object)brokerName);
+ if (isChange!=0) goto label3;
+ isChange=1;
+ goto label4;
+ label3:isChange=0;
+ label4:return  isChange;
+ } 
+

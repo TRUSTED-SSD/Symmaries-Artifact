@@ -1,0 +1,10 @@
+static boolean org.apache.kerby.kerberos.kerb.preauth.pkinit.PkinitCrypto:verifyKdcSan (
+  java.lang.String @hostname,
+  org.apache.kerby.kerberos.kerb.type.base.PrincipalName kdcPrincipal,
+  java.util.List @certificates) {
+  guard = pc ⊔ level(@certificates) ⊔ level(@hostname) ⊔ obj_level(@certificates) ⊔ obj_level(kdcPrincipal) = ⊥;
+  ret(level()) = ⊥;
+  ret(obj_level(@certificates)) = ⊥;
+  ret(obj_level(@hostname)) = obj_level(@hostname);
+  ret(obj_level(kdcPrincipal)) = ⊥;
+}

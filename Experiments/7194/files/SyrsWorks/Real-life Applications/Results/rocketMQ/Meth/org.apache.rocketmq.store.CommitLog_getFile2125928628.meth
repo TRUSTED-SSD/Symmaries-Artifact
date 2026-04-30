@@ -1,0 +1,38 @@
+org.apache.rocketmq.store.SelectMappedFileResult org.apache.rocketmq.store.CommitLog:getFile(long offset)
+{
+int mappedFileSize;
+  org.apache.rocketmq.store.logfile.MappedFile mappedFile;
+  org.apache.rocketmq.store.DefaultMessageStore $stack6;
+  org.apache.rocketmq.store.config.MessageStoreConfig $stack7;
+  byte $stack9;
+  org.apache.rocketmq.store.MappedFileQueue $stack10;
+  int $stack12;
+  long $stack13;
+  long $stack15;
+  org.apache.rocketmq.store.SelectMappedFileResult $stack18;
+  boolean $stack20;
+  $stack6=this.defaultMessageStore;
+ $stack7 = $stack6.getMessageStoreConfig();
+ mappedFileSize = $stack7.getMappedFileSizeCommitLog();
+ $stack10=this.mappedFileQueue;
+ $stack15=offset;
+ $stack9=(offset cmp 0L);
+ if ($stack9!=0) goto label0;
+ $stack20=1;
+ goto label1;
+ label0:$stack20=0;
+ label1:mappedFile = $stack10.findMappedFileByOffset($stack15,$stack20);
+ if (mappedFile==null) goto label2;
+ $stack12 = mappedFile.getReadPosition();
+ $stack15=(long) $stack12;
+ $stack13=(long) mappedFileSize;
+ offset=(offset%$stack13);
+ offset=($stack15-offset);
+ mappedFileSize=(int) offset;
+ if (mappedFileSize<=0) goto label2;
+ $stack18=new org.apache.rocketmq.store.SelectMappedFileResult;
+ $stack18#org.apache.rocketmq.store.SelectMappedFileResult(mappedFileSize,mappedFile);
+ return  $stack18;
+ label2:return  null;
+ } 
+

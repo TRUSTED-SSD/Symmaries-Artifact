@@ -1,0 +1,26 @@
+java.lang.String org.apache.rocketmq.common.namesrv.DefaultTopAddressing:fetchNSAddr()
+{
+java.util.Iterator l1;
+  org.apache.rocketmq.common.namesrv.TopAddressing topAddressing;
+  java.lang.String nsAddress;
+  java.util.List $stack4;
+  boolean $stack5;
+  java.lang.Object $stack13;
+  $stack4=this.topAddressingList;
+ $stack5 = $stack4.isEmpty();
+ if ($stack5!=0) goto label0;
+ $stack4=this.topAddressingList;
+ l1 = $stack4.iterator();
+ label1:$stack5 = l1.hasNext();
+ if ($stack5==0) goto label0;
+ $stack13 = l1.next();
+ topAddressing=(org.apache.rocketmq.common.namesrv.TopAddressing) $stack13;
+ nsAddress = topAddressing.fetchNSAddr();
+ $stack5 = com.google.common.base.Strings.isNullOrEmpty(nsAddress);
+ if ($stack5!=0) goto label2;
+ return  nsAddress;
+ label2:goto label1;
+ label0:nsAddress = this.fetchNSAddr((boolean)1,3000L);
+ return  nsAddress;
+ } 
+

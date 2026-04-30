@@ -1,0 +1,41 @@
+void org.apache.bookkeeper.bookie.EntryLogCompactor$CompactionScannerFactory$1:process(long ledgerId,long offset,io.netty.buffer.ByteBuf entry)
+{
+long newoffset;
+  org.apache.bookkeeper.bookie.EntryLogCompactor$CompactionScannerFactory $stack10;
+  org.apache.bookkeeper.bookie.EntryLogCompactor $stack11;
+  org.apache.bookkeeper.bookie.AbstractLogCompactor$Throttler $stack12;
+  int $stack13;
+  java.util.List $stack15;
+  int $stack19;
+  org.apache.bookkeeper.bookie.storage.EntryLogger $stack25;
+  org.apache.bookkeeper.bookie.EntryLocation $stack28;
+  $stack10=this.this$1;
+ $stack11=$stack10.this$0;
+ $stack12=$stack11.throttler;
+ $stack13 = entry.readableBytes();
+dummyClass.highSourceMut($stack13);
+ $stack12.acquire($stack13);
+ $stack10=this.this$1;
+ $stack15=$stack10.offsets;
+ $stack13 = $stack15.size();
+ $stack10=this.this$1;
+ $stack11=$stack10.this$0;
+ $stack19 = org.apache.bookkeeper.bookie.EntryLogCompactor.access$000($stack11);
+ if ($stack13<=$stack19) goto label0;
+ $stack10=this.this$1;
+ $stack10.flush();
+ label0:$stack13 = entry.readerIndex();
+ $stack13=($stack13+8);
+ offset = entry.getLong($stack13);
+ $stack10=this.this$1;
+ $stack11=$stack10.this$0;
+ $stack25=$stack11.entryLogger;
+ newoffset = $stack25.addEntry(ledgerId,entry);
+ $stack10=this.this$1;
+ $stack15=$stack10.offsets;
+ $stack28=new org.apache.bookkeeper.bookie.EntryLocation;
+ $stack28#org.apache.bookkeeper.bookie.EntryLocation(ledgerId,offset,newoffset);
+ $stack15.add((java.lang.Object)$stack28);
+ return;
+ } 
+

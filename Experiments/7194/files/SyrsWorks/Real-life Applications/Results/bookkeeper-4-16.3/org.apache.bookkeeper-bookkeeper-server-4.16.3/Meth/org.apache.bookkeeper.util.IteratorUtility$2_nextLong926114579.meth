@@ -1,0 +1,49 @@
+long org.apache.bookkeeper.util.IteratorUtility$2:nextLong()
+{
+java.lang.Object returnEntry;
+  int compareValue;
+  boolean $stack3;
+  java.util.function.ToLongFunction $stack6;
+  long $stack7;
+  java.lang.Object $stack15;
+  java.util.Comparator $stack16;
+  java.util.NoSuchElementException $stack18;
+  $stack3 = this.hasNext();
+ if ($stack3!=0) goto label0;
+ $stack18=new java.util.NoSuchElementException;
+ $stack18#java.util.NoSuchElementException();
+ throw $stack18;
+ label0:returnEntry=null;
+ returnEntry=this.curIter1Entry;
+ if (returnEntry==null) goto label1;
+ returnEntry=this.curIter2Entry;
+ if (returnEntry==null) goto label1;
+ $stack16=this.val$comparator;
+ $stack15=this.curIter1Entry;
+ returnEntry=this.curIter2Entry;
+ compareValue = $stack16.compare($stack15,returnEntry);
+ if (compareValue!=0) goto label2;
+ returnEntry=this.curIter1Entry;
+ this.curIter1Entry=null;
+ this.curIter2Entry=null;
+ goto label3;
+ label2:if (compareValue>=0) goto label4;
+ returnEntry=this.curIter1Entry;
+ this.curIter1Entry=null;
+ goto label3;
+ label4:returnEntry=this.curIter2Entry;
+ this.curIter2Entry=null;
+ label3:goto label5;
+ label1:returnEntry=this.curIter1Entry;
+ if (returnEntry==null) goto label6;
+ returnEntry=this.curIter1Entry;
+ this.curIter1Entry=null;
+ goto label5;
+ label6:returnEntry=this.curIter2Entry;
+ this.curIter2Entry=null;
+ label5:this.hasToPreFetch=1;
+ $stack6=this.val$function;
+ $stack7 = $stack6.applyAsLong(returnEntry);
+ return  $stack7;
+ } 
+

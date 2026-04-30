@@ -1,0 +1,40 @@
+static java.lang.String org.apache.bookkeeper.tools.cli.helpers.CommandHelpers:getBookieSocketAddrStringRepresentation(org.apache.bookkeeper.net.BookieId bookieId,org.apache.bookkeeper.proto.BookieAddressResolver bookieAddressResolver)
+{
+java.lang.Object networkAddress;
+  java.lang.String hostname;
+  java.lang.String ip;
+  java.net.InetAddress ia;
+  boolean $stack9;
+  java.net.InetSocketAddress $stack10;
+  int $stack12;
+  org.apache.bookkeeper.proto.BookieAddressResolver$BookieIdNotResolvedException $stack23;
+  org.apache.bookkeeper.net.BookieSocketAddress tmp$1839852655;
+  label0:networkAddress = bookieAddressResolver.resolve(bookieId);
+ tmp$1839852655=(org.apache.bookkeeper.net.BookieSocketAddress) networkAddress;
+ hostname = tmp$1839852655.getHostName();
+ $stack9 = com.google.common.net.InetAddresses.isInetAddress(hostname);
+ if ($stack9==0) goto label1;
+ ip=hostname;
+ tmp$1839852655=(org.apache.bookkeeper.net.BookieSocketAddress) networkAddress;
+ $stack10 = tmp$1839852655.getSocketAddress();
+ ia = $stack10.getAddress();
+ hostname = ia.getCanonicalHostName();
+ goto label2;
+ label1:tmp$1839852655=(org.apache.bookkeeper.net.BookieSocketAddress) networkAddress;
+ $stack10 = tmp$1839852655.getSocketAddress();
+ ia = $stack10.getAddress();
+ if (null==ia) goto label3;
+ ip = ia.getHostAddress();
+ goto label2;
+ label3:ip="UNKNOWN";
+ label2:tmp$1839852655=(org.apache.bookkeeper.net.BookieSocketAddress) networkAddress;
+ $stack12 = tmp$1839852655.getPort();
+ ip = org.apache.bookkeeper.tools.cli.helpers.CommandHelpers.formatBookieSocketAddress(bookieId,ip,$stack12,hostname);
+ label4:return  ip;
+ label5:$stack23 = catch;
+ networkAddress=$stack23;
+ ip = org.apache.bookkeeper.tools.cli.helpers.CommandHelpers.formatBookieSocketAddress(bookieId,"UNKNOWN",0,"UNKNOWN");
+ return  ip;
+ catch org.apache.bookkeeper.proto.BookieAddressResolver$BookieIdNotResolvedException: label0 - label4 : label5;
+} 
+

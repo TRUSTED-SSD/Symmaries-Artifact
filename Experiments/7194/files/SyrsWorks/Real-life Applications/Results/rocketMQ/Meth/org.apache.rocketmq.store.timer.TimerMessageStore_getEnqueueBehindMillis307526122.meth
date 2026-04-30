@@ -1,0 +1,18 @@
+long org.apache.rocketmq.store.timer.TimerMessageStore:getEnqueueBehindMillis()
+{
+long $stack1;
+  long $stack2;
+  byte $stack4;
+  $stack1 = java.lang.System.currentTimeMillis();
+ $stack2=this.lastEnqueueButExpiredTime;
+ $stack1=($stack1-$stack2);
+ $stack4=($stack1 cmp 2000L);
+ if ($stack4>=0) goto label0;
+ $stack1 = java.lang.System.currentTimeMillis();
+ $stack2=this.lastEnqueueButExpiredStoreTime;
+ $stack1=($stack1-$stack2);
+ $stack1=($stack1/1000L);
+ return  $stack1;
+ label0:return  0L;
+ } 
+

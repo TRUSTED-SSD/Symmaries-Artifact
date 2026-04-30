@@ -1,0 +1,30 @@
+void org.apache.rocketmq.tools.admin.DefaultMQAdminExtImpl:cloneGroupOffset(java.lang.String srcGroup,java.lang.String destGroup,java.lang.String topic,boolean isOffline)
+{
+java.lang.String retryTopic;
+  org.apache.rocketmq.remoting.protocol.route.TopicRouteData topicRouteData;
+  java.util.Iterator l7;
+  org.apache.rocketmq.remoting.protocol.route.BrokerData bd;
+  java.util.List $stack12;
+  boolean $stack14;
+  java.lang.Object $stack15;
+  org.apache.rocketmq.client.impl.factory.MQClientInstance $stack18;
+  org.apache.rocketmq.client.impl.MQClientAPIImpl $stack19;
+  long $stack20;
+  retryTopic = org.apache.rocketmq.common.MixAll.getRetryTopic(srcGroup);
+ topicRouteData = this.examineTopicRouteInfo(retryTopic);
+ $stack12 = topicRouteData.getBrokerDatas();
+ l7 = $stack12.iterator();
+ label0:$stack14 = l7.hasNext();
+ if ($stack14==0) goto label1;
+ $stack15 = l7.next();
+ bd=(org.apache.rocketmq.remoting.protocol.route.BrokerData) $stack15;
+ retryTopic = bd.selectBrokerAddr();
+ if (retryTopic==null) goto label2;
+ $stack18=this.mqClientInstance;
+ $stack19 = $stack18.getMQClientAPIImpl();
+ $stack20=this.timeoutMillis;
+ $stack19.cloneGroupOffset(retryTopic,srcGroup,destGroup,topic,isOffline,$stack20);
+ label2:goto label0;
+ label1:return;
+ } 
+

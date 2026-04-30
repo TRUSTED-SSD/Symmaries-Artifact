@@ -1,0 +1,40 @@
+void org.apache.rocketmq.broker.BrokerController:updateMinBroker(long minBrokerId,java.lang.String minBrokerAddr)
+{
+java.lang.String offlineBrokerAddr;
+  java.lang.Throwable l5;
+  org.apache.rocketmq.common.BrokerConfig $stack6;
+  boolean $stack7;
+  long $stack9;
+  byte $stack10;
+  java.util.concurrent.locks.Lock $stack11;
+  $stack6=this.brokerConfig;
+ $stack7 = $stack6.isEnableSlaveActingMaster();
+ if ($stack7==0) goto label0;
+ $stack6=this.brokerConfig;
+ $stack9 = $stack6.getBrokerId();
+ $stack10=($stack9 cmp 0L);
+ if ($stack10==0) goto label0;
+ $stack11=this.lock;
+ $stack7 = $stack11.tryLock();
+ if ($stack7==0) goto label0;
+ label1:$stack9=this.minBrokerIdInGroup;
+ $stack10=(minBrokerId cmp $stack9);
+ if ($stack10==0) goto label2;
+ offlineBrokerAddr=null;
+ $stack9=this.minBrokerIdInGroup;
+ $stack10=(minBrokerId cmp $stack9);
+ if ($stack10<=0) goto label3;
+ offlineBrokerAddr=this.minBrokerAddrInGroup;
+ label3:this#org.apache.rocketmq.broker.BrokerController:onMinBrokerChange(minBrokerId,minBrokerAddr,offlineBrokerAddr,null);
+ label2:$stack11=this.lock;
+ $stack11.unlock();
+ goto label0;
+ label4:l5 = catch;
+ label5:$stack11=this.lock;
+ $stack11.unlock();
+ throw l5;
+ label0:return;
+ catch java.lang.Throwable: label1 - label2 : label4;
+catch java.lang.Throwable: label4 - label5 : label4;
+} 
+

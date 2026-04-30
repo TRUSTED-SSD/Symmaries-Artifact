@@ -1,0 +1,43 @@
+boolean org.apache.bookkeeper.net.NetworkTopologyImpl:contains(org.apache.bookkeeper.net.Node node)
+{
+org.apache.bookkeeper.net.Node parent;
+  int level;
+  boolean l4;
+  java.lang.Throwable l5;
+  java.util.concurrent.locks.ReadWriteLock $stack6;
+  java.util.concurrent.locks.Lock $stack7;
+  org.apache.bookkeeper.net.NetworkTopologyImpl$InnerNode $stack13;
+  if (node!=null) goto label0;
+ return  0;
+ label0:$stack6=this.netlock;
+ $stack7 = $stack6.readLock();
+ $stack7.lock();
+ label1:parent = node.getParent();
+ level = node.getLevel();
+ label2:if (parent==null) goto label3;
+ if (level<=0) goto label3;
+ $stack13=this.clusterMap;
+ if (parent!=$stack13) goto label4;
+ l4=1;
+ label5:$stack6=this.netlock;
+ $stack7 = $stack6.readLock();
+ $stack7.unlock();
+ return  1;
+ label4:parent = parent.getParent();
+ level=(level+-1);
+ goto label2;
+ label3:$stack6=this.netlock;
+ $stack7 = $stack6.readLock();
+ $stack7.unlock();
+ goto label6;
+ label7:l5 = catch;
+ label8:$stack6=this.netlock;
+ $stack7 = $stack6.readLock();
+ $stack7.unlock();
+ throw l5;
+ label6:return  0;
+ catch java.lang.Throwable: label1 - label5 : label7;
+catch java.lang.Throwable: label4 - label3 : label7;
+catch java.lang.Throwable: label7 - label8 : label7;
+} 
+

@@ -1,0 +1,30 @@
+void org.apache.rocketmq.broker.out.BrokerOuterAPI:unregisterBrokerAll(java.lang.String clusterName,java.lang.String brokerAddr,java.lang.String brokerName,long brokerId)
+{
+java.util.List nameServerAddressList;
+  java.util.Iterator l7;
+  java.lang.String namesrvAddr;
+  org.apache.rocketmq.remoting.RemotingClient $stack10;
+  boolean $stack13;
+  java.lang.Object $stack14;
+  org.apache.rocketmq.logging.org.slf4j.Logger $stack15;
+  java.lang.Exception $stack17;
+  $stack10=this.remotingClient;
+ nameServerAddressList = $stack10.getNameServerAddressList();
+ if (nameServerAddressList==null) goto label0;
+ l7 = nameServerAddressList.iterator();
+ label1:$stack13 = l7.hasNext();
+ if ($stack13==0) goto label0;
+ $stack14 = l7.next();
+ namesrvAddr=(java.lang.String) $stack14;
+ label2:this.unregisterBroker(namesrvAddr,clusterName,brokerAddr,brokerName,brokerId);
+ $stack15=org.apache.rocketmq.broker.out.BrokerOuterAPI.LOGGER;
+ $stack15.info("unregisterBroker OK, NamesrvAddr: {}",(java.lang.Object)namesrvAddr);
+ label3:goto label4;
+ label5:$stack17 = catch;
+ $stack15=org.apache.rocketmq.broker.out.BrokerOuterAPI.LOGGER;
+ $stack15.warn("unregisterBroker Exception, NamesrvAddr: {}",(java.lang.Object)namesrvAddr,(java.lang.Object)$stack17);
+ label4:goto label1;
+ label0:return;
+ catch java.lang.Exception: label2 - label3 : label5;
+} 
+

@@ -1,0 +1,23 @@
+void org.apache.rocketmq.tieredstore.TieredMessageStore:destroy()
+{
+org.apache.rocketmq.store.MessageStore $stack2;
+  org.apache.rocketmq.tieredstore.common.TieredMessageStoreConfig $stack3;
+  org.apache.rocketmq.tieredstore.container.TieredContainerManager $stack4;
+  org.apache.rocketmq.tieredstore.metadata.TieredMetadataStore $stack5;
+  java.lang.Exception $stack6;
+  org.apache.rocketmq.logging.org.slf4j.Logger $stack7;
+  $stack2=this.next;
+ $stack2.destroy();
+ $stack3=this.storeConfig;
+ $stack4 = org.apache.rocketmq.tieredstore.container.TieredContainerManager.getInstance($stack3);
+ $stack4#org.apache.rocketmq.tieredstore.container.TieredContainerManager();
+ label0:$stack5=this.metadataStore;
+ $stack5.destroy();
+ label1:goto label2;
+ label3:$stack6 = catch;
+ $stack7=org.apache.rocketmq.tieredstore.TieredMessageStore.logger;
+ $stack7.error("TieredMessageStore#destroy: destroy metadata store failed",(java.lang.Throwable)$stack6);
+ label2:return;
+ catch java.lang.Exception: label0 - label1 : label3;
+} 
+

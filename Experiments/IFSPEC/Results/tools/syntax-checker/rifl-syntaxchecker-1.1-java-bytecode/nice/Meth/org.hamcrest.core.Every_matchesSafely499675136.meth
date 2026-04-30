@@ -1,0 +1,21 @@
+boolean org.hamcrest.core.Every:matchesSafely(java.lang.Iterable collection,org.hamcrest.Description mismatchDescription)
+{
+java.util.Iterator i$;
+  java.lang.Object t;
+  boolean $stack6;
+  org.hamcrest.Matcher $stack8;
+  i$ = collection.iterator();
+ label0:$stack6 = i$.hasNext();
+ if ($stack6==0) goto label1;
+ t = i$.next();
+ $stack8=this.matcher;
+ $stack6 = $stack8.matches(t);
+ if ($stack6!=0) goto label2;
+ mismatchDescription.appendText("an item ");
+ $stack8=this.matcher;
+ $stack8.describeMismatch(t,mismatchDescription);
+ return  0;
+ label2:goto label0;
+ label1:return  1;
+ } 
+

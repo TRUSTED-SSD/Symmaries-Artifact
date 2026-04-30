@@ -1,0 +1,68 @@
+org.apache.rocketmq.remoting.protocol.body.BrokerMemberGroup org.apache.rocketmq.broker.out.BrokerOuterAPI:getBrokerMemberGroupCompatible(java.lang.String clusterName,java.lang.String brokerName)
+{
+org.apache.rocketmq.remoting.protocol.body.BrokerMemberGroup brokerMemberGroup;
+  org.apache.rocketmq.remoting.protocol.header.namesrv.GetRouteInfoRequestHeader requestHeader;
+  org.apache.rocketmq.remoting.protocol.RemotingCommand request;
+  byte[] body;
+  org.apache.rocketmq.remoting.protocol.route.TopicRouteData topicRouteData;
+  java.util.Iterator l9;
+  org.apache.rocketmq.remoting.protocol.route.BrokerData brokerData;
+  java.lang.StringBuilder $stack13;
+  java.lang.String $stack16;
+  org.apache.rocketmq.remoting.RemotingClient $stack18;
+  boolean $stack20;
+  int $stack21;
+  java.lang.Object $stack23;
+  java.util.List $stack24;
+  java.util.Map $stack33;
+  java.util.HashMap $stack34;
+  java.lang.AssertionError $stack38;
+  brokerMemberGroup=new org.apache.rocketmq.remoting.protocol.body.BrokerMemberGroup;
+ brokerMemberGroup#org.apache.rocketmq.remoting.protocol.body.BrokerMemberGroup(clusterName,brokerName);
+ requestHeader=new org.apache.rocketmq.remoting.protocol.header.namesrv.GetRouteInfoRequestHeader;
+ requestHeader#org.apache.rocketmq.remoting.protocol.header.namesrv.GetRouteInfoRequestHeader();
+ $stack13=new java.lang.StringBuilder;
+ $stack13#java.lang.StringBuilder();
+ $stack13 = $stack13.append("rmq_sys_SYNC_BROKER_MEMBER_");
+ $stack13 = $stack13.append(brokerName);
+ $stack16 = $stack13.toString();
+ requestHeader.setTopic($stack16);
+ request = org.apache.rocketmq.remoting.protocol.RemotingCommand.createRequestCommand(105,(org.apache.rocketmq.remoting.CommandCustomHeader)requestHeader);
+ $stack18=this.remotingClient;
+ request = $stack18.invokeSync(null,request,3000L);
+ $stack20=org.apache.rocketmq.broker.out.BrokerOuterAPI.$assertionsDisabled;
+ if ($stack20!=0) goto label0;
+ if (request!=null) goto label0;
+ $stack38=new java.lang.AssertionError;
+ $stack38#java.lang.AssertionError();
+ throw $stack38;
+ label0:$stack21 = request.getCode();
+ switch [$stack21]
+if 0 goto label1;
+goto label2;
+ label1:body = request.getBody();
+ if (body==null) goto label2;
+ $stack23 = org.apache.rocketmq.remoting.protocol.RemotingSerializable.decode(body,org.apache.rocketmq.remoting.protocol.route.TopicRouteData);
+ topicRouteData=(org.apache.rocketmq.remoting.protocol.route.TopicRouteData) $stack23;
+ $stack24 = topicRouteData.getBrokerDatas();
+ l9 = $stack24.iterator();
+ label3:$stack20 = l9.hasNext();
+ if ($stack20==0) goto label4;
+ $stack23 = l9.next();
+ brokerData=(org.apache.rocketmq.remoting.protocol.route.BrokerData) $stack23;
+ if (brokerData==null) goto label5;
+ $stack16 = brokerData.getBrokerName();
+ $stack20 = $stack16.equals((java.lang.Object)brokerName);
+ if ($stack20==0) goto label5;
+ $stack16 = brokerData.getCluster();
+ $stack20 = $stack16.equals((java.lang.Object)clusterName);
+ if ($stack20==0) goto label5;
+ $stack33 = brokerMemberGroup.getBrokerAddrs();
+ $stack34 = brokerData.getBrokerAddrs();
+ $stack33.putAll((java.util.Map)$stack34);
+ goto label4;
+ label5:goto label3;
+ label4:return  brokerMemberGroup;
+ label2:return  brokerMemberGroup;
+ } 
+

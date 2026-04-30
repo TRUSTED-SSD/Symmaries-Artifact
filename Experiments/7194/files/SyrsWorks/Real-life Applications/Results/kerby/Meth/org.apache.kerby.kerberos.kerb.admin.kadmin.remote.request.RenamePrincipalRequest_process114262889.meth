@@ -1,0 +1,57 @@
+void org.apache.kerby.kerberos.kerb.admin.kadmin.remote.request.RenamePrincipalRequest:process()
+{
+org.apache.kerby.kerberos.kerb.admin.message.RenamePrincipalReq renamePrincipalReq;
+  byte paramNum;
+  org.apache.kerby.xdr.XdrFieldInfo[] xdrFieldInfos;
+  org.apache.kerby.kerberos.kerb.admin.message.AdminMessageCode value;
+  byte[] encodeBytes;
+  java.nio.ByteBuffer e;
+  int $stack8;
+  org.apache.kerby.xdr.XdrFieldInfo $stack9;
+  org.apache.kerby.kerberos.kerb.admin.message.AdminMessageType $stack10;
+  org.apache.kerby.xdr.XdrDataType $stack11;
+  java.lang.Integer $stack17;
+  java.lang.String $stack22;
+  java.io.IOException $stack30;
+  org.apache.kerby.kerberos.kerb.KrbException $stack31;
+  this#org.apache.kerby.kerberos.kerb.admin.kadmin.remote.request.AdminRequest();
+ renamePrincipalReq=new org.apache.kerby.kerberos.kerb.admin.message.RenamePrincipalReq;
+ renamePrincipalReq#org.apache.kerby.kerberos.kerb.admin.message.RenamePrincipalReq();
+ paramNum=2;
+ $stack8=(2+2);
+ xdrFieldInfos=new org.apache.kerby.xdr.XdrFieldInfo[$stack8];
+ $stack9=new org.apache.kerby.xdr.XdrFieldInfo;
+ $stack11=org.apache.kerby.xdr.XdrDataType.ENUM;
+ $stack10=org.apache.kerby.kerberos.kerb.admin.message.AdminMessageType.RENAME_PRINCIPAL_REQ;
+ $stack9#org.apache.kerby.xdr.XdrFieldInfo(0,$stack11,(java.lang.Object)$stack10);
+ xdrFieldInfos[0]=$stack9;
+ $stack9=new org.apache.kerby.xdr.XdrFieldInfo;
+ $stack11=org.apache.kerby.xdr.XdrDataType.INTEGER;
+ $stack17 = java.lang.Integer.valueOf(2);
+ $stack9#org.apache.kerby.xdr.XdrFieldInfo(1,$stack11,(java.lang.Object)$stack17);
+ xdrFieldInfos[1]=$stack9;
+ $stack9=new org.apache.kerby.xdr.XdrFieldInfo;
+ $stack11=org.apache.kerby.xdr.XdrDataType.STRING;
+ $stack22 = this.getPrincipal();
+ $stack9#org.apache.kerby.xdr.XdrFieldInfo(2,$stack11,(java.lang.Object)$stack22);
+ xdrFieldInfos[2]=$stack9;
+ $stack9=new org.apache.kerby.xdr.XdrFieldInfo;
+ $stack11=org.apache.kerby.xdr.XdrDataType.STRING;
+ $stack22=this.newPrincipalName;
+ $stack9#org.apache.kerby.xdr.XdrFieldInfo(3,$stack11,(java.lang.Object)$stack22);
+ xdrFieldInfos[3]=$stack9;
+ value=new org.apache.kerby.kerberos.kerb.admin.message.AdminMessageCode;
+ value#org.apache.kerby.kerberos.kerb.admin.message.AdminMessageCode(xdrFieldInfos);
+ label0:encodeBytes = value.encode();
+ label1:goto label2;
+ label3:$stack30 = catch;
+ $stack31=new org.apache.kerby.kerberos.kerb.KrbException;
+ $stack31#org.apache.kerby.kerberos.kerb.KrbException("Xdr encode error when generate rename principal request.",(java.lang.Throwable)$stack30);
+ throw $stack31;
+ label2:e = java.nio.ByteBuffer.wrap(encodeBytes);
+ renamePrincipalReq.setMessageBuffer(e);
+ this.setAdminReq((org.apache.kerby.kerberos.kerb.admin.message.AdminReq)renamePrincipalReq);
+ return;
+ catch java.io.IOException: label0 - label1 : label3;
+} 
+

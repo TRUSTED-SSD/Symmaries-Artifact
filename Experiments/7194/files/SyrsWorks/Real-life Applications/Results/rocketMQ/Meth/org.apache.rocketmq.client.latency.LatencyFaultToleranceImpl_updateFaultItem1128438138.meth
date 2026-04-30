@@ -1,0 +1,32 @@
+void org.apache.rocketmq.client.latency.LatencyFaultToleranceImpl:updateFaultItem(java.lang.String name,long currentLatency,long notAvailableDuration)
+{
+org.apache.rocketmq.client.latency.LatencyFaultToleranceImpl$FaultItem old;
+  java.util.concurrent.ConcurrentHashMap $stack8;
+  java.lang.Object $stack9;
+  long $stack13;
+  $stack8=this.faultItemTable;
+ $stack9 = $stack8.get((java.lang.Object)name);
+ old=(org.apache.rocketmq.client.latency.LatencyFaultToleranceImpl$FaultItem) $stack9;
+ if (null!=old) goto label0;
+ old=new org.apache.rocketmq.client.latency.LatencyFaultToleranceImpl$FaultItem;
+ old#org.apache.rocketmq.client.latency.LatencyFaultToleranceImpl$FaultItem(this,name);
+ old.setCurrentLatency(currentLatency);
+ $stack13 = java.lang.System.currentTimeMillis();
+ $stack13=($stack13+notAvailableDuration);
+ old.setStartTimestamp($stack13);
+ $stack8=this.faultItemTable;
+ $stack9 = $stack8.putIfAbsent((java.lang.Object)name,(java.lang.Object)old);
+ old=(org.apache.rocketmq.client.latency.LatencyFaultToleranceImpl$FaultItem) $stack9;
+ if (old==null) goto label1;
+ old.setCurrentLatency(currentLatency);
+ currentLatency = java.lang.System.currentTimeMillis();
+ currentLatency=(currentLatency+notAvailableDuration);
+ old.setStartTimestamp(currentLatency);
+ label1:goto label2;
+ label0:old.setCurrentLatency(currentLatency);
+ currentLatency = java.lang.System.currentTimeMillis();
+ currentLatency=(currentLatency+notAvailableDuration);
+ old.setStartTimestamp(currentLatency);
+ label2:return;
+ } 
+

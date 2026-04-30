@@ -1,0 +1,76 @@
+    public void filter(org.junit.runner.manipulation.Filter) throws org.junit.runner.manipulation.NoTestsRemainException
+    {
+        org.junit.internal.runners.JUnit4ClassRunner this;
+        org.junit.runner.manipulation.Filter filter;
+        java.util.Iterator iter;
+        java.lang.reflect.Method method;
+        java.util.List $stack4;
+        boolean $stack6;
+        org.junit.runner.manipulation.NoTestsRemainException $stack9;
+        java.lang.Object $stack10;
+        org.junit.runner.Description $stack11;
+
+        this := @this: org.junit.internal.runners.JUnit4ClassRunner;
+
+        filter := @parameter0: org.junit.runner.manipulation.Filter;
+
+        $stack4 = this.<org.junit.internal.runners.JUnit4ClassRunner: java.util.List testMethods>;
+/*125*/
+
+        iter = interfaceinvoke $stack4.<java.util.List: java.util.Iterator iterator()>();
+/*125*/
+/*125*/
+
+     label1:
+        $stack6 = interfaceinvoke iter.<java.util.Iterator: boolean hasNext()>();
+/*125*/
+
+        if $stack6 == 0 goto label3;
+/*125*/
+
+        $stack10 = interfaceinvoke iter.<java.util.Iterator: java.lang.Object next()>();
+/*126*/
+
+        method = (java.lang.reflect.Method) $stack10;
+/*126*/
+
+        $stack11 = virtualinvoke this.<org.junit.internal.runners.JUnit4ClassRunner: org.junit.runner.Description methodDescription(java.lang.reflect.Method)>(method);
+/*127*/
+
+        $stack6 = virtualinvoke filter.<org.junit.runner.manipulation.Filter: boolean shouldRun(org.junit.runner.Description)>($stack11);
+/*127*/
+
+        if $stack6 != 0 goto label2;
+/*127*/
+
+        interfaceinvoke iter.<java.util.Iterator: void remove()>();
+/*128*/
+
+     label2:
+        goto label1;
+/*130*/
+
+     label3:
+        $stack4 = this.<org.junit.internal.runners.JUnit4ClassRunner: java.util.List testMethods>;
+/*131*/
+
+        $stack6 = interfaceinvoke $stack4.<java.util.List: boolean isEmpty()>();
+/*131*/
+
+        if $stack6 == 0 goto label4;
+/*131*/
+
+        $stack9 = new org.junit.runner.manipulation.NoTestsRemainException;
+/*132*/
+
+        specialinvoke $stack9.<org.junit.runner.manipulation.NoTestsRemainException: void <init>()>();
+/*132*/
+
+        throw $stack9;
+/*132*/
+
+     label4:
+        return;
+/*134*/
+    }
+

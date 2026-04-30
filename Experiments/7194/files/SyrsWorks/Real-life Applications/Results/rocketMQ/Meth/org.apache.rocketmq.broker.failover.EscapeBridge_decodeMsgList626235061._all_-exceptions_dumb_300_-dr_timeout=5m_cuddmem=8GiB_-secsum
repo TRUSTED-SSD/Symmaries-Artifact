@@ -1,0 +1,9 @@
+java.util.List org.apache.rocketmq.broker.failover.EscapeBridge:decodeMsgList (
+  org.apache.rocketmq.store.GetMessageResult getMessageResult,
+  boolean deCompressBody) {
+  guard = tt;
+  ret(level()) = ⊥;
+  ret(obj_level()) = level(deCompressBody) ⊔ level(getMessageResult) ⊔ obj_level(getMessageResult);
+  ret(obj_level(getMessageResult)) = level(deCompressBody) ⊔ level(getMessageResult) ⊔ obj_level(getMessageResult);
+  ret(obj_level(this)) = level(deCompressBody) ⊔ level(getMessageResult) ⊔ obj_level(getMessageResult) ⊔ obj_level(this);
+}

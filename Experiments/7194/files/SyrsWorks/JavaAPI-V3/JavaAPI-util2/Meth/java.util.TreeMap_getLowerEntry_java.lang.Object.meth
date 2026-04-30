@@ -1,0 +1,37 @@
+java.util.TreeMap$Entry java.util.TreeMap:getLowerEntry(java.lang.Object r1)
+{
+int i0;
+  java.lang.Object $r2;
+  java.util.TreeMap$Entry $r3;
+  java.util.TreeMap$Entry $r4;
+  java.util.TreeMap$Entry $r5;
+  java.util.TreeMap$Entry r6;
+  java.util.TreeMap$Entry r7;
+  java.util.TreeMap$Entry r8;
+  r6=this.root;
+ label0:if (r6==null) goto label1;
+ $r2=r6.key;
+ i0 = this.compare(r1,$r2);
+ if (i0<=0) goto label2;
+ $r5=r6.right;
+ if ($r5==null) goto label3;
+ r6=r6.right;
+ goto label4;
+ label3:return  r6;
+ label2:$r3=r6.left;
+ if ($r3==null) goto label5;
+ r6=r6.left;
+ goto label4;
+ label5:r7=r6.parent;
+ r8=r6;
+ label6:if (r7==null) goto label7;
+ $r4=r7.left;
+ if (r8!=$r4) goto label7;
+ r8=r7;
+ r7=r7.parent;
+ goto label6;
+ label7:return  r7;
+ label4:goto label0;
+ label1:return  null;
+ }  
+

@@ -1,0 +1,25 @@
+org.keycloak.common.profile.ProfileConfigResolver$FeatureConfig org.keycloak.common.profile.CommaSeparatedListProfileConfigResolver:getFeatureConfig(org.keycloak.common.Profile$Feature feature)
+{
+java.lang.String key;
+  java.util.Set $stack4;
+  org.keycloak.common.profile.ProfileConfigResolver$FeatureConfig $stack6;
+  boolean $stack8;
+  key = feature.getKey();
+ $stack4=this.enabledFeatures;
+ if ($stack4==null) goto label0;
+ $stack4=this.enabledFeatures;
+ $stack8 = $stack4.contains((java.lang.Object)key);
+ if ($stack8==0) goto label0;
+ $stack6=org.keycloak.common.profile.ProfileConfigResolver$FeatureConfig.ENABLED;
+ return  $stack6;
+ label0:$stack4=this.disabledFeatures;
+ if ($stack4==null) goto label1;
+ $stack4=this.disabledFeatures;
+ $stack8 = $stack4.contains((java.lang.Object)key);
+ if ($stack8==0) goto label1;
+ $stack6=org.keycloak.common.profile.ProfileConfigResolver$FeatureConfig.DISABLED;
+ return  $stack6;
+ label1:$stack6=org.keycloak.common.profile.ProfileConfigResolver$FeatureConfig.UNCONFIGURED;
+ return  $stack6;
+ } 
+

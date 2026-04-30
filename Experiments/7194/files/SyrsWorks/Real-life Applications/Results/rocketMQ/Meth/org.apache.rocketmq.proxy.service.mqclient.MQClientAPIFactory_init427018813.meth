@@ -1,0 +1,20 @@
+void org.apache.rocketmq.proxy.service.mqclient.MQClientAPIFactory:init()
+{
+org.apache.rocketmq.proxy.config.ProxyConfig proxyConfig;
+  java.lang.String $stack2;
+  boolean $stack5;
+  java.lang.System.setProperty("com.rocketmq.sendMessageWithVIPChannel","false");
+ proxyConfig = org.apache.rocketmq.proxy.config.ConfigurationManager.getProxyConfig();
+ $stack2 = proxyConfig.getNamesrvDomain();
+ $stack5 = org.apache.commons.lang3.StringUtils.isEmpty((java.lang.CharSequence)$stack2);
+ if ($stack5==0) goto label0;
+ $stack2 = proxyConfig.getNamesrvAddr();
+ java.lang.System.setProperty("rocketmq.namesrv.addr",$stack2);
+ goto label1;
+ label0:$stack2 = proxyConfig.getNamesrvDomain();
+ java.lang.System.setProperty("rocketmq.namesrv.domain",$stack2);
+ $stack2 = proxyConfig.getNamesrvDomainSubgroup();
+ java.lang.System.setProperty("rocketmq.namesrv.domain.subgroup",$stack2);
+ label1:return;
+ } 
+

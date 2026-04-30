@@ -1,0 +1,49 @@
+long org.apache.bookkeeper.util.IteratorUtility$1:nextLong()
+{
+long returnEntryId;
+  boolean $stack3;
+  byte $stack5;
+  long $stack16;
+  java.util.NoSuchElementException $stack21;
+  $stack3 = this.hasNext();
+ if ($stack3!=0) goto label0;
+ $stack21=new java.util.NoSuchElementException;
+ $stack21#java.util.NoSuchElementException();
+ throw $stack21;
+ label0:returnEntryId=-1L;
+ returnEntryId=this.curIter1Element;
+ $stack5=(returnEntryId cmp -1L);
+ if ($stack5==0) goto label1;
+ returnEntryId=this.curIter2Element;
+ $stack5=(returnEntryId cmp -1L);
+ if ($stack5==0) goto label1;
+ $stack16=this.curIter1Element;
+ returnEntryId=this.curIter2Element;
+ $stack5=($stack16 cmp returnEntryId);
+ if ($stack5!=0) goto label2;
+ returnEntryId=this.curIter1Element;
+ this.curIter1Element=-1L;
+ this.curIter2Element=-1L;
+ goto label3;
+ label2:$stack16=this.curIter1Element;
+ returnEntryId=this.curIter2Element;
+ $stack5=($stack16 cmp returnEntryId);
+ if ($stack5>=0) goto label4;
+ returnEntryId=this.curIter1Element;
+ this.curIter1Element=-1L;
+ goto label3;
+ label4:returnEntryId=this.curIter2Element;
+ this.curIter2Element=-1L;
+ goto label3;
+ label1:returnEntryId=this.curIter1Element;
+ $stack5=(returnEntryId cmp -1L);
+ if ($stack5==0) goto label5;
+ returnEntryId=this.curIter1Element;
+ this.curIter1Element=-1L;
+ goto label3;
+ label5:returnEntryId=this.curIter2Element;
+ this.curIter2Element=-1L;
+ label3:this.hasToPreFetch=1;
+ return  returnEntryId;
+ } 
+

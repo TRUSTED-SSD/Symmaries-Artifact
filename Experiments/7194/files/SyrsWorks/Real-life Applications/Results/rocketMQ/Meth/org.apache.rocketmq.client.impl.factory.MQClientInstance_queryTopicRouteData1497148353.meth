@@ -1,0 +1,10 @@
+org.apache.rocketmq.remoting.protocol.route.TopicRouteData org.apache.rocketmq.client.impl.factory.MQClientInstance:queryTopicRouteData(java.lang.String topic)
+{
+org.apache.rocketmq.remoting.protocol.route.TopicRouteData data;
+  data = this.getAnExistTopicRouteData(topic);
+ if (data!=null) goto label0;
+ this.updateTopicRouteInfoFromNameServer(topic);
+ data = this.getAnExistTopicRouteData(topic);
+ label0:return  data;
+ } 
+

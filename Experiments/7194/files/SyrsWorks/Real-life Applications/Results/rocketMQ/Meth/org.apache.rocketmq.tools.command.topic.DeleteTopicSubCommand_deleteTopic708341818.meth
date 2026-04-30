@@ -1,0 +1,33 @@
+static void org.apache.rocketmq.tools.command.topic.DeleteTopicSubCommand:deleteTopic(org.apache.rocketmq.tools.admin.DefaultMQAdminExt adminExt,java.lang.String clusterName,java.lang.String topic)
+{
+java.util.Set masterBrokerAddressSet;
+  java.util.HashSet nameServerSet;
+  java.lang.String[] ns;
+  java.lang.Object[] $stack7;
+  java.io.PrintStream $stack8;
+  java.lang.String $stack10;
+  java.util.List $stack18;
+  masterBrokerAddressSet = org.apache.rocketmq.tools.command.CommandUtil.fetchMasterAddrByClusterName((org.apache.rocketmq.tools.admin.MQAdminExt)adminExt,clusterName);
+ adminExt.deleteTopicInBroker(masterBrokerAddressSet,topic);
+ $stack8=java.lang.System.out;
+ $stack7=new java.lang.Object[2];
+ $stack7[0]=topic;
+ $stack7[1]=clusterName;
+ $stack8.printf("delete topic [%s] from cluster [%s] success.%n",$stack7);
+ nameServerSet=null;
+ $stack10 = adminExt.getNamesrvAddr();
+ if ($stack10==null) goto label0;
+ $stack10 = adminExt.getNamesrvAddr();
+ $stack10 = $stack10.trim();
+ ns = $stack10.split(";");
+ nameServerSet=new java.util.HashSet;
+ $stack18 = java.util.Arrays.asList((java.lang.Object[])ns);
+ nameServerSet#java.util.HashSet((java.util.Collection)$stack18);
+ label0:adminExt.deleteTopicInNameServer((java.util.Set)nameServerSet,clusterName,topic);
+ $stack8=java.lang.System.out;
+ $stack7=new java.lang.Object[1];
+ $stack7[0]=topic;
+ $stack8.printf("delete topic [%s] from NameServer success.%n",$stack7);
+ return;
+ } 
+

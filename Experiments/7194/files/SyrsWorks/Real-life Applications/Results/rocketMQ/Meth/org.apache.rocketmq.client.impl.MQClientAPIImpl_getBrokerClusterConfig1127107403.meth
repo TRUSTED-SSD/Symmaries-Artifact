@@ -1,0 +1,50 @@
+org.apache.rocketmq.common.AclConfig org.apache.rocketmq.client.impl.MQClientAPIImpl:getBrokerClusterConfig(java.lang.String addr,long timeoutMillis)
+{
+org.apache.rocketmq.remoting.protocol.RemotingCommand request;
+  org.apache.rocketmq.remoting.protocol.header.GetBrokerClusterAclConfigResponseBody body;
+  org.apache.rocketmq.common.AclConfig aclConfig;
+  org.apache.rocketmq.client.ClientConfig $stack9;
+  org.apache.rocketmq.remoting.RemotingClient $stack10;
+  boolean $stack11;
+  java.lang.String $stack12;
+  int $stack15;
+  byte[] $stack16;
+  org.apache.rocketmq.client.exception.MQBrokerException $stack17;
+  java.lang.Object $stack21;
+  java.util.List $stack23;
+  java.lang.AssertionError $stack29;
+  request = org.apache.rocketmq.remoting.protocol.RemotingCommand.createRequestCommand(54,null);
+ $stack10=this.remotingClient;
+ $stack9=this.clientConfig;
+ $stack11 = $stack9.isVipChannelEnabled();
+ $stack12 = org.apache.rocketmq.common.MixAll.brokerVIPChannel($stack11,addr);
+ request = $stack10.invokeSync($stack12,request,timeoutMillis);
+ $stack11=org.apache.rocketmq.client.impl.MQClientAPIImpl.$assertionsDisabled;
+ if ($stack11!=0) goto label0;
+ if (request!=null) goto label0;
+ $stack29=new java.lang.AssertionError;
+ $stack29#java.lang.AssertionError();
+ throw $stack29;
+ label0:$stack15 = request.getCode();
+ switch [$stack15]
+if 0 goto label1;
+goto label2;
+ label1:$stack16 = request.getBody();
+ if ($stack16==null) goto label2;
+ $stack16 = request.getBody();
+ $stack21 = org.apache.rocketmq.remoting.protocol.RemotingSerializable.decode($stack16,org.apache.rocketmq.remoting.protocol.header.GetBrokerClusterAclConfigResponseBody);
+ body=(org.apache.rocketmq.remoting.protocol.header.GetBrokerClusterAclConfigResponseBody) $stack21;
+ aclConfig=new org.apache.rocketmq.common.AclConfig;
+ aclConfig#org.apache.rocketmq.common.AclConfig();
+ $stack23 = body.getGlobalWhiteAddrs();
+ aclConfig.setGlobalWhiteAddrs($stack23);
+ $stack23 = body.getPlainAccessConfigs();
+ aclConfig.setPlainAccessConfigs($stack23);
+ return  aclConfig;
+ label2:$stack17=new org.apache.rocketmq.client.exception.MQBrokerException;
+ $stack15 = request.getCode();
+ $stack12 = request.getRemark();
+ $stack17#org.apache.rocketmq.client.exception.MQBrokerException($stack15,$stack12,addr);
+ throw $stack17;
+ } 
+

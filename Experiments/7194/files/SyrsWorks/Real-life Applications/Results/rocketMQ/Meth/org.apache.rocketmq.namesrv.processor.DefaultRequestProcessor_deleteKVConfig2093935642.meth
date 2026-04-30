@@ -1,0 +1,22 @@
+org.apache.rocketmq.remoting.protocol.RemotingCommand org.apache.rocketmq.namesrv.processor.DefaultRequestProcessor:deleteKVConfig(io.netty.channel.ChannelHandlerContext ctx,org.apache.rocketmq.remoting.protocol.RemotingCommand request)
+{
+org.apache.rocketmq.remoting.protocol.RemotingCommand response;
+  org.apache.rocketmq.remoting.protocol.header.namesrv.DeleteKVConfigRequestHeader requestHeader;
+  org.apache.rocketmq.remoting.CommandCustomHeader $stack6;
+  org.apache.rocketmq.namesrv.NamesrvController $stack7;
+  org.apache.rocketmq.namesrv.kvconfig.KVConfigManager $stack8;
+  java.lang.String $stack9;
+  java.lang.String $stack10;
+  response = org.apache.rocketmq.remoting.protocol.RemotingCommand.createResponseCommand(null);
+ $stack6 = request.decodeCommandCustomHeader(org.apache.rocketmq.remoting.protocol.header.namesrv.DeleteKVConfigRequestHeader);
+ requestHeader=(org.apache.rocketmq.remoting.protocol.header.namesrv.DeleteKVConfigRequestHeader) $stack6;
+ $stack7=this.namesrvController;
+ $stack8 = $stack7.getKvConfigManager();
+ $stack9 = requestHeader.getNamespace();
+ $stack10 = requestHeader.getKey();
+ $stack8.deleteKVConfig($stack9,$stack10);
+ response.setCode(0);
+ response.setRemark(null);
+ return  response;
+ } 
+

@@ -1,0 +1,35 @@
+void org.apache.rocketmq.store.MappedFileQueue:cleanSwappedMap(long forceCleanSwapIntervalMs)
+{
+java.lang.Object[] mfs;
+  int i;
+  org.apache.rocketmq.store.logfile.MappedFile mappedFile;
+  java.util.concurrent.CopyOnWriteArrayList $stack7;
+  boolean $stack8;
+  java.lang.Object $stack12;
+  long $stack13;
+  long $stack14;
+  byte $stack16;
+  $stack7=this.mappedFiles;
+ $stack8 = $stack7.isEmpty();
+ if ($stack8==0) goto label0;
+ return;
+ label0:mfs = this.copyMappedFiles(0);
+ if (null!=mfs) goto label1;
+ return;
+ label1:i=#mfs;
+ i=(i-3);
+ i=(i-1);
+ label2:if (i<0) goto label3;
+ $stack12=mfs[i];
+ mappedFile=(org.apache.rocketmq.store.logfile.MappedFile) $stack12;
+ $stack13 = java.lang.System.currentTimeMillis();
+ $stack14 = mappedFile.getRecentSwapMapTime();
+ $stack13=($stack13-$stack14);
+ $stack16=($stack13 cmp forceCleanSwapIntervalMs);
+ if ($stack16<=0) goto label4;
+ mappedFile.cleanSwapedMap((boolean)0);
+ label4:i=(i+-1);
+ goto label2;
+ label3:return;
+ } 
+

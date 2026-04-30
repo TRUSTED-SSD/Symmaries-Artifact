@@ -1,0 +1,29 @@
+static byte[] org.keycloak.common.util.Base64:encodeBytesToBytes(byte[] source)
+{
+byte[] encoded;
+  int $stack3;
+  java.io.IOException $stack5;
+  boolean $stack6;
+  java.lang.AssertionError $stack8;
+  java.lang.StringBuilder $stack9;
+  java.lang.String $stack11;
+  encoded=null;
+ label0:$stack3=#source;
+ encoded = org.keycloak.common.util.Base64.encodeBytesToBytes(source,0,$stack3,0);
+ label1:goto label2;
+ label3:$stack5 = catch;
+ $stack6=org.keycloak.common.util.Base64.$assertionsDisabled;
+ if ($stack6!=0) goto label2;
+ $stack8=new java.lang.AssertionError;
+ $stack9=new java.lang.StringBuilder;
+ $stack9#java.lang.StringBuilder();
+ $stack9 = $stack9.append("IOExceptions only come from GZipping, which is turned off: ");
+ $stack11 = $stack5.getMessage();
+ $stack9 = $stack9.append($stack11);
+ $stack11 = $stack9.toString();
+ $stack8#java.lang.AssertionError((java.lang.Object)$stack11);
+ throw $stack8;
+ label2:return  encoded;
+ catch java.io.IOException: label0 - label1 : label3;
+} 
+

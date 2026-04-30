@@ -1,0 +1,28 @@
+org.apache.rocketmq.broker.dledger.DLedgerRoleChangeHandler(org.apache.rocketmq.broker.BrokerController brokerController,org.apache.rocketmq.store.DefaultMessageStore messageStore)
+{
+long $stack3;
+  org.apache.rocketmq.store.CommitLog $stack4;
+  org.apache.rocketmq.store.dledger.DLedgerCommitLog $stack5;
+  io.openmessaging.storage.dledger.DLedgerServer $stack7;
+  org.apache.rocketmq.common.ThreadFactoryImpl $stack8;
+  org.apache.rocketmq.common.BrokerIdentity $stack10;
+  java.util.concurrent.ExecutorService $stack11;
+  this#java.lang.Object();
+ $stack3 = java.lang.System.currentTimeMillis();
+ this.lastSyncTimeMs=$stack3;
+ this.brokerController=brokerController;
+ this.messageStore=messageStore;
+ $stack4 = messageStore.getCommitLog();
+ $stack5=(org.apache.rocketmq.store.dledger.DLedgerCommitLog) $stack4;
+ this.dLedgerCommitLog=$stack5;
+ $stack5=this.dLedgerCommitLog;
+ $stack7 = $stack5.getdLedgerServer();
+ this.dLegerServer=$stack7;
+ $stack8=new org.apache.rocketmq.common.ThreadFactoryImpl;
+ $stack10 = brokerController.getBrokerIdentity();
+ $stack8#org.apache.rocketmq.common.ThreadFactoryImpl("DLegerRoleChangeHandler_",$stack10);
+ $stack11 = java.util.concurrent.Executors.newSingleThreadExecutor((java.util.concurrent.ThreadFactory)$stack8);
+ this.executorService=$stack11;
+ return;
+ } 
+

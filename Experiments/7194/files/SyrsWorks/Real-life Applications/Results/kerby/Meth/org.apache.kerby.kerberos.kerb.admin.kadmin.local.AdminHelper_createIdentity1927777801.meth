@@ -1,0 +1,39 @@
+static org.apache.kerby.kerberos.kerb.request.KrbIdentity org.apache.kerby.kerberos.kerb.admin.kadmin.local.AdminHelper:createIdentity(java.lang.String principal,org.apache.kerby.KOptions kOptions)
+{
+org.apache.kerby.kerberos.kerb.request.KrbIdentity kid;
+  java.util.Date date;
+  org.apache.kerby.kerberos.kerb.type.KerberosTime $stack5;
+  org.apache.kerby.kerberos.kerb.admin.kadmin.KadminOption $stack6;
+  boolean $stack7;
+  int $stack12;
+  long $stack21;
+  kid=new org.apache.kerby.kerberos.kerb.request.KrbIdentity;
+ kid#org.apache.kerby.kerberos.kerb.request.KrbIdentity(principal);
+ $stack5 = org.apache.kerby.kerberos.kerb.type.KerberosTime.now();
+ kid.setCreatedTime($stack5);
+ $stack6=org.apache.kerby.kerberos.kerb.admin.kadmin.KadminOption.EXPIRE;
+ $stack7 = kOptions.contains((org.apache.kerby.KOption)$stack6);
+ if ($stack7==0) goto label0;
+ $stack6=org.apache.kerby.kerberos.kerb.admin.kadmin.KadminOption.EXPIRE;
+ date = kOptions.getDateOption((org.apache.kerby.KOption)$stack6);
+ $stack5=new org.apache.kerby.kerberos.kerb.type.KerberosTime;
+ $stack21 = date.getTime();
+ $stack5#org.apache.kerby.kerberos.kerb.type.KerberosTime($stack21);
+ kid.setExpireTime($stack5);
+ goto label1;
+ label0:$stack5=new org.apache.kerby.kerberos.kerb.type.KerberosTime;
+ $stack5#org.apache.kerby.kerberos.kerb.type.KerberosTime(253402300799900L);
+ kid.setExpireTime($stack5);
+ label1:$stack6=org.apache.kerby.kerberos.kerb.admin.kadmin.KadminOption.KVNO;
+ $stack7 = kOptions.contains((org.apache.kerby.KOption)$stack6);
+ if ($stack7==0) goto label2;
+ $stack6=org.apache.kerby.kerberos.kerb.admin.kadmin.KadminOption.KVNO;
+ $stack12 = kOptions.getIntegerOption((org.apache.kerby.KOption)$stack6);
+ kid.setKeyVersion($stack12);
+ goto label3;
+ label2:kid.setKeyVersion(1);
+ label3:kid.setDisabled((boolean)0);
+ kid.setLocked((boolean)0);
+ return  kid;
+ } 
+

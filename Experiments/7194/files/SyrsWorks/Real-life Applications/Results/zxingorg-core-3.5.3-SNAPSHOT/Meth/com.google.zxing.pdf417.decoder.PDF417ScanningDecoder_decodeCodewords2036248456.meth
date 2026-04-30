@@ -1,0 +1,26 @@
+static com.google.zxing.common.DecoderResult com.google.zxing.pdf417.decoder.PDF417ScanningDecoder:decodeCodewords(int[] codewords,int ecLevel,int[] erasures)
+{
+int numECCodewords;
+  int correctedErrorsCount;
+  com.google.zxing.common.DecoderResult decoderResult;
+  java.lang.String $stack9;
+  java.lang.Integer $stack11;
+  com.google.zxing.FormatException $stack14;
+  numECCodewords=#codewords;
+ if (numECCodewords!=0) goto label0;
+ $stack14 = com.google.zxing.FormatException.getFormatInstance();
+ throw $stack14;
+ label0:numECCodewords=(ecLevel+1);
+ numECCodewords=(1<<numECCodewords);
+ correctedErrorsCount = com.google.zxing.pdf417.decoder.PDF417ScanningDecoder.correctErrors(codewords,erasures,numECCodewords);
+ com.google.zxing.pdf417.decoder.PDF417ScanningDecoder.verifyCodewordCount(codewords,numECCodewords);
+ $stack9 = java.lang.String.valueOf(ecLevel);
+ decoderResult = com.google.zxing.pdf417.decoder.DecodedBitStreamParser.decode(codewords,$stack9);
+ $stack11 = java.lang.Integer.valueOf(correctedErrorsCount);
+ decoderResult.setErrorsCorrected($stack11);
+ ecLevel=#erasures;
+ $stack11 = java.lang.Integer.valueOf(ecLevel);
+ decoderResult.setErasures($stack11);
+ return  decoderResult;
+ } 
+

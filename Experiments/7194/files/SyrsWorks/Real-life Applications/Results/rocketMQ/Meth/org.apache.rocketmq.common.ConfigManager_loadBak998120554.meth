@@ -1,0 +1,44 @@
+boolean org.apache.rocketmq.common.ConfigManager:loadBak()
+{
+java.lang.String fileName;
+  java.lang.String jsonString;
+  java.lang.StringBuilder $stack4;
+  int $stack9;
+  org.apache.rocketmq.logging.org.slf4j.Logger $stack11;
+  java.lang.Exception $stack16;
+  fileName=null;
+ label0:fileName = this.configFilePath();
+ $stack4=new java.lang.StringBuilder;
+ $stack4#java.lang.StringBuilder();
+ $stack4 = $stack4.append(fileName);
+ $stack4 = $stack4.append(".bak");
+ jsonString = $stack4.toString();
+ jsonString = org.apache.rocketmq.common.MixAll.file2String(jsonString);
+ if (jsonString==null) goto label1;
+ $stack9 = jsonString.length();
+ if ($stack9<=0) goto label1;
+ this.decode(jsonString);
+ $stack11=org.apache.rocketmq.common.ConfigManager.log;
+ $stack4=new java.lang.StringBuilder;
+ $stack4#java.lang.StringBuilder();
+ $stack4 = $stack4.append("load ");
+ $stack4 = $stack4.append(fileName);
+ $stack4 = $stack4.append(" OK");
+ jsonString = $stack4.toString();
+ $stack11.info(jsonString);
+ label2:return  1;
+ label1:goto label3;
+ label4:$stack16 = catch;
+ $stack11=org.apache.rocketmq.common.ConfigManager.log;
+ $stack4=new java.lang.StringBuilder;
+ $stack4#java.lang.StringBuilder();
+ $stack4 = $stack4.append("load ");
+ $stack4 = $stack4.append(fileName);
+ $stack4 = $stack4.append(" Failed");
+ fileName = $stack4.toString();
+ $stack11.error(fileName,(java.lang.Throwable)$stack16);
+ return  0;
+ label3:return  1;
+ catch java.lang.Exception: label0 - label2 : label4;
+} 
+

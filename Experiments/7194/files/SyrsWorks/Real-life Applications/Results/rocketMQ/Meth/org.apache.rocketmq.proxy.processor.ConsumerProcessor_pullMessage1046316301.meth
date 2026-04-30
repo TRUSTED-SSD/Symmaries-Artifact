@@ -1,0 +1,54 @@
+java.util.concurrent.CompletableFuture org.apache.rocketmq.proxy.processor.ConsumerProcessor:pullMessage(org.apache.rocketmq.proxy.common.ProxyContext ctx,org.apache.rocketmq.common.message.MessageQueue messageQueue,java.lang.String @consumerGroup,long queueOffset,int maxMsgNums,int sysFlag,long commitOffset,long suspendTimeoutMillis,org.apache.rocketmq.remoting.protocol.heartbeat.SubscriptionData subscriptionData,long timeoutMillis)
+{
+java.util.concurrent.CompletableFuture future;
+  org.apache.rocketmq.proxy.service.route.AddressableMessageQueue addressableMessageQueue;
+  org.apache.rocketmq.remoting.protocol.header.PullMessageRequestHeader requestHeader;
+  org.apache.rocketmq.proxy.service.ServiceManager $stack19;
+  org.apache.rocketmq.proxy.service.route.TopicRouteService $stack20;
+  int $stack24;
+  java.lang.Integer $stack25;
+  java.lang.Long $stack26;
+  org.apache.rocketmq.proxy.service.message.MessageService $stack34;
+  java.util.concurrent.ExecutorService $stack36;
+  java.lang.Throwable $stack38;
+  java.lang.String consumerGroup;
+consumerGroup=@consumerGroup;
+future=new java.util.concurrent.CompletableFuture;
+ future#java.util.concurrent.CompletableFuture();
+ label0:$stack19=this.serviceManager;
+ $stack20 = $stack19.getTopicRouteService();
+ addressableMessageQueue = $stack20.buildAddressableMessageQueue(messageQueue);
+ requestHeader=new org.apache.rocketmq.remoting.protocol.header.PullMessageRequestHeader;
+ requestHeader#org.apache.rocketmq.remoting.protocol.header.PullMessageRequestHeader();
+ requestHeader.setConsumerGroup(consumerGroup);
+ consumerGroup = addressableMessageQueue.getTopic();
+ requestHeader.setTopic(consumerGroup);
+ $stack24 = addressableMessageQueue.getQueueId();
+ $stack25 = java.lang.Integer.valueOf($stack24);
+ requestHeader.setQueueId($stack25);
+ $stack26 = java.lang.Long.valueOf(queueOffset);
+ requestHeader.setQueueOffset($stack26);
+ $stack25 = java.lang.Integer.valueOf(maxMsgNums);
+ requestHeader.setMaxMsgNums($stack25);
+ $stack25 = java.lang.Integer.valueOf(sysFlag);
+ requestHeader.setSysFlag($stack25);
+ $stack26 = java.lang.Long.valueOf(commitOffset);
+ requestHeader.setCommitOffset($stack26);
+ $stack26 = java.lang.Long.valueOf(suspendTimeoutMillis);
+ requestHeader.setSuspendTimeoutMillis($stack26);
+ consumerGroup = subscriptionData.getSubString();
+ requestHeader.setSubscription(consumerGroup);
+ consumerGroup = subscriptionData.getExpressionType();
+ requestHeader.setExpressionType(consumerGroup);
+ $stack19=this.serviceManager;
+ $stack34 = $stack19.getMessageService();
+ future = $stack34.pullMessage(ctx,addressableMessageQueue,requestHeader,timeoutMillis);
+ label1:goto label2;
+ label3:$stack38 = catch;
+ future.completeExceptionally($stack38);
+ label2:$stack36=this.executor;
+ future = org.apache.rocketmq.proxy.common.utils.FutureUtils.addExecutor(future,$stack36);
+ return  future;
+ catch java.lang.Throwable: label0 - label1 : label3;
+} 
+

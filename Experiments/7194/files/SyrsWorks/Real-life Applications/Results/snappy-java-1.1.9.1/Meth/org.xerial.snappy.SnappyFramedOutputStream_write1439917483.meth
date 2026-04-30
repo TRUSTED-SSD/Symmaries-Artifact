@@ -1,0 +1,49 @@
+int org.xerial.snappy.SnappyFramedOutputStream:write(java.nio.ByteBuffer l1)
+{
+int l2;
+  int l3;
+  boolean $stack4;
+  java.nio.ByteBuffer $stack5;
+  int $stack10;
+  int $stack15;
+  java.nio.channels.ClosedChannelException $stack35;
+  $stack4=this.closed;
+ if ($stack4==0) goto label0;
+ $stack35=new java.nio.channels.ClosedChannelException;
+ $stack35#java.nio.channels.ClosedChannelException();
+ throw $stack35;
+ label0:$stack5=this.buffer;
+ l2 = $stack5.remaining();
+ if (l2>0) goto label1;
+ this#org.xerial.snappy.SnappyFramedOutputStream:flushBuffer();
+ label1:l2 = l1.remaining();
+ $stack5=this.buffer;
+ l3 = $stack5.remaining();
+ $stack10 = l1.remaining();
+ if (l3<$stack10) goto label2;
+ $stack5=this.buffer;
+ $stack5.put(l1);
+ return  l2;
+ label2:l3 = l1.position();
+ $stack10 = l1.remaining();
+ l3=(l3+$stack10);
+ label3:$stack10 = l1.position();
+ $stack5=this.buffer;
+ $stack15 = $stack5.remaining();
+ $stack10=($stack10+$stack15);
+ if ($stack10>l3) goto label4;
+ $stack10 = l1.position();
+ $stack5=this.buffer;
+ $stack15 = $stack5.remaining();
+ $stack10=($stack10+$stack15);
+ l1.limit($stack10);
+ $stack5=this.buffer;
+ $stack5.put(l1);
+ this#org.xerial.snappy.SnappyFramedOutputStream:flushBuffer();
+ goto label3;
+ label4:l1.limit(l3);
+ $stack5=this.buffer;
+ $stack5.put(l1);
+ return  l2;
+ } 
+

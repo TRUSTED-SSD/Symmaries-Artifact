@@ -1,0 +1,8 @@
+org.apache.rocketmq.store.PutMessageResult org.apache.rocketmq.broker.failover.EscapeBridge:putMessageToSpecificQueue (
+  org.apache.rocketmq.common.message.MessageExtBrokerInner messageExt) {
+  guard = level(messageExt) ⊔ level(this) ⊔ obj_level(messageExt) ⊔ obj_level(this) = ⊥;
+  ret(level()) = ⊥;
+  ret(obj_level()) = ⊥;
+  ret(obj_level(messageExt)) = ⊤;
+  ret(obj_level(this)) = ⊤;
+}

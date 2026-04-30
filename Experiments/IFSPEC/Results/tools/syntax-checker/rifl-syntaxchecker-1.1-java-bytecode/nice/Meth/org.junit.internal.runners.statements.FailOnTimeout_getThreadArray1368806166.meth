@@ -1,0 +1,22 @@
+java.lang.Thread[] org.junit.internal.runners.statements.FailOnTimeout:getThreadArray(java.lang.ThreadGroup group)
+{
+int count;
+  int enumCount;
+  java.lang.Thread[] threads;
+  int loopCount;
+  count = group.activeCount();
+ count=(count * 2);
+ count = java.lang.Math.max(count,100);
+ loopCount=0;
+ label0:threads=new java.lang.Thread[count];
+ enumCount = group.enumerate(threads);
+ if (enumCount>=count) goto label1;
+ goto label2;
+ label1:count=(count+100);
+ loopCount=(loopCount+1);
+ if (loopCount<5) goto label0;
+ return  null;
+ label2:threads = this#org.junit.internal.runners.statements.FailOnTimeout:copyThreads(threads,enumCount);
+ return  threads;
+ } 
+

@@ -1,0 +1,119 @@
+    protected rifl.spec.abstractbytecode.AbstractBytecodeParameter readParameter(org.w3c.dom.Element, boolean) throws rifl.spec.RIFLIntegrityException
+    {
+        rifl.spec.abstractbytecode.AbstractBytecodeRIFLReader this;
+        org.w3c.dom.Element elem;
+        boolean isSource, $stack9;
+        java.lang.String className, methodName, paramIndex;
+        rifl.spec.abstractbytecode.AbstractBytecodeParameter $stack12;
+        rifl.spec.RIFLIntegrityException $stack13;
+        java.lang.StringBuilder $stack14;
+
+        this := @this: rifl.spec.abstractbytecode.AbstractBytecodeRIFLReader;
+
+        elem := @parameter0: org.w3c.dom.Element;
+
+        isSource := @parameter1: boolean;
+
+        className = interfaceinvoke elem.<org.w3c.dom.Element: java.lang.String getAttribute(java.lang.String)>("class");
+/*89*/
+/*89*/
+
+        methodName = interfaceinvoke elem.<org.w3c.dom.Element: java.lang.String getAttribute(java.lang.String)>("method");
+/*90*/
+/*90*/
+
+        paramIndex = interfaceinvoke elem.<org.w3c.dom.Element: java.lang.String getAttribute(java.lang.String)>("parameter");
+/*91*/
+/*91*/
+
+        $stack9 = staticinvoke <rifl.spec.abstractbytecode.AbstractBytecodeSyntaxChecker: boolean isClassNameCorrect(java.lang.String)>(className);
+/*93*/
+
+        if $stack9 != 0 goto label1;
+/*93*/
+
+        $stack13 = new rifl.spec.RIFLIntegrityException;
+/*94*/
+
+        $stack14 = new java.lang.StringBuilder;
+/*94*/
+
+        specialinvoke $stack14.<java.lang.StringBuilder: void <init>(java.lang.String)>("Invalid class name: ");
+/*94*/
+
+        $stack14 = virtualinvoke $stack14.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>(className);
+/*94*/
+
+        className = virtualinvoke $stack14.<java.lang.StringBuilder: java.lang.String toString()>();
+/*94*/
+
+        specialinvoke $stack13.<rifl.spec.RIFLIntegrityException: void <init>(java.lang.String)>(className);
+/*94*/
+
+        throw $stack13;
+/*94*/
+
+     label1:
+        $stack9 = staticinvoke <rifl.spec.abstractbytecode.AbstractBytecodeSyntaxChecker: boolean isMethodNameCorrect(java.lang.String)>(methodName);
+/*97*/
+
+        if $stack9 != 0 goto label2;
+/*97*/
+
+        $stack13 = new rifl.spec.RIFLIntegrityException;
+/*98*/
+
+        $stack14 = new java.lang.StringBuilder;
+/*98*/
+
+        specialinvoke $stack14.<java.lang.StringBuilder: void <init>(java.lang.String)>("Invalid method name: ");
+/*98*/
+
+        $stack14 = virtualinvoke $stack14.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>(methodName);
+/*98*/
+
+        className = virtualinvoke $stack14.<java.lang.StringBuilder: java.lang.String toString()>();
+/*98*/
+
+        specialinvoke $stack13.<rifl.spec.RIFLIntegrityException: void <init>(java.lang.String)>(className);
+/*98*/
+
+        throw $stack13;
+/*98*/
+
+     label2:
+        $stack9 = staticinvoke <rifl.spec.abstractbytecode.AbstractBytecodeSyntaxChecker: boolean isParameterIndexCorrect(java.lang.String)>(paramIndex);
+/*101*/
+
+        if $stack9 != 0 goto label3;
+/*101*/
+
+        $stack13 = new rifl.spec.RIFLIntegrityException;
+/*102*/
+
+        $stack14 = new java.lang.StringBuilder;
+/*102*/
+
+        specialinvoke $stack14.<java.lang.StringBuilder: void <init>(java.lang.String)>("Invalid parameter index: ");
+/*102*/
+
+        $stack14 = virtualinvoke $stack14.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>(paramIndex);
+/*102*/
+
+        className = virtualinvoke $stack14.<java.lang.StringBuilder: java.lang.String toString()>();
+/*102*/
+
+        specialinvoke $stack13.<rifl.spec.RIFLIntegrityException: void <init>(java.lang.String)>(className);
+/*102*/
+
+        throw $stack13;
+/*102*/
+
+     label3:
+        $stack12 = virtualinvoke this.<rifl.spec.abstractbytecode.AbstractBytecodeRIFLReader: rifl.spec.abstractbytecode.AbstractBytecodeParameter createParameter(java.lang.String,java.lang.String,java.lang.String,boolean)>(className, methodName, paramIndex, isSource);
+/*105*/
+
+        return $stack12;
+/*105*/
+    }
+

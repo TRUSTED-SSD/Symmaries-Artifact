@@ -1,0 +1,17 @@
+io.netty.buffer.ByteBuf org.apache.bookkeeper.bookie.BookieImpl:createMasterKeyEntry(long ledgerId,byte[] masterKey)
+{
+io.netty.buffer.ByteBuf bb;
+  int $stack5;
+  io.netty.buffer.ByteBufAllocator $stack7;
+  $stack7=this.allocator;
+ $stack5=#masterKey;
+ $stack5=(20+$stack5);
+ bb = $stack7.directBuffer($stack5);
+ bb.writeLong(ledgerId);
+ bb.writeLong(-4096L);
+ $stack5=#masterKey;
+ bb.writeInt($stack5);
+ bb.writeBytes(masterKey);
+ return  bb;
+ } 
+

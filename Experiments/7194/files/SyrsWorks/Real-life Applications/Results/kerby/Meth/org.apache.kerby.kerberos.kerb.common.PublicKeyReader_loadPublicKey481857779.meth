@@ -1,0 +1,21 @@
+static java.security.PublicKey org.apache.kerby.kerberos.kerb.common.PublicKeyReader:loadPublicKey(java.io.InputStream in)
+{
+byte[] keyBytes;
+  java.security.spec.InvalidKeySpecException ex;
+  java.security.cert.Certificate cert;
+  java.security.PublicKey $stack5;
+  java.security.cert.CertificateFactory $stack7;
+  java.io.ByteArrayInputStream $stack8;
+  keyBytes = org.apache.commons.io.IOUtils.toByteArray(in);
+ label0:$stack5 = org.apache.kerby.kerberos.kerb.common.PublicKeyReader.loadPublicKey(keyBytes);
+ label1:return  $stack5;
+ label2:ex = catch;
+ $stack7 = java.security.cert.CertificateFactory.getInstance("X.509");
+ $stack8=new java.io.ByteArrayInputStream;
+ $stack8#java.io.ByteArrayInputStream(keyBytes);
+ cert = $stack7.generateCertificate((java.io.InputStream)$stack8);
+ $stack5 = cert.getPublicKey();
+ return  $stack5;
+ catch java.security.spec.InvalidKeySpecException: label0 - label1 : label2;
+} 
+

@@ -1,0 +1,44 @@
+void org.apache.rocketmq.store.DefaultMessageStore$ReputMessageService:run()
+{
+org.apache.rocketmq.logging.org.slf4j.Logger $stack2;
+  java.lang.StringBuilder $stack3;
+  java.lang.String $stack4;
+  boolean $stack8;
+  java.util.concurrent.TimeUnit $stack15;
+  java.lang.Exception $stack17;
+  $stack2 = org.apache.rocketmq.store.DefaultMessageStore.access$600();
+ $stack3=new java.lang.StringBuilder;
+ $stack3#java.lang.StringBuilder();
+ $stack4 = this.getServiceName();
+ $stack3 = $stack3.append($stack4);
+ $stack3 = $stack3.append(" service started");
+ $stack4 = $stack3.toString();
+ $stack2.info($stack4);
+ label0:$stack8 = this.isStopped();
+ if ($stack8!=0) goto label1;
+ label2:$stack15=java.util.concurrent.TimeUnit.MILLISECONDS;
+ $stack15.sleep(1L);
+ this.doReput();
+ label3:goto label0;
+ label4:$stack17 = catch;
+ $stack2 = org.apache.rocketmq.store.DefaultMessageStore.access$600();
+ $stack3=new java.lang.StringBuilder;
+ $stack3#java.lang.StringBuilder();
+ $stack4 = this.getServiceName();
+ $stack3 = $stack3.append($stack4);
+ $stack3 = $stack3.append(" service has exception. ");
+ $stack4 = $stack3.toString();
+ $stack2.warn($stack4,(java.lang.Throwable)$stack17);
+ goto label0;
+ label1:$stack2 = org.apache.rocketmq.store.DefaultMessageStore.access$600();
+ $stack3=new java.lang.StringBuilder;
+ $stack3#java.lang.StringBuilder();
+ $stack4 = this.getServiceName();
+ $stack3 = $stack3.append($stack4);
+ $stack3 = $stack3.append(" service end");
+ $stack4 = $stack3.toString();
+ $stack2.info($stack4);
+ return;
+ catch java.lang.Exception: label2 - label3 : label4;
+} 
+

@@ -1,0 +1,367 @@
+    public void <init>(org.apache.bookkeeper.stream.server.conf.BookieConfiguration, org.apache.bookkeeper.stats.StatsLogger, java.util.function.Supplier) throws java.lang.Exception
+    {
+        org.apache.bookkeeper.stream.server.service.BookieService this;
+        org.apache.bookkeeper.stream.server.conf.BookieConfiguration conf;
+        org.apache.bookkeeper.stats.StatsLogger statsLogger, bookieStats, $stack58;
+        java.util.function.Supplier bookieServiceInfoProvider;
+        java.lang.String hello;
+        org.apache.bookkeeper.common.allocator.ByteBufAllocatorWithOomHandler allocator;
+        org.apache.bookkeeper.util.DiskChecker diskChecker;
+        org.apache.bookkeeper.bookie.LedgerDirsManager ledgerDirsManager, indexDirsManager;
+        org.apache.bookkeeper.bookie.LedgerStorage storage;
+        org.apache.bookkeeper.bookie.UncleanShutdownDetectionImpl uncleanShutdownDetection, tmp$993764546;
+        java.lang.Object bookie;
+        org.apache.bookkeeper.conf.ServerConfiguration $stack14;
+        org.apache.commons.configuration.CompositeConfiguration $stack16;
+        java.lang.Object[] $stack17;
+        int $stack24;
+        java.lang.Integer $stack25;
+        java.lang.String[] $stack31;
+        java.util.List $stack32;
+        org.apache.bookkeeper.meta.MetadataBookieDriver $stack47;
+        org.apache.bookkeeper.discover.RegistrationManager $stack50;
+        org.apache.bookkeeper.meta.LedgerManagerFactory $stack52;
+        org.apache.bookkeeper.meta.LedgerManager $stack54;
+        boolean $stack73;
+        org.slf4j.Logger $stack80;
+        org.apache.bookkeeper.bookie.LegacyCookieValidation tmp$200351953;
+        org.apache.bookkeeper.bookie.ReadOnlyBookie tmp$267361320;
+        org.apache.bookkeeper.bookie.BookieImpl tmp$837747352;
+        org.apache.bookkeeper.proto.BookieServer tmp$177030875;
+        org.apache.bookkeeper.bookie.Bookie tmp$1607319853;
+
+        this := @this: org.apache.bookkeeper.stream.server.service.BookieService;
+
+        conf := @parameter0: org.apache.bookkeeper.stream.server.conf.BookieConfiguration;
+
+        statsLogger := @parameter1: org.apache.bookkeeper.stats.StatsLogger;
+
+        bookieServiceInfoProvider := @parameter2: java.util.function.Supplier;
+
+        specialinvoke this.<org.apache.bookkeeper.common.component.AbstractLifecycleComponent: void <init>(java.lang.String,org.apache.bookkeeper.common.conf.ComponentConfiguration,org.apache.bookkeeper.stats.StatsLogger)>("bookie-server", conf, statsLogger);
+/*73*/
+
+        $stack14 = new org.apache.bookkeeper.conf.ServerConfiguration;
+/*74*/
+
+        specialinvoke $stack14.<org.apache.bookkeeper.conf.ServerConfiguration: void <init>()>();
+/*74*/
+
+        this.<org.apache.bookkeeper.stream.server.service.BookieService: org.apache.bookkeeper.conf.ServerConfiguration serverConf> = $stack14;
+/*74*/
+
+        $stack14 = this.<org.apache.bookkeeper.stream.server.service.BookieService: org.apache.bookkeeper.conf.ServerConfiguration serverConf>;
+/*75*/
+
+        $stack16 = virtualinvoke conf.<org.apache.bookkeeper.stream.server.conf.BookieConfiguration: org.apache.commons.configuration.CompositeConfiguration getUnderlyingConf()>();
+/*75*/
+
+        virtualinvoke $stack14.<org.apache.bookkeeper.conf.ServerConfiguration: void loadConf(org.apache.commons.configuration.CompositeConfiguration)>($stack16);
+/*75*/
+
+        this.<org.apache.bookkeeper.stream.server.service.BookieService: java.util.function.Supplier bookieServiceInfoProvider> = bookieServiceInfoProvider;
+/*76*/
+
+        hello = "Hello, I\'m your bookie, bookieId is %1$s, listening on port %2$s. Metadata service uri is %3$s. Journals are in %4$s. Ledgers are stored in %5$s. Indexes are stored in %6$s.";
+/*80*/
+
+        $stack17 = newarray (java.lang.Object)[6];
+/*77*/
+
+        $stack14 = this.<org.apache.bookkeeper.stream.server.service.BookieService: org.apache.bookkeeper.conf.ServerConfiguration serverConf>;
+/*80*/
+
+        hello = virtualinvoke $stack14.<org.apache.bookkeeper.conf.ServerConfiguration: java.lang.String getBookieId()>();
+/*80*/
+
+        if hello == null goto label1;
+/*80*/
+
+        $stack14 = this.<org.apache.bookkeeper.stream.server.service.BookieService: org.apache.bookkeeper.conf.ServerConfiguration serverConf>;
+/*110*/
+
+        hello = virtualinvoke $stack14.<org.apache.bookkeeper.conf.ServerConfiguration: java.lang.String getBookieId()>();
+/*110*/
+
+        goto label2;
+/*110*/
+
+     label1:
+        hello = "<not-set>";
+/*110*/
+
+     label2:
+        $stack17[0] = hello;
+/*80*/
+
+        $stack14 = this.<org.apache.bookkeeper.stream.server.service.BookieService: org.apache.bookkeeper.conf.ServerConfiguration serverConf>;
+/*81*/
+
+        $stack24 = virtualinvoke $stack14.<org.apache.bookkeeper.conf.ServerConfiguration: int getBookiePort()>();
+/*81*/
+
+        $stack25 = staticinvoke <java.lang.Integer: java.lang.Integer valueOf(int)>($stack24);
+/*81*/
+
+        $stack17[1] = $stack25;
+/*81*/
+
+        $stack14 = this.<org.apache.bookkeeper.stream.server.service.BookieService: org.apache.bookkeeper.conf.ServerConfiguration serverConf>;
+/*82*/
+
+        hello = virtualinvoke $stack14.<org.apache.bookkeeper.conf.ServerConfiguration: java.lang.String getMetadataServiceUriUnchecked()>();
+/*82*/
+
+        $stack17[2] = hello;
+/*82*/
+
+        $stack14 = this.<org.apache.bookkeeper.stream.server.service.BookieService: org.apache.bookkeeper.conf.ServerConfiguration serverConf>;
+/*83*/
+
+        $stack31 = virtualinvoke $stack14.<org.apache.bookkeeper.conf.ServerConfiguration: java.lang.String[] getJournalDirNames()>();
+/*83*/
+
+        $stack32 = staticinvoke <java.util.Arrays: java.util.List asList(java.lang.Object[])>($stack31);
+/*83*/
+
+        $stack17[3] = $stack32;
+/*83*/
+
+        $stack14 = this.<org.apache.bookkeeper.stream.server.service.BookieService: org.apache.bookkeeper.conf.ServerConfiguration serverConf>;
+/*84*/
+
+        $stack31 = virtualinvoke $stack14.<org.apache.bookkeeper.conf.ServerConfiguration: java.lang.String[] getLedgerDirNames()>();
+/*84*/
+
+        $stack32 = staticinvoke <java.util.Arrays: java.util.List asList(java.lang.Object[])>($stack31);
+/*84*/
+
+        $stack17[4] = $stack32;
+/*84*/
+
+        $stack14 = this.<org.apache.bookkeeper.stream.server.service.BookieService: org.apache.bookkeeper.conf.ServerConfiguration serverConf>;
+/*85*/
+
+        $stack31 = virtualinvoke $stack14.<org.apache.bookkeeper.conf.ServerConfiguration: java.lang.String[] getIndexDirNames()>();
+/*85*/
+
+        if $stack31 == null goto label3;
+/*85*/
+
+        $stack14 = this.<org.apache.bookkeeper.stream.server.service.BookieService: org.apache.bookkeeper.conf.ServerConfiguration serverConf>;
+/*86*/
+
+        $stack31 = virtualinvoke $stack14.<org.apache.bookkeeper.conf.ServerConfiguration: java.lang.String[] getIndexDirNames()>();
+/*86*/
+
+        goto label4;
+/*86*/
+
+     label3:
+        $stack14 = this.<org.apache.bookkeeper.stream.server.service.BookieService: org.apache.bookkeeper.conf.ServerConfiguration serverConf>;
+/*85*/
+
+        $stack31 = virtualinvoke $stack14.<org.apache.bookkeeper.conf.ServerConfiguration: java.lang.String[] getLedgerDirNames()>();
+/*85*/
+
+     label4:
+        $stack32 = staticinvoke <java.util.Arrays: java.util.List asList(java.lang.Object[])>($stack31);
+/*85*/
+
+        $stack17[5] = $stack32;
+/*85*/
+
+        hello = staticinvoke <java.lang.String: java.lang.String format(java.lang.String,java.lang.Object[])>("Hello, I\'m your bookie, bookieId is %1$s, listening on port %2$s. Metadata service uri is %3$s. Journals are in %4$s. Ledgers are stored in %5$s. Indexes are stored in %6$s.", $stack17);
+/*77*/
+/*77*/
+
+        $stack14 = this.<org.apache.bookkeeper.stream.server.service.BookieService: org.apache.bookkeeper.conf.ServerConfiguration serverConf>;
+/*88*/
+
+        allocator = staticinvoke <org.apache.bookkeeper.bookie.BookieResources: org.apache.bookkeeper.common.allocator.ByteBufAllocatorWithOomHandler createAllocator(org.apache.bookkeeper.conf.ServerConfiguration)>($stack14);
+/*88*/
+/*88*/
+
+        $stack14 = this.<org.apache.bookkeeper.stream.server.service.BookieService: org.apache.bookkeeper.conf.ServerConfiguration serverConf>;
+/*90*/
+
+        $stack47 = staticinvoke <org.apache.bookkeeper.bookie.BookieResources: org.apache.bookkeeper.meta.MetadataBookieDriver createMetadataDriver(org.apache.bookkeeper.conf.ServerConfiguration,org.apache.bookkeeper.stats.StatsLogger)>($stack14, statsLogger);
+/*90*/
+
+        this.<org.apache.bookkeeper.stream.server.service.BookieService: org.apache.bookkeeper.meta.MetadataBookieDriver metadataDriver> = $stack47;
+/*90*/
+
+        bookieStats = interfaceinvoke statsLogger.<org.apache.bookkeeper.stats.StatsLogger: org.apache.bookkeeper.stats.StatsLogger scope(java.lang.String)>("bookie");
+/*92*/
+/*92*/
+
+        $stack47 = this.<org.apache.bookkeeper.stream.server.service.BookieService: org.apache.bookkeeper.meta.MetadataBookieDriver metadataDriver>;
+/*93*/
+
+        $stack50 = interfaceinvoke $stack47.<org.apache.bookkeeper.meta.MetadataBookieDriver: org.apache.bookkeeper.discover.RegistrationManager createRegistrationManager()>();
+/*93*/
+
+        this.<org.apache.bookkeeper.stream.server.service.BookieService: org.apache.bookkeeper.discover.RegistrationManager rm> = $stack50;
+/*93*/
+
+        $stack47 = this.<org.apache.bookkeeper.stream.server.service.BookieService: org.apache.bookkeeper.meta.MetadataBookieDriver metadataDriver>;
+/*94*/
+
+        $stack52 = interfaceinvoke $stack47.<org.apache.bookkeeper.meta.MetadataBookieDriver: org.apache.bookkeeper.meta.LedgerManagerFactory getLedgerManagerFactory()>();
+/*94*/
+
+        this.<org.apache.bookkeeper.stream.server.service.BookieService: org.apache.bookkeeper.meta.LedgerManagerFactory lmFactory> = $stack52;
+/*94*/
+
+        $stack52 = this.<org.apache.bookkeeper.stream.server.service.BookieService: org.apache.bookkeeper.meta.LedgerManagerFactory lmFactory>;
+/*95*/
+
+        $stack54 = interfaceinvoke $stack52.<org.apache.bookkeeper.meta.LedgerManagerFactory: org.apache.bookkeeper.meta.LedgerManager newLedgerManager()>();
+/*95*/
+
+        this.<org.apache.bookkeeper.stream.server.service.BookieService: org.apache.bookkeeper.meta.LedgerManager ledgerManager> = $stack54;
+/*95*/
+
+        $stack14 = this.<org.apache.bookkeeper.stream.server.service.BookieService: org.apache.bookkeeper.conf.ServerConfiguration serverConf>;
+/*97*/
+
+        diskChecker = staticinvoke <org.apache.bookkeeper.bookie.BookieResources: org.apache.bookkeeper.util.DiskChecker createDiskChecker(org.apache.bookkeeper.conf.ServerConfiguration)>($stack14);
+/*97*/
+/*97*/
+
+        $stack14 = this.<org.apache.bookkeeper.stream.server.service.BookieService: org.apache.bookkeeper.conf.ServerConfiguration serverConf>;
+/*99*/
+
+        $stack58 = interfaceinvoke bookieStats.<org.apache.bookkeeper.stats.StatsLogger: org.apache.bookkeeper.stats.StatsLogger scope(java.lang.String)>("ledger");
+/*99*/
+
+        ledgerDirsManager = staticinvoke <org.apache.bookkeeper.bookie.BookieResources: org.apache.bookkeeper.bookie.LedgerDirsManager createLedgerDirsManager(org.apache.bookkeeper.conf.ServerConfiguration,org.apache.bookkeeper.util.DiskChecker,org.apache.bookkeeper.stats.StatsLogger)>($stack14, diskChecker, $stack58);
+/*98*/
+/*98*/
+
+        $stack14 = this.<org.apache.bookkeeper.stream.server.service.BookieService: org.apache.bookkeeper.conf.ServerConfiguration serverConf>;
+/*101*/
+
+        $stack58 = interfaceinvoke bookieStats.<org.apache.bookkeeper.stats.StatsLogger: org.apache.bookkeeper.stats.StatsLogger scope(java.lang.String)>("index");
+/*101*/
+
+        indexDirsManager = staticinvoke <org.apache.bookkeeper.bookie.BookieResources: org.apache.bookkeeper.bookie.LedgerDirsManager createIndexDirsManager(org.apache.bookkeeper.conf.ServerConfiguration,org.apache.bookkeeper.util.DiskChecker,org.apache.bookkeeper.stats.StatsLogger,org.apache.bookkeeper.bookie.LedgerDirsManager)>($stack14, diskChecker, $stack58, ledgerDirsManager);
+/*100*/
+/*100*/
+
+        $stack14 = this.<org.apache.bookkeeper.stream.server.service.BookieService: org.apache.bookkeeper.conf.ServerConfiguration serverConf>;
+/*102*/
+
+        $stack54 = this.<org.apache.bookkeeper.stream.server.service.BookieService: org.apache.bookkeeper.meta.LedgerManager ledgerManager>;
+/*102*/
+
+        storage = staticinvoke <org.apache.bookkeeper.bookie.BookieResources: org.apache.bookkeeper.bookie.LedgerStorage createLedgerStorage(org.apache.bookkeeper.conf.ServerConfiguration,org.apache.bookkeeper.meta.LedgerManager,org.apache.bookkeeper.bookie.LedgerDirsManager,org.apache.bookkeeper.bookie.LedgerDirsManager,org.apache.bookkeeper.stats.StatsLogger,io.netty.buffer.ByteBufAllocator)>($stack14, $stack54, ledgerDirsManager, indexDirsManager, bookieStats, allocator);
+/*102*/
+/*102*/
+
+        tmp$993764546 = new org.apache.bookkeeper.bookie.UncleanShutdownDetectionImpl;
+/*104*/
+
+        uncleanShutdownDetection = tmp$993764546;
+
+        specialinvoke tmp$993764546.<org.apache.bookkeeper.bookie.UncleanShutdownDetectionImpl: void <init>(org.apache.bookkeeper.bookie.LedgerDirsManager)>(ledgerDirsManager);
+/*104*/
+
+        uncleanShutdownDetection = tmp$993764546;
+/*104*/
+
+        tmp$200351953 = new org.apache.bookkeeper.bookie.LegacyCookieValidation;
+/*106*/
+
+        $stack14 = this.<org.apache.bookkeeper.stream.server.service.BookieService: org.apache.bookkeeper.conf.ServerConfiguration serverConf>;
+/*106*/
+
+        $stack50 = this.<org.apache.bookkeeper.stream.server.service.BookieService: org.apache.bookkeeper.discover.RegistrationManager rm>;
+/*106*/
+
+        specialinvoke tmp$200351953.<org.apache.bookkeeper.bookie.LegacyCookieValidation: void <init>(org.apache.bookkeeper.conf.ServerConfiguration,org.apache.bookkeeper.discover.RegistrationManager)>($stack14, $stack50);
+/*106*/
+
+        $stack14 = this.<org.apache.bookkeeper.stream.server.service.BookieService: org.apache.bookkeeper.conf.ServerConfiguration serverConf>;
+/*107*/
+
+        $stack32 = staticinvoke <org.apache.bookkeeper.server.Main: java.util.List storageDirectoriesFromConf(org.apache.bookkeeper.conf.ServerConfiguration)>($stack14);
+/*107*/
+
+        virtualinvoke tmp$200351953.<org.apache.bookkeeper.bookie.LegacyCookieValidation: void checkCookies(java.util.List)>($stack32);
+/*107*/
+
+        $stack14 = this.<org.apache.bookkeeper.stream.server.service.BookieService: org.apache.bookkeeper.conf.ServerConfiguration serverConf>;
+/*110*/
+
+        $stack73 = virtualinvoke $stack14.<org.apache.bookkeeper.conf.ServerConfiguration: boolean isForceReadOnlyBookie()>();
+/*110*/
+
+        if $stack73 == 0 goto label5;
+/*110*/
+
+        tmp$267361320 = new org.apache.bookkeeper.bookie.ReadOnlyBookie;
+/*111*/
+
+        $stack14 = this.<org.apache.bookkeeper.stream.server.service.BookieService: org.apache.bookkeeper.conf.ServerConfiguration serverConf>;
+/*113*/
+
+        $stack50 = this.<org.apache.bookkeeper.stream.server.service.BookieService: org.apache.bookkeeper.discover.RegistrationManager rm>;
+/*113*/
+
+        bookieStats = interfaceinvoke statsLogger.<org.apache.bookkeeper.stats.StatsLogger: org.apache.bookkeeper.stats.StatsLogger scope(java.lang.String)>("bookie");
+/*113*/
+
+        specialinvoke tmp$267361320.<org.apache.bookkeeper.bookie.ReadOnlyBookie: void <init>(org.apache.bookkeeper.conf.ServerConfiguration,org.apache.bookkeeper.discover.RegistrationManager,org.apache.bookkeeper.bookie.LedgerStorage,org.apache.bookkeeper.util.DiskChecker,org.apache.bookkeeper.bookie.LedgerDirsManager,org.apache.bookkeeper.bookie.LedgerDirsManager,org.apache.bookkeeper.stats.StatsLogger,io.netty.buffer.ByteBufAllocator,java.util.function.Supplier)>($stack14, $stack50, storage, diskChecker, ledgerDirsManager, indexDirsManager, bookieStats, allocator, bookieServiceInfoProvider);
+/*113*/
+
+        bookie = tmp$267361320;
+/*113*/
+
+        goto label6;
+/*113*/
+
+     label5:
+        tmp$837747352 = new org.apache.bookkeeper.bookie.BookieImpl;
+/*116*/
+
+        $stack14 = this.<org.apache.bookkeeper.stream.server.service.BookieService: org.apache.bookkeeper.conf.ServerConfiguration serverConf>;
+/*118*/
+
+        $stack50 = this.<org.apache.bookkeeper.stream.server.service.BookieService: org.apache.bookkeeper.discover.RegistrationManager rm>;
+/*118*/
+
+        bookieStats = interfaceinvoke statsLogger.<org.apache.bookkeeper.stats.StatsLogger: org.apache.bookkeeper.stats.StatsLogger scope(java.lang.String)>("bookie");
+/*118*/
+
+        specialinvoke tmp$837747352.<org.apache.bookkeeper.bookie.BookieImpl: void <init>(org.apache.bookkeeper.conf.ServerConfiguration,org.apache.bookkeeper.discover.RegistrationManager,org.apache.bookkeeper.bookie.LedgerStorage,org.apache.bookkeeper.util.DiskChecker,org.apache.bookkeeper.bookie.LedgerDirsManager,org.apache.bookkeeper.bookie.LedgerDirsManager,org.apache.bookkeeper.stats.StatsLogger,io.netty.buffer.ByteBufAllocator,java.util.function.Supplier)>($stack14, $stack50, storage, diskChecker, ledgerDirsManager, indexDirsManager, bookieStats, allocator, bookieServiceInfoProvider);
+/*118*/
+
+        bookie = tmp$837747352;
+/*118*/
+
+     label6:
+        tmp$177030875 = new org.apache.bookkeeper.proto.BookieServer;
+/*122*/
+
+        $stack14 = this.<org.apache.bookkeeper.stream.server.service.BookieService: org.apache.bookkeeper.conf.ServerConfiguration serverConf>;
+/*122*/
+
+        tmp$1607319853 = (org.apache.bookkeeper.bookie.Bookie) bookie;
+
+        specialinvoke tmp$177030875.<org.apache.bookkeeper.proto.BookieServer: void <init>(org.apache.bookkeeper.conf.ServerConfiguration,org.apache.bookkeeper.bookie.Bookie,org.apache.bookkeeper.stats.StatsLogger,io.netty.buffer.ByteBufAllocator,org.apache.bookkeeper.bookie.UncleanShutdownDetection)>($stack14, tmp$1607319853, statsLogger, allocator, tmp$993764546);
+/*122*/
+
+        this.<org.apache.bookkeeper.stream.server.service.BookieService: org.apache.bookkeeper.proto.BookieServer bs> = tmp$177030875;
+/*122*/
+
+        $stack80 = <org.apache.bookkeeper.stream.server.service.BookieService: org.slf4j.Logger log>;
+/*124*/
+
+        interfaceinvoke $stack80.<org.slf4j.Logger: void info(java.lang.String)>(hello);
+/*124*/
+
+        return;
+/*125*/
+    }
+

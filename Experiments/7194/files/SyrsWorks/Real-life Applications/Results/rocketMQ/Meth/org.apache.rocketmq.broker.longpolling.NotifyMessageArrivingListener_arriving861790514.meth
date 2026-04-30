@@ -1,0 +1,16 @@
+void org.apache.rocketmq.broker.longpolling.NotifyMessageArrivingListener:arriving(java.lang.String topic,int queueId,long logicOffset,long tagsCode,long msgStoreTime,byte[] filterBitMap,java.util.Map properties)
+{
+org.apache.rocketmq.broker.longpolling.PullRequestHoldService $stack11;
+  java.lang.Long $stack12;
+  org.apache.rocketmq.broker.processor.PopMessageProcessor $stack13;
+  org.apache.rocketmq.broker.processor.NotificationProcessor $stack14;
+  $stack11=this.pullRequestHoldService;
+ $stack12 = java.lang.Long.valueOf(tagsCode);
+ $stack11.notifyMessageArriving(topic,queueId,logicOffset,$stack12,msgStoreTime,filterBitMap,properties);
+ $stack13=this.popMessageProcessor;
+ $stack13.notifyMessageArriving(topic,queueId);
+ $stack14=this.notificationProcessor;
+ $stack14.notifyMessageArriving(topic,queueId);
+ return;
+ } 
+

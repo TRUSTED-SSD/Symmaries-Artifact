@@ -1,0 +1,62 @@
+    private static org.apache.bookkeeper.stream.storage.api.cluster.ClusterController lambda$buildStorageServer$7(org.apache.bookkeeper.stream.server.service.CuratorProviderService, org.apache.bookkeeper.conf.ServerConfiguration, org.apache.bookkeeper.stream.server.service.RegistrationServiceProvider, org.apache.bookkeeper.stream.storage.conf.StorageConfiguration)
+    {
+        org.apache.bookkeeper.stream.server.service.CuratorProviderService curatorProviderService;
+        org.apache.bookkeeper.conf.ServerConfiguration bkServerConf;
+        org.apache.bookkeeper.stream.server.service.RegistrationServiceProvider regService;
+        org.apache.bookkeeper.stream.storage.conf.StorageConfiguration storageConf;
+        org.apache.bookkeeper.stream.storage.impl.cluster.ClusterControllerImpl $stack4;
+        org.apache.bookkeeper.stream.storage.impl.cluster.ZkClusterMetadataStore $stack5;
+        org.apache.curator.framework.CuratorFramework $stack6;
+        java.lang.String $stack7;
+        org.apache.bookkeeper.discover.RegistrationClient $stack8;
+        org.apache.bookkeeper.stream.storage.impl.sc.DefaultStorageContainerController $stack9;
+        org.apache.bookkeeper.stream.storage.impl.cluster.ZkClusterControllerLeaderSelector $stack10;
+
+        curatorProviderService := @parameter0: org.apache.bookkeeper.stream.server.service.CuratorProviderService;
+
+        bkServerConf := @parameter1: org.apache.bookkeeper.conf.ServerConfiguration;
+
+        regService := @parameter2: org.apache.bookkeeper.stream.server.service.RegistrationServiceProvider;
+
+        storageConf := @parameter3: org.apache.bookkeeper.stream.storage.conf.StorageConfiguration;
+
+        $stack4 = new org.apache.bookkeeper.stream.storage.impl.cluster.ClusterControllerImpl;
+/*392*/
+
+        $stack5 = new org.apache.bookkeeper.stream.storage.impl.cluster.ZkClusterMetadataStore;
+/*392*/
+
+        $stack6 = virtualinvoke curatorProviderService.<org.apache.bookkeeper.stream.server.service.CuratorProviderService: org.apache.curator.framework.CuratorFramework get()>();
+/*394*/
+
+        $stack7 = staticinvoke <org.apache.bookkeeper.meta.zk.ZKMetadataDriverBase: java.lang.String resolveZkServers(org.apache.bookkeeper.conf.AbstractConfiguration)>(bkServerConf);
+/*395*/
+
+        specialinvoke $stack5.<org.apache.bookkeeper.stream.storage.impl.cluster.ZkClusterMetadataStore: void <init>(org.apache.curator.framework.CuratorFramework,java.lang.String,java.lang.String)>($stack6, $stack7, "/stream");
+/*395*/
+
+        $stack8 = virtualinvoke regService.<org.apache.bookkeeper.stream.server.service.RegistrationServiceProvider: org.apache.bookkeeper.discover.RegistrationClient get()>();
+/*397*/
+
+        $stack9 = new org.apache.bookkeeper.stream.storage.impl.sc.DefaultStorageContainerController;
+/*397*/
+
+        specialinvoke $stack9.<org.apache.bookkeeper.stream.storage.impl.sc.DefaultStorageContainerController: void <init>()>();
+/*397*/
+
+        $stack10 = new org.apache.bookkeeper.stream.storage.impl.cluster.ZkClusterControllerLeaderSelector;
+/*397*/
+
+        $stack6 = virtualinvoke curatorProviderService.<org.apache.bookkeeper.stream.server.service.CuratorProviderService: org.apache.curator.framework.CuratorFramework get()>();
+/*399*/
+
+        specialinvoke $stack10.<org.apache.bookkeeper.stream.storage.impl.cluster.ZkClusterControllerLeaderSelector: void <init>(org.apache.curator.framework.CuratorFramework,java.lang.String)>($stack6, "/stream");
+/*399*/
+
+        specialinvoke $stack4.<org.apache.bookkeeper.stream.storage.impl.cluster.ClusterControllerImpl: void <init>(org.apache.bookkeeper.stream.storage.api.cluster.ClusterMetadataStore,org.apache.bookkeeper.discover.RegistrationClient,org.apache.bookkeeper.stream.storage.impl.sc.StorageContainerController,org.apache.bookkeeper.stream.storage.api.cluster.ClusterControllerLeaderSelector,org.apache.bookkeeper.stream.storage.conf.StorageConfiguration)>($stack5, $stack8, $stack9, $stack10, storageConf);
+/*399*/
+
+        return $stack4;
+/*392*/
+    }
+

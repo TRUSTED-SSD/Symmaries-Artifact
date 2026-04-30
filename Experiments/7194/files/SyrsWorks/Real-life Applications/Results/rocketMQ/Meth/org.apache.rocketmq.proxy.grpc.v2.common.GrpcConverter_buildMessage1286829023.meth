@@ -1,0 +1,25 @@
+apache.rocketmq.v2.Message org.apache.rocketmq.proxy.grpc.v2.common.GrpcConverter:buildMessage(org.apache.rocketmq.common.message.MessageExt messageExt)
+{
+java.util.Map userProperties;
+  apache.rocketmq.v2.SystemProperties systemProperties;
+  apache.rocketmq.v2.Resource topic;
+  java.lang.String $stack7;
+  apache.rocketmq.v2.Message$Builder $stack9;
+  byte[] $stack13;
+  com.google.protobuf.ByteString $stack14;
+  apache.rocketmq.v2.Message $stack16;
+  userProperties = this.buildUserAttributes(messageExt);
+ systemProperties = this.buildSystemProperties(messageExt);
+ $stack7 = messageExt.getTopic();
+ topic = this.buildResource($stack7);
+ $stack9 = apache.rocketmq.v2.Message.newBuilder();
+ $stack9 = $stack9.setTopic(topic);
+ $stack9 = $stack9.putAllUserProperties(userProperties);
+ $stack9 = $stack9.setSystemProperties(systemProperties);
+ $stack13 = messageExt.getBody();
+ $stack14 = com.google.protobuf.ByteString.copyFrom($stack13);
+ $stack9 = $stack9.setBody($stack14);
+ $stack16 = $stack9.build();
+ return  $stack16;
+ } 
+

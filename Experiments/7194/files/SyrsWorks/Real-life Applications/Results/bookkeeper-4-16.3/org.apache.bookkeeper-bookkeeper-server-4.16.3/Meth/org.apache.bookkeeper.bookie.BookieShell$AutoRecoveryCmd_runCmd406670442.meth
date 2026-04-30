@@ -1,0 +1,27 @@
+int org.apache.bookkeeper.bookie.BookieShell$AutoRecoveryCmd:runCmd(org.apache.commons.cli.CommandLine cmdLine)
+{
+boolean disable;
+  boolean enable;
+  org.apache.bookkeeper.tools.cli.commands.autorecovery.ToggleCommand$AutoRecoveryFlags flags;
+  org.apache.bookkeeper.tools.cli.commands.autorecovery.ToggleCommand $stack11;
+  org.apache.bookkeeper.bookie.BookieShell $stack12;
+  org.apache.bookkeeper.conf.ServerConfiguration $stack13;
+  disable = cmdLine.hasOption("d");
+ enable = cmdLine.hasOption("e");
+ flags=new org.apache.bookkeeper.tools.cli.commands.autorecovery.ToggleCommand$AutoRecoveryFlags;
+ flags#org.apache.bookkeeper.tools.cli.commands.autorecovery.ToggleCommand$AutoRecoveryFlags();
+ flags = flags.enable(enable);
+ if (disable!=0) goto label0;
+ if (enable!=0) goto label0;
+ disable=1;
+ goto label1;
+ label0:disable=0;
+ label1:flags = flags.status(disable);
+ $stack11=new org.apache.bookkeeper.tools.cli.commands.autorecovery.ToggleCommand;
+ $stack11#org.apache.bookkeeper.tools.cli.commands.autorecovery.ToggleCommand();
+ $stack12=this.this$0;
+ $stack13=$stack12.bkConf;
+ disable = $stack11.apply($stack13,flags);
+ return  0;
+ } 
+

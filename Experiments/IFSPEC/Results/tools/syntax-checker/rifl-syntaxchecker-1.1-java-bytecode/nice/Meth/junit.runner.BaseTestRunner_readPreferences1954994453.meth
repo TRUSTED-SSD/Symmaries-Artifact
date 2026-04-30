@@ -1,0 +1,53 @@
+static void junit.runner.BaseTestRunner:readPreferences()
+{
+java.io.FileInputStream is;
+  java.io.IOException e1;
+  java.lang.Throwable l2;
+  java.io.FileInputStream $stack4;
+  java.io.File $stack5;
+  java.util.Properties $stack6;
+  java.util.Properties $stack7;
+  java.io.IOException $stack10;
+  java.io.IOException $stack11;
+  java.io.IOException $stack13;
+  is=null;
+ label0:$stack4=new java.io.FileInputStream;
+ $stack5 = junit.runner.BaseTestRunner.getPreferencesFile();
+ $stack4#java.io.FileInputStream($stack5);
+ is=$stack4;
+ $stack6=new java.util.Properties;
+ $stack7 = junit.runner.BaseTestRunner.getPreferences();
+ $stack6#java.util.Properties($stack7);
+ junit.runner.BaseTestRunner.setPreferences($stack6);
+ $stack6 = junit.runner.BaseTestRunner.getPreferences();
+ $stack6.load((java.io.InputStream)$stack4);
+ label1:if ($stack4==null) goto label2;
+ $stack4.close();
+ label2:goto label3;
+ label4:e1 = catch;
+ goto label3;
+ label5:$stack11 = catch;
+ e1=$stack11;
+ label6:if (is==null) goto label7;
+ is.close();
+ label7:goto label3;
+ label8:$stack10 = catch;
+ e1=$stack10;
+ goto label3;
+ label9:l2 = catch;
+ label10:if (is==null) goto label11;
+ is.close();
+ label11:goto label12;
+ label13:$stack13 = catch;
+ e1=$stack13;
+ label12:throw l2;
+ label3:return;
+ catch java.io.IOException: label1 - label2 : label4;
+catch java.io.IOException: label0 - label1 : label5;
+catch java.io.IOException: label6 - label7 : label8;
+catch java.lang.Throwable: label0 - label1 : label9;
+catch java.lang.Throwable: label5 - label6 : label9;
+catch java.io.IOException: label10 - label11 : label13;
+catch java.lang.Throwable: label9 - label10 : label9;
+} 
+

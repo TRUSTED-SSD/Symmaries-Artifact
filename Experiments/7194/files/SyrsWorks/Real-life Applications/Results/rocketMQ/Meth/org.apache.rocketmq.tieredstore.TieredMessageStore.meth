@@ -1,0 +1,41 @@
+org.apache.rocketmq.tieredstore.TieredMessageStore(org.apache.rocketmq.store.plugin.MessageStorePluginContext context,org.apache.rocketmq.store.MessageStore next)
+{
+org.apache.rocketmq.tieredstore.common.TieredMessageStoreConfig $stack3;
+  java.lang.String $stack6;
+  org.apache.rocketmq.tieredstore.metadata.TieredMetadataStore $stack11;
+  org.apache.rocketmq.tieredstore.TieredMessageFetcher $stack12;
+  org.apache.rocketmq.tieredstore.TieredDispatcher $stack14;
+  org.apache.rocketmq.tieredstore.container.TieredContainerManager $stack17;
+  this#org.apache.rocketmq.store.plugin.AbstractPluginMessageStore(context,next);
+ $stack3=new org.apache.rocketmq.tieredstore.common.TieredMessageStoreConfig;
+ $stack3#org.apache.rocketmq.tieredstore.common.TieredMessageStoreConfig();
+ this.storeConfig=$stack3;
+ $stack3=this.storeConfig;
+ context.registerConfiguration((java.lang.Object)$stack3);
+ $stack3=this.storeConfig;
+ $stack6 = $stack3.getBrokerName();
+ this.brokerName=$stack6;
+ $stack3=this.storeConfig;
+ $stack6 = $stack3.getBrokerClusterName();
+ org.apache.rocketmq.tieredstore.util.TieredStoreUtil.addSystemTopic($stack6);
+ $stack6=this.brokerName;
+ org.apache.rocketmq.tieredstore.util.TieredStoreUtil.addSystemTopic($stack6);
+ $stack3=this.storeConfig;
+ $stack11 = org.apache.rocketmq.tieredstore.util.TieredStoreUtil.getMetadataStore($stack3);
+ this.metadataStore=$stack11;
+ $stack12=new org.apache.rocketmq.tieredstore.TieredMessageFetcher;
+ $stack3=this.storeConfig;
+ $stack12#org.apache.rocketmq.tieredstore.TieredMessageFetcher($stack3);
+ this.fetcher=$stack12;
+ $stack14=new org.apache.rocketmq.tieredstore.TieredDispatcher;
+ $stack3=this.storeConfig;
+ $stack14#org.apache.rocketmq.tieredstore.TieredDispatcher(next,$stack3);
+ this.dispatcher=$stack14;
+ $stack3=this.storeConfig;
+ $stack17 = org.apache.rocketmq.tieredstore.container.TieredContainerManager.getInstance($stack3);
+ this.containerManager=$stack17;
+ $stack14=this.dispatcher;
+ next.addDispatcher((org.apache.rocketmq.store.CommitLogDispatcher)$stack14);
+ return;
+ } 
+

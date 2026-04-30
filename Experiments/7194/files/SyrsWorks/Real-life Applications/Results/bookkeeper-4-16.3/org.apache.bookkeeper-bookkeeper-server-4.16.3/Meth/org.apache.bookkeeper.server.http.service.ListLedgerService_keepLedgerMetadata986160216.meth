@@ -1,0 +1,31 @@
+void org.apache.bookkeeper.server.http.service.ListLedgerService:keepLedgerMetadata(long ledgerId,java.util.concurrent.CompletableFuture future,java.util.LinkedHashMap output,boolean decodeMeta)
+{
+org.apache.bookkeeper.client.api.LedgerMetadata md;
+  java.lang.Object $stack7;
+  org.apache.bookkeeper.versioning.Versioned $stack8;
+  java.lang.Long $stack10;
+  java.lang.String $stack11;
+  java.lang.String $stack12;
+  org.apache.bookkeeper.meta.LedgerMetadataSerDe $stack13;
+  byte[] $stack14;
+  java.nio.charset.Charset $stack15;
+  $stack7 = future.get();
+ $stack8=(org.apache.bookkeeper.versioning.Versioned) $stack7;
+ $stack7 = $stack8.getValue();
+ md=(org.apache.bookkeeper.client.api.LedgerMetadata) $stack7;
+ if (decodeMeta==0) goto label0;
+ $stack10 = java.lang.Long.valueOf(ledgerId);
+ $stack11 = $stack10.toString();
+ output.put((java.lang.Object)$stack11,(java.lang.Object)md);
+ goto label1;
+ label0:$stack10 = java.lang.Long.valueOf(ledgerId);
+ $stack11 = $stack10.toString();
+ $stack12=new java.lang.String;
+ $stack13=this.serDe;
+ $stack14 = $stack13.serialize(md);
+ $stack15=java.nio.charset.StandardCharsets.UTF_8;
+ $stack12#java.lang.String($stack14,$stack15);
+ output.put((java.lang.Object)$stack11,(java.lang.Object)$stack12);
+ label1:return;
+ } 
+

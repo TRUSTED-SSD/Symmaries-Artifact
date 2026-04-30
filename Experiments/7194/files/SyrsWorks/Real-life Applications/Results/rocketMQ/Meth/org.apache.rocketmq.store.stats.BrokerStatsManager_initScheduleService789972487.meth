@@ -1,0 +1,23 @@
+void org.apache.rocketmq.store.stats.BrokerStatsManager:initScheduleService()
+{
+org.apache.rocketmq.common.ThreadFactoryImpl $stack1;
+  org.apache.rocketmq.common.BrokerConfig $stack2;
+  java.util.concurrent.ScheduledExecutorService $stack3;
+  $stack1=new org.apache.rocketmq.common.ThreadFactoryImpl;
+ $stack2=this.brokerConfig;
+ $stack1#org.apache.rocketmq.common.ThreadFactoryImpl("BrokerStatsThread",1,(org.apache.rocketmq.common.BrokerIdentity)$stack2);
+ $stack3 = java.util.concurrent.Executors.newSingleThreadScheduledExecutor((java.util.concurrent.ThreadFactory)$stack1);
+ this.scheduledExecutorService=$stack3;
+ $stack1=new org.apache.rocketmq.common.ThreadFactoryImpl;
+ $stack2=this.brokerConfig;
+ $stack1#org.apache.rocketmq.common.ThreadFactoryImpl("CommercialStatsThread",1,(org.apache.rocketmq.common.BrokerIdentity)$stack2);
+ $stack3 = java.util.concurrent.Executors.newSingleThreadScheduledExecutor((java.util.concurrent.ThreadFactory)$stack1);
+ this.commercialExecutor=$stack3;
+ $stack1=new org.apache.rocketmq.common.ThreadFactoryImpl;
+ $stack2=this.brokerConfig;
+ $stack1#org.apache.rocketmq.common.ThreadFactoryImpl("AccountStatsThread",1,(org.apache.rocketmq.common.BrokerIdentity)$stack2);
+ $stack3 = java.util.concurrent.Executors.newSingleThreadScheduledExecutor((java.util.concurrent.ThreadFactory)$stack1);
+ this.accountExecutor=$stack3;
+ return;
+ } 
+

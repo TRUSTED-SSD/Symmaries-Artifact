@@ -1,0 +1,15 @@
+void org.apache.rocketmq.client.consumer.MQPullConsumerScheduleService:registerPullTaskCallback(java.lang.String topic,org.apache.rocketmq.client.consumer.PullTaskCallback callback)
+{
+org.apache.rocketmq.client.consumer.DefaultMQPullConsumer $stack3;
+  java.util.concurrent.ConcurrentMap $stack4;
+  java.lang.String $stack5;
+  $stack4=this.callbackTable;
+ $stack3=this.defaultMQPullConsumer;
+ $stack5 = $stack3.getNamespace();
+ $stack5 = org.apache.rocketmq.remoting.protocol.NamespaceUtil.wrapNamespace($stack5,topic);
+ $stack4.put((java.lang.Object)$stack5,(java.lang.Object)callback);
+ $stack3=this.defaultMQPullConsumer;
+ $stack3.registerMessageQueueListener(topic,null);
+ return;
+ } 
+

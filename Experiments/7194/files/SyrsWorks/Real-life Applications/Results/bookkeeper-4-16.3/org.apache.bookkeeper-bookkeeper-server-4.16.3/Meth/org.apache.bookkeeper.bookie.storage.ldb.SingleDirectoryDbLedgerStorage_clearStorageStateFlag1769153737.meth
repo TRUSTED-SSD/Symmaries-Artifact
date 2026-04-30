@@ -1,0 +1,42 @@
+void org.apache.bookkeeper.bookie.storage.ldb.SingleDirectoryDbLedgerStorage:clearStorageStateFlag(org.apache.bookkeeper.bookie.LedgerStorage$StorageState flag)
+{
+int flagInt;
+  int curFlags;
+  int newFlags;
+  java.util.Map $stack5;
+  boolean $stack6;
+  java.lang.StringBuilder $stack7;
+  java.lang.String $stack10;
+  java.lang.Object $stack12;
+  java.lang.Integer $stack13;
+  org.apache.bookkeeper.bookie.storage.ldb.LedgerMetadataIndex $stack15;
+  org.slf4j.Logger $stack20;
+  java.lang.Integer $stack23;
+  $stack5=org.apache.bookkeeper.bookie.storage.ldb.SingleDirectoryDbLedgerStorage.stateBitmaps;
+ $stack6 = $stack5.containsKey((java.lang.Object)flag);
+ $stack7=new java.lang.StringBuilder;
+ $stack7#java.lang.StringBuilder();
+ $stack7 = $stack7.append("Unsupported flag ");
+ $stack7 = $stack7.append((java.lang.Object)flag);
+ $stack10 = $stack7.toString();
+ com.google.common.base.Preconditions.checkArgument($stack6,(java.lang.Object)$stack10);
+ $stack5=org.apache.bookkeeper.bookie.storage.ldb.SingleDirectoryDbLedgerStorage.stateBitmaps;
+ $stack12 = $stack5.get((java.lang.Object)flag);
+ $stack13=(java.lang.Integer) $stack12;
+ flagInt = $stack13.intValue();
+ label0:$stack15=this.ledgerIndex;
+ curFlags = $stack15.getStorageStateFlags();
+ newFlags=(!flagInt & -1) |(!-1 & flagInt);
+ newFlags=(curFlags & newFlags);
+ $stack15=this.ledgerIndex;
+ $stack6 = $stack15.setStorageStateFlags(curFlags,newFlags);
+ if ($stack6==0) goto label1;
+ return;
+ label1:$stack20=org.apache.bookkeeper.bookie.storage.ldb.SingleDirectoryDbLedgerStorage.log;
+ $stack13 = java.lang.Integer.valueOf(curFlags);
+ $stack23 = java.lang.Integer.valueOf(newFlags);
+ dummyClass.lowSink("Conflict updating storage state flags {} -> {}, retrying");
+$stack20.info("Conflict updating storage state flags {} -> {}, retrying",(java.lang.Object)$stack13,(java.lang.Object)$stack23);
+ goto label0;
+ } 
+

@@ -1,0 +1,8 @@
+org.apache.rocketmq.remoting.protocol.subscription.SubscriptionGroupConfig org.apache.rocketmq.proxy.service.metadata.ClusterMetadataService:getSubscriptionGroupConfig (
+  java.lang.String group) {
+  guard = tt;
+  ret(level()) = pc ⊔ level(group) ⊔ level(this) ⊔ obj_level(group) ⊔ obj_level(this);
+  ret(obj_level()) = pc ⊔ level(group) ⊔ level(this) ⊔ obj_level(group) ⊔ obj_level(this);
+  ret(obj_level(group)) = if obj_level(group) = ⊤ ∨ pc ≠ ⊤ ∧ (if obj_level(this) = ⊥ then obj_level(group) = ⊥ ∧ level(group) ⊔ level(this) = ⊤ else obj_level(group) = ⊥ ∧ obj_level(this) = ⊤) then ⊤ else ⊥;
+  ret(obj_level(this)) = pc ⊔ level(group) ⊔ level(this) ⊔ obj_level(group) ⊔ obj_level(this);
+}

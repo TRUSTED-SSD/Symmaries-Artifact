@@ -1,0 +1,41 @@
+static com.google.zxing.pdf417.decoder.DetectionResultRowIndicatorColumn com.google.zxing.pdf417.decoder.PDF417ScanningDecoder:getRowIndicatorColumn(com.google.zxing.common.BitMatrix image,com.google.zxing.pdf417.decoder.BoundingBox boundingBox,com.google.zxing.ResultPoint startPoint,boolean leftToRight,int minCodewordWidth,int maxCodewordWidth)
+{
+com.google.zxing.pdf417.decoder.DetectionResultRowIndicatorColumn rowIndicatorColumn;
+  int i;
+  byte increment;
+  int startColumn;
+  int imageRow;
+  com.google.zxing.pdf417.decoder.Codeword codeword;
+  float $stack13;
+  int $stack15;
+  rowIndicatorColumn=new com.google.zxing.pdf417.decoder.DetectionResultRowIndicatorColumn;
+ rowIndicatorColumn#com.google.zxing.pdf417.decoder.DetectionResultRowIndicatorColumn(boundingBox,leftToRight);
+ i=0;
+ label0:if (i>=2) goto label1;
+ if (i!=0) goto label2;
+ increment=1;
+ goto label3;
+ label2:increment=-1;
+ label3:$stack13 = startPoint.getX();
+ startColumn=(int) $stack13;
+ $stack13 = startPoint.getY();
+ imageRow=(int) $stack13;
+ label4:$stack15 = boundingBox.getMaxY();
+ if (imageRow>$stack15) goto label5;
+ $stack15 = boundingBox.getMinY();
+ if (imageRow<$stack15) goto label5;
+ $stack15 = image.getWidth();
+ codeword = com.google.zxing.pdf417.decoder.PDF417ScanningDecoder.detectCodeword(image,0,$stack15,leftToRight,startColumn,imageRow,minCodewordWidth,maxCodewordWidth);
+ if (codeword==null) goto label6;
+ rowIndicatorColumn.setCodeword(imageRow,codeword);
+ if (leftToRight==0) goto label7;
+ startColumn = codeword.getStartX();
+ goto label6;
+ label7:startColumn = codeword.getEndX();
+ label6:imageRow=(imageRow+increment);
+ goto label4;
+ label5:i=(i+1);
+ goto label0;
+ label1:return  rowIndicatorColumn;
+ } 
+

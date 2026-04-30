@@ -1,0 +1,36 @@
+    public org.junit.runner.Runner safeRunnerForClass(java.lang.Class)
+    {
+        org.junit.runners.model.RunnerBuilder this;
+        java.lang.Class testClass;
+        org.junit.runner.Runner $stack3;
+        java.lang.Throwable $stack4;
+        org.junit.internal.runners.ErrorReportingRunner $stack5;
+
+        this := @this: org.junit.runners.model.RunnerBuilder;
+
+        testClass := @parameter0: java.lang.Class;
+
+     label1:
+        $stack3 = virtualinvoke this.<org.junit.runners.model.RunnerBuilder: org.junit.runner.Runner runnerForClass(java.lang.Class)>(testClass);
+/*59*/
+
+     label2:
+        return $stack3;
+/*59*/
+
+     label3:
+        $stack4 := @caughtexception;
+/*59*/
+
+        $stack5 = new org.junit.internal.runners.ErrorReportingRunner;
+/*61*/
+
+        specialinvoke $stack5.<org.junit.internal.runners.ErrorReportingRunner: void <init>(java.lang.Class,java.lang.Throwable)>(testClass, $stack4);
+/*61*/
+
+        return $stack5;
+/*61*/
+
+        catch java.lang.Throwable from label1 to label2 with label3;
+    }
+

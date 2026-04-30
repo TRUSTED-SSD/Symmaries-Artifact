@@ -1,0 +1,23 @@
+void org.apache.rocketmq.remoting.netty.NettyRemotingAbstract:lambda$invokeSyncImpl$3(org.apache.rocketmq.remoting.netty.ResponseFuture responseFuture,int opaque,java.net.SocketAddress addr,io.netty.channel.ChannelFuture f)
+{
+boolean $stack5;
+  java.util.concurrent.ConcurrentMap $stack6;
+  java.lang.Integer $stack7;
+  java.lang.Throwable $stack9;
+  org.apache.rocketmq.logging.org.slf4j.Logger $stack10;
+  $stack5 = f.isSuccess();
+ if ($stack5==0) goto label0;
+ responseFuture.setSendRequestOK((boolean)1);
+ return;
+ label0:responseFuture.setSendRequestOK((boolean)0);
+ $stack6=this.responseTable;
+ $stack7 = java.lang.Integer.valueOf(opaque);
+ $stack6.remove((java.lang.Object)$stack7);
+ $stack9 = f.cause();
+ responseFuture.setCause($stack9);
+ responseFuture.putResponse(null);
+ $stack10=org.apache.rocketmq.remoting.netty.NettyRemotingAbstract.log;
+ $stack10.warn("Failed to write a request command to {}, caused by underlying I/O operation failure",(java.lang.Object)addr);
+ return;
+ } 
+

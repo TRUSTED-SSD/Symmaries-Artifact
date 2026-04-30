@@ -1,0 +1,27 @@
+void org.apache.rocketmq.broker.longpolling.PullRequestHoldService:suspendPullRequest(java.lang.String @topic,int queueId,org.apache.rocketmq.broker.longpolling.PullRequest pullRequest)
+{
+org.apache.rocketmq.broker.longpolling.ManyPullRequest mpr;
+  org.apache.rocketmq.broker.longpolling.ManyPullRequest prev;
+  java.util.concurrent.ConcurrentMap $stack8;
+  java.lang.Object $stack9;
+  org.apache.rocketmq.remoting.protocol.RemotingCommand $stack10;
+  java.lang.String topic;
+topic=@topic;
+topic = this#org.apache.rocketmq.broker.longpolling.PullRequestHoldService:buildKey(topic,queueId);
+ $stack8=this.pullRequestTable;
+ $stack9 = $stack8.get((java.lang.Object)topic);
+ mpr=(org.apache.rocketmq.broker.longpolling.ManyPullRequest) $stack9;
+ if (null!=mpr) goto label0;
+ mpr=new org.apache.rocketmq.broker.longpolling.ManyPullRequest;
+ mpr#org.apache.rocketmq.broker.longpolling.ManyPullRequest();
+ $stack8=this.pullRequestTable;
+ $stack9 = $stack8.putIfAbsent((java.lang.Object)topic,(java.lang.Object)mpr);
+ prev=(org.apache.rocketmq.broker.longpolling.ManyPullRequest) $stack9;
+ if (prev==null) goto label0;
+ mpr=prev;
+ label0:$stack10 = pullRequest.getRequestCommand();
+ $stack10.setSuspended((boolean)1);
+ mpr.addPullRequest(pullRequest);
+ return;
+ } 
+

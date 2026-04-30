@@ -1,0 +1,8 @@
+void org.apache.bookkeeper.statelib.impl.mvcc.MVCCCommandProcessor:applyTxnCommand (
+  long revision, org.apache.bookkeeper.stream.proto.kv.store.Command command,
+  org.apache.bookkeeper.statelib.impl.mvcc.MVCCStoreImpl store) {
+  guard = pc = ⊥;
+  ret(obj_level(command)) = level(revision) ⊔ level(store) ⊔ obj_level(command) ⊔ obj_level(store);
+  ret(obj_level(store)) = level(revision) ⊔ level(store) ⊔ obj_level(command) ⊔ obj_level(store) ⊔ obj_level(this);
+  ret(obj_level(this)) = level(revision) ⊔ level(store) ⊔ obj_level(command) ⊔ obj_level(store) ⊔ obj_level(this);
+}

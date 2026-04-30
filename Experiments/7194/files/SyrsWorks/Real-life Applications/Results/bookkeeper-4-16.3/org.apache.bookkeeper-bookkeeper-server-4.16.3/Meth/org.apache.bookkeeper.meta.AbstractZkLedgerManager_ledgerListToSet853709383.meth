@@ -1,0 +1,47 @@
+java.util.NavigableSet org.apache.bookkeeper.meta.AbstractZkLedgerManager:ledgerListToSet(java.util.List ledgerNodes,java.lang.String path)
+{
+java.util.TreeSet zkActiveLedgers;
+  java.util.Iterator l4;
+  java.lang.String ledgerNode;
+  java.io.IOException e;
+  boolean $stack9;
+  java.lang.Object $stack10;
+  java.lang.StringBuilder $stack12;
+  java.lang.String $stack16;
+  long $stack17;
+  java.lang.Long $stack18;
+  org.slf4j.Logger $stack23;
+  zkActiveLedgers=new java.util.TreeSet;
+ zkActiveLedgers#java.util.TreeSet();
+ l4 = ledgerNodes.iterator();
+ label0:$stack9 = l4.hasNext();
+ if ($stack9==0) goto label1;
+ $stack10 = l4.next();
+ ledgerNode=(java.lang.String) $stack10;
+ $stack9 = org.apache.bookkeeper.meta.AbstractZkLedgerManager.isSpecialZnode(ledgerNode);
+ if ($stack9==0) goto label2;
+ goto label0;
+ label2:$stack12=new java.lang.StringBuilder;
+ $stack12#java.lang.StringBuilder();
+ $stack12 = $stack12.append(path);
+ $stack12 = $stack12.append("/");
+ $stack12 = $stack12.append(ledgerNode);
+ $stack16 = $stack12.toString();
+ $stack17 = this.getLedgerId($stack16);
+ $stack18 = java.lang.Long.valueOf($stack17);
+ zkActiveLedgers.add((java.lang.Object)$stack18);
+ label3:goto label4;
+ label5:e = catch;
+ $stack23=org.apache.bookkeeper.meta.AbstractZkLedgerManager.LOG;
+ $stack12=new java.lang.StringBuilder;
+ $stack12#java.lang.StringBuilder();
+ $stack12 = $stack12.append("Error extracting ledgerId from ZK ledger node: ");
+ $stack12 = $stack12.append(ledgerNode);
+ ledgerNode = $stack12.toString();
+ $stack23.warn(ledgerNode);
+ goto label0;
+ label4:goto label0;
+ label1:return  zkActiveLedgers;
+ catch java.io.IOException: label2 - label3 : label5;
+} 
+

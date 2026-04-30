@@ -1,0 +1,47 @@
+org.apache.rocketmq.store.DispatchRequest[] org.apache.rocketmq.store.DefaultMessageStore$DispatchRequestOrderlyQueue:get(java.util.List dispatchRequestsList)
+{
+org.apache.rocketmq.store.DefaultMessageStore$DispatchRequestOrderlyQueue l2;
+  int i;
+  int mod;
+  org.apache.rocketmq.store.DispatchRequest[] ret;
+  java.lang.Throwable l6;
+  org.apache.rocketmq.store.DispatchRequest[][] $stack8;
+  long $stack13;
+  long $stack14;
+  l2=this;
+ monitorenter this;
+ label0:i=0;
+ label1:$stack8=this.buffer;
+ mod=#$stack8;
+ if (i>=mod) goto label2;
+ $stack14=this.ptr;
+ $stack8=this.buffer;
+ mod=#$stack8;
+ $stack13=(long) mod;
+ $stack13=($stack14%$stack13);
+ mod=(int) $stack13;
+ $stack8=this.buffer;
+ ret=$stack8[mod];
+ if (ret!=null) goto label3;
+ this.notifyAll();
+ monitorexit this;
+ label4:return  null;
+ label3:dispatchRequestsList.add((java.lang.Object)ret);
+ $stack8=this.buffer;
+ $stack8[mod]=null;
+ $stack13=this.ptr;
+ $stack13=($stack13+1L);
+ this.ptr=$stack13;
+ i=(i+1);
+ goto label1;
+ label2:monitorexit this;
+ label5:goto label6;
+ label7:l6 = catch;
+ monitorexit this;
+ label8:throw l6;
+ label6:return  null;
+ catch java.lang.Throwable: label0 - label4 : label7;
+catch java.lang.Throwable: label3 - label5 : label7;
+catch java.lang.Throwable: label7 - label8 : label7;
+} 
+

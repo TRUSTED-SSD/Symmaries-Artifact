@@ -1,0 +1,166 @@
+    protected void runTest() throws java.lang.Throwable
+    {
+        junit.framework.TestCase this;
+        java.lang.reflect.Method runMethod;
+        java.lang.ReflectiveOperationException e;
+        java.lang.String $stack3;
+        java.lang.Class $stack4;
+        java.lang.Class[] $stack5;
+        int $stack8;
+        boolean $stack9;
+        java.lang.Object[] $stack10;
+        java.lang.StringBuilder $stack12;
+        java.lang.IllegalAccessException $stack21;
+        java.lang.Throwable $stack22;
+        java.lang.reflect.InvocationTargetException $stack23;
+        java.lang.NoSuchMethodException $stack26;
+
+        this := @this: junit.framework.TestCase;
+
+        $stack3 = this.<junit.framework.TestCase: java.lang.String fName>;
+/*160*/
+
+        staticinvoke <junit.framework.TestCase: void assertNotNull(java.lang.String,java.lang.Object)>("TestCase.fName cannot be null", $stack3);
+/*160*/
+
+        runMethod = null;
+/*161*/
+
+     label1:
+        $stack4 = virtualinvoke this.<java.lang.Object: java.lang.Class getClass()>();
+/*167*/
+
+        $stack3 = this.<junit.framework.TestCase: java.lang.String fName>;
+/*167*/
+
+        $stack5 = (java.lang.Class[]) null;
+/*167*/
+
+        runMethod = virtualinvoke $stack4.<java.lang.Class: java.lang.reflect.Method getMethod(java.lang.String,java.lang.Class[])>($stack3, $stack5);
+/*167*/
+/*167*/
+
+     label2:
+        goto label4;
+/*170*/
+
+     label3:
+        $stack26 := @caughtexception;
+/*179*/
+
+        e = $stack26;
+/*168*/
+
+        $stack12 = new java.lang.StringBuilder;
+/*169*/
+
+        specialinvoke $stack12.<java.lang.StringBuilder: void <init>()>();
+/*169*/
+
+        $stack12 = virtualinvoke $stack12.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>("Method \"");
+/*169*/
+
+        $stack3 = this.<junit.framework.TestCase: java.lang.String fName>;
+/*169*/
+
+        $stack12 = virtualinvoke $stack12.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>($stack3);
+/*169*/
+
+        $stack12 = virtualinvoke $stack12.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>("\" not found");
+/*169*/
+
+        $stack3 = virtualinvoke $stack12.<java.lang.StringBuilder: java.lang.String toString()>();
+/*169*/
+
+        staticinvoke <junit.framework.TestCase: void fail(java.lang.String)>($stack3);
+/*169*/
+
+     label4:
+        $stack8 = virtualinvoke runMethod.<java.lang.reflect.Method: int getModifiers()>();
+/*171*/
+
+        $stack9 = staticinvoke <java.lang.reflect.Modifier: boolean isPublic(int)>($stack8);
+/*171*/
+
+        if $stack9 != 0 goto label5;
+/*171*/
+
+        $stack12 = new java.lang.StringBuilder;
+/*172*/
+
+        specialinvoke $stack12.<java.lang.StringBuilder: void <init>()>();
+/*172*/
+
+        $stack12 = virtualinvoke $stack12.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>("Method \"");
+/*172*/
+
+        $stack3 = this.<junit.framework.TestCase: java.lang.String fName>;
+/*172*/
+
+        $stack12 = virtualinvoke $stack12.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>($stack3);
+/*172*/
+
+        $stack12 = virtualinvoke $stack12.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>("\" should be public");
+/*172*/
+
+        $stack3 = virtualinvoke $stack12.<java.lang.StringBuilder: java.lang.String toString()>();
+/*172*/
+
+        staticinvoke <junit.framework.TestCase: void fail(java.lang.String)>($stack3);
+/*172*/
+
+     label5:
+        $stack10 = newarray (java.lang.Object)[0];
+/*176*/
+
+        virtualinvoke runMethod.<java.lang.reflect.Method: java.lang.Object invoke(java.lang.Object,java.lang.Object[])>(this, $stack10);
+/*176*/
+
+     label6:
+        goto label9;
+/*183*/
+
+     label7:
+        $stack23 := @caughtexception;
+/*182*/
+
+        e = $stack23;
+/*177*/
+
+        $stack23 = (java.lang.reflect.InvocationTargetException) $stack23;
+
+        virtualinvoke $stack23.<java.lang.reflect.InvocationTargetException: java.lang.Throwable fillInStackTrace()>();
+/*178*/
+
+        $stack23 = (java.lang.reflect.InvocationTargetException) e;
+
+        $stack22 = virtualinvoke $stack23.<java.lang.reflect.InvocationTargetException: java.lang.Throwable getTargetException()>();
+/*179*/
+
+        throw $stack22;
+/*179*/
+
+     label8:
+        $stack21 := @caughtexception;
+/*183*/
+
+        e = $stack21;
+/*180*/
+
+        $stack21 = (java.lang.IllegalAccessException) $stack21;
+
+        virtualinvoke $stack21.<java.lang.IllegalAccessException: java.lang.Throwable fillInStackTrace()>();
+/*181*/
+
+        throw e;
+/*182*/
+
+     label9:
+        return;
+/*184*/
+
+        catch java.lang.NoSuchMethodException from label1 to label2 with label3;
+        catch java.lang.reflect.InvocationTargetException from label5 to label6 with label7;
+        catch java.lang.IllegalAccessException from label5 to label6 with label8;
+    }
+

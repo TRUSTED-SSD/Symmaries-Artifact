@@ -1,0 +1,48 @@
+void org.apache.bookkeeper.proto.PerChannelBookieClient:readLac(long ledgerId,org.apache.bookkeeper.proto.BookkeeperInternalCallbacks$ReadLacCallback cb,java.lang.Object ctx)
+{
+java.lang.Object request;
+  org.apache.bookkeeper.proto.PerChannelBookieClient$CompletionKey completionKey;
+  long txnId;
+  org.apache.bookkeeper.proto.BookkeeperProtocol$BKPacketHeader$Builder headerBuilder;
+  org.apache.bookkeeper.proto.BookkeeperProtocol$ReadLacRequest$Builder readLacBuilder;
+  boolean $stack11;
+  org.apache.bookkeeper.proto.PerChannelBookieClient$V3CompletionKey $stack13;
+  org.apache.bookkeeper.proto.BookkeeperProtocol$OperationType $stack14;
+  org.apache.bookkeeper.proto.BookkeeperProtocol$ProtocolVersion $stack16;
+  org.apache.bookkeeper.proto.BookkeeperProtocol$Request$Builder $stack23;
+  org.apache.bookkeeper.proto.PerChannelBookieClient$ReadLacCompletion $stack28;
+  io.netty.channel.Channel $stack29;
+  request=null;
+ completionKey=null;
+ $stack11=this.useV2WireProtocol;
+ if ($stack11==0) goto label0;
+ request = org.apache.bookkeeper.proto.BookieProtocol$ReadRequest.create((byte)2,ledgerId,0L,(short)0,null);
+ $stack14=org.apache.bookkeeper.proto.BookkeeperProtocol$OperationType.READ_LAC;
+ completionKey = this.acquireV2Key(ledgerId,0L,$stack14);
+ goto label1;
+ label0:txnId = this#org.apache.bookkeeper.proto.PerChannelBookieClient:getTxnId();
+ $stack13=new org.apache.bookkeeper.proto.PerChannelBookieClient$V3CompletionKey;
+ $stack14=org.apache.bookkeeper.proto.BookkeeperProtocol$OperationType.READ_LAC;
+ $stack13#org.apache.bookkeeper.proto.PerChannelBookieClient$V3CompletionKey(this,txnId,$stack14);
+ completionKey=$stack13;
+ headerBuilder = org.apache.bookkeeper.proto.BookkeeperProtocol$BKPacketHeader.newBuilder();
+ $stack16=org.apache.bookkeeper.proto.BookkeeperProtocol$ProtocolVersion.VERSION_THREE;
+ headerBuilder = headerBuilder.setVersion($stack16);
+ $stack14=org.apache.bookkeeper.proto.BookkeeperProtocol$OperationType.READ_LAC;
+ headerBuilder = headerBuilder.setOperation($stack14);
+ headerBuilder = headerBuilder.setTxnId(txnId);
+ readLacBuilder = org.apache.bookkeeper.proto.BookkeeperProtocol$ReadLacRequest.newBuilder();
+ readLacBuilder = readLacBuilder.setLedgerId(ledgerId);
+ $stack23 = org.apache.bookkeeper.proto.BookkeeperProtocol$Request.newBuilder();
+ $stack23 = this.withRequestContext($stack23);
+ $stack23 = $stack23.setHeader(headerBuilder);
+ $stack23 = $stack23.setReadLacRequest(readLacBuilder);
+ request = $stack23.build();
+ label1:$stack28=new org.apache.bookkeeper.proto.PerChannelBookieClient$ReadLacCompletion;
+ $stack28#org.apache.bookkeeper.proto.PerChannelBookieClient$ReadLacCompletion(this,completionKey,cb,ctx,ledgerId);
+ this#org.apache.bookkeeper.proto.PerChannelBookieClient:putCompletionKeyValue(completionKey,(org.apache.bookkeeper.proto.PerChannelBookieClient$CompletionValue)$stack28);
+ $stack29=this.channel;
+ this#org.apache.bookkeeper.proto.PerChannelBookieClient:writeAndFlush($stack29,completionKey,request);
+ return;
+ } 
+

@@ -1,0 +1,54 @@
+static int java.util.TimSort:countRunAndMakeAscending(java.lang.Object[] r0,int i0,int i1,java.util.Comparator r1)
+{
+boolean $z0;
+  java.lang.Object $r2;
+  java.lang.Object $r3;
+  int $i2;
+  int $i3;
+  java.lang.Object $r4;
+  java.lang.Object $r5;
+  int $i4;
+  int $i5;
+  java.lang.Object $r6;
+  java.lang.Object $r7;
+  int $i6;
+  java.lang.AssertionError $r8;
+  int i7;
+  int i8;
+  int $i9;
+  $z0=java.util.TimSort.$assertionsDisabled;
+ if ($z0!=0) goto label0;
+ if (i0<i1) goto label0;
+ $r8=new java.lang.AssertionError;
+ $r8#java.lang.AssertionError:init();
+ throw $r8;
+ label0:i7=(i0+1);
+ if (i7!=i1) goto label1;
+ return  1;
+ label1:i8=(i7+1);
+ $r3=r0[i7];
+ $r2=r0[i0];
+ $i2 = r1.compare($r3,$r2);
+ if ($i2>=0) goto label2;
+ label3:if (i8>=i1) goto label4;
+ $r7=r0[i8];
+ $i5=(i8-1);
+ $r6=r0[$i5];
+ $i6 = r1.compare($r7,$r6);
+ if ($i6>=0) goto label4;
+ i8=(i8+1);
+ goto label3;
+ label4:java.util.TimSort.reverseRange(r0,i0,i8);
+ goto label5;
+ label2:if (i8>=i1) goto label5;
+ $r5=r0[i8];
+ $i3=(i8-1);
+ $r4=r0[$i3];
+ $i4 = r1.compare($r5,$r4);
+ if ($i4<0) goto label5;
+ i8=(i8+1);
+ goto label2;
+ label5:$i9=(i8-i0);
+ return  $i9;
+ }  
+

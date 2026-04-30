@@ -1,0 +1,50 @@
+boolean org.apache.bookkeeper.util.AvailabilityOfEntriesOfLedger$SequenceGroup:isEntryAvailable(long entryId)
+{
+boolean $stack3;
+  long $stack4;
+  byte $stack5;
+  int $stack6;
+  long $stack8;
+  java.lang.IllegalStateException $stack28;
+  $stack3 = this#org.apache.bookkeeper.util.AvailabilityOfEntriesOfLedger$SequenceGroup:isSequenceGroupClosed();
+ if ($stack3!=0) goto label0;
+ $stack28=new java.lang.IllegalStateException;
+ $stack28#java.lang.IllegalStateException("SequenceGroup is not yet closed, it is illegal to call isEntryAvailable");
+ throw $stack28;
+ label0:$stack4=this.firstSequenceStart;
+ $stack5=(entryId cmp $stack4);
+ if ($stack5<0) goto label1;
+ $stack8=this.lastSequenceStart;
+ $stack6=this.sequenceSize;
+ $stack4=(long) $stack6;
+ $stack4=($stack8+$stack4);
+ $stack5=(entryId cmp $stack4);
+ if ($stack5>0) goto label1;
+ $stack6=this.sequencePeriod;
+ if ($stack6!=0) goto label2;
+ $stack4=this.firstSequenceStart;
+ $stack4=(entryId-$stack4);
+ $stack6=this.sequenceSize;
+ entryId=(long) $stack6;
+ $stack5=($stack4 cmp entryId);
+ if ($stack5>=0) goto label3;
+ $stack3=1;
+ goto label4;
+ label3:$stack3=0;
+ label4:return  $stack3;
+ label2:$stack4=this.firstSequenceStart;
+ $stack4=(entryId-$stack4);
+ $stack6=this.sequencePeriod;
+ entryId=(long) $stack6;
+ $stack4=($stack4%entryId);
+ $stack6=this.sequenceSize;
+ entryId=(long) $stack6;
+ $stack5=($stack4 cmp entryId);
+ if ($stack5>=0) goto label5;
+ $stack3=1;
+ goto label6;
+ label5:$stack3=0;
+ label6:return  $stack3;
+ label1:return  0;
+ } 
+

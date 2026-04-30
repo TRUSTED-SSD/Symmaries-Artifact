@@ -1,0 +1,61 @@
+    private void applyValidators(java.util.List)
+    {
+        org.junit.runners.ParentRunner this;
+        java.util.List errors, $stack6;
+        java.util.Iterator i$;
+        org.junit.validator.TestClassValidator each;
+        org.junit.runners.model.TestClass $stack4;
+        java.lang.Class $stack5;
+        boolean $stack8;
+        java.lang.Object $stack9;
+
+        this := @this: org.junit.runners.ParentRunner;
+
+        errors := @parameter0: java.util.List;
+
+        $stack4 = virtualinvoke this.<org.junit.runners.ParentRunner: org.junit.runners.model.TestClass getTestClass()>();
+/*132*/
+
+        $stack5 = virtualinvoke $stack4.<org.junit.runners.model.TestClass: java.lang.Class getJavaClass()>();
+/*132*/
+
+        if $stack5 == null goto label2;
+/*132*/
+
+        $stack6 = <org.junit.runners.ParentRunner: java.util.List VALIDATORS>;
+/*133*/
+
+        i$ = interfaceinvoke $stack6.<java.util.List: java.util.Iterator iterator()>();
+/*133*/
+/*133*/
+
+     label1:
+        $stack8 = interfaceinvoke i$.<java.util.Iterator: boolean hasNext()>();
+/*133*/
+
+        if $stack8 == 0 goto label2;
+/*133*/
+
+        $stack9 = interfaceinvoke i$.<java.util.Iterator: java.lang.Object next()>();
+/*137*/
+
+        each = (org.junit.validator.TestClassValidator) $stack9;
+/*137*/
+
+        $stack4 = virtualinvoke this.<org.junit.runners.ParentRunner: org.junit.runners.model.TestClass getTestClass()>();
+/*134*/
+
+        $stack6 = interfaceinvoke each.<org.junit.validator.TestClassValidator: java.util.List validateTestClass(org.junit.runners.model.TestClass)>($stack4);
+/*134*/
+
+        interfaceinvoke errors.<java.util.List: boolean addAll(java.util.Collection)>($stack6);
+/*134*/
+
+        goto label1;
+/*134*/
+
+     label2:
+        return;
+/*137*/
+    }
+

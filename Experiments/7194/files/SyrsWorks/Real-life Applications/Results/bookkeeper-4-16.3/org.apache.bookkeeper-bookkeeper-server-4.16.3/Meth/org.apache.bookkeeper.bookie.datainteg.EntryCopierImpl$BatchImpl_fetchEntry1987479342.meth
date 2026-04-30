@@ -1,0 +1,45 @@
+java.util.concurrent.CompletableFuture org.apache.bookkeeper.bookie.datainteg.EntryCopierImpl$BatchImpl:fetchEntry(long entryId)
+{
+java.util.List ensemble;
+  java.util.Map$Entry writeSetsForEntryId;
+  com.google.common.collect.ImmutableList writeSet;
+  java.util.concurrent.CompletableFuture promise;
+  org.apache.bookkeeper.client.api.LedgerMetadata $stack8;
+  com.google.common.collect.ImmutableSortedMap $stack10;
+  java.lang.Long $stack11;
+  java.lang.Object $stack13;
+  org.apache.bookkeeper.bookie.datainteg.WriteSets $stack14;
+  java.util.Optional $stack17;
+  org.slf4j.Logger $stack18;
+  java.lang.IllegalStateException $stack22;
+  java.lang.StringBuilder $stack23;
+  java.lang.String $stack27;
+  $stack8=this.metadata;
+ ensemble = $stack8.getEnsembleAt(entryId);
+ $stack10=this.writeSets;
+ $stack11 = java.lang.Long.valueOf(entryId);
+ writeSetsForEntryId = $stack10.floorEntry((java.lang.Object)$stack11);
+ if (writeSetsForEntryId!=null) goto label0;
+ $stack18 = org.apache.bookkeeper.bookie.datainteg.EntryCopierImpl.access$100();
+ $stack11 = java.lang.Long.valueOf(entryId);
+ $stack10=this.writeSets;
+ $stack18.error("writeSets for entryId {} not found, writeSets {}",(java.lang.Object)$stack11,(java.lang.Object)$stack10);
+ $stack22=new java.lang.IllegalStateException;
+ $stack23=new java.lang.StringBuilder;
+ $stack23#java.lang.StringBuilder();
+ $stack23 = $stack23.append("writeSets for entryId: ");
+ $stack23 = $stack23.append(entryId);
+ $stack23 = $stack23.append(" not found");
+ $stack27 = $stack23.toString();
+ $stack22#java.lang.IllegalStateException($stack27);
+ throw $stack22;
+ label0:$stack13 = writeSetsForEntryId.getValue();
+ $stack14=(org.apache.bookkeeper.bookie.datainteg.WriteSets) $stack13;
+ writeSet = $stack14.getForEntry(entryId);
+ promise=new java.util.concurrent.CompletableFuture;
+ promise#java.util.concurrent.CompletableFuture();
+ $stack17 = java.util.Optional.empty();
+ this#org.apache.bookkeeper.bookie.datainteg.EntryCopierImpl$BatchImpl(entryId,0,ensemble,writeSet,promise,$stack17);
+ return  promise;
+ } 
+

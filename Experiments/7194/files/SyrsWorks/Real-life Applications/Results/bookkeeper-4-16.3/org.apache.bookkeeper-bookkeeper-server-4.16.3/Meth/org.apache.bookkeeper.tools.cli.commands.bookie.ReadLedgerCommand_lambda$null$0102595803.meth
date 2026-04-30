@@ -1,0 +1,39 @@
+void org.apache.bookkeeper.tools.cli.commands.bookie.ReadLedgerCommand:lambda$null$0(java.util.concurrent.CompletableFuture future,org.apache.bookkeeper.tools.cli.commands.bookie.ReadLedgerCommand$ReadLedgerFlags flags,long entryId,int rc,long ledgerId1,long entryId1,io.netty.buffer.ByteBuf buffer,java.lang.Object ctx)
+{
+org.slf4j.Logger $stack12;
+  org.apache.bookkeeper.util.LedgerIdFormatter $stack14;
+  java.lang.String $stack16;
+  java.lang.Long $stack17;
+  boolean $stack18;
+  java.lang.StringBuilder $stack20;
+  org.apache.bookkeeper.client.BKException $stack32;
+  if (rc==0) goto label0;
+ $stack12=org.apache.bookkeeper.tools.cli.commands.bookie.ReadLedgerCommand.LOG;
+ $stack17 = java.lang.Long.valueOf(entryId1);
+ $stack16 = org.apache.bookkeeper.client.api.BKException.getMessage(rc);
+ $stack12.error("Failed to read entry {} -- {}",(java.lang.Object)$stack17,(java.lang.Object)$stack16);
+ $stack32 = org.apache.bookkeeper.client.BKException.create(rc);
+ future.completeExceptionally((java.lang.Throwable)$stack32);
+ return;
+ label0:$stack12=org.apache.bookkeeper.tools.cli.commands.bookie.ReadLedgerCommand.LOG;
+ $stack14=this.ledgerIdFormatter;
+ ledgerId1 = org.apache.bookkeeper.tools.cli.commands.bookie.ReadLedgerCommand$ReadLedgerFlags.access$500(flags);
+ $stack16 = $stack14.formatLedgerId(ledgerId1);
+ $stack17 = java.lang.Long.valueOf(entryId);
+ dummyClass.lowSink("--------- Lid={}, Eid={} ---------");
+$stack12.info("--------- Lid={}, Eid={} ---------",(java.lang.Object)$stack16,(java.lang.Object)$stack17);
+ $stack18 = org.apache.bookkeeper.tools.cli.commands.bookie.ReadLedgerCommand$ReadLedgerFlags.access$700(flags);
+ if ($stack18==0) goto label1;
+ $stack12=org.apache.bookkeeper.tools.cli.commands.bookie.ReadLedgerCommand.LOG;
+ $stack20=new java.lang.StringBuilder;
+ $stack20#java.lang.StringBuilder();
+ $stack20 = $stack20.append("Data: ");
+ $stack16 = io.netty.buffer.ByteBufUtil.prettyHexDump(buffer);
+ $stack20 = $stack20.append($stack16);
+ $stack16 = $stack20.toString();
+ dummyClass.lowSink($stack16);
+$stack12.info($stack16);
+ label1:future.complete(null);
+ return;
+ } 
+

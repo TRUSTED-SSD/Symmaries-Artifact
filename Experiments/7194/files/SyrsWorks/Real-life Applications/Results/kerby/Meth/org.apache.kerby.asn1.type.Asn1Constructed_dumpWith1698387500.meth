@@ -1,0 +1,53 @@
+void org.apache.kerby.asn1.type.Asn1Constructed:dumpWith(org.apache.kerby.asn1.Asn1Dumper dumper,int indents)
+{
+java.lang.String typeStr;
+  java.util.List items;
+  int i;
+  java.util.Iterator l6;
+  org.apache.kerby.asn1.type.Asn1Type aObj;
+  java.lang.StringBuilder $stack8;
+  org.apache.kerby.asn1.Tag $stack9;
+  org.apache.kerby.asn1.Asn1Dumper $stack23;
+  java.lang.Object $stack26;
+  boolean $stack28;
+  int $stack30;
+  int $stack33;
+  $stack8=new java.lang.StringBuilder;
+ $stack8#java.lang.StringBuilder();
+ $stack9 = this.tag();
+ typeStr = $stack9.typeStr();
+ $stack8 = $stack8.append(typeStr);
+ $stack8 = $stack8.append(" [tag=");
+ $stack9 = this.tag();
+ $stack8 = $stack8.append((java.lang.Object)$stack9);
+ $stack8 = $stack8.append(", len=");
+ i = this.getHeaderLength();
+ $stack8 = $stack8.append(i);
+ $stack8 = $stack8.append("+");
+ i = this.getBodyLength();
+ $stack8 = $stack8.append(i);
+ $stack8 = $stack8.append("] ");
+ typeStr = $stack8.toString();
+ $stack23 = dumper.indent(indents);
+ $stack23 = $stack23.append(typeStr);
+ $stack23.newLine();
+ $stack26 = this.getValue();
+ items=(java.util.List) $stack26;
+ i=0;
+ l6 = items.iterator();
+ label0:$stack28 = l6.hasNext();
+ if ($stack28==0) goto label1;
+ $stack26 = l6.next();
+ aObj=(org.apache.kerby.asn1.type.Asn1Type) $stack26;
+ $stack30=(indents+4);
+ dumper#org.apache.kerby.asn1.Asn1Dumper($stack30,aObj);
+ $stack30=i;
+ i=(i+1);
+ $stack33 = items.size();
+ $stack33=($stack33-1);
+ if ($stack30==$stack33) goto label2;
+ dumper.newLine();
+ label2:goto label0;
+ label1:return;
+ } 
+

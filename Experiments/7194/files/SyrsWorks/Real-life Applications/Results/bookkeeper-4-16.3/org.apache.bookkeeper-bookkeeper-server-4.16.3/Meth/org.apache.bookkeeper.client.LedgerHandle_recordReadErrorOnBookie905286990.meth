@@ -1,0 +1,20 @@
+void org.apache.bookkeeper.client.LedgerHandle:recordReadErrorOnBookie(int bookieIndex)
+{
+int $stack2;
+  org.apache.bookkeeper.client.ClientContext $stack3;
+  org.apache.bookkeeper.client.EnsemblePlacementPolicy $stack4;
+  org.apache.bookkeeper.client.api.LedgerMetadata $stack5;
+  java.lang.Integer $stack6;
+  java.util.Optional $stack7;
+  $stack2=this.stickyBookieIndex;
+ if ($stack2==-1) goto label0;
+ $stack3=this.clientCtx;
+ $stack4 = $stack3.getPlacementPolicy();
+ $stack5 = this.getLedgerMetadata();
+ $stack6 = java.lang.Integer.valueOf(bookieIndex);
+ $stack7 = java.util.Optional.of((java.lang.Object)$stack6);
+ bookieIndex = $stack4.getStickyReadBookieIndex($stack5,$stack7);
+ this.stickyBookieIndex=bookieIndex;
+ label0:return;
+ } 
+

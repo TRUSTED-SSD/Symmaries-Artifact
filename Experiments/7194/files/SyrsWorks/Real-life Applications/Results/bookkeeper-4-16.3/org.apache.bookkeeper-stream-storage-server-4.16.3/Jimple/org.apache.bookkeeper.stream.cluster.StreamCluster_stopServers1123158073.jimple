@@ -1,0 +1,42 @@
+    private void stopServers()
+    {
+        org.apache.bookkeeper.stream.cluster.StreamCluster this;
+        java.util.Iterator l1;
+        org.apache.bookkeeper.common.component.LifecycleComponent server;
+        java.util.List $stack3;
+        boolean $stack5;
+        java.lang.Object $stack6;
+
+        this := @this: org.apache.bookkeeper.stream.cluster.StreamCluster;
+
+        $stack3 = this.<org.apache.bookkeeper.stream.cluster.StreamCluster: java.util.List servers>;
+/*273*/
+
+        l1 = interfaceinvoke $stack3.<java.util.List: java.util.Iterator iterator()>();
+/*273*/
+/*273*/
+
+     label1:
+        $stack5 = interfaceinvoke l1.<java.util.Iterator: boolean hasNext()>();
+/*273*/
+
+        if $stack5 == 0 goto label2;
+/*273*/
+
+        $stack6 = interfaceinvoke l1.<java.util.Iterator: java.lang.Object next()>();
+/*276*/
+
+        server = (org.apache.bookkeeper.common.component.LifecycleComponent) $stack6;
+/*276*/
+
+        interfaceinvoke server.<org.apache.bookkeeper.common.component.LifecycleComponent: void close()>();
+/*274*/
+
+        goto label1;
+/*275*/
+
+     label2:
+        return;
+/*276*/
+    }
+

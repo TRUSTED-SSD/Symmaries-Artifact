@@ -1,0 +1,48 @@
+com.google.zxing.aztec.encoder.State com.google.zxing.aztec.encoder.State:appendFLGn(int eci)
+{
+com.google.zxing.aztec.encoder.State result;
+  com.google.zxing.aztec.encoder.Token token;
+  int bitsAdded;
+  byte[] eciDigits;
+  byte[] l6;
+  int l8;
+  byte eciDigit;
+  java.lang.String $stack11;
+  java.nio.charset.Charset $stack12;
+  java.lang.IllegalArgumentException $stack27;
+  result = this.shiftAndAppend(4,0);
+ token=result.token;
+ bitsAdded=3;
+ if (eci>=0) goto label0;
+ token = token.add(0,3);
+ goto label1;
+ label0:if (eci<=999999) goto label2;
+ $stack27=new java.lang.IllegalArgumentException;
+ $stack27#java.lang.IllegalArgumentException("ECI code must be between 0 and 999999");
+ throw $stack27;
+ label2:$stack11 = java.lang.Integer.toString(eci);
+ $stack12=java.nio.charset.StandardCharsets.ISO_8859_1;
+ eciDigits = $stack11.getBytes($stack12);
+ eci=#eciDigits;
+ token = token.add(eci,3);
+ l6=eciDigits;
+ eci=#eciDigits;
+ l8=0;
+ label3:if (l8>=eci) goto label4;
+ eciDigit=eciDigits[l8];
+ bitsAdded=(eciDigit-48);
+ bitsAdded=(bitsAdded+2);
+ token = token.add(bitsAdded,4);
+ l8=(l8+1);
+ goto label3;
+ label4:eci=#eciDigits;
+ eci=(eci * 4);
+ bitsAdded=(3+eci);
+ label1:result=new com.google.zxing.aztec.encoder.State;
+ eci=this.mode;
+ l8=this.bitCount;
+ bitsAdded=(l8+bitsAdded);
+ result#com.google.zxing.aztec.encoder.State(token,eci,0,bitsAdded);
+ return  result;
+ } 
+

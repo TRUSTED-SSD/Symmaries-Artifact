@@ -1,0 +1,47 @@
+void org.apache.rocketmq.tools.monitor.MonitorService:reportConsumerRunningInfo(java.lang.String consumerGroup)
+{
+org.apache.rocketmq.remoting.protocol.body.ConsumerConnection cc;
+  java.util.TreeMap infoMap;
+  java.util.Iterator l4;
+  org.apache.rocketmq.remoting.protocol.body.Connection c;
+  java.lang.String clientId;
+  java.lang.Object info;
+  org.apache.rocketmq.tools.admin.DefaultMQAdminExt $stack8;
+  java.util.HashSet $stack11;
+  boolean $stack13;
+  org.apache.rocketmq.tools.monitor.MonitorListener $stack15;
+  int $stack18;
+  org.apache.rocketmq.common.MQVersion$Version $stack19;
+  int $stack20;
+  java.lang.Exception $stack25;
+  $stack8=this.defaultMQAdminExt;
+ cc = $stack8.examineConsumerConnectionInfo(consumerGroup);
+ infoMap=new java.util.TreeMap;
+ infoMap#java.util.TreeMap();
+ $stack11 = cc.getConnectionSet();
+ l4 = $stack11.iterator();
+ label0:$stack13 = l4.hasNext();
+ if ($stack13==0) goto label1;
+ info = l4.next();
+ c=(org.apache.rocketmq.remoting.protocol.body.Connection) info;
+ clientId = c.getClientId();
+ $stack18 = c.getVersion();
+ $stack19=org.apache.rocketmq.common.MQVersion$Version.V3_1_8_SNAPSHOT;
+ $stack20 = $stack19.ordinal();
+ if ($stack18>=$stack20) goto label2;
+ goto label0;
+ label2:$stack8=this.defaultMQAdminExt;
+ info = $stack8.getConsumerRunningInfo(consumerGroup,clientId,(boolean)0);
+ infoMap.put((java.lang.Object)clientId,info);
+ label3:goto label4;
+ label5:$stack25 = catch;
+ info=$stack25;
+ label4:goto label0;
+ label1:$stack13 = infoMap.isEmpty();
+ if ($stack13!=0) goto label6;
+ $stack15=this.monitorListener;
+ $stack15.reportConsumerRunningInfo(infoMap);
+ label6:return;
+ catch java.lang.Exception: label2 - label3 : label5;
+} 
+

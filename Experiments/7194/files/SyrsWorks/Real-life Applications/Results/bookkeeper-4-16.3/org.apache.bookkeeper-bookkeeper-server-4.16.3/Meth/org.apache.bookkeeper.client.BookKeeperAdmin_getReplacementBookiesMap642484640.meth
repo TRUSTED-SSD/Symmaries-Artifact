@@ -1,0 +1,28 @@
+static java.util.Map org.apache.bookkeeper.client.BookKeeperAdmin:getReplacementBookiesMap(org.apache.bookkeeper.client.LedgerFragment ledgerFragment,java.util.Map targetBookieAddresses)
+{
+java.util.HashMap bookiesMap;
+  java.util.Iterator l3;
+  java.lang.Integer bookieIndex;
+  org.apache.bookkeeper.net.BookieId oldBookie;
+  org.apache.bookkeeper.net.BookieId newBookie;
+  java.util.Set $stack8;
+  boolean $stack10;
+  java.lang.Object $stack11;
+  int $stack12;
+  bookiesMap=new java.util.HashMap;
+ bookiesMap#java.util.HashMap();
+ $stack8 = ledgerFragment.getBookiesIndexes();
+ l3 = $stack8.iterator();
+ label0:$stack10 = l3.hasNext();
+ if ($stack10==0) goto label1;
+ $stack11 = l3.next();
+ bookieIndex=(java.lang.Integer) $stack11;
+ $stack12 = bookieIndex.intValue();
+ oldBookie = ledgerFragment.getAddress($stack12);
+ $stack11 = targetBookieAddresses.get((java.lang.Object)bookieIndex);
+ newBookie=(org.apache.bookkeeper.net.BookieId) $stack11;
+ bookiesMap.put((java.lang.Object)oldBookie,(java.lang.Object)newBookie);
+ goto label0;
+ label1:return  bookiesMap;
+ } 
+

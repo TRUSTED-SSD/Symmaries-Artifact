@@ -1,0 +1,33 @@
+void org.apache.rocketmq.store.queue.BatchConsumeQueue:reviseMinOffsetInQueue()
+{
+org.apache.rocketmq.store.logfile.MappedFile firstMappedFile;
+  org.apache.rocketmq.store.queue.BatchOffsetIndex min;
+  org.apache.rocketmq.store.MappedFileQueue $stack3;
+  long $stack5;
+  int $stack9;
+  org.apache.rocketmq.logging.org.slf4j.Logger $stack10;
+  java.lang.String $stack12;
+  java.lang.Integer $stack13;
+  $stack3=this.mappedFileQueue;
+ firstMappedFile = $stack3.getFirstMappedFile();
+ if (null!=firstMappedFile) goto label0;
+ this.maxOffsetInQueue=0L;
+ this.minOffsetInQueue=-1L;
+ this.minLogicOffset=-1L;
+ $stack10=org.apache.rocketmq.store.queue.BatchConsumeQueue.log;
+ $stack12=this.topic;
+ $stack9=this.queueId;
+ $stack13 = java.lang.Integer.valueOf($stack9);
+ $stack10.info("reviseMinOffsetInQueue found firstMappedFile null, topic:{} queue:{}",(java.lang.Object)$stack12,(java.lang.Object)$stack13);
+ return;
+ label0:$stack5 = firstMappedFile.getFileFromOffset();
+ this.minLogicOffset=$stack5;
+ min = this.getMinMsgOffset(firstMappedFile,(boolean)0,(boolean)0);
+ if (null!=min) goto label1;
+ $stack5=-1L;
+ goto label2;
+ label1:$stack5 = min.getMsgOffset();
+ label2:this.minOffsetInQueue=$stack5;
+ return;
+ } 
+

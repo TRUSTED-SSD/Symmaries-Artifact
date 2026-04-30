@@ -1,0 +1,31 @@
+org.apache.rocketmq.proxy.processor.ReceiptHandleProcessor(org.apache.rocketmq.proxy.processor.MessagingProcessor messagingProcessor)
+{
+org.apache.rocketmq.proxy.config.ProxyConfig proxyConfig;
+  org.apache.rocketmq.common.ThreadFactoryImpl $stack3;
+  java.util.concurrent.ScheduledExecutorService $stack4;
+  java.util.concurrent.ConcurrentHashMap $stack5;
+  int $stack7;
+  int $stack8;
+  java.util.concurrent.TimeUnit $stack10;
+  int $stack12;
+  java.util.concurrent.ThreadPoolExecutor $stack13;
+  this#org.apache.rocketmq.proxy.common.AbstractStartAndShutdown();
+ $stack3=new org.apache.rocketmq.common.ThreadFactoryImpl;
+ $stack3#org.apache.rocketmq.common.ThreadFactoryImpl("RenewalScheduledThread_");
+ $stack4 = java.util.concurrent.Executors.newSingleThreadScheduledExecutor((java.util.concurrent.ThreadFactory)$stack3);
+ this.scheduledExecutorService=$stack4;
+ this.messagingProcessor=messagingProcessor;
+ $stack5=new java.util.concurrent.ConcurrentHashMap;
+ $stack5#java.util.concurrent.ConcurrentHashMap();
+ this.receiptHandleGroupMap=$stack5;
+ proxyConfig = org.apache.rocketmq.proxy.config.ConfigurationManager.getProxyConfig();
+ $stack7 = proxyConfig.getRenewThreadPoolNums();
+ $stack8 = proxyConfig.getRenewMaxThreadPoolNums();
+ $stack10=java.util.concurrent.TimeUnit.MINUTES;
+ $stack12 = proxyConfig.getRenewThreadPoolQueueCapacity();
+ $stack13 = org.apache.rocketmq.common.thread.ThreadPoolMonitor.createAndMonitor($stack7,$stack8,1L,$stack10,"RenewalWorkerThread",$stack12);
+ this.renewalWorkerService=$stack13;
+ this#org.apache.rocketmq.proxy.processor.ReceiptHandleProcessor();
+ return;
+ } 
+

@@ -1,0 +1,11 @@
+AccountOwner (Account l1) {
+  guard = tt;
+  ret(obj_level(l1)) = pc ⊔ obj_level(l1) ⊔ obj_level(this) ⊔ (if l1~this then level(l1) ⊔ level(this) else level(this));
+  ret(obj_level(this)) = pc ⊔ level(l1) ⊔ level(this) ⊔ obj_level(l1) ⊔ obj_level(this);
+  ret(l1~this) = tt;
+  exc(level()) = ⊥;
+  exc(obj_level()) = ⊥;
+  exc(obj_level(l1)) = pc ⊔ obj_level(l1) ⊔ obj_level(this) ⊔ (if l1~this then level(l1) ⊔ level(this) else level(this));
+  exc(obj_level(this)) = pc ⊔ level(l1) ⊔ level(this) ⊔ obj_level(l1) ⊔ obj_level(this);
+  exc(l1~this) = tt;
+}

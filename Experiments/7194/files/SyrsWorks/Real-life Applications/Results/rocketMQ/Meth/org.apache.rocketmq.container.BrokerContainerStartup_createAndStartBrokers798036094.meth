@@ -1,0 +1,46 @@
+static java.util.List org.apache.rocketmq.container.BrokerContainerStartup:createAndStartBrokers(org.apache.rocketmq.container.BrokerContainer brokerContainer)
+{
+java.lang.String[] configPaths;
+  java.util.ArrayList brokerControllerList;
+  org.apache.rocketmq.container.BrokerContainerStartup$SystemConfigFileHelper configFileHelper;
+  int l5;
+  int l6;
+  java.lang.String configPath;
+  java.util.Properties brokerProperties;
+  org.apache.rocketmq.broker.BrokerController e;
+  java.lang.Object[] $stack15;
+  java.io.PrintStream $stack16;
+  java.lang.Exception $stack23;
+  configPaths = org.apache.rocketmq.container.BrokerContainerStartup.parseBrokerConfigPath();
+ brokerControllerList=new java.util.ArrayList;
+ brokerControllerList#java.util.ArrayList();
+ if (configPaths==null) goto label0;
+ l5=#configPaths;
+ if (l5<=0) goto label0;
+ configFileHelper=new org.apache.rocketmq.container.BrokerContainerStartup$SystemConfigFileHelper;
+ configFileHelper#org.apache.rocketmq.container.BrokerContainerStartup$SystemConfigFileHelper();
+ l5=#configPaths;
+ l6=0;
+ label1:if (l6>=l5) goto label0;
+ configPath=configPaths[l6];
+ $stack16=java.lang.System.out;
+ $stack15=new java.lang.Object[1];
+ $stack15[0]=configPath;
+ $stack16.printf("Start broker from config file path %s%n",$stack15);
+ configFileHelper.setFile(configPath);
+ brokerProperties=null;
+ label2:brokerProperties = configFileHelper.loadConfig();
+ label3:goto label4;
+ label5:$stack23 = catch;
+ $stack23.printStackTrace();
+ java.lang.System.exit(-1);
+ label4:e = org.apache.rocketmq.container.BrokerContainerStartup.createAndInitializeBroker(brokerContainer,configPath,brokerProperties);
+ if (e==null) goto label6;
+ brokerControllerList.add((java.lang.Object)e);
+ org.apache.rocketmq.container.BrokerContainerStartup.startBrokerController(brokerContainer,e,brokerProperties);
+ label6:l6=(l6+1);
+ goto label1;
+ label0:return  brokerControllerList;
+ catch java.lang.Exception: label2 - label3 : label5;
+} 
+

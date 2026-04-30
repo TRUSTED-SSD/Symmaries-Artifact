@@ -1,0 +1,31 @@
+static io.openmessaging.KeyValue io.openmessaging.rocketmq.utils.OMSUtil:buildKeyValue(io.openmessaging.KeyValue[] keyValues)
+{
+io.openmessaging.KeyValue keyValue;
+  int l3;
+  int l4;
+  io.openmessaging.KeyValue properties;
+  java.util.Iterator l6;
+  java.lang.String key;
+  java.util.Set $stack9;
+  boolean $stack11;
+  java.lang.Object $stack14;
+  java.lang.String $stack15;
+  keyValue = io.openmessaging.OMS.newKeyValue();
+ l3=#keyValues;
+ l4=0;
+ label0:if (l4>=l3) goto label1;
+ properties=keyValues[l4];
+ $stack9 = properties.keySet();
+ l6 = $stack9.iterator();
+ label2:$stack11 = l6.hasNext();
+ if ($stack11==0) goto label3;
+ $stack14 = l6.next();
+ key=(java.lang.String) $stack14;
+ $stack15 = properties.getString(key);
+ keyValue.put(key,$stack15);
+ goto label2;
+ label3:l4=(l4+1);
+ goto label0;
+ label1:return  keyValue;
+ } 
+

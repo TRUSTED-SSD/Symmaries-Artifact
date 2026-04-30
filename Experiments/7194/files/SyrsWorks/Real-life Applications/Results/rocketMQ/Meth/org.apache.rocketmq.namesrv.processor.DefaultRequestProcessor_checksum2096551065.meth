@@ -1,0 +1,29 @@
+boolean org.apache.rocketmq.namesrv.processor.DefaultRequestProcessor:checksum(io.netty.channel.ChannelHandlerContext ctx,org.apache.rocketmq.remoting.protocol.RemotingCommand request,org.apache.rocketmq.remoting.protocol.header.namesrv.RegisterBrokerRequestHeader requestHeader)
+{
+int crc32;
+  java.lang.Integer $stack5;
+  byte[] $stack7;
+  int $stack10;
+  java.lang.Object[] $stack12;
+  org.apache.rocketmq.logging.org.slf4j.Logger $stack13;
+  io.netty.channel.Channel $stack16;
+  java.lang.String $stack17;
+  $stack5 = requestHeader.getBodyCrc32();
+ crc32 = $stack5.intValue();
+ if (crc32==0) goto label0;
+ $stack7 = request.getBody();
+ crc32 = org.apache.rocketmq.common.UtilAll.crc32($stack7);
+ $stack5 = requestHeader.getBodyCrc32();
+ $stack10 = $stack5.intValue();
+ if (crc32==$stack10) goto label0;
+ $stack13=org.apache.rocketmq.namesrv.processor.DefaultRequestProcessor.log;
+ $stack12=new java.lang.Object[1];
+ $stack16 = ctx.channel();
+ $stack17 = org.apache.rocketmq.remoting.common.RemotingHelper.parseChannelRemoteAddr($stack16);
+ $stack12[0]=$stack17;
+ $stack17 = java.lang.String.format("receive registerBroker request,crc32 not match,from %s",$stack12);
+ $stack13.warn($stack17);
+ return  0;
+ label0:return  1;
+ } 
+

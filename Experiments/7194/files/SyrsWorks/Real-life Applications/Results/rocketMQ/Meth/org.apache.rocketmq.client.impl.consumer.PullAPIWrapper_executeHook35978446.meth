@@ -1,0 +1,30 @@
+void org.apache.rocketmq.client.impl.consumer.PullAPIWrapper:executeHook(org.apache.rocketmq.client.hook.FilterMessageContext context)
+{
+java.util.Iterator l2;
+  org.apache.rocketmq.client.hook.FilterMessageHook hook;
+  java.lang.Throwable e;
+  java.util.ArrayList $stack5;
+  boolean $stack6;
+  java.lang.Object $stack10;
+  org.apache.rocketmq.logging.org.slf4j.Logger $stack13;
+  java.lang.String $stack15;
+  $stack5=this.filterMessageHookList;
+ $stack6 = $stack5.isEmpty();
+ if ($stack6!=0) goto label0;
+ $stack5=this.filterMessageHookList;
+ l2 = $stack5.iterator();
+ label1:$stack6 = l2.hasNext();
+ if ($stack6==0) goto label0;
+ $stack10 = l2.next();
+ hook=(org.apache.rocketmq.client.hook.FilterMessageHook) $stack10;
+ label2:hook.filterMessage(context);
+ label3:goto label4;
+ label5:e = catch;
+ $stack13=org.apache.rocketmq.client.impl.consumer.PullAPIWrapper.log;
+ $stack15 = hook.hookName();
+ $stack13.error("execute hook error. hookName={}",(java.lang.Object)$stack15);
+ label4:goto label1;
+ label0:return;
+ catch java.lang.Throwable: label2 - label3 : label5;
+} 
+

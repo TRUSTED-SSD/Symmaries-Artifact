@@ -1,0 +1,17 @@
+void org.apache.bookkeeper.proto.BookieRequestHandler:channelRead(io.netty.channel.ChannelHandlerContext @ctx,java.lang.Object msg)
+{
+boolean $stack3;
+  org.apache.bookkeeper.processor.RequestProcessor $stack4;
+  io.netty.channel.ChannelHandlerContext ctx;
+ctx=@ctx;
+$stack3=msg instanceof org.apache.bookkeeper.proto.BookkeeperProtocol$Request;
+ if ($stack3!=0) goto label0;
+ $stack3=msg instanceof org.apache.bookkeeper.proto.BookieProtocol$Request;
+ if ($stack3!=0) goto label0;
+ ctx = ctx.fireChannelRead(msg);
+ return;
+ label0:$stack4=this.requestProcessor;
+ $stack4.processRequest(msg,this);
+ return;
+ } 
+

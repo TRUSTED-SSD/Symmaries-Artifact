@@ -1,0 +1,29 @@
+digraph G {
+  node [shape=box, ];
+  "pc0_js1" [label="〈$r1 = new java.util.Formatter$Flags, js1〉", ];
+  "pc1_js1" [label="〈$i0 = this.flags, js1〉", ];
+  "pc2_js1" [label="〈$r1#java.util.Formatter$Flags.init ($i0), js1〉\n\
+tt",
+             ];
+  "pc3_js1" [label="〈return $r1, js1〉", ];
+  "pc4_js1" [label="〈sink, js1〉\n\
+obj_level(this) ⊑ ret(obj_level(this))' ∧ (ϕ ≠ S3 ∨ obj_level($r1) ⊑ ret(obj_level())' ∧ pc ⊔ level($r1) ⊑ ret(level())' ∧ (ret(~this)' ∨ ¬$r1~this))",
+             ];
+  
+  
+  "pc0_js1" -> "pc1_js1" [label="tt,\n\
+{$r1~this := ff,\n\
+ level($r1) := pc,\n\
+ obj_level($r1) := pc}",
+                          ];
+  "pc1_js1" -> "pc2_js1" [label="tt,\n\
+{level($i0) := pc ⊔ level(this) ⊔ obj_level(this)}",
+                          ];
+  "pc2_js1" -> "pc3_js1" [label="tt,\n\
+{$r1~this := ff,\n\
+ obj_level($r1) := pc ⊔ level(this) ⊔ obj_level(this)}",
+                          ];
+  "pc3_js1" -> "pc4_js1" [label="tt,\n\
+{ϕ := S3}", ];
+  
+  }

@@ -1,0 +1,40 @@
+org.apache.kerby.kerberos.kerb.request.KrbIdentity org.apache.kerby.kerberos.kerb.identity.backend.AbstractIdentityBackend:updateIdentity(org.apache.kerby.kerberos.kerb.request.KrbIdentity identity)
+{
+org.apache.kerby.kerberos.kerb.request.KrbIdentity updated;
+  java.lang.String $stack3;
+  org.slf4j.Logger $stack6;
+  java.lang.String $stack9;
+  java.lang.StringBuilder $stack13;
+  org.apache.kerby.kerberos.kerb.KrbException $stack20;
+  java.lang.IllegalArgumentException $stack21;
+  if (identity!=null) goto label0;
+ $stack21=new java.lang.IllegalArgumentException;
+ $stack21#java.lang.IllegalArgumentException("null identity to update");
+ throw $stack21;
+ label0:$stack3 = identity.getPrincipalName();
+ updated = this.doGetIdentity($stack3);
+ if (updated!=null) goto label1;
+ $stack6=org.apache.kerby.kerberos.kerb.identity.backend.AbstractIdentityBackend.logger;
+ $stack13=new java.lang.StringBuilder;
+ $stack13#java.lang.StringBuilder();
+ $stack13 = $stack13.append("Error occurred while updating identity, principal ");
+ $stack3 = identity.getPrincipalName();
+ $stack13 = $stack13.append($stack3);
+ $stack13 = $stack13.append(" does not exists.");
+ $stack3 = $stack13.toString();
+ $stack6.error($stack3);
+ $stack20=new org.apache.kerby.kerberos.kerb.KrbException;
+ $stack20#org.apache.kerby.kerberos.kerb.KrbException("Principal does not exist.");
+ throw $stack20;
+ label1:updated = this.doUpdateIdentity(identity);
+ $stack6=org.apache.kerby.kerberos.kerb.identity.backend.AbstractIdentityBackend.logger;
+ if (updated==null) goto label2;
+ $stack3="successful";
+ goto label3;
+ label2:$stack3="failed";
+ label3:$stack9 = identity.getPrincipalName();
+ dummyClass.lowSink("updateIdentity {}, principalName = {}");
+$stack6.debug("updateIdentity {}, principalName = {}",(java.lang.Object)$stack3,(java.lang.Object)$stack9);
+ return  updated;
+ } 
+

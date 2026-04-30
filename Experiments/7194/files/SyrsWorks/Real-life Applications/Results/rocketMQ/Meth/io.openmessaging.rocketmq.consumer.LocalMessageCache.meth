@@ -1,0 +1,27 @@
+io.openmessaging.rocketmq.consumer.LocalMessageCache(org.apache.rocketmq.client.consumer.DefaultMQPullConsumer rocketmqPullConsumer,io.openmessaging.rocketmq.config.ClientConfig clientConfig)
+{
+java.util.concurrent.LinkedBlockingQueue $stack3;
+  int $stack4;
+  java.util.concurrent.ConcurrentHashMap $stack5;
+  org.apache.rocketmq.common.ThreadFactoryImpl $stack7;
+  java.util.concurrent.ScheduledExecutorService $stack8;
+  this#java.lang.Object();
+ $stack3=new java.util.concurrent.LinkedBlockingQueue;
+ $stack4 = clientConfig.getRmqPullMessageCacheCapacity();
+ $stack3#java.util.concurrent.LinkedBlockingQueue($stack4);
+ this.consumeRequestCache=$stack3;
+ $stack5=new java.util.concurrent.ConcurrentHashMap;
+ $stack5#java.util.concurrent.ConcurrentHashMap();
+ this.consumedRequest=$stack5;
+ $stack5=new java.util.concurrent.ConcurrentHashMap;
+ $stack5#java.util.concurrent.ConcurrentHashMap();
+ this.pullOffsetTable=$stack5;
+ this.rocketmqPullConsumer=rocketmqPullConsumer;
+ this.clientConfig=clientConfig;
+ $stack7=new org.apache.rocketmq.common.ThreadFactoryImpl;
+ $stack7#org.apache.rocketmq.common.ThreadFactoryImpl("OMS_CleanExpireMsgScheduledThread_");
+ $stack8 = java.util.concurrent.Executors.newSingleThreadScheduledExecutor((java.util.concurrent.ThreadFactory)$stack7);
+ this.cleanExpireMsgExecutors=$stack8;
+ return;
+ } 
+

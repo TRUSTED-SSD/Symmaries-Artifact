@@ -1,0 +1,31 @@
+java.io.ObjectInputStream$GetField java.io.ObjectInputStream:readFields()
+{
+java.io.SerialCallbackContext r1;
+  java.io.ObjectStreamClass r3;
+  java.io.ObjectInputStream$GetFieldImpl r4;
+  java.io.ObjectInputStream$BlockDataInputStream $r5;
+  java.io.ObjectInputStream$GetFieldImpl $r6;
+  java.io.ObjectInputStream$BlockDataInputStream $r7;
+  boolean $z2;
+  java.io.NotActiveException $r8;
+  r1=this.curContext;
+ if (r1!=null) goto label0;
+ $r8=new java.io.NotActiveException;
+ $r8#java.io.NotActiveException:init("not in call to readObject");
+ throw $r8;
+ label0:r1.getObj();
+ r3 = r1.getDesc();
+ $r5=this.bin;
+ $r5.setBlockDataMode((boolean)0);
+ $r6=new java.io.ObjectInputStream$GetFieldImpl;
+ $r6#java.io.ObjectInputStream$GetFieldImpl:init(this,r3);
+ r4=$r6;
+ r4.readFields();
+ $r7=this.bin;
+ $r7.setBlockDataMode((boolean)1);
+ $z2 = r3.hasWriteObjectData();
+ if ($z2!=0) goto label1;
+ this.defaultDataEnd=1;
+ label1:return  r4;
+ }  
+

@@ -1,0 +1,13 @@
+static java.lang.String org.apache.bookkeeper.meta.zk.ZKMetadataDriverBase:resolveZkServers(org.apache.bookkeeper.conf.AbstractConfiguration conf)
+{
+java.lang.String metadataServiceUriStr;
+  java.net.URI metadataServiceUri;
+  metadataServiceUriStr = conf.getMetadataServiceUriUnchecked();
+ if (null!=metadataServiceUriStr) goto label0;
+ metadataServiceUriStr = conf.getZkServers();
+ return  metadataServiceUriStr;
+ label0:metadataServiceUri = java.net.URI.create(metadataServiceUriStr);
+ metadataServiceUriStr = org.apache.bookkeeper.meta.zk.ZKMetadataDriverBase.getZKServersFromServiceUri(metadataServiceUri);
+ return  metadataServiceUriStr;
+ } 
+

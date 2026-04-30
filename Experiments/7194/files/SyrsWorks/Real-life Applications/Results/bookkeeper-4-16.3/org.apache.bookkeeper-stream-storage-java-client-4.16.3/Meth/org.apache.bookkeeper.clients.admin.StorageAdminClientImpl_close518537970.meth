@@ -1,0 +1,30 @@
+void org.apache.bookkeeper.clients.admin.StorageAdminClientImpl:close()
+{
+java.util.concurrent.CompletableFuture $stack2;
+  java.util.concurrent.ExecutionException $stack4;
+  org.slf4j.Logger $stack5;
+  boolean $stack6;
+  java.lang.InterruptedException $stack8;
+  label0:$stack2 = this.closeAsync();
+ $stack2.get();
+ label1:goto label2;
+ label3:$stack8 = catch;
+ $stack5=org.apache.bookkeeper.clients.admin.StorageAdminClientImpl.log;
+ $stack6 = $stack5.isDebugEnabled();
+ if ($stack6==0) goto label4;
+ $stack5=org.apache.bookkeeper.clients.admin.StorageAdminClientImpl.log;
+ dummyClass.lowSink("Interrupted on closing stream admin client");
+$stack5.debug("Interrupted on closing stream admin client",(java.lang.Throwable)$stack8);
+ label4:goto label2;
+ label5:$stack4 = catch;
+ $stack5=org.apache.bookkeeper.clients.admin.StorageAdminClientImpl.log;
+ $stack6 = $stack5.isDebugEnabled();
+ if ($stack6==0) goto label2;
+ $stack5=org.apache.bookkeeper.clients.admin.StorageAdminClientImpl.log;
+ dummyClass.lowSink("Failed to cloe stream admin client");
+$stack5.debug("Failed to cloe stream admin client",(java.lang.Throwable)$stack4);
+ label2:return;
+ catch java.lang.InterruptedException: label0 - label1 : label3;
+catch java.util.concurrent.ExecutionException: label0 - label1 : label5;
+} 
+

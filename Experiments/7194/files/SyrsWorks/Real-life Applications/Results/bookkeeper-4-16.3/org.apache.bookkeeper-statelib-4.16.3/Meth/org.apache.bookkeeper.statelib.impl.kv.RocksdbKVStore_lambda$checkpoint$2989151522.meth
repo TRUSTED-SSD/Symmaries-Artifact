@@ -1,0 +1,26 @@
+void org.apache.bookkeeper.statelib.impl.kv.RocksdbKVStore:lambda$checkpoint$2(byte[] checkpointAtRevisionBytes)
+{
+org.apache.bookkeeper.statelib.impl.rocksdb.ccheckpoint.RocksCheckpointer $stack3;
+  java.lang.String $stack4;
+  org.apache.bookkeeper.statelib.api.exceptions.StateStoreException $stack5;
+  java.lang.Object[] $stack6;
+  org.slf4j.Logger $stack8;
+  long $stack11;
+  java.lang.Long $stack12;
+  label0:$stack3=this.checkpointer;
+ $stack3.checkpointAtTxid(checkpointAtRevisionBytes);
+ label1:goto label2;
+ label3:$stack5 = catch;
+ $stack8=org.apache.bookkeeper.statelib.impl.kv.RocksdbKVStore.log;
+ $stack6=new java.lang.Object[3];
+ $stack4=this.name;
+ $stack6[0]=$stack4;
+ $stack11 = org.apache.bookkeeper.statelib.impl.Bytes.toLong(checkpointAtRevisionBytes,0);
+ $stack12 = java.lang.Long.valueOf($stack11);
+ $stack6[1]=$stack12;
+ $stack6[2]=$stack5;
+ $stack8.error("Failed to checkpoint state store {} at revision {}",$stack6);
+ label2:return;
+ catch org.apache.bookkeeper.statelib.api.exceptions.StateStoreException: label0 - label1 : label3;
+} 
+

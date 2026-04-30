@@ -1,0 +1,23 @@
+java.util.concurrent.ExecutorService org.apache.rocketmq.store.queue.ConsumeQueueStore:buildExecutorService(java.util.concurrent.BlockingQueue blockingQueue,java.lang.String threadNamePrefix)
+{
+java.util.concurrent.ThreadPoolExecutor $stack3;
+  org.apache.rocketmq.store.DefaultMessageStore $stack4;
+  org.apache.rocketmq.common.BrokerConfig $stack5;
+  int $stack6;
+  int $stack9;
+  org.apache.rocketmq.common.ThreadFactoryImpl $stack10;
+  java.util.concurrent.TimeUnit $stack12;
+  $stack3=new java.util.concurrent.ThreadPoolExecutor;
+ $stack4=this.messageStore;
+ $stack5 = $stack4.getBrokerConfig();
+ $stack6 = $stack5.getRecoverThreadPoolNums();
+ $stack4=this.messageStore;
+ $stack5 = $stack4.getBrokerConfig();
+ $stack9 = $stack5.getRecoverThreadPoolNums();
+ $stack12=java.util.concurrent.TimeUnit.MILLISECONDS;
+ $stack10=new org.apache.rocketmq.common.ThreadFactoryImpl;
+ $stack10#org.apache.rocketmq.common.ThreadFactoryImpl(threadNamePrefix);
+ $stack3#java.util.concurrent.ThreadPoolExecutor($stack6,$stack9,60000L,$stack12,blockingQueue,(java.util.concurrent.ThreadFactory)$stack10);
+ return  $stack3;
+ } 
+

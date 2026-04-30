@@ -1,0 +1,24 @@
+boolean org.hamcrest.core.AllOf:matches(java.lang.Object o,org.hamcrest.Description mismatch)
+{
+java.util.Iterator i$;
+  org.hamcrest.Matcher matcher;
+  java.lang.Iterable $stack5;
+  boolean $stack7;
+  java.lang.Object $stack8;
+  org.hamcrest.Description $stack11;
+  $stack5=this.matchers;
+ i$ = $stack5.iterator();
+ label0:$stack7 = i$.hasNext();
+ if ($stack7==0) goto label1;
+ $stack8 = i$.next();
+ matcher=(org.hamcrest.Matcher) $stack8;
+ $stack7 = matcher.matches(o);
+ if ($stack7!=0) goto label2;
+ $stack11 = mismatch.appendDescriptionOf((org.hamcrest.SelfDescribing)matcher);
+ $stack11.appendText(" ");
+ matcher.describeMismatch(o,mismatch);
+ return  0;
+ label2:goto label0;
+ label1:return  1;
+ } 
+

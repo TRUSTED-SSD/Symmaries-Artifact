@@ -1,0 +1,27 @@
+long org.apache.rocketmq.broker.BrokerController:headSlowTimeMills(java.util.concurrent.BlockingQueue q)
+{
+long slowTimeMills;
+  java.lang.Runnable peek;
+  org.apache.rocketmq.remoting.netty.RequestTask rt;
+  java.lang.Object $stack6;
+  byte $stack7;
+  org.apache.rocketmq.store.MessageStore $stack10;
+  long $stack12;
+  slowTimeMills=0L;
+ $stack6 = q.peek();
+ peek=(java.lang.Runnable) $stack6;
+ if (peek==null) goto label0;
+ rt = org.apache.rocketmq.broker.latency.BrokerFastFailure.castRunnable(peek);
+ if (rt!=null) goto label1;
+ slowTimeMills=0L;
+ goto label0;
+ label1:$stack10=this.messageStore;
+ slowTimeMills = $stack10.now();
+ $stack12 = rt.getCreateTimestamp();
+ slowTimeMills=(slowTimeMills-$stack12);
+ label0:$stack7=(slowTimeMills cmp 0L);
+ if ($stack7>=0) goto label2;
+ slowTimeMills=0L;
+ label2:return  slowTimeMills;
+ } 
+

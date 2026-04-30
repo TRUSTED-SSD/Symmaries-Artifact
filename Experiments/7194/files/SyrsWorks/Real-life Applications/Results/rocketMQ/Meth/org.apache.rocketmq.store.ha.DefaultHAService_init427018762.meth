@@ -1,0 +1,33 @@
+void org.apache.rocketmq.store.ha.DefaultHAService:init(org.apache.rocketmq.store.DefaultMessageStore defaultMessageStore)
+{
+org.apache.rocketmq.store.ha.DefaultHAService$DefaultAcceptSocketService $stack2;
+  org.apache.rocketmq.store.config.MessageStoreConfig $stack3;
+  org.apache.rocketmq.store.ha.GroupTransferService $stack4;
+  org.apache.rocketmq.store.DefaultMessageStore $stack5;
+  org.apache.rocketmq.store.config.BrokerRole $stack7;
+  org.apache.rocketmq.store.config.BrokerRole $stack8;
+  org.apache.rocketmq.store.ha.HAConnectionStateNotificationService $stack9;
+  org.apache.rocketmq.store.ha.DefaultHAClient $stack10;
+  this.defaultMessageStore=defaultMessageStore;
+ $stack2=new org.apache.rocketmq.store.ha.DefaultHAService$DefaultAcceptSocketService;
+ $stack3 = defaultMessageStore.getMessageStoreConfig();
+ $stack2#org.apache.rocketmq.store.ha.DefaultHAService$DefaultAcceptSocketService(this,$stack3);
+ this.acceptSocketService=$stack2;
+ $stack4=new org.apache.rocketmq.store.ha.GroupTransferService;
+ $stack4#org.apache.rocketmq.store.ha.GroupTransferService((org.apache.rocketmq.store.ha.HAService)this,defaultMessageStore);
+ this.groupTransferService=$stack4;
+ $stack5=this.defaultMessageStore;
+ $stack3 = $stack5.getMessageStoreConfig();
+ $stack7 = $stack3.getBrokerRole();
+ $stack8=org.apache.rocketmq.store.config.BrokerRole.SLAVE;
+ if ($stack7!=$stack8) goto label0;
+ $stack10=new org.apache.rocketmq.store.ha.DefaultHAClient;
+ $stack5=this.defaultMessageStore;
+ $stack10#org.apache.rocketmq.store.ha.DefaultHAClient($stack5);
+ this.haClient=$stack10;
+ label0:$stack9=new org.apache.rocketmq.store.ha.HAConnectionStateNotificationService;
+ $stack9#org.apache.rocketmq.store.ha.HAConnectionStateNotificationService((org.apache.rocketmq.store.ha.HAService)this,defaultMessageStore);
+ this.haConnectionStateNotificationService=$stack9;
+ return;
+ } 
+

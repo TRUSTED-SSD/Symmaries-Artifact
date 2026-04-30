@@ -1,0 +1,25 @@
+void org.apache.kerby.kerberos.kerb.admin.kadmin.local.LocalKadminImpl:checkBuiltinPrincipals()
+{
+java.lang.String tgsPrincipal;
+  java.lang.String kadminPrincipal;
+  org.apache.kerby.kerberos.kerb.identity.backend.IdentityBackend $stack6;
+  org.apache.kerby.kerberos.kerb.request.KrbIdentity $stack7;
+  org.slf4j.Logger $stack8;
+  org.apache.kerby.kerberos.kerb.KrbException $stack9;
+  tgsPrincipal = this#org.apache.kerby.kerberos.kerb.admin.kadmin.local.LocalKadminImpl:getTgsPrincipal();
+ kadminPrincipal = this.getKadminPrincipal();
+ $stack6=this.backend;
+ $stack7 = $stack6.getIdentity(tgsPrincipal);
+ if ($stack7==null) goto label0;
+ $stack6=this.backend;
+ $stack7 = $stack6.getIdentity(kadminPrincipal);
+ if ($stack7!=null) goto label1;
+ label0:tgsPrincipal="The built-in principals do not exist in the backend, please run the kdcinit tool.";
+ $stack8=org.apache.kerby.kerberos.kerb.admin.kadmin.local.LocalKadminImpl.LOG;
+ $stack8.error("The built-in principals do not exist in the backend, please run the kdcinit tool.");
+ $stack9=new org.apache.kerby.kerberos.kerb.KrbException;
+ $stack9#org.apache.kerby.kerberos.kerb.KrbException("The built-in principals do not exist in the backend, please run the kdcinit tool.");
+ throw $stack9;
+ label1:return;
+ } 
+

@@ -1,0 +1,22 @@
+static void org.apache.rocketmq.store.StoreUtil:fileAppend(org.apache.rocketmq.store.logfile.MappedFile file,java.nio.ByteBuffer data)
+{
+boolean success;
+  java.lang.RuntimeException $stack4;
+  java.lang.Object[] $stack5;
+  int $stack8;
+  java.lang.Integer $stack9;
+  java.lang.String $stack10;
+  success = file.appendMessage(data);
+ if (success!=0) goto label0;
+ $stack4=new java.lang.RuntimeException;
+ $stack5=new java.lang.Object[2];
+ $stack5[0]=file;
+ $stack8 = data.remaining();
+ $stack9 = java.lang.Integer.valueOf($stack8);
+ $stack5[1]=$stack9;
+ $stack10 = java.lang.String.format("fileAppend failed for file: %s and data remaining: %d",$stack5);
+ $stack4#java.lang.RuntimeException($stack10);
+ throw $stack4;
+ label0:return;
+ } 
+

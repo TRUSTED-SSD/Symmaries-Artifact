@@ -1,0 +1,16 @@
+static void org.apache.bookkeeper.bookie.BookieImpl:lambda$checkIfDirsOnSameDiskPartition$0(boolean allowDiskPartitionDuplication,org.apache.commons.lang3.mutable.MutableBoolean isDuplicationFoundAndNotAllowed,java.nio.file.FileStore fileStore,java.util.List dirsList)
+{
+int $stack4;
+  org.slf4j.Logger $stack5;
+  $stack4 = dirsList.size();
+ if ($stack4<=1) goto label0;
+ if (allowDiskPartitionDuplication==0) goto label1;
+ $stack5=org.apache.bookkeeper.bookie.BookieImpl.LOG;
+ $stack5.warn("Dirs: {} are in same DiskPartition/FileSystem: {}",(java.lang.Object)dirsList,(java.lang.Object)fileStore);
+ goto label0;
+ label1:$stack5=org.apache.bookkeeper.bookie.BookieImpl.LOG;
+ $stack5.error("Dirs: {} are in same DiskPartition/FileSystem: {}",(java.lang.Object)dirsList,(java.lang.Object)fileStore);
+ isDuplicationFoundAndNotAllowed.setValue((boolean)1);
+ label0:return;
+ } 
+

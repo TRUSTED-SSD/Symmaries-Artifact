@@ -1,0 +1,22 @@
+static int com.google.zxing.oned.rss.AbstractRSSReader:parseFinderValue(int[] counters,int[][] finderPatterns)
+{
+int value;
+  int $stack3;
+  com.google.zxing.NotFoundException $stack4;
+  int[] $stack5;
+  float $stack6;
+  byte $stack7;
+  value=0;
+ label0:$stack3=#finderPatterns;
+ if (value>=$stack3) goto label1;
+ $stack5=finderPatterns[value];
+ $stack6 = com.google.zxing.oned.OneDReader.patternMatchVariance(counters,$stack5,0.45F);
+ $stack7=($stack6 cmpg 0.2F);
+ if ($stack7>=0) goto label2;
+ return  value;
+ label2:value=(value+1);
+ goto label0;
+ label1:$stack4 = com.google.zxing.NotFoundException.getNotFoundInstance();
+ throw $stack4;
+ } 
+

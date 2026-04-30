@@ -1,0 +1,18 @@
+int com.google.zxing.datamatrix.encoder.C40Encoder:backtrackOneCharacter(com.google.zxing.datamatrix.encoder.EncoderContext context,java.lang.StringBuilder @buffer,java.lang.StringBuilder removed,int lastCharSize)
+{
+int count;
+  char c;
+  java.lang.StringBuilder buffer;
+buffer=@buffer;
+count = buffer.length();
+ lastCharSize=(count-lastCharSize);
+ buffer = buffer.delete(lastCharSize,count);
+ lastCharSize=context.pos;
+ lastCharSize=(lastCharSize-1);
+ context.pos=lastCharSize;
+ c = context.getCurrentChar();
+ lastCharSize = this.encodeChar(c,removed);
+ context.resetSymbolInfo();
+ return  lastCharSize;
+ } 
+

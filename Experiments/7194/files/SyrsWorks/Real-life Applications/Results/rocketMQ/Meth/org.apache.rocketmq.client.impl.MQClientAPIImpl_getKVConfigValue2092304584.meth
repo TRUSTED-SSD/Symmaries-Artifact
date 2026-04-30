@@ -1,0 +1,41 @@
+java.lang.String org.apache.rocketmq.client.impl.MQClientAPIImpl:getKVConfigValue(java.lang.String @namespace,java.lang.String key,long timeoutMillis)
+{
+org.apache.rocketmq.remoting.protocol.header.namesrv.GetKVConfigRequestHeader requestHeader;
+  org.apache.rocketmq.remoting.protocol.RemotingCommand request;
+  org.apache.rocketmq.remoting.protocol.header.namesrv.GetKVConfigResponseHeader responseHeader;
+  org.apache.rocketmq.remoting.RemotingClient $stack11;
+  boolean $stack13;
+  int $stack14;
+  org.apache.rocketmq.remoting.CommandCustomHeader $stack15;
+  org.apache.rocketmq.client.exception.MQClientException $stack17;
+  java.lang.AssertionError $stack21;
+  java.lang.String namespace;
+namespace=@namespace;
+requestHeader=new org.apache.rocketmq.remoting.protocol.header.namesrv.GetKVConfigRequestHeader;
+ requestHeader#org.apache.rocketmq.remoting.protocol.header.namesrv.GetKVConfigRequestHeader();
+ requestHeader.setNamespace(namespace);
+ requestHeader.setKey(key);
+ request = org.apache.rocketmq.remoting.protocol.RemotingCommand.createRequestCommand(101,(org.apache.rocketmq.remoting.CommandCustomHeader)requestHeader);
+ $stack11=this.remotingClient;
+ request = $stack11.invokeSync(null,request,timeoutMillis);
+ $stack13=org.apache.rocketmq.client.impl.MQClientAPIImpl.$assertionsDisabled;
+ if ($stack13!=0) goto label0;
+ if (request!=null) goto label0;
+ $stack21=new java.lang.AssertionError;
+ $stack21#java.lang.AssertionError();
+ throw $stack21;
+ label0:$stack14 = request.getCode();
+ switch [$stack14]
+if 0 goto label1;
+goto label2;
+ label1:$stack15 = request.decodeCommandCustomHeader(org.apache.rocketmq.remoting.protocol.header.namesrv.GetKVConfigResponseHeader);
+ responseHeader=(org.apache.rocketmq.remoting.protocol.header.namesrv.GetKVConfigResponseHeader) $stack15;
+ namespace = responseHeader.getValue();
+ return  namespace;
+ label2:$stack17=new org.apache.rocketmq.client.exception.MQClientException;
+ $stack14 = request.getCode();
+ namespace = request.getRemark();
+ $stack17#org.apache.rocketmq.client.exception.MQClientException($stack14,namespace);
+ throw $stack17;
+ } 
+

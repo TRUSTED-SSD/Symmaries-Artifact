@@ -1,0 +1,46 @@
+java.lang.String org.apache.bookkeeper.tools.cli.commands.bookies.InfoCommand:getReadable(long val)
+{
+java.lang.String[] unit;
+  int cnt;
+  double d;
+  java.text.DecimalFormat df;
+  byte $stack9;
+  java.math.RoundingMode $stack11;
+  java.lang.String $stack12;
+  java.lang.StringBuilder $stack13;
+  int $stack21;
+  unit=new java.lang.String[5];
+ unit[0]="";
+ unit[1]="KB";
+ unit[2]="MB";
+ unit[3]="GB";
+ unit[4]="TB";
+ cnt=0;
+ d=(double) val;
+ label0:$stack9=(d cmpl 1000.0);
+ if ($stack9<0) goto label1;
+ $stack21=#unit;
+ $stack21=($stack21-1);
+ if (cnt>=$stack21) goto label1;
+ d=(d/1000.0);
+ cnt=(cnt+1);
+ goto label0;
+ label1:df=new java.text.DecimalFormat;
+ df#java.text.DecimalFormat("#.###");
+ $stack11=java.math.RoundingMode.DOWN;
+ df.setRoundingMode($stack11);
+ if (cnt<=0) goto label2;
+ $stack13=new java.lang.StringBuilder;
+ $stack13#java.lang.StringBuilder();
+ $stack13 = $stack13.append("(");
+ $stack12 = df.format(d);
+ $stack13 = $stack13.append($stack12);
+ $stack12=unit[cnt];
+ $stack13 = $stack13.append($stack12);
+ $stack13 = $stack13.append(")");
+ $stack12 = $stack13.toString();
+ goto label3;
+ label2:$stack12=unit[cnt];
+ label3:return  $stack12;
+ } 
+

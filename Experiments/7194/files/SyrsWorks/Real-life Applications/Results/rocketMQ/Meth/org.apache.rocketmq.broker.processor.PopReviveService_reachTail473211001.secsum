@@ -1,0 +1,7 @@
+boolean org.apache.rocketmq.broker.processor.PopReviveService:reachTail (
+  org.apache.rocketmq.client.consumer.PullResult pullResult, long offset) {
+  guard = tt;
+  ret(level()) = pc ⊔ level(offset) ⊔ level(pullResult) ⊔ obj_level(pullResult);
+  ret(obj_level(pullResult)) = if obj_level(pullResult) = ⊤ ∨ pc ≠ ⊤ ∧ obj_level(pullResult) = ⊥ ∧ obj_level(this) = ⊤ ∧ level(offset) ⊔ level(pullResult) = ⊤ then ⊤ else ⊥;
+  ret(obj_level(this)) = if obj_level(this) = ⊤ ∨ pc ≠ ⊤ ∧ obj_level(pullResult) = ⊤ ∧ obj_level(this) = ⊥ then ⊤ else ⊥;
+}

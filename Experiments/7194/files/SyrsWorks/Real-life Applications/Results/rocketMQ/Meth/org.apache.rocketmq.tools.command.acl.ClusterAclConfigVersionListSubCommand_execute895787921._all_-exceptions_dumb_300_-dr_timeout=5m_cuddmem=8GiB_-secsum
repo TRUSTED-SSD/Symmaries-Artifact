@@ -1,0 +1,10 @@
+void org.apache.rocketmq.tools.command.acl.ClusterAclConfigVersionListSubCommand:execute (
+  org.apache.commons.cli.CommandLine commandLine,
+  org.apache.commons.cli.Options options,
+  org.apache.rocketmq.remoting.RPCHook rpcHook) {
+  guard = level(options) ⊔ level(rpcHook) ⊔ obj_level(options) ⊔ obj_level(rpcHook) = ⊥;
+  ret(obj_level(commandLine)) = level(commandLine) ⊔ obj_level(commandLine) ⊔ obj_level(this);
+  ret(obj_level(options)) = level(commandLine) ⊔ obj_level(commandLine) ⊔ obj_level(this);
+  ret(obj_level(rpcHook)) = level(commandLine) ⊔ obj_level(commandLine) ⊔ obj_level(this);
+  ret(obj_level(this)) = level(commandLine) ⊔ obj_level(commandLine) ⊔ obj_level(this);
+}

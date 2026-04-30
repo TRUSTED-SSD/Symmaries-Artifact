@@ -1,0 +1,51 @@
+void org.apache.bookkeeper.proto.PerChannelBookieClient$GetListOfEntriesOfLedgerCompletion:handleV3Response(org.apache.bookkeeper.proto.BookkeeperProtocol$Response response)
+{
+org.apache.bookkeeper.proto.BookkeeperProtocol$GetListOfEntriesOfLedgerResponse getListOfEntriesOfLedgerResponse;
+  io.netty.buffer.ByteBuf availabilityOfEntriesOfLedgerBuffer;
+  org.apache.bookkeeper.proto.BookkeeperProtocol$StatusCode status;
+  int rc;
+  org.apache.bookkeeper.util.AvailabilityOfEntriesOfLedger availabilityOfEntriesOfLedger;
+  org.apache.bookkeeper.proto.BookkeeperProtocol$StatusCode $stack9;
+  boolean $stack11;
+  org.slf4j.Logger $stack12;
+  long $stack15;
+  org.apache.bookkeeper.proto.BookkeeperInternalCallbacks$GetListOfEntriesOfLedgerCallback $stack16;
+  java.lang.Object[] $stack23;
+  java.lang.Long $stack26;
+  com.google.protobuf.ByteString $stack32;
+  java.nio.ByteBuffer $stack33;
+  getListOfEntriesOfLedgerResponse = response.getGetListOfEntriesOfLedgerResponse();
+ availabilityOfEntriesOfLedgerBuffer=io.netty.buffer.Unpooled.EMPTY_BUFFER;
+ status = response.getStatus();
+ $stack9=org.apache.bookkeeper.proto.BookkeeperProtocol$StatusCode.EOK;
+ if (status!=$stack9) goto label0;
+ status = getListOfEntriesOfLedgerResponse.getStatus();
+ goto label1;
+ label0:status = response.getStatus();
+ label1:$stack11 = getListOfEntriesOfLedgerResponse.hasAvailabilityOfEntriesOfLedger();
+ if ($stack11==0) goto label2;
+ $stack32 = getListOfEntriesOfLedgerResponse.getAvailabilityOfEntriesOfLedger();
+ $stack33 = $stack32.asReadOnlyByteBuffer();
+dummyClass.highSourceMut($stack33);
+ availabilityOfEntriesOfLedgerBuffer = io.netty.buffer.Unpooled.wrappedBuffer($stack33);
+ label2:$stack12=org.apache.bookkeeper.proto.PerChannelBookieClient.LOG;
+ $stack11 = $stack12.isDebugEnabled();
+ if ($stack11==0) goto label3;
+ $stack23=new java.lang.Object[2];
+ $stack23[0]="ledgerId";
+ $stack15=this.ledgerId;
+ $stack26 = java.lang.Long.valueOf($stack15);
+ $stack23[1]=$stack26;
+ this.logResponse(status,$stack23);
+ label3:rc = this.convertStatus(status,-1);
+ availabilityOfEntriesOfLedger=null;
+ if (rc!=0) goto label4;
+ availabilityOfEntriesOfLedger=new org.apache.bookkeeper.util.AvailabilityOfEntriesOfLedger;
+ availabilityOfEntriesOfLedgerBuffer = availabilityOfEntriesOfLedgerBuffer.slice();
+ availabilityOfEntriesOfLedger#org.apache.bookkeeper.util.AvailabilityOfEntriesOfLedger(availabilityOfEntriesOfLedgerBuffer);
+ label4:$stack16=this.cb;
+ $stack15=this.ledgerId;
+ $stack16.getListOfEntriesOfLedgerComplete(rc,$stack15,availabilityOfEntriesOfLedger);
+ return;
+ } 
+

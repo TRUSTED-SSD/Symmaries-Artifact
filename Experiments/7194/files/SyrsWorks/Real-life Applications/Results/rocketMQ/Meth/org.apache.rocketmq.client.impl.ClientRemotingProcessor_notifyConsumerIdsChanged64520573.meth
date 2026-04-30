@@ -1,0 +1,28 @@
+org.apache.rocketmq.remoting.protocol.RemotingCommand org.apache.rocketmq.client.impl.ClientRemotingProcessor:notifyConsumerIdsChanged(io.netty.channel.ChannelHandlerContext ctx,org.apache.rocketmq.remoting.protocol.RemotingCommand request)
+{
+org.apache.rocketmq.remoting.protocol.header.NotifyConsumerIdsChangedRequestHeader requestHeader;
+  org.apache.rocketmq.remoting.CommandCustomHeader $stack4;
+  org.apache.rocketmq.logging.org.slf4j.Logger $stack5;
+  io.netty.channel.Channel $stack7;
+  java.lang.String $stack8;
+  java.lang.String $stack9;
+  org.apache.rocketmq.client.impl.factory.MQClientInstance $stack10;
+  java.lang.Exception $stack11;
+  label0:$stack4 = request.decodeCommandCustomHeader(org.apache.rocketmq.remoting.protocol.header.NotifyConsumerIdsChangedRequestHeader);
+ requestHeader=(org.apache.rocketmq.remoting.protocol.header.NotifyConsumerIdsChangedRequestHeader) $stack4;
+ $stack5=this.logger;
+ $stack7 = ctx.channel();
+ $stack8 = org.apache.rocketmq.remoting.common.RemotingHelper.parseChannelRemoteAddr($stack7);
+ $stack9 = requestHeader.getConsumerGroup();
+ $stack5.info("receive broker\'s notification[{}], the consumer group: {} changed, rebalance immediately",(java.lang.Object)$stack8,(java.lang.Object)$stack9);
+ $stack10=this.mqClientFactory;
+ $stack10.rebalanceImmediately();
+ label1:goto label2;
+ label3:$stack11 = catch;
+ $stack5=this.logger;
+ $stack8 = org.apache.rocketmq.common.UtilAll.exceptionSimpleDesc((java.lang.Throwable)$stack11);
+ $stack5.error("notifyConsumerIdsChanged exception",(java.lang.Object)$stack8);
+ label2:return  null;
+ catch java.lang.Exception: label0 - label1 : label3;
+} 
+

@@ -1,0 +1,49 @@
+boolean org.apache.bookkeeper.common.conf.validators.ClassValidator:validate(java.lang.String @name,java.lang.Object value)
+{
+java.lang.Class re;
+  boolean $stack4;
+  java.lang.Class $stack6;
+  java.lang.Object[] $stack8;
+  org.slf4j.Logger $stack10;
+  java.lang.String $stack17;
+  java.lang.RuntimeException $stack19;
+  java.lang.String name;
+name=@name;
+$stack4=value instanceof java.lang.String;
+ if ($stack4==0) goto label0;
+ label1:$stack17=(java.lang.String) value;
+ re=this.interfaceClass;
+ org.apache.bookkeeper.common.util.ReflectionUtils.forName($stack17,re);
+ label2:return  1;
+ label3:$stack19 = catch;
+ $stack10=org.apache.bookkeeper.common.conf.validators.ClassValidator.log;
+ $stack8=new java.lang.Object[4];
+ $stack8[0]=name;
+ re=this.interfaceClass;
+ name = re.getName();
+ $stack8[1]=name;
+ $stack8[2]=value;
+ $stack8[3]=$stack19;
+ $stack10.warn("Setting value of \'{}\' is not \'{}\' : {}",$stack8);
+ return  0;
+ label0:$stack4=value instanceof java.lang.Class;
+ if ($stack4==0) goto label4;
+ re=(java.lang.Class) value;
+ $stack6=this.interfaceClass;
+ $stack4 = $stack6.isAssignableFrom(re);
+ if ($stack4!=0) goto label5;
+ $stack10=org.apache.bookkeeper.common.conf.validators.ClassValidator.log;
+ $stack8=new java.lang.Object[3];
+ $stack8[0]=name;
+ $stack6=this.interfaceClass;
+ name = $stack6.getName();
+ $stack8[1]=name;
+ name = re.getName();
+ $stack8[2]=name;
+ $stack10.warn("Setting value of \'{}\' is not \'{}\' : {}",$stack8);
+ return  0;
+ label5:return  1;
+ label4:return  0;
+ catch java.lang.RuntimeException: label1 - label2 : label3;
+} 
+

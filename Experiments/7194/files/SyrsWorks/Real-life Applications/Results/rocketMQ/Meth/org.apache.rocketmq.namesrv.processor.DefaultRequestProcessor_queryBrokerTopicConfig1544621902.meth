@@ -1,0 +1,44 @@
+org.apache.rocketmq.remoting.protocol.RemotingCommand org.apache.rocketmq.namesrv.processor.DefaultRequestProcessor:queryBrokerTopicConfig(io.netty.channel.ChannelHandlerContext ctx,org.apache.rocketmq.remoting.protocol.RemotingCommand request)
+{
+org.apache.rocketmq.remoting.protocol.RemotingCommand response;
+  org.apache.rocketmq.remoting.protocol.header.namesrv.QueryDataVersionResponseHeader responseHeader;
+  org.apache.rocketmq.remoting.protocol.header.namesrv.QueryDataVersionRequestHeader requestHeader;
+  org.apache.rocketmq.remoting.protocol.DataVersion dataVersion;
+  java.lang.String clusterName;
+  java.lang.String brokerAddr;
+  java.lang.Boolean changed;
+  org.apache.rocketmq.remoting.CommandCustomHeader $stack12;
+  byte[] $stack14;
+  java.lang.Object $stack15;
+  org.apache.rocketmq.namesrv.NamesrvController $stack18;
+  org.apache.rocketmq.namesrv.routeinfo.RouteInfoManager $stack19;
+  boolean $stack20;
+  response = org.apache.rocketmq.remoting.protocol.RemotingCommand.createResponseCommand(org.apache.rocketmq.remoting.protocol.header.namesrv.QueryDataVersionResponseHeader);
+ $stack12 = response.readCustomHeader();
+ responseHeader=(org.apache.rocketmq.remoting.protocol.header.namesrv.QueryDataVersionResponseHeader) $stack12;
+ $stack12 = request.decodeCommandCustomHeader(org.apache.rocketmq.remoting.protocol.header.namesrv.QueryDataVersionRequestHeader);
+ requestHeader=(org.apache.rocketmq.remoting.protocol.header.namesrv.QueryDataVersionRequestHeader) $stack12;
+ $stack14 = request.getBody();
+ $stack15 = org.apache.rocketmq.remoting.protocol.RemotingSerializable.decode($stack14,org.apache.rocketmq.remoting.protocol.DataVersion);
+ dataVersion=(org.apache.rocketmq.remoting.protocol.DataVersion) $stack15;
+ clusterName = requestHeader.getClusterName();
+ brokerAddr = requestHeader.getBrokerAddr();
+ $stack18=this.namesrvController;
+ $stack19 = $stack18.getRouteInfoManager();
+ $stack20 = $stack19.isBrokerTopicConfigChanged(clusterName,brokerAddr,dataVersion);
+ changed = java.lang.Boolean.valueOf($stack20);
+ $stack18=this.namesrvController;
+ $stack19 = $stack18.getRouteInfoManager();
+ $stack19.updateBrokerInfoUpdateTimestamp(clusterName,brokerAddr);
+ $stack18=this.namesrvController;
+ $stack19 = $stack18.getRouteInfoManager();
+ dataVersion = $stack19.queryBrokerTopicConfig(clusterName,brokerAddr);
+ response.setCode(0);
+ response.setRemark(null);
+ if (dataVersion==null) goto label0;
+ $stack14 = dataVersion.encode();
+ response.setBody($stack14);
+ label0:responseHeader.setChanged(changed);
+ return  response;
+ } 
+

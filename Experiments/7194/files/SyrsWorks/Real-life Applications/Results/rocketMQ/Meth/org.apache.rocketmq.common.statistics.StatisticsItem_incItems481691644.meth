@@ -1,0 +1,32 @@
+void org.apache.rocketmq.common.statistics.StatisticsItem:incItems(long[] itemIncs)
+{
+int len;
+  int i;
+  java.util.concurrent.atomic.AtomicLong[] $stack4;
+  java.util.concurrent.atomic.AtomicLong $stack8;
+  long $stack9;
+  org.apache.rocketmq.common.statistics.Interceptor $stack12;
+  i=#itemIncs;
+ $stack4=this.itemAccumulates;
+ len=#$stack4;
+ len = java.lang.Math.min(i,len);
+ i=0;
+ label0:if (i>=len) goto label1;
+ $stack4=this.itemAccumulates;
+ $stack8=$stack4[i];
+ $stack9=itemIncs[i];
+ $stack8.addAndGet($stack9);
+ i=(i+1);
+ goto label0;
+ label1:$stack8=this.invokeTimes;
+ $stack8.addAndGet(1L);
+ $stack8=this.lastTimeStamp;
+ $stack9 = java.lang.System.currentTimeMillis();
+ $stack8.set($stack9);
+ $stack12=this.interceptor;
+ if ($stack12==null) goto label2;
+ $stack12=this.interceptor;
+ $stack12.inc(itemIncs);
+ label2:return;
+ } 
+

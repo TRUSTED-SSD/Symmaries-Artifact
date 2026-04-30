@@ -1,0 +1,32 @@
+static boolean org.keycloak.common.util.Encode:savePathParams(java.lang.String @segment,java.lang.StringBuilder newSegment,java.util.List params)
+{
+boolean foundParam;
+  java.util.regex.Matcher matcher;
+  int start;
+  java.lang.String group;
+  java.util.regex.Pattern $stack8;
+  boolean $stack10;
+  int $stack11;
+  java.lang.String segment;
+segment=@segment;
+foundParam=0;
+ segment = org.keycloak.common.util.PathHelper.replaceEnclosedCurlyBraces(segment);
+ $stack8=org.keycloak.common.util.PathHelper.URI_TEMPLATE_PATTERN;
+ matcher = $stack8.matcher((java.lang.CharSequence)segment);
+ start=0;
+ label0:$stack10 = matcher.find();
+ if ($stack10==0) goto label1;
+ $stack11 = matcher.start();
+ newSegment.append((java.lang.CharSequence)segment,start,$stack11);
+ foundParam=1;
+ group = matcher.group();
+ group = org.keycloak.common.util.PathHelper.recoverEnclosedCurlyBraces(group);
+ params.add((java.lang.Object)group);
+ newSegment.append("_resteasy_uri_parameter");
+ start = matcher.end();
+ goto label0;
+ label1:$stack11 = segment.length();
+ newSegment.append((java.lang.CharSequence)segment,start,$stack11);
+ return  foundParam;
+ } 
+

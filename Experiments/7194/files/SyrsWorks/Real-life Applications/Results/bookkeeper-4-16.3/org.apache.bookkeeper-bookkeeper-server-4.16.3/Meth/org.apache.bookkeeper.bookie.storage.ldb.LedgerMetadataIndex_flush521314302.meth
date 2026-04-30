@@ -1,0 +1,56 @@
+void org.apache.bookkeeper.bookie.storage.ldb.LedgerMetadataIndex:flush()
+{
+org.apache.bookkeeper.bookie.storage.ldb.LongWrapper key;
+  int updatedLedgers;
+  java.util.Map$Entry entry;
+  byte[] value;
+  java.lang.Throwable l5;
+  java.util.concurrent.ConcurrentLinkedQueue $stack7;
+  java.lang.Object $stack8;
+  java.util.Map$Entry $stack9;
+  org.slf4j.Logger $stack10;
+  boolean $stack11;
+  org.apache.bookkeeper.bookie.storage.ldb.KeyValueStorage $stack12;
+  java.lang.Integer $stack15;
+  java.lang.Long $stack19;
+  long $stack20;
+  org.apache.bookkeeper.bookie.storage.ldb.DbLedgerStorageDataFormats$LedgerData $stack22;
+  byte[] $stack24;
+  key = org.apache.bookkeeper.bookie.storage.ldb.LongWrapper.get();
+ label0:updatedLedgers=0;
+ label1:$stack7=this.pendingLedgersUpdates;
+ $stack8 = $stack7.poll();
+ $stack9=(java.util.Map$Entry) $stack8;
+ entry=$stack9;
+ if ($stack9==null) goto label2;
+ $stack8 = $stack9.getKey();
+ $stack19=(java.lang.Long) $stack8;
+ $stack20 = $stack19.longValue();
+ key.set($stack20);
+ $stack8 = $stack9.getValue();
+ $stack22=(org.apache.bookkeeper.bookie.storage.ldb.DbLedgerStorageDataFormats$LedgerData) $stack8;
+ value = $stack22.toByteArray();
+ $stack12=this.ledgersDb;
+ $stack24=key.array;
+ $stack12.put($stack24,value);
+ updatedLedgers=(updatedLedgers+1);
+ goto label1;
+ label2:$stack10=org.apache.bookkeeper.bookie.storage.ldb.LedgerMetadataIndex.log;
+ $stack11 = $stack10.isDebugEnabled();
+ if ($stack11==0) goto label3;
+ $stack10=org.apache.bookkeeper.bookie.storage.ldb.LedgerMetadataIndex.log;
+ $stack15 = java.lang.Integer.valueOf(updatedLedgers);
+ dummyClass.lowSink("Persisting updates to {} ledgers");
+$stack10.debug("Persisting updates to {} ledgers",(java.lang.Object)$stack15);
+ label3:$stack12=this.ledgersDb;
+ $stack12.sync();
+ label4:key.recycle();
+ goto label5;
+ label6:l5 = catch;
+ label7:key.recycle();
+ throw l5;
+ label5:return;
+ catch java.lang.Throwable: label0 - label4 : label6;
+catch java.lang.Throwable: label6 - label7 : label6;
+} 
+

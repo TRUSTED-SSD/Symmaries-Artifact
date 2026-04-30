@@ -1,0 +1,40 @@
+java.lang.String org.apache.rocketmq.store.StoreStatsService:getFormatRuntime()
+{
+long millisecond;
+  long time;
+  long hours;
+  long minutes;
+  java.text.MessageFormat $stack22;
+  java.lang.Long[] $stack28;
+  java.lang.Long $stack30;
+  java.lang.String $stack37;
+  millisecond=1L;
+ millisecond=1000L;
+ millisecond=60000L;
+ millisecond=3600000L;
+ millisecond=86400000L;
+ $stack22=new java.text.MessageFormat;
+ $stack22#java.text.MessageFormat("[ {0} days, {1} hours, {2} minutes, {3} seconds ]");
+ millisecond = java.lang.System.currentTimeMillis();
+ hours=this.messageStoreBootTimestamp;
+ time=(millisecond-hours);
+ millisecond=(time/86400000L);
+ hours=(time%86400000L);
+ hours=(hours/3600000L);
+ minutes=(time%3600000L);
+ minutes=(minutes/60000L);
+ time=(time%60000L);
+ time=(time/1000L);
+ $stack28=new java.lang.Long[4];
+ $stack30 = java.lang.Long.valueOf(millisecond);
+ $stack28[0]=$stack30;
+ $stack30 = java.lang.Long.valueOf(hours);
+ $stack28[1]=$stack30;
+ $stack30 = java.lang.Long.valueOf(minutes);
+ $stack28[2]=$stack30;
+ $stack30 = java.lang.Long.valueOf(time);
+ $stack28[3]=$stack30;
+ $stack37 = $stack22.format((java.lang.Object)$stack28);
+ return  $stack37;
+ } 
+

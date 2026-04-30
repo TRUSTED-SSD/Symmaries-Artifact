@@ -1,0 +1,58 @@
+boolean org.apache.bookkeeper.meta.MSLedgerManagerFactory:validateAndNukeExistingCluster(org.apache.bookkeeper.conf.AbstractConfiguration conf,org.apache.bookkeeper.meta.LayoutManager layoutManager)
+{
+java.lang.String zkLedgersRootPath;
+  java.lang.String zkServers;
+  java.util.List ledgersRootPathChildrenList;
+  java.util.Iterator l6;
+  java.lang.String ledgersRootPathChildren;
+  org.apache.zookeeper.ZooKeeper $stack10;
+  boolean $stack13;
+  org.slf4j.Logger $stack19;
+  java.lang.Object $stack20;
+  java.lang.StringBuilder $stack23;
+  zkLedgersRootPath = org.apache.bookkeeper.meta.zk.ZKMetadataDriverBase.resolveZkLedgersRootPath(conf);
+ zkServers = org.apache.bookkeeper.meta.zk.ZKMetadataDriverBase.resolveZkServers(conf);
+ $stack10=this.zk;
+ ledgersRootPathChildrenList = $stack10.getChildren(zkLedgersRootPath,(boolean)0);
+ l6 = ledgersRootPathChildrenList.iterator();
+ label0:$stack13 = l6.hasNext();
+ if ($stack13==0) goto label1;
+ $stack20 = l6.next();
+ ledgersRootPathChildren=(java.lang.String) $stack20;
+ $stack13 = org.apache.bookkeeper.meta.MSLedgerManagerFactory$MsLedgerManager.isSpecialZnode(ledgersRootPathChildren);
+ if ($stack13!=0) goto label2;
+ $stack19=org.apache.bookkeeper.meta.MSLedgerManagerFactory.log;
+ $stack19.error("Found unexpected znode : {} under ledgersRootPath : {} so exiting nuke operation",(java.lang.Object)ledgersRootPathChildren,(java.lang.Object)zkLedgersRootPath);
+ return  0;
+ label2:goto label0;
+ label1:this#org.apache.bookkeeper.meta.MSLedgerManagerFactory(conf,layoutManager);
+ $stack10=this.zk;
+ ledgersRootPathChildrenList = $stack10.getChildren(zkLedgersRootPath,(boolean)0);
+ l6 = ledgersRootPathChildrenList.iterator();
+ label3:$stack13 = l6.hasNext();
+ if ($stack13==0) goto label4;
+ $stack20 = l6.next();
+ ledgersRootPathChildren=(java.lang.String) $stack20;
+ $stack13 = org.apache.bookkeeper.meta.MSLedgerManagerFactory$MsLedgerManager.isSpecialZnode(ledgersRootPathChildren);
+ if ($stack13==0) goto label5;
+ $stack10=this.zk;
+ $stack23=new java.lang.StringBuilder;
+ $stack23#java.lang.StringBuilder();
+ $stack23 = $stack23.append(zkLedgersRootPath);
+ $stack23 = $stack23.append("/");
+ $stack23 = $stack23.append(ledgersRootPathChildren);
+ ledgersRootPathChildren = $stack23.toString();
+ org.apache.zookeeper.ZKUtil.deleteRecursive($stack10,ledgersRootPathChildren);
+ goto label6;
+ label5:$stack19=org.apache.bookkeeper.meta.MSLedgerManagerFactory.log;
+ $stack19.error("Found unexpected znode : {} under ledgersRootPath : {} so exiting nuke operation",(java.lang.Object)ledgersRootPathChildren,(java.lang.Object)zkLedgersRootPath);
+ return  0;
+ label6:goto label3;
+ label4:$stack10=this.zk;
+ $stack10.delete(zkLedgersRootPath,-1);
+ $stack19=org.apache.bookkeeper.meta.MSLedgerManagerFactory.log;
+ dummyClass.lowSink("Successfully nuked existing cluster, ZKServers: {} ledger root path: {}");
+$stack19.info("Successfully nuked existing cluster, ZKServers: {} ledger root path: {}",(java.lang.Object)zkServers,(java.lang.Object)zkLedgersRootPath);
+ return  1;
+ } 
+

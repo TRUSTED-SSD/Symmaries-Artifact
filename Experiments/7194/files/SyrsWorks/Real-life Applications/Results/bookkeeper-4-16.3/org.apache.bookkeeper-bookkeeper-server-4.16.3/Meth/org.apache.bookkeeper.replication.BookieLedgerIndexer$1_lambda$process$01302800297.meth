@@ -1,0 +1,56 @@
+void org.apache.bookkeeper.replication.BookieLedgerIndexer$1:lambda$process$0(java.util.concurrent.ConcurrentHashMap bookie2ledgersMap,java.lang.Long ledgerId,org.apache.zookeeper.AsyncCallback$VoidCallback iterCallback,org.apache.bookkeeper.versioning.Versioned metadata,java.lang.Throwable exception)
+{
+java.util.Iterator l6;
+  java.util.Map$Entry ensemble;
+  java.util.Iterator l8;
+  org.apache.bookkeeper.net.BookieId bookie;
+  int $stack10;
+  org.slf4j.Logger $stack11;
+  java.lang.Object $stack14;
+  org.apache.bookkeeper.client.api.LedgerMetadata $stack15;
+  java.util.NavigableMap $stack16;
+  java.util.Set $stack17;
+  boolean $stack19;
+  java.util.List $stack22;
+  org.apache.bookkeeper.replication.BookieLedgerIndexer $stack27;
+  java.lang.String $stack28;
+  long $stack29;
+  if (exception!=null) goto label0;
+ $stack14 = metadata.getValue();
+ $stack15=(org.apache.bookkeeper.client.api.LedgerMetadata) $stack14;
+ $stack16 = $stack15.getAllEnsembles();
+ $stack17 = $stack16.entrySet();
+ l6 = $stack17.iterator();
+ label1:$stack19 = l6.hasNext();
+ if ($stack19==0) goto label2;
+ $stack14 = l6.next();
+ ensemble=(java.util.Map$Entry) $stack14;
+ $stack14 = ensemble.getValue();
+ $stack22=(java.util.List) $stack14;
+ l8 = $stack22.iterator();
+ label3:$stack19 = l8.hasNext();
+ if ($stack19==0) goto label4;
+ $stack14 = l8.next();
+ bookie=(org.apache.bookkeeper.net.BookieId) $stack14;
+ $stack27=this.this$0;
+ $stack28 = bookie.toString();
+ $stack29 = ledgerId.longValue();
+ org.apache.bookkeeper.replication.BookieLedgerIndexer.access$100($stack27,bookie2ledgersMap,$stack28,$stack29);
+ goto label3;
+ label4:goto label1;
+ label2:iterCallback.processResult(0,null,null);
+ goto label5;
+ label0:$stack10 = org.apache.bookkeeper.client.BKException.getExceptionCode(exception);
+ if ($stack10!=-25) goto label6;
+ $stack11 = org.apache.bookkeeper.replication.BookieLedgerIndexer.access$200();
+ dummyClass.lowSink("Ignoring replication of already deleted ledger {}");
+$stack11.info("Ignoring replication of already deleted ledger {}",(java.lang.Object)ledgerId);
+ iterCallback.processResult(0,null,null);
+ goto label5;
+ label6:$stack11 = org.apache.bookkeeper.replication.BookieLedgerIndexer.access$200();
+ $stack11.warn("Unable to read the ledger: {} information",(java.lang.Object)ledgerId);
+ $stack10 = org.apache.bookkeeper.client.BKException.getExceptionCode(exception);
+ iterCallback.processResult($stack10,null,null);
+ label5:return;
+ } 
+

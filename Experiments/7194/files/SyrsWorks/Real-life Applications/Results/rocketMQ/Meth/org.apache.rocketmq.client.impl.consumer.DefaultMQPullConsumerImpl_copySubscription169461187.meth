@@ -1,0 +1,35 @@
+void org.apache.rocketmq.client.impl.consumer.DefaultMQPullConsumerImpl:copySubscription()
+{
+java.util.Set registerTopics;
+  java.util.Iterator l2;
+  java.lang.String topic;
+  org.apache.rocketmq.remoting.protocol.heartbeat.SubscriptionData subscriptionData;
+  org.apache.rocketmq.client.consumer.DefaultMQPullConsumer $stack5;
+  boolean $stack8;
+  java.lang.Object $stack9;
+  org.apache.rocketmq.client.impl.consumer.RebalanceImpl $stack11;
+  java.util.concurrent.ConcurrentMap $stack12;
+  java.lang.Exception $stack15;
+  org.apache.rocketmq.client.exception.MQClientException $stack16;
+  label0:$stack5=this.defaultMQPullConsumer;
+ registerTopics = $stack5.getRegisterTopics();
+ if (registerTopics==null) goto label1;
+ l2 = registerTopics.iterator();
+ label2:$stack8 = l2.hasNext();
+ if ($stack8==0) goto label1;
+ $stack9 = l2.next();
+ topic=(java.lang.String) $stack9;
+ subscriptionData = org.apache.rocketmq.remoting.protocol.filter.FilterAPI.buildSubscriptionData(topic,"*");
+ $stack11=this.rebalanceImpl;
+ $stack12 = $stack11.getSubscriptionInner();
+ $stack12.put((java.lang.Object)topic,(java.lang.Object)subscriptionData);
+ goto label2;
+ label1:goto label3;
+ label4:$stack15 = catch;
+ $stack16=new org.apache.rocketmq.client.exception.MQClientException;
+ $stack16#org.apache.rocketmq.client.exception.MQClientException("subscription exception",(java.lang.Throwable)$stack15);
+ throw $stack16;
+ label3:return;
+ catch java.lang.Exception: label0 - label1 : label4;
+} 
+

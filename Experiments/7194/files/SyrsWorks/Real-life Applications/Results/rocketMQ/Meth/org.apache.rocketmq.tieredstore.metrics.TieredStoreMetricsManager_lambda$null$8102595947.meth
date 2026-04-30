@@ -1,0 +1,18 @@
+static void org.apache.rocketmq.tieredstore.metrics.TieredStoreMetricsManager:lambda$null$8(java.lang.String @topic,io.opentelemetry.api.metrics.ObservableLongMeasurement measurement,org.apache.rocketmq.tieredstore.provider.TieredFileSegment$FileSegmentType fileSegmentType,java.lang.Long size)
+{
+io.opentelemetry.api.common.Attributes attributes;
+  io.opentelemetry.api.common.AttributesBuilder $stack5;
+  long $stack12;
+  java.lang.String topic;
+topic=@topic;
+$stack5 = org.apache.rocketmq.tieredstore.metrics.TieredStoreMetricsManager.newAttributesBuilder();
+ $stack5 = $stack5.put("topic",topic);
+ topic = fileSegmentType.name();
+ topic = topic.toLowerCase();
+ $stack5 = $stack5.put("file_type",topic);
+ attributes = $stack5.build();
+ $stack12 = size.longValue();
+ measurement.record($stack12,attributes);
+ return;
+ } 
+

@@ -1,0 +1,24 @@
+static java.nio.ByteBuffer org.apache.rocketmq.common.message.MessageExt:socketAddress2ByteBuffer(java.net.SocketAddress socketAddress,java.nio.ByteBuffer byteBuffer)
+{
+java.net.InetSocketAddress inetSocketAddress;
+  java.net.InetAddress address;
+  boolean $stack5;
+  byte[] $stack7;
+  int $stack9;
+  inetSocketAddress=(java.net.InetSocketAddress) socketAddress;
+ address = inetSocketAddress.getAddress();
+ $stack5=address instanceof java.net.Inet4Address;
+ if ($stack5==0) goto label0;
+ address = inetSocketAddress.getAddress();
+ $stack7 = address.getAddress();
+ byteBuffer.put($stack7,0,4);
+ goto label1;
+ label0:address = inetSocketAddress.getAddress();
+ $stack7 = address.getAddress();
+ byteBuffer.put($stack7,0,16);
+ label1:$stack9 = inetSocketAddress.getPort();
+ byteBuffer.putInt($stack9);
+ byteBuffer.flip();
+ return  byteBuffer;
+ } 
+

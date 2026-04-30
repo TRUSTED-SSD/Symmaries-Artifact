@@ -1,0 +1,30 @@
+java.lang.String org.apache.rocketmq.client.impl.MQClientAPIImpl:onNameServerAddressChange(java.lang.String @namesrvAddress)
+{
+java.lang.String $stack3;
+  boolean $stack4;
+  java.lang.StringBuilder $stack6;
+  org.apache.rocketmq.logging.org.slf4j.Logger $stack7;
+  java.lang.String namesrvAddress;
+namesrvAddress=@namesrvAddress;
+if (namesrvAddress==null) goto label0;
+ $stack3=this.nameSrvAddr;
+ $stack4 = namesrvAddress.equals((java.lang.Object)$stack3);
+ if ($stack4!=0) goto label0;
+ $stack7=org.apache.rocketmq.client.impl.MQClientAPIImpl.log;
+ $stack6=new java.lang.StringBuilder;
+ $stack6#java.lang.StringBuilder();
+ $stack6 = $stack6.append("name server address changed, old=");
+ $stack3=this.nameSrvAddr;
+ $stack6 = $stack6.append($stack3);
+ $stack6 = $stack6.append(", new=");
+ $stack6 = $stack6.append(namesrvAddress);
+ $stack3 = $stack6.toString();
+ $stack7.info($stack3);
+ this.updateNameServerAddressList(namesrvAddress);
+ this.nameSrvAddr=namesrvAddress;
+ namesrvAddress=this.nameSrvAddr;
+ return  namesrvAddress;
+ label0:namesrvAddress=this.nameSrvAddr;
+ return  namesrvAddress;
+ } 
+

@@ -1,0 +1,47 @@
+void org.apache.bookkeeper.stream.server.service.DLNamespaceProviderService:doStart()
+{
+java.net.URI uri;
+  org.apache.bookkeeper.conf.ServerConfiguration $stack4;
+  org.apache.distributedlog.api.namespace.NamespaceBuilder $stack6;
+  org.apache.bookkeeper.stats.StatsLogger $stack7;
+  org.apache.distributedlog.DistributedLogConfiguration $stack10;
+  org.apache.distributedlog.config.DynamicDistributedLogConfiguration $stack12;
+  org.apache.distributedlog.api.namespace.Namespace $stack15;
+  org.slf4j.Logger $stack16;
+  java.lang.Throwable $stack17;
+  java.lang.RuntimeException $stack18;
+  java.lang.StringBuilder $stack19;
+  java.lang.String $stack22;
+  label0:$stack4=this.bkServerConf;
+ uri=this.dlogUri;
+ uri = org.apache.bookkeeper.stream.server.service.DLNamespaceProviderService.initializeNamespace($stack4,uri);
+ $stack6 = org.apache.distributedlog.api.namespace.NamespaceBuilder.newBuilder();
+ $stack7 = this.getStatsLogger();
+ $stack6 = $stack6.statsLogger($stack7);
+ $stack6 = $stack6.clientId("storage-server");
+ $stack10=this.dlConf;
+ $stack6 = $stack6.conf($stack10);
+ $stack12=this.dlDynConf;
+ $stack6 = $stack6.dynConf($stack12);
+ $stack6 = $stack6.uri(uri);
+ $stack15 = $stack6.build();
+ this.namespace=$stack15;
+ label1:goto label2;
+ label3:$stack17 = catch;
+ $stack18=new java.lang.RuntimeException;
+ $stack19=new java.lang.StringBuilder;
+ $stack19#java.lang.StringBuilder();
+ $stack19 = $stack19.append("Failed to build the distributedlog namespace at ");
+ $stack4=this.bkServerConf;
+ $stack22 = $stack4.getMetadataServiceUriUnchecked();
+ $stack19 = $stack19.append($stack22);
+ $stack22 = $stack19.toString();
+ $stack18#java.lang.RuntimeException($stack22,$stack17);
+ throw $stack18;
+ label2:$stack16=org.apache.bookkeeper.stream.server.service.DLNamespaceProviderService.log;
+ dummyClass.lowSink("Provided distributedlog namespace at {}.");
+$stack16.info("Provided distributedlog namespace at {}.",(java.lang.Object)uri);
+ return;
+ catch java.lang.Throwable: label0 - label1 : label3;
+} 
+

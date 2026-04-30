@@ -1,0 +1,43 @@
+void org.apache.rocketmq.tools.command.message.QueryMsgByKeySubCommand:execute(org.apache.commons.cli.CommandLine commandLine,org.apache.commons.cli.Options options,org.apache.rocketmq.remoting.RPCHook rpcHook)
+{
+org.apache.rocketmq.tools.admin.DefaultMQAdminExt defaultMQAdminExt;
+  java.lang.String topic;
+  java.lang.String key;
+  java.lang.Throwable l7;
+  long $stack9;
+  java.lang.Exception $stack15;
+  org.apache.rocketmq.tools.command.SubCommandException $stack16;
+  java.lang.StringBuilder $stack17;
+  java.lang.Class $stack18;
+  defaultMQAdminExt=new org.apache.rocketmq.tools.admin.DefaultMQAdminExt;
+ defaultMQAdminExt#org.apache.rocketmq.tools.admin.DefaultMQAdminExt(rpcHook);
+ $stack9 = java.lang.System.currentTimeMillis();
+ topic = java.lang.Long.toString($stack9);
+ defaultMQAdminExt.setInstanceName(topic);
+ label0:topic = commandLine.getOptionValue((char)116);
+ topic = topic.trim();
+ key = commandLine.getOptionValue((char)107);
+ key = key.trim();
+ this#org.apache.rocketmq.tools.command.message.QueryMsgByKeySubCommand:queryByKey(defaultMQAdminExt,topic,key);
+ label1:defaultMQAdminExt.shutdown();
+ goto label2;
+ label3:$stack15 = catch;
+ $stack16=new org.apache.rocketmq.tools.command.SubCommandException;
+ $stack17=new java.lang.StringBuilder;
+ $stack17#java.lang.StringBuilder();
+ $stack18 = this.getClass();
+ topic = $stack18.getSimpleName();
+ $stack17 = $stack17.append(topic);
+ $stack17 = $stack17.append(" command failed");
+ topic = $stack17.toString();
+ $stack16#org.apache.rocketmq.tools.command.SubCommandException(topic,(java.lang.Throwable)$stack15);
+ throw $stack16;
+ label4:l7 = catch;
+ label5:defaultMQAdminExt.shutdown();
+ throw l7;
+ label2:return;
+ catch java.lang.Exception: label0 - label1 : label3;
+catch java.lang.Throwable: label0 - label1 : label4;
+catch java.lang.Throwable: label3 - label5 : label4;
+} 
+

@@ -1,0 +1,47 @@
+void com.google.zxing.oned.rss.expanded.RSSExpandedReader:storeRow(int rowNumber)
+{
+int insertPos;
+  boolean prevIsSame;
+  boolean nextIsSame;
+  com.google.zxing.oned.rss.expanded.ExpandedRow erow;
+  java.util.List $stack6;
+  int $stack7;
+  java.util.List $stack9;
+  java.lang.Object $stack17;
+  insertPos=0;
+ prevIsSame=0;
+ nextIsSame=0;
+ label0:$stack6=this.rows;
+ $stack7 = $stack6.size();
+ if (insertPos>=$stack7) goto label1;
+ $stack6=this.rows;
+ $stack17 = $stack6.get(insertPos);
+ erow=(com.google.zxing.oned.rss.expanded.ExpandedRow) $stack17;
+ $stack7 = erow.getRowNumber();
+ if ($stack7<=rowNumber) goto label2;
+ $stack6=this.pairs;
+ nextIsSame = erow.isEquivalent($stack6);
+ goto label1;
+ label2:$stack6=this.pairs;
+ prevIsSame = erow.isEquivalent($stack6);
+ insertPos=(insertPos+1);
+ goto label0;
+ label1:if (nextIsSame!=0) goto label3;
+ if (prevIsSame==0) goto label4;
+ label3:return;
+ label4:$stack9=this.pairs;
+ $stack6=this.rows;
+ prevIsSame = com.google.zxing.oned.rss.expanded.RSSExpandedReader.isPartialRow((java.lang.Iterable)$stack9,(java.lang.Iterable)$stack6);
+ if (prevIsSame==0) goto label5;
+ return;
+ label5:$stack9=this.rows;
+ erow=new com.google.zxing.oned.rss.expanded.ExpandedRow;
+ $stack6=this.pairs;
+ erow#com.google.zxing.oned.rss.expanded.ExpandedRow($stack6,rowNumber);
+ $stack9.add(insertPos,(java.lang.Object)erow);
+ $stack9=this.pairs;
+ $stack6=this.rows;
+ com.google.zxing.oned.rss.expanded.RSSExpandedReader.removePartialRows((java.util.Collection)$stack9,(java.util.Collection)$stack6);
+ return;
+ } 
+

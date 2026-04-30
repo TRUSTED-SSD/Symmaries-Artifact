@@ -1,0 +1,106 @@
+    public void run()
+    {
+        org.junit.internal.runners.MethodRoadie this;
+        long timeout;
+        java.lang.Throwable l3;
+        org.junit.internal.runners.TestMethod $stack4;
+        boolean $stack5;
+        org.junit.runner.Description $stack6;
+        org.junit.runner.notification.RunNotifier $stack7;
+        byte $stack10;
+
+        this := @this: org.junit.internal.runners.MethodRoadie;
+
+        $stack4 = this.<org.junit.internal.runners.MethodRoadie: org.junit.internal.runners.TestMethod testMethod>;
+/*40*/
+
+        $stack5 = virtualinvoke $stack4.<org.junit.internal.runners.TestMethod: boolean isIgnored()>();
+/*40*/
+
+        if $stack5 == 0 goto label1;
+/*40*/
+
+        $stack7 = this.<org.junit.internal.runners.MethodRoadie: org.junit.runner.notification.RunNotifier notifier>;
+/*41*/
+
+        $stack6 = this.<org.junit.internal.runners.MethodRoadie: org.junit.runner.Description description>;
+/*41*/
+
+        virtualinvoke $stack7.<org.junit.runner.notification.RunNotifier: void fireTestIgnored(org.junit.runner.Description)>($stack6);
+/*41*/
+
+        return;
+/*42*/
+
+     label1:
+        $stack7 = this.<org.junit.internal.runners.MethodRoadie: org.junit.runner.notification.RunNotifier notifier>;
+/*44*/
+
+        $stack6 = this.<org.junit.internal.runners.MethodRoadie: org.junit.runner.Description description>;
+/*44*/
+
+        virtualinvoke $stack7.<org.junit.runner.notification.RunNotifier: void fireTestStarted(org.junit.runner.Description)>($stack6);
+/*44*/
+
+     label2:
+        $stack4 = this.<org.junit.internal.runners.MethodRoadie: org.junit.internal.runners.TestMethod testMethod>;
+/*46*/
+
+        timeout = virtualinvoke $stack4.<org.junit.internal.runners.TestMethod: long getTimeout()>();
+/*46*/
+/*46*/
+
+        $stack10 = timeout cmp 0L;
+/*47*/
+
+        if $stack10 <= 0 goto label3;
+/*47*/
+
+        specialinvoke this.<org.junit.internal.runners.MethodRoadie: void runWithTimeout(long)>(timeout);
+/*48*/
+
+        goto label4;
+/*48*/
+
+     label3:
+        virtualinvoke this.<org.junit.internal.runners.MethodRoadie: void runTest()>();
+/*50*/
+
+     label4:
+        $stack7 = this.<org.junit.internal.runners.MethodRoadie: org.junit.runner.notification.RunNotifier notifier>;
+/*53*/
+
+        $stack6 = this.<org.junit.internal.runners.MethodRoadie: org.junit.runner.Description description>;
+/*53*/
+
+        virtualinvoke $stack7.<org.junit.runner.notification.RunNotifier: void fireTestFinished(org.junit.runner.Description)>($stack6);
+/*53*/
+
+        goto label7;
+/*54*/
+
+     label5:
+        l3 := @caughtexception;
+/*42*/
+
+     label6:
+        $stack7 = this.<org.junit.internal.runners.MethodRoadie: org.junit.runner.notification.RunNotifier notifier>;
+/*53*/
+
+        $stack6 = this.<org.junit.internal.runners.MethodRoadie: org.junit.runner.Description description>;
+/*53*/
+
+        virtualinvoke $stack7.<org.junit.runner.notification.RunNotifier: void fireTestFinished(org.junit.runner.Description)>($stack6);
+/*53*/
+
+        throw l3;
+/*53*/
+
+     label7:
+        return;
+/*55*/
+
+        catch java.lang.Throwable from label2 to label4 with label5;
+        catch java.lang.Throwable from label5 to label6 with label5;
+    }
+

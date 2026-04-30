@@ -1,0 +1,25 @@
+static java.lang.String org.apache.rocketmq.store.CommitLog$DefaultAppendMessageCallback:lambda$doAppend$0(org.apache.rocketmq.common.message.MessageExtBrokerInner msgInner,long wroteOffset)
+{
+int sysflag;
+  byte msgIdLen;
+  java.nio.ByteBuffer msgIdBuffer;
+  java.net.SocketAddress $stack9;
+  byte[] $stack14;
+  java.lang.String $stack15;
+  sysflag = msgInner.getSysFlag();
+ sysflag=(sysflag & 32);
+ if (sysflag!=0) goto label0;
+ msgIdLen=16;
+ goto label1;
+ label0:msgIdLen=28;
+ label1:msgIdBuffer = java.nio.ByteBuffer.allocate((int)msgIdLen);
+ $stack9 = msgInner.getStoreHost();
+ org.apache.rocketmq.common.message.MessageExt.socketAddress2ByteBuffer($stack9,msgIdBuffer);
+ msgIdBuffer.clear();
+ sysflag=(msgIdLen-8);
+ msgIdBuffer.putLong(sysflag,wroteOffset);
+ $stack14 = msgIdBuffer.array();
+ $stack15 = org.apache.rocketmq.common.UtilAll.bytes2string($stack14);
+ return  $stack15;
+ } 
+

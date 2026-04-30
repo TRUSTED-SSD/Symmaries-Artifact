@@ -1,0 +1,42 @@
+java.util.concurrent.CompletableFuture org.apache.rocketmq.proxy.processor.TransactionProcessor:endTransaction(org.apache.rocketmq.proxy.common.ProxyContext ctx,java.lang.String @transactionId,java.lang.String messageId,java.lang.String producerGroup,org.apache.rocketmq.proxy.processor.TransactionStatus transactionStatus,boolean fromTransactionCheck,long timeoutMillis)
+{
+java.util.concurrent.CompletableFuture future;
+  org.apache.rocketmq.proxy.service.transaction.EndTransactionRequestData headerData;
+  org.apache.rocketmq.proxy.service.ServiceManager $stack12;
+  org.apache.rocketmq.proxy.service.transaction.TransactionService $stack13;
+  int $stack14;
+  java.lang.Integer $stack15;
+  org.apache.rocketmq.proxy.service.message.MessageService $stack18;
+  org.apache.rocketmq.remoting.protocol.header.EndTransactionRequestHeader $stack20;
+  java.util.concurrent.CompletableFuture $stack21;
+  org.apache.rocketmq.proxy.common.ProxyException $stack22;
+  org.apache.rocketmq.proxy.common.ProxyExceptionCode $stack23;
+  java.lang.Throwable $stack25;
+  java.lang.String transactionId;
+transactionId=@transactionId;
+future=new java.util.concurrent.CompletableFuture;
+ future#java.util.concurrent.CompletableFuture();
+ label0:$stack12=this.serviceManager;
+ $stack13 = $stack12.getTransactionService();
+ $stack14 = this.buildCommitOrRollback(transactionStatus);
+ $stack15 = java.lang.Integer.valueOf($stack14);
+ headerData = $stack13.genEndTransactionRequestHeader(producerGroup,$stack15,fromTransactionCheck,messageId,transactionId);
+ if (headerData!=null) goto label1;
+ $stack22=new org.apache.rocketmq.proxy.common.ProxyException;
+ $stack23=org.apache.rocketmq.proxy.common.ProxyExceptionCode.TRANSACTION_DATA_NOT_FOUND;
+ $stack22#org.apache.rocketmq.proxy.common.ProxyException($stack23,"cannot found transaction data");
+ future.completeExceptionally((java.lang.Throwable)$stack22);
+ label2:return  future;
+ label1:$stack12=this.serviceManager;
+ $stack18 = $stack12.getMessageService();
+ transactionId = headerData.getBrokerName();
+ $stack20 = headerData.getRequestHeader();
+ $stack21 = $stack18.endTransactionOneway(ctx,transactionId,$stack20,timeoutMillis);
+ label3:return  $stack21;
+ label4:$stack25 = catch;
+ future.completeExceptionally($stack25);
+ return  future;
+ catch java.lang.Throwable: label0 - label2 : label4;
+catch java.lang.Throwable: label1 - label3 : label4;
+} 
+

@@ -1,0 +1,15 @@
+static void org.apache.rocketmq.proxy.ProxyStartup:initConfiguration(org.apache.rocketmq.proxy.CommandLineArgument commandLineArgument)
+{
+java.lang.String $stack1;
+  boolean $stack2;
+  $stack1 = commandLineArgument.getProxyConfigPath();
+ $stack2 = org.apache.commons.lang3.StringUtils.isNotBlank((java.lang.CharSequence)$stack1);
+ if ($stack2==0) goto label0;
+ $stack1 = commandLineArgument.getProxyConfigPath();
+ java.lang.System.setProperty("com.rocketmq.proxy.configPath",$stack1);
+ label0:org.apache.rocketmq.proxy.config.ConfigurationManager.initEnv();
+ org.apache.rocketmq.proxy.config.ConfigurationManager.intConfig();
+ org.apache.rocketmq.proxy.ProxyStartup.setConfigFromCommandLineArgument(commandLineArgument);
+ return;
+ } 
+

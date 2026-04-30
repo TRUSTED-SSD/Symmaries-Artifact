@@ -1,0 +1,31 @@
+org.apache.rocketmq.filter.expression.Expression org.apache.rocketmq.filter.parser.SelectorParser:orExpression()
+{
+org.apache.rocketmq.filter.expression.Expression left;
+  org.apache.rocketmq.filter.expression.Expression right;
+  int $stack4;
+  org.apache.rocketmq.filter.expression.BooleanExpression $stack8;
+  org.apache.rocketmq.filter.expression.BooleanExpression $stack9;
+  int[] $stack14;
+  left = this.andExpression();
+ label0:$stack4=this.jjNtk;
+ if ($stack4!=-1) goto label1;
+ $stack4 = this#org.apache.rocketmq.filter.parser.SelectorParser:jj_ntk();
+ goto label2;
+ label1:$stack4=this.jjNtk;
+ label2:switch [$stack4]
+if 0 goto label3;
+goto label4;
+ label3:goto label5;
+ label4:$stack14=this.jjLa1;
+ $stack4=this.jjGen;
+ $stack14[0]=$stack4;
+ goto label6;
+ label5:this#org.apache.rocketmq.filter.parser.SelectorParser:jj_consume_token(10);
+ right = this.andExpression();
+ $stack8 = this#org.apache.rocketmq.filter.parser.SelectorParser:asBooleanExpression(left);
+ $stack9 = this#org.apache.rocketmq.filter.parser.SelectorParser:asBooleanExpression(right);
+ left = org.apache.rocketmq.filter.expression.LogicExpression.createOR($stack8,$stack9);
+ goto label0;
+ label6:return  left;
+ } 
+

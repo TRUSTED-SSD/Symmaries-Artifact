@@ -1,0 +1,34 @@
+boolean org.apache.rocketmq.namesrv.routeinfo.RouteInfoManager:isNoMasterExists(java.lang.String brokerName)
+{
+org.apache.rocketmq.remoting.protocol.route.BrokerData brokerData;
+  java.util.Map $stack3;
+  java.lang.Object $stack4;
+  java.util.HashMap $stack5;
+  int $stack6;
+  java.util.Set $stack8;
+  java.lang.Long $stack10;
+  long $stack11;
+  byte $stack12;
+  boolean $stack13;
+  $stack3=this.brokerAddrTable;
+ $stack4 = $stack3.get((java.lang.Object)brokerName);
+ brokerData=(org.apache.rocketmq.remoting.protocol.route.BrokerData) $stack4;
+ if (brokerData!=null) goto label0;
+ return  1;
+ label0:$stack5 = brokerData.getBrokerAddrs();
+ $stack6 = $stack5.size();
+ if ($stack6!=0) goto label1;
+ return  1;
+ label1:$stack5 = brokerData.getBrokerAddrs();
+ $stack8 = $stack5.keySet();
+ $stack4 = java.util.Collections.min((java.util.Collection)$stack8);
+ $stack10=(java.lang.Long) $stack4;
+ $stack11 = $stack10.longValue();
+ $stack12=($stack11 cmp 0L);
+ if ($stack12<=0) goto label2;
+ $stack13=1;
+ goto label3;
+ label2:$stack13=0;
+ label3:return  $stack13;
+ } 
+

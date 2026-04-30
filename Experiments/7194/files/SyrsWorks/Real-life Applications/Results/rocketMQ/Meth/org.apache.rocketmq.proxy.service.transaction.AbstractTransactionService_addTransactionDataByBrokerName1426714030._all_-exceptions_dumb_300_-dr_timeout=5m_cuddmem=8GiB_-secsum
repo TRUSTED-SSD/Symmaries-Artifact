@@ -1,0 +1,14 @@
+org.apache.rocketmq.proxy.service.transaction.TransactionData org.apache.rocketmq.proxy.service.transaction.AbstractTransactionService:addTransactionDataByBrokerName (
+  java.lang.String brokerName, java.lang.String producerGroup,
+  long tranStateTableOffset, long commitLogOffset,
+  java.lang.String transactionId,
+  org.apache.rocketmq.common.message.Message message) {
+  guard = tt;
+  ret(level()) = ⊥;
+  ret(obj_level()) = level(brokerName) ⊔ level(commitLogOffset) ⊔ level(tranStateTableOffset) ⊔ level(transactionId) ⊔ obj_level(brokerName);
+  ret(obj_level(brokerName)) = level(brokerName) ⊔ level(commitLogOffset) ⊔ level(tranStateTableOffset) ⊔ level(transactionId) ⊔ obj_level(brokerName);
+  ret(obj_level(message)) = level(brokerName) ⊔ level(commitLogOffset) ⊔ level(tranStateTableOffset) ⊔ level(transactionId) ⊔ obj_level(brokerName) ⊔ obj_level(message);
+  ret(obj_level(producerGroup)) = level(brokerName) ⊔ level(commitLogOffset) ⊔ level(tranStateTableOffset) ⊔ level(transactionId) ⊔ obj_level(producerGroup);
+  ret(obj_level(this)) = level(brokerName) ⊔ level(commitLogOffset) ⊔ level(tranStateTableOffset) ⊔ level(transactionId) ⊔ obj_level(brokerName) ⊔ obj_level(this);
+  ret(obj_level(transactionId)) = level(brokerName) ⊔ level(commitLogOffset) ⊔ level(tranStateTableOffset) ⊔ level(transactionId) ⊔ obj_level(brokerName);
+}

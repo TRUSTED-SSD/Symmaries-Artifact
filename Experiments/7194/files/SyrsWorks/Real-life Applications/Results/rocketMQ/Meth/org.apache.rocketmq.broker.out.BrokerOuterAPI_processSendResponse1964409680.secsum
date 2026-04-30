@@ -1,0 +1,12 @@
+org.apache.rocketmq.client.producer.SendResult org.apache.rocketmq.broker.out.BrokerOuterAPI:processSendResponse (
+  java.lang.String @brokerName,
+  org.apache.rocketmq.common.message.Message @msg,
+  org.apache.rocketmq.remoting.protocol.RemotingCommand response) {
+  guard = tt;
+  ret(level()) = pc ⊔ level(response) ⊔ obj_level(response);
+  ret(obj_level()) = pc ⊔ level(@brokerName) ⊔ level(@msg) ⊔ level(response) ⊔ obj_level(@brokerName) ⊔ obj_level(@msg) ⊔ obj_level(response);
+  ret(obj_level(@brokerName)) = pc ⊔ level(@brokerName) ⊔ level(@msg) ⊔ level(response) ⊔ obj_level(@brokerName) ⊔ obj_level(@msg) ⊔ obj_level(response);
+  ret(obj_level(@msg)) = pc ⊔ level(@brokerName) ⊔ level(@msg) ⊔ level(response) ⊔ obj_level(@brokerName) ⊔ obj_level(@msg) ⊔ obj_level(response);
+  ret(obj_level(response)) = pc ⊔ level(@brokerName) ⊔ level(@msg) ⊔ level(response) ⊔ obj_level(@brokerName) ⊔ obj_level(@msg) ⊔ obj_level(response);
+  ret(obj_level(this)) = pc ⊔ level(@brokerName) ⊔ level(@msg) ⊔ level(response) ⊔ obj_level(@brokerName) ⊔ obj_level(@msg) ⊔ obj_level(response) ⊔ obj_level(this);
+}

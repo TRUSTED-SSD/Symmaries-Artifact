@@ -1,0 +1,33 @@
+void org.apache.rocketmq.tools.command.consumer.StartMonitoringSubCommand:execute(org.apache.commons.cli.CommandLine commandLine,org.apache.commons.cli.Options options,org.apache.rocketmq.remoting.RPCHook rpcHook)
+{
+org.apache.rocketmq.tools.monitor.MonitorService $stack5;
+  org.apache.rocketmq.tools.monitor.MonitorConfig $stack6;
+  org.apache.rocketmq.tools.monitor.DefaultMonitorListener $stack7;
+  java.lang.Exception $stack8;
+  org.apache.rocketmq.tools.command.SubCommandException $stack9;
+  java.lang.StringBuilder $stack10;
+  java.lang.Class $stack11;
+  java.lang.String $stack12;
+  label0:$stack5=new org.apache.rocketmq.tools.monitor.MonitorService;
+ $stack6=new org.apache.rocketmq.tools.monitor.MonitorConfig;
+ $stack6#org.apache.rocketmq.tools.monitor.MonitorConfig();
+ $stack7=new org.apache.rocketmq.tools.monitor.DefaultMonitorListener;
+ $stack7#org.apache.rocketmq.tools.monitor.DefaultMonitorListener();
+ $stack5#org.apache.rocketmq.tools.monitor.MonitorService($stack6,(org.apache.rocketmq.tools.monitor.MonitorListener)$stack7,rpcHook);
+ $stack5.start();
+ label1:goto label2;
+ label3:$stack8 = catch;
+ $stack9=new org.apache.rocketmq.tools.command.SubCommandException;
+ $stack10=new java.lang.StringBuilder;
+ $stack10#java.lang.StringBuilder();
+ $stack11 = this.getClass();
+ $stack12 = $stack11.getSimpleName();
+ $stack10 = $stack10.append($stack12);
+ $stack10 = $stack10.append(" command failed");
+ $stack12 = $stack10.toString();
+ $stack9#org.apache.rocketmq.tools.command.SubCommandException($stack12,(java.lang.Throwable)$stack8);
+ throw $stack9;
+ label2:return;
+ catch java.lang.Exception: label0 - label1 : label3;
+} 
+

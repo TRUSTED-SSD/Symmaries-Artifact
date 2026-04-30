@@ -1,0 +1,30 @@
+void org.apache.rocketmq.broker.controller.ReplicasManager:lambda$handleSlaveSynchronize$3()
+{
+long $stack2;
+  long $stack3;
+  byte $stack5;
+  org.apache.rocketmq.broker.BrokerController $stack6;
+  org.apache.rocketmq.broker.slave.SlaveSynchronize $stack7;
+  java.lang.Throwable $stack12;
+  org.apache.rocketmq.logging.org.slf4j.Logger $stack13;
+  label0:$stack2 = java.lang.System.currentTimeMillis();
+ $stack3=this.lastSyncTimeMs;
+ $stack2=($stack2-$stack3);
+ $stack5=($stack2 cmp 10000L);
+ if ($stack5<=0) goto label1;
+ $stack6=this.brokerController;
+ $stack7 = $stack6.getSlaveSynchronize();
+ $stack7.syncAll();
+ $stack2 = java.lang.System.currentTimeMillis();
+ this.lastSyncTimeMs=$stack2;
+ label1:$stack6=this.brokerController;
+ $stack7 = $stack6.getSlaveSynchronize();
+ $stack7.syncTimerCheckPoint();
+ label2:goto label3;
+ label4:$stack12 = catch;
+ $stack13=org.apache.rocketmq.broker.controller.ReplicasManager.LOGGER;
+ $stack13.error("ScheduledTask SlaveSynchronize syncAll error.",$stack12);
+ label3:return;
+ catch java.lang.Throwable: label0 - label2 : label4;
+} 
+

@@ -1,0 +1,54 @@
+static org.apache.rocketmq.common.message.MessageClientIDSetter
+{
+byte[] ip;
+  java.lang.Object e;
+  int $stack3;
+  java.nio.ByteBuffer $stack12;
+  short $stack14;
+  java.lang.Class $stack16;
+  java.lang.ClassLoader $stack17;
+  java.lang.String $stack21;
+  char[] $stack22;
+  long $stack23;
+  java.lang.Exception $stack25;
+  java.util.concurrent.atomic.AtomicInteger tmp$815182766;
+  label0:ip = org.apache.rocketmq.common.UtilAll.getIP();
+ label1:goto label2;
+ label3:$stack25 = catch;
+ e=$stack25;
+ ip = org.apache.rocketmq.common.message.MessageClientIDSetter.createFakeIP();
+ label2:$stack3=#ip;
+ $stack3=($stack3+2);
+ $stack3=($stack3+4);
+ $stack3=($stack3+4);
+ $stack3=($stack3+2);
+ org.apache.rocketmq.common.message.MessageClientIDSetter.LEN=$stack3;
+ $stack3=#ip;
+ $stack3=($stack3+2);
+ $stack3=($stack3+4);
+ e = java.nio.ByteBuffer.allocate($stack3);
+ $stack12=(java.nio.ByteBuffer) e;
+ $stack12.put(ip);
+ $stack3 = org.apache.rocketmq.common.UtilAll.getPid();
+ $stack14=(short) $stack3;
+ $stack12=(java.nio.ByteBuffer) e;
+ $stack12.putShort($stack14);
+ $stack16=org.apache.rocketmq.common.message.MessageClientIDSetter;
+ $stack17 = $stack16.getClassLoader();
+ $stack3 = $stack17.hashCode();
+ $stack12=(java.nio.ByteBuffer) e;
+ $stack12.putInt($stack3);
+ $stack12=(java.nio.ByteBuffer) e;
+ ip = $stack12.array();
+ $stack21 = org.apache.rocketmq.common.UtilAll.bytes2string(ip);
+ $stack22 = $stack21.toCharArray();
+ org.apache.rocketmq.common.message.MessageClientIDSetter.FIX_STRING=$stack22;
+ $stack23 = java.lang.System.currentTimeMillis();
+ org.apache.rocketmq.common.message.MessageClientIDSetter.setStartTime($stack23);
+ tmp$815182766=new java.util.concurrent.atomic.AtomicInteger;
+ tmp$815182766#java.util.concurrent.atomic.AtomicInteger(0);
+ org.apache.rocketmq.common.message.MessageClientIDSetter.COUNTER=tmp$815182766;
+ return;
+ catch java.lang.Exception: label0 - label1 : label3;
+} 
+

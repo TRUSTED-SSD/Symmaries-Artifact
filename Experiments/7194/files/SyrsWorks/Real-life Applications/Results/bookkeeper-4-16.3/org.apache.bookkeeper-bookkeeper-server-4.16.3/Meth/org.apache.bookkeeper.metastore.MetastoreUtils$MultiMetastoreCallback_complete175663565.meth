@@ -1,0 +1,22 @@
+void org.apache.bookkeeper.metastore.MetastoreUtils$MultiMetastoreCallback:complete(int rc,java.lang.Object value,java.lang.Object ctx)
+{
+org.apache.bookkeeper.metastore.MSException$Code $stack4;
+  int $stack5;
+  java.util.concurrent.atomic.AtomicInteger $stack6;
+  java.util.concurrent.CountDownLatch $stack9;
+  $stack4=org.apache.bookkeeper.metastore.MSException$Code.OK;
+ $stack5 = $stack4.getCode();
+ if ($stack5==rc) goto label0;
+ this.rc=rc;
+ $stack9=this.doneLatch;
+ $stack9.countDown();
+ return;
+ label0:$stack6=this.numFinished;
+ rc = $stack6.incrementAndGet();
+ $stack5=this.numOps;
+ if (rc!=$stack5) goto label1;
+ $stack9=this.doneLatch;
+ $stack9.countDown();
+ label1:return;
+ } 
+

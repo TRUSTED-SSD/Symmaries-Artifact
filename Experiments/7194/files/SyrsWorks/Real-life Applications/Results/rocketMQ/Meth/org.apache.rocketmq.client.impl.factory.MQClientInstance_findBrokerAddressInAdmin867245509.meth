@@ -1,0 +1,56 @@
+org.apache.rocketmq.client.impl.FindBrokerResult org.apache.rocketmq.client.impl.factory.MQClientInstance:findBrokerAddressInAdmin(java.lang.String brokerName)
+{
+java.lang.String brokerAddr;
+  boolean slave;
+  boolean found;
+  java.util.HashMap map;
+  java.util.Iterator l6;
+  java.util.Map$Entry entry;
+  java.lang.Long id;
+  java.util.concurrent.ConcurrentMap $stack9;
+  java.lang.Object $stack10;
+  org.apache.rocketmq.client.impl.FindBrokerResult $stack11;
+  int $stack12;
+  boolean $stack13;
+  java.util.Set $stack15;
+  long $stack23;
+  byte $stack24;
+  if (brokerName!=null) goto label0;
+ return  null;
+ label0:brokerAddr=null;
+ slave=0;
+ found=0;
+ $stack9=this.brokerAddrTable;
+ $stack10 = $stack9.get((java.lang.Object)brokerName);
+ map=(java.util.HashMap) $stack10;
+ if (map==null) goto label1;
+ $stack13 = map.isEmpty();
+ if ($stack13!=0) goto label1;
+ $stack15 = map.entrySet();
+ l6 = $stack15.iterator();
+ label2:$stack13 = l6.hasNext();
+ if ($stack13==0) goto label1;
+ $stack10 = l6.next();
+ entry=(java.util.Map$Entry) $stack10;
+ $stack10 = entry.getKey();
+ id=(java.lang.Long) $stack10;
+ $stack10 = entry.getValue();
+ brokerAddr=(java.lang.String) $stack10;
+ if (brokerAddr==null) goto label3;
+ found=1;
+ $stack23 = id.longValue();
+ $stack24=(0L cmp $stack23);
+ if ($stack24==0) goto label4;
+ slave=1;
+ goto label5;
+ label4:slave=0;
+ label5:goto label1;
+ label3:goto label2;
+ label1:if (found==0) goto label6;
+ $stack11=new org.apache.rocketmq.client.impl.FindBrokerResult;
+ $stack12 = this#org.apache.rocketmq.client.impl.factory.MQClientInstance:findBrokerVersion(brokerName,brokerAddr);
+ $stack11#org.apache.rocketmq.client.impl.FindBrokerResult(brokerAddr,slave,$stack12);
+ return  $stack11;
+ label6:return  null;
+ } 
+

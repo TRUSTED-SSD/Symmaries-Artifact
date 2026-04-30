@@ -1,0 +1,65 @@
+apache.rocketmq.v2.Settings org.apache.rocketmq.proxy.grpc.v2.common.GrpcClientSettingsManager:mergeMetric(apache.rocketmq.v2.Settings @settings)
+{
+org.apache.rocketmq.proxy.config.ProxyConfig proxyConfig;
+  org.apache.rocketmq.proxy.config.MetricCollectorMode metricCollectorMode;
+  java.lang.String metricCollectorAddress;
+  apache.rocketmq.v2.Metric$Builder metricBuilder;
+  java.lang.Object split;
+  int port;
+  apache.rocketmq.v2.Address address;
+  apache.rocketmq.v2.Endpoints endpoints;
+  int[] $stack16;
+  java.lang.String $stack20;
+  apache.rocketmq.v2.Address$Builder $stack22;
+  apache.rocketmq.v2.Endpoints$Builder $stack26;
+  apache.rocketmq.v2.AddressScheme $stack27;
+  apache.rocketmq.v2.Metric$Builder $stack31;
+  apache.rocketmq.v2.Settings$Builder $stack34;
+  java.lang.String[] tmp$667212711;
+  apache.rocketmq.v2.Metric tmp$1797817190;
+  apache.rocketmq.v2.Settings settings;
+settings=@settings;
+proxyConfig = org.apache.rocketmq.proxy.config.ConfigurationManager.getProxyConfig();
+ metricCollectorAddress = proxyConfig.getMetricCollectorMode();
+ metricCollectorMode = org.apache.rocketmq.proxy.config.MetricCollectorMode.getEnumByString(metricCollectorAddress);
+ metricCollectorAddress = proxyConfig.getMetricCollectorAddress();
+ metricBuilder = apache.rocketmq.v2.Metric.newBuilder();
+ $stack16=org.apache.rocketmq.proxy.grpc.v2.common.GrpcClientSettingsManager$1.$SwitchMap$org$apache$rocketmq$proxy$config$MetricCollectorMode;
+ port = metricCollectorMode.ordinal();
+ port=$stack16[port];
+ switch [port]
+if 0 goto label0;
+if 1 goto label1;
+if 2 goto label2;
+goto label2;
+ label0:split = metricCollectorAddress.split(":");
+ tmp$667212711=(java.lang.String[]) split;
+ metricCollectorAddress=tmp$667212711[0];
+ tmp$667212711=(java.lang.String[]) split;
+ $stack20=tmp$667212711[1];
+ port = java.lang.Integer.parseInt($stack20);
+ $stack22 = apache.rocketmq.v2.Address.newBuilder();
+ $stack22 = $stack22.setHost(metricCollectorAddress);
+ $stack22 = $stack22.setPort(port);
+ address = $stack22.build();
+ $stack26 = apache.rocketmq.v2.Endpoints.newBuilder();
+ $stack27=apache.rocketmq.v2.AddressScheme.IPv4;
+ $stack26 = $stack26.setScheme($stack27);
+ $stack26 = $stack26.addAddresses(address);
+ endpoints = $stack26.build();
+ $stack31 = metricBuilder.setOn((boolean)1);
+ $stack31.setEndpoints(endpoints);
+ goto label3;
+ label1:$stack31 = metricBuilder.setOn((boolean)1);
+ endpoints = settings.getAccessPoint();
+ $stack31.setEndpoints(endpoints);
+ goto label3;
+ label2:metricBuilder.setOn((boolean)0);
+ label3:split = metricBuilder.build();
+ $stack34 = settings.toBuilder();
+ tmp$1797817190=(apache.rocketmq.v2.Metric) split;
+ $stack34 = $stack34.setMetric(tmp$1797817190);
+ settings = $stack34.build();
+ return  settings;
+ } 
+

@@ -1,0 +1,34 @@
+java.util.List rifl.utils.InterfaceSpecificationAccessor:getParentCategories(rifl.spec.CatSrcSnk catSrcSnk)
+{
+java.util.ArrayList parents;
+  rifl.spec.Category parent;
+  java.util.HashMap $stack4;
+  boolean $stack5;
+  java.lang.Object $stack8;
+  java.lang.IllegalArgumentException $stack13;
+  java.lang.StringBuilder $stack14;
+  java.lang.String $stack16;
+  $stack4=this.parentCategories;
+ $stack5 = $stack4.containsKey((java.lang.Object)catSrcSnk);
+ if ($stack5!=0) goto label0;
+ $stack13=new java.lang.IllegalArgumentException;
+ $stack14=new java.lang.StringBuilder;
+ $stack14#java.lang.StringBuilder("Unknown category, source, or sink: ");
+ $stack14 = $stack14.append((java.lang.Object)catSrcSnk);
+ $stack16 = $stack14.toString();
+ $stack13#java.lang.IllegalArgumentException($stack16);
+ throw $stack13;
+ label0:parents=new java.util.ArrayList;
+ parents#java.util.ArrayList();
+ $stack4=this.parentCategories;
+ $stack8 = $stack4.get((java.lang.Object)catSrcSnk);
+ parent=(rifl.spec.Category) $stack8;
+ goto label1;
+ label2:parents.add((java.lang.Object)parent);
+ $stack4=this.parentCategories;
+ $stack8 = $stack4.get((java.lang.Object)parent);
+ parent=(rifl.spec.Category) $stack8;
+ label1:if (parent!=null) goto label2;
+ return  parents;
+ } 
+

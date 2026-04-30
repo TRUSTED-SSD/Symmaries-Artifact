@@ -1,0 +1,48 @@
+void org.apache.rocketmq.client.impl.consumer.DefaultMQPushConsumerImpl:sendMessageBackAsNormalMessage(org.apache.rocketmq.common.message.MessageExt msg)
+{
+org.apache.rocketmq.common.message.Message newMsg;
+  java.lang.String originMsgId;
+  org.apache.rocketmq.client.consumer.DefaultMQPushConsumer $stack5;
+  byte[] $stack8;
+  boolean $stack10;
+  int $stack11;
+  java.util.Map $stack12;
+  org.apache.rocketmq.client.impl.factory.MQClientInstance $stack23;
+  org.apache.rocketmq.client.producer.DefaultMQProducer $stack24;
+  org.apache.rocketmq.common.message.Message $stack27;
+  newMsg=new org.apache.rocketmq.common.message.Message;
+ $stack5=this.defaultMQPushConsumer;
+ originMsgId = $stack5.getConsumerGroup();
+ originMsgId = org.apache.rocketmq.common.MixAll.getRetryTopic(originMsgId);
+ $stack8 = msg.getBody();
+ newMsg#org.apache.rocketmq.common.message.Message(originMsgId,$stack8);
+ originMsgId = org.apache.rocketmq.common.message.MessageAccessor.getOriginMessageId((org.apache.rocketmq.common.message.Message)msg);
+ $stack27=newMsg;
+ $stack10 = org.apache.rocketmq.common.UtilAll.isBlank(originMsgId);
+ if ($stack10==0) goto label0;
+ originMsgId = msg.getMsgId();
+ goto label0;
+ label0:org.apache.rocketmq.common.message.MessageAccessor.setOriginMessageId($stack27,originMsgId);
+ $stack11 = msg.getFlag();
+ newMsg.setFlag($stack11);
+ $stack12 = msg.getProperties();
+ org.apache.rocketmq.common.message.MessageAccessor.setProperties(newMsg,$stack12);
+ originMsgId = msg.getTopic();
+ org.apache.rocketmq.common.message.MessageAccessor.putProperty(newMsg,"RETRY_TOPIC",originMsgId);
+ $stack11 = msg.getReconsumeTimes();
+ $stack11=($stack11+1);
+ originMsgId = java.lang.String.valueOf($stack11);
+ org.apache.rocketmq.common.message.MessageAccessor.setReconsumeTime(newMsg,originMsgId);
+ $stack11 = this.getMaxReconsumeTimes();
+ originMsgId = java.lang.String.valueOf($stack11);
+ org.apache.rocketmq.common.message.MessageAccessor.setMaxReconsumeTimes(newMsg,originMsgId);
+ org.apache.rocketmq.common.message.MessageAccessor.clearProperty(newMsg,"TRAN_MSG");
+ $stack11 = msg.getReconsumeTimes();
+ $stack11=(3+$stack11);
+ newMsg.setDelayTimeLevel($stack11);
+ $stack23=this.mQClientFactory;
+ $stack24 = $stack23.getDefaultMQProducer();
+ $stack24.send(newMsg);
+ return;
+ } 
+

@@ -1,0 +1,30 @@
+void org.apache.kerby.kerberos.kerb.server.request.KdcRequest:checkEncryptionType()
+{
+java.util.List requestedTypes;
+  org.apache.kerby.kerberos.kerb.type.base.EncryptionType bestType;
+  org.apache.kerby.kerberos.kerb.type.kdc.KdcReq $stack3;
+  org.apache.kerby.kerberos.kerb.type.kdc.KdcReqBody $stack4;
+  org.apache.kerby.kerberos.kerb.server.KdcContext $stack6;
+  org.apache.kerby.kerberos.kerb.server.KdcConfig $stack7;
+  java.util.List $stack8;
+  org.slf4j.Logger $stack10;
+  org.apache.kerby.kerberos.kerb.KrbException $stack11;
+  org.apache.kerby.kerberos.kerb.KrbErrorCode $stack12;
+  $stack3 = this.getKdcReq();
+ $stack4 = $stack3.getReqBody();
+ requestedTypes = $stack4.getEtypes();
+ $stack6=this.kdcContext;
+ $stack7 = $stack6.getConfig();
+ $stack8 = $stack7.getEncryptionTypes();
+ bestType = org.apache.kerby.kerberos.kerb.common.EncryptionUtil.getBestEncryptionType(requestedTypes,$stack8);
+ if (bestType!=null) goto label0;
+ $stack10=org.apache.kerby.kerberos.kerb.server.request.KdcRequest.LOG;
+ $stack10.error("Can\'t get the best encryption type.");
+ $stack11=new org.apache.kerby.kerberos.kerb.KrbException;
+ $stack12=org.apache.kerby.kerberos.kerb.KrbErrorCode.KDC_ERR_ETYPE_NOSUPP;
+ $stack11#org.apache.kerby.kerberos.kerb.KrbException($stack12);
+ throw $stack11;
+ label0:this.setEncryptionType(bestType);
+ return;
+ } 
+

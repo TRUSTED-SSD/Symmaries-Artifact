@@ -1,0 +1,52 @@
+void org.greenrobot.eventbus.EventBus:postSingleEvent(java.lang.Object event,org.greenrobot.eventbus.EventBus$PostingThreadState postingState)
+{
+java.lang.Class eventClass;
+  boolean subscriptionFound;
+  java.util.List eventTypes;
+  int countTypes;
+  int h;
+  java.lang.Class clazz;
+  boolean $stack10;
+  org.greenrobot.eventbus.NoSubscriberEvent $stack14;
+  java.lang.StringBuilder $stack15;
+  org.greenrobot.eventbus.Logger $stack16;
+  java.util.logging.Level $stack17;
+  java.lang.String $stack20;
+  java.lang.Object $stack25;
+  eventClass = event.getClass();
+ subscriptionFound=0;
+ $stack10=this.eventInheritance;
+ if ($stack10==0) goto label0;
+ eventTypes = org.greenrobot.eventbus.EventBus.lookupAllEventTypes(eventClass);
+ countTypes = eventTypes.size();
+ h=0;
+ label1:if (h>=countTypes) goto label2;
+ $stack25 = eventTypes.get(h);
+ clazz=(java.lang.Class) $stack25;
+ $stack10 = this#org.greenrobot.eventbus.EventBus:postSingleEventForEventType(event,postingState,clazz);
+ subscriptionFound=(subscriptionFound | $stack10);
+ h=(h+1);
+ goto label1;
+ label2:goto label3;
+ label0:subscriptionFound = this#org.greenrobot.eventbus.EventBus:postSingleEventForEventType(event,postingState,eventClass);
+ label3:if (subscriptionFound!=0) goto label4;
+ subscriptionFound=this.logNoSubscriberMessages;
+ if (subscriptionFound==0) goto label5;
+ $stack16=this.logger;
+ $stack17=java.util.logging.Level.FINE;
+ $stack15=new java.lang.StringBuilder;
+ $stack15#java.lang.StringBuilder();
+ $stack15 = $stack15.append("No subscribers registered for event ");
+ $stack15 = $stack15.append((java.lang.Object)eventClass);
+ $stack20 = $stack15.toString();
+ $stack16.log($stack17,$stack20);
+ label5:subscriptionFound=this.sendNoSubscriberEvent;
+ if (subscriptionFound==0) goto label4;
+ if (eventClass==org.greenrobot.eventbus.NoSubscriberEvent) goto label4;
+ if (eventClass==org.greenrobot.eventbus.SubscriberExceptionEvent) goto label4;
+ $stack14=new org.greenrobot.eventbus.NoSubscriberEvent;
+ $stack14#org.greenrobot.eventbus.NoSubscriberEvent(this,event);
+ this#org.greenrobot.eventbus.EventBus((java.lang.Object)$stack14);
+ label4:return;
+ } 
+

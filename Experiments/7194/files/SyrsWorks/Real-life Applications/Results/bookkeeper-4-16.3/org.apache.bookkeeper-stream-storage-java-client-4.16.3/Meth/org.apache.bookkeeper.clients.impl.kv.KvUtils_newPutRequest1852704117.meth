@@ -1,0 +1,18 @@
+static org.apache.bookkeeper.stream.proto.kv.rpc.PutRequest$Builder org.apache.bookkeeper.clients.impl.kv.KvUtils:newPutRequest(io.netty.buffer.ByteBuf key,io.netty.buffer.ByteBuf value,org.apache.bookkeeper.api.kv.options.PutOption option)
+{
+org.apache.bookkeeper.stream.proto.kv.rpc.PutRequest$Builder $stack3;
+  java.nio.ByteBuffer $stack4;
+  com.google.protobuf.ByteString $stack5;
+  boolean $stack10;
+  $stack3 = org.apache.bookkeeper.stream.proto.kv.rpc.PutRequest.newBuilder();
+ $stack4 = key.nioBuffer();
+ $stack5 = com.google.protobuf.UnsafeByteOperations.unsafeWrap($stack4);
+ $stack3 = $stack3.setKey($stack5);
+ $stack4 = value.nioBuffer();
+ $stack5 = com.google.protobuf.UnsafeByteOperations.unsafeWrap($stack4);
+ $stack3 = $stack3.setValue($stack5);
+ $stack10 = option.prevKv();
+ $stack3 = $stack3.setPrevKv($stack10);
+ return  $stack3;
+ } 
+

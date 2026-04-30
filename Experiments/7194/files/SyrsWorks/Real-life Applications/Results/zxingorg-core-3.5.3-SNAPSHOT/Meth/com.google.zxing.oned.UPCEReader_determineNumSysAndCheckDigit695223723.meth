@@ -1,0 +1,32 @@
+static void com.google.zxing.oned.UPCEReader:determineNumSysAndCheckDigit(java.lang.StringBuilder resultString,int lgPatternFound)
+{
+int numSys;
+  int d;
+  com.google.zxing.NotFoundException $stack4;
+  int[][] $stack7;
+  int[] $stack8;
+  int $stack9;
+  char $stack13;
+  numSys=0;
+ label0:if (numSys>1) goto label1;
+ d=0;
+ label2:if (d>=10) goto label3;
+ $stack7=com.google.zxing.oned.UPCEReader.NUMSYS_AND_CHECK_DIGIT_PATTERNS;
+ $stack8=$stack7[numSys];
+ $stack9=$stack8[d];
+ if (lgPatternFound!=$stack9) goto label4;
+ lgPatternFound=(48+numSys);
+ $stack13=(char) lgPatternFound;
+ resultString.insert(0,$stack13);
+ lgPatternFound=(48+d);
+ $stack13=(char) lgPatternFound;
+ resultString.append($stack13);
+ return;
+ label4:d=(d+1);
+ goto label2;
+ label3:numSys=(numSys+1);
+ goto label0;
+ label1:$stack4 = com.google.zxing.NotFoundException.getNotFoundInstance();
+ throw $stack4;
+ } 
+

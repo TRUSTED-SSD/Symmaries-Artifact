@@ -1,0 +1,38 @@
+void org.apache.bookkeeper.meta.ZkLedgerUnderreplicationManager:acquireUnderreplicatedLedger(long ledgerId)
+{
+java.lang.String lockPath;
+  org.apache.bookkeeper.conf.AbstractConfiguration $stack4;
+  org.apache.zookeeper.ZooKeeper $stack5;
+  java.util.List $stack7;
+  java.util.Map $stack9;
+  java.lang.Long $stack10;
+  org.apache.bookkeeper.meta.ZkLedgerUnderreplicationManager$Lock $stack11;
+  java.util.Optional $stack12;
+  java.lang.Exception $stack14;
+  org.apache.bookkeeper.replication.ReplicationException$UnavailableException $stack15;
+  java.lang.StringBuilder $stack16;
+  label0:$stack5=this.zkc;
+ lockPath=this.rootPath;
+ $stack4=this.conf;
+ $stack7 = org.apache.bookkeeper.util.ZkUtils.getACLs($stack4);
+ lockPath = org.apache.bookkeeper.meta.ZkLedgerUnderreplicationManager.acquireUnderreplicatedLedgerLock($stack5,lockPath,ledgerId,$stack7);
+ $stack9=this.heldLocks;
+ $stack10 = java.lang.Long.valueOf(ledgerId);
+ $stack11=new org.apache.bookkeeper.meta.ZkLedgerUnderreplicationManager$Lock;
+ $stack12 = java.util.Optional.empty();
+ $stack11#org.apache.bookkeeper.meta.ZkLedgerUnderreplicationManager$Lock(lockPath,$stack12);
+ $stack9.put((java.lang.Object)$stack10,(java.lang.Object)$stack11);
+ label1:goto label2;
+ label3:$stack14 = catch;
+ $stack15=new org.apache.bookkeeper.replication.ReplicationException$UnavailableException;
+ $stack16=new java.lang.StringBuilder;
+ $stack16#java.lang.StringBuilder();
+ $stack16 = $stack16.append("Failed to acquire underreplicated ledger lock for ");
+ $stack16 = $stack16.append(ledgerId);
+ lockPath = $stack16.toString();
+ $stack15#org.apache.bookkeeper.replication.ReplicationException$UnavailableException(lockPath,(java.lang.Throwable)$stack14);
+ throw $stack15;
+ label2:return;
+ catch java.lang.Exception: label0 - label1 : label3;
+} 
+

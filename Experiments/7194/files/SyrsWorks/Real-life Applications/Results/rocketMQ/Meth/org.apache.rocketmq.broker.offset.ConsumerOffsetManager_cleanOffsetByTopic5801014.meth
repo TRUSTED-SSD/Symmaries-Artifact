@@ -1,0 +1,38 @@
+void org.apache.rocketmq.broker.offset.ConsumerOffsetManager:cleanOffsetByTopic(java.lang.String topic)
+{
+java.util.Iterator it;
+  java.util.Map$Entry next;
+  java.lang.String topicAtGroup;
+  java.lang.String[] arrays;
+  java.util.concurrent.ConcurrentMap $stack6;
+  java.util.Set $stack7;
+  boolean $stack9;
+  java.lang.Object $stack10;
+  int $stack15;
+  java.lang.String $stack16;
+  org.apache.rocketmq.logging.org.slf4j.Logger $stack18;
+  $stack6=this.offsetTable;
+ $stack7 = $stack6.entrySet();
+ it = $stack7.iterator();
+ label0:$stack9 = it.hasNext();
+ if ($stack9==0) goto label1;
+ $stack10 = it.next();
+ next=(java.util.Map$Entry) $stack10;
+ $stack10 = next.getKey();
+ topicAtGroup=(java.lang.String) $stack10;
+ $stack9 = topicAtGroup.contains((java.lang.CharSequence)topic);
+ if ($stack9==0) goto label2;
+ arrays = topicAtGroup.split("@");
+ $stack15=#arrays;
+ if ($stack15!=2) goto label2;
+ $stack16=arrays[0];
+ $stack9 = topic.equals((java.lang.Object)$stack16);
+ if ($stack9==0) goto label2;
+ it.remove();
+ $stack18=org.apache.rocketmq.broker.offset.ConsumerOffsetManager.LOG;
+ $stack10 = next.getValue();
+ $stack18.warn("Clean topic\'s offset, {}, {}",(java.lang.Object)topicAtGroup,$stack10);
+ label2:goto label0;
+ label1:return;
+ } 
+

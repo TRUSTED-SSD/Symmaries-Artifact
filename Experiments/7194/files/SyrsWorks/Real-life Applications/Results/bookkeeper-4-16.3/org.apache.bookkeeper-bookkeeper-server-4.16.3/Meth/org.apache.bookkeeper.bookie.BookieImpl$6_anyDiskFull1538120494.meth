@@ -1,0 +1,19 @@
+void org.apache.bookkeeper.bookie.BookieImpl$6:anyDiskFull(boolean highPriorityWritesAllowed)
+{
+org.apache.bookkeeper.bookie.BookieImpl $stack2;
+  org.apache.bookkeeper.conf.ServerConfiguration $stack3;
+  boolean $stack4;
+  org.apache.bookkeeper.bookie.StateManager $stack6;
+  $stack2=this.this$0;
+ $stack3=$stack2.conf;
+ $stack4 = $stack3.isReadOnlyModeOnAnyDiskFullEnabled();
+ if ($stack4==0) goto label0;
+ $stack2=this.this$0;
+ $stack6=$stack2.stateManager;
+ $stack6.setHighPriorityWritesAvailability(highPriorityWritesAllowed);
+ $stack2=this.this$0;
+ $stack6=$stack2.stateManager;
+ $stack6.transitionToReadOnlyMode();
+ label0:return;
+ } 
+

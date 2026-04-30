@@ -1,0 +1,9 @@
+static boolean org.apache.rocketmq.tieredstore.container.TieredFileQueue:lambda$getFileByTime$2 (
+  org.apache.rocketmq.tieredstore.common.BoundaryType boundaryType,
+  long timestamp,
+  org.apache.rocketmq.tieredstore.provider.TieredFileSegment segment) {
+  guard = tt;
+  ret(level()) = pc ⊔ level(boundaryType) ⊔ level(segment) ⊔ level(timestamp) ⊔ obj_level(segment);
+  ret(obj_level(boundaryType)) = obj_level(boundaryType);
+  ret(obj_level(segment)) = if obj_level(segment) = ⊤ ∨ pc ≠ ⊤ ∧ (if level(boundaryType) = ⊤ then obj_level(boundaryType) = ⊤ ∧ obj_level(segment) = ⊥ else level(boundaryType) = ⊥ ∧ obj_level(segment) = ⊥ ∧ obj_level(boundaryType) ⊓ (level(segment) ⊔ level(timestamp)) = ⊤) then ⊤ else ⊥;
+}

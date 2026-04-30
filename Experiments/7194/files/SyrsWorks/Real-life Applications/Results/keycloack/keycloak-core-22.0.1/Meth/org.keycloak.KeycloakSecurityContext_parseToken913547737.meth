@@ -1,0 +1,25 @@
+java.lang.Object org.keycloak.KeycloakSecurityContext:parseToken(java.lang.String @encoded,java.lang.Class clazz)
+{
+java.lang.String[] parts;
+  byte[] bytes;
+  int $stack6;
+  java.lang.IllegalArgumentException $stack7;
+  java.lang.Object $stack11;
+  java.lang.String encoded;
+encoded=@encoded;
+if (encoded!=null) goto label0;
+ return  null;
+ label0:parts = encoded.split("\\.");
+ $stack6=#parts;
+ if ($stack6<2) goto label1;
+ $stack6=#parts;
+ if ($stack6<=3) goto label2;
+ label1:$stack7=new java.lang.IllegalArgumentException;
+ $stack7#java.lang.IllegalArgumentException("Parsing error");
+ throw $stack7;
+ label2:encoded=parts[1];
+ bytes = org.keycloak.common.util.Base64Url.decode(encoded);
+ $stack11 = org.keycloak.util.JsonSerialization.readValue(bytes,clazz);
+ return  $stack11;
+ } 
+

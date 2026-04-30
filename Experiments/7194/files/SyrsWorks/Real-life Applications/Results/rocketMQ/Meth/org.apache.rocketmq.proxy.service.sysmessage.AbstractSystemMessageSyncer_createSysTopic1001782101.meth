@@ -1,0 +1,44 @@
+void org.apache.rocketmq.proxy.service.sysmessage.AbstractSystemMessageSyncer:createSysTopic()
+{
+java.lang.String clusterName;
+  boolean createSuccess;
+  org.apache.rocketmq.proxy.service.admin.AdminService $stack3;
+  java.lang.String $stack9;
+  int $stack10;
+  int $stack11;
+  org.apache.rocketmq.proxy.common.ProxyException $stack13;
+  java.lang.StringBuilder $stack14;
+  org.apache.rocketmq.proxy.common.ProxyExceptionCode $stack15;
+  $stack3=this.adminService;
+ clusterName = this.getBroadcastTopicName();
+ createSuccess = $stack3.topicExist(clusterName);
+ if (createSuccess==0) goto label0;
+ return;
+ label0:clusterName = this.getBroadcastTopicClusterName();
+ createSuccess = org.apache.commons.lang3.StringUtils.isEmpty((java.lang.CharSequence)clusterName);
+ if (createSuccess==0) goto label1;
+ $stack13=new org.apache.rocketmq.proxy.common.ProxyException;
+ $stack15=org.apache.rocketmq.proxy.common.ProxyExceptionCode.INTERNAL_SERVER_ERROR;
+ $stack13#org.apache.rocketmq.proxy.common.ProxyException($stack15,"system topic cluster cannot be empty");
+ throw $stack13;
+ label1:$stack3=this.adminService;
+ $stack9 = this.getBroadcastTopicName();
+ $stack10 = this.getBroadcastTopicQueueNum();
+ $stack11 = this.getBroadcastTopicQueueNum();
+ createSuccess = $stack3.createTopicOnTopicBrokerIfNotExist($stack9,clusterName,$stack10,$stack11,(boolean)1,3);
+ if (createSuccess!=0) goto label2;
+ $stack13=new org.apache.rocketmq.proxy.common.ProxyException;
+ $stack15=org.apache.rocketmq.proxy.common.ProxyExceptionCode.INTERNAL_SERVER_ERROR;
+ $stack14=new java.lang.StringBuilder;
+ $stack14#java.lang.StringBuilder();
+ $stack14 = $stack14.append("create system broadcast topic ");
+ $stack9 = this.getBroadcastTopicName();
+ $stack14 = $stack14.append($stack9);
+ $stack14 = $stack14.append(" failed on cluster ");
+ $stack14 = $stack14.append(clusterName);
+ clusterName = $stack14.toString();
+ $stack13#org.apache.rocketmq.proxy.common.ProxyException($stack15,clusterName);
+ throw $stack13;
+ label2:return;
+ } 
+

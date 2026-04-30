@@ -1,0 +1,54 @@
+    private java.util.List runners(java.lang.Class[])
+    {
+        org.junit.runners.model.RunnerBuilder this;
+        java.lang.Class[] children;
+        java.util.ArrayList runners;
+        int len$, i$;
+        java.lang.Class each;
+        org.junit.runner.Runner childRunner;
+
+        this := @this: org.junit.runners.model.RunnerBuilder;
+
+        children := @parameter0: java.lang.Class[];
+
+        runners = new java.util.ArrayList;
+/*99*/
+
+        specialinvoke runners.<java.util.ArrayList: void <init>()>();
+/*99*/
+
+        len$ = lengthof children;
+/*100*/
+
+        i$ = 0;
+/*100*/
+
+     label1:
+        if i$ >= len$ goto label3;
+/*100*/
+
+        each = children[i$];
+/*106*/
+
+        childRunner = virtualinvoke this.<org.junit.runners.model.RunnerBuilder: org.junit.runner.Runner safeRunnerForClass(java.lang.Class)>(each);
+/*101*/
+/*101*/
+
+        if childRunner == null goto label2;
+/*102*/
+
+        virtualinvoke runners.<java.util.ArrayList: boolean add(java.lang.Object)>(childRunner);
+/*103*/
+
+     label2:
+        i$ = i$ + 1;
+/*100*/
+
+        goto label1;
+/*100*/
+
+     label3:
+        return runners;
+/*106*/
+    }
+

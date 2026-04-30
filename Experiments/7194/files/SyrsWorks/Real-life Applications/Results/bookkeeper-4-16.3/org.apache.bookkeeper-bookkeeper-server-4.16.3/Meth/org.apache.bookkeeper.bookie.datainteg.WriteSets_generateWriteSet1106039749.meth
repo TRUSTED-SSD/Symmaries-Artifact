@@ -1,0 +1,56 @@
+static com.google.common.collect.ImmutableList org.apache.bookkeeper.bookie.datainteg.WriteSets:generateWriteSet(java.util.List preferredOrder,int ensembleSize,int writeQuorumSize,int offset)
+{
+com.google.common.collect.ImmutableList$Builder builder;
+  int firstIndex;
+  java.lang.Object writeSet;
+  java.lang.Integer i;
+  boolean $stack13;
+  java.lang.Object $stack20;
+  com.google.common.collect.ImmutableList$Builder $stack23;
+  java.util.Iterator tmp$625748547;
+  com.google.common.collect.ImmutableList tmp$1061712037;
+  $stack23=new com.google.common.collect.ImmutableList$Builder;
+ builder=$stack23;
+ $stack23#com.google.common.collect.ImmutableList$Builder();
+ builder=$stack23;
+ firstIndex=offset;
+ offset=(offset+writeQuorumSize);
+ offset=(offset-1);
+ ensembleSize=(offset%ensembleSize);
+ writeSet = preferredOrder.iterator();
+ label0:tmp$625748547=(java.util.Iterator) writeSet;
+ $stack13 = tmp$625748547.hasNext();
+ if ($stack13==0) goto label1;
+ tmp$625748547=(java.util.Iterator) writeSet;
+ $stack20 = tmp$625748547.next();
+ i=(java.lang.Integer) $stack20;
+ if (firstIndex>ensembleSize) goto label2;
+ offset = i.intValue();
+ if (offset<firstIndex) goto label2;
+ offset = i.intValue();
+ if (offset>ensembleSize) goto label2;
+ builder.add((java.lang.Object)i);
+ goto label3;
+ label2:if (ensembleSize>=firstIndex) goto label3;
+ offset = i.intValue();
+ if (offset<=ensembleSize) goto label4;
+ offset = i.intValue();
+ if (offset<firstIndex) goto label3;
+ label4:builder.add((java.lang.Object)i);
+ label3:goto label0;
+ label1:writeSet = builder.build();
+ tmp$1061712037=(com.google.common.collect.ImmutableList) writeSet;
+ ensembleSize = tmp$1061712037.size();
+ if (ensembleSize==writeQuorumSize) goto label5;
+ tmp$1061712037=(com.google.common.collect.ImmutableList) writeSet;
+ ensembleSize = tmp$1061712037.size();
+ writeQuorumSize=(writeQuorumSize-1);
+ if (ensembleSize!=writeQuorumSize) goto label6;
+ label5:$stack13=1;
+ goto label7;
+ label6:$stack13=0;
+ label7:com.google.common.base.Preconditions.checkState($stack13);
+ tmp$1061712037=(com.google.common.collect.ImmutableList) writeSet;
+ return  tmp$1061712037;
+ } 
+

@@ -1,0 +1,40 @@
+int org.apache.rocketmq.store.AllocateMappedFileService$AllocateRequest:compareTo(org.apache.rocketmq.store.AllocateMappedFileService$AllocateRequest other)
+{
+int mIndex;
+  long mName;
+  long oName;
+  int $stack9;
+  java.lang.String $stack12;
+  java.lang.String $stack13;
+  byte $stack26;
+  $stack9=this.fileSize;
+ mIndex=other.fileSize;
+ if ($stack9>=mIndex) goto label0;
+ return  1;
+ label0:$stack9=this.fileSize;
+ mIndex=other.fileSize;
+ if ($stack9<=mIndex) goto label1;
+ return  -1;
+ label1:$stack13=this.filePath;
+ $stack12=java.io.File.separator;
+ mIndex = $stack13.lastIndexOf($stack12);
+ $stack12=this.filePath;
+ mIndex=(mIndex+1);
+ $stack12 = $stack12.substring(mIndex);
+ mName = java.lang.Long.parseLong($stack12);
+ $stack13=other.filePath;
+ $stack12=java.io.File.separator;
+ mIndex = $stack13.lastIndexOf($stack12);
+ $stack12=other.filePath;
+ mIndex=(mIndex+1);
+ $stack12 = $stack12.substring(mIndex);
+ oName = java.lang.Long.parseLong($stack12);
+ $stack26=(mName cmp oName);
+ if ($stack26>=0) goto label2;
+ return  -1;
+ label2:$stack26=(mName cmp oName);
+ if ($stack26<=0) goto label3;
+ return  1;
+ label3:return  0;
+ } 
+

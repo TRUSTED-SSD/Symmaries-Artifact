@@ -1,0 +1,20 @@
+void org.apache.kerby.kerberos.kerb.admin.kadmin.remote.AdminHandler:handleRequest(org.apache.kerby.kerberos.kerb.admin.kadmin.remote.request.AdminRequest adminRequest,org.xnio.sasl.SaslWrapper sasl)
+{
+org.apache.kerby.kerberos.kerb.admin.message.AdminReq adminReq;
+  java.nio.ByteBuffer requestMessage;
+  java.io.IOException $stack8;
+  org.apache.kerby.kerberos.kerb.KrbException $stack9;
+  adminRequest.process();
+ adminReq = adminRequest.getAdminReq();
+ label0:requestMessage = org.apache.kerby.kerberos.kerb.admin.message.KadminCode.encodeWrapMessage((org.apache.kerby.kerberos.kerb.admin.message.AdminMessage)adminReq,sasl);
+ requestMessage.flip();
+ this.sendMessage(adminRequest,requestMessage);
+ label1:goto label2;
+ label3:$stack8 = catch;
+ $stack9=new org.apache.kerby.kerberos.kerb.KrbException;
+ $stack9#org.apache.kerby.kerberos.kerb.KrbException("Admin sends request message failed",(java.lang.Throwable)$stack8);
+ throw $stack9;
+ label2:return;
+ catch java.io.IOException: label0 - label1 : label3;
+} 
+

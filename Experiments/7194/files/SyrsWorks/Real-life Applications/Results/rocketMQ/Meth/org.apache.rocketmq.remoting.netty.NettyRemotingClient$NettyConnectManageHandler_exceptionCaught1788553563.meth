@@ -1,0 +1,30 @@
+void org.apache.rocketmq.remoting.netty.NettyRemotingClient$NettyConnectManageHandler:exceptionCaught(io.netty.channel.ChannelHandlerContext ctx,java.lang.Throwable cause)
+{
+java.lang.String remoteAddress;
+  io.netty.channel.Channel $stack4;
+  org.apache.rocketmq.logging.org.slf4j.Logger $stack6;
+  org.apache.rocketmq.remoting.netty.NettyRemotingClient $stack8;
+  org.apache.rocketmq.remoting.ChannelEventListener $stack11;
+  org.apache.rocketmq.remoting.netty.NettyEvent $stack12;
+  org.apache.rocketmq.remoting.netty.NettyEventType $stack14;
+  $stack4 = ctx.channel();
+ remoteAddress = org.apache.rocketmq.remoting.common.RemotingHelper.parseChannelRemoteAddr($stack4);
+ $stack6 = org.apache.rocketmq.remoting.netty.NettyRemotingClient.access$200();
+ $stack6.warn("NETTY CLIENT PIPELINE: exceptionCaught {}",(java.lang.Object)remoteAddress);
+ $stack6 = org.apache.rocketmq.remoting.netty.NettyRemotingClient.access$200();
+ $stack6.warn("NETTY CLIENT PIPELINE: exceptionCaught exception.",cause);
+ $stack8=this.this$0;
+ $stack4 = ctx.channel();
+ $stack8.closeChannel($stack4);
+ $stack8=this.this$0;
+ $stack11 = org.apache.rocketmq.remoting.netty.NettyRemotingClient.access$900($stack8);
+ if ($stack11==null) goto label0;
+ $stack8=this.this$0;
+ $stack12=new org.apache.rocketmq.remoting.netty.NettyEvent;
+ $stack14=org.apache.rocketmq.remoting.netty.NettyEventType.EXCEPTION;
+ $stack4 = ctx.channel();
+ $stack12#org.apache.rocketmq.remoting.netty.NettyEvent($stack14,remoteAddress,$stack4);
+ $stack8.putNettyEvent($stack12);
+ label0:return;
+ } 
+

@@ -1,0 +1,31 @@
+void org.apache.rocketmq.namesrv.routeinfo.BatchUnregistrationService:run()
+{
+org.apache.rocketmq.remoting.protocol.header.namesrv.UnRegisterBrokerRequestHeader request;
+  java.util.HashSet unregistrationRequests;
+  boolean $stack3;
+  java.util.concurrent.BlockingQueue $stack4;
+  java.lang.Object $stack5;
+  org.apache.rocketmq.namesrv.routeinfo.RouteInfoManager $stack10;
+  java.lang.Throwable $stack12;
+  org.apache.rocketmq.logging.org.slf4j.Logger $stack13;
+  label0:$stack3 = this.isStopped();
+ if ($stack3!=0) goto label1;
+ label2:$stack4=this.unregistrationQueue;
+ $stack5 = $stack4.take();
+ request=(org.apache.rocketmq.remoting.protocol.header.namesrv.UnRegisterBrokerRequestHeader) $stack5;
+ unregistrationRequests=new java.util.HashSet;
+ unregistrationRequests#java.util.HashSet();
+ $stack4=this.unregistrationQueue;
+ $stack4.drainTo((java.util.Collection)unregistrationRequests);
+ unregistrationRequests.add((java.lang.Object)request);
+ $stack10=this.routeInfoManager;
+ $stack10#org.apache.rocketmq.namesrv.routeinfo.RouteInfoManager((java.util.Set)unregistrationRequests);
+ label3:goto label0;
+ label4:$stack12 = catch;
+ $stack13=org.apache.rocketmq.namesrv.routeinfo.BatchUnregistrationService.log;
+ $stack13.error("Handle unregister broker request failed",$stack12);
+ goto label0;
+ label1:return;
+ catch java.lang.Throwable: label2 - label3 : label4;
+} 
+

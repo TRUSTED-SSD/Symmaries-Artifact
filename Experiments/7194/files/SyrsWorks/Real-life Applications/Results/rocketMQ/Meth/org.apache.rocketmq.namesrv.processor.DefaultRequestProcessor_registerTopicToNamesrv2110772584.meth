@@ -1,0 +1,35 @@
+org.apache.rocketmq.remoting.protocol.RemotingCommand org.apache.rocketmq.namesrv.processor.DefaultRequestProcessor:registerTopicToNamesrv(io.netty.channel.ChannelHandlerContext ctx,org.apache.rocketmq.remoting.protocol.RemotingCommand request)
+{
+org.apache.rocketmq.remoting.protocol.RemotingCommand response;
+  org.apache.rocketmq.remoting.protocol.header.namesrv.RegisterTopicRequestHeader requestHeader;
+  org.apache.rocketmq.remoting.protocol.route.TopicRouteData topicRouteData;
+  org.apache.rocketmq.remoting.CommandCustomHeader $stack7;
+  byte[] $stack8;
+  java.lang.Object $stack9;
+  java.util.List $stack10;
+  boolean $stack17;
+  org.apache.rocketmq.namesrv.NamesrvController $stack18;
+  org.apache.rocketmq.namesrv.routeinfo.RouteInfoManager $stack19;
+  java.lang.String $stack20;
+  response = org.apache.rocketmq.remoting.protocol.RemotingCommand.createResponseCommand(null);
+ $stack7 = request.decodeCommandCustomHeader(org.apache.rocketmq.remoting.protocol.header.namesrv.RegisterTopicRequestHeader);
+ requestHeader=(org.apache.rocketmq.remoting.protocol.header.namesrv.RegisterTopicRequestHeader) $stack7;
+ $stack8 = request.getBody();
+ $stack9 = org.apache.rocketmq.remoting.protocol.RemotingSerializable.decode($stack8,org.apache.rocketmq.remoting.protocol.route.TopicRouteData);
+ topicRouteData=(org.apache.rocketmq.remoting.protocol.route.TopicRouteData) $stack9;
+ if (topicRouteData==null) goto label0;
+ $stack10 = topicRouteData.getQueueDatas();
+ if ($stack10==null) goto label0;
+ $stack10 = topicRouteData.getQueueDatas();
+ $stack17 = $stack10.isEmpty();
+ if ($stack17!=0) goto label0;
+ $stack18=this.namesrvController;
+ $stack19 = $stack18.getRouteInfoManager();
+ $stack20 = requestHeader.getTopic();
+ $stack10 = topicRouteData.getQueueDatas();
+ $stack19.registerTopic($stack20,$stack10);
+ label0:response.setCode(0);
+ response.setRemark(null);
+ return  response;
+ } 
+

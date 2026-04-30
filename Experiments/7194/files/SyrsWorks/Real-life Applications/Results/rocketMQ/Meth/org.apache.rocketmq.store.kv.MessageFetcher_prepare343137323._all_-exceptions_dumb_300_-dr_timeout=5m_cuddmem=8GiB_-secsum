@@ -1,0 +1,14 @@
+boolean org.apache.rocketmq.store.kv.MessageFetcher:prepare (java.lang.String
+                                                               masterAddr,
+                                                             java.lang.String
+                                                               topic,
+                                                             java.lang.String
+                                                               groupName,
+                                                             long subVersion) {
+  guard = tt;
+  ret(level()) = ⊥;
+  ret(obj_level(groupName)) = level(groupName) ⊔ level(subVersion) ⊔ level(topic) ⊔ obj_level(groupName);
+  ret(obj_level(masterAddr)) = level(groupName) ⊔ level(subVersion) ⊔ level(topic) ⊔ obj_level(groupName);
+  ret(obj_level(this)) = level(groupName) ⊔ level(subVersion) ⊔ level(topic) ⊔ obj_level(groupName) ⊔ obj_level(this);
+  ret(obj_level(topic)) = level(groupName) ⊔ level(subVersion) ⊔ level(topic) ⊔ obj_level(groupName);
+}

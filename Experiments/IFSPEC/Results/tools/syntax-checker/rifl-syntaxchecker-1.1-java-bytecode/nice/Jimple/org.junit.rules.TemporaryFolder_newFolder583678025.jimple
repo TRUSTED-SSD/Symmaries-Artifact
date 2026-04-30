@@ -1,0 +1,95 @@
+    public transient java.io.File newFolder(java.lang.String[]) throws java.io.IOException
+    {
+        org.junit.rules.TemporaryFolder this;
+        java.lang.String[] folderNames;
+        java.io.File file, $stack7;
+        int i, $stack6;
+        java.lang.String folderName;
+        boolean $stack8;
+        java.io.IOException $stack12;
+        java.lang.StringBuilder $stack13;
+
+        this := @this: org.junit.rules.TemporaryFolder;
+
+        folderNames := @parameter0: java.lang.String[];
+
+        file = virtualinvoke this.<org.junit.rules.TemporaryFolder: java.io.File getRoot()>();
+/*94*/
+/*94*/
+
+        i = 0;
+/*95*/
+
+     label1:
+        $stack6 = lengthof folderNames;
+/*95*/
+
+        if i >= $stack6 goto label3;
+/*95*/
+
+        folderName = folderNames[i];
+/*96*/
+
+        specialinvoke this.<org.junit.rules.TemporaryFolder: void validateFolderName(java.lang.String)>(folderName);
+/*97*/
+
+        $stack7 = new java.io.File;
+/*98*/
+
+        specialinvoke $stack7.<java.io.File: void <init>(java.io.File,java.lang.String)>(file, folderName);
+/*98*/
+
+        file = $stack7;
+/*98*/
+
+        $stack8 = virtualinvoke $stack7.<java.io.File: boolean mkdir()>();
+/*99*/
+
+        if $stack8 != 0 goto label2;
+/*99*/
+
+        $stack8 = specialinvoke this.<org.junit.rules.TemporaryFolder: boolean isLastElementInArray(int,java.lang.String[])>(i, folderNames);
+/*95*/
+
+        if $stack8 == 0 goto label2;
+/*95*/
+
+        $stack12 = new java.io.IOException;
+/*100*/
+
+        $stack13 = new java.lang.StringBuilder;
+/*100*/
+
+        specialinvoke $stack13.<java.lang.StringBuilder: void <init>()>();
+/*100*/
+
+        $stack13 = virtualinvoke $stack13.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>("a folder with the name \'");
+/*100*/
+
+        $stack13 = virtualinvoke $stack13.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>(folderName);
+/*100*/
+
+        $stack13 = virtualinvoke $stack13.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>("\' already exists");
+/*100*/
+
+        folderName = virtualinvoke $stack13.<java.lang.StringBuilder: java.lang.String toString()>();
+/*100*/
+
+        specialinvoke $stack12.<java.io.IOException: void <init>(java.lang.String)>(folderName);
+/*100*/
+
+        throw $stack12;
+/*100*/
+
+     label2:
+        i = i + 1;
+/*95*/
+
+        goto label1;
+/*95*/
+
+     label3:
+        return file;
+/*104*/
+    }
+

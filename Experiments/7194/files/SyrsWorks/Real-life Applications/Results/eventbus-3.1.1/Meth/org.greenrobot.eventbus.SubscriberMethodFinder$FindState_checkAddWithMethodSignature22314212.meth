@@ -1,0 +1,34 @@
+boolean org.greenrobot.eventbus.SubscriberMethodFinder$FindState:checkAddWithMethodSignature(java.lang.reflect.Method method,java.lang.Class @eventType)
+{
+java.lang.String methodKey;
+  java.lang.Class methodClassOld;
+  java.lang.StringBuilder $stack6;
+  java.util.Map $stack17;
+  java.lang.Object $stack18;
+  boolean $stack19;
+  java.lang.Class eventType;
+eventType=@eventType;
+$stack6=this.methodKeyBuilder;
+ $stack6.setLength(0);
+ $stack6=this.methodKeyBuilder;
+ methodKey = method.getName();
+ $stack6.append(methodKey);
+ $stack6=this.methodKeyBuilder;
+ $stack6 = $stack6.append((char)62);
+ methodKey = eventType.getName();
+ $stack6.append(methodKey);
+ $stack6=this.methodKeyBuilder;
+ methodKey = $stack6.toString();
+ eventType = method.getDeclaringClass();
+ $stack17=this.subscriberClassByMethodKey;
+ $stack18 = $stack17.put((java.lang.Object)methodKey,(java.lang.Object)eventType);
+ methodClassOld=(java.lang.Class) $stack18;
+ if (methodClassOld==null) goto label0;
+ $stack19 = methodClassOld.isAssignableFrom(eventType);
+ if ($stack19==0) goto label1;
+ label0:return  1;
+ label1:$stack17=this.subscriberClassByMethodKey;
+ $stack17.put((java.lang.Object)methodKey,(java.lang.Object)methodClassOld);
+ return  0;
+ } 
+

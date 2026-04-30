@@ -1,0 +1,54 @@
+boolean org.keycloak.adapters.AuthenticatedActionsHandler:abortTokenResponse()
+{
+java.lang.String origin;
+  org.keycloak.adapters.OIDCHttpFacade $stack2;
+  org.keycloak.KeycloakSecurityContext $stack3;
+  org.keycloak.adapters.KeycloakDeployment $stack4;
+  boolean $stack5;
+  org.keycloak.adapters.spi.HttpFacade$Request $stack7;
+  org.keycloak.adapters.spi.HttpFacade$Response $stack14;
+  org.jboss.logging.Logger $stack22;
+  $stack2=this.facade;
+ $stack3 = $stack2.getSecurityContext();
+ if ($stack3!=null) goto label0;
+ $stack22=org.keycloak.adapters.AuthenticatedActionsHandler.log;
+ $stack2=this.facade;
+ $stack7 = $stack2.getRequest();
+ origin = $stack7.getURI();
+ $stack22.debugv("Not logged in, sending back 401: {0}",(java.lang.Object)origin);
+ $stack2=this.facade;
+ $stack14 = $stack2.getResponse();
+ $stack14.sendError(401);
+ $stack2=this.facade;
+ $stack14 = $stack2.getResponse();
+ $stack14.end();
+ return  1;
+ label0:$stack4=this.deployment;
+ $stack5 = $stack4.isExposeToken();
+ if ($stack5!=0) goto label1;
+ $stack2=this.facade;
+ $stack14 = $stack2.getResponse();
+ $stack14.setStatus(200);
+ $stack2=this.facade;
+ $stack14 = $stack2.getResponse();
+ $stack14.end();
+ return  1;
+ label1:$stack2=this.facade;
+ $stack7 = $stack2.getRequest();
+ origin = $stack7.getHeader("Origin");
+ $stack4=this.deployment;
+ $stack5 = $stack4.isCors();
+ if ($stack5!=0) goto label2;
+ if (origin==null) goto label2;
+ $stack5 = origin.equals((java.lang.Object)"null");
+ if ($stack5!=0) goto label2;
+ $stack2=this.facade;
+ $stack14 = $stack2.getResponse();
+ $stack14.setStatus(200);
+ $stack2=this.facade;
+ $stack14 = $stack2.getResponse();
+ $stack14.end();
+ return  1;
+ label2:return  0;
+ } 
+

@@ -1,0 +1,22 @@
+digraph G {
+  node [shape=box, ];
+  "pc0_js1" [label="〈$r1 = new java.util.NoSuchElementException, js1〉", ];
+  "pc1_js1" [label="〈$r1#java.util.NoSuchElementException.init (), js1〉\n\
+tt",
+             ];
+  "pc2_js1" [label="〈throw $r1, js1〉", ];
+  "pc3_js1" [label="〈sink, js1〉\n\
+obj_level(this) ⊑ ret(obj_level(this))' ∧ (ϕ ≠ S2 ∨ obj_level($r1) ⊑ ret(obj_level())' ∧ pc ⊔ level($r1) ⊑ ret(level())')",
+             ];
+  
+  
+  "pc0_js1" -> "pc1_js1" [label="tt,\n\
+{level($r1) := pc,\n\
+ obj_level($r1) := pc}",
+                          ];
+  "pc1_js1" -> "pc2_js1" [label="tt,\n\
+{obj_level($r1) := pc}", ];
+  "pc2_js1" -> "pc3_js1" [label="tt,\n\
+{ϕ := S2}", ];
+  
+  }

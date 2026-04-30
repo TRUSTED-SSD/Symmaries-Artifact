@@ -1,0 +1,42 @@
+org.apache.rocketmq.acl.plain.RemoteAddressStrategyFactory$MultipleRemoteAddressStrategy(java.lang.String[] strArray)
+{
+org.apache.commons.validator.routines.InetAddressValidator validator;
+  int l4;
+  int l5;
+  java.lang.String netaddress;
+  java.util.HashSet $stack7;
+  boolean $stack9;
+  org.apache.rocketmq.acl.common.AclException $stack11;
+  java.lang.Object[] $stack12;
+  java.util.Set $stack14;
+  this#java.lang.Object();
+ $stack7=new java.util.HashSet;
+ $stack7#java.util.HashSet();
+ this.multipleSet=$stack7;
+ validator = org.apache.commons.validator.routines.InetAddressValidator.getInstance();
+ l4=#strArray;
+ l5=0;
+ label0:if (l5>=l4) goto label1;
+ netaddress=strArray[l5];
+ $stack9 = validator.isValidInet4Address(netaddress);
+ if ($stack9==0) goto label2;
+ $stack14=this.multipleSet;
+ $stack14.add((java.lang.Object)netaddress);
+ goto label3;
+ label2:$stack9 = validator.isValidInet6Address(netaddress);
+ if ($stack9==0) goto label4;
+ $stack14=this.multipleSet;
+ netaddress = org.apache.rocketmq.acl.common.AclUtils.expandIP(netaddress,8);
+ $stack14.add((java.lang.Object)netaddress);
+ goto label3;
+ label4:$stack11=new org.apache.rocketmq.acl.common.AclException;
+ $stack12=new java.lang.Object[1];
+ $stack12[0]=netaddress;
+ netaddress = java.lang.String.format("Netaddress examine Exception netaddress is %s",$stack12);
+ $stack11#org.apache.rocketmq.acl.common.AclException(netaddress);
+ throw $stack11;
+ label3:l5=(l5+1);
+ goto label0;
+ label1:return;
+ } 
+

@@ -1,0 +1,41 @@
+void org.apache.rocketmq.client.impl.MQClientAPIImpl:cloneGroupOffset(java.lang.String @addr,java.lang.String srcGroup,java.lang.String destGroup,java.lang.String topic,boolean isOffline,long timeoutMillis)
+{
+org.apache.rocketmq.remoting.protocol.header.CloneGroupOffsetRequestHeader requestHeader;
+  org.apache.rocketmq.remoting.protocol.RemotingCommand request;
+  org.apache.rocketmq.client.ClientConfig $stack13;
+  org.apache.rocketmq.remoting.RemotingClient $stack14;
+  int $stack19;
+  org.apache.rocketmq.client.exception.MQClientException $stack20;
+  java.lang.AssertionError $stack24;
+  java.lang.String addr;
+addr=@addr;
+requestHeader=new org.apache.rocketmq.remoting.protocol.header.CloneGroupOffsetRequestHeader;
+ requestHeader#org.apache.rocketmq.remoting.protocol.header.CloneGroupOffsetRequestHeader();
+ requestHeader.setSrcGroup(srcGroup);
+ requestHeader.setDestGroup(destGroup);
+ requestHeader.setTopic(topic);
+ requestHeader.setOffline(isOffline);
+ request = org.apache.rocketmq.remoting.protocol.RemotingCommand.createRequestCommand(314,(org.apache.rocketmq.remoting.CommandCustomHeader)requestHeader);
+ $stack14=this.remotingClient;
+ $stack13=this.clientConfig;
+ isOffline = $stack13.isVipChannelEnabled();
+ addr = org.apache.rocketmq.common.MixAll.brokerVIPChannel(isOffline,addr);
+ request = $stack14.invokeSync(addr,request,timeoutMillis);
+ isOffline=org.apache.rocketmq.client.impl.MQClientAPIImpl.$assertionsDisabled;
+ if (isOffline!=0) goto label0;
+ if (request!=null) goto label0;
+ $stack24=new java.lang.AssertionError;
+ $stack24#java.lang.AssertionError();
+ throw $stack24;
+ label0:$stack19 = request.getCode();
+ switch [$stack19]
+if 0 goto label1;
+goto label2;
+ label1:return;
+ label2:$stack20=new org.apache.rocketmq.client.exception.MQClientException;
+ $stack19 = request.getCode();
+ addr = request.getRemark();
+ $stack20#org.apache.rocketmq.client.exception.MQClientException($stack19,addr);
+ throw $stack20;
+ } 
+

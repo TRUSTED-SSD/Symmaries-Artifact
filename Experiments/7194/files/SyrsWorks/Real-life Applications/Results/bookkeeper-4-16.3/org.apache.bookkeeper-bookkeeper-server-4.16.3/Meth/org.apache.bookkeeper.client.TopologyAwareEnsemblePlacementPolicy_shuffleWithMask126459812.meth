@@ -1,0 +1,33 @@
+static void org.apache.bookkeeper.client.TopologyAwareEnsemblePlacementPolicy:shuffleWithMask(org.apache.bookkeeper.client.DistributionSchedule$WriteSet writeSet,int mask,int bits)
+{
+int first;
+  int last;
+  int i;
+  int $stack7;
+  java.util.concurrent.ThreadLocalRandom $stack8;
+  first=-1;
+ last=-1;
+ i=0;
+ label0:$stack7 = writeSet.size();
+ if (i>=$stack7) goto label1;
+ $stack7 = writeSet.get(i);
+ $stack7=($stack7 & bits);
+ if ($stack7!=mask) goto label2;
+ if (first!=-1) goto label3;
+ first=i;
+ label3:last=i;
+ label2:i=(i+1);
+ goto label0;
+ label1:if (first==-1) goto label4;
+ i=(last+1);
+ label5:if (i<=first) goto label4;
+ $stack8 = java.util.concurrent.ThreadLocalRandom.current();
+ mask = $stack8.nextInt(i);
+ bits = writeSet.get(mask);
+ bits = writeSet.set(i,bits);
+ writeSet.set(mask,bits);
+ i=(i+-1);
+ goto label5;
+ label4:return;
+ } 
+

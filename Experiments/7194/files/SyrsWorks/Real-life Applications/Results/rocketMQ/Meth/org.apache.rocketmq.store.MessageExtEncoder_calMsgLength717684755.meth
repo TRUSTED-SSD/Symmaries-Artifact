@@ -1,0 +1,32 @@
+static int org.apache.rocketmq.store.MessageExtEncoder:calMsgLength(org.apache.rocketmq.common.message.MessageVersion messageVersion,int sysFlag,int bodyLength,int topicLength,int propertiesLength)
+{
+byte bornhostLength;
+  int $stack7;
+  byte $stack23;
+  $stack7=(sysFlag & 16);
+ if ($stack7!=0) goto label0;
+ bornhostLength=8;
+ goto label1;
+ label0:bornhostLength=20;
+ label1:sysFlag=(sysFlag & 32);
+ if (sysFlag!=0) goto label2;
+ $stack23=8;
+ goto label3;
+ label2:$stack23=20;
+ label3:sysFlag=(48+bornhostLength);
+ sysFlag=(sysFlag+8);
+ sysFlag=(sysFlag+$stack23);
+ sysFlag=(sysFlag+4);
+ sysFlag=(sysFlag+8);
+ sysFlag=(sysFlag+4);
+ bodyLength = java.lang.Math.max(bodyLength,0);
+ sysFlag=(sysFlag+bodyLength);
+ bodyLength = messageVersion.getTopicLengthSize();
+ sysFlag=(sysFlag+bodyLength);
+ sysFlag=(sysFlag+topicLength);
+ sysFlag=(sysFlag+2);
+ bodyLength = java.lang.Math.max(propertiesLength,0);
+ sysFlag=(sysFlag+bodyLength);
+ return  sysFlag;
+ } 
+

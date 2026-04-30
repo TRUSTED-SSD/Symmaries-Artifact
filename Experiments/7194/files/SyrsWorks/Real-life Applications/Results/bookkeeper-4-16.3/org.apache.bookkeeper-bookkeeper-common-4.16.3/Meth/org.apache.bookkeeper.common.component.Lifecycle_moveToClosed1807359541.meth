@@ -1,0 +1,19 @@
+boolean org.apache.bookkeeper.common.component.Lifecycle:moveToClosed()
+{
+org.apache.bookkeeper.common.component.Lifecycle$State localState;
+  org.apache.bookkeeper.common.component.Lifecycle$State $stack2;
+  java.lang.IllegalStateException $stack5;
+  localState=this.state;
+ $stack2=org.apache.bookkeeper.common.component.Lifecycle$State.CLOSED;
+ if (localState!=$stack2) goto label0;
+ return  0;
+ label0:$stack2=org.apache.bookkeeper.common.component.Lifecycle$State.STARTED;
+ if (localState!=$stack2) goto label1;
+ $stack5=new java.lang.IllegalStateException;
+ $stack5#java.lang.IllegalStateException("Can\'t move to closed before moving to stopped mode");
+ throw $stack5;
+ label1:localState=org.apache.bookkeeper.common.component.Lifecycle$State.CLOSED;
+ this.state=localState;
+ return  1;
+ } 
+

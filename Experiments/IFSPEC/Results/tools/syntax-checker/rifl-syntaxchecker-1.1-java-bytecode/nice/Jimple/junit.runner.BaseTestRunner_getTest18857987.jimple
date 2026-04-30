@@ -1,0 +1,271 @@
+    public junit.framework.Test getTest(java.lang.String)
+    {
+        junit.runner.BaseTestRunner this;
+        java.lang.String suiteClassName;
+        java.lang.Class testClass;
+        java.lang.reflect.Method e;
+        java.lang.Object clazz;
+        int $stack6;
+        java.lang.Class[] $stack8;
+        boolean $stack11;
+        java.lang.Object[] $stack12;
+        java.lang.reflect.InvocationTargetException $stack14;
+        java.lang.StringBuilder $stack15;
+        java.lang.Throwable $stack17;
+        java.lang.IllegalAccessException $stack21;
+        java.lang.Exception $stack27, $stack33;
+        java.lang.ClassNotFoundException $stack35;
+        junit.framework.TestSuite tmp$660396553;
+        junit.framework.Test tmp$1521444351;
+
+        this := @this: junit.runner.BaseTestRunner;
+
+        suiteClassName := @parameter0: java.lang.String;
+
+        $stack6 = virtualinvoke suiteClassName.<java.lang.String: int length()>();
+/*94*/
+
+        if $stack6 > 0 goto label01;
+/*94*/
+
+        virtualinvoke this.<junit.runner.BaseTestRunner: void clearStatus()>();
+/*95*/
+
+        return null;
+/*96*/
+
+     label01:
+        testClass = null;
+/*98*/
+
+     label02:
+        testClass = virtualinvoke this.<junit.runner.BaseTestRunner: java.lang.Class loadSuiteClass(java.lang.String)>(suiteClassName);
+/*100*/
+/*100*/
+
+     label03:
+        goto label07;
+/*111*/
+
+     label04:
+        $stack35 := @caughtexception;
+/*118*/
+
+        clazz = virtualinvoke $stack35.<java.lang.ClassNotFoundException: java.lang.String getMessage()>();
+/*102*/
+/*102*/
+
+        if clazz != null goto label05;
+/*103*/
+
+        clazz = suiteClassName;
+/*104*/
+
+     label05:
+        $stack15 = new java.lang.StringBuilder;
+/*106*/
+
+        specialinvoke $stack15.<java.lang.StringBuilder: void <init>()>();
+/*106*/
+
+        $stack15 = virtualinvoke $stack15.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>("Class not found \"");
+/*106*/
+
+        suiteClassName = (java.lang.String) clazz;
+
+        $stack15 = virtualinvoke $stack15.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>(suiteClassName);
+/*106*/
+
+        $stack15 = virtualinvoke $stack15.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>("\"");
+/*106*/
+
+        suiteClassName = virtualinvoke $stack15.<java.lang.StringBuilder: java.lang.String toString()>();
+/*106*/
+
+        virtualinvoke this.<junit.runner.BaseTestRunner: void runFailed(java.lang.String)>(suiteClassName);
+/*106*/
+
+        return null;
+/*107*/
+
+     label06:
+        $stack27 := @caughtexception;
+/*135*/
+
+        $stack15 = new java.lang.StringBuilder;
+/*109*/
+
+        specialinvoke $stack15.<java.lang.StringBuilder: void <init>()>();
+/*109*/
+
+        $stack15 = virtualinvoke $stack15.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>("Error: ");
+/*109*/
+
+        suiteClassName = virtualinvoke $stack27.<java.lang.Exception: java.lang.String toString()>();
+/*109*/
+
+        $stack15 = virtualinvoke $stack15.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>(suiteClassName);
+/*109*/
+
+        suiteClassName = virtualinvoke $stack15.<java.lang.StringBuilder: java.lang.String toString()>();
+/*109*/
+
+        virtualinvoke this.<junit.runner.BaseTestRunner: void runFailed(java.lang.String)>(suiteClassName);
+/*109*/
+
+        return null;
+/*110*/
+
+     label07:
+        e = null;
+/*112*/
+
+     label08:
+        $stack8 = newarray (java.lang.Class)[0];
+/*114*/
+
+        e = virtualinvoke testClass.<java.lang.Class: java.lang.reflect.Method getMethod(java.lang.String,java.lang.Class[])>("suite", $stack8);
+/*114*/
+/*114*/
+
+     label09:
+        goto label11;
+/*119*/
+
+     label10:
+        $stack33 := @caughtexception;
+/*110*/
+
+        clazz = $stack33;
+/*115*/
+
+        virtualinvoke this.<junit.runner.BaseTestRunner: void clearStatus()>();
+/*117*/
+
+        tmp$660396553 = new junit.framework.TestSuite;
+/*118*/
+
+        specialinvoke tmp$660396553.<junit.framework.TestSuite: void <init>(java.lang.Class)>(testClass);
+/*118*/
+
+        return tmp$660396553;
+/*118*/
+
+     label11:
+        $stack6 = virtualinvoke e.<java.lang.reflect.Method: int getModifiers()>();
+/*120*/
+
+        $stack11 = staticinvoke <java.lang.reflect.Modifier: boolean isStatic(int)>($stack6);
+/*120*/
+
+        if $stack11 != 0 goto label12;
+/*120*/
+
+        virtualinvoke this.<junit.runner.BaseTestRunner: void runFailed(java.lang.String)>("Suite() method must be static");
+/*121*/
+
+        return null;
+/*122*/
+
+     label12:
+        clazz = null;
+/*124*/
+
+     label13:
+        $stack12 = newarray (java.lang.Object)[0];
+/*126*/
+
+        clazz = virtualinvoke e.<java.lang.reflect.Method: java.lang.Object invoke(java.lang.Object,java.lang.Object[])>(null, $stack12);
+/*126*/
+
+        clazz = (junit.framework.Test) clazz;
+/*126*/
+
+        if clazz != null goto label15;
+/*127*/
+
+     label14:
+        tmp$1521444351 = (junit.framework.Test) clazz;
+
+        return tmp$1521444351;
+/*128*/
+
+     label15:
+        goto label18;
+/*136*/
+
+     label16:
+        $stack14 := @caughtexception;
+/*96*/
+
+        $stack15 = new java.lang.StringBuilder;
+/*131*/
+
+        specialinvoke $stack15.<java.lang.StringBuilder: void <init>()>();
+/*131*/
+
+        $stack15 = virtualinvoke $stack15.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>("Failed to invoke suite():");
+/*131*/
+
+        $stack17 = virtualinvoke $stack14.<java.lang.reflect.InvocationTargetException: java.lang.Throwable getTargetException()>();
+/*131*/
+
+        suiteClassName = virtualinvoke $stack17.<java.lang.Throwable: java.lang.String toString()>();
+/*131*/
+
+        $stack15 = virtualinvoke $stack15.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>(suiteClassName);
+/*131*/
+
+        suiteClassName = virtualinvoke $stack15.<java.lang.StringBuilder: java.lang.String toString()>();
+/*131*/
+
+        virtualinvoke this.<junit.runner.BaseTestRunner: void runFailed(java.lang.String)>(suiteClassName);
+/*131*/
+
+        return null;
+/*132*/
+
+     label17:
+        $stack21 := @caughtexception;
+/*132*/
+
+        $stack15 = new java.lang.StringBuilder;
+/*134*/
+
+        specialinvoke $stack15.<java.lang.StringBuilder: void <init>()>();
+/*134*/
+
+        $stack15 = virtualinvoke $stack15.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>("Failed to invoke suite():");
+/*134*/
+
+        suiteClassName = virtualinvoke $stack21.<java.lang.IllegalAccessException: java.lang.String toString()>();
+/*134*/
+
+        $stack15 = virtualinvoke $stack15.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>(suiteClassName);
+/*134*/
+
+        suiteClassName = virtualinvoke $stack15.<java.lang.StringBuilder: java.lang.String toString()>();
+/*134*/
+
+        virtualinvoke this.<junit.runner.BaseTestRunner: void runFailed(java.lang.String)>(suiteClassName);
+/*134*/
+
+        return null;
+/*135*/
+
+     label18:
+        virtualinvoke this.<junit.runner.BaseTestRunner: void clearStatus()>();
+/*138*/
+
+        tmp$1521444351 = (junit.framework.Test) clazz;
+
+        return tmp$1521444351;
+/*139*/
+
+        catch java.lang.ClassNotFoundException from label02 to label03 with label04;
+        catch java.lang.Exception from label02 to label03 with label06;
+        catch java.lang.Exception from label08 to label09 with label10;
+        catch java.lang.reflect.InvocationTargetException from label13 to label14 with label16;
+        catch java.lang.IllegalAccessException from label13 to label14 with label17;
+    }
+

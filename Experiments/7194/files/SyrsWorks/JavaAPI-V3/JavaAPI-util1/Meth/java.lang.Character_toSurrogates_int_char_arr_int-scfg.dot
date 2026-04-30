@@ -1,0 +1,33 @@
+digraph G {
+  node [shape=box, ];
+  "pc0_js1" [label="〈$i2 = i1 + 1, js1〉", ];
+  "pc1_js1" [label="〈$c3 = java.lang.Character.lowSurrogate (i0), js1〉\n\
+tt",
+             ];
+  "pc2_js1" [label="〈r0[$i2] = $c3, js1〉", ];
+  "pc3_js1" [label="〈$c4 = java.lang.Character.highSurrogate (i0), js1〉\n\
+tt",
+             ];
+  "pc4_js1" [label="〈r0[i1] = $c4, js1〉", ];
+  "pc5_js1" [label="〈return, js1〉", ];
+  "pc6_js1" [label="〈sink, js1〉\n\
+obj_level(r0) ⊑ ret(obj_level(r0))'",
+             ];
+  
+  
+  "pc0_js1" -> "pc1_js1" [label="tt,\n\
+{level($i2) := pc ⊔ level(i1)}", ];
+  "pc1_js1" -> "pc2_js1" [label="tt,\n\
+{level($c3) := pc ⊔ level(i0)}", ];
+  "pc2_js1" -> "pc3_js1" [label="tt,\n\
+{obj_level(r0) := pc ⊔ level(i0) ⊔ level(i1) ⊔ obj_level(r0)}",
+                          ];
+  "pc3_js1" -> "pc4_js1" [label="tt,\n\
+{level($c4) := pc ⊔ level(i0)}", ];
+  "pc4_js1" -> "pc5_js1" [label="tt,\n\
+{obj_level(r0) := pc ⊔ level(i0) ⊔ level(i1) ⊔ obj_level(r0)}",
+                          ];
+  "pc5_js1" -> "pc6_js1" [label="tt,\n\
+{ϕ := S5}", ];
+  
+  }

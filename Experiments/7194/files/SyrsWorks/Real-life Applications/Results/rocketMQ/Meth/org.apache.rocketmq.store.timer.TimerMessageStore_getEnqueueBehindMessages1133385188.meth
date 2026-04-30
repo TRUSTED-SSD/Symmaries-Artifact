@@ -1,0 +1,19 @@
+long org.apache.rocketmq.store.timer.TimerMessageStore:getEnqueueBehindMessages()
+{
+long tmpQueueOffset;
+  org.apache.rocketmq.store.ConsumeQueue cq;
+  org.apache.rocketmq.store.MessageStore $stack6;
+  org.apache.rocketmq.store.queue.ConsumeQueueInterface $stack7;
+  long $stack8;
+  tmpQueueOffset=this.currQueueOffset;
+ $stack6=this.messageStore;
+ $stack7 = $stack6.getConsumeQueue("rmq_sys_wheel_timer",0);
+ cq=(org.apache.rocketmq.store.ConsumeQueue) $stack7;
+ if (cq!=null) goto label0;
+ $stack8=0L;
+ goto label1;
+ label0:$stack8 = cq.getMaxOffsetInQueue();
+ label1:tmpQueueOffset=($stack8-tmpQueueOffset);
+ return  tmpQueueOffset;
+ } 
+

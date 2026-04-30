@@ -1,0 +1,38 @@
+boolean org.apache.bookkeeper.client.LedgerHandle:setLedgerMetadata(org.apache.bookkeeper.versioning.Versioned @expected,org.apache.bookkeeper.versioning.Versioned newMetadata)
+{
+org.apache.bookkeeper.client.LedgerHandle l3;
+  org.apache.bookkeeper.client.api.LedgerMetadata metadata;
+  java.lang.Throwable l5;
+  org.apache.bookkeeper.versioning.Versioned $stack7;
+  java.lang.Object $stack10;
+  boolean $stack11;
+  long $stack13;
+  org.apache.bookkeeper.versioning.Versioned expected;
+expected=@expected;
+l3=this;
+ monitorenter this;
+ label0:$stack7=this.versionedMetadata;
+ if ($stack7!=expected) goto label1;
+ this.versionedMetadata=newMetadata;
+ expected=this.versionedMetadata;
+ $stack10 = expected.getValue();
+ metadata=(org.apache.bookkeeper.client.api.LedgerMetadata) $stack10;
+ $stack11 = metadata.isClosed();
+ if ($stack11==0) goto label2;
+ $stack13 = metadata.getLastEntryId();
+ this.lastAddPushed=$stack13;
+ this.lastAddConfirmed=$stack13;
+ $stack13 = metadata.getLength();
+ this.length=$stack13;
+ label2:monitorexit this;
+ label3:return  1;
+ label1:monitorexit this;
+ label4:return  0;
+ label5:l5 = catch;
+ monitorexit this;
+ label6:throw l5;
+ catch java.lang.Throwable: label0 - label3 : label5;
+catch java.lang.Throwable: label1 - label4 : label5;
+catch java.lang.Throwable: label5 - label6 : label5;
+} 
+

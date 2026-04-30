@@ -1,0 +1,22 @@
+static void org.apache.rocketmq.client.Validators:checkTopicConfig(org.apache.rocketmq.common.TopicConfig topicConfig)
+{
+int $stack1;
+  boolean $stack2;
+  org.apache.rocketmq.client.exception.MQClientException $stack3;
+  java.lang.Object[] $stack4;
+  java.lang.Integer $stack9;
+  java.lang.String $stack10;
+  $stack1 = topicConfig.getPerm();
+ $stack2 = org.apache.rocketmq.common.constant.PermName.isValid($stack1);
+ if ($stack2!=0) goto label0;
+ $stack3=new org.apache.rocketmq.client.exception.MQClientException;
+ $stack4=new java.lang.Object[1];
+ $stack1 = topicConfig.getPerm();
+ $stack9 = java.lang.Integer.valueOf($stack1);
+ $stack4[0]=$stack9;
+ $stack10 = java.lang.String.format("topicPermission value: %s is invalid.",$stack4);
+ $stack3#org.apache.rocketmq.client.exception.MQClientException(16,$stack10);
+ throw $stack3;
+ label0:return;
+ } 
+

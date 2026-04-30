@@ -1,0 +1,11 @@
+void org.apache.rocketmq.store.ConsumeQueueExt:fullFillToEnd(org.apache.rocketmq.store.logfile.MappedFile mappedFile,int wrotePosition)
+{
+java.nio.ByteBuffer mappedFileBuffer;
+  mappedFileBuffer = mappedFile.sliceByteBuffer();
+ mappedFileBuffer.position(wrotePosition);
+ mappedFileBuffer.putShort((short)-1);
+ wrotePosition=this.mappedFileSize;
+ mappedFile.setWrotePosition(wrotePosition);
+ return;
+ } 
+

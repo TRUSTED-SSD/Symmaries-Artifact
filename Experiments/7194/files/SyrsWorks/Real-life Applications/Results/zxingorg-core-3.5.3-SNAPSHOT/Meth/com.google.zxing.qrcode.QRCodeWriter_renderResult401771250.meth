@@ -1,0 +1,52 @@
+static com.google.zxing.common.BitMatrix com.google.zxing.qrcode.QRCodeWriter:renderResult(com.google.zxing.qrcode.encoder.QRCode code,int width,int height,int quietZone)
+{
+com.google.zxing.qrcode.encoder.ByteMatrix input;
+  int inputWidth;
+  int inputHeight;
+  int qrWidth;
+  com.google.zxing.common.BitMatrix output;
+  int inputX;
+  int outputX;
+  byte $stack36;
+  java.lang.IllegalStateException $stack42;
+  input = code.getMatrix();
+ if (input!=null) goto label0;
+ $stack42=new java.lang.IllegalStateException;
+ $stack42#java.lang.IllegalStateException();
+ throw $stack42;
+ label0:inputWidth = input.getWidth();
+ inputHeight = input.getHeight();
+ qrWidth=(quietZone * 2);
+ qrWidth=(inputWidth+qrWidth);
+ quietZone=(quietZone * 2);
+ quietZone=(inputHeight+quietZone);
+ width = java.lang.Math.max(width,qrWidth);
+ height = java.lang.Math.max(height,quietZone);
+ qrWidth=(width/qrWidth);
+ quietZone=(height/quietZone);
+ quietZone = java.lang.Math.min(qrWidth,quietZone);
+ qrWidth=(inputWidth * quietZone);
+ qrWidth=(width-qrWidth);
+ qrWidth=(qrWidth/2);
+ inputX=(inputHeight * quietZone);
+ inputX=(height-inputX);
+ output=new com.google.zxing.common.BitMatrix;
+ output#com.google.zxing.common.BitMatrix(width,height);
+ width=0;
+ height=(inputX/2);
+ label1:if (width>=inputHeight) goto label2;
+ inputX=0;
+ outputX=qrWidth;
+ label3:if (inputX>=inputWidth) goto label4;
+ $stack36 = input.get(inputX,width);
+ if ($stack36!=1) goto label5;
+ output.setRegion(outputX,height,quietZone,quietZone);
+ label5:inputX=(inputX+1);
+ outputX=(outputX+quietZone);
+ goto label3;
+ label4:width=(width+1);
+ height=(height+quietZone);
+ goto label1;
+ label2:return  output;
+ } 
+

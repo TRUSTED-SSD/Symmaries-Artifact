@@ -1,0 +1,35 @@
+void org.keycloak.adapters.RequestAuthenticator:completeAuthentication(org.keycloak.adapters.BearerTokenRequestAuthenticator bearer,java.lang.String @method)
+{
+org.keycloak.KeycloakPrincipal principal;
+  org.keycloak.adapters.RefreshableKeycloakSecurityContext $stack5;
+  org.keycloak.adapters.KeycloakDeployment $stack6;
+  java.lang.String $stack8;
+  org.keycloak.representations.AccessToken $stack9;
+  org.jboss.logging.Logger $stack14;
+  org.keycloak.adapters.spi.HttpFacade $stack17;
+  org.keycloak.adapters.spi.HttpFacade$Request $stack18;
+  java.lang.String $stack21;
+  java.lang.String method;
+method=@method;
+$stack5=new org.keycloak.adapters.RefreshableKeycloakSecurityContext;
+ $stack6=this.deployment;
+ $stack8 = bearer.getTokenString();
+ $stack9 = bearer.getToken();
+ $stack5#org.keycloak.adapters.RefreshableKeycloakSecurityContext($stack6,null,$stack8,$stack9,null,null,null);
+ principal=new org.keycloak.KeycloakPrincipal;
+ $stack6=this.deployment;
+ $stack9 = bearer.getToken();
+ $stack8 = org.keycloak.adapters.AdapterUtils.getPrincipalName($stack6,$stack9);
+ principal#org.keycloak.KeycloakPrincipal($stack8,(org.keycloak.KeycloakSecurityContext)$stack5);
+ this.completeBearerAuthentication(principal,method);
+ $stack14=org.keycloak.adapters.RequestAuthenticator.log;
+ method = principal.getName();
+ $stack17=this.facade;
+ $stack18 = $stack17.getRequest();
+ $stack8 = $stack18.getURI();
+ $stack6=this.deployment;
+ $stack21 = $stack6.getResourceName();
+ $stack14.debugv("User \'\'{0}\'\' invoking \'\'{1}\'\' on client \'\'{2}\'\'",(java.lang.Object)method,(java.lang.Object)$stack8,(java.lang.Object)$stack21);
+ return;
+ } 
+

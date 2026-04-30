@@ -1,0 +1,31 @@
+int org.apache.bookkeeper.statelib.impl.mvcc.MVCCRecordCoder:getSerializedSize(org.apache.bookkeeper.statelib.impl.mvcc.MVCCRecord record)
+{
+org.apache.bookkeeper.stream.proto.kv.store.KeyMeta meta;
+  int metaLen;
+  int valLen;
+  org.apache.bookkeeper.stream.proto.kv.store.KeyMeta$Builder $stack5;
+  long $stack6;
+  org.apache.bookkeeper.stream.proto.kv.store.ValueType $stack12;
+  io.netty.buffer.ByteBuf $stack18;
+  $stack5 = org.apache.bookkeeper.stream.proto.kv.store.KeyMeta.newBuilder();
+ $stack6 = record.getCreateRev();
+ $stack5 = $stack5.setCreateRevision($stack6);
+ $stack6 = record.getModRev();
+ $stack5 = $stack5.setModRevision($stack6);
+ $stack6 = record.getVersion();
+ $stack5 = $stack5.setVersion($stack6);
+ $stack12 = record.getValueType();
+ $stack5 = $stack5.setValueType($stack12);
+ $stack6 = record.getExpireTime();
+ $stack5 = $stack5.setExpireTime($stack6);
+ meta = $stack5.build();
+ metaLen = meta.getSerializedSize();
+ $stack18 = record.getValue();
+ valLen = $stack18.readableBytes();
+dummyClass.highSourceMutint(valLen);
+ metaLen=(4+metaLen);
+ metaLen=(metaLen+4);
+ valLen=(metaLen+valLen);
+ return  valLen;
+ } 
+

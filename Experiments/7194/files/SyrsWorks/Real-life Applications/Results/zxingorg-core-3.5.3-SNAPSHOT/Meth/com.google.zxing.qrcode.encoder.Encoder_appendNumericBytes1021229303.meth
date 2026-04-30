@@ -1,0 +1,44 @@
+static void com.google.zxing.qrcode.encoder.Encoder:appendNumericBytes(java.lang.CharSequence content,com.google.zxing.common.BitArray bits)
+{
+int length;
+  int i;
+  int num1;
+  int num2;
+  int num3;
+  char $stack8;
+  length = content.length();
+ i=0;
+ label0:if (i>=length) goto label1;
+ $stack8 = content.charAt(i);
+ num1=($stack8-48);
+ num2=(i+2);
+ if (num2>=length) goto label2;
+ num2=(i+1);
+ $stack8 = content.charAt(num2);
+ num2=($stack8-48);
+ num3=(i+2);
+ $stack8 = content.charAt(num3);
+ num3=($stack8-48);
+ num1=(num1 * 100);
+ num2=(num2 * 10);
+ num1=(num1+num2);
+ num1=(num1+num3);
+ bits.appendBits(num1,10);
+ i=(i+3);
+ goto label3;
+ label2:num2=(i+1);
+ if (num2>=length) goto label4;
+ num2=(i+1);
+ $stack8 = content.charAt(num2);
+ num2=($stack8-48);
+ num1=(num1 * 10);
+ num1=(num1+num2);
+ bits.appendBits(num1,7);
+ i=(i+2);
+ goto label3;
+ label4:bits.appendBits(num1,4);
+ i=(i+1);
+ label3:goto label0;
+ label1:return;
+ } 
+

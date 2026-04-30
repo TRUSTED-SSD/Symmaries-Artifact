@@ -1,0 +1,49 @@
+void org.apache.bookkeeper.net.NetworkTopologyImpl:pseudoSortByDistance(org.apache.bookkeeper.net.Node reader,org.apache.bookkeeper.net.Node[] nodes)
+{
+int tempIndex;
+  int localRackNode;
+  int i;
+  java.util.Random $stack8;
+  int $stack11;
+  org.apache.bookkeeper.net.Node $stack15;
+  boolean $stack16;
+  tempIndex=0;
+ localRackNode=-1;
+ if (reader==null) goto label0;
+ i=0;
+ label1:$stack11=#nodes;
+ if (i>=$stack11) goto label2;
+ if (tempIndex!=0) goto label3;
+ $stack15=nodes[i];
+ if (reader!=$stack15) goto label3;
+ if (i==0) goto label4;
+ org.apache.bookkeeper.net.NetworkTopologyImpl.swap(nodes,tempIndex,i);
+ label4:tempIndex=1;
+ if (localRackNode==-1) goto label5;
+ if (localRackNode!=0) goto label2;
+ localRackNode=i;
+ goto label2;
+ label3:if (localRackNode!=-1) goto label5;
+ $stack15=nodes[i];
+ $stack16 = this.isOnSameRack(reader,$stack15);
+ if ($stack16==0) goto label5;
+ localRackNode=i;
+ if (tempIndex==0) goto label5;
+ goto label2;
+ label5:i=(i+1);
+ goto label1;
+ label2:if (localRackNode==-1) goto label0;
+ if (localRackNode==tempIndex) goto label0;
+ org.apache.bookkeeper.net.NetworkTopologyImpl.swap(nodes,tempIndex,localRackNode);
+ tempIndex=(tempIndex+1);
+ label0:if (tempIndex!=0) goto label6;
+ if (localRackNode!=-1) goto label6;
+ tempIndex=#nodes;
+ if (tempIndex==0) goto label6;
+ $stack8=org.apache.bookkeeper.net.NetworkTopologyImpl.r;
+ tempIndex=#nodes;
+ tempIndex = $stack8.nextInt(tempIndex);
+ org.apache.bookkeeper.net.NetworkTopologyImpl.swap(nodes,0,tempIndex);
+ label6:return;
+ } 
+

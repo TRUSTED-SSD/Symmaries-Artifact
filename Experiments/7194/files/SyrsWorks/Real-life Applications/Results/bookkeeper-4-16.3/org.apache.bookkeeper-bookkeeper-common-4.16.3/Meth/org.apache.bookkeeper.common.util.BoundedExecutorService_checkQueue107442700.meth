@@ -1,0 +1,27 @@
+void org.apache.bookkeeper.common.util.BoundedExecutorService:checkQueue(int numberOfTasks)
+{
+int $stack2;
+  java.util.concurrent.BlockingQueue $stack3;
+  java.util.concurrent.RejectedExecutionException $stack7;
+  java.lang.StringBuilder $stack8;
+  java.lang.String $stack13;
+  $stack2=this.maxTasksInQueue;
+ if ($stack2<=0) goto label0;
+ $stack3=this.queue;
+ $stack2 = $stack3.size();
+ $stack2=($stack2+numberOfTasks);
+ numberOfTasks=this.maxTasksInQueue;
+ if ($stack2<=numberOfTasks) goto label0;
+ $stack7=new java.util.concurrent.RejectedExecutionException;
+ $stack8=new java.lang.StringBuilder;
+ $stack8#java.lang.StringBuilder();
+ $stack8 = $stack8.append("Queue at limit of ");
+ numberOfTasks=this.maxTasksInQueue;
+ $stack8 = $stack8.append(numberOfTasks);
+ $stack8 = $stack8.append(" items");
+ $stack13 = $stack8.toString();
+ $stack7#java.util.concurrent.RejectedExecutionException($stack13);
+ throw $stack7;
+ label0:return;
+ } 
+

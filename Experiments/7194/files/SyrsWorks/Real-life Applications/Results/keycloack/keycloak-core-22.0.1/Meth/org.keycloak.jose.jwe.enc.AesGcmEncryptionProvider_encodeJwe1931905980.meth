@@ -1,0 +1,50 @@
+void org.keycloak.jose.jwe.enc.AesGcmEncryptionProvider:encodeJwe(org.keycloak.jose.jwe.JWE jwe)
+{
+byte[] contentBytes;
+  byte[] initializationVector;
+  java.security.Key aesKey;
+  int expectedAesKeyLength;
+  byte[] aad;
+  org.keycloak.jose.jwe.JWEKeyStorage $stack12;
+  org.keycloak.jose.jwe.JWEKeyStorage$KeyUse $stack13;
+  int $stack17;
+  java.lang.String $stack18;
+  java.nio.charset.Charset $stack19;
+  java.lang.IllegalStateException $stack24;
+  java.lang.StringBuilder $stack25;
+  java.lang.IllegalArgumentException $stack33;
+  contentBytes = jwe.getContent();
+ initializationVector = org.keycloak.jose.jwe.JWEUtils.generateSecret(12);
+ $stack12 = jwe.getKeyStorage();
+ $stack13=org.keycloak.jose.jwe.JWEKeyStorage$KeyUse.ENCRYPTION;
+ aesKey = $stack12.getCEKKey($stack13,(boolean)0);
+ if (aesKey!=null) goto label0;
+ $stack33=new java.lang.IllegalArgumentException;
+ $stack33#java.lang.IllegalArgumentException("AES CEK key not present");
+ throw $stack33;
+ label0:expectedAesKeyLength = this.getExpectedAesKeyLength();
+ aad = aesKey.getEncoded();
+ $stack17=#aad;
+ if (expectedAesKeyLength==$stack17) goto label1;
+ $stack24=new java.lang.IllegalStateException;
+ $stack25=new java.lang.StringBuilder;
+ $stack25#java.lang.StringBuilder();
+ $stack25 = $stack25.append("Length of aes key should be ");
+ $stack25 = $stack25.append(expectedAesKeyLength);
+ $stack25 = $stack25.append(", but was ");
+ initializationVector = aesKey.getEncoded();
+ expectedAesKeyLength=#initializationVector;
+ $stack25 = $stack25.append(expectedAesKeyLength);
+ $stack18 = $stack25.toString();
+ $stack24#java.lang.IllegalStateException($stack18);
+ throw $stack24;
+ label1:$stack18 = jwe.getBase64Header();
+ $stack19=java.nio.charset.StandardCharsets.UTF_8;
+ aad = $stack18.getBytes($stack19);
+ aad = this#org.keycloak.jose.jwe.enc.AesGcmEncryptionProvider:encryptBytes(contentBytes,initializationVector,aesKey,aad);
+ contentBytes = this#org.keycloak.jose.jwe.enc.AesGcmEncryptionProvider:getAuthenticationTag(aad);
+ aad = this#org.keycloak.jose.jwe.enc.AesGcmEncryptionProvider:getEncryptedContent(aad);
+ jwe.setEncryptedContentInfo(initializationVector,aad,contentBytes);
+ return;
+ } 
+

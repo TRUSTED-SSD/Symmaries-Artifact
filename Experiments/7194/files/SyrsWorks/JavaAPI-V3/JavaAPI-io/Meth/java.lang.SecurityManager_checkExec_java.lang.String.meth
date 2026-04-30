@@ -1,0 +1,22 @@
+void java.lang.SecurityManager:checkExec(java.lang.String r1)
+{
+java.io.File r2;
+  java.io.File $r3;
+  boolean $z0;
+  java.io.FilePermission $r4;
+  java.io.FilePermission $r5;
+  $r3=new java.io.File;
+ $r3#java.io.File:init(r1);
+ r2=$r3;
+ $z0 = r2.isAbsolute();
+ if ($z0==0) goto label0;
+ $r5=new java.io.FilePermission;
+ $r5#java.io.FilePermission:init(r1,"execute");
+ this.checkPermission((java.security.Permission)$r5);
+ goto label1;
+ label0:$r4=new java.io.FilePermission;
+ $r4#java.io.FilePermission:init("<<ALL FILES>>","execute");
+ this.checkPermission((java.security.Permission)$r4);
+ label1:return;
+ }  
+

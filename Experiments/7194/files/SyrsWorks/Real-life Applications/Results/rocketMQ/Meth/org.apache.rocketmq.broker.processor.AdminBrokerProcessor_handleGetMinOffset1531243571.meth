@@ -1,0 +1,49 @@
+java.util.concurrent.CompletableFuture org.apache.rocketmq.broker.processor.AdminBrokerProcessor:handleGetMinOffset(org.apache.rocketmq.remoting.rpc.RpcRequest request)
+{
+org.apache.rocketmq.remoting.protocol.header.GetMinOffsetRequestHeader requestHeader;
+  java.util.concurrent.CompletableFuture rewriteResult;
+  org.apache.rocketmq.remoting.protocol.header.GetMinOffsetResponseHeader responseHeader;
+  long offset;
+  boolean $stack8;
+  org.apache.rocketmq.remoting.rpc.RpcRequestHeader $stack9;
+  org.apache.rocketmq.broker.BrokerController $stack10;
+  org.apache.rocketmq.broker.topic.TopicQueueMappingManager $stack11;
+  org.apache.rocketmq.store.MessageStore $stack16;
+  java.lang.String $stack17;
+  java.lang.Integer $stack18;
+  int $stack19;
+  java.lang.Long $stack21;
+  org.apache.rocketmq.remoting.rpc.RpcResponse $stack22;
+  org.apache.rocketmq.remoting.protocol.statictopic.TopicQueueMappingContext $stack31;
+  java.lang.AssertionError $stack34;
+  $stack8=org.apache.rocketmq.broker.processor.AdminBrokerProcessor.$assertionsDisabled;
+ if ($stack8!=0) goto label0;
+ $stack19 = request.getCode();
+ if ($stack19==31) goto label0;
+ $stack34=new java.lang.AssertionError;
+ $stack34#java.lang.AssertionError();
+ throw $stack34;
+ label0:$stack9 = request.getHeader();
+ requestHeader=(org.apache.rocketmq.remoting.protocol.header.GetMinOffsetRequestHeader) $stack9;
+ $stack10=this.brokerController;
+ $stack11 = $stack10.getTopicQueueMappingManager();
+ $stack31 = $stack11.buildTopicQueueMappingContext((org.apache.rocketmq.remoting.rpc.TopicRequestHeader)requestHeader,(boolean)0);
+ rewriteResult = this#org.apache.rocketmq.broker.processor.AdminBrokerProcessor:handleGetMinOffsetForStaticTopic(request,$stack31);
+ if (rewriteResult==null) goto label1;
+ return  rewriteResult;
+ label1:responseHeader=new org.apache.rocketmq.remoting.protocol.header.GetMinOffsetResponseHeader;
+ responseHeader#org.apache.rocketmq.remoting.protocol.header.GetMinOffsetResponseHeader();
+ $stack10=this.brokerController;
+ $stack16 = $stack10.getMessageStore();
+ $stack17 = requestHeader.getTopic();
+ $stack18 = requestHeader.getQueueId();
+ $stack19 = $stack18.intValue();
+ offset = $stack16.getMinOffsetInQueue($stack17,$stack19);
+ $stack21 = java.lang.Long.valueOf(offset);
+ responseHeader.setOffset($stack21);
+ $stack22=new org.apache.rocketmq.remoting.rpc.RpcResponse;
+ $stack22#org.apache.rocketmq.remoting.rpc.RpcResponse(0,(org.apache.rocketmq.remoting.CommandCustomHeader)responseHeader,null);
+ rewriteResult = java.util.concurrent.CompletableFuture.completedFuture((java.lang.Object)$stack22);
+ return  rewriteResult;
+ } 
+

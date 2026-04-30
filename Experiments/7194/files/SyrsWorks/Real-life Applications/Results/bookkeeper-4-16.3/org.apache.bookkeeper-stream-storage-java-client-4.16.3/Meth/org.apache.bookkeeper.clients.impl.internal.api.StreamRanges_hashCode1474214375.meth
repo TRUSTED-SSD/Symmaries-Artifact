@@ -1,0 +1,33 @@
+int org.apache.bookkeeper.clients.impl.internal.api.StreamRanges:hashCode()
+{
+byte PRIME;
+  int result;
+  long $maxRangeId;
+  org.apache.bookkeeper.stream.proto.RangeKeyType $keyType;
+  java.util.NavigableMap $ranges;
+  long $stack8;
+  int $stack11;
+  PRIME=59;
+ $maxRangeId = this.getMaxRangeId();
+ $stack11=(1 * 59);
+ $stack8=($maxRangeId>>>32);
+ $maxRangeId=(!$stack8 & $maxRangeId) |(!$maxRangeId & $stack8);
+ result=(int) $maxRangeId;
+ result=($stack11+result);
+ $keyType = this.getKeyType();
+ result=(result * 59);
+ if ($keyType!=null) goto label0;
+ $stack11=43;
+ goto label1;
+ label0:$stack11 = $keyType.hashCode();
+ label1:$ranges = this.getRanges();
+ result=(result+$stack11);
+ result=(result * 59);
+ if ($ranges!=null) goto label2;
+ $stack11=43;
+ goto label3;
+ label2:$stack11 = $ranges.hashCode();
+ label3:result=(result+$stack11);
+ return  result;
+ } 
+

@@ -1,0 +1,66 @@
+digraph G {
+  node [shape=box, ];
+  "pc0_js1" [label="〈$r5 = this.value, js1〉", ];
+  "pc1_js1" [label="〈$r2 = this.value, js1〉", ];
+  "pc2_js1" [label="〈$i2 = #$r2, js1〉", ];
+  "pc3_js1" [label="〈$r4 = r1.value, js1〉", ];
+  "pc4_js1" [label="〈$r3 = r1.value, js1〉", ];
+  "pc5_js1" [label="〈$i1 = #$r3, js1〉", ];
+  "pc6_js1" [label="〈$i3 = java.lang.String.indexOf ($r5, 0, $i2, $r4, 0, $i1, i0), js1〉\n\
+tt",
+             ];
+  "pc7_js1" [label="〈return $i3, js1〉", ];
+  "pc8_js1" [label="〈sink, js1〉\n\
+obj_level(r1) ⊑ ret(obj_level(r1))' ∧ obj_level(this) ⊑ ret(obj_level(this))' ∧ (ret(r1.><r1)' ∨ ¬r1.><r1) ∧ (ret(r1.><this)' ∨ ¬r1.><this) ∧ (ret(this.><r1)' ∨ ¬this.><r1) ∧ (ret(this.><this)' ∨ ¬this.><this) ∧ (ϕ ≠ S7 ∨ pc ⊔ level($i3) ⊑ ret(level())')",
+             ];
+  
+  
+  "pc0_js1" -> "pc1_js1" [label="tt,\n\
+{$r2~$r5 := ff,\n\
+ $r3~$r5 := ff,\n\
+ $r4~$r5 := ff,\n\
+ r1.><$r5 := r1~this ∨ r1.><this,\n\
+ this.><$r5 := tt,\n\
+ level($r5) := pc ⊔ level(this) ⊔ obj_level(this),\n\
+ obj_level($r5) := obj_level(this)}",
+                          ];
+  "pc1_js1" -> "pc2_js1" [label="tt,\n\
+{$r2~$r3 := ff,\n\
+ $r2~$r4 := ff,\n\
+ $r2~$r5 := tt,\n\
+ r1.><$r2 := r1~this ∨ r1.><this,\n\
+ this.><$r2 := tt,\n\
+ level($r2) := pc ⊔ level(this) ⊔ obj_level(this),\n\
+ obj_level($r2) := obj_level(this)}",
+                          ];
+  "pc2_js1" -> "pc3_js1" [label="tt,\n\
+{level($i2) := pc ⊔ level(this) ⊔ obj_level(this)}",
+                          ];
+  "pc3_js1" -> "pc4_js1" [label="tt,\n\
+{$r2~$r4 := r1~this ∨ r1.><this,\n\
+ $r3~$r4 := ff,\n\
+ $r4~$r5 := r1~this ∨ r1.><this,\n\
+ r1.><$r4 := tt,\n\
+ this.><$r4 := r1~this ∨ this.><r1,\n\
+ level($r4) := pc ⊔ level(r1) ⊔ obj_level(r1),\n\
+ obj_level($r4) := obj_level(r1)}",
+                          ];
+  "pc4_js1" -> "pc5_js1" [label="tt,\n\
+{$r2~$r3 := r1~this ∨ r1.><this,\n\
+ $r3~$r4 := tt,\n\
+ $r3~$r5 := r1~this ∨ r1.><this,\n\
+ r1.><$r3 := tt,\n\
+ this.><$r3 := r1~this ∨ this.><r1,\n\
+ level($r3) := pc ⊔ level(r1) ⊔ obj_level(r1),\n\
+ obj_level($r3) := obj_level(r1)}",
+                          ];
+  "pc5_js1" -> "pc6_js1" [label="tt,\n\
+{level($i1) := pc ⊔ level(r1) ⊔ obj_level(r1)}",
+                          ];
+  "pc6_js1" -> "pc7_js1" [label="tt,\n\
+{level($i3) := pc ⊔ level(i0) ⊔ level(r1) ⊔ level(this) ⊔ obj_level(r1) ⊔ obj_level(this)}",
+                          ];
+  "pc7_js1" -> "pc8_js1" [label="tt,\n\
+{ϕ := S7}", ];
+  
+  }

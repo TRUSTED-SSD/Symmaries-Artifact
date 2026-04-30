@@ -1,0 +1,52 @@
+static void com.google.zxing.datamatrix.decoder.DecodedBitStreamParser:decodeAnsiX12Segment(com.google.zxing.common.BitSource bits,com.google.zxing.common.ECIStringBuilder result)
+{
+int[] cValues;
+  int firstByte;
+  int cValue;
+  com.google.zxing.FormatException $stack16;
+  char $stack18;
+  cValues=new int[3];
+ label0:firstByte = bits.available();
+ if (firstByte!=8) goto label1;
+ return;
+ label1:firstByte = bits.readBits(8);
+ if (firstByte!=254) goto label2;
+ return;
+ label2:cValue = bits.readBits(8);
+ com.google.zxing.datamatrix.decoder.DecodedBitStreamParser.parseTwoBytes(firstByte,cValue,cValues);
+ firstByte=0;
+ label3:if (firstByte>=3) goto label4;
+ cValue=cValues[firstByte];
+ switch [cValue]
+if 0 goto label5;
+if 1 goto label6;
+if 2 goto label7;
+if 3 goto label8;
+goto label9;
+ label5:result.append((char)13);
+ goto label10;
+ label6:result.append((char)42);
+ goto label10;
+ label7:result.append((char)62);
+ goto label10;
+ label8:result.append((char)32);
+ goto label10;
+ label9:if (cValue>=14) goto label11;
+ cValue=(cValue+44);
+ $stack18=(char) cValue;
+ result.append($stack18);
+ goto label10;
+ label11:if (cValue>=40) goto label12;
+ cValue=(cValue+51);
+ $stack18=(char) cValue;
+ result.append($stack18);
+ goto label10;
+ label12:$stack16 = com.google.zxing.FormatException.getFormatInstance();
+ throw $stack16;
+ label10:firstByte=(firstByte+1);
+ goto label3;
+ label4:firstByte = bits.available();
+ if (firstByte>0) goto label0;
+ return;
+ } 
+

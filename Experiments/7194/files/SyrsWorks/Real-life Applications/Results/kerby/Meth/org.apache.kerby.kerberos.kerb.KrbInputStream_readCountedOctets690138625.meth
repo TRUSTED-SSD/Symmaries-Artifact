@@ -1,0 +1,28 @@
+byte[] org.apache.kerby.kerberos.kerb.KrbInputStream:readCountedOctets()
+{
+int len;
+  byte[] data;
+  java.io.IOException $stack4;
+  java.lang.StringBuilder $stack5;
+  java.lang.String $stack8;
+  int $stack9;
+  len = this.readOctetsCount();
+ if (len!=0) goto label0;
+ return  null;
+ label0:if (len<0) goto label1;
+ $stack9 = this.available();
+ if (len<=$stack9) goto label2;
+ label1:$stack4=new java.io.IOException;
+ $stack5=new java.lang.StringBuilder;
+ $stack5#java.lang.StringBuilder();
+ $stack5 = $stack5.append("Unexpected octets len: ");
+ $stack5 = $stack5.append(len);
+ $stack8 = $stack5.toString();
+ $stack4#java.io.IOException($stack8);
+ throw $stack4;
+ label2:data=new byte[len];
+ dummyClass.highSourceMut(data);
+this.readFully(data);
+ return  data;
+ } 
+

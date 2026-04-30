@@ -1,0 +1,53 @@
+int[] com.google.zxing.common.reedsolomon.ReedSolomonDecoder:findErrorMagnitudes(com.google.zxing.common.reedsolomon.GenericGFPoly errorEvaluator,int[] errorLocations)
+{
+int s;
+  int[] result;
+  int i;
+  int xiInverse;
+  int denominator;
+  int j;
+  int term;
+  com.google.zxing.common.reedsolomon.GenericGF $stack12;
+  com.google.zxing.common.reedsolomon.GenericGF $stack16;
+  int $stack31;
+  s=#errorLocations;
+ result=new int[s];
+ i=0;
+ label0:if (i>=s) goto label1;
+ $stack12=this.field;
+ xiInverse=errorLocations[i];
+ xiInverse = $stack12.inverse(xiInverse);
+ denominator=1;
+ j=0;
+ label2:if (j>=s) goto label3;
+ if (i==j) goto label4;
+ $stack12=this.field;
+ term=errorLocations[j];
+ term = $stack12.multiply(term,xiInverse);
+ $stack31=(term & 1);
+ if ($stack31!=0) goto label5;
+ term=(term | 1);
+ goto label6;
+ label5:term=(term & -2);
+ label6:$stack12=this.field;
+ denominator = $stack12.multiply(denominator,term);
+ label4:j=(j+1);
+ goto label2;
+ label3:$stack12=this.field;
+ j = errorEvaluator.evaluateAt(xiInverse);
+ $stack16=this.field;
+ denominator = $stack16.inverse(denominator);
+ denominator = $stack12.multiply(j,denominator);
+ result[i]=denominator;
+ $stack12=this.field;
+ denominator = $stack12.getGeneratorBase();
+ if (denominator==0) goto label7;
+ $stack12=this.field;
+ denominator=result[i];
+ xiInverse = $stack12.multiply(denominator,xiInverse);
+ result[i]=xiInverse;
+ label7:i=(i+1);
+ goto label0;
+ label1:return  result;
+ } 
+

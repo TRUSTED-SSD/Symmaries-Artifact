@@ -1,0 +1,22 @@
+void org.apache.rocketmq.common.statistics.StatisticsItemScheduledIncrementPrinter:remove(org.apache.rocketmq.common.statistics.StatisticsItem item)
+{
+java.lang.String kind;
+  java.lang.String key;
+  java.util.concurrent.ConcurrentHashMap lastItemMap;
+  java.lang.Object $stack9;
+  this.removeAllFuture((java.lang.Object)item);
+ kind = item.getStatKind();
+ key = item.getStatObject();
+ lastItemMap=this.lastItemSnapshots;
+ $stack9 = lastItemMap.get((java.lang.Object)kind);
+ lastItemMap=(java.util.concurrent.ConcurrentHashMap) $stack9;
+ if (lastItemMap==null) goto label0;
+ lastItemMap.remove((java.lang.Object)key);
+ label0:lastItemMap=this.sampleBriefs;
+ $stack9 = lastItemMap.get((java.lang.Object)kind);
+ lastItemMap=(java.util.concurrent.ConcurrentHashMap) $stack9;
+ if (lastItemMap==null) goto label1;
+ lastItemMap.remove((java.lang.Object)key);
+ label1:return;
+ } 
+

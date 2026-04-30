@@ -1,0 +1,24 @@
+org.apache.bookkeeper.discover.BookieServiceInfo org.apache.bookkeeper.client.BookKeeperAdmin:getBookieServiceInfo(org.apache.bookkeeper.net.BookieId bookiedId)
+{
+org.apache.bookkeeper.client.BookKeeper $stack3;
+  org.apache.bookkeeper.meta.MetadataClientDriver $stack4;
+  org.apache.bookkeeper.discover.RegistrationClient $stack5;
+  java.util.concurrent.CompletableFuture $stack6;
+  java.lang.Object $stack7;
+  org.apache.bookkeeper.versioning.Versioned $stack8;
+  org.apache.bookkeeper.discover.BookieServiceInfo $stack10;
+  java.lang.Throwable $stack11;
+  label0:$stack3=this.bkc;
+ $stack4 = $stack3.getMetadataClientDriver();
+ $stack5 = $stack4.getRegistrationClient();
+ $stack6 = $stack5.getBookieServiceInfo(bookiedId);
+ $stack7 = org.apache.bookkeeper.common.concurrent.FutureUtils.result($stack6);
+ $stack8=(org.apache.bookkeeper.versioning.Versioned) $stack7;
+ $stack7 = $stack8.getValue();
+ $stack10=(org.apache.bookkeeper.discover.BookieServiceInfo) $stack7;
+ label1:return  $stack10;
+ label2:$stack11 = catch;
+ throw $stack11;
+ catch java.lang.Throwable: label0 - label1 : label2;
+} 
+

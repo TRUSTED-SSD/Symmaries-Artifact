@@ -1,0 +1,30 @@
+static void org.apache.kerby.asn1.util.Asn1Util:encodeLength(java.nio.ByteBuffer buffer,int bodyLength)
+{
+int length;
+  int payload;
+  byte $stack6;
+  if (bodyLength>=128) goto label0;
+ $stack6=(byte) bodyLength;
+ buffer.put($stack6);
+ goto label1;
+ label0:length=0;
+ payload=bodyLength;
+ label2:if (payload==0) goto label3;
+ payload=(payload>>8);
+ length=(length+1);
+ goto label2;
+ label3:payload=(length | 128);
+ $stack6=(byte) payload;
+ buffer.put($stack6);
+ payload=bodyLength;
+ bodyLength=(length-1);
+ label4:if (bodyLength<0) goto label1;
+ length=(bodyLength * 8);
+ length=(payload>>length);
+ $stack6=(byte) length;
+ buffer.put($stack6);
+ bodyLength=(bodyLength+-1);
+ goto label4;
+ label1:return;
+ } 
+

@@ -1,0 +1,52 @@
+void org.apache.rocketmq.store.MappedFileQueue:truncateDirtyFiles(long offset)
+{
+java.util.ArrayList willRemoveFiles;
+  java.util.Iterator l4;
+  org.apache.rocketmq.store.logfile.MappedFile file;
+  long fileTailOffset;
+  java.util.concurrent.CopyOnWriteArrayList $stack9;
+  boolean $stack11;
+  java.lang.Object $stack12;
+  int $stack14;
+  long $stack15;
+  byte $stack16;
+  willRemoveFiles=new java.util.ArrayList;
+ willRemoveFiles#java.util.ArrayList();
+ $stack9=this.mappedFiles;
+ l4 = $stack9.iterator();
+ label0:$stack11 = l4.hasNext();
+ if ($stack11==0) goto label1;
+ $stack12 = l4.next();
+ file=(org.apache.rocketmq.store.logfile.MappedFile) $stack12;
+ fileTailOffset = file.getFileFromOffset();
+ $stack14=this.mappedFileSize;
+ $stack15=(long) $stack14;
+ fileTailOffset=(fileTailOffset+$stack15);
+ $stack16=(fileTailOffset cmp offset);
+ if ($stack16<=0) goto label2;
+ fileTailOffset = file.getFileFromOffset();
+ $stack16=(offset cmp fileTailOffset);
+ if ($stack16<0) goto label3;
+ $stack14=this.mappedFileSize;
+ fileTailOffset=(long) $stack14;
+ fileTailOffset=(offset%fileTailOffset);
+ $stack14=(int) fileTailOffset;
+ file.setWrotePosition($stack14);
+ $stack14=this.mappedFileSize;
+ fileTailOffset=(long) $stack14;
+ fileTailOffset=(offset%fileTailOffset);
+ $stack14=(int) fileTailOffset;
+ file.setCommittedPosition($stack14);
+ $stack14=this.mappedFileSize;
+ fileTailOffset=(long) $stack14;
+ fileTailOffset=(offset%fileTailOffset);
+ $stack14=(int) fileTailOffset;
+ file.setFlushedPosition($stack14);
+ goto label2;
+ label3:file.destroy(1000L);
+ willRemoveFiles.add((java.lang.Object)file);
+ label2:goto label0;
+ label1:this.deleteExpiredFile((java.util.List)willRemoveFiles);
+ return;
+ } 
+

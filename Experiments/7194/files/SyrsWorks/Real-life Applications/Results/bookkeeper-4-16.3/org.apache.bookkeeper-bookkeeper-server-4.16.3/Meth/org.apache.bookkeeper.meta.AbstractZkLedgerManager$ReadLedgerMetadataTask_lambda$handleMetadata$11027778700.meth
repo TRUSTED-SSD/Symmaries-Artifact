@@ -1,0 +1,29 @@
+void org.apache.bookkeeper.meta.AbstractZkLedgerManager$ReadLedgerMetadataTask:lambda$handleMetadata$1(java.util.Set listenerSet,org.apache.bookkeeper.versioning.Versioned result)
+{
+java.util.Set l3;
+  java.util.Iterator l4;
+  org.apache.bookkeeper.proto.BookkeeperInternalCallbacks$LedgerMetadataListener listener;
+  java.lang.Throwable l6;
+  boolean $stack9;
+  java.lang.Object $stack11;
+  long $stack12;
+  l3=listenerSet;
+ monitorenter listenerSet;
+ label0:l4 = listenerSet.iterator();
+ label1:$stack9 = l4.hasNext();
+ if ($stack9==0) goto label2;
+ $stack11 = l4.next();
+ listener=(org.apache.bookkeeper.proto.BookkeeperInternalCallbacks$LedgerMetadataListener) $stack11;
+ $stack12=this.ledgerId;
+ listener.onChanged($stack12,result);
+ goto label1;
+ label2:monitorexit listenerSet;
+ label3:goto label4;
+ label5:l6 = catch;
+ monitorexit listenerSet;
+ label6:throw l6;
+ label4:return;
+ catch java.lang.Throwable: label0 - label3 : label5;
+catch java.lang.Throwable: label5 - label6 : label5;
+} 
+

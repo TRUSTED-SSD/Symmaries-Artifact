@@ -1,0 +1,33 @@
+void org.apache.rocketmq.store.GetMessageResult:addMessage(org.apache.rocketmq.store.SelectMappedBufferResult mapedBuffer)
+{
+java.util.List $stack2;
+  java.nio.ByteBuffer $stack5;
+  int $stack7;
+  int $stack8;
+  double $stack13;
+  double $stack14;
+  $stack2=this.messageMapedList;
+ $stack2.add((java.lang.Object)mapedBuffer);
+ $stack2=this.messageBufferList;
+ $stack5 = mapedBuffer.getByteBuffer();
+ $stack2.add((java.lang.Object)$stack5);
+ $stack7=this.bufferTotalSize;
+ $stack8 = mapedBuffer.getSize();
+ $stack7=($stack7+$stack8);
+ this.bufferTotalSize=$stack7;
+ $stack7=this.msgCount4Commercial;
+ $stack8 = mapedBuffer.getSize();
+ $stack14=(double) $stack8;
+ $stack8=this.commercialSizePerMsg;
+ $stack13=(double) $stack8;
+ $stack13=($stack14/$stack13);
+ $stack13 = java.lang.Math.ceil($stack13);
+ $stack8=(int) $stack13;
+ $stack7=($stack7+$stack8);
+ this.msgCount4Commercial=$stack7;
+ $stack7=this.messageCount;
+ $stack7=($stack7+1);
+ this.messageCount=$stack7;
+ return;
+ } 
+

@@ -1,0 +1,72 @@
+    public rifl.spec.Domain getDomainForName(java.lang.String)
+    {
+        rifl.utils.RIFLInformationFlowPolicy this;
+        java.lang.String name;
+        rifl.spec.CatSrcSnk catSrcSnk;
+        java.lang.Object msg;
+        rifl.utils.InterfaceSpecificationAccessor $stack4;
+        rifl.spec.RIFLSpecification $stack8;
+        java.util.Map $stack9;
+        rifl.spec.Domain $stack11;
+        java.lang.Object[] $stack12;
+        java.lang.IllegalArgumentException tmp$858936682;
+
+        this := @this: rifl.utils.RIFLInformationFlowPolicy;
+
+        name := @parameter0: java.lang.String;
+
+        $stack4 = this.<rifl.utils.RIFLInformationFlowPolicy: rifl.utils.InterfaceSpecificationAccessor isa>;
+/*85*/
+
+        catSrcSnk = virtualinvoke $stack4.<rifl.utils.InterfaceSpecificationAccessor: rifl.spec.CatSrcSnk getCatSrcSnkForName(java.lang.String)>(name);
+/*85*/
+/*85*/
+
+        if catSrcSnk != null goto label1;
+/*87*/
+
+        $stack12 = newarray (java.lang.Object)[1];
+/*88*/
+
+        $stack12[0] = name;
+/*88*/
+
+        msg = staticinvoke <java.lang.String: java.lang.String format(java.lang.String,java.lang.Object[])>("No domain, category, source or sink with the name %s exists.", $stack12);
+/*88*/
+/*88*/
+
+        tmp$858936682 = new java.lang.IllegalArgumentException;
+/*89*/
+
+        name = (java.lang.String) msg;
+
+        specialinvoke tmp$858936682.<java.lang.IllegalArgumentException: void <init>(java.lang.String)>(name);
+/*89*/
+
+        throw tmp$858936682;
+/*89*/
+
+     label1:
+        $stack4 = this.<rifl.utils.RIFLInformationFlowPolicy: rifl.utils.InterfaceSpecificationAccessor isa>;
+/*92*/
+
+        msg = virtualinvoke $stack4.<rifl.utils.InterfaceSpecificationAccessor: rifl.spec.Assignable getParentAssignable(rifl.spec.CatSrcSnk)>(catSrcSnk);
+/*92*/
+/*92*/
+
+        $stack8 = this.<rifl.utils.RIFLInformationFlowPolicy: rifl.spec.RIFLSpecification rifl>;
+/*93*/
+
+        $stack9 = $stack8.<rifl.spec.RIFLSpecification: java.util.Map domainAssignment>;
+/*93*/
+
+        msg = interfaceinvoke $stack9.<java.util.Map: java.lang.Object get(java.lang.Object)>(msg);
+/*93*/
+
+        $stack11 = (rifl.spec.Domain) msg;
+/*93*/
+
+        return $stack11;
+/*93*/
+    }
+

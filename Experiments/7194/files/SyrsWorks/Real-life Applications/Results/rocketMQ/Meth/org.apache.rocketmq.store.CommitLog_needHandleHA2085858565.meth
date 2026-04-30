@@ -1,0 +1,24 @@
+boolean org.apache.rocketmq.store.CommitLog:needHandleHA(org.apache.rocketmq.common.message.MessageExt messageExt)
+{
+boolean $stack2;
+  org.apache.rocketmq.store.DefaultMessageStore $stack3;
+  org.apache.rocketmq.store.config.MessageStoreConfig $stack4;
+  org.apache.rocketmq.store.config.BrokerRole $stack7;
+  org.apache.rocketmq.store.config.BrokerRole $stack9;
+  $stack2 = messageExt.isWaitStoreMsgOK();
+ if ($stack2!=0) goto label0;
+ return  0;
+ label0:$stack3=this.defaultMessageStore;
+ $stack4 = $stack3.getMessageStoreConfig();
+ $stack2 = $stack4.isDuplicationEnable();
+ if ($stack2==0) goto label1;
+ return  0;
+ label1:$stack7=org.apache.rocketmq.store.config.BrokerRole.SYNC_MASTER;
+ $stack3=this.defaultMessageStore;
+ $stack4 = $stack3.getMessageStoreConfig();
+ $stack9 = $stack4.getBrokerRole();
+ if ($stack7==$stack9) goto label2;
+ return  0;
+ label2:return  1;
+ } 
+

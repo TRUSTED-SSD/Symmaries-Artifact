@@ -1,0 +1,18 @@
+java.lang.String org.keycloak.adapters.pep.HttpAuthzRequest:getFirstParam(java.lang.String @name)
+{
+java.lang.String queryParamValue;
+  org.keycloak.adapters.OIDCHttpFacade $stack3;
+  org.keycloak.adapters.spi.HttpFacade$Request $stack4;
+  java.lang.String name;
+name=@name;
+$stack3=this.oidcFacade;
+ $stack4 = $stack3.getRequest();
+ queryParamValue = $stack4.getQueryParamValue(name);
+ if (queryParamValue==null) goto label0;
+ return  queryParamValue;
+ label0:$stack3=this.oidcFacade;
+ $stack4 = $stack3.getRequest();
+ name = $stack4.getFirstParam(name);
+ return  name;
+ } 
+

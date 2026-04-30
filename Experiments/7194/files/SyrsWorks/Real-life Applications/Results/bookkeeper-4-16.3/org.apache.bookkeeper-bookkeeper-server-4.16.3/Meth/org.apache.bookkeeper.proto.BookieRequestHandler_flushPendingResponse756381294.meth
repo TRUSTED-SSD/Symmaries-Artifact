@@ -1,0 +1,41 @@
+void org.apache.bookkeeper.proto.BookieRequestHandler:flushPendingResponse()
+{
+io.netty.buffer.ByteBuf $stack1;
+  int $stack2;
+  double $stack3;
+  double $stack8;
+  io.netty.channel.ChannelHandlerContext $stack13;
+  io.netty.channel.Channel $stack14;
+  boolean $stack15;
+  io.netty.channel.ChannelHandlerContext $stack19;
+  io.netty.channel.ChannelPromise $stack21;
+  $stack1=this.pendingSendResponses;
+ if ($stack1==null) goto label0;
+ $stack2=this.maxPendingResponsesSize;
+ $stack3=(double) $stack2;
+ $stack3=($stack3 * 0.5);
+ $stack1=this.pendingSendResponses;
+ $stack2 = $stack1.readableBytes();
+dummyClass.highSourceMut($stack2);
+ $stack8=(double) $stack2;
+ $stack8=(0.5 * $stack8);
+ $stack3=($stack3+$stack8);
+ $stack3 = java.lang.Math.max($stack3,256.0);
+ $stack2=(int) $stack3;
+ this.maxPendingResponsesSize=$stack2;
+ $stack13 = this.ctx();
+ $stack14 = $stack13.channel();
+ $stack15 = $stack14.isActive();
+ if ($stack15==0) goto label1;
+ $stack13 = this.ctx();
+ $stack1=this.pendingSendResponses;
+ $stack19=this.ctx;
+ $stack21 = $stack19.voidPromise();
+ $stack13.writeAndFlush((java.lang.Object)$stack1,$stack21);
+ goto label2;
+ label1:$stack1=this.pendingSendResponses;
+ $stack1.release();
+ label2:this.pendingSendResponses=null;
+ label0:return;
+ } 
+

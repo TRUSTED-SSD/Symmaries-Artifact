@@ -1,0 +1,45 @@
+org.apache.rocketmq.remoting.protocol.subscription.SubscriptionGroupConfig org.apache.rocketmq.client.impl.MQClientAPIImpl:getSubscriptionGroupConfig(java.lang.String brokerAddr,java.lang.String @group,long timeoutMillis)
+{
+org.apache.rocketmq.remoting.protocol.header.GetSubscriptionGroupConfigRequestHeader header;
+  org.apache.rocketmq.remoting.protocol.RemotingCommand request;
+  org.apache.rocketmq.client.ClientConfig $stack10;
+  org.apache.rocketmq.remoting.RemotingClient $stack11;
+  boolean $stack12;
+  int $stack16;
+  byte[] $stack17;
+  java.lang.Object $stack18;
+  org.apache.rocketmq.remoting.protocol.subscription.SubscriptionGroupConfig $stack19;
+  org.apache.rocketmq.client.exception.MQBrokerException $stack20;
+  java.lang.AssertionError $stack24;
+  java.lang.String group;
+group=@group;
+header=new org.apache.rocketmq.remoting.protocol.header.GetSubscriptionGroupConfigRequestHeader;
+ header#org.apache.rocketmq.remoting.protocol.header.GetSubscriptionGroupConfigRequestHeader();
+ header.setGroup(group);
+ request = org.apache.rocketmq.remoting.protocol.RemotingCommand.createRequestCommand(352,(org.apache.rocketmq.remoting.CommandCustomHeader)header);
+ $stack11=this.remotingClient;
+ $stack10=this.clientConfig;
+ $stack12 = $stack10.isVipChannelEnabled();
+ group = org.apache.rocketmq.common.MixAll.brokerVIPChannel($stack12,brokerAddr);
+ request = $stack11.invokeSync(group,request,timeoutMillis);
+ $stack12=org.apache.rocketmq.client.impl.MQClientAPIImpl.$assertionsDisabled;
+ if ($stack12!=0) goto label0;
+ if (request!=null) goto label0;
+ $stack24=new java.lang.AssertionError;
+ $stack24#java.lang.AssertionError();
+ throw $stack24;
+ label0:$stack16 = request.getCode();
+ switch [$stack16]
+if 0 goto label1;
+goto label2;
+ label1:$stack17 = request.getBody();
+ $stack18 = org.apache.rocketmq.remoting.protocol.RemotingSerializable.decode($stack17,org.apache.rocketmq.remoting.protocol.subscription.SubscriptionGroupConfig);
+ $stack19=(org.apache.rocketmq.remoting.protocol.subscription.SubscriptionGroupConfig) $stack18;
+ return  $stack19;
+ label2:$stack20=new org.apache.rocketmq.client.exception.MQBrokerException;
+ $stack16 = request.getCode();
+ group = request.getRemark();
+ $stack20#org.apache.rocketmq.client.exception.MQBrokerException($stack16,group,brokerAddr);
+ throw $stack20;
+ } 
+

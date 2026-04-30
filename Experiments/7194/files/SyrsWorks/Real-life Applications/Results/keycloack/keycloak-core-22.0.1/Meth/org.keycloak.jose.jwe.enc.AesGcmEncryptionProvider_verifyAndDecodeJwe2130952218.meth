@@ -1,0 +1,48 @@
+void org.keycloak.jose.jwe.enc.AesGcmEncryptionProvider:verifyAndDecodeJwe(org.keycloak.jose.jwe.JWE jwe)
+{
+java.security.Key aesKey;
+  int expectedAesKeyLength;
+  byte[] aad;
+  byte[] decryptedTargetContent;
+  org.keycloak.jose.jwe.JWEKeyStorage $stack7;
+  org.keycloak.jose.jwe.JWEKeyStorage$KeyUse $stack8;
+  int $stack12;
+  java.lang.String $stack13;
+  java.nio.charset.Charset $stack14;
+  byte[] $stack17;
+  java.lang.IllegalStateException $stack20;
+  java.lang.StringBuilder $stack21;
+  java.lang.IllegalArgumentException $stack29;
+  $stack7 = jwe.getKeyStorage();
+ $stack8=org.keycloak.jose.jwe.JWEKeyStorage$KeyUse.ENCRYPTION;
+ aesKey = $stack7.getCEKKey($stack8,(boolean)0);
+ if (aesKey!=null) goto label0;
+ $stack29=new java.lang.IllegalArgumentException;
+ $stack29#java.lang.IllegalArgumentException("AES CEK key not present");
+ throw $stack29;
+ label0:expectedAesKeyLength = this.getExpectedAesKeyLength();
+ aad = aesKey.getEncoded();
+ $stack12=#aad;
+ if (expectedAesKeyLength==$stack12) goto label1;
+ $stack20=new java.lang.IllegalStateException;
+ $stack21=new java.lang.StringBuilder;
+ $stack21#java.lang.StringBuilder();
+ $stack21 = $stack21.append("Length of aes key should be ");
+ $stack21 = $stack21.append(expectedAesKeyLength);
+ $stack21 = $stack21.append(", but was ");
+ aad = aesKey.getEncoded();
+ expectedAesKeyLength=#aad;
+ $stack21 = $stack21.append(expectedAesKeyLength);
+ $stack13 = $stack21.toString();
+ $stack20#java.lang.IllegalStateException($stack13);
+ throw $stack20;
+ label1:$stack13 = jwe.getBase64Header();
+ $stack14=java.nio.charset.StandardCharsets.UTF_8;
+ aad = $stack13.getBytes($stack14);
+ decryptedTargetContent = this#org.keycloak.jose.jwe.enc.AesGcmEncryptionProvider:getAeadDecryptedTargetContent(jwe);
+ $stack17 = jwe.getInitializationVector();
+ aad = this#org.keycloak.jose.jwe.enc.AesGcmEncryptionProvider:decryptBytes(decryptedTargetContent,$stack17,aesKey,aad);
+ jwe.content(aad);
+ return;
+ } 
+

@@ -1,0 +1,48 @@
+int com.google.zxing.datamatrix.decoder.BitMatrixParser:readCorner2(int numRows,int numColumns)
+{
+int currentByte;
+  int $stack4;
+  boolean $stack5;
+  currentByte=0;
+ $stack4=(numRows-3);
+ $stack5 = this#com.google.zxing.datamatrix.decoder.BitMatrixParser:readModule($stack4,0,numRows,numColumns);
+ if ($stack5==0) goto label0;
+ currentByte=(0 | 1);
+ label0:currentByte=(currentByte<<1);
+ $stack4=(numRows-2);
+ $stack5 = this#com.google.zxing.datamatrix.decoder.BitMatrixParser:readModule($stack4,0,numRows,numColumns);
+ if ($stack5==0) goto label1;
+ currentByte=(currentByte | 1);
+ label1:currentByte=(currentByte<<1);
+ $stack4=(numRows-1);
+ $stack5 = this#com.google.zxing.datamatrix.decoder.BitMatrixParser:readModule($stack4,0,numRows,numColumns);
+ if ($stack5==0) goto label2;
+ currentByte=(currentByte | 1);
+ label2:currentByte=(currentByte<<1);
+ $stack4=(numColumns-4);
+ $stack5 = this#com.google.zxing.datamatrix.decoder.BitMatrixParser:readModule(0,$stack4,numRows,numColumns);
+ if ($stack5==0) goto label3;
+ currentByte=(currentByte | 1);
+ label3:currentByte=(currentByte<<1);
+ $stack4=(numColumns-3);
+ $stack5 = this#com.google.zxing.datamatrix.decoder.BitMatrixParser:readModule(0,$stack4,numRows,numColumns);
+ if ($stack5==0) goto label4;
+ currentByte=(currentByte | 1);
+ label4:currentByte=(currentByte<<1);
+ $stack4=(numColumns-2);
+ $stack5 = this#com.google.zxing.datamatrix.decoder.BitMatrixParser:readModule(0,$stack4,numRows,numColumns);
+ if ($stack5==0) goto label5;
+ currentByte=(currentByte | 1);
+ label5:currentByte=(currentByte<<1);
+ $stack4=(numColumns-1);
+ $stack5 = this#com.google.zxing.datamatrix.decoder.BitMatrixParser:readModule(0,$stack4,numRows,numColumns);
+ if ($stack5==0) goto label6;
+ currentByte=(currentByte | 1);
+ label6:currentByte=(currentByte<<1);
+ $stack4=(numColumns-1);
+ $stack5 = this#com.google.zxing.datamatrix.decoder.BitMatrixParser:readModule(1,$stack4,numRows,numColumns);
+ if ($stack5==0) goto label7;
+ currentByte=(currentByte | 1);
+ label7:return  currentByte;
+ } 
+

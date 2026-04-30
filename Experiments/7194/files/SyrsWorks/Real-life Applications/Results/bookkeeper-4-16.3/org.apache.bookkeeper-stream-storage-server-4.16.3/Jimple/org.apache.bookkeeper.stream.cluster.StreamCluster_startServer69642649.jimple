@@ -1,0 +1,361 @@
+    private org.apache.bookkeeper.common.component.LifecycleComponent startServer() throws java.lang.Exception
+    {
+        org.apache.bookkeeper.stream.cluster.StreamCluster this;
+        int bookiePort, grpcPort, retries, $stack15;
+        boolean success;
+        java.lang.Object server, serverConf;
+        java.io.File bkDir, rangesStoreDir, $stack37, tmp$1417429934;
+        org.apache.bookkeeper.common.net.ServiceURI $stack17;
+        org.apache.bookkeeper.stream.cluster.StreamClusterSpec $stack19;
+        org.apache.commons.configuration.CompositeConfiguration $stack20;
+        org.apache.bookkeeper.conf.ServerConfiguration $stack21;
+        java.lang.StringBuilder $stack25;
+        java.lang.String $stack28;
+        java.lang.String[] $stack31;
+        java.lang.Object[] $stack47;
+        org.slf4j.Logger $stack48;
+        java.lang.Integer $stack51, $stack58;
+        java.util.List $stack59;
+        org.apache.bookkeeper.stream.proto.common.Endpoint $stack60;
+        java.lang.Throwable $stack62, $stack64;
+        java.net.BindException $stack70;
+        org.apache.bookkeeper.stream.storage.conf.StorageConfiguration tmp$1506218424;
+        java.io.IOException tmp$2117120919;
+        org.apache.bookkeeper.common.component.LifecycleComponent tmp$1388862463;
+
+        this := @this: org.apache.bookkeeper.stream.cluster.StreamCluster;
+
+        success = 0;
+/*164*/
+
+        retries = 0;
+/*165*/
+
+     label01:
+        if 0 != 0 goto label13;
+/*167*/
+
+        server = this;
+/*168*/
+
+        entermonitor this;
+/*168*/
+
+     label02:
+        bookiePort = this.<org.apache.bookkeeper.stream.cluster.StreamCluster: int nextBookiePort>;
+/*169*/
+
+        grpcPort = bookiePort + 1;
+/*169*/
+
+        this.<org.apache.bookkeeper.stream.cluster.StreamCluster: int nextBookiePort> = grpcPort;
+/*169*/
+
+        grpcPort = this.<org.apache.bookkeeper.stream.cluster.StreamCluster: int nextGrpcPort>;
+/*170*/
+
+        $stack15 = grpcPort + 1;
+/*170*/
+
+        this.<org.apache.bookkeeper.stream.cluster.StreamCluster: int nextGrpcPort> = $stack15;
+/*170*/
+
+        exitmonitor this;
+/*171*/
+
+     label03:
+        goto label06;
+/*171*/
+
+     label04:
+        $stack62 := @caughtexception;
+/*195*/
+
+        serverConf = $stack62;
+/*195*/
+
+        exitmonitor this;
+/*195*/
+
+     label05:
+        $stack62 = (java.lang.Throwable) $stack62;
+
+        throw $stack62;
+/*195*/
+
+     label06:
+        server = null;
+/*172*/
+
+     label07:
+        $stack17 = this.<org.apache.bookkeeper.stream.cluster.StreamCluster: org.apache.bookkeeper.common.net.ServiceURI metadataServiceUri>;
+/*174*/
+
+        serverConf = staticinvoke <org.apache.bookkeeper.stream.cluster.StreamCluster: org.apache.bookkeeper.conf.ServerConfiguration newBookieConfiguration(org.apache.bookkeeper.common.net.ServiceURI)>($stack17);
+/*174*/
+/*174*/
+
+        $stack19 = this.<org.apache.bookkeeper.stream.cluster.StreamCluster: org.apache.bookkeeper.stream.cluster.StreamClusterSpec spec>;
+/*175*/
+
+        $stack20 = virtualinvoke $stack19.<org.apache.bookkeeper.stream.cluster.StreamClusterSpec: org.apache.commons.configuration.CompositeConfiguration baseConf()>();
+/*175*/
+
+        $stack21 = (org.apache.bookkeeper.conf.ServerConfiguration) serverConf;
+
+        virtualinvoke $stack21.<org.apache.bookkeeper.conf.ServerConfiguration: void loadConf(org.apache.commons.configuration.CompositeConfiguration)>($stack20);
+/*175*/
+
+        $stack21 = (org.apache.bookkeeper.conf.ServerConfiguration) serverConf;
+
+        virtualinvoke $stack21.<org.apache.bookkeeper.conf.ServerConfiguration: org.apache.bookkeeper.conf.ServerConfiguration setBookiePort(int)>(bookiePort);
+/*176*/
+
+        $stack37 = new java.io.File;
+/*177*/
+
+        bkDir = $stack37;
+
+        $stack19 = this.<org.apache.bookkeeper.stream.cluster.StreamCluster: org.apache.bookkeeper.stream.cluster.StreamClusterSpec spec>;
+/*177*/
+
+        rangesStoreDir = virtualinvoke $stack19.<org.apache.bookkeeper.stream.cluster.StreamClusterSpec: java.io.File storageRootDir()>();
+/*177*/
+
+        $stack25 = new java.lang.StringBuilder;
+/*177*/
+
+        specialinvoke $stack25.<java.lang.StringBuilder: void <init>()>();
+/*177*/
+
+        $stack25 = virtualinvoke $stack25.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>("bookie_");
+/*177*/
+
+        $stack25 = virtualinvoke $stack25.<java.lang.StringBuilder: java.lang.StringBuilder append(int)>(bookiePort);
+/*177*/
+
+        $stack28 = virtualinvoke $stack25.<java.lang.StringBuilder: java.lang.String toString()>();
+/*177*/
+
+        specialinvoke $stack37.<java.io.File: void <init>(java.io.File,java.lang.String)>(rangesStoreDir, $stack28);
+/*177*/
+
+        bkDir = $stack37;
+/*177*/
+
+        $stack28 = virtualinvoke $stack37.<java.io.File: java.lang.String getPath()>();
+/*178*/
+
+        $stack21 = (org.apache.bookkeeper.conf.ServerConfiguration) serverConf;
+
+        virtualinvoke $stack21.<org.apache.bookkeeper.conf.ServerConfiguration: org.apache.bookkeeper.conf.ServerConfiguration setJournalDirName(java.lang.String)>($stack28);
+/*178*/
+
+        $stack31 = newarray (java.lang.String)[1];
+/*179*/
+
+        $stack28 = virtualinvoke $stack37.<java.io.File: java.lang.String getPath()>();
+/*179*/
+
+        $stack31[0] = $stack28;
+/*179*/
+
+        $stack21 = (org.apache.bookkeeper.conf.ServerConfiguration) serverConf;
+
+        virtualinvoke $stack21.<org.apache.bookkeeper.conf.ServerConfiguration: org.apache.bookkeeper.conf.ServerConfiguration setLedgerDirNames(java.lang.String[])>($stack31);
+/*179*/
+
+        tmp$1417429934 = new java.io.File;
+/*181*/
+
+        rangesStoreDir = tmp$1417429934;
+
+        $stack19 = this.<org.apache.bookkeeper.stream.cluster.StreamCluster: org.apache.bookkeeper.stream.cluster.StreamClusterSpec spec>;
+/*181*/
+
+        $stack37 = virtualinvoke $stack19.<org.apache.bookkeeper.stream.cluster.StreamClusterSpec: java.io.File storageRootDir()>();
+/*181*/
+
+        $stack25 = new java.lang.StringBuilder;
+/*181*/
+
+        specialinvoke $stack25.<java.lang.StringBuilder: void <init>()>();
+/*181*/
+
+        $stack25 = virtualinvoke $stack25.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>("ranges_");
+/*181*/
+
+        $stack25 = virtualinvoke $stack25.<java.lang.StringBuilder: java.lang.StringBuilder append(int)>(grpcPort);
+/*181*/
+
+        $stack28 = virtualinvoke $stack25.<java.lang.StringBuilder: java.lang.String toString()>();
+/*181*/
+
+        specialinvoke tmp$1417429934.<java.io.File: void <init>(java.io.File,java.lang.String)>($stack37, $stack28);
+/*181*/
+
+        rangesStoreDir = tmp$1417429934;
+/*181*/
+
+        tmp$1506218424 = new org.apache.bookkeeper.stream.storage.conf.StorageConfiguration;
+/*182*/
+
+        $stack20 = (org.apache.commons.configuration.CompositeConfiguration) serverConf;
+
+        specialinvoke tmp$1506218424.<org.apache.bookkeeper.stream.storage.conf.StorageConfiguration: void <init>(org.apache.commons.configuration.CompositeConfiguration)>($stack20);
+/*182*/
+
+        $stack31 = newarray (java.lang.String)[1];
+/*183*/
+
+        $stack28 = virtualinvoke tmp$1417429934.<java.io.File: java.lang.String getPath()>();
+/*183*/
+
+        $stack31[0] = $stack28;
+/*183*/
+
+        virtualinvoke tmp$1506218424.<org.apache.bookkeeper.stream.storage.conf.StorageConfiguration: org.apache.bookkeeper.stream.storage.conf.StorageConfiguration setRangeStoreDirNames(java.lang.String[])>($stack31);
+/*183*/
+
+        $stack48 = <org.apache.bookkeeper.stream.cluster.StreamCluster: org.slf4j.Logger log>;
+/*187*/
+
+        $stack47 = newarray (java.lang.Object)[4];
+/*185*/
+
+        $stack51 = staticinvoke <java.lang.Integer: java.lang.Integer valueOf(int)>(bookiePort);
+/*187*/
+
+        $stack47[0] = $stack51;
+/*187*/
+
+        $stack51 = staticinvoke <java.lang.Integer: java.lang.Integer valueOf(int)>(grpcPort);
+/*187*/
+
+        $stack47[1] = $stack51;
+/*187*/
+
+        $stack47[2] = bkDir;
+/*187*/
+
+        $stack47[3] = tmp$1417429934;
+/*187*/
+
+        interfaceinvoke $stack48.<org.slf4j.Logger: void info(java.lang.String,java.lang.Object[])>("Attempting to start storage server at (bookie port = {}, grpc port = {}) : bkDir = {}, rangesStoreDir = {}", $stack47);
+/*185*/
+
+        $stack20 = (org.apache.commons.configuration.CompositeConfiguration) serverConf;
+
+        server = staticinvoke <org.apache.bookkeeper.stream.server.StorageServer: org.apache.bookkeeper.common.component.LifecycleComponent buildStorageServer(org.apache.commons.configuration.CompositeConfiguration,int)>($stack20, grpcPort);
+/*188*/
+/*188*/
+
+        tmp$1388862463 = (org.apache.bookkeeper.common.component.LifecycleComponent) server;
+
+        interfaceinvoke tmp$1388862463.<org.apache.bookkeeper.common.component.LifecycleComponent: void start()>();
+/*191*/
+
+        $stack48 = <org.apache.bookkeeper.stream.cluster.StreamCluster: org.slf4j.Logger log>;
+/*193*/
+
+        $stack51 = staticinvoke <java.lang.Integer: java.lang.Integer valueOf(int)>(bookiePort);
+/*193*/
+
+        $stack58 = staticinvoke <java.lang.Integer: java.lang.Integer valueOf(int)>(grpcPort);
+/*193*/
+
+        interfaceinvoke $stack48.<org.slf4j.Logger: void info(java.lang.String,java.lang.Object,java.lang.Object)>("Started storage server at (bookie port = {}, grpc port = {})", $stack51, $stack58);
+/*192*/
+
+        $stack59 = this.<org.apache.bookkeeper.stream.cluster.StreamCluster: java.util.List rpcEndpoints>;
+/*194*/
+
+        $stack60 = staticinvoke <org.apache.bookkeeper.stream.server.StorageServer: org.apache.bookkeeper.stream.proto.common.Endpoint createLocalEndpoint(int,boolean)>(grpcPort, 0);
+/*194*/
+
+        interfaceinvoke $stack59.<java.util.List: boolean add(java.lang.Object)>($stack60);
+/*194*/
+
+     label08:
+        tmp$1388862463 = (org.apache.bookkeeper.common.component.LifecycleComponent) server;
+
+        return tmp$1388862463;
+/*195*/
+
+     label09:
+        $stack64 := @caughtexception;
+/*195*/
+
+        serverConf = $stack64;
+/*196*/
+
+        $stack48 = <org.apache.bookkeeper.stream.cluster.StreamCluster: org.slf4j.Logger log>;
+/*197*/
+
+        $stack62 = (java.lang.Throwable) $stack64;
+
+        interfaceinvoke $stack48.<org.slf4j.Logger: void error(java.lang.String,java.lang.Throwable)>("Failed to start storage server", $stack62);
+/*197*/
+
+        if null == server goto label10;
+/*198*/
+
+        tmp$1388862463 = (org.apache.bookkeeper.common.component.LifecycleComponent) server;
+
+        interfaceinvoke tmp$1388862463.<org.apache.bookkeeper.common.component.LifecycleComponent: void stop()>();
+/*199*/
+
+     label10:
+        $stack62 = (java.lang.Throwable) $stack64;
+
+        $stack62 = virtualinvoke $stack62.<java.lang.Throwable: java.lang.Throwable getCause()>();
+/*201*/
+
+        success = $stack62 instanceof java.net.BindException;
+/*201*/
+
+        if success == 0 goto label11;
+/*201*/
+
+        retries = retries + 1;
+/*202*/
+
+        if retries <= 20 goto label12;
+/*203*/
+
+        $stack62 = (java.lang.Throwable) $stack64;
+
+        $stack62 = virtualinvoke $stack62.<java.lang.Throwable: java.lang.Throwable getCause()>();
+/*204*/
+
+        $stack70 = (java.net.BindException) $stack62;
+/*204*/
+
+        throw $stack70;
+/*204*/
+
+     label11:
+        $stack62 = (java.lang.Throwable) $stack64;
+
+        throw $stack62;
+/*207*/
+
+     label12:
+        goto label01;
+/*210*/
+
+     label13:
+        tmp$2117120919 = new java.io.IOException;
+/*211*/
+
+        specialinvoke tmp$2117120919.<java.io.IOException: void <init>(java.lang.String)>("Failed to start any storage server.");
+/*211*/
+
+        throw tmp$2117120919;
+/*211*/
+
+        catch java.lang.Throwable from label02 to label03 with label04;
+        catch java.lang.Throwable from label04 to label05 with label04;
+        catch java.lang.Throwable from label07 to label08 with label09;
+    }
+

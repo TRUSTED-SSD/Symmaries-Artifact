@@ -1,0 +1,39 @@
+digraph G {
+  node [shape=box, ];
+  "pc0_js1" [label="〈$i1 = i0 + 1, js1〉", ];
+  "pc1_js1" [label="〈$b2 = r0[$i1], js1〉", ];
+  "pc2_js1" [label="〈$s5 = $b2 & 255, js1〉", ];
+  "pc3_js1" [label="〈$b3 = r0[i0], js1〉", ];
+  "pc4_js1" [label="〈$i4 = $b3 << 8, js1〉", ];
+  "pc5_js1" [label="〈$i6 = $s5 + $i4, js1〉", ];
+  "pc6_js1" [label="〈$c7 = (char) $i6, js1〉", ];
+  "pc7_js1" [label="〈return $c7, js1〉", ];
+  "pc8_js1" [label="〈sink, js1〉\n\
+obj_level(r0) ⊑ ret(obj_level(r0))' ∧ (ϕ ≠ S7 ∨ pc ⊔ level($c7) ⊑ ret(level())')",
+             ];
+  
+  
+  "pc0_js1" -> "pc1_js1" [label="tt,\n\
+{level($i1) := pc ⊔ level(i0)}", ];
+  "pc1_js1" -> "pc2_js1" [label="tt,\n\
+{level($b2) := pc ⊔ level(i0) ⊔ level(r0) ⊔ obj_level(r0)}",
+                          ];
+  "pc2_js1" -> "pc3_js1" [label="tt,\n\
+{level($s5) := pc ⊔ level(i0) ⊔ level(r0) ⊔ obj_level(r0)}",
+                          ];
+  "pc3_js1" -> "pc4_js1" [label="tt,\n\
+{level($b3) := pc ⊔ level(i0) ⊔ level(r0) ⊔ obj_level(r0)}",
+                          ];
+  "pc4_js1" -> "pc5_js1" [label="tt,\n\
+{level($i4) := pc ⊔ level(i0) ⊔ level(r0) ⊔ obj_level(r0)}",
+                          ];
+  "pc5_js1" -> "pc6_js1" [label="tt,\n\
+{level($i6) := pc ⊔ level(i0) ⊔ level(r0) ⊔ obj_level(r0)}",
+                          ];
+  "pc6_js1" -> "pc7_js1" [label="tt,\n\
+{level($c7) := pc ⊔ level(i0) ⊔ level(r0) ⊔ obj_level(r0)}",
+                          ];
+  "pc7_js1" -> "pc8_js1" [label="tt,\n\
+{ϕ := S7}", ];
+  
+  }

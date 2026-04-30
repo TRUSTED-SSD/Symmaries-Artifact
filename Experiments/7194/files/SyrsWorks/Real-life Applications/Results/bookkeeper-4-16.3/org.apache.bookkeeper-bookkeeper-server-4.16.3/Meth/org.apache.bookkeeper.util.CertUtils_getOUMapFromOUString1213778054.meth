@@ -1,0 +1,40 @@
+static java.util.Map org.apache.bookkeeper.util.CertUtils:getOUMapFromOUString(java.lang.String @ou)
+{
+java.util.HashMap ouMap;
+  java.lang.String[] l3;
+  int l4;
+  int l5;
+  java.util.regex.Matcher matcher;
+  java.util.Map $stack9;
+  java.util.regex.Pattern $stack10;
+  boolean $stack15;
+  int $stack18;
+  java.lang.String $stack21;
+  java.lang.String ou;
+ou=@ou;
+ouMap=new java.util.HashMap;
+ ouMap#java.util.HashMap();
+ if (ou==null) goto label0;
+ $stack10=org.apache.bookkeeper.util.CertUtils.OU_VALUES_SPLITTER;
+ l3 = $stack10.split((java.lang.CharSequence)ou);
+ l4=#l3;
+ l5=0;
+ label1:if (l5>=l4) goto label0;
+ ou=l3[l5];
+ $stack10=org.apache.bookkeeper.util.CertUtils.OU_GENERAL_NAME_REGEX;
+ matcher = $stack10.matcher((java.lang.CharSequence)ou);
+ $stack15 = matcher.find();
+ if ($stack15==0) goto label2;
+ $stack18 = matcher.groupCount();
+ if ($stack18!=2) goto label2;
+ ou = matcher.group(1);
+ ou = ou.trim();
+ $stack21 = matcher.group(2);
+ $stack21 = $stack21.trim();
+ ouMap.put((java.lang.Object)ou,(java.lang.Object)$stack21);
+ label2:l5=(l5+1);
+ goto label1;
+ label0:$stack9 = java.util.Collections.unmodifiableMap((java.util.Map)ouMap);
+ return  $stack9;
+ } 
+

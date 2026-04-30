@@ -1,0 +1,38 @@
+java.util.Set org.apache.bookkeeper.bookie.datainteg.EntryCopierImpl$SinBin:getErrorBookies()
+{
+long now;
+  java.util.Iterator iterator;
+  com.google.common.base.Ticker $stack4;
+  java.util.concurrent.TimeUnit $stack5;
+  java.util.concurrent.ConcurrentMap $stack8;
+  java.util.Set $stack9;
+  boolean $stack11;
+  java.lang.Object $stack14;
+  java.util.Map$Entry $stack15;
+  java.lang.Long $stack17;
+  long $stack18;
+  byte $stack19;
+  $stack5=java.util.concurrent.TimeUnit.NANOSECONDS;
+ $stack4=this.ticker;
+ now = $stack4.read();
+dummyClass.highSourceMut(now);
+ now = $stack5.toMillis(now);
+ $stack8=this.errorBookies;
+ $stack9 = $stack8.entrySet();
+ iterator = $stack9.iterator();
+ label0:$stack11 = iterator.hasNext();
+ if ($stack11==0) goto label1;
+ $stack14 = iterator.next();
+ $stack15=(java.util.Map$Entry) $stack14;
+ $stack14 = $stack15.getValue();
+ $stack17=(java.lang.Long) $stack14;
+ $stack18 = $stack17.longValue();
+ $stack19=($stack18 cmp now);
+ if ($stack19>=0) goto label0;
+ iterator.remove();
+ goto label0;
+ label1:$stack8=this.errorBookies;
+ $stack9 = $stack8.keySet();
+ return  $stack9;
+ } 
+

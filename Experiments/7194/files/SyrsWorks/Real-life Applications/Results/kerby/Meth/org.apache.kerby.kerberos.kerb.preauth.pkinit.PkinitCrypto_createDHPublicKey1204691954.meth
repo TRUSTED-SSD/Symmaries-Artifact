@@ -1,0 +1,42 @@
+static javax.crypto.interfaces.DHPublicKey org.apache.kerby.kerberos.kerb.preauth.pkinit.PkinitCrypto:createDHPublicKey(java.math.BigInteger p,java.math.BigInteger g,java.math.BigInteger y)
+{
+javax.crypto.spec.DHPublicKeySpec dhPublicKeySpec;
+  java.security.KeyFactory keyFactory;
+  javax.crypto.interfaces.DHPublicKey e;
+  java.security.PublicKey $stack9;
+  java.security.spec.InvalidKeySpecException $stack10;
+  java.lang.StringBuilder $stack11;
+  org.slf4j.Logger $stack12;
+  java.lang.String $stack15;
+  java.security.NoSuchAlgorithmException $stack17;
+  dhPublicKeySpec=new javax.crypto.spec.DHPublicKeySpec;
+ dhPublicKeySpec#javax.crypto.spec.DHPublicKeySpec(y,p,g);
+ keyFactory=null;
+ label0:keyFactory = java.security.KeyFactory.getInstance("DH");
+ label1:goto label2;
+ label3:$stack17 = catch;
+ $stack12=org.apache.kerby.kerberos.kerb.preauth.pkinit.PkinitCrypto.LOG;
+ $stack11=new java.lang.StringBuilder;
+ $stack11#java.lang.StringBuilder();
+ $stack11 = $stack11.append("Fail to get dh instance. ");
+ $stack11 = $stack11.append((java.lang.Object)$stack17);
+ $stack15 = $stack11.toString();
+ $stack12.error($stack15);
+ label2:e=null;
+ label4:if (keyFactory==null) goto label5;
+ $stack9 = keyFactory.generatePublic((java.security.spec.KeySpec)dhPublicKeySpec);
+ e=(javax.crypto.interfaces.DHPublicKey) $stack9;
+ label5:goto label6;
+ label7:$stack10 = catch;
+ $stack12=org.apache.kerby.kerberos.kerb.preauth.pkinit.PkinitCrypto.LOG;
+ $stack11=new java.lang.StringBuilder;
+ $stack11#java.lang.StringBuilder();
+ $stack11 = $stack11.append("Fail to generate public key. ");
+ $stack11 = $stack11.append((java.lang.Object)$stack10);
+ $stack15 = $stack11.toString();
+ $stack12.error($stack15);
+ label6:return  e;
+ catch java.security.NoSuchAlgorithmException: label0 - label1 : label3;
+catch java.security.spec.InvalidKeySpecException: label4 - label5 : label7;
+} 
+

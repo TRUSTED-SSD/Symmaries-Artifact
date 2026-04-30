@@ -1,0 +1,21 @@
+static int com.google.zxing.pdf417.encoder.PDF417HighLevelEncoder:determineConsecutiveDigitCount(com.google.zxing.common.ECIInput input,int startpos)
+{
+int count;
+  int len;
+  boolean $stack7;
+  char $stack8;
+  count=0;
+ len = input.length();
+ if (startpos>=len) goto label0;
+ label1:if (startpos>=len) goto label0;
+ $stack7 = input.isECI(startpos);
+ if ($stack7!=0) goto label0;
+ $stack8 = input.charAt(startpos);
+ $stack7 = com.google.zxing.pdf417.encoder.PDF417HighLevelEncoder.isDigit($stack8);
+ if ($stack7==0) goto label0;
+ count=(count+1);
+ startpos=(startpos+1);
+ goto label1;
+ label0:return  count;
+ } 
+

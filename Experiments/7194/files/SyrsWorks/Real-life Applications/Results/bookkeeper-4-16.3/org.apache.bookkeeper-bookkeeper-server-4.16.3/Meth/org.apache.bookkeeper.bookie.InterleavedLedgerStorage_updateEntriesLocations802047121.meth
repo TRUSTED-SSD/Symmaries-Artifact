@@ -1,0 +1,41 @@
+void org.apache.bookkeeper.bookie.InterleavedLedgerStorage:updateEntriesLocations(java.lang.Iterable locations)
+{
+java.util.Iterator l2;
+  org.apache.bookkeeper.bookie.EntryLocation l;
+  org.apache.bookkeeper.bookie.Bookie$NoLedgerException e;
+  boolean $stack6;
+  java.lang.Object $stack7;
+  long $stack8;
+  long $stack9;
+  long $stack10;
+  org.apache.bookkeeper.bookie.LedgerCache $stack11;
+  org.slf4j.Logger $stack14;
+  java.lang.Long $stack19;
+  java.lang.Long $stack21;
+  l2 = locations.iterator();
+ label0:$stack6 = l2.hasNext();
+ if ($stack6==0) goto label1;
+ $stack7 = l2.next();
+ l=(org.apache.bookkeeper.bookie.EntryLocation) $stack7;
+ label2:$stack11=this.ledgerCache;
+ $stack10=l.ledger;
+ $stack9=l.entry;
+ $stack8=l.location;
+ $stack11.putEntryOffset($stack10,$stack9,$stack8);
+ label3:goto label4;
+ label5:e = catch;
+ $stack14=org.apache.bookkeeper.bookie.InterleavedLedgerStorage.LOG;
+ $stack6 = $stack14.isDebugEnabled();
+ if ($stack6==0) goto label4;
+ $stack14=org.apache.bookkeeper.bookie.InterleavedLedgerStorage.LOG;
+ $stack8=l.ledger;
+ $stack19 = java.lang.Long.valueOf($stack8);
+ $stack8=l.entry;
+ $stack21 = java.lang.Long.valueOf($stack8);
+ dummyClass.lowSink("Compaction failed for deleted ledger ledger: {} entry: {}");
+$stack14.debug("Compaction failed for deleted ledger ledger: {} entry: {}",(java.lang.Object)$stack19,(java.lang.Object)$stack21);
+ label4:goto label0;
+ label1:return;
+ catch org.apache.bookkeeper.bookie.Bookie$NoLedgerException: label2 - label3 : label5;
+} 
+

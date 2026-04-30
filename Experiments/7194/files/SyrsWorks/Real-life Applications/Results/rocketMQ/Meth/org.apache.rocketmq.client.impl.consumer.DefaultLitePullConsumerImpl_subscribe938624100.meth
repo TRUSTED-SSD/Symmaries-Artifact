@@ -1,0 +1,49 @@
+void org.apache.rocketmq.client.impl.consumer.DefaultLitePullConsumerImpl:subscribe(java.lang.String topic,java.lang.String subExpression,org.apache.rocketmq.client.consumer.MessageQueueListener messageQueueListener)
+{
+org.apache.rocketmq.remoting.protocol.heartbeat.SubscriptionData subscriptionData;
+  boolean $stack5;
+  org.apache.rocketmq.client.impl.consumer.DefaultLitePullConsumerImpl$SubscriptionType $stack6;
+  org.apache.rocketmq.client.impl.consumer.RebalanceImpl $stack8;
+  java.util.concurrent.ConcurrentMap $stack9;
+  org.apache.rocketmq.client.impl.consumer.DefaultLitePullConsumerImpl$3 $stack11;
+  org.apache.rocketmq.client.consumer.DefaultLitePullConsumer $stack12;
+  org.apache.rocketmq.client.impl.consumer.AssignedMessageQueue $stack14;
+  org.apache.rocketmq.common.ServiceState $stack15;
+  org.apache.rocketmq.common.ServiceState $stack16;
+  org.apache.rocketmq.client.impl.factory.MQClientInstance $stack17;
+  java.lang.IllegalArgumentException $stack18;
+  java.lang.Exception $stack19;
+  org.apache.rocketmq.client.exception.MQClientException $stack20;
+  label0:$stack5 = org.apache.commons.lang3.StringUtils.isEmpty((java.lang.CharSequence)topic);
+ if ($stack5==0) goto label1;
+ $stack18=new java.lang.IllegalArgumentException;
+ $stack18#java.lang.IllegalArgumentException("Topic can not be null or empty.");
+ throw $stack18;
+ label1:$stack6=org.apache.rocketmq.client.impl.consumer.DefaultLitePullConsumerImpl$SubscriptionType.SUBSCRIBE;
+ this#org.apache.rocketmq.client.impl.consumer.DefaultLitePullConsumerImpl:setSubscriptionType($stack6);
+ subscriptionData = org.apache.rocketmq.remoting.protocol.filter.FilterAPI.buildSubscriptionData(topic,subExpression);
+ $stack8=this.rebalanceImpl;
+ $stack9 = $stack8.getSubscriptionInner();
+ $stack9.put((java.lang.Object)topic,(java.lang.Object)subscriptionData);
+ $stack12=this.defaultLitePullConsumer;
+ $stack11=new org.apache.rocketmq.client.impl.consumer.DefaultLitePullConsumerImpl$3;
+ $stack11#org.apache.rocketmq.client.impl.consumer.DefaultLitePullConsumerImpl$3(this,messageQueueListener);
+ $stack12.setMessageQueueListener((org.apache.rocketmq.client.consumer.MessageQueueListener)$stack11);
+ $stack14=this.assignedMessageQueue;
+ $stack8=this.rebalanceImpl;
+ $stack14.setRebalanceImpl($stack8);
+ $stack16=this.serviceState;
+ $stack15=org.apache.rocketmq.common.ServiceState.RUNNING;
+ if ($stack16!=$stack15) goto label2;
+ $stack17=this.mQClientFactory;
+ $stack17.sendHeartbeatToAllBrokerWithLock();
+ this#org.apache.rocketmq.client.impl.consumer.DefaultLitePullConsumerImpl:updateTopicSubscribeInfoWhenSubscriptionChanged();
+ label2:goto label3;
+ label4:$stack19 = catch;
+ $stack20=new org.apache.rocketmq.client.exception.MQClientException;
+ $stack20#org.apache.rocketmq.client.exception.MQClientException("subscribe exception",(java.lang.Throwable)$stack19);
+ throw $stack20;
+ label3:return;
+ catch java.lang.Exception: label0 - label2 : label4;
+} 
+

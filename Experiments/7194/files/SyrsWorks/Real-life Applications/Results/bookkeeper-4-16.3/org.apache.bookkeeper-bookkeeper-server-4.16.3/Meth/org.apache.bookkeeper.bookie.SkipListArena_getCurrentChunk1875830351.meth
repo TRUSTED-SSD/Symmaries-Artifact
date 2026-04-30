@@ -1,0 +1,23 @@
+org.apache.bookkeeper.bookie.SkipListArena$Chunk org.apache.bookkeeper.bookie.SkipListArena:getCurrentChunk()
+{
+org.apache.bookkeeper.bookie.SkipListArena$Chunk c;
+  java.util.concurrent.atomic.AtomicReference $stack2;
+  java.lang.Object $stack3;
+  int $stack5;
+  boolean $stack7;
+  label0:$stack2=this.curChunk;
+ $stack3 = $stack2.get();
+ c=(org.apache.bookkeeper.bookie.SkipListArena$Chunk) $stack3;
+ if (c==null) goto label1;
+ return  c;
+ label1:c=new org.apache.bookkeeper.bookie.SkipListArena$Chunk;
+ $stack5=this.chunkSize;
+ c#org.apache.bookkeeper.bookie.SkipListArena$Chunk($stack5,null);
+ $stack2=this.curChunk;
+ $stack7 = $stack2.compareAndSet(null,(java.lang.Object)c);
+ if ($stack7==0) goto label2;
+ c#org.apache.bookkeeper.bookie.SkipListArena$Chunk();
+ return  c;
+ label2:goto label0;
+ } 
+

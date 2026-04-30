@@ -1,0 +1,42 @@
+void org.apache.rocketmq.store.DefaultMessageStore:lambda$asyncPutMessage$0(long beginTime,org.apache.rocketmq.common.message.MessageExtBrokerInner msg,org.apache.rocketmq.store.PutMessageResult result)
+{
+org.apache.rocketmq.common.SystemClock $stack7;
+  long $stack8;
+  byte $stack9;
+  org.apache.rocketmq.store.StoreStatsService $stack10;
+  java.util.concurrent.atomic.LongAdder $stack12;
+  boolean $stack13;
+  java.lang.Object[] $stack16;
+  org.apache.rocketmq.logging.org.slf4j.Logger $stack17;
+  java.lang.Long $stack20;
+  java.lang.String $stack22;
+  byte[] $stack24;
+  int $stack25;
+  java.lang.Integer $stack26;
+  $stack7 = this.getSystemClock();
+ $stack8 = $stack7.now();
+ beginTime=($stack8-beginTime);
+ $stack9=(beginTime cmp 500L);
+ if ($stack9<=0) goto label0;
+ $stack17=org.apache.rocketmq.store.DefaultMessageStore.LOGGER;
+ $stack16=new java.lang.Object[3];
+ $stack20 = java.lang.Long.valueOf(beginTime);
+ $stack16[0]=$stack20;
+ $stack22 = msg.getTopic();
+ $stack16[1]=$stack22;
+ $stack24 = msg.getBody();
+ $stack25=#$stack24;
+ $stack26 = java.lang.Integer.valueOf($stack25);
+ $stack16[2]=$stack26;
+ $stack17.warn("DefaultMessageStore#putMessage: CommitLog#putMessage cost {}ms, topic={}, bodyLength={}",$stack16);
+ label0:$stack10=this.storeStatsService;
+ $stack10.setPutMessageEntireTimeMax(beginTime);
+ if (null==result) goto label1;
+ $stack13 = result.isOk();
+ if ($stack13!=0) goto label2;
+ label1:$stack10=this.storeStatsService;
+ $stack12 = $stack10.getPutMessageFailedTimes();
+ $stack12.add(1L);
+ label2:return;
+ } 
+

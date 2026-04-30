@@ -1,0 +1,45 @@
+com.google.zxing.ResultPoint[] com.google.zxing.datamatrix.detector.Detector:detectSolid1(com.google.zxing.ResultPoint[] @cornerPoints)
+{
+com.google.zxing.ResultPoint pointA;
+  com.google.zxing.ResultPoint pointB;
+  com.google.zxing.ResultPoint pointC;
+  com.google.zxing.ResultPoint pointD;
+  int trAB;
+  int trBC;
+  int trCD;
+  int trDA;
+  com.google.zxing.ResultPoint[] cornerPoints;
+cornerPoints=@cornerPoints;
+pointA=cornerPoints[0];
+ pointB=cornerPoints[1];
+ pointC=cornerPoints[3];
+ pointD=cornerPoints[2];
+ trAB = this#com.google.zxing.datamatrix.detector.Detector:transitionsBetween(pointA,pointB);
+ trBC = this#com.google.zxing.datamatrix.detector.Detector:transitionsBetween(pointB,pointC);
+ trCD = this#com.google.zxing.datamatrix.detector.Detector:transitionsBetween(pointC,pointD);
+ trDA = this#com.google.zxing.datamatrix.detector.Detector:transitionsBetween(pointD,pointA);
+ cornerPoints=new com.google.zxing.ResultPoint[4];
+ cornerPoints[0]=pointD;
+ cornerPoints[1]=pointA;
+ cornerPoints[2]=pointB;
+ cornerPoints[3]=pointC;
+ if (trAB<=trBC) goto label0;
+ trAB=trBC;
+ cornerPoints[0]=pointA;
+ cornerPoints[1]=pointB;
+ cornerPoints[2]=pointC;
+ cornerPoints[3]=pointD;
+ label0:if (trAB<=trCD) goto label1;
+ trAB=trCD;
+ cornerPoints[0]=pointB;
+ cornerPoints[1]=pointC;
+ cornerPoints[2]=pointD;
+ cornerPoints[3]=pointA;
+ label1:if (trAB<=trDA) goto label2;
+ cornerPoints[0]=pointC;
+ cornerPoints[1]=pointD;
+ cornerPoints[2]=pointA;
+ cornerPoints[3]=pointB;
+ label2:return  cornerPoints;
+ } 
+

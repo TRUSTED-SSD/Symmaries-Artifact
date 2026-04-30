@@ -1,0 +1,34 @@
+org.apache.kerby.kerberos.kerb.type.ap.ApRep org.apache.kerby.kerberos.kerb.response.ApResponse:makeApRep()
+{
+org.apache.kerby.kerberos.kerb.type.ap.ApRep apRep;
+  org.apache.kerby.kerberos.kerb.type.ap.EncAPRepPart encAPRepPart;
+  org.apache.kerby.kerberos.kerb.type.ap.Authenticator auth;
+  org.apache.kerby.kerberos.kerb.type.base.EncryptedData encPart;
+  org.apache.kerby.kerberos.kerb.type.ap.ApReq $stack7;
+  org.apache.kerby.kerberos.kerb.type.KerberosTime $stack9;
+  int $stack10;
+  org.apache.kerby.kerberos.kerb.type.base.EncryptionKey $stack11;
+  java.lang.Integer $stack12;
+  org.apache.kerby.kerberos.kerb.type.base.KeyUsage $stack14;
+  apRep=new org.apache.kerby.kerberos.kerb.type.ap.ApRep;
+ apRep#org.apache.kerby.kerberos.kerb.type.ap.ApRep();
+ encAPRepPart=new org.apache.kerby.kerberos.kerb.type.ap.EncAPRepPart;
+ encAPRepPart#org.apache.kerby.kerberos.kerb.type.ap.EncAPRepPart();
+ $stack7=this.apReq;
+ auth = $stack7.getAuthenticator();
+ $stack9 = auth.getCtime();
+ encAPRepPart.setCtime($stack9);
+ $stack10 = auth.getCusec();
+ encAPRepPart.setCusec($stack10);
+ $stack11 = auth.getSubKey();
+ encAPRepPart.setSubkey($stack11);
+ $stack12 = java.lang.Integer.valueOf(0);
+ encAPRepPart.setSeqNumber($stack12);
+ apRep.setEncRepPart(encAPRepPart);
+ $stack11 = auth.getSubKey();
+ $stack14=org.apache.kerby.kerberos.kerb.type.base.KeyUsage.AP_REP_ENCPART;
+ encPart = org.apache.kerby.kerberos.kerb.common.EncryptionUtil.seal((org.apache.kerby.asn1.type.Asn1Encodeable)encAPRepPart,$stack11,$stack14);
+ apRep.setEncryptedEncPart(encPart);
+ return  apRep;
+ } 
+

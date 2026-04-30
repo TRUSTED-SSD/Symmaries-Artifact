@@ -1,0 +1,19 @@
+void org.apache.rocketmq.broker.metrics.BrokerMetricsManager:lambda$null$19(io.opentelemetry.api.metrics.ObservableLongMeasurement measurement,org.apache.rocketmq.broker.metrics.ConsumerLagCalculator$CalculateInflightResult result)
+{
+long latency;
+  long curTimeStamp;
+  long $stack8;
+  byte $stack9;
+  io.opentelemetry.api.common.Attributes $stack10;
+  latency=0L;
+ curTimeStamp = java.lang.System.currentTimeMillis();
+ $stack8=result.earliestUnPulledTimestamp;
+ $stack9=($stack8 cmp 0L);
+ if ($stack9==0) goto label0;
+ latency=result.earliestUnPulledTimestamp;
+ latency=(curTimeStamp-latency);
+ label0:$stack10 = this#org.apache.rocketmq.broker.metrics.BrokerMetricsManager:buildLagAttributes((org.apache.rocketmq.broker.metrics.ConsumerLagCalculator$BaseCalculateResult)result);
+ measurement.record(latency,$stack10);
+ return;
+ } 
+

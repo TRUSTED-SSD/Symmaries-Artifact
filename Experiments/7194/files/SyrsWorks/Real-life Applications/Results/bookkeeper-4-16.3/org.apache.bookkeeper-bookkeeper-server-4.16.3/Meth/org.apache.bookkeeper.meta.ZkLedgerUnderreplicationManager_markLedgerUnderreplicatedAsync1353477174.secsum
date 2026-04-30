@@ -1,0 +1,8 @@
+java.util.concurrent.CompletableFuture org.apache.bookkeeper.meta.ZkLedgerUnderreplicationManager:markLedgerUnderreplicatedAsync (
+  long ledgerId, java.util.Collection missingReplicas) {
+  guard = pc ⊔ level(ledgerId) ⊔ level(missingReplicas) ⊔ obj_level(missingReplicas) = ⊥;
+  ret(level()) = ⊥;
+  ret(obj_level()) = ⊥;
+  ret(obj_level(missingReplicas)) = level(this) ⊔ obj_level(this);
+  ret(obj_level(this)) = level(this) ⊔ obj_level(this);
+}

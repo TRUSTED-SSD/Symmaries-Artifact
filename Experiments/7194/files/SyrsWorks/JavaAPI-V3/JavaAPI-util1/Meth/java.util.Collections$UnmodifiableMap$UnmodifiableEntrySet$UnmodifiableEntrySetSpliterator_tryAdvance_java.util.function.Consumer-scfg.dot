@@ -1,0 +1,41 @@
+digraph G {
+  node [shape=box, ];
+  "pc0_js1" [label="〈java.util.Objects.requireNonNull ((java.lang.Object) r1), js1〉\n\
+tt",
+             ];
+  "pc1_js1" [label="〈$r3 = this.s, js1〉", ];
+  "pc2_js1" [label="〈$r4 = java.util.Collections$UnmodifiableMap$UnmodifiableEntrySet.entryConsumer (r1), js1〉\n\
+tt",
+             ];
+  "pc3_js1" [label="〈$z0 = $r3.tryAdvance ($r4), js1〉\n\
+tt", ];
+  "pc4_js1" [label="〈return $z0, js1〉", ];
+  "pc5_js1" [label="〈sink, js1〉\n\
+obj_level(r1) ⊑ ret(obj_level(r1))' ∧ obj_level(this) ⊑ ret(obj_level(this))' ∧ (ϕ ≠ S4 ∨ pc ⊔ level($z0) ⊑ ret(level())')",
+             ];
+  
+  
+  "pc0_js1" -> "pc1_js1" [label="tt,\n\
+{obj_level($r3) := pc ⊔ level(r1) ⊔ obj_level(r1),\n\
+ obj_level($r4) := pc ⊔ level(r1) ⊔ obj_level(r1),\n\
+ obj_level(r1) := pc ⊔ level(r1) ⊔ obj_level(r1),\n\
+ obj_level(this) := pc ⊔ level(r1) ⊔ obj_level(r1) ⊔ obj_level(this)}",
+                          ];
+  "pc1_js1" -> "pc2_js1" [label="tt,\n\
+{level($r3) := pc ⊔ level(this) ⊔ obj_level(this),\n\
+ obj_level($r3) := obj_level(this)}",
+                          ];
+  "pc2_js1" -> "pc3_js1" [label="tt,\n\
+{level($r4) := pc,\n\
+ obj_level($r3) := pc ⊔ level(r1) ⊔ obj_level($r3) ⊔ obj_level(r1),\n\
+ obj_level($r4) := pc ⊔ level(r1) ⊔ obj_level(r1),\n\
+ obj_level(r1) := pc ⊔ level(r1) ⊔ obj_level(r1),\n\
+ obj_level(this) := pc ⊔ level(r1) ⊔ obj_level(r1) ⊔ obj_level(this)}",
+                          ];
+  "pc3_js1" -> "pc4_js1" [label="tt,\n\
+{level($z0) := pc ⊔ level($r3) ⊔ obj_level($r3) ⊔ obj_level($r4)}",
+                          ];
+  "pc4_js1" -> "pc5_js1" [label="tt,\n\
+{ϕ := S4}", ];
+  
+  }

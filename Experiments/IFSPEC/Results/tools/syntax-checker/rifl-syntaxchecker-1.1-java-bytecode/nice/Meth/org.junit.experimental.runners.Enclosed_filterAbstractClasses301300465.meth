@@ -1,0 +1,31 @@
+static java.lang.Class[] org.junit.experimental.runners.Enclosed:filterAbstractClasses(java.lang.Class[] @classes)
+{
+java.util.ArrayList filteredList;
+  int len$;
+  int i$;
+  java.lang.Class clazz;
+  java.lang.Object[] $stack10;
+  int $stack12;
+  boolean $stack13;
+  java.lang.Class[] classes;
+classes=@classes;
+filteredList=new java.util.ArrayList;
+ len$=#classes;
+ filteredList#java.util.ArrayList(len$);
+ len$=#classes;
+ i$=0;
+ label0:if (i$>=len$) goto label1;
+ clazz=classes[i$];
+ $stack12 = clazz.getModifiers();
+ $stack13 = java.lang.reflect.Modifier.isAbstract($stack12);
+ if ($stack13!=0) goto label2;
+ filteredList.add((java.lang.Object)clazz);
+ label2:i$=(i$+1);
+ goto label0;
+ label1:len$ = filteredList.size();
+ classes=new java.lang.Class[len$];
+ $stack10 = filteredList.toArray((java.lang.Object[])classes);
+ classes=(java.lang.Class[]) $stack10;
+ return  classes;
+ } 
+

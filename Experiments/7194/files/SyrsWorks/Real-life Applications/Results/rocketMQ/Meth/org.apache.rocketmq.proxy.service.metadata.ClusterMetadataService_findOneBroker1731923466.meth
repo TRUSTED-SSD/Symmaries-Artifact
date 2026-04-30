@@ -1,0 +1,26 @@
+java.util.Optional org.apache.rocketmq.proxy.service.metadata.ClusterMetadataService:findOneBroker(java.lang.String topic)
+{
+java.lang.Exception e;
+  org.apache.rocketmq.proxy.service.route.TopicRouteService $stack3;
+  org.apache.rocketmq.proxy.service.route.MessageQueueView $stack4;
+  org.apache.rocketmq.remoting.protocol.route.TopicRouteData $stack5;
+  java.util.List $stack6;
+  java.util.stream.Stream $stack7;
+  java.util.Optional $stack8;
+  boolean $stack10;
+  label0:$stack3=this.topicRouteService;
+ $stack4 = $stack3.getAllMessageQueueView(topic);
+ $stack5 = $stack4.getTopicRouteData();
+ $stack6 = $stack5.getBrokerDatas();
+ $stack7 = $stack6.stream();
+ $stack8 = $stack7.findAny();
+ label1:return  $stack8;
+ label2:e = catch;
+ $stack10 = org.apache.rocketmq.proxy.service.route.TopicRouteHelper.isTopicNotExistError((java.lang.Throwable)e);
+ if ($stack10==0) goto label3;
+ $stack8 = java.util.Optional.empty();
+ return  $stack8;
+ label3:throw e;
+ catch java.lang.Exception: label0 - label1 : label2;
+} 
+

@@ -1,0 +1,33 @@
+boolean org.keycloak.representations.ClaimsRepresentation:isPresent(java.lang.String claimName,org.keycloak.representations.ClaimsRepresentation$ClaimContext ctx)
+{
+org.keycloak.representations.ClaimsRepresentation$ClaimContext $stack3;
+  java.lang.IllegalArgumentException $stack5;
+  java.util.Map $stack6;
+  boolean $stack8;
+  $stack3=org.keycloak.representations.ClaimsRepresentation$ClaimContext.ID_TOKEN;
+ if (ctx!=$stack3) goto label0;
+ $stack6=this.idTokenClaims;
+ if ($stack6==null) goto label1;
+ $stack6=this.idTokenClaims;
+ $stack8 = $stack6.containsKey((java.lang.Object)claimName);
+ if ($stack8==0) goto label1;
+ $stack8=1;
+ goto label2;
+ label1:$stack8=0;
+ label2:return  $stack8;
+ label0:$stack3=org.keycloak.representations.ClaimsRepresentation$ClaimContext.USERINFO;
+ if (ctx!=$stack3) goto label3;
+ $stack6=this.userinfoClaims;
+ if ($stack6==null) goto label4;
+ $stack6=this.userinfoClaims;
+ $stack8 = $stack6.containsKey((java.lang.Object)claimName);
+ if ($stack8==0) goto label4;
+ $stack8=1;
+ goto label5;
+ label4:$stack8=0;
+ label5:return  $stack8;
+ label3:$stack5=new java.lang.IllegalArgumentException;
+ $stack5#java.lang.IllegalArgumentException("Invalid claim context");
+ throw $stack5;
+ } 
+

@@ -1,0 +1,51 @@
+void org.apache.rocketmq.store.timer.TimerWheel:reviseSlot(long timeMs,long firstPos,long lastPos,boolean force)
+{
+java.lang.ThreadLocal $stack8;
+  java.lang.Object $stack9;
+  java.nio.ByteBuffer $stack10;
+  int $stack11;
+  long $stack15;
+  long $stack20;
+  byte $stack21;
+  $stack8=this.localBuffer;
+ $stack9 = $stack8.get();
+ $stack10=(java.nio.ByteBuffer) $stack9;
+ $stack11 = this.getSlotIndex(timeMs);
+ $stack11=($stack11 * 32);
+ $stack10.position($stack11);
+ $stack11=this.precisionMs;
+ $stack15=(long) $stack11;
+ $stack15=(timeMs/$stack15);
+ $stack8=this.localBuffer;
+ $stack9 = $stack8.get();
+ $stack10=(java.nio.ByteBuffer) $stack9;
+ $stack20 = $stack10.getLong();
+ $stack21=($stack15 cmp $stack20);
+ if ($stack21==0) goto label0;
+ if (force==0) goto label1;
+ $stack21=(firstPos cmp -2L);
+ if ($stack21==0) goto label2;
+ goto label3;
+ label2:firstPos=lastPos;
+ label3:this.putSlot(timeMs,firstPos,lastPos);
+ goto label1;
+ label0:$stack21=(-2L cmp firstPos);
+ if ($stack21==0) goto label4;
+ $stack8=this.localBuffer;
+ $stack9 = $stack8.get();
+ $stack10=(java.nio.ByteBuffer) $stack9;
+ $stack10.putLong(firstPos);
+ goto label5;
+ label4:$stack8=this.localBuffer;
+ $stack9 = $stack8.get();
+ $stack10=(java.nio.ByteBuffer) $stack9;
+ $stack10.getLong();
+ label5:$stack21=(-2L cmp lastPos);
+ if ($stack21==0) goto label1;
+ $stack8=this.localBuffer;
+ $stack9 = $stack8.get();
+ $stack10=(java.nio.ByteBuffer) $stack9;
+ $stack10.putLong(lastPos);
+ label1:return;
+ } 
+

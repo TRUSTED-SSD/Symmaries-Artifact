@@ -1,0 +1,8 @@
+org.apache.rocketmq.store.PutMessageResult org.apache.rocketmq.broker.transaction.queue.TransactionalMessageBridge:putHalfMessage (
+  org.apache.rocketmq.common.message.MessageExtBrokerInner @messageInner) {
+  guard = tt;
+  ret(level()) = level(@messageInner) ⊔ level(this) ⊔ obj_level(@messageInner) ⊔ obj_level(this);
+  ret(obj_level()) = level(@messageInner) ⊔ level(this) ⊔ obj_level(@messageInner) ⊔ obj_level(this);
+  ret(obj_level(@messageInner)) = level(@messageInner) ⊔ obj_level(@messageInner) ⊔ obj_level(this);
+  ret(obj_level(this)) = level(@messageInner) ⊔ obj_level(@messageInner) ⊔ obj_level(this);
+}

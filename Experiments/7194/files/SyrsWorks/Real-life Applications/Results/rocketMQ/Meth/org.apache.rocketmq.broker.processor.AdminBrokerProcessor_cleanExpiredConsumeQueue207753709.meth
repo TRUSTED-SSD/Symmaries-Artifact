@@ -1,0 +1,19 @@
+org.apache.rocketmq.remoting.protocol.RemotingCommand org.apache.rocketmq.broker.processor.AdminBrokerProcessor:cleanExpiredConsumeQueue()
+{
+org.apache.rocketmq.remoting.protocol.RemotingCommand response;
+  org.apache.rocketmq.logging.org.slf4j.Logger $stack2;
+  org.apache.rocketmq.broker.BrokerController $stack4;
+  org.apache.rocketmq.store.MessageStore $stack5;
+  $stack2=org.apache.rocketmq.broker.processor.AdminBrokerProcessor.LOGGER;
+ $stack2.info("AdminBrokerProcessor#cleanExpiredConsumeQueue: start.");
+ response = org.apache.rocketmq.remoting.protocol.RemotingCommand.createResponseCommand(null);
+ $stack4=this.brokerController;
+ $stack5 = $stack4.getMessageStore();
+ $stack5.cleanExpiredConsumerQueue();
+ $stack2=org.apache.rocketmq.broker.processor.AdminBrokerProcessor.LOGGER;
+ $stack2.info("AdminBrokerProcessor#cleanExpiredConsumeQueue: end.");
+ response.setCode(0);
+ response.setRemark(null);
+ return  response;
+ } 
+

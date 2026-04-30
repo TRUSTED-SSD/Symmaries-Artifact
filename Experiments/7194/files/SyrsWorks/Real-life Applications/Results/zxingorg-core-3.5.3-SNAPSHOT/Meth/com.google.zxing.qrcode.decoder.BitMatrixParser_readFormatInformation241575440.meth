@@ -1,0 +1,52 @@
+com.google.zxing.qrcode.decoder.FormatInformation com.google.zxing.qrcode.decoder.BitMatrixParser:readFormatInformation()
+{
+int formatInfoBits1;
+  int i;
+  int formatInfoBits2;
+  int jMin;
+  int j;
+  com.google.zxing.qrcode.decoder.FormatInformation $stack6;
+  com.google.zxing.common.BitMatrix $stack10;
+  com.google.zxing.FormatException $stack14;
+  $stack6=this.parsedFormatInfo;
+ if ($stack6==null) goto label0;
+ $stack6=this.parsedFormatInfo;
+ return  $stack6;
+ label0:formatInfoBits1=0;
+ i=0;
+ label1:if (i>=6) goto label2;
+ formatInfoBits1 = this#com.google.zxing.qrcode.decoder.BitMatrixParser:copyBit(i,8,formatInfoBits1);
+ i=(i+1);
+ goto label1;
+ label2:formatInfoBits1 = this#com.google.zxing.qrcode.decoder.BitMatrixParser:copyBit(7,8,formatInfoBits1);
+ formatInfoBits1 = this#com.google.zxing.qrcode.decoder.BitMatrixParser:copyBit(8,8,formatInfoBits1);
+ formatInfoBits1 = this#com.google.zxing.qrcode.decoder.BitMatrixParser:copyBit(8,7,formatInfoBits1);
+ i=5;
+ label3:if (i<0) goto label4;
+ formatInfoBits1 = this#com.google.zxing.qrcode.decoder.BitMatrixParser:copyBit(8,i,formatInfoBits1);
+ i=(i+-1);
+ goto label3;
+ label4:$stack10=this.bitMatrix;
+ i = $stack10.getHeight();
+ formatInfoBits2=0;
+ jMin=(i-7);
+ j=(i-1);
+ label5:if (j<jMin) goto label6;
+ formatInfoBits2 = this#com.google.zxing.qrcode.decoder.BitMatrixParser:copyBit(8,j,formatInfoBits2);
+ j=(j+-1);
+ goto label5;
+ label6:j=(i-8);
+ label7:if (j>=i) goto label8;
+ formatInfoBits2 = this#com.google.zxing.qrcode.decoder.BitMatrixParser:copyBit(j,8,formatInfoBits2);
+ j=(j+1);
+ goto label7;
+ label8:$stack6 = com.google.zxing.qrcode.decoder.FormatInformation.decodeFormatInformation(formatInfoBits1,formatInfoBits2);
+ this.parsedFormatInfo=$stack6;
+ $stack6=this.parsedFormatInfo;
+ if ($stack6==null) goto label9;
+ $stack6=this.parsedFormatInfo;
+ return  $stack6;
+ label9:$stack14 = com.google.zxing.FormatException.getFormatInstance();
+ throw $stack14;
+ } 
+

@@ -1,0 +1,22 @@
+static java.io.IOException org.apache.bookkeeper.common.util.ExceptionUtils:toIOException(java.lang.Throwable @cause)
+{
+boolean $stack1;
+  java.io.IOException $stack4;
+  java.lang.Throwable cause;
+cause=@cause;
+$stack1=cause instanceof java.io.IOException;
+ if ($stack1==0) goto label0;
+ $stack4=(java.io.IOException) cause;
+ return  $stack4;
+ label0:$stack1=cause instanceof java.util.concurrent.ExecutionException;
+ if ($stack1!=0) goto label1;
+ $stack1=cause instanceof java.util.concurrent.CompletionException;
+ if ($stack1==0) goto label2;
+ label1:cause = cause.getCause();
+ $stack4 = org.apache.bookkeeper.common.util.ExceptionUtils.toIOException(cause);
+ return  $stack4;
+ label2:$stack4=new java.io.IOException;
+ $stack4#java.io.IOException(cause);
+ return  $stack4;
+ } 
+

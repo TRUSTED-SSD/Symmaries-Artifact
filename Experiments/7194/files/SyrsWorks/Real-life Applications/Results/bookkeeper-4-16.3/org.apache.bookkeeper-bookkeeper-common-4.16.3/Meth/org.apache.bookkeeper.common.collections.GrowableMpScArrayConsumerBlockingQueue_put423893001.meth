@@ -1,0 +1,53 @@
+void org.apache.bookkeeper.common.collections.GrowableMpScArrayConsumerBlockingQueue:put(java.lang.Object e)
+{
+long stamp;
+  int oldSize;
+  java.lang.Thread waitingConsumer;
+  java.lang.Throwable l6;
+  java.util.concurrent.locks.StampedLock $stack7;
+  java.util.concurrent.atomic.AtomicInteger $stack9;
+  java.lang.Object[] $stack11;
+  int $stack12;
+  org.apache.bookkeeper.common.collections.GrowableMpScArrayConsumerBlockingQueue$PaddedInt $stack13;
+  org.apache.bookkeeper.common.collections.GrowableMpScArrayConsumerBlockingQueue$PaddedInt $stack23;
+  $stack7=this.tailLock;
+ stamp = $stack7.writeLock();
+ label0:$stack9=this.size;
+ oldSize = $stack9.get();
+ $stack11=this.data;
+ $stack12=#$stack11;
+ if (oldSize!=$stack12) goto label1;
+ this#org.apache.bookkeeper.common.collections.GrowableMpScArrayConsumerBlockingQueue:expandArray();
+ label1:$stack11=this.data;
+ $stack13=this.tailIndex;
+ oldSize=$stack13.value;
+ $stack11[oldSize]=e;
+ $stack23=this.tailIndex;
+ $stack13=this.tailIndex;
+ oldSize=$stack13.value;
+ oldSize=(oldSize+1);
+ $stack11=this.data;
+ $stack12=#$stack11;
+ $stack12=($stack12-1);
+ oldSize=(oldSize & $stack12);
+ $stack23.value=oldSize;
+ $stack9=this.size;
+ oldSize = $stack9.getAndIncrement();
+ if (oldSize!=0) goto label2;
+ waitingConsumer=this.waitingConsumer;
+ if (waitingConsumer==null) goto label2;
+ waitingConsumer=this.waitingConsumer;
+ this.waitingConsumer=null;
+ java.util.concurrent.locks.LockSupport.unpark(waitingConsumer);
+ label2:$stack7=this.tailLock;
+ $stack7.unlockWrite(stamp);
+ goto label3;
+ label4:l6 = catch;
+ label5:$stack7=this.tailLock;
+ $stack7.unlockWrite(stamp);
+ throw l6;
+ label3:return;
+ catch java.lang.Throwable: label0 - label2 : label4;
+catch java.lang.Throwable: label4 - label5 : label4;
+} 
+

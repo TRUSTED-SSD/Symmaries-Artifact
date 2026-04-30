@@ -1,0 +1,32 @@
+boolean org.apache.rocketmq.store.DefaultMessageFilter:isMatchedByConsumeQueue(java.lang.Long tagsCode,org.apache.rocketmq.store.ConsumeQueueExt$CqExtUnit cqExtUnit)
+{
+org.apache.rocketmq.remoting.protocol.heartbeat.SubscriptionData $stack3;
+  boolean $stack5;
+  java.lang.String $stack7;
+  java.util.Set $stack10;
+  int $stack11;
+  java.lang.Integer $stack12;
+  if (null==tagsCode) goto label0;
+ $stack3=this.subscriptionData;
+ if (null!=$stack3) goto label1;
+ label0:return  1;
+ label1:$stack3=this.subscriptionData;
+ $stack5 = $stack3.isClassFilterMode();
+ if ($stack5==0) goto label2;
+ return  1;
+ label2:$stack3=this.subscriptionData;
+ $stack7 = $stack3.getSubString();
+ $stack5 = $stack7.equals((java.lang.Object)"*");
+ if ($stack5!=0) goto label3;
+ $stack3=this.subscriptionData;
+ $stack10 = $stack3.getCodeSet();
+ $stack11 = tagsCode.intValue();
+ $stack12 = java.lang.Integer.valueOf($stack11);
+ $stack5 = $stack10.contains((java.lang.Object)$stack12);
+ if ($stack5==0) goto label4;
+ label3:$stack5=1;
+ goto label5;
+ label4:$stack5=0;
+ label5:return  $stack5;
+ } 
+

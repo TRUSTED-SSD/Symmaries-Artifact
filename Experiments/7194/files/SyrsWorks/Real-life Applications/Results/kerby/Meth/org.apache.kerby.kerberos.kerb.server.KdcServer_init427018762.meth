@@ -1,0 +1,28 @@
+void org.apache.kerby.kerberos.kerb.server.KdcServer:init()
+{
+org.apache.kerby.kerberos.kerb.server.KdcServerOption $stack1;
+  org.apache.kerby.KOptions $stack2;
+  boolean $stack3;
+  org.apache.kerby.kerberos.kerb.server.impl.DefaultInternalKdcServerImpl $stack4;
+  org.apache.kerby.kerberos.kerb.server.KdcSetting $stack5;
+  org.apache.kerby.kerberos.kerb.server.impl.InternalKdcServer $stack6;
+  java.lang.Object $stack9;
+  $stack2=this.startupOptions;
+ $stack1=org.apache.kerby.kerberos.kerb.server.KdcServerOption.INNER_KDC_IMPL;
+ $stack3 = $stack2.contains((org.apache.kerby.KOption)$stack1);
+ if ($stack3==0) goto label0;
+ $stack2=this.startupOptions;
+ $stack1=org.apache.kerby.kerberos.kerb.server.KdcServerOption.INNER_KDC_IMPL;
+ $stack9 = $stack2.getOptionValue((org.apache.kerby.KOption)$stack1);
+ $stack6=(org.apache.kerby.kerberos.kerb.server.impl.InternalKdcServer) $stack9;
+ this.innerKdc=$stack6;
+ goto label1;
+ label0:$stack4=new org.apache.kerby.kerberos.kerb.server.impl.DefaultInternalKdcServerImpl;
+ $stack5=this.kdcSetting;
+ $stack4#org.apache.kerby.kerberos.kerb.server.impl.DefaultInternalKdcServerImpl($stack5);
+ this.innerKdc=$stack4;
+ label1:$stack6=this.innerKdc;
+ $stack6.init();
+ return;
+ } 
+

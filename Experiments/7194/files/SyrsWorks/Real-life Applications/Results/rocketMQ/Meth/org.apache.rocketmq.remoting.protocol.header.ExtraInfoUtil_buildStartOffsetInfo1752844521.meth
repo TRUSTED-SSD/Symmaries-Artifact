@@ -1,0 +1,24 @@
+static void org.apache.rocketmq.remoting.protocol.header.ExtraInfoUtil:buildStartOffsetInfo(java.lang.StringBuilder @stringBuilder,boolean retry,int queueId,long startOffset)
+{
+int $stack5;
+  java.lang.String $stack11;
+  java.lang.StringBuilder stringBuilder;
+stringBuilder=@stringBuilder;
+if (stringBuilder!=null) goto label0;
+ stringBuilder=new java.lang.StringBuilder;
+ stringBuilder#java.lang.StringBuilder(64);
+ label0:$stack5 = stringBuilder.length();
+ if ($stack5<=0) goto label1;
+ stringBuilder.append(";");
+ label1:if (retry==0) goto label2;
+ $stack11="1";
+ goto label3;
+ label2:$stack11="0";
+ label3:stringBuilder = stringBuilder.append($stack11);
+ stringBuilder = stringBuilder.append(" ");
+ stringBuilder = stringBuilder.append(queueId);
+ stringBuilder = stringBuilder.append(" ");
+ stringBuilder.append(startOffset);
+ return;
+ } 
+

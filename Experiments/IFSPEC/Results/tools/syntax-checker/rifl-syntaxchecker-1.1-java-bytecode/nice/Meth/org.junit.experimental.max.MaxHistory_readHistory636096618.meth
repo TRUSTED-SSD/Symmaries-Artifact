@@ -1,0 +1,38 @@
+static org.junit.experimental.max.MaxHistory org.junit.experimental.max.MaxHistory:readHistory(java.io.File storedResults)
+{
+java.io.FileInputStream file;
+  java.io.ObjectInputStream stream;
+  org.junit.experimental.max.MaxHistory l3;
+  java.lang.Throwable l4;
+  java.lang.Object $stack8;
+  java.lang.Exception $stack9;
+  org.junit.experimental.max.CouldNotReadCoreException $stack10;
+  java.lang.Throwable $stack12;
+  label0:file=new java.io.FileInputStream;
+ file#java.io.FileInputStream(storedResults);
+ label1:stream=new java.io.ObjectInputStream;
+ stream#java.io.ObjectInputStream((java.io.InputStream)file);
+ label2:$stack8 = stream.readObject();
+ l3=(org.junit.experimental.max.MaxHistory) $stack8;
+ label3:stream.close();
+ label4:file.close();
+ label5:return  l3;
+ label6:l4 = catch;
+ label7:stream.close();
+ throw l4;
+ label8:$stack12 = catch;
+ l4=$stack12;
+ label9:file.close();
+ throw $stack12;
+ label10:$stack9 = catch;
+ $stack10=new org.junit.experimental.max.CouldNotReadCoreException;
+ $stack10#org.junit.experimental.max.CouldNotReadCoreException((java.lang.Throwable)$stack9);
+ throw $stack10;
+ catch java.lang.Throwable: label2 - label3 : label6;
+catch java.lang.Throwable: label6 - label7 : label6;
+catch java.lang.Throwable: label1 - label4 : label8;
+catch java.lang.Throwable: label6 - label9 : label8;
+catch java.lang.Exception: label0 - label5 : label10;
+catch java.lang.Exception: label6 - label10 : label10;
+} 
+

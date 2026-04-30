@@ -1,0 +1,31 @@
+void org.apache.rocketmq.broker.BrokerController:changeSpecialServiceStatus(boolean shouldStart)
+{
+java.util.Iterator l2;
+  org.apache.rocketmq.broker.plugin.BrokerAttachedPlugin brokerAttachedPlugin;
+  java.util.List $stack4;
+  boolean $stack6;
+  org.apache.rocketmq.broker.processor.AckMessageProcessor $stack7;
+  org.apache.rocketmq.logging.org.slf4j.Logger $stack8;
+  java.lang.Boolean $stack10;
+  java.lang.Object $stack12;
+  $stack4=this.brokerAttachedPlugins;
+ l2 = $stack4.iterator();
+ label0:$stack6 = l2.hasNext();
+ if ($stack6==0) goto label1;
+ $stack12 = l2.next();
+ brokerAttachedPlugin=(org.apache.rocketmq.broker.plugin.BrokerAttachedPlugin) $stack12;
+ if (brokerAttachedPlugin==null) goto label2;
+ brokerAttachedPlugin.statusChanged(shouldStart);
+ label2:goto label0;
+ label1:this.changeScheduleServiceStatus(shouldStart);
+ this#org.apache.rocketmq.broker.BrokerController:changeTransactionCheckServiceStatus(shouldStart);
+ $stack7=this.ackMessageProcessor;
+ if ($stack7==null) goto label3;
+ $stack8=org.apache.rocketmq.broker.BrokerController.LOG;
+ $stack10 = java.lang.Boolean.valueOf(shouldStart);
+ $stack8.info("Set PopReviveService Status to {}",(java.lang.Object)$stack10);
+ $stack7=this.ackMessageProcessor;
+ $stack7.setPopReviveServiceStatus(shouldStart);
+ label3:return;
+ } 
+

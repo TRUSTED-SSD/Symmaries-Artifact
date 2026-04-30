@@ -1,0 +1,16 @@
+long org.apache.bookkeeper.zookeeper.ExponentialBackoffRetryPolicy:nextRetryWaitTime(int retryCount,long elapsedRetryTime)
+{
+java.util.Random $stack8;
+  long $stack12;
+  elapsedRetryTime=this.baseBackoffTime;
+ $stack8=this.random;
+ retryCount=(retryCount+1);
+ retryCount=(1<<retryCount);
+ retryCount = java.lang.Math.max(1,retryCount);
+ retryCount = $stack8.nextInt(retryCount);
+ retryCount = java.lang.Math.max(1,retryCount);
+ $stack12=(long) retryCount;
+ elapsedRetryTime=(elapsedRetryTime * $stack12);
+ return  elapsedRetryTime;
+ } 
+

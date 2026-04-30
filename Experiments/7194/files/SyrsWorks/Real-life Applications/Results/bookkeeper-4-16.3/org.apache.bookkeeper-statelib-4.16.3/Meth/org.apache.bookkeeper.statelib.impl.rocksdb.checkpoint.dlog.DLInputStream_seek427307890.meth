@@ -1,0 +1,27 @@
+void org.apache.bookkeeper.statelib.impl.rocksdb.checkpoint.dlog.DLInputStream:seek(long pos)
+{
+long $stack3;
+  byte $stack4;
+  org.apache.distributedlog.api.LogReader $stack7;
+  org.apache.distributedlog.api.DistributedLogManager $stack8;
+  $stack3=this.pos;
+ $stack4=($stack3 cmp pos);
+ if ($stack4!=0) goto label0;
+ return;
+ label0:$stack3=this.pos;
+ $stack4=($stack3 cmp pos);
+ if ($stack4>0) goto label1;
+ $stack3=this.pos;
+ $stack3=(pos-$stack3);
+ $stack4=($stack3 cmp 4194304L);
+ if ($stack4<0) goto label2;
+ label1:$stack7=this.reader;
+ $stack7.close();
+ $stack8=this.dlm;
+ $stack7 = $stack8.openLogReader(pos);
+ this.reader=$stack7;
+ this.currentRecord=null;
+ label2:this#org.apache.bookkeeper.statelib.impl.rocksdb.checkpoint.dlog.DLInputStream:skipTo(pos);
+ return;
+ } 
+

@@ -1,0 +1,41 @@
+io.netty.util.concurrent.Promise org.apache.rocketmq.remoting.rpc.RpcClientImpl:handleCommonBodyRequest(java.lang.String addr,org.apache.rocketmq.remoting.rpc.RpcRequest rpcRequest,long timeoutMillis,java.lang.Class bodyClass)
+{
+io.netty.util.concurrent.Promise rpcResponsePromise;
+  org.apache.rocketmq.remoting.protocol.RemotingCommand requestCommand;
+  org.apache.rocketmq.remoting.RemotingClient $stack11;
+  boolean $stack13;
+  int $stack14;
+  org.apache.rocketmq.remoting.rpc.RpcResponse $stack15;
+  byte[] $stack18;
+  java.lang.Object $stack19;
+  org.apache.rocketmq.remoting.rpc.RpcException $stack22;
+  java.lang.AssertionError $stack27;
+  rpcResponsePromise = this.createResponseFuture();
+ requestCommand = org.apache.rocketmq.remoting.rpc.RpcClientUtils.createCommandForRpcRequest(rpcRequest);
+ $stack11=this.remotingClient;
+ requestCommand = $stack11.invokeSync(addr,requestCommand,timeoutMillis);
+ $stack13=org.apache.rocketmq.remoting.rpc.RpcClientImpl.$assertionsDisabled;
+ if ($stack13!=0) goto label0;
+ if (requestCommand!=null) goto label0;
+ $stack27=new java.lang.AssertionError;
+ $stack27#java.lang.AssertionError();
+ throw $stack27;
+ label0:$stack14 = requestCommand.getCode();
+ switch [$stack14]
+if 0 goto label1;
+goto label2;
+ label1:$stack15=new org.apache.rocketmq.remoting.rpc.RpcResponse;
+ $stack18 = requestCommand.getBody();
+ $stack19 = org.apache.rocketmq.remoting.protocol.RemotingSerializable.decode($stack18,bodyClass);
+ $stack15#org.apache.rocketmq.remoting.rpc.RpcResponse(0,null,$stack19);
+ rpcResponsePromise.setSuccess((java.lang.Object)$stack15);
+ goto label3;
+ label2:$stack15=new org.apache.rocketmq.remoting.rpc.RpcResponse;
+ $stack22=new org.apache.rocketmq.remoting.rpc.RpcException;
+ $stack14 = requestCommand.getCode();
+ $stack22#org.apache.rocketmq.remoting.rpc.RpcException($stack14,"unknown remote error");
+ $stack15#org.apache.rocketmq.remoting.rpc.RpcResponse($stack22);
+ rpcResponsePromise.setSuccess((java.lang.Object)$stack15);
+ label3:return  rpcResponsePromise;
+ } 
+

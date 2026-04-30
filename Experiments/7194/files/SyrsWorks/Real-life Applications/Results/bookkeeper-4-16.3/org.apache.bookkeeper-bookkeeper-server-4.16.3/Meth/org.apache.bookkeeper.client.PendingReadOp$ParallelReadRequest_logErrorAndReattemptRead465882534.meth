@@ -1,0 +1,24 @@
+void org.apache.bookkeeper.client.PendingReadOp$ParallelReadRequest:logErrorAndReattemptRead(int bookieIndex,org.apache.bookkeeper.net.BookieId host,java.lang.String errMsg,int rc)
+{
+org.apache.bookkeeper.client.PendingReadOp $stack7;
+  boolean $stack8;
+  this#org.apache.bookkeeper.client.PendingReadOp$LedgerEntryRequest(bookieIndex,host,errMsg,rc);
+ bookieIndex=this.numPendings;
+ bookieIndex=(bookieIndex-1);
+ this.numPendings=bookieIndex;
+ $stack7=this.this$0;
+ $stack8=$stack7.isRecoveryRead;
+ if ($stack8==0) goto label0;
+ rc=this.numBookiesMissingEntry;
+ $stack7=this.this$0;
+ bookieIndex=$stack7.requiredBookiesMissingEntryForRecovery;
+ if (rc<bookieIndex) goto label0;
+ this.fail(-13);
+ goto label1;
+ label0:bookieIndex=this.numPendings;
+ if (bookieIndex!=0) goto label1;
+ bookieIndex=this.firstError;
+ this.fail(bookieIndex);
+ label1:return;
+ } 
+

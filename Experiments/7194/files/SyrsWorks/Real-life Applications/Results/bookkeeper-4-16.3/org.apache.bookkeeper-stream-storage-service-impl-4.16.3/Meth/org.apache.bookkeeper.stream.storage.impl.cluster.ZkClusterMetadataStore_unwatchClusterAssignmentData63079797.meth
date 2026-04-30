@@ -1,0 +1,45 @@
+void org.apache.bookkeeper.stream.storage.impl.cluster.ZkClusterMetadataStore:unwatchClusterAssignmentData(java.util.function.Consumer watcher)
+{
+org.apache.bookkeeper.stream.storage.impl.cluster.ZkClusterMetadataStore l2;
+  org.apache.curator.framework.recipes.cache.NodeCacheListener listener;
+  java.lang.Throwable l5;
+  java.util.Map $stack7;
+  java.lang.Object $stack8;
+  boolean $stack10;
+  org.apache.curator.framework.recipes.cache.NodeCache $stack12;
+  org.apache.curator.framework.listen.Listenable $stack17;
+  java.io.IOException $stack20;
+  org.slf4j.Logger $stack21;
+  l2=this;
+ monitorenter this;
+ label0:$stack7=this.assignmentDataConsumers;
+ $stack8 = $stack7.remove((java.lang.Object)watcher);
+ listener=(org.apache.curator.framework.recipes.cache.NodeCacheListener) $stack8;
+ if (null==listener) goto label1;
+ $stack12=this.assignmentDataCache;
+ if (null==$stack12) goto label1;
+ $stack12=this.assignmentDataCache;
+ $stack17 = $stack12.getListenable();
+ $stack17.removeListener((java.lang.Object)listener);
+ label1:$stack7=this.assignmentDataConsumers;
+ $stack10 = $stack7.isEmpty();
+ if ($stack10==0) goto label2;
+ $stack12=this.assignmentDataCache;
+ if (null==$stack12) goto label2;
+ label3:$stack12=this.assignmentDataCache;
+ $stack12.close();
+ label4:goto label2;
+ label5:$stack20 = catch;
+ $stack21=org.apache.bookkeeper.stream.storage.impl.cluster.ZkClusterMetadataStore.log;
+ $stack21.warn("Failed to close assignment data cache when there is no watcher",(java.lang.Throwable)$stack20);
+ label2:monitorexit this;
+ label6:goto label7;
+ label8:l5 = catch;
+ monitorexit this;
+ label9:throw l5;
+ label7:return;
+ catch java.io.IOException: label3 - label4 : label5;
+catch java.lang.Throwable: label0 - label6 : label8;
+catch java.lang.Throwable: label8 - label9 : label8;
+} 
+

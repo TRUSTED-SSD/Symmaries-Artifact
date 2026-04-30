@@ -1,0 +1,46 @@
+void org.apache.rocketmq.proxy.grpc.v2.client.ClientActivity$1:onNext(apache.rocketmq.v2.TelemetryCommand request)
+{
+int[] $stack3;
+  apache.rocketmq.v2.TelemetryCommand$CommandCase $stack4;
+  int $stack5;
+  io.grpc.stub.StreamObserver $stack7;
+  org.apache.rocketmq.proxy.common.ProxyContext $stack8;
+  org.apache.rocketmq.proxy.grpc.v2.client.ClientActivity $stack9;
+  apache.rocketmq.v2.Status $stack12;
+  apache.rocketmq.v2.VerifyMessageResult $stack13;
+  apache.rocketmq.v2.ThreadStackTrace $stack17;
+  java.lang.Throwable $stack22;
+  label0:$stack3=org.apache.rocketmq.proxy.grpc.v2.client.ClientActivity$2.$SwitchMap$apache$rocketmq$v2$TelemetryCommand$CommandCase;
+ $stack4 = request.getCommandCase();
+ $stack5 = $stack4.ordinal();
+ $stack5=$stack3[$stack5];
+ switch [$stack5]
+if 0 goto label1;
+if 1 goto label2;
+if 2 goto label3;
+goto label4;
+ label1:$stack9=this.this$0;
+ $stack8=this.val$ctx;
+ $stack7=this.val$responseObserver;
+ $stack9#org.apache.rocketmq.proxy.grpc.v2.client.ClientActivity($stack8,request,$stack7);
+ goto label4;
+ label2:$stack9=this.this$0;
+ $stack8=this.val$ctx;
+ $stack12 = request.getStatus();
+ $stack17 = request.getThreadStackTrace();
+ $stack9.reportThreadStackTrace($stack8,$stack12,$stack17);
+ goto label4;
+ label3:$stack9=this.this$0;
+ $stack8=this.val$ctx;
+ $stack12 = request.getStatus();
+ $stack13 = request.getVerifyMessageResult();
+ $stack9.reportVerifyMessageResult($stack8,$stack12,$stack13);
+ label4:goto label5;
+ label6:$stack22 = catch;
+ $stack9=this.this$0;
+ $stack7=this.val$responseObserver;
+ $stack9#org.apache.rocketmq.proxy.grpc.v2.client.ClientActivity(request,$stack22,$stack7);
+ label5:return;
+ catch java.lang.Throwable: label0 - label4 : label6;
+} 
+

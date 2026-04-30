@@ -1,0 +1,41 @@
+void org.apache.bookkeeper.proto.PacketProcessorBase:sendResponseAndWait(int rc,java.lang.Object response,org.apache.bookkeeper.stats.OpStatsLogger statsLogger)
+{
+io.netty.channel.Channel channel;
+  io.netty.channel.ChannelFuture future;
+  org.apache.bookkeeper.proto.BookieRequestHandler $stack6;
+  io.netty.channel.ChannelHandlerContext $stack7;
+  io.netty.channel.EventLoop $stack10;
+  boolean $stack11;
+  long $stack12;
+  java.util.concurrent.TimeUnit $stack14;
+  java.lang.Exception $stack19;
+  org.slf4j.Logger $stack20;
+  label0:$stack6=this.requestHandler;
+ $stack7 = $stack6.ctx();
+ channel = $stack7.channel();
+ future = channel.writeAndFlush(response);
+ $stack10 = channel.eventLoop();
+ $stack11 = $stack10.inEventLoop();
+ if ($stack11!=0) goto label1;
+ future.get();
+ label1:goto label2;
+ label3:$stack19 = catch;
+ $stack20=org.apache.bookkeeper.proto.PacketProcessorBase.logger;
+ dummyClass.lowSink("Netty channel write exception. ");
+$stack20.debug("Netty channel write exception. ",(java.lang.Throwable)$stack19);
+ return;
+ label2:if (0!=rc) goto label4;
+ $stack12=this.enqueueNanos;
+ $stack12 = org.apache.bookkeeper.util.MathUtils.elapsedNanos($stack12);
+ $stack14=java.util.concurrent.TimeUnit.NANOSECONDS;
+ statsLogger.registerSuccessfulEvent($stack12,$stack14);
+ goto label5;
+ label4:$stack12=this.enqueueNanos;
+ $stack12 = org.apache.bookkeeper.util.MathUtils.elapsedNanos($stack12);
+ $stack14=java.util.concurrent.TimeUnit.NANOSECONDS;
+ statsLogger.registerFailedEvent($stack12,$stack14);
+ label5:return;
+ catch java.util.concurrent.ExecutionException: label0 - label1 : label3;
+catch java.lang.InterruptedException: label0 - label1 : label3;
+} 
+

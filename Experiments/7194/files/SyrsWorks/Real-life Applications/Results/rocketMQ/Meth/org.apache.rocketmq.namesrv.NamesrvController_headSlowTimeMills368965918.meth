@@ -1,0 +1,29 @@
+long org.apache.rocketmq.namesrv.NamesrvController:headSlowTimeMills(java.util.concurrent.BlockingQueue q)
+{
+long slowTimeMills;
+  java.lang.Runnable firstRunnable;
+  java.lang.Object $stack6;
+  boolean $stack7;
+  byte $stack8;
+  org.apache.rocketmq.common.future.FutureTaskExt $stack10;
+  org.apache.rocketmq.remoting.netty.RequestTask $stack16;
+  long $stack17;
+  slowTimeMills=0L;
+ $stack6 = q.peek();
+ firstRunnable=(java.lang.Runnable) $stack6;
+ $stack7=firstRunnable instanceof org.apache.rocketmq.common.future.FutureTaskExt;
+ if ($stack7==0) goto label0;
+ $stack10=(org.apache.rocketmq.common.future.FutureTaskExt) firstRunnable;
+ firstRunnable = $stack10.getRunnable();
+ $stack7=firstRunnable instanceof org.apache.rocketmq.remoting.netty.RequestTask;
+ if ($stack7==0) goto label0;
+ slowTimeMills = java.lang.System.currentTimeMillis();
+ $stack16=(org.apache.rocketmq.remoting.netty.RequestTask) firstRunnable;
+ $stack17 = $stack16.getCreateTimestamp();
+ slowTimeMills=(slowTimeMills-$stack17);
+ label0:$stack8=(slowTimeMills cmp 0L);
+ if ($stack8>=0) goto label1;
+ slowTimeMills=0L;
+ label1:return  slowTimeMills;
+ } 
+

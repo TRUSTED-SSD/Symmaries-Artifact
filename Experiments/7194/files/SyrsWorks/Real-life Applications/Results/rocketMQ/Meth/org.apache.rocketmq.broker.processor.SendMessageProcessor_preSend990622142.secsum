@@ -1,0 +1,13 @@
+org.apache.rocketmq.remoting.protocol.RemotingCommand org.apache.rocketmq.broker.processor.SendMessageProcessor:preSend (
+  io.netty.channel.ChannelHandlerContext ctx,
+  org.apache.rocketmq.remoting.protocol.RemotingCommand request,
+  org.apache.rocketmq.remoting.protocol.header.SendMessageRequestHeader
+    requestHeader) {
+  guard = tt;
+  ret(level()) = pc ⊔ level(request) ⊔ level(this) ⊔ obj_level(request) ⊔ obj_level(this);
+  ret(obj_level()) = ⊤;
+  ret(obj_level(ctx)) = ⊤;
+  ret(obj_level(request)) = ⊤;
+  ret(obj_level(requestHeader)) = ⊤;
+  ret(obj_level(this)) = ⊤;
+}

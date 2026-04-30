@@ -1,0 +1,38 @@
+void org.apache.rocketmq.broker.client.ProducerManager:registerProducer(java.lang.String group,org.apache.rocketmq.broker.client.ClientChannelInfo clientChannelInfo)
+{
+org.apache.rocketmq.broker.client.ClientChannelInfo clientChannelInfoFound;
+  java.util.concurrent.ConcurrentHashMap channelTable;
+  java.lang.Object $stack6;
+  io.netty.channel.Channel $stack7;
+  long $stack9;
+  java.lang.String $stack13;
+  org.apache.rocketmq.logging.org.slf4j.Logger $stack16;
+  java.util.concurrent.ConcurrentHashMap $stack21;
+  clientChannelInfoFound=null;
+ channelTable=this.groupChannelTable;
+ $stack6 = channelTable.get((java.lang.Object)group);
+ channelTable=(java.util.concurrent.ConcurrentHashMap) $stack6;
+ if (null!=channelTable) goto label0;
+ channelTable=new java.util.concurrent.ConcurrentHashMap;
+ channelTable#java.util.concurrent.ConcurrentHashMap();
+ $stack21=this.groupChannelTable;
+ $stack21.put((java.lang.Object)group,(java.lang.Object)channelTable);
+ label0:$stack7 = clientChannelInfo.getChannel();
+ $stack6 = channelTable.get((java.lang.Object)$stack7);
+ clientChannelInfoFound=(org.apache.rocketmq.broker.client.ClientChannelInfo) $stack6;
+ if (null!=clientChannelInfoFound) goto label1;
+ $stack7 = clientChannelInfo.getChannel();
+ channelTable.put((java.lang.Object)$stack7,(java.lang.Object)clientChannelInfo);
+ channelTable=this.clientChannelTable;
+ $stack13 = clientChannelInfo.getClientId();
+ $stack7 = clientChannelInfo.getChannel();
+ channelTable.put((java.lang.Object)$stack13,(java.lang.Object)$stack7);
+ $stack16=org.apache.rocketmq.broker.client.ProducerManager.log;
+ $stack13 = clientChannelInfo.toString();
+ $stack16.info("new producer connected, group: {} channel: {}",(java.lang.Object)group,(java.lang.Object)$stack13);
+ label1:if (clientChannelInfoFound==null) goto label2;
+ $stack9 = java.lang.System.currentTimeMillis();
+ clientChannelInfoFound.setLastUpdateTimestamp($stack9);
+ label2:return;
+ } 
+

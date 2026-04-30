@@ -1,0 +1,53 @@
+digraph G {
+  node [shape=box, ];
+  "pc0_js1" [label="〈this#java.io.InputStream.init (), js1〉\n\
+tt", ];
+  "pc1_js1" [label="〈this.mark = 0, js1〉", ];
+  "pc2_js1" [label="〈this.buf = r1, js1〉", ];
+  "pc3_js1" [label="〈this.pos = i0, js1〉", ];
+  "pc4_js1" [label="〈$i3 = i0 + i1, js1〉", ];
+  "pc5_js1" [label="〈$i2 = #r1, js1〉", ];
+  "pc6_js1" [label="〈$i4 = java.lang.Math.min ($i3, $i2), js1〉\n\
+tt", ];
+  "pc7_js1" [label="〈this.count = $i4, js1〉", ];
+  "pc8_js1" [label="〈this.mark = i0, js1〉", ];
+  "pc9_js1" [label="〈return this, js1〉", ];
+  "pc10_js1" [label="〈sink, js1〉\n\
+obj_level(r1) ⊑ ret(obj_level(r1))' ∧ obj_level(this) ⊑ ret(obj_level(this))' ∧ (ret(this.><r1)' ∨ ¬this.><r1) ∧ (ret(this.><this)' ∨ ¬this.><this) ∧ (ϕ ≠ S9 ∨ ret(~this)' ∧ obj_level(this) ⊑ ret(obj_level())' ∧ pc ⊔ level(this) ⊑ ret(level())' ∧ (ret(.><this)' ∨ ¬this.><this) ∧ (ret(r1.><)' ∨ ¬this.><r1) ∧ (ret(this.><)' ∨ ¬this.><this))",
+              ];
+  
+  
+  "pc0_js1" -> "pc1_js1" [label="tt,\n\
+{this.><r1 := ff,\n\
+ this.><this := ff}",
+                          ];
+  "pc1_js1" -> "pc2_js1" [label="tt,\n\
+{obj_level(this) := pc ⊔ obj_level(this)}",
+                          ];
+  "pc2_js1" -> "pc3_js1" [label="tt,\n\
+{this.><r1 := tt,\n\
+ this.><this := ff,\n\
+ obj_level(this) := pc ⊔ level(r1) ⊔ obj_level(r1) ⊔ obj_level(this)}",
+                          ];
+  "pc3_js1" -> "pc4_js1" [label="tt,\n\
+{obj_level(this) := pc ⊔ level(i0) ⊔ obj_level(this)}",
+                          ];
+  "pc4_js1" -> "pc5_js1" [label="tt,\n\
+{level($i3) := pc ⊔ level(i0) ⊔ level(i1)}",
+                          ];
+  "pc5_js1" -> "pc6_js1" [label="tt,\n\
+{level($i2) := pc ⊔ level(r1) ⊔ obj_level(r1)}",
+                          ];
+  "pc6_js1" -> "pc7_js1" [label="tt,\n\
+{level($i4) := pc ⊔ level(i0) ⊔ level(i1) ⊔ level(r1) ⊔ obj_level(r1)}",
+                          ];
+  "pc7_js1" -> "pc8_js1" [label="tt,\n\
+{obj_level(this) := pc ⊔ level(i0) ⊔ level(i1) ⊔ level(r1) ⊔ obj_level(r1) ⊔ obj_level(this)}",
+                          ];
+  "pc8_js1" -> "pc9_js1" [label="tt,\n\
+{obj_level(this) := pc ⊔ level(i0) ⊔ obj_level(this)}",
+                          ];
+  "pc9_js1" -> "pc10_js1" [label="tt,\n\
+{ϕ := S9}", ];
+  
+  }

@@ -1,0 +1,28 @@
+byte[] com.google.zxing.InvertedLuminanceSource:getMatrix()
+{
+byte[] matrix;
+  int length;
+  byte[] invertedMatrix;
+  int i;
+  com.google.zxing.LuminanceSource $stack5;
+  byte $stack9;
+  short $stack10;
+  int $stack11;
+  $stack5=this.delegate;
+ matrix = $stack5.getMatrix();
+ length = this.getWidth();
+ i = this.getHeight();
+ length=(length * i);
+ invertedMatrix=new byte[length];
+ i=0;
+ label0:if (i>=length) goto label1;
+ $stack9=matrix[i];
+ $stack10=($stack9 & 255);
+ $stack11=(255-$stack10);
+ $stack9=(byte) $stack11;
+ invertedMatrix[i]=$stack9;
+ i=(i+1);
+ goto label0;
+ label1:return  invertedMatrix;
+ } 
+

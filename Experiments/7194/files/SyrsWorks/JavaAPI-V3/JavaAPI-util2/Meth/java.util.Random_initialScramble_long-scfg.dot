@@ -1,0 +1,19 @@
+digraph G {
+  node [shape=box, ];
+  "pc0_js1" [label="〈$l1 = ! l0 & 25214903917L | ! 25214903917L & l0, js1〉",
+             ];
+  "pc1_js1" [label="〈$l2 = $l1 & 281474976710655L, js1〉", ];
+  "pc2_js1" [label="〈return $l2, js1〉", ];
+  "pc3_js1" [label="〈sink, js1〉\n\
+ϕ ≠ S2 ∨ pc ⊔ level($l2) ⊑ ret(level())'",
+             ];
+  
+  
+  "pc0_js1" -> "pc1_js1" [label="tt,\n\
+{level($l1) := pc ⊔ level(l0)}", ];
+  "pc1_js1" -> "pc2_js1" [label="tt,\n\
+{level($l2) := pc ⊔ level(l0)}", ];
+  "pc2_js1" -> "pc3_js1" [label="tt,\n\
+{ϕ := S2}", ];
+  
+  }

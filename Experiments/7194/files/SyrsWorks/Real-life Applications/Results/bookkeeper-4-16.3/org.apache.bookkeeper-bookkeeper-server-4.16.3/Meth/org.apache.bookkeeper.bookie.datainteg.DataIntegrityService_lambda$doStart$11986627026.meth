@@ -1,0 +1,33 @@
+void org.apache.bookkeeper.bookie.datainteg.DataIntegrityService:lambda$doStart$1()
+{
+org.apache.bookkeeper.bookie.datainteg.DataIntegrityCheck $stack2;
+  boolean $stack3;
+  java.util.concurrent.CompletableFuture $stack5;
+  java.lang.InterruptedException $stack7;
+  org.apache.bookkeeper.bookie.datainteg.Events $stack8;
+  org.slf4j.Logger $stack9;
+  java.lang.Thread $stack10;
+  java.lang.Throwable $stack11;
+  label0:$stack2=this.check;
+ $stack3 = $stack2.needsFullCheck();
+ if ($stack3==0) goto label1;
+ $stack2=this.check;
+ $stack5 = $stack2.runFullCheck();
+ $stack5.get();
+ label1:goto label2;
+ label3:$stack7 = catch;
+ $stack9=org.apache.bookkeeper.bookie.datainteg.DataIntegrityService.log;
+ $stack8=org.apache.bookkeeper.bookie.datainteg.Events.DATA_INTEG_SERVICE_INTERRUPTED;
+ $stack9.warn("Event: {}",(java.lang.Object)$stack8,(java.lang.Object)$stack7);
+ $stack10 = java.lang.Thread.currentThread();
+ $stack10.interrupt();
+ goto label2;
+ label4:$stack11 = catch;
+ $stack9=org.apache.bookkeeper.bookie.datainteg.DataIntegrityService.log;
+ $stack8=org.apache.bookkeeper.bookie.datainteg.Events.DATA_INTEG_SERVICE_ERROR;
+ $stack9.error("Event: {}",(java.lang.Object)$stack8,(java.lang.Object)$stack11);
+ label2:return;
+ catch java.lang.InterruptedException: label0 - label1 : label3;
+catch java.lang.Throwable: label0 - label1 : label4;
+} 
+

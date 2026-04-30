@@ -1,0 +1,29 @@
+java.lang.String org.keycloak.jose.jwe.JWE:getEncodedJweString()
+{
+java.lang.StringBuilder builder;
+  java.lang.String $stack3;
+  java.lang.StringBuilder $stack4;
+  byte[] $stack9;
+  builder=new java.lang.StringBuilder;
+ builder#java.lang.StringBuilder();
+ $stack3=this.base64Header;
+ $stack4 = builder.append($stack3);
+ $stack4 = $stack4.append(".");
+ $stack3=this.base64Cek;
+ $stack4 = $stack4.append($stack3);
+ $stack4 = $stack4.append(".");
+ $stack9=this.initializationVector;
+ $stack3 = org.keycloak.common.util.Base64Url.encode($stack9);
+ $stack4 = $stack4.append($stack3);
+ $stack4 = $stack4.append(".");
+ $stack9=this.encryptedContent;
+ $stack3 = org.keycloak.common.util.Base64Url.encode($stack9);
+ $stack4 = $stack4.append($stack3);
+ $stack4 = $stack4.append(".");
+ $stack9=this.authenticationTag;
+ $stack3 = org.keycloak.common.util.Base64Url.encode($stack9);
+ $stack4.append($stack3);
+ $stack3 = builder.toString();
+ return  $stack3;
+ } 
+

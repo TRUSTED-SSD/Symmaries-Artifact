@@ -1,0 +1,42 @@
+boolean org.apache.rocketmq.common.ConfigManager:load()
+{
+java.lang.String fileName;
+  java.lang.String jsonString;
+  boolean $stack5;
+  int $stack6;
+  java.lang.StringBuilder $stack7;
+  org.apache.rocketmq.logging.org.slf4j.Logger $stack8;
+  java.lang.Exception $stack14;
+  fileName=null;
+ label0:fileName = this.configFilePath();
+ jsonString = org.apache.rocketmq.common.MixAll.file2String(fileName);
+ if (null==jsonString) goto label1;
+ $stack6 = jsonString.length();
+ if ($stack6!=0) goto label2;
+ label1:$stack5 = this#org.apache.rocketmq.common.ConfigManager:loadBak();
+ label3:return  $stack5;
+ label2:this.decode(jsonString);
+ $stack8=org.apache.rocketmq.common.ConfigManager.log;
+ $stack7=new java.lang.StringBuilder;
+ $stack7#java.lang.StringBuilder();
+ $stack7 = $stack7.append("load ");
+ $stack7 = $stack7.append(fileName);
+ $stack7 = $stack7.append(" OK");
+ jsonString = $stack7.toString();
+ $stack8.info(jsonString);
+ label4:return  1;
+ label5:$stack14 = catch;
+ $stack8=org.apache.rocketmq.common.ConfigManager.log;
+ $stack7=new java.lang.StringBuilder;
+ $stack7#java.lang.StringBuilder();
+ $stack7 = $stack7.append("load ");
+ $stack7 = $stack7.append(fileName);
+ $stack7 = $stack7.append(" failed, and try to load backup file");
+ fileName = $stack7.toString();
+ $stack8.error(fileName,(java.lang.Throwable)$stack14);
+ $stack5 = this#org.apache.rocketmq.common.ConfigManager:loadBak();
+ return  $stack5;
+ catch java.lang.Exception: label0 - label3 : label5;
+catch java.lang.Exception: label2 - label4 : label5;
+} 
+

@@ -1,0 +1,40 @@
+void java.util.LinkedList$LLSpliterator:forEachRemaining(java.util.function.Consumer r1)
+{
+java.lang.Object r2;
+  int $i0;
+  java.util.ConcurrentModificationException $r3;
+  java.util.LinkedList$Node $r4;
+  java.lang.NullPointerException $r5;
+  int i1;
+  java.util.LinkedList$Node r6;
+  java.util.LinkedList $r7;
+  int $i2;
+  int $i3;
+  if (r1!=null) goto label0;
+ $r5=new java.lang.NullPointerException;
+ $r5#java.lang.NullPointerException:init();
+ throw $r5;
+ label0:$i0 = this.getEst();
+ i1=$i0;
+ if ($i0<=0) goto label1;
+ $r4=this.current;
+ r6=$r4;
+ if ($r4==null) goto label1;
+ this.current=null;
+ this.est=0;
+ label2:r2=r6.item;
+ r6=r6.next;
+ r1.accept(r2);
+ if (r6==null) goto label1;
+ i1=(i1+-1);
+ if (i1>0) goto label2;
+ label1:$r7=this.list;
+ $i2=$r7.modCount;
+ $i3=this.expectedModCount;
+ if ($i2==$i3) goto label3;
+ $r3=new java.util.ConcurrentModificationException;
+ $r3#java.util.ConcurrentModificationException:init();
+ throw $r3;
+ label3:return;
+ }  
+

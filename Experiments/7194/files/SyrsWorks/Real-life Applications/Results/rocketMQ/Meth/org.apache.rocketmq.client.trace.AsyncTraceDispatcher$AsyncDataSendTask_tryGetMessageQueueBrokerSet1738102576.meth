@@ -1,0 +1,46 @@
+java.util.Set org.apache.rocketmq.client.trace.AsyncTraceDispatcher$AsyncDataSendTask:tryGetMessageQueueBrokerSet(org.apache.rocketmq.client.impl.producer.DefaultMQProducerImpl producer,java.lang.String @topic)
+{
+java.util.HashSet brokerSet;
+  org.apache.rocketmq.client.impl.producer.TopicPublishInfo topicPublishInfo;
+  java.util.Iterator l5;
+  org.apache.rocketmq.common.message.MessageQueue queue;
+  java.util.concurrent.ConcurrentMap $stack8;
+  java.lang.Object $stack9;
+  org.apache.rocketmq.client.impl.factory.MQClientInstance $stack13;
+  boolean $stack14;
+  java.util.List $stack18;
+  java.lang.String topic;
+topic=@topic;
+brokerSet=new java.util.HashSet;
+ brokerSet#java.util.HashSet();
+ $stack8 = producer.getTopicPublishInfoTable();
+ $stack9 = $stack8.get((java.lang.Object)topic);
+ topicPublishInfo=(org.apache.rocketmq.client.impl.producer.TopicPublishInfo) $stack9;
+ if (null==topicPublishInfo) goto label0;
+ $stack14 = topicPublishInfo.ok();
+ if ($stack14!=0) goto label1;
+ label0:$stack8 = producer.getTopicPublishInfoTable();
+ topicPublishInfo=new org.apache.rocketmq.client.impl.producer.TopicPublishInfo;
+ topicPublishInfo#org.apache.rocketmq.client.impl.producer.TopicPublishInfo();
+ $stack8.putIfAbsent((java.lang.Object)topic,(java.lang.Object)topicPublishInfo);
+ $stack13 = producer.getMqClientFactory();
+ $stack13.updateTopicRouteInfoFromNameServer(topic);
+ $stack8 = producer.getTopicPublishInfoTable();
+ $stack9 = $stack8.get((java.lang.Object)topic);
+ topicPublishInfo=(org.apache.rocketmq.client.impl.producer.TopicPublishInfo) $stack9;
+ label1:$stack14 = topicPublishInfo.isHaveTopicRouterInfo();
+ if ($stack14!=0) goto label2;
+ $stack14 = topicPublishInfo.ok();
+ if ($stack14==0) goto label3;
+ label2:$stack18 = topicPublishInfo.getMessageQueueList();
+ l5 = $stack18.iterator();
+ label4:$stack14 = l5.hasNext();
+ if ($stack14==0) goto label3;
+ $stack9 = l5.next();
+ queue=(org.apache.rocketmq.common.message.MessageQueue) $stack9;
+ topic = queue.getBrokerName();
+ brokerSet.add((java.lang.Object)topic);
+ goto label4;
+ label3:return  brokerSet;
+ } 
+

@@ -1,0 +1,189 @@
+    private void allIDsAreUnique() throws rifl.spec.RIFLIntegrityException
+    {
+        rifl.spec.RIFLSpecification this;
+        java.util.HashSet ids, tmp$1743055101;
+        rifl.spec.Identifiable dom;
+        java.util.Iterator l3, l7;
+        java.util.LinkedList q, tmp$1208454156;
+        rifl.spec.Category category;
+        rifl.spec.CatSrcSnk catSrcSnk;
+        java.util.Set $stack9;
+        boolean $stack11;
+        java.lang.Object $stack12;
+        java.lang.String $stack13;
+        rifl.spec.Domain tmp$918041611;
+        rifl.spec.Assignable tmp$205586118;
+
+        this := @this: rifl.spec.RIFLSpecification;
+
+        tmp$1743055101 = new java.util.HashSet;
+/*92*/
+
+        ids = tmp$1743055101;
+
+        specialinvoke tmp$1743055101.<java.util.HashSet: void <init>()>();
+/*92*/
+
+        ids = tmp$1743055101;
+/*92*/
+
+        $stack9 = this.<rifl.spec.RIFLSpecification: java.util.Set domains>;
+/*95*/
+
+        l3 = interfaceinvoke $stack9.<java.util.Set: java.util.Iterator iterator()>();
+/*95*/
+/*95*/
+
+        goto label2;
+/*95*/
+
+     label1:
+        $stack12 = interfaceinvoke l3.<java.util.Iterator: java.lang.Object next()>();
+/*95*/
+
+        dom = (rifl.spec.Domain) $stack12;
+/*95*/
+
+        tmp$918041611 = (rifl.spec.Domain) dom;
+
+        $stack13 = virtualinvoke tmp$918041611.<rifl.spec.Domain: java.lang.String getName()>();
+/*96*/
+
+        specialinvoke this.<rifl.spec.RIFLSpecification: void checkUniquenessOfID(java.lang.String,java.util.HashSet)>($stack13, tmp$1743055101);
+/*96*/
+
+     label2:
+        $stack11 = interfaceinvoke l3.<java.util.Iterator: boolean hasNext()>();
+/*95*/
+
+        if $stack11 != 0 goto label1;
+/*95*/
+
+        $stack9 = this.<rifl.spec.RIFLSpecification: java.util.Set interfaceSpec>;
+/*100*/
+
+        l3 = interfaceinvoke $stack9.<java.util.Set: java.util.Iterator iterator()>();
+/*100*/
+/*100*/
+
+        goto label8;
+/*100*/
+
+     label3:
+        $stack12 = interfaceinvoke l3.<java.util.Iterator: java.lang.Object next()>();
+/*100*/
+
+        dom = (rifl.spec.Assignable) $stack12;
+/*100*/
+
+        tmp$205586118 = (rifl.spec.Assignable) dom;
+
+        $stack13 = virtualinvoke tmp$205586118.<rifl.spec.Assignable: java.lang.String getName()>();
+/*101*/
+
+        specialinvoke this.<rifl.spec.RIFLSpecification: void checkUniquenessOfID(java.lang.String,java.util.HashSet)>($stack13, tmp$1743055101);
+/*101*/
+
+        tmp$205586118 = (rifl.spec.Assignable) dom;
+
+        catSrcSnk = tmp$205586118.<rifl.spec.Assignable: rifl.spec.CatSrcSnk catSrcSnk>;
+/*104*/
+
+        $stack11 = catSrcSnk instanceof rifl.spec.Category;
+/*104*/
+
+        if $stack11 == 0 goto label8;
+/*104*/
+
+        tmp$1208454156 = new java.util.LinkedList;
+/*105*/
+
+        q = tmp$1208454156;
+
+        specialinvoke tmp$1208454156.<java.util.LinkedList: void <init>()>();
+/*105*/
+
+        q = tmp$1208454156;
+/*105*/
+
+        tmp$205586118 = (rifl.spec.Assignable) dom;
+
+        catSrcSnk = tmp$205586118.<rifl.spec.Assignable: rifl.spec.CatSrcSnk catSrcSnk>;
+/*106*/
+
+        category = (rifl.spec.Category) catSrcSnk;
+/*106*/
+
+        virtualinvoke tmp$1208454156.<java.util.LinkedList: boolean add(java.lang.Object)>(category);
+/*106*/
+
+        goto label7;
+/*107*/
+
+     label4:
+        $stack12 = virtualinvoke tmp$1208454156.<java.util.LinkedList: java.lang.Object removeFirst()>();
+/*108*/
+
+        category = (rifl.spec.Category) $stack12;
+/*108*/
+
+        $stack13 = virtualinvoke category.<rifl.spec.Category: java.lang.String getName()>();
+/*109*/
+
+        specialinvoke this.<rifl.spec.RIFLSpecification: void checkUniquenessOfID(java.lang.String,java.util.HashSet)>($stack13, tmp$1743055101);
+/*109*/
+
+        $stack9 = category.<rifl.spec.Category: java.util.Set catSrcSnks>;
+/*110*/
+
+        l7 = interfaceinvoke $stack9.<java.util.Set: java.util.Iterator iterator()>();
+/*110*/
+/*110*/
+
+        goto label6;
+/*110*/
+
+     label5:
+        $stack12 = interfaceinvoke l7.<java.util.Iterator: java.lang.Object next()>();
+/*110*/
+
+        catSrcSnk = (rifl.spec.CatSrcSnk) $stack12;
+/*110*/
+
+        $stack11 = catSrcSnk instanceof rifl.spec.Category;
+/*111*/
+
+        if $stack11 == 0 goto label6;
+/*111*/
+
+        category = (rifl.spec.Category) catSrcSnk;
+/*112*/
+
+        virtualinvoke tmp$1208454156.<java.util.LinkedList: boolean add(java.lang.Object)>(category);
+/*112*/
+
+     label6:
+        $stack11 = interfaceinvoke l7.<java.util.Iterator: boolean hasNext()>();
+/*110*/
+
+        if $stack11 != 0 goto label5;
+/*110*/
+
+     label7:
+        $stack11 = virtualinvoke tmp$1208454156.<java.util.LinkedList: boolean isEmpty()>();
+/*107*/
+
+        if $stack11 == 0 goto label4;
+/*107*/
+
+     label8:
+        $stack11 = interfaceinvoke l3.<java.util.Iterator: boolean hasNext()>();
+/*100*/
+
+        if $stack11 != 0 goto label3;
+/*100*/
+
+        return;
+/*118*/
+    }
+

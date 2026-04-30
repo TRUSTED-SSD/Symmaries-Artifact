@@ -1,0 +1,21 @@
+static int java.lang.Character:codePointAtImpl(char[] r0,int i4,int i0)
+{
+char c1;
+  char c2;
+  boolean $z0;
+  boolean $z1;
+  int $i3;
+  int i5;
+  c1=r0[i4];
+ $z0 = java.lang.Character.isHighSurrogate(c1);
+ if ($z0==0) goto label0;
+ i5=(i4+1);
+ if (i5>=i0) goto label0;
+ c2=r0[i5];
+ $z1 = java.lang.Character.isLowSurrogate(c2);
+ if ($z1==0) goto label0;
+ $i3 = java.lang.Character.toCodePoint(c1,c2);
+ return  $i3;
+ label0:return  c1;
+ }  
+

@@ -1,0 +1,39 @@
+static int[] com.google.zxing.pdf417.decoder.PDF417CodewordDecoder:sampleBitCounts(int[] moduleBitCount)
+{
+float bitCountSum;
+  int[] result;
+  int bitCountIndex;
+  int sumPreviousBits;
+  int i;
+  float sampleIndex;
+  float $stack8;
+  int $stack12;
+  byte $stack15;
+  bitCountIndex = com.google.zxing.common.detector.MathUtils.sum(moduleBitCount);
+ bitCountSum=(float) bitCountIndex;
+ result=new int[8];
+ bitCountIndex=0;
+ sumPreviousBits=0;
+ i=0;
+ label0:if (i>=17) goto label1;
+ sampleIndex=(bitCountSum/34.0F);
+ $stack8=(float) i;
+ $stack8=($stack8 * bitCountSum);
+ $stack8=($stack8/17.0F);
+ sampleIndex=(sampleIndex+$stack8);
+ $stack12=moduleBitCount[bitCountIndex];
+ $stack12=(sumPreviousBits+$stack12);
+ $stack8=(float) $stack12;
+ $stack15=($stack8 cmpg sampleIndex);
+ if ($stack15>0) goto label2;
+ $stack12=moduleBitCount[bitCountIndex];
+ sumPreviousBits=(sumPreviousBits+$stack12);
+ bitCountIndex=(bitCountIndex+1);
+ label2:$stack12=result[bitCountIndex];
+ $stack12=($stack12+1);
+ result[bitCountIndex]=$stack12;
+ i=(i+1);
+ goto label0;
+ label1:return  result;
+ } 
+

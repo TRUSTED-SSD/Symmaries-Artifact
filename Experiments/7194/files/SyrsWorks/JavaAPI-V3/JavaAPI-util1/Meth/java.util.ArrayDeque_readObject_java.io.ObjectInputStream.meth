@@ -1,0 +1,26 @@
+void java.util.ArrayDeque:readObject(java.io.ObjectInputStream r1)
+{
+int i0;
+  int i1;
+  sun.misc.JavaOISAccess $r2;
+  java.lang.Object[] $r3;
+  java.lang.Object $r4;
+  int i2;
+  r1.defaultReadObject();
+ i0 = r1.readInt();
+ i1 = java.util.ArrayDeque.calculateSize(i0);
+ $r2 = sun.misc.SharedSecrets.getJavaOISAccess();
+ $r2.checkArray(r1,java.lang.Object[],i1);
+ this#java.util.ArrayDeque:allocateElements(i0);
+ this.head=0;
+ this.tail=i0;
+ i2=0;
+ label0:if (i2>=i0) goto label1;
+ $r3=this.elements;
+ $r4 = r1.readObject();
+ $r3[i2]=$r4;
+ i2=(i2+1);
+ goto label0;
+ label1:return;
+ }  
+

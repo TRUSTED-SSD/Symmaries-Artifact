@@ -1,0 +1,44 @@
+digraph G {
+  node [shape=box, ];
+  "pc0_js1" [label="〈$b2 = l0 cmp l1, js1〉", ];
+  "pc1_js1" [label="〈if ($b2 > 0) goto label0, js1〉", ];
+  "pc2_js1" [label="〈$l3 = l0, js1〉", ];
+  "pc3_js1" [label="〈goto label1, js1〉", ];
+  "pc4_js1" [label="〈label0: $l3 = l1, js1〉", ];
+  "pc5_js1" [label="〈label1: return $l3, js1〉", ];
+  "pc5_js2" [label="〈label1: return $l3, js2〉", ];
+  "pc6_js1" [label="〈sink, js1〉\n\
+ϕ ≠ S5 ∨ pc ⊔ level($l3) ⊑ ret(level())'",
+             ];
+  
+  
+  "pc0_js1" -> "pc1_js1" [label="tt,\n\
+{level($b2) := pc ⊔ level(l0) ⊔ level(l1)}",
+                          ];
+  "pc1_js1" -> "pc2_js1" [label="υ ∧ ¬ω ∨ ¬τ ∧ ¬υ ∧ level($b2) ⊐ pc ∨ ¬τ ∧ ¬υ ∧ level($b2) ⊑ pc,\n\
+{pc := if ¬(¬τ ∧ ¬υ ∧ level($b2) ⊐ pc) ∨ υ ∧ ¬ω then pc else pc ⊔ level($b2),\n\
+ hr := if ¬(¬τ ∧ ¬υ ∧ level($b2) ⊐ pc) ∨ υ ∧ ¬ω then hr else P1}",
+                          ];
+  "pc1_js1" -> "pc4_js1" [label="υ ∧ ω ∨ τ ∧ ¬υ ∧ level($b2) ⊐ pc ∨ τ ∧ ¬υ ∧ level($b2) ⊑ pc,\n\
+{pc := if ¬(τ ∧ ¬υ ∧ level($b2) ⊐ pc) ∨ υ ∧ ω then pc else pc ⊔ level($b2),\n\
+ hr := if ¬(τ ∧ ¬υ ∧ level($b2) ⊐ pc) ∨ υ ∧ ω then hr else P1}",
+                          ];
+  "pc2_js1" -> "pc3_js1" [label="tt,\n\
+{level($l3) := pc ⊔ (if υ then level($l3) else level(l0))}",
+                          ];
+  "pc3_js1" -> "pc5_js1" [label="tt,\n\
+{}", ];
+  "pc4_js1" -> "pc5_js1" [label="tt,\n\
+{level($l3) := pc ⊔ (if υ then level($l3) else level(l1))}",
+                          ];
+  "pc5_js1" -> "pc1_js1" [label="¬υ ∧ hr = P1,\n\
+{υ := tt}", ];
+  "pc5_js1" -> "pc5_js2" [label="hr ≠ P1 ∨ υ ∧ hr = P1,\n\
+{υ := υ ∧ ¬(υ ∧ hr = P1),\n\
+ pc := if υ ∧ hr = P1 then ⊥ else pc,\n\
+ hr := if υ ∧ hr = P1 then P. else hr}",
+                          ];
+  "pc5_js2" -> "pc6_js1" [label="tt,\n\
+{ϕ := S5}", ];
+  
+  }

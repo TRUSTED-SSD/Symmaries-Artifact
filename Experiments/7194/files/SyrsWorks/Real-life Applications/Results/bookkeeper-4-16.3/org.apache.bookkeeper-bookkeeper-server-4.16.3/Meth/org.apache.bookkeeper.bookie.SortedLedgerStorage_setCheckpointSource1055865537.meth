@@ -1,0 +1,27 @@
+void org.apache.bookkeeper.bookie.SortedLedgerStorage:setCheckpointSource(org.apache.bookkeeper.bookie.CheckpointSource checkpointSource)
+{
+org.apache.bookkeeper.bookie.InterleavedLedgerStorage $stack2;
+  org.apache.bookkeeper.conf.ServerConfiguration $stack3;
+  boolean $stack4;
+  org.apache.bookkeeper.bookie.EntryMemTable $stack5;
+  org.apache.bookkeeper.stats.StatsLogger $stack6;
+  org.apache.bookkeeper.bookie.EntryMemTableWithParallelFlusher $stack8;
+  $stack2=this.interleavedLedgerStorage;
+ $stack2.setCheckpointSource(checkpointSource);
+ $stack3=this.conf;
+ $stack4 = $stack3.isEntryLogPerLedgerEnabled();
+ if ($stack4==0) goto label0;
+ $stack8=new org.apache.bookkeeper.bookie.EntryMemTableWithParallelFlusher;
+ $stack3=this.conf;
+ $stack6=this.statsLogger;
+ $stack8#org.apache.bookkeeper.bookie.EntryMemTableWithParallelFlusher($stack3,checkpointSource,$stack6);
+ this.memTable=$stack8;
+ goto label1;
+ label0:$stack5=new org.apache.bookkeeper.bookie.EntryMemTable;
+ $stack3=this.conf;
+ $stack6=this.statsLogger;
+ $stack5#org.apache.bookkeeper.bookie.EntryMemTable($stack3,checkpointSource,$stack6);
+ this.memTable=$stack5;
+ label1:return;
+ } 
+

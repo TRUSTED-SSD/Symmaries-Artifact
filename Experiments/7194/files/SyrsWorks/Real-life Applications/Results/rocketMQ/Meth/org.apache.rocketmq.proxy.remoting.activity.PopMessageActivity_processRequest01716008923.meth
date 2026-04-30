@@ -1,0 +1,19 @@
+org.apache.rocketmq.remoting.protocol.RemotingCommand org.apache.rocketmq.proxy.remoting.activity.PopMessageActivity:processRequest0(io.netty.channel.ChannelHandlerContext ctx,org.apache.rocketmq.remoting.protocol.RemotingCommand @request,org.apache.rocketmq.proxy.common.ProxyContext context)
+{
+org.apache.rocketmq.remoting.protocol.header.PopMessageRequestHeader popMessageRequestHeader;
+  long timeoutMillis;
+  org.apache.rocketmq.remoting.CommandCustomHeader $stack7;
+  java.time.Duration $stack9;
+  long $stack10;
+  org.apache.rocketmq.remoting.protocol.RemotingCommand request;
+request=@request;
+$stack7 = request.decodeCommandCustomHeader(org.apache.rocketmq.remoting.protocol.header.PopMessageRequestHeader);
+ popMessageRequestHeader=(org.apache.rocketmq.remoting.protocol.header.PopMessageRequestHeader) $stack7;
+ timeoutMillis = popMessageRequestHeader.getPollTime();
+ $stack9 = java.time.Duration.ofSeconds(10L);
+ $stack10 = $stack9.toMillis();
+ timeoutMillis=(timeoutMillis+$stack10);
+ request = this.request(ctx,request,context,timeoutMillis);
+ return  request;
+ } 
+

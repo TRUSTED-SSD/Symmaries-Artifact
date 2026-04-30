@@ -1,0 +1,8 @@
+org.apache.rocketmq.tieredstore.metadata.QueueMetadata org.apache.rocketmq.tieredstore.metadata.TieredMetadataManager:getQueue (
+  org.apache.rocketmq.common.message.MessageQueue queue) {
+  guard = tt;
+  ret(level()) = level(queue) ⊔ level(this) ⊔ obj_level(queue) ⊔ obj_level(this);
+  ret(obj_level()) = level(queue) ⊔ level(this) ⊔ obj_level(queue) ⊔ obj_level(this);
+  ret(obj_level(queue)) = level(queue) ⊔ level(this) ⊔ obj_level(queue) ⊔ obj_level(this);
+  ret(obj_level(this)) = level(queue) ⊔ level(this) ⊔ obj_level(queue) ⊔ obj_level(this);
+}

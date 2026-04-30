@@ -1,0 +1,56 @@
+void org.junit.internal.ComparisonCriteria:arrayEquals(java.lang.String message,java.lang.Object expecteds,java.lang.Object actuals)
+{
+java.lang.String header;
+  int expectedsLength;
+  int i;
+  java.lang.Object expected;
+  java.lang.Object actual;
+  org.junit.internal.ArrayComparisonFailure e;
+  java.lang.Object[] $stack10;
+  java.lang.Object[] $stack11;
+  boolean $stack12;
+  java.lang.StringBuilder $stack13;
+  java.lang.AssertionError $stack33;
+  if (expecteds==actuals) goto label0;
+ $stack10=new java.lang.Object[1];
+ $stack10[0]=expecteds;
+ $stack11=new java.lang.Object[1];
+ $stack11[0]=actuals;
+ $stack12 = java.util.Arrays.deepEquals($stack10,$stack11);
+ if ($stack12==0) goto label1;
+ label0:return;
+ label1:if (message!=null) goto label2;
+ header="";
+ goto label3;
+ label2:$stack13=new java.lang.StringBuilder;
+ $stack13#java.lang.StringBuilder();
+ $stack13 = $stack13.append(message);
+ $stack13 = $stack13.append(": ");
+ header = $stack13.toString();
+ label3:expectedsLength = this#org.junit.internal.ComparisonCriteria:assertArraysAreSameLength(expecteds,actuals,header);
+ i=0;
+ label4:if (i>=expectedsLength) goto label5;
+ expected = java.lang.reflect.Array.get(expecteds,i);
+ actual = java.lang.reflect.Array.get(actuals,i);
+ $stack12 = this#org.junit.internal.ComparisonCriteria:isArray(expected);
+ if ($stack12==0) goto label6;
+ $stack12 = this#org.junit.internal.ComparisonCriteria:isArray(actual);
+ if ($stack12==0) goto label6;
+ label7:this#org.junit.internal.ComparisonCriteria(message,expected,actual);
+ label8:goto label9;
+ label10:e = catch;
+ e.addDimension(i);
+ throw e;
+ label6:this.assertElementsEqual(expected,actual);
+ label11:goto label9;
+ label12:$stack33 = catch;
+ e=new org.junit.internal.ArrayComparisonFailure;
+ e#org.junit.internal.ArrayComparisonFailure(header,$stack33,i);
+ throw e;
+ label9:i=(i+1);
+ goto label4;
+ label5:return;
+ catch org.junit.internal.ArrayComparisonFailure: label7 - label8 : label10;
+catch java.lang.AssertionError: label6 - label11 : label12;
+} 
+

@@ -1,0 +1,57 @@
+void org.apache.rocketmq.store.ConsumeQueue:assignQueueOffset(org.apache.rocketmq.store.queue.QueueOffsetAssigner queueOffsetAssigner,org.apache.rocketmq.common.message.MessageExtBrokerInner msg,short messageNum)
+{
+java.lang.String topicQueueKey;
+  long queueOffset;
+  java.lang.String[] queues;
+  java.lang.Long[] queueOffsets;
+  int i;
+  java.lang.StringBuilder $stack12;
+  org.apache.rocketmq.store.MessageStore $stack20;
+  org.apache.rocketmq.store.config.MessageStoreConfig $stack21;
+  boolean $stack22;
+  int $stack27;
+  java.lang.Long $stack39;
+  $stack12=new java.lang.StringBuilder;
+ $stack12#java.lang.StringBuilder();
+ topicQueueKey = this.getTopic();
+ $stack12 = $stack12.append(topicQueueKey);
+ $stack12 = $stack12.append("-");
+ i = this.getQueueId();
+ $stack12 = $stack12.append(i);
+ topicQueueKey = $stack12.toString();
+ queueOffset = queueOffsetAssigner.assignQueueOffset(topicQueueKey,messageNum);
+ msg.setQueueOffset(queueOffset);
+ $stack20=this.messageStore;
+ $stack21 = $stack20.getMessageStoreConfig();
+ $stack22 = $stack21.isEnableMultiDispatch();
+ if ($stack22!=0) goto label0;
+ return;
+ label0:topicQueueKey = msg.getProperty("INNER_MULTI_DISPATCH");
+ $stack22 = org.apache.commons.lang3.StringUtils.isBlank((java.lang.CharSequence)topicQueueKey);
+ if ($stack22==0) goto label1;
+ return;
+ label1:queues = topicQueueKey.split(",");
+ i=#queues;
+ queueOffsets=new java.lang.Long[i];
+ i=0;
+ label2:$stack27=#queues;
+ if (i>=$stack27) goto label3;
+ topicQueueKey=queues[i];
+ topicQueueKey = this.queueKey(topicQueueKey,msg);
+ $stack20=this.messageStore;
+ $stack21 = $stack20.getMessageStoreConfig();
+ $stack22 = $stack21.isEnableLmq();
+ if ($stack22==0) goto label4;
+ $stack22 = org.apache.rocketmq.common.MixAll.isLmq(topicQueueKey);
+ if ($stack22==0) goto label4;
+ queueOffset = queueOffsetAssigner.assignLmqOffset(topicQueueKey,(short)1);
+ $stack39 = java.lang.Long.valueOf(queueOffset);
+ queueOffsets[i]=$stack39;
+ label4:i=(i+1);
+ goto label2;
+ label3:topicQueueKey = org.apache.commons.lang3.StringUtils.join((java.lang.Object[])queueOffsets,",");
+ org.apache.rocketmq.common.message.MessageAccessor.putProperty((org.apache.rocketmq.common.message.Message)msg,"INNER_MULTI_QUEUE_OFFSET",topicQueueKey);
+ this#org.apache.rocketmq.store.ConsumeQueue:removeWaitStorePropertyString(msg);
+ return;
+ } 
+

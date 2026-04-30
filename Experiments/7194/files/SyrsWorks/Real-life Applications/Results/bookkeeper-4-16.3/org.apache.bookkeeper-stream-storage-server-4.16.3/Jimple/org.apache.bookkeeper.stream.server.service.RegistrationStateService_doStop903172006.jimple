@@ -1,0 +1,40 @@
+    protected void doStop()
+    {
+        org.apache.bookkeeper.stream.server.service.RegistrationStateService this;
+        org.apache.bookkeeper.bookie.BookieStateManager $stack1;
+        org.slf4j.Logger $stack4;
+
+        this := @this: org.apache.bookkeeper.stream.server.service.RegistrationStateService;
+
+        $stack1 = this.<org.apache.bookkeeper.stream.server.service.RegistrationStateService: org.apache.bookkeeper.bookie.BookieStateManager stateManager>;
+/*98*/
+
+        if null != $stack1 goto label1;
+/*98*/
+
+        $stack4 = <org.apache.bookkeeper.stream.server.service.RegistrationStateService: org.slf4j.Logger log>;
+/*99*/
+
+        interfaceinvoke $stack4.<org.slf4j.Logger: void info(java.lang.String)>("State Manager is null, no need to stop it.");
+/*99*/
+
+        return;
+/*100*/
+
+     label1:
+        $stack1 = this.<org.apache.bookkeeper.stream.server.service.RegistrationStateService: org.apache.bookkeeper.bookie.BookieStateManager stateManager>;
+/*102*/
+
+        virtualinvoke $stack1.<org.apache.bookkeeper.bookie.BookieStateManager: void forceToShuttingDown()>();
+/*102*/
+
+        $stack1 = this.<org.apache.bookkeeper.stream.server.service.RegistrationStateService: org.apache.bookkeeper.bookie.BookieStateManager stateManager>;
+/*106*/
+
+        virtualinvoke $stack1.<org.apache.bookkeeper.bookie.BookieStateManager: void forceToReadOnly()>();
+/*106*/
+
+        return;
+/*107*/
+    }
+

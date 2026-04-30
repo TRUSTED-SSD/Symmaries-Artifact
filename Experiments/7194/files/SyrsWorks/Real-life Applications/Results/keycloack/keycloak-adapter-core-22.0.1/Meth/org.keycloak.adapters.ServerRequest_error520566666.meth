@@ -1,0 +1,43 @@
+static void org.keycloak.adapters.ServerRequest:error(int status,org.apache.http.HttpEntity entity)
+{
+java.lang.String body;
+  java.io.InputStream is;
+  java.io.IOException l4;
+  java.lang.Throwable l5;
+  org.keycloak.adapters.ServerRequest$HttpFailure $stack7;
+  java.io.IOException $stack12;
+  java.io.IOException $stack14;
+  java.io.IOException $stack16;
+  body=null;
+ if (entity==null) goto label0;
+ is = entity.getContent();
+ label1:body = org.keycloak.common.util.StreamUtil.readString(is);
+ label2:is.close();
+ label3:goto label0;
+ label4:l4 = catch;
+ goto label0;
+ label5:$stack12 = catch;
+ l4=$stack12;
+ label6:is.close();
+ label7:goto label0;
+ label8:$stack14 = catch;
+ l4=$stack14;
+ goto label0;
+ label9:l5 = catch;
+ label10:is.close();
+ label11:goto label12;
+ label13:$stack16 = catch;
+ l4=$stack16;
+ label12:throw l5;
+ label0:$stack7=new org.keycloak.adapters.ServerRequest$HttpFailure;
+ $stack7#org.keycloak.adapters.ServerRequest$HttpFailure(status,body);
+ throw $stack7;
+ catch java.io.IOException: label2 - label3 : label4;
+catch java.io.IOException: label1 - label2 : label5;
+catch java.io.IOException: label6 - label7 : label8;
+catch java.lang.Throwable: label1 - label2 : label9;
+catch java.lang.Throwable: label5 - label6 : label9;
+catch java.io.IOException: label10 - label11 : label13;
+catch java.lang.Throwable: label9 - label10 : label9;
+} 
+

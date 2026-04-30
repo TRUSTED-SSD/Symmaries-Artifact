@@ -1,0 +1,20 @@
+boolean org.apache.rocketmq.store.timer.TimerMessageStore:checkStateForPutMessages(int state)
+{
+org.apache.rocketmq.store.timer.TimerMessageStore$TimerDequeuePutMessageService[] l2;
+  int l3;
+  int l4;
+  org.apache.rocketmq.store.timer.TimerMessageStore$TimerDequeuePutMessageService service;
+  boolean $stack6;
+  l2=this.dequeuePutMessageServices;
+ l3=#l2;
+ l4=0;
+ label0:if (l4>=l3) goto label1;
+ service=l2[l4];
+ $stack6 = service.isState(state);
+ if ($stack6!=0) goto label2;
+ return  0;
+ label2:l4=(l4+1);
+ goto label0;
+ label1:return  1;
+ } 
+

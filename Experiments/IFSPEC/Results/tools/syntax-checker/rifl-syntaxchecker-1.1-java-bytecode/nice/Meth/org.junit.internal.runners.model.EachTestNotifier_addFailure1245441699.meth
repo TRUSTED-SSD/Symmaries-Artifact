@@ -1,0 +1,20 @@
+void org.junit.internal.runners.model.EachTestNotifier:addFailure(java.lang.Throwable targetException)
+{
+boolean $stack2;
+  org.junit.runner.notification.Failure $stack3;
+  org.junit.runner.Description $stack4;
+  org.junit.runner.notification.RunNotifier $stack5;
+  org.junit.runners.model.MultipleFailureException $stack6;
+  $stack2=targetException instanceof org.junit.runners.model.MultipleFailureException;
+ if ($stack2==0) goto label0;
+ $stack6=(org.junit.runners.model.MultipleFailureException) targetException;
+ this#org.junit.internal.runners.model.EachTestNotifier:addMultipleFailureException($stack6);
+ goto label1;
+ label0:$stack5=this.notifier;
+ $stack3=new org.junit.runner.notification.Failure;
+ $stack4=this.description;
+ $stack3#org.junit.runner.notification.Failure($stack4,targetException);
+ $stack5.fireTestFailure($stack3);
+ label1:return;
+ } 
+

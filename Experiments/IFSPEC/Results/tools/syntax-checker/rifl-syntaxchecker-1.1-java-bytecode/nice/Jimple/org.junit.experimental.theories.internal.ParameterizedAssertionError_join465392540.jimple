@@ -1,0 +1,61 @@
+    public static java.lang.String join(java.lang.String, java.util.Collection)
+    {
+        java.lang.String delimiter, $stack10;
+        java.util.Collection values;
+        java.lang.StringBuilder sb;
+        java.util.Iterator iter;
+        java.lang.Object next;
+        boolean $stack7;
+
+        delimiter := @parameter0: java.lang.String;
+
+        values := @parameter1: java.util.Collection;
+
+        sb = new java.lang.StringBuilder;
+/*31*/
+
+        specialinvoke sb.<java.lang.StringBuilder: void <init>()>();
+/*31*/
+
+        iter = interfaceinvoke values.<java.util.Collection: java.util.Iterator iterator()>();
+/*32*/
+/*32*/
+
+     label1:
+        $stack7 = interfaceinvoke iter.<java.util.Iterator: boolean hasNext()>();
+/*33*/
+
+        if $stack7 == 0 goto label3;
+/*33*/
+
+        next = interfaceinvoke iter.<java.util.Iterator: java.lang.Object next()>();
+/*34*/
+/*34*/
+
+        $stack10 = staticinvoke <org.junit.experimental.theories.internal.ParameterizedAssertionError: java.lang.String stringValueOf(java.lang.Object)>(next);
+/*35*/
+
+        virtualinvoke sb.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>($stack10);
+/*35*/
+
+        $stack7 = interfaceinvoke iter.<java.util.Iterator: boolean hasNext()>();
+/*36*/
+
+        if $stack7 == 0 goto label2;
+/*36*/
+
+        virtualinvoke sb.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>(delimiter);
+/*37*/
+
+     label2:
+        goto label1;
+/*39*/
+
+     label3:
+        delimiter = virtualinvoke sb.<java.lang.StringBuilder: java.lang.String toString()>();
+/*40*/
+
+        return delimiter;
+/*40*/
+    }
+

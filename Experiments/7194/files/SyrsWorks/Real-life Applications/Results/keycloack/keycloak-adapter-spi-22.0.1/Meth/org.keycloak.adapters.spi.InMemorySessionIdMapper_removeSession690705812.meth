@@ -1,0 +1,31 @@
+void org.keycloak.adapters.spi.InMemorySessionIdMapper:removeSession(java.lang.String session)
+{
+java.lang.String sso;
+  java.util.Set sessions;
+  org.jboss.logging.Logger $stack5;
+  java.util.concurrent.ConcurrentHashMap $stack6;
+  java.lang.Object $stack7;
+  boolean $stack12;
+  $stack5=org.keycloak.adapters.spi.InMemorySessionIdMapper.LOG;
+ $stack5.debugf("Removing session %s",(java.lang.Object)session);
+ $stack6=this.sessionToSso;
+ $stack7 = $stack6.remove((java.lang.Object)session);
+ sso=(java.lang.String) $stack7;
+ if (sso==null) goto label0;
+ $stack6=this.ssoToSession;
+ $stack6.remove((java.lang.Object)sso);
+ label0:$stack6=this.sessionToPrincipal;
+ $stack7 = $stack6.remove((java.lang.Object)session);
+ sso=(java.lang.String) $stack7;
+ if (sso==null) goto label1;
+ $stack6=this.principalToSession;
+ $stack7 = $stack6.get((java.lang.Object)sso);
+ sessions=(java.util.Set) $stack7;
+ sessions.remove((java.lang.Object)session);
+ $stack12 = sessions.isEmpty();
+ if ($stack12==0) goto label1;
+ $stack6=this.principalToSession;
+ $stack6.remove((java.lang.Object)sso,(java.lang.Object)sessions);
+ label1:return;
+ } 
+

@@ -1,0 +1,37 @@
+static java.security.PrivateKey org.apache.kerby.kerberos.kerb.common.PrivateKeyReader:loadPrivateKey(java.io.InputStream in)
+{
+java.io.BufferedReader br;
+  java.lang.String readLine;
+  java.lang.StringBuilder sb;
+  java.io.InputStreamReader $stack5;
+  java.nio.charset.Charset $stack6;
+  java.lang.String $stack8;
+  java.security.PrivateKey $stack10;
+  char $stack11;
+  java.io.IOException $stack15;
+  label0:br=new java.io.BufferedReader;
+ $stack5=new java.io.InputStreamReader;
+ $stack6=java.nio.charset.StandardCharsets.UTF_8;
+ $stack5#java.io.InputStreamReader(in,$stack6);
+ br#java.io.BufferedReader((java.io.Reader)$stack5);
+ readLine=null;
+ sb=new java.lang.StringBuilder;
+ sb#java.lang.StringBuilder();
+ label1:$stack8 = br.readLine();
+dummyClass.highSourceMut($stack8);
+ readLine=$stack8;
+ if ($stack8==null) goto label2;
+ $stack11 = $stack8.charAt(0);
+ if ($stack11!=45) goto label3;
+ goto label1;
+ label3:sb.append($stack8);
+ sb.append((char)13);
+ goto label1;
+ label2:readLine = sb.toString();
+ $stack10 = org.apache.kerby.kerberos.kerb.common.PrivateKeyReader.loadPrivateKey(readLine);
+ label4:return  $stack10;
+ label5:$stack15 = catch;
+ throw $stack15;
+ catch java.io.IOException: label0 - label4 : label5;
+} 
+

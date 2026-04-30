@@ -1,0 +1,27 @@
+void org.apache.bookkeeper.proto.WriteLacProcessorV3:run()
+{
+org.apache.bookkeeper.proto.BookkeeperProtocol$WriteLacResponse writeLacResponse;
+  org.apache.bookkeeper.proto.BookkeeperProtocol$Response$Builder response;
+  org.apache.bookkeeper.proto.BookkeeperProtocol$Response resp;
+  org.apache.bookkeeper.proto.BookkeeperProtocol$BKPacketHeader $stack6;
+  org.apache.bookkeeper.proto.BookkeeperProtocol$StatusCode $stack8;
+  org.apache.bookkeeper.proto.BookieRequestProcessor $stack13;
+  org.apache.bookkeeper.proto.RequestStats $stack14;
+  org.apache.bookkeeper.stats.OpStatsLogger $stack15;
+  writeLacResponse = this#org.apache.bookkeeper.proto.WriteLacProcessorV3:getWriteLacResponse();
+ if (null==writeLacResponse) goto label0;
+ response = org.apache.bookkeeper.proto.BookkeeperProtocol$Response.newBuilder();
+ $stack6 = this.getHeader();
+ response = response.setHeader($stack6);
+ $stack8 = writeLacResponse.getStatus();
+ response = response.setStatus($stack8);
+ response = response.setWriteLacResponse(writeLacResponse);
+ resp = response.build();
+ $stack8 = writeLacResponse.getStatus();
+ $stack13=this.requestProcessor;
+ $stack14 = $stack13.getRequestStats();
+ $stack15 = $stack14.getWriteLacRequestStats();
+ this.sendResponse($stack8,(java.lang.Object)resp,$stack15);
+ label0:return;
+ } 
+

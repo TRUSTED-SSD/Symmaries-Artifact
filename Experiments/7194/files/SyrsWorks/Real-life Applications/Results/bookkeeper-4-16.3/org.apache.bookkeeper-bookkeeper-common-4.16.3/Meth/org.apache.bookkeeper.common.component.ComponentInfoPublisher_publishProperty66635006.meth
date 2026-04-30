@@ -1,0 +1,39 @@
+void org.apache.bookkeeper.common.component.ComponentInfoPublisher:publishProperty(java.lang.String @key,java.lang.String value)
+{
+org.slf4j.Logger $stack3;
+  boolean $stack4;
+  java.lang.StringBuilder $stack7;
+  java.lang.String $stack11;
+  java.util.Map $stack13;
+  java.lang.IllegalStateException $stack15;
+  java.lang.String key;
+key=@key;
+$stack3=org.apache.bookkeeper.common.component.ComponentInfoPublisher.log;
+ $stack4 = $stack3.isDebugEnabled();
+ if ($stack4==0) goto label0;
+ $stack3=org.apache.bookkeeper.common.component.ComponentInfoPublisher.log;
+ dummyClass.lowSink("publish {}={}");
+$stack3.debug("publish {}={}",(java.lang.Object)key,(java.lang.Object)value);
+ label0:$stack4=this.startupFinished;
+ if ($stack4==0) goto label1;
+ $stack15=new java.lang.IllegalStateException;
+ $stack7=new java.lang.StringBuilder;
+ $stack7#java.lang.StringBuilder();
+ $stack7 = $stack7.append("Server already started, cannot publish ");
+ $stack7 = $stack7.append(key);
+ key = $stack7.toString();
+ $stack15#java.lang.IllegalStateException(key);
+ throw $stack15;
+ label1:java.util.Objects.requireNonNull((java.lang.Object)key);
+ $stack7=new java.lang.StringBuilder;
+ $stack7#java.lang.StringBuilder();
+ $stack7 = $stack7.append("Value for ");
+ $stack7 = $stack7.append(key);
+ $stack7 = $stack7.append(" cannot be null");
+ $stack11 = $stack7.toString();
+ java.util.Objects.requireNonNull((java.lang.Object)value,$stack11);
+ $stack13=this.properties;
+ $stack13.put((java.lang.Object)key,(java.lang.Object)value);
+ return;
+ } 
+

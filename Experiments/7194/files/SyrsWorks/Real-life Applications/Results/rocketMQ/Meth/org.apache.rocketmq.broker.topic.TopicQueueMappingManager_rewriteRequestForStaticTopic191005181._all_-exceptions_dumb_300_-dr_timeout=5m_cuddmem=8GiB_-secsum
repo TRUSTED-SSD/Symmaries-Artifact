@@ -1,0 +1,11 @@
+org.apache.rocketmq.remoting.protocol.RemotingCommand org.apache.rocketmq.broker.topic.TopicQueueMappingManager:rewriteRequestForStaticTopic (
+  org.apache.rocketmq.remoting.rpc.TopicQueueRequestHeader requestHeader,
+  org.apache.rocketmq.remoting.protocol.statictopic.TopicQueueMappingContext
+    mappingContext) {
+  guard = tt;
+  ret(level()) = level(mappingContext) ⊔ level(requestHeader) ⊔ obj_level(mappingContext) ⊔ obj_level(requestHeader);
+  ret(obj_level()) = level(mappingContext) ⊔ level(requestHeader) ⊔ obj_level(mappingContext) ⊔ obj_level(requestHeader);
+  ret(obj_level(mappingContext)) = level(mappingContext) ⊔ level(requestHeader) ⊔ obj_level(mappingContext) ⊔ obj_level(requestHeader);
+  ret(obj_level(requestHeader)) = level(mappingContext) ⊔ level(requestHeader) ⊔ obj_level(mappingContext) ⊔ obj_level(requestHeader);
+  ret(obj_level(this)) = level(mappingContext) ⊔ level(requestHeader) ⊔ obj_level(mappingContext) ⊔ obj_level(requestHeader) ⊔ obj_level(this);
+}

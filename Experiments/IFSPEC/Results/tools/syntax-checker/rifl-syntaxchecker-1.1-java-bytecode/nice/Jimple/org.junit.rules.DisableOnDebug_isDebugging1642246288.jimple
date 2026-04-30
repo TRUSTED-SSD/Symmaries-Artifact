@@ -1,0 +1,58 @@
+    private static boolean isDebugging(java.util.List)
+    {
+        java.util.List arguments;
+        java.util.Iterator i$;
+        java.lang.String argument, $stack6;
+        boolean $stack4;
+        java.lang.Object $stack5;
+
+        arguments := @parameter0: java.util.List;
+
+        i$ = interfaceinvoke arguments.<java.util.List: java.util.Iterator iterator()>();
+/*105*/
+/*105*/
+
+     label1:
+        $stack4 = interfaceinvoke i$.<java.util.Iterator: boolean hasNext()>();
+/*105*/
+
+        if $stack4 == 0 goto label4;
+/*105*/
+
+        $stack5 = interfaceinvoke i$.<java.util.Iterator: java.lang.Object next()>();
+/*112*/
+
+        argument = (java.lang.String) $stack5;
+/*112*/
+
+        $stack6 = "-Xdebug";
+/*106*/
+
+        $stack4 = virtualinvoke $stack6.<java.lang.String: boolean equals(java.lang.Object)>(argument);
+/*106*/
+
+        if $stack4 == 0 goto label2;
+/*106*/
+
+        return 1;
+/*107*/
+
+     label2:
+        $stack4 = virtualinvoke argument.<java.lang.String: boolean startsWith(java.lang.String)>("-agentlib:jdwp");
+/*108*/
+
+        if $stack4 == 0 goto label3;
+/*108*/
+
+        return 1;
+/*109*/
+
+     label3:
+        goto label1;
+/*108*/
+
+     label4:
+        return 0;
+/*112*/
+    }
+

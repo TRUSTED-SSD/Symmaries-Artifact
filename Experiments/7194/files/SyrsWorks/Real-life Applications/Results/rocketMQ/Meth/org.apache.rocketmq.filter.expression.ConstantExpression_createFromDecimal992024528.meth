@@ -1,0 +1,33 @@
+static org.apache.rocketmq.filter.expression.ConstantExpression org.apache.rocketmq.filter.expression.ConstantExpression:createFromDecimal(java.lang.String @text)
+{
+java.lang.Number value;
+  long l;
+  boolean $stack4;
+  int $stack6;
+  java.lang.Long $stack9;
+  byte $stack11;
+  org.apache.rocketmq.filter.expression.ConstantExpression $stack12;
+  java.lang.String text;
+text=@text;
+$stack4 = text.endsWith("l");
+ if ($stack4!=0) goto label0;
+ $stack4 = text.endsWith("L");
+ if ($stack4==0) goto label1;
+ label0:$stack6 = text.length();
+ $stack6=($stack6-1);
+ text = text.substring(0,$stack6);
+ label1:$stack9=new java.lang.Long;
+ $stack9#java.lang.Long(text);
+ value=$stack9;
+ l = $stack9.longValue();
+ $stack11=(-2147483648L cmp l);
+ if ($stack11>0) goto label2;
+ $stack11=(l cmp 2147483647L);
+ if ($stack11>0) goto label2;
+ $stack6 = $stack9.intValue();
+ value = java.lang.Integer.valueOf($stack6);
+ label2:$stack12=new org.apache.rocketmq.filter.expression.ConstantExpression;
+ $stack12#org.apache.rocketmq.filter.expression.ConstantExpression((java.lang.Object)value);
+ return  $stack12;
+ } 
+

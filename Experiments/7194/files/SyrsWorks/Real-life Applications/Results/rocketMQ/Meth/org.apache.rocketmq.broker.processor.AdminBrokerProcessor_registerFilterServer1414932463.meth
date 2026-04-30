@@ -1,0 +1,35 @@
+org.apache.rocketmq.remoting.protocol.RemotingCommand org.apache.rocketmq.broker.processor.AdminBrokerProcessor:registerFilterServer(io.netty.channel.ChannelHandlerContext ctx,org.apache.rocketmq.remoting.protocol.RemotingCommand request)
+{
+org.apache.rocketmq.remoting.protocol.RemotingCommand response;
+  org.apache.rocketmq.remoting.protocol.header.filtersrv.RegisterFilterServerResponseHeader responseHeader;
+  org.apache.rocketmq.remoting.protocol.header.filtersrv.RegisterFilterServerRequestHeader requestHeader;
+  org.apache.rocketmq.remoting.CommandCustomHeader $stack7;
+  org.apache.rocketmq.broker.BrokerController $stack9;
+  org.apache.rocketmq.broker.filtersrv.FilterServerManager $stack10;
+  io.netty.channel.Channel $stack11;
+  java.lang.String $stack12;
+  org.apache.rocketmq.common.BrokerConfig $stack14;
+  long $stack15;
+  response = org.apache.rocketmq.remoting.protocol.RemotingCommand.createResponseCommand(org.apache.rocketmq.remoting.protocol.header.filtersrv.RegisterFilterServerResponseHeader);
+ $stack7 = response.readCustomHeader();
+ responseHeader=(org.apache.rocketmq.remoting.protocol.header.filtersrv.RegisterFilterServerResponseHeader) $stack7;
+ $stack7 = request.decodeCommandCustomHeader(org.apache.rocketmq.remoting.protocol.header.filtersrv.RegisterFilterServerRequestHeader);
+ requestHeader=(org.apache.rocketmq.remoting.protocol.header.filtersrv.RegisterFilterServerRequestHeader) $stack7;
+ $stack9=this.brokerController;
+ $stack10 = $stack9.getFilterServerManager();
+ $stack11 = ctx.channel();
+ $stack12 = requestHeader.getFilterServerAddr();
+ $stack10.registerFilterServer($stack11,$stack12);
+ $stack9=this.brokerController;
+ $stack14 = $stack9.getBrokerConfig();
+ $stack15 = $stack14.getBrokerId();
+ responseHeader.setBrokerId($stack15);
+ $stack9=this.brokerController;
+ $stack14 = $stack9.getBrokerConfig();
+ $stack12 = $stack14.getBrokerName();
+ responseHeader.setBrokerName($stack12);
+ response.setCode(0);
+ response.setRemark(null);
+ return  response;
+ } 
+

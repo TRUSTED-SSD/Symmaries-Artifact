@@ -1,0 +1,35 @@
+java.lang.String org.apache.kerby.asn1.parse.Asn1Container:toString()
+{
+java.lang.String typeStr;
+  org.apache.kerby.asn1.Tag $stack2;
+  java.lang.StringBuilder $stack4;
+  int $stack10;
+  boolean $stack18;
+  $stack2 = this.tag();
+ typeStr = $stack2.typeStr();
+ $stack4=new java.lang.StringBuilder;
+ $stack4#java.lang.StringBuilder();
+ $stack4 = $stack4.append(typeStr);
+ $stack4 = $stack4.append(" [tag=");
+ $stack2 = this.tag();
+ $stack4 = $stack4.append((java.lang.Object)$stack2);
+ $stack4 = $stack4.append(", off=");
+ $stack10 = this.getOffset();
+ $stack4 = $stack4.append($stack10);
+ $stack4 = $stack4.append(", len=");
+ $stack10 = this.getHeaderLength();
+ $stack4 = $stack4.append($stack10);
+ $stack4 = $stack4.append("+");
+ $stack10 = this.getBodyLength();
+ $stack4 = $stack4.append($stack10);
+ $stack18 = this.isDefinitiveLength();
+ if ($stack18==0) goto label0;
+ typeStr="";
+ goto label1;
+ label0:typeStr="(undefined)";
+ label1:$stack4 = $stack4.append(typeStr);
+ $stack4 = $stack4.append("]");
+ typeStr = $stack4.toString();
+ return  typeStr;
+ } 
+

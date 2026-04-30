@@ -1,0 +1,35 @@
+org.apache.rocketmq.remoting.protocol.RemotingCommand org.apache.rocketmq.broker.processor.AdminBrokerProcessor:notifyMinBrokerIdChange(io.netty.channel.ChannelHandlerContext ctx,org.apache.rocketmq.remoting.protocol.RemotingCommand @request)
+{
+org.apache.rocketmq.remoting.protocol.header.NotifyMinBrokerIdChangeRequestHeader requestHeader;
+  org.apache.rocketmq.remoting.CommandCustomHeader $stack5;
+  org.apache.rocketmq.broker.BrokerController $stack7;
+  org.apache.rocketmq.logging.org.slf4j.Logger $stack8;
+  long $stack10;
+  java.lang.Long $stack11;
+  java.lang.Long $stack12;
+  java.lang.String $stack16;
+  java.lang.String $stack17;
+  java.lang.String $stack18;
+  org.apache.rocketmq.remoting.protocol.RemotingCommand request;
+request=@request;
+$stack5 = request.decodeCommandCustomHeader(org.apache.rocketmq.remoting.protocol.header.NotifyMinBrokerIdChangeRequestHeader);
+ requestHeader=(org.apache.rocketmq.remoting.protocol.header.NotifyMinBrokerIdChangeRequestHeader) $stack5;
+ request = org.apache.rocketmq.remoting.protocol.RemotingCommand.createResponseCommand(null);
+ $stack8=org.apache.rocketmq.broker.processor.AdminBrokerProcessor.LOGGER;
+ $stack7=this.brokerController;
+ $stack10 = $stack7.getMinBrokerIdInGroup();
+ $stack11 = java.lang.Long.valueOf($stack10);
+ $stack12 = requestHeader.getMinBrokerId();
+ $stack8.warn("min broker id changed, prev {}, new {}",(java.lang.Object)$stack11,(java.lang.Object)$stack12);
+ $stack7=this.brokerController;
+ $stack11 = requestHeader.getMinBrokerId();
+ $stack10 = $stack11.longValue();
+ $stack16 = requestHeader.getMinBrokerAddr();
+ $stack17 = requestHeader.getOfflineBrokerAddr();
+ $stack18 = requestHeader.getHaBrokerAddr();
+ $stack7.updateMinBroker($stack10,$stack16,$stack17,$stack18);
+ request.setCode(0);
+ request.setRemark(null);
+ return  request;
+ } 
+

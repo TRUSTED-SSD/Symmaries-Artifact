@@ -1,0 +1,10 @@
+javax.security.sasl.SaslServer org.apache.bookkeeper.sasl.SaslServerState:createSaslServer (
+  javax.security.auth.Subject subject,
+  org.apache.bookkeeper.conf.ServerConfiguration serverConfiguration) {
+  guard = pc ⊔ obj_level(subject) = ⊥;
+  ret(level()) = level(subject) ⊔ level(this) ⊔ obj_level(this);
+  ret(obj_level()) = level(subject) ⊔ level(this) ⊔ obj_level(this);
+  ret(obj_level(serverConfiguration)) = level(subject) ⊔ level(this) ⊔ obj_level(serverConfiguration) ⊔ obj_level(this);
+  ret(obj_level(subject)) = level(subject) ⊔ level(this) ⊔ obj_level(this);
+  ret(obj_level(this)) = level(subject) ⊔ level(this) ⊔ obj_level(this);
+}

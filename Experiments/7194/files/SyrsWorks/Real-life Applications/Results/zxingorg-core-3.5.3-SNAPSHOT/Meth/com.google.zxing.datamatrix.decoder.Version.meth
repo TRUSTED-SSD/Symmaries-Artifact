@@ -1,0 +1,30 @@
+com.google.zxing.datamatrix.decoder.Version(int versionNumber,int symbolSizeRows,int symbolSizeColumns,int dataRegionSizeRows,int dataRegionSizeColumns,com.google.zxing.datamatrix.decoder.Version$ECBlocks ecBlocks)
+{
+com.google.zxing.datamatrix.decoder.Version$ECB[] l10;
+  com.google.zxing.datamatrix.decoder.Version$ECB ecBlock;
+  int $stack17;
+  this#java.lang.Object();
+ this.versionNumber=versionNumber;
+ this.symbolSizeRows=symbolSizeRows;
+ this.symbolSizeColumns=symbolSizeColumns;
+ this.dataRegionSizeRows=dataRegionSizeRows;
+ this.dataRegionSizeColumns=dataRegionSizeColumns;
+ this.ecBlocks=ecBlocks;
+ versionNumber=0;
+ symbolSizeRows = ecBlocks.getECCodewords();
+ l10 = ecBlocks.getECBlocks();
+ symbolSizeColumns=#l10;
+ dataRegionSizeRows=0;
+ label0:if (dataRegionSizeRows>=symbolSizeColumns) goto label1;
+ ecBlock=l10[dataRegionSizeRows];
+ dataRegionSizeColumns = ecBlock.getCount();
+ $stack17 = ecBlock.getDataCodewords();
+ $stack17=($stack17+symbolSizeRows);
+ dataRegionSizeColumns=(dataRegionSizeColumns * $stack17);
+ versionNumber=(versionNumber+dataRegionSizeColumns);
+ dataRegionSizeRows=(dataRegionSizeRows+1);
+ goto label0;
+ label1:this.totalCodewords=versionNumber;
+ return;
+ } 
+

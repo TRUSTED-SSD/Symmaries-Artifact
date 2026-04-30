@@ -1,0 +1,15 @@
+void org.apache.rocketmq.remoting.common.SemaphoreReleaseOnlyOnce:release()
+{
+java.util.concurrent.Semaphore $stack1;
+  java.util.concurrent.atomic.AtomicBoolean $stack2;
+  boolean $stack3;
+  $stack1=this.semaphore;
+ if ($stack1==null) goto label0;
+ $stack2=this.released;
+ $stack3 = $stack2.compareAndSet((boolean)0,(boolean)1);
+ if ($stack3==0) goto label0;
+ $stack1=this.semaphore;
+ $stack1.release();
+ label0:return;
+ } 
+

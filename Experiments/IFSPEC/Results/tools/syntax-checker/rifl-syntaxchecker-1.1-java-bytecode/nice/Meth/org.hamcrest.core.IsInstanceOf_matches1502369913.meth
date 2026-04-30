@@ -1,0 +1,27 @@
+boolean org.hamcrest.core.IsInstanceOf:matches(java.lang.Object item,org.hamcrest.Description @mismatch)
+{
+java.lang.Class $stack3;
+  boolean $stack4;
+  java.lang.StringBuilder $stack6;
+  java.lang.String $stack9;
+  org.hamcrest.Description mismatch;
+mismatch=@mismatch;
+if (null!=item) goto label0;
+ mismatch.appendText("null");
+ return  0;
+ label0:$stack3=this.matchableClass;
+ $stack4 = $stack3.isInstance(item);
+ if ($stack4!=0) goto label1;
+ mismatch = mismatch.appendValue(item);
+ $stack6=new java.lang.StringBuilder;
+ $stack6#java.lang.StringBuilder();
+ $stack6 = $stack6.append(" is a ");
+ $stack3 = item.getClass();
+ $stack9 = $stack3.getName();
+ $stack6 = $stack6.append($stack9);
+ $stack9 = $stack6.toString();
+ mismatch.appendText($stack9);
+ return  0;
+ label1:return  1;
+ } 
+

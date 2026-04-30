@@ -1,0 +1,94 @@
+    public void describeTo(org.hamcrest.Description)
+    {
+        org.hamcrest.core.DescribedAs this;
+        org.hamcrest.Description description;
+        java.util.regex.Matcher arg;
+        int textStart, $stack9;
+        java.lang.String $stack4;
+        java.util.regex.Pattern $stack5;
+        boolean $stack7;
+        java.lang.Object[] $stack17;
+        java.lang.Object $stack20;
+
+        this := @this: org.hamcrest.core.DescribedAs;
+
+        description := @parameter0: org.hamcrest.Description;
+
+        $stack5 = <org.hamcrest.core.DescribedAs: java.util.regex.Pattern ARG_PATTERN>;
+/*37*/
+
+        $stack4 = this.<org.hamcrest.core.DescribedAs: java.lang.String descriptionTemplate>;
+/*37*/
+
+        arg = virtualinvoke $stack5.<java.util.regex.Pattern: java.util.regex.Matcher matcher(java.lang.CharSequence)>($stack4);
+/*37*/
+/*37*/
+
+        textStart = 0;
+/*39*/
+
+     label1:
+        $stack7 = virtualinvoke arg.<java.util.regex.Matcher: boolean find()>();
+/*40*/
+
+        if $stack7 == 0 goto label2;
+/*40*/
+
+        $stack4 = this.<org.hamcrest.core.DescribedAs: java.lang.String descriptionTemplate>;
+/*41*/
+
+        $stack9 = virtualinvoke arg.<java.util.regex.Matcher: int start()>();
+/*41*/
+
+        $stack4 = virtualinvoke $stack4.<java.lang.String: java.lang.String substring(int,int)>(textStart, $stack9);
+/*41*/
+
+        interfaceinvoke description.<org.hamcrest.Description: org.hamcrest.Description appendText(java.lang.String)>($stack4);
+/*41*/
+
+        $stack17 = this.<org.hamcrest.core.DescribedAs: java.lang.Object[] values>;
+/*42*/
+
+        $stack4 = virtualinvoke arg.<java.util.regex.Matcher: java.lang.String group(int)>(1);
+/*42*/
+
+        textStart = staticinvoke <java.lang.Integer: int parseInt(java.lang.String)>($stack4);
+/*42*/
+
+        $stack20 = $stack17[textStart];
+/*42*/
+
+        interfaceinvoke description.<org.hamcrest.Description: org.hamcrest.Description appendValue(java.lang.Object)>($stack20);
+/*42*/
+
+        textStart = virtualinvoke arg.<java.util.regex.Matcher: int end()>();
+/*43*/
+/*43*/
+
+        goto label1;
+/*43*/
+
+     label2:
+        $stack4 = this.<org.hamcrest.core.DescribedAs: java.lang.String descriptionTemplate>;
+/*46*/
+
+        $stack9 = virtualinvoke $stack4.<java.lang.String: int length()>();
+/*46*/
+
+        if textStart >= $stack9 goto label3;
+/*46*/
+
+        $stack4 = this.<org.hamcrest.core.DescribedAs: java.lang.String descriptionTemplate>;
+/*47*/
+
+        $stack4 = virtualinvoke $stack4.<java.lang.String: java.lang.String substring(int)>(textStart);
+/*47*/
+
+        interfaceinvoke description.<org.hamcrest.Description: org.hamcrest.Description appendText(java.lang.String)>($stack4);
+/*47*/
+
+     label3:
+        return;
+/*49*/
+    }
+

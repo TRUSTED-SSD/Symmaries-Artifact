@@ -1,0 +1,57 @@
+void org.apache.rocketmq.common.stats.StatsItemSet:init()
+{
+org.apache.rocketmq.common.stats.StatsItemSet$1 $stack1;
+  java.util.concurrent.ScheduledExecutorService $stack2;
+  java.util.concurrent.TimeUnit $stack3;
+  org.apache.rocketmq.common.stats.StatsItemSet$2 $stack5;
+  org.apache.rocketmq.common.stats.StatsItemSet$3 $stack9;
+  org.apache.rocketmq.common.stats.StatsItemSet$4 $stack13;
+  long $stack15;
+  long $stack16;
+  org.apache.rocketmq.common.stats.StatsItemSet$5 $stack21;
+  org.apache.rocketmq.common.stats.StatsItemSet$6 $stack29;
+  $stack2=this.scheduledExecutorService;
+ $stack1=new org.apache.rocketmq.common.stats.StatsItemSet$1;
+ $stack1#org.apache.rocketmq.common.stats.StatsItemSet$1(this);
+ $stack3=java.util.concurrent.TimeUnit.SECONDS;
+ $stack2.scheduleAtFixedRate((java.lang.Runnable)$stack1,0L,10L,$stack3);
+ $stack2=this.scheduledExecutorService;
+ $stack5=new org.apache.rocketmq.common.stats.StatsItemSet$2;
+ $stack5#org.apache.rocketmq.common.stats.StatsItemSet$2(this);
+ $stack3=java.util.concurrent.TimeUnit.MINUTES;
+ $stack2.scheduleAtFixedRate((java.lang.Runnable)$stack5,0L,10L,$stack3);
+ $stack2=this.scheduledExecutorService;
+ $stack9=new org.apache.rocketmq.common.stats.StatsItemSet$3;
+ $stack9#org.apache.rocketmq.common.stats.StatsItemSet$3(this);
+ $stack3=java.util.concurrent.TimeUnit.HOURS;
+ $stack2.scheduleAtFixedRate((java.lang.Runnable)$stack9,0L,1L,$stack3);
+ $stack2=this.scheduledExecutorService;
+ $stack13=new org.apache.rocketmq.common.stats.StatsItemSet$4;
+ $stack13#org.apache.rocketmq.common.stats.StatsItemSet$4(this);
+ $stack15 = org.apache.rocketmq.common.UtilAll.computeNextMinutesTimeMillis();
+ $stack16 = java.lang.System.currentTimeMillis();
+ $stack15=($stack15-$stack16);
+ $stack15 = java.lang.Math.abs($stack15);
+ $stack3=java.util.concurrent.TimeUnit.MILLISECONDS;
+ $stack2.scheduleAtFixedRate((java.lang.Runnable)$stack13,$stack15,60000L,$stack3);
+ $stack2=this.scheduledExecutorService;
+ $stack21=new org.apache.rocketmq.common.stats.StatsItemSet$5;
+ $stack21#org.apache.rocketmq.common.stats.StatsItemSet$5(this);
+ $stack15 = org.apache.rocketmq.common.UtilAll.computeNextHourTimeMillis();
+ $stack16 = java.lang.System.currentTimeMillis();
+ $stack15=($stack15-$stack16);
+ $stack15 = java.lang.Math.abs($stack15);
+ $stack3=java.util.concurrent.TimeUnit.MILLISECONDS;
+ $stack2.scheduleAtFixedRate((java.lang.Runnable)$stack21,$stack15,3600000L,$stack3);
+ $stack2=this.scheduledExecutorService;
+ $stack29=new org.apache.rocketmq.common.stats.StatsItemSet$6;
+ $stack29#org.apache.rocketmq.common.stats.StatsItemSet$6(this);
+ $stack15 = org.apache.rocketmq.common.UtilAll.computeNextMorningTimeMillis();
+ $stack16 = java.lang.System.currentTimeMillis();
+ $stack15=($stack15-$stack16);
+ $stack15 = java.lang.Math.abs($stack15);
+ $stack3=java.util.concurrent.TimeUnit.MILLISECONDS;
+ $stack2.scheduleAtFixedRate((java.lang.Runnable)$stack29,$stack15,86400000L,$stack3);
+ return;
+ } 
+

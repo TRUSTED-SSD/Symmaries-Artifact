@@ -1,0 +1,79 @@
+    private java.lang.Void lambda$doStart$0(org.apache.bookkeeper.meta.MetadataClientDriver)
+    {
+        org.apache.bookkeeper.stream.server.service.BookieWatchService this;
+        org.apache.bookkeeper.meta.MetadataClientDriver clientDriver;
+        org.apache.bookkeeper.discover.RegistrationClient $stack3;
+        int $stack4;
+        java.lang.Exception $stack6;
+        org.slf4j.Logger $stack8;
+        java.lang.Integer $stack10;
+        java.lang.RuntimeException $stack11;
+        java.lang.StringBuilder $stack12;
+        java.lang.String $stack17;
+
+        this := @this: org.apache.bookkeeper.stream.server.service.BookieWatchService;
+
+        clientDriver := @parameter0: org.apache.bookkeeper.meta.MetadataClientDriver;
+
+     label1:
+        $stack3 = interfaceinvoke clientDriver.<org.apache.bookkeeper.meta.MetadataClientDriver: org.apache.bookkeeper.discover.RegistrationClient getRegistrationClient()>();
+/*65*/
+
+        $stack4 = this.<org.apache.bookkeeper.stream.server.service.BookieWatchService: int minNumBookies>;
+/*65*/
+
+        staticinvoke <org.apache.bookkeeper.stream.server.service.BookieWatchService: void waitingForNumBookies(org.apache.bookkeeper.discover.RegistrationClient,int)>($stack3, $stack4);
+/*65*/
+
+     label2:
+        return null;
+
+     label3:
+        $stack6 := @caughtexception;
+/*71*/
+
+        $stack8 = <org.apache.bookkeeper.stream.server.service.BookieWatchService: org.slf4j.Logger log>;
+/*67*/
+
+        $stack4 = this.<org.apache.bookkeeper.stream.server.service.BookieWatchService: int minNumBookies>;
+/*67*/
+
+        $stack10 = staticinvoke <java.lang.Integer: java.lang.Integer valueOf(int)>($stack4);
+/*67*/
+
+        interfaceinvoke $stack8.<org.slf4j.Logger: void error(java.lang.String,java.lang.Object)>("Encountered exceptions on waiting {} bookies to be alive", $stack10);
+/*67*/
+
+        $stack11 = new java.lang.RuntimeException;
+/*68*/
+
+        $stack12 = new java.lang.StringBuilder;
+/*68*/
+
+        specialinvoke $stack12.<java.lang.StringBuilder: void <init>()>();
+/*68*/
+
+        $stack12 = virtualinvoke $stack12.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>("Encountered exceptions on waiting ");
+/*68*/
+
+        $stack4 = this.<org.apache.bookkeeper.stream.server.service.BookieWatchService: int minNumBookies>;
+/*68*/
+
+        $stack12 = virtualinvoke $stack12.<java.lang.StringBuilder: java.lang.StringBuilder append(int)>($stack4);
+/*68*/
+
+        $stack12 = virtualinvoke $stack12.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>(" bookies to be alive");
+/*68*/
+
+        $stack17 = virtualinvoke $stack12.<java.lang.StringBuilder: java.lang.String toString()>();
+/*68*/
+
+        specialinvoke $stack11.<java.lang.RuntimeException: void <init>(java.lang.String,java.lang.Throwable)>($stack17, $stack6);
+/*68*/
+
+        throw $stack11;
+/*68*/
+
+        catch java.lang.Exception from label1 to label2 with label3;
+    }
+

@@ -1,0 +1,29 @@
+java.lang.String org.apache.kerby.asn1.type.Asn1GeneralizedTime:getTimeZonePart(java.lang.String @dateStr)
+{
+int iPos;
+  int $stack5;
+  java.lang.IllegalArgumentException $stack8;
+  java.lang.StringBuilder $stack9;
+  java.lang.String dateStr;
+dateStr=@dateStr;
+iPos = dateStr.indexOf(43);
+ if (iPos!=-1) goto label0;
+ iPos = dateStr.indexOf(45);
+ label0:if (iPos<=0) goto label1;
+ $stack5 = dateStr.length();
+ $stack5=($stack5-5);
+ if (iPos==$stack5) goto label1;
+ $stack8=new java.lang.IllegalArgumentException;
+ $stack9=new java.lang.StringBuilder;
+ $stack9#java.lang.StringBuilder();
+ $stack9 = $stack9.append("Bad generalized time string, with improper timezone part ");
+ $stack9 = $stack9.append(dateStr);
+ dateStr = $stack9.toString();
+ $stack8#java.lang.IllegalArgumentException(dateStr);
+ throw $stack8;
+ label1:if (iPos<=0) goto label2;
+ dateStr = dateStr.substring(iPos);
+ return  dateStr;
+ label2:return  null;
+ } 
+

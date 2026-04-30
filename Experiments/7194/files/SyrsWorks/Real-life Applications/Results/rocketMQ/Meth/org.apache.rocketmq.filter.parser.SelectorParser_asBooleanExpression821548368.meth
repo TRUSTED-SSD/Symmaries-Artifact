@@ -1,0 +1,25 @@
+org.apache.rocketmq.filter.expression.BooleanExpression org.apache.rocketmq.filter.parser.SelectorParser:asBooleanExpression(org.apache.rocketmq.filter.expression.Expression value)
+{
+boolean $stack2;
+  org.apache.rocketmq.filter.parser.ParseException $stack4;
+  java.lang.StringBuilder $stack5;
+  java.lang.String $stack8;
+  org.apache.rocketmq.filter.expression.BooleanExpression $stack9;
+  $stack2=value instanceof org.apache.rocketmq.filter.expression.BooleanExpression;
+ if ($stack2==0) goto label0;
+ $stack9=(org.apache.rocketmq.filter.expression.BooleanExpression) value;
+ return  $stack9;
+ label0:$stack2=value instanceof org.apache.rocketmq.filter.expression.PropertyExpression;
+ if ($stack2==0) goto label1;
+ $stack9 = org.apache.rocketmq.filter.expression.UnaryExpression.createBooleanCast(value);
+ return  $stack9;
+ label1:$stack4=new org.apache.rocketmq.filter.parser.ParseException;
+ $stack5=new java.lang.StringBuilder;
+ $stack5#java.lang.StringBuilder();
+ $stack5 = $stack5.append("Expression will not result in a boolean value: ");
+ $stack5 = $stack5.append((java.lang.Object)value);
+ $stack8 = $stack5.toString();
+ $stack4#org.apache.rocketmq.filter.parser.ParseException($stack8);
+ throw $stack4;
+ } 
+

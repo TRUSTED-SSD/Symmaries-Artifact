@@ -1,0 +1,46 @@
+boolean org.apache.rocketmq.common.TopicConfig:decode(java.lang.String @in)
+{
+java.lang.String[] strs;
+  java.lang.Exception l3;
+  int $stack5;
+  org.apache.rocketmq.common.TopicFilterType $stack14;
+  com.alibaba.fastjson.TypeReference $stack16;
+  java.lang.reflect.Type $stack18;
+  com.alibaba.fastjson.parser.Feature[] $stack19;
+  java.lang.Object $stack20;
+  java.util.Map $stack21;
+  java.lang.String in;
+in=@in;
+strs = in.split(" ");
+ $stack5=#strs;
+ if ($stack5<5) goto label0;
+ in=strs[0];
+ this.topicName=in;
+ in=strs[1];
+ $stack5 = java.lang.Integer.parseInt(in);
+ this.readQueueNums=$stack5;
+ in=strs[2];
+ $stack5 = java.lang.Integer.parseInt(in);
+ this.writeQueueNums=$stack5;
+ in=strs[3];
+ $stack5 = java.lang.Integer.parseInt(in);
+ this.perm=$stack5;
+ in=strs[4];
+ $stack14 = org.apache.rocketmq.common.TopicFilterType.valueOf(in);
+ this.topicFilterType=$stack14;
+ $stack5=#strs;
+ if ($stack5<6) goto label1;
+ label2:in=strs[5];
+ $stack16=org.apache.rocketmq.common.TopicConfig.ATTRIBUTES_TYPE_REFERENCE;
+ $stack18 = $stack16.getType();
+ $stack19=new com.alibaba.fastjson.parser.Feature[0];
+ $stack20 = com.alibaba.fastjson.JSON.parseObject(in,$stack18,$stack19);
+ $stack21=(java.util.Map) $stack20;
+ this.attributes=$stack21;
+ label3:goto label1;
+ label4:l3 = catch;
+ label1:return  1;
+ label0:return  0;
+ catch java.lang.Exception: label2 - label3 : label4;
+} 
+

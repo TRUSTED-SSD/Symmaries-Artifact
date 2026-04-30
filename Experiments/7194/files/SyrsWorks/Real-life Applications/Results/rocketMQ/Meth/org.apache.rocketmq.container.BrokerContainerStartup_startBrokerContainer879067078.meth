@@ -1,0 +1,43 @@
+static org.apache.rocketmq.container.BrokerContainer org.apache.rocketmq.container.BrokerContainerStartup:startBrokerContainer(org.apache.rocketmq.container.BrokerContainer brokerContainer)
+{
+java.lang.String tip;
+  java.lang.StringBuilder $stack2;
+  org.apache.rocketmq.remoting.protocol.SerializeType $stack4;
+  org.apache.rocketmq.container.BrokerContainerConfig $stack8;
+  java.lang.String $stack9;
+  org.apache.rocketmq.logging.org.slf4j.Logger $stack10;
+  java.lang.Object[] $stack11;
+  java.io.PrintStream $stack12;
+  java.lang.Throwable $stack27;
+  label0:brokerContainer.start();
+ $stack2=new java.lang.StringBuilder;
+ $stack2#java.lang.StringBuilder();
+ $stack2 = $stack2.append("The broker container boot success. serializeType=");
+ $stack4 = org.apache.rocketmq.remoting.protocol.RemotingCommand.getSerializeTypeConfigInThisServer();
+ $stack2 = $stack2.append((java.lang.Object)$stack4);
+ tip = $stack2.toString();
+ $stack8 = brokerContainer.getBrokerContainerConfig();
+ $stack9 = $stack8.getNamesrvAddr();
+ if (null==$stack9) goto label1;
+ $stack2=new java.lang.StringBuilder;
+ $stack2#java.lang.StringBuilder();
+ $stack2 = $stack2.append(tip);
+ $stack2 = $stack2.append(" and name server is ");
+ $stack8 = brokerContainer.getBrokerContainerConfig();
+ tip = $stack8.getNamesrvAddr();
+ $stack2 = $stack2.append(tip);
+ tip = $stack2.toString();
+ label1:$stack10=org.apache.rocketmq.container.BrokerContainerStartup.log;
+ $stack10.info(tip);
+ $stack12=java.lang.System.out;
+ $stack11=new java.lang.Object[1];
+ $stack11[0]=tip;
+ $stack12.printf("%s%n",$stack11);
+ label2:return  brokerContainer;
+ label3:$stack27 = catch;
+ $stack27.printStackTrace();
+ java.lang.System.exit(-1);
+ return  null;
+ catch java.lang.Throwable: label0 - label2 : label3;
+} 
+

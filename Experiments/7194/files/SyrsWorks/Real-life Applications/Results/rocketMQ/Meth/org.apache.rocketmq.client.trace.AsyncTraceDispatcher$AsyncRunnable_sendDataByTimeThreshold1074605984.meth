@@ -1,0 +1,33 @@
+void org.apache.rocketmq.client.trace.AsyncTraceDispatcher$AsyncRunnable:sendDataByTimeThreshold()
+{
+long now;
+  java.util.Iterator l3;
+  org.apache.rocketmq.client.trace.AsyncTraceDispatcher$TraceDataSegment taskInfo;
+  org.apache.rocketmq.client.trace.AsyncTraceDispatcher $stack6;
+  java.util.HashMap $stack7;
+  java.util.Collection $stack8;
+  boolean $stack10;
+  java.lang.Object $stack11;
+  long $stack12;
+  long $stack15;
+  byte $stack16;
+  now = java.lang.System.currentTimeMillis();
+ $stack6=this.this$0;
+ $stack7 = org.apache.rocketmq.client.trace.AsyncTraceDispatcher.access$200($stack6);
+ $stack8 = $stack7.values();
+ l3 = $stack8.iterator();
+ label0:$stack10 = l3.hasNext();
+ if ($stack10==0) goto label1;
+ $stack11 = l3.next();
+ taskInfo=(org.apache.rocketmq.client.trace.AsyncTraceDispatcher$TraceDataSegment) $stack11;
+ $stack12 = org.apache.rocketmq.client.trace.AsyncTraceDispatcher$TraceDataSegment.access$500(taskInfo);
+ $stack12=(now-$stack12);
+ $stack6=this.this$0;
+ $stack15 = org.apache.rocketmq.client.trace.AsyncTraceDispatcher.access$600($stack6);
+ $stack16=($stack12 cmp $stack15);
+ if ($stack16<0) goto label2;
+ taskInfo.sendAllData();
+ label2:goto label0;
+ label1:return;
+ } 
+

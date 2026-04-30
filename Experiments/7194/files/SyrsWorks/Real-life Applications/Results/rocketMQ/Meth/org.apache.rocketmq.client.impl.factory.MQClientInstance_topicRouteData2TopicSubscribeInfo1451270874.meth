@@ -1,0 +1,47 @@
+static java.util.Set org.apache.rocketmq.client.impl.factory.MQClientInstance:topicRouteData2TopicSubscribeInfo(java.lang.String topic,org.apache.rocketmq.remoting.protocol.route.TopicRouteData route)
+{
+java.util.HashSet mqList;
+  java.util.concurrent.ConcurrentMap mqEndPoints;
+  java.util.Iterator l4;
+  org.apache.rocketmq.remoting.protocol.route.QueueData qd;
+  int i;
+  java.util.Map $stack9;
+  boolean $stack12;
+  java.lang.Object $stack13;
+  int $stack17;
+  org.apache.rocketmq.common.message.MessageQueue $stack18;
+  java.lang.String $stack19;
+  java.util.List $stack26;
+  java.util.Set $stack28;
+  mqList=new java.util.HashSet;
+ mqList#java.util.HashSet();
+ $stack9 = route.getTopicQueueMappingByBroker();
+ if ($stack9==null) goto label0;
+ $stack9 = route.getTopicQueueMappingByBroker();
+ $stack12 = $stack9.isEmpty();
+ if ($stack12!=0) goto label0;
+ mqEndPoints = org.apache.rocketmq.remoting.rpc.ClientMetadata.topicRouteData2EndpointsForStaticTopic(topic,route);
+ $stack28 = mqEndPoints.keySet();
+ return  $stack28;
+ label0:$stack26 = route.getQueueDatas();
+ l4 = $stack26.iterator();
+ label1:$stack12 = l4.hasNext();
+ if ($stack12==0) goto label2;
+ $stack13 = l4.next();
+ qd=(org.apache.rocketmq.remoting.protocol.route.QueueData) $stack13;
+ i = qd.getPerm();
+ $stack12 = org.apache.rocketmq.common.constant.PermName.isReadable(i);
+ if ($stack12==0) goto label3;
+ i=0;
+ label4:$stack17 = qd.getReadQueueNums();
+ if (i>=$stack17) goto label3;
+ $stack18=new org.apache.rocketmq.common.message.MessageQueue;
+ $stack19 = qd.getBrokerName();
+ $stack18#org.apache.rocketmq.common.message.MessageQueue(topic,$stack19,i);
+ mqList.add((java.lang.Object)$stack18);
+ i=(i+1);
+ goto label4;
+ label3:goto label1;
+ label2:return  mqList;
+ } 
+

@@ -1,0 +1,42 @@
+boolean org.apache.bookkeeper.tools.cli.commands.bookie.ReadLogMetadataCommand:readLogMetadata(org.apache.bookkeeper.conf.ServerConfiguration conf,org.apache.bookkeeper.tools.cli.commands.bookie.ReadLogMetadataCommand$ReadLogMetadataFlags flags)
+{
+long logid;
+  java.lang.String name;
+  long $stack8;
+  byte $stack9;
+  boolean $stack11;
+  java.io.File $stack12;
+  java.lang.String[] $stack16;
+  java.lang.StringBuilder $stack22;
+  org.slf4j.Logger $stack23;
+  logid=-1L;
+ $stack8 = org.apache.bookkeeper.tools.cli.commands.bookie.ReadLogMetadataCommand$ReadLogMetadataFlags.access$100(flags);
+ $stack9=($stack8 cmp -1L);
+ if ($stack9==0) goto label0;
+ logid = org.apache.bookkeeper.tools.cli.commands.bookie.ReadLogMetadataCommand$ReadLogMetadataFlags.access$100(flags);
+ goto label1;
+ label0:name = org.apache.bookkeeper.tools.cli.commands.bookie.ReadLogMetadataCommand$ReadLogMetadataFlags.access$200(flags);
+ $stack11 = name.equals((java.lang.Object)"");
+ if ($stack11!=0) goto label1;
+ $stack12=new java.io.File;
+ name = org.apache.bookkeeper.tools.cli.commands.bookie.ReadLogMetadataCommand$ReadLogMetadataFlags.access$200(flags);
+ $stack12#java.io.File(name);
+ name = $stack12.getName();
+ $stack11 = name.endsWith(".log");
+ if ($stack11!=0) goto label2;
+ $stack23=org.apache.bookkeeper.tools.cli.commands.bookie.ReadLogMetadataCommand.LOG;
+ $stack22=new java.lang.StringBuilder;
+ $stack22#java.lang.StringBuilder();
+ $stack22 = $stack22.append("ERROR: invalid entry log file name ");
+ name = org.apache.bookkeeper.tools.cli.commands.bookie.ReadLogMetadataCommand$ReadLogMetadataFlags.access$200(flags);
+ $stack22 = $stack22.append(name);
+ name = $stack22.toString();
+ $stack23.error(name);
+ return  0;
+ label2:$stack16 = name.split("\\.");
+ name=$stack16[0];
+ logid = java.lang.Long.parseLong(name,16);
+ label1:this#org.apache.bookkeeper.tools.cli.commands.bookie.ReadLogMetadataCommand(conf,logid);
+ return  1;
+ } 
+

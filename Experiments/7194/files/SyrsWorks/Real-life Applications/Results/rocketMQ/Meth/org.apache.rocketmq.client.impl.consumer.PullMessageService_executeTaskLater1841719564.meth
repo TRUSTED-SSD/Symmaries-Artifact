@@ -1,0 +1,17 @@
+void org.apache.rocketmq.client.impl.consumer.PullMessageService:executeTaskLater(java.lang.Runnable r,long timeDelay)
+{
+boolean $stack4;
+  org.apache.rocketmq.logging.org.slf4j.Logger $stack5;
+  java.util.concurrent.TimeUnit $stack6;
+  java.util.concurrent.ScheduledExecutorService $stack7;
+  $stack4 = this.isStopped();
+ if ($stack4!=0) goto label0;
+ $stack7=this.scheduledExecutorService;
+ $stack6=java.util.concurrent.TimeUnit.MILLISECONDS;
+ $stack7.schedule(r,timeDelay,$stack6);
+ goto label1;
+ label0:$stack5=this.logger;
+ $stack5.warn("PullMessageServiceScheduledThread has shutdown");
+ label1:return;
+ } 
+

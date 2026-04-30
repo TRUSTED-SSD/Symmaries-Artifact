@@ -1,0 +1,16 @@
+static java.lang.String org.keycloak.util.TokenUtil:jweDirectEncode(java.security.Key aesKey,java.security.Key hmacKey,org.keycloak.representations.JsonWebToken jwt)
+{
+byte[] contentBytes;
+  java.lang.String $stack5;
+  java.io.IOException $stack6;
+  org.keycloak.jose.jwe.JWEException $stack7;
+  label0:contentBytes = org.keycloak.util.JsonSerialization.writeValueAsBytes((java.lang.Object)jwt);
+ $stack5 = org.keycloak.util.TokenUtil.jweDirectEncode(aesKey,hmacKey,contentBytes);
+ label1:return  $stack5;
+ label2:$stack6 = catch;
+ $stack7=new org.keycloak.jose.jwe.JWEException;
+ $stack7#org.keycloak.jose.jwe.JWEException((java.lang.Throwable)$stack6);
+ throw $stack7;
+ catch java.io.IOException: label0 - label1 : label2;
+} 
+

@@ -1,0 +1,31 @@
+static java.lang.Object org.keycloak.common.util.Retry:call(org.keycloak.common.util.Retry$Supplier supplier,int attemptsCount,long intervalMillis)
+{
+int iteration;
+  java.lang.Throwable e;
+  java.lang.InterruptedException ie;
+  java.lang.Object $stack7;
+  java.lang.RuntimeException $stack9;
+  byte $stack11;
+  iteration=0;
+ label0:$stack7 = supplier.get(iteration);
+ label1:return  $stack7;
+ label2:e = catch;
+ attemptsCount=(attemptsCount+-1);
+ iteration=(iteration+1);
+ if (attemptsCount<=0) goto label3;
+ label4:$stack11=(intervalMillis cmp 0L);
+ if ($stack11<=0) goto label5;
+ java.lang.Thread.sleep(intervalMillis);
+ label5:goto label6;
+ label7:ie = catch;
+ ie.addSuppressed(e);
+ $stack9=new java.lang.RuntimeException;
+ $stack9#java.lang.RuntimeException((java.lang.Throwable)ie);
+ throw $stack9;
+ label3:throw e;
+ label6:goto label0;
+ catch java.lang.Exception: label0 - label1 : label2;
+catch java.lang.AssertionError: label0 - label1 : label2;
+catch java.lang.InterruptedException: label4 - label5 : label7;
+} 
+

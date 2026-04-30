@@ -1,0 +1,17 @@
+org.apache.bookkeeper.meta.LedgerIdGenerator org.apache.bookkeeper.meta.MSLedgerManagerFactory:newLedgerIdGenerator()
+{
+java.util.List zkAcls;
+  org.apache.bookkeeper.conf.AbstractConfiguration $stack2;
+  org.apache.bookkeeper.meta.ZkLedgerIdGenerator $stack4;
+  org.apache.zookeeper.ZooKeeper $stack6;
+  java.lang.String $stack7;
+  $stack2=this.conf;
+ zkAcls = org.apache.bookkeeper.util.ZkUtils.getACLs($stack2);
+ $stack4=new org.apache.bookkeeper.meta.ZkLedgerIdGenerator;
+ $stack6=this.zk;
+ $stack2=this.conf;
+ $stack7 = org.apache.bookkeeper.meta.zk.ZKMetadataDriverBase.resolveZkLedgersRootPath($stack2);
+ $stack4#org.apache.bookkeeper.meta.ZkLedgerIdGenerator($stack6,$stack7,"ms-idgen",zkAcls);
+ return  $stack4;
+ } 
+

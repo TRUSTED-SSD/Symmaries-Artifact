@@ -1,0 +1,31 @@
+static byte[] org.apache.kerby.kerberos.kerb.preauth.pkinit.PkinitCrypto:cmsSignedDataCreate(byte[] @data,java.lang.String oid,int version,org.apache.kerby.cms.type.DigestAlgorithmIdentifiers digestAlgorithmIdentifiers,org.apache.kerby.cms.type.CertificateSet certificateSet,org.apache.kerby.cms.type.RevocationInfoChoices crls,org.apache.kerby.cms.type.SignerInfos signerInfos)
+{
+org.apache.kerby.cms.type.SignedContentInfo contentInfo;
+  org.apache.kerby.cms.type.SignedData signedData;
+  org.apache.kerby.cms.type.EncapsulatedContentInfo eContentInfo;
+  byte[] data;
+data=@data;
+contentInfo=new org.apache.kerby.cms.type.SignedContentInfo;
+ contentInfo#org.apache.kerby.cms.type.SignedContentInfo();
+ contentInfo.setContentType("1.2.840.113549.1.7.2");
+ signedData=new org.apache.kerby.cms.type.SignedData;
+ signedData#org.apache.kerby.cms.type.SignedData();
+ signedData.setVersion(version);
+ if (digestAlgorithmIdentifiers==null) goto label0;
+ signedData.setDigestAlgorithms(digestAlgorithmIdentifiers);
+ label0:eContentInfo=new org.apache.kerby.cms.type.EncapsulatedContentInfo;
+ eContentInfo#org.apache.kerby.cms.type.EncapsulatedContentInfo();
+ eContentInfo.setContentType(oid);
+ eContentInfo.setContent(data);
+ signedData.setEncapContentInfo(eContentInfo);
+ if (certificateSet==null) goto label1;
+ signedData.setCertificates(certificateSet);
+ label1:if (crls==null) goto label2;
+ signedData.setCrls(crls);
+ label2:if (signerInfos==null) goto label3;
+ signedData.setSignerInfos(signerInfos);
+ label3:contentInfo.setSignedData(signedData);
+ data = org.apache.kerby.kerberos.kerb.KrbCodec.encode((org.apache.kerby.asn1.type.Asn1Type)contentInfo);
+ return  data;
+ } 
+

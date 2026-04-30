@@ -1,0 +1,50 @@
+java.util.List org.apache.bookkeeper.tools.cli.commands.bookie.ReadJournalCommand:getJournals(org.apache.bookkeeper.conf.ServerConfiguration conf)
+{
+int idx;
+  java.io.File[] l3;
+  int l4;
+  int l5;
+  java.io.File journalDir;
+  java.util.List $stack7;
+  java.util.ArrayList $stack11;
+  org.apache.bookkeeper.bookie.Journal $stack14;
+  int $stack15;
+  java.io.File $stack16;
+  org.apache.bookkeeper.bookie.LedgerDirsManager $stack18;
+  java.io.File[] $stack19;
+  org.apache.bookkeeper.util.DiskChecker $stack20;
+  float $stack21;
+  float $stack22;
+  $stack7=this.journals;
+ if (null!=$stack7) goto label0;
+ l3 = conf.getJournalDirs();
+ idx=#l3;
+ $stack11 = com.google.common.collect.Lists.newArrayListWithCapacity(idx);
+ this.journals=$stack11;
+ idx=0;
+ l3 = conf.getJournalDirs();
+ l4=#l3;
+ l5=0;
+ label1:if (l5>=l4) goto label0;
+ journalDir=l3[l5];
+ $stack7=this.journals;
+ $stack14=new org.apache.bookkeeper.bookie.Journal;
+ $stack15=idx;
+ idx=(idx+1);
+ $stack16=new java.io.File;
+ $stack16#java.io.File(journalDir,"current");
+ $stack18=new org.apache.bookkeeper.bookie.LedgerDirsManager;
+ $stack19 = conf.getLedgerDirs();
+ $stack20=new org.apache.bookkeeper.util.DiskChecker;
+ $stack21 = conf.getDiskUsageThreshold();
+ $stack22 = conf.getDiskUsageWarnThreshold();
+ $stack20#org.apache.bookkeeper.util.DiskChecker($stack21,$stack22);
+ $stack18#org.apache.bookkeeper.bookie.LedgerDirsManager(conf,$stack19,$stack20);
+ $stack14#org.apache.bookkeeper.bookie.Journal($stack15,$stack16,conf,$stack18);
+ $stack7.add((java.lang.Object)$stack14);
+ l5=(l5+1);
+ goto label1;
+ label0:$stack7=this.journals;
+ return  $stack7;
+ } 
+

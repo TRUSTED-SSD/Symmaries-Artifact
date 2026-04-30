@@ -1,0 +1,43 @@
+void java.util.ArrayDeque:doubleCapacity()
+{
+int i0;
+  int i1;
+  int i2;
+  int i3;
+  java.lang.Object[] r1;
+  boolean $z0;
+  java.lang.Object[] $r2;
+  java.lang.Object[] $r3;
+  java.lang.Object[] $r4;
+  java.lang.IllegalStateException $r5;
+  int $i4;
+  int $i5;
+  java.lang.AssertionError $r6;
+  $z0=java.util.ArrayDeque.$assertionsDisabled;
+ if ($z0!=0) goto label0;
+ $i5=this.head;
+ $i4=this.tail;
+ if ($i5==$i4) goto label0;
+ $r6=new java.lang.AssertionError;
+ $r6#java.lang.AssertionError:init();
+ throw $r6;
+ label0:i0=this.head;
+ $r2=this.elements;
+ i1=#$r2;
+ i2=(i1-i0);
+ i3=(i1<<1);
+ if (i3>=0) goto label1;
+ $r5=new java.lang.IllegalStateException;
+ $r5#java.lang.IllegalStateException:init("Sorry, deque too big");
+ throw $r5;
+ label1:r1=new java.lang.Object[i3];
+ $r3=this.elements;
+ java.lang.System.native_arraycopy((java.lang.Object)$r3,i0,(java.lang.Object)r1,0,i2);
+ $r4=this.elements;
+ java.lang.System.native_arraycopy((java.lang.Object)$r4,0,(java.lang.Object)r1,i2,i0);
+ this.elements=r1;
+ this.head=0;
+ this.tail=i1;
+ return;
+ }  
+

@@ -1,0 +1,38 @@
+void org.apache.bookkeeper.proto.PerChannelBookieClient:getListOfEntriesOfLedger(long ledgerId,org.apache.bookkeeper.proto.BookkeeperInternalCallbacks$GetListOfEntriesOfLedgerCallback cb)
+{
+long txnId;
+  org.apache.bookkeeper.proto.PerChannelBookieClient$V3CompletionKey completionKey;
+  org.apache.bookkeeper.proto.BookkeeperProtocol$BKPacketHeader$Builder headerBuilder;
+  org.apache.bookkeeper.proto.BookkeeperProtocol$GetListOfEntriesOfLedgerRequest$Builder getListOfEntriesOfLedgerRequestBuilder;
+  org.apache.bookkeeper.proto.BookkeeperProtocol$Request getListOfEntriesOfLedgerRequest;
+  org.apache.bookkeeper.proto.BookkeeperProtocol$OperationType $stack12;
+  org.apache.bookkeeper.proto.PerChannelBookieClient$GetListOfEntriesOfLedgerCompletion $stack13;
+  org.apache.bookkeeper.util.collections.ConcurrentOpenHashMap $stack14;
+  org.apache.bookkeeper.proto.BookkeeperProtocol$ProtocolVersion $stack17;
+  org.apache.bookkeeper.proto.BookkeeperProtocol$Request$Builder $stack24;
+  io.netty.channel.Channel $stack28;
+  txnId = this#org.apache.bookkeeper.proto.PerChannelBookieClient:getTxnId();
+ completionKey=new org.apache.bookkeeper.proto.PerChannelBookieClient$V3CompletionKey;
+ $stack12=org.apache.bookkeeper.proto.BookkeeperProtocol$OperationType.GET_LIST_OF_ENTRIES_OF_LEDGER;
+ completionKey#org.apache.bookkeeper.proto.PerChannelBookieClient$V3CompletionKey(this,txnId,$stack12);
+ $stack14=this.completionObjects;
+ $stack13=new org.apache.bookkeeper.proto.PerChannelBookieClient$GetListOfEntriesOfLedgerCompletion;
+ $stack13#org.apache.bookkeeper.proto.PerChannelBookieClient$GetListOfEntriesOfLedgerCompletion(this,(org.apache.bookkeeper.proto.PerChannelBookieClient$CompletionKey)completionKey,cb,ledgerId);
+ $stack14.put((java.lang.Object)completionKey,(java.lang.Object)$stack13);
+ headerBuilder = org.apache.bookkeeper.proto.BookkeeperProtocol$BKPacketHeader.newBuilder();
+ $stack17=org.apache.bookkeeper.proto.BookkeeperProtocol$ProtocolVersion.VERSION_THREE;
+ headerBuilder = headerBuilder.setVersion($stack17);
+ $stack12=org.apache.bookkeeper.proto.BookkeeperProtocol$OperationType.GET_LIST_OF_ENTRIES_OF_LEDGER;
+ headerBuilder = headerBuilder.setOperation($stack12);
+ headerBuilder = headerBuilder.setTxnId(txnId);
+ getListOfEntriesOfLedgerRequestBuilder = org.apache.bookkeeper.proto.BookkeeperProtocol$GetListOfEntriesOfLedgerRequest.newBuilder();
+ getListOfEntriesOfLedgerRequestBuilder = getListOfEntriesOfLedgerRequestBuilder.setLedgerId(ledgerId);
+ $stack24 = org.apache.bookkeeper.proto.BookkeeperProtocol$Request.newBuilder();
+ $stack24 = $stack24.setHeader(headerBuilder);
+ $stack24 = $stack24.setGetListOfEntriesOfLedgerRequest(getListOfEntriesOfLedgerRequestBuilder);
+ getListOfEntriesOfLedgerRequest = $stack24.build();
+ $stack28=this.channel;
+ this#org.apache.bookkeeper.proto.PerChannelBookieClient:writeAndFlush($stack28,(org.apache.bookkeeper.proto.PerChannelBookieClient$CompletionKey)completionKey,(java.lang.Object)getListOfEntriesOfLedgerRequest);
+ return;
+ } 
+

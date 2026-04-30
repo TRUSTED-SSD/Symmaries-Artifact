@@ -1,0 +1,26 @@
+java.lang.Object org.apache.bookkeeper.client.DynamicWeightedRandomSelectionImpl:getNextRandom()
+{
+java.lang.Object l1;
+  java.util.concurrent.locks.ReadWriteLock $stack3;
+  java.util.concurrent.locks.Lock $stack4;
+  java.util.Map $stack5;
+  java.util.Set $stack6;
+  java.lang.Throwable $stack10;
+  $stack3=this.rwLock;
+ $stack4 = $stack3.readLock();
+ $stack4.lock();
+ label0:$stack5=this.weightMap;
+ $stack6 = $stack5.keySet();
+ l1 = this.getNextRandom((java.util.Collection)$stack6);
+ label1:$stack3=this.rwLock;
+ $stack4 = $stack3.readLock();
+ $stack4.unlock();
+ return  l1;
+ label2:$stack10 = catch;
+ $stack3=this.rwLock;
+ $stack4 = $stack3.readLock();
+ $stack4.unlock();
+ throw $stack10;
+ catch java.lang.Throwable: label0 - label1 : label2;
+} 
+

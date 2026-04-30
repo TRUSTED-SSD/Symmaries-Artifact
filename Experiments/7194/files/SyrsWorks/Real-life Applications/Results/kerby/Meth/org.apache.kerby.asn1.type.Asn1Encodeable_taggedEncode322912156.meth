@@ -1,0 +1,26 @@
+void org.apache.kerby.asn1.type.Asn1Encodeable:taggedEncode(java.nio.ByteBuffer buffer,org.apache.kerby.asn1.TaggingOption taggingOption)
+{
+boolean $stack5;
+  int $stack8;
+  org.apache.kerby.asn1.Tag $stack17;
+  $stack5 = this.isPrimitive();
+ if ($stack5!=0) goto label0;
+ $stack5=1;
+ goto label1;
+ label0:$stack5=0;
+ label1:$stack17 = taggingOption.getTag($stack5);
+ org.apache.kerby.asn1.util.Asn1Util.encodeTag(buffer,$stack17);
+ $stack5 = taggingOption.isImplicit();
+ if ($stack5==0) goto label2;
+ $stack8 = this.encodingBodyLength();
+ goto label3;
+ label2:$stack8 = this.encodingLength();
+ label3:org.apache.kerby.asn1.util.Asn1Util.encodeLength(buffer,$stack8);
+ $stack5 = taggingOption.isImplicit();
+ if ($stack5==0) goto label4;
+ this.encodeBody(buffer);
+ goto label5;
+ label4:this.encode(buffer);
+ label5:return;
+ } 
+

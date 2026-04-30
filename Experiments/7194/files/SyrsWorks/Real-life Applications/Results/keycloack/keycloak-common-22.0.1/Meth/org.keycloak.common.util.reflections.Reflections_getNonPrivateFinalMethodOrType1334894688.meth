@@ -1,0 +1,25 @@
+static java.lang.Object org.keycloak.common.util.reflections.Reflections:getNonPrivateFinalMethodOrType(java.lang.Class type)
+{
+java.lang.reflect.Method[] l1;
+  int l2;
+  int l3;
+  java.lang.reflect.Method method;
+  boolean $stack5;
+  $stack5 = org.keycloak.common.util.reflections.Reflections.isFinal(type);
+ if ($stack5==0) goto label0;
+ return  type;
+ label0:l1 = type.getDeclaredMethods();
+ l2=#l1;
+ l3=0;
+ label1:if (l3>=l2) goto label2;
+ method=l1[l3];
+ $stack5 = org.keycloak.common.util.reflections.Reflections.isFinal((java.lang.reflect.Member)method);
+ if ($stack5==0) goto label3;
+ $stack5 = org.keycloak.common.util.reflections.Reflections.isPrivate((java.lang.reflect.Member)method);
+ if ($stack5!=0) goto label3;
+ return  method;
+ label3:l3=(l3+1);
+ goto label1;
+ label2:return  null;
+ } 
+

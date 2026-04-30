@@ -1,0 +1,55 @@
+static org.apache.bookkeeper.clients.impl.internal.api.HashStreamRanges org.apache.bookkeeper.clients.impl.internal.ProtocolInternalUtils:createActiveRanges(org.apache.bookkeeper.stream.proto.storage.GetActiveRangesResponse response)
+{
+java.util.TreeMap ranges;
+  long lastEndKey;
+  java.util.Iterator l4;
+  org.apache.bookkeeper.stream.proto.storage.RelatedRanges rr;
+  org.apache.bookkeeper.stream.proto.RangeProperties range;
+  long startKey;
+  long endKey;
+  java.util.List $stack12;
+  boolean $stack14;
+  byte $stack15;
+  int $stack16;
+  org.apache.bookkeeper.stream.proto.RangeKeyType $stack17;
+  org.apache.bookkeeper.clients.impl.internal.api.HashStreamRanges $stack18;
+  java.lang.Object $stack27;
+  java.lang.Long $stack32;
+  ranges = com.google.common.collect.Maps.newTreeMap();
+ lastEndKey=-9223372036854775808L;
+ $stack12 = response.getRangesList();
+ l4 = $stack12.iterator();
+ label0:$stack14 = l4.hasNext();
+ if ($stack14==0) goto label1;
+ $stack27 = l4.next();
+ rr=(org.apache.bookkeeper.stream.proto.storage.RelatedRanges) $stack27;
+ range = rr.getProps();
+ startKey = range.getStartHashKey();
+ endKey = range.getEndHashKey();
+ $stack15=(lastEndKey cmp startKey);
+ if ($stack15!=0) goto label2;
+ $stack14=1;
+ goto label3;
+ label2:$stack14=0;
+ label3:com.google.common.base.Preconditions.checkState($stack14,"Invalid range key found : expected = %s, actual = %s",lastEndKey,startKey);
+ $stack32 = java.lang.Long.valueOf(startKey);
+ ranges.put((java.lang.Object)$stack32,(java.lang.Object)range);
+ lastEndKey=endKey;
+ goto label0;
+ label1:$stack15=(9223372036854775807L cmp lastEndKey);
+ if ($stack15!=0) goto label4;
+ $stack14=1;
+ goto label5;
+ label4:$stack14=0;
+ label5:com.google.common.base.Preconditions.checkState($stack14,"Missing key range [%s - %s)",lastEndKey,9223372036854775807L);
+ $stack16 = ranges.size();
+ if ($stack16<=0) goto label6;
+ $stack14=1;
+ goto label7;
+ label6:$stack14=0;
+ label7:com.google.common.base.Preconditions.checkState($stack14,(java.lang.Object)"No active range found");
+ $stack17=org.apache.bookkeeper.stream.proto.RangeKeyType.HASH;
+ $stack18 = org.apache.bookkeeper.clients.impl.internal.api.StreamRanges.ofHash($stack17,(java.util.NavigableMap)ranges);
+ return  $stack18;
+ } 
+

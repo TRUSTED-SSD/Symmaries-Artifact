@@ -1,0 +1,47 @@
+void org.apache.rocketmq.client.impl.consumer.ConsumeMessagePopConcurrentlyService:changePopInvisibleTime(org.apache.rocketmq.common.message.MessageExt msg,java.lang.String @consumerGroup,int delayLevel)
+{
+int[] delayLevelTable;
+  java.lang.String extraInfo;
+  org.apache.rocketmq.client.impl.consumer.DefaultMQPushConsumerImpl $stack8;
+  int $stack10;
+  java.lang.String $stack13;
+  long $stack14;
+  org.apache.rocketmq.client.impl.consumer.ConsumeMessagePopConcurrentlyService$1 $stack15;
+  java.lang.Throwable $stack34;
+  java.lang.Object[] $stack35;
+  org.apache.rocketmq.logging.org.slf4j.Logger $stack36;
+  java.lang.String consumerGroup;
+consumerGroup=@consumerGroup;
+if (0!=delayLevel) goto label0;
+ delayLevel = msg.getReconsumeTimes();
+ label0:$stack8=this.defaultMQPushConsumerImpl;
+ delayLevelTable = $stack8.getPopDelayLevel();
+ $stack10=#delayLevelTable;
+ if (delayLevel<$stack10) goto label1;
+ delayLevel=#delayLevelTable;
+ delayLevel=(delayLevel-1);
+ delayLevel=delayLevelTable[delayLevel];
+ goto label2;
+ label1:delayLevel=delayLevelTable[delayLevel];
+ label2:extraInfo = msg.getProperty("POP_CK");
+ label3:$stack8=this.defaultMQPushConsumerImpl;
+ $stack13 = msg.getTopic();
+ $stack14=(long) delayLevel;
+ $stack14=($stack14 * 1000L);
+ $stack15=new org.apache.rocketmq.client.impl.consumer.ConsumeMessagePopConcurrentlyService$1;
+ $stack15#org.apache.rocketmq.client.impl.consumer.ConsumeMessagePopConcurrentlyService$1(this,msg);
+ $stack8.changePopInvisibleTimeAsync($stack13,consumerGroup,extraInfo,$stack14,(org.apache.rocketmq.client.consumer.AckCallback)$stack15);
+ label4:goto label5;
+ label6:$stack34 = catch;
+ $stack36=org.apache.rocketmq.client.impl.consumer.ConsumeMessagePopConcurrentlyService.log;
+ $stack35=new java.lang.Object[3];
+ $stack35[0]=consumerGroup;
+ consumerGroup = msg.toString();
+ $stack35[1]=consumerGroup;
+ consumerGroup = $stack34.toString();
+ $stack35[2]=consumerGroup;
+ $stack36.error("changePopInvisibleTimeAsync fail, group:{} msg:{} errorInfo:{}",$stack35);
+ label5:return;
+ catch java.lang.Throwable: label3 - label4 : label6;
+} 
+

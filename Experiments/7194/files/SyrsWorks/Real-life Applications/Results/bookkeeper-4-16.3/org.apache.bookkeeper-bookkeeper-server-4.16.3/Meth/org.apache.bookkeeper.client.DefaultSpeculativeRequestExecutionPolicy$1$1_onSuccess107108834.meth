@@ -1,0 +1,50 @@
+void org.apache.bookkeeper.client.DefaultSpeculativeRequestExecutionPolicy$1$1:onSuccess(java.lang.Boolean issueNextRequest)
+{
+boolean $stack2;
+  org.slf4j.Logger $stack3;
+  org.apache.bookkeeper.client.DefaultSpeculativeRequestExecutionPolicy$1 $stack6;
+  int $stack8;
+  org.apache.bookkeeper.client.SpeculativeRequestExecutor $stack10;
+  java.lang.Integer $stack11;
+  org.apache.bookkeeper.client.DefaultSpeculativeRequestExecutionPolicy $stack16;
+  int $stack18;
+  float $stack21;
+  float $stack22;
+  org.apache.bookkeeper.client.DefaultSpeculativeRequestExecutionPolicy $stack24;
+  java.util.concurrent.ScheduledExecutorService $stack25;
+  $stack2 = issueNextRequest.booleanValue();
+ if ($stack2==0) goto label0;
+ $stack6=this.this$1;
+ $stack24=$stack6.this$0;
+ $stack6=this.this$1;
+ $stack25=$stack6.val$scheduler;
+ $stack6=this.this$1;
+ $stack10=$stack6.val$requestExecutor;
+ $stack6=this.this$1;
+ $stack16=$stack6.this$0;
+ $stack8=$stack16.maxSpeculativeRequestTimeout;
+ $stack6=this.this$1;
+ $stack18=$stack6.val$speculativeRequestTimeout;
+ $stack22=(float) $stack18;
+ $stack6=this.this$1;
+ $stack16=$stack6.this$0;
+ $stack21=$stack16.backoffMultiplier;
+ $stack21=($stack22 * $stack21);
+ $stack18 = java.lang.Math.round($stack21);
+ $stack8 = java.lang.Math.min($stack8,$stack18);
+ org.apache.bookkeeper.client.DefaultSpeculativeRequestExecutionPolicy.access$000($stack24,$stack25,$stack10,$stack8);
+ goto label1;
+ label0:$stack3 = org.apache.bookkeeper.client.DefaultSpeculativeRequestExecutionPolicy.access$100();
+ $stack2 = $stack3.isTraceEnabled();
+ if ($stack2==0) goto label1;
+ $stack3 = org.apache.bookkeeper.client.DefaultSpeculativeRequestExecutionPolicy.access$100();
+ $stack6=this.this$1;
+ $stack10=$stack6.val$requestExecutor;
+ $stack6=this.this$1;
+ $stack8=$stack6.val$speculativeRequestTimeout;
+ $stack11 = java.lang.Integer.valueOf($stack8);
+ dummyClass.lowSink("Stopped issuing speculative requests for {}, speculativeReadTimeout = {}");
+$stack3.trace("Stopped issuing speculative requests for {}, speculativeReadTimeout = {}",(java.lang.Object)$stack10,(java.lang.Object)$stack11);
+ label1:return;
+ } 
+

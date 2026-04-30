@@ -1,0 +1,17 @@
+long org.apache.rocketmq.store.ConsumeQueue:getTotalSize()
+{
+long totalSize;
+  org.apache.rocketmq.store.MappedFileQueue $stack3;
+  boolean $stack5;
+  org.apache.rocketmq.store.ConsumeQueueExt $stack6;
+  long $stack7;
+  $stack3=this.mappedFileQueue;
+ totalSize = $stack3.getTotalFileSize();
+ $stack5 = this.isExtReadEnable();
+ if ($stack5==0) goto label0;
+ $stack6=this.consumeQueueExt;
+ $stack7 = $stack6.getTotalSize();
+ totalSize=(totalSize+$stack7);
+ label0:return  totalSize;
+ } 
+

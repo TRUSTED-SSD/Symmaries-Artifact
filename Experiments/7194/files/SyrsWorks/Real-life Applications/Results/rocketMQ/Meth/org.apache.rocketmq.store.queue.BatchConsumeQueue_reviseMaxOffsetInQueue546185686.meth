@@ -1,0 +1,40 @@
+void org.apache.rocketmq.store.queue.BatchConsumeQueue:reviseMaxOffsetInQueue()
+{
+org.apache.rocketmq.store.logfile.MappedFile lastMappedFile;
+  org.apache.rocketmq.store.queue.BatchOffsetIndex max;
+  org.apache.rocketmq.store.MappedFileQueue $stack4;
+  long $stack7;
+  short $stack8;
+  long $stack9;
+  java.util.List $stack13;
+  int $stack14;
+  java.util.List $stack20;
+  java.lang.Object $stack23;
+  $stack4=this.mappedFileQueue;
+ lastMappedFile = $stack4.getLastMappedFile();
+ max = this.getMaxMsgOffset(lastMappedFile,(boolean)1,(boolean)0);
+ if (null!=max) goto label0;
+ $stack4=this.mappedFileQueue;
+ $stack13 = $stack4.getMappedFiles();
+ $stack14 = $stack13.size();
+ if ($stack14<2) goto label0;
+ $stack4=this.mappedFileQueue;
+ $stack13 = $stack4.getMappedFiles();
+ $stack4=this.mappedFileQueue;
+ $stack20 = $stack4.getMappedFiles();
+ $stack14 = $stack20.size();
+ $stack14=($stack14-2);
+ $stack23 = $stack13.get($stack14);
+ lastMappedFile=(org.apache.rocketmq.store.logfile.MappedFile) $stack23;
+ max = this.getMaxMsgOffset(lastMappedFile,(boolean)1,(boolean)0);
+ label0:if (null!=max) goto label1;
+ $stack7=0L;
+ goto label2;
+ label1:$stack7 = max.getMsgOffset();
+ $stack8 = max.getBatchSize();
+ $stack9=(long) $stack8;
+ $stack7=($stack7+$stack9);
+ label2:this.maxOffsetInQueue=$stack7;
+ return;
+ } 
+

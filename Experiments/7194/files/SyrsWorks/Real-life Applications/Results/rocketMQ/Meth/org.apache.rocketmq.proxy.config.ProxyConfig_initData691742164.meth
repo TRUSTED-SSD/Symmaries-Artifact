@@ -1,0 +1,32 @@
+void org.apache.rocketmq.proxy.config.ProxyConfig:initData()
+{
+java.lang.String $stack1;
+  boolean $stack2;
+  org.apache.rocketmq.proxy.common.ProxyException $stack12;
+  org.apache.rocketmq.proxy.common.ProxyExceptionCode $stack13;
+  this.parseDelayLevel();
+ $stack1=this.localServeAddr;
+ $stack2 = org.apache.commons.lang3.StringUtils.isEmpty((java.lang.CharSequence)$stack1);
+ if ($stack2==0) goto label0;
+ $stack1 = org.apache.rocketmq.common.utils.NetworkUtil.getLocalAddress();
+ this.localServeAddr=$stack1;
+ label0:$stack1=this.localServeAddr;
+ $stack2 = org.apache.commons.lang3.StringUtils.isBlank((java.lang.CharSequence)$stack1);
+ if ($stack2==0) goto label1;
+ $stack12=new org.apache.rocketmq.proxy.common.ProxyException;
+ $stack13=org.apache.rocketmq.proxy.common.ProxyExceptionCode.INTERNAL_SERVER_ERROR;
+ $stack12#org.apache.rocketmq.proxy.common.ProxyException($stack13,"get local serve ip failed");
+ throw $stack12;
+ label1:$stack1=this.remotingAccessAddr;
+ $stack2 = org.apache.commons.lang3.StringUtils.isBlank((java.lang.CharSequence)$stack1);
+ if ($stack2==0) goto label2;
+ $stack1=this.localServeAddr;
+ this.remotingAccessAddr=$stack1;
+ label2:$stack1=this.heartbeatSyncerTopicClusterName;
+ $stack2 = org.apache.commons.lang3.StringUtils.isBlank((java.lang.CharSequence)$stack1);
+ if ($stack2==0) goto label3;
+ $stack1=this.rocketMQClusterName;
+ this.heartbeatSyncerTopicClusterName=$stack1;
+ label3:return;
+ } 
+

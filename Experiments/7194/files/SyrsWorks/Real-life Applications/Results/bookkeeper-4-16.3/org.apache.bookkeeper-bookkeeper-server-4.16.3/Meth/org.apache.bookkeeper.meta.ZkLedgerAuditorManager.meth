@@ -1,0 +1,30 @@
+org.apache.bookkeeper.meta.ZkLedgerAuditorManager(org.apache.zookeeper.ZooKeeper zkc,org.apache.bookkeeper.conf.ServerConfiguration conf,org.apache.bookkeeper.stats.StatsLogger statsLogger)
+{
+java.lang.StringBuilder $stack4;
+  java.lang.String $stack5;
+  org.apache.bookkeeper.stats.Counter $stack16;
+  this#java.lang.Object();
+ this.isClosed=0;
+ this.zkc=zkc;
+ this.conf=conf;
+ $stack4=new java.lang.StringBuilder;
+ $stack4#java.lang.StringBuilder();
+ $stack5 = org.apache.bookkeeper.meta.zk.ZKMetadataDriverBase.resolveZkLedgersRootPath((org.apache.bookkeeper.conf.AbstractConfiguration)conf);
+ $stack4 = $stack4.append($stack5);
+ $stack4 = $stack4.append((char)47);
+ $stack4 = $stack4.append("underreplication");
+ $stack5 = $stack4.toString();
+ this.basePath=$stack5;
+ $stack4=new java.lang.StringBuilder;
+ $stack4#java.lang.StringBuilder();
+ $stack5=this.basePath;
+ $stack4 = $stack4.append($stack5);
+ $stack4 = $stack4.append((char)47);
+ $stack4 = $stack4.append("auditorelection");
+ $stack5 = $stack4.toString();
+ this.electionPath=$stack5;
+ $stack16 = statsLogger.getCounter("election_attempts");
+ this.electionAttempts=$stack16;
+ return;
+ } 
+

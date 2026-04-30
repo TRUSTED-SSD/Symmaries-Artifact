@@ -1,0 +1,27 @@
+org.junit.runner.Request org.junit.runner.JUnitCommandLineParseResult:applyFilterSpecs(org.junit.runner.Request @request)
+{
+java.util.Iterator i$;
+  java.lang.String filterSpec;
+  org.junit.runner.manipulation.Filter filter;
+  java.util.List $stack5;
+  boolean $stack7;
+  java.lang.Object $stack8;
+  org.junit.runner.FilterFactory$FilterNotCreatedException $stack12;
+  org.junit.runner.Request request;
+request=@request;
+label0:$stack5=this.filterSpecs;
+ i$ = $stack5.iterator();
+ label1:$stack7 = i$.hasNext();
+ if ($stack7==0) goto label2;
+ $stack8 = i$.next();
+ filterSpec=(java.lang.String) $stack8;
+ filter = org.junit.runner.FilterFactories.createFilterFromFilterSpec(request,filterSpec);
+ request = request.filterWith(filter);
+ goto label1;
+ label2:return  request;
+ label3:$stack12 = catch;
+ request = this#org.junit.runner.JUnitCommandLineParseResult:errorReport((java.lang.Throwable)$stack12);
+ return  request;
+ catch org.junit.runner.FilterFactory$FilterNotCreatedException: label0 - label2 : label3;
+} 
+

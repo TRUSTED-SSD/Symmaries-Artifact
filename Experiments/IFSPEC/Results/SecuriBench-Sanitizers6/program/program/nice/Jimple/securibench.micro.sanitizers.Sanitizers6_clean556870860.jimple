@@ -1,0 +1,71 @@
+    private static java.lang.String clean(java.lang.String)
+    {
+        java.lang.String l0;
+        java.lang.StringBuffer l1;
+        int l2, $stack5;
+        char l3;
+        boolean $stack8;
+
+        l0 := @parameter0: java.lang.String;
+
+        l1 = new java.lang.StringBuffer;
+/*39*/
+
+        specialinvoke l1.<java.lang.StringBuffer: void <init>()>();
+/*39*/
+
+        l2 = 0;
+/*40*/
+
+     label1:
+        $stack5 = virtualinvoke l0.<java.lang.String: int length()>();
+/*40*/
+
+        if l2 >= $stack5 goto label5;
+/*40*/
+
+        l3 = virtualinvoke l0.<java.lang.String: char charAt(int)>(l2);
+/*41*/
+/*41*/
+
+        $stack8 = staticinvoke <java.lang.Character: boolean isLetter(char)>(l3);
+/*43*/
+
+        if $stack8 != 0 goto label2;
+/*43*/
+
+        $stack8 = staticinvoke <java.lang.Character: boolean isDigit(char)>(l3);
+/*40*/
+
+        if $stack8 != 0 goto label2;
+/*40*/
+
+        if l3 != 95 goto label3;
+/*44*/
+
+     label2:
+        virtualinvoke l1.<java.lang.StringBuffer: java.lang.StringBuffer append(char)>(l3);
+/*44*/
+
+        goto label4;
+/*44*/
+
+     label3:
+        virtualinvoke l1.<java.lang.StringBuffer: java.lang.StringBuffer append(char)>(63);
+/*46*/
+
+     label4:
+        l2 = l2 + 1;
+/*40*/
+
+        goto label1;
+/*40*/
+
+     label5:
+        l0 = virtualinvoke l1.<java.lang.StringBuffer: java.lang.String toString()>();
+/*50*/
+
+        return l0;
+/*50*/
+    }
+

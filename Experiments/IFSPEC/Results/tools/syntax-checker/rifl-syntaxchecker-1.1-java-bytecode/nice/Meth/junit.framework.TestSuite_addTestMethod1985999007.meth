@@ -1,0 +1,33 @@
+void junit.framework.TestSuite:addTestMethod(java.lang.reflect.Method m,java.util.List names,java.lang.Class theClass)
+{
+java.lang.String name;
+  boolean $stack6;
+  junit.framework.Test $stack9;
+  java.lang.StringBuilder $stack11;
+  name = m.getName();
+ $stack6 = names.contains((java.lang.Object)name);
+ if ($stack6==0) goto label0;
+ return;
+ label0:$stack6 = this#junit.framework.TestSuite:isPublicTestMethod(m);
+ if ($stack6!=0) goto label1;
+ $stack6 = this#junit.framework.TestSuite:isTestMethod(m);
+ if ($stack6==0) goto label2;
+ $stack11=new java.lang.StringBuilder;
+ $stack11#java.lang.StringBuilder();
+ $stack11 = $stack11.append("Test method isn\'t public: ");
+ name = m.getName();
+ $stack11 = $stack11.append(name);
+ $stack11 = $stack11.append("(");
+ name = theClass.getCanonicalName();
+ $stack11 = $stack11.append(name);
+ $stack11 = $stack11.append(")");
+ name = $stack11.toString();
+ $stack9 = junit.framework.TestSuite.warning(name);
+ this.addTest($stack9);
+ label2:return;
+ label1:names.add((java.lang.Object)name);
+ $stack9 = junit.framework.TestSuite.createTest(theClass,name);
+ this.addTest($stack9);
+ return;
+ } 
+

@@ -1,0 +1,18 @@
+boolean org.apache.bookkeeper.bookie.Journal$JournalRollingFilter:accept(long journalId)
+{
+org.apache.bookkeeper.bookie.Journal$LastLogMark $stack3;
+  org.apache.bookkeeper.bookie.LogMark $stack4;
+  long $stack5;
+  byte $stack6;
+  boolean $stack7;
+  $stack3=this.lastMark;
+ $stack4 = $stack3.getCurMark();
+ $stack5 = $stack4.getLogFileId();
+ $stack6=(journalId cmp $stack5);
+ if ($stack6>=0) goto label0;
+ $stack7=1;
+ goto label1;
+ label0:$stack7=0;
+ label1:return  $stack7;
+ } 
+

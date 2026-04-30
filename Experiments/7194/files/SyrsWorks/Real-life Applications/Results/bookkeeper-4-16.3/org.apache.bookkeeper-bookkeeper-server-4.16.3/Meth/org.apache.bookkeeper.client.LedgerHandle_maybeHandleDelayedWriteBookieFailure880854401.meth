@@ -1,0 +1,33 @@
+void org.apache.bookkeeper.client.LedgerHandle:maybeHandleDelayedWriteBookieFailure()
+{
+java.lang.Object l1;
+  java.lang.Throwable l3;
+  java.lang.Object $stack4;
+  java.util.Map $stack5;
+  boolean $stack6;
+  java.util.HashMap $stack7;
+  $stack4=this.metadataLock;
+ l1=$stack4;
+ monitorenter $stack4;
+ label0:$stack5=this.delayedWriteFailedBookies;
+ $stack6 = $stack5.isEmpty();
+ if ($stack6==0) goto label1;
+ monitorexit $stack4;
+ label2:return;
+ label1:$stack7=new java.util.HashMap;
+ $stack5=this.delayedWriteFailedBookies;
+ $stack7#java.util.HashMap($stack5);
+ $stack5=this.delayedWriteFailedBookies;
+ $stack5.clear();
+ this#org.apache.bookkeeper.client.LedgerHandle((java.util.Map)$stack7);
+ monitorexit $stack4;
+ label3:goto label4;
+ label5:l3 = catch;
+ monitorexit $stack4;
+ label6:throw l3;
+ label4:return;
+ catch java.lang.Throwable: label0 - label2 : label5;
+catch java.lang.Throwable: label1 - label3 : label5;
+catch java.lang.Throwable: label5 - label6 : label5;
+} 
+

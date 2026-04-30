@@ -1,0 +1,16 @@
+byte[] org.keycloak.jose.jwe.enc.AesGcmEncryptionProvider:serializeCEK(org.keycloak.jose.jwe.JWEKeyStorage keyStorage)
+{
+java.security.Key aesKey;
+  byte[] aesBytes;
+  org.keycloak.jose.jwe.JWEKeyStorage$KeyUse $stack4;
+  java.lang.IllegalArgumentException $stack7;
+  $stack4=org.keycloak.jose.jwe.JWEKeyStorage$KeyUse.ENCRYPTION;
+ aesKey = keyStorage.getCEKKey($stack4,(boolean)0);
+ if (aesKey!=null) goto label0;
+ $stack7=new java.lang.IllegalArgumentException;
+ $stack7#java.lang.IllegalArgumentException("AES CEK key not present");
+ throw $stack7;
+ label0:aesBytes = aesKey.getEncoded();
+ return  aesBytes;
+ } 
+

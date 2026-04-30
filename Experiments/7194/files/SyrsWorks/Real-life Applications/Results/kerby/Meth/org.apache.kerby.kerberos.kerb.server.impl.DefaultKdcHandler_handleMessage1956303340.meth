@@ -1,0 +1,26 @@
+void org.apache.kerby.kerberos.kerb.server.impl.DefaultKdcHandler:handleMessage(java.nio.ByteBuffer @message)
+{
+java.net.InetAddress clientAddress;
+  boolean isTcp;
+  org.apache.kerby.kerberos.kerb.transport.KrbTransport $stack5;
+  java.lang.Exception $stack10;
+  org.slf4j.Logger $stack12;
+  java.nio.ByteBuffer message;
+message=@message;
+$stack5=this.transport;
+ clientAddress = $stack5.getRemoteAddress();
+ $stack5=this.transport;
+ isTcp=$stack5 instanceof org.apache.kerby.kerberos.kerb.transport.KrbTcpTransport;
+ label0:message = this.handleMessage(message,isTcp,clientAddress);
+ $stack5=this.transport;
+ $stack5.sendMessage(message);
+ label1:goto label2;
+ label3:$stack10 = catch;
+ $stack5=this.transport;
+ $stack5.release();
+ $stack12=org.apache.kerby.kerberos.kerb.server.impl.DefaultKdcHandler.logger;
+ $stack12.error("Error occured while processing request:",(java.lang.Throwable)$stack10);
+ label2:return;
+ catch java.lang.Exception: label0 - label1 : label3;
+} 
+

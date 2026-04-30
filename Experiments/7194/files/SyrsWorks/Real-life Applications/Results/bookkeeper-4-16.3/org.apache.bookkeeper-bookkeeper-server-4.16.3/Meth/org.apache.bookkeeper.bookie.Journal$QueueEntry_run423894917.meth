@@ -1,0 +1,43 @@
+void org.apache.bookkeeper.bookie.Journal$QueueEntry:run()
+{
+long startTime;
+  org.slf4j.Logger $stack4;
+  boolean $stack5;
+  long $stack6;
+  org.apache.bookkeeper.stats.OpStatsLogger $stack7;
+  java.util.concurrent.TimeUnit $stack9;
+  java.lang.Object $stack10;
+  long $stack12;
+  org.apache.bookkeeper.proto.BookkeeperInternalCallbacks$WriteCallback $stack13;
+  org.apache.bookkeeper.stats.Counter $stack14;
+  java.lang.Long $stack20;
+  java.lang.Long $stack22;
+  startTime = java.lang.System.nanoTime();
+ $stack4 = org.apache.bookkeeper.bookie.Journal.access$000();
+ $stack5 = $stack4.isDebugEnabled();
+ if ($stack5==0) goto label0;
+ $stack4 = org.apache.bookkeeper.bookie.Journal.access$000();
+ $stack6=this.ledgerId;
+ $stack20 = java.lang.Long.valueOf($stack6);
+ $stack6=this.entryId;
+ $stack22 = java.lang.Long.valueOf($stack6);
+ dummyClass.lowSink("Acknowledge Ledger: {}, Entry: {}");
+$stack4.debug("Acknowledge Ledger: {}, Entry: {}",(java.lang.Object)$stack20,(java.lang.Object)$stack22);
+ label0:$stack7=this.journalAddEntryStats;
+ $stack6=this.enqueueTime;
+ $stack6 = org.apache.bookkeeper.util.MathUtils.elapsedNanos($stack6);
+ $stack9=java.util.concurrent.TimeUnit.NANOSECONDS;
+ $stack7.registerSuccessfulEvent($stack6,$stack9);
+ $stack13=this.cb;
+ $stack12=this.ledgerId;
+ $stack6=this.entryId;
+ $stack10=this.ctx;
+ $stack13.writeComplete(0,$stack12,$stack6,null,$stack10);
+ $stack14=this.callbackTime;
+ startTime = org.apache.bookkeeper.util.MathUtils.elapsedNanos(startTime);
+ $stack9=java.util.concurrent.TimeUnit.NANOSECONDS;
+ $stack14.addLatency(startTime,$stack9);
+ this#org.apache.bookkeeper.bookie.Journal$QueueEntry:recycle();
+ return;
+ } 
+

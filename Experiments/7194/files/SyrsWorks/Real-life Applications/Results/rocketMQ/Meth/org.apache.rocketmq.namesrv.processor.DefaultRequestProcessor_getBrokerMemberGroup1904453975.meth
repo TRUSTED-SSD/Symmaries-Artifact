@@ -1,0 +1,30 @@
+org.apache.rocketmq.remoting.protocol.RemotingCommand org.apache.rocketmq.namesrv.processor.DefaultRequestProcessor:getBrokerMemberGroup(io.netty.channel.ChannelHandlerContext ctx,org.apache.rocketmq.remoting.protocol.RemotingCommand @request)
+{
+org.apache.rocketmq.remoting.protocol.header.GetBrokerMemberGroupRequestHeader requestHeader;
+  org.apache.rocketmq.remoting.protocol.body.BrokerMemberGroup memberGroup;
+  org.apache.rocketmq.remoting.protocol.body.GetBrokerMemberGroupResponseBody responseBody;
+  org.apache.rocketmq.remoting.CommandCustomHeader $stack7;
+  org.apache.rocketmq.namesrv.NamesrvController $stack8;
+  org.apache.rocketmq.namesrv.routeinfo.RouteInfoManager $stack9;
+  java.lang.String $stack10;
+  java.lang.String $stack11;
+  byte[] $stack15;
+  org.apache.rocketmq.remoting.protocol.RemotingCommand request;
+request=@request;
+$stack7 = request.decodeCommandCustomHeader(org.apache.rocketmq.remoting.protocol.header.GetBrokerMemberGroupRequestHeader);
+ requestHeader=(org.apache.rocketmq.remoting.protocol.header.GetBrokerMemberGroupRequestHeader) $stack7;
+ $stack8=this.namesrvController;
+ $stack9 = $stack8.getRouteInfoManager();
+ $stack10 = requestHeader.getClusterName();
+ $stack11 = requestHeader.getBrokerName();
+ memberGroup = $stack9.getBrokerMemberGroup($stack10,$stack11);
+ responseBody=new org.apache.rocketmq.remoting.protocol.body.GetBrokerMemberGroupResponseBody;
+ responseBody#org.apache.rocketmq.remoting.protocol.body.GetBrokerMemberGroupResponseBody();
+ responseBody.setBrokerMemberGroup(memberGroup);
+ request = org.apache.rocketmq.remoting.protocol.RemotingCommand.createResponseCommand(null);
+ request.setCode(0);
+ $stack15 = responseBody.encode();
+ request.setBody($stack15);
+ return  request;
+ } 
+

@@ -1,0 +1,115 @@
+    private java.lang.Thread getStuckThread(java.lang.Thread)
+    {
+        org.junit.internal.runners.statements.FailOnTimeout this;
+        java.lang.Thread mainThread, stuckThread, thread;
+        java.lang.Thread[] threadsInGroup;
+        long maxCpuTime, threadCpuTime;
+        int len$, i$;
+        java.lang.ThreadGroup $stack12;
+        java.lang.Thread$State $stack16, $stack17;
+        byte $stack21;
+
+        this := @this: org.junit.internal.runners.statements.FailOnTimeout;
+
+        mainThread := @parameter0: java.lang.Thread;
+
+        $stack12 = this.<org.junit.internal.runners.statements.FailOnTimeout: java.lang.ThreadGroup threadGroup>;
+/*200*/
+
+        if $stack12 != null goto label1;
+/*200*/
+
+        return null;
+/*201*/
+
+     label1:
+        $stack12 = this.<org.junit.internal.runners.statements.FailOnTimeout: java.lang.ThreadGroup threadGroup>;
+/*203*/
+
+        threadsInGroup = specialinvoke this.<org.junit.internal.runners.statements.FailOnTimeout: java.lang.Thread[] getThreadArray(java.lang.ThreadGroup)>($stack12);
+/*203*/
+/*203*/
+
+        if threadsInGroup != null goto label2;
+/*204*/
+
+        return null;
+/*205*/
+
+     label2:
+        stuckThread = null;
+/*213*/
+
+        maxCpuTime = 0L;
+/*214*/
+
+        len$ = lengthof threadsInGroup;
+/*215*/
+
+        i$ = 0;
+/*215*/
+
+     label3:
+        if i$ >= len$ goto label6;
+/*215*/
+
+        thread = threadsInGroup[i$];
+/*224*/
+
+        $stack16 = virtualinvoke thread.<java.lang.Thread: java.lang.Thread$State getState()>();
+/*216*/
+
+        $stack17 = <java.lang.Thread$State: java.lang.Thread$State RUNNABLE>;
+/*216*/
+
+        if $stack16 != $stack17 goto label5;
+/*216*/
+
+        threadCpuTime = specialinvoke this.<org.junit.internal.runners.statements.FailOnTimeout: long cpuTime(java.lang.Thread)>(thread);
+/*217*/
+/*217*/
+
+        if stuckThread == null goto label4;
+/*218*/
+
+        $stack21 = threadCpuTime cmp maxCpuTime;
+/*215*/
+
+        if $stack21 <= 0 goto label5;
+/*215*/
+
+     label4:
+        stuckThread = thread;
+/*219*/
+/*219*/
+
+        maxCpuTime = threadCpuTime;
+/*220*/
+/*220*/
+
+     label5:
+        i$ = i$ + 1;
+/*215*/
+
+        goto label3;
+/*215*/
+
+     label6:
+        if stuckThread != mainThread goto label7;
+/*224*/
+
+        mainThread = null;
+/*224*/
+
+        goto label8;
+/*224*/
+
+     label7:
+        mainThread = stuckThread;
+/*224*/
+
+     label8:
+        return mainThread;
+/*224*/
+    }
+

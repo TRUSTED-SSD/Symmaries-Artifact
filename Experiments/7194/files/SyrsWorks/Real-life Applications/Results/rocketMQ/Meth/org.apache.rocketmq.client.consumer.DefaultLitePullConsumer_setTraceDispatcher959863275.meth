@@ -1,0 +1,43 @@
+void org.apache.rocketmq.client.consumer.DefaultLitePullConsumer:setTraceDispatcher()
+{
+java.lang.Object traceDispatcher;
+  boolean $stack2;
+  org.apache.rocketmq.client.trace.AsyncTraceDispatcher $stack3;
+  java.lang.String $stack4;
+  org.apache.rocketmq.client.trace.TraceDispatcher$Type $stack5;
+  java.lang.String $stack6;
+  org.apache.rocketmq.client.producer.DefaultMQProducer $stack7;
+  org.apache.rocketmq.client.impl.consumer.DefaultLitePullConsumerImpl $stack10;
+  java.lang.Throwable $stack11;
+  org.apache.rocketmq.logging.org.slf4j.Logger $stack12;
+  org.apache.rocketmq.client.trace.AsyncTraceDispatcher tmp$664870430;
+  org.apache.rocketmq.client.trace.hook.ConsumeMessageTraceHookImpl tmp$1266435924;
+  org.apache.rocketmq.client.trace.TraceDispatcher tmp$226136457;
+  $stack2 = this.isEnableMsgTrace();
+ if ($stack2==0) goto label0;
+ label1:tmp$664870430=new org.apache.rocketmq.client.trace.AsyncTraceDispatcher;
+ $stack6=this.consumerGroup;
+ $stack5=org.apache.rocketmq.client.trace.TraceDispatcher$Type.CONSUME;
+ $stack4=this.customizedTraceTopic;
+ tmp$664870430#org.apache.rocketmq.client.trace.AsyncTraceDispatcher($stack6,$stack5,$stack4,null);
+ traceDispatcher=tmp$664870430;
+ $stack3=(org.apache.rocketmq.client.trace.AsyncTraceDispatcher) tmp$664870430;
+ $stack7 = $stack3.getTraceProducer();
+ $stack2 = this.isUseTLS();
+ $stack7.setUseTLS($stack2);
+ tmp$226136457=(org.apache.rocketmq.client.trace.TraceDispatcher) tmp$664870430;
+ this.traceDispatcher=tmp$226136457;
+ $stack10=this.defaultLitePullConsumerImpl;
+ tmp$1266435924=new org.apache.rocketmq.client.trace.hook.ConsumeMessageTraceHookImpl;
+ tmp$226136457=(org.apache.rocketmq.client.trace.TraceDispatcher) tmp$664870430;
+ tmp$1266435924#org.apache.rocketmq.client.trace.hook.ConsumeMessageTraceHookImpl(tmp$226136457);
+ $stack10.registerConsumeMessageHook((org.apache.rocketmq.client.hook.ConsumeMessageHook)tmp$1266435924);
+ label2:goto label0;
+ label3:$stack11 = catch;
+ traceDispatcher=$stack11;
+ $stack12=org.apache.rocketmq.client.consumer.DefaultLitePullConsumer.log;
+ $stack12.error("system mqtrace hook init failed ,maybe can\'t send msg trace data");
+ label0:return;
+ catch java.lang.Throwable: label1 - label2 : label3;
+} 
+

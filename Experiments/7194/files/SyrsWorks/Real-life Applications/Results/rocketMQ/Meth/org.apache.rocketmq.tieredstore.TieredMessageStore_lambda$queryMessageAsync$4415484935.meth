@@ -1,0 +1,31 @@
+static org.apache.rocketmq.store.QueryMessageResult org.apache.rocketmq.tieredstore.TieredMessageStore:lambda$queryMessageAsync$4(java.lang.String topic,com.google.common.base.Stopwatch stopwatch,org.apache.rocketmq.store.QueryMessageResult result,org.apache.rocketmq.store.QueryMessageResult tieredStoreResult)
+{
+io.opentelemetry.api.common.Attributes latencyAttributes;
+  java.util.Iterator l5;
+  org.apache.rocketmq.store.SelectMappedBufferResult msg;
+  io.opentelemetry.api.common.AttributesBuilder $stack7;
+  java.util.concurrent.TimeUnit $stack11;
+  io.opentelemetry.api.metrics.LongHistogram $stack12;
+  long $stack13;
+  java.util.List $stack14;
+  boolean $stack16;
+  java.lang.Object $stack17;
+  $stack7 = org.apache.rocketmq.tieredstore.metrics.TieredStoreMetricsManager.newAttributesBuilder();
+ $stack7 = $stack7.put("operation","query_message");
+ $stack7 = $stack7.put("topic",topic);
+ latencyAttributes = $stack7.build();
+ $stack12=org.apache.rocketmq.tieredstore.metrics.TieredStoreMetricsManager.apiLatency;
+ $stack11=java.util.concurrent.TimeUnit.MILLISECONDS;
+ $stack13 = stopwatch.elapsed($stack11);
+ $stack12.record($stack13,latencyAttributes);
+ $stack14 = tieredStoreResult.getMessageMapedList();
+ l5 = $stack14.iterator();
+ label0:$stack16 = l5.hasNext();
+ if ($stack16==0) goto label1;
+ $stack17 = l5.next();
+ msg=(org.apache.rocketmq.store.SelectMappedBufferResult) $stack17;
+ result.addMessage(msg);
+ goto label0;
+ label1:return  result;
+ } 
+

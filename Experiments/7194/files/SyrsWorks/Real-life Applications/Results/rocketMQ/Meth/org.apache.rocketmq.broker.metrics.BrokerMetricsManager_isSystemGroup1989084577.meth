@@ -1,0 +1,26 @@
+static boolean org.apache.rocketmq.broker.metrics.BrokerMetricsManager:isSystemGroup(java.lang.String @group)
+{
+java.util.Iterator l2;
+  java.lang.String prefix;
+  boolean $stack4;
+  java.util.List $stack6;
+  java.lang.Object $stack9;
+  java.lang.String group;
+group=@group;
+$stack4 = org.apache.commons.lang3.StringUtils.isBlank((java.lang.CharSequence)group);
+ if ($stack4==0) goto label0;
+ return  0;
+ label0:group = group.toLowerCase();
+ $stack6=org.apache.rocketmq.broker.metrics.BrokerMetricsManager.SYSTEM_GROUP_PREFIX_LIST;
+ l2 = $stack6.iterator();
+ label1:$stack4 = l2.hasNext();
+ if ($stack4==0) goto label2;
+ $stack9 = l2.next();
+ prefix=(java.lang.String) $stack9;
+ $stack4 = group.startsWith(prefix);
+ if ($stack4==0) goto label3;
+ return  1;
+ label3:goto label1;
+ label2:return  0;
+ } 
+

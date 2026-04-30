@@ -1,0 +1,51 @@
+long org.apache.rocketmq.client.impl.MQAdminImpl:searchOffset(org.apache.rocketmq.common.message.MessageQueue mq,long timestamp)
+{
+java.lang.String brokerAddr;
+  org.apache.rocketmq.client.impl.factory.MQClientInstance $stack6;
+  org.apache.rocketmq.client.impl.factory.MQClientInstance $stack7;
+  org.apache.rocketmq.client.exception.MQClientException $stack10;
+  java.lang.StringBuilder $stack11;
+  org.apache.rocketmq.client.impl.MQClientAPIImpl $stack18;
+  long $stack19;
+  java.lang.Exception $stack29;
+  $stack7=this.mQClientFactory;
+ $stack6=this.mQClientFactory;
+ brokerAddr = $stack6.getBrokerNameFromMessageQueue(mq);
+ brokerAddr = $stack7.findBrokerAddressInPublish(brokerAddr);
+ if (null!=brokerAddr) goto label0;
+ $stack6=this.mQClientFactory;
+ brokerAddr = mq.getTopic();
+ $stack6.updateTopicRouteInfoFromNameServer(brokerAddr);
+ $stack7=this.mQClientFactory;
+ $stack6=this.mQClientFactory;
+ brokerAddr = $stack6.getBrokerNameFromMessageQueue(mq);
+ brokerAddr = $stack7.findBrokerAddressInPublish(brokerAddr);
+ label0:if (brokerAddr==null) goto label1;
+ label2:$stack6=this.mQClientFactory;
+ $stack18 = $stack6.getMQClientAPIImpl();
+ $stack19=this.timeoutMillis;
+ timestamp = $stack18.searchOffset(brokerAddr,mq,timestamp,$stack19);
+ label3:return  timestamp;
+ label4:$stack29 = catch;
+ $stack10=new org.apache.rocketmq.client.exception.MQClientException;
+ $stack11=new java.lang.StringBuilder;
+ $stack11#java.lang.StringBuilder();
+ $stack11 = $stack11.append("Invoke Broker[");
+ $stack11 = $stack11.append(brokerAddr);
+ $stack11 = $stack11.append("] exception");
+ brokerAddr = $stack11.toString();
+ $stack10#org.apache.rocketmq.client.exception.MQClientException(brokerAddr,(java.lang.Throwable)$stack29);
+ throw $stack10;
+ label1:$stack10=new org.apache.rocketmq.client.exception.MQClientException;
+ $stack11=new java.lang.StringBuilder;
+ $stack11#java.lang.StringBuilder();
+ $stack11 = $stack11.append("The broker[");
+ brokerAddr = mq.getBrokerName();
+ $stack11 = $stack11.append(brokerAddr);
+ $stack11 = $stack11.append("] not exist");
+ brokerAddr = $stack11.toString();
+ $stack10#org.apache.rocketmq.client.exception.MQClientException(brokerAddr,null);
+ throw $stack10;
+ catch java.lang.Exception: label2 - label3 : label4;
+} 
+

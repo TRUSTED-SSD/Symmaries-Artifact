@@ -1,0 +1,15 @@
+io.netty.util.concurrent.Promise org.apache.rocketmq.remoting.rpc.RpcClientImpl:handlePullMessage(java.lang.String addr,org.apache.rocketmq.remoting.rpc.RpcRequest rpcRequest,long timeoutMillis)
+{
+org.apache.rocketmq.remoting.protocol.RemotingCommand requestCommand;
+  io.netty.util.concurrent.Promise rpcResponsePromise;
+  org.apache.rocketmq.remoting.rpc.RpcClientImpl$1 $stack10;
+  org.apache.rocketmq.remoting.RemotingClient $stack11;
+  requestCommand = org.apache.rocketmq.remoting.rpc.RpcClientUtils.createCommandForRpcRequest(rpcRequest);
+ rpcResponsePromise = this.createResponseFuture();
+ $stack10=new org.apache.rocketmq.remoting.rpc.RpcClientImpl$1;
+ $stack10#org.apache.rocketmq.remoting.rpc.RpcClientImpl$1(this,addr,requestCommand,rpcResponsePromise);
+ $stack11=this.remotingClient;
+ $stack11.invokeAsync(addr,requestCommand,timeoutMillis,(org.apache.rocketmq.remoting.InvokeCallback)$stack10);
+ return  rpcResponsePromise;
+ } 
+

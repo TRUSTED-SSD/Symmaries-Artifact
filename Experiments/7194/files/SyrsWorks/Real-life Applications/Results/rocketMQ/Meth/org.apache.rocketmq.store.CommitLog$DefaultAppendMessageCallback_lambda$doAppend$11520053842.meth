@@ -1,0 +1,41 @@
+static java.lang.String org.apache.rocketmq.store.CommitLog$DefaultAppendMessageCallback:lambda$doAppend$1(int storeHostLength,org.apache.rocketmq.store.PutMessageContext putMessageContext,org.apache.rocketmq.common.message.MessageExtBatch messageExtBatch)
+{
+int batchCount;
+  long[] phyPosArray;
+  java.nio.ByteBuffer msgIdBuffer;
+  java.lang.StringBuilder buffer;
+  java.lang.String msgId;
+  java.net.SocketAddress $stack13;
+  int $stack17;
+  long $stack23;
+  byte[] $stack26;
+  storeHostLength=(storeHostLength+8);
+ batchCount = putMessageContext.getBatchSize();
+ phyPosArray = putMessageContext.getPhyPos();
+ msgIdBuffer = java.nio.ByteBuffer.allocate(storeHostLength);
+ $stack13 = messageExtBatch.getStoreHost();
+ org.apache.rocketmq.common.message.MessageExt.socketAddress2ByteBuffer($stack13,msgIdBuffer);
+ msgIdBuffer.clear();
+ buffer=new java.lang.StringBuilder;
+ $stack17=(batchCount * storeHostLength);
+ $stack17=($stack17 * 2);
+ batchCount=($stack17+batchCount);
+ batchCount=(batchCount-1);
+ buffer#java.lang.StringBuilder(batchCount);
+ batchCount=0;
+ label0:$stack17=#phyPosArray;
+ if (batchCount>=$stack17) goto label1;
+ $stack17=(storeHostLength-8);
+ $stack23=phyPosArray[batchCount];
+ msgIdBuffer.putLong($stack17,$stack23);
+ $stack26 = msgIdBuffer.array();
+ msgId = org.apache.rocketmq.common.UtilAll.bytes2string($stack26);
+ if (batchCount==0) goto label2;
+ buffer.append((char)44);
+ label2:buffer.append(msgId);
+ batchCount=(batchCount+1);
+ goto label0;
+ label1:msgId = buffer.toString();
+ return  msgId;
+ } 
+

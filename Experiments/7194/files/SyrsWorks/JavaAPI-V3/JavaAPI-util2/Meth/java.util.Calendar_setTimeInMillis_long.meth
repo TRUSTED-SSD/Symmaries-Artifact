@@ -1,0 +1,38 @@
+void java.util.Calendar:setTimeInMillis(long l0)
+{
+long $l1;
+  byte $b2;
+  boolean $z0;
+  boolean $z1;
+  boolean $z2;
+  java.util.TimeZone $r1;
+  boolean $z3;
+  java.util.TimeZone $r2;
+  sun.util.calendar.ZoneInfo $r3;
+  boolean $z4;
+  $l1=this.time;
+ $b2=($l1 cmp l0);
+ if ($b2!=0) goto label0;
+ $z0=this.isTimeSet;
+ if ($z0==0) goto label0;
+ $z1=this.areFieldsSet;
+ if ($z1==0) goto label0;
+ $z2=this.areAllFieldsSet;
+ if ($z2==0) goto label0;
+ $r1=this.zone;
+ $z3=$r1 instanceof sun.util.calendar.ZoneInfo;
+ if ($z3==0) goto label0;
+ $r2=this.zone;
+ $r3=(sun.util.calendar.ZoneInfo) $r2;
+ $z4 = $r3.isDirty();
+ if ($z4!=0) goto label0;
+ return;
+ label0:this.time=l0;
+ this.isTimeSet=1;
+ this.areFieldsSet=0;
+ this.computeFields();
+ this.areFieldsSet=1;
+ this.areAllFieldsSet=1;
+ return;
+ }  
+

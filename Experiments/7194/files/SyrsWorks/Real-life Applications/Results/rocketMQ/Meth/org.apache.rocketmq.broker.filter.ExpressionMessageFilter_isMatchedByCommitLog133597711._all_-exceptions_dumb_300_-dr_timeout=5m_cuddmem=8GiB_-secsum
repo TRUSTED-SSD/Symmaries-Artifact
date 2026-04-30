@@ -1,0 +1,8 @@
+boolean org.apache.rocketmq.broker.filter.ExpressionMessageFilter:isMatchedByCommitLog (
+  java.nio.ByteBuffer msgBuffer, java.util.Map @properties) {
+  guard = tt;
+  ret(level()) = level(@properties) ⊔ level(msgBuffer) ⊔ level(this) ⊔ obj_level(@properties) ⊔ obj_level(msgBuffer) ⊔ obj_level(this);
+  ret(obj_level(@properties)) = level(@properties) ⊔ level(msgBuffer) ⊔ level(this) ⊔ obj_level(@properties) ⊔ obj_level(msgBuffer) ⊔ obj_level(this);
+  ret(obj_level(msgBuffer)) = level(@properties) ⊔ level(msgBuffer) ⊔ level(this) ⊔ obj_level(@properties) ⊔ obj_level(msgBuffer) ⊔ obj_level(this);
+  ret(obj_level(this)) = level(@properties) ⊔ level(msgBuffer) ⊔ level(this) ⊔ obj_level(@properties) ⊔ obj_level(msgBuffer) ⊔ obj_level(this);
+}

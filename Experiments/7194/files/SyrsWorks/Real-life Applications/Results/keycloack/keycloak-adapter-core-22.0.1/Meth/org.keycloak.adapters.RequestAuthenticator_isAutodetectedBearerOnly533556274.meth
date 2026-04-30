@@ -1,0 +1,55 @@
+boolean org.keycloak.adapters.RequestAuthenticator:isAutodetectedBearerOnly(org.keycloak.adapters.spi.HttpFacade$Request @request)
+{
+java.lang.String headerValue;
+  java.util.List accepts;
+  java.util.Iterator l4;
+  org.keycloak.adapters.KeycloakDeployment $stack6;
+  boolean $stack7;
+  org.keycloak.adapters.spi.HttpFacade $stack8;
+  java.lang.Object $stack22;
+  org.keycloak.adapters.spi.HttpFacade$Request request;
+request=@request;
+$stack6=this.deployment;
+ $stack7 = $stack6.isAutodetectBearerOnly();
+ if ($stack7!=0) goto label0;
+ return  0;
+ label0:$stack8=this.facade;
+ request = $stack8.getRequest();
+ headerValue = request.getHeader("X-Requested-With");
+ if (headerValue==null) goto label1;
+ $stack7 = headerValue.equalsIgnoreCase("XMLHttpRequest");
+ if ($stack7==0) goto label1;
+ return  1;
+ label1:$stack8=this.facade;
+ request = $stack8.getRequest();
+ headerValue = request.getHeader("Faces-Request");
+ if (headerValue==null) goto label2;
+ $stack7 = headerValue.startsWith("partial/");
+ if ($stack7==0) goto label2;
+ return  1;
+ label2:$stack8=this.facade;
+ request = $stack8.getRequest();
+ headerValue = request.getHeader("SOAPAction");
+ if (headerValue==null) goto label3;
+ return  1;
+ label3:$stack8=this.facade;
+ request = $stack8.getRequest();
+ accepts = request.getHeaders("Accept");
+ if (accepts!=null) goto label4;
+ accepts = java.util.Collections.emptyList();
+ label4:l4 = accepts.iterator();
+ label5:$stack7 = l4.hasNext();
+ if ($stack7==0) goto label6;
+ $stack22 = l4.next();
+ headerValue=(java.lang.String) $stack22;
+ $stack7 = headerValue.contains((java.lang.CharSequence)"text/html");
+ if ($stack7!=0) goto label7;
+ $stack7 = headerValue.contains((java.lang.CharSequence)"text/*");
+ if ($stack7!=0) goto label7;
+ $stack7 = headerValue.contains((java.lang.CharSequence)"*/*");
+ if ($stack7==0) goto label8;
+ label7:return  0;
+ label8:goto label5;
+ label6:return  1;
+ } 
+

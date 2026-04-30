@@ -1,0 +1,23 @@
+void org.apache.bookkeeper.replication.ReplicationWorker:logBKExceptionAndReleaseLedger(org.apache.bookkeeper.client.BKException e,long ledgerIdToReplicate)
+{
+org.slf4j.Logger $stack4;
+  java.lang.Class $stack6;
+  java.lang.String $stack7;
+  java.lang.Long $stack8;
+  org.apache.bookkeeper.meta.LedgerUnderreplicationManager $stack9;
+  org.apache.bookkeeper.stats.Counter $stack12;
+  $stack4=org.apache.bookkeeper.replication.ReplicationWorker.LOG;
+ $stack6 = e.getClass();
+ $stack7 = $stack6.getSimpleName();
+ $stack8 = java.lang.Long.valueOf(ledgerIdToReplicate);
+ dummyClass.lowSink("{} while rereplicating ledger {}. Enough Bookies might not have available So, no harm to continue");
+$stack4.info("{} while rereplicating ledger {}. Enough Bookies might not have available So, no harm to continue",(java.lang.Object)$stack7,(java.lang.Object)$stack8);
+ $stack9=this.underreplicationManager;
+ $stack9.releaseUnderreplicatedLedger(ledgerIdToReplicate);
+ $stack6 = e.getClass();
+ $stack7 = $stack6.getSimpleName();
+ $stack12 = this#org.apache.bookkeeper.replication.ReplicationWorker:getExceptionCounter($stack7);
+ $stack12.inc();
+ return;
+ } 
+

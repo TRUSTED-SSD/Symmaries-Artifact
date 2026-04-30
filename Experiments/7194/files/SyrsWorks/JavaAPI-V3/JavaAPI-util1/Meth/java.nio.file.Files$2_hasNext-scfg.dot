@@ -1,0 +1,22 @@
+digraph G {
+  node [shape=box, ];
+  "pc0_js1" [label="〈label0: $r2 = this.val$delegate, js1〉", ];
+  "pc1_js1" [label="〈$z0 = $r2.hasNext (), js1〉\n\
+tt", ];
+  "pc2_js1" [label="〈label1: return $z0, js1〉", ];
+  "pc9_js1" [label="〈sink, js1〉\n\
+obj_level(this) ⊑ ret(obj_level(this))' ∧ (ϕ ≠ S2 ∨ pc ⊔ level($z0) ⊑ ret(level())') ∧ (ϕ ≠ S8 ∨ pc ⊔ level($r4) ⊑ ret(level())')",
+             ];
+  
+  
+  "pc0_js1" -> "pc1_js1" [label="tt,\n\
+{level($r2) := pc ⊔ level(this) ⊔ obj_level(this),\n\
+ obj_level($r2) := obj_level(this)}",
+                          ];
+  "pc1_js1" -> "pc2_js1" [label="tt,\n\
+{level($z0) := pc ⊔ level(this) ⊔ obj_level(this)}",
+                          ];
+  "pc2_js1" -> "pc9_js1" [label="tt,\n\
+{ϕ := S2}", ];
+  
+  }

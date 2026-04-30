@@ -1,0 +1,55 @@
+java.util.List org.apache.rocketmq.client.consumer.rebalance.AllocateMessageQueueAveragely:allocate(java.lang.String consumerGroup,java.lang.String currentCID,java.util.List mqAll,java.util.List cidAll)
+{
+java.util.ArrayList result;
+  int index;
+  int mod;
+  int averageSize;
+  boolean $stack13;
+  int $stack18;
+  int $stack26;
+  java.lang.Object $stack28;
+  result=new java.util.ArrayList;
+ result#java.util.ArrayList();
+ $stack13 = this.check(consumerGroup,currentCID,mqAll,cidAll);
+ if ($stack13!=0) goto label0;
+ return  result;
+ label0:index = cidAll.indexOf((java.lang.Object)currentCID);
+ mod = mqAll.size();
+ averageSize = cidAll.size();
+ mod=(mod%averageSize);
+ averageSize = mqAll.size();
+ $stack18 = cidAll.size();
+ if (averageSize>$stack18) goto label1;
+ averageSize=1;
+ goto label2;
+ label1:if (mod<=0) goto label3;
+ if (index>=mod) goto label3;
+ averageSize = mqAll.size();
+ $stack18 = cidAll.size();
+ averageSize=(averageSize/$stack18);
+ averageSize=(averageSize+1);
+ goto label2;
+ label3:averageSize = mqAll.size();
+ $stack18 = cidAll.size();
+ averageSize=(averageSize/$stack18);
+ label2:if (mod<=0) goto label4;
+ if (index>=mod) goto label4;
+ index=(index * averageSize);
+ goto label5;
+ label4:index=(index * averageSize);
+ index=(index+mod);
+ label5:mod = mqAll.size();
+ mod=(mod-index);
+ mod = java.lang.Math.min(averageSize,mod);
+ averageSize=0;
+ label6:if (averageSize>=mod) goto label7;
+ $stack18=(index+averageSize);
+ $stack26 = mqAll.size();
+ $stack18=($stack18%$stack26);
+ $stack28 = mqAll.get($stack18);
+ result.add($stack28);
+ averageSize=(averageSize+1);
+ goto label6;
+ label7:return  result;
+ } 
+

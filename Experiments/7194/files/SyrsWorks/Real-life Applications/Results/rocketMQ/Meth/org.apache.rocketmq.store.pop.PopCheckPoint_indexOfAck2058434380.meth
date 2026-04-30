@@ -1,0 +1,38 @@
+int org.apache.rocketmq.store.pop.PopCheckPoint:indexOfAck(long ackOffset)
+{
+long $stack3;
+  byte $stack4;
+  java.util.List $stack5;
+  long $stack9;
+  int $stack13;
+  boolean $stack15;
+  java.lang.Integer $stack20;
+  $stack3=this.startOffset;
+ $stack4=(ackOffset cmp $stack3);
+ if ($stack4>=0) goto label0;
+ return  -1;
+ label0:$stack5=this.queueOffsetDiff;
+ if ($stack5==null) goto label1;
+ $stack5=this.queueOffsetDiff;
+ $stack15 = $stack5.isEmpty();
+ if ($stack15==0) goto label2;
+ label1:$stack3=this.startOffset;
+ $stack9=(ackOffset-$stack3);
+ $stack4=this.num;
+ $stack3=(long) $stack4;
+ $stack4=($stack9 cmp $stack3);
+ if ($stack4>=0) goto label3;
+ $stack3=this.startOffset;
+ ackOffset=(ackOffset-$stack3);
+ $stack13=(int) ackOffset;
+ return  $stack13;
+ label3:return  -1;
+ label2:$stack5=this.queueOffsetDiff;
+ $stack3=this.startOffset;
+ ackOffset=(ackOffset-$stack3);
+ $stack13=(int) ackOffset;
+ $stack20 = java.lang.Integer.valueOf($stack13);
+ $stack13 = $stack5.indexOf((java.lang.Object)$stack20);
+ return  $stack13;
+ } 
+

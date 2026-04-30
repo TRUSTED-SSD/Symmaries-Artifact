@@ -1,0 +1,22 @@
+java.lang.Object org.apache.bookkeeper.metastore.MetastoreUtils$SyncMetastoreCallback:getResult()
+{
+java.util.concurrent.CountDownLatch $stack1;
+  org.apache.bookkeeper.metastore.MSException$Code $stack2;
+  int $stack3;
+  int $stack4;
+  java.lang.Object $stack5;
+  org.apache.bookkeeper.metastore.MSException $stack8;
+  $stack1=this.doneLatch;
+ $stack1.await();
+ $stack2=org.apache.bookkeeper.metastore.MSException$Code.OK;
+ $stack3 = $stack2.getCode();
+ $stack4=this.rc;
+ if ($stack3==$stack4) goto label0;
+ $stack3=this.rc;
+ $stack2 = org.apache.bookkeeper.metastore.MSException$Code.get($stack3);
+ $stack8 = org.apache.bookkeeper.metastore.MSException.create($stack2);
+ throw $stack8;
+ label0:$stack5=this.result;
+ return  $stack5;
+ } 
+

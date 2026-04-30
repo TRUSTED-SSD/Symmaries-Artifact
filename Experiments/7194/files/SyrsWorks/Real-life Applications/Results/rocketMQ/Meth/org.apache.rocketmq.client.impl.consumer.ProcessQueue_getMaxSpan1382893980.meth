@@ -1,0 +1,51 @@
+long org.apache.rocketmq.client.impl.consumer.ProcessQueue:getMaxSpan()
+{
+long e;
+  java.util.concurrent.locks.ReadWriteLock $stack4;
+  java.util.concurrent.locks.Lock $stack5;
+  java.util.TreeMap $stack6;
+  boolean $stack7;
+  java.lang.Object $stack11;
+  java.lang.Long $stack12;
+  long $stack17;
+  java.lang.Throwable $stack20;
+  java.lang.InterruptedException $stack23;
+  org.apache.rocketmq.logging.org.slf4j.Logger $stack24;
+  label0:$stack4=this.treeMapLock;
+ $stack5 = $stack4.readLock();
+ $stack5.lockInterruptibly();
+ label1:$stack6=this.msgTreeMap;
+ $stack7 = $stack6.isEmpty();
+ if ($stack7!=0) goto label2;
+ $stack6=this.msgTreeMap;
+ $stack11 = $stack6.lastKey();
+ $stack12=(java.lang.Long) $stack11;
+ e = $stack12.longValue();
+ $stack6=this.msgTreeMap;
+ $stack11 = $stack6.firstKey();
+ $stack12=(java.lang.Long) $stack11;
+ $stack17 = $stack12.longValue();
+ e=(e-$stack17);
+ label3:$stack4=this.treeMapLock;
+ $stack5 = $stack4.readLock();
+ $stack5.unlock();
+ label4:return  e;
+ label2:$stack4=this.treeMapLock;
+ $stack5 = $stack4.readLock();
+ $stack5.unlock();
+ goto label5;
+ label6:$stack20 = catch;
+ $stack4=this.treeMapLock;
+ $stack5 = $stack4.readLock();
+ $stack5.unlock();
+ throw $stack20;
+ label5:goto label7;
+ label8:$stack23 = catch;
+ $stack24=this.log;
+ $stack24.error("getMaxSpan exception",(java.lang.Throwable)$stack23);
+ label7:return  0L;
+ catch java.lang.Throwable: label1 - label3 : label6;
+catch java.lang.InterruptedException: label0 - label4 : label8;
+catch java.lang.InterruptedException: label2 - label5 : label8;
+} 
+

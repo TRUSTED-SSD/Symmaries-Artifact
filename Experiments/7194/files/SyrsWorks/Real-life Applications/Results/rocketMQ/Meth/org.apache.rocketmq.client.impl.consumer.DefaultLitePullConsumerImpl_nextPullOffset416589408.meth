@@ -1,0 +1,23 @@
+long org.apache.rocketmq.client.impl.consumer.DefaultLitePullConsumerImpl:nextPullOffset(org.apache.rocketmq.common.message.MessageQueue messageQueue)
+{
+long offset;
+  org.apache.rocketmq.client.impl.consumer.AssignedMessageQueue $stack6;
+  byte $stack8;
+  offset=-1L;
+ $stack6=this.assignedMessageQueue;
+ offset = $stack6.getSeekOffset(messageQueue);
+ $stack8=(offset cmp -1L);
+ if ($stack8==0) goto label0;
+ $stack6=this.assignedMessageQueue;
+ $stack6.updateConsumeOffset(messageQueue,offset);
+ $stack6=this.assignedMessageQueue;
+ $stack6.setSeekOffset(messageQueue,-1L);
+ goto label1;
+ label0:$stack6=this.assignedMessageQueue;
+ offset = $stack6.getPullOffset(messageQueue);
+ $stack8=(offset cmp -1L);
+ if ($stack8!=0) goto label1;
+ offset = this#org.apache.rocketmq.client.impl.consumer.DefaultLitePullConsumerImpl:fetchConsumeOffset(messageQueue);
+ label1:return  offset;
+ } 
+

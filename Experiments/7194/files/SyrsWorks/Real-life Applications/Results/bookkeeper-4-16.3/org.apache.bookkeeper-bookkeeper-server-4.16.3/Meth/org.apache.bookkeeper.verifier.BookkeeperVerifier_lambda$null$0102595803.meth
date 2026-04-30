@@ -1,0 +1,38 @@
+void org.apache.bookkeeper.verifier.BookkeeperVerifier:lambda$null$0(org.apache.bookkeeper.verifier.BookkeeperVerifier$LedgerInfo ledger,long start,long end,java.lang.Integer rc2)
+{
+org.apache.bookkeeper.verifier.BookkeeperVerifier l7;
+  java.lang.Throwable l8;
+  long $stack10;
+  int $stack11;
+  java.lang.Object[] $stack13;
+  java.io.PrintStream $stack14;
+  java.lang.Long $stack17;
+  l7=this;
+ monitorenter this;
+ label0:$stack10 = org.apache.bookkeeper.verifier.BookkeeperVerifier$LedgerInfo.access$400(ledger);
+ $stack11 = rc2.intValue();
+ this#org.apache.bookkeeper.verifier.BookkeeperVerifier:checkReturn($stack10,$stack11);
+ $stack14=java.lang.System.out;
+ $stack13=new java.lang.Object[3];
+ $stack17 = java.lang.Long.valueOf(start);
+ $stack13[0]=$stack17;
+ $stack17 = java.lang.Long.valueOf(end);
+ $stack13[1]=$stack17;
+ start = org.apache.bookkeeper.verifier.BookkeeperVerifier$LedgerInfo.access$400(ledger);
+ $stack17 = java.lang.Long.valueOf(start);
+ $stack13[2]=$stack17;
+ $stack14.format("Read %d -> %d from ledger %d releasing read%n",$stack13);
+ $stack11=this.outstandingReadCount;
+ $stack11=($stack11-1);
+ this.outstandingReadCount=$stack11;
+ this.notifyAll();
+ monitorexit this;
+ label1:goto label2;
+ label3:l8 = catch;
+ monitorexit this;
+ label4:throw l8;
+ label2:return;
+ catch java.lang.Throwable: label0 - label1 : label3;
+catch java.lang.Throwable: label3 - label4 : label3;
+} 
+

@@ -1,0 +1,32 @@
+long org.apache.rocketmq.remoting.protocol.admin.ConsumeStats:computeInflightTotalDiff()
+{
+long diffTotal;
+  java.util.Iterator l3;
+  java.util.Map$Entry entry;
+  java.util.Map $stack5;
+  java.util.Set $stack6;
+  boolean $stack8;
+  java.lang.Object $stack9;
+  org.apache.rocketmq.remoting.protocol.admin.OffsetWrapper $stack11;
+  long $stack12;
+  long $stack15;
+  diffTotal=0L;
+ $stack5=this.offsetTable;
+ $stack6 = $stack5.entrySet();
+ l3 = $stack6.iterator();
+ label0:$stack8 = l3.hasNext();
+ if ($stack8==0) goto label1;
+ $stack9 = l3.next();
+ entry=(java.util.Map$Entry) $stack9;
+ $stack9 = entry.getValue();
+ $stack11=(org.apache.rocketmq.remoting.protocol.admin.OffsetWrapper) $stack9;
+ $stack12 = $stack11.getPullOffset();
+ $stack9 = entry.getValue();
+ $stack11=(org.apache.rocketmq.remoting.protocol.admin.OffsetWrapper) $stack9;
+ $stack15 = $stack11.getConsumerOffset();
+ $stack12=($stack12-$stack15);
+ diffTotal=(diffTotal+$stack12);
+ goto label0;
+ label1:return  diffTotal;
+ } 
+

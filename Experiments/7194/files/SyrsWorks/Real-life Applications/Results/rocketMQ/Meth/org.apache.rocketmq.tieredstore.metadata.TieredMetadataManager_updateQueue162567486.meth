@@ -1,0 +1,32 @@
+void org.apache.rocketmq.tieredstore.metadata.TieredMetadataManager:updateQueue(org.apache.rocketmq.tieredstore.metadata.QueueMetadata metadata)
+{
+org.apache.rocketmq.common.message.MessageQueue queue;
+  java.util.concurrent.ConcurrentMap metadataMap;
+  java.lang.String $stack6;
+  boolean $stack7;
+  java.lang.Object $stack10;
+  int $stack11;
+  java.lang.Integer $stack12;
+  long $stack14;
+  queue = metadata.getQueue();
+ metadataMap=this.queueMetadataTable;
+ $stack6 = queue.getTopic();
+ $stack7 = metadataMap.containsKey((java.lang.Object)$stack6);
+ if ($stack7==0) goto label0;
+ metadataMap=this.queueMetadataTable;
+ $stack6 = queue.getTopic();
+ $stack10 = metadataMap.get((java.lang.Object)$stack6);
+ metadataMap=(java.util.concurrent.ConcurrentMap) $stack10;
+ $stack11 = queue.getQueueId();
+ $stack12 = java.lang.Integer.valueOf($stack11);
+ $stack7 = metadataMap.containsKey((java.lang.Object)$stack12);
+ if ($stack7==0) goto label0;
+ $stack14 = java.lang.System.currentTimeMillis();
+ metadata.setUpdateTimestamp($stack14);
+ $stack11 = queue.getQueueId();
+ $stack12 = java.lang.Integer.valueOf($stack11);
+ metadataMap.put((java.lang.Object)$stack12,(java.lang.Object)metadata);
+ this.persist();
+ label0:return;
+ } 
+

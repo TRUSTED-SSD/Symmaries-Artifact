@@ -1,0 +1,19 @@
+org.junit.runner.Runner org.junit.internal.builders.AnnotatedBuilder:runnerForClass(java.lang.Class testClass)
+{
+java.lang.Class currentTestClass;
+  org.junit.runner.RunWith annotation;
+  java.lang.annotation.Annotation $stack4;
+  org.junit.runner.Runner $stack8;
+  currentTestClass=testClass;
+ label0:if (currentTestClass==null) goto label1;
+ $stack4 = currentTestClass.getAnnotation(org.junit.runner.RunWith);
+ annotation=(org.junit.runner.RunWith) $stack4;
+ if (annotation==null) goto label2;
+ currentTestClass = annotation.value();
+ $stack8 = this.buildRunner(currentTestClass,testClass);
+ return  $stack8;
+ label2:currentTestClass = this#org.junit.internal.builders.AnnotatedBuilder:getEnclosingClassForNonStaticMemberClass(currentTestClass);
+ goto label0;
+ label1:return  null;
+ } 
+

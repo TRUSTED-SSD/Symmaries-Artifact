@@ -1,0 +1,55 @@
+void org.apache.kerby.asn1.type.Asn1CollectionType:dumpWith(org.apache.kerby.asn1.Asn1Dumper dumper,int indents)
+{
+java.lang.String fdName;
+  int i;
+  org.apache.kerby.asn1.type.Asn1Type fdValue;
+  org.apache.kerby.asn1.Asn1Dumper $stack6;
+  java.lang.Class $stack7;
+  org.apache.kerby.asn1.Asn1FieldInfo[] $stack12;
+  int $stack13;
+  org.apache.kerby.asn1.Asn1FieldInfo $stack15;
+  org.apache.kerby.asn1.EnumType $stack16;
+  org.apache.kerby.asn1.type.Asn1Type[] $stack24;
+  org.apache.kerby.asn1.type.Asn1Simple $stack25;
+  boolean $stack33;
+  $stack6 = dumper.indent(indents);
+ $stack7 = this.getClass();
+ $stack6.appendType($stack7);
+ fdName = this.simpleInfo();
+ $stack6 = dumper.append(fdName);
+ $stack6.newLine();
+ i=0;
+ label0:$stack12=this.fieldInfos;
+ $stack13=#$stack12;
+ if (i>=$stack13) goto label1;
+ $stack12=this.fieldInfos;
+ $stack15=$stack12[i];
+ $stack16 = $stack15.getIndex();
+ fdName = $stack16.getName();
+ fdName = fdName.replace((java.lang.CharSequence)"_",(java.lang.CharSequence)"-");
+ fdName = fdName.toLowerCase();
+ $stack13=(indents+4);
+ $stack6 = dumper.indent($stack13);
+ $stack6 = $stack6.append(fdName);
+ $stack6.append(" = ");
+ $stack24=this.fields;
+ fdValue=$stack24[i];
+ if (fdValue==null) goto label2;
+ $stack33=fdValue instanceof org.apache.kerby.asn1.type.Asn1Simple;
+ if ($stack33==0) goto label3;
+ label2:$stack25=(org.apache.kerby.asn1.type.Asn1Simple) fdValue;
+ dumper.append($stack25);
+ goto label4;
+ label3:$stack6 = dumper.newLine();
+ $stack13=(indents+8);
+ $stack6#org.apache.kerby.asn1.Asn1Dumper($stack13,fdValue);
+ label4:$stack12=this.fieldInfos;
+ $stack13=#$stack12;
+ $stack13=($stack13-1);
+ if (i>=$stack13) goto label5;
+ dumper.newLine();
+ label5:i=(i+1);
+ goto label0;
+ label1:return;
+ } 
+

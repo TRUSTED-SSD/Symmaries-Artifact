@@ -1,0 +1,42 @@
+void org.apache.rocketmq.store.DefaultMessageStore:addScheduleTask()
+{
+org.apache.rocketmq.store.DefaultMessageStore$1 $stack1;
+  java.util.concurrent.ScheduledExecutorService $stack2;
+  org.apache.rocketmq.common.BrokerIdentity $stack3;
+  org.apache.rocketmq.store.config.MessageStoreConfig $stack4;
+  int $stack6;
+  java.util.concurrent.TimeUnit $stack7;
+  long $stack8;
+  org.apache.rocketmq.store.DefaultMessageStore$2 $stack10;
+  org.apache.rocketmq.store.DefaultMessageStore$3 $stack15;
+  org.apache.rocketmq.store.DefaultMessageStore$4 $stack20;
+  $stack2=this.scheduledExecutorService;
+ $stack1=new org.apache.rocketmq.store.DefaultMessageStore$1;
+ $stack3 = this.getBrokerIdentity();
+ $stack1#org.apache.rocketmq.store.DefaultMessageStore$1(this,$stack3);
+ $stack4=this.messageStoreConfig;
+ $stack6 = $stack4.getCleanResourceInterval();
+ $stack8=(long) $stack6;
+ $stack7=java.util.concurrent.TimeUnit.MILLISECONDS;
+ $stack2.scheduleAtFixedRate((java.lang.Runnable)$stack1,60000L,$stack8,$stack7);
+ $stack2=this.scheduledExecutorService;
+ $stack10=new org.apache.rocketmq.store.DefaultMessageStore$2;
+ $stack3 = this.getBrokerIdentity();
+ $stack10#org.apache.rocketmq.store.DefaultMessageStore$2(this,$stack3);
+ $stack7=java.util.concurrent.TimeUnit.MINUTES;
+ $stack2.scheduleAtFixedRate((java.lang.Runnable)$stack10,1L,10L,$stack7);
+ $stack2=this.scheduledExecutorService;
+ $stack15=new org.apache.rocketmq.store.DefaultMessageStore$3;
+ $stack3 = this.getBrokerIdentity();
+ $stack15#org.apache.rocketmq.store.DefaultMessageStore$3(this,$stack3);
+ $stack7=java.util.concurrent.TimeUnit.SECONDS;
+ $stack2.scheduleAtFixedRate((java.lang.Runnable)$stack15,1L,1L,$stack7);
+ $stack2=this.scheduledExecutorService;
+ $stack20=new org.apache.rocketmq.store.DefaultMessageStore$4;
+ $stack3 = this.getBrokerIdentity();
+ $stack20#org.apache.rocketmq.store.DefaultMessageStore$4(this,$stack3);
+ $stack7=java.util.concurrent.TimeUnit.SECONDS;
+ $stack2.scheduleAtFixedRate((java.lang.Runnable)$stack20,1L,1L,$stack7);
+ return;
+ } 
+

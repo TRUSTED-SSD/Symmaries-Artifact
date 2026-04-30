@@ -1,0 +1,20 @@
+void org.apache.bookkeeper.proto.BookieClientImpl:monitorPendingOperations()
+{
+java.util.Iterator l1;
+  org.apache.bookkeeper.proto.PerChannelBookieClientPool clientPool;
+  java.util.concurrent.ConcurrentHashMap $stack3;
+  java.util.Collection $stack4;
+  boolean $stack6;
+  java.lang.Object $stack7;
+  $stack3=this.channels;
+ $stack4 = $stack3.values();
+ l1 = $stack4.iterator();
+ label0:$stack6 = l1.hasNext();
+ if ($stack6==0) goto label1;
+ $stack7 = l1.next();
+ clientPool=(org.apache.bookkeeper.proto.PerChannelBookieClientPool) $stack7;
+ clientPool.checkTimeoutOnPendingOperations();
+ goto label0;
+ label1:return;
+ } 
+

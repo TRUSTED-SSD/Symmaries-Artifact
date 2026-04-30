@@ -1,0 +1,43 @@
+org.apache.rocketmq.proxy.service.route.AddressableMessageQueue org.apache.rocketmq.proxy.grpc.v2.producer.SendMessageActivity$SendMessageQueueSelector:select(org.apache.rocketmq.proxy.common.ProxyContext ctx,org.apache.rocketmq.proxy.service.route.MessageQueueView messageQueueView)
+{
+java.lang.Object message;
+  java.lang.String shardingKey;
+  org.apache.rocketmq.proxy.service.route.AddressableMessageQueue targetMessageQueue;
+  java.util.List writeQueues;
+  int bucket;
+  apache.rocketmq.v2.SendMessageRequest $stack8;
+  boolean $stack12;
+  org.apache.rocketmq.proxy.service.route.MessageQueueSelector $stack13;
+  long $stack18;
+  apache.rocketmq.v2.SystemProperties $stack23;
+  java.lang.Exception $stack26;
+  apache.rocketmq.v2.Message tmp$1195440122;
+  label0:$stack8=this.request;
+ message = $stack8.getMessages(0);
+ shardingKey=null;
+ $stack8=this.request;
+ bucket = $stack8.getMessagesCount();
+ if (bucket!=1) goto label1;
+ tmp$1195440122=(apache.rocketmq.v2.Message) message;
+ $stack23 = tmp$1195440122.getSystemProperties();
+ shardingKey = $stack23.getMessageGroup();
+ label1:$stack12 = org.apache.commons.lang3.StringUtils.isNotEmpty((java.lang.CharSequence)shardingKey);
+ if ($stack12==0) goto label2;
+ $stack13 = messageQueueView.getWriteSelector();
+ writeQueues = $stack13.getQueues();
+ bucket = shardingKey.hashCode();
+ $stack18=(long) bucket;
+ bucket = writeQueues.size();
+ bucket = com.google.common.hash.Hashing.consistentHash($stack18,bucket);
+ message = writeQueues.get(bucket);
+ targetMessageQueue=(org.apache.rocketmq.proxy.service.route.AddressableMessageQueue) message;
+ goto label3;
+ label2:$stack13 = messageQueueView.getWriteSelector();
+ targetMessageQueue = $stack13.selectOne((boolean)0);
+ label3:return  targetMessageQueue;
+ label4:$stack26 = catch;
+ message=$stack26;
+ return  null;
+ catch java.lang.Exception: label0 - label3 : label4;
+} 
+

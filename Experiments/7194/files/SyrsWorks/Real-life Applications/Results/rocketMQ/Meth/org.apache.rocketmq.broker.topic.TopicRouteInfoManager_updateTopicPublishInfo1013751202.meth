@@ -1,0 +1,26 @@
+void org.apache.rocketmq.broker.topic.TopicRouteInfoManager:updateTopicPublishInfo(java.lang.String @topic,org.apache.rocketmq.client.impl.producer.TopicPublishInfo @info)
+{
+java.util.concurrent.ConcurrentMap $stack4;
+  java.lang.Object $stack5;
+  java.lang.StringBuilder $stack6;
+  org.apache.rocketmq.logging.org.slf4j.Logger $stack7;
+  org.apache.rocketmq.client.impl.producer.TopicPublishInfo info;
+java.lang.String topic;
+topic=@topic;
+info=@info;
+if (info==null) goto label0;
+ if (topic==null) goto label0;
+ $stack4=this.topicPublishInfoTable;
+ $stack5 = $stack4.put((java.lang.Object)topic,(java.lang.Object)info);
+ info=(org.apache.rocketmq.client.impl.producer.TopicPublishInfo) $stack5;
+ if (info==null) goto label0;
+ $stack7=org.apache.rocketmq.broker.topic.TopicRouteInfoManager.log;
+ $stack6=new java.lang.StringBuilder;
+ $stack6#java.lang.StringBuilder();
+ $stack6 = $stack6.append("updateTopicPublishInfo prev is not null, ");
+ $stack6 = $stack6.append((java.lang.Object)info);
+ topic = $stack6.toString();
+ $stack7.info(topic);
+ label0:return;
+ } 
+

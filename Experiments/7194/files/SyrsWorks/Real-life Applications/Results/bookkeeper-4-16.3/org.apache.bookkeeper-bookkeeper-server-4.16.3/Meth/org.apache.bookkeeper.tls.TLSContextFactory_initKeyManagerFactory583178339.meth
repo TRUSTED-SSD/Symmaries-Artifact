@@ -1,0 +1,32 @@
+javax.net.ssl.KeyManagerFactory org.apache.bookkeeper.tls.TLSContextFactory:initKeyManagerFactory(java.lang.String @keyStoreType,java.lang.String keyStoreLocation,java.lang.String keyStorePasswordPath)
+{
+javax.net.ssl.KeyManagerFactory kmf;
+  java.lang.String keyStorePassword;
+  java.security.KeyStore ks;
+  boolean $stack7;
+  char[] $stack13;
+  org.slf4j.Logger $stack23;
+  org.apache.bookkeeper.tls.SecurityException $stack24;
+  java.lang.String keyStoreType;
+keyStoreType=@keyStoreType;
+kmf=null;
+ $stack7 = com.google.common.base.Strings.isNullOrEmpty(keyStoreLocation);
+ if ($stack7==0) goto label0;
+ $stack23=org.apache.bookkeeper.tls.TLSContextFactory.log;
+ $stack23.error("Key store location cannot be empty when Mutual Authentication is enabled!");
+ $stack24=new org.apache.bookkeeper.tls.SecurityException;
+ $stack24#org.apache.bookkeeper.tls.SecurityException("Key store location cannot be empty when Mutual Authentication is enabled!");
+ throw $stack24;
+ label0:keyStorePassword="";
+ $stack7 = com.google.common.base.Strings.isNullOrEmpty(keyStorePasswordPath);
+ if ($stack7!=0) goto label1;
+ keyStorePassword = this#org.apache.bookkeeper.tls.TLSContextFactory:getPasswordFromFile(keyStorePasswordPath);
+ label1:ks = this#org.apache.bookkeeper.tls.TLSContextFactory:loadKeyStore(keyStoreType,keyStoreLocation,keyStorePassword);
+ keyStoreType = javax.net.ssl.KeyManagerFactory.getDefaultAlgorithm();
+ kmf = javax.net.ssl.KeyManagerFactory.getInstance(keyStoreType);
+ keyStoreType = keyStorePassword.trim();
+ $stack13 = keyStoreType.toCharArray();
+ kmf.init(ks,$stack13);
+ return  kmf;
+ } 
+

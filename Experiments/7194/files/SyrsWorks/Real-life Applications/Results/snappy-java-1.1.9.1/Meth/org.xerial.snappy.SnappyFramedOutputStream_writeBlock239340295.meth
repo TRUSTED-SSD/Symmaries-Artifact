@@ -1,0 +1,38 @@
+void org.xerial.snappy.SnappyFramedOutputStream:writeBlock(java.nio.channels.WritableByteChannel l1,java.nio.ByteBuffer l2,boolean l3,int l4)
+{
+int l5;
+  java.nio.ByteBuffer $stack6;
+  byte $stack8;
+  int $stack15;
+  $stack6=this.headerBuffer;
+ $stack6.clear();
+ $stack6=this.headerBuffer;
+ if (l3==0) goto label0;
+ l3=0;
+ goto label1;
+ label0:l3=1;
+ label1:$stack8=(byte) l3;
+ $stack6.put($stack8);
+ l5 = l2.remaining();
+ l5=(l5+4);
+ $stack6=this.headerBuffer;
+ $stack8=(byte) l5;
+ $stack6.put($stack8);
+ $stack6=this.headerBuffer;
+ $stack15=(l5>>>8);
+ $stack8=(byte) $stack15;
+ $stack6.put($stack8);
+ $stack6=this.headerBuffer;
+ l5=(l5>>>16);
+ $stack8=(byte) l5;
+ $stack6.put($stack8);
+ $stack6=this.headerBuffer;
+ $stack6.putInt(l4);
+ $stack6=this.headerBuffer;
+ $stack6.flip();
+ $stack6=this.headerBuffer;
+ l1.write($stack6);
+ l1.write(l2);
+ return;
+ } 
+

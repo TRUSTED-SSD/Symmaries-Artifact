@@ -1,0 +1,22 @@
+void org.apache.kerby.util.Base64OutputStream:flush(boolean propogate)
+{
+int avail;
+  byte[] buf;
+  org.apache.kerby.util.Base64 $stack5;
+  java.io.OutputStream $stack7;
+  $stack5=this.base64;
+ avail = $stack5.avail();
+ if (avail<=0) goto label0;
+ buf=new byte[avail];
+ $stack5=this.base64;
+ avail = $stack5.readResults(buf,0,avail);
+ if (avail<=0) goto label0;
+ $stack7=this.out;
+ dummyClass.lowSink(buf);
+$stack7.write(buf,0,avail);
+ label0:if (propogate==0) goto label1;
+ $stack7=this.out;
+ $stack7.flush();
+ label1:return;
+ } 
+

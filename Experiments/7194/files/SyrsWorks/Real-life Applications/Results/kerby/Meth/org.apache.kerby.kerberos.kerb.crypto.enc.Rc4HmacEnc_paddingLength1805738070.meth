@@ -1,0 +1,16 @@
+int org.apache.kerby.kerberos.kerb.crypto.enc.Rc4HmacEnc:paddingLength(int inputLen)
+{
+int payloadLen;
+  int $stack6;
+  payloadLen = this.confounderSize();
+ payloadLen=(payloadLen+inputLen);
+ inputLen = this.paddingSize();
+ if (inputLen==0) goto label0;
+ $stack6=(payloadLen%inputLen);
+ if ($stack6!=0) goto label1;
+ label0:return  0;
+ label1:payloadLen=(payloadLen%inputLen);
+ inputLen=(inputLen-payloadLen);
+ return  inputLen;
+ } 
+

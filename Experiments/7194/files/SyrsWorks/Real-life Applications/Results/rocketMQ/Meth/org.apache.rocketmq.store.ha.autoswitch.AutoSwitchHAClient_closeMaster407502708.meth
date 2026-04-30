@@ -1,0 +1,41 @@
+void org.apache.rocketmq.store.ha.autoswitch.AutoSwitchHAClient:closeMaster()
+{
+java.nio.channels.SelectionKey sk;
+  java.nio.channels.SocketChannel $stack2;
+  java.nio.channels.Selector $stack3;
+  java.util.concurrent.atomic.AtomicReference $stack7;
+  org.apache.rocketmq.logging.org.slf4j.Logger $stack8;
+  java.lang.Object $stack10;
+  org.apache.rocketmq.store.ha.HAConnectionState $stack11;
+  java.nio.ByteBuffer $stack12;
+  java.io.IOException $stack21;
+  $stack2=this.socketChannel;
+ if (null==$stack2) goto label0;
+ label1:$stack2=this.socketChannel;
+ $stack3=this.selector;
+ sk = $stack2.keyFor($stack3);
+ if (sk==null) goto label2;
+ sk.cancel();
+ label2:$stack2=this.socketChannel;
+ $stack2.close();
+ this.socketChannel=null;
+ $stack8=org.apache.rocketmq.store.ha.autoswitch.AutoSwitchHAClient.LOGGER;
+ $stack7=this.masterHaAddress;
+ $stack10 = $stack7.get();
+ $stack8.info("AutoSwitchHAClient close connection with master {}",$stack10);
+ $stack11=org.apache.rocketmq.store.ha.HAConnectionState.READY;
+ this.changeCurrentState($stack11);
+ label3:goto label4;
+ label5:$stack21 = catch;
+ $stack8=org.apache.rocketmq.store.ha.autoswitch.AutoSwitchHAClient.LOGGER;
+ $stack8.warn("CloseMaster exception. ",(java.lang.Throwable)$stack21);
+ label4:this.lastReadTimestamp=0L;
+ this.processPosition=0;
+ $stack12=this.byteBufferRead;
+ $stack12.position(0);
+ $stack12=this.byteBufferRead;
+ $stack12.limit(4194304);
+ label0:return;
+ catch java.io.IOException: label1 - label3 : label5;
+} 
+

@@ -1,0 +1,35 @@
+void org.apache.bookkeeper.client.LedgerFragmentReplicator$SingleFragmentCallback:processResult(int rc,java.lang.String @path,java.lang.Object ctx)
+{
+java.util.Map $stack4;
+  org.apache.bookkeeper.client.LedgerHandle $stack5;
+  long $stack6;
+  org.apache.zookeeper.AsyncCallback$VoidCallback $stack7;
+  org.apache.bookkeeper.meta.LedgerManager $stack8;
+  org.slf4j.Logger $stack9;
+  java.lang.StringBuilder $stack10;
+  org.apache.bookkeeper.client.BKException $stack16;
+  java.lang.String path;
+path=@path;
+if (rc==0) goto label0;
+ $stack9 = org.apache.bookkeeper.client.LedgerFragmentReplicator.access$100();
+ $stack10=new java.lang.StringBuilder;
+ $stack10#java.lang.StringBuilder();
+ $stack10 = $stack10.append("BK error replicating ledger fragments for ledger: ");
+ $stack5=this.lh;
+ $stack6 = $stack5.getId();
+ $stack10 = $stack10.append($stack6);
+ path = $stack10.toString();
+ $stack16 = org.apache.bookkeeper.client.BKException.create(rc);
+ $stack9.error(path,(java.lang.Throwable)$stack16);
+ $stack7=this.ledgerFragmentsMcb;
+ $stack7.processResult(rc,null,null);
+ return;
+ label0:$stack8=this.ledgerManager;
+ $stack7=this.ledgerFragmentsMcb;
+ $stack6=this.fragmentStartId;
+ $stack5=this.lh;
+ $stack4=this.oldBookie2NewBookie;
+ org.apache.bookkeeper.client.LedgerFragmentReplicator.access$1000($stack8,$stack7,$stack6,$stack5,$stack4);
+ return;
+ } 
+

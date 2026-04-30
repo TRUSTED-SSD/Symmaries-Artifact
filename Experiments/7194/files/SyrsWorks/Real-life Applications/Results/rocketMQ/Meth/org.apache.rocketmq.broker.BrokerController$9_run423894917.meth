@@ -1,0 +1,32 @@
+void org.apache.rocketmq.broker.BrokerController$9:run()
+{
+long $stack2;
+  org.apache.rocketmq.broker.BrokerController $stack3;
+  long $stack4;
+  byte $stack6;
+  org.apache.rocketmq.broker.slave.SlaveSynchronize $stack8;
+  java.lang.Throwable $stack15;
+  org.apache.rocketmq.logging.org.slf4j.Logger $stack16;
+  label0:$stack2 = java.lang.System.currentTimeMillis();
+ $stack3=this.this$0;
+ $stack4 = org.apache.rocketmq.broker.BrokerController.access$000($stack3);
+ $stack2=($stack2-$stack4);
+ $stack6=($stack2 cmp 60000L);
+ if ($stack6<=0) goto label1;
+ $stack3=this.this$0;
+ $stack8 = $stack3.getSlaveSynchronize();
+ $stack8.syncAll();
+ $stack3=this.this$0;
+ $stack2 = java.lang.System.currentTimeMillis();
+ org.apache.rocketmq.broker.BrokerController.access$002($stack3,$stack2);
+ label1:$stack3=this.this$0;
+ $stack8 = $stack3.getSlaveSynchronize();
+ $stack8.syncTimerCheckPoint();
+ label2:goto label3;
+ label4:$stack15 = catch;
+ $stack16=org.apache.rocketmq.broker.BrokerController.LOG;
+ $stack16.error("Failed to sync all config for slave.",$stack15);
+ label3:return;
+ catch java.lang.Throwable: label0 - label2 : label4;
+} 
+

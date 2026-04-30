@@ -1,0 +1,54 @@
+com.google.zxing.client.result.GeoParsedResult com.google.zxing.client.result.GeoResultParser:parse(com.google.zxing.Result result)
+{
+java.lang.String rawText;
+  java.util.regex.Matcher matcher;
+  double latitude;
+  double longitude;
+  double altitude;
+  java.util.regex.Pattern $stack13;
+  boolean $stack15;
+  java.lang.String $stack17;
+  byte $stack19;
+  com.google.zxing.client.result.GeoParsedResult $stack29;
+  java.lang.NumberFormatException $stack32;
+  rawText = com.google.zxing.client.result.ResultParser.getMassagedText(result);
+ $stack13=com.google.zxing.client.result.GeoResultParser.GEO_URL_PATTERN;
+ matcher = $stack13.matcher((java.lang.CharSequence)rawText);
+ $stack15 = matcher.matches();
+ if ($stack15!=0) goto label0;
+ return  null;
+ label0:rawText = matcher.group(4);
+ label1:$stack17 = matcher.group(1);
+ latitude = java.lang.Double.parseDouble($stack17);
+ $stack19=(latitude cmpl 90.0);
+ if ($stack19>0) goto label2;
+ $stack19=(latitude cmpg -90.0);
+ if ($stack19>=0) goto label3;
+ label2:return  null;
+ label3:$stack17 = matcher.group(2);
+ longitude = java.lang.Double.parseDouble($stack17);
+ $stack19=(longitude cmpl 180.0);
+ if ($stack19>0) goto label4;
+ $stack19=(longitude cmpg -180.0);
+ if ($stack19>=0) goto label5;
+ label4:return  null;
+ label5:$stack17 = matcher.group(3);
+ if ($stack17!=null) goto label6;
+ altitude=0.0;
+ goto label7;
+ label6:$stack17 = matcher.group(3);
+ altitude = java.lang.Double.parseDouble($stack17);
+ $stack19=(altitude cmpg 0.0);
+ if ($stack19>=0) goto label7;
+ label8:return  null;
+ label7:goto label9;
+ label10:$stack32 = catch;
+ return  null;
+ label9:$stack29=new com.google.zxing.client.result.GeoParsedResult;
+ $stack29#com.google.zxing.client.result.GeoParsedResult(latitude,longitude,altitude,rawText);
+ return  $stack29;
+ catch java.lang.NumberFormatException: label1 - label2 : label10;
+catch java.lang.NumberFormatException: label3 - label4 : label10;
+catch java.lang.NumberFormatException: label5 - label8 : label10;
+} 
+

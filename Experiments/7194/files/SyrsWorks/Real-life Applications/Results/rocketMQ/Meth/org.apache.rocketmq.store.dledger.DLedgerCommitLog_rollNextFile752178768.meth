@@ -1,0 +1,18 @@
+long org.apache.rocketmq.store.dledger.DLedgerCommitLog:rollNextFile(long offset)
+{
+int mappedFileSize;
+  org.apache.rocketmq.store.DefaultMessageStore $stack4;
+  org.apache.rocketmq.store.config.MessageStoreConfig $stack5;
+  long $stack7;
+  long $stack8;
+  $stack4=this.defaultMessageStore;
+ $stack5 = $stack4.getMessageStoreConfig();
+ mappedFileSize = $stack5.getMappedFileSizeCommitLog();
+ $stack7=(long) mappedFileSize;
+ $stack7=(offset+$stack7);
+ $stack8=(long) mappedFileSize;
+ offset=(offset%$stack8);
+ offset=($stack7-offset);
+ return  offset;
+ } 
+

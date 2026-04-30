@@ -1,0 +1,32 @@
+digraph G {
+  node [shape=box, ];
+  "pc0_js1" [label="〈$i3 = i0 + 1, js1〉", ];
+  "pc1_js1" [label="〈$b2 = (byte) s1, js1〉", ];
+  "pc2_js1" [label="〈r0[$i3] = $b2, js1〉", ];
+  "pc3_js1" [label="〈$s4 = s1 >>> 8, js1〉", ];
+  "pc4_js1" [label="〈$b5 = (byte) $s4, js1〉", ];
+  "pc5_js1" [label="〈r0[i0] = $b5, js1〉", ];
+  "pc6_js1" [label="〈return, js1〉", ];
+  "pc7_js1" [label="〈sink, js1〉\n\
+obj_level(r0) ⊑ ret(obj_level(r0))'",
+             ];
+  
+  
+  "pc0_js1" -> "pc1_js1" [label="tt,\n\
+{level($i3) := pc ⊔ level(i0)}", ];
+  "pc1_js1" -> "pc2_js1" [label="tt,\n\
+{level($b2) := pc ⊔ level(s1)}", ];
+  "pc2_js1" -> "pc3_js1" [label="tt,\n\
+{obj_level(r0) := pc ⊔ level(i0) ⊔ level(s1) ⊔ obj_level(r0)}",
+                          ];
+  "pc3_js1" -> "pc4_js1" [label="tt,\n\
+{level($s4) := pc ⊔ level(s1)}", ];
+  "pc4_js1" -> "pc5_js1" [label="tt,\n\
+{level($b5) := pc ⊔ level(s1)}", ];
+  "pc5_js1" -> "pc6_js1" [label="tt,\n\
+{obj_level(r0) := pc ⊔ level(i0) ⊔ level(s1) ⊔ obj_level(r0)}",
+                          ];
+  "pc6_js1" -> "pc7_js1" [label="tt,\n\
+{ϕ := S6}", ];
+  
+  }

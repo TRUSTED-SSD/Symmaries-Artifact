@@ -1,0 +1,42 @@
+void org.junit.internal.runners.MethodRoadie$1:run()
+{
+java.util.concurrent.ExecutorService service;
+  java.util.concurrent.Future result;
+  boolean terminated;
+  java.util.concurrent.TimeUnit $stack8;
+  long $stack9;
+  java.lang.Exception $stack16;
+  org.junit.internal.runners.MethodRoadie $stack17;
+  java.util.concurrent.TimeoutException $stack18;
+  org.junit.internal.runners.MethodRoadie$1$1 tmp$824907831;
+  org.junit.runners.model.TestTimedOutException tmp$249781375;
+  service = java.util.concurrent.Executors.newSingleThreadExecutor();
+ tmp$824907831=new org.junit.internal.runners.MethodRoadie$1$1;
+ tmp$824907831#org.junit.internal.runners.MethodRoadie$1$1(this);
+ result = service.submit((java.util.concurrent.Callable)tmp$824907831);
+ service.shutdown();
+ label0:$stack9=this.val$timeout;
+ $stack8=java.util.concurrent.TimeUnit.MILLISECONDS;
+ terminated = service.awaitTermination($stack9,$stack8);
+ if (terminated!=0) goto label1;
+ service.shutdownNow();
+ label1:$stack8=java.util.concurrent.TimeUnit.MILLISECONDS;
+ result.get(0L,$stack8);
+ label2:goto label3;
+ label4:$stack18 = catch;
+ terminated=(boolean) $stack18;
+ $stack17=this.this$0;
+ tmp$249781375=new org.junit.runners.model.TestTimedOutException;
+ $stack9=this.val$timeout;
+ $stack8=java.util.concurrent.TimeUnit.MILLISECONDS;
+ tmp$249781375#org.junit.runners.model.TestTimedOutException($stack9,$stack8);
+ $stack17.addFailure((java.lang.Throwable)tmp$249781375);
+ goto label3;
+ label5:$stack16 = catch;
+ $stack17=this.this$0;
+ $stack17.addFailure((java.lang.Throwable)$stack16);
+ label3:return;
+ catch java.util.concurrent.TimeoutException: label0 - label2 : label4;
+catch java.lang.Exception: label0 - label2 : label5;
+} 
+

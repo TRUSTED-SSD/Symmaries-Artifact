@@ -1,0 +1,17 @@
+org.apache.bookkeeper.net.BookieNode org.apache.bookkeeper.client.RackawareEnsemblePlacementPolicy:selectFromNetworkLocation(java.lang.String networkLoc,java.util.Set excludeBookies,org.apache.bookkeeper.client.ITopologyAwareEnsemblePlacementPolicy$Predicate predicate,org.apache.bookkeeper.client.ITopologyAwareEnsemblePlacementPolicy$Ensemble ensemble,boolean fallbackToRandom)
+{
+org.apache.bookkeeper.net.BookieNode $stack7;
+  org.apache.bookkeeper.client.BKException$BKNotEnoughBookiesException $stack8;
+  org.apache.bookkeeper.client.RackawareEnsemblePlacementPolicyImpl $stack9;
+  label0:$stack7 = this#org.apache.bookkeeper.client.RackawareEnsemblePlacementPolicyImpl:selectFromNetworkLocation(networkLoc,excludeBookies,predicate,ensemble,fallbackToRandom);
+ label1:return  $stack7;
+ label2:$stack8 = catch;
+ $stack9=this.slave;
+ if ($stack9!=null) goto label3;
+ throw $stack8;
+ label3:$stack9=this.slave;
+ $stack7 = $stack9.selectFromNetworkLocation(networkLoc,excludeBookies,predicate,ensemble,fallbackToRandom);
+ return  $stack7;
+ catch org.apache.bookkeeper.client.BKException$BKNotEnoughBookiesException: label0 - label1 : label2;
+} 
+

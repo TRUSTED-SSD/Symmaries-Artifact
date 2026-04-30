@@ -1,0 +1,39 @@
+void org.apache.bookkeeper.client.BookKeeperAdmin:replicateLedgerFragment(org.apache.bookkeeper.client.LedgerHandle lh,org.apache.bookkeeper.client.LedgerFragment ledgerFragment,java.util.Map targetBookieAddresses,java.util.function.BiConsumer onReadEntryFailureCallback)
+{
+java.util.concurrent.CompletableFuture result;
+  java.util.HashSet targetBookieSet;
+  org.apache.bookkeeper.client.BookKeeperAdmin$ResultCallBack $stack11;
+  org.apache.bookkeeper.client.LedgerFragmentReplicator$SingleFragmentCallback $stack12;
+  org.apache.bookkeeper.client.BookKeeper $stack13;
+  org.apache.bookkeeper.meta.LedgerManager $stack14;
+  long $stack15;
+  java.util.Map $stack16;
+  java.util.Collection $stack18;
+  org.apache.bookkeeper.client.BKException $stack21;
+  int $stack23;
+  result=new java.util.concurrent.CompletableFuture;
+ result#java.util.concurrent.CompletableFuture();
+ $stack11=new org.apache.bookkeeper.client.BookKeeperAdmin$ResultCallBack;
+ $stack11#org.apache.bookkeeper.client.BookKeeperAdmin$ResultCallBack(result);
+ $stack12=new org.apache.bookkeeper.client.LedgerFragmentReplicator$SingleFragmentCallback;
+ $stack13=this.bkc;
+ $stack14 = $stack13.getLedgerManager();
+ $stack15 = ledgerFragment.getFirstEntryId();
+ $stack16 = org.apache.bookkeeper.client.BookKeeperAdmin.getReplacementBookiesMap(ledgerFragment,targetBookieAddresses);
+ $stack12#org.apache.bookkeeper.client.LedgerFragmentReplicator$SingleFragmentCallback((org.apache.zookeeper.AsyncCallback$VoidCallback)$stack11,lh,$stack14,$stack15,$stack16);
+ targetBookieSet = com.google.common.collect.Sets.newHashSet();
+ $stack18 = targetBookieAddresses.values();
+ targetBookieSet.addAll($stack18);
+ this#org.apache.bookkeeper.client.BookKeeperAdmin:asyncRecoverLedgerFragment(lh,ledgerFragment,(org.apache.zookeeper.AsyncCallback$VoidCallback)$stack12,(java.util.Set)targetBookieSet,onReadEntryFailureCallback);
+ label0:org.apache.bookkeeper.client.SyncCallbackUtils.waitForResult(result);
+ label1:goto label2;
+ label3:$stack21 = catch;
+ $stack13=this.bkc;
+ $stack23 = $stack21.getCode();
+ $stack23 = $stack13.getReturnRc($stack23);
+ $stack21 = org.apache.bookkeeper.client.BKException.create($stack23);
+ throw $stack21;
+ label2:return;
+ catch org.apache.bookkeeper.client.BKException: label0 - label1 : label3;
+} 
+

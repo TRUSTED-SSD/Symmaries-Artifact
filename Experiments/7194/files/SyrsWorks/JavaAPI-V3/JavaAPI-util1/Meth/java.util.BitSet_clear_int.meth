@@ -1,0 +1,38 @@
+void java.util.BitSet:clear(int i0)
+{
+int i1;
+  int $i2;
+  long[] $r1;
+  long $l3;
+  long $l4;
+  long $l5;
+  long $l6;
+  java.lang.IndexOutOfBoundsException $r2;
+  java.lang.StringBuilder $r3;
+  java.lang.StringBuilder $r4;
+  java.lang.StringBuilder $r5;
+  java.lang.String $r6;
+  if (i0>=0) goto label0;
+ $r2=new java.lang.IndexOutOfBoundsException;
+ $r3=new java.lang.StringBuilder;
+ $r3#java.lang.StringBuilder:init();
+ $r4 = $r3.append("bitIndex < 0: ");
+ $r5 = $r4.append(i0);
+ $r6 = $r5.toString();
+ $r2#java.lang.IndexOutOfBoundsException:init($r6);
+ throw $r2;
+ label0:i1 = java.util.BitSet.wordIndex(i0);
+ $i2=this.wordsInUse;
+ if (i1<$i2) goto label1;
+ return;
+ label1:$r1=this.words;
+ $l5=$r1[i1];
+ $l3=(1L<<i0);
+ $l4=(!$l3 & -1L) |(!-1L & $l3);
+ $l6=($l5 & $l4);
+ $r1[i1]=$l6;
+ this#java.util.BitSet:recalculateWordsInUse();
+ this#java.util.BitSet:checkInvariants();
+ return;
+ }  
+

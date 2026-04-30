@@ -1,0 +1,22 @@
+org.apache.rocketmq.store.MessageStore org.apache.rocketmq.container.InnerBrokerController:getMessageStoreByBrokerName(java.lang.String brokerName)
+{
+org.apache.rocketmq.broker.BrokerController brokerController;
+  org.apache.rocketmq.common.BrokerConfig $stack3;
+  java.lang.String $stack4;
+  boolean $stack5;
+  org.apache.rocketmq.container.BrokerContainer $stack6;
+  org.apache.rocketmq.store.MessageStore $stack8;
+  $stack3=this.brokerConfig;
+ $stack4 = $stack3.getBrokerName();
+ $stack5 = $stack4.equals((java.lang.Object)brokerName);
+ if ($stack5==0) goto label0;
+ $stack8 = this.getMessageStore();
+ return  $stack8;
+ label0:$stack6=this.brokerContainer;
+ brokerController = $stack6.findBrokerControllerByBrokerName(brokerName);
+ if (brokerController==null) goto label1;
+ $stack8 = brokerController.getMessageStore();
+ return  $stack8;
+ label1:return  null;
+ } 
+

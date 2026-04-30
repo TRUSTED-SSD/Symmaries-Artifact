@@ -1,0 +1,27 @@
+int com.scurrilous.circe.crc.NormalIntCrc:resumeRaw(int crc,byte[] input,int index,int length)
+{
+int i;
+  int $stack8;
+  byte $stack11;
+  int $stack12;
+  int[] $stack15;
+  i=0;
+ label0:if (i>=length) goto label1;
+ $stack15=this.table;
+ $stack8=this.bitWidth;
+ $stack8=($stack8-8);
+ $stack12=(crc>>>$stack8);
+ $stack8=(index+i);
+ $stack11=input[$stack8];
+ $stack8=(!$stack12 & $stack11) |(!$stack11 & $stack12);
+ $stack8=($stack8 & 255);
+ $stack8=$stack15[$stack8];
+ crc=(crc<<8);
+ crc=(!$stack8 & crc) |(!crc & $stack8);
+ i=(i+1);
+ goto label0;
+ label1:index=this.widthMask;
+ crc=(crc & index);
+ return  crc;
+ } 
+

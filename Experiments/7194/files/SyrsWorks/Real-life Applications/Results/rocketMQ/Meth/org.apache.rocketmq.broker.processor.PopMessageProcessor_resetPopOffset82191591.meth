@@ -1,0 +1,36 @@
+java.lang.Long org.apache.rocketmq.broker.processor.PopMessageProcessor:resetPopOffset(java.lang.String topic,java.lang.String group,int queueId)
+{
+java.lang.String lockKey;
+  java.lang.Long resetOffset;
+  java.lang.StringBuilder $stack6;
+  org.apache.rocketmq.broker.BrokerController $stack13;
+  org.apache.rocketmq.broker.offset.ConsumerOffsetManager $stack14;
+  java.lang.Integer $stack15;
+  org.apache.rocketmq.broker.offset.ConsumerOrderInfoManager $stack18;
+  org.apache.rocketmq.broker.processor.PopBufferMergeService $stack19;
+  long $stack23;
+  $stack6=new java.lang.StringBuilder;
+ $stack6#java.lang.StringBuilder();
+ $stack6 = $stack6.append(topic);
+ $stack6 = $stack6.append("@");
+ $stack6 = $stack6.append(group);
+ $stack6 = $stack6.append("@");
+ $stack6 = $stack6.append(queueId);
+ lockKey = $stack6.toString();
+ $stack13=this.brokerController;
+ $stack14 = $stack13.getConsumerOffsetManager();
+ $stack15 = java.lang.Integer.valueOf(queueId);
+ resetOffset = $stack14.queryThenEraseResetOffset(topic,group,$stack15);
+ if (resetOffset==null) goto label0;
+ $stack13=this.brokerController;
+ $stack18 = $stack13.getConsumerOrderInfoManager();
+ $stack18#org.apache.rocketmq.broker.offset.ConsumerOrderInfoManager(topic,group,queueId);
+ $stack19 = this.getPopBufferMergeService();
+ $stack19.clearOffsetQueue(lockKey);
+ $stack13=this.brokerController;
+ $stack14 = $stack13.getConsumerOffsetManager();
+ $stack23 = resetOffset.longValue();
+ $stack14.commitOffset("ResetPopOffset",group,topic,queueId,$stack23);
+ label0:return  resetOffset;
+ } 
+

@@ -1,0 +1,78 @@
+    public java.util.List asTestList(org.junit.runner.Description)
+    {
+        junit.framework.JUnit4TestAdapterCache this;
+        org.junit.runner.Description description;
+        java.util.ArrayList returnThis, $stack7;
+        java.util.Iterator i$;
+        boolean $stack5;
+        java.lang.Object $stack10;
+        junit.framework.Test $stack11;
+        junit.framework.Test[] $stack14;
+        java.util.List $stack17;
+
+        this := @this: junit.framework.JUnit4TestAdapterCache;
+
+        description := @parameter0: org.junit.runner.Description;
+
+        $stack5 = virtualinvoke description.<org.junit.runner.Description: boolean isTest()>();
+/*66*/
+
+        if $stack5 == 0 goto label1;
+/*66*/
+
+        $stack14 = newarray (junit.framework.Test)[1];
+/*67*/
+
+        $stack11 = virtualinvoke this.<junit.framework.JUnit4TestAdapterCache: junit.framework.Test asTest(org.junit.runner.Description)>(description);
+/*67*/
+
+        $stack14[0] = $stack11;
+/*67*/
+
+        $stack17 = staticinvoke <java.util.Arrays: java.util.List asList(java.lang.Object[])>($stack14);
+/*67*/
+
+        return $stack17;
+/*67*/
+
+     label1:
+        returnThis = new java.util.ArrayList;
+/*69*/
+
+        specialinvoke returnThis.<java.util.ArrayList: void <init>()>();
+/*69*/
+
+        $stack7 = virtualinvoke description.<org.junit.runner.Description: java.util.ArrayList getChildren()>();
+/*70*/
+
+        i$ = virtualinvoke $stack7.<java.util.ArrayList: java.util.Iterator iterator()>();
+/*70*/
+/*70*/
+
+     label2:
+        $stack5 = interfaceinvoke i$.<java.util.Iterator: boolean hasNext()>();
+/*70*/
+
+        if $stack5 == 0 goto label3;
+/*70*/
+
+        $stack10 = interfaceinvoke i$.<java.util.Iterator: java.lang.Object next()>();
+/*73*/
+
+        description = (org.junit.runner.Description) $stack10;
+/*73*/
+
+        $stack11 = virtualinvoke this.<junit.framework.JUnit4TestAdapterCache: junit.framework.Test asTest(org.junit.runner.Description)>(description);
+/*71*/
+
+        interfaceinvoke returnThis.<java.util.List: boolean add(java.lang.Object)>($stack11);
+/*71*/
+
+        goto label2;
+/*71*/
+
+     label3:
+        return returnThis;
+/*73*/
+    }
+

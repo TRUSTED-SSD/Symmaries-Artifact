@@ -1,0 +1,54 @@
+boolean java.util.IdentityHashMap$EntrySpliterator:tryAdvance(java.util.function.Consumer r1)
+{
+java.lang.Object[] r2;
+  int i0;
+  java.lang.Object r3;
+  java.lang.Object r4;
+  java.lang.Object r5;
+  java.util.IdentityHashMap $r6;
+  int $i1;
+  int $i2;
+  int $i3;
+  int $i4;
+  int $i5;
+  int $i6;
+  java.util.AbstractMap$SimpleImmutableEntry $r7;
+  java.util.IdentityHashMap $r8;
+  int $i7;
+  int $i8;
+  java.util.ConcurrentModificationException $r9;
+  java.lang.NullPointerException $r10;
+  if (r1!=null) goto label0;
+ $r10=new java.lang.NullPointerException;
+ $r10#java.lang.NullPointerException:init();
+ throw $r10;
+ label0:$r6=this.map;
+ r2=$r6.table;
+ i0 = this.getFence();
+ label1:$i1=this.index;
+ if ($i1>=i0) goto label2;
+ $i2=this.index;
+ r3=r2[$i2];
+ $i3=this.index;
+ $i4=($i3+1);
+ r4=r2[$i4];
+ $i5=this.index;
+ $i6=($i5+2);
+ this.index=$i6;
+ if (r3==null) goto label3;
+ r5 = java.util.IdentityHashMap.unmaskNull(r3);
+ $r7=new java.util.AbstractMap$SimpleImmutableEntry;
+ $r7#java.util.AbstractMap$SimpleImmutableEntry:init(r5,r4);
+ r1.accept((java.lang.Object)$r7);
+ $r8=this.map;
+ $i8=$r8.modCount;
+ $i7=this.expectedModCount;
+ if ($i8==$i7) goto label4;
+ $r9=new java.util.ConcurrentModificationException;
+ $r9#java.util.ConcurrentModificationException:init();
+ throw $r9;
+ label4:return  1;
+ label3:goto label1;
+ label2:return  0;
+ }  
+

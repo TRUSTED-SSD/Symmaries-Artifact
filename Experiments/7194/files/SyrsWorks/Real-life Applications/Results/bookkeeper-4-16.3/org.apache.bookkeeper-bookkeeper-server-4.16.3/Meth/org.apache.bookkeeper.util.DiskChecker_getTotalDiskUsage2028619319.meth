@@ -1,0 +1,22 @@
+float org.apache.bookkeeper.util.DiskChecker:getTotalDiskUsage(java.util.List dirs)
+{
+float free;
+  java.lang.IllegalArgumentException $stack4;
+  boolean $stack5;
+  long $stack6;
+  float $stack9;
+  if (dirs==null) goto label0;
+ $stack5 = dirs.isEmpty();
+ if ($stack5==0) goto label1;
+ label0:$stack4=new java.lang.IllegalArgumentException;
+ $stack4#java.lang.IllegalArgumentException("list argument of getTotalDiskUsage is not supposed to be null or empty");
+ throw $stack4;
+ label1:$stack6 = this.getTotalFreeSpace(dirs);
+ free=(float) $stack6;
+ $stack6 = this.getTotalDiskSpace(dirs);
+ $stack9=(float) $stack6;
+ free=(free/$stack9);
+ free=(1.0F-free);
+ return  free;
+ } 
+

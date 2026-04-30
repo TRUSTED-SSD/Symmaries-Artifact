@@ -1,0 +1,96 @@
+    public java.lang.Class findExpectedType(java.lang.Class)
+    {
+        org.hamcrest.internal.ReflectiveTypeFinder this;
+        java.lang.Class fromClass;
+        java.lang.reflect.Method[] arr$;
+        int len$, i$;
+        java.lang.reflect.Method method;
+        java.lang.Error $stack7;
+        java.lang.StringBuilder $stack8;
+        java.lang.String $stack10;
+        boolean $stack18;
+
+        this := @this: org.hamcrest.internal.ReflectiveTypeFinder;
+
+        fromClass := @parameter0: java.lang.Class;
+
+     label1:
+        if fromClass == class "Ljava/lang/Object;" goto label5;
+/*42*/
+
+        arr$ = virtualinvoke fromClass.<java.lang.Class: java.lang.reflect.Method[] getDeclaredMethods()>();
+/*43*/
+/*43*/
+
+        len$ = lengthof arr$;
+/*43*/
+
+        i$ = 0;
+/*43*/
+
+     label2:
+        if i$ >= len$ goto label4;
+/*43*/
+
+        method = arr$[i$];
+/*42*/
+
+        $stack18 = virtualinvoke this.<org.hamcrest.internal.ReflectiveTypeFinder: boolean canObtainExpectedTypeFrom(java.lang.reflect.Method)>(method);
+/*44*/
+
+        if $stack18 == 0 goto label3;
+/*44*/
+
+        fromClass = virtualinvoke this.<org.hamcrest.internal.ReflectiveTypeFinder: java.lang.Class expectedTypeFrom(java.lang.reflect.Method)>(method);
+/*45*/
+
+        return fromClass;
+/*45*/
+
+     label3:
+        i$ = i$ + 1;
+/*43*/
+
+        goto label2;
+/*43*/
+
+     label4:
+        fromClass = virtualinvoke fromClass.<java.lang.Class: java.lang.Class getSuperclass()>();
+/*42*/
+/*42*/
+
+        goto label1;
+/*42*/
+
+     label5:
+        $stack7 = new java.lang.Error;
+/*49*/
+
+        $stack8 = new java.lang.StringBuilder;
+/*49*/
+
+        specialinvoke $stack8.<java.lang.StringBuilder: void <init>()>();
+/*49*/
+
+        $stack8 = virtualinvoke $stack8.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>("Cannot determine correct type for ");
+/*49*/
+
+        $stack10 = this.<org.hamcrest.internal.ReflectiveTypeFinder: java.lang.String methodName>;
+/*49*/
+
+        $stack8 = virtualinvoke $stack8.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>($stack10);
+/*49*/
+
+        $stack8 = virtualinvoke $stack8.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>("() method.");
+/*49*/
+
+        $stack10 = virtualinvoke $stack8.<java.lang.StringBuilder: java.lang.String toString()>();
+/*49*/
+
+        specialinvoke $stack7.<java.lang.Error: void <init>(java.lang.String)>($stack10);
+/*49*/
+
+        throw $stack7;
+/*49*/
+    }
+

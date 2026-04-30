@@ -1,0 +1,38 @@
+org.apache.bookkeeper.bookie.GarbageCollectionStatus org.apache.bookkeeper.bookie.GarbageCollectorThread:getGarbageCollectionStatus()
+{
+org.apache.bookkeeper.bookie.GarbageCollectionStatus$GarbageCollectionStatusBuilder $stack1;
+  java.util.concurrent.atomic.AtomicBoolean $stack2;
+  boolean $stack3;
+  long $stack11;
+  org.apache.bookkeeper.bookie.stats.GarbageCollectorStats $stack15;
+  org.apache.bookkeeper.stats.Counter $stack16;
+  java.lang.Long $stack17;
+  org.apache.bookkeeper.bookie.GarbageCollectionStatus $stack25;
+  $stack1 = org.apache.bookkeeper.bookie.GarbageCollectionStatus.builder();
+ $stack2=this.forceGarbageCollection;
+ $stack3 = $stack2.get();
+ $stack1 = $stack1.forceCompacting($stack3);
+ $stack2=this.majorCompacting;
+ $stack3 = $stack2.get();
+ $stack1 = $stack1.majorCompacting($stack3);
+ $stack2=this.minorCompacting;
+ $stack3 = $stack2.get();
+ $stack1 = $stack1.minorCompacting($stack3);
+ $stack11=this.lastMajorCompactionTime;
+ $stack1 = $stack1.lastMajorCompactionTime($stack11);
+ $stack11=this.lastMinorCompactionTime;
+ $stack1 = $stack1.lastMinorCompactionTime($stack11);
+ $stack15=this.gcStats;
+ $stack16 = $stack15.getMajorCompactionCounter();
+ $stack17 = $stack16.get();
+ $stack11 = $stack17.longValue();
+ $stack1 = $stack1.majorCompactionCounter($stack11);
+ $stack15=this.gcStats;
+ $stack16 = $stack15.getMinorCompactionCounter();
+ $stack17 = $stack16.get();
+ $stack11 = $stack17.longValue();
+ $stack1 = $stack1.minorCompactionCounter($stack11);
+ $stack25 = $stack1.build();
+ return  $stack25;
+ } 
+

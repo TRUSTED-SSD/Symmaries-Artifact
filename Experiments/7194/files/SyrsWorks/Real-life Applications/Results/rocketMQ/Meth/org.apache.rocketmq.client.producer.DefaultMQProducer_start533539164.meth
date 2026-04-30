@@ -1,0 +1,27 @@
+void org.apache.rocketmq.client.producer.DefaultMQProducer:start()
+{
+java.lang.String $stack2;
+  org.apache.rocketmq.client.impl.producer.DefaultMQProducerImpl $stack4;
+  org.apache.rocketmq.client.trace.TraceDispatcher $stack5;
+  org.apache.rocketmq.client.AccessChannel $stack8;
+  org.apache.rocketmq.client.exception.MQClientException $stack9;
+  org.apache.rocketmq.logging.org.slf4j.Logger $stack10;
+  $stack2=this.producerGroup;
+ $stack2 = this.withNamespace($stack2);
+ this.setProducerGroup($stack2);
+ $stack4=this.defaultMQProducerImpl;
+ $stack4.start();
+ $stack5=this.traceDispatcher;
+ if (null==$stack5) goto label0;
+ label1:$stack5=this.traceDispatcher;
+ $stack2 = this.getNamesrvAddr();
+ $stack8 = this.getAccessChannel();
+ $stack5.start($stack2,$stack8);
+ label2:goto label0;
+ label3:$stack9 = catch;
+ $stack10=this.logger;
+ $stack10.warn("trace dispatcher start failed ",(java.lang.Throwable)$stack9);
+ label0:return;
+ catch org.apache.rocketmq.client.exception.MQClientException: label1 - label2 : label3;
+} 
+

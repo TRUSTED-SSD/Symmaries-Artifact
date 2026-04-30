@@ -1,0 +1,15 @@
+byte[] org.apache.rocketmq.remoting.protocol.RemotingCommand:headerEncode()
+{
+org.apache.rocketmq.remoting.protocol.SerializeType $stack1;
+  org.apache.rocketmq.remoting.protocol.SerializeType $stack2;
+  byte[] $stack3;
+  this.makeCustomHeaderToNet();
+ $stack2=org.apache.rocketmq.remoting.protocol.SerializeType.ROCKETMQ;
+ $stack1=this.serializeTypeCurrentRPC;
+ if ($stack2!=$stack1) goto label0;
+ $stack3 = org.apache.rocketmq.remoting.protocol.RocketMQSerializable.rocketMQProtocolEncode(this);
+ return  $stack3;
+ label0:$stack3 = org.apache.rocketmq.remoting.protocol.RemotingSerializable.encode((java.lang.Object)this);
+ return  $stack3;
+ } 
+

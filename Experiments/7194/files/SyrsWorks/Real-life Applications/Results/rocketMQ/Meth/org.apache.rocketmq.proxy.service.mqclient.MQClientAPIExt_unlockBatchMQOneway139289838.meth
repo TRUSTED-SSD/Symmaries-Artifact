@@ -1,0 +1,22 @@
+java.util.concurrent.CompletableFuture org.apache.rocketmq.proxy.service.mqclient.MQClientAPIExt:unlockBatchMQOneway(java.lang.String brokerAddr,org.apache.rocketmq.remoting.protocol.body.UnlockBatchRequestBody requestBody,long timeoutMillis)
+{
+java.util.concurrent.CompletableFuture future;
+  org.apache.rocketmq.remoting.protocol.RemotingCommand request;
+  byte[] $stack10;
+  org.apache.rocketmq.remoting.RemotingClient $stack11;
+  java.lang.Exception $stack13;
+  future=new java.util.concurrent.CompletableFuture;
+ future#java.util.concurrent.CompletableFuture();
+ request = org.apache.rocketmq.remoting.protocol.RemotingCommand.createRequestCommand(42,null);
+ $stack10 = requestBody.encode();
+ request.setBody($stack10);
+ label0:$stack11 = this.getRemotingClient();
+ $stack11.invokeOneway(brokerAddr,request,timeoutMillis);
+ future.complete(null);
+ label1:goto label2;
+ label3:$stack13 = catch;
+ future.completeExceptionally((java.lang.Throwable)$stack13);
+ label2:return  future;
+ catch java.lang.Exception: label0 - label1 : label3;
+} 
+

@@ -1,0 +1,52 @@
+int com.google.zxing.datamatrix.decoder.BitMatrixParser:readUtah(int row,int column,int numRows,int numColumns)
+{
+int currentByte;
+  int $stack6;
+  int $stack7;
+  boolean $stack8;
+  currentByte=0;
+ $stack7=(row-2);
+ $stack6=(column-2);
+ $stack8 = this#com.google.zxing.datamatrix.decoder.BitMatrixParser:readModule($stack7,$stack6,numRows,numColumns);
+ if ($stack8==0) goto label0;
+ currentByte=(0 | 1);
+ label0:currentByte=(currentByte<<1);
+ $stack7=(row-2);
+ $stack6=(column-1);
+ $stack8 = this#com.google.zxing.datamatrix.decoder.BitMatrixParser:readModule($stack7,$stack6,numRows,numColumns);
+ if ($stack8==0) goto label1;
+ currentByte=(currentByte | 1);
+ label1:currentByte=(currentByte<<1);
+ $stack7=(row-1);
+ $stack6=(column-2);
+ $stack8 = this#com.google.zxing.datamatrix.decoder.BitMatrixParser:readModule($stack7,$stack6,numRows,numColumns);
+ if ($stack8==0) goto label2;
+ currentByte=(currentByte | 1);
+ label2:currentByte=(currentByte<<1);
+ $stack7=(row-1);
+ $stack6=(column-1);
+ $stack8 = this#com.google.zxing.datamatrix.decoder.BitMatrixParser:readModule($stack7,$stack6,numRows,numColumns);
+ if ($stack8==0) goto label3;
+ currentByte=(currentByte | 1);
+ label3:currentByte=(currentByte<<1);
+ $stack6=(row-1);
+ $stack8 = this#com.google.zxing.datamatrix.decoder.BitMatrixParser:readModule($stack6,column,numRows,numColumns);
+ if ($stack8==0) goto label4;
+ currentByte=(currentByte | 1);
+ label4:currentByte=(currentByte<<1);
+ $stack6=(column-2);
+ $stack8 = this#com.google.zxing.datamatrix.decoder.BitMatrixParser:readModule(row,$stack6,numRows,numColumns);
+ if ($stack8==0) goto label5;
+ currentByte=(currentByte | 1);
+ label5:currentByte=(currentByte<<1);
+ $stack6=(column-1);
+ $stack8 = this#com.google.zxing.datamatrix.decoder.BitMatrixParser:readModule(row,$stack6,numRows,numColumns);
+ if ($stack8==0) goto label6;
+ currentByte=(currentByte | 1);
+ label6:currentByte=(currentByte<<1);
+ $stack8 = this#com.google.zxing.datamatrix.decoder.BitMatrixParser:readModule(row,column,numRows,numColumns);
+ if ($stack8==0) goto label7;
+ currentByte=(currentByte | 1);
+ label7:return  currentByte;
+ } 
+

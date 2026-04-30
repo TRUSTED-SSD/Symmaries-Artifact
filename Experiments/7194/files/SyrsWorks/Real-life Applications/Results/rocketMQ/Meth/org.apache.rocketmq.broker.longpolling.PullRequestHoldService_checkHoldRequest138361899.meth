@@ -1,0 +1,49 @@
+void org.apache.rocketmq.broker.longpolling.PullRequestHoldService:checkHoldRequest()
+{
+java.util.Iterator l1;
+  java.lang.String key;
+  java.lang.String[] kArray;
+  int queueId;
+  long offset;
+  java.util.concurrent.ConcurrentMap $stack9;
+  java.util.Set $stack10;
+  boolean $stack12;
+  java.lang.Object $stack13;
+  java.lang.String $stack17;
+  org.apache.rocketmq.broker.BrokerController $stack19;
+  org.apache.rocketmq.store.MessageStore $stack20;
+  java.lang.Throwable $stack22;
+  java.lang.Object[] $stack23;
+  org.apache.rocketmq.logging.org.slf4j.Logger $stack24;
+  java.lang.Integer $stack27;
+  $stack9=this.pullRequestTable;
+ $stack10 = $stack9.keySet();
+ l1 = $stack10.iterator();
+ label0:$stack12 = l1.hasNext();
+ if ($stack12==0) goto label1;
+ $stack13 = l1.next();
+ key=(java.lang.String) $stack13;
+ kArray = key.split("@");
+ queueId=#kArray;
+ if (2!=queueId) goto label2;
+ key=kArray[0];
+ $stack17=kArray[1];
+ queueId = java.lang.Integer.parseInt($stack17);
+ $stack19=this.brokerController;
+ $stack20 = $stack19.getMessageStore();
+ offset = $stack20.getMaxOffsetInQueue(key,queueId);
+ label3:this.notifyMessageArriving(key,queueId,offset);
+ label4:goto label2;
+ label5:$stack22 = catch;
+ $stack24=org.apache.rocketmq.broker.longpolling.PullRequestHoldService.log;
+ $stack23=new java.lang.Object[3];
+ $stack23[0]=key;
+ $stack27 = java.lang.Integer.valueOf(queueId);
+ $stack23[1]=$stack27;
+ $stack23[2]=$stack22;
+ $stack24.error("PullRequestHoldService: failed to check hold request failed, topic={}, queueId={}",$stack23);
+ label2:goto label0;
+ label1:return;
+ catch java.lang.Throwable: label3 - label4 : label5;
+} 
+

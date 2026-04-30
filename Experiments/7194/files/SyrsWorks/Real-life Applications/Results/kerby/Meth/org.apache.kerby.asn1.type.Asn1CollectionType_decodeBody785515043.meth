@@ -1,0 +1,45 @@
+void org.apache.kerby.asn1.type.Asn1CollectionType:decodeBody(org.apache.kerby.asn1.parse.Asn1ParseResult @parseResult)
+{
+org.apache.kerby.asn1.parse.Asn1Container container;
+  java.util.List parseResults;
+  int lastPos;
+  int foundPos;
+  java.util.Iterator l6;
+  boolean $stack8;
+  java.lang.Object $stack12;
+  java.io.IOException $stack16;
+  java.lang.StringBuilder $stack17;
+  java.lang.String $stack19;
+  org.apache.kerby.asn1.parse.Asn1ParseResult parseResult;
+parseResult=@parseResult;
+$stack8 = parseResult.isDefinitiveLength();
+ this.useDefinitiveLength($stack8);
+ container=(org.apache.kerby.asn1.parse.Asn1Container) parseResult;
+ parseResults = container.getChildren();
+ lastPos=-1;
+ foundPos=-1;
+ l6 = parseResults.iterator();
+ label0:$stack8 = l6.hasNext();
+ if ($stack8==0) goto label1;
+ $stack12 = l6.next();
+ parseResult=(org.apache.kerby.asn1.parse.Asn1ParseResult) $stack12;
+ $stack8 = parseResult.isEOC();
+ if ($stack8==0) goto label2;
+ goto label0;
+ label2:foundPos = this#org.apache.kerby.asn1.type.Asn1CollectionType:match(lastPos,parseResult);
+ if (foundPos!=-1) goto label3;
+ $stack16=new java.io.IOException;
+ $stack17=new java.lang.StringBuilder;
+ $stack17#java.lang.StringBuilder();
+ $stack17 = $stack17.append("Unexpected item: ");
+ $stack19 = parseResult.simpleInfo();
+ $stack17 = $stack17.append($stack19);
+ $stack19 = $stack17.toString();
+ $stack16#java.io.IOException($stack19);
+ throw $stack16;
+ label3:lastPos=foundPos;
+ this#org.apache.kerby.asn1.type.Asn1CollectionType:attemptBinding(parseResult,foundPos);
+ goto label0;
+ label1:return;
+ } 
+

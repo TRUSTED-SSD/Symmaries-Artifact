@@ -1,0 +1,26 @@
+void java.util.WeakHashMap:clear()
+{
+java.lang.ref.ReferenceQueue $r1;
+  java.lang.ref.Reference $r2;
+  int $i0;
+  int $i1;
+  java.util.WeakHashMap$Entry[] $r3;
+  java.lang.ref.ReferenceQueue $r4;
+  java.lang.ref.Reference $r5;
+  label0:$r1=this.queue;
+ $r2 = $r1.poll();
+ if ($r2==null) goto label1;
+ goto label0;
+ label1:$i0=this.modCount;
+ $i1=($i0+1);
+ this.modCount=$i1;
+ $r3=this.table;
+ java.util.Arrays.fill((java.lang.Object[])$r3,null);
+ this.size=0;
+ label2:$r4=this.queue;
+ $r5 = $r4.poll();
+ if ($r5==null) goto label3;
+ goto label2;
+ label3:return;
+ }  
+

@@ -1,0 +1,28 @@
+boolean org.keycloak.representations.JsonWebToken:isExpired()
+{
+java.lang.Long $stack1;
+  long $stack3;
+  byte $stack4;
+  boolean $stack5;
+  int $stack6;
+  long $stack9;
+  $stack1=this.exp;
+ if ($stack1==null) goto label0;
+ $stack1=this.exp;
+ $stack3 = $stack1.longValue();
+ $stack4=($stack3 cmp 0L);
+ if ($stack4==0) goto label0;
+ $stack6 = org.keycloak.common.util.Time.currentTime();
+ $stack3=(long) $stack6;
+ $stack1=this.exp;
+ $stack9 = $stack1.longValue();
+ $stack4=($stack3 cmp $stack9);
+ if ($stack4<=0) goto label1;
+ $stack5=1;
+ goto label2;
+ label1:$stack5=0;
+ goto label2;
+ label0:$stack5=0;
+ label2:return  $stack5;
+ } 
+

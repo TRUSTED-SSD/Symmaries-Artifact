@@ -1,0 +1,38 @@
+void org.apache.bookkeeper.tools.cli.commands.bookie.ReadLogCommand$2:process(long candidateLedgerId,long startPos,io.netty.buffer.ByteBuf entry)
+{
+long entrysLedgerId;
+  long entrysEntryId;
+  int $stack10;
+  byte $stack15;
+  org.apache.commons.lang.mutable.MutableBoolean $stack20;
+  org.apache.bookkeeper.tools.cli.commands.bookie.ReadLogCommand $stack21;
+  boolean $stack22;
+  org.apache.bookkeeper.util.LedgerIdFormatter $stack23;
+  org.apache.bookkeeper.util.EntryFormatter $stack25;
+  $stack10 = entry.readerIndex();
+ entrysLedgerId = entry.getLong($stack10);
+ $stack10 = entry.readerIndex();
+ $stack10=($stack10+8);
+ entrysEntryId = entry.getLong($stack10);
+ $stack15=(candidateLedgerId cmp entrysLedgerId);
+ if ($stack15!=0) goto label0;
+ entrysLedgerId=this.val$ledgerId;
+ $stack15=(candidateLedgerId cmp entrysLedgerId);
+ if ($stack15!=0) goto label0;
+ candidateLedgerId=this.val$entryId;
+ $stack15=(entrysEntryId cmp candidateLedgerId);
+ if ($stack15==0) goto label1;
+ candidateLedgerId=this.val$entryId;
+ $stack15=(candidateLedgerId cmp -1L);
+ if ($stack15!=0) goto label0;
+ label1:$stack20=this.val$entryFound;
+ $stack20.setValue((boolean)1);
+ $stack22=this.val$printMsg;
+ $stack21=this.this$0;
+ $stack23 = org.apache.bookkeeper.tools.cli.commands.bookie.ReadLogCommand.access$900($stack21);
+ $stack21=this.this$0;
+ $stack25 = org.apache.bookkeeper.tools.cli.commands.bookie.ReadLogCommand.access$1000($stack21);
+ org.apache.bookkeeper.tools.cli.commands.bookie.FormatUtil.formatEntry(startPos,entry,$stack22,$stack23,$stack25);
+ label0:return;
+ } 
+

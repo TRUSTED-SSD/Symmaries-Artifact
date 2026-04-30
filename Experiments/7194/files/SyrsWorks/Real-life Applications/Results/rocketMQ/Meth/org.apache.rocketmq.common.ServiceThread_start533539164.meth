@@ -1,0 +1,37 @@
+void org.apache.rocketmq.common.ServiceThread:start()
+{
+java.lang.Object[] $stack1;
+  org.apache.rocketmq.logging.org.slf4j.Logger $stack2;
+  java.lang.String $stack5;
+  java.util.concurrent.atomic.AtomicBoolean $stack6;
+  boolean $stack8;
+  java.lang.Boolean $stack9;
+  java.lang.Thread $stack10;
+  $stack2=org.apache.rocketmq.common.ServiceThread.log;
+ $stack1=new java.lang.Object[3];
+ $stack5 = this.getServiceName();
+ $stack1[0]=$stack5;
+ $stack6=this.started;
+ $stack8 = $stack6.get();
+ $stack9 = java.lang.Boolean.valueOf($stack8);
+ $stack1[1]=$stack9;
+ $stack10=this.thread;
+ $stack1[2]=$stack10;
+ $stack2.info("Try to start service thread:{} started:{} lastThread:{}",$stack1);
+ $stack6=this.started;
+ $stack8 = $stack6.compareAndSet((boolean)0,(boolean)1);
+ if ($stack8!=0) goto label0;
+ return;
+ label0:this.stopped=0;
+ $stack10=new java.lang.Thread;
+ $stack5 = this.getServiceName();
+ $stack10#java.lang.Thread((java.lang.Runnable)this,$stack5);
+ this.thread=$stack10;
+ $stack10=this.thread;
+ $stack8=this.isDaemon;
+ $stack10.setDaemon($stack8);
+ $stack10=this.thread;
+ $stack10.start();
+ return;
+ } 
+

@@ -1,0 +1,18 @@
+void org.apache.bookkeeper.bookie.GarbageCollectorThread:suspendMajorGC()
+{
+java.util.concurrent.atomic.AtomicBoolean $stack1;
+  boolean $stack2;
+  org.slf4j.Logger $stack3;
+  java.lang.Thread $stack5;
+  java.lang.String $stack6;
+  $stack1=this.suspendMajorCompaction;
+ $stack2 = $stack1.compareAndSet((boolean)0,(boolean)1);
+ if ($stack2==0) goto label0;
+ $stack3=org.apache.bookkeeper.bookie.GarbageCollectorThread.LOG;
+ $stack5 = java.lang.Thread.currentThread();
+ $stack6 = $stack5.getName();
+ dummyClass.lowSink("Suspend Major Compaction triggered by thread: {}");
+$stack3.info("Suspend Major Compaction triggered by thread: {}",(java.lang.Object)$stack6);
+ label0:return;
+ } 
+

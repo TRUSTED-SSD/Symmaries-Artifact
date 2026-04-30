@@ -1,0 +1,58 @@
+static void org.apache.kerby.kerberos.kerb.preauth.pkinit.PkinitCrypto:validateChain(java.util.List certificateList,java.security.cert.X509Certificate anchor)
+{
+java.security.cert.CertificateFactory certificateFactory;
+  java.util.ArrayList certsList;
+  java.lang.Object certPath;
+  java.lang.Object cert;
+  java.security.cert.X509Certificate parsedCert;
+  java.security.cert.PKIXParameters parameters;
+  int $stack10;
+  boolean $stack12;
+  java.util.Set $stack17;
+  byte[] $stack21;
+  java.security.cert.Certificate $stack22;
+  java.util.ArrayList tmp$1474185863;
+  java.io.ByteArrayInputStream tmp$939034310;
+  java.security.cert.TrustAnchor tmp$808022628;
+  java.security.cert.PKIXParameters tmp$1750231048;
+  java.util.Iterator tmp$1373735363;
+  org.apache.kerby.x509.type.Certificate tmp$54995235;
+  java.security.cert.CertPathValidator tmp$64812356;
+  java.security.cert.CertPath tmp$1338908689;
+  certificateFactory = java.security.cert.CertificateFactory.getInstance("X.509");
+ tmp$1474185863=new java.util.ArrayList;
+ certsList=tmp$1474185863;
+ $stack10 = certificateList.size();
+ tmp$1474185863#java.util.ArrayList($stack10);
+ certsList=tmp$1474185863;
+ certPath = certificateList.iterator();
+ label0:tmp$1373735363=(java.util.Iterator) certPath;
+ $stack12 = tmp$1373735363.hasNext();
+ if ($stack12==0) goto label1;
+ tmp$1373735363=(java.util.Iterator) certPath;
+ cert = tmp$1373735363.next();
+ cert=(org.apache.kerby.x509.type.Certificate) cert;
+ tmp$939034310=new java.io.ByteArrayInputStream;
+ tmp$54995235=(org.apache.kerby.x509.type.Certificate) cert;
+ $stack21 = tmp$54995235.encode();
+ tmp$939034310#java.io.ByteArrayInputStream($stack21);
+ $stack22 = certificateFactory.generateCertificate((java.io.InputStream)tmp$939034310);
+ parsedCert=(java.security.cert.X509Certificate) $stack22;
+ tmp$1474185863.add((java.lang.Object)parsedCert);
+ goto label0;
+ label1:certPath = certificateFactory.generateCertPath((java.util.List)tmp$1474185863);
+ cert = java.security.cert.CertPathValidator.getInstance("PKIX");
+ tmp$808022628=new java.security.cert.TrustAnchor;
+ tmp$808022628#java.security.cert.TrustAnchor(anchor,null);
+ tmp$1750231048=new java.security.cert.PKIXParameters;
+ parameters=tmp$1750231048;
+ $stack17 = java.util.Collections.singleton((java.lang.Object)tmp$808022628);
+ tmp$1750231048#java.security.cert.PKIXParameters($stack17);
+ parameters=tmp$1750231048;
+ tmp$1750231048.setRevocationEnabled((boolean)0);
+ tmp$64812356=(java.security.cert.CertPathValidator) cert;
+ tmp$1338908689=(java.security.cert.CertPath) certPath;
+ tmp$64812356.validate(tmp$1338908689,(java.security.cert.CertPathParameters)tmp$1750231048);
+ return;
+ } 
+

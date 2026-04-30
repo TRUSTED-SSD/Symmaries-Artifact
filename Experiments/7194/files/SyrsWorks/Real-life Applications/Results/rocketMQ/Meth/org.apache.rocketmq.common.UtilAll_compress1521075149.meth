@@ -1,0 +1,47 @@
+static byte[] org.apache.rocketmq.common.UtilAll:compress(byte[] src,int level)
+{
+byte[] result;
+  java.io.ByteArrayOutputStream byteArrayOutputStream;
+  java.util.zip.Deflater defeater;
+  java.util.zip.DeflaterOutputStream deflaterOutputStream;
+  java.io.IOException e;
+  java.lang.Throwable l7;
+  int $stack10;
+  java.io.IOException $stack14;
+  java.io.IOException $stack15;
+  result=src;
+ byteArrayOutputStream=new java.io.ByteArrayOutputStream;
+ $stack10=#src;
+ byteArrayOutputStream#java.io.ByteArrayOutputStream($stack10);
+ defeater=new java.util.zip.Deflater;
+ defeater#java.util.zip.Deflater(level);
+ deflaterOutputStream=new java.util.zip.DeflaterOutputStream;
+ deflaterOutputStream#java.util.zip.DeflaterOutputStream((java.io.OutputStream)byteArrayOutputStream,defeater);
+ label0:dummyClass.lowSink(src);
+deflaterOutputStream.write(src);
+ deflaterOutputStream.finish();
+ deflaterOutputStream.close();
+ result = byteArrayOutputStream.toByteArray();
+ label1:byteArrayOutputStream.close();
+ label2:goto label3;
+ label4:e = catch;
+ label3:defeater.end();
+ goto label5;
+ label6:$stack15 = catch;
+ defeater.end();
+ throw $stack15;
+ label7:l7 = catch;
+ label8:byteArrayOutputStream.close();
+ label9:goto label10;
+ label11:$stack14 = catch;
+ e=$stack14;
+ label10:defeater.end();
+ throw l7;
+ label5:return  result;
+ catch java.io.IOException: label1 - label2 : label4;
+catch java.io.IOException: label0 - label1 : label6;
+catch java.lang.Throwable: label0 - label1 : label7;
+catch java.io.IOException: label8 - label9 : label11;
+catch java.lang.Throwable: label6 - label8 : label7;
+} 
+

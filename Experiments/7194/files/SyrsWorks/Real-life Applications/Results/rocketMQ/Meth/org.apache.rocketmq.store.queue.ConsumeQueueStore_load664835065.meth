@@ -1,0 +1,25 @@
+boolean org.apache.rocketmq.store.queue.ConsumeQueueStore:load()
+{
+boolean cqLoadResult;
+  boolean bcqLoadResult;
+  org.apache.rocketmq.store.config.MessageStoreConfig $stack3;
+  java.lang.String $stack4;
+  org.apache.rocketmq.common.attribute.CQType $stack6;
+  $stack3=this.messageStoreConfig;
+ $stack4 = $stack3.getStorePathRootDir();
+ $stack4 = org.apache.rocketmq.store.config.StorePathConfigHelper.getStorePathConsumeQueue($stack4);
+ $stack6=org.apache.rocketmq.common.attribute.CQType.SimpleCQ;
+ cqLoadResult = this#org.apache.rocketmq.store.queue.ConsumeQueueStore:loadConsumeQueues($stack4,$stack6);
+ $stack3=this.messageStoreConfig;
+ $stack4 = $stack3.getStorePathRootDir();
+ $stack4 = org.apache.rocketmq.store.config.StorePathConfigHelper.getStorePathBatchConsumeQueue($stack4);
+ $stack6=org.apache.rocketmq.common.attribute.CQType.BatchCQ;
+ bcqLoadResult = this#org.apache.rocketmq.store.queue.ConsumeQueueStore:loadConsumeQueues($stack4,$stack6);
+ if (cqLoadResult==0) goto label0;
+ if (bcqLoadResult==0) goto label0;
+ cqLoadResult=1;
+ goto label1;
+ label0:cqLoadResult=0;
+ label1:return  cqLoadResult;
+ } 
+

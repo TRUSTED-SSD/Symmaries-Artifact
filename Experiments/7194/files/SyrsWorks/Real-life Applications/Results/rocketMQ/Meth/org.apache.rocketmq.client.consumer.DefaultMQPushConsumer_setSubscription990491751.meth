@@ -1,0 +1,29 @@
+void org.apache.rocketmq.client.consumer.DefaultMQPushConsumer:setSubscription(java.util.Map subscription)
+{
+java.util.HashMap subscriptionWithNamespace;
+  java.util.Iterator l3;
+  java.util.Map$Entry topicEntry;
+  int $stack6;
+  java.util.Set $stack7;
+  boolean $stack9;
+  java.lang.Object $stack10;
+  java.lang.String $stack12;
+  subscriptionWithNamespace=new java.util.HashMap;
+ $stack6 = subscription.size();
+ subscriptionWithNamespace#java.util.HashMap($stack6,1.0F);
+ $stack7 = subscription.entrySet();
+ l3 = $stack7.iterator();
+ label0:$stack9 = l3.hasNext();
+ if ($stack9==0) goto label1;
+ $stack10 = l3.next();
+ topicEntry=(java.util.Map$Entry) $stack10;
+ $stack10 = topicEntry.getKey();
+ $stack12=(java.lang.String) $stack10;
+ $stack12 = this.withNamespace($stack12);
+ $stack10 = topicEntry.getValue();
+ subscriptionWithNamespace.put((java.lang.Object)$stack12,$stack10);
+ goto label0;
+ label1:this.subscription=subscriptionWithNamespace;
+ return;
+ } 
+

@@ -1,0 +1,61 @@
+int com.google.zxing.qrcode.encoder.MinimalEncoder$ResultList$ResultNode:getSize(com.google.zxing.qrcode.decoder.Version version)
+{
+int size;
+  int rest;
+  com.google.zxing.qrcode.decoder.Mode $stack4;
+  int[] $stack8;
+  int $stack19;
+  byte $stack21;
+  $stack4=this.mode;
+ size = $stack4.getCharacterCountBits(version);
+ size=(4+size);
+ $stack8=com.google.zxing.qrcode.encoder.MinimalEncoder$1.$SwitchMap$com$google$zxing$qrcode$decoder$Mode;
+ $stack4=this.mode;
+ rest = $stack4.ordinal();
+ rest=$stack8[rest];
+ switch [rest]
+if 0 goto label0;
+if 1 goto label1;
+if 2 goto label2;
+if 3 goto label3;
+if 4 goto label4;
+goto label5;
+ label0:rest=this.characterLength;
+ rest=(13 * rest);
+ size=(size+rest);
+ goto label5;
+ label1:rest=this.characterLength;
+ rest=(rest/2);
+ rest=(rest * 11);
+ size=(size+rest);
+ rest=this.characterLength;
+ rest=(rest%2);
+ if (rest!=1) goto label6;
+ $stack21=6;
+ goto label7;
+ label6:$stack21=0;
+ label7:size=(size+$stack21);
+ goto label5;
+ label2:rest=this.characterLength;
+ rest=(rest/3);
+ $stack19=(rest * 10);
+ rest=this.characterLength;
+ rest=(rest%3);
+ size=(size+$stack19);
+ if (rest!=1) goto label8;
+ $stack21=4;
+ goto label9;
+ label8:if (rest!=2) goto label10;
+ $stack21=7;
+ goto label9;
+ label10:$stack21=0;
+ label9:size=(size+$stack21);
+ goto label5;
+ label3:rest = this#com.google.zxing.qrcode.encoder.MinimalEncoder$ResultList$ResultNode:getCharacterCountIndicator();
+ rest=(8 * rest);
+ size=(size+rest);
+ goto label5;
+ label4:size=(size+8);
+ label5:return  size;
+ } 
+

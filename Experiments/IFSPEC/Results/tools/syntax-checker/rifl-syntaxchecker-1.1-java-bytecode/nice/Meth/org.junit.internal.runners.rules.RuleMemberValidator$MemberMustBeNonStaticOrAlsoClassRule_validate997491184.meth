@@ -1,0 +1,29 @@
+void org.junit.internal.runners.rules.RuleMemberValidator$MemberMustBeNonStaticOrAlsoClassRule:validate(org.junit.runners.model.FrameworkMember member,java.lang.Class annotation,java.util.List errors)
+{
+boolean isMethodRuleMember;
+  java.lang.String message;
+  java.lang.annotation.Annotation $stack8;
+  boolean $stack9;
+  org.junit.internal.runners.rules.ValidationError $stack11;
+  boolean $stack18;
+  isMethodRuleMember = org.junit.internal.runners.rules.RuleMemberValidator.access$1200(member);
+ $stack8 = member.getAnnotation(org.junit.ClassRule);
+ if ($stack8==null) goto label0;
+ $stack18=1;
+ goto label1;
+ label0:$stack18=0;
+ label1:$stack9 = member.isStatic();
+ if ($stack9==0) goto label2;
+ if (isMethodRuleMember!=0) goto label3;
+ if ($stack18!=0) goto label2;
+ label3:isMethodRuleMember = org.junit.internal.runners.rules.RuleMemberValidator.access$1200(member);
+ if (isMethodRuleMember==0) goto label4;
+ message="must not be static.";
+ goto label5;
+ label4:message="must not be static or it must be annotated with @ClassRule.";
+ label5:$stack11=new org.junit.internal.runners.rules.ValidationError;
+ $stack11#org.junit.internal.runners.rules.ValidationError(member,annotation,message);
+ errors.add((java.lang.Object)$stack11);
+ label2:return;
+ } 
+

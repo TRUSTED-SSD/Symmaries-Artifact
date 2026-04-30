@@ -1,0 +1,28 @@
+static long org.apache.bookkeeper.util.StringUtils:stringToHierarchicalLedgerId(java.lang.String[] levelNodes)
+{
+java.lang.StringBuilder sb;
+  int l3;
+  int l4;
+  java.lang.String node;
+  long $stack8;
+  java.lang.NumberFormatException $stack12;
+  java.io.IOException $stack13;
+  label0:sb=new java.lang.StringBuilder;
+ sb#java.lang.StringBuilder();
+ l3=#levelNodes;
+ l4=0;
+ label1:if (l4>=l3) goto label2;
+ node=levelNodes[l4];
+ sb.append(node);
+ l4=(l4+1);
+ goto label1;
+ label2:node = sb.toString();
+ $stack8 = java.lang.Long.parseLong(node);
+ label3:return  $stack8;
+ label4:$stack12 = catch;
+ $stack13=new java.io.IOException;
+ $stack13#java.io.IOException((java.lang.Throwable)$stack12);
+ throw $stack13;
+ catch java.lang.NumberFormatException: label0 - label3 : label4;
+} 
+

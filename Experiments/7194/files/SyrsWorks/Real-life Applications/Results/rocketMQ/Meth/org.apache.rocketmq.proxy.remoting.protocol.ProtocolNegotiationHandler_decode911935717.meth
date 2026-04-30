@@ -1,0 +1,37 @@
+void org.apache.rocketmq.proxy.remoting.protocol.ProtocolNegotiationHandler:decode(io.netty.channel.ChannelHandlerContext ctx,io.netty.buffer.ByteBuf in,java.util.List @out)
+{
+org.apache.rocketmq.proxy.remoting.protocol.ProtocolHandler protocolHandler;
+  java.util.Iterator l5;
+  org.apache.rocketmq.proxy.remoting.protocol.ProtocolHandler curProtocolHandler;
+  int $stack7;
+  boolean $stack10;
+  io.netty.channel.ChannelPipeline $stack11;
+  java.lang.Object $stack18;
+  io.netty.channel.ChannelHandler tmp$996388085;
+  java.util.List out;
+out=@out;
+$stack7 = in.readableBytes();
+dummyClass.highSourceMut($stack7);
+ if ($stack7>=4) goto label0;
+ return;
+ label0:protocolHandler=null;
+ out=this.protocolHandlerList;
+ l5 = out.iterator();
+ label1:$stack10 = l5.hasNext();
+ if ($stack10==0) goto label2;
+ $stack18 = l5.next();
+ curProtocolHandler=(org.apache.rocketmq.proxy.remoting.protocol.ProtocolHandler) $stack18;
+ $stack10 = curProtocolHandler.match(in);
+ if ($stack10==0) goto label3;
+ protocolHandler=curProtocolHandler;
+ goto label2;
+ label3:goto label1;
+ label2:if (protocolHandler!=null) goto label4;
+ protocolHandler=this.fallbackProtocolHandler;
+ label4:protocolHandler.config(ctx,in);
+ $stack11 = ctx.pipeline();
+ tmp$996388085=(io.netty.channel.ChannelHandler) this;
+ $stack11.remove(tmp$996388085);
+ return;
+ } 
+

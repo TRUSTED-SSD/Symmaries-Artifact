@@ -1,0 +1,20 @@
+void org.apache.bookkeeper.proto.ReadEntryProcessorV3:sendFenceResponse(org.apache.bookkeeper.proto.BookkeeperProtocol$ReadResponse$Builder readResponse,io.netty.buffer.ByteBuf entryBody,boolean fenceResult,com.google.common.base.Stopwatch startTimeSw)
+{
+org.apache.bookkeeper.proto.BookieRequestProcessor $stack5;
+  org.apache.bookkeeper.proto.RequestStats $stack7;
+  org.apache.bookkeeper.stats.OpStatsLogger $stack8;
+  org.apache.bookkeeper.proto.BookkeeperProtocol$ReadResponse $stack9;
+  this#org.apache.bookkeeper.proto.ReadEntryProcessorV3:getFenceResponse(readResponse,entryBody,fenceResult);
+ if (fenceResult!=0) goto label0;
+ fenceResult=1;
+ goto label1;
+ label0:fenceResult=0;
+ label1:$stack5=this.requestProcessor;
+ $stack7 = $stack5.getRequestStats();
+ $stack8 = $stack7.getFenceReadEntryStats();
+ this.registerEvent(fenceResult,$stack8,startTimeSw);
+ $stack9 = readResponse.build();
+ this.sendResponse($stack9);
+ return;
+ } 
+

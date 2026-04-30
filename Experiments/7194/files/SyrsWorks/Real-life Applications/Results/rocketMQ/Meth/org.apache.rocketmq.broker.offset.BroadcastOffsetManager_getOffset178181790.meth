@@ -1,0 +1,35 @@
+long org.apache.rocketmq.broker.offset.BroadcastOffsetManager:getOffset(org.apache.rocketmq.broker.offset.BroadcastOffsetManager$BroadcastTimedOffsetStore offsetStore,java.lang.String topic,java.lang.String @groupId,int queueId)
+{
+long storeOffset;
+  byte $stack7;
+  org.apache.rocketmq.broker.BrokerController $stack9;
+  org.apache.rocketmq.store.MessageStore $stack10;
+  boolean $stack11;
+  org.apache.rocketmq.broker.offset.ConsumerOffsetManager $stack17;
+  org.apache.rocketmq.broker.offset.BroadcastOffsetStore $stack22;
+  java.lang.String groupId;
+groupId=@groupId;
+storeOffset=-1L;
+ if (offsetStore==null) goto label0;
+ $stack22 = org.apache.rocketmq.broker.offset.BroadcastOffsetManager$BroadcastTimedOffsetStore.access$100(offsetStore);
+ storeOffset = $stack22.readOffset(queueId);
+ label0:$stack7=(storeOffset cmp 0L);
+ if ($stack7>=0) goto label1;
+ $stack9=this.brokerController;
+ $stack17 = $stack9.getConsumerOffsetManager();
+ groupId = org.apache.rocketmq.broker.offset.BroadcastOffsetManager.broadcastGroupId(groupId);
+ storeOffset = $stack17.queryOffset(groupId,topic,queueId);
+ label1:$stack7=(storeOffset cmp 0L);
+ if ($stack7>=0) goto label2;
+ $stack9=this.brokerController;
+ $stack10 = $stack9.getMessageStore();
+ $stack11 = $stack10.checkInMemByConsumeOffset(topic,queueId,0L,1);
+ if ($stack11==0) goto label3;
+ storeOffset=0L;
+ goto label2;
+ label3:$stack9=this.brokerController;
+ $stack10 = $stack9.getMessageStore();
+ storeOffset = $stack10.getMaxOffsetInQueue(topic,queueId,(boolean)1);
+ label2:return  storeOffset;
+ } 
+

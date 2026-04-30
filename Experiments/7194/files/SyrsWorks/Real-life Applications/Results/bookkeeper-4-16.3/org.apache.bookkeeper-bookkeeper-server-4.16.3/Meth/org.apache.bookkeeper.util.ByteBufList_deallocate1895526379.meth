@@ -1,0 +1,23 @@
+void org.apache.bookkeeper.util.ByteBufList:deallocate()
+{
+int i;
+  java.util.ArrayList $stack2;
+  int $stack3;
+  io.netty.util.Recycler$Handle $stack5;
+  java.lang.Object $stack7;
+  i=0;
+ label0:$stack2=this.buffers;
+ $stack3 = $stack2.size();
+ if (i>=$stack3) goto label1;
+ $stack2=this.buffers;
+ $stack7 = $stack2.get(i);
+ io.netty.util.ReferenceCountUtil.release($stack7);
+ i=(i+1);
+ goto label0;
+ label1:$stack2=this.buffers;
+ $stack2.clear();
+ $stack5=this.recyclerHandle;
+ $stack5.recycle((java.lang.Object)this);
+ return;
+ } 
+

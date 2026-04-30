@@ -1,0 +1,92 @@
+    private static org.junit.experimental.max.MaxHistory readHistory(java.io.File) throws org.junit.experimental.max.CouldNotReadCoreException
+    {
+        java.io.File storedResults;
+        java.io.FileInputStream file;
+        java.io.ObjectInputStream stream;
+        org.junit.experimental.max.MaxHistory l3;
+        java.lang.Throwable l4, $stack12;
+        java.lang.Object $stack8;
+        java.lang.Exception $stack9;
+        org.junit.experimental.max.CouldNotReadCoreException $stack10;
+
+        storedResults := @parameter0: java.io.File;
+
+     label01:
+        file = new java.io.FileInputStream;
+/*48*/
+
+        specialinvoke file.<java.io.FileInputStream: void <init>(java.io.File)>(storedResults);
+/*48*/
+
+     label02:
+        stream = new java.io.ObjectInputStream;
+/*50*/
+
+        specialinvoke stream.<java.io.ObjectInputStream: void <init>(java.io.InputStream)>(file);
+/*50*/
+
+     label03:
+        $stack8 = virtualinvoke stream.<java.io.ObjectInputStream: java.lang.Object readObject()>();
+/*52*/
+
+        l3 = (org.junit.experimental.max.MaxHistory) $stack8;
+/*52*/
+
+     label04:
+        virtualinvoke stream.<java.io.ObjectInputStream: void close()>();
+/*54*/
+
+     label05:
+        virtualinvoke file.<java.io.FileInputStream: void close()>();
+/*57*/
+
+     label06:
+        return l3;
+/*57*/
+
+     label07:
+        l4 := @caughtexception;
+/*60*/
+
+     label08:
+        virtualinvoke stream.<java.io.ObjectInputStream: void close()>();
+/*54*/
+
+        throw l4;
+/*54*/
+
+     label09:
+        $stack12 := @caughtexception;
+/*54*/
+
+        l4 = $stack12;
+/*57*/
+
+     label10:
+        virtualinvoke file.<java.io.FileInputStream: void close()>();
+/*57*/
+
+        throw $stack12;
+/*57*/
+
+     label11:
+        $stack9 := @caughtexception;
+/*57*/
+
+        $stack10 = new org.junit.experimental.max.CouldNotReadCoreException;
+/*60*/
+
+        specialinvoke $stack10.<org.junit.experimental.max.CouldNotReadCoreException: void <init>(java.lang.Throwable)>($stack9);
+/*60*/
+
+        throw $stack10;
+/*60*/
+
+        catch java.lang.Throwable from label03 to label04 with label07;
+        catch java.lang.Throwable from label07 to label08 with label07;
+        catch java.lang.Throwable from label02 to label05 with label09;
+        catch java.lang.Throwable from label07 to label10 with label09;
+        catch java.lang.Exception from label01 to label06 with label11;
+        catch java.lang.Exception from label07 to label11 with label11;
+    }
+

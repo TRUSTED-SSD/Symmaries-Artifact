@@ -1,0 +1,16 @@
+static void org.apache.rocketmq.proxy.remoting.channel.RemotingChannel:lambda$processCheckTransaction$0(java.util.concurrent.CompletableFuture responseFuture,java.util.concurrent.CompletableFuture writeFuture,io.netty.channel.ChannelFuture future)
+{
+org.apache.rocketmq.remoting.exception.RemotingException e;
+  boolean $stack4;
+  $stack4 = future.isSuccess();
+ if ($stack4==0) goto label0;
+ responseFuture.complete(null);
+ writeFuture.complete(null);
+ goto label1;
+ label0:e=new org.apache.rocketmq.remoting.exception.RemotingException;
+ e#org.apache.rocketmq.remoting.exception.RemotingException("write and flush data failed");
+ responseFuture.completeExceptionally((java.lang.Throwable)e);
+ writeFuture.completeExceptionally((java.lang.Throwable)e);
+ label1:return;
+ } 
+

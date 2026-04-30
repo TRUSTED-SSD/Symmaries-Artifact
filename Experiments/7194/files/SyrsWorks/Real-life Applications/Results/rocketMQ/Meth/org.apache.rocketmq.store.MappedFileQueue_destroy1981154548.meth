@@ -1,0 +1,36 @@
+void org.apache.rocketmq.store.MappedFileQueue:destroy()
+{
+java.lang.Object file;
+  org.apache.rocketmq.store.logfile.MappedFile mf;
+  java.util.concurrent.CopyOnWriteArrayList $stack3;
+  boolean $stack5;
+  java.io.File $stack7;
+  java.lang.String $stack8;
+  java.lang.Object $stack11;
+  java.io.File tmp$1500380297;
+  java.util.Iterator tmp$1646043967;
+  $stack3=this.mappedFiles;
+ file = $stack3.iterator();
+ label0:tmp$1646043967=(java.util.Iterator) file;
+ $stack5 = tmp$1646043967.hasNext();
+ if ($stack5==0) goto label1;
+ tmp$1646043967=(java.util.Iterator) file;
+ $stack11 = tmp$1646043967.next();
+ mf=(org.apache.rocketmq.store.logfile.MappedFile) $stack11;
+ mf.destroy(3000L);
+ goto label0;
+ label1:$stack3=this.mappedFiles;
+ $stack3.clear();
+ this.flushedWhere=0L;
+ tmp$1500380297=new java.io.File;
+ $stack8=this.storePath;
+ tmp$1500380297#java.io.File($stack8);
+ file=tmp$1500380297;
+ $stack7=(java.io.File) tmp$1500380297;
+ $stack5 = $stack7.isDirectory();
+ if ($stack5==0) goto label2;
+ $stack7=(java.io.File) tmp$1500380297;
+ $stack7.delete();
+ label2:return;
+ } 
+

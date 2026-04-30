@@ -1,0 +1,52 @@
+org.apache.bookkeeper.bookie.EntryMemTable(org.apache.bookkeeper.conf.ServerConfiguration conf,org.apache.bookkeeper.bookie.CheckpointSource source,org.apache.bookkeeper.stats.StatsLogger statsLogger)
+{
+java.util.concurrent.locks.ReentrantReadWriteLock $stack4;
+  org.apache.bookkeeper.bookie.EntryMemTable$EntrySkipList $stack5;
+  java.util.concurrent.atomic.AtomicLong $stack7;
+  org.apache.bookkeeper.bookie.SkipListArena $stack8;
+  java.util.concurrent.atomic.AtomicBoolean $stack9;
+  long $stack10;
+  byte $stack12;
+  java.util.concurrent.Semaphore $stack13;
+  int $stack15;
+  org.apache.bookkeeper.bookie.stats.EntryMemTableStats $stack17;
+  java.lang.IllegalArgumentException $stack18;
+  this#java.lang.Object();
+ $stack4=new java.util.concurrent.locks.ReentrantReadWriteLock;
+ $stack4#java.util.concurrent.locks.ReentrantReadWriteLock();
+ this.lock=$stack4;
+ this.checkpointSource=source;
+ $stack5 = this#org.apache.bookkeeper.bookie.EntryMemTable:newSkipList();
+ this.kvmap=$stack5;
+ $stack5=org.apache.bookkeeper.bookie.EntryMemTable$EntrySkipList.EMPTY_VALUE;
+ this.snapshot=$stack5;
+ this.conf=conf;
+ $stack7=new java.util.concurrent.atomic.AtomicLong;
+ $stack7#java.util.concurrent.atomic.AtomicLong(0L);
+ this.size=$stack7;
+ $stack8=new org.apache.bookkeeper.bookie.SkipListArena;
+ $stack8#org.apache.bookkeeper.bookie.SkipListArena(conf);
+ this.allocator=$stack8;
+ $stack9=new java.util.concurrent.atomic.AtomicBoolean;
+ $stack9#java.util.concurrent.atomic.AtomicBoolean(1);
+ this.previousFlushSucceeded=$stack9;
+ $stack10 = conf.getSkipListSizeLimit();
+ this.skipListSizeLimit=$stack10;
+ $stack10=this.skipListSizeLimit;
+ $stack12=($stack10 cmp 1073741823L);
+ if ($stack12<=0) goto label0;
+ $stack18=new java.lang.IllegalArgumentException;
+ $stack18#java.lang.IllegalArgumentException("skiplist size over 1073741823");
+ throw $stack18;
+ label0:$stack13=new java.util.concurrent.Semaphore;
+ $stack10=this.skipListSizeLimit;
+ $stack15=(int) $stack10;
+ $stack15=($stack15 * 2);
+ $stack13#java.util.concurrent.Semaphore($stack15);
+ this.skipListSemaphore=$stack13;
+ $stack17=new org.apache.bookkeeper.bookie.stats.EntryMemTableStats;
+ $stack17#org.apache.bookkeeper.bookie.stats.EntryMemTableStats(statsLogger);
+ this.memTableStats=$stack17;
+ return;
+ } 
+

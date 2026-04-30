@@ -1,0 +1,22 @@
+void org.apache.kerby.kerberos.kerb.transport.KdcNetwork:checkAndAccept()
+{
+java.net.Socket socket;
+  java.net.ServerSocket $stack3;
+  boolean $stack4;
+  java.net.Socket $stack6;
+  org.apache.kerby.kerberos.kerb.transport.KrbTcpTransport $stack7;
+  $stack3=this.tcpServer;
+ $stack4 = $stack3.isClosed();
+ if ($stack4==0) goto label0;
+ return;
+ label0:$stack3=this.tcpServer;
+ $stack6 = $stack3.accept();
+ socket=$stack6;
+ if ($stack6==null) goto label1;
+ $stack6.setSoTimeout(3000);
+ $stack7=new org.apache.kerby.kerberos.kerb.transport.KrbTcpTransport;
+ $stack7#org.apache.kerby.kerberos.kerb.transport.KrbTcpTransport($stack6);
+ this.onNewTransport((org.apache.kerby.kerberos.kerb.transport.KrbTransport)$stack7);
+ label1:return;
+ } 
+

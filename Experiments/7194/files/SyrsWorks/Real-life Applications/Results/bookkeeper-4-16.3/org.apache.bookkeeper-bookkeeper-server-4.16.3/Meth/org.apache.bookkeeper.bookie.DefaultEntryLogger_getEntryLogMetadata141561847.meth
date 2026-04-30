@@ -1,0 +1,29 @@
+org.apache.bookkeeper.bookie.EntryLogMetadata org.apache.bookkeeper.bookie.DefaultEntryLogger:getEntryLogMetadata(long entryLogId,org.apache.bookkeeper.bookie.AbstractLogCompactor$Throttler throttler)
+{
+java.io.FileNotFoundException fne;
+  org.apache.bookkeeper.bookie.EntryLogMetadata $stack5;
+  java.lang.Exception $stack6;
+  org.slf4j.Logger $stack7;
+  java.lang.Long $stack9;
+  java.lang.String $stack10;
+  java.lang.String $stack16;
+  label0:$stack5 = this.extractEntryLogMetadataFromIndex(entryLogId);
+ label1:return  $stack5;
+ label2:fne = catch;
+ $stack7=org.apache.bookkeeper.bookie.DefaultEntryLogger.LOG;
+ $stack10 = java.lang.Long.toHexString(entryLogId);
+ $stack16 = fne.getMessage();
+ $stack7.warn("Cannot find entry log file {}.log : {}",(java.lang.Object)$stack10,(java.lang.Object)$stack16);
+ throw fne;
+ label3:$stack6 = catch;
+ $stack7=org.apache.bookkeeper.bookie.DefaultEntryLogger.LOG;
+ $stack9 = java.lang.Long.valueOf(entryLogId);
+ $stack10 = $stack6.getMessage();
+ dummyClass.lowSink("Failed to get ledgers map index from: {}.log : {}");
+$stack7.info("Failed to get ledgers map index from: {}.log : {}",(java.lang.Object)$stack9,(java.lang.Object)$stack10);
+ $stack5 = this#org.apache.bookkeeper.bookie.DefaultEntryLogger:extractEntryLogMetadataByScanning(entryLogId,throttler);
+ return  $stack5;
+ catch java.io.FileNotFoundException: label0 - label1 : label2;
+catch java.lang.Exception: label0 - label1 : label3;
+} 
+

@@ -1,0 +1,26 @@
+com.google.zxing.client.result.ISBNParsedResult com.google.zxing.client.result.ISBNResultParser:parse(com.google.zxing.Result result)
+{
+com.google.zxing.BarcodeFormat format;
+  java.lang.String rawText;
+  int length;
+  com.google.zxing.BarcodeFormat $stack6;
+  boolean $stack9;
+  com.google.zxing.client.result.ISBNParsedResult $stack10;
+  format = result.getBarcodeFormat();
+ $stack6=com.google.zxing.BarcodeFormat.EAN_13;
+ if (format==$stack6) goto label0;
+ return  null;
+ label0:rawText = com.google.zxing.client.result.ResultParser.getMassagedText(result);
+ length = rawText.length();
+ if (length==13) goto label1;
+ return  null;
+ label1:$stack9 = rawText.startsWith("978");
+ if ($stack9!=0) goto label2;
+ $stack9 = rawText.startsWith("979");
+ if ($stack9!=0) goto label2;
+ return  null;
+ label2:$stack10=new com.google.zxing.client.result.ISBNParsedResult;
+ $stack10#com.google.zxing.client.result.ISBNParsedResult(rawText);
+ return  $stack10;
+ } 
+

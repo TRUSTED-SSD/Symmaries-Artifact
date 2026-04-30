@@ -1,0 +1,9 @@
+org.apache.rocketmq.common.message.MessageQueue org.apache.rocketmq.broker.transaction.queue.TransactionalMessageBridge:getOpQueueByHalf (
+  java.lang.Integer queueId, java.lang.String brokerName) {
+  guard = tt;
+  ret(level()) = pc;
+  ret(obj_level()) = pc ⊔ level(brokerName) ⊔ level(queueId) ⊔ obj_level(brokerName) ⊔ obj_level(queueId);
+  ret(obj_level(brokerName)) = pc ⊔ level(brokerName) ⊔ level(queueId) ⊔ obj_level(brokerName) ⊔ obj_level(queueId);
+  ret(obj_level(queueId)) = pc ⊔ level(queueId) ⊔ obj_level(queueId);
+  ret(obj_level(this)) = pc ⊔ level(brokerName) ⊔ level(queueId) ⊔ obj_level(brokerName) ⊔ obj_level(queueId) ⊔ obj_level(this);
+}

@@ -1,0 +1,20 @@
+org.apache.rocketmq.common.message.MessageExt org.apache.rocketmq.tools.admin.DefaultMQAdminExtImpl:queryMessage(java.lang.String clusterName,java.lang.String topic,java.lang.String msgId)
+{
+org.apache.rocketmq.common.message.MessageExt $stack6;
+  java.lang.Exception $stack7;
+  org.apache.rocketmq.logging.org.slf4j.Logger $stack8;
+  org.apache.rocketmq.client.impl.factory.MQClientInstance $stack9;
+  org.apache.rocketmq.client.impl.MQAdminImpl $stack10;
+  label0:org.apache.rocketmq.common.message.MessageDecoder.decodeMessageId(msgId);
+ $stack6 = this.viewMessage(msgId);
+ label1:return  $stack6;
+ label2:$stack7 = catch;
+ $stack8=this.logger;
+ $stack8.warn("the msgId maybe created by new client. msgId={}",(java.lang.Object)msgId,(java.lang.Object)$stack7);
+ $stack9=this.mqClientInstance;
+ $stack10 = $stack9.getMQAdminImpl();
+ $stack6 = $stack10.queryMessageByUniqKey(clusterName,topic,msgId);
+ return  $stack6;
+ catch java.lang.Exception: label0 - label1 : label2;
+} 
+

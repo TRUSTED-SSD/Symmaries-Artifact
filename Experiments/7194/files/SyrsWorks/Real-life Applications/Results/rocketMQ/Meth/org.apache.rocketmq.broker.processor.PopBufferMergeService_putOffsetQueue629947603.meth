@@ -1,0 +1,32 @@
+boolean org.apache.rocketmq.broker.processor.PopBufferMergeService:putOffsetQueue(org.apache.rocketmq.broker.processor.PopBufferMergeService$PopCheckPointWrapper pointWrapper)
+{
+org.apache.rocketmq.broker.processor.PopBufferMergeService$QueueWithTime queue;
+  org.apache.rocketmq.broker.processor.PopBufferMergeService$QueueWithTime old;
+  java.util.concurrent.ConcurrentHashMap $stack4;
+  java.lang.String $stack5;
+  java.lang.Object $stack6;
+  org.apache.rocketmq.store.pop.PopCheckPoint $stack7;
+  long $stack8;
+  java.util.concurrent.LinkedBlockingDeque $stack9;
+  boolean $stack10;
+  $stack4=this.commitOffsets;
+ $stack5 = pointWrapper.getLockKey();
+ $stack6 = $stack4.get((java.lang.Object)$stack5);
+ queue=(org.apache.rocketmq.broker.processor.PopBufferMergeService$QueueWithTime) $stack6;
+ if (queue!=null) goto label0;
+ queue=new org.apache.rocketmq.broker.processor.PopBufferMergeService$QueueWithTime;
+ queue#org.apache.rocketmq.broker.processor.PopBufferMergeService$QueueWithTime(this);
+ $stack4=this.commitOffsets;
+ $stack5 = pointWrapper.getLockKey();
+ $stack6 = $stack4.putIfAbsent((java.lang.Object)$stack5,(java.lang.Object)queue);
+ old=(org.apache.rocketmq.broker.processor.PopBufferMergeService$QueueWithTime) $stack6;
+ if (old==null) goto label0;
+ queue=old;
+ label0:$stack7 = pointWrapper.getCk();
+ $stack8 = $stack7.getPopTime();
+ queue.setTime($stack8);
+ $stack9 = queue.get();
+ $stack10 = $stack9.offer((java.lang.Object)pointWrapper);
+ return  $stack10;
+ } 
+

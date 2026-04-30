@@ -1,0 +1,36 @@
+static java.lang.String org.keycloak.common.util.Base64Url:encodeBase64UrlToBase64(java.lang.String @base64Url)
+{
+int $stack4;
+  java.lang.StringBuilder $stack6;
+  java.lang.RuntimeException $stack15;
+  java.lang.String base64Url;
+base64Url=@base64Url;
+base64Url = base64Url.replace((char)45,(char)43);
+ base64Url = base64Url.replace((char)95,(char)47);
+ $stack4 = base64Url.length();
+ $stack4=($stack4%4);
+ switch [$stack4]
+if 0 goto label0;
+if 1 goto label1;
+if 2 goto label2;
+if 3 goto label3;
+goto label1;
+ label0:goto label4;
+ label2:$stack6=new java.lang.StringBuilder;
+ $stack6#java.lang.StringBuilder();
+ $stack6 = $stack6.append(base64Url);
+ $stack6 = $stack6.append("==");
+ base64Url = $stack6.toString();
+ goto label4;
+ label3:$stack6=new java.lang.StringBuilder;
+ $stack6#java.lang.StringBuilder();
+ $stack6 = $stack6.append(base64Url);
+ $stack6 = $stack6.append("=");
+ base64Url = $stack6.toString();
+ goto label4;
+ label1:$stack15=new java.lang.RuntimeException;
+ $stack15#java.lang.RuntimeException("Illegal base64url string!");
+ throw $stack15;
+ label4:return  base64Url;
+ } 
+

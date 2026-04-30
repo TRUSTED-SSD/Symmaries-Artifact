@@ -1,0 +1,33 @@
+static boolean org.apache.kerby.kerberos.kerb.crypto.util.Des:isWeakKey(byte[] key,int offset,int len)
+{
+boolean match;
+  byte[][] l4;
+  int l6;
+  byte[] weakKey;
+  int i;
+  byte $stack13;
+  byte $stack14;
+  l4=org.apache.kerby.kerberos.kerb.crypto.util.Des.WEAK_KEYS;
+ offset=#l4;
+ l6=0;
+ label0:if (l6>=offset) goto label1;
+ weakKey=l4[l6];
+ match=1;
+ i=#weakKey;
+ if (i!=len) goto label2;
+ i=0;
+ label3:if (i>=len) goto label2;
+ $stack14=weakKey[i];
+ $stack13=key[i];
+ if ($stack14==$stack13) goto label4;
+ match=0;
+ goto label2;
+ label4:i=(i+1);
+ goto label3;
+ label2:if (match==0) goto label5;
+ return  1;
+ label5:l6=(l6+1);
+ goto label0;
+ label1:return  0;
+ } 
+

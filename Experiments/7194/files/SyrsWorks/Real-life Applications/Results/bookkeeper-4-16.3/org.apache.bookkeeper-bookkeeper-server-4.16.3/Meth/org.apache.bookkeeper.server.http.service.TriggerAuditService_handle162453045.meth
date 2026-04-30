@@ -1,0 +1,56 @@
+org.apache.bookkeeper.http.service.HttpServiceResponse org.apache.bookkeeper.server.http.service.TriggerAuditService:handle(org.apache.bookkeeper.http.service.HttpServiceRequest request)
+{
+org.apache.bookkeeper.http.service.HttpServiceResponse response;
+  java.lang.Exception e;
+  org.apache.bookkeeper.http.HttpServer$Method $stack5;
+  org.apache.bookkeeper.http.HttpServer$Method $stack6;
+  org.apache.bookkeeper.http.HttpServer$StatusCode $stack7;
+  org.apache.bookkeeper.client.BookKeeperAdmin $stack10;
+  org.slf4j.Logger $stack14;
+  boolean $stack15;
+  java.lang.StringBuilder $stack16;
+  java.lang.String $stack19;
+  response=new org.apache.bookkeeper.http.service.HttpServiceResponse;
+ response#org.apache.bookkeeper.http.service.HttpServiceResponse();
+ $stack5=org.apache.bookkeeper.http.HttpServer$Method.PUT;
+ $stack6 = request.getMethod();
+ if ($stack5!=$stack6) goto label0;
+ label1:$stack10=this.bka;
+ $stack10.triggerAudit();
+ label2:goto label3;
+ label4:e = catch;
+ $stack14=org.apache.bookkeeper.server.http.service.TriggerAuditService.LOG;
+ $stack14.error("Meet Exception: ",(java.lang.Throwable)e);
+ $stack7=org.apache.bookkeeper.http.HttpServer$StatusCode.NOT_FOUND;
+ response.setCode($stack7);
+ $stack16=new java.lang.StringBuilder;
+ $stack16#java.lang.StringBuilder();
+ $stack16 = $stack16.append("Exception when do operation.");
+ $stack19 = e.getMessage();
+ $stack16 = $stack16.append($stack19);
+ $stack19 = $stack16.toString();
+ response.setBody($stack19);
+ return  response;
+ label3:$stack7=org.apache.bookkeeper.http.HttpServer$StatusCode.OK;
+ response.setCode($stack7);
+ response.setBody("Success trigger audit.");
+ $stack14=org.apache.bookkeeper.server.http.service.TriggerAuditService.LOG;
+ $stack15 = $stack14.isDebugEnabled();
+ if ($stack15==0) goto label5;
+ $stack14=org.apache.bookkeeper.server.http.service.TriggerAuditService.LOG;
+ $stack16=new java.lang.StringBuilder;
+ $stack16#java.lang.StringBuilder();
+ $stack16 = $stack16.append("response body:");
+ $stack19 = response.getBody();
+ $stack16 = $stack16.append($stack19);
+ $stack19 = $stack16.toString();
+ dummyClass.lowSink($stack19);
+$stack14.debug($stack19);
+ label5:return  response;
+ label0:$stack7=org.apache.bookkeeper.http.HttpServer$StatusCode.NOT_FOUND;
+ response.setCode($stack7);
+ response.setBody("Not found method. Should be PUT method");
+ return  response;
+ catch java.lang.Exception: label1 - label2 : label4;
+} 
+

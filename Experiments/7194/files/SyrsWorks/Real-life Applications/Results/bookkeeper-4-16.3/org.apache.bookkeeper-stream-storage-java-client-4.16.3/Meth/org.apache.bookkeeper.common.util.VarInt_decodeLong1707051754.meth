@@ -1,0 +1,39 @@
+static long org.apache.bookkeeper.common.util.VarInt:decodeLong(java.io.InputStream buf)
+{
+long result;
+  int shift;
+  int b;
+  long bits;
+  int $stack8;
+  java.io.IOException $stack9;
+  byte $stack14;
+  java.io.EOFException $stack23;
+  result=0L;
+ shift=0;
+ label0:b = buf.read();
+dummyClass.highSourceMut(b);
+ if (b>=0) goto label1;
+ if (shift!=0) goto label2;
+ $stack23=new java.io.EOFException;
+ $stack23#java.io.EOFException();
+ throw $stack23;
+ label2:$stack9=new java.io.IOException;
+ $stack9#java.io.IOException("varint not terminated");
+ throw $stack9;
+ label1:$stack8=(b & 127);
+ bits=(long) $stack8;
+ if (shift>=64) goto label3;
+ if (shift!=63) goto label4;
+ $stack14=(bits cmp 1L);
+ if ($stack14<=0) goto label4;
+ label3:$stack9=new java.io.IOException;
+ $stack9#java.io.IOException("varint too long");
+ throw $stack9;
+ label4:bits=(bits<<shift);
+ result=(result | bits);
+ shift=(shift+7);
+ b=(b & 128);
+ if (b!=0) goto label0;
+ return  result;
+ } 
+

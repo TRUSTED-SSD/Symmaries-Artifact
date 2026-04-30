@@ -1,0 +1,27 @@
+void org.apache.rocketmq.tieredstore.container.TieredIndexFile:initIndexFileHeader(org.apache.rocketmq.store.logfile.MappedFile mappedFile)
+{
+java.nio.MappedByteBuffer mappedByteBuffer;
+  int i;
+  int $stack11;
+  mappedByteBuffer = mappedFile.getMappedByteBuffer();
+ i = mappedByteBuffer.getInt(0);
+ if (i==-1127939447) goto label0;
+ mappedByteBuffer.putInt(0,-1127939447);
+ mappedByteBuffer.putLong(4,-1L);
+ mappedByteBuffer.putLong(12,-1L);
+ mappedByteBuffer.putInt(20,0);
+ mappedByteBuffer.putInt(24,0);
+ i=0;
+ label1:$stack11=this.maxHashSlotNum;
+ if (i>=$stack11) goto label2;
+ $stack11=(i * 8);
+ $stack11=(28+$stack11);
+ mappedByteBuffer.putInt($stack11,-1);
+ i=(i+1);
+ goto label1;
+ label2:i=this.fileMaxSize;
+ i=(i-4);
+ mappedByteBuffer.putInt(i,-1);
+ label0:return;
+ } 
+

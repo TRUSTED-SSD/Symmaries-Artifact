@@ -1,0 +1,28 @@
+static void org.apache.rocketmq.common.utils.ThreadUtils:shutdownGracefully(java.util.concurrent.ExecutorService executor,long timeout,java.util.concurrent.TimeUnit timeUnit)
+{
+java.lang.InterruptedException ie;
+  boolean $stack5;
+  java.lang.Object[] $stack8;
+  org.apache.rocketmq.logging.org.slf4j.Logger $stack9;
+  java.lang.String $stack10;
+  java.lang.Thread $stack13;
+  executor.shutdown();
+ label0:$stack5 = executor.awaitTermination(timeout,timeUnit);
+ if ($stack5!=0) goto label1;
+ executor.shutdownNow();
+ $stack5 = executor.awaitTermination(timeout,timeUnit);
+ if ($stack5!=0) goto label1;
+ $stack9=org.apache.rocketmq.common.utils.ThreadUtils.LOGGER;
+ $stack8=new java.lang.Object[1];
+ $stack8[0]=executor;
+ $stack10 = java.lang.String.format("%s didn\'t terminate!",$stack8);
+ $stack9.warn($stack10);
+ label1:goto label2;
+ label3:ie = catch;
+ executor.shutdownNow();
+ $stack13 = java.lang.Thread.currentThread();
+ $stack13.interrupt();
+ label2:return;
+ catch java.lang.InterruptedException: label0 - label1 : label3;
+} 
+

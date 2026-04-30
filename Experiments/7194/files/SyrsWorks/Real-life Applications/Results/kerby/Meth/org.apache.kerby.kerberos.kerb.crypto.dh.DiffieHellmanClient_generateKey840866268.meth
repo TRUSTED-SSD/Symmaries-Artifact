@@ -1,0 +1,29 @@
+org.apache.kerby.kerberos.kerb.type.base.EncryptionKey org.apache.kerby.kerberos.kerb.crypto.dh.DiffieHellmanClient:generateKey(byte[] @clientDhNonce,byte[] serverDhNonce,org.apache.kerby.kerberos.kerb.type.base.EncryptionType type)
+{
+byte[] dhSharedSecret;
+  byte[] x;
+  javax.crypto.KeyAgreement $stack7;
+  int $stack9;
+  org.apache.kerby.kerberos.kerb.type.base.EncryptionKey $stack11;
+  byte[] clientDhNonce;
+clientDhNonce=@clientDhNonce;
+$stack7=this.clientKeyAgree;
+ dhSharedSecret = $stack7.generateSecret();
+ x=dhSharedSecret;
+ if (clientDhNonce==null) goto label0;
+ $stack9=#clientDhNonce;
+ if ($stack9<=0) goto label0;
+ if (serverDhNonce==null) goto label0;
+ $stack9=#serverDhNonce;
+ if ($stack9<=0) goto label0;
+ x = this#org.apache.kerby.kerberos.kerb.crypto.dh.DiffieHellmanClient:concatenateBytes(dhSharedSecret,clientDhNonce);
+ x = this#org.apache.kerby.kerberos.kerb.crypto.dh.DiffieHellmanClient:concatenateBytes(x,serverDhNonce);
+ label0:$stack9=#dhSharedSecret;
+ $stack11=new org.apache.kerby.kerberos.kerb.type.base.EncryptionKey;
+ clientDhNonce = org.apache.kerby.kerberos.kerb.crypto.dh.OctetString2Key.kTruncate($stack9,x);
+ $stack11#org.apache.kerby.kerberos.kerb.type.base.EncryptionKey(type,clientDhNonce);
+ this.clientKey=$stack11;
+ $stack11=this.clientKey;
+ return  $stack11;
+ } 
+

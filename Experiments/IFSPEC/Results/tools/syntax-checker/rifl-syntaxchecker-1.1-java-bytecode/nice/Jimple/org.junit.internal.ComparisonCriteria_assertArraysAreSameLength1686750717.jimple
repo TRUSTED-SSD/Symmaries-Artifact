@@ -1,0 +1,103 @@
+    private int assertArraysAreSameLength(java.lang.Object, java.lang.Object, java.lang.String)
+    {
+        org.junit.internal.ComparisonCriteria this;
+        java.lang.Object expecteds, actuals;
+        java.lang.String header, $stack19;
+        int actualsLength, expectedsLength;
+        java.lang.StringBuilder $stack8;
+
+        this := @this: org.junit.internal.ComparisonCriteria;
+
+        expecteds := @parameter0: java.lang.Object;
+
+        actuals := @parameter1: java.lang.Object;
+
+        header := @parameter2: java.lang.String;
+
+        if expecteds != null goto label1;
+/*67*/
+
+        $stack8 = new java.lang.StringBuilder;
+/*68*/
+
+        specialinvoke $stack8.<java.lang.StringBuilder: void <init>()>();
+/*68*/
+
+        $stack8 = virtualinvoke $stack8.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>(header);
+/*68*/
+
+        $stack8 = virtualinvoke $stack8.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>("expected array was null");
+/*68*/
+
+        $stack19 = virtualinvoke $stack8.<java.lang.StringBuilder: java.lang.String toString()>();
+/*68*/
+
+        staticinvoke <org.junit.Assert: void fail(java.lang.String)>($stack19);
+/*68*/
+
+     label1:
+        if actuals != null goto label2;
+/*70*/
+
+        $stack8 = new java.lang.StringBuilder;
+/*71*/
+
+        specialinvoke $stack8.<java.lang.StringBuilder: void <init>()>();
+/*71*/
+
+        $stack8 = virtualinvoke $stack8.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>(header);
+/*71*/
+
+        $stack8 = virtualinvoke $stack8.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>("actual array was null");
+/*71*/
+
+        $stack19 = virtualinvoke $stack8.<java.lang.StringBuilder: java.lang.String toString()>();
+/*71*/
+
+        staticinvoke <org.junit.Assert: void fail(java.lang.String)>($stack19);
+/*71*/
+
+     label2:
+        actualsLength = staticinvoke <java.lang.reflect.Array: int getLength(java.lang.Object)>(actuals);
+/*73*/
+/*73*/
+
+        expectedsLength = staticinvoke <java.lang.reflect.Array: int getLength(java.lang.Object)>(expecteds);
+/*74*/
+/*74*/
+
+        if actualsLength == expectedsLength goto label3;
+/*75*/
+
+        $stack8 = new java.lang.StringBuilder;
+/*76*/
+
+        specialinvoke $stack8.<java.lang.StringBuilder: void <init>()>();
+/*76*/
+
+        $stack8 = virtualinvoke $stack8.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>(header);
+/*76*/
+
+        $stack8 = virtualinvoke $stack8.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>("array lengths differed, expected.length=");
+/*76*/
+
+        $stack8 = virtualinvoke $stack8.<java.lang.StringBuilder: java.lang.StringBuilder append(int)>(expectedsLength);
+/*76*/
+
+        $stack8 = virtualinvoke $stack8.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>(" actual.length=");
+/*76*/
+
+        $stack8 = virtualinvoke $stack8.<java.lang.StringBuilder: java.lang.StringBuilder append(int)>(actualsLength);
+/*76*/
+
+        header = virtualinvoke $stack8.<java.lang.StringBuilder: java.lang.String toString()>();
+/*76*/
+
+        staticinvoke <org.junit.Assert: void fail(java.lang.String)>(header);
+/*76*/
+
+     label3:
+        return expectedsLength;
+/*79*/
+    }
+

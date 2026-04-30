@@ -1,0 +1,46 @@
+static org.apache.rocketmq.broker.BrokerController org.apache.rocketmq.broker.BrokerStartup:start(org.apache.rocketmq.broker.BrokerController controller)
+{
+java.lang.String tip;
+  java.lang.Object[] $stack2;
+  org.apache.rocketmq.common.BrokerConfig $stack5;
+  org.apache.rocketmq.remoting.protocol.SerializeType $stack10;
+  java.lang.String $stack14;
+  org.apache.rocketmq.logging.org.slf4j.Logger $stack15;
+  java.io.PrintStream $stack17;
+  java.lang.StringBuilder $stack19;
+  java.lang.Throwable $stack32;
+  label0:controller.start();
+ $stack2=new java.lang.Object[3];
+ $stack5 = controller.getBrokerConfig();
+ tip = $stack5.getBrokerName();
+ $stack2[0]=tip;
+ tip = controller.getBrokerAddr();
+ $stack2[1]=tip;
+ $stack10 = org.apache.rocketmq.remoting.protocol.RemotingCommand.getSerializeTypeConfigInThisServer();
+ $stack2[2]=$stack10;
+ tip = java.lang.String.format("The broker[%s, %s] boot success. serializeType=%s",$stack2);
+ $stack5 = controller.getBrokerConfig();
+ $stack14 = $stack5.getNamesrvAddr();
+ if (null==$stack14) goto label1;
+ $stack19=new java.lang.StringBuilder;
+ $stack19#java.lang.StringBuilder();
+ $stack19 = $stack19.append(tip);
+ $stack19 = $stack19.append(" and name server is ");
+ $stack5 = controller.getBrokerConfig();
+ tip = $stack5.getNamesrvAddr();
+ $stack19 = $stack19.append(tip);
+ tip = $stack19.toString();
+ label1:$stack15=org.apache.rocketmq.broker.BrokerStartup.log;
+ $stack15.info(tip);
+ $stack17=java.lang.System.out;
+ $stack2=new java.lang.Object[1];
+ $stack2[0]=tip;
+ $stack17.printf("%s%n",$stack2);
+ label2:return  controller;
+ label3:$stack32 = catch;
+ $stack32.printStackTrace();
+ java.lang.System.exit(-1);
+ return  null;
+ catch java.lang.Throwable: label0 - label2 : label3;
+} 
+

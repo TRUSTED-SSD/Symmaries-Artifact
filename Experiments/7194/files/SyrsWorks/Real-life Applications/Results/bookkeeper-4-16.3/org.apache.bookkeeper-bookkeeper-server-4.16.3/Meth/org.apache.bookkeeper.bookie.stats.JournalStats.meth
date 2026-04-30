@@ -1,0 +1,55 @@
+org.apache.bookkeeper.bookie.stats.JournalStats(org.apache.bookkeeper.stats.StatsLogger statsLogger,long maxJournalMemoryBytes,java.util.function.Supplier currentJournalMemoryBytes)
+{
+org.apache.bookkeeper.stats.OpStatsLogger $stack5;
+  org.apache.bookkeeper.stats.Counter $stack16;
+  org.apache.bookkeeper.bookie.stats.JournalStats$1 $stack22;
+  org.apache.bookkeeper.stats.Gauge $stack23;
+  org.apache.bookkeeper.bookie.stats.JournalStats$2 $stack24;
+  this#java.lang.Object();
+ $stack5 = statsLogger.getOpStatsLogger("JOURNAL_ADD_ENTRY");
+ this.journalAddEntryStats=$stack5;
+ $stack5 = statsLogger.getOpStatsLogger("JOURNAL_FORCE_LEDGER");
+ this.journalForceLedgerStats=$stack5;
+ $stack5 = statsLogger.getOpStatsLogger("JOURNAL_SYNC");
+ this.journalSyncStats=$stack5;
+ $stack5 = statsLogger.getOpStatsLogger("JOURNAL_FORCE_WRITE_ENQUEUE");
+ this.fwEnqueueTimeStats=$stack5;
+ $stack5 = statsLogger.getOpStatsLogger("JOURNAL_CREATION_LATENCY");
+ this.journalCreationStats=$stack5;
+ $stack5 = statsLogger.getOpStatsLogger("JOURNAL_FLUSH_LATENCY");
+ this.journalFlushStats=$stack5;
+ $stack5 = statsLogger.getOpStatsLogger("JOURNAL_QUEUE_LATENCY");
+ this.journalQueueStats=$stack5;
+ $stack5 = statsLogger.getOpStatsLogger("JOURNAL_PROCESS_TIME_LATENCY");
+ this.journalProcessTimeStats=$stack5;
+ $stack5 = statsLogger.getOpStatsLogger("JOURNAL_FORCE_WRITE_GROUPING_TOTAL");
+ this.forceWriteGroupingCountStats=$stack5;
+ $stack5 = statsLogger.getOpStatsLogger("JOURNAL_FORCE_WRITE_BATCH_ENTRIES");
+ this.forceWriteBatchEntriesStats=$stack5;
+ $stack5 = statsLogger.getOpStatsLogger("JOURNAL_FORCE_WRITE_BATCH_BYTES");
+ this.forceWriteBatchBytesStats=$stack5;
+ $stack16 = statsLogger.getCounter("JOURNAL_QUEUE_SIZE");
+ this.journalQueueSize=$stack16;
+ $stack16 = statsLogger.getCounter("JOURNAL_FORCE_WRITE_QUEUE_SIZE");
+ this.forceWriteQueueSize=$stack16;
+ $stack16 = statsLogger.getCounter("JOURNAL_NUM_FLUSH_MAX_WAIT");
+ this.flushMaxWaitCounter=$stack16;
+ $stack16 = statsLogger.getCounter("JOURNAL_NUM_FLUSH_MAX_OUTSTANDING_BYTES");
+ this.flushMaxOutstandingBytesCounter=$stack16;
+ $stack16 = statsLogger.getCounter("JOURNAL_NUM_FLUSH_EMPTY_QUEUE");
+ this.flushEmptyQueueCounter=$stack16;
+ $stack16 = statsLogger.getCounter("JOURNAL_WRITE_BYTES");
+ this.journalWriteBytes=$stack16;
+ $stack22=new org.apache.bookkeeper.bookie.stats.JournalStats$1;
+ $stack22#org.apache.bookkeeper.bookie.stats.JournalStats$1(this,maxJournalMemoryBytes);
+ this.journalMemoryMaxStats=$stack22;
+ $stack23=this.journalMemoryMaxStats;
+ statsLogger.registerGauge("JOURNAL_MEMORY_MAX",$stack23);
+ $stack24=new org.apache.bookkeeper.bookie.stats.JournalStats$2;
+ $stack24#org.apache.bookkeeper.bookie.stats.JournalStats$2(this,currentJournalMemoryBytes);
+ this.journalMemoryUsedStats=$stack24;
+ $stack23=this.journalMemoryUsedStats;
+ statsLogger.registerGauge("JOURNAL_MEMORY_USED",$stack23);
+ return;
+ } 
+

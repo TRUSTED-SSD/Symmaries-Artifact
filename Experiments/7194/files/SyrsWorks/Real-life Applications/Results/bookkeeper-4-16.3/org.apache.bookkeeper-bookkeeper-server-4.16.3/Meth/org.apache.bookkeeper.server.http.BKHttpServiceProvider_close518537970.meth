@@ -1,0 +1,38 @@
+void org.apache.bookkeeper.server.http.BKHttpServiceProvider:close()
+{
+java.lang.Exception ie;
+  java.util.concurrent.ExecutorService $stack2;
+  org.apache.bookkeeper.client.BookKeeperAdmin $stack3;
+  java.lang.InterruptedException $stack5;
+  java.lang.Thread $stack6;
+  org.slf4j.Logger $stack7;
+  java.io.IOException $stack8;
+  org.apache.bookkeeper.client.BKException $stack9;
+  label0:$stack2=this.executor;
+ $stack2.shutdown();
+ $stack3=this.bka;
+ if ($stack3==null) goto label1;
+ $stack3=this.bka;
+ $stack3.close();
+ label1:goto label2;
+ label3:$stack5 = catch;
+ ie=$stack5;
+ $stack6 = java.lang.Thread.currentThread();
+ $stack6.interrupt();
+ $stack7=org.apache.bookkeeper.server.http.BKHttpServiceProvider.log;
+ $stack7.error("Interruption while closing BKHttpServiceProvider",(java.lang.Throwable)$stack5);
+ $stack8=new java.io.IOException;
+ $stack8#java.io.IOException("Interruption while closing BKHttpServiceProvider",(java.lang.Throwable)$stack5);
+ throw $stack8;
+ label4:$stack9 = catch;
+ ie=$stack9;
+ $stack7=org.apache.bookkeeper.server.http.BKHttpServiceProvider.log;
+ $stack7.error("Error while closing BKHttpServiceProvider",(java.lang.Throwable)$stack9);
+ $stack8=new java.io.IOException;
+ $stack8#java.io.IOException("Error while closing BKHttpServiceProvider",(java.lang.Throwable)$stack9);
+ throw $stack8;
+ label2:return;
+ catch java.lang.InterruptedException: label0 - label1 : label3;
+catch org.apache.bookkeeper.client.BKException: label0 - label1 : label4;
+} 
+

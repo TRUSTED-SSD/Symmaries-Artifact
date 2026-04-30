@@ -1,0 +1,25 @@
+static int org.apache.bookkeeper.common.util.VarInt:decodeInt(java.io.InputStream buf)
+{
+long r;
+  byte $stack4;
+  java.io.IOException $stack5;
+  java.lang.StringBuilder $stack6;
+  java.lang.String $stack9;
+  int $stack11;
+  r = org.apache.bookkeeper.common.util.VarInt.decodeLong(buf);
+ $stack4=(r cmp 0L);
+ if ($stack4<0) goto label0;
+ $stack4=(r cmp 4294967296L);
+ if ($stack4<0) goto label1;
+ label0:$stack5=new java.io.IOException;
+ $stack6=new java.lang.StringBuilder;
+ $stack6#java.lang.StringBuilder();
+ $stack6 = $stack6.append("var int overflow ");
+ $stack6 = $stack6.append(r);
+ $stack9 = $stack6.toString();
+ $stack5#java.io.IOException($stack9);
+ throw $stack5;
+ label1:$stack11=(int) r;
+ return  $stack11;
+ } 
+

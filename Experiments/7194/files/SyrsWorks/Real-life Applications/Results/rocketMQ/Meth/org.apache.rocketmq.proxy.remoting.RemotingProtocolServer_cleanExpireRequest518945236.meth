@@ -1,0 +1,27 @@
+void org.apache.rocketmq.proxy.remoting.RemotingProtocolServer:cleanExpireRequest()
+{
+org.apache.rocketmq.proxy.config.ProxyConfig config;
+  java.util.concurrent.ThreadPoolExecutor $stack3;
+  long $stack4;
+  config = org.apache.rocketmq.proxy.config.ConfigurationManager.getProxyConfig();
+ $stack3=this.sendMessageExecutor;
+ $stack4 = config.getRemotingWaitTimeMillsInSendQueue();
+ this.cleanExpiredRequestInQueue($stack3,$stack4);
+ $stack3=this.pullMessageExecutor;
+ $stack4 = config.getRemotingWaitTimeMillsInPullQueue();
+ this.cleanExpiredRequestInQueue($stack3,$stack4);
+ $stack3=this.heartbeatExecutor;
+ $stack4 = config.getRemotingWaitTimeMillsInHeartbeatQueue();
+ this.cleanExpiredRequestInQueue($stack3,$stack4);
+ $stack3=this.updateOffsetExecutor;
+ $stack4 = config.getRemotingWaitTimeMillsInUpdateOffsetQueue();
+ this.cleanExpiredRequestInQueue($stack3,$stack4);
+ $stack3=this.topicRouteExecutor;
+ $stack4 = config.getRemotingWaitTimeMillsInTopicRouteQueue();
+ this.cleanExpiredRequestInQueue($stack3,$stack4);
+ $stack3=this.defaultExecutor;
+ $stack4 = config.getRemotingWaitTimeMillsInDefaultQueue();
+ this.cleanExpiredRequestInQueue($stack3,$stack4);
+ return;
+ } 
+

@@ -1,0 +1,25 @@
+static void org.apache.rocketmq.broker.metrics.BrokerMetricsManager:lambda$null$6(io.opentelemetry.api.metrics.ObservableLongMeasurement measurement,org.apache.rocketmq.broker.metrics.ProducerAttr attr,java.lang.Integer count)
+{
+io.opentelemetry.api.common.Attributes attributes;
+  io.opentelemetry.api.common.AttributesBuilder $stack4;
+  org.apache.rocketmq.remoting.protocol.LanguageCode $stack5;
+  java.lang.String $stack7;
+  int $stack10;
+  long $stack18;
+  $stack4 = org.apache.rocketmq.broker.metrics.BrokerMetricsManager.newAttributesBuilder();
+ $stack5=attr.language;
+ $stack7 = $stack5.name();
+ $stack7 = $stack7.toLowerCase();
+ $stack4 = $stack4.put("language",$stack7);
+ $stack10=attr.version;
+ $stack7 = org.apache.rocketmq.common.MQVersion.getVersionDesc($stack10);
+ $stack7 = $stack7.toLowerCase();
+ $stack4 = $stack4.put("version",$stack7);
+ $stack4 = $stack4.put("protocol_type","remoting");
+ attributes = $stack4.build();
+ $stack10 = count.intValue();
+ $stack18=(long) $stack10;
+ measurement.record($stack18,attributes);
+ return;
+ } 
+

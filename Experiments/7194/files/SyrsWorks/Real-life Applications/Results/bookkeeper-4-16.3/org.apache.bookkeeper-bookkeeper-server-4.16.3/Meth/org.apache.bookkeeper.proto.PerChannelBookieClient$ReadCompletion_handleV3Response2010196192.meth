@@ -1,0 +1,47 @@
+void org.apache.bookkeeper.proto.PerChannelBookieClient$ReadCompletion:handleV3Response(org.apache.bookkeeper.proto.BookkeeperProtocol$Response response)
+{
+org.apache.bookkeeper.proto.BookkeeperProtocol$ReadResponse readResponse;
+  org.apache.bookkeeper.proto.BookkeeperProtocol$StatusCode status;
+  io.netty.buffer.ByteBuf buffer;
+  long maxLAC;
+  long lacUpdateTimestamp;
+  org.apache.bookkeeper.proto.PerChannelBookieClient $stack9;
+  org.apache.bookkeeper.stats.Counter $stack10;
+  org.apache.bookkeeper.proto.BookkeeperProtocol$StatusCode $stack13;
+  boolean $stack15;
+  long $stack18;
+  long $stack19;
+  com.google.protobuf.ByteString $stack33;
+  java.nio.ByteBuffer $stack34;
+  $stack9=this.this$0;
+ $stack10 = org.apache.bookkeeper.proto.PerChannelBookieClient.access$2400($stack9);
+ $stack10.dec();
+ readResponse = response.getReadResponse();
+ status = response.getStatus();
+ $stack13=org.apache.bookkeeper.proto.BookkeeperProtocol$StatusCode.EOK;
+ if (status!=$stack13) goto label0;
+ status = readResponse.getStatus();
+ goto label1;
+ label0:status = response.getStatus();
+ label1:buffer=io.netty.buffer.Unpooled.EMPTY_BUFFER;
+ $stack15 = readResponse.hasBody();
+ if ($stack15==0) goto label2;
+ $stack33 = readResponse.getBody();
+ $stack34 = $stack33.asReadOnlyByteBuffer();
+dummyClass.highSourceMut($stack34);
+ buffer = io.netty.buffer.Unpooled.wrappedBuffer($stack34);
+ label2:maxLAC=-1L;
+ $stack15 = readResponse.hasMaxLAC();
+ if ($stack15==0) goto label3;
+ maxLAC = readResponse.getMaxLAC();
+ label3:lacUpdateTimestamp=-1L;
+ $stack15 = readResponse.hasLacUpdateTimestamp();
+ if ($stack15==0) goto label4;
+ lacUpdateTimestamp = readResponse.getLacUpdateTimestamp();
+ label4:$stack18 = readResponse.getLedgerId();
+ $stack19 = readResponse.getEntryId();
+ this#org.apache.bookkeeper.proto.PerChannelBookieClient$ReadCompletion:handleReadResponse($stack18,$stack19,status,buffer,maxLAC,lacUpdateTimestamp);
+ io.netty.util.ReferenceCountUtil.release((java.lang.Object)buffer);
+ return;
+ } 
+

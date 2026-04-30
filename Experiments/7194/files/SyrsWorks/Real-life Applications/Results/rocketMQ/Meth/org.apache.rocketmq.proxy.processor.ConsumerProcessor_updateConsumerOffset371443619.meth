@@ -1,0 +1,42 @@
+java.util.concurrent.CompletableFuture org.apache.rocketmq.proxy.processor.ConsumerProcessor:updateConsumerOffset(org.apache.rocketmq.proxy.common.ProxyContext ctx,org.apache.rocketmq.common.message.MessageQueue messageQueue,java.lang.String @consumerGroup,long commitOffset,long timeoutMillis)
+{
+java.util.concurrent.CompletableFuture future;
+  org.apache.rocketmq.proxy.service.route.AddressableMessageQueue addressableMessageQueue;
+  org.apache.rocketmq.remoting.protocol.header.UpdateConsumerOffsetRequestHeader requestHeader;
+  org.apache.rocketmq.proxy.service.ServiceManager $stack12;
+  org.apache.rocketmq.proxy.service.route.TopicRouteService $stack13;
+  int $stack17;
+  java.lang.Integer $stack18;
+  java.lang.Long $stack19;
+  org.apache.rocketmq.proxy.service.message.MessageService $stack21;
+  java.util.concurrent.ExecutorService $stack23;
+  java.lang.Throwable $stack25;
+  java.lang.String consumerGroup;
+consumerGroup=@consumerGroup;
+future=new java.util.concurrent.CompletableFuture;
+ future#java.util.concurrent.CompletableFuture();
+ label0:$stack12=this.serviceManager;
+ $stack13 = $stack12.getTopicRouteService();
+ addressableMessageQueue = $stack13.buildAddressableMessageQueue(messageQueue);
+ requestHeader=new org.apache.rocketmq.remoting.protocol.header.UpdateConsumerOffsetRequestHeader;
+ requestHeader#org.apache.rocketmq.remoting.protocol.header.UpdateConsumerOffsetRequestHeader();
+ requestHeader.setConsumerGroup(consumerGroup);
+ consumerGroup = addressableMessageQueue.getTopic();
+ requestHeader.setTopic(consumerGroup);
+ $stack17 = addressableMessageQueue.getQueueId();
+ $stack18 = java.lang.Integer.valueOf($stack17);
+ requestHeader.setQueueId($stack18);
+ $stack19 = java.lang.Long.valueOf(commitOffset);
+ requestHeader.setCommitOffset($stack19);
+ $stack12=this.serviceManager;
+ $stack21 = $stack12.getMessageService();
+ future = $stack21.updateConsumerOffset(ctx,addressableMessageQueue,requestHeader,timeoutMillis);
+ label1:goto label2;
+ label3:$stack25 = catch;
+ future.completeExceptionally($stack25);
+ label2:$stack23=this.executor;
+ future = org.apache.rocketmq.proxy.common.utils.FutureUtils.addExecutor(future,$stack23);
+ return  future;
+ catch java.lang.Throwable: label0 - label1 : label3;
+} 
+

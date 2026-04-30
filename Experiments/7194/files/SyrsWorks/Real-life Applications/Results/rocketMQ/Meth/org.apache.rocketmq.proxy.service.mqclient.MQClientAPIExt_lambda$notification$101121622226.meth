@@ -1,0 +1,37 @@
+static void org.apache.rocketmq.proxy.service.mqclient.MQClientAPIExt:lambda$notification$10(java.util.concurrent.CompletableFuture future,org.apache.rocketmq.remoting.netty.ResponseFuture responseFuture)
+{
+org.apache.rocketmq.remoting.protocol.RemotingCommand response;
+  org.apache.rocketmq.remoting.protocol.header.NotificationResponseHeader responseHeader;
+  org.apache.rocketmq.client.exception.MQClientException $stack5;
+  boolean $stack6;
+  int $stack7;
+  org.apache.rocketmq.client.exception.MQBrokerException $stack8;
+  java.lang.String $stack10;
+  org.apache.rocketmq.remoting.CommandCustomHeader $stack12;
+  java.lang.Boolean $stack14;
+  java.lang.Throwable $stack16;
+  response = responseFuture.getResponseCommand();
+ if (response==null) goto label0;
+ $stack7 = response.getCode();
+ if ($stack7!=0) goto label1;
+ label2:$stack12 = response.decodeCommandCustomHeader(org.apache.rocketmq.remoting.protocol.header.NotificationResponseHeader);
+ responseHeader=(org.apache.rocketmq.remoting.protocol.header.NotificationResponseHeader) $stack12;
+ $stack6 = responseHeader.isHasMsg();
+ $stack14 = java.lang.Boolean.valueOf($stack6);
+ future.complete((java.lang.Object)$stack14);
+ label3:goto label4;
+ label5:$stack16 = catch;
+ future.completeExceptionally($stack16);
+ goto label4;
+ label1:$stack8=new org.apache.rocketmq.client.exception.MQBrokerException;
+ $stack7 = response.getCode();
+ $stack10 = response.getRemark();
+ $stack8#org.apache.rocketmq.client.exception.MQBrokerException($stack7,$stack10);
+ future.completeExceptionally((java.lang.Throwable)$stack8);
+ goto label4;
+ label0:$stack5 = org.apache.rocketmq.proxy.service.mqclient.MQClientAPIExt.processNullResponseErr(responseFuture);
+ future.completeExceptionally((java.lang.Throwable)$stack5);
+ label4:return;
+ catch java.lang.Throwable: label2 - label3 : label5;
+} 
+

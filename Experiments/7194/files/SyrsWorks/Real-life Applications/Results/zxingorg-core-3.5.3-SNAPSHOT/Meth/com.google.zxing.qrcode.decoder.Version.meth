@@ -1,0 +1,34 @@
+com.google.zxing.qrcode.decoder.Version(int versionNumber,int[] alignmentPatternCenters,com.google.zxing.qrcode.decoder.Version$ECBlocks[] ecBlocks)
+{
+int ecCodewords;
+  com.google.zxing.qrcode.decoder.Version$ECB[] l7;
+  int l8;
+  int l9;
+  com.google.zxing.qrcode.decoder.Version$ECB ecBlock;
+  com.google.zxing.qrcode.decoder.Version$ECBlocks $stack11;
+  int $stack15;
+  int $stack16;
+  this#java.lang.Object();
+ this.versionNumber=versionNumber;
+ this.alignmentPatternCenters=alignmentPatternCenters;
+ this.ecBlocks=ecBlocks;
+ versionNumber=0;
+ $stack11=ecBlocks[0];
+ ecCodewords = $stack11.getECCodewordsPerBlock();
+ $stack11=ecBlocks[0];
+ l7 = $stack11.getECBlocks();
+ l8=#l7;
+ l9=0;
+ label0:if (l9>=l8) goto label1;
+ ecBlock=l7[l9];
+ $stack15 = ecBlock.getCount();
+ $stack16 = ecBlock.getDataCodewords();
+ $stack16=($stack16+ecCodewords);
+ $stack15=($stack15 * $stack16);
+ versionNumber=(versionNumber+$stack15);
+ l9=(l9+1);
+ goto label0;
+ label1:this.totalCodewords=versionNumber;
+ return;
+ } 
+

@@ -1,0 +1,43 @@
+io.netty.buffer.ByteBuf org.apache.bookkeeper.bookie.FileInfo:getExplicitLac()
+{
+io.netty.buffer.ByteBuf retLac;
+  org.apache.bookkeeper.bookie.FileInfo l2;
+  java.lang.Throwable l3;
+  org.slf4j.Logger $stack5;
+  boolean $stack6;
+  java.nio.ByteBuffer $stack7;
+  int $stack10;
+  retLac=null;
+ l2=this;
+ monitorenter this;
+ label0:$stack5=org.apache.bookkeeper.bookie.FileInfo.LOG;
+ $stack6 = $stack5.isDebugEnabled();
+ if ($stack6==0) goto label1;
+ $stack5=org.apache.bookkeeper.bookie.FileInfo.LOG;
+ $stack7=this.explicitLac;
+ dummyClass.lowSink("fileInfo:GetLac: {}");
+$stack5.debug("fileInfo:GetLac: {}",(java.lang.Object)$stack7);
+ label1:$stack7=this.explicitLac;
+ if ($stack7==null) goto label2;
+ $stack7=this.explicitLac;
+ $stack10 = $stack7.capacity();
+ retLac = io.netty.buffer.Unpooled.buffer($stack10);
+ $stack7=this.explicitLac;
+ $stack7.rewind();
+ $stack7=this.explicitLac;
+ retLac.writeBytes($stack7);
+ $stack7=this.explicitLac;
+ $stack7.rewind();
+ monitorexit this;
+ label3:return  retLac;
+ label2:monitorexit this;
+ label4:goto label5;
+ label6:l3 = catch;
+ monitorexit this;
+ label7:throw l3;
+ label5:return  null;
+ catch java.lang.Throwable: label0 - label3 : label6;
+catch java.lang.Throwable: label2 - label4 : label6;
+catch java.lang.Throwable: label6 - label7 : label6;
+} 
+

@@ -1,0 +1,149 @@
+    protected void doStart()
+    {
+        org.apache.bookkeeper.stream.server.service.RegistrationStateService this;
+        org.apache.bookkeeper.discover.RegistrationManager $stack2;
+        org.apache.bookkeeper.discover.ZKRegistrationManager $stack3;
+        org.apache.bookkeeper.stream.server.service.RegistrationServiceProvider $stack4;
+        org.apache.bookkeeper.conf.ServerConfiguration $stack5;
+        org.apache.bookkeeper.zookeeper.ZooKeeperClient $stack6;
+        java.lang.String $stack8, $stack28;
+        org.apache.bookkeeper.discover.RegistrationManager$RegistrationListener $stack10;
+        org.apache.bookkeeper.bookie.BookieStateManager $stack11;
+        org.apache.bookkeeper.stats.StatsLogger $stack12;
+        java.util.List $stack16;
+        java.util.function.Supplier $stack17, $stack18;
+        java.util.concurrent.Future $stack21;
+        org.slf4j.Logger $stack24;
+        org.apache.bookkeeper.stream.proto.common.Endpoint $stack27;
+        java.lang.Exception $stack29;
+        java.lang.RuntimeException $stack30;
+
+        this := @this: org.apache.bookkeeper.stream.server.service.RegistrationStateService;
+
+        $stack2 = this.<org.apache.bookkeeper.stream.server.service.RegistrationStateService: org.apache.bookkeeper.discover.RegistrationManager regManager>;
+/*64*/
+
+        if null != $stack2 goto label4;
+/*64*/
+
+        $stack3 = new org.apache.bookkeeper.discover.ZKRegistrationManager;
+/*65*/
+
+        $stack5 = this.<org.apache.bookkeeper.stream.server.service.RegistrationStateService: org.apache.bookkeeper.conf.ServerConfiguration bkServerConf>;
+/*67*/
+
+        $stack4 = this.<org.apache.bookkeeper.stream.server.service.RegistrationStateService: org.apache.bookkeeper.stream.server.service.RegistrationServiceProvider regServiceProvider>;
+/*67*/
+
+        $stack6 = virtualinvoke $stack4.<org.apache.bookkeeper.stream.server.service.RegistrationServiceProvider: org.apache.bookkeeper.zookeeper.ZooKeeperClient getZkClient()>();
+/*67*/
+
+        $stack4 = this.<org.apache.bookkeeper.stream.server.service.RegistrationStateService: org.apache.bookkeeper.stream.server.service.RegistrationServiceProvider regServiceProvider>;
+/*68*/
+
+        $stack8 = virtualinvoke $stack4.<org.apache.bookkeeper.stream.server.service.RegistrationServiceProvider: java.lang.String getRegistrationPath()>();
+/*68*/
+
+        specialinvoke $stack3.<org.apache.bookkeeper.discover.ZKRegistrationManager: void <init>(org.apache.bookkeeper.conf.ServerConfiguration,org.apache.zookeeper.ZooKeeper,java.lang.String)>($stack5, $stack6, $stack8);
+/*68*/
+
+        this.<org.apache.bookkeeper.stream.server.service.RegistrationStateService: org.apache.bookkeeper.discover.RegistrationManager regManager> = $stack3;
+/*68*/
+
+        $stack2 = this.<org.apache.bookkeeper.stream.server.service.RegistrationStateService: org.apache.bookkeeper.discover.RegistrationManager regManager>;
+/*69*/
+
+        $stack10 = dynamicinvoke "onRegistrationExpired" <org.apache.bookkeeper.discover.RegistrationManager$RegistrationListener (org.apache.bookkeeper.stream.server.service.RegistrationStateService)>(this) <java.lang.invoke.LambdaMetafactory: java.lang.invoke.CallSite metafactory(java.lang.invoke.MethodHandles$Lookup,java.lang.String,java.lang.invoke.MethodType,java.lang.invoke.MethodType,java.lang.invoke.MethodHandle,java.lang.invoke.MethodType)>(class "()V", handle: <org.apache.bookkeeper.stream.server.service.RegistrationStateService: void lambda$doStart$0()>, class "()V");
+/*69*/
+
+        interfaceinvoke $stack2.<org.apache.bookkeeper.discover.RegistrationManager: void addRegistrationListener(org.apache.bookkeeper.discover.RegistrationManager$RegistrationListener)>($stack10);
+/*69*/
+
+     label1:
+        $stack11 = new org.apache.bookkeeper.bookie.BookieStateManager;
+/*79*/
+
+        $stack5 = this.<org.apache.bookkeeper.stream.server.service.RegistrationStateService: org.apache.bookkeeper.conf.ServerConfiguration bkServerConf>;
+/*81*/
+
+        $stack12 = this.<org.apache.bookkeeper.stream.server.service.RegistrationStateService: org.apache.bookkeeper.stats.StatsLogger statsLogger>;
+/*81*/
+
+        $stack12 = interfaceinvoke $stack12.<org.apache.bookkeeper.stats.StatsLogger: org.apache.bookkeeper.stats.StatsLogger scope(java.lang.String)>("state");
+/*81*/
+
+        $stack2 = this.<org.apache.bookkeeper.stream.server.service.RegistrationStateService: org.apache.bookkeeper.discover.RegistrationManager regManager>;
+/*83*/
+
+        $stack16 = staticinvoke <java.util.Collections: java.util.List emptyList()>();
+/*83*/
+
+        $stack17 = dynamicinvoke "get" <java.util.function.Supplier (org.apache.bookkeeper.stream.server.service.RegistrationStateService)>(this) <java.lang.invoke.LambdaMetafactory: java.lang.invoke.CallSite metafactory(java.lang.invoke.MethodHandles$Lookup,java.lang.String,java.lang.invoke.MethodType,java.lang.invoke.MethodType,java.lang.invoke.MethodHandle,java.lang.invoke.MethodType)>(class "()Ljava/lang/Object;", handle: <org.apache.bookkeeper.stream.server.service.RegistrationStateService: org.apache.bookkeeper.net.BookieId lambda$doStart$1()>, class "()Lorg/apache/bookkeeper/net/BookieId;");
+/*83*/
+
+        $stack18 = <org.apache.bookkeeper.discover.BookieServiceInfo: java.util.function.Supplier NO_INFO>;
+/*83*/
+
+        specialinvoke $stack11.<org.apache.bookkeeper.bookie.BookieStateManager: void <init>(org.apache.bookkeeper.conf.ServerConfiguration,org.apache.bookkeeper.stats.StatsLogger,org.apache.bookkeeper.discover.RegistrationManager,java.util.List,java.util.function.Supplier,java.util.function.Supplier)>($stack5, $stack12, $stack2, $stack16, $stack17, $stack18);
+/*83*/
+
+        this.<org.apache.bookkeeper.stream.server.service.RegistrationStateService: org.apache.bookkeeper.bookie.BookieStateManager stateManager> = $stack11;
+/*83*/
+
+        $stack11 = this.<org.apache.bookkeeper.stream.server.service.RegistrationStateService: org.apache.bookkeeper.bookie.BookieStateManager stateManager>;
+/*86*/
+
+        virtualinvoke $stack11.<org.apache.bookkeeper.bookie.BookieStateManager: void initState()>();
+/*86*/
+
+        $stack11 = this.<org.apache.bookkeeper.stream.server.service.RegistrationStateService: org.apache.bookkeeper.bookie.BookieStateManager stateManager>;
+/*87*/
+
+        $stack21 = virtualinvoke $stack11.<org.apache.bookkeeper.bookie.BookieStateManager: java.util.concurrent.Future registerBookie(boolean)>(1);
+/*87*/
+
+        interfaceinvoke $stack21.<java.util.concurrent.Future: java.lang.Object get()>();
+/*87*/
+
+        $stack24 = <org.apache.bookkeeper.stream.server.service.RegistrationStateService: org.slf4j.Logger log>;
+/*89*/
+
+        $stack4 = this.<org.apache.bookkeeper.stream.server.service.RegistrationStateService: org.apache.bookkeeper.stream.server.service.RegistrationServiceProvider regServiceProvider>;
+/*89*/
+
+        $stack8 = virtualinvoke $stack4.<org.apache.bookkeeper.stream.server.service.RegistrationServiceProvider: java.lang.String getRegistrationPath()>();
+/*89*/
+
+        $stack27 = this.<org.apache.bookkeeper.stream.server.service.RegistrationStateService: org.apache.bookkeeper.stream.proto.common.Endpoint myEndpoint>;
+/*89*/
+
+        $stack28 = staticinvoke <org.apache.bookkeeper.clients.utils.NetUtils: java.lang.String endpointToString(org.apache.bookkeeper.stream.proto.common.Endpoint)>($stack27);
+/*89*/
+
+        interfaceinvoke $stack24.<org.slf4j.Logger: void info(java.lang.String,java.lang.Object,java.lang.Object)>("Successfully register myself under registration path {}/{}", $stack8, $stack28);
+/*88*/
+
+     label2:
+        goto label4;
+/*92*/
+
+     label3:
+        $stack29 := @caughtexception;
+/*94*/
+
+        $stack30 = new java.lang.RuntimeException;
+/*91*/
+
+        specialinvoke $stack30.<java.lang.RuntimeException: void <init>(java.lang.String,java.lang.Throwable)>("Failed to intiailize a registration state service", $stack29);
+/*91*/
+
+        throw $stack30;
+/*91*/
+
+     label4:
+        return;
+/*94*/
+
+        catch java.lang.Exception from label1 to label2 with label3;
+    }
+

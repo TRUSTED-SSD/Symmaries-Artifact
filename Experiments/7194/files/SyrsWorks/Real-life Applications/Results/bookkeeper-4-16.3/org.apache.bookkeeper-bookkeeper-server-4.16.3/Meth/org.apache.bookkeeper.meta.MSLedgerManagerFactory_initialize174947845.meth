@@ -1,0 +1,49 @@
+org.apache.bookkeeper.meta.LedgerManagerFactory org.apache.bookkeeper.meta.MSLedgerManagerFactory:initialize(org.apache.bookkeeper.conf.AbstractConfiguration conf,org.apache.bookkeeper.meta.LayoutManager layoutManager,int factoryVersion)
+{
+org.apache.bookkeeper.meta.ZkLayoutManager zkLayoutManager;
+  java.lang.String msName;
+  boolean $stack7;
+  org.apache.zookeeper.ZooKeeper $stack8;
+  org.apache.bookkeeper.metastore.MetaStore $stack10;
+  java.lang.StringBuilder $stack15;
+  java.lang.Throwable $stack19;
+  java.io.IOException tmp$359640974;
+  org.apache.commons.configuration.Configuration tmp$596315652;
+  $stack7=layoutManager instanceof org.apache.bookkeeper.meta.ZkLayoutManager;
+ com.google.common.base.Preconditions.checkArgument($stack7);
+ zkLayoutManager=(org.apache.bookkeeper.meta.ZkLayoutManager) layoutManager;
+ if (1==factoryVersion) goto label0;
+ tmp$359640974=new java.io.IOException;
+ $stack15=new java.lang.StringBuilder;
+ $stack15#java.lang.StringBuilder();
+ $stack15 = $stack15.append("Incompatible layout version found : ");
+ $stack15 = $stack15.append(factoryVersion);
+ msName = $stack15.toString();
+ tmp$359640974#java.io.IOException(msName);
+ throw tmp$359640974;
+ label0:this.conf=conf;
+ $stack8 = zkLayoutManager.getZk();
+ this.zk=$stack8;
+ msName = conf.getMetastoreImplClass();
+ label1:$stack10 = org.apache.bookkeeper.metastore.MetastoreFactory.createMetaStore(msName);
+ this.metastore=$stack10;
+ $stack10=this.metastore;
+ factoryVersion = $stack10.getVersion();
+ $stack10=this.metastore;
+ tmp$596315652=(org.apache.commons.configuration.Configuration) conf;
+ $stack10.init(tmp$596315652,factoryVersion);
+ label2:goto label3;
+ label4:$stack19 = catch;
+ tmp$359640974=new java.io.IOException;
+ $stack15=new java.lang.StringBuilder;
+ $stack15#java.lang.StringBuilder();
+ $stack15 = $stack15.append("Failed to initialize metastore ");
+ $stack15 = $stack15.append(msName);
+ $stack15 = $stack15.append(" : ");
+ msName = $stack15.toString();
+ tmp$359640974#java.io.IOException(msName,$stack19);
+ throw tmp$359640974;
+ label3:return  this;
+ catch java.lang.Throwable: label1 - label2 : label4;
+} 
+

@@ -1,0 +1,43 @@
+long java.io.PushbackInputStream:skip(long l11)
+{
+byte $b0;
+  byte[] $r1;
+  int $i1;
+  int $i2;
+  int $i3;
+  byte $b4;
+  long $l5;
+  byte $b6;
+  int $i7;
+  long $l8;
+  long $l9;
+  int $i10;
+  long l12;
+  byte $b13;
+  this#java.io.PushbackInputStream:ensureOpen();
+ $b0=(l11 cmp 0L);
+ if ($b0>0) goto label0;
+ return  0L;
+ label0:$r1=this.buf;
+ $i2=#$r1;
+ $i1=this.pos;
+ $i3=($i2-$i1);
+ l12=(long) $i3;
+ $b4=(l12 cmp 0L);
+ if ($b4<=0) goto label1;
+ $b6=(l11 cmp l12);
+ if ($b6>=0) goto label2;
+ l12=l11;
+ label2:$i7=this.pos;
+ $l8=(long) $i7;
+ $l9=($l8+l12);
+ $i10=(int) $l9;
+ this.pos=$i10;
+ l11=(l11-l12);
+ label1:$b13=(l11 cmp 0L);
+ if ($b13<=0) goto label3;
+ $l5 = this#java.io.FilterInputStream:skip(l11);
+ l12=(l12+$l5);
+ label3:return  l12;
+ }  
+

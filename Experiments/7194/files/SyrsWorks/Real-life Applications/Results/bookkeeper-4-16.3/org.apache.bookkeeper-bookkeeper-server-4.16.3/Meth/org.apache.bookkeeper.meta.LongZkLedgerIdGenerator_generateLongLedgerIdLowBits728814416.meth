@@ -1,0 +1,26 @@
+void org.apache.bookkeeper.meta.LongZkLedgerIdGenerator:generateLongLedgerIdLowBits(java.lang.String @ledgerPrefix,long highBits,org.apache.bookkeeper.proto.BookkeeperInternalCallbacks$GenericCallback cb)
+{
+java.lang.String highPath;
+  java.lang.StringBuilder $stack6;
+  int $stack8;
+  org.apache.bookkeeper.meta.LongZkLedgerIdGenerator$1 $stack12;
+  org.apache.zookeeper.ZooKeeper $stack13;
+  java.util.List $stack15;
+  java.lang.String ledgerPrefix;
+ledgerPrefix=@ledgerPrefix;
+$stack6=new java.lang.StringBuilder;
+ $stack6#java.lang.StringBuilder();
+ $stack6 = $stack6.append(ledgerPrefix);
+ $stack8=(int) highBits;
+ highPath = this#org.apache.bookkeeper.meta.LongZkLedgerIdGenerator:formatHalfId($stack8);
+ $stack6 = $stack6.append(highPath);
+ highPath = $stack6.toString();
+ $stack12=new org.apache.bookkeeper.meta.LongZkLedgerIdGenerator$1;
+ $stack12#org.apache.bookkeeper.meta.LongZkLedgerIdGenerator$1(this,highBits,cb,ledgerPrefix);
+ $stack13=this.zk;
+ ledgerPrefix = org.apache.bookkeeper.meta.ZkLedgerIdGenerator.createLedgerPrefix(highPath,null);
+ $stack15=this.zkAcls;
+ org.apache.bookkeeper.meta.ZkLedgerIdGenerator.generateLedgerIdImpl((org.apache.bookkeeper.proto.BookkeeperInternalCallbacks$GenericCallback)$stack12,$stack13,ledgerPrefix,$stack15);
+ return;
+ } 
+

@@ -1,0 +1,56 @@
+boolean java.util.Scanner:makeSpace()
+{
+int i0;
+  int i1;
+  java.nio.CharBuffer r1;
+  int $i2;
+  java.nio.CharBuffer $r2;
+  java.nio.CharBuffer $r4;
+  int $i3;
+  java.nio.CharBuffer $r5;
+  int $i4;
+  int $i5;
+  java.nio.CharBuffer $r8;
+  java.util.regex.Matcher $r9;
+  java.nio.CharBuffer $r11;
+  int $i6;
+  int $i7;
+  java.nio.CharBuffer $r13;
+  int $i8;
+  this#java.util.Scanner:clearCaches();
+ $i2=this.savedScannerPosition;
+ if ($i2!=-1) goto label0;
+ $i8=this.position;
+ goto label1;
+ label0:$i8=this.savedScannerPosition;
+ label1:i0=$i8;
+ $r2=this.buf;
+ $r2.position(i0);
+ if (i0<=0) goto label2;
+ $r11=this.buf;
+ $r11.compact();
+ this#java.util.Scanner:translateSavedIndexes(i0);
+ $i6=this.position;
+ $i7=($i6-i0);
+ this.position=$i7;
+ $r13=this.buf;
+ $r13.flip();
+ return  1;
+ label2:$r4=this.buf;
+ $i3 = $r4.capacity();
+ i1=($i3 * 2);
+ r1 = java.nio.CharBuffer.allocate(i1);
+ $r5=this.buf;
+ r1.put($r5);
+ r1.flip();
+ this#java.util.Scanner:translateSavedIndexes(i0);
+ $i4=this.position;
+ $i5=($i4-i0);
+ this.position=$i5;
+ this.buf=r1;
+ $r9=this.matcher;
+ $r8=this.buf;
+ $r9.reset((java.lang.CharSequence)$r8);
+ return  1;
+ }  
+

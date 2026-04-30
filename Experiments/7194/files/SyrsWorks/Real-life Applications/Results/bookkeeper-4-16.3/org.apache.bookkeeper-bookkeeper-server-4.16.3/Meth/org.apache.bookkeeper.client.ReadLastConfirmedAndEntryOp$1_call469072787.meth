@@ -1,0 +1,56 @@
+java.lang.Boolean org.apache.bookkeeper.client.ReadLastConfirmedAndEntryOp$1:call()
+{
+org.apache.bookkeeper.client.ReadLastConfirmedAndEntryOp $stack1;
+  java.util.concurrent.atomic.AtomicBoolean $stack2;
+  boolean $stack3;
+  java.lang.Boolean $stack4;
+  org.apache.bookkeeper.client.ReadLastConfirmedAndEntryOp$ReadLACAndEntryRequest $stack6;
+  java.util.BitSet $stack11;
+  org.apache.bookkeeper.net.BookieId $stack14;
+  org.slf4j.Logger $stack15;
+  java.lang.Object[] $stack18;
+  org.apache.bookkeeper.client.LedgerHandle $stack25;
+  long $stack26;
+  java.lang.Long $stack27;
+  $stack1=this.this$0;
+ $stack2=$stack1.requestComplete;
+ $stack3 = $stack2.get();
+ if ($stack3!=0) goto label0;
+ $stack1=this.this$0;
+ $stack6=$stack1.request;
+ $stack3 = $stack6.isComplete();
+ if ($stack3!=0) goto label0;
+ $stack1=this.this$0;
+ $stack6=$stack1.request;
+ $stack1=this.this$0;
+ $stack11=$stack1.heardFromHostsBitSet;
+ $stack14 = $stack6.maybeSendSpeculativeRead($stack11);
+ if (null==$stack14) goto label0;
+ $stack15=org.apache.bookkeeper.client.ReadLastConfirmedAndEntryOp.LOG;
+ $stack3 = $stack15.isDebugEnabled();
+ if ($stack3==0) goto label1;
+ $stack15=org.apache.bookkeeper.client.ReadLastConfirmedAndEntryOp.LOG;
+ $stack18=new java.lang.Object[4];
+ $stack1=this.this$0;
+ $stack6=$stack1.request;
+ $stack18[0]=$stack6;
+ $stack1=this.this$0;
+ $stack25 = org.apache.bookkeeper.client.ReadLastConfirmedAndEntryOp.access$000($stack1);
+ $stack26 = $stack25.getId();
+ $stack27 = java.lang.Long.valueOf($stack26);
+ $stack18[1]=$stack27;
+ $stack1=this.this$0;
+ $stack26 = org.apache.bookkeeper.client.ReadLastConfirmedAndEntryOp.access$300($stack1);
+ $stack27 = java.lang.Long.valueOf($stack26);
+ $stack18[2]=$stack27;
+ $stack1=this.this$0;
+ $stack11=$stack1.heardFromHostsBitSet;
+ $stack18[3]=$stack11;
+ dummyClass.lowSink("Send speculative ReadLAC {} for ledger {} (previousLAC: {}). Hosts heard are {}.");
+$stack15.debug("Send speculative ReadLAC {} for ledger {} (previousLAC: {}). Hosts heard are {}.",$stack18);
+ label1:$stack4 = java.lang.Boolean.valueOf((boolean)1);
+ return  $stack4;
+ label0:$stack4 = java.lang.Boolean.valueOf((boolean)0);
+ return  $stack4;
+ } 
+

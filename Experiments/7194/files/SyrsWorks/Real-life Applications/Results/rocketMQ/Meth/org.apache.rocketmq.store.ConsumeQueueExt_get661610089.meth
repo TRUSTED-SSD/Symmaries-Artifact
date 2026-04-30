@@ -1,0 +1,50 @@
+boolean org.apache.rocketmq.store.ConsumeQueueExt:get(long address,org.apache.rocketmq.store.ConsumeQueueExt$CqExtUnit cqExtUnit)
+{
+int mappedFileSize;
+  org.apache.rocketmq.store.logfile.MappedFile mappedFile;
+  org.apache.rocketmq.store.SelectMappedBufferResult bufferResult;
+  boolean ret;
+  java.lang.Throwable l11;
+  byte $stack14;
+  org.apache.rocketmq.store.MappedFileQueue $stack15;
+  long $stack17;
+  java.nio.ByteBuffer $stack20;
+  org.apache.rocketmq.logging.org.slf4j.Logger $stack22;
+  java.lang.Long $stack24;
+  ret = org.apache.rocketmq.store.ConsumeQueueExt.isExtAddr(address);
+ if (ret!=0) goto label0;
+ return  0;
+ label0:mappedFileSize=this.mappedFileSize;
+ address = this.unDecorate(address);
+ $stack15=this.mappedFileQueue;
+ $stack17=address;
+ $stack14=(address cmp 0L);
+ if ($stack14!=0) goto label1;
+ ret=1;
+ goto label2;
+ label1:ret=0;
+ label2:mappedFile = $stack15.findMappedFileByOffset($stack17,ret);
+ if (mappedFile!=null) goto label3;
+ return  0;
+ label3:$stack17=(long) mappedFileSize;
+ $stack17=(address%$stack17);
+ mappedFileSize=(int) $stack17;
+ bufferResult = mappedFile.selectMappedBuffer(mappedFileSize);
+ if (bufferResult!=null) goto label4;
+ $stack22=org.apache.rocketmq.store.ConsumeQueueExt.log;
+ $stack24 = java.lang.Long.valueOf(address);
+ $stack22.warn("[BUG] Consume queue extend unit({}) is not found!",(java.lang.Object)$stack24);
+ return  0;
+ label4:ret=0;
+ label5:$stack20 = bufferResult.getByteBuffer();
+ ret = org.apache.rocketmq.store.ConsumeQueueExt$CqExtUnit.access$000(cqExtUnit,$stack20);
+ label6:bufferResult.release();
+ goto label7;
+ label8:l11 = catch;
+ label9:bufferResult.release();
+ throw l11;
+ label7:return  ret;
+ catch java.lang.Throwable: label5 - label6 : label8;
+catch java.lang.Throwable: label8 - label9 : label8;
+} 
+

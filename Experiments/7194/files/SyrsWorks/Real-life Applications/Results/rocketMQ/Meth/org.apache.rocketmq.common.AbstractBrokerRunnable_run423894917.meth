@@ -1,0 +1,29 @@
+void org.apache.rocketmq.common.AbstractBrokerRunnable:run()
+{
+org.apache.rocketmq.common.BrokerIdentity $stack2;
+  boolean $stack3;
+  java.lang.StringBuilder $stack4;
+  java.lang.String $stack6;
+  java.lang.Throwable $stack13;
+  label0:$stack2=this.brokerIdentity;
+ $stack3 = $stack2.isInBrokerContainer();
+ if ($stack3==0) goto label1;
+ $stack4=new java.lang.StringBuilder;
+ $stack4#java.lang.StringBuilder();
+ $stack6=java.io.File.separator;
+ $stack4 = $stack4.append($stack6);
+ $stack2=this.brokerIdentity;
+ $stack6 = $stack2.getCanonicalName();
+ $stack4 = $stack4.append($stack6);
+ $stack6 = $stack4.toString();
+ org.apache.rocketmq.logging.org.slf4j.MDC.put("brokerContainerLogDir",$stack6);
+ label1:this.run0();
+ label2:org.apache.rocketmq.logging.org.slf4j.MDC.clear();
+ goto label3;
+ label4:$stack13 = catch;
+ org.apache.rocketmq.logging.org.slf4j.MDC.clear();
+ throw $stack13;
+ label3:return;
+ catch java.lang.Throwable: label0 - label2 : label4;
+} 
+

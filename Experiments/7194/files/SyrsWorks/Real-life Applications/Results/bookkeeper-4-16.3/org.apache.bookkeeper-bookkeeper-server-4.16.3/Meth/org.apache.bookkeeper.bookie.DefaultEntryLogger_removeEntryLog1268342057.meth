@@ -1,0 +1,29 @@
+boolean org.apache.bookkeeper.bookie.DefaultEntryLogger:removeEntryLog(long entryLogId)
+{
+java.io.File entryLogFile;
+  java.io.FileNotFoundException e;
+  boolean $stack6;
+  org.slf4j.Logger $stack7;
+  java.lang.StringBuilder $stack10;
+  java.lang.String $stack15;
+  this.removeFromChannelsAndClose(entryLogId);
+ label0:entryLogFile = this#org.apache.bookkeeper.bookie.DefaultEntryLogger:findFile(entryLogId);
+ label1:goto label2;
+ label3:e = catch;
+ $stack7=org.apache.bookkeeper.bookie.DefaultEntryLogger.LOG;
+ $stack10=new java.lang.StringBuilder;
+ $stack10#java.lang.StringBuilder();
+ $stack10 = $stack10.append("Trying to delete an entryLog file that could not be found: ");
+ $stack10 = $stack10.append(entryLogId);
+ $stack10 = $stack10.append(".log");
+ $stack15 = $stack10.toString();
+ $stack7.error($stack15);
+ return  0;
+ label2:$stack6 = entryLogFile.delete();
+ if ($stack6!=0) goto label4;
+ $stack7=org.apache.bookkeeper.bookie.DefaultEntryLogger.LOG;
+ $stack7.warn("Could not delete entry log file {}",(java.lang.Object)entryLogFile);
+ label4:return  1;
+ catch java.io.FileNotFoundException: label0 - label1 : label3;
+} 
+

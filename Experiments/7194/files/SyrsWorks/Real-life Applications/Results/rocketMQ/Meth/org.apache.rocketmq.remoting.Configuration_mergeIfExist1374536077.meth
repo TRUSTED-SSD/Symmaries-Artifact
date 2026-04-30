@@ -1,0 +1,40 @@
+void org.apache.rocketmq.remoting.Configuration:mergeIfExist(java.util.Properties from,java.util.Properties to)
+{
+java.util.Iterator l3;
+  java.util.Map$Entry next;
+  java.lang.Object fromObj;
+  java.lang.Object toObj;
+  java.util.Set $stack7;
+  boolean $stack9;
+  java.lang.Object[] $stack23;
+  org.apache.rocketmq.logging.org.slf4j.Logger $stack24;
+  java.lang.Object $stack27;
+  $stack7 = from.entrySet();
+ l3 = $stack7.iterator();
+ label0:$stack9 = l3.hasNext();
+ if ($stack9==0) goto label1;
+ fromObj = l3.next();
+ next=(java.util.Map$Entry) fromObj;
+ fromObj = next.getKey();
+ $stack9 = to.containsKey(fromObj);
+ if ($stack9!=0) goto label2;
+ goto label0;
+ label2:fromObj = next.getValue();
+ toObj = next.getKey();
+ toObj = to.get(toObj);
+ if (toObj==null) goto label3;
+ $stack9 = toObj.equals(fromObj);
+ if ($stack9!=0) goto label3;
+ $stack24=this.log;
+ $stack23=new java.lang.Object[3];
+ $stack27 = next.getKey();
+ $stack23[0]=$stack27;
+ $stack23[1]=toObj;
+ $stack23[2]=fromObj;
+ $stack24.info("Replace, key: {}, value: {} -> {}",$stack23);
+ label3:toObj = next.getKey();
+ to.put(toObj,fromObj);
+ goto label0;
+ label1:return;
+ } 
+

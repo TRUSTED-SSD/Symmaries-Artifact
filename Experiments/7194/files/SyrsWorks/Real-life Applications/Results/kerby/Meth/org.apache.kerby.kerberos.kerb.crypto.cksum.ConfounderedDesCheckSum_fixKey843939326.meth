@@ -1,0 +1,22 @@
+byte[] org.apache.kerby.kerberos.kerb.crypto.cksum.ConfounderedDesCheckSum:fixKey(byte[] key)
+{
+boolean isWeak;
+  java.security.InvalidKeyException e;
+  byte $stack5;
+  short $stack6;
+  org.slf4j.Logger $stack10;
+  isWeak=1;
+ label0:isWeak = javax.crypto.spec.DESKeySpec.isWeak(key,0);
+ label1:goto label2;
+ label3:e = catch;
+ $stack10=org.apache.kerby.kerberos.kerb.crypto.cksum.ConfounderedDesCheckSum.LOG;
+ $stack10.error("Invalid key found. ");
+ label2:if (isWeak==0) goto label4;
+ $stack5=key[7];
+ $stack6=(!$stack5 & 240) |(!240 & $stack5);
+ $stack5=(byte) $stack6;
+ key[7]=$stack5;
+ label4:return  key;
+ catch java.security.InvalidKeyException: label0 - label1 : label3;
+} 
+

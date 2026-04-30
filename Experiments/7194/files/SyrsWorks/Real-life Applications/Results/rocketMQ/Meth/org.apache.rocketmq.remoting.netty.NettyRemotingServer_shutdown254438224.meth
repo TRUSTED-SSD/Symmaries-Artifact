@@ -1,0 +1,39 @@
+void org.apache.rocketmq.remoting.netty.NettyRemotingServer:shutdown()
+{
+java.util.Timer $stack2;
+  io.netty.channel.EventLoopGroup $stack3;
+  org.apache.rocketmq.remoting.netty.NettyRemotingAbstract$NettyEventExecutor $stack7;
+  io.netty.util.concurrent.DefaultEventExecutorGroup $stack8;
+  java.util.concurrent.ExecutorService $stack9;
+  java.lang.Exception $stack13;
+  org.apache.rocketmq.logging.org.slf4j.Logger $stack14;
+  java.lang.Exception $stack16;
+  label0:$stack2=this.timer;
+ $stack2.cancel();
+ $stack3=this.eventLoopGroupBoss;
+ $stack3.shutdownGracefully();
+ $stack3=this.eventLoopGroupSelector;
+ $stack3.shutdownGracefully();
+ $stack7=this.nettyEventExecutor;
+ $stack7.shutdown();
+ $stack8=this.defaultEventExecutorGroup;
+ if ($stack8==null) goto label1;
+ $stack8=this.defaultEventExecutorGroup;
+ $stack8.shutdownGracefully();
+ label1:goto label2;
+ label3:$stack13 = catch;
+ $stack14=org.apache.rocketmq.remoting.netty.NettyRemotingServer.log;
+ $stack14.error("NettyRemotingServer shutdown exception, ",(java.lang.Throwable)$stack13);
+ label2:$stack9=this.publicExecutor;
+ if ($stack9==null) goto label4;
+ label5:$stack9=this.publicExecutor;
+ $stack9.shutdown();
+ label6:goto label4;
+ label7:$stack16 = catch;
+ $stack14=org.apache.rocketmq.remoting.netty.NettyRemotingServer.log;
+ $stack14.error("NettyRemotingServer shutdown exception, ",(java.lang.Throwable)$stack16);
+ label4:return;
+ catch java.lang.Exception: label0 - label1 : label3;
+catch java.lang.Exception: label5 - label6 : label7;
+} 
+

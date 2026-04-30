@@ -1,0 +1,37 @@
+long org.apache.bookkeeper.bookie.IndexInMemPageMgr$InMemPageCollection:getLastEntryInMem(long ledgerId)
+{
+long lastEntry;
+  java.util.concurrent.ConcurrentMap map;
+  java.util.Iterator l6;
+  org.apache.bookkeeper.bookie.LedgerEntryPage lep;
+  java.lang.Long $stack11;
+  java.lang.Object $stack12;
+  java.util.Collection $stack13;
+  boolean $stack15;
+  byte $stack19;
+  lastEntry=0L;
+ map=this.pages;
+ $stack11 = java.lang.Long.valueOf(ledgerId);
+ $stack12 = map.get((java.lang.Object)$stack11);
+ map=(java.util.concurrent.ConcurrentMap) $stack12;
+ if (map==null) goto label0;
+ $stack13 = map.values();
+ l6 = $stack13.iterator();
+ label1:$stack15 = l6.hasNext();
+ if ($stack15==0) goto label0;
+ $stack12 = l6.next();
+ lep=(org.apache.bookkeeper.bookie.LedgerEntryPage) $stack12;
+ ledgerId = lep.getMaxPossibleEntry();
+ $stack19=(ledgerId cmp lastEntry);
+ if ($stack19>=0) goto label2;
+ goto label1;
+ label2:lep.usePage();
+ ledgerId = lep.getLastEntry();
+ $stack19=(ledgerId cmp lastEntry);
+ if ($stack19<=0) goto label3;
+ lastEntry=ledgerId;
+ label3:lep.releasePage();
+ goto label1;
+ label0:return  lastEntry;
+ } 
+

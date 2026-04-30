@@ -1,0 +1,121 @@
+    public org.junit.runner.Runner buildRunner(java.lang.Class, java.lang.Class) throws java.lang.Exception
+    {
+        org.junit.internal.builders.AnnotatedBuilder this;
+        java.lang.Class runnerClass, testClass;
+        java.lang.NoSuchMethodException e, $stack11;
+        java.lang.String simpleName;
+        java.lang.Class[] $stack6;
+        java.lang.reflect.Constructor $stack7;
+        java.lang.Object[] $stack8;
+        java.lang.Object $stack9;
+        org.junit.runner.Runner $stack10;
+        org.junit.runners.model.InitializationError $stack13;
+        org.junit.runners.model.RunnerBuilder $stack20;
+
+        this := @this: org.junit.internal.builders.AnnotatedBuilder;
+
+        runnerClass := @parameter0: java.lang.Class;
+
+        testClass := @parameter1: java.lang.Class;
+
+     label1:
+        $stack6 = newarray (java.lang.Class)[1];
+/*104*/
+
+        $stack6[0] = class "Ljava/lang/Class;";
+/*104*/
+
+        $stack7 = virtualinvoke runnerClass.<java.lang.Class: java.lang.reflect.Constructor getConstructor(java.lang.Class[])>($stack6);
+/*104*/
+
+        $stack8 = newarray (java.lang.Object)[1];
+/*104*/
+
+        $stack8[0] = testClass;
+/*104*/
+
+        $stack9 = virtualinvoke $stack7.<java.lang.reflect.Constructor: java.lang.Object newInstance(java.lang.Object[])>($stack8);
+/*104*/
+
+        $stack10 = (org.junit.runner.Runner) $stack9;
+/*104*/
+
+     label2:
+        return $stack10;
+/*104*/
+
+     label3:
+        e := @caughtexception;
+/*111*/
+
+     label4:
+        $stack6 = newarray (java.lang.Class)[2];
+/*107*/
+
+        $stack6[0] = class "Ljava/lang/Class;";
+/*107*/
+
+        $stack6[1] = class "Lorg/junit/runners/model/RunnerBuilder;";
+/*107*/
+
+        $stack7 = virtualinvoke runnerClass.<java.lang.Class: java.lang.reflect.Constructor getConstructor(java.lang.Class[])>($stack6);
+/*107*/
+
+        $stack8 = newarray (java.lang.Object)[2];
+/*107*/
+
+        $stack8[0] = testClass;
+/*107*/
+
+        $stack20 = this.<org.junit.internal.builders.AnnotatedBuilder: org.junit.runners.model.RunnerBuilder suiteBuilder>;
+/*107*/
+
+        $stack8[1] = $stack20;
+/*107*/
+
+        $stack9 = virtualinvoke $stack7.<java.lang.reflect.Constructor: java.lang.Object newInstance(java.lang.Object[])>($stack8);
+/*107*/
+
+        $stack10 = (org.junit.runner.Runner) $stack9;
+/*107*/
+
+     label5:
+        return $stack10;
+/*107*/
+
+     label6:
+        $stack11 := @caughtexception;
+/*104*/
+
+        e = $stack11;
+/*109*/
+
+        simpleName = virtualinvoke runnerClass.<java.lang.Class: java.lang.String getSimpleName()>();
+/*110*/
+/*110*/
+
+        $stack13 = new org.junit.runners.model.InitializationError;
+/*111*/
+
+        $stack8 = newarray (java.lang.Object)[2];
+/*111*/
+
+        $stack8[0] = simpleName;
+/*111*/
+
+        $stack8[1] = simpleName;
+/*111*/
+
+        simpleName = staticinvoke <java.lang.String: java.lang.String format(java.lang.String,java.lang.Object[])>("Custom runner class %s should have a public constructor with signature %s(Class testClass)", $stack8);
+/*111*/
+
+        specialinvoke $stack13.<org.junit.runners.model.InitializationError: void <init>(java.lang.String)>(simpleName);
+/*111*/
+
+        throw $stack13;
+/*111*/
+
+        catch java.lang.NoSuchMethodException from label1 to label2 with label3;
+        catch java.lang.NoSuchMethodException from label4 to label5 with label6;
+    }
+

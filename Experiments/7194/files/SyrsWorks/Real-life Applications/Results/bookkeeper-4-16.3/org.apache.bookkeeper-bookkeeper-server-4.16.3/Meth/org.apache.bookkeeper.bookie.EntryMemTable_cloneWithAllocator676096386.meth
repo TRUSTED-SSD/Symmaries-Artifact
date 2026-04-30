@@ -1,0 +1,33 @@
+org.apache.bookkeeper.bookie.EntryKeyValue org.apache.bookkeeper.bookie.EntryMemTable:cloneWithAllocator(long ledgerId,long entryId,java.nio.ByteBuffer entry)
+{
+int len;
+  org.apache.bookkeeper.bookie.SkipListArena$MemorySlice alloc;
+  org.apache.bookkeeper.bookie.SkipListArena $stack9;
+  boolean $stack11;
+  byte[] $stack12;
+  int $stack13;
+  org.apache.bookkeeper.bookie.EntryKeyValue $stack15;
+  java.lang.AssertionError $stack28;
+  len = entry.remaining();
+ $stack9=this.allocator;
+ alloc = $stack9.allocateBytes(len);
+ if (alloc!=null) goto label0;
+ $stack15 = this#org.apache.bookkeeper.bookie.EntryMemTable:newEntry(ledgerId,entryId,entry);
+ return  $stack15;
+ label0:$stack11=org.apache.bookkeeper.bookie.EntryMemTable.$assertionsDisabled;
+ if ($stack11!=0) goto label1;
+ $stack12 = alloc.getData();
+ if ($stack12!=null) goto label1;
+ $stack28=new java.lang.AssertionError;
+ $stack28#java.lang.AssertionError();
+ throw $stack28;
+ label1:$stack12 = alloc.getData();
+ $stack13 = alloc.getOffset();
+ entry.get($stack12,$stack13,len);
+ $stack15=new org.apache.bookkeeper.bookie.EntryKeyValue;
+ $stack12 = alloc.getData();
+ $stack13 = alloc.getOffset();
+ $stack15#org.apache.bookkeeper.bookie.EntryKeyValue(ledgerId,entryId,$stack12,$stack13,len);
+ return  $stack15;
+ } 
+

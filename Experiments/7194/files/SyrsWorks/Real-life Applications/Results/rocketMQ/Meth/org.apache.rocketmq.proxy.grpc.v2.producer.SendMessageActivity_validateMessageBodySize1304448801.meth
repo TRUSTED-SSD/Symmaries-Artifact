@@ -1,0 +1,27 @@
+void org.apache.rocketmq.proxy.grpc.v2.producer.SendMessageActivity:validateMessageBodySize(com.google.protobuf.ByteString body)
+{
+int max;
+  org.apache.rocketmq.proxy.config.ProxyConfig $stack3;
+  int $stack5;
+  org.apache.rocketmq.proxy.grpc.v2.common.GrpcProxyException $stack6;
+  java.lang.StringBuilder $stack7;
+  apache.rocketmq.v2.Code $stack8;
+  java.lang.String $stack11;
+  $stack3 = org.apache.rocketmq.proxy.config.ConfigurationManager.getProxyConfig();
+ max = $stack3.getMaxMessageSize();
+ if (max>0) goto label0;
+ return;
+ label0:$stack5 = body.size();
+ if ($stack5<=max) goto label1;
+ $stack6=new org.apache.rocketmq.proxy.grpc.v2.common.GrpcProxyException;
+ $stack8=apache.rocketmq.v2.Code.MESSAGE_BODY_TOO_LARGE;
+ $stack7=new java.lang.StringBuilder;
+ $stack7#java.lang.StringBuilder();
+ $stack7 = $stack7.append("message body cannot exceed the max ");
+ $stack7 = $stack7.append(max);
+ $stack11 = $stack7.toString();
+ $stack6#org.apache.rocketmq.proxy.grpc.v2.common.GrpcProxyException($stack8,$stack11);
+ throw $stack6;
+ label1:return;
+ } 
+

@@ -1,0 +1,42 @@
+void org.apache.rocketmq.client.impl.consumer.AssignedMessageQueue:addAssignedMessageQueue(java.util.Collection assigned)
+{
+java.util.Iterator l2;
+  org.apache.rocketmq.common.message.MessageQueue messageQueue;
+  org.apache.rocketmq.client.impl.consumer.AssignedMessageQueue$MessageQueueState messageQueueState;
+  boolean $stack7;
+  java.lang.Object $stack8;
+  java.util.concurrent.ConcurrentHashMap $stack9;
+  org.apache.rocketmq.client.impl.consumer.RebalanceImpl $stack12;
+  org.apache.rocketmq.client.impl.consumer.ProcessQueue $stack13;
+  java.util.concurrent.ConcurrentMap $stack18;
+  l2 = assigned.iterator();
+ label0:$stack7 = l2.hasNext();
+ if ($stack7==0) goto label1;
+ $stack8 = l2.next();
+ messageQueue=(org.apache.rocketmq.common.message.MessageQueue) $stack8;
+ $stack9=this.assignedMessageQueueState;
+ $stack7 = $stack9.containsKey((java.lang.Object)messageQueue);
+ if ($stack7!=0) goto label2;
+ $stack12=this.rebalanceImpl;
+ if ($stack12==null) goto label3;
+ $stack12=this.rebalanceImpl;
+ $stack18 = $stack12.getProcessQueueTable();
+ $stack8 = $stack18.get((java.lang.Object)messageQueue);
+ if ($stack8==null) goto label3;
+ messageQueueState=new org.apache.rocketmq.client.impl.consumer.AssignedMessageQueue$MessageQueueState;
+ $stack12=this.rebalanceImpl;
+ $stack18 = $stack12.getProcessQueueTable();
+ $stack8 = $stack18.get((java.lang.Object)messageQueue);
+ $stack13=(org.apache.rocketmq.client.impl.consumer.ProcessQueue) $stack8;
+ messageQueueState#org.apache.rocketmq.client.impl.consumer.AssignedMessageQueue$MessageQueueState(this,messageQueue,$stack13,null);
+ goto label4;
+ label3:$stack13=new org.apache.rocketmq.client.impl.consumer.ProcessQueue;
+ $stack13#org.apache.rocketmq.client.impl.consumer.ProcessQueue();
+ messageQueueState=new org.apache.rocketmq.client.impl.consumer.AssignedMessageQueue$MessageQueueState;
+ messageQueueState#org.apache.rocketmq.client.impl.consumer.AssignedMessageQueue$MessageQueueState(this,messageQueue,$stack13,null);
+ label4:$stack9=this.assignedMessageQueueState;
+ $stack9.put((java.lang.Object)messageQueue,(java.lang.Object)messageQueueState);
+ label2:goto label0;
+ label1:return;
+ } 
+

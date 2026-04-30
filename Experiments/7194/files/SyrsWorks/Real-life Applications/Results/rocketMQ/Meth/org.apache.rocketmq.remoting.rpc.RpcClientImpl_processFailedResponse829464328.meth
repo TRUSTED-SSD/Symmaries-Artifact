@@ -1,0 +1,58 @@
+void org.apache.rocketmq.remoting.rpc.RpcClientImpl:processFailedResponse(java.lang.String addr,org.apache.rocketmq.remoting.protocol.RemotingCommand requestCommand,org.apache.rocketmq.remoting.netty.ResponseFuture responseFuture,io.netty.util.concurrent.Promise rpcResponsePromise)
+{
+org.apache.rocketmq.remoting.protocol.RemotingCommand responseCommand;
+  short errorCode;
+  java.lang.String errorMessage;
+  boolean $stack9;
+  java.lang.StringBuilder $stack11;
+  long $stack15;
+  org.apache.rocketmq.remoting.rpc.RpcResponse $stack20;
+  org.apache.rocketmq.remoting.rpc.RpcException $stack21;
+  responseCommand = responseFuture.getResponseCommand();
+ if (responseCommand==null) goto label0;
+ return;
+ label0:errorCode=-1000;
+ errorMessage=null;
+ $stack9 = responseFuture.isSendRequestOK();
+ if ($stack9!=0) goto label1;
+ errorCode=-1004;
+ $stack11=new java.lang.StringBuilder;
+ $stack11#java.lang.StringBuilder();
+ $stack11 = $stack11.append("send request failed to ");
+ $stack11 = $stack11.append(addr);
+ $stack11 = $stack11.append(". Request: ");
+ $stack11 = $stack11.append((java.lang.Object)requestCommand);
+ errorMessage = $stack11.toString();
+ goto label2;
+ label1:$stack9 = responseFuture.isTimeout();
+ if ($stack9==0) goto label3;
+ errorCode=-1006;
+ $stack11=new java.lang.StringBuilder;
+ $stack11#java.lang.StringBuilder();
+ $stack11 = $stack11.append("wait response from ");
+ $stack11 = $stack11.append(addr);
+ $stack11 = $stack11.append(" timeout :");
+ $stack15 = responseFuture.getTimeoutMillis();
+ $stack11 = $stack11.append($stack15);
+ $stack11 = $stack11.append("ms. Request: ");
+ $stack11 = $stack11.append((java.lang.Object)requestCommand);
+ errorMessage = $stack11.toString();
+ goto label2;
+ label3:$stack11=new java.lang.StringBuilder;
+ $stack11#java.lang.StringBuilder();
+ $stack11 = $stack11.append("unknown reason. addr: ");
+ $stack11 = $stack11.append(addr);
+ $stack11 = $stack11.append(", timeoutMillis: ");
+ $stack15 = responseFuture.getTimeoutMillis();
+ $stack11 = $stack11.append($stack15);
+ $stack11 = $stack11.append(". Request: ");
+ $stack11 = $stack11.append((java.lang.Object)requestCommand);
+ errorMessage = $stack11.toString();
+ label2:$stack20=new org.apache.rocketmq.remoting.rpc.RpcResponse;
+ $stack21=new org.apache.rocketmq.remoting.rpc.RpcException;
+ $stack21#org.apache.rocketmq.remoting.rpc.RpcException(errorCode,errorMessage);
+ $stack20#org.apache.rocketmq.remoting.rpc.RpcResponse($stack21);
+ rpcResponsePromise.setSuccess((java.lang.Object)$stack20);
+ return;
+ } 
+

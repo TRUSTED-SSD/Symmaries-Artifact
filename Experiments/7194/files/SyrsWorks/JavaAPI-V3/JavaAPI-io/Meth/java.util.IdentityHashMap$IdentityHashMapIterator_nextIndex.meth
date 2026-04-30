@@ -1,0 +1,37 @@
+int java.util.IdentityHashMap$IdentityHashMapIterator:nextIndex()
+{
+java.util.IdentityHashMap $r1;
+  int $i0;
+  int $i1;
+  boolean $z0;
+  int $i2;
+  int $i3;
+  int $i4;
+  int $i5;
+  boolean $z1;
+  java.util.NoSuchElementException $r3;
+  java.util.ConcurrentModificationException $r4;
+  $r1=this.this$0;
+ $i1=$r1.modCount;
+ $i0=this.expectedModCount;
+ if ($i1==$i0) goto label0;
+ $r4=new java.util.ConcurrentModificationException;
+ $r4#java.util.ConcurrentModificationException:init();
+ throw $r4;
+ label0:$z0=this.indexValid;
+ if ($z0!=0) goto label1;
+ $z1 = this.hasNext();
+ if ($z1!=0) goto label1;
+ $r3=new java.util.NoSuchElementException;
+ $r3#java.util.NoSuchElementException:init();
+ throw $r3;
+ label1:this.indexValid=0;
+ $i2=this.index;
+ this.lastReturnedIndex=$i2;
+ $i3=this.index;
+ $i4=($i3+2);
+ this.index=$i4;
+ $i5=this.lastReturnedIndex;
+ return  $i5;
+ }  
+

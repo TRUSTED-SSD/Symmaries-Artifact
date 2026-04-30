@@ -1,0 +1,27 @@
+boolean org.apache.rocketmq.store.ha.autoswitch.AutoSwitchHAClient:reportSlaveOffset(long offsetToReport)
+{
+java.nio.ByteBuffer $stack3;
+  org.apache.rocketmq.store.ha.HAConnectionState $stack7;
+  int $stack9;
+  java.nio.channels.SocketChannel $stack16;
+  org.apache.rocketmq.store.ha.io.HAWriter $stack17;
+  boolean $stack18;
+  $stack3=this.transferHeaderBuffer;
+ $stack3.position(0);
+ $stack3=this.transferHeaderBuffer;
+ $stack3.limit(12);
+ $stack3=this.transferHeaderBuffer;
+ $stack7=this.currentState;
+ $stack9 = $stack7.ordinal();
+ $stack3.putInt($stack9);
+ $stack3=this.transferHeaderBuffer;
+ $stack3.putLong(offsetToReport);
+ $stack3=this.transferHeaderBuffer;
+ $stack3.flip();
+ $stack17=this.haWriter;
+ $stack16=this.socketChannel;
+ $stack3=this.transferHeaderBuffer;
+ $stack18 = $stack17.write($stack16,$stack3);
+ return  $stack18;
+ } 
+

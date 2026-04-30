@@ -1,0 +1,50 @@
+void org.apache.rocketmq.broker.BrokerPreOnlineService:run()
+{
+boolean isSuccess;
+  java.lang.StringBuilder $stack2;
+  org.apache.rocketmq.logging.org.slf4j.Logger $stack3;
+  java.lang.String $stack4;
+  org.apache.rocketmq.broker.BrokerController $stack15;
+  org.apache.rocketmq.common.BrokerConfig $stack24;
+  java.lang.Exception $stack26;
+  $stack3=org.apache.rocketmq.broker.BrokerPreOnlineService.LOGGER;
+ $stack2=new java.lang.StringBuilder;
+ $stack2#java.lang.StringBuilder();
+ $stack4 = this.getServiceName();
+ $stack2 = $stack2.append($stack4);
+ $stack2 = $stack2.append(" service started");
+ $stack4 = $stack2.toString();
+ $stack3.info($stack4);
+ label0:isSuccess = this.isStopped();
+ if (isSuccess!=0) goto label1;
+ $stack15=this.brokerController;
+ isSuccess = $stack15.isIsolated();
+ if (isSuccess!=0) goto label2;
+ $stack3=org.apache.rocketmq.broker.BrokerPreOnlineService.LOGGER;
+ $stack15=this.brokerController;
+ $stack24 = $stack15.getBrokerConfig();
+ $stack4 = $stack24.getCanonicalName();
+ $stack3.info("broker {} is online",(java.lang.Object)$stack4);
+ goto label1;
+ label2:isSuccess = this#org.apache.rocketmq.broker.BrokerPreOnlineService:prepareForBrokerOnline();
+ if (isSuccess!=0) goto label3;
+ this.waitForRunning(1000L);
+ goto label4;
+ label3:goto label1;
+ label4:goto label0;
+ label5:$stack26 = catch;
+ $stack3=org.apache.rocketmq.broker.BrokerPreOnlineService.LOGGER;
+ $stack3.error("Broker preOnline error, ",(java.lang.Throwable)$stack26);
+ goto label0;
+ label1:$stack3=org.apache.rocketmq.broker.BrokerPreOnlineService.LOGGER;
+ $stack2=new java.lang.StringBuilder;
+ $stack2#java.lang.StringBuilder();
+ $stack4 = this.getServiceName();
+ $stack2 = $stack2.append($stack4);
+ $stack2 = $stack2.append(" service end");
+ $stack4 = $stack2.toString();
+ $stack3.info($stack4);
+ return;
+ catch java.lang.Exception: label2 - label3 : label5;
+} 
+

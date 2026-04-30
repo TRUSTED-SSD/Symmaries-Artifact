@@ -1,0 +1,56 @@
+    public void runProtected(junit.framework.Test, junit.framework.Protectable)
+    {
+        junit.framework.TestResult this;
+        junit.framework.Test test;
+        junit.framework.Protectable p;
+        java.lang.ThreadDeath $stack4;
+        junit.framework.AssertionFailedError $stack5;
+        java.lang.Throwable $stack6;
+
+        this := @this: junit.framework.TestResult;
+
+        test := @parameter0: junit.framework.Test;
+
+        p := @parameter1: junit.framework.Protectable;
+
+     label1:
+        interfaceinvoke p.<junit.framework.Protectable: void protect()>();
+/*142*/
+
+     label2:
+        goto label6;
+/*149*/
+
+     label3:
+        $stack5 := @caughtexception;
+/*146*/
+
+        virtualinvoke this.<junit.framework.TestResult: void addFailure(junit.framework.Test,junit.framework.AssertionFailedError)>(test, $stack5);
+/*144*/
+
+        goto label6;
+/*149*/
+
+     label4:
+        $stack4 := @caughtexception;
+/*150*/
+
+        throw $stack4;
+/*146*/
+
+     label5:
+        $stack6 := @caughtexception;
+/*150*/
+
+        virtualinvoke this.<junit.framework.TestResult: void addError(junit.framework.Test,java.lang.Throwable)>(test, $stack6);
+/*148*/
+
+     label6:
+        return;
+/*150*/
+
+        catch junit.framework.AssertionFailedError from label1 to label2 with label3;
+        catch java.lang.ThreadDeath from label1 to label2 with label4;
+        catch java.lang.Throwable from label1 to label2 with label5;
+    }
+

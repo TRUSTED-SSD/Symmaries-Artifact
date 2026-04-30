@@ -1,0 +1,40 @@
+com.google.zxing.client.result.AddressBookParsedResult com.google.zxing.client.result.AddressBookDoCoMoResultParser:parse(com.google.zxing.Result result)
+{
+java.lang.String rawText;
+  java.lang.String[] rawName;
+  java.lang.String name;
+  java.lang.String pronunciation;
+  java.lang.String[] emails;
+  java.lang.String note;
+  java.lang.String[] addresses;
+  java.lang.String birthday;
+  java.lang.String[] urls;
+  boolean $stack14;
+  com.google.zxing.client.result.AddressBookParsedResult $stack27;
+  java.lang.String[] $stack28;
+  rawText = com.google.zxing.client.result.ResultParser.getMassagedText(result);
+ $stack14 = rawText.startsWith("MECARD:");
+ if ($stack14!=0) goto label0;
+ return  null;
+ label0:rawName = com.google.zxing.client.result.AbstractDoCoMoResultParser.matchDoCoMoPrefixedField("N:",rawText);
+ if (rawName!=null) goto label1;
+ return  null;
+ label1:name=rawName[0];
+ name = com.google.zxing.client.result.AddressBookDoCoMoResultParser.parseName(name);
+ pronunciation = com.google.zxing.client.result.AbstractDoCoMoResultParser.matchSingleDoCoMoPrefixedField("SOUND:",rawText,(boolean)1);
+ rawName = com.google.zxing.client.result.AbstractDoCoMoResultParser.matchDoCoMoPrefixedField("TEL:",rawText);
+ emails = com.google.zxing.client.result.AbstractDoCoMoResultParser.matchDoCoMoPrefixedField("EMAIL:",rawText);
+ note = com.google.zxing.client.result.AbstractDoCoMoResultParser.matchSingleDoCoMoPrefixedField("NOTE:",rawText,(boolean)0);
+ addresses = com.google.zxing.client.result.AbstractDoCoMoResultParser.matchDoCoMoPrefixedField("ADR:",rawText);
+ birthday = com.google.zxing.client.result.AbstractDoCoMoResultParser.matchSingleDoCoMoPrefixedField("BDAY:",rawText,(boolean)1);
+ $stack14 = com.google.zxing.client.result.ResultParser.isStringOfDigits((java.lang.CharSequence)birthday,8);
+ if ($stack14!=0) goto label2;
+ birthday=null;
+ label2:urls = com.google.zxing.client.result.AbstractDoCoMoResultParser.matchDoCoMoPrefixedField("URL:",rawText);
+ rawText = com.google.zxing.client.result.AbstractDoCoMoResultParser.matchSingleDoCoMoPrefixedField("ORG:",rawText,(boolean)1);
+ $stack27=new com.google.zxing.client.result.AddressBookParsedResult;
+ $stack28 = com.google.zxing.client.result.ResultParser.maybeWrap(name);
+ $stack27#com.google.zxing.client.result.AddressBookParsedResult($stack28,null,pronunciation,rawName,null,emails,null,null,note,addresses,null,rawText,birthday,null,urls,null);
+ return  $stack27;
+ } 
+

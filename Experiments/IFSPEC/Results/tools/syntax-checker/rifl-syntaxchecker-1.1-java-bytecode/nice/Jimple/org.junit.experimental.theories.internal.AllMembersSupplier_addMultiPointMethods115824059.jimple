@@ -1,0 +1,130 @@
+    private void addMultiPointMethods(org.junit.experimental.theories.ParameterSignature, java.util.List) throws java.lang.Throwable
+    {
+        org.junit.experimental.theories.internal.AllMembersSupplier this;
+        org.junit.experimental.theories.ParameterSignature sig;
+        java.util.List list;
+        java.util.Iterator i$;
+        org.junit.runners.model.FrameworkMethod dataPointsMethod;
+        java.lang.Class returnType, $stack14;
+        java.lang.Throwable throwable;
+        org.junit.experimental.theories.DataPoints 'annotation';
+        java.util.Collection $stack8;
+        boolean $stack10;
+        java.lang.Object $stack11;
+        java.lang.String $stack17;
+        java.lang.Object[] $stack18;
+        java.lang.'annotation'.Annotation $stack32;
+        java.lang.Class[] $stack33;
+
+        this := @this: org.junit.experimental.theories.internal.AllMembersSupplier;
+
+        sig := @parameter0: org.junit.experimental.theories.ParameterSignature;
+
+        list := @parameter1: java.util.List;
+
+        $stack8 = virtualinvoke this.<org.junit.experimental.theories.internal.AllMembersSupplier: java.util.Collection getDataPointsMethods(org.junit.experimental.theories.ParameterSignature)>(sig);
+/*77*/
+
+        i$ = interfaceinvoke $stack8.<java.util.Collection: java.util.Iterator iterator()>();
+/*77*/
+/*77*/
+
+     label1:
+        $stack10 = interfaceinvoke i$.<java.util.Iterator: boolean hasNext()>();
+/*77*/
+
+        if $stack10 == 0 goto label8;
+/*77*/
+
+        $stack11 = interfaceinvoke i$.<java.util.Iterator: java.lang.Object next()>();
+/*95*/
+
+        dataPointsMethod = (org.junit.runners.model.FrameworkMethod) $stack11;
+/*95*/
+
+        returnType = virtualinvoke dataPointsMethod.<org.junit.runners.model.FrameworkMethod: java.lang.Class getReturnType()>();
+/*78*/
+/*78*/
+
+        $stack10 = virtualinvoke returnType.<java.lang.Class: boolean isArray()>();
+/*80*/
+
+        if $stack10 == 0 goto label2;
+/*80*/
+
+        $stack14 = virtualinvoke returnType.<java.lang.Class: java.lang.Class getComponentType()>();
+/*94*/
+
+        $stack10 = virtualinvoke sig.<org.junit.experimental.theories.ParameterSignature: boolean canPotentiallyAcceptType(java.lang.Class)>($stack14);
+/*94*/
+
+        if $stack10 != 0 goto label3;
+/*94*/
+
+     label2:
+        $stack14 = class "Ljava/lang/Iterable;";
+/*80*/
+
+        $stack10 = virtualinvoke $stack14.<java.lang.Class: boolean isAssignableFrom(java.lang.Class)>(returnType);
+/*80*/
+
+        if $stack10 == 0 goto label7;
+/*80*/
+
+     label3:
+        $stack17 = virtualinvoke dataPointsMethod.<org.junit.runners.model.FrameworkMethod: java.lang.String getName()>();
+/*83*/
+
+        $stack18 = newarray (java.lang.Object)[0];
+/*83*/
+
+        $stack11 = virtualinvoke dataPointsMethod.<org.junit.runners.model.FrameworkMethod: java.lang.Object invokeExplosively(java.lang.Object,java.lang.Object[])>(null, $stack18);
+/*83*/
+
+        specialinvoke this.<org.junit.experimental.theories.internal.AllMembersSupplier: void addDataPointsValues(java.lang.Class,org.junit.experimental.theories.ParameterSignature,java.lang.String,java.util.List,java.lang.Object)>(returnType, sig, $stack17, list, $stack11);
+/*83*/
+
+     label4:
+        goto label7;
+/*92*/
+
+     label5:
+        throwable := @caughtexception;
+/*92*/
+
+        $stack32 = virtualinvoke dataPointsMethod.<org.junit.runners.model.FrameworkMethod: java.lang.'annotation'.Annotation getAnnotation(java.lang.Class)>(class "Lorg/junit/experimental/theories/DataPoints;");
+/*86*/
+
+        'annotation' = (org.junit.experimental.theories.DataPoints) $stack32;
+/*86*/
+
+        if 'annotation' == null goto label6;
+/*87*/
+
+        $stack33 = interfaceinvoke 'annotation'.<org.junit.experimental.theories.DataPoints: java.lang.Class[] ignoredExceptions()>();
+/*90*/
+
+        $stack10 = staticinvoke <org.junit.experimental.theories.internal.AllMembersSupplier: boolean isAssignableToAnyOf(java.lang.Class[],java.lang.Object)>($stack33, throwable);
+/*90*/
+
+        if $stack10 == 0 goto label6;
+/*90*/
+
+        return;
+/*88*/
+
+     label6:
+        throw throwable;
+/*90*/
+
+     label7:
+        goto label1;
+/*94*/
+
+     label8:
+        return;
+/*95*/
+
+        catch java.lang.Throwable from label3 to label4 with label5;
+    }
+

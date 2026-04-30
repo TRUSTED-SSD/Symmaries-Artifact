@@ -1,0 +1,15 @@
+static int org.apache.kerby.asn1.util.Asn1Util:lengthOfTagLength(int tagNo)
+{
+int length;
+  length=1;
+ if (tagNo<31) goto label0;
+ if (tagNo>=128) goto label1;
+ length=(1+1);
+ goto label0;
+ label1:length=(1+1);
+ label2:tagNo=(tagNo>>7);
+ length=(length+1);
+ if (tagNo>127) goto label2;
+ label0:return  length;
+ } 
+

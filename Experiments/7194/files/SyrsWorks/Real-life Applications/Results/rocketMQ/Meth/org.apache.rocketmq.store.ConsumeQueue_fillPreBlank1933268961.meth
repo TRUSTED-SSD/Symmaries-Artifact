@@ -1,0 +1,26 @@
+void org.apache.rocketmq.store.ConsumeQueue:fillPreBlank(org.apache.rocketmq.store.logfile.MappedFile mappedFile,long untilWhere)
+{
+java.nio.ByteBuffer byteBuffer;
+  int until;
+  int i;
+  org.apache.rocketmq.store.MappedFileQueue $stack11;
+  long $stack13;
+  byte[] $stack15;
+  byteBuffer = java.nio.ByteBuffer.allocate(20);
+ byteBuffer.putLong(0L);
+ byteBuffer.putInt(2147483647);
+ byteBuffer.putLong(0L);
+ $stack11=this.mappedFileQueue;
+ until = $stack11.getMappedFileSize();
+ $stack13=(long) until;
+ untilWhere=(untilWhere%$stack13);
+ until=(int) untilWhere;
+ i=0;
+ label0:if (i>=until) goto label1;
+ $stack15 = byteBuffer.array();
+ mappedFile.appendMessage($stack15);
+ i=(i+20);
+ goto label0;
+ label1:return;
+ } 
+

@@ -1,0 +1,34 @@
+static com.google.zxing.pdf417.decoder.BarcodeMetadata com.google.zxing.pdf417.decoder.PDF417ScanningDecoder:getBarcodeMetadata(com.google.zxing.pdf417.decoder.DetectionResultRowIndicatorColumn leftRowIndicatorColumn,com.google.zxing.pdf417.decoder.DetectionResultRowIndicatorColumn rightRowIndicatorColumn)
+{
+com.google.zxing.pdf417.decoder.BarcodeMetadata leftBarcodeMetadata;
+  com.google.zxing.pdf417.decoder.BarcodeMetadata rightBarcodeMetadata;
+  com.google.zxing.pdf417.decoder.BarcodeMetadata $stack6;
+  int $stack7;
+  int $stack8;
+  if (leftRowIndicatorColumn==null) goto label0;
+ rightBarcodeMetadata = leftRowIndicatorColumn.getBarcodeMetadata();
+ leftBarcodeMetadata=rightBarcodeMetadata;
+ if (rightBarcodeMetadata!=null) goto label1;
+ label0:if (rightRowIndicatorColumn!=null) goto label2;
+ leftBarcodeMetadata=null;
+ goto label3;
+ label2:leftBarcodeMetadata = rightRowIndicatorColumn.getBarcodeMetadata();
+ label3:return  leftBarcodeMetadata;
+ label1:if (rightRowIndicatorColumn==null) goto label4;
+ $stack6 = rightRowIndicatorColumn.getBarcodeMetadata();
+ rightBarcodeMetadata=$stack6;
+ if ($stack6!=null) goto label5;
+ label4:return  leftBarcodeMetadata;
+ label5:$stack7 = leftBarcodeMetadata.getColumnCount();
+ $stack8 = $stack6.getColumnCount();
+ if ($stack7==$stack8) goto label6;
+ $stack7 = leftBarcodeMetadata.getErrorCorrectionLevel();
+ $stack8 = $stack6.getErrorCorrectionLevel();
+ if ($stack7==$stack8) goto label6;
+ $stack7 = leftBarcodeMetadata.getRowCount();
+ $stack8 = $stack6.getRowCount();
+ if ($stack7==$stack8) goto label6;
+ return  null;
+ label6:return  leftBarcodeMetadata;
+ } 
+

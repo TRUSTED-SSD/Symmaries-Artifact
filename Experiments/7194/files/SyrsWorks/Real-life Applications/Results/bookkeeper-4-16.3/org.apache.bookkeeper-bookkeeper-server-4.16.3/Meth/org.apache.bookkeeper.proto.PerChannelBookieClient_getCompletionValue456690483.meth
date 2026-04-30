@@ -1,0 +1,18 @@
+org.apache.bookkeeper.proto.PerChannelBookieClient$CompletionValue org.apache.bookkeeper.proto.PerChannelBookieClient:getCompletionValue(org.apache.bookkeeper.proto.PerChannelBookieClient$CompletionKey key)
+{
+org.apache.bookkeeper.proto.PerChannelBookieClient$CompletionValue completionValue;
+  org.apache.bookkeeper.util.collections.ConcurrentOpenHashMap $stack3;
+  java.lang.Object $stack4;
+  org.apache.bookkeeper.util.collections.SynchronizedHashMultiMap $stack5;
+  java.util.Optional $stack6;
+  $stack3=this.completionObjects;
+ $stack4 = $stack3.remove((java.lang.Object)key);
+ completionValue=(org.apache.bookkeeper.proto.PerChannelBookieClient$CompletionValue) $stack4;
+ if (completionValue!=null) goto label0;
+ $stack5=this.completionObjectsV2Conflicts;
+ $stack6 = $stack5.removeAny((java.lang.Object)key);
+ $stack4 = $stack6.orElse(null);
+ completionValue=(org.apache.bookkeeper.proto.PerChannelBookieClient$CompletionValue) $stack4;
+ label0:return  completionValue;
+ } 
+

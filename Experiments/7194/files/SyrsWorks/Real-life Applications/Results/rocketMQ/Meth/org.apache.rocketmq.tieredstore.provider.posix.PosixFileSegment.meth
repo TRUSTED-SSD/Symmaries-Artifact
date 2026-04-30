@@ -1,0 +1,58 @@
+org.apache.rocketmq.tieredstore.provider.posix.PosixFileSegment(org.apache.rocketmq.tieredstore.provider.TieredFileSegment$FileSegmentType fileType,org.apache.rocketmq.common.message.MessageQueue messageQueue,long baseOffset,org.apache.rocketmq.tieredstore.common.TieredMessageStoreConfig storeConfig)
+{
+java.lang.String basePath;
+  boolean $stack8;
+  java.lang.StringBuilder $stack9;
+  int $stack28;
+  java.lang.String $stack38;
+  this#org.apache.rocketmq.tieredstore.provider.TieredFileSegment(fileType,messageQueue,baseOffset,storeConfig);
+ basePath = storeConfig.getTieredStoreFilepath();
+ $stack8 = org.apache.commons.lang3.StringUtils.isBlank((java.lang.CharSequence)basePath);
+ if ($stack8!=0) goto label0;
+ $stack38=java.io.File.separator;
+ $stack8 = basePath.endsWith($stack38);
+ if ($stack8==0) goto label1;
+ label0:this.basePath=basePath;
+ goto label2;
+ label1:$stack9=new java.lang.StringBuilder;
+ $stack9#java.lang.StringBuilder();
+ $stack9 = $stack9.append(basePath);
+ basePath=java.io.File.separator;
+ $stack9 = $stack9.append(basePath);
+ basePath = $stack9.toString();
+ this.basePath=basePath;
+ label2:$stack9=new java.lang.StringBuilder;
+ $stack9#java.lang.StringBuilder();
+ basePath=this.basePath;
+ $stack9 = $stack9.append(basePath);
+ basePath = storeConfig.getBrokerClusterName();
+ basePath = org.apache.rocketmq.tieredstore.util.TieredStoreUtil.getHash(basePath);
+ $stack9 = $stack9.append(basePath);
+ $stack9 = $stack9.append("_");
+ basePath = storeConfig.getBrokerClusterName();
+ $stack9 = $stack9.append(basePath);
+ basePath=java.io.File.separator;
+ $stack9 = $stack9.append(basePath);
+ basePath = messageQueue.getBrokerName();
+ $stack9 = $stack9.append(basePath);
+ basePath=java.io.File.separator;
+ $stack9 = $stack9.append(basePath);
+ basePath = messageQueue.getTopic();
+ $stack9 = $stack9.append(basePath);
+ basePath=java.io.File.separator;
+ $stack9 = $stack9.append(basePath);
+ $stack28 = messageQueue.getQueueId();
+ $stack9 = $stack9.append($stack28);
+ basePath=java.io.File.separator;
+ $stack9 = $stack9.append(basePath);
+ $stack9 = $stack9.append((java.lang.Object)fileType);
+ basePath=java.io.File.separator;
+ $stack9 = $stack9.append(basePath);
+ basePath = org.apache.rocketmq.tieredstore.util.TieredStoreUtil.offset2FileName(baseOffset);
+ $stack9 = $stack9.append(basePath);
+ basePath = $stack9.toString();
+ this.filepath=basePath;
+ this.createFile();
+ return;
+ } 
+

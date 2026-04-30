@@ -1,0 +1,61 @@
+    private java.lang.Thread[] getThreadArray(java.lang.ThreadGroup)
+    {
+        org.junit.internal.runners.statements.FailOnTimeout this;
+        java.lang.ThreadGroup group;
+        int count, enumCount, loopCount;
+        java.lang.Thread[] threads;
+
+        this := @this: org.junit.internal.runners.statements.FailOnTimeout;
+
+        group := @parameter0: java.lang.ThreadGroup;
+
+        count = virtualinvoke group.<java.lang.ThreadGroup: int activeCount()>();
+/*236*/
+/*236*/
+
+        count = count * 2;
+/*237*/
+
+        count = staticinvoke <java.lang.Math: int max(int,int)>(count, 100);
+/*237*/
+/*237*/
+
+        loopCount = 0;
+/*240*/
+
+     label1:
+        threads = newarray (java.lang.Thread)[count];
+/*242*/
+/*242*/
+
+        enumCount = virtualinvoke group.<java.lang.ThreadGroup: int enumerate(java.lang.Thread[])>(threads);
+/*243*/
+/*243*/
+
+        if enumCount >= count goto label2;
+/*244*/
+
+        goto label3;
+/*245*/
+
+     label2:
+        count = count + 100;
+/*250*/
+
+        loopCount = loopCount + 1;
+/*251*/
+
+        if loopCount < 5 goto label1;
+/*251*/
+
+        return null;
+/*252*/
+
+     label3:
+        threads = specialinvoke this.<org.junit.internal.runners.statements.FailOnTimeout: java.lang.Thread[] copyThreads(java.lang.Thread[],int)>(threads, enumCount);
+/*257*/
+
+        return threads;
+/*257*/
+    }
+

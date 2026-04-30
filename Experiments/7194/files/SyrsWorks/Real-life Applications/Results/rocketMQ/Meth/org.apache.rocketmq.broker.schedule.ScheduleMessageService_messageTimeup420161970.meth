@@ -1,0 +1,48 @@
+org.apache.rocketmq.common.message.MessageExtBrokerInner org.apache.rocketmq.broker.schedule.ScheduleMessageService:messageTimeup(org.apache.rocketmq.common.message.MessageExt msgExt)
+{
+org.apache.rocketmq.common.message.MessageExtBrokerInner msgInner;
+  org.apache.rocketmq.common.TopicFilterType topicFilterType;
+  long tagsCodeValue;
+  java.lang.String queueIdStr;
+  int queueId;
+  byte[] $stack9;
+  java.util.Map $stack11;
+  java.net.SocketAddress $stack20;
+  msgInner=new org.apache.rocketmq.common.message.MessageExtBrokerInner;
+ msgInner#org.apache.rocketmq.common.message.MessageExtBrokerInner();
+ $stack9 = msgExt.getBody();
+ msgInner.setBody($stack9);
+ queueId = msgExt.getFlag();
+ msgInner.setFlag(queueId);
+ $stack11 = msgExt.getProperties();
+ org.apache.rocketmq.common.message.MessageAccessor.setProperties((org.apache.rocketmq.common.message.Message)msgInner,$stack11);
+ queueId = msgInner.getSysFlag();
+ topicFilterType = org.apache.rocketmq.common.message.MessageExt.parseTopicFilterType(queueId);
+ queueIdStr = msgInner.getTags();
+ tagsCodeValue = org.apache.rocketmq.common.message.MessageExtBrokerInner.tagsString2tagsCode(topicFilterType,queueIdStr);
+ msgInner.setTagsCode(tagsCodeValue);
+ $stack11 = msgExt.getProperties();
+ queueIdStr = org.apache.rocketmq.common.message.MessageDecoder.messageProperties2String($stack11);
+ msgInner.setPropertiesString(queueIdStr);
+ queueId = msgExt.getSysFlag();
+ msgInner.setSysFlag(queueId);
+ tagsCodeValue = msgExt.getBornTimestamp();
+ msgInner.setBornTimestamp(tagsCodeValue);
+ $stack20 = msgExt.getBornHost();
+ msgInner.setBornHost($stack20);
+ $stack20 = msgExt.getStoreHost();
+ msgInner.setStoreHost($stack20);
+ queueId = msgExt.getReconsumeTimes();
+ msgInner.setReconsumeTimes(queueId);
+ msgInner.setWaitStoreMsgOK((boolean)0);
+ org.apache.rocketmq.common.message.MessageAccessor.clearProperty((org.apache.rocketmq.common.message.Message)msgInner,"DELAY");
+ org.apache.rocketmq.common.message.MessageAccessor.clearProperty((org.apache.rocketmq.common.message.Message)msgInner,"TIMER_DELIVER_MS");
+ org.apache.rocketmq.common.message.MessageAccessor.clearProperty((org.apache.rocketmq.common.message.Message)msgInner,"TIMER_DELAY_SEC");
+ queueIdStr = msgInner.getProperty("REAL_TOPIC");
+ msgInner.setTopic(queueIdStr);
+ queueIdStr = msgInner.getProperty("REAL_QID");
+ queueId = java.lang.Integer.parseInt(queueIdStr);
+ msgInner.setQueueId(queueId);
+ return  msgInner;
+ } 
+

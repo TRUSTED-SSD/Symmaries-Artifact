@@ -1,0 +1,33 @@
+void org.apache.bookkeeper.bookie.JournalChannel:forceWrite(boolean forceMetadata)
+{
+long newForceWritePosition;
+  org.slf4j.Logger $stack6;
+  boolean $stack7;
+  org.apache.bookkeeper.bookie.BufferedChannel $stack8;
+  long $stack11;
+  byte $stack12;
+  long $stack13;
+  int $stack16;
+  $stack6=org.apache.bookkeeper.bookie.JournalChannel.LOG;
+ $stack7 = $stack6.isDebugEnabled();
+ if ($stack7==0) goto label0;
+ $stack6=org.apache.bookkeeper.bookie.JournalChannel.LOG;
+ dummyClass.lowSink("Journal ForceWrite");
+$stack6.debug("Journal ForceWrite");
+ label0:$stack8=this.bc;
+ newForceWritePosition = $stack8.forceWrite(forceMetadata);
+ forceMetadata=this.fRemoveFromPageCache;
+ if (forceMetadata==0) goto label1;
+ newForceWritePosition=(newForceWritePosition-8388608L);
+ $stack11=this.lastDropPosition;
+ $stack12=($stack11 cmp newForceWritePosition);
+ if ($stack12>=0) goto label2;
+ $stack16=this.fd;
+ $stack11=this.lastDropPosition;
+ $stack13=this.lastDropPosition;
+ $stack13=(newForceWritePosition-$stack13);
+ org.apache.bookkeeper.util.PageCacheUtil.bestEffortRemoveFromPageCache($stack16,$stack11,$stack13);
+ label2:this.lastDropPosition=newForceWritePosition;
+ label1:return;
+ } 
+

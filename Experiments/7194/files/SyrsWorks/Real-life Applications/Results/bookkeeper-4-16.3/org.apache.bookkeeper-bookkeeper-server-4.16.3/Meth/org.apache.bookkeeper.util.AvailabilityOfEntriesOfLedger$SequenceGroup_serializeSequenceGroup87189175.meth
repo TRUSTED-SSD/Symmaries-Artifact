@@ -1,0 +1,24 @@
+void org.apache.bookkeeper.util.AvailabilityOfEntriesOfLedger$SequenceGroup:serializeSequenceGroup(byte[] byteArrayForSerialization)
+{
+java.nio.ByteBuffer buffer;
+  boolean $stack3;
+  long $stack5;
+  int $stack9;
+  java.lang.IllegalStateException $stack13;
+  $stack3 = this#org.apache.bookkeeper.util.AvailabilityOfEntriesOfLedger$SequenceGroup:isSequenceGroupClosed();
+ if ($stack3!=0) goto label0;
+ $stack13=new java.lang.IllegalStateException;
+ $stack13#java.lang.IllegalStateException("SequenceGroup is not yet closed, it is illegal to call serializeSequenceGroup");
+ throw $stack13;
+ label0:buffer = java.nio.ByteBuffer.wrap(byteArrayForSerialization);
+ $stack5=this.firstSequenceStart;
+ buffer.putLong($stack5);
+ $stack5=this.lastSequenceStart;
+ buffer.putLong($stack5);
+ $stack9=this.sequenceSize;
+ buffer.putInt($stack9);
+ $stack9=this.sequencePeriod;
+ buffer.putInt($stack9);
+ return;
+ } 
+

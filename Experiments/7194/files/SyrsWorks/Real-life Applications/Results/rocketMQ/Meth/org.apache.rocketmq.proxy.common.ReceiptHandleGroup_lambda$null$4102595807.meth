@@ -1,0 +1,29 @@
+void org.apache.rocketmq.proxy.common.ReceiptHandleGroup:lambda$null$4(org.apache.rocketmq.proxy.common.ReceiptHandleGroup$HandleData handleData,java.util.Map handleMap,java.lang.String handleKey,java.lang.String msgID,org.apache.rocketmq.proxy.common.MessageReceiptHandle messageReceiptHandle,java.lang.Throwable @throwable)
+{
+boolean $stack9;
+  java.lang.Throwable $stack15;
+  java.lang.Throwable throwable;
+throwable=@throwable;
+label0:if (throwable==null) goto label1;
+ label2:handleData.unlock();
+ return;
+ label1:if (messageReceiptHandle!=null) goto label3;
+ org.apache.rocketmq.proxy.common.ReceiptHandleGroup$HandleData.access$102(handleData,(boolean)1);
+ goto label4;
+ label3:org.apache.rocketmq.proxy.common.ReceiptHandleGroup$HandleData.access$002(handleData,messageReceiptHandle);
+ label4:handleData.unlock();
+ goto label5;
+ label6:$stack15 = catch;
+ throwable=$stack15;
+ label7:handleData.unlock();
+ throw $stack15;
+ label5:$stack9 = org.apache.rocketmq.proxy.common.ReceiptHandleGroup$HandleData.access$100(handleData);
+ if ($stack9==0) goto label8;
+ handleMap.remove((java.lang.Object)handleKey,(java.lang.Object)handleData);
+ label8:this#org.apache.rocketmq.proxy.common.ReceiptHandleGroup(msgID);
+ return;
+ catch java.lang.Throwable: label0 - label2 : label6;
+catch java.lang.Throwable: label1 - label4 : label6;
+catch java.lang.Throwable: label6 - label7 : label6;
+} 
+

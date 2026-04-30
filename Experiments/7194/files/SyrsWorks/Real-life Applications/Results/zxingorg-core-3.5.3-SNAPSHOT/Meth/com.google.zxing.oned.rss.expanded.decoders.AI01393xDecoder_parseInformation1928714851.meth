@@ -1,0 +1,40 @@
+java.lang.String com.google.zxing.oned.rss.expanded.decoders.AI01393xDecoder:parseInformation()
+{
+java.lang.StringBuilder buf;
+  int lastAIdigit;
+  com.google.zxing.common.BitArray $stack5;
+  com.google.zxing.oned.rss.expanded.decoders.GeneralAppIdDecoder $stack8;
+  int $stack15;
+  java.lang.String $stack20;
+  com.google.zxing.oned.rss.expanded.decoders.DecodedInformation $stack29;
+  com.google.zxing.NotFoundException $stack35;
+  $stack5 = this.getInformation();
+ lastAIdigit = $stack5.getSize();
+ if (lastAIdigit>=48) goto label0;
+ $stack35 = com.google.zxing.NotFoundException.getNotFoundInstance();
+ throw $stack35;
+ label0:buf=new java.lang.StringBuilder;
+ buf#java.lang.StringBuilder();
+ this.encodeCompressedGtin(buf,8);
+ $stack8 = this.getGeneralDecoder();
+ lastAIdigit = $stack8.extractNumericValueFromBitArray(48,2);
+ buf.append("(393");
+ buf.append(lastAIdigit);
+ buf.append((char)41);
+ $stack8 = this.getGeneralDecoder();
+ lastAIdigit = $stack8.extractNumericValueFromBitArray(50,10);
+ $stack15=(lastAIdigit/100);
+ if ($stack15!=0) goto label1;
+ buf.append((char)48);
+ label1:$stack15=(lastAIdigit/10);
+ if ($stack15!=0) goto label2;
+ buf.append((char)48);
+ label2:buf.append(lastAIdigit);
+ $stack8 = this.getGeneralDecoder();
+ $stack29 = $stack8.decodeGeneralPurposeField(60,null);
+ $stack20 = $stack29.getNewString();
+ buf.append($stack20);
+ $stack20 = buf.toString();
+ return  $stack20;
+ } 
+

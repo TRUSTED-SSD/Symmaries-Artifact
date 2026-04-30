@@ -1,0 +1,17 @@
+void org.apache.rocketmq.proxy.grpc.v2.common.GrpcClientSettingsManager:updateClientSettings(java.lang.String clientId,apache.rocketmq.v2.Settings @settings)
+{
+boolean $stack3;
+  java.util.Map $stack4;
+  apache.rocketmq.v2.Settings$Builder $stack6;
+  apache.rocketmq.v2.Settings settings;
+settings=@settings;
+$stack3 = settings.hasSubscription();
+ if ($stack3==0) goto label0;
+ $stack6 = this.createDefaultConsumerSettingsBuilder();
+ $stack6 = $stack6.mergeFrom(settings);
+ settings = $stack6.build();
+ label0:$stack4=org.apache.rocketmq.proxy.grpc.v2.common.GrpcClientSettingsManager.CLIENT_SETTINGS_MAP;
+ $stack4.put((java.lang.Object)clientId,(java.lang.Object)settings);
+ return;
+ } 
+

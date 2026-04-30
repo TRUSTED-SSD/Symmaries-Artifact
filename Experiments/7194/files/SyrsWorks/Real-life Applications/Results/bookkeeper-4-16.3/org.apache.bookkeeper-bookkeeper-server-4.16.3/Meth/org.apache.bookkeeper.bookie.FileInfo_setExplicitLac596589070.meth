@@ -1,0 +1,46 @@
+void org.apache.bookkeeper.bookie.FileInfo:setExplicitLac(io.netty.buffer.ByteBuf lac)
+{
+long explicitLacValue;
+  org.apache.bookkeeper.bookie.FileInfo l4;
+  java.lang.Throwable l5;
+  java.nio.ByteBuffer $stack7;
+  org.slf4j.Logger $stack18;
+  boolean $stack19;
+  int $stack26;
+  l4=this;
+ monitorenter this;
+ label0:$stack7=this.explicitLac;
+ if ($stack7!=null) goto label1;
+ $stack26 = lac.capacity();
+ $stack7 = java.nio.ByteBuffer.allocate($stack26);
+ this.explicitLac=$stack7;
+ label1:$stack7=this.explicitLac;
+ dummyClass.highSourceMut($stack7);
+lac.readBytes($stack7);
+ $stack7=this.explicitLac;
+ $stack7.rewind();
+ $stack7=this.explicitLac;
+ $stack7.getLong();
+ $stack7=this.explicitLac;
+ explicitLacValue = $stack7.getLong();
+ $stack7=this.explicitLac;
+ $stack7.rewind();
+ $stack18=org.apache.bookkeeper.bookie.FileInfo.LOG;
+ $stack19 = $stack18.isDebugEnabled();
+ if ($stack19==0) goto label2;
+ $stack18=org.apache.bookkeeper.bookie.FileInfo.LOG;
+ $stack7=this.explicitLac;
+ dummyClass.lowSink("fileInfo:SetLac: {}");
+$stack18.debug("fileInfo:SetLac: {}",(java.lang.Object)$stack7);
+ label2:this.needFlushHeader=1;
+ monitorexit this;
+ label3:goto label4;
+ label5:l5 = catch;
+ monitorexit this;
+ label6:throw l5;
+ label4:this.setLastAddConfirmed(explicitLacValue);
+ return;
+ catch java.lang.Throwable: label0 - label3 : label5;
+catch java.lang.Throwable: label5 - label6 : label5;
+} 
+

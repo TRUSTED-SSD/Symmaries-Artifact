@@ -1,0 +1,41 @@
+org.apache.bookkeeper.client.BookieWatcherImpl(org.apache.bookkeeper.conf.ClientConfiguration conf,org.apache.bookkeeper.client.EnsemblePlacementPolicy placementPolicy,org.apache.bookkeeper.discover.RegistrationClient registrationClient,org.apache.bookkeeper.proto.BookieAddressResolver bookieAddressResolver,org.apache.bookkeeper.stats.StatsLogger statsLogger)
+{
+java.util.Set $stack6;
+  com.google.common.cache.CacheBuilder $stack8;
+  int $stack9;
+  java.util.concurrent.TimeUnit $stack10;
+  long $stack11;
+  org.apache.bookkeeper.client.BookieWatcherImpl$1 $stack13;
+  com.google.common.cache.Cache $stack15;
+  org.apache.bookkeeper.stats.OpStatsLogger $stack16;
+  org.apache.bookkeeper.stats.Counter $stack18;
+  this#java.lang.Object();
+ $stack6 = java.util.Collections.emptySet();
+ this.writableBookies=$stack6;
+ $stack6 = java.util.Collections.emptySet();
+ this.readOnlyBookies=$stack6;
+ this.initialWritableBookiesFuture=null;
+ this.initialReadonlyBookiesFuture=null;
+ this.conf=conf;
+ this.bookieAddressResolver=bookieAddressResolver;
+ this.placementPolicy=placementPolicy;
+ this.registrationClient=registrationClient;
+ $stack8 = com.google.common.cache.CacheBuilder.newBuilder();
+ $stack9 = conf.getBookieQuarantineTimeSeconds();
+ $stack11=(long) $stack9;
+ $stack10=java.util.concurrent.TimeUnit.SECONDS;
+ $stack8 = $stack8.expireAfterWrite($stack11,$stack10);
+ $stack13=new org.apache.bookkeeper.client.BookieWatcherImpl$1;
+ $stack13#org.apache.bookkeeper.client.BookieWatcherImpl$1(this);
+ $stack8 = $stack8.removalListener((com.google.common.cache.RemovalListener)$stack13);
+ $stack15 = $stack8.build();
+ this.quarantinedBookies=$stack15;
+ $stack16 = statsLogger.getOpStatsLogger("NEW_ENSEMBLE_TIME");
+ this.newEnsembleTimer=$stack16;
+ $stack16 = statsLogger.getOpStatsLogger("REPLACE_BOOKIE_TIME");
+ this.replaceBookieTimer=$stack16;
+ $stack18 = statsLogger.getCounter("ENSEMBLE_NOT_ADHERING_TO_PLACEMENT_POLICY_TOTAL");
+ this.ensembleNotAdheringToPlacementPolicy=$stack18;
+ return;
+ } 
+

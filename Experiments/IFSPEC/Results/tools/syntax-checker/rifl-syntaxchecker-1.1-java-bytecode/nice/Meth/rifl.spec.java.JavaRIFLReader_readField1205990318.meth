@@ -1,0 +1,44 @@
+rifl.spec.java.JavaField rifl.spec.java.JavaRIFLReader:readField(org.w3c.dom.Element elem,boolean isSource)
+{
+java.lang.String className;
+  java.lang.String fieldName;
+  boolean $stack7;
+  rifl.spec.java.JavaField $stack10;
+  rifl.spec.RIFLIntegrityException $stack11;
+  java.lang.StringBuilder $stack12;
+  className = elem.getAttribute("class");
+ fieldName = elem.getAttribute("name");
+ $stack7 = rifl.spec.java.JavaSyntaxChecker.isArrayClassNameCorrect(className);
+ if ($stack7==0) goto label0;
+ $stack7 = fieldName.equals((java.lang.Object)"content");
+ if ($stack7!=0) goto label0;
+ $stack7 = fieldName.equals((java.lang.Object)"length");
+ if ($stack7!=0) goto label0;
+ $stack11=new rifl.spec.RIFLIntegrityException;
+ $stack11#rifl.spec.RIFLIntegrityException("If class name of field is an array class, fields may only be content or length.");
+ throw $stack11;
+ label0:$stack7 = rifl.spec.java.JavaSyntaxChecker.isClassNameCorrect(className);
+ if ($stack7!=0) goto label1;
+ $stack7 = rifl.spec.java.JavaSyntaxChecker.isArrayClassNameCorrect(className);
+ if ($stack7!=0) goto label1;
+ $stack11=new rifl.spec.RIFLIntegrityException;
+ $stack12=new java.lang.StringBuilder;
+ $stack12#java.lang.StringBuilder("Invalid class name: ");
+ $stack12 = $stack12.append(className);
+ className = $stack12.toString();
+ $stack11#rifl.spec.RIFLIntegrityException(className);
+ throw $stack11;
+ label1:$stack7 = rifl.spec.java.JavaSyntaxChecker.isFieldNameCorrect(fieldName);
+ if ($stack7!=0) goto label2;
+ $stack11=new rifl.spec.RIFLIntegrityException;
+ $stack12=new java.lang.StringBuilder;
+ $stack12#java.lang.StringBuilder("Invalid field name: ");
+ $stack12 = $stack12.append(fieldName);
+ className = $stack12.toString();
+ $stack11#rifl.spec.RIFLIntegrityException(className);
+ throw $stack11;
+ label2:$stack10=new rifl.spec.java.JavaField;
+ $stack10#rifl.spec.java.JavaField(className,fieldName,isSource);
+ return  $stack10;
+ } 
+

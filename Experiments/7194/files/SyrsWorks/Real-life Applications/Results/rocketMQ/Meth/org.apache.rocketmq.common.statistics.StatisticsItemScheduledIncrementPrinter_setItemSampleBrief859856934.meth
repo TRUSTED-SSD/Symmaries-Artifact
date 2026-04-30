@@ -1,0 +1,20 @@
+void org.apache.rocketmq.common.statistics.StatisticsItemScheduledIncrementPrinter:setItemSampleBrief(java.lang.String kind,java.lang.String key,org.apache.rocketmq.common.statistics.StatisticsItemScheduledIncrementPrinter$StatisticsItemSampleBrief brief)
+{
+java.util.concurrent.ConcurrentHashMap itemMap;
+  java.util.concurrent.ConcurrentHashMap oldItemMap;
+  java.lang.Object $stack7;
+  itemMap=this.sampleBriefs;
+ $stack7 = itemMap.get((java.lang.Object)kind);
+ itemMap=(java.util.concurrent.ConcurrentHashMap) $stack7;
+ if (itemMap!=null) goto label0;
+ itemMap=new java.util.concurrent.ConcurrentHashMap;
+ itemMap#java.util.concurrent.ConcurrentHashMap();
+ oldItemMap=this.sampleBriefs;
+ $stack7 = oldItemMap.putIfAbsent((java.lang.Object)kind,(java.lang.Object)itemMap);
+ oldItemMap=(java.util.concurrent.ConcurrentHashMap) $stack7;
+ if (oldItemMap==null) goto label0;
+ itemMap=oldItemMap;
+ label0:itemMap.put((java.lang.Object)key,(java.lang.Object)brief);
+ return;
+ } 
+

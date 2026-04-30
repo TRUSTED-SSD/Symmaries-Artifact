@@ -1,0 +1,32 @@
+static com.google.zxing.qrcode.decoder.Version com.google.zxing.qrcode.decoder.Version:decodeVersionInformation(int versionBits)
+{
+int bestDifference;
+  int bestVersion;
+  int i;
+  int targetVersion;
+  int[] $stack6;
+  com.google.zxing.qrcode.decoder.Version $stack8;
+  bestDifference=2147483647;
+ bestVersion=0;
+ i=0;
+ label0:$stack6=com.google.zxing.qrcode.decoder.Version.VERSION_DECODE_INFO;
+ targetVersion=#$stack6;
+ if (i>=targetVersion) goto label1;
+ $stack6=com.google.zxing.qrcode.decoder.Version.VERSION_DECODE_INFO;
+ targetVersion=$stack6[i];
+ if (targetVersion!=versionBits) goto label2;
+ versionBits=(i+7);
+ $stack8 = com.google.zxing.qrcode.decoder.Version.getVersionForNumber(versionBits);
+ return  $stack8;
+ label2:targetVersion = com.google.zxing.qrcode.decoder.FormatInformation.numBitsDiffering(versionBits,targetVersion);
+ if (targetVersion>=bestDifference) goto label3;
+ bestVersion=(i+7);
+ bestDifference=targetVersion;
+ label3:i=(i+1);
+ goto label0;
+ label1:if (bestDifference>3) goto label4;
+ $stack8 = com.google.zxing.qrcode.decoder.Version.getVersionForNumber(bestVersion);
+ return  $stack8;
+ label4:return  null;
+ } 
+

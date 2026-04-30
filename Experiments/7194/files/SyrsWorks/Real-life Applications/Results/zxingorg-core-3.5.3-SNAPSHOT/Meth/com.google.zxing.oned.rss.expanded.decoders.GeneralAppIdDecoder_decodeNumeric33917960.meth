@@ -1,0 +1,34 @@
+com.google.zxing.oned.rss.expanded.decoders.DecodedNumeric com.google.zxing.oned.rss.expanded.decoders.GeneralAppIdDecoder:decodeNumeric(int pos)
+{
+int numeric;
+  int digit1;
+  com.google.zxing.common.BitArray $stack5;
+  com.google.zxing.oned.rss.expanded.decoders.DecodedNumeric $stack11;
+  digit1=(pos+7);
+ $stack5=this.information;
+ numeric = $stack5.getSize();
+ if (digit1<=numeric) goto label0;
+ numeric = this.extractNumericValueFromBitArray(pos,4);
+ if (numeric!=0) goto label1;
+ $stack11=new com.google.zxing.oned.rss.expanded.decoders.DecodedNumeric;
+ $stack5=this.information;
+ pos = $stack5.getSize();
+ $stack11#com.google.zxing.oned.rss.expanded.decoders.DecodedNumeric(pos,10,10);
+ return  $stack11;
+ label1:$stack11=new com.google.zxing.oned.rss.expanded.decoders.DecodedNumeric;
+ $stack5=this.information;
+ pos = $stack5.getSize();
+ digit1=(numeric-1);
+ $stack11#com.google.zxing.oned.rss.expanded.decoders.DecodedNumeric(pos,digit1,10);
+ return  $stack11;
+ label0:numeric = this.extractNumericValueFromBitArray(pos,7);
+ digit1=(numeric-8);
+ digit1=(digit1/11);
+ numeric=(numeric-8);
+ numeric=(numeric%11);
+ $stack11=new com.google.zxing.oned.rss.expanded.decoders.DecodedNumeric;
+ pos=(pos+7);
+ $stack11#com.google.zxing.oned.rss.expanded.decoders.DecodedNumeric(pos,digit1,numeric);
+ return  $stack11;
+ } 
+

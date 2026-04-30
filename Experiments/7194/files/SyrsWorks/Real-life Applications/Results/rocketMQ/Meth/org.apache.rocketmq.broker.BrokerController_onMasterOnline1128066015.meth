@@ -1,0 +1,56 @@
+void org.apache.rocketmq.broker.BrokerController:onMasterOnline(java.lang.String @masterAddr,java.lang.String masterHaAddr)
+{
+boolean needSyncMasterFlushOffset;
+  org.apache.rocketmq.remoting.protocol.BrokerSyncInfo brokerSyncInfo;
+  org.apache.rocketmq.store.MessageStore $stack5;
+  long $stack6;
+  byte $stack7;
+  org.apache.rocketmq.broker.out.BrokerOuterAPI $stack8;
+  org.apache.rocketmq.logging.org.slf4j.Logger $stack17;
+  java.lang.Long $stack20;
+  org.apache.rocketmq.store.config.MessageStoreConfig $stack28;
+  java.lang.Exception $stack32;
+  java.lang.String masterAddr;
+masterAddr=@masterAddr;
+$stack5=this.messageStore;
+ $stack6 = $stack5.getMasterFlushedOffset();
+ $stack7=($stack6 cmp 0L);
+ if ($stack7!=0) goto label0;
+ $stack28=this.messageStoreConfig;
+ needSyncMasterFlushOffset = $stack28.isSyncMasterFlushOffsetWhenStartup();
+ if (needSyncMasterFlushOffset==0) goto label0;
+ needSyncMasterFlushOffset=1;
+ goto label1;
+ label0:needSyncMasterFlushOffset=0;
+ label1:if (masterHaAddr==null) goto label2;
+ if (needSyncMasterFlushOffset==0) goto label3;
+ label2:$stack8=this.brokerOuterAPI;
+ brokerSyncInfo = $stack8.retrieveBrokerHaInfo(masterAddr);
+ if (needSyncMasterFlushOffset==0) goto label4;
+ $stack17=org.apache.rocketmq.broker.BrokerController.LOG;
+ $stack6 = brokerSyncInfo.getMasterFlushOffset();
+ $stack20 = java.lang.Long.valueOf($stack6);
+ $stack17.info("Set master flush offset in slave to {}",(java.lang.Object)$stack20);
+ $stack5=this.messageStore;
+ $stack6 = brokerSyncInfo.getMasterFlushOffset();
+ $stack5.setMasterFlushedOffset($stack6);
+ label4:if (masterHaAddr!=null) goto label5;
+ $stack5=this.messageStore;
+ masterAddr = brokerSyncInfo.getMasterHaAddress();
+ $stack5.updateHaMasterAddress(masterAddr);
+ $stack5=this.messageStore;
+ masterAddr = brokerSyncInfo.getMasterAddress();
+ $stack5.updateMasterAddress(masterAddr);
+ label5:goto label3;
+ label6:$stack32 = catch;
+ $stack17=org.apache.rocketmq.broker.BrokerController.LOG;
+ $stack17.error("retrieve master ha info exception, {}",(java.lang.Throwable)$stack32);
+ label3:if (masterHaAddr==null) goto label7;
+ $stack5=this.messageStore;
+ $stack5.updateHaMasterAddress(masterHaAddr);
+ label7:$stack5=this.messageStore;
+ $stack5.wakeupHAClient();
+ return;
+ catch java.lang.Exception: label2 - label5 : label6;
+} 
+

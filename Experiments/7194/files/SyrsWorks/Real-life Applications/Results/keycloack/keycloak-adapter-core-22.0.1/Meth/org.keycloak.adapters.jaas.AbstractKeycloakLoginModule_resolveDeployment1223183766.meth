@@ -1,0 +1,55 @@
+org.keycloak.adapters.KeycloakDeployment org.keycloak.adapters.jaas.AbstractKeycloakLoginModule:resolveDeployment(java.lang.String @keycloakConfigFile)
+{
+java.lang.Object is;
+  boolean $stack4;
+  org.keycloak.adapters.KeycloakDeployment $stack10;
+  java.net.MalformedURLException $stack11;
+  java.lang.RuntimeException $stack12;
+  java.io.IOException $stack13;
+  org.jboss.logging.Logger $stack16;
+  java.lang.StringBuilder $stack17;
+  java.net.URL tmp$1797387305;
+  java.io.InputStream tmp$1098431238;
+  java.lang.Throwable tmp$91457288;
+  java.lang.String keycloakConfigFile;
+keycloakConfigFile=@keycloakConfigFile;
+label0:is=null;
+ $stack4 = keycloakConfigFile.startsWith("profile:");
+ if ($stack4==0) goto label1;
+ label2:tmp$1797387305=new java.net.URL;
+ tmp$1797387305#java.net.URL(keycloakConfigFile);
+ is = tmp$1797387305.openStream();
+ label3:goto label4;
+ label5:$stack11 = catch;
+ $stack12=new java.lang.RuntimeException;
+ $stack12#java.lang.RuntimeException((java.lang.Throwable)$stack11);
+ throw $stack12;
+ label6:$stack13 = catch;
+ $stack12=new java.lang.RuntimeException;
+ $stack12#java.lang.RuntimeException((java.lang.Throwable)$stack13);
+ throw $stack12;
+ label1:is = org.keycloak.common.util.FindFile.findFile(keycloakConfigFile);
+ label4:tmp$1098431238=(java.io.InputStream) is;
+ $stack10 = org.keycloak.adapters.KeycloakDeploymentBuilder.build(tmp$1098431238);
+ label7:return  $stack10;
+ label8:$stack12 = catch;
+ is=$stack12;
+ $stack16 = this.getLogger();
+ $stack17=new java.lang.StringBuilder;
+ $stack17#java.lang.StringBuilder();
+ $stack17 = $stack17.append("Unable to find or parse file ");
+ $stack17 = $stack17.append(keycloakConfigFile);
+ $stack17 = $stack17.append(" due to ");
+ $stack12=(java.lang.RuntimeException) $stack12;
+ keycloakConfigFile = $stack12.getMessage();
+ $stack17 = $stack17.append(keycloakConfigFile);
+ keycloakConfigFile = $stack17.toString();
+ tmp$91457288=(java.lang.Throwable) is;
+ $stack16.debug((java.lang.Object)keycloakConfigFile,tmp$91457288);
+ tmp$91457288=(java.lang.Throwable) is;
+ throw tmp$91457288;
+ catch java.net.MalformedURLException: label2 - label3 : label5;
+catch java.io.IOException: label2 - label3 : label6;
+catch java.lang.RuntimeException: label0 - label7 : label8;
+} 
+

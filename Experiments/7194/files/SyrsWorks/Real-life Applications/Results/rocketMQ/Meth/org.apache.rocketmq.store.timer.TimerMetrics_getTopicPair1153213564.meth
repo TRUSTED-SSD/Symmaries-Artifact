@@ -1,0 +1,21 @@
+org.apache.rocketmq.store.timer.TimerMetrics$Metric org.apache.rocketmq.store.timer.TimerMetrics:getTopicPair(java.lang.String topic)
+{
+org.apache.rocketmq.store.timer.TimerMetrics$Metric pair;
+  org.apache.rocketmq.store.timer.TimerMetrics$Metric previous;
+  java.util.concurrent.ConcurrentMap $stack4;
+  java.lang.Object $stack5;
+  $stack4=this.timingCount;
+ $stack5 = $stack4.get((java.lang.Object)topic);
+ pair=(org.apache.rocketmq.store.timer.TimerMetrics$Metric) $stack5;
+ if (null==pair) goto label0;
+ return  pair;
+ label0:pair=new org.apache.rocketmq.store.timer.TimerMetrics$Metric;
+ pair#org.apache.rocketmq.store.timer.TimerMetrics$Metric();
+ $stack4=this.timingCount;
+ $stack5 = $stack4.putIfAbsent((java.lang.Object)topic,(java.lang.Object)pair);
+ previous=(org.apache.rocketmq.store.timer.TimerMetrics$Metric) $stack5;
+ if (null==previous) goto label1;
+ return  previous;
+ label1:return  pair;
+ } 
+

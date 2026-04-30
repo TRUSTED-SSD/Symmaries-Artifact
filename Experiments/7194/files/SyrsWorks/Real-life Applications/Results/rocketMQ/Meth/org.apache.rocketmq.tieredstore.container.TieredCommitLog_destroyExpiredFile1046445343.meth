@@ -1,0 +1,46 @@
+void org.apache.rocketmq.tieredstore.container.TieredCommitLog:destroyExpiredFile()
+{
+org.apache.rocketmq.tieredstore.provider.TieredFileSegment fileSegment;
+  org.apache.rocketmq.tieredstore.container.TieredFileQueue $stack3;
+  int $stack5;
+  long $stack8;
+  long $stack9;
+  org.apache.rocketmq.tieredstore.common.TieredMessageStoreConfig $stack10;
+  byte $stack17;
+  java.lang.Exception $stack24;
+  org.apache.rocketmq.logging.org.slf4j.Logger $stack25;
+  $stack3=this.fileQueue;
+ $stack3#org.apache.rocketmq.tieredstore.container.TieredFileQueue();
+ $stack3=this.fileQueue;
+ $stack5 = $stack3.getFileSegmentCount();
+ if ($stack5!=0) goto label0;
+ return;
+ label0:$stack3=this.fileQueue;
+ fileSegment = $stack3.getFileToWrite();
+ label1:$stack8 = java.lang.System.currentTimeMillis();
+ $stack9 = fileSegment.getEndTimestamp();
+ $stack8=($stack8-$stack9);
+ $stack10=this.storeConfig;
+ $stack5 = $stack10.getCommitLogRollingInterval();
+ $stack9=(long) $stack5;
+ $stack9=($stack9 * 60L);
+ $stack9=($stack9 * 60L);
+ $stack9=($stack9 * 1000L);
+ $stack17=($stack8 cmp $stack9);
+ if ($stack17<=0) goto label2;
+ $stack8 = fileSegment.getSize();
+ $stack10=this.storeConfig;
+ $stack5 = $stack10.getCommitLogRollingMinimumSize();
+ $stack9=(long) $stack5;
+ $stack17=($stack8 cmp $stack9);
+ if ($stack17<=0) goto label2;
+ $stack3=this.fileQueue;
+ $stack3.rollingNewFile();
+ label2:goto label3;
+ label4:$stack24 = catch;
+ $stack25=org.apache.rocketmq.tieredstore.container.TieredCommitLog.logger;
+ $stack25.error("Rolling to next file failed:",(java.lang.Throwable)$stack24);
+ label3:return;
+ catch java.lang.Exception: label1 - label2 : label4;
+} 
+

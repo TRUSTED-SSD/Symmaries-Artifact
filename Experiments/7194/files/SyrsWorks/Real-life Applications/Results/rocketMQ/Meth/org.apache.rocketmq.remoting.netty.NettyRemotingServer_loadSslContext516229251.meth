@@ -1,0 +1,27 @@
+void org.apache.rocketmq.remoting.netty.NettyRemotingServer:loadSslContext()
+{
+org.apache.rocketmq.remoting.common.TlsMode tlsMode;
+  org.apache.rocketmq.logging.org.slf4j.Logger $stack3;
+  java.lang.String $stack5;
+  org.apache.rocketmq.remoting.common.TlsMode $stack6;
+  io.netty.handler.ssl.SslContext $stack7;
+  java.lang.Exception $stack9;
+  tlsMode=org.apache.rocketmq.remoting.netty.TlsSystemConfig.tlsMode;
+ $stack3=org.apache.rocketmq.remoting.netty.NettyRemotingServer.log;
+ $stack5 = tlsMode.getName();
+ $stack3.info("Server is running in TLS {} mode",(java.lang.Object)$stack5);
+ $stack6=org.apache.rocketmq.remoting.common.TlsMode.DISABLED;
+ if (tlsMode==$stack6) goto label0;
+ label1:$stack7 = org.apache.rocketmq.remoting.netty.TlsHelper.buildSslContext((boolean)0);
+ this.sslContext=$stack7;
+ $stack3=org.apache.rocketmq.remoting.netty.NettyRemotingServer.log;
+ $stack3.info("SSLContext created for server");
+ label2:goto label0;
+ label3:$stack9 = catch;
+ $stack3=org.apache.rocketmq.remoting.netty.NettyRemotingServer.log;
+ $stack3.error("Failed to create SSLContext for server",(java.lang.Throwable)$stack9);
+ label0:return;
+ catch java.security.cert.CertificateException: label1 - label2 : label3;
+catch java.io.IOException: label1 - label2 : label3;
+} 
+

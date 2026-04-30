@@ -1,0 +1,54 @@
+long org.apache.bookkeeper.bookie.storage.ldb.ReadCache:size()
+{
+long size;
+  int i;
+  java.lang.Throwable l5;
+  java.util.concurrent.locks.ReentrantReadWriteLock $stack6;
+  java.util.concurrent.locks.ReentrantReadWriteLock$ReadLock $stack7;
+  java.util.List $stack8;
+  int $stack9;
+  java.lang.Object $stack14;
+  org.apache.bookkeeper.util.collections.ConcurrentLongLongPairHashMap $stack15;
+  boolean $stack16;
+  long $stack20;
+  java.util.concurrent.atomic.AtomicInteger $stack21;
+  $stack6=this.lock;
+ $stack7 = $stack6.readLock();
+ $stack7.lock();
+ label0:size=0L;
+ i=0;
+ label1:$stack8=this.cacheIndexes;
+ $stack9 = $stack8.size();
+ if (i>=$stack9) goto label2;
+ $stack9=this.currentSegmentIdx;
+ if (i!=$stack9) goto label3;
+ $stack21=this.currentSegmentOffset;
+ $stack9 = $stack21.get();
+ $stack20=(long) $stack9;
+ size=(size+$stack20);
+ goto label4;
+ label3:$stack8=this.cacheIndexes;
+ $stack14 = $stack8.get(i);
+ $stack15=(org.apache.bookkeeper.util.collections.ConcurrentLongLongPairHashMap) $stack14;
+ $stack16 = $stack15.isEmpty();
+ if ($stack16!=0) goto label4;
+ $stack9=this.segmentSize;
+ $stack20=(long) $stack9;
+ size=(size+$stack20);
+ label4:i=(i+1);
+ goto label1;
+ label2:i=(int) size;
+ label5:$stack6=this.lock;
+ $stack7 = $stack6.readLock();
+ $stack7.unlock();
+ size=(long) i;
+ return  size;
+ label6:l5 = catch;
+ label7:$stack6=this.lock;
+ $stack7 = $stack6.readLock();
+ $stack7.unlock();
+ throw l5;
+ catch java.lang.Throwable: label0 - label5 : label6;
+catch java.lang.Throwable: label6 - label7 : label6;
+} 
+

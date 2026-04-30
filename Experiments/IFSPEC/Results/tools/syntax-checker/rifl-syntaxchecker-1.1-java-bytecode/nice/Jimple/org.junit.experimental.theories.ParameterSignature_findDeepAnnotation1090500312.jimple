@@ -1,0 +1,91 @@
+    private java.lang.'annotation'.Annotation findDeepAnnotation(java.lang.'annotation'.Annotation[], java.lang.Class, int)
+    {
+        org.junit.experimental.theories.ParameterSignature this;
+        java.lang.'annotation'.Annotation[] annotations, $stack11;
+        java.lang.Class annotationType, $stack10;
+        int depth, len$, i$, $stack12;
+        java.lang.'annotation'.Annotation each;
+        boolean $stack9;
+        java.lang.Object $stack16;
+
+        this := @this: org.junit.experimental.theories.ParameterSignature;
+
+        annotations := @parameter0: java.lang.'annotation'.Annotation[];
+
+        annotationType := @parameter1: java.lang.Class;
+
+        depth := @parameter2: int;
+
+        if depth != 0 goto label1;
+/*109*/
+
+        return null;
+/*110*/
+
+     label1:
+        len$ = lengthof annotations;
+/*112*/
+
+        i$ = 0;
+/*112*/
+
+     label2:
+        if i$ >= len$ goto label5;
+/*112*/
+
+        each = annotations[i$];
+/*123*/
+
+        $stack9 = virtualinvoke annotationType.<java.lang.Class: boolean isInstance(java.lang.Object)>(each);
+/*113*/
+
+        if $stack9 == 0 goto label3;
+/*113*/
+
+        $stack16 = virtualinvoke annotationType.<java.lang.Class: java.lang.Object cast(java.lang.Object)>(each);
+/*114*/
+
+        each = (java.lang.'annotation'.Annotation) $stack16;
+/*114*/
+
+        return each;
+/*114*/
+
+     label3:
+        $stack10 = interfaceinvoke each.<java.lang.'annotation'.Annotation: java.lang.Class annotationType()>();
+/*116*/
+
+        $stack11 = virtualinvoke $stack10.<java.lang.Class: java.lang.'annotation'.Annotation[] getAnnotations()>();
+/*116*/
+
+        $stack12 = depth - 1;
+/*116*/
+
+        each = specialinvoke this.<org.junit.experimental.theories.ParameterSignature: java.lang.'annotation'.Annotation findDeepAnnotation(java.lang.'annotation'.Annotation[],java.lang.Class,int)>($stack11, annotationType, $stack12);
+/*116*/
+/*116*/
+
+        if each == null goto label4;
+/*118*/
+
+        $stack16 = virtualinvoke annotationType.<java.lang.Class: java.lang.Object cast(java.lang.Object)>(each);
+/*119*/
+
+        each = (java.lang.'annotation'.Annotation) $stack16;
+/*119*/
+
+        return each;
+/*119*/
+
+     label4:
+        i$ = i$ + 1;
+/*112*/
+
+        goto label2;
+/*112*/
+
+     label5:
+        return null;
+/*123*/
+    }
+

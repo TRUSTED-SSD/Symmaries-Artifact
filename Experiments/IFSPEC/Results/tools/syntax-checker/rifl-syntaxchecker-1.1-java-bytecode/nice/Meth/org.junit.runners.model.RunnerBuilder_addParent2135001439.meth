@@ -1,0 +1,20 @@
+java.lang.Class org.junit.runners.model.RunnerBuilder:addParent(java.lang.Class parent)
+{
+java.util.Set $stack2;
+  boolean $stack3;
+  org.junit.runners.model.InitializationError $stack4;
+  java.lang.Object[] $stack5;
+  java.lang.String $stack8;
+  $stack2=this.parents;
+ $stack3 = $stack2.add((java.lang.Object)parent);
+ if ($stack3!=0) goto label0;
+ $stack4=new org.junit.runners.model.InitializationError;
+ $stack5=new java.lang.Object[1];
+ $stack8 = parent.getName();
+ $stack5[0]=$stack8;
+ $stack8 = java.lang.String.format("class \'%s\' (possibly indirectly) contains itself as a SuiteClass",$stack5);
+ $stack4#org.junit.runners.model.InitializationError($stack8);
+ throw $stack4;
+ label0:return  parent;
+ } 
+

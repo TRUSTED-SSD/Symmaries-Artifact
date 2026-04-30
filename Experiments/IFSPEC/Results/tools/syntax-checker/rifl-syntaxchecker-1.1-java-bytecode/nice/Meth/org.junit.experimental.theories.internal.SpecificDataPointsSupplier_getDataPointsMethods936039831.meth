@@ -1,0 +1,36 @@
+java.util.Collection org.junit.experimental.theories.internal.SpecificDataPointsSupplier:getDataPointsMethods(org.junit.experimental.theories.ParameterSignature sig)
+{
+java.util.Collection methods;
+  java.lang.String requestedName;
+  java.util.ArrayList methodsWithMatchingNames;
+  java.util.Iterator i$;
+  org.junit.runners.model.FrameworkMethod method;
+  java.lang.String[] methodNames;
+  java.lang.annotation.Annotation $stack9;
+  org.junit.experimental.theories.FromDataPoints $stack10;
+  boolean $stack14;
+  java.lang.Object $stack15;
+  org.junit.experimental.theories.DataPoints $stack17;
+  java.util.List $stack19;
+  methods = this#org.junit.experimental.theories.internal.AllMembersSupplier:getDataPointsMethods(sig);
+ $stack9 = sig.getAnnotation(org.junit.experimental.theories.FromDataPoints);
+ $stack10=(org.junit.experimental.theories.FromDataPoints) $stack9;
+ requestedName = $stack10.value();
+ methodsWithMatchingNames=new java.util.ArrayList;
+ methodsWithMatchingNames#java.util.ArrayList();
+ i$ = methods.iterator();
+ label0:$stack14 = i$.hasNext();
+ if ($stack14==0) goto label1;
+ $stack15 = i$.next();
+ method=(org.junit.runners.model.FrameworkMethod) $stack15;
+ $stack9 = method.getAnnotation(org.junit.experimental.theories.DataPoints);
+ $stack17=(org.junit.experimental.theories.DataPoints) $stack9;
+ methodNames = $stack17.value();
+ $stack19 = java.util.Arrays.asList((java.lang.Object[])methodNames);
+ $stack14 = $stack19.contains((java.lang.Object)requestedName);
+ if ($stack14==0) goto label2;
+ methodsWithMatchingNames.add((java.lang.Object)method);
+ label2:goto label0;
+ label1:return  methodsWithMatchingNames;
+ } 
+

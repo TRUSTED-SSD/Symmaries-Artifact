@@ -1,0 +1,24 @@
+void org.keycloak.adapters.jetty.spi.JettyUserSessionManagement:logoutHttpSessions(java.util.List ids)
+{
+java.util.Iterator l2;
+  java.lang.String id;
+  javax.servlet.http.HttpSession httpSession;
+  org.jboss.logging.Logger $stack5;
+  boolean $stack7;
+  java.lang.Object $stack8;
+  org.keycloak.adapters.jetty.spi.JettySessionManager $stack9;
+  $stack5=org.keycloak.adapters.jetty.spi.JettyUserSessionManagement.log;
+ $stack5.trace((java.lang.Object)"---> logoutHttpSessions");
+ l2 = ids.iterator();
+ label0:$stack7 = l2.hasNext();
+ if ($stack7==0) goto label1;
+ $stack8 = l2.next();
+ id=(java.lang.String) $stack8;
+ $stack9=this.sessionManager;
+ httpSession = $stack9.getHttpSession(id);
+ if (httpSession==null) goto label2;
+ httpSession.invalidate();
+ label2:goto label0;
+ label1:return;
+ } 
+

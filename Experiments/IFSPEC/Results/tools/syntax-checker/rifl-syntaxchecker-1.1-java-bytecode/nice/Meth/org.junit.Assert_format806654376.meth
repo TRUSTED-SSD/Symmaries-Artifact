@@ -1,0 +1,44 @@
+static java.lang.String org.junit.Assert:format(java.lang.String @message,java.lang.Object expected,java.lang.Object actual)
+{
+java.lang.String formatted;
+  java.lang.String expectedString;
+  boolean $stack8;
+  java.lang.StringBuilder $stack9;
+  java.lang.String message;
+message=@message;
+formatted="";
+ if (message==null) goto label0;
+ $stack8 = message.equals((java.lang.Object)"");
+ if ($stack8!=0) goto label0;
+ $stack9=new java.lang.StringBuilder;
+ $stack9#java.lang.StringBuilder();
+ $stack9 = $stack9.append(message);
+ $stack9 = $stack9.append(" ");
+ formatted = $stack9.toString();
+ label0:expectedString = java.lang.String.valueOf(expected);
+ message = java.lang.String.valueOf(actual);
+ $stack8 = expectedString.equals((java.lang.Object)message);
+ if ($stack8==0) goto label1;
+ $stack9=new java.lang.StringBuilder;
+ $stack9#java.lang.StringBuilder();
+ $stack9 = $stack9.append(formatted);
+ $stack9 = $stack9.append("expected: ");
+ formatted = org.junit.Assert.formatClassAndValue(expected,expectedString);
+ $stack9 = $stack9.append(formatted);
+ $stack9 = $stack9.append(" but was: ");
+ message = org.junit.Assert.formatClassAndValue(actual,message);
+ $stack9 = $stack9.append(message);
+ message = $stack9.toString();
+ return  message;
+ label1:$stack9=new java.lang.StringBuilder;
+ $stack9#java.lang.StringBuilder();
+ $stack9 = $stack9.append(formatted);
+ $stack9 = $stack9.append("expected:<");
+ $stack9 = $stack9.append(expectedString);
+ $stack9 = $stack9.append("> but was:<");
+ $stack9 = $stack9.append(message);
+ $stack9 = $stack9.append(">");
+ message = $stack9.toString();
+ return  message;
+ } 
+

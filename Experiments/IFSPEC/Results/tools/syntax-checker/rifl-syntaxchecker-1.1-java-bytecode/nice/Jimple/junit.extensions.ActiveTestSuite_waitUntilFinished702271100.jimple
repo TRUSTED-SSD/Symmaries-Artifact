@@ -1,0 +1,40 @@
+    synchronized void waitUntilFinished()
+    {
+        junit.extensions.ActiveTestSuite this;
+        java.lang.InterruptedException e;
+        int $stack2, $stack3;
+
+        this := @this: junit.extensions.ActiveTestSuite;
+
+     label1:
+        $stack2 = this.<junit.extensions.ActiveTestSuite: int fActiveTestDeathCount>;
+/*57*/
+
+        $stack3 = virtualinvoke this.<junit.extensions.ActiveTestSuite: int testCount()>();
+/*57*/
+
+        if $stack2 >= $stack3 goto label5;
+/*57*/
+
+     label2:
+        virtualinvoke this.<java.lang.Object: void wait()>();
+/*59*/
+
+     label3:
+        goto label1;
+/*62*/
+
+     label4:
+        e := @caughtexception;
+/*57*/
+
+        return;
+/*61*/
+
+     label5:
+        return;
+/*64*/
+
+        catch java.lang.InterruptedException from label2 to label3 with label4;
+    }
+

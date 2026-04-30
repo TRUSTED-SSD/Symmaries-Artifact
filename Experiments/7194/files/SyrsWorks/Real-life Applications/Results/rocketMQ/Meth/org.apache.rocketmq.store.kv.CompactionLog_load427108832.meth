@@ -1,0 +1,37 @@
+void org.apache.rocketmq.store.kv.CompactionLog:load(boolean exitOk)
+{
+org.apache.rocketmq.store.MessageStore $stack2;
+  org.apache.rocketmq.store.config.MessageStoreConfig $stack3;
+  org.apache.rocketmq.store.config.BrokerRole $stack4;
+  org.apache.rocketmq.store.config.BrokerRole $stack5;
+  org.apache.rocketmq.store.kv.CompactionLog$State $stack6;
+  org.apache.rocketmq.store.kv.CompactionLog$State $stack7;
+  java.util.concurrent.atomic.AtomicReference $stack8;
+  org.apache.rocketmq.store.MappedFileQueue $stack10;
+  int $stack13;
+  org.apache.rocketmq.logging.org.slf4j.Logger $stack14;
+  java.lang.String $stack16;
+  java.lang.Integer $stack17;
+  this#org.apache.rocketmq.store.kv.CompactionLog:initLogAndCq(exitOk);
+ $stack2=this.defaultMessageStore;
+ $stack3 = $stack2.getMessageStoreConfig();
+ $stack4 = $stack3.getBrokerRole();
+ $stack5=org.apache.rocketmq.store.config.BrokerRole.SLAVE;
+ if ($stack4!=$stack5) goto label0;
+ $stack10 = this.getLog();
+ exitOk = $stack10.isMappedFilesEmpty();
+ if (exitOk==0) goto label0;
+ $stack14=org.apache.rocketmq.store.kv.CompactionLog.log;
+ $stack16=this.topic;
+ $stack13=this.queueId;
+ $stack17 = java.lang.Integer.valueOf($stack13);
+ $stack14.info("{}:{} load compactionLog from remote master",(java.lang.Object)$stack16,(java.lang.Object)$stack17);
+ this#org.apache.rocketmq.store.kv.CompactionLog();
+ goto label1;
+ label0:$stack8=this.state;
+ $stack7=org.apache.rocketmq.store.kv.CompactionLog$State.INITIALIZING;
+ $stack6=org.apache.rocketmq.store.kv.CompactionLog$State.NORMAL;
+ $stack8.compareAndSet((java.lang.Object)$stack7,(java.lang.Object)$stack6);
+ label1:return;
+ } 
+

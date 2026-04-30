@@ -1,0 +1,37 @@
+void org.apache.rocketmq.remoting.netty.NettyRemotingServer$SubRemotingServer:start()
+{
+java.net.InetSocketAddress addr;
+  int $stack2;
+  org.apache.rocketmq.remoting.netty.NettyRemotingServer $stack3;
+  io.netty.bootstrap.ServerBootstrap $stack4;
+  io.netty.channel.ChannelFuture $stack6;
+  io.netty.channel.Channel $stack8;
+  java.net.SocketAddress $stack11;
+  java.lang.InterruptedException $stack18;
+  java.lang.RuntimeException $stack19;
+  label0:$stack2=this.listenPort;
+ if ($stack2>=0) goto label1;
+ this.listenPort=0;
+ label1:$stack3=this.this$0;
+ $stack4 = org.apache.rocketmq.remoting.netty.NettyRemotingServer.access$600($stack3);
+ $stack2=this.listenPort;
+ $stack6 = $stack4.bind($stack2);
+ $stack6 = $stack6.sync();
+ $stack8 = $stack6.channel();
+ this.serverChannel=$stack8;
+ $stack2=this.listenPort;
+ if (0!=$stack2) goto label2;
+ $stack8=this.serverChannel;
+ $stack11 = $stack8.localAddress();
+ addr=(java.net.InetSocketAddress) $stack11;
+ $stack2 = addr.getPort();
+ this.listenPort=$stack2;
+ label2:goto label3;
+ label4:$stack18 = catch;
+ $stack19=new java.lang.RuntimeException;
+ $stack19#java.lang.RuntimeException("this.subRemotingServer.serverBootstrap.bind().sync() InterruptedException",(java.lang.Throwable)$stack18);
+ throw $stack19;
+ label3:return;
+ catch java.lang.InterruptedException: label0 - label2 : label4;
+} 
+

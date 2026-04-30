@@ -1,0 +1,31 @@
+void org.apache.rocketmq.store.ha.autoswitch.AutoSwitchHAClient:updateHaMasterAddress(java.lang.String @newAddress)
+{
+java.lang.String currentAddr;
+  java.util.concurrent.atomic.AtomicReference $stack3;
+  java.lang.Object $stack4;
+  boolean $stack5;
+  java.lang.StringBuilder $stack8;
+  org.apache.rocketmq.logging.org.slf4j.Logger $stack9;
+  java.lang.String newAddress;
+newAddress=@newAddress;
+$stack3=this.masterHaAddress;
+ $stack4 = $stack3.get();
+ currentAddr=(java.lang.String) $stack4;
+ $stack5 = org.apache.commons.lang3.StringUtils.equals((java.lang.CharSequence)newAddress,(java.lang.CharSequence)currentAddr);
+ if ($stack5!=0) goto label0;
+ $stack3=this.masterHaAddress;
+ $stack5 = $stack3.compareAndSet((java.lang.Object)currentAddr,(java.lang.Object)newAddress);
+ if ($stack5==0) goto label0;
+ $stack9=org.apache.rocketmq.store.ha.autoswitch.AutoSwitchHAClient.LOGGER;
+ $stack8=new java.lang.StringBuilder;
+ $stack8#java.lang.StringBuilder();
+ $stack8 = $stack8.append("update master ha address, OLD: ");
+ $stack8 = $stack8.append(currentAddr);
+ $stack8 = $stack8.append(" NEW: ");
+ $stack8 = $stack8.append(newAddress);
+ newAddress = $stack8.toString();
+ $stack9.info(newAddress);
+ this.wakeup();
+ label0:return;
+ } 
+

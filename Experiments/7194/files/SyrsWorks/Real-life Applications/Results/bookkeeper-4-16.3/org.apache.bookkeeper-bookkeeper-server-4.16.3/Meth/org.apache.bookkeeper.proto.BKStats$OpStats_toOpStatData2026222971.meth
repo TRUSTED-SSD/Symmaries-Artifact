@@ -1,0 +1,44 @@
+org.apache.bookkeeper.proto.BKStats$OpStatData org.apache.bookkeeper.proto.BKStats$OpStats:toOpStatData()
+{
+double avgLatency;
+  java.lang.StringBuilder sb;
+  int i;
+  long $stack5;
+  byte $stack6;
+  org.apache.bookkeeper.proto.BKStats$OpStatData $stack8;
+  long $stack10;
+  long $stack11;
+  long $stack12;
+  java.lang.String $stack13;
+  long[] $stack14;
+  double $stack22;
+  $stack5=this.numSuccessOps;
+ $stack6=($stack5 cmp 0L);
+ if ($stack6<=0) goto label0;
+ $stack22=this.totalLatency;
+ $stack5=this.numSuccessOps;
+ avgLatency=(double) $stack5;
+ avgLatency=($stack22/avgLatency);
+ goto label1;
+ label0:avgLatency=0.0;
+ label1:sb=new java.lang.StringBuilder;
+ sb#java.lang.StringBuilder();
+ i=0;
+ label2:if (i>=29) goto label3;
+ $stack14=this.latencyBuckets;
+ $stack5=$stack14[i];
+ sb.append($stack5);
+ if (i==28) goto label4;
+ sb.append((char)44);
+ label4:i=(i+1);
+ goto label2;
+ label3:$stack8=new org.apache.bookkeeper.proto.BKStats$OpStatData;
+ $stack5=this.maxLatency;
+ $stack10=this.minLatency;
+ $stack11=this.numSuccessOps;
+ $stack12=this.numFailedOps;
+ $stack13 = sb.toString();
+ $stack8#org.apache.bookkeeper.proto.BKStats$OpStatData($stack5,$stack10,avgLatency,$stack11,$stack12,$stack13);
+ return  $stack8;
+ } 
+

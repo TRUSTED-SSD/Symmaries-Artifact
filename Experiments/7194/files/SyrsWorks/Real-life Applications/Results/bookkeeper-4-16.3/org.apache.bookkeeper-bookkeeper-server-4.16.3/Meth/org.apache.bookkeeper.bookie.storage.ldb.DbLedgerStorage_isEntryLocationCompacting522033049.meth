@@ -1,0 +1,29 @@
+java.util.Map org.apache.bookkeeper.bookie.storage.ldb.DbLedgerStorage:isEntryLocationCompacting(java.util.List locations)
+{
+java.util.HashMap isCompacting;
+  java.util.Iterator l3;
+  org.apache.bookkeeper.bookie.storage.ldb.SingleDirectoryDbLedgerStorage ledgerStorage;
+  java.lang.String entryLocation;
+  java.util.List $stack7;
+  boolean $stack9;
+  java.lang.Object $stack10;
+  java.lang.Boolean $stack16;
+  isCompacting = com.google.common.collect.Maps.newHashMap();
+ $stack7=this.ledgerStorageList;
+ l3 = $stack7.iterator();
+ label0:$stack9 = l3.hasNext();
+ if ($stack9==0) goto label1;
+ $stack10 = l3.next();
+ ledgerStorage=(org.apache.bookkeeper.bookie.storage.ldb.SingleDirectoryDbLedgerStorage) $stack10;
+ $stack7 = ledgerStorage.getEntryLocationDBPath();
+ $stack10 = $stack7.get(0);
+ entryLocation=(java.lang.String) $stack10;
+ $stack9 = locations.contains((java.lang.Object)entryLocation);
+ if ($stack9==0) goto label2;
+ $stack9 = ledgerStorage.isEntryLocationCompacting();
+ $stack16 = java.lang.Boolean.valueOf($stack9);
+ isCompacting.put((java.lang.Object)entryLocation,(java.lang.Object)$stack16);
+ label2:goto label0;
+ label1:return  isCompacting;
+ } 
+

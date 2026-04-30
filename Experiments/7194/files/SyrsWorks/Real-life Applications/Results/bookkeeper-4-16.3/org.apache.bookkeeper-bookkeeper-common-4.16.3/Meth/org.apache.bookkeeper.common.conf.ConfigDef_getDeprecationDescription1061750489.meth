@@ -1,0 +1,27 @@
+java.lang.String org.apache.bookkeeper.common.conf.ConfigDef:getDeprecationDescription(org.apache.bookkeeper.common.conf.ConfigKey key)
+{
+java.lang.StringBuilder sb;
+  java.lang.StringBuilder $stack4;
+  java.lang.String $stack5;
+  boolean $stack6;
+  sb=new java.lang.StringBuilder;
+ sb#java.lang.StringBuilder();
+ sb.append("@deprecated");
+ $stack5 = key.deprecatedSince();
+ $stack6 = org.apache.commons.lang.StringUtils.isNotBlank($stack5);
+ if ($stack6==0) goto label0;
+ $stack4 = sb.append(" since `");
+ $stack5 = key.deprecatedSince();
+ $stack4 = $stack4.append($stack5);
+ $stack4.append("`");
+ label0:$stack5 = key.deprecatedByConfigKey();
+ $stack6 = org.apache.commons.lang.StringUtils.isNotBlank($stack5);
+ if ($stack6==0) goto label1;
+ $stack4 = sb.append(" in favor of using `");
+ $stack5 = key.deprecatedByConfigKey();
+ $stack4 = $stack4.append($stack5);
+ $stack4.append("`");
+ label1:$stack5 = sb.toString();
+ return  $stack5;
+ } 
+

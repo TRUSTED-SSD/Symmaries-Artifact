@@ -1,0 +1,28 @@
+static void org.apache.bookkeeper.stats.prometheus.DataSketchesOpStatsLogger:lambda$rotateLatencyCollection$0(com.yahoo.sketches.quantiles.DoublesUnion aggregateSuccesss,com.yahoo.sketches.quantiles.DoublesUnion aggregateFail,org.apache.bookkeeper.stats.prometheus.DataSketchesOpStatsLogger$LocalData localData,java.lang.Boolean b)
+{
+long stamp;
+  java.lang.Throwable l6;
+  java.util.concurrent.locks.StampedLock $stack7;
+  com.yahoo.sketches.quantiles.DoublesSketch $stack9;
+  $stack7 = org.apache.bookkeeper.stats.prometheus.DataSketchesOpStatsLogger$LocalData.access$200(localData);
+ stamp = $stack7.writeLock();
+ label0:$stack9 = org.apache.bookkeeper.stats.prometheus.DataSketchesOpStatsLogger$LocalData.access$400(localData);
+ aggregateSuccesss.update($stack9);
+ $stack9 = org.apache.bookkeeper.stats.prometheus.DataSketchesOpStatsLogger$LocalData.access$400(localData);
+ $stack9.reset();
+ $stack9 = org.apache.bookkeeper.stats.prometheus.DataSketchesOpStatsLogger$LocalData.access$300(localData);
+ aggregateFail.update($stack9);
+ $stack9 = org.apache.bookkeeper.stats.prometheus.DataSketchesOpStatsLogger$LocalData.access$300(localData);
+ $stack9.reset();
+ label1:$stack7 = org.apache.bookkeeper.stats.prometheus.DataSketchesOpStatsLogger$LocalData.access$200(localData);
+ $stack7.unlockWrite(stamp);
+ goto label2;
+ label3:l6 = catch;
+ label4:$stack7 = org.apache.bookkeeper.stats.prometheus.DataSketchesOpStatsLogger$LocalData.access$200(localData);
+ $stack7.unlockWrite(stamp);
+ throw l6;
+ label2:return;
+ catch java.lang.Throwable: label0 - label1 : label3;
+catch java.lang.Throwable: label3 - label4 : label3;
+} 
+

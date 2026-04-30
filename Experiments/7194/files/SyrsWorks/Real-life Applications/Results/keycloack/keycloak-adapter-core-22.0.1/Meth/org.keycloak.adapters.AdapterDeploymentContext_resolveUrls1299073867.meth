@@ -1,0 +1,28 @@
+org.keycloak.adapters.KeycloakDeployment org.keycloak.adapters.AdapterDeploymentContext:resolveUrls(org.keycloak.adapters.KeycloakDeployment @deployment,org.keycloak.adapters.spi.HttpFacade facade)
+{
+org.keycloak.adapters.AdapterDeploymentContext$DeploymentDelegate delegate;
+  org.keycloak.common.enums.RelativeUrlsUsed $stack4;
+  org.keycloak.common.enums.RelativeUrlsUsed $stack5;
+  java.lang.String $stack9;
+  org.keycloak.common.util.KeycloakUriBuilder $stack10;
+  java.lang.Object[] $stack11;
+  java.net.URI $stack12;
+  org.keycloak.adapters.KeycloakDeployment deployment;
+deployment=@deployment;
+$stack5=deployment.relativeUrls;
+ $stack4=org.keycloak.common.enums.RelativeUrlsUsed.NEVER;
+ if ($stack5!=$stack4) goto label0;
+ return  deployment;
+ label0:delegate=new org.keycloak.adapters.AdapterDeploymentContext$DeploymentDelegate;
+ deployment=this.deployment;
+ delegate#org.keycloak.adapters.AdapterDeploymentContext$DeploymentDelegate(deployment);
+ deployment=this.deployment;
+ $stack9 = deployment.getAuthServerBaseUrl();
+ $stack10 = this.getBaseBuilder(facade,$stack9);
+ $stack11=new java.lang.Object[0];
+ $stack12 = $stack10.build($stack11);
+ $stack9 = $stack12.toString();
+ delegate.setAuthServerBaseUrl($stack9);
+ return  delegate;
+ } 
+

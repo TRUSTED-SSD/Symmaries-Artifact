@@ -1,0 +1,40 @@
+void org.greenrobot.eventbus.EventBus:cancelEventDelivery(java.lang.Object event)
+{
+org.greenrobot.eventbus.EventBus$PostingThreadState postingState;
+  java.lang.ThreadLocal $stack3;
+  java.lang.Object $stack4;
+  boolean $stack5;
+  org.greenrobot.eventbus.Subscription $stack7;
+  org.greenrobot.eventbus.SubscriberMethod $stack8;
+  org.greenrobot.eventbus.ThreadMode $stack9;
+  org.greenrobot.eventbus.ThreadMode $stack10;
+  org.greenrobot.eventbus.EventBusException $stack11;
+  $stack3=this.currentPostingThreadState;
+ $stack4 = $stack3.get();
+ postingState=(org.greenrobot.eventbus.EventBus$PostingThreadState) $stack4;
+ $stack5=postingState.isPosting;
+ if ($stack5!=0) goto label0;
+ $stack11=new org.greenrobot.eventbus.EventBusException;
+ $stack11#org.greenrobot.eventbus.EventBusException("This method may only be called from inside event handling methods on the posting thread");
+ throw $stack11;
+ label0:if (event!=null) goto label1;
+ $stack11=new org.greenrobot.eventbus.EventBusException;
+ $stack11#org.greenrobot.eventbus.EventBusException("Event may not be null");
+ throw $stack11;
+ label1:$stack4=postingState.event;
+ if ($stack4==event) goto label2;
+ $stack11=new org.greenrobot.eventbus.EventBusException;
+ $stack11#org.greenrobot.eventbus.EventBusException("Only the currently handled event may be aborted");
+ throw $stack11;
+ label2:$stack7=postingState.subscription;
+ $stack8=$stack7.subscriberMethod;
+ $stack10=$stack8.threadMode;
+ $stack9=org.greenrobot.eventbus.ThreadMode.POSTING;
+ if ($stack10==$stack9) goto label3;
+ $stack11=new org.greenrobot.eventbus.EventBusException;
+ $stack11#org.greenrobot.eventbus.EventBusException(" event handlers may only abort the incoming event");
+ throw $stack11;
+ label3:postingState.canceled=1;
+ return;
+ } 
+

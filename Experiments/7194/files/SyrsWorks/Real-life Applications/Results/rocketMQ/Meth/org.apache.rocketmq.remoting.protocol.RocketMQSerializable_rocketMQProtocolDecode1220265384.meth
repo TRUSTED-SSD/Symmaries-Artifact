@@ -1,0 +1,50 @@
+static org.apache.rocketmq.remoting.protocol.RemotingCommand org.apache.rocketmq.remoting.protocol.RocketMQSerializable:rocketMQProtocolDecode(io.netty.buffer.ByteBuf headerBuffer,int headerLen)
+{
+org.apache.rocketmq.remoting.protocol.RemotingCommand cmd;
+  int extFieldsLength;
+  short $stack5;
+  byte $stack6;
+  org.apache.rocketmq.remoting.protocol.LanguageCode $stack7;
+  java.lang.String $stack11;
+  java.util.HashMap $stack13;
+  org.apache.rocketmq.remoting.exception.RemotingCommandException $stack15;
+  java.lang.StringBuilder $stack16;
+  cmd=new org.apache.rocketmq.remoting.protocol.RemotingCommand;
+ cmd#org.apache.rocketmq.remoting.protocol.RemotingCommand();
+ $stack5 = headerBuffer.readShort();
+dummyClass.highSourceMut($stack5);
+ cmd.setCode((int)$stack5);
+ $stack6 = headerBuffer.readByte();
+dummyClass.highSourceMut($stack6);
+ $stack7 = org.apache.rocketmq.remoting.protocol.LanguageCode.valueOf($stack6);
+ cmd.setLanguage($stack7);
+ $stack5 = headerBuffer.readShort();
+dummyClass.highSourceMut($stack5);
+ cmd.setVersion((int)$stack5);
+ extFieldsLength = headerBuffer.readInt();
+dummyClass.highSourceMut(extFieldsLength);
+ cmd.setOpaque(extFieldsLength);
+ extFieldsLength = headerBuffer.readInt();
+dummyClass.highSourceMut(extFieldsLength);
+ cmd.setFlag(extFieldsLength);
+ $stack11 = org.apache.rocketmq.remoting.protocol.RocketMQSerializable.readStr(headerBuffer,(boolean)0,headerLen);
+ cmd.setRemark($stack11);
+ extFieldsLength = headerBuffer.readInt();
+dummyClass.highSourceMut(extFieldsLength);
+ if (extFieldsLength<=0) goto label0;
+ if (extFieldsLength<=headerLen) goto label1;
+ $stack15=new org.apache.rocketmq.remoting.exception.RemotingCommandException;
+ $stack16=new java.lang.StringBuilder;
+ $stack16#java.lang.StringBuilder();
+ $stack16 = $stack16.append("RocketMQ protocol decoding failed, extFields length: ");
+ $stack16 = $stack16.append(extFieldsLength);
+ $stack16 = $stack16.append(", but header length: ");
+ $stack16 = $stack16.append(headerLen);
+ $stack11 = $stack16.toString();
+ $stack15#org.apache.rocketmq.remoting.exception.RemotingCommandException($stack11);
+ throw $stack15;
+ label1:$stack13 = org.apache.rocketmq.remoting.protocol.RocketMQSerializable.mapDeserialize(headerBuffer,extFieldsLength);
+ cmd.setExtFields($stack13);
+ label0:return  cmd;
+ } 
+

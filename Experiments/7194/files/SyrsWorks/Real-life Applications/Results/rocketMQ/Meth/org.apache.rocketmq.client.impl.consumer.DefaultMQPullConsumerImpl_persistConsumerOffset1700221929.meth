@@ -1,0 +1,37 @@
+void org.apache.rocketmq.client.impl.consumer.DefaultMQPullConsumerImpl:persistConsumerOffset()
+{
+java.util.HashSet mqs;
+  java.util.Set allocateMq;
+  org.apache.rocketmq.client.impl.consumer.RebalanceImpl $stack4;
+  java.util.concurrent.ConcurrentMap $stack5;
+  org.apache.rocketmq.client.consumer.store.OffsetStore $stack8;
+  java.lang.Exception $stack9;
+  java.lang.StringBuilder $stack10;
+  org.apache.rocketmq.logging.org.slf4j.Logger $stack11;
+  org.apache.rocketmq.client.consumer.DefaultMQPullConsumer $stack13;
+  java.lang.String $stack14;
+  label0:this#org.apache.rocketmq.client.impl.consumer.DefaultMQPullConsumerImpl:isRunning();
+ mqs=new java.util.HashSet;
+ mqs#java.util.HashSet();
+ $stack4=this.rebalanceImpl;
+ $stack5 = $stack4.getProcessQueueTable();
+ allocateMq = $stack5.keySet();
+ mqs.addAll((java.util.Collection)allocateMq);
+ $stack8=this.offsetStore;
+ $stack8.persistAll((java.util.Set)mqs);
+ label1:goto label2;
+ label3:$stack9 = catch;
+ $stack11=org.apache.rocketmq.client.impl.consumer.DefaultMQPullConsumerImpl.log;
+ $stack10=new java.lang.StringBuilder;
+ $stack10#java.lang.StringBuilder();
+ $stack10 = $stack10.append("group: ");
+ $stack13=this.defaultMQPullConsumer;
+ $stack14 = $stack13.getConsumerGroup();
+ $stack10 = $stack10.append($stack14);
+ $stack10 = $stack10.append(" persistConsumerOffset exception");
+ $stack14 = $stack10.toString();
+ $stack11.error($stack14,(java.lang.Throwable)$stack9);
+ label2:return;
+ catch java.lang.Exception: label0 - label1 : label3;
+} 
+

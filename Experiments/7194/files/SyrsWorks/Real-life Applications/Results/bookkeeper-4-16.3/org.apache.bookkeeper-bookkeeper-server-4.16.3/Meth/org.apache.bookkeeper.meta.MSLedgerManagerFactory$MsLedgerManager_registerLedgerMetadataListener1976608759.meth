@@ -1,0 +1,47 @@
+void org.apache.bookkeeper.meta.MSLedgerManagerFactory$MsLedgerManager:registerLedgerMetadataListener(long ledgerId,org.apache.bookkeeper.proto.BookkeeperInternalCallbacks$LedgerMetadataListener listener)
+{
+java.util.Set listenerSet;
+  java.util.Set newListenerSet;
+  java.lang.Throwable l7;
+  org.slf4j.Logger $stack8;
+  java.lang.Long $stack10;
+  java.util.concurrent.ConcurrentMap $stack11;
+  java.lang.Object $stack13;
+  org.apache.bookkeeper.meta.MSLedgerManagerFactory$MsLedgerManager$ReadLedgerMetadataTask $stack17;
+  java.util.HashSet $stack18;
+  if (null==listener) goto label0;
+ $stack8 = org.apache.bookkeeper.meta.MSLedgerManagerFactory.access$000();
+ $stack10 = java.lang.Long.valueOf(ledgerId);
+ dummyClass.lowSink("Registered ledger metadata listener {} on ledger {}.");
+$stack8.info("Registered ledger metadata listener {} on ledger {}.",(java.lang.Object)listener,(java.lang.Object)$stack10);
+ $stack11=this.listeners;
+ $stack10 = java.lang.Long.valueOf(ledgerId);
+ $stack13 = $stack11.get((java.lang.Object)$stack10);
+ listenerSet=(java.util.Set) $stack13;
+ if (listenerSet!=null) goto label1;
+ $stack18=new java.util.HashSet;
+ $stack18#java.util.HashSet();
+ newListenerSet=$stack18;
+ $stack11=this.listeners;
+ $stack10 = java.lang.Long.valueOf(ledgerId);
+ $stack13 = $stack11.putIfAbsent((java.lang.Object)$stack10,(java.lang.Object)$stack18);
+ listenerSet=(java.util.Set) $stack13;
+ if (null==listenerSet) goto label2;
+ goto label1;
+ label2:listenerSet=$stack18;
+ label1:newListenerSet=listenerSet;
+ monitorenter listenerSet;
+ label3:listenerSet.add((java.lang.Object)listener);
+ monitorexit listenerSet;
+ label4:goto label5;
+ label6:l7 = catch;
+ monitorexit newListenerSet;
+ label7:throw l7;
+ label5:$stack17=new org.apache.bookkeeper.meta.MSLedgerManagerFactory$MsLedgerManager$ReadLedgerMetadataTask;
+ $stack17#org.apache.bookkeeper.meta.MSLedgerManagerFactory$MsLedgerManager$ReadLedgerMetadataTask(this,ledgerId);
+ $stack17#org.apache.bookkeeper.meta.MSLedgerManagerFactory$MsLedgerManager$ReadLedgerMetadataTask();
+ label0:return;
+ catch java.lang.Throwable: label3 - label4 : label6;
+catch java.lang.Throwable: label6 - label7 : label6;
+} 
+

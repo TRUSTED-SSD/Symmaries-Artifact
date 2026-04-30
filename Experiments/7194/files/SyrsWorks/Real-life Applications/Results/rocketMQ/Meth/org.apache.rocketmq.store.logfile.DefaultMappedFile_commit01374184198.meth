@@ -1,0 +1,36 @@
+void org.apache.rocketmq.store.logfile.DefaultMappedFile:commit0()
+{
+int writePos;
+  int lastCommittedPosition;
+  java.nio.ByteBuffer byteBuffer;
+  java.util.concurrent.atomic.AtomicIntegerFieldUpdater $stack4;
+  int $stack8;
+  long $stack13;
+  java.nio.channels.FileChannel $stack14;
+  java.lang.Throwable $stack19;
+  org.apache.rocketmq.logging.org.slf4j.Logger $stack20;
+  $stack4=org.apache.rocketmq.store.logfile.DefaultMappedFile.WROTE_POSITION_UPDATER;
+ writePos = $stack4.get((java.lang.Object)this);
+ $stack4=org.apache.rocketmq.store.logfile.DefaultMappedFile.COMMITTED_POSITION_UPDATER;
+ lastCommittedPosition = $stack4.get((java.lang.Object)this);
+ $stack8=(writePos-lastCommittedPosition);
+ if ($stack8<=0) goto label0;
+ label1:byteBuffer=this.writeBuffer;
+ byteBuffer = byteBuffer.slice();
+ byteBuffer.position(lastCommittedPosition);
+ byteBuffer.limit(writePos);
+ $stack14=this.fileChannel;
+ $stack13=(long) lastCommittedPosition;
+ $stack14.position($stack13);
+ $stack14=this.fileChannel;
+ $stack14.write(byteBuffer);
+ $stack4=org.apache.rocketmq.store.logfile.DefaultMappedFile.COMMITTED_POSITION_UPDATER;
+ $stack4.set((java.lang.Object)this,writePos);
+ label2:goto label0;
+ label3:$stack19 = catch;
+ $stack20=org.apache.rocketmq.store.logfile.DefaultMappedFile.log;
+ $stack20.error("Error occurred when commit data to FileChannel.",$stack19);
+ label0:return;
+ catch java.lang.Throwable: label1 - label2 : label3;
+} 
+

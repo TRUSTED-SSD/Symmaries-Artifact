@@ -1,0 +1,32 @@
+java.lang.String org.apache.kerby.asn1.Tag:typeStr()
+{
+boolean $stack1;
+  java.lang.StringBuilder $stack3;
+  int $stack5;
+  java.lang.String $stack8;
+  org.apache.kerby.asn1.UniversalTag $stack15;
+  $stack1 = this.isUniversal();
+ if ($stack1==0) goto label0;
+ $stack15 = this.universalTag();
+ $stack8 = $stack15.toStr();
+ return  $stack8;
+ label0:$stack1 = this.isAppSpecific();
+ if ($stack1==0) goto label1;
+ $stack3=new java.lang.StringBuilder;
+ $stack3#java.lang.StringBuilder();
+ $stack3 = $stack3.append("application [");
+ $stack5 = this.tagNo();
+ $stack3 = $stack3.append($stack5);
+ $stack3 = $stack3.append("]");
+ $stack8 = $stack3.toString();
+ return  $stack8;
+ label1:$stack3=new java.lang.StringBuilder;
+ $stack3#java.lang.StringBuilder();
+ $stack3 = $stack3.append("context [");
+ $stack5 = this.tagNo();
+ $stack3 = $stack3.append($stack5);
+ $stack3 = $stack3.append("]");
+ $stack8 = $stack3.toString();
+ return  $stack8;
+ } 
+

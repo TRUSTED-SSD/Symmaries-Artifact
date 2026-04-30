@@ -1,0 +1,36 @@
+static java.lang.String org.apache.rocketmq.tools.command.CommandUtil:fetchBrokerNameByAddr(org.apache.rocketmq.tools.admin.MQAdminExt adminExt,java.lang.String @addr)
+{
+org.apache.rocketmq.remoting.protocol.body.ClusterInfo clusterInfoSerializeWrapper;
+  java.util.Map brokerAddrTable;
+  java.util.Iterator it;
+  java.util.Map$Entry entry;
+  java.util.HashMap brokerAddrs;
+  java.util.Set $stack9;
+  boolean $stack11;
+  java.lang.Exception $stack12;
+  java.lang.Object $stack13;
+  org.apache.rocketmq.remoting.protocol.route.BrokerData $stack15;
+  java.lang.String addr;
+addr=@addr;
+clusterInfoSerializeWrapper = adminExt.examineBrokerClusterInfo();
+ brokerAddrTable = clusterInfoSerializeWrapper.getBrokerAddrTable();
+ $stack9 = brokerAddrTable.entrySet();
+ it = $stack9.iterator();
+ label0:$stack11 = it.hasNext();
+ if ($stack11==0) goto label1;
+ $stack13 = it.next();
+ entry=(java.util.Map$Entry) $stack13;
+ $stack13 = entry.getValue();
+ $stack15=(org.apache.rocketmq.remoting.protocol.route.BrokerData) $stack13;
+ brokerAddrs = $stack15.getBrokerAddrs();
+ $stack11 = brokerAddrs.containsValue((java.lang.Object)addr);
+ if ($stack11==0) goto label2;
+ $stack13 = entry.getKey();
+ addr=(java.lang.String) $stack13;
+ return  addr;
+ label2:goto label0;
+ label1:$stack12=new java.lang.Exception;
+ $stack12#java.lang.Exception("Make sure the specified clusterName exists or the name server connected to is correct.");
+ throw $stack12;
+ } 
+

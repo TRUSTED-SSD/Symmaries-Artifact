@@ -1,0 +1,24 @@
+static void org.apache.bookkeeper.util.IOUtils:close(org.slf4j.Logger log,java.io.Closeable closeable)
+{
+java.io.IOException $stack3;
+  boolean $stack4;
+  java.lang.StringBuilder $stack5;
+  java.lang.String $stack8;
+  if (closeable==null) goto label0;
+ label1:closeable.close();
+ label2:goto label0;
+ label3:$stack3 = catch;
+ if (log==null) goto label0;
+ $stack4 = log.isDebugEnabled();
+ if ($stack4==0) goto label0;
+ $stack5=new java.lang.StringBuilder;
+ $stack5#java.lang.StringBuilder();
+ $stack5 = $stack5.append("Exception in closing ");
+ $stack5 = $stack5.append((java.lang.Object)closeable);
+ $stack8 = $stack5.toString();
+ dummyClass.lowSink($stack8);
+log.debug($stack8,(java.lang.Throwable)$stack3);
+ label0:return;
+ catch java.io.IOException: label1 - label2 : label3;
+} 
+

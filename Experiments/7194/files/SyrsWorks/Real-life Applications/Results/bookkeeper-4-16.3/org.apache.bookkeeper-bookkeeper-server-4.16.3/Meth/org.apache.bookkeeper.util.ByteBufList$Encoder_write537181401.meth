@@ -1,0 +1,44 @@
+void org.apache.bookkeeper.util.ByteBufList$Encoder:write(io.netty.channel.ChannelHandlerContext ctx,java.lang.Object @msg,io.netty.channel.ChannelPromise promise)
+{
+org.apache.bookkeeper.util.ByteBufList b;
+  int buffersCount;
+  int i;
+  io.netty.buffer.ByteBuf bx;
+  java.lang.Throwable l8;
+  boolean $stack9;
+  java.util.ArrayList $stack11;
+  int $stack17;
+  io.netty.channel.ChannelPromise $stack18;
+  java.lang.Object msg;
+msg=@msg;
+$stack9=msg instanceof org.apache.bookkeeper.util.ByteBufList;
+ if ($stack9==0) goto label0;
+ b=(org.apache.bookkeeper.util.ByteBufList) msg;
+ label1:$stack11 = org.apache.bookkeeper.util.ByteBufList.access$100(b);
+ buffersCount = $stack11.size();
+ i=0;
+ label2:if (i>=buffersCount) goto label3;
+ $stack11 = org.apache.bookkeeper.util.ByteBufList.access$100(b);
+ msg = $stack11.get(i);
+ bx=(io.netty.buffer.ByteBuf) msg;
+ bx = bx.retainedDuplicate();
+ $stack17=(buffersCount-1);
+ if (i!=$stack17) goto label4;
+ $stack18=promise;
+ goto label5;
+ label4:$stack18 = ctx.voidPromise();
+ label5:ctx.write((java.lang.Object)bx,$stack18);
+ i=(i+1);
+ goto label2;
+ label3:io.netty.util.ReferenceCountUtil.release((java.lang.Object)b);
+ goto label6;
+ label7:l8 = catch;
+ label8:io.netty.util.ReferenceCountUtil.release((java.lang.Object)b);
+ throw l8;
+ label6:goto label9;
+ label0:ctx.write(msg,promise);
+ label9:return;
+ catch java.lang.Throwable: label1 - label3 : label7;
+catch java.lang.Throwable: label7 - label8 : label7;
+} 
+

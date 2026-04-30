@@ -1,0 +1,41 @@
+org.apache.rocketmq.remoting.protocol.RemotingCommand org.apache.rocketmq.broker.topic.TopicQueueMappingManager:rewriteRequestForStaticTopic(org.apache.rocketmq.remoting.rpc.TopicQueueRequestHeader requestHeader,org.apache.rocketmq.remoting.protocol.statictopic.TopicQueueMappingContext mappingContext)
+{
+org.apache.rocketmq.remoting.protocol.statictopic.TopicQueueMappingDetail mappingDetail;
+  org.apache.rocketmq.remoting.protocol.statictopic.LogicQueueMappingItem mappingItem;
+  boolean $stack7;
+  int $stack9;
+  java.lang.Integer $stack10;
+  java.lang.Object[] $stack11;
+  java.lang.String $stack15;
+  org.apache.rocketmq.remoting.protocol.RemotingCommand $stack21;
+  java.lang.Throwable $stack22;
+  label0:mappingDetail = mappingContext.getMappingDetail();
+ if (mappingDetail!=null) goto label1;
+ label2:return  null;
+ label1:mappingDetail = mappingContext.getMappingDetail();
+ $stack7 = mappingContext.isLeader();
+ if ($stack7!=0) goto label3;
+ $stack11=new java.lang.Object[3];
+ $stack15 = requestHeader.getTopic();
+ $stack11[0]=$stack15;
+ $stack10 = requestHeader.getQueueId();
+ $stack11[1]=$stack10;
+ $stack15 = mappingDetail.getBname();
+ $stack11[2]=$stack15;
+ $stack15 = java.lang.String.format("%s-%d does not exit in request process of current broker %s",$stack11);
+ $stack21 = org.apache.rocketmq.remoting.protocol.RemotingCommand.buildErrorResponse(501,$stack15);
+ label4:return  $stack21;
+ label3:mappingItem = mappingContext.getLeaderItem();
+ $stack9 = mappingItem.getQueueId();
+ $stack10 = java.lang.Integer.valueOf($stack9);
+ requestHeader.setQueueId($stack10);
+ label5:return  null;
+ label6:$stack22 = catch;
+ $stack15 = $stack22.getMessage();
+ $stack21 = org.apache.rocketmq.remoting.protocol.RemotingCommand.buildErrorResponse(1,$stack15);
+ return  $stack21;
+ catch java.lang.Throwable: label0 - label2 : label6;
+catch java.lang.Throwable: label1 - label4 : label6;
+catch java.lang.Throwable: label3 - label5 : label6;
+} 
+

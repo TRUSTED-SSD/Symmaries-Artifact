@@ -1,0 +1,31 @@
+boolean org.apache.rocketmq.client.impl.consumer.DefaultLitePullConsumerImpl:isSetEqual(java.util.Set set1,java.util.Set set2)
+{
+java.util.Iterator iter;
+  boolean isEqual;
+  int $stack6;
+  int $stack7;
+  boolean $stack10;
+  java.lang.Object $stack11;
+  if (set1!=null) goto label0;
+ if (set2!=null) goto label0;
+ return  1;
+ label0:if (set1==null) goto label1;
+ if (set2==null) goto label1;
+ $stack6 = set1.size();
+ $stack7 = set2.size();
+ if ($stack6!=$stack7) goto label1;
+ $stack6 = set1.size();
+ if ($stack6!=0) goto label2;
+ label1:return  0;
+ label2:iter = set2.iterator();
+ isEqual=1;
+ label3:$stack10 = iter.hasNext();
+ if ($stack10==0) goto label4;
+ $stack11 = iter.next();
+ $stack10 = set1.contains($stack11);
+ if ($stack10!=0) goto label3;
+ isEqual=0;
+ goto label3;
+ label4:return  isEqual;
+ } 
+

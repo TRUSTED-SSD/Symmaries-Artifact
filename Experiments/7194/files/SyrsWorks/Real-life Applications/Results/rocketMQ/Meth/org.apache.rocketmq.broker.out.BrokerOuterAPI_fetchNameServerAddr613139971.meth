@@ -1,0 +1,31 @@
+java.lang.String org.apache.rocketmq.broker.out.BrokerOuterAPI:fetchNameServerAddr()
+{
+java.lang.String addrs;
+  org.apache.rocketmq.common.namesrv.TopAddressing $stack2;
+  boolean $stack4;
+  java.lang.String $stack6;
+  org.apache.rocketmq.logging.org.slf4j.Logger $stack9;
+  java.lang.Exception $stack11;
+  label0:$stack2=this.topAddressing;
+ addrs = $stack2.fetchNSAddr();
+ $stack4 = org.apache.rocketmq.common.UtilAll.isBlank(addrs);
+ if ($stack4!=0) goto label1;
+ $stack6=this.nameSrvAddr;
+ $stack4 = addrs.equals((java.lang.Object)$stack6);
+ if ($stack4!=0) goto label1;
+ $stack9=org.apache.rocketmq.broker.out.BrokerOuterAPI.LOGGER;
+ $stack6=this.nameSrvAddr;
+ $stack9.info("name server address changed, old: {} new: {}",(java.lang.Object)$stack6,(java.lang.Object)addrs);
+ this.updateNameServerAddressList(addrs);
+ this.nameSrvAddr=addrs;
+ addrs=this.nameSrvAddr;
+ label2:return  addrs;
+ label1:goto label3;
+ label4:$stack11 = catch;
+ $stack9=org.apache.rocketmq.broker.out.BrokerOuterAPI.LOGGER;
+ $stack9.error("fetchNameServerAddr Exception",(java.lang.Throwable)$stack11);
+ label3:addrs=this.nameSrvAddr;
+ return  addrs;
+ catch java.lang.Exception: label0 - label2 : label4;
+} 
+

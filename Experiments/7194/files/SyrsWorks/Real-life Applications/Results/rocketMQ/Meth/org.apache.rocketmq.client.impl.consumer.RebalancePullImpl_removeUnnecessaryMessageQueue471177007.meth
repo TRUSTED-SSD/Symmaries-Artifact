@@ -1,0 +1,13 @@
+boolean org.apache.rocketmq.client.impl.consumer.RebalancePullImpl:removeUnnecessaryMessageQueue(org.apache.rocketmq.common.message.MessageQueue mq,org.apache.rocketmq.client.impl.consumer.ProcessQueue pq)
+{
+org.apache.rocketmq.client.impl.consumer.DefaultMQPullConsumerImpl $stack3;
+  org.apache.rocketmq.client.consumer.store.OffsetStore $stack4;
+  $stack3=this.defaultMQPullConsumerImpl;
+ $stack4 = $stack3.getOffsetStore();
+ $stack4.persist(mq);
+ $stack3=this.defaultMQPullConsumerImpl;
+ $stack4 = $stack3.getOffsetStore();
+ $stack4.removeOffset(mq);
+ return  1;
+ } 
+

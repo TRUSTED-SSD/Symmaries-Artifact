@@ -1,0 +1,16 @@
+void org.apache.bookkeeper.bookie.SortedLedgerStorage:start()
+{
+org.apache.bookkeeper.bookie.InterleavedLedgerStorage $stack2;
+  java.io.IOException $stack3;
+  org.slf4j.Logger $stack4;
+  label0:this.flush();
+ label1:goto label2;
+ label3:$stack3 = catch;
+ $stack4=org.apache.bookkeeper.bookie.SortedLedgerStorage.LOG;
+ $stack4.error("Exception thrown while flushing ledger cache.",(java.lang.Throwable)$stack3);
+ label2:$stack2=this.interleavedLedgerStorage;
+ $stack2.start();
+ return;
+ catch java.io.IOException: label0 - label1 : label3;
+} 
+

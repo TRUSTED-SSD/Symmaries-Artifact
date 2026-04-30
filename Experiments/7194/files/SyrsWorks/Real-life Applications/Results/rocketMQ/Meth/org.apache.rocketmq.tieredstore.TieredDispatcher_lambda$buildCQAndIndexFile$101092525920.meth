@@ -1,0 +1,26 @@
+static void org.apache.rocketmq.tieredstore.TieredDispatcher:lambda$buildCQAndIndexFile$10(org.apache.rocketmq.common.message.MessageQueue messageQueue,java.lang.Long count)
+{
+io.opentelemetry.api.common.Attributes attributes;
+  io.opentelemetry.api.common.AttributesBuilder $stack3;
+  java.lang.String $stack5;
+  int $stack8;
+  long $stack9;
+  org.apache.rocketmq.tieredstore.provider.TieredFileSegment$FileSegmentType $stack11;
+  io.opentelemetry.api.metrics.LongCounter $stack17;
+  $stack3 = org.apache.rocketmq.tieredstore.metrics.TieredStoreMetricsManager.newAttributesBuilder();
+ $stack5 = messageQueue.getTopic();
+ $stack3 = $stack3.put("topic",$stack5);
+ $stack8 = messageQueue.getQueueId();
+ $stack9=(long) $stack8;
+ $stack3 = $stack3.put("queue_id",$stack9);
+ $stack11=org.apache.rocketmq.tieredstore.provider.TieredFileSegment$FileSegmentType.CONSUME_QUEUE;
+ $stack5 = $stack11.name();
+ $stack5 = $stack5.toLowerCase();
+ $stack3 = $stack3.put("file_type",$stack5);
+ attributes = $stack3.build();
+ $stack17=org.apache.rocketmq.tieredstore.metrics.TieredStoreMetricsManager.messagesDispatchTotal;
+ $stack9 = count.longValue();
+ $stack17.add($stack9,attributes);
+ return;
+ } 
+

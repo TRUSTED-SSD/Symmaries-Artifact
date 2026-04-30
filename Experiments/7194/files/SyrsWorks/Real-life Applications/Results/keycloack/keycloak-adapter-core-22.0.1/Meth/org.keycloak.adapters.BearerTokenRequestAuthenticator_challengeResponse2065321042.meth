@@ -1,0 +1,29 @@
+org.keycloak.adapters.spi.AuthChallenge org.keycloak.adapters.BearerTokenRequestAuthenticator:challengeResponse(org.keycloak.adapters.spi.HttpFacade facade,org.keycloak.adapters.OIDCAuthenticationError$Reason reason,java.lang.String @error,java.lang.String description)
+{
+java.lang.StringBuilder header;
+  org.keycloak.adapters.KeycloakDeployment $stack8;
+  java.lang.String $stack9;
+  java.lang.StringBuilder $stack10;
+  org.keycloak.adapters.BearerTokenRequestAuthenticator$2 $stack13;
+  java.lang.String error;
+error=@error;
+header=new java.lang.StringBuilder;
+ header#java.lang.StringBuilder("Bearer realm=\"");
+ $stack8=this.deployment;
+ $stack9 = $stack8.getRealm();
+ $stack10 = header.append($stack9);
+ $stack10.append("\"");
+ if (error==null) goto label0;
+ $stack10 = header.append(", error=\"");
+ $stack10 = $stack10.append(error);
+ $stack10.append("\"");
+ label0:if (description==null) goto label1;
+ $stack10 = header.append(", error_description=\"");
+ $stack10 = $stack10.append(description);
+ $stack10.append("\"");
+ label1:$stack13=new org.keycloak.adapters.BearerTokenRequestAuthenticator$2;
+ error = header.toString();
+ $stack13#org.keycloak.adapters.BearerTokenRequestAuthenticator$2(this,reason,description,error);
+ return  $stack13;
+ } 
+

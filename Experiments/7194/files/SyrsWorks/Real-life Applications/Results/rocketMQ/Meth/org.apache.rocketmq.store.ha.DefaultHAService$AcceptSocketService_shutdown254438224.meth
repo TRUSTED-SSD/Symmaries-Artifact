@@ -1,0 +1,23 @@
+void org.apache.rocketmq.store.ha.DefaultHAService$AcceptSocketService:shutdown(boolean interrupt)
+{
+java.nio.channels.ServerSocketChannel $stack3;
+  java.nio.channels.Selector $stack4;
+  java.io.IOException $stack9;
+  org.apache.rocketmq.logging.org.slf4j.Logger $stack10;
+  this#org.apache.rocketmq.common.ServiceThread(interrupt);
+ label0:$stack3=this.serverSocketChannel;
+ if (null==$stack3) goto label1;
+ $stack3=this.serverSocketChannel;
+ $stack3.close();
+ label1:$stack4=this.selector;
+ if (null==$stack4) goto label2;
+ $stack4=this.selector;
+ $stack4.close();
+ label2:goto label3;
+ label4:$stack9 = catch;
+ $stack10 = org.apache.rocketmq.store.ha.DefaultHAService.access$000();
+ $stack10.error("AcceptSocketService shutdown exception",(java.lang.Throwable)$stack9);
+ label3:return;
+ catch java.io.IOException: label0 - label2 : label4;
+} 
+

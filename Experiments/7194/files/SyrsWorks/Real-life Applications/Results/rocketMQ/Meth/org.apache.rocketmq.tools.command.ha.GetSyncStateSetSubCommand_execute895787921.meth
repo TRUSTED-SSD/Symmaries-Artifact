@@ -1,0 +1,58 @@
+void org.apache.rocketmq.tools.command.ha.GetSyncStateSetSubCommand:execute(org.apache.commons.cli.CommandLine commandLine,org.apache.commons.cli.Options options,org.apache.rocketmq.remoting.RPCHook rpcHook)
+{
+org.apache.rocketmq.tools.admin.DefaultMQAdminExt defaultMQAdminExt;
+  java.lang.String interval;
+  int flushSecond;
+  java.lang.Throwable l7;
+  long $stack9;
+  boolean $stack11;
+  int $stack13;
+  java.lang.String $stack21;
+  java.lang.Exception $stack26;
+  org.apache.rocketmq.tools.command.SubCommandException $stack27;
+  java.lang.StringBuilder $stack28;
+  java.lang.Class $stack29;
+  defaultMQAdminExt=new org.apache.rocketmq.tools.admin.DefaultMQAdminExt;
+ defaultMQAdminExt#org.apache.rocketmq.tools.admin.DefaultMQAdminExt(rpcHook);
+ $stack9 = java.lang.System.currentTimeMillis();
+ interval = java.lang.Long.toString($stack9);
+ defaultMQAdminExt.setInstanceName(interval);
+ label0:$stack11 = commandLine.hasOption((char)105);
+ if ($stack11==0) goto label1;
+ interval = commandLine.getOptionValue((char)105);
+ flushSecond=3;
+ if (interval==null) goto label2;
+ $stack21 = interval.trim();
+ $stack11 = $stack21.equals((java.lang.Object)"");
+ if ($stack11!=0) goto label2;
+ flushSecond = java.lang.Integer.parseInt(interval);
+ label2:defaultMQAdminExt.start();
+ label3:this#org.apache.rocketmq.tools.command.ha.GetSyncStateSetSubCommand:innerExec(commandLine,options,defaultMQAdminExt);
+ $stack13=(flushSecond * 1000);
+ $stack9=(long) $stack13;
+ java.lang.Thread.sleep($stack9);
+ goto label3;
+ label1:defaultMQAdminExt.start();
+ this#org.apache.rocketmq.tools.command.ha.GetSyncStateSetSubCommand:innerExec(commandLine,options,defaultMQAdminExt);
+ label4:defaultMQAdminExt.shutdown();
+ goto label5;
+ label6:$stack26 = catch;
+ $stack27=new org.apache.rocketmq.tools.command.SubCommandException;
+ $stack28=new java.lang.StringBuilder;
+ $stack28#java.lang.StringBuilder();
+ $stack29 = this.getClass();
+ interval = $stack29.getSimpleName();
+ $stack28 = $stack28.append(interval);
+ $stack28 = $stack28.append(" command failed");
+ interval = $stack28.toString();
+ $stack27#org.apache.rocketmq.tools.command.SubCommandException(interval,(java.lang.Throwable)$stack26);
+ throw $stack27;
+ label7:l7 = catch;
+ label8:defaultMQAdminExt.shutdown();
+ throw l7;
+ label5:return;
+ catch java.lang.Exception: label0 - label4 : label6;
+catch java.lang.Throwable: label0 - label4 : label7;
+catch java.lang.Throwable: label6 - label8 : label7;
+} 
+

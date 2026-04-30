@@ -1,0 +1,25 @@
+void org.apache.rocketmq.store.ConsumeQueue:removeWaitStorePropertyString(org.apache.rocketmq.common.message.MessageExtBrokerInner msgInner)
+{
+java.lang.String waitStoreMsgOKValue;
+  java.util.Map $stack3;
+  boolean $stack4;
+  java.lang.Object $stack8;
+  java.lang.String $stack10;
+  $stack3 = msgInner.getProperties();
+ $stack4 = $stack3.containsKey((java.lang.Object)"WAIT");
+ if ($stack4==0) goto label0;
+ $stack3 = msgInner.getProperties();
+ $stack8 = $stack3.remove((java.lang.Object)"WAIT");
+ waitStoreMsgOKValue=(java.lang.String) $stack8;
+ $stack3 = msgInner.getProperties();
+ $stack10 = org.apache.rocketmq.common.message.MessageDecoder.messageProperties2String($stack3);
+ msgInner.setPropertiesString($stack10);
+ $stack3 = msgInner.getProperties();
+ $stack3.put((java.lang.Object)"WAIT",(java.lang.Object)waitStoreMsgOKValue);
+ goto label1;
+ label0:$stack3 = msgInner.getProperties();
+ waitStoreMsgOKValue = org.apache.rocketmq.common.message.MessageDecoder.messageProperties2String($stack3);
+ msgInner.setPropertiesString(waitStoreMsgOKValue);
+ label1:return;
+ } 
+

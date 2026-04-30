@@ -1,0 +1,18 @@
+byte[] org.apache.kerby.kerberos.kerb.crypto.cksum.Md5HmacRc4CheckSum:doChecksumWithKey(byte[] @data,int start,int len,byte[] key,int usage)
+{
+byte[] salt;
+  org.apache.kerby.kerberos.kerb.crypto.cksum.HashProvider $stack10;
+  byte[] data;
+data=@data;
+salt = org.apache.kerby.kerberos.kerb.crypto.util.Rc4.getSalt(usage,(boolean)0);
+ $stack10 = this.hashProvider();
+ $stack10.hash(salt);
+ $stack10 = this.hashProvider();
+ $stack10.hash(data,start,len);
+ $stack10 = this.hashProvider();
+ data = $stack10.output();
+ $stack10 = this.hashProvider();
+ data = org.apache.kerby.kerberos.kerb.crypto.util.Hmac.hmac($stack10,key,data);
+ return  data;
+ } 
+

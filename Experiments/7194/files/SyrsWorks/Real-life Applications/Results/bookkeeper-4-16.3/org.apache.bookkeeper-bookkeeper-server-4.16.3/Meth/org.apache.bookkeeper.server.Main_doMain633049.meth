@@ -1,0 +1,50 @@
+static int org.apache.bookkeeper.server.Main:doMain(java.lang.String[] args)
+{
+org.apache.bookkeeper.conf.ServerConfiguration conf;
+  java.lang.Object iae;
+  java.lang.InterruptedException e;
+  java.util.concurrent.CompletableFuture $stack7;
+  java.lang.IllegalArgumentException $stack9;
+  java.lang.Thread $stack11;
+  org.slf4j.Logger $stack12;
+  java.lang.Exception $stack14;
+  java.util.concurrent.ExecutionException $stack16;
+  java.lang.Throwable $stack19;
+  org.apache.bookkeeper.server.conf.BookieConfiguration tmp$451927743;
+  org.apache.bookkeeper.common.component.LifecycleComponent tmp$70698484;
+  label0:conf = org.apache.bookkeeper.server.Main.parseCommandLine(args);
+ label1:goto label2;
+ label3:$stack9 = catch;
+ iae=$stack9;
+ return  1;
+ label2:tmp$451927743=new org.apache.bookkeeper.server.conf.BookieConfiguration;
+ tmp$451927743#org.apache.bookkeeper.server.conf.BookieConfiguration(conf);
+ iae = org.apache.bookkeeper.server.Main.buildBookieServer(tmp$451927743);
+ label4:goto label5;
+ label6:$stack14 = catch;
+ $stack12=org.apache.bookkeeper.server.Main.log;
+ $stack12.error("Failed to build bookie server",(java.lang.Throwable)$stack14);
+ return  2;
+ label5:tmp$70698484=(org.apache.bookkeeper.common.component.LifecycleComponent) iae;
+ $stack7 = org.apache.bookkeeper.common.component.ComponentStarter.startComponent(tmp$70698484);
+ $stack7.get();
+ label7:goto label8;
+ label9:e = catch;
+ $stack11 = java.lang.Thread.currentThread();
+ $stack11.interrupt();
+ $stack12=org.apache.bookkeeper.server.Main.log;
+ dummyClass.lowSink("Bookie server is interrupted. Exiting ...");
+$stack12.info("Bookie server is interrupted. Exiting ...");
+ goto label8;
+ label10:$stack16 = catch;
+ $stack12=org.apache.bookkeeper.server.Main.log;
+ $stack19 = $stack16.getCause();
+ $stack12.error("Error in bookie shutdown",$stack19);
+ return  2;
+ label8:return  0;
+ catch java.lang.IllegalArgumentException: label0 - label1 : label3;
+catch java.lang.Exception: label2 - label4 : label6;
+catch java.lang.InterruptedException: label5 - label7 : label9;
+catch java.util.concurrent.ExecutionException: label5 - label7 : label10;
+} 
+

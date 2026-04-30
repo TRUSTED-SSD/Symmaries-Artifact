@@ -1,0 +1,40 @@
+org.apache.rocketmq.store.queue.BatchOffsetIndex org.apache.rocketmq.store.queue.SparseConsumeQueue:getMaxMsgOffset(org.apache.rocketmq.store.logfile.MappedFile mappedFile,boolean getBatchSize,boolean getStoreTime)
+{
+java.nio.ByteBuffer byteBuffer;
+  int i;
+  long offset;
+  int size;
+  long timestamp;
+  long msgBaseOffset;
+  short batchSize;
+  byte $stack24;
+  org.apache.rocketmq.store.queue.BatchOffsetIndex $stack27;
+  if (mappedFile==null) goto label0;
+ i = mappedFile.getReadPosition();
+ if (i>=46) goto label1;
+ label0:return  null;
+ label1:byteBuffer = mappedFile.sliceByteBuffer();
+ i = mappedFile.getReadPosition();
+ i=(i-46);
+ label2:if (i<0) goto label3;
+ byteBuffer.position(i);
+ offset = byteBuffer.getLong();
+ size = byteBuffer.getInt();
+ byteBuffer.getLong();
+ timestamp = byteBuffer.getLong();
+ msgBaseOffset = byteBuffer.getLong();
+ batchSize = byteBuffer.getShort();
+ $stack24=(offset cmp 0L);
+ if ($stack24<0) goto label4;
+ if (size<=0) goto label4;
+ $stack24=(msgBaseOffset cmp 0L);
+ if ($stack24<0) goto label4;
+ if (batchSize<=0) goto label4;
+ $stack27=new org.apache.rocketmq.store.queue.BatchOffsetIndex;
+ $stack27#org.apache.rocketmq.store.queue.BatchOffsetIndex(mappedFile,i,msgBaseOffset,batchSize,timestamp);
+ return  $stack27;
+ label4:i=(i+-46);
+ goto label2;
+ label3:return  null;
+ } 
+

@@ -1,0 +1,55 @@
+    protected org.junit.runners.model.Statement possiblyExpectingExceptions(org.junit.runners.model.FrameworkMethod, java.lang.Object, org.junit.runners.model.Statement)
+    {
+        org.junit.runners.BlockJUnit4ClassRunner this;
+        org.junit.runners.model.FrameworkMethod method;
+        java.lang.Object test;
+        org.junit.runners.model.Statement next, $stack7;
+        org.junit.Test 'annotation';
+        java.lang.'annotation'.Annotation $stack5;
+        boolean $stack6;
+        java.lang.Class $stack8;
+        org.junit.internal.runners.statements.ExpectException tmp$1257167682;
+
+        this := @this: org.junit.runners.BlockJUnit4ClassRunner;
+
+        method := @parameter0: org.junit.runners.model.FrameworkMethod;
+
+        test := @parameter1: java.lang.Object;
+
+        next := @parameter2: org.junit.runners.model.Statement;
+
+        $stack5 = virtualinvoke method.<org.junit.runners.model.FrameworkMethod: java.lang.'annotation'.Annotation getAnnotation(java.lang.Class)>(class "Lorg/junit/Test;");
+/*301*/
+
+        'annotation' = (org.junit.Test) $stack5;
+/*301*/
+
+        $stack6 = specialinvoke this.<org.junit.runners.BlockJUnit4ClassRunner: boolean expectsException(org.junit.Test)>('annotation');
+/*302*/
+
+        if $stack6 == 0 goto label1;
+/*302*/
+
+        tmp$1257167682 = new org.junit.internal.runners.statements.ExpectException;
+/*302*/
+
+        $stack7 = tmp$1257167682;
+
+        $stack8 = specialinvoke this.<org.junit.runners.BlockJUnit4ClassRunner: java.lang.Class getExpectedException(org.junit.Test)>('annotation');
+/*302*/
+
+        specialinvoke tmp$1257167682.<org.junit.internal.runners.statements.ExpectException: void <init>(org.junit.runners.model.Statement,java.lang.Class)>(next, $stack8);
+/*302*/
+
+        goto label2;
+/*302*/
+
+     label1:
+        $stack7 = next;
+/*302*/
+
+     label2:
+        return $stack7;
+/*302*/
+    }
+

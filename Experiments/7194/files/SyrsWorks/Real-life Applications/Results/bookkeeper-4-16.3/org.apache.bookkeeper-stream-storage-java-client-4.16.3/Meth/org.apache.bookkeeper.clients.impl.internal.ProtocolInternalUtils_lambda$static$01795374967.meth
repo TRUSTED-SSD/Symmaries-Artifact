@@ -1,0 +1,17 @@
+static java.util.List org.apache.bookkeeper.clients.impl.internal.ProtocolInternalUtils:lambda$static$0(org.apache.bookkeeper.stream.proto.storage.GetStorageContainerEndpointResponse response)
+{
+org.apache.bookkeeper.stream.proto.storage.StatusCode $stack1;
+  org.apache.bookkeeper.stream.proto.storage.StatusCode $stack2;
+  org.apache.bookkeeper.clients.exceptions.StorageContainerException $stack3;
+  java.util.List $stack5;
+  $stack1=org.apache.bookkeeper.stream.proto.storage.StatusCode.SUCCESS;
+ $stack2 = response.getStatusCode();
+ if ($stack1!=$stack2) goto label0;
+ $stack5 = response.getResponsesList();
+ return  $stack5;
+ label0:$stack3=new org.apache.bookkeeper.clients.exceptions.StorageContainerException;
+ $stack1 = response.getStatusCode();
+ $stack3#org.apache.bookkeeper.clients.exceptions.StorageContainerException($stack1,"Fail to get storage container endpoints");
+ throw $stack3;
+ } 
+

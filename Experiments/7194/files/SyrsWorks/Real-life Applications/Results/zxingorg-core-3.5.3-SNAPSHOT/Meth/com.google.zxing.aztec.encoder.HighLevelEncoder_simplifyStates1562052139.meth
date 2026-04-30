@@ -1,0 +1,37 @@
+static java.util.Collection com.google.zxing.aztec.encoder.HighLevelEncoder:simplifyStates(java.lang.Iterable states)
+{
+java.util.LinkedList result;
+  java.util.Iterator l2;
+  com.google.zxing.aztec.encoder.State newState;
+  boolean add;
+  java.util.Iterator iterator;
+  com.google.zxing.aztec.encoder.State oldState;
+  java.lang.Object $stack10;
+  boolean $stack12;
+  result=new java.util.LinkedList;
+ result#java.util.LinkedList();
+ l2 = states.iterator();
+ label0:add = l2.hasNext();
+ if (add==0) goto label1;
+ $stack10 = l2.next();
+ newState=(com.google.zxing.aztec.encoder.State) $stack10;
+ add=1;
+ iterator = result.iterator();
+ label2:$stack12 = iterator.hasNext();
+ if ($stack12==0) goto label3;
+ $stack10 = iterator.next();
+ oldState=(com.google.zxing.aztec.encoder.State) $stack10;
+ $stack12 = oldState.isBetterThanOrEqualTo(newState);
+ if ($stack12==0) goto label4;
+ add=0;
+ goto label3;
+ label4:$stack12 = newState.isBetterThanOrEqualTo(oldState);
+ if ($stack12==0) goto label5;
+ iterator.remove();
+ label5:goto label2;
+ label3:if (add==0) goto label6;
+ result.addFirst((java.lang.Object)newState);
+ label6:goto label0;
+ label1:return  result;
+ } 
+

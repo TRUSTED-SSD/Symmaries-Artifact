@@ -1,0 +1,52 @@
+org.apache.bookkeeper.tools.framework.CliSpec org.apache.bookkeeper.tools.framework.Cli:updateSpecWithDefaultValues(org.apache.bookkeeper.tools.framework.CliSpec @spec)
+{
+org.apache.bookkeeper.tools.framework.CliSpec$Builder builder;
+  java.lang.String $stack4;
+  boolean $stack5;
+  java.util.Set $stack6;
+  java.lang.Object[] $stack12;
+  java.lang.StringBuilder $stack29;
+  java.lang.String $stack36;
+  org.apache.bookkeeper.tools.framework.CliSpec spec;
+spec=@spec;
+builder = org.apache.bookkeeper.tools.framework.CliSpec.newBuilder(spec);
+ $stack4 = spec.usage();
+ $stack5 = com.google.common.base.Strings.isNullOrEmpty($stack4);
+ if ($stack5==0) goto label0;
+ $stack6 = spec.commands();
+ $stack5 = $stack6.isEmpty();
+ if ($stack5==0) goto label1;
+ $stack29=new java.lang.StringBuilder;
+ $stack29#java.lang.StringBuilder();
+ $stack29 = $stack29.append("%s [flags] ");
+ $stack4 = spec.argumentsUsage();
+ $stack29 = $stack29.append($stack4);
+ $stack4 = $stack29.toString();
+ $stack12=new java.lang.Object[1];
+ $stack36 = org.apache.bookkeeper.tools.framework.Cli.getCmdPath(spec);
+ $stack12[0]=$stack36;
+ $stack4 = java.lang.String.format($stack4,$stack12);
+ builder.withUsage($stack4);
+ goto label0;
+ label1:$stack12=new java.lang.Object[1];
+ $stack4 = org.apache.bookkeeper.tools.framework.Cli.getCmdPath(spec);
+ $stack12[0]=$stack4;
+ $stack4 = java.lang.String.format("%s [flags] [command] [command options]",$stack12);
+ builder.withUsage($stack4);
+ label0:$stack6 = spec.commands();
+ $stack5 = $stack6.isEmpty();
+ if ($stack5!=0) goto label2;
+ $stack4 = spec.tailer();
+ $stack5 = com.google.common.base.Strings.isNullOrEmpty($stack4);
+ if ($stack5==0) goto label2;
+ $stack12=new java.lang.Object[2];
+ $stack4 = org.apache.bookkeeper.tools.framework.Cli.getCmdPath(spec);
+ $stack12[0]=$stack4;
+ $stack4 = org.apache.bookkeeper.tools.framework.Cli.getCmdPath(spec);
+ $stack12[1]=$stack4;
+ $stack4 = java.lang.String.format("Use \"%s [command] --help\" or \"%s help [command]\" for more information about a command",$stack12);
+ builder.withTailer($stack4);
+ label2:spec = builder.build();
+ return  spec;
+ } 
+

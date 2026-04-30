@@ -1,0 +1,17 @@
+static void com.google.zxing.datamatrix.decoder.DecodedBitStreamParser:parseTwoBytes(int firstByte,int secondByte,int[] result)
+{
+firstByte=(firstByte<<8);
+ firstByte=(firstByte+secondByte);
+ firstByte=(firstByte-1);
+ secondByte=(firstByte/1600);
+ result[0]=secondByte;
+ secondByte=(secondByte * 1600);
+ firstByte=(firstByte-secondByte);
+ secondByte=(firstByte/40);
+ result[1]=secondByte;
+ secondByte=(secondByte * 40);
+ firstByte=(firstByte-secondByte);
+ result[2]=firstByte;
+ return;
+ } 
+

@@ -1,0 +1,11 @@
+apache.rocketmq.v2.SendMessageResponse org.apache.rocketmq.proxy.grpc.v2.producer.SendMessageActivity:convertToSendMessageResponse (
+  org.apache.rocketmq.proxy.common.ProxyContext ctx,
+  apache.rocketmq.v2.SendMessageRequest request, java.util.List resultList) {
+  guard = tt;
+  ret(level()) = level(resultList) ⊔ obj_level(resultList);
+  ret(obj_level()) = level(resultList) ⊔ obj_level(resultList);
+  ret(obj_level(ctx)) = level(resultList) ⊔ obj_level(ctx) ⊔ obj_level(resultList);
+  ret(obj_level(request)) = level(resultList) ⊔ obj_level(request) ⊔ obj_level(resultList);
+  ret(obj_level(resultList)) = level(resultList) ⊔ obj_level(resultList);
+  ret(obj_level(this)) = level(resultList) ⊔ obj_level(resultList) ⊔ obj_level(this);
+}

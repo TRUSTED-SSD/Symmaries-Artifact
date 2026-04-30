@@ -1,0 +1,53 @@
+void org.junit.internal.runners.JUnit38ClassRunner:filter(org.junit.runner.manipulation.Filter filter)
+{
+java.lang.Object adapter;
+  junit.framework.TestSuite filtered;
+  int n;
+  int i;
+  junit.framework.Test test;
+  boolean $stack8;
+  java.lang.String $stack13;
+  org.junit.runner.Description $stack18;
+  junit.framework.TestSuite tmp$415222127;
+  org.junit.runner.manipulation.NoTestsRemainException tmp$539693240;
+  org.junit.runner.manipulation.Filterable tmp$231282902;
+  test = this#org.junit.internal.runners.JUnit38ClassRunner:getTest();
+ $stack8=test instanceof org.junit.runner.manipulation.Filterable;
+ if ($stack8==0) goto label0;
+ test = this#org.junit.internal.runners.JUnit38ClassRunner:getTest();
+ adapter=(org.junit.runner.manipulation.Filterable) test;
+ tmp$231282902=(org.junit.runner.manipulation.Filterable) adapter;
+ tmp$231282902.filter(filter);
+ goto label1;
+ label0:test = this#org.junit.internal.runners.JUnit38ClassRunner:getTest();
+ $stack8=test instanceof junit.framework.TestSuite;
+ if ($stack8==0) goto label1;
+ test = this#org.junit.internal.runners.JUnit38ClassRunner:getTest();
+ adapter=(junit.framework.TestSuite) test;
+ tmp$415222127=new junit.framework.TestSuite;
+ filtered=tmp$415222127;
+ filtered=(junit.framework.TestSuite) adapter;
+ $stack13 = filtered.getName();
+ tmp$415222127#junit.framework.TestSuite($stack13);
+ filtered=tmp$415222127;
+ tmp$415222127=(junit.framework.TestSuite) adapter;
+ n = tmp$415222127.testCount();
+ i=0;
+ label2:if (i>=n) goto label3;
+ tmp$415222127=(junit.framework.TestSuite) adapter;
+ test = tmp$415222127.testAt(i);
+ $stack18 = org.junit.internal.runners.JUnit38ClassRunner.makeDescription(test);
+ $stack8 = filter.shouldRun($stack18);
+ if ($stack8==0) goto label4;
+ filtered.addTest(test);
+ label4:i=(i+1);
+ goto label2;
+ label3:this#org.junit.internal.runners.JUnit38ClassRunner:setTest((junit.framework.Test)filtered);
+ n = filtered.testCount();
+ if (n!=0) goto label1;
+ tmp$539693240=new org.junit.runner.manipulation.NoTestsRemainException;
+ tmp$539693240#org.junit.runner.manipulation.NoTestsRemainException();
+ throw tmp$539693240;
+ label1:return;
+ } 
+

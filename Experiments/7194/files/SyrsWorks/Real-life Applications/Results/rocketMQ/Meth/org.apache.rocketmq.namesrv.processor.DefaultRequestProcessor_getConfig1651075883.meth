@@ -1,0 +1,38 @@
+org.apache.rocketmq.remoting.protocol.RemotingCommand org.apache.rocketmq.namesrv.processor.DefaultRequestProcessor:getConfig(io.netty.channel.ChannelHandlerContext ctx,org.apache.rocketmq.remoting.protocol.RemotingCommand @request)
+{
+java.lang.String content;
+  java.io.UnsupportedEncodingException e;
+  org.apache.rocketmq.namesrv.NamesrvController $stack7;
+  org.apache.rocketmq.remoting.Configuration $stack8;
+  boolean $stack10;
+  byte[] $stack11;
+  org.apache.rocketmq.logging.org.slf4j.Logger $stack18;
+  java.lang.StringBuilder $stack19;
+  org.apache.rocketmq.remoting.protocol.RemotingCommand request;
+request=@request;
+request = org.apache.rocketmq.remoting.protocol.RemotingCommand.createResponseCommand(null);
+ $stack7=this.namesrvController;
+ $stack8 = $stack7.getConfiguration();
+ content = $stack8.getAllConfigsFormatString();
+ $stack10 = org.apache.commons.lang3.StringUtils.isNotBlank((java.lang.CharSequence)content);
+ if ($stack10==0) goto label0;
+ label1:$stack11 = content.getBytes("UTF-8");
+ request.setBody($stack11);
+ label2:goto label0;
+ label3:e = catch;
+ $stack18=org.apache.rocketmq.namesrv.processor.DefaultRequestProcessor.log;
+ $stack18.error("getConfig error, ",(java.lang.Throwable)e);
+ request.setCode(1);
+ $stack19=new java.lang.StringBuilder;
+ $stack19#java.lang.StringBuilder();
+ $stack19 = $stack19.append("UnsupportedEncodingException ");
+ $stack19 = $stack19.append((java.lang.Object)e);
+ content = $stack19.toString();
+ request.setRemark(content);
+ return  request;
+ label0:request.setCode(0);
+ request.setRemark(null);
+ return  request;
+ catch java.io.UnsupportedEncodingException: label1 - label2 : label3;
+} 
+

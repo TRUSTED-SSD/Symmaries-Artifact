@@ -1,0 +1,29 @@
+void org.apache.bookkeeper.bookie.storage.ldb.PersistentEntryLogMetadataMap:remove(long entryLogId)
+{
+org.apache.bookkeeper.bookie.storage.ldb.LongWrapper key;
+  java.lang.Throwable l5;
+  byte[] $stack7;
+  org.apache.bookkeeper.bookie.storage.ldb.KeyValueStorage $stack8;
+  java.io.IOException $stack10;
+  org.apache.bookkeeper.bookie.BookieException$EntryLogMetadataMapException $stack11;
+  this.throwIfClosed();
+ key = org.apache.bookkeeper.bookie.storage.ldb.LongWrapper.get(entryLogId);
+ label0:$stack8=this.metadataMapDB;
+ $stack7=key.array;
+ $stack8.delete($stack7);
+ label1:goto label2;
+ label3:$stack10 = catch;
+ $stack11=new org.apache.bookkeeper.bookie.BookieException$EntryLogMetadataMapException;
+ $stack11#org.apache.bookkeeper.bookie.BookieException$EntryLogMetadataMapException((java.lang.Throwable)$stack10);
+ throw $stack11;
+ label2:key.recycle();
+ goto label4;
+ label5:l5 = catch;
+ label6:key.recycle();
+ throw l5;
+ label4:return;
+ catch java.io.IOException: label0 - label1 : label3;
+catch java.lang.Throwable: label0 - label2 : label5;
+catch java.lang.Throwable: label5 - label6 : label5;
+} 
+

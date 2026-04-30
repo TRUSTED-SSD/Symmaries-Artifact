@@ -1,0 +1,32 @@
+void org.apache.rocketmq.store.kv.CompactionLog$TopicPartitionLog:init(boolean exitOk)
+{
+org.apache.rocketmq.store.MappedFileQueue $stack3;
+  org.apache.rocketmq.store.queue.SparseConsumeQueue $stack5;
+  java.io.IOException $stack8;
+  java.lang.Exception $stack10;
+  $stack3=this.mappedFileQueue;
+ exitOk = $stack3.load();
+ if (exitOk!=0) goto label0;
+ this.shutdown();
+ $stack8=new java.io.IOException;
+ $stack8#java.io.IOException("load log exception");
+ throw $stack8;
+ label0:$stack5=this.consumeQueue;
+ exitOk = $stack5.load();
+ if (exitOk!=0) goto label1;
+ this.shutdown();
+ $stack8=new java.io.IOException;
+ $stack8#java.io.IOException("load consume queue exception");
+ throw $stack8;
+ label1:$stack5=this.consumeQueue;
+ $stack5.recover();
+ this#org.apache.rocketmq.store.kv.CompactionLog$TopicPartitionLog:recover();
+ this.sanityCheck();
+ label2:goto label3;
+ label4:$stack10 = catch;
+ this.shutdown();
+ throw $stack10;
+ label3:return;
+ catch java.lang.Exception: label1 - label2 : label4;
+} 
+

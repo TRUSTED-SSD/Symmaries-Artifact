@@ -1,0 +1,45 @@
+java.util.Set org.apache.rocketmq.store.ha.autoswitch.AutoSwitchHAService:maybeShrinkInSyncStateSet()
+{
+java.util.Set newSyncStateSet;
+  long haMaxTimeSlaveNotCatchup;
+  java.util.Iterator l4;
+  java.util.Map$Entry next;
+  java.lang.String slaveAddress;
+  java.lang.Long lastCaughtUpTimeMs;
+  org.apache.rocketmq.store.DefaultMessageStore $stack9;
+  org.apache.rocketmq.store.config.MessageStoreConfig $stack10;
+  java.util.concurrent.ConcurrentHashMap $stack12;
+  java.util.Set $stack13;
+  boolean $stack15;
+  java.lang.Object $stack16;
+  long $stack22;
+  long $stack23;
+  byte $stack25;
+  newSyncStateSet = this.getSyncStateSet();
+ $stack9=this.defaultMessageStore;
+ $stack10 = $stack9.getMessageStoreConfig();
+ haMaxTimeSlaveNotCatchup = $stack10.getHaMaxTimeSlaveNotCatchup();
+ $stack12=this.connectionCaughtUpTimeTable;
+ $stack13 = $stack12.entrySet();
+ l4 = $stack13.iterator();
+ label0:$stack15 = l4.hasNext();
+ if ($stack15==0) goto label1;
+ $stack16 = l4.next();
+ next=(java.util.Map$Entry) $stack16;
+ $stack16 = next.getKey();
+ slaveAddress=(java.lang.String) $stack16;
+ $stack15 = newSyncStateSet.contains((java.lang.Object)slaveAddress);
+ if ($stack15==0) goto label2;
+ $stack12=this.connectionCaughtUpTimeTable;
+ $stack16 = $stack12.get((java.lang.Object)slaveAddress);
+ lastCaughtUpTimeMs=(java.lang.Long) $stack16;
+ $stack22 = java.lang.System.currentTimeMillis();
+ $stack23 = lastCaughtUpTimeMs.longValue();
+ $stack22=($stack22-$stack23);
+ $stack25=($stack22 cmp haMaxTimeSlaveNotCatchup);
+ if ($stack25<=0) goto label2;
+ newSyncStateSet.remove((java.lang.Object)slaveAddress);
+ label2:goto label0;
+ label1:return  newSyncStateSet;
+ } 
+

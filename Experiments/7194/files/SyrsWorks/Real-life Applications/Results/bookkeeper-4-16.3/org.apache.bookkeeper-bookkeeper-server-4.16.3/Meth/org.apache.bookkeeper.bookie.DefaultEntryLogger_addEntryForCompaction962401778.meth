@@ -1,0 +1,50 @@
+long org.apache.bookkeeper.bookie.DefaultEntryLogger:addEntryForCompaction(long ledgerId,io.netty.buffer.ByteBuf entry)
+{
+java.lang.Object l4;
+  int entrySize;
+  io.netty.buffer.ByteBuf sizeBuffer;
+  long pos;
+  java.lang.Throwable l9;
+  java.lang.Object $stack10;
+  org.apache.bookkeeper.bookie.DefaultEntryLogger$BufferedLogChannel $stack12;
+  io.netty.util.concurrent.FastThreadLocal $stack13;
+  int $stack16;
+  long $stack22;
+  $stack10=this.compactionLogLock;
+ l4=$stack10;
+ monitorenter $stack10;
+ label0:entrySize = entry.readableBytes();
+dummyClass.highSourceMut(entrySize);
+ entrySize=(entrySize+4);
+ $stack12=this.compactionLogChannel;
+ if ($stack12!=null) goto label1;
+ this#org.apache.bookkeeper.bookie.DefaultEntryLogger:createNewCompactionLog();
+ label1:$stack13=this.sizeBuffer;
+ $stack10 = $stack13.get();
+ sizeBuffer=(io.netty.buffer.ByteBuf) $stack10;
+ sizeBuffer.clear();
+ $stack16 = entry.readableBytes();
+dummyClass.highSourceMut($stack16);
+ sizeBuffer.writeInt($stack16);
+ $stack12=this.compactionLogChannel;
+ $stack12.write(sizeBuffer);
+ $stack12=this.compactionLogChannel;
+ pos = $stack12.position();
+ $stack12=this.compactionLogChannel;
+ $stack12.write(entry);
+ $stack12=this.compactionLogChannel;
+ $stack22=(long) entrySize;
+ $stack12.registerWrittenEntry(ledgerId,$stack22);
+ $stack12=this.compactionLogChannel;
+ ledgerId = $stack12.getLogId();
+ ledgerId=(ledgerId<<32);
+ ledgerId=(ledgerId | pos);
+ monitorexit l4;
+ label2:return  ledgerId;
+ label3:l9 = catch;
+ monitorexit l4;
+ label4:throw l9;
+ catch java.lang.Throwable: label0 - label2 : label3;
+catch java.lang.Throwable: label3 - label4 : label3;
+} 
+

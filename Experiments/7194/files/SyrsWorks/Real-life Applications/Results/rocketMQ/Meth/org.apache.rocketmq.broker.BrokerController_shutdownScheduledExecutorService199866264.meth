@@ -1,0 +1,21 @@
+void org.apache.rocketmq.broker.BrokerController:shutdownScheduledExecutorService(java.util.concurrent.ScheduledExecutorService scheduledExecutorService)
+{
+java.util.concurrent.TimeUnit $stack3;
+  java.lang.InterruptedException $stack5;
+  org.apache.rocketmq.logging.org.slf4j.Logger $stack6;
+  java.lang.Thread $stack7;
+  if (scheduledExecutorService!=null) goto label0;
+ return;
+ label0:scheduledExecutorService.shutdown();
+ label1:$stack3=java.util.concurrent.TimeUnit.MILLISECONDS;
+ scheduledExecutorService.awaitTermination(5000L,$stack3);
+ label2:goto label3;
+ label4:$stack5 = catch;
+ $stack6=org.apache.rocketmq.broker.BrokerController.LOG;
+ $stack6.warn("shutdown ScheduledExecutorService was Interrupted!  ",(java.lang.Throwable)$stack5);
+ $stack7 = java.lang.Thread.currentThread();
+ $stack7.interrupt();
+ label3:return;
+ catch java.lang.InterruptedException: label1 - label2 : label4;
+} 
+

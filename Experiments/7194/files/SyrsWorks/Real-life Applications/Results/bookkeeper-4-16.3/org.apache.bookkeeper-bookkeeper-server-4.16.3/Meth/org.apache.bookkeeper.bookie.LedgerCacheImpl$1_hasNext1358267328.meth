@@ -1,0 +1,40 @@
+boolean org.apache.bookkeeper.bookie.LedgerCacheImpl$1:hasNext()
+{
+java.util.PrimitiveIterator$OfLong $stack2;
+  boolean $stack4;
+  java.util.Iterator $stack8;
+  java.lang.Object $stack12;
+  org.apache.bookkeeper.bookie.LedgerCache$PageEntries $stack13;
+  org.apache.bookkeeper.bookie.LedgerEntryPage $stack14;
+  java.lang.Exception $stack16;
+  java.lang.RuntimeException $stack17;
+  label0:$stack2=this.entriesInCurrentLEPIterator;
+ if ($stack2==null) goto label1;
+ $stack2=this.entriesInCurrentLEPIterator;
+ $stack4 = $stack2.hasNext();
+ if ($stack4!=0) goto label1;
+ $stack8=this.val$pageEntriesIterator;
+ $stack4 = $stack8.hasNext();
+ if ($stack4==0) goto label2;
+ $stack8=this.val$pageEntriesIterator;
+ $stack12 = $stack8.next();
+ $stack13=(org.apache.bookkeeper.bookie.LedgerCache$PageEntries) $stack12;
+ $stack14 = $stack13.getLEP();
+ $stack2 = $stack14.getEntriesIterator();
+ this.entriesInCurrentLEPIterator=$stack2;
+ goto label0;
+ label2:this.entriesInCurrentLEPIterator=null;
+ goto label0;
+ label1:$stack2=this.entriesInCurrentLEPIterator;
+ if ($stack2==null) goto label3;
+ $stack4=1;
+ goto label4;
+ label3:$stack4=0;
+ label4:return  $stack4;
+ label5:$stack16 = catch;
+ $stack17=new java.lang.RuntimeException;
+ $stack17#java.lang.RuntimeException("Received exception in InterleavedLedgerStorage getEntriesOfLedger hasNext call",(java.lang.Throwable)$stack16);
+ throw $stack17;
+ catch java.lang.Exception: label0 - label4 : label5;
+} 
+

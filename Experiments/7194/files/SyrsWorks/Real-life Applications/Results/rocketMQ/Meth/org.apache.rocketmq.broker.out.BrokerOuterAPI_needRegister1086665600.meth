@@ -1,0 +1,50 @@
+java.util.List org.apache.rocketmq.broker.out.BrokerOuterAPI:needRegister(java.lang.String clusterName,java.lang.String brokerAddr,java.lang.String brokerName,long brokerId,org.apache.rocketmq.remoting.protocol.body.TopicConfigSerializeWrapper topicConfigWrapper,int timeoutMills,boolean isInBrokerContainer)
+{
+java.util.concurrent.CopyOnWriteArrayList changedList;
+  java.util.List nameServerAddressList;
+  java.util.concurrent.CountDownLatch countDownLatch;
+  java.util.Iterator e;
+  java.lang.String namesrvAddr;
+  org.apache.rocketmq.remoting.RemotingClient $stack15;
+  int $stack17;
+  boolean $stack22;
+  java.util.concurrent.TimeUnit $stack23;
+  java.lang.Object $stack26;
+  org.apache.rocketmq.broker.out.BrokerOuterAPI$4 $stack27;
+  org.apache.rocketmq.common.BrokerIdentity $stack28;
+  org.apache.rocketmq.broker.latency.BrokerFixedThreadPoolExecutor $stack29;
+  java.lang.InterruptedException $stack31;
+  org.apache.rocketmq.logging.org.slf4j.Logger $stack32;
+  changedList=new java.util.concurrent.CopyOnWriteArrayList;
+ changedList#java.util.concurrent.CopyOnWriteArrayList();
+ $stack15=this.remotingClient;
+ nameServerAddressList = $stack15.getNameServerAddressList();
+ if (nameServerAddressList==null) goto label0;
+ $stack17 = nameServerAddressList.size();
+ if ($stack17<=0) goto label0;
+ countDownLatch=new java.util.concurrent.CountDownLatch;
+ $stack17 = nameServerAddressList.size();
+ countDownLatch#java.util.concurrent.CountDownLatch($stack17);
+ e = nameServerAddressList.iterator();
+ label1:$stack22 = e.hasNext();
+ if ($stack22==0) goto label2;
+ $stack26 = e.next();
+ namesrvAddr=(java.lang.String) $stack26;
+ $stack29=this.brokerOuterExecutor;
+ $stack27=new org.apache.rocketmq.broker.out.BrokerOuterAPI$4;
+ $stack28=new org.apache.rocketmq.common.BrokerIdentity;
+ $stack28#org.apache.rocketmq.common.BrokerIdentity(clusterName,brokerName,brokerId,isInBrokerContainer);
+ $stack27#org.apache.rocketmq.broker.out.BrokerOuterAPI$4(this,$stack28,brokerAddr,brokerId,brokerName,clusterName,topicConfigWrapper,namesrvAddr,timeoutMills,(java.util.List)changedList,countDownLatch);
+ $stack29.execute((java.lang.Runnable)$stack27);
+ goto label1;
+ label2:brokerId=(long) timeoutMills;
+ $stack23=java.util.concurrent.TimeUnit.MILLISECONDS;
+ countDownLatch.await(brokerId,$stack23);
+ label3:goto label0;
+ label4:$stack31 = catch;
+ $stack32=org.apache.rocketmq.broker.out.BrokerOuterAPI.LOGGER;
+ $stack32.error("query dataversion from nameserver countDownLatch await Exception",(java.lang.Throwable)$stack31);
+ label0:return  changedList;
+ catch java.lang.InterruptedException: label2 - label3 : label4;
+} 
+

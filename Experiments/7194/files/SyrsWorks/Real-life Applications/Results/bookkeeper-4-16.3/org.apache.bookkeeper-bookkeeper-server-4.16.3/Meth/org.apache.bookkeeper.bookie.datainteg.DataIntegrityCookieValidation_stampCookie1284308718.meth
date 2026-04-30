@@ -1,0 +1,38 @@
+void org.apache.bookkeeper.bookie.datainteg.DataIntegrityCookieValidation:stampCookie(org.apache.bookkeeper.bookie.Cookie masterCookie,org.apache.bookkeeper.versioning.Version expectedVersion,java.util.List directories)
+{
+java.util.Iterator l4;
+  java.io.File d;
+  java.io.IOException ioe;
+  org.slf4j.Logger $stack7;
+  org.apache.bookkeeper.conf.ServerConfiguration $stack8;
+  org.apache.bookkeeper.discover.RegistrationManager $stack9;
+  boolean $stack11;
+  java.lang.Object $stack12;
+  org.apache.bookkeeper.bookie.BookieException$InvalidCookieException $stack17;
+  $stack7=org.apache.bookkeeper.bookie.datainteg.DataIntegrityCookieValidation.log;
+ dummyClass.lowSink("Stamping cookie to ZK");
+$stack7.info("Stamping cookie to ZK");
+ $stack9=this.registrationManager;
+ $stack8=this.conf;
+ masterCookie#org.apache.bookkeeper.bookie.Cookie($stack9,$stack8,expectedVersion);
+ l4 = directories.iterator();
+ label0:$stack11 = l4.hasNext();
+ if ($stack11==0) goto label1;
+ $stack12 = l4.next();
+ d=(java.io.File) $stack12;
+ label2:$stack7=org.apache.bookkeeper.bookie.datainteg.DataIntegrityCookieValidation.log;
+ dummyClass.lowSink("Stamping cookie to directory {}");
+$stack7.info("Stamping cookie to directory {}",(java.lang.Object)d);
+ masterCookie.writeToDirectory(d);
+ label3:goto label4;
+ label5:ioe = catch;
+ $stack7=org.apache.bookkeeper.bookie.datainteg.DataIntegrityCookieValidation.log;
+ $stack7.error("Exception writing cookie",(java.lang.Throwable)ioe);
+ $stack17=new org.apache.bookkeeper.bookie.BookieException$InvalidCookieException;
+ $stack17#org.apache.bookkeeper.bookie.BookieException$InvalidCookieException((java.lang.Throwable)ioe);
+ throw $stack17;
+ label4:goto label0;
+ label1:return;
+ catch java.io.IOException: label2 - label3 : label5;
+} 
+

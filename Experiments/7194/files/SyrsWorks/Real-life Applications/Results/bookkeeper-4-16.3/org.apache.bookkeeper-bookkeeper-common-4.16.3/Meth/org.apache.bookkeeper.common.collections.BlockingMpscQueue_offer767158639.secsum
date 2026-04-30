@@ -1,0 +1,8 @@
+boolean org.apache.bookkeeper.common.collections.BlockingMpscQueue:offer (
+  java.lang.Object e, long timeout, java.util.concurrent.TimeUnit unit) {
+  guard = tt;
+  ret(level()) = pc ⊔ level(e) ⊔ level(this) ⊔ obj_level(e);
+  ret(obj_level(e)) = pc ⊔ level(e) ⊔ level(this) ⊔ obj_level(e);
+  ret(obj_level(this)) = pc ⊔ level(e) ⊔ level(this) ⊔ obj_level(e);
+  ret(obj_level(unit)) = if obj_level(e) = ⊤ ∨ pc ≠ ⊤ ∧ obj_level(e) = ⊥ ∧ level(e) ⊔ level(this) = ⊤ then ⊤ else ⊥;
+}

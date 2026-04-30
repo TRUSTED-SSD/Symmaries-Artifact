@@ -1,0 +1,36 @@
+void org.apache.rocketmq.tieredstore.TieredMessageStore:lambda$destroyContainer$6(org.apache.rocketmq.tieredstore.metadata.QueueMetadata queueMetadata)
+{
+org.apache.rocketmq.common.message.MessageQueue mq;
+  org.apache.rocketmq.tieredstore.container.TieredMessageQueueContainer container;
+  org.apache.rocketmq.tieredstore.container.TieredContainerManager $stack6;
+  org.apache.rocketmq.tieredstore.metadata.TieredMetadataStore $stack9;
+  org.apache.rocketmq.logging.org.slf4j.Logger $stack11;
+  java.lang.String $stack13;
+  int $stack14;
+  java.lang.Integer $stack15;
+  java.lang.Exception $stack16;
+  java.lang.IllegalStateException $stack17;
+  mq = queueMetadata.getQueue();
+ $stack6=this.containerManager;
+ container = $stack6.getMQContainer(mq);
+ if (container==null) goto label0;
+ $stack6=this.containerManager;
+ $stack6.destroyContainer(mq);
+ label1:$stack9=this.metadataStore;
+ $stack9.deleteQueue(mq);
+ $stack9=this.metadataStore;
+ $stack9.deleteFileSegment(mq);
+ label2:goto label3;
+ label4:$stack16 = catch;
+ $stack17=new java.lang.IllegalStateException;
+ $stack17#java.lang.IllegalStateException((java.lang.Throwable)$stack16);
+ throw $stack17;
+ label3:$stack11=org.apache.rocketmq.tieredstore.TieredMessageStore.logger;
+ $stack13 = mq.getTopic();
+ $stack14 = mq.getQueueId();
+ $stack15 = java.lang.Integer.valueOf($stack14);
+ $stack11.info("TieredMessageStore#destroyContainer: destroy container success: topic: {}, queueId: {}",(java.lang.Object)$stack13,(java.lang.Object)$stack15);
+ label0:return;
+ catch java.lang.Exception: label1 - label2 : label4;
+} 
+

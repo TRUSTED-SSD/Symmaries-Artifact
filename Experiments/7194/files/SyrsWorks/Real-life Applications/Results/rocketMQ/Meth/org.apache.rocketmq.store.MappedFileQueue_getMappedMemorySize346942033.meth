@@ -1,0 +1,29 @@
+long org.apache.rocketmq.store.MappedFileQueue:getMappedMemorySize()
+{
+long size;
+  java.lang.Object[] mfs;
+  int l5;
+  int l6;
+  java.lang.Object mf;
+  org.apache.rocketmq.store.ReferenceResource $stack10;
+  boolean $stack11;
+  int $stack14;
+  long $stack15;
+  size=0L;
+ mfs = this.copyMappedFiles(0);
+ if (mfs==null) goto label0;
+ l5=#mfs;
+ l6=0;
+ label1:if (l6>=l5) goto label0;
+ mf=mfs[l6];
+ $stack10=(org.apache.rocketmq.store.ReferenceResource) mf;
+ $stack11 = $stack10.isAvailable();
+ if ($stack11==0) goto label2;
+ $stack14=this.mappedFileSize;
+ $stack15=(long) $stack14;
+ size=(size+$stack15);
+ label2:l6=(l6+1);
+ goto label1;
+ label0:return  size;
+ } 
+

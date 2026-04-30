@@ -1,0 +1,33 @@
+static java.lang.String org.apache.rocketmq.common.utils.HttpTinyClient:encodingParams(java.util.List paramValues,java.lang.String @encoding)
+{
+java.lang.StringBuilder sb;
+  java.util.Iterator iter;
+  boolean $stack6;
+  java.lang.Object $stack8;
+  java.lang.String $stack9;
+  java.lang.StringBuilder $stack10;
+  java.lang.String encoding;
+encoding=@encoding;
+sb=new java.lang.StringBuilder;
+ sb#java.lang.StringBuilder();
+ if (null!=paramValues) goto label0;
+ return  null;
+ label0:iter = paramValues.iterator();
+ label1:$stack6 = iter.hasNext();
+ if ($stack6==0) goto label2;
+ $stack8 = iter.next();
+ $stack9=(java.lang.String) $stack8;
+ $stack10 = sb.append($stack9);
+ $stack10.append("=");
+ $stack8 = iter.next();
+ $stack9=(java.lang.String) $stack8;
+ $stack9 = java.net.URLEncoder.encode($stack9,encoding);
+ sb.append($stack9);
+ $stack6 = iter.hasNext();
+ if ($stack6==0) goto label1;
+ sb.append("&");
+ goto label1;
+ label2:encoding = sb.toString();
+ return  encoding;
+ } 
+

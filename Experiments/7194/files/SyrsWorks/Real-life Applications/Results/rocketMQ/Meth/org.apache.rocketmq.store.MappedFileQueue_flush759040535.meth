@@ -1,0 +1,37 @@
+boolean org.apache.rocketmq.store.MappedFileQueue:flush(int flushLeastPages)
+{
+boolean result;
+  org.apache.rocketmq.store.logfile.MappedFile mappedFile;
+  long tmpTimeStamp;
+  int offset;
+  long where;
+  byte $stack10;
+  long $stack16;
+  boolean $stack25;
+  result=1;
+ where=this.flushedWhere;
+ tmpTimeStamp=this.flushedWhere;
+ $stack10=(tmpTimeStamp cmp 0L);
+ if ($stack10!=0) goto label0;
+ $stack25=1;
+ goto label1;
+ label0:$stack25=0;
+ label1:mappedFile = this.findMappedFileByOffset(where,$stack25);
+ if (mappedFile==null) goto label2;
+ tmpTimeStamp = mappedFile.getStoreTimestamp();
+ offset = mappedFile.flush(flushLeastPages);
+ where = mappedFile.getFileFromOffset();
+ $stack16=(long) offset;
+ where=(where+$stack16);
+ $stack16=this.flushedWhere;
+ $stack10=(where cmp $stack16);
+ if ($stack10!=0) goto label3;
+ result=1;
+ goto label4;
+ label3:result=0;
+ label4:this.flushedWhere=where;
+ if (0!=flushLeastPages) goto label2;
+ this.storeTimestamp=tmpTimeStamp;
+ label2:return  result;
+ } 
+

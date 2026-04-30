@@ -1,0 +1,39 @@
+void org.apache.rocketmq.store.timer.TimerCheckpoint:flush()
+{
+java.nio.MappedByteBuffer $stack1;
+  long $stack2;
+  org.apache.rocketmq.remoting.protocol.DataVersion $stack14;
+  java.util.concurrent.atomic.AtomicLong $stack27;
+  $stack1=this.mappedByteBuffer;
+ if (null!=$stack1) goto label0;
+ return;
+ label0:$stack1=this.mappedByteBuffer;
+ $stack2=this.lastReadTimeMs;
+ $stack1.putLong(0,$stack2);
+ $stack1=this.mappedByteBuffer;
+ $stack2=this.lastTimerLogFlushPos;
+ $stack1.putLong(8,$stack2);
+ $stack1=this.mappedByteBuffer;
+ $stack2=this.lastTimerQueueOffset;
+ $stack1.putLong(16,$stack2);
+ $stack1=this.mappedByteBuffer;
+ $stack2=this.masterTimerQueueOffset;
+ $stack1.putLong(24,$stack2);
+ $stack1=this.mappedByteBuffer;
+ $stack14=this.dataVersion;
+ $stack2 = $stack14.getStateVersion();
+ $stack1.putLong(32,$stack2);
+ $stack1=this.mappedByteBuffer;
+ $stack14=this.dataVersion;
+ $stack2 = $stack14.getTimestamp();
+ $stack1.putLong(40,$stack2);
+ $stack1=this.mappedByteBuffer;
+ $stack14=this.dataVersion;
+ $stack27 = $stack14.getCounter();
+ $stack2 = $stack27.get();
+ $stack1.putLong(48,$stack2);
+ $stack1=this.mappedByteBuffer;
+ $stack1.force();
+ return;
+ } 
+

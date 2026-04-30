@@ -1,0 +1,8 @@
+org.apache.bookkeeper.api.kv.op.TxnOpBuilder org.apache.bookkeeper.api.kv.impl.op.TxnOpBuilderImpl:Else (
+  org.apache.bookkeeper.api.kv.op.Op[] ops) {
+  guard = tt;
+  ret(level()) = level(this);
+  ret(obj_level()) = level(ops) ⊔ level(this) ⊔ obj_level(ops) ⊔ obj_level(this);
+  ret(obj_level(ops)) = level(ops) ⊔ level(this) ⊔ obj_level(ops) ⊔ obj_level(this);
+  ret(obj_level(this)) = level(ops) ⊔ level(this) ⊔ obj_level(ops) ⊔ obj_level(this);
+}

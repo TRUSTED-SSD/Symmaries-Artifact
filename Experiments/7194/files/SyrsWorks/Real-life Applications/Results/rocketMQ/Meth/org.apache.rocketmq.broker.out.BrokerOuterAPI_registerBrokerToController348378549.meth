@@ -1,0 +1,44 @@
+org.apache.rocketmq.remoting.protocol.header.controller.RegisterBrokerToControllerResponseHeader org.apache.rocketmq.broker.out.BrokerOuterAPI:registerBrokerToController(java.lang.String @controllerAddress,java.lang.String clusterName,java.lang.String brokerName,java.lang.String address,long controllerHeartbeatTimeoutMills,int epoch,long maxOffset,int electionPriority)
+{
+org.apache.rocketmq.remoting.protocol.RemotingCommand request;
+  org.apache.rocketmq.remoting.protocol.header.controller.RegisterBrokerToControllerRequestHeader $stack14;
+  java.lang.Long $stack15;
+  org.apache.rocketmq.remoting.RemotingClient $stack17;
+  boolean $stack19;
+  org.apache.rocketmq.client.exception.MQBrokerException $stack21;
+  org.apache.rocketmq.remoting.CommandCustomHeader $stack23;
+  org.apache.rocketmq.remoting.protocol.header.controller.RegisterBrokerToControllerResponseHeader $stack24;
+  java.lang.AssertionError $stack29;
+  java.lang.String controllerAddress;
+controllerAddress=@controllerAddress;
+$stack14=new org.apache.rocketmq.remoting.protocol.header.controller.RegisterBrokerToControllerRequestHeader;
+ $stack15 = java.lang.Long.valueOf(controllerHeartbeatTimeoutMills);
+ $stack14#org.apache.rocketmq.remoting.protocol.header.controller.RegisterBrokerToControllerRequestHeader(clusterName,brokerName,address,$stack15,epoch,maxOffset,electionPriority);
+ request = org.apache.rocketmq.remoting.protocol.RemotingCommand.createRequestCommand(1003,(org.apache.rocketmq.remoting.CommandCustomHeader)$stack14);
+ $stack17=this.remotingClient;
+ request = $stack17.invokeSync(controllerAddress,request,3000L);
+ $stack19=org.apache.rocketmq.broker.out.BrokerOuterAPI.$assertionsDisabled;
+ if ($stack19!=0) goto label0;
+ if (request!=null) goto label0;
+ $stack29=new java.lang.AssertionError;
+ $stack29#java.lang.AssertionError();
+ throw $stack29;
+ label0:epoch = request.getCode();
+ switch [epoch]
+if 0 goto label1;
+if 1 goto label2;
+goto label3;
+ label1:$stack23 = request.decodeCommandCustomHeader(org.apache.rocketmq.remoting.protocol.header.controller.RegisterBrokerToControllerResponseHeader);
+ $stack24=(org.apache.rocketmq.remoting.protocol.header.controller.RegisterBrokerToControllerResponseHeader) $stack23;
+ return  $stack24;
+ label2:$stack21=new org.apache.rocketmq.client.exception.MQBrokerException;
+ epoch = request.getCode();
+ $stack21#org.apache.rocketmq.client.exception.MQBrokerException(epoch,"Controller leader was changed");
+ throw $stack21;
+ label3:$stack21=new org.apache.rocketmq.client.exception.MQBrokerException;
+ epoch = request.getCode();
+ controllerAddress = request.getRemark();
+ $stack21#org.apache.rocketmq.client.exception.MQBrokerException(epoch,controllerAddress);
+ throw $stack21;
+ } 
+

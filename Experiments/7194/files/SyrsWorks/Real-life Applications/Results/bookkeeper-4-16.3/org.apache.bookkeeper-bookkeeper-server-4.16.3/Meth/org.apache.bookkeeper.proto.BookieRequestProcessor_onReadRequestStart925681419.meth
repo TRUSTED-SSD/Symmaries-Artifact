@@ -1,0 +1,38 @@
+void org.apache.bookkeeper.proto.BookieRequestProcessor:onReadRequestStart(io.netty.channel.Channel channel)
+{
+long throttlingStartTimeNanos;
+  java.util.concurrent.Semaphore $stack6;
+  org.apache.bookkeeper.proto.RequestStats $stack7;
+  boolean $stack9;
+  io.netty.channel.ChannelConfig $stack12;
+  org.slf4j.Logger $stack14;
+  java.lang.Long $stack22;
+  $stack6=this.readsSemaphore;
+ if ($stack6==null) goto label0;
+ $stack6=this.readsSemaphore;
+ $stack9 = $stack6.tryAcquire();
+ if ($stack9!=0) goto label0;
+ throttlingStartTimeNanos = org.apache.bookkeeper.common.util.MathUtils.nowInNano();
+ $stack12 = channel.config();
+ $stack12.setAutoRead((boolean)0);
+ $stack14=org.apache.bookkeeper.proto.BookieRequestProcessor.LOG;
+ dummyClass.lowSink("Too many read requests in progress, disabling autoread on channel {}");
+$stack14.info("Too many read requests in progress, disabling autoread on channel {}",(java.lang.Object)channel);
+ $stack7=this.requestStats;
+ $stack7.blockReadRequest();
+ $stack6=this.readsSemaphore;
+ $stack6.acquireUninterruptibly();
+ $stack12 = channel.config();
+ $stack12.setAutoRead((boolean)1);
+ throttlingStartTimeNanos = org.apache.bookkeeper.common.util.MathUtils.elapsedNanos(throttlingStartTimeNanos);
+ $stack14=org.apache.bookkeeper.proto.BookieRequestProcessor.LOG;
+ $stack22 = java.lang.Long.valueOf(throttlingStartTimeNanos);
+ dummyClass.lowSink("Re-enabled autoread on channel {} after ReadRequest delay of {} nanos");
+$stack14.info("Re-enabled autoread on channel {} after ReadRequest delay of {} nanos",(java.lang.Object)channel,(java.lang.Object)$stack22);
+ $stack7=this.requestStats;
+ $stack7.unblockReadRequest(throttlingStartTimeNanos);
+ label0:$stack7=this.requestStats;
+ $stack7#org.apache.bookkeeper.proto.RequestStats();
+ return;
+ } 
+

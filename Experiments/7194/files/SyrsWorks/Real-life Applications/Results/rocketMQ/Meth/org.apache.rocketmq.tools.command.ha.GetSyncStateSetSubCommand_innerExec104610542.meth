@@ -1,0 +1,46 @@
+void org.apache.rocketmq.tools.command.ha.GetSyncStateSetSubCommand:innerExec(org.apache.commons.cli.CommandLine commandLine,org.apache.commons.cli.Options options,org.apache.rocketmq.tools.admin.DefaultMQAdminExt defaultMQAdminExt)
+{
+java.lang.String controllerAddress;
+  java.lang.String brokerName;
+  java.util.Collection brokers;
+  java.lang.String[] $stack9;
+  boolean $stack10;
+  java.lang.StringBuilder $stack12;
+  java.util.ArrayList $stack20;
+  java.util.ArrayList tmp$248494840;
+  java.util.List tmp$847654025;
+  controllerAddress = commandLine.getOptionValue((char)97);
+ controllerAddress = controllerAddress.trim();
+ $stack9 = controllerAddress.split(";");
+ controllerAddress=$stack9[0];
+ $stack10 = commandLine.hasOption((char)98);
+ if ($stack10==0) goto label0;
+ brokerName = commandLine.getOptionValue((char)98);
+ brokerName = brokerName.trim();
+ tmp$248494840=new java.util.ArrayList;
+ tmp$248494840#java.util.ArrayList();
+ brokers=tmp$248494840;
+ $stack20=(java.util.ArrayList) tmp$248494840;
+ $stack20.add((java.lang.Object)brokerName);
+ tmp$847654025=(java.util.List) tmp$248494840;
+ this#org.apache.rocketmq.tools.command.ha.GetSyncStateSetSubCommand:printData(controllerAddress,tmp$847654025,defaultMQAdminExt);
+ goto label1;
+ label0:$stack10 = commandLine.hasOption((char)99);
+ if ($stack10==0) goto label2;
+ brokerName = commandLine.getOptionValue((char)99);
+ brokerName = brokerName.trim();
+ brokers = org.apache.rocketmq.tools.command.CommandUtil.fetchBrokerNameByClusterName((org.apache.rocketmq.tools.admin.MQAdminExt)defaultMQAdminExt,brokerName);
+ tmp$248494840=new java.util.ArrayList;
+ tmp$248494840#java.util.ArrayList(brokers);
+ this#org.apache.rocketmq.tools.command.ha.GetSyncStateSetSubCommand:printData(controllerAddress,(java.util.List)tmp$248494840,defaultMQAdminExt);
+ goto label1;
+ label2:$stack12=new java.lang.StringBuilder;
+ $stack12#java.lang.StringBuilder();
+ $stack12 = $stack12.append("mqadmin ");
+ controllerAddress = this.commandName();
+ $stack12 = $stack12.append(controllerAddress);
+ controllerAddress = $stack12.toString();
+ org.apache.rocketmq.srvutil.ServerUtil.printCommandLineHelp(controllerAddress,options);
+ label1:return;
+ } 
+

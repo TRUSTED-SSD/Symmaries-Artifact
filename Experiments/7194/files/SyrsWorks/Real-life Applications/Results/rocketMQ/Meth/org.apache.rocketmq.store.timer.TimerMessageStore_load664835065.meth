@@ -1,0 +1,19 @@
+boolean org.apache.rocketmq.store.timer.TimerMessageStore:load()
+{
+boolean load;
+  org.apache.rocketmq.store.timer.TimerLog $stack2;
+  org.apache.rocketmq.store.timer.TimerMetrics $stack4;
+  $stack2=this.timerLog;
+ load = $stack2.load();
+ if (load==0) goto label0;
+ $stack4=this.timerMetrics;
+ load = $stack4.load();
+ if (load==0) goto label0;
+ load=1;
+ goto label1;
+ label0:load=0;
+ label1:this.recover();
+ this#org.apache.rocketmq.store.timer.TimerMessageStore:calcTimerDistribution();
+ return  load;
+ } 
+

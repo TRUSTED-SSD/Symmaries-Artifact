@@ -1,0 +1,37 @@
+static java.util.Set org.apache.rocketmq.proxy.remoting.channel.RemotingChannel:parseChannelExtendAttribute(io.netty.channel.Channel channel)
+{
+java.lang.String attr;
+  org.apache.rocketmq.proxy.processor.channel.ChannelProtocolType $stack3;
+  org.apache.rocketmq.proxy.processor.channel.ChannelProtocolType $stack4;
+  boolean $stack5;
+  org.apache.rocketmq.proxy.processor.channel.ChannelExtendAttributeGetter $stack8;
+  org.apache.rocketmq.proxy.remoting.channel.RemotingChannel$1 $stack10;
+  com.alibaba.fastjson.parser.Feature[] $stack11;
+  java.lang.Object $stack12;
+  java.util.Set $stack13;
+  java.lang.Exception $stack14;
+  org.apache.rocketmq.logging.org.slf4j.Logger $stack15;
+  $stack3 = org.apache.rocketmq.proxy.common.channel.ChannelHelper.getChannelProtocolType(channel);
+ $stack4=org.apache.rocketmq.proxy.processor.channel.ChannelProtocolType.REMOTING;
+ $stack5 = $stack3.equals((java.lang.Object)$stack4);
+ if ($stack5==0) goto label0;
+ $stack5=channel instanceof org.apache.rocketmq.proxy.processor.channel.ChannelExtendAttributeGetter;
+ if ($stack5==0) goto label0;
+ $stack8=(org.apache.rocketmq.proxy.processor.channel.ChannelExtendAttributeGetter) channel;
+ attr = $stack8.getChannelExtendAttribute();
+ if (attr!=null) goto label1;
+ return  null;
+ label1:$stack10=new org.apache.rocketmq.proxy.remoting.channel.RemotingChannel$1;
+ $stack10#org.apache.rocketmq.proxy.remoting.channel.RemotingChannel$1();
+ $stack11=new com.alibaba.fastjson.parser.Feature[0];
+ $stack12 = com.alibaba.fastjson.JSON.parseObject(attr,(com.alibaba.fastjson.TypeReference)$stack10,$stack11);
+ $stack13=(java.util.Set) $stack12;
+ label2:return  $stack13;
+ label3:$stack14 = catch;
+ $stack15=org.apache.rocketmq.proxy.remoting.channel.RemotingChannel.log;
+ $stack15.error("convert remoting extend attribute to subscriptionDataSet failed. data:{}",(java.lang.Object)attr,(java.lang.Object)$stack14);
+ return  null;
+ label0:return  null;
+ catch java.lang.Exception: label1 - label2 : label3;
+} 
+

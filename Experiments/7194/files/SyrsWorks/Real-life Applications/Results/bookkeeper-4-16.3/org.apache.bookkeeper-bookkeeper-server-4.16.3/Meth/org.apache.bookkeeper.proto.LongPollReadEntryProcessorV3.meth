@@ -1,0 +1,21 @@
+org.apache.bookkeeper.proto.LongPollReadEntryProcessorV3(org.apache.bookkeeper.proto.BookkeeperProtocol$Request request,org.apache.bookkeeper.proto.BookieRequestHandler requestHandler,org.apache.bookkeeper.proto.BookieRequestProcessor requestProcessor,java.util.concurrent.ExecutorService fenceThreadPool,java.util.concurrent.ExecutorService longPollThreadPool,io.netty.util.HashedWheelTimer requestTimer)
+{
+java.util.Optional $stack7;
+  org.apache.bookkeeper.proto.BookkeeperProtocol$ReadRequest $stack8;
+  long $stack9;
+  java.lang.Long $stack10;
+  this#org.apache.bookkeeper.proto.ReadEntryProcessorV3(request,requestHandler,requestProcessor,fenceThreadPool);
+ $stack7 = java.util.Optional.empty();
+ this.lastAddConfirmedUpdateTime=$stack7;
+ this.expirationTimerTask=null;
+ this.deferredTask=null;
+ this.shouldReadEntry=0;
+ $stack8=this.readRequest;
+ $stack9 = $stack8.getPreviousLAC();
+ $stack10 = java.lang.Long.valueOf($stack9);
+ this.previousLAC=$stack10;
+ this.longPollThreadPool=longPollThreadPool;
+ this.requestTimer=requestTimer;
+ return;
+ } 
+

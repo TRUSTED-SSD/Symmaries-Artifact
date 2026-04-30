@@ -1,0 +1,33 @@
+org.apache.rocketmq.remoting.protocol.RemotingCommand org.apache.rocketmq.namesrv.processor.DefaultRequestProcessor:deleteTopicInNamesrv(io.netty.channel.ChannelHandlerContext ctx,org.apache.rocketmq.remoting.protocol.RemotingCommand request)
+{
+org.apache.rocketmq.remoting.protocol.RemotingCommand response;
+  org.apache.rocketmq.remoting.protocol.header.namesrv.DeleteTopicFromNamesrvRequestHeader requestHeader;
+  org.apache.rocketmq.remoting.CommandCustomHeader $stack6;
+  java.lang.String $stack7;
+  org.apache.rocketmq.namesrv.NamesrvController $stack8;
+  org.apache.rocketmq.namesrv.routeinfo.RouteInfoManager $stack9;
+  boolean $stack12;
+  java.lang.String $stack23;
+  response = org.apache.rocketmq.remoting.protocol.RemotingCommand.createResponseCommand(null);
+ $stack6 = request.decodeCommandCustomHeader(org.apache.rocketmq.remoting.protocol.header.namesrv.DeleteTopicFromNamesrvRequestHeader);
+ requestHeader=(org.apache.rocketmq.remoting.protocol.header.namesrv.DeleteTopicFromNamesrvRequestHeader) $stack6;
+ $stack7 = requestHeader.getClusterName();
+ if ($stack7==null) goto label0;
+ $stack7 = requestHeader.getClusterName();
+ $stack12 = $stack7.isEmpty();
+ if ($stack12!=0) goto label0;
+ $stack8=this.namesrvController;
+ $stack9 = $stack8.getRouteInfoManager();
+ $stack7 = requestHeader.getTopic();
+ $stack23 = requestHeader.getClusterName();
+ $stack9.deleteTopic($stack7,$stack23);
+ goto label1;
+ label0:$stack8=this.namesrvController;
+ $stack9 = $stack8.getRouteInfoManager();
+ $stack7 = requestHeader.getTopic();
+ $stack9.deleteTopic($stack7);
+ label1:response.setCode(0);
+ response.setRemark(null);
+ return  response;
+ } 
+

@@ -1,0 +1,54 @@
+java.util.List org.apache.rocketmq.tools.admin.DefaultMQAdminExtImpl:resetOffsetByTimestampOld(java.lang.String consumerGroup,java.lang.String topic,long timestamp,boolean force)
+{
+org.apache.rocketmq.remoting.protocol.route.TopicRouteData topicRouteData;
+  java.util.ArrayList rollbackStatsList;
+  java.util.HashMap topicRouteMap;
+  java.util.Iterator l9;
+  java.lang.Comparable queueData;
+  java.lang.String addr;
+  java.util.List $stack15;
+  boolean $stack17;
+  java.lang.Object $stack21;
+  java.lang.String $stack24;
+  org.apache.rocketmq.remoting.protocol.route.QueueData $stack26;
+  java.util.ArrayList tmp$703890147;
+  java.util.HashMap tmp$326129193;
+  org.apache.rocketmq.remoting.protocol.route.BrokerData tmp$749510847;
+  topicRouteData = this.examineTopicRouteInfo(topic);
+ tmp$703890147=new java.util.ArrayList;
+ rollbackStatsList=tmp$703890147;
+ tmp$703890147#java.util.ArrayList();
+ rollbackStatsList=tmp$703890147;
+ tmp$326129193=new java.util.HashMap;
+ topicRouteMap=tmp$326129193;
+ tmp$326129193#java.util.HashMap();
+ topicRouteMap=tmp$326129193;
+ $stack15 = topicRouteData.getQueueDatas();
+ l9 = $stack15.iterator();
+ label0:$stack17 = l9.hasNext();
+ if ($stack17==0) goto label1;
+ $stack21 = l9.next();
+ queueData=(org.apache.rocketmq.remoting.protocol.route.QueueData) $stack21;
+ $stack26=(org.apache.rocketmq.remoting.protocol.route.QueueData) queueData;
+ addr = $stack26.getBrokerName();
+ tmp$326129193.put((java.lang.Object)addr,(java.lang.Object)queueData);
+ goto label0;
+ label1:$stack15 = topicRouteData.getBrokerDatas();
+ l9 = $stack15.iterator();
+ label2:$stack17 = l9.hasNext();
+ if ($stack17==0) goto label3;
+ $stack21 = l9.next();
+ queueData=(org.apache.rocketmq.remoting.protocol.route.BrokerData) $stack21;
+ tmp$749510847=(org.apache.rocketmq.remoting.protocol.route.BrokerData) queueData;
+ addr = tmp$749510847.selectBrokerAddr();
+ if (addr==null) goto label4;
+ tmp$749510847=(org.apache.rocketmq.remoting.protocol.route.BrokerData) queueData;
+ $stack24 = tmp$749510847.getBrokerName();
+ $stack21 = tmp$326129193.get((java.lang.Object)$stack24);
+ $stack26=(org.apache.rocketmq.remoting.protocol.route.QueueData) $stack21;
+ $stack15 = this#org.apache.rocketmq.tools.admin.DefaultMQAdminExtImpl:resetOffsetByTimestampOld(addr,$stack26,consumerGroup,topic,timestamp,force);
+ tmp$703890147.addAll((java.util.Collection)$stack15);
+ label4:goto label2;
+ label3:return  tmp$703890147;
+ } 
+

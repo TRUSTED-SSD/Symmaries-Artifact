@@ -1,0 +1,85 @@
+    private void runAfters()
+    {
+        org.junit.internal.runners.MethodRoadie this;
+        java.util.List afters;
+        java.util.Iterator i$;
+        java.lang.reflect.Method after;
+        org.junit.internal.runners.TestMethod $stack5;
+        boolean $stack8;
+        java.lang.Object $stack9;
+        java.lang.Object[] $stack10;
+        java.lang.Throwable $stack14;
+        java.lang.reflect.InvocationTargetException $stack15;
+
+        this := @this: org.junit.internal.runners.MethodRoadie;
+
+        $stack5 = this.<org.junit.internal.runners.MethodRoadie: org.junit.internal.runners.TestMethod testMethod>;
+/*147*/
+
+        afters = virtualinvoke $stack5.<org.junit.internal.runners.TestMethod: java.util.List getAfters()>();
+/*147*/
+/*147*/
+
+        i$ = interfaceinvoke afters.<java.util.List: java.util.Iterator iterator()>();
+/*148*/
+/*148*/
+
+     label1:
+        $stack8 = interfaceinvoke i$.<java.util.Iterator: boolean hasNext()>();
+/*148*/
+
+        if $stack8 == 0 goto label7;
+/*148*/
+
+        $stack9 = interfaceinvoke i$.<java.util.Iterator: java.lang.Object next()>();
+/*157*/
+
+        after = (java.lang.reflect.Method) $stack9;
+/*157*/
+
+     label2:
+        $stack9 = this.<org.junit.internal.runners.MethodRoadie: java.lang.Object test>;
+/*150*/
+
+        $stack10 = newarray (java.lang.Object)[0];
+/*150*/
+
+        virtualinvoke after.<java.lang.reflect.Method: java.lang.Object invoke(java.lang.Object,java.lang.Object[])>($stack9, $stack10);
+/*150*/
+
+     label3:
+        goto label6;
+/*155*/
+
+     label4:
+        $stack15 := @caughtexception;
+/*155*/
+
+        $stack14 = virtualinvoke $stack15.<java.lang.reflect.InvocationTargetException: java.lang.Throwable getTargetException()>();
+/*152*/
+
+        virtualinvoke this.<org.junit.internal.runners.MethodRoadie: void addFailure(java.lang.Throwable)>($stack14);
+/*152*/
+
+        goto label6;
+/*155*/
+
+     label5:
+        $stack14 := @caughtexception;
+/*155*/
+
+        virtualinvoke this.<org.junit.internal.runners.MethodRoadie: void addFailure(java.lang.Throwable)>($stack14);
+/*154*/
+
+     label6:
+        goto label1;
+/*155*/
+
+     label7:
+        return;
+/*157*/
+
+        catch java.lang.reflect.InvocationTargetException from label2 to label3 with label4;
+        catch java.lang.Throwable from label2 to label3 with label5;
+    }
+

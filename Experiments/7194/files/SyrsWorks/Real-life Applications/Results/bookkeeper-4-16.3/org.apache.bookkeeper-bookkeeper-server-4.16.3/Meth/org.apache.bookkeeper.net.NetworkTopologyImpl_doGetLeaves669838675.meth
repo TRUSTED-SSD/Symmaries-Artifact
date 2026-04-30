@@ -1,0 +1,28 @@
+java.util.Set org.apache.bookkeeper.net.NetworkTopologyImpl:doGetLeaves(java.lang.String scope)
+{
+org.apache.bookkeeper.net.Node node;
+  java.util.HashSet leafNodes;
+  org.apache.bookkeeper.net.NetworkTopologyImpl$InnerNode innerNode;
+  int i;
+  boolean $stack8;
+  int $stack9;
+  node = this.getNode(scope);
+ leafNodes=new java.util.HashSet;
+ leafNodes#java.util.HashSet();
+ if (node!=null) goto label0;
+ return  leafNodes;
+ label0:$stack8=node instanceof org.apache.bookkeeper.net.NetworkTopologyImpl$InnerNode;
+ if ($stack8!=0) goto label1;
+ leafNodes.add((java.lang.Object)node);
+ goto label2;
+ label1:innerNode=(org.apache.bookkeeper.net.NetworkTopologyImpl$InnerNode) node;
+ i=0;
+ label3:$stack9 = innerNode.getNumOfLeaves();
+ if (i>=$stack9) goto label2;
+ node = innerNode.getLeaf(i,null);
+ leafNodes.add((java.lang.Object)node);
+ i=(i+1);
+ goto label3;
+ label2:return  leafNodes;
+ } 
+

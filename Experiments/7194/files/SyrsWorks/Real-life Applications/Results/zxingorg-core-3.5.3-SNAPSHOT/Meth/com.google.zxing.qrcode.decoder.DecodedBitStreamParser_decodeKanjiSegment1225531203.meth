@@ -1,0 +1,44 @@
+static void com.google.zxing.qrcode.decoder.DecodedBitStreamParser:decodeKanjiSegment(com.google.zxing.common.BitSource bits,java.lang.StringBuilder result,int count)
+{
+byte[] buffer;
+  int offset;
+  int twoBytes;
+  java.lang.String $stack10;
+  java.nio.charset.Charset $stack11;
+  int $stack14;
+  byte $stack18;
+  com.google.zxing.FormatException $stack30;
+  offset=(count * 13);
+ twoBytes = bits.available();
+ if (offset<=twoBytes) goto label0;
+ $stack30 = com.google.zxing.FormatException.getFormatInstance();
+ throw $stack30;
+ label0:offset=(2 * count);
+ buffer=new byte[offset];
+ offset=0;
+ label1:if (count<=0) goto label2;
+ twoBytes = bits.readBits(13);
+ $stack14=(twoBytes/192);
+ $stack14=($stack14<<8);
+ twoBytes=(twoBytes%192);
+ twoBytes=($stack14 | twoBytes);
+ if (twoBytes>=7936) goto label3;
+ twoBytes=(twoBytes+33088);
+ goto label4;
+ label3:twoBytes=(twoBytes+49472);
+ label4:$stack14=(twoBytes>>8);
+ $stack18=(byte) $stack14;
+ buffer[offset]=$stack18;
+ $stack14=(offset+1);
+ $stack18=(byte) twoBytes;
+ buffer[$stack14]=$stack18;
+ offset=(offset+2);
+ count=(count+-1);
+ goto label1;
+ label2:$stack10=new java.lang.String;
+ $stack11=com.google.zxing.common.StringUtils.SHIFT_JIS_CHARSET;
+ $stack10#java.lang.String(buffer,$stack11);
+ result.append($stack10);
+ return;
+ } 
+

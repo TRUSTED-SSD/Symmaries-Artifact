@@ -1,0 +1,17 @@
+static int org.apache.rocketmq.common.utils.MessageUtils:getShardingKeyIndex(java.lang.String shardingKey,int indexSize)
+{
+com.google.common.hash.HashFunction $stack2;
+  java.nio.charset.Charset $stack3;
+  byte[] $stack4;
+  com.google.common.hash.HashCode $stack5;
+  int $stack6;
+  $stack2 = com.google.common.hash.Hashing.murmur3_32();
+ $stack3=java.nio.charset.StandardCharsets.UTF_8;
+ $stack4 = shardingKey.getBytes($stack3);
+ $stack5 = $stack2.hashBytes($stack4);
+ $stack6 = $stack5.asInt();
+ indexSize=($stack6%indexSize);
+ indexSize = java.lang.Math.abs(indexSize);
+ return  indexSize;
+ } 
+

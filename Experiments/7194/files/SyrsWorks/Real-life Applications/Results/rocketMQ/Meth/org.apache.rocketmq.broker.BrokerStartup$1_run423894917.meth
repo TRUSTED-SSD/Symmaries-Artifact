@@ -1,0 +1,41 @@
+void org.apache.rocketmq.broker.BrokerStartup$1:run()
+{
+org.apache.rocketmq.broker.BrokerStartup$1 l1;
+  long beginTime;
+  java.lang.Throwable l6;
+  java.util.concurrent.atomic.AtomicInteger $stack8;
+  org.apache.rocketmq.logging.org.slf4j.Logger $stack9;
+  int $stack11;
+  java.lang.Integer $stack12;
+  boolean $stack13;
+  org.apache.rocketmq.broker.BrokerController $stack16;
+  long $stack17;
+  java.lang.Long $stack20;
+  l1=this;
+ monitorenter this;
+ label0:$stack9=org.apache.rocketmq.broker.BrokerStartup.log;
+ $stack8=this.shutdownTimes;
+ $stack11 = $stack8.incrementAndGet();
+ $stack12 = java.lang.Integer.valueOf($stack11);
+ $stack9.info("Shutdown hook was invoked, {}",(java.lang.Object)$stack12);
+ $stack13=this.hasShutdown;
+ if ($stack13!=0) goto label1;
+ this.hasShutdown=1;
+ beginTime = java.lang.System.currentTimeMillis();
+ $stack16=this.val$brokerController;
+ $stack16.shutdown();
+ $stack17 = java.lang.System.currentTimeMillis();
+ beginTime=($stack17-beginTime);
+ $stack9=org.apache.rocketmq.broker.BrokerStartup.log;
+ $stack20 = java.lang.Long.valueOf(beginTime);
+ $stack9.info("Shutdown hook over, consuming total time(ms): {}",(java.lang.Object)$stack20);
+ label1:monitorexit this;
+ label2:goto label3;
+ label4:l6 = catch;
+ monitorexit this;
+ label5:throw l6;
+ label3:return;
+ catch java.lang.Throwable: label0 - label2 : label4;
+catch java.lang.Throwable: label4 - label5 : label4;
+} 
+

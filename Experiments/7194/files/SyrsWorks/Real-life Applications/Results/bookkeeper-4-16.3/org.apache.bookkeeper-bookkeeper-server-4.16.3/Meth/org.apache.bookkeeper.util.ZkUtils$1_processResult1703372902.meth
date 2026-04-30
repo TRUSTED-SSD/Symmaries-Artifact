@@ -1,0 +1,34 @@
+void org.apache.bookkeeper.util.ZkUtils$1:processResult(int rc,java.lang.String @path,java.lang.Object ctx,java.lang.String name)
+{
+org.apache.zookeeper.KeeperException$Code $stack6;
+  int $stack7;
+  java.io.File $stack8;
+  org.apache.bookkeeper.util.ZkUtils$1$1 $stack12;
+  org.apache.zookeeper.ZooKeeper $stack13;
+  byte[] $stack14;
+  java.util.List $stack15;
+  org.apache.zookeeper.CreateMode $stack16;
+  org.apache.zookeeper.AsyncCallback$StringCallback $stack17;
+  java.lang.String path;
+path=@path;
+$stack6=org.apache.zookeeper.KeeperException$Code.NONODE;
+ $stack7 = $stack6.intValue();
+ if (rc==$stack7) goto label0;
+ $stack17=this.val$callback;
+ $stack17.processResult(rc,path,ctx,name);
+ return;
+ label0:$stack8=new java.io.File;
+ path=this.val$originalPath;
+ $stack8#java.io.File(path);
+ path = $stack8.getParent();
+ path = path.replace((java.lang.CharSequence)"\\",(java.lang.CharSequence)"/");
+ $stack13=this.val$zk;
+ $stack14=new byte[0];
+ $stack15=this.val$acl;
+ $stack16=org.apache.zookeeper.CreateMode.PERSISTENT;
+ $stack12=new org.apache.bookkeeper.util.ZkUtils$1$1;
+ $stack12#org.apache.bookkeeper.util.ZkUtils$1$1(this);
+ org.apache.bookkeeper.util.ZkUtils.asyncCreateFullPathOptimistic($stack13,path,$stack14,$stack15,$stack16,(org.apache.zookeeper.AsyncCallback$StringCallback)$stack12,ctx);
+ return;
+ } 
+

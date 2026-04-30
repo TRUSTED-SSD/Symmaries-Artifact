@@ -1,0 +1,35 @@
+org.apache.rocketmq.common.stats.StatsItem org.apache.rocketmq.common.stats.StatsItemSet:getAndCreateItem(java.lang.String statsKey,boolean rtItem)
+{
+org.apache.rocketmq.common.stats.StatsItem statsItem;
+  org.apache.rocketmq.common.stats.StatsItem prev;
+  java.util.concurrent.ConcurrentMap $stack5;
+  java.lang.Object $stack6;
+  org.apache.rocketmq.logging.org.slf4j.Logger $stack8;
+  java.util.concurrent.ScheduledExecutorService $stack9;
+  java.lang.String $stack10;
+  org.apache.rocketmq.common.stats.RTStatsItem $stack14;
+  $stack5=this.statsItemTable;
+ $stack6 = $stack5.get((java.lang.Object)statsKey);
+ statsItem=(org.apache.rocketmq.common.stats.StatsItem) $stack6;
+ if (null!=statsItem) goto label0;
+ if (rtItem==0) goto label1;
+ $stack14=new org.apache.rocketmq.common.stats.RTStatsItem;
+ $stack10=this.statsName;
+ $stack9=this.scheduledExecutorService;
+ $stack8=this.logger;
+ $stack14#org.apache.rocketmq.common.stats.RTStatsItem($stack10,statsKey,$stack9,$stack8);
+ statsItem=$stack14;
+ goto label2;
+ label1:statsItem=new org.apache.rocketmq.common.stats.StatsItem;
+ $stack10=this.statsName;
+ $stack9=this.scheduledExecutorService;
+ $stack8=this.logger;
+ statsItem#org.apache.rocketmq.common.stats.StatsItem($stack10,statsKey,$stack9,$stack8);
+ label2:$stack5=this.statsItemTable;
+ $stack6 = $stack5.putIfAbsent((java.lang.Object)statsKey,(java.lang.Object)statsItem);
+ prev=(org.apache.rocketmq.common.stats.StatsItem) $stack6;
+ if (null==prev) goto label0;
+ statsItem=prev;
+ label0:return  statsItem;
+ } 
+

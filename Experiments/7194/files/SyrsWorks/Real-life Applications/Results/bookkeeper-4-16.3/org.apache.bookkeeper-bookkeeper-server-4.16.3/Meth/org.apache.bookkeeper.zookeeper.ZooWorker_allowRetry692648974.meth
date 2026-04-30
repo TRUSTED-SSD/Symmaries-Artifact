@@ -1,0 +1,39 @@
+boolean org.apache.bookkeeper.zookeeper.ZooWorker:allowRetry(int rc)
+{
+long $stack2;
+  boolean $stack4;
+  org.apache.bookkeeper.zookeeper.RetryPolicy $stack9;
+  org.apache.zookeeper.KeeperException$Code $stack11;
+  int $stack12;
+  org.apache.bookkeeper.stats.OpStatsLogger $stack14;
+  java.util.concurrent.TimeUnit $stack16;
+  $stack2=this.startTimeNanos;
+ $stack2 = org.apache.bookkeeper.util.MathUtils.elapsedMSec($stack2);
+ this.elapsedTimeMs=$stack2;
+ $stack4 = org.apache.bookkeeper.zookeeper.ZooWorker.isRecoverableException(rc);
+ if ($stack4!=0) goto label0;
+ $stack11=org.apache.zookeeper.KeeperException$Code.OK;
+ $stack12 = $stack11.intValue();
+ if ($stack12!=rc) goto label1;
+ $stack14=this.statsLogger;
+ $stack2=this.startTimeNanos;
+ $stack2 = org.apache.bookkeeper.util.MathUtils.elapsedMicroSec($stack2);
+ $stack16=java.util.concurrent.TimeUnit.MICROSECONDS;
+ $stack14.registerSuccessfulEvent($stack2,$stack16);
+ goto label2;
+ label1:$stack14=this.statsLogger;
+ $stack2=this.startTimeNanos;
+ $stack2 = org.apache.bookkeeper.util.MathUtils.elapsedMicroSec($stack2);
+ $stack16=java.util.concurrent.TimeUnit.MICROSECONDS;
+ $stack14.registerFailedEvent($stack2,$stack16);
+ label2:return  0;
+ label0:rc=this.attempts;
+ rc=(rc+1);
+ this.attempts=rc;
+ $stack9=this.retryPolicy;
+ rc=this.attempts;
+ $stack2=this.elapsedTimeMs;
+ $stack4 = $stack9.allowRetry(rc,$stack2);
+ return  $stack4;
+ } 
+

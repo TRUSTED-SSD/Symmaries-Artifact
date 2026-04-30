@@ -1,0 +1,41 @@
+java.io.File org.apache.bookkeeper.bookie.LedgerDirsManager:pickRandomDir(java.util.List dirs,java.io.File excludedDir)
+{
+int start;
+  int idx;
+  java.io.File candidate;
+  java.util.Random $stack6;
+  java.lang.Object $stack9;
+  boolean $stack10;
+  int $stack13;
+  org.apache.bookkeeper.bookie.LedgerDirsManager$NoWritableLedgerDirException $stack17;
+  java.lang.StringBuilder $stack18;
+  java.lang.String $stack23;
+  $stack6=this.rand;
+ start = dirs.size();
+ start = $stack6.nextInt(start);
+ idx=start;
+ $stack9 = dirs.get(start);
+ candidate=(java.io.File) $stack9;
+ label0:if (null==excludedDir) goto label1;
+ $stack10 = excludedDir.equals((java.lang.Object)candidate);
+ if ($stack10==0) goto label1;
+ idx=(idx+1);
+ $stack13 = dirs.size();
+ idx=(idx%$stack13);
+ if (idx!=start) goto label2;
+ $stack17=new org.apache.bookkeeper.bookie.LedgerDirsManager$NoWritableLedgerDirException;
+ $stack18=new java.lang.StringBuilder;
+ $stack18#java.lang.StringBuilder();
+ $stack18 = $stack18.append("No writable directories found from  available writable dirs (");
+ $stack18 = $stack18.append((java.lang.Object)dirs);
+ $stack18 = $stack18.append(") : exclude dir ");
+ $stack18 = $stack18.append((java.lang.Object)excludedDir);
+ $stack23 = $stack18.toString();
+ $stack17#org.apache.bookkeeper.bookie.LedgerDirsManager$NoWritableLedgerDirException($stack23);
+ throw $stack17;
+ label2:$stack9 = dirs.get(idx);
+ candidate=(java.io.File) $stack9;
+ goto label0;
+ label1:return  candidate;
+ } 
+

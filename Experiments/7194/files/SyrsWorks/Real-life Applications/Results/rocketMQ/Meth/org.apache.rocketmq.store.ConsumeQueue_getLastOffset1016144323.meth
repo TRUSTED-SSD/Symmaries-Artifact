@@ -1,0 +1,37 @@
+long org.apache.rocketmq.store.ConsumeQueue:getLastOffset()
+{
+long lastOffset;
+  int logicFileSize;
+  org.apache.rocketmq.store.logfile.MappedFile mappedFile;
+  int position;
+  java.nio.ByteBuffer byteBuffer;
+  long offset;
+  int size;
+  org.apache.rocketmq.store.MappedFileQueue $stack11;
+  byte $stack20;
+  lastOffset=-1L;
+ logicFileSize=this.mappedFileSize;
+ $stack11=this.mappedFileQueue;
+ mappedFile = $stack11.getLastMappedFile();
+ if (mappedFile==null) goto label0;
+ position = mappedFile.getWrotePosition();
+ position=(position-20);
+ if (position>=0) goto label1;
+ position=0;
+ label1:byteBuffer = mappedFile.sliceByteBuffer();
+ byteBuffer.position(position);
+ position=0;
+ label2:if (position>=logicFileSize) goto label0;
+ offset = byteBuffer.getLong();
+ size = byteBuffer.getInt();
+ byteBuffer.getLong();
+ $stack20=(offset cmp 0L);
+ if ($stack20<0) goto label0;
+ if (size<=0) goto label0;
+ lastOffset=(long) size;
+ lastOffset=(offset+lastOffset);
+ position=(position+20);
+ goto label2;
+ label0:return  lastOffset;
+ } 
+

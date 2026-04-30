@@ -1,0 +1,60 @@
+    private org.junit.runners.model.Statement withMethodRules(org.junit.runners.model.FrameworkMethod, java.util.List, java.lang.Object, org.junit.runners.model.Statement)
+    {
+        org.junit.runners.BlockJUnit4ClassRunner this;
+        org.junit.runners.model.FrameworkMethod method;
+        java.util.List testRules, $stack7;
+        java.lang.Object target, $stack10;
+        org.junit.runners.model.Statement result;
+        java.util.Iterator i$;
+        org.junit.rules.MethodRule each;
+        boolean $stack9;
+
+        this := @this: org.junit.runners.BlockJUnit4ClassRunner;
+
+        method := @parameter0: org.junit.runners.model.FrameworkMethod;
+
+        testRules := @parameter1: java.util.List;
+
+        target := @parameter2: java.lang.Object;
+
+        result := @parameter3: org.junit.runners.model.Statement;
+
+        $stack7 = specialinvoke this.<org.junit.runners.BlockJUnit4ClassRunner: java.util.List getMethodRules(java.lang.Object)>(target);
+/*363*/
+
+        i$ = interfaceinvoke $stack7.<java.util.List: java.util.Iterator iterator()>();
+/*363*/
+/*363*/
+
+     label1:
+        $stack9 = interfaceinvoke i$.<java.util.Iterator: boolean hasNext()>();
+/*363*/
+
+        if $stack9 == 0 goto label3;
+/*363*/
+
+        $stack10 = interfaceinvoke i$.<java.util.Iterator: java.lang.Object next()>();
+/*368*/
+
+        each = (org.junit.rules.MethodRule) $stack10;
+/*368*/
+
+        $stack9 = interfaceinvoke testRules.<java.util.List: boolean contains(java.lang.Object)>(each);
+/*364*/
+
+        if $stack9 != 0 goto label2;
+/*364*/
+
+        result = interfaceinvoke each.<org.junit.rules.MethodRule: org.junit.runners.model.Statement apply(org.junit.runners.model.Statement,org.junit.runners.model.FrameworkMethod,java.lang.Object)>(result, method, target);
+/*365*/
+/*365*/
+
+     label2:
+        goto label1;
+/*364*/
+
+     label3:
+        return result;
+/*368*/
+    }
+

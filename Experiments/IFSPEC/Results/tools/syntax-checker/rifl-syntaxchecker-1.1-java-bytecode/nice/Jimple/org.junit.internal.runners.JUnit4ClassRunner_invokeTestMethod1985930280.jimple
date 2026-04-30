@@ -1,0 +1,76 @@
+    protected void invokeTestMethod(java.lang.reflect.Method, org.junit.runner.notification.RunNotifier)
+    {
+        org.junit.internal.runners.JUnit4ClassRunner this;
+        java.lang.reflect.Method method;
+        org.junit.runner.notification.RunNotifier notifier;
+        org.junit.runner.Description description;
+        java.lang.Object test;
+        org.junit.internal.runners.TestMethod e;
+        org.junit.internal.runners.MethodRoadie $stack9;
+        java.lang.reflect.InvocationTargetException $stack10;
+        java.lang.Throwable $stack11;
+        java.lang.Exception $stack12;
+
+        this := @this: org.junit.internal.runners.JUnit4ClassRunner;
+
+        method := @parameter0: java.lang.reflect.Method;
+
+        notifier := @parameter1: org.junit.runner.notification.RunNotifier;
+
+        description = virtualinvoke this.<org.junit.internal.runners.JUnit4ClassRunner: org.junit.runner.Description methodDescription(java.lang.reflect.Method)>(method);
+/*86*/
+/*86*/
+
+     label1:
+        test = virtualinvoke this.<org.junit.internal.runners.JUnit4ClassRunner: java.lang.Object createTest()>();
+/*89*/
+/*89*/
+
+     label2:
+        goto label5;
+/*96*/
+
+     label3:
+        $stack10 := @caughtexception;
+/*99*/
+
+        $stack11 = virtualinvoke $stack10.<java.lang.reflect.InvocationTargetException: java.lang.Throwable getCause()>();
+/*91*/
+
+        specialinvoke this.<org.junit.internal.runners.JUnit4ClassRunner: void testAborted(org.junit.runner.notification.RunNotifier,org.junit.runner.Description,java.lang.Throwable)>(notifier, description, $stack11);
+/*91*/
+
+        return;
+/*92*/
+
+     label4:
+        $stack12 := @caughtexception;
+/*92*/
+
+        specialinvoke this.<org.junit.internal.runners.JUnit4ClassRunner: void testAborted(org.junit.runner.notification.RunNotifier,org.junit.runner.Description,java.lang.Throwable)>(notifier, description, $stack12);
+/*94*/
+
+        return;
+/*95*/
+
+     label5:
+        e = virtualinvoke this.<org.junit.internal.runners.JUnit4ClassRunner: org.junit.internal.runners.TestMethod wrapMethod(java.lang.reflect.Method)>(method);
+/*97*/
+/*97*/
+
+        $stack9 = new org.junit.internal.runners.MethodRoadie;
+/*98*/
+
+        specialinvoke $stack9.<org.junit.internal.runners.MethodRoadie: void <init>(java.lang.Object,org.junit.internal.runners.TestMethod,org.junit.runner.notification.RunNotifier,org.junit.runner.Description)>(test, e, notifier, description);
+/*98*/
+
+        virtualinvoke $stack9.<org.junit.internal.runners.MethodRoadie: void run()>();
+/*98*/
+
+        return;
+/*99*/
+
+        catch java.lang.reflect.InvocationTargetException from label1 to label2 with label3;
+        catch java.lang.Exception from label1 to label2 with label4;
+    }
+

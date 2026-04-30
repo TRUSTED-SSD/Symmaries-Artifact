@@ -1,0 +1,15 @@
+void org.apache.bookkeeper.client.LedgerHandle:asyncReadLastConfirmed(org.apache.bookkeeper.client.AsyncCallback$ReadLastConfirmedCallback cb,java.lang.Object ctx)
+{
+org.apache.bookkeeper.client.ClientContext $stack3;
+  org.apache.bookkeeper.client.ClientInternalConf $stack4;
+  boolean $stack5;
+  $stack3=this.clientCtx;
+ $stack4 = $stack3.getConf();
+ $stack5=$stack4.useV2WireProtocol;
+ if ($stack5==0) goto label0;
+ this#org.apache.bookkeeper.client.LedgerHandle:asyncReadPiggybackLastConfirmed(cb,ctx);
+ goto label1;
+ label0:this.asyncReadExplicitLastConfirmed(cb,ctx);
+ label1:return;
+ } 
+

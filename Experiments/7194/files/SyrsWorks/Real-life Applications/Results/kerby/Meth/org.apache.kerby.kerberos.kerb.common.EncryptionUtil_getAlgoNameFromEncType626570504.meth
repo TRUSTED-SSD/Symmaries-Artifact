@@ -1,0 +1,39 @@
+static java.lang.String org.apache.kerby.kerberos.kerb.common.EncryptionUtil:getAlgoNameFromEncType(org.apache.kerby.kerberos.kerb.type.base.EncryptionType encType)
+{
+java.lang.String cipherName;
+  java.util.Iterator l2;
+  java.util.Map$Entry entry;
+  java.util.Map $stack6;
+  java.util.Set $stack7;
+  boolean $stack9;
+  java.lang.IllegalArgumentException $stack10;
+  java.lang.StringBuilder $stack11;
+  java.lang.Object $stack15;
+  java.lang.String $stack17;
+  cipherName = encType.getName();
+ cipherName = cipherName.toLowerCase();
+ $stack6=org.apache.kerby.kerberos.kerb.common.EncryptionUtil.CIPHER_ALGO_MAP;
+ $stack7 = $stack6.entrySet();
+ l2 = $stack7.iterator();
+ label0:$stack9 = l2.hasNext();
+ if ($stack9==0) goto label1;
+ $stack15 = l2.next();
+ entry=(java.util.Map$Entry) $stack15;
+ $stack15 = entry.getKey();
+ $stack17=(java.lang.String) $stack15;
+ $stack9 = cipherName.startsWith($stack17);
+ if ($stack9==0) goto label2;
+ $stack15 = entry.getValue();
+ cipherName=(java.lang.String) $stack15;
+ return  cipherName;
+ label2:goto label0;
+ label1:$stack10=new java.lang.IllegalArgumentException;
+ $stack11=new java.lang.StringBuilder;
+ $stack11#java.lang.StringBuilder();
+ $stack11 = $stack11.append("Unknown algorithm name for the encryption type ");
+ $stack11 = $stack11.append((java.lang.Object)encType);
+ cipherName = $stack11.toString();
+ $stack10#java.lang.IllegalArgumentException(cipherName);
+ throw $stack10;
+ } 
+

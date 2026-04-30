@@ -1,0 +1,8 @@
+org.apache.rocketmq.proxy.grpc.GrpcServerBuilder org.apache.rocketmq.proxy.grpc.GrpcServerBuilder:appendInterceptor (
+  io.grpc.ServerInterceptor interceptor) {
+  guard = tt;
+  ret(level()) = level(this);
+  ret(obj_level()) = level(interceptor) ⊔ level(this) ⊔ obj_level(interceptor) ⊔ obj_level(this);
+  ret(obj_level(interceptor)) = level(interceptor) ⊔ level(this) ⊔ obj_level(interceptor) ⊔ obj_level(this);
+  ret(obj_level(this)) = level(interceptor) ⊔ level(this) ⊔ obj_level(interceptor) ⊔ obj_level(this);
+}

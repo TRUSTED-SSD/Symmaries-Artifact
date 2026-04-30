@@ -1,0 +1,36 @@
+long org.apache.bookkeeper.bookie.BufferedChannel:forceWrite(boolean forceMetadata)
+{
+long positionForceWrite;
+  org.apache.bookkeeper.bookie.BufferedChannel l4;
+  java.lang.Throwable l5;
+  java.util.concurrent.atomic.AtomicLong $stack6;
+  long $stack8;
+  byte $stack9;
+  java.nio.channels.FileChannel $stack10;
+  io.netty.buffer.ByteBuf $stack12;
+  int $stack14;
+  $stack6=this.writeBufferStartPosition;
+ positionForceWrite = $stack6.get();
+ $stack8=this.unpersistedBytesBound;
+ $stack9=($stack8 cmp 0L);
+ if ($stack9<=0) goto label0;
+ l4=this;
+ monitorenter this;
+ label1:$stack6=this.unpersistedBytes;
+ $stack12=this.writeBuffer;
+ $stack14 = $stack12.readableBytes();
+dummyClass.highSourceMut($stack14);
+ $stack8=(long) $stack14;
+ $stack6.set($stack8);
+ monitorexit this;
+ label2:goto label0;
+ label3:l5 = catch;
+ monitorexit this;
+ label4:throw l5;
+ label0:$stack10=this.fileChannel;
+ $stack10.force(forceMetadata);
+ return  positionForceWrite;
+ catch java.lang.Throwable: label1 - label2 : label3;
+catch java.lang.Throwable: label3 - label4 : label3;
+} 
+

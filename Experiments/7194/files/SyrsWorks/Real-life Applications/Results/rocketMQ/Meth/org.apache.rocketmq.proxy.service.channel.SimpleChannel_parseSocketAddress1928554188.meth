@@ -1,0 +1,24 @@
+static java.net.SocketAddress org.apache.rocketmq.proxy.service.channel.SimpleChannel:parseSocketAddress(java.lang.String @address)
+{
+java.lang.String[] segments;
+  boolean $stack2;
+  int $stack4;
+  java.net.InetSocketAddress $stack5;
+  java.lang.String $stack7;
+  java.lang.String address;
+address=@address;
+$stack2 = com.google.common.base.Strings.isNullOrEmpty(address);
+ if ($stack2==0) goto label0;
+ return  null;
+ label0:segments = address.split(":");
+ $stack4=#segments;
+ if (2!=$stack4) goto label1;
+ $stack5=new java.net.InetSocketAddress;
+ $stack7=segments[0];
+ address=segments[1];
+ $stack4 = java.lang.Integer.parseInt(address);
+ $stack5#java.net.InetSocketAddress($stack7,$stack4);
+ return  $stack5;
+ label1:return  null;
+ } 
+

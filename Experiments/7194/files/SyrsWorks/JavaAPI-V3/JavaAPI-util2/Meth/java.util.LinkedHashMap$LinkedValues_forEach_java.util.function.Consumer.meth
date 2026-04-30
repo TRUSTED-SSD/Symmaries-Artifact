@@ -1,0 +1,33 @@
+void java.util.LinkedHashMap$LinkedValues:forEach(java.util.function.Consumer r1)
+{
+int i0;
+  java.util.LinkedHashMap $r2;
+  java.util.LinkedHashMap $r3;
+  java.util.LinkedHashMap $r4;
+  int $i1;
+  java.util.ConcurrentModificationException $r5;
+  java.lang.Object $r6;
+  java.lang.NullPointerException $r7;
+  java.util.LinkedHashMap$Entry r8;
+  if (r1!=null) goto label0;
+ $r7=new java.lang.NullPointerException;
+ $r7#java.lang.NullPointerException:init();
+ throw $r7;
+ label0:$r2=this.this$0;
+ i0=$r2.modCount;
+ $r3=this.this$0;
+ r8=$r3.head;
+ label1:if (r8==null) goto label2;
+ $r6=r8.value;
+ r1.accept($r6);
+ r8=r8.after;
+ goto label1;
+ label2:$r4=this.this$0;
+ $i1=$r4.modCount;
+ if ($i1==i0) goto label3;
+ $r5=new java.util.ConcurrentModificationException;
+ $r5#java.util.ConcurrentModificationException:init();
+ throw $r5;
+ label3:return;
+ }  
+

@@ -1,0 +1,98 @@
+    protected static org.w3c.dom.Element getChildElement(org.w3c.dom.Element)
+    {
+        org.w3c.dom.Element elem, child;
+        java.lang.Object it, $stack6;
+        org.w3c.dom.NodeList $stack3;
+        java.lang.Iterable $stack4;
+        boolean $stack7;
+        java.lang.StringBuilder $stack9;
+        java.lang.String $stack11;
+        java.util.NoSuchElementException $stack12;
+        java.lang.IllegalArgumentException tmp$1146528670;
+        java.util.Iterator tmp$1649570285;
+
+        elem := @parameter0: org.w3c.dom.Element;
+
+     label1:
+        $stack3 = interfaceinvoke elem.<org.w3c.dom.Element: org.w3c.dom.NodeList getChildNodes()>();
+/*347*/
+
+        $stack4 = staticinvoke <rifl.spec.RIFLReader: java.lang.Iterable getElementList(org.w3c.dom.NodeList)>($stack3);
+/*347*/
+
+        it = interfaceinvoke $stack4.<java.lang.Iterable: java.util.Iterator iterator()>();
+/*347*/
+/*347*/
+
+        tmp$1649570285 = (java.util.Iterator) it;
+
+        $stack6 = interfaceinvoke tmp$1649570285.<java.util.Iterator: java.lang.Object next()>();
+/*348*/
+
+        child = (org.w3c.dom.Element) $stack6;
+/*348*/
+
+        tmp$1649570285 = (java.util.Iterator) it;
+
+        $stack7 = interfaceinvoke tmp$1649570285.<java.util.Iterator: boolean hasNext()>();
+/*349*/
+
+        if $stack7 == 0 goto label2;
+/*349*/
+
+        tmp$1146528670 = new java.lang.IllegalArgumentException;
+/*350*/
+
+        $stack9 = new java.lang.StringBuilder;
+/*350*/
+
+        specialinvoke $stack9.<java.lang.StringBuilder: void <init>(java.lang.String)>("The given element has more than one child: ");
+/*350*/
+
+        $stack9 = virtualinvoke $stack9.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.Object)>(elem);
+/*350*/
+
+        $stack11 = virtualinvoke $stack9.<java.lang.StringBuilder: java.lang.String toString()>();
+/*350*/
+
+        specialinvoke tmp$1146528670.<java.lang.IllegalArgumentException: void <init>(java.lang.String)>($stack11);
+/*350*/
+
+        throw tmp$1146528670;
+/*350*/
+
+     label2:
+        return child;
+/*352*/
+
+     label3:
+        $stack12 := @caughtexception;
+/*350*/
+
+        it = $stack12;
+/*353*/
+
+        tmp$1146528670 = new java.lang.IllegalArgumentException;
+/*354*/
+
+        $stack9 = new java.lang.StringBuilder;
+/*354*/
+
+        specialinvoke $stack9.<java.lang.StringBuilder: void <init>(java.lang.String)>("The given element has no child: ");
+/*354*/
+
+        $stack9 = virtualinvoke $stack9.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.Object)>(elem);
+/*354*/
+
+        $stack11 = virtualinvoke $stack9.<java.lang.StringBuilder: java.lang.String toString()>();
+/*354*/
+
+        specialinvoke tmp$1146528670.<java.lang.IllegalArgumentException: void <init>(java.lang.String)>($stack11);
+/*354*/
+
+        throw tmp$1146528670;
+/*354*/
+
+        catch java.util.NoSuchElementException from label1 to label2 with label3;
+    }
+

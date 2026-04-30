@@ -1,0 +1,25 @@
+java.util.Set org.apache.bookkeeper.client.BookieWatcherImpl:getBookies()
+{
+org.apache.bookkeeper.discover.RegistrationClient $stack2;
+  java.util.concurrent.CompletableFuture $stack3;
+  java.util.function.Function $stack4;
+  java.lang.Object $stack5;
+  org.apache.bookkeeper.versioning.Versioned $stack6;
+  java.util.Set $stack8;
+  org.apache.bookkeeper.client.BKException$BKInterruptedException $stack9;
+  java.lang.Thread $stack10;
+  label0:$stack2=this.registrationClient;
+ $stack3 = $stack2.getWritableBookies();
+ $stack4=org.apache.bookkeeper.client.BookieWatcherImpl.EXCEPTION_FUNC;
+ $stack5 = org.apache.bookkeeper.common.concurrent.FutureUtils.result($stack3,$stack4);
+ $stack6=(org.apache.bookkeeper.versioning.Versioned) $stack5;
+ $stack5 = $stack6.getValue();
+ $stack8=(java.util.Set) $stack5;
+ label1:return  $stack8;
+ label2:$stack9 = catch;
+ $stack10 = java.lang.Thread.currentThread();
+ $stack10.interrupt();
+ throw $stack9;
+ catch org.apache.bookkeeper.client.BKException$BKInterruptedException: label0 - label1 : label2;
+} 
+

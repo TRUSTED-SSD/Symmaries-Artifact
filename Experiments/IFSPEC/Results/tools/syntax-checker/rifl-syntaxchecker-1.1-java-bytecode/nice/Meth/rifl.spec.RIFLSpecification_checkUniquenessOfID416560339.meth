@@ -1,0 +1,19 @@
+void rifl.spec.RIFLSpecification:checkUniquenessOfID(java.lang.String @id,java.util.HashSet ids)
+{
+boolean $stack3;
+  rifl.spec.RIFLIntegrityException $stack5;
+  java.lang.Object[] $stack6;
+  java.lang.String id;
+id=@id;
+$stack3 = ids.contains((java.lang.Object)id);
+ if ($stack3==0) goto label0;
+ $stack5=new rifl.spec.RIFLIntegrityException;
+ $stack6=new java.lang.Object[1];
+ $stack6[0]=id;
+ id = java.lang.String.format("Duplicate identifier: %s.",$stack6);
+ $stack5#rifl.spec.RIFLIntegrityException(id);
+ throw $stack5;
+ label0:ids.add((java.lang.Object)id);
+ return;
+ } 
+

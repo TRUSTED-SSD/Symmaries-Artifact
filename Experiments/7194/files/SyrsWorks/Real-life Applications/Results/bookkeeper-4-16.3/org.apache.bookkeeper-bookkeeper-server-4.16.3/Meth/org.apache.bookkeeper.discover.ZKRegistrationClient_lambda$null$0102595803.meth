@@ -1,0 +1,53 @@
+void org.apache.bookkeeper.discover.ZKRegistrationClient:lambda$null$0(org.apache.bookkeeper.net.BookieId bookieId,java.util.concurrent.CompletableFuture promise,int rc2,java.lang.String path2,java.lang.Object @o2,byte[] bytes2,org.apache.zookeeper.data.Stat stat2)
+{
+org.apache.bookkeeper.versioning.Versioned result;
+  org.apache.zookeeper.KeeperException$Code $stack10;
+  int $stack11;
+  org.apache.bookkeeper.client.BKException $stack12;
+  long $stack18;
+  org.slf4j.Logger $stack19;
+  java.util.concurrent.ConcurrentHashMap $stack22;
+  java.io.IOException $stack25;
+  org.apache.zookeeper.KeeperException $stack28;
+  java.lang.Throwable $stack29;
+  org.apache.bookkeeper.versioning.LongVersion tmp$375864132;
+  org.apache.bookkeeper.versioning.Versioned tmp$1131687775;
+  java.lang.Object o2;
+o2=@o2;
+$stack10=org.apache.zookeeper.KeeperException$Code.OK;
+ $stack11 = $stack10.intValue();
+ if ($stack11!=rc2) goto label0;
+ label1:o2 = org.apache.bookkeeper.discover.ZKRegistrationClient.deserializeBookieServiceInfo(bookieId,bytes2);
+ tmp$1131687775=new org.apache.bookkeeper.versioning.Versioned;
+ result=tmp$1131687775;
+ tmp$375864132=new org.apache.bookkeeper.versioning.LongVersion;
+ $stack11 = stat2.getCversion();
+ $stack18=(long) $stack11;
+ tmp$375864132#org.apache.bookkeeper.versioning.LongVersion($stack18);
+ tmp$1131687775#org.apache.bookkeeper.versioning.Versioned(o2,(org.apache.bookkeeper.versioning.Version)tmp$375864132);
+ result=tmp$1131687775;
+ $stack19=org.apache.bookkeeper.discover.ZKRegistrationClient.log;
+ o2 = tmp$1131687775.getValue();
+ dummyClass.lowSink("Update BookieInfoCache (readonly bookie) {} -> {}");
+$stack19.info("Update BookieInfoCache (readonly bookie) {} -> {}",(java.lang.Object)bookieId,o2);
+ $stack22=this.bookieServiceInfoCache;
+ $stack22.put((java.lang.Object)bookieId,(java.lang.Object)tmp$1131687775);
+ promise.complete((java.lang.Object)tmp$1131687775);
+ label2:goto label3;
+ label4:$stack25 = catch;
+ o2=$stack25;
+ $stack19=org.apache.bookkeeper.discover.ZKRegistrationClient.log;
+ $stack29=(java.lang.Throwable) $stack25;
+ $stack19.error("Cannot update BookieInfo for ",$stack29);
+ $stack10 = org.apache.zookeeper.KeeperException$Code.get(rc2);
+ $stack28 = org.apache.zookeeper.KeeperException.create($stack10,path2);
+ $stack29=(java.lang.Throwable) $stack25;
+ $stack29 = $stack28.initCause($stack29);
+ promise.completeExceptionally($stack29);
+ return;
+ label0:$stack12 = org.apache.bookkeeper.client.BKException.create(-3);
+ promise.completeExceptionally((java.lang.Throwable)$stack12);
+ label3:return;
+ catch java.io.IOException: label1 - label2 : label4;
+} 
+

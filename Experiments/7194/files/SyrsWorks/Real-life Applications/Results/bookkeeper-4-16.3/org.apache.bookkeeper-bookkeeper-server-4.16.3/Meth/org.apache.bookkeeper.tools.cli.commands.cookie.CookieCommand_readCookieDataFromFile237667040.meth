@@ -1,0 +1,30 @@
+byte[] org.apache.bookkeeper.tools.cli.commands.cookie.CookieCommand:readCookieDataFromFile(java.lang.String @cookieFile)
+{
+java.lang.String[] $stack3;
+  java.nio.file.Path $stack4;
+  byte[] $stack5;
+  java.nio.file.NoSuchFileException $stack6;
+  org.apache.bookkeeper.tools.framework.CliSpec $stack7;
+  java.io.PrintStream $stack8;
+  java.lang.StringBuilder $stack9;
+  java.lang.String cookieFile;
+cookieFile=@cookieFile;
+label0:$stack3=new java.lang.String[0];
+ $stack4 = java.nio.file.Paths.get(cookieFile,$stack3);
+ $stack5 = java.nio.file.Files.readAllBytes($stack4);
+ label1:return  $stack5;
+ label2:$stack6 = catch;
+ $stack7=this.spec;
+ $stack8 = $stack7.console();
+ $stack9=new java.lang.StringBuilder;
+ $stack9#java.lang.StringBuilder();
+ $stack9 = $stack9.append("Cookie file \'");
+ $stack9 = $stack9.append(cookieFile);
+ $stack9 = $stack9.append("\' doesn\'t exist.");
+ cookieFile = $stack9.toString();
+ dummyClass.lowSink(cookieFile);
+$stack8.println(cookieFile);
+ throw $stack6;
+ catch java.nio.file.NoSuchFileException: label0 - label1 : label2;
+} 
+

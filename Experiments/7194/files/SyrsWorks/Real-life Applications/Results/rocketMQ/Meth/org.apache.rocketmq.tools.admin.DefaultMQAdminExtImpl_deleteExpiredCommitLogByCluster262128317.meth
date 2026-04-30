@@ -1,0 +1,20 @@
+boolean org.apache.rocketmq.tools.admin.DefaultMQAdminExtImpl:deleteExpiredCommitLogByCluster(org.apache.rocketmq.remoting.protocol.body.ClusterInfo clusterInfo,java.lang.String @cluster)
+{
+boolean result;
+  java.lang.String[] l5;
+  int l6;
+  int l7;
+  java.lang.String cluster;
+cluster=@cluster;
+result=0;
+ l5 = clusterInfo.retrieveAllAddrByCluster(cluster);
+ l6=#l5;
+ l7=0;
+ label0:if (l7>=l6) goto label1;
+ cluster=l5[l7];
+ result = this.deleteExpiredCommitLogByAddr(cluster);
+ l7=(l7+1);
+ goto label0;
+ label1:return  result;
+ } 
+

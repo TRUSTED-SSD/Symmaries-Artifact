@@ -1,0 +1,35 @@
+int org.apache.bookkeeper.bookie.BookieShell$ListActiveLedgersCmd:runCmd(org.apache.commons.cli.CommandLine cmdLine)
+{
+boolean hasTimeout;
+  boolean hasLogId;
+  long logId;
+  org.apache.bookkeeper.tools.cli.commands.bookie.ListActiveLedgersCommand$ActiveLedgerFlags flags;
+  java.lang.String $stack10;
+  org.apache.bookkeeper.tools.cli.commands.bookie.ListActiveLedgersCommand $stack14;
+  org.apache.bookkeeper.bookie.BookieShell $stack15;
+  org.apache.bookkeeper.util.LedgerIdFormatter $stack16;
+  org.apache.bookkeeper.conf.ServerConfiguration $stack18;
+  hasTimeout = cmdLine.hasOption("t");
+ hasLogId = cmdLine.hasOption("l");
+ if (hasLogId!=0) goto label0;
+ this.printUsage();
+ return  -1;
+ label0:$stack10 = cmdLine.getOptionValue("l");
+ logId = java.lang.Long.parseLong($stack10);
+ flags=new org.apache.bookkeeper.tools.cli.commands.bookie.ListActiveLedgersCommand$ActiveLedgerFlags;
+ flags#org.apache.bookkeeper.tools.cli.commands.bookie.ListActiveLedgersCommand$ActiveLedgerFlags();
+ flags.logId(logId);
+ if (hasTimeout==0) goto label1;
+ $stack10 = cmdLine.getOptionValue("t");
+ logId = java.lang.Long.parseLong($stack10);
+ flags.timeout(logId);
+ label1:$stack14=new org.apache.bookkeeper.tools.cli.commands.bookie.ListActiveLedgersCommand;
+ $stack15=this.this$0;
+ $stack16=$stack15.ledgerIdFormatter;
+ $stack14#org.apache.bookkeeper.tools.cli.commands.bookie.ListActiveLedgersCommand($stack16);
+ $stack15=this.this$0;
+ $stack18=$stack15.bkConf;
+ $stack14#org.apache.bookkeeper.tools.cli.commands.bookie.ListActiveLedgersCommand($stack18,flags);
+ return  0;
+ } 
+

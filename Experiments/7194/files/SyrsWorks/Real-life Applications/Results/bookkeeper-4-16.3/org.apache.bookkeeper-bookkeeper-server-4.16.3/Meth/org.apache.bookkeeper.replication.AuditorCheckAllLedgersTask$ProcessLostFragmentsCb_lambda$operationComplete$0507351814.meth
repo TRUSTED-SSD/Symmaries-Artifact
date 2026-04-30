@@ -1,0 +1,26 @@
+void org.apache.bookkeeper.replication.AuditorCheckAllLedgersTask$ProcessLostFragmentsCb:lambda$operationComplete$0(java.util.Set bookies,java.lang.Object result,java.lang.Throwable cause)
+{
+org.apache.zookeeper.AsyncCallback$VoidCallback $stack4;
+  org.slf4j.Logger $stack5;
+  java.lang.Object[] $stack6;
+  org.apache.bookkeeper.client.LedgerHandle $stack7;
+  long $stack10;
+  java.lang.Long $stack11;
+  if (null==cause) goto label0;
+ $stack5 = org.apache.bookkeeper.replication.AuditorCheckAllLedgersTask.access$000();
+ $stack6=new java.lang.Object[3];
+ $stack7=this.lh;
+ $stack10 = $stack7.getId();
+ $stack11 = java.lang.Long.valueOf($stack10);
+ $stack6[0]=$stack11;
+ $stack6[1]=bookies;
+ $stack6[2]=cause;
+ $stack5.error("Auditor exception publishing suspected ledger {} with lost bookies {}",$stack6);
+ $stack4=this.callback;
+ $stack4.processResult(-200,null,null);
+ goto label1;
+ label0:$stack4=this.callback;
+ $stack4.processResult(0,null,null);
+ label1:return;
+ } 
+

@@ -1,0 +1,39 @@
+void org.apache.bookkeeper.bookie.GarbageCollectorThread:shutdown()
+{
+boolean $stack2;
+  org.slf4j.Logger $stack3;
+  org.apache.bookkeeper.bookie.AbstractLogCompactor$Throttler $stack4;
+  org.apache.bookkeeper.bookie.AbstractLogCompactor $stack5;
+  java.util.concurrent.atomic.AtomicBoolean $stack7;
+  java.util.concurrent.ScheduledExecutorService $stack9;
+  org.apache.bookkeeper.bookie.EntryLogMetadataMap $stack11;
+  java.lang.Exception $stack15;
+  $stack2=this.running;
+ if ($stack2!=0) goto label0;
+ return;
+ label0:$stack3=org.apache.bookkeeper.bookie.GarbageCollectorThread.LOG;
+ dummyClass.lowSink("Shutting down GarbageCollectorThread");
+$stack3.info("Shutting down GarbageCollectorThread");
+ $stack4=this.throttler;
+ $stack4.cancelledAcquire();
+ $stack5=this.compactor;
+ $stack4=$stack5.throttler;
+ $stack4.cancelledAcquire();
+ label1:$stack7=this.compacting;
+ $stack2 = $stack7.compareAndSet((boolean)0,(boolean)1);
+ if ($stack2!=0) goto label2;
+ java.lang.Thread.sleep(100L);
+ goto label1;
+ label2:this.running=0;
+ $stack9=this.gcExecutor;
+ $stack9.shutdownNow();
+ label3:$stack11=this.entryLogMetaMap;
+ $stack11.close();
+ label4:goto label5;
+ label6:$stack15 = catch;
+ $stack3=org.apache.bookkeeper.bookie.GarbageCollectorThread.LOG;
+ $stack3.warn("Failed to close entryLog metadata-map",(java.lang.Throwable)$stack15);
+ label5:return;
+ catch java.lang.Exception: label3 - label4 : label6;
+} 
+

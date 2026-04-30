@@ -1,0 +1,198 @@
+    transient java.lang.String[] parseOptions(java.lang.String[])
+    {
+        org.junit.runner.JUnitCommandLineParseResult this;
+        java.lang.String[] args;
+        int i, $stack5;
+        java.lang.String arg;
+        boolean $stack7;
+        java.util.List $stack16;
+        org.junit.runner.JUnitCommandLineParseResult$CommandLineParserError $stack21;
+        java.lang.StringBuilder $stack22;
+
+        this := @this: org.junit.runner.JUnitCommandLineParseResult;
+
+        args := @parameter0: java.lang.String[];
+
+        i = 0;
+/*54*/
+
+     label01:
+        $stack5 = lengthof args;
+/*54*/
+
+        if i == $stack5 goto label10;
+/*54*/
+
+        arg = args[i];
+/*55*/
+
+        $stack7 = virtualinvoke arg.<java.lang.String: boolean equals(java.lang.Object)>("--");
+/*57*/
+
+        if $stack7 == 0 goto label02;
+/*57*/
+
+        $stack5 = i + 1;
+/*58*/
+
+        i = lengthof args;
+/*58*/
+
+        args = specialinvoke this.<org.junit.runner.JUnitCommandLineParseResult: java.lang.String[] copyArray(java.lang.String[],int,int)>(args, $stack5, i);
+/*58*/
+
+        return args;
+/*58*/
+
+     label02:
+        $stack7 = virtualinvoke arg.<java.lang.String: boolean startsWith(java.lang.String)>("--");
+/*59*/
+
+        if $stack7 == 0 goto label08;
+/*59*/
+
+        $stack7 = virtualinvoke arg.<java.lang.String: boolean startsWith(java.lang.String)>("--filter=");
+/*60*/
+
+        if $stack7 != 0 goto label03;
+/*60*/
+
+        $stack7 = virtualinvoke arg.<java.lang.String: boolean equals(java.lang.Object)>("--filter");
+/*76*/
+
+        if $stack7 == 0 goto label07;
+/*76*/
+
+     label03:
+        $stack7 = virtualinvoke arg.<java.lang.String: boolean equals(java.lang.Object)>("--filter");
+/*62*/
+
+        if $stack7 == 0 goto label05;
+/*62*/
+
+        i = i + 1;
+/*63*/
+
+        $stack5 = lengthof args;
+/*65*/
+
+        if i >= $stack5 goto label04;
+/*65*/
+
+        arg = args[i];
+/*66*/
+
+        goto label06;
+/*66*/
+
+     label04:
+        $stack16 = this.<org.junit.runner.JUnitCommandLineParseResult: java.util.List parserErrors>;
+/*68*/
+
+        $stack21 = new org.junit.runner.JUnitCommandLineParseResult$CommandLineParserError;
+/*68*/
+
+        $stack22 = new java.lang.StringBuilder;
+/*68*/
+
+        specialinvoke $stack22.<java.lang.StringBuilder: void <init>()>();
+/*68*/
+
+        $stack22 = virtualinvoke $stack22.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>(arg);
+/*68*/
+
+        $stack22 = virtualinvoke $stack22.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>(" value not specified");
+/*68*/
+
+        arg = virtualinvoke $stack22.<java.lang.StringBuilder: java.lang.String toString()>();
+/*68*/
+
+        specialinvoke $stack21.<org.junit.runner.JUnitCommandLineParseResult$CommandLineParserError: void <init>(java.lang.String)>(arg);
+/*68*/
+
+        interfaceinvoke $stack16.<java.util.List: boolean add(java.lang.Object)>($stack21);
+/*68*/
+
+        goto label10;
+/*69*/
+
+     label05:
+        $stack5 = virtualinvoke arg.<java.lang.String: int indexOf(int)>(61);
+/*72*/
+
+        $stack5 = $stack5 + 1;
+/*72*/
+
+        arg = virtualinvoke arg.<java.lang.String: java.lang.String substring(int)>($stack5);
+/*72*/
+/*72*/
+
+     label06:
+        $stack16 = this.<org.junit.runner.JUnitCommandLineParseResult: java.util.List filterSpecs>;
+/*75*/
+
+        interfaceinvoke $stack16.<java.util.List: boolean add(java.lang.Object)>(arg);
+/*75*/
+
+        goto label09;
+/*76*/
+
+     label07:
+        $stack16 = this.<org.junit.runner.JUnitCommandLineParseResult: java.util.List parserErrors>;
+/*77*/
+
+        $stack21 = new org.junit.runner.JUnitCommandLineParseResult$CommandLineParserError;
+/*77*/
+
+        $stack22 = new java.lang.StringBuilder;
+/*77*/
+
+        specialinvoke $stack22.<java.lang.StringBuilder: void <init>()>();
+/*77*/
+
+        $stack22 = virtualinvoke $stack22.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>("JUnit knows nothing about the ");
+/*77*/
+
+        $stack22 = virtualinvoke $stack22.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>(arg);
+/*77*/
+
+        $stack22 = virtualinvoke $stack22.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>(" option");
+/*77*/
+
+        arg = virtualinvoke $stack22.<java.lang.StringBuilder: java.lang.String toString()>();
+/*77*/
+
+        specialinvoke $stack21.<org.junit.runner.JUnitCommandLineParseResult$CommandLineParserError: void <init>(java.lang.String)>(arg);
+/*77*/
+
+        interfaceinvoke $stack16.<java.util.List: boolean add(java.lang.Object)>($stack21);
+/*77*/
+
+        goto label09;
+/*77*/
+
+     label08:
+        $stack5 = lengthof args;
+/*80*/
+
+        args = specialinvoke this.<org.junit.runner.JUnitCommandLineParseResult: java.lang.String[] copyArray(java.lang.String[],int,int)>(args, i, $stack5);
+/*80*/
+
+        return args;
+/*80*/
+
+     label09:
+        i = i + 1;
+/*54*/
+
+        goto label01;
+/*54*/
+
+     label10:
+        args = newarray (java.lang.String)[0];
+/*84*/
+
+        return args;
+/*84*/
+    }
+

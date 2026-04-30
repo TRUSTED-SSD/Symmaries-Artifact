@@ -1,0 +1,42 @@
+static void org.apache.kerby.util.Util:main(java.lang.String[] args)
+{
+java.lang.String s;
+  org.apache.kerby.util.ByteArrayReadLine readLine;
+  java.io.ByteArrayInputStream $stack5;
+  java.nio.charset.Charset $stack6;
+  byte[] $stack7;
+  java.io.PrintStream $stack10;
+  s="line1\n\rline2\n\rline3";
+ $stack5=new java.io.ByteArrayInputStream;
+ $stack6 = java.nio.charset.Charset.forName("UTF-8");
+ $stack7 = s.getBytes($stack6);
+ $stack5#java.io.ByteArrayInputStream($stack7);
+ readLine=new org.apache.kerby.util.ByteArrayReadLine;
+ readLine#org.apache.kerby.util.ByteArrayReadLine($stack5);
+ s = readLine.next();
+ label0:if (s==null) goto label1;
+ $stack10=java.lang.System.out;
+ dummyClass.lowSink(s);
+$stack10.println(s);
+ s = readLine.next();
+ goto label0;
+ label1:$stack10=java.lang.System.out;
+ dummyClass.lowSink("--------- test 2 ----------");
+$stack10.println("--------- test 2 ----------");
+ s="line1\n\rline2\n\rline3\n\r\n\r";
+ $stack5=new java.io.ByteArrayInputStream;
+ $stack6=java.nio.charset.StandardCharsets.UTF_8;
+ $stack7 = s.getBytes($stack6);
+ $stack5#java.io.ByteArrayInputStream($stack7);
+ readLine=new org.apache.kerby.util.ByteArrayReadLine;
+ readLine#org.apache.kerby.util.ByteArrayReadLine($stack5);
+ s = readLine.next();
+ label2:if (s==null) goto label3;
+ $stack10=java.lang.System.out;
+ dummyClass.lowSink(s);
+$stack10.println(s);
+ s = readLine.next();
+ goto label2;
+ label3:return;
+ } 
+

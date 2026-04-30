@@ -1,0 +1,44 @@
+void org.apache.bookkeeper.proto.BookieServer:start()
+{
+org.apache.bookkeeper.bookie.Bookie $stack1;
+  boolean $stack3;
+  org.apache.bookkeeper.bookie.UncleanShutdownDetection $stack4;
+  org.apache.bookkeeper.proto.BookieNettyServer $stack5;
+  org.apache.bookkeeper.proto.BookieServer$DeathWatcher $stack6;
+  org.apache.bookkeeper.conf.ServerConfiguration $stack7;
+  java.lang.Thread$UncaughtExceptionHandler $stack8;
+  java.util.concurrent.TimeUnit $stack10;
+  int $stack16;
+  org.apache.bookkeeper.processor.RequestProcessor $stack17;
+  $stack1=this.bookie;
+ $stack1.start();
+ $stack1=this.bookie;
+ $stack3 = $stack1.isRunning();
+ if ($stack3!=0) goto label0;
+ $stack1=this.bookie;
+ $stack16 = $stack1.getExitCode();
+ this.exitCode=$stack16;
+ $stack17=this.requestProcessor;
+ $stack17.close();
+ return;
+ label0:$stack4=this.uncleanShutdownDetection;
+ $stack4.registerStartUp();
+ $stack5=this.nettyServer;
+ $stack5.start();
+ this.running=1;
+ $stack6=new org.apache.bookkeeper.proto.BookieServer$DeathWatcher;
+ $stack7=this.conf;
+ $stack6#org.apache.bookkeeper.proto.BookieServer$DeathWatcher(this,$stack7);
+ this.deathWatcher=$stack6;
+ $stack8=this.uncaughtExceptionHandler;
+ if (null==$stack8) goto label1;
+ $stack6=this.deathWatcher;
+ $stack8=this.uncaughtExceptionHandler;
+ $stack6.setUncaughtExceptionHandler($stack8);
+ label1:$stack6=this.deathWatcher;
+ $stack6.start();
+ $stack10=java.util.concurrent.TimeUnit.MILLISECONDS;
+ $stack10.sleep(250L);
+ return;
+ } 
+

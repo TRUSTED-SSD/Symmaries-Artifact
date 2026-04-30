@@ -1,0 +1,24 @@
+void org.apache.bookkeeper.client.LedgerFragmentReplicator:replicate(org.apache.bookkeeper.client.LedgerHandle lh,org.apache.bookkeeper.client.LedgerFragment lf,org.apache.zookeeper.AsyncCallback$VoidCallback ledgerFragmentMcb,java.util.Set targetBookieAddresses,java.util.function.BiConsumer onReadEntryFailureCallback)
+{
+java.util.Set partionedFragments;
+  org.apache.bookkeeper.client.BookKeeper $stack7;
+  org.apache.bookkeeper.conf.ClientConfiguration $stack8;
+  long $stack9;
+  org.slf4j.Logger $stack11;
+  int $stack13;
+  java.lang.Integer $stack14;
+  java.util.Iterator $stack15;
+  $stack7=this.bkc;
+ $stack8 = $stack7.getConf();
+ $stack9 = $stack8.getRereplicationEntryBatchSize();
+ partionedFragments = org.apache.bookkeeper.client.LedgerFragmentReplicator.splitIntoSubFragments(lh,lf,$stack9);
+ $stack11=org.apache.bookkeeper.client.LedgerFragmentReplicator.LOG;
+ $stack13 = partionedFragments.size();
+ $stack14 = java.lang.Integer.valueOf($stack13);
+ dummyClass.lowSink("Replicating fragment {} in {} sub fragments.");
+$stack11.info("Replicating fragment {} in {} sub fragments.",(java.lang.Object)lf,(java.lang.Object)$stack14);
+ $stack15 = partionedFragments.iterator();
+ this#org.apache.bookkeeper.client.LedgerFragmentReplicator:replicateNextBatch(lh,$stack15,ledgerFragmentMcb,targetBookieAddresses,onReadEntryFailureCallback);
+ return;
+ } 
+

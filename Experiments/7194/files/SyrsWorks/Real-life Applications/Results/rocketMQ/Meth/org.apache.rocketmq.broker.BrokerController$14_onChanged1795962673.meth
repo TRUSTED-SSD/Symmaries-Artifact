@@ -1,0 +1,31 @@
+void org.apache.rocketmq.broker.BrokerController$14:onChanged(java.lang.String path)
+{
+java.lang.String $stack2;
+  boolean $stack3;
+  org.apache.rocketmq.logging.org.slf4j.Logger $stack10;
+  $stack2=org.apache.rocketmq.remoting.netty.TlsSystemConfig.tlsServerTrustCertPath;
+ $stack3 = path.equals((java.lang.Object)$stack2);
+ if ($stack3==0) goto label0;
+ $stack10=org.apache.rocketmq.broker.BrokerController.LOG;
+ $stack10.info("The trust certificate changed, reload the ssl context");
+ this#org.apache.rocketmq.broker.BrokerController$14:reloadServerSslContext();
+ label0:$stack2=org.apache.rocketmq.remoting.netty.TlsSystemConfig.tlsServerCertPath;
+ $stack3 = path.equals((java.lang.Object)$stack2);
+ if ($stack3==0) goto label1;
+ this.certChanged=1;
+ label1:$stack2=org.apache.rocketmq.remoting.netty.TlsSystemConfig.tlsServerKeyPath;
+ $stack3 = path.equals((java.lang.Object)$stack2);
+ if ($stack3==0) goto label2;
+ this.keyChanged=1;
+ label2:$stack3=this.certChanged;
+ if ($stack3==0) goto label3;
+ $stack3=this.keyChanged;
+ if ($stack3==0) goto label3;
+ $stack10=org.apache.rocketmq.broker.BrokerController.LOG;
+ $stack10.info("The certificate and private key changed, reload the ssl context");
+ this.keyChanged=0;
+ this.certChanged=0;
+ this#org.apache.rocketmq.broker.BrokerController$14:reloadServerSslContext();
+ label3:return;
+ } 
+

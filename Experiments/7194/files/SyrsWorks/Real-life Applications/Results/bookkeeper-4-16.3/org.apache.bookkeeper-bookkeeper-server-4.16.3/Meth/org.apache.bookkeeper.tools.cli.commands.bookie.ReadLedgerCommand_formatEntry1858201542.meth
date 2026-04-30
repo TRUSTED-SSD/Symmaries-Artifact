@@ -1,0 +1,33 @@
+void org.apache.bookkeeper.tools.cli.commands.bookie.ReadLedgerCommand:formatEntry(org.apache.bookkeeper.client.LedgerEntry entry,boolean printMsg)
+{
+long ledgerId;
+  long entryId;
+  long entrySize;
+  java.lang.Object[] $stack12;
+  org.apache.bookkeeper.util.LedgerIdFormatter $stack13;
+  org.slf4j.Logger $stack14;
+  java.lang.String $stack17;
+  java.lang.Long $stack19;
+  org.apache.bookkeeper.util.EntryFormatter $stack22;
+  byte[] $stack23;
+  ledgerId = entry.getLedgerId();
+ entryId = entry.getEntryId();
+ entrySize = entry.getLength();
+ $stack14=org.apache.bookkeeper.tools.cli.commands.bookie.ReadLedgerCommand.LOG;
+ $stack12=new java.lang.Object[3];
+ $stack13=this.ledgerIdFormatter;
+ $stack17 = $stack13.formatLedgerId(ledgerId);
+ $stack12[0]=$stack17;
+ $stack19 = java.lang.Long.valueOf(entryId);
+ $stack12[1]=$stack19;
+ $stack19 = java.lang.Long.valueOf(entrySize);
+ $stack12[2]=$stack19;
+ dummyClass.lowSink("--------- Lid={}, Eid={}, EntrySize={} ---------");
+$stack14.info("--------- Lid={}, Eid={}, EntrySize={} ---------",$stack12);
+ if (printMsg==0) goto label0;
+ $stack22=this.entryFormatter;
+ $stack23 = entry.getEntry();
+ $stack22.formatEntry($stack23);
+ label0:return;
+ } 
+

@@ -1,0 +1,59 @@
+    private static void assertNoDescendantsHaveCategoryAnnotations(org.junit.runner.Description) throws org.junit.runners.model.InitializationError
+    {
+        org.junit.runner.Description description;
+        java.util.Iterator i$;
+        java.util.ArrayList $stack3;
+        boolean $stack5;
+        java.lang.Object $stack6;
+        java.lang.'annotation'.Annotation $stack7;
+        org.junit.runners.model.InitializationError $stack9;
+
+        description := @parameter0: org.junit.runner.Description;
+
+        $stack3 = virtualinvoke description.<org.junit.runner.Description: java.util.ArrayList getChildren()>();
+/*351*/
+
+        i$ = virtualinvoke $stack3.<java.util.ArrayList: java.util.Iterator iterator()>();
+/*351*/
+/*351*/
+
+     label1:
+        $stack5 = interfaceinvoke i$.<java.util.Iterator: boolean hasNext()>();
+/*351*/
+
+        if $stack5 == 0 goto label3;
+/*351*/
+
+        $stack6 = interfaceinvoke i$.<java.util.Iterator: java.lang.Object next()>();
+/*357*/
+
+        description = (org.junit.runner.Description) $stack6;
+/*357*/
+
+        $stack7 = virtualinvoke description.<org.junit.runner.Description: java.lang.'annotation'.Annotation getAnnotation(java.lang.Class)>(class "Lorg/junit/experimental/categories/Category;");
+/*352*/
+
+        if $stack7 == null goto label2;
+/*352*/
+
+        $stack9 = new org.junit.runners.model.InitializationError;
+/*353*/
+
+        specialinvoke $stack9.<org.junit.runners.model.InitializationError: void <init>(java.lang.String)>("Category annotations on Parameterized classes are not supported on individual methods.");
+/*353*/
+
+        throw $stack9;
+/*353*/
+
+     label2:
+        staticinvoke <org.junit.experimental.categories.Categories: void assertNoDescendantsHaveCategoryAnnotations(org.junit.runner.Description)>(description);
+/*355*/
+
+        goto label1;
+/*355*/
+
+     label3:
+        return;
+/*357*/
+    }
+

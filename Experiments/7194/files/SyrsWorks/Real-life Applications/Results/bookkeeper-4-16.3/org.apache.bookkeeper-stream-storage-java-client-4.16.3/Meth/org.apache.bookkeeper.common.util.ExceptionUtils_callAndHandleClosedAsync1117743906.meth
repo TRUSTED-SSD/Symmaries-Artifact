@@ -1,0 +1,14 @@
+static java.util.concurrent.CompletableFuture org.apache.bookkeeper.common.util.ExceptionUtils:callAndHandleClosedAsync(java.lang.String componentName,boolean isClosed,org.apache.bookkeeper.common.util.CompletableRunnable callable)
+{
+java.util.concurrent.CompletableFuture future;
+  org.apache.bookkeeper.common.exceptions.ObjectClosedException $stack5;
+  future = org.apache.bookkeeper.common.concurrent.FutureUtils.createFuture();
+ if (isClosed==0) goto label0;
+ $stack5=new org.apache.bookkeeper.common.exceptions.ObjectClosedException;
+ $stack5#org.apache.bookkeeper.common.exceptions.ObjectClosedException(componentName);
+ isClosed = future.completeExceptionally((java.lang.Throwable)$stack5);
+ goto label1;
+ label0:callable.run(future);
+ label1:return  future;
+ } 
+

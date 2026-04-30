@@ -1,0 +1,76 @@
+    public void runBeforesThenTestThenAfters(java.lang.Runnable)
+    {
+        org.junit.internal.runners.MethodRoadie this;
+        java.lang.Runnable test;
+        java.lang.Exception e;
+        java.lang.Throwable l3;
+        java.lang.RuntimeException $stack5;
+        org.junit.internal.runners.FailedBefore $stack7;
+
+        this := @this: org.junit.internal.runners.MethodRoadie;
+
+        test := @parameter0: java.lang.Runnable;
+
+     label1:
+        specialinvoke this.<org.junit.internal.runners.MethodRoadie: void runBefores()>();
+/*96*/
+
+        interfaceinvoke test.<java.lang.Runnable: void run()>();
+/*97*/
+
+     label2:
+        specialinvoke this.<org.junit.internal.runners.MethodRoadie: void runAfters()>();
+/*102*/
+
+        goto label8;
+/*103*/
+
+     label3:
+        $stack7 := @caughtexception;
+/*102*/
+
+        e = $stack7;
+/*98*/
+
+     label4:
+        specialinvoke this.<org.junit.internal.runners.MethodRoadie: void runAfters()>();
+/*102*/
+
+        goto label8;
+/*103*/
+
+     label5:
+        e := @caughtexception;
+/*104*/
+
+        $stack5 = new java.lang.RuntimeException;
+/*100*/
+
+        specialinvoke $stack5.<java.lang.RuntimeException: void <init>(java.lang.String)>("test should never throw an exception to this level");
+/*100*/
+
+        throw $stack5;
+/*100*/
+
+     label6:
+        l3 := @caughtexception;
+/*100*/
+
+     label7:
+        specialinvoke this.<org.junit.internal.runners.MethodRoadie: void runAfters()>();
+/*102*/
+
+        throw l3;
+/*102*/
+
+     label8:
+        return;
+/*104*/
+
+        catch org.junit.internal.runners.FailedBefore from label1 to label2 with label3;
+        catch java.lang.Exception from label1 to label2 with label5;
+        catch java.lang.Throwable from label1 to label2 with label6;
+        catch java.lang.Throwable from label3 to label4 with label6;
+        catch java.lang.Throwable from label5 to label7 with label6;
+    }
+

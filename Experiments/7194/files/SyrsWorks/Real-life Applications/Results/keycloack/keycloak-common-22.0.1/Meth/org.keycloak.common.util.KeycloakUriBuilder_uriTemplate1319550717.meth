@@ -1,0 +1,46 @@
+org.keycloak.common.util.KeycloakUriBuilder org.keycloak.common.util.KeycloakUriBuilder:uriTemplate(java.lang.String @uriTemplate)
+{
+org.keycloak.common.util.KeycloakUriBuilder $this;
+  java.util.regex.Matcher opaque;
+  java.util.regex.Pattern $stack4;
+  boolean $stack6;
+  java.lang.IllegalArgumentException $stack10;
+  java.lang.StringBuilder $stack11;
+  java.lang.String uriTemplate;
+uriTemplate=@uriTemplate;
+$this= this;
+ if (uriTemplate!=null) goto label0;
+ $stack10=new java.lang.IllegalArgumentException;
+ $stack10#java.lang.IllegalArgumentException("uriTemplate parameter is null");
+ throw $stack10;
+ label0:$stack4=org.keycloak.common.util.KeycloakUriBuilder.opaqueUri;
+ opaque = $stack4.matcher((java.lang.CharSequence)uriTemplate);
+ $stack6 = opaque.matches();
+ if ($stack6==0) goto label1;
+ $this.authority=null;
+ $this.host=null;
+ $this.port=-1;
+ $this.userInfo=null;
+ $this.query=null;
+ uriTemplate = opaque.group(1);
+ $this.scheme=uriTemplate;
+ uriTemplate = opaque.group(2);
+ $this.ssp=uriTemplate;
+ return  $this;
+ label1:$stack4=org.keycloak.common.util.KeycloakUriBuilder.hierarchicalUri;
+ opaque = $stack4.matcher((java.lang.CharSequence)uriTemplate);
+ $stack6 = opaque.matches();
+ if ($stack6==0) goto label2;
+ $this.ssp=null;
+ $this = $this.parseHierarchicalUri(uriTemplate,opaque);
+ return  $this;
+ label2:$stack10=new java.lang.IllegalArgumentException;
+ $stack11=new java.lang.StringBuilder;
+ $stack11#java.lang.StringBuilder();
+ $stack11 = $stack11.append("Illegal uri template: ");
+ $stack11 = $stack11.append(uriTemplate);
+ uriTemplate = $stack11.toString();
+ $stack10#java.lang.IllegalArgumentException(uriTemplate);
+ throw $stack10;
+ } 
+

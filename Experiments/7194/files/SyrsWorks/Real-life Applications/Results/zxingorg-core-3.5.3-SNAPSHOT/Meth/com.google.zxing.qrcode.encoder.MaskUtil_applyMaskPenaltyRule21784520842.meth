@@ -1,0 +1,46 @@
+static int com.google.zxing.qrcode.encoder.MaskUtil:applyMaskPenaltyRule2(com.google.zxing.qrcode.encoder.ByteMatrix matrix)
+{
+int penalty;
+  byte[][] array;
+  int width;
+  int height;
+  int y;
+  byte[] arrayY;
+  int x;
+  byte value;
+  int $stack14;
+  byte $stack19;
+  byte[] $stack24;
+  penalty=0;
+ array = matrix.getArray();
+ width = matrix.getWidth();
+ height = matrix.getHeight();
+ y=0;
+ label0:x=(height-1);
+ if (y>=x) goto label1;
+ arrayY=array[y];
+ x=0;
+ label2:$stack14=(width-1);
+ if (x>=$stack14) goto label3;
+ value=arrayY[x];
+ $stack14=(x+1);
+ $stack19=arrayY[$stack14];
+ if (value!=$stack19) goto label4;
+ $stack14=(y+1);
+ $stack24=array[$stack14];
+ $stack19=$stack24[x];
+ if (value!=$stack19) goto label4;
+ $stack14=(y+1);
+ $stack24=array[$stack14];
+ $stack14=(x+1);
+ $stack19=$stack24[$stack14];
+ if (value!=$stack19) goto label4;
+ penalty=(penalty+1);
+ label4:x=(x+1);
+ goto label2;
+ label3:y=(y+1);
+ goto label0;
+ label1:penalty=(3 * penalty);
+ return  penalty;
+ } 
+

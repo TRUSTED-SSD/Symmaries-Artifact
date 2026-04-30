@@ -1,0 +1,52 @@
+org.apache.rocketmq.remoting.protocol.RemotingCommand org.apache.rocketmq.broker.processor.AdminBrokerProcessor:deleteSubscriptionGroup(io.netty.channel.ChannelHandlerContext ctx,org.apache.rocketmq.remoting.protocol.RemotingCommand request)
+{
+org.apache.rocketmq.remoting.protocol.RemotingCommand response;
+  org.apache.rocketmq.remoting.protocol.header.DeleteSubscriptionGroupRequestHeader requestHeader;
+  boolean $stack6;
+  org.apache.rocketmq.remoting.CommandCustomHeader $stack7;
+  org.apache.rocketmq.logging.org.slf4j.Logger $stack8;
+  io.netty.channel.Channel $stack10;
+  java.lang.String $stack11;
+  org.apache.rocketmq.broker.BrokerController $stack12;
+  org.apache.rocketmq.broker.subscription.SubscriptionGroupManager $stack13;
+  org.apache.rocketmq.common.BrokerConfig $stack17;
+  org.apache.rocketmq.store.stats.BrokerStatsManager $stack20;
+  org.apache.rocketmq.broker.offset.ConsumerOffsetManager $stack28;
+  org.apache.rocketmq.broker.processor.PopInflightMessageCounter $stack31;
+  response = org.apache.rocketmq.remoting.protocol.RemotingCommand.createResponseCommand(null);
+ $stack6 = this#org.apache.rocketmq.broker.processor.AdminBrokerProcessor:validateSlave(response);
+ if ($stack6==0) goto label0;
+ return  response;
+ label0:$stack7 = request.decodeCommandCustomHeader(org.apache.rocketmq.remoting.protocol.header.DeleteSubscriptionGroupRequestHeader);
+ requestHeader=(org.apache.rocketmq.remoting.protocol.header.DeleteSubscriptionGroupRequestHeader) $stack7;
+ $stack8=org.apache.rocketmq.broker.processor.AdminBrokerProcessor.LOGGER;
+ $stack10 = ctx.channel();
+ $stack11 = org.apache.rocketmq.remoting.common.RemotingHelper.parseChannelRemoteAddr($stack10);
+ $stack8.info("AdminBrokerProcessor#deleteSubscriptionGroup, caller={}",(java.lang.Object)$stack11);
+ $stack12=this.brokerController;
+ $stack13 = $stack12.getSubscriptionGroupManager();
+ $stack11 = requestHeader.getGroupName();
+ $stack13.deleteSubscriptionGroupConfig($stack11);
+ $stack6 = requestHeader.isCleanOffset();
+ if ($stack6==0) goto label1;
+ $stack12=this.brokerController;
+ $stack28 = $stack12.getConsumerOffsetManager();
+ $stack11 = requestHeader.getGroupName();
+ $stack28.removeOffset($stack11);
+ $stack12=this.brokerController;
+ $stack31 = $stack12.getPopInflightMessageCounter();
+ $stack11 = requestHeader.getGroupName();
+ $stack31.clearInFlightMessageNumByGroupName($stack11);
+ label1:$stack12=this.brokerController;
+ $stack17 = $stack12.getBrokerConfig();
+ $stack6 = $stack17.isAutoDeleteUnusedStats();
+ if ($stack6==0) goto label2;
+ $stack12=this.brokerController;
+ $stack20 = $stack12.getBrokerStatsManager();
+ $stack11 = requestHeader.getGroupName();
+ $stack20.onGroupDeleted($stack11);
+ label2:response.setCode(0);
+ response.setRemark(null);
+ return  response;
+ } 
+

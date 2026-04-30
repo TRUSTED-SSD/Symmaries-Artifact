@@ -1,0 +1,34 @@
+void org.apache.rocketmq.store.kv.CompactionLog:doCompaction()
+{
+org.apache.rocketmq.store.kv.CompactionLog$State $stack2;
+  org.apache.rocketmq.store.kv.CompactionLog$State $stack3;
+  java.util.concurrent.atomic.AtomicReference $stack4;
+  boolean $stack5;
+  org.apache.rocketmq.store.kv.CompactionLog$ProcessFileList $stack6;
+  org.apache.rocketmq.logging.org.slf4j.Logger $stack12;
+  java.lang.Object $stack14;
+  java.lang.Throwable $stack15;
+  $stack4=this.state;
+ $stack3=org.apache.rocketmq.store.kv.CompactionLog$State.NORMAL;
+ $stack2=org.apache.rocketmq.store.kv.CompactionLog$State.COMPACTING;
+ $stack5 = $stack4.compareAndSet((java.lang.Object)$stack3,(java.lang.Object)$stack2);
+ if ($stack5!=0) goto label0;
+ $stack12=org.apache.rocketmq.store.kv.CompactionLog.log;
+ $stack4=this.state;
+ $stack14 = $stack4.get();
+ $stack12.warn("compactionLog state is {}, skip this time",$stack14);
+ return;
+ label0:$stack6 = this.getCompactionFile();
+ this.compactAndReplace($stack6);
+ label1:goto label2;
+ label3:$stack15 = catch;
+ $stack12=org.apache.rocketmq.store.kv.CompactionLog.log;
+ $stack12.error("do compaction exception: ",$stack15);
+ label2:$stack4=this.state;
+ $stack3=org.apache.rocketmq.store.kv.CompactionLog$State.COMPACTING;
+ $stack2=org.apache.rocketmq.store.kv.CompactionLog$State.NORMAL;
+ $stack4.compareAndSet((java.lang.Object)$stack3,(java.lang.Object)$stack2);
+ return;
+ catch java.lang.Throwable: label0 - label1 : label3;
+} 
+

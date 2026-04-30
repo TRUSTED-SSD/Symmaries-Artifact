@@ -1,0 +1,66 @@
+    private void <init>(org.apache.bookkeeper.stream.cluster.StreamClusterSpec)
+    {
+        org.apache.bookkeeper.stream.cluster.StreamCluster this;
+        org.apache.bookkeeper.stream.cluster.StreamClusterSpec spec;
+        org.apache.bookkeeper.stream.storage.conf.StorageConfiguration $stack2;
+        org.apache.commons.configuration.CompositeConfiguration $stack4;
+        org.apache.bookkeeper.stats.NullStatsLogger $stack5;
+        int $stack6;
+        java.util.ArrayList $stack7;
+
+        this := @this: org.apache.bookkeeper.stream.cluster.StreamCluster;
+
+        spec := @parameter0: org.apache.bookkeeper.stream.cluster.StreamClusterSpec;
+
+        $stack2 = new org.apache.bookkeeper.stream.storage.conf.StorageConfiguration;
+/*96*/
+
+        $stack4 = virtualinvoke spec.<org.apache.bookkeeper.stream.cluster.StreamClusterSpec: org.apache.commons.configuration.CompositeConfiguration baseConf()>();
+/*98*/
+
+        specialinvoke $stack2.<org.apache.bookkeeper.stream.storage.conf.StorageConfiguration: void <init>(org.apache.commons.configuration.CompositeConfiguration)>($stack4);
+/*98*/
+
+        $stack5 = <org.apache.bookkeeper.stats.NullStatsLogger: org.apache.bookkeeper.stats.NullStatsLogger INSTANCE>;
+/*96*/
+
+        specialinvoke this.<org.apache.bookkeeper.common.component.AbstractLifecycleComponent: void <init>(java.lang.String,org.apache.bookkeeper.common.conf.ComponentConfiguration,org.apache.bookkeeper.stats.StatsLogger)>("stream-cluster", $stack2, $stack5);
+/*96*/
+
+        this.<org.apache.bookkeeper.stream.cluster.StreamCluster: org.apache.bookkeeper.stream.cluster.StreamClusterSpec spec> = spec;
+/*100*/
+
+        $stack6 = virtualinvoke spec.<org.apache.bookkeeper.stream.cluster.StreamClusterSpec: int numServers()>();
+/*101*/
+
+        $stack7 = staticinvoke <com.google.common.collect.Lists: java.util.ArrayList newArrayListWithExpectedSize(int)>($stack6);
+/*101*/
+
+        this.<org.apache.bookkeeper.stream.cluster.StreamCluster: java.util.List servers> = $stack7;
+/*101*/
+
+        $stack6 = virtualinvoke spec.<org.apache.bookkeeper.stream.cluster.StreamClusterSpec: int numServers()>();
+/*102*/
+
+        $stack7 = staticinvoke <com.google.common.collect.Lists: java.util.ArrayList newArrayListWithExpectedSize(int)>($stack6);
+/*102*/
+
+        this.<org.apache.bookkeeper.stream.cluster.StreamCluster: java.util.List rpcEndpoints> = $stack7;
+/*102*/
+
+        $stack6 = virtualinvoke spec.<org.apache.bookkeeper.stream.cluster.StreamClusterSpec: int initialBookiePort()>();
+/*103*/
+
+        this.<org.apache.bookkeeper.stream.cluster.StreamCluster: int nextBookiePort> = $stack6;
+/*103*/
+
+        $stack6 = virtualinvoke spec.<org.apache.bookkeeper.stream.cluster.StreamClusterSpec: int initialGrpcPort()>();
+/*104*/
+
+        this.<org.apache.bookkeeper.stream.cluster.StreamCluster: int nextGrpcPort> = $stack6;
+/*104*/
+
+        return;
+/*105*/
+    }
+

@@ -1,0 +1,9 @@
+java.lang.Object org.apache.kerby.config.ConfigImpl:getDefaultValueAs (
+  org.apache.kerby.config.ConfigKey confKey, java.lang.Class cls) {
+  guard = tt;
+  ret(level()) = pc ⊔ level(cls) ⊔ level(confKey) ⊔ obj_level(confKey);
+  ret(obj_level()) = pc ⊔ level(cls) ⊔ level(confKey) ⊔ obj_level(confKey);
+  ret(obj_level(cls)) = if obj_level(cls) = ⊤ ∨ pc ≠ ⊤ ∧ (if level(cls) = ⊤ then if obj_level(this) = ⊥ then obj_level(cls) = ⊥ ∧ obj_level(confKey) = ⊤ else obj_level(cls) = ⊥ ∧ obj_level(this) = ⊤ else level(cls) = ⊥ ∧ (if obj_level(this) = ⊥ then obj_level(cls) = ⊥ ∧ obj_level(confKey) = ⊤ else obj_level(this) = ⊤ ∧ (if obj_level(confKey) = ⊥ then level(confKey) = ⊤ ∧ obj_level(cls) = ⊥ else obj_level(cls) = ⊥ ∧ obj_level(confKey) = ⊤))) then ⊤ else ⊥;
+  ret(obj_level(confKey)) = if obj_level(confKey) = ⊤ ∨ pc ≠ ⊤ ∧ (if level(cls) = ⊤ then if obj_level(this) = ⊥ then obj_level(cls) = ⊤ ∧ obj_level(confKey) = ⊥ else obj_level(confKey) = ⊥ ∧ obj_level(this) = ⊤ else level(cls) = ⊥ ∧ (if obj_level(this) = ⊤ then level(confKey) = ⊤ ∧ obj_level(confKey) = ⊥ else obj_level(confKey) = ⊥ ∧ obj_level(this) = ⊥ ∧ level(confKey) ⊓ obj_level(cls) = ⊤)) then ⊤ else ⊥;
+  ret(obj_level(this)) = if obj_level(this) = ⊤ ∨ pc ≠ ⊤ ∧ (if level(cls) = ⊤ then obj_level(this) = ⊥ ∧ obj_level(cls) ⊔ obj_level(confKey) = ⊤ else level(cls) = ⊥ ∧ obj_level(this) = ⊥ ∧ obj_level(confKey) ⊔ level(confKey) ⊓ obj_level(cls) = ⊤) then ⊤ else ⊥;
+}

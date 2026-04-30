@@ -1,0 +1,23 @@
+org.apache.rocketmq.remoting.protocol.RemotingCommand org.apache.rocketmq.broker.processor.AdminBrokerProcessor:getBrokerHaStatus(io.netty.channel.ChannelHandlerContext ctx,org.apache.rocketmq.remoting.protocol.RemotingCommand @request)
+{
+org.apache.rocketmq.remoting.protocol.body.HARuntimeInfo runtimeInfo;
+  byte[] body;
+  org.apache.rocketmq.broker.BrokerController $stack7;
+  org.apache.rocketmq.store.MessageStore $stack8;
+  org.apache.rocketmq.remoting.protocol.RemotingCommand request;
+request=@request;
+request = org.apache.rocketmq.remoting.protocol.RemotingCommand.createResponseCommand(null);
+ $stack7=this.brokerController;
+ $stack8 = $stack7.getMessageStore();
+ runtimeInfo = $stack8.getHARuntimeInfo();
+ if (runtimeInfo==null) goto label0;
+ body = runtimeInfo.encode();
+ request.setBody(body);
+ request.setCode(0);
+ request.setRemark(null);
+ goto label1;
+ label0:request.setCode(1);
+ request.setRemark("Can not get HARuntimeInfo, may be duplicationEnable is true");
+ label1:return  request;
+ } 
+

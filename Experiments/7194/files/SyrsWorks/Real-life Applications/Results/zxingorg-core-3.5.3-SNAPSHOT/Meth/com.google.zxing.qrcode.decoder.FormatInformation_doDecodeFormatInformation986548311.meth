@@ -1,0 +1,43 @@
+static com.google.zxing.qrcode.decoder.FormatInformation com.google.zxing.qrcode.decoder.FormatInformation:doDecodeFormatInformation(int maskedFormatInfo1,int maskedFormatInfo2)
+{
+int bestDifference;
+  int bestFormatInfo;
+  int[][] l4;
+  int l5;
+  int l6;
+  int[] decodeInfo;
+  int targetInfo;
+  int bitsDifference;
+  com.google.zxing.qrcode.decoder.FormatInformation $stack10;
+  bestDifference=2147483647;
+ bestFormatInfo=0;
+ l4=com.google.zxing.qrcode.decoder.FormatInformation.FORMAT_INFO_DECODE_LOOKUP;
+ l5=#l4;
+ l6=0;
+ label0:if (l6>=l5) goto label1;
+ decodeInfo=l4[l6];
+ targetInfo=decodeInfo[0];
+ if (targetInfo==maskedFormatInfo1) goto label2;
+ if (targetInfo!=maskedFormatInfo2) goto label3;
+ label2:$stack10=new com.google.zxing.qrcode.decoder.FormatInformation;
+ maskedFormatInfo1=decodeInfo[1];
+ $stack10#com.google.zxing.qrcode.decoder.FormatInformation(maskedFormatInfo1);
+ return  $stack10;
+ label3:bitsDifference = com.google.zxing.qrcode.decoder.FormatInformation.numBitsDiffering(maskedFormatInfo1,targetInfo);
+ if (bitsDifference>=bestDifference) goto label4;
+ bestFormatInfo=decodeInfo[1];
+ bestDifference=bitsDifference;
+ label4:if (maskedFormatInfo1==maskedFormatInfo2) goto label5;
+ bitsDifference = com.google.zxing.qrcode.decoder.FormatInformation.numBitsDiffering(maskedFormatInfo2,targetInfo);
+ if (bitsDifference>=bestDifference) goto label5;
+ bestFormatInfo=decodeInfo[1];
+ bestDifference=bitsDifference;
+ label5:l6=(l6+1);
+ goto label0;
+ label1:if (bestDifference>3) goto label6;
+ $stack10=new com.google.zxing.qrcode.decoder.FormatInformation;
+ $stack10#com.google.zxing.qrcode.decoder.FormatInformation(bestFormatInfo);
+ return  $stack10;
+ label6:return  null;
+ } 
+

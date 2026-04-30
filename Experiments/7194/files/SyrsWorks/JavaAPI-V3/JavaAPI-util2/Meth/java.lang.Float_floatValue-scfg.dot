@@ -1,0 +1,16 @@
+digraph G {
+  node [shape=box, ];
+  "pc0_js1" [label="〈$f0 = this.value, js1〉", ];
+  "pc1_js1" [label="〈return $f0, js1〉", ];
+  "pc2_js1" [label="〈sink, js1〉\n\
+obj_level(this) ⊑ ret(obj_level(this))' ∧ (ϕ ≠ S1 ∨ pc ⊔ level($f0) ⊑ ret(level())')",
+             ];
+  
+  
+  "pc0_js1" -> "pc1_js1" [label="tt,\n\
+{level($f0) := pc ⊔ level(this) ⊔ obj_level(this)}",
+                          ];
+  "pc1_js1" -> "pc2_js1" [label="tt,\n\
+{ϕ := S1}", ];
+  
+  }

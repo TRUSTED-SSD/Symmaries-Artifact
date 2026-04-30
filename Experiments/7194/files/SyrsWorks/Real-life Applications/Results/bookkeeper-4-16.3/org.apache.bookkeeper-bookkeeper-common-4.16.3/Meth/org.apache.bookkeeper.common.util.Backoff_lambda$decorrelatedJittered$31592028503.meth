@@ -1,0 +1,30 @@
+static java.lang.Long org.apache.bookkeeper.common.util.Backoff:lambda$decorrelatedJittered$3(long startNanos,long maxNanos,java.lang.Long @lastMs)
+{
+long lastNanos;
+  java.util.concurrent.TimeUnit $stack13;
+  java.util.concurrent.TimeUnit $stack15;
+  byte $stack20;
+  java.util.concurrent.ThreadLocalRandom $stack21;
+  java.lang.Long lastMs;
+lastMs=@lastMs;
+$stack13=java.util.concurrent.TimeUnit.MILLISECONDS;
+ lastNanos = lastMs.longValue();
+ $stack15=java.util.concurrent.TimeUnit.NANOSECONDS;
+ lastNanos = $stack13.convert(lastNanos,$stack15);
+ lastNanos=(lastNanos * 3L);
+ lastNanos=(lastNanos-startNanos);
+ lastNanos = java.lang.Math.abs(lastNanos);
+ $stack20=(0L cmp lastNanos);
+ if ($stack20!=0) goto label0;
+ goto label1;
+ label0:$stack21 = java.util.concurrent.ThreadLocalRandom.current();
+ lastNanos = $stack21.nextLong(lastNanos);
+ startNanos=(startNanos+lastNanos);
+ label1:startNanos = java.lang.Math.min(maxNanos,startNanos);
+ $stack15=java.util.concurrent.TimeUnit.MILLISECONDS;
+ $stack13=java.util.concurrent.TimeUnit.NANOSECONDS;
+ startNanos = $stack15.convert(startNanos,$stack13);
+ lastMs = java.lang.Long.valueOf(startNanos);
+ return  lastMs;
+ } 
+

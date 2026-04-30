@@ -1,0 +1,30 @@
+static void com.google.zxing.datamatrix.decoder.DecodedBitStreamParser:decodeEdifactSegment(com.google.zxing.common.BitSource bits,com.google.zxing.common.ECIStringBuilder result)
+{
+int i;
+  int edifactValue;
+  int $stack10;
+  char $stack11;
+  label0:i = bits.available();
+ if (i>16) goto label1;
+ return;
+ label1:i=0;
+ label2:if (i>=4) goto label3;
+ edifactValue = bits.readBits(6);
+ if (edifactValue!=31) goto label4;
+ i = bits.getBitOffset();
+ i=(8-i);
+ if (i==8) goto label5;
+ i = bits.readBits(i);
+ label5:return;
+ label4:$stack10=(edifactValue & 32);
+ if ($stack10!=0) goto label6;
+ edifactValue=(edifactValue | 64);
+ label6:$stack11=(char) edifactValue;
+ result.append($stack11);
+ i=(i+1);
+ goto label2;
+ label3:i = bits.available();
+ if (i>0) goto label0;
+ return;
+ } 
+

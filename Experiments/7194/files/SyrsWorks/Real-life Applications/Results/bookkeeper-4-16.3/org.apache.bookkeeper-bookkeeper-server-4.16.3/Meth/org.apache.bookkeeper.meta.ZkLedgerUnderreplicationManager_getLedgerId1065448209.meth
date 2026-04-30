@@ -1,0 +1,21 @@
+long org.apache.bookkeeper.meta.ZkLedgerUnderreplicationManager:getLedgerId(java.lang.String @path)
+{
+java.util.regex.Matcher m;
+  java.util.regex.Pattern $stack3;
+  boolean $stack5;
+  java.lang.NumberFormatException $stack6;
+  long $stack8;
+  java.lang.String path;
+path=@path;
+$stack3=this.idExtractionPattern;
+ m = $stack3.matcher((java.lang.CharSequence)path);
+ $stack5 = m.find();
+ if ($stack5==0) goto label0;
+ path = m.group(1);
+ $stack8 = java.lang.Long.parseLong(path);
+ return  $stack8;
+ label0:$stack6=new java.lang.NumberFormatException;
+ $stack6#java.lang.NumberFormatException("Couldn\'t find ledgerid in path");
+ throw $stack6;
+ } 
+

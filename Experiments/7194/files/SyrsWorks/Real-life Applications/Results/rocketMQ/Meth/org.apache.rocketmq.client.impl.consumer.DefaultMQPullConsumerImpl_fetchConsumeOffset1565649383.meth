@@ -1,0 +1,15 @@
+long org.apache.rocketmq.client.impl.consumer.DefaultMQPullConsumerImpl:fetchConsumeOffset(org.apache.rocketmq.common.message.MessageQueue mq,boolean fromStore)
+{
+org.apache.rocketmq.client.consumer.store.ReadOffsetType $stack3;
+  org.apache.rocketmq.client.consumer.store.OffsetStore $stack4;
+  long $stack5;
+  this#org.apache.rocketmq.client.impl.consumer.DefaultMQPullConsumerImpl:isRunning();
+ $stack4=this.offsetStore;
+ if (fromStore==0) goto label0;
+ $stack3=org.apache.rocketmq.client.consumer.store.ReadOffsetType.READ_FROM_STORE;
+ goto label1;
+ label0:$stack3=org.apache.rocketmq.client.consumer.store.ReadOffsetType.MEMORY_FIRST_THEN_STORE;
+ label1:$stack5 = $stack4.readOffset(mq,$stack3);
+ return  $stack5;
+ } 
+

@@ -1,0 +1,28 @@
+org.apache.bookkeeper.bookie.storage.directentrylogger.DirectCompactionEntryLog$WritingDirectCompactionEntryLog(int srcLogId,int dstLogId,java.io.File @ledgerDir,long maxFileSize,java.util.concurrent.ExecutorService writeExecutor,org.apache.bookkeeper.bookie.storage.directentrylogger.BufferPool writeBuffers,org.apache.bookkeeper.common.util.nativeio.NativeIO nativeIO,io.netty.buffer.ByteBufAllocator allocator,org.apache.bookkeeper.slogger.Slogger @slog)
+{
+org.apache.bookkeeper.bookie.storage.directentrylogger.WriterWithMetadata $stack11;
+  org.apache.bookkeeper.bookie.storage.directentrylogger.DirectWriter $stack12;
+  java.lang.String $stack14;
+  org.apache.bookkeeper.bookie.EntryLogMetadata $stack15;
+  org.apache.bookkeeper.bookie.storage.directentrylogger.Events $stack17;
+  java.io.File ledgerDir;
+org.apache.bookkeeper.slogger.Slogger slog;
+slog=@slog;
+ledgerDir=@ledgerDir;
+this#org.apache.bookkeeper.bookie.storage.directentrylogger.DirectCompactionEntryLog(srcLogId,dstLogId,ledgerDir,slog,null);
+ $stack11=new org.apache.bookkeeper.bookie.storage.directentrylogger.WriterWithMetadata;
+ $stack12=new org.apache.bookkeeper.bookie.storage.directentrylogger.DirectWriter;
+ ledgerDir=this.compactingFile;
+ $stack14 = ledgerDir.toString();
+ $stack12#org.apache.bookkeeper.bookie.storage.directentrylogger.DirectWriter(dstLogId,$stack14,maxFileSize,writeExecutor,writeBuffers,nativeIO,slog);
+ $stack15=new org.apache.bookkeeper.bookie.EntryLogMetadata;
+ maxFileSize=(long) dstLogId;
+ $stack15#org.apache.bookkeeper.bookie.EntryLogMetadata(maxFileSize);
+ $stack11#org.apache.bookkeeper.bookie.storage.directentrylogger.WriterWithMetadata((org.apache.bookkeeper.bookie.storage.directentrylogger.LogWriter)$stack12,$stack15,allocator);
+ this.writer=$stack11;
+ slog=this.slog;
+ $stack17=org.apache.bookkeeper.bookie.storage.directentrylogger.Events.COMPACTION_LOG_CREATED;
+ slog.info((java.lang.Enum)$stack17);
+ return;
+ } 
+

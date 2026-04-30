@@ -1,0 +1,58 @@
+org.keycloak.adapters.authorization.PolicyEnforcer org.keycloak.adapters.KeycloakDeploymentBuilder$1:call()
+{
+org.keycloak.adapters.KeycloakDeployment l1;
+  java.lang.Throwable l2;
+  org.keycloak.adapters.authorization.PolicyEnforcer $stack3;
+  org.keycloak.adapters.KeycloakDeploymentBuilder $stack5;
+  org.keycloak.adapters.KeycloakDeployment $stack6;
+  org.keycloak.adapters.authorization.PolicyEnforcer$Builder $stack10;
+  org.keycloak.representations.adapters.config.AdapterConfig $stack11;
+  java.lang.String $stack12;
+  boolean $stack21;
+  org.keycloak.protocol.oidc.client.authentication.ClientCredentialsProvider $stack25;
+  org.keycloak.representations.adapters.config.PolicyEnforcerConfig $stack27;
+  org.apache.http.client.HttpClient $stack31;
+  $stack3=this.policyEnforcer;
+ if ($stack3!=null) goto label0;
+ $stack5=this.this$0;
+ $stack6=$stack5.deployment;
+ l1=$stack6;
+ monitorenter $stack6;
+ label1:$stack3=this.policyEnforcer;
+ if ($stack3!=null) goto label2;
+ $stack10 = org.keycloak.adapters.authorization.PolicyEnforcer.builder();
+ $stack11=this.val$adapterConfig;
+ $stack12 = $stack11.getAuthServerUrl();
+ $stack10 = $stack10.authServerUrl($stack12);
+ $stack11=this.val$adapterConfig;
+ $stack12 = $stack11.getRealm();
+ $stack10 = $stack10.realm($stack12);
+ $stack11=this.val$adapterConfig;
+ $stack12 = $stack11.getResource();
+ $stack10 = $stack10.clientId($stack12);
+ $stack11=this.val$adapterConfig;
+ $stack21 = $stack11.isBearerOnly();
+ $stack10 = $stack10.bearerOnly($stack21);
+ $stack5=this.this$0;
+ $stack6=$stack5.deployment;
+ $stack25 = $stack6.getClientAuthenticator();
+ $stack10 = $stack10.credentialProvider($stack25);
+ $stack27=this.val$policyEnforcerConfig;
+ $stack10 = $stack10.enforcerConfig($stack27);
+ $stack5=this.this$0;
+ $stack6=$stack5.deployment;
+ $stack31 = $stack6.getClient();
+ $stack10 = $stack10.httpClient($stack31);
+ $stack3 = $stack10.build();
+ this.policyEnforcer=$stack3;
+ label2:monitorexit l1;
+ label3:goto label0;
+ label4:l2 = catch;
+ monitorexit l1;
+ label5:throw l2;
+ label0:$stack3=this.policyEnforcer;
+ return  $stack3;
+ catch java.lang.Throwable: label1 - label3 : label4;
+catch java.lang.Throwable: label4 - label5 : label4;
+} 
+

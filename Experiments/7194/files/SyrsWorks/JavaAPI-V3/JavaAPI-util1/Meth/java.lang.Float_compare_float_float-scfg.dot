@@ -1,0 +1,111 @@
+digraph G {
+  node [shape=box, ];
+  "pc0_js1" [label="〈$b2 = f0 cmpg f1, js1〉", ];
+  "pc1_js1" [label="〈if ($b2 >= 0) goto label0, js1〉", ];
+  "pc2_js1" [label="〈return - 1, js1〉", ];
+  "pc3_js1" [label="〈label0: $b3 = f0 cmpl f1, js1〉", ];
+  "pc4_js1" [label="〈if ($b3 <= 0) goto label1, js1〉", ];
+  "pc5_js1" [label="〈return 1, js1〉", ];
+  "pc6_js1" [label="〈label1: i0 = java.lang.Float.floatToIntBits (f0), js1〉\n\
+tt",
+             ];
+  "pc7_js1" [label="〈i1 = java.lang.Float.floatToIntBits (f1), js1〉\n\
+tt",
+             ];
+  "pc8_js1" [label="〈if (i0 != i1) goto label2, js1〉", ];
+  "pc9_js1" [label="〈$b4 = 0, js1〉", ];
+  "pc10_js1" [label="〈goto label3 @10, js1〉", ];
+  "pc11_js1" [label="〈label2: if (i0 >= i1) goto label4, js1〉", ];
+  "pc12_js1" [label="〈$b4 = - 1, js1〉", ];
+  "pc13_js1" [label="〈goto label3 @13, js1〉", ];
+  "pc14_js1" [label="〈label4: $b4 = 1, js1〉", ];
+  "pc15_js1" [label="〈label3: return $b4, js1〉", ];
+  "pc15_js2" [label="〈label3: return $b4, js2〉", ];
+  "pc16_js1" [label="〈sink, js1〉", ];
+  "pc16_js2" [label="〈sink, js2〉\n\
+(ϕ ≠ S15 ∨ pc ⊔ level($b4) ⊑ ret(level())') ∧ (ϕ ≠ S2 ∨ pc ⊑ ret(level())') ∧ (ϕ ≠ S5 ∨ pc ⊑ ret(level())')",
+              ];
+  
+  
+  "pc0_js1" -> "pc1_js1" [label="tt,\n\
+{level($b2) := pc ⊔ level(f0) ⊔ level(f1)}",
+                          ];
+  "pc1_js1" -> "pc2_js1" [label="υ ∧ ¬ω ∨ ¬τ ∧ ¬υ ∧ level($b2) ⊐ pc ∨ ¬τ ∧ ¬υ ∧ level($b2) ⊑ pc,\n\
+{pc := if ¬(¬τ ∧ ¬υ ∧ level($b2) ⊐ pc) ∨ υ ∧ ¬ω then pc else pc ⊔ level($b2),\n\
+ hr := if ¬(¬τ ∧ ¬υ ∧ level($b2) ⊐ pc) ∨ υ ∧ ¬ω then hr else P1}",
+                          ];
+  "pc1_js1" -> "pc3_js1" [label="υ ∧ ω ∨ τ ∧ ¬υ ∧ level($b2) ⊐ pc ∨ τ ∧ ¬υ ∧ level($b2) ⊑ pc,\n\
+{pc := if ¬(τ ∧ ¬υ ∧ level($b2) ⊐ pc) ∨ υ ∧ ω then pc else pc ⊔ level($b2),\n\
+ hr := if ¬(τ ∧ ¬υ ∧ level($b2) ⊐ pc) ∨ υ ∧ ω then hr else P1}",
+                          ];
+  "pc2_js1" -> "pc16_js1" [label="tt,\n\
+{ϕ := S2}", ];
+  "pc3_js1" -> "pc4_js1" [label="tt,\n\
+{level($b3) := pc ⊔ (if υ then level($b3) else level(f0) ⊔ level(f1))}",
+                          ];
+  "pc4_js1" -> "pc5_js1" [label="υ ∧ ¬ω ∨ ¬τ ∧ ¬υ ∧ level($b3) ⊐ pc ∨ ¬τ ∧ ¬υ ∧ level($b3) ⊑ pc,\n\
+{pc := if ¬(¬τ ∧ ¬υ ∧ level($b3) ⊐ pc) ∨ υ ∧ ¬ω then pc else pc ⊔ level($b3),\n\
+ hr := if ¬(¬τ ∧ ¬υ ∧ level($b3) ⊐ pc) ∨ υ ∧ ¬ω then hr else P4}",
+                          ];
+  "pc4_js1" -> "pc6_js1" [label="υ ∧ ω ∨ τ ∧ ¬υ ∧ level($b3) ⊐ pc ∨ τ ∧ ¬υ ∧ level($b3) ⊑ pc,\n\
+{pc := if ¬(τ ∧ ¬υ ∧ level($b3) ⊐ pc) ∨ υ ∧ ω then pc else pc ⊔ level($b3),\n\
+ hr := if ¬(τ ∧ ¬υ ∧ level($b3) ⊐ pc) ∨ υ ∧ ω then hr else P4}",
+                          ];
+  "pc5_js1" -> "pc16_js1" [label="tt,\n\
+{ϕ := S5}", ];
+  "pc6_js1" -> "pc7_js1" [label="tt,\n\
+{level(i0) := pc ⊔ (if υ then level(i0) else pc ⊔ level(f0))}",
+                          ];
+  "pc7_js1" -> "pc8_js1" [label="tt,\n\
+{level(i1) := pc ⊔ (if υ then level(i1) else pc ⊔ level(f1))}",
+                          ];
+  "pc8_js1" -> "pc9_js1" [label="υ ∧ ¬ω ∨ ¬τ ∧ ¬υ ∧ level(i0) ⊔ level(i1) ⊐ pc ∨ ¬τ ∧ ¬υ ∧ level(i0) ⊔ level(i1) ⊑ pc,\n\
+{pc := if ¬(¬τ ∧ ¬υ ∧ level(i0) ⊔ level(i1) ⊐ pc) ∨ υ ∧ ¬ω then pc else pc ⊔ level(i0) ⊔ level(i1),\n\
+ hr := if ¬(¬τ ∧ ¬υ ∧ level(i0) ⊔ level(i1) ⊐ pc) ∨ υ ∧ ¬ω then hr else P8}",
+                          ];
+  "pc8_js1" -> "pc11_js1" [label="υ ∧ ω ∨ τ ∧ ¬υ ∧ level(i0) ⊔ level(i1) ⊐ pc ∨ τ ∧ ¬υ ∧ level(i0) ⊔ level(i1) ⊑ pc,\n\
+{pc := if ¬(τ ∧ ¬υ ∧ level(i0) ⊔ level(i1) ⊐ pc) ∨ υ ∧ ω then pc else pc ⊔ level(i0) ⊔ level(i1),\n\
+ hr := if ¬(τ ∧ ¬υ ∧ level(i0) ⊔ level(i1) ⊐ pc) ∨ υ ∧ ω then hr else P8}",
+                           ];
+  "pc9_js1" -> "pc10_js1" [label="tt,\n\
+{level($b4) := pc ⊔ (if υ then level($b4) else ⊥)}",
+                           ];
+  "pc10_js1" -> "pc15_js1" [label="tt,\n\
+{}", ];
+  "pc11_js1" -> "pc12_js1" [label="υ ∧ ¬ω ∨ ¬τ ∧ ¬υ ∧ level(i0) ⊔ level(i1) ⊐ pc ∨ ¬τ ∧ ¬υ ∧ level(i0) ⊔ level(i1) ⊑ pc,\n\
+{pc := if ¬(¬(¬(¬τ ∧ ¬υ ∧ level(i0) ⊔ level(i1) ⊐ pc) ∨ υ ∧ ¬ω ∨ ¬τ ∧ ¬υ ∧ level(i0) ⊔ level(i1) ⊑ pc) ∨ ¬τ ∧ ¬υ ∧ level(i0) ⊔ level(i1) ⊐ pc) ∨ υ ∧ ¬ω then pc else pc ⊔ level(i0) ⊔ level(i1),\n\
+ hr := if ¬(¬(¬(¬τ ∧ ¬υ ∧ level(i0) ⊔ level(i1) ⊐ pc) ∨ υ ∧ ¬ω ∨ ¬τ ∧ ¬υ ∧ level(i0) ⊔ level(i1) ⊑ pc) ∨ ¬τ ∧ ¬υ ∧ level(i0) ⊔ level(i1) ⊐ pc) ∨ υ ∧ ¬ω then hr else P11}",
+                            ];
+  "pc11_js1" -> "pc14_js1" [label="υ ∧ ω ∨ τ ∧ ¬υ ∧ level(i0) ⊔ level(i1) ⊐ pc ∨ τ ∧ ¬υ ∧ level(i0) ⊔ level(i1) ⊑ pc,\n\
+{pc := if ¬(¬(¬(τ ∧ ¬υ ∧ level(i0) ⊔ level(i1) ⊐ pc) ∨ υ ∧ ω ∨ τ ∧ ¬υ ∧ level(i0) ⊔ level(i1) ⊑ pc) ∨ τ ∧ ¬υ ∧ level(i0) ⊔ level(i1) ⊐ pc) ∨ υ ∧ ω then pc else pc ⊔ level(i0) ⊔ level(i1),\n\
+ hr := if ¬(¬(¬(τ ∧ ¬υ ∧ level(i0) ⊔ level(i1) ⊐ pc) ∨ υ ∧ ω ∨ τ ∧ ¬υ ∧ level(i0) ⊔ level(i1) ⊑ pc) ∨ τ ∧ ¬υ ∧ level(i0) ⊔ level(i1) ⊐ pc) ∨ υ ∧ ω then hr else P11}",
+                            ];
+  "pc12_js1" -> "pc13_js1" [label="tt,\n\
+{level($b4) := pc ⊔ (if υ then level($b4) else ⊥)}",
+                            ];
+  "pc13_js1" -> "pc15_js1" [label="tt,\n\
+{}", ];
+  "pc14_js1" -> "pc15_js1" [label="tt,\n\
+{level($b4) := pc ⊔ (if υ then level($b4) else ⊥)}",
+                            ];
+  "pc15_js1" -> "pc8_js1" [label="¬υ ∧ hr = P8,\n\
+{υ := tt}", ];
+  "pc15_js1" -> "pc11_js1" [label="¬υ ∧ hr = P11,\n\
+{υ := tt}", ];
+  "pc15_js1" -> "pc15_js2" [label="¬(hr = P11 ∨ hr = P8) ∨ υ ∧ (hr = P11 ∨ hr = P8),\n\
+{υ := υ ∧ ¬(υ ∧ (hr = P11 ∨ hr = P8)),\n\
+ pc := if υ ∧ (hr = P11 ∨ hr = P8) then ⊥ else pc,\n\
+ hr := if υ ∧ (hr = P11 ∨ hr = P8) then P. else hr}",
+                            ];
+  "pc15_js2" -> "pc16_js1" [label="tt,\n\
+{ϕ := S15}", ];
+  "pc16_js1" -> "pc1_js1" [label="¬υ ∧ hr = P1,\n\
+{υ := tt}", ];
+  "pc16_js1" -> "pc4_js1" [label="¬υ ∧ hr = P4,\n\
+{υ := tt}", ];
+  "pc16_js1" -> "pc16_js2" [label="¬(hr = P1 ∨ hr = P4) ∨ υ ∧ (hr = P1 ∨ hr = P4),\n\
+{υ := υ ∧ ¬(υ ∧ (hr = P1 ∨ hr = P4)),\n\
+ hr := if υ ∧ (hr = P1 ∨ hr = P4) then P. else hr}",
+                            ];
+  
+  }

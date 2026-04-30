@@ -1,0 +1,26 @@
+org.apache.rocketmq.common.attribute.TopicMessageType org.apache.rocketmq.proxy.service.metadata.ClusterMetadataService:getTopicMessageType(java.lang.String topic)
+{
+org.apache.rocketmq.remoting.protocol.statictopic.TopicConfigAndQueueMapping topicConfigAndQueueMapping;
+  java.lang.Exception e;
+  com.google.common.cache.LoadingCache $stack4;
+  java.lang.Object $stack5;
+  org.apache.rocketmq.remoting.protocol.statictopic.TopicConfigAndQueueMapping $stack6;
+  boolean $stack7;
+  org.apache.rocketmq.common.attribute.TopicMessageType $stack8;
+  label0:$stack4=this.topicConfigCache;
+ $stack5 = $stack4.get((java.lang.Object)topic);
+ topicConfigAndQueueMapping=(org.apache.rocketmq.remoting.protocol.statictopic.TopicConfigAndQueueMapping) $stack5;
+ label1:goto label2;
+ label3:e = catch;
+ $stack8=org.apache.rocketmq.common.attribute.TopicMessageType.UNSPECIFIED;
+ return  $stack8;
+ label2:$stack6=org.apache.rocketmq.proxy.service.metadata.ClusterMetadataService.EMPTY_TOPIC_CONFIG;
+ $stack7 = topicConfigAndQueueMapping.equals((java.lang.Object)$stack6);
+ if ($stack7==0) goto label4;
+ $stack8=org.apache.rocketmq.common.attribute.TopicMessageType.UNSPECIFIED;
+ return  $stack8;
+ label4:$stack8 = topicConfigAndQueueMapping.getTopicMessageType();
+ return  $stack8;
+ catch java.lang.Exception: label0 - label1 : label3;
+} 
+

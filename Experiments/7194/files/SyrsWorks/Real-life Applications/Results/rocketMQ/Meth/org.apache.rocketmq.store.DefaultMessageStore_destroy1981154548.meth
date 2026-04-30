@@ -1,0 +1,22 @@
+void org.apache.rocketmq.store.DefaultMessageStore:destroy()
+{
+org.apache.rocketmq.store.CommitLog $stack1;
+  org.apache.rocketmq.store.index.IndexService $stack2;
+  org.apache.rocketmq.store.config.MessageStoreConfig $stack3;
+  java.lang.String $stack4;
+  this.destroyLogics();
+ $stack1=this.commitLog;
+ $stack1.destroy();
+ $stack2=this.indexService;
+ $stack2.destroy();
+ $stack3=this.messageStoreConfig;
+ $stack4 = $stack3.getStorePathRootDir();
+ $stack4 = org.apache.rocketmq.store.config.StorePathConfigHelper.getAbortFile($stack4);
+ this#org.apache.rocketmq.store.DefaultMessageStore:deleteFile($stack4);
+ $stack3=this.messageStoreConfig;
+ $stack4 = $stack3.getStorePathRootDir();
+ $stack4 = org.apache.rocketmq.store.config.StorePathConfigHelper.getStoreCheckpoint($stack4);
+ this#org.apache.rocketmq.store.DefaultMessageStore:deleteFile($stack4);
+ return;
+ } 
+

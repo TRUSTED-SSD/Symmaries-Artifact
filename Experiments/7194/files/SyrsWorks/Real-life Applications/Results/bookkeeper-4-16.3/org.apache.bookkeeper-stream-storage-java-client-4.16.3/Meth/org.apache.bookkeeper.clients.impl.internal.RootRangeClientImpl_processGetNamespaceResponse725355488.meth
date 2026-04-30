@@ -1,0 +1,17 @@
+void org.apache.bookkeeper.clients.impl.internal.RootRangeClientImpl:processGetNamespaceResponse(java.lang.String namespace,org.apache.bookkeeper.stream.proto.storage.GetNamespaceResponse response,java.util.concurrent.CompletableFuture getFuture)
+{
+org.apache.bookkeeper.stream.proto.storage.StatusCode code;
+  org.apache.bookkeeper.stream.proto.storage.StatusCode $stack6;
+  java.lang.Throwable $stack7;
+  org.apache.bookkeeper.stream.proto.NamespaceProperties $stack9;
+  code = response.getCode();
+ $stack6=org.apache.bookkeeper.stream.proto.storage.StatusCode.SUCCESS;
+ if ($stack6!=code) goto label0;
+ $stack9 = response.getNsProps();
+ getFuture.complete((java.lang.Object)$stack9);
+ return;
+ label0:$stack7 = org.apache.bookkeeper.clients.impl.internal.ProtocolInternalUtils.createRootRangeException(namespace,code);
+ getFuture.completeExceptionally($stack7);
+ return;
+ } 
+

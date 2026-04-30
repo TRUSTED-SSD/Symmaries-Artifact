@@ -1,0 +1,117 @@
+    private static void waitingForNumBookies(org.apache.bookkeeper.discover.RegistrationClient, int) throws java.lang.Exception
+    {
+        org.apache.bookkeeper.discover.RegistrationClient client;
+        int minNumBookies, $stack9;
+        com.google.common.base.Stopwatch stopwatch;
+        java.util.Set bookies;
+        java.util.concurrent.CompletableFuture $stack5;
+        java.lang.Object $stack6;
+        org.apache.bookkeeper.versioning.Versioned $stack7;
+        java.util.concurrent.TimeUnit $stack10;
+        java.lang.Object[] $stack15;
+        org.slf4j.Logger $stack16;
+        java.lang.Integer $stack20;
+        long $stack23;
+        java.lang.Long $stack24;
+
+        client := @parameter0: org.apache.bookkeeper.discover.RegistrationClient;
+
+        minNumBookies := @parameter1: int;
+
+        stopwatch = staticinvoke <com.google.common.base.Stopwatch: com.google.common.base.Stopwatch createStarted()>();
+/*79*/
+/*79*/
+
+        $stack5 = interfaceinvoke client.<org.apache.bookkeeper.discover.RegistrationClient: java.util.concurrent.CompletableFuture getWritableBookies()>();
+/*80*/
+
+        $stack6 = staticinvoke <org.apache.bookkeeper.common.concurrent.FutureUtils: java.lang.Object result(java.util.concurrent.CompletableFuture)>($stack5);
+/*80*/
+
+        $stack7 = (org.apache.bookkeeper.versioning.Versioned) $stack6;
+/*80*/
+
+        $stack6 = virtualinvoke $stack7.<org.apache.bookkeeper.versioning.Versioned: java.lang.Object getValue()>();
+/*80*/
+
+        bookies = (java.util.Set) $stack6;
+/*80*/
+
+     label1:
+        $stack9 = interfaceinvoke bookies.<java.util.Set: int size()>();
+/*81*/
+
+        if $stack9 >= minNumBookies goto label2;
+/*81*/
+
+        $stack10 = <java.util.concurrent.TimeUnit: java.util.concurrent.TimeUnit SECONDS>;
+/*82*/
+
+        virtualinvoke $stack10.<java.util.concurrent.TimeUnit: void sleep(long)>(1L);
+/*82*/
+
+        $stack5 = interfaceinvoke client.<org.apache.bookkeeper.discover.RegistrationClient: java.util.concurrent.CompletableFuture getWritableBookies()>();
+/*83*/
+
+        $stack6 = staticinvoke <org.apache.bookkeeper.common.concurrent.FutureUtils: java.lang.Object result(java.util.concurrent.CompletableFuture)>($stack5);
+/*83*/
+
+        $stack7 = (org.apache.bookkeeper.versioning.Versioned) $stack6;
+/*83*/
+
+        $stack6 = virtualinvoke $stack7.<org.apache.bookkeeper.versioning.Versioned: java.lang.Object getValue()>();
+/*83*/
+
+        bookies = (java.util.Set) $stack6;
+/*83*/
+
+        $stack16 = <org.apache.bookkeeper.stream.server.service.BookieWatchService: org.slf4j.Logger log>;
+/*86*/
+
+        $stack15 = newarray (java.lang.Object)[3];
+/*84*/
+
+        $stack9 = interfaceinvoke bookies.<java.util.Set: int size()>();
+/*86*/
+
+        $stack20 = staticinvoke <java.lang.Integer: java.lang.Integer valueOf(int)>($stack9);
+/*86*/
+
+        $stack15[0] = $stack20;
+/*86*/
+
+        $stack10 = <java.util.concurrent.TimeUnit: java.util.concurrent.TimeUnit SECONDS>;
+/*86*/
+
+        $stack23 = virtualinvoke stopwatch.<com.google.common.base.Stopwatch: long elapsed(java.util.concurrent.TimeUnit)>($stack10);
+/*86*/
+
+        $stack24 = staticinvoke <java.lang.Long: java.lang.Long valueOf(long)>($stack23);
+/*86*/
+
+        $stack15[1] = $stack24;
+/*86*/
+
+        $stack9 = interfaceinvoke bookies.<java.util.Set: int size()>();
+/*86*/
+
+        $stack9 = minNumBookies - $stack9;
+/*86*/
+
+        $stack20 = staticinvoke <java.lang.Integer: java.lang.Integer valueOf(int)>($stack9);
+/*86*/
+
+        $stack15[2] = $stack20;
+/*86*/
+
+        interfaceinvoke $stack16.<org.slf4j.Logger: void info(java.lang.String,java.lang.Object[])>("Only {} bookies are live since {} seconds elapsed, wait for another {} bookies for another 1 second", $stack15);
+/*84*/
+
+        goto label1;
+/*84*/
+
+     label2:
+        return;
+/*88*/
+    }
+

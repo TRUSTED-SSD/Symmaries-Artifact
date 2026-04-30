@@ -1,0 +1,24 @@
+void org.apache.rocketmq.client.impl.consumer.ConsumeMessagePopOrderlyService:shutdown(long awaitTerminateMillis)
+{
+java.util.concurrent.ScheduledExecutorService $stack3;
+  java.util.concurrent.TimeUnit $stack4;
+  java.util.concurrent.ThreadPoolExecutor $stack5;
+  org.apache.rocketmq.client.impl.consumer.DefaultMQPushConsumerImpl $stack6;
+  org.apache.rocketmq.remoting.protocol.heartbeat.MessageModel $stack7;
+  org.apache.rocketmq.remoting.protocol.heartbeat.MessageModel $stack8;
+  boolean $stack9;
+  this.stopped=1;
+ $stack3=this.scheduledExecutorService;
+ $stack3.shutdown();
+ $stack5=this.consumeExecutor;
+ $stack4=java.util.concurrent.TimeUnit.MILLISECONDS;
+ org.apache.rocketmq.common.utils.ThreadUtils.shutdownGracefully((java.util.concurrent.ExecutorService)$stack5,awaitTerminateMillis,$stack4);
+ $stack7=org.apache.rocketmq.remoting.protocol.heartbeat.MessageModel.CLUSTERING;
+ $stack6=this.defaultMQPushConsumerImpl;
+ $stack8 = $stack6.messageModel();
+ $stack9 = $stack7.equals((java.lang.Object)$stack8);
+ if ($stack9==0) goto label0;
+ this.unlockAllMessageQueues();
+ label0:return;
+ } 
+

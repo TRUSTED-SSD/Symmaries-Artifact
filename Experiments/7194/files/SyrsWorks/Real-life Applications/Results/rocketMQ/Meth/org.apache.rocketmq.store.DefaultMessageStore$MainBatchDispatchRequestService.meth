@@ -1,0 +1,29 @@
+org.apache.rocketmq.store.DefaultMessageStore$MainBatchDispatchRequestService(org.apache.rocketmq.store.DefaultMessageStore this$0)
+{
+java.util.concurrent.ThreadPoolExecutor $stack2;
+  org.apache.rocketmq.store.config.MessageStoreConfig $stack3;
+  int $stack4;
+  int $stack6;
+  java.util.concurrent.LinkedBlockingQueue $stack7;
+  java.util.concurrent.TimeUnit $stack9;
+  org.apache.rocketmq.common.ThreadFactoryImpl $stack10;
+  java.util.concurrent.ThreadPoolExecutor$AbortPolicy $stack11;
+  this.this$0=this$0;
+ this#org.apache.rocketmq.common.ServiceThread();
+ $stack2=new java.util.concurrent.ThreadPoolExecutor;
+ $stack3 = this$0.getMessageStoreConfig();
+ $stack4 = $stack3.getBatchDispatchRequestThreadPoolNums();
+ $stack3 = this$0.getMessageStoreConfig();
+ $stack6 = $stack3.getBatchDispatchRequestThreadPoolNums();
+ $stack9=java.util.concurrent.TimeUnit.MICROSECONDS;
+ $stack7=new java.util.concurrent.LinkedBlockingQueue;
+ $stack7#java.util.concurrent.LinkedBlockingQueue(4096);
+ $stack10=new org.apache.rocketmq.common.ThreadFactoryImpl;
+ $stack10#org.apache.rocketmq.common.ThreadFactoryImpl("BatchDispatchRequestServiceThread_");
+ $stack11=new java.util.concurrent.ThreadPoolExecutor$AbortPolicy;
+ $stack11#java.util.concurrent.ThreadPoolExecutor$AbortPolicy();
+ $stack2#java.util.concurrent.ThreadPoolExecutor($stack4,$stack6,60000L,$stack9,(java.util.concurrent.BlockingQueue)$stack7,(java.util.concurrent.ThreadFactory)$stack10,(java.util.concurrent.RejectedExecutionHandler)$stack11);
+ this.batchDispatchRequestExecutor=$stack2;
+ return;
+ } 
+

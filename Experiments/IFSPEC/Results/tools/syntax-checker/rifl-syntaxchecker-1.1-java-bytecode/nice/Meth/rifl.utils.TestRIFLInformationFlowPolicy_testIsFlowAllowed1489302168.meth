@@ -1,0 +1,24 @@
+void rifl.utils.TestRIFLInformationFlowPolicy:testIsFlowAllowed()
+{
+rifl.spec.Domain $stack1;
+  rifl.spec.Domain $stack2;
+  rifl.utils.RIFLInformationFlowPolicy $stack3;
+  boolean $stack4;
+  $stack3=this.wrapper;
+ $stack2=rifl.TestBase.top;
+ $stack1=rifl.TestBase.top;
+ $stack4 = $stack3.isFlowAllowed($stack2,$stack1);
+ org.junit.Assert.assertTrue($stack4);
+ $stack3=this.wrapper;
+ $stack2=rifl.TestBase.bottom;
+ $stack1=rifl.TestBase.top;
+ $stack4 = $stack3.isFlowAllowed($stack2,$stack1);
+ org.junit.Assert.assertTrue($stack4);
+ $stack3=this.wrapper;
+ $stack2=rifl.TestBase.top;
+ $stack1=rifl.TestBase.bottom;
+ $stack4 = $stack3.isFlowAllowed($stack2,$stack1);
+ org.junit.Assert.assertFalse($stack4);
+ return;
+ } 
+

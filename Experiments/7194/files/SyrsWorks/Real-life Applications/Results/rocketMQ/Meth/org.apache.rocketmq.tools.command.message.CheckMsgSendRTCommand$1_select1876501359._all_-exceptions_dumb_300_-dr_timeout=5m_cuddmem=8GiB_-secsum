@@ -1,0 +1,11 @@
+org.apache.rocketmq.common.message.MessageQueue org.apache.rocketmq.tools.command.message.CheckMsgSendRTCommand$1:select (
+  java.util.List mqs, org.apache.rocketmq.common.message.Message msg,
+  java.lang.Object @arg) {
+  guard = tt;
+  ret(level()) = level(@arg) ⊔ level(mqs) ⊔ obj_level(@arg);
+  ret(obj_level()) = level(@arg) ⊔ level(mqs) ⊔ obj_level(@arg);
+  ret(obj_level(@arg)) = level(@arg) ⊔ level(mqs) ⊔ obj_level(@arg);
+  ret(obj_level(mqs)) = level(@arg) ⊔ level(mqs) ⊔ obj_level(@arg);
+  ret(obj_level(msg)) = level(@arg) ⊔ level(mqs) ⊔ obj_level(msg);
+  ret(obj_level(this)) = level(@arg) ⊔ level(mqs) ⊔ obj_level(this);
+}

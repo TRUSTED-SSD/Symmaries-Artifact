@@ -1,0 +1,64 @@
+digraph G {
+  node [shape=box, ];
+  "pc0_js1" [label="〈$r2 = java.lang.String.valueOf (r1), js1〉\n\
+pc ⊔ level(r1) ⊔ obj_level(r1) = ⊥",
+             ];
+  "pc1_js1" [label="〈$r3 = this.append ($r2), js1〉\n\
+tt", ];
+  "pc2_js1" [label="〈return $r3, js1〉", ];
+  "pc3_js1" [label="〈sink, js1〉\n\
+obj_level(r1) ⊑ ret(obj_level(r1))' ∧ obj_level(this) ⊑ ret(obj_level(this))' ∧ (ret(r1.><r1)' ∨ ¬r1.><r1) ∧ (ret(r1.><this)' ∨ ¬r1.><this) ∧ (ret(this.><r1)' ∨ ¬this.><r1) ∧ (ret(this.><this)' ∨ ¬this.><this) ∧ (ϕ ≠ S2 ∨ obj_level($r3) ⊑ ret(obj_level())' ∧ pc ⊔ level($r3) ⊑ ret(level())' ∧ (ret(~r1)' ∨ ¬$r3~r1) ∧ (ret(~this)' ∨ ¬$r3~this) ∧ (ret(.><r1)' ∨ ¬r1.><$r3) ∧ (ret(.><this)' ∨ ¬this.><$r3) ∧ (ret(r1.><)' ∨ ¬$r3.><r1) ∧ (ret(this.><)' ∨ ¬$r3.><this))",
+             ];
+  
+  
+  "pc0_js1" -> "pc1_js1" [label="tt,\n\
+{$r2~r1 := ff,\n\
+ $r2.><$r3 := ff,\n\
+ $r2.><r1 := ff,\n\
+ $r2.><this := ff,\n\
+ $r3.><$r2 := ff,\n\
+ $r3.><$r3 := ff,\n\
+ $r3.><r1 := ff,\n\
+ $r3.><this := ff,\n\
+ r1.><$r2 := ff,\n\
+ r1.><$r3 := ff,\n\
+ r1.><r1 := tt,\n\
+ r1.><this := r1~this ∨ r1.><this ∨ this.><r1,\n\
+ this.><$r2 := ff,\n\
+ this.><$r3 := ff,\n\
+ this.><r1 := r1~this ∨ this.><r1,\n\
+ this.><this := this.><this ∨ (r1~this ∨ this.><r1) ∧ (r1~this ∨ r1.><this ∨ this.><r1),\n\
+ level($r2) := ⊤,\n\
+ obj_level($r2) := ⊤,\n\
+ obj_level($r3) := ⊥,\n\
+ obj_level(r1) := ⊤,\n\
+ obj_level(this) := obj_level(this) ⊔ (if r1~this ∨ r1.><this ∨ this.><r1 then ⊤ else ⊥)}",
+                          ];
+  "pc1_js1" -> "pc2_js1" [label="tt,\n\
+{$r3~r1 := r1~this,\n\
+ $r3~this := tt,\n\
+ r1~this := ff,\n\
+ $r2.><$r2 := ff,\n\
+ $r2.><$r3 := ff,\n\
+ $r2.><r1 := ff,\n\
+ $r2.><this := ff,\n\
+ $r3.><$r2 := ff,\n\
+ $r3.><r1 := this.><r1,\n\
+ $r3.><this := this.><this,\n\
+ r1.><$r2 := ff,\n\
+ r1.><$r3 := r1.><this,\n\
+ r1.><r1 := tt,\n\
+ r1.><this := r1.><this ∨ (if this.><this then r1~this ∨ r1.><this else r1.><this),\n\
+ this.><$r2 := ff,\n\
+ this.><$r3 := this.><this,\n\
+ this.><r1 := this.><r1 ∨ (if this.><this then r1~this ∨ r1.><this ∨ this.><r1 else this.><r1),\n\
+ level($r3) := pc ⊔ level(this),\n\
+ obj_level($r2) := ⊤,\n\
+ obj_level($r3) := ⊤,\n\
+ obj_level(r1) := ⊤,\n\
+ obj_level(this) := ⊤}",
+                          ];
+  "pc2_js1" -> "pc3_js1" [label="tt,\n\
+{ϕ := S2}", ];
+  
+  }

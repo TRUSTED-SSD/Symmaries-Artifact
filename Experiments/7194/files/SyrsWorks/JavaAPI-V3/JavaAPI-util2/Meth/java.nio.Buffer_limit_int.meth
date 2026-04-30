@@ -1,0 +1,22 @@
+java.nio.Buffer java.nio.Buffer:limit(int i0)
+{
+int $i1;
+  java.lang.IllegalArgumentException $r1;
+  int $i2;
+  int $i3;
+  $i1=this.capacity;
+ if (i0>$i1) goto label0;
+ if (i0>=0) goto label1;
+ label0:$r1=new java.lang.IllegalArgumentException;
+ $r1#java.lang.IllegalArgumentException:init();
+ throw $r1;
+ label1:this.limit=i0;
+ $i2=this.position;
+ if ($i2<=i0) goto label2;
+ this.position=i0;
+ label2:$i3=this.mark;
+ if ($i3<=i0) goto label3;
+ this.mark=-1;
+ label3:return  this;
+ }  
+

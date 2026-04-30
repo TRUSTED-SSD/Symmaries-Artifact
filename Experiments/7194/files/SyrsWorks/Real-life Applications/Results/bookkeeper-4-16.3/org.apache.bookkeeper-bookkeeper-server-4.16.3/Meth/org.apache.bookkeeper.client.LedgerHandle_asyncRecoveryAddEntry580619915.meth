@@ -1,0 +1,17 @@
+void org.apache.bookkeeper.client.LedgerHandle:asyncRecoveryAddEntry(byte[] data,int offset,int length,org.apache.bookkeeper.client.AsyncCallback$AddCallback cb,java.lang.Object ctx)
+{
+org.apache.bookkeeper.client.PendingAddOp op;
+  org.apache.bookkeeper.client.ClientContext $stack7;
+  java.util.List $stack8;
+  io.netty.buffer.ByteBuf $stack9;
+  java.util.EnumSet $stack10;
+  $stack7=this.clientCtx;
+ $stack8 = this.getCurrentEnsemble();
+ $stack9 = io.netty.buffer.Unpooled.wrappedBuffer(data,offset,length);
+ $stack10=this.writeFlags;
+ op = org.apache.bookkeeper.client.PendingAddOp.create(this,$stack7,$stack8,$stack9,$stack10,(org.apache.bookkeeper.client.AsyncCallback$AddCallbackWithLatency)cb,ctx);
+ op = op.enableRecoveryAdd();
+ this.doAsyncAddEntry(op);
+ return;
+ } 
+

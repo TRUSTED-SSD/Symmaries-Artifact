@@ -1,0 +1,48 @@
+static java.security.Provider org.apache.bookkeeper.tls.TLSContextFactory:getProvider()
+{
+java.io.Serializable provider;
+  java.security.Provider $stack2;
+  org.slf4j.Logger $stack6;
+  boolean $stack7;
+  java.lang.String $stack10;
+  java.lang.Exception $stack16;
+  java.lang.RuntimeException tmp$321634100;
+  java.lang.Throwable tmp$515729011;
+  $stack2 = java.security.Security.getProvider("BC");
+ if ($stack2!=null) goto label0;
+ $stack2 = java.security.Security.getProvider("BCFIPS");
+ if ($stack2==null) goto label1;
+ label0:$stack7=1;
+ goto label2;
+ label1:$stack7=0;
+ label2:if ($stack7==0) goto label3;
+ $stack2 = java.security.Security.getProvider("BC");
+ if ($stack2==null) goto label4;
+ $stack2 = java.security.Security.getProvider("BC");
+ goto label5;
+ label4:$stack2 = java.security.Security.getProvider("BCFIPS");
+ label5:provider=$stack2;
+ $stack6=org.apache.bookkeeper.tls.TLSContextFactory.log;
+ $stack7 = $stack6.isDebugEnabled();
+ if ($stack7==0) goto label6;
+ $stack6=org.apache.bookkeeper.tls.TLSContextFactory.log;
+ $stack2=(java.security.Provider) $stack2;
+ $stack10 = $stack2.getName();
+ dummyClass.lowSink("Already instantiated Bouncy Castle provider {}");
+$stack6.debug("Already instantiated Bouncy Castle provider {}",(java.lang.Object)$stack10);
+ label6:$stack2=(java.security.Provider) provider;
+ return  $stack2;
+ label3:$stack2 = org.apache.bookkeeper.tls.TLSContextFactory.getBCProviderFromClassPath();
+ label7:return  $stack2;
+ label8:$stack16 = catch;
+ provider=$stack16;
+ $stack6=org.apache.bookkeeper.tls.TLSContextFactory.log;
+ tmp$515729011=(java.lang.Throwable) $stack16;
+ $stack6.warn("Not able to get Bouncy Castle provider for both FIPS and Non-FIPS from class path:",tmp$515729011);
+ tmp$321634100=new java.lang.RuntimeException;
+ tmp$515729011=(java.lang.Throwable) $stack16;
+ tmp$321634100#java.lang.RuntimeException(tmp$515729011);
+ throw tmp$321634100;
+ catch java.lang.Exception: label3 - label7 : label8;
+} 
+

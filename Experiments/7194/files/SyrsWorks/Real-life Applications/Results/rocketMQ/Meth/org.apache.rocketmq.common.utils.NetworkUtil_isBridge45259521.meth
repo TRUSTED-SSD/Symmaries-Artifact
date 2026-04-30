@@ -1,0 +1,29 @@
+static boolean org.apache.rocketmq.common.utils.NetworkUtil:isBridge(java.net.NetworkInterface networkInterface)
+{
+java.io.Serializable interfaceName;
+  boolean $stack3;
+  java.lang.StringBuilder $stack6;
+  java.lang.String $stack10;
+  java.lang.SecurityException $stack12;
+  java.io.File tmp$1157638806;
+  label0:$stack3 = org.apache.rocketmq.common.utils.NetworkUtil.isLinuxPlatform();
+ if ($stack3==0) goto label1;
+ interfaceName = networkInterface.getName();
+ tmp$1157638806=new java.io.File;
+ $stack6=new java.lang.StringBuilder;
+ $stack6#java.lang.StringBuilder();
+ $stack6 = $stack6.append("/sys/class/net/");
+ $stack10=(java.lang.String) interfaceName;
+ $stack6 = $stack6.append($stack10);
+ $stack6 = $stack6.append("/bridge");
+ $stack10 = $stack6.toString();
+ tmp$1157638806#java.io.File($stack10);
+ $stack3 = tmp$1157638806.exists();
+ label2:return  $stack3;
+ label1:goto label3;
+ label4:$stack12 = catch;
+ interfaceName=$stack12;
+ label3:return  0;
+ catch java.lang.SecurityException: label0 - label2 : label4;
+} 
+

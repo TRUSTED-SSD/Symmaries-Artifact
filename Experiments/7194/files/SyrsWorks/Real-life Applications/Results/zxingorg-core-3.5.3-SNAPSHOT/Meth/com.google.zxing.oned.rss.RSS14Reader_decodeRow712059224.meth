@@ -1,0 +1,45 @@
+com.google.zxing.Result com.google.zxing.oned.rss.RSS14Reader:decodeRow(int rowNumber,com.google.zxing.common.BitArray row,java.util.Map hints)
+{
+com.google.zxing.oned.rss.Pair leftPair;
+  java.util.Iterator l6;
+  java.util.Iterator l8;
+  com.google.zxing.oned.rss.Pair right;
+  java.util.List $stack11;
+  boolean $stack16;
+  com.google.zxing.NotFoundException $stack17;
+  java.lang.Object $stack18;
+  com.google.zxing.Result $stack28;
+  leftPair = this#com.google.zxing.oned.rss.RSS14Reader:decodePair(row,(boolean)0,rowNumber,hints);
+ $stack11=this.possibleLeftPairs;
+ com.google.zxing.oned.rss.RSS14Reader.addOrTally((java.util.Collection)$stack11,leftPair);
+ row.reverse();
+ leftPair = this#com.google.zxing.oned.rss.RSS14Reader:decodePair(row,(boolean)1,rowNumber,hints);
+ $stack11=this.possibleRightPairs;
+ com.google.zxing.oned.rss.RSS14Reader.addOrTally((java.util.Collection)$stack11,leftPair);
+ row.reverse();
+ $stack11=this.possibleLeftPairs;
+ l6 = $stack11.iterator();
+ label0:$stack16 = l6.hasNext();
+ if ($stack16==0) goto label1;
+ $stack18 = l6.next();
+ leftPair=(com.google.zxing.oned.rss.Pair) $stack18;
+ rowNumber = leftPair.getCount();
+ if (rowNumber<=1) goto label2;
+ $stack11=this.possibleRightPairs;
+ l8 = $stack11.iterator();
+ label3:$stack16 = l8.hasNext();
+ if ($stack16==0) goto label2;
+ $stack18 = l8.next();
+ right=(com.google.zxing.oned.rss.Pair) $stack18;
+ rowNumber = right.getCount();
+ if (rowNumber<=1) goto label4;
+ $stack16 = com.google.zxing.oned.rss.RSS14Reader.checkChecksum(leftPair,right);
+ if ($stack16==0) goto label4;
+ $stack28 = com.google.zxing.oned.rss.RSS14Reader.constructResult(leftPair,right);
+ return  $stack28;
+ label4:goto label3;
+ label2:goto label0;
+ label1:$stack17 = com.google.zxing.NotFoundException.getNotFoundInstance();
+ throw $stack17;
+ } 
+

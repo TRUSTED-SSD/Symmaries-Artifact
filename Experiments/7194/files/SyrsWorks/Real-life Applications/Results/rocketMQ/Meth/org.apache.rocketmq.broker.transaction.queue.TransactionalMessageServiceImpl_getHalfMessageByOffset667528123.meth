@@ -1,0 +1,18 @@
+org.apache.rocketmq.broker.transaction.OperationResult org.apache.rocketmq.broker.transaction.queue.TransactionalMessageServiceImpl:getHalfMessageByOffset(long commitLogOffset)
+{
+org.apache.rocketmq.broker.transaction.OperationResult response;
+  org.apache.rocketmq.common.message.MessageExt messageExt;
+  org.apache.rocketmq.broker.transaction.queue.TransactionalMessageBridge $stack6;
+  response=new org.apache.rocketmq.broker.transaction.OperationResult;
+ response#org.apache.rocketmq.broker.transaction.OperationResult();
+ $stack6=this.transactionalMessageBridge;
+ messageExt = $stack6.lookMessageByOffset(commitLogOffset);
+ if (messageExt==null) goto label0;
+ response.setPrepareMessage(messageExt);
+ response.setResponseCode(0);
+ goto label1;
+ label0:response.setResponseCode(1);
+ response.setResponseRemark("Find prepared transaction message failed");
+ label1:return  response;
+ } 
+

@@ -1,0 +1,44 @@
+byte[] org.apache.rocketmq.common.compression.ZstdCompressor:compress(byte[] src,int level)
+{
+byte[] result;
+  java.io.ByteArrayOutputStream byteArrayOutputStream;
+  com.github.luben.zstd.ZstdOutputStream outputStream;
+  java.io.IOException e;
+  java.lang.Throwable l7;
+  int $stack10;
+  java.io.IOException $stack15;
+  java.io.IOException $stack18;
+  org.apache.rocketmq.logging.org.slf4j.Logger $stack19;
+  result=src;
+ byteArrayOutputStream=new java.io.ByteArrayOutputStream;
+ $stack10=#src;
+ byteArrayOutputStream#java.io.ByteArrayOutputStream($stack10);
+ outputStream=new com.github.luben.zstd.ZstdOutputStream;
+ outputStream#com.github.luben.zstd.ZstdOutputStream((java.io.OutputStream)byteArrayOutputStream,level);
+ label0:outputStream.write(src);
+ outputStream.flush();
+ outputStream.close();
+ result = byteArrayOutputStream.toByteArray();
+ label1:byteArrayOutputStream.close();
+ label2:goto label3;
+ label4:e = catch;
+ goto label3;
+ label5:$stack18 = catch;
+ e=$stack18;
+ $stack19=org.apache.rocketmq.common.compression.ZstdCompressor.log;
+ $stack19.error("Failed to compress data by zstd",(java.lang.Throwable)$stack18);
+ throw $stack18;
+ label6:l7 = catch;
+ label7:byteArrayOutputStream.close();
+ label8:goto label9;
+ label10:$stack15 = catch;
+ e=$stack15;
+ label9:throw l7;
+ label3:return  result;
+ catch java.io.IOException: label1 - label2 : label4;
+catch java.io.IOException: label0 - label1 : label5;
+catch java.lang.Throwable: label0 - label1 : label6;
+catch java.io.IOException: label7 - label8 : label10;
+catch java.lang.Throwable: label5 - label7 : label6;
+} 
+

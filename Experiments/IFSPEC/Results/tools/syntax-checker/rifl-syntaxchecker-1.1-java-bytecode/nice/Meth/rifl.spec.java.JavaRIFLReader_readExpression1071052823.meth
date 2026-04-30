@@ -1,0 +1,27 @@
+rifl.spec.DeclassificationExpression rifl.spec.java.JavaRIFLReader:readExpression(org.w3c.dom.Element elem)
+{
+org.w3c.dom.Node childNode;
+  short $stack6;
+  java.lang.String $stack7;
+  rifl.spec.java.JavaDeclassificationExpression $stack9;
+  rifl.spec.RIFLIntegrityException $stack14;
+  org.w3c.dom.Text $stack17;
+  childNode = elem.getFirstChild();
+ goto label0;
+ label1:childNode = childNode.getNextSibling();
+ if (childNode!=null) goto label0;
+ $stack14=new rifl.spec.RIFLIntegrityException;
+ $stack14#rifl.spec.RIFLIntegrityException("No declassification expression given.");
+ throw $stack14;
+ label0:$stack6 = childNode.getNodeType();
+ if ($stack6==4) goto label2;
+ $stack6 = childNode.getNodeType();
+ if ($stack6!=3) goto label1;
+ label2:$stack17=(org.w3c.dom.Text) childNode;
+ $stack7 = $stack17.getData();
+ $stack9=new rifl.spec.java.JavaDeclassificationExpression;
+ $stack7 = $stack7.trim();
+ $stack9#rifl.spec.java.JavaDeclassificationExpression($stack7);
+ return  $stack9;
+ } 
+

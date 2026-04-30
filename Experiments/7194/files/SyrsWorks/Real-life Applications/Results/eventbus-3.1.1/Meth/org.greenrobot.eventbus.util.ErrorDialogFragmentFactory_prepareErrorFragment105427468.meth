@@ -1,0 +1,50 @@
+java.lang.Object org.greenrobot.eventbus.util.ErrorDialogFragmentFactory:prepareErrorFragment(org.greenrobot.eventbus.util.ThrowableFailureEvent event,boolean finishAfterDialog,android.os.Bundle @argumentsForErrorDialog)
+{
+java.lang.String title;
+  boolean $stack6;
+  java.lang.Object $stack13;
+  org.greenrobot.eventbus.util.ErrorDialogConfig $stack14;
+  int $stack15;
+  java.lang.Class $stack22;
+  android.os.Bundle argumentsForErrorDialog;
+argumentsForErrorDialog=@argumentsForErrorDialog;
+$stack6 = event.isSuppressErrorUi();
+ if ($stack6==0) goto label0;
+ return  null;
+ label0:if (argumentsForErrorDialog==null) goto label1;
+ $stack13 = argumentsForErrorDialog.clone();
+ argumentsForErrorDialog=(android.os.Bundle) $stack13;
+ goto label2;
+ label1:argumentsForErrorDialog=new android.os.Bundle;
+ argumentsForErrorDialog#android.os.Bundle();
+ label2:$stack6 = argumentsForErrorDialog.containsKey("de.greenrobot.eventbus.errordialog.title");
+ if ($stack6!=0) goto label3;
+ title = this.getTitleFor(event,argumentsForErrorDialog);
+ argumentsForErrorDialog.putString("de.greenrobot.eventbus.errordialog.title",title);
+ label3:$stack6 = argumentsForErrorDialog.containsKey("de.greenrobot.eventbus.errordialog.message");
+ if ($stack6!=0) goto label4;
+ title = this.getMessageFor(event,argumentsForErrorDialog);
+ argumentsForErrorDialog.putString("de.greenrobot.eventbus.errordialog.message",title);
+ label4:$stack6 = argumentsForErrorDialog.containsKey("de.greenrobot.eventbus.errordialog.finish_after_dialog");
+ if ($stack6!=0) goto label5;
+ argumentsForErrorDialog.putBoolean("de.greenrobot.eventbus.errordialog.finish_after_dialog",finishAfterDialog);
+ label5:finishAfterDialog = argumentsForErrorDialog.containsKey("de.greenrobot.eventbus.errordialog.event_type_on_close");
+ if (finishAfterDialog!=0) goto label6;
+ $stack14=this.config;
+ $stack22=$stack14.defaultEventTypeOnDialogClosed;
+ if ($stack22==null) goto label6;
+ $stack14=this.config;
+ $stack22=$stack14.defaultEventTypeOnDialogClosed;
+ argumentsForErrorDialog.putSerializable("de.greenrobot.eventbus.errordialog.event_type_on_close",(java.io.Serializable)$stack22);
+ label6:finishAfterDialog = argumentsForErrorDialog.containsKey("de.greenrobot.eventbus.errordialog.icon_id");
+ if (finishAfterDialog!=0) goto label7;
+ $stack14=this.config;
+ $stack15=$stack14.defaultDialogIconId;
+ if ($stack15==0) goto label7;
+ $stack14=this.config;
+ $stack15=$stack14.defaultDialogIconId;
+ argumentsForErrorDialog.putInt("de.greenrobot.eventbus.errordialog.icon_id",$stack15);
+ label7:$stack13 = this.createErrorFragment(event,argumentsForErrorDialog);
+ return  $stack13;
+ } 
+

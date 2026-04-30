@@ -1,0 +1,41 @@
+org.apache.kerby.kerberos.kerb.type.ap.ApReq org.apache.kerby.kerberos.kerb.request.ApRequest:makeApReq()
+{
+org.apache.kerby.kerberos.kerb.type.ap.ApReq apReq;
+  org.apache.kerby.kerberos.kerb.type.ap.Authenticator authenticator;
+  org.apache.kerby.kerberos.kerb.type.base.EncryptionKey sessionKey;
+  org.apache.kerby.kerberos.kerb.type.base.EncryptedData authData;
+  org.apache.kerby.kerberos.kerb.type.ap.ApOptions apOptions;
+  java.util.Iterator l6;
+  org.apache.kerby.kerberos.kerb.type.ap.ApOption flag;
+  org.apache.kerby.kerberos.kerb.type.ticket.SgtTicket $stack10;
+  org.apache.kerby.kerberos.kerb.type.base.KeyUsage $stack12;
+  org.apache.kerby.kerberos.kerb.type.ticket.Ticket $stack15;
+  java.util.EnumSet $stack17;
+  boolean $stack19;
+  java.lang.Object $stack20;
+  apReq=new org.apache.kerby.kerberos.kerb.type.ap.ApReq;
+ apReq#org.apache.kerby.kerberos.kerb.type.ap.ApReq();
+ authenticator = this#org.apache.kerby.kerberos.kerb.request.ApRequest:makeAuthenticator();
+ $stack10=this.sgtTicket;
+ sessionKey = $stack10.getSessionKey();
+ $stack12=org.apache.kerby.kerberos.kerb.type.base.KeyUsage.AP_REQ_AUTH;
+ authData = org.apache.kerby.kerberos.kerb.common.EncryptionUtil.seal((org.apache.kerby.asn1.type.Asn1Encodeable)authenticator,sessionKey,$stack12);
+ apReq.setEncryptedAuthenticator(authData);
+ apReq.setAuthenticator(authenticator);
+ $stack10=this.sgtTicket;
+ $stack15 = $stack10.getTicket();
+ apReq.setTicket($stack15);
+ apOptions=new org.apache.kerby.kerberos.kerb.type.ap.ApOptions;
+ apOptions#org.apache.kerby.kerberos.kerb.type.ap.ApOptions();
+ $stack17=this.flags;
+ l6 = $stack17.iterator();
+ label0:$stack19 = l6.hasNext();
+ if ($stack19==0) goto label1;
+ $stack20 = l6.next();
+ flag=(org.apache.kerby.kerberos.kerb.type.ap.ApOption) $stack20;
+ apOptions.setFlag((org.apache.kerby.asn1.EnumType)flag);
+ goto label0;
+ label1:apReq.setApOptions(apOptions);
+ return  apReq;
+ } 
+

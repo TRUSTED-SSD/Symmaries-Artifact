@@ -1,0 +1,34 @@
+static com.google.zxing.pdf417.detector.PDF417DetectorResult com.google.zxing.pdf417.detector.Detector:detect(com.google.zxing.BinaryBitmap image,java.util.Map hints,boolean multiple)
+{
+com.google.zxing.common.BitMatrix originalMatrix;
+  int[] l4;
+  int l5;
+  int l6;
+  int rotation;
+  com.google.zxing.common.BitMatrix bitMatrix;
+  java.util.List barcodeCoordinates;
+  com.google.zxing.pdf417.detector.PDF417DetectorResult $stack11;
+  java.util.ArrayList $stack12;
+  boolean $stack15;
+  originalMatrix = image.getBlackMatrix();
+ l4=com.google.zxing.pdf417.detector.Detector.ROTATIONS;
+ l5=#l4;
+ l6=0;
+ label0:if (l6>=l5) goto label1;
+ rotation=l4[l6];
+ bitMatrix = com.google.zxing.pdf417.detector.Detector.applyRotation(originalMatrix,rotation);
+ barcodeCoordinates = com.google.zxing.pdf417.detector.Detector.detect(multiple,bitMatrix);
+ $stack15 = barcodeCoordinates.isEmpty();
+ if ($stack15!=0) goto label2;
+ $stack11=new com.google.zxing.pdf417.detector.PDF417DetectorResult;
+ $stack11#com.google.zxing.pdf417.detector.PDF417DetectorResult(bitMatrix,barcodeCoordinates,rotation);
+ return  $stack11;
+ label2:l6=(l6+1);
+ goto label0;
+ label1:$stack11=new com.google.zxing.pdf417.detector.PDF417DetectorResult;
+ $stack12=new java.util.ArrayList;
+ $stack12#java.util.ArrayList();
+ $stack11#com.google.zxing.pdf417.detector.PDF417DetectorResult(originalMatrix,(java.util.List)$stack12,0);
+ return  $stack11;
+ } 
+

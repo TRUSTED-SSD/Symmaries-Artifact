@@ -1,0 +1,32 @@
+com.scurrilous.circe.Hash com.scurrilous.circe.impl.AbstractHashProvider:getCacheable(com.scurrilous.circe.HashParameters params,java.util.EnumSet required)
+{
+com.scurrilous.circe.impl.HashCache cache;
+  java.util.concurrent.ExecutionException e;
+  java.lang.Throwable cause;
+  boolean $stack6;
+  com.scurrilous.circe.StatelessHash $stack7;
+  com.scurrilous.circe.impl.AbstractHashProvider$1 $stack9;
+  com.scurrilous.circe.Hash $stack10;
+  java.lang.UnsupportedOperationException $stack14;
+  java.lang.RuntimeException $stack15;
+  $stack6 = com.scurrilous.circe.impl.HashCacheLoader.hasCache();
+ if ($stack6==0) goto label0;
+ cache = com.scurrilous.circe.impl.HashCacheLoader.getCache();
+ label1:$stack9=new com.scurrilous.circe.impl.AbstractHashProvider$1;
+ $stack9#com.scurrilous.circe.impl.AbstractHashProvider$1(this,params,required);
+ $stack10 = cache.get(params,required,(java.util.concurrent.Callable)$stack9);
+ label2:return  $stack10;
+ label3:e = catch;
+ cause = e.getCause();
+ $stack6=cause instanceof java.lang.RuntimeException;
+ if ($stack6==0) goto label4;
+ $stack15=(java.lang.RuntimeException) cause;
+ throw $stack15;
+ label4:$stack14=new java.lang.UnsupportedOperationException;
+ $stack14#java.lang.UnsupportedOperationException((java.lang.Throwable)e);
+ throw $stack14;
+ label0:$stack7 = this.createCacheable(params,required);
+ return  $stack7;
+ catch java.util.concurrent.ExecutionException: label1 - label2 : label3;
+} 
+

@@ -1,0 +1,15 @@
+boolean org.apache.bookkeeper.client.RoundRobinDistributionSchedule:hasEntry(long entryId,int bookieIndex)
+{
+int w;
+  int $stack5;
+  w=0;
+ label0:$stack5=this.writeQuorumSize;
+ if (w>=$stack5) goto label1;
+ $stack5 = this.getWriteSetBookieIndex(entryId,w);
+ if (bookieIndex!=$stack5) goto label2;
+ return  1;
+ label2:w=(w+1);
+ goto label0;
+ label1:return  0;
+ } 
+

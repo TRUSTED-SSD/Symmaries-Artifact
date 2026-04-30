@@ -1,0 +1,35 @@
+static java.lang.String org.keycloak.common.crypto.CryptoIntegration:dumpJavaSecurityProviders()
+{
+java.lang.StringBuilder builder;
+  java.security.Provider[] l1;
+  int l2;
+  int l3;
+  java.security.Provider p;
+  java.lang.String $stack8;
+  java.lang.StringBuilder $stack9;
+  java.lang.Class $stack14;
+  builder=new java.lang.StringBuilder;
+ builder#java.lang.StringBuilder("Java security providers: [ \n");
+ l1 = java.security.Security.getProviders();
+ l2=#l1;
+ l3=0;
+ label0:if (l3>=l2) goto label1;
+ p=l1[l3];
+ $stack9=new java.lang.StringBuilder;
+ $stack9#java.lang.StringBuilder();
+ $stack9 = $stack9.append(" ");
+ $stack8 = p.toString();
+ $stack9 = $stack9.append($stack8);
+ $stack9 = $stack9.append(" - ");
+ $stack14 = p.getClass();
+ $stack9 = $stack9.append((java.lang.Object)$stack14);
+ $stack9 = $stack9.append(", \n");
+ $stack8 = $stack9.toString();
+ builder.append($stack8);
+ l3=(l3+1);
+ goto label0;
+ label1:builder = builder.append("]");
+ $stack8 = builder.toString();
+ return  $stack8;
+ } 
+

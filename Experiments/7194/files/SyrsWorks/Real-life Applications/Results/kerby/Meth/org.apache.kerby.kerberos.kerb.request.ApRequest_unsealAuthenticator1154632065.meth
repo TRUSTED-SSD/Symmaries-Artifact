@@ -1,0 +1,14 @@
+static void org.apache.kerby.kerberos.kerb.request.ApRequest:unsealAuthenticator(org.apache.kerby.kerberos.kerb.type.base.EncryptionKey encKey,org.apache.kerby.kerberos.kerb.type.ap.ApReq apReq)
+{
+org.apache.kerby.kerberos.kerb.type.base.EncryptedData authData;
+  org.apache.kerby.kerberos.kerb.type.ap.Authenticator authenticator;
+  org.apache.kerby.kerberos.kerb.type.base.KeyUsage $stack5;
+  org.apache.kerby.asn1.type.Asn1Type $stack6;
+  authData = apReq.getEncryptedAuthenticator();
+ $stack5=org.apache.kerby.kerberos.kerb.type.base.KeyUsage.AP_REQ_AUTH;
+ $stack6 = org.apache.kerby.kerberos.kerb.common.EncryptionUtil.unseal(authData,encKey,$stack5,org.apache.kerby.kerberos.kerb.type.ap.Authenticator);
+ authenticator=(org.apache.kerby.kerberos.kerb.type.ap.Authenticator) $stack6;
+ apReq.setAuthenticator(authenticator);
+ return;
+ } 
+

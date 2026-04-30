@@ -1,0 +1,39 @@
+digraph G {
+  node [shape=box, ];
+  "pc0_js1" [label="〈this#java.lang.Object.init (), js1〉\n\
+tt", ];
+  "pc1_js1" [label="〈this.list = r1, js1〉", ];
+  "pc2_js1" [label="〈this.index = i0, js1〉", ];
+  "pc3_js1" [label="〈this.fence = i1, js1〉", ];
+  "pc4_js1" [label="〈this.expectedModCount = i2, js1〉", ];
+  "pc5_js1" [label="〈return this, js1〉", ];
+  "pc6_js1" [label="〈sink, js1〉\n\
+obj_level(r1) ⊑ ret(obj_level(r1))' ∧ obj_level(this) ⊑ ret(obj_level(this))' ∧ (ret(r1.><r1)' ∨ ¬r1.><r1) ∧ (ret(r1.><this)' ∨ ¬r1.><this) ∧ (ret(this.><r1)' ∨ ¬this.><r1) ∧ (ret(this.><this)' ∨ ¬this.><this) ∧ (ϕ ≠ S5 ∨ ret(~this)' ∧ obj_level(this) ⊑ ret(obj_level())' ∧ pc ⊔ level(this) ⊑ ret(level())' ∧ (ret(.><r1)' ∨ ¬r1.><this) ∧ (ret(.><this)' ∨ ¬this.><this) ∧ (ret(r1.><)' ∨ ¬this.><r1) ∧ (ret(this.><)' ∨ ¬this.><this))",
+             ];
+  
+  
+  "pc0_js1" -> "pc1_js1" [label="tt,\n\
+{r1.><r1 := if this.><this then r1.><r1 ∨ r1.><this ∧ (r1.><this ∨ this.><r1) else r1.><r1,\n\
+ r1.><this := ff,\n\
+ this.><r1 := if this.><this then r1.><this ∨ this.><r1 else this.><r1,\n\
+ this.><this := ff}",
+                          ];
+  "pc1_js1" -> "pc2_js1" [label="tt,\n\
+{r1.><this := ff,\n\
+ this.><r1 := tt,\n\
+ this.><this := this.><r1,\n\
+ obj_level(this) := pc ⊔ level(r1) ⊔ obj_level(r1) ⊔ obj_level(this)}",
+                          ];
+  "pc2_js1" -> "pc3_js1" [label="tt,\n\
+{obj_level(this) := pc ⊔ level(i0) ⊔ obj_level(this)}",
+                          ];
+  "pc3_js1" -> "pc4_js1" [label="tt,\n\
+{obj_level(this) := pc ⊔ level(i1) ⊔ obj_level(this)}",
+                          ];
+  "pc4_js1" -> "pc5_js1" [label="tt,\n\
+{obj_level(this) := pc ⊔ level(i2) ⊔ obj_level(this)}",
+                          ];
+  "pc5_js1" -> "pc6_js1" [label="tt,\n\
+{ϕ := S5}", ];
+  
+  }

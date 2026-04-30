@@ -1,0 +1,37 @@
+static void org.apache.rocketmq.common.utils.HttpTinyClient:setHeaders(java.net.HttpURLConnection conn,java.util.List headers,java.lang.String @encoding)
+{
+java.util.Iterator iter;
+  int $stack4;
+  java.lang.String $stack6;
+  java.lang.StringBuilder $stack7;
+  long $stack12;
+  boolean $stack15;
+  java.lang.Object $stack23;
+  java.lang.String $stack26;
+  java.lang.String encoding;
+encoding=@encoding;
+if (null==headers) goto label0;
+ iter = headers.iterator();
+ label1:$stack15 = iter.hasNext();
+ if ($stack15==0) goto label0;
+ $stack23 = iter.next();
+ $stack6=(java.lang.String) $stack23;
+ $stack23 = iter.next();
+ $stack26=(java.lang.String) $stack23;
+ conn.addRequestProperty($stack6,$stack26);
+ goto label1;
+ label0:$stack4=org.apache.rocketmq.common.MQVersion.CURRENT_VERSION;
+ $stack6 = org.apache.rocketmq.common.MQVersion.getVersionDesc($stack4);
+ conn.addRequestProperty("Client-Version",$stack6);
+ $stack7=new java.lang.StringBuilder;
+ $stack7#java.lang.StringBuilder();
+ $stack7 = $stack7.append("application/x-www-form-urlencoded;charset=");
+ $stack7 = $stack7.append(encoding);
+ encoding = $stack7.toString();
+ conn.addRequestProperty("Content-Type",encoding);
+ $stack12 = java.lang.System.currentTimeMillis();
+ encoding = java.lang.String.valueOf($stack12);
+ conn.addRequestProperty("Metaq-Client-RequestTS",encoding);
+ return;
+ } 
+

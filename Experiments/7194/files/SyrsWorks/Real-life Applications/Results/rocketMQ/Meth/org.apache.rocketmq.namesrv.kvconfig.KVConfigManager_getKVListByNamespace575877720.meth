@@ -1,0 +1,46 @@
+byte[] org.apache.rocketmq.namesrv.kvconfig.KVConfigManager:getKVListByNamespace(java.lang.String namespace)
+{
+java.util.HashMap kvTable;
+  org.apache.rocketmq.remoting.protocol.body.KVTable table;
+  byte[] l4;
+  java.lang.Throwable l5;
+  java.util.concurrent.locks.ReadWriteLock $stack6;
+  java.util.concurrent.locks.Lock $stack7;
+  java.lang.Object $stack9;
+  java.lang.InterruptedException $stack16;
+  org.apache.rocketmq.logging.org.slf4j.Logger $stack17;
+  label0:$stack6=this.lock;
+ $stack7 = $stack6.readLock();
+ $stack7.lockInterruptibly();
+ label1:kvTable=this.configTable;
+ $stack9 = kvTable.get((java.lang.Object)namespace);
+ kvTable=(java.util.HashMap) $stack9;
+ if (null==kvTable) goto label2;
+ table=new org.apache.rocketmq.remoting.protocol.body.KVTable;
+ table#org.apache.rocketmq.remoting.protocol.body.KVTable();
+ table.setTable(kvTable);
+ l4 = table.encode();
+ label3:$stack6=this.lock;
+ $stack7 = $stack6.readLock();
+ $stack7.unlock();
+ label4:return  l4;
+ label2:$stack6=this.lock;
+ $stack7 = $stack6.readLock();
+ $stack7.unlock();
+ goto label5;
+ label6:l5 = catch;
+ label7:$stack6=this.lock;
+ $stack7 = $stack6.readLock();
+ $stack7.unlock();
+ throw l5;
+ label5:goto label8;
+ label9:$stack16 = catch;
+ $stack17=org.apache.rocketmq.namesrv.kvconfig.KVConfigManager.log;
+ $stack17.error("getKVListByNamespace InterruptedException",(java.lang.Throwable)$stack16);
+ label8:return  null;
+ catch java.lang.Throwable: label1 - label3 : label6;
+catch java.lang.Throwable: label6 - label7 : label6;
+catch java.lang.InterruptedException: label0 - label4 : label9;
+catch java.lang.InterruptedException: label2 - label5 : label9;
+} 
+

@@ -1,0 +1,45 @@
+org.apache.rocketmq.remoting.protocol.body.ConsumeStatsList org.apache.rocketmq.client.impl.MQClientAPIImpl:fetchConsumeStatsInBroker(java.lang.String @brokerAddr,boolean isOrder,long timeoutMillis)
+{
+org.apache.rocketmq.remoting.protocol.header.GetConsumeStatsInBrokerHeader requestHeader;
+  org.apache.rocketmq.remoting.protocol.RemotingCommand request;
+  byte[] body;
+  org.apache.rocketmq.client.ClientConfig $stack11;
+  org.apache.rocketmq.remoting.RemotingClient $stack12;
+  int $stack17;
+  org.apache.rocketmq.client.exception.MQClientException $stack19;
+  java.lang.Object $stack22;
+  org.apache.rocketmq.remoting.protocol.body.ConsumeStatsList $stack23;
+  java.lang.AssertionError $stack27;
+  java.lang.String brokerAddr;
+brokerAddr=@brokerAddr;
+requestHeader=new org.apache.rocketmq.remoting.protocol.header.GetConsumeStatsInBrokerHeader;
+ requestHeader#org.apache.rocketmq.remoting.protocol.header.GetConsumeStatsInBrokerHeader();
+ requestHeader.setIsOrder(isOrder);
+ request = org.apache.rocketmq.remoting.protocol.RemotingCommand.createRequestCommand(317,(org.apache.rocketmq.remoting.CommandCustomHeader)requestHeader);
+ $stack12=this.remotingClient;
+ $stack11=this.clientConfig;
+ isOrder = $stack11.isVipChannelEnabled();
+ brokerAddr = org.apache.rocketmq.common.MixAll.brokerVIPChannel(isOrder,brokerAddr);
+ request = $stack12.invokeSync(brokerAddr,request,timeoutMillis);
+ isOrder=org.apache.rocketmq.client.impl.MQClientAPIImpl.$assertionsDisabled;
+ if (isOrder!=0) goto label0;
+ if (request!=null) goto label0;
+ $stack27=new java.lang.AssertionError;
+ $stack27#java.lang.AssertionError();
+ throw $stack27;
+ label0:$stack17 = request.getCode();
+ switch [$stack17]
+if 0 goto label1;
+goto label2;
+ label1:body = request.getBody();
+ if (body==null) goto label2;
+ $stack22 = org.apache.rocketmq.remoting.protocol.RemotingSerializable.decode(body,org.apache.rocketmq.remoting.protocol.body.ConsumeStatsList);
+ $stack23=(org.apache.rocketmq.remoting.protocol.body.ConsumeStatsList) $stack22;
+ return  $stack23;
+ label2:$stack19=new org.apache.rocketmq.client.exception.MQClientException;
+ $stack17 = request.getCode();
+ brokerAddr = request.getRemark();
+ $stack19#org.apache.rocketmq.client.exception.MQClientException($stack17,brokerAddr);
+ throw $stack19;
+ } 
+

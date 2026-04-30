@@ -1,0 +1,35 @@
+void org.apache.rocketmq.broker.dledger.DLedgerRoleChangeHandler$2:run()
+{
+long $stack2;
+  org.apache.rocketmq.broker.dledger.DLedgerRoleChangeHandler $stack3;
+  long $stack4;
+  byte $stack6;
+  org.apache.rocketmq.broker.BrokerController $stack8;
+  org.apache.rocketmq.broker.slave.SlaveSynchronize $stack9;
+  java.lang.Throwable $stack17;
+  org.apache.rocketmq.logging.org.slf4j.Logger $stack18;
+  label0:$stack2 = java.lang.System.currentTimeMillis();
+ $stack3=this.this$0;
+ $stack4 = org.apache.rocketmq.broker.dledger.DLedgerRoleChangeHandler.access$400($stack3);
+ $stack2=($stack2-$stack4);
+ $stack6=($stack2 cmp 10000L);
+ if ($stack6<=0) goto label1;
+ $stack3=this.this$0;
+ $stack8 = org.apache.rocketmq.broker.dledger.DLedgerRoleChangeHandler.access$500($stack3);
+ $stack9 = $stack8.getSlaveSynchronize();
+ $stack9.syncAll();
+ $stack3=this.this$0;
+ $stack2 = java.lang.System.currentTimeMillis();
+ org.apache.rocketmq.broker.dledger.DLedgerRoleChangeHandler.access$402($stack3,$stack2);
+ label1:$stack3=this.this$0;
+ $stack8 = org.apache.rocketmq.broker.dledger.DLedgerRoleChangeHandler.access$500($stack3);
+ $stack9 = $stack8.getSlaveSynchronize();
+ $stack9.syncTimerCheckPoint();
+ label2:goto label3;
+ label4:$stack17 = catch;
+ $stack18 = org.apache.rocketmq.broker.dledger.DLedgerRoleChangeHandler.access$100();
+ $stack18.error("ScheduledTask SlaveSynchronize syncAll error.",$stack17);
+ label3:return;
+ catch java.lang.Throwable: label0 - label2 : label4;
+} 
+

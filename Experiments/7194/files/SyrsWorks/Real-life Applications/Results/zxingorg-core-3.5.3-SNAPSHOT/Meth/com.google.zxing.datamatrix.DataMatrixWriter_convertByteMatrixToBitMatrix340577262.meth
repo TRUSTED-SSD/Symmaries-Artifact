@@ -1,0 +1,51 @@
+static com.google.zxing.common.BitMatrix com.google.zxing.datamatrix.DataMatrixWriter:convertByteMatrixToBitMatrix(com.google.zxing.qrcode.encoder.ByteMatrix matrix,int reqWidth,int reqHeight)
+{
+int matrixWidth;
+  int matrixHeight;
+  int outputWidth;
+  int outputHeight;
+  int multiple;
+  com.google.zxing.common.BitMatrix output;
+  int outputX;
+  byte $stack29;
+  matrixWidth = matrix.getWidth();
+ matrixHeight = matrix.getHeight();
+ outputWidth = java.lang.Math.max(reqWidth,matrixWidth);
+ outputHeight = java.lang.Math.max(reqHeight,matrixHeight);
+ outputX=(outputWidth/matrixWidth);
+ multiple=(outputHeight/matrixHeight);
+ multiple = java.lang.Math.min(outputX,multiple);
+ outputX=(matrixWidth * multiple);
+ outputWidth=(outputWidth-outputX);
+ outputWidth=(outputWidth/2);
+ outputX=(matrixHeight * multiple);
+ outputHeight=(outputHeight-outputX);
+ outputHeight=(outputHeight/2);
+ if (reqHeight<matrixHeight) goto label0;
+ if (reqWidth>=matrixWidth) goto label1;
+ label0:outputWidth=0;
+ outputHeight=0;
+ output=new com.google.zxing.common.BitMatrix;
+ output#com.google.zxing.common.BitMatrix(matrixWidth,matrixHeight);
+ goto label2;
+ label1:output=new com.google.zxing.common.BitMatrix;
+ output#com.google.zxing.common.BitMatrix(reqWidth,reqHeight);
+ label2:output.clear();
+ reqWidth=0;
+ reqHeight=outputHeight;
+ label3:if (reqWidth>=matrixHeight) goto label4;
+ outputHeight=0;
+ outputX=outputWidth;
+ label5:if (outputHeight>=matrixWidth) goto label6;
+ $stack29 = matrix.get(outputHeight,reqWidth);
+ if ($stack29!=1) goto label7;
+ output.setRegion(outputX,reqHeight,multiple,multiple);
+ label7:outputHeight=(outputHeight+1);
+ outputX=(outputX+multiple);
+ goto label5;
+ label6:reqWidth=(reqWidth+1);
+ reqHeight=(reqHeight+multiple);
+ goto label3;
+ label4:return  output;
+ } 
+

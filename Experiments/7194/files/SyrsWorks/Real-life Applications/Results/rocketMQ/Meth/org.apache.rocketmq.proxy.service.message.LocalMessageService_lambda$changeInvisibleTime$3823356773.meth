@@ -1,0 +1,48 @@
+static org.apache.rocketmq.client.consumer.AckResult org.apache.rocketmq.proxy.service.message.LocalMessageService:lambda$changeInvisibleTime$3(org.apache.rocketmq.common.consumer.ReceiptHandle @handle,org.apache.rocketmq.remoting.protocol.RemotingCommand r)
+{
+org.apache.rocketmq.remoting.protocol.header.ChangeInvisibleTimeResponseHeader responseHeader;
+  org.apache.rocketmq.client.consumer.AckResult ackResult;
+  org.apache.rocketmq.remoting.CommandCustomHeader $stack4;
+  int $stack7;
+  org.apache.rocketmq.client.consumer.AckStatus $stack8;
+  long $stack9;
+  org.apache.rocketmq.common.consumer.ReceiptHandle$ReceiptHandleBuilder $stack10;
+  java.lang.String $stack19;
+  org.apache.rocketmq.common.consumer.ReceiptHandle handle;
+handle=@handle;
+$stack4 = r.readCustomHeader();
+ responseHeader=(org.apache.rocketmq.remoting.protocol.header.ChangeInvisibleTimeResponseHeader) $stack4;
+ ackResult=new org.apache.rocketmq.client.consumer.AckResult;
+ ackResult#org.apache.rocketmq.client.consumer.AckResult();
+ $stack7 = r.getCode();
+ if (0!=$stack7) goto label0;
+ $stack8=org.apache.rocketmq.client.consumer.AckStatus.OK;
+ ackResult.setStatus($stack8);
+ goto label1;
+ label0:$stack8=org.apache.rocketmq.client.consumer.AckStatus.NO_EXIST;
+ ackResult.setStatus($stack8);
+ label1:$stack9 = responseHeader.getPopTime();
+ ackResult.setPopTime($stack9);
+ $stack10 = org.apache.rocketmq.common.consumer.ReceiptHandle.builder();
+ $stack9 = handle.getStartOffset();
+ $stack10 = $stack10.startOffset($stack9);
+ $stack9 = responseHeader.getPopTime();
+ $stack10 = $stack10.retrieveTime($stack9);
+ $stack9 = responseHeader.getInvisibleTime();
+ $stack10 = $stack10.invisibleTime($stack9);
+ $stack7 = responseHeader.getReviveQid();
+ $stack10 = $stack10.reviveQueueId($stack7);
+ $stack19 = handle.getTopicType();
+ $stack10 = $stack10.topicType($stack19);
+ $stack19 = handle.getBrokerName();
+ $stack10 = $stack10.brokerName($stack19);
+ $stack7 = handle.getQueueId();
+ $stack10 = $stack10.queueId($stack7);
+ $stack9 = handle.getOffset();
+ $stack10 = $stack10.offset($stack9);
+ handle = $stack10.build();
+ $stack19 = handle.encode();
+ ackResult.setExtraInfo($stack19);
+ return  ackResult;
+ } 
+

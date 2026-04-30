@@ -1,0 +1,58 @@
+static void org.apache.bookkeeper.bookie.storage.ldb.ArrayUtil:setLong(byte[] array,int index,long value)
+{
+boolean $stack4;
+  long $stack5;
+  int $stack6;
+  byte $stack7;
+  int $stack11;
+  $stack4=org.apache.bookkeeper.bookie.storage.ldb.ArrayUtil.HAS_UNSAFE;
+ if ($stack4==0) goto label0;
+ $stack4=org.apache.bookkeeper.bookie.storage.ldb.ArrayUtil.UNALIGNED;
+ if ($stack4==0) goto label0;
+ $stack4=org.apache.bookkeeper.bookie.storage.ldb.ArrayUtil.BIG_ENDIAN_NATIVE_ORDER;
+ if ($stack4==0) goto label1;
+ goto label2;
+ label1:value = java.lang.Long.reverseBytes(value);
+ label2:io.netty.util.internal.PlatformDependent.putLong(array,index,value);
+ goto label3;
+ label0:$stack5=(value>>>56);
+ $stack6=(int) $stack5;
+ $stack7=(byte) $stack6;
+ array[index]=$stack7;
+ $stack11=(index+1);
+ $stack5=(value>>>48);
+ $stack6=(int) $stack5;
+ $stack7=(byte) $stack6;
+ array[$stack11]=$stack7;
+ $stack11=(index+2);
+ $stack5=(value>>>40);
+ $stack6=(int) $stack5;
+ $stack7=(byte) $stack6;
+ array[$stack11]=$stack7;
+ $stack11=(index+3);
+ $stack5=(value>>>32);
+ $stack6=(int) $stack5;
+ $stack7=(byte) $stack6;
+ array[$stack11]=$stack7;
+ $stack11=(index+4);
+ $stack5=(value>>>24);
+ $stack6=(int) $stack5;
+ $stack7=(byte) $stack6;
+ array[$stack11]=$stack7;
+ $stack11=(index+5);
+ $stack5=(value>>>16);
+ $stack6=(int) $stack5;
+ $stack7=(byte) $stack6;
+ array[$stack11]=$stack7;
+ $stack11=(index+6);
+ $stack5=(value>>>8);
+ $stack6=(int) $stack5;
+ $stack7=(byte) $stack6;
+ array[$stack11]=$stack7;
+ $stack6=(index+7);
+ index=(int) value;
+ $stack7=(byte) index;
+ array[$stack6]=$stack7;
+ label3:return;
+ } 
+

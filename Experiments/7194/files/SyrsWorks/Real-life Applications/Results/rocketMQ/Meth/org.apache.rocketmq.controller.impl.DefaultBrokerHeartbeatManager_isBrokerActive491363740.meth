@@ -1,0 +1,29 @@
+boolean org.apache.rocketmq.controller.impl.DefaultBrokerHeartbeatManager:isBrokerActive(java.lang.String clusterName,java.lang.String brokerAddr)
+{
+org.apache.rocketmq.controller.BrokerLiveInfo info;
+  long last;
+  long timeoutMillis;
+  org.apache.rocketmq.common.BrokerAddrInfo $stack8;
+  java.util.Map $stack9;
+  java.lang.Object $stack10;
+  byte $stack15;
+  boolean $stack16;
+  $stack9=this.brokerLiveTable;
+ $stack8=new org.apache.rocketmq.common.BrokerAddrInfo;
+ $stack8#org.apache.rocketmq.common.BrokerAddrInfo(clusterName,brokerAddr);
+ $stack10 = $stack9.get((java.lang.Object)$stack8);
+ info=(org.apache.rocketmq.controller.BrokerLiveInfo) $stack10;
+ if (info==null) goto label0;
+ last = info.getLastUpdateTimestamp();
+ timeoutMillis = info.getHeartbeatTimeoutMillis();
+ last=(last+timeoutMillis);
+ timeoutMillis = java.lang.System.currentTimeMillis();
+ $stack15=(last cmp timeoutMillis);
+ if ($stack15<0) goto label1;
+ $stack16=1;
+ goto label2;
+ label1:$stack16=0;
+ label2:return  $stack16;
+ label0:return  0;
+ } 
+

@@ -1,0 +1,29 @@
+static java.lang.String org.apache.bookkeeper.util.StringUtils:requestToString(java.lang.Object request)
+{
+org.apache.bookkeeper.proto.BookkeeperProtocol$BKPacketHeader header;
+  boolean $stack2;
+  java.lang.String $stack3;
+  org.apache.bookkeeper.proto.BookkeeperProtocol$Request $stack4;
+  java.lang.Object[] $stack6;
+  long $stack9;
+  java.lang.Long $stack10;
+  org.apache.bookkeeper.proto.BookkeeperProtocol$OperationType $stack12;
+  org.apache.bookkeeper.proto.BookkeeperProtocol$ProtocolVersion $stack14;
+  $stack2=request instanceof org.apache.bookkeeper.proto.BookkeeperProtocol$Request;
+ if ($stack2==0) goto label0;
+ $stack4=(org.apache.bookkeeper.proto.BookkeeperProtocol$Request) request;
+ header = $stack4.getHeader();
+ $stack6=new java.lang.Object[3];
+ $stack9 = header.getTxnId();
+ $stack10 = java.lang.Long.valueOf($stack9);
+ $stack6[0]=$stack10;
+ $stack12 = header.getOperation();
+ $stack6[1]=$stack12;
+ $stack14 = header.getVersion();
+ $stack6[2]=$stack14;
+ $stack3 = java.lang.String.format("Req(txnId=%d,op=%s,version=%s)",$stack6);
+ return  $stack3;
+ label0:$stack3 = request.toString();
+ return  $stack3;
+ } 
+

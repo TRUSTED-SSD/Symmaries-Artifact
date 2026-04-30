@@ -1,0 +1,25 @@
+boolean org.apache.bookkeeper.common.util.OrderedExecutor:awaitTermination(long timeout,java.util.concurrent.TimeUnit unit)
+{
+boolean ret;
+  int i;
+  java.util.concurrent.ExecutorService[] $stack6;
+  int $stack7;
+  java.util.concurrent.ExecutorService $stack11;
+  ret=1;
+ i=0;
+ label0:$stack6=this.threads;
+ $stack7=#$stack6;
+ if (i>=$stack7) goto label1;
+ if (ret==0) goto label2;
+ $stack6=this.threads;
+ $stack11=$stack6[i];
+ ret = $stack11.awaitTermination(timeout,unit);
+ if (ret==0) goto label2;
+ ret=1;
+ goto label3;
+ label2:ret=0;
+ label3:i=(i+1);
+ goto label0;
+ label1:return  ret;
+ } 
+

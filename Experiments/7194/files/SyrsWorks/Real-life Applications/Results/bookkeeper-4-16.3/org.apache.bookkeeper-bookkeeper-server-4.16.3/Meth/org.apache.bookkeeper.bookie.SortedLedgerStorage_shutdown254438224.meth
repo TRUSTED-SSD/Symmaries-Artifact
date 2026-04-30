@@ -1,0 +1,29 @@
+void org.apache.bookkeeper.bookie.SortedLedgerStorage:shutdown()
+{
+java.util.concurrent.ScheduledExecutorService $stack2;
+  java.util.concurrent.TimeUnit $stack3;
+  boolean $stack5;
+  org.apache.bookkeeper.bookie.EntryMemTable $stack6;
+  org.apache.bookkeeper.bookie.InterleavedLedgerStorage $stack7;
+  java.lang.Exception $stack11;
+  org.slf4j.Logger $stack12;
+  $stack2=this.scheduler;
+ $stack2.shutdown();
+ $stack2=this.scheduler;
+ $stack3=java.util.concurrent.TimeUnit.SECONDS;
+ $stack5 = $stack2.awaitTermination(3L,$stack3);
+ if ($stack5!=0) goto label0;
+ $stack2=this.scheduler;
+ $stack2.shutdownNow();
+ label0:$stack6=this.memTable;
+ $stack6.close();
+ label1:goto label2;
+ label3:$stack11 = catch;
+ $stack12=org.apache.bookkeeper.bookie.SortedLedgerStorage.LOG;
+ $stack12.error("Error while closing the memtable",(java.lang.Throwable)$stack11);
+ label2:$stack7=this.interleavedLedgerStorage;
+ $stack7.shutdown();
+ return;
+ catch java.lang.Exception: label0 - label1 : label3;
+} 
+

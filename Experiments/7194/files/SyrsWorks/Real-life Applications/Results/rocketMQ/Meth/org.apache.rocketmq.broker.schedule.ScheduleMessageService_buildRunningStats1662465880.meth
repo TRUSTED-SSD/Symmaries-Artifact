@@ -1,0 +1,54 @@
+void org.apache.rocketmq.broker.schedule.ScheduleMessageService:buildRunningStats(java.util.HashMap stats)
+{
+java.util.Iterator it;
+  java.util.Map$Entry next;
+  int queueId;
+  long delayOffset;
+  long maxOffset;
+  java.lang.String value;
+  java.lang.String key;
+  java.util.concurrent.ConcurrentMap $stack11;
+  java.util.Set $stack12;
+  boolean $stack14;
+  java.lang.Object $stack15;
+  java.lang.Integer $stack17;
+  java.lang.Long $stack21;
+  org.apache.rocketmq.broker.BrokerController $stack23;
+  org.apache.rocketmq.store.MessageStore $stack24;
+  java.lang.Object[] $stack26;
+  org.apache.rocketmq.common.running.RunningStats $stack34;
+  $stack11=this.offsetTable;
+ $stack12 = $stack11.entrySet();
+ it = $stack12.iterator();
+ label0:$stack14 = it.hasNext();
+ if ($stack14==0) goto label1;
+ $stack15 = it.next();
+ next=(java.util.Map$Entry) $stack15;
+ $stack15 = next.getKey();
+ $stack17=(java.lang.Integer) $stack15;
+ queueId = $stack17.intValue();
+ queueId = org.apache.rocketmq.broker.schedule.ScheduleMessageService.delayLevel2QueueId(queueId);
+ $stack15 = next.getValue();
+ $stack21=(java.lang.Long) $stack15;
+ delayOffset = $stack21.longValue();
+ $stack23=this.brokerController;
+ $stack24 = $stack23.getMessageStore();
+ maxOffset = $stack24.getMaxOffsetInQueue("SCHEDULE_TOPIC_XXXX",queueId);
+ $stack26=new java.lang.Object[2];
+ $stack21 = java.lang.Long.valueOf(delayOffset);
+ $stack26[0]=$stack21;
+ $stack21 = java.lang.Long.valueOf(maxOffset);
+ $stack26[1]=$stack21;
+ value = java.lang.String.format("%d,%d",$stack26);
+ $stack26=new java.lang.Object[2];
+ $stack34=org.apache.rocketmq.common.running.RunningStats.scheduleMessageOffset;
+ key = $stack34.name();
+ $stack26[0]=key;
+ $stack15 = next.getKey();
+ $stack26[1]=$stack15;
+ key = java.lang.String.format("%s_%d",$stack26);
+ stats.put((java.lang.Object)key,(java.lang.Object)value);
+ goto label0;
+ label1:return;
+ } 
+

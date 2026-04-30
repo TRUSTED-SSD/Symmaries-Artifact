@@ -1,0 +1,53 @@
+static org.apache.kerby.kerberos.kerb.provider.TokenProvider org.apache.kerby.kerberos.kerb.TokenProviderRegistry:createProvider(java.lang.String @name)
+{
+java.lang.Exception e;
+  boolean $stack2;
+  java.util.Map $stack3;
+  java.lang.Object $stack4;
+  java.lang.Class $stack5;
+  org.apache.kerby.kerberos.kerb.provider.TokenProvider $stack7;
+  java.lang.StringBuilder $stack8;
+  org.slf4j.Logger $stack9;
+  java.lang.String $stack12;
+  java.lang.RuntimeException $stack13;
+  java.lang.String name;
+name=@name;
+$stack2 = org.apache.kerby.kerberos.kerb.TokenProviderRegistry.registeredProvider(name);
+ if ($stack2!=0) goto label0;
+ $stack9=org.apache.kerby.kerberos.kerb.TokenProviderRegistry.LOG;
+ $stack8=new java.lang.StringBuilder;
+ $stack8#java.lang.StringBuilder();
+ $stack8 = $stack8.append("Unregistered token provider ");
+ $stack8 = $stack8.append(name);
+ $stack12 = $stack8.toString();
+ $stack9.error($stack12);
+ $stack13=new java.lang.RuntimeException;
+ $stack8=new java.lang.StringBuilder;
+ $stack8#java.lang.StringBuilder();
+ $stack8 = $stack8.append("Unregistered token provider ");
+ $stack8 = $stack8.append(name);
+ name = $stack8.toString();
+ $stack13#java.lang.RuntimeException(name);
+ throw $stack13;
+ label0:$stack3=org.apache.kerby.kerberos.kerb.TokenProviderRegistry.allProvider;
+ $stack4 = $stack3.get((java.lang.Object)name);
+ $stack5=(java.lang.Class) $stack4;
+ $stack4 = $stack5.newInstance();
+ $stack7=(org.apache.kerby.kerberos.kerb.provider.TokenProvider) $stack4;
+ label1:return  $stack7;
+ label2:e = catch;
+ $stack9=org.apache.kerby.kerberos.kerb.TokenProviderRegistry.LOG;
+ $stack9.error("Create {} token provider failed",(java.lang.Object)name,(java.lang.Object)e);
+ $stack13=new java.lang.RuntimeException;
+ $stack8=new java.lang.StringBuilder;
+ $stack8#java.lang.StringBuilder();
+ $stack8 = $stack8.append("Create ");
+ $stack8 = $stack8.append(name);
+ $stack8 = $stack8.append("token provider failed");
+ $stack8 = $stack8.append((java.lang.Object)e);
+ name = $stack8.toString();
+ $stack13#java.lang.RuntimeException(name);
+ throw $stack13;
+ catch java.lang.Exception: label0 - label1 : label2;
+} 
+

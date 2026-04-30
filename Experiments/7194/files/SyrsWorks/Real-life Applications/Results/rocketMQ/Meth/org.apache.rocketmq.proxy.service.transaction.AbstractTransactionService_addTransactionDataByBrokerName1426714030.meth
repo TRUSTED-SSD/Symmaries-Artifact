@@ -1,0 +1,21 @@
+org.apache.rocketmq.proxy.service.transaction.TransactionData org.apache.rocketmq.proxy.service.transaction.AbstractTransactionService:addTransactionDataByBrokerName(java.lang.String brokerName,java.lang.String producerGroup,long tranStateTableOffset,long commitLogOffset,java.lang.String transactionId,org.apache.rocketmq.common.message.Message message)
+{
+org.apache.rocketmq.proxy.service.transaction.TransactionData transactionData;
+  boolean $stack10;
+  long $stack12;
+  org.apache.rocketmq.proxy.config.ProxyConfig $stack13;
+  long $stack14;
+  org.apache.rocketmq.proxy.service.transaction.TransactionDataManager $stack15;
+  $stack10 = org.apache.commons.lang3.StringUtils.isBlank((java.lang.CharSequence)brokerName);
+ if ($stack10==0) goto label0;
+ return  null;
+ label0:transactionData=new org.apache.rocketmq.proxy.service.transaction.TransactionData;
+ $stack12 = java.lang.System.currentTimeMillis();
+ $stack13 = org.apache.rocketmq.proxy.config.ConfigurationManager.getProxyConfig();
+ $stack14 = $stack13.getTransactionDataExpireMillis();
+ transactionData#org.apache.rocketmq.proxy.service.transaction.TransactionData(brokerName,tranStateTableOffset,commitLogOffset,transactionId,$stack12,$stack14);
+ $stack15=this.transactionDataManager;
+ $stack15#org.apache.rocketmq.proxy.service.transaction.TransactionDataManager(producerGroup,transactionId,transactionData);
+ return  transactionData;
+ } 
+

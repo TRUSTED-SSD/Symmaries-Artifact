@@ -1,0 +1,55 @@
+sun.util.calendar.BaseCalendar$Date java.util.Date:normalize()
+{
+sun.util.calendar.BaseCalendar r1;
+  sun.util.calendar.BaseCalendar$Date $r2;
+  sun.util.calendar.BaseCalendar$Date $r3;
+  boolean $z0;
+  sun.util.calendar.BaseCalendar$Date $r4;
+  java.util.TimeZone $r5;
+  sun.util.calendar.BaseCalendar$Date $r6;
+  sun.util.calendar.BaseCalendar$Date $r7;
+  sun.util.calendar.BaseCalendar$Date $r9;
+  sun.util.calendar.BaseCalendar$Date $r10;
+  long $l0;
+  sun.util.calendar.BaseCalendar$Date $r12;
+  sun.util.calendar.BaseCalendar$Date $r13;
+  long $l1;
+  long $l2;
+  java.util.TimeZone $r14;
+  sun.util.calendar.CalendarDate $r15;
+  sun.util.calendar.BaseCalendar$Date $r16;
+  sun.util.calendar.BaseCalendar$Date $r17;
+  sun.util.calendar.BaseCalendar r18;
+  java.util.TimeZone r19;
+  $r2=this.cdate;
+ if ($r2!=null) goto label0;
+ $l1=this.fastTime;
+ r18 = java.util.Date.getCalendarSystem($l1);
+ $l2=this.fastTime;
+ $r14 = java.util.TimeZone.getDefaultRef();
+ $r15 = r18.getCalendarDate($l2,$r14);
+ $r16=(sun.util.calendar.BaseCalendar$Date) $r15;
+ this.cdate=$r16;
+ $r17=this.cdate;
+ return  $r17;
+ label0:$r3=this.cdate;
+ $z0 = $r3.isNormalized();
+ if ($z0!=0) goto label1;
+ $r12=this.cdate;
+ $r13 = this#java.util.Date:normalize($r12);
+ this.cdate=$r13;
+ label1:r19 = java.util.TimeZone.getDefaultRef();
+ $r4=this.cdate;
+ $r5 = $r4.getZone();
+ if (r19==$r5) goto label2;
+ $r7=this.cdate;
+ $r7.setZone(r19);
+ $r9=this.cdate;
+ r1 = java.util.Date.getCalendarSystem($r9);
+ $l0=this.fastTime;
+ $r10=this.cdate;
+ r1.getCalendarDate($l0,(sun.util.calendar.CalendarDate)$r10);
+ label2:$r6=this.cdate;
+ return  $r6;
+ }  
+

@@ -1,0 +1,17 @@
+io.netty.buffer.ByteBuf org.apache.bookkeeper.bookie.BookieImpl:createExplicitLACEntry(long ledgerId,io.netty.buffer.ByteBuf explicitLac)
+{
+io.netty.buffer.ByteBuf bb;
+  io.netty.buffer.ByteBufAllocator $stack5;
+  int $stack7;
+  $stack5=this.allocator;
+ $stack7 = explicitLac.capacity();
+ $stack7=(20+$stack7);
+ bb = $stack5.directBuffer($stack7);
+ bb.writeLong(ledgerId);
+ bb.writeLong(-32768L);
+ $stack7 = explicitLac.capacity();
+ bb.writeInt($stack7);
+ bb.writeBytes(explicitLac);
+ return  bb;
+ } 
+

@@ -1,0 +1,54 @@
+static org.apache.commons.lang3.tuple.Pair org.apache.bookkeeper.util.LedgerDirUtil:findLargestGap(java.util.List currentIds)
+{
+int nextIdCandidate;
+  int maxIdCandidate;
+  int maxGap;
+  int i;
+  int gapStart;
+  int j;
+  int gapEnd;
+  boolean $stack9;
+  java.lang.Object $stack10;
+  java.lang.Integer $stack11;
+  java.lang.Integer $stack15;
+  org.apache.commons.lang3.tuple.Pair $stack16;
+  int $stack20;
+  $stack9 = currentIds.isEmpty();
+ if ($stack9==0) goto label0;
+ $stack11 = java.lang.Integer.valueOf(0);
+ $stack15 = java.lang.Integer.valueOf(2147483647);
+ $stack16 = org.apache.commons.lang3.tuple.Pair.of((java.lang.Object)$stack11,(java.lang.Object)$stack15);
+ return  $stack16;
+ label0:java.util.Collections.sort(currentIds);
+ nextIdCandidate=0;
+ $stack10 = currentIds.get(0);
+ $stack11=(java.lang.Integer) $stack10;
+ maxIdCandidate = $stack11.intValue();
+ maxGap=(maxIdCandidate-0);
+ i=0;
+ label1:gapStart = currentIds.size();
+ if (i>=gapStart) goto label2;
+ $stack10 = currentIds.get(i);
+ $stack11=(java.lang.Integer) $stack10;
+ gapStart = $stack11.intValue();
+ gapStart=(gapStart+1);
+ j=(i+1);
+ gapEnd=2147483647;
+ $stack20 = currentIds.size();
+ if (j>=$stack20) goto label3;
+ $stack10 = currentIds.get(j);
+ $stack11=(java.lang.Integer) $stack10;
+ gapEnd = $stack11.intValue();
+ label3:j=(gapEnd-gapStart);
+ if (j<=maxGap) goto label4;
+ maxGap=j;
+ nextIdCandidate=gapStart;
+ maxIdCandidate=gapEnd;
+ label4:i=(i+1);
+ goto label1;
+ label2:$stack11 = java.lang.Integer.valueOf(nextIdCandidate);
+ $stack15 = java.lang.Integer.valueOf(maxIdCandidate);
+ $stack16 = org.apache.commons.lang3.tuple.Pair.of((java.lang.Object)$stack11,(java.lang.Object)$stack15);
+ return  $stack16;
+ } 
+

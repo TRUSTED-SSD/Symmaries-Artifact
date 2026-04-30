@@ -1,0 +1,22 @@
+static java.lang.String org.keycloak.adapters.CookieTokenStore:getContextPath(org.keycloak.adapters.spi.HttpFacade facade)
+{
+java.lang.String uri;
+  int index;
+  org.keycloak.adapters.spi.HttpFacade$Request $stack4;
+  org.keycloak.common.util.KeycloakUriBuilder $stack6;
+  boolean $stack8;
+  $stack4 = facade.getRequest();
+ uri = $stack4.getURI();
+ $stack6 = org.keycloak.common.util.KeycloakUriBuilder.fromUri(uri);
+ uri = $stack6.getPath();
+ if (uri==null) goto label0;
+ $stack8 = uri.isEmpty();
+ if ($stack8==0) goto label1;
+ label0:return  "/";
+ label1:index = uri.indexOf("/",1);
+ if (index!=-1) goto label2;
+ goto label3;
+ label2:uri = uri.substring(0,index);
+ label3:return  uri;
+ } 
+

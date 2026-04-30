@@ -1,0 +1,11 @@
+java.net.Socket org.keycloak.adapters.SniSSLSocketFactory:connectSocket(int connectTimeout,java.net.Socket @socket,org.apache.http.HttpHost host,java.net.InetSocketAddress remoteAddress,java.net.InetSocketAddress localAddress,org.apache.http.protocol.HttpContext context)
+{
+java.lang.String $stack7;
+  java.net.Socket socket;
+socket=@socket;
+$stack7 = host.getHostName();
+ socket = this#org.keycloak.adapters.SniSSLSocketFactory:applySNI(socket,$stack7);
+ socket = this#org.apache.http.conn.ssl.SSLSocketFactory:connectSocket(connectTimeout,socket,host,remoteAddress,localAddress,context);
+ return  socket;
+ } 
+

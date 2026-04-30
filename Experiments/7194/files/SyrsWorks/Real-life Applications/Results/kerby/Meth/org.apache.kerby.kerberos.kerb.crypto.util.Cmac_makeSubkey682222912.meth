@@ -1,0 +1,37 @@
+static void org.apache.kerby.kerberos.kerb.crypto.util.Cmac:makeSubkey(org.apache.kerby.kerberos.kerb.crypto.enc.EncryptProvider encProvider,byte[] @key,byte[] @k1,byte[] k2)
+{
+byte[] l;
+  int $stack6;
+  byte $stack7;
+  short $stack8;
+  byte[] key;
+byte[] k1;
+k1=@k1;
+key=@key;
+$stack6=#k1;
+ l=new byte[$stack6];
+ java.util.Arrays.fill(l,(byte)0);
+ org.apache.kerby.kerberos.kerb.crypto.util.Cmac.encryptBlock(encProvider,key,null,l);
+ $stack7=l[0];
+ $stack8=($stack7 & 128);
+ if ($stack8!=0) goto label0;
+ org.apache.kerby.kerberos.kerb.crypto.util.Cmac.leftShiftByOne(l,k1);
+ goto label1;
+ label0:$stack6=#k1;
+ key=new byte[$stack6];
+ org.apache.kerby.kerberos.kerb.crypto.util.Cmac.leftShiftByOne(l,key);
+ l=org.apache.kerby.kerberos.kerb.crypto.util.Cmac.constRb;
+ org.apache.kerby.kerberos.kerb.crypto.util.BytesUtil.xor(key,l,k1);
+ label1:$stack7=k1[0];
+ $stack8=($stack7 & 128);
+ if ($stack8!=0) goto label2;
+ org.apache.kerby.kerberos.kerb.crypto.util.Cmac.leftShiftByOne(k1,k2);
+ goto label3;
+ label2:$stack6=#k1;
+ key=new byte[$stack6];
+ org.apache.kerby.kerberos.kerb.crypto.util.Cmac.leftShiftByOne(k1,key);
+ k1=org.apache.kerby.kerberos.kerb.crypto.util.Cmac.constRb;
+ org.apache.kerby.kerberos.kerb.crypto.util.BytesUtil.xor(key,k1,k2);
+ label3:return;
+ } 
+

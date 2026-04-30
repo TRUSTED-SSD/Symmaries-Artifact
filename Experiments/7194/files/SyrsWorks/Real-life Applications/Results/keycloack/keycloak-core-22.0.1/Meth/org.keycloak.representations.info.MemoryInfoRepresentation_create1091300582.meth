@@ -1,0 +1,37 @@
+static org.keycloak.representations.info.MemoryInfoRepresentation org.keycloak.representations.info.MemoryInfoRepresentation:create()
+{
+org.keycloak.representations.info.MemoryInfoRepresentation rep;
+  java.lang.Runtime runtime;
+  long $stack4;
+  java.lang.String $stack6;
+  long $stack8;
+  rep=new org.keycloak.representations.info.MemoryInfoRepresentation;
+ rep#org.keycloak.representations.info.MemoryInfoRepresentation();
+ runtime = java.lang.Runtime.getRuntime();
+ $stack4 = runtime.maxMemory();
+ rep.total=$stack4;
+ $stack4=rep.total;
+ $stack6 = org.keycloak.representations.info.MemoryInfoRepresentation.formatMemory($stack4);
+ rep.totalFormated=$stack6;
+ $stack4 = runtime.totalMemory();
+ $stack8 = runtime.freeMemory();
+ $stack4=($stack4-$stack8);
+ rep.used=$stack4;
+ $stack4=rep.used;
+ $stack6 = org.keycloak.representations.info.MemoryInfoRepresentation.formatMemory($stack4);
+ rep.usedFormated=$stack6;
+ $stack8=rep.total;
+ $stack4=rep.used;
+ $stack4=($stack8-$stack4);
+ rep.free=$stack4;
+ $stack4=rep.free;
+ $stack6 = org.keycloak.representations.info.MemoryInfoRepresentation.formatMemory($stack4);
+ rep.freeFormated=$stack6;
+ $stack4=rep.free;
+ $stack8=($stack4 * 100L);
+ $stack4=rep.total;
+ $stack4=($stack8/$stack4);
+ rep.freePercentage=$stack4;
+ return  rep;
+ } 
+

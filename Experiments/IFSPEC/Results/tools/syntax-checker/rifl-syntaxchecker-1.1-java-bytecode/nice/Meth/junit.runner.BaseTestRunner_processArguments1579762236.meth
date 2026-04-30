@@ -1,0 +1,43 @@
+java.lang.String junit.runner.BaseTestRunner:processArguments(java.lang.String[] args)
+{
+java.lang.String suiteName;
+  int i;
+  int $stack4;
+  java.lang.String $stack5;
+  boolean $stack6;
+  int $stack14;
+  java.io.PrintStream $stack15;
+  suiteName=null;
+ i=0;
+ label0:$stack4=#args;
+ if (i>=$stack4) goto label1;
+ $stack5=args[i];
+ $stack6 = $stack5.equals((java.lang.Object)"-noloading");
+ if ($stack6==0) goto label2;
+ this.setLoading((boolean)0);
+ goto label3;
+ label2:$stack5=args[i];
+ $stack6 = $stack5.equals((java.lang.Object)"-nofilterstack");
+ if ($stack6==0) goto label4;
+ junit.runner.BaseTestRunner.fgFilterStack=0;
+ goto label3;
+ label4:$stack5=args[i];
+ $stack6 = $stack5.equals((java.lang.Object)"-c");
+ if ($stack6==0) goto label5;
+ $stack14=#args;
+ $stack4=(i+1);
+ if ($stack14<=$stack4) goto label6;
+ $stack4=(i+1);
+ suiteName=args[$stack4];
+ suiteName = this.extractClassName(suiteName);
+ goto label7;
+ label6:$stack15=java.lang.System.out;
+ $stack15.println("Missing Test class name");
+ label7:i=(i+1);
+ goto label3;
+ label5:suiteName=args[i];
+ label3:i=(i+1);
+ goto label0;
+ label1:return  suiteName;
+ } 
+

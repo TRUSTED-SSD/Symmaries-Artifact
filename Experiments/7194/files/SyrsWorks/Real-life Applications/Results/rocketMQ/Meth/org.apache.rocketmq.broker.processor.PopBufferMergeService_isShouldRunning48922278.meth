@@ -1,0 +1,26 @@
+boolean org.apache.rocketmq.broker.processor.PopBufferMergeService:isShouldRunning()
+{
+org.apache.rocketmq.broker.BrokerController $stack1;
+  org.apache.rocketmq.common.BrokerConfig $stack2;
+  boolean $stack3;
+  org.apache.rocketmq.store.config.MessageStoreConfig $stack5;
+  org.apache.rocketmq.store.config.BrokerRole $stack6;
+  org.apache.rocketmq.store.config.BrokerRole $stack7;
+  $stack1=this.brokerController;
+ $stack2 = $stack1.getBrokerConfig();
+ $stack3 = $stack2.isEnableSlaveActingMaster();
+ if ($stack3==0) goto label0;
+ return  1;
+ label0:$stack1=this.brokerController;
+ $stack5 = $stack1.getMessageStoreConfig();
+ $stack6 = $stack5.getBrokerRole();
+ $stack7=org.apache.rocketmq.store.config.BrokerRole.SLAVE;
+ if ($stack6==$stack7) goto label1;
+ $stack3=1;
+ goto label2;
+ label1:$stack3=0;
+ label2:this.master=$stack3;
+ $stack3=this.master;
+ return  $stack3;
+ } 
+

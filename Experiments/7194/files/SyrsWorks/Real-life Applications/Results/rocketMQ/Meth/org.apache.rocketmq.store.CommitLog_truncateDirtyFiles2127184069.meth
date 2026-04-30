@@ -1,0 +1,21 @@
+void org.apache.rocketmq.store.CommitLog:truncateDirtyFiles(long phyOffset)
+{
+long $stack3;
+  byte $stack4;
+  org.apache.rocketmq.store.MappedFileQueue $stack5;
+  $stack3 = this.getFlushedWhere();
+ $stack4=(phyOffset cmp $stack3);
+ if ($stack4>0) goto label0;
+ $stack5=this.mappedFileQueue;
+ $stack5.setFlushedWhere(phyOffset);
+ label0:$stack5=this.mappedFileQueue;
+ $stack3 = $stack5.getCommittedWhere();
+ $stack4=(phyOffset cmp $stack3);
+ if ($stack4>0) goto label1;
+ $stack5=this.mappedFileQueue;
+ $stack5.setCommittedWhere(phyOffset);
+ label1:$stack5=this.mappedFileQueue;
+ $stack5.truncateDirtyFiles(phyOffset);
+ return;
+ } 
+

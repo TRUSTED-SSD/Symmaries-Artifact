@@ -1,0 +1,37 @@
+org.apache.rocketmq.remoting.protocol.RemotingCommand org.apache.rocketmq.client.impl.ClientRemotingProcessor:getConsumerRunningInfo(io.netty.channel.ChannelHandlerContext ctx,org.apache.rocketmq.remoting.protocol.RemotingCommand request)
+{
+org.apache.rocketmq.remoting.protocol.RemotingCommand response;
+  org.apache.rocketmq.remoting.protocol.header.GetConsumerRunningInfoRequestHeader requestHeader;
+  org.apache.rocketmq.remoting.protocol.body.ConsumerRunningInfo consumerRunningInfo;
+  java.util.Map map;
+  java.lang.String jstack;
+  org.apache.rocketmq.remoting.CommandCustomHeader $stack9;
+  org.apache.rocketmq.client.impl.factory.MQClientInstance $stack10;
+  java.lang.Object[] $stack13;
+  boolean $stack18;
+  byte[] $stack19;
+  response = org.apache.rocketmq.remoting.protocol.RemotingCommand.createResponseCommand(null);
+ $stack9 = request.decodeCommandCustomHeader(org.apache.rocketmq.remoting.protocol.header.GetConsumerRunningInfoRequestHeader);
+ requestHeader=(org.apache.rocketmq.remoting.protocol.header.GetConsumerRunningInfoRequestHeader) $stack9;
+ $stack10=this.mqClientFactory;
+ jstack = requestHeader.getConsumerGroup();
+ consumerRunningInfo = $stack10.consumerRunningInfo(jstack);
+ if (null==consumerRunningInfo) goto label0;
+ $stack18 = requestHeader.isJstackEnable();
+ if ($stack18==0) goto label1;
+ map = java.lang.Thread.getAllStackTraces();
+ jstack = org.apache.rocketmq.common.UtilAll.jstack(map);
+ consumerRunningInfo.setJstack(jstack);
+ label1:response.setCode(0);
+ $stack19 = consumerRunningInfo.encode();
+ response.setBody($stack19);
+ goto label2;
+ label0:response.setCode(1);
+ $stack13=new java.lang.Object[1];
+ jstack = requestHeader.getConsumerGroup();
+ $stack13[0]=jstack;
+ jstack = java.lang.String.format("The Consumer Group <%s> not exist in this consumer",$stack13);
+ response.setRemark(jstack);
+ label2:return  response;
+ } 
+

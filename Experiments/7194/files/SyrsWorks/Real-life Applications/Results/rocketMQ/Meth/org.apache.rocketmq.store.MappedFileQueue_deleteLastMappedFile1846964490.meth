@@ -1,0 +1,23 @@
+void org.apache.rocketmq.store.MappedFileQueue:deleteLastMappedFile()
+{
+org.apache.rocketmq.store.logfile.MappedFile lastMappedFile;
+  java.util.concurrent.CopyOnWriteArrayList $stack4;
+  java.lang.StringBuilder $stack6;
+  org.apache.rocketmq.logging.org.slf4j.Logger $stack7;
+  java.lang.String $stack9;
+  lastMappedFile = this.getLastMappedFile();
+ if (lastMappedFile==null) goto label0;
+ lastMappedFile.destroy(1000L);
+ $stack4=this.mappedFiles;
+ $stack4.remove((java.lang.Object)lastMappedFile);
+ $stack7=org.apache.rocketmq.store.MappedFileQueue.log;
+ $stack6=new java.lang.StringBuilder;
+ $stack6#java.lang.StringBuilder();
+ $stack6 = $stack6.append("on recover, destroy a logic mapped file ");
+ $stack9 = lastMappedFile.getFileName();
+ $stack6 = $stack6.append($stack9);
+ $stack9 = $stack6.toString();
+ $stack7.info($stack9);
+ label0:return;
+ } 
+

@@ -1,0 +1,38 @@
+java.lang.Class org.hamcrest.internal.ReflectiveTypeFinder:findExpectedType(java.lang.Class @fromClass)
+{
+java.lang.reflect.Method[] arr$;
+  int len$;
+  int i$;
+  java.lang.reflect.Method method;
+  java.lang.Error $stack7;
+  java.lang.StringBuilder $stack8;
+  java.lang.String $stack10;
+  boolean $stack18;
+  java.lang.Class fromClass;
+fromClass=@fromClass;
+label0:if (fromClass==java.lang.Object) goto label1;
+ arr$ = fromClass.getDeclaredMethods();
+ len$=#arr$;
+ i$=0;
+ label2:if (i$>=len$) goto label3;
+ method=arr$[i$];
+ $stack18 = this.canObtainExpectedTypeFrom(method);
+ if ($stack18==0) goto label4;
+ fromClass = this.expectedTypeFrom(method);
+ return  fromClass;
+ label4:i$=(i$+1);
+ goto label2;
+ label3:fromClass = fromClass.getSuperclass();
+ goto label0;
+ label1:$stack7=new java.lang.Error;
+ $stack8=new java.lang.StringBuilder;
+ $stack8#java.lang.StringBuilder();
+ $stack8 = $stack8.append("Cannot determine correct type for ");
+ $stack10=this.methodName;
+ $stack8 = $stack8.append($stack10);
+ $stack8 = $stack8.append("() method.");
+ $stack10 = $stack8.toString();
+ $stack7#java.lang.Error($stack10);
+ throw $stack7;
+ } 
+

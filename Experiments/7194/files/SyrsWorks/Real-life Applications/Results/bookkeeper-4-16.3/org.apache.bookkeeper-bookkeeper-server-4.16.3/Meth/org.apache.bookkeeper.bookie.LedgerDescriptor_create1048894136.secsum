@@ -1,0 +1,9 @@
+static org.apache.bookkeeper.bookie.LedgerDescriptor org.apache.bookkeeper.bookie.LedgerDescriptor:create (
+  byte[] masterKey, long ledgerId,
+  org.apache.bookkeeper.bookie.LedgerStorage ledgerStorage) {
+  guard = pc ⊔ level(ledgerId) ⊔ level(ledgerStorage) ⊔ level(masterKey) ⊔ obj_level(ledgerStorage) ⊔ obj_level(masterKey) = ⊥;
+  ret(level()) = ⊥;
+  ret(obj_level()) = ⊤;
+  ret(obj_level(ledgerStorage)) = ⊤;
+  ret(obj_level(masterKey)) = ⊤;
+}

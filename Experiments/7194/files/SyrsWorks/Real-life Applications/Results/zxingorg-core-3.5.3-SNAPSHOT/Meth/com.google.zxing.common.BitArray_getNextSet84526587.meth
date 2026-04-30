@@ -1,0 +1,34 @@
+int com.google.zxing.common.BitArray:getNextSet(int from)
+{
+int bitsOffset;
+  int currentBits;
+  int[] $stack6;
+  bitsOffset=this.size;
+ if (from<bitsOffset) goto label0;
+ from=this.size;
+ return  from;
+ label0:bitsOffset=(from/32);
+ $stack6=this.bits;
+ currentBits=$stack6[bitsOffset];
+ from=(from & 31);
+ from=(1<<from);
+ from= ! (from);
+ currentBits=(currentBits & from);
+ label1:if (currentBits!=0) goto label2;
+ bitsOffset=(bitsOffset+1);
+ $stack6=this.bits;
+ from=#$stack6;
+ if (bitsOffset!=from) goto label3;
+ from=this.size;
+ return  from;
+ label3:$stack6=this.bits;
+ currentBits=$stack6[bitsOffset];
+ goto label1;
+ label2:from=(bitsOffset * 32);
+ bitsOffset = java.lang.Integer.numberOfTrailingZeros(currentBits);
+ from=(from+bitsOffset);
+ bitsOffset=this.size;
+ from = java.lang.Math.min(from,bitsOffset);
+ return  from;
+ } 
+

@@ -1,0 +1,18 @@
+org.apache.bookkeeper.sasl.SASLBookieAuthProvider (org.apache.bookkeeper.proto.BookieConnectionPeer
+                                                     addr,
+                                                   org.apache.bookkeeper.auth.AuthCallbacks$GenericCallback
+                                                     completeCb,
+                                                   org.apache.bookkeeper.conf.ServerConfiguration
+                                                     serverConfiguration,
+                                                   javax.security.auth.Subject
+                                                     subject,
+                                                   java.util.regex.Pattern
+                                                     allowedIdsPattern) {
+  guard = pc ⊔ level(allowedIdsPattern) ⊔ level(completeCb) ⊔ level(this) ⊔ obj_level(allowedIdsPattern) ⊔ obj_level(completeCb) ⊔ obj_level(subject) ⊔ obj_level(this) = ⊥;
+  ret(obj_level(addr)) = level(subject) ⊔ obj_level(addr) ⊔ obj_level(serverConfiguration);
+  ret(obj_level(allowedIdsPattern)) = level(subject) ⊔ obj_level(serverConfiguration);
+  ret(obj_level(completeCb)) = level(subject) ⊔ obj_level(serverConfiguration);
+  ret(obj_level(serverConfiguration)) = level(subject) ⊔ obj_level(serverConfiguration);
+  ret(obj_level(subject)) = level(subject) ⊔ obj_level(serverConfiguration);
+  ret(obj_level(this)) = level(subject) ⊔ obj_level(serverConfiguration);
+}

@@ -1,0 +1,32 @@
+long org.apache.bookkeeper.bookie.InterleavedLedgerStorage:getLastAddConfirmed(long ledgerId)
+{
+java.lang.Long lac;
+  io.netty.buffer.ByteBuf bb;
+  java.lang.Throwable l5;
+  org.apache.bookkeeper.bookie.LedgerCache $stack6;
+  long $stack11;
+  $stack6=this.ledgerCache;
+ lac = $stack6.getLastAddConfirmed(ledgerId);
+ if (lac!=null) goto label0;
+ bb = this.getEntry(ledgerId,-1L);
+ if (null!=bb) goto label1;
+ return  -1L;
+ label1:bb.skipBytes(16);
+ $stack11 = bb.readLong();
+dummyClass.highSourceMut($stack11);
+ lac = java.lang.Long.valueOf($stack11);
+ $stack6=this.ledgerCache;
+ $stack11 = lac.longValue();
+ ledgerId = $stack6.updateLastAddConfirmed(ledgerId,$stack11);
+ lac = java.lang.Long.valueOf(ledgerId);
+ label2:io.netty.util.ReferenceCountUtil.release((java.lang.Object)bb);
+ goto label0;
+ label3:l5 = catch;
+ label4:io.netty.util.ReferenceCountUtil.release((java.lang.Object)bb);
+ throw l5;
+ label0:ledgerId = lac.longValue();
+ return  ledgerId;
+ catch java.lang.Throwable: label1 - label2 : label3;
+catch java.lang.Throwable: label3 - label4 : label3;
+} 
+

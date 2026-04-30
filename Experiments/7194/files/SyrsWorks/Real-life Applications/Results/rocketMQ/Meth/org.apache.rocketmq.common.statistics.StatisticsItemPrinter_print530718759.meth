@@ -1,0 +1,34 @@
+void org.apache.rocketmq.common.statistics.StatisticsItemPrinter:print(java.lang.String @prefix,org.apache.rocketmq.common.statistics.StatisticsItem statItem,java.lang.String[] suffixs)
+{
+java.lang.StringBuilder suffix;
+  int l6;
+  int l7;
+  java.lang.String str;
+  org.apache.rocketmq.logging.org.slf4j.Logger $stack10;
+  java.lang.Object[] $stack11;
+  org.apache.rocketmq.common.statistics.StatisticsItemFormatter $stack12;
+  java.lang.String prefix;
+prefix=@prefix;
+suffix=new java.lang.StringBuilder;
+ suffix#java.lang.StringBuilder();
+ l6=#suffixs;
+ l7=0;
+ label0:if (l7>=l6) goto label1;
+ str=suffixs[l7];
+ suffix.append(str);
+ l7=(l7+1);
+ goto label0;
+ label1:$stack10=this.log;
+ if ($stack10==null) goto label2;
+ $stack10=this.log;
+ $stack11=new java.lang.Object[3];
+ $stack11[0]=prefix;
+ $stack12=this.formatter;
+ prefix = $stack12.format(statItem);
+ $stack11[1]=prefix;
+ prefix = suffix.toString();
+ $stack11[2]=prefix;
+ $stack10.info("{}{}{}",$stack11);
+ label2:return;
+ } 
+

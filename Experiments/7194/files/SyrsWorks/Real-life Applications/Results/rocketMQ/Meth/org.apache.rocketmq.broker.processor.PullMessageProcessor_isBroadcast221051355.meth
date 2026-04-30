@@ -1,0 +1,22 @@
+boolean org.apache.rocketmq.broker.processor.PullMessageProcessor:isBroadcast(boolean proxyPullBroadcast,org.apache.rocketmq.broker.client.ConsumerGroupInfo consumerGroupInfo)
+{
+org.apache.rocketmq.remoting.protocol.heartbeat.MessageModel $stack4;
+  org.apache.rocketmq.remoting.protocol.heartbeat.MessageModel $stack5;
+  org.apache.rocketmq.remoting.protocol.heartbeat.ConsumeType $stack7;
+  org.apache.rocketmq.remoting.protocol.heartbeat.ConsumeType $stack8;
+  if (proxyPullBroadcast!=0) goto label0;
+ if (consumerGroupInfo==null) goto label1;
+ $stack4=org.apache.rocketmq.remoting.protocol.heartbeat.MessageModel.BROADCASTING;
+ $stack5 = consumerGroupInfo.getMessageModel();
+ proxyPullBroadcast = $stack4.equals((java.lang.Object)$stack5);
+ if (proxyPullBroadcast==0) goto label1;
+ $stack7=org.apache.rocketmq.remoting.protocol.heartbeat.ConsumeType.CONSUME_PASSIVELY;
+ $stack8 = consumerGroupInfo.getConsumeType();
+ proxyPullBroadcast = $stack7.equals((java.lang.Object)$stack8);
+ if (proxyPullBroadcast==0) goto label1;
+ label0:proxyPullBroadcast=1;
+ goto label2;
+ label1:proxyPullBroadcast=0;
+ label2:return  proxyPullBroadcast;
+ } 
+

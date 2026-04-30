@@ -1,0 +1,40 @@
+java.lang.Long org.apache.rocketmq.tieredstore.TieredMessageStore:lambda$getMessageStoreTimeStampAsync$3(java.lang.String topic,com.google.common.base.Stopwatch stopwatch,int queueId,long consumeQueueOffset,java.lang.Long @time)
+{
+io.opentelemetry.api.common.Attributes latencyAttributes;
+  io.opentelemetry.api.common.AttributesBuilder $stack8;
+  java.util.concurrent.TimeUnit $stack12;
+  io.opentelemetry.api.metrics.LongHistogram $stack13;
+  long $stack14;
+  byte $stack16;
+  java.lang.Object[] $stack17;
+  org.apache.rocketmq.logging.org.slf4j.Logger $stack18;
+  java.lang.Integer $stack21;
+  org.apache.rocketmq.store.MessageStore $stack24;
+  java.lang.Long time;
+time=@time;
+$stack8 = org.apache.rocketmq.tieredstore.metrics.TieredStoreMetricsManager.newAttributesBuilder();
+ $stack8 = $stack8.put("operation","get_time_by_offset");
+ $stack8 = $stack8.put("topic",topic);
+ latencyAttributes = $stack8.build();
+ $stack13=org.apache.rocketmq.tieredstore.metrics.TieredStoreMetricsManager.apiLatency;
+ $stack12=java.util.concurrent.TimeUnit.MILLISECONDS;
+ $stack14 = stopwatch.elapsed($stack12);
+ $stack13.record($stack14,latencyAttributes);
+ $stack14 = time.longValue();
+ $stack16=($stack14 cmp -1L);
+ if ($stack16!=0) goto label0;
+ $stack18=org.apache.rocketmq.tieredstore.TieredMessageStore.logger;
+ $stack17=new java.lang.Object[3];
+ $stack17[0]=topic;
+ $stack21 = java.lang.Integer.valueOf(queueId);
+ $stack17[1]=$stack21;
+ time = java.lang.Long.valueOf(consumeQueueOffset);
+ $stack17[2]=time;
+ $stack18.debug("TieredMessageStore#getMessageStoreTimeStampAsync: get message time failed, try to get message time from next store: topic: {}, queue: {}, queue offset: {}",$stack17);
+ $stack24=this.next;
+ consumeQueueOffset = $stack24.getMessageStoreTimeStamp(topic,queueId,consumeQueueOffset);
+ time = java.lang.Long.valueOf(consumeQueueOffset);
+ return  time;
+ label0:return  time;
+ } 
+

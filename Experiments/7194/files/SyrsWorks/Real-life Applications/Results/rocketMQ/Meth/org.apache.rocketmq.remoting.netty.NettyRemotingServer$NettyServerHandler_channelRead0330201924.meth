@@ -1,0 +1,27 @@
+void org.apache.rocketmq.remoting.netty.NettyRemotingServer$NettyServerHandler:channelRead0(io.netty.channel.ChannelHandlerContext ctx,org.apache.rocketmq.remoting.protocol.RemotingCommand msg)
+{
+int localPort;
+  org.apache.rocketmq.remoting.netty.NettyRemotingAbstract remotingAbstract;
+  io.netty.channel.Channel $stack5;
+  java.net.SocketAddress $stack6;
+  org.apache.rocketmq.remoting.netty.NettyRemotingServer $stack8;
+  java.util.concurrent.ConcurrentMap $stack9;
+  java.lang.Integer $stack10;
+  java.lang.Object $stack11;
+  $stack5 = ctx.channel();
+ $stack6 = $stack5.localAddress();
+ localPort = org.apache.rocketmq.remoting.common.RemotingHelper.parseSocketAddressPort($stack6);
+ $stack8=this.this$0;
+ $stack9 = org.apache.rocketmq.remoting.netty.NettyRemotingServer.access$300($stack8);
+ $stack10 = java.lang.Integer.valueOf(localPort);
+ $stack11 = $stack9.get((java.lang.Object)$stack10);
+ remotingAbstract=(org.apache.rocketmq.remoting.netty.NettyRemotingAbstract) $stack11;
+ if (localPort==-1) goto label0;
+ if (remotingAbstract==null) goto label0;
+ remotingAbstract.processMessageReceived(ctx,msg);
+ return;
+ label0:$stack5 = ctx.channel();
+ org.apache.rocketmq.remoting.common.RemotingHelper.closeChannel($stack5);
+ return;
+ } 
+

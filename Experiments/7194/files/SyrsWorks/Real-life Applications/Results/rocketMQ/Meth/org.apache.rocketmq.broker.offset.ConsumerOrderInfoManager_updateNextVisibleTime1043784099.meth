@@ -1,0 +1,57 @@
+void org.apache.rocketmq.broker.offset.ConsumerOrderInfoManager:updateNextVisibleTime(java.lang.String topic,java.lang.String group,int queueId,long queueOffset,long popTime,long nextVisibleTime)
+{
+java.lang.String key;
+  java.util.concurrent.ConcurrentHashMap qs;
+  org.apache.rocketmq.broker.offset.ConsumerOrderInfoManager$OrderInfo orderInfo;
+  java.lang.Object $stack15;
+  java.lang.Integer $stack16;
+  long $stack18;
+  byte $stack19;
+  java.lang.Object[] $stack20;
+  org.apache.rocketmq.logging.org.slf4j.Logger $stack21;
+  java.lang.Long $stack24;
+  key = org.apache.rocketmq.broker.offset.ConsumerOrderInfoManager.buildKey(topic,group);
+ qs=this.table;
+ $stack15 = qs.get((java.lang.Object)key);
+ qs=(java.util.concurrent.ConcurrentHashMap) $stack15;
+ if (qs!=null) goto label0;
+ $stack21=org.apache.rocketmq.broker.offset.ConsumerOrderInfoManager.log;
+ $stack20=new java.lang.Object[3];
+ $stack20[0]=key;
+ $stack24 = java.lang.Long.valueOf(queueOffset);
+ $stack20[1]=$stack24;
+ $stack16 = java.lang.Integer.valueOf(queueId);
+ $stack20[2]=$stack16;
+ $stack21.warn("orderInfo of queueId is null. key: {}, queueOffset: {}, queueId: {}",$stack20);
+ return;
+ label0:$stack16 = java.lang.Integer.valueOf(queueId);
+ $stack15 = qs.get((java.lang.Object)$stack16);
+ orderInfo=(org.apache.rocketmq.broker.offset.ConsumerOrderInfoManager$OrderInfo) $stack15;
+ if (orderInfo!=null) goto label1;
+ $stack21=org.apache.rocketmq.broker.offset.ConsumerOrderInfoManager.log;
+ $stack20=new java.lang.Object[3];
+ $stack20[0]=key;
+ $stack24 = java.lang.Long.valueOf(queueOffset);
+ $stack20[1]=$stack24;
+ $stack16 = java.lang.Integer.valueOf(queueId);
+ $stack20[2]=$stack16;
+ $stack21.warn("orderInfo is null, key: {}, queueOffset: {}, queueId: {}",$stack20);
+ return;
+ label1:$stack18 = org.apache.rocketmq.broker.offset.ConsumerOrderInfoManager$OrderInfo.access$200(orderInfo);
+ $stack19=(popTime cmp $stack18);
+ if ($stack19==0) goto label2;
+ $stack21=org.apache.rocketmq.broker.offset.ConsumerOrderInfoManager.log;
+ $stack20=new java.lang.Object[4];
+ $stack20[0]=key;
+ $stack24 = java.lang.Long.valueOf(queueOffset);
+ $stack20[1]=$stack24;
+ $stack20[2]=orderInfo;
+ $stack24 = java.lang.Long.valueOf(popTime);
+ $stack20[3]=$stack24;
+ $stack21.warn("popTime is not equal to orderInfo saved. key: {}, queueOffset: {}, orderInfo: {}, popTime: {}",$stack20);
+ return;
+ label2:orderInfo.updateOffsetNextVisibleTime(queueOffset,nextVisibleTime);
+ this#org.apache.rocketmq.broker.offset.ConsumerOrderInfoManager:updateLockFreeTimestamp(topic,group,queueId,orderInfo);
+ return;
+ } 
+

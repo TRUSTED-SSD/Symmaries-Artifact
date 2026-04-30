@@ -1,0 +1,36 @@
+org.apache.bookkeeper.streaming.LedgerInputStream(org.apache.bookkeeper.client.LedgerHandle lh)
+{
+int $stack2;
+  byte[] $stack3;
+  java.nio.ByteBuffer $stack5;
+  java.nio.ByteBuffer $stack7;
+  long $stack10;
+  long $stack12;
+  java.util.Enumeration $stack15;
+  this#java.io.InputStream();
+ this.lastEntry=0L;
+ this.increment=50;
+ this.defaultSize=1048576;
+ this.ledgerSeq=null;
+ this.lh=lh;
+ $stack2=this.defaultSize;
+ $stack3=new byte[$stack2];
+ this.bbytes=$stack3;
+ $stack3=this.bbytes;
+ $stack5 = java.nio.ByteBuffer.wrap($stack3);
+ this.bytebuff=$stack5;
+ $stack7=this.bytebuff;
+ $stack5=this.bytebuff;
+ $stack2 = $stack5.limit();
+ $stack7.position($stack2);
+ $stack10 = lh.getLastAddConfirmed();
+ $stack2=this.increment;
+ $stack12=(long) $stack2;
+ $stack10 = java.lang.Math.min($stack10,$stack12);
+ this.lastEntry=$stack10;
+ $stack10=this.lastEntry;
+ $stack15 = lh.readEntries(0L,$stack10);
+ this.ledgerSeq=$stack15;
+ return;
+ } 
+

@@ -1,0 +1,40 @@
+org.apache.rocketmq.store.queue.ConsumeQueueInterface org.apache.rocketmq.store.queue.ConsumeQueueStore:createConsumeQueueByType(org.apache.rocketmq.common.attribute.CQType cqType,java.lang.String @topic,int queueId,java.lang.String storePath)
+{
+org.apache.rocketmq.common.attribute.CQType $stack5;
+  boolean $stack6;
+  java.lang.RuntimeException $stack9;
+  java.lang.Object[] $stack10;
+  org.apache.rocketmq.store.queue.BatchConsumeQueue $stack15;
+  org.apache.rocketmq.store.config.MessageStoreConfig $stack16;
+  int $stack17;
+  org.apache.rocketmq.store.DefaultMessageStore $stack18;
+  org.apache.rocketmq.store.ConsumeQueue $stack19;
+  java.lang.String topic;
+topic=@topic;
+$stack5=org.apache.rocketmq.common.attribute.CQType.SimpleCQ;
+ $stack6 = java.util.Objects.equals((java.lang.Object)$stack5,(java.lang.Object)cqType);
+ if ($stack6==0) goto label0;
+ $stack19=new org.apache.rocketmq.store.ConsumeQueue;
+ $stack16=this.messageStoreConfig;
+ $stack17 = $stack16.getMappedFileSizeConsumeQueue();
+ $stack18=this.messageStore;
+ $stack19#org.apache.rocketmq.store.ConsumeQueue(topic,queueId,storePath,$stack17,(org.apache.rocketmq.store.MessageStore)$stack18);
+ return  $stack19;
+ label0:$stack5=org.apache.rocketmq.common.attribute.CQType.BatchCQ;
+ $stack6 = java.util.Objects.equals((java.lang.Object)$stack5,(java.lang.Object)cqType);
+ if ($stack6==0) goto label1;
+ $stack15=new org.apache.rocketmq.store.queue.BatchConsumeQueue;
+ $stack16=this.messageStoreConfig;
+ $stack17 = $stack16.getMapperFileSizeBatchConsumeQueue();
+ $stack18=this.messageStore;
+ $stack15#org.apache.rocketmq.store.queue.BatchConsumeQueue(topic,queueId,storePath,$stack17,(org.apache.rocketmq.store.MessageStore)$stack18);
+ return  $stack15;
+ label1:$stack9=new java.lang.RuntimeException;
+ $stack10=new java.lang.Object[1];
+ topic = cqType.toString();
+ $stack10[0]=topic;
+ topic = java.lang.String.format("queue type %s is not supported.",$stack10);
+ $stack9#java.lang.RuntimeException(topic);
+ throw $stack9;
+ } 
+

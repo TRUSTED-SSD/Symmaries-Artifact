@@ -1,0 +1,32 @@
+void org.apache.kerby.asn1.type.Asn1CollectionType:encodeBody(java.nio.ByteBuffer buffer)
+{
+int i;
+  org.apache.kerby.asn1.type.Asn1Type field;
+  org.apache.kerby.asn1.TaggingOption taggingOption;
+  org.apache.kerby.asn1.type.Asn1Type[] $stack5;
+  int $stack6;
+  org.apache.kerby.asn1.Asn1FieldInfo[] $stack10;
+  org.apache.kerby.asn1.Asn1FieldInfo $stack11;
+  boolean $stack12;
+  i=0;
+ label0:$stack5=this.fields;
+ $stack6=#$stack5;
+ if (i>=$stack6) goto label1;
+ $stack5=this.fields;
+ field=$stack5[i];
+ if (field==null) goto label2;
+ $stack10=this.fieldInfos;
+ $stack11=$stack10[i];
+ $stack12 = $stack11.isTagged();
+ if ($stack12==0) goto label3;
+ $stack10=this.fieldInfos;
+ $stack11=$stack10[i];
+ taggingOption = $stack11.getTaggingOption();
+ field.taggedEncode(buffer,taggingOption);
+ goto label2;
+ label3:field.encode(buffer);
+ label2:i=(i+1);
+ goto label0;
+ label1:return;
+ } 
+

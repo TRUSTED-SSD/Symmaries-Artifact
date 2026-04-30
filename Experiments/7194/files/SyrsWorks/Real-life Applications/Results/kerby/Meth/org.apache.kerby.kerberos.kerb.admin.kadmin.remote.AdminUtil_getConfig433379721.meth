@@ -1,0 +1,36 @@
+static org.apache.kerby.kerberos.kerb.admin.kadmin.remote.AdminConfig org.apache.kerby.kerberos.kerb.admin.kadmin.remote.AdminUtil:getConfig(java.io.File @confDir)
+{
+org.apache.kerby.kerberos.kerb.admin.kadmin.remote.AdminConfig adminConfig;
+  java.io.IOException e;
+  java.io.File $stack4;
+  boolean $stack5;
+  org.apache.kerby.kerberos.kerb.KrbException $stack7;
+  java.lang.StringBuilder $stack10;
+  java.lang.String $stack12;
+  java.io.File confDir;
+confDir=@confDir;
+$stack4=new java.io.File;
+ $stack4#java.io.File(confDir,"krb5.conf");
+ confDir=$stack4;
+ $stack5 = $stack4.exists();
+ if ($stack5!=0) goto label0;
+ $stack7=new org.apache.kerby.kerberos.kerb.KrbException;
+ $stack7#org.apache.kerby.kerberos.kerb.KrbException("krb5.conf not found");
+ throw $stack7;
+ label0:adminConfig=new org.apache.kerby.kerberos.kerb.admin.kadmin.remote.AdminConfig;
+ adminConfig#org.apache.kerby.kerberos.kerb.admin.kadmin.remote.AdminConfig();
+ label1:adminConfig.addKrb5Config($stack4);
+ label2:return  adminConfig;
+ label3:e = catch;
+ $stack7=new org.apache.kerby.kerberos.kerb.KrbException;
+ $stack10=new java.lang.StringBuilder;
+ $stack10#java.lang.StringBuilder();
+ $stack10 = $stack10.append("Failed to load krb config ");
+ $stack12 = $stack4.getAbsolutePath();
+ $stack10 = $stack10.append($stack12);
+ $stack12 = $stack10.toString();
+ $stack7#org.apache.kerby.kerberos.kerb.KrbException($stack12);
+ throw $stack7;
+ catch java.io.IOException: label1 - label2 : label3;
+} 
+

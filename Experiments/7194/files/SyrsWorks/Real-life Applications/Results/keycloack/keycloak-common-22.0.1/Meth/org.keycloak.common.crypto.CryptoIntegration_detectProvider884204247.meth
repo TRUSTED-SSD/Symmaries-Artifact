@@ -1,0 +1,55 @@
+static org.keycloak.common.crypto.CryptoProvider org.keycloak.common.crypto.CryptoIntegration:detectProvider(java.lang.ClassLoader classLoader)
+{
+java.util.List foundProviders;
+  java.util.ServiceLoader $stack2;
+  java.util.Spliterator $stack3;
+  java.util.stream.Stream $stack4;
+  java.util.stream.Collector $stack5;
+  java.lang.Object $stack6;
+  boolean $stack7;
+  int $stack8;
+  org.jboss.logging.Logger $stack9;
+  org.keycloak.common.crypto.CryptoProvider $stack12;
+  java.lang.Class $stack13;
+  java.lang.String $stack14;
+  java.lang.IllegalStateException $stack17;
+  java.lang.StringBuilder $stack18;
+  $stack2 = java.util.ServiceLoader.load(org.keycloak.common.crypto.CryptoProvider,classLoader);
+ $stack3 = $stack2.spliterator();
+ $stack4 = java.util.stream.StreamSupport.stream($stack3,(boolean)0);
+ $stack5 = java.util.stream.Collectors.toList();
+ $stack6 = $stack4.collect($stack5);
+ foundProviders=(java.util.List) $stack6;
+ $stack7 = foundProviders.isEmpty();
+ if ($stack7==0) goto label0;
+ $stack17=new java.lang.IllegalStateException;
+ $stack18=new java.lang.StringBuilder;
+ $stack18#java.lang.StringBuilder();
+ $stack18 = $stack18.append("Not able to load any cryptoProvider with the classLoader: ");
+ $stack18 = $stack18.append((java.lang.Object)classLoader);
+ $stack14 = $stack18.toString();
+ $stack17#java.lang.IllegalStateException($stack14);
+ throw $stack17;
+ label0:$stack8 = foundProviders.size();
+ if ($stack8<=1) goto label1;
+ $stack17=new java.lang.IllegalStateException;
+ $stack18=new java.lang.StringBuilder;
+ $stack18#java.lang.StringBuilder();
+ $stack18 = $stack18.append("Multiple crypto providers loaded with the classLoader: ");
+ $stack18 = $stack18.append((java.lang.Object)classLoader);
+ $stack18 = $stack18.append(". Make sure only one cryptoProvider available on the classpath. Available providers: ");
+ $stack18 = $stack18.append((java.lang.Object)foundProviders);
+ $stack14 = $stack18.toString();
+ $stack17#java.lang.IllegalStateException($stack14);
+ throw $stack17;
+ label1:$stack9=org.keycloak.common.crypto.CryptoIntegration.logger;
+ $stack6 = foundProviders.get(0);
+ $stack12=(org.keycloak.common.crypto.CryptoProvider) $stack6;
+ $stack13 = $stack12.getClass();
+ $stack14 = $stack13.getName();
+ $stack9.debugf("Detected crypto provider: %s",(java.lang.Object)$stack14);
+ $stack6 = foundProviders.get(0);
+ $stack12=(org.keycloak.common.crypto.CryptoProvider) $stack6;
+ return  $stack12;
+ } 
+

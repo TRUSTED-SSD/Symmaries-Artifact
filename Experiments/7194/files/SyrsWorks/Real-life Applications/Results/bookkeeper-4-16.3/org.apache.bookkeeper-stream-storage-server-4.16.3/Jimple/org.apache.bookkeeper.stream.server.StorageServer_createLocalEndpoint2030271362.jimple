@@ -1,0 +1,64 @@
+    public static org.apache.bookkeeper.stream.proto.common.Endpoint createLocalEndpoint(int, boolean) throws java.net.UnknownHostException
+    {
+        int port;
+        boolean useHostname;
+        java.lang.String hostname;
+        org.slf4j.Logger $stack3;
+        java.net.InetAddress $stack4;
+        org.apache.bookkeeper.stream.proto.common.Endpoint$Builder $stack7;
+        org.apache.bookkeeper.stream.proto.common.Endpoint $stack10;
+
+        port := @parameter0: int;
+
+        useHostname := @parameter1: boolean;
+
+        $stack3 = <org.apache.bookkeeper.stream.server.StorageServer: org.slf4j.Logger log>;
+/*122*/
+
+        interfaceinvoke $stack3.<org.slf4j.Logger: void warn(java.lang.String)>("Determining hostname for stream storage");
+/*122*/
+
+        if useHostname == 0 goto label1;
+/*123*/
+
+        $stack4 = staticinvoke <java.net.InetAddress: java.net.InetAddress getLocalHost()>();
+/*124*/
+
+        hostname = virtualinvoke $stack4.<java.net.InetAddress: java.lang.String getCanonicalHostName()>();
+/*124*/
+/*124*/
+
+        goto label2;
+/*124*/
+
+     label1:
+        $stack4 = staticinvoke <java.net.InetAddress: java.net.InetAddress getLocalHost()>();
+/*126*/
+
+        hostname = virtualinvoke $stack4.<java.net.InetAddress: java.lang.String getHostAddress()>();
+/*126*/
+/*126*/
+
+     label2:
+        $stack3 = <org.apache.bookkeeper.stream.server.StorageServer: org.slf4j.Logger log>;
+/*129*/
+
+        interfaceinvoke $stack3.<org.slf4j.Logger: void warn(java.lang.String,java.lang.Object)>("Decided to use hostname {}", hostname);
+/*129*/
+
+        $stack7 = staticinvoke <org.apache.bookkeeper.stream.proto.common.Endpoint: org.apache.bookkeeper.stream.proto.common.Endpoint$Builder newBuilder()>();
+/*130*/
+
+        $stack7 = virtualinvoke $stack7.<org.apache.bookkeeper.stream.proto.common.Endpoint$Builder: org.apache.bookkeeper.stream.proto.common.Endpoint$Builder setHostname(java.lang.String)>(hostname);
+/*131*/
+
+        $stack7 = virtualinvoke $stack7.<org.apache.bookkeeper.stream.proto.common.Endpoint$Builder: org.apache.bookkeeper.stream.proto.common.Endpoint$Builder setPort(int)>(port);
+/*132*/
+
+        $stack10 = virtualinvoke $stack7.<org.apache.bookkeeper.stream.proto.common.Endpoint$Builder: org.apache.bookkeeper.stream.proto.common.Endpoint build()>();
+/*133*/
+
+        return $stack10;
+/*130*/
+    }
+

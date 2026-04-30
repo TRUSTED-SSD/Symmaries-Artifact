@@ -1,0 +1,47 @@
+digraph G {
+  node [shape=box, ];
+  "pc0_js1" [label="〈r2 = r1.toString (), js1〉\n\
+pc ⊑ ⊥ ∧ level(r1) ⊔ obj_level(r1) ⊑ ⊥",
+             ];
+  "pc1_js1" [label="〈$r3 = new java.util.FormatFlagsConversionMismatchException, js1〉",
+             ];
+  "pc2_js1" [label="〈$r3#java.util.FormatFlagsConversionMismatchException.init (r2, c0), js1〉\n\
+tt",
+             ];
+  "pc3_js1" [label="〈throw $r3, js1〉", ];
+  "pc4_js1" [label="〈sink, js1〉\n\
+obj_level(r1) ⊑ ret(obj_level(r1))' ∧ obj_level(this) ⊑ ret(obj_level(this))' ∧ (ret(this.><r1)' ∨ ¬this.><r1) ∧ (ret(this.><this)' ∨ ¬this.><this)",
+             ];
+  
+  
+  "pc0_js1" -> "pc1_js1" [label="tt,\n\
+{level(r2) := ⊤,\n\
+ obj_level(r1) := ⊤,\n\
+ obj_level(r2) := ⊤,\n\
+ obj_level(this) := obj_level(this) ⊔ (if this.><r1 then ⊤ else ⊥)}",
+                          ];
+  "pc1_js1" -> "pc2_js1" [label="tt,\n\
+{$r3.><$r3 := ff,\n\
+ $r3.><r2 := ff,\n\
+ $r3.><this := ff,\n\
+ r2.><$r3 := ff,\n\
+ this.><$r3 := ff,\n\
+ level($r3) := pc,\n\
+ obj_level($r3) := pc}",
+                          ];
+  "pc2_js1" -> "pc3_js1" [label="tt,\n\
+{$r3.><$r3 := ff,\n\
+ $r3.><r2 := ff,\n\
+ $r3.><this := ff,\n\
+ r2.><$r3 := ff,\n\
+ r2.><r2 := ff,\n\
+ r2.><this := ff,\n\
+ this.><$r3 := ff,\n\
+ this.><r2 := ff,\n\
+ obj_level($r3) := ⊤,\n\
+ obj_level(r2) := ⊤}",
+                          ];
+  "pc3_js1" -> "pc4_js1" [label="tt,\n\
+{ϕ := S3}", ];
+  
+  }

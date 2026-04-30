@@ -1,0 +1,51 @@
+org.apache.rocketmq.store.logfile.MappedFile org.apache.rocketmq.store.queue.SparseConsumeQueue:searchFileByOffsetOrRight(long msgOffset)
+{
+org.apache.rocketmq.store.logfile.MappedFile targetBcq;
+  boolean searchBcqByCacheEnable;
+  org.apache.rocketmq.store.logfile.MappedFile firstBcq;
+  org.apache.rocketmq.store.queue.BatchOffsetIndex minForFirstBcq;
+  org.apache.rocketmq.store.MessageStore $stack7;
+  org.apache.rocketmq.store.config.MessageStoreConfig $stack8;
+  org.apache.rocketmq.store.MappedFileQueue $stack13;
+  java.lang.Object[] $stack16;
+  java.lang.String $stack17;
+  int $stack18;
+  org.apache.rocketmq.logging.org.slf4j.Logger $stack19;
+  java.lang.Integer $stack22;
+  java.lang.Long $stack24;
+  long $stack25;
+  byte $stack26;
+  targetBcq=null;
+ $stack7=this.messageStore;
+ $stack8 = $stack7.getMessageStoreConfig();
+ searchBcqByCacheEnable = $stack8.isSearchBcqByCacheEnable();
+ if (searchBcqByCacheEnable==0) goto label0;
+ targetBcq = this.searchOffsetFromCacheOrRight(msgOffset);
+ if (targetBcq!=null) goto label1;
+ $stack13=this.mappedFileQueue;
+ firstBcq = $stack13.getFirstMappedFile();
+ minForFirstBcq = this.getMinMsgOffset(firstBcq,(boolean)0,(boolean)0);
+ if (minForFirstBcq==null) goto label2;
+ $stack25 = minForFirstBcq.getMsgOffset();
+ $stack26=($stack25 cmp msgOffset);
+ if ($stack26>0) goto label2;
+ $stack25=this.maxOffsetInQueue;
+ $stack26=(msgOffset cmp $stack25);
+ if ($stack26>=0) goto label2;
+ targetBcq = this.searchOffsetFromFilesOrRight(msgOffset);
+ label2:$stack19=org.apache.rocketmq.store.queue.BatchConsumeQueue.log;
+ $stack16=new java.lang.Object[4];
+ $stack17=this.topic;
+ $stack16[0]=$stack17;
+ $stack18=this.queueId;
+ $stack22 = java.lang.Integer.valueOf($stack18);
+ $stack16[1]=$stack22;
+ $stack24 = java.lang.Long.valueOf(msgOffset);
+ $stack16[2]=$stack24;
+ $stack16[3]=targetBcq;
+ $stack19.warn("cache is not working on BCQ [Topic: {}, QueueId: {}] for msgOffset: {}, targetBcq: {}",$stack16);
+ goto label1;
+ label0:targetBcq = this.searchOffsetFromFilesOrRight(msgOffset);
+ label1:return  targetBcq;
+ } 
+

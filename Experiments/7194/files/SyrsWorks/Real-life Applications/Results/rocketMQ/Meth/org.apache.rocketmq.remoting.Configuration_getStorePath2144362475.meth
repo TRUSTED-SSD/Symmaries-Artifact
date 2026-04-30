@@ -1,0 +1,46 @@
+java.lang.String org.apache.rocketmq.remoting.Configuration:getStorePath()
+{
+java.lang.String realStorePath;
+  java.lang.InterruptedException e;
+  java.util.concurrent.locks.ReadWriteLock $stack4;
+  java.util.concurrent.locks.Lock $stack5;
+  boolean $stack6;
+  java.lang.Object $stack9;
+  java.lang.reflect.Field $stack10;
+  org.apache.rocketmq.logging.org.slf4j.Logger $stack14;
+  java.lang.Throwable $stack16;
+  java.lang.IllegalAccessException $stack19;
+  realStorePath=null;
+ label0:$stack4=this.readWriteLock;
+ $stack5 = $stack4.readLock();
+ $stack5.lockInterruptibly();
+ label1:realStorePath=this.storePath;
+ $stack6=this.storePathFromConfig;
+ if ($stack6==0) goto label2;
+ label3:$stack10=this.storePathField;
+ $stack9=this.storePathObject;
+ $stack9 = $stack10.get($stack9);
+ realStorePath=(java.lang.String) $stack9;
+ label4:goto label2;
+ label5:$stack19 = catch;
+ $stack14=this.log;
+ $stack14.error("getStorePath error, ",(java.lang.Throwable)$stack19);
+ label2:$stack4=this.readWriteLock;
+ $stack5 = $stack4.readLock();
+ $stack5.unlock();
+ goto label6;
+ label7:$stack16 = catch;
+ $stack4=this.readWriteLock;
+ $stack5 = $stack4.readLock();
+ $stack5.unlock();
+ throw $stack16;
+ label6:goto label8;
+ label9:e = catch;
+ $stack14=this.log;
+ $stack14.error("getStorePath lock error");
+ label8:return  realStorePath;
+ catch java.lang.IllegalAccessException: label3 - label4 : label5;
+catch java.lang.Throwable: label1 - label2 : label7;
+catch java.lang.InterruptedException: label0 - label6 : label9;
+} 
+

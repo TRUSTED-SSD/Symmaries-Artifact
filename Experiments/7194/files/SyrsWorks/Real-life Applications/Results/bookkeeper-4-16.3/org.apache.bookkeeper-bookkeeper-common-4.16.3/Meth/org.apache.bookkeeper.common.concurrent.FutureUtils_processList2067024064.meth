@@ -1,0 +1,14 @@
+static java.util.concurrent.CompletableFuture org.apache.bookkeeper.common.concurrent.FutureUtils:processList(java.util.List collection,java.util.function.Function processFunc,java.util.concurrent.ExecutorService callbackExecutor)
+{
+org.apache.bookkeeper.common.concurrent.FutureUtils$ListFutureProcessor processor;
+  java.util.concurrent.CompletableFuture $stack5;
+  processor=new org.apache.bookkeeper.common.concurrent.FutureUtils$ListFutureProcessor;
+ processor#org.apache.bookkeeper.common.concurrent.FutureUtils$ListFutureProcessor(collection,processFunc,callbackExecutor);
+ if (null==callbackExecutor) goto label0;
+ callbackExecutor.submit((java.lang.Runnable)processor);
+ goto label1;
+ label0:processor.run();
+ label1:$stack5 = org.apache.bookkeeper.common.concurrent.FutureUtils$ListFutureProcessor.access$100(processor);
+ return  $stack5;
+ } 
+

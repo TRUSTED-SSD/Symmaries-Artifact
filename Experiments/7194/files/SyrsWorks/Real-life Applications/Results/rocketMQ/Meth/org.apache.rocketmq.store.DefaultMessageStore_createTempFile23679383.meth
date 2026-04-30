@@ -1,0 +1,36 @@
+void org.apache.rocketmq.store.DefaultMessageStore:createTempFile()
+{
+java.lang.String fileName;
+  java.io.File file;
+  boolean result;
+  org.apache.rocketmq.store.config.MessageStoreConfig $stack4;
+  java.lang.String $stack8;
+  java.lang.StringBuilder $stack10;
+  org.apache.rocketmq.logging.org.slf4j.Logger $stack11;
+  long $stack15;
+  $stack4=this.messageStoreConfig;
+ fileName = $stack4.getStorePathRootDir();
+ fileName = org.apache.rocketmq.store.config.StorePathConfigHelper.getAbortFile(fileName);
+ file=new java.io.File;
+ file#java.io.File(fileName);
+ $stack8 = file.getParent();
+ org.apache.rocketmq.common.UtilAll.ensureDirOK($stack8);
+ result = file.createNewFile();
+ $stack11=org.apache.rocketmq.store.DefaultMessageStore.LOGGER;
+ $stack10=new java.lang.StringBuilder;
+ $stack10#java.lang.StringBuilder();
+ $stack10 = $stack10.append(fileName);
+ if (result==0) goto label0;
+ fileName=" create OK";
+ goto label1;
+ label0:fileName=" already exists";
+ label1:$stack10 = $stack10.append(fileName);
+ fileName = $stack10.toString();
+ $stack11.info(fileName);
+ $stack15 = org.apache.rocketmq.common.MixAll.getPID();
+ fileName = java.lang.Long.toString($stack15);
+ $stack8 = file.getAbsolutePath();
+ org.apache.rocketmq.common.MixAll.string2File(fileName,$stack8);
+ return;
+ } 
+

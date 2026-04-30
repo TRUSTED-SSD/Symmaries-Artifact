@@ -1,0 +1,33 @@
+org.apache.rocketmq.store.index.IndexFile org.apache.rocketmq.store.index.IndexService:putKey(org.apache.rocketmq.store.index.IndexFile @indexFile,org.apache.rocketmq.store.DispatchRequest msg,java.lang.String idxKey)
+{
+boolean ok;
+  long $stack5;
+  long $stack6;
+  java.lang.StringBuilder $stack8;
+  org.apache.rocketmq.logging.org.slf4j.Logger $stack9;
+  java.lang.String $stack11;
+  org.apache.rocketmq.store.index.IndexFile indexFile;
+indexFile=@indexFile;
+$stack5 = msg.getCommitLogOffset();
+ $stack6 = msg.getStoreTimestamp();
+ ok = indexFile.putKey(idxKey,$stack5,$stack6);
+ label0:if (ok!=0) goto label1;
+ $stack9=org.apache.rocketmq.store.index.IndexService.LOGGER;
+ $stack8=new java.lang.StringBuilder;
+ $stack8#java.lang.StringBuilder();
+ $stack8 = $stack8.append("Index file [");
+ $stack11 = indexFile.getFileName();
+ $stack8 = $stack8.append($stack11);
+ $stack8 = $stack8.append("] is full, trying to create another one");
+ $stack11 = $stack8.toString();
+ $stack9.warn($stack11);
+ indexFile = this.retryGetAndCreateIndexFile();
+ if (null!=indexFile) goto label2;
+ return  null;
+ label2:$stack5 = msg.getCommitLogOffset();
+ $stack6 = msg.getStoreTimestamp();
+ ok = indexFile.putKey(idxKey,$stack5,$stack6);
+ goto label0;
+ label1:return  indexFile;
+ } 
+

@@ -1,0 +1,40 @@
+org.apache.bookkeeper.bookie.stats.GarbageCollectorStats(org.apache.bookkeeper.stats.StatsLogger statsLogger,java.util.function.Supplier activeEntryLogCountSupplier,java.util.function.Supplier activeEntryLogSpaceBytesSupplier,java.util.function.Supplier activeLedgerCountSupplier)
+{
+org.apache.bookkeeper.stats.Counter $stack5;
+  org.apache.bookkeeper.stats.OpStatsLogger $stack9;
+  org.apache.bookkeeper.bookie.stats.GarbageCollectorStats$1 $stack11;
+  org.apache.bookkeeper.stats.Gauge $stack12;
+  org.apache.bookkeeper.bookie.stats.GarbageCollectorStats$2 $stack13;
+  org.apache.bookkeeper.bookie.stats.GarbageCollectorStats$3 $stack15;
+  this#java.lang.Object();
+ this.statsLogger=statsLogger;
+ $stack5 = statsLogger.getCounter("MINOR_COMPACTION_TOTAL");
+ this.minorCompactionCounter=$stack5;
+ $stack5 = statsLogger.getCounter("MAJOR_COMPACTION_TOTAL");
+ this.majorCompactionCounter=$stack5;
+ $stack5 = statsLogger.getCounter("RECLAIMED_COMPACTION_SPACE_BYTES");
+ this.reclaimedSpaceViaCompaction=$stack5;
+ $stack5 = statsLogger.getCounter("RECLAIMED_DELETION_SPACE_BYTES");
+ this.reclaimedSpaceViaDeletes=$stack5;
+ $stack9 = statsLogger.getOpStatsLogger("THREAD_RUNTIME");
+ this.gcThreadRuntime=$stack9;
+ $stack5 = statsLogger.getCounter("DELETED_LEDGER_TOTAL");
+ this.deletedLedgerCounter=$stack5;
+ $stack11=new org.apache.bookkeeper.bookie.stats.GarbageCollectorStats$1;
+ $stack11#org.apache.bookkeeper.bookie.stats.GarbageCollectorStats$1(this,activeEntryLogCountSupplier);
+ this.activeEntryLogCountGauge=$stack11;
+ $stack12=this.activeEntryLogCountGauge;
+ statsLogger.registerGauge("ACTIVE_ENTRY_LOG_TOTAL",$stack12);
+ $stack13=new org.apache.bookkeeper.bookie.stats.GarbageCollectorStats$2;
+ $stack13#org.apache.bookkeeper.bookie.stats.GarbageCollectorStats$2(this,activeEntryLogSpaceBytesSupplier);
+ this.activeEntryLogSpaceBytesGauge=$stack13;
+ $stack12=this.activeEntryLogSpaceBytesGauge;
+ statsLogger.registerGauge("ACTIVE_ENTRY_LOG_SPACE_BYTES",$stack12);
+ $stack15=new org.apache.bookkeeper.bookie.stats.GarbageCollectorStats$3;
+ $stack15#org.apache.bookkeeper.bookie.stats.GarbageCollectorStats$3(this,activeLedgerCountSupplier);
+ this.activeLedgerCountGauge=$stack15;
+ $stack12=this.activeLedgerCountGauge;
+ statsLogger.registerGauge("ACTIVE_LEDGER_TOTAL",$stack12);
+ return;
+ } 
+

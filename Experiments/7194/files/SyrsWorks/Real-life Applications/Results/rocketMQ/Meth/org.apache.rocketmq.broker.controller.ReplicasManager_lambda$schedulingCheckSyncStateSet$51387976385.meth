@@ -1,0 +1,40 @@
+void org.apache.rocketmq.broker.controller.ReplicasManager:lambda$schedulingCheckSyncStateSet$5()
+{
+java.util.Set newSyncStateSet;
+  org.apache.rocketmq.broker.controller.ReplicasManager l2;
+  java.lang.Throwable l3;
+  org.apache.rocketmq.store.ha.autoswitch.AutoSwitchHAService $stack4;
+  java.lang.String $stack6;
+  boolean $stack7;
+  java.util.Set $stack9;
+  int $stack12;
+  int $stack13;
+  $stack4=this.haService;
+ newSyncStateSet = $stack4.maybeShrinkInSyncStateSet();
+ $stack6=this.localAddress;
+ newSyncStateSet.add((java.lang.Object)$stack6);
+ l2=this;
+ monitorenter this;
+ label0:$stack9=this.syncStateSet;
+ if ($stack9==null) goto label1;
+ $stack9=this.syncStateSet;
+ $stack12 = $stack9.size();
+ $stack13 = newSyncStateSet.size();
+ if ($stack12!=$stack13) goto label1;
+ $stack9=this.syncStateSet;
+ $stack7 = $stack9.containsAll((java.util.Collection)newSyncStateSet);
+ if ($stack7==0) goto label1;
+ monitorexit this;
+ label2:return;
+ label1:monitorexit this;
+ label3:goto label4;
+ label5:l3 = catch;
+ monitorexit this;
+ label6:throw l3;
+ label4:this#org.apache.rocketmq.broker.controller.ReplicasManager:doReportSyncStateSetChanged(newSyncStateSet);
+ return;
+ catch java.lang.Throwable: label0 - label2 : label5;
+catch java.lang.Throwable: label1 - label3 : label5;
+catch java.lang.Throwable: label5 - label6 : label5;
+} 
+

@@ -1,0 +1,36 @@
+void org.apache.bookkeeper.meta.MSLedgerManagerFactory$AsyncSetProcessor$1:processResult(int rc,java.lang.String path,java.lang.Object @ctx)
+{
+int $stack6;
+  java.util.Iterator $stack7;
+  boolean $stack8;
+  org.apache.bookkeeper.meta.MSLedgerManagerFactory$AsyncSetProcessor $stack11;
+  org.apache.bookkeeper.meta.MSLedgerManagerFactory$AsyncSetProcessor$1$1 $stack12;
+  java.util.concurrent.ScheduledExecutorService $stack13;
+  org.apache.zookeeper.AsyncCallback$VoidCallback $stack17;
+  java.lang.Object ctx;
+ctx=@ctx;
+$stack6=this.val$successRc;
+ if (rc==$stack6) goto label0;
+ $stack17=this.val$finalCb;
+ rc=this.val$failureRc;
+ ctx=this.val$context;
+ $stack17.processResult(rc,null,ctx);
+ return;
+ label0:$stack7=this.val$iter;
+ $stack8 = $stack7.hasNext();
+ if ($stack8!=0) goto label1;
+ $stack17=this.val$finalCb;
+ rc=this.val$successRc;
+ ctx=this.val$context;
+ $stack17.processResult(rc,null,ctx);
+ return;
+ label1:$stack7=this.val$iter;
+ ctx = $stack7.next();
+ $stack11=this.this$0;
+ $stack13=$stack11.scheduler;
+ $stack12=new org.apache.bookkeeper.meta.MSLedgerManagerFactory$AsyncSetProcessor$1$1;
+ $stack12#org.apache.bookkeeper.meta.MSLedgerManagerFactory$AsyncSetProcessor$1$1(this,ctx,(org.apache.zookeeper.AsyncCallback$VoidCallback)this);
+ $stack13.submit((java.lang.Runnable)$stack12);
+ return;
+ } 
+

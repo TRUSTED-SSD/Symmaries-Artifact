@@ -1,0 +1,52 @@
+static void org.apache.kerby.kerberos.kerb.request.ApRequest:validate(org.apache.kerby.kerberos.kerb.type.base.EncryptionKey @encKey,org.apache.kerby.kerberos.kerb.type.ap.ApReq apReq)
+{
+org.apache.kerby.kerberos.kerb.type.ticket.Ticket ticket;
+  org.apache.kerby.kerberos.kerb.type.ticket.EncTicketPart encPart;
+  org.apache.kerby.kerberos.kerb.type.ap.Authenticator authenticator;
+  org.apache.kerby.kerberos.kerb.type.base.EncryptedData $stack6;
+  org.apache.kerby.kerberos.kerb.type.base.KeyUsage $stack7;
+  org.apache.kerby.asn1.type.Asn1Type $stack8;
+  org.apache.kerby.kerberos.kerb.type.base.PrincipalName $stack11;
+  org.apache.kerby.kerberos.kerb.type.base.PrincipalName $stack13;
+  boolean $stack14;
+  java.lang.String $stack15;
+  java.lang.String $stack17;
+  org.apache.kerby.kerberos.kerb.KrbException $stack19;
+  org.apache.kerby.kerberos.kerb.KrbErrorCode $stack20;
+  org.apache.kerby.kerberos.kerb.type.base.EncryptionKey encKey;
+encKey=@encKey;
+ticket = apReq.getTicket();
+ if (encKey!=null) goto label0;
+ $stack19=new org.apache.kerby.kerberos.kerb.KrbException;
+ $stack20=org.apache.kerby.kerberos.kerb.KrbErrorCode.KRB_AP_ERR_NOKEY;
+ $stack19#org.apache.kerby.kerberos.kerb.KrbException($stack20);
+ throw $stack19;
+ label0:$stack6 = ticket.getEncryptedEncPart();
+ $stack7=org.apache.kerby.kerberos.kerb.type.base.KeyUsage.KDC_REP_TICKET;
+ $stack8 = org.apache.kerby.kerberos.kerb.common.EncryptionUtil.unseal($stack6,encKey,$stack7,org.apache.kerby.kerberos.kerb.type.ticket.EncTicketPart);
+ encPart=(org.apache.kerby.kerberos.kerb.type.ticket.EncTicketPart) $stack8;
+ ticket.setEncPart(encPart);
+ encKey = encPart.getKey();
+ org.apache.kerby.kerberos.kerb.request.ApRequest.unsealAuthenticator(encKey,apReq);
+ authenticator = apReq.getAuthenticator();
+ $stack11 = authenticator.getCname();
+ encPart = ticket.getEncPart();
+ $stack13 = encPart.getCname();
+ $stack14 = $stack11.equals((java.lang.Object)$stack13);
+ if ($stack14!=0) goto label1;
+ $stack19=new org.apache.kerby.kerberos.kerb.KrbException;
+ $stack20=org.apache.kerby.kerberos.kerb.KrbErrorCode.KRB_AP_ERR_BADMATCH;
+ $stack19#org.apache.kerby.kerberos.kerb.KrbException($stack20);
+ throw $stack19;
+ label1:$stack15 = authenticator.getCrealm();
+ encPart = ticket.getEncPart();
+ $stack17 = encPart.getCrealm();
+ $stack14 = $stack15.equals((java.lang.Object)$stack17);
+ if ($stack14!=0) goto label2;
+ $stack19=new org.apache.kerby.kerberos.kerb.KrbException;
+ $stack20=org.apache.kerby.kerberos.kerb.KrbErrorCode.KRB_AP_ERR_BADMATCH;
+ $stack19#org.apache.kerby.kerberos.kerb.KrbException($stack20);
+ throw $stack19;
+ label2:return;
+ } 
+

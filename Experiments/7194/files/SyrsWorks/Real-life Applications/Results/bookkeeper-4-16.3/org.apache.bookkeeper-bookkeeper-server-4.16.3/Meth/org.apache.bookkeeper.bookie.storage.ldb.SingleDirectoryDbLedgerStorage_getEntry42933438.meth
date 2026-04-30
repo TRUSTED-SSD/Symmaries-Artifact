@@ -1,0 +1,21 @@
+io.netty.buffer.ByteBuf org.apache.bookkeeper.bookie.storage.ldb.SingleDirectoryDbLedgerStorage:getEntry(long ledgerId,long entryId)
+{
+long startTime;
+  io.netty.buffer.ByteBuf entry;
+  org.apache.bookkeeper.bookie.storage.ldb.DbLedgerStorageStats $stack10;
+  org.apache.bookkeeper.stats.OpStatsLogger $stack11;
+  java.io.IOException $stack12;
+  startTime = org.apache.bookkeeper.util.MathUtils.nowInNano();
+ label0:entry = this#org.apache.bookkeeper.bookie.storage.ldb.SingleDirectoryDbLedgerStorage:doGetEntry(ledgerId,entryId);
+ $stack10=this.dbLedgerStorageStats;
+ $stack11 = $stack10.getReadEntryStats();
+ this#org.apache.bookkeeper.bookie.storage.ldb.SingleDirectoryDbLedgerStorage:recordSuccessfulEvent($stack11,startTime);
+ label1:return  entry;
+ label2:$stack12 = catch;
+ $stack10=this.dbLedgerStorageStats;
+ $stack11 = $stack10.getReadEntryStats();
+ this#org.apache.bookkeeper.bookie.storage.ldb.SingleDirectoryDbLedgerStorage:recordFailedEvent($stack11,startTime);
+ throw $stack12;
+ catch java.io.IOException: label0 - label1 : label2;
+} 
+

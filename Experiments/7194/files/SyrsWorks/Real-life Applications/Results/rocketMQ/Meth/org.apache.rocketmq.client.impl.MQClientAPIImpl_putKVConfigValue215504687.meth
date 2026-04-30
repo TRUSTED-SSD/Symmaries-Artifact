@@ -1,0 +1,55 @@
+void org.apache.rocketmq.client.impl.MQClientAPIImpl:putKVConfigValue(java.lang.String @namespace,java.lang.String key,java.lang.String value,long timeoutMillis)
+{
+org.apache.rocketmq.remoting.protocol.header.namesrv.PutKVConfigRequestHeader requestHeader;
+  org.apache.rocketmq.remoting.protocol.RemotingCommand request;
+  java.util.List nameServerAddressList;
+  org.apache.rocketmq.remoting.protocol.RemotingCommand errResponse;
+  java.util.Iterator l10;
+  org.apache.rocketmq.remoting.protocol.RemotingCommand response;
+  org.apache.rocketmq.remoting.RemotingClient $stack15;
+  boolean $stack18;
+  org.apache.rocketmq.client.exception.MQClientException $stack19;
+  int $stack20;
+  java.lang.Object $stack22;
+  java.lang.AssertionError $stack29;
+  java.lang.String namespace;
+namespace=@namespace;
+requestHeader=new org.apache.rocketmq.remoting.protocol.header.namesrv.PutKVConfigRequestHeader;
+ requestHeader#org.apache.rocketmq.remoting.protocol.header.namesrv.PutKVConfigRequestHeader();
+ requestHeader.setNamespace(namespace);
+ requestHeader.setKey(key);
+ requestHeader.setValue(value);
+ request = org.apache.rocketmq.remoting.protocol.RemotingCommand.createRequestCommand(100,(org.apache.rocketmq.remoting.CommandCustomHeader)requestHeader);
+ $stack15=this.remotingClient;
+ nameServerAddressList = $stack15.getNameServerAddressList();
+ if (nameServerAddressList==null) goto label0;
+ errResponse=null;
+ l10 = nameServerAddressList.iterator();
+ label1:$stack18 = l10.hasNext();
+ if ($stack18==0) goto label2;
+ $stack22 = l10.next();
+ namespace=(java.lang.String) $stack22;
+ $stack15=this.remotingClient;
+ response = $stack15.invokeSync(namespace,request,timeoutMillis);
+ $stack18=org.apache.rocketmq.client.impl.MQClientAPIImpl.$assertionsDisabled;
+ if ($stack18!=0) goto label3;
+ if (response!=null) goto label3;
+ $stack29=new java.lang.AssertionError;
+ $stack29#java.lang.AssertionError();
+ throw $stack29;
+ label3:$stack20 = response.getCode();
+ switch [$stack20]
+if 0 goto label4;
+goto label5;
+ label4:goto label6;
+ label5:errResponse=response;
+ label6:goto label1;
+ label2:if (errResponse==null) goto label0;
+ $stack19=new org.apache.rocketmq.client.exception.MQClientException;
+ $stack20 = errResponse.getCode();
+ namespace = errResponse.getRemark();
+ $stack19#org.apache.rocketmq.client.exception.MQClientException($stack20,namespace);
+ throw $stack19;
+ label0:return;
+ } 
+

@@ -1,0 +1,9 @@
+org.apache.rocketmq.client.consumer.AckResult org.apache.rocketmq.proxy.processor.ConsumerProcessor:lambda$changeInvisibleTime$1 (
+  long commitLogOffset,
+  org.apache.rocketmq.client.consumer.AckResult ackResult) {
+  guard = tt;
+  ret(level()) = level(ackResult);
+  ret(obj_level()) = level(ackResult) ⊔ level(commitLogOffset) ⊔ obj_level(ackResult) ⊔ obj_level(this);
+  ret(obj_level(ackResult)) = level(ackResult) ⊔ level(commitLogOffset) ⊔ obj_level(ackResult) ⊔ obj_level(this);
+  ret(obj_level(this)) = level(ackResult) ⊔ level(commitLogOffset) ⊔ obj_level(ackResult) ⊔ obj_level(this);
+}

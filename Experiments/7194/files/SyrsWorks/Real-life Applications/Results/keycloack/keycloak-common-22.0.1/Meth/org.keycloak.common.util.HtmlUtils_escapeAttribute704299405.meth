@@ -1,0 +1,36 @@
+static java.lang.String org.keycloak.common.util.HtmlUtils:escapeAttribute(java.lang.String @value)
+{
+java.lang.StringBuilder escaped;
+  int i;
+  char chr;
+  int $stack5;
+  java.lang.String value;
+value=@value;
+escaped=new java.lang.StringBuilder;
+ escaped#java.lang.StringBuilder();
+ i=0;
+ label0:$stack5 = value.length();
+ if (i>=$stack5) goto label1;
+ chr = value.charAt(i);
+ if (chr!=60) goto label2;
+ escaped.append("&lt;");
+ goto label3;
+ label2:if (chr!=62) goto label4;
+ escaped.append("&gt;");
+ goto label3;
+ label4:if (chr!=34) goto label5;
+ escaped.append("&quot;");
+ goto label3;
+ label5:if (chr!=39) goto label6;
+ escaped.append("&apos;");
+ goto label3;
+ label6:if (chr!=38) goto label7;
+ escaped.append("&amp;");
+ goto label3;
+ label7:escaped.append(chr);
+ label3:i=(i+1);
+ goto label0;
+ label1:value = escaped.toString();
+ return  value;
+ } 
+

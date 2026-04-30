@@ -1,0 +1,21 @@
+int com.scurrilous.circe.crc.ReflectedIntCrc:resumeRaw(int crc,byte[] input,int index,int length)
+{
+int i;
+  int $stack6;
+  byte $stack7;
+  int[] $stack10;
+  i=0;
+ label0:if (i>=length) goto label1;
+ $stack10=this.table;
+ $stack6=(index+i);
+ $stack7=input[$stack6];
+ $stack6=(!crc & $stack7) |(!$stack7 & crc);
+ $stack6=($stack6 & 255);
+ $stack6=$stack10[$stack6];
+ crc=(crc>>>8);
+ crc=(!$stack6 & crc) |(!crc & $stack6);
+ i=(i+1);
+ goto label0;
+ label1:return  crc;
+ } 
+

@@ -1,0 +1,15 @@
+java.util.concurrent.CompletableFuture org.apache.bookkeeper.clients.utils.RetryUtils:execute(java.util.function.Supplier action)
+{
+org.apache.bookkeeper.common.util.Backoff$Policy $stack2;
+  java.util.stream.Stream $stack3;
+  org.apache.bookkeeper.common.util.OrderedScheduler $stack4;
+  java.util.function.Predicate $stack5;
+  java.util.concurrent.CompletableFuture $stack6;
+  $stack2=this.backoffPolicy;
+ $stack3 = $stack2.toBackoffs();
+ $stack5=this.retryPredicate;
+ $stack4=this.scheduler;
+ $stack6 = org.apache.bookkeeper.common.util.Retries.run($stack3,$stack5,action,$stack4);
+ return  $stack6;
+ } 
+

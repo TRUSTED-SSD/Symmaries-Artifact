@@ -1,0 +1,20 @@
+void org.apache.rocketmq.broker.transaction.queue.TransactionalMessageBridge:updateConsumeOffset(org.apache.rocketmq.common.message.MessageQueue mq,long offset)
+{
+org.apache.rocketmq.broker.BrokerController $stack4;
+  org.apache.rocketmq.broker.offset.ConsumerOffsetManager $stack5;
+  java.net.SocketAddress $stack6;
+  java.lang.String $stack7;
+  java.lang.String $stack8;
+  java.lang.String $stack9;
+  int $stack10;
+  $stack4=this.brokerController;
+ $stack5 = $stack4.getConsumerOffsetManager();
+ $stack6=this.storeHost;
+ $stack7 = org.apache.rocketmq.remoting.common.RemotingHelper.parseSocketAddressAddr($stack6);
+ $stack8 = org.apache.rocketmq.broker.transaction.queue.TransactionalMessageUtil.buildConsumerGroup();
+ $stack9 = mq.getTopic();
+ $stack10 = mq.getQueueId();
+ $stack5.commitOffset($stack7,$stack8,$stack9,$stack10,offset);
+ return;
+ } 
+

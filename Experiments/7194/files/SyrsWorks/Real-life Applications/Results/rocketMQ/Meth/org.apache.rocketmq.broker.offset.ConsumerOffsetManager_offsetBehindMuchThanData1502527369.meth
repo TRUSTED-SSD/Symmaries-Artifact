@@ -1,0 +1,46 @@
+boolean org.apache.rocketmq.broker.offset.ConsumerOffsetManager:offsetBehindMuchThanData(java.lang.String topic,java.util.concurrent.ConcurrentMap table)
+{
+java.util.Iterator it;
+  boolean result;
+  java.util.Map$Entry next;
+  long minOffsetInStore;
+  long offsetInPersist;
+  java.util.Set $stack10;
+  boolean $stack13;
+  java.lang.Object $stack15;
+  org.apache.rocketmq.broker.BrokerController $stack16;
+  org.apache.rocketmq.store.MessageStore $stack17;
+  java.lang.Integer $stack19;
+  int $stack20;
+  java.lang.Long $stack23;
+  byte $stack25;
+  $stack10 = table.entrySet();
+ it = $stack10.iterator();
+ result = table.isEmpty();
+ if (result!=0) goto label0;
+ result=1;
+ goto label1;
+ label0:result=0;
+ label1:$stack13 = it.hasNext();
+ if ($stack13==0) goto label2;
+ if (result==0) goto label2;
+ $stack15 = it.next();
+ next=(java.util.Map$Entry) $stack15;
+ $stack16=this.brokerController;
+ $stack17 = $stack16.getMessageStore();
+ $stack15 = next.getKey();
+ $stack19=(java.lang.Integer) $stack15;
+ $stack20 = $stack19.intValue();
+ minOffsetInStore = $stack17.getMinOffsetInQueue(topic,$stack20);
+ $stack15 = next.getValue();
+ $stack23=(java.lang.Long) $stack15;
+ offsetInPersist = $stack23.longValue();
+ $stack25=(offsetInPersist cmp minOffsetInStore);
+ if ($stack25>0) goto label3;
+ result=1;
+ goto label4;
+ label3:result=0;
+ label4:goto label1;
+ label2:return  result;
+ } 
+

@@ -1,0 +1,20 @@
+org.bouncycastle.operator.ContentSigner org.keycloak.crypto.def.BCCertificateUtilsProvider:createSigner(java.security.PrivateKey privateKey)
+{
+org.bouncycastle.operator.jcajce.JcaContentSignerBuilder signerBuilder;
+  java.lang.String $stack4;
+  org.bouncycastle.operator.ContentSigner $stack6;
+  java.lang.Exception $stack7;
+  java.lang.RuntimeException $stack8;
+  label0:signerBuilder=new org.bouncycastle.operator.jcajce.JcaContentSignerBuilder;
+ signerBuilder#org.bouncycastle.operator.jcajce.JcaContentSignerBuilder("SHA256WithRSAEncryption");
+ $stack4=org.keycloak.common.util.BouncyIntegration.PROVIDER;
+ signerBuilder = signerBuilder.setProvider($stack4);
+ $stack6 = signerBuilder.build(privateKey);
+ label1:return  $stack6;
+ label2:$stack7 = catch;
+ $stack8=new java.lang.RuntimeException;
+ $stack8#java.lang.RuntimeException("Could not create content signer.",(java.lang.Throwable)$stack7);
+ throw $stack8;
+ catch java.lang.Exception: label0 - label1 : label2;
+} 
+

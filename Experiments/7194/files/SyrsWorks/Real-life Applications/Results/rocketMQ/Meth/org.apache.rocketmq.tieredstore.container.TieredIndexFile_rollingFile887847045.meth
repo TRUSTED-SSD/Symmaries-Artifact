@@ -1,0 +1,36 @@
+boolean org.apache.rocketmq.tieredstore.container.TieredIndexFile:rollingFile()
+{
+boolean preFileExists;
+  java.io.File $stack4;
+  java.lang.String $stack5;
+  org.apache.rocketmq.store.logfile.MappedFile $stack8;
+  org.apache.rocketmq.logging.org.slf4j.Logger $stack10;
+  org.apache.rocketmq.store.logfile.DefaultMappedFile $stack12;
+  int $stack13;
+  $stack4=new java.io.File;
+ $stack5=this.preFilepath;
+ $stack4#java.io.File($stack5);
+ preFileExists = $stack4.exists();
+ if (preFileExists!=0) goto label0;
+ $stack8=this.curMappedFile;
+ $stack5=this.preFilepath;
+ preFileExists = $stack8.renameTo($stack5);
+ if (preFileExists==0) goto label1;
+ $stack8=this.curMappedFile;
+ this.preMappedFile=$stack8;
+ $stack12=new org.apache.rocketmq.store.logfile.DefaultMappedFile;
+ $stack5=this.curFilePath;
+ $stack13=this.fileMaxSize;
+ $stack12#org.apache.rocketmq.store.logfile.DefaultMappedFile($stack5,$stack13);
+ this.curMappedFile=$stack12;
+ $stack8=this.curMappedFile;
+ this#org.apache.rocketmq.tieredstore.container.TieredIndexFile:initIndexFileHeader($stack8);
+ this#org.apache.rocketmq.tieredstore.container.TieredIndexFile:tryToCompactPreFile();
+ return  1;
+ label1:$stack10=org.apache.rocketmq.tieredstore.container.TieredIndexFile.logger;
+ $stack10.error("TieredIndexFile#rollingFile: rename current file failed");
+ return  0;
+ label0:this#org.apache.rocketmq.tieredstore.container.TieredIndexFile:tryToCompactPreFile();
+ return  0;
+ } 
+

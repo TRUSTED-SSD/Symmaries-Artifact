@@ -1,0 +1,24 @@
+static java.lang.String org.apache.rocketmq.common.MixAll:brokerVIPChannel(boolean isChange,java.lang.String @brokerAddr)
+{
+int split;
+  java.lang.String ip;
+  java.lang.StringBuilder $stack10;
+  java.lang.String brokerAddr;
+brokerAddr=@brokerAddr;
+if (isChange==0) goto label0;
+ split = brokerAddr.lastIndexOf(":");
+ ip = brokerAddr.substring(0,split);
+ split=(split+1);
+ brokerAddr = brokerAddr.substring(split);
+ $stack10=new java.lang.StringBuilder;
+ $stack10#java.lang.StringBuilder();
+ $stack10 = $stack10.append(ip);
+ $stack10 = $stack10.append(":");
+ split = java.lang.Integer.parseInt(brokerAddr);
+ split=(split-2);
+ $stack10 = $stack10.append(split);
+ brokerAddr = $stack10.toString();
+ return  brokerAddr;
+ label0:return  brokerAddr;
+ } 
+

@@ -1,0 +1,20 @@
+java.util.concurrent.atomic.LongAdder org.apache.rocketmq.store.StoreStatsService:getSinglePutMessageTopicTimesTotal(java.lang.String topic)
+{
+java.util.concurrent.atomic.LongAdder rs;
+  java.util.concurrent.atomic.LongAdder previous;
+  java.util.concurrent.ConcurrentMap $stack4;
+  java.lang.Object $stack5;
+  $stack4=this.putMessageTopicTimesTotal;
+ $stack5 = $stack4.get((java.lang.Object)topic);
+ rs=(java.util.concurrent.atomic.LongAdder) $stack5;
+ if (null!=rs) goto label0;
+ rs=new java.util.concurrent.atomic.LongAdder;
+ rs#java.util.concurrent.atomic.LongAdder();
+ $stack4=this.putMessageTopicTimesTotal;
+ $stack5 = $stack4.putIfAbsent((java.lang.Object)topic,(java.lang.Object)rs);
+ previous=(java.util.concurrent.atomic.LongAdder) $stack5;
+ if (previous==null) goto label0;
+ rs=previous;
+ label0:return  rs;
+ } 
+

@@ -1,0 +1,30 @@
+void java.io.ExpiringCache:put(java.lang.String r1,java.lang.String r2)
+{
+java.io.ExpiringCache$Entry r3;
+  int $i0;
+  int $i1;
+  int $i2;
+  java.io.ExpiringCache$Entry $r4;
+  java.util.Map $r5;
+  long $l3;
+  long $l4;
+  $i0=this.queryCount;
+ $i1=($i0+1);
+ this.queryCount=$i1;
+ $i2=this.queryOverflow;
+ if ($i1<$i2) goto label0;
+ this#java.io.ExpiringCache:cleanup();
+ label0:r3 = this#java.io.ExpiringCache:entryFor(r1);
+ if (r3==null) goto label1;
+ $l4 = java.lang.System.native_currentTimeMillis();
+ r3.setTimestamp($l4);
+ r3.setVal(r2);
+ goto label2;
+ label1:$r5=this.map;
+ $r4=new java.io.ExpiringCache$Entry;
+ $l3 = java.lang.System.native_currentTimeMillis();
+ $r4#java.io.ExpiringCache$Entry:init($l3,r2);
+ $r5.put((java.lang.Object)r1,(java.lang.Object)$r4);
+ label2:return;
+ }  
+

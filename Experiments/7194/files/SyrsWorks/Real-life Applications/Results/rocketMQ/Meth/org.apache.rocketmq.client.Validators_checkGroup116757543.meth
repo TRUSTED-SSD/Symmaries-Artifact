@@ -1,0 +1,30 @@
+static void org.apache.rocketmq.client.Validators:checkGroup(java.lang.String @group)
+{
+boolean $stack1;
+  int $stack2;
+  org.apache.rocketmq.client.exception.MQClientException $stack4;
+  java.lang.Object[] $stack5;
+  java.lang.String group;
+group=@group;
+$stack1 = org.apache.rocketmq.common.UtilAll.isBlank(group);
+ if ($stack1==0) goto label0;
+ $stack4=new org.apache.rocketmq.client.exception.MQClientException;
+ $stack4#org.apache.rocketmq.client.exception.MQClientException("the specified group is blank",null);
+ throw $stack4;
+ label0:$stack2 = group.length();
+ if ($stack2<=255) goto label1;
+ $stack4=new org.apache.rocketmq.client.exception.MQClientException;
+ $stack4#org.apache.rocketmq.client.exception.MQClientException("the specified group is longer than group max length 255.",null);
+ throw $stack4;
+ label1:$stack1 = org.apache.rocketmq.common.topic.TopicValidator.isTopicOrGroupIllegal(group);
+ if ($stack1==0) goto label2;
+ $stack4=new org.apache.rocketmq.client.exception.MQClientException;
+ $stack5=new java.lang.Object[2];
+ $stack5[0]=group;
+ $stack5[1]="^[%|a-zA-Z0-9_-]+$";
+ group = java.lang.String.format("the specified group[%s] contains illegal characters, allowing only %s",$stack5);
+ $stack4#org.apache.rocketmq.client.exception.MQClientException(group,null);
+ throw $stack4;
+ label2:return;
+ } 
+

@@ -1,0 +1,27 @@
+boolean org.apache.bookkeeper.bookie.storage.ldb.SingleDirectoryDbLedgerStorage:isFlushRequired()
+{
+long stamp;
+  boolean l3;
+  java.lang.Throwable l4;
+  java.util.concurrent.locks.StampedLock $stack5;
+  org.apache.bookkeeper.bookie.storage.ldb.WriteCache $stack7;
+  $stack5=this.writeCacheRotationLock;
+ stamp = $stack5.readLock();
+dummyClass.highSourceMut(stamp);
+ label0:$stack7=this.writeCache;
+ l3 = $stack7.isEmpty();
+ if (l3!=0) goto label1;
+ l3=1;
+ goto label2;
+ label1:l3=0;
+ label2:$stack5=this.writeCacheRotationLock;
+ $stack5.unlockRead(stamp);
+ return  l3;
+ label3:l4 = catch;
+ label4:$stack5=this.writeCacheRotationLock;
+ $stack5.unlockRead(stamp);
+ throw l4;
+ catch java.lang.Throwable: label0 - label2 : label3;
+catch java.lang.Throwable: label3 - label4 : label3;
+} 
+

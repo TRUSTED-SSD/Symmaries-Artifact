@@ -1,0 +1,42 @@
+org.apache.rocketmq.store.SelectMappedBufferResult org.apache.rocketmq.store.logfile.DefaultMappedFile$Itr:next()
+{
+int readPosition;
+  java.nio.ByteBuffer byteBuffer;
+  org.apache.rocketmq.store.logfile.DefaultMappedFile $stack5;
+  int $stack7;
+  boolean $stack11;
+  org.apache.rocketmq.store.SelectMappedBufferResult $stack22;
+  long $stack25;
+  long $stack26;
+  $stack5=this.this$0;
+ readPosition = $stack5.getReadPosition();
+ $stack7=this.current;
+ if ($stack7>=readPosition) goto label0;
+ readPosition=this.current;
+ if (readPosition<0) goto label0;
+ $stack5=this.this$0;
+ $stack11 = $stack5.hold();
+ if ($stack11==0) goto label0;
+ byteBuffer=this.buf;
+ byteBuffer = byteBuffer.slice();
+ readPosition=this.current;
+ byteBuffer.position(readPosition);
+ readPosition=this.current;
+ readPosition = byteBuffer.getInt(readPosition);
+ byteBuffer = byteBuffer.slice();
+ byteBuffer.limit(readPosition);
+ $stack7=this.current;
+ $stack7=($stack7+readPosition);
+ this.current=$stack7;
+ $stack22=new org.apache.rocketmq.store.SelectMappedBufferResult;
+ $stack5=this.this$0;
+ $stack26=$stack5.fileFromOffset;
+ $stack7=this.current;
+ $stack25=(long) $stack7;
+ $stack25=($stack26+$stack25);
+ $stack5=this.this$0;
+ $stack22#org.apache.rocketmq.store.SelectMappedBufferResult($stack25,byteBuffer,readPosition,(org.apache.rocketmq.store.logfile.MappedFile)$stack5);
+ return  $stack22;
+ label0:return  null;
+ } 
+

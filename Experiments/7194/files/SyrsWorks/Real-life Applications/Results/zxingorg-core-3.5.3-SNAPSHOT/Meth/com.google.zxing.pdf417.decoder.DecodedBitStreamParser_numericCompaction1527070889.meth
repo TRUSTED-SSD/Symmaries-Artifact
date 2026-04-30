@@ -1,0 +1,47 @@
+static int com.google.zxing.pdf417.decoder.DecodedBitStreamParser:numericCompaction(int[] codewords,int codeIndex,com.google.zxing.common.ECIStringBuilder result)
+{
+int count;
+  boolean end;
+  int[] numericCodewords;
+  int code;
+  int $stack10;
+  java.lang.String $stack15;
+  count=0;
+ end=0;
+ numericCodewords=new int[15];
+ label0:code=codewords[0];
+ if (codeIndex>=code) goto label1;
+ if (end!=0) goto label1;
+ code=codeIndex;
+ codeIndex=(codeIndex+1);
+ code=codewords[code];
+ $stack10=codewords[0];
+ if (codeIndex!=$stack10) goto label2;
+ end=1;
+ label2:if (code>=900) goto label3;
+ numericCodewords[count]=code;
+ count=(count+1);
+ goto label4;
+ label3:switch [code]
+if 0 goto label5;
+if 1 goto label5;
+if 2 goto label5;
+if 3 goto label5;
+if 4 goto label5;
+if 5 goto label5;
+if 6 goto label5;
+goto label4;
+ label5:codeIndex=(codeIndex+-1);
+ end=1;
+ label4:$stack10=(count%15);
+ if ($stack10==0) goto label6;
+ if (code==902) goto label6;
+ if (end==0) goto label7;
+ label6:if (count<=0) goto label7;
+ $stack15 = com.google.zxing.pdf417.decoder.DecodedBitStreamParser.decodeBase900toBase10(numericCodewords,count);
+ result.append($stack15);
+ count=0;
+ label7:goto label0;
+ label1:return  codeIndex;
+ } 
+

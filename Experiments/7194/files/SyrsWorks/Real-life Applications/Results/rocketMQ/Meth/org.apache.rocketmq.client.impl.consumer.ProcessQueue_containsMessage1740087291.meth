@@ -1,0 +1,38 @@
+boolean org.apache.rocketmq.client.impl.consumer.ProcessQueue:containsMessage(org.apache.rocketmq.common.message.MessageExt message)
+{
+boolean t;
+  java.util.concurrent.locks.ReadWriteLock $stack4;
+  java.util.concurrent.locks.Lock $stack5;
+  java.util.TreeMap $stack6;
+  long $stack7;
+  java.lang.Long $stack8;
+  java.lang.Throwable $stack12;
+  org.apache.rocketmq.logging.org.slf4j.Logger $stack13;
+  java.lang.Throwable $stack14;
+  if (message!=null) goto label0;
+ return  0;
+ label0:$stack4=this.treeMapLock;
+ $stack5 = $stack4.readLock();
+ $stack5.lockInterruptibly();
+ label1:$stack6=this.msgTreeMap;
+ $stack7 = message.getQueueOffset();
+ $stack8 = java.lang.Long.valueOf($stack7);
+ t = $stack6.containsKey((java.lang.Object)$stack8);
+ label2:$stack4=this.treeMapLock;
+ $stack5 = $stack4.readLock();
+ $stack5.unlock();
+ label3:return  t;
+ label4:$stack14 = catch;
+ $stack4=this.treeMapLock;
+ $stack5 = $stack4.readLock();
+ $stack5.unlock();
+ throw $stack14;
+ label5:$stack12 = catch;
+ $stack13=this.log;
+ $stack13.error("Failed to check message\'s existence in process queue, message={}",(java.lang.Object)message,(java.lang.Object)$stack12);
+ return  0;
+ catch java.lang.Throwable: label1 - label2 : label4;
+catch java.lang.Throwable: label0 - label3 : label5;
+catch java.lang.Throwable: label4 - label5 : label5;
+} 
+

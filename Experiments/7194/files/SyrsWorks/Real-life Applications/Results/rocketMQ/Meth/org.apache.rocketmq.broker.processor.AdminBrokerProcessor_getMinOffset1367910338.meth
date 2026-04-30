@@ -1,0 +1,28 @@
+org.apache.rocketmq.remoting.protocol.RemotingCommand org.apache.rocketmq.broker.processor.AdminBrokerProcessor:getMinOffset(io.netty.channel.ChannelHandlerContext ctx,org.apache.rocketmq.remoting.protocol.RemotingCommand @request)
+{
+org.apache.rocketmq.remoting.protocol.header.GetMinOffsetRequestHeader requestHeader;
+  java.util.concurrent.CompletableFuture responseFuture;
+  org.apache.rocketmq.remoting.rpc.RpcResponse rpcResponse;
+  org.apache.rocketmq.remoting.CommandCustomHeader $stack6;
+  org.apache.rocketmq.remoting.rpc.RpcRequest $stack7;
+  java.lang.Object $stack9;
+  java.lang.Throwable $stack11;
+  java.lang.String $stack13;
+  org.apache.rocketmq.remoting.protocol.RemotingCommand request;
+request=@request;
+$stack6 = request.decodeCommandCustomHeader(org.apache.rocketmq.remoting.protocol.header.GetMinOffsetRequestHeader);
+ requestHeader=(org.apache.rocketmq.remoting.protocol.header.GetMinOffsetRequestHeader) $stack6;
+ label0:$stack7=new org.apache.rocketmq.remoting.rpc.RpcRequest;
+ $stack7#org.apache.rocketmq.remoting.rpc.RpcRequest(31,(org.apache.rocketmq.remoting.rpc.RpcRequestHeader)requestHeader,null);
+ responseFuture = this#org.apache.rocketmq.broker.processor.AdminBrokerProcessor:handleGetMinOffset($stack7);
+ $stack9 = responseFuture.get();
+ rpcResponse=(org.apache.rocketmq.remoting.rpc.RpcResponse) $stack9;
+ request = org.apache.rocketmq.remoting.rpc.RpcClientUtils.createCommandForRpcResponse(rpcResponse);
+ label1:return  request;
+ label2:$stack11 = catch;
+ $stack13 = $stack11.getMessage();
+ request = org.apache.rocketmq.remoting.protocol.RemotingCommand.buildErrorResponse(1,$stack13);
+ return  request;
+ catch java.lang.Throwable: label0 - label1 : label2;
+} 
+

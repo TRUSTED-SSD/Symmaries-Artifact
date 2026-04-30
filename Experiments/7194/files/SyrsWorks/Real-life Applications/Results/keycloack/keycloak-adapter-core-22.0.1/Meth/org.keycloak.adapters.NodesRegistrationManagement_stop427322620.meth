@@ -1,0 +1,25 @@
+void org.keycloak.adapters.NodesRegistrationManagement:stop()
+{
+java.util.Collection allRegistrations;
+  java.util.Iterator l2;
+  org.keycloak.adapters.NodesRegistrationManagement$NodeRegistrationContext registration;
+  java.util.concurrent.ExecutorService $stack4;
+  java.util.Map $stack6;
+  boolean $stack9;
+  java.lang.Object $stack10;
+  org.keycloak.adapters.KeycloakDeployment $stack11;
+  $stack4=this.executor;
+ $stack4.shutdownNow();
+ $stack6=this.nodeRegistrations;
+ allRegistrations = $stack6.values();
+ l2 = allRegistrations.iterator();
+ label0:$stack9 = l2.hasNext();
+ if ($stack9==0) goto label1;
+ $stack10 = l2.next();
+ registration=(org.keycloak.adapters.NodesRegistrationManagement$NodeRegistrationContext) $stack10;
+ $stack11 = org.keycloak.adapters.NodesRegistrationManagement$NodeRegistrationContext.access$200(registration);
+ this.sendUnregistrationEvent($stack11);
+ goto label0;
+ label1:return;
+ } 
+

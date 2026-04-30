@@ -1,0 +1,44 @@
+io.netty.bootstrap.Bootstrap org.apache.rocketmq.remoting.netty.NettyRemotingClient:fetchBootstrap(java.lang.String @addr)
+{
+java.util.Map$Entry proxyEntry;
+  java.lang.String cidr;
+  org.apache.rocketmq.remoting.proxy.SocksProxyConfig socksProxyConfig;
+  io.netty.bootstrap.Bootstrap bootstrapWithProxy;
+  io.netty.bootstrap.Bootstrap old;
+  java.lang.Object $stack8;
+  java.lang.Object[] $stack10;
+  org.apache.rocketmq.logging.org.slf4j.Logger $stack11;
+  java.util.concurrent.ConcurrentHashMap $stack12;
+  java.lang.String addr;
+addr=@addr;
+proxyEntry = this#org.apache.rocketmq.remoting.netty.NettyRemotingClient:getProxy(addr);
+ if (proxyEntry!=null) goto label0;
+ bootstrapWithProxy=this.bootstrap;
+ return  bootstrapWithProxy;
+ label0:$stack8 = proxyEntry.getKey();
+ cidr=(java.lang.String) $stack8;
+ $stack8 = proxyEntry.getValue();
+ socksProxyConfig=(org.apache.rocketmq.remoting.proxy.SocksProxyConfig) $stack8;
+ $stack11=org.apache.rocketmq.remoting.netty.NettyRemotingClient.LOGGER;
+ $stack10=new java.lang.Object[3];
+ $stack10[0]=addr;
+ $stack10[1]=cidr;
+ if (socksProxyConfig==null) goto label1;
+ addr = socksProxyConfig.getAddr();
+ goto label2;
+ label1:addr="";
+ label2:$stack10[2]=addr;
+ $stack11.info("Netty fetch bootstrap, addr: {}, cidr: {}, proxy: {}",$stack10);
+ $stack12=this.bootstrapMap;
+ $stack8 = $stack12.get((java.lang.Object)cidr);
+ bootstrapWithProxy=(io.netty.bootstrap.Bootstrap) $stack8;
+ if (bootstrapWithProxy!=null) goto label3;
+ bootstrapWithProxy = this#org.apache.rocketmq.remoting.netty.NettyRemotingClient:createBootstrap(socksProxyConfig);
+ $stack12=this.bootstrapMap;
+ $stack8 = $stack12.putIfAbsent((java.lang.Object)cidr,(java.lang.Object)bootstrapWithProxy);
+ old=(io.netty.bootstrap.Bootstrap) $stack8;
+ if (old==null) goto label3;
+ bootstrapWithProxy=old;
+ label3:return  bootstrapWithProxy;
+ } 
+

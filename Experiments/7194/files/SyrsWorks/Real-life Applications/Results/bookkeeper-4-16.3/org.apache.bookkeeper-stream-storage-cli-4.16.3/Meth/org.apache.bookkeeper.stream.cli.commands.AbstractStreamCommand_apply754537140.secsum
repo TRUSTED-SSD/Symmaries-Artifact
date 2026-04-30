@@ -1,0 +1,13 @@
+boolean org.apache.bookkeeper.stream.cli.commands.AbstractStreamCommand:apply (
+  org.apache.bookkeeper.common.net.ServiceURI @serviceURI,
+  org.apache.commons.configuration.CompositeConfiguration conf,
+  org.apache.bookkeeper.tools.common.BKFlags globalFlags,
+  org.apache.bookkeeper.tools.framework.CliFlags cmdFlags) {
+  guard = pc ⊔ level(@serviceURI) = ⊥;
+  ret(level()) = level(cmdFlags) ⊔ level(conf) ⊔ level(globalFlags) ⊔ level(this) ⊔ obj_level(@serviceURI) ⊔ obj_level(cmdFlags) ⊔ obj_level(conf) ⊔ obj_level(globalFlags) ⊔ obj_level(this);
+  ret(obj_level(@serviceURI)) = obj_level(@serviceURI);
+  ret(obj_level(cmdFlags)) = obj_level(cmdFlags);
+  ret(obj_level(conf)) = obj_level(conf);
+  ret(obj_level(globalFlags)) = obj_level(globalFlags);
+  ret(obj_level(this)) = obj_level(this);
+}

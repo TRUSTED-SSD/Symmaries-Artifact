@@ -1,0 +1,21 @@
+static org.apache.bookkeeper.common.allocator.ByteBufAllocatorWithOomHandler org.apache.bookkeeper.bookie.BookieResources:createAllocator(org.apache.bookkeeper.conf.ServerConfiguration conf)
+{
+org.apache.bookkeeper.common.allocator.ByteBufAllocatorBuilder $stack1;
+  org.apache.bookkeeper.common.allocator.PoolingPolicy $stack2;
+  int $stack4;
+  org.apache.bookkeeper.common.allocator.OutOfMemoryPolicy $stack6;
+  org.apache.bookkeeper.common.allocator.LeakDetectionPolicy $stack8;
+  org.apache.bookkeeper.common.allocator.ByteBufAllocatorWithOomHandler $stack10;
+  $stack1 = org.apache.bookkeeper.common.allocator.ByteBufAllocatorBuilder.create();
+ $stack2 = conf.getAllocatorPoolingPolicy();
+ $stack1 = $stack1.poolingPolicy($stack2);
+ $stack4 = conf.getAllocatorPoolingConcurrency();
+ $stack1 = $stack1.poolingConcurrency($stack4);
+ $stack6 = conf.getAllocatorOutOfMemoryPolicy();
+ $stack1 = $stack1.outOfMemoryPolicy($stack6);
+ $stack8 = conf.getAllocatorLeakDetectionPolicy();
+ $stack1 = $stack1.leakDetectionPolicy($stack8);
+ $stack10 = $stack1.build();
+ return  $stack10;
+ } 
+

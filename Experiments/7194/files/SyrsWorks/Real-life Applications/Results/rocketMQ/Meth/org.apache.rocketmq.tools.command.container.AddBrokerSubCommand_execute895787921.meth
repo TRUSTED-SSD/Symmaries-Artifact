@@ -1,0 +1,50 @@
+void org.apache.rocketmq.tools.command.container.AddBrokerSubCommand:execute(org.apache.commons.cli.CommandLine commandLine,org.apache.commons.cli.Options options,org.apache.rocketmq.remoting.RPCHook rpcHook)
+{
+org.apache.rocketmq.tools.admin.DefaultMQAdminExt defaultMQAdminExt;
+  java.lang.String brokerContainerAddr;
+  java.lang.String brokerConfigPath;
+  java.lang.Throwable l7;
+  long $stack9;
+  java.lang.Object[] $stack15;
+  java.io.PrintStream $stack16;
+  java.lang.Exception $stack19;
+  org.apache.rocketmq.tools.command.SubCommandException $stack20;
+  java.lang.StringBuilder $stack21;
+  java.lang.Class $stack22;
+  defaultMQAdminExt=new org.apache.rocketmq.tools.admin.DefaultMQAdminExt;
+ defaultMQAdminExt#org.apache.rocketmq.tools.admin.DefaultMQAdminExt(rpcHook);
+ $stack9 = java.lang.System.currentTimeMillis();
+ brokerContainerAddr = java.lang.Long.toString($stack9);
+ defaultMQAdminExt.setInstanceName(brokerContainerAddr);
+ label0:defaultMQAdminExt.start();
+ brokerContainerAddr = commandLine.getOptionValue((char)99);
+ brokerContainerAddr = brokerContainerAddr.trim();
+ brokerConfigPath = commandLine.getOptionValue((char)98);
+ brokerConfigPath = brokerConfigPath.trim();
+ defaultMQAdminExt.addBrokerToContainer(brokerContainerAddr,brokerConfigPath);
+ $stack16=java.lang.System.out;
+ $stack15=new java.lang.Object[1];
+ $stack15[0]=brokerContainerAddr;
+ $stack16.printf("add broker to %s success%n",$stack15);
+ label1:defaultMQAdminExt.shutdown();
+ goto label2;
+ label3:$stack19 = catch;
+ $stack20=new org.apache.rocketmq.tools.command.SubCommandException;
+ $stack21=new java.lang.StringBuilder;
+ $stack21#java.lang.StringBuilder();
+ $stack22 = this.getClass();
+ brokerContainerAddr = $stack22.getSimpleName();
+ $stack21 = $stack21.append(brokerContainerAddr);
+ $stack21 = $stack21.append(" command failed");
+ brokerContainerAddr = $stack21.toString();
+ $stack20#org.apache.rocketmq.tools.command.SubCommandException(brokerContainerAddr,(java.lang.Throwable)$stack19);
+ throw $stack20;
+ label4:l7 = catch;
+ label5:defaultMQAdminExt.shutdown();
+ throw l7;
+ label2:return;
+ catch java.lang.Exception: label0 - label1 : label3;
+catch java.lang.Throwable: label0 - label1 : label4;
+catch java.lang.Throwable: label3 - label5 : label4;
+} 
+

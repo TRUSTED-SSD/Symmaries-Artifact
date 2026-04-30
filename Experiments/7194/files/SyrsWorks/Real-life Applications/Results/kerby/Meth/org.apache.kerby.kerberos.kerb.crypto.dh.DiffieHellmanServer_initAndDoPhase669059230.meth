@@ -1,0 +1,31 @@
+java.security.PublicKey org.apache.kerby.kerberos.kerb.crypto.dh.DiffieHellmanServer:initAndDoPhase(byte[] clientPubKeyEnc)
+{
+java.security.KeyFactory serverKeyFac;
+  java.security.PublicKey clientPubKey;
+  javax.crypto.spec.DHParameterSpec dhParamSpec;
+  java.security.KeyPairGenerator serverKpairGen;
+  java.security.KeyPair serverKpair;
+  java.security.spec.X509EncodedKeySpec $stack9;
+  javax.crypto.interfaces.DHPublicKey $stack11;
+  javax.crypto.KeyAgreement $stack15;
+  java.security.PrivateKey $stack17;
+  serverKeyFac = java.security.KeyFactory.getInstance("DH");
+ $stack9=new java.security.spec.X509EncodedKeySpec;
+ $stack9#java.security.spec.X509EncodedKeySpec(clientPubKeyEnc);
+ clientPubKey = serverKeyFac.generatePublic((java.security.spec.KeySpec)$stack9);
+ $stack11=(javax.crypto.interfaces.DHPublicKey) clientPubKey;
+ dhParamSpec = $stack11.getParams();
+ serverKpairGen = java.security.KeyPairGenerator.getInstance("DH");
+ serverKpairGen.initialize((java.security.spec.AlgorithmParameterSpec)dhParamSpec);
+ serverKpair = serverKpairGen.generateKeyPair();
+ $stack15 = javax.crypto.KeyAgreement.getInstance("DH");
+ this.serverKeyAgree=$stack15;
+ $stack15=this.serverKeyAgree;
+ $stack17 = serverKpair.getPrivate();
+ $stack15.init((java.security.Key)$stack17);
+ $stack15=this.serverKeyAgree;
+ $stack15.doPhase((java.security.Key)clientPubKey,(boolean)1);
+ clientPubKey = serverKpair.getPublic();
+ return  clientPubKey;
+ } 
+

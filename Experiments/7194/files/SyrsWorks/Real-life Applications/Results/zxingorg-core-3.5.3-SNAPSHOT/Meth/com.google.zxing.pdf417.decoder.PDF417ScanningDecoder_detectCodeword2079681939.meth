@@ -1,0 +1,44 @@
+static com.google.zxing.pdf417.decoder.Codeword com.google.zxing.pdf417.decoder.PDF417ScanningDecoder:detectCodeword(com.google.zxing.common.BitMatrix image,int minColumn,int maxColumn,boolean leftToRight,int startColumn,int imageRow,int minCodewordWidth,int maxCodewordWidth)
+{
+int[] moduleBitCount;
+  int endColumn;
+  com.google.zxing.pdf417.decoder.Codeword $stack21;
+  startColumn = com.google.zxing.pdf417.decoder.PDF417ScanningDecoder.adjustCodewordStartColumn(image,minColumn,maxColumn,leftToRight,startColumn,imageRow);
+ moduleBitCount = com.google.zxing.pdf417.decoder.PDF417ScanningDecoder.getModuleBitCount(image,minColumn,maxColumn,leftToRight,startColumn,imageRow);
+ if (moduleBitCount!=null) goto label0;
+ return  null;
+ label0:minColumn = com.google.zxing.common.detector.MathUtils.sum(moduleBitCount);
+ if (leftToRight==0) goto label1;
+ endColumn=(startColumn+minColumn);
+ goto label2;
+ label1:maxColumn=0;
+ label3:imageRow=#moduleBitCount;
+ imageRow=(imageRow/2);
+ if (maxColumn>=imageRow) goto label4;
+ imageRow=moduleBitCount[maxColumn];
+ endColumn=#moduleBitCount;
+ endColumn=(endColumn-1);
+ endColumn=(endColumn-maxColumn);
+ endColumn=moduleBitCount[endColumn];
+ moduleBitCount[maxColumn]=endColumn;
+ endColumn=#moduleBitCount;
+ endColumn=(endColumn-1);
+ endColumn=(endColumn-maxColumn);
+ moduleBitCount[endColumn]=imageRow;
+ maxColumn=(maxColumn+1);
+ goto label3;
+ label4:endColumn=startColumn;
+ startColumn=(startColumn-minColumn);
+ label2:leftToRight = com.google.zxing.pdf417.decoder.PDF417ScanningDecoder.checkCodewordSkew(minColumn,minCodewordWidth,maxCodewordWidth);
+ if (leftToRight!=0) goto label5;
+ return  null;
+ label5:maxColumn = com.google.zxing.pdf417.decoder.PDF417CodewordDecoder.getDecodedValue(moduleBitCount);
+ imageRow = com.google.zxing.pdf417.PDF417Common.getCodeword(maxColumn);
+ if (imageRow!=-1) goto label6;
+ return  null;
+ label6:$stack21=new com.google.zxing.pdf417.decoder.Codeword;
+ minColumn = com.google.zxing.pdf417.decoder.PDF417ScanningDecoder.getCodewordBucketNumber(maxColumn);
+ $stack21#com.google.zxing.pdf417.decoder.Codeword(startColumn,endColumn,minColumn,imageRow);
+ return  $stack21;
+ } 
+

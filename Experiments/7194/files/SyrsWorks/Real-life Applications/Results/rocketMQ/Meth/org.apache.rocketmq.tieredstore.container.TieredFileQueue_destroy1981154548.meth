@@ -1,0 +1,52 @@
+void org.apache.rocketmq.tieredstore.container.TieredFileQueue:destroy()
+{
+java.util.Iterator l1;
+  org.apache.rocketmq.tieredstore.provider.TieredFileSegment fileSegment;
+  java.lang.Throwable l4;
+  java.util.concurrent.locks.ReentrantReadWriteLock $stack5;
+  java.util.concurrent.locks.ReentrantReadWriteLock$WriteLock $stack6;
+  java.util.List $stack7;
+  boolean $stack9;
+  java.lang.Object $stack14;
+  org.apache.rocketmq.tieredstore.metadata.TieredMetadataStore $stack15;
+  java.lang.Exception $stack21;
+  org.apache.rocketmq.logging.org.slf4j.Logger $stack22;
+  java.lang.String $stack24;
+  $stack5=this.fileSegmentLock;
+ $stack6 = $stack5.writeLock();
+ $stack6.lock();
+ label0:$stack7=this.fileSegmentList;
+ l1 = $stack7.iterator();
+ label1:$stack9 = l1.hasNext();
+ if ($stack9==0) goto label2;
+ $stack14 = l1.next();
+ fileSegment=(org.apache.rocketmq.tieredstore.provider.TieredFileSegment) $stack14;
+ fileSegment.close();
+ label3:$stack15=this.metadataStore;
+ $stack15.updateFileSegment(fileSegment);
+ label4:goto label5;
+ label6:$stack21 = catch;
+ $stack22=org.apache.rocketmq.tieredstore.container.TieredFileQueue.logger;
+ $stack24 = fileSegment.getPath();
+ $stack22.error("TieredFileQueue#destroy: mark file segment: {} is deleted failed",(java.lang.Object)$stack24,(java.lang.Object)$stack21);
+ label5:fileSegment.destroyFile();
+ goto label1;
+ label2:$stack7=this.fileSegmentList;
+ $stack7.clear();
+ $stack7=this.needCommitFileSegmentList;
+ $stack7.clear();
+ label7:$stack5=this.fileSegmentLock;
+ $stack6 = $stack5.writeLock();
+ $stack6.unlock();
+ goto label8;
+ label9:l4 = catch;
+ label10:$stack5=this.fileSegmentLock;
+ $stack6 = $stack5.writeLock();
+ $stack6.unlock();
+ throw l4;
+ label8:return;
+ catch java.lang.Exception: label3 - label4 : label6;
+catch java.lang.Throwable: label0 - label7 : label9;
+catch java.lang.Throwable: label9 - label10 : label9;
+} 
+

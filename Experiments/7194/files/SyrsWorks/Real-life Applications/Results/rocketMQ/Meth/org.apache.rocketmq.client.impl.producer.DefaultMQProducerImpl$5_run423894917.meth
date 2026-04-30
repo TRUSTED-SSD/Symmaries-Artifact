@@ -1,0 +1,49 @@
+void org.apache.rocketmq.client.impl.producer.DefaultMQProducerImpl$5:run()
+{
+long costTime;
+  long $stack5;
+  byte $stack7;
+  org.apache.rocketmq.remoting.exception.RemotingTooMuchRequestException $stack8;
+  org.apache.rocketmq.client.producer.SendCallback $stack9;
+  org.apache.rocketmq.client.impl.CommunicationMode $stack13;
+  java.lang.Object $stack14;
+  org.apache.rocketmq.client.producer.MessageQueueSelector $stack15;
+  org.apache.rocketmq.common.message.Message $stack16;
+  org.apache.rocketmq.client.impl.producer.DefaultMQProducerImpl $stack17;
+  org.apache.rocketmq.client.exception.MQBrokerException $stack19;
+  org.apache.rocketmq.client.exception.MQClientException $stack20;
+  java.lang.Exception $stack21;
+  costTime = java.lang.System.currentTimeMillis();
+ $stack5=this.val$beginStartTime;
+ costTime=(costTime-$stack5);
+ $stack5=this.val$timeout;
+ $stack7=($stack5 cmp costTime);
+ if ($stack7<=0) goto label0;
+ label1:$stack17=this.this$0;
+ $stack16=this.val$msg;
+ $stack15=this.val$selector;
+ $stack14=this.val$arg;
+ $stack13=org.apache.rocketmq.client.impl.CommunicationMode.ASYNC;
+ $stack9=this.val$sendCallback;
+ $stack5=this.val$timeout;
+ costTime=($stack5-costTime);
+ org.apache.rocketmq.client.impl.producer.DefaultMQProducerImpl.access$600($stack17,$stack16,$stack15,$stack14,$stack13,$stack9,costTime);
+ label2:goto label3;
+ label4:$stack19 = catch;
+ $stack20=new org.apache.rocketmq.client.exception.MQClientException;
+ $stack20#org.apache.rocketmq.client.exception.MQClientException("unknown exception",(java.lang.Throwable)$stack19);
+ throw $stack20;
+ label3:goto label5;
+ label6:$stack21 = catch;
+ $stack9=this.val$sendCallback;
+ $stack9.onException((java.lang.Throwable)$stack21);
+ goto label5;
+ label0:$stack9=this.val$sendCallback;
+ $stack8=new org.apache.rocketmq.remoting.exception.RemotingTooMuchRequestException;
+ $stack8#org.apache.rocketmq.remoting.exception.RemotingTooMuchRequestException("call timeout");
+ $stack9.onException((java.lang.Throwable)$stack8);
+ label5:return;
+ catch org.apache.rocketmq.client.exception.MQBrokerException: label1 - label2 : label4;
+catch java.lang.Exception: label1 - label3 : label6;
+} 
+

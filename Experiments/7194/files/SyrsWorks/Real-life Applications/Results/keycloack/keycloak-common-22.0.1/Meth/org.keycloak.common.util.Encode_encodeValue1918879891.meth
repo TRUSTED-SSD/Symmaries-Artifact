@@ -1,0 +1,24 @@
+static java.lang.String org.keycloak.common.util.Encode:encodeValue(java.lang.String @segment,java.lang.String[] encoding)
+{
+java.util.ArrayList params;
+  boolean foundParam;
+  java.lang.StringBuilder newSegment;
+  boolean $stack8;
+  java.lang.String segment;
+segment=@segment;
+params=new java.util.ArrayList;
+ params#java.util.ArrayList();
+ foundParam=0;
+ newSegment=new java.lang.StringBuilder;
+ newSegment#java.lang.StringBuilder();
+ $stack8 = org.keycloak.common.util.Encode.savePathParams(segment,newSegment,(java.util.List)params);
+ if ($stack8==0) goto label0;
+ foundParam=1;
+ segment = newSegment.toString();
+ label0:segment = org.keycloak.common.util.Encode.encodeFromArray(segment,encoding,(boolean)0);
+ segment = org.keycloak.common.util.Encode.encodeNonCodes(segment);
+ if (foundParam==0) goto label1;
+ segment = org.keycloak.common.util.Encode.pathParamReplacement(segment,(java.util.List)params);
+ label1:return  segment;
+ } 
+

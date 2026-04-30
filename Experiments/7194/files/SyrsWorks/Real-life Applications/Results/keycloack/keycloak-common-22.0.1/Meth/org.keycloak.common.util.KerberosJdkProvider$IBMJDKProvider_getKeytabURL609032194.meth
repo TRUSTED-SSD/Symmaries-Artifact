@@ -1,0 +1,29 @@
+java.lang.String org.keycloak.common.util.KerberosJdkProvider$IBMJDKProvider:getKeytabURL(java.lang.String keytab)
+{
+java.io.File $stack3;
+  java.net.URI $stack4;
+  java.net.URL $stack5;
+  java.lang.String $stack6;
+  java.net.MalformedURLException $stack7;
+  java.lang.StringBuilder $stack8;
+  java.io.PrintStream $stack9;
+  label0:$stack3=new java.io.File;
+ $stack3#java.io.File(keytab);
+ $stack4 = $stack3.toURI();
+ $stack5 = $stack4.toURL();
+ $stack6 = $stack5.toString();
+ label1:return  $stack6;
+ label2:$stack7 = catch;
+ $stack9=java.lang.System.err;
+ $stack8=new java.lang.StringBuilder;
+ $stack8#java.lang.StringBuilder();
+ $stack8 = $stack8.append("Invalid keytab location specified in configuration: ");
+ $stack8 = $stack8.append(keytab);
+ $stack6 = $stack8.toString();
+ dummyClass.lowSink($stack6);
+$stack9.println($stack6);
+ $stack7.printStackTrace();
+ return  keytab;
+ catch java.net.MalformedURLException: label0 - label1 : label2;
+} 
+

@@ -1,0 +1,43 @@
+boolean org.apache.kerby.kerberos.kerb.server.preauth.builtin.EncTsPreauth:verify(org.apache.kerby.kerberos.kerb.server.request.KdcRequest kdcRequest,org.apache.kerby.kerberos.kerb.preauth.PluginRequestContext requestContext,org.apache.kerby.kerberos.kerb.type.pa.PaDataEntry paData)
+{
+org.apache.kerby.kerberos.kerb.type.base.EncryptedData encData;
+  org.apache.kerby.kerberos.kerb.type.base.EncryptionKey clientKey;
+  org.apache.kerby.kerberos.kerb.type.pa.PaEncTsEnc timestamp;
+  org.apache.kerby.kerberos.kerb.server.KdcContext kdcContext;
+  long clockSkew;
+  byte[] $stack10;
+  org.apache.kerby.asn1.type.Asn1Type $stack11;
+  org.apache.kerby.kerberos.kerb.type.base.EncryptionType $stack12;
+  org.apache.kerby.kerberos.kerb.type.base.KeyUsage $stack14;
+  org.apache.kerby.kerberos.kerb.server.KdcConfig $stack17;
+  org.apache.kerby.kerberos.kerb.type.KerberosTime $stack19;
+  boolean $stack20;
+  org.apache.kerby.kerberos.kerb.KrbException $stack21;
+  org.apache.kerby.kerberos.kerb.KrbErrorCode $stack22;
+  $stack10 = paData.getPaDataValue();
+ $stack11 = org.apache.kerby.kerberos.kerb.KrbCodec.decode($stack10,org.apache.kerby.kerberos.kerb.type.base.EncryptedData);
+ encData=(org.apache.kerby.kerberos.kerb.type.base.EncryptedData) $stack11;
+ $stack12 = encData.getEType();
+ clientKey = kdcRequest.getClientKey($stack12);
+ if (clientKey!=null) goto label0;
+ $stack21=new org.apache.kerby.kerberos.kerb.KrbException;
+ $stack22=org.apache.kerby.kerberos.kerb.KrbErrorCode.KDC_ERR_ETYPE_NOSUPP;
+ $stack21#org.apache.kerby.kerberos.kerb.KrbException($stack22);
+ throw $stack21;
+ label0:$stack14=org.apache.kerby.kerberos.kerb.type.base.KeyUsage.AS_REQ_PA_ENC_TS;
+ $stack11 = org.apache.kerby.kerberos.kerb.common.EncryptionUtil.unseal(encData,clientKey,$stack14,org.apache.kerby.kerberos.kerb.type.pa.PaEncTsEnc);
+ timestamp=(org.apache.kerby.kerberos.kerb.type.pa.PaEncTsEnc) $stack11;
+ kdcContext = kdcRequest.getKdcContext();
+ $stack17 = kdcContext.getConfig();
+ clockSkew = $stack17.getAllowableClockSkew();
+ clockSkew=(clockSkew * 1000L);
+ $stack19 = timestamp.getAllTime();
+ $stack20 = $stack19.isInClockSkew(clockSkew);
+ if ($stack20!=0) goto label1;
+ $stack21=new org.apache.kerby.kerberos.kerb.KrbException;
+ $stack22=org.apache.kerby.kerberos.kerb.KrbErrorCode.KDC_ERR_PREAUTH_FAILED;
+ $stack21#org.apache.kerby.kerberos.kerb.KrbException($stack22);
+ throw $stack21;
+ label1:return  1;
+ } 
+

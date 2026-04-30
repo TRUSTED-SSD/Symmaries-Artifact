@@ -1,0 +1,22 @@
+digraph G {
+  node [shape=box, ];
+  "pc0_js1" [label="〈$i1 = java.lang.Float.floatToIntBits (f0), js1〉\n\
+tt",
+             ];
+  "pc1_js1" [label="〈java.io.Bits.putInt (r0, i0, $i1), js1〉\n\
+tt", ];
+  "pc2_js1" [label="〈return, js1〉", ];
+  "pc3_js1" [label="〈sink, js1〉\n\
+obj_level(r0) ⊑ ret(obj_level(r0))'",
+             ];
+  
+  
+  "pc0_js1" -> "pc1_js1" [label="tt,\n\
+{level($i1) := pc ⊔ level(f0)}", ];
+  "pc1_js1" -> "pc2_js1" [label="tt,\n\
+{obj_level(r0) := pc ⊔ level(f0) ⊔ level(i0) ⊔ obj_level(r0)}",
+                          ];
+  "pc2_js1" -> "pc3_js1" [label="tt,\n\
+{ϕ := S2}", ];
+  
+  }

@@ -1,0 +1,31 @@
+void org.apache.rocketmq.tieredstore.container.TieredIndexFile$CompactTask:compact()
+{
+org.apache.rocketmq.store.logfile.MappedFile $stack1;
+  boolean $stack2;
+  org.apache.rocketmq.tieredstore.container.TieredFileQueue $stack4;
+  java.nio.MappedByteBuffer $stack5;
+  org.apache.rocketmq.logging.org.slf4j.Logger $stack12;
+  $stack1=this.originFile;
+ $stack2 = org.apache.rocketmq.tieredstore.container.TieredIndexFile.access$100($stack1);
+ if ($stack2!=0) goto label0;
+ $stack12 = org.apache.rocketmq.tieredstore.container.TieredIndexFile.access$000();
+ $stack12.error("[Bug]TieredIndexFile#CompactTask#compact: try to compact unsealed file");
+ $stack1=this.originFile;
+ $stack1.destroy(-1L);
+ $stack1=this.compactFile;
+ $stack1.destroy(-1L);
+ return;
+ label0:this#org.apache.rocketmq.tieredstore.container.TieredIndexFile$CompactTask:buildCompactFile();
+ $stack4=this.fileQueue;
+ $stack1=this.compactFile;
+ $stack5 = $stack1.getMappedByteBuffer();
+ $stack4.append((java.nio.ByteBuffer)$stack5);
+ $stack4=this.fileQueue;
+ $stack4#org.apache.rocketmq.tieredstore.container.TieredFileQueue(1);
+ $stack1=this.compactFile;
+ $stack1.destroy(-1L);
+ $stack1=this.originFile;
+ $stack1.destroy(-1L);
+ return;
+ } 
+

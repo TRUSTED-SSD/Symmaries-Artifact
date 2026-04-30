@@ -1,0 +1,25 @@
+boolean org.greenrobot.eventbus.SubscriberMethodFinder$FindState:checkAdd(java.lang.reflect.Method method,java.lang.Class eventType)
+{
+java.lang.Object existing;
+  java.util.Map $stack4;
+  boolean $stack6;
+  java.lang.reflect.Method $stack8;
+  java.lang.IllegalStateException $stack15;
+  $stack4=this.anyMethodByEventType;
+ existing = $stack4.put((java.lang.Object)eventType,(java.lang.Object)method);
+ if (existing!=null) goto label0;
+ return  1;
+ label0:$stack6=existing instanceof java.lang.reflect.Method;
+ if ($stack6==0) goto label1;
+ $stack8=(java.lang.reflect.Method) existing;
+ $stack6 = this#org.greenrobot.eventbus.SubscriberMethodFinder$FindState:checkAddWithMethodSignature($stack8,eventType);
+ if ($stack6!=0) goto label2;
+ $stack15=new java.lang.IllegalStateException;
+ $stack15#java.lang.IllegalStateException();
+ throw $stack15;
+ label2:$stack4=this.anyMethodByEventType;
+ $stack4.put((java.lang.Object)eventType,(java.lang.Object)this);
+ label1:$stack6 = this#org.greenrobot.eventbus.SubscriberMethodFinder$FindState:checkAddWithMethodSignature(method,eventType);
+ return  $stack6;
+ } 
+

@@ -1,0 +1,36 @@
+void java.util.WeakHashMap:resize(int i0)
+{
+java.util.WeakHashMap$Entry[] r1;
+  int i1;
+  java.util.WeakHashMap$Entry[] r2;
+  int $i2;
+  int $i3;
+  int $i4;
+  float $f0;
+  float $f1;
+  float $f2;
+  int $i5;
+  r1 = this#java.util.WeakHashMap:getTable();
+ i1=#r1;
+ if (i1!=1073741824) goto label0;
+ this.threshold=2147483647;
+ return;
+ label0:r2 = this#java.util.WeakHashMap:newTable(i0);
+ this#java.util.WeakHashMap:transfer(r1,r2);
+ this.table=r2;
+ $i4=this.size;
+ $i2=this.threshold;
+ $i3=($i2/2);
+ if ($i4<$i3) goto label1;
+ $f1=(float) i0;
+ $f0=this.loadFactor;
+ $f2=($f1 * $f0);
+ $i5=(int) $f2;
+ this.threshold=$i5;
+ goto label2;
+ label1:this#java.util.WeakHashMap:expungeStaleEntries();
+ this#java.util.WeakHashMap:transfer(r2,r1);
+ this.table=r1;
+ label2:return;
+ }  
+

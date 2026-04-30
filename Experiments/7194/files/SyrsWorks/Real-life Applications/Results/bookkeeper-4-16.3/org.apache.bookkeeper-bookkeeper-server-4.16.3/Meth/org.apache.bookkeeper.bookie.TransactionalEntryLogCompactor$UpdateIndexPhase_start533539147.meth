@@ -1,0 +1,28 @@
+void org.apache.bookkeeper.bookie.TransactionalEntryLogCompactor$UpdateIndexPhase:start()
+{
+org.apache.bookkeeper.bookie.storage.CompactionEntryLog $stack1;
+  boolean $stack2;
+  org.apache.bookkeeper.bookie.TransactionalEntryLogCompactor $stack3;
+  java.util.List $stack4;
+  org.apache.bookkeeper.bookie.CompactableLedgerStorage $stack9;
+  $stack1=this.compactionLog;
+ $stack1.makeAvailable();
+ $stack2=this.isInRecovery;
+ if ($stack2==0) goto label0;
+ $stack1=this.compactionLog;
+ this#org.apache.bookkeeper.bookie.TransactionalEntryLogCompactor$UpdateIndexPhase:recoverEntryLocations($stack1);
+ label0:$stack3=this.this$0;
+ $stack4=$stack3.offsets;
+ $stack2 = $stack4.isEmpty();
+ if ($stack2!=0) goto label1;
+ $stack3=this.this$0;
+ $stack9=$stack3.ledgerStorage;
+ $stack3=this.this$0;
+ $stack4=$stack3.offsets;
+ $stack9.updateEntriesLocations((java.lang.Iterable)$stack4);
+ $stack3=this.this$0;
+ $stack9=$stack3.ledgerStorage;
+ $stack9.flushEntriesLocationsIndex();
+ label1:return;
+ } 
+

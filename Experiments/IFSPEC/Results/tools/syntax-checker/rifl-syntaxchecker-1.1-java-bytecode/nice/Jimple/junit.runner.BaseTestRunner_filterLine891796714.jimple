@@ -1,0 +1,69 @@
+    static boolean filterLine(java.lang.String)
+    {
+        java.lang.String line, $stack5;
+        java.lang.String[] patterns;
+        int i, $stack4;
+
+        line := @parameter0: java.lang.String;
+
+        patterns = newarray (java.lang.String)[8];
+/*305*/
+
+        patterns[0] = "junit.framework.TestCase";
+/*305*/
+
+        patterns[1] = "junit.framework.TestResult";
+/*305*/
+
+        patterns[2] = "junit.framework.TestSuite";
+/*305*/
+
+        patterns[3] = "junit.framework.Assert.";
+/*305*/
+
+        patterns[4] = "junit.swingui.TestRunner";
+/*305*/
+
+        patterns[5] = "junit.awtui.TestRunner";
+/*305*/
+
+        patterns[6] = "junit.textui.TestRunner";
+/*305*/
+
+        patterns[7] = "java.lang.reflect.Method.invoke(";
+/*305*/
+
+        i = 0;
+/*315*/
+
+     label1:
+        $stack4 = lengthof patterns;
+/*315*/
+
+        if i >= $stack4 goto label3;
+/*315*/
+
+        $stack5 = patterns[i];
+/*316*/
+
+        $stack4 = virtualinvoke line.<java.lang.String: int indexOf(java.lang.String)>($stack5);
+/*316*/
+
+        if $stack4 <= 0 goto label2;
+/*316*/
+
+        return 1;
+/*317*/
+
+     label2:
+        i = i + 1;
+/*315*/
+
+        goto label1;
+/*315*/
+
+     label3:
+        return 0;
+/*320*/
+    }
+

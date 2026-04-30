@@ -1,0 +1,22 @@
+void org.keycloak.KeycloakSecurityContext:readObject(java.io.ObjectInputStream in)
+{
+org.keycloak.common.util.DelegatingSerializationFilter$FilterPatternBuilder $stack2;
+  java.lang.String $stack4;
+  java.lang.Object $stack5;
+  org.keycloak.representations.AccessToken $stack6;
+  org.keycloak.representations.IDToken $stack9;
+  $stack2 = org.keycloak.common.util.DelegatingSerializationFilter.builder();
+ $stack2 = $stack2.addAllowedClass(org.keycloak.KeycloakSecurityContext);
+ $stack2.setFilter(in);
+ in.defaultReadObject();
+ $stack4=this.tokenString;
+ $stack5 = this#org.keycloak.KeycloakSecurityContext:parseToken($stack4,org.keycloak.representations.AccessToken);
+ $stack6=(org.keycloak.representations.AccessToken) $stack5;
+ this.token=$stack6;
+ $stack4=this.idTokenString;
+ $stack5 = this#org.keycloak.KeycloakSecurityContext:parseToken($stack4,org.keycloak.representations.IDToken);
+ $stack9=(org.keycloak.representations.IDToken) $stack5;
+ this.idToken=$stack9;
+ return;
+ } 
+

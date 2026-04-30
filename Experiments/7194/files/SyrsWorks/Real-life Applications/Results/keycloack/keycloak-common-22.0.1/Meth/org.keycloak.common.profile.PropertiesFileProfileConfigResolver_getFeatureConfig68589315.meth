@@ -1,0 +1,60 @@
+org.keycloak.common.profile.ProfileConfigResolver$FeatureConfig org.keycloak.common.profile.PropertiesFileProfileConfigResolver:getFeatureConfig(org.keycloak.common.Profile$Feature feature)
+{
+java.lang.String config;
+  java.lang.String l3;
+  byte l4;
+  java.util.Properties $stack5;
+  org.keycloak.common.profile.ProfileConfigResolver$FeatureConfig $stack6;
+  java.lang.StringBuilder $stack7;
+  int $stack15;
+  boolean $stack16;
+  org.keycloak.common.profile.ProfileException $stack19;
+  $stack5=this.properties;
+ if ($stack5==null) goto label0;
+ $stack5=this.properties;
+ $stack7=new java.lang.StringBuilder;
+ $stack7#java.lang.StringBuilder();
+ $stack7 = $stack7.append("feature.");
+ config = feature.name();
+ config = config.toLowerCase();
+ $stack7 = $stack7.append(config);
+ config = $stack7.toString();
+ config = $stack5.getProperty(config);
+ if (config==null) goto label0;
+ l3=config;
+ l4=-1;
+ $stack15 = config.hashCode();
+ switch [$stack15]
+if 0 goto label1;
+if 1 goto label2;
+goto label3;
+ label1:$stack16 = config.equals((java.lang.Object)"enabled");
+ if ($stack16==0) goto label3;
+ l4=0;
+ goto label3;
+ label2:$stack16 = config.equals((java.lang.Object)"disabled");
+ if ($stack16==0) goto label3;
+ l4=1;
+ label3:switch [l4]
+if 0 goto label4;
+if 1 goto label5;
+goto label6;
+ label4:$stack6=org.keycloak.common.profile.ProfileConfigResolver$FeatureConfig.ENABLED;
+ return  $stack6;
+ label5:$stack6=org.keycloak.common.profile.ProfileConfigResolver$FeatureConfig.DISABLED;
+ return  $stack6;
+ label6:$stack19=new org.keycloak.common.profile.ProfileException;
+ $stack7=new java.lang.StringBuilder;
+ $stack7#java.lang.StringBuilder();
+ $stack7 = $stack7.append("Invalid config value \'");
+ $stack7 = $stack7.append(config);
+ $stack7 = $stack7.append("\' for feature ");
+ config = feature.getKey();
+ $stack7 = $stack7.append(config);
+ config = $stack7.toString();
+ $stack19#org.keycloak.common.profile.ProfileException(config);
+ throw $stack19;
+ label0:$stack6=org.keycloak.common.profile.ProfileConfigResolver$FeatureConfig.UNCONFIGURED;
+ return  $stack6;
+ } 
+

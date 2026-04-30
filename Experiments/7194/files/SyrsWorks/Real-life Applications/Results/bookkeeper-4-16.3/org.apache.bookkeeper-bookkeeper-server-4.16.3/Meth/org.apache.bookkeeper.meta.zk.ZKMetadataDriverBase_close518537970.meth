@@ -1,0 +1,36 @@
+void org.apache.bookkeeper.meta.zk.ZKMetadataDriverBase:close()
+{
+org.apache.bookkeeper.meta.LedgerManagerFactory $stack2;
+  boolean $stack3;
+  org.apache.zookeeper.ZooKeeper $stack4;
+  java.lang.InterruptedException $stack8;
+  java.lang.Thread $stack9;
+  org.slf4j.Logger $stack10;
+  java.io.IOException $stack13;
+  $stack2=this.lmFactory;
+ if (null==$stack2) goto label0;
+ label1:$stack2=this.lmFactory;
+ $stack2.close();
+ label2:goto label3;
+ label4:$stack13 = catch;
+ $stack10=org.apache.bookkeeper.meta.zk.ZKMetadataDriverBase.log;
+ $stack10.warn("Failed to close zookeeper based ledger manager",(java.lang.Throwable)$stack13);
+ label3:this.lmFactory=null;
+ label0:$stack3=this.ownZKHandle;
+ if ($stack3==0) goto label5;
+ $stack4=this.zk;
+ if (null==$stack4) goto label5;
+ label6:$stack4=this.zk;
+ $stack4.close();
+ label7:goto label8;
+ label9:$stack8 = catch;
+ $stack9 = java.lang.Thread.currentThread();
+ $stack9.interrupt();
+ $stack10=org.apache.bookkeeper.meta.zk.ZKMetadataDriverBase.log;
+ $stack10.warn("Interrupted on closing zookeeper client",(java.lang.Throwable)$stack8);
+ label8:this.zk=null;
+ label5:return;
+ catch java.io.IOException: label1 - label2 : label4;
+catch java.lang.InterruptedException: label6 - label7 : label9;
+} 
+

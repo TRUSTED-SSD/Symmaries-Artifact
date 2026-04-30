@@ -1,0 +1,47 @@
+boolean org.apache.rocketmq.store.MappedFileQueue:retryDeleteFirstFile(long intervalForcibly)
+{
+org.apache.rocketmq.store.logfile.MappedFile mappedFile;
+  boolean result;
+  java.util.ArrayList tmpFiles;
+  java.lang.StringBuilder $stack9;
+  org.apache.rocketmq.logging.org.slf4j.Logger $stack10;
+  java.lang.String $stack12;
+  mappedFile = this.getFirstMappedFile();
+ if (mappedFile==null) goto label0;
+ result = mappedFile.isAvailable();
+ if (result!=0) goto label0;
+ $stack10=org.apache.rocketmq.store.MappedFileQueue.log;
+ $stack9=new java.lang.StringBuilder;
+ $stack9#java.lang.StringBuilder();
+ $stack9 = $stack9.append("the mappedFile was destroyed once, but still alive, ");
+ $stack12 = mappedFile.getFileName();
+ $stack9 = $stack9.append($stack12);
+ $stack12 = $stack9.toString();
+ $stack10.warn($stack12);
+ result = mappedFile.destroy(intervalForcibly);
+ if (result==0) goto label1;
+ $stack10=org.apache.rocketmq.store.MappedFileQueue.log;
+ $stack9=new java.lang.StringBuilder;
+ $stack9#java.lang.StringBuilder();
+ $stack9 = $stack9.append("the mappedFile re delete OK, ");
+ $stack12 = mappedFile.getFileName();
+ $stack9 = $stack9.append($stack12);
+ $stack12 = $stack9.toString();
+ $stack10.info($stack12);
+ tmpFiles=new java.util.ArrayList;
+ tmpFiles#java.util.ArrayList();
+ tmpFiles.add((java.lang.Object)mappedFile);
+ this.deleteExpiredFile((java.util.List)tmpFiles);
+ goto label2;
+ label1:$stack10=org.apache.rocketmq.store.MappedFileQueue.log;
+ $stack9=new java.lang.StringBuilder;
+ $stack9#java.lang.StringBuilder();
+ $stack9 = $stack9.append("the mappedFile re delete failed, ");
+ $stack12 = mappedFile.getFileName();
+ $stack9 = $stack9.append($stack12);
+ $stack12 = $stack9.toString();
+ $stack10.warn($stack12);
+ label2:return  result;
+ label0:return  0;
+ } 
+

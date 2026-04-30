@@ -1,0 +1,54 @@
+boolean org.apache.rocketmq.proxy.service.admin.DefaultAdminService:createTopicOnTopicBrokerIfNotExist(java.lang.String createTopic,java.lang.String sampleTopic,int wQueueNum,int rQueueNum,boolean examineTopic,int retryCheckCount)
+{
+org.apache.rocketmq.remoting.protocol.route.TopicRouteData curTopicRouteData;
+  java.lang.Object e;
+  java.util.List $stack13;
+  boolean $stack14;
+  java.util.List $stack16;
+  java.lang.Exception $stack19;
+  org.apache.rocketmq.logging.org.slf4j.Logger $stack24;
+  java.lang.Exception $stack25;
+  java.lang.Exception $stack27;
+  org.apache.rocketmq.remoting.protocol.route.TopicRouteData tmp$657596606;
+  java.lang.Throwable tmp$518014762;
+  tmp$657596606=new org.apache.rocketmq.remoting.protocol.route.TopicRouteData;
+ curTopicRouteData=tmp$657596606;
+ tmp$657596606#org.apache.rocketmq.remoting.protocol.route.TopicRouteData();
+ curTopicRouteData=tmp$657596606;
+ label0:curTopicRouteData = this.getTopicRouteDataDirectlyFromNameServer(createTopic);
+ label1:goto label2;
+ label3:$stack19 = catch;
+ e=$stack19;
+ tmp$518014762=(java.lang.Throwable) $stack19;
+ $stack14 = org.apache.rocketmq.proxy.service.route.TopicRouteHelper.isTopicNotExistError(tmp$518014762);
+ if ($stack14!=0) goto label2;
+ $stack24=org.apache.rocketmq.proxy.service.admin.DefaultAdminService.log;
+ $stack24.error("get cur topic route {} failed.",(java.lang.Object)createTopic,(java.lang.Object)$stack19);
+ return  0;
+ label2:e=null;
+ label4:e = this.getTopicRouteDataDirectlyFromNameServer(sampleTopic);
+ label5:goto label6;
+ label7:$stack27 = catch;
+ $stack24=org.apache.rocketmq.proxy.service.admin.DefaultAdminService.log;
+ $stack24.error("create topic {} failed.",(java.lang.Object)createTopic,(java.lang.Object)$stack27);
+ return  0;
+ label6:if (e==null) goto label8;
+ tmp$657596606=(org.apache.rocketmq.remoting.protocol.route.TopicRouteData) e;
+ $stack13 = tmp$657596606.getBrokerDatas();
+ $stack14 = $stack13.isEmpty();
+ if ($stack14==0) goto label9;
+ label8:return  0;
+ label9:$stack13 = curTopicRouteData.getBrokerDatas();
+ curTopicRouteData=(org.apache.rocketmq.remoting.protocol.route.TopicRouteData) e;
+ $stack16 = curTopicRouteData.getBrokerDatas();
+ examineTopic = this.createTopicOnBroker(createTopic,wQueueNum,rQueueNum,$stack13,$stack16,examineTopic,retryCheckCount);
+ label10:return  examineTopic;
+ label11:$stack25 = catch;
+ $stack24=org.apache.rocketmq.proxy.service.admin.DefaultAdminService.log;
+ $stack24.error("create topic {} failed.",(java.lang.Object)createTopic,(java.lang.Object)$stack25);
+ return  0;
+ catch java.lang.Exception: label0 - label1 : label3;
+catch java.lang.Exception: label4 - label5 : label7;
+catch java.lang.Exception: label9 - label10 : label11;
+} 
+

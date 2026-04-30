@@ -1,0 +1,40 @@
+int java.util.Random:nextInt(int i0)
+{
+int i1;
+  int $i2;
+  int $i3;
+  int $i4;
+  int $i5;
+  long $l6;
+  long $l7;
+  long $l8;
+  long $l9;
+  java.lang.IllegalArgumentException $r1;
+  int i10;
+  int i11;
+  int i12;
+  if (i0>0) goto label0;
+ $r1=new java.lang.IllegalArgumentException;
+ $r1#java.lang.IllegalArgumentException:init("bound must be positive");
+ throw $r1;
+ label0:i10 = this.next(31);
+ i1=(i0-1);
+ $i2=(i0 & i1);
+ if ($i2!=0) goto label1;
+ $l7=(long) i0;
+ $l6=(long) i10;
+ $l8=($l7 * $l6);
+ $l9=($l8>>31);
+ i11=(int) $l9;
+ goto label2;
+ label1:i12=i10;
+ label3:$i3=(i12%i0);
+ i11=$i3;
+ $i4=(i12-$i3);
+ $i5=($i4+i1);
+ if ($i5>=0) goto label2;
+ i12 = this.next(31);
+ goto label3;
+ label2:return  i11;
+ }  
+

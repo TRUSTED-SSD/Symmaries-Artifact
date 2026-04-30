@@ -1,0 +1,46 @@
+static org.apache.rocketmq.tieredstore.metadata.TieredMetadataStore org.apache.rocketmq.tieredstore.util.TieredStoreUtil:getMetadataStore(org.apache.rocketmq.tieredstore.common.TieredMessageStoreConfig storeConfig)
+{
+java.lang.Class l1;
+  java.lang.reflect.Constructor constructor;
+  java.lang.Throwable l4;
+  org.apache.rocketmq.tieredstore.metadata.TieredMetadataStore $stack5;
+  java.lang.String $stack9;
+  java.lang.Class[] $stack12;
+  java.lang.Object[] $stack14;
+  java.lang.Object $stack15;
+  java.lang.Exception $stack17;
+  org.apache.rocketmq.logging.org.slf4j.Logger $stack18;
+  $stack5=org.apache.rocketmq.tieredstore.util.TieredStoreUtil.metadataStoreInstance;
+ if ($stack5!=null) goto label0;
+ l1=org.apache.rocketmq.tieredstore.metadata.TieredMetadataStore;
+ monitorenter org.apache.rocketmq.tieredstore.metadata.TieredMetadataStore;
+ label1:$stack5=org.apache.rocketmq.tieredstore.util.TieredStoreUtil.metadataStoreInstance;
+ if ($stack5!=null) goto label2;
+ label3:$stack9 = storeConfig.getTieredMetadataServiceProvider();
+ l1 = java.lang.Class.forName($stack9);
+ l1 = l1.asSubclass(org.apache.rocketmq.tieredstore.metadata.TieredMetadataStore);
+ $stack12=new java.lang.Class[1];
+ $stack12[0]=org.apache.rocketmq.tieredstore.common.TieredMessageStoreConfig;
+ constructor = l1.getConstructor($stack12);
+ $stack14=new java.lang.Object[1];
+ $stack14[0]=storeConfig;
+ $stack15 = constructor.newInstance($stack14);
+ $stack5=(org.apache.rocketmq.tieredstore.metadata.TieredMetadataStore) $stack15;
+ org.apache.rocketmq.tieredstore.util.TieredStoreUtil.metadataStoreInstance=$stack5;
+ label4:goto label2;
+ label5:$stack17 = catch;
+ $stack18=org.apache.rocketmq.tieredstore.util.TieredStoreUtil.logger;
+ $stack9 = storeConfig.getTieredMetadataServiceProvider();
+ $stack18.error("TieredMetadataStore#getInstance: build metadata store failed, provider class: {}",(java.lang.Object)$stack9,(java.lang.Object)$stack17);
+ label2:monitorexit org.apache.rocketmq.tieredstore.metadata.TieredMetadataStore;
+ label6:goto label0;
+ label7:l4 = catch;
+ monitorexit org.apache.rocketmq.tieredstore.metadata.TieredMetadataStore;
+ label8:throw l4;
+ label0:$stack5=org.apache.rocketmq.tieredstore.util.TieredStoreUtil.metadataStoreInstance;
+ return  $stack5;
+ catch java.lang.Exception: label3 - label4 : label5;
+catch java.lang.Throwable: label1 - label6 : label7;
+catch java.lang.Throwable: label7 - label8 : label7;
+} 
+

@@ -1,0 +1,32 @@
+digraph G {
+  node [shape=box, ];
+  "pc0_js1" [label="〈r1 = new (long)[i0], js1〉", ];
+  "pc1_js1" [label="〈$i1 = #r0, js1〉", ];
+  "pc2_js1" [label="〈$i2 = java.lang.Math.min ($i1, i0), js1〉\n\
+tt", ];
+  "pc3_js1" [label="〈java.lang.System.native_arraycopy ((java.lang.Object) r0, 0, (java.lang.Object) r1, 0, $i2), js1〉\n\
+tt",
+             ];
+  "pc4_js1" [label="〈return r1, js1〉", ];
+  "pc5_js1" [label="〈sink, js1〉\n\
+obj_level(r0) ⊑ ret(obj_level(r0))' ∧ (ϕ ≠ S4 ∨ obj_level(r1) ⊑ ret(obj_level())' ∧ pc ⊔ level(r1) ⊑ ret(level())' ∧ (ret(~r0)' ∨ ¬r0~r1))",
+             ];
+  
+  
+  "pc0_js1" -> "pc1_js1" [label="tt,\n\
+{r0~r1 := ff,\n\
+ level(r1) := pc,\n\
+ obj_level(r1) := pc ⊔ level(i0)}",
+                          ];
+  "pc1_js1" -> "pc2_js1" [label="tt,\n\
+{level($i1) := pc ⊔ level(r0) ⊔ obj_level(r0)}",
+                          ];
+  "pc2_js1" -> "pc3_js1" [label="tt,\n\
+{level($i2) := pc ⊔ level(i0) ⊔ level(r0) ⊔ obj_level(r0)}",
+                          ];
+  "pc3_js1" -> "pc4_js1" [label="tt,\n\
+{}", ];
+  "pc4_js1" -> "pc5_js1" [label="tt,\n\
+{ϕ := S4}", ];
+  
+  }

@@ -1,0 +1,18 @@
+static void org.apache.rocketmq.tools.admin.MQAdminUtils:refreshClusterInfo(org.apache.rocketmq.tools.admin.DefaultMQAdminExt defaultMQAdminExt,org.apache.rocketmq.remoting.rpc.ClientMetadata clientMetadata)
+{
+org.apache.rocketmq.remoting.protocol.body.ClusterInfo clusterInfo;
+  java.lang.RuntimeException $stack4;
+  java.util.Map $stack5;
+  boolean $stack6;
+  clusterInfo = defaultMQAdminExt.examineBrokerClusterInfo();
+ if (clusterInfo==null) goto label0;
+ $stack5 = clusterInfo.getClusterAddrTable();
+ $stack6 = $stack5.isEmpty();
+ if ($stack6==0) goto label1;
+ label0:$stack4=new java.lang.RuntimeException;
+ $stack4#java.lang.RuntimeException("The Cluster info is empty");
+ throw $stack4;
+ label1:clientMetadata.refreshClusterInfo(clusterInfo);
+ return;
+ } 
+

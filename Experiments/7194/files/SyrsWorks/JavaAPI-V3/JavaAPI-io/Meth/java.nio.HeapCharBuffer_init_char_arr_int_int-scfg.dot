@@ -1,0 +1,29 @@
+digraph G {
+  node [shape=box, ];
+  "pc0_js1" [label="〈$i3 = i0 + i1, js1〉", ];
+  "pc1_js1" [label="〈$i2 = #r1, js1〉", ];
+  "pc2_js1" [label="〈this#java.nio.CharBuffer.init (-1, i0, $i3, $i2, r1, 0), js1〉\n\
+pc ⊔ level($i2) ⊔ level($i3) ⊔ level(i0) ⊔ level(this) ⊔ obj_level(this) = ⊥",
+             ];
+  "pc3_js1" [label="〈return this, js1〉", ];
+  "pc4_js1" [label="〈sink, js1〉\n\
+obj_level(r1) ⊑ ret(obj_level(r1))' ∧ obj_level(this) ⊑ ret(obj_level(this))' ∧ (ret(this.><r1)' ∨ ¬this.><r1) ∧ (ret(this.><this)' ∨ ¬this.><this) ∧ (ϕ ≠ S3 ∨ ret(~this)' ∧ obj_level(this) ⊑ ret(obj_level())' ∧ pc ⊔ level(this) ⊑ ret(level())' ∧ (ret(.><this)' ∨ ¬this.><this) ∧ (ret(r1.><)' ∨ ¬this.><r1) ∧ (ret(this.><)' ∨ ¬this.><this))",
+             ];
+  
+  
+  "pc0_js1" -> "pc1_js1" [label="tt,\n\
+{level($i3) := pc ⊔ level(i0) ⊔ level(i1)}",
+                          ];
+  "pc1_js1" -> "pc2_js1" [label="tt,\n\
+{level($i2) := pc ⊔ level(r1) ⊔ obj_level(r1)}",
+                          ];
+  "pc2_js1" -> "pc3_js1" [label="tt,\n\
+{this.><r1 := tt,\n\
+ this.><this := tt,\n\
+ obj_level(r1) := obj_level(r1) ⊔ (if this.><r1 then ⊤ else ⊥) ⊔ (if this.><r1 then ⊤ else obj_level(r1)),\n\
+ obj_level(this) := ⊤}",
+                          ];
+  "pc3_js1" -> "pc4_js1" [label="tt,\n\
+{ϕ := S3}", ];
+  
+  }

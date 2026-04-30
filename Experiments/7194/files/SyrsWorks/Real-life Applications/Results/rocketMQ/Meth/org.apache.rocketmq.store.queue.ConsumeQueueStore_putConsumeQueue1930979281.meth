@@ -1,0 +1,23 @@
+void org.apache.rocketmq.store.queue.ConsumeQueueStore:putConsumeQueue(java.lang.String topic,int queueId,org.apache.rocketmq.store.queue.ConsumeQueueInterface consumeQueue)
+{
+java.util.concurrent.ConcurrentMap map;
+  java.lang.Object $stack6;
+  java.lang.Integer $stack7;
+  java.util.concurrent.ConcurrentHashMap $stack9;
+  map=this.consumeQueueTable;
+ $stack6 = map.get((java.lang.Object)topic);
+ map=(java.util.concurrent.ConcurrentMap) $stack6;
+ if (null!=map) goto label0;
+ $stack9=new java.util.concurrent.ConcurrentHashMap;
+ $stack9#java.util.concurrent.ConcurrentHashMap();
+ map=$stack9;
+ $stack7 = java.lang.Integer.valueOf(queueId);
+ $stack9.put((java.lang.Object)$stack7,(java.lang.Object)consumeQueue);
+ map=this.consumeQueueTable;
+ map.put((java.lang.Object)topic,(java.lang.Object)$stack9);
+ goto label1;
+ label0:$stack7 = java.lang.Integer.valueOf(queueId);
+ map.put((java.lang.Object)$stack7,(java.lang.Object)consumeQueue);
+ label1:return;
+ } 
+

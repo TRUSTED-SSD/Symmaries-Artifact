@@ -1,0 +1,27 @@
+boolean org.apache.bookkeeper.common.util.SingleThreadExecutor:safeRunTask(java.lang.Runnable r)
+{
+java.lang.Throwable t;
+  java.util.concurrent.atomic.LongAdder $stack3;
+  boolean $stack5;
+  org.slf4j.Logger $stack7;
+  java.lang.String $stack9;
+  java.lang.Thread $stack11;
+  label0:r.run();
+ $stack3=this.tasksCompleted;
+ $stack3.increment();
+ label1:goto label2;
+ label3:t = catch;
+ $stack5=t instanceof java.lang.InterruptedException;
+ if ($stack5==0) goto label4;
+ $stack11 = java.lang.Thread.currentThread();
+ $stack11.interrupt();
+ return  0;
+ label4:$stack3=this.tasksFailed;
+ $stack3.increment();
+ $stack7=org.apache.bookkeeper.common.util.SingleThreadExecutor.log;
+ $stack9 = t.getMessage();
+ $stack7.error("Error while running task: {}",(java.lang.Object)$stack9,(java.lang.Object)t);
+ label2:return  1;
+ catch java.lang.Throwable: label0 - label1 : label3;
+} 
+

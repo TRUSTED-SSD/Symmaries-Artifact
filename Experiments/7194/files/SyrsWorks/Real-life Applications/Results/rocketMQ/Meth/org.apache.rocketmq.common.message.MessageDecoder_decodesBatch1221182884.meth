@@ -1,0 +1,16 @@
+static java.util.List org.apache.rocketmq.common.message.MessageDecoder:decodesBatch(java.nio.ByteBuffer byteBuffer,boolean readBody,boolean decompressBody,boolean isClient)
+{
+java.util.ArrayList msgExts;
+  org.apache.rocketmq.common.message.MessageExt msgExt;
+  boolean $stack7;
+  msgExts=new java.util.ArrayList;
+ msgExts#java.util.ArrayList();
+ label0:$stack7 = byteBuffer.hasRemaining();
+ if ($stack7==0) goto label1;
+ msgExt = org.apache.rocketmq.common.message.MessageDecoder.decode(byteBuffer,readBody,decompressBody,isClient);
+ if (null==msgExt) goto label1;
+ msgExts.add((java.lang.Object)msgExt);
+ goto label0;
+ label1:return  msgExts;
+ } 
+

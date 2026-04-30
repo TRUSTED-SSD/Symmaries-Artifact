@@ -1,0 +1,48 @@
+void org.apache.rocketmq.store.MappedFileQueue:swapMap(int reserveNum,long forceSwapIntervalMs,long normalSwapIntervalMs)
+{
+java.lang.Object[] mfs;
+  org.apache.rocketmq.store.logfile.MappedFile mappedFile;
+  java.util.concurrent.CopyOnWriteArrayList $stack9;
+  boolean $stack10;
+  int $stack12;
+  java.lang.Object $stack14;
+  long $stack15;
+  long $stack16;
+  byte $stack18;
+  $stack9=this.mappedFiles;
+ $stack10 = $stack9.isEmpty();
+ if ($stack10==0) goto label0;
+ return;
+ label0:if (reserveNum>=3) goto label1;
+ reserveNum=3;
+ label1:mfs = this.copyMappedFiles(0);
+ if (null!=mfs) goto label2;
+ return;
+ label2:$stack12=#mfs;
+ reserveNum=($stack12-reserveNum);
+ reserveNum=(reserveNum-1);
+ label3:if (reserveNum<0) goto label4;
+ $stack14=mfs[reserveNum];
+ mappedFile=(org.apache.rocketmq.store.logfile.MappedFile) $stack14;
+ $stack15 = java.lang.System.currentTimeMillis();
+ $stack16 = mappedFile.getRecentSwapMapTime();
+ $stack15=($stack15-$stack16);
+ $stack18=($stack15 cmp forceSwapIntervalMs);
+ if ($stack18<=0) goto label5;
+ mappedFile.swapMap();
+ goto label6;
+ label5:$stack15 = java.lang.System.currentTimeMillis();
+ $stack16 = mappedFile.getRecentSwapMapTime();
+ $stack15=($stack15-$stack16);
+ $stack18=($stack15 cmp normalSwapIntervalMs);
+ if ($stack18<=0) goto label6;
+ $stack15 = mappedFile.getMappedByteBufferAccessCountSinceLastSwap();
+ $stack18=($stack15 cmp 0L);
+ if ($stack18<=0) goto label6;
+ mappedFile.swapMap();
+ goto label6;
+ label6:reserveNum=(reserveNum+-1);
+ goto label3;
+ label4:return;
+ } 
+

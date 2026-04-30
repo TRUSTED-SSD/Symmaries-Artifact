@@ -1,0 +1,51 @@
+    private static org.apache.bookkeeper.discover.BookieServiceInfo buildBookieServiceInfo(org.apache.bookkeeper.common.component.ComponentInfoPublisher)
+    {
+        org.apache.bookkeeper.common.component.ComponentInfoPublisher componentInfoPublisher;
+        java.util.List endpoints;
+        java.util.Map $stack2;
+        java.util.Collection $stack3;
+        java.util.stream.Stream $stack4;
+        java.util.function.Function $stack5;
+        java.util.stream.Collector $stack7;
+        java.lang.Object $stack8;
+        org.apache.bookkeeper.discover.BookieServiceInfo $stack9;
+
+        componentInfoPublisher := @parameter0: org.apache.bookkeeper.common.component.ComponentInfoPublisher;
+
+        $stack2 = virtualinvoke componentInfoPublisher.<org.apache.bookkeeper.common.component.ComponentInfoPublisher: java.util.Map getEndpoints()>();
+/*424*/
+
+        $stack3 = interfaceinvoke $stack2.<java.util.Map: java.util.Collection values()>();
+/*424*/
+
+        $stack4 = interfaceinvoke $stack3.<java.util.Collection: java.util.stream.Stream stream()>();
+/*425*/
+
+        $stack5 = dynamicinvoke "apply" <java.util.function.Function ()>() <java.lang.invoke.LambdaMetafactory: java.lang.invoke.CallSite metafactory(java.lang.invoke.MethodHandles$Lookup,java.lang.String,java.lang.invoke.MethodType,java.lang.invoke.MethodType,java.lang.invoke.MethodHandle,java.lang.invoke.MethodType)>(class "(Ljava/lang/Object;)Ljava/lang/Object;", handle: <org.apache.bookkeeper.stream.server.StorageServer: org.apache.bookkeeper.discover.BookieServiceInfo$Endpoint lambda$buildBookieServiceInfo$8(org.apache.bookkeeper.common.component.ComponentInfoPublisher$EndpointInfo)>, class "(Lorg/apache/bookkeeper/common/component/ComponentInfoPublisher$EndpointInfo;)Lorg/apache/bookkeeper/discover/BookieServiceInfo$Endpoint;");
+/*425*/
+
+        $stack4 = interfaceinvoke $stack4.<java.util.stream.Stream: java.util.stream.Stream map(java.util.function.Function)>($stack5);
+/*425*/
+
+        $stack7 = staticinvoke <java.util.stream.Collectors: java.util.stream.Collector toList()>();
+/*434*/
+
+        $stack8 = interfaceinvoke $stack4.<java.util.stream.Stream: java.lang.Object collect(java.util.stream.Collector)>($stack7);
+/*434*/
+
+        endpoints = (java.util.List) $stack8;
+/*434*/
+
+        $stack9 = new org.apache.bookkeeper.discover.BookieServiceInfo;
+/*435*/
+
+        $stack2 = virtualinvoke componentInfoPublisher.<org.apache.bookkeeper.common.component.ComponentInfoPublisher: java.util.Map getProperties()>();
+/*435*/
+
+        specialinvoke $stack9.<org.apache.bookkeeper.discover.BookieServiceInfo: void <init>(java.util.Map,java.util.List)>($stack2, endpoints);
+/*435*/
+
+        return $stack9;
+/*435*/
+    }
+

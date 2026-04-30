@@ -1,0 +1,56 @@
+org.apache.rocketmq.store.logfile.MappedFile org.apache.rocketmq.store.queue.BatchConsumeQueue:searchTimeFromFiles(long timestamp)
+{
+org.apache.rocketmq.store.logfile.MappedFile targetBcq;
+  int mappedFileNum;
+  int i;
+  org.apache.rocketmq.store.logfile.MappedFile mappedFile;
+  org.apache.rocketmq.store.queue.BatchOffsetIndex tmpMinMsgOffset;
+  org.apache.rocketmq.store.queue.BatchOffsetIndex tmpMaxMsgOffset;
+  org.apache.rocketmq.store.MappedFileQueue $stack9;
+  java.util.List $stack10;
+  java.lang.Object $stack14;
+  long $stack17;
+  byte $stack18;
+  int $stack20;
+  targetBcq=null;
+ $stack9=this.mappedFileQueue;
+ $stack10 = $stack9.getMappedFiles();
+ mappedFileNum = $stack10.size();
+ i=(mappedFileNum-1);
+ label0:if (i<0) goto label1;
+ $stack9=this.mappedFileQueue;
+ $stack10 = $stack9.getMappedFiles();
+ $stack14 = $stack10.get(i);
+ mappedFile=(org.apache.rocketmq.store.logfile.MappedFile) $stack14;
+ tmpMinMsgOffset = this.getMinMsgOffset(mappedFile,(boolean)0,(boolean)1);
+ if (tmpMinMsgOffset!=null) goto label2;
+ goto label3;
+ label2:tmpMaxMsgOffset = this.getMaxMsgOffset(mappedFile,(boolean)0,(boolean)1);
+ if (tmpMaxMsgOffset!=null) goto label4;
+ goto label1;
+ label4:$stack17 = tmpMaxMsgOffset.getStoreTimestamp();
+ $stack18=($stack17 cmp timestamp);
+ if ($stack18<0) goto label5;
+ $stack17 = tmpMinMsgOffset.getStoreTimestamp();
+ $stack18=($stack17 cmp timestamp);
+ if ($stack18>0) goto label6;
+ targetBcq=mappedFile;
+ goto label1;
+ label6:$stack20=(i-1);
+ if ($stack20>=0) goto label3;
+ targetBcq=mappedFile;
+ goto label1;
+ label5:$stack20=(i+1);
+ mappedFileNum=(mappedFileNum-1);
+ if ($stack20>mappedFileNum) goto label1;
+ $stack9=this.mappedFileQueue;
+ $stack10 = $stack9.getMappedFiles();
+ i=(i+1);
+ $stack14 = $stack10.get(i);
+ targetBcq=(org.apache.rocketmq.store.logfile.MappedFile) $stack14;
+ goto label1;
+ label3:i=(i+-1);
+ goto label0;
+ label1:return  targetBcq;
+ } 
+

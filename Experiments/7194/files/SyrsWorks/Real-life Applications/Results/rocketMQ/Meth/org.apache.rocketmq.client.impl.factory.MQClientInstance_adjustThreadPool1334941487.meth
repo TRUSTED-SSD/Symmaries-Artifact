@@ -1,0 +1,34 @@
+void org.apache.rocketmq.client.impl.factory.MQClientInstance:adjustThreadPool()
+{
+java.util.Iterator l1;
+  java.util.Map$Entry entry;
+  org.apache.rocketmq.client.impl.consumer.MQConsumerInner impl;
+  java.lang.Object dmq;
+  java.util.concurrent.ConcurrentMap $stack5;
+  java.util.Set $stack6;
+  boolean $stack8;
+  java.lang.Exception $stack13;
+  org.apache.rocketmq.client.impl.consumer.DefaultMQPushConsumerImpl tmp$760603830;
+  $stack5=this.consumerTable;
+ $stack6 = $stack5.entrySet();
+ l1 = $stack6.iterator();
+ label0:$stack8 = l1.hasNext();
+ if ($stack8==0) goto label1;
+ dmq = l1.next();
+ entry=(java.util.Map$Entry) dmq;
+ dmq = entry.getValue();
+ impl=(org.apache.rocketmq.client.impl.consumer.MQConsumerInner) dmq;
+ if (impl==null) goto label2;
+ label3:$stack8=impl instanceof org.apache.rocketmq.client.impl.consumer.DefaultMQPushConsumerImpl;
+ if ($stack8==0) goto label4;
+ dmq=(org.apache.rocketmq.client.impl.consumer.DefaultMQPushConsumerImpl) impl;
+ tmp$760603830=(org.apache.rocketmq.client.impl.consumer.DefaultMQPushConsumerImpl) dmq;
+ tmp$760603830.adjustThreadPool();
+ label4:goto label2;
+ label5:$stack13 = catch;
+ dmq=$stack13;
+ label2:goto label0;
+ label1:return;
+ catch java.lang.Exception: label3 - label4 : label5;
+} 
+

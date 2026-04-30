@@ -1,0 +1,27 @@
+void org.keycloak.json.StringOrArraySerializer:serialize(java.lang.Object o,com.fasterxml.jackson.core.JsonGenerator jsonGenerator,com.fasterxml.jackson.databind.SerializerProvider serializerProvider)
+{
+java.lang.String[] array;
+  int l6;
+  int l7;
+  java.lang.String s;
+  array=(java.lang.String[]) o;
+ if (array!=null) goto label0;
+ jsonGenerator.writeNull();
+ goto label1;
+ label0:l6=#array;
+ if (l6!=1) goto label2;
+ s=array[0];
+ jsonGenerator.writeString(s);
+ goto label1;
+ label2:jsonGenerator.writeStartArray();
+ l6=#array;
+ l7=0;
+ label3:if (l7>=l6) goto label4;
+ s=array[l7];
+ jsonGenerator.writeString(s);
+ l7=(l7+1);
+ goto label3;
+ label4:jsonGenerator.writeEndArray();
+ label1:return;
+ } 
+

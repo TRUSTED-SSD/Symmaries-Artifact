@@ -1,0 +1,21 @@
+org.apache.bookkeeper.meta.LedgerIdGenerator org.apache.bookkeeper.meta.HierarchicalLedgerManagerFactory:newLedgerIdGenerator()
+{
+java.util.List zkAcls;
+  java.lang.String zkLedgersRootPath;
+  org.apache.bookkeeper.conf.AbstractConfiguration $stack4;
+  org.apache.bookkeeper.meta.ZkLedgerIdGenerator $stack8;
+  org.apache.zookeeper.ZooKeeper $stack9;
+  org.apache.bookkeeper.meta.LongZkLedgerIdGenerator $stack10;
+  $stack4=this.conf;
+ zkAcls = org.apache.bookkeeper.util.ZkUtils.getACLs($stack4);
+ $stack4=this.conf;
+ zkLedgersRootPath = org.apache.bookkeeper.meta.zk.ZKMetadataDriverBase.resolveZkLedgersRootPath($stack4);
+ $stack8=new org.apache.bookkeeper.meta.ZkLedgerIdGenerator;
+ $stack9=this.zk;
+ $stack8#org.apache.bookkeeper.meta.ZkLedgerIdGenerator($stack9,zkLedgersRootPath,"idgen",zkAcls);
+ $stack10=new org.apache.bookkeeper.meta.LongZkLedgerIdGenerator;
+ $stack9=this.zk;
+ $stack10#org.apache.bookkeeper.meta.LongZkLedgerIdGenerator($stack9,zkLedgersRootPath,"idgen-long",$stack8,zkAcls);
+ return  $stack10;
+ } 
+

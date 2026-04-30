@@ -1,0 +1,99 @@
+    public static junit.framework.Test testFromSuiteMethod(java.lang.Class) throws java.lang.Throwable
+    {
+        java.lang.Class klass;
+        java.lang.reflect.Method suiteMethod;
+        junit.framework.Test suite;
+        java.lang.Class[] $stack4;
+        int $stack6;
+        boolean $stack7;
+        java.lang.Object[] $stack8;
+        java.lang.Object $stack9;
+        java.lang.Exception $stack10;
+        java.lang.StringBuilder $stack11;
+        java.lang.String $stack12;
+        java.lang.reflect.InvocationTargetException $stack16;
+        java.lang.Throwable $stack17;
+
+        klass := @parameter0: java.lang.Class;
+
+        suiteMethod = null;
+/*28*/
+
+        suite = null;
+/*29*/
+
+     label1:
+        $stack4 = newarray (java.lang.Class)[0];
+/*31*/
+
+        suiteMethod = virtualinvoke klass.<java.lang.Class: java.lang.reflect.Method getMethod(java.lang.String,java.lang.Class[])>("suite", $stack4);
+/*31*/
+/*31*/
+
+        $stack6 = virtualinvoke suiteMethod.<java.lang.reflect.Method: int getModifiers()>();
+/*32*/
+
+        $stack7 = staticinvoke <java.lang.reflect.Modifier: boolean isStatic(int)>($stack6);
+/*32*/
+
+        if $stack7 != 0 goto label2;
+/*32*/
+
+        $stack10 = new java.lang.Exception;
+/*33*/
+
+        $stack11 = new java.lang.StringBuilder;
+/*33*/
+
+        specialinvoke $stack11.<java.lang.StringBuilder: void <init>()>();
+/*33*/
+
+        $stack12 = virtualinvoke klass.<java.lang.Class: java.lang.String getName()>();
+/*33*/
+
+        $stack11 = virtualinvoke $stack11.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>($stack12);
+/*33*/
+
+        $stack11 = virtualinvoke $stack11.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>(".suite() must be static");
+/*33*/
+
+        $stack12 = virtualinvoke $stack11.<java.lang.StringBuilder: java.lang.String toString()>();
+/*33*/
+
+        specialinvoke $stack10.<java.lang.Exception: void <init>(java.lang.String)>($stack12);
+/*33*/
+
+        throw $stack10;
+/*33*/
+
+     label2:
+        $stack8 = newarray (java.lang.Object)[0];
+/*35*/
+
+        $stack9 = virtualinvoke suiteMethod.<java.lang.reflect.Method: java.lang.Object invoke(java.lang.Object,java.lang.Object[])>(null, $stack8);
+/*35*/
+
+        suite = (junit.framework.Test) $stack9;
+/*35*/
+
+     label3:
+        goto label5;
+/*38*/
+
+     label4:
+        $stack16 := @caughtexception;
+/*33*/
+
+        $stack17 = virtualinvoke $stack16.<java.lang.reflect.InvocationTargetException: java.lang.Throwable getCause()>();
+/*37*/
+
+        throw $stack17;
+/*37*/
+
+     label5:
+        return suite;
+/*39*/
+
+        catch java.lang.reflect.InvocationTargetException from label1 to label3 with label4;
+    }
+

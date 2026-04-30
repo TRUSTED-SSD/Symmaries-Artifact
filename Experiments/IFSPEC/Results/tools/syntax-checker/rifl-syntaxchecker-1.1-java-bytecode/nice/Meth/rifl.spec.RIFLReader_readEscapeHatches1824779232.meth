@@ -1,0 +1,43 @@
+void rifl.spec.RIFLReader:readEscapeHatches(org.w3c.dom.Document doc,java.util.Set escapeHatches)
+{
+org.w3c.dom.Element hatchesElem;
+  java.util.Iterator l5;
+  org.w3c.dom.Element expressionElem;
+  rifl.spec.DeclassificationExpression expression;
+  rifl.spec.ReferencePoint referencePoint;
+  org.w3c.dom.NodeList $stack13;
+  java.lang.Iterable $stack14;
+  boolean $stack16;
+  java.lang.Object $stack17;
+  org.w3c.dom.Node $stack19;
+  rifl.spec.Domain $stack24;
+  java.lang.String $stack25;
+  rifl.spec.EscapeHatch $stack26;
+  hatchesElem = rifl.spec.RIFLReader.getElement(doc,"hatches");
+ if (hatchesElem!=null) goto label0;
+ return;
+ label0:$stack13 = hatchesElem.getChildNodes();
+ $stack14 = rifl.spec.RIFLReader.getElementList($stack13);
+ l5 = $stack14.iterator();
+ goto label1;
+ label2:$stack17 = l5.next();
+ hatchesElem=(org.w3c.dom.Element) $stack17;
+ $stack13 = hatchesElem.getElementsByTagName("expression");
+ $stack19 = $stack13.item(0);
+ expressionElem=(org.w3c.dom.Element) $stack19;
+ expression = this.readExpression(expressionElem);
+ $stack13 = hatchesElem.getElementsByTagName("referencepoint");
+ $stack19 = $stack13.item(0);
+ expressionElem=(org.w3c.dom.Element) $stack19;
+ referencePoint = this.readReferencePoint(expressionElem);
+ $stack24=new rifl.spec.Domain;
+ $stack25 = hatchesElem.getAttribute("to");
+ $stack24#rifl.spec.Domain($stack25);
+ $stack26=new rifl.spec.EscapeHatch;
+ $stack26#rifl.spec.EscapeHatch(expression,referencePoint,$stack24);
+ escapeHatches.add((java.lang.Object)$stack26);
+ label1:$stack16 = l5.hasNext();
+ if ($stack16!=0) goto label2;
+ return;
+ } 
+

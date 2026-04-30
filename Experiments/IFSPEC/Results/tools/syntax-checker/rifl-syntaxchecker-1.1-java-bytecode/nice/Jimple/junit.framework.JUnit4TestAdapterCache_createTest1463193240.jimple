@@ -1,0 +1,76 @@
+    junit.framework.Test createTest(org.junit.runner.Description)
+    {
+        junit.framework.JUnit4TestAdapterCache this;
+        org.junit.runner.Description description;
+        junit.framework.TestSuite suite;
+        java.util.Iterator i$;
+        boolean $stack5;
+        java.lang.String $stack7;
+        java.util.ArrayList $stack8;
+        java.lang.Object $stack11;
+        junit.framework.Test $stack12;
+        junit.framework.JUnit4TestCaseFacade $stack14;
+
+        this := @this: junit.framework.JUnit4TestAdapterCache;
+
+        description := @parameter0: org.junit.runner.Description;
+
+        $stack5 = virtualinvoke description.<org.junit.runner.Description: boolean isTest()>();
+/*33*/
+
+        if $stack5 == 0 goto label1;
+/*33*/
+
+        $stack14 = new junit.framework.JUnit4TestCaseFacade;
+/*34*/
+
+        specialinvoke $stack14.<junit.framework.JUnit4TestCaseFacade: void <init>(org.junit.runner.Description)>(description);
+/*34*/
+
+        return $stack14;
+/*34*/
+
+     label1:
+        suite = new junit.framework.TestSuite;
+/*36*/
+
+        $stack7 = virtualinvoke description.<org.junit.runner.Description: java.lang.String getDisplayName()>();
+/*36*/
+
+        specialinvoke suite.<junit.framework.TestSuite: void <init>(java.lang.String)>($stack7);
+/*36*/
+
+        $stack8 = virtualinvoke description.<org.junit.runner.Description: java.util.ArrayList getChildren()>();
+/*37*/
+
+        i$ = virtualinvoke $stack8.<java.util.ArrayList: java.util.Iterator iterator()>();
+/*37*/
+/*37*/
+
+     label2:
+        $stack5 = interfaceinvoke i$.<java.util.Iterator: boolean hasNext()>();
+/*37*/
+
+        if $stack5 == 0 goto label3;
+/*37*/
+
+        $stack11 = interfaceinvoke i$.<java.util.Iterator: java.lang.Object next()>();
+/*40*/
+
+        description = (org.junit.runner.Description) $stack11;
+/*40*/
+
+        $stack12 = virtualinvoke this.<junit.framework.JUnit4TestAdapterCache: junit.framework.Test asTest(org.junit.runner.Description)>(description);
+/*38*/
+
+        virtualinvoke suite.<junit.framework.TestSuite: void addTest(junit.framework.Test)>($stack12);
+/*38*/
+
+        goto label2;
+/*38*/
+
+     label3:
+        return suite;
+/*40*/
+    }
+

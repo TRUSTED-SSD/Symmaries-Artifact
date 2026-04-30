@@ -1,0 +1,29 @@
+static java.lang.Object org.apache.bookkeeper.common.util.ReflectionUtils:newInstance(java.lang.Class theCls)
+{
+java.lang.Object result;
+  java.lang.reflect.Constructor meth;
+  java.util.Map $stack3;
+  java.lang.Object[] $stack5;
+  java.lang.Class[] $stack7;
+  java.lang.Exception $stack13;
+  java.lang.RuntimeException $stack14;
+  label0:$stack3=org.apache.bookkeeper.common.util.ReflectionUtils.constructorCache;
+ result = $stack3.get((java.lang.Object)theCls);
+ meth=(java.lang.reflect.Constructor) result;
+ if (null!=meth) goto label1;
+ $stack7=new java.lang.Class[0];
+ meth = theCls.getDeclaredConstructor($stack7);
+ meth.setAccessible((boolean)1);
+ $stack3=org.apache.bookkeeper.common.util.ReflectionUtils.constructorCache;
+ result = $stack3.put((java.lang.Object)theCls,(java.lang.Object)meth);
+ label1:$stack5=new java.lang.Object[0];
+ result = meth.newInstance($stack5);
+ label2:goto label3;
+ label4:$stack13 = catch;
+ $stack14=new java.lang.RuntimeException;
+ $stack14#java.lang.RuntimeException((java.lang.Throwable)$stack13);
+ throw $stack14;
+ label3:return  result;
+ catch java.lang.Exception: label0 - label2 : label4;
+} 
+

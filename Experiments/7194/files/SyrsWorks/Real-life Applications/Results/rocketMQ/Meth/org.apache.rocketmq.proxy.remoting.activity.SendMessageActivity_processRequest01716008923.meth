@@ -1,0 +1,19 @@
+org.apache.rocketmq.remoting.protocol.RemotingCommand org.apache.rocketmq.proxy.remoting.activity.SendMessageActivity:processRequest0(io.netty.channel.ChannelHandlerContext ctx,org.apache.rocketmq.remoting.protocol.RemotingCommand @request,org.apache.rocketmq.proxy.common.ProxyContext context)
+{
+int $stack4;
+  org.apache.rocketmq.remoting.protocol.RemotingCommand request;
+request=@request;
+$stack4 = request.getCode();
+ switch [$stack4]
+if 0 goto label0;
+if 1 goto label1;
+if 2 goto label0;
+if 3 goto label0;
+goto label2;
+ label0:request = this.sendMessage(ctx,request,context);
+ return  request;
+ label1:request = this.consumerSendMessage(ctx,request,context);
+ return  request;
+ label2:return  null;
+ } 
+

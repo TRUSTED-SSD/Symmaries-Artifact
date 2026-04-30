@@ -1,0 +1,28 @@
+org.apache.rocketmq.broker.client.DefaultConsumerIdsChangeListener(org.apache.rocketmq.broker.BrokerController brokerController)
+{
+java.util.concurrent.ScheduledThreadPoolExecutor $stack2;
+  java.util.concurrent.ThreadFactory $stack4;
+  java.util.concurrent.ConcurrentHashMap $stack5;
+  org.apache.rocketmq.broker.client.DefaultConsumerIdsChangeListener$1 $stack6;
+  java.util.concurrent.ScheduledExecutorService $stack7;
+  org.apache.rocketmq.common.BrokerConfig $stack8;
+  java.util.concurrent.TimeUnit $stack9;
+  this#java.lang.Object();
+ this.cacheSize=8096;
+ $stack2=new java.util.concurrent.ScheduledThreadPoolExecutor;
+ $stack4 = org.apache.rocketmq.common.utils.ThreadUtils.newGenericThreadFactory("DefaultConsumerIdsChangeListener",(boolean)1);
+ $stack2#java.util.concurrent.ScheduledThreadPoolExecutor(1,$stack4);
+ this.scheduledExecutorService=$stack2;
+ $stack5=new java.util.concurrent.ConcurrentHashMap;
+ $stack5#java.util.concurrent.ConcurrentHashMap(8096);
+ this.consumerChannelMap=$stack5;
+ this.brokerController=brokerController;
+ $stack7=this.scheduledExecutorService;
+ $stack6=new org.apache.rocketmq.broker.client.DefaultConsumerIdsChangeListener$1;
+ $stack8 = brokerController.getBrokerConfig();
+ $stack6#org.apache.rocketmq.broker.client.DefaultConsumerIdsChangeListener$1(this,(org.apache.rocketmq.common.BrokerIdentity)$stack8);
+ $stack9=java.util.concurrent.TimeUnit.SECONDS;
+ $stack7.scheduleAtFixedRate((java.lang.Runnable)$stack6,30L,15L,$stack9);
+ return;
+ } 
+

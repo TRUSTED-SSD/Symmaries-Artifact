@@ -1,0 +1,37 @@
+boolean org.apache.rocketmq.tools.admin.DefaultMQAdminExtImpl:cleanExpiredConsumerQueue(java.lang.String @cluster)
+{
+boolean result;
+  org.apache.rocketmq.remoting.protocol.body.ClusterInfo clusterInfo;
+  java.lang.String[] l4;
+  int l5;
+  int l6;
+  java.lang.String $stack13;
+  boolean $stack14;
+  org.apache.rocketmq.client.exception.MQBrokerException $stack20;
+  org.apache.rocketmq.logging.org.slf4j.Logger $stack21;
+  java.lang.String cluster;
+cluster=@cluster;
+result=0;
+ label0:clusterInfo = this.examineBrokerClusterInfo();
+ if (null==cluster) goto label1;
+ $stack13="";
+ $stack14 = $stack13.equals((java.lang.Object)cluster);
+ if ($stack14==0) goto label2;
+ label1:l4 = clusterInfo.retrieveAllClusterNames();
+ l5=#l4;
+ l6=0;
+ label3:if (l6>=l5) goto label4;
+ cluster=l4[l6];
+ result = this.cleanExpiredConsumerQueueByCluster(clusterInfo,cluster);
+ l6=(l6+1);
+ goto label3;
+ label4:goto label5;
+ label2:result = this.cleanExpiredConsumerQueueByCluster(clusterInfo,cluster);
+ label5:goto label6;
+ label7:$stack20 = catch;
+ $stack21=this.logger;
+ $stack21.error("cleanExpiredConsumerQueue error.",(java.lang.Throwable)$stack20);
+ label6:return  result;
+ catch org.apache.rocketmq.client.exception.MQBrokerException: label0 - label5 : label7;
+} 
+

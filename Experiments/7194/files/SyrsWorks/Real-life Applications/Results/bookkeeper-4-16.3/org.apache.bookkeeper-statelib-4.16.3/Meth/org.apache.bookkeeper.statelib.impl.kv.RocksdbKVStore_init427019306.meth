@@ -1,0 +1,51 @@
+void org.apache.bookkeeper.statelib.impl.kv.RocksdbKVStore:init(org.apache.bookkeeper.statelib.api.StateStoreSpec spec)
+{
+java.io.File $stack2;
+  java.lang.String $stack4;
+  boolean $stack5;
+  int $stack6;
+  org.apache.bookkeeper.common.coder.Coder $stack7;
+  org.apache.bookkeeper.statelib.api.ccheckpoint.CheckpointStore $stack10;
+  org.apache.bookkeeper.statelib.impl.rocksdb.ccheckpoint.RocksCheckpointer $stack13;
+  org.rocksdb.RocksDB $stack16;
+  boolean $stack21;
+  java.util.concurrent.ScheduledExecutorService $stack22;
+  $stack2 = spec.getLocalStateStoreDir();
+ com.google.common.base.Preconditions.checkNotNull((java.lang.Object)$stack2,(java.lang.Object)"local state store directory is not configured");
+ $stack4 = spec.getName();
+ this.name=$stack4;
+ $stack5 = spec.isLocalStorageCleanupEnable();
+ this.cleanupLocalStoreDirEnable=$stack5;
+ $stack6 = spec.getTtlSeconds();
+ this.ttlSeconds=$stack6;
+ $stack7 = spec.getKeyCoder();
+ this.keyCoder=$stack7;
+ $stack7 = spec.getValCoder();
+ this.valCoder=$stack7;
+ $stack2 = spec.getLocalStateStoreDir();
+ this#org.apache.bookkeeper.statelib.impl.kv.RocksdbKVStore:cleanupLocalStoreDir($stack2);
+ $stack10 = spec.getCheckpointStore();
+ this.checkpointStore=$stack10;
+ $stack10=this.checkpointStore;
+ if (null==$stack10) goto label0;
+ this#org.apache.bookkeeper.statelib.impl.kv.RocksdbKVStore(spec);
+ goto label1;
+ label0:this#org.apache.bookkeeper.statelib.impl.kv.RocksdbKVStore(spec);
+ label1:this#org.apache.bookkeeper.statelib.impl.kv.RocksdbKVStore();
+ $stack10=this.checkpointStore;
+ if (null==$stack10) goto label2;
+ $stack13=new org.apache.bookkeeper.statelib.impl.rocksdb.ccheckpoint.RocksCheckpointer;
+ $stack4 = this.name();
+ $stack2=this.dbDir;
+ $stack16=this.db;
+ $stack10=this.checkpointStore;
+ $stack5 = spec.isCheckpointChecksumEnable();
+ $stack21 = spec.isCheckpointChecksumCompatible();
+ $stack13#org.apache.bookkeeper.statelib.impl.rocksdb.ccheckpoint.RocksCheckpointer($stack4,$stack2,$stack16,$stack10,1,1,$stack5,$stack21);
+ this.checkpointer=$stack13;
+ $stack22 = spec.getCheckpointIOScheduler();
+ this.checkpointScheduler=$stack22;
+ label2:this.isInitialized=1;
+ return;
+ } 
+

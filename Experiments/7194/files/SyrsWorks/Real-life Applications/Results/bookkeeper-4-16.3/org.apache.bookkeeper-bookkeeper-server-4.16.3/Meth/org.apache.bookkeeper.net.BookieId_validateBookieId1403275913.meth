@@ -1,0 +1,26 @@
+static void org.apache.bookkeeper.net.BookieId:validateBookieId(java.lang.String @id)
+{
+boolean $stack2;
+  java.lang.IllegalArgumentException $stack3;
+  java.lang.StringBuilder $stack4;
+  java.lang.String $stack9;
+  java.lang.String id;
+id=@id;
+java.util.Objects.requireNonNull((java.lang.Object)id,"BookieId cannot be null");
+ $stack2 = id.matches("[a-zA-Z0-9:-_.\\-]+");
+ if ($stack2==0) goto label0;
+ $stack9="readonly";
+ $stack2 = $stack9.equalsIgnoreCase(id);
+ if ($stack2==0) goto label1;
+ label0:$stack3=new java.lang.IllegalArgumentException;
+ $stack4=new java.lang.StringBuilder;
+ $stack4#java.lang.StringBuilder();
+ $stack4 = $stack4.append("BookieId ");
+ $stack4 = $stack4.append(id);
+ $stack4 = $stack4.append(" is not valid");
+ id = $stack4.toString();
+ $stack3#java.lang.IllegalArgumentException(id);
+ throw $stack3;
+ label1:return;
+ } 
+

@@ -1,0 +1,36 @@
+boolean org.keycloak.common.util.PathMatcher:exactMatch(java.lang.String @expectedUri,java.lang.String targetUri)
+{
+java.lang.String rootPath;
+  int suffixIndex;
+  boolean $stack5;
+  int $stack8;
+  java.lang.String expectedUri;
+expectedUri=@expectedUri;
+$stack5 = targetUri.equals((java.lang.Object)expectedUri);
+ if ($stack5==0) goto label0;
+ return  1;
+ label0:$stack5 = this.endsWithWildcard(expectedUri);
+ if ($stack5==0) goto label1;
+ suffixIndex = expectedUri.length();
+ suffixIndex=(suffixIndex-1);
+ rootPath = expectedUri.substring(0,suffixIndex);
+ $stack5 = targetUri.startsWith(rootPath);
+ if ($stack5==0) goto label2;
+ return  1;
+ label2:suffixIndex = rootPath.length();
+ suffixIndex=(suffixIndex-1);
+ expectedUri = rootPath.substring(0,suffixIndex);
+ $stack5 = targetUri.equals((java.lang.Object)expectedUri);
+ return  $stack5;
+ label1:rootPath="/*.";
+ suffixIndex = expectedUri.indexOf("/*.");
+ if (suffixIndex==-1) goto label3;
+ $stack8 = rootPath.length();
+ suffixIndex=(suffixIndex+$stack8);
+ suffixIndex=(suffixIndex-1);
+ expectedUri = expectedUri.substring(suffixIndex);
+ $stack5 = targetUri.endsWith(expectedUri);
+ return  $stack5;
+ label3:return  0;
+ } 
+

@@ -1,0 +1,45 @@
+static java.lang.String[] org.apache.rocketmq.container.BrokerContainerStartup:parseBrokerConfigPath()
+{
+java.lang.String brokerConfigList;
+  java.lang.String brokerContainerConfigPath;
+  org.apache.rocketmq.container.BrokerContainerConfig brokerContainerConfig;
+  org.apache.rocketmq.container.BrokerContainerStartup$SystemConfigFileHelper configFileHelper;
+  java.util.Properties brokerContainerProperties;
+  org.apache.commons.cli.CommandLine $stack6;
+  boolean $stack7;
+  java.lang.String[] $stack10;
+  java.lang.Exception $stack21;
+  brokerConfigList=null;
+ $stack6=org.apache.rocketmq.container.BrokerContainerStartup.commandLine;
+ $stack7 = $stack6.hasOption("b");
+ if ($stack7==0) goto label0;
+ $stack6=org.apache.rocketmq.container.BrokerContainerStartup.commandLine;
+ brokerConfigList = $stack6.getOptionValue("b");
+ goto label1;
+ label0:$stack6=org.apache.rocketmq.container.BrokerContainerStartup.commandLine;
+ $stack7 = $stack6.hasOption("c");
+ if ($stack7==0) goto label1;
+ $stack6=org.apache.rocketmq.container.BrokerContainerStartup.commandLine;
+ brokerContainerConfigPath = $stack6.getOptionValue("c");
+ if (brokerContainerConfigPath==null) goto label1;
+ brokerContainerConfig=new org.apache.rocketmq.container.BrokerContainerConfig;
+ brokerContainerConfig#org.apache.rocketmq.container.BrokerContainerConfig();
+ configFileHelper=new org.apache.rocketmq.container.BrokerContainerStartup$SystemConfigFileHelper;
+ configFileHelper#org.apache.rocketmq.container.BrokerContainerStartup$SystemConfigFileHelper();
+ configFileHelper.setFile(brokerContainerConfigPath);
+ brokerContainerProperties=null;
+ label2:brokerContainerProperties = configFileHelper.loadConfig();
+ label3:goto label4;
+ label5:$stack21 = catch;
+ $stack21.printStackTrace();
+ java.lang.System.exit(-1);
+ label4:if (brokerContainerProperties==null) goto label6;
+ org.apache.rocketmq.common.MixAll.properties2Object(brokerContainerProperties,(java.lang.Object)brokerContainerConfig);
+ label6:brokerConfigList = brokerContainerConfig.getBrokerConfigPaths();
+ label1:if (brokerConfigList==null) goto label7;
+ $stack10 = brokerConfigList.split(":");
+ return  $stack10;
+ label7:return  null;
+ catch java.lang.Exception: label2 - label3 : label5;
+} 
+

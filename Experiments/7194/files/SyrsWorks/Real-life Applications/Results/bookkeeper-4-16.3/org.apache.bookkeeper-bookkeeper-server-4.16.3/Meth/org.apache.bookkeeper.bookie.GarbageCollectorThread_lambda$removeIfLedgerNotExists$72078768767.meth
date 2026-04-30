@@ -1,0 +1,22 @@
+boolean org.apache.bookkeeper.bookie.GarbageCollectorThread:lambda$removeIfLedgerNotExists$7(org.apache.commons.lang3.mutable.MutableBoolean modified,long entryLogLedger)
+{
+boolean exist;
+  org.apache.bookkeeper.bookie.CompactableLedgerStorage $stack5;
+  java.io.IOException $stack9;
+  org.slf4j.Logger $stack10;
+  label0:$stack5=this.ledgerStorage;
+ exist = $stack5.ledgerExists(entryLogLedger);
+ if (exist!=0) goto label1;
+ modified.setTrue();
+ label1:if (exist!=0) goto label2;
+ exist=1;
+ goto label3;
+ label2:exist=0;
+ label3:return  exist;
+ label4:$stack9 = catch;
+ $stack10=org.apache.bookkeeper.bookie.GarbageCollectorThread.LOG;
+ $stack10.error("Error reading from ledger storage",(java.lang.Throwable)$stack9);
+ return  0;
+ catch java.io.IOException: label0 - label3 : label4;
+} 
+

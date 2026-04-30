@@ -1,0 +1,26 @@
+static com.google.zxing.Result com.google.zxing.oned.UPCAReader:maybeReturnResult(com.google.zxing.Result result)
+{
+java.lang.String text;
+  com.google.zxing.Result upcaResult;
+  char $stack4;
+  com.google.zxing.FormatException $stack5;
+  com.google.zxing.ResultPoint[] $stack9;
+  com.google.zxing.BarcodeFormat $stack10;
+  java.util.Map $stack11;
+  text = result.getText();
+ $stack4 = text.charAt(0);
+ if ($stack4!=48) goto label0;
+ upcaResult=new com.google.zxing.Result;
+ text = text.substring(1);
+ $stack9 = result.getResultPoints();
+ $stack10=com.google.zxing.BarcodeFormat.UPC_A;
+ upcaResult#com.google.zxing.Result(text,null,$stack9,$stack10);
+ $stack11 = result.getResultMetadata();
+ if ($stack11==null) goto label1;
+ $stack11 = result.getResultMetadata();
+ upcaResult.putAllMetadata($stack11);
+ label1:return  upcaResult;
+ label0:$stack5 = com.google.zxing.FormatException.getFormatInstance();
+ throw $stack5;
+ } 
+

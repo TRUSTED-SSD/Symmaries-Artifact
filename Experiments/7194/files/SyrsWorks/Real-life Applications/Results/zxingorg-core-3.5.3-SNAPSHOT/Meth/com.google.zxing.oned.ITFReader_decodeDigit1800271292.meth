@@ -1,0 +1,37 @@
+static int com.google.zxing.oned.ITFReader:decodeDigit(int[] counters)
+{
+float bestVariance;
+  int bestMatch;
+  int max;
+  int i;
+  int[] pattern;
+  float variance;
+  int[][] $stack7;
+  com.google.zxing.NotFoundException $stack8;
+  byte $stack12;
+  bestVariance=0.38F;
+ bestMatch=-1;
+ $stack7=com.google.zxing.oned.ITFReader.PATTERNS;
+ max=#$stack7;
+ i=0;
+ label0:if (i>=max) goto label1;
+ $stack7=com.google.zxing.oned.ITFReader.PATTERNS;
+ pattern=$stack7[i];
+ variance = com.google.zxing.oned.OneDReader.patternMatchVariance(counters,pattern,0.5F);
+ $stack12=(variance cmpg bestVariance);
+ if ($stack12>=0) goto label2;
+ bestVariance=variance;
+ bestMatch=i;
+ goto label3;
+ label2:$stack12=(variance cmpl bestVariance);
+ if ($stack12!=0) goto label3;
+ bestMatch=-1;
+ label3:i=(i+1);
+ goto label0;
+ label1:if (bestMatch<0) goto label4;
+ bestMatch=(bestMatch%10);
+ return  bestMatch;
+ label4:$stack8 = com.google.zxing.NotFoundException.getNotFoundInstance();
+ throw $stack8;
+ } 
+

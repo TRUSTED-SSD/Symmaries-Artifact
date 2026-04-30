@@ -1,0 +1,22 @@
+void org.apache.bookkeeper.replication.BookieLedgerIndexer:putLedger(java.util.concurrent.ConcurrentHashMap bookie2ledgersMap,java.lang.String bookie,long ledgerId)
+{
+java.util.Set ledgers;
+  java.util.Set oldLedgers;
+  java.lang.Object $stack7;
+  java.lang.Long $stack8;
+  java.util.HashSet $stack10;
+  $stack7 = bookie2ledgersMap.get((java.lang.Object)bookie);
+ ledgers=(java.util.Set) $stack7;
+ if (ledgers!=null) goto label0;
+ $stack10=new java.util.HashSet;
+ $stack10#java.util.HashSet();
+ ledgers = java.util.Collections.synchronizedSet((java.util.Set)$stack10);
+ $stack7 = bookie2ledgersMap.putIfAbsent((java.lang.Object)bookie,(java.lang.Object)ledgers);
+ oldLedgers=(java.util.Set) $stack7;
+ if (oldLedgers==null) goto label0;
+ ledgers=oldLedgers;
+ label0:$stack8 = java.lang.Long.valueOf(ledgerId);
+ ledgers.add((java.lang.Object)$stack8);
+ return;
+ } 
+

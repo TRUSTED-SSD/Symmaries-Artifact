@@ -1,0 +1,14 @@
+java.lang.Long org.apache.rocketmq.tieredstore.TieredMessageFetcher:lambda$prefetchAndPutMsgToCache$1 (
+  org.apache.rocketmq.common.message.MessageQueue mq, long queueOffset,
+  int batchSize,
+  org.apache.rocketmq.tieredstore.container.TieredMessageQueueContainer
+    container,
+  org.apache.rocketmq.store.GetMessageResult result) {
+  guard = tt;
+  ret(level()) = level(result) ⊔ obj_level(result);
+  ret(obj_level()) = level(result) ⊔ obj_level(result);
+  ret(obj_level(container)) = level(batchSize) ⊔ level(mq) ⊔ level(queueOffset) ⊔ level(result) ⊔ obj_level(container) ⊔ obj_level(mq) ⊔ obj_level(result);
+  ret(obj_level(mq)) = level(batchSize) ⊔ level(mq) ⊔ level(queueOffset) ⊔ level(result) ⊔ obj_level(mq) ⊔ obj_level(result);
+  ret(obj_level(result)) = level(batchSize) ⊔ level(mq) ⊔ level(queueOffset) ⊔ level(result) ⊔ obj_level(mq) ⊔ obj_level(result);
+  ret(obj_level(this)) = level(batchSize) ⊔ level(mq) ⊔ level(queueOffset) ⊔ level(result) ⊔ obj_level(mq) ⊔ obj_level(result) ⊔ obj_level(this);
+}

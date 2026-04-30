@@ -1,0 +1,14 @@
+static org.apache.bookkeeper.net.BookieId org.apache.bookkeeper.bookie.BookieImpl:getBookieId(org.apache.bookkeeper.conf.ServerConfiguration conf)
+{
+java.lang.String customBookieId;
+  org.apache.bookkeeper.net.BookieSocketAddress $stack3;
+  org.apache.bookkeeper.net.BookieId $stack4;
+  customBookieId = conf.getBookieId();
+ if (customBookieId==null) goto label0;
+ $stack4 = org.apache.bookkeeper.net.BookieId.parse(customBookieId);
+ return  $stack4;
+ label0:$stack3 = org.apache.bookkeeper.bookie.BookieImpl.getBookieAddress(conf);
+ $stack4 = $stack3.toBookieId();
+ return  $stack4;
+ } 
+

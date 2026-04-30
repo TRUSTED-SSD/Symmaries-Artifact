@@ -1,0 +1,141 @@
+    private static org.apache.bookkeeper.stream.protocol.util.StorageContainerPlacementPolicy lambda$buildStorageServer$2(org.apache.bookkeeper.stream.server.service.CuratorProviderService, org.apache.bookkeeper.conf.ServerConfiguration)
+    {
+        org.apache.bookkeeper.stream.server.service.CuratorProviderService curatorProviderService;
+        org.apache.bookkeeper.conf.ServerConfiguration bkServerConf;
+        long numStorageContainers;
+        org.apache.bookkeeper.stream.storage.impl.cluster.ZkClusterMetadataStore store;
+        java.lang.Throwable l5, l6, $stack17, $stack19, $stack21;
+        org.apache.curator.framework.CuratorFramework $stack10;
+        java.lang.String $stack11;
+        org.apache.bookkeeper.stream.proto.cluster.ClusterMetadata $stack12;
+        int $stack14;
+        org.apache.bookkeeper.stream.storage.impl.sc.StorageContainerPlacementPolicyImpl $stack15;
+
+        curatorProviderService := @parameter0: org.apache.bookkeeper.stream.server.service.CuratorProviderService;
+
+        bkServerConf := @parameter1: org.apache.bookkeeper.conf.ServerConfiguration;
+
+        store = new org.apache.bookkeeper.stream.storage.impl.cluster.ZkClusterMetadataStore;
+/*324*/
+
+        $stack10 = virtualinvoke curatorProviderService.<org.apache.bookkeeper.stream.server.service.CuratorProviderService: org.apache.curator.framework.CuratorFramework get()>();
+/*325*/
+
+        $stack11 = staticinvoke <org.apache.bookkeeper.meta.zk.ZKMetadataDriverBase: java.lang.String resolveZkServers(org.apache.bookkeeper.conf.AbstractConfiguration)>(bkServerConf);
+/*326*/
+
+        specialinvoke store.<org.apache.bookkeeper.stream.storage.impl.cluster.ZkClusterMetadataStore: void <init>(org.apache.curator.framework.CuratorFramework,java.lang.String,java.lang.String)>($stack10, $stack11, "/stream");
+/*326*/
+
+        l5 = null;
+/*324*/
+
+     label01:
+        $stack12 = virtualinvoke store.<org.apache.bookkeeper.stream.storage.impl.cluster.ZkClusterMetadataStore: org.apache.bookkeeper.stream.proto.cluster.ClusterMetadata getClusterMetadata()>();
+/*328*/
+
+        numStorageContainers = virtualinvoke $stack12.<org.apache.bookkeeper.stream.proto.cluster.ClusterMetadata: long getNumStorageContainers()>();
+/*328*/
+/*328*/
+
+     label02:
+        if store == null goto label15;
+/*329*/
+
+        if null == null goto label06;
+/*330*/
+
+     label03:
+        virtualinvoke store.<org.apache.bookkeeper.stream.storage.impl.cluster.ZkClusterMetadataStore: void close()>();
+/*330*/
+
+     label04:
+        goto label15;
+/*330*/
+
+     label05:
+        l6 := @caughtexception;
+/*324*/
+
+        virtualinvoke l5.<java.lang.Throwable: void addSuppressed(java.lang.Throwable)>(l6);
+/*324*/
+
+        goto label15;
+/*324*/
+
+     label06:
+        virtualinvoke store.<org.apache.bookkeeper.stream.storage.impl.cluster.ZkClusterMetadataStore: void close()>();
+/*330*/
+
+        goto label15;
+/*330*/
+
+     label07:
+        $stack17 := @caughtexception;
+/*330*/
+
+        l6 = $stack17;
+/*324*/
+
+        l5 = $stack17;
+/*324*/
+
+        throw $stack17;
+/*324*/
+
+     label08:
+        $stack19 := @caughtexception;
+/*330*/
+
+        l6 = $stack19;
+/*329*/
+
+     label09:
+        if store == null goto label14;
+/*329*/
+
+        if l5 == null goto label13;
+/*329*/
+
+     label10:
+        virtualinvoke store.<org.apache.bookkeeper.stream.storage.impl.cluster.ZkClusterMetadataStore: void close()>();
+/*329*/
+
+     label11:
+        goto label14;
+/*329*/
+
+     label12:
+        $stack21 := @caughtexception;
+/*329*/
+
+        virtualinvoke l5.<java.lang.Throwable: void addSuppressed(java.lang.Throwable)>($stack21);
+/*329*/
+
+        goto label14;
+/*329*/
+
+     label13:
+        virtualinvoke store.<org.apache.bookkeeper.stream.storage.impl.cluster.ZkClusterMetadataStore: void close()>();
+/*329*/
+
+     label14:
+        throw $stack19;
+/*329*/
+
+     label15:
+        $stack14 = (int) numStorageContainers;
+/*330*/
+
+        $stack15 = staticinvoke <org.apache.bookkeeper.stream.storage.impl.sc.StorageContainerPlacementPolicyImpl: org.apache.bookkeeper.stream.storage.impl.sc.StorageContainerPlacementPolicyImpl of(int)>($stack14);
+/*330*/
+
+        return $stack15;
+/*330*/
+
+        catch java.lang.Throwable from label03 to label04 with label05;
+        catch java.lang.Throwable from label01 to label02 with label07;
+        catch java.lang.Throwable from label10 to label11 with label12;
+        catch java.lang.Throwable from label07 to label09 with label08;
+    }
+

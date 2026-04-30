@@ -1,0 +1,24 @@
+void org.apache.rocketmq.client.impl.consumer.AssignedMessageQueue:pause(java.util.Collection messageQueues)
+{
+java.util.Iterator l2;
+  org.apache.rocketmq.common.message.MessageQueue messageQueue;
+  org.apache.rocketmq.client.impl.consumer.AssignedMessageQueue$MessageQueueState messageQueueState;
+  boolean $stack6;
+  java.lang.Object $stack7;
+  java.util.concurrent.ConcurrentHashMap $stack8;
+  l2 = messageQueues.iterator();
+ label0:$stack6 = l2.hasNext();
+ if ($stack6==0) goto label1;
+ $stack7 = l2.next();
+ messageQueue=(org.apache.rocketmq.common.message.MessageQueue) $stack7;
+ $stack8=this.assignedMessageQueueState;
+ $stack7 = $stack8.get((java.lang.Object)messageQueue);
+ messageQueueState=(org.apache.rocketmq.client.impl.consumer.AssignedMessageQueue$MessageQueueState) $stack7;
+ $stack8=this.assignedMessageQueueState;
+ $stack7 = $stack8.get((java.lang.Object)messageQueue);
+ if ($stack7==null) goto label2;
+ messageQueueState.setPaused((boolean)1);
+ label2:goto label0;
+ label1:return;
+ } 
+

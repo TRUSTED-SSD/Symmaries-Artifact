@@ -1,0 +1,22 @@
+java.util.concurrent.CompletableFuture org.apache.rocketmq.proxy.service.message.ClusterMessageService:endTransactionOneway(org.apache.rocketmq.proxy.common.ProxyContext ctx,java.lang.String @brokerName,org.apache.rocketmq.remoting.protocol.header.EndTransactionRequestHeader requestHeader,long timeoutMillis)
+{
+java.util.concurrent.CompletableFuture future;
+  org.apache.rocketmq.proxy.service.mqclient.MQClientAPIFactory $stack9;
+  org.apache.rocketmq.proxy.service.mqclient.MQClientAPIExt $stack10;
+  java.lang.Throwable $stack13;
+  java.lang.String brokerName;
+brokerName=@brokerName;
+future=new java.util.concurrent.CompletableFuture;
+ future#java.util.concurrent.CompletableFuture();
+ label0:$stack9=this.mqClientAPIFactory;
+ $stack10 = $stack9.getClient();
+ brokerName = this.resolveBrokerAddr(brokerName);
+ $stack10.endTransactionOneway(brokerName,requestHeader,"end transaction from proxy",timeoutMillis);
+ future.complete(null);
+ label1:goto label2;
+ label3:$stack13 = catch;
+ future.completeExceptionally($stack13);
+ label2:return  future;
+ catch java.lang.Throwable: label0 - label1 : label3;
+} 
+

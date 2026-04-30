@@ -1,0 +1,36 @@
+long org.xerial.snappy.SnappyFramedInputStream:transferTo(java.io.OutputStream l1)
+{
+long l2;
+  int l4;
+  boolean $stack5;
+  int $stack8;
+  byte[] $stack9;
+  long $stack12;
+  java.nio.channels.ClosedChannelException $stack14;
+  java.lang.IllegalArgumentException $stack15;
+  if (l1!=null) goto label0;
+ $stack15=new java.lang.IllegalArgumentException;
+ $stack15#java.lang.IllegalArgumentException("os is null");
+ throw $stack15;
+ label0:$stack5=this.closed;
+ if ($stack5==0) goto label1;
+ $stack14=new java.nio.channels.ClosedChannelException;
+ $stack14#java.nio.channels.ClosedChannelException();
+ throw $stack14;
+ label1:l2=0L;
+ label2:$stack5 = this#org.xerial.snappy.SnappyFramedInputStream:ensureBuffer();
+ if ($stack5==0) goto label3;
+ l4 = this.available();
+ $stack9=this.buffer;
+ $stack8=this.position;
+ dummyClass.lowSink($stack9);
+l1.write($stack9,$stack8,l4);
+ $stack8=this.position;
+ $stack8=($stack8+l4);
+ this.position=$stack8;
+ $stack12=(long) l4;
+ l2=(l2+$stack12);
+ goto label2;
+ label3:return  l2;
+ } 
+

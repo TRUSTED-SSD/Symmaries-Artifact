@@ -1,0 +1,40 @@
+org.apache.rocketmq.remoting.protocol.RemotingCommand org.apache.rocketmq.namesrv.processor.DefaultRequestProcessor:getKVConfig(io.netty.channel.ChannelHandlerContext ctx,org.apache.rocketmq.remoting.protocol.RemotingCommand request)
+{
+org.apache.rocketmq.remoting.protocol.RemotingCommand response;
+  org.apache.rocketmq.remoting.protocol.header.namesrv.GetKVConfigResponseHeader responseHeader;
+  org.apache.rocketmq.remoting.protocol.header.namesrv.GetKVConfigRequestHeader requestHeader;
+  java.lang.String value;
+  org.apache.rocketmq.remoting.CommandCustomHeader $stack8;
+  org.apache.rocketmq.namesrv.NamesrvController $stack10;
+  org.apache.rocketmq.namesrv.kvconfig.KVConfigManager $stack11;
+  java.lang.String $stack13;
+  java.lang.StringBuilder $stack15;
+  response = org.apache.rocketmq.remoting.protocol.RemotingCommand.createResponseCommand(org.apache.rocketmq.remoting.protocol.header.namesrv.GetKVConfigResponseHeader);
+ $stack8 = response.readCustomHeader();
+ responseHeader=(org.apache.rocketmq.remoting.protocol.header.namesrv.GetKVConfigResponseHeader) $stack8;
+ $stack8 = request.decodeCommandCustomHeader(org.apache.rocketmq.remoting.protocol.header.namesrv.GetKVConfigRequestHeader);
+ requestHeader=(org.apache.rocketmq.remoting.protocol.header.namesrv.GetKVConfigRequestHeader) $stack8;
+ $stack10=this.namesrvController;
+ $stack11 = $stack10.getKvConfigManager();
+ value = requestHeader.getNamespace();
+ $stack13 = requestHeader.getKey();
+ value = $stack11.getKVConfig(value,$stack13);
+ if (value==null) goto label0;
+ responseHeader.setValue(value);
+ response.setCode(0);
+ response.setRemark(null);
+ return  response;
+ label0:response.setCode(22);
+ $stack15=new java.lang.StringBuilder;
+ $stack15#java.lang.StringBuilder();
+ $stack15 = $stack15.append("No config item, Namespace: ");
+ value = requestHeader.getNamespace();
+ $stack15 = $stack15.append(value);
+ $stack15 = $stack15.append(" Key: ");
+ value = requestHeader.getKey();
+ $stack15 = $stack15.append(value);
+ value = $stack15.toString();
+ response.setRemark(value);
+ return  response;
+ } 
+

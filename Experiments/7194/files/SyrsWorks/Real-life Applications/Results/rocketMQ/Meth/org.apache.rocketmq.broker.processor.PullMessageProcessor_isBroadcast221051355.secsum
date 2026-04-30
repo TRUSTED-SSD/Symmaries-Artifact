@@ -1,0 +1,8 @@
+boolean org.apache.rocketmq.broker.processor.PullMessageProcessor:isBroadcast (
+  boolean proxyPullBroadcast,
+  org.apache.rocketmq.broker.client.ConsumerGroupInfo consumerGroupInfo) {
+  guard = tt;
+  ret(level()) = pc ⊔ level(consumerGroupInfo) ⊔ level(proxyPullBroadcast) ⊔ obj_level(consumerGroupInfo);
+  ret(obj_level(consumerGroupInfo)) = if obj_level(consumerGroupInfo) = ⊤ ∨ pc ≠ ⊤ ∧ (if level(proxyPullBroadcast) = ⊤ then obj_level(consumerGroupInfo) = ⊥ ∧ obj_level(this) = ⊤ else level(consumerGroupInfo) = ⊤ ∧ level(proxyPullBroadcast) = ⊥ ∧ obj_level(consumerGroupInfo) = ⊥ ∧ obj_level(this) = ⊤) then ⊤ else ⊥;
+  ret(obj_level(this)) = if obj_level(this) = ⊤ ∨ pc ≠ ⊤ ∧ obj_level(consumerGroupInfo) = ⊤ ∧ obj_level(this) = ⊥ then ⊤ else ⊥;
+}

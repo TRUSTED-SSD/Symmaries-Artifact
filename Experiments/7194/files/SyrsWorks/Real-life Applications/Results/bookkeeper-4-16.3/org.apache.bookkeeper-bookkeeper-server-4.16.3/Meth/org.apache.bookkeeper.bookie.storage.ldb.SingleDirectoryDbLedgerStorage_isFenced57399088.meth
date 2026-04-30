@@ -1,0 +1,25 @@
+boolean org.apache.bookkeeper.bookie.storage.ldb.SingleDirectoryDbLedgerStorage:isFenced(long ledgerId)
+{
+boolean isFenced;
+  org.apache.bookkeeper.bookie.storage.ldb.LedgerMetadataIndex $stack4;
+  org.apache.bookkeeper.bookie.storage.ldb.DbLedgerStorageDataFormats$LedgerData $stack5;
+  org.slf4j.Logger $stack7;
+  boolean $stack8;
+  java.lang.Long $stack12;
+  java.lang.Boolean $stack13;
+  $stack4=this.ledgerIndex;
+ $stack5 = $stack4.get(ledgerId);
+ isFenced = $stack5.getFenced();
+ $stack7=org.apache.bookkeeper.bookie.storage.ldb.SingleDirectoryDbLedgerStorage.log;
+ $stack8 = $stack7.isDebugEnabled();
+ if ($stack8==0) goto label0;
+ $stack7=org.apache.bookkeeper.bookie.storage.ldb.SingleDirectoryDbLedgerStorage.log;
+ $stack12 = java.lang.Long.valueOf(ledgerId);
+ $stack13 = java.lang.Boolean.valueOf(isFenced);
+ dummyClass.lowSink("ledger: {}, isFenced: {}.");
+$stack7.debug("ledger: {}, isFenced: {}.",(java.lang.Object)$stack12,(java.lang.Object)$stack13);
+ label0:if (isFenced!=0) goto label1;
+ this#org.apache.bookkeeper.bookie.storage.ldb.SingleDirectoryDbLedgerStorage:throwIfLimbo(ledgerId);
+ label1:return  isFenced;
+ } 
+

@@ -1,0 +1,28 @@
+void org.apache.rocketmq.remoting.netty.NettyRemotingAbstract$NettyEventExecutor:putNettyEvent(org.apache.rocketmq.remoting.netty.NettyEvent event)
+{
+int currentSize;
+  short maxSize;
+  java.util.concurrent.LinkedBlockingQueue $stack4;
+  org.apache.rocketmq.logging.org.slf4j.Logger $stack6;
+  java.lang.Object[] $stack7;
+  java.lang.Integer $stack10;
+  java.lang.String $stack14;
+  $stack4=this.eventQueue;
+ currentSize = $stack4.size();
+ maxSize=10000;
+ if (currentSize>10000) goto label0;
+ $stack4=this.eventQueue;
+ $stack4.add((java.lang.Object)event);
+ goto label1;
+ label0:$stack6 = org.apache.rocketmq.remoting.netty.NettyRemotingAbstract.access$000();
+ $stack7=new java.lang.Object[3];
+ $stack10 = java.lang.Integer.valueOf(currentSize);
+ $stack7[0]=$stack10;
+ $stack10 = java.lang.Integer.valueOf(10000);
+ $stack7[1]=$stack10;
+ $stack14 = event.toString();
+ $stack7[2]=$stack14;
+ $stack6.warn("event queue size [{}] over the limit [{}], so drop this event {}",$stack7);
+ label1:return;
+ } 
+

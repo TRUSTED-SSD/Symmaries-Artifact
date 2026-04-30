@@ -1,0 +1,31 @@
+long org.apache.rocketmq.common.consistenthash.ConsistentHashRouter$MD5Hash:hash(java.lang.String key)
+{
+byte[] digest;
+  long h;
+  int i;
+  java.security.MessageDigest $stack6;
+  java.nio.charset.Charset $stack7;
+  byte $stack12;
+  short $stack13;
+  long $stack14;
+  $stack6=this.instance;
+ $stack6.reset();
+ $stack6=this.instance;
+ $stack7=java.nio.charset.StandardCharsets.UTF_8;
+ digest = key.getBytes($stack7);
+ $stack6.update(digest);
+ $stack6=this.instance;
+ digest = $stack6.digest();
+ h=0L;
+ i=0;
+ label0:if (i>=4) goto label1;
+ h=(h<<8);
+ $stack12=digest[i];
+ $stack13=($stack12 & 255);
+ $stack14=(long) $stack13;
+ h=(h | $stack14);
+ i=(i+1);
+ goto label0;
+ label1:return  h;
+ } 
+

@@ -1,0 +1,33 @@
+static org.apache.rocketmq.store.timer.TimerCheckpoint org.apache.rocketmq.store.timer.TimerCheckpoint:decode(java.nio.ByteBuffer byteBuffer)
+{
+org.apache.rocketmq.store.timer.TimerCheckpoint tmp;
+  long $stack3;
+  boolean $stack7;
+  org.apache.rocketmq.remoting.protocol.DataVersion $stack8;
+  java.util.concurrent.atomic.AtomicLong $stack13;
+  tmp=new org.apache.rocketmq.store.timer.TimerCheckpoint;
+ tmp#org.apache.rocketmq.store.timer.TimerCheckpoint();
+ $stack3 = byteBuffer.getLong();
+ tmp.setLastReadTimeMs($stack3);
+ $stack3 = byteBuffer.getLong();
+ tmp.setLastTimerLogFlushPos($stack3);
+ $stack3 = byteBuffer.getLong();
+ tmp.setLastTimerQueueOffset($stack3);
+ $stack3 = byteBuffer.getLong();
+ tmp.setMasterTimerQueueOffset($stack3);
+ $stack7 = byteBuffer.hasRemaining();
+ if ($stack7==0) goto label0;
+ $stack8 = tmp.getDataVersion();
+ $stack3 = byteBuffer.getLong();
+ $stack8.setStateVersion($stack3);
+ $stack8 = tmp.getDataVersion();
+ $stack3 = byteBuffer.getLong();
+ $stack8.setTimestamp($stack3);
+ $stack8 = tmp.getDataVersion();
+ $stack13=new java.util.concurrent.atomic.AtomicLong;
+ $stack3 = byteBuffer.getLong();
+ $stack13#java.util.concurrent.atomic.AtomicLong($stack3);
+ $stack8.setCounter($stack13);
+ label0:return  tmp;
+ } 
+

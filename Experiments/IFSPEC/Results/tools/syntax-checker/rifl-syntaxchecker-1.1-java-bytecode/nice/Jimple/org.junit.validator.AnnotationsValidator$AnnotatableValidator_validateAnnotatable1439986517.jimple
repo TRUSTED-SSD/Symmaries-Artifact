@@ -1,0 +1,80 @@
+    private java.util.List validateAnnotatable(org.junit.runners.model.Annotatable)
+    {
+        org.junit.validator.AnnotationsValidator$AnnotatableValidator this;
+        org.junit.runners.model.Annotatable annotatable;
+        java.util.ArrayList validationErrors;
+        java.lang.'annotation'.Annotation[] arr$;
+        int len$, i$;
+        java.lang.'annotation'.Annotation 'annotation';
+        java.lang.Class annotationType;
+        org.junit.validator.ValidateWith validateWith;
+        org.junit.validator.AnnotationValidator annotationValidator;
+        java.util.List errors;
+        org.junit.validator.AnnotationValidatorFactory $stack17;
+
+        this := @this: org.junit.validator.AnnotationsValidator$AnnotatableValidator;
+
+        annotatable := @parameter0: org.junit.runners.model.Annotatable;
+
+        validationErrors = new java.util.ArrayList;
+/*61*/
+
+        specialinvoke validationErrors.<java.util.ArrayList: void <init>()>();
+/*61*/
+
+        arr$ = interfaceinvoke annotatable.<org.junit.runners.model.Annotatable: java.lang.'annotation'.Annotation[] getAnnotations()>();
+/*62*/
+/*62*/
+
+        len$ = lengthof arr$;
+/*62*/
+
+        i$ = 0;
+/*62*/
+
+     label1:
+        if i$ >= len$ goto label3;
+/*62*/
+
+        'annotation' = arr$[i$];
+/*75*/
+
+        annotationType = interfaceinvoke 'annotation'.<java.lang.'annotation'.Annotation: java.lang.Class annotationType()>();
+/*63*/
+/*63*/
+
+        'annotation' = virtualinvoke annotationType.<java.lang.Class: java.lang.'annotation'.Annotation getAnnotation(java.lang.Class)>(class "Lorg/junit/validator/ValidateWith;");
+/*65*/
+
+        validateWith = (org.junit.validator.ValidateWith) 'annotation';
+/*65*/
+
+        if validateWith == null goto label2;
+/*67*/
+
+        $stack17 = <org.junit.validator.AnnotationsValidator$AnnotatableValidator: org.junit.validator.AnnotationValidatorFactory ANNOTATION_VALIDATOR_FACTORY>;
+/*68*/
+
+        annotationValidator = virtualinvoke $stack17.<org.junit.validator.AnnotationValidatorFactory: org.junit.validator.AnnotationValidator createAnnotationValidator(org.junit.validator.ValidateWith)>(validateWith);
+/*68*/
+/*68*/
+
+        errors = virtualinvoke this.<org.junit.validator.AnnotationsValidator$AnnotatableValidator: java.util.List validateAnnotatable(org.junit.validator.AnnotationValidator,org.junit.runners.model.Annotatable)>(annotationValidator, annotatable);
+/*70*/
+/*70*/
+
+        interfaceinvoke validationErrors.<java.util.List: boolean addAll(java.util.Collection)>(errors);
+/*72*/
+
+     label2:
+        i$ = i$ + 1;
+/*62*/
+
+        goto label1;
+/*62*/
+
+     label3:
+        return validationErrors;
+/*75*/
+    }
+

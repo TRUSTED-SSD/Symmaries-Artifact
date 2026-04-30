@@ -1,0 +1,28 @@
+boolean org.apache.rocketmq.client.trace.AsyncTraceDispatcher:append(java.lang.Object ctx)
+{
+boolean result;
+  org.apache.rocketmq.client.trace.TraceContext $stack3;
+  java.util.concurrent.ArrayBlockingQueue $stack4;
+  java.lang.StringBuilder $stack6;
+  org.apache.rocketmq.logging.org.slf4j.Logger $stack7;
+  java.util.concurrent.atomic.AtomicLong $stack9;
+  long $stack10;
+  java.lang.String $stack14;
+  $stack4=this.traceContextQueue;
+ $stack3=(org.apache.rocketmq.client.trace.TraceContext) ctx;
+ result = $stack4.offer((java.lang.Object)$stack3);
+ if (result!=0) goto label0;
+ $stack7=org.apache.rocketmq.client.trace.AsyncTraceDispatcher.log;
+ $stack6=new java.lang.StringBuilder;
+ $stack6#java.lang.StringBuilder();
+ $stack6 = $stack6.append("buffer full");
+ $stack9=this.discardCount;
+ $stack10 = $stack9.incrementAndGet();
+ $stack6 = $stack6.append($stack10);
+ $stack6 = $stack6.append(" ,context is ");
+ $stack6 = $stack6.append(ctx);
+ $stack14 = $stack6.toString();
+ $stack7.info($stack14);
+ label0:return  result;
+ } 
+

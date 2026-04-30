@@ -1,0 +1,31 @@
+static org.apache.bookkeeper.proto.BookieProtocol$Response org.apache.bookkeeper.proto.ResponseBuilder:buildErrorResponse(int errorCode,org.apache.bookkeeper.proto.BookieProtocol$Request r)
+{
+byte $stack2;
+  boolean $stack3;
+  org.apache.bookkeeper.proto.BookieProtocol$ReadResponse $stack4;
+  long $stack6;
+  long $stack7;
+  java.lang.AssertionError $stack13;
+  org.apache.bookkeeper.proto.BookieProtocol$AddResponse $stack17;
+  $stack2 = r.getOpCode();
+ if ($stack2!=1) goto label0;
+ $stack2 = r.getProtocolVersion();
+ $stack6 = r.getLedgerId();
+ $stack7 = r.getEntryId();
+ $stack17 = org.apache.bookkeeper.proto.BookieProtocol$AddResponse.create($stack2,errorCode,$stack6,$stack7);
+ return  $stack17;
+ label0:$stack3=org.apache.bookkeeper.proto.ResponseBuilder.$assertionsDisabled;
+ if ($stack3!=0) goto label1;
+ $stack2 = r.getOpCode();
+ if ($stack2==2) goto label1;
+ $stack13=new java.lang.AssertionError;
+ $stack13#java.lang.AssertionError();
+ throw $stack13;
+ label1:$stack4=new org.apache.bookkeeper.proto.BookieProtocol$ReadResponse;
+ $stack2 = r.getProtocolVersion();
+ $stack6 = r.getLedgerId();
+ $stack7 = r.getEntryId();
+ $stack4#org.apache.bookkeeper.proto.BookieProtocol$ReadResponse($stack2,errorCode,$stack6,$stack7);
+ return  $stack4;
+ } 
+

@@ -1,0 +1,14 @@
+static java.net.InetAddress org.apache.kerby.util.Util:toInetAddress(java.lang.String s)
+{
+byte[] ip;
+  java.net.InetAddress $stack3;
+  ip = org.apache.kerby.util.IPAddressParser.parseIPv4Literal(s);
+ if (ip!=null) goto label0;
+ ip = org.apache.kerby.util.IPAddressParser.parseIPv6Literal(s);
+ label0:if (ip==null) goto label1;
+ $stack3 = java.net.InetAddress.getByAddress(s,ip);
+ return  $stack3;
+ label1:$stack3 = java.net.InetAddress.getByName(s);
+ return  $stack3;
+ } 
+

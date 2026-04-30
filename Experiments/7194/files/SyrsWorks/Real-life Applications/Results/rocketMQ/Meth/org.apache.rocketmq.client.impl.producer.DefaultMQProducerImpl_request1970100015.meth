@@ -1,0 +1,42 @@
+org.apache.rocketmq.common.message.Message org.apache.rocketmq.client.impl.producer.DefaultMQProducerImpl:request(org.apache.rocketmq.common.message.Message @msg,long timeout)
+{
+long beginTimestamp;
+  java.lang.String correlationId;
+  org.apache.rocketmq.client.producer.RequestResponseFuture requestResponseFuture;
+  java.lang.Throwable l11;
+  org.apache.rocketmq.client.producer.RequestFutureHolder $stack15;
+  java.util.concurrent.ConcurrentHashMap $stack16;
+  long $stack18;
+  org.apache.rocketmq.client.impl.producer.DefaultMQProducerImpl$6 $stack19;
+  org.apache.rocketmq.client.impl.CommunicationMode $stack20;
+  org.apache.rocketmq.common.message.Message msg;
+msg=@msg;
+beginTimestamp = java.lang.System.currentTimeMillis();
+ this#org.apache.rocketmq.client.impl.producer.DefaultMQProducerImpl:prepareSendRequest(msg,timeout);
+ correlationId = msg.getProperty("CORRELATION_ID");
+ label0:requestResponseFuture=new org.apache.rocketmq.client.producer.RequestResponseFuture;
+ requestResponseFuture#org.apache.rocketmq.client.producer.RequestResponseFuture(correlationId,timeout,null);
+ $stack15 = org.apache.rocketmq.client.producer.RequestFutureHolder.getInstance();
+ $stack16 = $stack15.getRequestFutureTable();
+ $stack16.put((java.lang.Object)correlationId,(java.lang.Object)requestResponseFuture);
+ $stack18 = java.lang.System.currentTimeMillis();
+ beginTimestamp=($stack18-beginTimestamp);
+ $stack20=org.apache.rocketmq.client.impl.CommunicationMode.ASYNC;
+ $stack19=new org.apache.rocketmq.client.impl.producer.DefaultMQProducerImpl$6;
+ $stack19#org.apache.rocketmq.client.impl.producer.DefaultMQProducerImpl$6(this,requestResponseFuture);
+ $stack18=(timeout-beginTimestamp);
+ this#org.apache.rocketmq.client.impl.producer.DefaultMQProducerImpl(msg,$stack20,(org.apache.rocketmq.client.producer.SendCallback)$stack19,$stack18);
+ msg = this#org.apache.rocketmq.client.impl.producer.DefaultMQProducerImpl:waitResponse(msg,timeout,requestResponseFuture,beginTimestamp);
+ label1:$stack15 = org.apache.rocketmq.client.producer.RequestFutureHolder.getInstance();
+ $stack16 = $stack15.getRequestFutureTable();
+ $stack16.remove((java.lang.Object)correlationId);
+ return  msg;
+ label2:l11 = catch;
+ label3:$stack15 = org.apache.rocketmq.client.producer.RequestFutureHolder.getInstance();
+ $stack16 = $stack15.getRequestFutureTable();
+ $stack16.remove((java.lang.Object)correlationId);
+ throw l11;
+ catch java.lang.Throwable: label0 - label1 : label2;
+catch java.lang.Throwable: label2 - label3 : label2;
+} 
+

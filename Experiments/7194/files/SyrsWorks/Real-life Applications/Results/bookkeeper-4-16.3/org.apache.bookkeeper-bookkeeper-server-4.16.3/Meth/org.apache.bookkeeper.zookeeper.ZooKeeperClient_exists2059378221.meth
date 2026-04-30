@@ -1,0 +1,18 @@
+org.apache.zookeeper.data.Stat org.apache.bookkeeper.zookeeper.ZooKeeperClient:exists(java.lang.String path,org.apache.zookeeper.Watcher watcher)
+{
+org.apache.bookkeeper.zookeeper.ZooKeeperClient$13 $stack3;
+  org.apache.bookkeeper.stats.OpStatsLogger $stack4;
+  com.google.common.util.concurrent.RateLimiter $stack5;
+  org.apache.bookkeeper.zookeeper.RetryPolicy $stack6;
+  java.lang.Object $stack7;
+  org.apache.zookeeper.data.Stat $stack8;
+  $stack3=new org.apache.bookkeeper.zookeeper.ZooKeeperClient$13;
+ $stack3#org.apache.bookkeeper.zookeeper.ZooKeeperClient$13(this,path,watcher);
+ $stack6=this.operationRetryPolicy;
+ $stack5=this.rateLimiter;
+ $stack4=this.existsStats;
+ $stack7 = org.apache.bookkeeper.zookeeper.ZooWorker.syncCallWithRetries(this,(org.apache.bookkeeper.zookeeper.ZooWorker$ZooCallable)$stack3,$stack6,$stack5,$stack4);
+ $stack8=(org.apache.zookeeper.data.Stat) $stack7;
+ return  $stack8;
+ } 
+

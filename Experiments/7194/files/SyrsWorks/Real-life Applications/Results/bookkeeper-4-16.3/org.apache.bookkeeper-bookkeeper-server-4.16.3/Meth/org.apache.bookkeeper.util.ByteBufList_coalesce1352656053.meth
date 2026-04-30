@@ -1,0 +1,27 @@
+static io.netty.buffer.ByteBuf org.apache.bookkeeper.util.ByteBufList:coalesce(org.apache.bookkeeper.util.ByteBufList list)
+{
+io.netty.buffer.ByteBuf res;
+  int i;
+  io.netty.buffer.ByteBuf b;
+  java.util.ArrayList $stack6;
+  int $stack7;
+  java.lang.Object $stack9;
+  int $stack11;
+  i = list.readableBytes();
+ res = io.netty.buffer.Unpooled.buffer(i);
+ i=0;
+ label0:$stack6=list.buffers;
+ $stack7 = $stack6.size();
+ if (i>=$stack7) goto label1;
+ $stack6=list.buffers;
+ $stack9 = $stack6.get(i);
+ b=(io.netty.buffer.ByteBuf) $stack9;
+ $stack7 = b.readerIndex();
+ $stack11 = b.readableBytes();
+dummyClass.highSourceMut($stack11);
+ res.writeBytes(b,$stack7,$stack11);
+ i=(i+1);
+ goto label0;
+ label1:return  res;
+ } 
+

@@ -1,0 +1,23 @@
+org.apache.bookkeeper.meta.MetadataClientDriver org.apache.bookkeeper.meta.zk.ZKMetadataClientDriver:initialize(org.apache.bookkeeper.conf.ClientConfiguration conf,java.util.concurrent.ScheduledExecutorService scheduler,org.apache.bookkeeper.stats.StatsLogger statsLogger,java.util.Optional optionalCtx)
+{
+org.apache.bookkeeper.zookeeper.BoundExponentialBackoffRetryPolicy $stack5;
+  int $stack6;
+  long $stack7;
+  long $stack9;
+  boolean $stack11;
+  $stack5=new org.apache.bookkeeper.zookeeper.BoundExponentialBackoffRetryPolicy;
+ $stack6 = conf.getZkTimeout();
+ $stack7=(long) $stack6;
+ $stack6 = conf.getZkTimeout();
+ $stack9=(long) $stack6;
+ $stack6 = conf.getZkRetryBackoffMaxRetries();
+ $stack5#org.apache.bookkeeper.zookeeper.BoundExponentialBackoffRetryPolicy($stack7,$stack9,$stack6);
+ this#org.apache.bookkeeper.meta.zk.ZKMetadataDriverBase:initialize((org.apache.bookkeeper.conf.AbstractConfiguration)conf,statsLogger,(org.apache.bookkeeper.zookeeper.RetryPolicy)$stack5,optionalCtx);
+ this.statsLogger=statsLogger;
+ this.clientConf=conf;
+ this.scheduler=scheduler;
+ $stack11 = conf.getEnableBookieAddressTracking();
+ this.bookieAddressTracking=$stack11;
+ return  this;
+ } 
+

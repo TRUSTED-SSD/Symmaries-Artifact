@@ -1,0 +1,11 @@
+java.lang.String org.apache.rocketmq.store.CommitLog:generateKey (java.lang.StringBuilder
+                                                                    keyBuilder,
+                                                                  org.apache.rocketmq.common.message.MessageExt
+                                                                    messageExt) {
+  guard = tt;
+  ret(level()) = level(keyBuilder) ⊔ level(messageExt) ⊔ obj_level(keyBuilder) ⊔ obj_level(messageExt);
+  ret(obj_level()) = level(keyBuilder) ⊔ level(messageExt) ⊔ obj_level(keyBuilder) ⊔ obj_level(messageExt);
+  ret(obj_level(keyBuilder)) = level(keyBuilder) ⊔ level(messageExt) ⊔ obj_level(keyBuilder) ⊔ obj_level(messageExt);
+  ret(obj_level(messageExt)) = level(keyBuilder) ⊔ level(messageExt) ⊔ obj_level(keyBuilder) ⊔ obj_level(messageExt);
+  ret(obj_level(this)) = level(keyBuilder) ⊔ level(messageExt) ⊔ obj_level(keyBuilder) ⊔ obj_level(messageExt) ⊔ obj_level(this);
+}

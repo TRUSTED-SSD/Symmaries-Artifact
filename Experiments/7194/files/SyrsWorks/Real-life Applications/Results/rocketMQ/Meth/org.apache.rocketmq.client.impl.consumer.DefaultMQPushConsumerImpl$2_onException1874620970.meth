@@ -1,0 +1,36 @@
+void org.apache.rocketmq.client.impl.consumer.DefaultMQPushConsumerImpl$2:onException(java.lang.Throwable e)
+{
+org.apache.rocketmq.client.impl.consumer.PopRequest $stack2;
+  org.apache.rocketmq.common.message.MessageQueue $stack3;
+  java.lang.String $stack4;
+  boolean $stack5;
+  org.apache.rocketmq.client.impl.consumer.DefaultMQPushConsumerImpl $stack7;
+  org.apache.rocketmq.client.impl.consumer.DefaultMQPushConsumerImpl $stack8;
+  long $stack10;
+  org.apache.rocketmq.client.exception.MQBrokerException $stack11;
+  int $stack12;
+  org.apache.rocketmq.logging.org.slf4j.Logger $stack18;
+  $stack2=this.val$popRequest;
+ $stack3 = $stack2.getMessageQueue();
+ $stack4 = $stack3.getTopic();
+ $stack5 = $stack4.startsWith("%RETRY%");
+ if ($stack5!=0) goto label0;
+ $stack18 = org.apache.rocketmq.client.impl.consumer.DefaultMQPushConsumerImpl.access$300();
+ $stack18.warn("execute the pull request exception: {}",e);
+ label0:$stack5=e instanceof org.apache.rocketmq.client.exception.MQBrokerException;
+ if ($stack5==0) goto label1;
+ $stack11=(org.apache.rocketmq.client.exception.MQBrokerException) e;
+ $stack12 = $stack11.getResponseCode();
+ if ($stack12!=215) goto label1;
+ $stack7=this.this$0;
+ $stack2=this.val$popRequest;
+ $stack7.executePopPullRequestLater($stack2,20L);
+ goto label2;
+ label1:$stack8=this.this$0;
+ $stack2=this.val$popRequest;
+ $stack7=this.this$0;
+ $stack10 = org.apache.rocketmq.client.impl.consumer.DefaultMQPushConsumerImpl.access$700($stack7);
+ $stack8.executePopPullRequestLater($stack2,$stack10);
+ label2:return;
+ } 
+

@@ -1,0 +1,28 @@
+java.util.concurrent.CompletableFuture org.apache.bookkeeper.common.util.AbstractAutoAsyncCloseable:closeAsync()
+{
+java.util.concurrent.CompletableFuture savedFuture;
+  org.apache.bookkeeper.common.util.AbstractAutoAsyncCloseable l2;
+  java.lang.Throwable l3;
+  java.util.concurrent.CompletableFuture $stack6;
+  l2=this;
+ monitorenter this;
+ label0:savedFuture=this.closeFuture;
+ if (null==savedFuture) goto label1;
+ savedFuture=this.closeFuture;
+ monitorexit this;
+ label2:return  savedFuture;
+ label1:$stack6 = org.apache.bookkeeper.common.concurrent.FutureUtils.createFuture();
+ savedFuture=$stack6;
+ this.closeFuture=$stack6;
+ monitorexit this;
+ label3:goto label4;
+ label5:l3 = catch;
+ monitorexit this;
+ label6:throw l3;
+ label4:this.closeAsyncOnce($stack6);
+ return  $stack6;
+ catch java.lang.Throwable: label0 - label2 : label5;
+catch java.lang.Throwable: label1 - label3 : label5;
+catch java.lang.Throwable: label5 - label6 : label5;
+} 
+

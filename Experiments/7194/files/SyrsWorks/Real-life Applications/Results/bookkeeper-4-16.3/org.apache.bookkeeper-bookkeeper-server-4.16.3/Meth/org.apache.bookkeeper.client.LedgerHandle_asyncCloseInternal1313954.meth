@@ -1,0 +1,32 @@
+void org.apache.bookkeeper.client.LedgerHandle:asyncCloseInternal(org.apache.bookkeeper.client.AsyncCallback$CloseCallback cb,java.lang.Object ctx,int rc)
+{
+java.util.concurrent.RejectedExecutionException $stack5;
+  org.slf4j.Logger $stack6;
+  boolean $stack7;
+  org.apache.bookkeeper.client.ClientContext $stack8;
+  org.apache.bookkeeper.proto.BookieClient $stack9;
+  long $stack14;
+  java.lang.Long $stack17;
+  label0:this#org.apache.bookkeeper.client.LedgerHandle(cb,ctx,rc);
+ label1:goto label2;
+ label3:$stack5 = catch;
+ $stack6=org.apache.bookkeeper.client.LedgerHandle.LOG;
+ $stack7 = $stack6.isDebugEnabled();
+ if ($stack7==0) goto label4;
+ $stack6=org.apache.bookkeeper.client.LedgerHandle.LOG;
+ $stack14=this.ledgerId;
+ $stack17 = java.lang.Long.valueOf($stack14);
+ dummyClass.lowSink("Failed to close ledger {} : ");
+$stack6.debug("Failed to close ledger {} : ",(java.lang.Object)$stack17,(java.lang.Object)$stack5);
+ label4:$stack8=this.clientCtx;
+ $stack9 = $stack8.getBookieClient();
+ rc = org.apache.bookkeeper.client.BookKeeper.getReturnRc($stack9,rc);
+ this.errorOutPendingAdds(rc);
+ $stack8=this.clientCtx;
+ $stack9 = $stack8.getBookieClient();
+ rc = org.apache.bookkeeper.client.BookKeeper.getReturnRc($stack9,-15);
+ cb.closeComplete(rc,this,ctx);
+ label2:return;
+ catch java.util.concurrent.RejectedExecutionException: label0 - label1 : label3;
+} 
+

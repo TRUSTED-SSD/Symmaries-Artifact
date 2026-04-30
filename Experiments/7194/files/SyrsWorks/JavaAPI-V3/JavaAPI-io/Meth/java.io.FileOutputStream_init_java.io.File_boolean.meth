@@ -1,0 +1,44 @@
+java.io.FileOutputStream java.io.FileOutputStream:init (java.io.File r1,boolean z0)
+{
+java.lang.String r2;
+  java.lang.SecurityManager r3;
+  java.lang.Object $r4;
+  boolean $z1;
+  java.io.FileDescriptor $r5;
+  java.io.FileDescriptor $r6;
+  java.io.FileNotFoundException $r7;
+  java.lang.NullPointerException $r8;
+  java.lang.String $r9;
+  this#java.io.OutputStream:init();
+ $r4=new java.lang.Object;
+ $r4#java.lang.Object:init();
+ this.closeLock=$r4;
+ this.closed=0;
+ if (r1==null) goto label0;
+ $r9 = r1.getPath();
+ goto label1;
+ label0:$r9=null;
+ label1:r2=$r9;
+ r3 = java.lang.System.getSecurityManager();
+ if (r3==null) goto label2;
+ r3.checkWrite(r2);
+ label2:if (r2!=null) goto label3;
+ $r8=new java.lang.NullPointerException;
+ $r8#java.lang.NullPointerException:init();
+ throw $r8;
+ label3:$z1 = r1.isInvalid();
+ if ($z1==0) goto label4;
+ $r7=new java.io.FileNotFoundException;
+ $r7#java.io.FileNotFoundException:init("Invalid file path");
+ throw $r7;
+ label4:$r5=new java.io.FileDescriptor;
+ $r5#java.io.FileDescriptor:init();
+ this.fd=$r5;
+ $r6=this.fd;
+ $r6.attach((java.io.Closeable)this);
+ this.append=z0;
+ this.path=r2;
+ this#java.io.FileOutputStream:open(r2,z0);
+  return this;
+ }  
+

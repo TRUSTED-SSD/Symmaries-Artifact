@@ -1,0 +1,17 @@
+static java.nio.ByteBuffer org.apache.rocketmq.tieredstore.util.MessageBufferUtil:getOffsetIdBuffer(java.nio.ByteBuffer message)
+{
+java.nio.ByteBuffer idBuffer;
+  int $stack4;
+  long $stack6;
+  idBuffer = java.nio.ByteBuffer.allocate(16);
+ idBuffer.limit(16);
+ $stack4 = message.position();
+ $stack4=($stack4+64);
+ $stack6 = message.getLong($stack4);
+ idBuffer.putLong($stack6);
+ $stack6 = org.apache.rocketmq.tieredstore.util.MessageBufferUtil.getCommitLogOffset(message);
+ idBuffer.putLong($stack6);
+ idBuffer.flip();
+ return  idBuffer;
+ } 
+

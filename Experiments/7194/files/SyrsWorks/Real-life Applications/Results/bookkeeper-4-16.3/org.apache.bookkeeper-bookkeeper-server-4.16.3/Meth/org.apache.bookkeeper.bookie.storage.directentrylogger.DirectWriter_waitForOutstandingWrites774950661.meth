@@ -1,0 +1,31 @@
+void org.apache.bookkeeper.bookie.storage.directentrylogger.DirectWriter:waitForOutstandingWrites()
+{
+java.util.List l1;
+  java.util.Iterator iter;
+  java.util.concurrent.Future f;
+  java.lang.Throwable l4;
+  java.util.List $stack5;
+  boolean $stack8;
+  java.lang.Object $stack10;
+  $stack5=this.outstandingWrites;
+ l1=$stack5;
+ monitorenter $stack5;
+ label0:$stack5=this.outstandingWrites;
+ iter = $stack5.iterator();
+ label1:$stack8 = iter.hasNext();
+ if ($stack8==0) goto label2;
+ $stack10 = iter.next();
+ f=(java.util.concurrent.Future) $stack10;
+ this#org.apache.bookkeeper.bookie.storage.directentrylogger.DirectWriter:waitForFuture(f);
+ iter.remove();
+ goto label1;
+ label2:monitorexit l1;
+ label3:goto label4;
+ label5:l4 = catch;
+ monitorexit l1;
+ label6:throw l4;
+ label4:return;
+ catch java.lang.Throwable: label0 - label3 : label5;
+catch java.lang.Throwable: label5 - label6 : label5;
+} 
+

@@ -1,0 +1,31 @@
+java.util.Map org.apache.rocketmq.client.impl.factory.MQClientInstance:getConsumerStatus(java.lang.String topic,java.lang.String group)
+{
+org.apache.rocketmq.client.impl.consumer.MQConsumerInner impl;
+  java.util.concurrent.ConcurrentMap $stack5;
+  java.lang.Object $stack6;
+  boolean $stack7;
+  java.util.Map $stack9;
+  org.apache.rocketmq.client.consumer.store.OffsetStore $stack10;
+  org.apache.rocketmq.client.impl.consumer.DefaultMQPushConsumerImpl tmp$1588514218;
+  org.apache.rocketmq.client.impl.consumer.DefaultMQPullConsumerImpl tmp$526296990;
+  $stack5=this.consumerTable;
+ $stack6 = $stack5.get((java.lang.Object)group);
+ impl=(org.apache.rocketmq.client.impl.consumer.MQConsumerInner) $stack6;
+ $stack7=impl instanceof org.apache.rocketmq.client.impl.consumer.DefaultMQPushConsumerImpl;
+ if ($stack7==0) goto label0;
+ impl=(org.apache.rocketmq.client.impl.consumer.DefaultMQPushConsumerImpl) impl;
+ tmp$1588514218=(org.apache.rocketmq.client.impl.consumer.DefaultMQPushConsumerImpl) impl;
+ $stack10 = tmp$1588514218.getOffsetStore();
+ $stack9 = $stack10.cloneOffsetTable(topic);
+ return  $stack9;
+ label0:$stack7=impl instanceof org.apache.rocketmq.client.impl.consumer.DefaultMQPullConsumerImpl;
+ if ($stack7==0) goto label1;
+ impl=(org.apache.rocketmq.client.impl.consumer.DefaultMQPullConsumerImpl) impl;
+ tmp$526296990=(org.apache.rocketmq.client.impl.consumer.DefaultMQPullConsumerImpl) impl;
+ $stack10 = tmp$526296990.getOffsetStore();
+ $stack9 = $stack10.cloneOffsetTable(topic);
+ return  $stack9;
+ label1:$stack9=java.util.Collections.EMPTY_MAP;
+ return  $stack9;
+ } 
+

@@ -1,0 +1,20 @@
+digraph G {
+  node [shape=box, ];
+  "pc0_js1" [label="〈$r1 = r0.bin, js1〉", ];
+  "pc1_js1" [label="〈return $r1, js1〉", ];
+  "pc2_js1" [label="〈sink, js1〉\n\
+obj_level(r0) ⊑ ret(obj_level(r0))' ∧ (ret(r0.><r0)' ∨ ¬r0.><r0) ∧ (ϕ ≠ S1 ∨ obj_level($r1) ⊑ ret(obj_level())' ∧ pc ⊔ level($r1) ⊑ ret(level())' ∧ (ret(.><r0)' ∨ ¬r0.><$r1) ∧ (ret(r0.><)' ∨ ¬$r1.><r0))",
+             ];
+  
+  
+  "pc0_js1" -> "pc1_js1" [label="tt,\n\
+{$r1.><$r1 := ff,\n\
+ $r1.><r0 := r0.><r0,\n\
+ r0.><$r1 := tt,\n\
+ level($r1) := pc ⊔ level(r0) ⊔ obj_level(r0),\n\
+ obj_level($r1) := obj_level(r0)}",
+                          ];
+  "pc1_js1" -> "pc2_js1" [label="tt,\n\
+{ϕ := S1}", ];
+  
+  }

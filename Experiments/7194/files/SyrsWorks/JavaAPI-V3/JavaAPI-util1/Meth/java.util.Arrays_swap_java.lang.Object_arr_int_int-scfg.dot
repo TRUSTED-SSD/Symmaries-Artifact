@@ -1,0 +1,66 @@
+digraph G {
+  node [shape=box, ];
+  "pc0_js1" [label="〈r1 = r0[i0], js1〉", ];
+  "pc1_js1" [label="〈$r2 = r0[i1], js1〉", ];
+  "pc2_js1" [label="〈r0[i0] = $r2, js1〉", ];
+  "pc3_js1" [label="〈r0[i1] = r1, js1〉", ];
+  "pc4_js1" [label="〈return, js1〉", ];
+  "pc5_js1" [label="〈sink, js1〉\n\
+obj_level(r0) ⊑ ret(obj_level(r0))' ∧ (ret(r0.><r0)' ∨ ¬r0.><r0)",
+             ];
+  
+  
+  "pc0_js1" -> "pc1_js1" [label="tt,\n\
+{$r2~r1 := ff,\n\
+ r0~r1 := r0.><r0,\n\
+ $r2.><r1 := ff,\n\
+ r0.><r1 := tt,\n\
+ r1.><$r2 := ff,\n\
+ r1.><r0 := r0.><r0,\n\
+ r1.><r1 := ff,\n\
+ level(r1) := pc ⊔ level(i0) ⊔ level(r0) ⊔ obj_level(r0),\n\
+ obj_level(r1) := obj_level(r0)}",
+                          ];
+  "pc1_js1" -> "pc2_js1" [label="tt,\n\
+{$r2~r0 := r0.><r0,\n\
+ $r2~r1 := tt,\n\
+ $r2.><$r2 := ff,\n\
+ $r2.><r0 := r0.><r0,\n\
+ $r2.><r1 := tt,\n\
+ r0.><$r2 := tt,\n\
+ r1.><$r2 := r0.><r0,\n\
+ level($r2) := pc ⊔ level(i1) ⊔ level(r0) ⊔ obj_level(r0),\n\
+ obj_level($r2) := obj_level(r0)}",
+                          ];
+  "pc2_js1" -> "pc3_js1" [label="tt,\n\
+{$r2.><$r2 := r0.><r0,\n\
+ $r2.><r0 := r0.><r0,\n\
+ $r2.><r1 := tt,\n\
+ r0.><$r2 := tt,\n\
+ r0.><r0 := tt,\n\
+ r0.><r1 := tt,\n\
+ r1.><$r2 := r0.><r0,\n\
+ r1.><r0 := r0.><r0,\n\
+ r1.><r1 := r0.><r0,\n\
+ obj_level($r2) := obj_level(r0) ⊔ (if r0.><r0 then pc ⊔ level(i0) ⊔ level(i1) ⊔ level(r0) ⊔ obj_level(r0) else ⊥),\n\
+ obj_level(r0) := pc ⊔ level(i0) ⊔ level(i1) ⊔ level(r0) ⊔ obj_level(r0),\n\
+ obj_level(r1) := obj_level(r0) ⊔ (if r0.><r0 then pc ⊔ level(i0) ⊔ level(i1) ⊔ level(r0) ⊔ obj_level(r0) else ⊥)}",
+                          ];
+  "pc3_js1" -> "pc4_js1" [label="tt,\n\
+{$r2.><$r2 := $r2~r0 ∨ $r2.><$r2 ∨ $r2.><r0,\n\
+ $r2.><r0 := $r2~r0 ∨ $r2.><r0,\n\
+ $r2.><r1 := tt,\n\
+ r0.><$r2 := tt,\n\
+ r0.><r0 := tt,\n\
+ r0.><r1 := tt,\n\
+ r1.><$r2 := r0~r1 ∨ r1.><$r2 ∨ r1.><r0,\n\
+ r1.><r0 := r0~r1 ∨ r1.><r0,\n\
+ r1.><r1 := r0~r1 ∨ r1.><r0 ∨ r1.><r1,\n\
+ obj_level($r2) := obj_level($r2) ⊔ (if $r2~r0 ∨ $r2.><r0 then pc ⊔ level(i1) ⊔ level(r1) ⊔ obj_level(r1) else ⊥),\n\
+ obj_level(r0) := pc ⊔ level(i1) ⊔ level(r1) ⊔ obj_level(r0) ⊔ obj_level(r1),\n\
+ obj_level(r1) := obj_level(r1) ⊔ (if r0~r1 ∨ r1.><r0 then pc ⊔ level(i1) ⊔ level(r1) ⊔ obj_level(r1) else ⊥)}",
+                          ];
+  "pc4_js1" -> "pc5_js1" [label="tt,\n\
+{ϕ := S4}", ];
+  
+  }

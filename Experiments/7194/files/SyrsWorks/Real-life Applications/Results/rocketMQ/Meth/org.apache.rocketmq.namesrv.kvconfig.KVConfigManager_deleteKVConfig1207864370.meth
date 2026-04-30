@@ -1,0 +1,46 @@
+void org.apache.rocketmq.namesrv.kvconfig.KVConfigManager:deleteKVConfig(java.lang.String namespace,java.lang.String key)
+{
+java.util.HashMap kvTable;
+  java.lang.String value;
+  java.lang.Throwable l5;
+  java.util.concurrent.locks.ReadWriteLock $stack6;
+  java.util.concurrent.locks.Lock $stack7;
+  java.lang.Object $stack9;
+  java.lang.Object[] $stack13;
+  org.apache.rocketmq.logging.org.slf4j.Logger $stack14;
+  java.lang.InterruptedException $stack19;
+  label0:$stack6=this.lock;
+ $stack7 = $stack6.writeLock();
+ $stack7.lockInterruptibly();
+ label1:kvTable=this.configTable;
+ $stack9 = kvTable.get((java.lang.Object)namespace);
+ kvTable=(java.util.HashMap) $stack9;
+ if (null==kvTable) goto label2;
+ $stack9 = kvTable.remove((java.lang.Object)key);
+ value=(java.lang.String) $stack9;
+ $stack14=org.apache.rocketmq.namesrv.kvconfig.KVConfigManager.log;
+ $stack13=new java.lang.Object[3];
+ $stack13[0]=namespace;
+ $stack13[1]=key;
+ $stack13[2]=value;
+ $stack14.info("deleteKVConfig delete a config item, Namespace: {} Key: {} Value: {}",$stack13);
+ label2:$stack6=this.lock;
+ $stack7 = $stack6.writeLock();
+ $stack7.unlock();
+ goto label3;
+ label4:l5 = catch;
+ label5:$stack6=this.lock;
+ $stack7 = $stack6.writeLock();
+ $stack7.unlock();
+ throw l5;
+ label3:goto label6;
+ label7:$stack19 = catch;
+ $stack14=org.apache.rocketmq.namesrv.kvconfig.KVConfigManager.log;
+ $stack14.error("deleteKVConfig InterruptedException",(java.lang.Throwable)$stack19);
+ label6:this.persist();
+ return;
+ catch java.lang.Throwable: label1 - label2 : label4;
+catch java.lang.Throwable: label4 - label5 : label4;
+catch java.lang.InterruptedException: label0 - label3 : label7;
+} 
+

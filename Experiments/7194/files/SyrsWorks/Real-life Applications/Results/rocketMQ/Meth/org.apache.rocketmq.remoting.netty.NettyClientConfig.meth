@@ -1,0 +1,50 @@
+org.apache.rocketmq.remoting.netty.NettyClientConfig()
+{
+int $stack1;
+  java.lang.Runtime $stack2;
+  boolean $stack10;
+  org.apache.rocketmq.remoting.common.TlsMode $stack11;
+  org.apache.rocketmq.remoting.common.TlsMode $stack12;
+  java.lang.String $stack13;
+  this#java.lang.Object();
+ $stack1=org.apache.rocketmq.remoting.netty.NettySystemConfig.clientWorkerSize;
+ this.clientWorkerThreads=$stack1;
+ $stack2 = java.lang.Runtime.getRuntime();
+ $stack1 = $stack2.availableProcessors();
+ this.clientCallbackExecutorThreads=$stack1;
+ $stack1=org.apache.rocketmq.remoting.netty.NettySystemConfig.CLIENT_ONEWAY_SEMAPHORE_VALUE;
+ this.clientOnewaySemaphoreValue=$stack1;
+ $stack1=org.apache.rocketmq.remoting.netty.NettySystemConfig.CLIENT_ASYNC_SEMAPHORE_VALUE;
+ this.clientAsyncSemaphoreValue=$stack1;
+ $stack1=org.apache.rocketmq.remoting.netty.NettySystemConfig.connectTimeoutMillis;
+ this.connectTimeoutMillis=$stack1;
+ this.channelNotActiveInterval=60000L;
+ $stack1=org.apache.rocketmq.remoting.netty.NettySystemConfig.clientChannelMaxIdleTimeSeconds;
+ this.clientChannelMaxIdleTimeSeconds=$stack1;
+ $stack1=org.apache.rocketmq.remoting.netty.NettySystemConfig.socketSndbufSize;
+ this.clientSocketSndBufSize=$stack1;
+ $stack1=org.apache.rocketmq.remoting.netty.NettySystemConfig.socketRcvbufSize;
+ this.clientSocketRcvBufSize=$stack1;
+ this.clientPooledByteBufAllocatorEnable=0;
+ $stack10=org.apache.rocketmq.remoting.netty.NettySystemConfig.clientCloseSocketIfTimeout;
+ this.clientCloseSocketIfTimeout=$stack10;
+ $stack12=org.apache.rocketmq.remoting.netty.TlsSystemConfig.tlsMode;
+ $stack11=org.apache.rocketmq.remoting.common.TlsMode.ENFORCING;
+ if ($stack12!=$stack11) goto label0;
+ $stack10=1;
+ goto label1;
+ label0:$stack10=0;
+ label1:$stack13 = java.lang.String.valueOf($stack10);
+ $stack13 = java.lang.System.getProperty("tls.enable",$stack13);
+ $stack10 = java.lang.Boolean.parseBoolean($stack13);
+ this.useTLS=$stack10;
+ this.socksProxyConfig="{}";
+ $stack1=org.apache.rocketmq.remoting.netty.NettySystemConfig.writeBufferHighWaterMark;
+ this.writeBufferHighWaterMark=$stack1;
+ $stack1=org.apache.rocketmq.remoting.netty.NettySystemConfig.writeBufferLowWaterMark;
+ this.writeBufferLowWaterMark=$stack1;
+ this.disableCallbackExecutor=0;
+ this.disableNettyWorkerGroup=0;
+ return;
+ } 
+

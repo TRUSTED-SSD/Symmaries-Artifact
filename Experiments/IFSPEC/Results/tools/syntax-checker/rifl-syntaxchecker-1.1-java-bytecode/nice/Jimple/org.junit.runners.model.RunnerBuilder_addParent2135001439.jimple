@@ -1,0 +1,49 @@
+    java.lang.Class addParent(java.lang.Class) throws org.junit.runners.model.InitializationError
+    {
+        org.junit.runners.model.RunnerBuilder this;
+        java.lang.Class parent;
+        java.util.Set $stack2;
+        boolean $stack3;
+        org.junit.runners.model.InitializationError $stack4;
+        java.lang.Object[] $stack5;
+        java.lang.String $stack8;
+
+        this := @this: org.junit.runners.model.RunnerBuilder;
+
+        parent := @parameter0: java.lang.Class;
+
+        $stack2 = this.<org.junit.runners.model.RunnerBuilder: java.util.Set parents>;
+/*66*/
+
+        $stack3 = interfaceinvoke $stack2.<java.util.Set: boolean add(java.lang.Object)>(parent);
+/*66*/
+
+        if $stack3 != 0 goto label1;
+/*66*/
+
+        $stack4 = new org.junit.runners.model.InitializationError;
+/*67*/
+
+        $stack5 = newarray (java.lang.Object)[1];
+/*67*/
+
+        $stack8 = virtualinvoke parent.<java.lang.Class: java.lang.String getName()>();
+/*67*/
+
+        $stack5[0] = $stack8;
+/*67*/
+
+        $stack8 = staticinvoke <java.lang.String: java.lang.String format(java.lang.String,java.lang.Object[])>("class \'%s\' (possibly indirectly) contains itself as a SuiteClass", $stack5);
+/*67*/
+
+        specialinvoke $stack4.<org.junit.runners.model.InitializationError: void <init>(java.lang.String)>($stack8);
+/*67*/
+
+        throw $stack4;
+/*67*/
+
+     label1:
+        return parent;
+/*69*/
+    }
+

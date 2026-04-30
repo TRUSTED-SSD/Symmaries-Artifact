@@ -1,0 +1,39 @@
+java.util.Map org.apache.rocketmq.broker.offset.ConsumerOffsetManager:getGroupTopicMap()
+{
+java.util.HashMap retMap;
+  java.util.Iterator l2;
+  java.lang.String key;
+  java.lang.String[] arr;
+  java.lang.String group;
+  java.util.Set topics;
+  java.util.concurrent.ConcurrentMap $stack9;
+  boolean $stack12;
+  java.lang.Object $stack13;
+  int $stack15;
+  java.util.HashSet $stack19;
+  retMap=new java.util.HashMap;
+ retMap#java.util.HashMap(128);
+ $stack9=this.offsetTable;
+ topics = $stack9.keySet();
+ l2 = topics.iterator();
+ label0:$stack12 = l2.hasNext();
+ if ($stack12==0) goto label1;
+ $stack13 = l2.next();
+ key=(java.lang.String) $stack13;
+ arr = key.split("@");
+ $stack15=#arr;
+ if ($stack15!=2) goto label2;
+ key=arr[0];
+ group=arr[1];
+ $stack13 = retMap.get((java.lang.Object)group);
+ topics=(java.util.Set) $stack13;
+ if (topics!=null) goto label3;
+ $stack19=new java.util.HashSet;
+ $stack19#java.util.HashSet(8);
+ topics=$stack19;
+ retMap.put((java.lang.Object)group,(java.lang.Object)$stack19);
+ label3:topics.add((java.lang.Object)key);
+ label2:goto label0;
+ label1:return  retMap;
+ } 
+

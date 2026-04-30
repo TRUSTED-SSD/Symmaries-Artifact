@@ -1,0 +1,31 @@
+byte[][] com.google.zxing.pdf417.encoder.BarcodeMatrix:getScaledMatrix(int xScale,int yScale)
+{
+byte[][] matrixOut;
+  int yMax;
+  int i;
+  int $stack11;
+  com.google.zxing.pdf417.encoder.BarcodeRow[] $stack13;
+  com.google.zxing.pdf417.encoder.BarcodeRow $stack14;
+  int $stack15;
+  byte[] $stack16;
+  yMax=this.height;
+ yMax=(yMax * yScale);
+ i=this.width;
+ i=(i * xScale);
+ matrixOut= new byte[yMax][i];
+ yMax=this.height;
+ yMax=(yMax * yScale);
+ i=0;
+ label0:if (i>=yMax) goto label1;
+ $stack11=(yMax-i);
+ $stack15=($stack11-1);
+ $stack13=this.matrix;
+ $stack11=(i/yScale);
+ $stack14=$stack13[$stack11];
+ $stack16 = $stack14.getScaledRow(xScale);
+ matrixOut[$stack15]=$stack16;
+ i=(i+1);
+ goto label0;
+ label1:return  matrixOut;
+ } 
+

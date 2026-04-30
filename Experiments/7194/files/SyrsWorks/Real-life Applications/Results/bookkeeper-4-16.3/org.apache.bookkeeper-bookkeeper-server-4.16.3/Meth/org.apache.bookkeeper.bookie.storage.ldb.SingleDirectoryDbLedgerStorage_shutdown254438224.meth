@@ -1,0 +1,43 @@
+void org.apache.bookkeeper.bookie.storage.ldb.SingleDirectoryDbLedgerStorage:shutdown()
+{
+org.apache.bookkeeper.bookie.GarbageCollectorThread $stack2;
+  org.apache.bookkeeper.bookie.storage.EntryLogger $stack3;
+  java.util.concurrent.ScheduledExecutorService $stack4;
+  java.util.concurrent.TimeUnit $stack5;
+  org.apache.bookkeeper.bookie.storage.ldb.LedgerMetadataIndex $stack8;
+  org.apache.bookkeeper.bookie.storage.ldb.EntryLocationIndex $stack9;
+  org.apache.bookkeeper.bookie.storage.ldb.WriteCache $stack10;
+  org.apache.bookkeeper.bookie.storage.ldb.ReadCache $stack12;
+  java.util.concurrent.ExecutorService $stack13;
+  java.io.IOException $stack14;
+  org.slf4j.Logger $stack15;
+  label0:this.flush();
+ $stack2=this.gcThread;
+ $stack2.shutdown();
+ $stack3=this.entryLogger;
+ $stack3.close();
+ $stack4=this.cleanupExecutor;
+ $stack4.shutdown();
+ $stack4=this.cleanupExecutor;
+ $stack5=java.util.concurrent.TimeUnit.SECONDS;
+ $stack4.awaitTermination(1L,$stack5);
+ $stack8=this.ledgerIndex;
+ $stack8.close();
+ $stack9=this.entryLocationIndex;
+ $stack9.close();
+ $stack10=this.writeCache;
+ $stack10.close();
+ $stack10=this.writeCacheBeingFlushed;
+ $stack10.close();
+ $stack12=this.readCache;
+ $stack12#org.apache.bookkeeper.bookie.storage.ldb.ReadCache();
+ $stack13=this.executor;
+ $stack13.shutdown();
+ label1:goto label2;
+ label3:$stack14 = catch;
+ $stack15=org.apache.bookkeeper.bookie.storage.ldb.SingleDirectoryDbLedgerStorage.log;
+ $stack15.error("Error closing db storage",(java.lang.Throwable)$stack14);
+ label2:return;
+ catch java.io.IOException: label0 - label1 : label3;
+} 
+

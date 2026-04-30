@@ -1,0 +1,16 @@
+void org.apache.rocketmq.broker.processor.AckMessageProcessor:decInFlightMessageNum(org.apache.rocketmq.remoting.protocol.header.AckMessageRequestHeader requestHeader)
+{
+org.apache.rocketmq.broker.BrokerController $stack2;
+  org.apache.rocketmq.broker.processor.PopInflightMessageCounter $stack3;
+  java.lang.String $stack4;
+  java.lang.String $stack5;
+  java.lang.String $stack6;
+  $stack2=this.brokerController;
+ $stack3 = $stack2.getPopInflightMessageCounter();
+ $stack4 = requestHeader.getTopic();
+ $stack5 = requestHeader.getConsumerGroup();
+ $stack6 = requestHeader.getExtraInfo();
+ $stack3.decrementInFlightMessageNum($stack4,$stack5,$stack6);
+ return;
+ } 
+

@@ -1,0 +1,33 @@
+boolean org.apache.rocketmq.store.queue.BatchConsumeQueue:load()
+{
+boolean result;
+  org.apache.rocketmq.store.MappedFileQueue $stack2;
+  java.lang.Object[] $stack4;
+  java.lang.String $stack5;
+  int $stack6;
+  org.apache.rocketmq.logging.org.slf4j.Logger $stack7;
+  java.lang.Integer $stack10;
+  java.util.List $stack13;
+  $stack2=this.mappedFileQueue;
+ result = $stack2.load();
+ $stack7=org.apache.rocketmq.store.queue.BatchConsumeQueue.log;
+ $stack4=new java.lang.Object[4];
+ $stack5=this.topic;
+ $stack4[0]=$stack5;
+ $stack6=this.queueId;
+ $stack10 = java.lang.Integer.valueOf($stack6);
+ $stack4[1]=$stack10;
+ if (result==0) goto label0;
+ $stack5="OK";
+ goto label1;
+ label0:$stack5="Failed";
+ label1:$stack4[2]=$stack5;
+ $stack2=this.mappedFileQueue;
+ $stack13 = $stack2.getMappedFiles();
+ $stack6 = $stack13.size();
+ $stack10 = java.lang.Integer.valueOf($stack6);
+ $stack4[3]=$stack10;
+ $stack7.info("Load batch consume queue {}-{} {} {}",$stack4);
+ return  result;
+ } 
+

@@ -1,0 +1,46 @@
+org.apache.rocketmq.remoting.protocol.RemotingCommand org.apache.rocketmq.container.BrokerContainerProcessor:removeBroker(io.netty.channel.ChannelHandlerContext ctx,org.apache.rocketmq.remoting.protocol.RemotingCommand request)
+{
+org.apache.rocketmq.remoting.protocol.RemotingCommand response;
+  org.apache.rocketmq.remoting.protocol.header.RemoveBrokerRequestHeader requestHeader;
+  org.apache.rocketmq.common.BrokerIdentity brokerIdentity;
+  org.apache.rocketmq.broker.BrokerController brokerController;
+  org.apache.rocketmq.remoting.CommandCustomHeader $stack9;
+  org.apache.rocketmq.logging.org.slf4j.Logger $stack10;
+  io.netty.channel.Channel $stack12;
+  java.lang.String $stack13;
+  java.lang.String $stack16;
+  java.lang.Long $stack17;
+  long $stack18;
+  org.apache.rocketmq.container.BrokerContainer $stack19;
+  java.lang.Exception $stack22;
+  response = org.apache.rocketmq.remoting.protocol.RemotingCommand.createResponseCommand(null);
+ $stack9 = request.decodeCommandCustomHeader(org.apache.rocketmq.remoting.protocol.header.RemoveBrokerRequestHeader);
+ requestHeader=(org.apache.rocketmq.remoting.protocol.header.RemoveBrokerRequestHeader) $stack9;
+ $stack10=org.apache.rocketmq.container.BrokerContainerProcessor.LOGGER;
+ $stack12 = ctx.channel();
+ $stack13 = org.apache.rocketmq.remoting.common.RemotingHelper.parseChannelRemoteAddr($stack12);
+ $stack10.info("removeBroker called by {}",(java.lang.Object)$stack13);
+ brokerIdentity=new org.apache.rocketmq.common.BrokerIdentity;
+ $stack13 = requestHeader.getBrokerClusterName();
+ $stack16 = requestHeader.getBrokerName();
+ $stack17 = requestHeader.getBrokerId();
+ $stack18 = $stack17.longValue();
+ brokerIdentity#org.apache.rocketmq.common.BrokerIdentity($stack13,$stack16,$stack18);
+ label0:$stack19=this.brokerContainer;
+ brokerController = $stack19.removeBroker(brokerIdentity);
+ label1:goto label2;
+ label3:$stack22 = catch;
+ response.setCode(1);
+ $stack13 = $stack22.getMessage();
+ response.setRemark($stack13);
+ return  response;
+ label2:if (brokerController==null) goto label4;
+ response.setCode(0);
+ response.setRemark(null);
+ goto label5;
+ label4:response.setCode(211);
+ response.setRemark("Broker not exist");
+ label5:return  response;
+ catch java.lang.Exception: label0 - label1 : label3;
+} 
+

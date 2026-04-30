@@ -1,0 +1,16 @@
+java.io.File org.apache.bookkeeper.bookie.IndexPersistenceMgr:createFileInfoBackingFile(long ledger,boolean createIfMissing)
+{
+java.io.File lf;
+  java.lang.Long $stack6;
+  org.apache.bookkeeper.bookie.Bookie$NoLedgerException $stack9;
+  lf = this#org.apache.bookkeeper.bookie.IndexPersistenceMgr:findIndexFile(ledger);
+ if (null!=lf) goto label0;
+ if (createIfMissing!=0) goto label1;
+ $stack9=new org.apache.bookkeeper.bookie.Bookie$NoLedgerException;
+ $stack9#org.apache.bookkeeper.bookie.Bookie$NoLedgerException(ledger);
+ throw $stack9;
+ label1:$stack6 = java.lang.Long.valueOf(ledger);
+ lf = this#org.apache.bookkeeper.bookie.IndexPersistenceMgr:getNewLedgerIndexFile($stack6,null);
+ label0:return  lf;
+ } 
+

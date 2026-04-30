@@ -1,0 +1,42 @@
+org.apache.rocketmq.remoting.protocol.body.BrokerMemberGroup org.apache.rocketmq.broker.out.BrokerOuterAPI:getBrokerMemberGroup(java.lang.String clusterName,java.lang.String brokerName)
+{
+org.apache.rocketmq.remoting.protocol.body.BrokerMemberGroup brokerMemberGroup;
+  org.apache.rocketmq.remoting.protocol.header.GetBrokerMemberGroupRequestHeader requestHeader;
+  org.apache.rocketmq.remoting.protocol.RemotingCommand request;
+  org.apache.rocketmq.remoting.protocol.RemotingCommand response;
+  byte[] body;
+  org.apache.rocketmq.remoting.protocol.body.GetBrokerMemberGroupResponseBody brokerMemberGroupResponseBody;
+  org.apache.rocketmq.remoting.RemotingClient $stack12;
+  boolean $stack14;
+  int $stack15;
+  java.lang.Object $stack17;
+  java.lang.AssertionError $stack21;
+  brokerMemberGroup=new org.apache.rocketmq.remoting.protocol.body.BrokerMemberGroup;
+ brokerMemberGroup#org.apache.rocketmq.remoting.protocol.body.BrokerMemberGroup(clusterName,brokerName);
+ requestHeader=new org.apache.rocketmq.remoting.protocol.header.GetBrokerMemberGroupRequestHeader;
+ requestHeader#org.apache.rocketmq.remoting.protocol.header.GetBrokerMemberGroupRequestHeader();
+ requestHeader.setClusterName(clusterName);
+ requestHeader.setBrokerName(brokerName);
+ request = org.apache.rocketmq.remoting.protocol.RemotingCommand.createRequestCommand(901,(org.apache.rocketmq.remoting.CommandCustomHeader)requestHeader);
+ response=null;
+ $stack12=this.remotingClient;
+ response = $stack12.invokeSync(null,request,3000L);
+ $stack14=org.apache.rocketmq.broker.out.BrokerOuterAPI.$assertionsDisabled;
+ if ($stack14!=0) goto label0;
+ if (response!=null) goto label0;
+ $stack21=new java.lang.AssertionError;
+ $stack21#java.lang.AssertionError();
+ throw $stack21;
+ label0:$stack15 = response.getCode();
+ switch [$stack15]
+if 0 goto label1;
+goto label2;
+ label1:body = response.getBody();
+ if (body==null) goto label2;
+ $stack17 = org.apache.rocketmq.remoting.protocol.RemotingSerializable.decode(body,org.apache.rocketmq.remoting.protocol.body.GetBrokerMemberGroupResponseBody);
+ brokerMemberGroupResponseBody=(org.apache.rocketmq.remoting.protocol.body.GetBrokerMemberGroupResponseBody) $stack17;
+ brokerMemberGroup = brokerMemberGroupResponseBody.getBrokerMemberGroup();
+ return  brokerMemberGroup;
+ label2:return  brokerMemberGroup;
+ } 
+

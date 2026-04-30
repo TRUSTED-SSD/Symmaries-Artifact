@@ -1,0 +1,34 @@
+static java.util.Map org.apache.rocketmq.common.message.MessageDecoder:string2messageProperties(java.lang.String properties)
+{
+java.util.HashMap map;
+  int len;
+  int index;
+  int newIndex;
+  int kvSepIndex;
+  java.lang.String k;
+  java.lang.String v;
+  int $stack19;
+  map=new java.util.HashMap;
+ map#java.util.HashMap(128);
+ if (properties==null) goto label0;
+ len = properties.length();
+ index=0;
+ label1:if (index>=len) goto label0;
+ newIndex = properties.indexOf(2,index);
+ if (newIndex>=0) goto label2;
+ newIndex=len;
+ label2:kvSepIndex=(newIndex-index);
+ if (kvSepIndex<3) goto label3;
+ kvSepIndex = properties.indexOf(1,index);
+ if (kvSepIndex<=index) goto label3;
+ $stack19=(newIndex-1);
+ if (kvSepIndex>=$stack19) goto label3;
+ k = properties.substring(index,kvSepIndex);
+ index=(kvSepIndex+1);
+ v = properties.substring(index,newIndex);
+ map.put((java.lang.Object)k,(java.lang.Object)v);
+ label3:index=(newIndex+1);
+ goto label1;
+ label0:return  map;
+ } 
+

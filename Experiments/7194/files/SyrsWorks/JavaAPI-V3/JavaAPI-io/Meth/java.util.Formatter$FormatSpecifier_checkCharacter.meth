@@ -1,0 +1,51 @@
+void java.util.Formatter$FormatSpecifier:checkCharacter()
+{
+int $i0;
+  java.util.Formatter$Flags[] $r1;
+  java.util.Formatter$Flags $r2;
+  java.util.Formatter$Flags $r3;
+  java.util.Formatter$Flags $r4;
+  java.util.Formatter$Flags $r5;
+  java.util.Formatter$Flags $r6;
+  java.util.Formatter$Flags $r7;
+  int $i1;
+  java.util.Formatter$Flags $r8;
+  java.util.Formatter$Flags $r9;
+  boolean $z0;
+  java.util.MissingFormatWidthException $r10;
+  java.lang.String $r11;
+  java.util.IllegalFormatPrecisionException $r12;
+  int $i2;
+  $i0=this.precision;
+ if ($i0==-1) goto label0;
+ $r12=new java.util.IllegalFormatPrecisionException;
+ $i2=this.precision;
+ $r12#java.util.IllegalFormatPrecisionException:init($i2);
+ throw $r12;
+ label0:$r1=new java.util.Formatter$Flags[6];
+ $r2=java.util.Formatter$Flags.ALTERNATE;
+ $r1[0]=$r2;
+ $r3=java.util.Formatter$Flags.PLUS;
+ $r1[1]=$r3;
+ $r4=java.util.Formatter$Flags.LEADING_SPACE;
+ $r1[2]=$r4;
+ $r5=java.util.Formatter$Flags.ZERO_PAD;
+ $r1[3]=$r5;
+ $r6=java.util.Formatter$Flags.GROUP;
+ $r1[4]=$r6;
+ $r7=java.util.Formatter$Flags.PARENTHESES;
+ $r1[5]=$r7;
+ this#java.util.Formatter$FormatSpecifier:checkBadFlags($r1);
+ $i1=this.width;
+ if ($i1!=-1) goto label1;
+ $r9=this.f;
+ $r8=java.util.Formatter$Flags.LEFT_JUSTIFY;
+ $z0 = $r9.contains($r8);
+ if ($z0==0) goto label1;
+ $r10=new java.util.MissingFormatWidthException;
+ $r11 = this.toString();
+ $r10#java.util.MissingFormatWidthException:init($r11);
+ throw $r10;
+ label1:return;
+ }  
+

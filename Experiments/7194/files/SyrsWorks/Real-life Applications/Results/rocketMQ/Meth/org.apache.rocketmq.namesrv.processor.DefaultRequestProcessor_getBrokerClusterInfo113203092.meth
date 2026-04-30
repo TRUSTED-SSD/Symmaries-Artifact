@@ -1,0 +1,19 @@
+org.apache.rocketmq.remoting.protocol.RemotingCommand org.apache.rocketmq.namesrv.processor.DefaultRequestProcessor:getBrokerClusterInfo(io.netty.channel.ChannelHandlerContext ctx,org.apache.rocketmq.remoting.protocol.RemotingCommand @request)
+{
+byte[] content;
+  org.apache.rocketmq.namesrv.NamesrvController $stack6;
+  org.apache.rocketmq.namesrv.routeinfo.RouteInfoManager $stack7;
+  org.apache.rocketmq.remoting.protocol.body.ClusterInfo $stack8;
+  org.apache.rocketmq.remoting.protocol.RemotingCommand request;
+request=@request;
+request = org.apache.rocketmq.remoting.protocol.RemotingCommand.createResponseCommand(null);
+ $stack6=this.namesrvController;
+ $stack7 = $stack6.getRouteInfoManager();
+ $stack8 = $stack7.getAllClusterInfo();
+ content = $stack8.encode();
+ request.setBody(content);
+ request.setCode(0);
+ request.setRemark(null);
+ return  request;
+ } 
+

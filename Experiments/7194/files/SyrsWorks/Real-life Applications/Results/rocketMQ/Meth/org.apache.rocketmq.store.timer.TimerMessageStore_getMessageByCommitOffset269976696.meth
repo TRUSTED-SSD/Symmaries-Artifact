@@ -1,0 +1,49 @@
+org.apache.rocketmq.common.message.MessageExt org.apache.rocketmq.store.timer.TimerMessageStore:getMessageByCommitOffset(long offsetPy,int sizePy)
+{
+int i;
+  org.apache.rocketmq.common.message.MessageExt msgExt;
+  boolean res;
+  java.lang.ThreadLocal $stack7;
+  java.lang.Object $stack8;
+  java.nio.ByteBuffer $stack9;
+  org.apache.rocketmq.store.MessageStore $stack16;
+  org.apache.rocketmq.logging.org.slf4j.Logger $stack20;
+  java.lang.Long $stack22;
+  java.lang.Integer $stack23;
+  i=0;
+ label0:if (i>=3) goto label1;
+ msgExt=null;
+ $stack7=this.bufferLocal;
+ $stack8 = $stack7.get();
+ $stack9=(java.nio.ByteBuffer) $stack8;
+ $stack9.position(0);
+ $stack7=this.bufferLocal;
+ $stack8 = $stack7.get();
+ $stack9=(java.nio.ByteBuffer) $stack8;
+ $stack9.limit(sizePy);
+ $stack16=this.messageStore;
+ $stack7=this.bufferLocal;
+ $stack8 = $stack7.get();
+ $stack9=(java.nio.ByteBuffer) $stack8;
+ res = $stack16.getData(offsetPy,sizePy,$stack9);
+ if (res==0) goto label2;
+ $stack7=this.bufferLocal;
+ $stack8 = $stack7.get();
+ $stack9=(java.nio.ByteBuffer) $stack8;
+ $stack9.flip();
+ $stack7=this.bufferLocal;
+ $stack8 = $stack7.get();
+ $stack9=(java.nio.ByteBuffer) $stack8;
+ msgExt = org.apache.rocketmq.common.message.MessageDecoder.decode($stack9,(boolean)1,(boolean)0,(boolean)0);
+ label2:if (null!=msgExt) goto label3;
+ $stack20=org.apache.rocketmq.store.timer.TimerMessageStore.LOGGER;
+ $stack22 = java.lang.Long.valueOf(offsetPy);
+ $stack23 = java.lang.Integer.valueOf(sizePy);
+ $stack20.warn("Fail to read msg from commitlog offsetPy:{} sizePy:{}",(java.lang.Object)$stack22,(java.lang.Object)$stack23);
+ goto label4;
+ label3:return  msgExt;
+ label4:i=(i+1);
+ goto label0;
+ label1:return  null;
+ } 
+

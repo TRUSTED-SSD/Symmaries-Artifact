@@ -1,0 +1,31 @@
+void org.apache.rocketmq.client.impl.consumer.DefaultLitePullConsumerImpl:updateTopicSubscribeInfoWhenSubscriptionChanged()
+{
+java.util.concurrent.ConcurrentMap subTable;
+  java.util.Iterator l2;
+  java.util.Map$Entry entry;
+  java.lang.String topic;
+  boolean $stack5;
+  org.apache.rocketmq.client.impl.consumer.RebalanceImpl $stack6;
+  java.util.Set $stack8;
+  java.lang.Object $stack11;
+  org.apache.rocketmq.client.impl.factory.MQClientInstance $stack13;
+  $stack5=org.apache.rocketmq.client.impl.consumer.DefaultLitePullConsumerImpl.doNotUpdateTopicSubscribeInfoWhenSubscriptionChanged;
+ if ($stack5==0) goto label0;
+ return;
+ label0:$stack6=this.rebalanceImpl;
+ subTable = $stack6.getSubscriptionInner();
+ if (subTable==null) goto label1;
+ $stack8 = subTable.entrySet();
+ l2 = $stack8.iterator();
+ label2:$stack5 = l2.hasNext();
+ if ($stack5==0) goto label1;
+ $stack11 = l2.next();
+ entry=(java.util.Map$Entry) $stack11;
+ $stack11 = entry.getKey();
+ topic=(java.lang.String) $stack11;
+ $stack13=this.mQClientFactory;
+ $stack13.updateTopicRouteInfoFromNameServer(topic);
+ goto label2;
+ label1:return;
+ } 
+

@@ -1,0 +1,19 @@
+byte[] org.apache.kerby.kerberos.kerb.crypto.dh.DiffieHellmanServer:encrypt(byte[] @clearText,org.apache.kerby.kerberos.kerb.type.base.KeyUsage usage)
+{
+org.apache.kerby.kerberos.kerb.crypto.EncTypeHandler encType;
+  org.apache.kerby.kerberos.kerb.type.base.EncryptionKey $stack4;
+  org.apache.kerby.kerberos.kerb.type.base.EncryptionType $stack5;
+  byte[] $stack8;
+  int $stack9;
+  byte[] clearText;
+clearText=@clearText;
+$stack4=this.serverKey;
+ $stack5 = $stack4.getKeyType();
+ encType = org.apache.kerby.kerberos.kerb.crypto.EncryptionHandler.getEncHandler($stack5);
+ $stack4=this.serverKey;
+ $stack8 = $stack4.getKeyData();
+ $stack9 = usage.getValue();
+ clearText = encType.encrypt(clearText,$stack8,$stack9);
+ return  clearText;
+ } 
+

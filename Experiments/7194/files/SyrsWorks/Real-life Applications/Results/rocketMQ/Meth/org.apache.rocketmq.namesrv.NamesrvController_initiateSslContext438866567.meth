@@ -1,0 +1,34 @@
+void org.apache.rocketmq.namesrv.NamesrvController:initiateSslContext()
+{
+java.lang.String[] watchFiles;
+  org.apache.rocketmq.namesrv.NamesrvController$3 listener;
+  java.lang.Exception e;
+  org.apache.rocketmq.remoting.common.TlsMode $stack4;
+  org.apache.rocketmq.remoting.common.TlsMode $stack5;
+  java.lang.String $stack7;
+  org.apache.rocketmq.srvutil.FileWatchService $stack11;
+  org.apache.rocketmq.logging.org.slf4j.Logger $stack13;
+  $stack5=org.apache.rocketmq.remoting.netty.TlsSystemConfig.tlsMode;
+ $stack4=org.apache.rocketmq.remoting.common.TlsMode.DISABLED;
+ if ($stack5!=$stack4) goto label0;
+ return;
+ label0:watchFiles=new java.lang.String[3];
+ $stack7=org.apache.rocketmq.remoting.netty.TlsSystemConfig.tlsServerCertPath;
+ watchFiles[0]=$stack7;
+ $stack7=org.apache.rocketmq.remoting.netty.TlsSystemConfig.tlsServerKeyPath;
+ watchFiles[1]=$stack7;
+ $stack7=org.apache.rocketmq.remoting.netty.TlsSystemConfig.tlsServerTrustCertPath;
+ watchFiles[2]=$stack7;
+ listener=new org.apache.rocketmq.namesrv.NamesrvController$3;
+ listener#org.apache.rocketmq.namesrv.NamesrvController$3(this);
+ label1:$stack11=new org.apache.rocketmq.srvutil.FileWatchService;
+ $stack11#org.apache.rocketmq.srvutil.FileWatchService(watchFiles,(org.apache.rocketmq.srvutil.FileWatchService$Listener)listener);
+ this.fileWatchService=$stack11;
+ label2:goto label3;
+ label4:e = catch;
+ $stack13=org.apache.rocketmq.namesrv.NamesrvController.LOGGER;
+ $stack13.warn("FileWatchService created error, can\'t load the certificate dynamically");
+ label3:return;
+ catch java.lang.Exception: label1 - label2 : label4;
+} 
+

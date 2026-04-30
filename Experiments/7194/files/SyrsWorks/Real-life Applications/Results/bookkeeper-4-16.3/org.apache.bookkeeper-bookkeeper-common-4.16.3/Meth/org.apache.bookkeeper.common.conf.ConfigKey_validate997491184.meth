@@ -1,0 +1,49 @@
+void org.apache.bookkeeper.common.conf.ConfigKey:validate(org.apache.commons.configuration.Configuration conf)
+{
+java.lang.Object value;
+  java.lang.String $stack3;
+  boolean $stack4;
+  org.apache.bookkeeper.common.conf.ConfigException $stack6;
+  java.lang.StringBuilder $stack7;
+  org.apache.bookkeeper.common.conf.Validator $stack13;
+  $stack3 = this.name();
+ $stack4 = conf.containsKey($stack3);
+ if ($stack4==0) goto label0;
+ $stack13 = this.validator();
+ if ($stack13==null) goto label0;
+ value = this.get(conf);
+ $stack13 = this.validator();
+ $stack3 = this.name();
+ $stack4 = $stack13.validate($stack3,value);
+ if ($stack4!=0) goto label1;
+ $stack6=new org.apache.bookkeeper.common.conf.ConfigException;
+ $stack7=new java.lang.StringBuilder;
+ $stack7#java.lang.StringBuilder();
+ $stack7 = $stack7.append("Invalid setting of \'");
+ $stack3 = this.name();
+ $stack7 = $stack7.append($stack3);
+ $stack7 = $stack7.append("\' found the configuration: value = \'");
+ $stack7 = $stack7.append(value);
+ $stack7 = $stack7.append("\', requirement = \'");
+ $stack13=this.validator;
+ $stack7 = $stack7.append((java.lang.Object)$stack13);
+ $stack7 = $stack7.append("\'");
+ $stack3 = $stack7.toString();
+ $stack6#org.apache.bookkeeper.common.conf.ConfigException($stack3);
+ throw $stack6;
+ label1:goto label2;
+ label0:$stack4 = this.required();
+ if ($stack4==0) goto label2;
+ $stack6=new org.apache.bookkeeper.common.conf.ConfigException;
+ $stack7=new java.lang.StringBuilder;
+ $stack7#java.lang.StringBuilder();
+ $stack7 = $stack7.append("Setting \'");
+ $stack3 = this.name();
+ $stack7 = $stack7.append($stack3);
+ $stack7 = $stack7.append("\' is required but missing in the configuration");
+ $stack3 = $stack7.toString();
+ $stack6#org.apache.bookkeeper.common.conf.ConfigException($stack3);
+ throw $stack6;
+ label2:return;
+ } 
+

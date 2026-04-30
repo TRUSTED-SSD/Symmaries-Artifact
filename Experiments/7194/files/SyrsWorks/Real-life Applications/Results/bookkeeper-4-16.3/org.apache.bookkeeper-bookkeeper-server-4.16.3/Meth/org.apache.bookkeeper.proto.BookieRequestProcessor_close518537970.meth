@@ -1,0 +1,31 @@
+void org.apache.bookkeeper.proto.BookieRequestProcessor:close()
+{
+org.slf4j.Logger $stack1;
+  org.apache.bookkeeper.common.util.OrderedExecutor $stack2;
+  org.apache.bookkeeper.conf.ServerConfiguration $stack4;
+  int $stack5;
+  io.netty.util.HashedWheelTimer $stack8;
+  $stack1=org.apache.bookkeeper.proto.BookieRequestProcessor.LOG;
+ dummyClass.lowSink("Closing RequestProcessor");
+$stack1.info("Closing RequestProcessor");
+ $stack2=this.writeThreadPool;
+ this#org.apache.bookkeeper.proto.BookieRequestProcessor:shutdownExecutor($stack2);
+ $stack2=this.readThreadPool;
+ this#org.apache.bookkeeper.proto.BookieRequestProcessor:shutdownExecutor($stack2);
+ $stack4=this.serverCfg;
+ $stack5 = $stack4.getNumLongPollWorkerThreads();
+ if ($stack5>0) goto label0;
+ $stack2=this.readThreadPool;
+ if ($stack2!=null) goto label1;
+ label0:$stack2=this.longPollThreadPool;
+ this#org.apache.bookkeeper.proto.BookieRequestProcessor:shutdownExecutor($stack2);
+ label1:$stack2=this.highPriorityThreadPool;
+ this#org.apache.bookkeeper.proto.BookieRequestProcessor:shutdownExecutor($stack2);
+ $stack8=this.requestTimer;
+ $stack8.stop();
+ $stack1=org.apache.bookkeeper.proto.BookieRequestProcessor.LOG;
+ dummyClass.lowSink("Closed RequestProcessor");
+$stack1.info("Closed RequestProcessor");
+ return;
+ } 
+

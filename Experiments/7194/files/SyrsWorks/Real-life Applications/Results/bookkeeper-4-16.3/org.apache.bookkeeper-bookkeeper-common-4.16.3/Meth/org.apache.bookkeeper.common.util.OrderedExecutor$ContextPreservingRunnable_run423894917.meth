@@ -1,0 +1,18 @@
+void org.apache.bookkeeper.common.util.OrderedExecutor$ContextPreservingRunnable:run()
+{
+java.util.Map $stack2;
+  java.lang.Runnable $stack3;
+  java.lang.Throwable $stack4;
+  $stack2=this.mdcContextMap;
+ org.apache.bookkeeper.common.util.MdcUtils.restoreContext($stack2);
+ label0:$stack3=this.runnable;
+ $stack3.run();
+ label1:org.slf4j.MDC.clear();
+ goto label2;
+ label3:$stack4 = catch;
+ org.slf4j.MDC.clear();
+ throw $stack4;
+ label2:return;
+ catch java.lang.Throwable: label0 - label1 : label3;
+} 
+

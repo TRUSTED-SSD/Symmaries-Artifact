@@ -1,0 +1,25 @@
+void org.apache.rocketmq.acl.common.AclClientRPCHook:doBeforeRequest(java.lang.String @remoteAddr,org.apache.rocketmq.remoting.protocol.RemotingCommand request)
+{
+org.apache.rocketmq.acl.common.SessionCredentials $stack5;
+  java.util.SortedMap $stack10;
+  byte[] $stack22;
+  java.lang.String remoteAddr;
+remoteAddr=@remoteAddr;
+$stack5=this.sessionCredentials;
+ remoteAddr = $stack5.getAccessKey();
+ request.addExtField("AccessKey",remoteAddr);
+ $stack5=this.sessionCredentials;
+ remoteAddr = $stack5.getSecurityToken();
+ if (remoteAddr==null) goto label0;
+ $stack5=this.sessionCredentials;
+ remoteAddr = $stack5.getSecurityToken();
+ request.addExtField("SecurityToken",remoteAddr);
+ label0:$stack10 = this.parseRequestContent(request);
+ $stack22 = org.apache.rocketmq.acl.common.AclUtils.combineRequestContent(request,$stack10);
+ $stack5=this.sessionCredentials;
+ remoteAddr = $stack5.getSecretKey();
+ remoteAddr = org.apache.rocketmq.acl.common.AclUtils.calSignature($stack22,remoteAddr);
+ request.addExtField("Signature",remoteAddr);
+ return;
+ } 
+

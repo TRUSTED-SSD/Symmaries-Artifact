@@ -1,0 +1,16 @@
+int org.apache.kerby.kerberos.kerb.server.KdcSetting:checkGetKdcUdpPort()
+{
+int kdcPort;
+  boolean $stack2;
+  org.apache.kerby.kerberos.kerb.KrbException $stack4;
+  $stack2 = this.allowUdp();
+ if ($stack2==0) goto label0;
+ kdcPort = this.getKdcUdpPort();
+ if (kdcPort>=1) goto label1;
+ $stack4=new org.apache.kerby.kerberos.kerb.KrbException;
+ $stack4#org.apache.kerby.kerberos.kerb.KrbException("KDC udp port isn\'t set or configured");
+ throw $stack4;
+ label1:return  kdcPort;
+ label0:return  -1;
+ } 
+

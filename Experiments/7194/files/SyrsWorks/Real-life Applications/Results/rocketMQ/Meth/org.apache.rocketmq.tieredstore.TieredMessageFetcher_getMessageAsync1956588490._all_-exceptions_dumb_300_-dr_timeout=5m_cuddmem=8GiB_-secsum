@@ -1,0 +1,12 @@
+java.util.concurrent.CompletableFuture org.apache.rocketmq.tieredstore.TieredMessageFetcher:getMessageAsync (
+  java.lang.String group, java.lang.String topic, int queueId,
+  long queueOffset, int maxMsgNums,
+  org.apache.rocketmq.store.MessageFilter messageFilter) {
+  guard = tt;
+  ret(level()) = level(group) ⊔ level(maxMsgNums) ⊔ level(queueId) ⊔ level(queueOffset) ⊔ level(this) ⊔ level(topic) ⊔ obj_level(group) ⊔ obj_level(this);
+  ret(obj_level()) = level(group) ⊔ level(maxMsgNums) ⊔ level(queueId) ⊔ level(queueOffset) ⊔ level(this) ⊔ level(topic) ⊔ obj_level(group) ⊔ obj_level(this);
+  ret(obj_level(group)) = level(queueId) ⊔ level(queueOffset) ⊔ level(this) ⊔ level(topic) ⊔ obj_level(group) ⊔ obj_level(this);
+  ret(obj_level(messageFilter)) = level(queueId) ⊔ level(queueOffset) ⊔ level(this) ⊔ level(topic) ⊔ obj_level(messageFilter) ⊔ obj_level(this) ⊔ obj_level(topic);
+  ret(obj_level(this)) = level(queueId) ⊔ level(queueOffset) ⊔ level(this) ⊔ level(topic) ⊔ obj_level(this) ⊔ obj_level(topic);
+  ret(obj_level(topic)) = level(queueId) ⊔ level(queueOffset) ⊔ level(this) ⊔ level(topic) ⊔ obj_level(this) ⊔ obj_level(topic);
+}

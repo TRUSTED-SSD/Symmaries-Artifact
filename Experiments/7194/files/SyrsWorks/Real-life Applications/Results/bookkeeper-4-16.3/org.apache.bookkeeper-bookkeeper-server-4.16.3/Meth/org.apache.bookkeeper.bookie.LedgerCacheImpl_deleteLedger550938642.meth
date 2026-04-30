@@ -1,0 +1,22 @@
+void org.apache.bookkeeper.bookie.LedgerCacheImpl:deleteLedger(long ledgerId)
+{
+org.slf4j.Logger $stack3;
+  boolean $stack4;
+  org.apache.bookkeeper.bookie.IndexInMemPageMgr $stack5;
+  org.apache.bookkeeper.bookie.IndexPersistenceMgr $stack6;
+  java.lang.Long $stack7;
+  $stack3=org.apache.bookkeeper.bookie.LedgerCacheImpl.LOG;
+ $stack4 = $stack3.isDebugEnabled();
+ if ($stack4==0) goto label0;
+ $stack3=org.apache.bookkeeper.bookie.LedgerCacheImpl.LOG;
+ $stack7 = java.lang.Long.valueOf(ledgerId);
+ dummyClass.lowSink("Deleting ledgerId: {}");
+$stack3.debug("Deleting ledgerId: {}",(java.lang.Object)$stack7);
+ label0:$stack5=this.indexPageManager;
+ $stack5.removePagesForLedger(ledgerId);
+ $stack6=this.indexPersistenceManager;
+ $stack7 = java.lang.Long.valueOf(ledgerId);
+ $stack6.removeLedger($stack7);
+ return;
+ } 
+

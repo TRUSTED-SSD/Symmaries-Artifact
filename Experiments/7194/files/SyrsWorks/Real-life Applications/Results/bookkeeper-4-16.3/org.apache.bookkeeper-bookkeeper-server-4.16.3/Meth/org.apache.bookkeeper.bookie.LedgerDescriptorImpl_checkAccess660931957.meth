@@ -1,0 +1,31 @@
+void org.apache.bookkeeper.bookie.LedgerDescriptorImpl:checkAccess(byte[] @masterKey)
+{
+byte[] $stack2;
+  boolean $stack3;
+  java.lang.Object[] $stack4;
+  long $stack5;
+  org.slf4j.Logger $stack6;
+  java.lang.Long $stack9;
+  java.lang.String $stack11;
+  org.apache.bookkeeper.bookie.BookieException $stack15;
+  byte[] masterKey;
+masterKey=@masterKey;
+$stack2=this.masterKey;
+ $stack3 = java.util.Arrays.equals($stack2,masterKey);
+ if ($stack3!=0) goto label0;
+ $stack6=org.apache.bookkeeper.bookie.LedgerDescriptorImpl.LOG;
+ $stack4=new java.lang.Object[3];
+ $stack5=this.ledgerId;
+ $stack9 = java.lang.Long.valueOf($stack5);
+ $stack4[0]=$stack9;
+ $stack11 = java.util.Arrays.toString(masterKey);
+ $stack4[1]=$stack11;
+ masterKey=this.masterKey;
+ $stack11 = java.util.Arrays.toString(masterKey);
+ $stack4[2]=$stack11;
+ $stack6.error("[{}] Requested master key {} does not match the cached master key {}",$stack4);
+ $stack15 = org.apache.bookkeeper.bookie.BookieException.create(-1);
+ throw $stack15;
+ label0:return;
+ } 
+

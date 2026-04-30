@@ -1,0 +1,16 @@
+static byte[] org.apache.kerby.kerberos.kerb.crypto.util.Pbkdf:pbkdf2(char[] secret,byte[] @salt,int count,int keySize)
+{
+javax.crypto.SecretKeyFactory skf;
+  javax.crypto.SecretKey key;
+  javax.crypto.spec.PBEKeySpec $stack7;
+  byte[] salt;
+salt=@salt;
+$stack7=new javax.crypto.spec.PBEKeySpec;
+ keySize=(keySize * 8);
+ $stack7#javax.crypto.spec.PBEKeySpec(secret,salt,count,keySize);
+ skf = javax.crypto.SecretKeyFactory.getInstance("PBKDF2WithHmacSHA1");
+ key = skf.generateSecret((java.security.spec.KeySpec)$stack7);
+ salt = key.getEncoded();
+ return  salt;
+ } 
+

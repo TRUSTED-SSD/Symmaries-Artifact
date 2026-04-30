@@ -1,0 +1,58 @@
+long org.apache.bookkeeper.statelib.impl.rocksdb.checkpoint.dlog.DLInputStream:skip(long n)
+{
+long remaining;
+  int bytesLeft;
+  long endPos;
+  byte $stack8;
+  org.apache.bookkeeper.statelib.impl.rocksdb.checkpoint.dlog.DLInputStream$RecordStream $stack9;
+  java.io.InputStream $stack12;
+  org.apache.distributedlog.LogRecordWithDLSN $stack15;
+  long $stack17;
+  org.apache.distributedlog.api.LogReader $stack30;
+  $stack8=(n cmp 0L);
+ if ($stack8>0) goto label0;
+ return  0L;
+ label0:remaining=n;
+ label1:$stack9=this.currentRecord;
+ if (null!=$stack9) goto label2;
+ $stack30=this.reader;
+ $stack9 = org.apache.bookkeeper.statelib.impl.rocksdb.checkpoint.dlog.DLInputStream.nextRecordStream($stack30);
+ this.currentRecord=$stack9;
+ label2:$stack9=this.currentRecord;
+ if (null!=$stack9) goto label3;
+ n=(n-remaining);
+ return  n;
+ label3:$stack9=this.currentRecord;
+ $stack12 = org.apache.bookkeeper.statelib.impl.rocksdb.checkpoint.dlog.DLInputStream$RecordStream.access$100($stack9);
+ bytesLeft = $stack12.available();
+ $stack9=this.currentRecord;
+ $stack15 = org.apache.bookkeeper.statelib.impl.rocksdb.checkpoint.dlog.DLInputStream$RecordStream.access$000($stack9);
+ endPos = $stack15.getTransactionId();
+ $stack17=(long) bytesLeft;
+ $stack8=(remaining cmp $stack17);
+ if ($stack8<=0) goto label4;
+ $stack17=(long) bytesLeft;
+ remaining=(remaining-$stack17);
+ this.pos=endPos;
+ $stack30=this.reader;
+ $stack9 = org.apache.bookkeeper.statelib.impl.rocksdb.checkpoint.dlog.DLInputStream.nextRecordStream($stack30);
+ this.currentRecord=$stack9;
+ goto label1;
+ label4:$stack17=(long) bytesLeft;
+ $stack8=(remaining cmp $stack17);
+ if ($stack8!=0) goto label5;
+ this.pos=endPos;
+ this.currentRecord=null;
+ return  n;
+ label5:$stack9=this.currentRecord;
+ $stack12 = org.apache.bookkeeper.statelib.impl.rocksdb.checkpoint.dlog.DLInputStream$RecordStream.access$100($stack9);
+ $stack12.skip(remaining);
+ $stack9=this.currentRecord;
+ $stack12 = org.apache.bookkeeper.statelib.impl.rocksdb.checkpoint.dlog.DLInputStream$RecordStream.access$100($stack9);
+ bytesLeft = $stack12.available();
+ remaining=(long) bytesLeft;
+ endPos=(endPos-remaining);
+ this.pos=endPos;
+ return  n;
+ } 
+

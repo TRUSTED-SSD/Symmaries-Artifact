@@ -1,0 +1,44 @@
+org.apache.rocketmq.proxy.service.route.MessageQueueSelector(org.apache.rocketmq.proxy.service.route.TopicRouteWrapper topicRouteWrapper,boolean read)
+{
+java.util.Random random;
+  java.util.ArrayList $stack4;
+  java.util.concurrent.ConcurrentHashMap $stack6;
+  java.util.List $stack7;
+  java.util.List $stack8;
+  java.lang.String $stack10;
+  java.util.concurrent.atomic.AtomicInteger $stack13;
+  int $stack14;
+  this#java.lang.Object();
+ $stack4=new java.util.ArrayList;
+ $stack4#java.util.ArrayList();
+ this.queues=$stack4;
+ $stack4=new java.util.ArrayList;
+ $stack4#java.util.ArrayList();
+ this.brokerActingQueues=$stack4;
+ $stack6=new java.util.concurrent.ConcurrentHashMap;
+ $stack6#java.util.concurrent.ConcurrentHashMap();
+ this.brokerNameQueueMap=$stack6;
+ if (read==0) goto label0;
+ $stack7=this.queues;
+ $stack8 = org.apache.rocketmq.proxy.service.route.MessageQueueSelector.buildRead(topicRouteWrapper);
+ $stack7.addAll((java.util.Collection)$stack8);
+ goto label1;
+ label0:$stack7=this.queues;
+ $stack8 = org.apache.rocketmq.proxy.service.route.MessageQueueSelector.buildWrite(topicRouteWrapper);
+ $stack7.addAll((java.util.Collection)$stack8);
+ label1:$stack10 = topicRouteWrapper.getTopicName();
+ $stack7=this.queues;
+ this#org.apache.rocketmq.proxy.service.route.MessageQueueSelector:buildBrokerActingQueues($stack10,$stack7);
+ random=new java.util.Random;
+ random#java.util.Random();
+ $stack13=new java.util.concurrent.atomic.AtomicInteger;
+ $stack14 = random.nextInt();
+ $stack13#java.util.concurrent.atomic.AtomicInteger($stack14);
+ this.queueIndex=$stack13;
+ $stack13=new java.util.concurrent.atomic.AtomicInteger;
+ $stack14 = random.nextInt();
+ $stack13#java.util.concurrent.atomic.AtomicInteger($stack14);
+ this.brokerIndex=$stack13;
+ return;
+ } 
+

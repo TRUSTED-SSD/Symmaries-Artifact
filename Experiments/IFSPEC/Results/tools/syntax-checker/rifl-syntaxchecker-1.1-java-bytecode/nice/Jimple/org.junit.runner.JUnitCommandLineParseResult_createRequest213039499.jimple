@@ -1,0 +1,70 @@
+    public org.junit.runner.Request createRequest(org.junit.runner.Computer)
+    {
+        org.junit.runner.JUnitCommandLineParseResult this;
+        org.junit.runner.Computer computer;
+        org.junit.runner.Request request;
+        java.util.List $stack3, $stack9;
+        boolean $stack4;
+        org.junit.runners.model.InitializationError $stack5;
+        int $stack10;
+        java.lang.Class[] $stack11;
+        java.lang.Object[] $stack12;
+
+        this := @this: org.junit.runner.JUnitCommandLineParseResult;
+
+        computer := @parameter0: org.junit.runner.Computer;
+
+        $stack3 = this.<org.junit.runner.JUnitCommandLineParseResult: java.util.List parserErrors>;
+/*117*/
+
+        $stack4 = interfaceinvoke $stack3.<java.util.List: boolean isEmpty()>();
+/*117*/
+
+        if $stack4 == 0 goto label1;
+/*117*/
+
+        $stack9 = this.<org.junit.runner.JUnitCommandLineParseResult: java.util.List classes>;
+/*118*/
+
+        $stack3 = this.<org.junit.runner.JUnitCommandLineParseResult: java.util.List classes>;
+/*118*/
+
+        $stack10 = interfaceinvoke $stack3.<java.util.List: int size()>();
+/*118*/
+
+        $stack11 = newarray (java.lang.Class)[$stack10];
+/*118*/
+
+        $stack12 = interfaceinvoke $stack9.<java.util.List: java.lang.Object[] toArray(java.lang.Object[])>($stack11);
+/*118*/
+
+        $stack11 = (java.lang.Class[]) $stack12;
+/*118*/
+
+        request = staticinvoke <org.junit.runner.Request: org.junit.runner.Request classes(org.junit.runner.Computer,java.lang.Class[])>(computer, $stack11);
+/*118*/
+/*118*/
+
+        request = specialinvoke this.<org.junit.runner.JUnitCommandLineParseResult: org.junit.runner.Request applyFilterSpecs(org.junit.runner.Request)>(request);
+/*120*/
+
+        return request;
+/*120*/
+
+     label1:
+        $stack5 = new org.junit.runners.model.InitializationError;
+/*122*/
+
+        $stack3 = this.<org.junit.runner.JUnitCommandLineParseResult: java.util.List parserErrors>;
+/*122*/
+
+        specialinvoke $stack5.<org.junit.runners.model.InitializationError: void <init>(java.util.List)>($stack3);
+/*122*/
+
+        request = specialinvoke this.<org.junit.runner.JUnitCommandLineParseResult: org.junit.runner.Request errorReport(java.lang.Throwable)>($stack5);
+/*122*/
+
+        return request;
+/*122*/
+    }
+

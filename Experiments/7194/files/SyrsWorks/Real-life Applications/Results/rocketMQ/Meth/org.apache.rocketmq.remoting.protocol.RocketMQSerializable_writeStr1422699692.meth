@@ -1,0 +1,19 @@
+static void org.apache.rocketmq.remoting.protocol.RocketMQSerializable:writeStr(io.netty.buffer.ByteBuf buf,boolean useShortLength,java.lang.String str)
+{
+int lenIndex;
+  int len;
+  java.nio.charset.Charset $stack7;
+  lenIndex = buf.writerIndex();
+ if (useShortLength==0) goto label0;
+ buf.writeShort(0);
+ goto label1;
+ label0:buf.writeInt(0);
+ label1:$stack7=java.nio.charset.StandardCharsets.UTF_8;
+ len = buf.writeCharSequence((java.lang.CharSequence)str,$stack7);
+ if (useShortLength==0) goto label2;
+ buf.setShort(lenIndex,len);
+ goto label3;
+ label2:buf.setInt(lenIndex,len);
+ label3:return;
+ } 
+

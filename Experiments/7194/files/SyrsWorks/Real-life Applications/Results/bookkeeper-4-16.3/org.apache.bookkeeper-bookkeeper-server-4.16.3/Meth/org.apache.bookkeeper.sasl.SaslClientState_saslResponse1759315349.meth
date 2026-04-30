@@ -1,0 +1,22 @@
+byte[] org.apache.bookkeeper.sasl.SaslClientState:saslResponse(byte[] @saslTokenMessage)
+{
+javax.security.sasl.SaslClient $stack3;
+  javax.security.sasl.SaslException $stack5;
+  org.slf4j.Logger $stack6;
+  boolean $stack7;
+  byte[] saslTokenMessage;
+saslTokenMessage=@saslTokenMessage;
+label0:$stack3=this.saslClient;
+ saslTokenMessage = $stack3.evaluateChallenge(saslTokenMessage);
+ label1:return  saslTokenMessage;
+ label2:$stack5 = catch;
+ $stack6=org.apache.bookkeeper.sasl.SaslClientState.LOG;
+ $stack7 = $stack6.isDebugEnabled();
+ if ($stack7==0) goto label3;
+ $stack6=org.apache.bookkeeper.sasl.SaslClientState.LOG;
+ dummyClass.lowSink("saslResponse: Failed to respond to SASL server\'s token:");
+$stack6.debug("saslResponse: Failed to respond to SASL server\'s token:",(java.lang.Throwable)$stack5);
+ label3:return  null;
+ catch javax.security.sasl.SaslException: label0 - label1 : label2;
+} 
+

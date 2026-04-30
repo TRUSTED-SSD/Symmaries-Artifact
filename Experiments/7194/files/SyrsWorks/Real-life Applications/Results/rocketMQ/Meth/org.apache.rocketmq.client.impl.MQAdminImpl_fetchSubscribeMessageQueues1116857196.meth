@@ -1,0 +1,56 @@
+java.util.Set org.apache.rocketmq.client.impl.MQAdminImpl:fetchSubscribeMessageQueues(java.lang.String @topic)
+{
+org.apache.rocketmq.remoting.protocol.route.TopicRouteData topicRouteData;
+  java.util.Set mqList;
+  org.apache.rocketmq.client.impl.factory.MQClientInstance $stack4;
+  org.apache.rocketmq.client.impl.MQClientAPIImpl $stack5;
+  long $stack6;
+  org.apache.rocketmq.client.exception.MQClientException $stack8;
+  java.lang.StringBuilder $stack9;
+  boolean $stack14;
+  java.lang.String $stack20;
+  java.lang.Exception $stack21;
+  java.lang.String topic;
+topic=@topic;
+label0:$stack4=this.mQClientFactory;
+ $stack5 = $stack4.getMQClientAPIImpl();
+ $stack6=this.timeoutMillis;
+ topicRouteData = $stack5.getTopicRouteInfoFromNameServer(topic,$stack6);
+ if (topicRouteData==null) goto label1;
+ mqList = org.apache.rocketmq.client.impl.factory.MQClientInstance.topicRouteData2TopicSubscribeInfo(topic,topicRouteData);
+ $stack14 = mqList.isEmpty();
+ if ($stack14!=0) goto label2;
+ label3:return  mqList;
+ label2:$stack8=new org.apache.rocketmq.client.exception.MQClientException;
+ $stack9=new java.lang.StringBuilder;
+ $stack9#java.lang.StringBuilder();
+ $stack9 = $stack9.append("Can not find Message Queue for this topic, ");
+ $stack9 = $stack9.append(topic);
+ $stack9 = $stack9.append(" Namesrv return empty");
+ $stack20 = $stack9.toString();
+ $stack8#org.apache.rocketmq.client.exception.MQClientException($stack20,null);
+ throw $stack8;
+ label1:goto label4;
+ label5:$stack21 = catch;
+ $stack8=new org.apache.rocketmq.client.exception.MQClientException;
+ $stack9=new java.lang.StringBuilder;
+ $stack9#java.lang.StringBuilder();
+ $stack9 = $stack9.append("Can not find Message Queue for this topic, ");
+ $stack9 = $stack9.append(topic);
+ topic = org.apache.rocketmq.common.help.FAQUrl.suggestTodo("https://rocketmq.apache.org/docs/bestPractice/06FAQ");
+ $stack9 = $stack9.append(topic);
+ topic = $stack9.toString();
+ $stack8#org.apache.rocketmq.client.exception.MQClientException(topic,(java.lang.Throwable)$stack21);
+ throw $stack8;
+ label4:$stack8=new org.apache.rocketmq.client.exception.MQClientException;
+ $stack9=new java.lang.StringBuilder;
+ $stack9#java.lang.StringBuilder();
+ $stack9 = $stack9.append("Unknow why, Can not find Message Queue for this topic, ");
+ $stack9 = $stack9.append(topic);
+ topic = $stack9.toString();
+ $stack8#org.apache.rocketmq.client.exception.MQClientException(topic,null);
+ throw $stack8;
+ catch java.lang.Exception: label0 - label3 : label5;
+catch java.lang.Exception: label2 - label1 : label5;
+} 
+

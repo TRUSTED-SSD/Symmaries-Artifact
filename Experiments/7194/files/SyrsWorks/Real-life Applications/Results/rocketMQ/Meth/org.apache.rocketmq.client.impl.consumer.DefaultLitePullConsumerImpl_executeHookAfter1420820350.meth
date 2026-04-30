@@ -1,0 +1,30 @@
+void org.apache.rocketmq.client.impl.consumer.DefaultLitePullConsumerImpl:executeHookAfter(org.apache.rocketmq.client.hook.ConsumeMessageContext context)
+{
+java.util.Iterator l2;
+  org.apache.rocketmq.client.hook.ConsumeMessageHook hook;
+  java.util.ArrayList $stack5;
+  boolean $stack6;
+  java.lang.Object $stack10;
+  java.lang.Throwable $stack12;
+  org.apache.rocketmq.logging.org.slf4j.Logger $stack13;
+  java.lang.String $stack15;
+  $stack5=this.consumeMessageHookList;
+ $stack6 = $stack5.isEmpty();
+ if ($stack6!=0) goto label0;
+ $stack5=this.consumeMessageHookList;
+ l2 = $stack5.iterator();
+ label1:$stack6 = l2.hasNext();
+ if ($stack6==0) goto label0;
+ $stack10 = l2.next();
+ hook=(org.apache.rocketmq.client.hook.ConsumeMessageHook) $stack10;
+ label2:hook.consumeMessageAfter(context);
+ label3:goto label4;
+ label5:$stack12 = catch;
+ $stack13=org.apache.rocketmq.client.impl.consumer.DefaultLitePullConsumerImpl.log;
+ $stack15 = hook.hookName();
+ $stack13.error("consumeMessageHook {} executeHookAfter exception",(java.lang.Object)$stack15,(java.lang.Object)$stack12);
+ label4:goto label1;
+ label0:return;
+ catch java.lang.Throwable: label2 - label3 : label5;
+} 
+

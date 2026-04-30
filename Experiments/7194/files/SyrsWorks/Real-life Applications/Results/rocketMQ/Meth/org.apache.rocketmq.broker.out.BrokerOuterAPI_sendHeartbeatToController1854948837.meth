@@ -1,0 +1,37 @@
+void org.apache.rocketmq.broker.out.BrokerOuterAPI:sendHeartbeatToController(java.lang.String controllerAddress,java.lang.String clusterName,java.lang.String brokerAddr,java.lang.String brokerName,java.lang.Long brokerId,int sendHeartBeatTimeoutMills,boolean isInBrokerContainer,int epoch,long maxOffset,long confirmOffset,long controllerHeartBeatTimeoutMills,int electionPriority)
+{
+org.apache.rocketmq.remoting.protocol.header.namesrv.BrokerHeartbeatRequestHeader requestHeader;
+  boolean $stack17;
+  java.lang.Integer $stack19;
+  java.lang.Long $stack20;
+  org.apache.rocketmq.broker.out.BrokerOuterAPI$5 $stack24;
+  org.apache.rocketmq.common.BrokerIdentity $stack25;
+  org.apache.rocketmq.broker.latency.BrokerFixedThreadPoolExecutor $stack26;
+  $stack17 = org.apache.commons.lang3.StringUtils.isEmpty((java.lang.CharSequence)controllerAddress);
+ if ($stack17==0) goto label0;
+ return;
+ label0:requestHeader=new org.apache.rocketmq.remoting.protocol.header.namesrv.BrokerHeartbeatRequestHeader;
+ requestHeader#org.apache.rocketmq.remoting.protocol.header.namesrv.BrokerHeartbeatRequestHeader();
+ requestHeader.setClusterName(clusterName);
+ requestHeader.setBrokerAddr(brokerAddr);
+ requestHeader.setBrokerName(brokerName);
+ $stack19 = java.lang.Integer.valueOf(epoch);
+ requestHeader.setEpoch($stack19);
+ $stack20 = java.lang.Long.valueOf(maxOffset);
+ requestHeader.setMaxOffset($stack20);
+ $stack20 = java.lang.Long.valueOf(confirmOffset);
+ requestHeader.setConfirmOffset($stack20);
+ $stack20 = java.lang.Long.valueOf(controllerHeartBeatTimeoutMills);
+ requestHeader.setHeartbeatTimeoutMills($stack20);
+ $stack19 = java.lang.Integer.valueOf(electionPriority);
+ requestHeader.setElectionPriority($stack19);
+ $stack26=this.brokerOuterExecutor;
+ $stack24=new org.apache.rocketmq.broker.out.BrokerOuterAPI$5;
+ $stack25=new org.apache.rocketmq.common.BrokerIdentity;
+ maxOffset = brokerId.longValue();
+ $stack25#org.apache.rocketmq.common.BrokerIdentity(clusterName,brokerName,maxOffset,isInBrokerContainer);
+ $stack24#org.apache.rocketmq.broker.out.BrokerOuterAPI$5(this,$stack25,requestHeader,controllerAddress,sendHeartBeatTimeoutMills);
+ $stack26.execute((java.lang.Runnable)$stack24);
+ return;
+ } 
+

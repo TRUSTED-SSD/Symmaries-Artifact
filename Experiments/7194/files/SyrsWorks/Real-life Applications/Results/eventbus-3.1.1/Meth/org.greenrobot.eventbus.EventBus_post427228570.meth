@@ -1,0 +1,43 @@
+void org.greenrobot.eventbus.EventBus:post(java.lang.Object @event)
+{
+org.greenrobot.eventbus.EventBus$PostingThreadState postingState;
+  java.util.List eventQueue;
+  java.lang.Throwable l4;
+  java.lang.ThreadLocal $stack5;
+  java.lang.Object $stack6;
+  boolean $stack7;
+  org.greenrobot.eventbus.EventBusException $stack14;
+  java.lang.Object event;
+event=@event;
+$stack5=this.currentPostingThreadState;
+ $stack6 = $stack5.get();
+ postingState=(org.greenrobot.eventbus.EventBus$PostingThreadState) $stack6;
+ eventQueue=postingState.eventQueue;
+ eventQueue.add(event);
+ $stack7=postingState.isPosting;
+ if ($stack7!=0) goto label0;
+ $stack7 = this#org.greenrobot.eventbus.EventBus:isMainThread();
+ postingState.isMainThread=$stack7;
+ postingState.isPosting=1;
+ $stack7=postingState.canceled;
+ if ($stack7==0) goto label1;
+ $stack14=new org.greenrobot.eventbus.EventBusException;
+ $stack14#org.greenrobot.eventbus.EventBusException("Internal error. Abort state was not reset");
+ throw $stack14;
+ label1:$stack7 = eventQueue.isEmpty();
+ if ($stack7!=0) goto label2;
+ event = eventQueue.remove(0);
+ this#org.greenrobot.eventbus.EventBus:postSingleEvent(event,postingState);
+ goto label1;
+ label2:postingState.isPosting=0;
+ postingState.isMainThread=0;
+ goto label0;
+ label3:l4 = catch;
+ label4:postingState.isPosting=0;
+ postingState.isMainThread=0;
+ throw l4;
+ label0:return;
+ catch java.lang.Throwable: label1 - label2 : label3;
+catch java.lang.Throwable: label3 - label4 : label3;
+} 
+

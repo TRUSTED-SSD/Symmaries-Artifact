@@ -1,0 +1,21 @@
+static boolean org.apache.rocketmq.acl.common.AclUtils:isScope(java.lang.String @netaddress,int index)
+{
+java.lang.String[] strArray;
+  boolean $stack3;
+  int $stack5;
+  java.lang.String netaddress;
+netaddress=@netaddress;
+$stack3 = org.apache.rocketmq.acl.common.AclUtils.isColon(netaddress);
+ if ($stack3==0) goto label0;
+ netaddress = org.apache.rocketmq.acl.common.AclUtils.expandIP(netaddress,8);
+ strArray = org.apache.commons.lang3.StringUtils.split(netaddress,":");
+ $stack3 = org.apache.rocketmq.acl.common.AclUtils.isIPv6Scope(strArray,index);
+ return  $stack3;
+ label0:strArray = org.apache.commons.lang3.StringUtils.split(netaddress,".");
+ $stack5=#strArray;
+ if ($stack5==4) goto label1;
+ return  0;
+ label1:$stack3 = org.apache.rocketmq.acl.common.AclUtils.isScope(strArray,index);
+ return  $stack3;
+ } 
+

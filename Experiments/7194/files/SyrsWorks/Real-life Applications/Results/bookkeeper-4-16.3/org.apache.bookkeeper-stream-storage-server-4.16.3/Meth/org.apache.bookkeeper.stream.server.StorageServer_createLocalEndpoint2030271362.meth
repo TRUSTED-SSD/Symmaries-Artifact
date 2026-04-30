@@ -1,0 +1,24 @@
+static org.apache.bookkeeper.stream.proto.common.Endpoint org.apache.bookkeeper.stream.server.StorageServer:createLocalEndpoint(int port,boolean useHostname)
+{
+java.lang.String hostname;
+  org.slf4j.Logger $stack3;
+  java.net.InetAddress $stack4;
+  org.apache.bookkeeper.stream.proto.common.Endpoint$Builder $stack7;
+  org.apache.bookkeeper.stream.proto.common.Endpoint $stack10;
+  $stack3=org.apache.bookkeeper.stream.server.StorageServer.log;
+ $stack3.warn("Determining hostname for stream storage");
+ if (useHostname==0) goto label0;
+ $stack4 = java.net.InetAddress.getLocalHost();
+ hostname = $stack4.getCanonicalHostName();
+ goto label1;
+ label0:$stack4 = java.net.InetAddress.getLocalHost();
+ hostname = $stack4.getHostAddress();
+ label1:$stack3=org.apache.bookkeeper.stream.server.StorageServer.log;
+ $stack3.warn("Decided to use hostname {}",(java.lang.Object)hostname);
+ $stack7 = org.apache.bookkeeper.stream.proto.common.Endpoint.newBuilder();
+ $stack7 = $stack7.setHostname(hostname);
+ $stack7 = $stack7.setPort(port);
+ $stack10 = $stack7.build();
+ return  $stack10;
+ } 
+

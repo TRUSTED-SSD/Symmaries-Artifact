@@ -1,0 +1,58 @@
+boolean org.apache.rocketmq.store.ha.HAConnectionStateNotificationService:checkConnectionStateAndNotify(org.apache.rocketmq.store.ha.HAConnection connection)
+{
+java.lang.String remoteAddress;
+  org.apache.rocketmq.store.ha.HAConnectionState connState;
+  org.apache.rocketmq.store.ha.HAConnectionStateNotificationRequest $stack4;
+  java.nio.channels.SocketChannel $stack5;
+  java.net.SocketAddress $stack6;
+  java.net.InetSocketAddress $stack7;
+  java.net.InetAddress $stack8;
+  java.lang.String $stack11;
+  boolean $stack12;
+  org.apache.rocketmq.store.ha.HAConnectionState $stack15;
+  java.util.concurrent.CompletableFuture $stack21;
+  java.lang.Boolean $stack22;
+  java.lang.Exception $stack29;
+  org.apache.rocketmq.logging.org.slf4j.Logger $stack30;
+  $stack4=this.request;
+ if ($stack4==null) goto label0;
+ if (connection!=null) goto label1;
+ label0:return  0;
+ label1:$stack5 = connection.getSocketChannel();
+ $stack6 = $stack5.getRemoteAddress();
+ $stack7=(java.net.InetSocketAddress) $stack6;
+ $stack8 = $stack7.getAddress();
+ remoteAddress = $stack8.getHostAddress();
+ $stack4=this.request;
+ $stack11 = $stack4.getRemoteAddr();
+ $stack12 = remoteAddress.equals((java.lang.Object)$stack11);
+ if ($stack12==0) goto label2;
+ connState = connection.getCurrentState();
+ $stack4=this.request;
+ $stack15 = $stack4.getExpectState();
+ if (connState!=$stack15) goto label3;
+ $stack4=this.request;
+ $stack21 = $stack4.getRequestFuture();
+ $stack22 = java.lang.Boolean.valueOf((boolean)1);
+ $stack21.complete((java.lang.Object)$stack22);
+ this.request=null;
+ goto label4;
+ label3:$stack4=this.request;
+ $stack12 = $stack4.isNotifyWhenShutdown();
+ if ($stack12==0) goto label4;
+ $stack15=org.apache.rocketmq.store.ha.HAConnectionState.SHUTDOWN;
+ if (connState!=$stack15) goto label4;
+ $stack4=this.request;
+ $stack21 = $stack4.getRequestFuture();
+ $stack22 = java.lang.Boolean.valueOf((boolean)0);
+ $stack21.complete((java.lang.Object)$stack22);
+ this.request=null;
+ label4:return  1;
+ label2:goto label5;
+ label6:$stack29 = catch;
+ $stack30=org.apache.rocketmq.store.ha.HAConnectionStateNotificationService.LOGGER;
+ $stack30.error("Check connection address exception: {}",(java.lang.Throwable)$stack29);
+ label5:return  0;
+ catch java.lang.Exception: label1 - label4 : label6;
+} 
+

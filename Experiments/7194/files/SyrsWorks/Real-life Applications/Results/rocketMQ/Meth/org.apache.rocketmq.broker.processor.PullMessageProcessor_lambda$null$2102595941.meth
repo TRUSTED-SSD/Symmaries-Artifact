@@ -1,0 +1,22 @@
+static void org.apache.rocketmq.broker.processor.PullMessageProcessor:lambda$null$2(io.netty.channel.Channel channel,org.apache.rocketmq.remoting.protocol.RemotingCommand request,org.apache.rocketmq.remoting.protocol.RemotingCommand response,io.netty.util.concurrent.Future future)
+{
+boolean $stack4;
+  org.apache.rocketmq.logging.org.slf4j.Logger $stack5;
+  java.net.SocketAddress $stack7;
+  java.lang.Throwable $stack8;
+  java.lang.String $stack10;
+  $stack4 = future.isSuccess();
+ if ($stack4!=0) goto label0;
+ $stack5=org.apache.rocketmq.broker.processor.PullMessageProcessor.LOGGER;
+ $stack7 = channel.remoteAddress();
+ $stack8 = future.cause();
+ $stack5.error("processRequestWrapper response to {} failed",(java.lang.Object)$stack7,(java.lang.Object)$stack8);
+ $stack5=org.apache.rocketmq.broker.processor.PullMessageProcessor.LOGGER;
+ $stack10 = request.toString();
+ $stack5.error($stack10);
+ $stack5=org.apache.rocketmq.broker.processor.PullMessageProcessor.LOGGER;
+ $stack10 = response.toString();
+ $stack5.error($stack10);
+ label0:return;
+ } 
+

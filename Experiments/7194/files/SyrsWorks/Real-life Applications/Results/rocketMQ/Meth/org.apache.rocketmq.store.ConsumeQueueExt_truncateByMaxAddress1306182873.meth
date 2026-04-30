@@ -1,0 +1,30 @@
+void org.apache.rocketmq.store.ConsumeQueueExt:truncateByMaxAddress(long maxAddress)
+{
+org.apache.rocketmq.store.ConsumeQueueExt$CqExtUnit cqExtUnit;
+  boolean $stack6;
+  org.apache.rocketmq.logging.org.slf4j.Logger $stack7;
+  java.lang.Long $stack9;
+  org.apache.rocketmq.store.MappedFileQueue $stack12;
+  short $stack13;
+  long $stack14;
+  $stack6 = org.apache.rocketmq.store.ConsumeQueueExt.isExtAddr(maxAddress);
+ if ($stack6!=0) goto label0;
+ return;
+ label0:$stack7=org.apache.rocketmq.store.ConsumeQueueExt.log;
+ $stack9 = java.lang.Long.valueOf(maxAddress);
+ $stack7.info("Truncate consume queue ext by max {}.",(java.lang.Object)$stack9);
+ cqExtUnit = this.get(maxAddress);
+ if (cqExtUnit!=null) goto label1;
+ $stack7=org.apache.rocketmq.store.ConsumeQueueExt.log;
+ $stack9 = java.lang.Long.valueOf(maxAddress);
+ $stack7.error("[BUG] address {} of consume queue extend not found!",(java.lang.Object)$stack9);
+ return;
+ label1:maxAddress = this.unDecorate(maxAddress);
+ $stack12=this.mappedFileQueue;
+ $stack13 = cqExtUnit.getSize();
+ $stack14=(long) $stack13;
+ maxAddress=(maxAddress+$stack14);
+ $stack12.truncateDirtyFiles(maxAddress);
+ return;
+ } 
+

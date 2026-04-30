@@ -1,0 +1,21 @@
+org.apache.rocketmq.tieredstore.common.AppendResult org.apache.rocketmq.tieredstore.container.TieredFileQueue:append(java.nio.ByteBuffer byteBuf,long timeStamp,boolean commit)
+{
+org.apache.rocketmq.tieredstore.provider.TieredFileSegment fileSegment;
+  org.apache.rocketmq.tieredstore.common.AppendResult result;
+  org.apache.rocketmq.tieredstore.common.AppendResult $stack9;
+  fileSegment = this.getFileToWrite();
+ result = fileSegment.append(byteBuf,timeStamp);
+ if (commit==0) goto label0;
+ $stack9=org.apache.rocketmq.tieredstore.common.AppendResult.BUFFER_FULL;
+ if (result!=$stack9) goto label0;
+ commit = fileSegment.commit();
+ if (commit==0) goto label0;
+ result = fileSegment.append(byteBuf,timeStamp);
+ label0:$stack9=org.apache.rocketmq.tieredstore.common.AppendResult.FILE_FULL;
+ if (result!=$stack9) goto label1;
+ fileSegment = this.getFileToWrite();
+ result = fileSegment.append(byteBuf,timeStamp);
+ return  result;
+ label1:return  result;
+ } 
+

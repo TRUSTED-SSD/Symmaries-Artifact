@@ -1,0 +1,37 @@
+static java.io.IOException org.apache.bookkeeper.util.HardLink:createIOException(java.io.File f,java.lang.String @message,java.lang.String error,int exitvalue,java.lang.Exception cause)
+{
+java.lang.String winErrMsg;
+  java.lang.StringBuilder $stack7;
+  org.apache.bookkeeper.util.HardLink$OSType $stack14;
+  org.apache.bookkeeper.util.HardLink$OSType $stack15;
+  java.io.IOException $stack20;
+  java.lang.String message;
+message=@message;
+winErrMsg="; Windows errors in getLinkCount are often due to Cygwin misconfiguration";
+ $stack7=new java.lang.StringBuilder;
+ $stack7#java.lang.StringBuilder();
+ $stack7 = $stack7.append("Failed to get link count on file ");
+ $stack7 = $stack7.append((java.lang.Object)f);
+ $stack7 = $stack7.append(": message=");
+ $stack7 = $stack7.append(message);
+ $stack7 = $stack7.append("; error=");
+ $stack7 = $stack7.append(error);
+ $stack15=org.apache.bookkeeper.util.HardLink.OS_TYPE;
+ $stack14=org.apache.bookkeeper.util.HardLink$OSType.OS_TYPE_WINXP;
+ if ($stack15!=$stack14) goto label0;
+ message="; Windows errors in getLinkCount are often due to Cygwin misconfiguration";
+ goto label1;
+ label0:message="";
+ label1:$stack7 = $stack7.append(message);
+ $stack7 = $stack7.append("; exit value=");
+ $stack7 = $stack7.append(exitvalue);
+ message = $stack7.toString();
+ if (cause!=null) goto label2;
+ $stack20=new java.io.IOException;
+ $stack20#java.io.IOException(message);
+ goto label3;
+ label2:$stack20=new java.io.IOException;
+ $stack20#java.io.IOException(message,(java.lang.Throwable)cause);
+ label3:return  $stack20;
+ } 
+

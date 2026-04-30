@@ -1,0 +1,38 @@
+boolean com.google.zxing.aztec.encoder.State:isBetterThanOrEqualTo(com.google.zxing.aztec.encoder.State other)
+{
+int newModeBitCount;
+  int $stack3;
+  int[][] $stack4;
+  int[] $stack6;
+  int $stack11;
+  boolean $stack15;
+  newModeBitCount=this.bitCount;
+ $stack4=com.google.zxing.aztec.encoder.HighLevelEncoder.LATCH_TABLE;
+ $stack3=this.mode;
+ $stack6=$stack4[$stack3];
+ $stack3=other.mode;
+ $stack3=$stack6[$stack3];
+ $stack3=($stack3>>16);
+ newModeBitCount=(newModeBitCount+$stack3);
+ $stack11=this.binaryShiftByteCount;
+ $stack3=other.binaryShiftByteCount;
+ if ($stack11>=$stack3) goto label0;
+ $stack11=other.binaryShiftCost;
+ $stack3=this.binaryShiftCost;
+ $stack3=($stack11-$stack3);
+ newModeBitCount=(newModeBitCount+$stack3);
+ goto label1;
+ label0:$stack11=this.binaryShiftByteCount;
+ $stack3=other.binaryShiftByteCount;
+ if ($stack11<=$stack3) goto label1;
+ $stack3=other.binaryShiftByteCount;
+ if ($stack3<=0) goto label1;
+ newModeBitCount=(newModeBitCount+10);
+ label1:$stack3=other.bitCount;
+ if (newModeBitCount>$stack3) goto label2;
+ $stack15=1;
+ goto label3;
+ label2:$stack15=0;
+ label3:return  $stack15;
+ } 
+

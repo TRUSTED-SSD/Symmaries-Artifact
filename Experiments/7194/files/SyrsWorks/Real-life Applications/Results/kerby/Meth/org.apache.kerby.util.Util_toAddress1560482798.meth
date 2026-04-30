@@ -1,0 +1,38 @@
+static org.apache.kerby.util.HostPort org.apache.kerby.util.Util:toAddress(java.lang.String @target,int defaultPort)
+{
+java.lang.String host;
+  java.util.StringTokenizer st;
+  boolean $stack6;
+  org.apache.kerby.util.HostPort $stack9;
+  java.lang.IllegalArgumentException $stack10;
+  java.lang.StringBuilder $stack11;
+  java.lang.String $stack15;
+  java.lang.String target;
+target=@target;
+host=target;
+ st=new java.util.StringTokenizer;
+ st#java.util.StringTokenizer(target,":");
+ $stack6 = st.hasMoreTokens();
+ if ($stack6==0) goto label0;
+ host = st.nextToken();
+ host = host.trim();
+ label0:$stack6 = st.hasMoreTokens();
+ if ($stack6==0) goto label1;
+ $stack15 = st.nextToken();
+ $stack15 = $stack15.trim();
+ defaultPort = java.lang.Integer.parseInt($stack15);
+ label1:$stack6 = st.hasMoreTokens();
+ if ($stack6==0) goto label2;
+ $stack10=new java.lang.IllegalArgumentException;
+ $stack11=new java.lang.StringBuilder;
+ $stack11#java.lang.StringBuilder();
+ $stack11 = $stack11.append("Invalid host: ");
+ $stack11 = $stack11.append(target);
+ target = $stack11.toString();
+ $stack10#java.lang.IllegalArgumentException(target);
+ throw $stack10;
+ label2:$stack9=new org.apache.kerby.util.HostPort;
+ $stack9#org.apache.kerby.util.HostPort(host,defaultPort);
+ return  $stack9;
+ } 
+

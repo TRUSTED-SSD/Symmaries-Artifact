@@ -1,0 +1,34 @@
+void org.apache.bookkeeper.bookie.storage.directentrylogger.DirectCompactionEntryLog$WritingDirectCompactionEntryLog:markCompacted()
+{
+org.apache.bookkeeper.bookie.storage.directentrylogger.WriterWithMetadata $stack1;
+  java.io.File $stack2;
+  java.io.File $stack3;
+  boolean $stack5;
+  org.apache.bookkeeper.slogger.Slogger $stack7;
+  org.apache.bookkeeper.bookie.storage.directentrylogger.Events $stack11;
+  $stack1=this.writer;
+ $stack1.finalizeAndClose();
+ $stack3=this.compactingFile;
+ $stack2=this.compactedFile;
+ org.apache.bookkeeper.bookie.storage.directentrylogger.DirectCompactionEntryLog.access$100($stack3,$stack2);
+ $stack2=this.compactingFile;
+ $stack5 = $stack2.delete();
+ if ($stack5!=0) goto label0;
+ $stack7=this.slog;
+ $stack2=this.compactingFile;
+ $stack7 = $stack7.kv((java.lang.Object)"compactingFile",(java.lang.Object)$stack2);
+ $stack2=this.compactedFile;
+ $stack7 = $stack7.kv((java.lang.Object)"compactedFile",(java.lang.Object)$stack2);
+ $stack11=org.apache.bookkeeper.bookie.storage.directentrylogger.Events.COMPACTION_DELETE_FAILURE;
+ $stack7.info((java.lang.Enum)$stack11);
+ goto label1;
+ label0:$stack7=this.slog;
+ $stack2=this.compactingFile;
+ $stack7 = $stack7.kv((java.lang.Object)"compactingFile",(java.lang.Object)$stack2);
+ $stack2=this.compactedFile;
+ $stack7 = $stack7.kv((java.lang.Object)"compactedFile",(java.lang.Object)$stack2);
+ $stack11=org.apache.bookkeeper.bookie.storage.directentrylogger.Events.COMPACTION_MARK_COMPACTED;
+ $stack7.info((java.lang.Enum)$stack11);
+ label1:return;
+ } 
+

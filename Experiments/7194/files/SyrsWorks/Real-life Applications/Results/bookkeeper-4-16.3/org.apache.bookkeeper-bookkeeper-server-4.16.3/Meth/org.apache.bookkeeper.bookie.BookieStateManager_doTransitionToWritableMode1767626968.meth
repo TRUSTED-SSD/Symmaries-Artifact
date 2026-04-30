@@ -1,0 +1,58 @@
+void org.apache.bookkeeper.bookie.BookieStateManager:doTransitionToWritableMode()
+{
+boolean $stack2;
+  java.util.concurrent.atomic.AtomicBoolean $stack3;
+  org.apache.bookkeeper.bookie.BookieStatus $stack5;
+  org.slf4j.Logger $stack7;
+  org.apache.bookkeeper.conf.ServerConfiguration $stack8;
+  java.util.function.Supplier $stack11;
+  org.apache.bookkeeper.discover.RegistrationManager $stack12;
+  java.lang.Object $stack13;
+  org.apache.bookkeeper.net.BookieId $stack14;
+  java.util.List $stack15;
+  org.apache.bookkeeper.bookie.BookieException $stack18;
+  java.io.IOException $stack20;
+  $stack2=this.shuttingdown;
+ if ($stack2!=0) goto label0;
+ $stack3=this.forceReadOnly;
+ $stack2 = $stack3.get();
+ if ($stack2==0) goto label1;
+ label0:return;
+ label1:$stack5=this.bookieStatus;
+ $stack2 = $stack5.setToWritableMode();
+ if ($stack2!=0) goto label2;
+ return;
+ label2:$stack7=org.apache.bookkeeper.bookie.BookieStateManager.LOG;
+ dummyClass.lowSink("Transitioning Bookie to Writable mode and will serve read/write requests.");
+$stack7.info("Transitioning Bookie to Writable mode and will serve read/write requests.");
+ $stack8=this.conf;
+ $stack2 = $stack8.isPersistBookieStatusEnabled();
+ if ($stack2==0) goto label3;
+ $stack5=this.bookieStatus;
+ $stack15=this.statusDirs;
+ $stack5.writeToDirectories($stack15);
+ label3:$stack2 = this#org.apache.bookkeeper.bookie.BookieStateManager:isRegistrationManagerDisabled();
+ if ($stack2==0) goto label4;
+ return;
+ label4:this#org.apache.bookkeeper.bookie.BookieStateManager:doRegisterBookie((boolean)0);
+ label5:goto label6;
+ label7:$stack20 = catch;
+ $stack7=org.apache.bookkeeper.bookie.BookieStateManager.LOG;
+ $stack7.warn("Error in transitioning back to writable mode : ",(java.lang.Throwable)$stack20);
+ this.transitionToReadOnlyMode();
+ return;
+ label6:$stack12=this.rm;
+ $stack11=this.bookieIdSupplier;
+ $stack13 = $stack11.get();
+ $stack14=(org.apache.bookkeeper.net.BookieId) $stack13;
+ $stack12.unregisterBookie($stack14,(boolean)1);
+ label8:goto label9;
+ label10:$stack18 = catch;
+ $stack7=org.apache.bookkeeper.bookie.BookieStateManager.LOG;
+ $stack7.warn("Failed to delete bookie readonly state in zookeeper : ",(java.lang.Throwable)$stack18);
+ return;
+ label9:return;
+ catch java.io.IOException: label4 - label5 : label7;
+catch org.apache.bookkeeper.bookie.BookieException: label6 - label8 : label10;
+} 
+

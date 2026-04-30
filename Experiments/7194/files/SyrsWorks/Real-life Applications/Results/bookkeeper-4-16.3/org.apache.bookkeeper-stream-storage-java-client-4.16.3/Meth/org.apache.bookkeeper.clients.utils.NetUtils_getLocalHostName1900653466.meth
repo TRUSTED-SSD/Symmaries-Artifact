@@ -1,0 +1,18 @@
+static java.lang.String org.apache.bookkeeper.clients.utils.NetUtils:getLocalHostName(boolean useHostname)
+{
+java.lang.String hostname;
+  java.net.UnknownHostException uhe;
+  java.net.InetAddress $stack3;
+  label0:if (useHostname==0) goto label1;
+ $stack3 = java.net.InetAddress.getLocalHost();
+ hostname = $stack3.getHostName();
+ goto label2;
+ label1:$stack3 = java.net.InetAddress.getLocalHost();
+ hostname = $stack3.getHostAddress();
+ label2:goto label3;
+ label4:uhe = catch;
+ hostname="Unknown-Host-Name";
+ label3:return  hostname;
+ catch java.net.UnknownHostException: label0 - label2 : label4;
+} 
+

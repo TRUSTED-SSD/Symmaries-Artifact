@@ -1,0 +1,23 @@
+static void org.apache.rocketmq.remoting.protocol.statictopic.TopicQueueMappingUtils:checkLeaderInTargetBrokers(java.util.Collection mappingOnes,java.util.Set targetBrokers)
+{
+java.util.Iterator l2;
+  org.apache.rocketmq.remoting.protocol.statictopic.TopicQueueMappingOne mappingOne;
+  boolean $stack5;
+  java.lang.Object $stack6;
+  java.lang.String $stack7;
+  java.lang.RuntimeException $stack10;
+  l2 = mappingOnes.iterator();
+ label0:$stack5 = l2.hasNext();
+ if ($stack5==0) goto label1;
+ $stack6 = l2.next();
+ mappingOne=(org.apache.rocketmq.remoting.protocol.statictopic.TopicQueueMappingOne) $stack6;
+ $stack7=mappingOne.bname;
+ $stack5 = targetBrokers.contains((java.lang.Object)$stack7);
+ if ($stack5!=0) goto label2;
+ $stack10=new java.lang.RuntimeException;
+ $stack10#java.lang.RuntimeException("The leader broker does not in target broker");
+ throw $stack10;
+ label2:goto label0;
+ label1:return;
+ } 
+

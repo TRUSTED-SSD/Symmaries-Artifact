@@ -1,0 +1,15 @@
+java.lang.Object org.apache.bookkeeper.statelib.impl.kv.RocksdbKVStore:delete(java.lang.Object key,long revision)
+{
+byte[] keyBytes;
+  java.lang.Object val;
+  org.apache.bookkeeper.common.coder.Coder $stack7;
+  val = com.google.common.base.Preconditions.checkNotNull(key,(java.lang.Object)"key cannot be null");
+ this.checkStoreOpen();
+ this#org.apache.bookkeeper.statelib.impl.kv.RocksdbKVStore:updateLastRevision(revision);
+ $stack7=this.keyCoder;
+ keyBytes = $stack7.encode(key);
+ val = this#org.apache.bookkeeper.statelib.impl.kv.RocksdbKVStore:getRaw(key,keyBytes);
+ this#org.apache.bookkeeper.statelib.impl.kv.RocksdbKVStore(key,keyBytes,null,revision);
+ return  val;
+ } 
+

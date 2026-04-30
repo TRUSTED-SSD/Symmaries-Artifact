@@ -1,0 +1,142 @@
+    protected void doGet(javax.servlet.http.HttpServletRequest, javax.servlet.http.HttpServletResponse) throws java.io.IOException
+    {
+        securibench.micro.basic.Basic19 this;
+        javax.servlet.http.HttpServletRequest l1;
+        javax.servlet.http.HttpServletResponse l2;
+        java.lang.String l3;
+        java.sql.Connection l4;
+        java.sql.SQLException l5, $stack16, $stack18, $stack20;
+        java.lang.Throwable l6;
+        java.lang.StringBuilder $stack10;
+        java.io.PrintStream $stack19;
+
+        this := @this: securibench.micro.basic.Basic19;
+
+        l1 := @parameter0: javax.servlet.http.HttpServletRequest;
+
+        l2 := @parameter1: javax.servlet.http.HttpServletResponse;
+
+        l3 = interfaceinvoke l1.<javax.servlet.http.HttpServletRequest: java.lang.String getParameter(java.lang.String)>("name");
+/*25*/
+/*25*/
+
+        l4 = null;
+/*27*/
+
+     label01:
+        l4 = staticinvoke <java.sql.DriverManager: java.sql.Connection getConnection(java.lang.String)>("jdbc:dtF:E. coli;USR=dtfadm;PWD=dtfadm;Create=always;APPL=GIVE;DType=FILE");
+/*29*/
+/*29*/
+
+        $stack10 = new java.lang.StringBuilder;
+/*30*/
+
+        specialinvoke $stack10.<java.lang.StringBuilder: void <init>()>();
+/*30*/
+
+        $stack10 = virtualinvoke $stack10.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>("select * from Users where name=");
+/*30*/
+
+        $stack10 = virtualinvoke $stack10.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>(l3);
+/*30*/
+
+        l3 = virtualinvoke $stack10.<java.lang.StringBuilder: java.lang.String toString()>();
+/*30*/
+
+        interfaceinvoke l4.<java.sql.Connection: java.sql.PreparedStatement prepareStatement(java.lang.String)>(l3);
+/*30*/
+
+     label02:
+        if l4 == null goto label03;
+/*35*/
+
+        interfaceinvoke l4.<java.sql.Connection: void close()>();
+/*40*/
+
+     label03:
+        goto label14;
+/*38*/
+
+     label04:
+        l5 := @caughtexception;
+/*38*/
+
+        virtualinvoke l5.<java.sql.SQLException: void printStackTrace()>();
+/*37*/
+
+        goto label14;
+/*39*/
+
+     label05:
+        $stack18 := @caughtexception;
+/*38*/
+
+        l5 = $stack18;
+/*31*/
+
+        $stack19 = <java.lang.System: java.io.PrintStream err>;
+/*32*/
+
+        virtualinvoke $stack19.<java.io.PrintStream: void println(java.lang.String)>("An error occurred");
+/*32*/
+
+     label06:
+        if l4 == null goto label07;
+/*35*/
+
+        interfaceinvoke l4.<java.sql.Connection: void close()>();
+/*40*/
+
+     label07:
+        goto label14;
+/*38*/
+
+     label08:
+        $stack16 := @caughtexception;
+/*40*/
+
+        virtualinvoke $stack16.<java.sql.SQLException: void printStackTrace()>();
+/*37*/
+
+        goto label14;
+/*39*/
+
+     label09:
+        l6 := @caughtexception;
+/*40*/
+
+     label10:
+        if l4 == null goto label11;
+/*35*/
+
+        interfaceinvoke l4.<java.sql.Connection: void close()>();
+/*39*/
+
+     label11:
+        goto label13;
+/*38*/
+
+     label12:
+        $stack20 := @caughtexception;
+/*38*/
+
+        virtualinvoke $stack20.<java.sql.SQLException: void printStackTrace()>();
+/*37*/
+
+     label13:
+        throw l6;
+/*39*/
+
+     label14:
+        return;
+/*40*/
+
+        catch java.sql.SQLException from label02 to label03 with label04;
+        catch java.sql.SQLException from label01 to label02 with label05;
+        catch java.sql.SQLException from label06 to label07 with label08;
+        catch java.lang.Throwable from label01 to label02 with label09;
+        catch java.lang.Throwable from label05 to label06 with label09;
+        catch java.sql.SQLException from label10 to label11 with label12;
+        catch java.lang.Throwable from label09 to label10 with label09;
+    }
+

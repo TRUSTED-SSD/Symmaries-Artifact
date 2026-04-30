@@ -1,0 +1,53 @@
+long java.util.Random:internalNextLong(long l0,long l1)
+{
+long l2;
+  long l3;
+  byte $b4;
+  long $l5;
+  byte $b6;
+  byte $b7;
+  byte $b8;
+  byte $b9;
+  long $l10;
+  long $l11;
+  long $l12;
+  byte $b13;
+  long $l14;
+  long $l15;
+  long l16;
+  long l17;
+  long l18;
+  l16 = this.nextLong();
+ $b4=(l0 cmp l1);
+ if ($b4>=0) goto label0;
+ l2=(l1-l0);
+ l3=(l2-1L);
+ $l5=(l2 & l3);
+ $b6=($l5 cmp 0L);
+ if ($b6!=0) goto label1;
+ $l15=(l16 & l3);
+ l16=($l15+l0);
+ goto label0;
+ label1:$b7=(l2 cmp 0L);
+ if ($b7<=0) goto label2;
+ l17=(l16>>>1);
+ label3:$l11=(l17+l3);
+ $l10=(l17%l2);
+ l18=$l10;
+ $l12=($l11-$l10);
+ $b13=($l12 cmp 0L);
+ if ($b13>=0) goto label4;
+ $l14 = this.nextLong();
+ l17=($l14>>>1);
+ goto label3;
+ label4:l16=(l18+l0);
+ goto label0;
+ label2:$b8=(l16 cmp l0);
+ if ($b8<0) goto label5;
+ $b9=(l16 cmp l1);
+ if ($b9<0) goto label0;
+ label5:l16 = this.nextLong();
+ goto label2;
+ label0:return  l16;
+ }  
+

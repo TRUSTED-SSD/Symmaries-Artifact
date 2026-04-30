@@ -1,0 +1,17 @@
+org.apache.rocketmq.broker.BrokerController org.apache.rocketmq.container.BrokerContainer:getBroker(org.apache.rocketmq.common.BrokerIdentity brokerIdentity)
+{
+org.apache.rocketmq.container.InnerSalveBrokerController slaveBroker;
+  java.util.concurrent.ConcurrentMap $stack3;
+  java.lang.Object $stack4;
+  org.apache.rocketmq.broker.BrokerController $stack7;
+  $stack3=this.slaveBrokerControllers;
+ $stack4 = $stack3.get((java.lang.Object)brokerIdentity);
+ slaveBroker=(org.apache.rocketmq.container.InnerSalveBrokerController) $stack4;
+ if (slaveBroker==null) goto label0;
+ return  slaveBroker;
+ label0:$stack3=this.masterBrokerControllers;
+ $stack4 = $stack3.get((java.lang.Object)brokerIdentity);
+ $stack7=(org.apache.rocketmq.broker.BrokerController) $stack4;
+ return  $stack7;
+ } 
+

@@ -1,0 +1,25 @@
+static void com.google.zxing.qrcode.encoder.Encoder:appendLengthInfo(int numLetters,com.google.zxing.qrcode.decoder.Version version,com.google.zxing.qrcode.decoder.Mode mode,com.google.zxing.common.BitArray bits)
+{
+int numBits;
+  int $stack6;
+  com.google.zxing.WriterException $stack7;
+  java.lang.StringBuilder $stack8;
+  java.lang.String $stack14;
+  numBits = mode.getCharacterCountBits(version);
+ $stack6=(1<<numBits);
+ if (numLetters<$stack6) goto label0;
+ $stack7=new com.google.zxing.WriterException;
+ $stack8=new java.lang.StringBuilder;
+ $stack8#java.lang.StringBuilder();
+ $stack8 = $stack8.append(numLetters);
+ $stack8 = $stack8.append(" is bigger than ");
+ numLetters=(1<<numBits);
+ numLetters=(numLetters-1);
+ $stack8 = $stack8.append(numLetters);
+ $stack14 = $stack8.toString();
+ $stack7#com.google.zxing.WriterException($stack14);
+ throw $stack7;
+ label0:bits.appendBits(numLetters,numBits);
+ return;
+ } 
+

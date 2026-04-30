@@ -1,0 +1,28 @@
+org.apache.bookkeeper.server.http.BKHttpServiceProvider(org.apache.bookkeeper.proto.BookieServer bookieServer,org.apache.bookkeeper.replication.AutoRecoveryMain autoRecovery,org.apache.bookkeeper.meta.LedgerManagerFactory ledgerManagerFactory,org.apache.bookkeeper.conf.ServerConfiguration serverConf,org.apache.bookkeeper.stats.StatsProvider statsProvider)
+{
+org.apache.bookkeeper.conf.ClientConfiguration $stack7;
+  org.apache.bookkeeper.client.BookKeeperAdmin $stack8;
+  com.google.common.util.concurrent.ThreadFactoryBuilder $stack9;
+  java.util.concurrent.ThreadFactory $stack12;
+  java.util.concurrent.ExecutorService $stack13;
+  this#java.lang.Object();
+ this.bookieServer=bookieServer;
+ this.autoRecovery=autoRecovery;
+ this.ledgerManagerFactory=ledgerManagerFactory;
+ this.serverConf=serverConf;
+ this.statsProvider=statsProvider;
+ $stack7=new org.apache.bookkeeper.conf.ClientConfiguration;
+ $stack7#org.apache.bookkeeper.conf.ClientConfiguration((org.apache.bookkeeper.conf.AbstractConfiguration)serverConf);
+ $stack8=new org.apache.bookkeeper.client.BookKeeperAdmin;
+ $stack8#org.apache.bookkeeper.client.BookKeeperAdmin($stack7);
+ this.bka=$stack8;
+ $stack9=new com.google.common.util.concurrent.ThreadFactoryBuilder;
+ $stack9#com.google.common.util.concurrent.ThreadFactoryBuilder();
+ $stack9 = $stack9.setNameFormat("BKHttpServiceThread");
+ $stack9 = $stack9.setDaemon((boolean)1);
+ $stack12 = $stack9.build();
+ $stack13 = java.util.concurrent.Executors.newSingleThreadExecutor($stack12);
+ this.executor=$stack13;
+ return;
+ } 
+

@@ -1,0 +1,46 @@
+void org.apache.rocketmq.broker.controller.ReplicasManager:scanAvailableControllerAddresses()
+{
+java.util.Iterator l1;
+  java.lang.String address;
+  java.util.List $stack3;
+  java.util.concurrent.ConcurrentMap $stack4;
+  java.util.Set $stack5;
+  boolean $stack7;
+  java.lang.Object $stack11;
+  org.apache.rocketmq.broker.controller.ReplicasManager$1 $stack12;
+  java.util.concurrent.ExecutorService $stack13;
+  org.apache.rocketmq.logging.org.slf4j.Logger $stack20;
+  $stack3=this.controllerAddresses;
+ if ($stack3!=null) goto label0;
+ $stack20=org.apache.rocketmq.broker.controller.ReplicasManager.LOGGER;
+ $stack20.warn("scanAvailableControllerAddresses addresses of controller is null!");
+ return;
+ label0:$stack4=this.availableControllerAddresses;
+ $stack5 = $stack4.keySet();
+ l1 = $stack5.iterator();
+ label1:$stack7 = l1.hasNext();
+ if ($stack7==0) goto label2;
+ $stack11 = l1.next();
+ address=(java.lang.String) $stack11;
+ $stack3=this.controllerAddresses;
+ $stack7 = $stack3.contains((java.lang.Object)address);
+ if ($stack7!=0) goto label3;
+ $stack20=org.apache.rocketmq.broker.controller.ReplicasManager.LOGGER;
+ $stack20.warn("scanAvailableControllerAddresses remove invalid address {}",(java.lang.Object)address);
+ $stack4=this.availableControllerAddresses;
+ $stack4.remove((java.lang.Object)address);
+ label3:goto label1;
+ label2:$stack3=this.controllerAddresses;
+ l1 = $stack3.iterator();
+ label4:$stack7 = l1.hasNext();
+ if ($stack7==0) goto label5;
+ $stack11 = l1.next();
+ address=(java.lang.String) $stack11;
+ $stack13=this.scanExecutor;
+ $stack12=new org.apache.rocketmq.broker.controller.ReplicasManager$1;
+ $stack12#org.apache.rocketmq.broker.controller.ReplicasManager$1(this,address);
+ $stack13.submit((java.lang.Runnable)$stack12);
+ goto label4;
+ label5:return;
+ } 
+

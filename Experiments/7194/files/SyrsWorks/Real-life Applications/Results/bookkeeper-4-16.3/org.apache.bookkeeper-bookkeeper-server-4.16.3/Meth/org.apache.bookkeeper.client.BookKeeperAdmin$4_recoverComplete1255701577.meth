@@ -1,0 +1,27 @@
+void org.apache.bookkeeper.client.BookKeeperAdmin$4:recoverComplete(int rc,java.lang.Object ctx)
+{
+org.apache.bookkeeper.client.BookKeeperAdmin$SyncObject syncObj;
+  org.apache.bookkeeper.client.BookKeeperAdmin$SyncObject l4;
+  java.lang.Throwable l5;
+  org.slf4j.Logger $stack6;
+  java.lang.Object $stack8;
+  $stack6 = org.apache.bookkeeper.client.BookKeeperAdmin.access$000();
+ $stack8 = org.apache.bookkeeper.client.api.BKException.codeLogger(rc);
+ dummyClass.lowSink("Recover bookie operation completed with rc: {}");
+$stack6.info("Recover bookie operation completed with rc: {}",$stack8);
+ syncObj=(org.apache.bookkeeper.client.BookKeeperAdmin$SyncObject) ctx;
+ l4=syncObj;
+ monitorenter syncObj;
+ label0:syncObj.rc=rc;
+ syncObj.value=1;
+ syncObj.notify();
+ monitorexit syncObj;
+ label1:goto label2;
+ label3:l5 = catch;
+ monitorexit syncObj;
+ label4:throw l5;
+ label2:return;
+ catch java.lang.Throwable: label0 - label1 : label3;
+catch java.lang.Throwable: label3 - label4 : label3;
+} 
+

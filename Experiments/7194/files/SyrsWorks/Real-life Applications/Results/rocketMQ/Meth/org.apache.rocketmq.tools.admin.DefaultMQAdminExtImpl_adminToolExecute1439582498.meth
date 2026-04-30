@@ -1,0 +1,53 @@
+org.apache.rocketmq.tools.admin.common.AdminToolResult org.apache.rocketmq.tools.admin.DefaultMQAdminExtImpl:adminToolExecute(org.apache.rocketmq.tools.admin.common.AdminToolHandler handler)
+{
+java.lang.Exception e;
+  org.apache.rocketmq.tools.admin.common.AdminToolResult $stack3;
+  org.apache.rocketmq.client.exception.MQClientException $stack4;
+  int $stack6;
+  org.apache.rocketmq.tools.admin.common.AdminToolsResultCodeEnum $stack7;
+  java.lang.String $stack8;
+  java.lang.InterruptedException $stack13;
+  org.apache.rocketmq.remoting.exception.RemotingException $stack21;
+  org.apache.rocketmq.logging.org.slf4j.Logger $stack22;
+  label0:$stack3 = handler.doExecute();
+ label1:return  $stack3;
+ label2:$stack21 = catch;
+ e=$stack21;
+ $stack22=this.logger;
+ $stack22.error("",(java.lang.Throwable)$stack21);
+ $stack7=org.apache.rocketmq.tools.admin.common.AdminToolsResultCodeEnum.REMOTING_ERROR;
+ $stack21=(org.apache.rocketmq.remoting.exception.RemotingException) $stack21;
+ $stack8 = $stack21.getMessage();
+ $stack3 = org.apache.rocketmq.tools.admin.common.AdminToolResult.failure($stack7,$stack8);
+ return  $stack3;
+ label3:$stack4 = catch;
+ e=$stack4;
+ $stack4=(org.apache.rocketmq.client.exception.MQClientException) $stack4;
+ $stack6 = $stack4.getResponseCode();
+ if (17!=$stack6) goto label4;
+ $stack7=org.apache.rocketmq.tools.admin.common.AdminToolsResultCodeEnum.TOPIC_ROUTE_INFO_NOT_EXIST;
+ $stack4=(org.apache.rocketmq.client.exception.MQClientException) e;
+ $stack8 = $stack4.getErrorMessage();
+ $stack3 = org.apache.rocketmq.tools.admin.common.AdminToolResult.failure($stack7,$stack8);
+ return  $stack3;
+ label4:$stack7=org.apache.rocketmq.tools.admin.common.AdminToolsResultCodeEnum.MQ_CLIENT_ERROR;
+ $stack4=(org.apache.rocketmq.client.exception.MQClientException) e;
+ $stack8 = $stack4.getMessage();
+ $stack3 = org.apache.rocketmq.tools.admin.common.AdminToolResult.failure($stack7,$stack8);
+ return  $stack3;
+ label5:$stack13 = catch;
+ $stack7=org.apache.rocketmq.tools.admin.common.AdminToolsResultCodeEnum.INTERRUPT_ERROR;
+ $stack8 = $stack13.getMessage();
+ $stack3 = org.apache.rocketmq.tools.admin.common.AdminToolResult.failure($stack7,$stack8);
+ return  $stack3;
+ label6:e = catch;
+ $stack7=org.apache.rocketmq.tools.admin.common.AdminToolsResultCodeEnum.MQ_BROKER_ERROR;
+ $stack8 = e.getMessage();
+ $stack3 = org.apache.rocketmq.tools.admin.common.AdminToolResult.failure($stack7,$stack8);
+ return  $stack3;
+ catch org.apache.rocketmq.remoting.exception.RemotingException: label0 - label1 : label2;
+catch org.apache.rocketmq.client.exception.MQClientException: label0 - label1 : label3;
+catch java.lang.InterruptedException: label0 - label1 : label5;
+catch java.lang.Exception: label0 - label1 : label6;
+} 
+

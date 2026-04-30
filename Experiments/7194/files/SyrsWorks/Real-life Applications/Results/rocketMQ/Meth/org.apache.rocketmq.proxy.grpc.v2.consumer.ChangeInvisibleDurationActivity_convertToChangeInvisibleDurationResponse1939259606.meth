@@ -1,0 +1,36 @@
+apache.rocketmq.v2.ChangeInvisibleDurationResponse org.apache.rocketmq.proxy.grpc.v2.consumer.ChangeInvisibleDurationActivity:convertToChangeInvisibleDurationResponse(org.apache.rocketmq.proxy.common.ProxyContext ctx,apache.rocketmq.v2.ChangeInvisibleDurationRequest request,org.apache.rocketmq.client.consumer.AckResult ackResult)
+{
+org.apache.rocketmq.client.consumer.AckStatus $stack4;
+  org.apache.rocketmq.client.consumer.AckStatus $stack5;
+  boolean $stack6;
+  apache.rocketmq.v2.ChangeInvisibleDurationResponse$Builder $stack7;
+  org.apache.rocketmq.proxy.grpc.v2.common.ResponseBuilder $stack8;
+  apache.rocketmq.v2.Code $stack9;
+  apache.rocketmq.v2.Status $stack10;
+  apache.rocketmq.v2.ChangeInvisibleDurationResponse $stack12;
+  apache.rocketmq.v2.Code $stack16;
+  java.lang.String $stack17;
+  $stack4=org.apache.rocketmq.client.consumer.AckStatus.OK;
+ $stack5 = ackResult.getStatus();
+ $stack6 = $stack4.equals((java.lang.Object)$stack5);
+ if ($stack6==0) goto label0;
+ $stack7 = apache.rocketmq.v2.ChangeInvisibleDurationResponse.newBuilder();
+ $stack8 = org.apache.rocketmq.proxy.grpc.v2.common.ResponseBuilder.getInstance();
+ $stack16=apache.rocketmq.v2.Code.OK;
+ $stack9=apache.rocketmq.v2.Code.OK;
+ $stack17 = $stack9.name();
+ $stack10 = $stack8.buildStatus($stack16,$stack17);
+ $stack7 = $stack7.setStatus($stack10);
+ $stack17 = ackResult.getExtraInfo();
+ $stack7 = $stack7.setReceiptHandle($stack17);
+ $stack12 = $stack7.build();
+ return  $stack12;
+ label0:$stack7 = apache.rocketmq.v2.ChangeInvisibleDurationResponse.newBuilder();
+ $stack8 = org.apache.rocketmq.proxy.grpc.v2.common.ResponseBuilder.getInstance();
+ $stack9=apache.rocketmq.v2.Code.INTERNAL_SERVER_ERROR;
+ $stack10 = $stack8.buildStatus($stack9,"changeInvisibleDuration failed: status is abnormal");
+ $stack7 = $stack7.setStatus($stack10);
+ $stack12 = $stack7.build();
+ return  $stack12;
+ } 
+

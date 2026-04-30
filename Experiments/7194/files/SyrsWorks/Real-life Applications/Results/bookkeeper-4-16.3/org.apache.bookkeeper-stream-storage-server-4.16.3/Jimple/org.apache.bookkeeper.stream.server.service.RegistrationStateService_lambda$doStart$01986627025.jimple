@@ -1,0 +1,40 @@
+    private void lambda$doStart$0()
+    {
+        org.apache.bookkeeper.stream.server.service.RegistrationStateService this;
+        org.apache.bookkeeper.bookie.BookieStateManager $stack1;
+        org.slf4j.Logger $stack5;
+
+        this := @this: org.apache.bookkeeper.stream.server.service.RegistrationStateService;
+
+        $stack1 = this.<org.apache.bookkeeper.stream.server.service.RegistrationStateService: org.apache.bookkeeper.bookie.BookieStateManager stateManager>;
+/*70*/
+
+        if null != $stack1 goto label1;
+/*70*/
+
+        $stack5 = <org.apache.bookkeeper.stream.server.service.RegistrationStateService: org.slf4j.Logger log>;
+/*71*/
+
+        interfaceinvoke $stack5.<org.slf4j.Logger: void warn(java.lang.String)>("Registration state manager is not initialized yet");
+/*71*/
+
+        return;
+/*72*/
+
+     label1:
+        $stack1 = this.<org.apache.bookkeeper.stream.server.service.RegistrationStateService: org.apache.bookkeeper.bookie.BookieStateManager stateManager>;
+/*74*/
+
+        virtualinvoke $stack1.<org.apache.bookkeeper.bookie.BookieStateManager: void forceToUnregistered()>();
+/*74*/
+
+        $stack1 = this.<org.apache.bookkeeper.stream.server.service.RegistrationStateService: org.apache.bookkeeper.bookie.BookieStateManager stateManager>;
+/*76*/
+
+        virtualinvoke $stack1.<org.apache.bookkeeper.bookie.BookieStateManager: java.util.concurrent.Future registerBookie(boolean)>(0);
+/*76*/
+
+        return;
+/*77*/
+    }
+

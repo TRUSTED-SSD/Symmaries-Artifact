@@ -1,0 +1,43 @@
+static void org.apache.rocketmq.tools.admin.MQAdminUtils:completeNoTargetBrokers(java.util.Map brokerConfigMap,org.apache.rocketmq.tools.admin.DefaultMQAdminExt defaultMQAdminExt)
+{
+org.apache.rocketmq.remoting.protocol.statictopic.TopicConfigAndQueueMapping configMapping;
+  java.lang.String topic;
+  int queueNum;
+  long newEpoch;
+  java.util.Set allBrokers;
+  java.util.Iterator l8;
+  java.lang.String broker;
+  java.util.Collection $stack10;
+  java.lang.Object $stack12;
+  org.apache.rocketmq.remoting.protocol.statictopic.TopicQueueMappingDetail $stack14;
+  boolean $stack21;
+  org.apache.rocketmq.common.TopicConfig $stack26;
+  $stack10 = brokerConfigMap.values();
+ l8 = $stack10.iterator();
+ $stack12 = l8.next();
+ configMapping=(org.apache.rocketmq.remoting.protocol.statictopic.TopicConfigAndQueueMapping) $stack12;
+ topic = configMapping.getTopicName();
+ $stack14 = configMapping.getMappingDetail();
+ queueNum = $stack14.getTotalQueues();
+ $stack14 = configMapping.getMappingDetail();
+ newEpoch = $stack14.getEpoch();
+ allBrokers = brokerConfigMap.keySet();
+ allBrokers = org.apache.rocketmq.tools.admin.MQAdminUtils.getAllBrokersInSameCluster((java.util.Collection)allBrokers,defaultMQAdminExt);
+ l8 = allBrokers.iterator();
+ label0:$stack21 = l8.hasNext();
+ if ($stack21==0) goto label1;
+ $stack12 = l8.next();
+ broker=(java.lang.String) $stack12;
+ $stack21 = brokerConfigMap.containsKey((java.lang.Object)broker);
+ if ($stack21!=0) goto label2;
+ configMapping=new org.apache.rocketmq.remoting.protocol.statictopic.TopicConfigAndQueueMapping;
+ $stack26=new org.apache.rocketmq.common.TopicConfig;
+ $stack26#org.apache.rocketmq.common.TopicConfig(topic,0,0);
+ $stack14=new org.apache.rocketmq.remoting.protocol.statictopic.TopicQueueMappingDetail;
+ $stack14#org.apache.rocketmq.remoting.protocol.statictopic.TopicQueueMappingDetail(topic,queueNum,broker,newEpoch);
+ configMapping#org.apache.rocketmq.remoting.protocol.statictopic.TopicConfigAndQueueMapping($stack26,$stack14);
+ brokerConfigMap.put((java.lang.Object)broker,(java.lang.Object)configMapping);
+ label2:goto label0;
+ label1:return;
+ } 
+

@@ -1,0 +1,47 @@
+void org.apache.rocketmq.remoting.netty.NettyRemotingClient:scanAvailableNameSrv()
+{
+java.util.List nameServerList;
+  java.util.Iterator l2;
+  java.lang.String address;
+  java.util.concurrent.atomic.AtomicReference $stack4;
+  java.lang.Object $stack5;
+  java.util.concurrent.ConcurrentMap $stack6;
+  java.util.Set $stack7;
+  boolean $stack9;
+  org.apache.rocketmq.remoting.netty.NettyRemotingClient$10 $stack13;
+  java.util.concurrent.ExecutorService $stack14;
+  org.apache.rocketmq.logging.org.slf4j.Logger $stack19;
+  $stack4=this.namesrvAddrList;
+ $stack5 = $stack4.get();
+ nameServerList=(java.util.List) $stack5;
+ if (nameServerList!=null) goto label0;
+ $stack19=org.apache.rocketmq.remoting.netty.NettyRemotingClient.LOGGER;
+ $stack19.debug("scanAvailableNameSrv addresses of name server is null!");
+ return;
+ label0:$stack6=this.availableNamesrvAddrMap;
+ $stack7 = $stack6.keySet();
+ l2 = $stack7.iterator();
+ label1:$stack9 = l2.hasNext();
+ if ($stack9==0) goto label2;
+ $stack5 = l2.next();
+ address=(java.lang.String) $stack5;
+ $stack9 = nameServerList.contains((java.lang.Object)address);
+ if ($stack9!=0) goto label3;
+ $stack19=org.apache.rocketmq.remoting.netty.NettyRemotingClient.LOGGER;
+ $stack19.warn("scanAvailableNameSrv remove invalid address {}",(java.lang.Object)address);
+ $stack6=this.availableNamesrvAddrMap;
+ $stack6.remove((java.lang.Object)address);
+ label3:goto label1;
+ label2:l2 = nameServerList.iterator();
+ label4:$stack9 = l2.hasNext();
+ if ($stack9==0) goto label5;
+ $stack5 = l2.next();
+ address=(java.lang.String) $stack5;
+ $stack14=this.scanExecutor;
+ $stack13=new org.apache.rocketmq.remoting.netty.NettyRemotingClient$10;
+ $stack13#org.apache.rocketmq.remoting.netty.NettyRemotingClient$10(this,address);
+ $stack14.execute((java.lang.Runnable)$stack13);
+ goto label4;
+ label5:return;
+ } 
+

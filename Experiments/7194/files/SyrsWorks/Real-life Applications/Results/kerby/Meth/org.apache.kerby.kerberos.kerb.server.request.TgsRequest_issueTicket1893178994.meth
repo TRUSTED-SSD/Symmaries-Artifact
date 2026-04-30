@@ -1,0 +1,36 @@
+void org.apache.kerby.kerberos.kerb.server.request.TgsRequest:issueTicket()
+{
+org.apache.kerby.kerberos.kerb.type.ticket.Ticket newTicket;
+  org.apache.kerby.kerberos.kerb.server.request.ServiceTicketIssuer $stack3;
+  java.lang.StringBuilder $stack5;
+  org.slf4j.Logger $stack6;
+  org.apache.kerby.kerberos.kerb.type.ticket.EncTicketPart $stack8;
+  org.apache.kerby.kerberos.kerb.type.KerberosTime $stack9;
+  long $stack10;
+  org.apache.kerby.kerberos.kerb.type.base.PrincipalName $stack14;
+  java.lang.String $stack19;
+  $stack3=new org.apache.kerby.kerberos.kerb.server.request.ServiceTicketIssuer;
+ $stack3#org.apache.kerby.kerberos.kerb.server.request.ServiceTicketIssuer(this);
+ newTicket = $stack3.issueTicket();
+ $stack6=org.apache.kerby.kerberos.kerb.server.request.TgsRequest.LOG;
+ $stack5=new java.lang.StringBuilder;
+ $stack5#java.lang.StringBuilder();
+ $stack5 = $stack5.append("TGS_REQ ISSUE: authtime ");
+ $stack8 = newTicket.getEncPart();
+ $stack9 = $stack8.getAuthTime();
+ $stack10 = $stack9.getTime();
+ $stack5 = $stack5.append($stack10);
+ $stack5 = $stack5.append(",");
+ $stack8 = newTicket.getEncPart();
+ $stack14 = $stack8.getCname();
+ $stack5 = $stack5.append((java.lang.Object)$stack14);
+ $stack5 = $stack5.append(" for ");
+ $stack14 = newTicket.getSname();
+ $stack5 = $stack5.append((java.lang.Object)$stack14);
+ $stack19 = $stack5.toString();
+ dummyClass.lowSink($stack19);
+$stack6.info($stack19);
+ this.setTicket(newTicket);
+ return;
+ } 
+

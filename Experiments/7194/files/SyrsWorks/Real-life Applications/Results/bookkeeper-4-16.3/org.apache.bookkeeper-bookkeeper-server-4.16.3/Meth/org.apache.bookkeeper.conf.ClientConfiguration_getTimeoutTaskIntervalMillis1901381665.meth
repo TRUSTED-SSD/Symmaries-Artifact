@@ -1,0 +1,17 @@
+long org.apache.bookkeeper.conf.ClientConfiguration:getTimeoutTaskIntervalMillis()
+{
+java.util.concurrent.TimeUnit $stack2;
+  int $stack3;
+  int $stack4;
+  long $stack6;
+  $stack2=java.util.concurrent.TimeUnit.SECONDS;
+ $stack3 = this.getAddEntryTimeout();
+ $stack4 = this.getReadEntryTimeout();
+ $stack3 = java.lang.Math.min($stack3,$stack4);
+ $stack6=(long) $stack3;
+ $stack6 = $stack2.toMillis($stack6);
+ $stack6=($stack6/2L);
+ $stack6 = this.getLong("timeoutTaskIntervalMillis",$stack6);
+ return  $stack6;
+ } 
+

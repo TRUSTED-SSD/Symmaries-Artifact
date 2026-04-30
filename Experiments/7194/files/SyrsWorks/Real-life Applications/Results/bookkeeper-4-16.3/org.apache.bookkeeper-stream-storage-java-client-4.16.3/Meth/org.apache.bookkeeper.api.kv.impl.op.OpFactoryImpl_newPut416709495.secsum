@@ -1,0 +1,11 @@
+org.apache.bookkeeper.api.kv.op.PutOp org.apache.bookkeeper.api.kv.impl.op.OpFactoryImpl:newPut (
+  java.lang.Object key, java.lang.Object value,
+  org.apache.bookkeeper.api.kv.options.PutOption option) {
+  guard = tt;
+  ret(level()) = obj_level(this);
+  ret(obj_level()) = level(key) ⊔ level(option) ⊔ level(value) ⊔ obj_level(key);
+  ret(obj_level(key)) = level(key) ⊔ level(option) ⊔ level(value) ⊔ obj_level(key);
+  ret(obj_level(option)) = level(key) ⊔ level(option) ⊔ level(value) ⊔ obj_level(key);
+  ret(obj_level(this)) = level(key) ⊔ level(option) ⊔ level(value) ⊔ obj_level(key);
+  ret(obj_level(value)) = level(key) ⊔ level(option) ⊔ level(value) ⊔ obj_level(key);
+}

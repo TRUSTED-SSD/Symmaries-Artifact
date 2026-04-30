@@ -1,0 +1,21 @@
+static apache.rocketmq.v2.ExponentialBackoff org.apache.rocketmq.proxy.grpc.v2.common.GrpcClientSettingsManager:convertToExponentialBackoff(org.apache.rocketmq.remoting.protocol.subscription.ExponentialRetryPolicy retryPolicy)
+{
+apache.rocketmq.v2.ExponentialBackoff$Builder $stack1;
+  long $stack2;
+  com.google.protobuf.Duration $stack3;
+  float $stack9;
+  apache.rocketmq.v2.ExponentialBackoff $stack11;
+  $stack1 = apache.rocketmq.v2.ExponentialBackoff.newBuilder();
+ $stack2 = retryPolicy.getInitial();
+ $stack3 = com.google.protobuf.util.Durations.fromMillis($stack2);
+ $stack1 = $stack1.setInitial($stack3);
+ $stack2 = retryPolicy.getMax();
+ $stack3 = com.google.protobuf.util.Durations.fromMillis($stack2);
+ $stack1 = $stack1.setMax($stack3);
+ $stack2 = retryPolicy.getMultiplier();
+ $stack9=(float) $stack2;
+ $stack1 = $stack1.setMultiplier($stack9);
+ $stack11 = $stack1.build();
+ return  $stack11;
+ } 
+

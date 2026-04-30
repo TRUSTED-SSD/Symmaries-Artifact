@@ -1,0 +1,18 @@
+static int org.apache.rocketmq.common.message.MessageDecoder:countInnerMsgNum(java.nio.ByteBuffer buffer)
+{
+int count;
+  int currPos;
+  int size;
+  boolean $stack4;
+  count=0;
+ label0:$stack4 = buffer.hasRemaining();
+ if ($stack4==0) goto label1;
+ count=(count+1);
+ currPos = buffer.position();
+ size = buffer.getInt();
+ currPos=(currPos+size);
+ buffer.position(currPos);
+ goto label0;
+ label1:return  count;
+ } 
+

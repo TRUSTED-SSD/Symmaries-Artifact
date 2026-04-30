@@ -1,0 +1,32 @@
+void org.apache.rocketmq.remoting.netty.NettyRemotingAbstract:failFast(io.netty.channel.Channel channel)
+{
+java.util.Iterator l2;
+  java.util.Map$Entry entry;
+  java.lang.Integer opaque;
+  java.util.concurrent.ConcurrentMap $stack5;
+  java.util.Set $stack6;
+  boolean $stack8;
+  java.lang.Object $stack9;
+  org.apache.rocketmq.remoting.netty.ResponseFuture $stack11;
+  io.netty.channel.Channel $stack12;
+  int $stack15;
+  $stack5=this.responseTable;
+ $stack6 = $stack5.entrySet();
+ l2 = $stack6.iterator();
+ label0:$stack8 = l2.hasNext();
+ if ($stack8==0) goto label1;
+ $stack9 = l2.next();
+ entry=(java.util.Map$Entry) $stack9;
+ $stack9 = entry.getValue();
+ $stack11=(org.apache.rocketmq.remoting.netty.ResponseFuture) $stack9;
+ $stack12 = $stack11.getChannel();
+ if ($stack12!=channel) goto label2;
+ $stack9 = entry.getKey();
+ opaque=(java.lang.Integer) $stack9;
+ if (opaque==null) goto label2;
+ $stack15 = opaque.intValue();
+ this#org.apache.rocketmq.remoting.netty.NettyRemotingAbstract:requestFail($stack15);
+ label2:goto label0;
+ label1:return;
+ } 
+

@@ -1,0 +1,19 @@
+static com.google.zxing.qrcode.decoder.Version com.google.zxing.qrcode.encoder.Encoder:chooseVersion(int numInputBits,com.google.zxing.qrcode.decoder.ErrorCorrectionLevel ecLevel)
+{
+int versionNum;
+  com.google.zxing.qrcode.decoder.Version version;
+  com.google.zxing.WriterException $stack4;
+  boolean $stack6;
+  versionNum=1;
+ label0:if (versionNum>40) goto label1;
+ version = com.google.zxing.qrcode.decoder.Version.getVersionForNumber(versionNum);
+ $stack6 = com.google.zxing.qrcode.encoder.Encoder.willFit(numInputBits,version,ecLevel);
+ if ($stack6==0) goto label2;
+ return  version;
+ label2:versionNum=(versionNum+1);
+ goto label0;
+ label1:$stack4=new com.google.zxing.WriterException;
+ $stack4#com.google.zxing.WriterException("Data too big");
+ throw $stack4;
+ } 
+

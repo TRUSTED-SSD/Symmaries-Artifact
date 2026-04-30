@@ -1,0 +1,48 @@
+int org.apache.bookkeeper.bookie.CheckpointSourceList$CheckpointList:compareTo(org.apache.bookkeeper.bookie.CheckpointSource$Checkpoint @o)
+{
+org.apache.bookkeeper.bookie.CheckpointSourceList$CheckpointList other;
+  int i;
+  int res;
+  org.apache.bookkeeper.bookie.CheckpointSource$Checkpoint $stack5;
+  boolean $stack7;
+  java.util.List $stack8;
+  java.lang.Object $stack15;
+  org.apache.bookkeeper.bookie.CheckpointSource$Checkpoint o;
+o=@o;
+$stack5=org.apache.bookkeeper.bookie.CheckpointSource$Checkpoint.MAX;
+ if (o!=$stack5) goto label0;
+ return  -1;
+ label0:$stack5=org.apache.bookkeeper.bookie.CheckpointSource$Checkpoint.MIN;
+ if (o!=$stack5) goto label1;
+ return  1;
+ label1:$stack7=o instanceof org.apache.bookkeeper.bookie.CheckpointSourceList$CheckpointList;
+ com.google.common.base.Preconditions.checkArgument($stack7);
+ other=(org.apache.bookkeeper.bookie.CheckpointSourceList$CheckpointList) o;
+ $stack8=this.checkpoints;
+ i = $stack8.size();
+ $stack8=other.checkpoints;
+ res = $stack8.size();
+ if (i==res) goto label2;
+ $stack8=this.checkpoints;
+ i = $stack8.size();
+ $stack8=other.checkpoints;
+ res = $stack8.size();
+ i = java.lang.Integer.compare(i,res);
+ return  i;
+ label2:i=0;
+ label3:$stack8=this.checkpoints;
+ res = $stack8.size();
+ if (i>=res) goto label4;
+ $stack8=this.checkpoints;
+ $stack15 = $stack8.get(i);
+ o=(org.apache.bookkeeper.bookie.CheckpointSource$Checkpoint) $stack15;
+ $stack8=other.checkpoints;
+ $stack15 = $stack8.get(i);
+ res = o.compareTo($stack15);
+ if (res==0) goto label5;
+ return  res;
+ label5:i=(i+1);
+ goto label3;
+ label4:return  0;
+ } 
+

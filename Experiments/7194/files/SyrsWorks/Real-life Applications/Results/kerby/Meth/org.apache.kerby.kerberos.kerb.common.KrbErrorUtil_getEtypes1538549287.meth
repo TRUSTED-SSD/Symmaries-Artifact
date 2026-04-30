@@ -1,0 +1,38 @@
+static java.util.List org.apache.kerby.kerberos.kerb.common.KrbErrorUtil:getEtypes(org.apache.kerby.kerberos.kerb.type.base.KrbError error)
+{
+org.apache.kerby.kerberos.kerb.type.base.MethodData methodData;
+  java.util.Iterator l2;
+  org.apache.kerby.kerberos.kerb.type.pa.PaDataEntry pd;
+  byte[] $stack5;
+  java.util.List $stack6;
+  boolean $stack8;
+  java.lang.Object $stack10;
+  org.apache.kerby.kerberos.kerb.type.pa.PaDataType $stack11;
+  org.apache.kerby.kerberos.kerb.type.pa.PaDataType $stack12;
+  methodData=new org.apache.kerby.kerberos.kerb.type.base.MethodData;
+ methodData#org.apache.kerby.kerberos.kerb.type.base.MethodData();
+ $stack5 = error.getEdata();
+ methodData.decode($stack5);
+ $stack6 = methodData.getElements();
+ l2 = $stack6.iterator();
+ label0:$stack8 = l2.hasNext();
+ if ($stack8==0) goto label1;
+ $stack10 = l2.next();
+ pd=(org.apache.kerby.kerberos.kerb.type.pa.PaDataEntry) $stack10;
+ $stack11 = pd.getPaDataType();
+ $stack12=org.apache.kerby.kerberos.kerb.type.pa.PaDataType.ETYPE_INFO2;
+ if ($stack11!=$stack12) goto label2;
+ $stack5 = pd.getPaDataValue();
+ $stack6 = org.apache.kerby.kerberos.kerb.common.KrbErrorUtil.getEtypes2($stack5);
+ return  $stack6;
+ label2:$stack11 = pd.getPaDataType();
+ $stack12=org.apache.kerby.kerberos.kerb.type.pa.PaDataType.ETYPE_INFO;
+ if ($stack11!=$stack12) goto label3;
+ $stack5 = pd.getPaDataValue();
+ $stack6 = org.apache.kerby.kerberos.kerb.common.KrbErrorUtil.getEtypes($stack5);
+ return  $stack6;
+ label3:goto label0;
+ label1:$stack6 = java.util.Collections.emptyList();
+ return  $stack6;
+ } 
+

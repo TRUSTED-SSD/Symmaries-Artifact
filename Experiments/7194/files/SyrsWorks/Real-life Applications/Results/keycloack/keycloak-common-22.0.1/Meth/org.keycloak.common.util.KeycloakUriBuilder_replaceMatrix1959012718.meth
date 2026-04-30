@@ -1,0 +1,48 @@
+org.keycloak.common.util.KeycloakUriBuilder org.keycloak.common.util.KeycloakUriBuilder:replaceMatrix(java.lang.String @matrix)
+{
+int start;
+  boolean $stack4;
+  java.lang.String $stack6;
+  java.lang.StringBuilder $stack11;
+  java.lang.String matrix;
+matrix=@matrix;
+if (matrix!=null) goto label0;
+ matrix="";
+ label0:$stack4 = matrix.startsWith(";");
+ if ($stack4!=0) goto label1;
+ $stack11=new java.lang.StringBuilder;
+ $stack11#java.lang.StringBuilder();
+ $stack11 = $stack11.append(";");
+ $stack11 = $stack11.append(matrix);
+ matrix = $stack11.toString();
+ label1:matrix = org.keycloak.common.util.Encode.encodePath(matrix);
+ $stack6=this.path;
+ if ($stack6!=null) goto label2;
+ this.path=matrix;
+ goto label3;
+ label2:$stack6=this.path;
+ start = $stack6.lastIndexOf(47);
+ if (start>=0) goto label4;
+ start=0;
+ label4:$stack6=this.path;
+ start = $stack6.indexOf(59,start);
+ if (start<=-1) goto label5;
+ $stack11=new java.lang.StringBuilder;
+ $stack11#java.lang.StringBuilder();
+ $stack6=this.path;
+ $stack6 = $stack6.substring(0,start);
+ $stack11 = $stack11.append($stack6);
+ $stack11 = $stack11.append(matrix);
+ matrix = $stack11.toString();
+ this.path=matrix;
+ goto label3;
+ label5:$stack11=new java.lang.StringBuilder;
+ $stack11#java.lang.StringBuilder();
+ $stack6=this.path;
+ $stack11 = $stack11.append($stack6);
+ $stack11 = $stack11.append(matrix);
+ matrix = $stack11.toString();
+ this.path=matrix;
+ label3:return  this;
+ } 
+

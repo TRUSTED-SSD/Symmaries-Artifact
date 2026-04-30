@@ -1,0 +1,33 @@
+void org.apache.rocketmq.remoting.netty.NettyRemotingClient$NettyConnectManageHandler:connect(io.netty.channel.ChannelHandlerContext ctx,java.net.SocketAddress remoteAddress,java.net.SocketAddress localAddress,io.netty.channel.ChannelPromise promise)
+{
+java.lang.String local;
+  java.lang.String remote;
+  org.apache.rocketmq.logging.org.slf4j.Logger $stack9;
+  org.apache.rocketmq.remoting.netty.NettyRemotingClient $stack10;
+  org.apache.rocketmq.remoting.ChannelEventListener $stack11;
+  org.apache.rocketmq.remoting.netty.NettyEvent $stack12;
+  org.apache.rocketmq.remoting.netty.NettyEventType $stack14;
+  io.netty.channel.Channel $stack15;
+  if (localAddress!=null) goto label0;
+ local="UNKNOWN";
+ goto label1;
+ label0:local = org.apache.rocketmq.remoting.common.RemotingHelper.parseSocketAddressAddr(localAddress);
+ label1:if (remoteAddress!=null) goto label2;
+ remote="UNKNOWN";
+ goto label3;
+ label2:remote = org.apache.rocketmq.remoting.common.RemotingHelper.parseSocketAddressAddr(remoteAddress);
+ label3:$stack9 = org.apache.rocketmq.remoting.netty.NettyRemotingClient.access$200();
+ $stack9.info("NETTY CLIENT PIPELINE: CONNECT  {} => {}",(java.lang.Object)local,(java.lang.Object)remote);
+ this#io.netty.channel.ChannelDuplexHandler:connect(ctx,remoteAddress,localAddress,promise);
+ $stack10=this.this$0;
+ $stack11 = org.apache.rocketmq.remoting.netty.NettyRemotingClient.access$900($stack10);
+ if ($stack11==null) goto label4;
+ $stack10=this.this$0;
+ $stack12=new org.apache.rocketmq.remoting.netty.NettyEvent;
+ $stack14=org.apache.rocketmq.remoting.netty.NettyEventType.CONNECT;
+ $stack15 = ctx.channel();
+ $stack12#org.apache.rocketmq.remoting.netty.NettyEvent($stack14,remote,$stack15);
+ $stack10.putNettyEvent($stack12);
+ label4:return;
+ } 
+

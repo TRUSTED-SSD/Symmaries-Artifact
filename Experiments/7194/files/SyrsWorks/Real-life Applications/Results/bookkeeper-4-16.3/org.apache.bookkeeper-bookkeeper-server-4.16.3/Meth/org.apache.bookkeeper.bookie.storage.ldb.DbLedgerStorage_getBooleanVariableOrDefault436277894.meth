@@ -1,0 +1,22 @@
+static boolean org.apache.bookkeeper.bookie.storage.ldb.DbLedgerStorage:getBooleanVariableOrDefault(org.apache.bookkeeper.conf.ServerConfiguration conf,java.lang.String keyName,boolean defaultValue)
+{
+java.lang.Object obj;
+  boolean $stack5;
+  java.lang.String $stack6;
+  java.lang.Boolean $stack9;
+  obj = conf.getProperty(keyName);
+ $stack5=obj instanceof java.lang.Boolean;
+ if ($stack5==0) goto label0;
+ $stack9=(java.lang.Boolean) obj;
+ defaultValue = $stack9.booleanValue();
+ return  defaultValue;
+ label0:if (obj!=null) goto label1;
+ return  defaultValue;
+ label1:$stack6 = conf.getString(keyName);
+ $stack5 = org.apache.commons.lang3.StringUtils.isEmpty((java.lang.CharSequence)$stack6);
+ if ($stack5==0) goto label2;
+ return  defaultValue;
+ label2:defaultValue = conf.getBoolean(keyName);
+ return  defaultValue;
+ } 
+

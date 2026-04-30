@@ -1,0 +1,36 @@
+void org.apache.rocketmq.broker.BrokerController:startService(long minBrokerId,java.lang.String minBrokerAddr)
+{
+java.lang.Object[] $stack4;
+  org.apache.rocketmq.common.BrokerConfig $stack5;
+  org.apache.rocketmq.logging.org.slf4j.Logger $stack6;
+  java.lang.String $stack9;
+  java.lang.Long $stack11;
+  long $stack13;
+  byte $stack14;
+  boolean $stack18;
+  $stack6=org.apache.rocketmq.broker.BrokerController.LOG;
+ $stack4=new java.lang.Object[3];
+ $stack5=this.brokerConfig;
+ $stack9 = $stack5.getCanonicalName();
+ $stack4[0]=$stack9;
+ $stack11 = java.lang.Long.valueOf(minBrokerId);
+ $stack4[1]=$stack11;
+ $stack4[2]=minBrokerAddr;
+ $stack6.info("{} start service, min broker id is {}, min broker addr: {}",$stack4);
+ this.minBrokerIdInGroup=minBrokerId;
+ this.minBrokerAddrInGroup=minBrokerAddr;
+ $stack5=this.brokerConfig;
+ $stack13 = $stack5.getBrokerId();
+ $stack14=($stack13 cmp minBrokerId);
+ if ($stack14!=0) goto label0;
+ $stack18=1;
+ goto label1;
+ label0:$stack18=0;
+ label1:this.changeSpecialServiceStatus($stack18);
+ $stack5=this.brokerConfig;
+ $stack18 = $stack5.isForceRegister();
+ this.registerBrokerAll((boolean)1,(boolean)0,$stack18);
+ this.isIsolated=0;
+ return;
+ } 
+

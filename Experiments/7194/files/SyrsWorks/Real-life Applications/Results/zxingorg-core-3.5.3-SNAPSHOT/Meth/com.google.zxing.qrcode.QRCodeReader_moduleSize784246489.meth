@@ -1,0 +1,42 @@
+static float com.google.zxing.qrcode.QRCodeReader:moduleSize(int[] leftTopBlack,com.google.zxing.common.BitMatrix image)
+{
+int height;
+  int width;
+  int x;
+  int y;
+  boolean inBlack;
+  int transitions;
+  com.google.zxing.NotFoundException $stack10;
+  float $stack13;
+  boolean $stack17;
+  height = image.getHeight();
+ width = image.getWidth();
+ x=leftTopBlack[0];
+ y=leftTopBlack[1];
+ inBlack=1;
+ transitions=0;
+ label0:if (x>=width) goto label1;
+ if (y>=height) goto label1;
+ $stack17 = image.get(x,y);
+ if (inBlack==$stack17) goto label2;
+ transitions=(transitions+1);
+ if (transitions!=5) goto label3;
+ goto label1;
+ label3:if (inBlack!=0) goto label4;
+ inBlack=1;
+ goto label2;
+ label4:inBlack=0;
+ label2:x=(x+1);
+ y=(y+1);
+ goto label0;
+ label1:if (x==width) goto label5;
+ if (y!=height) goto label6;
+ label5:$stack10 = com.google.zxing.NotFoundException.getNotFoundInstance();
+ throw $stack10;
+ label6:height=leftTopBlack[0];
+ x=(x-height);
+ $stack13=(float) x;
+ $stack13=($stack13/7.0F);
+ return  $stack13;
+ } 
+

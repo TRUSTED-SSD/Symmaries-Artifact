@@ -1,0 +1,30 @@
+org.apache.kerby.kerberos.kerb.type.base.PrincipalName org.apache.kerby.kerberos.kerb.server.request.TicketIssuer:getclientPrincipal()
+{
+org.apache.kerby.kerberos.kerb.type.base.PrincipalName principalName;
+  org.apache.kerby.kerberos.kerb.server.request.KdcRequest $stack2;
+  boolean $stack3;
+  org.apache.kerby.kerberos.kerb.type.kdc.KdcReq $stack4;
+  org.apache.kerby.kerberos.kerb.type.kdc.KdcReqBody $stack5;
+  org.apache.kerby.kerberos.kerb.type.base.NameType $stack9;
+  org.apache.kerby.kerberos.kerb.type.base.AuthToken $stack13;
+  java.lang.String $stack14;
+  $stack2=this.kdcRequest;
+ $stack3 = $stack2.isToken();
+ if ($stack3==0) goto label0;
+ principalName=new org.apache.kerby.kerberos.kerb.type.base.PrincipalName;
+ $stack2=this.kdcRequest;
+ $stack13 = $stack2.getToken();
+ $stack14 = $stack13.getSubject();
+ principalName#org.apache.kerby.kerberos.kerb.type.base.PrincipalName($stack14);
+ return  principalName;
+ label0:$stack4 = this.getKdcReq();
+ $stack5 = $stack4.getReqBody();
+ principalName = $stack5.getCname();
+ $stack2 = this.getKdcRequest();
+ $stack3 = $stack2.isAnonymous();
+ if ($stack3==0) goto label1;
+ $stack9=org.apache.kerby.kerberos.kerb.type.base.NameType.NT_WELLKNOWN;
+ principalName.setNameType($stack9);
+ label1:return  principalName;
+ } 
+

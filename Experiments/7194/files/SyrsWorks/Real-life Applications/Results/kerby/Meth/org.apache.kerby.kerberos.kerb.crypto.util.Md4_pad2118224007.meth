@@ -1,0 +1,36 @@
+byte[] org.apache.kerby.kerberos.kerb.crypto.util.Md4:pad()
+{
+int pos;
+  byte[] pad;
+  long bits;
+  int i;
+  int $stack11;
+  int $stack12;
+  long $stack13;
+  byte $stack15;
+  bits=this.msgLength;
+ bits=(bits%64L);
+ pos=(int) bits;
+ if (pos>=56) goto label0;
+ pos=(64-pos);
+ goto label1;
+ label0:pos=(128-pos);
+ label1:pad=new byte[pos];
+ pad[0]=-128;
+ bits=this.msgLength;
+ bits=(bits<<3);
+ pos=(pos-8);
+ i=0;
+ label2:if (i>=8) goto label3;
+ $stack11=pos;
+ pos=(pos+1);
+ $stack12=(i<<3);
+ $stack13=(bits>>>$stack12);
+ $stack12=(int) $stack13;
+ $stack15=(byte) $stack12;
+ pad[$stack11]=$stack15;
+ i=(i+1);
+ goto label2;
+ label3:return  pad;
+ } 
+

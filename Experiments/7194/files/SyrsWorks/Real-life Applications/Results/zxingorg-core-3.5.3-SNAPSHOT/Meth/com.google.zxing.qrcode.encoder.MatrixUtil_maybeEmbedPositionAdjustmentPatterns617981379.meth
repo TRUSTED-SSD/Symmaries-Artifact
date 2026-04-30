@@ -1,0 +1,46 @@
+static void com.google.zxing.qrcode.encoder.MatrixUtil:maybeEmbedPositionAdjustmentPatterns(com.google.zxing.qrcode.decoder.Version version,com.google.zxing.qrcode.encoder.ByteMatrix matrix)
+{
+int index;
+  int[] coordinates;
+  int[] l4;
+  int l6;
+  int y;
+  int l9;
+  int l10;
+  int x;
+  int[][] $stack14;
+  byte $stack19;
+  boolean $stack20;
+  int $stack22;
+  index = version.getVersionNumber();
+ if (index>=2) goto label0;
+ return;
+ label0:index = version.getVersionNumber();
+ index=(index-1);
+ $stack14=com.google.zxing.qrcode.encoder.MatrixUtil.POSITION_ADJUSTMENT_PATTERN_COORDINATE_TABLE;
+ coordinates=$stack14[index];
+ l4=coordinates;
+ index=#coordinates;
+ l6=0;
+ label1:if (l6>=index) goto label2;
+ y=coordinates[l6];
+ if (y<0) goto label3;
+ l4=coordinates;
+ l9=#coordinates;
+ l10=0;
+ label4:if (l10>=l9) goto label3;
+ x=coordinates[l10];
+ if (x<0) goto label5;
+ $stack19 = matrix.get(x,y);
+ $stack20 = com.google.zxing.qrcode.encoder.MatrixUtil.isEmpty((int)$stack19);
+ if ($stack20==0) goto label5;
+ $stack22=(x-2);
+ x=(y-2);
+ com.google.zxing.qrcode.encoder.MatrixUtil.embedPositionAdjustmentPattern($stack22,x,matrix);
+ label5:l10=(l10+1);
+ goto label4;
+ label3:l6=(l6+1);
+ goto label1;
+ label2:return;
+ } 
+

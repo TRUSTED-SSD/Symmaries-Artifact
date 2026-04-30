@@ -1,0 +1,7 @@
+boolean org.apache.rocketmq.proxy.processor.ReceiptHandleProcessor:renewExceptionNeedRetry (
+  java.lang.Throwable @t) {
+  guard = tt;
+  ret(level()) = pc ⊔ level(@t) ⊔ obj_level(@t);
+  ret(obj_level(@t)) = if obj_level(@t) = ⊤ ∨ pc ≠ ⊤ ∧ level(@t) = ⊤ ∧ obj_level(@t) = ⊥ then ⊤ else ⊥;
+  ret(obj_level(this)) = if obj_level(@t) ⊔ obj_level(this) = ⊤ ∨ pc ≠ ⊤ ∧ level(@t) = ⊤ ∧ obj_level(@t) = ⊥ ∧ obj_level(this) = ⊥ then ⊤ else ⊥;
+}

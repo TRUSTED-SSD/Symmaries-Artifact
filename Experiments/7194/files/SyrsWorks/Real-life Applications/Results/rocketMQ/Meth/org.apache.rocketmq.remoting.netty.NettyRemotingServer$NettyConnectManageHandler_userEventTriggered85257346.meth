@@ -1,0 +1,39 @@
+void org.apache.rocketmq.remoting.netty.NettyRemotingServer$NettyConnectManageHandler:userEventTriggered(io.netty.channel.ChannelHandlerContext ctx,java.lang.Object evt)
+{
+io.netty.handler.timeout.IdleStateEvent event;
+  java.lang.String remoteAddress;
+  boolean $stack5;
+  io.netty.handler.timeout.IdleState $stack7;
+  io.netty.handler.timeout.IdleState $stack8;
+  io.netty.channel.Channel $stack12;
+  org.apache.rocketmq.logging.org.slf4j.Logger $stack14;
+  org.apache.rocketmq.remoting.netty.NettyRemotingServer $stack16;
+  org.apache.rocketmq.remoting.ChannelEventListener $stack17;
+  org.apache.rocketmq.remoting.netty.NettyEvent $stack18;
+  org.apache.rocketmq.remoting.netty.NettyEventType $stack20;
+  $stack5=evt instanceof io.netty.handler.timeout.IdleStateEvent;
+ if ($stack5==0) goto label0;
+ event=(io.netty.handler.timeout.IdleStateEvent) evt;
+ $stack7 = event.state();
+ $stack8=io.netty.handler.timeout.IdleState.ALL_IDLE;
+ $stack5 = $stack7.equals((java.lang.Object)$stack8);
+ if ($stack5==0) goto label0;
+ $stack12 = ctx.channel();
+ remoteAddress = org.apache.rocketmq.remoting.common.RemotingHelper.parseChannelRemoteAddr($stack12);
+ $stack14 = org.apache.rocketmq.remoting.netty.NettyRemotingServer.access$100();
+ $stack14.warn("NETTY SERVER PIPELINE: IDLE exception [{}]",(java.lang.Object)remoteAddress);
+ $stack12 = ctx.channel();
+ org.apache.rocketmq.remoting.common.RemotingHelper.closeChannel($stack12);
+ $stack16=this.this$0;
+ $stack17 = org.apache.rocketmq.remoting.netty.NettyRemotingServer.access$400($stack16);
+ if ($stack17==null) goto label0;
+ $stack16=this.this$0;
+ $stack18=new org.apache.rocketmq.remoting.netty.NettyEvent;
+ $stack20=org.apache.rocketmq.remoting.netty.NettyEventType.IDLE;
+ $stack12 = ctx.channel();
+ $stack18#org.apache.rocketmq.remoting.netty.NettyEvent($stack20,remoteAddress,$stack12);
+ $stack16.putNettyEvent($stack18);
+ label0:ctx.fireUserEventTriggered(evt);
+ return;
+ } 
+

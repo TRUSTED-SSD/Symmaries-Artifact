@@ -1,0 +1,19 @@
+static boolean com.google.zxing.qrcode.encoder.Encoder:willFit(int numInputBits,com.google.zxing.qrcode.decoder.Version version,com.google.zxing.qrcode.decoder.ErrorCorrectionLevel ecLevel)
+{
+int numBytes;
+  com.google.zxing.qrcode.decoder.Version$ECBlocks ecBlocks;
+  int numEcBytes;
+  boolean $stack12;
+  numBytes = version.getTotalCodewords();
+ ecBlocks = version.getECBlocksForLevel(ecLevel);
+ numEcBytes = ecBlocks.getTotalECCodewords();
+ numBytes=(numBytes-numEcBytes);
+ numInputBits=(numInputBits+7);
+ numInputBits=(numInputBits/8);
+ if (numBytes<numInputBits) goto label0;
+ $stack12=1;
+ goto label1;
+ label0:$stack12=0;
+ label1:return  $stack12;
+ } 
+

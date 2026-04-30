@@ -1,0 +1,30 @@
+void org.apache.bookkeeper.bookie.JournalChannel:preAllocIfNeeded(long size)
+{
+org.apache.bookkeeper.bookie.BufferedChannel $stack3;
+  long $stack4;
+  byte $stack7;
+  java.nio.ByteBuffer $stack11;
+  int $stack13;
+  java.nio.channels.FileChannel $stack18;
+  $stack3=this.bc;
+ $stack4 = $stack3.position();
+ $stack4=($stack4+size);
+ size=this.nextPrealloc;
+ $stack7=($stack4 cmp size);
+ if ($stack7<=0) goto label0;
+ $stack4=this.nextPrealloc;
+ size=this.preAllocSize;
+ size=($stack4+size);
+ this.nextPrealloc=size;
+ $stack11=this.zeros;
+ $stack11.clear();
+ $stack18=this.fc;
+ $stack11=this.zeros;
+ $stack4=this.nextPrealloc;
+ $stack13=this.journalAlignSize;
+ size=(long) $stack13;
+ size=($stack4-size);
+ $stack18.write($stack11,size);
+ label0:return;
+ } 
+

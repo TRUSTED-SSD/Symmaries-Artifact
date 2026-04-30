@@ -1,0 +1,52 @@
+static java.lang.String com.google.zxing.client.result.VCardResultParser:decodeQuotedPrintable(java.lang.CharSequence value,java.lang.String @charset)
+{
+int length;
+  java.lang.StringBuilder result;
+  java.io.ByteArrayOutputStream fragmentBuffer;
+  int i;
+  char c;
+  char nextNextChar;
+  int firstDigit;
+  int secondDigit;
+  java.lang.String charset;
+charset=@charset;
+length = value.length();
+ result=new java.lang.StringBuilder;
+ result#java.lang.StringBuilder(length);
+ fragmentBuffer=new java.io.ByteArrayOutputStream;
+ fragmentBuffer#java.io.ByteArrayOutputStream();
+ i=0;
+ label0:if (i>=length) goto label1;
+ c = value.charAt(i);
+ switch [c]
+if 0 goto label2;
+if 1 goto label2;
+if 2 goto label3;
+goto label4;
+ label2:goto label5;
+ label3:secondDigit=(length-2);
+ if (i>=secondDigit) goto label5;
+ secondDigit=(i+1);
+ c = value.charAt(secondDigit);
+ if (c==13) goto label6;
+ if (c==10) goto label6;
+ secondDigit=(i+2);
+ nextNextChar = value.charAt(secondDigit);
+ firstDigit = com.google.zxing.client.result.ResultParser.parseHexDigit(c);
+ secondDigit = com.google.zxing.client.result.ResultParser.parseHexDigit(nextNextChar);
+ if (firstDigit<0) goto label7;
+ if (secondDigit<0) goto label7;
+ firstDigit=(firstDigit<<4);
+ secondDigit=(firstDigit+secondDigit);
+ fragmentBuffer.write(secondDigit);
+ label7:i=(i+2);
+ label6:goto label5;
+ label4:com.google.zxing.client.result.VCardResultParser.maybeAppendFragment(fragmentBuffer,charset,result);
+ result.append(c);
+ label5:i=(i+1);
+ goto label0;
+ label1:com.google.zxing.client.result.VCardResultParser.maybeAppendFragment(fragmentBuffer,charset,result);
+ charset = result.toString();
+ return  charset;
+ } 
+

@@ -1,0 +1,23 @@
+static long org.apache.bookkeeper.meta.ZkLedgerIdGenerator:getLedgerIdFromGenPath(java.lang.String @nodeName,java.lang.String ledgerPrefix)
+{
+long ledgerId;
+  java.lang.String[] parts;
+  int $stack6;
+  java.lang.NumberFormatException $stack10;
+  java.io.IOException $stack11;
+  java.lang.String nodeName;
+nodeName=@nodeName;
+label0:parts = nodeName.split(ledgerPrefix);
+ $stack6=#parts;
+ $stack6=($stack6-1);
+ nodeName=parts[$stack6];
+ ledgerId = java.lang.Long.parseLong(nodeName);
+ label1:goto label2;
+ label3:$stack10 = catch;
+ $stack11=new java.io.IOException;
+ $stack11#java.io.IOException((java.lang.Throwable)$stack10);
+ throw $stack11;
+ label2:return  ledgerId;
+ catch java.lang.NumberFormatException: label0 - label1 : label3;
+} 
+

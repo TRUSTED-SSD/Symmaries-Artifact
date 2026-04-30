@@ -1,0 +1,33 @@
+void org.apache.rocketmq.remoting.netty.NettyEncoder:encode(io.netty.channel.ChannelHandlerContext ctx,org.apache.rocketmq.remoting.protocol.RemotingCommand remotingCommand,io.netty.buffer.ByteBuf out)
+{
+byte[] body;
+  java.lang.Exception $stack7;
+  java.lang.StringBuilder $stack8;
+  org.apache.rocketmq.logging.org.slf4j.Logger $stack9;
+  io.netty.channel.Channel $stack11;
+  java.lang.String $stack12;
+  label0:remotingCommand#org.apache.rocketmq.remoting.protocol.RemotingCommand(out);
+ body = remotingCommand.getBody();
+ if (body==null) goto label1;
+ out.writeBytes(body);
+ label1:goto label2;
+ label3:$stack7 = catch;
+ $stack9=org.apache.rocketmq.remoting.netty.NettyEncoder.log;
+ $stack8=new java.lang.StringBuilder;
+ $stack8#java.lang.StringBuilder();
+ $stack8 = $stack8.append("encode exception, ");
+ $stack11 = ctx.channel();
+ $stack12 = org.apache.rocketmq.remoting.common.RemotingHelper.parseChannelRemoteAddr($stack11);
+ $stack8 = $stack8.append($stack12);
+ $stack12 = $stack8.toString();
+ $stack9.error($stack12,(java.lang.Throwable)$stack7);
+ if (remotingCommand==null) goto label4;
+ $stack9=org.apache.rocketmq.remoting.netty.NettyEncoder.log;
+ $stack12 = remotingCommand.toString();
+ $stack9.error($stack12);
+ label4:$stack11 = ctx.channel();
+ org.apache.rocketmq.remoting.common.RemotingHelper.closeChannel($stack11);
+ label2:return;
+ catch java.lang.Exception: label0 - label1 : label3;
+} 
+

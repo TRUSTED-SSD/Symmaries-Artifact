@@ -1,0 +1,40 @@
+java.util.WeakHashMap$Entry java.util.WeakHashMap$HashIterator:nextEntry()
+{
+java.util.WeakHashMap $r1;
+  int $i0;
+  int $i1;
+  java.lang.Object $r2;
+  java.util.WeakHashMap$Entry $r3;
+  java.util.WeakHashMap$Entry $r4;
+  java.util.WeakHashMap$Entry $r5;
+  java.lang.Object $r6;
+  java.util.WeakHashMap$Entry $r7;
+  boolean $z0;
+  java.util.NoSuchElementException $r8;
+  java.util.ConcurrentModificationException $r9;
+  $r1=this.this$0;
+ $i1=$r1.modCount;
+ $i0=this.expectedModCount;
+ if ($i1==$i0) goto label0;
+ $r9=new java.util.ConcurrentModificationException;
+ $r9#java.util.ConcurrentModificationException:init();
+ throw $r9;
+ label0:$r2=this.nextKey;
+ if ($r2!=null) goto label1;
+ $z0 = this.hasNext();
+ if ($z0!=0) goto label1;
+ $r8=new java.util.NoSuchElementException;
+ $r8#java.util.NoSuchElementException:init();
+ throw $r8;
+ label1:$r3=this.entry;
+ this.lastReturned=$r3;
+ $r4=this.entry;
+ $r5=$r4.next;
+ this.entry=$r5;
+ $r6=this.nextKey;
+ this.currentKey=$r6;
+ this.nextKey=null;
+ $r7=this.lastReturned;
+ return  $r7;
+ }  
+

@@ -1,0 +1,45 @@
+java.util.HashMap org.apache.rocketmq.client.impl.consumer.RebalanceImpl:buildProcessQueueTableByBrokerName()
+{
+java.util.HashMap result;
+  java.util.Iterator l2;
+  java.util.Map$Entry entry;
+  org.apache.rocketmq.common.message.MessageQueue mq;
+  org.apache.rocketmq.client.impl.consumer.ProcessQueue pq;
+  java.lang.String destBrokerName;
+  java.util.Set mqs;
+  java.util.concurrent.ConcurrentMap $stack9;
+  boolean $stack12;
+  java.lang.Object $stack13;
+  org.apache.rocketmq.client.impl.factory.MQClientInstance $stack17;
+  java.util.HashSet $stack22;
+  result=new java.util.HashMap;
+ result#java.util.HashMap();
+ $stack9=this.processQueueTable;
+ mqs = $stack9.entrySet();
+ l2 = mqs.iterator();
+ label0:$stack12 = l2.hasNext();
+ if ($stack12==0) goto label1;
+ $stack13 = l2.next();
+ entry=(java.util.Map$Entry) $stack13;
+ $stack13 = entry.getKey();
+ mq=(org.apache.rocketmq.common.message.MessageQueue) $stack13;
+ $stack13 = entry.getValue();
+ pq=(org.apache.rocketmq.client.impl.consumer.ProcessQueue) $stack13;
+ $stack12 = pq.isDropped();
+ if ($stack12==0) goto label2;
+ goto label0;
+ label2:$stack17=this.mQClientFactory;
+ destBrokerName = $stack17.getBrokerNameFromMessageQueue(mq);
+ $stack13 = result.get((java.lang.Object)destBrokerName);
+ mqs=(java.util.Set) $stack13;
+ if (null!=mqs) goto label3;
+ $stack22=new java.util.HashSet;
+ $stack22#java.util.HashSet();
+ mqs=$stack22;
+ destBrokerName = mq.getBrokerName();
+ result.put((java.lang.Object)destBrokerName,(java.lang.Object)$stack22);
+ label3:mqs.add((java.lang.Object)mq);
+ goto label0;
+ label1:return  result;
+ } 
+

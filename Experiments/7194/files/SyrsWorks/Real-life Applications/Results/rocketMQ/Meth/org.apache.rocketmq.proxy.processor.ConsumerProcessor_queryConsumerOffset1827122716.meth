@@ -1,0 +1,39 @@
+java.util.concurrent.CompletableFuture org.apache.rocketmq.proxy.processor.ConsumerProcessor:queryConsumerOffset(org.apache.rocketmq.proxy.common.ProxyContext ctx,org.apache.rocketmq.common.message.MessageQueue messageQueue,java.lang.String @consumerGroup,long timeoutMillis)
+{
+java.util.concurrent.CompletableFuture future;
+  org.apache.rocketmq.proxy.service.route.AddressableMessageQueue addressableMessageQueue;
+  org.apache.rocketmq.remoting.protocol.header.QueryConsumerOffsetRequestHeader requestHeader;
+  org.apache.rocketmq.proxy.service.ServiceManager $stack10;
+  org.apache.rocketmq.proxy.service.route.TopicRouteService $stack11;
+  int $stack15;
+  java.lang.Integer $stack16;
+  org.apache.rocketmq.proxy.service.message.MessageService $stack18;
+  java.util.concurrent.ExecutorService $stack20;
+  java.lang.Throwable $stack22;
+  java.lang.String consumerGroup;
+consumerGroup=@consumerGroup;
+future=new java.util.concurrent.CompletableFuture;
+ future#java.util.concurrent.CompletableFuture();
+ label0:$stack10=this.serviceManager;
+ $stack11 = $stack10.getTopicRouteService();
+ addressableMessageQueue = $stack11.buildAddressableMessageQueue(messageQueue);
+ requestHeader=new org.apache.rocketmq.remoting.protocol.header.QueryConsumerOffsetRequestHeader;
+ requestHeader#org.apache.rocketmq.remoting.protocol.header.QueryConsumerOffsetRequestHeader();
+ requestHeader.setConsumerGroup(consumerGroup);
+ consumerGroup = addressableMessageQueue.getTopic();
+ requestHeader.setTopic(consumerGroup);
+ $stack15 = addressableMessageQueue.getQueueId();
+ $stack16 = java.lang.Integer.valueOf($stack15);
+ requestHeader.setQueueId($stack16);
+ $stack10=this.serviceManager;
+ $stack18 = $stack10.getMessageService();
+ future = $stack18.queryConsumerOffset(ctx,addressableMessageQueue,requestHeader,timeoutMillis);
+ label1:goto label2;
+ label3:$stack22 = catch;
+ future.completeExceptionally($stack22);
+ label2:$stack20=this.executor;
+ future = org.apache.rocketmq.proxy.common.utils.FutureUtils.addExecutor(future,$stack20);
+ return  future;
+ catch java.lang.Throwable: label0 - label1 : label3;
+} 
+

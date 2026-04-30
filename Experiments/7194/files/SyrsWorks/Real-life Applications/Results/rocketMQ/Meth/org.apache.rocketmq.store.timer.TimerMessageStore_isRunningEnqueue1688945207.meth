@@ -1,0 +1,22 @@
+boolean org.apache.rocketmq.store.timer.TimerMessageStore:isRunningEnqueue()
+{
+boolean $stack1;
+  org.apache.rocketmq.store.timer.TimerCheckpoint $stack5;
+  long $stack6;
+  long $stack7;
+  byte $stack8;
+  this#org.apache.rocketmq.store.timer.TimerMessageStore:checkBrokerRole();
+ $stack1=this.shouldRunningDequeue;
+ if ($stack1!=0) goto label0;
+ $stack1 = this.isMaster();
+ if ($stack1!=0) goto label0;
+ $stack6=this.currQueueOffset;
+ $stack5=this.timerCheckpoint;
+ $stack7 = $stack5.getMasterTimerQueueOffset();
+ $stack8=($stack6 cmp $stack7);
+ if ($stack8<0) goto label0;
+ return  0;
+ label0:$stack1 = this#org.apache.rocketmq.store.timer.TimerMessageStore:isRunning();
+ return  $stack1;
+ } 
+

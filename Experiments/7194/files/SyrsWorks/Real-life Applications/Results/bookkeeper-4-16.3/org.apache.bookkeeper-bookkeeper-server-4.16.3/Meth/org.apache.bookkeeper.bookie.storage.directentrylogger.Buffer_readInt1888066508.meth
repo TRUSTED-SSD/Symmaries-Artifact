@@ -1,0 +1,42 @@
+int org.apache.bookkeeper.bookie.storage.directentrylogger.Buffer:readInt(int offset)
+{
+boolean $stack3;
+  java.nio.ByteBuffer $stack4;
+  int $stack5;
+  java.io.IOException $stack6;
+  org.apache.bookkeeper.common.util.ExceptionMessageHelper $stack7;
+  java.lang.Integer $stack9;
+  java.lang.String $stack15;
+  java.lang.Exception $stack16;
+  $stack3 = this.hasData(offset,4);
+ if ($stack3!=0) goto label0;
+ $stack6=new java.io.IOException;
+ $stack7 = org.apache.bookkeeper.common.util.ExceptionMessageHelper.exMsg("Buffer cannot satify int read");
+ $stack9 = java.lang.Integer.valueOf(offset);
+ $stack7 = $stack7.kv("offset",(java.lang.Object)$stack9);
+ offset=this.bufferSize;
+ $stack9 = java.lang.Integer.valueOf(offset);
+ $stack7 = $stack7.kv("bufferSize",(java.lang.Object)$stack9);
+ $stack15 = $stack7.toString();
+ $stack6#java.io.IOException($stack15);
+ throw $stack6;
+ label0:$stack4=this.byteBuffer;
+ $stack5 = $stack4.getInt(offset);
+ label1:return  $stack5;
+ label2:$stack16 = catch;
+ $stack6=new java.io.IOException;
+ $stack7 = org.apache.bookkeeper.common.util.ExceptionMessageHelper.exMsg("Error reading int");
+ $stack4=this.byteBuffer;
+ $stack15 = $stack4.toString();
+ $stack7 = $stack7.kv("byteBuffer",(java.lang.Object)$stack15);
+ $stack9 = java.lang.Integer.valueOf(offset);
+ $stack7 = $stack7.kv("offset",(java.lang.Object)$stack9);
+ offset=this.bufferSize;
+ $stack9 = java.lang.Integer.valueOf(offset);
+ $stack7 = $stack7.kv("bufferSize",(java.lang.Object)$stack9);
+ $stack15 = $stack7.toString();
+ $stack6#java.io.IOException($stack15,(java.lang.Throwable)$stack16);
+ throw $stack6;
+ catch java.lang.Exception: label0 - label1 : label2;
+} 
+

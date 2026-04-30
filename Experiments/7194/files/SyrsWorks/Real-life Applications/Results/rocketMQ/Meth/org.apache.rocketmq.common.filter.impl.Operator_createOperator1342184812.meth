@@ -1,0 +1,43 @@
+static org.apache.rocketmq.common.filter.impl.Operator org.apache.rocketmq.common.filter.impl.Operator:createOperator(java.lang.String @operator)
+{
+org.apache.rocketmq.common.filter.impl.Operator $stack1;
+  java.lang.String $stack2;
+  boolean $stack3;
+  java.lang.IllegalArgumentException $stack13;
+  java.lang.StringBuilder $stack14;
+  java.lang.String operator;
+operator=@operator;
+$stack1=org.apache.rocketmq.common.filter.impl.Operator.LEFTPARENTHESIS;
+ $stack2 = $stack1.getSymbol();
+ $stack3 = $stack2.equals((java.lang.Object)operator);
+ if ($stack3==0) goto label0;
+ $stack1=org.apache.rocketmq.common.filter.impl.Operator.LEFTPARENTHESIS;
+ return  $stack1;
+ label0:$stack1=org.apache.rocketmq.common.filter.impl.Operator.RIGHTPARENTHESIS;
+ $stack2 = $stack1.getSymbol();
+ $stack3 = $stack2.equals((java.lang.Object)operator);
+ if ($stack3==0) goto label1;
+ $stack1=org.apache.rocketmq.common.filter.impl.Operator.RIGHTPARENTHESIS;
+ return  $stack1;
+ label1:$stack1=org.apache.rocketmq.common.filter.impl.Operator.AND;
+ $stack2 = $stack1.getSymbol();
+ $stack3 = $stack2.equals((java.lang.Object)operator);
+ if ($stack3==0) goto label2;
+ $stack1=org.apache.rocketmq.common.filter.impl.Operator.AND;
+ return  $stack1;
+ label2:$stack1=org.apache.rocketmq.common.filter.impl.Operator.OR;
+ $stack2 = $stack1.getSymbol();
+ $stack3 = $stack2.equals((java.lang.Object)operator);
+ if ($stack3==0) goto label3;
+ $stack1=org.apache.rocketmq.common.filter.impl.Operator.OR;
+ return  $stack1;
+ label3:$stack13=new java.lang.IllegalArgumentException;
+ $stack14=new java.lang.StringBuilder;
+ $stack14#java.lang.StringBuilder();
+ $stack14 = $stack14.append("unsupport operator ");
+ $stack14 = $stack14.append(operator);
+ operator = $stack14.toString();
+ $stack13#java.lang.IllegalArgumentException(operator);
+ throw $stack13;
+ } 
+

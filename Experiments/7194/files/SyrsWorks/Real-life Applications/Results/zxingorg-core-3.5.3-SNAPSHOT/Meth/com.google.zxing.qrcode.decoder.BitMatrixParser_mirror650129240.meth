@@ -1,0 +1,32 @@
+void com.google.zxing.qrcode.decoder.BitMatrixParser:mirror()
+{
+int x;
+  int y;
+  com.google.zxing.common.BitMatrix $stack3;
+  int $stack6;
+  boolean $stack10;
+  boolean $stack12;
+  x=0;
+ label0:$stack3=this.bitMatrix;
+ y = $stack3.getWidth();
+ if (x>=y) goto label1;
+ y=(x+1);
+ label2:$stack3=this.bitMatrix;
+ $stack6 = $stack3.getHeight();
+ if (y>=$stack6) goto label3;
+ $stack3=this.bitMatrix;
+ $stack10 = $stack3.get(x,y);
+ $stack3=this.bitMatrix;
+ $stack12 = $stack3.get(y,x);
+ if ($stack10==$stack12) goto label4;
+ $stack3=this.bitMatrix;
+ $stack3.flip(y,x);
+ $stack3=this.bitMatrix;
+ $stack3.flip(x,y);
+ label4:y=(y+1);
+ goto label2;
+ label3:x=(x+1);
+ goto label0;
+ label1:return;
+ } 
+

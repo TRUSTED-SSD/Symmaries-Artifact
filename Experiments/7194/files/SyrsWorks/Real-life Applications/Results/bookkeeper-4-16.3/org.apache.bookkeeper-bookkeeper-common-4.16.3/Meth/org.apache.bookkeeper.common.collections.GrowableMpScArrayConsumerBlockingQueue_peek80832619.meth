@@ -1,0 +1,32 @@
+java.lang.Object org.apache.bookkeeper.common.collections.GrowableMpScArrayConsumerBlockingQueue:peek()
+{
+long stamp;
+  java.lang.Object l3;
+  java.lang.Throwable l4;
+  java.util.concurrent.atomic.AtomicInteger $stack5;
+  int $stack6;
+  java.util.concurrent.locks.StampedLock $stack7;
+  org.apache.bookkeeper.common.collections.GrowableMpScArrayConsumerBlockingQueue$PaddedInt $stack9;
+  java.lang.Object[] $stack11;
+  $stack5=this.size;
+ $stack6 = $stack5.get();
+ if ($stack6<=0) goto label0;
+ $stack7=this.headLock;
+ stamp = $stack7.readLock();
+dummyClass.highSourceMut(stamp);
+ label1:$stack11=this.data;
+ $stack9=this.headIndex;
+ $stack6=$stack9.value;
+ l3=$stack11[$stack6];
+ label2:$stack7=this.headLock;
+ $stack7.unlockRead(stamp);
+ return  l3;
+ label3:l4 = catch;
+ label4:$stack7=this.headLock;
+ $stack7.unlockRead(stamp);
+ throw l4;
+ label0:return  null;
+ catch java.lang.Throwable: label1 - label2 : label3;
+catch java.lang.Throwable: label3 - label4 : label3;
+} 
+

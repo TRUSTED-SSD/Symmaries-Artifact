@@ -1,0 +1,20 @@
+boolean org.apache.rocketmq.util.cache.LocalCache:removeEldestEntry(java.util.Map$Entry eldest)
+{
+boolean result;
+  int $stack3;
+  int $stack4;
+  org.apache.rocketmq.util.cache.CacheEvictHandler $stack5;
+  $stack3 = this.size();
+ $stack4=this.cacheSize;
+ if ($stack3<=$stack4) goto label0;
+ result=1;
+ goto label1;
+ label0:result=0;
+ label1:if (result==0) goto label2;
+ $stack5=this.handler;
+ if ($stack5==null) goto label2;
+ $stack5=this.handler;
+ $stack5.onEvict(eldest);
+ label2:return  result;
+ } 
+

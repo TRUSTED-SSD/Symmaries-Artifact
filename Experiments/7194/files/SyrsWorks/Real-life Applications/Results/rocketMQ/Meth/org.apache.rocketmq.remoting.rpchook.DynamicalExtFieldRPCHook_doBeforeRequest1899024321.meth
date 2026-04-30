@@ -1,0 +1,18 @@
+void org.apache.rocketmq.remoting.rpchook.DynamicalExtFieldRPCHook:doBeforeRequest(java.lang.String @remoteAddr,org.apache.rocketmq.remoting.protocol.RemotingCommand request)
+{
+boolean $stack8;
+  java.lang.String remoteAddr;
+remoteAddr=@remoteAddr;
+remoteAddr = java.lang.System.getenv("ROCKETMQ_ZONE");
+ remoteAddr = java.lang.System.getProperty("rocketmq.zone",remoteAddr);
+ $stack8 = org.apache.commons.lang3.StringUtils.isNotBlank((java.lang.CharSequence)remoteAddr);
+ if ($stack8==0) goto label0;
+ request.addExtField("__ZONE_NAME",remoteAddr);
+ label0:remoteAddr = java.lang.System.getenv("ROCKETMQ_ZONE_MODE");
+ remoteAddr = java.lang.System.getProperty("rocketmq.zone.mode",remoteAddr);
+ $stack8 = org.apache.commons.lang3.StringUtils.isNotBlank((java.lang.CharSequence)remoteAddr);
+ if ($stack8==0) goto label1;
+ request.addExtField("__ZONE_MODE",remoteAddr);
+ label1:return;
+ } 
+

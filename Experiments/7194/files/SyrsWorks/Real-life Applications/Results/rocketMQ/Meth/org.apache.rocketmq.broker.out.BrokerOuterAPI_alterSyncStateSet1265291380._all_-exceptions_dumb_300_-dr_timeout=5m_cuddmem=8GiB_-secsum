@@ -1,0 +1,13 @@
+org.apache.rocketmq.remoting.protocol.body.SyncStateSet org.apache.rocketmq.broker.out.BrokerOuterAPI:alterSyncStateSet (
+  java.lang.String @controllerAddress, java.lang.String brokerName,
+  java.lang.String masterAddress, int masterEpoch,
+  java.util.Set newSyncStateSet, int syncStateSetEpoch) {
+  guard = tt;
+  ret(level()) = level(@controllerAddress) ⊔ level(newSyncStateSet) ⊔ level(syncStateSetEpoch) ⊔ level(this) ⊔ obj_level(@controllerAddress) ⊔ obj_level(newSyncStateSet) ⊔ obj_level(this);
+  ret(obj_level()) = level(@controllerAddress) ⊔ level(newSyncStateSet) ⊔ level(syncStateSetEpoch) ⊔ level(this) ⊔ obj_level(@controllerAddress) ⊔ obj_level(newSyncStateSet) ⊔ obj_level(this);
+  ret(obj_level(@controllerAddress)) = level(newSyncStateSet) ⊔ level(syncStateSetEpoch) ⊔ obj_level(@controllerAddress) ⊔ obj_level(newSyncStateSet);
+  ret(obj_level(brokerName)) = level(newSyncStateSet) ⊔ level(syncStateSetEpoch) ⊔ obj_level(brokerName) ⊔ obj_level(newSyncStateSet);
+  ret(obj_level(masterAddress)) = level(newSyncStateSet) ⊔ level(syncStateSetEpoch) ⊔ obj_level(masterAddress) ⊔ obj_level(newSyncStateSet);
+  ret(obj_level(newSyncStateSet)) = level(@controllerAddress) ⊔ level(newSyncStateSet) ⊔ level(syncStateSetEpoch) ⊔ level(this) ⊔ obj_level(@controllerAddress) ⊔ obj_level(newSyncStateSet) ⊔ obj_level(this);
+  ret(obj_level(this)) = level(@controllerAddress) ⊔ level(newSyncStateSet) ⊔ level(syncStateSetEpoch) ⊔ level(this) ⊔ obj_level(@controllerAddress) ⊔ obj_level(newSyncStateSet) ⊔ obj_level(this);
+}

@@ -1,0 +1,29 @@
+static boolean org.apache.rocketmq.tieredstore.container.TieredMessageQueueContainer:lambda$getInflightRequest$3(long offset,int batchSize,java.util.Map$Entry entry)
+{
+org.apache.rocketmq.tieredstore.common.InflightRequestKey key;
+  java.lang.Object $stack5;
+  long $stack6;
+  long $stack8;
+  int $stack9;
+  long $stack10;
+  byte $stack15;
+  boolean $stack16;
+  $stack5 = entry.getKey();
+ key=(org.apache.rocketmq.tieredstore.common.InflightRequestKey) $stack5;
+ $stack6 = key.getOffset();
+ $stack6 = java.lang.Math.max($stack6,offset);
+ $stack8 = key.getOffset();
+ $stack9 = key.getBatchSize();
+ $stack10=(long) $stack9;
+ $stack8=($stack8+$stack10);
+ $stack10=(long) batchSize;
+ offset=(offset+$stack10);
+ offset = java.lang.Math.min($stack8,offset);
+ $stack15=($stack6 cmp offset);
+ if ($stack15>0) goto label0;
+ $stack16=1;
+ goto label1;
+ label0:$stack16=0;
+ label1:return  $stack16;
+ } 
+

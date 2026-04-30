@@ -1,0 +1,29 @@
+void org.apache.bookkeeper.bookie.DefaultEntryLogger:removeFromChannelsAndClose(long logId)
+{
+java.nio.channels.FileChannel fileChannel;
+  java.io.IOException e;
+  java.util.concurrent.ConcurrentMap $stack5;
+  java.lang.Long $stack6;
+  java.lang.Object $stack7;
+  java.lang.StringBuilder $stack9;
+  org.slf4j.Logger $stack10;
+  java.lang.String $stack13;
+  $stack5=this.logid2FileChannel;
+ $stack6 = java.lang.Long.valueOf(logId);
+ $stack7 = $stack5.remove((java.lang.Object)$stack6);
+ fileChannel=(java.nio.channels.FileChannel) $stack7;
+ if (null==fileChannel) goto label0;
+ label1:fileChannel.close();
+ label2:goto label0;
+ label3:e = catch;
+ $stack10=org.apache.bookkeeper.bookie.DefaultEntryLogger.LOG;
+ $stack9=new java.lang.StringBuilder;
+ $stack9#java.lang.StringBuilder();
+ $stack9 = $stack9.append("Exception while closing channel for log file:");
+ $stack9 = $stack9.append(logId);
+ $stack13 = $stack9.toString();
+ $stack10.warn($stack13);
+ label0:return;
+ catch java.io.IOException: label1 - label2 : label3;
+} 
+

@@ -1,0 +1,27 @@
+org.apache.bookkeeper.bookie.LedgerCache$LedgerIndexMetadata org.apache.bookkeeper.bookie.IndexPersistenceMgr:readLedgerIndexMetadata(long ledgerId)
+{
+org.apache.bookkeeper.bookie.FileInfoBackingCache$CachedFileInfo fi;
+  org.apache.bookkeeper.bookie.LedgerCache$LedgerIndexMetadata l4;
+  java.lang.Throwable l5;
+  java.lang.Long $stack6;
+  byte[] $stack9;
+  boolean $stack11;
+  fi=null;
+ label0:$stack6 = java.lang.Long.valueOf(ledgerId);
+ fi = this.getFileInfo($stack6,null);
+ l4=new org.apache.bookkeeper.bookie.LedgerCache$LedgerIndexMetadata;
+ $stack9 = fi.getMasterKey();
+ ledgerId = fi.size();
+ $stack11 = fi.isFenced();
+ l4#org.apache.bookkeeper.bookie.LedgerCache$LedgerIndexMetadata($stack9,ledgerId,$stack11);
+ label1:if (fi==null) goto label2;
+ fi.release();
+ label2:return  l4;
+ label3:l5 = catch;
+ label4:if (fi==null) goto label5;
+ fi.release();
+ label5:throw l5;
+ catch java.lang.Throwable: label0 - label1 : label3;
+catch java.lang.Throwable: label3 - label4 : label3;
+} 
+

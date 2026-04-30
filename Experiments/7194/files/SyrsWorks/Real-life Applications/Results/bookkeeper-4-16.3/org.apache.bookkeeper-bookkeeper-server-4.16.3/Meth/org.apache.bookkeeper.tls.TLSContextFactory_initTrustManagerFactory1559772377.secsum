@@ -1,0 +1,11 @@
+javax.net.ssl.TrustManagerFactory org.apache.bookkeeper.tls.TLSContextFactory:initTrustManagerFactory (
+  java.lang.String @trustStoreType, java.lang.String trustStoreLocation,
+  java.lang.String trustStorePasswordPath) {
+  guard = pc ⊔ level(trustStoreLocation) ⊔ obj_level(trustStoreLocation) = ⊥;
+  ret(level()) = ⊥;
+  ret(obj_level()) = level(@trustStoreType) ⊔ level(trustStorePasswordPath) ⊔ obj_level(@trustStoreType) ⊔ obj_level(this);
+  ret(obj_level(@trustStoreType)) = level(@trustStoreType) ⊔ level(trustStorePasswordPath) ⊔ obj_level(@trustStoreType) ⊔ obj_level(this);
+  ret(obj_level(this)) = level(@trustStoreType) ⊔ level(trustStorePasswordPath) ⊔ obj_level(@trustStoreType) ⊔ obj_level(this);
+  ret(obj_level(trustStoreLocation)) = level(@trustStoreType) ⊔ level(trustStorePasswordPath) ⊔ obj_level(@trustStoreType) ⊔ obj_level(this);
+  ret(obj_level(trustStorePasswordPath)) = level(@trustStoreType) ⊔ level(trustStorePasswordPath) ⊔ obj_level(@trustStoreType) ⊔ obj_level(this);
+}

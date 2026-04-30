@@ -1,0 +1,53 @@
+void java.util.BitSet:or(java.util.BitSet r1)
+{
+int i0;
+  int $i1;
+  int $i2;
+  int $i3;
+  int $i4;
+  int $i5;
+  int $i6;
+  int $i7;
+  long[] $r2;
+  long[] $r3;
+  long[] $r4;
+  long[] $r5;
+  long $l8;
+  long $l9;
+  long $l10;
+  int $i11;
+  int $i12;
+  int i13;
+  if (this!=r1) goto label0;
+ return;
+ label0:$i2=this.wordsInUse;
+ $i1=r1.wordsInUse;
+ i0 = java.lang.Math.min($i2,$i1);
+ $i4=this.wordsInUse;
+ $i3=r1.wordsInUse;
+ if ($i4>=$i3) goto label1;
+ $i11=r1.wordsInUse;
+ this#java.util.BitSet:ensureCapacity($i11);
+ $i12=r1.wordsInUse;
+ this.wordsInUse=$i12;
+ label1:i13=0;
+ label2:if (i13>=i0) goto label3;
+ $r4=this.words;
+ $l9=$r4[i13];
+ $r5=r1.words;
+ $l8=$r5[i13];
+ $l10=($l9 | $l8);
+ $r4[i13]=$l10;
+ i13=(i13+1);
+ goto label2;
+ label3:$i5=r1.wordsInUse;
+ if (i0>=$i5) goto label4;
+ $r3=r1.words;
+ $r2=this.words;
+ $i6=this.wordsInUse;
+ $i7=($i6-i0);
+ java.lang.System.native_arraycopy((java.lang.Object)$r3,i0,(java.lang.Object)$r2,i0,$i7);
+ label4:this#java.util.BitSet:checkInvariants();
+ return;
+ }  
+

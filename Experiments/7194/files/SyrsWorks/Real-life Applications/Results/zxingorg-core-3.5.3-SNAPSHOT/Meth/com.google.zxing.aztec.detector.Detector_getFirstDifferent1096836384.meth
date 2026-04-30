@@ -1,0 +1,43 @@
+com.google.zxing.aztec.detector.Detector$Point com.google.zxing.aztec.detector.Detector:getFirstDifferent(com.google.zxing.aztec.detector.Detector$Point @init,boolean color,int dx,int dy)
+{
+int x;
+  int y;
+  boolean $stack9;
+  com.google.zxing.common.BitMatrix $stack13;
+  com.google.zxing.aztec.detector.Detector$Point init;
+init=@init;
+x = init.getX();
+ x=(x+dx);
+ y = init.getY();
+ y=(y+dy);
+ label0:$stack9 = this#com.google.zxing.aztec.detector.Detector:isValid(x,y);
+ if ($stack9==0) goto label1;
+ $stack13=this.image;
+ $stack9 = $stack13.get(x,y);
+ if ($stack9!=color) goto label1;
+ x=(x+dx);
+ y=(y+dy);
+ goto label0;
+ label1:x=(x-dx);
+ y=(y-dy);
+ label2:$stack9 = this#com.google.zxing.aztec.detector.Detector:isValid(x,y);
+ if ($stack9==0) goto label3;
+ $stack13=this.image;
+ $stack9 = $stack13.get(x,y);
+ if ($stack9!=color) goto label3;
+ x=(x+dx);
+ goto label2;
+ label3:x=(x-dx);
+ label4:$stack9 = this#com.google.zxing.aztec.detector.Detector:isValid(x,y);
+ if ($stack9==0) goto label5;
+ $stack13=this.image;
+ $stack9 = $stack13.get(x,y);
+ if ($stack9!=color) goto label5;
+ y=(y+dy);
+ goto label4;
+ label5:init=new com.google.zxing.aztec.detector.Detector$Point;
+ dx=(y-dy);
+ init#com.google.zxing.aztec.detector.Detector$Point(x,dx);
+ return  init;
+ } 
+

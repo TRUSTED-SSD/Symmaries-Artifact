@@ -1,0 +1,22 @@
+void org.apache.rocketmq.broker.topic.TopicQueueMappingManager:delete(java.lang.String topic)
+{
+org.apache.rocketmq.remoting.protocol.statictopic.TopicQueueMappingDetail old;
+  java.util.concurrent.ConcurrentMap $stack3;
+  java.lang.Object $stack4;
+  org.apache.rocketmq.logging.org.slf4j.Logger $stack5;
+  org.apache.rocketmq.remoting.protocol.DataVersion $stack7;
+  $stack3=this.topicQueueMappingTable;
+ $stack4 = $stack3.remove((java.lang.Object)topic);
+ old=(org.apache.rocketmq.remoting.protocol.statictopic.TopicQueueMappingDetail) $stack4;
+ if (old==null) goto label0;
+ $stack5=org.apache.rocketmq.broker.topic.TopicQueueMappingManager.log;
+ $stack5.info("delete topic queue mapping OK, static topic queue mapping: {}",(java.lang.Object)old);
+ $stack7=this.dataVersion;
+ $stack7.nextVersion();
+ this.persist();
+ goto label1;
+ label0:$stack5=org.apache.rocketmq.broker.topic.TopicQueueMappingManager.log;
+ $stack5.warn("delete topic queue mapping failed, static topic: {} not exists",(java.lang.Object)topic);
+ label1:return;
+ } 
+

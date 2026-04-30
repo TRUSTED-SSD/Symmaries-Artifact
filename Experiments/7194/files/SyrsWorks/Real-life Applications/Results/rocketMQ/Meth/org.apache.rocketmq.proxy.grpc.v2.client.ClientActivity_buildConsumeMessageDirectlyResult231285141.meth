@@ -1,0 +1,27 @@
+org.apache.rocketmq.remoting.protocol.body.ConsumeMessageDirectlyResult org.apache.rocketmq.proxy.grpc.v2.client.ClientActivity:buildConsumeMessageDirectlyResult(apache.rocketmq.v2.Status status,apache.rocketmq.v2.VerifyMessageResult request)
+{
+org.apache.rocketmq.remoting.protocol.body.ConsumeMessageDirectlyResult consumeMessageDirectlyResult;
+  apache.rocketmq.v2.Code $stack5;
+  int $stack6;
+  org.apache.rocketmq.remoting.protocol.body.CMResult $stack7;
+  consumeMessageDirectlyResult=new org.apache.rocketmq.remoting.protocol.body.ConsumeMessageDirectlyResult;
+ consumeMessageDirectlyResult#org.apache.rocketmq.remoting.protocol.body.ConsumeMessageDirectlyResult();
+ $stack5 = status.getCode();
+ $stack6 = $stack5.getNumber();
+ switch [$stack6]
+if 0 goto label0;
+if 1 goto label1;
+if 2 goto label2;
+goto label3;
+ label0:$stack7=org.apache.rocketmq.remoting.protocol.body.CMResult.CR_SUCCESS;
+ consumeMessageDirectlyResult.setConsumeResult($stack7);
+ goto label3;
+ label2:$stack7=org.apache.rocketmq.remoting.protocol.body.CMResult.CR_LATER;
+ consumeMessageDirectlyResult.setConsumeResult($stack7);
+ goto label3;
+ label1:$stack7=org.apache.rocketmq.remoting.protocol.body.CMResult.CR_RETURN_NULL;
+ consumeMessageDirectlyResult.setConsumeResult($stack7);
+ label3:consumeMessageDirectlyResult.setRemark("from gRPC client");
+ return  consumeMessageDirectlyResult;
+ } 
+

@@ -1,0 +1,46 @@
+    public static org.junit.experimental.max.MaxHistory forFolder(java.io.File)
+    {
+        java.io.File file;
+        boolean $stack2;
+        org.junit.experimental.max.MaxHistory $stack3;
+        org.junit.experimental.max.CouldNotReadCoreException $stack5;
+
+        file := @parameter0: java.io.File;
+
+        $stack2 = virtualinvoke file.<java.io.File: boolean exists()>();
+/*34*/
+
+        if $stack2 == 0 goto label4;
+/*34*/
+
+     label1:
+        $stack3 = staticinvoke <org.junit.experimental.max.MaxHistory: org.junit.experimental.max.MaxHistory readHistory(java.io.File)>(file);
+/*36*/
+
+     label2:
+        return $stack3;
+/*36*/
+
+     label3:
+        $stack5 := @caughtexception;
+/*36*/
+
+        virtualinvoke $stack5.<org.junit.experimental.max.CouldNotReadCoreException: void printStackTrace()>();
+/*38*/
+
+        virtualinvoke file.<java.io.File: boolean delete()>();
+/*39*/
+
+     label4:
+        $stack3 = new org.junit.experimental.max.MaxHistory;
+/*42*/
+
+        specialinvoke $stack3.<org.junit.experimental.max.MaxHistory: void <init>(java.io.File)>(file);
+/*42*/
+
+        return $stack3;
+/*42*/
+
+        catch org.junit.experimental.max.CouldNotReadCoreException from label1 to label2 with label3;
+    }
+

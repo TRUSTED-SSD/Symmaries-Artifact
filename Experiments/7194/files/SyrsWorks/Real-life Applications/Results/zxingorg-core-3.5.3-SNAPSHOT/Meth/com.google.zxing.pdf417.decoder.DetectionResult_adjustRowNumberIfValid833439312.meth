@@ -1,0 +1,16 @@
+static int com.google.zxing.pdf417.decoder.DetectionResult:adjustRowNumberIfValid(int rowIndicatorRowNumber,int invalidRowCounts,com.google.zxing.pdf417.decoder.Codeword codeword)
+{
+boolean $stack3;
+  if (codeword!=null) goto label0;
+ return  invalidRowCounts;
+ label0:$stack3 = codeword.hasValidRowNumber();
+ if ($stack3!=0) goto label1;
+ $stack3 = codeword.isValidRowNumber(rowIndicatorRowNumber);
+ if ($stack3==0) goto label2;
+ codeword.setRowNumber(rowIndicatorRowNumber);
+ invalidRowCounts=0;
+ goto label1;
+ label2:invalidRowCounts=(invalidRowCounts+1);
+ label1:return  invalidRowCounts;
+ } 
+

@@ -1,0 +1,31 @@
+void java.util.LinkedHashMap$LinkedEntrySet:forEach(java.util.function.Consumer r1)
+{
+int i0;
+  java.util.LinkedHashMap $r2;
+  java.util.LinkedHashMap $r3;
+  java.util.LinkedHashMap $r4;
+  int $i1;
+  java.util.ConcurrentModificationException $r5;
+  java.lang.NullPointerException $r6;
+  java.util.LinkedHashMap$Entry r7;
+  if (r1!=null) goto label0;
+ $r6=new java.lang.NullPointerException;
+ $r6#java.lang.NullPointerException:init();
+ throw $r6;
+ label0:$r2=this.this$0;
+ i0=$r2.modCount;
+ $r3=this.this$0;
+ r7=$r3.head;
+ label1:if (r7==null) goto label2;
+ r1.accept((java.lang.Object)r7);
+ r7=r7.after;
+ goto label1;
+ label2:$r4=this.this$0;
+ $i1=$r4.modCount;
+ if ($i1==i0) goto label3;
+ $r5=new java.util.ConcurrentModificationException;
+ $r5#java.util.ConcurrentModificationException:init();
+ throw $r5;
+ label3:return;
+ }  
+

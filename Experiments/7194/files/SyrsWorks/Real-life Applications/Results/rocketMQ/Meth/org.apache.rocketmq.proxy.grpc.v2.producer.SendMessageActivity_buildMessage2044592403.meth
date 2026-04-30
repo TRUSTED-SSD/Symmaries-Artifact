@@ -1,0 +1,35 @@
+java.util.List org.apache.rocketmq.proxy.grpc.v2.producer.SendMessageActivity:buildMessage(org.apache.rocketmq.proxy.common.ProxyContext context,java.util.List protoMessageList,apache.rocketmq.v2.Resource topic)
+{
+java.lang.String topicName;
+  java.util.ArrayList messageExtList;
+  java.util.Iterator l6;
+  apache.rocketmq.v2.Message protoMessage;
+  org.apache.rocketmq.proxy.grpc.v2.common.GrpcConverter $stack8;
+  boolean $stack12;
+  java.lang.Object $stack13;
+  apache.rocketmq.v2.Resource $stack14;
+  org.apache.rocketmq.common.message.Message $stack16;
+  org.apache.rocketmq.proxy.grpc.v2.common.GrpcProxyException $stack19;
+  apache.rocketmq.v2.Code $stack20;
+  $stack8 = org.apache.rocketmq.proxy.grpc.v2.common.GrpcConverter.getInstance();
+ topicName = $stack8.wrapResourceWithNamespace(topic);
+ messageExtList=new java.util.ArrayList;
+ messageExtList#java.util.ArrayList();
+ l6 = protoMessageList.iterator();
+ label0:$stack12 = l6.hasNext();
+ if ($stack12==0) goto label1;
+ $stack13 = l6.next();
+ protoMessage=(apache.rocketmq.v2.Message) $stack13;
+ $stack14 = protoMessage.getTopic();
+ $stack12 = $stack14.equals((java.lang.Object)topic);
+ if ($stack12!=0) goto label2;
+ $stack19=new org.apache.rocketmq.proxy.grpc.v2.common.GrpcProxyException;
+ $stack20=apache.rocketmq.v2.Code.MESSAGE_CORRUPTED;
+ $stack19#org.apache.rocketmq.proxy.grpc.v2.common.GrpcProxyException($stack20,"topic in message is not same");
+ throw $stack19;
+ label2:$stack16 = this.buildMessage(context,protoMessage,topicName);
+ messageExtList.add((java.lang.Object)$stack16);
+ goto label0;
+ label1:return  messageExtList;
+ } 
+

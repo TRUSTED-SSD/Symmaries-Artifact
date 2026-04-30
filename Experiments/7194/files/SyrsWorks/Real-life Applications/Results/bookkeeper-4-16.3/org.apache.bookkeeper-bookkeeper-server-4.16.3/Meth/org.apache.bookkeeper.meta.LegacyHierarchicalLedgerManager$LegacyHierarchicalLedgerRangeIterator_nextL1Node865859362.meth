@@ -1,0 +1,51 @@
+boolean org.apache.bookkeeper.meta.LegacyHierarchicalLedgerManager$LegacyHierarchicalLedgerRangeIterator:nextL1Node()
+{
+java.util.List l2Nodes;
+  java.util.Iterator $stack2;
+  boolean $stack4;
+  java.lang.Object $stack6;
+  java.lang.String $stack7;
+  org.apache.bookkeeper.meta.LegacyHierarchicalLedgerManager $stack9;
+  java.lang.StringBuilder $stack12;
+  org.apache.zookeeper.ZooKeeper $stack13;
+  this.l2NodesIter=null;
+ label0:$stack2=this.l2NodesIter;
+ if ($stack2!=null) goto label1;
+ $stack2=this.l1NodesIter;
+ $stack4 = $stack2.hasNext();
+ if ($stack4==0) goto label2;
+ $stack2=this.l1NodesIter;
+ $stack6 = $stack2.next();
+ $stack7=(java.lang.String) $stack6;
+ this.curL1Nodes=$stack7;
+ goto label3;
+ label2:return  0;
+ label3:$stack9=this.this$0;
+ $stack7=this.curL1Nodes;
+ $stack4 = $stack9.isLedgerParentNode($stack7);
+ if ($stack4!=0) goto label4;
+ goto label0;
+ label4:$stack9=this.this$0;
+ $stack13=$stack9.zk;
+ $stack12=new java.lang.StringBuilder;
+ $stack12#java.lang.StringBuilder();
+ $stack9=this.this$0;
+ $stack7=$stack9.ledgerRootPath;
+ $stack12 = $stack12.append($stack7);
+ $stack12 = $stack12.append("/");
+ $stack7=this.curL1Nodes;
+ $stack12 = $stack12.append($stack7);
+ $stack7 = $stack12.toString();
+ l2Nodes = $stack13.getChildren($stack7,null);
+ java.util.Collections.sort(l2Nodes);
+ $stack2 = l2Nodes.iterator();
+ this.l2NodesIter=$stack2;
+ $stack2=this.l2NodesIter;
+ $stack4 = $stack2.hasNext();
+ if ($stack4!=0) goto label5;
+ this.l2NodesIter=null;
+ goto label0;
+ label5:goto label0;
+ label1:return  1;
+ } 
+

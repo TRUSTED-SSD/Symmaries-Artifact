@@ -1,0 +1,51 @@
+static void com.google.zxing.qrcode.decoder.DecodedBitStreamParser:decodeAlphanumericSegment(com.google.zxing.common.BitSource bits,java.lang.StringBuilder result,int count,boolean fc1InEffect)
+{
+int start;
+  int nextTwoCharsBits;
+  char $stack8;
+  com.google.zxing.FormatException $stack25;
+  int $stack28;
+  start = result.length();
+ label0:if (count<=1) goto label1;
+ nextTwoCharsBits = bits.available();
+ if (nextTwoCharsBits>=11) goto label2;
+ $stack25 = com.google.zxing.FormatException.getFormatInstance();
+ throw $stack25;
+ label2:nextTwoCharsBits = bits.readBits(11);
+ $stack28=(nextTwoCharsBits/45);
+ $stack8 = com.google.zxing.qrcode.decoder.DecodedBitStreamParser.toAlphaNumericChar($stack28);
+ result.append($stack8);
+ nextTwoCharsBits=(nextTwoCharsBits%45);
+ $stack8 = com.google.zxing.qrcode.decoder.DecodedBitStreamParser.toAlphaNumericChar(nextTwoCharsBits);
+ result.append($stack8);
+ count=(count+-2);
+ goto label0;
+ label1:if (count!=1) goto label3;
+ count = bits.available();
+ if (count>=6) goto label4;
+ $stack25 = com.google.zxing.FormatException.getFormatInstance();
+ throw $stack25;
+ label4:count = bits.readBits(6);
+ $stack8 = com.google.zxing.qrcode.decoder.DecodedBitStreamParser.toAlphaNumericChar(count);
+ result.append($stack8);
+ label3:if (fc1InEffect==0) goto label5;
+ nextTwoCharsBits=start;
+ label6:count = result.length();
+ if (nextTwoCharsBits>=count) goto label5;
+ $stack8 = result.charAt(nextTwoCharsBits);
+ if ($stack8!=37) goto label7;
+ count = result.length();
+ count=(count-1);
+ if (nextTwoCharsBits>=count) goto label8;
+ count=(nextTwoCharsBits+1);
+ $stack8 = result.charAt(count);
+ if ($stack8!=37) goto label8;
+ count=(nextTwoCharsBits+1);
+ result.deleteCharAt(count);
+ goto label7;
+ label8:result.setCharAt(nextTwoCharsBits,(char)29);
+ label7:nextTwoCharsBits=(nextTwoCharsBits+1);
+ goto label6;
+ label5:return;
+ } 
+

@@ -1,0 +1,150 @@
+    protected void doGet(javax.servlet.http.HttpServletRequest, javax.servlet.http.HttpServletResponse) throws java.io.IOException
+    {
+        securibench.micro.basic.Basic20 this;
+        javax.servlet.http.HttpServletRequest l1;
+        javax.servlet.http.HttpServletResponse l2;
+        java.lang.String l3;
+        java.sql.Connection l4;
+        java.lang.Object l5;
+        java.lang.Throwable l6;
+        java.lang.StringBuilder $stack11;
+        java.sql.SQLException $stack17, $stack19, $stack20, $stack21;
+        java.io.PrintStream $stack18;
+        java.sql.Statement tmp$218800126;
+
+        this := @this: securibench.micro.basic.Basic20;
+
+        l1 := @parameter0: javax.servlet.http.HttpServletRequest;
+
+        l2 := @parameter1: javax.servlet.http.HttpServletResponse;
+
+        l3 = interfaceinvoke l1.<javax.servlet.http.HttpServletRequest: java.lang.String getParameter(java.lang.String)>("name");
+/*26*/
+/*26*/
+
+        l4 = null;
+/*28*/
+
+     label01:
+        l4 = staticinvoke <java.sql.DriverManager: java.sql.Connection getConnection(java.lang.String)>("jdbc:dtF:E. coli;USR=dtfadm;PWD=dtfadm;Create=always;APPL=GIVE;DType=FILE");
+/*30*/
+/*30*/
+
+        l5 = interfaceinvoke l4.<java.sql.Connection: java.sql.Statement createStatement()>();
+/*31*/
+/*31*/
+
+        $stack11 = new java.lang.StringBuilder;
+/*32*/
+
+        specialinvoke $stack11.<java.lang.StringBuilder: void <init>()>();
+/*32*/
+
+        $stack11 = virtualinvoke $stack11.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>("select * from Users where name=");
+/*32*/
+
+        $stack11 = virtualinvoke $stack11.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>(l3);
+/*32*/
+
+        l3 = virtualinvoke $stack11.<java.lang.StringBuilder: java.lang.String toString()>();
+/*32*/
+
+        tmp$218800126 = (java.sql.Statement) l5;
+
+        interfaceinvoke tmp$218800126.<java.sql.Statement: boolean execute(java.lang.String)>(l3);
+/*32*/
+
+     label02:
+        if l4 == null goto label03;
+/*37*/
+
+        interfaceinvoke l4.<java.sql.Connection: void close()>();
+/*43*/
+
+     label03:
+        goto label14;
+/*40*/
+
+     label04:
+        $stack19 := @caughtexception;
+/*40*/
+
+        virtualinvoke $stack19.<java.sql.SQLException: void printStackTrace()>();
+/*39*/
+
+        goto label14;
+/*41*/
+
+     label05:
+        $stack17 := @caughtexception;
+/*40*/
+
+        l5 = $stack17;
+/*33*/
+
+        $stack18 = <java.lang.System: java.io.PrintStream err>;
+/*34*/
+
+        virtualinvoke $stack18.<java.io.PrintStream: void println(java.lang.String)>("An error occurred");
+/*34*/
+
+     label06:
+        if l4 == null goto label07;
+/*37*/
+
+        interfaceinvoke l4.<java.sql.Connection: void close()>();
+/*43*/
+
+     label07:
+        goto label14;
+/*40*/
+
+     label08:
+        $stack20 := @caughtexception;
+/*43*/
+
+        virtualinvoke $stack20.<java.sql.SQLException: void printStackTrace()>();
+/*39*/
+
+        goto label14;
+/*41*/
+
+     label09:
+        l6 := @caughtexception;
+/*40*/
+
+     label10:
+        if l4 == null goto label11;
+/*37*/
+
+        interfaceinvoke l4.<java.sql.Connection: void close()>();
+/*41*/
+
+     label11:
+        goto label13;
+/*40*/
+
+     label12:
+        $stack21 := @caughtexception;
+/*43*/
+
+        virtualinvoke $stack21.<java.sql.SQLException: void printStackTrace()>();
+/*39*/
+
+     label13:
+        throw l6;
+/*41*/
+
+     label14:
+        return;
+/*43*/
+
+        catch java.sql.SQLException from label02 to label03 with label04;
+        catch java.sql.SQLException from label01 to label02 with label05;
+        catch java.sql.SQLException from label06 to label07 with label08;
+        catch java.lang.Throwable from label01 to label02 with label09;
+        catch java.lang.Throwable from label05 to label06 with label09;
+        catch java.sql.SQLException from label10 to label11 with label12;
+        catch java.lang.Throwable from label09 to label10 with label09;
+    }
+

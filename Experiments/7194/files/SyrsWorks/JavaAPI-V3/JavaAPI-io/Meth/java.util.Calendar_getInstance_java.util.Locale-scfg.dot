@@ -1,0 +1,31 @@
+digraph G {
+  node [shape=box, ];
+  "pc0_js1" [label="〈$r1 = java.util.TimeZone.getDefault (), js1〉\n\
+tt", ];
+  "pc1_js1" [label="〈$r2 = java.util.Calendar.createCalendar ($r1, r0), js1〉\n\
+pc ⊑ ⊥ ∧ level($r1) ⊔ level(r0) ⊔ obj_level($r1) ⊔ obj_level(r0) ⊑ ⊥",
+             ];
+  "pc2_js1" [label="〈return $r2, js1〉", ];
+  "pc3_js1" [label="〈sink, js1〉\n\
+obj_level(r0) ⊑ ret(obj_level(r0))' ∧ (ret(r0.><r0)' ∨ ¬r0.><r0) ∧ (ϕ ≠ S2 ∨ obj_level($r2) ⊑ ret(obj_level())' ∧ pc ⊔ level($r2) ⊑ ret(level())' ∧ (ret(.><r0)' ∨ ¬r0.><$r2) ∧ (ret(r0.><)' ∨ ¬$r2.><r0))",
+             ];
+  
+  
+  "pc0_js1" -> "pc1_js1" [label="tt,\n\
+{level($r1) := pc,\n\
+ obj_level($r1) := pc}",
+                          ];
+  "pc1_js1" -> "pc2_js1" [label="tt,\n\
+{$r1.><$r1 := tt,\n\
+ $r1.><r0 := tt,\n\
+ r0.><$r1 := tt,\n\
+ r0.><r0 := tt,\n\
+ level($r2) := ⊤,\n\
+ obj_level($r1) := ⊤,\n\
+ obj_level($r2) := ⊤,\n\
+ obj_level(r0) := ⊤}",
+                          ];
+  "pc2_js1" -> "pc3_js1" [label="tt,\n\
+{ϕ := S2}", ];
+  
+  }

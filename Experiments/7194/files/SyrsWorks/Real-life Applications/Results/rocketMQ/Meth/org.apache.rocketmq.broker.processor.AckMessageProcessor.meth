@@ -1,0 +1,49 @@
+org.apache.rocketmq.broker.processor.AckMessageProcessor(org.apache.rocketmq.broker.BrokerController brokerController)
+{
+int i;
+  org.apache.rocketmq.broker.BrokerController $stack3;
+  org.apache.rocketmq.common.BrokerConfig $stack4;
+  java.lang.String $stack5;
+  org.apache.rocketmq.broker.processor.PopReviveService[] $stack10;
+  int $stack13;
+  org.apache.rocketmq.broker.processor.PopReviveService $stack14;
+  long $stack20;
+  byte $stack21;
+  boolean $stack24;
+  this#java.lang.Object();
+ this.brokerController=brokerController;
+ $stack3=this.brokerController;
+ $stack4 = $stack3.getBrokerConfig();
+ $stack5 = $stack4.getBrokerClusterName();
+ $stack5 = org.apache.rocketmq.common.PopAckConstants.buildClusterReviveTopic($stack5);
+ this.reviveTopic=$stack5;
+ $stack3=this.brokerController;
+ $stack4 = $stack3.getBrokerConfig();
+ i = $stack4.getReviveQueueNum();
+ $stack10=new org.apache.rocketmq.broker.processor.PopReviveService[i];
+ this.popReviveServices=$stack10;
+ i=0;
+ label0:$stack3=this.brokerController;
+ $stack4 = $stack3.getBrokerConfig();
+ $stack13 = $stack4.getReviveQueueNum();
+ if (i>=$stack13) goto label1;
+ $stack10=this.popReviveServices;
+ $stack14=new org.apache.rocketmq.broker.processor.PopReviveService;
+ $stack5=this.reviveTopic;
+ $stack14#org.apache.rocketmq.broker.processor.PopReviveService(brokerController,$stack5,i);
+ $stack10[i]=$stack14;
+ $stack10=this.popReviveServices;
+ $stack14=$stack10[i];
+ $stack4 = brokerController.getBrokerConfig();
+ $stack20 = $stack4.getBrokerId();
+ $stack21=($stack20 cmp 0L);
+ if ($stack21!=0) goto label2;
+ $stack24=1;
+ goto label3;
+ label2:$stack24=0;
+ label3:$stack14.setShouldRunPopRevive($stack24);
+ i=(i+1);
+ goto label0;
+ label1:return;
+ } 
+

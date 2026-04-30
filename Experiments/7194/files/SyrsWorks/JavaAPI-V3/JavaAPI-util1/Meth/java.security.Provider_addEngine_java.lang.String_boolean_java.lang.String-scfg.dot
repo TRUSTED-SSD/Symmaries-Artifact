@@ -1,0 +1,90 @@
+digraph G {
+  node [shape=box, ];
+  "pc0_js1" [label="〈$r3 = new java.security.Provider$EngineDescription, js1〉",
+             ];
+  "pc1_js1" [label="〈$r3#java.security.Provider$EngineDescription.init (r0, z0, r1), js1〉\n\
+tt",
+             ];
+  "pc2_js1" [label="〈r2 = $r3, js1〉", ];
+  "pc3_js1" [label="〈$r5 = java.security.Provider.knownEngines, js1〉", ];
+  "pc4_js1" [label="〈$r4 = java.util.Locale.ENGLISH, js1〉", ];
+  "pc5_js1" [label="〈$r6 = r0.toLowerCase ($r4), js1〉\n\
+tt", ];
+  "pc6_js1" [label="〈$r5.put ((java.lang.Object) $r6, (java.lang.Object) r2), js1〉\n\
+pc ⊔ level($r5) ⊔ level($r6) ⊔ level(r2) ⊔ obj_level($r5) ⊔ obj_level($r6) = ⊥",
+             ];
+  "pc7_js1" [label="〈$r8 = java.security.Provider.knownEngines, js1〉", ];
+  "pc8_js1" [label="〈$r8.put ((java.lang.Object) r0, (java.lang.Object) r2), js1〉\n\
+pc ⊔ level($r8) ⊔ level(r0) ⊔ level(r2) ⊔ obj_level($r8) ⊔ obj_level(r0) = ⊥",
+             ];
+  "pc9_js1" [label="〈return, js1〉", ];
+  "pc10_js1" [label="〈sink, js1〉\n\
+obj_level(r0) ⊑ ret(obj_level(r0))' ∧ obj_level(r1) ⊑ ret(obj_level(r1))'",
+              ];
+  
+  
+  "pc0_js1" -> "pc1_js1" [label="tt,\n\
+{level($r3) := pc,\n\
+ obj_level($r3) := pc}",
+                          ];
+  "pc1_js1" -> "pc2_js1" [label="tt,\n\
+{obj_level($r3) := pc ⊔ level(r0) ⊔ level(r1) ⊔ level(z0) ⊔ obj_level(r0),\n\
+ obj_level($r4) := pc ⊔ level(r0) ⊔ level(r1) ⊔ level(z0) ⊔ obj_level(r0),\n\
+ obj_level($r5) := pc ⊔ level(r0) ⊔ level(r1) ⊔ level(z0) ⊔ obj_level(r0),\n\
+ obj_level($r6) := pc ⊔ level(r0) ⊔ level(r1) ⊔ level(z0) ⊔ obj_level(r0),\n\
+ obj_level($r8) := pc ⊔ level(r0) ⊔ level(r1) ⊔ level(z0) ⊔ obj_level(r0),\n\
+ obj_level(r0) := pc ⊔ level(r0) ⊔ level(r1) ⊔ level(z0) ⊔ obj_level(r0),\n\
+ obj_level(r1) := pc ⊔ level(r0) ⊔ level(r1) ⊔ level(z0) ⊔ obj_level(r0) ⊔ obj_level(r1),\n\
+ obj_level(r2) := pc ⊔ level(r0) ⊔ level(r1) ⊔ level(z0) ⊔ obj_level(r0)}",
+                          ];
+  "pc2_js1" -> "pc3_js1" [label="tt,\n\
+{level(r2) := pc,\n\
+ obj_level(r2) := obj_level($r3)}",
+                          ];
+  "pc3_js1" -> "pc4_js1" [label="tt,\n\
+{level($r5) := pc,\n\
+ obj_level($r5) := ⊥}",
+                          ];
+  "pc4_js1" -> "pc5_js1" [label="tt,\n\
+{level($r4) := pc,\n\
+ obj_level($r4) := ⊥}",
+                          ];
+  "pc5_js1" -> "pc6_js1" [label="tt,\n\
+{level($r6) := pc ⊔ level(r0) ⊔ obj_level(r0),\n\
+ obj_level($r3) := pc ⊔ level(r0) ⊔ obj_level($r3) ⊔ obj_level(r0),\n\
+ obj_level($r4) := pc ⊔ level(r0) ⊔ obj_level(r0),\n\
+ obj_level($r5) := pc ⊔ level(r0) ⊔ obj_level(r0),\n\
+ obj_level($r6) := pc ⊔ level(r0) ⊔ obj_level(r0),\n\
+ obj_level($r8) := pc ⊔ level(r0) ⊔ obj_level($r8) ⊔ obj_level(r0),\n\
+ obj_level(r0) := pc ⊔ level(r0) ⊔ obj_level(r0),\n\
+ obj_level(r1) := pc ⊔ level(r0) ⊔ obj_level(r0) ⊔ obj_level(r1),\n\
+ obj_level(r2) := pc ⊔ level(r0) ⊔ obj_level(r0) ⊔ obj_level(r2)}",
+                          ];
+  "pc6_js1" -> "pc7_js1" [label="tt,\n\
+{obj_level($r3) := pc ⊔ level($r6) ⊔ obj_level($r3) ⊔ obj_level($r5) ⊔ obj_level($r6) ⊔ obj_level(r2),\n\
+ obj_level($r4) := pc ⊔ level($r6) ⊔ obj_level($r4) ⊔ obj_level($r5) ⊔ obj_level($r6) ⊔ obj_level(r2),\n\
+ obj_level($r5) := pc ⊔ level($r6) ⊔ obj_level($r5) ⊔ obj_level($r6) ⊔ obj_level(r2),\n\
+ obj_level($r6) := pc ⊔ level($r6) ⊔ obj_level($r5) ⊔ obj_level($r6) ⊔ obj_level(r2),\n\
+ obj_level($r8) := pc ⊔ level($r6) ⊔ obj_level($r5) ⊔ obj_level($r6) ⊔ obj_level($r8) ⊔ obj_level(r2),\n\
+ obj_level(r0) := pc ⊔ level($r6) ⊔ obj_level($r5) ⊔ obj_level($r6) ⊔ obj_level(r0) ⊔ obj_level(r2),\n\
+ obj_level(r1) := pc ⊔ level($r6) ⊔ obj_level($r5) ⊔ obj_level($r6) ⊔ obj_level(r1) ⊔ obj_level(r2),\n\
+ obj_level(r2) := pc ⊔ level($r6) ⊔ obj_level($r5) ⊔ obj_level($r6) ⊔ obj_level(r2)}",
+                          ];
+  "pc7_js1" -> "pc8_js1" [label="tt,\n\
+{level($r8) := pc,\n\
+ obj_level($r8) := ⊥}",
+                          ];
+  "pc8_js1" -> "pc9_js1" [label="tt,\n\
+{obj_level($r3) := pc ⊔ level(r0) ⊔ obj_level($r3) ⊔ obj_level(r0) ⊔ obj_level(r2),\n\
+ obj_level($r4) := pc ⊔ level(r0) ⊔ obj_level($r4) ⊔ obj_level(r0) ⊔ obj_level(r2),\n\
+ obj_level($r5) := pc ⊔ level(r0) ⊔ obj_level($r5) ⊔ obj_level(r0) ⊔ obj_level(r2),\n\
+ obj_level($r6) := pc ⊔ level(r0) ⊔ obj_level($r6) ⊔ obj_level(r0) ⊔ obj_level(r2),\n\
+ obj_level($r8) := pc ⊔ level(r0) ⊔ obj_level(r0) ⊔ obj_level(r2),\n\
+ obj_level(r0) := pc ⊔ level(r0) ⊔ obj_level(r0) ⊔ obj_level(r2),\n\
+ obj_level(r1) := pc ⊔ level(r0) ⊔ obj_level(r0) ⊔ obj_level(r1) ⊔ obj_level(r2),\n\
+ obj_level(r2) := pc ⊔ level(r0) ⊔ obj_level(r0) ⊔ obj_level(r2)}",
+                          ];
+  "pc9_js1" -> "pc10_js1" [label="tt,\n\
+{ϕ := S9}", ];
+  
+  }

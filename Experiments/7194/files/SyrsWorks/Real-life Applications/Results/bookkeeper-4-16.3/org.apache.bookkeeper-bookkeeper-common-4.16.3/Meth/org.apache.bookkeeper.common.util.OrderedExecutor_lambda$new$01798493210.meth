@@ -1,0 +1,33 @@
+void org.apache.bookkeeper.common.util.OrderedExecutor:lambda$new$0(int idx,boolean enableThreadScopedMetrics,java.lang.String @baseName,boolean enableBusyWait)
+{
+java.lang.Throwable t;
+  long[] $stack6;
+  java.lang.Thread $stack7;
+  long $stack8;
+  java.lang.Object[] $stack11;
+  org.slf4j.Logger $stack12;
+  java.lang.String baseName;
+baseName=@baseName;
+$stack6=this.threadIds;
+ $stack7 = java.lang.Thread.currentThread();
+ $stack8 = $stack7.getId();
+ $stack6[idx]=$stack8;
+ if (enableThreadScopedMetrics==0) goto label0;
+ org.apache.bookkeeper.stats.ThreadRegistry.register(baseName,idx);
+ label0:if (enableBusyWait==0) goto label1;
+ label2:org.apache.bookkeeper.common.util.affinity.CpuAffinity.acquireCore();
+ label3:goto label1;
+ label4:t = catch;
+ $stack12=org.apache.bookkeeper.common.util.OrderedExecutor.log;
+ $stack11=new java.lang.Object[3];
+ $stack7 = java.lang.Thread.currentThread();
+ baseName = $stack7.getName();
+ $stack11[0]=baseName;
+ baseName = t.getMessage();
+ $stack11[1]=baseName;
+ $stack11[2]=t;
+ $stack12.warn("Failed to acquire CPU core for thread {}: {}",$stack11);
+ label1:return;
+ catch java.lang.Throwable: label2 - label3 : label4;
+} 
+

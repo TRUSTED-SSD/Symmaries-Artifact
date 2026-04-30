@@ -1,0 +1,234 @@
+    public static junit.framework.Test createTest(java.lang.Class, java.lang.String)
+    {
+        java.lang.Class theClass;
+        java.lang.String name;
+        java.lang.reflect.Constructor constructor;
+        java.lang.Object e;
+        java.lang.Class[] $stack6;
+        int $stack7;
+        java.lang.Object[] $stack8;
+        boolean $stack13;
+        junit.framework.TestCase $stack14;
+        java.lang.IllegalAccessException $stack15;
+        java.lang.StringBuilder $stack16;
+        junit.framework.Test $stack24;
+        java.lang.NoSuchMethodException $stack25;
+        java.lang.InstantiationException $stack33;
+        java.lang.reflect.InvocationTargetException $stack43;
+        java.lang.Throwable $stack48;
+
+        theClass := @parameter0: java.lang.Class;
+
+        name := @parameter1: java.lang.String;
+
+     label1:
+        constructor = staticinvoke <junit.framework.TestSuite: java.lang.reflect.Constructor getTestConstructor(java.lang.Class)>(theClass);
+/*53*/
+/*53*/
+
+     label2:
+        goto label4;
+/*56*/
+
+     label3:
+        $stack25 := @caughtexception;
+/*72*/
+
+        e = $stack25;
+/*54*/
+
+        $stack16 = new java.lang.StringBuilder;
+/*55*/
+
+        specialinvoke $stack16.<java.lang.StringBuilder: void <init>()>();
+/*55*/
+
+        $stack16 = virtualinvoke $stack16.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>("Class ");
+/*55*/
+
+        name = virtualinvoke theClass.<java.lang.Class: java.lang.String getName()>();
+/*55*/
+
+        $stack16 = virtualinvoke $stack16.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>(name);
+/*55*/
+
+        $stack16 = virtualinvoke $stack16.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>(" has no public constructor TestCase(String name) or TestCase()");
+/*55*/
+
+        name = virtualinvoke $stack16.<java.lang.StringBuilder: java.lang.String toString()>();
+/*55*/
+
+        $stack24 = staticinvoke <junit.framework.TestSuite: junit.framework.Test warning(java.lang.String)>(name);
+/*55*/
+
+        return $stack24;
+/*55*/
+
+     label4:
+        $stack6 = virtualinvoke constructor.<java.lang.reflect.Constructor: java.lang.Class[] getParameterTypes()>();
+/*59*/
+
+        $stack7 = lengthof $stack6;
+/*59*/
+
+        if $stack7 != 0 goto label5;
+/*59*/
+
+        $stack8 = newarray (java.lang.Object)[0];
+/*60*/
+
+        e = virtualinvoke constructor.<java.lang.reflect.Constructor: java.lang.Object newInstance(java.lang.Object[])>($stack8);
+/*60*/
+/*60*/
+
+        $stack13 = e instanceof junit.framework.TestCase;
+/*61*/
+
+        if $stack13 == 0 goto label6;
+/*61*/
+
+        $stack14 = (junit.framework.TestCase) e;
+/*62*/
+
+        virtualinvoke $stack14.<junit.framework.TestCase: void setName(java.lang.String)>(name);
+/*62*/
+
+        goto label6;
+/*62*/
+
+     label5:
+        $stack8 = newarray (java.lang.Object)[1];
+/*65*/
+
+        $stack8[0] = name;
+/*65*/
+
+        e = virtualinvoke constructor.<java.lang.reflect.Constructor: java.lang.Object newInstance(java.lang.Object[])>($stack8);
+/*65*/
+/*65*/
+
+     label6:
+        $stack24 = (junit.framework.Test) e;
+
+        return $stack24;
+
+     label7:
+        $stack33 := @caughtexception;
+/*55*/
+
+        $stack16 = new java.lang.StringBuilder;
+/*68*/
+
+        specialinvoke $stack16.<java.lang.StringBuilder: void <init>()>();
+/*68*/
+
+        $stack16 = virtualinvoke $stack16.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>("Cannot instantiate test case: ");
+/*68*/
+
+        $stack16 = virtualinvoke $stack16.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>(name);
+/*68*/
+
+        $stack16 = virtualinvoke $stack16.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>(" (");
+/*68*/
+
+        name = staticinvoke <junit.framework.TestSuite: java.lang.String exceptionToString(java.lang.Throwable)>($stack33);
+/*68*/
+
+        $stack16 = virtualinvoke $stack16.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>(name);
+/*68*/
+
+        $stack16 = virtualinvoke $stack16.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>(")");
+/*68*/
+
+        name = virtualinvoke $stack16.<java.lang.StringBuilder: java.lang.String toString()>();
+/*68*/
+
+        $stack24 = staticinvoke <junit.framework.TestSuite: junit.framework.Test warning(java.lang.String)>(name);
+/*68*/
+
+        return $stack24;
+/*68*/
+
+     label8:
+        $stack43 := @caughtexception;
+/*68*/
+
+        $stack16 = new java.lang.StringBuilder;
+/*70*/
+
+        specialinvoke $stack16.<java.lang.StringBuilder: void <init>()>();
+/*70*/
+
+        $stack16 = virtualinvoke $stack16.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>("Exception in constructor: ");
+/*70*/
+
+        $stack16 = virtualinvoke $stack16.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>(name);
+/*70*/
+
+        $stack16 = virtualinvoke $stack16.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>(" (");
+/*70*/
+
+        $stack48 = virtualinvoke $stack43.<java.lang.reflect.InvocationTargetException: java.lang.Throwable getTargetException()>();
+/*70*/
+
+        name = staticinvoke <junit.framework.TestSuite: java.lang.String exceptionToString(java.lang.Throwable)>($stack48);
+/*70*/
+
+        $stack16 = virtualinvoke $stack16.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>(name);
+/*70*/
+
+        $stack16 = virtualinvoke $stack16.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>(")");
+/*70*/
+
+        name = virtualinvoke $stack16.<java.lang.StringBuilder: java.lang.String toString()>();
+/*70*/
+
+        $stack24 = staticinvoke <junit.framework.TestSuite: junit.framework.Test warning(java.lang.String)>(name);
+/*70*/
+
+        return $stack24;
+/*70*/
+
+     label9:
+        $stack15 := @caughtexception;
+/*73*/
+
+        $stack16 = new java.lang.StringBuilder;
+/*72*/
+
+        specialinvoke $stack16.<java.lang.StringBuilder: void <init>()>();
+/*72*/
+
+        $stack16 = virtualinvoke $stack16.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>("Cannot access test case: ");
+/*72*/
+
+        $stack16 = virtualinvoke $stack16.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>(name);
+/*72*/
+
+        $stack16 = virtualinvoke $stack16.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>(" (");
+/*72*/
+
+        name = staticinvoke <junit.framework.TestSuite: java.lang.String exceptionToString(java.lang.Throwable)>($stack15);
+/*72*/
+
+        $stack16 = virtualinvoke $stack16.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>(name);
+/*72*/
+
+        $stack16 = virtualinvoke $stack16.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>(")");
+/*72*/
+
+        name = virtualinvoke $stack16.<java.lang.StringBuilder: java.lang.String toString()>();
+/*72*/
+
+        $stack24 = staticinvoke <junit.framework.TestSuite: junit.framework.Test warning(java.lang.String)>(name);
+/*72*/
+
+        return $stack24;
+/*72*/
+
+        catch java.lang.NoSuchMethodException from label1 to label2 with label3;
+        catch java.lang.InstantiationException from label4 to label6 with label7;
+        catch java.lang.reflect.InvocationTargetException from label4 to label6 with label8;
+        catch java.lang.IllegalAccessException from label4 to label6 with label9;
+    }
+

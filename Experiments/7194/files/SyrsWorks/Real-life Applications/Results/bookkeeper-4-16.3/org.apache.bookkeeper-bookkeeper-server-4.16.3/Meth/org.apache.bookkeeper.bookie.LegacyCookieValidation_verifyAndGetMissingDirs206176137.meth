@@ -1,0 +1,36 @@
+static org.apache.commons.lang3.tuple.Pair org.apache.bookkeeper.bookie.LegacyCookieValidation:verifyAndGetMissingDirs(org.apache.bookkeeper.bookie.Cookie masterCookie,boolean allowExpansion,java.util.List dirs)
+{
+java.util.ArrayList missingDirs;
+  java.util.ArrayList existedCookies;
+  java.util.Iterator l5;
+  java.io.File dir;
+  java.lang.Object c;
+  boolean $stack11;
+  org.apache.commons.lang3.tuple.Pair $stack12;
+  java.io.FileNotFoundException $stack19;
+  org.apache.bookkeeper.bookie.Cookie tmp$1375115206;
+  missingDirs = com.google.common.collect.Lists.newArrayList();
+ existedCookies = com.google.common.collect.Lists.newArrayList();
+ l5 = dirs.iterator();
+ label0:$stack11 = l5.hasNext();
+ if ($stack11==0) goto label1;
+ c = l5.next();
+ dir=(java.io.File) c;
+ label2:c = org.apache.bookkeeper.bookie.Cookie.readFromDirectory(dir);
+ if (allowExpansion==0) goto label3;
+ tmp$1375115206=(org.apache.bookkeeper.bookie.Cookie) c;
+ masterCookie.verifyIsSuperSet(tmp$1375115206);
+ goto label4;
+ label3:tmp$1375115206=(org.apache.bookkeeper.bookie.Cookie) c;
+ masterCookie.verify(tmp$1375115206);
+ label4:existedCookies.add(c);
+ label5:goto label6;
+ label7:$stack19 = catch;
+ c=$stack19;
+ missingDirs.add((java.lang.Object)dir);
+ label6:goto label0;
+ label1:$stack12 = org.apache.commons.lang3.tuple.Pair.of((java.lang.Object)missingDirs,(java.lang.Object)existedCookies);
+ return  $stack12;
+ catch java.io.FileNotFoundException: label2 - label5 : label7;
+} 
+

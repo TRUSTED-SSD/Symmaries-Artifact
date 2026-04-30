@@ -1,0 +1,36 @@
+org.apache.rocketmq.remoting.protocol.body.SubscriptionGroupWrapper org.apache.rocketmq.tools.admin.DefaultMQAdminExtImpl:getUserSubscriptionGroup(java.lang.String @brokerAddr,long timeoutMillis)
+{
+org.apache.rocketmq.remoting.protocol.body.SubscriptionGroupWrapper subscriptionGroupWrapper;
+  java.util.Iterator iterator;
+  java.util.Map$Entry configEntry;
+  org.apache.rocketmq.client.impl.factory.MQClientInstance $stack7;
+  org.apache.rocketmq.client.impl.MQClientAPIImpl $stack8;
+  java.util.concurrent.ConcurrentMap $stack10;
+  java.util.Set $stack11;
+  boolean $stack13;
+  java.lang.Object $stack14;
+  java.lang.String brokerAddr;
+brokerAddr=@brokerAddr;
+$stack7=this.mqClientInstance;
+ $stack8 = $stack7.getMQClientAPIImpl();
+ subscriptionGroupWrapper = $stack8.getAllSubscriptionGroup(brokerAddr,timeoutMillis);
+ $stack10 = subscriptionGroupWrapper.getSubscriptionGroupTable();
+ $stack11 = $stack10.entrySet();
+ iterator = $stack11.iterator();
+ label0:$stack13 = iterator.hasNext();
+ if ($stack13==0) goto label1;
+ $stack14 = iterator.next();
+ configEntry=(java.util.Map$Entry) $stack14;
+ $stack14 = configEntry.getKey();
+ brokerAddr=(java.lang.String) $stack14;
+ $stack13 = org.apache.rocketmq.common.MixAll.isSysConsumerGroup(brokerAddr);
+ if ($stack13!=0) goto label2;
+ $stack11=org.apache.rocketmq.tools.admin.DefaultMQAdminExtImpl.SYSTEM_GROUP_SET;
+ $stack14 = configEntry.getKey();
+ $stack13 = $stack11.contains($stack14);
+ if ($stack13==0) goto label3;
+ label2:iterator.remove();
+ label3:goto label0;
+ label1:return  subscriptionGroupWrapper;
+ } 
+

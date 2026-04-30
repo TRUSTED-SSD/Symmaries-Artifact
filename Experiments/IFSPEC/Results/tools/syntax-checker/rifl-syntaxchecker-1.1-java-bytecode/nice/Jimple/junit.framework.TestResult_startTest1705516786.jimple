@@ -1,0 +1,100 @@
+    public void startTest(junit.framework.Test)
+    {
+        junit.framework.TestResult this;
+        junit.framework.Test test;
+        int count, $stack7;
+        java.lang.Object i$, each;
+        java.util.List $stack10;
+        boolean $stack12;
+        java.lang.Throwable $stack15;
+        java.util.Iterator tmp$1406554599;
+        junit.framework.TestListener tmp$601280255;
+
+        this := @this: junit.framework.TestResult;
+
+        test := @parameter0: junit.framework.Test;
+
+        count = interfaceinvoke test.<junit.framework.Test: int countTestCases()>();
+/*163*/
+/*163*/
+
+        i$ = this;
+/*164*/
+
+        entermonitor this;
+/*164*/
+
+     label1:
+        $stack7 = this.<junit.framework.TestResult: int fRunTests>;
+/*165*/
+
+        count = $stack7 + count;
+/*165*/
+
+        this.<junit.framework.TestResult: int fRunTests> = count;
+/*165*/
+
+        exitmonitor this;
+/*166*/
+
+     label2:
+        goto label5;
+/*166*/
+
+     label3:
+        $stack15 := @caughtexception;
+/*168*/
+
+        each = $stack15;
+/*168*/
+
+        exitmonitor this;
+/*168*/
+
+     label4:
+        $stack15 = (java.lang.Throwable) $stack15;
+
+        throw $stack15;
+/*168*/
+
+     label5:
+        $stack10 = specialinvoke this.<junit.framework.TestResult: java.util.List cloneListeners()>();
+/*167*/
+
+        i$ = interfaceinvoke $stack10.<java.util.List: java.util.Iterator iterator()>();
+/*167*/
+/*167*/
+
+     label6:
+        tmp$1406554599 = (java.util.Iterator) i$;
+
+        $stack12 = interfaceinvoke tmp$1406554599.<java.util.Iterator: boolean hasNext()>();
+/*167*/
+
+        if $stack12 == 0 goto label7;
+/*167*/
+
+        tmp$1406554599 = (java.util.Iterator) i$;
+
+        each = interfaceinvoke tmp$1406554599.<java.util.Iterator: java.lang.Object next()>();
+/*170*/
+
+        each = (junit.framework.TestListener) each;
+/*170*/
+
+        tmp$601280255 = (junit.framework.TestListener) each;
+
+        interfaceinvoke tmp$601280255.<junit.framework.TestListener: void startTest(junit.framework.Test)>(test);
+/*168*/
+
+        goto label6;
+/*168*/
+
+     label7:
+        return;
+/*170*/
+
+        catch java.lang.Throwable from label1 to label2 with label3;
+        catch java.lang.Throwable from label3 to label4 with label3;
+    }
+

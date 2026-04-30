@@ -1,0 +1,36 @@
+byte[] org.apache.kerby.asn1.type.Asn1ObjectIdentifier:convert(java.math.BigInteger @value)
+{
+int bitLen;
+  byte[] bytes;
+  int i;
+  byte $stack10;
+  short $stack15;
+  java.math.BigInteger value;
+value=@value;
+bitLen = value.bitLength();
+ if (bitLen>=8) goto label0;
+ bytes=new byte[1];
+ $stack10 = value.byteValue();
+ bytes[0]=$stack10;
+ return  bytes;
+ label0:bitLen=(bitLen+6);
+ bitLen=(bitLen/7);
+ bytes=new byte[bitLen];
+ i=(bitLen-1);
+ label1:if (i<0) goto label2;
+ $stack10 = value.byteValue();
+ $stack10=($stack10 & 127);
+ $stack15=($stack10 | 128);
+ $stack10=(byte) $stack15;
+ bytes[i]=$stack10;
+ value = value.shiftRight(7);
+ i=(i+-1);
+ goto label1;
+ label2:bitLen=(bitLen-1);
+ $stack10=bytes[bitLen];
+ $stack10=($stack10 & 127);
+ $stack10=(byte) $stack10;
+ bytes[bitLen]=$stack10;
+ return  bytes;
+ } 
+

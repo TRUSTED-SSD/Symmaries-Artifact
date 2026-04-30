@@ -1,0 +1,46 @@
+org.apache.bookkeeper.bookie.EntryLogManagerForEntryLogPerLedger$BufferedLogChannelWithDirInfo org.apache.bookkeeper.bookie.EntryLogManagerForEntryLogPerLedger:getCurrentLogWithDirInfoForLedger(long ledgerId)
+{
+java.util.concurrent.locks.Lock lock;
+  java.lang.Object entryLogAndLockTuple;
+  org.apache.bookkeeper.bookie.EntryLogManagerForEntryLogPerLedger$BufferedLogChannelWithDirInfo l5;
+  java.lang.Throwable l6;
+  com.google.common.cache.LoadingCache $stack8;
+  java.lang.Long $stack9;
+  java.lang.Exception $stack13;
+  java.lang.StringBuilder $stack14;
+  org.slf4j.Logger $stack15;
+  java.lang.String $stack18;
+  java.io.IOException tmp$2127207134;
+  org.apache.bookkeeper.bookie.EntryLogManagerForEntryLogPerLedger$EntryLogAndLockTuple tmp$994688912;
+  lock = this.getLock(ledgerId);
+ lock.lock();
+ label0:$stack8=this.ledgerIdEntryLogMap;
+ $stack9 = java.lang.Long.valueOf(ledgerId);
+ entryLogAndLockTuple = $stack8.get((java.lang.Object)$stack9);
+ entryLogAndLockTuple=(org.apache.bookkeeper.bookie.EntryLogManagerForEntryLogPerLedger$EntryLogAndLockTuple) entryLogAndLockTuple;
+ tmp$994688912=(org.apache.bookkeeper.bookie.EntryLogManagerForEntryLogPerLedger$EntryLogAndLockTuple) entryLogAndLockTuple;
+ l5 = tmp$994688912.getEntryLogWithDirInfo();
+ label1:lock.unlock();
+ return  l5;
+ label2:$stack13 = catch;
+ entryLogAndLockTuple=$stack13;
+ $stack15=org.apache.bookkeeper.bookie.EntryLogManagerForEntryLogPerLedger.log;
+ $stack14=new java.lang.StringBuilder;
+ $stack14#java.lang.StringBuilder();
+ $stack14 = $stack14.append("Received unexpected exception while fetching entry from map for ledger: ");
+ $stack14 = $stack14.append(ledgerId);
+ $stack18 = $stack14.toString();
+ l6=(java.lang.Throwable) $stack13;
+ $stack15.error($stack18,l6);
+ tmp$2127207134=new java.io.IOException;
+ l6=(java.lang.Throwable) $stack13;
+ tmp$2127207134#java.io.IOException("Received unexpected exception while fetching entry from map",l6);
+ throw tmp$2127207134;
+ label3:l6 = catch;
+ label4:lock.unlock();
+ throw l6;
+ catch java.lang.Exception: label0 - label1 : label2;
+catch java.lang.Throwable: label0 - label1 : label3;
+catch java.lang.Throwable: label2 - label4 : label3;
+} 
+

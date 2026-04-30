@@ -1,0 +1,18 @@
+java.lang.Object org.apache.bookkeeper.common.util.OrderedExecutor$ContextPreservingCallable:call()
+{
+java.lang.Object l1;
+  java.util.Map $stack3;
+  java.util.concurrent.Callable $stack4;
+  java.lang.Throwable $stack6;
+  $stack3=this.mdcContextMap;
+ org.apache.bookkeeper.common.util.MdcUtils.restoreContext($stack3);
+ label0:$stack4=this.callable;
+ l1 = $stack4.call();
+ label1:org.slf4j.MDC.clear();
+ return  l1;
+ label2:$stack6 = catch;
+ org.slf4j.MDC.clear();
+ throw $stack6;
+ catch java.lang.Throwable: label0 - label1 : label2;
+} 
+

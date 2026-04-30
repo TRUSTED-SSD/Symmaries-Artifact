@@ -1,0 +1,33 @@
+org.apache.bookkeeper.api.kv.op.TxnOp org.apache.bookkeeper.api.kv.impl.op.TxnOpBuilderImpl:build()
+{
+org.apache.bookkeeper.api.kv.impl.op.TxnOpImpl l1;
+  io.netty.util.Recycler $stack3;
+  java.lang.Object $stack4;
+  java.util.List $stack5;
+  io.netty.util.Recycler$Handle $stack12;
+  java.lang.Throwable $stack13;
+  label0:$stack3=this.txnOpRecycler;
+ $stack4 = $stack3.get();
+ l1=(org.apache.bookkeeper.api.kv.impl.op.TxnOpImpl) $stack4;
+ $stack5=this.compareOps;
+ l1 = l1.compareOps($stack5);
+ $stack5=this.successOps;
+ l1 = l1.successOps($stack5);
+ $stack5=this.failureOps;
+ l1 = l1.failureOps($stack5);
+ label1:this.compareOps=null;
+ this.successOps=null;
+ this.failureOps=null;
+ $stack12=this.handle;
+ $stack12.recycle((java.lang.Object)this);
+ return  l1;
+ label2:$stack13 = catch;
+ this.compareOps=null;
+ this.successOps=null;
+ this.failureOps=null;
+ $stack12=this.handle;
+ $stack12.recycle((java.lang.Object)this);
+ throw $stack13;
+ catch java.lang.Throwable: label0 - label1 : label2;
+} 
+

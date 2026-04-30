@@ -1,0 +1,54 @@
+long org.apache.rocketmq.client.consumer.store.RemoteBrokerOffsetStore:fetchConsumeOffsetFromBroker(org.apache.rocketmq.common.message.MessageQueue mq)
+{
+org.apache.rocketmq.client.impl.FindBrokerResult findBrokerResult;
+  org.apache.rocketmq.remoting.protocol.header.QueryConsumerOffsetRequestHeader requestHeader;
+  org.apache.rocketmq.client.impl.factory.MQClientInstance $stack4;
+  org.apache.rocketmq.client.impl.factory.MQClientInstance $stack5;
+  java.lang.String $stack6;
+  org.apache.rocketmq.client.exception.MQClientException $stack8;
+  java.lang.StringBuilder $stack9;
+  int $stack18;
+  java.lang.Integer $stack19;
+  org.apache.rocketmq.client.impl.MQClientAPIImpl $stack22;
+  long $stack24;
+  $stack5=this.mQClientFactory;
+ $stack4=this.mQClientFactory;
+ $stack6 = $stack4.getBrokerNameFromMessageQueue(mq);
+ findBrokerResult = $stack5.findBrokerAddressInSubscribe($stack6,0L,(boolean)1);
+ if (null!=findBrokerResult) goto label0;
+ $stack4=this.mQClientFactory;
+ $stack6 = mq.getTopic();
+ $stack4.updateTopicRouteInfoFromNameServer($stack6);
+ $stack5=this.mQClientFactory;
+ $stack4=this.mQClientFactory;
+ $stack6 = $stack4.getBrokerNameFromMessageQueue(mq);
+ findBrokerResult = $stack5.findBrokerAddressInSubscribe($stack6,0L,(boolean)0);
+ label0:if (findBrokerResult==null) goto label1;
+ requestHeader=new org.apache.rocketmq.remoting.protocol.header.QueryConsumerOffsetRequestHeader;
+ requestHeader#org.apache.rocketmq.remoting.protocol.header.QueryConsumerOffsetRequestHeader();
+ $stack6 = mq.getTopic();
+ requestHeader.setTopic($stack6);
+ $stack6=this.groupName;
+ requestHeader.setConsumerGroup($stack6);
+ $stack18 = mq.getQueueId();
+ $stack19 = java.lang.Integer.valueOf($stack18);
+ requestHeader.setQueueId($stack19);
+ $stack6 = mq.getBrokerName();
+ requestHeader.setBname($stack6);
+ $stack4=this.mQClientFactory;
+ $stack22 = $stack4.getMQClientAPIImpl();
+ $stack6 = findBrokerResult.getBrokerAddr();
+ $stack24 = $stack22.queryConsumerOffset($stack6,requestHeader,5000L);
+ return  $stack24;
+ label1:$stack8=new org.apache.rocketmq.client.exception.MQClientException;
+ $stack9=new java.lang.StringBuilder;
+ $stack9#java.lang.StringBuilder();
+ $stack9 = $stack9.append("The broker[");
+ $stack6 = mq.getBrokerName();
+ $stack9 = $stack9.append($stack6);
+ $stack9 = $stack9.append("] not exist");
+ $stack6 = $stack9.toString();
+ $stack8#org.apache.rocketmq.client.exception.MQClientException($stack6,null);
+ throw $stack8;
+ } 
+

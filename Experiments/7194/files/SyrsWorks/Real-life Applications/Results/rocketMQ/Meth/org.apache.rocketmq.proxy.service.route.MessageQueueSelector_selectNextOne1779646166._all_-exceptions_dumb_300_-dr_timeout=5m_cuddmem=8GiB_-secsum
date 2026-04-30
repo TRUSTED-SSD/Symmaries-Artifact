@@ -1,0 +1,8 @@
+org.apache.rocketmq.proxy.service.route.AddressableMessageQueue org.apache.rocketmq.proxy.service.route.MessageQueueSelector:selectNextOne (
+  org.apache.rocketmq.proxy.service.route.AddressableMessageQueue last) {
+  guard = tt;
+  ret(level()) = level(last) ⊔ level(this) ⊔ obj_level(this);
+  ret(obj_level()) = level(this) ⊔ obj_level(last) ⊔ obj_level(this);
+  ret(obj_level(last)) = level(this) ⊔ obj_level(last) ⊔ obj_level(this);
+  ret(obj_level(this)) = level(this) ⊔ obj_level(this);
+}

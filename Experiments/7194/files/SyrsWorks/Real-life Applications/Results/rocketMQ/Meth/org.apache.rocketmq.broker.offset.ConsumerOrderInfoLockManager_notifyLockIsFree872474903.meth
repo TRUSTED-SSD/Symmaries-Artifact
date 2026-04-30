@@ -1,0 +1,23 @@
+void org.apache.rocketmq.broker.offset.ConsumerOrderInfoLockManager:notifyLockIsFree(org.apache.rocketmq.broker.offset.ConsumerOrderInfoLockManager$Key key)
+{
+org.apache.rocketmq.broker.BrokerController $stack3;
+  org.apache.rocketmq.broker.processor.PopMessageProcessor $stack4;
+  java.lang.String $stack5;
+  java.lang.String $stack6;
+  int $stack7;
+  java.lang.Exception $stack8;
+  org.apache.rocketmq.logging.org.slf4j.Logger $stack9;
+  label0:$stack3=this.brokerController;
+ $stack4 = $stack3.getPopMessageProcessor();
+ $stack5 = org.apache.rocketmq.broker.offset.ConsumerOrderInfoLockManager$Key.access$000(key);
+ $stack6 = org.apache.rocketmq.broker.offset.ConsumerOrderInfoLockManager$Key.access$100(key);
+ $stack7 = org.apache.rocketmq.broker.offset.ConsumerOrderInfoLockManager$Key.access$200(key);
+ $stack4.notifyLongPollingRequestIfNeed($stack5,$stack6,$stack7);
+ label1:goto label2;
+ label3:$stack8 = catch;
+ $stack9=org.apache.rocketmq.broker.offset.ConsumerOrderInfoLockManager.POP_LOGGER;
+ $stack9.error("unexpect error when notifyLockIsFree. key:{}",(java.lang.Object)key,(java.lang.Object)$stack8);
+ label2:return;
+ catch java.lang.Exception: label0 - label1 : label3;
+} 
+

@@ -1,0 +1,52 @@
+    public static int listSizeLeak(int)
+    {
+        int l0, l3;
+        java.util.ArrayList l1;
+        boolean l2;
+        java.lang.Integer $stack8;
+
+        l0 := @parameter0: int;
+
+        l1 = new java.util.ArrayList;
+/*14*/
+
+        specialinvoke l1.<java.util.ArrayList: void <init>()>();
+/*14*/
+
+        l2 = 0;
+/*16*/
+
+        l3 = 0;
+/*18*/
+
+     label1:
+        if l3 >= l0 goto label2;
+/*18*/
+
+        $stack8 = staticinvoke <java.lang.Integer: java.lang.Integer valueOf(int)>(42);
+/*19*/
+
+        virtualinvoke l1.<java.util.ArrayList: boolean add(java.lang.Object)>($stack8);
+/*19*/
+
+        l3 = l3 + 1;
+/*18*/
+
+        goto label1;
+/*18*/
+
+     label2:
+        l0 = virtualinvoke l1.<java.util.ArrayList: int size()>();
+/*22*/
+
+        if l0 >= 10 goto label3;
+/*22*/
+
+        l2 = 1;
+/*23*/
+
+     label3:
+        return 0;
+/*28*/
+    }
+

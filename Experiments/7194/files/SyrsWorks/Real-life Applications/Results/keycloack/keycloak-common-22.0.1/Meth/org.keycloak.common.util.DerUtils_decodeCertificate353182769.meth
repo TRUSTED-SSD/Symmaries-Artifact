@@ -1,0 +1,14 @@
+static java.security.cert.X509Certificate org.keycloak.common.util.DerUtils:decodeCertificate(java.io.InputStream is)
+{
+java.security.cert.CertificateFactory cf;
+  java.security.cert.X509Certificate cert;
+  org.keycloak.common.crypto.CryptoProvider $stack3;
+  java.security.cert.Certificate $stack5;
+  $stack3 = org.keycloak.common.crypto.CryptoIntegration.getProvider();
+ cf = $stack3.getX509CertFactory();
+ $stack5 = cf.generateCertificate(is);
+ cert=(java.security.cert.X509Certificate) $stack5;
+ is.close();
+ return  cert;
+ } 
+

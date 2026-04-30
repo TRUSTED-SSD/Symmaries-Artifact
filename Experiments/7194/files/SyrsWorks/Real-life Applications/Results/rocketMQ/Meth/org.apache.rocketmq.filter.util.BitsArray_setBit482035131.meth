@@ -1,0 +1,27 @@
+void org.apache.rocketmq.filter.util.BitsArray:setBit(int bitPos,boolean set)
+{
+int sub;
+  byte[] $stack7;
+  byte $stack9;
+  byte[] $stack12;
+  this.checkBitPosition(bitPos,this);
+ sub = this.subscript(bitPos);
+ bitPos = this.position(bitPos);
+ if (set==0) goto label0;
+ $stack12=this.bytes;
+ $stack7=this.bytes;
+ $stack9=$stack7[sub];
+ bitPos=($stack9 | bitPos);
+ $stack9=(byte) bitPos;
+ $stack12[sub]=$stack9;
+ goto label1;
+ label0:$stack12=this.bytes;
+ $stack7=this.bytes;
+ $stack9=$stack7[sub];
+ bitPos=(!bitPos & -1) |(!-1 & bitPos);
+ bitPos=($stack9 & bitPos);
+ $stack9=(byte) bitPos;
+ $stack12[sub]=$stack9;
+ label1:return;
+ } 
+

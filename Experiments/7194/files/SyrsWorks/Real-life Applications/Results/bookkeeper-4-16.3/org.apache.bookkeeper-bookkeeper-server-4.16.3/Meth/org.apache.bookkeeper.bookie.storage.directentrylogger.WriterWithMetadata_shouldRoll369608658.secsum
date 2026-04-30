@@ -1,0 +1,8 @@
+boolean org.apache.bookkeeper.bookie.storage.directentrylogger.WriterWithMetadata:shouldRoll (
+  io.netty.buffer.ByteBuf entry, long rollThreshold) {
+  p0: io.netty.buffer.ByteBuf () -> level;
+  guard = tt;
+  ret(level()) = p0 ⊔ pc ⊔ level(rollThreshold) ⊔ level(this) ⊔ obj_level(this);
+  ret(obj_level(entry)) = pc ⊔ level(this) ⊔ obj_level(entry) ⊔ obj_level(this);
+  ret(obj_level(this)) = if obj_level(this) ⊔ (if obj_level(entry) = ⊤ then p0 ⊔ level(rollThreshold) ⊔ level(this) else level(this) ⊔ obj_level(entry)) = ⊥ then pc else if if obj_level(this) = ⊥ then if obj_level(entry) = ⊤ then p0 ⊔ level(rollThreshold) ⊔ level(this) = ⊤ else level(this) = ⊤ ∧ obj_level(entry) = ⊥ else obj_level(this) = ⊤ then ⊤ else ⊥;
+}

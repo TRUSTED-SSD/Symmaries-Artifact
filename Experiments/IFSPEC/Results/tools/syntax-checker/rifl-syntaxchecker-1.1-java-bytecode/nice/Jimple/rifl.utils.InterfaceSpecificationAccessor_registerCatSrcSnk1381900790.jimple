@@ -1,0 +1,136 @@
+    private void registerCatSrcSnk(rifl.spec.Assignable, rifl.spec.Category, rifl.spec.CatSrcSnk)
+    {
+        rifl.utils.InterfaceSpecificationAccessor this;
+        rifl.spec.Assignable assignable;
+        rifl.spec.Category category;
+        rifl.spec.CatSrcSnk catSrcSnk, old;
+        java.lang.String msg;
+        java.util.HashMap $stack6;
+        boolean $stack8;
+        java.lang.Object $stack11;
+        java.lang.Object[] $stack19;
+        java.lang.StringBuilder $stack24;
+        java.io.PrintStream $stack31;
+
+        this := @this: rifl.utils.InterfaceSpecificationAccessor;
+
+        assignable := @parameter0: rifl.spec.Assignable;
+
+        category := @parameter1: rifl.spec.Category;
+
+        catSrcSnk := @parameter2: rifl.spec.CatSrcSnk;
+
+        $stack6 = this.<rifl.utils.InterfaceSpecificationAccessor: java.util.HashMap identifiables>;
+/*101*/
+
+        msg = virtualinvoke catSrcSnk.<rifl.spec.CatSrcSnk: java.lang.String getName()>();
+/*101*/
+
+        $stack8 = virtualinvoke $stack6.<java.util.HashMap: boolean containsKey(java.lang.Object)>(msg);
+/*101*/
+
+        if $stack8 == 0 goto label3;
+/*101*/
+
+        $stack6 = this.<rifl.utils.InterfaceSpecificationAccessor: java.util.HashMap identifiables>;
+/*102*/
+
+        msg = virtualinvoke catSrcSnk.<rifl.spec.CatSrcSnk: java.lang.String getName()>();
+/*102*/
+
+        $stack11 = virtualinvoke $stack6.<java.util.HashMap: java.lang.Object get(java.lang.Object)>(msg);
+/*102*/
+
+        old = (rifl.spec.CatSrcSnk) $stack11;
+/*102*/
+
+        msg = "The source or sink with the name %s is declared under multiple categories or assignables. This interface specification accessor supports only uniquely declared sources and sinks. It will use only the one defined under assignable %s%s.";
+/*109*/
+
+        $stack19 = newarray (java.lang.Object)[3];
+/*103*/
+
+        $stack19[0] = catSrcSnk;
+/*108*/
+
+        $stack6 = this.<rifl.utils.InterfaceSpecificationAccessor: java.util.HashMap parentAssignables>;
+/*109*/
+
+        $stack11 = virtualinvoke $stack6.<java.util.HashMap: java.lang.Object get(java.lang.Object)>(old);
+/*109*/
+
+        $stack19[1] = $stack11;
+/*109*/
+
+        if category != null goto label1;
+/*110*/
+
+        msg = "";
+/*117*/
+
+        goto label2;
+/*117*/
+
+     label1:
+        $stack24 = new java.lang.StringBuilder;
+/*110*/
+
+        specialinvoke $stack24.<java.lang.StringBuilder: void <init>(java.lang.String)>("and category ");
+/*110*/
+
+        $stack6 = this.<rifl.utils.InterfaceSpecificationAccessor: java.util.HashMap parentCategories>;
+/*110*/
+
+        $stack11 = virtualinvoke $stack6.<java.util.HashMap: java.lang.Object get(java.lang.Object)>(old);
+/*110*/
+
+        $stack24 = virtualinvoke $stack24.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.Object)>($stack11);
+/*110*/
+
+        msg = virtualinvoke $stack24.<java.lang.StringBuilder: java.lang.String toString()>();
+/*110*/
+
+     label2:
+        $stack19[2] = msg;
+/*110*/
+
+        msg = staticinvoke <java.lang.String: java.lang.String format(java.lang.String,java.lang.Object[])>("The source or sink with the name %s is declared under multiple categories or assignables. This interface specification accessor supports only uniquely declared sources and sinks. It will use only the one defined under assignable %s%s.", $stack19);
+/*103*/
+/*103*/
+
+        $stack31 = <java.lang.System: java.io.PrintStream err>;
+/*111*/
+
+        virtualinvoke $stack31.<java.io.PrintStream: void println(java.lang.String)>(msg);
+/*111*/
+
+        goto label4;
+/*112*/
+
+     label3:
+        $stack6 = this.<rifl.utils.InterfaceSpecificationAccessor: java.util.HashMap identifiables>;
+/*113*/
+
+        msg = virtualinvoke catSrcSnk.<rifl.spec.CatSrcSnk: java.lang.String getName()>();
+/*113*/
+
+        virtualinvoke $stack6.<java.util.HashMap: java.lang.Object put(java.lang.Object,java.lang.Object)>(msg, catSrcSnk);
+/*113*/
+
+        $stack6 = this.<rifl.utils.InterfaceSpecificationAccessor: java.util.HashMap parentCategories>;
+/*114*/
+
+        virtualinvoke $stack6.<java.util.HashMap: java.lang.Object put(java.lang.Object,java.lang.Object)>(catSrcSnk, category);
+/*114*/
+
+        $stack6 = this.<rifl.utils.InterfaceSpecificationAccessor: java.util.HashMap parentAssignables>;
+/*115*/
+
+        virtualinvoke $stack6.<java.util.HashMap: java.lang.Object put(java.lang.Object,java.lang.Object)>(catSrcSnk, assignable);
+/*115*/
+
+     label4:
+        return;
+/*117*/
+    }
+

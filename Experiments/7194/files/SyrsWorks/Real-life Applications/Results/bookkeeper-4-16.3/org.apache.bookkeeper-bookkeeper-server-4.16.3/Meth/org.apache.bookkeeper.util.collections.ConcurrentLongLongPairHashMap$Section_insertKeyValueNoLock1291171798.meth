@@ -1,0 +1,25 @@
+static void org.apache.bookkeeper.util.collections.ConcurrentLongLongPairHashMap$Section:insertKeyValueNoLock(long[] table,int capacity,long key1,long key2,long value1,long value2)
+{
+long $stack13;
+  byte $stack15;
+  int $stack16;
+  $stack13 = org.apache.bookkeeper.util.collections.ConcurrentLongLongPairHashMap.hash(key1,key2);
+ capacity = org.apache.bookkeeper.util.collections.ConcurrentLongLongPairHashMap.signSafeMod($stack13,capacity);
+ label0:$stack13=table[capacity];
+ $stack15=($stack13 cmp -1L);
+ if ($stack15!=0) goto label1;
+ table[capacity]=key1;
+ $stack16=(capacity+1);
+ table[$stack16]=key2;
+ $stack16=(capacity+2);
+ table[$stack16]=value1;
+ capacity=(capacity+3);
+ table[capacity]=value2;
+ return;
+ label1:capacity=(capacity+4);
+ $stack16=#table;
+ $stack16=($stack16-1);
+ capacity=(capacity & $stack16);
+ goto label0;
+ } 
+

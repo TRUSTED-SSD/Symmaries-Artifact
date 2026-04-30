@@ -1,0 +1,24 @@
+void org.apache.rocketmq.tieredstore.TieredDispatcher:swapDispatchRequestList()
+{
+java.util.concurrent.locks.ReentrantLock $stack2;
+  java.util.concurrent.ConcurrentMap $stack3;
+  java.util.concurrent.ConcurrentHashMap $stack4;
+  java.lang.Throwable $stack6;
+  $stack2=this.dispatchRequestListLock;
+ $stack2.lock();
+ label0:$stack3=this.dispatchRequestWriteMap;
+ this.dispatchRequestReadMap=$stack3;
+ $stack4=new java.util.concurrent.ConcurrentHashMap;
+ $stack4#java.util.concurrent.ConcurrentHashMap();
+ this.dispatchRequestWriteMap=$stack4;
+ label1:$stack2=this.dispatchRequestListLock;
+ $stack2.unlock();
+ goto label2;
+ label3:$stack6 = catch;
+ $stack2=this.dispatchRequestListLock;
+ $stack2.unlock();
+ throw $stack6;
+ label2:return;
+ catch java.lang.Throwable: label0 - label1 : label3;
+} 
+

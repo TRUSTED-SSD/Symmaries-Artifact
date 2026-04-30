@@ -1,0 +1,49 @@
+    public static void savePreferences() throws java.io.IOException
+    {
+        java.io.FileOutputStream fos;
+        java.lang.Throwable l1;
+        java.io.File $stack3;
+        java.util.Properties $stack4;
+
+        fos = new java.io.FileOutputStream;
+/*57*/
+
+        $stack3 = staticinvoke <junit.runner.BaseTestRunner: java.io.File getPreferencesFile()>();
+/*57*/
+
+        specialinvoke fos.<java.io.FileOutputStream: void <init>(java.io.File)>($stack3);
+/*57*/
+
+     label1:
+        $stack4 = staticinvoke <junit.runner.BaseTestRunner: java.util.Properties getPreferences()>();
+/*59*/
+
+        virtualinvoke $stack4.<java.util.Properties: void store(java.io.OutputStream,java.lang.String)>(fos, "");
+/*59*/
+
+     label2:
+        virtualinvoke fos.<java.io.FileOutputStream: void close()>();
+/*61*/
+
+        goto label5;
+/*62*/
+
+     label3:
+        l1 := @caughtexception;
+/*63*/
+
+     label4:
+        virtualinvoke fos.<java.io.FileOutputStream: void close()>();
+/*61*/
+
+        throw l1;
+/*61*/
+
+     label5:
+        return;
+/*63*/
+
+        catch java.lang.Throwable from label1 to label2 with label3;
+        catch java.lang.Throwable from label3 to label4 with label3;
+    }
+

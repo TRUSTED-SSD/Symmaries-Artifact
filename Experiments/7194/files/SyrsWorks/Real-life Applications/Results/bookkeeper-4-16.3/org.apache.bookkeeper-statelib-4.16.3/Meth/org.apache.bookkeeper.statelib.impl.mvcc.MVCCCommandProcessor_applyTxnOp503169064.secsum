@@ -1,0 +1,9 @@
+void org.apache.bookkeeper.statelib.impl.mvcc.MVCCCommandProcessor:applyTxnOp (
+  long revision, org.apache.bookkeeper.api.kv.op.TxnOp op,
+  boolean ignoreSmallerRevision,
+  org.apache.bookkeeper.statelib.impl.mvcc.MVCCStoreImpl localStore) {
+  guard = pc = ⊥;
+  ret(obj_level(localStore)) = level(ignoreSmallerRevision) ⊔ level(localStore) ⊔ level(op) ⊔ level(revision) ⊔ obj_level(localStore) ⊔ obj_level(op);
+  ret(obj_level(op)) = level(localStore) ⊔ level(op) ⊔ level(revision) ⊔ obj_level(localStore) ⊔ obj_level(op);
+  ret(obj_level(this)) = level(localStore) ⊔ level(op) ⊔ level(revision) ⊔ obj_level(localStore) ⊔ obj_level(op) ⊔ obj_level(this);
+}

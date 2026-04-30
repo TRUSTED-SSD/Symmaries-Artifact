@@ -1,0 +1,51 @@
+org.apache.rocketmq.remoting.protocol.body.TopicList org.apache.rocketmq.client.impl.MQClientAPIImpl:getHasUnitSubTopicList(boolean containRetry,long timeoutMillis)
+{
+org.apache.rocketmq.remoting.protocol.RemotingCommand request;
+  byte[] body;
+  org.apache.rocketmq.remoting.protocol.body.TopicList topicList;
+  java.util.Iterator it;
+  java.lang.String topic;
+  org.apache.rocketmq.remoting.RemotingClient $stack11;
+  boolean $stack13;
+  int $stack14;
+  org.apache.rocketmq.client.exception.MQClientException $stack16;
+  java.lang.Object $stack20;
+  java.util.Set $stack21;
+  java.lang.AssertionError $stack31;
+  request = org.apache.rocketmq.remoting.protocol.RemotingCommand.createRequestCommand(312,null);
+ $stack11=this.remotingClient;
+ request = $stack11.invokeSync(null,request,timeoutMillis);
+ $stack13=org.apache.rocketmq.client.impl.MQClientAPIImpl.$assertionsDisabled;
+ if ($stack13!=0) goto label0;
+ if (request!=null) goto label0;
+ $stack31=new java.lang.AssertionError;
+ $stack31#java.lang.AssertionError();
+ throw $stack31;
+ label0:$stack14 = request.getCode();
+ switch [$stack14]
+if 0 goto label1;
+goto label2;
+ label1:body = request.getBody();
+ if (body==null) goto label2;
+ body = request.getBody();
+ $stack20 = org.apache.rocketmq.remoting.protocol.RemotingSerializable.decode(body,org.apache.rocketmq.remoting.protocol.body.TopicList);
+ topicList=(org.apache.rocketmq.remoting.protocol.body.TopicList) $stack20;
+ if (containRetry!=0) goto label3;
+ $stack21 = topicList.getTopicList();
+ it = $stack21.iterator();
+ label4:containRetry = it.hasNext();
+ if (containRetry==0) goto label3;
+ $stack20 = it.next();
+ topic=(java.lang.String) $stack20;
+ containRetry = topic.startsWith("%RETRY%");
+ if (containRetry==0) goto label5;
+ it.remove();
+ label5:goto label4;
+ label3:return  topicList;
+ label2:$stack16=new org.apache.rocketmq.client.exception.MQClientException;
+ $stack14 = request.getCode();
+ topic = request.getRemark();
+ $stack16#org.apache.rocketmq.client.exception.MQClientException($stack14,topic);
+ throw $stack16;
+ } 
+

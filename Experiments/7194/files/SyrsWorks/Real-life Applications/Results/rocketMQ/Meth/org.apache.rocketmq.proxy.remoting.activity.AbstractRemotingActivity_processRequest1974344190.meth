@@ -1,0 +1,19 @@
+org.apache.rocketmq.remoting.protocol.RemotingCommand org.apache.rocketmq.proxy.remoting.activity.AbstractRemotingActivity:processRequest(io.netty.channel.ChannelHandlerContext ctx,org.apache.rocketmq.remoting.protocol.RemotingCommand request)
+{
+org.apache.rocketmq.proxy.common.ProxyContext context;
+  org.apache.rocketmq.remoting.protocol.RemotingCommand response;
+  org.apache.rocketmq.proxy.remoting.pipeline.RequestPipeline $stack6;
+  java.lang.Throwable $stack9;
+  context = this.createContext(ctx,request);
+ label0:$stack6=this.requestPipeline;
+ $stack6.execute(ctx,request,context);
+ response = this.processRequest0(ctx,request,context);
+ if (response==null) goto label1;
+ this.writeResponse(ctx,context,request,response);
+ label1:return  null;
+ label2:$stack9 = catch;
+ this.writeErrResponse(ctx,context,request,$stack9);
+ return  null;
+ catch java.lang.Throwable: label0 - label1 : label2;
+} 
+

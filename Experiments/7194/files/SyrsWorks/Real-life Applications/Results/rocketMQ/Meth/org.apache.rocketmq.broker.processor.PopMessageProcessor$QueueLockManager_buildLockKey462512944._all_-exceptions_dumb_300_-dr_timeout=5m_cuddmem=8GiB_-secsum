@@ -1,0 +1,9 @@
+java.lang.String org.apache.rocketmq.broker.processor.PopMessageProcessor$QueueLockManager:buildLockKey (
+  java.lang.String @topic, java.lang.String consumerGroup, int queueId) {
+  guard = tt;
+  ret(level()) = level(@topic) ⊔ level(consumerGroup) ⊔ level(queueId) ⊔ obj_level(@topic);
+  ret(obj_level()) = level(@topic) ⊔ level(consumerGroup) ⊔ level(queueId) ⊔ obj_level(@topic);
+  ret(obj_level(@topic)) = level(@topic) ⊔ level(consumerGroup) ⊔ level(queueId) ⊔ obj_level(@topic);
+  ret(obj_level(consumerGroup)) = level(@topic) ⊔ level(consumerGroup) ⊔ level(queueId) ⊔ obj_level(@topic);
+  ret(obj_level(this)) = level(@topic) ⊔ level(consumerGroup) ⊔ level(queueId) ⊔ obj_level(@topic) ⊔ obj_level(this);
+}

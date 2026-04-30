@@ -1,0 +1,22 @@
+void org.xerial.snappy.SnappyFramedOutputStream:write(int l1)
+{
+boolean $stack2;
+  java.nio.ByteBuffer $stack3;
+  int $stack4;
+  byte $stack5;
+  java.io.IOException $stack10;
+  $stack2=this.closed;
+ if ($stack2==0) goto label0;
+ $stack10=new java.io.IOException;
+ $stack10#java.io.IOException("Stream is closed");
+ throw $stack10;
+ label0:$stack3=this.buffer;
+ $stack4 = $stack3.remaining();
+ if ($stack4>0) goto label1;
+ this#org.xerial.snappy.SnappyFramedOutputStream:flushBuffer();
+ label1:$stack3=this.buffer;
+ $stack5=(byte) l1;
+ $stack3.put($stack5);
+ return;
+ } 
+

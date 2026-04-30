@@ -1,0 +1,51 @@
+void org.apache.kerby.kerberos.kerb.common.Krb5Parser:insertSections(java.lang.String @line,java.io.BufferedReader br,java.util.Map items)
+{
+int pos;
+  java.lang.String sectionName;
+  java.util.IdentityHashMap entries;
+  boolean $stack7;
+  java.io.IOException $stack9;
+  java.lang.StringBuilder $stack10;
+  int $stack14;
+  java.lang.String line;
+line=@line;
+label0:$stack7 = line.startsWith("[");
+ if ($stack7==0) goto label1;
+ pos = line.indexOf("]");
+ if (pos<2) goto label2;
+ $stack14 = line.length();
+ $stack14=($stack14-1);
+ if (pos>=$stack14) goto label3;
+ label2:$stack9=new java.io.IOException;
+ $stack10=new java.lang.StringBuilder;
+ $stack10#java.lang.StringBuilder();
+ $stack10 = $stack10.append("Illegal section name: ");
+ $stack10 = $stack10.append(line);
+ line = $stack10.toString();
+ $stack9#java.io.IOException(line);
+ throw $stack9;
+ label3:sectionName = line.substring(1,pos);
+ entries=new java.util.IdentityHashMap;
+ entries#java.util.IdentityHashMap();
+ line = br.readLine();
+dummyClass.highSourceMut(line);
+ if (line!=null) goto label4;
+ goto label1;
+ label4:$stack7 = line.isEmpty();
+ if ($stack7!=0) goto label5;
+ $stack7 = this#org.apache.kerby.kerberos.kerb.common.Krb5Parser:isComment(line);
+ if ($stack7==0) goto label5;
+ line = br.readLine();
+dummyClass.highSourceMut(line);
+ if (line!=null) goto label4;
+ goto label5;
+ label5:if (line==null) goto label6;
+ line = line.trim();
+ line = this#org.apache.kerby.kerberos.kerb.common.Krb5Parser:insertEntries(line,br,(java.util.Map)entries);
+ items.put((java.lang.Object)sectionName,(java.lang.Object)entries);
+ label6:if (line!=null) goto label7;
+ goto label1;
+ label7:goto label0;
+ label1:return;
+ } 
+

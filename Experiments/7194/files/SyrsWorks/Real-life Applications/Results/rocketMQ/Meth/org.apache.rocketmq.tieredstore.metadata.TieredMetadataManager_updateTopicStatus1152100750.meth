@@ -1,0 +1,14 @@
+void org.apache.rocketmq.tieredstore.metadata.TieredMetadataManager:updateTopicStatus(java.lang.String topic,int status)
+{
+org.apache.rocketmq.tieredstore.metadata.TopicMetadata metadata;
+  long $stack5;
+  metadata = this.getTopic(topic);
+ if (metadata!=null) goto label0;
+ return;
+ label0:metadata.setStatus(status);
+ $stack5 = java.lang.System.currentTimeMillis();
+ metadata.setUpdateTimestamp($stack5);
+ this.persist();
+ return;
+ } 
+

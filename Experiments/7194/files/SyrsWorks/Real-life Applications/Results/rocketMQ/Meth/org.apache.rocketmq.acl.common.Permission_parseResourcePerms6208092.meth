@@ -1,0 +1,53 @@
+static void org.apache.rocketmq.acl.common.Permission:parseResourcePerms(org.apache.rocketmq.acl.plain.PlainAccessResource plainAccessResource,java.lang.Boolean isTopic,java.util.List resources)
+{
+java.util.Iterator l3;
+  java.lang.String resource;
+  java.lang.String[] items;
+  boolean $stack6;
+  java.lang.Object $stack9;
+  int $stack11;
+  org.apache.rocketmq.acl.common.AclException $stack12;
+  java.lang.Object[] $stack13;
+  java.lang.String $stack14;
+  byte $stack15;
+  if (resources==null) goto label0;
+ $stack6 = resources.isEmpty();
+ if ($stack6==0) goto label1;
+ label0:return;
+ label1:l3 = resources.iterator();
+ label2:$stack6 = l3.hasNext();
+ if ($stack6==0) goto label3;
+ $stack9 = l3.next();
+ resource=(java.lang.String) $stack9;
+ items = org.apache.commons.lang3.StringUtils.split(resource,"=");
+ $stack11=#items;
+ if ($stack11!=2) goto label4;
+ $stack6 = isTopic.booleanValue();
+ if ($stack6==0) goto label5;
+ resource=items[0];
+ resource = resource.trim();
+ goto label6;
+ label5:resource=items[0];
+ resource = resource.trim();
+ resource = org.apache.rocketmq.acl.plain.PlainAccessResource.getRetryTopic(resource);
+ label6:$stack14=items[1];
+ $stack14 = $stack14.trim();
+ $stack15 = org.apache.rocketmq.acl.common.Permission.parsePermFromString($stack14);
+ plainAccessResource.addResourceAndPerm(resource,$stack15);
+ goto label7;
+ label4:$stack12=new org.apache.rocketmq.acl.common.AclException;
+ $stack13=new java.lang.Object[2];
+ $stack6 = isTopic.booleanValue();
+ if ($stack6==0) goto label8;
+ $stack14="topic";
+ goto label9;
+ label8:$stack14="group";
+ label9:$stack13[0]=$stack14;
+ $stack13[1]=resource;
+ resource = java.lang.String.format("Parse resource permission failed for %s:%s",$stack13);
+ $stack12#org.apache.rocketmq.acl.common.AclException(resource);
+ throw $stack12;
+ label7:goto label2;
+ label3:return;
+ } 
+

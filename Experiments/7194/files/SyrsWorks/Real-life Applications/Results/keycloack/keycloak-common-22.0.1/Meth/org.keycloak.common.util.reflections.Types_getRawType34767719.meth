@@ -1,0 +1,54 @@
+static java.lang.Class org.keycloak.common.util.reflections.Types:getRawType(java.lang.reflect.Type @type)
+{
+boolean $stack3;
+  java.lang.reflect.Type[] $stack8;
+  int $stack11;
+  java.lang.Class $stack14;
+  java.lang.Object $stack17;
+  java.lang.RuntimeException tmp$884996205;
+  java.lang.reflect.ParameterizedType tmp$239096651;
+  java.lang.reflect.GenericArrayType tmp$1794994936;
+  java.lang.reflect.TypeVariable tmp$534638188;
+  java.lang.reflect.Type type;
+type=@type;
+$stack3=type instanceof java.lang.Class;
+ if ($stack3==0) goto label0;
+ $stack14=(java.lang.Class) type;
+ return  $stack14;
+ label0:$stack3=type instanceof java.lang.reflect.ParameterizedType;
+ if ($stack3==0) goto label1;
+ type=(java.lang.reflect.ParameterizedType) type;
+ tmp$239096651=(java.lang.reflect.ParameterizedType) type;
+ type = tmp$239096651.getRawType();
+ $stack14=(java.lang.Class) type;
+ return  $stack14;
+ label1:$stack3=type instanceof java.lang.reflect.GenericArrayType;
+ if ($stack3==0) goto label2;
+ type=(java.lang.reflect.GenericArrayType) type;
+ tmp$1794994936=(java.lang.reflect.GenericArrayType) type;
+ type = tmp$1794994936.getGenericComponentType();
+ type = org.keycloak.common.util.reflections.Types.getRawType(type);
+ $stack14=(java.lang.Class) type;
+ $stack17 = java.lang.reflect.Array.newInstance($stack14,0);
+ $stack14 = $stack17.getClass();
+ return  $stack14;
+ label2:$stack3=type instanceof java.lang.reflect.TypeVariable;
+ if ($stack3==0) goto label3;
+ type=(java.lang.reflect.TypeVariable) type;
+ tmp$534638188=(java.lang.reflect.TypeVariable) type;
+ $stack8 = tmp$534638188.getBounds();
+ if ($stack8==null) goto label3;
+ tmp$534638188=(java.lang.reflect.TypeVariable) type;
+ $stack8 = tmp$534638188.getBounds();
+ $stack11=#$stack8;
+ if ($stack11<=0) goto label3;
+ tmp$534638188=(java.lang.reflect.TypeVariable) type;
+ $stack8 = tmp$534638188.getBounds();
+ type=$stack8[0];
+ $stack14 = org.keycloak.common.util.reflections.Types.getRawType(type);
+ return  $stack14;
+ label3:tmp$884996205=new java.lang.RuntimeException;
+ tmp$884996205#java.lang.RuntimeException("unable to determine base class");
+ throw tmp$884996205;
+ } 
+

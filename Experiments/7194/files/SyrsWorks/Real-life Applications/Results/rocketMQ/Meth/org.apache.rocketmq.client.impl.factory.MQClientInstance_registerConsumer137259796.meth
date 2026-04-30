@@ -1,0 +1,29 @@
+boolean org.apache.rocketmq.client.impl.factory.MQClientInstance:registerConsumer(java.lang.String @group,org.apache.rocketmq.client.impl.consumer.MQConsumerInner @consumer)
+{
+java.util.concurrent.ConcurrentMap $stack4;
+  java.lang.Object $stack5;
+  java.lang.StringBuilder $stack6;
+  org.apache.rocketmq.logging.org.slf4j.Logger $stack7;
+  org.apache.rocketmq.client.impl.consumer.MQConsumerInner consumer;
+java.lang.String group;
+group=@group;
+consumer=@consumer;
+if (null==group) goto label0;
+ if (null!=consumer) goto label1;
+ label0:return  0;
+ label1:$stack4=this.consumerTable;
+ $stack5 = $stack4.putIfAbsent((java.lang.Object)group,(java.lang.Object)consumer);
+ consumer=(org.apache.rocketmq.client.impl.consumer.MQConsumerInner) $stack5;
+ if (consumer==null) goto label2;
+ $stack7=org.apache.rocketmq.client.impl.factory.MQClientInstance.log;
+ $stack6=new java.lang.StringBuilder;
+ $stack6#java.lang.StringBuilder();
+ $stack6 = $stack6.append("the consumer group[");
+ $stack6 = $stack6.append(group);
+ $stack6 = $stack6.append("] exist already.");
+ group = $stack6.toString();
+ $stack7.warn(group);
+ return  0;
+ label2:return  1;
+ } 
+

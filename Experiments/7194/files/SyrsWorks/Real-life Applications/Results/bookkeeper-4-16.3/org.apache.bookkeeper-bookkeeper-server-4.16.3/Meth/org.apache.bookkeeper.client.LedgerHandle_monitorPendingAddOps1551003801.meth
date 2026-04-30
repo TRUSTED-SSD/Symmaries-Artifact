@@ -1,0 +1,29 @@
+void org.apache.bookkeeper.client.LedgerHandle:monitorPendingAddOps()
+{
+int timedOut;
+  java.util.Iterator l2;
+  org.apache.bookkeeper.client.PendingAddOp op;
+  java.util.Queue $stack4;
+  boolean $stack6;
+  org.slf4j.Logger $stack7;
+  java.lang.Integer $stack9;
+  java.lang.Object $stack10;
+  timedOut=0;
+ $stack4=this.pendingAddOps;
+ l2 = $stack4.iterator();
+ label0:$stack6 = l2.hasNext();
+ if ($stack6==0) goto label1;
+ $stack10 = l2.next();
+ op=(org.apache.bookkeeper.client.PendingAddOp) $stack10;
+ $stack6 = op.maybeTimeout();
+ if ($stack6==0) goto label2;
+ timedOut=(timedOut+1);
+ label2:goto label0;
+ label1:if (timedOut<=0) goto label3;
+ $stack7=org.apache.bookkeeper.client.LedgerHandle.LOG;
+ $stack9 = java.lang.Integer.valueOf(timedOut);
+ dummyClass.lowSink("Timed out {} add ops");
+$stack7.info("Timed out {} add ops",(java.lang.Object)$stack9);
+ label3:return;
+ } 
+

@@ -1,0 +1,27 @@
+java.nio.ByteBuffer org.apache.kerby.asn1.parse.Asn1DerivedItem:makeBodyBuffer()
+{
+java.nio.ByteBuffer tmpBuffer;
+  java.util.Iterator l2;
+  org.apache.kerby.asn1.parse.Asn1ParseResult parseItem;
+  int $stack4;
+  org.apache.kerby.asn1.parse.Asn1Container $stack6;
+  java.util.List $stack7;
+  boolean $stack9;
+  java.lang.Object $stack11;
+  java.nio.ByteBuffer $stack12;
+  $stack4 = this.getBodyLength();
+ tmpBuffer = java.nio.ByteBuffer.allocate($stack4);
+ $stack6=this.container;
+ $stack7 = $stack6.getChildren();
+ l2 = $stack7.iterator();
+ label0:$stack9 = l2.hasNext();
+ if ($stack9==0) goto label1;
+ $stack11 = l2.next();
+ parseItem=(org.apache.kerby.asn1.parse.Asn1ParseResult) $stack11;
+ $stack12 = parseItem.getBodyBuffer();
+ tmpBuffer.put($stack12);
+ goto label0;
+ label1:tmpBuffer.flip();
+ return  tmpBuffer;
+ } 
+

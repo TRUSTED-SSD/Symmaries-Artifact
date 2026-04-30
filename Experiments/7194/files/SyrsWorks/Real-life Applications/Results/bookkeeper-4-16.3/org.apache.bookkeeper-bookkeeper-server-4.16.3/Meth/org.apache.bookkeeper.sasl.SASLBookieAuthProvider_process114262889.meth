@@ -1,0 +1,36 @@
+void org.apache.bookkeeper.sasl.SASLBookieAuthProvider:process(org.apache.bookkeeper.auth.AuthToken @m,org.apache.bookkeeper.auth.AuthCallbacks$GenericCallback @cb)
+{
+byte[] clientSideToken;
+  org.apache.bookkeeper.sasl.SaslServerState $stack6;
+  boolean $stack9;
+  javax.security.sasl.SaslException $stack14;
+  org.slf4j.Logger $stack15;
+  org.apache.bookkeeper.auth.AuthToken m;
+org.apache.bookkeeper.auth.AuthCallbacks$GenericCallback cb;
+cb=@cb;
+m=@m;
+label0:clientSideToken = m.getData();
+ $stack6=this.server;
+ clientSideToken = $stack6.response(clientSideToken);
+ if (clientSideToken==null) goto label1;
+ m = org.apache.bookkeeper.auth.AuthToken.wrap(clientSideToken);
+ cb.operationComplete(0,(java.lang.Object)m);
+ label1:$stack6=this.server;
+ $stack9 = $stack6.isComplete();
+ if ($stack9==0) goto label2;
+ cb=this.completeCb;
+ cb.operationComplete(0,null);
+ label2:goto label3;
+ label4:$stack14 = catch;
+ $stack15=org.apache.bookkeeper.sasl.SASLBookieAuthProvider.LOG;
+ $stack9 = $stack15.isDebugEnabled();
+ if ($stack9==0) goto label5;
+ $stack15=org.apache.bookkeeper.sasl.SASLBookieAuthProvider.LOG;
+ dummyClass.lowSink("SASL error");
+$stack15.debug("SASL error",(java.lang.Throwable)$stack14);
+ label5:cb=this.completeCb;
+ cb.operationComplete(-102,null);
+ label3:return;
+ catch javax.security.sasl.SaslException: label0 - label2 : label4;
+} 
+

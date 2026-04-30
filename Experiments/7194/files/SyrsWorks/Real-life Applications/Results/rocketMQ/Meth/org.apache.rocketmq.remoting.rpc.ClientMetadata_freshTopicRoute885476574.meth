@@ -1,0 +1,44 @@
+void org.apache.rocketmq.remoting.rpc.ClientMetadata:freshTopicRoute(java.lang.String topic,org.apache.rocketmq.remoting.protocol.route.TopicRouteData topicRouteData)
+{
+org.apache.rocketmq.remoting.protocol.route.TopicRouteData old;
+  java.lang.Object mqEndPoints;
+  org.apache.rocketmq.remoting.protocol.route.BrokerData bd;
+  java.util.concurrent.ConcurrentMap $stack6;
+  boolean $stack8;
+  java.util.List $stack9;
+  java.lang.Object $stack16;
+  java.lang.String $stack18;
+  java.util.HashMap $stack19;
+  java.util.Iterator tmp$1120872325;
+  if (topic==null) goto label0;
+ if (topicRouteData!=null) goto label1;
+ label0:return;
+ label1:$stack6=this.topicRouteTable;
+ mqEndPoints = $stack6.get((java.lang.Object)topic);
+ old=(org.apache.rocketmq.remoting.protocol.route.TopicRouteData) mqEndPoints;
+ $stack8 = topicRouteData.topicRouteDataChanged(old);
+ if ($stack8!=0) goto label2;
+ return;
+ label2:$stack9 = topicRouteData.getBrokerDatas();
+ mqEndPoints = $stack9.iterator();
+ label3:tmp$1120872325=(java.util.Iterator) mqEndPoints;
+ $stack8 = tmp$1120872325.hasNext();
+ if ($stack8==0) goto label4;
+ tmp$1120872325=(java.util.Iterator) mqEndPoints;
+ $stack16 = tmp$1120872325.next();
+ bd=(org.apache.rocketmq.remoting.protocol.route.BrokerData) $stack16;
+ $stack6=this.brokerAddrTable;
+ $stack18 = bd.getBrokerName();
+ $stack19 = bd.getBrokerAddrs();
+ $stack6.put((java.lang.Object)$stack18,(java.lang.Object)$stack19);
+ goto label3;
+ label4:mqEndPoints = org.apache.rocketmq.remoting.rpc.ClientMetadata.topicRouteData2EndpointsForStaticTopic(topic,topicRouteData);
+ if (mqEndPoints==null) goto label5;
+ $stack6=(java.util.concurrent.ConcurrentMap) mqEndPoints;
+ $stack8 = $stack6.isEmpty();
+ if ($stack8!=0) goto label5;
+ $stack6=this.topicEndPointsTable;
+ $stack6.put((java.lang.Object)topic,mqEndPoints);
+ label5:return;
+ } 
+

@@ -1,0 +1,39 @@
+void org.apache.rocketmq.client.impl.producer.DefaultMQProducerImpl:prepareSendRequest(org.apache.rocketmq.common.message.Message msg,long timeout)
+{
+java.lang.String correlationId;
+  java.lang.String requestClientId;
+  boolean hasRouteData;
+  org.apache.rocketmq.client.impl.factory.MQClientInstance $stack12;
+  java.util.concurrent.ConcurrentMap $stack17;
+  long $stack24;
+  byte $stack25;
+  org.apache.rocketmq.logging.org.slf4j.Logger $stack26;
+  java.lang.Long $stack29;
+  correlationId = org.apache.rocketmq.common.utils.CorrelationIdUtil.createCorrelationId();
+ $stack12 = this.getMqClientFactory();
+ requestClientId = $stack12.getClientId();
+ org.apache.rocketmq.common.message.MessageAccessor.putProperty(msg,"CORRELATION_ID",correlationId);
+ org.apache.rocketmq.common.message.MessageAccessor.putProperty(msg,"REPLY_TO_CLIENT",requestClientId);
+ correlationId = java.lang.String.valueOf(timeout);
+ org.apache.rocketmq.common.message.MessageAccessor.putProperty(msg,"TTL",correlationId);
+ $stack12 = this.getMqClientFactory();
+ $stack17 = $stack12.getTopicRouteTable();
+ correlationId = msg.getTopic();
+ hasRouteData = $stack17.containsKey((java.lang.Object)correlationId);
+ if (hasRouteData!=0) goto label0;
+ timeout = java.lang.System.currentTimeMillis();
+ correlationId = msg.getTopic();
+ this#org.apache.rocketmq.client.impl.producer.DefaultMQProducerImpl:tryToFindTopicPublishInfo(correlationId);
+ $stack12 = this.getMqClientFactory();
+ $stack12.sendHeartbeatToAllBrokerWithLock();
+ $stack24 = java.lang.System.currentTimeMillis();
+ timeout=($stack24-timeout);
+ $stack25=(timeout cmp 500L);
+ if ($stack25<=0) goto label0;
+ $stack26=this.log;
+ correlationId = msg.getTopic();
+ $stack29 = java.lang.Long.valueOf(timeout);
+ $stack26.warn("prepare send request for <{}> cost {} ms",(java.lang.Object)correlationId,(java.lang.Object)$stack29);
+ label0:return;
+ } 
+

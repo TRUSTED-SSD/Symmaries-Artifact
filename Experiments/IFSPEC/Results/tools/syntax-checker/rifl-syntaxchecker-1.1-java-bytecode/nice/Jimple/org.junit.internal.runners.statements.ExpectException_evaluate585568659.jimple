@@ -1,0 +1,143 @@
+    public void evaluate() throws java.lang.Exception
+    {
+        org.junit.internal.runners.statements.ExpectException this;
+        boolean complete, $stack15;
+        java.lang.Throwable e;
+        java.lang.String message;
+        org.junit.runners.model.Statement $stack4;
+        java.lang.AssertionError $stack5;
+        java.lang.StringBuilder $stack6;
+        java.lang.Class $stack8, $stack14;
+        java.lang.Exception $stack28;
+        org.junit.internal.AssumptionViolatedException $stack29;
+
+        this := @this: org.junit.internal.runners.statements.ExpectException;
+
+        complete = 0;
+/*17*/
+
+     label1:
+        $stack4 = this.<org.junit.internal.runners.statements.ExpectException: org.junit.runners.model.Statement next>;
+/*19*/
+
+        virtualinvoke $stack4.<org.junit.runners.model.Statement: void evaluate()>();
+/*19*/
+
+        complete = 1;
+/*20*/
+
+     label2:
+        goto label5;
+/*30*/
+
+     label3:
+        $stack29 := @caughtexception;
+/*28*/
+
+        throw $stack29;
+/*22*/
+
+     label4:
+        e := @caughtexception;
+/*32*/
+
+        $stack8 = this.<org.junit.internal.runners.statements.ExpectException: java.lang.Class expected>;
+/*24*/
+
+        $stack14 = virtualinvoke e.<java.lang.Object: java.lang.Class getClass()>();
+/*24*/
+
+        $stack15 = virtualinvoke $stack8.<java.lang.Class: boolean isAssignableFrom(java.lang.Class)>($stack14);
+/*24*/
+
+        if $stack15 != 0 goto label5;
+/*24*/
+
+        $stack6 = new java.lang.StringBuilder;
+/*25*/
+
+        specialinvoke $stack6.<java.lang.StringBuilder: void <init>()>();
+/*25*/
+
+        $stack6 = virtualinvoke $stack6.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>("Unexpected exception, expected<");
+/*25*/
+
+        $stack8 = this.<org.junit.internal.runners.statements.ExpectException: java.lang.Class expected>;
+/*25*/
+
+        message = virtualinvoke $stack8.<java.lang.Class: java.lang.String getName()>();
+/*25*/
+
+        $stack6 = virtualinvoke $stack6.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>(message);
+/*25*/
+
+        $stack6 = virtualinvoke $stack6.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>("> but was<");
+/*25*/
+
+        $stack8 = virtualinvoke e.<java.lang.Object: java.lang.Class getClass()>();
+/*25*/
+
+        message = virtualinvoke $stack8.<java.lang.Class: java.lang.String getName()>();
+/*25*/
+
+        $stack6 = virtualinvoke $stack6.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>(message);
+/*25*/
+
+        $stack6 = virtualinvoke $stack6.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>(">");
+/*25*/
+
+        message = virtualinvoke $stack6.<java.lang.StringBuilder: java.lang.String toString()>();
+/*25*/
+/*25*/
+
+        $stack28 = new java.lang.Exception;
+/*28*/
+
+        specialinvoke $stack28.<java.lang.Exception: void <init>(java.lang.String,java.lang.Throwable)>(message, e);
+/*28*/
+
+        throw $stack28;
+/*28*/
+
+     label5:
+        if complete == 0 goto label6;
+/*31*/
+
+        $stack5 = new java.lang.AssertionError;
+/*32*/
+
+        $stack6 = new java.lang.StringBuilder;
+/*32*/
+
+        specialinvoke $stack6.<java.lang.StringBuilder: void <init>()>();
+/*32*/
+
+        $stack6 = virtualinvoke $stack6.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>("Expected exception: ");
+/*32*/
+
+        $stack8 = this.<org.junit.internal.runners.statements.ExpectException: java.lang.Class expected>;
+/*32*/
+
+        message = virtualinvoke $stack8.<java.lang.Class: java.lang.String getName()>();
+/*32*/
+
+        $stack6 = virtualinvoke $stack6.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>(message);
+/*32*/
+
+        message = virtualinvoke $stack6.<java.lang.StringBuilder: java.lang.String toString()>();
+/*32*/
+
+        specialinvoke $stack5.<java.lang.AssertionError: void <init>(java.lang.Object)>(message);
+/*32*/
+
+        throw $stack5;
+/*32*/
+
+     label6:
+        return;
+/*35*/
+
+        catch org.junit.internal.AssumptionViolatedException from label1 to label2 with label3;
+        catch java.lang.Throwable from label1 to label2 with label4;
+    }
+

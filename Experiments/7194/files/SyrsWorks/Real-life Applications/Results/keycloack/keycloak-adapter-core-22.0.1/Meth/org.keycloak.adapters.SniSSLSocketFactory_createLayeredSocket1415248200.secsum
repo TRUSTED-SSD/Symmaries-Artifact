@@ -1,0 +1,11 @@
+java.net.Socket org.keycloak.adapters.SniSSLSocketFactory:createLayeredSocket (
+  java.net.Socket @socket, java.lang.String target, int port,
+  org.apache.http.protocol.HttpContext context) {
+  guard = pc ⊔ level(@socket) ⊔ level(target) ⊔ level(this) ⊔ obj_level(@socket) ⊔ obj_level(target) ⊔ obj_level(this) = ⊥;
+  ret(level()) = level(context) ⊔ level(port) ⊔ obj_level(context);
+  ret(obj_level()) = level(context) ⊔ level(port) ⊔ obj_level(context);
+  ret(obj_level(@socket)) = level(context) ⊔ level(port) ⊔ obj_level(context);
+  ret(obj_level(context)) = obj_level(context);
+  ret(obj_level(target)) = ⊥;
+  ret(obj_level(this)) = level(context) ⊔ level(port) ⊔ obj_level(context);
+}

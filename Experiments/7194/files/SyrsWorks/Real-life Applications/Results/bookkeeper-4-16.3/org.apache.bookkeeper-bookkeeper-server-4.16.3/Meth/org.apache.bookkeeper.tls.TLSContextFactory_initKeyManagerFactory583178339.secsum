@@ -1,0 +1,11 @@
+javax.net.ssl.KeyManagerFactory org.apache.bookkeeper.tls.TLSContextFactory:initKeyManagerFactory (
+  java.lang.String @keyStoreType, java.lang.String keyStoreLocation,
+  java.lang.String keyStorePasswordPath) {
+  guard = pc ⊔ level(keyStoreLocation) ⊔ obj_level(keyStoreLocation) = ⊥;
+  ret(level()) = ⊥;
+  ret(obj_level()) = level(@keyStoreType) ⊔ level(keyStorePasswordPath) ⊔ obj_level(@keyStoreType) ⊔ obj_level(this);
+  ret(obj_level(@keyStoreType)) = level(@keyStoreType) ⊔ level(keyStorePasswordPath) ⊔ obj_level(@keyStoreType) ⊔ obj_level(this);
+  ret(obj_level(keyStoreLocation)) = level(@keyStoreType) ⊔ level(keyStorePasswordPath) ⊔ obj_level(@keyStoreType) ⊔ obj_level(this);
+  ret(obj_level(keyStorePasswordPath)) = level(@keyStoreType) ⊔ level(keyStorePasswordPath) ⊔ obj_level(@keyStoreType) ⊔ obj_level(this);
+  ret(obj_level(this)) = level(@keyStoreType) ⊔ level(keyStorePasswordPath) ⊔ obj_level(@keyStoreType) ⊔ obj_level(this);
+}

@@ -1,0 +1,12 @@
+org.apache.rocketmq.remoting.protocol.RemotingCommand org.apache.rocketmq.proxy.service.mqclient.ProxyClientRemotingProcessor:processRequest(io.netty.channel.ChannelHandlerContext ctx,org.apache.rocketmq.remoting.protocol.RemotingCommand @request)
+{
+int $stack3;
+  org.apache.rocketmq.remoting.protocol.RemotingCommand request;
+request=@request;
+$stack3 = request.getCode();
+ if ($stack3!=39) goto label0;
+ request = this.checkTransactionState(ctx,request);
+ return  request;
+ label0:return  null;
+ } 
+

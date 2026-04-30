@@ -1,0 +1,30 @@
+static java.lang.String org.keycloak.common.util.Encode:encodeNonCodes(java.lang.String @string)
+{
+java.util.regex.Matcher matcher;
+  java.lang.StringBuilder builder;
+  int idx;
+  int start;
+  java.util.regex.Pattern $stack5;
+  boolean $stack8;
+  java.lang.String $stack13;
+  java.lang.String string;
+string=@string;
+$stack5=org.keycloak.common.util.Encode.nonCodes;
+ matcher = $stack5.matcher((java.lang.CharSequence)string);
+ builder=new java.lang.StringBuilder;
+ builder#java.lang.StringBuilder();
+ idx=0;
+ label0:$stack8 = matcher.find(idx);
+ if ($stack8==0) goto label1;
+ start = matcher.start();
+ $stack13 = string.substring(idx,start);
+ builder.append($stack13);
+ builder.append("%25");
+ idx=(start+1);
+ goto label0;
+ label1:string = string.substring(idx);
+ builder.append(string);
+ string = builder.toString();
+ return  string;
+ } 
+

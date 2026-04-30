@@ -1,0 +1,22 @@
+static void org.apache.bookkeeper.util.collections.ConcurrentOpenHashMap$Section:insertKeyValueNoLock(java.lang.Object[] table,int capacity,java.lang.Object key,java.lang.Object value)
+{
+long $stack6;
+  java.lang.Object $stack8;
+  int $stack9;
+  java.lang.Object $stack15;
+  $stack6 = org.apache.bookkeeper.util.collections.ConcurrentOpenHashMap.hash(key);
+ capacity = org.apache.bookkeeper.util.collections.ConcurrentOpenHashMap.signSafeMod($stack6,capacity);
+ label0:$stack15=table[capacity];
+ $stack8 = org.apache.bookkeeper.util.collections.ConcurrentOpenHashMap.access$500();
+ if ($stack15!=$stack8) goto label1;
+ table[capacity]=key;
+ capacity=(capacity+1);
+ table[capacity]=value;
+ return;
+ label1:capacity=(capacity+2);
+ $stack9=#table;
+ $stack9=($stack9-1);
+ capacity=(capacity & $stack9);
+ goto label0;
+ } 
+

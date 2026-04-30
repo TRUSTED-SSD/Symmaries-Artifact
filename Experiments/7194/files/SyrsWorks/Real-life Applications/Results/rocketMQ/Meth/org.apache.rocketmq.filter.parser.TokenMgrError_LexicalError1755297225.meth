@@ -1,0 +1,37 @@
+static java.lang.String org.apache.rocketmq.filter.parser.TokenMgrError:LexicalError(boolean eofSeen,int lexState,int errorLine,int errorColumn,java.lang.String @errorAfter,char curChar)
+{
+java.lang.StringBuilder $stack6;
+  java.lang.StringBuilder $stack12;
+  java.lang.String $stack14;
+  java.lang.String errorAfter;
+errorAfter=@errorAfter;
+$stack6=new java.lang.StringBuilder;
+ $stack6#java.lang.StringBuilder();
+ $stack6 = $stack6.append("Lexical error at line ");
+ $stack6 = $stack6.append(errorLine);
+ $stack6 = $stack6.append(", column ");
+ $stack6 = $stack6.append(errorColumn);
+ $stack6 = $stack6.append(".  Encountered: ");
+ if (eofSeen==0) goto label0;
+ $stack14="<EOF> ";
+ goto label1;
+ label0:$stack12=new java.lang.StringBuilder;
+ $stack12#java.lang.StringBuilder();
+ $stack12 = $stack12.append("\"");
+ $stack14 = java.lang.String.valueOf(curChar);
+ $stack14 = org.apache.rocketmq.filter.parser.TokenMgrError.addEscapes($stack14);
+ $stack12 = $stack12.append($stack14);
+ $stack12 = $stack12.append("\"");
+ $stack12 = $stack12.append(" (");
+ $stack12 = $stack12.append((int)curChar);
+ $stack12 = $stack12.append("), ");
+ $stack14 = $stack12.toString();
+ label1:$stack6 = $stack6.append($stack14);
+ $stack6 = $stack6.append("after : \"");
+ errorAfter = org.apache.rocketmq.filter.parser.TokenMgrError.addEscapes(errorAfter);
+ $stack6 = $stack6.append(errorAfter);
+ $stack6 = $stack6.append("\"");
+ errorAfter = $stack6.toString();
+ return  errorAfter;
+ } 
+

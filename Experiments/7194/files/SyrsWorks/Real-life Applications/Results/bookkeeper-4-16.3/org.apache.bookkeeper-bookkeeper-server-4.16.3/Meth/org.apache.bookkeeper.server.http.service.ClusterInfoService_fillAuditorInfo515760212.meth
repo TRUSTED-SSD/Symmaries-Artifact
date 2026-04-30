@@ -1,0 +1,30 @@
+void org.apache.bookkeeper.server.http.service.ClusterInfoService:fillAuditorInfo(org.apache.bookkeeper.server.http.service.ClusterInfoService$ClusterInfo info)
+{
+org.apache.bookkeeper.net.BookieId currentAuditor;
+  org.apache.bookkeeper.client.BookKeeperAdmin $stack3;
+  java.lang.String $stack5;
+  boolean $stack7;
+  java.lang.Exception $stack10;
+  org.slf4j.Logger $stack11;
+  label0:$stack3=this.bka;
+ currentAuditor = $stack3.getCurrentAuditor();
+ if (currentAuditor==null) goto label1;
+ $stack7=1;
+ goto label2;
+ label1:$stack7=0;
+ label2:info.setAuditorElected($stack7);
+ if (currentAuditor!=null) goto label3;
+ $stack5="";
+ goto label4;
+ label3:$stack5 = currentAuditor.getId();
+ label4:info.setAuditorId($stack5);
+ label5:goto label6;
+ label7:$stack10 = catch;
+ $stack11=org.apache.bookkeeper.server.http.service.ClusterInfoService.log;
+ $stack11.error("Could not get Auditor info",(java.lang.Throwable)$stack10);
+ info.setAuditorElected((boolean)0);
+ info.setAuditorId("");
+ label6:return;
+ catch java.lang.Exception: label0 - label5 : label7;
+} 
+

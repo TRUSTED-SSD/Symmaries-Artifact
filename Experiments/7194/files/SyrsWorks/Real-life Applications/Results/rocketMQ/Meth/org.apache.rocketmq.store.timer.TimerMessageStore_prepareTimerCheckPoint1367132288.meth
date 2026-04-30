@@ -1,0 +1,49 @@
+void org.apache.rocketmq.store.timer.TimerMessageStore:prepareTimerCheckPoint()
+{
+org.apache.rocketmq.store.timer.TimerLog $stack1;
+  org.apache.rocketmq.store.timer.TimerCheckpoint $stack2;
+  org.apache.rocketmq.store.MappedFileQueue $stack3;
+  long $stack4;
+  boolean $stack7;
+  org.apache.rocketmq.store.timer.TimerCheckpoint $stack9;
+  long $stack11;
+  byte $stack17;
+  org.apache.rocketmq.store.MessageStore $stack18;
+  $stack2=this.timerCheckpoint;
+ $stack1=this.timerLog;
+ $stack3 = $stack1.getMappedFileQueue();
+ $stack4 = $stack3.getFlushedWhere();
+ $stack2.setLastTimerLogFlushPos($stack4);
+ $stack2=this.timerCheckpoint;
+ $stack4=this.commitReadTimeMs;
+ $stack2.setLastReadTimeMs($stack4);
+ $stack7=this.shouldRunningDequeue;
+ if ($stack7==0) goto label0;
+ $stack2=this.timerCheckpoint;
+ $stack4=this.commitQueueOffset;
+ $stack2.setMasterTimerQueueOffset($stack4);
+ $stack11=this.commitReadTimeMs;
+ $stack4=this.lastCommitReadTimeMs;
+ $stack17=($stack11 cmp $stack4);
+ if ($stack17!=0) goto label1;
+ $stack11=this.commitQueueOffset;
+ $stack4=this.lastCommitQueueOffset;
+ $stack17=($stack11 cmp $stack4);
+ if ($stack17==0) goto label0;
+ label1:$stack2=this.timerCheckpoint;
+ $stack18=this.messageStore;
+ $stack4 = $stack18.getStateMachineVersion();
+ $stack2.updateDateVersion($stack4);
+ $stack4=this.commitReadTimeMs;
+ this.lastCommitReadTimeMs=$stack4;
+ $stack4=this.commitQueueOffset;
+ this.lastCommitQueueOffset=$stack4;
+ label0:$stack9=this.timerCheckpoint;
+ $stack4=this.commitQueueOffset;
+ $stack2=this.timerCheckpoint;
+ $stack11 = $stack2.getMasterTimerQueueOffset();
+ $stack4 = java.lang.Math.min($stack4,$stack11);
+ $stack9.setLastTimerQueueOffset($stack4);
+ return;
+ } 
+

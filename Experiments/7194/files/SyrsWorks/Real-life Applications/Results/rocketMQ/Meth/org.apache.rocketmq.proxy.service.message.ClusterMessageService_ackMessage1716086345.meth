@@ -1,0 +1,14 @@
+java.util.concurrent.CompletableFuture org.apache.rocketmq.proxy.service.message.ClusterMessageService:ackMessage(org.apache.rocketmq.proxy.common.ProxyContext ctx,org.apache.rocketmq.common.consumer.ReceiptHandle handle,java.lang.String @messageId,org.apache.rocketmq.remoting.protocol.header.AckMessageRequestHeader requestHeader,long timeoutMillis)
+{
+org.apache.rocketmq.proxy.service.mqclient.MQClientAPIFactory $stack7;
+  org.apache.rocketmq.proxy.service.mqclient.MQClientAPIExt $stack8;
+  java.util.concurrent.CompletableFuture $stack10;
+  java.lang.String messageId;
+messageId=@messageId;
+$stack7=this.mqClientAPIFactory;
+ $stack8 = $stack7.getClient();
+ messageId = this.resolveBrokerAddrInReceiptHandle(handle);
+ $stack10 = $stack8.ackMessageAsync(messageId,requestHeader,timeoutMillis);
+ return  $stack10;
+ } 
+

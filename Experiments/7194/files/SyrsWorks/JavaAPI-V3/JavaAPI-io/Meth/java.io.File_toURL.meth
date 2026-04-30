@@ -1,0 +1,21 @@
+java.net.URL java.io.File:toURL()
+{
+boolean $z0;
+  java.net.URL $r1;
+  java.lang.String $r2;
+  boolean $z1;
+  java.lang.String $r3;
+  java.net.MalformedURLException $r4;
+  $z0 = this.isInvalid();
+ if ($z0==0) goto label0;
+ $r4=new java.net.MalformedURLException;
+ $r4#java.net.MalformedURLException:init("Invalid file path");
+ throw $r4;
+ label0:$r1=new java.net.URL;
+ $r2 = this.getAbsolutePath();
+ $z1 = this.isDirectory();
+ $r3 = java.io.File.slashify($r2,$z1);
+ $r1#java.net.URL:init("file","",$r3);
+ return  $r1;
+ }  
+

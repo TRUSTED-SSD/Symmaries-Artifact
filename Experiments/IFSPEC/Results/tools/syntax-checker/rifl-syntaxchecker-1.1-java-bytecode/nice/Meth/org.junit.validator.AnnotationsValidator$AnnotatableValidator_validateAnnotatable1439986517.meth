@@ -1,0 +1,32 @@
+java.util.List org.junit.validator.AnnotationsValidator$AnnotatableValidator:validateAnnotatable(org.junit.runners.model.Annotatable annotatable)
+{
+java.util.ArrayList validationErrors;
+  java.lang.annotation.Annotation[] arr$;
+  int len$;
+  int i$;
+  java.lang.annotation.Annotation annotation;
+  java.lang.Class annotationType;
+  org.junit.validator.ValidateWith validateWith;
+  org.junit.validator.AnnotationValidator annotationValidator;
+  java.util.List errors;
+  org.junit.validator.AnnotationValidatorFactory $stack17;
+  validationErrors=new java.util.ArrayList;
+ validationErrors#java.util.ArrayList();
+ arr$ = annotatable.getAnnotations();
+ len$=#arr$;
+ i$=0;
+ label0:if (i$>=len$) goto label1;
+ annotation=arr$[i$];
+ annotationType = annotation.annotationType();
+ annotation = annotationType.getAnnotation(org.junit.validator.ValidateWith);
+ validateWith=(org.junit.validator.ValidateWith) annotation;
+ if (validateWith==null) goto label2;
+ $stack17=org.junit.validator.AnnotationsValidator$AnnotatableValidator.ANNOTATION_VALIDATOR_FACTORY;
+ annotationValidator = $stack17.createAnnotationValidator(validateWith);
+ errors = this.validateAnnotatable(annotationValidator,annotatable);
+ validationErrors.addAll((java.util.Collection)errors);
+ label2:i$=(i$+1);
+ goto label0;
+ label1:return  validationErrors;
+ } 
+

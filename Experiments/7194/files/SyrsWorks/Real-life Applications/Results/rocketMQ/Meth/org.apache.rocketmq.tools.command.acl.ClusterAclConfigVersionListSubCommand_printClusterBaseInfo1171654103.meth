@@ -1,0 +1,58 @@
+void org.apache.rocketmq.tools.command.acl.ClusterAclConfigVersionListSubCommand:printClusterBaseInfo(org.apache.rocketmq.tools.admin.DefaultMQAdminExt defaultMQAdminExt,java.lang.String @addr)
+{
+org.apache.rocketmq.remoting.protocol.body.ClusterAclVersionInfo clusterAclVersionInfo;
+  java.util.Map aclDataVersion;
+  java.text.SimpleDateFormat sdf;
+  java.util.Iterator l6;
+  java.util.Map$Entry entry;
+  int $stack11;
+  java.util.Set $stack12;
+  boolean $stack14;
+  java.lang.Object $stack15;
+  java.lang.Object[] $stack16;
+  java.io.PrintStream $stack17;
+  org.apache.rocketmq.remoting.protocol.DataVersion $stack29;
+  java.util.concurrent.atomic.AtomicLong $stack30;
+  java.sql.Timestamp $stack32;
+  long $stack36;
+  java.lang.String addr;
+addr=@addr;
+clusterAclVersionInfo = defaultMQAdminExt.examineBrokerClusterAclVersionInfo(addr);
+ aclDataVersion = clusterAclVersionInfo.getAllAclConfigDataVersion();
+ sdf=new java.text.SimpleDateFormat;
+ sdf#java.text.SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+ $stack11 = aclDataVersion.size();
+ if ($stack11<=0) goto label0;
+ $stack12 = aclDataVersion.entrySet();
+ l6 = $stack12.iterator();
+ label1:$stack14 = l6.hasNext();
+ if ($stack14==0) goto label0;
+ $stack15 = l6.next();
+ entry=(java.util.Map$Entry) $stack15;
+ $stack17=java.lang.System.out;
+ $stack16=new java.lang.Object[6];
+ addr = clusterAclVersionInfo.getClusterName();
+ $stack16[0]=addr;
+ addr = clusterAclVersionInfo.getBrokerName();
+ $stack16[1]=addr;
+ addr = clusterAclVersionInfo.getBrokerAddr();
+ $stack16[2]=addr;
+ $stack15 = entry.getKey();
+ $stack16[3]=$stack15;
+ $stack15 = entry.getValue();
+ $stack29=(org.apache.rocketmq.remoting.protocol.DataVersion) $stack15;
+ $stack30 = $stack29.getCounter();
+ addr = java.lang.String.valueOf((java.lang.Object)$stack30);
+ $stack16[4]=addr;
+ $stack32=new java.sql.Timestamp;
+ $stack15 = entry.getValue();
+ $stack29=(org.apache.rocketmq.remoting.protocol.DataVersion) $stack15;
+ $stack36 = $stack29.getTimestamp();
+ $stack32#java.sql.Timestamp($stack36);
+ addr = sdf.format((java.util.Date)$stack32);
+ $stack16[5]=addr;
+ $stack17.printf("%-16s  %-22s  %-22s  %-20s  %-22s  %-22s%n",$stack16);
+ goto label1;
+ label0:return;
+ } 
+

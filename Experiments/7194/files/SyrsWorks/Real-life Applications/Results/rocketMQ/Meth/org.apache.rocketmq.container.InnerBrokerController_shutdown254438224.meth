@@ -1,0 +1,38 @@
+void org.apache.rocketmq.container.InnerBrokerController:shutdown()
+{
+java.util.Iterator l1;
+  java.util.concurrent.ScheduledFuture scheduledFuture;
+  java.util.List $stack3;
+  boolean $stack5;
+  org.apache.rocketmq.remoting.RemotingServer $stack6;
+  org.apache.rocketmq.container.BrokerContainer $stack8;
+  org.apache.rocketmq.common.BrokerConfig $stack10;
+  int $stack11;
+  java.lang.Object $stack18;
+  this.shutdownBasicService();
+ $stack3=this.scheduledFutures;
+ l1 = $stack3.iterator();
+ label0:$stack5 = l1.hasNext();
+ if ($stack5==0) goto label1;
+ $stack18 = l1.next();
+ scheduledFuture=(java.util.concurrent.ScheduledFuture) $stack18;
+ scheduledFuture.cancel((boolean)1);
+ goto label0;
+ label1:$stack6=this.remotingServer;
+ if ($stack6==null) goto label2;
+ $stack8=this.brokerContainer;
+ $stack6 = $stack8.getRemotingServer();
+ $stack10=this.brokerConfig;
+ $stack11 = $stack10.getListenPort();
+ $stack6.removeRemotingServer($stack11);
+ label2:$stack6=this.fastRemotingServer;
+ if ($stack6==null) goto label3;
+ $stack8=this.brokerContainer;
+ $stack6 = $stack8.getRemotingServer();
+ $stack10=this.brokerConfig;
+ $stack11 = $stack10.getListenPort();
+ $stack11=($stack11-2);
+ $stack6.removeRemotingServer($stack11);
+ label3:return;
+ } 
+

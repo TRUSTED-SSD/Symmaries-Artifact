@@ -1,0 +1,36 @@
+static long org.apache.rocketmq.common.UtilAll:getDiskPartitionTotalSpace(java.lang.String path)
+{
+java.io.Serializable file;
+  boolean $stack2;
+  java.io.File $stack3;
+  long $stack5;
+  long $stack6;
+  java.lang.Exception $stack11;
+  java.io.File tmp$1820655362;
+  if (null==path) goto label0;
+ $stack2 = path.isEmpty();
+ if ($stack2==0) goto label1;
+ label0:return  -1L;
+ label1:tmp$1820655362=new java.io.File;
+ tmp$1820655362#java.io.File(path);
+ file=tmp$1820655362;
+ $stack3=(java.io.File) tmp$1820655362;
+ $stack2 = $stack3.exists();
+ if ($stack2!=0) goto label2;
+ label3:return  -1L;
+ label2:$stack3=(java.io.File) tmp$1820655362;
+ $stack5 = $stack3.getTotalSpace();
+ $stack3=(java.io.File) tmp$1820655362;
+ $stack6 = $stack3.getFreeSpace();
+ $stack5=($stack5-$stack6);
+ $stack3=(java.io.File) tmp$1820655362;
+ $stack6 = $stack3.getUsableSpace();
+ $stack5=($stack5+$stack6);
+ label4:return  $stack5;
+ label5:$stack11 = catch;
+ file=$stack11;
+ return  -1L;
+ catch java.lang.Exception: label1 - label3 : label5;
+catch java.lang.Exception: label2 - label4 : label5;
+} 
+

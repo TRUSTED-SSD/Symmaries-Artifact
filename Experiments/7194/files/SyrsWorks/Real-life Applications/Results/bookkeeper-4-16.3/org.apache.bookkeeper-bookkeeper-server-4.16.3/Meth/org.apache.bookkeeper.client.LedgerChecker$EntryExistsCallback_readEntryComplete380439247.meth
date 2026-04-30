@@ -1,0 +1,27 @@
+void org.apache.bookkeeper.client.LedgerChecker$EntryExistsCallback:readEntryComplete(int rc,long ledgerId,long entryId,io.netty.buffer.ByteBuf buffer,java.lang.Object ctx)
+{
+org.apache.bookkeeper.client.LedgerChecker $stack8;
+  java.util.concurrent.atomic.AtomicInteger $stack9;
+  int $stack10;
+  java.util.concurrent.atomic.AtomicBoolean $stack11;
+  org.apache.bookkeeper.proto.BookkeeperInternalCallbacks$GenericCallback $stack12;
+  boolean $stack13;
+  java.lang.Boolean $stack14;
+  $stack8=this.this$0;
+ $stack8.releasePermit();
+ if (-13==rc) goto label0;
+ if (-7==rc) goto label0;
+ if (-25==rc) goto label0;
+ $stack11=this.entryMayExist;
+ $stack11.set((boolean)1);
+ label0:$stack9=this.numReads;
+ $stack10 = $stack9.decrementAndGet();
+ if ($stack10!=0) goto label1;
+ $stack12=this.cb;
+ $stack11=this.entryMayExist;
+ $stack13 = $stack11.get();
+ $stack14 = java.lang.Boolean.valueOf($stack13);
+ $stack12.operationComplete(rc,(java.lang.Object)$stack14);
+ label1:return;
+ } 
+

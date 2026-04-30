@@ -1,0 +1,49 @@
+void org.apache.rocketmq.client.impl.consumer.AssignedMessageQueue:updateAssignedMessageQueue(java.lang.String topic,java.util.Collection assigned)
+{
+java.util.concurrent.ConcurrentHashMap l3;
+  java.util.Iterator it;
+  java.util.Map$Entry next;
+  java.lang.Throwable l6;
+  java.util.concurrent.ConcurrentHashMap $stack7;
+  java.util.Set $stack9;
+  boolean $stack11;
+  java.lang.Object $stack13;
+  org.apache.rocketmq.common.message.MessageQueue $stack15;
+  java.lang.String $stack16;
+  org.apache.rocketmq.client.impl.consumer.AssignedMessageQueue$MessageQueueState $stack22;
+  org.apache.rocketmq.client.impl.consumer.ProcessQueue $stack23;
+  $stack7=this.assignedMessageQueueState;
+ l3=$stack7;
+ monitorenter $stack7;
+ label0:$stack7=this.assignedMessageQueueState;
+ $stack9 = $stack7.entrySet();
+ it = $stack9.iterator();
+ label1:$stack11 = it.hasNext();
+ if ($stack11==0) goto label2;
+ $stack13 = it.next();
+ next=(java.util.Map$Entry) $stack13;
+ $stack13 = next.getKey();
+ $stack15=(org.apache.rocketmq.common.message.MessageQueue) $stack13;
+ $stack16 = $stack15.getTopic();
+ $stack11 = $stack16.equals((java.lang.Object)topic);
+ if ($stack11==0) goto label3;
+ $stack13 = next.getKey();
+ $stack11 = assigned.contains($stack13);
+ if ($stack11!=0) goto label3;
+ $stack13 = next.getValue();
+ $stack22=(org.apache.rocketmq.client.impl.consumer.AssignedMessageQueue$MessageQueueState) $stack13;
+ $stack23 = $stack22.getProcessQueue();
+ $stack23.setDropped((boolean)1);
+ it.remove();
+ label3:goto label1;
+ label2:this#org.apache.rocketmq.client.impl.consumer.AssignedMessageQueue:addAssignedMessageQueue(assigned);
+ monitorexit l3;
+ label4:goto label5;
+ label6:l6 = catch;
+ monitorexit l3;
+ label7:throw l6;
+ label5:return;
+ catch java.lang.Throwable: label0 - label4 : label6;
+catch java.lang.Throwable: label6 - label7 : label6;
+} 
+

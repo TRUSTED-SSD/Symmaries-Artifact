@@ -1,0 +1,38 @@
+int com.google.zxing.pdf417.decoder.DetectionResult:adjustRowNumbers()
+{
+int unadjustedCount;
+  int barcodeColumn;
+  com.google.zxing.pdf417.decoder.Codeword[] codewords;
+  int codewordsRow;
+  com.google.zxing.pdf417.decoder.DetectionResultColumn[] $stack8;
+  com.google.zxing.pdf417.decoder.DetectionResultColumn $stack9;
+  int $stack11;
+  com.google.zxing.pdf417.decoder.Codeword $stack15;
+  boolean $stack17;
+  unadjustedCount = this#com.google.zxing.pdf417.decoder.DetectionResult:adjustRowNumbersByRow();
+ if (unadjustedCount!=0) goto label0;
+ return  0;
+ label0:barcodeColumn=1;
+ label1:codewordsRow=this.barcodeColumnCount;
+ codewordsRow=(codewordsRow+1);
+ if (barcodeColumn>=codewordsRow) goto label2;
+ $stack8=this.detectionResultColumns;
+ $stack9=$stack8[barcodeColumn];
+ codewords = $stack9.getCodewords();
+ codewordsRow=0;
+ label3:$stack11=#codewords;
+ if (codewordsRow>=$stack11) goto label4;
+ $stack15=codewords[codewordsRow];
+ if ($stack15!=null) goto label5;
+ goto label6;
+ label5:$stack15=codewords[codewordsRow];
+ $stack17 = $stack15.hasValidRowNumber();
+ if ($stack17!=0) goto label6;
+ this#com.google.zxing.pdf417.decoder.DetectionResult:adjustRowNumbers(barcodeColumn,codewordsRow,codewords);
+ label6:codewordsRow=(codewordsRow+1);
+ goto label3;
+ label4:barcodeColumn=(barcodeColumn+1);
+ goto label1;
+ label2:return  unadjustedCount;
+ } 
+

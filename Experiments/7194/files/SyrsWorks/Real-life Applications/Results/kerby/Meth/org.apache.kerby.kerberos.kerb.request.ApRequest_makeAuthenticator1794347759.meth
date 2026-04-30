@@ -1,0 +1,42 @@
+org.apache.kerby.kerberos.kerb.type.ap.Authenticator org.apache.kerby.kerberos.kerb.request.ApRequest:makeAuthenticator()
+{
+org.apache.kerby.kerberos.kerb.type.ap.Authenticator authenticator;
+  long millis;
+  int usec;
+  org.apache.kerby.kerberos.kerb.type.base.PrincipalName $stack6;
+  org.apache.kerby.kerberos.kerb.type.ticket.SgtTicket $stack7;
+  java.lang.String $stack8;
+  long $stack10;
+  org.apache.kerby.kerberos.kerb.type.KerberosTime $stack13;
+  org.apache.kerby.kerberos.kerb.type.ap.ApOption $stack14;
+  java.util.EnumSet $stack15;
+  boolean $stack16;
+  org.apache.kerby.kerberos.kerb.type.base.EncryptionKey $stack18;
+  authenticator=new org.apache.kerby.kerberos.kerb.type.ap.Authenticator;
+ authenticator#org.apache.kerby.kerberos.kerb.type.ap.Authenticator();
+ authenticator.setAuthenticatorVno(5);
+ $stack6=this.clientPrincipal;
+ authenticator.setCname($stack6);
+ $stack7=this.sgtTicket;
+ $stack8 = $stack7.getRealm();
+ authenticator.setCrealm($stack8);
+ millis = java.lang.System.currentTimeMillis();
+ $stack10=(millis%1000L);
+ usec=(int) $stack10;
+ usec=(usec * 1000);
+ $stack10=(millis%1000L);
+ millis=(millis-$stack10);
+ $stack13=new org.apache.kerby.kerberos.kerb.type.KerberosTime;
+ $stack13#org.apache.kerby.kerberos.kerb.type.KerberosTime(millis);
+ authenticator.setCtime($stack13);
+ authenticator.setCusec(usec);
+ $stack15=this.flags;
+ $stack14=org.apache.kerby.kerberos.kerb.type.ap.ApOption.USE_SESSION_KEY;
+ $stack16 = $stack15.contains((java.lang.Object)$stack14);
+ if ($stack16==0) goto label0;
+ $stack7=this.sgtTicket;
+ $stack18 = $stack7.getSessionKey();
+ authenticator.setSubKey($stack18);
+ label0:return  authenticator;
+ } 
+

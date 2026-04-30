@@ -1,0 +1,26 @@
+java.util.Set org.apache.rocketmq.store.ha.autoswitch.AutoSwitchHAService:getSyncStateSet()
+{
+java.util.concurrent.locks.Lock readLock;
+  java.util.HashSet set;
+  java.lang.Throwable l4;
+  java.util.concurrent.locks.ReadWriteLock $stack5;
+  java.util.concurrent.CopyOnWriteArraySet $stack8;
+  int $stack9;
+  $stack5=this.readWriteLock;
+ readLock = $stack5.readLock();
+ label0:readLock.lock();
+ set=new java.util.HashSet;
+ $stack8=this.syncStateSet;
+ $stack9 = $stack8.size();
+ set#java.util.HashSet($stack9);
+ $stack8=this.syncStateSet;
+ set.addAll((java.util.Collection)$stack8);
+ label1:readLock.unlock();
+ return  set;
+ label2:l4 = catch;
+ label3:readLock.unlock();
+ throw l4;
+ catch java.lang.Throwable: label0 - label1 : label2;
+catch java.lang.Throwable: label2 - label3 : label2;
+} 
+

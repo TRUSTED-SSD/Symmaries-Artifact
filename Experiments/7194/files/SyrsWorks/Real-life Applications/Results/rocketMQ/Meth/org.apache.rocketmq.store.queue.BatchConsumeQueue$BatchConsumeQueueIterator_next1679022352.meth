@@ -1,0 +1,56 @@
+org.apache.rocketmq.store.queue.CqUnit org.apache.rocketmq.store.queue.BatchConsumeQueue$BatchConsumeQueueIterator:next()
+{
+java.nio.ByteBuffer tmpBuffer;
+  int relativePos;
+  long offsetPy;
+  int sizePy;
+  long tagsCode;
+  long msgBaseOffset;
+  short batchSize;
+  int compactedOffset;
+  boolean $stack13;
+  org.apache.rocketmq.store.SelectMappedBufferResult $stack14;
+  java.nio.ByteBuffer $stack21;
+  org.apache.rocketmq.store.queue.CqUnit $stack48;
+  $stack13 = this.hasNext();
+ if ($stack13!=0) goto label0;
+ return  null;
+ label0:$stack14=this.sbr;
+ tmpBuffer = $stack14.getByteBuffer();
+ tmpBuffer = tmpBuffer.slice();
+ tmpBuffer.position(38);
+ tmpBuffer = tmpBuffer.slice();
+ tmpBuffer.limit(4);
+ $stack14=this.sbr;
+ $stack21 = $stack14.getByteBuffer();
+ relativePos = $stack21.position();
+ $stack14=this.sbr;
+ $stack21 = $stack14.getByteBuffer();
+ offsetPy = $stack21.getLong();
+ $stack14=this.sbr;
+ $stack21 = $stack14.getByteBuffer();
+ sizePy = $stack21.getInt();
+ $stack14=this.sbr;
+ $stack21 = $stack14.getByteBuffer();
+ tagsCode = $stack21.getLong();
+ $stack14=this.sbr;
+ $stack21 = $stack14.getByteBuffer();
+ $stack21.getLong();
+ $stack14=this.sbr;
+ $stack21 = $stack14.getByteBuffer();
+ msgBaseOffset = $stack21.getLong();
+ $stack14=this.sbr;
+ $stack21 = $stack14.getByteBuffer();
+ batchSize = $stack21.getShort();
+ $stack14=this.sbr;
+ $stack21 = $stack14.getByteBuffer();
+ compactedOffset = $stack21.getInt();
+ $stack14=this.sbr;
+ $stack21 = $stack14.getByteBuffer();
+ relativePos=(relativePos+46);
+ $stack21.position(relativePos);
+ $stack48=new org.apache.rocketmq.store.queue.CqUnit;
+ $stack48#org.apache.rocketmq.store.queue.CqUnit(msgBaseOffset,offsetPy,sizePy,tagsCode,batchSize,compactedOffset,tmpBuffer);
+ return  $stack48;
+ } 
+

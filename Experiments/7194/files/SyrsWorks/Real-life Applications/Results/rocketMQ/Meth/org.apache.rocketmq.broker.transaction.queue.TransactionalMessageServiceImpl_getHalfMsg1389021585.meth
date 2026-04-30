@@ -1,0 +1,24 @@
+org.apache.rocketmq.broker.transaction.queue.GetResult org.apache.rocketmq.broker.transaction.queue.TransactionalMessageServiceImpl:getHalfMsg(org.apache.rocketmq.common.message.MessageQueue messageQueue,long offset)
+{
+org.apache.rocketmq.broker.transaction.queue.GetResult getResult;
+  org.apache.rocketmq.client.consumer.PullResult result;
+  java.util.List messageExts;
+  int $stack10;
+  java.lang.Object $stack11;
+  org.apache.rocketmq.common.message.MessageExt $stack12;
+  getResult=new org.apache.rocketmq.broker.transaction.queue.GetResult;
+ getResult#org.apache.rocketmq.broker.transaction.queue.GetResult();
+ result = this#org.apache.rocketmq.broker.transaction.queue.TransactionalMessageServiceImpl:pullHalfMsg(messageQueue,offset,1);
+ if (result==null) goto label0;
+ getResult.setPullResult(result);
+ messageExts = result.getMsgFoundList();
+ if (messageExts==null) goto label1;
+ $stack10 = messageExts.size();
+ if ($stack10!=0) goto label2;
+ label1:return  getResult;
+ label2:$stack11 = messageExts.get(0);
+ $stack12=(org.apache.rocketmq.common.message.MessageExt) $stack11;
+ getResult.setMsg($stack12);
+ label0:return  getResult;
+ } 
+

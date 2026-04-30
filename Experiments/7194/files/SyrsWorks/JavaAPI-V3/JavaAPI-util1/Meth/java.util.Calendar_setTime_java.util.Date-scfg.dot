@@ -1,0 +1,25 @@
+digraph G {
+  node [shape=box, ];
+  "pc0_js1" [label="〈$l0 = r1.getTime (), js1〉\n\
+tt", ];
+  "pc1_js1" [label="〈this.setTimeInMillis ($l0), js1〉\n\
+tt", ];
+  "pc2_js1" [label="〈return, js1〉", ];
+  "pc3_js1" [label="〈sink, js1〉\n\
+obj_level(r1) ⊑ ret(obj_level(r1))' ∧ obj_level(this) ⊑ ret(obj_level(this))'",
+             ];
+  
+  
+  "pc0_js1" -> "pc1_js1" [label="tt,\n\
+{level($l0) := pc ⊔ level(r1) ⊔ obj_level(r1),\n\
+ obj_level(r1) := pc ⊔ level(r1) ⊔ obj_level(r1),\n\
+ obj_level(this) := pc ⊔ level(r1) ⊔ obj_level(r1) ⊔ obj_level(this)}",
+                          ];
+  "pc1_js1" -> "pc2_js1" [label="tt,\n\
+{obj_level(r1) := pc ⊔ level($l0) ⊔ level(this) ⊔ obj_level(r1) ⊔ obj_level(this),\n\
+ obj_level(this) := pc ⊔ level($l0) ⊔ level(this) ⊔ obj_level(this)}",
+                          ];
+  "pc2_js1" -> "pc3_js1" [label="tt,\n\
+{ϕ := S2}", ];
+  
+  }

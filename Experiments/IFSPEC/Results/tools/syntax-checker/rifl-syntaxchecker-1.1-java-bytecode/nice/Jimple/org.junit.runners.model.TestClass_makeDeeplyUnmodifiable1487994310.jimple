@@ -1,0 +1,65 @@
+    private static java.util.Map makeDeeplyUnmodifiable(java.util.Map)
+    {
+        java.util.Map source;
+        java.util.LinkedHashMap copy;
+        java.util.Iterator i$;
+        java.util.Map$Entry entry;
+        java.util.Set $stack5;
+        boolean $stack7;
+        java.lang.Object $stack9, $stack11;
+        java.util.List $stack12;
+
+        source := @parameter0: java.util.Map;
+
+        copy = new java.util.LinkedHashMap;
+/*100*/
+
+        specialinvoke copy.<java.util.LinkedHashMap: void <init>()>();
+/*100*/
+
+        $stack5 = interfaceinvoke source.<java.util.Map: java.util.Set entrySet()>();
+/*102*/
+
+        i$ = interfaceinvoke $stack5.<java.util.Set: java.util.Iterator iterator()>();
+/*102*/
+/*102*/
+
+     label1:
+        $stack7 = interfaceinvoke i$.<java.util.Iterator: boolean hasNext()>();
+/*102*/
+
+        if $stack7 == 0 goto label2;
+/*102*/
+
+        $stack9 = interfaceinvoke i$.<java.util.Iterator: java.lang.Object next()>();
+/*105*/
+
+        entry = (java.util.Map$Entry) $stack9;
+/*105*/
+
+        $stack9 = interfaceinvoke entry.<java.util.Map$Entry: java.lang.Object getKey()>();
+/*103*/
+
+        $stack11 = interfaceinvoke entry.<java.util.Map$Entry: java.lang.Object getValue()>();
+/*103*/
+
+        $stack12 = (java.util.List) $stack11;
+/*103*/
+
+        $stack12 = staticinvoke <java.util.Collections: java.util.List unmodifiableList(java.util.List)>($stack12);
+/*103*/
+
+        virtualinvoke copy.<java.util.LinkedHashMap: java.lang.Object put(java.lang.Object,java.lang.Object)>($stack9, $stack12);
+/*103*/
+
+        goto label1;
+/*103*/
+
+     label2:
+        source = staticinvoke <java.util.Collections: java.util.Map unmodifiableMap(java.util.Map)>(copy);
+/*105*/
+
+        return source;
+/*105*/
+    }
+

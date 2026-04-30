@@ -1,0 +1,41 @@
+void java.util.BitSet:and(java.util.BitSet r1)
+{
+int $i0;
+  int $i1;
+  int $i2;
+  long[] $r2;
+  long[] $r3;
+  long $l3;
+  long $l4;
+  long $l5;
+  int $i6;
+  int $i7;
+  long[] $r4;
+  int i8;
+  if (this!=r1) goto label0;
+ return;
+ label0:$i1=this.wordsInUse;
+ $i0=r1.wordsInUse;
+ if ($i1<=$i0) goto label1;
+ $r4=this.words;
+ $i6=this.wordsInUse;
+ $i7=($i6-1);
+ this.wordsInUse=$i7;
+ $r4[$i7]=0L;
+ goto label0;
+ label1:i8=0;
+ label2:$i2=this.wordsInUse;
+ if (i8>=$i2) goto label3;
+ $r2=this.words;
+ $l4=$r2[i8];
+ $r3=r1.words;
+ $l3=$r3[i8];
+ $l5=($l4 & $l3);
+ $r2[i8]=$l5;
+ i8=(i8+1);
+ goto label2;
+ label3:this#java.util.BitSet:recalculateWordsInUse();
+ this#java.util.BitSet:checkInvariants();
+ return;
+ }  
+

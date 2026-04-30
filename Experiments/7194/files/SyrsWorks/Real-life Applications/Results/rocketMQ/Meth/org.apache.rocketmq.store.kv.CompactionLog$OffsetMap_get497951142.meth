@@ -1,0 +1,40 @@
+long org.apache.rocketmq.store.kv.CompactionLog$OffsetMap:get(java.lang.String key)
+{
+int tryNum;
+  int maxTryNum;
+  int index;
+  byte[] $stack5;
+  java.nio.ByteBuffer $stack11;
+  boolean $stack13;
+  byte[] $stack18;
+  long $stack23;
+  $stack5=this.hash1;
+ this#org.apache.rocketmq.store.kv.CompactionLog$OffsetMap:hashInto(key,$stack5);
+ tryNum=0;
+ index=this.entryNum;
+ maxTryNum=this.hashSize;
+ maxTryNum=(index+maxTryNum);
+ maxTryNum=(maxTryNum-4);
+ index=0;
+ label0:if (tryNum<maxTryNum) goto label1;
+ return  -1L;
+ label1:$stack5=this.hash1;
+ index = this#org.apache.rocketmq.store.kv.CompactionLog$OffsetMap:indexOf($stack5,tryNum);
+ $stack11=this.dataBytes;
+ $stack11.position(index);
+ $stack13 = this#org.apache.rocketmq.store.kv.CompactionLog$OffsetMap:isEmpty(index);
+ if ($stack13==0) goto label2;
+ return  -1L;
+ label2:$stack11=this.dataBytes;
+ $stack5=this.hash2;
+ $stack11.get($stack5);
+ tryNum=(tryNum+1);
+ $stack18=this.hash1;
+ $stack5=this.hash2;
+ $stack13 = java.util.Arrays.equals($stack18,$stack5);
+ if ($stack13==0) goto label0;
+ $stack11=this.dataBytes;
+ $stack23 = $stack11.getLong();
+ return  $stack23;
+ } 
+

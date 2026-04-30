@@ -1,0 +1,127 @@
+    private void startServers() throws java.lang.Exception
+    {
+        org.apache.bookkeeper.stream.cluster.StreamCluster this;
+        java.util.concurrent.ExecutorService executor;
+        java.util.ArrayList startFutures;
+        int i, $stack13;
+        java.util.concurrent.Future future;
+        org.apache.bookkeeper.stream.cluster.StreamClusterSpec $stack5;
+        org.slf4j.Logger $stack6;
+        java.lang.Integer $stack9;
+        boolean $stack15;
+        java.lang.Object $stack21;
+        java.util.List $stack22;
+        java.util.concurrent.Callable $stack26;
+        java.util.Iterator tmp$256761062;
+
+        this := @this: org.apache.bookkeeper.stream.cluster.StreamCluster;
+
+        $stack6 = <org.apache.bookkeeper.stream.cluster.StreamCluster: org.slf4j.Logger log>;
+/*215*/
+
+        $stack5 = this.<org.apache.bookkeeper.stream.cluster.StreamCluster: org.apache.bookkeeper.stream.cluster.StreamClusterSpec spec>;
+/*215*/
+
+        i = virtualinvoke $stack5.<org.apache.bookkeeper.stream.cluster.StreamClusterSpec: int numServers()>();
+/*215*/
+
+        $stack9 = staticinvoke <java.lang.Integer: java.lang.Integer valueOf(int)>(i);
+/*215*/
+
+        interfaceinvoke $stack6.<org.slf4j.Logger: void info(java.lang.String,java.lang.Object)>("Starting {} storage servers.", $stack9);
+/*215*/
+
+        executor = staticinvoke <java.util.concurrent.Executors: java.util.concurrent.ExecutorService newCachedThreadPool()>();
+/*216*/
+/*216*/
+
+        startFutures = staticinvoke <com.google.common.collect.Lists: java.util.ArrayList newArrayList()>();
+/*217*/
+/*217*/
+
+        i = 0;
+/*218*/
+
+     label1:
+        $stack5 = this.<org.apache.bookkeeper.stream.cluster.StreamCluster: org.apache.bookkeeper.stream.cluster.StreamClusterSpec spec>;
+/*218*/
+
+        $stack13 = virtualinvoke $stack5.<org.apache.bookkeeper.stream.cluster.StreamClusterSpec: int numServers()>();
+/*218*/
+
+        if i >= $stack13 goto label2;
+/*218*/
+
+        $stack26 = dynamicinvoke "call" <java.util.concurrent.Callable (org.apache.bookkeeper.stream.cluster.StreamCluster)>(this) <java.lang.invoke.LambdaMetafactory: java.lang.invoke.CallSite metafactory(java.lang.invoke.MethodHandles$Lookup,java.lang.String,java.lang.invoke.MethodType,java.lang.invoke.MethodType,java.lang.invoke.MethodHandle,java.lang.invoke.MethodType)>(class "()Ljava/lang/Object;", handle: <org.apache.bookkeeper.stream.cluster.StreamCluster: org.apache.bookkeeper.common.component.LifecycleComponent lambda$startServers$1()>, class "()Lorg/apache/bookkeeper/common/component/LifecycleComponent;");
+/*219*/
+
+        future = interfaceinvoke executor.<java.util.concurrent.ExecutorService: java.util.concurrent.Future submit(java.util.concurrent.Callable)>($stack26);
+/*219*/
+/*219*/
+
+        interfaceinvoke startFutures.<java.util.List: boolean add(java.lang.Object)>(future);
+/*220*/
+
+        i = i + 1;
+/*218*/
+
+        goto label1;
+/*218*/
+
+     label2:
+        tmp$256761062 = interfaceinvoke startFutures.<java.util.List: java.util.Iterator iterator()>();
+
+        i = (int) tmp$256761062;
+
+     label3:
+        tmp$256761062 = (java.util.Iterator) i;
+
+        $stack15 = interfaceinvoke tmp$256761062.<java.util.Iterator: boolean hasNext()>();
+/*222*/
+
+        if $stack15 == 0 goto label4;
+/*222*/
+
+        tmp$256761062 = (java.util.Iterator) i;
+
+        $stack21 = interfaceinvoke tmp$256761062.<java.util.Iterator: java.lang.Object next()>();
+/*227*/
+
+        future = (java.util.concurrent.Future) $stack21;
+/*227*/
+
+        $stack22 = this.<org.apache.bookkeeper.stream.cluster.StreamCluster: java.util.List servers>;
+/*223*/
+
+        $stack21 = interfaceinvoke future.<java.util.concurrent.Future: java.lang.Object get()>();
+/*223*/
+
+        interfaceinvoke $stack22.<java.util.List: boolean add(java.lang.Object)>($stack21);
+/*223*/
+
+        goto label3;
+/*224*/
+
+     label4:
+        $stack6 = <org.apache.bookkeeper.stream.cluster.StreamCluster: org.slf4j.Logger log>;
+/*225*/
+
+        $stack5 = this.<org.apache.bookkeeper.stream.cluster.StreamCluster: org.apache.bookkeeper.stream.cluster.StreamClusterSpec spec>;
+/*225*/
+
+        i = virtualinvoke $stack5.<org.apache.bookkeeper.stream.cluster.StreamClusterSpec: int numServers()>();
+/*225*/
+
+        $stack9 = staticinvoke <java.lang.Integer: java.lang.Integer valueOf(int)>(i);
+/*225*/
+
+        interfaceinvoke $stack6.<org.slf4j.Logger: void info(java.lang.String,java.lang.Object)>("Started {} storage servers.", $stack9);
+/*225*/
+
+        interfaceinvoke executor.<java.util.concurrent.ExecutorService: void shutdown()>();
+/*226*/
+
+        return;
+/*227*/
+    }
+

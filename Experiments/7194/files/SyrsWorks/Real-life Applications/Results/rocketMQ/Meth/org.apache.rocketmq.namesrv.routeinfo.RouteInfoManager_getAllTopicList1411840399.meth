@@ -1,0 +1,42 @@
+org.apache.rocketmq.remoting.protocol.body.TopicList org.apache.rocketmq.namesrv.routeinfo.RouteInfoManager:getAllTopicList()
+{
+org.apache.rocketmq.remoting.protocol.body.TopicList topicList;
+  java.util.concurrent.locks.ReadWriteLock $stack5;
+  java.util.concurrent.locks.Lock $stack6;
+  java.util.Set $stack7;
+  java.util.Map $stack8;
+  java.util.Set $stack9;
+  java.lang.Throwable $stack13;
+  java.lang.Exception $stack16;
+  org.apache.rocketmq.logging.org.slf4j.Logger $stack17;
+  topicList=new org.apache.rocketmq.remoting.protocol.body.TopicList;
+ topicList#org.apache.rocketmq.remoting.protocol.body.TopicList();
+ label0:$stack5=this.lock;
+ $stack6 = $stack5.readLock();
+ $stack6.lockInterruptibly();
+ $stack7 = topicList.getTopicList();
+ $stack8=this.topicQueueTable;
+ $stack9 = $stack8.keySet();
+ $stack7.addAll((java.util.Collection)$stack9);
+ label1:$stack5=this.lock;
+ $stack6 = $stack5.readLock();
+ $stack6.unlock();
+ goto label2;
+ label3:$stack16 = catch;
+ $stack17=org.apache.rocketmq.namesrv.routeinfo.RouteInfoManager.log;
+ $stack17.error("getAllTopicList Exception",(java.lang.Throwable)$stack16);
+ label4:$stack5=this.lock;
+ $stack6 = $stack5.readLock();
+ $stack6.unlock();
+ goto label2;
+ label5:$stack13 = catch;
+ $stack5=this.lock;
+ $stack6 = $stack5.readLock();
+ $stack6.unlock();
+ throw $stack13;
+ label2:return  topicList;
+ catch java.lang.Exception: label0 - label1 : label3;
+catch java.lang.Throwable: label0 - label1 : label5;
+catch java.lang.Throwable: label3 - label4 : label5;
+} 
+

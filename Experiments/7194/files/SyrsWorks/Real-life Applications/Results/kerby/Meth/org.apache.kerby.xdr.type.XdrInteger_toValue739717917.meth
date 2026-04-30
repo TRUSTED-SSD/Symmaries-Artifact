@@ -1,0 +1,22 @@
+void org.apache.kerby.xdr.type.XdrInteger:toValue()
+{
+byte[] intBytes;
+  int $stack3;
+  java.lang.Integer $stack7;
+  java.nio.ByteBuffer $stack8;
+  intBytes = this.getBytes();
+ $stack3=#intBytes;
+ if ($stack3==4) goto label0;
+ $stack8 = java.nio.ByteBuffer.allocate(4);
+ intBytes = this.getBytes();
+ $stack8 = $stack8.put(intBytes,0,4);
+ intBytes = $stack8.array();
+ this.setBytes(intBytes);
+ label0:intBytes = this.getBytes();
+ $stack8 = java.nio.ByteBuffer.wrap(intBytes);
+ $stack3 = $stack8.getInt();
+ $stack7 = java.lang.Integer.valueOf($stack3);
+ this.setValue((java.lang.Object)$stack7);
+ return;
+ } 
+

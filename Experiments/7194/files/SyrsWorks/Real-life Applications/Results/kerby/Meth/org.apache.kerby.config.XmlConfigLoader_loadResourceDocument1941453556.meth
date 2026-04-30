@@ -1,0 +1,47 @@
+org.w3c.dom.Element org.apache.kerby.config.XmlConfigLoader:loadResourceDocument(org.apache.kerby.config.Resource resource)
+{
+javax.xml.parsers.DocumentBuilderFactory docBuilderFactory;
+  javax.xml.parsers.DocumentBuilder e;
+  java.io.InputStream is;
+  org.w3c.dom.Document doc;
+  java.lang.Object root;
+  java.lang.Boolean $stack8;
+  boolean $stack10;
+  java.lang.Throwable $stack16;
+  java.lang.UnsupportedOperationException $stack17;
+  org.slf4j.Logger $stack18;
+  org.w3c.dom.Element tmp$623910497;
+  docBuilderFactory = javax.xml.parsers.DocumentBuilderFactory.newInstance();
+ $stack8=java.lang.Boolean.TRUE;
+ $stack10 = $stack8.booleanValue();
+ docBuilderFactory.setFeature("http://javax.xml.XMLConstants/feature/secure-processing",$stack10);
+ docBuilderFactory.setFeature("http://apache.org/xml/features/disallow-doctype-decl",(boolean)1);
+ docBuilderFactory.setIgnoringComments((boolean)1);
+ docBuilderFactory.setNamespaceAware((boolean)1);
+ label0:docBuilderFactory.setXIncludeAware((boolean)1);
+ label1:goto label2;
+ label3:$stack17 = catch;
+ $stack18=org.apache.kerby.config.XmlConfigLoader.LOGGER;
+ $stack18.error("Failed to set setXIncludeAware(true) for parser",(java.lang.Throwable)$stack17);
+ label2:e = docBuilderFactory.newDocumentBuilder();
+ root = resource.getResource();
+ is=(java.io.InputStream) root;
+ doc=null;
+ label4:doc = e.parse(is);
+ label5:is.close();
+ goto label6;
+ label7:$stack16 = catch;
+ root=$stack16;
+ label8:is.close();
+ $stack16=(java.lang.Throwable) $stack16;
+ throw $stack16;
+ label6:root = doc.getDocumentElement();
+ tmp$623910497=(org.w3c.dom.Element) root;
+ this#org.apache.kerby.config.XmlConfigLoader:validateConfig(tmp$623910497);
+ tmp$623910497=(org.w3c.dom.Element) root;
+ return  tmp$623910497;
+ catch java.lang.UnsupportedOperationException: label0 - label1 : label3;
+catch java.lang.Throwable: label4 - label5 : label7;
+catch java.lang.Throwable: label7 - label8 : label7;
+} 
+

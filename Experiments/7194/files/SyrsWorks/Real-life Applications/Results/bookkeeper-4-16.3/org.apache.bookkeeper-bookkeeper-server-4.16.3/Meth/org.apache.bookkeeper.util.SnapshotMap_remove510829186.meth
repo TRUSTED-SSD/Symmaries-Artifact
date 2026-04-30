@@ -1,0 +1,29 @@
+void org.apache.bookkeeper.util.SnapshotMap:remove(java.lang.Object key)
+{
+java.util.concurrent.locks.ReentrantReadWriteLock $stack3;
+  java.util.concurrent.locks.ReentrantReadWriteLock$ReadLock $stack4;
+  java.util.Map $stack5;
+  java.util.NavigableMap $stack9;
+  java.lang.Throwable $stack13;
+  $stack3=this.lock;
+ $stack4 = $stack3.readLock();
+ $stack4.lock();
+ label0:$stack5=this.updates;
+ $stack5.remove(key);
+ $stack5=this.updatesToMerge;
+ $stack5.remove(key);
+ $stack9=this.snapshot;
+ $stack9.remove(key);
+ label1:$stack3=this.lock;
+ $stack4 = $stack3.readLock();
+ $stack4.unlock();
+ goto label2;
+ label3:$stack13 = catch;
+ $stack3=this.lock;
+ $stack4 = $stack3.readLock();
+ $stack4.unlock();
+ throw $stack13;
+ label2:return;
+ catch java.lang.Throwable: label0 - label1 : label3;
+} 
+

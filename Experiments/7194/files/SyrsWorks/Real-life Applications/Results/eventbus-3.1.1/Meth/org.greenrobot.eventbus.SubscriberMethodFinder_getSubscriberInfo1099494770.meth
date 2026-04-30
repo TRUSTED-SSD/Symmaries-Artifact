@@ -1,0 +1,42 @@
+org.greenrobot.eventbus.meta.SubscriberInfo org.greenrobot.eventbus.SubscriberMethodFinder:getSubscriberInfo(org.greenrobot.eventbus.SubscriberMethodFinder$FindState findState)
+{
+java.lang.Object superclassInfo;
+  org.greenrobot.eventbus.meta.SubscriberInfoIndex index;
+  org.greenrobot.eventbus.meta.SubscriberInfo info;
+  java.util.List $stack6;
+  boolean $stack9;
+  java.lang.Object $stack11;
+  java.lang.Class $stack12;
+  java.lang.Class $stack21;
+  java.util.Iterator tmp$1124332147;
+  info=findState.subscriberInfo;
+ if (info==null) goto label0;
+ info=findState.subscriberInfo;
+ info = info.getSuperSubscriberInfo();
+ if (info==null) goto label0;
+ info=findState.subscriberInfo;
+ superclassInfo = info.getSuperSubscriberInfo();
+ $stack12=findState.clazz;
+ info=(org.greenrobot.eventbus.meta.SubscriberInfo) superclassInfo;
+ $stack21 = info.getSubscriberClass();
+ if ($stack12!=$stack21) goto label0;
+ info=(org.greenrobot.eventbus.meta.SubscriberInfo) superclassInfo;
+ return  info;
+ label0:$stack6=this.subscriberInfoIndexes;
+ if ($stack6==null) goto label1;
+ $stack6=this.subscriberInfoIndexes;
+ superclassInfo = $stack6.iterator();
+ label2:tmp$1124332147=(java.util.Iterator) superclassInfo;
+ $stack9 = tmp$1124332147.hasNext();
+ if ($stack9==0) goto label1;
+ tmp$1124332147=(java.util.Iterator) superclassInfo;
+ $stack11 = tmp$1124332147.next();
+ index=(org.greenrobot.eventbus.meta.SubscriberInfoIndex) $stack11;
+ $stack12=findState.clazz;
+ info = index.getSubscriberInfo($stack12);
+ if (info==null) goto label3;
+ return  info;
+ label3:goto label2;
+ label1:return  null;
+ } 
+

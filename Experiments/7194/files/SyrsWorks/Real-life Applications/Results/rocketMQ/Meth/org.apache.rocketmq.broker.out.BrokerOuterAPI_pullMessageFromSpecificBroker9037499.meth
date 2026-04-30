@@ -1,0 +1,41 @@
+org.apache.rocketmq.client.consumer.PullResult org.apache.rocketmq.broker.out.BrokerOuterAPI:pullMessageFromSpecificBroker(java.lang.String brokerName,java.lang.String brokerAddr,java.lang.String consumerGroup,java.lang.String topic,int queueId,long offset,int maxNums,long timeoutMillis)
+{
+org.apache.rocketmq.remoting.protocol.header.PullMessageRequestHeader requestHeader;
+  org.apache.rocketmq.remoting.protocol.RemotingCommand request;
+  org.apache.rocketmq.client.impl.consumer.PullResultExt pullResultExt;
+  java.lang.Integer $stack16;
+  java.lang.Long $stack17;
+  org.apache.rocketmq.remoting.RemotingClient $stack27;
+  requestHeader=new org.apache.rocketmq.remoting.protocol.header.PullMessageRequestHeader;
+ requestHeader#org.apache.rocketmq.remoting.protocol.header.PullMessageRequestHeader();
+ requestHeader.setConsumerGroup(consumerGroup);
+ requestHeader.setTopic(topic);
+ $stack16 = java.lang.Integer.valueOf(queueId);
+ requestHeader.setQueueId($stack16);
+ $stack17 = java.lang.Long.valueOf(offset);
+ requestHeader.setQueueOffset($stack17);
+ $stack16 = java.lang.Integer.valueOf(maxNums);
+ requestHeader.setMaxMsgNums($stack16);
+ maxNums = org.apache.rocketmq.common.sysflag.PullSysFlag.buildSysFlag((boolean)0,(boolean)0,(boolean)1,(boolean)0);
+ $stack16 = java.lang.Integer.valueOf(maxNums);
+ requestHeader.setSysFlag($stack16);
+ $stack17 = java.lang.Long.valueOf(0L);
+ requestHeader.setCommitOffset($stack17);
+ $stack17 = java.lang.Long.valueOf(0L);
+ requestHeader.setSuspendTimeoutMillis($stack17);
+ requestHeader.setSubscription("*");
+ offset = java.lang.System.currentTimeMillis();
+ $stack17 = java.lang.Long.valueOf(offset);
+ requestHeader.setSubVersion($stack17);
+ $stack16 = java.lang.Integer.valueOf(2147483647);
+ requestHeader.setMaxMsgBytes($stack16);
+ requestHeader.setExpressionType("TAG");
+ requestHeader.setBname(brokerName);
+ request = org.apache.rocketmq.remoting.protocol.RemotingCommand.createRequestCommand(11,(org.apache.rocketmq.remoting.CommandCustomHeader)requestHeader);
+ $stack27=this.remotingClient;
+ request = $stack27.invokeSync(brokerAddr,request,timeoutMillis);
+ pullResultExt = this#org.apache.rocketmq.broker.out.BrokerOuterAPI:processPullResponse(request,brokerAddr);
+ this#org.apache.rocketmq.broker.out.BrokerOuterAPI:processPullResult(pullResultExt,brokerName,queueId);
+ return  pullResultExt;
+ } 
+

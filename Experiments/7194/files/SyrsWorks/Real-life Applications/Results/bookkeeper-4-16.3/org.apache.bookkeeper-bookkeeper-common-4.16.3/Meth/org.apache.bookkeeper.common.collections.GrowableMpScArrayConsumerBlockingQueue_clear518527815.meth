@@ -1,0 +1,50 @@
+void org.apache.bookkeeper.common.collections.GrowableMpScArrayConsumerBlockingQueue:clear()
+{
+long stamp;
+  int size;
+  int i;
+  java.lang.Throwable l5;
+  java.util.concurrent.locks.StampedLock $stack6;
+  java.util.concurrent.atomic.AtomicInteger $stack8;
+  org.apache.bookkeeper.common.collections.GrowableMpScArrayConsumerBlockingQueue$PaddedInt $stack14;
+  int $stack15;
+  java.lang.Object[] $stack16;
+  int $stack20;
+  org.apache.bookkeeper.common.collections.GrowableMpScArrayConsumerBlockingQueue$PaddedInt $stack24;
+  $stack6=this.headLock;
+ stamp = $stack6.readLock();
+dummyClass.highSourceMut(stamp);
+ label0:$stack8=this.size;
+ size = $stack8.get();
+ i=0;
+ label1:if (i>=size) goto label2;
+ $stack16=this.data;
+ $stack14=this.headIndex;
+ $stack15=$stack14.value;
+ $stack16[$stack15]=null;
+ $stack24=this.headIndex;
+ $stack14=this.headIndex;
+ $stack15=$stack14.value;
+ $stack15=($stack15+1);
+ $stack16=this.data;
+ $stack20=#$stack16;
+ $stack20=($stack20-1);
+ $stack15=($stack15 & $stack20);
+ $stack24.value=$stack15;
+ i=(i+1);
+ goto label1;
+ label2:$stack8=this.size;
+ size= ! (size);
+ size = $stack8.addAndGet(size);
+ label3:$stack6=this.headLock;
+ $stack6.unlockRead(stamp);
+ goto label4;
+ label5:l5 = catch;
+ label6:$stack6=this.headLock;
+ $stack6.unlockRead(stamp);
+ throw l5;
+ label4:return;
+ catch java.lang.Throwable: label0 - label3 : label5;
+catch java.lang.Throwable: label5 - label6 : label5;
+} 
+

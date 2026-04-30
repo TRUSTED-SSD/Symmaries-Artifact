@@ -1,0 +1,34 @@
+void org.apache.rocketmq.remoting.netty.NettyRemotingAbstract:requestFail(int opaque)
+{
+org.apache.rocketmq.remoting.netty.ResponseFuture responseFuture;
+  java.lang.Throwable l4;
+  java.util.concurrent.ConcurrentMap $stack5;
+  java.lang.Integer $stack6;
+  java.lang.Object $stack7;
+  java.lang.Throwable $stack8;
+  org.apache.rocketmq.logging.org.slf4j.Logger $stack10;
+  $stack5=this.responseTable;
+ $stack6 = java.lang.Integer.valueOf(opaque);
+ $stack7 = $stack5.remove((java.lang.Object)$stack6);
+ responseFuture=(org.apache.rocketmq.remoting.netty.ResponseFuture) $stack7;
+ if (responseFuture==null) goto label0;
+ responseFuture.setSendRequestOK((boolean)0);
+ responseFuture.putResponse(null);
+ label1:this#org.apache.rocketmq.remoting.netty.NettyRemotingAbstract(responseFuture);
+ label2:responseFuture.release();
+ goto label0;
+ label3:l4 = catch;
+ $stack10=org.apache.rocketmq.remoting.netty.NettyRemotingAbstract.log;
+ $stack10.warn("execute callback in requestFail, and callback throw",l4);
+ label4:responseFuture.release();
+ goto label0;
+ label5:$stack8 = catch;
+ l4=$stack8;
+ label6:responseFuture.release();
+ throw $stack8;
+ label0:return;
+ catch java.lang.Throwable: label1 - label2 : label3;
+catch java.lang.Throwable: label3 - label4 : label5;
+catch java.lang.Throwable: label5 - label6 : label5;
+} 
+

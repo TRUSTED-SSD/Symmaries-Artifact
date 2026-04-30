@@ -1,0 +1,42 @@
+void org.apache.rocketmq.broker.slave.SlaveSynchronize:syncMessageRequestMode()
+{
+java.lang.String masterAddrBak;
+  org.apache.rocketmq.remoting.protocol.body.MessageRequestModeSerializeWrapper messageRequestModeSerializeWrapper;
+  org.apache.rocketmq.broker.loadbalance.MessageRequestModeManager messageRequestModeManager;
+  org.apache.rocketmq.broker.BrokerController $stack4;
+  java.lang.String $stack5;
+  boolean $stack6;
+  org.apache.rocketmq.broker.out.BrokerOuterAPI $stack8;
+  org.apache.rocketmq.broker.processor.QueryAssignmentProcessor $stack11;
+  java.util.concurrent.ConcurrentHashMap $stack13;
+  java.util.concurrent.ConcurrentHashMap $stack15;
+  org.apache.rocketmq.logging.org.slf4j.Logger $stack16;
+  java.lang.Exception $stack17;
+  masterAddrBak=this.masterAddr;
+ if (masterAddrBak==null) goto label0;
+ $stack4=this.brokerController;
+ $stack5 = $stack4.getBrokerAddr();
+ $stack6 = masterAddrBak.equals((java.lang.Object)$stack5);
+ if ($stack6!=0) goto label0;
+ label1:$stack4=this.brokerController;
+ $stack8 = $stack4.getBrokerOuterAPI();
+ messageRequestModeSerializeWrapper = $stack8.getAllMessageRequestMode(masterAddrBak);
+ $stack4=this.brokerController;
+ $stack11 = $stack4.getQueryAssignmentProcessor();
+ messageRequestModeManager = $stack11.getMessageRequestModeManager();
+ $stack13 = messageRequestModeManager.getMessageRequestModeMap();
+ $stack13.clear();
+ $stack13 = messageRequestModeManager.getMessageRequestModeMap();
+ $stack15 = messageRequestModeSerializeWrapper.getMessageRequestModeMap();
+ $stack13.putAll((java.util.Map)$stack15);
+ messageRequestModeManager.persist();
+ $stack16=org.apache.rocketmq.broker.slave.SlaveSynchronize.LOGGER;
+ $stack16.info("Update slave Message Request Mode from master, {}",(java.lang.Object)masterAddrBak);
+ label2:goto label0;
+ label3:$stack17 = catch;
+ $stack16=org.apache.rocketmq.broker.slave.SlaveSynchronize.LOGGER;
+ $stack16.error("SyncMessageRequestMode Exception, {}",(java.lang.Object)masterAddrBak,(java.lang.Object)$stack17);
+ label0:return;
+ catch java.lang.Exception: label1 - label2 : label3;
+} 
+

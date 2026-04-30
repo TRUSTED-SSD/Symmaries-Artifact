@@ -1,0 +1,47 @@
+java.util.Set org.apache.rocketmq.client.impl.consumer.DefaultMQPullConsumerImpl:subscriptions()
+{
+java.util.HashSet result;
+  java.util.Set topics;
+  java.util.Set l3;
+  java.util.Iterator l4;
+  java.lang.String t;
+  org.apache.rocketmq.remoting.protocol.heartbeat.SubscriptionData ms;
+  java.lang.Throwable l8;
+  org.apache.rocketmq.client.consumer.DefaultMQPullConsumer $stack10;
+  boolean $stack14;
+  java.lang.Object $stack17;
+  java.lang.Exception $stack23;
+  org.apache.rocketmq.logging.org.slf4j.Logger $stack24;
+  result=new java.util.HashSet;
+ result#java.util.HashSet();
+ $stack10=this.defaultMQPullConsumer;
+ topics = $stack10.getRegisterTopics();
+ if (topics==null) goto label0;
+ l3=topics;
+ monitorenter topics;
+ label1:l4 = topics.iterator();
+ label2:$stack14 = l4.hasNext();
+ if ($stack14==0) goto label3;
+ $stack17 = l4.next();
+ t=(java.lang.String) $stack17;
+ ms=null;
+ label4:ms = org.apache.rocketmq.remoting.protocol.filter.FilterAPI.buildSubscriptionData(t,"*");
+ label5:goto label6;
+ label7:$stack23 = catch;
+ $stack24=org.apache.rocketmq.client.impl.consumer.DefaultMQPullConsumerImpl.log;
+ $stack24.error("parse subscription error",(java.lang.Throwable)$stack23);
+ label6:if (ms==null) goto label8;
+ ms.setSubVersion(0L);
+ result.add((java.lang.Object)ms);
+ label8:goto label2;
+ label3:monitorexit topics;
+ label9:goto label0;
+ label10:l8 = catch;
+ monitorexit topics;
+ label11:throw l8;
+ label0:return  result;
+ catch java.lang.Exception: label4 - label5 : label7;
+catch java.lang.Throwable: label1 - label9 : label10;
+catch java.lang.Throwable: label10 - label11 : label10;
+} 
+

@@ -1,0 +1,33 @@
+void org.apache.bookkeeper.bookie.InterleavedLedgerStorage:shutdown()
+{
+org.slf4j.Logger $stack2;
+  org.apache.bookkeeper.bookie.GarbageCollectorThread $stack4;
+  org.apache.bookkeeper.bookie.DefaultEntryLogger $stack6;
+  org.apache.bookkeeper.bookie.LedgerCache $stack7;
+  java.io.IOException $stack9;
+  $stack2=org.apache.bookkeeper.bookie.InterleavedLedgerStorage.LOG;
+ dummyClass.lowSink("Shutting down InterleavedLedgerStorage");
+$stack2.info("Shutting down InterleavedLedgerStorage");
+ $stack2=org.apache.bookkeeper.bookie.InterleavedLedgerStorage.LOG;
+ dummyClass.lowSink("Shutting down GC thread");
+$stack2.info("Shutting down GC thread");
+ $stack4=this.gcThread;
+ $stack4.shutdown();
+ $stack2=org.apache.bookkeeper.bookie.InterleavedLedgerStorage.LOG;
+ dummyClass.lowSink("Shutting down entry logger");
+$stack2.info("Shutting down entry logger");
+ $stack6=this.entryLogger;
+ $stack6.close();
+ label0:$stack7=this.ledgerCache;
+ $stack7.close();
+ label1:goto label2;
+ label3:$stack9 = catch;
+ $stack2=org.apache.bookkeeper.bookie.InterleavedLedgerStorage.LOG;
+ $stack2.error("Error while closing the ledger cache",(java.lang.Throwable)$stack9);
+ label2:$stack2=org.apache.bookkeeper.bookie.InterleavedLedgerStorage.LOG;
+ dummyClass.lowSink("Complete shutting down Ledger Storage");
+$stack2.info("Complete shutting down Ledger Storage");
+ return;
+ catch java.io.IOException: label0 - label1 : label3;
+} 
+

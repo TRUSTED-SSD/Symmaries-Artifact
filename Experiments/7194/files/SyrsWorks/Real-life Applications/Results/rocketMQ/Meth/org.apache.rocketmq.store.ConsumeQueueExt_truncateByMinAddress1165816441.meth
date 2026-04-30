@@ -1,0 +1,57 @@
+void org.apache.rocketmq.store.ConsumeQueueExt:truncateByMinAddress(long minAddress)
+{
+java.util.ArrayList willRemoveFiles;
+  java.util.List mappedFiles;
+  java.util.Iterator l7;
+  org.apache.rocketmq.store.logfile.MappedFile file;
+  long fileTailOffset;
+  boolean $stack11;
+  org.apache.rocketmq.logging.org.slf4j.Logger $stack12;
+  java.lang.Long $stack14;
+  org.apache.rocketmq.store.MappedFileQueue $stack16;
+  java.lang.Object $stack22;
+  int $stack24;
+  long $stack25;
+  byte $stack26;
+  java.lang.Object[] $stack28;
+  java.lang.String $stack32;
+  $stack11 = org.apache.rocketmq.store.ConsumeQueueExt.isExtAddr(minAddress);
+ if ($stack11!=0) goto label0;
+ return;
+ label0:$stack12=org.apache.rocketmq.store.ConsumeQueueExt.log;
+ $stack14 = java.lang.Long.valueOf(minAddress);
+ $stack12.info("Truncate consume queue ext by min {}.",(java.lang.Object)$stack14);
+ willRemoveFiles=new java.util.ArrayList;
+ willRemoveFiles#java.util.ArrayList();
+ $stack16=this.mappedFileQueue;
+ mappedFiles = $stack16.getMappedFiles();
+ minAddress = this.unDecorate(minAddress);
+ l7 = mappedFiles.iterator();
+ label1:$stack11 = l7.hasNext();
+ if ($stack11==0) goto label2;
+ $stack22 = l7.next();
+ file=(org.apache.rocketmq.store.logfile.MappedFile) $stack22;
+ fileTailOffset = file.getFileFromOffset();
+ $stack24=this.mappedFileSize;
+ $stack25=(long) $stack24;
+ fileTailOffset=(fileTailOffset+$stack25);
+ $stack26=(fileTailOffset cmp minAddress);
+ if ($stack26>=0) goto label3;
+ $stack12=org.apache.rocketmq.store.ConsumeQueueExt.log;
+ $stack28=new java.lang.Object[3];
+ $stack32 = file.getFileName();
+ $stack28[0]=$stack32;
+ $stack14 = java.lang.Long.valueOf(fileTailOffset);
+ $stack28[1]=$stack14;
+ $stack14 = java.lang.Long.valueOf(minAddress);
+ $stack28[2]=$stack14;
+ $stack12.info("Destroy consume queue ext by min: file={}, fileTailOffset={}, minOffset={}",$stack28);
+ $stack11 = file.destroy(1000L);
+ if ($stack11==0) goto label3;
+ willRemoveFiles.add((java.lang.Object)file);
+ label3:goto label1;
+ label2:$stack16=this.mappedFileQueue;
+ $stack16.deleteExpiredFile((java.util.List)willRemoveFiles);
+ return;
+ } 
+

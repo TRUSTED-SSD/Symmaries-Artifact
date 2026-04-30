@@ -1,0 +1,33 @@
+io.netty.util.Timeout org.apache.rocketmq.broker.offset.ConsumerOrderInfoLockManager:lambda$updateLockFreeTimestamp$0(java.lang.Long lockFreeTimestamp,org.apache.rocketmq.broker.offset.ConsumerOrderInfoLockManager$Key key,io.netty.util.Timeout oldTimeout)
+{
+long delay;
+  io.netty.util.Timeout newTimeout;
+  long $stack8;
+  org.apache.rocketmq.broker.offset.ConsumerOrderInfoLockManager$NotifyLockFreeTimerTask $stack9;
+  io.netty.util.Timer $stack10;
+  java.util.concurrent.TimeUnit $stack11;
+  java.lang.Exception $stack15;
+  java.lang.Object[] $stack16;
+  org.apache.rocketmq.logging.org.slf4j.Logger $stack17;
+  label0:delay = lockFreeTimestamp.longValue();
+ $stack8 = java.lang.System.currentTimeMillis();
+ delay=(delay-$stack8);
+ $stack10=this.timer;
+ $stack9=new org.apache.rocketmq.broker.offset.ConsumerOrderInfoLockManager$NotifyLockFreeTimerTask;
+ $stack9#org.apache.rocketmq.broker.offset.ConsumerOrderInfoLockManager$NotifyLockFreeTimerTask(this,key,null);
+ $stack11=java.util.concurrent.TimeUnit.MILLISECONDS;
+ newTimeout = $stack10.newTimeout((io.netty.util.TimerTask)$stack9,delay,$stack11);
+ if (oldTimeout==null) goto label1;
+ oldTimeout.cancel();
+ label1:return  newTimeout;
+ label2:$stack15 = catch;
+ $stack17=org.apache.rocketmq.broker.offset.ConsumerOrderInfoLockManager.POP_LOGGER;
+ $stack16=new java.lang.Object[3];
+ $stack16[0]=key;
+ $stack16[1]=lockFreeTimestamp;
+ $stack16[2]=$stack15;
+ $stack17.warn("add timeout task failed. key:{}, lockFreeTimestamp:{}",$stack16);
+ return  oldTimeout;
+ catch java.lang.Exception: label0 - label1 : label2;
+} 
+

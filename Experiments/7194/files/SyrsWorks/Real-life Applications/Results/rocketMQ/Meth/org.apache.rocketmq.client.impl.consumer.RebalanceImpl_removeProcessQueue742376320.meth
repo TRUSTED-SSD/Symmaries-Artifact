@@ -1,0 +1,28 @@
+void org.apache.rocketmq.client.impl.consumer.RebalanceImpl:removeProcessQueue(org.apache.rocketmq.common.message.MessageQueue mq)
+{
+org.apache.rocketmq.client.impl.consumer.ProcessQueue prev;
+  boolean droped;
+  java.util.concurrent.ConcurrentMap $stack4;
+  java.lang.Object $stack5;
+  java.lang.Object[] $stack8;
+  java.lang.String $stack9;
+  org.apache.rocketmq.logging.org.slf4j.Logger $stack10;
+  java.lang.Boolean $stack13;
+  $stack4=this.processQueueTable;
+ $stack5 = $stack4.remove((java.lang.Object)mq);
+ prev=(org.apache.rocketmq.client.impl.consumer.ProcessQueue) $stack5;
+ if (prev==null) goto label0;
+ droped = prev.isDropped();
+ prev.setDropped((boolean)1);
+ this.removeUnnecessaryMessageQueue(mq,prev);
+ $stack10=org.apache.rocketmq.client.impl.consumer.RebalanceImpl.log;
+ $stack8=new java.lang.Object[3];
+ $stack9=this.consumerGroup;
+ $stack8[0]=$stack9;
+ $stack8[1]=mq;
+ $stack13 = java.lang.Boolean.valueOf(droped);
+ $stack8[2]=$stack13;
+ $stack10.info("Fix Offset, {}, remove unnecessary mq, {} Droped: {}",$stack8);
+ label0:return;
+ } 
+

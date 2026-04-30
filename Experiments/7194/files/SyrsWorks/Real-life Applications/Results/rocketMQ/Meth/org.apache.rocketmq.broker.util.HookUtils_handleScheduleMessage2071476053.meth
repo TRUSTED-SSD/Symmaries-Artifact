@@ -1,0 +1,31 @@
+static org.apache.rocketmq.store.PutMessageResult org.apache.rocketmq.broker.util.HookUtils:handleScheduleMessage(org.apache.rocketmq.broker.BrokerController brokerController,org.apache.rocketmq.common.message.MessageExtBrokerInner msg)
+{
+int tranType;
+  org.apache.rocketmq.store.PutMessageResult transformRes;
+  boolean $stack6;
+  org.apache.rocketmq.store.config.MessageStoreConfig $stack11;
+  org.apache.rocketmq.store.PutMessageStatus $stack15;
+  tranType = msg.getSysFlag();
+ tranType = org.apache.rocketmq.common.sysflag.MessageSysFlag.getTransactionValue(tranType);
+ if (tranType==0) goto label0;
+ if (tranType!=8) goto label1;
+ label0:$stack6 = org.apache.rocketmq.broker.util.HookUtils.isRolledTimerMessage(msg);
+ if ($stack6!=0) goto label2;
+ $stack6 = org.apache.rocketmq.broker.util.HookUtils.checkIfTimerMessage(msg);
+ if ($stack6==0) goto label2;
+ $stack11 = brokerController.getMessageStoreConfig();
+ $stack6 = $stack11.isTimerWheelEnable();
+ if ($stack6!=0) goto label3;
+ transformRes=new org.apache.rocketmq.store.PutMessageResult;
+ $stack15=org.apache.rocketmq.store.PutMessageStatus.WHEEL_TIMER_NOT_ENABLE;
+ transformRes#org.apache.rocketmq.store.PutMessageResult($stack15,null);
+ return  transformRes;
+ label3:transformRes = org.apache.rocketmq.broker.util.HookUtils.transformTimerMessage(brokerController,msg);
+ if (null==transformRes) goto label2;
+ return  transformRes;
+ label2:tranType = msg.getDelayTimeLevel();
+ if (tranType<=0) goto label1;
+ org.apache.rocketmq.broker.util.HookUtils.transformDelayLevelMessage(brokerController,msg);
+ label1:return  null;
+ } 
+

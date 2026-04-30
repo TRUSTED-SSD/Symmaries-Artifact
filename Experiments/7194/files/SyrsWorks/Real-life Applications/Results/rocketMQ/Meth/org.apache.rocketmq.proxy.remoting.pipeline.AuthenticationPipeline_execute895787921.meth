@@ -1,0 +1,31 @@
+void org.apache.rocketmq.proxy.remoting.pipeline.AuthenticationPipeline:execute(io.netty.channel.ChannelHandlerContext ctx,org.apache.rocketmq.remoting.protocol.RemotingCommand request,org.apache.rocketmq.proxy.common.ProxyContext context)
+{
+org.apache.rocketmq.proxy.config.ProxyConfig config;
+  java.util.Iterator l5;
+  org.apache.rocketmq.acl.AccessValidator accessValidator;
+  org.apache.rocketmq.acl.AccessResource accessResource;
+  boolean $stack9;
+  org.apache.rocketmq.acl.plain.PlainAccessValidator $stack10;
+  java.util.List $stack11;
+  java.lang.Object $stack16;
+  java.lang.String $stack17;
+  config = org.apache.rocketmq.proxy.config.ConfigurationManager.getProxyConfig();
+ $stack9 = config.isEnableACL();
+ if ($stack9==0) goto label0;
+ $stack11=this.accessValidatorList;
+ $stack10=new org.apache.rocketmq.acl.plain.PlainAccessValidator;
+ $stack10#org.apache.rocketmq.acl.plain.PlainAccessValidator();
+ $stack11.add((java.lang.Object)$stack10);
+ $stack11=this.accessValidatorList;
+ l5 = $stack11.iterator();
+ label1:$stack9 = l5.hasNext();
+ if ($stack9==0) goto label0;
+ $stack16 = l5.next();
+ accessValidator=(org.apache.rocketmq.acl.AccessValidator) $stack16;
+ $stack17 = context.getRemoteAddress();
+ accessResource = accessValidator.parse(request,$stack17);
+ accessValidator.validate(accessResource);
+ goto label1;
+ label0:return;
+ } 
+

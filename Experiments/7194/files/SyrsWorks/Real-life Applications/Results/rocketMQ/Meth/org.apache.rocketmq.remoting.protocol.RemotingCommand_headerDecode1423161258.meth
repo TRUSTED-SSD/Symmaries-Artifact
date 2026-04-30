@@ -1,0 +1,27 @@
+static org.apache.rocketmq.remoting.protocol.RemotingCommand org.apache.rocketmq.remoting.protocol.RemotingCommand:headerDecode(io.netty.buffer.ByteBuf byteBuffer,int len,org.apache.rocketmq.remoting.protocol.SerializeType type)
+{
+byte[] headerData;
+  org.apache.rocketmq.remoting.protocol.RemotingCommand resultJson;
+  int[] $stack6;
+  int $stack7;
+  java.lang.Object $stack11;
+  $stack6=org.apache.rocketmq.remoting.protocol.RemotingCommand$1.$SwitchMap$org$apache$rocketmq$remoting$protocol$SerializeType;
+ $stack7 = type.ordinal();
+ $stack7=$stack6[$stack7];
+ switch [$stack7]
+if 0 goto label0;
+if 1 goto label1;
+goto label2;
+ label0:headerData=new byte[len];
+ dummyClass.highSourceMut(headerData);
+byteBuffer.readBytes(headerData);
+ $stack11 = org.apache.rocketmq.remoting.protocol.RemotingSerializable.decode(headerData,org.apache.rocketmq.remoting.protocol.RemotingCommand);
+ resultJson=(org.apache.rocketmq.remoting.protocol.RemotingCommand) $stack11;
+ resultJson.setSerializeTypeCurrentRPC(type);
+ return  resultJson;
+ label1:resultJson = org.apache.rocketmq.remoting.protocol.RocketMQSerializable.rocketMQProtocolDecode(byteBuffer,len);
+ resultJson.setSerializeTypeCurrentRPC(type);
+ return  resultJson;
+ label2:return  null;
+ } 
+

@@ -1,0 +1,10 @@
+org.apache.rocketmq.client.impl.factory.MQClientInstance org.apache.rocketmq.client.impl.MQClientManager:getOrCreateMQClientInstance (
+  org.apache.rocketmq.client.ClientConfig @clientConfig,
+  org.apache.rocketmq.remoting.RPCHook rpcHook) {
+  guard = tt;
+  ret(level()) = level(@clientConfig) ⊔ level(this) ⊔ obj_level(@clientConfig) ⊔ obj_level(this);
+  ret(obj_level()) = level(@clientConfig) ⊔ level(this) ⊔ obj_level(@clientConfig) ⊔ obj_level(this);
+  ret(obj_level(@clientConfig)) = level(@clientConfig) ⊔ level(this) ⊔ obj_level(@clientConfig) ⊔ obj_level(this);
+  ret(obj_level(rpcHook)) = level(@clientConfig) ⊔ level(this) ⊔ obj_level(@clientConfig) ⊔ obj_level(rpcHook) ⊔ obj_level(this);
+  ret(obj_level(this)) = level(@clientConfig) ⊔ level(this) ⊔ obj_level(@clientConfig) ⊔ obj_level(this);
+}

@@ -1,0 +1,26 @@
+void org.apache.bookkeeper.common.grpc.stats.MonitoringServerCall:close(io.grpc.Status status,io.grpc.Metadata trailers)
+{
+long latencyMicros;
+  org.apache.bookkeeper.common.grpc.stats.ServerStats $stack5;
+  io.grpc.Status$Code $stack6;
+  boolean $stack8;
+  io.grpc.Status $stack11;
+  $stack5=this.stats;
+ $stack6 = status.getCode();
+ $stack5.recordServerHandled($stack6);
+ $stack5=this.stats;
+ $stack8 = $stack5.shouldRecordLatency();
+ if ($stack8==0) goto label0;
+ latencyMicros=this.startNanos;
+ latencyMicros = org.apache.bookkeeper.common.util.MathUtils.elapsedMicroSec(latencyMicros);
+ $stack5=this.stats;
+ $stack11=io.grpc.Status.OK;
+ if ($stack11!=status) goto label1;
+ $stack8=1;
+ goto label2;
+ label1:$stack8=0;
+ label2:$stack5#org.apache.bookkeeper.common.grpc.stats.ServerStats($stack8,latencyMicros);
+ label0:this#io.grpc.ForwardingServerCall$SimpleForwardingServerCall:close(status,trailers);
+ return;
+ } 
+

@@ -1,0 +1,38 @@
+void org.apache.bookkeeper.proto.PerChannelBookieClient:errorOutPendingOps(int rc)
+{
+java.util.Queue oldPendingOps;
+  java.lang.Object l3;
+  java.lang.Object pendingOp;
+  boolean $stack9;
+  java.lang.Throwable $stack12;
+  java.util.ArrayDeque tmp$1744461290;
+  java.util.Iterator tmp$114694102;
+  org.apache.bookkeeper.proto.BookkeeperInternalCallbacks$GenericCallback tmp$123652842;
+  l3=this;
+ monitorenter this;
+ label0:oldPendingOps=this.pendingOps;
+ tmp$1744461290=new java.util.ArrayDeque;
+ tmp$1744461290#java.util.ArrayDeque();
+ this.pendingOps=tmp$1744461290;
+ monitorexit this;
+ label1:goto label2;
+ label3:$stack12 = catch;
+ pendingOp=$stack12;
+ monitorexit this;
+ label4:$stack12=(java.lang.Throwable) $stack12;
+ throw $stack12;
+ label2:l3 = oldPendingOps.iterator();
+ label5:tmp$114694102=(java.util.Iterator) l3;
+ $stack9 = tmp$114694102.hasNext();
+ if ($stack9==0) goto label6;
+ tmp$114694102=(java.util.Iterator) l3;
+ pendingOp = tmp$114694102.next();
+ pendingOp=(org.apache.bookkeeper.proto.BookkeeperInternalCallbacks$GenericCallback) pendingOp;
+ tmp$123652842=(org.apache.bookkeeper.proto.BookkeeperInternalCallbacks$GenericCallback) pendingOp;
+ tmp$123652842.operationComplete(rc,(java.lang.Object)this);
+ goto label5;
+ label6:return;
+ catch java.lang.Throwable: label0 - label1 : label3;
+catch java.lang.Throwable: label3 - label4 : label3;
+} 
+

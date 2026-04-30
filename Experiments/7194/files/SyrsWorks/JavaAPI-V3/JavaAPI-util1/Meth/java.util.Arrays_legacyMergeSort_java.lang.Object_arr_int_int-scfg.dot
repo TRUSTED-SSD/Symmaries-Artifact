@@ -1,0 +1,29 @@
+digraph G {
+  node [shape=box, ];
+  "pc0_js1" [label="〈r1 = java.util.Arrays.copyOfRange (r0, i0, i1), js1〉\n\
+tt",
+             ];
+  "pc1_js1" [label="〈$i2 = ! i0, js1〉", ];
+  "pc2_js1" [label="〈java.util.Arrays.mergeSort (r1, r0, i0, i1, $i2), js1〉\n\
+tt",
+             ];
+  "pc3_js1" [label="〈return, js1〉", ];
+  "pc4_js1" [label="〈sink, js1〉\n\
+obj_level(r0) ⊑ ret(obj_level(r0))'",
+             ];
+  
+  
+  "pc0_js1" -> "pc1_js1" [label="tt,\n\
+{level(r1) := pc,\n\
+ obj_level(r1) := pc ⊔ level(i0) ⊔ level(i1) ⊔ level(r0) ⊔ obj_level(r0)}",
+                          ];
+  "pc1_js1" -> "pc2_js1" [label="tt,\n\
+{level($i2) := pc ⊔ level(i0)}", ];
+  "pc2_js1" -> "pc3_js1" [label="tt,\n\
+{obj_level(r0) := pc ⊔ level(i0) ⊔ level(i1) ⊔ level(r0) ⊔ obj_level(r0),\n\
+ obj_level(r1) := pc ⊔ level(i0) ⊔ level(i1) ⊔ level(r0) ⊔ obj_level(r0)}",
+                          ];
+  "pc3_js1" -> "pc4_js1" [label="tt,\n\
+{ϕ := S3}", ];
+  
+  }

@@ -1,0 +1,49 @@
+java.util.List com.google.zxing.oned.rss.expanded.RSSExpandedReader:decodeRow2pairs(int rowNumber,com.google.zxing.common.BitArray row)
+{
+boolean done;
+  java.util.List ps;
+  com.google.zxing.NotFoundException $stack10;
+  java.util.List $stack22;
+  com.google.zxing.oned.rss.expanded.ExpandedPair $stack23;
+  ps=this.pairs;
+ ps.clear();
+ done=0;
+ label0:if (done!=0) goto label1;
+ label2:$stack22=this.pairs;
+ ps=this.pairs;
+ $stack23 = this.retrieveNextPair(row,ps,rowNumber);
+ $stack22.add((java.lang.Object)$stack23);
+ label3:goto label0;
+ label4:$stack10 = catch;
+ ps=this.pairs;
+ done = ps.isEmpty();
+ if (done==0) goto label5;
+ throw $stack10;
+ label5:done=1;
+ goto label0;
+ label1:done = this#com.google.zxing.oned.rss.expanded.RSSExpandedReader:checkChecksum();
+ if (done==0) goto label6;
+ ps=this.pairs;
+ done = com.google.zxing.oned.rss.expanded.RSSExpandedReader.isValidSequence(ps,(boolean)1);
+ if (done==0) goto label6;
+ ps=this.pairs;
+ return  ps;
+ label6:ps=this.rows;
+ done = ps.isEmpty();
+ if (done!=0) goto label7;
+ done=1;
+ goto label8;
+ label7:done=0;
+ label8:this#com.google.zxing.oned.rss.expanded.RSSExpandedReader:storeRow(rowNumber);
+ if (done==0) goto label9;
+ ps = this#com.google.zxing.oned.rss.expanded.RSSExpandedReader:checkRows((boolean)0);
+ if (ps==null) goto label10;
+ return  ps;
+ label10:ps = this#com.google.zxing.oned.rss.expanded.RSSExpandedReader:checkRows((boolean)1);
+ if (ps==null) goto label9;
+ return  ps;
+ label9:$stack10 = com.google.zxing.NotFoundException.getNotFoundInstance();
+ throw $stack10;
+ catch com.google.zxing.NotFoundException: label2 - label3 : label4;
+} 
+

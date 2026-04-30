@@ -1,0 +1,22 @@
+void org.apache.rocketmq.remoting.netty.NettyRemotingAbstract:doAfterRpcHooks(java.lang.String addr,org.apache.rocketmq.remoting.protocol.RemotingCommand request,org.apache.rocketmq.remoting.protocol.RemotingCommand response)
+{
+java.util.Iterator l4;
+  org.apache.rocketmq.remoting.RPCHook rpcHook;
+  java.util.List $stack6;
+  int $stack7;
+  boolean $stack10;
+  java.lang.Object $stack11;
+  $stack6=this.rpcHooks;
+ $stack7 = $stack6.size();
+ if ($stack7<=0) goto label0;
+ $stack6=this.rpcHooks;
+ l4 = $stack6.iterator();
+ label1:$stack10 = l4.hasNext();
+ if ($stack10==0) goto label0;
+ $stack11 = l4.next();
+ rpcHook=(org.apache.rocketmq.remoting.RPCHook) $stack11;
+ rpcHook.doAfterResponse(addr,request,response);
+ goto label1;
+ label0:return;
+ } 
+

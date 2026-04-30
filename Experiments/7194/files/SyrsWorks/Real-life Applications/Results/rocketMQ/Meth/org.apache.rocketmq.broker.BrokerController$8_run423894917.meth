@@ -1,0 +1,22 @@
+void org.apache.rocketmq.broker.BrokerController$8:run()
+{
+org.apache.rocketmq.broker.BrokerController $stack2;
+  org.apache.rocketmq.logging.org.slf4j.Logger $stack3;
+  org.apache.rocketmq.store.MessageStore $stack5;
+  long $stack6;
+  java.lang.Long $stack7;
+  java.lang.Throwable $stack8;
+  label0:$stack3=org.apache.rocketmq.broker.BrokerController.LOG;
+ $stack2=this.this$0;
+ $stack5 = $stack2.getMessageStore();
+ $stack6 = $stack5.dispatchBehindBytes();
+ $stack7 = java.lang.Long.valueOf($stack6);
+ $stack3.info("Dispatch task fall behind commit log {}bytes",(java.lang.Object)$stack7);
+ label1:goto label2;
+ label3:$stack8 = catch;
+ $stack3=org.apache.rocketmq.broker.BrokerController.LOG;
+ $stack3.error("Failed to print dispatchBehindBytes",$stack8);
+ label2:return;
+ catch java.lang.Throwable: label0 - label1 : label3;
+} 
+

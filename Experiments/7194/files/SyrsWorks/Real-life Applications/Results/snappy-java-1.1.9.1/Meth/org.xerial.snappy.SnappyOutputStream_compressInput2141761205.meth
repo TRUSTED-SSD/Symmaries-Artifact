@@ -1,0 +1,37 @@
+void org.xerial.snappy.SnappyOutputStream:compressInput()
+{
+int l1;
+  boolean $stack2;
+  int $stack6;
+  byte[] $stack8;
+  byte[] $stack10;
+  $stack2=this.headerWritten;
+ if ($stack2!=0) goto label0;
+ l1 = this.writeHeader();
+ this.outputCursor=l1;
+ this.headerWritten=1;
+ label0:l1=this.inputCursor;
+ if (l1>0) goto label1;
+ return;
+ label1:l1=this.inputCursor;
+ $stack2 = this#org.xerial.snappy.SnappyOutputStream:hasSufficientOutputBufferFor(l1);
+ if ($stack2!=0) goto label2;
+ this.dumpOutput();
+ label2:this.writeBlockPreemble();
+ $stack10=this.inputBuffer;
+ l1=this.inputCursor;
+ $stack8=this.outputBuffer;
+ $stack6=this.outputCursor;
+ $stack6=($stack6+4);
+ l1 = org.xerial.snappy.Snappy.compress($stack10,0,l1,$stack8,$stack6);
+ $stack8=this.outputBuffer;
+ $stack6=this.outputCursor;
+ org.xerial.snappy.SnappyOutputStream.writeInt($stack8,$stack6,l1);
+ $stack6=this.outputCursor;
+ l1=(4+l1);
+ l1=($stack6+l1);
+ this.outputCursor=l1;
+ this.inputCursor=0;
+ return;
+ } 
+

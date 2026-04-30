@@ -1,0 +1,20 @@
+org.apache.rocketmq.client.consumer.PullResult org.apache.rocketmq.client.impl.MQClientAPIImpl:pullMessageSync(java.lang.String addr,org.apache.rocketmq.remoting.protocol.RemotingCommand @request,long timeoutMillis)
+{
+org.apache.rocketmq.remoting.RemotingClient $stack6;
+  boolean $stack8;
+  org.apache.rocketmq.client.consumer.PullResult $stack9;
+  java.lang.AssertionError $stack13;
+  org.apache.rocketmq.remoting.protocol.RemotingCommand request;
+request=@request;
+$stack6=this.remotingClient;
+ request = $stack6.invokeSync(addr,request,timeoutMillis);
+ $stack8=org.apache.rocketmq.client.impl.MQClientAPIImpl.$assertionsDisabled;
+ if ($stack8!=0) goto label0;
+ if (request!=null) goto label0;
+ $stack13=new java.lang.AssertionError;
+ $stack13#java.lang.AssertionError();
+ throw $stack13;
+ label0:$stack9 = this#org.apache.rocketmq.client.impl.MQClientAPIImpl:processPullResponse(request,addr);
+ return  $stack9;
+ } 
+

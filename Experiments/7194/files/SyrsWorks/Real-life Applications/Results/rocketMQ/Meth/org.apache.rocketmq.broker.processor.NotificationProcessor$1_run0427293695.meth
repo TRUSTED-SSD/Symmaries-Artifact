@@ -1,0 +1,58 @@
+void org.apache.rocketmq.broker.processor.NotificationProcessor$1:run0()
+{
+java.lang.Object pops;
+  java.util.Iterator l2;
+  java.util.concurrent.ArrayBlockingQueue popQ;
+  org.apache.rocketmq.broker.longpolling.NotificationRequest tmPopRequest;
+  java.lang.Thread $stack5;
+  boolean $stack6;
+  org.apache.rocketmq.broker.processor.NotificationProcessor $stack7;
+  com.googlecode.concurrentlinkedhashmap.ConcurrentLinkedHashMap $stack8;
+  org.apache.rocketmq.logging.org.slf4j.Logger $stack17;
+  java.lang.InterruptedException $stack21;
+  java.lang.Exception $stack22;
+  java.util.Collection tmp$324978809;
+  label0:$stack5 = java.lang.Thread.currentThread();
+ $stack6 = $stack5.isInterrupted();
+ if ($stack6==0) goto label1;
+ goto label2;
+ label1:java.lang.Thread.sleep(200L);
+ $stack7=this.this$0;
+ $stack8 = org.apache.rocketmq.broker.processor.NotificationProcessor.access$000($stack7);
+ pops = $stack8.values();
+ tmp$324978809=(java.util.Collection) pops;
+ l2 = tmp$324978809.iterator();
+ label3:$stack6 = l2.hasNext();
+ if ($stack6==0) goto label4;
+ pops = l2.next();
+ popQ=(java.util.concurrent.ArrayBlockingQueue) pops;
+ pops = popQ.peek();
+ tmPopRequest=(org.apache.rocketmq.broker.longpolling.NotificationRequest) pops;
+ label5:if (tmPopRequest==null) goto label6;
+ $stack6 = tmPopRequest.isTimeout();
+ if ($stack6==0) goto label6;
+ pops = popQ.poll();
+ tmPopRequest=(org.apache.rocketmq.broker.longpolling.NotificationRequest) pops;
+ if (tmPopRequest!=null) goto label7;
+ goto label6;
+ label7:$stack17 = org.apache.rocketmq.broker.processor.NotificationProcessor.access$100();
+ $stack17.info("timeout , wakeUp Notification : {}",(java.lang.Object)tmPopRequest);
+ $stack7=this.this$0;
+ org.apache.rocketmq.broker.processor.NotificationProcessor.access$200($stack7,tmPopRequest);
+ pops = popQ.peek();
+ tmPopRequest=(org.apache.rocketmq.broker.longpolling.NotificationRequest) pops;
+ goto label5;
+ label6:goto label3;
+ label4:goto label0;
+ label8:$stack21 = catch;
+ pops=$stack21;
+ goto label2;
+ label9:$stack22 = catch;
+ $stack17 = org.apache.rocketmq.broker.processor.NotificationProcessor.access$100();
+ $stack17.error("checkNotificationPolling error",(java.lang.Throwable)$stack22);
+ goto label0;
+ label2:return;
+ catch java.lang.InterruptedException: label1 - label4 : label8;
+catch java.lang.Exception: label1 - label4 : label9;
+} 
+

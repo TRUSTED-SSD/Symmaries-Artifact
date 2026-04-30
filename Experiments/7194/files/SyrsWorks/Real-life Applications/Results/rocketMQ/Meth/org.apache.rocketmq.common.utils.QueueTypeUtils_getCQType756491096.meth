@@ -1,0 +1,40 @@
+static org.apache.rocketmq.common.attribute.CQType org.apache.rocketmq.common.utils.QueueTypeUtils:getCQType(java.util.Optional topicConfig)
+{
+java.lang.String attributeName;
+  java.util.Map attributes;
+  boolean $stack3;
+  org.apache.rocketmq.common.attribute.EnumAttribute $stack4;
+  java.lang.Object $stack6;
+  org.apache.rocketmq.common.TopicConfig $stack7;
+  org.apache.rocketmq.common.attribute.CQType $stack11;
+  int $stack12;
+  $stack3 = topicConfig.isPresent();
+ if ($stack3!=0) goto label0;
+ $stack4=org.apache.rocketmq.common.TopicAttributes.QUEUE_TYPE_ATTRIBUTE;
+ attributeName = $stack4.getDefaultValue();
+ $stack11 = org.apache.rocketmq.common.attribute.CQType.valueOf(attributeName);
+ return  $stack11;
+ label0:$stack4=org.apache.rocketmq.common.TopicAttributes.QUEUE_TYPE_ATTRIBUTE;
+ attributeName = $stack4.getName();
+ $stack6 = topicConfig.get();
+ $stack7=(org.apache.rocketmq.common.TopicConfig) $stack6;
+ attributes = $stack7.getAttributes();
+ if (attributes==null) goto label1;
+ $stack12 = attributes.size();
+ if ($stack12!=0) goto label2;
+ label1:$stack4=org.apache.rocketmq.common.TopicAttributes.QUEUE_TYPE_ATTRIBUTE;
+ attributeName = $stack4.getDefaultValue();
+ $stack11 = org.apache.rocketmq.common.attribute.CQType.valueOf(attributeName);
+ return  $stack11;
+ label2:$stack3 = attributes.containsKey((java.lang.Object)attributeName);
+ if ($stack3==0) goto label3;
+ $stack6 = attributes.get((java.lang.Object)attributeName);
+ attributeName=(java.lang.String) $stack6;
+ $stack11 = org.apache.rocketmq.common.attribute.CQType.valueOf(attributeName);
+ return  $stack11;
+ label3:$stack4=org.apache.rocketmq.common.TopicAttributes.QUEUE_TYPE_ATTRIBUTE;
+ attributeName = $stack4.getDefaultValue();
+ $stack11 = org.apache.rocketmq.common.attribute.CQType.valueOf(attributeName);
+ return  $stack11;
+ } 
+

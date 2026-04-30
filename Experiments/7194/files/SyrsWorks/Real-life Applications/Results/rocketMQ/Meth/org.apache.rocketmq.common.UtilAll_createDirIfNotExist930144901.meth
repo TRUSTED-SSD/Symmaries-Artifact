@@ -1,0 +1,28 @@
+static void org.apache.rocketmq.common.UtilAll:createDirIfNotExist(java.lang.String @dirName)
+{
+java.io.File f;
+  boolean result;
+  java.lang.StringBuilder $stack6;
+  org.apache.rocketmq.logging.org.slf4j.Logger $stack7;
+  java.lang.String dirName;
+dirName=@dirName;
+f=new java.io.File;
+ f#java.io.File(dirName);
+ result = f.exists();
+ if (result!=0) goto label0;
+ result = f.mkdirs();
+ $stack7=org.apache.rocketmq.common.UtilAll.STORE_LOG;
+ $stack6=new java.lang.StringBuilder;
+ $stack6#java.lang.StringBuilder();
+ $stack6 = $stack6.append(dirName);
+ $stack6 = $stack6.append(" mkdir ");
+ if (result==0) goto label1;
+ dirName="OK";
+ goto label2;
+ label1:dirName="Failed";
+ label2:$stack6 = $stack6.append(dirName);
+ dirName = $stack6.toString();
+ $stack7.info(dirName);
+ label0:return;
+ } 
+

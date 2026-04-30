@@ -1,0 +1,38 @@
+void org.apache.bookkeeper.stats.prometheus.DataSketchesOpStatsLogger:registerSuccessfulValue(long value)
+{
+org.apache.bookkeeper.stats.prometheus.DataSketchesOpStatsLogger$LocalData localData;
+  long stamp;
+  java.lang.Throwable l6;
+  java.util.concurrent.atomic.LongAdder $stack7;
+  org.apache.bookkeeper.stats.prometheus.DataSketchesOpStatsLogger$ThreadLocalAccessor $stack9;
+  io.netty.util.concurrent.FastThreadLocal $stack10;
+  java.lang.Object $stack11;
+  java.util.concurrent.locks.StampedLock $stack12;
+  com.yahoo.sketches.quantiles.DoublesSketch $stack14;
+  double $stack15;
+  $stack7=this.successCountAdder;
+ $stack7.increment();
+ $stack7=this.successSumAdder;
+ $stack7.add(value);
+ $stack9=this.current;
+ $stack10 = org.apache.bookkeeper.stats.prometheus.DataSketchesOpStatsLogger$ThreadLocalAccessor.access$100($stack9);
+ $stack11 = $stack10.get();
+ localData=(org.apache.bookkeeper.stats.prometheus.DataSketchesOpStatsLogger$LocalData) $stack11;
+ $stack12 = org.apache.bookkeeper.stats.prometheus.DataSketchesOpStatsLogger$LocalData.access$200(localData);
+ stamp = $stack12.readLock();
+dummyClass.highSourceMut(stamp);
+ label0:$stack14 = org.apache.bookkeeper.stats.prometheus.DataSketchesOpStatsLogger$LocalData.access$400(localData);
+ $stack15=(double) value;
+ $stack14.update($stack15);
+ label1:$stack12 = org.apache.bookkeeper.stats.prometheus.DataSketchesOpStatsLogger$LocalData.access$200(localData);
+ $stack12.unlockRead(stamp);
+ goto label2;
+ label3:l6 = catch;
+ label4:$stack12 = org.apache.bookkeeper.stats.prometheus.DataSketchesOpStatsLogger$LocalData.access$200(localData);
+ $stack12.unlockRead(stamp);
+ throw l6;
+ label2:return;
+ catch java.lang.Throwable: label0 - label1 : label3;
+catch java.lang.Throwable: label3 - label4 : label3;
+} 
+

@@ -1,0 +1,36 @@
+java.util.concurrent.CompletableFuture org.apache.rocketmq.store.CommitLog:handleHA(org.apache.rocketmq.store.AppendMessageResult result,org.apache.rocketmq.store.PutMessageResult putMessageResult,int needAckNums)
+{
+org.apache.rocketmq.store.ha.HAService haService;
+  org.apache.rocketmq.store.CommitLog$GroupCommitRequest request;
+  org.apache.rocketmq.store.DefaultMessageStore $stack8;
+  long $stack10;
+  int $stack11;
+  long $stack12;
+  org.apache.rocketmq.store.config.MessageStoreConfig $stack15;
+  org.apache.rocketmq.store.ha.WaitNotifyObject $stack18;
+  java.util.concurrent.CompletableFuture $stack19;
+  org.apache.rocketmq.store.PutMessageStatus $stack31;
+  if (needAckNums<0) goto label0;
+ if (needAckNums>1) goto label0;
+ $stack31=org.apache.rocketmq.store.PutMessageStatus.PUT_OK;
+ $stack19 = java.util.concurrent.CompletableFuture.completedFuture((java.lang.Object)$stack31);
+ return  $stack19;
+ label0:$stack8=this.defaultMessageStore;
+ haService = $stack8.getHaService();
+ $stack10 = result.getWroteOffset();
+ $stack11 = result.getWroteBytes();
+ $stack12=(long) $stack11;
+ request=new org.apache.rocketmq.store.CommitLog$GroupCommitRequest;
+ $stack12=($stack10+$stack12);
+ $stack8=this.defaultMessageStore;
+ $stack15 = $stack8.getMessageStoreConfig();
+ $stack11 = $stack15.getSlaveTimeout();
+ $stack10=(long) $stack11;
+ request#org.apache.rocketmq.store.CommitLog$GroupCommitRequest($stack12,$stack10,needAckNums);
+ haService.putRequest(request);
+ $stack18 = haService.getWaitNotifyObject();
+ $stack18.wakeupAll();
+ $stack19 = request.future();
+ return  $stack19;
+ } 
+

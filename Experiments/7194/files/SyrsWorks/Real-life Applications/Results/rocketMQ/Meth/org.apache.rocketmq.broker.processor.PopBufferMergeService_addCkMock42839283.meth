@@ -1,0 +1,32 @@
+void org.apache.rocketmq.broker.processor.PopBufferMergeService:addCkMock(java.lang.String group,java.lang.String topic,int queueId,long startOffset,long invisibleTime,long popTime,int reviveQueueId,long nextBeginOffset,java.lang.String brokerName)
+{
+org.apache.rocketmq.store.pop.PopCheckPoint ck;
+  org.apache.rocketmq.broker.processor.PopBufferMergeService$PopCheckPointWrapper pointWrapper;
+  boolean $stack18;
+  org.apache.rocketmq.broker.BrokerController $stack19;
+  org.apache.rocketmq.common.BrokerConfig $stack20;
+  org.apache.rocketmq.logging.org.slf4j.Logger $stack22;
+  ck=new org.apache.rocketmq.store.pop.PopCheckPoint;
+ ck#org.apache.rocketmq.store.pop.PopCheckPoint();
+ ck.setBitMap(0);
+ ck.setNum((byte)0);
+ ck.setPopTime(popTime);
+ ck.setInvisibleTime(invisibleTime);
+ ck.setStartOffset(startOffset);
+ ck.setCId(group);
+ ck.setTopic(topic);
+ ck.setQueueId(queueId);
+ ck.setBrokerName(brokerName);
+ pointWrapper=new org.apache.rocketmq.broker.processor.PopBufferMergeService$PopCheckPointWrapper;
+ pointWrapper#org.apache.rocketmq.broker.processor.PopBufferMergeService$PopCheckPointWrapper(this,reviveQueueId,9223372036854775807L,ck,nextBeginOffset,1);
+ pointWrapper.setCkStored((boolean)1);
+ this#org.apache.rocketmq.broker.processor.PopBufferMergeService:putOffsetQueue(pointWrapper);
+ $stack19=this.brokerController;
+ $stack20 = $stack19.getBrokerConfig();
+ $stack18 = $stack20.isEnablePopLog();
+ if ($stack18==0) goto label0;
+ $stack22=org.apache.rocketmq.broker.processor.PopBufferMergeService.POP_LOGGER;
+ $stack22.info("[PopBuffer]add ck just offset, mocked, {}",(java.lang.Object)pointWrapper);
+ label0:return;
+ } 
+

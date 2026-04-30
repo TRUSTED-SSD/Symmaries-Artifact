@@ -1,0 +1,23 @@
+boolean org.apache.rocketmq.store.kv.MessageFetcher:pullDone(java.lang.String masterAddr,java.lang.String groupName)
+{
+org.apache.rocketmq.remoting.protocol.header.UnregisterClientRequestHeader requestHeader;
+  org.apache.rocketmq.remoting.protocol.RemotingCommand request;
+  java.lang.String $stack7;
+  org.apache.rocketmq.remoting.RemotingClient $stack9;
+  int $stack11;
+  requestHeader=new org.apache.rocketmq.remoting.protocol.header.UnregisterClientRequestHeader;
+ requestHeader#org.apache.rocketmq.remoting.protocol.header.UnregisterClientRequestHeader();
+ $stack7 = this#org.apache.rocketmq.store.kv.MessageFetcher:getClientId();
+ requestHeader.setClientID($stack7);
+ requestHeader.setProducerGroup("");
+ requestHeader.setConsumerGroup(groupName);
+ request = org.apache.rocketmq.remoting.protocol.RemotingCommand.createRequestCommand(35,(org.apache.rocketmq.remoting.CommandCustomHeader)requestHeader);
+ $stack9=this.client;
+ request = $stack9.invokeSync(masterAddr,request,30000L);
+ if (request==null) goto label0;
+ $stack11 = request.getCode();
+ if ($stack11!=0) goto label0;
+ return  1;
+ label0:return  0;
+ } 
+

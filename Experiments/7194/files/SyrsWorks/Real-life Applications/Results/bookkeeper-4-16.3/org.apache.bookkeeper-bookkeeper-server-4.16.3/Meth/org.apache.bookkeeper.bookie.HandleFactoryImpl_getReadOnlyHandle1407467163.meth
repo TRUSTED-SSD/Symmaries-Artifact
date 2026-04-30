@@ -1,0 +1,17 @@
+org.apache.bookkeeper.bookie.LedgerDescriptor org.apache.bookkeeper.bookie.HandleFactoryImpl:getReadOnlyHandle(long ledgerId)
+{
+org.apache.bookkeeper.bookie.LedgerDescriptor handle;
+  org.apache.bookkeeper.util.collections.ConcurrentLongHashMap $stack4;
+  java.lang.Object $stack5;
+  org.apache.bookkeeper.bookie.LedgerStorage $stack6;
+  $stack4=this.readOnlyLedgers;
+ $stack5 = $stack4.get(ledgerId);
+ handle=(org.apache.bookkeeper.bookie.LedgerDescriptor) $stack5;
+ if (handle!=null) goto label0;
+ $stack6=this.ledgerStorage;
+ handle = org.apache.bookkeeper.bookie.LedgerDescriptor.createReadOnly(ledgerId,$stack6);
+ $stack4=this.readOnlyLedgers;
+ $stack4.putIfAbsent(ledgerId,(java.lang.Object)handle);
+ label0:return  handle;
+ } 
+

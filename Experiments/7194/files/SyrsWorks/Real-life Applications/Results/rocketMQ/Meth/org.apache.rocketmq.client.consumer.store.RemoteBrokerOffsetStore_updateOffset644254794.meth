@@ -1,0 +1,23 @@
+void org.apache.rocketmq.client.consumer.store.RemoteBrokerOffsetStore:updateOffset(org.apache.rocketmq.common.message.MessageQueue mq,long offset,boolean increaseOnly)
+{
+java.util.concurrent.atomic.AtomicLong offsetOld;
+  java.util.concurrent.ConcurrentMap $stack6;
+  java.lang.Object $stack7;
+  if (mq==null) goto label0;
+ $stack6=this.offsetTable;
+ $stack7 = $stack6.get((java.lang.Object)mq);
+ offsetOld=(java.util.concurrent.atomic.AtomicLong) $stack7;
+ if (null!=offsetOld) goto label1;
+ $stack6=this.offsetTable;
+ offsetOld=new java.util.concurrent.atomic.AtomicLong;
+ offsetOld#java.util.concurrent.atomic.AtomicLong(offset);
+ $stack7 = $stack6.putIfAbsent((java.lang.Object)mq,(java.lang.Object)offsetOld);
+ offsetOld=(java.util.concurrent.atomic.AtomicLong) $stack7;
+ label1:if (null==offsetOld) goto label0;
+ if (increaseOnly==0) goto label2;
+ org.apache.rocketmq.common.MixAll.compareAndIncreaseOnly(offsetOld,offset);
+ goto label0;
+ label2:offsetOld.set(offset);
+ label0:return;
+ } 
+

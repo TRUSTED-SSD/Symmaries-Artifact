@@ -1,0 +1,18 @@
+static int org.apache.bookkeeper.bookie.storage.directentrylogger.Buffer:nextAlignment(int pos)
+{
+boolean $stack3;
+  if (pos>2147479552) goto label0;
+ $stack3=1;
+ goto label1;
+ label0:$stack3=0;
+ label1:com.google.common.base.Preconditions.checkArgument($stack3,"position (0x%x) must be lower or equal to max alignment (0x%x)",pos,2147479552);
+ if (pos<0) goto label2;
+ $stack3=1;
+ goto label3;
+ label2:$stack3=0;
+ label3:com.google.common.base.Preconditions.checkArgument($stack3,"position (0x%x) must be positive",pos);
+ pos=(pos+4095);
+ pos=(pos & -4096);
+ return  pos;
+ } 
+

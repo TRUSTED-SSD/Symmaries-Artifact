@@ -1,0 +1,50 @@
+void org.apache.bookkeeper.bookie.GarbageCollectorThread:lambda$doCompactEntryLogs$9(long logId,double threshold,int[] compactedBuckets,int bucketIndex,java.lang.Long @entryLogId,org.apache.bookkeeper.bookie.EntryLogMetadata meta)
+{
+org.slf4j.Logger $stack11;
+  boolean $stack12;
+  org.apache.bookkeeper.bookie.stats.GarbageCollectorStats $stack14;
+  org.apache.bookkeeper.stats.Counter $stack15;
+  long $stack16;
+  int $stack18;
+  java.lang.Object[] $stack20;
+  double $stack27;
+  java.lang.Double $stack28;
+  java.lang.Long entryLogId;
+entryLogId=@entryLogId;
+if (meta!=null) goto label0;
+ $stack11=org.apache.bookkeeper.bookie.GarbageCollectorThread.LOG;
+ $stack12 = $stack11.isDebugEnabled();
+ if ($stack12==0) goto label1;
+ $stack11=org.apache.bookkeeper.bookie.GarbageCollectorThread.LOG;
+ entryLogId = java.lang.Long.valueOf(logId);
+ dummyClass.lowSink("Metadata for entry log {} already deleted");
+$stack11.debug("Metadata for entry log {} already deleted",(java.lang.Object)entryLogId);
+ label1:return;
+ label0:$stack11=org.apache.bookkeeper.bookie.GarbageCollectorThread.LOG;
+ $stack12 = $stack11.isDebugEnabled();
+ if ($stack12==0) goto label2;
+ $stack11=org.apache.bookkeeper.bookie.GarbageCollectorThread.LOG;
+ $stack20=new java.lang.Object[3];
+ logId = meta.getEntryLogId();
+ entryLogId = java.lang.Long.valueOf(logId);
+ $stack20[0]=entryLogId;
+ $stack27 = meta.getUsage();
+ $stack28 = java.lang.Double.valueOf($stack27);
+ $stack20[1]=$stack28;
+ $stack28 = java.lang.Double.valueOf(threshold);
+ $stack20[2]=$stack28;
+ dummyClass.lowSink("Compacting entry log {} with usage {} below threshold {}");
+$stack11.debug("Compacting entry log {} with usage {} below threshold {}",$stack20);
+ label2:logId = meta.getRemainingSize();
+ this.compactEntryLog(meta);
+ $stack14=this.gcStats;
+ $stack15 = $stack14.getReclaimedSpaceViaCompaction();
+ $stack16 = meta.getTotalSize();
+ logId=($stack16-logId);
+ $stack15.addCount(logId);
+ $stack18=compactedBuckets[bucketIndex];
+ $stack18=($stack18+1);
+ compactedBuckets[bucketIndex]=$stack18;
+ return;
+ } 
+

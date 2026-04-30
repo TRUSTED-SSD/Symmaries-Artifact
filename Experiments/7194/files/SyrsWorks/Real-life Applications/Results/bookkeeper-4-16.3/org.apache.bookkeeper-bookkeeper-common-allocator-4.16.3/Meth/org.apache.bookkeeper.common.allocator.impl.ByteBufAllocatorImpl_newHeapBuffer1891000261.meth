@@ -1,0 +1,23 @@
+io.netty.buffer.ByteBuf org.apache.bookkeeper.common.allocator.impl.ByteBufAllocatorImpl:newHeapBuffer(int initialCapacity,int maxCapacity)
+{
+java.lang.OutOfMemoryError alloc;
+  org.apache.bookkeeper.common.allocator.PoolingPolicy $stack4;
+  org.apache.bookkeeper.common.allocator.PoolingPolicy $stack5;
+  io.netty.buffer.ByteBuf $stack6;
+  io.netty.buffer.ByteBufAllocator $stack7;
+  java.util.function.Consumer $stack12;
+  label0:$stack5=this.poolingPolicy;
+ $stack4=org.apache.bookkeeper.common.allocator.PoolingPolicy.PooledDirect;
+ if ($stack5!=$stack4) goto label1;
+ $stack7=this.pooledAllocator;
+ goto label2;
+ label1:$stack7=this.unpooledAllocator;
+ label2:$stack6 = $stack7.heapBuffer(initialCapacity,maxCapacity);
+ label3:return  $stack6;
+ label4:alloc = catch;
+ $stack12=this.outOfMemoryListener;
+ $stack12.accept((java.lang.Object)alloc);
+ throw alloc;
+ catch java.lang.OutOfMemoryError: label0 - label3 : label4;
+} 
+

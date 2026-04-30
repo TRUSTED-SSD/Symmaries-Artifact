@@ -1,0 +1,29 @@
+void java.util.LinkedHashMap:forEach(java.util.function.BiConsumer r1)
+{
+int i0;
+  int $i1;
+  java.util.ConcurrentModificationException $r2;
+  java.lang.Object $r3;
+  java.lang.Object $r4;
+  java.lang.NullPointerException $r5;
+  java.util.LinkedHashMap$Entry r6;
+  if (r1!=null) goto label0;
+ $r5=new java.lang.NullPointerException;
+ $r5#java.lang.NullPointerException:init();
+ throw $r5;
+ label0:i0=this.modCount;
+ r6=this.head;
+ label1:if (r6==null) goto label2;
+ $r4=r6.key;
+ $r3=r6.value;
+ r1.accept($r4,$r3);
+ r6=r6.after;
+ goto label1;
+ label2:$i1=this.modCount;
+ if ($i1==i0) goto label3;
+ $r2=new java.util.ConcurrentModificationException;
+ $r2#java.util.ConcurrentModificationException:init();
+ throw $r2;
+ label3:return;
+ }  
+

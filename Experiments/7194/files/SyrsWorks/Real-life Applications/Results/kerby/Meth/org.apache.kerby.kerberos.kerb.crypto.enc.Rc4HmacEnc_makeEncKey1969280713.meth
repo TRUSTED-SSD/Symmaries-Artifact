@@ -1,0 +1,24 @@
+byte[] org.apache.kerby.kerberos.kerb.crypto.enc.Rc4HmacEnc:makeEncKey(byte[] @usageKey,byte[] checksum)
+{
+byte[] tmpKey;
+  int i;
+  boolean $stack5;
+  org.apache.kerby.kerberos.kerb.crypto.cksum.HashProvider $stack6;
+  int $stack12;
+  byte[] usageKey;
+usageKey=@usageKey;
+tmpKey=usageKey;
+ $stack5=this.exportable;
+ if ($stack5==0) goto label0;
+ tmpKey = org.apache.kerby.kerberos.kerb.crypto.util.BytesUtil.duplicate(usageKey);
+ i=0;
+ label1:if (i>=9) goto label0;
+ $stack12=(i+7);
+ tmpKey[$stack12]=-85;
+ i=(i+1);
+ goto label1;
+ label0:$stack6 = this.hashProvider();
+ usageKey = org.apache.kerby.kerberos.kerb.crypto.util.Hmac.hmac($stack6,tmpKey,checksum);
+ return  usageKey;
+ } 
+

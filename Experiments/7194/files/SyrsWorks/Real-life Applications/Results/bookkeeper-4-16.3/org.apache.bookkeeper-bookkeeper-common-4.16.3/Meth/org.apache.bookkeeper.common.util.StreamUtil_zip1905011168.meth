@@ -1,0 +1,49 @@
+static java.util.stream.Stream org.apache.bookkeeper.common.util.StreamUtil:zip(java.util.stream.Stream @a,java.util.stream.Stream b,java.util.function.BiFunction zipper)
+{
+java.util.Spliterator aSpliterator;
+  java.util.Spliterator bSpliterator;
+  int characteristics;
+  java.util.Iterator aIterator;
+  java.lang.Object $stack12;
+  java.util.stream.Stream $stack14;
+  int $stack20;
+  org.apache.bookkeeper.common.util.StreamUtil$1 $stack25;
+  boolean $stack27;
+  long $stack33;
+  long $stack34;
+  java.util.Iterator $stack39;
+  java.util.stream.Stream a;
+a=@a;
+java.util.Objects.requireNonNull((java.lang.Object)zipper);
+ $stack12 = java.util.Objects.requireNonNull((java.lang.Object)a);
+ $stack14=(java.util.stream.Stream) $stack12;
+ aSpliterator = $stack14.spliterator();
+ $stack12 = java.util.Objects.requireNonNull((java.lang.Object)b);
+ $stack14=(java.util.stream.Stream) $stack12;
+ bSpliterator = $stack14.spliterator();
+ characteristics = aSpliterator.characteristics();
+ $stack20 = bSpliterator.characteristics();
+ characteristics=(characteristics & $stack20);
+ characteristics=(characteristics & -6);
+ $stack20=(characteristics & 64);
+ if ($stack20==0) goto label0;
+ $stack33 = aSpliterator.getExactSizeIfKnown();
+ $stack34 = bSpliterator.getExactSizeIfKnown();
+ $stack33 = java.lang.Math.min($stack33,$stack34);
+ goto label1;
+ label0:$stack33=-1L;
+ label1:aIterator = java.util.Spliterators.iterator(aSpliterator);
+ $stack25=new org.apache.bookkeeper.common.util.StreamUtil$1;
+ $stack39 = java.util.Spliterators.iterator(bSpliterator);
+ $stack25#org.apache.bookkeeper.common.util.StreamUtil$1(aIterator,$stack39,zipper);
+ aSpliterator = java.util.Spliterators.spliterator((java.util.Iterator)$stack25,$stack33,characteristics);
+ $stack27 = a.isParallel();
+ if ($stack27!=0) goto label2;
+ $stack27 = b.isParallel();
+ if ($stack27==0) goto label3;
+ label2:a = java.util.stream.StreamSupport.stream(aSpliterator,(boolean)1);
+ goto label4;
+ label3:a = java.util.stream.StreamSupport.stream(aSpliterator,(boolean)0);
+ label4:return  a;
+ } 
+

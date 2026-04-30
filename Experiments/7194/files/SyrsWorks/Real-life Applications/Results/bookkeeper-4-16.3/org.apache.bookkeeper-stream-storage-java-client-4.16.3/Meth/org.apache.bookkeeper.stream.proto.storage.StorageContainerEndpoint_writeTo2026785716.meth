@@ -1,0 +1,41 @@
+void org.apache.bookkeeper.stream.proto.storage.StorageContainerEndpoint:writeTo(com.google.protobuf.CodedOutputStream output)
+{
+int i;
+  long $stack3;
+  byte $stack4;
+  org.apache.bookkeeper.stream.proto.common.Endpoint $stack7;
+  java.util.List $stack8;
+  int $stack9;
+  com.google.protobuf.UnknownFieldSet $stack10;
+  java.lang.Object $stack13;
+  com.google.protobuf.MessageLite $stack14;
+  $stack3=this.storageContainerId_;
+ $stack4=($stack3 cmp 0L);
+ if ($stack4==0) goto label0;
+ $stack3=this.storageContainerId_;
+ output.writeInt64(1,$stack3);
+ label0:$stack3=this.revision_;
+ $stack4=($stack3 cmp 0L);
+ if ($stack4==0) goto label1;
+ $stack3=this.revision_;
+ output.writeInt64(2,$stack3);
+ label1:$stack7=this.rwEndpoint_;
+ if ($stack7==null) goto label2;
+ $stack7 = this.getRwEndpoint();
+ $stack14=(com.google.protobuf.MessageLite) $stack7;
+ output.writeMessage(3,$stack14);
+ label2:i=0;
+ label3:$stack8=this.roEndpoint_;
+ $stack9 = $stack8.size();
+ if (i>=$stack9) goto label4;
+ $stack8=this.roEndpoint_;
+ $stack13 = $stack8.get(i);
+ $stack14=(com.google.protobuf.MessageLite) $stack13;
+ output.writeMessage(4,$stack14);
+ i=(i+1);
+ goto label3;
+ label4:$stack10 = this.getUnknownFields();
+ $stack10.writeTo(output);
+ return;
+ } 
+

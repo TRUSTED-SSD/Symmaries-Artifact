@@ -1,0 +1,122 @@
+    private java.lang.Exception createTimeoutException(java.lang.Thread)
+    {
+        org.junit.internal.runners.statements.FailOnTimeout this;
+        java.lang.Thread thread, stuckThread;
+        java.lang.StackTraceElement[] stackTrace;
+        org.junit.runners.model.TestTimedOutException currThreadException;
+        java.lang.Exception stuckThreadException;
+        boolean $stack7;
+        java.util.concurrent.TimeUnit $stack9;
+        long $stack10;
+        java.lang.StringBuilder $stack12;
+        java.lang.String $stack14;
+        org.junit.runners.model.MultipleFailureException $stack18;
+        java.lang.Throwable[] $stack19;
+        java.util.List $stack20;
+
+        this := @this: org.junit.internal.runners.statements.FailOnTimeout;
+
+        thread := @parameter0: java.lang.Thread;
+
+        stackTrace = virtualinvoke thread.<java.lang.Thread: java.lang.StackTraceElement[] getStackTrace()>();
+/*156*/
+/*156*/
+
+        $stack7 = this.<org.junit.internal.runners.statements.FailOnTimeout: boolean lookForStuckThread>;
+/*157*/
+
+        if $stack7 == 0 goto label1;
+/*157*/
+
+        stuckThread = specialinvoke this.<org.junit.internal.runners.statements.FailOnTimeout: java.lang.Thread getStuckThread(java.lang.Thread)>(thread);
+/*163*/
+
+        goto label2;
+/*163*/
+
+     label1:
+        stuckThread = null;
+/*163*/
+
+     label2:
+        currThreadException = new org.junit.runners.model.TestTimedOutException;
+/*158*/
+
+        $stack10 = this.<org.junit.internal.runners.statements.FailOnTimeout: long timeout>;
+/*158*/
+
+        $stack9 = this.<org.junit.internal.runners.statements.FailOnTimeout: java.util.concurrent.TimeUnit timeUnit>;
+/*158*/
+
+        specialinvoke currThreadException.<org.junit.runners.model.TestTimedOutException: void <init>(long,java.util.concurrent.TimeUnit)>($stack10, $stack9);
+/*158*/
+
+        if stackTrace == null goto label3;
+/*159*/
+
+        virtualinvoke currThreadException.<java.lang.Exception: void setStackTrace(java.lang.StackTraceElement[])>(stackTrace);
+/*160*/
+
+        virtualinvoke thread.<java.lang.Thread: void interrupt()>();
+/*161*/
+
+     label3:
+        if stuckThread == null goto label4;
+/*163*/
+
+        stuckThreadException = new java.lang.Exception;
+/*164*/
+
+        $stack12 = new java.lang.StringBuilder;
+/*164*/
+
+        specialinvoke $stack12.<java.lang.StringBuilder: void <init>()>();
+/*164*/
+
+        $stack12 = virtualinvoke $stack12.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>("Appears to be stuck in thread ");
+/*164*/
+
+        $stack14 = virtualinvoke stuckThread.<java.lang.Thread: java.lang.String getName()>();
+/*164*/
+
+        $stack12 = virtualinvoke $stack12.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>($stack14);
+/*164*/
+
+        $stack14 = virtualinvoke $stack12.<java.lang.StringBuilder: java.lang.String toString()>();
+/*164*/
+
+        specialinvoke stuckThreadException.<java.lang.Exception: void <init>(java.lang.String)>($stack14);
+/*164*/
+
+        stackTrace = specialinvoke this.<org.junit.internal.runners.statements.FailOnTimeout: java.lang.StackTraceElement[] getStackTrace(java.lang.Thread)>(stuckThread);
+/*167*/
+
+        virtualinvoke stuckThreadException.<java.lang.Exception: void setStackTrace(java.lang.StackTraceElement[])>(stackTrace);
+/*167*/
+
+        $stack18 = new org.junit.runners.model.MultipleFailureException;
+/*168*/
+
+        $stack19 = newarray (java.lang.Throwable)[2];
+/*168*/
+
+        $stack19[0] = currThreadException;
+/*168*/
+
+        $stack19[1] = stuckThreadException;
+/*168*/
+
+        $stack20 = staticinvoke <java.util.Arrays: java.util.List asList(java.lang.Object[])>($stack19);
+/*168*/
+
+        specialinvoke $stack18.<org.junit.runners.model.MultipleFailureException: void <init>(java.util.List)>($stack20);
+/*168*/
+
+        return $stack18;
+/*168*/
+
+     label4:
+        return currThreadException;
+/*171*/
+    }
+

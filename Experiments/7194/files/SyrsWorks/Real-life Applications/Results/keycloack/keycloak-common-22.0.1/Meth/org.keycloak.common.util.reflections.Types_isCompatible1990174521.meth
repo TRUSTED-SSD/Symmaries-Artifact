@@ -1,0 +1,36 @@
+static boolean org.keycloak.common.util.reflections.Types:isCompatible(java.lang.reflect.Method method,java.lang.reflect.Method intfMethod)
+{
+int i;
+  java.lang.Class rootParam;
+  java.lang.Class intfParam;
+  java.lang.String $stack5;
+  java.lang.String $stack6;
+  boolean $stack7;
+  int $stack9;
+  java.lang.Class[] $stack11;
+  if (method!=intfMethod) goto label0;
+ return  1;
+ label0:$stack5 = method.getName();
+ $stack6 = intfMethod.getName();
+ $stack7 = $stack5.equals((java.lang.Object)$stack6);
+ if ($stack7!=0) goto label1;
+ return  0;
+ label1:i = method.getParameterCount();
+ $stack9 = intfMethod.getParameterCount();
+ if (i==$stack9) goto label2;
+ return  0;
+ label2:i=0;
+ label3:$stack9 = method.getParameterCount();
+ if (i>=$stack9) goto label4;
+ $stack11 = method.getParameterTypes();
+ rootParam=$stack11[i];
+ $stack11 = intfMethod.getParameterTypes();
+ intfParam=$stack11[i];
+ $stack7 = intfParam.isAssignableFrom(rootParam);
+ if ($stack7!=0) goto label5;
+ return  0;
+ label5:i=(i+1);
+ goto label3;
+ label4:return  1;
+ } 
+

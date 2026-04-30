@@ -1,0 +1,56 @@
+void org.apache.rocketmq.broker.processor.AdminBrokerProcessor:initConsumerOffset(java.lang.String clientHost,java.lang.String groupName,int mode,org.apache.rocketmq.common.TopicConfig topicConfig)
+{
+java.lang.String topic;
+  int queueId;
+  long offset;
+  int $stack10;
+  org.apache.rocketmq.broker.BrokerController $stack11;
+  org.apache.rocketmq.broker.offset.ConsumerOffsetManager $stack12;
+  byte $stack14;
+  org.apache.rocketmq.store.MessageStore $stack16;
+  org.apache.rocketmq.store.queue.ConsumeQueueInterface $stack17;
+  java.lang.Object[] $stack20;
+  org.apache.rocketmq.logging.org.slf4j.Logger $stack21;
+  java.lang.Integer $stack24;
+  java.lang.Long $stack26;
+  topic = topicConfig.getTopicName();
+ queueId=0;
+ label0:$stack10 = topicConfig.getReadQueueNums();
+ if (queueId>=$stack10) goto label1;
+ $stack11=this.brokerController;
+ $stack12 = $stack11.getConsumerOffsetManager();
+ offset = $stack12.queryOffset(groupName,topic,queueId);
+ $stack14=(offset cmp -1L);
+ if ($stack14<=0) goto label2;
+ goto label3;
+ label2:offset=0L;
+ $stack11=this.brokerController;
+ $stack16 = $stack11.getMessageStore();
+ $stack17 = $stack16.getConsumeQueue(topic,queueId);
+ if ($stack17==null) goto label4;
+ if (1!=mode) goto label5;
+ $stack11=this.brokerController;
+ $stack16 = $stack11.getMessageStore();
+ offset = $stack16.getMaxOffsetInQueue(topic,queueId);
+ goto label4;
+ label5:if (0!=mode) goto label4;
+ $stack11=this.brokerController;
+ $stack16 = $stack11.getMessageStore();
+ offset = $stack16.getMinOffsetInQueue(topic,queueId);
+ label4:$stack11=this.brokerController;
+ $stack12 = $stack11.getConsumerOffsetManager();
+ $stack12.commitOffset(clientHost,groupName,topic,queueId,offset);
+ $stack21=org.apache.rocketmq.broker.processor.AdminBrokerProcessor.LOGGER;
+ $stack20=new java.lang.Object[4];
+ $stack20[0]=groupName;
+ $stack20[1]=topic;
+ $stack24 = java.lang.Integer.valueOf(queueId);
+ $stack20[2]=$stack24;
+ $stack26 = java.lang.Long.valueOf(offset);
+ $stack20[3]=$stack26;
+ $stack21.info("AdminBrokerProcessor#initConsumerOffset: consumerGroup={}, topic={}, queueId={}, offset={}",$stack20);
+ label3:queueId=(queueId+1);
+ goto label0;
+ label1:return;
+ } 
+

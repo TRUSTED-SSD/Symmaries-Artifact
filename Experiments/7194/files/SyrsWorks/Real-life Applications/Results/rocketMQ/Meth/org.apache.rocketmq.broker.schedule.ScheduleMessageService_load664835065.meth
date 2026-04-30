@@ -1,0 +1,19 @@
+boolean org.apache.rocketmq.broker.schedule.ScheduleMessageService:load()
+{
+boolean result;
+  result = this#org.apache.rocketmq.common.ConfigManager:load();
+ if (result==0) goto label0;
+ result = this.parseDelayLevel();
+ if (result==0) goto label0;
+ result=1;
+ goto label1;
+ label0:result=0;
+ label1:if (result==0) goto label2;
+ result = this.correctDelayOffset();
+ if (result==0) goto label2;
+ result=1;
+ goto label3;
+ label2:result=0;
+ label3:return  result;
+ } 
+

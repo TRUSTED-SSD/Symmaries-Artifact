@@ -1,0 +1,51 @@
+digraph G {
+  node [shape=box, ];
+  "pc0_js1" [label="〈i2 = 0, js1〉", ];
+  "pc1_js1" [label="〈i1 = #r0, js1〉", ];
+  "pc2_js1" [label="〈label0: if (i2 >= i1) goto label1, js1〉", ];
+  "pc3_js1" [label="〈r0[i2] = i0, js1〉", ];
+  "pc4_js1" [label="〈i2 = i2 + 1, js1〉", ];
+  "pc5_js1" [label="〈goto label0, js1〉", ];
+  "pc6_js1" [label="〈label1: return, js1〉", ];
+  "pc6_js2" [label="〈label1: return, js2〉", ];
+  "pc7_js1" [label="〈sink, js1〉\n\
+obj_level(r0) ⊑ ret(obj_level(r0))'",
+             ];
+  
+  
+  "pc0_js1" -> "pc1_js1" [label="tt,\n\
+{level(i2) := pc}", ];
+  "pc1_js1" -> "pc2_js1" [label="tt,\n\
+{level(i1) := pc ⊔ level(r0) ⊔ obj_level(r0)}",
+                          ];
+  "pc2_js1" -> "pc3_js1" [label="υ ∧ ¬ω ∨ ¬τ ∧ ¬υ ∧ level(i1) ⊔ level(i2) ⊐ pc ∨ ¬τ ∧ ¬υ ∧ level(i1) ⊔ level(i2) ⊑ pc,\n\
+{pc := if ¬(¬τ ∧ ¬υ ∧ level(i1) ⊔ level(i2) ⊐ pc) ∨ υ ∧ ¬ω then pc else pc ⊔ level(i1) ⊔ level(i2),\n\
+ obj_level(r0)' := if ¬(¬τ ∧ ¬υ ∧ level(i1) ⊔ level(i2) ⊐ pc) ∨ υ ∧ ¬ω then obj_level(r0)' else obj_level(r0),\n\
+ hr := if ¬(¬τ ∧ ¬υ ∧ level(i1) ⊔ level(i2) ⊐ pc) ∨ υ ∧ ¬ω then hr else P2}",
+                          ];
+  "pc2_js1" -> "pc6_js1" [label="υ ∧ ω ∨ τ ∧ ¬υ ∧ level(i1) ⊔ level(i2) ⊐ pc ∨ τ ∧ ¬υ ∧ level(i1) ⊔ level(i2) ⊑ pc,\n\
+{pc := if ¬(τ ∧ ¬υ ∧ level(i1) ⊔ level(i2) ⊐ pc) ∨ υ ∧ ω then pc else pc ⊔ level(i1) ⊔ level(i2),\n\
+ obj_level(r0)' := if ¬(τ ∧ ¬υ ∧ level(i1) ⊔ level(i2) ⊐ pc) ∨ υ ∧ ω then obj_level(r0)' else obj_level(r0),\n\
+ hr := if ¬(τ ∧ ¬υ ∧ level(i1) ⊔ level(i2) ⊐ pc) ∨ υ ∧ ω then hr else P2}",
+                          ];
+  "pc3_js1" -> "pc4_js1" [label="tt,\n\
+{obj_level(r0) := pc ⊔ obj_level(r0) ⊔ (if υ then ⊥ else level(i0) ⊔ level(i2))}",
+                          ];
+  "pc4_js1" -> "pc5_js1" [label="tt,\n\
+{level(i2) := pc ⊔ level(i2)}", ];
+  "pc5_js1" -> "pc2_js1" [label="tt,\n\
+{}", ];
+  "pc6_js1" -> "pc2_js1" [label="¬υ ∧ hr = P2,\n\
+{υ := tt,\n\
+ obj_level(r0) := obj_level(r0)',\n\
+ obj_level(r0)' := obj_level(r0)}",
+                          ];
+  "pc6_js1" -> "pc6_js2" [label="hr ≠ P2 ∨ υ ∧ hr = P2,\n\
+{υ := ¬(υ ∧ hr = P2) ∧ (if hr = P2 then υ ∧ ¬(υ ∧ hr = P2) else υ),\n\
+ pc := if ¬(hr ≠ P2 ∨ ¬(υ ∧ hr = P2)) ∨ υ ∧ hr = P2 then ⊥ else pc,\n\
+ hr := if ¬(hr ≠ P2 ∨ ¬(υ ∧ hr = P2)) ∨ υ ∧ hr = P2 then P. else hr}",
+                          ];
+  "pc6_js2" -> "pc7_js1" [label="tt,\n\
+{ϕ := S6}", ];
+  
+  }

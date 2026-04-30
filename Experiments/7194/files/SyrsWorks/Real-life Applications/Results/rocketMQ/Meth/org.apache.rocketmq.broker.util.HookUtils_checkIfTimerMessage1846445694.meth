@@ -1,0 +1,37 @@
+static boolean org.apache.rocketmq.broker.util.HookUtils:checkIfTimerMessage(org.apache.rocketmq.common.message.MessageExtBrokerInner msg)
+{
+int $stack1;
+  java.lang.String $stack2;
+  java.lang.String $stack3;
+  boolean $stack4;
+  $stack1 = msg.getDelayTimeLevel();
+ if ($stack1<=0) goto label0;
+ $stack2 = msg.getProperty("TIMER_DELIVER_MS");
+ if (null==$stack2) goto label1;
+ org.apache.rocketmq.common.message.MessageAccessor.clearProperty((org.apache.rocketmq.common.message.Message)msg,"TIMER_DELIVER_MS");
+ label1:$stack2 = msg.getProperty("TIMER_DELAY_SEC");
+ if (null==$stack2) goto label2;
+ org.apache.rocketmq.common.message.MessageAccessor.clearProperty((org.apache.rocketmq.common.message.Message)msg,"TIMER_DELAY_SEC");
+ label2:$stack2 = msg.getProperty("TIMER_DELAY_MS");
+ if (null==$stack2) goto label3;
+ org.apache.rocketmq.common.message.MessageAccessor.clearProperty((org.apache.rocketmq.common.message.Message)msg,"TIMER_DELAY_MS");
+ label3:return  0;
+ label0:$stack2="rmq_sys_wheel_timer";
+ $stack3 = msg.getTopic();
+ $stack4 = $stack2.equals((java.lang.Object)$stack3);
+ if ($stack4!=0) goto label4;
+ $stack2 = msg.getProperty("TIMER_OUT_MS");
+ if (null==$stack2) goto label5;
+ label4:return  0;
+ label5:$stack2 = msg.getProperty("TIMER_DELIVER_MS");
+ if (null!=$stack2) goto label6;
+ $stack2 = msg.getProperty("TIMER_DELAY_MS");
+ if (null!=$stack2) goto label6;
+ $stack2 = msg.getProperty("TIMER_DELAY_SEC");
+ if (null==$stack2) goto label7;
+ label6:$stack4=1;
+ goto label8;
+ label7:$stack4=0;
+ label8:return  $stack4;
+ } 
+

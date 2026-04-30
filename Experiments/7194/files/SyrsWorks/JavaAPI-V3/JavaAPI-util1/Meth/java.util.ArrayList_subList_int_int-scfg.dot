@@ -1,0 +1,39 @@
+digraph G {
+  node [shape=box, ];
+  "pc0_js1" [label="〈$i2 = this.size, js1〉", ];
+  "pc1_js1" [label="〈java.util.ArrayList.subListRangeCheck (i0, i1, $i2), js1〉\n\
+pc ⊑ ⊥ ∧ level($i2) ⊔ level(i0) ⊔ level(i1) ⊑ ⊥",
+             ];
+  "pc2_js1" [label="〈$r1 = new java.util.ArrayList$SubList, js1〉", ];
+  "pc3_js1" [label="〈$r1#java.util.ArrayList$SubList.init (this, (java.util.AbstractList) this, 0, i0, i1), js1〉\n\
+tt",
+             ];
+  "pc4_js1" [label="〈return $r1, js1〉", ];
+  "pc5_js1" [label="〈sink, js1〉\n\
+obj_level(this) ⊑ ret(obj_level(this))' ∧ (ret(this.><this)' ∨ ¬this.><this) ∧ (ϕ ≠ S4 ∨ obj_level($r1) ⊑ ret(obj_level())' ∧ pc ⊔ level($r1) ⊑ ret(level())' ∧ (ret(.><this)' ∨ ¬this.><$r1) ∧ (ret(this.><)' ∨ ¬$r1.><this))",
+             ];
+  
+  
+  "pc0_js1" -> "pc1_js1" [label="tt,\n\
+{level($i2) := pc ⊔ level(this) ⊔ obj_level(this)}",
+                          ];
+  "pc1_js1" -> "pc2_js1" [label="tt,\n\
+{}", ];
+  "pc2_js1" -> "pc3_js1" [label="tt,\n\
+{$r1.><$r1 := ff,\n\
+ $r1.><this := ff,\n\
+ this.><$r1 := ff,\n\
+ level($r1) := pc,\n\
+ obj_level($r1) := pc}",
+                          ];
+  "pc3_js1" -> "pc4_js1" [label="tt,\n\
+{$r1.><$r1 := ff,\n\
+ $r1.><this := tt,\n\
+ this.><$r1 := ff,\n\
+ obj_level($r1) := pc ⊔ level(i0) ⊔ level(i1) ⊔ level(this) ⊔ obj_level(this),\n\
+ obj_level(this) := pc ⊔ level(this) ⊔ obj_level(this) ⊔ (if pc = ⊤ then ⊤ else if pc = ⊥ ∧ obj_level(this) = ⊥ ∧ (if obj_level(this) = ⊤ then ¬this.><this else level(this) = ⊥ ∧ obj_level(this) = ⊥) then pc else if pc = ⊥ ∧ (if obj_level(this) = ⊥ then if obj_level(this) = ⊤ then this.><this else level(this) = ⊤ ∧ obj_level(this) = ⊥ else obj_level(this) = ⊤) then ⊤ else ⊥)}",
+                          ];
+  "pc4_js1" -> "pc5_js1" [label="tt,\n\
+{ϕ := S4}", ];
+  
+  }

@@ -1,0 +1,22 @@
+org.apache.rocketmq.common.message.MessageQueue org.apache.rocketmq.broker.transaction.queue.TransactionalMessageServiceImpl:getOpQueue(org.apache.rocketmq.common.message.MessageQueue messageQueue)
+{
+org.apache.rocketmq.common.message.MessageQueue opQueue;
+  java.util.concurrent.ConcurrentHashMap $stack3;
+  java.lang.Object $stack4;
+  java.lang.String $stack6;
+  java.lang.String $stack7;
+  int $stack8;
+  $stack3=this.opQueueMap;
+ $stack4 = $stack3.get((java.lang.Object)messageQueue);
+ opQueue=(org.apache.rocketmq.common.message.MessageQueue) $stack4;
+ if (opQueue!=null) goto label0;
+ opQueue=new org.apache.rocketmq.common.message.MessageQueue;
+ $stack6 = org.apache.rocketmq.broker.transaction.queue.TransactionalMessageUtil.buildOpTopic();
+ $stack7 = messageQueue.getBrokerName();
+ $stack8 = messageQueue.getQueueId();
+ opQueue#org.apache.rocketmq.common.message.MessageQueue($stack6,$stack7,$stack8);
+ $stack3=this.opQueueMap;
+ $stack3.put((java.lang.Object)messageQueue,(java.lang.Object)opQueue);
+ label0:return  opQueue;
+ } 
+

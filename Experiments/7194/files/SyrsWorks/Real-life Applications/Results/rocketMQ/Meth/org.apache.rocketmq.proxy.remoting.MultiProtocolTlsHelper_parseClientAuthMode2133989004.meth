@@ -1,0 +1,31 @@
+static io.netty.handler.ssl.ClientAuth org.apache.rocketmq.proxy.remoting.MultiProtocolTlsHelper:parseClientAuthMode(java.lang.String authMode)
+{
+io.netty.handler.ssl.ClientAuth[] l1;
+  int l2;
+  int l3;
+  io.netty.handler.ssl.ClientAuth clientAuth;
+  java.lang.String $stack6;
+  boolean $stack7;
+  java.lang.String $stack11;
+  if (null==authMode) goto label0;
+ $stack6 = authMode.trim();
+ $stack7 = $stack6.isEmpty();
+ if ($stack7==0) goto label1;
+ label0:clientAuth=io.netty.handler.ssl.ClientAuth.NONE;
+ return  clientAuth;
+ label1:l1 = io.netty.handler.ssl.ClientAuth.values();
+ l2=#l1;
+ l3=0;
+ label2:if (l3>=l2) goto label3;
+ clientAuth=l1[l3];
+ $stack6 = clientAuth.name();
+ $stack11 = authMode.toUpperCase();
+ $stack7 = $stack6.equals((java.lang.Object)$stack11);
+ if ($stack7==0) goto label4;
+ return  clientAuth;
+ label4:l3=(l3+1);
+ goto label2;
+ label3:clientAuth=io.netty.handler.ssl.ClientAuth.NONE;
+ return  clientAuth;
+ } 
+

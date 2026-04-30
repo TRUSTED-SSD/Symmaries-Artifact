@@ -1,0 +1,47 @@
+org.apache.rocketmq.store.index.IndexFile(java.lang.String fileName,int hashSlotNum,int indexNum,long endPhyOffset,long endTimestamp)
+{
+java.nio.ByteBuffer byteBuffer;
+  int $stack9;
+  int $stack11;
+  org.apache.rocketmq.store.logfile.DefaultMappedFile $stack15;
+  org.apache.rocketmq.store.logfile.MappedFile $stack17;
+  java.nio.MappedByteBuffer $stack18;
+  org.apache.rocketmq.store.index.IndexHeader $stack21;
+  byte $stack22;
+  this#java.lang.Object();
+ $stack9=org.apache.rocketmq.store.index.IndexFile.hashSlotSize;
+ $stack9=(hashSlotNum * $stack9);
+ $stack9=(40+$stack9);
+ $stack11=org.apache.rocketmq.store.index.IndexFile.indexSize;
+ $stack11=(indexNum * $stack11);
+ $stack9=($stack9+$stack11);
+ this.fileTotalSize=$stack9;
+ $stack15=new org.apache.rocketmq.store.logfile.DefaultMappedFile;
+ $stack9=this.fileTotalSize;
+ $stack15#org.apache.rocketmq.store.logfile.DefaultMappedFile(fileName,$stack9);
+ this.mappedFile=$stack15;
+ $stack17=this.mappedFile;
+ $stack18 = $stack17.getMappedByteBuffer();
+ this.mappedByteBuffer=$stack18;
+ this.hashSlotNum=hashSlotNum;
+ this.indexNum=indexNum;
+ $stack18=this.mappedByteBuffer;
+ byteBuffer = $stack18.slice();
+ $stack21=new org.apache.rocketmq.store.index.IndexHeader;
+ $stack21#org.apache.rocketmq.store.index.IndexHeader(byteBuffer);
+ this.indexHeader=$stack21;
+ $stack22=(endPhyOffset cmp 0L);
+ if ($stack22<=0) goto label0;
+ $stack21=this.indexHeader;
+ $stack21.setBeginPhyOffset(endPhyOffset);
+ $stack21=this.indexHeader;
+ $stack21.setEndPhyOffset(endPhyOffset);
+ label0:$stack22=(endTimestamp cmp 0L);
+ if ($stack22<=0) goto label1;
+ $stack21=this.indexHeader;
+ $stack21.setBeginTimestamp(endTimestamp);
+ $stack21=this.indexHeader;
+ $stack21.setEndTimestamp(endTimestamp);
+ label1:return;
+ } 
+

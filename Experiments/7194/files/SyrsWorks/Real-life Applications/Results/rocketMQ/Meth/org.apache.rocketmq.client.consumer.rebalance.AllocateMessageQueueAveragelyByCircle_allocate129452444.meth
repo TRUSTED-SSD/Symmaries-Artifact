@@ -1,0 +1,27 @@
+java.util.List org.apache.rocketmq.client.consumer.rebalance.AllocateMessageQueueAveragelyByCircle:allocate(java.lang.String consumerGroup,java.lang.String currentCID,java.util.List mqAll,java.util.List cidAll)
+{
+java.util.ArrayList result;
+  int index;
+  int i;
+  boolean $stack9;
+  int $stack11;
+  java.lang.Object $stack16;
+  result=new java.util.ArrayList;
+ result#java.util.ArrayList();
+ $stack9 = this.check(consumerGroup,currentCID,mqAll,cidAll);
+ if ($stack9!=0) goto label0;
+ return  result;
+ label0:index = cidAll.indexOf((java.lang.Object)currentCID);
+ i=index;
+ label1:$stack11 = mqAll.size();
+ if (i>=$stack11) goto label2;
+ $stack11 = cidAll.size();
+ $stack11=(i%$stack11);
+ if ($stack11!=index) goto label3;
+ $stack16 = mqAll.get(i);
+ result.add($stack16);
+ label3:i=(i+1);
+ goto label1;
+ label2:return  result;
+ } 
+

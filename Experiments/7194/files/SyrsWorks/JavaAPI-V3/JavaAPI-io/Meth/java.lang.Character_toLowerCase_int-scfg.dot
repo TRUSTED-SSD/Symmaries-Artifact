@@ -1,0 +1,23 @@
+digraph G {
+  node [shape=box, ];
+  "pc0_js1" [label="〈$r0 = java.lang.CharacterData.of (i0), js1〉\n\
+pc ⊑ ⊥ ∧ level(i0) ⊑ ⊥",
+             ];
+  "pc1_js1" [label="〈$i1 = $r0.toLowerCase (i0), js1〉\n\
+tt", ];
+  "pc2_js1" [label="〈return $i1, js1〉", ];
+  "pc3_js1" [label="〈sink, js1〉\n\
+ϕ ≠ S2 ∨ pc ⊔ level($i1) ⊑ ret(level())'",
+             ];
+  
+  
+  "pc0_js1" -> "pc1_js1" [label="tt,\n\
+{level($r0) := ⊤,\n\
+ obj_level($r0) := ⊤}",
+                          ];
+  "pc1_js1" -> "pc2_js1" [label="tt,\n\
+{level($i1) := ⊤}", ];
+  "pc2_js1" -> "pc3_js1" [label="tt,\n\
+{ϕ := S2}", ];
+  
+  }

@@ -1,0 +1,55 @@
+org.apache.rocketmq.store.PutMessageResult org.apache.rocketmq.broker.failover.EscapeBridge:putMessage(org.apache.rocketmq.common.message.MessageExtBrokerInner messageExt)
+{
+org.apache.rocketmq.broker.BrokerController masterBroker;
+  org.apache.rocketmq.client.producer.SendResult sendResult;
+  org.apache.rocketmq.common.BrokerConfig $stack7;
+  boolean $stack8;
+  org.apache.rocketmq.logging.org.slf4j.Logger $stack10;
+  java.lang.Boolean $stack14;
+  java.lang.Boolean $stack18;
+  org.apache.rocketmq.store.PutMessageResult $stack19;
+  org.apache.rocketmq.store.PutMessageStatus $stack20;
+  org.apache.rocketmq.store.MessageStore $stack29;
+  java.lang.Exception $stack31;
+  masterBroker=this.brokerController;
+ masterBroker = masterBroker.peekMasterBroker();
+ if (masterBroker==null) goto label0;
+ $stack29 = masterBroker.getMessageStore();
+ $stack19 = $stack29.putMessage(messageExt);
+ return  $stack19;
+ label0:masterBroker=this.brokerController;
+ $stack7 = masterBroker.getBrokerConfig();
+ $stack8 = $stack7.isEnableSlaveActingMaster();
+ if ($stack8==0) goto label1;
+ masterBroker=this.brokerController;
+ $stack7 = masterBroker.getBrokerConfig();
+ $stack8 = $stack7.isEnableRemoteEscape();
+ if ($stack8==0) goto label1;
+ label2:messageExt.setWaitStoreMsgOK((boolean)0);
+ sendResult = this#org.apache.rocketmq.broker.failover.EscapeBridge:putMessageToRemoteBroker(messageExt);
+ $stack19 = this#org.apache.rocketmq.broker.failover.EscapeBridge:transformSendResult2PutResult(sendResult);
+ label3:return  $stack19;
+ label4:$stack31 = catch;
+ $stack10=org.apache.rocketmq.broker.failover.EscapeBridge.LOG;
+ $stack10.error("sendMessageInFailover to remote failed",(java.lang.Throwable)$stack31);
+ $stack19=new org.apache.rocketmq.store.PutMessageResult;
+ $stack20=org.apache.rocketmq.store.PutMessageStatus.PUT_TO_REMOTE_BROKER_FAIL;
+ $stack19#org.apache.rocketmq.store.PutMessageResult($stack20,null,1);
+ return  $stack19;
+ label1:$stack10=org.apache.rocketmq.broker.failover.EscapeBridge.LOG;
+ masterBroker=this.brokerController;
+ $stack7 = masterBroker.getBrokerConfig();
+ $stack8 = $stack7.isEnableSlaveActingMaster();
+ $stack14 = java.lang.Boolean.valueOf($stack8);
+ masterBroker=this.brokerController;
+ $stack7 = masterBroker.getBrokerConfig();
+ $stack8 = $stack7.isEnableRemoteEscape();
+ $stack18 = java.lang.Boolean.valueOf($stack8);
+ $stack10.warn("Put message failed, enableSlaveActingMaster={}, enableRemoteEscape={}.",(java.lang.Object)$stack14,(java.lang.Object)$stack18);
+ $stack19=new org.apache.rocketmq.store.PutMessageResult;
+ $stack20=org.apache.rocketmq.store.PutMessageStatus.SERVICE_NOT_AVAILABLE;
+ $stack19#org.apache.rocketmq.store.PutMessageResult($stack20,null);
+ return  $stack19;
+ catch java.lang.Exception: label2 - label3 : label4;
+} 
+

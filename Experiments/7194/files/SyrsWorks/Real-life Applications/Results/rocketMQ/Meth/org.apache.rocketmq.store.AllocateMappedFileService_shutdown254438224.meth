@@ -1,0 +1,31 @@
+void org.apache.rocketmq.store.AllocateMappedFileService:shutdown()
+{
+java.util.Iterator l1;
+  org.apache.rocketmq.store.AllocateMappedFileService$AllocateRequest req;
+  java.util.concurrent.ConcurrentMap $stack3;
+  java.util.Collection $stack4;
+  boolean $stack6;
+  java.lang.Object $stack7;
+  org.apache.rocketmq.store.logfile.MappedFile $stack8;
+  org.apache.rocketmq.logging.org.slf4j.Logger $stack10;
+  java.lang.String $stack13;
+  this#org.apache.rocketmq.common.ServiceThread(1);
+ $stack3=this.requestTable;
+ $stack4 = $stack3.values();
+ l1 = $stack4.iterator();
+ label0:$stack6 = l1.hasNext();
+ if ($stack6==0) goto label1;
+ $stack7 = l1.next();
+ req=(org.apache.rocketmq.store.AllocateMappedFileService$AllocateRequest) $stack7;
+ $stack8 = org.apache.rocketmq.store.AllocateMappedFileService$AllocateRequest.access$000(req);
+ if ($stack8==null) goto label2;
+ $stack10=org.apache.rocketmq.store.AllocateMappedFileService.log;
+ $stack8 = org.apache.rocketmq.store.AllocateMappedFileService$AllocateRequest.access$000(req);
+ $stack13 = $stack8.getFileName();
+ $stack10.info("delete pre allocated maped file, {}",(java.lang.Object)$stack13);
+ $stack8 = org.apache.rocketmq.store.AllocateMappedFileService$AllocateRequest.access$000(req);
+ $stack8.destroy(1000L);
+ label2:goto label0;
+ label1:return;
+ } 
+

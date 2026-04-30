@@ -1,0 +1,50 @@
+void org.apache.rocketmq.store.MultiPathMappedFileQueue:destroy()
+{
+java.lang.Object storePathSet;
+  java.lang.Object mf;
+  java.lang.String path;
+  java.io.File file;
+  java.util.concurrent.CopyOnWriteArrayList $stack5;
+  boolean $stack7;
+  java.util.Set $stack10;
+  java.io.File tmp$22920261;
+  java.util.Iterator tmp$1983050886;
+  org.apache.rocketmq.store.logfile.MappedFile tmp$401351329;
+  java.util.Set tmp$1567727007;
+  $stack5=this.mappedFiles;
+ storePathSet = $stack5.iterator();
+ label0:tmp$1983050886=(java.util.Iterator) storePathSet;
+ $stack7 = tmp$1983050886.hasNext();
+ if ($stack7==0) goto label1;
+ tmp$1983050886=(java.util.Iterator) storePathSet;
+ mf = tmp$1983050886.next();
+ mf=(org.apache.rocketmq.store.logfile.MappedFile) mf;
+ tmp$401351329=(org.apache.rocketmq.store.logfile.MappedFile) mf;
+ tmp$401351329.destroy(3000L);
+ goto label0;
+ label1:$stack5=this.mappedFiles;
+ $stack5.clear();
+ this.flushedWhere=0L;
+ storePathSet = this#org.apache.rocketmq.store.MultiPathMappedFileQueue:getPaths();
+ $stack10 = this#org.apache.rocketmq.store.MultiPathMappedFileQueue:getReadonlyPaths();
+ tmp$1567727007=(java.util.Set) storePathSet;
+ tmp$1567727007.addAll((java.util.Collection)$stack10);
+ $stack10=(java.util.Set) storePathSet;
+ mf = $stack10.iterator();
+ label2:tmp$1983050886=(java.util.Iterator) mf;
+ $stack7 = tmp$1983050886.hasNext();
+ if ($stack7==0) goto label3;
+ tmp$1983050886=(java.util.Iterator) mf;
+ storePathSet = tmp$1983050886.next();
+ path=(java.lang.String) storePathSet;
+ tmp$22920261=new java.io.File;
+ file=tmp$22920261;
+ tmp$22920261#java.io.File(path);
+ file=tmp$22920261;
+ $stack7 = tmp$22920261.isDirectory();
+ if ($stack7==0) goto label4;
+ tmp$22920261.delete();
+ label4:goto label2;
+ label3:return;
+ } 
+

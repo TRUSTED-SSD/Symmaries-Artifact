@@ -1,0 +1,25 @@
+org.apache.commons.lang3.tuple.Pair org.apache.rocketmq.tieredstore.container.TieredConsumeQueue:getQueueOffsetInFileByTime(long timestamp,org.apache.rocketmq.tieredstore.common.BoundaryType boundaryType)
+{
+org.apache.rocketmq.tieredstore.provider.TieredFileSegment fileSegment;
+  org.apache.rocketmq.tieredstore.container.TieredFileQueue $stack5;
+  java.lang.Long $stack9;
+  java.lang.Long $stack13;
+  org.apache.commons.lang3.tuple.Pair $stack14;
+  $stack5=this.fileQueue;
+ fileSegment = $stack5.getFileByTime(timestamp,boundaryType);
+ if (fileSegment!=null) goto label0;
+ $stack9 = java.lang.Long.valueOf(-1L);
+ $stack13 = java.lang.Long.valueOf(-1L);
+ $stack14 = org.apache.commons.lang3.tuple.Pair.of((java.lang.Object)$stack9,(java.lang.Object)$stack13);
+ return  $stack14;
+ label0:timestamp = fileSegment.getBaseOffset();
+ timestamp=(timestamp/20L);
+ $stack9 = java.lang.Long.valueOf(timestamp);
+ timestamp = fileSegment.getCommitOffset();
+ timestamp=(timestamp/20L);
+ timestamp=(timestamp-1L);
+ $stack13 = java.lang.Long.valueOf(timestamp);
+ $stack14 = org.apache.commons.lang3.tuple.Pair.of((java.lang.Object)$stack9,(java.lang.Object)$stack13);
+ return  $stack14;
+ } 
+

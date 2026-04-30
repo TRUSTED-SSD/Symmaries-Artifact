@@ -1,0 +1,71 @@
+    private java.util.Collection getFilteredChildren()
+    {
+        org.junit.runners.ParentRunner this;
+        java.lang.Object l1, $stack5;
+        java.lang.Throwable l2;
+        java.util.Collection $stack3;
+        java.util.List $stack9;
+
+        this := @this: org.junit.runners.ParentRunner;
+
+        $stack3 = this.<org.junit.runners.ParentRunner: java.util.Collection filteredChildren>;
+/*423*/
+
+        if $stack3 != null goto label6;
+/*423*/
+
+        $stack5 = this.<org.junit.runners.ParentRunner: java.lang.Object childrenLock>;
+/*424*/
+
+        l1 = $stack5;
+/*424*/
+
+        entermonitor $stack5;
+/*424*/
+
+     label1:
+        $stack3 = this.<org.junit.runners.ParentRunner: java.util.Collection filteredChildren>;
+/*425*/
+
+        if $stack3 != null goto label2;
+/*425*/
+
+        $stack9 = virtualinvoke this.<org.junit.runners.ParentRunner: java.util.List getChildren()>();
+/*426*/
+
+        $stack3 = staticinvoke <java.util.Collections: java.util.Collection unmodifiableCollection(java.util.Collection)>($stack9);
+/*426*/
+
+        this.<org.junit.runners.ParentRunner: java.util.Collection filteredChildren> = $stack3;
+/*426*/
+
+     label2:
+        exitmonitor $stack5;
+/*428*/
+
+     label3:
+        goto label6;
+/*428*/
+
+     label4:
+        l2 := @caughtexception;
+/*428*/
+
+        exitmonitor $stack5;
+/*428*/
+
+     label5:
+        throw l2;
+/*428*/
+
+     label6:
+        $stack3 = this.<org.junit.runners.ParentRunner: java.util.Collection filteredChildren>;
+/*430*/
+
+        return $stack3;
+/*430*/
+
+        catch java.lang.Throwable from label1 to label3 with label4;
+        catch java.lang.Throwable from label4 to label5 with label4;
+    }
+

@@ -1,0 +1,44 @@
+java.util.List org.apache.rocketmq.broker.processor.QueryAssignmentProcessor:allocate(java.lang.String consumerGroup,java.lang.String currentCID,java.util.List mqAll,java.util.List cidAll)
+{
+java.util.ArrayList result;
+  int index;
+  boolean $stack7;
+  int $stack13;
+  java.lang.Object $stack15;
+  java.lang.Object[] $stack17;
+  org.apache.rocketmq.logging.org.slf4j.Logger $stack18;
+  java.lang.IllegalArgumentException $stack19;
+  $stack7 = org.apache.commons.lang3.StringUtils.isBlank((java.lang.CharSequence)currentCID);
+ if ($stack7==0) goto label0;
+ $stack19=new java.lang.IllegalArgumentException;
+ $stack19#java.lang.IllegalArgumentException("currentCID is empty");
+ throw $stack19;
+ label0:$stack7 = org.apache.commons.collections.CollectionUtils.isEmpty((java.util.Collection)mqAll);
+ if ($stack7==0) goto label1;
+ $stack19=new java.lang.IllegalArgumentException;
+ $stack19#java.lang.IllegalArgumentException("mqAll is null or mqAll empty");
+ throw $stack19;
+ label1:$stack7 = org.apache.commons.collections.CollectionUtils.isEmpty((java.util.Collection)cidAll);
+ if ($stack7==0) goto label2;
+ $stack19=new java.lang.IllegalArgumentException;
+ $stack19#java.lang.IllegalArgumentException("cidAll is null or cidAll empty");
+ throw $stack19;
+ label2:result=new java.util.ArrayList;
+ result#java.util.ArrayList();
+ $stack7 = cidAll.contains((java.lang.Object)currentCID);
+ if ($stack7!=0) goto label3;
+ $stack18=org.apache.rocketmq.broker.processor.QueryAssignmentProcessor.log;
+ $stack17=new java.lang.Object[3];
+ $stack17[0]=consumerGroup;
+ $stack17[1]=currentCID;
+ $stack17[2]=cidAll;
+ $stack18.info("[BUG] ConsumerGroup: {} The consumerId: {} not in cidAll: {}",$stack17);
+ return  result;
+ label3:index = cidAll.indexOf((java.lang.Object)currentCID);
+ $stack13 = mqAll.size();
+ index=(index%$stack13);
+ $stack15 = mqAll.get(index);
+ result.add($stack15);
+ return  result;
+ } 
+

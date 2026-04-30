@@ -1,0 +1,51 @@
+void org.apache.rocketmq.broker.transaction.AbstractTransactionalMessageCheckListener:sendCheckMessage(org.apache.rocketmq.common.message.MessageExt msgExt)
+{
+org.apache.rocketmq.remoting.protocol.header.CheckTransactionStateRequestHeader checkTransactionStateRequestHeader;
+  java.lang.String groupId;
+  io.netty.channel.Channel channel;
+  long $stack6;
+  java.lang.Long $stack7;
+  org.apache.rocketmq.broker.BrokerController $stack13;
+  org.apache.rocketmq.common.BrokerConfig $stack14;
+  int $stack18;
+  org.apache.rocketmq.broker.client.ProducerManager $stack21;
+  org.apache.rocketmq.logging.org.slf4j.Logger $stack23;
+  org.apache.rocketmq.broker.client.net.Broker2Client $stack25;
+  checkTransactionStateRequestHeader=new org.apache.rocketmq.remoting.protocol.header.CheckTransactionStateRequestHeader;
+ checkTransactionStateRequestHeader#org.apache.rocketmq.remoting.protocol.header.CheckTransactionStateRequestHeader();
+ $stack6 = msgExt.getCommitLogOffset();
+ $stack7 = java.lang.Long.valueOf($stack6);
+ checkTransactionStateRequestHeader.setCommitLogOffset($stack7);
+ groupId = msgExt.getMsgId();
+ checkTransactionStateRequestHeader.setOffsetMsgId(groupId);
+ groupId = msgExt.getUserProperty("UNIQ_KEY");
+ checkTransactionStateRequestHeader.setMsgId(groupId);
+ groupId = checkTransactionStateRequestHeader.getMsgId();
+ checkTransactionStateRequestHeader.setTransactionId(groupId);
+ $stack6 = msgExt.getQueueOffset();
+ $stack7 = java.lang.Long.valueOf($stack6);
+ checkTransactionStateRequestHeader.setTranStateTableOffset($stack7);
+ $stack13=this.brokerController;
+ $stack14 = $stack13.getBrokerConfig();
+ groupId = $stack14.getBrokerName();
+ checkTransactionStateRequestHeader.setBname(groupId);
+ groupId = msgExt.getUserProperty("REAL_TOPIC");
+ msgExt.setTopic(groupId);
+ groupId = msgExt.getUserProperty("REAL_QID");
+ $stack18 = java.lang.Integer.parseInt(groupId);
+ msgExt.setQueueId($stack18);
+ msgExt.setStoreSize(0);
+ groupId = msgExt.getProperty("PGROUP");
+ $stack13=this.brokerController;
+ $stack21 = $stack13.getProducerManager();
+ channel = $stack21.getAvailableChannel(groupId);
+ if (channel==null) goto label0;
+ $stack13=this.brokerController;
+ $stack25 = $stack13.getBroker2Client();
+ $stack25.checkProducerTransactionState(groupId,channel,checkTransactionStateRequestHeader,msgExt);
+ goto label1;
+ label0:$stack23=org.apache.rocketmq.broker.transaction.AbstractTransactionalMessageCheckListener.LOGGER;
+ $stack23.warn("Check transaction failed, channel is null. groupId={}",(java.lang.Object)groupId);
+ label1:return;
+ } 
+

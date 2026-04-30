@@ -1,0 +1,8 @@
+void org.apache.rocketmq.acl.plain.PlainPermissionManager:checkPerm (
+  org.apache.rocketmq.acl.plain.PlainAccessResource needCheckedAccess,
+  org.apache.rocketmq.acl.plain.PlainAccessResource ownedAccess) {
+  guard = tt;
+  ret(obj_level(needCheckedAccess)) = level(needCheckedAccess) ⊔ level(ownedAccess) ⊔ obj_level(needCheckedAccess) ⊔ obj_level(this);
+  ret(obj_level(ownedAccess)) = level(needCheckedAccess) ⊔ level(ownedAccess) ⊔ obj_level(ownedAccess) ⊔ obj_level(this);
+  ret(obj_level(this)) = level(needCheckedAccess) ⊔ level(ownedAccess) ⊔ obj_level(ownedAccess) ⊔ obj_level(this);
+}

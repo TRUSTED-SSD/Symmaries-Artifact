@@ -1,0 +1,50 @@
+    public void addFailure(java.lang.Throwable)
+    {
+        org.junit.internal.runners.model.EachTestNotifier this;
+        java.lang.Throwable targetException;
+        boolean $stack2;
+        org.junit.runner.notification.Failure $stack3;
+        org.junit.runner.Description $stack4;
+        org.junit.runner.notification.RunNotifier $stack5;
+        org.junit.runners.model.MultipleFailureException $stack6;
+
+        this := @this: org.junit.internal.runners.model.EachTestNotifier;
+
+        targetException := @parameter0: java.lang.Throwable;
+
+        $stack2 = targetException instanceof org.junit.runners.model.MultipleFailureException;
+/*20*/
+
+        if $stack2 == 0 goto label1;
+/*20*/
+
+        $stack6 = (org.junit.runners.model.MultipleFailureException) targetException;
+/*21*/
+
+        specialinvoke this.<org.junit.internal.runners.model.EachTestNotifier: void addMultipleFailureException(org.junit.runners.model.MultipleFailureException)>($stack6);
+/*21*/
+
+        goto label2;
+/*21*/
+
+     label1:
+        $stack5 = this.<org.junit.internal.runners.model.EachTestNotifier: org.junit.runner.notification.RunNotifier notifier>;
+/*23*/
+
+        $stack3 = new org.junit.runner.notification.Failure;
+/*23*/
+
+        $stack4 = this.<org.junit.internal.runners.model.EachTestNotifier: org.junit.runner.Description description>;
+/*23*/
+
+        specialinvoke $stack3.<org.junit.runner.notification.Failure: void <init>(org.junit.runner.Description,java.lang.Throwable)>($stack4, targetException);
+/*23*/
+
+        virtualinvoke $stack5.<org.junit.runner.notification.RunNotifier: void fireTestFailure(org.junit.runner.notification.Failure)>($stack3);
+/*23*/
+
+     label2:
+        return;
+/*25*/
+    }
+

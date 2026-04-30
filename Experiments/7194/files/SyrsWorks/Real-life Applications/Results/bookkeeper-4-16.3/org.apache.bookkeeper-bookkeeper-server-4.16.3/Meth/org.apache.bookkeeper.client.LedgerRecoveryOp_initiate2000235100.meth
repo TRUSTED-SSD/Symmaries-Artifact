@@ -1,0 +1,34 @@
+java.util.concurrent.CompletableFuture org.apache.bookkeeper.client.LedgerRecoveryOp:initiate()
+{
+org.apache.bookkeeper.client.ReadLastConfirmedOp $stack2;
+  org.apache.bookkeeper.client.ClientContext $stack3;
+  org.apache.bookkeeper.proto.BookieClient $stack4;
+  org.apache.bookkeeper.client.LedgerHandle $stack5;
+  org.apache.bookkeeper.client.DistributionSchedule $stack9;
+  org.apache.bookkeeper.proto.checksum.DigestManager $stack10;
+  long $stack11;
+  java.util.List $stack12;
+  org.apache.bookkeeper.client.LedgerRecoveryOp$1 $stack14;
+  byte[] $stack15;
+  java.util.concurrent.CompletableFuture $stack16;
+  $stack2=new org.apache.bookkeeper.client.ReadLastConfirmedOp;
+ $stack3=this.clientCtx;
+ $stack4 = $stack3.getBookieClient();
+ $stack5=this.lh;
+ $stack9=$stack5.distributionSchedule;
+ $stack5=this.lh;
+ $stack10=$stack5.macManager;
+ $stack5=this.lh;
+ $stack11=$stack5.ledgerId;
+ $stack5=this.lh;
+ $stack12 = $stack5.getCurrentEnsemble();
+ $stack5=this.lh;
+ $stack15=$stack5.ledgerKey;
+ $stack14=new org.apache.bookkeeper.client.LedgerRecoveryOp$1;
+ $stack14#org.apache.bookkeeper.client.LedgerRecoveryOp$1(this);
+ $stack2#org.apache.bookkeeper.client.ReadLastConfirmedOp($stack4,$stack9,$stack10,$stack11,$stack12,$stack15,(org.apache.bookkeeper.client.ReadLastConfirmedOp$LastConfirmedDataCallback)$stack14);
+ $stack2.initiateWithFencing();
+ $stack16=this.promise;
+ return  $stack16;
+ } 
+

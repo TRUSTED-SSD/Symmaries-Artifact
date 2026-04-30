@@ -1,0 +1,8 @@
+java.lang.String org.keycloak.adapters.pep.HttpAuthzRequest:getCookieValue (
+  java.lang.String @name) {
+  guard = tt;
+  ret(level()) = pc ⊔ level(@name) ⊔ obj_level(@name) ⊔ obj_level(this);
+  ret(obj_level()) = pc ⊔ level(@name) ⊔ obj_level(@name) ⊔ obj_level(this);
+  ret(obj_level(@name)) = if pc ⊔ level(@name) ⊔ obj_level(@name) = ⊥ then obj_level(this) else if if pc = ⊤ then obj_level(@name) = ⊤ else pc = ⊥ ∧ level(@name) ⊔ obj_level(@name) = ⊤ then ⊤ else ⊥;
+  ret(obj_level(this)) = obj_level(this);
+}

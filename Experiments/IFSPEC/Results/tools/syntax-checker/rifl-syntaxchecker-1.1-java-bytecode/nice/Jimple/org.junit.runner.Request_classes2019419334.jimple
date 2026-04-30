@@ -1,0 +1,48 @@
+    public static transient org.junit.runner.Request classes(org.junit.runner.Computer, java.lang.Class[])
+    {
+        org.junit.runner.Computer computer;
+        java.lang.Class[] classes;
+        org.junit.runners.model.InitializationError builder;
+        org.junit.runner.Runner suite;
+        org.junit.internal.builders.AllDefaultPossibilitiesBuilder $stack4;
+        org.junit.runner.Request $stack6;
+        java.lang.RuntimeException $stack8;
+
+        computer := @parameter0: org.junit.runner.Computer;
+
+        classes := @parameter1: java.lang.Class[];
+
+     label1:
+        $stack4 = new org.junit.internal.builders.AllDefaultPossibilitiesBuilder;
+/*74*/
+
+        specialinvoke $stack4.<org.junit.internal.builders.AllDefaultPossibilitiesBuilder: void <init>(boolean)>(1);
+/*74*/
+
+        suite = virtualinvoke computer.<org.junit.runner.Computer: org.junit.runner.Runner getSuite(org.junit.runners.model.RunnerBuilder,java.lang.Class[])>($stack4, classes);
+/*75*/
+/*75*/
+
+        $stack6 = staticinvoke <org.junit.runner.Request: org.junit.runner.Request runner(org.junit.runner.Runner)>(suite);
+/*76*/
+
+     label2:
+        return $stack6;
+/*76*/
+
+     label3:
+        builder := @caughtexception;
+/*76*/
+
+        $stack8 = new java.lang.RuntimeException;
+/*78*/
+
+        specialinvoke $stack8.<java.lang.RuntimeException: void <init>(java.lang.String)>("Bug in saff\'s brain: Suite constructor, called as above, should always complete");
+/*78*/
+
+        throw $stack8;
+/*78*/
+
+        catch org.junit.runners.model.InitializationError from label1 to label2 with label3;
+    }
+

@@ -1,0 +1,51 @@
+void org.apache.kerby.config.XmlConfigLoader:loadConfig(org.apache.kerby.config.ConfigImpl config,org.w3c.dom.Element @element)
+{
+org.w3c.dom.NodeList props;
+  int i;
+  org.w3c.dom.Node subNode;
+  java.lang.String name;
+  org.apache.kerby.config.ConfigObject value;
+  java.lang.String tagName;
+  org.apache.kerby.config.ConfigImpl cfg;
+  int $stack12;
+  boolean $stack14;
+  java.lang.String $stack17;
+  org.w3c.dom.Element element;
+element=@element;
+props = element.getChildNodes();
+ i=0;
+ label0:$stack12 = props.getLength();
+ if (i>=$stack12) goto label1;
+ subNode = props.item(i);
+ $stack14=subNode instanceof org.w3c.dom.Element;
+ if ($stack14!=0) goto label2;
+ goto label3;
+ label2:element=(org.w3c.dom.Element) subNode;
+ name = org.apache.kerby.config.XmlConfigLoader.getElementName(element);
+ if (name!=null) goto label4;
+ goto label3;
+ label4:value=null;
+ tagName = element.getTagName();
+ $stack17="property";
+ $stack14 = $stack17.equals((java.lang.Object)tagName);
+ if ($stack14==0) goto label5;
+ $stack14 = element.hasChildNodes();
+ if ($stack14==0) goto label5;
+ value = org.apache.kerby.config.XmlConfigLoader.loadProperty(element);
+ goto label6;
+ label5:$stack17="config";
+ $stack14 = $stack17.equals((java.lang.Object)tagName);
+ if ($stack14==0) goto label6;
+ $stack14 = element.hasChildNodes();
+ if ($stack14==0) goto label6;
+ cfg=new org.apache.kerby.config.ConfigImpl;
+ cfg#org.apache.kerby.config.ConfigImpl(name);
+ this#org.apache.kerby.config.XmlConfigLoader(cfg,element);
+ value=new org.apache.kerby.config.ConfigObject;
+ value#org.apache.kerby.config.ConfigObject((org.apache.kerby.config.Config)cfg);
+ label6:config.set(name,value);
+ label3:i=(i+1);
+ goto label0;
+ label1:return;
+ } 
+

@@ -1,0 +1,22 @@
+java.lang.String org.apache.rocketmq.client.ClientConfig:getNamesrvAddr()
+{
+java.lang.String $stack1;
+  boolean $stack2;
+  java.util.regex.Pattern $stack5;
+  java.util.regex.Matcher $stack7;
+  $stack1=this.namesrvAddr;
+ $stack2 = org.apache.commons.lang3.StringUtils.isNotEmpty((java.lang.CharSequence)$stack1);
+ if ($stack2==0) goto label0;
+ $stack5=org.apache.rocketmq.common.utils.NameServerAddressUtils.NAMESRV_ENDPOINT_PATTERN;
+ $stack1=this.namesrvAddr;
+ $stack1 = $stack1.trim();
+ $stack7 = $stack5.matcher((java.lang.CharSequence)$stack1);
+ $stack2 = $stack7.matches();
+ if ($stack2==0) goto label0;
+ $stack1=this.namesrvAddr;
+ $stack1 = org.apache.rocketmq.common.utils.NameServerAddressUtils.getNameSrvAddrFromNamesrvEndpoint($stack1);
+ return  $stack1;
+ label0:$stack1=this.namesrvAddr;
+ return  $stack1;
+ } 
+

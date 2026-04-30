@@ -1,0 +1,31 @@
+void org.apache.rocketmq.broker.processor.PopMessageProcessor:notifyMessageArriving(java.lang.String topic,int queueId)
+{
+java.util.concurrent.ConcurrentHashMap cids;
+  java.util.Iterator l4;
+  java.util.Map$Entry cid;
+  java.lang.Object $stack7;
+  java.util.Set $stack8;
+  boolean $stack10;
+  java.lang.String $stack13;
+  cids=this.topicCidMap;
+ $stack7 = cids.get((java.lang.Object)topic);
+ cids=(java.util.concurrent.ConcurrentHashMap) $stack7;
+ if (cids!=null) goto label0;
+ return;
+ label0:$stack8 = cids.entrySet();
+ l4 = $stack8.iterator();
+ label1:$stack10 = l4.hasNext();
+ if ($stack10==0) goto label2;
+ $stack7 = l4.next();
+ cid=(java.util.Map$Entry) $stack7;
+ if (queueId<0) goto label3;
+ $stack7 = cid.getKey();
+ $stack13=(java.lang.String) $stack7;
+ this.notifyMessageArriving(topic,$stack13,-1);
+ label3:$stack7 = cid.getKey();
+ $stack13=(java.lang.String) $stack7;
+ this.notifyMessageArriving(topic,$stack13,queueId);
+ goto label1;
+ label2:return;
+ } 
+

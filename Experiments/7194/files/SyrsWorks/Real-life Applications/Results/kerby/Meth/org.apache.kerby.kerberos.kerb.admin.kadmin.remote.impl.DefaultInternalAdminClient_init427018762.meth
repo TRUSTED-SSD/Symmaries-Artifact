@@ -1,0 +1,36 @@
+void org.apache.kerby.kerberos.kerb.admin.kadmin.remote.impl.DefaultInternalAdminClient:init()
+{
+org.apache.kerby.kerberos.kerb.transport.TransportPair tpair;
+  org.apache.kerby.kerberos.kerb.transport.KrbNetwork network;
+  org.apache.kerby.kerberos.kerb.admin.kadmin.remote.impl.DefaultAdminHandler $stack4;
+  org.apache.kerby.kerberos.kerb.admin.kadmin.remote.AdminContext $stack6;
+  org.apache.kerby.kerberos.kerb.admin.kadmin.remote.AdminSetting $stack7;
+  int $stack11;
+  org.apache.kerby.kerberos.kerb.transport.KrbTransport $stack12;
+  java.io.IOException $stack13;
+  org.apache.kerby.kerberos.kerb.KrbException $stack14;
+  this#org.apache.kerby.kerberos.kerb.admin.kadmin.remote.impl.AbstractInternalAdminClient();
+ $stack4=new org.apache.kerby.kerberos.kerb.admin.kadmin.remote.impl.DefaultAdminHandler;
+ $stack4#org.apache.kerby.kerberos.kerb.admin.kadmin.remote.impl.DefaultAdminHandler();
+ this.adminHandler=$stack4;
+ $stack4=this.adminHandler;
+ $stack6 = this.getContext();
+ $stack4.init($stack6);
+ $stack7 = this.getSetting();
+ tpair = org.apache.kerby.kerberos.kerb.admin.kadmin.remote.AdminUtil.getTransportPair($stack7);
+ network=new org.apache.kerby.kerberos.kerb.transport.KrbNetwork;
+ network#org.apache.kerby.kerberos.kerb.transport.KrbNetwork();
+ $stack7 = this.getSetting();
+ $stack11 = $stack7.getTimeout();
+ network.setSocketTimeout($stack11);
+ label0:$stack12 = network.connect(tpair);
+ this.transport=$stack12;
+ label1:goto label2;
+ label3:$stack13 = catch;
+ $stack14=new org.apache.kerby.kerberos.kerb.KrbException;
+ $stack14#org.apache.kerby.kerberos.kerb.KrbException("Failed to create transport",(java.lang.Throwable)$stack13);
+ throw $stack14;
+ label2:return;
+ catch java.io.IOException: label0 - label1 : label3;
+} 
+

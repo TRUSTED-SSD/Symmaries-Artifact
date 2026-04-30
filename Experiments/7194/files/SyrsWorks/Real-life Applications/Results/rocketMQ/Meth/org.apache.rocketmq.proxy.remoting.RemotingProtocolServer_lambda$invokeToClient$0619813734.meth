@@ -1,0 +1,17 @@
+static void org.apache.rocketmq.proxy.remoting.RemotingProtocolServer:lambda$invokeToClient$0(java.util.concurrent.CompletableFuture future,org.apache.rocketmq.remoting.netty.ResponseFuture responseFuture)
+{
+org.apache.rocketmq.remoting.protocol.RemotingCommand $stack2;
+  org.apache.rocketmq.client.exception.MQClientException $stack5;
+  java.lang.Throwable $stack7;
+  $stack2 = responseFuture.getResponseCommand();
+ if ($stack2!=null) goto label0;
+ $stack5=new org.apache.rocketmq.client.exception.MQClientException;
+ $stack7 = responseFuture.getCause();
+ $stack5#org.apache.rocketmq.client.exception.MQClientException("response is null after send request to client",$stack7);
+ future.completeExceptionally((java.lang.Throwable)$stack5);
+ return;
+ label0:$stack2 = responseFuture.getResponseCommand();
+ future.complete((java.lang.Object)$stack2);
+ return;
+ } 
+

@@ -1,0 +1,27 @@
+long org.apache.rocketmq.tieredstore.TieredMessageStore:getMinOffsetInQueue(java.lang.String topic,int queueId)
+{
+long minOffsetInNextStore;
+  org.apache.rocketmq.tieredstore.container.TieredMessageQueueContainer container;
+  long minOffsetInTieredStore;
+  org.apache.rocketmq.store.MessageStore $stack8;
+  org.apache.rocketmq.common.message.MessageQueue $stack10;
+  java.lang.String $stack11;
+  org.apache.rocketmq.tieredstore.container.TieredContainerManager $stack12;
+  byte $stack15;
+  $stack8=this.next;
+ minOffsetInNextStore = $stack8.getMinOffsetInQueue(topic,queueId);
+ $stack12=this.containerManager;
+ $stack10=new org.apache.rocketmq.common.message.MessageQueue;
+ $stack11=this.brokerName;
+ $stack10#org.apache.rocketmq.common.message.MessageQueue(topic,$stack11,queueId);
+ container = $stack12.getMQContainer($stack10);
+ if (container!=null) goto label0;
+ return  minOffsetInNextStore;
+ label0:minOffsetInTieredStore = container.getConsumeQueueMinOffset();
+ $stack15=(minOffsetInTieredStore cmp 0L);
+ if ($stack15>=0) goto label1;
+ return  minOffsetInNextStore;
+ label1:minOffsetInNextStore = java.lang.Math.min(minOffsetInNextStore,minOffsetInTieredStore);
+ return  minOffsetInNextStore;
+ } 
+

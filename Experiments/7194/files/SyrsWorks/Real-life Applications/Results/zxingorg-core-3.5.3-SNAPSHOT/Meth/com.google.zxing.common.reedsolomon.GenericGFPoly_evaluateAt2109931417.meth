@@ -1,0 +1,40 @@
+int com.google.zxing.common.reedsolomon.GenericGFPoly:evaluateAt(int a)
+{
+int result;
+  int[] size;
+  int i;
+  int coefficient;
+  com.google.zxing.common.reedsolomon.GenericGF $stack9;
+  int[] $stack11;
+  if (a!=0) goto label0;
+ a = this.getCoefficient(0);
+ return  a;
+ label0:if (a!=1) goto label1;
+ result=0;
+ size=this.coefficients;
+ i=#size;
+ a=0;
+ label2:if (a>=i) goto label3;
+ coefficient=size[a];
+ result = com.google.zxing.common.reedsolomon.GenericGF.addOrSubtract(result,coefficient);
+ a=(a+1);
+ goto label2;
+ label3:return  result;
+ label1:size=this.coefficients;
+ result=size[0];
+ size=this.coefficients;
+ i=#size;
+ size=(int[]) i;
+ i=1;
+ label4:coefficient=(int) size;
+ if (i>=coefficient) goto label5;
+ $stack9=this.field;
+ result = $stack9.multiply(a,result);
+ $stack11=this.coefficients;
+ coefficient=$stack11[i];
+ result = com.google.zxing.common.reedsolomon.GenericGF.addOrSubtract(result,coefficient);
+ i=(i+1);
+ goto label4;
+ label5:return  result;
+ } 
+

@@ -1,0 +1,46 @@
+long org.apache.bookkeeper.bookie.storage.directentrylogger.DirectReader:readLongAt(long offset)
+{
+org.apache.bookkeeper.bookie.storage.directentrylogger.Buffer l3;
+  io.netty.buffer.ByteBuf longBuf;
+  java.lang.Throwable l7;
+  org.apache.bookkeeper.bookie.storage.directentrylogger.Buffer $stack9;
+  long $stack10;
+  byte $stack11;
+  long $stack17;
+  int $stack27;
+  java.lang.Throwable $stack32;
+  org.apache.bookkeeper.bookie.storage.directentrylogger.DirectReader.assertValidOffset(offset);
+ $stack9=this.nativeBuffer;
+ l3=$stack9;
+ monitorenter $stack9;
+ label0:$stack10=this.currentBlock;
+ $stack11=(offset cmp $stack10);
+ if ($stack11<0) goto label1;
+ $stack17=(offset+8L);
+ $stack10=this.currentBlockEnd;
+ $stack11=($stack17 cmp $stack10);
+ if ($stack11>0) goto label1;
+ $stack9=this.nativeBuffer;
+ $stack27 = this#org.apache.bookkeeper.bookie.storage.directentrylogger.DirectReader:offsetInBlock(offset);
+ offset = $stack9.readLong($stack27);
+ monitorexit l3;
+ label2:return  offset;
+ label1:longBuf = this.readBufferAt(offset,8);
+ label3:offset = longBuf.getLong(0);
+ label4:io.netty.util.ReferenceCountUtil.release((java.lang.Object)longBuf);
+ monitorexit l3;
+ label5:return  offset;
+ label6:l7 = catch;
+ label7:io.netty.util.ReferenceCountUtil.release((java.lang.Object)longBuf);
+ throw l7;
+ label8:$stack32 = catch;
+ l7=$stack32;
+ monitorexit l3;
+ label9:throw $stack32;
+ catch java.lang.Throwable: label3 - label4 : label6;
+catch java.lang.Throwable: label6 - label7 : label6;
+catch java.lang.Throwable: label0 - label2 : label8;
+catch java.lang.Throwable: label1 - label5 : label8;
+catch java.lang.Throwable: label6 - label9 : label8;
+} 
+

@@ -1,0 +1,53 @@
+org.apache.bookkeeper.client.PendingReadOp(org.apache.bookkeeper.client.LedgerHandle lh,org.apache.bookkeeper.client.ClientContext clientCtx,long startEntryId,long endEntryId,boolean isRecoveryRead)
+{
+java.util.HashSet $stack8;
+  java.util.concurrent.atomic.AtomicBoolean $stack9;
+  java.util.LinkedList $stack10;
+  java.util.concurrent.CompletableFuture $stack11;
+  org.apache.bookkeeper.client.api.LedgerMetadata $stack14;
+  int $stack15;
+  int $stack17;
+  java.util.BitSet $stack21;
+  this#java.lang.Object();
+ this.speculativeTask=null;
+ $stack8=new java.util.HashSet;
+ $stack8#java.util.HashSet();
+ this.sentToHosts=$stack8;
+ this.parallelRead=0;
+ $stack9=new java.util.concurrent.atomic.AtomicBoolean;
+ $stack9#java.util.concurrent.atomic.AtomicBoolean(0);
+ this.complete=$stack9;
+ this.allowFailFast=0;
+ $stack10=new java.util.LinkedList;
+ $stack10#java.util.LinkedList();
+ this.seq=$stack10;
+ $stack11=new java.util.concurrent.CompletableFuture;
+ $stack11#java.util.concurrent.CompletableFuture();
+ this.future=$stack11;
+ this.lh=lh;
+ this.clientCtx=clientCtx;
+ this.startEntryId=startEntryId;
+ this.endEntryId=endEntryId;
+ this.isRecoveryRead=isRecoveryRead;
+ this.allowFailFast=0;
+ startEntryId=(endEntryId-startEntryId);
+ startEntryId=(startEntryId+1L);
+ this.numPendingEntries=startEntryId;
+ $stack14 = this.getLedgerMetadata();
+ $stack15 = $stack14.getWriteQuorumSize();
+ $stack14 = this.getLedgerMetadata();
+ $stack17 = $stack14.getAckQuorumSize();
+ $stack15=($stack15-$stack17);
+ $stack15=($stack15+1);
+ this.requiredBookiesMissingEntryForRecovery=$stack15;
+ $stack8=new java.util.HashSet;
+ $stack8#java.util.HashSet();
+ this.heardFromHosts=$stack8;
+ $stack21=new java.util.BitSet;
+ $stack14 = this.getLedgerMetadata();
+ $stack15 = $stack14.getEnsembleSize();
+ $stack21#java.util.BitSet($stack15);
+ this.heardFromHostsBitSet=$stack21;
+ return;
+ } 
+

@@ -1,0 +1,19 @@
+byte[] org.apache.kerby.kerberos.kerb.crypto.cksum.KcCheckSum:doChecksumWithKey(byte[] @data,int start,int len,byte[] @key,int usage)
+{
+byte[] constant;
+  org.apache.kerby.kerberos.kerb.crypto.key.KeyMaker $stack8;
+  org.apache.kerby.kerberos.kerb.crypto.key.DkKeyMaker $stack9;
+  byte[] key;
+byte[] data;
+data=@data;
+key=@key;
+constant=new byte[5];
+ org.apache.kerby.kerberos.kerb.crypto.util.BytesUtil.int2bytes(usage,constant,0,(boolean)1);
+ constant[4]=-103;
+ $stack8 = this.keyMaker();
+ $stack9=(org.apache.kerby.kerberos.kerb.crypto.key.DkKeyMaker) $stack8;
+ key = $stack9.dk(key,constant);
+ data = this.mac(key,data,start,len);
+ return  data;
+ } 
+

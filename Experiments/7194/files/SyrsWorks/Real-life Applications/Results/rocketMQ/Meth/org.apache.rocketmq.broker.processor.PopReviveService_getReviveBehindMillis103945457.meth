@@ -1,0 +1,30 @@
+long org.apache.rocketmq.broker.processor.PopReviveService:getReviveBehindMillis()
+{
+long maxOffset;
+  byte $stack4;
+  org.apache.rocketmq.broker.BrokerController $stack5;
+  org.apache.rocketmq.store.MessageStore $stack6;
+  int $stack7;
+  java.lang.String $stack8;
+  long $stack10;
+  maxOffset=this.currentReviveMessageTimestamp;
+ $stack4=(maxOffset cmp 0L);
+ if ($stack4>0) goto label0;
+ return  0L;
+ label0:$stack5=this.brokerController;
+ $stack6 = $stack5.getMessageStore();
+ $stack8=this.reviveTopic;
+ $stack7=this.queueId;
+ maxOffset = $stack6.getMaxOffsetInQueue($stack8,$stack7);
+ $stack10=this.reviveOffset;
+ maxOffset=(maxOffset-$stack10);
+ $stack4=(maxOffset cmp 1L);
+ if ($stack4<=0) goto label1;
+ maxOffset = java.lang.System.currentTimeMillis();
+ $stack10=this.currentReviveMessageTimestamp;
+ maxOffset=(maxOffset-$stack10);
+ maxOffset = java.lang.Math.max(0L,maxOffset);
+ return  maxOffset;
+ label1:return  0L;
+ } 
+

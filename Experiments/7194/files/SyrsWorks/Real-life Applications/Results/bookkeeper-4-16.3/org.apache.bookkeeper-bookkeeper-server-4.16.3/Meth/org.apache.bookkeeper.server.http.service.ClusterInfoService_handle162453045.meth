@@ -1,0 +1,29 @@
+org.apache.bookkeeper.http.service.HttpServiceResponse org.apache.bookkeeper.server.http.service.ClusterInfoService:handle(org.apache.bookkeeper.http.service.HttpServiceRequest request)
+{
+org.apache.bookkeeper.http.service.HttpServiceResponse response;
+  org.apache.bookkeeper.server.http.service.ClusterInfoService$ClusterInfo info;
+  java.lang.String jsonResponse;
+  org.apache.bookkeeper.http.HttpServer$Method $stack6;
+  org.apache.bookkeeper.http.HttpServer$Method $stack7;
+  org.apache.bookkeeper.http.HttpServer$StatusCode $stack11;
+  response=new org.apache.bookkeeper.http.service.HttpServiceResponse;
+ response#org.apache.bookkeeper.http.service.HttpServiceResponse();
+ $stack6=org.apache.bookkeeper.http.HttpServer$Method.GET;
+ $stack7 = request.getMethod();
+ if ($stack6==$stack7) goto label0;
+ $stack11=org.apache.bookkeeper.http.HttpServer$StatusCode.NOT_FOUND;
+ response.setCode($stack11);
+ response.setBody("Only GET is supported.");
+ return  response;
+ label0:info=new org.apache.bookkeeper.server.http.service.ClusterInfoService$ClusterInfo;
+ info#org.apache.bookkeeper.server.http.service.ClusterInfoService$ClusterInfo();
+ this#org.apache.bookkeeper.server.http.service.ClusterInfoService:fillUReplicatedInfo(info);
+ this#org.apache.bookkeeper.server.http.service.ClusterInfoService:fillAuditorInfo(info);
+ this#org.apache.bookkeeper.server.http.service.ClusterInfoService:fillBookiesInfo(info);
+ jsonResponse = org.apache.bookkeeper.common.util.JsonUtil.toJson((java.lang.Object)info);
+ response.setBody(jsonResponse);
+ $stack11=org.apache.bookkeeper.http.HttpServer$StatusCode.OK;
+ response.setCode($stack11);
+ return  response;
+ } 
+

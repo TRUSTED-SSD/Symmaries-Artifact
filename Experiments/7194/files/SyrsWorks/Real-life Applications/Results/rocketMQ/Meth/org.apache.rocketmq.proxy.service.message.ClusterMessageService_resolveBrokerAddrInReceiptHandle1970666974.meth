@@ -1,0 +1,26 @@
+java.lang.String org.apache.rocketmq.proxy.service.message.ClusterMessageService:resolveBrokerAddrInReceiptHandle(org.apache.rocketmq.common.consumer.ReceiptHandle handle)
+{
+org.apache.rocketmq.proxy.service.route.TopicRouteService $stack3;
+  java.lang.String $stack4;
+  java.lang.Throwable $stack6;
+  org.apache.rocketmq.proxy.common.ProxyException $stack7;
+  java.lang.StringBuilder $stack8;
+  org.apache.rocketmq.proxy.common.ProxyExceptionCode $stack9;
+  label0:$stack3=this.topicRouteService;
+ $stack4 = handle.getBrokerName();
+ $stack4 = $stack3.getBrokerAddr($stack4);
+ label1:return  $stack4;
+ label2:$stack6 = catch;
+ $stack7=new org.apache.rocketmq.proxy.common.ProxyException;
+ $stack9=org.apache.rocketmq.proxy.common.ProxyExceptionCode.INVALID_RECEIPT_HANDLE;
+ $stack8=new java.lang.StringBuilder;
+ $stack8#java.lang.StringBuilder();
+ $stack8 = $stack8.append("cannot find broker ");
+ $stack4 = handle.getBrokerName();
+ $stack8 = $stack8.append($stack4);
+ $stack4 = $stack8.toString();
+ $stack7#org.apache.rocketmq.proxy.common.ProxyException($stack9,$stack4,$stack6);
+ throw $stack7;
+ catch java.lang.Throwable: label0 - label1 : label2;
+} 
+

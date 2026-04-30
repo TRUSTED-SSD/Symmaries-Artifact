@@ -1,0 +1,35 @@
+void org.apache.bookkeeper.proto.BookieNettyServer:resumeProcessing()
+{
+java.lang.Object l1;
+  java.util.Iterator l2;
+  io.netty.channel.Channel channel;
+  java.lang.Throwable l4;
+  java.lang.Object $stack5;
+  io.netty.channel.group.ChannelGroup $stack6;
+  boolean $stack8;
+  io.netty.channel.ChannelConfig $stack12;
+  $stack5=this.suspensionLock;
+ l1=$stack5;
+ monitorenter $stack5;
+ label0:this.suspended=0;
+ $stack6=this.allChannels;
+ l2 = $stack6.iterator();
+ label1:$stack8 = l2.hasNext();
+ if ($stack8==0) goto label2;
+ $stack5 = l2.next();
+ channel=(io.netty.channel.Channel) $stack5;
+ $stack12 = channel.config();
+ $stack12.setAutoRead((boolean)1);
+ goto label1;
+ label2:$stack5=this.suspensionLock;
+ $stack5.notifyAll();
+ monitorexit l1;
+ label3:goto label4;
+ label5:l4 = catch;
+ monitorexit l1;
+ label6:throw l4;
+ label4:return;
+ catch java.lang.Throwable: label0 - label3 : label5;
+catch java.lang.Throwable: label5 - label6 : label5;
+} 
+

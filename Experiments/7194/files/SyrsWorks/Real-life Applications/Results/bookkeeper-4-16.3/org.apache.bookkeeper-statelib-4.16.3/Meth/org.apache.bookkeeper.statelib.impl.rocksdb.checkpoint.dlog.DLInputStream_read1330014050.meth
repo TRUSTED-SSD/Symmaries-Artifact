@@ -1,0 +1,43 @@
+int org.apache.bookkeeper.statelib.impl.rocksdb.checkpoint.dlog.DLInputStream:read(byte[] b,int off,int len)
+{
+int numBytesRead;
+  int bytesLeft;
+  org.apache.bookkeeper.statelib.impl.rocksdb.checkpoint.dlog.DLInputStream$RecordStream $stack9;
+  java.io.InputStream $stack12;
+  int $stack17;
+  org.apache.distributedlog.api.LogReader $stack23;
+  numBytesRead=0;
+ label0:if (len<=0) goto label1;
+ $stack9=this.currentRecord;
+ if (null!=$stack9) goto label2;
+ $stack23=this.reader;
+ $stack9 = org.apache.bookkeeper.statelib.impl.rocksdb.checkpoint.dlog.DLInputStream.nextRecordStream($stack23);
+ this.currentRecord=$stack9;
+ label2:$stack9=this.currentRecord;
+ if (null!=$stack9) goto label3;
+ if (numBytesRead!=0) goto label1;
+ return  -1;
+ label3:$stack9=this.currentRecord;
+ $stack12 = org.apache.bookkeeper.statelib.impl.rocksdb.checkpoint.dlog.DLInputStream$RecordStream.access$100($stack9);
+ bytesLeft = $stack12.available();
+ if (bytesLeft>0) goto label4;
+ $stack9=this.currentRecord;
+ $stack12 = org.apache.bookkeeper.statelib.impl.rocksdb.checkpoint.dlog.DLInputStream$RecordStream.access$100($stack9);
+ $stack12.close();
+ this.currentRecord=null;
+ goto label0;
+ label4:bytesLeft = java.lang.Math.min(bytesLeft,len);
+ $stack9=this.currentRecord;
+ $stack12 = org.apache.bookkeeper.statelib.impl.rocksdb.checkpoint.dlog.DLInputStream$RecordStream.access$100($stack9);
+ $stack17=(off+numBytesRead);
+ dummyClass.highSourceMut(b);
+bytesLeft = $stack12.read(b,$stack17,bytesLeft);
+dummyClass.highSourceMut(bytesLeft);
+ if (bytesLeft>=0) goto label5;
+ goto label0;
+ label5:numBytesRead=(numBytesRead+bytesLeft);
+ len=(len-bytesLeft);
+ goto label0;
+ label1:return  numBytesRead;
+ } 
+

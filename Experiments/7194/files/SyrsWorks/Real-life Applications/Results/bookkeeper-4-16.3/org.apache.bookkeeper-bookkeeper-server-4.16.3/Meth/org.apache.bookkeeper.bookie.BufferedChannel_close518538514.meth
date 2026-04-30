@@ -1,0 +1,16 @@
+void org.apache.bookkeeper.bookie.BufferedChannel:close()
+{
+boolean $stack1;
+  io.netty.buffer.ByteBuf $stack2;
+  java.nio.channels.FileChannel $stack4;
+  $stack1=this.closed;
+ if ($stack1==0) goto label0;
+ return;
+ label0:$stack2=this.writeBuffer;
+ io.netty.util.ReferenceCountUtil.release((java.lang.Object)$stack2);
+ $stack4=this.fileChannel;
+ $stack4.close();
+ this.closed=1;
+ return;
+ } 
+

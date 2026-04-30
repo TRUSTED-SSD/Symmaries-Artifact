@@ -1,0 +1,53 @@
+void org.apache.bookkeeper.replication.AutoRecoveryMain:shutdown(int exitCode)
+{
+org.slf4j.Logger $stack3;
+  java.lang.Integer $stack5;
+  boolean $stack6;
+  org.apache.bookkeeper.replication.AuditorElector $stack8;
+  org.apache.bookkeeper.replication.ReplicationWorker $stack9;
+  org.apache.bookkeeper.client.BookKeeper $stack10;
+  org.apache.bookkeeper.client.BKException $stack11;
+  java.lang.InterruptedException $stack13;
+  java.lang.Thread $stack14;
+  java.lang.InterruptedException $stack16;
+  $stack3=org.apache.bookkeeper.replication.AutoRecoveryMain.LOG;
+ $stack5 = java.lang.Integer.valueOf(exitCode);
+ dummyClass.lowSink("Shutting down auto recovery: {}");
+$stack3.info("Shutting down auto recovery: {}",(java.lang.Object)$stack5);
+ $stack6=this.shuttingDown;
+ if ($stack6==0) goto label0;
+ return;
+ label0:$stack3=org.apache.bookkeeper.replication.AutoRecoveryMain.LOG;
+ dummyClass.lowSink("Shutting down AutoRecovery");
+$stack3.info("Shutting down AutoRecovery");
+ this.shuttingDown=1;
+ this.running=0;
+ this.exitCode=exitCode;
+ label1:$stack8=this.auditorElector;
+ $stack8.shutdown();
+ label2:goto label3;
+ label4:$stack16 = catch;
+ $stack14 = java.lang.Thread.currentThread();
+ $stack14.interrupt();
+ $stack3=org.apache.bookkeeper.replication.AutoRecoveryMain.LOG;
+ $stack3.warn("Interrupted shutting down auditor elector",(java.lang.Throwable)$stack16);
+ label3:$stack9=this.replicationWorker;
+ $stack9.shutdown();
+ label5:$stack10=this.bkc;
+ $stack10.close();
+ label6:goto label7;
+ label8:$stack11 = catch;
+ $stack3=org.apache.bookkeeper.replication.AutoRecoveryMain.LOG;
+ $stack3.warn("Failed to close bookkeeper client for auto recovery",(java.lang.Throwable)$stack11);
+ goto label7;
+ label9:$stack13 = catch;
+ $stack14 = java.lang.Thread.currentThread();
+ $stack14.interrupt();
+ $stack3=org.apache.bookkeeper.replication.AutoRecoveryMain.LOG;
+ $stack3.warn("Interrupted closing bookkeeper client for auto recovery",(java.lang.Throwable)$stack13);
+ label7:return;
+ catch java.lang.InterruptedException: label1 - label2 : label4;
+catch org.apache.bookkeeper.client.BKException: label5 - label6 : label8;
+catch java.lang.InterruptedException: label5 - label6 : label9;
+} 
+

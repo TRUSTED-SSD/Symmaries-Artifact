@@ -1,0 +1,38 @@
+java.util.Map$Entry org.apache.rocketmq.remoting.netty.NettyRemotingClient:getProxy(java.lang.String @addr)
+{
+java.lang.String[] hostAndPort;
+  java.util.Iterator l3;
+  java.util.Map$Entry entry;
+  boolean $stack6;
+  java.util.Map $stack9;
+  java.util.Set $stack10;
+  java.lang.Object $stack13;
+  java.lang.String $stack15;
+  java.lang.String addr;
+addr=@addr;
+$stack6 = org.apache.commons.lang3.StringUtils.isBlank((java.lang.CharSequence)addr);
+ if ($stack6!=0) goto label0;
+ $stack6 = addr.contains((java.lang.CharSequence)":");
+ if ($stack6!=0) goto label1;
+ label0:return  null;
+ label1:hostAndPort = this#org.apache.rocketmq.remoting.netty.NettyRemotingClient:getHostAndPort(addr);
+ $stack9=this.proxyMap;
+ $stack10 = $stack9.entrySet();
+ l3 = $stack10.iterator();
+ label2:$stack6 = l3.hasNext();
+ if ($stack6==0) goto label3;
+ $stack13 = l3.next();
+ entry=(java.util.Map$Entry) $stack13;
+ $stack13 = entry.getKey();
+ addr=(java.lang.String) $stack13;
+ $stack15="0.0.0.0/0";
+ $stack6 = $stack15.equals((java.lang.Object)addr);
+ if ($stack6!=0) goto label4;
+ $stack15=hostAndPort[0];
+ $stack6 = org.apache.rocketmq.remoting.common.RemotingHelper.ipInCIDR($stack15,addr);
+ if ($stack6==0) goto label5;
+ label4:return  entry;
+ label5:goto label2;
+ label3:return  null;
+ } 
+

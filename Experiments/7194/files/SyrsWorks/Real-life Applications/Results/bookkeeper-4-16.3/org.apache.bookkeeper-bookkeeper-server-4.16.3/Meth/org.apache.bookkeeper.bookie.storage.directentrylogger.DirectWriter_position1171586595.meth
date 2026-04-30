@@ -1,0 +1,46 @@
+void org.apache.bookkeeper.bookie.storage.directentrylogger.DirectWriter:position(long offset)
+{
+java.lang.Object l3;
+  java.lang.Throwable l4;
+  java.lang.Object $stack5;
+  org.apache.bookkeeper.bookie.storage.directentrylogger.Buffer $stack6;
+  long $stack7;
+  byte $stack8;
+  java.io.IOException $stack10;
+  org.apache.bookkeeper.common.util.ExceptionMessageHelper $stack11;
+  java.lang.Long $stack13;
+  java.lang.Integer $stack16;
+  java.lang.String $stack18;
+  int $stack20;
+  $stack5=this.bufferLock;
+ l3=$stack5;
+ monitorenter $stack5;
+ label0:$stack6=this.nativeBuffer;
+ if ($stack6==null) goto label1;
+ $stack6=this.nativeBuffer;
+ $stack20 = $stack6.position();
+ if ($stack20<=0) goto label1;
+ this#org.apache.bookkeeper.bookie.storage.directentrylogger.DirectWriter();
+ label1:$stack7=(offset%4096L);
+ $stack8=($stack7 cmp 0L);
+ if ($stack8==0) goto label2;
+ $stack10=new java.io.IOException;
+ $stack11 = org.apache.bookkeeper.common.util.ExceptionMessageHelper.exMsg("offset must be multiple of alignment");
+ $stack13 = java.lang.Long.valueOf(offset);
+ $stack11 = $stack11.kv("offset",(java.lang.Object)$stack13);
+ $stack16 = java.lang.Integer.valueOf(4096);
+ $stack11 = $stack11.kv("alignment",(java.lang.Object)$stack16);
+ $stack18 = $stack11.toString();
+ $stack10#java.io.IOException($stack18);
+ throw $stack10;
+ label2:this.offset=offset;
+ monitorexit $stack5;
+ label3:goto label4;
+ label5:l4 = catch;
+ monitorexit $stack5;
+ label6:throw l4;
+ label4:return;
+ catch java.lang.Throwable: label0 - label3 : label5;
+catch java.lang.Throwable: label5 - label6 : label5;
+} 
+

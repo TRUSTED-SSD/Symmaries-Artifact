@@ -1,0 +1,41 @@
+java.util.List org.apache.rocketmq.namesrv.routeinfo.RouteInfoManager:chooseBrokerAddrsToNotify(java.util.Map brokerAddrMap,java.lang.String offlineBrokerAddr)
+{
+long minBrokerId;
+  java.util.ArrayList brokerAddrList;
+  java.util.Iterator l6;
+  java.lang.Long brokerId;
+  java.util.Collection $stack9;
+  int $stack10;
+  java.util.Set $stack11;
+  java.lang.Object $stack12;
+  boolean $stack18;
+  long $stack20;
+  byte $stack21;
+  if (offlineBrokerAddr!=null) goto label0;
+ $stack10 = brokerAddrMap.size();
+ if ($stack10!=1) goto label1;
+ label0:brokerAddrList=new java.util.ArrayList;
+ $stack9 = brokerAddrMap.values();
+ brokerAddrList#java.util.ArrayList($stack9);
+ return  brokerAddrList;
+ label1:$stack11 = brokerAddrMap.keySet();
+ $stack12 = java.util.Collections.min((java.util.Collection)$stack11);
+ brokerId=(java.lang.Long) $stack12;
+ minBrokerId = brokerId.longValue();
+ brokerAddrList=new java.util.ArrayList;
+ brokerAddrList#java.util.ArrayList();
+ $stack11 = brokerAddrMap.keySet();
+ l6 = $stack11.iterator();
+ label2:$stack18 = l6.hasNext();
+ if ($stack18==0) goto label3;
+ $stack12 = l6.next();
+ brokerId=(java.lang.Long) $stack12;
+ $stack20 = brokerId.longValue();
+ $stack21=($stack20 cmp minBrokerId);
+ if ($stack21==0) goto label4;
+ $stack12 = brokerAddrMap.get((java.lang.Object)brokerId);
+ brokerAddrList.add($stack12);
+ label4:goto label2;
+ label3:return  brokerAddrList;
+ } 
+

@@ -1,0 +1,29 @@
+java.lang.Object org.apache.bookkeeper.bookie.storage.directentrylogger.DirectEntryLogger:lambda$flushCurrent$4(org.apache.bookkeeper.bookie.storage.directentrylogger.WriterWithMetadata flushWriter)
+{
+long start;
+  org.apache.bookkeeper.bookie.storage.directentrylogger.DirectEntryLoggerStats $stack6;
+  org.apache.bookkeeper.stats.OpStatsLogger $stack7;
+  long $stack8;
+  java.util.concurrent.TimeUnit $stack9;
+  java.lang.Throwable $stack11;
+  start = java.lang.System.nanoTime();
+ label0:flushWriter.flush();
+ $stack6=this.stats;
+ $stack7 = $stack6.getWriterFlushStats();
+ $stack8 = java.lang.System.nanoTime();
+ $stack8=($stack8-start);
+ $stack9=java.util.concurrent.TimeUnit.NANOSECONDS;
+ $stack7.registerSuccessfulEvent($stack8,$stack9);
+ label1:goto label2;
+ label3:$stack11 = catch;
+ $stack6=this.stats;
+ $stack7 = $stack6.getWriterFlushStats();
+ $stack8 = java.lang.System.nanoTime();
+ start=($stack8-start);
+ $stack9=java.util.concurrent.TimeUnit.NANOSECONDS;
+ $stack7.registerFailedEvent(start,$stack9);
+ throw $stack11;
+ label2:return  null;
+ catch java.lang.Throwable: label0 - label1 : label3;
+} 
+

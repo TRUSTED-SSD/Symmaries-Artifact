@@ -1,0 +1,35 @@
+void org.apache.bookkeeper.common.concurrent.FutureUtils$ListFutureProcessor:run()
+{
+boolean $stack1;
+  java.util.Iterator $stack2;
+  java.util.function.Function $stack5;
+  java.lang.Object $stack6;
+  java.util.concurrent.CompletableFuture $stack8;
+  java.util.List $stack10;
+  org.slf4j.Logger $stack13;
+  $stack1=this.done;
+ if ($stack1==0) goto label0;
+ $stack13 = org.apache.bookkeeper.common.concurrent.FutureUtils.access$000();
+ $stack1 = $stack13.isDebugEnabled();
+ if ($stack1==0) goto label1;
+ $stack13 = org.apache.bookkeeper.common.concurrent.FutureUtils.access$000();
+ dummyClass.lowSink("ListFutureProcessor is interrupted.");
+$stack13.debug("ListFutureProcessor is interrupted.");
+ label1:return;
+ label0:$stack2=this.itemsIter;
+ $stack1 = $stack2.hasNext();
+ if ($stack1!=0) goto label2;
+ $stack8=this.promise;
+ $stack10=this.results;
+ $stack8.complete((java.lang.Object)$stack10);
+ this.done=1;
+ return;
+ label2:$stack5=this.processFunc;
+ $stack2=this.itemsIter;
+ $stack6 = $stack2.next();
+ $stack6 = $stack5.apply($stack6);
+ $stack8=(java.util.concurrent.CompletableFuture) $stack6;
+ $stack8.whenComplete((java.util.function.BiConsumer)this);
+ return;
+ } 
+

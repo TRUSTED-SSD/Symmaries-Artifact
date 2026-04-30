@@ -1,0 +1,16 @@
+org.apache.rocketmq.remoting.protocol.RemotingCommand org.apache.rocketmq.broker.processor.ConsumerManageProcessor:rewriteResponseForStaticTopic (
+  org.apache.rocketmq.remoting.protocol.header.QueryConsumerOffsetRequestHeader
+    requestHeader,
+  org.apache.rocketmq.remoting.protocol.header.QueryConsumerOffsetResponseHeader
+    responseHeader,
+  org.apache.rocketmq.remoting.protocol.statictopic.TopicQueueMappingContext
+    mappingContext,
+  int code) {
+  guard = tt;
+  ret(level()) = ⊥;
+  ret(obj_level()) = ⊥;
+  ret(obj_level(mappingContext)) = level(mappingContext) ⊔ level(responseHeader) ⊔ obj_level(mappingContext) ⊔ obj_level(responseHeader);
+  ret(obj_level(requestHeader)) = obj_level(requestHeader);
+  ret(obj_level(responseHeader)) = level(mappingContext) ⊔ level(responseHeader) ⊔ obj_level(mappingContext) ⊔ obj_level(responseHeader);
+  ret(obj_level(this)) = level(mappingContext) ⊔ level(responseHeader) ⊔ obj_level(mappingContext) ⊔ obj_level(responseHeader) ⊔ obj_level(this);
+}

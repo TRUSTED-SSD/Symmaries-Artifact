@@ -1,0 +1,35 @@
+void org.apache.bookkeeper.stream.storage.impl.cluster.ZkClusterMetadataStore:close()
+{
+org.apache.bookkeeper.stream.storage.impl.cluster.ZkClusterMetadataStore l1;
+  java.lang.Throwable l3;
+  boolean $stack5;
+  org.apache.curator.framework.recipes.cache.NodeCache $stack6;
+  java.io.IOException $stack10;
+  org.slf4j.Logger $stack11;
+  l1=this;
+ monitorenter this;
+ label0:$stack5=this.closed;
+ if ($stack5==0) goto label1;
+ monitorexit this;
+ label2:return;
+ label1:this.closed=1;
+ $stack6=this.assignmentDataCache;
+ if (null==$stack6) goto label3;
+ label4:$stack6=this.assignmentDataCache;
+ $stack6.close();
+ label5:goto label3;
+ label6:$stack10 = catch;
+ $stack11=org.apache.bookkeeper.stream.storage.impl.cluster.ZkClusterMetadataStore.log;
+ $stack11.warn("Failed to close assignment data cache",(java.lang.Throwable)$stack10);
+ label3:monitorexit this;
+ label7:goto label8;
+ label9:l3 = catch;
+ monitorexit this;
+ label10:throw l3;
+ label8:return;
+ catch java.io.IOException: label4 - label5 : label6;
+catch java.lang.Throwable: label0 - label2 : label9;
+catch java.lang.Throwable: label1 - label7 : label9;
+catch java.lang.Throwable: label9 - label10 : label9;
+} 
+

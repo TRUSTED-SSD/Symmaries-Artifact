@@ -1,0 +1,16 @@
+byte[] org.keycloak.jose.jwe.enc.AesCbcHmacShaEncryptionProvider:encryptBytes(byte[] @contentBytes,byte[] ivBytes,java.security.Key aesKey)
+{
+javax.crypto.Cipher cipher;
+  org.keycloak.common.crypto.CryptoProvider $stack6;
+  javax.crypto.spec.IvParameterSpec $stack8;
+  byte[] contentBytes;
+contentBytes=@contentBytes;
+$stack6 = org.keycloak.common.crypto.CryptoIntegration.getProvider();
+ cipher = $stack6.getAesCbcCipher();
+ $stack8=new javax.crypto.spec.IvParameterSpec;
+ $stack8#javax.crypto.spec.IvParameterSpec(ivBytes);
+ cipher.init(1,aesKey,(java.security.spec.AlgorithmParameterSpec)$stack8);
+ contentBytes = cipher.doFinal(contentBytes);
+ return  contentBytes;
+ } 
+

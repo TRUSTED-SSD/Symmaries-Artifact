@@ -1,0 +1,18 @@
+static byte[] org.keycloak.util.TokenUtil:jweDirectVerifyAndDecode(java.security.Key aesKey,java.security.Key hmacKey,java.lang.String jweStr)
+{
+org.keycloak.jose.jwe.JWE jwe;
+  org.keycloak.jose.jwe.JWEKeyStorage $stack5;
+  org.keycloak.jose.jwe.JWEKeyStorage$KeyUse $stack6;
+  byte[] $stack11;
+  jwe=new org.keycloak.jose.jwe.JWE;
+ jwe#org.keycloak.jose.jwe.JWE();
+ $stack5 = jwe.getKeyStorage();
+ $stack6=org.keycloak.jose.jwe.JWEKeyStorage$KeyUse.ENCRYPTION;
+ $stack5 = $stack5.setCEKKey(aesKey,$stack6);
+ $stack6=org.keycloak.jose.jwe.JWEKeyStorage$KeyUse.SIGNATURE;
+ $stack5.setCEKKey(hmacKey,$stack6);
+ jwe.verifyAndDecodeJwe(jweStr);
+ $stack11 = jwe.getContent();
+ return  $stack11;
+ } 
+

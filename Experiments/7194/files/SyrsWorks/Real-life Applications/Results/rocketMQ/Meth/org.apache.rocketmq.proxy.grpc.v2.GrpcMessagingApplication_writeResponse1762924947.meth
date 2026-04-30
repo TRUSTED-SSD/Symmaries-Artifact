@@ -1,0 +1,17 @@
+void org.apache.rocketmq.proxy.grpc.v2.GrpcMessagingApplication:writeResponse(org.apache.rocketmq.proxy.common.ProxyContext context,java.lang.Object @request,java.lang.Object response,io.grpc.stub.StreamObserver responseObserver,java.lang.Throwable t,java.util.function.Function errorResponseCreator)
+{
+org.apache.rocketmq.proxy.grpc.v2.common.ResponseWriter $stack7;
+  apache.rocketmq.v2.Status $stack9;
+  java.lang.Object request;
+request=@request;
+if (t==null) goto label0;
+ $stack7 = org.apache.rocketmq.proxy.grpc.v2.common.ResponseWriter.getInstance();
+ $stack9 = this.convertExceptionToStatus(t);
+ request = errorResponseCreator.apply((java.lang.Object)$stack9);
+ $stack7.write(responseObserver,request);
+ goto label1;
+ label0:$stack7 = org.apache.rocketmq.proxy.grpc.v2.common.ResponseWriter.getInstance();
+ $stack7.write(responseObserver,response);
+ label1:return;
+ } 
+

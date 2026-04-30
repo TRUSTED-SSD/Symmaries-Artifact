@@ -1,0 +1,34 @@
+org.apache.rocketmq.proxy.common.ProxyContext org.apache.rocketmq.proxy.remoting.activity.AbstractRemotingActivity:createContext(io.netty.channel.ChannelHandlerContext ctx,org.apache.rocketmq.remoting.protocol.RemotingCommand request)
+{
+org.apache.rocketmq.proxy.common.ProxyContext context;
+  java.lang.StringBuilder $stack5;
+  int $stack7;
+  java.lang.String $stack9;
+  org.apache.rocketmq.proxy.common.ProxyContext $stack10;
+  org.apache.rocketmq.remoting.protocol.LanguageCode $stack11;
+  io.netty.channel.Channel $stack14;
+  java.net.SocketAddress $stack17;
+  context = org.apache.rocketmq.proxy.common.ProxyContext.create();
+ $stack5=new java.lang.StringBuilder;
+ $stack5#java.lang.StringBuilder();
+ $stack5 = $stack5.append("Remoting");
+ $stack7 = request.getCode();
+ $stack5 = $stack5.append($stack7);
+ $stack9 = $stack5.toString();
+ $stack10 = context.setAction($stack9);
+ $stack11 = request.getLanguage();
+ $stack9 = $stack11.name();
+ $stack10 = $stack10.setLanguage($stack9);
+ $stack14 = ctx.channel();
+ $stack10 = $stack10.setChannel($stack14);
+ $stack14 = ctx.channel();
+ $stack17 = $stack14.localAddress();
+ $stack9 = org.apache.rocketmq.common.utils.NetworkUtil.socketAddress2String($stack17);
+ $stack10 = $stack10.setLocalAddress($stack9);
+ $stack14 = ctx.channel();
+ $stack17 = $stack14.remoteAddress();
+ $stack9 = org.apache.rocketmq.common.utils.NetworkUtil.socketAddress2String($stack17);
+ $stack10.setRemoteAddress($stack9);
+ return  context;
+ } 
+

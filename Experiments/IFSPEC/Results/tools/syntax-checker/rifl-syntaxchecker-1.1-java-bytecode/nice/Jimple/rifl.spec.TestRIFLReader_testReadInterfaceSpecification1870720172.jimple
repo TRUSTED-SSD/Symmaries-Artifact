@@ -1,0 +1,243 @@
+    public void testReadInterfaceSpecification() throws rifl.spec.RIFLIntegrityException
+    {
+        rifl.spec.TestRIFLReader this;
+        java.util.Set ispec;
+        int i;
+        java.lang.String[] expectedHandle, expectedName;
+        java.lang.Class[] expectedClass;
+        rifl.spec.Assignable last, assign;
+        java.util.Iterator l8;
+        long $stack12;
+        boolean $stack17;
+        java.lang.Object $stack18;
+        java.lang.String $stack19, $stack20;
+        rifl.spec.CatSrcSnk $stack21;
+        java.lang.Class $stack22;
+        java.lang.Boolean $stack28, $stack32;
+        rifl.spec.SrcSnk $stack30;
+        rifl.spec.Category $stack37;
+
+        this := @this: rifl.spec.TestRIFLReader;
+
+        ispec = virtualinvoke this.<rifl.spec.TestRIFLReader: java.util.Set readInterfaceSpec(java.lang.String)>("<riflspec><interfacespec>  <assignable handle=\"cmdinputhandle\"><source>    <returnvalue class=\"Ljava/io/BufferedReader;\"      method=\"readLine()Ljava/lang/String;\" />  </source></assignable>  <assignable handle=\"cmdoutputhandle\"><sink>    <parameter class=\"Ljava/io/PrintStream;\"      method=\"println(Ljava/lang/String;)V\" parameter=\"1\" />  </sink></assignable>  <assignable handle=\"envinputhandle\">    <category name=\"envinput\"><sink>      <parameter class=\"Lde/spp_rs3/Main;\"        method=\"main([Ljava/lang/String;)V\" parameter=\"1\" />  </sink></category></assignable></interfacespec></riflspec>");
+/*180*/
+/*180*/
+
+        i = interfaceinvoke ispec.<java.util.Set: int size()>();
+/*196*/
+
+        $stack12 = (long) i;
+/*196*/
+
+        staticinvoke <org.junit.Assert: void assertEquals(long,long)>(3L, $stack12);
+/*196*/
+
+        i = 0;
+/*197*/
+
+        expectedHandle = newarray (java.lang.String)[3];
+/*198*/
+
+        expectedHandle[0] = "cmdinputhandle";
+/*198*/
+
+        expectedHandle[1] = "cmdoutputhandle";
+/*198*/
+
+        expectedHandle[2] = "envinputhandle";
+/*198*/
+
+        expectedName = newarray (java.lang.String)[3];
+/*199*/
+
+        expectedName[0] = "Ljava/io/BufferedReader;readLine()Ljava/lang/String;";
+/*200*/
+
+        expectedName[1] = "Ljava/io/PrintStream;println(Ljava/lang/String;)V1";
+/*201*/
+
+        expectedName[2] = "envinput";
+/*202*/
+
+        expectedClass = newarray (java.lang.Class)[3];
+/*203*/
+
+        expectedClass[0] = class "Lrifl/spec/SrcSnk;";
+/*203*/
+
+        expectedClass[1] = class "Lrifl/spec/SrcSnk;";
+/*203*/
+
+        expectedClass[2] = class "Lrifl/spec/Category;";
+/*203*/
+
+        last = null;
+/*204*/
+
+        l8 = interfaceinvoke ispec.<java.util.Set: java.util.Iterator iterator()>();
+/*205*/
+/*205*/
+
+        goto label5;
+/*205*/
+
+     label1:
+        $stack18 = interfaceinvoke l8.<java.util.Iterator: java.lang.Object next()>();
+/*205*/
+
+        assign = (rifl.spec.Assignable) $stack18;
+/*205*/
+
+        $stack19 = expectedHandle[i];
+/*206*/
+
+        $stack20 = virtualinvoke assign.<rifl.spec.Assignable: java.lang.String getName()>();
+/*206*/
+
+        staticinvoke <org.junit.Assert: void assertEquals(java.lang.Object,java.lang.Object)>($stack19, $stack20);
+/*206*/
+
+        $stack22 = expectedClass[i];
+/*207*/
+
+        $stack21 = assign.<rifl.spec.Assignable: rifl.spec.CatSrcSnk catSrcSnk>;
+/*207*/
+
+        $stack17 = virtualinvoke $stack22.<java.lang.Class: boolean isInstance(java.lang.Object)>($stack21);
+/*207*/
+
+        staticinvoke <org.junit.Assert: void assertTrue(boolean)>($stack17);
+/*207*/
+
+        $stack19 = expectedName[i];
+/*208*/
+
+        $stack21 = assign.<rifl.spec.Assignable: rifl.spec.CatSrcSnk catSrcSnk>;
+/*208*/
+
+        $stack20 = virtualinvoke $stack21.<rifl.spec.CatSrcSnk: java.lang.String getName()>();
+/*208*/
+
+        staticinvoke <org.junit.Assert: void assertEquals(java.lang.Object,java.lang.Object)>($stack19, $stack20);
+/*208*/
+
+        if last == null goto label4;
+/*209*/
+
+        if i != 1 goto label2;
+/*210*/
+
+        $stack17 = 1;
+/*205*/
+
+        goto label3;
+/*205*/
+
+     label2:
+        $stack17 = 0;
+/*205*/
+
+     label3:
+        $stack28 = staticinvoke <java.lang.Boolean: java.lang.Boolean valueOf(boolean)>($stack17);
+/*210*/
+
+        $stack21 = last.<rifl.spec.Assignable: rifl.spec.CatSrcSnk catSrcSnk>;
+/*210*/
+
+        $stack30 = (rifl.spec.SrcSnk) $stack21;
+/*210*/
+
+        $stack17 = virtualinvoke $stack30.<rifl.spec.SrcSnk: boolean isSource()>();
+/*210*/
+
+        $stack32 = staticinvoke <java.lang.Boolean: java.lang.Boolean valueOf(boolean)>($stack17);
+/*210*/
+
+        staticinvoke <org.junit.Assert: void assertEquals(java.lang.Object,java.lang.Object)>($stack28, $stack32);
+/*210*/
+
+     label4:
+        i = i + 1;
+/*212*/
+
+        last = assign;
+/*213*/
+/*213*/
+
+     label5:
+        $stack17 = interfaceinvoke l8.<java.util.Iterator: boolean hasNext()>();
+/*205*/
+
+        if $stack17 != 0 goto label1;
+/*205*/
+
+        $stack21 = last.<rifl.spec.Assignable: rifl.spec.CatSrcSnk catSrcSnk>;
+/*215*/
+
+        $stack37 = (rifl.spec.Category) $stack21;
+/*215*/
+
+        ispec = $stack37.<rifl.spec.Category: java.util.Set catSrcSnks>;
+/*215*/
+
+        i = interfaceinvoke ispec.<java.util.Set: int size()>();
+/*215*/
+
+        $stack12 = (long) i;
+/*215*/
+
+        staticinvoke <org.junit.Assert: void assertEquals(long,long)>(1L, $stack12);
+/*215*/
+
+        $stack21 = last.<rifl.spec.Assignable: rifl.spec.CatSrcSnk catSrcSnk>;
+/*216*/
+
+        $stack37 = (rifl.spec.Category) $stack21;
+/*216*/
+
+        ispec = $stack37.<rifl.spec.Category: java.util.Set catSrcSnks>;
+/*216*/
+
+        l8 = interfaceinvoke ispec.<java.util.Set: java.util.Iterator iterator()>();
+/*216*/
+
+        $stack18 = interfaceinvoke l8.<java.util.Iterator: java.lang.Object next()>();
+/*216*/
+
+        $stack30 = (rifl.spec.SrcSnk) $stack18;
+/*216*/
+
+        $stack17 = virtualinvoke $stack30.<rifl.spec.SrcSnk: boolean isSource()>();
+/*216*/
+
+        staticinvoke <org.junit.Assert: void assertFalse(boolean)>($stack17);
+/*216*/
+
+        $stack21 = last.<rifl.spec.Assignable: rifl.spec.CatSrcSnk catSrcSnk>;
+/*218*/
+
+        $stack37 = (rifl.spec.Category) $stack21;
+/*218*/
+
+        ispec = $stack37.<rifl.spec.Category: java.util.Set catSrcSnks>;
+/*218*/
+
+        l8 = interfaceinvoke ispec.<java.util.Set: java.util.Iterator iterator()>();
+/*218*/
+
+        $stack18 = interfaceinvoke l8.<java.util.Iterator: java.lang.Object next()>();
+/*218*/
+
+        $stack21 = (rifl.spec.CatSrcSnk) $stack18;
+/*218*/
+
+        $stack19 = virtualinvoke $stack21.<rifl.spec.CatSrcSnk: java.lang.String getName()>();
+/*218*/
+
+        staticinvoke <org.junit.Assert: void assertEquals(java.lang.Object,java.lang.Object)>("Lde/spp_rs3/Main;main([Ljava/lang/String;)V1", $stack19);
+/*217*/
+
+        return;
+/*219*/
+    }
+

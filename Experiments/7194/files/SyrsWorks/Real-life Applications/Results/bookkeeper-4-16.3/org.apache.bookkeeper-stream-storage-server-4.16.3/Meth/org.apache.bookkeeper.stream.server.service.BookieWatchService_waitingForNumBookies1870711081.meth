@@ -1,0 +1,48 @@
+static void org.apache.bookkeeper.stream.server.service.BookieWatchService:waitingForNumBookies(org.apache.bookkeeper.discover.RegistrationClient client,int minNumBookies)
+{
+com.google.common.base.Stopwatch stopwatch;
+  java.util.Set bookies;
+  java.util.concurrent.CompletableFuture $stack5;
+  java.lang.Object $stack6;
+  org.apache.bookkeeper.versioning.Versioned $stack7;
+  int $stack9;
+  java.util.concurrent.TimeUnit $stack10;
+  java.lang.Object[] $stack15;
+  org.slf4j.Logger $stack16;
+  java.lang.Integer $stack20;
+  long $stack23;
+  java.lang.Long $stack24;
+  stopwatch = com.google.common.base.Stopwatch.createStarted();
+ $stack5 = client.getWritableBookies();
+ $stack6 = org.apache.bookkeeper.common.concurrent.FutureUtils.result($stack5);
+ $stack7=(org.apache.bookkeeper.versioning.Versioned) $stack6;
+ $stack6 = $stack7.getValue();
+ bookies=(java.util.Set) $stack6;
+ label0:$stack9 = bookies.size();
+ if ($stack9>=minNumBookies) goto label1;
+ $stack10=java.util.concurrent.TimeUnit.SECONDS;
+ $stack10.sleep(1L);
+ $stack5 = client.getWritableBookies();
+ $stack6 = org.apache.bookkeeper.common.concurrent.FutureUtils.result($stack5);
+ $stack7=(org.apache.bookkeeper.versioning.Versioned) $stack6;
+ $stack6 = $stack7.getValue();
+ bookies=(java.util.Set) $stack6;
+ $stack16=org.apache.bookkeeper.stream.server.service.BookieWatchService.log;
+ $stack15=new java.lang.Object[3];
+ $stack9 = bookies.size();
+ $stack20 = java.lang.Integer.valueOf($stack9);
+ $stack15[0]=$stack20;
+ $stack10=java.util.concurrent.TimeUnit.SECONDS;
+ $stack23 = stopwatch.elapsed($stack10);
+ $stack24 = java.lang.Long.valueOf($stack23);
+ $stack15[1]=$stack24;
+ $stack9 = bookies.size();
+ $stack9=(minNumBookies-$stack9);
+ $stack20 = java.lang.Integer.valueOf($stack9);
+ $stack15[2]=$stack20;
+ dummyClass.lowSink("Only {} bookies are live since {} seconds elapsed, wait for another {} bookies for another 1 second");
+$stack16.info("Only {} bookies are live since {} seconds elapsed, wait for another {} bookies for another 1 second",$stack15);
+ goto label0;
+ label1:return;
+ } 
+

@@ -1,0 +1,16 @@
+org.apache.kerby.kerberos.kerb.request.KrbIdentity org.apache.kerby.kerberos.kerb.identity.CacheableIdentityService:addIdentity(org.apache.kerby.kerberos.kerb.request.KrbIdentity @identity)
+{
+org.apache.kerby.kerberos.kerb.identity.IdentityService $stack3;
+  java.util.Map $stack5;
+  java.lang.String $stack6;
+  org.apache.kerby.kerberos.kerb.request.KrbIdentity identity;
+identity=@identity;
+$stack3=this.underlying;
+ identity = $stack3.addIdentity(identity);
+ if (identity==null) goto label0;
+ $stack5=this.idCache;
+ $stack6 = identity.getPrincipalName();
+ $stack5.put((java.lang.Object)$stack6,(java.lang.Object)identity);
+ label0:return  identity;
+ } 
+

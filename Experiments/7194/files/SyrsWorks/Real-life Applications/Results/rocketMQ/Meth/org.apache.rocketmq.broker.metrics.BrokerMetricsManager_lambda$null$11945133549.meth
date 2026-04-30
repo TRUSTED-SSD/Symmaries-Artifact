@@ -1,0 +1,36 @@
+static void org.apache.rocketmq.broker.metrics.BrokerMetricsManager:lambda$null$11(io.opentelemetry.api.metrics.ObservableLongMeasurement measurement,org.apache.rocketmq.broker.metrics.ConsumerAttr attr,java.lang.Integer count)
+{
+io.opentelemetry.api.common.Attributes attributes;
+  io.opentelemetry.api.common.AttributesBuilder $stack4;
+  java.lang.String $stack5;
+  org.apache.rocketmq.remoting.protocol.LanguageCode $stack7;
+  int $stack12;
+  org.apache.rocketmq.remoting.protocol.heartbeat.ConsumeType $stack17;
+  boolean $stack25;
+  long $stack29;
+  $stack4 = org.apache.rocketmq.broker.metrics.BrokerMetricsManager.newAttributesBuilder();
+ $stack5=attr.group;
+ $stack4 = $stack4.put("consumer_group",$stack5);
+ $stack7=attr.language;
+ $stack5 = $stack7.name();
+ $stack5 = $stack5.toLowerCase();
+ $stack4 = $stack4.put("language",$stack5);
+ $stack12=attr.version;
+ $stack5 = org.apache.rocketmq.common.MQVersion.getVersionDesc($stack12);
+ $stack5 = $stack5.toLowerCase();
+ $stack4 = $stack4.put("version",$stack5);
+ $stack17=attr.consumeMode;
+ $stack5 = $stack17.getTypeCN();
+ $stack5 = $stack5.toLowerCase();
+ $stack4 = $stack4.put("consume_mode",$stack5);
+ $stack4 = $stack4.put("protocol_type","remoting");
+ $stack5=attr.group;
+ $stack25 = org.apache.rocketmq.broker.metrics.BrokerMetricsManager.isSystemGroup($stack5);
+ $stack4 = $stack4.put("is_system",$stack25);
+ attributes = $stack4.build();
+ $stack12 = count.intValue();
+ $stack29=(long) $stack12;
+ measurement.record($stack29,attributes);
+ return;
+ } 
+

@@ -1,0 +1,22 @@
+org.apache.kerby.kerberos.kerb.type.base.EncryptionKey org.apache.kerby.kerberos.kerb.KrbInputStream:readKey()
+{
+short eType;
+  org.apache.kerby.kerberos.kerb.type.base.EncryptionType encType;
+  byte[] keyData;
+  java.lang.Integer $stack6;
+  org.apache.kerby.kerberos.kerb.type.base.EncryptionType $stack9;
+  org.apache.kerby.kerberos.kerb.type.base.EncryptionKey $stack10;
+  eType = this.readShort();
+dummyClass.highSourceMut(eType);
+ $stack6 = java.lang.Integer.valueOf((int)eType);
+ encType = org.apache.kerby.kerberos.kerb.type.base.EncryptionType.fromValue($stack6);
+ keyData = this.readCountedOctets();
+ $stack9=org.apache.kerby.kerberos.kerb.type.base.EncryptionType.NONE;
+ if (encType==$stack9) goto label0;
+ if (keyData!=null) goto label1;
+ label0:return  null;
+ label1:$stack10=new org.apache.kerby.kerberos.kerb.type.base.EncryptionKey;
+ $stack10#org.apache.kerby.kerberos.kerb.type.base.EncryptionKey(encType,keyData);
+ return  $stack10;
+ } 
+

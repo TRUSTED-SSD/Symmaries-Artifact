@@ -1,0 +1,12 @@
+org.apache.rocketmq.proxy.common.MessageReceiptHandle org.apache.rocketmq.proxy.processor.ReceiptHandleProcessor:removeReceiptHandle (
+  org.apache.rocketmq.proxy.processor.ReceiptHandleProcessor$ReceiptHandleGroupKey
+    key,
+  java.lang.String msgID, java.lang.String receiptHandle) {
+  guard = tt;
+  ret(level()) = level(key) ⊔ level(msgID) ⊔ level(receiptHandle) ⊔ level(this) ⊔ obj_level(key) ⊔ obj_level(receiptHandle) ⊔ obj_level(this);
+  ret(obj_level()) = level(key) ⊔ level(msgID) ⊔ level(receiptHandle) ⊔ level(this) ⊔ obj_level(key) ⊔ obj_level(receiptHandle) ⊔ obj_level(this);
+  ret(obj_level(key)) = level(key) ⊔ level(this) ⊔ obj_level(key) ⊔ obj_level(this);
+  ret(obj_level(msgID)) = level(key) ⊔ level(this) ⊔ obj_level(key) ⊔ obj_level(msgID) ⊔ obj_level(this);
+  ret(obj_level(receiptHandle)) = level(key) ⊔ level(this) ⊔ obj_level(key) ⊔ obj_level(receiptHandle) ⊔ obj_level(this);
+  ret(obj_level(this)) = level(key) ⊔ level(this) ⊔ obj_level(key) ⊔ obj_level(this);
+}

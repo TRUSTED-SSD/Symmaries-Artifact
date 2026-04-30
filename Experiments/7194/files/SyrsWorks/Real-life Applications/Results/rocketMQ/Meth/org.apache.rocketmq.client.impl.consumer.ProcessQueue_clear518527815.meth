@@ -1,0 +1,39 @@
+void org.apache.rocketmq.client.impl.consumer.ProcessQueue:clear()
+{
+java.util.concurrent.locks.ReadWriteLock $stack2;
+  java.util.concurrent.locks.Lock $stack3;
+  java.util.TreeMap $stack4;
+  java.util.concurrent.atomic.AtomicLong $stack6;
+  java.lang.InterruptedException $stack10;
+  org.apache.rocketmq.logging.org.slf4j.Logger $stack11;
+  java.lang.Throwable $stack12;
+  label0:$stack2=this.treeMapLock;
+ $stack3 = $stack2.writeLock();
+ $stack3.lockInterruptibly();
+ label1:$stack4=this.msgTreeMap;
+ $stack4.clear();
+ $stack4=this.consumingMsgOrderlyTreeMap;
+ $stack4.clear();
+ $stack6=this.msgCount;
+ $stack6.set(0L);
+ $stack6=this.msgSize;
+ $stack6.set(0L);
+ this.queueOffsetMax=0L;
+ label2:$stack2=this.treeMapLock;
+ $stack3 = $stack2.writeLock();
+ $stack3.unlock();
+ goto label3;
+ label4:$stack12 = catch;
+ $stack2=this.treeMapLock;
+ $stack3 = $stack2.writeLock();
+ $stack3.unlock();
+ throw $stack12;
+ label3:goto label5;
+ label6:$stack10 = catch;
+ $stack11=this.log;
+ $stack11.error("rollback exception",(java.lang.Throwable)$stack10);
+ label5:return;
+ catch java.lang.Throwable: label1 - label2 : label4;
+catch java.lang.InterruptedException: label0 - label3 : label6;
+} 
+

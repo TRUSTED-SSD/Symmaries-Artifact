@@ -1,0 +1,41 @@
+void java.util.WeakHashMap:transfer(java.util.WeakHashMap$Entry[] r1,java.util.WeakHashMap$Entry[] r2)
+{
+java.util.WeakHashMap$Entry r3;
+  java.lang.Object r4;
+  int i0;
+  int $i1;
+  int $i2;
+  int $i3;
+  java.util.WeakHashMap$Entry $r5;
+  int $i4;
+  int $i5;
+  int i6;
+  java.util.WeakHashMap$Entry r6;
+  i6=0;
+ label0:$i1=#r1;
+ if (i6>=$i1) goto label1;
+ r6=r1[i6];
+ r1[i6]=null;
+ label2:if (r6==null) goto label3;
+ r3=r6.next;
+ r4 = r6.get();
+ if (r4!=null) goto label4;
+ r6.next=null;
+ r6.value=null;
+ $i4=this.size;
+ $i5=($i4-1);
+ this.size=$i5;
+ goto label5;
+ label4:$i3=r6.hash;
+ $i2=#r2;
+ i0 = java.util.WeakHashMap.indexFor($i3,$i2);
+ $r5=r2[i0];
+ r6.next=$r5;
+ r2[i0]=r6;
+ label5:r6=r3;
+ goto label2;
+ label3:i6=(i6+1);
+ goto label0;
+ label1:return;
+ }  
+

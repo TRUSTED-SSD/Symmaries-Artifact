@@ -1,0 +1,23 @@
+static void org.apache.kerby.xdr.util.IOUtil:readInputStream(java.io.InputStream in,byte[] buf)
+{
+int toRead;
+  int off;
+  int ret;
+  java.io.IOException $stack7;
+  toRead=#buf;
+ off=0;
+ label0:if (toRead<=0) goto label1;
+ dummyClass.highSourceMut(buf);
+ret = in.read(buf,off,toRead);
+dummyClass.highSourceMut(ret);
+ if (ret>=0) goto label2;
+ $stack7=new java.io.IOException;
+ $stack7#java.io.IOException("Bad inputStream, premature EOF");
+ throw $stack7;
+ label2:toRead=(toRead-ret);
+ off=(off+ret);
+ goto label0;
+ label1:in.close();
+ return;
+ } 
+

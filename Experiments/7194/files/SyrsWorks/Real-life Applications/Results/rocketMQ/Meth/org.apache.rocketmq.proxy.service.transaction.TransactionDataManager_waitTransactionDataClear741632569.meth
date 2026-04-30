@@ -1,0 +1,24 @@
+void org.apache.rocketmq.proxy.service.transaction.TransactionDataManager:waitTransactionDataClear()
+{
+long waitMs;
+  java.util.concurrent.atomic.AtomicLong $stack3;
+  long $stack5;
+  org.apache.rocketmq.proxy.config.ProxyConfig $stack8;
+  byte $stack11;
+  java.util.concurrent.TimeUnit $stack12;
+  this#org.apache.rocketmq.proxy.service.transaction.TransactionDataManager();
+ $stack3=this.maxTransactionDataExpireTime;
+ waitMs = $stack3.get();
+ $stack5 = java.lang.System.currentTimeMillis();
+ waitMs=(waitMs-$stack5);
+ waitMs = java.lang.Math.max(waitMs,0L);
+ $stack8 = org.apache.rocketmq.proxy.config.ConfigurationManager.getProxyConfig();
+ $stack5 = $stack8.getTransactionDataMaxWaitClearMillis();
+ waitMs = java.lang.Math.min(waitMs,$stack5);
+ $stack11=(waitMs cmp 0L);
+ if ($stack11<=0) goto label0;
+ $stack12=java.util.concurrent.TimeUnit.MILLISECONDS;
+ $stack12.sleep(waitMs);
+ label0:return;
+ } 
+

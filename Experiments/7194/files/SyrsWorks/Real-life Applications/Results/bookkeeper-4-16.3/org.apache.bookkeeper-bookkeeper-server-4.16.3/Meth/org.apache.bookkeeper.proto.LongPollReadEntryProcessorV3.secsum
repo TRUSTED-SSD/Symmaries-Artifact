@@ -1,0 +1,21 @@
+org.apache.bookkeeper.proto.LongPollReadEntryProcessorV3 (org.apache.bookkeeper.proto.BookkeeperProtocol$Request
+                                                            request,
+                                                          org.apache.bookkeeper.proto.BookieRequestHandler
+                                                            requestHandler,
+                                                          org.apache.bookkeeper.proto.BookieRequestProcessor
+                                                            requestProcessor,
+                                                          java.util.concurrent.ExecutorService
+                                                            fenceThreadPool,
+                                                          java.util.concurrent.ExecutorService
+                                                            longPollThreadPool,
+                                                          io.netty.util.HashedWheelTimer
+                                                            requestTimer) {
+  guard = pc ⊔ level(request) ⊔ level(requestHandler) ⊔ level(requestProcessor) ⊔ level(this) ⊔ obj_level(request) ⊔ obj_level(requestHandler) ⊔ obj_level(requestProcessor) ⊔ obj_level(this) = ⊥;
+  ret(obj_level(fenceThreadPool)) = level(fenceThreadPool) ⊔ obj_level(fenceThreadPool);
+  ret(obj_level(longPollThreadPool)) = level(fenceThreadPool) ⊔ obj_level(fenceThreadPool);
+  ret(obj_level(request)) = level(fenceThreadPool) ⊔ obj_level(fenceThreadPool);
+  ret(obj_level(requestHandler)) = level(fenceThreadPool) ⊔ level(longPollThreadPool) ⊔ level(requestTimer) ⊔ obj_level(fenceThreadPool) ⊔ obj_level(requestTimer);
+  ret(obj_level(requestProcessor)) = level(fenceThreadPool) ⊔ level(longPollThreadPool) ⊔ level(requestTimer) ⊔ obj_level(fenceThreadPool) ⊔ obj_level(requestTimer);
+  ret(obj_level(requestTimer)) = level(fenceThreadPool) ⊔ obj_level(fenceThreadPool) ⊔ obj_level(requestTimer);
+  ret(obj_level(this)) = level(fenceThreadPool) ⊔ level(longPollThreadPool) ⊔ level(requestTimer) ⊔ obj_level(fenceThreadPool) ⊔ obj_level(requestTimer);
+}

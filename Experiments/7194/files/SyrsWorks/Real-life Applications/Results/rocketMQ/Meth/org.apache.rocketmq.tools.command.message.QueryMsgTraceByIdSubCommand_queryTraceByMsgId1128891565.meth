@@ -1,0 +1,28 @@
+void org.apache.rocketmq.tools.command.message.QueryMsgTraceByIdSubCommand:queryTraceByMsgId(org.apache.rocketmq.tools.admin.DefaultMQAdminExt admin,java.lang.String traceTopic,java.lang.String msgId)
+{
+org.apache.rocketmq.client.QueryResult queryResult;
+  java.util.List messageList;
+  java.util.ArrayList traceViews;
+  java.util.Iterator l7;
+  org.apache.rocketmq.common.message.MessageExt message;
+  long $stack12;
+  boolean $stack17;
+  java.lang.Object $stack18;
+  admin.start();
+ $stack12 = java.lang.System.currentTimeMillis();
+ queryResult = admin.queryMessage(traceTopic,msgId,64,0L,$stack12);
+ messageList = queryResult.getMessageList();
+ traceViews=new java.util.ArrayList;
+ traceViews#java.util.ArrayList();
+ l7 = messageList.iterator();
+ label0:$stack17 = l7.hasNext();
+ if ($stack17==0) goto label1;
+ $stack18 = l7.next();
+ message=(org.apache.rocketmq.common.message.MessageExt) $stack18;
+ messageList = org.apache.rocketmq.client.trace.TraceView.decodeFromTraceTransData(msgId,message);
+ traceViews.addAll((java.util.Collection)messageList);
+ goto label0;
+ label1:this#org.apache.rocketmq.tools.command.message.QueryMsgTraceByIdSubCommand:printMessageTrace((java.util.List)traceViews);
+ return;
+ } 
+

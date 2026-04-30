@@ -1,0 +1,21 @@
+boolean org.apache.rocketmq.tieredstore.provider.TieredFileSegment:commit()
+{
+java.lang.Boolean result;
+  boolean $stack2;
+  java.util.concurrent.CompletableFuture $stack3;
+  java.lang.Object $stack4;
+  $stack2=this.closed;
+ if ($stack2==0) goto label0;
+ return  0;
+ label0:$stack3 = this.commitAsync();
+ $stack4 = $stack3.join();
+ result=(java.lang.Boolean) $stack4;
+ $stack2 = result.booleanValue();
+ if ($stack2!=0) goto label1;
+ $stack3=this.inflightCommitRequest;
+ $stack4 = $stack3.join();
+ result=(java.lang.Boolean) $stack4;
+ label1:$stack2 = result.booleanValue();
+ return  $stack2;
+ } 
+

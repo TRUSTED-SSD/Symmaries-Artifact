@@ -1,0 +1,10 @@
+java.net.URL org.apache.rocketmq.common.logging.DefaultJoranConfiguratorExt:getResource (
+  java.lang.String filename, java.lang.ClassLoader myClassLoader,
+  boolean updateStatus) {
+  guard = tt;
+  ret(level()) = pc ⊔ level(filename) ⊔ level(myClassLoader) ⊔ obj_level(filename) ⊔ obj_level(myClassLoader);
+  ret(obj_level()) = pc ⊔ level(filename) ⊔ level(myClassLoader) ⊔ obj_level(filename) ⊔ obj_level(myClassLoader);
+  ret(obj_level(filename)) = pc ⊔ level(filename) ⊔ level(myClassLoader) ⊔ obj_level(filename) ⊔ obj_level(myClassLoader);
+  ret(obj_level(myClassLoader)) = if level(updateStatus) = ⊥ then pc ⊔ level(filename) ⊔ level(myClassLoader) ⊔ obj_level(filename) ⊔ obj_level(myClassLoader) else if level(updateStatus) = ⊤ ∧ level(filename) ⊔ level(myClassLoader) ⊔ obj_level(filename) ⊔ obj_level(myClassLoader) ⊔ obj_level(this) = ⊥ then pc else level(updateStatus) ⊓ (level(filename) ⊔ level(myClassLoader) ⊔ obj_level(filename) ⊔ obj_level(myClassLoader) ⊔ obj_level(this));
+  ret(obj_level(this)) = pc ⊔ level(filename) ⊔ level(myClassLoader) ⊔ obj_level(filename) ⊔ obj_level(myClassLoader) ⊔ obj_level(this);
+}

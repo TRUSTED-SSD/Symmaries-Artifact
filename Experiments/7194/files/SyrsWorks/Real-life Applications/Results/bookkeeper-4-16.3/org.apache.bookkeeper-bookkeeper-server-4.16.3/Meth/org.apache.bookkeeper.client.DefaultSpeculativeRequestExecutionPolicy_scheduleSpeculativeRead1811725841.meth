@@ -1,0 +1,31 @@
+java.util.concurrent.ScheduledFuture org.apache.bookkeeper.client.DefaultSpeculativeRequestExecutionPolicy:scheduleSpeculativeRead(java.util.concurrent.ScheduledExecutorService scheduler,org.apache.bookkeeper.client.SpeculativeRequestExecutor requestExecutor,int speculativeRequestTimeout)
+{
+org.apache.bookkeeper.client.DefaultSpeculativeRequestExecutionPolicy$1 $stack5;
+  java.util.concurrent.TimeUnit $stack6;
+  long $stack7;
+  java.util.concurrent.ScheduledFuture $stack8;
+  java.util.concurrent.RejectedExecutionException $stack9;
+  boolean $stack10;
+  java.lang.Object[] $stack11;
+  org.slf4j.Logger $stack12;
+  java.lang.Integer $stack15;
+  label0:$stack5=new org.apache.bookkeeper.client.DefaultSpeculativeRequestExecutionPolicy$1;
+ $stack5#org.apache.bookkeeper.client.DefaultSpeculativeRequestExecutionPolicy$1(this,requestExecutor,scheduler,speculativeRequestTimeout);
+ $stack7=(long) speculativeRequestTimeout;
+ $stack6=java.util.concurrent.TimeUnit.MILLISECONDS;
+ $stack8 = scheduler.schedule((java.lang.Runnable)$stack5,$stack7,$stack6);
+ label1:return  $stack8;
+ label2:$stack9 = catch;
+ $stack10 = scheduler.isShutdown();
+ if ($stack10!=0) goto label3;
+ $stack12=org.apache.bookkeeper.client.DefaultSpeculativeRequestExecutionPolicy.LOG;
+ $stack11=new java.lang.Object[3];
+ $stack11[0]=requestExecutor;
+ $stack15 = java.lang.Integer.valueOf(speculativeRequestTimeout);
+ $stack11[1]=$stack15;
+ $stack11[2]=$stack9;
+ $stack12.warn("Failed to schedule speculative request for {}, speculativeReadTimeout = {} : ",$stack11);
+ label3:return  null;
+ catch java.util.concurrent.RejectedExecutionException: label0 - label1 : label2;
+} 
+

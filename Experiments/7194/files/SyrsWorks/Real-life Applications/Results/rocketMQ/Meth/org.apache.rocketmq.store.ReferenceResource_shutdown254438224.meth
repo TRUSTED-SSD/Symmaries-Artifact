@@ -1,0 +1,30 @@
+void org.apache.rocketmq.store.ReferenceResource:shutdown(long intervalForcibly)
+{
+boolean $stack3;
+  long $stack4;
+  byte $stack5;
+  long $stack7;
+  java.util.concurrent.atomic.AtomicLong $stack10;
+  $stack3=this.available;
+ if ($stack3==0) goto label0;
+ this.available=0;
+ intervalForcibly = java.lang.System.currentTimeMillis();
+ this.firstShutdownTimestamp=intervalForcibly;
+ this.release();
+ goto label1;
+ label0:$stack4 = this.getRefCount();
+ $stack5=($stack4 cmp 0L);
+ if ($stack5<=0) goto label1;
+ $stack4 = java.lang.System.currentTimeMillis();
+ $stack7=this.firstShutdownTimestamp;
+ $stack4=($stack4-$stack7);
+ $stack5=($stack4 cmp intervalForcibly);
+ if ($stack5<0) goto label1;
+ $stack10=this.refCount;
+ intervalForcibly = this.getRefCount();
+ intervalForcibly=(-1000L-intervalForcibly);
+ $stack10.set(intervalForcibly);
+ this.release();
+ label1:return;
+ } 
+

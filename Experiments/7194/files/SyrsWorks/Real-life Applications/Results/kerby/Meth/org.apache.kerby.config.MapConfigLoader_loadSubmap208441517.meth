@@ -1,0 +1,36 @@
+void org.apache.kerby.config.MapConfigLoader:loadSubmap(org.apache.kerby.config.ConfigImpl config,java.util.Map @map)
+{
+java.util.Iterator l3;
+  java.util.Map$Entry entry;
+  java.lang.String key;
+  java.lang.Object value;
+  org.apache.kerby.config.ConfigImpl subConfig;
+  java.util.Set $stack8;
+  boolean $stack10;
+  java.lang.String $stack19;
+  java.util.Map map;
+map=@map;
+$stack8 = map.entrySet();
+ l3 = $stack8.iterator();
+ label0:$stack10 = l3.hasNext();
+ if ($stack10==0) goto label1;
+ value = l3.next();
+ entry=(java.util.Map$Entry) value;
+ value = entry.getKey();
+ key=(java.lang.String) value;
+ value = entry.getValue();
+ $stack10=value instanceof java.lang.String;
+ if ($stack10==0) goto label2;
+ $stack19=(java.lang.String) value;
+ config.set(key,$stack19);
+ label2:$stack10=value instanceof java.util.Map;
+ if ($stack10==0) goto label3;
+ subConfig=new org.apache.kerby.config.ConfigImpl;
+ subConfig#org.apache.kerby.config.ConfigImpl(key);
+ map=(java.util.Map) value;
+ this#org.apache.kerby.config.MapConfigLoader(subConfig,map);
+ config.add((org.apache.kerby.config.Config)subConfig);
+ label3:goto label0;
+ label1:return;
+ } 
+

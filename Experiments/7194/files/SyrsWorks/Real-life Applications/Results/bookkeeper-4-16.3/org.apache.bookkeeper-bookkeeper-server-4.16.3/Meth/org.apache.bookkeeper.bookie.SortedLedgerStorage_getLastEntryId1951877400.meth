@@ -1,0 +1,16 @@
+io.netty.buffer.ByteBuf org.apache.bookkeeper.bookie.SortedLedgerStorage:getLastEntryId(long ledgerId)
+{
+org.apache.bookkeeper.bookie.EntryKeyValue kv;
+  org.apache.bookkeeper.bookie.EntryMemTable $stack4;
+  org.apache.bookkeeper.bookie.InterleavedLedgerStorage $stack6;
+  io.netty.buffer.ByteBuf $stack7;
+  $stack4=this.memTable;
+ kv = $stack4.getLastEntry(ledgerId);
+ if (null==kv) goto label0;
+ $stack7 = kv.getValueAsByteBuffer();
+ return  $stack7;
+ label0:$stack6=this.interleavedLedgerStorage;
+ $stack7 = $stack6.getEntry(ledgerId,-1L);
+ return  $stack7;
+ } 
+

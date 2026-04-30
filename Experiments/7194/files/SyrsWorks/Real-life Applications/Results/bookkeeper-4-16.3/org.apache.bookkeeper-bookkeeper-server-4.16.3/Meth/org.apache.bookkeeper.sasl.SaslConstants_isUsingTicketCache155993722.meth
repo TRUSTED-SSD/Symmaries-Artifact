@@ -1,0 +1,34 @@
+static boolean org.apache.bookkeeper.sasl.SaslConstants:isUsingTicketCache(java.lang.String @configurationEntry)
+{
+javax.security.auth.login.AppConfigurationEntry[] entries;
+  int l3;
+  int l4;
+  javax.security.auth.login.AppConfigurationEntry entry;
+  javax.security.auth.login.Configuration $stack7;
+  java.util.Map $stack9;
+  java.lang.Object $stack10;
+  boolean $stack15;
+  java.lang.String configurationEntry;
+configurationEntry=@configurationEntry;
+$stack7 = javax.security.auth.login.Configuration.getConfiguration();
+ entries = $stack7.getAppConfigurationEntry(configurationEntry);
+ if (entries!=null) goto label0;
+ return  0;
+ label0:l3=#entries;
+ l4=0;
+ label1:if (l4>=l3) goto label2;
+ entry=entries[l4];
+ $stack9 = entry.getOptions();
+ $stack10 = $stack9.get((java.lang.Object)"useTicketCache");
+ if ($stack10==null) goto label3;
+ $stack9 = entry.getOptions();
+ $stack10 = $stack9.get((java.lang.Object)"useTicketCache");
+ configurationEntry=(java.lang.String) $stack10;
+ $stack15 = configurationEntry.equals((java.lang.Object)"true");
+ if ($stack15==0) goto label3;
+ return  1;
+ label3:l4=(l4+1);
+ goto label1;
+ label2:return  0;
+ } 
+

@@ -1,0 +1,19 @@
+void org.apache.bookkeeper.clients.SimpleClientBase:closeAsyncOnce(java.util.concurrent.CompletableFuture closeFuture)
+{
+boolean $stack2;
+  org.apache.bookkeeper.common.util.SharedResourceManager $stack3;
+  org.apache.bookkeeper.common.util.OrderedScheduler $stack4;
+  org.apache.bookkeeper.common.util.SharedResourceManager$Resource $stack5;
+  io.grpc.ManagedChannel $stack7;
+  $stack2=this.ownChannel;
+ if ($stack2==0) goto label0;
+ $stack7=this.managedChannel;
+ $stack7.shutdown();
+ label0:$stack3 = org.apache.bookkeeper.common.util.SharedResourceManager.shared();
+ $stack5=this.schedulerResource;
+ $stack4=this.scheduler;
+ $stack3.release($stack5,(java.lang.Object)$stack4);
+ closeFuture.complete(null);
+ return;
+ } 
+

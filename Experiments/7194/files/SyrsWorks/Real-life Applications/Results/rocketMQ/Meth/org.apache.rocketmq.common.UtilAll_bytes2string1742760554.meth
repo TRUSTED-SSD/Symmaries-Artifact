@@ -1,0 +1,37 @@
+static java.lang.String org.apache.rocketmq.common.UtilAll:bytes2string(byte[] src)
+{
+char[] hexChars;
+  int j;
+  short v;
+  int $stack6;
+  java.lang.String $stack7;
+  byte $stack8;
+  short $stack9;
+  char[] $stack10;
+  char $stack11;
+  j=#src;
+ j=(j * 2);
+ hexChars=new char[j];
+ j=0;
+ label0:$stack6=#src;
+ if (j>=$stack6) goto label1;
+ $stack8=src[j];
+ v=($stack8 & 255);
+ $stack6=(j * 2);
+ $stack10=org.apache.rocketmq.common.UtilAll.HEX_ARRAY;
+ $stack9=(v>>>4);
+ $stack11=$stack10[$stack9];
+ hexChars[$stack6]=$stack11;
+ $stack6=(j * 2);
+ $stack6=($stack6+1);
+ $stack10=org.apache.rocketmq.common.UtilAll.HEX_ARRAY;
+ v=(v & 15);
+ $stack11=$stack10[v];
+ hexChars[$stack6]=$stack11;
+ j=(j+1);
+ goto label0;
+ label1:$stack7=new java.lang.String;
+ $stack7#java.lang.String(hexChars);
+ return  $stack7;
+ } 
+

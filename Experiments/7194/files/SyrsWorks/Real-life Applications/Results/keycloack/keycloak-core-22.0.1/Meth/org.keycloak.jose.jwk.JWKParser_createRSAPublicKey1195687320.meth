@@ -1,0 +1,40 @@
+java.security.PublicKey org.keycloak.jose.jwk.JWKParser:createRSAPublicKey()
+{
+java.math.BigInteger modulus;
+  java.math.BigInteger publicExponent;
+  java.security.KeyFactory kf;
+  org.keycloak.jose.jwk.JWK $stack5;
+  java.util.Map $stack7;
+  java.lang.Object $stack8;
+  java.lang.String $stack9;
+  byte[] $stack10;
+  java.security.spec.RSAPublicKeySpec $stack19;
+  java.security.PublicKey $stack20;
+  java.lang.Exception $stack21;
+  java.lang.RuntimeException $stack22;
+  modulus=new java.math.BigInteger;
+ $stack5=this.jwk;
+ $stack7 = $stack5.getOtherClaims();
+ $stack8 = $stack7.get((java.lang.Object)"n");
+ $stack9 = $stack8.toString();
+ $stack10 = org.keycloak.common.util.Base64Url.decode($stack9);
+ modulus#java.math.BigInteger(1,$stack10);
+ publicExponent=new java.math.BigInteger;
+ $stack5=this.jwk;
+ $stack7 = $stack5.getOtherClaims();
+ $stack8 = $stack7.get((java.lang.Object)"e");
+ $stack9 = $stack8.toString();
+ $stack10 = org.keycloak.common.util.Base64Url.decode($stack9);
+ publicExponent#java.math.BigInteger(1,$stack10);
+ label0:kf = java.security.KeyFactory.getInstance("RSA");
+ $stack19=new java.security.spec.RSAPublicKeySpec;
+ $stack19#java.security.spec.RSAPublicKeySpec(modulus,publicExponent);
+ $stack20 = kf.generatePublic((java.security.spec.KeySpec)$stack19);
+ label1:return  $stack20;
+ label2:$stack21 = catch;
+ $stack22=new java.lang.RuntimeException;
+ $stack22#java.lang.RuntimeException((java.lang.Throwable)$stack21);
+ throw $stack22;
+ catch java.lang.Exception: label0 - label1 : label2;
+} 
+

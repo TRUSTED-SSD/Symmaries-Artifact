@@ -1,0 +1,39 @@
+void org.keycloak.adapters.KeycloakDeployment:setAuthServerBaseUrl(org.keycloak.representations.adapters.config.AdapterConfig config)
+{
+java.net.URI authServerUri;
+  java.lang.String $stack3;
+  org.keycloak.common.util.KeycloakUriBuilder $stack6;
+  java.lang.Object[] $stack7;
+  org.keycloak.common.enums.RelativeUrlsUsed $stack13;
+  $stack3 = config.getAuthServerUrl();
+ this.authServerBaseUrl=$stack3;
+ $stack3=this.authServerBaseUrl;
+ if ($stack3!=null) goto label0;
+ return;
+ label0:$stack3=this.authServerBaseUrl;
+ $stack6 = org.keycloak.common.util.KeycloakUriBuilder.fromUri($stack3);
+ $stack7=new java.lang.Object[0];
+ authServerUri = $stack6.build($stack7);
+ $stack3 = authServerUri.toString();
+ this.authServerBaseUrl=$stack3;
+ this.authUrl=null;
+ this.realmInfoUrl=null;
+ this.tokenUrl=null;
+ this.logoutUrl=null;
+ this.accountUrl=null;
+ this.registerNodeUrl=null;
+ this.unregisterNodeUrl=null;
+ this.jwksUrl=null;
+ $stack3=this.authServerBaseUrl;
+ authServerUri = java.net.URI.create($stack3);
+ $stack3 = authServerUri.getHost();
+ if ($stack3!=null) goto label1;
+ $stack13=org.keycloak.common.enums.RelativeUrlsUsed.ALWAYS;
+ this.relativeUrls=$stack13;
+ goto label2;
+ label1:$stack13=org.keycloak.common.enums.RelativeUrlsUsed.NEVER;
+ this.relativeUrls=$stack13;
+ label2:this.adapterConfig=config;
+ return;
+ } 
+

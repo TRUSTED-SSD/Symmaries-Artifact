@@ -1,0 +1,31 @@
+void org.apache.rocketmq.broker.processor.PopReviveService:addRetryTopicIfNoExit(java.lang.String topic,java.lang.String consumerGroup)
+{
+org.apache.rocketmq.common.TopicConfig topicConfig;
+  org.apache.rocketmq.broker.BrokerController $stack4;
+  org.apache.rocketmq.broker.topic.TopicConfigManager $stack6;
+  int $stack9;
+  org.apache.rocketmq.common.TopicFilterType $stack11;
+  $stack4=this.brokerController;
+ if ($stack4==null) goto label0;
+ $stack4=this.brokerController;
+ $stack6 = $stack4.getTopicConfigManager();
+ topicConfig = $stack6.selectTopicConfig(topic);
+ if (topicConfig==null) goto label1;
+ return;
+ label1:topicConfig=new org.apache.rocketmq.common.TopicConfig;
+ topicConfig#org.apache.rocketmq.common.TopicConfig(topic);
+ $stack9=org.apache.rocketmq.common.PopAckConstants.retryQueueNum;
+ topicConfig.setReadQueueNums($stack9);
+ $stack9=org.apache.rocketmq.common.PopAckConstants.retryQueueNum;
+ topicConfig.setWriteQueueNums($stack9);
+ $stack11=org.apache.rocketmq.common.TopicFilterType.SINGLE_TAG;
+ topicConfig.setTopicFilterType($stack11);
+ topicConfig.setPerm(6);
+ topicConfig.setTopicSysFlag(0);
+ $stack4=this.brokerController;
+ $stack6 = $stack4.getTopicConfigManager();
+ $stack6.updateTopicConfig(topicConfig);
+ this#org.apache.rocketmq.broker.processor.PopReviveService:initPopRetryOffset(topic,consumerGroup);
+ label0:return;
+ } 
+

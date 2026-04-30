@@ -1,0 +1,45 @@
+void org.apache.rocketmq.broker.client.ConsumerManager:unregisterConsumer(java.lang.String group,org.apache.rocketmq.broker.client.ClientChannelInfo clientChannelInfo,boolean isNotifyConsumerIdsChangedEnable)
+{
+org.apache.rocketmq.broker.client.ConsumerGroupInfo consumerGroupInfo;
+  boolean removed;
+  org.apache.rocketmq.broker.client.ConsumerGroupInfo remove;
+  java.util.concurrent.ConcurrentMap $stack7;
+  java.lang.Object $stack8;
+  java.lang.Object[] $stack12;
+  org.apache.rocketmq.broker.client.ConsumerGroupEvent $stack13;
+  java.util.List $stack15;
+  org.apache.rocketmq.logging.org.slf4j.Logger $stack19;
+  java.util.Set $stack25;
+  $stack7=this.consumerTable;
+ $stack8 = $stack7.get((java.lang.Object)group);
+ consumerGroupInfo=(org.apache.rocketmq.broker.client.ConsumerGroupInfo) $stack8;
+ if (null==consumerGroupInfo) goto label0;
+ removed = consumerGroupInfo.unregisterChannel(clientChannelInfo);
+ if (removed==0) goto label1;
+ $stack13=org.apache.rocketmq.broker.client.ConsumerGroupEvent.CLIENT_UNREGISTER;
+ $stack12=new java.lang.Object[2];
+ $stack12[0]=clientChannelInfo;
+ $stack25 = consumerGroupInfo.getSubscribeTopics();
+ $stack12[1]=$stack25;
+ this.callConsumerIdsChangeListener($stack13,group,$stack12);
+ label1:$stack7 = consumerGroupInfo.getChannelInfoTable();
+ removed = $stack7.isEmpty();
+ if (removed==0) goto label2;
+ $stack7=this.consumerTable;
+ $stack8 = $stack7.remove((java.lang.Object)group);
+ remove=(org.apache.rocketmq.broker.client.ConsumerGroupInfo) $stack8;
+ if (remove==null) goto label2;
+ $stack19=org.apache.rocketmq.broker.client.ConsumerManager.LOGGER;
+ $stack19.info("unregister consumer ok, no any connection, and remove consumer group, {}",(java.lang.Object)group);
+ $stack13=org.apache.rocketmq.broker.client.ConsumerGroupEvent.UNREGISTER;
+ $stack12=new java.lang.Object[0];
+ this.callConsumerIdsChangeListener($stack13,group,$stack12);
+ label2:if (isNotifyConsumerIdsChangedEnable==0) goto label0;
+ $stack13=org.apache.rocketmq.broker.client.ConsumerGroupEvent.CHANGE;
+ $stack12=new java.lang.Object[1];
+ $stack15 = consumerGroupInfo.getAllChannel();
+ $stack12[0]=$stack15;
+ this.callConsumerIdsChangeListener($stack13,group,$stack12);
+ label0:return;
+ } 
+

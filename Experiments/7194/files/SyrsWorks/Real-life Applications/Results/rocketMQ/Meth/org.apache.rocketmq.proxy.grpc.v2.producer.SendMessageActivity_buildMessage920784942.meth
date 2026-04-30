@@ -1,0 +1,25 @@
+org.apache.rocketmq.common.message.Message org.apache.rocketmq.proxy.grpc.v2.producer.SendMessageActivity:buildMessage(org.apache.rocketmq.proxy.common.ProxyContext context,apache.rocketmq.v2.Message protoMessage,java.lang.String producerGroup)
+{
+java.lang.String topicName;
+  org.apache.rocketmq.common.message.Message messageExt;
+  java.util.Map messageProperty;
+  org.apache.rocketmq.proxy.grpc.v2.common.GrpcConverter $stack7;
+  apache.rocketmq.v2.Resource $stack8;
+  com.google.protobuf.ByteString $stack10;
+  byte[] $stack13;
+  $stack7 = org.apache.rocketmq.proxy.grpc.v2.common.GrpcConverter.getInstance();
+ $stack8 = protoMessage.getTopic();
+ topicName = $stack7.wrapResourceWithNamespace($stack8);
+ $stack10 = protoMessage.getBody();
+ this.validateMessageBodySize($stack10);
+ messageExt=new org.apache.rocketmq.common.message.Message;
+ messageExt#org.apache.rocketmq.common.message.Message();
+ messageExt.setTopic(topicName);
+ $stack10 = protoMessage.getBody();
+ $stack13 = $stack10.toByteArray();
+ messageExt.setBody($stack13);
+ messageProperty = this.buildMessageProperty(context,protoMessage,producerGroup);
+ org.apache.rocketmq.common.message.MessageAccessor.setProperties(messageExt,messageProperty);
+ return  messageExt;
+ } 
+

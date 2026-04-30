@@ -1,0 +1,31 @@
+void org.apache.rocketmq.proxy.remoting.activity.ClientManagerActivity$ConsumerIdsChangeListenerImpl:handle(org.apache.rocketmq.broker.client.ConsumerGroupEvent event,java.lang.String group,java.lang.Object[] args)
+{
+org.apache.rocketmq.broker.client.ClientChannelInfo clientChannelInfo;
+  org.apache.rocketmq.broker.client.ConsumerGroupEvent $stack5;
+  int $stack6;
+  java.lang.Object $stack7;
+  boolean $stack8;
+  org.apache.rocketmq.proxy.remoting.activity.ClientManagerActivity $stack10;
+  org.apache.rocketmq.proxy.remoting.channel.RemotingChannelManager $stack11;
+  io.netty.channel.Channel $stack12;
+  org.apache.rocketmq.logging.org.slf4j.Logger $stack14;
+  $stack5=org.apache.rocketmq.broker.client.ConsumerGroupEvent.CLIENT_UNREGISTER;
+ if (event!=$stack5) goto label0;
+ if (args==null) goto label1;
+ $stack6=#args;
+ if ($stack6>=1) goto label2;
+ label1:return;
+ label2:$stack7=args[0];
+ $stack8=$stack7 instanceof org.apache.rocketmq.broker.client.ClientChannelInfo;
+ if ($stack8==0) goto label0;
+ $stack7=args[0];
+ clientChannelInfo=(org.apache.rocketmq.broker.client.ClientChannelInfo) $stack7;
+ $stack10=this.this$0;
+ $stack11 = org.apache.rocketmq.proxy.remoting.activity.ClientManagerActivity.access$000($stack10);
+ $stack12 = clientChannelInfo.getChannel();
+ $stack11.removeConsumerChannel(group,$stack12);
+ $stack14=org.apache.rocketmq.proxy.remoting.activity.AbstractRemotingActivity.log;
+ $stack14.info("remove remoting channel when client unregister. clientChannelInfo:{}",(java.lang.Object)clientChannelInfo);
+ label0:return;
+ } 
+

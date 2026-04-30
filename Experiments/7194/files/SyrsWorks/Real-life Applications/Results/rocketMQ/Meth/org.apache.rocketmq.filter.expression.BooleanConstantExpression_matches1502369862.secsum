@@ -1,0 +1,7 @@
+boolean org.apache.rocketmq.filter.expression.BooleanConstantExpression:matches (
+  org.apache.rocketmq.filter.expression.EvaluationContext context) {
+  guard = tt;
+  ret(level()) = pc ⊔ level(this) ⊔ obj_level(this);
+  ret(obj_level(context)) = if obj_level(context) = ⊤ ∨ pc ≠ ⊤ ∧ obj_level(context) = ⊥ ∧ obj_level(this) = ⊤ then ⊤ else ⊥;
+  ret(obj_level(this)) = if obj_level(this) = ⊤ ∨ pc ≠ ⊤ ∧ obj_level(this) = ⊥ ∧ level(this) ⊓ obj_level(context) = ⊤ then ⊤ else ⊥;
+}

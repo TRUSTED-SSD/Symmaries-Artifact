@@ -1,0 +1,84 @@
+    public void validate(org.junit.runners.model.FrameworkMember, java.lang.Class, java.util.List)
+    {
+        org.junit.internal.runners.rules.RuleMemberValidator$MemberMustBeNonStaticOrAlsoClassRule this;
+        org.junit.runners.model.FrameworkMember member;
+        java.lang.Class 'annotation';
+        java.util.List errors;
+        boolean isMethodRuleMember, $stack9, $stack18;
+        java.lang.String message;
+        java.lang.'annotation'.Annotation $stack8;
+        org.junit.internal.runners.rules.ValidationError $stack11;
+
+        this := @this: org.junit.internal.runners.rules.RuleMemberValidator$MemberMustBeNonStaticOrAlsoClassRule;
+
+        member := @parameter0: org.junit.runners.model.FrameworkMember;
+
+        'annotation' := @parameter1: java.lang.Class;
+
+        errors := @parameter2: java.util.List;
+
+        isMethodRuleMember = staticinvoke <org.junit.internal.runners.rules.RuleMemberValidator: boolean access$1200(org.junit.runners.model.FrameworkMember)>(member);
+/*168*/
+/*168*/
+
+        $stack8 = virtualinvoke member.<org.junit.runners.model.FrameworkMember: java.lang.'annotation'.Annotation getAnnotation(java.lang.Class)>(class "Lorg/junit/ClassRule;");
+/*169*/
+
+        if $stack8 == null goto label1;
+/*169*/
+
+        $stack18 = 1;
+/*178*/
+
+        goto label2;
+/*178*/
+
+     label1:
+        $stack18 = 0;
+/*178*/
+
+     label2:
+        $stack9 = virtualinvoke member.<org.junit.runners.model.FrameworkMember: boolean isStatic()>();
+/*176*/
+
+        if $stack9 == 0 goto label6;
+/*176*/
+
+        if isMethodRuleMember != 0 goto label3;
+/*185*/
+
+        if $stack18 != 0 goto label6;
+/*185*/
+
+     label3:
+        isMethodRuleMember = staticinvoke <org.junit.internal.runners.rules.RuleMemberValidator: boolean access$1200(org.junit.runners.model.FrameworkMember)>(member);
+/*178*/
+
+        if isMethodRuleMember == 0 goto label4;
+/*178*/
+
+        message = "must not be static.";
+/*179*/
+
+        goto label5;
+/*179*/
+
+     label4:
+        message = "must not be static or it must be annotated with @ClassRule.";
+/*181*/
+
+     label5:
+        $stack11 = new org.junit.internal.runners.rules.ValidationError;
+/*183*/
+
+        specialinvoke $stack11.<org.junit.internal.runners.rules.ValidationError: void <init>(org.junit.runners.model.FrameworkMember,java.lang.Class,java.lang.String)>(member, 'annotation', message);
+/*183*/
+
+        interfaceinvoke errors.<java.util.List: boolean add(java.lang.Object)>($stack11);
+/*183*/
+
+     label6:
+        return;
+/*185*/
+    }
+

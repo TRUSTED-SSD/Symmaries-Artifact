@@ -1,0 +1,12 @@
+void org.apache.bookkeeper.proto.PacketProcessorBase:sendReadReqResponse(int rc,java.lang.Object response,org.apache.bookkeeper.stats.OpStatsLogger statsLogger,boolean throttle)
+{
+org.apache.bookkeeper.proto.BookieRequestProcessor $stack5;
+  if (throttle==0) goto label0;
+ this.sendResponseAndWait(rc,response,statsLogger);
+ goto label1;
+ label0:this#org.apache.bookkeeper.proto.PacketProcessorBase(rc,response,statsLogger);
+ label1:$stack5=this.requestProcessor;
+ $stack5.onReadRequestFinish();
+ return;
+ } 
+

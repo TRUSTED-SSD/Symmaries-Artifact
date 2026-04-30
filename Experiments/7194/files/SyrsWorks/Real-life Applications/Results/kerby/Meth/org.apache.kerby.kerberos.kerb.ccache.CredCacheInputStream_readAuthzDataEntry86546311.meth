@@ -1,0 +1,30 @@
+org.apache.kerby.kerberos.kerb.type.ad.AuthorizationDataEntry org.apache.kerby.kerberos.kerb.ccache.CredCacheInputStream:readAuthzDataEntry()
+{
+short typeValue;
+  org.apache.kerby.kerberos.kerb.type.ad.AuthorizationType authzType;
+  byte[] authzData;
+  org.apache.kerby.kerberos.kerb.type.ad.AuthorizationDataEntry authzEntry;
+  java.lang.Integer $stack6;
+  org.apache.kerby.kerberos.kerb.type.ad.AuthorizationType $stack8;
+  java.io.IOException $stack11;
+  typeValue = this.readShort();
+dummyClass.highSourceMut(typeValue);
+ $stack6 = java.lang.Integer.valueOf((int)typeValue);
+ authzType = org.apache.kerby.kerberos.kerb.type.ad.AuthorizationType.fromValue($stack6);
+ $stack8=org.apache.kerby.kerberos.kerb.type.ad.AuthorizationType.NONE;
+ if (authzType!=$stack8) goto label0;
+ $stack11=new java.io.IOException;
+ $stack11#java.io.IOException("Invalid authorization data type");
+ throw $stack11;
+ label0:authzData = this.readCountedOctets();
+ if (authzData!=null) goto label1;
+ $stack11=new java.io.IOException;
+ $stack11#java.io.IOException("Invalid authorization data");
+ throw $stack11;
+ label1:authzEntry=new org.apache.kerby.kerberos.kerb.type.ad.AuthorizationDataEntry;
+ authzEntry#org.apache.kerby.kerberos.kerb.type.ad.AuthorizationDataEntry();
+ authzEntry.setAuthzType(authzType);
+ authzEntry.setAuthzData(authzData);
+ return  authzEntry;
+ } 
+

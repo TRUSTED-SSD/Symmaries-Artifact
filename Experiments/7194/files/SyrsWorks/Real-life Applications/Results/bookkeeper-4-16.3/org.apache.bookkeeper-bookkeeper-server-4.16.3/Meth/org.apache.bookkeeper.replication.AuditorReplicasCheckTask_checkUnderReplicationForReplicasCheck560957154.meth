@@ -1,0 +1,41 @@
+boolean org.apache.bookkeeper.replication.AuditorReplicasCheckTask:checkUnderReplicationForReplicasCheck(long ledgerInRange,org.apache.zookeeper.AsyncCallback$VoidCallback mcbForThisLedgerRange)
+{
+org.apache.bookkeeper.replication.ReplicationException$UnavailableException nre;
+  org.apache.bookkeeper.meta.LedgerUnderreplicationManager $stack5;
+  org.apache.bookkeeper.meta.UnderreplicatedLedger $stack6;
+  org.slf4j.Logger $stack7;
+  boolean $stack8;
+  java.lang.Long $stack11;
+  org.apache.bookkeeper.replication.ReplicationException$NonRecoverableReplicationException $stack17;
+  int $stack23;
+  label0:$stack5=this.ledgerUnderreplicationManager;
+ $stack6 = $stack5.getLedgerUnreplicationInfo(ledgerInRange);
+ if ($stack6!=null) goto label1;
+ label2:return  0;
+ label1:$stack7=org.apache.bookkeeper.replication.AuditorReplicasCheckTask.LOG;
+ $stack8 = $stack7.isDebugEnabled();
+ if ($stack8==0) goto label3;
+ $stack7=org.apache.bookkeeper.replication.AuditorReplicasCheckTask.LOG;
+ $stack11 = java.lang.Long.valueOf(ledgerInRange);
+ dummyClass.lowSink("Ledger: {} is marked underrreplicated, ignore this ledger for replicasCheck");
+$stack7.debug("Ledger: {} is marked underrreplicated, ignore this ledger for replicasCheck",(java.lang.Object)$stack11);
+ label3:mcbForThisLedgerRange.processResult(0,null,null);
+ label4:return  1;
+ label5:$stack17 = catch;
+ $stack7=org.apache.bookkeeper.replication.AuditorReplicasCheckTask.LOG;
+ $stack7.error("Non Recoverable Exception while reading from ZK",(java.lang.Throwable)$stack17);
+ this.submitShutdownTask();
+ return  1;
+ label6:nre = catch;
+ $stack7=org.apache.bookkeeper.replication.AuditorReplicasCheckTask.LOG;
+ $stack11 = java.lang.Long.valueOf(ledgerInRange);
+ $stack7.error("Got exception while trying to check if ledger: {} is underreplicated",(java.lang.Object)$stack11,(java.lang.Object)nre);
+ $stack23 = org.apache.bookkeeper.client.BKException.getExceptionCode((java.lang.Throwable)nre);
+ mcbForThisLedgerRange.processResult($stack23,null,null);
+ return  1;
+ catch org.apache.bookkeeper.replication.ReplicationException$NonRecoverableReplicationException: label0 - label2 : label5;
+catch org.apache.bookkeeper.replication.ReplicationException$NonRecoverableReplicationException: label1 - label4 : label5;
+catch org.apache.bookkeeper.replication.ReplicationException$UnavailableException: label0 - label2 : label6;
+catch org.apache.bookkeeper.replication.ReplicationException$UnavailableException: label1 - label4 : label6;
+} 
+

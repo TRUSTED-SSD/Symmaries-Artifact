@@ -1,0 +1,9 @@
+static java.lang.Long org.apache.bookkeeper.common.util.Backoff:lambda$equalJittered$4 (
+  java.util.concurrent.atomic.AtomicLong attempts, long startNanos,
+  long maxNanos, long maxMs, java.lang.Long @lastMs) {
+  guard = tt;
+  ret(level()) = pc ⊔ level(maxMs) ⊔ level(maxNanos) ⊔ level(startNanos) ⊔ obj_level(attempts);
+  ret(obj_level()) = pc ⊔ level(maxMs) ⊔ level(maxNanos) ⊔ level(startNanos) ⊔ obj_level(attempts);
+  ret(obj_level(@lastMs)) = if obj_level(@lastMs) = ⊤ ∨ pc ≠ ⊤ ∧ (if obj_level(attempts) = ⊤ then obj_level(@lastMs) = ⊥ else obj_level(@lastMs) = ⊥ ∧ obj_level(attempts) = ⊥ ∧ level(maxNanos) ⊔ level(startNanos) = ⊤) then ⊤ else ⊥;
+  ret(obj_level(attempts)) = pc ⊔ level(attempts) ⊔ level(startNanos) ⊔ obj_level(attempts);
+}

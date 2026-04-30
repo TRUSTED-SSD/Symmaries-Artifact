@@ -1,0 +1,34 @@
+void org.apache.kerby.kerberos.kerb.admin.kadmin.local.LocalKadminImpl:createBuiltinPrincipals()
+{
+java.lang.String tgsPrincipal;
+  org.apache.kerby.kerberos.kerb.identity.backend.IdentityBackend $stack5;
+  org.apache.kerby.kerberos.kerb.request.KrbIdentity $stack6;
+  org.slf4j.Logger $stack7;
+  org.apache.kerby.kerberos.kerb.KrbException $stack8;
+  tgsPrincipal = this#org.apache.kerby.kerberos.kerb.admin.kadmin.local.LocalKadminImpl:getTgsPrincipal();
+ $stack5=this.backend;
+ $stack6 = $stack5.getIdentity(tgsPrincipal);
+ if ($stack6!=null) goto label0;
+ this.addPrincipal(tgsPrincipal);
+ goto label1;
+ label0:tgsPrincipal="The tgs principal already exists in backend.";
+ $stack7=org.apache.kerby.kerberos.kerb.admin.kadmin.local.LocalKadminImpl.LOG;
+ $stack7.error("The tgs principal already exists in backend.");
+ $stack8=new org.apache.kerby.kerberos.kerb.KrbException;
+ $stack8#org.apache.kerby.kerberos.kerb.KrbException("The tgs principal already exists in backend.");
+ throw $stack8;
+ label1:tgsPrincipal = this.getKadminPrincipal();
+ $stack5=this.backend;
+ $stack6 = $stack5.getIdentity(tgsPrincipal);
+ if ($stack6!=null) goto label2;
+ this.addPrincipal(tgsPrincipal);
+ goto label3;
+ label2:tgsPrincipal="The kadmin principal already exists in backend.";
+ $stack7=org.apache.kerby.kerberos.kerb.admin.kadmin.local.LocalKadminImpl.LOG;
+ $stack7.error("The kadmin principal already exists in backend.");
+ $stack8=new org.apache.kerby.kerberos.kerb.KrbException;
+ $stack8#org.apache.kerby.kerberos.kerb.KrbException("The kadmin principal already exists in backend.");
+ throw $stack8;
+ label3:return;
+ } 
+

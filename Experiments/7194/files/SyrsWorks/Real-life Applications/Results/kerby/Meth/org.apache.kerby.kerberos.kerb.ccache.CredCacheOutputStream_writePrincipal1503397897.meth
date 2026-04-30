@@ -1,0 +1,30 @@
+void org.apache.kerby.kerberos.kerb.ccache.CredCacheOutputStream:writePrincipal(org.apache.kerby.kerberos.kerb.type.base.PrincipalName principal,int version)
+{
+java.util.List nameComponents;
+  int numComponents;
+  java.util.Iterator l5;
+  java.lang.String nameCom;
+  boolean $stack11;
+  java.lang.Object $stack12;
+  org.apache.kerby.kerberos.kerb.type.base.NameType $stack19;
+  nameComponents = principal.getNameStrings();
+ if (version==1281) goto label0;
+ $stack19 = principal.getNameType();
+ numComponents = $stack19.getValue();
+ this.writeInt(numComponents);
+ label0:numComponents = nameComponents.size();
+ if (version!=1281) goto label1;
+ numComponents=(numComponents+1);
+ label1:this.writeInt(numComponents);
+ nameCom = principal.getRealm();
+ this.writeRealm(nameCom);
+ l5 = nameComponents.iterator();
+ label2:$stack11 = l5.hasNext();
+ if ($stack11==0) goto label3;
+ $stack12 = l5.next();
+ nameCom=(java.lang.String) $stack12;
+ this.writeCountedString(nameCom);
+ goto label2;
+ label3:return;
+ } 
+

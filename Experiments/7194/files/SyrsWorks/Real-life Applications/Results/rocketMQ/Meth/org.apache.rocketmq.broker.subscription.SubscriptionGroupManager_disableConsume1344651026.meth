@@ -1,0 +1,27 @@
+void org.apache.rocketmq.broker.subscription.SubscriptionGroupManager:disableConsume(java.lang.String groupName)
+{
+org.apache.rocketmq.remoting.protocol.subscription.SubscriptionGroupConfig old;
+  java.util.concurrent.ConcurrentMap $stack5;
+  java.lang.Object $stack6;
+  org.apache.rocketmq.broker.BrokerController $stack7;
+  org.apache.rocketmq.store.MessageStore $stack8;
+  org.apache.rocketmq.remoting.protocol.DataVersion $stack9;
+  long $stack12;
+  $stack5=this.subscriptionGroupTable;
+ $stack6 = $stack5.get((java.lang.Object)groupName);
+ old=(org.apache.rocketmq.remoting.protocol.subscription.SubscriptionGroupConfig) $stack6;
+ if (old==null) goto label0;
+ old.setConsumeEnable((boolean)0);
+ $stack7=this.brokerController;
+ $stack8 = $stack7.getMessageStore();
+ if ($stack8==null) goto label1;
+ $stack7=this.brokerController;
+ $stack8 = $stack7.getMessageStore();
+ $stack12 = $stack8.getStateMachineVersion();
+ goto label2;
+ label1:$stack12=0L;
+ label2:$stack9=this.dataVersion;
+ $stack9.nextVersion($stack12);
+ label0:return;
+ } 
+

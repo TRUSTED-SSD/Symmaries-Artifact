@@ -1,0 +1,51 @@
+boolean org.keycloak.AuthorizationContext:hasPermission(java.lang.String resourceName,java.lang.String @scopeName)
+{
+org.keycloak.representations.AccessToken$Authorization authorization;
+  java.util.Iterator l4;
+  org.keycloak.representations.idm.authorization.Permission permission;
+  org.keycloak.representations.AccessToken $stack6;
+  java.util.Collection $stack9;
+  boolean $stack11;
+  org.keycloak.representations.adapters.config.PolicyEnforcerConfig$PathConfig $stack12;
+  java.lang.Object $stack17;
+  java.lang.String $stack18;
+  java.util.Set $stack20;
+  java.lang.String scopeName;
+scopeName=@scopeName;
+$stack6=this.authzToken;
+ if ($stack6!=null) goto label0;
+ return  0;
+ label0:$stack6=this.authzToken;
+ authorization = $stack6.getAuthorization();
+ if (authorization!=null) goto label1;
+ return  0;
+ label1:$stack9 = authorization.getPermissions();
+ l4 = $stack9.iterator();
+ label2:$stack11 = l4.hasNext();
+ if ($stack11==0) goto label3;
+ $stack17 = l4.next();
+ permission=(org.keycloak.representations.idm.authorization.Permission) $stack17;
+ $stack18 = permission.getResourceName();
+ $stack11 = resourceName.equalsIgnoreCase($stack18);
+ if ($stack11!=0) goto label4;
+ $stack18 = permission.getResourceId();
+ $stack11 = resourceName.equalsIgnoreCase($stack18);
+ if ($stack11==0) goto label5;
+ label4:if (scopeName!=null) goto label6;
+ return  1;
+ label6:$stack20 = permission.getScopes();
+ $stack11 = $stack20.contains((java.lang.Object)scopeName);
+ if ($stack11==0) goto label5;
+ return  1;
+ label5:goto label2;
+ label3:$stack12=this.current;
+ if ($stack12==null) goto label7;
+ if (scopeName!=null) goto label7;
+ $stack12=this.current;
+ scopeName = $stack12.getName();
+ $stack11 = scopeName.equals((java.lang.Object)resourceName);
+ if ($stack11==0) goto label7;
+ return  1;
+ label7:return  0;
+ } 
+

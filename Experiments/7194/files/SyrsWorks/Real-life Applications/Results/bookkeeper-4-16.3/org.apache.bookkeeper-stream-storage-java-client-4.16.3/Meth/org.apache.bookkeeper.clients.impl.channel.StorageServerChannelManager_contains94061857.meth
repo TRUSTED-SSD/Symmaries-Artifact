@@ -1,0 +1,24 @@
+boolean org.apache.bookkeeper.clients.impl.channel.StorageServerChannelManager:contains(org.apache.bookkeeper.stream.proto.common.Endpoint endpoint)
+{
+boolean l2;
+  java.util.concurrent.locks.ReentrantReadWriteLock $stack4;
+  java.util.concurrent.locks.ReentrantReadWriteLock$ReadLock $stack5;
+  java.util.concurrent.ConcurrentMap $stack6;
+  java.lang.Throwable $stack10;
+  $stack4=this.lock;
+ $stack5 = $stack4.readLock();
+ $stack5.lock();
+ label0:$stack6=this.channels;
+ l2 = $stack6.containsKey((java.lang.Object)endpoint);
+ label1:$stack4=this.lock;
+ $stack5 = $stack4.readLock();
+ $stack5.unlock();
+ return  l2;
+ label2:$stack10 = catch;
+ $stack4=this.lock;
+ $stack5 = $stack4.readLock();
+ $stack5.unlock();
+ throw $stack10;
+ catch java.lang.Throwable: label0 - label1 : label2;
+} 
+

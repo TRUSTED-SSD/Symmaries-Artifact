@@ -1,0 +1,22 @@
+org.apache.bookkeeper.client.EnsemblePlacementPolicy org.apache.bookkeeper.client.ZoneawareEnsemblePlacementPolicy:initialize(org.apache.bookkeeper.conf.ClientConfiguration conf,java.util.Optional optionalDnsResolver,io.netty.util.HashedWheelTimer timer,org.apache.bookkeeper.feature.FeatureProvider featureProvider,org.apache.bookkeeper.stats.StatsLogger statsLogger,org.apache.bookkeeper.proto.BookieAddressResolver bookieAddressResolver)
+{
+org.apache.bookkeeper.conf.ClientConfiguration confClone;
+  int $stack8;
+  org.apache.bookkeeper.client.ZoneawareEnsemblePlacementPolicyImpl $stack13;
+  $stack8 = conf.getNetworkTopologyStabilizePeriodSeconds();
+ if ($stack8<=0) goto label0;
+ confClone=new org.apache.bookkeeper.conf.ClientConfiguration;
+ confClone#org.apache.bookkeeper.conf.ClientConfiguration((org.apache.bookkeeper.conf.AbstractConfiguration)conf);
+ confClone.setNetworkTopologyStabilizePeriodSeconds(0);
+ this#org.apache.bookkeeper.client.ZoneawareEnsemblePlacementPolicyImpl(confClone,optionalDnsResolver,timer,featureProvider,statsLogger,bookieAddressResolver);
+ $stack13=new org.apache.bookkeeper.client.ZoneawareEnsemblePlacementPolicyImpl;
+ $stack13#org.apache.bookkeeper.client.ZoneawareEnsemblePlacementPolicyImpl();
+ this.slave=$stack13;
+ $stack13=this.slave;
+ $stack13#org.apache.bookkeeper.client.ZoneawareEnsemblePlacementPolicyImpl(conf,optionalDnsResolver,timer,featureProvider,statsLogger,bookieAddressResolver);
+ goto label1;
+ label0:this#org.apache.bookkeeper.client.ZoneawareEnsemblePlacementPolicyImpl(conf,optionalDnsResolver,timer,featureProvider,statsLogger,bookieAddressResolver);
+ this.slave=null;
+ label1:return  this;
+ } 
+

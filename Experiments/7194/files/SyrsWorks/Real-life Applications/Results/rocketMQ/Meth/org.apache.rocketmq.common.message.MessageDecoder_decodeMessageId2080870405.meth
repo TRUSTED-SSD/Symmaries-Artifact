@@ -1,0 +1,29 @@
+static org.apache.rocketmq.common.message.MessageId org.apache.rocketmq.common.message.MessageDecoder:decodeMessageId(java.lang.String msgId)
+{
+byte[] bytes;
+  java.nio.ByteBuffer byteBuffer;
+  int port;
+  java.net.InetSocketAddress $stack13;
+  java.net.InetAddress $stack14;
+  org.apache.rocketmq.common.message.MessageId $stack16;
+  byte $stack17;
+  long $stack26;
+  bytes = org.apache.rocketmq.common.UtilAll.string2bytes(msgId);
+ byteBuffer = java.nio.ByteBuffer.wrap(bytes);
+ port = msgId.length();
+ if (port!=32) goto label0;
+ $stack17=4;
+ goto label1;
+ label0:$stack17=16;
+ label1:bytes=new byte[$stack17];
+ byteBuffer.get(bytes);
+ port = byteBuffer.getInt();
+ $stack13=new java.net.InetSocketAddress;
+ $stack14 = java.net.InetAddress.getByAddress(bytes);
+ $stack13#java.net.InetSocketAddress($stack14,port);
+ $stack16=new org.apache.rocketmq.common.message.MessageId;
+ $stack26 = byteBuffer.getLong();
+ $stack16#org.apache.rocketmq.common.message.MessageId((java.net.SocketAddress)$stack13,$stack26);
+ return  $stack16;
+ } 
+

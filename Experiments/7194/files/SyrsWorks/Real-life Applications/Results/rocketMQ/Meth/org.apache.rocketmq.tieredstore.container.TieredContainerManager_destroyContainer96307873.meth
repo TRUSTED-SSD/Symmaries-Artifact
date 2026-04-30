@@ -1,0 +1,25 @@
+void org.apache.rocketmq.tieredstore.container.TieredContainerManager:destroyContainer(org.apache.rocketmq.common.message.MessageQueue @mq)
+{
+org.apache.rocketmq.tieredstore.container.TieredMessageQueueContainer container;
+  java.util.concurrent.ConcurrentMap $stack4;
+  java.lang.Object $stack5;
+  org.apache.rocketmq.logging.org.slf4j.Logger $stack7;
+  java.lang.String $stack9;
+  int $stack10;
+  java.lang.Integer $stack11;
+  org.apache.rocketmq.common.message.MessageQueue mq;
+mq=@mq;
+$stack4=this.messageQueueContainerMap;
+ $stack5 = $stack4.remove((java.lang.Object)mq);
+ container=(org.apache.rocketmq.tieredstore.container.TieredMessageQueueContainer) $stack5;
+ if (container==null) goto label0;
+ mq = container.getMessageQueue();
+ $stack7=org.apache.rocketmq.tieredstore.container.TieredContainerManager.logger;
+ $stack9 = mq.getTopic();
+ $stack10 = mq.getQueueId();
+ $stack11 = java.lang.Integer.valueOf($stack10);
+ $stack7.info("BlobContainerManager#destroyContainer: try to destroy container: topic: {}, queueId: {}",(java.lang.Object)$stack9,(java.lang.Object)$stack11);
+ container.destroy();
+ label0:return;
+ } 
+

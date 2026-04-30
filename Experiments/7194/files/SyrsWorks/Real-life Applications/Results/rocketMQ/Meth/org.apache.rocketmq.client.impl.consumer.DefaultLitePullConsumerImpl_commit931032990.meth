@@ -1,0 +1,32 @@
+void org.apache.rocketmq.client.impl.consumer.DefaultLitePullConsumerImpl:commit(org.apache.rocketmq.common.message.MessageQueue messageQueue)
+{
+long consumerOffset;
+  org.apache.rocketmq.client.impl.consumer.ProcessQueue processQueue;
+  org.apache.rocketmq.client.impl.consumer.AssignedMessageQueue $stack5;
+  byte $stack7;
+  java.lang.StringBuilder $stack8;
+  org.apache.rocketmq.logging.org.slf4j.Logger $stack9;
+  java.lang.String $stack13;
+  boolean $stack16;
+  $stack5=this.assignedMessageQueue;
+ consumerOffset = $stack5.getConsumerOffset(messageQueue);
+ $stack7=(consumerOffset cmp -1L);
+ if ($stack7==0) goto label0;
+ $stack5=this.assignedMessageQueue;
+ processQueue = $stack5.getProcessQueue(messageQueue);
+ if (processQueue==null) goto label1;
+ $stack16 = processQueue.isDropped();
+ if ($stack16!=0) goto label1;
+ this.updateConsumeOffset(messageQueue,consumerOffset);
+ label1:goto label2;
+ label0:$stack9=org.apache.rocketmq.client.impl.consumer.DefaultLitePullConsumerImpl.log;
+ $stack8=new java.lang.StringBuilder;
+ $stack8#java.lang.StringBuilder();
+ $stack8 = $stack8.append("consumerOffset is -1 in messageQueue [");
+ $stack8 = $stack8.append((java.lang.Object)messageQueue);
+ $stack8 = $stack8.append("].");
+ $stack13 = $stack8.toString();
+ $stack9.error($stack13);
+ label2:return;
+ } 
+

@@ -1,0 +1,32 @@
+static java.lang.String org.apache.rocketmq.remoting.protocol.NamespaceUtil:withoutNamespace(java.lang.String @resourceWithNamespace)
+{
+java.lang.StringBuilder stringBuilder;
+  java.lang.String resourceWithoutRetryAndDLQ;
+  int index;
+  boolean $stack5;
+  java.lang.String resourceWithNamespace;
+resourceWithNamespace=@resourceWithNamespace;
+$stack5 = org.apache.commons.lang3.StringUtils.isEmpty((java.lang.CharSequence)resourceWithNamespace);
+ if ($stack5!=0) goto label0;
+ $stack5 = org.apache.rocketmq.remoting.protocol.NamespaceUtil.isSystemResource(resourceWithNamespace);
+ if ($stack5==0) goto label1;
+ label0:return  resourceWithNamespace;
+ label1:stringBuilder=new java.lang.StringBuilder;
+ stringBuilder#java.lang.StringBuilder();
+ $stack5 = org.apache.rocketmq.remoting.protocol.NamespaceUtil.isRetryTopic(resourceWithNamespace);
+ if ($stack5==0) goto label2;
+ stringBuilder.append("%RETRY%");
+ label2:$stack5 = org.apache.rocketmq.remoting.protocol.NamespaceUtil.isDLQTopic(resourceWithNamespace);
+ if ($stack5==0) goto label3;
+ stringBuilder.append("%DLQ%");
+ label3:resourceWithoutRetryAndDLQ = org.apache.rocketmq.remoting.protocol.NamespaceUtil.withOutRetryAndDLQ(resourceWithNamespace);
+ index = resourceWithoutRetryAndDLQ.indexOf(37);
+ if (index<=0) goto label4;
+ index=(index+1);
+ resourceWithNamespace = resourceWithoutRetryAndDLQ.substring(index);
+ stringBuilder = stringBuilder.append(resourceWithNamespace);
+ resourceWithNamespace = stringBuilder.toString();
+ return  resourceWithNamespace;
+ label4:return  resourceWithNamespace;
+ } 
+

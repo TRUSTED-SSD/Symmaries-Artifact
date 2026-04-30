@@ -1,0 +1,27 @@
+java.lang.String org.apache.rocketmq.remoting.protocol.RemotingCommand:getCanonicalName(java.lang.Class clazz)
+{
+java.lang.String name;
+  java.util.Map l3;
+  java.lang.Throwable l4;
+  java.lang.Object $stack6;
+  java.util.Map $stack8;
+  l3=org.apache.rocketmq.remoting.protocol.RemotingCommand.CANONICAL_NAME_CACHE;
+ $stack6 = l3.get((java.lang.Object)clazz);
+ name=(java.lang.String) $stack6;
+ if (name!=null) goto label0;
+ name = clazz.getCanonicalName();
+ $stack8=org.apache.rocketmq.remoting.protocol.RemotingCommand.CANONICAL_NAME_CACHE;
+ l3=$stack8;
+ monitorenter $stack8;
+ label1:$stack8=org.apache.rocketmq.remoting.protocol.RemotingCommand.CANONICAL_NAME_CACHE;
+ $stack8.put((java.lang.Object)clazz,(java.lang.Object)name);
+ monitorexit l3;
+ label2:goto label0;
+ label3:l4 = catch;
+ monitorexit l3;
+ label4:throw l4;
+ label0:return  name;
+ catch java.lang.Throwable: label1 - label2 : label3;
+catch java.lang.Throwable: label3 - label4 : label3;
+} 
+

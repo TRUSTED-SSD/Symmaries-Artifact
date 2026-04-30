@@ -1,0 +1,47 @@
+void java.util.TreeMap$PrivateEntryIterator:remove()
+{
+java.util.TreeMap$Entry $r1;
+  java.util.TreeMap $r2;
+  int $i0;
+  int $i1;
+  java.util.TreeMap$Entry $r3;
+  java.util.TreeMap$Entry $r4;
+  java.util.TreeMap$Entry $r5;
+  java.util.TreeMap$Entry $r6;
+  java.util.TreeMap$Entry $r7;
+  java.util.ConcurrentModificationException $r8;
+  java.lang.IllegalStateException $r9;
+  java.util.TreeMap $r10;
+  java.util.TreeMap$Entry $r11;
+  java.util.TreeMap $r12;
+  int $i2;
+  $r1=this.lastReturned;
+ if ($r1!=null) goto label0;
+ $r9=new java.lang.IllegalStateException;
+ $r9#java.lang.IllegalStateException:init();
+ throw $r9;
+ label0:$r2=this.this$0;
+ $i0 = java.util.TreeMap.access$100($r2);
+ $i1=this.expectedModCount;
+ if ($i0==$i1) goto label1;
+ $r8=new java.util.ConcurrentModificationException;
+ $r8#java.util.ConcurrentModificationException:init();
+ throw $r8;
+ label1:$r3=this.lastReturned;
+ $r4=$r3.left;
+ if ($r4==null) goto label2;
+ $r5=this.lastReturned;
+ $r6=$r5.right;
+ if ($r6==null) goto label2;
+ $r7=this.lastReturned;
+ this.next=$r7;
+ label2:$r10=this.this$0;
+ $r11=this.lastReturned;
+ java.util.TreeMap.access$000($r10,$r11);
+ $r12=this.this$0;
+ $i2 = java.util.TreeMap.access$100($r12);
+ this.expectedModCount=$i2;
+ this.lastReturned=null;
+ return;
+ }  
+

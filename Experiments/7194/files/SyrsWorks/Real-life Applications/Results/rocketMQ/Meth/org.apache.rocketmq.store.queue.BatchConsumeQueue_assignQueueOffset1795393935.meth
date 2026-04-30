@@ -1,0 +1,29 @@
+void org.apache.rocketmq.store.queue.BatchConsumeQueue:assignQueueOffset(org.apache.rocketmq.store.queue.QueueOffsetAssigner queueOffsetAssigner,org.apache.rocketmq.common.message.MessageExtBrokerInner msg,short messageNum)
+{
+java.lang.String topicQueueKey;
+  long queueOffset;
+  java.lang.StringBuilder $stack7;
+  int $stack11;
+  boolean $stack16;
+  java.util.Map $stack19;
+  $stack7=new java.lang.StringBuilder;
+ $stack7#java.lang.StringBuilder();
+ topicQueueKey = this.getTopic();
+ $stack7 = $stack7.append(topicQueueKey);
+ $stack7 = $stack7.append("-");
+ $stack11 = this.getQueueId();
+ $stack7 = $stack7.append($stack11);
+ topicQueueKey = $stack7.toString();
+ queueOffset = queueOffsetAssigner.assignBatchQueueOffset(topicQueueKey,messageNum);
+ $stack11 = msg.getSysFlag();
+ $stack16 = org.apache.rocketmq.common.sysflag.MessageSysFlag.check($stack11,128);
+ if ($stack16==0) goto label0;
+ topicQueueKey = java.lang.String.valueOf(queueOffset);
+ org.apache.rocketmq.common.message.MessageAccessor.putProperty((org.apache.rocketmq.common.message.Message)msg,"INNER_BASE",topicQueueKey);
+ $stack19 = msg.getProperties();
+ topicQueueKey = org.apache.rocketmq.common.message.MessageDecoder.messageProperties2String($stack19);
+ msg.setPropertiesString(topicQueueKey);
+ label0:msg.setQueueOffset(queueOffset);
+ return;
+ } 
+

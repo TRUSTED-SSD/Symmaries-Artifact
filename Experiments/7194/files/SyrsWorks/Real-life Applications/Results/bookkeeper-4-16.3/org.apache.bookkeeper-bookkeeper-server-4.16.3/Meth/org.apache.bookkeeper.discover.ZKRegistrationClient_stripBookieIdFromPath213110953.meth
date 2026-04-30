@@ -1,0 +1,22 @@
+static org.apache.bookkeeper.net.BookieId org.apache.bookkeeper.discover.ZKRegistrationClient:stripBookieIdFromPath(java.lang.String path)
+{
+int slash;
+  java.lang.String $stack5;
+  org.apache.bookkeeper.net.BookieId $stack6;
+  java.lang.IllegalArgumentException $stack7;
+  org.slf4j.Logger $stack8;
+  if (path!=null) goto label0;
+ return  null;
+ label0:slash = path.lastIndexOf(47);
+ if (slash<0) goto label1;
+ label2:slash=(slash+1);
+ $stack5 = path.substring(slash);
+ $stack6 = org.apache.bookkeeper.net.BookieId.parse($stack5);
+ label3:return  $stack6;
+ label4:$stack7 = catch;
+ $stack8=org.apache.bookkeeper.discover.ZKRegistrationClient.log;
+ $stack8.warn("Cannot decode bookieId from {}",(java.lang.Object)path,(java.lang.Object)$stack7);
+ label1:return  null;
+ catch java.lang.IllegalArgumentException: label2 - label3 : label4;
+} 
+

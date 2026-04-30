@@ -1,0 +1,57 @@
+byte[] org.apache.rocketmq.common.compression.Lz4Compressor:decompress(byte[] src)
+{
+byte[] result;
+  java.io.ByteArrayInputStream byteArrayInputStream;
+  net.jpountz.lz4.LZ4FrameInputStream lz4InputStream;
+  java.io.ByteArrayOutputStream resultOutputStream;
+  int len;
+  java.lang.Throwable l8;
+  java.io.IOException $stack23;
+  org.apache.rocketmq.logging.org.slf4j.Logger $stack24;
+  java.io.IOException $stack27;
+  java.io.IOException $stack28;
+  result=src;
+ len=#src;
+ result=new byte[len];
+ byteArrayInputStream=new java.io.ByteArrayInputStream;
+ byteArrayInputStream#java.io.ByteArrayInputStream(src);
+ lz4InputStream=new net.jpountz.lz4.LZ4FrameInputStream;
+ lz4InputStream#net.jpountz.lz4.LZ4FrameInputStream((java.io.InputStream)byteArrayInputStream);
+ resultOutputStream=new java.io.ByteArrayOutputStream;
+ len=#src;
+ resultOutputStream#java.io.ByteArrayOutputStream(len);
+ label0:len=#result;
+ dummyClass.highSourceMut(result);
+len = lz4InputStream.read(result,0,len);
+ if (len>0) goto label1;
+ goto label2;
+ label1:resultOutputStream.write(result,0,len);
+ goto label0;
+ label2:resultOutputStream.flush();
+ resultOutputStream.close();
+ result = resultOutputStream.toByteArray();
+ label3:lz4InputStream.close();
+ byteArrayInputStream.close();
+ label4:goto label5;
+ label6:$stack28 = catch;
+ $stack24=org.apache.rocketmq.common.compression.Lz4Compressor.log;
+ $stack24.warn("Failed to close the lz4 compress stream ",(java.lang.Throwable)$stack28);
+ goto label5;
+ label7:$stack27 = catch;
+ throw $stack27;
+ label8:l8 = catch;
+ label9:lz4InputStream.close();
+ byteArrayInputStream.close();
+ label10:goto label11;
+ label12:$stack23 = catch;
+ $stack24=org.apache.rocketmq.common.compression.Lz4Compressor.log;
+ $stack24.warn("Failed to close the lz4 compress stream ",(java.lang.Throwable)$stack23);
+ label11:throw l8;
+ label5:return  result;
+ catch java.io.IOException: label3 - label4 : label6;
+catch java.io.IOException: label0 - label3 : label7;
+catch java.lang.Throwable: label0 - label3 : label8;
+catch java.io.IOException: label9 - label10 : label12;
+catch java.lang.Throwable: label7 - label9 : label8;
+} 
+

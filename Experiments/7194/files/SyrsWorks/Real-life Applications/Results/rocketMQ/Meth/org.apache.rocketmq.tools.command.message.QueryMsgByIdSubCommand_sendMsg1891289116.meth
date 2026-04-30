@@ -1,0 +1,30 @@
+void org.apache.rocketmq.tools.command.message.QueryMsgByIdSubCommand:sendMsg(org.apache.rocketmq.tools.admin.DefaultMQAdminExt defaultMQAdminExt,org.apache.rocketmq.client.producer.DefaultMQProducer defaultMQProducer,java.lang.String msgId)
+{
+org.apache.rocketmq.common.message.MessageExt msg;
+  org.apache.rocketmq.client.producer.SendResult result;
+  java.lang.Object[] $stack7;
+  java.io.PrintStream $stack8;
+  java.lang.Exception $stack17;
+  label0:msg = defaultMQAdminExt.viewMessage(msgId);
+ if (msg==null) goto label1;
+ $stack8=java.lang.System.out;
+ $stack7=new java.lang.Object[1];
+ $stack7[0]=msgId;
+ $stack8.printf("prepare resend msg. originalMsgId=%s",$stack7);
+ result = defaultMQProducer.send((org.apache.rocketmq.common.message.Message)msg);
+ $stack8=java.lang.System.out;
+ $stack7=new java.lang.Object[1];
+ $stack7[0]=result;
+ $stack8.printf("%s",$stack7);
+ goto label2;
+ label1:$stack8=java.lang.System.out;
+ $stack7=new java.lang.Object[1];
+ $stack7[0]=msgId;
+ $stack8.printf("no message. msgId=%s",$stack7);
+ label2:goto label3;
+ label4:$stack17 = catch;
+ $stack17.printStackTrace();
+ label3:return;
+ catch java.lang.Exception: label0 - label2 : label4;
+} 
+

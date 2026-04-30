@@ -1,0 +1,74 @@
+    private static java.lang.Class findExpectedType(java.lang.Class)
+    {
+        java.lang.Class fromClass;
+        java.lang.reflect.Method[] arr$;
+        int len$, i$;
+        java.lang.reflect.Method method;
+        java.lang.Error $stack6;
+        boolean $stack11;
+        java.lang.Class[] $stack14;
+
+        fromClass := @parameter0: java.lang.Class;
+
+     label1:
+        if fromClass == class "Ljava/lang/Object;" goto label5;
+/*31*/
+
+        arr$ = staticinvoke <org.junit.internal.MethodSorter: java.lang.reflect.Method[] getDeclaredMethods(java.lang.Class)>(fromClass);
+/*32*/
+/*32*/
+
+        len$ = lengthof arr$;
+/*32*/
+
+        i$ = 0;
+/*32*/
+
+     label2:
+        if i$ >= len$ goto label4;
+/*32*/
+
+        method = arr$[i$];
+/*31*/
+
+        $stack11 = staticinvoke <org.junit.internal.matchers.TypeSafeMatcher: boolean isMatchesSafelyMethod(java.lang.reflect.Method)>(method);
+/*33*/
+
+        if $stack11 == 0 goto label3;
+/*33*/
+
+        $stack14 = virtualinvoke method.<java.lang.reflect.Method: java.lang.Class[] getParameterTypes()>();
+/*34*/
+
+        fromClass = $stack14[0];
+/*34*/
+
+        return fromClass;
+/*34*/
+
+     label3:
+        i$ = i$ + 1;
+/*32*/
+
+        goto label2;
+/*32*/
+
+     label4:
+        fromClass = virtualinvoke fromClass.<java.lang.Class: java.lang.Class getSuperclass()>();
+/*31*/
+/*31*/
+
+        goto label1;
+/*31*/
+
+     label5:
+        $stack6 = new java.lang.Error;
+/*39*/
+
+        specialinvoke $stack6.<java.lang.Error: void <init>(java.lang.String)>("Cannot determine correct type for matchesSafely() method.");
+/*39*/
+
+        throw $stack6;
+/*39*/
+    }
+

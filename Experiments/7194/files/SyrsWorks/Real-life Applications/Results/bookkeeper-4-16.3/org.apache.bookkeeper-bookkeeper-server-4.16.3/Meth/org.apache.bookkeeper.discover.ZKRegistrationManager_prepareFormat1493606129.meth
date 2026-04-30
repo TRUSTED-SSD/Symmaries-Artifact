@@ -1,0 +1,57 @@
+boolean org.apache.bookkeeper.discover.ZKRegistrationManager:prepareFormat()
+{
+boolean ledgerRootExists;
+  boolean availableNodeExists;
+  java.lang.String $stack3;
+  org.apache.zookeeper.ZooKeeper $stack4;
+  org.apache.zookeeper.data.Stat $stack6;
+  org.apache.zookeeper.CreateMode $stack15;
+  java.util.List $stack16;
+  byte[] $stack17;
+  java.nio.charset.Charset $stack22;
+  java.lang.String $stack25;
+  $stack4=this.zk;
+ $stack3=this.ledgersRootPath;
+ $stack6 = $stack4.exists($stack3,(boolean)0);
+ if (null==$stack6) goto label0;
+ ledgerRootExists=1;
+ goto label1;
+ label0:ledgerRootExists=0;
+ label1:$stack4=this.zk;
+ $stack3=this.bookieRegistrationPath;
+ $stack6 = $stack4.exists($stack3,(boolean)0);
+ if (null==$stack6) goto label2;
+ availableNodeExists=1;
+ goto label3;
+ label2:availableNodeExists=0;
+ label3:if (ledgerRootExists!=0) goto label4;
+ $stack4=this.zk;
+ $stack25=this.ledgersRootPath;
+ $stack3="";
+ $stack22=java.nio.charset.StandardCharsets.UTF_8;
+ $stack17 = $stack3.getBytes($stack22);
+ $stack16=this.zkAcls;
+ $stack15=org.apache.zookeeper.CreateMode.PERSISTENT;
+ org.apache.bookkeeper.util.ZkUtils.createFullPathOptimistic($stack4,$stack25,$stack17,$stack16,$stack15);
+ label4:if (availableNodeExists!=0) goto label5;
+ $stack4=this.zk;
+ $stack25=this.bookieRegistrationPath;
+ $stack3="";
+ $stack22=java.nio.charset.StandardCharsets.UTF_8;
+ $stack17 = $stack3.getBytes($stack22);
+ $stack16=this.zkAcls;
+ $stack15=org.apache.zookeeper.CreateMode.PERSISTENT;
+ $stack4.create($stack25,$stack17,$stack16,$stack15);
+ label5:$stack4=this.zk;
+ $stack3=this.bookieReadonlyRegistrationPath;
+ $stack6 = $stack4.exists($stack3,(boolean)0);
+ if (null!=$stack6) goto label6;
+ $stack4=this.zk;
+ $stack3=this.bookieReadonlyRegistrationPath;
+ $stack17=new byte[0];
+ $stack16=this.zkAcls;
+ $stack15=org.apache.zookeeper.CreateMode.PERSISTENT;
+ $stack4.create($stack3,$stack17,$stack16,$stack15);
+ label6:return  ledgerRootExists;
+ } 
+

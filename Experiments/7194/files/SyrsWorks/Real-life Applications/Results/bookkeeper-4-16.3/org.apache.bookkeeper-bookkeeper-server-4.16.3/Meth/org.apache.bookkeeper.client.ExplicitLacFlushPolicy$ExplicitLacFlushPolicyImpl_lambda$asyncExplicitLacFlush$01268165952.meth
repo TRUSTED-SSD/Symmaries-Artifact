@@ -1,0 +1,15 @@
+void org.apache.bookkeeper.client.ExplicitLacFlushPolicy$ExplicitLacFlushPolicyImpl:lambda$asyncExplicitLacFlush$0(org.apache.bookkeeper.client.PendingWriteLacOp op)
+{
+org.apache.bookkeeper.util.ByteBufList toSend;
+  org.apache.bookkeeper.client.LedgerHandle $stack3;
+  org.apache.bookkeeper.proto.checksum.DigestManager $stack5;
+  long $stack6;
+  $stack3=this.lh;
+ $stack5=$stack3.macManager;
+ $stack3=this.lh;
+ $stack6 = $stack3.getLastAddConfirmed();
+ toSend = $stack5.computeDigestAndPackageForSendingLac($stack6);
+ op.initiate(toSend);
+ return;
+ } 
+

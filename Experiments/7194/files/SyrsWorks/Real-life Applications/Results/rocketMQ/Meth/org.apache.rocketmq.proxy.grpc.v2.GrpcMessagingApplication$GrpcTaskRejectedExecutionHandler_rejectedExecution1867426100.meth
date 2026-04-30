@@ -1,0 +1,28 @@
+void org.apache.rocketmq.proxy.grpc.v2.GrpcMessagingApplication$GrpcTaskRejectedExecutionHandler:rejectedExecution(java.lang.Runnable r,java.util.concurrent.ThreadPoolExecutor executor)
+{
+org.apache.rocketmq.proxy.grpc.v2.GrpcMessagingApplication$GrpcTask grpcTask;
+  boolean $stack4;
+  io.grpc.stub.StreamObserver $stack5;
+  java.lang.Object $stack6;
+  java.lang.Object $stack7;
+  org.apache.rocketmq.proxy.common.ProxyContext $stack8;
+  org.apache.rocketmq.proxy.grpc.v2.GrpcMessagingApplication $stack9;
+  java.lang.Throwable $stack10;
+  org.apache.rocketmq.logging.org.slf4j.Logger $stack11;
+  $stack4=r instanceof org.apache.rocketmq.proxy.grpc.v2.GrpcMessagingApplication$GrpcTask;
+ if ($stack4==0) goto label0;
+ label1:grpcTask=(org.apache.rocketmq.proxy.grpc.v2.GrpcMessagingApplication$GrpcTask) r;
+ $stack9=this.this$0;
+ $stack8=grpcTask.context;
+ $stack7=grpcTask.request;
+ $stack6=grpcTask.executeRejectResponse;
+ $stack5=grpcTask.streamObserver;
+ $stack9.writeResponse($stack8,$stack7,$stack6,$stack5,null,null);
+ label2:goto label0;
+ label3:$stack10 = catch;
+ $stack11 = org.apache.rocketmq.proxy.grpc.v2.GrpcMessagingApplication.access$000();
+ $stack11.warn("write rejected error response failed",$stack10);
+ label0:return;
+ catch java.lang.Throwable: label1 - label2 : label3;
+} 
+

@@ -1,0 +1,44 @@
+void org.junit.runners.ParentRunner:sort(org.junit.runner.manipulation.Sorter sorter)
+{
+java.lang.Object l2;
+  java.lang.Object i$;
+  java.lang.Object each;
+  java.lang.Throwable l5;
+  java.util.Collection $stack7;
+  boolean $stack9;
+  java.util.Comparator $stack12;
+  java.util.ArrayList tmp$1217855132;
+  java.util.Iterator tmp$1857246968;
+  java.util.List tmp$532361749;
+  i$=this.childrenLock;
+ l2=i$;
+ monitorenter i$;
+ label0:$stack7 = this#org.junit.runners.ParentRunner:getFilteredChildren();
+ i$ = $stack7.iterator();
+ label1:tmp$1857246968=(java.util.Iterator) i$;
+ $stack9 = tmp$1857246968.hasNext();
+ if ($stack9==0) goto label2;
+ tmp$1857246968=(java.util.Iterator) i$;
+ each = tmp$1857246968.next();
+ sorter.apply(each);
+ goto label1;
+ label2:tmp$1217855132=new java.util.ArrayList;
+ $stack7 = this#org.junit.runners.ParentRunner:getFilteredChildren();
+ tmp$1217855132#java.util.ArrayList($stack7);
+ i$=tmp$1217855132;
+ $stack12 = this#org.junit.runners.ParentRunner:comparator(sorter);
+ tmp$532361749=(java.util.List) tmp$1217855132;
+ java.util.Collections.sort(tmp$532361749,$stack12);
+ $stack7=(java.util.Collection) tmp$1217855132;
+ $stack7 = java.util.Collections.unmodifiableCollection($stack7);
+ this.filteredChildren=$stack7;
+ monitorexit l2;
+ label3:goto label4;
+ label5:l5 = catch;
+ monitorexit l2;
+ label6:throw l5;
+ label4:return;
+ catch java.lang.Throwable: label0 - label3 : label5;
+catch java.lang.Throwable: label5 - label6 : label5;
+} 
+

@@ -1,0 +1,48 @@
+java.util.concurrent.CompletableFuture org.apache.bookkeeper.meta.MSLedgerManagerFactory$MsLedgerManager:writeLedgerMetadata(long ledgerId,org.apache.bookkeeper.client.api.LedgerMetadata metadata,org.apache.bookkeeper.versioning.Version currentVersion)
+{
+java.util.concurrent.CompletableFuture promise;
+  byte[] bytes;
+  org.apache.bookkeeper.metastore.Value ioe;
+  java.lang.String key;
+  org.apache.bookkeeper.meta.LedgerMetadataSerDe $stack11;
+  org.slf4j.Logger $stack15;
+  boolean $stack16;
+  java.lang.Long $stack17;
+  org.apache.bookkeeper.meta.MSLedgerManagerFactory$MsLedgerManager$4 $stack19;
+  org.apache.bookkeeper.metastore.MetastoreScannableTable $stack20;
+  java.lang.Object[] $stack22;
+  java.io.IOException $stack39;
+  org.apache.bookkeeper.client.BKException$MetaStoreException $stack40;
+  promise=new java.util.concurrent.CompletableFuture;
+ promise#java.util.concurrent.CompletableFuture();
+ label0:$stack11=this.serDe;
+ bytes = $stack11.serialize(metadata);
+ label1:goto label2;
+ label3:$stack39 = catch;
+ $stack40=new org.apache.bookkeeper.client.BKException$MetaStoreException;
+ $stack40#org.apache.bookkeeper.client.BKException$MetaStoreException((java.lang.Throwable)$stack39);
+ promise.completeExceptionally((java.lang.Throwable)$stack40);
+ return  promise;
+ label2:ioe=new org.apache.bookkeeper.metastore.Value;
+ ioe#org.apache.bookkeeper.metastore.Value();
+ ioe = ioe.setField(".META",bytes);
+ $stack15 = org.apache.bookkeeper.meta.MSLedgerManagerFactory.access$000();
+ $stack16 = $stack15.isDebugEnabled();
+ if ($stack16==0) goto label4;
+ $stack15 = org.apache.bookkeeper.meta.MSLedgerManagerFactory.access$000();
+ $stack22=new java.lang.Object[2];
+ $stack17 = java.lang.Long.valueOf(ledgerId);
+ $stack22[0]=$stack17;
+ $stack22[1]=currentVersion;
+ dummyClass.lowSink("Writing ledger {} metadata, version {}");
+$stack15.debug("Writing ledger {} metadata, version {}",$stack22);
+ label4:$stack17 = java.lang.Long.valueOf(ledgerId);
+ key = org.apache.bookkeeper.meta.MSLedgerManagerFactory.ledgerId2Key($stack17);
+ $stack19=new org.apache.bookkeeper.meta.MSLedgerManagerFactory$MsLedgerManager$4;
+ $stack19#org.apache.bookkeeper.meta.MSLedgerManagerFactory$MsLedgerManager$4(this,ledgerId,promise,metadata,key);
+ $stack20=this.ledgerTable;
+ $stack20.put(key,ioe,currentVersion,(org.apache.bookkeeper.metastore.MetastoreCallback)$stack19,null);
+ return  promise;
+ catch java.io.IOException: label0 - label1 : label3;
+} 
+

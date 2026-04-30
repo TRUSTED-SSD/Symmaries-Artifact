@@ -1,0 +1,29 @@
+java.lang.Object org.apache.bookkeeper.common.collections.BatchedArrayBlockingQueue:dequeueOne()
+{
+java.lang.Object item;
+  int $stack2;
+  java.lang.Object[] $stack3;
+  int $stack8;
+  java.util.concurrent.locks.Condition $stack12;
+  $stack3=this.data;
+ $stack2=this.consumerIdx;
+ item=$stack3[$stack2];
+ $stack3=this.data;
+ $stack2=this.consumerIdx;
+ $stack3[$stack2]=null;
+ $stack2=this.consumerIdx;
+ $stack2=($stack2+1);
+ this.consumerIdx=$stack2;
+ $stack8=this.capacity;
+ if ($stack2!=$stack8) goto label0;
+ this.consumerIdx=0;
+ label0:$stack2=this.size;
+ $stack8=($stack2-1);
+ this.size=$stack8;
+ $stack8=this.capacity;
+ if ($stack2!=$stack8) goto label1;
+ $stack12=this.notFull;
+ $stack12.signalAll();
+ label1:return  item;
+ } 
+

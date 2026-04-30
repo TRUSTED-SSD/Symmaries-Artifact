@@ -1,0 +1,47 @@
+org.apache.bookkeeper.http.service.HttpServiceResponse org.apache.bookkeeper.server.http.service.AutoRecoveryStatusService:handlePutStatus(org.apache.bookkeeper.http.service.HttpServiceRequest request,org.apache.bookkeeper.meta.LedgerUnderreplicationManager ledgerUnderreplicationManager)
+{
+java.util.Map params;
+  java.lang.String enabled;
+  java.util.Map $stack7;
+  java.lang.Object $stack8;
+  boolean $stack10;
+  java.lang.Boolean $stack14;
+  com.google.common.collect.ImmutableMap $stack15;
+  org.apache.bookkeeper.http.service.HttpServiceResponse $stack17;
+  org.apache.bookkeeper.http.HttpServer$StatusCode $stack18;
+  java.lang.StringBuilder $stack23;
+  params = request.getParams();
+ $stack7 = java.util.Collections.emptyMap();
+ $stack8 = org.apache.commons.lang3.ObjectUtils.defaultIfNull((java.lang.Object)params,(java.lang.Object)$stack7);
+ params=(java.util.Map) $stack8;
+ $stack8 = params.get((java.lang.Object)"enabled");
+ enabled=(java.lang.String) $stack8;
+ if (enabled!=null) goto label0;
+ $stack17=new org.apache.bookkeeper.http.service.HttpServiceResponse;
+ $stack23=new java.lang.StringBuilder;
+ $stack23#java.lang.StringBuilder();
+ $stack23 = $stack23.append("Param \'enabled\' not found in ");
+ $stack23 = $stack23.append((java.lang.Object)params);
+ enabled = $stack23.toString();
+ $stack18=org.apache.bookkeeper.http.HttpServer$StatusCode.BAD_REQUEST;
+ $stack17#org.apache.bookkeeper.http.service.HttpServiceResponse(enabled,$stack18);
+ return  $stack17;
+ label0:$stack10 = java.lang.Boolean.parseBoolean(enabled);
+ if ($stack10==0) goto label1;
+ $stack10 = ledgerUnderreplicationManager.isLedgerReplicationEnabled();
+ if ($stack10!=0) goto label2;
+ ledgerUnderreplicationManager.enableLedgerReplication();
+ goto label2;
+ label1:$stack10 = ledgerUnderreplicationManager.isLedgerReplicationEnabled();
+ if ($stack10==0) goto label2;
+ ledgerUnderreplicationManager.disableLedgerReplication();
+ label2:$stack10 = ledgerUnderreplicationManager.isLedgerReplicationEnabled();
+ $stack14 = java.lang.Boolean.valueOf($stack10);
+ $stack15 = com.google.common.collect.ImmutableMap.of((java.lang.Object)"enabled",(java.lang.Object)$stack14);
+ $stack17=new org.apache.bookkeeper.http.service.HttpServiceResponse;
+ enabled = org.apache.bookkeeper.common.util.JsonUtil.toJson((java.lang.Object)$stack15);
+ $stack18=org.apache.bookkeeper.http.HttpServer$StatusCode.OK;
+ $stack17#org.apache.bookkeeper.http.service.HttpServiceResponse(enabled,$stack18);
+ return  $stack17;
+ } 
+

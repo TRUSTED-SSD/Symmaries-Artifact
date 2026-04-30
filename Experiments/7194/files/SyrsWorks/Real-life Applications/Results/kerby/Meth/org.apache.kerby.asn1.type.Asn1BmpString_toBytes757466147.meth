@@ -1,0 +1,33 @@
+void org.apache.kerby.asn1.type.Asn1BmpString:toBytes()
+{
+java.lang.String strValue;
+  int len;
+  byte[] bytes;
+  int i;
+  char c;
+  java.lang.Object $stack6;
+  char $stack10;
+  byte $stack11;
+  int $stack12;
+  $stack6 = this.getValue();
+ strValue=(java.lang.String) $stack6;
+ len = strValue.length();
+ i=(len * 2);
+ bytes=new byte[i];
+ i=0;
+ label0:if (i==len) goto label1;
+ c = strValue.charAt(i);
+ $stack12=(2 * i);
+ $stack10=(c>>8);
+ $stack11=(byte) $stack10;
+ bytes[$stack12]=$stack11;
+ $stack12=(2 * i);
+ $stack12=($stack12+1);
+ $stack11=(byte) c;
+ bytes[$stack12]=$stack11;
+ i=(i+1);
+ goto label0;
+ label1:this.setBytes(bytes);
+ return;
+ } 
+

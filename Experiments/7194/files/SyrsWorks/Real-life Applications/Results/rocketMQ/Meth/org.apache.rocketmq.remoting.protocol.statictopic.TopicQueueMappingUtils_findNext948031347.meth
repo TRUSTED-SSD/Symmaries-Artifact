@@ -1,0 +1,43 @@
+static org.apache.rocketmq.remoting.protocol.statictopic.LogicQueueMappingItem org.apache.rocketmq.remoting.protocol.statictopic.TopicQueueMappingUtils:findNext(java.util.List items,org.apache.rocketmq.remoting.protocol.statictopic.LogicQueueMappingItem currentItem,boolean ignoreNegative)
+{
+int i;
+  org.apache.rocketmq.remoting.protocol.statictopic.LogicQueueMappingItem item;
+  int $stack5;
+  java.lang.Object $stack6;
+  int $stack8;
+  long $stack15;
+  byte $stack16;
+  if (items==null) goto label0;
+ if (currentItem!=null) goto label1;
+ label0:return  null;
+ label1:i=0;
+ label2:$stack5 = items.size();
+ if (i>=$stack5) goto label3;
+ $stack6 = items.get(i);
+ item=(org.apache.rocketmq.remoting.protocol.statictopic.LogicQueueMappingItem) $stack6;
+ if (ignoreNegative==0) goto label4;
+ $stack15 = item.getLogicOffset();
+ $stack16=($stack15 cmp 0L);
+ if ($stack16>=0) goto label4;
+ goto label5;
+ label4:$stack5 = item.getGen();
+ $stack8 = currentItem.getGen();
+ if ($stack5!=$stack8) goto label5;
+ $stack5 = items.size();
+ $stack5=($stack5-1);
+ if (i>=$stack5) goto label6;
+ i=(i+1);
+ $stack6 = items.get(i);
+ item=(org.apache.rocketmq.remoting.protocol.statictopic.LogicQueueMappingItem) $stack6;
+ if (ignoreNegative==0) goto label7;
+ $stack15 = item.getLogicOffset();
+ $stack16=($stack15 cmp 0L);
+ if ($stack16>=0) goto label7;
+ return  null;
+ label7:return  item;
+ label6:return  null;
+ label5:i=(i+1);
+ goto label2;
+ label3:return  null;
+ } 
+

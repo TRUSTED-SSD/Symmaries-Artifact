@@ -1,0 +1,14 @@
+void org.apache.rocketmq.proxy.processor.AbstractProcessor:validateReceiptHandle(org.apache.rocketmq.common.consumer.ReceiptHandle handle)
+{
+boolean $stack2;
+  org.apache.rocketmq.proxy.common.ProxyException $stack3;
+  org.apache.rocketmq.proxy.common.ProxyExceptionCode $stack4;
+  $stack2 = handle.isExpired();
+ if ($stack2==0) goto label0;
+ $stack3=new org.apache.rocketmq.proxy.common.ProxyException;
+ $stack4=org.apache.rocketmq.proxy.common.ProxyExceptionCode.INVALID_RECEIPT_HANDLE;
+ $stack3#org.apache.rocketmq.proxy.common.ProxyException($stack4,"receipt handle is expired");
+ throw $stack3;
+ label0:return;
+ } 
+

@@ -1,0 +1,53 @@
+com.google.zxing.aztec.encoder.State com.google.zxing.aztec.encoder.State:addBinaryShiftChar(int index)
+{
+com.google.zxing.aztec.encoder.State $this;
+  com.google.zxing.aztec.encoder.Token token;
+  int mode;
+  int bitCount;
+  int $stack7;
+  int[][] $stack8;
+  int[] $stack9;
+  int $stack11;
+  com.google.zxing.aztec.encoder.State $stack15;
+  byte $stack25;
+  $this= this;
+ token=$this.token;
+ mode=$this.mode;
+ bitCount=$this.bitCount;
+ $stack7=$this.mode;
+ if ($stack7==4) goto label0;
+ $stack7=$this.mode;
+ if ($stack7!=2) goto label1;
+ label0:$stack8=com.google.zxing.aztec.encoder.HighLevelEncoder.LATCH_TABLE;
+ $stack9=$stack8[mode];
+ mode=$stack9[0];
+ $stack11=(mode & 65535);
+ $stack7=(mode>>16);
+ token = token.add($stack11,$stack7);
+ mode=(mode>>16);
+ bitCount=(bitCount+mode);
+ mode=0;
+ label1:$stack7=$this.binaryShiftByteCount;
+ if ($stack7==0) goto label2;
+ $stack7=$this.binaryShiftByteCount;
+ if ($stack7!=31) goto label3;
+ label2:$stack25=18;
+ goto label4;
+ label3:$stack7=$this.binaryShiftByteCount;
+ if ($stack7!=62) goto label5;
+ $stack25=9;
+ goto label4;
+ label5:$stack25=8;
+ label4:$stack15=new com.google.zxing.aztec.encoder.State;
+ $stack7=$this.binaryShiftByteCount;
+ $stack7=($stack7+1);
+ bitCount=(bitCount+$stack25);
+ $stack15#com.google.zxing.aztec.encoder.State(token,mode,$stack7,bitCount);
+ $this=$stack15;
+ bitCount=$stack15.binaryShiftByteCount;
+ if (bitCount!=2078) goto label6;
+ index=(index+1);
+ $this = $stack15.endBinaryShift(index);
+ label6:return  $this;
+ } 
+

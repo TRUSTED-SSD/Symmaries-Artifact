@@ -1,0 +1,38 @@
+java.security.PublicKey org.keycloak.adapters.rotation.JWKPublicKeyLocator:getPublicKey(java.lang.String kid,org.keycloak.adapters.KeycloakDeployment deployment)
+{
+int minTimeBetweenRequests;
+  int publicKeyCacheTtl;
+  int currentTime;
+  java.security.PublicKey publicKey;
+  org.keycloak.adapters.rotation.JWKPublicKeyLocator l7;
+  java.lang.Throwable l8;
+  int $stack15;
+  org.jboss.logging.Logger $stack18;
+  minTimeBetweenRequests = deployment.getMinTimeBetweenJwksRequests();
+ publicKeyCacheTtl = deployment.getPublicKeyCacheTtl();
+ currentTime = org.keycloak.common.util.Time.currentTime();
+ publicKey = this#org.keycloak.adapters.rotation.JWKPublicKeyLocator:lookupCachedKey(publicKeyCacheTtl,currentTime,kid);
+ if (publicKey==null) goto label0;
+ return  publicKey;
+ label0:l7=this;
+ monitorenter this;
+ label1:currentTime = org.keycloak.common.util.Time.currentTime();
+ $stack15=this.lastRequestTime;
+ minTimeBetweenRequests=($stack15+minTimeBetweenRequests);
+ if (currentTime<=minTimeBetweenRequests) goto label2;
+ this#org.keycloak.adapters.rotation.JWKPublicKeyLocator(deployment);
+ this.lastRequestTime=currentTime;
+ goto label3;
+ label2:$stack18=org.keycloak.adapters.rotation.JWKPublicKeyLocator.log;
+ minTimeBetweenRequests=this.lastRequestTime;
+ $stack18.debugf("Won\'t send request to realm jwks url. Last request time was %d. Current time is %d.",minTimeBetweenRequests,currentTime);
+ label3:publicKey = this#org.keycloak.adapters.rotation.JWKPublicKeyLocator:lookupCachedKey(publicKeyCacheTtl,currentTime,kid);
+ monitorexit this;
+ label4:return  publicKey;
+ label5:l8 = catch;
+ monitorexit this;
+ label6:throw l8;
+ catch java.lang.Throwable: label1 - label4 : label5;
+catch java.lang.Throwable: label5 - label6 : label5;
+} 
+

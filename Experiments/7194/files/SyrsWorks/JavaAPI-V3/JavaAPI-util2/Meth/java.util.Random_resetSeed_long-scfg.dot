@@ -1,0 +1,40 @@
+digraph G {
+  node [shape=box, ];
+  "pc0_js1" [label="〈$r2 = java.util.Random.unsafe, js1〉", ];
+  "pc1_js1" [label="〈$l1 = java.util.Random.seedOffset, js1〉", ];
+  "pc2_js1" [label="〈$r1 = new java.util.concurrent.atomic.AtomicLong, js1〉",
+             ];
+  "pc3_js1" [label="〈$r1#java.util.concurrent.atomic.AtomicLong.init (l0), js1〉\n\
+tt",
+             ];
+  "pc4_js1" [label="〈$r2.native_putObjectVolatile ((java.lang.Object) this, $l1, (java.lang.Object) $r1), js1〉\n\
+tt",
+             ];
+  "pc5_js1" [label="〈return, js1〉", ];
+  "pc6_js1" [label="〈sink, js1〉\n\
+obj_level(this) ⊑ ret(obj_level(this))' ∧ (ret(this.><this)' ∨ ¬this.><this)",
+             ];
+  
+  
+  "pc0_js1" -> "pc1_js1" [label="tt,\n\
+{level($r2) := pc,\n\
+ obj_level($r2) := ⊥}",
+                          ];
+  "pc1_js1" -> "pc2_js1" [label="tt,\n\
+{level($l1) := pc}", ];
+  "pc2_js1" -> "pc3_js1" [label="tt,\n\
+{this.><$r1 := ff,\n\
+ level($r1) := pc,\n\
+ obj_level($r1) := pc}",
+                          ];
+  "pc3_js1" -> "pc4_js1" [label="tt,\n\
+{this.><$r1 := ff,\n\
+ obj_level($r1) := pc ⊔ level(l0)}",
+                          ];
+  "pc4_js1" -> "pc5_js1" [label="tt,\n\
+{obj_level($r2) := pc ⊔ level(l0) ⊔ level(this) ⊔ obj_level(this)}",
+                          ];
+  "pc5_js1" -> "pc6_js1" [label="tt,\n\
+{ϕ := S5}", ];
+  
+  }

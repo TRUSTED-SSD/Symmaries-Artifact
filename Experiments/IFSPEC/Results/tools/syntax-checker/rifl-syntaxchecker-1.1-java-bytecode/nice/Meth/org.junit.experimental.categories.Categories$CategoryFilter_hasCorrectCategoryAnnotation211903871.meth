@@ -1,0 +1,38 @@
+boolean org.junit.experimental.categories.Categories$CategoryFilter:hasCorrectCategoryAnnotation(org.junit.runner.Description description)
+{
+java.util.Set childCategories;
+  boolean $stack4;
+  java.util.Set $stack5;
+  childCategories = org.junit.experimental.categories.Categories$CategoryFilter.categories(description);
+ $stack4 = childCategories.isEmpty();
+ if ($stack4==0) goto label0;
+ childCategories=this.included;
+ $stack4 = childCategories.isEmpty();
+ return  $stack4;
+ label0:$stack5=this.excluded;
+ $stack4 = $stack5.isEmpty();
+ if ($stack4!=0) goto label1;
+ $stack4=this.excludedAny;
+ if ($stack4==0) goto label2;
+ $stack5=this.excluded;
+ $stack4 = this#org.junit.experimental.categories.Categories$CategoryFilter:matchesAnyParentCategories(childCategories,$stack5);
+ if ($stack4==0) goto label1;
+ return  0;
+ label2:$stack5=this.excluded;
+ $stack4 = this#org.junit.experimental.categories.Categories$CategoryFilter:matchesAllParentCategories(childCategories,$stack5);
+ if ($stack4==0) goto label1;
+ return  0;
+ label1:$stack5=this.included;
+ $stack4 = $stack5.isEmpty();
+ if ($stack4==0) goto label3;
+ return  1;
+ label3:$stack4=this.includedAny;
+ if ($stack4==0) goto label4;
+ $stack5=this.included;
+ $stack4 = this#org.junit.experimental.categories.Categories$CategoryFilter:matchesAnyParentCategories(childCategories,$stack5);
+ return  $stack4;
+ label4:$stack5=this.included;
+ $stack4 = this#org.junit.experimental.categories.Categories$CategoryFilter:matchesAllParentCategories(childCategories,$stack5);
+ return  $stack4;
+ } 
+

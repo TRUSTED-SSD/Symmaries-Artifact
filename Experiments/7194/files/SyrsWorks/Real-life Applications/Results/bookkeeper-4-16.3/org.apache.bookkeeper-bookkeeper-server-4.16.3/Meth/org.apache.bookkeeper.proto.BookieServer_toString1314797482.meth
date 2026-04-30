@@ -1,0 +1,29 @@
+java.lang.String org.apache.bookkeeper.proto.BookieServer:toString()
+{
+java.lang.String addr;
+  java.lang.String id;
+  java.net.UnknownHostException l3;
+  org.apache.bookkeeper.conf.ServerConfiguration $stack4;
+  org.apache.bookkeeper.net.BookieSocketAddress $stack5;
+  org.apache.bookkeeper.net.BookieId $stack7;
+  java.lang.StringBuilder $stack9;
+  addr="UNKNOWN";
+ id="?";
+ label0:$stack4=this.conf;
+ $stack5 = org.apache.bookkeeper.bookie.BookieImpl.getBookieAddress($stack4);
+ addr = $stack5.toString();
+ $stack7 = this.getBookieId();
+ id = $stack7.toString();
+ label1:goto label2;
+ label3:l3 = catch;
+ label2:$stack9=new java.lang.StringBuilder;
+ $stack9#java.lang.StringBuilder();
+ $stack9 = $stack9.append("Bookie Server listening on ");
+ $stack9 = $stack9.append(addr);
+ $stack9 = $stack9.append(" with id ");
+ $stack9 = $stack9.append(id);
+ addr = $stack9.toString();
+ return  addr;
+ catch java.net.UnknownHostException: label0 - label1 : label3;
+} 
+

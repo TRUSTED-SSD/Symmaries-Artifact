@@ -1,0 +1,124 @@
+    protected rifl.spec.java.JavaField readField(org.w3c.dom.Element, boolean) throws rifl.spec.RIFLIntegrityException
+    {
+        rifl.spec.java.JavaRIFLReader this;
+        org.w3c.dom.Element elem;
+        boolean isSource, $stack7;
+        java.lang.String className, fieldName;
+        rifl.spec.java.JavaField $stack10;
+        rifl.spec.RIFLIntegrityException $stack11;
+        java.lang.StringBuilder $stack12;
+
+        this := @this: rifl.spec.java.JavaRIFLReader;
+
+        elem := @parameter0: org.w3c.dom.Element;
+
+        isSource := @parameter1: boolean;
+
+        className = interfaceinvoke elem.<org.w3c.dom.Element: java.lang.String getAttribute(java.lang.String)>("class");
+/*115*/
+/*115*/
+
+        fieldName = interfaceinvoke elem.<org.w3c.dom.Element: java.lang.String getAttribute(java.lang.String)>("name");
+/*116*/
+/*116*/
+
+        $stack7 = staticinvoke <rifl.spec.java.JavaSyntaxChecker: boolean isArrayClassNameCorrect(java.lang.String)>(className);
+/*118*/
+
+        if $stack7 == 0 goto label1;
+/*118*/
+
+        $stack7 = virtualinvoke fieldName.<java.lang.String: boolean equals(java.lang.Object)>("content");
+/*119*/
+
+        if $stack7 != 0 goto label1;
+/*119*/
+
+        $stack7 = virtualinvoke fieldName.<java.lang.String: boolean equals(java.lang.Object)>("length");
+/*124*/
+
+        if $stack7 != 0 goto label1;
+/*124*/
+
+        $stack11 = new rifl.spec.RIFLIntegrityException;
+/*120*/
+
+        specialinvoke $stack11.<rifl.spec.RIFLIntegrityException: void <init>(java.lang.String)>("If class name of field is an array class, fields may only be content or length.");
+/*120*/
+
+        throw $stack11;
+/*120*/
+
+     label1:
+        $stack7 = staticinvoke <rifl.spec.java.JavaSyntaxChecker: boolean isClassNameCorrect(java.lang.String)>(className);
+/*124*/
+
+        if $stack7 != 0 goto label2;
+/*124*/
+
+        $stack7 = staticinvoke <rifl.spec.java.JavaSyntaxChecker: boolean isArrayClassNameCorrect(java.lang.String)>(className);
+/*125*/
+
+        if $stack7 != 0 goto label2;
+/*125*/
+
+        $stack11 = new rifl.spec.RIFLIntegrityException;
+/*126*/
+
+        $stack12 = new java.lang.StringBuilder;
+/*126*/
+
+        specialinvoke $stack12.<java.lang.StringBuilder: void <init>(java.lang.String)>("Invalid class name: ");
+/*126*/
+
+        $stack12 = virtualinvoke $stack12.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>(className);
+/*126*/
+
+        className = virtualinvoke $stack12.<java.lang.StringBuilder: java.lang.String toString()>();
+/*126*/
+
+        specialinvoke $stack11.<rifl.spec.RIFLIntegrityException: void <init>(java.lang.String)>(className);
+/*126*/
+
+        throw $stack11;
+/*126*/
+
+     label2:
+        $stack7 = staticinvoke <rifl.spec.java.JavaSyntaxChecker: boolean isFieldNameCorrect(java.lang.String)>(fieldName);
+/*129*/
+
+        if $stack7 != 0 goto label3;
+/*129*/
+
+        $stack11 = new rifl.spec.RIFLIntegrityException;
+/*130*/
+
+        $stack12 = new java.lang.StringBuilder;
+/*130*/
+
+        specialinvoke $stack12.<java.lang.StringBuilder: void <init>(java.lang.String)>("Invalid field name: ");
+/*130*/
+
+        $stack12 = virtualinvoke $stack12.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>(fieldName);
+/*130*/
+
+        className = virtualinvoke $stack12.<java.lang.StringBuilder: java.lang.String toString()>();
+/*130*/
+
+        specialinvoke $stack11.<rifl.spec.RIFLIntegrityException: void <init>(java.lang.String)>(className);
+/*130*/
+
+        throw $stack11;
+/*130*/
+
+     label3:
+        $stack10 = new rifl.spec.java.JavaField;
+/*133*/
+
+        specialinvoke $stack10.<rifl.spec.java.JavaField: void <init>(java.lang.String,java.lang.String,boolean)>(className, fieldName, isSource);
+/*133*/
+
+        return $stack10;
+/*133*/
+    }
+

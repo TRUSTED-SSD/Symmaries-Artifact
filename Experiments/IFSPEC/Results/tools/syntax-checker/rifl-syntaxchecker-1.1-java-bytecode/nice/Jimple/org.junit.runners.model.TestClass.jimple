@@ -1,0 +1,73 @@
+    public void <init>(java.lang.Class)
+    {
+        org.junit.runners.model.TestClass this;
+        java.lang.Class clazz;
+        java.util.LinkedHashMap methodsForAnnotations, fieldsForAnnotations;
+        java.util.Map $stack6;
+        java.lang.reflect.Constructor[] $stack8;
+        int $stack9;
+        java.lang.IllegalArgumentException $stack17;
+
+        this := @this: org.junit.runners.model.TestClass;
+
+        clazz := @parameter0: java.lang.Class;
+
+        specialinvoke this.<java.lang.Object: void <init>()>();
+/*45*/
+
+        this.<org.junit.runners.model.TestClass: java.lang.Class clazz> = clazz;
+/*46*/
+
+        if clazz == null goto label1;
+/*47*/
+
+        $stack8 = virtualinvoke clazz.<java.lang.Class: java.lang.reflect.Constructor[] getConstructors()>();
+/*61*/
+
+        $stack9 = lengthof $stack8;
+/*61*/
+
+        if $stack9 <= 1 goto label1;
+/*61*/
+
+        $stack17 = new java.lang.IllegalArgumentException;
+/*48*/
+
+        specialinvoke $stack17.<java.lang.IllegalArgumentException: void <init>(java.lang.String)>("Test class can only have one constructor");
+/*48*/
+
+        throw $stack17;
+/*48*/
+
+     label1:
+        methodsForAnnotations = new java.util.LinkedHashMap;
+/*52*/
+
+        specialinvoke methodsForAnnotations.<java.util.LinkedHashMap: void <init>()>();
+/*52*/
+
+        fieldsForAnnotations = new java.util.LinkedHashMap;
+/*54*/
+
+        specialinvoke fieldsForAnnotations.<java.util.LinkedHashMap: void <init>()>();
+/*54*/
+
+        virtualinvoke this.<org.junit.runners.model.TestClass: void scanAnnotatedMembers(java.util.Map,java.util.Map)>(methodsForAnnotations, fieldsForAnnotations);
+/*57*/
+
+        $stack6 = staticinvoke <org.junit.runners.model.TestClass: java.util.Map makeDeeplyUnmodifiable(java.util.Map)>(methodsForAnnotations);
+/*59*/
+
+        this.<org.junit.runners.model.TestClass: java.util.Map methodsForAnnotations> = $stack6;
+/*59*/
+
+        $stack6 = staticinvoke <org.junit.runners.model.TestClass: java.util.Map makeDeeplyUnmodifiable(java.util.Map)>(fieldsForAnnotations);
+/*60*/
+
+        this.<org.junit.runners.model.TestClass: java.util.Map fieldsForAnnotations> = $stack6;
+/*60*/
+
+        return;
+/*61*/
+    }
+

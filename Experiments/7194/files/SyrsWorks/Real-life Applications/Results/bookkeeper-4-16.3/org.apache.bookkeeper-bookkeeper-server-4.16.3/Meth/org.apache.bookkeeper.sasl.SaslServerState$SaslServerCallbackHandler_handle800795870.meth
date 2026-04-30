@@ -1,0 +1,38 @@
+void org.apache.bookkeeper.sasl.SaslServerState$SaslServerCallbackHandler:handle(javax.security.auth.callback.Callback[] callbacks)
+{
+int l3;
+  int l4;
+  javax.security.auth.callback.Callback callback;
+  boolean $stack6;
+  javax.security.sasl.AuthorizeCallback $stack12;
+  javax.security.sasl.RealmCallback $stack13;
+  javax.security.auth.callback.PasswordCallback $stack14;
+  javax.security.auth.callback.NameCallback $stack15;
+  l3=#callbacks;
+ l4=0;
+ label0:if (l4>=l3) goto label1;
+ callback=callbacks[l4];
+ $stack6=callback instanceof javax.security.auth.callback.NameCallback;
+ if ($stack6==0) goto label2;
+ $stack15=(javax.security.auth.callback.NameCallback) callback;
+ this#org.apache.bookkeeper.sasl.SaslServerState$SaslServerCallbackHandler:handleNameCallback($stack15);
+ goto label3;
+ label2:$stack6=callback instanceof javax.security.auth.callback.PasswordCallback;
+ if ($stack6==0) goto label4;
+ $stack14=(javax.security.auth.callback.PasswordCallback) callback;
+ this#org.apache.bookkeeper.sasl.SaslServerState$SaslServerCallbackHandler:handlePasswordCallback($stack14);
+ goto label3;
+ label4:$stack6=callback instanceof javax.security.sasl.RealmCallback;
+ if ($stack6==0) goto label5;
+ $stack13=(javax.security.sasl.RealmCallback) callback;
+ this#org.apache.bookkeeper.sasl.SaslServerState$SaslServerCallbackHandler:handleRealmCallback($stack13);
+ goto label3;
+ label5:$stack6=callback instanceof javax.security.sasl.AuthorizeCallback;
+ if ($stack6==0) goto label3;
+ $stack12=(javax.security.sasl.AuthorizeCallback) callback;
+ this#org.apache.bookkeeper.sasl.SaslServerState$SaslServerCallbackHandler:handleAuthorizeCallback($stack12);
+ label3:l4=(l4+1);
+ goto label0;
+ label1:return;
+ } 
+

@@ -1,0 +1,22 @@
+void org.apache.rocketmq.store.CommitLog:start()
+{
+org.apache.rocketmq.store.FlushManager $stack1;
+  org.apache.rocketmq.store.DefaultMessageStore $stack2;
+  org.apache.rocketmq.logging.org.slf4j.Logger $stack3;
+  org.apache.rocketmq.store.config.MessageStoreConfig $stack5;
+  java.lang.String $stack6;
+  org.apache.rocketmq.store.FlushDiskWatcher $stack7;
+  $stack1=this.flushManager;
+ $stack1.start();
+ $stack3=org.apache.rocketmq.store.CommitLog.log;
+ $stack2=this.defaultMessageStore;
+ $stack5 = $stack2.getMessageStoreConfig();
+ $stack6 = $stack5.getStorePathRootDir();
+ $stack3.info("start commitLog successfully. storeRoot: {}",(java.lang.Object)$stack6);
+ $stack7=this.flushDiskWatcher;
+ $stack7.setDaemon((boolean)1);
+ $stack7=this.flushDiskWatcher;
+ $stack7.start();
+ return;
+ } 
+

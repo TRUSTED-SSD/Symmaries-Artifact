@@ -1,0 +1,22 @@
+com.google.zxing.PlanarYUVLuminanceSource(byte[] yuvData,int dataWidth,int dataHeight,int left,int top,int width,int height,boolean reverseHorizontal)
+{
+int $stack9;
+  java.lang.IllegalArgumentException $stack10;
+  this#com.google.zxing.LuminanceSource(width,height);
+ $stack9=(left+width);
+ if ($stack9>dataWidth) goto label0;
+ $stack9=(top+height);
+ if ($stack9<=dataHeight) goto label1;
+ label0:$stack10=new java.lang.IllegalArgumentException;
+ $stack10#java.lang.IllegalArgumentException("Crop rectangle does not fit within image data.");
+ throw $stack10;
+ label1:this.yuvData=yuvData;
+ this.dataWidth=dataWidth;
+ this.dataHeight=dataHeight;
+ this.left=left;
+ this.top=top;
+ if (reverseHorizontal==0) goto label2;
+ this#com.google.zxing.PlanarYUVLuminanceSource:reverseHorizontal(width,height);
+ label2:return;
+ } 
+

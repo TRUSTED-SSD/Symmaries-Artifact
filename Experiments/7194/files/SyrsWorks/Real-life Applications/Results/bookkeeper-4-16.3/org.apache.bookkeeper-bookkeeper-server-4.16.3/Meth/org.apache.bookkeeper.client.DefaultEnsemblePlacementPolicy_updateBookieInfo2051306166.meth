@@ -1,0 +1,45 @@
+void org.apache.bookkeeper.client.DefaultEnsemblePlacementPolicy:updateBookieInfo(java.util.Map @bookieInfoMap)
+{
+java.util.Iterator l2;
+  java.util.Map$Entry e;
+  java.lang.Throwable l4;
+  java.util.concurrent.locks.ReentrantReadWriteLock $stack5;
+  java.util.concurrent.locks.ReentrantReadWriteLock$WriteLock $stack6;
+  java.util.Set $stack7;
+  boolean $stack9;
+  org.apache.bookkeeper.client.WeightedRandomSelection $stack11;
+  java.lang.Object $stack14;
+  java.lang.Object $stack17;
+  java.util.Map bookieInfoMap;
+bookieInfoMap=@bookieInfoMap;
+$stack5=this.rwLock;
+ $stack6 = $stack5.writeLock();
+ $stack6.lock();
+ label0:$stack7 = bookieInfoMap.entrySet();
+ l2 = $stack7.iterator();
+ label1:$stack9 = l2.hasNext();
+ if ($stack9==0) goto label2;
+ $stack14 = l2.next();
+ e=(java.util.Map$Entry) $stack14;
+ bookieInfoMap=this.bookieInfoMap;
+ $stack14 = e.getKey();
+ $stack17 = e.getValue();
+ bookieInfoMap.put($stack14,$stack17);
+ goto label1;
+ label2:$stack11=this.weightedSelection;
+ bookieInfoMap=this.bookieInfoMap;
+ $stack11.updateMap(bookieInfoMap);
+ label3:$stack5=this.rwLock;
+ $stack6 = $stack5.writeLock();
+ $stack6.unlock();
+ goto label4;
+ label5:l4 = catch;
+ label6:$stack5=this.rwLock;
+ $stack6 = $stack5.writeLock();
+ $stack6.unlock();
+ throw l4;
+ label4:return;
+ catch java.lang.Throwable: label0 - label3 : label5;
+catch java.lang.Throwable: label5 - label6 : label5;
+} 
+

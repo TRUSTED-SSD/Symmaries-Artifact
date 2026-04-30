@@ -1,0 +1,11 @@
+org.apache.rocketmq.remoting.protocol.heartbeat.SubscriptionData org.apache.rocketmq.client.impl.MQClientAPIImpl:querySubscriptionByConsumer (
+  java.lang.String @addr, java.lang.String group, java.lang.String topic,
+  long timeoutMillis) {
+  guard = tt;
+  ret(level()) = level(@addr) ⊔ level(group) ⊔ level(this) ⊔ level(timeoutMillis) ⊔ level(topic) ⊔ obj_level(@addr) ⊔ obj_level(this);
+  ret(obj_level()) = level(@addr) ⊔ level(group) ⊔ level(this) ⊔ level(timeoutMillis) ⊔ level(topic) ⊔ obj_level(@addr) ⊔ obj_level(this);
+  ret(obj_level(@addr)) = level(@addr) ⊔ level(group) ⊔ level(topic) ⊔ obj_level(@addr);
+  ret(obj_level(group)) = level(@addr) ⊔ level(group) ⊔ level(topic) ⊔ obj_level(@addr);
+  ret(obj_level(this)) = level(@addr) ⊔ level(group) ⊔ level(this) ⊔ level(timeoutMillis) ⊔ level(topic) ⊔ obj_level(@addr) ⊔ obj_level(this);
+  ret(obj_level(topic)) = level(@addr) ⊔ level(group) ⊔ level(topic) ⊔ obj_level(@addr);
+}

@@ -1,0 +1,23 @@
+java.util.Collection org.apache.rocketmq.client.ClientConfig:queuesWithNamespace(java.util.Collection queues)
+{
+java.util.Iterator iter;
+  org.apache.rocketmq.common.message.MessageQueue queue;
+  java.lang.String $stack4;
+  boolean $stack5;
+  java.lang.Object $stack8;
+  $stack4 = this.getNamespace();
+ $stack5 = org.apache.commons.lang3.StringUtils.isEmpty((java.lang.CharSequence)$stack4);
+ if ($stack5==0) goto label0;
+ return  queues;
+ label0:iter = queues.iterator();
+ label1:$stack5 = iter.hasNext();
+ if ($stack5==0) goto label2;
+ $stack8 = iter.next();
+ queue=(org.apache.rocketmq.common.message.MessageQueue) $stack8;
+ $stack4 = queue.getTopic();
+ $stack4 = this.withNamespace($stack4);
+ queue.setTopic($stack4);
+ goto label1;
+ label2:return  queues;
+ } 
+

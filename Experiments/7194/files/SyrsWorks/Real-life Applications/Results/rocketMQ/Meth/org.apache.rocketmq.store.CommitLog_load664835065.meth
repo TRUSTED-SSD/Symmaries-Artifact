@@ -1,0 +1,25 @@
+boolean org.apache.rocketmq.store.CommitLog:load()
+{
+boolean result;
+  org.apache.rocketmq.store.MappedFileQueue $stack2;
+  java.lang.StringBuilder $stack5;
+  org.apache.rocketmq.logging.org.slf4j.Logger $stack6;
+  java.lang.String $stack9;
+  $stack2=this.mappedFileQueue;
+ result = $stack2.load();
+ $stack2=this.mappedFileQueue;
+ $stack2.checkSelf();
+ $stack6=org.apache.rocketmq.store.CommitLog.log;
+ $stack5=new java.lang.StringBuilder;
+ $stack5#java.lang.StringBuilder();
+ $stack5 = $stack5.append("load commit log ");
+ if (result==0) goto label0;
+ $stack9="OK";
+ goto label1;
+ label0:$stack9="Failed";
+ label1:$stack5 = $stack5.append($stack9);
+ $stack9 = $stack5.toString();
+ $stack6.info($stack9);
+ return  result;
+ } 
+

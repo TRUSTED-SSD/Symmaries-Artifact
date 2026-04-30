@@ -1,0 +1,14 @@
+static java.lang.String org.keycloak.jose.jws.crypto.HashUtils:oidcHash(java.lang.String @jwtAlgorithmName,java.lang.String input)
+{
+byte[] inputBytes;
+  java.nio.charset.Charset $stack5;
+  java.lang.String jwtAlgorithmName;
+jwtAlgorithmName=@jwtAlgorithmName;
+$stack5=java.nio.charset.StandardCharsets.UTF_8;
+ inputBytes = input.getBytes($stack5);
+ jwtAlgorithmName = org.keycloak.crypto.JavaAlgorithm.getJavaAlgorithmForHash(jwtAlgorithmName);
+ inputBytes = org.keycloak.jose.jws.crypto.HashUtils.hash(jwtAlgorithmName,inputBytes);
+ jwtAlgorithmName = org.keycloak.jose.jws.crypto.HashUtils.encodeHashToOIDC(inputBytes);
+ return  jwtAlgorithmName;
+ } 
+

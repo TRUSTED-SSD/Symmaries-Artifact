@@ -1,0 +1,54 @@
+org.keycloak.common.util.KeycloakUriBuilder org.keycloak.adapters.AdapterDeploymentContext:getBaseBuilder(org.keycloak.adapters.spi.HttpFacade facade,java.lang.String @base)
+{
+org.keycloak.common.util.KeycloakUriBuilder builder;
+  java.net.URI request;
+  org.keycloak.adapters.spi.HttpFacade$Request $stack7;
+  org.keycloak.adapters.KeycloakDeployment $stack11;
+  org.keycloak.common.enums.SslRequired $stack12;
+  java.lang.String $stack14;
+  boolean $stack15;
+  int $stack19;
+  java.lang.StringBuilder $stack32;
+  org.jboss.logging.Logger $stack33;
+  java.lang.RuntimeException $stack39;
+  java.lang.String base;
+base=@base;
+builder = org.keycloak.common.util.KeycloakUriBuilder.fromUri(base);
+ $stack7 = facade.getRequest();
+ base = $stack7.getURI();
+ request = java.net.URI.create(base);
+ base = request.getScheme();
+ $stack11=this.deployment;
+ $stack12 = $stack11.getSslRequired();
+ $stack7 = facade.getRequest();
+ $stack14 = $stack7.getRemoteAddr();
+ $stack15 = $stack12.isRequired($stack14);
+ if ($stack15==0) goto label0;
+ base="https";
+ $stack14 = request.getScheme();
+ $stack15 = $stack14.equals((java.lang.Object)"https");
+ if ($stack15!=0) goto label0;
+ $stack19 = request.getPort();
+ if ($stack19==-1) goto label0;
+ $stack33=org.keycloak.adapters.AdapterDeploymentContext.log;
+ $stack32=new java.lang.StringBuilder;
+ $stack32#java.lang.StringBuilder();
+ $stack32 = $stack32.append("request scheme: ");
+ base = request.getScheme();
+ $stack32 = $stack32.append(base);
+ $stack32 = $stack32.append(" ssl required");
+ base = $stack32.toString();
+ $stack33.error((java.lang.Object)base);
+ $stack39=new java.lang.RuntimeException;
+ $stack39#java.lang.RuntimeException("Can\'t resolve relative url from adapter config.");
+ throw $stack39;
+ label0:builder.scheme(base);
+ base = request.getHost();
+ builder.host(base);
+ $stack19 = request.getPort();
+ if ($stack19==-1) goto label1;
+ $stack19 = request.getPort();
+ builder.port($stack19);
+ label1:return  builder;
+ } 
+

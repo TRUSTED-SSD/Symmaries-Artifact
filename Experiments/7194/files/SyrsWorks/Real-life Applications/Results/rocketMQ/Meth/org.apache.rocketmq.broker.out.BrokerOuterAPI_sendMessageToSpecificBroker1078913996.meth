@@ -1,0 +1,12 @@
+org.apache.rocketmq.client.producer.SendResult org.apache.rocketmq.broker.out.BrokerOuterAPI:sendMessageToSpecificBroker(java.lang.String brokerAddr,java.lang.String brokerName,org.apache.rocketmq.common.message.MessageExt msg,java.lang.String group,long timeoutMillis)
+{
+org.apache.rocketmq.remoting.protocol.RemotingCommand request;
+  org.apache.rocketmq.remoting.RemotingClient $stack10;
+  org.apache.rocketmq.client.producer.SendResult $stack12;
+  request = org.apache.rocketmq.broker.out.BrokerOuterAPI.buildSendMessageRequest(msg,group);
+ $stack10=this.remotingClient;
+ request = $stack10.invokeSync(brokerAddr,request,timeoutMillis);
+ $stack12 = this#org.apache.rocketmq.broker.out.BrokerOuterAPI:processSendResponse(brokerName,(org.apache.rocketmq.common.message.Message)msg,request);
+ return  $stack12;
+ } 
+

@@ -1,0 +1,31 @@
+static boolean org.keycloak.jose.jws.crypto.RSAProvider:verify(org.keycloak.jose.jws.JWSInput input,java.security.PublicKey publicKey)
+{
+java.lang.Object verifier;
+  org.keycloak.jose.jws.JWSHeader $stack3;
+  org.keycloak.jose.jws.Algorithm $stack4;
+  java.lang.String $stack6;
+  java.nio.charset.Charset $stack7;
+  byte[] $stack8;
+  boolean $stack10;
+  java.lang.Exception $stack11;
+  java.security.Signature tmp$1420834245;
+  label0:$stack3 = input.getHeader();
+ $stack4 = $stack3.getAlgorithm();
+ verifier = org.keycloak.jose.jws.crypto.RSAProvider.getSignature($stack4);
+ tmp$1420834245=(java.security.Signature) verifier;
+ tmp$1420834245.initVerify(publicKey);
+ $stack6 = input.getEncodedSignatureInput();
+ $stack7=java.nio.charset.StandardCharsets.UTF_8;
+ $stack8 = $stack6.getBytes($stack7);
+ tmp$1420834245=(java.security.Signature) verifier;
+ tmp$1420834245.update($stack8);
+ $stack8 = input.getSignature();
+ tmp$1420834245=(java.security.Signature) verifier;
+ $stack10 = tmp$1420834245.verify($stack8);
+ label1:return  $stack10;
+ label2:$stack11 = catch;
+ verifier=$stack11;
+ return  0;
+ catch java.lang.Exception: label0 - label1 : label2;
+} 
+

@@ -1,0 +1,28 @@
+static javax.security.auth.Subject org.apache.kerby.kerberos.kerb.admin.AuthUtil:loginUsingKeytab(java.lang.String principal,java.io.File keytabFile)
+{
+java.util.HashSet principals;
+  javax.security.auth.login.Configuration conf;
+  javax.security.auth.login.LoginContext loginContext;
+  javax.security.auth.kerberos.KerberosPrincipal $stack8;
+  javax.security.auth.Subject $stack10;
+  java.util.HashSet $stack11;
+  java.util.HashSet $stack13;
+  principals=new java.util.HashSet;
+ principals#java.util.HashSet();
+ $stack8=new javax.security.auth.kerberos.KerberosPrincipal;
+ $stack8#javax.security.auth.kerberos.KerberosPrincipal(principal);
+ principals.add((java.lang.Object)$stack8);
+ $stack10=new javax.security.auth.Subject;
+ $stack11=new java.util.HashSet;
+ $stack11#java.util.HashSet();
+ $stack13=new java.util.HashSet;
+ $stack13#java.util.HashSet();
+ $stack10#javax.security.auth.Subject(0,(java.util.Set)principals,(java.util.Set)$stack11,(java.util.Set)$stack13);
+ conf = org.apache.kerby.kerberos.kerb.admin.AuthUtil.useKeytab(principal,keytabFile);
+ loginContext=new javax.security.auth.login.LoginContext;
+ loginContext#javax.security.auth.login.LoginContext("KeytabConf",$stack10,null,conf);
+ loginContext.login();
+ $stack10 = loginContext.getSubject();
+ return  $stack10;
+ } 
+

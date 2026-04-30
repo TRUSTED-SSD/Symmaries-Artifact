@@ -1,0 +1,37 @@
+void org.apache.bookkeeper.bookie.GarbageCollectorThread:lambda$doGcEntryLogs$6(java.util.concurrent.atomic.AtomicLong totalEntryLogSizeAcc,java.lang.Long entryLogId,org.apache.bookkeeper.bookie.EntryLogMetadata meta)
+{
+boolean modified;
+  boolean $stack6;
+  long $stack7;
+  org.apache.bookkeeper.bookie.EntryLogMetadataMap $stack9;
+  org.slf4j.Logger $stack11;
+  org.apache.bookkeeper.bookie.stats.GarbageCollectorStats $stack13;
+  org.apache.bookkeeper.stats.Counter $stack14;
+  org.apache.bookkeeper.bookie.BookieException$EntryLogMetadataMapException $stack16;
+  label0:modified = this#org.apache.bookkeeper.bookie.GarbageCollectorThread:removeIfLedgerNotExists(meta);
+ $stack6 = meta.isEmpty();
+ if ($stack6==0) goto label1;
+ $stack11=org.apache.bookkeeper.bookie.GarbageCollectorThread.LOG;
+ dummyClass.lowSink("Deleting entryLogId {} as it has no active ledgers!");
+$stack11.info("Deleting entryLogId {} as it has no active ledgers!",(java.lang.Object)entryLogId);
+ $stack7 = entryLogId.longValue();
+ this.removeEntryLog($stack7);
+ $stack13=this.gcStats;
+ $stack14 = $stack13.getReclaimedSpaceViaDeletes();
+ $stack7 = meta.getTotalSize();
+ $stack14.addCount($stack7);
+ goto label2;
+ label1:if (modified==0) goto label2;
+ $stack9=this.entryLogMetaMap;
+ $stack7 = meta.getEntryLogId();
+ $stack9.put($stack7,meta);
+ label2:goto label3;
+ label4:$stack16 = catch;
+ $stack11=org.apache.bookkeeper.bookie.GarbageCollectorThread.LOG;
+ $stack11.warn("Failed to remove ledger from entry-log metadata {}",(java.lang.Object)entryLogId,(java.lang.Object)$stack16);
+ label3:$stack7 = meta.getRemainingSize();
+ totalEntryLogSizeAcc.getAndAdd($stack7);
+ return;
+ catch org.apache.bookkeeper.bookie.BookieException$EntryLogMetadataMapException: label0 - label2 : label4;
+} 
+

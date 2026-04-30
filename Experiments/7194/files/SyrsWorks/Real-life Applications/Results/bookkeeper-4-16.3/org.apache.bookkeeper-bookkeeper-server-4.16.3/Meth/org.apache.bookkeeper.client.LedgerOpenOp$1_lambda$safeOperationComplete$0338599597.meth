@@ -1,0 +1,30 @@
+void org.apache.bookkeeper.client.LedgerOpenOp$1:lambda$safeOperationComplete$0(int rc,java.lang.Void ignore,java.lang.Throwable ex)
+{
+org.apache.bookkeeper.client.LedgerOpenOp $stack4;
+  org.apache.bookkeeper.client.BookKeeper $stack5;
+  org.apache.bookkeeper.client.LedgerOpenOp $stack6;
+  long $stack17;
+  org.slf4j.Logger $stack18;
+  java.lang.Long $stack20;
+  if (ex==null) goto label0;
+ $stack18=org.apache.bookkeeper.client.LedgerOpenOp.LOG;
+ $stack4=this.this$0;
+ $stack17=$stack4.ledgerId;
+ $stack20 = java.lang.Long.valueOf($stack17);
+ $stack18.error("Ledger {} close failed",(java.lang.Object)$stack20,(java.lang.Object)ex);
+ label0:if (rc==-102) goto label1;
+ if (rc!=-23) goto label2;
+ label1:$stack6=this.this$0;
+ $stack4=this.this$0;
+ $stack5=$stack4.bk;
+ rc = $stack5.getReturnRc(rc);
+ $stack6#org.apache.bookkeeper.client.LedgerOpenOp(rc,null);
+ goto label3;
+ label2:$stack6=this.this$0;
+ $stack4=this.this$0;
+ $stack5=$stack4.bk;
+ rc = $stack5.getReturnRc(-10);
+ $stack6#org.apache.bookkeeper.client.LedgerOpenOp(rc,null);
+ label3:return;
+ } 
+

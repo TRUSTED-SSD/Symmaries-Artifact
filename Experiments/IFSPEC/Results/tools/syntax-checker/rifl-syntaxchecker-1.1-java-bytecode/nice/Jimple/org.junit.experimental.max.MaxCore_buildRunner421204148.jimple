@@ -1,0 +1,124 @@
+    private org.junit.runner.Runner buildRunner(org.junit.runner.Description)
+    {
+        org.junit.experimental.max.MaxCore this;
+        org.junit.runner.Description each;
+        java.lang.Class type;
+        java.lang.String methodName;
+        boolean $stack5;
+        org.junit.runner.Request $stack10;
+        org.junit.runner.Runner $stack11;
+        java.lang.RuntimeException $stack14;
+        java.lang.StringBuilder $stack15;
+        org.junit.internal.runners.JUnit38ClassRunner $stack20;
+        junit.framework.TestSuite $stack21;
+
+        this := @this: org.junit.experimental.max.MaxCore;
+
+        each := @parameter0: org.junit.runner.Description;
+
+        methodName = virtualinvoke each.<org.junit.runner.Description: java.lang.String toString()>();
+/*124*/
+
+        $stack5 = virtualinvoke methodName.<java.lang.String: boolean equals(java.lang.Object)>("TestSuite with 0 tests");
+/*124*/
+
+        if $stack5 == 0 goto label1;
+/*124*/
+
+        $stack11 = staticinvoke <org.junit.runners.Suite: org.junit.runner.Runner emptySuite()>();
+/*125*/
+
+        return $stack11;
+/*125*/
+
+     label1:
+        methodName = virtualinvoke each.<org.junit.runner.Description: java.lang.String toString()>();
+/*127*/
+
+        $stack5 = virtualinvoke methodName.<java.lang.String: boolean startsWith(java.lang.String)>("malformed JUnit 3 test class: ");
+/*127*/
+
+        if $stack5 == 0 goto label2;
+/*127*/
+
+        $stack20 = new org.junit.internal.runners.JUnit38ClassRunner;
+/*132*/
+
+        $stack21 = new junit.framework.TestSuite;
+/*132*/
+
+        type = specialinvoke this.<org.junit.experimental.max.MaxCore: java.lang.Class getMalformedTestClass(org.junit.runner.Description)>(each);
+/*132*/
+
+        specialinvoke $stack21.<junit.framework.TestSuite: void <init>(java.lang.Class)>(type);
+/*132*/
+
+        specialinvoke $stack20.<org.junit.internal.runners.JUnit38ClassRunner: void <init>(junit.framework.Test)>($stack21);
+/*132*/
+
+        return $stack20;
+/*132*/
+
+     label2:
+        type = virtualinvoke each.<org.junit.runner.Description: java.lang.Class getTestClass()>();
+/*134*/
+/*134*/
+
+        if type != null goto label3;
+/*135*/
+
+        $stack14 = new java.lang.RuntimeException;
+/*136*/
+
+        $stack15 = new java.lang.StringBuilder;
+/*136*/
+
+        specialinvoke $stack15.<java.lang.StringBuilder: void <init>()>();
+/*136*/
+
+        $stack15 = virtualinvoke $stack15.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>("Can\'t build a runner from description [");
+/*136*/
+
+        $stack15 = virtualinvoke $stack15.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.Object)>(each);
+/*136*/
+
+        $stack15 = virtualinvoke $stack15.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>("]");
+/*136*/
+
+        methodName = virtualinvoke $stack15.<java.lang.StringBuilder: java.lang.String toString()>();
+/*136*/
+
+        specialinvoke $stack14.<java.lang.RuntimeException: void <init>(java.lang.String)>(methodName);
+/*136*/
+
+        throw $stack14;
+/*136*/
+
+     label3:
+        methodName = virtualinvoke each.<org.junit.runner.Description: java.lang.String getMethodName()>();
+/*138*/
+/*138*/
+
+        if methodName != null goto label4;
+/*139*/
+
+        $stack10 = staticinvoke <org.junit.runner.Request: org.junit.runner.Request aClass(java.lang.Class)>(type);
+/*140*/
+
+        $stack11 = virtualinvoke $stack10.<org.junit.runner.Request: org.junit.runner.Runner getRunner()>();
+/*140*/
+
+        return $stack11;
+/*140*/
+
+     label4:
+        $stack10 = staticinvoke <org.junit.runner.Request: org.junit.runner.Request method(java.lang.Class,java.lang.String)>(type, methodName);
+/*142*/
+
+        $stack11 = virtualinvoke $stack10.<org.junit.runner.Request: org.junit.runner.Runner getRunner()>();
+/*142*/
+
+        return $stack11;
+/*142*/
+    }
+

@@ -1,0 +1,51 @@
+float org.apache.bookkeeper.util.DiskChecker:checkDir(java.io.File dir)
+{
+float usage;
+  boolean $stack4;
+  org.apache.bookkeeper.util.DiskChecker$DiskErrorException $stack8;
+  java.lang.StringBuilder $stack9;
+  java.lang.String $stack12;
+  usage = this.checkDiskFull(dir);
+ $stack4 = org.apache.bookkeeper.util.DiskChecker.mkdirsWithExistsCheck(dir);
+ if ($stack4!=0) goto label0;
+ $stack8=new org.apache.bookkeeper.util.DiskChecker$DiskErrorException;
+ $stack9=new java.lang.StringBuilder;
+ $stack9#java.lang.StringBuilder();
+ $stack9 = $stack9.append("can not create directory: ");
+ $stack9 = $stack9.append((java.lang.Object)dir);
+ $stack12 = $stack9.toString();
+ $stack8#org.apache.bookkeeper.util.DiskChecker$DiskErrorException($stack12);
+ throw $stack8;
+ label0:$stack4 = dir.isDirectory();
+ if ($stack4!=0) goto label1;
+ $stack8=new org.apache.bookkeeper.util.DiskChecker$DiskErrorException;
+ $stack9=new java.lang.StringBuilder;
+ $stack9#java.lang.StringBuilder();
+ $stack9 = $stack9.append("not a directory: ");
+ $stack9 = $stack9.append((java.lang.Object)dir);
+ $stack12 = $stack9.toString();
+ $stack8#org.apache.bookkeeper.util.DiskChecker$DiskErrorException($stack12);
+ throw $stack8;
+ label1:$stack4 = dir.canRead();
+ if ($stack4!=0) goto label2;
+ $stack8=new org.apache.bookkeeper.util.DiskChecker$DiskErrorException;
+ $stack9=new java.lang.StringBuilder;
+ $stack9#java.lang.StringBuilder();
+ $stack9 = $stack9.append("directory is not readable: ");
+ $stack9 = $stack9.append((java.lang.Object)dir);
+ $stack12 = $stack9.toString();
+ $stack8#org.apache.bookkeeper.util.DiskChecker$DiskErrorException($stack12);
+ throw $stack8;
+ label2:$stack4 = dir.canWrite();
+ if ($stack4!=0) goto label3;
+ $stack8=new org.apache.bookkeeper.util.DiskChecker$DiskErrorException;
+ $stack9=new java.lang.StringBuilder;
+ $stack9#java.lang.StringBuilder();
+ $stack9 = $stack9.append("directory is not writable: ");
+ $stack9 = $stack9.append((java.lang.Object)dir);
+ $stack12 = $stack9.toString();
+ $stack8#org.apache.bookkeeper.util.DiskChecker$DiskErrorException($stack12);
+ throw $stack8;
+ label3:return  usage;
+ } 
+

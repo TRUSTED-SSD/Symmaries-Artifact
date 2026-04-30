@@ -1,0 +1,35 @@
+java.util.List org.greenrobot.eventbus.SubscriberMethodFinder:findSubscriberMethods(java.lang.Class subscriberClass)
+{
+java.util.List subscriberMethods;
+  java.util.Map $stack3;
+  java.lang.Object $stack4;
+  boolean $stack5;
+  org.greenrobot.eventbus.EventBusException $stack10;
+  java.lang.StringBuilder $stack11;
+  java.lang.String $stack15;
+  $stack3=org.greenrobot.eventbus.SubscriberMethodFinder.METHOD_CACHE;
+ $stack4 = $stack3.get((java.lang.Object)subscriberClass);
+ subscriberMethods=(java.util.List) $stack4;
+ if (subscriberMethods==null) goto label0;
+ return  subscriberMethods;
+ label0:$stack5=this.ignoreGeneratedIndex;
+ if ($stack5==0) goto label1;
+ subscriberMethods = this#org.greenrobot.eventbus.SubscriberMethodFinder:findUsingReflection(subscriberClass);
+ goto label2;
+ label1:subscriberMethods = this#org.greenrobot.eventbus.SubscriberMethodFinder:findUsingInfo(subscriberClass);
+ label2:$stack5 = subscriberMethods.isEmpty();
+ if ($stack5==0) goto label3;
+ $stack10=new org.greenrobot.eventbus.EventBusException;
+ $stack11=new java.lang.StringBuilder;
+ $stack11#java.lang.StringBuilder();
+ $stack11 = $stack11.append("Subscriber ");
+ $stack11 = $stack11.append((java.lang.Object)subscriberClass);
+ $stack11 = $stack11.append(" and its super classes have no public methods with the @Subscribe annotation");
+ $stack15 = $stack11.toString();
+ $stack10#org.greenrobot.eventbus.EventBusException($stack15);
+ throw $stack10;
+ label3:$stack3=org.greenrobot.eventbus.SubscriberMethodFinder.METHOD_CACHE;
+ $stack3.put((java.lang.Object)subscriberClass,(java.lang.Object)subscriberMethods);
+ return  subscriberMethods;
+ } 
+

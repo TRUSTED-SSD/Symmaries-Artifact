@@ -1,0 +1,50 @@
+static void com.google.zxing.ResultPoint:orderBestPatterns(com.google.zxing.ResultPoint[] patterns)
+{
+float zeroOneDistance;
+  float oneTwoDistance;
+  float zeroTwoDistance;
+  com.google.zxing.ResultPoint pointA;
+  com.google.zxing.ResultPoint pointB;
+  com.google.zxing.ResultPoint pointC;
+  com.google.zxing.ResultPoint temp;
+  byte $stack17;
+  pointB=patterns[0];
+ pointA=patterns[1];
+ zeroOneDistance = com.google.zxing.ResultPoint.distance(pointB,pointA);
+ pointB=patterns[1];
+ pointA=patterns[2];
+ oneTwoDistance = com.google.zxing.ResultPoint.distance(pointB,pointA);
+ pointB=patterns[0];
+ pointA=patterns[2];
+ zeroTwoDistance = com.google.zxing.ResultPoint.distance(pointB,pointA);
+ $stack17=(oneTwoDistance cmpl zeroOneDistance);
+ if ($stack17<0) goto label0;
+ $stack17=(oneTwoDistance cmpl zeroTwoDistance);
+ if ($stack17<0) goto label0;
+ pointB=patterns[0];
+ pointA=patterns[1];
+ pointC=patterns[2];
+ goto label1;
+ label0:$stack17=(zeroTwoDistance cmpl oneTwoDistance);
+ if ($stack17<0) goto label2;
+ $stack17=(zeroTwoDistance cmpl zeroOneDistance);
+ if ($stack17<0) goto label2;
+ pointB=patterns[1];
+ pointA=patterns[0];
+ pointC=patterns[2];
+ goto label1;
+ label2:pointB=patterns[2];
+ pointA=patterns[0];
+ pointC=patterns[1];
+ label1:zeroOneDistance = com.google.zxing.ResultPoint.crossProductZ(pointA,pointB,pointC);
+ $stack17=(zeroOneDistance cmpg 0.0F);
+ if ($stack17>=0) goto label3;
+ temp=pointA;
+ pointA=pointC;
+ pointC=temp;
+ label3:patterns[0]=pointA;
+ patterns[1]=pointB;
+ patterns[2]=pointC;
+ return;
+ } 
+

@@ -1,0 +1,25 @@
+org.apache.bookkeeper.statelib.impl.rocksdb.checkpoint.dlog.DLOutputStream(org.apache.distributedlog.api.DistributedLogManager dlm,org.apache.distributedlog.api.AsyncLogWriter writer)
+{
+long[] $stack3;
+  long $stack4;
+  byte $stack5;
+  this#java.io.OutputStream();
+ $stack3=new long[1];
+ this.syncPos=$stack3;
+ this.writePos=0L;
+ this.exception=null;
+ this.dlm=dlm;
+ this.writer=writer;
+ $stack4 = writer.getLastTxId();
+ $stack5=($stack4 cmp 0L);
+ if ($stack5>=0) goto label0;
+ $stack4=0L;
+ goto label1;
+ label0:$stack4 = writer.getLastTxId();
+ label1:this.writePos=$stack4;
+ $stack3=this.syncPos;
+ $stack4=this.writePos;
+ $stack3[0]=$stack4;
+ return;
+ } 
+

@@ -1,0 +1,55 @@
+boolean org.apache.rocketmq.store.kv.MessageFetcher:prepare(java.lang.String masterAddr,java.lang.String topic,java.lang.String groupName,long subVersion)
+{
+org.apache.rocketmq.remoting.protocol.heartbeat.HeartbeatData heartbeatData;
+  org.apache.rocketmq.remoting.protocol.heartbeat.ConsumerData consumerData;
+  org.apache.rocketmq.remoting.protocol.heartbeat.SubscriptionData subscriptionData;
+  org.apache.rocketmq.remoting.protocol.RemotingCommand request;
+  java.lang.String $stack12;
+  org.apache.rocketmq.remoting.protocol.heartbeat.ConsumeType $stack14;
+  org.apache.rocketmq.remoting.protocol.heartbeat.MessageModel $stack15;
+  org.apache.rocketmq.common.consumer.ConsumeFromWhere $stack16;
+  org.apache.rocketmq.remoting.protocol.heartbeat.SubscriptionData[] $stack18;
+  java.util.HashSet $stack19;
+  java.util.Set $stack20;
+  org.apache.rocketmq.remoting.protocol.LanguageCode $stack23;
+  byte[] $stack24;
+  org.apache.rocketmq.remoting.RemotingClient $stack25;
+  int $stack27;
+  heartbeatData=new org.apache.rocketmq.remoting.protocol.heartbeat.HeartbeatData;
+ heartbeatData#org.apache.rocketmq.remoting.protocol.heartbeat.HeartbeatData();
+ $stack12 = this#org.apache.rocketmq.store.kv.MessageFetcher:getClientId();
+ heartbeatData.setClientID($stack12);
+ consumerData=new org.apache.rocketmq.remoting.protocol.heartbeat.ConsumerData;
+ consumerData#org.apache.rocketmq.remoting.protocol.heartbeat.ConsumerData();
+ consumerData.setGroupName(groupName);
+ $stack14=org.apache.rocketmq.remoting.protocol.heartbeat.ConsumeType.CONSUME_ACTIVELY;
+ consumerData.setConsumeType($stack14);
+ $stack15=org.apache.rocketmq.remoting.protocol.heartbeat.MessageModel.CLUSTERING;
+ consumerData.setMessageModel($stack15);
+ $stack16=org.apache.rocketmq.common.consumer.ConsumeFromWhere.CONSUME_FROM_FIRST_OFFSET;
+ consumerData.setConsumeFromWhere($stack16);
+ subscriptionData=new org.apache.rocketmq.remoting.protocol.heartbeat.SubscriptionData;
+ subscriptionData#org.apache.rocketmq.remoting.protocol.heartbeat.SubscriptionData();
+ subscriptionData.setTopic(topic);
+ subscriptionData.setSubString("*");
+ subscriptionData.setSubVersion(subVersion);
+ $stack18=new org.apache.rocketmq.remoting.protocol.heartbeat.SubscriptionData[1];
+ $stack18[0]=subscriptionData;
+ $stack19 = com.google.common.collect.Sets.newHashSet((java.lang.Object[])$stack18);
+ consumerData.setSubscriptionDataSet((java.util.Set)$stack19);
+ $stack20 = heartbeatData.getConsumerDataSet();
+ $stack20.add((java.lang.Object)consumerData);
+ request = org.apache.rocketmq.remoting.protocol.RemotingCommand.createRequestCommand(34,null);
+ $stack23=org.apache.rocketmq.remoting.protocol.LanguageCode.JAVA;
+ request.setLanguage($stack23);
+ $stack24 = heartbeatData.encode();
+ request.setBody($stack24);
+ $stack25=this.client;
+ request = $stack25.invokeSync(masterAddr,request,30000L);
+ if (request==null) goto label0;
+ $stack27 = request.getCode();
+ if ($stack27!=0) goto label0;
+ return  1;
+ label0:return  0;
+ } 
+

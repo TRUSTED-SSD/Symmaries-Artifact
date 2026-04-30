@@ -1,0 +1,27 @@
+void org.apache.bookkeeper.statelib.impl.rocksdb.ccheckpoint.dlog.DLCheckpointStore:deleteRecursively(java.lang.String srcPath)
+{
+java.util.Iterator logs;
+  java.lang.String child;
+  org.apache.distributedlog.api.namespace.Namespace $stack4;
+  boolean $stack6;
+  java.lang.Object $stack8;
+  java.lang.StringBuilder $stack9;
+  $stack4=this.namespace;
+ logs = $stack4.getLogs(srcPath);
+ label0:$stack6 = logs.hasNext();
+ if ($stack6==0) goto label1;
+ $stack8 = logs.next();
+ child=(java.lang.String) $stack8;
+ $stack9=new java.lang.StringBuilder;
+ $stack9#java.lang.StringBuilder();
+ $stack9 = $stack9.append(srcPath);
+ $stack9 = $stack9.append("/");
+ $stack9 = $stack9.append(child);
+ child = $stack9.toString();
+ this#org.apache.bookkeeper.statelib.impl.rocksdb.ccheckpoint.dlog.DLCheckpointStore(child);
+ goto label0;
+ label1:$stack4=this.namespace;
+ $stack4.deleteLog(srcPath);
+ return;
+ } 
+

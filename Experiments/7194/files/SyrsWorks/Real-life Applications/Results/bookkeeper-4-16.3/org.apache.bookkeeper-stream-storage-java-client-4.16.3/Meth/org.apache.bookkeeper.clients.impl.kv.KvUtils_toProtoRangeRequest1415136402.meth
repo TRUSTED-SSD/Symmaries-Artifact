@@ -1,0 +1,34 @@
+static org.apache.bookkeeper.stream.proto.kv.rpc.RangeRequest$Builder org.apache.bookkeeper.clients.impl.kv.KvUtils:toProtoRangeRequest(org.apache.bookkeeper.api.kv.op.RangeOp op)
+{
+org.apache.bookkeeper.stream.proto.kv.rpc.RangeRequest$Builder builder;
+  java.lang.Object $stack3;
+  io.netty.buffer.ByteBuf $stack4;
+  com.google.protobuf.ByteString $stack5;
+  org.apache.bookkeeper.api.kv.options.RangeOption $stack7;
+  boolean $stack8;
+  long $stack14;
+  builder = org.apache.bookkeeper.stream.proto.kv.rpc.RangeRequest.newBuilder();
+ $stack3 = op.key();
+ $stack4=(io.netty.buffer.ByteBuf) $stack3;
+ $stack5 = org.apache.bookkeeper.clients.impl.kv.KvUtils.toProtoKey($stack4);
+ builder = builder.setKey($stack5);
+ $stack7 = op.option();
+ $stack8 = $stack7.countOnly();
+ builder = builder.setCountOnly($stack8);
+ $stack7 = op.option();
+ $stack8 = $stack7.keysOnly();
+ builder = builder.setKeysOnly($stack8);
+ $stack7 = op.option();
+ $stack14 = $stack7.limit();
+ builder = builder.setLimit($stack14);
+ $stack7 = op.option();
+ $stack3 = $stack7.endKey();
+ if (null==$stack3) goto label0;
+ $stack7 = op.option();
+ $stack3 = $stack7.endKey();
+ $stack4=(io.netty.buffer.ByteBuf) $stack3;
+ $stack5 = org.apache.bookkeeper.clients.impl.kv.KvUtils.toProtoKey($stack4);
+ builder.setRangeEnd($stack5);
+ label0:return  builder;
+ } 
+

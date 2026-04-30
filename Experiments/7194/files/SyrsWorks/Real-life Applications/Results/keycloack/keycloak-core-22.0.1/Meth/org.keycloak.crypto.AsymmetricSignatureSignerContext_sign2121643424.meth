@@ -1,0 +1,29 @@
+byte[] org.keycloak.crypto.AsymmetricSignatureSignerContext:sign(byte[] @data)
+{
+java.security.Signature signature;
+  org.keycloak.crypto.KeyWrapper $stack3;
+  java.lang.String $stack4;
+  java.security.Key $stack8;
+  java.security.PrivateKey $stack9;
+  java.lang.Exception $stack11;
+  org.keycloak.crypto.SignatureException $stack12;
+  byte[] data;
+data=@data;
+label0:$stack3=this.key;
+ $stack4 = $stack3.getAlgorithmOrDefault();
+ $stack4 = org.keycloak.crypto.JavaAlgorithm.getJavaAlgorithm($stack4);
+ signature = java.security.Signature.getInstance($stack4);
+ $stack3=this.key;
+ $stack8 = $stack3.getPrivateKey();
+ $stack9=(java.security.PrivateKey) $stack8;
+ signature.initSign($stack9);
+ signature.update(data);
+ data = signature.sign();
+ label1:return  data;
+ label2:$stack11 = catch;
+ $stack12=new org.keycloak.crypto.SignatureException;
+ $stack12#org.keycloak.crypto.SignatureException("Signing failed",(java.lang.Throwable)$stack11);
+ throw $stack12;
+ catch java.lang.Exception: label0 - label1 : label2;
+} 
+

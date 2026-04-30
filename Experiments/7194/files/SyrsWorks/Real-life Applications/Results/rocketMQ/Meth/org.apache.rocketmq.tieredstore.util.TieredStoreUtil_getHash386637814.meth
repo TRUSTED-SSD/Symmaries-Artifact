@@ -1,0 +1,31 @@
+static java.lang.String org.apache.rocketmq.tieredstore.util.TieredStoreUtil:getHash(java.lang.String @str)
+{
+java.lang.Object md;
+  byte[] digest;
+  java.nio.charset.Charset $stack4;
+  java.lang.Object[] $stack7;
+  java.lang.Exception $stack13;
+  java.math.BigInteger tmp$1641175241;
+  java.security.MessageDigest tmp$1619057877;
+  java.lang.String str;
+str=@str;
+label0:md = java.security.MessageDigest.getInstance("MD5");
+ $stack4=java.nio.charset.StandardCharsets.UTF_8;
+ digest = str.getBytes($stack4);
+ tmp$1619057877=(java.security.MessageDigest) md;
+ tmp$1619057877.update(digest);
+ tmp$1619057877=(java.security.MessageDigest) md;
+ digest = tmp$1619057877.digest();
+ $stack7=new java.lang.Object[1];
+ tmp$1641175241=new java.math.BigInteger;
+ tmp$1641175241#java.math.BigInteger(1,digest);
+ $stack7[0]=tmp$1641175241;
+ str = java.lang.String.format("%032x",$stack7);
+ str = str.substring(0,8);
+ label1:return  str;
+ label2:$stack13 = catch;
+ md=$stack13;
+ return  "";
+ catch java.lang.Exception: label0 - label1 : label2;
+} 
+

@@ -1,0 +1,21 @@
+static byte[] org.apache.rocketmq.remoting.protocol.body.RegisterBrokerBody:readBytes(java.util.zip.InflaterInputStream inflaterInputStream,int length)
+{
+byte[] buffer;
+  int bytesRead;
+  int len;
+  java.io.IOException $stack9;
+  buffer=new byte[length];
+ bytesRead=0;
+ label0:if (bytesRead>=length) goto label1;
+ len=(length-bytesRead);
+ dummyClass.highSourceMut(buffer);
+len = inflaterInputStream.read(buffer,bytesRead,len);
+ if (len!=-1) goto label2;
+ $stack9=new java.io.IOException;
+ $stack9#java.io.IOException("End of compressed data has reached");
+ throw $stack9;
+ label2:bytesRead=(bytesRead+len);
+ goto label0;
+ label1:return  buffer;
+ } 
+

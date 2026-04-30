@@ -1,0 +1,16 @@
+void org.apache.bookkeeper.net.StabilizeNetworkTopology:remove(org.apache.bookkeeper.net.Node node)
+{
+org.apache.bookkeeper.net.StabilizeNetworkTopology$RemoveNodeTask $stack2;
+  io.netty.util.HashedWheelTimer $stack3;
+  java.util.concurrent.TimeUnit $stack4;
+  long $stack5;
+  this.updateNode(node,(boolean)1);
+ $stack3=this.timer;
+ $stack2=new org.apache.bookkeeper.net.StabilizeNetworkTopology$RemoveNodeTask;
+ $stack2#org.apache.bookkeeper.net.StabilizeNetworkTopology$RemoveNodeTask(this,node);
+ $stack5=this.stabilizePeriodMillis;
+ $stack4=java.util.concurrent.TimeUnit.MILLISECONDS;
+ $stack3.newTimeout((io.netty.util.TimerTask)$stack2,$stack5,$stack4);
+ return;
+ } 
+

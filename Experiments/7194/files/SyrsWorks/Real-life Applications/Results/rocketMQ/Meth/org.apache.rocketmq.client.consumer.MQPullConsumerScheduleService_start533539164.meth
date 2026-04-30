@@ -1,0 +1,37 @@
+void org.apache.rocketmq.client.consumer.MQPullConsumerScheduleService:start()
+{
+java.lang.String group;
+  org.apache.rocketmq.client.consumer.DefaultMQPullConsumer $stack2;
+  java.util.concurrent.ScheduledThreadPoolExecutor $stack4;
+  org.apache.rocketmq.common.ThreadFactoryImpl $stack5;
+  java.lang.StringBuilder $stack6;
+  int $stack7;
+  org.apache.rocketmq.client.consumer.MessageQueueListener $stack11;
+  org.apache.rocketmq.logging.org.slf4j.Logger $stack15;
+  java.util.concurrent.ConcurrentMap $stack18;
+  $stack2=this.defaultMQPullConsumer;
+ group = $stack2.getConsumerGroup();
+ $stack4=new java.util.concurrent.ScheduledThreadPoolExecutor;
+ $stack7=this.pullThreadNums;
+ $stack5=new org.apache.rocketmq.common.ThreadFactoryImpl;
+ $stack6=new java.lang.StringBuilder;
+ $stack6#java.lang.StringBuilder();
+ $stack6 = $stack6.append("PullMsgThread-");
+ $stack6 = $stack6.append(group);
+ group = $stack6.toString();
+ $stack5#org.apache.rocketmq.common.ThreadFactoryImpl(group);
+ $stack4#java.util.concurrent.ScheduledThreadPoolExecutor($stack7,(java.util.concurrent.ThreadFactory)$stack5);
+ this.scheduledThreadPoolExecutor=$stack4;
+ $stack2=this.defaultMQPullConsumer;
+ $stack11=this.messageQueueListener;
+ $stack2.setMessageQueueListener($stack11);
+ $stack2=this.defaultMQPullConsumer;
+ $stack2.start();
+ $stack15=this.log;
+ $stack2=this.defaultMQPullConsumer;
+ group = $stack2.getConsumerGroup();
+ $stack18=this.callbackTable;
+ $stack15.info("MQPullConsumerScheduleService start OK, {} {}",(java.lang.Object)group,(java.lang.Object)$stack18);
+ return;
+ } 
+

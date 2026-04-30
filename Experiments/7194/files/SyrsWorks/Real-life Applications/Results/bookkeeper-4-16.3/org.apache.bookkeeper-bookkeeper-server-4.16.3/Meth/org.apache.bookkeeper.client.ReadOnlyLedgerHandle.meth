@@ -1,0 +1,20 @@
+org.apache.bookkeeper.client.ReadOnlyLedgerHandle(org.apache.bookkeeper.client.ClientContext clientCtx,long ledgerId,org.apache.bookkeeper.versioning.Versioned metadata,org.apache.bookkeeper.client.BookKeeper$DigestType digestType,byte[] password,boolean watch)
+{
+java.util.EnumSet $stack8;
+  java.lang.Object $stack9;
+  java.util.TreeMap $stack10;
+  org.apache.bookkeeper.meta.LedgerManager $stack11;
+  $stack8=org.apache.bookkeeper.client.api.WriteFlag.NONE;
+ this#org.apache.bookkeeper.client.LedgerHandle(clientCtx,ledgerId,metadata,digestType,password,$stack8);
+ $stack9=new java.lang.Object;
+ $stack9#java.lang.Object();
+ this.metadataLock=$stack9;
+ $stack10=new java.util.TreeMap;
+ $stack10#java.util.TreeMap();
+ this.newEnsemblesFromRecovery=$stack10;
+ if (watch==0) goto label0;
+ $stack11 = clientCtx.getLedgerManager();
+ $stack11.registerLedgerMetadataListener(ledgerId,(org.apache.bookkeeper.proto.BookkeeperInternalCallbacks$LedgerMetadataListener)this);
+ label0:return;
+ } 
+

@@ -1,0 +1,40 @@
+    public void deposit(double)
+    {
+        Account this;
+        double l1, $stack4;
+        byte $stack3;
+
+        this := @this: Account;
+
+        l1 := @parameter0: double;
+
+        $stack3 = l1 cmpl 0.0;
+/*11*/
+
+        if $stack3 <= 0 goto label1;
+/*11*/
+
+        $stack4 = this.<Account: double balance>;
+/*12*/
+
+        l1 = $stack4 + l1;
+/*12*/
+
+        this.<Account: double balance> = l1;
+/*12*/
+
+        specialinvoke this.<Account: void logTransaction(boolean)>(1);
+/*13*/
+
+        goto label2;
+/*13*/
+
+     label1:
+        virtualinvoke this.<Account: void logError(java.lang.String)>("Cannot deposit a non-positive amount.");
+/*15*/
+
+     label2:
+        return;
+/*17*/
+    }
+

@@ -1,0 +1,24 @@
+org.apache.rocketmq.store.GetMessageResult org.apache.rocketmq.store.kv.CompactionStore:getMessage(java.lang.String group,java.lang.String topic,int queueId,long offset,int maxMsgNums,int maxTotalMsgSize)
+{
+org.apache.rocketmq.store.kv.CompactionLog log;
+  java.lang.StringBuilder $stack9;
+  java.util.concurrent.ConcurrentHashMap $stack10;
+  java.lang.String $stack14;
+  java.lang.Object $stack15;
+  org.apache.rocketmq.store.GetMessageResult $stack16;
+  $stack10=this.compactionLogTable;
+ $stack9=new java.lang.StringBuilder;
+ $stack9#java.lang.StringBuilder();
+ $stack9 = $stack9.append(topic);
+ $stack9 = $stack9.append("_");
+ $stack9 = $stack9.append(queueId);
+ $stack14 = $stack9.toString();
+ $stack15 = $stack10.get((java.lang.Object)$stack14);
+ log=(org.apache.rocketmq.store.kv.CompactionLog) $stack15;
+ if (log!=null) goto label0;
+ $stack16=org.apache.rocketmq.store.GetMessageResult.NO_MATCH_LOGIC_QUEUE;
+ return  $stack16;
+ label0:$stack16 = log.getMessage(group,topic,queueId,offset,maxMsgNums,maxTotalMsgSize);
+ return  $stack16;
+ } 
+

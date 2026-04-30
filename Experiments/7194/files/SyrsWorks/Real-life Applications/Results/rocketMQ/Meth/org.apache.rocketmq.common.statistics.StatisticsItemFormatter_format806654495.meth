@@ -1,0 +1,35 @@
+java.lang.String org.apache.rocketmq.common.statistics.StatisticsItemFormatter:format(org.apache.rocketmq.common.statistics.StatisticsItem statItem)
+{
+java.lang.String separator;
+  java.lang.StringBuilder sb;
+  java.util.concurrent.atomic.AtomicLong[] l4;
+  int l5;
+  int l6;
+  java.util.concurrent.atomic.AtomicLong acc;
+  java.lang.StringBuilder $stack10;
+  long $stack19;
+  separator="|";
+ sb=new java.lang.StringBuilder;
+ sb#java.lang.StringBuilder();
+ separator = statItem.getStatKind();
+ $stack10 = sb.append(separator);
+ $stack10.append("|");
+ separator = statItem.getStatObject();
+ $stack10 = sb.append(separator);
+ $stack10.append("|");
+ l4 = statItem.getItemAccumulates();
+ l5=#l4;
+ l6=0;
+ label0:if (l6>=l5) goto label1;
+ acc=l4[l6];
+ $stack19 = acc.get();
+ $stack10 = sb.append($stack19);
+ $stack10.append("|");
+ l6=(l6+1);
+ goto label0;
+ label1:acc = statItem.getInvokeTimes();
+ sb.append((java.lang.Object)acc);
+ separator = sb.toString();
+ return  separator;
+ } 
+

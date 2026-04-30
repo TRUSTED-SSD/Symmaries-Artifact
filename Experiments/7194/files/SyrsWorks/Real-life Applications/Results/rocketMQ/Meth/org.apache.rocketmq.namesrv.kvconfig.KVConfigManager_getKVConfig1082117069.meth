@@ -1,0 +1,44 @@
+java.lang.String org.apache.rocketmq.namesrv.kvconfig.KVConfigManager:getKVConfig(java.lang.String @namespace,java.lang.String key)
+{
+java.util.HashMap kvTable;
+  java.lang.Throwable l5;
+  java.util.concurrent.locks.ReadWriteLock $stack6;
+  java.util.concurrent.locks.Lock $stack7;
+  java.lang.Object $stack9;
+  java.lang.InterruptedException $stack15;
+  org.apache.rocketmq.logging.org.slf4j.Logger $stack16;
+  java.lang.String namespace;
+namespace=@namespace;
+label0:$stack6=this.lock;
+ $stack7 = $stack6.readLock();
+ $stack7.lockInterruptibly();
+ label1:kvTable=this.configTable;
+ $stack9 = kvTable.get((java.lang.Object)namespace);
+ kvTable=(java.util.HashMap) $stack9;
+ if (null==kvTable) goto label2;
+ $stack9 = kvTable.get((java.lang.Object)key);
+ namespace=(java.lang.String) $stack9;
+ label3:$stack6=this.lock;
+ $stack7 = $stack6.readLock();
+ $stack7.unlock();
+ label4:return  namespace;
+ label2:$stack6=this.lock;
+ $stack7 = $stack6.readLock();
+ $stack7.unlock();
+ goto label5;
+ label6:l5 = catch;
+ label7:$stack6=this.lock;
+ $stack7 = $stack6.readLock();
+ $stack7.unlock();
+ throw l5;
+ label5:goto label8;
+ label9:$stack15 = catch;
+ $stack16=org.apache.rocketmq.namesrv.kvconfig.KVConfigManager.log;
+ $stack16.error("getKVConfig InterruptedException",(java.lang.Throwable)$stack15);
+ label8:return  null;
+ catch java.lang.Throwable: label1 - label3 : label6;
+catch java.lang.Throwable: label6 - label7 : label6;
+catch java.lang.InterruptedException: label0 - label4 : label9;
+catch java.lang.InterruptedException: label2 - label5 : label9;
+} 
+

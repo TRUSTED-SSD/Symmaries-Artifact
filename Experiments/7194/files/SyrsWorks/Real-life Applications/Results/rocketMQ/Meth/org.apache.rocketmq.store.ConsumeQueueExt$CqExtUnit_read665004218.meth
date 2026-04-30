@@ -1,0 +1,40 @@
+boolean org.apache.rocketmq.store.ConsumeQueueExt$CqExtUnit:read(java.nio.ByteBuffer buffer)
+{
+int $stack2;
+  int $stack4;
+  short $stack5;
+  long $stack7;
+  byte[] $stack11;
+  $stack2 = buffer.position();
+ $stack2=($stack2+2);
+ $stack4 = buffer.limit();
+ if ($stack2<=$stack4) goto label0;
+ return  0;
+ label0:$stack5 = buffer.getShort();
+ this.size=$stack5;
+ $stack5=this.size;
+ if ($stack5>=1) goto label1;
+ return  0;
+ label1:$stack7 = buffer.getLong();
+ this.tagsCode=$stack7;
+ $stack7 = buffer.getLong();
+ this.msgStoreTime=$stack7;
+ $stack5 = buffer.getShort();
+ this.bitMapSize=$stack5;
+ $stack5=this.bitMapSize;
+ if ($stack5>=1) goto label2;
+ return  1;
+ label2:$stack11=this.filterBitMap;
+ if ($stack11==null) goto label3;
+ $stack11=this.filterBitMap;
+ $stack2=#$stack11;
+ $stack5=this.bitMapSize;
+ if ($stack2==$stack5) goto label4;
+ label3:$stack5=this.bitMapSize;
+ $stack11=new byte[$stack5];
+ this.filterBitMap=$stack11;
+ label4:$stack11=this.filterBitMap;
+ buffer.get($stack11);
+ return  1;
+ } 
+

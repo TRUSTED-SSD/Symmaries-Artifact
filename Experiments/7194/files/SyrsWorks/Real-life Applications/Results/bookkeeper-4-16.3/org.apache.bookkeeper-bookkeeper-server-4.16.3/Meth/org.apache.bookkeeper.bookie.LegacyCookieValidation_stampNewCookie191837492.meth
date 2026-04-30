@@ -1,0 +1,21 @@
+static void org.apache.bookkeeper.bookie.LegacyCookieValidation:stampNewCookie(org.apache.bookkeeper.conf.ServerConfiguration conf,org.apache.bookkeeper.bookie.Cookie masterCookie,org.apache.bookkeeper.discover.RegistrationManager rm,org.apache.bookkeeper.versioning.Version version,java.util.List dirs)
+{
+java.util.Iterator l5;
+  java.io.File dir;
+  org.slf4j.Logger $stack7;
+  boolean $stack9;
+  java.lang.Object $stack10;
+  $stack7=org.apache.bookkeeper.bookie.LegacyCookieValidation.log;
+ dummyClass.lowSink("Stamping new cookies on all dirs {}");
+$stack7.info("Stamping new cookies on all dirs {}",(java.lang.Object)dirs);
+ l5 = dirs.iterator();
+ label0:$stack9 = l5.hasNext();
+ if ($stack9==0) goto label1;
+ $stack10 = l5.next();
+ dir=(java.io.File) $stack10;
+ masterCookie.writeToDirectory(dir);
+ goto label0;
+ label1:masterCookie#org.apache.bookkeeper.bookie.Cookie(rm,conf,version);
+ return;
+ } 
+

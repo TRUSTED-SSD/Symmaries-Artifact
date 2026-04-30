@@ -1,0 +1,41 @@
+boolean org.greenrobot.eventbus.EventBus:hasSubscriberForEvent(java.lang.Class @eventClass)
+{
+java.util.List eventTypes;
+  int countTypes;
+  int h;
+  java.util.concurrent.CopyOnWriteArrayList subscriptions;
+  org.greenrobot.eventbus.EventBus l7;
+  java.lang.Throwable l8;
+  java.lang.Object $stack12;
+  java.util.Map $stack14;
+  boolean $stack19;
+  java.lang.Class eventClass;
+eventClass=@eventClass;
+eventTypes = org.greenrobot.eventbus.EventBus.lookupAllEventTypes(eventClass);
+ if (eventTypes==null) goto label0;
+ countTypes = eventTypes.size();
+ h=0;
+ label1:if (h>=countTypes) goto label0;
+ $stack12 = eventTypes.get(h);
+ eventClass=(java.lang.Class) $stack12;
+ l7=this;
+ monitorenter this;
+ label2:$stack14=this.subscriptionsByEventType;
+ $stack12 = $stack14.get((java.lang.Object)eventClass);
+ subscriptions=(java.util.concurrent.CopyOnWriteArrayList) $stack12;
+ monitorexit this;
+ label3:goto label4;
+ label5:l8 = catch;
+ monitorexit this;
+ label6:throw l8;
+ label4:if (subscriptions==null) goto label7;
+ $stack19 = subscriptions.isEmpty();
+ if ($stack19!=0) goto label7;
+ return  1;
+ label7:h=(h+1);
+ goto label1;
+ label0:return  0;
+ catch java.lang.Throwable: label2 - label3 : label5;
+catch java.lang.Throwable: label5 - label6 : label5;
+} 
+

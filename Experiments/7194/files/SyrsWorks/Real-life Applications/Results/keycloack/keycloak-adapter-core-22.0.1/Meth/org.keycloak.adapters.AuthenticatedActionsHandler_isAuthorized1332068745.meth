@@ -1,0 +1,41 @@
+boolean org.keycloak.adapters.AuthenticatedActionsHandler:isAuthorized()
+{
+org.keycloak.adapters.authorization.PolicyEnforcer policyEnforcer;
+  org.keycloak.adapters.OIDCHttpFacade facade;
+  org.keycloak.AuthorizationContext authorizationContext;
+  org.keycloak.adapters.RefreshableKeycloakSecurityContext session;
+  org.keycloak.adapters.KeycloakDeployment $stack5;
+  org.keycloak.adapters.pep.HttpAuthzRequest $stack7;
+  org.keycloak.adapters.pep.HttpAuthzResponse $stack8;
+  org.keycloak.KeycloakSecurityContext $stack10;
+  boolean $stack11;
+  java.lang.Object[] $stack13;
+  org.jboss.logging.Logger $stack14;
+  java.lang.Exception $stack15;
+  java.lang.RuntimeException $stack16;
+  $stack5=this.deployment;
+ policyEnforcer = $stack5.getPolicyEnforcer();
+ if (policyEnforcer!=null) goto label0;
+ $stack14=org.keycloak.adapters.AuthenticatedActionsHandler.log;
+ $stack13=new java.lang.Object[0];
+ $stack14.debugv("Policy enforcement is disabled.",$stack13);
+ return  1;
+ label0:facade=this.facade;
+ $stack7=new org.keycloak.adapters.pep.HttpAuthzRequest;
+ $stack7#org.keycloak.adapters.pep.HttpAuthzRequest(facade);
+ $stack8=new org.keycloak.adapters.pep.HttpAuthzResponse;
+ $stack8#org.keycloak.adapters.pep.HttpAuthzResponse(facade);
+ authorizationContext = policyEnforcer.enforce((org.keycloak.adapters.authorization.spi.HttpRequest)$stack7,(org.keycloak.adapters.authorization.spi.HttpResponse)$stack8);
+ $stack10 = facade.getSecurityContext();
+ session=(org.keycloak.adapters.RefreshableKeycloakSecurityContext) $stack10;
+ if (session==null) goto label1;
+ session.setAuthorizationContext(authorizationContext);
+ label1:$stack11 = authorizationContext.isGranted();
+ label2:return  $stack11;
+ label3:$stack15 = catch;
+ $stack16=new java.lang.RuntimeException;
+ $stack16#java.lang.RuntimeException("Failed to enforce policy decisions.",(java.lang.Throwable)$stack15);
+ throw $stack16;
+ catch java.lang.Exception: label0 - label2 : label3;
+} 
+

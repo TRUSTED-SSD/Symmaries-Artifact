@@ -1,0 +1,39 @@
+java.util.List org.apache.rocketmq.proxy.grpc.v2.route.RouteActivity:convertToAddressList(apache.rocketmq.v2.Endpoints endpoints)
+{
+int port;
+  java.util.ArrayList addressList;
+  java.util.Iterator l4;
+  apache.rocketmq.v2.Address address;
+  org.apache.rocketmq.proxy.config.ProxyConfig $stack6;
+  java.lang.Integer $stack7;
+  java.util.List $stack10;
+  boolean $stack12;
+  java.lang.Object $stack13;
+  org.apache.rocketmq.proxy.common.Address $stack14;
+  apache.rocketmq.v2.AddressScheme $stack15;
+  java.lang.String $stack16;
+  org.apache.rocketmq.proxy.common.Address$AddressScheme $stack17;
+  com.google.common.net.HostAndPort $stack19;
+  $stack6 = org.apache.rocketmq.proxy.config.ConfigurationManager.getProxyConfig();
+ $stack7 = $stack6.getGrpcServerPort();
+ port = $stack7.intValue();
+ addressList=new java.util.ArrayList;
+ addressList#java.util.ArrayList();
+ $stack10 = endpoints.getAddressesList();
+ l4 = $stack10.iterator();
+ label0:$stack12 = l4.hasNext();
+ if ($stack12==0) goto label1;
+ $stack13 = l4.next();
+ address=(apache.rocketmq.v2.Address) $stack13;
+ $stack14=new org.apache.rocketmq.proxy.common.Address;
+ $stack15 = endpoints.getScheme();
+ $stack16 = $stack15.name();
+ $stack17 = org.apache.rocketmq.proxy.common.Address$AddressScheme.valueOf($stack16);
+ $stack16 = address.getHost();
+ $stack19 = com.google.common.net.HostAndPort.fromParts($stack16,port);
+ $stack14#org.apache.rocketmq.proxy.common.Address($stack17,$stack19);
+ addressList.add((java.lang.Object)$stack14);
+ goto label0;
+ label1:return  addressList;
+ } 
+

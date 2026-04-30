@@ -1,0 +1,38 @@
+boolean org.apache.bookkeeper.tools.cli.commands.bookie.LedgerCommand:lambda$printPageEntries$1(org.apache.commons.lang.mutable.MutableLong curEntry,long entry,long offset)
+{
+long $stack10;
+  byte $stack11;
+  java.lang.StringBuilder $stack12;
+  java.util.function.Consumer $stack13;
+  java.lang.String $stack21;
+  label0:$stack10 = curEntry.longValue();
+ $stack11=($stack10 cmp entry);
+ if ($stack11>=0) goto label1;
+ $stack13=this.print;
+ $stack12=new java.lang.StringBuilder;
+ $stack12#java.lang.StringBuilder();
+ $stack12 = $stack12.append("entry ");
+ $stack12 = $stack12.append((java.lang.Object)curEntry);
+ $stack12 = $stack12.append("\t:\tN/A");
+ $stack21 = $stack12.toString();
+ $stack13.accept((java.lang.Object)$stack21);
+ curEntry.increment();
+ goto label0;
+ label1:entry=(offset>>32);
+ offset=(offset & 4294967295L);
+ $stack13=this.print;
+ $stack12=new java.lang.StringBuilder;
+ $stack12#java.lang.StringBuilder();
+ $stack12 = $stack12.append("entry ");
+ $stack12 = $stack12.append((java.lang.Object)curEntry);
+ $stack12 = $stack12.append("\t:\t(log:");
+ $stack12 = $stack12.append(entry);
+ $stack12 = $stack12.append(", pos: ");
+ $stack12 = $stack12.append(offset);
+ $stack12 = $stack12.append(")");
+ $stack21 = $stack12.toString();
+ $stack13.accept((java.lang.Object)$stack21);
+ curEntry.increment();
+ return  1;
+ } 
+

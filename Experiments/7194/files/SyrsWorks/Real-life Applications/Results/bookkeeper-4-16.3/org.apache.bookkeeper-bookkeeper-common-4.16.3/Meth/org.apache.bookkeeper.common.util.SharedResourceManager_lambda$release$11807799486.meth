@@ -1,0 +1,31 @@
+void org.apache.bookkeeper.common.util.SharedResourceManager:lambda$release$1(org.apache.bookkeeper.common.util.SharedResourceManager$Instance cached,org.apache.bookkeeper.common.util.SharedResourceManager$Resource resource,java.lang.Object instance)
+{
+org.apache.bookkeeper.common.util.SharedResourceManager l4;
+  java.lang.Throwable l5;
+  int $stack7;
+  java.util.IdentityHashMap $stack9;
+  boolean $stack12;
+  java.util.concurrent.ScheduledExecutorService $stack13;
+  l4=this;
+ monitorenter this;
+ label0:$stack7 = org.apache.bookkeeper.common.util.SharedResourceManager$Instance.access$100(cached);
+ if ($stack7!=0) goto label1;
+ resource.close(instance);
+ $stack9=this.instances;
+ $stack9.remove((java.lang.Object)resource);
+ $stack9=this.instances;
+ $stack12 = $stack9.isEmpty();
+ if ($stack12==0) goto label1;
+ $stack13=this.destroyer;
+ $stack13.shutdown();
+ this.destroyer=null;
+ label1:monitorexit this;
+ label2:goto label3;
+ label4:l5 = catch;
+ monitorexit this;
+ label5:throw l5;
+ label3:return;
+ catch java.lang.Throwable: label0 - label2 : label4;
+catch java.lang.Throwable: label4 - label5 : label4;
+} 
+

@@ -1,0 +1,19 @@
+void org.apache.rocketmq.client.impl.consumer.PullMessageService:pullMessage(org.apache.rocketmq.client.impl.consumer.PullRequest pullRequest)
+{
+org.apache.rocketmq.client.impl.consumer.MQConsumerInner consumer;
+  org.apache.rocketmq.client.impl.consumer.DefaultMQPushConsumerImpl impl;
+  org.apache.rocketmq.client.impl.factory.MQClientInstance $stack4;
+  java.lang.String $stack5;
+  org.apache.rocketmq.logging.org.slf4j.Logger $stack7;
+  $stack4=this.mQClientFactory;
+ $stack5 = pullRequest.getConsumerGroup();
+ consumer = $stack4.selectConsumer($stack5);
+ if (consumer==null) goto label0;
+ impl=(org.apache.rocketmq.client.impl.consumer.DefaultMQPushConsumerImpl) consumer;
+ impl.pullMessage(pullRequest);
+ goto label1;
+ label0:$stack7=this.logger;
+ $stack7.warn("No matched consumer for the PullRequest {}, drop it",(java.lang.Object)pullRequest);
+ label1:return;
+ } 
+

@@ -1,0 +1,27 @@
+static void org.greenrobot.eventbus.PendingPost:releasePendingPost(org.greenrobot.eventbus.PendingPost pendingPost)
+{
+java.util.List l1;
+  java.lang.Throwable l2;
+  java.util.List $stack3;
+  int $stack5;
+  pendingPost.event=null;
+ pendingPost.subscription=null;
+ pendingPost.next=null;
+ $stack3=org.greenrobot.eventbus.PendingPost.pendingPostPool;
+ l1=$stack3;
+ monitorenter $stack3;
+ label0:$stack3=org.greenrobot.eventbus.PendingPost.pendingPostPool;
+ $stack5 = $stack3.size();
+ if ($stack5>=10000) goto label1;
+ $stack3=org.greenrobot.eventbus.PendingPost.pendingPostPool;
+ $stack3.add((java.lang.Object)pendingPost);
+ label1:monitorexit l1;
+ label2:goto label3;
+ label4:l2 = catch;
+ monitorexit l1;
+ label5:throw l2;
+ label3:return;
+ catch java.lang.Throwable: label0 - label2 : label4;
+catch java.lang.Throwable: label4 - label5 : label4;
+} 
+

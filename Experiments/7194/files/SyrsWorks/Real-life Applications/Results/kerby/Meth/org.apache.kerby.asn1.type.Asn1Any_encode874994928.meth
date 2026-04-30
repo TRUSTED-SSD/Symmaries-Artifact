@@ -1,0 +1,25 @@
+void org.apache.kerby.asn1.type.Asn1Any:encode(java.nio.ByteBuffer buffer)
+{
+org.apache.kerby.asn1.type.Asn1Encodeable theValue;
+  org.apache.kerby.asn1.TaggingOption taggingOption;
+  java.lang.Object $stack4;
+  boolean $stack5;
+  org.apache.kerby.asn1.Asn1FieldInfo $stack6;
+  $stack4 = this.getValue();
+ theValue=(org.apache.kerby.asn1.type.Asn1Encodeable) $stack4;
+ if (theValue==null) goto label0;
+ $stack5=this.isBlindlyDecoded;
+ if ($stack5!=0) goto label1;
+ $stack6=this.decodeInfo;
+ $stack5 = $stack6.isTagged();
+ if ($stack5==0) goto label2;
+ $stack6=this.decodeInfo;
+ taggingOption = $stack6.getTaggingOption();
+ theValue.taggedEncode(buffer,taggingOption);
+ goto label0;
+ label2:theValue.encode(buffer);
+ goto label0;
+ label1:theValue.encode(buffer);
+ label0:return;
+ } 
+

@@ -1,0 +1,27 @@
+boolean org.apache.rocketmq.broker.client.rebalance.RebalanceLockManager:isLockAllExpired(java.lang.String group)
+{
+java.util.concurrent.ConcurrentHashMap lockEntryMap;
+  java.util.Iterator l3;
+  org.apache.rocketmq.broker.client.rebalance.RebalanceLockManager$LockEntry entry;
+  java.util.concurrent.ConcurrentMap $stack5;
+  java.lang.Object $stack6;
+  java.util.Collection $stack7;
+  boolean $stack9;
+  $stack5=this.mqLockTable;
+ $stack6 = $stack5.get((java.lang.Object)group);
+ lockEntryMap=(java.util.concurrent.ConcurrentHashMap) $stack6;
+ if (null!=lockEntryMap) goto label0;
+ return  1;
+ label0:$stack7 = lockEntryMap.values();
+ l3 = $stack7.iterator();
+ label1:$stack9 = l3.hasNext();
+ if ($stack9==0) goto label2;
+ $stack6 = l3.next();
+ entry=(org.apache.rocketmq.broker.client.rebalance.RebalanceLockManager$LockEntry) $stack6;
+ $stack9 = entry.isExpired();
+ if ($stack9!=0) goto label3;
+ return  0;
+ label3:goto label1;
+ label2:return  1;
+ } 
+

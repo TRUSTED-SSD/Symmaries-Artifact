@@ -1,0 +1,67 @@
+void org.apache.bookkeeper.zookeeper.ZooKeeperWatcherBase:process(org.apache.zookeeper.WatchedEvent event)
+{
+org.apache.zookeeper.Watcher$Event$EventType $stack2;
+  org.apache.zookeeper.Watcher$Event$EventType $stack3;
+  org.apache.zookeeper.Watcher$Event$KeeperState $stack4;
+  org.apache.bookkeeper.stats.Counter $stack5;
+  org.slf4j.Logger $stack6;
+  boolean $stack7;
+  int[] $stack8;
+  int $stack10;
+  java.util.concurrent.CountDownLatch $stack13;
+  java.lang.String $stack32;
+  $stack2 = event.getType();
+ $stack3=org.apache.zookeeper.Watcher$Event$EventType.None;
+ if ($stack2==$stack3) goto label0;
+ $stack6=org.apache.bookkeeper.zookeeper.ZooKeeperWatcherBase.LOG;
+ $stack7 = $stack6.isDebugEnabled();
+ if ($stack7==0) goto label1;
+ $stack6=org.apache.bookkeeper.zookeeper.ZooKeeperWatcherBase.LOG;
+ $stack2 = event.getType();
+ $stack32 = event.getPath();
+ dummyClass.lowSink("Received event: {}, path: {} from ZooKeeper server");
+$stack6.debug("Received event: {}, path: {} from ZooKeeper server",(java.lang.Object)$stack2,(java.lang.Object)$stack32);
+ label1:$stack2 = event.getType();
+ $stack5 = this#org.apache.bookkeeper.zookeeper.ZooKeeperWatcherBase:getEventCounter($stack2);
+ $stack5.inc();
+ this#org.apache.bookkeeper.zookeeper.ZooKeeperWatcherBase:notifyEvent(event);
+ return;
+ label0:$stack4 = event.getState();
+ $stack5 = this.getStateCounter($stack4);
+ $stack5.inc();
+ $stack6=org.apache.bookkeeper.zookeeper.ZooKeeperWatcherBase.LOG;
+ $stack7 = $stack6.isDebugEnabled();
+ if ($stack7==0) goto label2;
+ $stack6=org.apache.bookkeeper.zookeeper.ZooKeeperWatcherBase.LOG;
+ $stack4 = event.getState();
+ dummyClass.lowSink("Received {} from ZooKeeper server");
+$stack6.debug("Received {} from ZooKeeper server",(java.lang.Object)$stack4);
+ label2:$stack8=org.apache.bookkeeper.zookeeper.ZooKeeperWatcherBase$1.$SwitchMap$org$apache$zookeeper$Watcher$Event$KeeperState;
+ $stack4 = event.getState();
+ $stack10 = $stack4.ordinal();
+ $stack10=$stack8[$stack10];
+ switch [$stack10]
+if 0 goto label3;
+if 1 goto label4;
+if 2 goto label5;
+goto label6;
+ label3:$stack6=org.apache.bookkeeper.zookeeper.ZooKeeperWatcherBase.LOG;
+ dummyClass.lowSink("ZooKeeper client is connected now.");
+$stack6.info("ZooKeeper client is connected now.");
+ $stack13=this.clientConnectLatch;
+ $stack13.countDown();
+ goto label6;
+ label4:$stack6=org.apache.bookkeeper.zookeeper.ZooKeeperWatcherBase.LOG;
+ dummyClass.lowSink("ZooKeeper client is disconnected from zookeeper now, but it is OK unless we received EXPIRED event.");
+$stack6.info("ZooKeeper client is disconnected from zookeeper now, but it is OK unless we received EXPIRED event.");
+ goto label6;
+ label5:$stack13=new java.util.concurrent.CountDownLatch;
+ $stack13#java.util.concurrent.CountDownLatch(1);
+ this.clientConnectLatch=$stack13;
+ $stack6=org.apache.bookkeeper.zookeeper.ZooKeeperWatcherBase.LOG;
+ $stack6.error("ZooKeeper client connection to the ZooKeeper server has expired!");
+ goto label6;
+ label6:this#org.apache.bookkeeper.zookeeper.ZooKeeperWatcherBase:notifyEvent(event);
+ return;
+ } 
+

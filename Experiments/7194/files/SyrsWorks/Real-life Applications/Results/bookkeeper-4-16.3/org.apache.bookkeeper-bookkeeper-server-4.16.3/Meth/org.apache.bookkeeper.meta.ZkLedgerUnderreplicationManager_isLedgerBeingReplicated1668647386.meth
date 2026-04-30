@@ -1,0 +1,24 @@
+boolean org.apache.bookkeeper.meta.ZkLedgerUnderreplicationManager:isLedgerBeingReplicated(long ledgerId)
+{
+java.lang.String $stack4;
+  org.apache.zookeeper.ZooKeeper $stack5;
+  org.apache.zookeeper.data.Stat $stack7;
+  boolean $stack8;
+  java.lang.Exception $stack9;
+  org.apache.bookkeeper.replication.ReplicationException$UnavailableException $stack10;
+  label0:$stack5=this.zkc;
+ $stack4=this.urLockPath;
+ $stack4 = org.apache.bookkeeper.meta.ZkLedgerUnderreplicationManager.getUrLedgerLockZnode($stack4,ledgerId);
+ $stack7 = $stack5.exists($stack4,(boolean)0);
+ if ($stack7==null) goto label1;
+ $stack8=1;
+ goto label2;
+ label1:$stack8=0;
+ label2:return  $stack8;
+ label3:$stack9 = catch;
+ $stack10=new org.apache.bookkeeper.replication.ReplicationException$UnavailableException;
+ $stack10#org.apache.bookkeeper.replication.ReplicationException$UnavailableException("Failed to check ledger lock",(java.lang.Throwable)$stack9);
+ throw $stack10;
+ catch java.lang.Exception: label0 - label2 : label3;
+} 
+

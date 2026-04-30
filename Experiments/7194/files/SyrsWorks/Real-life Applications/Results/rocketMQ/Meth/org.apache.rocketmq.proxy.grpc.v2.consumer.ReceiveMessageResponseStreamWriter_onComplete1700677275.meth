@@ -1,0 +1,25 @@
+void org.apache.rocketmq.proxy.grpc.v2.consumer.ReceiveMessageResponseStreamWriter:onComplete()
+{
+apache.rocketmq.v2.ReceiveMessageResponse$Builder $stack2;
+  long $stack3;
+  com.google.protobuf.Timestamp $stack4;
+  apache.rocketmq.v2.ReceiveMessageResponse $stack6;
+  io.grpc.stub.StreamObserver $stack7;
+  java.lang.Exception $stack8;
+  org.apache.rocketmq.logging.org.slf4j.Logger $stack9;
+  $stack2 = apache.rocketmq.v2.ReceiveMessageResponse.newBuilder();
+ $stack3 = java.lang.System.currentTimeMillis();
+ $stack4 = com.google.protobuf.util.Timestamps.fromMillis($stack3);
+ $stack2 = $stack2.setDeliveryTimestamp($stack4);
+ $stack6 = $stack2.build();
+ this.writeResponseWithErrorIgnore($stack6);
+ label0:$stack7=this.streamObserver;
+ $stack7.onCompleted();
+ label1:goto label2;
+ label3:$stack8 = catch;
+ $stack9=org.apache.rocketmq.proxy.grpc.v2.consumer.ReceiveMessageResponseStreamWriter.log;
+ $stack9.error("err when complete receive message response",(java.lang.Throwable)$stack8);
+ label2:return;
+ catch java.lang.Exception: label0 - label1 : label3;
+} 
+

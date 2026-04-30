@@ -1,0 +1,27 @@
+boolean org.apache.bookkeeper.bookie.Cookie:isBookieHostCreatedFromIp()
+{
+java.lang.String[] parts;
+  int port;
+  java.lang.NumberFormatException e;
+  java.lang.String $stack4;
+  java.net.InetSocketAddress $stack9;
+  boolean $stack12;
+  $stack4=this.bookieId;
+ parts = $stack4.split(":");
+ port=#parts;
+ if (port==2) goto label0;
+ return  0;
+ label0:$stack4=parts[1];
+ port = java.lang.Integer.parseInt($stack4);
+ label1:goto label2;
+ label3:e = catch;
+ return  0;
+ label2:$stack9=new java.net.InetSocketAddress;
+ $stack4=parts[0];
+ $stack9#java.net.InetSocketAddress($stack4,port);
+ $stack4 = $stack9.toString();
+ $stack12 = $stack4.startsWith("/");
+ return  $stack12;
+ catch java.lang.NumberFormatException: label0 - label1 : label3;
+} 
+

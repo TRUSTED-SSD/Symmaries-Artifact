@@ -1,0 +1,59 @@
+org.apache.rocketmq.remoting.protocol.body.TopicList org.apache.rocketmq.client.impl.MQClientAPIImpl:getSystemTopicList(long timeoutMillis)
+{
+org.apache.rocketmq.remoting.protocol.RemotingCommand request;
+  byte[] body;
+  org.apache.rocketmq.remoting.protocol.body.TopicList topicList;
+  org.apache.rocketmq.remoting.protocol.body.TopicList tmp;
+  org.apache.rocketmq.remoting.RemotingClient $stack9;
+  boolean $stack11;
+  int $stack12;
+  org.apache.rocketmq.client.exception.MQClientException $stack14;
+  java.lang.String $stack16;
+  java.lang.Object $stack18;
+  java.util.Set $stack19;
+  java.util.Set $stack31;
+  java.lang.AssertionError $stack36;
+  request = org.apache.rocketmq.remoting.protocol.RemotingCommand.createRequestCommand(304,null);
+ $stack9=this.remotingClient;
+ request = $stack9.invokeSync(null,request,timeoutMillis);
+ $stack11=org.apache.rocketmq.client.impl.MQClientAPIImpl.$assertionsDisabled;
+ if ($stack11!=0) goto label0;
+ if (request!=null) goto label0;
+ $stack36=new java.lang.AssertionError;
+ $stack36#java.lang.AssertionError();
+ throw $stack36;
+ label0:$stack12 = request.getCode();
+ switch [$stack12]
+if 0 goto label1;
+goto label2;
+ label1:body = request.getBody();
+ if (body==null) goto label2;
+ body = request.getBody();
+ $stack18 = org.apache.rocketmq.remoting.protocol.RemotingSerializable.decode(body,org.apache.rocketmq.remoting.protocol.body.TopicList);
+ topicList=(org.apache.rocketmq.remoting.protocol.body.TopicList) $stack18;
+ $stack19 = topicList.getTopicList();
+ if ($stack19==null) goto label3;
+ $stack19 = topicList.getTopicList();
+ $stack11 = $stack19.isEmpty();
+ if ($stack11!=0) goto label3;
+ $stack16 = topicList.getBrokerAddr();
+ $stack11 = org.apache.rocketmq.common.UtilAll.isBlank($stack16);
+ if ($stack11!=0) goto label3;
+ $stack16 = topicList.getBrokerAddr();
+ tmp = this.getSystemTopicListFromBroker($stack16,timeoutMillis);
+ $stack19 = tmp.getTopicList();
+ if ($stack19==null) goto label3;
+ $stack19 = tmp.getTopicList();
+ $stack11 = $stack19.isEmpty();
+ if ($stack11!=0) goto label3;
+ $stack19 = topicList.getTopicList();
+ $stack31 = tmp.getTopicList();
+ $stack19.addAll((java.util.Collection)$stack31);
+ label3:return  topicList;
+ label2:$stack14=new org.apache.rocketmq.client.exception.MQClientException;
+ $stack12 = request.getCode();
+ $stack16 = request.getRemark();
+ $stack14#org.apache.rocketmq.client.exception.MQClientException($stack12,$stack16);
+ throw $stack14;
+ } 
+

@@ -1,0 +1,9 @@
+static org.apache.rocketmq.acl.plain.PlainAccessResource org.apache.rocketmq.acl.plain.PlainAccessResource:build (
+  org.apache.rocketmq.common.PlainAccessConfig plainAccessConfig,
+  org.apache.rocketmq.acl.plain.RemoteAddressStrategy remoteAddressStrategy) {
+  guard = tt;
+  ret(level()) = ⊥;
+  ret(obj_level()) = level(plainAccessConfig) ⊔ level(remoteAddressStrategy) ⊔ obj_level(plainAccessConfig) ⊔ obj_level(remoteAddressStrategy);
+  ret(obj_level(plainAccessConfig)) = level(plainAccessConfig) ⊔ level(remoteAddressStrategy) ⊔ obj_level(plainAccessConfig) ⊔ obj_level(remoteAddressStrategy);
+  ret(obj_level(remoteAddressStrategy)) = level(plainAccessConfig) ⊔ level(remoteAddressStrategy) ⊔ obj_level(plainAccessConfig) ⊔ obj_level(remoteAddressStrategy);
+}

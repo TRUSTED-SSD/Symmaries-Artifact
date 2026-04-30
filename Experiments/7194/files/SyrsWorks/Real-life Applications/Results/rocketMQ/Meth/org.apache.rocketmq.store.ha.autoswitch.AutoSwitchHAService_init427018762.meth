@@ -1,0 +1,29 @@
+void org.apache.rocketmq.store.ha.autoswitch.AutoSwitchHAService:init(org.apache.rocketmq.store.DefaultMessageStore defaultMessageStore)
+{
+org.apache.rocketmq.store.ha.autoswitch.EpochFileCache $stack2;
+  org.apache.rocketmq.store.config.MessageStoreConfig $stack3;
+  java.lang.String $stack4;
+  org.apache.rocketmq.store.ha.autoswitch.AutoSwitchHAService$AutoSwitchAcceptSocketService $stack7;
+  org.apache.rocketmq.store.ha.GroupTransferService $stack9;
+  org.apache.rocketmq.store.ha.HAConnectionStateNotificationService $stack10;
+  $stack2=new org.apache.rocketmq.store.ha.autoswitch.EpochFileCache;
+ $stack3 = defaultMessageStore.getMessageStoreConfig();
+ $stack4 = $stack3.getStorePathEpochFile();
+ $stack2#org.apache.rocketmq.store.ha.autoswitch.EpochFileCache($stack4);
+ this.epochCache=$stack2;
+ $stack2=this.epochCache;
+ $stack2.initCacheFromFile();
+ this.defaultMessageStore=defaultMessageStore;
+ $stack7=new org.apache.rocketmq.store.ha.autoswitch.AutoSwitchHAService$AutoSwitchAcceptSocketService;
+ $stack3 = defaultMessageStore.getMessageStoreConfig();
+ $stack7#org.apache.rocketmq.store.ha.autoswitch.AutoSwitchHAService$AutoSwitchAcceptSocketService(this,$stack3);
+ this.acceptSocketService=$stack7;
+ $stack9=new org.apache.rocketmq.store.ha.GroupTransferService;
+ $stack9#org.apache.rocketmq.store.ha.GroupTransferService((org.apache.rocketmq.store.ha.HAService)this,defaultMessageStore);
+ this.groupTransferService=$stack9;
+ $stack10=new org.apache.rocketmq.store.ha.HAConnectionStateNotificationService;
+ $stack10#org.apache.rocketmq.store.ha.HAConnectionStateNotificationService((org.apache.rocketmq.store.ha.HAService)this,defaultMessageStore);
+ this.haConnectionStateNotificationService=$stack10;
+ return;
+ } 
+

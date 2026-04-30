@@ -1,0 +1,22 @@
+static java.util.Set org.apache.rocketmq.tools.command.CommandUtil:fetchMasterAndSlaveAddrByBrokerName(org.apache.rocketmq.tools.admin.MQAdminExt adminExt,java.lang.String brokerName)
+{
+java.util.HashSet brokerAddressSet;
+  org.apache.rocketmq.remoting.protocol.body.ClusterInfo clusterInfoSerializeWrapper;
+  org.apache.rocketmq.remoting.protocol.route.BrokerData brokerData;
+  java.util.Map $stack7;
+  java.lang.Object $stack8;
+  java.util.HashMap $stack9;
+  java.util.Collection $stack10;
+  brokerAddressSet=new java.util.HashSet;
+ brokerAddressSet#java.util.HashSet();
+ clusterInfoSerializeWrapper = adminExt.examineBrokerClusterInfo();
+ $stack7 = clusterInfoSerializeWrapper.getBrokerAddrTable();
+ $stack8 = $stack7.get((java.lang.Object)brokerName);
+ brokerData=(org.apache.rocketmq.remoting.protocol.route.BrokerData) $stack8;
+ if (brokerData==null) goto label0;
+ $stack9 = brokerData.getBrokerAddrs();
+ $stack10 = $stack9.values();
+ brokerAddressSet.addAll($stack10);
+ label0:return  brokerAddressSet;
+ } 
+

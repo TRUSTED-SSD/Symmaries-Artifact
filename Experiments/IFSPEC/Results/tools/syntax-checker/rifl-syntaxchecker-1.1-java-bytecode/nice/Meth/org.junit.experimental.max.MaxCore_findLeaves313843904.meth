@@ -1,0 +1,39 @@
+void org.junit.experimental.max.MaxCore:findLeaves(org.junit.runner.Description @parent,org.junit.runner.Description description,java.util.List results)
+{
+java.util.Iterator i$;
+  java.util.ArrayList $stack6;
+  boolean $stack7;
+  java.lang.Object $stack11;
+  java.lang.String $stack13;
+  java.lang.StringBuilder $stack16;
+  java.lang.annotation.Annotation[] $stack20;
+  org.junit.runner.Description parent;
+parent=@parent;
+$stack6 = description.getChildren();
+ $stack7 = $stack6.isEmpty();
+ if ($stack7==0) goto label0;
+ $stack13 = description.toString();
+ $stack7 = $stack13.equals((java.lang.Object)"warning(junit.framework.TestSuite$1)");
+ if ($stack7==0) goto label1;
+ $stack16=new java.lang.StringBuilder;
+ $stack16#java.lang.StringBuilder();
+ $stack16 = $stack16.append("malformed JUnit 3 test class: ");
+ $stack16 = $stack16.append((java.lang.Object)parent);
+ $stack13 = $stack16.toString();
+ $stack20=new java.lang.annotation.Annotation[0];
+ parent = org.junit.runner.Description.createSuiteDescription($stack13,$stack20);
+ results.add((java.lang.Object)parent);
+ goto label2;
+ label1:results.add((java.lang.Object)description);
+ goto label2;
+ label0:$stack6 = description.getChildren();
+ i$ = $stack6.iterator();
+ label3:$stack7 = i$.hasNext();
+ if ($stack7==0) goto label2;
+ $stack11 = i$.next();
+ parent=(org.junit.runner.Description) $stack11;
+ this#org.junit.experimental.max.MaxCore(description,parent,results);
+ goto label3;
+ label2:return;
+ } 
+

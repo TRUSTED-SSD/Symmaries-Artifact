@@ -1,0 +1,19 @@
+static org.apache.bookkeeper.stream.proto.kv.rpc.TxnRequest org.apache.bookkeeper.statelib.impl.mvcc.MVCCUtils:toTxnRequest(org.apache.bookkeeper.api.kv.op.TxnOp op)
+{
+org.apache.bookkeeper.stream.proto.kv.rpc.TxnRequest$Builder $stack1;
+  java.util.List $stack2;
+  org.apache.bookkeeper.stream.proto.kv.rpc.TxnRequest $stack11;
+  $stack1 = org.apache.bookkeeper.stream.proto.kv.rpc.TxnRequest.newBuilder();
+ $stack2 = op.successOps();
+ $stack2 = org.apache.bookkeeper.statelib.impl.mvcc.MVCCUtils.toRequestOpList($stack2);
+ $stack1 = $stack1.addAllSuccess((java.lang.Iterable)$stack2);
+ $stack2 = op.failureOps();
+ $stack2 = org.apache.bookkeeper.statelib.impl.mvcc.MVCCUtils.toRequestOpList($stack2);
+ $stack1 = $stack1.addAllFailure((java.lang.Iterable)$stack2);
+ $stack2 = op.compareOps();
+ $stack2 = org.apache.bookkeeper.statelib.impl.mvcc.MVCCUtils.toCompareList($stack2);
+ $stack1 = $stack1.addAllCompare((java.lang.Iterable)$stack2);
+ $stack11 = $stack1.build();
+ return  $stack11;
+ } 
+

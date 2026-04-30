@@ -1,0 +1,17 @@
+int org.apache.kerby.kerberos.kerb.server.KdcSetting:getKdcUdpPort()
+{
+int udpPort;
+  org.apache.kerby.kerberos.kerb.server.KdcServerOption $stack2;
+  org.apache.kerby.KOptions $stack3;
+  org.apache.kerby.kerberos.kerb.server.KdcConfig $stack7;
+  $stack3=this.startupOptions;
+ $stack2=org.apache.kerby.kerberos.kerb.server.KdcServerOption.KDC_UDP_PORT;
+ udpPort = $stack3.getIntegerOption((org.apache.kerby.KOption)$stack2);
+ if (udpPort>=1) goto label0;
+ $stack7=this.kdcConfig;
+ udpPort = $stack7.getKdcUdpPort();
+ label0:if (udpPort>=1) goto label1;
+ udpPort = this.getKdcPort();
+ label1:return  udpPort;
+ } 
+

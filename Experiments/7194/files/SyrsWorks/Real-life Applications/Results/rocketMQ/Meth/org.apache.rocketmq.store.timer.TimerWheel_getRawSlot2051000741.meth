@@ -1,0 +1,44 @@
+org.apache.rocketmq.store.timer.Slot org.apache.rocketmq.store.timer.TimerWheel:getRawSlot(long timeMs)
+{
+java.lang.ThreadLocal $stack3;
+  java.lang.Object $stack4;
+  java.nio.ByteBuffer $stack5;
+  int $stack6;
+  org.apache.rocketmq.store.timer.Slot $stack9;
+  long $stack15;
+  long $stack24;
+  int $stack32;
+  $stack3=this.localBuffer;
+ $stack4 = $stack3.get();
+ $stack5=(java.nio.ByteBuffer) $stack4;
+ $stack6 = this.getSlotIndex(timeMs);
+ $stack6=($stack6 * 32);
+ $stack5.position($stack6);
+ $stack9=new org.apache.rocketmq.store.timer.Slot;
+ $stack3=this.localBuffer;
+ $stack4 = $stack3.get();
+ $stack5=(java.nio.ByteBuffer) $stack4;
+ timeMs = $stack5.getLong();
+ $stack6=this.precisionMs;
+ $stack15=(long) $stack6;
+ timeMs=(timeMs * $stack15);
+ $stack3=this.localBuffer;
+ $stack4 = $stack3.get();
+ $stack5=(java.nio.ByteBuffer) $stack4;
+ $stack15 = $stack5.getLong();
+ $stack3=this.localBuffer;
+ $stack4 = $stack3.get();
+ $stack5=(java.nio.ByteBuffer) $stack4;
+ $stack24 = $stack5.getLong();
+ $stack3=this.localBuffer;
+ $stack4 = $stack3.get();
+ $stack5=(java.nio.ByteBuffer) $stack4;
+ $stack6 = $stack5.getInt();
+ $stack3=this.localBuffer;
+ $stack4 = $stack3.get();
+ $stack5=(java.nio.ByteBuffer) $stack4;
+ $stack32 = $stack5.getInt();
+ $stack9#org.apache.rocketmq.store.timer.Slot(timeMs,$stack15,$stack24,$stack6,$stack32);
+ return  $stack9;
+ } 
+

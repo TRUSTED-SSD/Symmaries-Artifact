@@ -1,0 +1,24 @@
+void org.apache.bookkeeper.proto.AuthHandler$ClientSideHandler:channelActive(io.netty.channel.ChannelHandlerContext ctx)
+{
+org.apache.bookkeeper.proto.AuthHandler$ClientSideHandler$AuthHandshakeCompleteCallback $stack2;
+  org.apache.bookkeeper.auth.ClientAuthProvider$Factory $stack3;
+  org.apache.bookkeeper.proto.ClientConnectionPeer $stack4;
+  org.apache.bookkeeper.auth.ClientAuthProvider $stack5;
+  org.apache.bookkeeper.proto.AuthHandler$ClientSideHandler$AuthRequestCallback $stack6;
+  java.lang.String $stack9;
+  $stack3=this.authProviderFactory;
+ $stack4=this.connectionPeer;
+ $stack2=new org.apache.bookkeeper.proto.AuthHandler$ClientSideHandler$AuthHandshakeCompleteCallback;
+ $stack2#org.apache.bookkeeper.proto.AuthHandler$ClientSideHandler$AuthHandshakeCompleteCallback(this,ctx);
+ $stack5 = $stack3.newProvider($stack4,(org.apache.bookkeeper.auth.AuthCallbacks$GenericCallback)$stack2);
+ this.authProvider=$stack5;
+ $stack5=this.authProvider;
+ $stack6=new org.apache.bookkeeper.proto.AuthHandler$ClientSideHandler$AuthRequestCallback;
+ $stack3=this.authProviderFactory;
+ $stack9 = $stack3.getPluginName();
+ $stack6#org.apache.bookkeeper.proto.AuthHandler$ClientSideHandler$AuthRequestCallback(this,ctx,$stack9);
+ $stack5.init((org.apache.bookkeeper.auth.AuthCallbacks$GenericCallback)$stack6);
+ this#io.netty.channel.ChannelDuplexHandler:channelActive(ctx);
+ return;
+ } 
+

@@ -1,0 +1,19 @@
+long org.apache.rocketmq.client.impl.consumer.DefaultLitePullConsumerImpl:committed(org.apache.rocketmq.common.message.MessageQueue messageQueue)
+{
+long offset;
+  org.apache.rocketmq.client.consumer.store.ReadOffsetType $stack4;
+  org.apache.rocketmq.client.consumer.store.OffsetStore $stack5;
+  byte $stack7;
+  org.apache.rocketmq.client.exception.MQClientException $stack8;
+  this#org.apache.rocketmq.client.impl.consumer.DefaultLitePullConsumerImpl:checkServiceState();
+ $stack5=this.offsetStore;
+ $stack4=org.apache.rocketmq.client.consumer.store.ReadOffsetType.MEMORY_FIRST_THEN_STORE;
+ offset = $stack5.readOffset(messageQueue,$stack4);
+ $stack7=(offset cmp -2L);
+ if ($stack7!=0) goto label0;
+ $stack8=new org.apache.rocketmq.client.exception.MQClientException;
+ $stack8#org.apache.rocketmq.client.exception.MQClientException("Fetch consume offset from broker exception",null);
+ throw $stack8;
+ label0:return  offset;
+ } 
+

@@ -1,0 +1,58 @@
+org.apache.rocketmq.remoting.protocol.RemotingCommand org.apache.rocketmq.client.impl.ClientRemotingProcessor:checkTransactionState(io.netty.channel.ChannelHandlerContext ctx,org.apache.rocketmq.remoting.protocol.RemotingCommand request)
+{
+org.apache.rocketmq.remoting.protocol.header.CheckTransactionStateRequestHeader requestHeader;
+  java.nio.ByteBuffer byteBuffer;
+  org.apache.rocketmq.common.message.MessageExt messageExt;
+  java.lang.String transactionId;
+  org.apache.rocketmq.client.impl.producer.MQProducerInner producer;
+  org.apache.rocketmq.remoting.CommandCustomHeader $stack10;
+  byte[] $stack11;
+  org.apache.rocketmq.logging.org.slf4j.Logger $stack14;
+  org.apache.rocketmq.client.impl.factory.MQClientInstance $stack15;
+  org.apache.rocketmq.client.ClientConfig $stack16;
+  boolean $stack18;
+  io.netty.channel.Channel $stack26;
+  java.lang.String $stack28;
+  $stack10 = request.decodeCommandCustomHeader(org.apache.rocketmq.remoting.protocol.header.CheckTransactionStateRequestHeader);
+ requestHeader=(org.apache.rocketmq.remoting.protocol.header.CheckTransactionStateRequestHeader) $stack10;
+ $stack11 = request.getBody();
+ byteBuffer = java.nio.ByteBuffer.wrap($stack11);
+ messageExt = org.apache.rocketmq.common.message.MessageDecoder.decode(byteBuffer);
+ if (messageExt==null) goto label0;
+ $stack15=this.mqClientFactory;
+ $stack16 = $stack15.getClientConfig();
+ transactionId = $stack16.getNamespace();
+ $stack18 = org.apache.commons.lang3.StringUtils.isNotEmpty((java.lang.CharSequence)transactionId);
+ if ($stack18==0) goto label1;
+ transactionId = messageExt.getTopic();
+ $stack15=this.mqClientFactory;
+ $stack16 = $stack15.getClientConfig();
+ $stack28 = $stack16.getNamespace();
+ transactionId = org.apache.rocketmq.remoting.protocol.NamespaceUtil.withoutNamespace(transactionId,$stack28);
+ messageExt.setTopic(transactionId);
+ label1:transactionId = messageExt.getProperty("UNIQ_KEY");
+ if (null==transactionId) goto label2;
+ $stack28="";
+ $stack18 = $stack28.equals((java.lang.Object)transactionId);
+ if ($stack18!=0) goto label2;
+ messageExt.setTransactionId(transactionId);
+ label2:transactionId = messageExt.getProperty("PGROUP");
+ if (transactionId==null) goto label3;
+ $stack15=this.mqClientFactory;
+ producer = $stack15.selectProducer(transactionId);
+ if (producer==null) goto label4;
+ $stack26 = ctx.channel();
+ transactionId = org.apache.rocketmq.remoting.common.RemotingHelper.parseChannelRemoteAddr($stack26);
+ producer.checkTransactionState(transactionId,messageExt,requestHeader);
+ goto label5;
+ label4:$stack14=this.logger;
+ $stack14.debug("checkTransactionState, pick producer by group[{}] failed",(java.lang.Object)transactionId);
+ label5:goto label6;
+ label3:$stack14=this.logger;
+ $stack14.warn("checkTransactionState, pick producer group failed");
+ label6:goto label7;
+ label0:$stack14=this.logger;
+ $stack14.warn("checkTransactionState, decode message failed");
+ label7:return  null;
+ } 
+

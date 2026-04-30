@@ -1,0 +1,56 @@
+    private long getNanos()
+    {
+        org.junit.rules.Stopwatch this;
+        long currentEndNanos, $stack6;
+        byte $stack4;
+        org.junit.rules.Stopwatch$Clock $stack8;
+        java.lang.IllegalStateException $stack12;
+
+        this := @this: org.junit.rules.Stopwatch;
+
+        currentEndNanos = this.<org.junit.rules.Stopwatch: long startNanos>;
+/*127*/
+
+        $stack4 = currentEndNanos cmp 0L;
+/*127*/
+
+        if $stack4 != 0 goto label1;
+/*127*/
+
+        $stack12 = new java.lang.IllegalStateException;
+/*128*/
+
+        specialinvoke $stack12.<java.lang.IllegalStateException: void <init>(java.lang.String)>("Test has not started");
+/*128*/
+
+        throw $stack12;
+/*128*/
+
+     label1:
+        currentEndNanos = this.<org.junit.rules.Stopwatch: long endNanos>;
+/*130*/
+
+        $stack4 = currentEndNanos cmp 0L;
+/*131*/
+
+        if $stack4 != 0 goto label2;
+/*131*/
+
+        $stack8 = this.<org.junit.rules.Stopwatch: org.junit.rules.Stopwatch$Clock clock>;
+/*132*/
+
+        currentEndNanos = virtualinvoke $stack8.<org.junit.rules.Stopwatch$Clock: long nanoTime()>();
+/*132*/
+/*132*/
+
+     label2:
+        $stack6 = this.<org.junit.rules.Stopwatch: long startNanos>;
+/*135*/
+
+        currentEndNanos = currentEndNanos - $stack6;
+/*135*/
+
+        return currentEndNanos;
+/*135*/
+    }
+

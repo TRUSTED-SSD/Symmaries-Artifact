@@ -1,0 +1,45 @@
+static java.util.List org.apache.bookkeeper.bookie.LegacyCookieValidation:possibleBookieIds(org.apache.bookkeeper.conf.ServerConfiguration conf)
+{
+java.util.ArrayList addresses;
+  java.lang.String $stack5;
+  org.apache.bookkeeper.conf.ServerConfiguration $stack6;
+  org.apache.bookkeeper.net.BookieSocketAddress $stack10;
+  org.apache.bookkeeper.net.BookieId $stack11;
+  java.net.UnknownHostException $stack27;
+  org.apache.bookkeeper.bookie.BookieException$UnknownBookieIdException $stack28;
+  addresses = com.google.common.collect.Lists.newArrayListWithExpectedSize(3);
+ label0:$stack5 = conf.getBookieId();
+ if (null==$stack5) goto label1;
+ $stack11 = org.apache.bookkeeper.bookie.BookieImpl.getBookieId(conf);
+ addresses.add((java.lang.Object)$stack11);
+ goto label2;
+ label1:$stack6=new org.apache.bookkeeper.conf.ServerConfiguration;
+ $stack6#org.apache.bookkeeper.conf.ServerConfiguration((org.apache.bookkeeper.conf.AbstractConfiguration)conf);
+ $stack6 = $stack6.setUseHostNameAsBookieID((boolean)0);
+ $stack6 = $stack6.setAdvertisedAddress(null);
+ $stack6 = $stack6.setAllowLoopback((boolean)1);
+ $stack10 = org.apache.bookkeeper.bookie.BookieImpl.getBookieAddress($stack6);
+ $stack11 = $stack10.toBookieId();
+ addresses.add((java.lang.Object)$stack11);
+ $stack6=new org.apache.bookkeeper.conf.ServerConfiguration;
+ $stack6#org.apache.bookkeeper.conf.ServerConfiguration((org.apache.bookkeeper.conf.AbstractConfiguration)conf);
+ $stack6 = $stack6.setUseHostNameAsBookieID((boolean)1);
+ $stack6 = $stack6.setAdvertisedAddress(null);
+ $stack6 = $stack6.setAllowLoopback((boolean)1);
+ $stack10 = org.apache.bookkeeper.bookie.BookieImpl.getBookieAddress($stack6);
+ $stack11 = $stack10.toBookieId();
+ addresses.add((java.lang.Object)$stack11);
+ $stack5 = conf.getAdvertisedAddress();
+ if (null==$stack5) goto label2;
+ $stack10 = org.apache.bookkeeper.bookie.BookieImpl.getBookieAddress(conf);
+ $stack11 = $stack10.toBookieId();
+ addresses.add((java.lang.Object)$stack11);
+ label2:goto label3;
+ label4:$stack27 = catch;
+ $stack28=new org.apache.bookkeeper.bookie.BookieException$UnknownBookieIdException;
+ $stack28#org.apache.bookkeeper.bookie.BookieException$UnknownBookieIdException((java.lang.Throwable)$stack27);
+ throw $stack28;
+ label3:return  addresses;
+ catch java.net.UnknownHostException: label0 - label2 : label4;
+} 
+

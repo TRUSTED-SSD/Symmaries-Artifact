@@ -1,0 +1,37 @@
+java.util.List org.apache.bookkeeper.proto.BookieClientImpl:getFaultyBookies()
+{
+java.util.ArrayList faultyBookies;
+  java.util.Iterator l2;
+  org.apache.bookkeeper.proto.PerChannelBookieClientPool channelPool;
+  org.apache.bookkeeper.proto.DefaultPerChannelBookieClientPool pool;
+  java.util.concurrent.ConcurrentHashMap $stack6;
+  java.util.Collection $stack7;
+  boolean $stack9;
+  java.lang.Object $stack10;
+  java.util.concurrent.atomic.AtomicLong $stack13;
+  long $stack14;
+  long $stack15;
+  byte $stack16;
+  org.apache.bookkeeper.net.BookieId $stack17;
+  faultyBookies = com.google.common.collect.Lists.newArrayList();
+ $stack6=this.channels;
+ $stack7 = $stack6.values();
+ l2 = $stack7.iterator();
+ label0:$stack9 = l2.hasNext();
+ if ($stack9==0) goto label1;
+ $stack10 = l2.next();
+ channelPool=(org.apache.bookkeeper.proto.PerChannelBookieClientPool) $stack10;
+ $stack9=channelPool instanceof org.apache.bookkeeper.proto.DefaultPerChannelBookieClientPool;
+ if ($stack9==0) goto label2;
+ pool=(org.apache.bookkeeper.proto.DefaultPerChannelBookieClientPool) channelPool;
+ $stack13=pool.errorCounter;
+ $stack14 = $stack13.getAndSet(0L);
+ $stack15=this.bookieErrorThresholdPerInterval;
+ $stack16=($stack14 cmp $stack15);
+ if ($stack16<0) goto label2;
+ $stack17=pool.address;
+ faultyBookies.add((java.lang.Object)$stack17);
+ label2:goto label0;
+ label1:return  faultyBookies;
+ } 
+

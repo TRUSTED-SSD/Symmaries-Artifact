@@ -1,0 +1,26 @@
+void java.io.ObjectInputStream:handleReset()
+{
+long $l0;
+  byte $b1;
+  java.io.StreamCorruptedException $r1;
+  java.lang.StringBuilder $r2;
+  java.lang.StringBuilder $r3;
+  long $l2;
+  java.lang.StringBuilder $r4;
+  java.lang.String $r5;
+  $l0=this.depth;
+ $b1=($l0 cmp 0L);
+ if ($b1<=0) goto label0;
+ $r1=new java.io.StreamCorruptedException;
+ $r2=new java.lang.StringBuilder;
+ $r2#java.lang.StringBuilder:init();
+ $r3 = $r2.append("unexpected reset; recursion depth: ");
+ $l2=this.depth;
+ $r4 = $r3.append($l2);
+ $r5 = $r4.toString();
+ $r1#java.io.StreamCorruptedException:init($r5);
+ throw $r1;
+ label0:this#java.io.ObjectInputStream:clear();
+ return;
+ }  
+

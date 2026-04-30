@@ -1,0 +1,34 @@
+void org.apache.rocketmq.client.impl.consumer.RebalanceService:run()
+{
+java.lang.StringBuilder $stack1;
+  org.apache.rocketmq.logging.org.slf4j.Logger $stack2;
+  java.lang.String $stack3;
+  boolean $stack7;
+  long $stack14;
+  org.apache.rocketmq.client.impl.factory.MQClientInstance $stack15;
+  $stack2=this.log;
+ $stack1=new java.lang.StringBuilder;
+ $stack1#java.lang.StringBuilder();
+ $stack3 = this.getServiceName();
+ $stack1 = $stack1.append($stack3);
+ $stack1 = $stack1.append(" service started");
+ $stack3 = $stack1.toString();
+ $stack2.info($stack3);
+ label0:$stack7 = this.isStopped();
+ if ($stack7!=0) goto label1;
+ $stack14=org.apache.rocketmq.client.impl.consumer.RebalanceService.waitInterval;
+ this.waitForRunning($stack14);
+ $stack15=this.mqClientFactory;
+ $stack15.doRebalance();
+ goto label0;
+ label1:$stack2=this.log;
+ $stack1=new java.lang.StringBuilder;
+ $stack1#java.lang.StringBuilder();
+ $stack3 = this.getServiceName();
+ $stack1 = $stack1.append($stack3);
+ $stack1 = $stack1.append(" service end");
+ $stack3 = $stack1.toString();
+ $stack2.info($stack3);
+ return;
+ } 
+

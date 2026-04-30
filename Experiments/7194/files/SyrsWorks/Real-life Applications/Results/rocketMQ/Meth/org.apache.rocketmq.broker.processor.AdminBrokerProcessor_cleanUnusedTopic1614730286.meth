@@ -1,0 +1,26 @@
+org.apache.rocketmq.remoting.protocol.RemotingCommand org.apache.rocketmq.broker.processor.AdminBrokerProcessor:cleanUnusedTopic()
+{
+org.apache.rocketmq.remoting.protocol.RemotingCommand response;
+  org.apache.rocketmq.logging.org.slf4j.Logger $stack2;
+  org.apache.rocketmq.broker.BrokerController $stack4;
+  org.apache.rocketmq.store.MessageStore $stack5;
+  org.apache.rocketmq.broker.topic.TopicConfigManager $stack7;
+  java.util.concurrent.ConcurrentMap $stack8;
+  java.util.Set $stack9;
+  $stack2=org.apache.rocketmq.broker.processor.AdminBrokerProcessor.LOGGER;
+ $stack2.warn("invoke cleanUnusedTopic start.");
+ response = org.apache.rocketmq.remoting.protocol.RemotingCommand.createResponseCommand(null);
+ $stack4=this.brokerController;
+ $stack5 = $stack4.getMessageStore();
+ $stack4=this.brokerController;
+ $stack7 = $stack4.getTopicConfigManager();
+ $stack8 = $stack7.getTopicConfigTable();
+ $stack9 = $stack8.keySet();
+ $stack5.cleanUnusedTopic($stack9);
+ $stack2=org.apache.rocketmq.broker.processor.AdminBrokerProcessor.LOGGER;
+ $stack2.warn("invoke cleanUnusedTopic end.");
+ response.setCode(0);
+ response.setRemark(null);
+ return  response;
+ } 
+

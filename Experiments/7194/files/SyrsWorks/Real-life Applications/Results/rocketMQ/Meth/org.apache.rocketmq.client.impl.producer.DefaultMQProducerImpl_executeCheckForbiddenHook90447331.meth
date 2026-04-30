@@ -1,0 +1,20 @@
+void org.apache.rocketmq.client.impl.producer.DefaultMQProducerImpl:executeCheckForbiddenHook(org.apache.rocketmq.client.hook.CheckForbiddenContext context)
+{
+java.util.Iterator l2;
+  org.apache.rocketmq.client.hook.CheckForbiddenHook hook;
+  boolean $stack4;
+  java.util.ArrayList $stack5;
+  java.lang.Object $stack8;
+  $stack4 = this.hasCheckForbiddenHook();
+ if ($stack4==0) goto label0;
+ $stack5=this.checkForbiddenHookList;
+ l2 = $stack5.iterator();
+ label1:$stack4 = l2.hasNext();
+ if ($stack4==0) goto label0;
+ $stack8 = l2.next();
+ hook=(org.apache.rocketmq.client.hook.CheckForbiddenHook) $stack8;
+ hook.checkForbidden(context);
+ goto label1;
+ label0:return;
+ } 
+

@@ -1,0 +1,25 @@
+void org.apache.rocketmq.store.ha.autoswitch.AutoSwitchHAService:maybeExpandInSyncStateSet(java.lang.String slaveAddress,long slaveMaxOffset)
+{
+java.util.Set currentSyncStateSet;
+  long confirmOffset;
+  org.apache.rocketmq.remoting.protocol.EpochEntry currentLeaderEpoch;
+  boolean $stack9;
+  byte $stack11;
+  org.apache.rocketmq.store.ha.autoswitch.EpochFileCache $stack12;
+  currentSyncStateSet = this.getSyncStateSet();
+ $stack9 = currentSyncStateSet.contains((java.lang.Object)slaveAddress);
+ if ($stack9==0) goto label0;
+ return;
+ label0:confirmOffset = this.getConfirmOffset();
+ $stack11=(slaveMaxOffset cmp confirmOffset);
+ if ($stack11<0) goto label1;
+ $stack12=this.epochCache;
+ currentLeaderEpoch = $stack12.lastEntry();
+ confirmOffset = currentLeaderEpoch.getStartOffset();
+ $stack11=(slaveMaxOffset cmp confirmOffset);
+ if ($stack11<0) goto label1;
+ currentSyncStateSet.add((java.lang.Object)slaveAddress);
+ this#org.apache.rocketmq.store.ha.autoswitch.AutoSwitchHAService(currentSyncStateSet);
+ label1:return;
+ } 
+

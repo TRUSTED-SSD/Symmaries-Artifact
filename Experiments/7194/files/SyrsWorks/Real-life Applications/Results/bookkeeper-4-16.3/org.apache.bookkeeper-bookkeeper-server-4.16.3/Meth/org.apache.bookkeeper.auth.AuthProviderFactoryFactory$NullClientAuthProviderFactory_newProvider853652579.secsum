@@ -1,0 +1,10 @@
+org.apache.bookkeeper.auth.ClientAuthProvider org.apache.bookkeeper.auth.AuthProviderFactoryFactory$NullClientAuthProviderFactory:newProvider (
+  org.apache.bookkeeper.proto.ClientConnectionPeer addr,
+  org.apache.bookkeeper.auth.AuthCallbacks$GenericCallback completeCb) {
+  guard = pc ⊔ level(addr) ⊔ level(completeCb) ⊔ obj_level(addr) ⊔ obj_level(completeCb) = ⊥;
+  ret(level()) = ⊥;
+  ret(obj_level()) = level(this) ⊔ obj_level(this);
+  ret(obj_level(addr)) = level(this) ⊔ obj_level(this);
+  ret(obj_level(completeCb)) = level(this) ⊔ obj_level(this);
+  ret(obj_level(this)) = level(this) ⊔ obj_level(this);
+}

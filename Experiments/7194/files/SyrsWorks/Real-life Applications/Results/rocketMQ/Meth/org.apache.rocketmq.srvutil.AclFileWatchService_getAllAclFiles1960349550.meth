@@ -1,0 +1,54 @@
+void org.apache.rocketmq.srvutil.AclFileWatchService:getAllAclFiles(java.lang.String @path)
+{
+java.io.File file;
+  java.io.File[] files;
+  int i;
+  boolean $stack8;
+  int $stack10;
+  java.lang.StringBuilder $stack14;
+  java.lang.String $stack15;
+  java.util.List $stack23;
+  org.apache.rocketmq.logging.org.slf4j.Logger $stack31;
+  java.lang.String path;
+path=@path;
+file=new java.io.File;
+ file#java.io.File(path);
+ $stack8 = file.exists();
+ if ($stack8!=0) goto label0;
+ $stack31=org.apache.rocketmq.srvutil.AclFileWatchService.log;
+ $stack31.info("The default acl dir {} is not exist",(java.lang.Object)path);
+ return;
+ label0:files = file.listFiles();
+ i=0;
+ label1:$stack10=#files;
+ if (i>=$stack10) goto label2;
+ file=files[i];
+ path = file.getAbsolutePath();
+ file=new java.io.File;
+ file#java.io.File(path);
+ $stack14=new java.lang.StringBuilder;
+ $stack14#java.lang.StringBuilder();
+ $stack15=this.aclPath;
+ $stack14 = $stack14.append($stack15);
+ $stack15=java.io.File.separator;
+ $stack14 = $stack14.append($stack15);
+ $stack14 = $stack14.append("tools.yml");
+ $stack15 = $stack14.toString();
+ $stack8 = path.equals((java.lang.Object)$stack15);
+ if ($stack8==0) goto label3;
+ goto label4;
+ label3:$stack8 = path.endsWith(".yml");
+ if ($stack8!=0) goto label5;
+ $stack8 = path.endsWith(".yaml");
+ if ($stack8==0) goto label6;
+ label5:$stack23=this.fileList;
+ $stack23.add((java.lang.Object)path);
+ goto label4;
+ label6:$stack8 = file.isDirectory();
+ if ($stack8==0) goto label4;
+ this#org.apache.rocketmq.srvutil.AclFileWatchService(path);
+ label4:i=(i+1);
+ goto label1;
+ label2:return;
+ } 
+

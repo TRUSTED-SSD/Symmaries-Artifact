@@ -1,0 +1,54 @@
+java.util.Map org.apache.rocketmq.acl.plain.PlainPermissionManager:updateAclConfigFileVersion(java.lang.String aclFileName,java.util.Map updateAclConfigMap)
+{
+java.lang.Object dataVersions;
+  org.apache.rocketmq.remoting.protocol.DataVersion dataVersion;
+  java.util.List dataVersionList;
+  java.util.LinkedHashMap accountsMap;
+  java.util.ArrayList $stack9;
+  java.util.concurrent.atomic.AtomicLong $stack12;
+  long $stack13;
+  java.lang.Long $stack14;
+  java.util.Map $stack22;
+  int $stack24;
+  java.lang.String $stack48;
+  dataVersions = updateAclConfigMap.get((java.lang.Object)"dataVersion");
+ dataVersion=new org.apache.rocketmq.remoting.protocol.DataVersion;
+ dataVersion#org.apache.rocketmq.remoting.protocol.DataVersion();
+ if (dataVersions==null) goto label0;
+ dataVersionList=(java.util.List) dataVersions;
+ $stack24 = dataVersionList.size();
+ if ($stack24<=0) goto label0;
+ dataVersions = dataVersionList.get(0);
+ $stack22=(java.util.Map) dataVersions;
+ dataVersions = $stack22.get((java.lang.Object)"timestamp");
+ $stack14=(java.lang.Long) dataVersions;
+ $stack13 = $stack14.longValue();
+ dataVersion.setTimestamp($stack13);
+ $stack12=new java.util.concurrent.atomic.AtomicLong;
+ dataVersions = dataVersionList.get(0);
+ $stack22=(java.util.Map) dataVersions;
+ dataVersions = $stack22.get((java.lang.Object)"counter");
+ $stack48 = dataVersions.toString();
+ $stack13 = java.lang.Long.parseLong($stack48);
+ $stack12#java.util.concurrent.atomic.AtomicLong($stack13);
+ dataVersion.setCounter($stack12);
+ label0:dataVersion.nextVersion();
+ $stack9=new java.util.ArrayList;
+ $stack9#java.util.ArrayList();
+ dataVersionList=$stack9;
+ accountsMap=new java.util.LinkedHashMap;
+ accountsMap#java.util.LinkedHashMap();
+ $stack12 = dataVersion.getCounter();
+ $stack13 = $stack12.longValue();
+ $stack14 = java.lang.Long.valueOf($stack13);
+ accountsMap.put((java.lang.Object)"counter",(java.lang.Object)$stack14);
+ $stack13 = dataVersion.getTimestamp();
+ $stack14 = java.lang.Long.valueOf($stack13);
+ accountsMap.put((java.lang.Object)"timestamp",(java.lang.Object)$stack14);
+ $stack9.add((java.lang.Object)accountsMap);
+ updateAclConfigMap.put((java.lang.Object)"dataVersion",(java.lang.Object)$stack9);
+ $stack22=this.dataVersionMap;
+ $stack22.put((java.lang.Object)aclFileName,(java.lang.Object)dataVersion);
+ return  updateAclConfigMap;
+ } 
+

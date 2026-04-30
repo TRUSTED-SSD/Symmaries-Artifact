@@ -1,0 +1,21 @@
+void org.apache.bookkeeper.client.BookieInfoReader:availableBookiesChanged(java.util.Set updatedBookiesList)
+{
+org.slf4j.Logger $stack2;
+  boolean $stack3;
+  org.apache.bookkeeper.client.BookieInfoReader$BookieInfoMap $stack4;
+  org.apache.bookkeeper.client.BookieInfoReader$InstanceState $stack5;
+  $stack2=org.apache.bookkeeper.client.BookieInfoReader.LOG;
+ $stack3 = $stack2.isInfoEnabled();
+ if ($stack3==0) goto label0;
+ $stack2=org.apache.bookkeeper.client.BookieInfoReader.LOG;
+ dummyClass.lowSink("Scheduling bookie info read due to changes in available bookies.");
+$stack2.info("Scheduling bookie info read due to changes in available bookies.");
+ label0:$stack4=this.bookieInfoMap;
+ $stack4.updateBookies((java.util.Collection)updatedBookiesList);
+ $stack5=this.instanceState;
+ $stack3 = $stack5.tryStartPartial();
+ if ($stack3==0) goto label1;
+ this#org.apache.bookkeeper.client.BookieInfoReader();
+ label1:return;
+ } 
+

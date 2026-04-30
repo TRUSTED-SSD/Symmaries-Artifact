@@ -1,0 +1,8 @@
+void org.apache.bookkeeper.statelib.impl.mvcc.MVCCCommandProcessor:applyCommand (
+  long txid, io.netty.buffer.ByteBuf cmdBuf,
+  org.apache.bookkeeper.statelib.impl.mvcc.MVCCStoreImpl store) {
+  guard = pc ⊔ level(cmdBuf) ⊔ obj_level(cmdBuf) = ⊥;
+  ret(obj_level(cmdBuf)) = level(store) ⊔ level(txid) ⊔ obj_level(store) ⊔ obj_level(this);
+  ret(obj_level(store)) = level(store) ⊔ level(txid) ⊔ obj_level(store) ⊔ obj_level(this);
+  ret(obj_level(this)) = level(store) ⊔ level(txid) ⊔ obj_level(store) ⊔ obj_level(this);
+}

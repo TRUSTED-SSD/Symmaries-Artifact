@@ -1,0 +1,7 @@
+boolean org.apache.rocketmq.client.impl.consumer.ConsumeMessageOrderlyService:lockOneMQ (
+  org.apache.rocketmq.common.message.MessageQueue mq) {
+  guard = tt;
+  ret(level()) = pc ⊔ level(mq) ⊔ level(this) ⊔ obj_level(mq) ⊔ obj_level(this);
+  ret(obj_level(mq)) = obj_level(mq);
+  ret(obj_level(this)) = if obj_level(this) = ⊤ ∨ pc ≠ ⊤ ∧ obj_level(this) = ⊥ ∧ level(this) ⊓ obj_level(mq) = ⊤ then ⊤ else ⊥;
+}

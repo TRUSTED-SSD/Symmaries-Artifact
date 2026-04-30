@@ -1,0 +1,36 @@
+static java.lang.String org.keycloak.common.util.Encode:pathParamReplacement(java.lang.String @segment,java.util.List params)
+{
+java.lang.StringBuilder newSegment;
+  java.util.regex.Matcher matcher;
+  int i;
+  int start;
+  java.lang.String replacement;
+  java.util.regex.Pattern $stack8;
+  boolean $stack10;
+  int $stack14;
+  java.lang.Object $stack17;
+  java.lang.String segment;
+segment=@segment;
+newSegment=new java.lang.StringBuilder;
+ newSegment#java.lang.StringBuilder();
+ $stack8=org.keycloak.common.util.Encode.PARAM_REPLACEMENT;
+ matcher = $stack8.matcher((java.lang.CharSequence)segment);
+ i=0;
+ start=0;
+ label0:$stack10 = matcher.find();
+ if ($stack10==0) goto label1;
+ $stack14 = matcher.start();
+ newSegment.append((java.lang.CharSequence)segment,start,$stack14);
+ start=i;
+ i=(i+1);
+ $stack17 = params.get(start);
+ replacement=(java.lang.String) $stack17;
+ newSegment.append(replacement);
+ start = matcher.end();
+ goto label0;
+ label1:i = segment.length();
+ newSegment.append((java.lang.CharSequence)segment,start,i);
+ segment = newSegment.toString();
+ return  segment;
+ } 
+

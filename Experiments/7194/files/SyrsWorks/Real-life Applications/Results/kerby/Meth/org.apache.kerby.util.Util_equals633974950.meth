@@ -1,0 +1,54 @@
+static boolean org.apache.kerby.util.Util:equals(java.security.KeyStore ks1,java.security.KeyStore ks2)
+{
+java.util.Set aliases1;
+  java.util.Set aliases2;
+  java.util.Iterator l4;
+  java.lang.String s;
+  java.security.cert.Certificate[] cc1;
+  java.security.cert.Certificate[] cc2;
+  java.security.cert.Certificate c1;
+  java.security.cert.Certificate c2;
+  boolean $stack10;
+  java.lang.Object $stack17;
+  boolean $stack19;
+  if (ks1==null) goto label0;
+ if (ks2!=null) goto label1;
+ label0:if (ks1!=null) goto label2;
+ if (ks2!=null) goto label2;
+ $stack10=1;
+ goto label3;
+ label2:$stack10=0;
+ label3:return  $stack10;
+ label1:aliases1 = org.apache.kerby.util.Util.aliases(ks1);
+ aliases2 = org.apache.kerby.util.Util.aliases(ks2);
+ $stack10 = aliases1.equals((java.lang.Object)aliases2);
+ if ($stack10==0) goto label4;
+ l4 = aliases1.iterator();
+ label5:$stack10 = l4.hasNext();
+ if ($stack10==0) goto label4;
+ $stack17 = l4.next();
+ s=(java.lang.String) $stack17;
+ $stack10 = ks1.isCertificateEntry(s);
+ $stack19 = ks2.isCertificateEntry(s);
+ if ($stack10==$stack19) goto label6;
+ return  0;
+ label6:$stack10 = ks1.isKeyEntry(s);
+ $stack19 = ks2.isKeyEntry(s);
+ if ($stack10==$stack19) goto label7;
+ return  0;
+ label7:$stack10 = ks1.isCertificateEntry(s);
+ if ($stack10==0) goto label8;
+ cc1 = ks1.getCertificateChain(s);
+ cc2 = ks2.getCertificateChain(s);
+ $stack10 = java.util.Arrays.equals((java.lang.Object[])cc1,(java.lang.Object[])cc2);
+ if ($stack10!=0) goto label9;
+ return  0;
+ label9:c1 = ks1.getCertificate(s);
+ c2 = ks2.getCertificate(s);
+ $stack10 = c1.equals((java.lang.Object)c2);
+ if ($stack10!=0) goto label8;
+ return  0;
+ label8:goto label5;
+ label4:return  1;
+ } 
+

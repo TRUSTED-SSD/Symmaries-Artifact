@@ -1,0 +1,43 @@
+long org.apache.bookkeeper.sasl.TGTRefreshThread:getRefreshTime(javax.security.auth.kerberos.KerberosTicket tgt)
+{
+long start;
+  long expires;
+  java.util.Date $stack8;
+  org.slf4j.Logger $stack12;
+  java.lang.String $stack15;
+  long $stack20;
+  java.util.Random $stack21;
+  double $stack22;
+  double $stack25;
+  byte $stack30;
+  $stack8 = tgt.getStartTime();
+ start = $stack8.getTime();
+ $stack8 = tgt.getEndTime();
+ expires = $stack8.getTime();
+ $stack12=org.apache.bookkeeper.sasl.TGTRefreshThread.LOG;
+ $stack8 = tgt.getStartTime();
+ $stack15 = $stack8.toString();
+ dummyClass.lowSink("TGT valid starting at:        {}");
+$stack12.info("TGT valid starting at:        {}",(java.lang.Object)$stack15);
+ $stack12=org.apache.bookkeeper.sasl.TGTRefreshThread.LOG;
+ $stack8 = tgt.getEndTime();
+ $stack15 = $stack8.toString();
+ dummyClass.lowSink("TGT expires:                  {}");
+$stack12.info("TGT expires:                  {}",(java.lang.Object)$stack15);
+ $stack20=(expires-start);
+ $stack22=(double) $stack20;
+ $stack21=org.apache.bookkeeper.sasl.TGTRefreshThread.rng;
+ $stack25 = $stack21.nextDouble();
+dummyClass.highSourceMut($stack25);
+ $stack25=(0.05000000074505806 * $stack25);
+ $stack25=(0.800000011920929+$stack25);
+ $stack22=($stack22 * $stack25);
+ $stack20=(long) $stack22;
+ start=(start+$stack20);
+ $stack30=(start cmp expires);
+ if ($stack30<=0) goto label0;
+ expires = org.apache.zookeeper.common.Time.currentWallTime();
+ return  expires;
+ label0:return  start;
+ } 
+

@@ -1,0 +1,50 @@
+java.util.List org.apache.rocketmq.broker.processor.PopReviveService:decodeMsgList(org.apache.rocketmq.store.GetMessageResult getMessageResult,boolean deCompressBody)
+{
+java.util.ArrayList foundList;
+  java.util.List messageBufferList;
+  int i;
+  java.nio.ByteBuffer bb;
+  org.apache.rocketmq.common.message.MessageExt msgExt;
+  java.lang.Throwable l8;
+  int $stack11;
+  java.lang.Object $stack13;
+  java.util.List $stack15;
+  java.lang.Long $stack17;
+  long $stack18;
+  org.apache.rocketmq.logging.org.slf4j.Logger $stack22;
+  foundList=new java.util.ArrayList;
+ foundList#java.util.ArrayList();
+ label0:messageBufferList = getMessageResult.getMessageBufferList();
+ if (messageBufferList==null) goto label1;
+ i=0;
+ label2:$stack11 = messageBufferList.size();
+ if (i>=$stack11) goto label1;
+ $stack13 = messageBufferList.get(i);
+ bb=(java.nio.ByteBuffer) $stack13;
+ if (bb!=null) goto label3;
+ $stack22=org.apache.rocketmq.broker.processor.PopReviveService.POP_LOGGER;
+ $stack22.error("bb is null {}",(java.lang.Object)getMessageResult);
+ goto label4;
+ label3:msgExt = org.apache.rocketmq.common.message.MessageDecoder.decode(bb,(boolean)1,deCompressBody);
+ if (msgExt!=null) goto label5;
+ $stack22=org.apache.rocketmq.broker.processor.PopReviveService.POP_LOGGER;
+ $stack22.error("decode msgExt is null {}",(java.lang.Object)getMessageResult);
+ goto label4;
+ label5:$stack15 = getMessageResult.getMessageQueueOffset();
+ $stack13 = $stack15.get(i);
+ $stack17=(java.lang.Long) $stack13;
+ $stack18 = $stack17.longValue();
+ msgExt.setQueueOffset($stack18);
+ foundList.add((java.lang.Object)msgExt);
+ label4:i=(i+1);
+ goto label2;
+ label1:getMessageResult.release();
+ goto label6;
+ label7:l8 = catch;
+ label8:getMessageResult.release();
+ throw l8;
+ label6:return  foundList;
+ catch java.lang.Throwable: label0 - label1 : label7;
+catch java.lang.Throwable: label7 - label8 : label7;
+} 
+

@@ -1,0 +1,40 @@
+float com.google.zxing.qrcode.detector.Detector:calculateModuleSizeOneWay(com.google.zxing.ResultPoint pattern,com.google.zxing.ResultPoint otherPattern)
+{
+float moduleSizeEst1;
+  float moduleSizeEst2;
+  int $stack6;
+  int $stack8;
+  int $stack10;
+  int $stack12;
+  boolean $stack23;
+  moduleSizeEst1 = pattern.getX();
+ $stack6=(int) moduleSizeEst1;
+ moduleSizeEst1 = pattern.getY();
+ $stack8=(int) moduleSizeEst1;
+ moduleSizeEst1 = otherPattern.getX();
+ $stack10=(int) moduleSizeEst1;
+ moduleSizeEst1 = otherPattern.getY();
+ $stack12=(int) moduleSizeEst1;
+ moduleSizeEst1 = this#com.google.zxing.qrcode.detector.Detector:sizeOfBlackWhiteBlackRunBothWays($stack6,$stack8,$stack10,$stack12);
+ moduleSizeEst2 = otherPattern.getX();
+ $stack6=(int) moduleSizeEst2;
+ moduleSizeEst2 = otherPattern.getY();
+ $stack8=(int) moduleSizeEst2;
+ moduleSizeEst2 = pattern.getX();
+ $stack10=(int) moduleSizeEst2;
+ moduleSizeEst2 = pattern.getY();
+ $stack12=(int) moduleSizeEst2;
+ moduleSizeEst2 = this#com.google.zxing.qrcode.detector.Detector:sizeOfBlackWhiteBlackRunBothWays($stack6,$stack8,$stack10,$stack12);
+ $stack23 = java.lang.Float.isNaN(moduleSizeEst1);
+ if ($stack23==0) goto label0;
+ moduleSizeEst1=(moduleSizeEst2/7.0F);
+ return  moduleSizeEst1;
+ label0:$stack23 = java.lang.Float.isNaN(moduleSizeEst2);
+ if ($stack23==0) goto label1;
+ moduleSizeEst1=(moduleSizeEst1/7.0F);
+ return  moduleSizeEst1;
+ label1:moduleSizeEst1=(moduleSizeEst1+moduleSizeEst2);
+ moduleSizeEst1=(moduleSizeEst1/14.0F);
+ return  moduleSizeEst1;
+ } 
+

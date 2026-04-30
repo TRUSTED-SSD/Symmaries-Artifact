@@ -1,0 +1,10 @@
+org.apache.rocketmq.acl.AccessResource org.apache.rocketmq.acl.plain.PlainAccessValidator:parse (
+  org.apache.rocketmq.remoting.protocol.RemotingCommand request,
+  java.lang.String remoteAddr) {
+  guard = tt;
+  ret(level()) = pc ⊔ level(remoteAddr) ⊔ level(request) ⊔ obj_level(remoteAddr) ⊔ obj_level(request);
+  ret(obj_level()) = pc ⊔ level(remoteAddr) ⊔ level(request) ⊔ obj_level(remoteAddr) ⊔ obj_level(request);
+  ret(obj_level(remoteAddr)) = pc ⊔ level(remoteAddr) ⊔ level(request) ⊔ obj_level(remoteAddr) ⊔ obj_level(request);
+  ret(obj_level(request)) = pc ⊔ level(remoteAddr) ⊔ level(request) ⊔ obj_level(remoteAddr) ⊔ obj_level(request);
+  ret(obj_level(this)) = pc ⊔ level(remoteAddr) ⊔ level(request) ⊔ obj_level(remoteAddr) ⊔ obj_level(request) ⊔ obj_level(this);
+}

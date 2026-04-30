@@ -1,0 +1,58 @@
+org.apache.rocketmq.tieredstore.provider.TieredFileSegment org.apache.rocketmq.tieredstore.container.TieredFileQueue:newSegment(long baseOffset,boolean createMetadata)
+{
+org.apache.rocketmq.tieredstore.provider.TieredFileSegment segment;
+  java.lang.Object[] $stack6;
+  org.apache.rocketmq.tieredstore.provider.TieredFileSegment$FileSegmentType $stack7;
+  org.apache.rocketmq.common.message.MessageQueue $stack8;
+  java.lang.reflect.Constructor $stack9;
+  java.lang.Long $stack11;
+  org.apache.rocketmq.tieredstore.common.TieredMessageStoreConfig $stack12;
+  java.lang.Object $stack13;
+  org.apache.rocketmq.tieredstore.provider.TieredFileSegment$FileSegmentType $stack15;
+  org.apache.rocketmq.tieredstore.metadata.TieredMetadataStore $stack16;
+  java.lang.Exception $stack19;
+  org.apache.rocketmq.logging.org.slf4j.Logger $stack22;
+  java.lang.String $stack25;
+  int $stack28;
+  java.lang.Integer $stack29;
+  segment=null;
+ label0:$stack9=this.fileSegmentConstructor;
+ $stack6=new java.lang.Object[4];
+ $stack7=this.fileType;
+ $stack6[0]=$stack7;
+ $stack8=this.messageQueue;
+ $stack6[1]=$stack8;
+ $stack11 = java.lang.Long.valueOf(baseOffset);
+ $stack6[2]=$stack11;
+ $stack12=this.storeConfig;
+ $stack6[3]=$stack12;
+ $stack13 = $stack9.newInstance($stack6);
+ segment=(org.apache.rocketmq.tieredstore.provider.TieredFileSegment) $stack13;
+ $stack15=this.fileType;
+ $stack7=org.apache.rocketmq.tieredstore.provider.TieredFileSegment$FileSegmentType.INDEX;
+ if ($stack15==$stack7) goto label1;
+ segment.createFile();
+ label1:if (createMetadata==0) goto label2;
+ $stack16=this.metadataStore;
+ $stack16.updateFileSegment(segment);
+ label2:goto label3;
+ label4:$stack19 = catch;
+ $stack22=org.apache.rocketmq.tieredstore.container.TieredFileQueue.logger;
+ $stack6=new java.lang.Object[5];
+ $stack8=this.messageQueue;
+ $stack25 = $stack8.getTopic();
+ $stack6[0]=$stack25;
+ $stack8=this.messageQueue;
+ $stack28 = $stack8.getQueueId();
+ $stack29 = java.lang.Integer.valueOf($stack28);
+ $stack6[1]=$stack29;
+ $stack7=this.fileType;
+ $stack6[2]=$stack7;
+ $stack11 = java.lang.Long.valueOf(baseOffset);
+ $stack6[3]=$stack11;
+ $stack6[4]=$stack19;
+ $stack22.error("create file segment failed: topic: {}, queue: {}, file type: {}, base offset: {}",$stack6);
+ label3:return  segment;
+ catch java.lang.Exception: label0 - label2 : label4;
+} 
+

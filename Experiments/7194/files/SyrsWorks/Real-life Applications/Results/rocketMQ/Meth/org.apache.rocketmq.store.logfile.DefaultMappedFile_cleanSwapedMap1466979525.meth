@@ -1,0 +1,50 @@
+void org.apache.rocketmq.store.logfile.DefaultMappedFile:cleanSwapedMap(boolean force)
+{
+long minGapTime;
+  java.nio.MappedByteBuffer $stack6;
+  long $stack8;
+  java.lang.StringBuilder $stack10;
+  org.apache.rocketmq.logging.org.slf4j.Logger $stack11;
+  java.lang.String $stack13;
+  byte $stack17;
+  java.lang.Exception $stack25;
+  label0:$stack6=this.mappedByteBufferWaitToClean;
+ if ($stack6!=null) goto label1;
+ label2:return;
+ label1:minGapTime=120000L;
+ minGapTime = java.lang.System.currentTimeMillis();
+ $stack8=this.swapMapTime;
+ minGapTime=(minGapTime-$stack8);
+ if (force!=0) goto label3;
+ $stack17=(minGapTime cmp 120000L);
+ if ($stack17>=0) goto label3;
+ minGapTime=(120000L-minGapTime);
+ java.lang.Thread.sleep(minGapTime);
+ label3:$stack6=this.mappedByteBufferWaitToClean;
+ org.apache.rocketmq.common.UtilAll.cleanBuffer((java.nio.ByteBuffer)$stack6);
+ this.mappedByteBufferWaitToClean=null;
+ $stack11=org.apache.rocketmq.store.logfile.DefaultMappedFile.log;
+ $stack10=new java.lang.StringBuilder;
+ $stack10#java.lang.StringBuilder();
+ $stack10 = $stack10.append("cleanSwapedMap file ");
+ $stack13=this.fileName;
+ $stack10 = $stack10.append($stack13);
+ $stack10 = $stack10.append(" success.");
+ $stack13 = $stack10.toString();
+ $stack11.info($stack13);
+ label4:goto label5;
+ label6:$stack25 = catch;
+ $stack11=org.apache.rocketmq.store.logfile.DefaultMappedFile.log;
+ $stack10=new java.lang.StringBuilder;
+ $stack10#java.lang.StringBuilder();
+ $stack10 = $stack10.append("cleanSwapedMap file ");
+ $stack13=this.fileName;
+ $stack10 = $stack10.append($stack13);
+ $stack10 = $stack10.append(" Failed. ");
+ $stack13 = $stack10.toString();
+ $stack11.error($stack13,(java.lang.Throwable)$stack25);
+ label5:return;
+ catch java.lang.Exception: label0 - label2 : label6;
+catch java.lang.Exception: label1 - label4 : label6;
+} 
+

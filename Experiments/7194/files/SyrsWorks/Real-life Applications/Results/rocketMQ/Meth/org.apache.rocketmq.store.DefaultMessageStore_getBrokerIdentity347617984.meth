@@ -1,0 +1,41 @@
+org.apache.rocketmq.common.BrokerIdentity org.apache.rocketmq.store.DefaultMessageStore:getBrokerIdentity()
+{
+org.apache.rocketmq.store.config.MessageStoreConfig $stack1;
+  boolean $stack2;
+  org.apache.rocketmq.common.BrokerIdentity $stack3;
+  org.apache.rocketmq.common.BrokerConfig $stack4;
+  java.lang.String $stack5;
+  java.lang.String $stack7;
+  long $stack9;
+  java.lang.String $stack18;
+  int $stack20;
+  $stack1=this.messageStoreConfig;
+ $stack2 = $stack1.isEnableDLegerCommitLog();
+ if ($stack2==0) goto label0;
+ $stack3=new org.apache.rocketmq.common.BrokerIdentity;
+ $stack4=this.brokerConfig;
+ $stack5 = $stack4.getBrokerClusterName();
+ $stack4=this.brokerConfig;
+ $stack7 = $stack4.getBrokerName();
+ $stack1=this.messageStoreConfig;
+ $stack18 = $stack1.getdLegerSelfId();
+ $stack18 = $stack18.substring(1);
+ $stack20 = java.lang.Integer.parseInt($stack18);
+ $stack9=(long) $stack20;
+ $stack4=this.brokerConfig;
+ $stack2 = $stack4.isInBrokerContainer();
+ $stack3#org.apache.rocketmq.common.BrokerIdentity($stack5,$stack7,$stack9,$stack2);
+ return  $stack3;
+ label0:$stack3=new org.apache.rocketmq.common.BrokerIdentity;
+ $stack4=this.brokerConfig;
+ $stack5 = $stack4.getBrokerClusterName();
+ $stack4=this.brokerConfig;
+ $stack7 = $stack4.getBrokerName();
+ $stack4=this.brokerConfig;
+ $stack9 = $stack4.getBrokerId();
+ $stack4=this.brokerConfig;
+ $stack2 = $stack4.isInBrokerContainer();
+ $stack3#org.apache.rocketmq.common.BrokerIdentity($stack5,$stack7,$stack9,$stack2);
+ return  $stack3;
+ } 
+

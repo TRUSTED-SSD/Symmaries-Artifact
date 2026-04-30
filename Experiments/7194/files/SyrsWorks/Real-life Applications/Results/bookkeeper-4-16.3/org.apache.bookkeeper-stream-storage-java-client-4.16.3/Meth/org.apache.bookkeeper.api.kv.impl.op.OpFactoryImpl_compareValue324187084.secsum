@@ -1,0 +1,11 @@
+org.apache.bookkeeper.api.kv.op.CompareOp org.apache.bookkeeper.api.kv.impl.op.OpFactoryImpl:compareValue (
+  org.apache.bookkeeper.api.kv.op.CompareResult result, java.lang.Object key,
+  java.lang.Object value) {
+  guard = tt;
+  ret(level()) = obj_level(this);
+  ret(obj_level()) = level(key) ⊔ level(result) ⊔ level(value) ⊔ obj_level(key);
+  ret(obj_level(key)) = level(key) ⊔ level(result) ⊔ level(value) ⊔ obj_level(key);
+  ret(obj_level(result)) = level(key) ⊔ level(result) ⊔ level(value) ⊔ obj_level(key);
+  ret(obj_level(this)) = level(key) ⊔ level(result) ⊔ level(value) ⊔ obj_level(key);
+  ret(obj_level(value)) = level(key) ⊔ level(result) ⊔ level(value) ⊔ obj_level(key);
+}

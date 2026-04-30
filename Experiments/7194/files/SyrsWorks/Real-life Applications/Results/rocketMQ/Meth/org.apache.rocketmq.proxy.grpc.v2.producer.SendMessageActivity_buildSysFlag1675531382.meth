@@ -1,0 +1,25 @@
+int org.apache.rocketmq.proxy.grpc.v2.producer.SendMessageActivity:buildSysFlag(apache.rocketmq.v2.Message protoMessage)
+{
+byte sysFlag;
+  apache.rocketmq.v2.Encoding bodyEncoding;
+  apache.rocketmq.v2.SystemProperties $stack5;
+  apache.rocketmq.v2.Encoding $stack7;
+  boolean $stack8;
+  apache.rocketmq.v2.MessageType $stack11;
+  apache.rocketmq.v2.MessageType $stack15;
+  sysFlag=0;
+ $stack5 = protoMessage.getSystemProperties();
+ bodyEncoding = $stack5.getBodyEncoding();
+ $stack7=apache.rocketmq.v2.Encoding.GZIP;
+ $stack8 = bodyEncoding.equals((java.lang.Object)$stack7);
+ if ($stack8==0) goto label0;
+ sysFlag=(0 | 1);
+ label0:$stack5 = protoMessage.getSystemProperties();
+ $stack15 = $stack5.getMessageType();
+ $stack11=apache.rocketmq.v2.MessageType.TRANSACTION;
+ $stack8 = $stack15.equals((java.lang.Object)$stack11);
+ if ($stack8==0) goto label1;
+ sysFlag=(sysFlag | 4);
+ label1:return  sysFlag;
+ } 
+

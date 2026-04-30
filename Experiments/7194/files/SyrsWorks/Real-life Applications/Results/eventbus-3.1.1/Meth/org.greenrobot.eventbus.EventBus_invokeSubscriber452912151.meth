@@ -1,0 +1,30 @@
+void org.greenrobot.eventbus.EventBus:invokeSubscriber(org.greenrobot.eventbus.Subscription subscription,java.lang.Object event)
+{
+org.greenrobot.eventbus.SubscriberMethod $stack4;
+  java.lang.Object[] $stack5;
+  java.lang.Object $stack6;
+  java.lang.reflect.Method $stack7;
+  java.lang.reflect.InvocationTargetException $stack9;
+  java.lang.Throwable $stack10;
+  java.lang.IllegalAccessException $stack11;
+  java.lang.IllegalStateException $stack12;
+  label0:$stack4=subscription.subscriberMethod;
+ $stack7=$stack4.method;
+ $stack6=subscription.subscriber;
+ $stack5=new java.lang.Object[1];
+ $stack5[0]=event;
+ $stack7.invoke($stack6,$stack5);
+ label1:goto label2;
+ label3:$stack9 = catch;
+ $stack10 = $stack9.getCause();
+ this#org.greenrobot.eventbus.EventBus:handleSubscriberException(subscription,event,$stack10);
+ goto label2;
+ label4:$stack11 = catch;
+ $stack12=new java.lang.IllegalStateException;
+ $stack12#java.lang.IllegalStateException("Unexpected exception",(java.lang.Throwable)$stack11);
+ throw $stack12;
+ label2:return;
+ catch java.lang.reflect.InvocationTargetException: label0 - label1 : label3;
+catch java.lang.IllegalAccessException: label0 - label1 : label4;
+} 
+

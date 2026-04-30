@@ -1,0 +1,27 @@
+java.util.LinkedHashMap$Entry java.util.LinkedHashMap$LinkedHashIterator:nextNode()
+{
+java.util.LinkedHashMap$Entry r1;
+  java.util.LinkedHashMap $r2;
+  int $i0;
+  int $i1;
+  java.util.LinkedHashMap$Entry $r3;
+  java.util.NoSuchElementException $r4;
+  java.util.ConcurrentModificationException $r5;
+  r1=this.next;
+ $r2=this.this$0;
+ $i1=$r2.modCount;
+ $i0=this.expectedModCount;
+ if ($i1==$i0) goto label0;
+ $r5=new java.util.ConcurrentModificationException;
+ $r5#java.util.ConcurrentModificationException:init();
+ throw $r5;
+ label0:if (r1!=null) goto label1;
+ $r4=new java.util.NoSuchElementException;
+ $r4#java.util.NoSuchElementException:init();
+ throw $r4;
+ label1:this.current=r1;
+ $r3=r1.after;
+ this.next=$r3;
+ return  r1;
+ }  
+

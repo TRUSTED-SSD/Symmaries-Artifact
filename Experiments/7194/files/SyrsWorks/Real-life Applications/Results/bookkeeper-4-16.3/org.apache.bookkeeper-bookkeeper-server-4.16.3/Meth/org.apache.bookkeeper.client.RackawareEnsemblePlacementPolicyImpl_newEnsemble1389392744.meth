@@ -1,0 +1,26 @@
+org.apache.bookkeeper.client.EnsemblePlacementPolicy$PlacementResult org.apache.bookkeeper.client.RackawareEnsemblePlacementPolicyImpl:newEnsemble(int ensembleSize,int writeQuorumSize,int ackQuorumSize,java.util.Map customMetadata,java.util.Set @excludeBookies)
+{
+org.apache.bookkeeper.client.EnsemblePlacementPolicy$PlacementResult l8;
+  java.lang.Throwable l9;
+  java.util.concurrent.locks.ReentrantReadWriteLock $stack10;
+  java.util.concurrent.locks.ReentrantReadWriteLock$ReadLock $stack11;
+  java.util.Set excludeBookies;
+excludeBookies=@excludeBookies;
+$stack10=this.rwLock;
+ $stack11 = $stack10.readLock();
+ $stack11.lock();
+ label0:excludeBookies = this.addDefaultRackBookiesIfMinNumRacksIsEnforced(excludeBookies);
+ l8 = this.newEnsembleInternal(ensembleSize,writeQuorumSize,ackQuorumSize,excludeBookies,null,null);
+ label1:$stack10=this.rwLock;
+ $stack11 = $stack10.readLock();
+ $stack11.unlock();
+ return  l8;
+ label2:l9 = catch;
+ label3:$stack10=this.rwLock;
+ $stack11 = $stack10.readLock();
+ $stack11.unlock();
+ throw l9;
+ catch java.lang.Throwable: label0 - label1 : label2;
+catch java.lang.Throwable: label2 - label3 : label2;
+} 
+

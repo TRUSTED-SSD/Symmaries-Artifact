@@ -1,0 +1,33 @@
+void org.apache.bookkeeper.proto.ReadEntryProcessor:sendResponse(io.netty.buffer.ByteBuf data,int errorCode,long startTimeNanos)
+{
+org.apache.bookkeeper.proto.RequestStats stats;
+  org.apache.bookkeeper.stats.OpStatsLogger logger;
+  org.apache.bookkeeper.proto.BookieProtocol$Response response;
+  org.apache.bookkeeper.proto.BookieRequestProcessor $stack8;
+  java.util.concurrent.TimeUnit $stack12;
+  org.apache.bookkeeper.proto.BookieProtocol$Request $stack13;
+  boolean $stack16;
+  $stack8=this.requestProcessor;
+ stats = $stack8.getRequestStats();
+ logger = stats.getReadEntryStats();
+ if (errorCode!=0) goto label0;
+ startTimeNanos = org.apache.bookkeeper.util.MathUtils.elapsedNanos(startTimeNanos);
+ $stack12=java.util.concurrent.TimeUnit.NANOSECONDS;
+ logger.registerSuccessfulEvent(startTimeNanos,$stack12);
+ $stack13=this.request;
+ response = org.apache.bookkeeper.proto.ResponseBuilder.buildReadResponse(data,$stack13);
+ goto label1;
+ label0:if (data==null) goto label2;
+ io.netty.util.ReferenceCountUtil.release((java.lang.Object)data);
+ label2:startTimeNanos = org.apache.bookkeeper.util.MathUtils.elapsedNanos(startTimeNanos);
+ $stack12=java.util.concurrent.TimeUnit.NANOSECONDS;
+ logger.registerFailedEvent(startTimeNanos,$stack12);
+ $stack13=this.request;
+ response = org.apache.bookkeeper.proto.ResponseBuilder.buildErrorResponse(errorCode,$stack13);
+ label1:logger = stats.getReadRequestStats();
+ $stack16=this.throttleReadResponses;
+ this.sendReadReqResponse(errorCode,(java.lang.Object)response,logger,$stack16);
+ this.recycle();
+ return;
+ } 
+

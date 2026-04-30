@@ -1,0 +1,49 @@
+void org.apache.rocketmq.store.ConsumeQueue:multiDispatchLmqQueue(org.apache.rocketmq.store.DispatchRequest request,int maxRetries)
+{
+java.util.Map prop;
+  java.lang.String multiDispatchQueue;
+  java.lang.String multiQueueOffset;
+  java.lang.String[] queues;
+  java.lang.String[] queueOffsets;
+  int i;
+  long queueOffset;
+  int queueId;
+  java.lang.Object $stack14;
+  org.apache.rocketmq.store.MessageStore $stack24;
+  org.apache.rocketmq.store.config.MessageStoreConfig $stack25;
+  boolean $stack26;
+  org.apache.rocketmq.logging.org.slf4j.Logger $stack36;
+  prop = request.getPropertiesMap();
+ $stack14 = prop.get((java.lang.Object)"INNER_MULTI_DISPATCH");
+ multiDispatchQueue=(java.lang.String) $stack14;
+ $stack14 = prop.get((java.lang.Object)"INNER_MULTI_QUEUE_OFFSET");
+ multiQueueOffset=(java.lang.String) $stack14;
+ queues = multiDispatchQueue.split(",");
+ queueOffsets = multiQueueOffset.split(",");
+ queueId=#queues;
+ i=#queueOffsets;
+ if (queueId==i) goto label0;
+ $stack36=org.apache.rocketmq.store.ConsumeQueue.log;
+ multiDispatchQueue = request.getTopic();
+ $stack36.error("[bug] queues.length!=queueOffsets.length ",(java.lang.Object)multiDispatchQueue);
+ return;
+ label0:i=0;
+ label1:queueId=#queues;
+ if (i>=queueId) goto label2;
+ multiDispatchQueue=queues[i];
+ multiQueueOffset=queueOffsets[i];
+ queueOffset = java.lang.Long.parseLong(multiQueueOffset);
+ queueId = request.getQueueId();
+ $stack24=this.messageStore;
+ $stack25 = $stack24.getMessageStoreConfig();
+ $stack26 = $stack25.isEnableLmq();
+ if ($stack26==0) goto label3;
+ $stack26 = org.apache.rocketmq.common.MixAll.isLmq(multiDispatchQueue);
+ if ($stack26==0) goto label3;
+ queueId=0;
+ label3:this#org.apache.rocketmq.store.ConsumeQueue:doDispatchLmqQueue(request,maxRetries,multiDispatchQueue,queueOffset,queueId);
+ i=(i+1);
+ goto label1;
+ label2:return;
+ } 
+

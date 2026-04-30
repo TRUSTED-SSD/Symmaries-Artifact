@@ -1,0 +1,52 @@
+org.apache.bookkeeper.common.grpc.proxy.ProxyHandlerRegistry org.apache.bookkeeper.common.grpc.proxy.ProxyHandlerRegistry$Builder:build()
+{
+org.apache.bookkeeper.common.grpc.proxy.ProxyServerCallHandler proxyHandler;
+  java.util.HashMap methods;
+  java.util.Iterator l3;
+  io.grpc.ServerServiceDefinition service;
+  java.util.Iterator l5;
+  io.grpc.ServerMethodDefinition method;
+  java.lang.String methodName;
+  org.apache.bookkeeper.common.grpc.proxy.ChannelFinder $stack8;
+  java.lang.Object $stack9;
+  io.grpc.CallOptions $stack11;
+  java.util.HashMap $stack14;
+  java.util.Collection $stack15;
+  boolean $stack17;
+  org.apache.bookkeeper.common.grpc.proxy.ProxyHandlerRegistry $stack18;
+  java.util.Map $stack19;
+  io.grpc.MethodDescriptor $stack26;
+  $stack8=this.finder;
+ com.google.common.base.Preconditions.checkNotNull((java.lang.Object)$stack8,(java.lang.Object)"No channel finder defined");
+ proxyHandler=new org.apache.bookkeeper.common.grpc.proxy.ProxyServerCallHandler;
+ $stack8=this.finder;
+ $stack11=io.grpc.CallOptions.DEFAULT;
+ proxyHandler#org.apache.bookkeeper.common.grpc.proxy.ProxyServerCallHandler($stack8,$stack11);
+ methods=new java.util.HashMap;
+ methods#java.util.HashMap();
+ $stack14=this.services;
+ $stack15 = $stack14.values();
+ l3 = $stack15.iterator();
+ label0:$stack17 = l3.hasNext();
+ if ($stack17==0) goto label1;
+ $stack9 = l3.next();
+ service=(io.grpc.ServerServiceDefinition) $stack9;
+ $stack15 = service.getMethods();
+ l5 = $stack15.iterator();
+ label2:$stack17 = l5.hasNext();
+ if ($stack17==0) goto label3;
+ $stack9 = l5.next();
+ method=(io.grpc.ServerMethodDefinition) $stack9;
+ $stack26 = method.getMethodDescriptor();
+ methodName = $stack26.getFullMethodName();
+ $stack26 = method.getMethodDescriptor();
+ method = org.apache.bookkeeper.common.grpc.proxy.ProxyHandlerRegistry.access$000($stack26,(io.grpc.ServerCallHandler)proxyHandler);
+ methods.put((java.lang.Object)methodName,(java.lang.Object)method);
+ goto label2;
+ label3:goto label0;
+ label1:$stack18=new org.apache.bookkeeper.common.grpc.proxy.ProxyHandlerRegistry;
+ $stack19 = java.util.Collections.unmodifiableMap((java.util.Map)methods);
+ $stack18#org.apache.bookkeeper.common.grpc.proxy.ProxyHandlerRegistry($stack19,null);
+ return  $stack18;
+ } 
+

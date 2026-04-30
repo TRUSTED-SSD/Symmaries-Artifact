@@ -1,0 +1,15 @@
+org.apache.rocketmq.tieredstore.common.AppendResult org.apache.rocketmq.tieredstore.container.TieredConsumeQueue:append(long offset,int size,long tagsCode,long timeStamp,boolean commit)
+{
+java.nio.ByteBuffer cqItem;
+  org.apache.rocketmq.tieredstore.container.TieredFileQueue $stack15;
+  org.apache.rocketmq.tieredstore.common.AppendResult $stack16;
+  cqItem = java.nio.ByteBuffer.allocate(20);
+ cqItem.putLong(offset);
+ cqItem.putInt(size);
+ cqItem.putLong(tagsCode);
+ cqItem.flip();
+ $stack15=this.fileQueue;
+ $stack16 = $stack15.append(cqItem,timeStamp,commit);
+ return  $stack16;
+ } 
+

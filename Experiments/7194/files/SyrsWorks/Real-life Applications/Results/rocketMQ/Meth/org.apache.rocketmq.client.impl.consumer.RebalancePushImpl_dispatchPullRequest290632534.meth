@@ -1,0 +1,24 @@
+void org.apache.rocketmq.client.impl.consumer.RebalancePushImpl:dispatchPullRequest(java.util.List pullRequestList,long delay)
+{
+java.util.Iterator l4;
+  org.apache.rocketmq.client.impl.consumer.PullRequest pullRequest;
+  boolean $stack7;
+  java.lang.Object $stack8;
+  byte $stack9;
+  org.apache.rocketmq.client.impl.consumer.DefaultMQPushConsumerImpl $stack10;
+  l4 = pullRequestList.iterator();
+ label0:$stack7 = l4.hasNext();
+ if ($stack7==0) goto label1;
+ $stack8 = l4.next();
+ pullRequest=(org.apache.rocketmq.client.impl.consumer.PullRequest) $stack8;
+ $stack9=(delay cmp 0L);
+ if ($stack9>0) goto label2;
+ $stack10=this.defaultMQPushConsumerImpl;
+ $stack10.executePullRequestImmediately(pullRequest);
+ goto label3;
+ label2:$stack10=this.defaultMQPushConsumerImpl;
+ $stack10.executePullRequestLater(pullRequest,delay);
+ label3:goto label0;
+ label1:return;
+ } 
+

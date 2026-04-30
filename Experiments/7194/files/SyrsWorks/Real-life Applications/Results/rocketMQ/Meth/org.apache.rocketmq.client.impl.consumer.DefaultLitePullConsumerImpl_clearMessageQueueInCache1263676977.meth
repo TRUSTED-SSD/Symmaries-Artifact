@@ -1,0 +1,28 @@
+void org.apache.rocketmq.client.impl.consumer.DefaultLitePullConsumerImpl:clearMessageQueueInCache(org.apache.rocketmq.common.message.MessageQueue messageQueue)
+{
+org.apache.rocketmq.client.impl.consumer.ProcessQueue processQueue;
+  java.util.Iterator iter;
+  org.apache.rocketmq.client.impl.consumer.AssignedMessageQueue $stack4;
+  java.util.concurrent.BlockingQueue $stack6;
+  boolean $stack8;
+  java.lang.Object $stack9;
+  org.apache.rocketmq.client.impl.consumer.DefaultLitePullConsumerImpl$ConsumeRequest $stack10;
+  org.apache.rocketmq.common.message.MessageQueue $stack11;
+  $stack4=this.assignedMessageQueue;
+ processQueue = $stack4.getProcessQueue(messageQueue);
+ if (processQueue==null) goto label0;
+ processQueue.clear();
+ label0:$stack6=this.consumeRequestCache;
+ iter = $stack6.iterator();
+ label1:$stack8 = iter.hasNext();
+ if ($stack8==0) goto label2;
+ $stack9 = iter.next();
+ $stack10=(org.apache.rocketmq.client.impl.consumer.DefaultLitePullConsumerImpl$ConsumeRequest) $stack9;
+ $stack11 = $stack10.getMessageQueue();
+ $stack8 = $stack11.equals((java.lang.Object)messageQueue);
+ if ($stack8==0) goto label1;
+ iter.remove();
+ goto label1;
+ label2:return;
+ } 
+

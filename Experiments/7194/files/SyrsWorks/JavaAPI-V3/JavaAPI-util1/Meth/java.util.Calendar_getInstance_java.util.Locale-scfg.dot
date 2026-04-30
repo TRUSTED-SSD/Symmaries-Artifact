@@ -1,0 +1,27 @@
+digraph G {
+  node [shape=box, ];
+  "pc0_js1" [label="〈$r1 = java.util.TimeZone.getDefault (), js1〉\n\
+tt", ];
+  "pc1_js1" [label="〈$r2 = java.util.Calendar.createCalendar ($r1, r0), js1〉\n\
+tt",
+             ];
+  "pc2_js1" [label="〈return $r2, js1〉", ];
+  "pc3_js1" [label="〈sink, js1〉\n\
+obj_level(r0) ⊑ ret(obj_level(r0))' ∧ (ϕ ≠ S2 ∨ obj_level($r2) ⊑ ret(obj_level())' ∧ pc ⊔ level($r2) ⊑ ret(level())')",
+             ];
+  
+  
+  "pc0_js1" -> "pc1_js1" [label="tt,\n\
+{level($r1) := pc,\n\
+ obj_level($r1) := pc}",
+                          ];
+  "pc1_js1" -> "pc2_js1" [label="tt,\n\
+{level($r2) := pc ⊔ level(r0) ⊔ obj_level(r0),\n\
+ obj_level($r1) := pc ⊔ level(r0) ⊔ obj_level(r0),\n\
+ obj_level($r2) := pc ⊔ level(r0) ⊔ obj_level(r0),\n\
+ obj_level(r0) := pc ⊔ level(r0) ⊔ obj_level(r0)}",
+                          ];
+  "pc2_js1" -> "pc3_js1" [label="tt,\n\
+{ϕ := S2}", ];
+  
+  }

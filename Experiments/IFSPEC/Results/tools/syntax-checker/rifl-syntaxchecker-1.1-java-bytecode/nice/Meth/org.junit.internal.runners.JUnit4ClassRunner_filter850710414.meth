@@ -1,0 +1,29 @@
+void org.junit.internal.runners.JUnit4ClassRunner:filter(org.junit.runner.manipulation.Filter filter)
+{
+java.util.Iterator iter;
+  java.lang.reflect.Method method;
+  java.util.List $stack4;
+  boolean $stack6;
+  org.junit.runner.manipulation.NoTestsRemainException $stack9;
+  java.lang.Object $stack10;
+  org.junit.runner.Description $stack11;
+  $stack4=this.testMethods;
+ iter = $stack4.iterator();
+ label0:$stack6 = iter.hasNext();
+ if ($stack6==0) goto label1;
+ $stack10 = iter.next();
+ method=(java.lang.reflect.Method) $stack10;
+ $stack11 = this.methodDescription(method);
+ $stack6 = filter.shouldRun($stack11);
+ if ($stack6!=0) goto label2;
+ iter.remove();
+ label2:goto label0;
+ label1:$stack4=this.testMethods;
+ $stack6 = $stack4.isEmpty();
+ if ($stack6==0) goto label3;
+ $stack9=new org.junit.runner.manipulation.NoTestsRemainException;
+ $stack9#org.junit.runner.manipulation.NoTestsRemainException();
+ throw $stack9;
+ label3:return;
+ } 
+

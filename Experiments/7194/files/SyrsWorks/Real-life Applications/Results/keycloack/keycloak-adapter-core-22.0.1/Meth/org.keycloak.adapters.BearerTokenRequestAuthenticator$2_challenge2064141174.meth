@@ -1,0 +1,49 @@
+boolean org.keycloak.adapters.BearerTokenRequestAuthenticator$2:challenge(org.keycloak.adapters.spi.HttpFacade facade)
+{
+org.keycloak.adapters.OIDCHttpFacade oidcFacade;
+  org.keycloak.adapters.BearerTokenRequestAuthenticator $stack4;
+  org.keycloak.adapters.KeycloakDeployment $stack5;
+  org.keycloak.adapters.authorization.PolicyEnforcer $stack6;
+  org.keycloak.adapters.OIDCAuthenticationError $stack7;
+  java.lang.String $stack8;
+  org.keycloak.adapters.OIDCAuthenticationError$Reason $stack9;
+  org.keycloak.adapters.spi.HttpFacade$Request $stack10;
+  org.keycloak.adapters.spi.HttpFacade$Response $stack11;
+  boolean $stack15;
+  org.keycloak.adapters.pep.HttpAuthzRequest $stack22;
+  org.keycloak.adapters.pep.HttpAuthzResponse $stack23;
+  oidcFacade=(org.keycloak.adapters.OIDCHttpFacade) facade;
+ $stack4=this.this$0;
+ $stack5=$stack4.deployment;
+ $stack6 = $stack5.getPolicyEnforcer();
+ if ($stack6==null) goto label0;
+ $stack4=this.this$0;
+ $stack5=$stack4.deployment;
+ $stack6 = $stack5.getPolicyEnforcer();
+ $stack22=new org.keycloak.adapters.pep.HttpAuthzRequest;
+ $stack22#org.keycloak.adapters.pep.HttpAuthzRequest(oidcFacade);
+ $stack23=new org.keycloak.adapters.pep.HttpAuthzResponse;
+ $stack23#org.keycloak.adapters.pep.HttpAuthzResponse(oidcFacade);
+ $stack6.enforce((org.keycloak.adapters.authorization.spi.HttpRequest)$stack22,(org.keycloak.adapters.authorization.spi.HttpResponse)$stack23);
+ return  1;
+ label0:$stack7=new org.keycloak.adapters.OIDCAuthenticationError;
+ $stack9=this.val$reason;
+ $stack8=this.val$description;
+ $stack7#org.keycloak.adapters.OIDCAuthenticationError($stack9,$stack8);
+ $stack10 = facade.getRequest();
+ $stack10.setError((org.keycloak.adapters.spi.AuthenticationError)$stack7);
+ $stack11 = facade.getResponse();
+ $stack8=this.val$challenge;
+ $stack11.addHeader("WWW-Authenticate",$stack8);
+ $stack4=this.this$0;
+ $stack5=$stack4.deployment;
+ $stack15 = $stack5.isDelegateBearerErrorResponseSending();
+ if ($stack15==0) goto label1;
+ $stack11 = facade.getResponse();
+ $stack11.setStatus(401);
+ goto label2;
+ label1:$stack11 = facade.getResponse();
+ $stack11.sendError(401);
+ label2:return  1;
+ } 
+

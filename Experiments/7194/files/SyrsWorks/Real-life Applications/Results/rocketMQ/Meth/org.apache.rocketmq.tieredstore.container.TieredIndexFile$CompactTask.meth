@@ -1,0 +1,48 @@
+org.apache.rocketmq.tieredstore.container.TieredIndexFile$CompactTask(org.apache.rocketmq.tieredstore.common.TieredMessageStoreConfig storeConfig,org.apache.rocketmq.store.logfile.MappedFile originFile,org.apache.rocketmq.tieredstore.container.TieredFileQueue fileQueue)
+{
+java.lang.String compactFilePath;
+  java.io.File compactFile;
+  int $stack6;
+  java.lang.StringBuilder $stack8;
+  int $stack22;
+  boolean $stack27;
+  org.apache.rocketmq.store.logfile.DefaultMappedFile $stack28;
+  this#java.lang.Object();
+ this.storeConfig=storeConfig;
+ $stack6 = storeConfig.getTieredStoreIndexFileMaxHashSlotNum();
+ this.maxHashSlotNum=$stack6;
+ $stack6 = storeConfig.getTieredStoreIndexFileMaxIndexNum();
+ this.maxIndexNum=$stack6;
+ this.originFile=originFile;
+ this.fileQueue=fileQueue;
+ $stack8=new java.lang.StringBuilder;
+ $stack8#java.lang.StringBuilder();
+ compactFilePath = storeConfig.getStorePathRootDir();
+ $stack8 = $stack8.append(compactFilePath);
+ compactFilePath=java.io.File.separator;
+ $stack8 = $stack8.append(compactFilePath);
+ $stack8 = $stack8.append("tiered_index_file");
+ compactFilePath=java.io.File.separator;
+ $stack8 = $stack8.append(compactFilePath);
+ $stack8 = $stack8.append("2222");
+ compactFilePath = $stack8.toString();
+ $stack6 = storeConfig.getTieredStoreIndexFileMaxHashSlotNum();
+ $stack6=($stack6 * 8);
+ $stack6=(40+$stack6);
+ $stack22 = storeConfig.getTieredStoreIndexFileMaxIndexNum();
+ $stack22=($stack22 * 32);
+ $stack6=($stack6+$stack22);
+ $stack6=($stack6+4);
+ this.fileMaxSize=$stack6;
+ compactFile=new java.io.File;
+ compactFile#java.io.File(compactFilePath);
+ $stack27 = compactFile.exists();
+ if ($stack27==0) goto label0;
+ compactFile.delete();
+ label0:$stack28=new org.apache.rocketmq.store.logfile.DefaultMappedFile;
+ $stack6=this.fileMaxSize;
+ $stack28#org.apache.rocketmq.store.logfile.DefaultMappedFile(compactFilePath,$stack6);
+ this.compactFile=$stack28;
+ return;
+ } 
+

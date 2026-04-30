@@ -1,0 +1,27 @@
+static org.apache.rocketmq.tools.command.SubCommand org.apache.rocketmq.tools.command.MQAdminStartup:findSubCommand(java.lang.String name)
+{
+java.util.Iterator l1;
+  org.apache.rocketmq.tools.command.SubCommand cmd;
+  java.util.List $stack3;
+  boolean $stack5;
+  java.lang.Object $stack6;
+  java.lang.String $stack7;
+  $stack3=org.apache.rocketmq.tools.command.MQAdminStartup.SUB_COMMANDS;
+ l1 = $stack3.iterator();
+ label0:$stack5 = l1.hasNext();
+ if ($stack5==0) goto label1;
+ $stack6 = l1.next();
+ cmd=(org.apache.rocketmq.tools.command.SubCommand) $stack6;
+ $stack7 = cmd.commandName();
+ $stack5 = $stack7.equalsIgnoreCase(name);
+ if ($stack5!=0) goto label2;
+ $stack7 = cmd.commandAlias();
+ if ($stack7==null) goto label3;
+ $stack7 = cmd.commandAlias();
+ $stack5 = $stack7.equalsIgnoreCase(name);
+ if ($stack5==0) goto label3;
+ label2:return  cmd;
+ label3:goto label0;
+ label1:return  null;
+ } 
+

@@ -1,0 +1,12 @@
+org.apache.rocketmq.store.PutMessageResult org.apache.rocketmq.broker.processor.ChangeInvisibleTimeProcessor:appendCheckPoint (
+  org.apache.rocketmq.remoting.protocol.header.ChangeInvisibleTimeRequestHeader
+    requestHeader,
+  int reviveQid, int queueId, long offset, long popTime,
+  java.lang.String @brokerName) {
+  guard = level(@brokerName) ⊔ level(offset) ⊔ level(popTime) ⊔ level(queueId) ⊔ level(requestHeader) ⊔ level(reviveQid) ⊔ level(this) ⊔ obj_level(@brokerName) ⊔ obj_level(requestHeader) ⊔ obj_level(this) = ⊥;
+  ret(level()) = ⊥;
+  ret(obj_level()) = ⊤;
+  ret(obj_level(@brokerName)) = ⊤;
+  ret(obj_level(requestHeader)) = ⊤;
+  ret(obj_level(this)) = ⊤;
+}

@@ -1,0 +1,45 @@
+digraph G {
+  node [shape=box, ];
+  "pc0_js1" [label="〈$r2 = java.lang.String.valueOf (r1), js1〉\n\
+pc ⊔ level(r1) ⊔ obj_level(r1) = ⊥",
+             ];
+  "pc1_js1" [label="〈this.write ($r2), js1〉\n\
+pc ⊔ level($r2) ⊔ level(this) ⊔ obj_level($r2) ⊔ obj_level(this) = ⊥",
+             ];
+  "pc2_js1" [label="〈return, js1〉", ];
+  "pc3_js1" [label="〈sink, js1〉\n\
+obj_level(r1) ⊑ ret(obj_level(r1))' ∧ obj_level(this) ⊑ ret(obj_level(this))' ∧ (ret(r1.><r1)' ∨ ¬r1.><r1) ∧ (ret(r1.><this)' ∨ ¬r1.><this) ∧ (ret(this.><r1)' ∨ ¬this.><r1) ∧ (ret(this.><this)' ∨ ¬this.><this)",
+             ];
+  
+  
+  "pc0_js1" -> "pc1_js1" [label="tt,\n\
+{$r2~r1 := tt,\n\
+ r1~this := ff,\n\
+ $r2.><r1 := r1.><r1,\n\
+ $r2.><this := r1.><this,\n\
+ r1.><$r2 := r1.><r1,\n\
+ r1.><r1 := tt,\n\
+ r1.><this := r1~this ∨ r1.><this ∨ this.><r1,\n\
+ this.><$r2 := this.><r1,\n\
+ this.><r1 := r1~this ∨ this.><r1,\n\
+ this.><this := this.><this ∨ (r1~this ∨ this.><r1) ∧ (r1~this ∨ r1.><this ∨ this.><r1),\n\
+ level($r2) := ⊤,\n\
+ obj_level($r2) := ⊤,\n\
+ obj_level(r1) := ⊤,\n\
+ obj_level(this) := obj_level(this) ⊔ (if r1~this ∨ r1.><this ∨ this.><r1 then ⊤ else ⊥)}",
+                          ];
+  "pc1_js1" -> "pc2_js1" [label="tt,\n\
+{$r2.><$r2 := $r2.><this ∨ $r2.><this ∧ (this.><$r2 ∨ $r2.><this ∧ this.><this) ∨ $r2.><this ∧ ¬this.><$r2 ∧ ($r2.><this ∨ this.><$r2) ∨ $r2.><this ∧ ($r2.><this ∨ this.><$r2) ∧ (this.><$r2 ∨ this.><this),\n\
+ $r2.><r1 := $r2.><r1 ∨ $r2.><this ∨ (if $r2.><this ∧ ¬this.><$r2 then $r2.><r1 ∨ r1.><this ∨ this.><r1 else $r2.><r1) ∨ (if this.><$r2 ∨ this.><this then $r2.><r1 ∨ $r2.><this ∧ (r1.><this ∨ this.><r1) else $r2.><r1) ∨ (if this.><$r2 ∨ $r2.><this ∧ this.><this then $r2.><r1 ∨ $r2.><this else $r2.><r1),\n\
+ $r2.><this := $r2.><this ∨ $r2.><this ∧ ¬this.><$r2 ∨ (if $r2.><this then $r2.><this ∨ this.><$r2 else $r2.><this) ∨ (if this.><$r2 ∨ $r2.><this ∧ this.><this then $r2.><this ∨ $r2.><this ∧ ($r2.><this ∨ this.><$r2) else $r2.><this),\n\
+ r1.><$r2 := $r2.><this ∨ r1.><$r2 ∨ (if $r2.><this ∧ ¬this.><$r2 then $r2.><this ∨ r1.><$r2 ∨ this.><$r2 else r1.><$r2) ∨ (if this.><$r2 ∨ this.><this then r1.><$r2 ∨ r1.><this ∧ ($r2.><this ∨ this.><$r2) else r1.><$r2) ∨ (if this.><$r2 ∨ $r2.><this ∧ this.><this then r1.><$r2 ∨ r1.><this else r1.><$r2),\n\
+ r1.><r1 := tt,\n\
+ r1.><this := r1.><this ∨ $r2.><this ∧ ¬this.><$r2 ∨ (if $r2.><this then $r2.><this ∨ r1.><this ∨ this.><$r2 else r1.><this) ∨ (if this.><$r2 ∨ $r2.><this ∧ this.><this then r1.><this ∨ r1.><this ∧ ($r2.><this ∨ this.><$r2) else r1.><this),\n\
+ this.><$r2 := this.><$r2 ∨ $r2.><this ∧ this.><this ∨ (if $r2.><this ∧ ¬this.><$r2 then this.><$r2 ∨ this.><$r2 ∧ ($r2.><this ∨ this.><$r2) else this.><$r2) ∨ (if this.><$r2 ∨ this.><this then $r2.><this ∨ this.><$r2 else this.><$r2),\n\
+ this.><r1 := this.><$r2 ∨ this.><r1 ∨ $r2.><this ∧ this.><this ∨ (if $r2.><this then this.><$r2 ∨ this.><r1 else this.><r1) ∨ (if $r2.><this ∧ ¬this.><$r2 then this.><r1 ∨ this.><$r2 ∧ (r1.><this ∨ this.><r1) else this.><r1) ∨ (if this.><$r2 ∨ this.><this then r1.><this ∨ this.><r1 else this.><r1),\n\
+ this.><this := this.><$r2 ∨ this.><this ∨ (if $r2.><this then this.><this ∨ this.><$r2 ∧ ($r2.><this ∨ this.><$r2) else this.><this) ∨ (if $r2.><this ∧ ¬this.><$r2 then this.><$r2 ∨ this.><this else this.><this) ∨ (if this.><$r2 ∨ $r2.><this ∧ this.><this then $r2.><this ∨ this.><$r2 ∨ this.><this else this.><this)}",
+                          ];
+  "pc2_js1" -> "pc3_js1" [label="tt,\n\
+{ϕ := S2}", ];
+  
+  }

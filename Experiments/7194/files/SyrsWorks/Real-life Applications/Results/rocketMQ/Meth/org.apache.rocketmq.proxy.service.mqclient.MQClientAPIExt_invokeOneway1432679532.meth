@@ -1,0 +1,17 @@
+java.util.concurrent.CompletableFuture org.apache.rocketmq.proxy.service.mqclient.MQClientAPIExt:invokeOneway(java.lang.String brokerAddr,org.apache.rocketmq.remoting.protocol.RemotingCommand request,long timeoutMillis)
+{
+java.util.concurrent.CompletableFuture future;
+  org.apache.rocketmq.remoting.RemotingClient $stack8;
+  java.lang.Exception $stack10;
+  future=new java.util.concurrent.CompletableFuture;
+ future#java.util.concurrent.CompletableFuture();
+ label0:$stack8 = this.getRemotingClient();
+ $stack8.invokeOneway(brokerAddr,request,timeoutMillis);
+ future.complete(null);
+ label1:goto label2;
+ label3:$stack10 = catch;
+ future.completeExceptionally((java.lang.Throwable)$stack10);
+ label2:return  future;
+ catch java.lang.Exception: label0 - label1 : label3;
+} 
+

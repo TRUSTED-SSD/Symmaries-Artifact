@@ -1,0 +1,54 @@
+static int com.google.zxing.qrcode.encoder.MaskUtil:applyMaskPenaltyRule1Internal(com.google.zxing.qrcode.encoder.ByteMatrix matrix,boolean isHorizontal)
+{
+int penalty;
+  int iLimit;
+  int jLimit;
+  byte[][] array;
+  int i;
+  int numSameBitCells;
+  byte prevBit;
+  int j;
+  byte bit;
+  byte[] $stack18;
+  penalty=0;
+ if (isHorizontal==0) goto label0;
+ iLimit = matrix.getHeight();
+ goto label1;
+ label0:iLimit = matrix.getWidth();
+ label1:if (isHorizontal==0) goto label2;
+ jLimit = matrix.getWidth();
+ goto label3;
+ label2:jLimit = matrix.getHeight();
+ label3:array = matrix.getArray();
+ i=0;
+ label4:if (i>=iLimit) goto label5;
+ numSameBitCells=0;
+ prevBit=-1;
+ j=0;
+ label6:if (j>=jLimit) goto label7;
+ if (isHorizontal==0) goto label8;
+ $stack18=array[i];
+ bit=$stack18[j];
+ goto label9;
+ label8:$stack18=array[j];
+ bit=$stack18[i];
+ label9:if (bit!=prevBit) goto label10;
+ numSameBitCells=(numSameBitCells+1);
+ goto label11;
+ label10:if (numSameBitCells<5) goto label12;
+ numSameBitCells=(numSameBitCells-5);
+ numSameBitCells=(3+numSameBitCells);
+ penalty=(penalty+numSameBitCells);
+ label12:numSameBitCells=1;
+ prevBit=bit;
+ label11:j=(j+1);
+ goto label6;
+ label7:if (numSameBitCells<5) goto label13;
+ j=(numSameBitCells-5);
+ j=(3+j);
+ penalty=(penalty+j);
+ label13:i=(i+1);
+ goto label4;
+ label5:return  penalty;
+ } 
+

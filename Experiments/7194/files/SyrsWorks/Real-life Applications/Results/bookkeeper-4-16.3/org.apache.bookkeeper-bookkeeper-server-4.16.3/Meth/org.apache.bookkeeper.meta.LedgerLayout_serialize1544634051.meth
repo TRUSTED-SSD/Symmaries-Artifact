@@ -1,0 +1,31 @@
+byte[] org.apache.bookkeeper.meta.LedgerLayout:serialize()
+{
+java.lang.String s;
+  java.lang.StringBuilder $stack2;
+  int $stack3;
+  org.slf4j.Logger $stack12;
+  boolean $stack13;
+  java.nio.charset.Charset $stack14;
+  byte[] $stack15;
+  $stack2=new java.lang.StringBuilder;
+ $stack2#java.lang.StringBuilder();
+ $stack3=this.layoutFormatVersion;
+ $stack2 = $stack2.append($stack3);
+ $stack2 = $stack2.append("\n");
+ s=this.managerFactoryClass;
+ $stack2 = $stack2.append(s);
+ $stack2 = $stack2.append(":");
+ $stack3=this.managerVersion;
+ $stack2 = $stack2.append($stack3);
+ s = $stack2.toString();
+ $stack12=org.apache.bookkeeper.meta.LedgerLayout.log;
+ $stack13 = $stack12.isDebugEnabled();
+ if ($stack13==0) goto label0;
+ $stack12=org.apache.bookkeeper.meta.LedgerLayout.log;
+ dummyClass.lowSink("Serialized layout info: {}");
+$stack12.debug("Serialized layout info: {}",(java.lang.Object)s);
+ label0:$stack14=java.nio.charset.StandardCharsets.UTF_8;
+ $stack15 = s.getBytes($stack14);
+ return  $stack15;
+ } 
+

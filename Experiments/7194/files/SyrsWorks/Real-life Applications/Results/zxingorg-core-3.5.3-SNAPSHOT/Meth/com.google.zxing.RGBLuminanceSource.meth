@@ -1,0 +1,34 @@
+com.google.zxing.RGBLuminanceSource(int width,int height,int[] pixels)
+{
+int pixel;
+  int r;
+  int g2;
+  byte[] $stack10;
+  byte $stack16;
+  this#com.google.zxing.LuminanceSource(width,height);
+ this.dataWidth=width;
+ this.dataHeight=height;
+ this.left=0;
+ this.top=0;
+ width=(width * height);
+ $stack10=new byte[width];
+ this.luminances=$stack10;
+ height=0;
+ label0:if (height>=width) goto label1;
+ pixel=pixels[height];
+ r=(pixel>>16);
+ r=(r & 255);
+ g2=(pixel>>7);
+ g2=(g2 & 510);
+ pixel=(pixel & 255);
+ $stack10=this.luminances;
+ r=(r+g2);
+ pixel=(r+pixel);
+ pixel=(pixel/4);
+ $stack16=(byte) pixel;
+ $stack10[height]=$stack16;
+ height=(height+1);
+ goto label0;
+ label1:return;
+ } 
+

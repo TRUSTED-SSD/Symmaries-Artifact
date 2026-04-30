@@ -1,0 +1,31 @@
+digraph G {
+  node [shape=box, ];
+  "pc0_js1" [label="〈$r2 = r0#java.text.AttributedString.getAttributeCheckRange (r1, i0, i1, i2), js1〉\n\
+pc ⊑ ⊥ ∧ level(i0) ⊔ level(i1) ⊔ level(i2) ⊔ level(r0) ⊔ level(r1) ⊔ obj_level(r0) ⊔ obj_level(r1) ⊑ ⊥",
+             ];
+  "pc1_js1" [label="〈return $r2, js1〉", ];
+  "pc2_js1" [label="〈sink, js1〉\n\
+obj_level(r0) ⊑ ret(obj_level(r0))' ∧ obj_level(r1) ⊑ ret(obj_level(r1))' ∧ (ret(r0.><r0)' ∨ ¬r0.><r0) ∧ (ret(r0.><r1)' ∨ ¬r0.><r1) ∧ (ret(r1.><r0)' ∨ ¬r1.><r0) ∧ (ret(r1.><r1)' ∨ ¬r1.><r1) ∧ (ϕ ≠ S1 ∨ obj_level($r2) ⊑ ret(obj_level())' ∧ pc ⊔ level($r2) ⊑ ret(level())' ∧ (ret(~r0)' ∨ ¬$r2~r0) ∧ (ret(~r1)' ∨ ¬$r2~r1) ∧ (ret(.><r0)' ∨ ¬r0.><$r2) ∧ (ret(.><r1)' ∨ ¬r1.><$r2) ∧ (ret(r0.><)' ∨ ¬$r2.><r0) ∧ (ret(r1.><)' ∨ ¬$r2.><r1))",
+             ];
+  
+  
+  "pc0_js1" -> "pc1_js1" [label="tt,\n\
+{$r2~r0 := tt,\n\
+ $r2~r1 := tt,\n\
+ $r2.><r0 := r0.><r0 ∨ r1.><r0,\n\
+ $r2.><r1 := r0.><r1 ∨ r1.><r1,\n\
+ r0.><$r2 := r0.><r0 ∨ r0.><r1,\n\
+ r0.><r0 := tt,\n\
+ r0.><r1 := tt,\n\
+ r1.><$r2 := r1.><r0 ∨ r1.><r1,\n\
+ r1.><r0 := tt,\n\
+ r1.><r1 := tt,\n\
+ level($r2) := ⊤,\n\
+ obj_level($r2) := ⊤,\n\
+ obj_level(r0) := ⊤,\n\
+ obj_level(r1) := ⊤}",
+                          ];
+  "pc1_js1" -> "pc2_js1" [label="tt,\n\
+{ϕ := S1}", ];
+  
+  }

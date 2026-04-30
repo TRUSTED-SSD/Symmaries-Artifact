@@ -1,0 +1,33 @@
+static void com.google.zxing.pdf417.decoder.PDF417ScanningDecoder:adjustCodewordCount(com.google.zxing.pdf417.decoder.DetectionResult detectionResult,com.google.zxing.pdf417.decoder.BarcodeValue[][] barcodeMatrix)
+{
+com.google.zxing.pdf417.decoder.BarcodeValue barcodeMatrix01;
+  int[] numberOfCodewords;
+  int calculatedNumberOfCodewords;
+  com.google.zxing.pdf417.decoder.BarcodeValue[] $stack5;
+  int $stack8;
+  com.google.zxing.NotFoundException $stack14;
+  $stack5=barcodeMatrix[0];
+ barcodeMatrix01=$stack5[1];
+ numberOfCodewords = barcodeMatrix01.getValue();
+ calculatedNumberOfCodewords = detectionResult.getBarcodeColumnCount();
+ $stack8 = detectionResult.getBarcodeRowCount();
+ calculatedNumberOfCodewords=(calculatedNumberOfCodewords * $stack8);
+ $stack8 = detectionResult.getBarcodeECLevel();
+ $stack8 = com.google.zxing.pdf417.decoder.PDF417ScanningDecoder.getNumberOfECCodeWords($stack8);
+ calculatedNumberOfCodewords=(calculatedNumberOfCodewords-$stack8);
+ $stack8=#numberOfCodewords;
+ if ($stack8!=0) goto label0;
+ if (calculatedNumberOfCodewords<1) goto label1;
+ if (calculatedNumberOfCodewords<=928) goto label2;
+ label1:$stack14 = com.google.zxing.NotFoundException.getNotFoundInstance();
+ throw $stack14;
+ label2:barcodeMatrix01.setValue(calculatedNumberOfCodewords);
+ goto label3;
+ label0:$stack8=numberOfCodewords[0];
+ if ($stack8==calculatedNumberOfCodewords) goto label3;
+ if (calculatedNumberOfCodewords<1) goto label3;
+ if (calculatedNumberOfCodewords>928) goto label3;
+ barcodeMatrix01.setValue(calculatedNumberOfCodewords);
+ label3:return;
+ } 
+

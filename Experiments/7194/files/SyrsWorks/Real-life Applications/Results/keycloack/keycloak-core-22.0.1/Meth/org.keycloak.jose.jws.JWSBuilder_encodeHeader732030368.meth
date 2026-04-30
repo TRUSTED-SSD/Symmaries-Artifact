@@ -1,0 +1,39 @@
+java.lang.String org.keycloak.jose.jws.JWSBuilder:encodeHeader(java.lang.String @sigAlgName)
+{
+java.lang.StringBuilder builder;
+  java.lang.StringBuilder $stack4;
+  java.nio.charset.Charset $stack12;
+  byte[] $stack13;
+  java.lang.String sigAlgName;
+sigAlgName=@sigAlgName;
+builder=new java.lang.StringBuilder;
+ builder#java.lang.StringBuilder("{");
+ $stack4 = builder.append("\"alg\":\"");
+ $stack4 = $stack4.append(sigAlgName);
+ $stack4.append("\"");
+ sigAlgName=this.type;
+ if (sigAlgName==null) goto label0;
+ $stack4 = builder.append(",\"typ\" : \"");
+ sigAlgName=this.type;
+ $stack4 = $stack4.append(sigAlgName);
+ $stack4.append("\"");
+ label0:sigAlgName=this.kid;
+ if (sigAlgName==null) goto label1;
+ $stack4 = builder.append(",\"kid\" : \"");
+ sigAlgName=this.kid;
+ $stack4 = $stack4.append(sigAlgName);
+ $stack4.append("\"");
+ label1:sigAlgName=this.contentType;
+ if (sigAlgName==null) goto label2;
+ $stack4 = builder.append(",\"cty\":\"");
+ sigAlgName=this.contentType;
+ $stack4 = $stack4.append(sigAlgName);
+ $stack4.append("\"");
+ label2:builder.append("}");
+ sigAlgName = builder.toString();
+ $stack12=java.nio.charset.StandardCharsets.UTF_8;
+ $stack13 = sigAlgName.getBytes($stack12);
+ sigAlgName = org.keycloak.common.util.Base64Url.encode($stack13);
+ return  sigAlgName;
+ } 
+

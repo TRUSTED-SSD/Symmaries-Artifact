@@ -1,0 +1,115 @@
+    protected void doStop()
+    {
+        org.apache.bookkeeper.stream.server.service.BookieService this;
+        org.apache.bookkeeper.proto.BookieServer $stack2;
+        org.apache.bookkeeper.discover.RegistrationManager $stack3;
+        org.apache.bookkeeper.meta.LedgerManager $stack4;
+        org.apache.bookkeeper.meta.LedgerManagerFactory $stack5;
+        org.apache.bookkeeper.meta.MetadataBookieDriver $stack6;
+        java.lang.Exception $stack17, $stack19;
+        org.slf4j.Logger $stack18;
+
+        this := @this: org.apache.bookkeeper.stream.server.service.BookieService;
+
+        $stack2 = this.<org.apache.bookkeeper.stream.server.service.BookieService: org.apache.bookkeeper.proto.BookieServer bs>;
+/*139*/
+
+        if null == $stack2 goto label01;
+/*139*/
+
+        $stack2 = this.<org.apache.bookkeeper.stream.server.service.BookieService: org.apache.bookkeeper.proto.BookieServer bs>;
+/*140*/
+
+        virtualinvoke $stack2.<org.apache.bookkeeper.proto.BookieServer: void shutdown()>();
+/*140*/
+
+     label01:
+        $stack3 = this.<org.apache.bookkeeper.stream.server.service.BookieService: org.apache.bookkeeper.discover.RegistrationManager rm>;
+/*142*/
+
+        if $stack3 == null goto label02;
+/*142*/
+
+        $stack3 = this.<org.apache.bookkeeper.stream.server.service.BookieService: org.apache.bookkeeper.discover.RegistrationManager rm>;
+/*143*/
+
+        interfaceinvoke $stack3.<org.apache.bookkeeper.discover.RegistrationManager: void close()>();
+/*143*/
+
+     label02:
+        $stack4 = this.<org.apache.bookkeeper.stream.server.service.BookieService: org.apache.bookkeeper.meta.LedgerManager ledgerManager>;
+/*145*/
+
+        if $stack4 == null goto label06;
+/*145*/
+
+     label03:
+        $stack4 = this.<org.apache.bookkeeper.stream.server.service.BookieService: org.apache.bookkeeper.meta.LedgerManager ledgerManager>;
+/*147*/
+
+        interfaceinvoke $stack4.<org.apache.bookkeeper.meta.LedgerManager: void close()>();
+/*147*/
+
+     label04:
+        goto label06;
+/*150*/
+
+     label05:
+        $stack19 := @caughtexception;
+/*159*/
+
+        $stack18 = <org.apache.bookkeeper.stream.server.service.BookieService: org.slf4j.Logger log>;
+/*149*/
+
+        interfaceinvoke $stack18.<org.slf4j.Logger: void error(java.lang.String,java.lang.Throwable)>("Error shutting down ledger manager", $stack19);
+/*149*/
+
+     label06:
+        $stack5 = this.<org.apache.bookkeeper.stream.server.service.BookieService: org.apache.bookkeeper.meta.LedgerManagerFactory lmFactory>;
+/*152*/
+
+        if $stack5 == null goto label10;
+/*152*/
+
+     label07:
+        $stack5 = this.<org.apache.bookkeeper.stream.server.service.BookieService: org.apache.bookkeeper.meta.LedgerManagerFactory lmFactory>;
+/*154*/
+
+        interfaceinvoke $stack5.<org.apache.bookkeeper.meta.LedgerManagerFactory: void close()>();
+/*154*/
+
+     label08:
+        goto label10;
+/*157*/
+
+     label09:
+        $stack17 := @caughtexception;
+/*142*/
+
+        $stack18 = <org.apache.bookkeeper.stream.server.service.BookieService: org.slf4j.Logger log>;
+/*156*/
+
+        interfaceinvoke $stack18.<org.slf4j.Logger: void error(java.lang.String,java.lang.Throwable)>("Error shutting down ledger manager factory", $stack17);
+/*156*/
+
+     label10:
+        $stack6 = this.<org.apache.bookkeeper.stream.server.service.BookieService: org.apache.bookkeeper.meta.MetadataBookieDriver metadataDriver>;
+/*159*/
+
+        if null == $stack6 goto label11;
+/*159*/
+
+        $stack6 = this.<org.apache.bookkeeper.stream.server.service.BookieService: org.apache.bookkeeper.meta.MetadataBookieDriver metadataDriver>;
+/*160*/
+
+        interfaceinvoke $stack6.<org.apache.bookkeeper.meta.MetadataBookieDriver: void close()>();
+/*160*/
+
+     label11:
+        return;
+/*162*/
+
+        catch java.lang.Exception from label03 to label04 with label05;
+        catch java.lang.Exception from label07 to label08 with label09;
+    }
+

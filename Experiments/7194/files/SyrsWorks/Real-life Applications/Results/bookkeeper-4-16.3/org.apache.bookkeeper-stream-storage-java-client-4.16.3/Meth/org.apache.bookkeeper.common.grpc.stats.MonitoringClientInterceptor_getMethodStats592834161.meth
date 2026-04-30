@@ -1,0 +1,27 @@
+org.apache.bookkeeper.common.grpc.stats.ClientStats org.apache.bookkeeper.common.grpc.stats.MonitoringClientInterceptor:getMethodStats(io.grpc.MethodDescriptor method)
+{
+org.apache.bookkeeper.common.grpc.stats.ClientStats stats;
+  org.apache.bookkeeper.common.grpc.stats.ClientStats oldStats;
+  java.util.concurrent.ConcurrentMap $stack5;
+  java.lang.String $stack6;
+  java.lang.Object $stack7;
+  org.apache.bookkeeper.stats.StatsLogger $stack8;
+  org.apache.bookkeeper.common.grpc.stats.ClientStats$Factory $stack9;
+  $stack5=this.methods;
+ $stack6 = method.getFullMethodName();
+ $stack7 = $stack5.get((java.lang.Object)$stack6);
+ stats=(org.apache.bookkeeper.common.grpc.stats.ClientStats) $stack7;
+ if (null==stats) goto label0;
+ return  stats;
+ label0:$stack9=this.statsFactory;
+ $stack8=this.statsLogger;
+ stats = $stack9.createMetricsForMethod(method,$stack8);
+ $stack5=this.methods;
+ $stack6 = method.getFullMethodName();
+ $stack7 = $stack5.putIfAbsent((java.lang.Object)$stack6,(java.lang.Object)stats);
+ oldStats=(org.apache.bookkeeper.common.grpc.stats.ClientStats) $stack7;
+ if (null==oldStats) goto label1;
+ return  oldStats;
+ label1:return  stats;
+ } 
+

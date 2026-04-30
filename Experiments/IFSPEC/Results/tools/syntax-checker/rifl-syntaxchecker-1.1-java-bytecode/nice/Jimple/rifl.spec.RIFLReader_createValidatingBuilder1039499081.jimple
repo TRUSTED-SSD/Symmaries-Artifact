@@ -1,0 +1,63 @@
+    private static javax.xml.parsers.DocumentBuilder createValidatingBuilder(javax.xml.parsers.DocumentBuilderFactory)
+    {
+        javax.xml.parsers.DocumentBuilderFactory factory;
+        javax.xml.parsers.DocumentBuilder builder;
+        javax.xml.parsers.ParserConfigurationException e;
+        java.lang.String $stack5;
+        boolean $stack6;
+        java.lang.RuntimeException $stack7;
+
+        factory := @parameter0: javax.xml.parsers.DocumentBuilderFactory;
+
+        virtualinvoke factory.<javax.xml.parsers.DocumentBuilderFactory: void setValidating(boolean)>(1);
+/*408*/
+
+        virtualinvoke factory.<javax.xml.parsers.DocumentBuilderFactory: void setNamespaceAware(boolean)>(1);
+/*409*/
+
+     label1:
+        builder = virtualinvoke factory.<javax.xml.parsers.DocumentBuilderFactory: javax.xml.parsers.DocumentBuilder newDocumentBuilder()>();
+/*413*/
+/*413*/
+
+     label2:
+        goto label5;
+/*414*/
+
+     label3:
+        e := @caughtexception;
+/*422*/
+
+        $stack5 = virtualinvoke e.<javax.xml.parsers.ParserConfigurationException: java.lang.String getMessage()>();
+/*415*/
+
+        $stack6 = virtualinvoke $stack5.<java.lang.String: boolean equals(java.lang.Object)>("No validating DocumentBuilder implementation available");
+/*415*/
+
+        if $stack6 == 0 goto label4;
+/*415*/
+
+        builder = staticinvoke <rifl.spec.RIFLReader: javax.xml.parsers.DocumentBuilder createNonValidatingBuilder(javax.xml.parsers.DocumentBuilderFactory)>(factory);
+/*416*/
+/*416*/
+
+        goto label5;
+/*417*/
+
+     label4:
+        $stack7 = new java.lang.RuntimeException;
+/*418*/
+
+        specialinvoke $stack7.<java.lang.RuntimeException: void <init>(java.lang.Throwable)>(e);
+/*418*/
+
+        throw $stack7;
+/*418*/
+
+     label5:
+        return builder;
+/*422*/
+
+        catch javax.xml.parsers.ParserConfigurationException from label1 to label2 with label3;
+    }
+

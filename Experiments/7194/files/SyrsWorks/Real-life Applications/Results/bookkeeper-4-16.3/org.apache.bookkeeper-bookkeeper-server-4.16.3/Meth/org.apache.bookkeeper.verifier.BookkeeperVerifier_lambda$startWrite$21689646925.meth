@@ -1,0 +1,36 @@
+void org.apache.bookkeeper.verifier.BookkeeperVerifier:lambda$startWrite$2(long newID,org.apache.bookkeeper.verifier.BookkeeperVerifier$LedgerInfo ledger,java.lang.Integer rc)
+{
+org.apache.bookkeeper.verifier.BookkeeperVerifier l5;
+  java.lang.Throwable l6;
+  int $stack8;
+  java.lang.Object[] $stack10;
+  java.io.PrintStream $stack11;
+  java.lang.Long $stack14;
+  java.util.Set $stack16;
+  l5=this;
+ monitorenter this;
+ label0:$stack8 = rc.intValue();
+ this#org.apache.bookkeeper.verifier.BookkeeperVerifier:checkReturn(newID,$stack8);
+ $stack11=java.lang.System.out;
+ $stack10=new java.lang.Object[1];
+ $stack14 = java.lang.Long.valueOf(newID);
+ $stack10[0]=$stack14;
+ $stack11.format("Created new ledger %d%n",$stack10);
+ $stack16=this.openingLedgers;
+ $stack16.remove((java.lang.Object)ledger);
+ $stack16=this.openLedgers;
+ $stack16.add((java.lang.Object)ledger);
+ $stack8=this.outstandingWriteCount;
+ $stack8=($stack8-1);
+ this.outstandingWriteCount=$stack8;
+ this.notifyAll();
+ monitorexit this;
+ label1:goto label2;
+ label3:l6 = catch;
+ monitorexit this;
+ label4:throw l6;
+ label2:return;
+ catch java.lang.Throwable: label0 - label1 : label3;
+catch java.lang.Throwable: label3 - label4 : label3;
+} 
+

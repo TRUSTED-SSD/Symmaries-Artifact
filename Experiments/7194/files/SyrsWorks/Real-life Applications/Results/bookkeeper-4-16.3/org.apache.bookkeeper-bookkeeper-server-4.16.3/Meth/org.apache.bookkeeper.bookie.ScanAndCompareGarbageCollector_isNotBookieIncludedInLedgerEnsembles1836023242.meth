@@ -1,0 +1,32 @@
+boolean org.apache.bookkeeper.bookie.ScanAndCompareGarbageCollector:isNotBookieIncludedInLedgerEnsembles(org.apache.bookkeeper.versioning.Versioned metadata)
+{
+java.util.NavigableMap ensembles;
+  java.util.Iterator l3;
+  java.util.List ensemble;
+  java.lang.Object $stack5;
+  org.apache.bookkeeper.client.api.LedgerMetadata $stack6;
+  boolean $stack7;
+  java.util.Collection $stack11;
+  org.apache.bookkeeper.net.BookieId $stack15;
+  $stack5 = metadata.getValue();
+ $stack6=(org.apache.bookkeeper.client.api.LedgerMetadata) $stack5;
+ $stack7 = $stack6.isClosed();
+ if ($stack7!=0) goto label0;
+ return  0;
+ label0:$stack5 = metadata.getValue();
+ $stack6=(org.apache.bookkeeper.client.api.LedgerMetadata) $stack5;
+ ensembles = $stack6.getAllEnsembles();
+ $stack11 = ensembles.values();
+ l3 = $stack11.iterator();
+ label1:$stack7 = l3.hasNext();
+ if ($stack7==0) goto label2;
+ $stack5 = l3.next();
+ ensemble=(java.util.List) $stack5;
+ $stack15=this.selfBookieAddress;
+ $stack7 = ensemble.contains((java.lang.Object)$stack15);
+ if ($stack7==0) goto label3;
+ return  0;
+ label3:goto label1;
+ label2:return  1;
+ } 
+

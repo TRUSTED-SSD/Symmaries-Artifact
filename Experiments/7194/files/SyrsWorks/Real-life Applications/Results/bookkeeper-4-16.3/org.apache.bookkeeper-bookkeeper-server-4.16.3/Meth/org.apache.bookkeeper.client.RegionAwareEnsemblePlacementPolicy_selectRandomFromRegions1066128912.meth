@@ -1,0 +1,29 @@
+java.util.List org.apache.bookkeeper.client.RegionAwareEnsemblePlacementPolicy:selectRandomFromRegions(java.util.Set availableRegions,int numBookies,java.util.Set excludeBookies,org.apache.bookkeeper.client.ITopologyAwareEnsemblePlacementPolicy$Predicate predicate,org.apache.bookkeeper.client.ITopologyAwareEnsemblePlacementPolicy$Ensemble ensemble)
+{
+java.util.ArrayList availableBookies;
+  java.util.Iterator l7;
+  org.apache.bookkeeper.net.BookieNode bookieNode;
+  java.util.Map $stack10;
+  java.util.Collection $stack11;
+  boolean $stack13;
+  java.util.List $stack14;
+  java.lang.Object $stack15;
+  java.lang.String $stack16;
+  availableBookies=new java.util.ArrayList;
+ availableBookies#java.util.ArrayList();
+ $stack10=this.knownBookies;
+ $stack11 = $stack10.values();
+ l7 = $stack11.iterator();
+ label0:$stack13 = l7.hasNext();
+ if ($stack13==0) goto label1;
+ $stack15 = l7.next();
+ bookieNode=(org.apache.bookkeeper.net.BookieNode) $stack15;
+ $stack16 = this.getLocalRegion(bookieNode);
+ $stack13 = availableRegions.contains((java.lang.Object)$stack16);
+ if ($stack13==0) goto label2;
+ availableBookies.add((java.lang.Object)bookieNode);
+ label2:goto label0;
+ label1:$stack14 = this.selectRandomInternal((java.util.List)availableBookies,numBookies,excludeBookies,predicate,ensemble);
+ return  $stack14;
+ } 
+

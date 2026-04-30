@@ -1,0 +1,21 @@
+org.apache.rocketmq.remoting.protocol.body.ConsumeMessageDirectlyResult org.apache.rocketmq.client.impl.factory.MQClientInstance:consumeMessageDirectly(org.apache.rocketmq.common.message.MessageExt msg,java.lang.String consumerGroup,java.lang.String brokerName)
+{
+org.apache.rocketmq.client.impl.consumer.MQConsumerInner mqConsumerInner;
+  org.apache.rocketmq.client.impl.consumer.DefaultMQPushConsumerImpl consumer;
+  java.util.concurrent.ConcurrentMap $stack6;
+  java.lang.Object $stack7;
+  boolean $stack8;
+  org.apache.rocketmq.client.impl.consumer.ConsumeMessageService $stack9;
+  org.apache.rocketmq.remoting.protocol.body.ConsumeMessageDirectlyResult $stack10;
+  $stack6=this.consumerTable;
+ $stack7 = $stack6.get((java.lang.Object)consumerGroup);
+ mqConsumerInner=(org.apache.rocketmq.client.impl.consumer.MQConsumerInner) $stack7;
+ $stack8=mqConsumerInner instanceof org.apache.rocketmq.client.impl.consumer.DefaultMQPushConsumerImpl;
+ if ($stack8==0) goto label0;
+ consumer=(org.apache.rocketmq.client.impl.consumer.DefaultMQPushConsumerImpl) mqConsumerInner;
+ $stack9 = consumer.getConsumeMessageService();
+ $stack10 = $stack9.consumeMessageDirectly(msg,brokerName);
+ return  $stack10;
+ label0:return  null;
+ } 
+

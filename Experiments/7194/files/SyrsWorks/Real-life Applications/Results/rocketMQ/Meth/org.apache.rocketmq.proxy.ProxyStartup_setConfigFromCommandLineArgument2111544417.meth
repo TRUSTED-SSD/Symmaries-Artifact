@@ -1,0 +1,26 @@
+static void org.apache.rocketmq.proxy.ProxyStartup:setConfigFromCommandLineArgument(org.apache.rocketmq.proxy.CommandLineArgument commandLineArgument)
+{
+java.lang.String $stack1;
+  boolean $stack2;
+  org.apache.rocketmq.proxy.config.ProxyConfig $stack7;
+  $stack1 = commandLineArgument.getNamesrvAddr();
+ $stack2 = org.apache.commons.lang3.StringUtils.isNotBlank((java.lang.CharSequence)$stack1);
+ if ($stack2==0) goto label0;
+ $stack7 = org.apache.rocketmq.proxy.config.ConfigurationManager.getProxyConfig();
+ $stack1 = commandLineArgument.getNamesrvAddr();
+ $stack7.setNamesrvAddr($stack1);
+ label0:$stack1 = commandLineArgument.getBrokerConfigPath();
+ $stack2 = org.apache.commons.lang3.StringUtils.isNotBlank((java.lang.CharSequence)$stack1);
+ if ($stack2==0) goto label1;
+ $stack7 = org.apache.rocketmq.proxy.config.ConfigurationManager.getProxyConfig();
+ $stack1 = commandLineArgument.getBrokerConfigPath();
+ $stack7.setBrokerConfigPath($stack1);
+ label1:$stack1 = commandLineArgument.getProxyMode();
+ $stack2 = org.apache.commons.lang3.StringUtils.isNotBlank((java.lang.CharSequence)$stack1);
+ if ($stack2==0) goto label2;
+ $stack7 = org.apache.rocketmq.proxy.config.ConfigurationManager.getProxyConfig();
+ $stack1 = commandLineArgument.getProxyMode();
+ $stack7.setProxyMode($stack1);
+ label2:return;
+ } 
+

@@ -1,0 +1,44 @@
+org.apache.rocketmq.client.impl.consumer.ConsumeMessagePopConcurrentlyService(org.apache.rocketmq.client.impl.consumer.DefaultMQPushConsumerImpl @defaultMQPushConsumerImpl,org.apache.rocketmq.client.consumer.listener.MessageListenerConcurrently messageListener)
+{
+org.apache.rocketmq.client.consumer.DefaultMQPushConsumer $stack4;
+  java.lang.String $stack6;
+  java.util.concurrent.LinkedBlockingQueue $stack7;
+  java.util.concurrent.ThreadPoolExecutor $stack8;
+  int $stack10;
+  int $stack12;
+  org.apache.rocketmq.common.ThreadFactoryImpl $stack13;
+  java.util.concurrent.TimeUnit $stack15;
+  java.util.concurrent.BlockingQueue $stack16;
+  java.util.concurrent.ScheduledExecutorService $stack18;
+  org.apache.rocketmq.client.impl.consumer.DefaultMQPushConsumerImpl defaultMQPushConsumerImpl;
+defaultMQPushConsumerImpl=@defaultMQPushConsumerImpl;
+this#java.lang.Object();
+ this.defaultMQPushConsumerImpl=defaultMQPushConsumerImpl;
+ this.messageListener=messageListener;
+ defaultMQPushConsumerImpl=this.defaultMQPushConsumerImpl;
+ $stack4 = defaultMQPushConsumerImpl.getDefaultMQPushConsumer();
+ this.defaultMQPushConsumer=$stack4;
+ $stack4=this.defaultMQPushConsumer;
+ $stack6 = $stack4.getConsumerGroup();
+ this.consumerGroup=$stack6;
+ $stack7=new java.util.concurrent.LinkedBlockingQueue;
+ $stack7#java.util.concurrent.LinkedBlockingQueue();
+ this.consumeRequestQueue=$stack7;
+ $stack8=new java.util.concurrent.ThreadPoolExecutor;
+ $stack4=this.defaultMQPushConsumer;
+ $stack10 = $stack4.getConsumeThreadMin();
+ $stack4=this.defaultMQPushConsumer;
+ $stack12 = $stack4.getConsumeThreadMax();
+ $stack15=java.util.concurrent.TimeUnit.MILLISECONDS;
+ $stack16=this.consumeRequestQueue;
+ $stack13=new org.apache.rocketmq.common.ThreadFactoryImpl;
+ $stack13#org.apache.rocketmq.common.ThreadFactoryImpl("ConsumeMessageThread_");
+ $stack8#java.util.concurrent.ThreadPoolExecutor($stack10,$stack12,60000L,$stack15,$stack16,(java.util.concurrent.ThreadFactory)$stack13);
+ this.consumeExecutor=$stack8;
+ $stack13=new org.apache.rocketmq.common.ThreadFactoryImpl;
+ $stack13#org.apache.rocketmq.common.ThreadFactoryImpl("ConsumeMessageScheduledThread_");
+ $stack18 = java.util.concurrent.Executors.newSingleThreadScheduledExecutor((java.util.concurrent.ThreadFactory)$stack13);
+ this.scheduledExecutorService=$stack18;
+ return;
+ } 
+

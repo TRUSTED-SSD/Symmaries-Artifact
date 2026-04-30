@@ -1,0 +1,29 @@
+static int com.google.zxing.oned.UPCEANReader:decodeDigit(com.google.zxing.common.BitArray row,int[] counters,int rowOffset,int[][] patterns)
+{
+float bestVariance;
+  int max;
+  int i;
+  int[] pattern;
+  float variance;
+  com.google.zxing.NotFoundException $stack10;
+  byte $stack12;
+  com.google.zxing.oned.OneDReader.recordPattern(row,rowOffset,counters);
+ bestVariance=0.48F;
+ rowOffset=-1;
+ max=#patterns;
+ i=0;
+ label0:if (i>=max) goto label1;
+ pattern=patterns[i];
+ variance = com.google.zxing.oned.OneDReader.patternMatchVariance(counters,pattern,0.7F);
+ $stack12=(variance cmpg bestVariance);
+ if ($stack12>=0) goto label2;
+ bestVariance=variance;
+ rowOffset=i;
+ label2:i=(i+1);
+ goto label0;
+ label1:if (rowOffset<0) goto label3;
+ return  rowOffset;
+ label3:$stack10 = com.google.zxing.NotFoundException.getNotFoundInstance();
+ throw $stack10;
+ } 
+

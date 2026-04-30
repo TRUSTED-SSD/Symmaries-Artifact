@@ -1,0 +1,35 @@
+org.apache.bookkeeper.common.grpc.stats.ServerStats(org.apache.bookkeeper.stats.StatsLogger rootStatsLogger,boolean includeLatencyHistograms,boolean streamRequests,boolean streamResponses)
+{
+org.apache.bookkeeper.stats.Counter $stack5;
+  org.apache.bookkeeper.stats.NullStatsLogger $stack7;
+  java.util.Optional $stack11;
+  org.apache.bookkeeper.stats.OpStatsLogger $stack12;
+  this#java.lang.Object();
+ $stack5 = rootStatsLogger.getCounter("grpc_started");
+ this.rpcStarted=$stack5;
+ $stack5 = rootStatsLogger.getCounter("grpc_completed");
+ this.rpcCompleted=$stack5;
+ if (streamRequests==0) goto label0;
+ $stack5 = rootStatsLogger.getCounter("grpc_msg_received");
+ this.streamMessagesReceived=$stack5;
+ goto label1;
+ label0:$stack7=org.apache.bookkeeper.stats.NullStatsLogger.INSTANCE;
+ $stack5 = $stack7.getCounter("grpc_msg_received");
+ this.streamMessagesReceived=$stack5;
+ label1:if (streamResponses==0) goto label2;
+ $stack5 = rootStatsLogger.getCounter("grpc_msg_sent");
+ this.streamMessagesSent=$stack5;
+ goto label3;
+ label2:$stack7=org.apache.bookkeeper.stats.NullStatsLogger.INSTANCE;
+ $stack5 = $stack7.getCounter("grpc_msg_sent");
+ this.streamMessagesSent=$stack5;
+ label3:if (includeLatencyHistograms==0) goto label4;
+ $stack12 = rootStatsLogger.getOpStatsLogger("grpc_latency_micros");
+ $stack11 = java.util.Optional.of((java.lang.Object)$stack12);
+ this.completedLatencyMicros=$stack11;
+ goto label5;
+ label4:$stack11 = java.util.Optional.empty();
+ this.completedLatencyMicros=$stack11;
+ label5:return;
+ } 
+

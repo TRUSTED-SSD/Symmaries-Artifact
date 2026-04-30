@@ -1,0 +1,41 @@
+int org.apache.rocketmq.common.BrokerAddrInfo:hashCode()
+{
+int h;
+  int i;
+  java.lang.String $stack3;
+  int $stack6;
+  char $stack16;
+  h=this.hash;
+ if (h!=0) goto label0;
+ $stack3=this.clusterName;
+ i = $stack3.length();
+ $stack3=this.brokerAddr;
+ $stack6 = $stack3.length();
+ i=(i+$stack6);
+ if (i<=0) goto label0;
+ i=0;
+ label1:$stack3=this.clusterName;
+ $stack6 = $stack3.length();
+ if (i>=$stack6) goto label2;
+ h=(31 * h);
+ $stack3=this.clusterName;
+ $stack16 = $stack3.charAt(i);
+ h=(h+$stack16);
+ i=(i+1);
+ goto label1;
+ label2:h=(31 * h);
+ h=(h+95);
+ i=0;
+ label3:$stack3=this.brokerAddr;
+ $stack6 = $stack3.length();
+ if (i>=$stack6) goto label4;
+ h=(31 * h);
+ $stack3=this.brokerAddr;
+ $stack16 = $stack3.charAt(i);
+ h=(h+$stack16);
+ i=(i+1);
+ goto label3;
+ label4:this.hash=h;
+ label0:return  h;
+ } 
+

@@ -1,0 +1,28 @@
+static boolean org.apache.rocketmq.remoting.protocol.MQProtosHelper:registerBrokerToNameServer(java.lang.String nsaddr,java.lang.String brokerAddr,long timeoutMillis)
+{
+org.apache.rocketmq.remoting.protocol.header.namesrv.RegisterBrokerRequestHeader requestHeader;
+  org.apache.rocketmq.remoting.protocol.RemotingCommand request;
+  int $stack11;
+  boolean $stack12;
+  java.lang.Exception $stack13;
+  org.apache.rocketmq.logging.org.slf4j.Logger $stack14;
+  requestHeader=new org.apache.rocketmq.remoting.protocol.header.namesrv.RegisterBrokerRequestHeader;
+ requestHeader#org.apache.rocketmq.remoting.protocol.header.namesrv.RegisterBrokerRequestHeader();
+ requestHeader.setBrokerAddr(brokerAddr);
+ request = org.apache.rocketmq.remoting.protocol.RemotingCommand.createRequestCommand(103,(org.apache.rocketmq.remoting.CommandCustomHeader)requestHeader);
+ label0:request = org.apache.rocketmq.remoting.common.RemotingHelper.invokeSync(nsaddr,request,timeoutMillis);
+ if (request==null) goto label1;
+ $stack11 = request.getCode();
+ if (0!=$stack11) goto label2;
+ $stack12=1;
+ goto label3;
+ label2:$stack12=0;
+ label3:return  $stack12;
+ label1:goto label4;
+ label5:$stack13 = catch;
+ $stack14=org.apache.rocketmq.remoting.protocol.MQProtosHelper.log;
+ $stack14.error("Failed to register broker",(java.lang.Throwable)$stack13);
+ label4:return  0;
+ catch java.lang.Exception: label0 - label3 : label5;
+} 
+

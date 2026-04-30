@@ -1,0 +1,41 @@
+java.util.List org.apache.rocketmq.store.MappedFileQueue:range(long from,long to)
+{
+java.lang.Object[] mfs;
+  java.util.ArrayList result;
+  int l8;
+  int l9;
+  java.lang.Object mf;
+  org.apache.rocketmq.store.logfile.MappedFile mappedFile;
+  long $stack14;
+  int $stack15;
+  long $stack16;
+  byte $stack18;
+  mfs = this.copyMappedFiles(0);
+ if (null!=mfs) goto label0;
+ result=new java.util.ArrayList;
+ result#java.util.ArrayList();
+ return  result;
+ label0:result=new java.util.ArrayList;
+ result#java.util.ArrayList();
+ l8=#mfs;
+ l9=0;
+ label1:if (l9>=l8) goto label2;
+ mf=mfs[l9];
+ mappedFile=(org.apache.rocketmq.store.logfile.MappedFile) mf;
+ $stack14 = mappedFile.getFileFromOffset();
+ $stack15 = mappedFile.getFileSize();
+ $stack16=(long) $stack15;
+ $stack14=($stack14+$stack16);
+ $stack18=($stack14 cmp from);
+ if ($stack18>0) goto label3;
+ goto label4;
+ label3:$stack14 = mappedFile.getFileFromOffset();
+ $stack18=(to cmp $stack14);
+ if ($stack18>0) goto label5;
+ goto label2;
+ label5:result.add((java.lang.Object)mappedFile);
+ label4:l9=(l9+1);
+ goto label1;
+ label2:return  result;
+ } 
+

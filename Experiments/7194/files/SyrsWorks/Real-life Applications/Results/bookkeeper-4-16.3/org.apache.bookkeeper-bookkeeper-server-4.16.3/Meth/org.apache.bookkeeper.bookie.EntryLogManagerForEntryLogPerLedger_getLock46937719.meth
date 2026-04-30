@@ -1,0 +1,32 @@
+java.util.concurrent.locks.Lock org.apache.bookkeeper.bookie.EntryLogManagerForEntryLogPerLedger:getLock(long ledgerId)
+{
+java.lang.Exception e;
+  com.google.common.cache.LoadingCache $stack4;
+  java.lang.Long $stack5;
+  java.lang.Object $stack6;
+  org.apache.bookkeeper.bookie.EntryLogManagerForEntryLogPerLedger$EntryLogAndLockTuple $stack7;
+  java.util.concurrent.locks.Lock $stack8;
+  java.lang.StringBuilder $stack10;
+  org.slf4j.Logger $stack11;
+  java.lang.String $stack14;
+  java.io.IOException $stack15;
+  label0:$stack4=this.ledgerIdEntryLogMap;
+ $stack5 = java.lang.Long.valueOf(ledgerId);
+ $stack6 = $stack4.get((java.lang.Object)$stack5);
+ $stack7=(org.apache.bookkeeper.bookie.EntryLogManagerForEntryLogPerLedger$EntryLogAndLockTuple) $stack6;
+ $stack8 = org.apache.bookkeeper.bookie.EntryLogManagerForEntryLogPerLedger$EntryLogAndLockTuple.access$1000($stack7);
+ label1:return  $stack8;
+ label2:e = catch;
+ $stack11=org.apache.bookkeeper.bookie.EntryLogManagerForEntryLogPerLedger.log;
+ $stack10=new java.lang.StringBuilder;
+ $stack10#java.lang.StringBuilder();
+ $stack10 = $stack10.append("Received unexpected exception while fetching lock to acquire for ledger: ");
+ $stack10 = $stack10.append(ledgerId);
+ $stack14 = $stack10.toString();
+ $stack11.error($stack14,(java.lang.Throwable)e);
+ $stack15=new java.io.IOException;
+ $stack15#java.io.IOException("Received unexpected exception while fetching lock to acquire",(java.lang.Throwable)e);
+ throw $stack15;
+ catch java.lang.Exception: label0 - label1 : label2;
+} 
+

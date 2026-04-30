@@ -1,0 +1,48 @@
+static void org.apache.bookkeeper.meta.MetadataDrivers:loadInitialClientDrivers()
+{
+java.util.HashSet driverList;
+  java.lang.String driversStr;
+  java.lang.Object driversArray;
+  org.apache.bookkeeper.meta.MetadataClientDriver driver;
+  boolean $stack7;
+  java.lang.Object $stack11;
+  java.lang.Class $stack14;
+  java.util.concurrent.ConcurrentMap $stack15;
+  java.lang.String $stack16;
+  java.lang.Exception $stack23;
+  org.slf4j.Logger $stack24;
+  org.apache.bookkeeper.meta.MetadataDrivers$MetadataClientDriverInfo tmp$1346958244;
+  java.lang.Object[] tmp$108494091;
+  java.util.Iterator tmp$1041237433;
+  driverList = com.google.common.collect.Sets.newHashSet();
+ driverList.add((java.lang.Object)"org.apache.bookkeeper.meta.zk.ZKMetadataClientDriver");
+ driversStr = java.lang.System.getProperty("bookkeeper.metadata.client.drivers");
+ if (null==driversStr) goto label0;
+ driversArray = org.apache.commons.lang3.StringUtils.split(driversStr,(char)58);
+ tmp$108494091=(java.lang.Object[]) driversArray;
+ java.util.Collections.addAll((java.util.Collection)driverList,tmp$108494091);
+ label0:driversArray = driverList.iterator();
+ label1:tmp$1041237433=(java.util.Iterator) driversArray;
+ $stack7 = tmp$1041237433.hasNext();
+ if ($stack7==0) goto label2;
+ tmp$1041237433=(java.util.Iterator) driversArray;
+ $stack11 = tmp$1041237433.next();
+ driversStr=(java.lang.String) $stack11;
+ label3:$stack11 = org.apache.bookkeeper.common.util.ReflectionUtils.newInstance(driversStr,org.apache.bookkeeper.meta.MetadataClientDriver);
+ driver=(org.apache.bookkeeper.meta.MetadataClientDriver) $stack11;
+ tmp$1346958244=new org.apache.bookkeeper.meta.MetadataDrivers$MetadataClientDriverInfo;
+ $stack14 = driver.getClass();
+ tmp$1346958244#org.apache.bookkeeper.meta.MetadataDrivers$MetadataClientDriverInfo($stack14);
+ $stack15=org.apache.bookkeeper.meta.MetadataDrivers.clientDrivers;
+ $stack16 = driver.getScheme();
+ $stack16 = $stack16.toLowerCase();
+ $stack15.put((java.lang.Object)$stack16,(java.lang.Object)tmp$1346958244);
+ label4:goto label5;
+ label6:$stack23 = catch;
+ $stack24=org.apache.bookkeeper.meta.MetadataDrivers.log;
+ $stack24.warn("Failed to load metadata client driver {}",(java.lang.Object)driversStr,(java.lang.Object)$stack23);
+ label5:goto label1;
+ label2:return;
+ catch java.lang.Exception: label3 - label4 : label6;
+} 
+

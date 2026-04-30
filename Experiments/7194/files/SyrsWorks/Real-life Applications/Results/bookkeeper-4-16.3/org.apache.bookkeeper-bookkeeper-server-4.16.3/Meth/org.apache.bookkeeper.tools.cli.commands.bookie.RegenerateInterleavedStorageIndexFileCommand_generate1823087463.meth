@@ -1,0 +1,53 @@
+boolean org.apache.bookkeeper.tools.cli.commands.bookie.RegenerateInterleavedStorageIndexFileCommand:generate(org.apache.bookkeeper.conf.ServerConfiguration conf,org.apache.bookkeeper.tools.cli.commands.bookie.RegenerateInterleavedStorageIndexFileCommand$RISIFFlags flags)
+{
+byte[] password;
+  java.util.Set ledgerIds;
+  java.lang.String $stack7;
+  boolean $stack8;
+  org.slf4j.Logger $stack11;
+  java.util.Base64$Decoder $stack12;
+  java.util.List $stack15;
+  java.util.stream.Stream $stack16;
+  java.util.stream.Collector $stack17;
+  java.lang.Object $stack18;
+  org.apache.bookkeeper.conf.ServerConfiguration $stack20;
+  org.apache.bookkeeper.bookie.InterleavedStorageRegenerateIndexOp $stack21;
+  java.nio.charset.Charset $stack25;
+  this#org.apache.bookkeeper.tools.cli.commands.bookie.RegenerateInterleavedStorageIndexFileCommand:validateFlags(flags);
+ $stack7 = org.apache.bookkeeper.tools.cli.commands.bookie.RegenerateInterleavedStorageIndexFileCommand$RISIFFlags.access$000(flags);
+ $stack8 = $stack7.equals((java.lang.Object)"");
+ if ($stack8!=0) goto label0;
+ $stack7 = org.apache.bookkeeper.tools.cli.commands.bookie.RegenerateInterleavedStorageIndexFileCommand$RISIFFlags.access$000(flags);
+ $stack25=java.nio.charset.StandardCharsets.UTF_8;
+ password = $stack7.getBytes($stack25);
+ goto label1;
+ label0:$stack7 = org.apache.bookkeeper.tools.cli.commands.bookie.RegenerateInterleavedStorageIndexFileCommand$RISIFFlags.access$100(flags);
+ $stack8 = $stack7.equals((java.lang.Object)"");
+ if ($stack8!=0) goto label2;
+ $stack12 = java.util.Base64.getDecoder();
+ $stack7 = org.apache.bookkeeper.tools.cli.commands.bookie.RegenerateInterleavedStorageIndexFileCommand$RISIFFlags.access$100(flags);
+ password = $stack12.decode($stack7);
+ goto label1;
+ label2:$stack11=org.apache.bookkeeper.tools.cli.commands.bookie.RegenerateInterleavedStorageIndexFileCommand.LOG;
+ $stack11.error("The password must be specified to regenerate the index file");
+ return  0;
+ label1:$stack15 = org.apache.bookkeeper.tools.cli.commands.bookie.RegenerateInterleavedStorageIndexFileCommand$RISIFFlags.access$200(flags);
+ $stack16 = $stack15.stream();
+ $stack17 = java.util.stream.Collectors.toSet();
+ $stack18 = $stack16.collect($stack17);
+ ledgerIds=(java.util.Set) $stack18;
+ $stack11=org.apache.bookkeeper.tools.cli.commands.bookie.RegenerateInterleavedStorageIndexFileCommand.LOG;
+ dummyClass.lowSink("=== Rebuilding index file for {} ===");
+$stack11.info("=== Rebuilding index file for {} ===",(java.lang.Object)ledgerIds);
+ $stack20=new org.apache.bookkeeper.conf.ServerConfiguration;
+ $stack20#org.apache.bookkeeper.conf.ServerConfiguration((org.apache.bookkeeper.conf.AbstractConfiguration)conf);
+ $stack21=new org.apache.bookkeeper.bookie.InterleavedStorageRegenerateIndexOp;
+ $stack21#org.apache.bookkeeper.bookie.InterleavedStorageRegenerateIndexOp($stack20,ledgerIds,password);
+ $stack8 = org.apache.bookkeeper.tools.cli.commands.bookie.RegenerateInterleavedStorageIndexFileCommand$RISIFFlags.access$300(flags);
+ $stack21#org.apache.bookkeeper.bookie.InterleavedStorageRegenerateIndexOp($stack8);
+ $stack11=org.apache.bookkeeper.tools.cli.commands.bookie.RegenerateInterleavedStorageIndexFileCommand.LOG;
+ dummyClass.lowSink("-- Done rebuilding index file for {} --");
+$stack11.info("-- Done rebuilding index file for {} --",(java.lang.Object)ledgerIds);
+ return  1;
+ } 
+

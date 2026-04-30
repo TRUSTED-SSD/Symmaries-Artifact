@@ -1,0 +1,23 @@
+int org.apache.rocketmq.remoting.protocol.body.ConsumerConnection:computeMinVersion()
+{
+int minVersion;
+  java.util.Iterator l2;
+  org.apache.rocketmq.remoting.protocol.body.Connection c;
+  java.util.HashSet $stack4;
+  boolean $stack6;
+  java.lang.Object $stack7;
+  int $stack8;
+  minVersion=2147483647;
+ $stack4=this.connectionSet;
+ l2 = $stack4.iterator();
+ label0:$stack6 = l2.hasNext();
+ if ($stack6==0) goto label1;
+ $stack7 = l2.next();
+ c=(org.apache.rocketmq.remoting.protocol.body.Connection) $stack7;
+ $stack8 = c.getVersion();
+ if ($stack8>=minVersion) goto label2;
+ minVersion = c.getVersion();
+ label2:goto label0;
+ label1:return  minVersion;
+ } 
+

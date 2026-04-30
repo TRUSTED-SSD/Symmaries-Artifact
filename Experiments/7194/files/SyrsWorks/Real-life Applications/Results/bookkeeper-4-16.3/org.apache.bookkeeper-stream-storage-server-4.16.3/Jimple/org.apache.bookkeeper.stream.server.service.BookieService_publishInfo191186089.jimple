@@ -1,0 +1,81 @@
+    public void publishInfo(org.apache.bookkeeper.common.component.ComponentInfoPublisher)
+    {
+        org.apache.bookkeeper.stream.server.service.BookieService this;
+        org.apache.bookkeeper.common.component.ComponentInfoPublisher componentInfoPublisher;
+        org.apache.bookkeeper.net.BookieSocketAddress localAddress;
+        java.util.ArrayList extensions;
+        org.apache.bookkeeper.proto.BookieServer $stack5;
+        org.apache.bookkeeper.conf.ServerConfiguration $stack8;
+        java.lang.String $stack9;
+        org.apache.bookkeeper.common.component.ComponentInfoPublisher$EndpointInfo $stack10;
+        int $stack12;
+        java.net.UnknownHostException $stack22;
+        org.slf4j.Logger $stack23;
+
+        this := @this: org.apache.bookkeeper.stream.server.service.BookieService;
+
+        componentInfoPublisher := @parameter0: org.apache.bookkeeper.common.component.ComponentInfoPublisher;
+
+     label1:
+        $stack5 = this.<org.apache.bookkeeper.stream.server.service.BookieService: org.apache.bookkeeper.proto.BookieServer bs>;
+/*176*/
+
+        localAddress = virtualinvoke $stack5.<org.apache.bookkeeper.proto.BookieServer: org.apache.bookkeeper.net.BookieSocketAddress getLocalAddress()>();
+/*176*/
+/*176*/
+
+        extensions = new java.util.ArrayList;
+/*177*/
+
+        specialinvoke extensions.<java.util.ArrayList: void <init>()>();
+/*177*/
+
+        $stack8 = this.<org.apache.bookkeeper.stream.server.service.BookieService: org.apache.bookkeeper.conf.ServerConfiguration serverConf>;
+/*178*/
+
+        $stack9 = virtualinvoke $stack8.<org.apache.bookkeeper.conf.ServerConfiguration: java.lang.String getTLSProviderFactoryClass()>();
+/*178*/
+
+        if $stack9 == null goto label2;
+/*178*/
+
+        interfaceinvoke extensions.<java.util.List: boolean add(java.lang.Object)>("tls");
+/*179*/
+
+     label2:
+        $stack10 = new org.apache.bookkeeper.common.component.ComponentInfoPublisher$EndpointInfo;
+/*181*/
+
+        $stack12 = virtualinvoke localAddress.<org.apache.bookkeeper.net.BookieSocketAddress: int getPort()>();
+/*182*/
+
+        $stack9 = virtualinvoke localAddress.<org.apache.bookkeeper.net.BookieSocketAddress: java.lang.String getHostName()>();
+/*183*/
+
+        specialinvoke $stack10.<org.apache.bookkeeper.common.component.ComponentInfoPublisher$EndpointInfo: void <init>(java.lang.String,int,java.lang.String,java.lang.String,java.util.List,java.util.List)>("bookie", $stack12, $stack9, "bookie-rpc", null, extensions);
+/*183*/
+
+        virtualinvoke componentInfoPublisher.<org.apache.bookkeeper.common.component.ComponentInfoPublisher: void publishEndpoint(org.apache.bookkeeper.common.component.ComponentInfoPublisher$EndpointInfo)>($stack10);
+/*185*/
+
+     label3:
+        goto label5;
+/*189*/
+
+     label4:
+        $stack22 := @caughtexception;
+/*189*/
+
+        $stack23 = <org.apache.bookkeeper.stream.server.service.BookieService: org.slf4j.Logger log>;
+/*188*/
+
+        interfaceinvoke $stack23.<org.slf4j.Logger: void error(java.lang.String,java.lang.Throwable)>("Cannot compute local address", $stack22);
+/*188*/
+
+     label5:
+        return;
+/*190*/
+
+        catch java.net.UnknownHostException from label1 to label3 with label4;
+    }
+

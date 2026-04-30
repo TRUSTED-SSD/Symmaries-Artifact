@@ -1,0 +1,46 @@
+boolean org.keycloak.adapters.PreAuthActionsHandler:validateAction(org.keycloak.representations.adapters.action.AdminAction action)
+{
+boolean $stack2;
+  org.keycloak.adapters.KeycloakDeployment $stack4;
+  java.lang.String $stack5;
+  java.lang.String $stack6;
+  org.jboss.logging.Logger $stack8;
+  org.keycloak.adapters.spi.HttpFacade $stack9;
+  org.keycloak.adapters.spi.HttpFacade$Response $stack10;
+  java.lang.StringBuilder $stack14;
+  $stack2 = action.validate();
+ if ($stack2!=0) goto label0;
+ $stack8=org.keycloak.adapters.PreAuthActionsHandler.log;
+ $stack14=new java.lang.StringBuilder;
+ $stack14#java.lang.StringBuilder();
+ $stack14 = $stack14.append("admin request failed, not validated");
+ $stack5 = action.getAction();
+ $stack14 = $stack14.append($stack5);
+ $stack5 = $stack14.toString();
+ $stack8.warn((java.lang.Object)$stack5);
+ $stack9=this.facade;
+ $stack10 = $stack9.getResponse();
+ $stack10.sendError(400,"Not validated");
+ return  0;
+ label0:$stack2 = action.isExpired();
+ if ($stack2==0) goto label1;
+ $stack8=org.keycloak.adapters.PreAuthActionsHandler.log;
+ $stack8.warn((java.lang.Object)"admin request failed, expired token");
+ $stack9=this.facade;
+ $stack10 = $stack9.getResponse();
+ $stack10.sendError(400,"Expired token");
+ return  0;
+ label1:$stack4=this.deployment;
+ $stack5 = $stack4.getResourceName();
+ $stack6 = action.getResource();
+ $stack2 = $stack5.equals((java.lang.Object)$stack6);
+ if ($stack2!=0) goto label2;
+ $stack8=org.keycloak.adapters.PreAuthActionsHandler.log;
+ $stack8.warn((java.lang.Object)"Resource name does not match");
+ $stack9=this.facade;
+ $stack10 = $stack9.getResponse();
+ $stack10.sendError(400,"Resource name does not match");
+ return  0;
+ label2:return  1;
+ } 
+

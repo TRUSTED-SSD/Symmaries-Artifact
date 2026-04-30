@@ -1,0 +1,19 @@
+static java.util.concurrent.CompletionStage org.apache.rocketmq.tieredstore.container.TieredIndexFile:lambda$queryAsync$1(org.apache.rocketmq.tieredstore.provider.TieredFileSegment fileSegment,java.nio.ByteBuffer slotBuffer)
+{
+int indexPosition;
+  int indexSize;
+  long $stack6;
+  java.util.concurrent.CompletableFuture $stack7;
+  indexPosition = slotBuffer.getInt();
+ if (indexPosition!=-1) goto label0;
+ $stack7 = java.util.concurrent.CompletableFuture.completedFuture(null);
+ return  $stack7;
+ label0:indexSize = slotBuffer.getInt();
+ if (indexSize>0) goto label1;
+ $stack7 = java.util.concurrent.CompletableFuture.completedFuture(null);
+ return  $stack7;
+ label1:$stack6=(long) indexPosition;
+ $stack7 = fileSegment.readAsync($stack6,indexSize);
+ return  $stack7;
+ } 
+

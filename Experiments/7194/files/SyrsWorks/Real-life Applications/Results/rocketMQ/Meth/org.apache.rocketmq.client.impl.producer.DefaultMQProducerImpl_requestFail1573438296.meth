@@ -1,0 +1,24 @@
+void org.apache.rocketmq.client.impl.producer.DefaultMQProducerImpl:requestFail(java.lang.String correlationId)
+{
+org.apache.rocketmq.client.producer.RequestResponseFuture responseFuture;
+  org.apache.rocketmq.client.producer.RequestFutureHolder $stack4;
+  java.util.concurrent.ConcurrentHashMap $stack5;
+  java.lang.Object $stack6;
+  java.lang.Exception $stack7;
+  org.apache.rocketmq.logging.org.slf4j.Logger $stack8;
+  $stack4 = org.apache.rocketmq.client.producer.RequestFutureHolder.getInstance();
+ $stack5 = $stack4.getRequestFutureTable();
+ $stack6 = $stack5.remove((java.lang.Object)correlationId);
+ responseFuture=(org.apache.rocketmq.client.producer.RequestResponseFuture) $stack6;
+ if (responseFuture==null) goto label0;
+ responseFuture.setSendRequestOk((boolean)0);
+ responseFuture.putResponseMessage(null);
+ label1:responseFuture.executeRequestCallback();
+ label2:goto label0;
+ label3:$stack7 = catch;
+ $stack8=this.log;
+ $stack8.warn("execute requestCallback in requestFail, and callback throw",(java.lang.Throwable)$stack7);
+ label0:return;
+ catch java.lang.Exception: label1 - label2 : label3;
+} 
+

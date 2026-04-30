@@ -1,0 +1,51 @@
+org.apache.rocketmq.remoting.protocol.RemotingCommand org.apache.rocketmq.proxy.remoting.activity.ClientManagerActivity:unregisterClient(io.netty.channel.ChannelHandlerContext ctx,org.apache.rocketmq.remoting.protocol.RemotingCommand request,org.apache.rocketmq.proxy.common.ProxyContext context)
+{
+org.apache.rocketmq.remoting.protocol.RemotingCommand response;
+  org.apache.rocketmq.remoting.protocol.header.UnregisterClientRequestHeader requestHeader;
+  java.lang.String producerGroup;
+  java.lang.Object channel;
+  org.apache.rocketmq.proxy.remoting.channel.RemotingChannel clientChannelInfo;
+  org.apache.rocketmq.remoting.CommandCustomHeader $stack11;
+  org.apache.rocketmq.proxy.remoting.channel.RemotingChannelManager $stack14;
+  io.netty.channel.Channel $stack15;
+  org.apache.rocketmq.remoting.protocol.LanguageCode $stack19;
+  int $stack20;
+  org.apache.rocketmq.proxy.processor.MessagingProcessor $stack21;
+  java.lang.String $stack31;
+  org.apache.rocketmq.broker.client.ClientChannelInfo tmp$1625669496;
+  response = org.apache.rocketmq.remoting.protocol.RemotingCommand.createResponseCommand(org.apache.rocketmq.remoting.protocol.header.UnregisterClientResponseHeader);
+ $stack11 = request.decodeCommandCustomHeader(org.apache.rocketmq.remoting.protocol.header.UnregisterClientRequestHeader);
+ requestHeader=(org.apache.rocketmq.remoting.protocol.header.UnregisterClientRequestHeader) $stack11;
+ producerGroup = requestHeader.getProducerGroup();
+ if (producerGroup==null) goto label0;
+ $stack14=this.remotingChannelManager;
+ $stack15 = ctx.channel();
+ channel = $stack14.removeProducerChannel(producerGroup,$stack15);
+ tmp$1625669496=new org.apache.rocketmq.broker.client.ClientChannelInfo;
+ $stack31 = requestHeader.getClientID();
+ $stack19 = request.getLanguage();
+ $stack20 = request.getVersion();
+ $stack15=(io.netty.channel.Channel) channel;
+ tmp$1625669496#org.apache.rocketmq.broker.client.ClientChannelInfo($stack15,$stack31,$stack19,$stack20);
+ $stack21=this.messagingProcessor;
+ $stack21.unRegisterProducer(context,producerGroup,tmp$1625669496);
+ label0:channel = requestHeader.getConsumerGroup();
+ if (channel==null) goto label1;
+ $stack14=this.remotingChannelManager;
+ $stack15 = ctx.channel();
+ producerGroup=(java.lang.String) channel;
+ clientChannelInfo = $stack14.removeConsumerChannel(producerGroup,$stack15);
+ tmp$1625669496=new org.apache.rocketmq.broker.client.ClientChannelInfo;
+ producerGroup = requestHeader.getClientID();
+ $stack19 = request.getLanguage();
+ $stack20 = request.getVersion();
+ $stack15=(io.netty.channel.Channel) clientChannelInfo;
+ tmp$1625669496#org.apache.rocketmq.broker.client.ClientChannelInfo($stack15,producerGroup,$stack19,$stack20);
+ $stack21=this.messagingProcessor;
+ producerGroup=(java.lang.String) channel;
+ $stack21.unRegisterConsumer(context,producerGroup,tmp$1625669496);
+ label1:response.setCode(0);
+ response.setRemark("");
+ return  response;
+ } 
+

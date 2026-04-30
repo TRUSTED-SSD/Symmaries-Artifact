@@ -1,0 +1,27 @@
+io.grpc.ServerCall$Listener org.apache.rocketmq.proxy.grpc.interceptor.HeaderInterceptor:interceptCall(io.grpc.ServerCall call,io.grpc.Metadata headers,io.grpc.ServerCallHandler next)
+{
+java.net.SocketAddress remoteSocketAddress;
+  java.lang.String remoteAddress;
+  io.grpc.Attributes $stack8;
+  io.grpc.Attributes$Key $stack9;
+  java.lang.Object $stack10;
+  io.grpc.Metadata$Key $stack12;
+  io.grpc.ServerCall$Listener $stack18;
+  $stack8 = call.getAttributes();
+ $stack9=io.grpc.Grpc.TRANSPORT_ATTR_REMOTE_ADDR;
+ $stack10 = $stack8.get($stack9);
+ remoteSocketAddress=(java.net.SocketAddress) $stack10;
+ remoteAddress = this#org.apache.rocketmq.proxy.grpc.interceptor.HeaderInterceptor:parseSocketAddress(remoteSocketAddress);
+ $stack12=org.apache.rocketmq.proxy.grpc.interceptor.InterceptorConstants.REMOTE_ADDRESS;
+ headers.put($stack12,(java.lang.Object)remoteAddress);
+ $stack8 = call.getAttributes();
+ $stack9=io.grpc.Grpc.TRANSPORT_ATTR_LOCAL_ADDR;
+ $stack10 = $stack8.get($stack9);
+ remoteSocketAddress=(java.net.SocketAddress) $stack10;
+ remoteAddress = this#org.apache.rocketmq.proxy.grpc.interceptor.HeaderInterceptor:parseSocketAddress(remoteSocketAddress);
+ $stack12=org.apache.rocketmq.proxy.grpc.interceptor.InterceptorConstants.LOCAL_ADDRESS;
+ headers.put($stack12,(java.lang.Object)remoteAddress);
+ $stack18 = next.startCall(call,headers);
+ return  $stack18;
+ } 
+

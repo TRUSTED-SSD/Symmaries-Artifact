@@ -1,0 +1,7 @@
+static boolean org.keycloak.common.util.reflections.Reflections:methodExists (
+  java.lang.Class @clazz, java.lang.String name) {
+  guard = tt;
+  ret(level()) = pc ⊔ level(@clazz) ⊔ obj_level(@clazz) ⊔ obj_level(name);
+  ret(obj_level(@clazz)) = if obj_level(@clazz) = ⊤ ∨ pc ≠ ⊤ ∧ (if obj_level(name) = ⊤ then obj_level(@clazz) = ⊥ else level(@clazz) = ⊤ ∧ obj_level(@clazz) = ⊥ ∧ obj_level(name) = ⊥) then ⊤ else ⊥;
+  ret(obj_level(name)) = if obj_level(name) = ⊤ ∨ pc ≠ ⊤ ∧ obj_level(name) = ⊥ ∧ level(@clazz) ⊔ obj_level(@clazz) = ⊤ then ⊤ else ⊥;
+}

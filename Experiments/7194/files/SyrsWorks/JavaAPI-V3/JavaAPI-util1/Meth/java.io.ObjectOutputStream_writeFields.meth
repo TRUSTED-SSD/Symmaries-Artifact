@@ -1,0 +1,21 @@
+void java.io.ObjectOutputStream:writeFields()
+{
+java.io.ObjectOutputStream$PutFieldImpl $r1;
+  java.io.ObjectOutputStream$BlockDataOutputStream $r2;
+  java.io.ObjectOutputStream$PutFieldImpl $r3;
+  java.io.ObjectOutputStream$BlockDataOutputStream $r4;
+  java.io.NotActiveException $r5;
+  $r1=this.curPut;
+ if ($r1!=null) goto label0;
+ $r5=new java.io.NotActiveException;
+ $r5#java.io.NotActiveException:init("no current PutField object");
+ throw $r5;
+ label0:$r2=this.bout;
+ $r2.setBlockDataMode((boolean)0);
+ $r3=this.curPut;
+ $r3.writeFields();
+ $r4=this.bout;
+ $r4.setBlockDataMode((boolean)1);
+ return;
+ }  
+

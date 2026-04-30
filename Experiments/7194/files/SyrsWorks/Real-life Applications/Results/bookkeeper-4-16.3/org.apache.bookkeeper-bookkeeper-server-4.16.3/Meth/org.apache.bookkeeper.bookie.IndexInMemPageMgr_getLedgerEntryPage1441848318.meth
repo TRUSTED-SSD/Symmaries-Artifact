@@ -1,0 +1,15 @@
+org.apache.bookkeeper.bookie.LedgerEntryPage org.apache.bookkeeper.bookie.IndexInMemPageMgr:getLedgerEntryPage(long ledger,long pageEntry)
+{
+org.apache.bookkeeper.bookie.LedgerEntryPage lep;
+  org.apache.bookkeeper.stats.Counter $stack7;
+  lep = this.getLedgerEntryPageFromCache(ledger,pageEntry,(boolean)0);
+ if (lep!=null) goto label0;
+ $stack7=this.ledgerCacheMissCounter;
+ $stack7.inc();
+ lep = this#org.apache.bookkeeper.bookie.IndexInMemPageMgr:grabLedgerEntryPage(ledger,pageEntry);
+ goto label1;
+ label0:$stack7=this.ledgerCacheHitCounter;
+ $stack7.inc();
+ label1:return  lep;
+ } 
+

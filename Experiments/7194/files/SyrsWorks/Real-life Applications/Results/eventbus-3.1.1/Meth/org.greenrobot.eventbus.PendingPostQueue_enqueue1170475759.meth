@@ -1,0 +1,27 @@
+void org.greenrobot.eventbus.PendingPostQueue:enqueue(org.greenrobot.eventbus.PendingPost pendingPost)
+{
+org.greenrobot.eventbus.PendingPost $stack2;
+  java.lang.IllegalStateException $stack4;
+  java.lang.NullPointerException $stack7;
+  if (pendingPost!=null) goto label0;
+ $stack7=new java.lang.NullPointerException;
+ $stack7#java.lang.NullPointerException("null cannot be enqueued");
+ throw $stack7;
+ label0:$stack2=this.tail;
+ if ($stack2==null) goto label1;
+ $stack2=this.tail;
+ $stack2.next=pendingPost;
+ this.tail=pendingPost;
+ goto label2;
+ label1:$stack2=this.head;
+ if ($stack2!=null) goto label3;
+ this.tail=pendingPost;
+ this.head=pendingPost;
+ goto label2;
+ label3:$stack4=new java.lang.IllegalStateException;
+ $stack4#java.lang.IllegalStateException("Head present, but no tail");
+ throw $stack4;
+ label2:this.notifyAll();
+ return;
+ } 
+

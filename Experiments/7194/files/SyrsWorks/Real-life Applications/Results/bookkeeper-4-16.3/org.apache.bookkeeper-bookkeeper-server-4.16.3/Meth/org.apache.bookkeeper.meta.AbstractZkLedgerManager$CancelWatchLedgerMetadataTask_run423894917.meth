@@ -1,0 +1,35 @@
+void org.apache.bookkeeper.meta.AbstractZkLedgerManager$CancelWatchLedgerMetadataTask:run()
+{
+java.util.Set listeners;
+  org.apache.bookkeeper.meta.AbstractZkLedgerManager $stack2;
+  long $stack3;
+  java.util.concurrent.ConcurrentMap $stack4;
+  java.lang.Long $stack5;
+  java.lang.Object $stack6;
+  boolean $stack7;
+  org.apache.bookkeeper.meta.AbstractZkLedgerManager $stack10;
+  org.slf4j.Logger $stack11;
+  $stack2=this.this$0;
+ $stack4=$stack2.listeners;
+ $stack3=this.ledgerId;
+ $stack5 = java.lang.Long.valueOf($stack3);
+ $stack6 = $stack4.get((java.lang.Object)$stack5);
+ listeners=(java.util.Set) $stack6;
+ $stack7 = org.apache.commons.collections4.CollectionUtils.isEmpty((java.util.Collection)listeners);
+ if ($stack7!=0) goto label0;
+ $stack11 = org.apache.bookkeeper.meta.AbstractZkLedgerManager.access$000();
+ $stack7 = $stack11.isDebugEnabled();
+ if ($stack7==0) goto label1;
+ $stack11 = org.apache.bookkeeper.meta.AbstractZkLedgerManager.access$000();
+ $stack3=this.ledgerId;
+ $stack5 = java.lang.Long.valueOf($stack3);
+ dummyClass.lowSink("Still watch ledgerId: {}, ignore this unwatch task.");
+$stack11.debug("Still watch ledgerId: {}, ignore this unwatch task.",(java.lang.Object)$stack5);
+ label1:return;
+ label0:$stack10=this.this$0;
+ $stack3=this.ledgerId;
+ $stack2=this.this$0;
+ org.apache.bookkeeper.meta.AbstractZkLedgerManager.access$100($stack10,$stack3,(org.apache.zookeeper.Watcher)$stack2);
+ return;
+ } 
+

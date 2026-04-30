@@ -1,0 +1,58 @@
+void java.util.HashMap:putMapEntries(java.util.Map r1,boolean z0)
+{
+int i0;
+  java.lang.Object r2;
+  java.lang.Object r3;
+  java.util.HashMap$Node[] $r4;
+  int $i1;
+  java.lang.Object $r5;
+  int $i2;
+  float $f0;
+  float $f1;
+  float $f2;
+  byte $b3;
+  int $i4;
+  int $i5;
+  float f3;
+  int $i6;
+  int i7;
+  java.util.Set $r8;
+  java.util.Iterator r9;
+  boolean $z1;
+  java.util.Map$Entry r10;
+  i0 = r1.size();
+ if (i0<=0) goto label0;
+ $r4=this.table;
+ if ($r4!=null) goto label1;
+ $f1=(float) i0;
+ $f0=this.loadFactor;
+ $f2=($f1/$f0);
+ f3=($f2+1.0F);
+ $b3=(f3 cmpg 1.07374182E9F);
+ if ($b3>=0) goto label2;
+ $i6=(int) f3;
+ goto label3;
+ label2:$i6=1073741824;
+ label3:i7=$i6;
+ $i4=this.threshold;
+ if (i7<=$i4) goto label4;
+ $i5 = java.util.HashMap.tableSizeFor(i7);
+ this.threshold=$i5;
+ label4:goto label5;
+ label1:$i1=this.threshold;
+ if (i0<=$i1) goto label5;
+ this.resize();
+ label5:$r8 = r1.entrySet();
+ r9 = $r8.iterator();
+ label6:$z1 = r9.hasNext();
+ if ($z1==0) goto label0;
+ $r5 = r9.next();
+ r10=(java.util.Map$Entry) $r5;
+ r2 = r10.getKey();
+ r3 = r10.getValue();
+ $i2 = java.util.HashMap.hash(r2);
+ this.putVal($i2,r2,r3,(boolean)0,z0);
+ goto label6;
+ label0:return;
+ }  
+

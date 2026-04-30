@@ -1,0 +1,17 @@
+void org.apache.kerby.kerberos.kerb.ccache.CredCacheOutputStream:writeKey(org.apache.kerby.kerberos.kerb.type.base.EncryptionKey key,int version)
+{
+org.apache.kerby.kerberos.kerb.type.base.EncryptionType $stack3;
+  int $stack4;
+  byte[] $stack5;
+  $stack3 = key.getKeyType();
+ $stack4 = $stack3.getValue();
+ this.writeShort($stack4);
+ if (version!=1283) goto label0;
+ $stack3 = key.getKeyType();
+ version = $stack3.getValue();
+ this.writeShort(version);
+ label0:$stack5 = key.getKeyData();
+ this.writeCountedOctets($stack5);
+ return;
+ } 
+

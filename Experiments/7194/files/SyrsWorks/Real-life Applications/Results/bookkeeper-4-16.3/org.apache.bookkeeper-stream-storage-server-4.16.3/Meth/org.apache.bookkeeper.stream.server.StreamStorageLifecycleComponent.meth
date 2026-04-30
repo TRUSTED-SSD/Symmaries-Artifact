@@ -1,0 +1,21 @@
+org.apache.bookkeeper.stream.server.StreamStorageLifecycleComponent(org.apache.bookkeeper.server.conf.BookieConfiguration conf,org.apache.bookkeeper.stats.StatsLogger @statsLogger)
+{
+org.apache.bookkeeper.stream.server.conf.StorageServerConfiguration ssConf;
+  org.apache.commons.configuration.CompositeConfiguration $stack4;
+  int $stack7;
+  boolean $stack8;
+  org.apache.bookkeeper.common.component.LifecycleComponent $stack11;
+  org.apache.bookkeeper.stats.StatsLogger statsLogger;
+statsLogger=@statsLogger;
+this#org.apache.bookkeeper.server.component.ServerLifecycleComponent("stream-storage",conf,statsLogger);
+ $stack4 = conf.getUnderlyingConf();
+ ssConf = org.apache.bookkeeper.stream.server.conf.StorageServerConfiguration.of($stack4);
+ $stack4 = conf.getUnderlyingConf();
+ $stack7 = ssConf.getGrpcPort();
+ $stack8 = ssConf.getGrpcUseHostname();
+ statsLogger = statsLogger.scope("stream");
+ $stack11 = org.apache.bookkeeper.stream.server.StorageServer.buildStorageServer($stack4,$stack7,$stack8,(boolean)0,statsLogger);
+ this.streamStorage=$stack11;
+ return;
+ } 
+

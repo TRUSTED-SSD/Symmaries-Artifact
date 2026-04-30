@@ -1,0 +1,46 @@
+org.apache.rocketmq.client.ClientConfig()
+{
+java.lang.String $stack1;
+  java.lang.Runtime $stack4;
+  int $stack5;
+  org.apache.rocketmq.client.AccessChannel $stack6;
+  boolean $stack8;
+  org.apache.rocketmq.remoting.protocol.LanguageCode $stack15;
+  this#java.lang.Object();
+ $stack1 = org.apache.rocketmq.common.utils.NameServerAddressUtils.getNameServerAddresses();
+ this.namesrvAddr=$stack1;
+ $stack1 = org.apache.rocketmq.common.utils.NetworkUtil.getLocalAddress();
+ this.clientIP=$stack1;
+ $stack1 = java.lang.System.getProperty("rocketmq.client.name","DEFAULT");
+ this.instanceName=$stack1;
+ $stack4 = java.lang.Runtime.getRuntime();
+ $stack5 = $stack4.availableProcessors();
+ this.clientCallbackExecutorThreads=$stack5;
+ this.namespaceInitialized=0;
+ $stack6=org.apache.rocketmq.client.AccessChannel.LOCAL;
+ this.accessChannel=$stack6;
+ this.pollNameServerInterval=30000;
+ this.heartbeatBrokerInterval=30000;
+ this.persistConsumerOffsetInterval=5000;
+ this.pullTimeDelayMillsWhenException=1000L;
+ this.unitMode=0;
+ $stack1 = java.lang.System.getProperty("com.rocketmq.read.body","true");
+ $stack8 = java.lang.Boolean.parseBoolean($stack1);
+ this.decodeReadBody=$stack8;
+ $stack1 = java.lang.System.getProperty("com.rocketmq.decompress.body","true");
+ $stack8 = java.lang.Boolean.parseBoolean($stack1);
+ this.decodeDecompressBody=$stack8;
+ $stack1 = java.lang.System.getProperty("com.rocketmq.sendMessageWithVIPChannel","false");
+ $stack8 = java.lang.Boolean.parseBoolean($stack1);
+ this.vipChannelEnabled=$stack8;
+ $stack8=org.apache.rocketmq.remoting.netty.TlsSystemConfig.tlsEnable;
+ this.useTLS=$stack8;
+ $stack1 = java.lang.System.getProperty("com.rocketmq.socks.proxy.config","{}");
+ this.socksProxyConfig=$stack1;
+ this.mqClientApiTimeout=3000;
+ $stack15=org.apache.rocketmq.remoting.protocol.LanguageCode.JAVA;
+ this.language=$stack15;
+ this.enableStreamRequestType=0;
+ return;
+ } 
+

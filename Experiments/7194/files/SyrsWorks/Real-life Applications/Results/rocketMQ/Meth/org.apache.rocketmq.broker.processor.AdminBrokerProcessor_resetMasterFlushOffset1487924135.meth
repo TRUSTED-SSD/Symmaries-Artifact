@@ -1,0 +1,31 @@
+org.apache.rocketmq.remoting.protocol.RemotingCommand org.apache.rocketmq.broker.processor.AdminBrokerProcessor:resetMasterFlushOffset(io.netty.channel.ChannelHandlerContext ctx,org.apache.rocketmq.remoting.protocol.RemotingCommand request)
+{
+org.apache.rocketmq.remoting.protocol.RemotingCommand response;
+  org.apache.rocketmq.remoting.protocol.header.ResetMasterFlushOffsetHeader requestHeader;
+  org.apache.rocketmq.broker.BrokerController $stack6;
+  org.apache.rocketmq.common.BrokerConfig $stack7;
+  long $stack8;
+  byte $stack9;
+  org.apache.rocketmq.remoting.CommandCustomHeader $stack10;
+  java.lang.Long $stack11;
+  org.apache.rocketmq.store.MessageStore $stack18;
+  response = org.apache.rocketmq.remoting.protocol.RemotingCommand.createResponseCommand(null);
+ $stack6=this.brokerController;
+ $stack7 = $stack6.getBrokerConfig();
+ $stack8 = $stack7.getBrokerId();
+ $stack9=($stack8 cmp 0L);
+ if ($stack9==0) goto label0;
+ $stack10 = request.decodeCommandCustomHeader(org.apache.rocketmq.remoting.protocol.header.ResetMasterFlushOffsetHeader);
+ requestHeader=(org.apache.rocketmq.remoting.protocol.header.ResetMasterFlushOffsetHeader) $stack10;
+ $stack11 = requestHeader.getMasterFlushOffset();
+ if ($stack11==null) goto label0;
+ $stack6=this.brokerController;
+ $stack18 = $stack6.getMessageStore();
+ $stack11 = requestHeader.getMasterFlushOffset();
+ $stack8 = $stack11.longValue();
+ $stack18.setMasterFlushedOffset($stack8);
+ label0:response.setCode(0);
+ response.setRemark(null);
+ return  response;
+ } 
+

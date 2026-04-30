@@ -1,0 +1,42 @@
+org.apache.rocketmq.client.consumer.PullResult org.apache.rocketmq.client.impl.MQClientAPIImpl:pullMessage(java.lang.String addr,org.apache.rocketmq.remoting.protocol.header.PullMessageRequestHeader requestHeader,long timeoutMillis,org.apache.rocketmq.client.impl.CommunicationMode communicationMode,org.apache.rocketmq.client.consumer.PullCallback pullCallback)
+{
+org.apache.rocketmq.remoting.protocol.RemotingCommand request;
+  java.lang.Integer $stack8;
+  int $stack9;
+  boolean $stack10;
+  int[] $stack12;
+  java.lang.AssertionError $stack16;
+  org.apache.rocketmq.client.consumer.PullResult $stack17;
+  $stack8 = requestHeader.getSysFlag();
+ $stack9 = $stack8.intValue();
+ $stack10 = org.apache.rocketmq.common.sysflag.PullSysFlag.hasLitePullFlag($stack9);
+ if ($stack10==0) goto label0;
+ request = org.apache.rocketmq.remoting.protocol.RemotingCommand.createRequestCommand(361,(org.apache.rocketmq.remoting.CommandCustomHeader)requestHeader);
+ goto label1;
+ label0:request = org.apache.rocketmq.remoting.protocol.RemotingCommand.createRequestCommand(11,(org.apache.rocketmq.remoting.CommandCustomHeader)requestHeader);
+ label1:$stack12=org.apache.rocketmq.client.impl.MQClientAPIImpl$6.$SwitchMap$org$apache$rocketmq$client$impl$CommunicationMode;
+ $stack9 = communicationMode.ordinal();
+ $stack9=$stack12[$stack9];
+ switch [$stack9]
+if 0 goto label2;
+if 1 goto label3;
+if 2 goto label4;
+goto label5;
+ label2:$stack10=org.apache.rocketmq.client.impl.MQClientAPIImpl.$assertionsDisabled;
+ if ($stack10!=0) goto label6;
+ $stack16=new java.lang.AssertionError;
+ $stack16#java.lang.AssertionError();
+ throw $stack16;
+ label6:return  null;
+ label3:this#org.apache.rocketmq.client.impl.MQClientAPIImpl:pullMessageAsync(addr,request,timeoutMillis,pullCallback);
+ return  null;
+ label4:$stack17 = this#org.apache.rocketmq.client.impl.MQClientAPIImpl:pullMessageSync(addr,request,timeoutMillis);
+ return  $stack17;
+ label5:$stack10=org.apache.rocketmq.client.impl.MQClientAPIImpl.$assertionsDisabled;
+ if ($stack10!=0) goto label7;
+ $stack16=new java.lang.AssertionError;
+ $stack16#java.lang.AssertionError();
+ throw $stack16;
+ label7:return  null;
+ } 
+

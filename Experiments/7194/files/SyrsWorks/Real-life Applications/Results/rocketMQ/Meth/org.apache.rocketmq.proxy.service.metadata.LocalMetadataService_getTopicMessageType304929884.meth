@@ -1,0 +1,16 @@
+org.apache.rocketmq.common.attribute.TopicMessageType org.apache.rocketmq.proxy.service.metadata.LocalMetadataService:getTopicMessageType(java.lang.String topic)
+{
+org.apache.rocketmq.common.TopicConfig topicConfig;
+  org.apache.rocketmq.broker.BrokerController $stack3;
+  org.apache.rocketmq.broker.topic.TopicConfigManager $stack4;
+  org.apache.rocketmq.common.attribute.TopicMessageType $stack6;
+  $stack3=this.brokerController;
+ $stack4 = $stack3.getTopicConfigManager();
+ topicConfig = $stack4.selectTopicConfig(topic);
+ if (topicConfig!=null) goto label0;
+ $stack6=org.apache.rocketmq.common.attribute.TopicMessageType.UNSPECIFIED;
+ return  $stack6;
+ label0:$stack6 = topicConfig.getTopicMessageType();
+ return  $stack6;
+ } 
+

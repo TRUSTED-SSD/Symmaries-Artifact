@@ -1,0 +1,14 @@
+static org.apache.rocketmq.store.PutMessageResult org.apache.rocketmq.store.CommitLog:lambda$handleDiskFlushAndHA$0(org.apache.rocketmq.store.PutMessageResult putMessageResult,org.apache.rocketmq.store.PutMessageStatus @flushStatus,org.apache.rocketmq.store.PutMessageStatus replicaStatus)
+{
+org.apache.rocketmq.store.PutMessageStatus $stack3;
+  org.apache.rocketmq.store.PutMessageStatus flushStatus;
+flushStatus=@flushStatus;
+$stack3=org.apache.rocketmq.store.PutMessageStatus.PUT_OK;
+ if (flushStatus==$stack3) goto label0;
+ putMessageResult.setPutMessageStatus(flushStatus);
+ label0:flushStatus=org.apache.rocketmq.store.PutMessageStatus.PUT_OK;
+ if (replicaStatus==flushStatus) goto label1;
+ putMessageResult.setPutMessageStatus(replicaStatus);
+ label1:return  putMessageResult;
+ } 
+

@@ -1,0 +1,49 @@
+org.apache.rocketmq.remoting.protocol.RemotingCommand org.apache.rocketmq.broker.processor.AdminBrokerProcessor:getAllDelayOffset(io.netty.channel.ChannelHandlerContext ctx,org.apache.rocketmq.remoting.protocol.RemotingCommand @request)
+{
+java.lang.String content;
+  java.io.UnsupportedEncodingException e;
+  org.apache.rocketmq.broker.BrokerController $stack7;
+  org.apache.rocketmq.broker.schedule.ScheduleMessageService $stack8;
+  org.apache.rocketmq.logging.org.slf4j.Logger $stack10;
+  io.netty.channel.Channel $stack12;
+  int $stack14;
+  byte[] $stack21;
+  java.lang.StringBuilder $stack27;
+  org.apache.rocketmq.remoting.protocol.RemotingCommand request;
+request=@request;
+request = org.apache.rocketmq.remoting.protocol.RemotingCommand.createResponseCommand(null);
+ $stack7=this.brokerController;
+ $stack8 = $stack7.getScheduleMessageService();
+ content = $stack8.encode();
+ if (content==null) goto label0;
+ $stack14 = content.length();
+ if ($stack14<=0) goto label0;
+ label1:$stack21 = content.getBytes("UTF-8");
+ request.setBody($stack21);
+ label2:goto label3;
+ label4:e = catch;
+ $stack10=org.apache.rocketmq.broker.processor.AdminBrokerProcessor.LOGGER;
+ $stack12 = ctx.channel();
+ content = org.apache.rocketmq.remoting.common.RemotingHelper.parseChannelRemoteAddr($stack12);
+ $stack10.error("AdminBrokerProcessor#getAllDelayOffset: unexpected error, caller={}.",(java.lang.Object)content,(java.lang.Object)e);
+ request.setCode(1);
+ $stack27=new java.lang.StringBuilder;
+ $stack27#java.lang.StringBuilder();
+ $stack27 = $stack27.append("UnsupportedEncodingException ");
+ $stack27 = $stack27.append((java.lang.Object)e);
+ content = $stack27.toString();
+ request.setRemark(content);
+ return  request;
+ label0:$stack10=org.apache.rocketmq.broker.processor.AdminBrokerProcessor.LOGGER;
+ $stack12 = ctx.channel();
+ content = org.apache.rocketmq.remoting.common.RemotingHelper.parseChannelRemoteAddr($stack12);
+ $stack10.error("AdminBrokerProcessor#getAllDelayOffset: no delay offset in this broker, caller={}",(java.lang.Object)content);
+ request.setCode(1);
+ request.setRemark("No delay offset in this broker");
+ return  request;
+ label3:request.setCode(0);
+ request.setRemark(null);
+ return  request;
+ catch java.io.UnsupportedEncodingException: label1 - label2 : label4;
+} 
+

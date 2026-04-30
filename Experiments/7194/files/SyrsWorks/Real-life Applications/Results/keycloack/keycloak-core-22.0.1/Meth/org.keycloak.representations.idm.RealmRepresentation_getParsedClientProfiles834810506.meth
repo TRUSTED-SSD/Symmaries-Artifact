@@ -1,0 +1,28 @@
+org.keycloak.representations.idm.ClientProfilesRepresentation org.keycloak.representations.idm.RealmRepresentation:getParsedClientProfiles()
+{
+com.fasterxml.jackson.databind.JsonNode $stack2;
+  com.fasterxml.jackson.databind.ObjectMapper $stack4;
+  java.lang.Object $stack5;
+  org.keycloak.representations.idm.ClientProfilesRepresentation $stack6;
+  java.lang.IllegalArgumentException $stack7;
+  org.jboss.logging.Logger $stack8;
+  java.lang.String $stack10;
+  java.lang.String $stack11;
+  label0:$stack2=this.clientProfiles;
+ if ($stack2!=null) goto label1;
+ label2:return  null;
+ label1:$stack4=org.keycloak.util.JsonSerialization.mapper;
+ $stack2=this.clientProfiles;
+ $stack5 = $stack4.convertValue((java.lang.Object)$stack2,org.keycloak.representations.idm.ClientProfilesRepresentation);
+ $stack6=(org.keycloak.representations.idm.ClientProfilesRepresentation) $stack5;
+ label3:return  $stack6;
+ label4:$stack7 = catch;
+ $stack8=org.keycloak.representations.idm.RealmRepresentation.logger;
+ $stack10=this.realm;
+ $stack11 = $stack7.getMessage();
+ $stack8.warnf("Failed to deserialize client profiles in the realm %s. Fallback to return empty profiles. Details: %s",(java.lang.Object)$stack10,(java.lang.Object)$stack11);
+ return  null;
+ catch java.lang.IllegalArgumentException: label0 - label2 : label4;
+catch java.lang.IllegalArgumentException: label1 - label3 : label4;
+} 
+

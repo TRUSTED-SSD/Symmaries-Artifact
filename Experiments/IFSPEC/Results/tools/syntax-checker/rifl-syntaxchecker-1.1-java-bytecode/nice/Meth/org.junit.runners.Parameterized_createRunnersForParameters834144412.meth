@@ -1,0 +1,34 @@
+java.util.List org.junit.runners.Parameterized:createRunnersForParameters(java.lang.Iterable allParameters,java.lang.String namePattern,org.junit.runners.parameterized.ParametersRunnerFactory runnerFactory)
+{
+java.lang.Object tests;
+  java.util.ArrayList runners;
+  java.util.Iterator i$;
+  org.junit.runners.parameterized.TestWithParameters test;
+  boolean $stack11;
+  org.junit.runner.Runner $stack13;
+  java.lang.ClassCastException $stack16;
+  java.lang.Exception $stack17;
+  java.util.ArrayList tmp$759020803;
+  java.util.List tmp$1994214242;
+  label0:tests = this#org.junit.runners.Parameterized:createTestsForParameters(allParameters,namePattern);
+ tmp$759020803=new java.util.ArrayList;
+ runners=tmp$759020803;
+ tmp$759020803#java.util.ArrayList();
+ runners=tmp$759020803;
+ tmp$1994214242=(java.util.List) tests;
+ i$ = tmp$1994214242.iterator();
+ label1:$stack11 = i$.hasNext();
+ if ($stack11==0) goto label2;
+ tests = i$.next();
+ test=(org.junit.runners.parameterized.TestWithParameters) tests;
+ $stack13 = runnerFactory.createRunnerForTestWithParameters(test);
+ tmp$759020803.add((java.lang.Object)$stack13);
+ goto label1;
+ label2:return  tmp$759020803;
+ label3:$stack16 = catch;
+ tests=$stack16;
+ $stack17 = this#org.junit.runners.Parameterized:parametersMethodReturnedWrongType();
+ throw $stack17;
+ catch java.lang.ClassCastException: label0 - label2 : label3;
+} 
+

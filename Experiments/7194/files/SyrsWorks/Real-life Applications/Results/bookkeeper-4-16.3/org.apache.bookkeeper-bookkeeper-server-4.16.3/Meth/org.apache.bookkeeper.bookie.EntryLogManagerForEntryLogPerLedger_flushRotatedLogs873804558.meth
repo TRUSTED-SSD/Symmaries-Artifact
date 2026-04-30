@@ -1,0 +1,34 @@
+void org.apache.bookkeeper.bookie.EntryLogManagerForEntryLogPerLedger:flushRotatedLogs()
+{
+java.util.Iterator l1;
+  org.apache.bookkeeper.bookie.DefaultEntryLogger$BufferedLogChannel channel;
+  java.util.List $stack3;
+  boolean $stack5;
+  java.lang.Object $stack6;
+  org.apache.bookkeeper.bookie.DefaultEntryLogger$RecentEntryLogsStatus $stack7;
+  long $stack8;
+  java.lang.Long $stack9;
+  org.slf4j.Logger $stack12;
+  $stack3=this.rotatedLogChannels;
+ l1 = $stack3.iterator();
+ label0:$stack5 = l1.hasNext();
+ if ($stack5==0) goto label1;
+ $stack6 = l1.next();
+ channel=(org.apache.bookkeeper.bookie.DefaultEntryLogger$BufferedLogChannel) $stack6;
+ channel.flushAndForceWrite((boolean)1);
+ channel.close();
+ $stack7=this.recentlyCreatedEntryLogsStatus;
+ $stack8 = channel.getLogId();
+ $stack9 = java.lang.Long.valueOf($stack8);
+ $stack7.flushRotatedEntryLog($stack9);
+ $stack3=this.rotatedLogChannels;
+ $stack3.remove((java.lang.Object)channel);
+ $stack12=org.apache.bookkeeper.bookie.EntryLogManagerForEntryLogPerLedger.log;
+ $stack8 = channel.getLogId();
+ $stack9 = java.lang.Long.valueOf($stack8);
+ dummyClass.lowSink("Synced entry logger {} to disk.");
+$stack12.info("Synced entry logger {} to disk.",(java.lang.Object)$stack9);
+ goto label0;
+ label1:return;
+ } 
+

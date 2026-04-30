@@ -1,0 +1,22 @@
+static java.lang.String org.apache.rocketmq.remoting.protocol.NamespaceUtil:withOutRetryAndDLQ(java.lang.String @originalResource)
+{
+boolean $stack1;
+  int $stack4;
+  java.lang.String originalResource;
+originalResource=@originalResource;
+$stack1 = org.apache.commons.lang3.StringUtils.isEmpty((java.lang.CharSequence)originalResource);
+ if ($stack1==0) goto label0;
+ return  "";
+ label0:$stack1 = org.apache.rocketmq.remoting.protocol.NamespaceUtil.isRetryTopic(originalResource);
+ if ($stack1==0) goto label1;
+ $stack4=org.apache.rocketmq.remoting.protocol.NamespaceUtil.RETRY_PREFIX_LENGTH;
+ originalResource = originalResource.substring($stack4);
+ return  originalResource;
+ label1:$stack1 = org.apache.rocketmq.remoting.protocol.NamespaceUtil.isDLQTopic(originalResource);
+ if ($stack1==0) goto label2;
+ $stack4=org.apache.rocketmq.remoting.protocol.NamespaceUtil.DLQ_PREFIX_LENGTH;
+ originalResource = originalResource.substring($stack4);
+ return  originalResource;
+ label2:return  originalResource;
+ } 
+

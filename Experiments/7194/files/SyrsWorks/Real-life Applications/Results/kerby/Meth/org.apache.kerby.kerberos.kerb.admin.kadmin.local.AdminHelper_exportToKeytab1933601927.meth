@@ -1,0 +1,33 @@
+static void org.apache.kerby.kerberos.kerb.admin.kadmin.local.AdminHelper:exportToKeytab(org.apache.kerby.kerberos.kerb.keytab.Keytab keytab,org.apache.kerby.kerberos.kerb.request.KrbIdentity identity)
+{
+org.apache.kerby.kerberos.kerb.type.base.PrincipalName principal;
+  org.apache.kerby.kerberos.kerb.type.KerberosTime timestamp;
+  java.util.Iterator l4;
+  org.apache.kerby.kerberos.kerb.type.base.EncryptionType encType;
+  org.apache.kerby.kerberos.kerb.type.base.EncryptionKey ekey;
+  int keyVersion;
+  java.util.Map $stack10;
+  java.util.Set $stack11;
+  boolean $stack13;
+  java.lang.Object $stack14;
+  org.apache.kerby.kerberos.kerb.keytab.KeytabEntry $stack18;
+  principal = identity.getPrincipal();
+ timestamp = org.apache.kerby.kerberos.kerb.type.KerberosTime.now();
+ $stack10 = identity.getKeys();
+ $stack11 = $stack10.keySet();
+ l4 = $stack11.iterator();
+ label0:$stack13 = l4.hasNext();
+ if ($stack13==0) goto label1;
+ $stack14 = l4.next();
+ encType=(org.apache.kerby.kerberos.kerb.type.base.EncryptionType) $stack14;
+ $stack10 = identity.getKeys();
+ $stack14 = $stack10.get((java.lang.Object)encType);
+ ekey=(org.apache.kerby.kerberos.kerb.type.base.EncryptionKey) $stack14;
+ keyVersion = ekey.getKvno();
+ $stack18=new org.apache.kerby.kerberos.kerb.keytab.KeytabEntry;
+ $stack18#org.apache.kerby.kerberos.kerb.keytab.KeytabEntry(principal,timestamp,keyVersion,ekey);
+ keytab.addEntry($stack18);
+ goto label0;
+ label1:return;
+ } 
+

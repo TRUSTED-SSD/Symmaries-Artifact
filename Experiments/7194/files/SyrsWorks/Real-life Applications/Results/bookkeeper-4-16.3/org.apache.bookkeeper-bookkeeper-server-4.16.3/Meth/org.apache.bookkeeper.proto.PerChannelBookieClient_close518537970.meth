@@ -1,0 +1,56 @@
+void org.apache.bookkeeper.proto.PerChannelBookieClient:close(boolean wait)
+{
+org.apache.bookkeeper.net.BookieId $stack3;
+  org.slf4j.Logger $stack4;
+  java.util.concurrent.locks.ReentrantReadWriteLock $stack5;
+  java.util.concurrent.locks.ReentrantReadWriteLock$WriteLock $stack6;
+  org.apache.bookkeeper.proto.PerChannelBookieClient$ConnectionState $stack7;
+  org.apache.bookkeeper.proto.PerChannelBookieClient$ConnectionState $stack8;
+  io.netty.channel.Channel $stack12;
+  org.apache.bookkeeper.stats.Counter $stack13;
+  io.netty.channel.ChannelPipeline $stack15;
+  io.netty.channel.ChannelHandler $stack16;
+  java.lang.Throwable $stack24;
+  $stack4=org.apache.bookkeeper.proto.PerChannelBookieClient.LOG;
+ $stack3=this.bookieId;
+ dummyClass.lowSink("Closing the per channel bookie client for {}");
+$stack4.info("Closing the per channel bookie client for {}",(java.lang.Object)$stack3);
+ $stack5=this.closeLock;
+ $stack6 = $stack5.writeLock();
+ $stack6.lock();
+ label0:$stack8=org.apache.bookkeeper.proto.PerChannelBookieClient$ConnectionState.CLOSED;
+ $stack7=this.state;
+ if ($stack8!=$stack7) goto label1;
+ label2:$stack5=this.closeLock;
+ $stack6 = $stack5.writeLock();
+ $stack6.unlock();
+ return;
+ label1:$stack7=org.apache.bookkeeper.proto.PerChannelBookieClient$ConnectionState.CLOSED;
+ this.state=$stack7;
+ this#org.apache.bookkeeper.proto.PerChannelBookieClient(-19);
+ label3:$stack5=this.closeLock;
+ $stack6 = $stack5.writeLock();
+ $stack6.unlock();
+ goto label4;
+ label5:$stack24 = catch;
+ $stack5=this.closeLock;
+ $stack6 = $stack5.writeLock();
+ $stack6.unlock();
+ throw $stack24;
+ label4:$stack12=this.channel;
+ if ($stack12==null) goto label6;
+ $stack12=this.channel;
+ $stack15 = $stack12.pipeline();
+ $stack16 = $stack15.get(io.netty.handler.ssl.SslHandler);
+ if ($stack16==null) goto label6;
+ $stack13=this.activeTlsChannelCounter;
+ $stack13.dec();
+ goto label7;
+ label6:$stack13=this.activeNonTlsChannelCounter;
+ $stack13.dec();
+ label7:this#org.apache.bookkeeper.proto.PerChannelBookieClient:closeInternal((boolean)1,wait);
+ return;
+ catch java.lang.Throwable: label0 - label2 : label5;
+catch java.lang.Throwable: label1 - label3 : label5;
+} 
+

@@ -1,0 +1,32 @@
+boolean org.apache.rocketmq.store.MappedFileQueue:commit(int commitLeastPages)
+{
+boolean result;
+  org.apache.rocketmq.store.logfile.MappedFile mappedFile;
+  long where;
+  byte $stack8;
+  long $stack9;
+  boolean $stack20;
+  result=1;
+ $stack9=this.committedWhere;
+ where=this.committedWhere;
+ $stack8=(where cmp 0L);
+ if ($stack8!=0) goto label0;
+ $stack20=1;
+ goto label1;
+ label0:$stack20=0;
+ label1:mappedFile = this.findMappedFileByOffset($stack9,$stack20);
+ if (mappedFile==null) goto label2;
+ commitLeastPages = mappedFile.commit(commitLeastPages);
+ where = mappedFile.getFileFromOffset();
+ $stack9=(long) commitLeastPages;
+ where=(where+$stack9);
+ $stack9=this.committedWhere;
+ $stack8=(where cmp $stack9);
+ if ($stack8!=0) goto label3;
+ result=1;
+ goto label4;
+ label3:result=0;
+ label4:this.committedWhere=where;
+ label2:return  result;
+ } 
+

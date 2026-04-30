@@ -1,0 +1,17 @@
+org.apache.rocketmq.remoting.protocol.RemotingCommand org.apache.rocketmq.broker.processor.ReplyMessageProcessor:processRequest(io.netty.channel.ChannelHandlerContext ctx,org.apache.rocketmq.remoting.protocol.RemotingCommand @request)
+{
+org.apache.rocketmq.broker.mqtrace.SendMessageContext mqtraceContext;
+  org.apache.rocketmq.remoting.protocol.header.SendMessageRequestHeader requestHeader;
+  org.apache.rocketmq.remoting.protocol.RemotingCommand request;
+request=@request;
+mqtraceContext=null;
+ requestHeader = this.parseRequestHeader(request);
+ if (requestHeader!=null) goto label0;
+ return  null;
+ label0:mqtraceContext = this.buildMsgContext(ctx,requestHeader,request);
+ this.executeSendMessageHookBefore(mqtraceContext);
+ request = this#org.apache.rocketmq.broker.processor.ReplyMessageProcessor:processReplyMessageRequest(ctx,request,mqtraceContext,requestHeader);
+ this.executeSendMessageHookAfter(request,mqtraceContext);
+ return  request;
+ } 
+

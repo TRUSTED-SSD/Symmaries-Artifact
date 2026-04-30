@@ -1,0 +1,39 @@
+void org.apache.rocketmq.common.statistics.StatisticsItemScheduledIncrementPrinter$StatisticsItemSampleBrief:sample(org.apache.rocketmq.common.statistics.StatisticsItem snapshot)
+{
+int i;
+  java.lang.String name;
+  java.lang.String[] $stack8;
+  int $stack9;
+  org.apache.rocketmq.common.statistics.StatisticsItem $stack11;
+  java.util.concurrent.atomic.AtomicLong $stack12;
+  long $stack13;
+  org.apache.rocketmq.common.statistics.StatisticsItemScheduledIncrementPrinter$ItemSampleBrief[] $stack14;
+  org.apache.rocketmq.common.statistics.StatisticsItemScheduledIncrementPrinter$ItemSampleBrief $stack15;
+  long $stack20;
+  if (snapshot!=null) goto label0;
+ return;
+ label0:i=0;
+ label1:$stack8=this.itemNames;
+ $stack9=#$stack8;
+ if (i>=$stack9) goto label2;
+ $stack8=this.itemNames;
+ name=$stack8[i];
+ $stack11=this.lastSnapshot;
+ if ($stack11==null) goto label3;
+ $stack11=this.lastSnapshot;
+ $stack12 = $stack11.getItemAccumulate(name);
+ $stack20 = $stack12.get();
+ goto label4;
+ label3:$stack20=0L;
+ label4:$stack12 = snapshot.getItemAccumulate(name);
+ $stack13 = $stack12.get();
+ $stack14=this.briefs;
+ $stack15=$stack14[i];
+ $stack13=($stack13-$stack20);
+ $stack15.sample($stack13);
+ i=(i+1);
+ goto label1;
+ label2:this.lastSnapshot=snapshot;
+ return;
+ } 
+

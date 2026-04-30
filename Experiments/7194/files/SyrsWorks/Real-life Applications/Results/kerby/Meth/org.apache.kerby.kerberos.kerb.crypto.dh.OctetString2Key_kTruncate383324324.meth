@@ -1,0 +1,35 @@
+static byte[] org.apache.kerby.kerberos.kerb.crypto.dh.OctetString2Key:kTruncate(int k,byte[] x)
+{
+byte[] result;
+  int count;
+  byte[] filler;
+  int position;
+  int i;
+  byte $stack8;
+  int $stack10;
+  k=(k/8);
+ result=new byte[k];
+ count=0;
+ $stack8=(byte) 0;
+ filler = org.apache.kerby.kerberos.kerb.crypto.dh.OctetString2Key.calculateIntegrity($stack8,x);
+ position=0;
+ i=0;
+ label0:if (i>=k) goto label1;
+ $stack10=#filler;
+ if (position>=$stack10) goto label2;
+ $stack8=filler[position];
+ result[i]=$stack8;
+ position=(position+1);
+ goto label3;
+ label2:count=(count+1);
+ $stack8=(byte) count;
+ filler = org.apache.kerby.kerberos.kerb.crypto.dh.OctetString2Key.calculateIntegrity($stack8,x);
+ position=0;
+ $stack8=filler[0];
+ result[i]=$stack8;
+ position=(0+1);
+ label3:i=(i+1);
+ goto label0;
+ label1:return  result;
+ } 
+

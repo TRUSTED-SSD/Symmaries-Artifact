@@ -1,0 +1,24 @@
+boolean org.apache.bookkeeper.client.BookKeeper:isClosed(long lId)
+{
+org.apache.bookkeeper.client.BookKeeper$1Result result;
+  org.apache.bookkeeper.client.BookKeeper$1 $stack6;
+  java.util.concurrent.CountDownLatch $stack7;
+  int $stack8;
+  boolean $stack9;
+  org.apache.bookkeeper.client.BKException $stack11;
+  result=new org.apache.bookkeeper.client.BookKeeper$1Result;
+ result#org.apache.bookkeeper.client.BookKeeper$1Result(this);
+ $stack6=new org.apache.bookkeeper.client.BookKeeper$1;
+ $stack6#org.apache.bookkeeper.client.BookKeeper$1(this,result);
+ this#org.apache.bookkeeper.client.BookKeeper(lId,(org.apache.bookkeeper.client.AsyncCallback$IsClosedCallback)$stack6,null);
+ $stack7=result.notifier;
+ $stack7.await();
+ $stack8=result.rc;
+ if ($stack8==0) goto label0;
+ $stack8=result.rc;
+ $stack11 = org.apache.bookkeeper.client.BKException.create($stack8);
+ throw $stack11;
+ label0:$stack9=result.isClosed;
+ return  $stack9;
+ } 
+

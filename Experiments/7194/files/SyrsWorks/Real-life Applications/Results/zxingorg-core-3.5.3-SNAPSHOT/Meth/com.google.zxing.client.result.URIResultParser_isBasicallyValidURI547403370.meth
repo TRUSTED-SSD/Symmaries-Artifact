@@ -1,0 +1,28 @@
+static boolean com.google.zxing.client.result.URIResultParser:isBasicallyValidURI(java.lang.String uri)
+{
+java.util.regex.Matcher m;
+  boolean $stack2;
+  java.util.regex.Pattern $stack3;
+  int $stack9;
+  $stack2 = uri.contains((java.lang.CharSequence)" ");
+ if ($stack2==0) goto label0;
+ return  0;
+ label0:$stack3=com.google.zxing.client.result.URIResultParser.URL_WITH_PROTOCOL_PATTERN;
+ m = $stack3.matcher((java.lang.CharSequence)uri);
+ $stack2 = m.find();
+ if ($stack2==0) goto label1;
+ $stack9 = m.start();
+ if ($stack9!=0) goto label1;
+ return  1;
+ label1:$stack3=com.google.zxing.client.result.URIResultParser.URL_WITHOUT_PROTOCOL_PATTERN;
+ m = $stack3.matcher((java.lang.CharSequence)uri);
+ $stack2 = m.find();
+ if ($stack2==0) goto label2;
+ $stack9 = m.start();
+ if ($stack9!=0) goto label2;
+ $stack2=1;
+ goto label3;
+ label2:$stack2=0;
+ label3:return  $stack2;
+ } 
+

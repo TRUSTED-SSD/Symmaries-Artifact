@@ -1,0 +1,49 @@
+boolean java.io.FilePermission:isPathInvalid()
+{
+java.lang.String $r1;
+  int $i0;
+  java.lang.String $r2;
+  boolean $z0;
+  java.io.File $r3;
+  java.lang.StringBuilder $r5;
+  java.lang.String $r6;
+  java.lang.String $r7;
+  int $i1;
+  int $i2;
+  java.lang.String $r8;
+  java.lang.StringBuilder $r9;
+  java.lang.StringBuilder $r10;
+  java.nio.file.InvalidPathException $r11;
+  java.lang.String $r12;
+  java.lang.String r13;
+  java.nio.file.InvalidPathException r14;
+  $r1=this.cpath;
+ $i0 = $r1.indexOf(". ");
+ if ($i0==-1) goto label0;
+ label1:$r2=this.cpath;
+ $z0 = $r2.endsWith("*");
+ if ($z0==0) goto label2;
+ $r5=new java.lang.StringBuilder;
+ $r5#java.lang.StringBuilder:init();
+ $r7=this.cpath;
+ $r6=this.cpath;
+ $i1 = $r6.length();
+ $i2=($i1-1);
+ $r8 = $r7.substring(0,$i2);
+ $r9 = $r5.append($r8);
+ $r10 = $r9.append("-");
+ $r12 = $r10.toString();
+ goto label3;
+ label2:$r12=this.cpath;
+ label3:r13=$r12;
+ $r3=new java.io.File;
+ $r3#java.io.File:init(r13);
+ $r3.toPath();
+ label4:goto label0;
+ label5:$r11 = catch;
+ r14=$r11;
+ return  1;
+ label0:return  0;
+ catch java.nio.file.InvalidPathException: label1 - label4 : label5;
+}  
+

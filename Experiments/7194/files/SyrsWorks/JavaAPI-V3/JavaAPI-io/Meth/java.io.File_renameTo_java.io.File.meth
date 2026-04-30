@@ -1,0 +1,30 @@
+boolean java.io.File:renameTo(java.io.File r1)
+{
+java.lang.SecurityManager r2;
+  boolean $z0;
+  boolean $z1;
+  java.io.FileSystem $r3;
+  boolean $z2;
+  java.lang.NullPointerException $r4;
+  java.lang.String $r5;
+  java.lang.String $r6;
+  r2 = java.lang.System.getSecurityManager();
+ if (r2==null) goto label0;
+ $r5=this.path;
+ r2.checkWrite($r5);
+ $r6=r1.path;
+ r2.checkWrite($r6);
+ label0:if (r1!=null) goto label1;
+ $r4=new java.lang.NullPointerException;
+ $r4#java.lang.NullPointerException:init();
+ throw $r4;
+ label1:$z0 = this.isInvalid();
+ if ($z0!=0) goto label2;
+ $z1 = r1.isInvalid();
+ if ($z1==0) goto label3;
+ label2:return  0;
+ label3:$r3=java.io.File.fs;
+ $z2 = $r3.rename(this,r1);
+ return  $z2;
+ }  
+

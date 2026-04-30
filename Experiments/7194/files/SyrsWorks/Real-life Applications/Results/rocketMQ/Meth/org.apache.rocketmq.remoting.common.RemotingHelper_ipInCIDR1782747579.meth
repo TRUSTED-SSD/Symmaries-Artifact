@@ -1,0 +1,26 @@
+static boolean org.apache.rocketmq.remoting.common.RemotingHelper:ipInCIDR(java.lang.String @ip,java.lang.String cidr)
+{
+int ipAddr;
+  java.lang.String[] cidrArr;
+  int netId;
+  int cidrIpAddr;
+  boolean $stack16;
+  java.lang.String ip;
+ip=@ip;
+ipAddr = org.apache.rocketmq.remoting.common.RemotingHelper.ipToInt(ip);
+ cidrArr = cidr.split("/");
+ ip=cidrArr[1];
+ netId = java.lang.Integer.parseInt(ip);
+ netId=(32-netId);
+ netId=(-1<<netId);
+ ip=cidrArr[0];
+ cidrIpAddr = org.apache.rocketmq.remoting.common.RemotingHelper.ipToInt(ip);
+ ipAddr=(ipAddr & netId);
+ netId=(cidrIpAddr & netId);
+ if (ipAddr!=netId) goto label0;
+ $stack16=1;
+ goto label1;
+ label0:$stack16=0;
+ label1:return  $stack16;
+ } 
+

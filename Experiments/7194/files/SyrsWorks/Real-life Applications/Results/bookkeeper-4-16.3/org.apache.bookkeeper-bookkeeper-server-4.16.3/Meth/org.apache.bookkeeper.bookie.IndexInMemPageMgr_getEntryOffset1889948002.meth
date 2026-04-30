@@ -1,0 +1,29 @@
+long org.apache.bookkeeper.bookie.IndexInMemPageMgr:getEntryOffset(long ledger,long entry)
+{
+int offsetInPage;
+  org.apache.bookkeeper.bookie.LedgerEntryPage lep;
+  java.lang.Throwable l11;
+  long $stack13;
+  int $stack17;
+  offsetInPage=this.entriesPerPage;
+ $stack13=(long) offsetInPage;
+ $stack13=(entry%$stack13);
+ offsetInPage=(int) $stack13;
+ $stack13=(long) offsetInPage;
+ entry=(entry-$stack13);
+ lep=null;
+ label0:lep = this.getLedgerEntryPage(ledger,entry);
+ $stack17 = org.apache.bookkeeper.bookie.LedgerEntryPage.getIndexEntrySize();
+ offsetInPage=(offsetInPage * $stack17);
+ ledger = lep.getOffset(offsetInPage);
+ label1:if (lep==null) goto label2;
+ lep.releasePage();
+ label2:return  ledger;
+ label3:l11 = catch;
+ label4:if (lep==null) goto label5;
+ lep.releasePage();
+ label5:throw l11;
+ catch java.lang.Throwable: label0 - label1 : label3;
+catch java.lang.Throwable: label3 - label4 : label3;
+} 
+

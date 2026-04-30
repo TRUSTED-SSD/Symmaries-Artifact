@@ -1,0 +1,36 @@
+    private java.lang.Class getMalformedTestClass(org.junit.runner.Description)
+    {
+        org.junit.experimental.max.MaxCore this;
+        org.junit.runner.Description each;
+        java.lang.ClassNotFoundException e;
+        java.lang.String $stack3;
+        java.lang.Class $stack5;
+
+        this := @this: org.junit.experimental.max.MaxCore;
+
+        each := @parameter0: org.junit.runner.Description;
+
+     label1:
+        $stack3 = virtualinvoke each.<org.junit.runner.Description: java.lang.String toString()>();
+/*147*/
+
+        $stack3 = virtualinvoke $stack3.<java.lang.String: java.lang.String replace(java.lang.CharSequence,java.lang.CharSequence)>("malformed JUnit 3 test class: ", "");
+/*147*/
+
+        $stack5 = staticinvoke <java.lang.Class: java.lang.Class forName(java.lang.String)>($stack3);
+/*147*/
+
+     label2:
+        return $stack5;
+/*147*/
+
+     label3:
+        e := @caughtexception;
+/*147*/
+
+        return null;
+/*149*/
+
+        catch java.lang.ClassNotFoundException from label1 to label2 with label3;
+    }
+

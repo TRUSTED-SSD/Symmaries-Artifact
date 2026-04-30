@@ -1,0 +1,32 @@
+int org.apache.bookkeeper.util.ByteBufList:getBytes(byte[] dst)
+{
+int copied;
+  int idx;
+  io.netty.buffer.ByteBuf b;
+  int len;
+  java.util.ArrayList $stack6;
+  java.lang.Object $stack11;
+  int $stack13;
+  copied=0;
+ idx=0;
+ label0:$stack6=this.buffers;
+ len = $stack6.size();
+ if (idx>=len) goto label1;
+ len=#dst;
+ if (copied>=len) goto label1;
+ $stack6=this.buffers;
+ $stack11 = $stack6.get(idx);
+ b=(io.netty.buffer.ByteBuf) $stack11;
+ len = b.readableBytes();
+dummyClass.highSourceMut(len);
+ $stack13=#dst;
+ $stack13=($stack13-copied);
+ len = java.lang.Math.min(len,$stack13);
+ $stack13 = b.readerIndex();
+ b.getBytes($stack13,dst,copied,len);
+ copied=(copied+len);
+ idx=(idx+1);
+ goto label0;
+ label1:return  copied;
+ } 
+

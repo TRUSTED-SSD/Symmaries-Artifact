@@ -1,0 +1,49 @@
+com.google.zxing.common.reedsolomon.GenericGFPoly com.google.zxing.common.reedsolomon.ReedSolomonEncoder:buildGenerator(int degree)
+{
+com.google.zxing.common.reedsolomon.GenericGFPoly lastGenerator;
+  int d;
+  java.util.List $stack5;
+  java.lang.Object $stack8;
+  java.util.List $stack11;
+  com.google.zxing.common.reedsolomon.GenericGFPoly $stack19;
+  int[] $stack20;
+  com.google.zxing.common.reedsolomon.GenericGF $stack21;
+  com.google.zxing.common.reedsolomon.GenericGF $stack22;
+  com.google.zxing.common.reedsolomon.GenericGF $stack24;
+  int $stack25;
+  int $stack26;
+  $stack5=this.cachedGenerators;
+ d = $stack5.size();
+ if (degree<d) goto label0;
+ $stack11=this.cachedGenerators;
+ $stack5=this.cachedGenerators;
+ d = $stack5.size();
+ d=(d-1);
+ $stack8 = $stack11.get(d);
+ lastGenerator=(com.google.zxing.common.reedsolomon.GenericGFPoly) $stack8;
+ $stack5=this.cachedGenerators;
+ d = $stack5.size();
+ label1:if (d>degree) goto label0;
+ $stack19=new com.google.zxing.common.reedsolomon.GenericGFPoly;
+ $stack22=this.field;
+ $stack20=new int[2];
+ $stack20[0]=1;
+ $stack24=this.field;
+ $stack25=(d-1);
+ $stack21=this.field;
+ $stack26 = $stack21.getGeneratorBase();
+ $stack25=($stack25+$stack26);
+ $stack25 = $stack24.exp($stack25);
+ $stack20[1]=$stack25;
+ $stack19#com.google.zxing.common.reedsolomon.GenericGFPoly($stack22,$stack20);
+ lastGenerator = lastGenerator.multiply($stack19);
+ $stack5=this.cachedGenerators;
+ $stack5.add((java.lang.Object)lastGenerator);
+ d=(d+1);
+ goto label1;
+ label0:$stack5=this.cachedGenerators;
+ $stack8 = $stack5.get(degree);
+ lastGenerator=(com.google.zxing.common.reedsolomon.GenericGFPoly) $stack8;
+ return  lastGenerator;
+ } 
+

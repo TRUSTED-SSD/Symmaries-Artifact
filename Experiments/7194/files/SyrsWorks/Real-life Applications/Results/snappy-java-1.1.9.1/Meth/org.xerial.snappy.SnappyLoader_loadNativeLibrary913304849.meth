@@ -1,0 +1,32 @@
+static void org.xerial.snappy.SnappyLoader:loadNativeLibrary()
+{
+java.lang.Exception l0;
+  boolean $stack1;
+  java.io.File $stack2;
+  java.lang.String $stack5;
+  org.xerial.snappy.SnappyError $stack7;
+  org.xerial.snappy.SnappyErrorCode $stack8;
+  $stack1=org.xerial.snappy.SnappyLoader.isLoaded;
+ if ($stack1!=0) goto label0;
+ label1:$stack2 = org.xerial.snappy.SnappyLoader.findNativeLibrary();
+ org.xerial.snappy.SnappyLoader.nativeLibFile=$stack2;
+ $stack2=org.xerial.snappy.SnappyLoader.nativeLibFile;
+ if ($stack2==null) goto label2;
+ $stack2=org.xerial.snappy.SnappyLoader.nativeLibFile;
+ $stack5 = $stack2.getAbsolutePath();
+ java.lang.System.load($stack5);
+ goto label3;
+ label2:java.lang.System.loadLibrary("snappyjava");
+ label3:goto label4;
+ label5:l0 = catch;
+ l0.printStackTrace();
+ $stack7=new org.xerial.snappy.SnappyError;
+ $stack8=org.xerial.snappy.SnappyErrorCode.FAILED_TO_LOAD_NATIVE_LIBRARY;
+ $stack5 = l0.getMessage();
+ $stack7#org.xerial.snappy.SnappyError($stack8,$stack5);
+ throw $stack7;
+ label4:org.xerial.snappy.SnappyLoader.isLoaded=1;
+ label0:return;
+ catch java.lang.Exception: label1 - label3 : label5;
+} 
+

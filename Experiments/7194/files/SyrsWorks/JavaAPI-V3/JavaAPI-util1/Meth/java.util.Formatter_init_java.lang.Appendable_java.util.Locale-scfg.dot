@@ -1,0 +1,60 @@
+digraph G {
+  node [shape=box, ];
+  "pc0_js1" [label="〈$r3 = java.util.Formatter.nonNullAppendable (r1), js1〉\n\
+tt",
+             ];
+  "pc1_js1" [label="〈this#java.util.Formatter.init (r2, $r3), js1〉\n\
+pc ⊔ level(r2) ⊔ obj_level(r2) = ⊥",
+             ];
+  "pc2_js1" [label="〈return this, js1〉", ];
+  "pc3_js1" [label="〈sink, js1〉\n\
+obj_level(r1) ⊑ ret(obj_level(r1))' ∧ obj_level(r2) ⊑ ret(obj_level(r2))' ∧ obj_level(this) ⊑ ret(obj_level(this))' ∧ (ret(r1.><r1)' ∨ ¬r1.><r1) ∧ (ret(r1.><r2)' ∨ ¬r1.><r2) ∧ (ret(r1.><this)' ∨ ¬r1.><this) ∧ (ret(r2.><r1)' ∨ ¬r2.><r1) ∧ (ret(r2.><r2)' ∨ ¬r2.><r2) ∧ (ret(r2.><this)' ∨ ¬r2.><this) ∧ (ret(this.><r1)' ∨ ¬this.><r1) ∧ (ret(this.><r2)' ∨ ¬this.><r2) ∧ (ret(this.><this)' ∨ ¬this.><this) ∧ (ϕ ≠ S2 ∨ ret(~this)' ∧ obj_level(this) ⊑ ret(obj_level())' ∧ pc ⊔ level(this) ⊑ ret(level())' ∧ (ret(.><r1)' ∨ ¬r1.><this) ∧ (ret(.><r2)' ∨ ¬r2.><this) ∧ (ret(.><this)' ∨ ¬this.><this) ∧ (ret(r1.><)' ∨ ¬this.><r1) ∧ (ret(r2.><)' ∨ ¬this.><r2) ∧ (ret(this.><)' ∨ ¬this.><this))",
+             ];
+  
+  
+  "pc0_js1" -> "pc1_js1" [label="tt,\n\
+{$r3~r1 := tt,\n\
+ $r3.><r1 := r1.><r1,\n\
+ $r3.><r2 := r1.><r2,\n\
+ $r3.><this := r1.><this,\n\
+ r1.><$r3 := r1.><r1,\n\
+ r1.><r1 := ff,\n\
+ r1.><r2 := if r1.><r1 then r1.><r2 ∨ r2.><r1 else r1.><r2,\n\
+ r1.><this := if r1.><r1 then r1.><this ∨ this.><r1 else r1.><this,\n\
+ r2.><$r3 := r2.><r1,\n\
+ r2.><r1 := ff,\n\
+ r2.><r2 := if r1.><r1 then r2.><r2 ∨ r2.><r1 ∧ (r1.><r2 ∨ r2.><r1) else r2.><r2,\n\
+ r2.><this := if r1.><r1 then r2.><this ∨ r2.><r1 ∧ (r1.><this ∨ this.><r1) else r2.><this,\n\
+ this.><$r3 := this.><r1,\n\
+ this.><r1 := ff,\n\
+ this.><r2 := if r1.><r1 then this.><r2 ∨ this.><r1 ∧ (r1.><r2 ∨ r2.><r1) else this.><r2,\n\
+ this.><this := if r1.><r1 then this.><this ∨ this.><r1 ∧ (r1.><this ∨ this.><r1) else this.><this,\n\
+ level($r3) := pc ⊔ level(r1),\n\
+ obj_level($r3) := pc ⊔ level(r1) ⊔ obj_level(r1)}",
+                          ];
+  "pc1_js1" -> "pc2_js1" [label="tt,\n\
+{$r3.><$r3 := $r3.><this ∨ $r3.><r2 ∧ ($r3.><r2 ∨ r2.><$r3) ∨ $r3.><r2 ∧ ($r3.><this ∨ this.><$r3) ∨ $r3.><r2 ∧ (if this.><this then $r3.><r2 ∨ r2.><$r3 ∨ $r3.><this ∧ r2.><this else $r3.><r2 ∨ r2.><$r3) ∨ $r3.><this ∧ ($r3.><r2 ∨ r2.><$r3) ∨ $r3.><this ∧ ($r3.><this ∨ this.><$r3) ∨ ($r3.><r2 ∨ r2.><$r3) ∧ (if this.><this then $r3.><r2 ∨ $r3.><this ∧ r2.><this else $r3.><r2) ∨ ($r3.><this ∨ this.><$r3) ∧ (if this.><this then $r3.><r2 ∨ $r3.><this ∧ r2.><this else $r3.><r2) ∨ (if this.><this then $r3.><r2 ∨ $r3.><this else $r3.><r2),\n\
+ $r3.><r1 := $r3.><r1 ∨ $r3.><this ∨ $r3.><r2 ∧ r1.><r2 ∨ $r3.><r2 ∧ r1.><this ∨ $r3.><this ∧ r1.><r2 ∨ $r3.><this ∧ r1.><this ∨ (if this.><this then $r3.><r2 ∨ $r3.><this else $r3.><r2) ∨ (if if this.><this then $r3.><r2 ∨ $r3.><this ∧ r2.><this else $r3.><r2 then $r3.><r1 ∨ r1.><r2 else $r3.><r1) ∨ (if if this.><this then $r3.><r2 ∨ $r3.><this ∧ r2.><this else $r3.><r2 then $r3.><r1 ∨ r1.><this else $r3.><r1) ∨ (if if this.><this then $r3.><r2 ∨ r2.><$r3 ∨ $r3.><this ∧ r2.><this else $r3.><r2 ∨ r2.><$r3 then $r3.><r1 ∨ $r3.><r2 else $r3.><r1),\n\
+ $r3.><r2 := $r3.><r2 ∨ $r3.><this ∨ $r3.><r2 ∧ (r2.><this ∨ this.><r2) ∨ $r3.><this ∧ ($r3.><r2 ∨ r2.><$r3) ∨ $r3.><this ∧ (r2.><this ∨ this.><r2) ∨ (if this.><this then $r3.><r2 ∨ $r3.><this ∧ r2.><this else $r3.><r2) ∨ (if if this.><this then $r3.><r2 ∨ $r3.><this else $r3.><r2 then $r3.><r2 ∨ r2.><$r3 else $r3.><r2) ∨ (if if this.><this then $r3.><r2 ∨ $r3.><this ∧ r2.><this else $r3.><r2 then $r3.><r2 ∨ r2.><this ∨ this.><r2 else $r3.><r2) ∨ (if if this.><this then $r3.><r2 ∨ r2.><$r3 ∨ $r3.><this ∧ r2.><this else $r3.><r2 ∨ r2.><$r3 then $r3.><r2 ∨ $r3.><r2 ∧ ($r3.><r2 ∨ r2.><$r3) else $r3.><r2),\n\
+ $r3.><this := $r3.><r2 ∨ $r3.><this ∨ $r3.><r2 ∧ (r2.><this ∨ this.><r2) ∨ $r3.><this ∧ ($r3.><this ∨ this.><$r3) ∨ $r3.><this ∧ (r2.><this ∨ this.><r2) ∨ (if this.><this then $r3.><r2 ∨ $r3.><this ∧ r2.><this else $r3.><r2) ∨ (if if this.><this then $r3.><r2 ∨ $r3.><this else $r3.><r2 then $r3.><this ∨ this.><$r3 else $r3.><this) ∨ (if if this.><this then $r3.><r2 ∨ $r3.><this ∧ r2.><this else $r3.><r2 then $r3.><this ∨ r2.><this ∨ this.><r2 else $r3.><this) ∨ (if if this.><this then $r3.><r2 ∨ r2.><$r3 ∨ $r3.><this ∧ r2.><this else $r3.><r2 ∨ r2.><$r3 then $r3.><this ∨ $r3.><r2 ∧ ($r3.><this ∨ this.><$r3) else $r3.><this),\n\
+ r1.><$r3 := r1.><$r3 ∨ r1.><this ∨ r1.><r2 ∧ ($r3.><r2 ∨ r2.><$r3) ∨ r1.><r2 ∧ ($r3.><this ∨ this.><$r3) ∨ r1.><this ∧ ($r3.><r2 ∨ r2.><$r3) ∨ r1.><this ∧ ($r3.><this ∨ this.><$r3) ∨ (if this.><this then $r3.><r2 ∨ $r3.><this else $r3.><r2) ∨ (if if this.><this then $r3.><r2 ∨ $r3.><this ∧ r2.><this else $r3.><r2 then $r3.><r2 ∨ r1.><$r3 ∨ r2.><$r3 else r1.><$r3) ∨ (if if this.><this then $r3.><r2 ∨ $r3.><this ∧ r2.><this else $r3.><r2 then $r3.><this ∨ r1.><$r3 ∨ this.><$r3 else r1.><$r3) ∨ (if if this.><this then $r3.><r2 ∨ r2.><$r3 ∨ $r3.><this ∧ r2.><this else $r3.><r2 ∨ r2.><$r3 then r1.><$r3 ∨ r1.><r2 else r1.><$r3),\n\
+ r1.><r1 := r1.><r2 ∨ r1.><this ∨ r1.><r2 ∧ r1.><this ∨ r1.><r2 ∧ (if this.><this then $r3.><r2 ∨ $r3.><this ∧ r2.><this else $r3.><r2) ∨ r1.><r2 ∧ (if this.><this then $r3.><r2 ∨ r2.><$r3 ∨ $r3.><this ∧ r2.><this else $r3.><r2 ∨ r2.><$r3) ∨ r1.><this ∧ (if this.><this then $r3.><r2 ∨ $r3.><this ∧ r2.><this else $r3.><r2) ∨ (if this.><this then $r3.><r2 ∨ $r3.><this else $r3.><r2),\n\
+ r1.><r2 := r1.><r2 ∨ r1.><this ∨ r1.><r2 ∧ (r2.><this ∨ this.><r2) ∨ r1.><this ∧ ($r3.><r2 ∨ r2.><$r3) ∨ r1.><this ∧ (r2.><this ∨ this.><r2) ∨ (if this.><this then $r3.><r2 ∨ $r3.><this ∧ r2.><this else $r3.><r2) ∨ (if if this.><this then $r3.><r2 ∨ $r3.><this else $r3.><r2 then $r3.><r2 ∨ r1.><r2 ∨ r2.><$r3 else r1.><r2) ∨ (if if this.><this then $r3.><r2 ∨ $r3.><this ∧ r2.><this else $r3.><r2 then r1.><r2 ∨ r2.><this ∨ this.><r2 else r1.><r2) ∨ (if if this.><this then $r3.><r2 ∨ r2.><$r3 ∨ $r3.><this ∧ r2.><this else $r3.><r2 ∨ r2.><$r3 then r1.><r2 ∨ r1.><r2 ∧ ($r3.><r2 ∨ r2.><$r3) else r1.><r2),\n\
+ r1.><this := r1.><r2 ∨ r1.><this ∨ r1.><r2 ∧ (r2.><this ∨ this.><r2) ∨ r1.><this ∧ ($r3.><this ∨ this.><$r3) ∨ r1.><this ∧ (r2.><this ∨ this.><r2) ∨ (if this.><this then $r3.><r2 ∨ $r3.><this ∧ r2.><this else $r3.><r2) ∨ (if if this.><this then $r3.><r2 ∨ $r3.><this else $r3.><r2 then $r3.><this ∨ r1.><this ∨ this.><$r3 else r1.><this) ∨ (if if this.><this then $r3.><r2 ∨ $r3.><this ∧ r2.><this else $r3.><r2 then r1.><this ∨ r2.><this ∨ this.><r2 else r1.><this) ∨ (if if this.><this then $r3.><r2 ∨ r2.><$r3 ∨ $r3.><this ∧ r2.><this else $r3.><r2 ∨ r2.><$r3 then r1.><this ∨ r1.><r2 ∧ ($r3.><this ∨ this.><$r3) else r1.><this),\n\
+ r2.><$r3 := $r3.><r2 ∨ $r3.><this ∨ r2.><$r3 ∨ r2.><this ∨ this.><$r3 ∨ r2.><this ∧ ($r3.><r2 ∨ r2.><$r3) ∨ r2.><this ∧ ($r3.><this ∨ this.><$r3) ∨ (if this.><this then $r3.><r2 ∨ r2.><$r3 ∨ $r3.><this ∧ r2.><this else $r3.><r2 ∨ r2.><$r3) ∨ (if if this.><this then $r3.><r2 ∨ $r3.><this ∧ r2.><this else $r3.><r2 then r2.><$r3 ∨ r2.><$r3 ∧ ($r3.><r2 ∨ r2.><$r3) else r2.><$r3) ∨ (if if this.><this then $r3.><r2 ∨ $r3.><this ∧ r2.><this else $r3.><r2 then r2.><$r3 ∨ r2.><$r3 ∧ ($r3.><this ∨ this.><$r3) else r2.><$r3),\n\
+ r2.><r1 := r1.><r2 ∨ r1.><this ∨ r2.><this ∨ r1.><r2 ∧ r2.><this ∨ r1.><this ∧ r2.><this ∨ r2.><$r3 ∧ (if this.><this then $r3.><r2 ∨ $r3.><this else $r3.><r2) ∨ r1.><r2 ∧ r2.><$r3 ∧ (if this.><this then $r3.><r2 ∨ $r3.><this ∧ r2.><this else $r3.><r2) ∨ r1.><this ∧ r2.><$r3 ∧ (if this.><this then $r3.><r2 ∨ $r3.><this ∧ r2.><this else $r3.><r2) ∨ (if this.><this then $r3.><r2 ∨ r2.><$r3 ∨ $r3.><this ∧ r2.><this else $r3.><r2 ∨ r2.><$r3),\n\
+ r2.><r2 := tt,\n\
+ r2.><this := tt,\n\
+ this.><$r3 := tt,\n\
+ this.><r1 := tt,\n\
+ this.><r2 := tt,\n\
+ this.><this := tt,\n\
+ obj_level($r3) := pc ⊔ level(r1) ⊔ obj_level(r1) ⊔ (if r2.><$r3 then ⊤ else ⊥) ⊔ (if this.><$r3 then ⊤ else ⊥) ⊔ (if this.><this then if ¬$r3.><r2 ∧ ¬r2.><$r3 ∧ (¬$r3.><this ∨ ¬r2.><this) then pc ⊔ level(r1) ⊔ obj_level(r1) else if $r3.><r2 ∨ r2.><$r3 ∨ $r3.><this ∧ r2.><this then ⊤ else ⊥ else if ¬$r3.><r2 ∧ ¬r2.><$r3 then pc ⊔ level(r1) ⊔ obj_level(r1) else if $r3.><r2 ∨ r2.><$r3 then ⊤ else ⊥),\n\
+ obj_level(r1) := obj_level(r1) ⊔ (if r1.><r2 then ⊤ else ⊥) ⊔ (if r1.><this then ⊤ else ⊥) ⊔ (if this.><this then if ¬$r3.><r2 ∧ ¬r2.><$r3 ∧ (¬$r3.><this ∨ ¬r2.><this) then pc ⊔ level(r1) ⊔ obj_level(r1) else if $r3.><r2 ∨ r2.><$r3 ∨ $r3.><this ∧ r2.><this then ⊤ else ⊥ else if ¬$r3.><r2 ∧ ¬r2.><$r3 then pc ⊔ level(r1) ⊔ obj_level(r1) else if $r3.><r2 ∨ r2.><$r3 then ⊤ else ⊥),\n\
+ obj_level(r2) := ⊤,\n\
+ obj_level(this) := ⊤}",
+                          ];
+  "pc2_js1" -> "pc3_js1" [label="tt,\n\
+{ϕ := S2}", ];
+  
+  }

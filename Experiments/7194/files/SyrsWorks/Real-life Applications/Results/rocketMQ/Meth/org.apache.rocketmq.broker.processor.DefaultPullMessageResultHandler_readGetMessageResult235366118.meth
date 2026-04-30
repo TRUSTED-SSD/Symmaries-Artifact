@@ -1,0 +1,54 @@
+byte[] org.apache.rocketmq.broker.processor.DefaultPullMessageResultHandler:readGetMessageResult(org.apache.rocketmq.store.GetMessageResult getMessageResult,java.lang.String group,java.lang.String topic,int queueId)
+{
+java.nio.ByteBuffer byteBuffer;
+  long storeTimestamp;
+  java.util.List messageBufferList;
+  java.util.Iterator l9;
+  java.nio.ByteBuffer bb;
+  int sysFlag;
+  java.lang.Throwable l14;
+  boolean $stack19;
+  org.apache.rocketmq.broker.BrokerController $stack20;
+  org.apache.rocketmq.store.stats.BrokerStatsManager $stack21;
+  org.apache.rocketmq.store.MessageStore $stack23;
+  long $stack24;
+  byte[] $stack26;
+  java.lang.Object $stack27;
+  byte $stack33;
+  sysFlag = getMessageResult.getBufferTotalSize();
+ byteBuffer = java.nio.ByteBuffer.allocate(sysFlag);
+ storeTimestamp=0L;
+ label0:messageBufferList = getMessageResult.getMessageBufferList();
+ l9 = messageBufferList.iterator();
+ label1:$stack19 = l9.hasNext();
+ if ($stack19==0) goto label2;
+ $stack27 = l9.next();
+ bb=(java.nio.ByteBuffer) $stack27;
+ byteBuffer.put(bb);
+ sysFlag = bb.getInt(36);
+ sysFlag=(sysFlag & 16);
+ if (sysFlag!=0) goto label3;
+ $stack33=8;
+ goto label4;
+ label3:$stack33=20;
+ label4:sysFlag=(48+$stack33);
+ storeTimestamp = bb.getLong(sysFlag);
+ goto label1;
+ label2:getMessageResult.release();
+ goto label5;
+ label6:l14 = catch;
+ label7:getMessageResult.release();
+ throw l14;
+ label5:$stack20=this.brokerController;
+ $stack21 = $stack20.getBrokerStatsManager();
+ $stack20=this.brokerController;
+ $stack23 = $stack20.getMessageStore();
+ $stack24 = $stack23.now();
+ storeTimestamp=($stack24-storeTimestamp);
+ $stack21.recordDiskFallBehindTime(group,topic,queueId,storeTimestamp);
+ $stack26 = byteBuffer.array();
+ return  $stack26;
+ catch java.lang.Throwable: label0 - label2 : label6;
+catch java.lang.Throwable: label6 - label7 : label6;
+} 
+

@@ -1,0 +1,54 @@
+org.apache.rocketmq.broker.processor.PopBufferMergeService$PopCheckPointWrapper(org.apache.rocketmq.broker.processor.PopBufferMergeService this$0,int reviveQueueId,long reviveQueueOffset,org.apache.rocketmq.store.pop.PopCheckPoint point,long nextBeginOffset)
+{
+java.util.concurrent.atomic.AtomicInteger $stack8;
+  java.lang.StringBuilder $stack10;
+  org.apache.rocketmq.store.pop.PopCheckPoint $stack11;
+  java.lang.String $stack12;
+  this.this$0=this$0;
+ this#java.lang.Object();
+ this.ckStored=0;
+ this.reviveQueueId=reviveQueueId;
+ this.reviveQueueOffset=reviveQueueOffset;
+ this.ck=point;
+ $stack8=new java.util.concurrent.atomic.AtomicInteger;
+ $stack8#java.util.concurrent.atomic.AtomicInteger(0);
+ this.bits=$stack8;
+ $stack8=new java.util.concurrent.atomic.AtomicInteger;
+ $stack8#java.util.concurrent.atomic.AtomicInteger(0);
+ this.toStoreBits=$stack8;
+ this.nextBeginOffset=nextBeginOffset;
+ $stack10=new java.lang.StringBuilder;
+ $stack10#java.lang.StringBuilder();
+ $stack11=this.ck;
+ $stack12 = $stack11.getTopic();
+ $stack10 = $stack10.append($stack12);
+ $stack10 = $stack10.append("@");
+ $stack11=this.ck;
+ $stack12 = $stack11.getCId();
+ $stack10 = $stack10.append($stack12);
+ $stack10 = $stack10.append("@");
+ $stack11=this.ck;
+ reviveQueueId = $stack11.getQueueId();
+ $stack10 = $stack10.append(reviveQueueId);
+ $stack12 = $stack10.toString();
+ this.lockKey=$stack12;
+ $stack10=new java.lang.StringBuilder;
+ $stack10#java.lang.StringBuilder();
+ $stack12 = point.getTopic();
+ $stack10 = $stack10.append($stack12);
+ $stack12 = point.getCId();
+ $stack10 = $stack10.append($stack12);
+ reviveQueueId = point.getQueueId();
+ $stack10 = $stack10.append(reviveQueueId);
+ reviveQueueOffset = point.getStartOffset();
+ $stack10 = $stack10.append(reviveQueueOffset);
+ reviveQueueOffset = point.getPopTime();
+ $stack10 = $stack10.append(reviveQueueOffset);
+ $stack12 = point.getBrokerName();
+ $stack10 = $stack10.append($stack12);
+ $stack12 = $stack10.toString();
+ this.mergeKey=$stack12;
+ this.justOffset=0;
+ return;
+ } 
+

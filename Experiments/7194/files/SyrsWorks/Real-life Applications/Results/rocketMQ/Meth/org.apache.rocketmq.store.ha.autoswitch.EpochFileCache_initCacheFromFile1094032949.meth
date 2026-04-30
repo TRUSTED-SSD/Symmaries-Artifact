@@ -1,0 +1,34 @@
+boolean org.apache.rocketmq.store.ha.autoswitch.EpochFileCache:initCacheFromFile()
+{
+java.util.List entries;
+  boolean l2;
+  java.util.concurrent.locks.Lock $stack4;
+  org.apache.rocketmq.common.utils.CheckpointFile $stack5;
+  java.lang.Throwable $stack8;
+  java.io.IOException $stack10;
+  org.apache.rocketmq.logging.org.slf4j.Logger $stack11;
+  $stack4=this.writeLock;
+ $stack4.lock();
+ label0:$stack5=this.ccheckpoint;
+ entries = $stack5.read();
+ this#org.apache.rocketmq.store.ha.autoswitch.EpochFileCache:initEntries(entries);
+ l2=1;
+ label1:$stack4=this.writeLock;
+ $stack4.unlock();
+ return  1;
+ label2:$stack10 = catch;
+ $stack11=org.apache.rocketmq.store.ha.autoswitch.EpochFileCache.log;
+ $stack11.error("Error happen when init epoch entries from epochFile",(java.lang.Throwable)$stack10);
+ l2=0;
+ label3:$stack4=this.writeLock;
+ $stack4.unlock();
+ return  0;
+ label4:$stack8 = catch;
+ $stack4=this.writeLock;
+ $stack4.unlock();
+ throw $stack8;
+ catch java.io.IOException: label0 - label1 : label2;
+catch java.lang.Throwable: label0 - label1 : label4;
+catch java.lang.Throwable: label2 - label3 : label4;
+} 
+

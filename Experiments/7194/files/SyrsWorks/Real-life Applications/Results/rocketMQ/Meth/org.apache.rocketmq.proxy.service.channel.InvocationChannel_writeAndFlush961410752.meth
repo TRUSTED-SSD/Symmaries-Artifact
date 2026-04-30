@@ -1,0 +1,28 @@
+io.netty.channel.ChannelFuture org.apache.rocketmq.proxy.service.channel.InvocationChannel:writeAndFlush(java.lang.Object msg)
+{
+org.apache.rocketmq.remoting.protocol.RemotingCommand responseCommand;
+  org.apache.rocketmq.proxy.service.channel.InvocationContextInterface context;
+  boolean $stack4;
+  io.netty.channel.ChannelFuture $stack5;
+  java.util.concurrent.ConcurrentMap $stack6;
+  int $stack7;
+  java.lang.Integer $stack8;
+  java.lang.Object $stack9;
+  $stack4=msg instanceof org.apache.rocketmq.remoting.protocol.RemotingCommand;
+ if ($stack4==0) goto label0;
+ responseCommand=(org.apache.rocketmq.remoting.protocol.RemotingCommand) msg;
+ $stack6=this.inFlightRequestMap;
+ $stack7 = responseCommand.getOpaque();
+ $stack8 = java.lang.Integer.valueOf($stack7);
+ $stack9 = $stack6.remove((java.lang.Object)$stack8);
+ context=(org.apache.rocketmq.proxy.service.channel.InvocationContextInterface) $stack9;
+ if (null==context) goto label1;
+ context.handle(responseCommand);
+ label1:$stack6=this.inFlightRequestMap;
+ $stack7 = responseCommand.getOpaque();
+ $stack8 = java.lang.Integer.valueOf($stack7);
+ $stack6.remove((java.lang.Object)$stack8);
+ label0:$stack5 = this#org.apache.rocketmq.proxy.service.channel.SimpleChannel:writeAndFlush(msg);
+ return  $stack5;
+ } 
+

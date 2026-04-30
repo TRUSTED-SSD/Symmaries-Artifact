@@ -1,0 +1,31 @@
+com.google.zxing.datamatrix.decoder.BitMatrixParser(com.google.zxing.common.BitMatrix @bitMatrix)
+{
+int dimension;
+  com.google.zxing.FormatException $stack4;
+  com.google.zxing.datamatrix.decoder.Version $stack6;
+  com.google.zxing.common.BitMatrix $stack9;
+  int $stack12;
+  com.google.zxing.common.BitMatrix bitMatrix;
+bitMatrix=@bitMatrix;
+this#java.lang.Object();
+ dimension = bitMatrix.getHeight();
+ if (dimension<8) goto label0;
+ if (dimension>144) goto label0;
+ dimension=(dimension & 1);
+ if (dimension==0) goto label1;
+ label0:$stack4 = com.google.zxing.FormatException.getFormatInstance();
+ throw $stack4;
+ label1:$stack6 = com.google.zxing.datamatrix.decoder.BitMatrixParser.readVersion(bitMatrix);
+ this.version=$stack6;
+ bitMatrix = this#com.google.zxing.datamatrix.decoder.BitMatrixParser:extractDataRegion(bitMatrix);
+ this.mappingBitMatrix=bitMatrix;
+ bitMatrix=new com.google.zxing.common.BitMatrix;
+ $stack9=this.mappingBitMatrix;
+ dimension = $stack9.getWidth();
+ $stack9=this.mappingBitMatrix;
+ $stack12 = $stack9.getHeight();
+ bitMatrix#com.google.zxing.common.BitMatrix(dimension,$stack12);
+ this.readMappingMatrix=bitMatrix;
+ return;
+ } 
+

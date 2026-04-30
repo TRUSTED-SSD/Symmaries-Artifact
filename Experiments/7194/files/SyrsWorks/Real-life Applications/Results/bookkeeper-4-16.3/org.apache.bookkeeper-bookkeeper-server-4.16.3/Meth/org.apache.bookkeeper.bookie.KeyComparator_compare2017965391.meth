@@ -1,0 +1,25 @@
+int org.apache.bookkeeper.bookie.KeyComparator:compare(org.apache.bookkeeper.bookie.EntryKey left,org.apache.bookkeeper.bookie.EntryKey right)
+{
+long ret;
+  long $stack6;
+  byte $stack7;
+  $stack6=left.ledgerId;
+ ret=right.ledgerId;
+ ret=($stack6-ret);
+ $stack7=(ret cmp 0L);
+ if ($stack7!=0) goto label0;
+ $stack6=left.entryId;
+ ret=right.entryId;
+ ret=($stack6-ret);
+ label0:$stack7=(ret cmp 0L);
+ if ($stack7>=0) goto label1;
+ $stack7=-1;
+ goto label2;
+ label1:$stack7=(ret cmp 0L);
+ if ($stack7<=0) goto label3;
+ $stack7=1;
+ goto label2;
+ label3:$stack7=0;
+ label2:return  $stack7;
+ } 
+

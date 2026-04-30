@@ -1,0 +1,14 @@
+apache.rocketmq.v2.Settings org.apache.rocketmq.proxy.grpc.v2.common.GrpcClientSettingsManager:mergeSubscriptionData(org.apache.rocketmq.proxy.common.ProxyContext ctx,apache.rocketmq.v2.Settings @settings,java.lang.String consumerGroup)
+{
+org.apache.rocketmq.remoting.protocol.subscription.SubscriptionGroupConfig config;
+  org.apache.rocketmq.proxy.processor.MessagingProcessor $stack5;
+  apache.rocketmq.v2.Settings settings;
+settings=@settings;
+$stack5=this.messagingProcessor;
+ config = $stack5.getSubscriptionGroupConfig(ctx,consumerGroup);
+ if (config!=null) goto label0;
+ return  settings;
+ label0:settings = org.apache.rocketmq.proxy.grpc.v2.common.GrpcClientSettingsManager.mergeSubscriptionData(settings,config);
+ return  settings;
+ } 
+

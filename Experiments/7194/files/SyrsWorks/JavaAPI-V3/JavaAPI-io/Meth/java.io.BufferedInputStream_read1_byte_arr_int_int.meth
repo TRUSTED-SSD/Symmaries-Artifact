@@ -1,0 +1,50 @@
+int java.io.BufferedInputStream:read1(byte[] r1,int i0,int i1)
+{
+int i2;
+  int $i3;
+  int $i4;
+  byte[] $r2;
+  int $i5;
+  int $i6;
+  int $i7;
+  byte[] $r4;
+  int $i8;
+  int $i9;
+  int $i10;
+  int $i11;
+  java.io.InputStream $r5;
+  int $i12;
+  int i13;
+  int $i14;
+  $i4=this.count;
+ $i3=this.pos;
+ i13=($i4-$i3);
+ if (i13>0) goto label0;
+ $r4 = this#java.io.BufferedInputStream:getBufIfOpen();
+ $i8=#$r4;
+ if (i1<$i8) goto label1;
+ $i11=this.markpos;
+ if ($i11>=0) goto label1;
+ $r5 = this#java.io.BufferedInputStream:getInIfOpen();
+ $i12 = $r5.read(r1,i0,i1);
+ return  $i12;
+ label1:this#java.io.BufferedInputStream:fill();
+ $i10=this.count;
+ $i9=this.pos;
+ i13=($i10-$i9);
+ if (i13>0) goto label0;
+ return  -1;
+ label0:if (i13>=i1) goto label2;
+ $i14=i13;
+ goto label3;
+ label2:$i14=i1;
+ label3:i2=$i14;
+ $r2 = this#java.io.BufferedInputStream:getBufIfOpen();
+ $i5=this.pos;
+ java.lang.System.native_arraycopy((java.lang.Object)$r2,$i5,(java.lang.Object)r1,i0,i2);
+ $i6=this.pos;
+ $i7=($i6+i2);
+ this.pos=$i7;
+ return  i2;
+ }  
+

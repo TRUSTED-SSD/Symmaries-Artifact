@@ -1,0 +1,27 @@
+java.util.concurrent.CompletableFuture org.apache.rocketmq.proxy.service.mqclient.MQClientAPIExt:sendHeartbeatOneway(java.lang.String brokerAddr,org.apache.rocketmq.remoting.protocol.heartbeat.HeartbeatData heartbeatData,long timeoutMillis)
+{
+java.util.concurrent.CompletableFuture future;
+  org.apache.rocketmq.remoting.protocol.RemotingCommand request;
+  org.apache.rocketmq.client.ClientConfig $stack9;
+  org.apache.rocketmq.remoting.protocol.LanguageCode $stack10;
+  byte[] $stack11;
+  org.apache.rocketmq.remoting.RemotingClient $stack12;
+  java.lang.Throwable $stack14;
+  future=new java.util.concurrent.CompletableFuture;
+ future#java.util.concurrent.CompletableFuture();
+ label0:request = org.apache.rocketmq.remoting.protocol.RemotingCommand.createRequestCommand(34,null);
+ $stack9=this.clientConfig;
+ $stack10 = $stack9.getLanguage();
+ request.setLanguage($stack10);
+ $stack11 = heartbeatData.encode();
+ request.setBody($stack11);
+ $stack12 = this.getRemotingClient();
+ $stack12.invokeOneway(brokerAddr,request,timeoutMillis);
+ future.complete(null);
+ label1:goto label2;
+ label3:$stack14 = catch;
+ future.completeExceptionally($stack14);
+ label2:return  future;
+ catch java.lang.Throwable: label0 - label1 : label3;
+} 
+

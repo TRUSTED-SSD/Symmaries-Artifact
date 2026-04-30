@@ -1,0 +1,41 @@
+static java.util.List org.apache.kerby.kerberos.kerb.preauth.pkinit.CertificateHelper:loadCerts(java.lang.String @filename)
+{
+java.io.File file;
+  java.io.InputStream res;
+  boolean $stack5;
+  java.lang.Class $stack6;
+  java.lang.ClassLoader $stack7;
+  java.util.List $stack9;
+  java.nio.file.Path $stack10;
+  java.nio.file.OpenOption[] $stack11;
+  java.io.IOException $stack14;
+  java.lang.StringBuilder $stack15;
+  org.slf4j.Logger $stack16;
+  java.lang.String filename;
+filename=@filename;
+file=new java.io.File;
+ file#java.io.File(filename);
+ res=null;
+ $stack5 = file.isFile();
+ if ($stack5==0) goto label0;
+ label1:$stack10 = file.toPath();
+ $stack11=new java.nio.file.OpenOption[0];
+ res = java.nio.file.Files.newInputStream($stack10,$stack11);
+ label2:goto label3;
+ label4:$stack14 = catch;
+ $stack16=org.apache.kerby.kerberos.kerb.preauth.pkinit.CertificateHelper.LOG;
+ $stack15=new java.lang.StringBuilder;
+ $stack15#java.lang.StringBuilder();
+ $stack15 = $stack15.append("Can\'t load cert, file not found. ");
+ $stack15 = $stack15.append((java.lang.Object)$stack14);
+ filename = $stack15.toString();
+ $stack16.error(filename);
+ goto label3;
+ label0:$stack6=org.apache.kerby.kerberos.kerb.preauth.pkinit.CertificateHelper;
+ $stack7 = $stack6.getClassLoader();
+ res = $stack7.getResourceAsStream(filename);
+ label3:$stack9 = org.apache.kerby.kerberos.kerb.preauth.pkinit.CertificateHelper.loadCerts(res);
+ return  $stack9;
+ catch java.io.IOException: label1 - label2 : label4;
+} 
+

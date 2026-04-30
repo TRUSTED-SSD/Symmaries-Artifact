@@ -1,0 +1,28 @@
+java.lang.String org.apache.rocketmq.remoting.protocol.route.BrokerData:selectBrokerAddr()
+{
+java.lang.String masterAddress;
+  java.util.ArrayList addrs;
+  java.util.HashMap $stack3;
+  java.lang.Long $stack4;
+  java.lang.Object $stack5;
+  java.util.Collection $stack8;
+  java.util.Random $stack9;
+  int $stack10;
+  $stack3=this.brokerAddrs;
+ $stack4 = java.lang.Long.valueOf(0L);
+ $stack5 = $stack3.get((java.lang.Object)$stack4);
+ masterAddress=(java.lang.String) $stack5;
+ if (masterAddress!=null) goto label0;
+ addrs=new java.util.ArrayList;
+ $stack3=this.brokerAddrs;
+ $stack8 = $stack3.values();
+ addrs#java.util.ArrayList($stack8);
+ $stack9=this.random;
+ $stack10 = addrs.size();
+ $stack10 = $stack9.nextInt($stack10);
+ $stack5 = addrs.get($stack10);
+ masterAddress=(java.lang.String) $stack5;
+ return  masterAddress;
+ label0:return  masterAddress;
+ } 
+

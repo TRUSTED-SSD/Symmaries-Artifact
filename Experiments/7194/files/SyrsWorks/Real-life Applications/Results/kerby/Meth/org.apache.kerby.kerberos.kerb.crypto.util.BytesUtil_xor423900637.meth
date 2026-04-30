@@ -1,0 +1,21 @@
+static void org.apache.kerby.kerberos.kerb.crypto.util.BytesUtil:xor(byte[] a,byte[] b,byte[] output)
+{
+int i;
+  int av;
+  int bv;
+  i=0;
+ label0:av=#a;
+ av=(av/4);
+ if (i>=av) goto label1;
+ av=(i * 4);
+ av = org.apache.kerby.kerberos.kerb.crypto.util.BytesUtil.bytes2int(a,av,(boolean)1);
+ bv=(i * 4);
+ bv = org.apache.kerby.kerberos.kerb.crypto.util.BytesUtil.bytes2int(b,bv,(boolean)1);
+ av=(!av & bv) |(!bv & av);
+ bv=(i * 4);
+ org.apache.kerby.kerberos.kerb.crypto.util.BytesUtil.int2bytes(av,output,bv,(boolean)1);
+ i=(i+1);
+ goto label0;
+ label1:return;
+ } 
+

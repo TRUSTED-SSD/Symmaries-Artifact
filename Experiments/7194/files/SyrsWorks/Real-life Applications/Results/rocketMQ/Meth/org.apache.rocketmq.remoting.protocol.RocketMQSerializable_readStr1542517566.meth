@@ -1,0 +1,35 @@
+static java.lang.String org.apache.rocketmq.remoting.protocol.RocketMQSerializable:readStr(io.netty.buffer.ByteBuf buf,boolean useShortLength,int limit)
+{
+int len;
+  java.lang.CharSequence cs;
+  java.nio.charset.Charset $stack6;
+  java.lang.String $stack8;
+  org.apache.rocketmq.remoting.exception.RemotingCommandException $stack9;
+  java.lang.StringBuilder $stack10;
+  if (useShortLength==0) goto label0;
+ len = buf.readShort();
+dummyClass.highSourceMut(len);
+ goto label1;
+ label0:len = buf.readInt();
+dummyClass.highSourceMut(len);
+ label1:if (len!=0) goto label2;
+ return  null;
+ label2:if (len<=limit) goto label3;
+ $stack9=new org.apache.rocketmq.remoting.exception.RemotingCommandException;
+ $stack10=new java.lang.StringBuilder;
+ $stack10#java.lang.StringBuilder();
+ $stack10 = $stack10.append("string length exceed limit:");
+ $stack10 = $stack10.append(limit);
+ $stack8 = $stack10.toString();
+ $stack9#org.apache.rocketmq.remoting.exception.RemotingCommandException($stack8);
+ throw $stack9;
+ label3:$stack6=java.nio.charset.StandardCharsets.UTF_8;
+ cs = buf.readCharSequence(len,$stack6);
+dummyClass.highSourceMut(cs);
+ if (cs!=null) goto label4;
+ $stack8=null;
+ goto label5;
+ label4:$stack8 = cs.toString();
+ label5:return  $stack8;
+ } 
+

@@ -1,0 +1,18 @@
+long org.apache.bookkeeper.bookie.EntryMemTable:internalAdd(org.apache.bookkeeper.bookie.EntryKeyValue toAdd)
+{
+long sizeChange;
+  org.apache.bookkeeper.bookie.EntryMemTable$EntrySkipList $stack4;
+  org.apache.bookkeeper.bookie.EntryKeyValue $stack5;
+  int $stack6;
+  java.util.concurrent.atomic.AtomicLong $stack7;
+  sizeChange=0L;
+ $stack4=this.kvmap;
+ $stack5 = $stack4.putIfAbsent((org.apache.bookkeeper.bookie.EntryKey)toAdd,toAdd);
+ if ($stack5!=null) goto label0;
+ $stack6 = toAdd.getLength();
+ sizeChange=(long) $stack6;
+ $stack7=this.size;
+ $stack7.addAndGet(sizeChange);
+ label0:return  sizeChange;
+ } 
+

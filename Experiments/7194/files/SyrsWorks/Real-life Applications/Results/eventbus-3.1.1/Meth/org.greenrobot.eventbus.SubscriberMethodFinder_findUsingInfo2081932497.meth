@@ -1,0 +1,43 @@
+java.util.List org.greenrobot.eventbus.SubscriberMethodFinder:findUsingInfo(java.lang.Class @subscriberClass)
+{
+org.greenrobot.eventbus.SubscriberMethodFinder$FindState findState;
+  org.greenrobot.eventbus.SubscriberMethod[] l4;
+  int l5;
+  int l6;
+  org.greenrobot.eventbus.SubscriberMethod subscriberMethod;
+  java.util.List $stack10;
+  org.greenrobot.eventbus.meta.SubscriberInfo $stack11;
+  java.lang.reflect.Method $stack18;
+  boolean $stack19;
+  java.lang.Class subscriberClass;
+subscriberClass=@subscriberClass;
+findState = this#org.greenrobot.eventbus.SubscriberMethodFinder:prepareFindState();
+ findState.initForSubscriber(subscriberClass);
+ label0:subscriberClass=findState.clazz;
+ if (subscriberClass==null) goto label1;
+ $stack11 = this#org.greenrobot.eventbus.SubscriberMethodFinder:getSubscriberInfo(findState);
+ findState.subscriberInfo=$stack11;
+ $stack11=findState.subscriberInfo;
+ if ($stack11==null) goto label2;
+ $stack11=findState.subscriberInfo;
+ l4 = $stack11.getSubscriberMethods();
+ l5=#l4;
+ l6=0;
+ label3:if (l6>=l5) goto label4;
+ subscriberMethod=l4[l6];
+ $stack18=subscriberMethod.method;
+ subscriberClass=subscriberMethod.eventType;
+ $stack19 = findState.checkAdd($stack18,subscriberClass);
+ if ($stack19==0) goto label5;
+ $stack10=findState.subscriberMethods;
+ $stack10.add((java.lang.Object)subscriberMethod);
+ label5:l6=(l6+1);
+ goto label3;
+ label4:goto label6;
+ label2:this#org.greenrobot.eventbus.SubscriberMethodFinder(findState);
+ label6:findState.moveToSuperclass();
+ goto label0;
+ label1:$stack10 = this#org.greenrobot.eventbus.SubscriberMethodFinder:getMethodsAndRelease(findState);
+ return  $stack10;
+ } 
+

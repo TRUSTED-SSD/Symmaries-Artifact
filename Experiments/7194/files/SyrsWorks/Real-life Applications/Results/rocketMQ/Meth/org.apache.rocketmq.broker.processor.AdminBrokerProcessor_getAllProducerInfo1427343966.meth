@@ -1,0 +1,25 @@
+org.apache.rocketmq.remoting.protocol.RemotingCommand org.apache.rocketmq.broker.processor.AdminBrokerProcessor:getAllProducerInfo(io.netty.channel.ChannelHandlerContext ctx,org.apache.rocketmq.remoting.protocol.RemotingCommand request)
+{
+org.apache.rocketmq.remoting.protocol.RemotingCommand response;
+  org.apache.rocketmq.remoting.protocol.header.GetAllProducerInfoRequestHeader requestHeader;
+  org.apache.rocketmq.remoting.protocol.body.ProducerTableInfo producerTable;
+  byte[] body;
+  org.apache.rocketmq.remoting.CommandCustomHeader $stack8;
+  org.apache.rocketmq.broker.BrokerController $stack9;
+  org.apache.rocketmq.broker.client.ProducerManager $stack10;
+  response = org.apache.rocketmq.remoting.protocol.RemotingCommand.createResponseCommand(null);
+ $stack8 = request.decodeCommandCustomHeader(org.apache.rocketmq.remoting.protocol.header.GetAllProducerInfoRequestHeader);
+ requestHeader=(org.apache.rocketmq.remoting.protocol.header.GetAllProducerInfoRequestHeader) $stack8;
+ $stack9=this.brokerController;
+ $stack10 = $stack9.getProducerManager();
+ producerTable = $stack10.getProducerTable();
+ if (producerTable==null) goto label0;
+ body = producerTable.encode();
+ response.setBody(body);
+ response.setCode(0);
+ response.setRemark(null);
+ return  response;
+ label0:response.setCode(1);
+ return  response;
+ } 
+

@@ -1,0 +1,7 @@
+long org.apache.rocketmq.client.impl.consumer.DefaultMQPullConsumerImpl:fetchConsumeOffset (
+  org.apache.rocketmq.common.message.MessageQueue mq, boolean fromStore) {
+  guard = tt;
+  ret(level()) = pc ⊔ level(fromStore) ⊔ level(mq) ⊔ level(this) ⊔ obj_level(mq) ⊔ obj_level(this);
+  ret(obj_level(mq)) = pc ⊔ level(this) ⊔ obj_level(mq) ⊔ obj_level(this);
+  ret(obj_level(this)) = if level(fromStore) = ⊥ then pc ⊔ level(this) ⊔ obj_level(this) else if level(fromStore) = ⊤ ∧ level(this) ⊔ obj_level(mq) ⊔ obj_level(this) = ⊥ then pc else level(fromStore) ⊓ (level(this) ⊔ obj_level(mq) ⊔ obj_level(this));
+}

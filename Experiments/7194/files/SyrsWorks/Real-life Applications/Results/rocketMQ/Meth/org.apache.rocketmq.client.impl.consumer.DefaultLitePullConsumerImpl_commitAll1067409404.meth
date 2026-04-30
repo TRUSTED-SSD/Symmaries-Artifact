@@ -1,0 +1,27 @@
+void org.apache.rocketmq.client.impl.consumer.DefaultLitePullConsumerImpl:commitAll()
+{
+java.util.Iterator l1;
+  org.apache.rocketmq.common.message.MessageQueue messageQueue;
+  java.lang.Exception e;
+  org.apache.rocketmq.client.impl.consumer.AssignedMessageQueue $stack4;
+  java.util.Set $stack5;
+  boolean $stack7;
+  java.lang.Object $stack8;
+  org.apache.rocketmq.logging.org.slf4j.Logger $stack11;
+  $stack4=this.assignedMessageQueue;
+ $stack5 = $stack4.messageQueues();
+ l1 = $stack5.iterator();
+ label0:$stack7 = l1.hasNext();
+ if ($stack7==0) goto label1;
+ $stack8 = l1.next();
+ messageQueue=(org.apache.rocketmq.common.message.MessageQueue) $stack8;
+ label2:this#org.apache.rocketmq.client.impl.consumer.DefaultLitePullConsumerImpl:commit(messageQueue);
+ label3:goto label4;
+ label5:e = catch;
+ $stack11=org.apache.rocketmq.client.impl.consumer.DefaultLitePullConsumerImpl.log;
+ $stack11.error("An error occurred when update consume offset Automatically.");
+ label4:goto label0;
+ label1:return;
+ catch java.lang.Exception: label2 - label3 : label5;
+} 
+

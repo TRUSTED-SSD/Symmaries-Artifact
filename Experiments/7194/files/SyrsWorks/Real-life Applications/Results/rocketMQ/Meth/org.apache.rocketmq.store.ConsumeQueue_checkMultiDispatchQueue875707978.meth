@@ -1,0 +1,31 @@
+boolean org.apache.rocketmq.store.ConsumeQueue:checkMultiDispatchQueue(org.apache.rocketmq.store.DispatchRequest dispatchRequest)
+{
+java.util.Map prop;
+  java.lang.String multiDispatchQueue;
+  java.lang.String multiQueueOffset;
+  org.apache.rocketmq.store.MessageStore $stack5;
+  org.apache.rocketmq.store.config.MessageStoreConfig $stack6;
+  boolean $stack7;
+  java.lang.Object $stack10;
+  $stack5=this.messageStore;
+ $stack6 = $stack5.getMessageStoreConfig();
+ $stack7 = $stack6.isEnableMultiDispatch();
+ if ($stack7!=0) goto label0;
+ return  0;
+ label0:prop = dispatchRequest.getPropertiesMap();
+ if (prop==null) goto label1;
+ $stack7 = prop.isEmpty();
+ if ($stack7==0) goto label2;
+ label1:return  0;
+ label2:$stack10 = prop.get((java.lang.Object)"INNER_MULTI_DISPATCH");
+ multiDispatchQueue=(java.lang.String) $stack10;
+ $stack10 = prop.get((java.lang.Object)"INNER_MULTI_QUEUE_OFFSET");
+ multiQueueOffset=(java.lang.String) $stack10;
+ $stack7 = org.apache.commons.lang3.StringUtils.isBlank((java.lang.CharSequence)multiDispatchQueue);
+ if ($stack7!=0) goto label3;
+ $stack7 = org.apache.commons.lang3.StringUtils.isBlank((java.lang.CharSequence)multiQueueOffset);
+ if ($stack7==0) goto label4;
+ label3:return  0;
+ label4:return  1;
+ } 
+

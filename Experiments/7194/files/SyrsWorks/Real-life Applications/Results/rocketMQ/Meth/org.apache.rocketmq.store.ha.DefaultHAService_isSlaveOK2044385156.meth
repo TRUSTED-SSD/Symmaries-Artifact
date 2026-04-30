@@ -1,0 +1,32 @@
+boolean org.apache.rocketmq.store.ha.DefaultHAService:isSlaveOK(long masterPutWhere)
+{
+java.util.concurrent.atomic.AtomicInteger $stack4;
+  int $stack5;
+  java.util.concurrent.atomic.AtomicLong $stack6;
+  long $stack7;
+  org.apache.rocketmq.store.DefaultMessageStore $stack8;
+  org.apache.rocketmq.store.config.MessageStoreConfig $stack10;
+  byte $stack13;
+  boolean $stack14;
+  $stack4=this.connectionCount;
+ $stack5 = $stack4.get();
+ if ($stack5<=0) goto label0;
+ $stack14=1;
+ goto label1;
+ label0:$stack14=0;
+ label1:if ($stack14==0) goto label2;
+ $stack6=this.push2SlaveMaxOffset;
+ $stack7 = $stack6.get();
+ masterPutWhere=(masterPutWhere-$stack7);
+ $stack8=this.defaultMessageStore;
+ $stack10 = $stack8.getMessageStoreConfig();
+ $stack5 = $stack10.getHaMaxGapNotInSync();
+ $stack7=(long) $stack5;
+ $stack13=(masterPutWhere cmp $stack7);
+ if ($stack13>=0) goto label2;
+ $stack14=1;
+ goto label3;
+ label2:$stack14=0;
+ label3:return  $stack14;
+ } 
+

@@ -1,0 +1,26 @@
+boolean org.apache.bookkeeper.tools.cli.commands.bookie.RebuildDBLedgersIndexCommand:apply(org.apache.bookkeeper.conf.ServerConfiguration conf,org.apache.bookkeeper.tools.cli.commands.bookie.RebuildDBLedgersIndexCommand$RebuildLedgersIndexFlags cmdFlags)
+{
+boolean success;
+  org.slf4j.Logger $stack5;
+  org.apache.bookkeeper.conf.ServerConfiguration $stack6;
+  org.apache.bookkeeper.bookie.storage.ldb.LedgersIndexRebuildOp $stack7;
+  $stack5=org.apache.bookkeeper.tools.cli.commands.bookie.RebuildDBLedgersIndexCommand.LOG;
+ dummyClass.lowSink("=== Rebuilding DBStorage ledgers index ===");
+$stack5.info("=== Rebuilding DBStorage ledgers index ===");
+ $stack6=new org.apache.bookkeeper.conf.ServerConfiguration;
+ $stack6#org.apache.bookkeeper.conf.ServerConfiguration((org.apache.bookkeeper.conf.AbstractConfiguration)conf);
+ $stack7=new org.apache.bookkeeper.bookie.storage.ldb.LedgersIndexRebuildOp;
+ success = org.apache.bookkeeper.tools.cli.commands.bookie.RebuildDBLedgersIndexCommand$RebuildLedgersIndexFlags.access$000(cmdFlags);
+ $stack7#org.apache.bookkeeper.bookie.storage.ldb.LedgersIndexRebuildOp($stack6,success);
+ success = $stack7.initiate();
+ if (success==0) goto label0;
+ $stack5=org.apache.bookkeeper.tools.cli.commands.bookie.RebuildDBLedgersIndexCommand.LOG;
+ dummyClass.lowSink("-- Done rebuilding DBStorage ledgers index --");
+$stack5.info("-- Done rebuilding DBStorage ledgers index --");
+ goto label1;
+ label0:$stack5=org.apache.bookkeeper.tools.cli.commands.bookie.RebuildDBLedgersIndexCommand.LOG;
+ dummyClass.lowSink("-- Aborted rebuilding DBStorage ledgers index --");
+$stack5.info("-- Aborted rebuilding DBStorage ledgers index --");
+ label1:return  success;
+ } 
+

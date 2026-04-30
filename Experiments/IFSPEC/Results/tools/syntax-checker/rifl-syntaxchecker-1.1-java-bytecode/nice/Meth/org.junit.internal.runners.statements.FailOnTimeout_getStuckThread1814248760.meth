@@ -1,0 +1,46 @@
+java.lang.Thread org.junit.internal.runners.statements.FailOnTimeout:getStuckThread(java.lang.Thread @mainThread)
+{
+java.lang.Thread[] threadsInGroup;
+  java.lang.Thread stuckThread;
+  long maxCpuTime;
+  int len$;
+  int i$;
+  java.lang.Thread thread;
+  long threadCpuTime;
+  java.lang.ThreadGroup $stack12;
+  java.lang.Thread$State $stack16;
+  java.lang.Thread$State $stack17;
+  byte $stack21;
+  java.lang.Thread mainThread;
+mainThread=@mainThread;
+$stack12=this.threadGroup;
+ if ($stack12!=null) goto label0;
+ return  null;
+ label0:$stack12=this.threadGroup;
+ threadsInGroup = this#org.junit.internal.runners.statements.FailOnTimeout:getThreadArray($stack12);
+ if (threadsInGroup!=null) goto label1;
+ return  null;
+ label1:stuckThread=null;
+ maxCpuTime=0L;
+ len$=#threadsInGroup;
+ i$=0;
+ label2:if (i$>=len$) goto label3;
+ thread=threadsInGroup[i$];
+ $stack16 = thread.getState();
+ $stack17=java.lang.Thread$State.RUNNABLE;
+ if ($stack16!=$stack17) goto label4;
+ threadCpuTime = this#org.junit.internal.runners.statements.FailOnTimeout:cpuTime(thread);
+ if (stuckThread==null) goto label5;
+ $stack21=(threadCpuTime cmp maxCpuTime);
+ if ($stack21<=0) goto label4;
+ label5:stuckThread=thread;
+ maxCpuTime=threadCpuTime;
+ label4:i$=(i$+1);
+ goto label2;
+ label3:if (stuckThread!=mainThread) goto label6;
+ mainThread=null;
+ goto label7;
+ label6:mainThread=stuckThread;
+ label7:return  mainThread;
+ } 
+

@@ -1,0 +1,40 @@
+org.apache.rocketmq.store.ha.DefaultHAClient(org.apache.rocketmq.store.DefaultMessageStore defaultMessageStore)
+{
+java.util.concurrent.atomic.AtomicReference $stack2;
+  java.nio.ByteBuffer $stack4;
+  long $stack5;
+  org.apache.rocketmq.store.ha.HAConnectionState $stack9;
+  java.nio.channels.Selector $stack10;
+  org.apache.rocketmq.store.ha.FlowMonitor $stack11;
+  org.apache.rocketmq.store.config.MessageStoreConfig $stack12;
+  this#org.apache.rocketmq.common.ServiceThread();
+ $stack2=new java.util.concurrent.atomic.AtomicReference;
+ $stack2#java.util.concurrent.atomic.AtomicReference();
+ this.masterHaAddress=$stack2;
+ $stack2=new java.util.concurrent.atomic.AtomicReference;
+ $stack2#java.util.concurrent.atomic.AtomicReference();
+ this.masterAddress=$stack2;
+ $stack4 = java.nio.ByteBuffer.allocate(8);
+ this.reportOffset=$stack4;
+ $stack5 = java.lang.System.currentTimeMillis();
+ this.lastReadTimestamp=$stack5;
+ $stack5 = java.lang.System.currentTimeMillis();
+ this.lastWriteTimestamp=$stack5;
+ this.currentReportedOffset=0L;
+ this.dispatchPosition=0;
+ $stack4 = java.nio.ByteBuffer.allocate(4194304);
+ this.byteBufferRead=$stack4;
+ $stack4 = java.nio.ByteBuffer.allocate(4194304);
+ this.byteBufferBackup=$stack4;
+ $stack9=org.apache.rocketmq.store.ha.HAConnectionState.READY;
+ this.currentState=$stack9;
+ $stack10 = org.apache.rocketmq.common.utils.NetworkUtil.openSelector();
+ this.selector=$stack10;
+ this.defaultMessageStore=defaultMessageStore;
+ $stack11=new org.apache.rocketmq.store.ha.FlowMonitor;
+ $stack12 = defaultMessageStore.getMessageStoreConfig();
+ $stack11#org.apache.rocketmq.store.ha.FlowMonitor($stack12);
+ this.flowMonitor=$stack11;
+ return;
+ } 
+

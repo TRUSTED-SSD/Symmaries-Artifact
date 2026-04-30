@@ -1,0 +1,24 @@
+byte[] com.google.zxing.InvertedLuminanceSource:getRow(int y,byte[] @row)
+{
+int i;
+  com.google.zxing.LuminanceSource $stack5;
+  byte $stack8;
+  short $stack9;
+  int $stack10;
+  byte[] row;
+row=@row;
+$stack5=this.delegate;
+ row = $stack5.getRow(y,row);
+ y = this.getWidth();
+ i=0;
+ label0:if (i>=y) goto label1;
+ $stack8=row[i];
+ $stack9=($stack8 & 255);
+ $stack10=(255-$stack9);
+ $stack8=(byte) $stack10;
+ row[i]=$stack8;
+ i=(i+1);
+ goto label0;
+ label1:return  row;
+ } 
+

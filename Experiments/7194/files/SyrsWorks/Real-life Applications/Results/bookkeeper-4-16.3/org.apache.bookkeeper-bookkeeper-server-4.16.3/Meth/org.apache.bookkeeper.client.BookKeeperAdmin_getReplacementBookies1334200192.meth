@@ -1,0 +1,28 @@
+java.util.Map org.apache.bookkeeper.client.BookKeeperAdmin:getReplacementBookies(org.apache.bookkeeper.client.LedgerHandle lh,java.util.List ensemble,java.util.Set bookiesToRereplicate)
+{
+java.util.HashSet bookieIndexesToRereplicate;
+  int bookieIndex;
+  org.apache.bookkeeper.net.BookieId bookieInEnsemble;
+  int $stack8;
+  java.util.Optional $stack9;
+  java.util.Map $stack10;
+  java.lang.Object $stack11;
+  boolean $stack12;
+  java.lang.Integer $stack15;
+  bookieIndexesToRereplicate = com.google.common.collect.Sets.newHashSet();
+ bookieIndex=0;
+ label0:$stack8 = ensemble.size();
+ if (bookieIndex>=$stack8) goto label1;
+ $stack11 = ensemble.get(bookieIndex);
+ bookieInEnsemble=(org.apache.bookkeeper.net.BookieId) $stack11;
+ $stack12 = bookiesToRereplicate.contains((java.lang.Object)bookieInEnsemble);
+ if ($stack12==0) goto label2;
+ $stack15 = java.lang.Integer.valueOf(bookieIndex);
+ bookieIndexesToRereplicate.add((java.lang.Object)$stack15);
+ label2:bookieIndex=(bookieIndex+1);
+ goto label0;
+ label1:$stack9 = java.util.Optional.of((java.lang.Object)bookiesToRereplicate);
+ $stack10 = this#org.apache.bookkeeper.client.BookKeeperAdmin:getReplacementBookiesByIndexes(lh,ensemble,(java.util.Set)bookieIndexesToRereplicate,$stack9);
+ return  $stack10;
+ } 
+

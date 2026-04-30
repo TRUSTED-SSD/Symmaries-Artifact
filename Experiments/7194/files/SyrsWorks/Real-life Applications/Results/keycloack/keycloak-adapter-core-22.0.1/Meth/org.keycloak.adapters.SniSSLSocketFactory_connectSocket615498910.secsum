@@ -1,0 +1,15 @@
+java.net.Socket org.keycloak.adapters.SniSSLSocketFactory:connectSocket (
+  int connectTimeout, java.net.Socket @socket, org.apache.http.HttpHost host,
+  java.net.InetSocketAddress remoteAddress,
+  java.net.InetSocketAddress localAddress,
+  org.apache.http.protocol.HttpContext context) {
+  guard = pc ⊔ level(@socket) ⊔ level(this) ⊔ obj_level(@socket) ⊔ obj_level(host) ⊔ obj_level(this) = ⊥;
+  ret(level()) = level(connectTimeout) ⊔ level(context) ⊔ level(host) ⊔ level(localAddress) ⊔ level(remoteAddress) ⊔ obj_level(context) ⊔ obj_level(localAddress);
+  ret(obj_level()) = level(connectTimeout) ⊔ level(context) ⊔ level(host) ⊔ level(localAddress) ⊔ level(remoteAddress) ⊔ obj_level(context) ⊔ obj_level(localAddress);
+  ret(obj_level(@socket)) = level(connectTimeout) ⊔ level(context) ⊔ level(host) ⊔ level(localAddress) ⊔ level(remoteAddress) ⊔ obj_level(context) ⊔ obj_level(localAddress);
+  ret(obj_level(context)) = obj_level(context);
+  ret(obj_level(host)) = ⊥;
+  ret(obj_level(localAddress)) = obj_level(localAddress);
+  ret(obj_level(remoteAddress)) = obj_level(remoteAddress);
+  ret(obj_level(this)) = level(connectTimeout) ⊔ level(context) ⊔ level(host) ⊔ level(localAddress) ⊔ level(remoteAddress) ⊔ obj_level(context) ⊔ obj_level(localAddress);
+}

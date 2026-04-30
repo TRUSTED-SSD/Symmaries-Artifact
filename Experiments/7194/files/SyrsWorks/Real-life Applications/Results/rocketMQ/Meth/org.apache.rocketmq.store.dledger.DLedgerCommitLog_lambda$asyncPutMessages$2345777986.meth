@@ -1,0 +1,50 @@
+static org.apache.rocketmq.store.PutMessageResult org.apache.rocketmq.store.dledger.DLedgerCommitLog:lambda$asyncPutMessages$2(org.apache.rocketmq.store.AppendMessageResult appendResult,org.apache.rocketmq.store.StoreStatsService storeStatsService,org.apache.rocketmq.common.message.MessageExtBatch messageExtBatch,io.openmessaging.storage.dledger.protocol.AppendEntryResponse appendEntryResponse)
+{
+org.apache.rocketmq.store.PutMessageStatus putMessageStatus;
+  org.apache.rocketmq.store.PutMessageResult putMessageResult;
+  int[] $stack6;
+  int $stack7;
+  io.openmessaging.storage.dledger.protocol.DLedgerResponseCode $stack8;
+  org.apache.rocketmq.store.PutMessageStatus $stack12;
+  java.lang.String $stack13;
+  java.util.concurrent.atomic.LongAdder $stack14;
+  long $stack16;
+  putMessageStatus=org.apache.rocketmq.store.PutMessageStatus.UNKNOWN_ERROR;
+ $stack6=org.apache.rocketmq.store.dledger.DLedgerCommitLog$1.$SwitchMap$io$openmessaging$storage$dledger$protocol$DLedgerResponseCode;
+ $stack7 = appendEntryResponse.getCode();
+ $stack8 = io.openmessaging.storage.dledger.protocol.DLedgerResponseCode.valueOf($stack7);
+ $stack7 = $stack8.ordinal();
+ $stack7=$stack6[$stack7];
+ switch [$stack7]
+if 0 goto label0;
+if 1 goto label1;
+if 2 goto label1;
+if 3 goto label1;
+if 4 goto label1;
+if 5 goto label2;
+if 6 goto label3;
+goto label4;
+ label0:putMessageStatus=org.apache.rocketmq.store.PutMessageStatus.PUT_OK;
+ goto label4;
+ label1:putMessageStatus=org.apache.rocketmq.store.PutMessageStatus.SERVICE_NOT_AVAILABLE;
+ goto label4;
+ label2:putMessageStatus=org.apache.rocketmq.store.PutMessageStatus.IN_SYNC_REPLICAS_NOT_ENOUGH;
+ goto label4;
+ label3:putMessageStatus=org.apache.rocketmq.store.PutMessageStatus.OS_PAGE_CACHE_BUSY;
+ label4:putMessageResult=new org.apache.rocketmq.store.PutMessageResult;
+ putMessageResult#org.apache.rocketmq.store.PutMessageResult(putMessageStatus,appendResult);
+ $stack12=org.apache.rocketmq.store.PutMessageStatus.PUT_OK;
+ if (putMessageStatus!=$stack12) goto label5;
+ $stack13 = messageExtBatch.getTopic();
+ $stack14 = storeStatsService.getSinglePutMessageTopicTimesTotal($stack13);
+ $stack7 = appendResult.getMsgNum();
+ $stack16=(long) $stack7;
+ $stack14.add($stack16);
+ $stack13 = messageExtBatch.getTopic();
+ $stack14 = storeStatsService.getSinglePutMessageTopicSizeTotal($stack13);
+ $stack7 = appendResult.getWroteBytes();
+ $stack16=(long) $stack7;
+ $stack14.add($stack16);
+ label5:return  putMessageResult;
+ } 
+

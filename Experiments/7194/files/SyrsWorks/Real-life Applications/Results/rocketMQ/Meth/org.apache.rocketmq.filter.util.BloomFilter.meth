@@ -1,0 +1,50 @@
+org.apache.rocketmq.filter.util.BloomFilter(int f,int n)
+{
+double errorRate;
+  java.lang.IllegalArgumentException $stack5;
+  double $stack7;
+  this#java.lang.Object();
+ this.f=10;
+ this.n=128;
+ if (f<1) goto label0;
+ if (f<100) goto label1;
+ label0:$stack5=new java.lang.IllegalArgumentException;
+ $stack5#java.lang.IllegalArgumentException("f must be greater or equal than 1 and less than 100");
+ throw $stack5;
+ label1:if (n>=1) goto label2;
+ $stack5=new java.lang.IllegalArgumentException;
+ $stack5#java.lang.IllegalArgumentException("n must be greater than 0");
+ throw $stack5;
+ label2:this.f=f;
+ this.n=n;
+ errorRate=(double) f;
+ errorRate=(errorRate/100.0);
+ $stack7 = this.logMN(0.5,errorRate);
+ $stack7 = java.lang.Math.ceil($stack7);
+ f=(int) $stack7;
+ this.k=f;
+ f=this.k;
+ if (f>=1) goto label3;
+ $stack5=new java.lang.IllegalArgumentException;
+ $stack5#java.lang.IllegalArgumentException("Hash function num is less than 1, maybe you should change the value of error rate or bit num!");
+ throw $stack5;
+ label3:f=this.n;
+ $stack7=(double) f;
+ errorRate=(1.0/errorRate);
+ errorRate = this.logMN(2.0,errorRate);
+ errorRate=($stack7 * errorRate);
+ $stack7 = this.logMN(2.0,2.718281828459045);
+ errorRate=(errorRate * $stack7);
+ errorRate = java.lang.Math.ceil(errorRate);
+ f=(int) errorRate;
+ this.m=f;
+ f=this.m;
+ errorRate=(double) f;
+ errorRate=(errorRate/8.0);
+ errorRate = java.lang.Math.ceil(errorRate);
+ errorRate=(8.0 * errorRate);
+ f=(int) errorRate;
+ this.m=f;
+ return;
+ } 
+

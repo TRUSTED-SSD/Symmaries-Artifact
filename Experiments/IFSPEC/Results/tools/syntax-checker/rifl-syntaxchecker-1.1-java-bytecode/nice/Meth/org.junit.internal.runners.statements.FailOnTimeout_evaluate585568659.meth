@@ -1,0 +1,26 @@
+void org.junit.internal.runners.statements.FailOnTimeout:evaluate()
+{
+org.junit.internal.runners.statements.FailOnTimeout$CallableStatement callable;
+  java.util.concurrent.FutureTask task;
+  java.lang.Thread thread;
+  java.lang.Throwable throwable;
+  java.lang.ThreadGroup $stack7;
+  callable=new org.junit.internal.runners.statements.FailOnTimeout$CallableStatement;
+ callable#org.junit.internal.runners.statements.FailOnTimeout$CallableStatement(this,null);
+ task=new java.util.concurrent.FutureTask;
+ task#java.util.concurrent.FutureTask((java.util.concurrent.Callable)callable);
+ $stack7=new java.lang.ThreadGroup;
+ $stack7#java.lang.ThreadGroup("FailOnTimeoutGroup");
+ this.threadGroup=$stack7;
+ thread=new java.lang.Thread;
+ $stack7=this.threadGroup;
+ thread#java.lang.Thread($stack7,(java.lang.Runnable)task,"Time-limited test");
+ thread.setDaemon((boolean)1);
+ thread.start();
+ callable.awaitStarted();
+ throwable = this#org.junit.internal.runners.statements.FailOnTimeout:getResult(task,thread);
+ if (throwable==null) goto label0;
+ throw throwable;
+ label0:return;
+ } 
+

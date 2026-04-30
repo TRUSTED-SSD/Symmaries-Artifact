@@ -1,0 +1,10 @@
+java.util.concurrent.CompletableFuture org.apache.bookkeeper.meta.MSLedgerManagerFactory$MsLedgerManager:writeLedgerMetadata (
+  long ledgerId, org.apache.bookkeeper.client.api.LedgerMetadata metadata,
+  org.apache.bookkeeper.versioning.Version currentVersion) {
+  guard = pc ⊔ level(metadata) ⊔ obj_level(metadata) = ⊥;
+  ret(level()) = ⊥;
+  ret(obj_level()) = level(currentVersion) ⊔ level(ledgerId) ⊔ level(this) ⊔ obj_level(currentVersion) ⊔ obj_level(this);
+  ret(obj_level(currentVersion)) = level(currentVersion) ⊔ level(ledgerId) ⊔ level(this) ⊔ obj_level(currentVersion) ⊔ obj_level(this);
+  ret(obj_level(metadata)) = level(currentVersion) ⊔ level(ledgerId) ⊔ level(this) ⊔ obj_level(currentVersion) ⊔ obj_level(this);
+  ret(obj_level(this)) = level(currentVersion) ⊔ level(ledgerId) ⊔ level(this) ⊔ obj_level(currentVersion) ⊔ obj_level(this);
+}

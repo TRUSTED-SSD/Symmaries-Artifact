@@ -1,0 +1,44 @@
+void org.apache.rocketmq.remoting.netty.NettyRemotingAbstract:processResponseCommand(io.netty.channel.ChannelHandlerContext ctx,org.apache.rocketmq.remoting.protocol.RemotingCommand cmd)
+{
+int opaque;
+  org.apache.rocketmq.remoting.netty.ResponseFuture responseFuture;
+  java.util.concurrent.ConcurrentMap $stack6;
+  java.lang.Integer $stack7;
+  java.lang.Object $stack8;
+  java.lang.StringBuilder $stack9;
+  org.apache.rocketmq.logging.org.slf4j.Logger $stack10;
+  io.netty.channel.Channel $stack12;
+  java.lang.String $stack13;
+  org.apache.rocketmq.remoting.InvokeCallback $stack21;
+  opaque = cmd.getOpaque();
+ $stack6=this.responseTable;
+ $stack7 = java.lang.Integer.valueOf(opaque);
+ $stack8 = $stack6.get((java.lang.Object)$stack7);
+ responseFuture=(org.apache.rocketmq.remoting.netty.ResponseFuture) $stack8;
+ if (responseFuture==null) goto label0;
+ responseFuture.setResponseCommand(cmd);
+ $stack6=this.responseTable;
+ $stack7 = java.lang.Integer.valueOf(opaque);
+ $stack6.remove((java.lang.Object)$stack7);
+ $stack21 = responseFuture.getInvokeCallback();
+ if ($stack21==null) goto label1;
+ this#org.apache.rocketmq.remoting.netty.NettyRemotingAbstract(responseFuture);
+ goto label2;
+ label1:responseFuture.putResponse(cmd);
+ responseFuture.release();
+ goto label2;
+ label0:$stack10=org.apache.rocketmq.remoting.netty.NettyRemotingAbstract.log;
+ $stack9=new java.lang.StringBuilder;
+ $stack9#java.lang.StringBuilder();
+ $stack9 = $stack9.append("receive response, but not matched any request, ");
+ $stack12 = ctx.channel();
+ $stack13 = org.apache.rocketmq.remoting.common.RemotingHelper.parseChannelRemoteAddr($stack12);
+ $stack9 = $stack9.append($stack13);
+ $stack13 = $stack9.toString();
+ $stack10.warn($stack13);
+ $stack10=org.apache.rocketmq.remoting.netty.NettyRemotingAbstract.log;
+ $stack13 = cmd.toString();
+ $stack10.warn($stack13);
+ label2:return;
+ } 
+

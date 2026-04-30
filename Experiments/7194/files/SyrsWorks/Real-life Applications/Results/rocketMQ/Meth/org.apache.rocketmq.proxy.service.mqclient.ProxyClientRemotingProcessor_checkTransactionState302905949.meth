@@ -1,0 +1,36 @@
+org.apache.rocketmq.remoting.protocol.RemotingCommand org.apache.rocketmq.proxy.service.mqclient.ProxyClientRemotingProcessor:checkTransactionState(io.netty.channel.ChannelHandlerContext ctx,org.apache.rocketmq.remoting.protocol.RemotingCommand request)
+{
+java.nio.ByteBuffer byteBuffer;
+  org.apache.rocketmq.common.message.MessageExt messageExt;
+  java.lang.String group;
+  org.apache.rocketmq.remoting.protocol.header.CheckTransactionStateRequestHeader requestHeader;
+  io.netty.channel.Channel channel;
+  byte[] $stack8;
+  org.apache.rocketmq.remoting.CommandCustomHeader $stack13;
+  java.net.SocketAddress $stack16;
+  java.lang.String $stack17;
+  org.apache.rocketmq.broker.client.ProducerManager $stack18;
+  org.apache.rocketmq.logging.org.slf4j.Logger $stack20;
+  $stack8 = request.getBody();
+ byteBuffer = java.nio.ByteBuffer.wrap($stack8);
+ messageExt = org.apache.rocketmq.common.message.MessageDecoder.decode(byteBuffer,(boolean)1,(boolean)0,(boolean)0);
+ if (messageExt==null) goto label0;
+ group = messageExt.getProperty("PGROUP");
+ if (group==null) goto label0;
+ $stack13 = request.decodeCommandCustomHeader(org.apache.rocketmq.remoting.protocol.header.CheckTransactionStateRequestHeader);
+ requestHeader=(org.apache.rocketmq.remoting.protocol.header.CheckTransactionStateRequestHeader) $stack13;
+ request.writeCustomHeader((org.apache.rocketmq.remoting.CommandCustomHeader)requestHeader);
+ channel = ctx.channel();
+ $stack16 = channel.remoteAddress();
+ $stack17 = org.apache.rocketmq.common.utils.NetworkUtil.socketAddress2String($stack16);
+ request.addExtField("brokerAddr",$stack17);
+ $stack18=this.producerManager;
+ channel = $stack18.getAvailableChannel(group);
+ if (channel==null) goto label1;
+ channel.writeAndFlush((java.lang.Object)request);
+ goto label0;
+ label1:$stack20=org.apache.rocketmq.proxy.service.mqclient.ProxyClientRemotingProcessor.log;
+ $stack20.warn("check transaction failed, channel is empty. groupId={}, requestHeader:{}",(java.lang.Object)group,(java.lang.Object)requestHeader);
+ label0:return  null;
+ } 
+

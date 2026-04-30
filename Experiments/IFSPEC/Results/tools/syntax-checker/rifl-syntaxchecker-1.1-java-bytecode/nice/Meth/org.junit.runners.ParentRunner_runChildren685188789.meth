@@ -1,0 +1,29 @@
+void org.junit.runners.ParentRunner:runChildren(org.junit.runner.notification.RunNotifier notifier)
+{
+org.junit.runners.model.RunnerScheduler currentScheduler;
+  java.util.Iterator i$;
+  java.lang.Object each;
+  java.lang.Throwable l5;
+  java.util.Collection $stack6;
+  boolean $stack8;
+  org.junit.runners.ParentRunner$3 $stack10;
+  currentScheduler=this.scheduler;
+ label0:$stack6 = this#org.junit.runners.ParentRunner:getFilteredChildren();
+ i$ = $stack6.iterator();
+ label1:$stack8 = i$.hasNext();
+ if ($stack8==0) goto label2;
+ each = i$.next();
+ $stack10=new org.junit.runners.ParentRunner$3;
+ $stack10#org.junit.runners.ParentRunner$3(this,each,notifier);
+ currentScheduler.schedule((java.lang.Runnable)$stack10);
+ goto label1;
+ label2:currentScheduler.finished();
+ goto label3;
+ label4:l5 = catch;
+ label5:currentScheduler.finished();
+ throw l5;
+ label3:return;
+ catch java.lang.Throwable: label0 - label2 : label4;
+catch java.lang.Throwable: label4 - label5 : label4;
+} 
+

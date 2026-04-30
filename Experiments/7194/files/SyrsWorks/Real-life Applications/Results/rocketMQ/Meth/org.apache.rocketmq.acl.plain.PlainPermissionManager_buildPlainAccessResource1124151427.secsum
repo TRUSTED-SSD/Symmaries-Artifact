@@ -1,0 +1,8 @@
+org.apache.rocketmq.acl.plain.PlainAccessResource org.apache.rocketmq.acl.plain.PlainPermissionManager:buildPlainAccessResource (
+  org.apache.rocketmq.common.PlainAccessConfig plainAccessConfig) {
+  guard = tt;
+  ret(level()) = pc;
+  ret(obj_level()) = pc ⊔ level(plainAccessConfig) ⊔ obj_level(plainAccessConfig) ⊔ obj_level(this);
+  ret(obj_level(plainAccessConfig)) = pc ⊔ level(plainAccessConfig) ⊔ obj_level(plainAccessConfig) ⊔ obj_level(this);
+  ret(obj_level(this)) = pc ⊔ level(plainAccessConfig) ⊔ obj_level(plainAccessConfig) ⊔ obj_level(this);
+}

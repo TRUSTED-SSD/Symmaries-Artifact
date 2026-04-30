@@ -1,0 +1,36 @@
+org.apache.rocketmq.remoting.RemotingServer org.apache.rocketmq.remoting.netty.NettyRemotingServer:newRemotingServer(int port)
+{
+org.apache.rocketmq.remoting.netty.NettyRemotingServer$SubRemotingServer remotingServer;
+  org.apache.rocketmq.remoting.netty.NettyRemotingAbstract existingServer;
+  org.apache.rocketmq.remoting.netty.NettyServerConfig $stack5;
+  int $stack6;
+  int $stack8;
+  java.util.concurrent.ConcurrentMap $stack9;
+  java.lang.Integer $stack10;
+  java.lang.Object $stack11;
+  java.lang.RuntimeException $stack12;
+  java.lang.StringBuilder $stack13;
+  java.lang.String $stack17;
+  remotingServer=new org.apache.rocketmq.remoting.netty.NettyRemotingServer$SubRemotingServer;
+ $stack5=this.nettyServerConfig;
+ $stack6 = $stack5.getServerOnewaySemaphoreValue();
+ $stack5=this.nettyServerConfig;
+ $stack8 = $stack5.getServerAsyncSemaphoreValue();
+ remotingServer#org.apache.rocketmq.remoting.netty.NettyRemotingServer$SubRemotingServer(this,port,$stack6,$stack8);
+ $stack9=this.remotingServerTable;
+ $stack10 = java.lang.Integer.valueOf(port);
+ $stack11 = $stack9.putIfAbsent((java.lang.Object)$stack10,(java.lang.Object)remotingServer);
+ existingServer=(org.apache.rocketmq.remoting.netty.NettyRemotingAbstract) $stack11;
+ if (existingServer==null) goto label0;
+ $stack12=new java.lang.RuntimeException;
+ $stack13=new java.lang.StringBuilder;
+ $stack13#java.lang.StringBuilder();
+ $stack13 = $stack13.append("The port ");
+ $stack13 = $stack13.append(port);
+ $stack13 = $stack13.append(" already in use by another RemotingServer");
+ $stack17 = $stack13.toString();
+ $stack12#java.lang.RuntimeException($stack17);
+ throw $stack12;
+ label0:return  remotingServer;
+ } 
+

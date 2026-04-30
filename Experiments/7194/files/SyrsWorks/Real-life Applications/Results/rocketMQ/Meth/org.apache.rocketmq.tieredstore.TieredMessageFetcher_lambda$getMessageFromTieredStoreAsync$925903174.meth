@@ -1,0 +1,25 @@
+static org.apache.rocketmq.store.GetMessageResult org.apache.rocketmq.tieredstore.TieredMessageFetcher:lambda$getMessageFromTieredStoreAsync$9(org.apache.rocketmq.tieredstore.container.TieredMessageQueueContainer container,org.apache.rocketmq.store.GetMessageResult result,long queueOffset,java.lang.Throwable e)
+{
+org.apache.rocketmq.common.message.MessageQueue mq;
+  java.lang.Object[] $stack7;
+  org.apache.rocketmq.logging.org.slf4j.Logger $stack8;
+  java.lang.String $stack11;
+  int $stack13;
+  java.lang.Integer $stack14;
+  org.apache.rocketmq.store.GetMessageStatus $stack15;
+  mq = container.getMessageQueue();
+ $stack8=org.apache.rocketmq.tieredstore.TieredMessageFetcher.LOGGER;
+ $stack7=new java.lang.Object[3];
+ $stack11 = mq.getTopic();
+ $stack7[0]=$stack11;
+ $stack13 = mq.getQueueId();
+ $stack14 = java.lang.Integer.valueOf($stack13);
+ $stack7[1]=$stack14;
+ $stack7[2]=e;
+ $stack8.warn("TieredMessageFetcher#getMessageFromTieredStoreAsync: get message failed: topic: {} queueId: {}",$stack7);
+ $stack15=org.apache.rocketmq.store.GetMessageStatus.OFFSET_FOUND_NULL;
+ result.setStatus($stack15);
+ result.setNextBeginOffset(queueOffset);
+ return  result;
+ } 
+

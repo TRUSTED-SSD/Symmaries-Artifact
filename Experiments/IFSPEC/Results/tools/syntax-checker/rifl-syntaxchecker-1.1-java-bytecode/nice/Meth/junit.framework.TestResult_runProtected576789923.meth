@@ -1,0 +1,20 @@
+void junit.framework.TestResult:runProtected(junit.framework.Test test,junit.framework.Protectable p)
+{
+java.lang.ThreadDeath $stack4;
+  junit.framework.AssertionFailedError $stack5;
+  java.lang.Throwable $stack6;
+  label0:p.protect();
+ label1:goto label2;
+ label3:$stack5 = catch;
+ this.addFailure(test,$stack5);
+ goto label2;
+ label4:$stack4 = catch;
+ throw $stack4;
+ label5:$stack6 = catch;
+ this.addError(test,$stack6);
+ label2:return;
+ catch junit.framework.AssertionFailedError: label0 - label1 : label3;
+catch java.lang.ThreadDeath: label0 - label1 : label4;
+catch java.lang.Throwable: label0 - label1 : label5;
+} 
+

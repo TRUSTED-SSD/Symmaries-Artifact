@@ -1,0 +1,28 @@
+static java.lang.String com.google.zxing.client.result.ExpandedProductResultParser:findValue(int i,java.lang.String @rawText)
+{
+java.lang.StringBuilder buf;
+  char c;
+  int $stack8;
+  java.lang.String $stack14;
+  java.lang.String rawText;
+rawText=@rawText;
+buf=new java.lang.StringBuilder;
+ buf#java.lang.StringBuilder();
+ rawText = rawText.substring(i);
+ i=0;
+ label0:$stack8 = rawText.length();
+ if (i>=$stack8) goto label1;
+ c = rawText.charAt(i);
+ if (c!=40) goto label2;
+ $stack14 = com.google.zxing.client.result.ExpandedProductResultParser.findAIvalue(i,rawText);
+ if ($stack14==null) goto label3;
+ goto label1;
+ label3:buf.append((char)40);
+ goto label4;
+ label2:buf.append(c);
+ label4:i=(i+1);
+ goto label0;
+ label1:rawText = buf.toString();
+ return  rawText;
+ } 
+

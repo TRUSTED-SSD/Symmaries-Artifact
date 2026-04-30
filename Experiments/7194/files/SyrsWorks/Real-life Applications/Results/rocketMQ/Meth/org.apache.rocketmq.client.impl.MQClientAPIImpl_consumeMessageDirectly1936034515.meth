@@ -1,0 +1,49 @@
+org.apache.rocketmq.remoting.protocol.body.ConsumeMessageDirectlyResult org.apache.rocketmq.client.impl.MQClientAPIImpl:consumeMessageDirectly(java.lang.String @addr,java.lang.String consumerGroup,java.lang.String clientId,java.lang.String topic,java.lang.String msgId,long timeoutMillis)
+{
+org.apache.rocketmq.remoting.protocol.header.ConsumeMessageDirectlyResultRequestHeader requestHeader;
+  org.apache.rocketmq.remoting.protocol.RemotingCommand request;
+  byte[] body;
+  org.apache.rocketmq.remoting.protocol.body.ConsumeMessageDirectlyResult info;
+  org.apache.rocketmq.client.ClientConfig $stack15;
+  org.apache.rocketmq.remoting.RemotingClient $stack16;
+  boolean $stack17;
+  int $stack21;
+  org.apache.rocketmq.client.exception.MQClientException $stack23;
+  java.lang.Object $stack26;
+  java.lang.AssertionError $stack30;
+  java.lang.String addr;
+addr=@addr;
+requestHeader=new org.apache.rocketmq.remoting.protocol.header.ConsumeMessageDirectlyResultRequestHeader;
+ requestHeader#org.apache.rocketmq.remoting.protocol.header.ConsumeMessageDirectlyResultRequestHeader();
+ requestHeader.setTopic(topic);
+ requestHeader.setConsumerGroup(consumerGroup);
+ requestHeader.setClientId(clientId);
+ requestHeader.setMsgId(msgId);
+ request = org.apache.rocketmq.remoting.protocol.RemotingCommand.createRequestCommand(309,(org.apache.rocketmq.remoting.CommandCustomHeader)requestHeader);
+ $stack16=this.remotingClient;
+ $stack15=this.clientConfig;
+ $stack17 = $stack15.isVipChannelEnabled();
+ addr = org.apache.rocketmq.common.MixAll.brokerVIPChannel($stack17,addr);
+ request = $stack16.invokeSync(addr,request,timeoutMillis);
+ $stack17=org.apache.rocketmq.client.impl.MQClientAPIImpl.$assertionsDisabled;
+ if ($stack17!=0) goto label0;
+ if (request!=null) goto label0;
+ $stack30=new java.lang.AssertionError;
+ $stack30#java.lang.AssertionError();
+ throw $stack30;
+ label0:$stack21 = request.getCode();
+ switch [$stack21]
+if 0 goto label1;
+goto label2;
+ label1:body = request.getBody();
+ if (body==null) goto label2;
+ $stack26 = org.apache.rocketmq.remoting.protocol.RemotingSerializable.decode(body,org.apache.rocketmq.remoting.protocol.body.ConsumeMessageDirectlyResult);
+ info=(org.apache.rocketmq.remoting.protocol.body.ConsumeMessageDirectlyResult) $stack26;
+ return  info;
+ label2:$stack23=new org.apache.rocketmq.client.exception.MQClientException;
+ $stack21 = request.getCode();
+ addr = request.getRemark();
+ $stack23#org.apache.rocketmq.client.exception.MQClientException($stack21,addr);
+ throw $stack23;
+ } 
+

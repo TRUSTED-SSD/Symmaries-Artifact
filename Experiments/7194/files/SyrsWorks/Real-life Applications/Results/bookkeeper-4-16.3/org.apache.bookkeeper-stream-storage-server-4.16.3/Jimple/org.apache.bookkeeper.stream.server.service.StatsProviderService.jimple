@@ -1,0 +1,53 @@
+    public void <init>(org.apache.bookkeeper.stream.server.conf.BookieConfiguration)
+    {
+        org.apache.bookkeeper.stream.server.service.StatsProviderService this;
+        org.apache.bookkeeper.stream.server.conf.BookieConfiguration conf;
+        org.apache.bookkeeper.stats.NullStatsLogger $stack2;
+        org.apache.bookkeeper.conf.ServerConfiguration $stack3;
+        org.apache.commons.configuration.CompositeConfiguration $stack5;
+        org.apache.bookkeeper.stats.StatsProvider $stack6;
+        org.apache.commons.configuration.Configuration tmp$3393941;
+
+        this := @this: org.apache.bookkeeper.stream.server.service.StatsProviderService;
+
+        conf := @parameter0: org.apache.bookkeeper.stream.server.conf.BookieConfiguration;
+
+        $stack2 = <org.apache.bookkeeper.stats.NullStatsLogger: org.apache.bookkeeper.stats.NullStatsLogger INSTANCE>;
+/*33*/
+
+        specialinvoke this.<org.apache.bookkeeper.common.component.AbstractLifecycleComponent: void <init>(java.lang.String,org.apache.bookkeeper.common.conf.ComponentConfiguration,org.apache.bookkeeper.stats.StatsLogger)>("stats-provider", conf, $stack2);
+/*33*/
+
+        $stack3 = new org.apache.bookkeeper.conf.ServerConfiguration;
+/*29*/
+
+        specialinvoke $stack3.<org.apache.bookkeeper.conf.ServerConfiguration: void <init>()>();
+/*29*/
+
+        this.<org.apache.bookkeeper.stream.server.service.StatsProviderService: org.apache.bookkeeper.conf.ServerConfiguration serverConf> = $stack3;
+/*29*/
+
+        $stack3 = this.<org.apache.bookkeeper.stream.server.service.StatsProviderService: org.apache.bookkeeper.conf.ServerConfiguration serverConf>;
+/*34*/
+
+        $stack5 = virtualinvoke conf.<org.apache.bookkeeper.stream.server.conf.BookieConfiguration: org.apache.commons.configuration.CompositeConfiguration getUnderlyingConf()>();
+/*34*/
+
+        virtualinvoke $stack3.<org.apache.bookkeeper.conf.ServerConfiguration: void loadConf(org.apache.commons.configuration.CompositeConfiguration)>($stack5);
+/*34*/
+
+        tmp$3393941 = (org.apache.commons.configuration.Configuration) conf;
+
+        staticinvoke <org.apache.bookkeeper.stats.Stats: void loadStatsProvider(org.apache.commons.configuration.Configuration)>(tmp$3393941);
+/*35*/
+
+        $stack6 = staticinvoke <org.apache.bookkeeper.stats.Stats: org.apache.bookkeeper.stats.StatsProvider get()>();
+/*36*/
+
+        this.<org.apache.bookkeeper.stream.server.service.StatsProviderService: org.apache.bookkeeper.stats.StatsProvider statsProvider> = $stack6;
+/*36*/
+
+        return;
+/*37*/
+    }
+

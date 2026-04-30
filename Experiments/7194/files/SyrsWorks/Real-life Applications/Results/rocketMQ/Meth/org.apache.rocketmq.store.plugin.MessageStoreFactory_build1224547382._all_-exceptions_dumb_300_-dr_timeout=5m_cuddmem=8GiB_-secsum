@@ -1,0 +1,9 @@
+static org.apache.rocketmq.store.MessageStore org.apache.rocketmq.store.plugin.MessageStoreFactory:build (
+  org.apache.rocketmq.store.plugin.MessageStorePluginContext context,
+  org.apache.rocketmq.store.MessageStore @messageStore) {
+  guard = tt;
+  ret(level()) = level(@messageStore) ⊔ level(context) ⊔ obj_level(@messageStore) ⊔ obj_level(context);
+  ret(obj_level()) = level(@messageStore) ⊔ level(context) ⊔ obj_level(@messageStore) ⊔ obj_level(context);
+  ret(obj_level(@messageStore)) = level(@messageStore) ⊔ level(context) ⊔ obj_level(@messageStore) ⊔ obj_level(context);
+  ret(obj_level(context)) = level(@messageStore) ⊔ level(context) ⊔ obj_level(@messageStore) ⊔ obj_level(context);
+}

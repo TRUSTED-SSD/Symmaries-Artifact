@@ -1,0 +1,28 @@
+boolean org.apache.bookkeeper.client.BookKeeperAdmin$8$1:hasNext()
+{
+org.apache.bookkeeper.client.BookKeeperAdmin$8 $stack2;
+  org.apache.bookkeeper.meta.LedgerManager$LedgerRangeIterator $stack3;
+  boolean $stack4;
+  java.util.Iterator $stack5;
+  java.io.IOException $stack8;
+  org.slf4j.Logger $stack9;
+  label0:$stack2=this.this$1;
+ $stack3=$stack2.val$iterator;
+ $stack4 = $stack3.hasNext();
+ if ($stack4==0) goto label1;
+ label2:return  1;
+ label1:$stack5=this.currentRange;
+ if ($stack5==null) goto label3;
+ $stack5=this.currentRange;
+ $stack4 = $stack5.hasNext();
+ if ($stack4==0) goto label3;
+ label4:return  1;
+ label3:goto label5;
+ label6:$stack8 = catch;
+ $stack9 = org.apache.bookkeeper.client.BookKeeperAdmin.access$000();
+ $stack9.error("Error while checking if there is a next element",(java.lang.Throwable)$stack8);
+ label5:return  0;
+ catch java.io.IOException: label0 - label2 : label6;
+catch java.io.IOException: label1 - label4 : label6;
+} 
+

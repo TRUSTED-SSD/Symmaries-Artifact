@@ -1,0 +1,87 @@
+digraph G {
+  node [shape=box, ];
+  "pc0_js1" [label="〈r2 = r1.putFields (), js1〉\n\
+pc ⊑ ⊥ ∧ level(r1) ⊔ obj_level(r1) ⊑ ⊥",
+             ];
+  "pc1_js1" [label="〈$r3 = this.seed, js1〉", ];
+  "pc2_js1" [label="〈$l0 = $r3.get (), js1〉\n\
+tt", ];
+  "pc3_js1" [label="〈r2.put (\"seed\", $l0), js1〉\n\
+tt", ];
+  "pc4_js1" [label="〈$d0 = this.nextNextGaussian, js1〉", ];
+  "pc5_js1" [label="〈r2.put (\"nextNextGaussian\", $d0), js1〉\n\
+tt", ];
+  "pc6_js1" [label="〈$z0 = this.haveNextNextGaussian, js1〉", ];
+  "pc7_js1" [label="〈r2.put (\"haveNextNextGaussian\", $z0), js1〉\n\
+tt", ];
+  "pc8_js1" [label="〈r1.writeFields (), js1〉\n\
+tt", ];
+  "pc9_js1" [label="〈return, js1〉", ];
+  "pc10_js1" [label="〈sink, js1〉\n\
+obj_level(r1) ⊑ ret(obj_level(r1))' ∧ obj_level(this) ⊑ ret(obj_level(this))' ∧ (ret(r1.><r1)' ∨ ¬r1.><r1) ∧ (ret(r1.><this)' ∨ ¬r1.><this) ∧ (ret(this.><r1)' ∨ ¬this.><r1) ∧ (ret(this.><this)' ∨ ¬this.><this)",
+              ];
+  
+  
+  "pc0_js1" -> "pc1_js1" [label="tt,\n\
+{r1.><r1 := tt,\n\
+ r1.><this := r1.><this ∨ this.><r1,\n\
+ this.><$r3 := ff,\n\
+ this.><this := this.><this ∨ this.><r1 ∧ (r1.><this ∨ this.><r1),\n\
+ level(r2) := ⊤,\n\
+ obj_level($r3) := ⊥,\n\
+ obj_level(r1) := ⊤,\n\
+ obj_level(r2) := ⊤,\n\
+ obj_level(this) := obj_level(this) ⊔ (if r1.><this ∨ this.><r1 then ⊤ else ⊥)}",
+                          ];
+  "pc1_js1" -> "pc2_js1" [label="tt,\n\
+{r1.><$r3 := r1.><this,\n\
+ r2.><$r3 := ff,\n\
+ this.><$r3 := tt,\n\
+ level($r3) := pc ⊔ level(this) ⊔ obj_level(this),\n\
+ obj_level($r3) := obj_level(this)}",
+                          ];
+  "pc2_js1" -> "pc3_js1" [label="tt,\n\
+{level($l0) := pc ⊔ obj_level($r3)}",
+                          ];
+  "pc3_js1" -> "pc4_js1" [label="tt,\n\
+{r1.><r1 := tt,\n\
+ r2.><r1 := ff,\n\
+ r2.><this := ff,\n\
+ this.><$r3 := tt}",
+                          ];
+  "pc4_js1" -> "pc5_js1" [label="tt,\n\
+{level($d0) := pc ⊔ level(this) ⊔ obj_level(this)}",
+                          ];
+  "pc5_js1" -> "pc6_js1" [label="tt,\n\
+{r1.><r1 := tt,\n\
+ r2.><r1 := ff,\n\
+ r2.><this := ff,\n\
+ this.><$r3 := tt}",
+                          ];
+  "pc6_js1" -> "pc7_js1" [label="tt,\n\
+{level($z0) := pc ⊔ level(this) ⊔ obj_level(this)}",
+                          ];
+  "pc7_js1" -> "pc8_js1" [label="tt,\n\
+{r1.><r1 := tt,\n\
+ r2.><r1 := ff,\n\
+ r2.><this := ff,\n\
+ this.><$r3 := tt}",
+                          ];
+  "pc8_js1" -> "pc9_js1" [label="tt,\n\
+{r1.><r2 := ff,\n\
+ r1.><this := r1.><this ∨ this.><r1,\n\
+ r2.><$r3 := ff,\n\
+ r2.><r2 := ff,\n\
+ r2.><this := ff,\n\
+ this.><$r3 := tt,\n\
+ this.><r2 := ff,\n\
+ this.><this := this.><this ∨ this.><r1 ∧ (r1.><this ∨ this.><r1),\n\
+ obj_level($r3) := obj_level($r3) ⊔ (if r1.><$r3 then ⊤ else ⊥),\n\
+ obj_level(r1) := ⊤,\n\
+ obj_level(r2) := ⊤,\n\
+ obj_level(this) := obj_level(this) ⊔ (if r1.><this ∨ this.><r1 then ⊤ else ⊥)}",
+                          ];
+  "pc9_js1" -> "pc10_js1" [label="tt,\n\
+{ϕ := S9}", ];
+  
+  }

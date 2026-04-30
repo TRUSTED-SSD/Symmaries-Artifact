@@ -1,0 +1,43 @@
+boolean org.apache.bookkeeper.clients.impl.container.StorageContainerManager:replaceStorageContainer(long groupId,org.apache.bookkeeper.clients.impl.container.StorageContainerInfo groupInfo)
+{
+java.util.Map l4;
+  org.apache.bookkeeper.clients.impl.container.StorageContainerInfo oldGroupInfo;
+  java.lang.Throwable l6;
+  java.util.Map $stack7;
+  java.lang.Long $stack9;
+  java.lang.Object $stack10;
+  org.slf4j.Logger $stack11;
+  long $stack18;
+  long $stack19;
+  byte $stack20;
+  $stack7=this.storageContainers;
+ l4=$stack7;
+ monitorenter $stack7;
+ label0:$stack7=this.storageContainers;
+ $stack9 = java.lang.Long.valueOf(groupId);
+ $stack10 = $stack7.get((java.lang.Object)$stack9);
+ oldGroupInfo=(org.apache.bookkeeper.clients.impl.container.StorageContainerInfo) $stack10;
+ if (null==oldGroupInfo) goto label1;
+ $stack18 = oldGroupInfo.getRevision();
+ $stack19 = groupInfo.getRevision();
+ $stack20=($stack18 cmp $stack19);
+ if ($stack20>=0) goto label2;
+ label1:$stack11=org.apache.bookkeeper.clients.impl.container.StorageContainerManager.log;
+ $stack9 = java.lang.Long.valueOf(groupId);
+ dummyClass.lowSink("Updated the storage container info for group {} : {}");
+$stack11.info("Updated the storage container info for group {} : {}",(java.lang.Object)$stack9,(java.lang.Object)groupInfo);
+ $stack7=this.storageContainers;
+ $stack9 = java.lang.Long.valueOf(groupId);
+ $stack7.put((java.lang.Object)$stack9,(java.lang.Object)groupInfo);
+ monitorexit l4;
+ label3:return  1;
+ label2:monitorexit l4;
+ label4:return  0;
+ label5:l6 = catch;
+ monitorexit l4;
+ label6:throw l6;
+ catch java.lang.Throwable: label0 - label3 : label5;
+catch java.lang.Throwable: label2 - label4 : label5;
+catch java.lang.Throwable: label5 - label6 : label5;
+} 
+

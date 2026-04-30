@@ -1,0 +1,15 @@
+static void org.apache.bookkeeper.clients.utils.RpcUtils:processRpc(java.lang.Object service,java.util.concurrent.CompletableFuture result,org.apache.bookkeeper.clients.utils.RpcUtils$CreateRequestFunc createRequestFunc,org.apache.bookkeeper.clients.utils.RpcUtils$ProcessRequestFunc processRequestFunc,org.apache.bookkeeper.clients.utils.RpcUtils$ProcessResponseFunc processResponseFunc)
+{
+java.lang.Object request;
+  com.google.common.util.concurrent.ListenableFuture resultFuture;
+  org.apache.bookkeeper.clients.utils.RpcUtils$1 $stack9;
+  java.util.concurrent.Executor $stack10;
+  request = createRequestFunc.apply();
+ resultFuture = processRequestFunc.process(service,request);
+ $stack9=new org.apache.bookkeeper.clients.utils.RpcUtils$1;
+ $stack9#org.apache.bookkeeper.clients.utils.RpcUtils$1(processResponseFunc,result);
+ $stack10 = com.google.common.util.concurrent.MoreExecutors.directExecutor();
+ com.google.common.util.concurrent.Futures.addCallback(resultFuture,(com.google.common.util.concurrent.FutureCallback)$stack9,$stack10);
+ return;
+ } 
+

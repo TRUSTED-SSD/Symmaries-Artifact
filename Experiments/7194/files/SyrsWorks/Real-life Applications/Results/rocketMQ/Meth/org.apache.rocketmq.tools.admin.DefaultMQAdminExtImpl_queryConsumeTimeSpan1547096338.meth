@@ -1,0 +1,33 @@
+java.util.List org.apache.rocketmq.tools.admin.DefaultMQAdminExtImpl:queryConsumeTimeSpan(java.lang.String topic,java.lang.String group)
+{
+java.util.ArrayList spanSet;
+  org.apache.rocketmq.remoting.protocol.route.TopicRouteData topicRouteData;
+  java.util.Iterator l5;
+  org.apache.rocketmq.remoting.protocol.route.BrokerData bd;
+  java.lang.String addr;
+  java.util.List $stack10;
+  boolean $stack12;
+  java.lang.Object $stack13;
+  org.apache.rocketmq.client.impl.factory.MQClientInstance $stack16;
+  org.apache.rocketmq.client.impl.MQClientAPIImpl $stack17;
+  long $stack18;
+  spanSet=new java.util.ArrayList;
+ spanSet#java.util.ArrayList();
+ topicRouteData = this.examineTopicRouteInfo(topic);
+ $stack10 = topicRouteData.getBrokerDatas();
+ l5 = $stack10.iterator();
+ label0:$stack12 = l5.hasNext();
+ if ($stack12==0) goto label1;
+ $stack13 = l5.next();
+ bd=(org.apache.rocketmq.remoting.protocol.route.BrokerData) $stack13;
+ addr = bd.selectBrokerAddr();
+ if (addr==null) goto label2;
+ $stack16=this.mqClientInstance;
+ $stack17 = $stack16.getMQClientAPIImpl();
+ $stack18=this.timeoutMillis;
+ $stack10 = $stack17.queryConsumeTimeSpan(addr,topic,group,$stack18);
+ spanSet.addAll((java.util.Collection)$stack10);
+ label2:goto label0;
+ label1:return  spanSet;
+ } 
+

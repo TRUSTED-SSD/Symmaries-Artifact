@@ -1,0 +1,55 @@
+    private static org.apache.bookkeeper.stream.storage.api.sc.StorageContainerManager lambda$buildStorageServer$3(org.apache.bookkeeper.stream.proto.common.Endpoint, org.apache.bookkeeper.stream.storage.conf.StorageConfiguration, org.apache.bookkeeper.stream.server.service.CuratorProviderService, org.apache.bookkeeper.conf.ServerConfiguration, org.apache.bookkeeper.stats.StatsLogger, org.apache.bookkeeper.stream.storage.conf.StorageConfiguration, org.apache.bookkeeper.stream.storage.api.sc.StorageContainerRegistry)
+    {
+        org.apache.bookkeeper.stream.proto.common.Endpoint myEndpoint;
+        org.apache.bookkeeper.stream.storage.conf.StorageConfiguration storageConf, storeConf;
+        org.apache.bookkeeper.stream.server.service.CuratorProviderService curatorProviderService;
+        org.apache.bookkeeper.conf.ServerConfiguration bkServerConf;
+        org.apache.bookkeeper.stats.StatsLogger rootStatsLogger;
+        org.apache.bookkeeper.stream.storage.api.sc.StorageContainerRegistry registry;
+        org.apache.bookkeeper.stream.storage.impl.sc.ZkStorageContainerManager $stack7;
+        org.apache.bookkeeper.stream.storage.impl.cluster.ZkClusterMetadataStore $stack8;
+        org.apache.curator.framework.CuratorFramework $stack9;
+        java.lang.String $stack10;
+
+        myEndpoint := @parameter0: org.apache.bookkeeper.stream.proto.common.Endpoint;
+
+        storageConf := @parameter1: org.apache.bookkeeper.stream.storage.conf.StorageConfiguration;
+
+        curatorProviderService := @parameter2: org.apache.bookkeeper.stream.server.service.CuratorProviderService;
+
+        bkServerConf := @parameter3: org.apache.bookkeeper.conf.ServerConfiguration;
+
+        rootStatsLogger := @parameter4: org.apache.bookkeeper.stats.StatsLogger;
+
+        storeConf := @parameter5: org.apache.bookkeeper.stream.storage.conf.StorageConfiguration;
+
+        registry := @parameter6: org.apache.bookkeeper.stream.storage.api.sc.StorageContainerRegistry;
+
+        $stack7 = new org.apache.bookkeeper.stream.storage.impl.sc.ZkStorageContainerManager;
+/*336*/
+
+        $stack8 = new org.apache.bookkeeper.stream.storage.impl.cluster.ZkClusterMetadataStore;
+/*336*/
+
+        $stack9 = virtualinvoke curatorProviderService.<org.apache.bookkeeper.stream.server.service.CuratorProviderService: org.apache.curator.framework.CuratorFramework get()>();
+/*340*/
+
+        $stack10 = staticinvoke <org.apache.bookkeeper.meta.zk.ZKMetadataDriverBase: java.lang.String resolveZkServers(org.apache.bookkeeper.conf.AbstractConfiguration)>(bkServerConf);
+/*341*/
+
+        specialinvoke $stack8.<org.apache.bookkeeper.stream.storage.impl.cluster.ZkClusterMetadataStore: void <init>(org.apache.curator.framework.CuratorFramework,java.lang.String,java.lang.String)>($stack9, $stack10, "/stream");
+/*341*/
+
+        rootStatsLogger = interfaceinvoke rootStatsLogger.<org.apache.bookkeeper.stats.StatsLogger: org.apache.bookkeeper.stats.StatsLogger scope(java.lang.String)>("sc");
+/*344*/
+
+        rootStatsLogger = interfaceinvoke rootStatsLogger.<org.apache.bookkeeper.stats.StatsLogger: org.apache.bookkeeper.stats.StatsLogger scope(java.lang.String)>("manager");
+/*344*/
+
+        specialinvoke $stack7.<org.apache.bookkeeper.stream.storage.impl.sc.ZkStorageContainerManager: void <init>(org.apache.bookkeeper.stream.proto.common.Endpoint,org.apache.bookkeeper.stream.storage.conf.StorageConfiguration,org.apache.bookkeeper.stream.storage.api.cluster.ClusterMetadataStore,org.apache.bookkeeper.stream.storage.api.sc.StorageContainerRegistry,org.apache.bookkeeper.stats.StatsLogger)>(myEndpoint, storageConf, $stack8, registry, rootStatsLogger);
+/*344*/
+
+        return $stack7;
+/*336*/
+    }
+

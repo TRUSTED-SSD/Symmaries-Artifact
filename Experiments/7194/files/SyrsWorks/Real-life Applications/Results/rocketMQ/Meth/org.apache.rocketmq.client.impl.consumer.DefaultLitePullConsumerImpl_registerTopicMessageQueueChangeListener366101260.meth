@@ -1,0 +1,30 @@
+void org.apache.rocketmq.client.impl.consumer.DefaultLitePullConsumerImpl:registerTopicMessageQueueChangeListener(java.lang.String topic,org.apache.rocketmq.client.consumer.TopicMessageQueueChangeListener listener)
+{
+java.util.Set messageQueues;
+  org.apache.rocketmq.client.exception.MQClientException $stack4;
+  java.util.Map $stack5;
+  boolean $stack6;
+  org.apache.rocketmq.common.ServiceState $stack9;
+  org.apache.rocketmq.common.ServiceState $stack10;
+  org.apache.rocketmq.logging.org.slf4j.Logger $stack14;
+  if (topic==null) goto label0;
+ if (listener!=null) goto label1;
+ label0:$stack4=new org.apache.rocketmq.client.exception.MQClientException;
+ $stack4#org.apache.rocketmq.client.exception.MQClientException("Topic or listener is null",null);
+ throw $stack4;
+ label1:$stack5=this.topicMessageQueueChangeListenerMap;
+ $stack6 = $stack5.containsKey((java.lang.Object)topic);
+ if ($stack6==0) goto label2;
+ $stack14=org.apache.rocketmq.client.impl.consumer.DefaultLitePullConsumerImpl.log;
+ $stack14.warn("Topic {} had been registered, new listener will overwrite the old one",(java.lang.Object)topic);
+ label2:$stack5=this.topicMessageQueueChangeListenerMap;
+ $stack5.put((java.lang.Object)topic,(java.lang.Object)listener);
+ $stack10=this.serviceState;
+ $stack9=org.apache.rocketmq.common.ServiceState.RUNNING;
+ if ($stack10!=$stack9) goto label3;
+ messageQueues = this.fetchMessageQueues(topic);
+ $stack5=this.messageQueuesForTopic;
+ $stack5.put((java.lang.Object)topic,(java.lang.Object)messageQueues);
+ label3:return;
+ } 
+

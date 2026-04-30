@@ -1,0 +1,22 @@
+void org.apache.rocketmq.broker.topic.TopicConfigManager:decode(java.lang.String jsonString)
+{
+org.apache.rocketmq.remoting.protocol.body.TopicConfigSerializeWrapper topicConfigSerializeWrapper;
+  java.lang.Object $stack3;
+  java.util.concurrent.ConcurrentMap $stack4;
+  java.util.concurrent.ConcurrentMap $stack5;
+  org.apache.rocketmq.remoting.protocol.DataVersion $stack6;
+  org.apache.rocketmq.remoting.protocol.DataVersion $stack7;
+  if (jsonString==null) goto label0;
+ $stack3 = org.apache.rocketmq.remoting.protocol.RemotingSerializable.fromJson(jsonString,org.apache.rocketmq.remoting.protocol.body.TopicConfigSerializeWrapper);
+ topicConfigSerializeWrapper=(org.apache.rocketmq.remoting.protocol.body.TopicConfigSerializeWrapper) $stack3;
+ if (topicConfigSerializeWrapper==null) goto label0;
+ $stack4=this.topicConfigTable;
+ $stack5 = topicConfigSerializeWrapper.getTopicConfigTable();
+ $stack4.putAll((java.util.Map)$stack5);
+ $stack6=this.dataVersion;
+ $stack7 = topicConfigSerializeWrapper.getDataVersion();
+ $stack6.assignNewOne($stack7);
+ this#org.apache.rocketmq.broker.topic.TopicConfigManager:printLoadDataWhenFirstBoot(topicConfigSerializeWrapper);
+ label0:return;
+ } 
+

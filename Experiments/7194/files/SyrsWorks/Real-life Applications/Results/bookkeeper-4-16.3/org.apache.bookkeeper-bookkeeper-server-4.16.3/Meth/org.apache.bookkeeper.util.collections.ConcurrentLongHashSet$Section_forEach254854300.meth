@@ -1,0 +1,51 @@
+void org.apache.bookkeeper.util.collections.ConcurrentLongHashSet$Section:forEach(org.apache.bookkeeper.util.collections.ConcurrentLongHashSet$ConsumerLong processor)
+{
+long stamp;
+  long[] table;
+  boolean acquiredReadLock;
+  int bucket;
+  long storedItem;
+  java.lang.Throwable l9;
+  boolean $stack11;
+  int $stack12;
+  byte $stack13;
+  stamp = this.tryOptimisticRead();
+dummyClass.highSourceMut(stamp);
+ table=this.table;
+ acquiredReadLock=0;
+ label0:$stack11 = this.validate(stamp);
+ if ($stack11!=0) goto label1;
+ stamp = this.readLock();
+dummyClass.highSourceMut(stamp);
+ acquiredReadLock=1;
+ table=this.table;
+ label1:bucket=0;
+ label2:$stack12=#table;
+ if (bucket>=$stack12) goto label3;
+ storedItem=table[bucket];
+ if (acquiredReadLock!=0) goto label4;
+ $stack11 = this.validate(stamp);
+ if ($stack11!=0) goto label4;
+ stamp = this.readLock();
+dummyClass.highSourceMut(stamp);
+ acquiredReadLock=1;
+ storedItem=table[bucket];
+ label4:$stack13=(storedItem cmp -2L);
+ if ($stack13==0) goto label5;
+ $stack13=(storedItem cmp -1L);
+ if ($stack13==0) goto label5;
+ processor.accept(storedItem);
+ label5:bucket=(bucket+1);
+ goto label2;
+ label3:if (acquiredReadLock==0) goto label6;
+ this.unlockRead(stamp);
+ goto label6;
+ label7:l9 = catch;
+ label8:if (acquiredReadLock==0) goto label9;
+ this.unlockRead(stamp);
+ label9:throw l9;
+ label6:return;
+ catch java.lang.Throwable: label0 - label3 : label7;
+catch java.lang.Throwable: label7 - label8 : label7;
+} 
+

@@ -1,0 +1,25 @@
+void org.apache.rocketmq.proxy.service.transaction.ClusterTransactionService:start()
+{
+org.apache.rocketmq.proxy.config.ProxyConfig proxyConfig;
+  org.apache.rocketmq.proxy.service.transaction.ClusterTransactionService$TxHeartbeatServiceThread $stack3;
+  int $stack5;
+  int $stack6;
+  java.util.concurrent.TimeUnit $stack8;
+  int $stack10;
+  java.util.concurrent.ThreadPoolExecutor $stack11;
+  proxyConfig = org.apache.rocketmq.proxy.config.ConfigurationManager.getProxyConfig();
+ $stack3=new org.apache.rocketmq.proxy.service.transaction.ClusterTransactionService$TxHeartbeatServiceThread;
+ $stack3#org.apache.rocketmq.proxy.service.transaction.ClusterTransactionService$TxHeartbeatServiceThread(this);
+ this.txHeartbeatServiceThread=$stack3;
+ this#org.apache.rocketmq.proxy.service.transaction.AbstractTransactionService();
+ $stack3=this.txHeartbeatServiceThread;
+ $stack3.start();
+ $stack5 = proxyConfig.getTransactionHeartbeatThreadPoolNums();
+ $stack6 = proxyConfig.getTransactionHeartbeatThreadPoolNums();
+ $stack8=java.util.concurrent.TimeUnit.MILLISECONDS;
+ $stack10 = proxyConfig.getTransactionHeartbeatThreadPoolQueueCapacity();
+ $stack11 = org.apache.rocketmq.common.thread.ThreadPoolMonitor.createAndMonitor($stack5,$stack6,0L,$stack8,"TransactionHeartbeatRegisterThread",$stack10);
+ this.heartbeatExecutors=$stack11;
+ return;
+ } 
+

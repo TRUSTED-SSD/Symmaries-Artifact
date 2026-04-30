@@ -1,0 +1,38 @@
+static java.lang.String org.keycloak.common.util.KerberosSerializationUtils:serialize(java.io.Serializable obj)
+{
+java.io.ByteArrayOutputStream bos;
+  java.io.ObjectOutputStream out;
+  byte[] objBytes;
+  java.lang.String l4;
+  java.lang.Throwable l6;
+  java.io.ObjectOutputStream $stack9;
+  java.io.IOException $stack12;
+  java.io.IOException $stack14;
+  bos=new java.io.ByteArrayOutputStream;
+ bos#java.io.ByteArrayOutputStream();
+ out=null;
+ label0:$stack9=new java.io.ObjectOutputStream;
+ $stack9#java.io.ObjectOutputStream((java.io.OutputStream)bos);
+ out=$stack9;
+ $stack9.writeObject((java.lang.Object)obj);
+ objBytes = bos.toByteArray();
+ l4 = org.keycloak.common.util.Base64.encodeBytes(objBytes);
+ label1:if ($stack9==null) goto label2;
+ $stack9.close();
+ label2:goto label3;
+ label4:$stack12 = catch;
+ $stack12.printStackTrace();
+ label3:return  l4;
+ label5:l6 = catch;
+ label6:if (out==null) goto label7;
+ out.close();
+ label7:goto label8;
+ label9:$stack14 = catch;
+ $stack14.printStackTrace();
+ label8:throw l6;
+ catch java.io.IOException: label1 - label2 : label4;
+catch java.lang.Throwable: label0 - label1 : label5;
+catch java.io.IOException: label6 - label7 : label9;
+catch java.lang.Throwable: label5 - label6 : label5;
+} 
+

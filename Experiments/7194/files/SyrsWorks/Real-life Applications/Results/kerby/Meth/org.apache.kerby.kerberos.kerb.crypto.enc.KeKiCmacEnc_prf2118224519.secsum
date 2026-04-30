@@ -1,0 +1,9 @@
+byte[] org.apache.kerby.kerberos.kerb.crypto.enc.KeKiCmacEnc:prf (byte[] @key,
+                                                                  byte[] seed) {
+  guard = tt;
+  ret(level()) = pc ⊔ level(@key) ⊔ level(seed) ⊔ level(this) ⊔ obj_level(@key) ⊔ obj_level(this);
+  ret(obj_level()) = pc ⊔ level(@key) ⊔ level(seed) ⊔ level(this) ⊔ obj_level(@key) ⊔ obj_level(this);
+  ret(obj_level(@key)) = if obj_level(@key) = ⊤ ∨ pc ≠ ⊤ ∧ (if obj_level(this) = ⊤ then obj_level(@key) = ⊥ else level(this) = ⊤ ∧ obj_level(@key) = ⊥ ∧ obj_level(this) = ⊥) then ⊤ else ⊥;
+  ret(obj_level(seed)) = if obj_level(seed) = ⊤ ∨ pc ≠ ⊤ ∧ (if obj_level(this) = ⊤ then obj_level(seed) = ⊥ else level(this) = ⊤ ∧ obj_level(seed) = ⊥ ∧ obj_level(this) = ⊥) then ⊤ else ⊥;
+  ret(obj_level(this)) = pc ⊔ level(this) ⊔ obj_level(this);
+}

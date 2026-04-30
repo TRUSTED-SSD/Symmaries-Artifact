@@ -1,0 +1,55 @@
+static org.apache.bookkeeper.stream.proto.kv.rpc.Compare$Builder org.apache.bookkeeper.clients.impl.kv.KvUtils:toProtoCompare(org.apache.bookkeeper.api.kv.op.CompareOp cmp$$)
+{
+org.apache.bookkeeper.stream.proto.kv.rpc.Compare$Builder builder;
+  io.netty.buffer.ByteBuf value;
+  org.apache.bookkeeper.api.kv.op.CompareTarget $stack4;
+  org.apache.bookkeeper.stream.proto.kv.rpc.Compare$CompareTarget $stack5;
+  org.apache.bookkeeper.api.kv.op.CompareResult $stack7;
+  org.apache.bookkeeper.stream.proto.kv.rpc.Compare$CompareResult $stack8;
+  java.lang.Object $stack10;
+  com.google.protobuf.ByteString $stack12;
+  int[] $stack14;
+  int $stack16;
+  long $stack18;
+  byte[] $stack28;
+  builder = org.apache.bookkeeper.stream.proto.kv.rpc.Compare.newBuilder();
+ $stack4 = cmp$$.target();
+ $stack5 = org.apache.bookkeeper.clients.impl.kv.KvUtils.toProtoTarget($stack4);
+ builder = builder.setTarget($stack5);
+ $stack7 = cmp$$.result();
+ $stack8 = org.apache.bookkeeper.clients.impl.kv.KvUtils.toProtoResult($stack7);
+ builder = builder.setResult($stack8);
+ $stack10 = cmp$$.key();
+ value=(io.netty.buffer.ByteBuf) $stack10;
+ $stack12 = org.apache.bookkeeper.clients.impl.kv.KvUtils.toProtoKey(value);
+ builder = builder.setKey($stack12);
+ $stack14=org.apache.bookkeeper.clients.impl.kv.KvUtils$1.$SwitchMap$org$apache$bookkeeper$api$kv$op$CompareTarget;
+ $stack4 = cmp$$.target();
+ $stack16 = $stack4.ordinal();
+ $stack16=$stack14[$stack16];
+ switch [$stack16]
+if 0 goto label0;
+if 1 goto label1;
+if 2 goto label2;
+if 3 goto label3;
+goto label4;
+ label3:$stack18 = cmp$$.revision();
+ builder.setVersion($stack18);
+ goto label4;
+ label0:$stack18 = cmp$$.revision();
+ builder.setModRevision($stack18);
+ goto label4;
+ label2:$stack18 = cmp$$.revision();
+ builder.setCreateRevision($stack18);
+ goto label4;
+ label1:$stack10 = cmp$$.value();
+ value=(io.netty.buffer.ByteBuf) $stack10;
+ if (null!=value) goto label5;
+ $stack28=new byte[0];
+ value = io.netty.buffer.Unpooled.wrappedBuffer($stack28);
+ label5:$stack12 = org.apache.bookkeeper.clients.impl.kv.KvUtils.toProtoKey(value);
+ builder.setValue($stack12);
+ goto label4;
+ label4:return  builder;
+ } 
+

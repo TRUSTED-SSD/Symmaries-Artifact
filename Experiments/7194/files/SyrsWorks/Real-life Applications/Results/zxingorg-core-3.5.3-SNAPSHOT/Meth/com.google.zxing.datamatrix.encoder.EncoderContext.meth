@@ -1,0 +1,47 @@
+com.google.zxing.datamatrix.encoder.EncoderContext(java.lang.String msg)
+{
+byte[] msgBinary;
+  java.lang.StringBuilder sb;
+  int i;
+  int c;
+  char ch;
+  java.nio.charset.Charset $stack7;
+  java.lang.String $stack11;
+  com.google.zxing.datamatrix.encoder.SymbolShapeHint $stack12;
+  byte $stack15;
+  short $stack16;
+  char $stack20;
+  java.lang.IllegalArgumentException $stack23;
+  this#java.lang.Object();
+ $stack7=java.nio.charset.StandardCharsets.ISO_8859_1;
+ msgBinary = msg.getBytes($stack7);
+ sb=new java.lang.StringBuilder;
+ i=#msgBinary;
+ sb#java.lang.StringBuilder(i);
+ i=0;
+ c=#msgBinary;
+ label0:if (i>=c) goto label1;
+ $stack15=msgBinary[i];
+ $stack16=($stack15 & 255);
+ ch=(char) $stack16;
+ if (ch!=63) goto label2;
+ $stack20 = msg.charAt(i);
+ if ($stack20==63) goto label2;
+ $stack23=new java.lang.IllegalArgumentException;
+ $stack23#java.lang.IllegalArgumentException("Message contains characters outside ISO-8859-1 encoding.");
+ throw $stack23;
+ label2:sb.append(ch);
+ i=(i+1);
+ goto label0;
+ label1:$stack11 = sb.toString();
+ this.msg=$stack11;
+ $stack12=com.google.zxing.datamatrix.encoder.SymbolShapeHint.FORCE_NONE;
+ this.shape=$stack12;
+ sb=new java.lang.StringBuilder;
+ i = msg.length();
+ sb#java.lang.StringBuilder(i);
+ this.codewords=sb;
+ this.newEncoding=-1;
+ return;
+ } 
+

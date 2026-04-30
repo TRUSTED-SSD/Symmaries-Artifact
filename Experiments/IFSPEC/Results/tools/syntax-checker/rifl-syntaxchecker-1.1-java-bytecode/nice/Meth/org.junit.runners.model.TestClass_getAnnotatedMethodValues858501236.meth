@@ -1,0 +1,46 @@
+java.util.List org.junit.runners.model.TestClass:getAnnotatedMethodValues(java.lang.Object test,java.lang.Class @annotationClass,java.lang.Class valueClass)
+{
+java.util.ArrayList results;
+  java.util.Iterator i$;
+  org.junit.runners.model.FrameworkMethod each;
+  java.lang.Object fieldValue;
+  java.util.List $stack9;
+  boolean $stack11;
+  java.lang.Object[] $stack16;
+  java.lang.Throwable $stack20;
+  java.lang.RuntimeException $stack21;
+  java.lang.StringBuilder $stack22;
+  java.lang.String $stack24;
+  java.lang.Class annotationClass;
+annotationClass=@annotationClass;
+results=new java.util.ArrayList;
+ results#java.util.ArrayList();
+ $stack9 = this.getAnnotatedMethods(annotationClass);
+ i$ = $stack9.iterator();
+ label0:$stack11 = i$.hasNext();
+ if ($stack11==0) goto label1;
+ fieldValue = i$.next();
+ each=(org.junit.runners.model.FrameworkMethod) fieldValue;
+ label2:annotationClass = each.getReturnType();
+ $stack11 = valueClass.isAssignableFrom(annotationClass);
+ if ($stack11==0) goto label3;
+ $stack16=new java.lang.Object[0];
+ fieldValue = each.invokeExplosively(test,$stack16);
+ fieldValue = valueClass.cast(fieldValue);
+ results.add(fieldValue);
+ label3:goto label4;
+ label5:$stack20 = catch;
+ $stack21=new java.lang.RuntimeException;
+ $stack22=new java.lang.StringBuilder;
+ $stack22#java.lang.StringBuilder();
+ $stack22 = $stack22.append("Exception in ");
+ $stack24 = each.getName();
+ $stack22 = $stack22.append($stack24);
+ $stack24 = $stack22.toString();
+ $stack21#java.lang.RuntimeException($stack24,$stack20);
+ throw $stack21;
+ label4:goto label0;
+ label1:return  results;
+ catch java.lang.Throwable: label2 - label3 : label5;
+} 
+

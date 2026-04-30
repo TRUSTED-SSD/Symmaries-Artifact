@@ -1,0 +1,28 @@
+static java.lang.String org.apache.rocketmq.common.MixAll:getWSAddr()
+{
+java.lang.String wsDomainName;
+  java.lang.String wsDomainSubgroup;
+  java.lang.String wsAddr;
+  java.lang.StringBuilder $stack5;
+  int $stack11;
+  wsDomainName = java.lang.System.getProperty("rocketmq.namesrv.domain","jmenv.tbsite.net");
+ wsDomainSubgroup = java.lang.System.getProperty("rocketmq.namesrv.domain.subgroup","nsaddr");
+ $stack5=new java.lang.StringBuilder;
+ $stack5#java.lang.StringBuilder();
+ $stack5 = $stack5.append("http://");
+ $stack5 = $stack5.append(wsDomainName);
+ $stack5 = $stack5.append(":8080/rocketmq/");
+ $stack5 = $stack5.append(wsDomainSubgroup);
+ wsAddr = $stack5.toString();
+ $stack11 = wsDomainName.indexOf(":");
+ if ($stack11<=0) goto label0;
+ $stack5=new java.lang.StringBuilder;
+ $stack5#java.lang.StringBuilder();
+ $stack5 = $stack5.append("http://");
+ $stack5 = $stack5.append(wsDomainName);
+ $stack5 = $stack5.append("/rocketmq/");
+ $stack5 = $stack5.append(wsDomainSubgroup);
+ wsAddr = $stack5.toString();
+ label0:return  wsAddr;
+ } 
+

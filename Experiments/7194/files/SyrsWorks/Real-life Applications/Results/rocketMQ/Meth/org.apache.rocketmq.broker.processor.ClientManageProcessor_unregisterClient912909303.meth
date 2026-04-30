@@ -1,0 +1,46 @@
+org.apache.rocketmq.remoting.protocol.RemotingCommand org.apache.rocketmq.broker.processor.ClientManageProcessor:unregisterClient(io.netty.channel.ChannelHandlerContext ctx,org.apache.rocketmq.remoting.protocol.RemotingCommand request)
+{
+org.apache.rocketmq.remoting.protocol.RemotingCommand response;
+  org.apache.rocketmq.remoting.protocol.header.UnregisterClientRequestHeader requestHeader;
+  org.apache.rocketmq.broker.client.ClientChannelInfo clientChannelInfo;
+  java.lang.String group;
+  org.apache.rocketmq.remoting.protocol.subscription.SubscriptionGroupConfig subscriptionGroupConfig;
+  boolean isNotifyConsumerIdsChangedEnable;
+  org.apache.rocketmq.remoting.CommandCustomHeader $stack10;
+  io.netty.channel.Channel $stack12;
+  org.apache.rocketmq.remoting.protocol.LanguageCode $stack14;
+  int $stack15;
+  org.apache.rocketmq.broker.BrokerController $stack18;
+  org.apache.rocketmq.broker.subscription.SubscriptionGroupManager $stack19;
+  org.apache.rocketmq.broker.client.ConsumerManager $stack22;
+  org.apache.rocketmq.broker.client.ProducerManager $stack34;
+  response = org.apache.rocketmq.remoting.protocol.RemotingCommand.createResponseCommand(org.apache.rocketmq.remoting.protocol.header.UnregisterClientResponseHeader);
+ $stack10 = request.decodeCommandCustomHeader(org.apache.rocketmq.remoting.protocol.header.UnregisterClientRequestHeader);
+ requestHeader=(org.apache.rocketmq.remoting.protocol.header.UnregisterClientRequestHeader) $stack10;
+ clientChannelInfo=new org.apache.rocketmq.broker.client.ClientChannelInfo;
+ $stack12 = ctx.channel();
+ group = requestHeader.getClientID();
+ $stack14 = request.getLanguage();
+ $stack15 = request.getVersion();
+ clientChannelInfo#org.apache.rocketmq.broker.client.ClientChannelInfo($stack12,group,$stack14,$stack15);
+ group = requestHeader.getProducerGroup();
+ if (group==null) goto label0;
+ $stack18=this.brokerController;
+ $stack34 = $stack18.getProducerManager();
+ $stack34.unregisterProducer(group,clientChannelInfo);
+ label0:group = requestHeader.getConsumerGroup();
+ if (group==null) goto label1;
+ $stack18=this.brokerController;
+ $stack19 = $stack18.getSubscriptionGroupManager();
+ subscriptionGroupConfig = $stack19.findSubscriptionGroupConfig(group);
+ isNotifyConsumerIdsChangedEnable=1;
+ if (null==subscriptionGroupConfig) goto label2;
+ isNotifyConsumerIdsChangedEnable = subscriptionGroupConfig.isNotifyConsumerIdsChangedEnable();
+ label2:$stack18=this.brokerController;
+ $stack22 = $stack18.getConsumerManager();
+ $stack22.unregisterConsumer(group,clientChannelInfo,isNotifyConsumerIdsChangedEnable);
+ label1:response.setCode(0);
+ response.setRemark(null);
+ return  response;
+ } 
+

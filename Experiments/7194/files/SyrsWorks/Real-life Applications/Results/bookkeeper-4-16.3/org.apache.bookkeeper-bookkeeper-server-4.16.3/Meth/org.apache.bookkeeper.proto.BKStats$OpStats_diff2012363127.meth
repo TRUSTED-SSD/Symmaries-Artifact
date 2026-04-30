@@ -1,0 +1,58 @@
+org.apache.bookkeeper.proto.BKStats$OpStats org.apache.bookkeeper.proto.BKStats$OpStats:diff(org.apache.bookkeeper.proto.BKStats$OpStats base)
+{
+org.apache.bookkeeper.proto.BKStats$OpStats diff;
+  int i;
+  long $stack5;
+  long $stack6;
+  byte $stack7;
+  double $stack13;
+  double $stack14;
+  long[] $stack22;
+  long[] $stack27;
+  org.apache.bookkeeper.proto.BKStats$OpStats $stack30;
+  diff=new org.apache.bookkeeper.proto.BKStats$OpStats;
+ diff#org.apache.bookkeeper.proto.BKStats$OpStats();
+ $stack30=diff;
+ $stack6=this.maxLatency;
+ $stack5=base.maxLatency;
+ $stack7=($stack6 cmp $stack5);
+ if ($stack7<=0) goto label0;
+ $stack5=this.maxLatency;
+ goto label1;
+ label0:$stack5=base.maxLatency;
+ label1:$stack30.maxLatency=$stack5;
+ $stack30=diff;
+ $stack6=this.minLatency;
+ $stack5=base.minLatency;
+ $stack7=($stack6 cmp $stack5);
+ if ($stack7<=0) goto label2;
+ $stack5=base.minLatency;
+ goto label3;
+ label2:$stack5=this.minLatency;
+ label3:$stack30.minLatency=$stack5;
+ $stack14=this.totalLatency;
+ $stack13=base.totalLatency;
+ $stack13=($stack14-$stack13);
+ diff.totalLatency=$stack13;
+ $stack6=this.numSuccessOps;
+ $stack5=base.numSuccessOps;
+ $stack5=($stack6-$stack5);
+ diff.numSuccessOps=$stack5;
+ $stack6=this.numFailedOps;
+ $stack5=base.numFailedOps;
+ $stack5=($stack6-$stack5);
+ diff.numFailedOps=$stack5;
+ i=0;
+ label4:if (i>=29) goto label5;
+ $stack27=diff.latencyBuckets;
+ $stack22=this.latencyBuckets;
+ $stack6=$stack22[i];
+ $stack22=base.latencyBuckets;
+ $stack5=$stack22[i];
+ $stack5=($stack6-$stack5);
+ $stack27[i]=$stack5;
+ i=(i+1);
+ goto label4;
+ label5:return  diff;
+ } 
+

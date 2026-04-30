@@ -1,0 +1,29 @@
+void org.apache.rocketmq.proxy.grpc.v2.consumer.ReceiveMessageResponseStreamWriter:processThrowableWhenWriteMessage(java.lang.Throwable throwable,org.apache.rocketmq.proxy.common.ProxyContext ctx,apache.rocketmq.v2.ReceiveMessageRequest request,org.apache.rocketmq.common.message.MessageExt messageExt)
+{
+java.lang.String handle;
+  org.apache.rocketmq.proxy.processor.MessagingProcessor $stack7;
+  org.apache.rocketmq.common.consumer.ReceiptHandle $stack8;
+  org.apache.rocketmq.proxy.grpc.v2.common.GrpcConverter $stack10;
+  apache.rocketmq.v2.Resource $stack11;
+  java.lang.String $stack12;
+  apache.rocketmq.v2.MessageQueue $stack14;
+  java.lang.String $stack16;
+  long $stack17;
+  handle = messageExt.getProperty("POP_CK");
+ if (handle!=null) goto label0;
+ return;
+ label0:$stack7=this.messagingProcessor;
+ $stack8 = org.apache.rocketmq.common.consumer.ReceiptHandle.decode(handle);
+ handle = messageExt.getMsgId();
+ $stack10 = org.apache.rocketmq.proxy.grpc.v2.common.GrpcConverter.getInstance();
+ $stack11 = request.getGroup();
+ $stack12 = $stack10.wrapResourceWithNamespace($stack11);
+ $stack10 = org.apache.rocketmq.proxy.grpc.v2.common.GrpcConverter.getInstance();
+ $stack14 = request.getMessageQueue();
+ $stack11 = $stack14.getTopic();
+ $stack16 = $stack10.wrapResourceWithNamespace($stack11);
+ $stack17=org.apache.rocketmq.proxy.grpc.v2.consumer.ReceiveMessageResponseStreamWriter.NACK_INVISIBLE_TIME;
+ $stack7.changeInvisibleTime(ctx,$stack8,handle,$stack12,$stack16,$stack17);
+ return;
+ } 
+

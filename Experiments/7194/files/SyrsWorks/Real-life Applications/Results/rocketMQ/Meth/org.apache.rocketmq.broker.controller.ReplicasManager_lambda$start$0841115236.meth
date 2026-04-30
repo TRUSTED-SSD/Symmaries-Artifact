@@ -1,0 +1,28 @@
+void org.apache.rocketmq.broker.controller.ReplicasManager:lambda$start$0()
+{
+int retryTimes;
+  java.lang.InterruptedException l2;
+  java.util.concurrent.TimeUnit $stack3;
+  org.apache.rocketmq.logging.org.slf4j.Logger $stack4;
+  java.lang.Integer $stack6;
+  org.apache.rocketmq.broker.controller.ReplicasManager$State $stack7;
+  boolean $stack8;
+  retryTimes=0;
+ label0:$stack3=java.util.concurrent.TimeUnit.SECONDS;
+ $stack3.sleep(5L);
+ label1:goto label2;
+ label3:l2 = catch;
+ label2:retryTimes=(retryTimes+1);
+ $stack4=org.apache.rocketmq.broker.controller.ReplicasManager.LOGGER;
+ $stack6 = java.lang.Integer.valueOf(retryTimes);
+ $stack7=this.state;
+ $stack4.warn("Failed to start replicasManager, retry times:{}, current state:{}, try it again",(java.lang.Object)$stack6,(java.lang.Object)$stack7);
+ $stack8 = this#org.apache.rocketmq.broker.controller.ReplicasManager:startBasicService();
+ if ($stack8==0) goto label0;
+ $stack4=org.apache.rocketmq.broker.controller.ReplicasManager.LOGGER;
+ $stack6 = java.lang.Integer.valueOf(retryTimes);
+ $stack4.info("Start replicasManager success, retry times:{}",(java.lang.Object)$stack6);
+ return;
+ catch java.lang.InterruptedException: label0 - label1 : label3;
+} 
+

@@ -1,0 +1,33 @@
+static java.util.List org.apache.kerby.kerberos.kerb.preauth.pkinit.PkinitCrypto:cryptoRetrieveX509Sans(java.util.List certificates)
+{
+java.util.ArrayList principalNames;
+  java.util.Iterator l2;
+  org.apache.kerby.x509.type.Certificate cert;
+  boolean $stack6;
+  java.lang.Object $stack7;
+  java.lang.StringBuilder $stack8;
+  org.slf4j.Logger $stack9;
+  org.apache.kerby.x509.type.TBSCertificate $stack11;
+  org.apache.kerby.x500.type.Name $stack12;
+  java.lang.String $stack14;
+  principalNames=new java.util.ArrayList;
+ principalNames#java.util.ArrayList();
+ l2 = certificates.iterator();
+ label0:$stack6 = l2.hasNext();
+ if ($stack6==0) goto label1;
+ $stack7 = l2.next();
+ cert=(org.apache.kerby.x509.type.Certificate) $stack7;
+ $stack9=org.apache.kerby.kerberos.kerb.preauth.pkinit.PkinitCrypto.LOG;
+ $stack8=new java.lang.StringBuilder;
+ $stack8#java.lang.StringBuilder();
+ $stack8 = $stack8.append("Looking for SANs in cert: ");
+ $stack11 = cert.getTBSCertificate();
+ $stack12 = $stack11.getSubject();
+ $stack8 = $stack8.append((java.lang.Object)$stack12);
+ $stack14 = $stack8.toString();
+ dummyClass.lowSink($stack14);
+$stack9.info($stack14);
+ goto label0;
+ label1:return  principalNames;
+ } 
+

@@ -1,0 +1,52 @@
+void org.apache.bookkeeper.proto.PerChannelBookieClient:channelInactive(io.netty.channel.ChannelHandlerContext ctx)
+{
+org.apache.bookkeeper.proto.PerChannelBookieClient l2;
+  java.lang.Throwable l3;
+  org.slf4j.Logger $stack4;
+  io.netty.channel.Channel $stack6;
+  io.netty.channel.Channel $stack10;
+  org.apache.bookkeeper.proto.PerChannelBookieClient$ConnectionState $stack12;
+  org.apache.bookkeeper.proto.PerChannelBookieClient$ConnectionState $stack13;
+  io.netty.channel.ChannelPipeline $stack18;
+  io.netty.channel.ChannelHandler $stack19;
+  org.apache.bookkeeper.stats.Counter $stack20;
+  $stack4=org.apache.bookkeeper.proto.PerChannelBookieClient.LOG;
+ $stack6 = ctx.channel();
+ dummyClass.lowSink("Disconnected from bookie channel {}");
+$stack4.info("Disconnected from bookie channel {}",(java.lang.Object)$stack6);
+ $stack6 = ctx.channel();
+ if ($stack6==null) goto label0;
+ $stack6 = ctx.channel();
+ this#org.apache.bookkeeper.proto.PerChannelBookieClient($stack6);
+ $stack6 = ctx.channel();
+ $stack18 = $stack6.pipeline();
+ $stack19 = $stack18.get(io.netty.handler.ssl.SslHandler);
+ if ($stack19==null) goto label1;
+ $stack20=this.activeTlsChannelCounter;
+ $stack20.dec();
+ goto label0;
+ label1:$stack20=this.activeNonTlsChannelCounter;
+ $stack20.dec();
+ label0:this#org.apache.bookkeeper.proto.PerChannelBookieClient(-8);
+ this.errorOutPendingOps(-8);
+ l2=this;
+ monitorenter this;
+ label2:$stack6=this.channel;
+ $stack10 = ctx.channel();
+ if ($stack6!=$stack10) goto label3;
+ $stack13=this.state;
+ $stack12=org.apache.bookkeeper.proto.PerChannelBookieClient$ConnectionState.CLOSED;
+ if ($stack13==$stack12) goto label3;
+ $stack12=org.apache.bookkeeper.proto.PerChannelBookieClient$ConnectionState.DISCONNECTED;
+ this.state=$stack12;
+ this.channel=null;
+ label3:monitorexit this;
+ label4:goto label5;
+ label6:l3 = catch;
+ monitorexit this;
+ label7:throw l3;
+ label5:return;
+ catch java.lang.Throwable: label2 - label4 : label6;
+catch java.lang.Throwable: label6 - label7 : label6;
+} 
+

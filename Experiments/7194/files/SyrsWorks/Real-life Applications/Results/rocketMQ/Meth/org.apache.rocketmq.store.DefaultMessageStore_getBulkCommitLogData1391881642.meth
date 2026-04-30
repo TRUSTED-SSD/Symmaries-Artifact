@@ -1,0 +1,16 @@
+java.util.List org.apache.rocketmq.store.DefaultMessageStore:getBulkCommitLogData(long offset,int size)
+{
+boolean $stack4;
+  org.apache.rocketmq.store.CommitLog $stack5;
+  java.util.List $stack6;
+  org.apache.rocketmq.logging.org.slf4j.Logger $stack7;
+  $stack4=this.shutdown;
+ if ($stack4==0) goto label0;
+ $stack7=org.apache.rocketmq.store.DefaultMessageStore.LOGGER;
+ $stack7.warn("message store has shutdown, so getBulkCommitLogData is forbidden");
+ return  null;
+ label0:$stack5=this.commitLog;
+ $stack6 = $stack5.getBulkData(offset,size);
+ return  $stack6;
+ } 
+

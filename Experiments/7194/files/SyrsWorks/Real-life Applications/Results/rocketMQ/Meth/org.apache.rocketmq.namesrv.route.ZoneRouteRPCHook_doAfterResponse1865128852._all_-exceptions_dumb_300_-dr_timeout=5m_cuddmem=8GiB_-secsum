@@ -1,0 +1,10 @@
+void org.apache.rocketmq.namesrv.route.ZoneRouteRPCHook:doAfterResponse (
+  java.lang.String @remoteAddr,
+  org.apache.rocketmq.remoting.protocol.RemotingCommand request,
+  org.apache.rocketmq.remoting.protocol.RemotingCommand response) {
+  guard = tt;
+  ret(obj_level(@remoteAddr)) = level(request) ⊔ level(response) ⊔ level(this) ⊔ obj_level(@remoteAddr) ⊔ obj_level(request) ⊔ obj_level(this);
+  ret(obj_level(request)) = level(request) ⊔ level(response) ⊔ level(this) ⊔ obj_level(request) ⊔ obj_level(this);
+  ret(obj_level(response)) = level(request) ⊔ level(response) ⊔ level(this) ⊔ obj_level(request) ⊔ obj_level(this);
+  ret(obj_level(this)) = level(request) ⊔ level(response) ⊔ level(this) ⊔ obj_level(request) ⊔ obj_level(this);
+}

@@ -1,0 +1,9 @@
+java.lang.String org.apache.rocketmq.store.index.IndexService:buildKey (
+  java.lang.String @topic, java.lang.String key) {
+  guard = tt;
+  ret(level()) = level(@topic) ⊔ level(key) ⊔ obj_level(@topic);
+  ret(obj_level()) = level(@topic) ⊔ level(key) ⊔ obj_level(@topic);
+  ret(obj_level(@topic)) = level(@topic) ⊔ level(key) ⊔ obj_level(@topic);
+  ret(obj_level(key)) = level(@topic) ⊔ obj_level(@topic);
+  ret(obj_level(this)) = level(@topic) ⊔ level(key) ⊔ obj_level(@topic) ⊔ obj_level(this);
+}

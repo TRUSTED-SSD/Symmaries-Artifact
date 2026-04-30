@@ -1,0 +1,40 @@
+static void org.apache.bookkeeper.client.ReadOnlyLedgerHandle:lambda$null$7(java.lang.Long @lastEnsembleKey,org.apache.bookkeeper.client.LedgerMetadataBuilder builder,java.util.Map$Entry e)
+{
+java.lang.Object $stack3;
+  java.lang.Long $stack4;
+  long $stack5;
+  long $stack6;
+  byte $stack7;
+  boolean $stack9;
+  java.util.List $stack14;
+  java.lang.Long lastEnsembleKey;
+lastEnsembleKey=@lastEnsembleKey;
+$stack3 = e.getKey();
+ $stack4=(java.lang.Long) $stack3;
+ $stack5 = $stack4.longValue();
+ $stack6 = lastEnsembleKey.longValue();
+ $stack7=($stack5 cmp $stack6);
+ if ($stack7<0) goto label0;
+ $stack9=1;
+ goto label1;
+ label0:$stack9=0;
+ label1:com.google.common.base.Preconditions.checkState($stack9,(java.lang.Object)"Once a ledger is in recovery, noone can add ensembles without closing");
+ $stack3 = e.getKey();
+ $stack9 = lastEnsembleKey.equals($stack3);
+ if ($stack9==0) goto label2;
+ $stack3 = e.getKey();
+ lastEnsembleKey=(java.lang.Long) $stack3;
+ $stack5 = lastEnsembleKey.longValue();
+ $stack3 = e.getValue();
+ $stack14=(java.util.List) $stack3;
+ builder.replaceEnsembleEntry($stack5,$stack14);
+ goto label3;
+ label2:$stack3 = e.getKey();
+ lastEnsembleKey=(java.lang.Long) $stack3;
+ $stack5 = lastEnsembleKey.longValue();
+ $stack3 = e.getValue();
+ $stack14=(java.util.List) $stack3;
+ builder.newEnsembleEntry($stack5,$stack14);
+ label3:return;
+ } 
+

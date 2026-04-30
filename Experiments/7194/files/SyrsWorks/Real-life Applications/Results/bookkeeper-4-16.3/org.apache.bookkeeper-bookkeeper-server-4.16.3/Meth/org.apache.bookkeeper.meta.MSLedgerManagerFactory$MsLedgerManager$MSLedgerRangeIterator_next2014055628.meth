@@ -1,0 +1,52 @@
+org.apache.bookkeeper.meta.LedgerManager$LedgerRange org.apache.bookkeeper.meta.MSLedgerManagerFactory$MsLedgerManager$MSLedgerRangeIterator:next()
+{
+java.io.Serializable ledgerIds;
+  java.util.Iterator iter;
+  org.apache.bookkeeper.meta.MSLedgerManagerFactory$MsLedgerManager $stack4;
+  int $stack5;
+  org.apache.bookkeeper.metastore.MetastoreCursor $stack6;
+  boolean $stack8;
+  java.lang.Object $stack10;
+  org.apache.bookkeeper.metastore.MetastoreTableItem $stack11;
+  java.lang.String $stack12;
+  java.lang.Long $stack13;
+  org.apache.bookkeeper.metastore.MSException $stack16;
+  org.slf4j.Logger $stack17;
+  java.util.TreeSet tmp$853342260;
+  org.apache.bookkeeper.meta.LedgerManager$LedgerRange tmp$2044587431;
+  java.io.IOException tmp$964150706;
+  java.util.SortedSet tmp$1331663236;
+  java.util.Set tmp$1654986144;
+  java.lang.Throwable tmp$1585671620;
+  label0:tmp$853342260=new java.util.TreeSet;
+ tmp$853342260#java.util.TreeSet();
+ ledgerIds=tmp$853342260;
+ $stack6=this.cursor;
+ $stack4=this.this$0;
+ $stack5=$stack4.maxEntriesPerScan;
+ iter = $stack6.readEntries($stack5);
+ label1:$stack8 = iter.hasNext();
+ if ($stack8==0) goto label2;
+ $stack10 = iter.next();
+ $stack11=(org.apache.bookkeeper.metastore.MetastoreTableItem) $stack10;
+ $stack12 = $stack11.getKey();
+ $stack13 = org.apache.bookkeeper.meta.MSLedgerManagerFactory.key2LedgerId($stack12);
+ tmp$1331663236=(java.util.SortedSet) tmp$853342260;
+ tmp$1331663236.add((java.lang.Object)$stack13);
+ goto label1;
+ label2:tmp$2044587431=new org.apache.bookkeeper.meta.LedgerManager$LedgerRange;
+ tmp$1654986144=(java.util.Set) tmp$853342260;
+ tmp$2044587431#org.apache.bookkeeper.meta.LedgerManager$LedgerRange(tmp$1654986144);
+ label3:return  tmp$2044587431;
+ label4:$stack16 = catch;
+ ledgerIds=$stack16;
+ $stack17 = org.apache.bookkeeper.meta.MSLedgerManagerFactory.access$000();
+ tmp$1585671620=(java.lang.Throwable) $stack16;
+ $stack17.error("Exception occurred reading from metastore",tmp$1585671620);
+ tmp$964150706=new java.io.IOException;
+ tmp$1585671620=(java.lang.Throwable) $stack16;
+ tmp$964150706#java.io.IOException("Couldn\'t read from metastore",tmp$1585671620);
+ throw tmp$964150706;
+ catch org.apache.bookkeeper.metastore.MSException: label0 - label3 : label4;
+} 
+

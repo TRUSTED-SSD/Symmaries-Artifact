@@ -1,0 +1,44 @@
+boolean org.apache.bookkeeper.client.LedgerHandle:isWriteSetWritable(org.apache.bookkeeper.client.DistributionSchedule$WriteSet writeSet,int allowedNonWritableCount)
+{
+int sz;
+  int requiredWritable;
+  int nonWritableCount;
+  java.util.List currentEnsemble;
+  int i;
+  int writeBookieIndex;
+  int $stack13;
+  org.apache.bookkeeper.client.ClientContext $stack16;
+  org.apache.bookkeeper.proto.BookieClient $stack17;
+  java.lang.Object $stack18;
+  long $stack19;
+  org.apache.bookkeeper.net.BookieId $stack20;
+  boolean $stack21;
+  if (allowedNonWritableCount>=0) goto label0;
+ allowedNonWritableCount=0;
+ label0:sz = writeSet.size();
+ requiredWritable=(sz-allowedNonWritableCount);
+ nonWritableCount=0;
+ currentEnsemble = this.getCurrentEnsemble();
+ i=0;
+ label1:if (i>=sz) goto label2;
+ writeBookieIndex = writeSet.get(i);
+ $stack13 = currentEnsemble.size();
+ if (writeBookieIndex>=$stack13) goto label3;
+ $stack16=this.clientCtx;
+ $stack17 = $stack16.getBookieClient();
+ $stack18 = currentEnsemble.get(writeBookieIndex);
+ $stack20=(org.apache.bookkeeper.net.BookieId) $stack18;
+ $stack19=this.ledgerId;
+ $stack21 = $stack17.isWritable($stack20,$stack19);
+ if ($stack21!=0) goto label3;
+ nonWritableCount=(nonWritableCount+1);
+ if (nonWritableCount<allowedNonWritableCount) goto label4;
+ return  0;
+ label3:writeBookieIndex=(i-nonWritableCount);
+ if (writeBookieIndex<requiredWritable) goto label4;
+ return  1;
+ label4:i=(i+1);
+ goto label1;
+ label2:return  1;
+ } 
+

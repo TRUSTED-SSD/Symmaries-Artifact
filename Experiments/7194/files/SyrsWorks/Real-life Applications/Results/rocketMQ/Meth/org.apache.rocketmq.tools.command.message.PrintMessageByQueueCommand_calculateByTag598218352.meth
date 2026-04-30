@@ -1,0 +1,28 @@
+static void org.apache.rocketmq.tools.command.message.PrintMessageByQueueCommand:calculateByTag(java.util.List msgs,java.util.Map tagCalmap,boolean calByTag)
+{
+java.util.Iterator l3;
+  org.apache.rocketmq.common.message.MessageExt msg;
+  java.lang.String tag;
+  java.util.concurrent.atomic.AtomicLong count;
+  java.lang.Object $stack9;
+  if (calByTag!=0) goto label0;
+ return;
+ label0:l3 = msgs.iterator();
+ label1:calByTag = l3.hasNext();
+ if (calByTag==0) goto label2;
+ $stack9 = l3.next();
+ msg=(org.apache.rocketmq.common.message.MessageExt) $stack9;
+ tag = msg.getTags();
+ calByTag = org.apache.commons.lang3.StringUtils.isNotBlank((java.lang.CharSequence)tag);
+ if (calByTag==0) goto label3;
+ $stack9 = tagCalmap.get((java.lang.Object)tag);
+ count=(java.util.concurrent.atomic.AtomicLong) $stack9;
+ if (count!=null) goto label4;
+ count=new java.util.concurrent.atomic.AtomicLong;
+ count#java.util.concurrent.atomic.AtomicLong();
+ tagCalmap.put((java.lang.Object)tag,(java.lang.Object)count);
+ label4:count.incrementAndGet();
+ label3:goto label1;
+ label2:return;
+ } 
+

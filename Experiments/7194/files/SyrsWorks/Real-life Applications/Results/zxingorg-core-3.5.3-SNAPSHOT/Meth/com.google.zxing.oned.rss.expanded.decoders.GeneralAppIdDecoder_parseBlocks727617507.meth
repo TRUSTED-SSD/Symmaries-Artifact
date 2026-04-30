@@ -1,0 +1,39 @@
+com.google.zxing.oned.rss.expanded.decoders.DecodedInformation com.google.zxing.oned.rss.expanded.decoders.GeneralAppIdDecoder:parseBlocks()
+{
+boolean isFinished;
+  com.google.zxing.oned.rss.expanded.decoders.BlockParsedResult result;
+  int initialPosition;
+  com.google.zxing.oned.rss.expanded.decoders.CurrentParsingState $stack5;
+  int $stack14;
+  com.google.zxing.oned.rss.expanded.decoders.DecodedInformation $stack17;
+  boolean $stack20;
+  label0:$stack5=this.current;
+ initialPosition = $stack5.getPosition();
+ $stack5=this.current;
+ isFinished = $stack5.isAlpha();
+ if (isFinished==0) goto label1;
+ result = this#com.google.zxing.oned.rss.expanded.decoders.GeneralAppIdDecoder:parseAlphaBlock();
+ isFinished = result.isFinished();
+ goto label2;
+ label1:$stack5=this.current;
+ isFinished = $stack5.isIsoIec646();
+ if (isFinished==0) goto label3;
+ result = this#com.google.zxing.oned.rss.expanded.decoders.GeneralAppIdDecoder:parseIsoIec646Block();
+ isFinished = result.isFinished();
+ goto label2;
+ label3:result = this#com.google.zxing.oned.rss.expanded.decoders.GeneralAppIdDecoder:parseNumericBlock();
+ isFinished = result.isFinished();
+ label2:$stack5=this.current;
+ $stack14 = $stack5.getPosition();
+ if (initialPosition==$stack14) goto label4;
+ $stack20=1;
+ goto label5;
+ label4:$stack20=0;
+ label5:if ($stack20!=0) goto label6;
+ if (isFinished!=0) goto label6;
+ goto label7;
+ label6:if (isFinished==0) goto label0;
+ label7:$stack17 = result.getDecodedInformation();
+ return  $stack17;
+ } 
+

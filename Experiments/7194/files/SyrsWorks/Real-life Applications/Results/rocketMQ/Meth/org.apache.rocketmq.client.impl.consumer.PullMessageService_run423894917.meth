@@ -1,0 +1,58 @@
+void org.apache.rocketmq.client.impl.consumer.PullMessageService:run()
+{
+java.lang.Object messageRequest;
+  java.lang.StringBuilder $stack2;
+  org.apache.rocketmq.logging.org.slf4j.Logger $stack3;
+  java.lang.String $stack4;
+  boolean $stack8;
+  java.util.concurrent.LinkedBlockingQueue $stack15;
+  org.apache.rocketmq.common.message.MessageRequestMode $stack17;
+  org.apache.rocketmq.common.message.MessageRequestMode $stack18;
+  org.apache.rocketmq.client.impl.consumer.PullRequest $stack19;
+  org.apache.rocketmq.client.impl.consumer.PopRequest $stack21;
+  java.lang.Exception $stack22;
+  java.lang.InterruptedException $stack24;
+  org.apache.rocketmq.client.impl.consumer.MessageRequest tmp$403792917;
+  $stack3=this.logger;
+ $stack2=new java.lang.StringBuilder;
+ $stack2#java.lang.StringBuilder();
+ $stack4 = this.getServiceName();
+ $stack2 = $stack2.append($stack4);
+ $stack2 = $stack2.append(" service started");
+ $stack4 = $stack2.toString();
+ $stack3.info($stack4);
+ label0:$stack8 = this.isStopped();
+ if ($stack8!=0) goto label1;
+ label2:$stack15=this.messageRequestQueue;
+ messageRequest = $stack15.take();
+ messageRequest=(org.apache.rocketmq.client.impl.consumer.MessageRequest) messageRequest;
+ tmp$403792917=(org.apache.rocketmq.client.impl.consumer.MessageRequest) messageRequest;
+ $stack17 = tmp$403792917.getMessageRequestMode();
+ $stack18=org.apache.rocketmq.common.message.MessageRequestMode.POP;
+ if ($stack17!=$stack18) goto label3;
+ $stack21=(org.apache.rocketmq.client.impl.consumer.PopRequest) messageRequest;
+ this#org.apache.rocketmq.client.impl.consumer.PullMessageService:popMessage($stack21);
+ goto label4;
+ label3:$stack19=(org.apache.rocketmq.client.impl.consumer.PullRequest) messageRequest;
+ this#org.apache.rocketmq.client.impl.consumer.PullMessageService:pullMessage($stack19);
+ label4:goto label0;
+ label5:$stack24 = catch;
+ messageRequest=$stack24;
+ goto label0;
+ label6:$stack22 = catch;
+ $stack3=this.logger;
+ $stack3.error("Pull Message Service Run Method exception",(java.lang.Throwable)$stack22);
+ goto label0;
+ label1:$stack3=this.logger;
+ $stack2=new java.lang.StringBuilder;
+ $stack2#java.lang.StringBuilder();
+ $stack4 = this.getServiceName();
+ $stack2 = $stack2.append($stack4);
+ $stack2 = $stack2.append(" service end");
+ $stack4 = $stack2.toString();
+ $stack3.info($stack4);
+ return;
+ catch java.lang.InterruptedException: label2 - label4 : label5;
+catch java.lang.Exception: label2 - label4 : label6;
+} 
+

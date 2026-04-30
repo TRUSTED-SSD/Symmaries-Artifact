@@ -1,0 +1,51 @@
+void org.apache.rocketmq.broker.controller.ReplicasManager:doReportSyncStateSetChanged(java.util.Set newSyncStateSet)
+{
+org.apache.rocketmq.remoting.protocol.body.SyncStateSet result;
+  org.apache.rocketmq.common.BrokerConfig $stack3;
+  org.apache.rocketmq.broker.out.BrokerOuterAPI $stack4;
+  java.lang.String $stack5;
+  java.lang.String $stack6;
+  int $stack7;
+  int $stack8;
+  java.lang.String $stack9;
+  java.util.Set $stack11;
+  java.lang.Exception $stack13;
+  java.lang.Object[] $stack14;
+  org.apache.rocketmq.logging.org.slf4j.Logger $stack16;
+  java.lang.Integer $stack23;
+  label0:$stack4=this.brokerOuterAPI;
+ $stack5=this.controllerLeaderAddress;
+ $stack3=this.brokerConfig;
+ $stack6 = $stack3.getBrokerName();
+ $stack9=this.masterAddress;
+ $stack8=this.masterEpoch;
+ $stack7=this.syncStateSetEpoch;
+ result = $stack4.alterSyncStateSet($stack5,$stack6,$stack9,$stack8,newSyncStateSet,$stack7);
+ if (result==null) goto label1;
+ $stack11 = result.getSyncStateSet();
+ $stack7 = result.getSyncStateSetEpoch();
+ this#org.apache.rocketmq.broker.controller.ReplicasManager:changeSyncStateSet($stack11,$stack7);
+ label1:goto label2;
+ label3:$stack13 = catch;
+ $stack16=org.apache.rocketmq.broker.controller.ReplicasManager.LOGGER;
+ $stack14=new java.lang.Object[7];
+ $stack3=this.brokerConfig;
+ $stack5 = $stack3.getBrokerName();
+ $stack14[0]=$stack5;
+ $stack5=this.masterAddress;
+ $stack14[1]=$stack5;
+ $stack7=this.masterEpoch;
+ $stack23 = java.lang.Integer.valueOf($stack7);
+ $stack14[2]=$stack23;
+ $stack11=this.syncStateSet;
+ $stack14[3]=$stack11;
+ $stack14[4]=newSyncStateSet;
+ $stack7=this.syncStateSetEpoch;
+ $stack23 = java.lang.Integer.valueOf($stack7);
+ $stack14[5]=$stack23;
+ $stack14[6]=$stack13;
+ $stack16.error("Error happen when change sync state set, broker:{}, masterAddress:{}, masterEpoch:{}, oldSyncStateSet:{}, newSyncStateSet:{}, syncStateSetEpoch:{}",$stack14);
+ label2:return;
+ catch java.lang.Exception: label0 - label1 : label3;
+} 
+

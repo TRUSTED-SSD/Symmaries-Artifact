@@ -1,0 +1,39 @@
+org.apache.rocketmq.remoting.protocol.RemotingCommand org.apache.rocketmq.broker.processor.AdminBrokerProcessor:queryTopicConsumeByWho(io.netty.channel.ChannelHandlerContext ctx,org.apache.rocketmq.remoting.protocol.RemotingCommand request)
+{
+org.apache.rocketmq.remoting.protocol.RemotingCommand response;
+  org.apache.rocketmq.remoting.protocol.header.QueryTopicConsumeByWhoRequestHeader requestHeader;
+  java.util.HashSet groups;
+  java.util.Set groupInOffset;
+  org.apache.rocketmq.remoting.protocol.body.GroupList groupList;
+  org.apache.rocketmq.remoting.CommandCustomHeader $stack10;
+  org.apache.rocketmq.broker.BrokerController $stack11;
+  org.apache.rocketmq.broker.client.ConsumerManager $stack12;
+  java.lang.String $stack13;
+  org.apache.rocketmq.broker.offset.ConsumerOffsetManager $stack16;
+  boolean $stack21;
+  byte[] $stack25;
+  response = org.apache.rocketmq.remoting.protocol.RemotingCommand.createResponseCommand(null);
+ $stack10 = request.decodeCommandCustomHeader(org.apache.rocketmq.remoting.protocol.header.QueryTopicConsumeByWhoRequestHeader);
+ requestHeader=(org.apache.rocketmq.remoting.protocol.header.QueryTopicConsumeByWhoRequestHeader) $stack10;
+ $stack11=this.brokerController;
+ $stack12 = $stack11.getConsumerManager();
+ $stack13 = requestHeader.getTopic();
+ groups = $stack12.queryTopicConsumeByWho($stack13);
+ $stack11=this.brokerController;
+ $stack16 = $stack11.getConsumerOffsetManager();
+ $stack13 = requestHeader.getTopic();
+ groupInOffset = $stack16.whichGroupByTopic($stack13);
+ if (groupInOffset==null) goto label0;
+ $stack21 = groupInOffset.isEmpty();
+ if ($stack21!=0) goto label0;
+ groups.addAll((java.util.Collection)groupInOffset);
+ label0:groupList=new org.apache.rocketmq.remoting.protocol.body.GroupList;
+ groupList#org.apache.rocketmq.remoting.protocol.body.GroupList();
+ groupList.setGroupList(groups);
+ $stack25 = groupList.encode();
+ response.setBody($stack25);
+ response.setCode(0);
+ response.setRemark(null);
+ return  response;
+ } 
+

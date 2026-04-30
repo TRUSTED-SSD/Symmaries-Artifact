@@ -1,0 +1,47 @@
+boolean org.apache.bookkeeper.statelib.impl.rocksdb.checkpoint.dlog.DLInputStream:skipTo(long position)
+{
+long endPos;
+  org.apache.bookkeeper.statelib.impl.rocksdb.checkpoint.dlog.DLInputStream$RecordStream $stack5;
+  org.apache.distributedlog.LogRecordWithDLSN $stack8;
+  byte $stack10;
+  java.io.InputStream $stack13;
+  java.io.InputStream $stack15;
+  int $stack16;
+  long $stack18;
+  org.apache.distributedlog.api.LogReader $stack21;
+  label0:$stack5=this.currentRecord;
+ if (null!=$stack5) goto label1;
+ $stack21=this.reader;
+ $stack5 = org.apache.bookkeeper.statelib.impl.rocksdb.checkpoint.dlog.DLInputStream.nextRecordStream($stack21);
+ this.currentRecord=$stack5;
+ label1:$stack5=this.currentRecord;
+ if (null!=$stack5) goto label2;
+ return  0;
+ label2:$stack5=this.currentRecord;
+ $stack8 = org.apache.bookkeeper.statelib.impl.rocksdb.checkpoint.dlog.DLInputStream$RecordStream.access$000($stack5);
+ endPos = $stack8.getTransactionId();
+ $stack10=(endPos cmp position);
+ if ($stack10>=0) goto label3;
+ $stack21=this.reader;
+ $stack5 = org.apache.bookkeeper.statelib.impl.rocksdb.checkpoint.dlog.DLInputStream.nextRecordStream($stack21);
+ this.currentRecord=$stack5;
+ this.pos=endPos;
+ goto label0;
+ label3:$stack10=(endPos cmp position);
+ if ($stack10!=0) goto label4;
+ this.pos=position;
+ this.currentRecord=null;
+ return  1;
+ label4:$stack5=this.currentRecord;
+ $stack13 = org.apache.bookkeeper.statelib.impl.rocksdb.checkpoint.dlog.DLInputStream$RecordStream.access$100($stack5);
+ $stack5=this.currentRecord;
+ $stack15 = org.apache.bookkeeper.statelib.impl.rocksdb.checkpoint.dlog.DLInputStream$RecordStream.access$100($stack5);
+ $stack16 = $stack15.available();
+ $stack18=(long) $stack16;
+ endPos=(endPos-position);
+ $stack18=($stack18-endPos);
+ $stack13.skip($stack18);
+ this.pos=position;
+ return  1;
+ } 
+

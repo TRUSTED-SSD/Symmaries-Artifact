@@ -1,0 +1,33 @@
+void org.xerial.snappy.SnappyFramedInputStream:allocateBuffersBasedOnSize(int l1)
+{
+java.nio.ByteBuffer $stack3;
+  byte[] $stack5;
+  org.xerial.snappy.pool.BufferPool $stack6;
+  $stack3=this.input;
+ if ($stack3==null) goto label0;
+ $stack6=this.bufferPool;
+ $stack3=this.input;
+ $stack6.releaseDirect($stack3);
+ label0:$stack3=this.uncompressedDirect;
+ if ($stack3==null) goto label1;
+ $stack6=this.bufferPool;
+ $stack3=this.uncompressedDirect;
+ $stack6.releaseDirect($stack3);
+ label1:$stack5=this.buffer;
+ if ($stack5==null) goto label2;
+ $stack6=this.bufferPool;
+ $stack5=this.buffer;
+ $stack6.releaseArray($stack5);
+ label2:$stack6=this.bufferPool;
+ $stack3 = $stack6.allocateDirect(l1);
+ this.input=$stack3;
+ l1 = org.xerial.snappy.Snappy.maxCompressedLength(l1);
+ $stack6=this.bufferPool;
+ $stack3 = $stack6.allocateDirect(l1);
+ this.uncompressedDirect=$stack3;
+ $stack6=this.bufferPool;
+ $stack5 = $stack6.allocateArray(l1);
+ this.buffer=$stack5;
+ return;
+ } 
+

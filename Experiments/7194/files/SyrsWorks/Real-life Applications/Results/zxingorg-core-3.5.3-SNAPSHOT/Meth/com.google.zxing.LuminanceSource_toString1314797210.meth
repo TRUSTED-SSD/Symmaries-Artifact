@@ -1,0 +1,48 @@
+java.lang.String com.google.zxing.LuminanceSource:toString()
+{
+byte[] row;
+  java.lang.StringBuilder result;
+  int y;
+  int x;
+  short luminance;
+  char c;
+  java.lang.String $stack14;
+  int $stack16;
+  byte $stack20;
+  y=this.width;
+ row=new byte[y];
+ result=new java.lang.StringBuilder;
+ y=this.height;
+ x=this.width;
+ x=(x+1);
+ y=(y * x);
+ result#java.lang.StringBuilder(y);
+ y=0;
+ label0:x=this.height;
+ if (y>=x) goto label1;
+ row = this.getRow(y,row);
+ x=0;
+ label2:$stack16=this.width;
+ if (x>=$stack16) goto label3;
+ $stack20=row[x];
+ luminance=($stack20 & 255);
+ if (luminance>=64) goto label4;
+ c=35;
+ goto label5;
+ label4:if (luminance>=128) goto label6;
+ c=43;
+ goto label5;
+ label6:if (luminance>=192) goto label7;
+ c=46;
+ goto label5;
+ label7:c=32;
+ label5:result.append(c);
+ x=(x+1);
+ goto label2;
+ label3:result.append((char)10);
+ y=(y+1);
+ goto label0;
+ label1:$stack14 = result.toString();
+ return  $stack14;
+ } 
+

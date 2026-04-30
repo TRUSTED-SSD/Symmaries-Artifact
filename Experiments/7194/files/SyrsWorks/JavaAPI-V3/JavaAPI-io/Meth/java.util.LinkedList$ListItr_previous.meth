@@ -1,0 +1,35 @@
+java.lang.Object java.util.LinkedList$ListItr:previous()
+{
+boolean $z0;
+  java.util.LinkedList$Node $r1;
+  java.util.LinkedList$Node $r2;
+  int $i0;
+  int $i1;
+  java.util.LinkedList$Node $r3;
+  java.lang.Object $r4;
+  java.util.LinkedList $r5;
+  java.util.NoSuchElementException $r9;
+  java.util.LinkedList$Node $r10;
+  this.checkForComodification();
+ $z0 = this.hasPrevious();
+ if ($z0!=0) goto label0;
+ $r9=new java.util.NoSuchElementException;
+ $r9#java.util.NoSuchElementException:init();
+ throw $r9;
+ label0:$r1=this.next;
+ if ($r1!=null) goto label1;
+ $r5=this.this$0;
+ $r10=$r5.last;
+ goto label2;
+ label1:$r2=this.next;
+ $r10=$r2.prev;
+ label2:this.next=$r10;
+ this.lastReturned=$r10;
+ $i0=this.nextIndex;
+ $i1=($i0-1);
+ this.nextIndex=$i1;
+ $r3=this.lastReturned;
+ $r4=$r3.item;
+ return  $r4;
+ }  
+

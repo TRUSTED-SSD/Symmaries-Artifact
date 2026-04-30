@@ -1,0 +1,47 @@
+static org.keycloak.common.util.DelegatingSerializationFilter$SerializationFilterAdapter org.keycloak.common.util.DelegatingSerializationFilter:createOnJava6To8Adapter()
+{
+java.lang.ClassLoader cl;
+  java.lang.Class objectInputFilterClass;
+  java.lang.Class objectInputFilterConfigClass;
+  java.lang.reflect.Method getObjectInputFilter;
+  java.lang.reflect.Method setObjectInputFilter;
+  java.lang.reflect.Method createFilter;
+  java.lang.Thread $stack6;
+  java.lang.Class[] $stack10;
+  org.jboss.logging.Logger $stack16;
+  org.keycloak.common.util.DelegatingSerializationFilter$OnJava6To8 $stack17;
+  java.lang.ReflectiveOperationException $stack18;
+  org.keycloak.common.util.DelegatingSerializationFilter$EmptyFilterAdapter $stack22;
+  label0:$stack6 = java.lang.Thread.currentThread();
+ cl = $stack6.getContextClassLoader();
+ objectInputFilterClass = cl.loadClass("sun.misc.ObjectInputFilter");
+ objectInputFilterConfigClass = cl.loadClass("sun.misc.ObjectInputFilter$Config");
+ $stack10=new java.lang.Class[1];
+ $stack10[0]=java.io.ObjectInputStream;
+ getObjectInputFilter = objectInputFilterConfigClass.getDeclaredMethod("getObjectInputFilter",$stack10);
+ $stack10=new java.lang.Class[2];
+ $stack10[0]=java.io.ObjectInputStream;
+ $stack10[1]=objectInputFilterClass;
+ setObjectInputFilter = objectInputFilterConfigClass.getDeclaredMethod("setObjectInputFilter",$stack10);
+ $stack10=new java.lang.Class[1];
+ $stack10[0]=java.lang.String;
+ createFilter = objectInputFilterConfigClass.getDeclaredMethod("createFilter",$stack10);
+ $stack16=org.keycloak.common.util.DelegatingSerializationFilter.LOG;
+ $stack16.info((java.lang.Object)"Using OnJava6To8 serialization filter adapter");
+ $stack17=new org.keycloak.common.util.DelegatingSerializationFilter$OnJava6To8;
+ $stack17#org.keycloak.common.util.DelegatingSerializationFilter$OnJava6To8(getObjectInputFilter,setObjectInputFilter,createFilter,null);
+ label1:return  $stack17;
+ label2:$stack18 = catch;
+ $stack16=org.keycloak.common.util.DelegatingSerializationFilter.LOG;
+ $stack16.warn((java.lang.Object)"Could not configure SerializationFilterAdapter. For better security, it is highly recommended to upgrade to newer JDK version update!");
+ $stack16=org.keycloak.common.util.DelegatingSerializationFilter.LOG;
+ $stack16.warn((java.lang.Object)"For the Java 7, the recommended update is at least 131 (1.7.0_131 or newer). For the Java 8, the recommended update is at least 121 (1.8.0_121 or newer).");
+ $stack16=org.keycloak.common.util.DelegatingSerializationFilter.LOG;
+ $stack16.warn((java.lang.Object)"Error details",(java.lang.Throwable)$stack18);
+ $stack22=new org.keycloak.common.util.DelegatingSerializationFilter$EmptyFilterAdapter;
+ $stack22#org.keycloak.common.util.DelegatingSerializationFilter$EmptyFilterAdapter();
+ return  $stack22;
+ catch java.lang.ClassNotFoundException: label0 - label1 : label2;
+catch java.lang.NoSuchMethodException: label0 - label1 : label2;
+} 
+

@@ -1,0 +1,22 @@
+void org.apache.rocketmq.store.timer.TimerCheckpoint:shutdown()
+{
+java.nio.MappedByteBuffer $stack2;
+  java.nio.channels.FileChannel $stack4;
+  java.io.IOException $stack5;
+  org.apache.rocketmq.logging.org.slf4j.Logger $stack6;
+  $stack2=this.mappedByteBuffer;
+ if (null!=$stack2) goto label0;
+ return;
+ label0:this.flush();
+ $stack2=this.mappedByteBuffer;
+ org.apache.rocketmq.common.UtilAll.cleanBuffer((java.nio.ByteBuffer)$stack2);
+ label1:$stack4=this.fileChannel;
+ $stack4.close();
+ label2:goto label3;
+ label4:$stack5 = catch;
+ $stack6=org.apache.rocketmq.store.timer.TimerCheckpoint.log;
+ $stack6.error("Shutdown error in timer check point",(java.lang.Throwable)$stack5);
+ label3:return;
+ catch java.io.IOException: label1 - label2 : label4;
+} 
+

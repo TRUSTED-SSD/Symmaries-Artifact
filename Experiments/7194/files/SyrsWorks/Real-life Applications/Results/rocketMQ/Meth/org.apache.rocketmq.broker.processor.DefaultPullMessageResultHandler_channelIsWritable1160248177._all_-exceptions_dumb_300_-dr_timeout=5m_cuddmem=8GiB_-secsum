@@ -1,0 +1,10 @@
+boolean org.apache.rocketmq.broker.processor.DefaultPullMessageResultHandler:channelIsWritable (
+  io.netty.channel.Channel channel,
+  org.apache.rocketmq.remoting.protocol.header.PullMessageRequestHeader
+    requestHeader) {
+  guard = tt;
+  ret(level()) = ⊥;
+  ret(obj_level(channel)) = level(channel) ⊔ obj_level(channel);
+  ret(obj_level(requestHeader)) = obj_level(requestHeader);
+  ret(obj_level(this)) = level(channel) ⊔ level(requestHeader) ⊔ obj_level(channel) ⊔ obj_level(requestHeader) ⊔ obj_level(this);
+}

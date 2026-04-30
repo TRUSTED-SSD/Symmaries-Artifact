@@ -1,0 +1,19 @@
+long org.apache.rocketmq.broker.metrics.ConsumerLagCalculator:getStoreTimeStamp(java.lang.String topic,int queueId,long offset)
+{
+long storeTimeStamp;
+  byte $stack7;
+  org.apache.rocketmq.store.MessageStore $stack8;
+  storeTimeStamp=9223372036854775807L;
+ $stack7=(offset cmp 0L);
+ if ($stack7<0) goto label0;
+ $stack8=this.messageStore;
+ storeTimeStamp = $stack8.getMessageStoreTimeStamp(topic,queueId,offset);
+ $stack7=(storeTimeStamp cmp 0L);
+ if ($stack7<=0) goto label1;
+ offset=storeTimeStamp;
+ goto label2;
+ label1:offset=9223372036854775807L;
+ label2:storeTimeStamp=offset;
+ label0:return  storeTimeStamp;
+ } 
+

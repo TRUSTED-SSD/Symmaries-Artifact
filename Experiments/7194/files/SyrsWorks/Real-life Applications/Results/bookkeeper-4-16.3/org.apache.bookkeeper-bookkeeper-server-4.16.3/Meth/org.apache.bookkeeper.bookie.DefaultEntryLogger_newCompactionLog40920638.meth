@@ -1,0 +1,29 @@
+org.apache.bookkeeper.bookie.storage.CompactionEntryLog org.apache.bookkeeper.bookie.DefaultEntryLogger:newCompactionLog(long logToCompact)
+{
+java.io.File compactingLogFile;
+  long compactionLogId;
+  java.io.File compactedLogFile;
+  java.lang.String $stack9;
+  java.io.File $stack12;
+  java.io.File $stack13;
+  java.lang.String $stack16;
+  int $stack17;
+  org.apache.bookkeeper.bookie.DefaultEntryLogger$EntryLoggerCompactionEntryLog $stack20;
+  this#org.apache.bookkeeper.bookie.DefaultEntryLogger:createNewCompactionLog();
+ compactingLogFile = this#org.apache.bookkeeper.bookie.DefaultEntryLogger:getCurCompactionLogFile();
+ $stack9 = compactingLogFile.getName();
+ compactionLogId = org.apache.bookkeeper.bookie.DefaultEntryLogger.fileName2LogId($stack9);
+ compactedLogFile = org.apache.bookkeeper.bookie.DefaultEntryLogger.compactedLogFileFromCompacting(compactingLogFile,logToCompact);
+ $stack12=new java.io.File;
+ $stack13 = compactingLogFile.getParentFile();
+ $stack9 = compactingLogFile.getName();
+ $stack16 = compactingLogFile.getName();
+ $stack17 = $stack16.indexOf(".log");
+ $stack17=($stack17+4);
+ $stack9 = $stack9.substring(0,$stack17);
+ $stack12#java.io.File($stack13,$stack9);
+ $stack20=new org.apache.bookkeeper.bookie.DefaultEntryLogger$EntryLoggerCompactionEntryLog;
+ $stack20#org.apache.bookkeeper.bookie.DefaultEntryLogger$EntryLoggerCompactionEntryLog(this,compactionLogId,logToCompact,compactingLogFile,compactedLogFile,$stack12);
+ return  $stack20;
+ } 
+

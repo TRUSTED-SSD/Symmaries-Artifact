@@ -1,0 +1,38 @@
+org.apache.rocketmq.remoting.protocol.RemotingCommand org.apache.rocketmq.broker.processor.AdminBrokerProcessor:getBrokerClusterAclConfig(io.netty.channel.ChannelHandlerContext ctx,org.apache.rocketmq.remoting.protocol.RemotingCommand @request)
+{
+org.apache.rocketmq.acl.AccessValidator accessValidator;
+  org.apache.rocketmq.remoting.protocol.header.GetBrokerClusterAclConfigResponseBody body;
+  org.apache.rocketmq.common.AclConfig aclConfig;
+  org.apache.rocketmq.broker.BrokerController $stack8;
+  java.util.Map $stack9;
+  java.lang.Object $stack10;
+  java.util.List $stack13;
+  byte[] $stack15;
+  java.lang.Exception $stack16;
+  org.apache.rocketmq.logging.org.slf4j.Logger $stack17;
+  org.apache.rocketmq.remoting.protocol.RemotingCommand request;
+request=@request;
+request = org.apache.rocketmq.remoting.protocol.RemotingCommand.createResponseCommand(org.apache.rocketmq.remoting.protocol.header.GetBrokerClusterAclConfigResponseHeader);
+ label0:$stack8=this.brokerController;
+ $stack9 = $stack8.getAccessValidatorMap();
+ $stack10 = $stack9.get((java.lang.Object)org.apache.rocketmq.acl.plain.PlainAccessValidator);
+ accessValidator=(org.apache.rocketmq.acl.AccessValidator) $stack10;
+ body=new org.apache.rocketmq.remoting.protocol.header.GetBrokerClusterAclConfigResponseBody;
+ body#org.apache.rocketmq.remoting.protocol.header.GetBrokerClusterAclConfigResponseBody();
+ aclConfig = accessValidator.getAllAclConfig();
+ $stack13 = aclConfig.getGlobalWhiteAddrs();
+ body.setGlobalWhiteAddrs($stack13);
+ $stack13 = aclConfig.getPlainAccessConfigs();
+ body.setPlainAccessConfigs($stack13);
+ request.setCode(0);
+ $stack15 = body.encode();
+ request.setBody($stack15);
+ request.setRemark(null);
+ label1:return  request;
+ label2:$stack16 = catch;
+ $stack17=org.apache.rocketmq.broker.processor.AdminBrokerProcessor.LOGGER;
+ $stack17.error("Failed to generate a proper getBrokerClusterAclConfig response",(java.lang.Throwable)$stack16);
+ return  null;
+ catch java.lang.Exception: label0 - label1 : label2;
+} 
+

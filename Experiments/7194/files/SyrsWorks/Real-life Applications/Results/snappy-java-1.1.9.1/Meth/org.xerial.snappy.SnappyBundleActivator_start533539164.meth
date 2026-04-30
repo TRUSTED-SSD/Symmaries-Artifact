@@ -1,0 +1,23 @@
+void org.xerial.snappy.SnappyBundleActivator:start(org.osgi.framework.BundleContext l1)
+{
+java.lang.String l2;
+  java.lang.String l3;
+  java.lang.String $stack6;
+  boolean $stack7;
+  org.xerial.snappy.SnappyNative $stack8;
+  l2 = java.lang.System.mapLibraryName("snappyjava");
+ l3 = java.lang.System.getProperty("os.arch");
+ $stack6 = l2.toLowerCase();
+ $stack7 = $stack6.endsWith(".dylib");
+ if ($stack7==0) goto label0;
+ $stack6="x86";
+ $stack7 = $stack6.equals((java.lang.Object)l3);
+ if ($stack7==0) goto label0;
+ l2 = l2.replace((java.lang.CharSequence)".dylib",(java.lang.CharSequence)".jnilib");
+ label0:java.lang.System.loadLibrary(l2);
+ $stack8=new org.xerial.snappy.SnappyNative;
+ $stack8#org.xerial.snappy.SnappyNative();
+ org.xerial.snappy.SnappyLoader.setSnappyApi((org.xerial.snappy.SnappyApi)$stack8);
+ return;
+ } 
+

@@ -1,0 +1,34 @@
+void org.junit.internal.runners.MethodRoadie:runAfters()
+{
+java.util.List afters;
+  java.util.Iterator i$;
+  java.lang.reflect.Method after;
+  org.junit.internal.runners.TestMethod $stack5;
+  boolean $stack8;
+  java.lang.Object $stack9;
+  java.lang.Object[] $stack10;
+  java.lang.Throwable $stack14;
+  java.lang.reflect.InvocationTargetException $stack15;
+  $stack5=this.testMethod;
+ afters = $stack5.getAfters();
+ i$ = afters.iterator();
+ label0:$stack8 = i$.hasNext();
+ if ($stack8==0) goto label1;
+ $stack9 = i$.next();
+ after=(java.lang.reflect.Method) $stack9;
+ label2:$stack9=this.test;
+ $stack10=new java.lang.Object[0];
+ after.invoke($stack9,$stack10);
+ label3:goto label4;
+ label5:$stack15 = catch;
+ $stack14 = $stack15.getTargetException();
+ this.addFailure($stack14);
+ goto label4;
+ label6:$stack14 = catch;
+ this.addFailure($stack14);
+ label4:goto label0;
+ label1:return;
+ catch java.lang.reflect.InvocationTargetException: label2 - label3 : label5;
+catch java.lang.Throwable: label2 - label3 : label6;
+} 
+

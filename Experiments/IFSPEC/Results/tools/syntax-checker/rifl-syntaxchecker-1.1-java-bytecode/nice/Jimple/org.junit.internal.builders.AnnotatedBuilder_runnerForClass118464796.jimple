@@ -1,0 +1,50 @@
+    public org.junit.runner.Runner runnerForClass(java.lang.Class) throws java.lang.Exception
+    {
+        org.junit.internal.builders.AnnotatedBuilder this;
+        java.lang.Class testClass, currentTestClass;
+        org.junit.runner.RunWith 'annotation';
+        java.lang.'annotation'.Annotation $stack4;
+        org.junit.runner.Runner $stack8;
+
+        this := @this: org.junit.internal.builders.AnnotatedBuilder;
+
+        testClass := @parameter0: java.lang.Class;
+
+        currentTestClass = testClass;
+/*82*/
+
+     label1:
+        if currentTestClass == null goto label3;
+/*82*/
+
+        $stack4 = virtualinvoke currentTestClass.<java.lang.Class: java.lang.'annotation'.Annotation getAnnotation(java.lang.Class)>(class "Lorg/junit/runner/RunWith;");
+/*84*/
+
+        'annotation' = (org.junit.runner.RunWith) $stack4;
+/*84*/
+
+        if 'annotation' == null goto label2;
+/*85*/
+
+        currentTestClass = interfaceinvoke 'annotation'.<org.junit.runner.RunWith: java.lang.Class value()>();
+/*86*/
+
+        $stack8 = virtualinvoke this.<org.junit.internal.builders.AnnotatedBuilder: org.junit.runner.Runner buildRunner(java.lang.Class,java.lang.Class)>(currentTestClass, testClass);
+/*86*/
+
+        return $stack8;
+/*86*/
+
+     label2:
+        currentTestClass = specialinvoke this.<org.junit.internal.builders.AnnotatedBuilder: java.lang.Class getEnclosingClassForNonStaticMemberClass(java.lang.Class)>(currentTestClass);
+/*83*/
+/*83*/
+
+        goto label1;
+/*83*/
+
+     label3:
+        return null;
+/*90*/
+    }
+

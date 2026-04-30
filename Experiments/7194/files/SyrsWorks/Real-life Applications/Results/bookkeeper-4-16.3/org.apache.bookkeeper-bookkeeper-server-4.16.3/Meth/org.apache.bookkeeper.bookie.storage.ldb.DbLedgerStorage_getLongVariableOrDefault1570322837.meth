@@ -1,0 +1,22 @@
+static long org.apache.bookkeeper.bookie.storage.ldb.DbLedgerStorage:getLongVariableOrDefault(org.apache.bookkeeper.conf.ServerConfiguration conf,java.lang.String keyName,long defaultValue)
+{
+java.lang.Object obj;
+  boolean $stack6;
+  java.lang.String $stack7;
+  java.lang.Number $stack10;
+  obj = conf.getProperty(keyName);
+ $stack6=obj instanceof java.lang.Number;
+ if ($stack6==0) goto label0;
+ $stack10=(java.lang.Number) obj;
+ defaultValue = $stack10.longValue();
+ return  defaultValue;
+ label0:if (obj!=null) goto label1;
+ return  defaultValue;
+ label1:$stack7 = conf.getString(keyName);
+ $stack6 = org.apache.commons.lang3.StringUtils.isEmpty((java.lang.CharSequence)$stack7);
+ if ($stack6==0) goto label2;
+ return  defaultValue;
+ label2:defaultValue = conf.getLong(keyName);
+ return  defaultValue;
+ } 
+

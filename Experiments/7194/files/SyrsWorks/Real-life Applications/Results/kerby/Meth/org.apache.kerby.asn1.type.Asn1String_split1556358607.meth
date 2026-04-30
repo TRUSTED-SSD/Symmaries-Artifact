@@ -1,0 +1,31 @@
+static java.lang.String[] org.apache.kerby.asn1.type.Asn1String:split(java.lang.String @input,char delimiter)
+{
+java.util.ArrayList v;
+  boolean moreTokens;
+  java.lang.String subString;
+  int tokenLocation;
+  java.lang.String[] $stack8;
+  java.lang.Object[] $stack9;
+  java.lang.String input;
+input=@input;
+v=new java.util.ArrayList;
+ v#java.util.ArrayList();
+ moreTokens=1;
+ label0:if (moreTokens==0) goto label1;
+ tokenLocation = input.indexOf((int)delimiter);
+ if (tokenLocation<=0) goto label2;
+ subString = input.substring(0,tokenLocation);
+ v.add((java.lang.Object)subString);
+ tokenLocation=(tokenLocation+1);
+ input = input.substring(tokenLocation);
+ goto label3;
+ label2:moreTokens=0;
+ v.add((java.lang.Object)input);
+ label3:goto label0;
+ label1:tokenLocation = v.size();
+ $stack8=new java.lang.String[tokenLocation];
+ $stack9 = v.toArray((java.lang.Object[])$stack8);
+ $stack8=(java.lang.String[]) $stack9;
+ return  $stack8;
+ } 
+

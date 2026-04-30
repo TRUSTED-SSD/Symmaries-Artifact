@@ -1,0 +1,32 @@
+long org.apache.rocketmq.proxy.remoting.RemotingProtocolServer:headSlowTimeMills(java.util.concurrent.BlockingQueue q)
+{
+long slowTimeMills;
+  java.lang.Runnable peek;
+  org.apache.rocketmq.remoting.netty.RequestTask rt;
+  java.lang.Object $stack6;
+  byte $stack7;
+  long $stack11;
+  java.lang.Exception $stack15;
+  org.apache.rocketmq.logging.org.slf4j.Logger $stack16;
+  label0:slowTimeMills=0L;
+ $stack6 = q.peek();
+ peek=(java.lang.Runnable) $stack6;
+ if (peek==null) goto label1;
+ rt = this#org.apache.rocketmq.proxy.remoting.RemotingProtocolServer:castRunnable(peek);
+ if (rt!=null) goto label2;
+ slowTimeMills=0L;
+ goto label1;
+ label2:slowTimeMills = java.lang.System.currentTimeMillis();
+ $stack11 = rt.getCreateTimestamp();
+ slowTimeMills=(slowTimeMills-$stack11);
+ label1:$stack7=(slowTimeMills cmp 0L);
+ if ($stack7>=0) goto label3;
+ slowTimeMills=0L;
+ label3:return  slowTimeMills;
+ label4:$stack15 = catch;
+ $stack16=org.apache.rocketmq.proxy.remoting.RemotingProtocolServer.log;
+ $stack16.error("error when headSlowTimeMills.",(java.lang.Throwable)$stack15);
+ return  -1L;
+ catch java.lang.Exception: label0 - label3 : label4;
+} 
+

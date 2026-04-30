@@ -1,0 +1,82 @@
+    private void initializeCluster() throws java.lang.Exception
+    {
+        org.apache.bookkeeper.stream.cluster.StreamCluster this;
+        java.lang.String[] serviceHosts;
+        java.lang.String metadataServers, $stack5;
+        org.apache.bookkeeper.common.net.ServiceURI $stack3;
+        boolean $stack6;
+        org.apache.bookkeeper.stream.storage.impl.cluster.ZkClusterInitializer $stack10;
+        java.net.URI $stack12;
+        org.apache.bookkeeper.stream.cluster.StreamClusterSpec $stack13;
+        int $stack14;
+        org.apache.bookkeeper.conf.ServerConfiguration $stack18;
+        java.util.function.Function $stack19;
+
+        this := @this: org.apache.bookkeeper.stream.cluster.StreamCluster;
+
+        metadataServers = "zk";
+/*136*/
+
+        $stack3 = this.<org.apache.bookkeeper.stream.cluster.StreamCluster: org.apache.bookkeeper.common.net.ServiceURI metadataServiceUri>;
+/*136*/
+
+        $stack5 = virtualinvoke $stack3.<org.apache.bookkeeper.common.net.ServiceURI: java.lang.String getServiceName()>();
+/*136*/
+
+        $stack6 = virtualinvoke metadataServers.<java.lang.String: boolean equals(java.lang.Object)>($stack5);
+/*136*/
+
+        staticinvoke <com.google.common.base.Preconditions: void checkArgument(boolean,java.lang.Object)>($stack6, "Only support zookeeper based metadata service now");
+/*136*/
+
+        $stack3 = this.<org.apache.bookkeeper.stream.cluster.StreamCluster: org.apache.bookkeeper.common.net.ServiceURI metadataServiceUri>;
+/*138*/
+
+        serviceHosts = virtualinvoke $stack3.<org.apache.bookkeeper.common.net.ServiceURI: java.lang.String[] getServiceHosts()>();
+/*138*/
+/*138*/
+
+        metadataServers = staticinvoke <org.apache.commons.lang3.StringUtils: java.lang.String join(java.lang.Object[],char)>(serviceHosts, 44);
+/*139*/
+/*139*/
+
+        $stack10 = new org.apache.bookkeeper.stream.storage.impl.cluster.ZkClusterInitializer;
+/*141*/
+
+        specialinvoke $stack10.<org.apache.bookkeeper.stream.storage.impl.cluster.ZkClusterInitializer: void <init>(java.lang.String)>(metadataServers);
+/*141*/
+
+        $stack3 = this.<org.apache.bookkeeper.stream.cluster.StreamCluster: org.apache.bookkeeper.common.net.ServiceURI metadataServiceUri>;
+/*142*/
+
+        $stack12 = virtualinvoke $stack3.<org.apache.bookkeeper.common.net.ServiceURI: java.net.URI getUri()>();
+/*142*/
+
+        $stack13 = this.<org.apache.bookkeeper.stream.cluster.StreamCluster: org.apache.bookkeeper.stream.cluster.StreamClusterSpec spec>;
+/*143*/
+
+        $stack14 = virtualinvoke $stack13.<org.apache.bookkeeper.stream.cluster.StreamClusterSpec: int numServers()>();
+/*143*/
+
+        $stack14 = $stack14 * 2;
+/*141*/
+
+        virtualinvoke $stack10.<org.apache.bookkeeper.stream.storage.impl.cluster.ZkClusterInitializer: boolean initializeCluster(java.net.URI,int)>($stack12, $stack14);
+/*141*/
+
+        $stack3 = this.<org.apache.bookkeeper.stream.cluster.StreamCluster: org.apache.bookkeeper.common.net.ServiceURI metadataServiceUri>;
+/*146*/
+
+        $stack18 = staticinvoke <org.apache.bookkeeper.stream.cluster.StreamCluster: org.apache.bookkeeper.conf.ServerConfiguration newBookieConfiguration(org.apache.bookkeeper.common.net.ServiceURI)>($stack3);
+/*146*/
+
+        $stack19 = dynamicinvoke "apply" <java.util.function.Function ()>() <java.lang.invoke.LambdaMetafactory: java.lang.invoke.CallSite metafactory(java.lang.invoke.MethodHandles$Lookup,java.lang.String,java.lang.invoke.MethodType,java.lang.invoke.MethodType,java.lang.invoke.MethodHandle,java.lang.invoke.MethodType)>(class "(Ljava/lang/Object;)Ljava/lang/Object;", handle: <org.apache.bookkeeper.stream.cluster.StreamCluster: java.lang.Object lambda$initializeCluster$0(org.apache.bookkeeper.meta.MetadataBookieDriver)>, class "(Lorg/apache/bookkeeper/meta/MetadataBookieDriver;)Ljava/lang/Object;");
+/*146*/
+
+        staticinvoke <org.apache.bookkeeper.meta.MetadataDrivers: java.lang.Object runFunctionWithMetadataBookieDriver(org.apache.bookkeeper.conf.ServerConfiguration,java.util.function.Function)>($stack18, $stack19);
+/*146*/
+
+        return;
+/*159*/
+    }
+

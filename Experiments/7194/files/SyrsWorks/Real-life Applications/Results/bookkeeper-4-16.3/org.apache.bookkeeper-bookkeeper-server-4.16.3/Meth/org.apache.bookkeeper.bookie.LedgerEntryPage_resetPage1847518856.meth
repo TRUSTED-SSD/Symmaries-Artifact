@@ -1,0 +1,25 @@
+void org.apache.bookkeeper.bookie.LedgerEntryPage:resetPage()
+{
+java.nio.ByteBuffer $stack1;
+  org.apache.bookkeeper.bookie.EntryKey $stack4;
+  java.util.concurrent.atomic.AtomicInteger $stack5;
+  org.apache.bookkeeper.bookie.LEPStateChangeCallback $stack6;
+  $stack1=this.page;
+ $stack1.clear();
+ $stack1=this.page;
+ org.apache.bookkeeper.util.ZeroBuffer.put($stack1);
+ this.last=-1;
+ $stack4=new org.apache.bookkeeper.bookie.EntryKey;
+ $stack4#org.apache.bookkeeper.bookie.EntryKey(-1L,-1L);
+ this.entryKey=$stack4;
+ this.clean=1;
+ $stack5=this.useCount;
+ $stack5.set(0);
+ this.deleted=0;
+ $stack6=this.callback;
+ if (null==$stack6) goto label0;
+ $stack6=this.callback;
+ $stack6.onResetInUse(this);
+ label0:return;
+ } 
+

@@ -1,0 +1,38 @@
+void org.apache.rocketmq.tieredstore.TieredMessageFetcher:recordCacheAccess(org.apache.rocketmq.tieredstore.container.TieredMessageQueueContainer container,java.lang.String group,long queueOffset,java.util.List resultWrapperList)
+{
+java.util.Iterator l6;
+  org.apache.rocketmq.tieredstore.common.SelectMappedBufferResultWrapper wrapper;
+  int $stack9;
+  boolean $stack11;
+  java.lang.Object $stack12;
+  long $stack14;
+  byte $stack15;
+  org.apache.rocketmq.tieredstore.common.MessageCacheKey $stack17;
+  com.github.benmanes.caffeine.cache.Cache $stack19;
+  $stack9 = resultWrapperList.size();
+ if ($stack9<=0) goto label0;
+ $stack9 = resultWrapperList.size();
+ $stack9=($stack9-1);
+ $stack12 = resultWrapperList.get($stack9);
+ wrapper=(org.apache.rocketmq.tieredstore.common.SelectMappedBufferResultWrapper) $stack12;
+ queueOffset = wrapper.getCurOffset();
+ label0:container.recordGroupAccess(group,queueOffset);
+ l6 = resultWrapperList.iterator();
+ label1:$stack11 = l6.hasNext();
+ if ($stack11==0) goto label2;
+ $stack12 = l6.next();
+ wrapper=(org.apache.rocketmq.tieredstore.common.SelectMappedBufferResultWrapper) $stack12;
+ wrapper.addAccessCount();
+ queueOffset = wrapper.getAccessCount();
+ $stack14 = container.getActiveGroupCount();
+ $stack15=(queueOffset cmp $stack14);
+ if ($stack15<0) goto label3;
+ $stack17=new org.apache.rocketmq.tieredstore.common.MessageCacheKey;
+ queueOffset = wrapper.getCurOffset();
+ $stack17#org.apache.rocketmq.tieredstore.common.MessageCacheKey(container,queueOffset);
+ $stack19=this.readAheadCache;
+ $stack19.invalidate((java.lang.Object)$stack17);
+ label3:goto label1;
+ label2:return;
+ } 
+

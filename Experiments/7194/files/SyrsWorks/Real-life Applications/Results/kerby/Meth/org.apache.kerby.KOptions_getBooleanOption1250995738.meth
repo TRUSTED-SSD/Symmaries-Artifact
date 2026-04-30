@@ -1,0 +1,35 @@
+boolean org.apache.kerby.KOptions:getBooleanOption(org.apache.kerby.KOption option,java.lang.Boolean @defaultValue)
+{
+java.lang.Object value;
+  java.lang.String strVal;
+  boolean $stack6;
+  java.lang.Boolean defaultValue;
+defaultValue=@defaultValue;
+value = this.getOptionValue(option);
+ $stack6=value instanceof java.lang.String;
+ if ($stack6==0) goto label0;
+ strVal=(java.lang.String) value;
+ $stack6 = strVal.equalsIgnoreCase("true");
+ if ($stack6!=0) goto label1;
+ $stack6 = strVal.equalsIgnoreCase("yes");
+ if ($stack6!=0) goto label1;
+ $stack6 = strVal.equals((java.lang.Object)"1");
+ if ($stack6==0) goto label2;
+ label1:return  1;
+ label2:$stack6 = strVal.equalsIgnoreCase("false");
+ if ($stack6!=0) goto label3;
+ $stack6 = strVal.equalsIgnoreCase("no");
+ if ($stack6!=0) goto label3;
+ $stack6 = strVal.equals((java.lang.Object)"0");
+ if ($stack6==0) goto label4;
+ label3:return  0;
+ label4:goto label5;
+ label0:$stack6=value instanceof java.lang.Boolean;
+ if ($stack6==0) goto label5;
+ defaultValue=(java.lang.Boolean) value;
+ $stack6 = defaultValue.booleanValue();
+ return  $stack6;
+ label5:$stack6 = defaultValue.booleanValue();
+ return  $stack6;
+ } 
+

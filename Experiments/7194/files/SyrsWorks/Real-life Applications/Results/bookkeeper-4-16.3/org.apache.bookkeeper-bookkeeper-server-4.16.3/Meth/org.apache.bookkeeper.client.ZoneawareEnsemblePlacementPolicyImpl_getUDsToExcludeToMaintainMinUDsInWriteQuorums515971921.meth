@@ -1,0 +1,50 @@
+java.util.Set org.apache.bookkeeper.client.ZoneawareEnsemblePlacementPolicyImpl:getUDsToExcludeToMaintainMinUDsInWriteQuorums(java.util.List currentEnsemble,int indexOfNode,int writeQuorumSize,java.lang.String zone)
+{
+int ensSize;
+  java.util.HashSet upgradeDomainsToExclude;
+  java.util.HashSet upgradeDomainsOfThisZoneInWriteQuorum;
+  int i;
+  int j;
+  int indexInEnsemble;
+  org.apache.bookkeeper.net.BookieId bookieAddr;
+  org.apache.bookkeeper.client.ZoneawareEnsemblePlacementPolicyImpl$ZoneAwareNodeLocation nodeLocation;
+  boolean $stack19;
+  java.lang.Object $stack23;
+  java.lang.String $stack25;
+  ensSize = currentEnsemble.size();
+ upgradeDomainsToExclude=new java.util.HashSet;
+ upgradeDomainsToExclude#java.util.HashSet();
+ upgradeDomainsOfThisZoneInWriteQuorum=new java.util.HashSet;
+ upgradeDomainsOfThisZoneInWriteQuorum#java.util.HashSet();
+ i=(writeQuorumSize-1);
+ i= ! (i);
+ label0:if (i>0) goto label1;
+ upgradeDomainsOfThisZoneInWriteQuorum.clear();
+ j=0;
+ label2:if (j>=writeQuorumSize) goto label3;
+ indexInEnsemble=(i+j);
+ indexInEnsemble=(indexInEnsemble+indexOfNode);
+ indexInEnsemble=(indexInEnsemble+ensSize);
+ indexInEnsemble=(indexInEnsemble%ensSize);
+ if (indexInEnsemble!=indexOfNode) goto label4;
+ goto label5;
+ label4:$stack23 = currentEnsemble.get(indexInEnsemble);
+ bookieAddr=(org.apache.bookkeeper.net.BookieId) $stack23;
+ if (bookieAddr!=null) goto label6;
+ goto label5;
+ label6:nodeLocation = this.getZoneAwareNodeLocation(bookieAddr);
+ $stack25 = nodeLocation.getZone();
+ $stack19 = $stack25.equals((java.lang.Object)zone);
+ if ($stack19==0) goto label5;
+ $stack25 = nodeLocation.getUpgradeDomain();
+ upgradeDomainsOfThisZoneInWriteQuorum.add((java.lang.Object)$stack25);
+ label5:j=(j+1);
+ goto label2;
+ label3:j = upgradeDomainsOfThisZoneInWriteQuorum.size();
+ if (j!=1) goto label7;
+ upgradeDomainsToExclude.addAll((java.util.Collection)upgradeDomainsOfThisZoneInWriteQuorum);
+ label7:i=(i+1);
+ goto label0;
+ label1:return  upgradeDomainsToExclude;
+ } 
+

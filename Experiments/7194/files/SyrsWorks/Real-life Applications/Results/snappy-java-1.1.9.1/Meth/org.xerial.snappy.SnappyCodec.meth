@@ -1,0 +1,35 @@
+org.xerial.snappy.SnappyCodec(byte[] @l1,int l2,int l3)
+{
+java.io.ByteArrayOutputStream l4;
+  java.io.DataOutputStream l5;
+  int $stack8;
+  java.io.IOException $stack12;
+  java.lang.RuntimeException $stack13;
+  byte[] l1;
+l1=@l1;
+this#java.lang.Object();
+ this.magic=l1;
+ this.version=l2;
+ this.compatibleVersion=l3;
+ l4=new java.io.ByteArrayOutputStream;
+ $stack8=org.xerial.snappy.SnappyCodec.HEADER_SIZE;
+ l4#java.io.ByteArrayOutputStream($stack8);
+ l5=new java.io.DataOutputStream;
+ l5#java.io.DataOutputStream((java.io.OutputStream)l4);
+ label0:$stack8=org.xerial.snappy.SnappyCodec.MAGIC_LEN;
+ dummyClass.lowSink(l1);
+l5.write(l1,0,$stack8);
+ l5.writeInt(l2);
+ l5.writeInt(l3);
+ l5.close();
+ label1:goto label2;
+ label3:$stack12 = catch;
+ $stack13=new java.lang.RuntimeException;
+ $stack13#java.lang.RuntimeException((java.lang.Throwable)$stack12);
+ throw $stack13;
+ label2:l1 = l4.toByteArray();
+ this.headerArray=l1;
+ return;
+ catch java.io.IOException: label0 - label1 : label3;
+} 
+

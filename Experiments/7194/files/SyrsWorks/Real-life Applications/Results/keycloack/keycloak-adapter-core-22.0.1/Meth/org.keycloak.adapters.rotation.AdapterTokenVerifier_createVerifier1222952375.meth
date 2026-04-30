@@ -1,0 +1,20 @@
+static org.keycloak.TokenVerifier org.keycloak.adapters.rotation.AdapterTokenVerifier:createVerifier(java.lang.String @tokenString,org.keycloak.adapters.KeycloakDeployment deployment,boolean withDefaultChecks,java.lang.Class tokenClass)
+{
+org.keycloak.TokenVerifier tokenVerifier;
+  org.keycloak.jose.jws.JWSHeader $stack8;
+  org.keycloak.TokenVerifier $stack11;
+  java.security.PublicKey $stack18;
+  java.lang.String tokenString;
+tokenString=@tokenString;
+tokenVerifier = org.keycloak.TokenVerifier.create(tokenString,tokenClass);
+ if (withDefaultChecks==0) goto label0;
+ $stack11 = tokenVerifier.withDefaultChecks();
+ tokenString = deployment.getRealmInfoUrl();
+ $stack11.realmUrl(tokenString);
+ label0:$stack8 = tokenVerifier.getHeader();
+ tokenString = $stack8.getKeyId();
+ $stack18 = org.keycloak.adapters.rotation.AdapterTokenVerifier.getPublicKey(tokenString,deployment);
+ tokenVerifier.publicKey($stack18);
+ return  tokenVerifier;
+ } 
+

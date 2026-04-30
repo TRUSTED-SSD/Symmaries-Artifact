@@ -1,0 +1,26 @@
+long org.apache.rocketmq.broker.metrics.ConsumerLagCalculator:getAvailableMsgCount(java.lang.String group,java.lang.String topic,boolean isPop)
+{
+long total;
+  org.apache.rocketmq.common.TopicConfig topicConfig;
+  int queueId;
+  org.apache.rocketmq.broker.topic.TopicConfigManager $stack8;
+  org.apache.rocketmq.logging.org.slf4j.Logger $stack10;
+  int $stack11;
+  long $stack13;
+  total=0L;
+ $stack8=this.topicConfigManager;
+ topicConfig = $stack8.selectTopicConfig(topic);
+ if (topicConfig==null) goto label0;
+ queueId=0;
+ label1:$stack11 = topicConfig.getWriteQueueNums();
+ if (queueId>=$stack11) goto label2;
+ $stack13 = this.getAvailableMsgCount(group,topic,queueId,isPop);
+ total=(total+$stack13);
+ queueId=(queueId+1);
+ goto label1;
+ label2:goto label3;
+ label0:$stack10=org.apache.rocketmq.broker.metrics.ConsumerLagCalculator.LOGGER;
+ $stack10.warn("failed to get config of topic {}",(java.lang.Object)topic);
+ label3:return  total;
+ } 
+

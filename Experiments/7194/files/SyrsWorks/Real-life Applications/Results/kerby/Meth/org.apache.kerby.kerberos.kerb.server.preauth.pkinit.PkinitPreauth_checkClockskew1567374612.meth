@@ -1,0 +1,21 @@
+boolean org.apache.kerby.kerberos.kerb.server.preauth.pkinit.PkinitPreauth:checkClockskew(org.apache.kerby.kerberos.kerb.server.request.KdcRequest kdcRequest,org.apache.kerby.kerberos.kerb.type.KerberosTime time)
+{
+long clockSkew;
+  org.apache.kerby.kerberos.kerb.server.KdcContext $stack5;
+  org.apache.kerby.kerberos.kerb.server.KdcConfig $stack6;
+  boolean $stack8;
+  org.apache.kerby.kerberos.kerb.KrbException $stack9;
+  org.apache.kerby.kerberos.kerb.KrbErrorCode $stack10;
+  $stack5 = kdcRequest.getKdcContext();
+ $stack6 = $stack5.getConfig();
+ clockSkew = $stack6.getAllowableClockSkew();
+ clockSkew=(clockSkew * 1000L);
+ $stack8 = time.isInClockSkew(clockSkew);
+ if ($stack8!=0) goto label0;
+ $stack9=new org.apache.kerby.kerberos.kerb.KrbException;
+ $stack10=org.apache.kerby.kerberos.kerb.KrbErrorCode.KDC_ERR_PREAUTH_FAILED;
+ $stack9#org.apache.kerby.kerberos.kerb.KrbException($stack10);
+ throw $stack9;
+ label0:return  1;
+ } 
+

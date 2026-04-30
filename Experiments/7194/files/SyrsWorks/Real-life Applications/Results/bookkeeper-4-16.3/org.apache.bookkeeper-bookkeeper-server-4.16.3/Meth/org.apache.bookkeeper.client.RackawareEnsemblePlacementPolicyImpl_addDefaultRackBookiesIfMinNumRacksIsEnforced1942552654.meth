@@ -1,0 +1,55 @@
+java.util.Set org.apache.bookkeeper.client.RackawareEnsemblePlacementPolicyImpl:addDefaultRackBookiesIfMinNumRacksIsEnforced(java.util.Set @excludeBookies)
+{
+java.util.HashSet bookiesInDefaultRack;
+  java.util.Set defaultRackLeaves;
+  java.util.Iterator l5;
+  org.apache.bookkeeper.net.Node node;
+  boolean $stack7;
+  org.apache.bookkeeper.net.NetworkTopology $stack8;
+  java.lang.String $stack9;
+  java.util.HashSet $stack15;
+  org.slf4j.Logger $stack17;
+  java.lang.Object $stack19;
+  org.apache.bookkeeper.net.BookieNode $stack25;
+  org.apache.bookkeeper.net.BookieId $stack26;
+  java.util.Set excludeBookies;
+excludeBookies=@excludeBookies;
+$stack7=this.enforceMinNumRacksPerWriteQuorum;
+ if ($stack7==0) goto label0;
+ bookiesInDefaultRack=null;
+ $stack8=this.topology;
+ $stack9 = this.getDefaultRack();
+ defaultRackLeaves = $stack8.getLeaves($stack9);
+ l5 = defaultRackLeaves.iterator();
+ label1:$stack7 = l5.hasNext();
+ if ($stack7==0) goto label2;
+ $stack19 = l5.next();
+ node=(org.apache.bookkeeper.net.Node) $stack19;
+ $stack7=node instanceof org.apache.bookkeeper.net.BookieNode;
+ if ($stack7==0) goto label3;
+ if (bookiesInDefaultRack!=null) goto label4;
+ bookiesInDefaultRack=new java.util.HashSet;
+ bookiesInDefaultRack#java.util.HashSet((java.util.Collection)excludeBookies);
+ label4:$stack25=(org.apache.bookkeeper.net.BookieNode) node;
+ $stack26 = $stack25.getAddr();
+ bookiesInDefaultRack.add((java.lang.Object)$stack26);
+ goto label5;
+ label3:$stack17=org.apache.bookkeeper.client.RackawareEnsemblePlacementPolicyImpl.LOG;
+ $stack9 = this.getDefaultRack();
+ $stack17.error("found non-BookieNode: {} as leaf of defaultrack: {}",(java.lang.Object)node,(java.lang.Object)$stack9);
+ label5:goto label1;
+ label2:if (bookiesInDefaultRack==null) goto label6;
+ $stack7 = bookiesInDefaultRack.isEmpty();
+ if ($stack7==0) goto label7;
+ label6:goto label8;
+ label7:$stack15=new java.util.HashSet;
+ $stack15#java.util.HashSet((java.util.Collection)excludeBookies);
+ excludeBookies=$stack15;
+ $stack15.addAll((java.util.Collection)bookiesInDefaultRack);
+ $stack17=org.apache.bookkeeper.client.RackawareEnsemblePlacementPolicyImpl.LOG;
+ dummyClass.lowSink("enforceMinNumRacksPerWriteQuorum is enabled, so Excluding bookies of defaultRack: {}");
+$stack17.info("enforceMinNumRacksPerWriteQuorum is enabled, so Excluding bookies of defaultRack: {}",(java.lang.Object)bookiesInDefaultRack);
+ label8:goto label0;
+ label0:return  excludeBookies;
+ } 
+

@@ -1,0 +1,24 @@
+java.util.concurrent.CompletableFuture org.apache.bookkeeper.clients.impl.kv.PByteBufSimpleTableImpl:lambda$delete$6(io.netty.buffer.ByteBuf pKey,io.netty.buffer.ByteBuf lKey,org.apache.bookkeeper.api.kv.options.DeleteOption option)
+{
+io.grpc.Channel $stack4;
+  io.grpc.MethodDescriptor $stack5;
+  io.grpc.CallOptions $stack6;
+  io.grpc.ClientCall $stack7;
+  org.apache.bookkeeper.stream.proto.kv.rpc.DeleteRangeRequest$Builder $stack8;
+  org.apache.bookkeeper.stream.proto.kv.rpc.RoutingHeader$Builder $stack9;
+  org.apache.bookkeeper.stream.proto.kv.rpc.DeleteRangeRequest $stack11;
+  com.google.common.util.concurrent.ListenableFuture $stack12;
+  java.util.concurrent.CompletableFuture $stack13;
+  $stack4 = this#org.apache.bookkeeper.clients.impl.kv.PByteBufSimpleTableImpl:getChannel(pKey);
+ $stack5 = org.apache.bookkeeper.stream.proto.kv.rpc.TableServiceGrpc.getDeleteMethod();
+ $stack6 = this.getCallOptions();
+ $stack7 = $stack4.newCall($stack5,$stack6);
+ $stack8 = org.apache.bookkeeper.clients.impl.kv.KvUtils.newDeleteRequest(lKey,option);
+ $stack9 = this#org.apache.bookkeeper.clients.impl.kv.PByteBufSimpleTableImpl:newRoutingHeader(pKey);
+ $stack8 = $stack8.setHeader($stack9);
+ $stack11 = $stack8.build();
+ $stack12 = io.grpc.stub.ClientCalls.futureUnaryCall($stack7,(java.lang.Object)$stack11);
+ $stack13 = org.apache.bookkeeper.common.util.ListenableFutures.fromListenableFuture($stack12);
+ return  $stack13;
+ } 
+

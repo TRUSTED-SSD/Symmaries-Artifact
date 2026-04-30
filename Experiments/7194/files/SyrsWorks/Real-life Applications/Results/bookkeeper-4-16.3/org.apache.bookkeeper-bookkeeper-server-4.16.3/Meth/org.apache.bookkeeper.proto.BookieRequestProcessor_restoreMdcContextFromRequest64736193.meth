@@ -1,0 +1,25 @@
+void org.apache.bookkeeper.proto.BookieRequestProcessor:restoreMdcContextFromRequest(org.apache.bookkeeper.proto.BookkeeperProtocol$Request req)
+{
+java.util.Iterator l2;
+  org.apache.bookkeeper.proto.BookkeeperProtocol$ContextPair pair;
+  boolean $stack4;
+  java.util.List $stack5;
+  java.lang.Object $stack8;
+  java.lang.String $stack9;
+  java.lang.String $stack10;
+  $stack4=this.preserveMdcForTaskExecution;
+ if ($stack4==0) goto label0;
+ org.slf4j.MDC.clear();
+ $stack5 = req.getRequestContextList();
+ l2 = $stack5.iterator();
+ label1:$stack4 = l2.hasNext();
+ if ($stack4==0) goto label0;
+ $stack8 = l2.next();
+ pair=(org.apache.bookkeeper.proto.BookkeeperProtocol$ContextPair) $stack8;
+ $stack9 = pair.getKey();
+ $stack10 = pair.getValue();
+ org.slf4j.MDC.put($stack9,$stack10);
+ goto label1;
+ label0:return;
+ } 
+

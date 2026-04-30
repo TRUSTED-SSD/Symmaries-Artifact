@@ -1,0 +1,33 @@
+void org.apache.bookkeeper.verifier.BookkeeperVerifier:printThrowExceptions()
+{
+java.util.Iterator l1;
+  java.lang.Exception e;
+  java.util.Queue $stack3;
+  boolean $stack4;
+  java.lang.Object $stack9;
+  java.lang.Object[] $stack12;
+  java.io.PrintStream $stack13;
+  java.lang.String $stack16;
+  $stack3=this.errors;
+ $stack4 = $stack3.isEmpty();
+ if ($stack4!=0) goto label0;
+ $stack3=this.errors;
+ l1 = $stack3.iterator();
+ label1:$stack4 = l1.hasNext();
+ if ($stack4==0) goto label2;
+ $stack9 = l1.next();
+ e=(java.lang.Exception) $stack9;
+ $stack13=java.lang.System.out;
+ $stack12=new java.lang.Object[1];
+ $stack16 = e.toString();
+ $stack12[0]=$stack16;
+ $stack13.format("Error found: %s%n",$stack12);
+ e.printStackTrace();
+ goto label1;
+ label2:$stack3=this.errors;
+ $stack9 = $stack3.poll();
+ e=(java.lang.Exception) $stack9;
+ throw e;
+ label0:return;
+ } 
+

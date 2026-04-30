@@ -1,0 +1,12 @@
+io.grpc.ServerCall$Listener org.apache.rocketmq.proxy.grpc.interceptor.ContextInterceptor:interceptCall(io.grpc.ServerCall call,io.grpc.Metadata headers,io.grpc.ServerCallHandler next)
+{
+io.grpc.Context context;
+  io.grpc.Context$Key $stack6;
+  io.grpc.ServerCall$Listener $stack8;
+  context = io.grpc.Context.current();
+ $stack6=org.apache.rocketmq.proxy.grpc.interceptor.InterceptorConstants.METADATA;
+ context = context.withValue($stack6,(java.lang.Object)headers);
+ $stack8 = io.grpc.Contexts.interceptCall(context,call,headers,next);
+ return  $stack8;
+ } 
+

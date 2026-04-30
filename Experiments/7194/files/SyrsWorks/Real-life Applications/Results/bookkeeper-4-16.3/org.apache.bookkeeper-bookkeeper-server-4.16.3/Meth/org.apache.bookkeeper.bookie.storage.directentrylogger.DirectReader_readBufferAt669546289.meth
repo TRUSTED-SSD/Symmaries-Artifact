@@ -1,0 +1,16 @@
+io.netty.buffer.ByteBuf org.apache.bookkeeper.bookie.storage.directentrylogger.DirectReader:readBufferAt(long offset,int size)
+{
+io.netty.buffer.ByteBuf buf;
+  io.netty.buffer.ByteBufAllocator $stack6;
+  java.io.IOException $stack8;
+  $stack6=this.allocator;
+ buf = $stack6.buffer(size);
+ label0:this.readIntoBufferAt(buf,offset,size);
+ label1:goto label2;
+ label3:$stack8 = catch;
+ io.netty.util.ReferenceCountUtil.release((java.lang.Object)buf);
+ throw $stack8;
+ label2:return  buf;
+ catch java.io.IOException: label0 - label1 : label3;
+} 
+

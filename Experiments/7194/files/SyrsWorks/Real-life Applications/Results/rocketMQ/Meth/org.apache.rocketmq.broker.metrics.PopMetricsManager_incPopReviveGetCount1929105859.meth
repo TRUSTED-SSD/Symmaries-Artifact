@@ -1,0 +1,22 @@
+static void org.apache.rocketmq.broker.metrics.PopMetricsManager:incPopReviveGetCount(java.lang.String @group,java.lang.String topic,org.apache.rocketmq.broker.metrics.PopReviveMessageType messageType,int queueId,int num)
+{
+io.opentelemetry.api.common.AttributesBuilder builder;
+  io.opentelemetry.api.common.Attributes attributes;
+  long $stack10;
+  io.opentelemetry.api.metrics.LongCounter $stack17;
+  java.lang.String group;
+group=@group;
+builder = org.apache.rocketmq.broker.metrics.PopMetricsManager.newAttributesBuilder();
+ builder = builder.put("consumer_group",group);
+ builder = builder.put("topic",topic);
+ $stack10=(long) queueId;
+ builder = builder.put("queue_id",$stack10);
+ group = messageType.name();
+ builder = builder.put("revive_message_type",group);
+ attributes = builder.build();
+ $stack17=org.apache.rocketmq.broker.metrics.PopMetricsManager.popReviveGetTotal;
+ $stack10=(long) num;
+ $stack17.add($stack10,attributes);
+ return;
+ } 
+

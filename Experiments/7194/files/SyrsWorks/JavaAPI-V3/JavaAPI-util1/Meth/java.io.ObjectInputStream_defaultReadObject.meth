@@ -1,0 +1,35 @@
+void java.io.ObjectInputStream:defaultReadObject()
+{
+java.io.SerialCallbackContext r1;
+  java.lang.Object r2;
+  java.io.ObjectStreamClass r3;
+  java.lang.ClassNotFoundException r4;
+  java.io.ObjectInputStream$BlockDataInputStream $r5;
+  java.io.ObjectInputStream$BlockDataInputStream $r6;
+  boolean $z2;
+  int $i0;
+  java.io.ObjectInputStream$HandleTable $r7;
+  java.io.NotActiveException $r8;
+  r1=this.curContext;
+ if (r1!=null) goto label0;
+ $r8=new java.io.NotActiveException;
+ $r8#java.io.NotActiveException:init("not in call to readObject");
+ throw $r8;
+ label0:r2 = r1.getObj();
+ r3 = r1.getDesc();
+ $r5=this.bin;
+ $r5.setBlockDataMode((boolean)0);
+ this#java.io.ObjectInputStream:defaultReadFields(r2,r3);
+ $r6=this.bin;
+ $r6.setBlockDataMode((boolean)1);
+ $z2 = r3.hasWriteObjectData();
+ if ($z2!=0) goto label1;
+ this.defaultDataEnd=1;
+ label1:$r7=this.handles;
+ $i0=this.passHandle;
+ r4 = $r7.lookupException($i0);
+ if (r4==null) goto label2;
+ throw r4;
+ label2:return;
+ }  
+

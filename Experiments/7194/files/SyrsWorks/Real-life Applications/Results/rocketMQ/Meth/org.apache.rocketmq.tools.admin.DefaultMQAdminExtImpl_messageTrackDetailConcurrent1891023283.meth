@@ -1,0 +1,40 @@
+java.util.List org.apache.rocketmq.tools.admin.DefaultMQAdminExtImpl:messageTrackDetailConcurrent(org.apache.rocketmq.common.message.MessageExt msg)
+{
+java.util.ArrayList result;
+  org.apache.rocketmq.remoting.protocol.body.GroupList groupList;
+  java.util.concurrent.CountDownLatch countDownLatch;
+  java.util.Iterator l5;
+  java.lang.String group;
+  java.util.HashSet $stack11;
+  int $stack12;
+  boolean $stack15;
+  java.util.concurrent.TimeUnit $stack16;
+  long $stack17;
+  java.lang.Object $stack19;
+  org.apache.rocketmq.tools.admin.DefaultMQAdminExtImpl$7 $stack20;
+  java.util.concurrent.ThreadPoolExecutor $stack21;
+  result=new java.util.ArrayList;
+ result#java.util.ArrayList();
+ group = msg.getTopic();
+ groupList = this.queryTopicConsumeByWho(group);
+ countDownLatch=new java.util.concurrent.CountDownLatch;
+ $stack11 = groupList.getGroupList();
+ $stack12 = $stack11.size();
+ countDownLatch#java.util.concurrent.CountDownLatch($stack12);
+ $stack11 = groupList.getGroupList();
+ l5 = $stack11.iterator();
+ label0:$stack15 = l5.hasNext();
+ if ($stack15==0) goto label1;
+ $stack19 = l5.next();
+ group=(java.lang.String) $stack19;
+ $stack21=this.threadPoolExecutor;
+ $stack20=new org.apache.rocketmq.tools.admin.DefaultMQAdminExtImpl$7;
+ $stack20#org.apache.rocketmq.tools.admin.DefaultMQAdminExtImpl$7(this,group,(java.util.List)result,countDownLatch,msg);
+ $stack21.submit((java.lang.Runnable)$stack20);
+ goto label0;
+ label1:$stack17=this.timeoutMillis;
+ $stack16=java.util.concurrent.TimeUnit.MILLISECONDS;
+ countDownLatch.await($stack17,$stack16);
+ return  result;
+ } 
+

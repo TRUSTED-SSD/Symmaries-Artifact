@@ -1,0 +1,60 @@
+    public java.io.File newFile(java.lang.String) throws java.io.IOException
+    {
+        org.junit.rules.TemporaryFolder this;
+        java.lang.String fileName;
+        java.io.File file, $stack4;
+        boolean $stack5;
+        java.io.IOException $stack6;
+        java.lang.StringBuilder $stack7;
+
+        this := @this: org.junit.rules.TemporaryFolder;
+
+        fileName := @parameter0: java.lang.String;
+
+        file = new java.io.File;
+/*66*/
+
+        $stack4 = virtualinvoke this.<org.junit.rules.TemporaryFolder: java.io.File getRoot()>();
+/*66*/
+
+        specialinvoke file.<java.io.File: void <init>(java.io.File,java.lang.String)>($stack4, fileName);
+/*66*/
+
+        $stack5 = virtualinvoke file.<java.io.File: boolean createNewFile()>();
+/*67*/
+
+        if $stack5 != 0 goto label1;
+/*67*/
+
+        $stack6 = new java.io.IOException;
+/*68*/
+
+        $stack7 = new java.lang.StringBuilder;
+/*68*/
+
+        specialinvoke $stack7.<java.lang.StringBuilder: void <init>()>();
+/*68*/
+
+        $stack7 = virtualinvoke $stack7.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>("a file with the name \'");
+/*68*/
+
+        $stack7 = virtualinvoke $stack7.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>(fileName);
+/*68*/
+
+        $stack7 = virtualinvoke $stack7.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>("\' already exists in the test folder");
+/*68*/
+
+        fileName = virtualinvoke $stack7.<java.lang.StringBuilder: java.lang.String toString()>();
+/*68*/
+
+        specialinvoke $stack6.<java.io.IOException: void <init>(java.lang.String)>(fileName);
+/*68*/
+
+        throw $stack6;
+/*68*/
+
+     label1:
+        return file;
+/*71*/
+    }
+

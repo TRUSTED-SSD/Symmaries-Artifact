@@ -1,0 +1,19 @@
+int org.apache.kerby.asn1.type.Asn1Encodeable:taggedEncodingLength(org.apache.kerby.asn1.TaggingOption taggingOption)
+{
+int taggingTagNo;
+  int taggingBodyLen;
+  boolean $stack6;
+  int $stack9;
+  taggingTagNo = taggingOption.getTagNo();
+ $stack6 = taggingOption.isImplicit();
+ if ($stack6==0) goto label0;
+ taggingBodyLen = this.getBodyLength();
+ goto label1;
+ label0:taggingBodyLen = this.encodingLength();
+ label1:taggingTagNo = org.apache.kerby.asn1.util.Asn1Util.lengthOfTagLength(taggingTagNo);
+ $stack9 = org.apache.kerby.asn1.util.Asn1Util.lengthOfBodyLength(taggingBodyLen);
+ taggingTagNo=(taggingTagNo+$stack9);
+ taggingBodyLen=(taggingTagNo+taggingBodyLen);
+ return  taggingBodyLen;
+ } 
+

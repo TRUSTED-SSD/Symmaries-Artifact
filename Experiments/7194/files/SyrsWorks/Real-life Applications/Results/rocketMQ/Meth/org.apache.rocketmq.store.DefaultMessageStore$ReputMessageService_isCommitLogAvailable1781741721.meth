@@ -1,0 +1,34 @@
+boolean org.apache.rocketmq.store.DefaultMessageStore$ReputMessageService:isCommitLogAvailable()
+{
+org.apache.rocketmq.store.DefaultMessageStore $stack1;
+  org.apache.rocketmq.store.config.MessageStoreConfig $stack2;
+  boolean $stack3;
+  long $stack5;
+  long $stack6;
+  byte $stack7;
+  org.apache.rocketmq.store.CommitLog $stack11;
+  $stack1=this.this$0;
+ $stack2 = $stack1.getMessageStoreConfig();
+ $stack3 = $stack2.isDuplicationEnable();
+ if ($stack3==0) goto label0;
+ $stack5=this.reputFromOffset;
+ $stack1=this.this$0;
+ $stack11 = org.apache.rocketmq.store.DefaultMessageStore.access$200($stack1);
+ $stack6 = $stack11.getConfirmOffset();
+ $stack7=($stack5 cmp $stack6);
+ if ($stack7>0) goto label1;
+ $stack3=1;
+ goto label2;
+ label1:$stack3=0;
+ label2:return  $stack3;
+ label0:$stack5=this.reputFromOffset;
+ $stack1=this.this$0;
+ $stack6 = $stack1.getConfirmOffset();
+ $stack7=($stack5 cmp $stack6);
+ if ($stack7>=0) goto label3;
+ $stack3=1;
+ goto label4;
+ label3:$stack3=0;
+ label4:return  $stack3;
+ } 
+

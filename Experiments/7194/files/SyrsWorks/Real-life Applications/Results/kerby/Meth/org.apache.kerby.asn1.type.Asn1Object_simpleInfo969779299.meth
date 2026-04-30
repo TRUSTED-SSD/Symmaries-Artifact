@@ -1,0 +1,33 @@
+java.lang.String org.apache.kerby.asn1.type.Asn1Object:simpleInfo()
+{
+java.lang.String simpleInfo;
+  org.apache.kerby.asn1.Tag $stack3;
+  java.lang.StringBuilder $stack5;
+  int $stack11;
+  java.io.IOException $stack18;
+  java.lang.RuntimeException $stack19;
+  $stack3 = this.tag();
+ simpleInfo = $stack3.typeStr();
+ label0:$stack5=new java.lang.StringBuilder;
+ $stack5#java.lang.StringBuilder();
+ $stack5 = $stack5.append(simpleInfo);
+ $stack5 = $stack5.append(" [tag=");
+ $stack3 = this.tag();
+ $stack5 = $stack5.append((java.lang.Object)$stack3);
+ $stack5 = $stack5.append(", len=");
+ $stack11 = this.getHeaderLength();
+ $stack5 = $stack5.append($stack11);
+ $stack5 = $stack5.append("+");
+ $stack11 = this.getBodyLength();
+ $stack5 = $stack5.append($stack11);
+ $stack5 = $stack5.append("] ");
+ simpleInfo = $stack5.toString();
+ label1:goto label2;
+ label3:$stack18 = catch;
+ $stack19=new java.lang.RuntimeException;
+ $stack19#java.lang.RuntimeException((java.lang.Throwable)$stack18);
+ throw $stack19;
+ label2:return  simpleInfo;
+ catch java.io.IOException: label0 - label1 : label3;
+} 
+

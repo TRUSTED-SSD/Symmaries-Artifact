@@ -1,0 +1,17 @@
+void org.apache.rocketmq.client.latency.MQFaultStrategy:updateFaultItem(java.lang.String brokerName,long currentLatency,boolean isolation)
+{
+long duration;
+  boolean $stack7;
+  org.apache.rocketmq.client.latency.LatencyFaultTolerance $stack9;
+  $stack7=this.sendLatencyFaultEnable;
+ if ($stack7==0) goto label0;
+ if (isolation==0) goto label1;
+ duration=30000L;
+ goto label2;
+ label1:duration=currentLatency;
+ label2:duration = this#org.apache.rocketmq.client.latency.MQFaultStrategy:computeNotAvailableDuration(duration);
+ $stack9=this.latencyFaultTolerance;
+ $stack9.updateFaultItem((java.lang.Object)brokerName,currentLatency,duration);
+ label0:return;
+ } 
+

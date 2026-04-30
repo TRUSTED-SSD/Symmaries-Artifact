@@ -1,0 +1,28 @@
+java.io.InputStream org.apache.rocketmq.common.logging.JoranConfiguratorExt:transformXml(java.io.InputStream in)
+{
+java.lang.String str;
+  java.io.ByteArrayInputStream l3;
+  java.lang.Throwable l4;
+  java.io.InputStreamReader $stack5;
+  java.nio.charset.Charset $stack6;
+  byte[] $stack11;
+  label0:$stack5=new java.io.InputStreamReader;
+ $stack6=java.nio.charset.StandardCharsets.UTF_8;
+ $stack5#java.io.InputStreamReader(in,$stack6);
+ str = com.google.common.io.CharStreams.toString((java.lang.Readable)$stack5);
+ str = str.replace((java.lang.CharSequence)"\"ch.qos.logback",(java.lang.CharSequence)"\"org.apache.rocketmq.logging.ch.qos.logback");
+ l3=new java.io.ByteArrayInputStream;
+ $stack6=java.nio.charset.StandardCharsets.UTF_8;
+ $stack11 = str.getBytes($stack6);
+ l3#java.io.ByteArrayInputStream($stack11);
+ label1:if (null==in) goto label2;
+ in.close();
+ label2:return  l3;
+ label3:l4 = catch;
+ label4:if (null==in) goto label5;
+ in.close();
+ label5:throw l4;
+ catch java.lang.Throwable: label0 - label1 : label3;
+catch java.lang.Throwable: label3 - label4 : label3;
+} 
+

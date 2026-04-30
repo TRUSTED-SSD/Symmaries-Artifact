@@ -1,0 +1,11 @@
+io.grpc.ServerCall$Listener org.apache.rocketmq.proxy.grpc.interceptor.HeaderInterceptor:interceptCall (
+  io.grpc.ServerCall call, io.grpc.Metadata headers,
+  io.grpc.ServerCallHandler next) {
+  guard = tt;
+  ret(level()) = pc ⊔ level(call) ⊔ level(headers) ⊔ level(next) ⊔ obj_level(call) ⊔ obj_level(headers) ⊔ obj_level(next);
+  ret(obj_level()) = pc ⊔ level(call) ⊔ level(headers) ⊔ level(next) ⊔ obj_level(call) ⊔ obj_level(headers) ⊔ obj_level(next);
+  ret(obj_level(call)) = obj_level(call);
+  ret(obj_level(headers)) = pc ⊔ level(headers) ⊔ obj_level(call) ⊔ obj_level(headers);
+  ret(obj_level(next)) = pc ⊔ level(call) ⊔ level(headers) ⊔ level(next) ⊔ obj_level(call) ⊔ obj_level(headers) ⊔ obj_level(next);
+  ret(obj_level(this)) = obj_level(this);
+}

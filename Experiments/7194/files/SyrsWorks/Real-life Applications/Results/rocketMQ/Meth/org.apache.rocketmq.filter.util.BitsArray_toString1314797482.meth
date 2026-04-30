@@ -1,0 +1,53 @@
+java.lang.String org.apache.rocketmq.filter.util.BitsArray:toString()
+{
+java.lang.StringBuilder stringBuilder;
+  int i;
+  int j;
+  byte mask;
+  byte[] $stack5;
+  java.lang.String $stack12;
+  int $stack14;
+  byte $stack21;
+  $stack5=this.bytes;
+ if ($stack5!=null) goto label0;
+ return  "null";
+ label0:stringBuilder=new java.lang.StringBuilder;
+ $stack5=this.bytes;
+ i=#$stack5;
+ i=(i * 8);
+ stringBuilder#java.lang.StringBuilder(i);
+ $stack5=this.bytes;
+ i=#$stack5;
+ i=(i-1);
+ label1:if (i<0) goto label2;
+ j=7;
+ $stack5=this.bytes;
+ $stack14=#$stack5;
+ $stack14=($stack14-1);
+ if (i!=$stack14) goto label3;
+ $stack14=this.bitLength;
+ $stack14=($stack14%8);
+ if ($stack14<=0) goto label3;
+ j=this.bitLength;
+ j=(j%8);
+ label3:if (j<0) goto label4;
+ $stack14=(1<<j);
+ mask=(byte) $stack14;
+ $stack5=this.bytes;
+ $stack21=$stack5[i];
+ $stack21=($stack21 & mask);
+ if ($stack21!=mask) goto label5;
+ stringBuilder.append("1");
+ goto label6;
+ label5:stringBuilder.append("0");
+ label6:j=(j+-1);
+ goto label3;
+ label4:j=(i%8);
+ if (j!=0) goto label7;
+ stringBuilder.append("\n");
+ label7:i=(i+-1);
+ goto label1;
+ label2:$stack12 = stringBuilder.toString();
+ return  $stack12;
+ } 
+

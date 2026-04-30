@@ -1,0 +1,21 @@
+boolean org.apache.bookkeeper.bookie.IndexPersistenceMgr:isFenced(long ledgerId)
+{
+org.apache.bookkeeper.bookie.FileInfoBackingCache$CachedFileInfo fi;
+  boolean l4;
+  java.lang.Throwable l5;
+  java.lang.Long $stack6;
+  fi=null;
+ label0:$stack6 = java.lang.Long.valueOf(ledgerId);
+ fi = this.getFileInfo($stack6,null);
+ l4 = fi.isFenced();
+ label1:if (null==fi) goto label2;
+ fi.release();
+ label2:return  l4;
+ label3:l5 = catch;
+ label4:if (null==fi) goto label5;
+ fi.release();
+ label5:throw l5;
+ catch java.lang.Throwable: label0 - label1 : label3;
+catch java.lang.Throwable: label3 - label4 : label3;
+} 
+

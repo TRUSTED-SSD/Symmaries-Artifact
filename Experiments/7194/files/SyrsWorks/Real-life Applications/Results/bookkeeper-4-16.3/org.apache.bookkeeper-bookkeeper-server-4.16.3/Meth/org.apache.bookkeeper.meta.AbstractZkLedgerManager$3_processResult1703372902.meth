@@ -1,0 +1,30 @@
+void org.apache.bookkeeper.meta.AbstractZkLedgerManager$3:processResult(int rc,java.lang.String path,java.lang.Object o)
+{
+org.apache.zookeeper.KeeperException$Code $stack4;
+  int $stack5;
+  org.slf4j.Logger $stack6;
+  boolean $stack7;
+  long $stack9;
+  java.lang.Long $stack11;
+  org.apache.zookeeper.KeeperException $stack17;
+  $stack4=org.apache.zookeeper.KeeperException$Code.OK;
+ $stack5 = $stack4.intValue();
+ if (rc==$stack5) goto label0;
+ $stack6 = org.apache.bookkeeper.meta.AbstractZkLedgerManager.access$000();
+ $stack9=this.val$ledgerId;
+ $stack11 = java.lang.Long.valueOf($stack9);
+ $stack4 = org.apache.zookeeper.KeeperException$Code.get(rc);
+ $stack17 = org.apache.zookeeper.KeeperException.create($stack4,path);
+ $stack6.error("Cancel watch ledger {} metadata failed.",(java.lang.Object)$stack11,(java.lang.Object)$stack17);
+ return;
+ label0:$stack6 = org.apache.bookkeeper.meta.AbstractZkLedgerManager.access$000();
+ $stack7 = $stack6.isDebugEnabled();
+ if ($stack7==0) goto label1;
+ $stack6 = org.apache.bookkeeper.meta.AbstractZkLedgerManager.access$000();
+ $stack9=this.val$ledgerId;
+ $stack11 = java.lang.Long.valueOf($stack9);
+ dummyClass.lowSink("Cancel watch ledger {} metadata succeed.");
+$stack6.debug("Cancel watch ledger {} metadata succeed.",(java.lang.Object)$stack11);
+ label1:return;
+ } 
+

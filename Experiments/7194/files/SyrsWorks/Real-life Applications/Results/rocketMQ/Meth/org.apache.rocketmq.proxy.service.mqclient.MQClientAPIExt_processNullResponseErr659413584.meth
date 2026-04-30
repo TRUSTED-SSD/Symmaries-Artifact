@@ -1,0 +1,33 @@
+static org.apache.rocketmq.client.exception.MQClientException org.apache.rocketmq.proxy.service.mqclient.MQClientAPIExt:processNullResponseErr(org.apache.rocketmq.remoting.netty.ResponseFuture responseFuture)
+{
+org.apache.rocketmq.client.exception.MQClientException ex;
+  boolean $stack2;
+  java.lang.Throwable $stack6;
+  java.lang.StringBuilder $stack8;
+  long $stack10;
+  java.lang.String $stack13;
+  $stack2 = responseFuture.isSendRequestOK();
+ if ($stack2!=0) goto label0;
+ ex=new org.apache.rocketmq.client.exception.MQClientException;
+ $stack6 = responseFuture.getCause();
+ ex#org.apache.rocketmq.client.exception.MQClientException("send request failed",$stack6);
+ goto label1;
+ label0:$stack2 = responseFuture.isTimeout();
+ if ($stack2==0) goto label2;
+ ex=new org.apache.rocketmq.client.exception.MQClientException;
+ $stack8=new java.lang.StringBuilder;
+ $stack8#java.lang.StringBuilder();
+ $stack8 = $stack8.append("wait response timeout ");
+ $stack10 = responseFuture.getTimeoutMillis();
+ $stack8 = $stack8.append($stack10);
+ $stack8 = $stack8.append("ms");
+ $stack13 = $stack8.toString();
+ $stack6 = responseFuture.getCause();
+ ex#org.apache.rocketmq.client.exception.MQClientException($stack13,$stack6);
+ goto label1;
+ label2:ex=new org.apache.rocketmq.client.exception.MQClientException;
+ $stack6 = responseFuture.getCause();
+ ex#org.apache.rocketmq.client.exception.MQClientException("unknown reason",$stack6);
+ label1:return  ex;
+ } 
+

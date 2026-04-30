@@ -1,0 +1,20 @@
+void org.apache.bookkeeper.bookie.IndexPersistenceMgr:moveLedgerIndexFile(java.lang.Long l,org.apache.bookkeeper.bookie.FileInfo fi)
+{
+java.io.File newLedgerIndexFile;
+  org.apache.bookkeeper.bookie.FileInfo$FileInfoDeletedException fileInfoDeleted;
+  long $stack7;
+  org.apache.bookkeeper.bookie.Bookie$NoLedgerException $stack9;
+  newLedgerIndexFile = this#org.apache.bookkeeper.bookie.IndexPersistenceMgr:getLedgerDirForLedger(fi);
+ newLedgerIndexFile = this#org.apache.bookkeeper.bookie.IndexPersistenceMgr:getNewLedgerIndexFile(l,newLedgerIndexFile);
+ label0:$stack7 = fi.getSizeSinceLastWrite();
+ fi.moveToNewLocation(newLedgerIndexFile,$stack7);
+ label1:goto label2;
+ label3:fileInfoDeleted = catch;
+ $stack9=new org.apache.bookkeeper.bookie.Bookie$NoLedgerException;
+ $stack7 = l.longValue();
+ $stack9#org.apache.bookkeeper.bookie.Bookie$NoLedgerException($stack7);
+ throw $stack9;
+ label2:return;
+ catch org.apache.bookkeeper.bookie.FileInfo$FileInfoDeletedException: label0 - label1 : label3;
+} 
+

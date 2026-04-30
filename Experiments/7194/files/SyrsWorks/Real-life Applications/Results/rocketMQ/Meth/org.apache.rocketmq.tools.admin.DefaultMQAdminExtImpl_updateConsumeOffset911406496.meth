@@ -1,0 +1,29 @@
+void org.apache.rocketmq.tools.admin.DefaultMQAdminExtImpl:updateConsumeOffset(java.lang.String brokerAddr,java.lang.String @consumeGroup,org.apache.rocketmq.common.message.MessageQueue mq,long offset)
+{
+org.apache.rocketmq.remoting.protocol.header.UpdateConsumerOffsetRequestHeader requestHeader;
+  int $stack9;
+  java.lang.Integer $stack10;
+  java.lang.Long $stack11;
+  org.apache.rocketmq.client.impl.factory.MQClientInstance $stack13;
+  org.apache.rocketmq.client.impl.MQClientAPIImpl $stack14;
+  java.lang.String consumeGroup;
+consumeGroup=@consumeGroup;
+requestHeader=new org.apache.rocketmq.remoting.protocol.header.UpdateConsumerOffsetRequestHeader;
+ requestHeader#org.apache.rocketmq.remoting.protocol.header.UpdateConsumerOffsetRequestHeader();
+ requestHeader.setConsumerGroup(consumeGroup);
+ consumeGroup = mq.getTopic();
+ requestHeader.setTopic(consumeGroup);
+ $stack9 = mq.getQueueId();
+ $stack10 = java.lang.Integer.valueOf($stack9);
+ requestHeader.setQueueId($stack10);
+ $stack11 = java.lang.Long.valueOf(offset);
+ requestHeader.setCommitOffset($stack11);
+ consumeGroup = mq.getBrokerName();
+ requestHeader.setBname(consumeGroup);
+ $stack13=this.mqClientInstance;
+ $stack14 = $stack13.getMQClientAPIImpl();
+ offset=this.timeoutMillis;
+ $stack14.updateConsumerOffset(brokerAddr,requestHeader,offset);
+ return;
+ } 
+

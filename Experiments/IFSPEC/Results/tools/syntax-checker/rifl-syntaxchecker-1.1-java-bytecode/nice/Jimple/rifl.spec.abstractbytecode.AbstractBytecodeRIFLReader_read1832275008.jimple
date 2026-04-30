@@ -1,0 +1,143 @@
+    protected rifl.spec.SrcSnk read(org.w3c.dom.Element, boolean) throws rifl.spec.RIFLIntegrityException
+    {
+        rifl.spec.abstractbytecode.AbstractBytecodeRIFLReader this;
+        org.w3c.dom.Element elem;
+        boolean isSource, $stack5;
+        java.lang.String $stack4;
+        rifl.spec.RIFLIntegrityException $stack14;
+        java.lang.Object[] $stack15;
+        rifl.spec.abstractbytecode.AbstractBytecodeAccessPath $stack23;
+        rifl.spec.abstractbytecode.AbstractBytecodeException $stack24;
+        rifl.spec.abstractbytecode.AbstractBytecodeReturnValue $stack25;
+        rifl.spec.abstractbytecode.AbstractBytecodeField $stack26;
+        rifl.spec.abstractbytecode.AbstractBytecodeParameter $stack27;
+
+        this := @this: rifl.spec.abstractbytecode.AbstractBytecodeRIFLReader;
+
+        elem := @parameter0: org.w3c.dom.Element;
+
+        isSource := @parameter1: boolean;
+
+        elem = staticinvoke <rifl.spec.abstractbytecode.AbstractBytecodeRIFLReader: org.w3c.dom.Element getChildElement(org.w3c.dom.Element)>(elem);
+/*70*/
+/*70*/
+
+        $stack4 = interfaceinvoke elem.<org.w3c.dom.Element: java.lang.String getNodeName()>();
+/*72*/
+
+        $stack5 = virtualinvoke $stack4.<java.lang.String: boolean equals(java.lang.Object)>("parameter");
+/*72*/
+
+        if $stack5 == 0 goto label1;
+/*72*/
+
+        $stack27 = virtualinvoke this.<rifl.spec.abstractbytecode.AbstractBytecodeRIFLReader: rifl.spec.abstractbytecode.AbstractBytecodeParameter readParameter(org.w3c.dom.Element,boolean)>(elem, isSource);
+/*73*/
+
+        return $stack27;
+/*73*/
+
+     label1:
+        $stack4 = interfaceinvoke elem.<org.w3c.dom.Element: java.lang.String getNodeName()>();
+/*74*/
+
+        $stack5 = virtualinvoke $stack4.<java.lang.String: boolean equals(java.lang.Object)>("field");
+/*74*/
+
+        if $stack5 == 0 goto label2;
+/*74*/
+
+        $stack26 = virtualinvoke this.<rifl.spec.abstractbytecode.AbstractBytecodeRIFLReader: rifl.spec.abstractbytecode.AbstractBytecodeField readField(org.w3c.dom.Element,boolean)>(elem, isSource);
+/*75*/
+
+        return $stack26;
+/*75*/
+
+     label2:
+        $stack4 = interfaceinvoke elem.<org.w3c.dom.Element: java.lang.String getNodeName()>();
+/*76*/
+
+        $stack5 = virtualinvoke $stack4.<java.lang.String: boolean equals(java.lang.Object)>("returnvalue");
+/*76*/
+
+        if $stack5 == 0 goto label3;
+/*76*/
+
+        $stack25 = virtualinvoke this.<rifl.spec.abstractbytecode.AbstractBytecodeRIFLReader: rifl.spec.abstractbytecode.AbstractBytecodeReturnValue readReturnValue(org.w3c.dom.Element,boolean)>(elem, isSource);
+/*77*/
+
+        return $stack25;
+/*77*/
+
+     label3:
+        $stack4 = interfaceinvoke elem.<org.w3c.dom.Element: java.lang.String getNodeName()>();
+/*78*/
+
+        $stack5 = virtualinvoke $stack4.<java.lang.String: boolean equals(java.lang.Object)>("exception");
+/*78*/
+
+        if $stack5 == 0 goto label4;
+/*78*/
+
+        $stack24 = virtualinvoke this.<rifl.spec.abstractbytecode.AbstractBytecodeRIFLReader: rifl.spec.abstractbytecode.AbstractBytecodeException readException(org.w3c.dom.Element,boolean)>(elem, isSource);
+/*79*/
+
+        return $stack24;
+/*79*/
+
+     label4:
+        $stack4 = interfaceinvoke elem.<org.w3c.dom.Element: java.lang.String getNodeName()>();
+/*80*/
+
+        $stack5 = virtualinvoke $stack4.<java.lang.String: boolean equals(java.lang.Object)>("path");
+/*80*/
+
+        if $stack5 == 0 goto label5;
+/*80*/
+
+        $stack23 = virtualinvoke this.<rifl.spec.abstractbytecode.AbstractBytecodeRIFLReader: rifl.spec.abstractbytecode.AbstractBytecodeAccessPath readAccessPath(org.w3c.dom.Element,boolean)>(elem, isSource);
+/*81*/
+
+        return $stack23;
+/*81*/
+
+     label5:
+        $stack14 = new rifl.spec.RIFLIntegrityException;
+/*83*/
+
+        $stack15 = newarray (java.lang.Object)[2];
+/*83*/
+
+        if isSource == 0 goto label6;
+/*84*/
+
+        $stack4 = "source";
+/*83*/
+
+        goto label7;
+/*83*/
+
+     label6:
+        $stack4 = "sink";
+/*83*/
+
+     label7:
+        $stack15[0] = $stack4;
+/*84*/
+
+        $stack4 = interfaceinvoke elem.<org.w3c.dom.Element: java.lang.String getNodeName()>();
+/*84*/
+
+        $stack15[1] = $stack4;
+/*84*/
+
+        $stack4 = staticinvoke <java.lang.String: java.lang.String format(java.lang.String,java.lang.Object[])>("Unkown %s type: %s.", $stack15);
+/*83*/
+
+        specialinvoke $stack14.<rifl.spec.RIFLIntegrityException: void <init>(java.lang.String)>($stack4);
+/*83*/
+
+        throw $stack14;
+/*83*/
+    }
+

@@ -1,0 +1,19 @@
+boolean org.apache.bookkeeper.bookie.storage.directentrylogger.DirectEntryLogger:logExists(long logId)
+{
+byte $stack3;
+  int $stack4;
+  java.io.File $stack5;
+  boolean $stack7;
+  $stack3=(logId cmp 2147483647L);
+ if ($stack3>=0) goto label0;
+ $stack7=1;
+ goto label1;
+ label0:$stack7=0;
+ label1:com.google.common.base.Preconditions.checkArgument($stack7,"Entry log id must be an int [%d]",logId);
+ $stack5=this.ledgerDir;
+ $stack4=(int) logId;
+ $stack5 = org.apache.bookkeeper.bookie.storage.directentrylogger.DirectEntryLogger.logFile($stack5,$stack4);
+ $stack7 = $stack5.exists();
+ return  $stack7;
+ } 
+

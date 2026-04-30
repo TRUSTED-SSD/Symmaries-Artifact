@@ -1,0 +1,46 @@
+digraph G {
+  node [shape=box, ];
+  "pc0_js1" [label="〈$r2 = new java.util.Formatter, js1〉", ];
+  "pc1_js1" [label="〈$r2#java.util.Formatter.init (), js1〉\n\
+tt", ];
+  "pc2_js1" [label="〈$r3 = $r2.format (r0, r1), js1〉\n\
+tt", ];
+  "pc3_js1" [label="〈$r4 = $r3.toString (), js1〉\n\
+tt", ];
+  "pc4_js1" [label="〈return $r4, js1〉", ];
+  "pc5_js1" [label="〈sink, js1〉\n\
+obj_level(r0) ⊑ ret(obj_level(r0))' ∧ obj_level(r1) ⊑ ret(obj_level(r1))' ∧ (ϕ ≠ S4 ∨ obj_level($r4) ⊑ ret(obj_level())' ∧ pc ⊔ level($r4) ⊑ ret(level())')",
+             ];
+  
+  
+  "pc0_js1" -> "pc1_js1" [label="tt,\n\
+{level($r2) := pc,\n\
+ obj_level($r2) := pc}",
+                          ];
+  "pc1_js1" -> "pc2_js1" [label="tt,\n\
+{obj_level($r2) := pc,\n\
+ obj_level($r3) := pc,\n\
+ obj_level($r4) := pc,\n\
+ obj_level(r0) := pc ⊔ obj_level(r0),\n\
+ obj_level(r1) := pc ⊔ obj_level(r1)}",
+                          ];
+  "pc2_js1" -> "pc3_js1" [label="tt,\n\
+{level($r3) := pc ⊔ level(r0) ⊔ level(r1) ⊔ obj_level(r0) ⊔ obj_level(r1),\n\
+ obj_level($r2) := pc ⊔ level(r0) ⊔ level(r1) ⊔ obj_level(r0) ⊔ obj_level(r1),\n\
+ obj_level($r3) := pc ⊔ level(r0) ⊔ level(r1) ⊔ obj_level(r0) ⊔ obj_level(r1),\n\
+ obj_level($r4) := pc ⊔ level(r0) ⊔ level(r1) ⊔ obj_level(r0) ⊔ obj_level(r1),\n\
+ obj_level(r0) := pc ⊔ level(r0) ⊔ level(r1) ⊔ obj_level(r0) ⊔ obj_level(r1),\n\
+ obj_level(r1) := pc ⊔ level(r0) ⊔ level(r1) ⊔ obj_level(r0) ⊔ obj_level(r1)}",
+                          ];
+  "pc3_js1" -> "pc4_js1" [label="tt,\n\
+{level($r4) := pc ⊔ level($r3) ⊔ obj_level($r3),\n\
+ obj_level($r2) := pc ⊔ level($r3) ⊔ obj_level($r2) ⊔ obj_level($r3),\n\
+ obj_level($r3) := pc ⊔ level($r3) ⊔ obj_level($r3),\n\
+ obj_level($r4) := pc ⊔ level($r3) ⊔ obj_level($r3),\n\
+ obj_level(r0) := pc ⊔ level($r3) ⊔ obj_level($r3) ⊔ obj_level(r0),\n\
+ obj_level(r1) := pc ⊔ level($r3) ⊔ obj_level($r3) ⊔ obj_level(r1)}",
+                          ];
+  "pc4_js1" -> "pc5_js1" [label="tt,\n\
+{ϕ := S4}", ];
+  
+  }

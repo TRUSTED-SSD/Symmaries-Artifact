@@ -1,0 +1,37 @@
+boolean org.apache.rocketmq.client.impl.producer.DefaultMQProducerImpl:tryToCompressMessage(org.apache.rocketmq.common.message.Message msg)
+{
+byte[] body;
+  boolean $stack4;
+  org.apache.rocketmq.client.producer.DefaultMQProducer $stack6;
+  int $stack7;
+  int $stack8;
+  org.apache.rocketmq.common.compression.Compressor $stack11;
+  java.io.IOException $stack13;
+  org.apache.rocketmq.logging.org.slf4j.Logger $stack14;
+  java.lang.String $stack16;
+  $stack4=msg instanceof org.apache.rocketmq.common.message.MessageBatch;
+ if ($stack4==0) goto label0;
+ return  0;
+ label0:body = msg.getBody();
+ if (body==null) goto label1;
+ $stack7=#body;
+ $stack6=this.defaultMQProducer;
+ $stack8 = $stack6.getCompressMsgBodyOverHowmuch();
+ if ($stack7<$stack8) goto label1;
+ label2:$stack11=this.compressor;
+ $stack7=this.compressLevel;
+ body = $stack11.compress(body,$stack7);
+ if (body==null) goto label3;
+ msg.setBody(body);
+ label4:return  1;
+ label3:goto label1;
+ label5:$stack13 = catch;
+ $stack14=this.log;
+ $stack14.error("tryToCompressMessage exception",(java.lang.Throwable)$stack13);
+ $stack14=this.log;
+ $stack16 = msg.toString();
+ $stack14.warn($stack16);
+ label1:return  0;
+ catch java.io.IOException: label2 - label4 : label5;
+} 
+

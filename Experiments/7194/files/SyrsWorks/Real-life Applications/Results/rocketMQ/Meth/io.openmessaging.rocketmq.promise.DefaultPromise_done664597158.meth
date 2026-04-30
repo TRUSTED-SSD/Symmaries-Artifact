@@ -1,0 +1,30 @@
+boolean io.openmessaging.rocketmq.promise.DefaultPromise:done()
+{
+java.lang.Object l1;
+  java.lang.Throwable l2;
+  java.lang.Object $stack3;
+  boolean $stack4;
+  io.openmessaging.rocketmq.promise.FutureState $stack5;
+  $stack3=this.lock;
+ l1=$stack3;
+ monitorenter $stack3;
+ label0:$stack4 = this#io.openmessaging.rocketmq.promise.DefaultPromise:isDoing();
+ if ($stack4!=0) goto label1;
+ monitorexit $stack3;
+ label2:return  0;
+ label1:$stack5=io.openmessaging.rocketmq.promise.FutureState.DONE;
+ this.state=$stack5;
+ $stack3=this.lock;
+ $stack3.notifyAll();
+ monitorexit l1;
+ label3:goto label4;
+ label5:l2 = catch;
+ monitorexit l1;
+ label6:throw l2;
+ label4:this#io.openmessaging.rocketmq.promise.DefaultPromise:notifyListeners();
+ return  1;
+ catch java.lang.Throwable: label0 - label2 : label5;
+catch java.lang.Throwable: label1 - label3 : label5;
+catch java.lang.Throwable: label5 - label6 : label5;
+} 
+

@@ -1,0 +1,17 @@
+void org.apache.bookkeeper.client.PendingReadOp$LedgerEntryRequest:close()
+{
+java.util.concurrent.atomic.AtomicBoolean $stack1;
+  boolean $stack2;
+  org.apache.bookkeeper.client.impl.LedgerEntryImpl $stack3;
+  org.apache.bookkeeper.client.DistributionSchedule$WriteSet $stack4;
+  $stack1=this.complete;
+ $stack2 = $stack1.compareAndSet((boolean)0,(boolean)1);
+ if ($stack2==0) goto label0;
+ this.rc=-999;
+ $stack4=this.writeSet;
+ $stack4.recycle();
+ label0:$stack3=this.entryImpl;
+ $stack3.close();
+ return;
+ } 
+

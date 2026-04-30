@@ -1,0 +1,36 @@
+static org.apache.kerby.x509.type.Certificate org.apache.kerby.kerberos.kerb.preauth.pkinit.PkinitCrypto:changeToCertificate(java.security.cert.X509Certificate x509Certificate)
+{
+org.apache.kerby.x509.type.Certificate certificate;
+  byte[] $stack4;
+  java.security.cert.CertificateEncodingException $stack5;
+  java.lang.StringBuilder $stack6;
+  org.slf4j.Logger $stack7;
+  java.lang.String $stack10;
+  java.io.IOException $stack12;
+  certificate=new org.apache.kerby.x509.type.Certificate;
+ certificate#org.apache.kerby.x509.type.Certificate();
+ label0:$stack4 = x509Certificate.getEncoded();
+ certificate.decode($stack4);
+ label1:goto label2;
+ label3:$stack12 = catch;
+ $stack7=org.apache.kerby.kerberos.kerb.preauth.pkinit.PkinitCrypto.LOG;
+ $stack6=new java.lang.StringBuilder;
+ $stack6#java.lang.StringBuilder();
+ $stack6 = $stack6.append("Fail to decode certificate. ");
+ $stack6 = $stack6.append((java.lang.Object)$stack12);
+ $stack10 = $stack6.toString();
+ $stack7.error($stack10);
+ goto label2;
+ label4:$stack5 = catch;
+ $stack7=org.apache.kerby.kerberos.kerb.preauth.pkinit.PkinitCrypto.LOG;
+ $stack6=new java.lang.StringBuilder;
+ $stack6#java.lang.StringBuilder();
+ $stack6 = $stack6.append("Fail to encode x509 certificate. ");
+ $stack6 = $stack6.append((java.lang.Object)$stack5);
+ $stack10 = $stack6.toString();
+ $stack7.error($stack10);
+ label2:return  certificate;
+ catch java.io.IOException: label0 - label1 : label3;
+catch java.security.cert.CertificateEncodingException: label0 - label1 : label4;
+} 
+

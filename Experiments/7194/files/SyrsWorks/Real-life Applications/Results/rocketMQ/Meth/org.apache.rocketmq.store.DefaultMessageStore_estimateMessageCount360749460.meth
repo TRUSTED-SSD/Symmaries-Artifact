@@ -1,0 +1,33 @@
+long org.apache.rocketmq.store.DefaultMessageStore:estimateMessageCount(java.lang.String topic,int queueId,long from,long to,org.apache.rocketmq.store.MessageFilter filter)
+{
+org.apache.rocketmq.store.queue.ConsumeQueueInterface consumeQueue;
+  long minOffset;
+  long diff;
+  byte $stack13;
+  $stack13=(from cmp 0L);
+ if ($stack13>=0) goto label0;
+ from=0L;
+ label0:$stack13=(from cmp to);
+ if ($stack13<0) goto label1;
+ return  0L;
+ label1:if (null!=filter) goto label2;
+ from=(to-from);
+ return  from;
+ label2:consumeQueue = this.findConsumeQueue(topic,queueId);
+ if (null!=consumeQueue) goto label3;
+ return  0L;
+ label3:minOffset = consumeQueue.getMinOffsetInQueue();
+ $stack13=(from cmp minOffset);
+ if ($stack13>=0) goto label4;
+ diff=(to-from);
+ from=minOffset;
+ to=(minOffset+diff);
+ label4:diff = consumeQueue.estimateMessageCount(from,to,filter);
+ $stack13=(diff cmp -1L);
+ if ($stack13!=0) goto label5;
+ from=(to-from);
+ goto label6;
+ label5:from=diff;
+ label6:return  from;
+ } 
+

@@ -1,0 +1,47 @@
+void org.apache.bookkeeper.bookie.FileInfoBackingCache:releaseFileInfo(long ledgerId,org.apache.bookkeeper.bookie.FileInfoBackingCache$CachedFileInfo fileInfo)
+{
+java.lang.Throwable l5;
+  java.util.concurrent.locks.ReentrantReadWriteLock $stack6;
+  java.util.concurrent.locks.ReentrantReadWriteLock$WriteLock $stack7;
+  boolean $stack8;
+  org.apache.bookkeeper.util.collections.ConcurrentLongHashMap $stack11;
+  java.io.IOException $stack17;
+  java.lang.Object[] $stack18;
+  org.slf4j.Logger $stack19;
+  java.lang.Long $stack22;
+  $stack6=this.lock;
+ $stack7 = $stack6.writeLock();
+ $stack7.lock();
+ label0:$stack8 = org.apache.bookkeeper.bookie.FileInfoBackingCache$CachedFileInfo.access$000(fileInfo);
+ if ($stack8==0) goto label1;
+ fileInfo.close((boolean)1);
+ $stack11=this.fileInfos;
+ $stack11.remove(ledgerId,(java.lang.Object)fileInfo);
+ label1:$stack6=this.lock;
+ $stack7 = $stack6.writeLock();
+ $stack7.unlock();
+ goto label2;
+ label3:$stack17 = catch;
+ $stack19=org.apache.bookkeeper.bookie.FileInfoBackingCache.log;
+ $stack18=new java.lang.Object[3];
+ $stack18[0]=fileInfo;
+ $stack22 = java.lang.Long.valueOf(ledgerId);
+ $stack18[1]=$stack22;
+ $stack18[2]=$stack17;
+ $stack19.error("Error evicting file info({}) for ledger {} from backing cache",$stack18);
+ label4:$stack6=this.lock;
+ $stack7 = $stack6.writeLock();
+ $stack7.unlock();
+ goto label2;
+ label5:l5 = catch;
+ label6:$stack6=this.lock;
+ $stack7 = $stack6.writeLock();
+ $stack7.unlock();
+ throw l5;
+ label2:return;
+ catch java.io.IOException: label0 - label1 : label3;
+catch java.lang.Throwable: label0 - label1 : label5;
+catch java.lang.Throwable: label3 - label4 : label5;
+catch java.lang.Throwable: label5 - label6 : label5;
+} 
+

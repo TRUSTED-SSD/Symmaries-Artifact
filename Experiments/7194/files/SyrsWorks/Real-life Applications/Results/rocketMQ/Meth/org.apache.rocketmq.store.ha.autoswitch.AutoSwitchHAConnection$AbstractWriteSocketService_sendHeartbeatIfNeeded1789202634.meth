@@ -1,0 +1,34 @@
+boolean org.apache.rocketmq.store.ha.autoswitch.AutoSwitchHAConnection$AbstractWriteSocketService:sendHeartbeatIfNeeded()
+{
+long interval;
+  org.apache.rocketmq.store.ha.autoswitch.AutoSwitchHAConnection $stack3;
+  org.apache.rocketmq.store.ha.autoswitch.AutoSwitchHAService $stack4;
+  org.apache.rocketmq.store.DefaultMessageStore $stack5;
+  org.apache.rocketmq.common.SystemClock $stack6;
+  long $stack8;
+  org.apache.rocketmq.store.config.MessageStoreConfig $stack12;
+  int $stack13;
+  byte $stack15;
+  boolean $stack17;
+  $stack3=this.this$0;
+ $stack4 = org.apache.rocketmq.store.ha.autoswitch.AutoSwitchHAConnection.access$100($stack3);
+ $stack5 = $stack4.getDefaultMessageStore();
+ $stack6 = $stack5.getSystemClock();
+ interval = $stack6.now();
+ $stack8=this.lastWriteTimestamp;
+ interval=(interval-$stack8);
+ $stack3=this.this$0;
+ $stack4 = org.apache.rocketmq.store.ha.autoswitch.AutoSwitchHAConnection.access$100($stack3);
+ $stack5 = $stack4.getDefaultMessageStore();
+ $stack12 = $stack5.getMessageStoreConfig();
+ $stack13 = $stack12.getHaSendHeartbeatInterval();
+ $stack8=(long) $stack13;
+ $stack15=(interval cmp $stack8);
+ if ($stack15<=0) goto label0;
+ interval=this.nextTransferFromWhere;
+ this#org.apache.rocketmq.store.ha.autoswitch.AutoSwitchHAConnection$AbstractWriteSocketService:buildTransferHeaderBuffer(interval,0);
+ $stack17 = this.transferData(0);
+ return  $stack17;
+ label0:return  1;
+ } 
+

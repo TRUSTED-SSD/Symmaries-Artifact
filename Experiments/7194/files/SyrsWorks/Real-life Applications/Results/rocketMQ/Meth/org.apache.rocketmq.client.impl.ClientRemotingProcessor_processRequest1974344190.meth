@@ -1,0 +1,32 @@
+org.apache.rocketmq.remoting.protocol.RemotingCommand org.apache.rocketmq.client.impl.ClientRemotingProcessor:processRequest(io.netty.channel.ChannelHandlerContext ctx,org.apache.rocketmq.remoting.protocol.RemotingCommand @request)
+{
+int $stack3;
+  org.apache.rocketmq.remoting.protocol.RemotingCommand request;
+request=@request;
+$stack3 = request.getCode();
+ switch [$stack3]
+if 0 goto label0;
+if 1 goto label1;
+if 2 goto label2;
+if 3 goto label3;
+if 4 goto label4;
+if 5 goto label5;
+if 6 goto label6;
+goto label7;
+ label0:request = this.checkTransactionState(ctx,request);
+ return  request;
+ label1:request = this.notifyConsumerIdsChanged(ctx,request);
+ return  request;
+ label2:request = this.resetOffset(ctx,request);
+ return  request;
+ label3:request = this.getConsumeStatus(ctx,request);
+ return  request;
+ label4:request = this#org.apache.rocketmq.client.impl.ClientRemotingProcessor:getConsumerRunningInfo(ctx,request);
+ return  request;
+ label5:request = this#org.apache.rocketmq.client.impl.ClientRemotingProcessor:consumeMessageDirectly(ctx,request);
+ return  request;
+ label6:request = this#org.apache.rocketmq.client.impl.ClientRemotingProcessor:receiveReplyMessage(ctx,request);
+ return  request;
+ label7:return  null;
+ } 
+

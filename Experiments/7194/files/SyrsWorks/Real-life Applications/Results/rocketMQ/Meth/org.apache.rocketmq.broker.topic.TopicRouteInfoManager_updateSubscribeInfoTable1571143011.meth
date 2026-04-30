@@ -1,0 +1,34 @@
+boolean org.apache.rocketmq.broker.topic.TopicRouteInfoManager:updateSubscribeInfoTable(org.apache.rocketmq.remoting.protocol.route.TopicRouteData @topicRouteData,java.lang.String topic)
+{
+java.util.Set newSubscribeInfo;
+  java.util.Set oldSubscribeInfo;
+  org.apache.rocketmq.remoting.protocol.route.TopicRouteData $stack6;
+  java.util.concurrent.ConcurrentHashMap $stack8;
+  java.lang.Object $stack9;
+  boolean $stack10;
+  java.lang.Object[] $stack11;
+  org.apache.rocketmq.logging.org.slf4j.Logger $stack12;
+  org.apache.rocketmq.remoting.protocol.route.TopicRouteData topicRouteData;
+topicRouteData=@topicRouteData;
+$stack6=new org.apache.rocketmq.remoting.protocol.route.TopicRouteData;
+ $stack6#org.apache.rocketmq.remoting.protocol.route.TopicRouteData(topicRouteData);
+ topicRouteData=$stack6;
+ $stack6.setTopicQueueMappingByBroker(null);
+ newSubscribeInfo = org.apache.rocketmq.client.impl.factory.MQClientInstance.topicRouteData2TopicSubscribeInfo(topic,$stack6);
+ $stack8=this.topicSubscribeInfoTable;
+ $stack9 = $stack8.get((java.lang.Object)topic);
+ oldSubscribeInfo=(java.util.Set) $stack9;
+ $stack10 = java.util.Objects.equals((java.lang.Object)newSubscribeInfo,(java.lang.Object)oldSubscribeInfo);
+ if ($stack10==0) goto label0;
+ return  0;
+ label0:$stack12=org.apache.rocketmq.broker.topic.TopicRouteInfoManager.log;
+ $stack11=new java.lang.Object[3];
+ $stack11[0]=topic;
+ $stack11[1]=oldSubscribeInfo;
+ $stack11[2]=newSubscribeInfo;
+ $stack12.info("the topic[{}] subscribe message queue changed, old[{}] ,new[{}]",$stack11);
+ $stack8=this.topicSubscribeInfoTable;
+ $stack8.put((java.lang.Object)topic,(java.lang.Object)newSubscribeInfo);
+ return  1;
+ } 
+

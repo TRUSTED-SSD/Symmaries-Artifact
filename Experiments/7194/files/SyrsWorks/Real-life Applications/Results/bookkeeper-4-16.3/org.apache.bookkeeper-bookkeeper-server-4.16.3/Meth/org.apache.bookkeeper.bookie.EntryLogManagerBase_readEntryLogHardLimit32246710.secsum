@@ -1,0 +1,9 @@
+boolean org.apache.bookkeeper.bookie.EntryLogManagerBase:readEntryLogHardLimit (
+  org.apache.bookkeeper.bookie.DefaultEntryLogger$BufferedLogChannel
+    logChannel,
+  long size) {
+  guard = tt;
+  ret(level()) = pc ⊔ level(logChannel) ⊔ level(size) ⊔ obj_level(logChannel);
+  ret(obj_level(logChannel)) = if obj_level(logChannel) = ⊤ ∨ pc ≠ ⊤ ∧ (if level(logChannel) = ⊤ then obj_level(logChannel) = ⊥ ∧ obj_level(this) = ⊤ else level(logChannel) = ⊥ ∧ level(size) = ⊤ ∧ obj_level(logChannel) = ⊥ ∧ obj_level(this) = ⊤) then ⊤ else ⊥;
+  ret(obj_level(this)) = if obj_level(this) = ⊤ ∨ pc ≠ ⊤ ∧ obj_level(logChannel) = ⊤ ∧ obj_level(this) = ⊥ then ⊤ else ⊥;
+}

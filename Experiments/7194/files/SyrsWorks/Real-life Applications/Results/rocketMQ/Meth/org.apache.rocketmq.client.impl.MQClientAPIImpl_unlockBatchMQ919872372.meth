@@ -1,0 +1,34 @@
+void org.apache.rocketmq.client.impl.MQClientAPIImpl:unlockBatchMQ(java.lang.String addr,org.apache.rocketmq.remoting.protocol.body.UnlockBatchRequestBody requestBody,long timeoutMillis,boolean oneway)
+{
+org.apache.rocketmq.remoting.protocol.RemotingCommand request;
+  byte[] $stack9;
+  org.apache.rocketmq.client.ClientConfig $stack10;
+  org.apache.rocketmq.remoting.RemotingClient $stack11;
+  java.lang.String $stack13;
+  int $stack15;
+  org.apache.rocketmq.client.exception.MQBrokerException $stack16;
+  request = org.apache.rocketmq.remoting.protocol.RemotingCommand.createRequestCommand(42,null);
+ $stack9 = requestBody.encode();
+ request.setBody($stack9);
+ if (oneway==0) goto label0;
+ $stack11=this.remotingClient;
+ $stack11.invokeOneway(addr,request,timeoutMillis);
+ goto label1;
+ label0:$stack11=this.remotingClient;
+ $stack10=this.clientConfig;
+ oneway = $stack10.isVipChannelEnabled();
+ $stack13 = org.apache.rocketmq.common.MixAll.brokerVIPChannel(oneway,addr);
+ request = $stack11.invokeSync($stack13,request,timeoutMillis);
+ $stack15 = request.getCode();
+ switch [$stack15]
+if 0 goto label2;
+goto label3;
+ label2:return;
+ label3:$stack16=new org.apache.rocketmq.client.exception.MQBrokerException;
+ $stack15 = request.getCode();
+ $stack13 = request.getRemark();
+ $stack16#org.apache.rocketmq.client.exception.MQBrokerException($stack15,$stack13,addr);
+ throw $stack16;
+ label1:return;
+ } 
+

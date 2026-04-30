@@ -1,0 +1,29 @@
+static java.lang.String org.keycloak.util.BasicAuthHelper:createHeader(java.lang.String @username,java.lang.String password)
+{
+java.io.IOException e;
+  java.lang.StringBuilder $stack3;
+  java.lang.StringBuilder $stack5;
+  java.nio.charset.Charset $stack10;
+  byte[] $stack11;
+  java.lang.String username;
+username=@username;
+label0:$stack3=new java.lang.StringBuilder;
+ $stack3#java.lang.StringBuilder();
+ $stack3 = $stack3.append("Basic ");
+ $stack5=new java.lang.StringBuilder;
+ $stack5#java.lang.StringBuilder();
+ $stack5 = $stack5.append(username);
+ $stack5 = $stack5.append((char)58);
+ $stack5 = $stack5.append(password);
+ username = $stack5.toString();
+ $stack10=java.nio.charset.StandardCharsets.UTF_8;
+ $stack11 = username.getBytes($stack10);
+ username = org.keycloak.common.util.Base64.encodeBytes($stack11,8);
+ $stack3 = $stack3.append(username);
+ username = $stack3.toString();
+ label1:return  username;
+ label2:e = catch;
+ return  null;
+ catch java.io.IOException: label0 - label1 : label2;
+} 
+

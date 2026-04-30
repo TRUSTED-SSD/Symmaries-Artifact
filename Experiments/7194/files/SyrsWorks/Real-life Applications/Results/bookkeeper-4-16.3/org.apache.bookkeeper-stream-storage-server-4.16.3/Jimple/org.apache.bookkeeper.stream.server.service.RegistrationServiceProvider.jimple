@@ -1,0 +1,94 @@
+    public void <init>(org.apache.bookkeeper.conf.ServerConfiguration, org.apache.bookkeeper.stream.server.conf.DLConfiguration, org.apache.bookkeeper.stats.StatsLogger)
+    {
+        org.apache.bookkeeper.stream.server.service.RegistrationServiceProvider this;
+        org.apache.bookkeeper.conf.ServerConfiguration bkServerConf;
+        org.apache.bookkeeper.stream.server.conf.DLConfiguration conf;
+        org.apache.bookkeeper.stats.StatsLogger statsLogger;
+        java.lang.String $stack5;
+        org.apache.bookkeeper.zookeeper.BoundExponentialBackoffRetryPolicy $stack6;
+        int $stack7;
+        long $stack8, $stack10;
+        com.google.common.util.concurrent.ThreadFactoryBuilder $stack12;
+        java.util.concurrent.ThreadFactory $stack14;
+        java.util.concurrent.ScheduledExecutorService $stack15;
+        org.apache.bookkeeper.conf.ClientConfiguration $stack16;
+        boolean $stack17;
+
+        this := @this: org.apache.bookkeeper.stream.server.service.RegistrationServiceProvider;
+
+        bkServerConf := @parameter0: org.apache.bookkeeper.conf.ServerConfiguration;
+
+        conf := @parameter1: org.apache.bookkeeper.stream.server.conf.DLConfiguration;
+
+        statsLogger := @parameter2: org.apache.bookkeeper.stats.StatsLogger;
+
+        specialinvoke this.<org.apache.bookkeeper.common.component.AbstractLifecycleComponent: void <init>(java.lang.String,org.apache.bookkeeper.common.conf.ComponentConfiguration,org.apache.bookkeeper.stats.StatsLogger)>("registration-service-provider", conf, statsLogger);
+/*63*/
+
+        $stack5 = staticinvoke <org.apache.bookkeeper.meta.zk.ZKMetadataDriverBase: java.lang.String resolveZkServers(org.apache.bookkeeper.conf.AbstractConfiguration)>(bkServerConf);
+/*64*/
+
+        this.<org.apache.bookkeeper.stream.server.service.RegistrationServiceProvider: java.lang.String zkServers> = $stack5;
+/*64*/
+
+        this.<org.apache.bookkeeper.stream.server.service.RegistrationServiceProvider: java.lang.String regPath> = "/stream/servers";
+/*65*/
+
+        $stack6 = new org.apache.bookkeeper.zookeeper.BoundExponentialBackoffRetryPolicy;
+/*66*/
+
+        $stack7 = virtualinvoke bkServerConf.<org.apache.bookkeeper.conf.ServerConfiguration: int getZkRetryBackoffStartMs()>();
+/*67*/
+
+        $stack8 = (long) $stack7;
+/*68*/
+
+        $stack7 = virtualinvoke bkServerConf.<org.apache.bookkeeper.conf.ServerConfiguration: int getZkRetryBackoffMaxMs()>();
+/*68*/
+
+        $stack10 = (long) $stack7;
+/*69*/
+
+        $stack7 = virtualinvoke bkServerConf.<org.apache.bookkeeper.conf.ServerConfiguration: int getZkRetryBackoffMaxRetries()>();
+/*69*/
+
+        specialinvoke $stack6.<org.apache.bookkeeper.zookeeper.BoundExponentialBackoffRetryPolicy: void <init>(long,long,int)>($stack8, $stack10, $stack7);
+/*69*/
+
+        this.<org.apache.bookkeeper.stream.server.service.RegistrationServiceProvider: org.apache.bookkeeper.zookeeper.RetryPolicy bkZkRetryPolicy> = $stack6;
+/*69*/
+
+        $stack12 = new com.google.common.util.concurrent.ThreadFactoryBuilder;
+/*70*/
+
+        specialinvoke $stack12.<com.google.common.util.concurrent.ThreadFactoryBuilder: void <init>()>();
+/*70*/
+
+        $stack12 = virtualinvoke $stack12.<com.google.common.util.concurrent.ThreadFactoryBuilder: com.google.common.util.concurrent.ThreadFactoryBuilder setNameFormat(java.lang.String)>("registration-service-provider-scheduler");
+/*71*/
+
+        $stack14 = virtualinvoke $stack12.<com.google.common.util.concurrent.ThreadFactoryBuilder: java.util.concurrent.ThreadFactory build()>();
+/*71*/
+
+        $stack15 = staticinvoke <java.util.concurrent.Executors: java.util.concurrent.ScheduledExecutorService newSingleThreadScheduledExecutor(java.util.concurrent.ThreadFactory)>($stack14);
+/*70*/
+
+        this.<org.apache.bookkeeper.stream.server.service.RegistrationServiceProvider: java.util.concurrent.ScheduledExecutorService regExecutor> = $stack15;
+/*70*/
+
+        $stack16 = new org.apache.bookkeeper.conf.ClientConfiguration;
+/*72*/
+
+        specialinvoke $stack16.<org.apache.bookkeeper.conf.ClientConfiguration: void <init>(org.apache.bookkeeper.conf.AbstractConfiguration)>(bkServerConf);
+/*72*/
+
+        $stack17 = virtualinvoke $stack16.<org.apache.bookkeeper.conf.ClientConfiguration: boolean getEnableBookieAddressTracking()>();
+/*73*/
+
+        this.<org.apache.bookkeeper.stream.server.service.RegistrationServiceProvider: boolean bookieAddresschangeTracking> = $stack17;
+/*73*/
+
+        return;
+/*74*/
+    }
+

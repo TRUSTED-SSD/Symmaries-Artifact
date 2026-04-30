@@ -1,0 +1,105 @@
+    private java.lang.String clean(java.lang.String)
+    {
+        securibench.micro.sanitizers.Sanitizers1 this;
+        java.lang.String l1;
+        java.lang.StringBuffer l2;
+        int l3, $stack6;
+        char l4;
+        boolean $stack14;
+
+        this := @this: securibench.micro.sanitizers.Sanitizers1;
+
+        l1 := @parameter0: java.lang.String;
+
+        l2 = new java.lang.StringBuffer;
+/*42*/
+
+        specialinvoke l2.<java.lang.StringBuffer: void <init>()>();
+/*42*/
+
+        l3 = 0;
+/*43*/
+
+     label1:
+        $stack6 = virtualinvoke l1.<java.lang.String: int length()>();
+/*43*/
+
+        if l3 >= $stack6 goto label9;
+/*43*/
+
+        l4 = virtualinvoke l1.<java.lang.String: char charAt(int)>(l3);
+/*44*/
+/*44*/
+
+        lookupswitch(l4)
+        {
+            case 38: goto label4;
+            case 60: goto label2;
+            case 62: goto label3;
+            default: goto label5;
+        };
+/*45*/
+
+     label2:
+        virtualinvoke l2.<java.lang.StringBuffer: java.lang.StringBuffer append(java.lang.String)>("&lt;");
+/*47*/
+
+        goto label8;
+/*47*/
+
+     label3:
+        virtualinvoke l2.<java.lang.StringBuffer: java.lang.StringBuffer append(java.lang.String)>("&gt;");
+/*49*/
+
+        goto label8;
+/*49*/
+
+     label4:
+        virtualinvoke l2.<java.lang.StringBuffer: java.lang.StringBuffer append(java.lang.String)>("&amp;");
+/*51*/
+
+        goto label8;
+/*51*/
+
+     label5:
+        $stack14 = staticinvoke <java.lang.Character: boolean isLetter(char)>(l4);
+/*53*/
+
+        if $stack14 != 0 goto label6;
+/*53*/
+
+        $stack14 = staticinvoke <java.lang.Character: boolean isDigit(char)>(l4);
+/*43*/
+
+        if $stack14 != 0 goto label6;
+/*43*/
+
+        if l4 != 95 goto label7;
+/*54*/
+
+     label6:
+        virtualinvoke l2.<java.lang.StringBuffer: java.lang.StringBuffer append(char)>(l4);
+/*54*/
+
+        goto label8;
+/*54*/
+
+     label7:
+        virtualinvoke l2.<java.lang.StringBuffer: java.lang.StringBuffer append(char)>(63);
+/*56*/
+
+     label8:
+        l3 = l3 + 1;
+/*43*/
+
+        goto label1;
+/*43*/
+
+     label9:
+        l1 = virtualinvoke l2.<java.lang.StringBuffer: java.lang.String toString()>();
+/*61*/
+
+        return l1;
+/*61*/
+    }
+

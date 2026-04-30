@@ -1,0 +1,33 @@
+static java.lang.reflect.Type org.keycloak.common.util.reflections.Types:resolveTypeVariable(java.lang.Class root,java.lang.reflect.TypeVariable typeVariable)
+{
+java.lang.Class classDeclaringTypeVariable;
+  java.lang.reflect.Type[] types;
+  int i;
+  java.lang.reflect.TypeVariable tv;
+  java.lang.reflect.GenericDeclaration $stack6;
+  boolean $stack7;
+  int $stack10;
+  java.lang.reflect.TypeVariable[] $stack12;
+  java.lang.reflect.Type $stack16;
+  $stack6 = typeVariable.getGenericDeclaration();
+ $stack7=$stack6 instanceof java.lang.Class;
+ if ($stack7==0) goto label0;
+ $stack6 = typeVariable.getGenericDeclaration();
+ classDeclaringTypeVariable=(java.lang.Class) $stack6;
+ types = org.keycloak.common.util.reflections.Types.findParameterizedTypes(root,classDeclaringTypeVariable);
+ if (types!=null) goto label1;
+ return  null;
+ label1:i=0;
+ label2:$stack10=#types;
+ if (i>=$stack10) goto label0;
+ $stack12 = classDeclaringTypeVariable.getTypeParameters();
+ tv=$stack12[i];
+ $stack7 = tv.equals((java.lang.Object)typeVariable);
+ if ($stack7==0) goto label3;
+ $stack16=types[i];
+ return  $stack16;
+ label3:i=(i+1);
+ goto label2;
+ label0:return  null;
+ } 
+

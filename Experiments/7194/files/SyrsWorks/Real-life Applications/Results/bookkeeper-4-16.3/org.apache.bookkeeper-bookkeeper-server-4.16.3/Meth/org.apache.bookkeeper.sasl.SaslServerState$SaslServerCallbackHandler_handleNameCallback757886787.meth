@@ -1,0 +1,28 @@
+void org.apache.bookkeeper.sasl.SaslServerState$SaslServerCallbackHandler:handleNameCallback(javax.security.auth.callback.NameCallback nc)
+{
+java.util.Map $stack2;
+  java.lang.String $stack3;
+  java.lang.Object $stack4;
+  org.slf4j.Logger $stack7;
+  java.lang.StringBuilder $stack8;
+  $stack2=this.credentials;
+ $stack3 = nc.getDefaultName();
+ $stack4 = $stack2.get((java.lang.Object)$stack3);
+ if ($stack4!=null) goto label0;
+ $stack7 = org.apache.bookkeeper.sasl.SaslServerState.access$000();
+ $stack8=new java.lang.StringBuilder;
+ $stack8#java.lang.StringBuilder();
+ $stack8 = $stack8.append("User \'");
+ $stack3 = nc.getDefaultName();
+ $stack8 = $stack8.append($stack3);
+ $stack8 = $stack8.append("\' not found in list of JAAS DIGEST-MD5 users.");
+ $stack3 = $stack8.toString();
+ $stack7.error($stack3);
+ return;
+ label0:$stack3 = nc.getDefaultName();
+ nc.setName($stack3);
+ $stack3 = nc.getDefaultName();
+ this.userName=$stack3;
+ return;
+ } 
+

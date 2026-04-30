@@ -1,0 +1,34 @@
+void org.apache.bookkeeper.bookie.BookieShell:setConf(org.apache.commons.configuration.CompositeConfiguration conf)
+{
+org.apache.bookkeeper.conf.ServerConfiguration $stack2;
+  java.io.File[] $stack4;
+  int $stack16;
+  $stack2=this.bkConf;
+ $stack2.loadConf(conf);
+ $stack2=this.bkConf;
+ $stack4 = $stack2.getJournalDirs();
+ $stack4 = org.apache.bookkeeper.bookie.BookieImpl.getCurrentDirectories($stack4);
+ this.journalDirectories=$stack4;
+ $stack2=this.bkConf;
+ $stack4 = $stack2.getLedgerDirs();
+ $stack4 = org.apache.bookkeeper.bookie.BookieImpl.getCurrentDirectories($stack4);
+ this.ledgerDirectories=$stack4;
+ $stack2=this.bkConf;
+ $stack4 = $stack2.getIndexDirs();
+ if (null!=$stack4) goto label0;
+ $stack4=this.ledgerDirectories;
+ this.indexDirectories=$stack4;
+ goto label1;
+ label0:$stack2=this.bkConf;
+ $stack4 = $stack2.getIndexDirs();
+ $stack4 = org.apache.bookkeeper.bookie.BookieImpl.getCurrentDirectories($stack4);
+ this.indexDirectories=$stack4;
+ label1:$stack2=this.bkConf;
+ $stack16 = $stack2.getPageSize();
+ this.pageSize=$stack16;
+ $stack16=this.pageSize;
+ $stack16=($stack16/8);
+ this.entriesPerPage=$stack16;
+ return;
+ } 
+

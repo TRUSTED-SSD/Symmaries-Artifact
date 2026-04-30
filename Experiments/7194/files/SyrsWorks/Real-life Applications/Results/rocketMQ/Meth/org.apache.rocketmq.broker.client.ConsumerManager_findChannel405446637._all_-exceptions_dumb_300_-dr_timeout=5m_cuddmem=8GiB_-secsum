@@ -1,0 +1,9 @@
+org.apache.rocketmq.broker.client.ClientChannelInfo org.apache.rocketmq.broker.client.ConsumerManager:findChannel (
+  java.lang.String group, java.lang.String clientId) {
+  guard = tt;
+  ret(level()) = level(clientId) ⊔ level(group) ⊔ level(this) ⊔ obj_level(clientId) ⊔ obj_level(this);
+  ret(obj_level()) = level(clientId) ⊔ level(group) ⊔ level(this) ⊔ obj_level(clientId) ⊔ obj_level(this);
+  ret(obj_level(clientId)) = level(group) ⊔ level(this) ⊔ obj_level(clientId) ⊔ obj_level(this);
+  ret(obj_level(group)) = level(group) ⊔ level(this) ⊔ obj_level(group) ⊔ obj_level(this);
+  ret(obj_level(this)) = level(group) ⊔ level(this) ⊔ obj_level(group) ⊔ obj_level(this);
+}

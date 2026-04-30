@@ -1,0 +1,33 @@
+org.apache.bookkeeper.net.Node org.apache.bookkeeper.net.NetworkTopologyImpl:getNode(java.lang.String @loc)
+{
+org.apache.bookkeeper.net.Node l2;
+  java.util.concurrent.locks.ReadWriteLock $stack4;
+  java.util.concurrent.locks.Lock $stack5;
+  java.lang.String $stack7;
+  boolean $stack8;
+  org.apache.bookkeeper.net.NetworkTopologyImpl$InnerNode $stack9;
+  java.lang.Throwable $stack18;
+  java.lang.String loc;
+loc=@loc;
+$stack4=this.netlock;
+ $stack5 = $stack4.readLock();
+ $stack5.lock();
+ label0:loc = org.apache.bookkeeper.net.NodeBase.normalize(loc);
+ $stack7="";
+ $stack8 = $stack7.equals((java.lang.Object)loc);
+ if ($stack8!=0) goto label1;
+ loc = loc.substring(1);
+ label1:$stack9=this.clusterMap;
+ l2 = org.apache.bookkeeper.net.NetworkTopologyImpl$InnerNode.access$000($stack9,loc);
+ label2:$stack4=this.netlock;
+ $stack5 = $stack4.readLock();
+ $stack5.unlock();
+ return  l2;
+ label3:$stack18 = catch;
+ $stack4=this.netlock;
+ $stack5 = $stack4.readLock();
+ $stack5.unlock();
+ throw $stack18;
+ catch java.lang.Throwable: label0 - label2 : label3;
+} 
+

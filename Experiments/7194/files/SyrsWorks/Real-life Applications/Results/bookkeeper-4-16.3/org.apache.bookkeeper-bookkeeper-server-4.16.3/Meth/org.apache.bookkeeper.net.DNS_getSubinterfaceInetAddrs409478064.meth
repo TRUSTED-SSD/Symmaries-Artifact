@@ -1,0 +1,24 @@
+static java.util.LinkedHashSet org.apache.bookkeeper.net.DNS:getSubinterfaceInetAddrs(java.net.NetworkInterface @nif)
+{
+java.util.LinkedHashSet addrs;
+  java.util.Enumeration subNifs;
+  boolean $stack6;
+  java.lang.Object $stack7;
+  java.util.Enumeration $stack8;
+  java.util.ArrayList $stack9;
+  java.net.NetworkInterface nif;
+nif=@nif;
+addrs=new java.util.LinkedHashSet;
+ addrs#java.util.LinkedHashSet();
+ subNifs = nif.getSubInterfaces();
+ label0:$stack6 = subNifs.hasMoreElements();
+ if ($stack6==0) goto label1;
+ $stack7 = subNifs.nextElement();
+ nif=(java.net.NetworkInterface) $stack7;
+ $stack8 = nif.getInetAddresses();
+ $stack9 = java.util.Collections.list($stack8);
+ addrs.addAll((java.util.Collection)$stack9);
+ goto label0;
+ label1:return  addrs;
+ } 
+

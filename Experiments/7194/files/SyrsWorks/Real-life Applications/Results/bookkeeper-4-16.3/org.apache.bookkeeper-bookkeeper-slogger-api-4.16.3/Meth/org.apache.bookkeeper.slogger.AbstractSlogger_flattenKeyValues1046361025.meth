@@ -1,0 +1,33 @@
+static void org.apache.bookkeeper.slogger.AbstractSlogger:flattenKeyValues(java.util.Iterator iter,java.util.function.BiConsumer consumer)
+{
+java.lang.String key;
+  java.lang.Object value;
+  boolean $stack4;
+  java.lang.Class $stack10;
+  java.lang.String $stack12;
+  org.apache.bookkeeper.slogger.Sloggable $stack15;
+  label0:$stack4 = iter.hasNext();
+ if ($stack4==0) goto label1;
+ value = iter.next();
+ key = value.toString();
+ $stack4 = iter.hasNext();
+ if ($stack4!=0) goto label2;
+ return;
+ label2:value = iter.next();
+ $stack4=value instanceof org.apache.bookkeeper.slogger.Sloggable;
+ if ($stack4==0) goto label3;
+ $stack15=(org.apache.bookkeeper.slogger.Sloggable) value;
+ org.apache.bookkeeper.slogger.AbstractSlogger.addWithPrefix(key,$stack15,consumer,0);
+ goto label4;
+ label3:$stack10 = value.getClass();
+ $stack4 = $stack10.isArray();
+ if ($stack4==0) goto label5;
+ $stack12 = org.apache.bookkeeper.slogger.AbstractSlogger.arrayToString(value);
+ consumer.accept((java.lang.Object)key,(java.lang.Object)$stack12);
+ goto label4;
+ label5:$stack12 = value.toString();
+ consumer.accept((java.lang.Object)key,(java.lang.Object)$stack12);
+ label4:goto label0;
+ label1:return;
+ } 
+

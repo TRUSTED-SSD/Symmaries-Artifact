@@ -1,0 +1,37 @@
+long org.apache.bookkeeper.client.LedgerHandle:readExplicitLastConfirmed()
+{
+org.apache.bookkeeper.client.LedgerHandle$LastConfirmedCtx ctx;
+  org.apache.bookkeeper.client.LedgerHandle$LastConfirmedCtx l2;
+  java.lang.Throwable l3;
+  org.apache.bookkeeper.client.SyncCallbackUtils$SyncReadLastConfirmedCallback $stack5;
+  boolean $stack7;
+  int $stack9;
+  long $stack10;
+  org.apache.bookkeeper.client.BKException $stack12;
+  ctx=new org.apache.bookkeeper.client.LedgerHandle$LastConfirmedCtx;
+ ctx#org.apache.bookkeeper.client.LedgerHandle$LastConfirmedCtx();
+ $stack5=new org.apache.bookkeeper.client.SyncCallbackUtils$SyncReadLastConfirmedCallback;
+ $stack5#org.apache.bookkeeper.client.SyncCallbackUtils$SyncReadLastConfirmedCallback();
+ this.asyncReadExplicitLastConfirmed((org.apache.bookkeeper.client.AsyncCallback$ReadLastConfirmedCallback)$stack5,(java.lang.Object)ctx);
+ l2=ctx;
+ monitorenter ctx;
+ label0:$stack7 = ctx.ready();
+ if ($stack7!=0) goto label1;
+ ctx.wait();
+ goto label0;
+ label1:monitorexit l2;
+ label2:goto label3;
+ label4:l3 = catch;
+ monitorexit l2;
+ label5:throw l3;
+ label3:$stack9 = ctx.getRC();
+ if ($stack9==0) goto label6;
+ $stack9 = ctx.getRC();
+ $stack12 = org.apache.bookkeeper.client.BKException.create($stack9);
+ throw $stack12;
+ label6:$stack10 = ctx.getlastConfirmed();
+ return  $stack10;
+ catch java.lang.Throwable: label0 - label2 : label4;
+catch java.lang.Throwable: label4 - label5 : label4;
+} 
+

@@ -1,0 +1,8 @@
+void org.keycloak.adapters.RequestAuthenticator:completeAuthentication (
+  org.keycloak.adapters.BearerTokenRequestAuthenticator bearer,
+  java.lang.String @method) {
+  guard = tt;
+  ret(obj_level(@method)) = if obj_level(bearer) = ⊥ then obj_level(@method) ⊔ obj_level(this) else if pc = ⊤ ∧ obj_level(@method) = ⊥ ∧ obj_level(bearer) = ⊤ then obj_level(this) else if obj_level(bearer) = ⊤ ∧ (pc = ⊥ ∨ pc ⊓ obj_level(@method) = ⊤) then ⊤ else ⊥;
+  ret(obj_level(bearer)) = pc ⊔ obj_level(bearer) ⊔ obj_level(this);
+  ret(obj_level(this)) = pc ⊔ obj_level(bearer) ⊔ obj_level(this);
+}

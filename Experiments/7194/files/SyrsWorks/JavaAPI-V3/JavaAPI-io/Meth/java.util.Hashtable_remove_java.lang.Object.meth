@@ -1,0 +1,53 @@
+java.lang.Object java.util.Hashtable:remove(java.lang.Object r1)
+{
+java.util.Hashtable$Entry[] r2;
+  int i0;
+  int i1;
+  java.lang.Object r3;
+  int $i2;
+  int $i3;
+  int $i4;
+  java.lang.Object $r4;
+  boolean $z0;
+  int $i5;
+  int $i6;
+  java.util.Hashtable$Entry $r5;
+  int $i7;
+  int $i8;
+  java.util.Hashtable$Entry $r6;
+  java.util.Hashtable$Entry r8;
+  java.util.Hashtable$Entry r9;
+  r2=this.table;
+ i0 = r1.native_hashCode();
+ $i3=(i0 & 2147483647);
+ $i2=#r2;
+ i1=($i3%$i2);
+ r8=r2[i1];
+ r9=null;
+ label0:if (r8==null) goto label1;
+ $i4=r8.hash;
+ if ($i4!=i0) goto label2;
+ $r4=r8.key;
+ $z0 = $r4.equals(r1);
+ if ($z0==0) goto label2;
+ $i5=this.modCount;
+ $i6=($i5+1);
+ this.modCount=$i6;
+ if (r9==null) goto label3;
+ $r6=r8.next;
+ r9.next=$r6;
+ goto label4;
+ label3:$r5=r8.next;
+ r2[i1]=$r5;
+ label4:$i7=this.count;
+ $i8=($i7-1);
+ this.count=$i8;
+ r3=r8.value;
+ r8.value=null;
+ return  r3;
+ label2:r9=r8;
+ r8=r8.next;
+ goto label0;
+ label1:return  null;
+ }  
+

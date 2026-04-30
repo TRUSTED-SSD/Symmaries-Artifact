@@ -1,0 +1,47 @@
+    protected void doStart()
+    {
+        org.apache.bookkeeper.stream.server.service.BookieService this;
+        org.apache.bookkeeper.proto.BookieServer $stack2;
+        org.slf4j.Logger $stack3;
+        java.lang.Exception $stack4;
+        java.lang.RuntimeException $stack5;
+
+        this := @this: org.apache.bookkeeper.stream.server.service.BookieService;
+
+     label1:
+        $stack2 = this.<org.apache.bookkeeper.stream.server.service.BookieService: org.apache.bookkeeper.proto.BookieServer bs>;
+/*130*/
+
+        virtualinvoke $stack2.<org.apache.bookkeeper.proto.BookieServer: void start()>();
+/*130*/
+
+        $stack3 = <org.apache.bookkeeper.stream.server.service.BookieService: org.slf4j.Logger log>;
+/*131*/
+
+        interfaceinvoke $stack3.<org.slf4j.Logger: void info(java.lang.String)>("Started bookie server successfully.");
+/*131*/
+
+     label2:
+        goto label4;
+/*134*/
+
+     label3:
+        $stack4 := @caughtexception;
+/*135*/
+
+        $stack5 = new java.lang.RuntimeException;
+/*133*/
+
+        specialinvoke $stack5.<java.lang.RuntimeException: void <init>(java.lang.String,java.lang.Throwable)>("Failed to start bookie server", $stack4);
+/*133*/
+
+        throw $stack5;
+/*133*/
+
+     label4:
+        return;
+/*135*/
+
+        catch java.lang.Exception from label1 to label2 with label3;
+    }
+

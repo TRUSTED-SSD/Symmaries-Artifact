@@ -1,0 +1,27 @@
+java.lang.String org.keycloak.jose.jws.JWSBuilder$EncodingBuilder:hmac512(byte[] @sharedSecret)
+{
+java.lang.StringBuilder buffer;
+  byte[] data;
+  org.keycloak.jose.jws.JWSBuilder $stack6;
+  org.keycloak.jose.jws.Algorithm $stack8;
+  java.lang.String $stack10;
+  java.nio.charset.Charset $stack11;
+  byte[] sharedSecret;
+sharedSecret=@sharedSecret;
+buffer=new java.lang.StringBuilder;
+ buffer#java.lang.StringBuilder();
+ $stack6=this.this$0;
+ data = $stack6.marshalContent();
+ $stack6=this.this$0;
+ $stack8=org.keycloak.jose.jws.Algorithm.HS512;
+ $stack6.encode($stack8,data,buffer);
+ $stack10 = buffer.toString();
+ $stack11=java.nio.charset.StandardCharsets.UTF_8;
+ data = $stack10.getBytes($stack11);
+ $stack8=org.keycloak.jose.jws.Algorithm.HS512;
+ sharedSecret = org.keycloak.jose.jws.crypto.HMACProvider.sign(data,$stack8,sharedSecret);
+ $stack6=this.this$0;
+ $stack10 = $stack6.encodeAll(buffer,sharedSecret);
+ return  $stack10;
+ } 
+

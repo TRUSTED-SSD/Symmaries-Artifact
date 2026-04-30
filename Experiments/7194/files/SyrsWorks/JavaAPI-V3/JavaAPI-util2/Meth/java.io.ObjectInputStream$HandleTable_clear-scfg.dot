@@ -1,0 +1,104 @@
+digraph G {
+  node [shape=box, ];
+  "pc0_js1" [label="〈$r1 = this.status, js1〉", ];
+  "pc1_js1" [label="〈$i0 = this.size, js1〉", ];
+  "pc2_js1" [label="〈java.util.Arrays.fill ($r1, 0, $i0, (byte) 0), js1〉\n\
+tt",
+             ];
+  "pc3_js1" [label="〈$r2 = this.entries, js1〉", ];
+  "pc4_js1" [label="〈$i1 = this.size, js1〉", ];
+  "pc5_js1" [label="〈java.util.Arrays.fill ($r2, 0, $i1, null), js1〉\n\
+tt",
+             ];
+  "pc6_js1" [label="〈$r3 = this.deps, js1〉", ];
+  "pc7_js1" [label="〈$i2 = this.size, js1〉", ];
+  "pc8_js1" [label="〈java.util.Arrays.fill ((java.lang.Object[]) $r3, 0, $i2, null), js1〉\n\
+tt",
+             ];
+  "pc9_js1" [label="〈this.lowDep = - 1, js1〉", ];
+  "pc10_js1" [label="〈this.size = 0, js1〉", ];
+  "pc11_js1" [label="〈return, js1〉", ];
+  "pc12_js1" [label="〈sink, js1〉\n\
+obj_level(this) ⊑ ret(obj_level(this))' ∧ (ret(this.><this)' ∨ ¬this.><this)",
+              ];
+  
+  
+  "pc0_js1" -> "pc1_js1" [label="tt,\n\
+{$r2.><$r1 := ff,\n\
+ this.><$r1 := tt,\n\
+ level($r1) := pc ⊔ level(this) ⊔ obj_level(this),\n\
+ obj_level($r1) := obj_level(this)}",
+                          ];
+  "pc1_js1" -> "pc2_js1" [label="tt,\n\
+{level($i0) := pc ⊔ level(this) ⊔ obj_level(this)}",
+                          ];
+  "pc2_js1" -> "pc3_js1" [label="tt,\n\
+{obj_level($r1) := pc ⊔ level(this) ⊔ obj_level(this),\n\
+ obj_level($r2) := ⊥,\n\
+ obj_level(this) := pc ⊔ level(this) ⊔ obj_level(this)}",
+                          ];
+  "pc3_js1" -> "pc4_js1" [label="tt,\n\
+{$r2.><$r1 := tt,\n\
+ $r2.><$r2 := ff,\n\
+ $r2.><$r3 := ff,\n\
+ $r2.><this := this.><this,\n\
+ $r3.><$r2 := ff,\n\
+ this.><$r2 := tt,\n\
+ level($r2) := pc ⊔ level(this) ⊔ obj_level(this),\n\
+ obj_level($r2) := obj_level(this)}",
+                          ];
+  "pc4_js1" -> "pc5_js1" [label="tt,\n\
+{level($i1) := pc ⊔ level(this) ⊔ obj_level(this)}",
+                          ];
+  "pc5_js1" -> "pc6_js1" [label="tt,\n\
+{$r2.><$r2 := tt,\n\
+ $r2.><$r3 := ff,\n\
+ $r2.><this := tt,\n\
+ $r3.><$r3 := ff,\n\
+ $r3.><this := ff,\n\
+ this.><$r1 := tt,\n\
+ this.><$r3 := ff,\n\
+ this.><this := tt,\n\
+ obj_level($r1) := pc ⊔ level($i1) ⊔ obj_level($r1) ⊔ obj_level($r2),\n\
+ obj_level($r2) := pc ⊔ level($i1) ⊔ obj_level($r2),\n\
+ obj_level($r3) := ⊥,\n\
+ obj_level(this) := pc ⊔ level($i1) ⊔ obj_level($r2) ⊔ obj_level(this)}",
+                          ];
+  "pc6_js1" -> "pc7_js1" [label="tt,\n\
+{$r2.><$r3 := tt,\n\
+ $r3.><$r2 := tt,\n\
+ $r3.><$r3 := ff,\n\
+ $r3.><this := tt,\n\
+ this.><$r3 := tt,\n\
+ level($r3) := pc ⊔ level(this) ⊔ obj_level(this),\n\
+ obj_level($r3) := obj_level(this)}",
+                          ];
+  "pc7_js1" -> "pc8_js1" [label="tt,\n\
+{level($i2) := pc ⊔ level(this) ⊔ obj_level(this)}",
+                          ];
+  "pc8_js1" -> "pc9_js1" [label="tt,\n\
+{$r2.><$r2 := tt,\n\
+ $r2.><this := tt,\n\
+ $r3.><$r2 := tt,\n\
+ $r3.><$r3 := tt,\n\
+ $r3.><this := tt,\n\
+ this.><$r2 := tt,\n\
+ this.><this := tt,\n\
+ obj_level($r2) := pc ⊔ level($i2) ⊔ obj_level($r2) ⊔ obj_level($r3),\n\
+ obj_level($r3) := pc ⊔ level($i2) ⊔ obj_level($r3),\n\
+ obj_level(this) := pc ⊔ level($i2) ⊔ obj_level($r3) ⊔ obj_level(this)}",
+                          ];
+  "pc9_js1" -> "pc10_js1" [label="tt,\n\
+{obj_level($r2) := pc ⊔ obj_level($r2),\n\
+ obj_level($r3) := pc ⊔ obj_level($r3),\n\
+ obj_level(this) := pc ⊔ obj_level(this)}",
+                           ];
+  "pc10_js1" -> "pc11_js1" [label="tt,\n\
+{obj_level($r2) := pc ⊔ obj_level($r2),\n\
+ obj_level($r3) := pc ⊔ obj_level($r3),\n\
+ obj_level(this) := pc ⊔ obj_level(this)}",
+                            ];
+  "pc11_js1" -> "pc12_js1" [label="tt,\n\
+{ϕ := S11}", ];
+  
+  }

@@ -1,0 +1,28 @@
+org.apache.kerby.kerberos.kerb.type.pa.PaDataEntry org.apache.kerby.kerberos.kerb.server.preauth.pkinit.PkinitPreauth:makeEntry(org.apache.kerby.kerberos.kerb.type.pa.pkinit.PaPkAsRep paPkAsRep)
+{
+org.apache.kerby.kerberos.kerb.type.pa.PaDataEntry paDataEntry;
+  org.apache.kerby.kerberos.kerb.type.pa.PaDataType $stack5;
+  byte[] $stack6;
+  java.io.IOException $stack7;
+  java.lang.StringBuilder $stack8;
+  org.slf4j.Logger $stack9;
+  java.lang.String $stack12;
+  paDataEntry=new org.apache.kerby.kerberos.kerb.type.pa.PaDataEntry;
+ paDataEntry#org.apache.kerby.kerberos.kerb.type.pa.PaDataEntry();
+ $stack5=org.apache.kerby.kerberos.kerb.type.pa.PaDataType.PK_AS_REP;
+ paDataEntry.setPaDataType($stack5);
+ label0:$stack6 = paPkAsRep.encode();
+ paDataEntry.setPaDataValue($stack6);
+ label1:goto label2;
+ label3:$stack7 = catch;
+ $stack9=org.apache.kerby.kerberos.kerb.server.preauth.pkinit.PkinitPreauth.LOG;
+ $stack8=new java.lang.StringBuilder;
+ $stack8#java.lang.StringBuilder();
+ $stack8 = $stack8.append("Fail to encode PaDataEntry. ");
+ $stack8 = $stack8.append((java.lang.Object)$stack7);
+ $stack12 = $stack8.toString();
+ $stack9.error($stack12);
+ label2:return  paDataEntry;
+ catch java.io.IOException: label0 - label1 : label3;
+} 
+

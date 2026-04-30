@@ -1,0 +1,37 @@
+org.apache.bookkeeper.bookie.LedgerEntryPage org.apache.bookkeeper.bookie.IndexInMemPageMgr$InMemPageCollection:putPage(org.apache.bookkeeper.bookie.LedgerEntryPage @lep)
+{
+java.lang.Object map;
+  java.util.concurrent.ConcurrentMap $stack4;
+  long $stack5;
+  java.lang.Long $stack6;
+  java.util.concurrent.ConcurrentHashMap tmp$1120984406;
+  org.apache.bookkeeper.bookie.LedgerEntryPage lep;
+lep=@lep;
+$stack4=this.pages;
+ $stack5 = lep.getLedger();
+ $stack6 = java.lang.Long.valueOf($stack5);
+ map = $stack4.get((java.lang.Object)$stack6);
+ map=(java.util.concurrent.ConcurrentMap) map;
+ if (null!=map) goto label0;
+ tmp$1120984406=new java.util.concurrent.ConcurrentHashMap;
+ tmp$1120984406#java.util.concurrent.ConcurrentHashMap();
+ map=tmp$1120984406;
+ $stack4=this.pages;
+ $stack5 = lep.getLedger();
+ $stack6 = java.lang.Long.valueOf($stack5);
+ map = $stack4.putIfAbsent((java.lang.Object)$stack6,(java.lang.Object)tmp$1120984406);
+ map=(java.util.concurrent.ConcurrentMap) map;
+ if (null!=map) goto label0;
+ map=tmp$1120984406;
+ label0:$stack5 = lep.getFirstEntry();
+ $stack6 = java.lang.Long.valueOf($stack5);
+ $stack4=(java.util.concurrent.ConcurrentMap) map;
+ map = $stack4.putIfAbsent((java.lang.Object)$stack6,(java.lang.Object)lep);
+ map=(org.apache.bookkeeper.bookie.LedgerEntryPage) map;
+ if (null!=map) goto label1;
+ map=lep;
+ this#org.apache.bookkeeper.bookie.IndexInMemPageMgr$InMemPageCollection:addToCleanPagesList(lep);
+ label1:lep=(org.apache.bookkeeper.bookie.LedgerEntryPage) map;
+ return  lep;
+ } 
+

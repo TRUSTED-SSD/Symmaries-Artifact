@@ -1,0 +1,65 @@
+digraph G {
+  node [shape=box, ];
+  "pc0_js1" [label="〈$i4 = java.lang.Integer.numberOfLeadingZeros (i0), js1〉\n\
+tt",
+             ];
+  "pc1_js1" [label="〈i2 = 32 - $i4, js1〉", ];
+  "pc2_js1" [label="〈$i5 = i1 - 1, js1〉", ];
+  "pc3_js1" [label="〈$i6 = i2 + $i5, js1〉", ];
+  "pc4_js1" [label="〈$i7 = $i6 / i1, js1〉", ];
+  "pc5_js1" [label="〈i3 = java.lang.Math.max ($i7, 1), js1〉\n\
+tt", ];
+  "pc6_js1" [label="〈r0 = new (char)[i3], js1〉", ];
+  "pc7_js1" [label="〈java.lang.Integer.formatUnsignedInt (i0, i1, r0, 0, i3), js1〉\n\
+tt",
+             ];
+  "pc8_js1" [label="〈$r1 = new java.lang.String, js1〉", ];
+  "pc9_js1" [label="〈$r1#java.lang.String.init (r0, (boolean) 1), js1〉\n\
+tt",
+             ];
+  "pc10_js1" [label="〈return $r1, js1〉", ];
+  "pc11_js1" [label="〈sink, js1〉\n\
+ϕ ≠ S10 ∨ obj_level($r1) ⊑ ret(obj_level())' ∧ pc ⊔ level($r1) ⊑ ret(level())'",
+              ];
+  
+  
+  "pc0_js1" -> "pc1_js1" [label="tt,\n\
+{level($i4) := pc ⊔ level(i0)}", ];
+  "pc1_js1" -> "pc2_js1" [label="tt,\n\
+{level(i2) := pc ⊔ level(i0)}", ];
+  "pc2_js1" -> "pc3_js1" [label="tt,\n\
+{level($i5) := pc ⊔ level(i1)}", ];
+  "pc3_js1" -> "pc4_js1" [label="tt,\n\
+{level($i6) := pc ⊔ level(i0) ⊔ level(i1)}",
+                          ];
+  "pc4_js1" -> "pc5_js1" [label="tt,\n\
+{level($i7) := pc ⊔ level(i0) ⊔ level(i1)}",
+                          ];
+  "pc5_js1" -> "pc6_js1" [label="tt,\n\
+{level(i3) := pc ⊔ level(i0) ⊔ level(i1)}",
+                          ];
+  "pc6_js1" -> "pc7_js1" [label="tt,\n\
+{$r1.><r0 := ff,\n\
+ level(r0) := pc,\n\
+ obj_level(r0) := pc ⊔ level(i0) ⊔ level(i1)}",
+                          ];
+  "pc7_js1" -> "pc8_js1" [label="tt,\n\
+{obj_level($r1) := ⊥,\n\
+ obj_level(r0) := pc ⊔ level(i0) ⊔ level(i1)}",
+                          ];
+  "pc8_js1" -> "pc9_js1" [label="tt,\n\
+{$r1.><$r1 := ff,\n\
+ $r1.><r0 := ff,\n\
+ level($r1) := pc,\n\
+ obj_level($r1) := pc}",
+                          ];
+  "pc9_js1" -> "pc10_js1" [label="tt,\n\
+{$r1.><$r1 := ff,\n\
+ $r1.><r0 := tt,\n\
+ obj_level($r1) := pc ⊔ level(i0) ⊔ level(i1),\n\
+ obj_level(r0) := pc ⊔ level(i0) ⊔ level(i1)}",
+                           ];
+  "pc10_js1" -> "pc11_js1" [label="tt,\n\
+{ϕ := S10}", ];
+  
+  }

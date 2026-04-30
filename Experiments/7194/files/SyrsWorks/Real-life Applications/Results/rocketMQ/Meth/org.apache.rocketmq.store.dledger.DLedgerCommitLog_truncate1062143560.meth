@@ -1,0 +1,29 @@
+io.openmessaging.storage.dledger.store.file.SelectMmapBufferResult org.apache.rocketmq.store.dledger.DLedgerCommitLog:truncate(io.openmessaging.storage.dledger.store.file.SelectMmapBufferResult sbr)
+{
+long committedPos;
+  io.openmessaging.storage.dledger.store.file.DLedgerMmapFileStore $stack4;
+  long $stack6;
+  byte $stack7;
+  int $stack9;
+  long $stack10;
+  $stack4=this.dLedgerFileStore;
+ committedPos = $stack4.getCommittedPos();
+ if (sbr==null) goto label0;
+ $stack6 = sbr.getStartOffset();
+ $stack7=($stack6 cmp committedPos);
+ if ($stack7!=0) goto label1;
+ label0:return  null;
+ label1:$stack6 = sbr.getStartOffset();
+ $stack9 = sbr.getSize();
+ $stack10=(long) $stack9;
+ $stack6=($stack6+$stack10);
+ $stack7=($stack6 cmp committedPos);
+ if ($stack7>0) goto label2;
+ return  sbr;
+ label2:$stack6 = sbr.getStartOffset();
+ committedPos=(committedPos-$stack6);
+ $stack9=(int) committedPos;
+ sbr.setSize($stack9);
+ return  sbr;
+ } 
+

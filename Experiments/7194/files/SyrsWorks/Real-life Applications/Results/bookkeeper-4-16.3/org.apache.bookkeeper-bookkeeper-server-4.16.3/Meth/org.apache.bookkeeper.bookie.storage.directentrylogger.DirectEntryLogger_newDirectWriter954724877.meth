@@ -1,0 +1,44 @@
+org.apache.bookkeeper.bookie.storage.directentrylogger.LogWriter org.apache.bookkeeper.bookie.storage.directentrylogger.DirectEntryLogger:newDirectWriter(int newId)
+{
+org.apache.bookkeeper.bookie.storage.directentrylogger.DirectWriter writer;
+  io.netty.buffer.ByteBuf buf;
+  java.lang.Throwable l4;
+  java.util.Set $stack5;
+  java.lang.Integer $stack6;
+  java.io.File $stack9;
+  java.lang.String $stack10;
+  org.apache.bookkeeper.slogger.Slogger $stack11;
+  org.apache.bookkeeper.common.util.nativeio.NativeIO $stack12;
+  org.apache.bookkeeper.bookie.storage.directentrylogger.BufferPool $stack13;
+  java.util.concurrent.ExecutorService $stack14;
+  long $stack15;
+  io.netty.buffer.ByteBufAllocator $stack16;
+  $stack5=this.unflushedLogs;
+ $stack6 = java.lang.Integer.valueOf(newId);
+ $stack5.add((java.lang.Object)$stack6);
+ writer=new org.apache.bookkeeper.bookie.storage.directentrylogger.DirectWriter;
+ $stack9=this.ledgerDir;
+ $stack10 = org.apache.bookkeeper.bookie.storage.directentrylogger.DirectEntryLogger.logFilename($stack9,newId);
+ $stack15=this.maxFileSize;
+ $stack14=this.writeExecutor;
+ $stack13=this.writeBuffers;
+ $stack12=this.nativeIO;
+ $stack11=this.slog;
+ writer#org.apache.bookkeeper.bookie.storage.directentrylogger.DirectWriter(newId,$stack10,$stack15,$stack14,$stack13,$stack12,$stack11);
+ $stack16=this.allocator;
+ buf = $stack16.buffer(4096);
+ label0:org.apache.bookkeeper.bookie.storage.directentrylogger.Header.writeEmptyHeader(buf);
+ writer.writeAt(0L,buf);
+ newId = buf.capacity();
+ $stack15=(long) newId;
+ writer.position($stack15);
+ label1:io.netty.util.ReferenceCountUtil.release((java.lang.Object)buf);
+ goto label2;
+ label3:l4 = catch;
+ label4:io.netty.util.ReferenceCountUtil.release((java.lang.Object)buf);
+ throw l4;
+ label2:return  writer;
+ catch java.lang.Throwable: label0 - label1 : label3;
+catch java.lang.Throwable: label3 - label4 : label3;
+} 
+

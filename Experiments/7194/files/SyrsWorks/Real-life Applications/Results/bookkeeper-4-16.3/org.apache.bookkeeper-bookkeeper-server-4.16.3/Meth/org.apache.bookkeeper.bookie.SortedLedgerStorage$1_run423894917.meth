@@ -1,0 +1,44 @@
+void org.apache.bookkeeper.bookie.SortedLedgerStorage$1:run()
+{
+org.slf4j.Logger $stack2;
+  org.apache.bookkeeper.bookie.SortedLedgerStorage $stack3;
+  org.apache.bookkeeper.bookie.InterleavedLedgerStorage $stack4;
+  org.apache.bookkeeper.bookie.DefaultEntryLogger $stack5;
+  org.apache.bookkeeper.bookie.EntryMemTable $stack8;
+  boolean $stack13;
+  org.apache.bookkeeper.bookie.CheckpointSource$Checkpoint $stack16;
+  org.apache.bookkeeper.bookie.Checkpointer $stack17;
+  java.lang.Exception $stack18;
+  org.apache.bookkeeper.bookie.StateManager $stack20;
+  label0:$stack2 = org.apache.bookkeeper.bookie.SortedLedgerStorage.access$000();
+ dummyClass.lowSink("Started flushing mem table.");
+$stack2.info("Started flushing mem table.");
+ $stack3=this.this$0;
+ $stack4 = org.apache.bookkeeper.bookie.SortedLedgerStorage.access$100($stack3);
+ $stack5 = $stack4.getEntryLogger();
+ $stack5.prepareEntryMemTableFlush();
+ $stack3=this.this$0;
+ $stack8=$stack3.memTable;
+ $stack3=this.this$0;
+ $stack8.flush((org.apache.bookkeeper.bookie.SkipListFlusher)$stack3);
+ $stack3=this.this$0;
+ $stack4 = org.apache.bookkeeper.bookie.SortedLedgerStorage.access$100($stack3);
+ $stack5 = $stack4.getEntryLogger();
+ $stack13 = $stack5.commitEntryMemTableFlush();
+ if ($stack13==0) goto label1;
+ $stack3=this.this$0;
+ $stack4 = org.apache.bookkeeper.bookie.SortedLedgerStorage.access$100($stack3);
+ $stack17=$stack4.checkpointer;
+ $stack16=this.val$cp;
+ $stack17.startCheckpoint($stack16);
+ label1:goto label2;
+ label3:$stack18 = catch;
+ $stack3=this.this$0;
+ $stack20 = org.apache.bookkeeper.bookie.SortedLedgerStorage.access$200($stack3);
+ $stack20.transitionToReadOnlyMode();
+ $stack2 = org.apache.bookkeeper.bookie.SortedLedgerStorage.access$000();
+ $stack2.error("Exception thrown while flushing skip list cache.",(java.lang.Throwable)$stack18);
+ label2:return;
+ catch java.lang.Exception: label0 - label1 : label3;
+} 
+

@@ -1,0 +1,32 @@
+void org.apache.bookkeeper.bookie.GarbageCollectorThread:lambda$new$3(org.apache.bookkeeper.bookie.CompactableLedgerStorage ledgerStorage,long ledgerId)
+{
+org.slf4j.Logger $stack5;
+  boolean $stack6;
+  org.apache.bookkeeper.bookie.stats.GarbageCollectorStats $stack7;
+  org.apache.bookkeeper.stats.Counter $stack8;
+  java.lang.StringBuilder $stack9;
+  java.lang.String $stack13;
+  java.io.IOException $stack17;
+  label0:$stack5=org.apache.bookkeeper.bookie.GarbageCollectorThread.LOG;
+ $stack6 = $stack5.isDebugEnabled();
+ if ($stack6==0) goto label1;
+ $stack5=org.apache.bookkeeper.bookie.GarbageCollectorThread.LOG;
+ $stack9=new java.lang.StringBuilder;
+ $stack9#java.lang.StringBuilder();
+ $stack9 = $stack9.append("delete ledger : ");
+ $stack9 = $stack9.append(ledgerId);
+ $stack13 = $stack9.toString();
+ dummyClass.lowSink($stack13);
+$stack5.debug($stack13);
+ label1:$stack7=this.gcStats;
+ $stack8 = $stack7.getDeletedLedgerCounter();
+ $stack8.inc();
+ ledgerStorage.deleteLedger(ledgerId);
+ label2:goto label3;
+ label4:$stack17 = catch;
+ $stack5=org.apache.bookkeeper.bookie.GarbageCollectorThread.LOG;
+ $stack5.error("Exception when deleting the ledger index file on the Bookie: ",(java.lang.Throwable)$stack17);
+ label3:return;
+ catch java.io.IOException: label0 - label2 : label4;
+} 
+

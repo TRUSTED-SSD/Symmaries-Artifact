@@ -1,0 +1,41 @@
+void org.apache.bookkeeper.meta.CleanupLedgerManager:asyncProcessLedgers(org.apache.bookkeeper.proto.BookkeeperInternalCallbacks$Processor processor,org.apache.zookeeper.AsyncCallback$VoidCallback finalCb,java.lang.Object context,int successRc,int failureRc)
+{
+org.apache.bookkeeper.meta.CleanupLedgerManager$1 stub;
+  java.lang.Throwable l7;
+  java.util.concurrent.locks.ReentrantReadWriteLock $stack8;
+  java.util.concurrent.locks.ReentrantReadWriteLock$ReadLock $stack9;
+  boolean $stack10;
+  org.apache.bookkeeper.meta.CleanupLedgerManager$2 $stack12;
+  org.apache.bookkeeper.meta.LedgerManager $stack13;
+  $stack8=this.closeLock;
+ $stack9 = $stack8.readLock();
+ $stack9.lock();
+ label0:$stack10=this.closed;
+ if ($stack10==0) goto label1;
+ finalCb.processResult(failureRc,null,context);
+ label2:$stack8=this.closeLock;
+ $stack9 = $stack8.readLock();
+ $stack9.unlock();
+ return;
+ label1:stub=new org.apache.bookkeeper.meta.CleanupLedgerManager$1;
+ stub#org.apache.bookkeeper.meta.CleanupLedgerManager$1(this,finalCb,failureRc,context);
+ this#org.apache.bookkeeper.meta.CleanupLedgerManager:addCallback((org.apache.bookkeeper.proto.BookkeeperInternalCallbacks$GenericCallback)stub);
+ $stack13=this.underlying;
+ $stack12=new org.apache.bookkeeper.meta.CleanupLedgerManager$2;
+ $stack12#org.apache.bookkeeper.meta.CleanupLedgerManager$2(this,(org.apache.bookkeeper.proto.BookkeeperInternalCallbacks$GenericCallback)stub,finalCb);
+ $stack13.asyncProcessLedgers(processor,(org.apache.zookeeper.AsyncCallback$VoidCallback)$stack12,context,successRc,failureRc);
+ label3:$stack8=this.closeLock;
+ $stack9 = $stack8.readLock();
+ $stack9.unlock();
+ goto label4;
+ label5:l7 = catch;
+ label6:$stack8=this.closeLock;
+ $stack9 = $stack8.readLock();
+ $stack9.unlock();
+ throw l7;
+ label4:return;
+ catch java.lang.Throwable: label0 - label2 : label5;
+catch java.lang.Throwable: label1 - label3 : label5;
+catch java.lang.Throwable: label5 - label6 : label5;
+} 
+

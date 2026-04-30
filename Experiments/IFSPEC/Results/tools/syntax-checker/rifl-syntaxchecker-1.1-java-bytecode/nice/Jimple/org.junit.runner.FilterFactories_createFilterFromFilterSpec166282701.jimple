@@ -1,0 +1,65 @@
+    public static org.junit.runner.manipulation.Filter createFilterFromFilterSpec(org.junit.runner.Request, java.lang.String) throws org.junit.runner.FilterFactory$FilterNotCreatedException
+    {
+        org.junit.runner.Request request;
+        java.lang.String filterSpec, $stack10;
+        org.junit.runner.Description topLevelDescription;
+        java.lang.String[] tuple;
+        org.junit.runner.Runner $stack4;
+        boolean $stack6;
+        org.junit.runner.FilterFactoryParams $stack8;
+        org.junit.runner.manipulation.Filter $stack11;
+
+        request := @parameter0: org.junit.runner.Request;
+
+        filterSpec := @parameter1: java.lang.String;
+
+        $stack4 = virtualinvoke request.<org.junit.runner.Request: org.junit.runner.Runner getRunner()>();
+/*23*/
+
+        topLevelDescription = virtualinvoke $stack4.<org.junit.runner.Runner: org.junit.runner.Description getDescription()>();
+/*23*/
+/*23*/
+
+        $stack6 = virtualinvoke filterSpec.<java.lang.String: boolean contains(java.lang.CharSequence)>("=");
+/*26*/
+
+        if $stack6 == 0 goto label1;
+/*26*/
+
+        tuple = virtualinvoke filterSpec.<java.lang.String: java.lang.String[] split(java.lang.String,int)>("=", 2);
+/*27*/
+/*27*/
+
+        goto label2;
+/*27*/
+
+     label1:
+        tuple = newarray (java.lang.String)[2];
+/*29*/
+
+        tuple[0] = filterSpec;
+/*29*/
+
+        tuple[1] = "";
+/*29*/
+
+     label2:
+        $stack10 = tuple[0];
+/*32*/
+
+        $stack8 = new org.junit.runner.FilterFactoryParams;
+/*32*/
+
+        filterSpec = tuple[1];
+/*32*/
+
+        specialinvoke $stack8.<org.junit.runner.FilterFactoryParams: void <init>(org.junit.runner.Description,java.lang.String)>(topLevelDescription, filterSpec);
+/*32*/
+
+        $stack11 = staticinvoke <org.junit.runner.FilterFactories: org.junit.runner.manipulation.Filter createFilter(java.lang.String,org.junit.runner.FilterFactoryParams)>($stack10, $stack8);
+/*32*/
+
+        return $stack11;
+/*32*/
+    }
+

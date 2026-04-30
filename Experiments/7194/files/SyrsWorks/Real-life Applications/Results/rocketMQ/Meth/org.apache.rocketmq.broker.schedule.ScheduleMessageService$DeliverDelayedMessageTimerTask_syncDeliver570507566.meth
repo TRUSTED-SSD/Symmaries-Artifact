@@ -1,0 +1,25 @@
+boolean org.apache.rocketmq.broker.schedule.ScheduleMessageService$DeliverDelayedMessageTimerTask:syncDeliver(org.apache.rocketmq.common.message.MessageExtBrokerInner msgInner,java.lang.String msgId,long offset,long offsetPy,int sizePy)
+{
+org.apache.rocketmq.broker.schedule.ScheduleMessageService$PutResultProcess resultProcess;
+  org.apache.rocketmq.store.PutMessageResult result;
+  boolean sendStatus;
+  org.apache.rocketmq.broker.schedule.ScheduleMessageService $stack13;
+  org.apache.rocketmq.store.PutMessageStatus $stack17;
+  org.apache.rocketmq.store.PutMessageStatus $stack18;
+  resultProcess = this#org.apache.rocketmq.broker.schedule.ScheduleMessageService$DeliverDelayedMessageTimerTask:deliverMessage(msgInner,msgId,offset,offsetPy,sizePy,(boolean)0);
+ result = resultProcess.get();
+ if (result==null) goto label0;
+ $stack17 = result.getPutMessageStatus();
+ $stack18=org.apache.rocketmq.store.PutMessageStatus.PUT_OK;
+ if ($stack17!=$stack18) goto label0;
+ sendStatus=1;
+ goto label1;
+ label0:sendStatus=0;
+ label1:if (sendStatus==0) goto label2;
+ $stack13=this.this$0;
+ sizePy=this.delayLevel;
+ offset = resultProcess.getNextOffset();
+ org.apache.rocketmq.broker.schedule.ScheduleMessageService.access$400($stack13,sizePy,offset);
+ label2:return  sendStatus;
+ } 
+

@@ -1,0 +1,37 @@
+static void com.google.zxing.qrcode.encoder.Encoder:appendAlphanumericBytes(java.lang.CharSequence content,com.google.zxing.common.BitArray bits)
+{
+int length;
+  int i;
+  int code1;
+  int code2;
+  char $stack7;
+  com.google.zxing.WriterException $stack17;
+  length = content.length();
+ i=0;
+ label0:if (i>=length) goto label1;
+ $stack7 = content.charAt(i);
+ code1 = com.google.zxing.qrcode.encoder.Encoder.getAlphanumericCode((int)$stack7);
+ if (code1!=-1) goto label2;
+ $stack17=new com.google.zxing.WriterException;
+ $stack17#com.google.zxing.WriterException();
+ throw $stack17;
+ label2:code2=(i+1);
+ if (code2>=length) goto label3;
+ code2=(i+1);
+ $stack7 = content.charAt(code2);
+ code2 = com.google.zxing.qrcode.encoder.Encoder.getAlphanumericCode((int)$stack7);
+ if (code2!=-1) goto label4;
+ $stack17=new com.google.zxing.WriterException;
+ $stack17#com.google.zxing.WriterException();
+ throw $stack17;
+ label4:code1=(code1 * 45);
+ code1=(code1+code2);
+ bits.appendBits(code1,11);
+ i=(i+2);
+ goto label5;
+ label3:bits.appendBits(code1,6);
+ i=(i+1);
+ label5:goto label0;
+ label1:return;
+ } 
+

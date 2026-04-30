@@ -1,0 +1,21 @@
+com.google.common.util.concurrent.ListeningScheduledExecutorService org.apache.bookkeeper.common.util.OrderedScheduler:addExecutorDecorators(java.lang.Object @executor)
+{
+boolean $stack2;
+  org.apache.bookkeeper.common.util.OrderedScheduler$OrderedSchedulerDecoratedThread $stack3;
+  com.google.common.util.concurrent.ListeningScheduledExecutorService $stack4;
+  org.apache.bookkeeper.common.util.BoundedScheduledExecutorService $stack5;
+  java.util.concurrent.ScheduledThreadPoolExecutor $stack6;
+  java.lang.Object executor;
+executor=@executor;
+$stack2=executor instanceof com.google.common.util.concurrent.ListeningScheduledExecutorService;
+ if ($stack2!=0) goto label0;
+ $stack5=new org.apache.bookkeeper.common.util.BoundedScheduledExecutorService;
+ $stack6=(java.util.concurrent.ScheduledThreadPoolExecutor) executor;
+ $stack5#org.apache.bookkeeper.common.util.BoundedScheduledExecutorService($stack6,0);
+ executor=$stack5;
+ label0:$stack3=new org.apache.bookkeeper.common.util.OrderedScheduler$OrderedSchedulerDecoratedThread;
+ $stack4=(com.google.common.util.concurrent.ListeningScheduledExecutorService) executor;
+ $stack3#org.apache.bookkeeper.common.util.OrderedScheduler$OrderedSchedulerDecoratedThread(this,$stack4,null);
+ return  $stack3;
+ } 
+

@@ -1,0 +1,35 @@
+static java.lang.String com.google.zxing.client.result.ResultParser:unescapeBackslash(java.lang.String @escaped)
+{
+int backslash;
+  int max;
+  java.lang.StringBuilder unescaped;
+  boolean nextIsEscaped;
+  char c;
+  int $stack10;
+  char[] $stack11;
+  java.lang.String escaped;
+escaped=@escaped;
+backslash = escaped.indexOf(92);
+ if (backslash>=0) goto label0;
+ return  escaped;
+ label0:max = escaped.length();
+ unescaped=new java.lang.StringBuilder;
+ $stack10=(max-1);
+ unescaped#java.lang.StringBuilder($stack10);
+ $stack11 = escaped.toCharArray();
+ unescaped.append($stack11,0,backslash);
+ nextIsEscaped=0;
+ label1:if (backslash>=max) goto label2;
+ c = escaped.charAt(backslash);
+ if (nextIsEscaped!=0) goto label3;
+ if (c==92) goto label4;
+ label3:unescaped.append(c);
+ nextIsEscaped=0;
+ goto label5;
+ label4:nextIsEscaped=1;
+ label5:backslash=(backslash+1);
+ goto label1;
+ label2:escaped = unescaped.toString();
+ return  escaped;
+ } 
+

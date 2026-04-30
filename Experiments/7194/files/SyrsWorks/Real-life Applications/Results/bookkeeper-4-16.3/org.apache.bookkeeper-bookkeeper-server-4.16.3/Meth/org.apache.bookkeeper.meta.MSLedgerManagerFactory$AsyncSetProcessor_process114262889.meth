@@ -1,0 +1,20 @@
+void org.apache.bookkeeper.meta.MSLedgerManagerFactory$AsyncSetProcessor:process(java.util.Set data,org.apache.bookkeeper.proto.BookkeeperInternalCallbacks$Processor processor,org.apache.zookeeper.AsyncCallback$VoidCallback finalCb,java.lang.Object @context,int successRc,int failureRc)
+{
+java.util.Iterator iter;
+  int $stack10;
+  org.apache.bookkeeper.meta.MSLedgerManagerFactory$AsyncSetProcessor$1 $stack12;
+  java.lang.Object context;
+context=@context;
+if (data==null) goto label0;
+ $stack10 = data.size();
+ if ($stack10!=0) goto label1;
+ label0:finalCb.processResult(successRc,null,context);
+ return;
+ label1:iter = data.iterator();
+ $stack12=new org.apache.bookkeeper.meta.MSLedgerManagerFactory$AsyncSetProcessor$1;
+ $stack12#org.apache.bookkeeper.meta.MSLedgerManagerFactory$AsyncSetProcessor$1(this,successRc,finalCb,failureRc,context,iter,processor);
+ context = iter.next();
+ processor.process(context,(org.apache.zookeeper.AsyncCallback$VoidCallback)$stack12);
+ return;
+ } 
+

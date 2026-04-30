@@ -1,0 +1,131 @@
+    public org.junit.validator.AnnotationValidator createAnnotationValidator(org.junit.validator.ValidateWith)
+    {
+        org.junit.validator.AnnotationValidatorFactory this;
+        org.junit.validator.ValidateWith validateWithAnnotation;
+        org.junit.validator.AnnotationValidator validator;
+        java.lang.Class clazz;
+        java.util.concurrent.ConcurrentHashMap $stack5;
+        java.lang.Object $stack6;
+        java.lang.IllegalArgumentException $stack14;
+        java.lang.StringBuilder $stack15;
+        java.lang.String $stack18;
+        java.lang.Exception $stack21;
+        java.lang.RuntimeException $stack22;
+
+        this := @this: org.junit.validator.AnnotationValidatorFactory;
+
+        validateWithAnnotation := @parameter0: org.junit.validator.ValidateWith;
+
+        $stack5 = <org.junit.validator.AnnotationValidatorFactory: java.util.concurrent.ConcurrentHashMap VALIDATORS_FOR_ANNOTATION_TYPES>;
+/*24*/
+
+        $stack6 = virtualinvoke $stack5.<java.util.concurrent.ConcurrentHashMap: java.lang.Object get(java.lang.Object)>(validateWithAnnotation);
+/*24*/
+
+        validator = (org.junit.validator.AnnotationValidator) $stack6;
+/*24*/
+
+        if validator == null goto label1;
+/*25*/
+
+        return validator;
+/*26*/
+
+     label1:
+        clazz = interfaceinvoke validateWithAnnotation.<org.junit.validator.ValidateWith: java.lang.Class value()>();
+/*29*/
+/*29*/
+
+        if clazz != null goto label2;
+/*30*/
+
+        $stack14 = new java.lang.IllegalArgumentException;
+/*31*/
+
+        $stack15 = new java.lang.StringBuilder;
+/*31*/
+
+        specialinvoke $stack15.<java.lang.StringBuilder: void <init>()>();
+/*31*/
+
+        $stack15 = virtualinvoke $stack15.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>("Can\'t create validator, value is null in annotation ");
+/*31*/
+
+        clazz = virtualinvoke validateWithAnnotation.<java.lang.Object: java.lang.Class getClass()>();
+/*31*/
+
+        $stack18 = virtualinvoke clazz.<java.lang.Class: java.lang.String getName()>();
+/*31*/
+
+        $stack15 = virtualinvoke $stack15.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>($stack18);
+/*31*/
+
+        $stack18 = virtualinvoke $stack15.<java.lang.StringBuilder: java.lang.String toString()>();
+/*31*/
+
+        specialinvoke $stack14.<java.lang.IllegalArgumentException: void <init>(java.lang.String)>($stack18);
+/*31*/
+
+        throw $stack14;
+/*31*/
+
+     label2:
+        $stack6 = virtualinvoke clazz.<java.lang.Class: java.lang.Object newInstance()>();
+/*34*/
+
+        validator = (org.junit.validator.AnnotationValidator) $stack6;
+/*34*/
+
+        $stack5 = <org.junit.validator.AnnotationValidatorFactory: java.util.concurrent.ConcurrentHashMap VALIDATORS_FOR_ANNOTATION_TYPES>;
+/*35*/
+
+        virtualinvoke $stack5.<java.util.concurrent.ConcurrentHashMap: java.lang.Object putIfAbsent(java.lang.Object,java.lang.Object)>(validateWithAnnotation, validator);
+/*35*/
+
+        $stack5 = <org.junit.validator.AnnotationValidatorFactory: java.util.concurrent.ConcurrentHashMap VALIDATORS_FOR_ANNOTATION_TYPES>;
+/*36*/
+
+        $stack6 = virtualinvoke $stack5.<java.util.concurrent.ConcurrentHashMap: java.lang.Object get(java.lang.Object)>(validateWithAnnotation);
+/*36*/
+
+        validator = (org.junit.validator.AnnotationValidator) $stack6;
+/*36*/
+
+     label3:
+        return validator;
+/*36*/
+
+     label4:
+        $stack21 := @caughtexception;
+/*26*/
+
+        $stack22 = new java.lang.RuntimeException;
+/*38*/
+
+        $stack15 = new java.lang.StringBuilder;
+/*38*/
+
+        specialinvoke $stack15.<java.lang.StringBuilder: void <init>()>();
+/*38*/
+
+        $stack15 = virtualinvoke $stack15.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>("Exception received when creating AnnotationValidator class ");
+/*38*/
+
+        $stack18 = virtualinvoke clazz.<java.lang.Class: java.lang.String getName()>();
+/*38*/
+
+        $stack15 = virtualinvoke $stack15.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>($stack18);
+/*38*/
+
+        $stack18 = virtualinvoke $stack15.<java.lang.StringBuilder: java.lang.String toString()>();
+/*38*/
+
+        specialinvoke $stack22.<java.lang.RuntimeException: void <init>(java.lang.String,java.lang.Throwable)>($stack18, $stack21);
+/*38*/
+
+        throw $stack22;
+/*38*/
+
+        catch java.lang.Exception from label2 to label3 with label4;
+    }
+

@@ -1,0 +1,42 @@
+static org.apache.rocketmq.remoting.protocol.header.SendMessageRequestHeaderV2 org.apache.rocketmq.broker.out.BrokerOuterAPI:buildSendMessageRequestHeaderV2(org.apache.rocketmq.common.message.MessageExt msg,java.lang.String @group)
+{
+org.apache.rocketmq.remoting.protocol.header.SendMessageRequestHeader requestHeader;
+  org.apache.rocketmq.remoting.protocol.header.SendMessageRequestHeaderV2 requestHeaderV2;
+  java.lang.Integer $stack6;
+  int $stack7;
+  long $stack11;
+  java.lang.Long $stack12;
+  java.util.Map $stack15;
+  java.lang.String group;
+group=@group;
+requestHeader=new org.apache.rocketmq.remoting.protocol.header.SendMessageRequestHeader;
+ requestHeader#org.apache.rocketmq.remoting.protocol.header.SendMessageRequestHeader();
+ requestHeader.setProducerGroup(group);
+ group = msg.getTopic();
+ requestHeader.setTopic(group);
+ requestHeader.setDefaultTopic("TBW102");
+ $stack6 = java.lang.Integer.valueOf(8);
+ requestHeader.setDefaultTopicQueueNums($stack6);
+ $stack7 = msg.getQueueId();
+ $stack6 = java.lang.Integer.valueOf($stack7);
+ requestHeader.setQueueId($stack6);
+ $stack7 = msg.getSysFlag();
+ $stack6 = java.lang.Integer.valueOf($stack7);
+ requestHeader.setSysFlag($stack6);
+ $stack11 = msg.getBornTimestamp();
+ $stack12 = java.lang.Long.valueOf($stack11);
+ requestHeader.setBornTimestamp($stack12);
+ $stack7 = msg.getFlag();
+ $stack6 = java.lang.Integer.valueOf($stack7);
+ requestHeader.setFlag($stack6);
+ $stack15 = msg.getProperties();
+ group = org.apache.rocketmq.common.message.MessageDecoder.messageProperties2String($stack15);
+ requestHeader.setProperties(group);
+ $stack7 = msg.getReconsumeTimes();
+ $stack6 = java.lang.Integer.valueOf($stack7);
+ requestHeader.setReconsumeTimes($stack6);
+ requestHeader.setBatch((boolean)0);
+ requestHeaderV2 = org.apache.rocketmq.remoting.protocol.header.SendMessageRequestHeaderV2.createSendMessageRequestHeaderV2(requestHeader);
+ return  requestHeaderV2;
+ } 
+

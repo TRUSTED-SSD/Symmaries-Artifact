@@ -1,0 +1,23 @@
+org.apache.bookkeeper.bookie.EntryLogMetadata org.apache.bookkeeper.bookie.storage.directentrylogger.DirectEntryLogger:getEntryLogMetadata(long entryLogId,org.apache.bookkeeper.bookie.AbstractLogCompactor$Throttler throttler)
+{
+org.apache.bookkeeper.bookie.EntryLogMetadata $stack5;
+  java.io.IOException $stack6;
+  org.apache.bookkeeper.slogger.Slogger $stack7;
+  java.lang.Long $stack9;
+  java.lang.String $stack12;
+  org.apache.bookkeeper.bookie.storage.directentrylogger.Events $stack14;
+  label0:$stack5 = this.readEntryLogIndex(entryLogId);
+ label1:return  $stack5;
+ label2:$stack6 = catch;
+ $stack7=this.slog;
+ $stack9 = java.lang.Long.valueOf(entryLogId);
+ $stack7 = $stack7.kv((java.lang.Object)"entryLogId",(java.lang.Object)$stack9);
+ $stack12 = $stack6.getMessage();
+ $stack7 = $stack7.kv((java.lang.Object)"reason",(java.lang.Object)$stack12);
+ $stack14=org.apache.bookkeeper.bookie.storage.directentrylogger.Events.READ_METADATA_FALLBACK;
+ $stack7.info((java.lang.Enum)$stack14);
+ $stack5 = this.scanEntryLogMetadata(entryLogId,throttler);
+ return  $stack5;
+ catch java.io.IOException: label0 - label1 : label2;
+} 
+

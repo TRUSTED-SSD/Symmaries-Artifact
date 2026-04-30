@@ -1,0 +1,82 @@
+    public org.junit.runner.Runner getRunner()
+    {
+        org.junit.internal.requests.ClassRequest this;
+        java.lang.Object l1, $stack5;
+        java.lang.Throwable l2;
+        org.junit.runner.Runner $stack3;
+        org.junit.internal.builders.AllDefaultPossibilitiesBuilder $stack9;
+        boolean $stack10;
+        java.lang.Class $stack11;
+
+        this := @this: org.junit.internal.requests.ClassRequest;
+
+        $stack3 = this.<org.junit.internal.requests.ClassRequest: org.junit.runner.Runner runner>;
+/*30*/
+
+        if $stack3 != null goto label6;
+/*30*/
+
+        $stack5 = this.<org.junit.internal.requests.ClassRequest: java.lang.Object runnerLock>;
+/*31*/
+
+        l1 = $stack5;
+/*31*/
+
+        entermonitor $stack5;
+/*31*/
+
+     label1:
+        $stack3 = this.<org.junit.internal.requests.ClassRequest: org.junit.runner.Runner runner>;
+/*32*/
+
+        if $stack3 != null goto label2;
+/*32*/
+
+        $stack9 = new org.junit.internal.builders.AllDefaultPossibilitiesBuilder;
+/*33*/
+
+        $stack10 = this.<org.junit.internal.requests.ClassRequest: boolean canUseSuiteMethod>;
+/*33*/
+
+        specialinvoke $stack9.<org.junit.internal.builders.AllDefaultPossibilitiesBuilder: void <init>(boolean)>($stack10);
+/*33*/
+
+        $stack11 = this.<org.junit.internal.requests.ClassRequest: java.lang.Class fTestClass>;
+/*33*/
+
+        $stack3 = virtualinvoke $stack9.<org.junit.internal.builders.AllDefaultPossibilitiesBuilder: org.junit.runner.Runner safeRunnerForClass(java.lang.Class)>($stack11);
+/*33*/
+
+        this.<org.junit.internal.requests.ClassRequest: org.junit.runner.Runner runner> = $stack3;
+/*33*/
+
+     label2:
+        exitmonitor $stack5;
+/*35*/
+
+     label3:
+        goto label6;
+/*35*/
+
+     label4:
+        l2 := @caughtexception;
+/*35*/
+
+        exitmonitor $stack5;
+/*35*/
+
+     label5:
+        throw l2;
+/*35*/
+
+     label6:
+        $stack3 = this.<org.junit.internal.requests.ClassRequest: org.junit.runner.Runner runner>;
+/*37*/
+
+        return $stack3;
+/*37*/
+
+        catch java.lang.Throwable from label1 to label3 with label4;
+        catch java.lang.Throwable from label4 to label5 with label4;
+    }
+

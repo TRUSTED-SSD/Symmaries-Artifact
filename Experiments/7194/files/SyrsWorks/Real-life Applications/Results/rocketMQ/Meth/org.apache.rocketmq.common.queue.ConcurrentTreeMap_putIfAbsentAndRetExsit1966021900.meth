@@ -1,0 +1,49 @@
+java.lang.Object org.apache.rocketmq.common.queue.ConcurrentTreeMap:putIfAbsentAndRetExsit(java.lang.Object @key,java.lang.Object value)
+{
+java.lang.Object exsit;
+  java.lang.Throwable l5;
+  java.util.concurrent.locks.ReentrantLock $stack6;
+  org.apache.rocketmq.common.queue.RoundQueue $stack7;
+  boolean $stack8;
+  java.util.TreeMap $stack9;
+  java.lang.StringBuilder $stack14;
+  org.apache.rocketmq.logging.org.slf4j.Logger $stack15;
+  java.lang.String $stack18;
+  java.lang.Object key;
+key=@key;
+$stack6=this.lock;
+ $stack6.lock();
+ label0:$stack7=this.roundQueue;
+ $stack8 = $stack7.put(key);
+ if ($stack8==0) goto label1;
+ $stack9=this.tree;
+ exsit = $stack9.get(key);
+ if (null!=exsit) goto label2;
+ $stack9=this.tree;
+ $stack9.put(key,value);
+ exsit=value;
+ label2:$stack15=org.apache.rocketmq.common.queue.ConcurrentTreeMap.log;
+ $stack14=new java.lang.StringBuilder;
+ $stack14#java.lang.StringBuilder();
+ $stack14 = $stack14.append("putIfAbsentAndRetExsit success. ");
+ $stack14 = $stack14.append(key);
+ $stack18 = $stack14.toString();
+ $stack15.warn($stack18);
+ key=exsit;
+ label3:$stack6=this.lock;
+ $stack6.unlock();
+ return  exsit;
+ label1:$stack9=this.tree;
+ key = $stack9.get(key);
+ label4:$stack6=this.lock;
+ $stack6.unlock();
+ return  key;
+ label5:l5 = catch;
+ label6:$stack6=this.lock;
+ $stack6.unlock();
+ throw l5;
+ catch java.lang.Throwable: label0 - label3 : label5;
+catch java.lang.Throwable: label1 - label4 : label5;
+catch java.lang.Throwable: label5 - label6 : label5;
+} 
+

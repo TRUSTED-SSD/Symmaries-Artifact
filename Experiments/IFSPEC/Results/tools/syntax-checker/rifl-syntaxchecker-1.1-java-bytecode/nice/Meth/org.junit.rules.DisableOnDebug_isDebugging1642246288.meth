@@ -1,0 +1,23 @@
+static boolean org.junit.rules.DisableOnDebug:isDebugging(java.util.List arguments)
+{
+java.util.Iterator i$;
+  java.lang.String argument;
+  boolean $stack4;
+  java.lang.Object $stack5;
+  java.lang.String $stack6;
+  i$ = arguments.iterator();
+ label0:$stack4 = i$.hasNext();
+ if ($stack4==0) goto label1;
+ $stack5 = i$.next();
+ argument=(java.lang.String) $stack5;
+ $stack6="-Xdebug";
+ $stack4 = $stack6.equals((java.lang.Object)argument);
+ if ($stack4==0) goto label2;
+ return  1;
+ label2:$stack4 = argument.startsWith("-agentlib:jdwp");
+ if ($stack4==0) goto label3;
+ return  1;
+ label3:goto label0;
+ label1:return  0;
+ } 
+

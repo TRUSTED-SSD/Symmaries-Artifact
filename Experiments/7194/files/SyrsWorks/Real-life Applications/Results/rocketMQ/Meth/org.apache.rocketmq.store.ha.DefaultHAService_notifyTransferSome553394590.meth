@@ -1,0 +1,23 @@
+void org.apache.rocketmq.store.ha.DefaultHAService:notifyTransferSome(long offset)
+{
+long value;
+  boolean ok;
+  java.util.concurrent.atomic.AtomicLong $stack6;
+  byte $stack8;
+  org.apache.rocketmq.store.ha.GroupTransferService $stack15;
+  $stack6=this.push2SlaveMaxOffset;
+ value = $stack6.get();
+ label0:$stack8=(offset cmp value);
+ if ($stack8<=0) goto label1;
+ $stack6=this.push2SlaveMaxOffset;
+ ok = $stack6.compareAndSet(value,offset);
+ if (ok==0) goto label2;
+ $stack15=this.groupTransferService;
+ $stack15.notifyTransferSome();
+ goto label1;
+ label2:$stack6=this.push2SlaveMaxOffset;
+ value = $stack6.get();
+ goto label0;
+ label1:return;
+ } 
+

@@ -1,0 +1,49 @@
+static com.google.zxing.common.BitArray com.google.zxing.aztec.encoder.Encoder:stuffBits(com.google.zxing.common.BitArray bits,int wordSize)
+{
+com.google.zxing.common.BitArray out;
+  int n;
+  int mask;
+  int i;
+  int word;
+  int j;
+  int $stack20;
+  boolean $stack27;
+  out=new com.google.zxing.common.BitArray;
+ out#com.google.zxing.common.BitArray();
+ n = bits.getSize();
+ mask=(1<<wordSize);
+ mask=(mask-2);
+ i=0;
+ label0:if (i>=n) goto label1;
+ word=0;
+ j=0;
+ label2:if (j>=wordSize) goto label3;
+ $stack20=(i+j);
+ if ($stack20>=n) goto label4;
+ $stack20=(i+j);
+ $stack27 = bits.get($stack20);
+ if ($stack27==0) goto label5;
+ label4:$stack20=(wordSize-1);
+ $stack20=($stack20-j);
+ $stack20=(1<<$stack20);
+ word=(word | $stack20);
+ label5:j=(j+1);
+ goto label2;
+ label3:j=(word & mask);
+ if (j!=mask) goto label6;
+ word=(word & mask);
+ out.appendBits(word,wordSize);
+ i=(i+-1);
+ goto label7;
+ label6:j=(word & mask);
+ if (j!=0) goto label8;
+ word=(word | 1);
+ out.appendBits(word,wordSize);
+ i=(i+-1);
+ goto label7;
+ label8:out.appendBits(word,wordSize);
+ label7:i=(i+wordSize);
+ goto label0;
+ label1:return  out;
+ } 
+

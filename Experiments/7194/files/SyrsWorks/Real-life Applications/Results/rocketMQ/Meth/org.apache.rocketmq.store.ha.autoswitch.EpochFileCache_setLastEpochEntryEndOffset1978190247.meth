@@ -1,0 +1,36 @@
+void org.apache.rocketmq.store.ha.autoswitch.EpochFileCache:setLastEpochEntryEndOffset(long endOffset)
+{
+org.apache.rocketmq.remoting.protocol.EpochEntry lastEntry;
+  java.lang.Throwable l4;
+  java.util.concurrent.locks.Lock $stack5;
+  java.util.TreeMap $stack6;
+  boolean $stack7;
+  java.util.Map$Entry $stack10;
+  java.lang.Object $stack11;
+  long $stack12;
+  byte $stack13;
+  $stack5=this.writeLock;
+ $stack5.lock();
+ label0:$stack6=this.epochMap;
+ $stack7 = $stack6.isEmpty();
+ if ($stack7!=0) goto label1;
+ $stack6=this.epochMap;
+ $stack10 = $stack6.lastEntry();
+ $stack11 = $stack10.getValue();
+ lastEntry=(org.apache.rocketmq.remoting.protocol.EpochEntry) $stack11;
+ $stack12 = lastEntry.getStartOffset();
+ $stack13=($stack12 cmp endOffset);
+ if ($stack13>0) goto label1;
+ lastEntry.setEndOffset(endOffset);
+ label1:$stack5=this.writeLock;
+ $stack5.unlock();
+ goto label2;
+ label3:l4 = catch;
+ label4:$stack5=this.writeLock;
+ $stack5.unlock();
+ throw l4;
+ label2:return;
+ catch java.lang.Throwable: label0 - label1 : label3;
+catch java.lang.Throwable: label3 - label4 : label3;
+} 
+

@@ -1,0 +1,29 @@
+void org.apache.bookkeeper.proto.PerChannelBookieClient$AddCompletion:handleResponse(long ledgerId,long entryId,org.apache.bookkeeper.proto.BookkeeperProtocol$StatusCode status)
+{
+org.slf4j.Logger $stack7;
+  boolean $stack8;
+  org.apache.bookkeeper.proto.PerChannelBookieClient $stack10;
+  java.lang.Object $stack11;
+  org.apache.bookkeeper.net.BookieId $stack12;
+  java.lang.Object[] $stack13;
+  java.lang.Long $stack15;
+  int $stack23;
+  $stack7=org.apache.bookkeeper.proto.PerChannelBookieClient.LOG;
+ $stack8 = $stack7.isDebugEnabled();
+ if ($stack8==0) goto label0;
+ $stack13=new java.lang.Object[4];
+ $stack13[0]="ledger";
+ $stack15 = java.lang.Long.valueOf(ledgerId);
+ $stack13[1]=$stack15;
+ $stack13[2]="entry";
+ $stack15 = java.lang.Long.valueOf(entryId);
+ $stack13[3]=$stack15;
+ this.logResponse(status,$stack13);
+ label0:$stack23 = this.convertStatus(status,-12);
+ $stack10=this.this$0;
+ $stack12=$stack10.bookieId;
+ $stack11=this.ctx;
+ this.writeComplete($stack23,ledgerId,entryId,$stack12,$stack11);
+ return;
+ } 
+

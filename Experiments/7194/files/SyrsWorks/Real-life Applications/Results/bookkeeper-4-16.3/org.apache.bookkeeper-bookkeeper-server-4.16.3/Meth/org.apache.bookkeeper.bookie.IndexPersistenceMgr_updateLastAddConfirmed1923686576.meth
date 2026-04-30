@@ -1,0 +1,20 @@
+long org.apache.bookkeeper.bookie.IndexPersistenceMgr:updateLastAddConfirmed(long ledgerId,long lac)
+{
+org.apache.bookkeeper.bookie.FileInfoBackingCache$CachedFileInfo fi;
+  java.lang.Throwable l8;
+  java.lang.Long $stack9;
+  fi=null;
+ label0:$stack9 = java.lang.Long.valueOf(ledgerId);
+ fi = this.getFileInfo($stack9,null);
+ ledgerId = fi.setLastAddConfirmed(lac);
+ label1:if (null==fi) goto label2;
+ fi.release();
+ label2:return  ledgerId;
+ label3:l8 = catch;
+ label4:if (null==fi) goto label5;
+ fi.release();
+ label5:throw l8;
+ catch java.lang.Throwable: label0 - label1 : label3;
+catch java.lang.Throwable: label3 - label4 : label3;
+} 
+

@@ -1,0 +1,43 @@
+void javax.security.auth.Subject$SecureSet$1:remove()
+{
+java.lang.SecurityManager r1;
+  javax.security.auth.Subject$SecureSet $r2;
+  javax.security.auth.Subject $r3;
+  boolean $z0;
+  javax.security.auth.Subject$SecureSet $r4;
+  int $i0;
+  javax.security.auth.AuthPermission $r5;
+  javax.security.auth.AuthPermission $r6;
+  javax.security.auth.AuthPermission $r7;
+  java.lang.IllegalStateException $r8;
+  java.lang.String $r9;
+  java.util.ListIterator $r10;
+  $r2=this.this$0;
+ $r3=$r2.subject;
+ $z0 = $r3.isReadOnly();
+ if ($z0==0) goto label0;
+ $r8=new java.lang.IllegalStateException;
+ $r9 = sun.security.util.ResourcesMgr.getString("Subject.is.read.only");
+ $r8#java.lang.IllegalStateException:init($r9);
+ throw $r8;
+ label0:r1 = java.lang.System.getSecurityManager();
+ if (r1==null) goto label1;
+ $r4=this.this$0;
+ $i0 = javax.security.auth.Subject$SecureSet.access$000($r4);
+ switch [$i0]
+if 0 goto label2;
+if 1 goto label3;
+goto label4;
+ label2:$r6=javax.security.auth.Subject$AuthPermissionHolder.MODIFY_PRINCIPALS_PERMISSION;
+ r1.checkPermission((java.security.Permission)$r6);
+ goto label1;
+ label3:$r5=javax.security.auth.Subject$AuthPermissionHolder.MODIFY_PUBLIC_CREDENTIALS_PERMISSION;
+ r1.checkPermission((java.security.Permission)$r5);
+ goto label1;
+ label4:$r7=javax.security.auth.Subject$AuthPermissionHolder.MODIFY_PRIVATE_CREDENTIALS_PERMISSION;
+ r1.checkPermission((java.security.Permission)$r7);
+ label1:$r10=this.i;
+ $r10.remove();
+ return;
+ }  
+

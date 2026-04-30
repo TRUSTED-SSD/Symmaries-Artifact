@@ -1,0 +1,47 @@
+org.apache.rocketmq.remoting.protocol.body.ProducerConnection org.apache.rocketmq.tools.admin.DefaultMQAdminExtImpl:examineProducerConnectionInfo(java.lang.String producerGroup,java.lang.String @topic)
+{
+org.apache.rocketmq.remoting.protocol.body.ProducerConnection result;
+  java.util.List brokers;
+  org.apache.rocketmq.remoting.protocol.route.BrokerData brokerData;
+  org.apache.rocketmq.remoting.protocol.route.TopicRouteData $stack8;
+  java.util.Random $stack10;
+  int $stack11;
+  java.lang.Object $stack13;
+  java.util.HashSet $stack14;
+  boolean $stack15;
+  org.apache.rocketmq.logging.org.slf4j.Logger $stack16;
+  org.apache.rocketmq.client.exception.MQClientException $stack17;
+  org.apache.rocketmq.client.impl.factory.MQClientInstance $stack21;
+  org.apache.rocketmq.client.impl.MQClientAPIImpl $stack22;
+  long $stack23;
+  java.lang.String topic;
+topic=@topic;
+result=new org.apache.rocketmq.remoting.protocol.body.ProducerConnection;
+ result#org.apache.rocketmq.remoting.protocol.body.ProducerConnection();
+ $stack8 = this.examineTopicRouteInfo(topic);
+ brokers = $stack8.getBrokerDatas();
+ $stack10=this.random;
+ $stack11 = brokers.size();
+ $stack11 = $stack10.nextInt($stack11);
+ $stack13 = brokers.get($stack11);
+ brokerData=(org.apache.rocketmq.remoting.protocol.route.BrokerData) $stack13;
+ topic=null;
+ if (brokerData==null) goto label0;
+ topic = brokerData.selectBrokerAddr();
+ $stack15 = org.apache.commons.lang3.StringUtils.isNotBlank((java.lang.CharSequence)topic);
+ if ($stack15==0) goto label0;
+ $stack21=this.mqClientInstance;
+ $stack22 = $stack21.getMQClientAPIImpl();
+ $stack23=this.timeoutMillis;
+ result = $stack22.getProducerConnectionList(topic,producerGroup,$stack23);
+ label0:$stack14 = result.getConnectionSet();
+ $stack15 = $stack14.isEmpty();
+ if ($stack15==0) goto label1;
+ $stack16=this.logger;
+ $stack16.warn("the producer group not online. brokerAddr={}, group={}",(java.lang.Object)topic,(java.lang.Object)producerGroup);
+ $stack17=new org.apache.rocketmq.client.exception.MQClientException;
+ $stack17#org.apache.rocketmq.client.exception.MQClientException("Not found the producer group connection",null);
+ throw $stack17;
+ label1:return  result;
+ } 
+

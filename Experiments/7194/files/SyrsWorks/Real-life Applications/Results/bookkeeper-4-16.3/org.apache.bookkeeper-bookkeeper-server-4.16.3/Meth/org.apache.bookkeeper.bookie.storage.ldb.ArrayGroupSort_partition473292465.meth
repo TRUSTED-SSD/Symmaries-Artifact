@@ -1,0 +1,21 @@
+static int org.apache.bookkeeper.bookie.storage.ldb.ArrayGroupSort:partition(long[] array,int low,int high)
+{
+int mid;
+  boolean $stack9;
+  mid=(high-low);
+ mid=(mid/2);
+ mid = org.apache.bookkeeper.bookie.storage.ldb.ArrayGroupSort.alignGroup(mid);
+ mid=(low+mid);
+ org.apache.bookkeeper.bookie.storage.ldb.ArrayGroupSort.swap(array,mid,high);
+ mid=low;
+ label0:if (low>=high) goto label1;
+ $stack9 = org.apache.bookkeeper.bookie.storage.ldb.ArrayGroupSort.isLess(array,low,high);
+ if ($stack9==0) goto label2;
+ org.apache.bookkeeper.bookie.storage.ldb.ArrayGroupSort.swap(array,low,mid);
+ mid=(mid+4);
+ label2:low=(low+4);
+ goto label0;
+ label1:org.apache.bookkeeper.bookie.storage.ldb.ArrayGroupSort.swap(array,mid,high);
+ return  mid;
+ } 
+

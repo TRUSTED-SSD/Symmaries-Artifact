@@ -1,0 +1,41 @@
+org.apache.rocketmq.common.message.MessageExtBrokerInner org.apache.rocketmq.broker.transaction.queue.TransactionalMessageBridge:renewHalfMessageInner(org.apache.rocketmq.common.message.MessageExt msgExt)
+{
+org.apache.rocketmq.common.message.MessageExtBrokerInner msgInner;
+  java.lang.String $stack4;
+  byte[] $stack5;
+  int $stack6;
+  long $stack11;
+  java.util.Map $stack12;
+  java.net.SocketAddress $stack16;
+  msgInner=new org.apache.rocketmq.common.message.MessageExtBrokerInner;
+ msgInner#org.apache.rocketmq.common.message.MessageExtBrokerInner();
+ $stack4 = msgExt.getTopic();
+ msgInner.setTopic($stack4);
+ $stack5 = msgExt.getBody();
+ msgInner.setBody($stack5);
+ $stack6 = msgExt.getQueueId();
+ msgInner.setQueueId($stack6);
+ $stack4 = msgExt.getMsgId();
+ msgInner.setMsgId($stack4);
+ $stack6 = msgExt.getSysFlag();
+ msgInner.setSysFlag($stack6);
+ $stack4 = msgExt.getTags();
+ msgInner.setTags($stack4);
+ $stack4 = msgInner.getTags();
+ $stack11 = org.apache.rocketmq.common.message.MessageExtBrokerInner.tagsString2tagsCode($stack4);
+ msgInner.setTagsCode($stack11);
+ $stack12 = msgExt.getProperties();
+ org.apache.rocketmq.common.message.MessageAccessor.setProperties((org.apache.rocketmq.common.message.Message)msgInner,$stack12);
+ $stack12 = msgExt.getProperties();
+ $stack4 = org.apache.rocketmq.common.message.MessageDecoder.messageProperties2String($stack12);
+ msgInner.setPropertiesString($stack4);
+ $stack11 = msgExt.getBornTimestamp();
+ msgInner.setBornTimestamp($stack11);
+ $stack16 = msgExt.getBornHost();
+ msgInner.setBornHost($stack16);
+ $stack16 = msgExt.getStoreHost();
+ msgInner.setStoreHost($stack16);
+ msgInner.setWaitStoreMsgOK((boolean)0);
+ return  msgInner;
+ } 
+

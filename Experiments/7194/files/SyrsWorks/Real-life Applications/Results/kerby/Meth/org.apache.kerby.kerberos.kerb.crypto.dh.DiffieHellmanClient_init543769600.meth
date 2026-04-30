@@ -1,0 +1,22 @@
+javax.crypto.interfaces.DHPublicKey org.apache.kerby.kerberos.kerb.crypto.dh.DiffieHellmanClient:init(javax.crypto.spec.DHParameterSpec dhParamSpec)
+{
+java.security.KeyPairGenerator clientKpairGen;
+  java.security.KeyPair clientKpair;
+  javax.crypto.KeyAgreement $stack6;
+  java.security.PrivateKey $stack8;
+  java.security.PublicKey $stack9;
+  javax.crypto.interfaces.DHPublicKey $stack10;
+  this.dhParameterSpec=dhParamSpec;
+ clientKpairGen = java.security.KeyPairGenerator.getInstance("DH");
+ clientKpairGen.initialize((java.security.spec.AlgorithmParameterSpec)dhParamSpec);
+ clientKpair = clientKpairGen.generateKeyPair();
+ $stack6 = javax.crypto.KeyAgreement.getInstance("DH");
+ this.clientKeyAgree=$stack6;
+ $stack6=this.clientKeyAgree;
+ $stack8 = clientKpair.getPrivate();
+ $stack6.init((java.security.Key)$stack8);
+ $stack9 = clientKpair.getPublic();
+ $stack10=(javax.crypto.interfaces.DHPublicKey) $stack9;
+ return  $stack10;
+ } 
+

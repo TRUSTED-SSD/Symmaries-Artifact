@@ -1,0 +1,8 @@
+org.apache.rocketmq.store.PutMessageResult org.apache.rocketmq.broker.transaction.queue.TransactionalMessageServiceImpl:putBackToHalfQueueReturnResult (
+  org.apache.rocketmq.common.message.MessageExt messageExt) {
+  guard = tt;
+  ret(level()) = level(messageExt) ⊔ level(this) ⊔ obj_level(messageExt) ⊔ obj_level(this);
+  ret(obj_level()) = level(messageExt) ⊔ level(this) ⊔ obj_level(messageExt) ⊔ obj_level(this);
+  ret(obj_level(messageExt)) = level(messageExt) ⊔ level(this) ⊔ obj_level(messageExt) ⊔ obj_level(this);
+  ret(obj_level(this)) = level(messageExt) ⊔ level(this) ⊔ obj_level(messageExt) ⊔ obj_level(this);
+}

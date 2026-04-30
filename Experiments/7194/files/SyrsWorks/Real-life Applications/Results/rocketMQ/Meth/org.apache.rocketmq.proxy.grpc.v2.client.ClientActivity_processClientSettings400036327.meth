@@ -1,0 +1,30 @@
+apache.rocketmq.v2.TelemetryCommand org.apache.rocketmq.proxy.grpc.v2.client.ClientActivity:processClientSettings(org.apache.rocketmq.proxy.common.ProxyContext ctx,apache.rocketmq.v2.TelemetryCommand @request)
+{
+java.lang.String clientId;
+  apache.rocketmq.v2.Settings settings;
+  org.apache.rocketmq.proxy.grpc.v2.common.GrpcClientSettingsManager $stack6;
+  apache.rocketmq.v2.TelemetryCommand$Builder $stack10;
+  org.apache.rocketmq.proxy.grpc.v2.common.ResponseBuilder $stack11;
+  apache.rocketmq.v2.Code $stack12;
+  apache.rocketmq.v2.Code $stack13;
+  apache.rocketmq.v2.Status $stack15;
+  apache.rocketmq.v2.TelemetryCommand request;
+request=@request;
+clientId = ctx.getClientID();
+ $stack6=this.grpcClientSettingsManager;
+ settings = request.getSettings();
+ $stack6.updateClientSettings(clientId,settings);
+ $stack6=this.grpcClientSettingsManager;
+ settings = $stack6.getClientSettings(ctx);
+ $stack10 = apache.rocketmq.v2.TelemetryCommand.newBuilder();
+ $stack11 = org.apache.rocketmq.proxy.grpc.v2.common.ResponseBuilder.getInstance();
+ $stack13=apache.rocketmq.v2.Code.OK;
+ $stack12=apache.rocketmq.v2.Code.OK;
+ clientId = $stack12.name();
+ $stack15 = $stack11.buildStatus($stack13,clientId);
+ $stack10 = $stack10.setStatus($stack15);
+ $stack10 = $stack10.setSettings(settings);
+ request = $stack10.build();
+ return  request;
+ } 
+

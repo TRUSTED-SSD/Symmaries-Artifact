@@ -1,0 +1,33 @@
+static void org.apache.bookkeeper.slogger.ConsoleSlogger:quotedAppend(java.lang.StringBuilder sb,java.lang.String str)
+{
+int i;
+  char c;
+  int $stack5;
+  java.lang.Object[] $stack11;
+  java.lang.Integer $stack14;
+  java.lang.String $stack15;
+  sb.append((char)34);
+ i=0;
+ label0:$stack5 = str.length();
+ if (i>=$stack5) goto label1;
+ c = str.charAt(i);
+ if (c!=92) goto label2;
+ sb.append("\\\\");
+ goto label3;
+ label2:if (c!=34) goto label4;
+ sb.append("\\\"");
+ goto label3;
+ label4:if (c>=32) goto label5;
+ $stack11=new java.lang.Object[1];
+ $stack14 = java.lang.Integer.valueOf((int)c);
+ $stack11[0]=$stack14;
+ $stack15 = java.lang.String.format("\\u%04X",$stack11);
+ sb.append($stack15);
+ goto label3;
+ label5:sb.append(c);
+ label3:i=(i+1);
+ goto label0;
+ label1:sb.append((char)34);
+ return;
+ } 
+

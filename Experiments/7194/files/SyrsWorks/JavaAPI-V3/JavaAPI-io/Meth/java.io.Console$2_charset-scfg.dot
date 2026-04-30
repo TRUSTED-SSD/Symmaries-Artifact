@@ -1,0 +1,24 @@
+digraph G {
+  node [shape=box, ];
+  "pc0_js1" [label="〈$r1 = java.io.Console.access$600 (), js1〉\n\
+tt", ];
+  "pc1_js1" [label="〈$r2 = java.io.Console.access$800 ($r1), js1〉\n\
+tt", ];
+  "pc2_js1" [label="〈return $r2, js1〉", ];
+  "pc3_js1" [label="〈sink, js1〉\n\
+obj_level(this) ⊑ ret(obj_level(this))' ∧ (ϕ ≠ S2 ∨ obj_level($r2) ⊑ ret(obj_level())' ∧ pc ⊔ level($r2) ⊑ ret(level())' ∧ (ret(this.><)' ∨ ¬$r2.><this))",
+             ];
+  
+  
+  "pc0_js1" -> "pc1_js1" [label="tt,\n\
+{level($r1) := pc,\n\
+ obj_level($r1) := ⊥}",
+                          ];
+  "pc1_js1" -> "pc2_js1" [label="tt,\n\
+{level($r2) := pc,\n\
+ obj_level($r2) := ⊥}",
+                          ];
+  "pc2_js1" -> "pc3_js1" [label="tt,\n\
+{ϕ := S2}", ];
+  
+  }

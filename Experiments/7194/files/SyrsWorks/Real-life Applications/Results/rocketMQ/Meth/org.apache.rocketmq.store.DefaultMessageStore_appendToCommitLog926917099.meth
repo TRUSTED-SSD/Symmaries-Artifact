@@ -1,0 +1,27 @@
+boolean org.apache.rocketmq.store.DefaultMessageStore:appendToCommitLog(long startOffset,byte[] data,int dataStart,int dataLength)
+{
+boolean result;
+  org.apache.rocketmq.store.CommitLog $stack8;
+  org.apache.rocketmq.logging.org.slf4j.Logger $stack10;
+  java.lang.Long $stack12;
+  java.lang.Integer $stack14;
+  org.apache.rocketmq.store.DefaultMessageStore$ReputMessageService $stack15;
+  result=this.shutdown;
+ if (result==0) goto label0;
+ $stack10=org.apache.rocketmq.store.DefaultMessageStore.LOGGER;
+ $stack10.warn("message store has shutdown, so appendToCommitLog is forbidden");
+ return  0;
+ label0:$stack8=this.commitLog;
+ result = $stack8.appendData(startOffset,data,dataStart,dataLength);
+ if (result==0) goto label1;
+ $stack15=this.reputMessageService;
+ $stack15.wakeup();
+ goto label2;
+ label1:$stack10=org.apache.rocketmq.store.DefaultMessageStore.LOGGER;
+ $stack12 = java.lang.Long.valueOf(startOffset);
+ dataStart=#data;
+ $stack14 = java.lang.Integer.valueOf(dataStart);
+ $stack10.error("DefaultMessageStore#appendToCommitLog: failed to append data to commitLog, physical offset={}, data length={}",(java.lang.Object)$stack12,(java.lang.Object)$stack14);
+ label2:return  result;
+ } 
+

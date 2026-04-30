@@ -1,0 +1,17 @@
+long org.apache.bookkeeper.conf.ClientConfiguration:getTimeoutMonitorIntervalSec()
+{
+int minTimeout;
+  int $stack3;
+  long $stack10;
+  minTimeout = this.getAddEntryQuorumTimeout();
+ $stack3 = this.getAddEntryTimeout();
+ minTimeout = java.lang.Math.min(minTimeout,$stack3);
+ $stack3 = this.getReadEntryTimeout();
+ minTimeout = java.lang.Math.min(minTimeout,$stack3);
+ minTimeout=(minTimeout/2);
+ minTimeout = java.lang.Math.max(minTimeout,1);
+ $stack10=(long) minTimeout;
+ $stack10 = this.getLong("timeoutMonitorIntervalSec",$stack10);
+ return  $stack10;
+ } 
+

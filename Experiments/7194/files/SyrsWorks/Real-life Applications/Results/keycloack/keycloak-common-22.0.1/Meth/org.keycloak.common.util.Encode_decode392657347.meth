@@ -1,0 +1,48 @@
+static org.keycloak.common.util.MultivaluedHashMap org.keycloak.common.util.Encode:decode(org.keycloak.common.util.MultivaluedHashMap map)
+{
+org.keycloak.common.util.MultivaluedHashMap decoded;
+  java.util.Iterator l2;
+  java.util.Map$Entry entry;
+  java.util.List values;
+  java.util.Iterator l5;
+  java.lang.String value;
+  java.util.Set $stack9;
+  boolean $stack11;
+  java.lang.Object $stack12;
+  java.lang.String $stack19;
+  java.lang.String $stack20;
+  java.io.UnsupportedEncodingException $stack25;
+  java.lang.RuntimeException $stack26;
+  decoded=new org.keycloak.common.util.MultivaluedHashMap;
+ decoded#org.keycloak.common.util.MultivaluedHashMap();
+ $stack9 = map.entrySet();
+ l2 = $stack9.iterator();
+ label0:$stack11 = l2.hasNext();
+ if ($stack11==0) goto label1;
+ $stack12 = l2.next();
+ entry=(java.util.Map$Entry) $stack12;
+ $stack12 = entry.getValue();
+ values=(java.util.List) $stack12;
+ l5 = values.iterator();
+ label2:$stack11 = l5.hasNext();
+ if ($stack11==0) goto label3;
+ $stack12 = l5.next();
+ value=(java.lang.String) $stack12;
+ label4:$stack12 = entry.getKey();
+ $stack20=(java.lang.String) $stack12;
+ $stack19=org.keycloak.common.util.Encode.UTF_8;
+ $stack19 = java.net.URLDecoder.decode($stack20,$stack19);
+ $stack20=org.keycloak.common.util.Encode.UTF_8;
+ value = java.net.URLDecoder.decode(value,$stack20);
+ decoded.add((java.lang.Object)$stack19,(java.lang.Object)value);
+ label5:goto label6;
+ label7:$stack25 = catch;
+ $stack26=new java.lang.RuntimeException;
+ $stack26#java.lang.RuntimeException((java.lang.Throwable)$stack25);
+ throw $stack26;
+ label6:goto label2;
+ label3:goto label0;
+ label1:return  decoded;
+ catch java.io.UnsupportedEncodingException: label4 - label5 : label7;
+} 
+

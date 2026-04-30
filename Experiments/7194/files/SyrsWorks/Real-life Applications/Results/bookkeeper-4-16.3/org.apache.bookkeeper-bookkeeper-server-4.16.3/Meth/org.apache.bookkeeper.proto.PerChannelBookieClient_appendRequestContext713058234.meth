@@ -1,0 +1,35 @@
+static org.apache.bookkeeper.proto.BookkeeperProtocol$Request$Builder org.apache.bookkeeper.proto.PerChannelBookieClient:appendRequestContext(org.apache.bookkeeper.proto.BookkeeperProtocol$Request$Builder builder)
+{
+java.util.Map mdcContextMap;
+  java.util.Iterator l2;
+  java.util.Map$Entry kv;
+  org.apache.bookkeeper.proto.BookkeeperProtocol$ContextPair context;
+  boolean $stack6;
+  java.util.Set $stack7;
+  java.lang.Object $stack10;
+  org.apache.bookkeeper.proto.BookkeeperProtocol$ContextPair$Builder $stack11;
+  java.lang.String $stack13;
+  mdcContextMap = org.slf4j.MDC.getCopyOfContextMap();
+ if (mdcContextMap==null) goto label0;
+ $stack6 = mdcContextMap.isEmpty();
+ if ($stack6==0) goto label1;
+ label0:return  builder;
+ label1:$stack7 = mdcContextMap.entrySet();
+ l2 = $stack7.iterator();
+ label2:$stack6 = l2.hasNext();
+ if ($stack6==0) goto label3;
+ $stack10 = l2.next();
+ kv=(java.util.Map$Entry) $stack10;
+ $stack11 = org.apache.bookkeeper.proto.BookkeeperProtocol$ContextPair.newBuilder();
+ $stack10 = kv.getKey();
+ $stack13=(java.lang.String) $stack10;
+ $stack11 = $stack11.setKey($stack13);
+ $stack10 = kv.getValue();
+ $stack13=(java.lang.String) $stack10;
+ $stack11 = $stack11.setValue($stack13);
+ context = $stack11.build();
+ builder.addRequestContext(context);
+ goto label2;
+ label3:return  builder;
+ } 
+

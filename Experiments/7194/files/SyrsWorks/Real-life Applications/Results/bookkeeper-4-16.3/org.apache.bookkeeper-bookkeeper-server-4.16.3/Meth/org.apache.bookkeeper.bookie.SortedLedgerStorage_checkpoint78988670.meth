@@ -1,0 +1,16 @@
+void org.apache.bookkeeper.bookie.SortedLedgerStorage:checkpoint(org.apache.bookkeeper.bookie.CheckpointSource$Checkpoint checkpoint$$)
+{
+long numBytesFlushed;
+  org.apache.bookkeeper.bookie.EntryMemTable $stack4;
+  org.apache.bookkeeper.bookie.InterleavedLedgerStorage $stack6;
+  org.apache.bookkeeper.bookie.DefaultEntryLogger $stack7;
+  $stack4=this.memTable;
+ numBytesFlushed = $stack4.flush((org.apache.bookkeeper.bookie.SkipListFlusher)this,checkpoint$$);
+ $stack6=this.interleavedLedgerStorage;
+ $stack7 = $stack6.getEntryLogger();
+ $stack7.prepareSortedLedgerStorageCheckpoint(numBytesFlushed);
+ $stack6=this.interleavedLedgerStorage;
+ $stack6.checkpoint(checkpoint$$);
+ return;
+ } 
+

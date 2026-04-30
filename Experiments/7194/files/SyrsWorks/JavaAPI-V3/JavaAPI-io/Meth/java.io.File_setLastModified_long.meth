@@ -1,0 +1,26 @@
+boolean java.io.File:setLastModified(long l0)
+{
+java.lang.SecurityManager r1;
+  byte $b1;
+  boolean $z0;
+  java.io.FileSystem $r2;
+  boolean $z1;
+  java.lang.String $r3;
+  java.lang.IllegalArgumentException $r4;
+  $b1=(l0 cmp 0L);
+ if ($b1>=0) goto label0;
+ $r4=new java.lang.IllegalArgumentException;
+ $r4#java.lang.IllegalArgumentException:init("Negative time");
+ throw $r4;
+ label0:r1 = java.lang.System.getSecurityManager();
+ if (r1==null) goto label1;
+ $r3=this.path;
+ r1.checkWrite($r3);
+ label1:$z0 = this.isInvalid();
+ if ($z0==0) goto label2;
+ return  0;
+ label2:$r2=java.io.File.fs;
+ $z1 = $r2.setLastModifiedTime(this,l0);
+ return  $z1;
+ }  
+

@@ -1,0 +1,21 @@
+void java.io.FileOutputStream:finalize()
+{
+java.io.FileDescriptor $r1;
+  java.io.FileDescriptor $r2;
+  java.io.FileDescriptor $r3;
+  java.io.FileDescriptor $r4;
+  java.io.FileDescriptor $r5;
+  $r1=this.fd;
+ if ($r1==null) goto label0;
+ $r3=this.fd;
+ $r2=java.io.FileDescriptor.out;
+ if ($r3==$r2) goto label1;
+ $r5=this.fd;
+ $r4=java.io.FileDescriptor.err;
+ if ($r5!=$r4) goto label2;
+ label1:this.flush();
+ goto label0;
+ label2:this.close();
+ label0:return;
+ }  
+

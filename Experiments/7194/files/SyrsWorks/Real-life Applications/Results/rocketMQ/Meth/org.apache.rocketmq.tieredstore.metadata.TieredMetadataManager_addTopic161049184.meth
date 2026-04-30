@@ -1,0 +1,19 @@
+org.apache.rocketmq.tieredstore.metadata.TopicMetadata org.apache.rocketmq.tieredstore.metadata.TieredMetadataManager:addTopic(java.lang.String topic,long reserveTime)
+{
+org.apache.rocketmq.tieredstore.metadata.TopicMetadata old;
+  java.util.concurrent.atomic.AtomicInteger $stack8;
+  int $stack9;
+  java.util.concurrent.ConcurrentMap $stack10;
+  old = this.getTopic(topic);
+ if (old==null) goto label0;
+ return  old;
+ label0:old=new org.apache.rocketmq.tieredstore.metadata.TopicMetadata;
+ $stack8=this.maxTopicId;
+ $stack9 = $stack8.getAndIncrement();
+ old#org.apache.rocketmq.tieredstore.metadata.TopicMetadata($stack9,topic,reserveTime);
+ $stack10=this.topicMetadataTable;
+ $stack10.put((java.lang.Object)topic,(java.lang.Object)old);
+ this.persist();
+ return  old;
+ } 
+

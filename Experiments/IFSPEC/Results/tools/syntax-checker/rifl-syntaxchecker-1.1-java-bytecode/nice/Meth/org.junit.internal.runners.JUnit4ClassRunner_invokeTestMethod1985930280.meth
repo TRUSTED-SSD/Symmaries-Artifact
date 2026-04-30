@@ -1,0 +1,28 @@
+void org.junit.internal.runners.JUnit4ClassRunner:invokeTestMethod(java.lang.reflect.Method method,org.junit.runner.notification.RunNotifier notifier)
+{
+org.junit.runner.Description description;
+  java.lang.Object test;
+  org.junit.internal.runners.TestMethod e;
+  org.junit.internal.runners.MethodRoadie $stack9;
+  java.lang.reflect.InvocationTargetException $stack10;
+  java.lang.Throwable $stack11;
+  java.lang.Exception $stack12;
+  description = this.methodDescription(method);
+ label0:test = this.createTest();
+ label1:goto label2;
+ label3:$stack10 = catch;
+ $stack11 = $stack10.getCause();
+ this#org.junit.internal.runners.JUnit4ClassRunner:testAborted(notifier,description,$stack11);
+ return;
+ label4:$stack12 = catch;
+ this#org.junit.internal.runners.JUnit4ClassRunner:testAborted(notifier,description,(java.lang.Throwable)$stack12);
+ return;
+ label2:e = this.wrapMethod(method);
+ $stack9=new org.junit.internal.runners.MethodRoadie;
+ $stack9#org.junit.internal.runners.MethodRoadie(test,e,notifier,description);
+ $stack9.run();
+ return;
+ catch java.lang.reflect.InvocationTargetException: label0 - label1 : label3;
+catch java.lang.Exception: label0 - label1 : label4;
+} 
+

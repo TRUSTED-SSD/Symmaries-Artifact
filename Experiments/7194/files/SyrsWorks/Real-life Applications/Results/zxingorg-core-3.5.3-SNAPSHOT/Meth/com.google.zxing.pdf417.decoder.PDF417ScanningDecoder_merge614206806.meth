@@ -1,0 +1,20 @@
+static com.google.zxing.pdf417.decoder.DetectionResult com.google.zxing.pdf417.decoder.PDF417ScanningDecoder:merge(com.google.zxing.pdf417.decoder.DetectionResultRowIndicatorColumn leftRowIndicatorColumn,com.google.zxing.pdf417.decoder.DetectionResultRowIndicatorColumn rightRowIndicatorColumn)
+{
+com.google.zxing.pdf417.decoder.BarcodeMetadata barcodeMetadata;
+  com.google.zxing.pdf417.decoder.BoundingBox boundingBox;
+  com.google.zxing.pdf417.decoder.BoundingBox $stack6;
+  com.google.zxing.pdf417.decoder.DetectionResult $stack8;
+  if (leftRowIndicatorColumn!=null) goto label0;
+ if (rightRowIndicatorColumn!=null) goto label0;
+ return  null;
+ label0:barcodeMetadata = com.google.zxing.pdf417.decoder.PDF417ScanningDecoder.getBarcodeMetadata(leftRowIndicatorColumn,rightRowIndicatorColumn);
+ if (barcodeMetadata!=null) goto label1;
+ return  null;
+ label1:boundingBox = com.google.zxing.pdf417.decoder.PDF417ScanningDecoder.adjustBoundingBox(leftRowIndicatorColumn);
+ $stack6 = com.google.zxing.pdf417.decoder.PDF417ScanningDecoder.adjustBoundingBox(rightRowIndicatorColumn);
+ boundingBox = com.google.zxing.pdf417.decoder.BoundingBox.merge(boundingBox,$stack6);
+ $stack8=new com.google.zxing.pdf417.decoder.DetectionResult;
+ $stack8#com.google.zxing.pdf417.decoder.DetectionResult(barcodeMetadata,boundingBox);
+ return  $stack8;
+ } 
+

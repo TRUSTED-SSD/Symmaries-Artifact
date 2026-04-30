@@ -1,0 +1,25 @@
+org.apache.bookkeeper.stats.Counter org.apache.bookkeeper.zookeeper.ZooKeeperWatcherBase:getStateCounter(org.apache.zookeeper.Watcher$Event$KeeperState state)
+{
+org.apache.bookkeeper.stats.Counter c;
+  org.apache.bookkeeper.stats.Counter oldCounter;
+  java.util.concurrent.ConcurrentHashMap $stack5;
+  java.lang.Object $stack6;
+  org.apache.bookkeeper.stats.StatsLogger $stack7;
+  java.lang.String $stack9;
+  $stack5=this.stateCounters;
+ $stack6 = $stack5.get((java.lang.Object)state);
+ c=(org.apache.bookkeeper.stats.Counter) $stack6;
+ if (null!=c) goto label0;
+ $stack7=this.statsLogger;
+ $stack7 = $stack7.scope("state");
+ $stack9 = state.name();
+ c = $stack7.getCounter($stack9);
+ $stack5=this.stateCounters;
+ $stack6 = $stack5.putIfAbsent((java.lang.Object)state,(java.lang.Object)c);
+ oldCounter=(org.apache.bookkeeper.stats.Counter) $stack6;
+ if (null==oldCounter) goto label0;
+ c=oldCounter;
+ goto label0;
+ label0:return  c;
+ } 
+

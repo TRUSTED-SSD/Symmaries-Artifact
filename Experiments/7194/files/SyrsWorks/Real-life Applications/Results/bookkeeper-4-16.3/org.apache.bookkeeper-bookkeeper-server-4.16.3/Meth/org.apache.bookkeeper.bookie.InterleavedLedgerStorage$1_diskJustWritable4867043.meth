@@ -1,0 +1,19 @@
+void org.apache.bookkeeper.bookie.InterleavedLedgerStorage$1:diskJustWritable(java.io.File disk)
+{
+org.apache.bookkeeper.bookie.InterleavedLedgerStorage $stack2;
+  org.apache.bookkeeper.bookie.GarbageCollectorThread $stack3;
+  boolean $stack4;
+  $stack2=this.this$0;
+ $stack3=$stack2.gcThread;
+ $stack4=$stack3.isForceGCAllowWhenNoSpace;
+ if ($stack4==0) goto label0;
+ $stack2=this.this$0;
+ $stack3=$stack2.gcThread;
+ $stack3.enableForceGC();
+ goto label1;
+ label0:$stack2=this.this$0;
+ $stack3=$stack2.gcThread;
+ $stack3.resumeMinorGC();
+ label1:return;
+ } 
+

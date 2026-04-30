@@ -1,0 +1,47 @@
+java.lang.String org.junit.ComparisonFailure$ComparisonCompactor:sharedSuffix(java.lang.String @prefix)
+{
+int suffixLength;
+  int maxSuffixLength;
+  java.lang.String $stack4;
+  int $stack6;
+  int $stack10;
+  char $stack23;
+  char $stack29;
+  java.lang.String prefix;
+prefix=@prefix;
+suffixLength=0;
+ $stack4=this.expected;
+ maxSuffixLength = $stack4.length();
+ $stack6 = prefix.length();
+ maxSuffixLength=(maxSuffixLength-$stack6);
+ $stack4=this.actual;
+ $stack6 = $stack4.length();
+ $stack10 = prefix.length();
+ $stack6=($stack6-$stack10);
+ maxSuffixLength = java.lang.Math.min(maxSuffixLength,$stack6);
+ maxSuffixLength=(maxSuffixLength-1);
+ label0:if (suffixLength>maxSuffixLength) goto label1;
+ $stack4=this.expected;
+ prefix=this.expected;
+ $stack6 = prefix.length();
+ $stack6=($stack6-1);
+ $stack6=($stack6-suffixLength);
+ $stack23 = $stack4.charAt($stack6);
+ $stack4=this.actual;
+ prefix=this.actual;
+ $stack6 = prefix.length();
+ $stack6=($stack6-1);
+ $stack6=($stack6-suffixLength);
+ $stack29 = $stack4.charAt($stack6);
+ if ($stack23==$stack29) goto label2;
+ goto label1;
+ label2:suffixLength=(suffixLength+1);
+ goto label0;
+ label1:$stack4=this.expected;
+ prefix=this.expected;
+ maxSuffixLength = prefix.length();
+ suffixLength=(maxSuffixLength-suffixLength);
+ prefix = $stack4.substring(suffixLength);
+ return  prefix;
+ } 
+

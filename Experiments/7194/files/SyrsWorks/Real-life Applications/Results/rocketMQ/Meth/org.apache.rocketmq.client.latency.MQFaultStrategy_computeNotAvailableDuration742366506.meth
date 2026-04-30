@@ -1,0 +1,22 @@
+long org.apache.rocketmq.client.latency.MQFaultStrategy:computeNotAvailableDuration(long currentLatency)
+{
+int i;
+  long[] $stack4;
+  long $stack7;
+  byte $stack8;
+  $stack4=this.latencyMax;
+ i=#$stack4;
+ i=(i-1);
+ label0:if (i<0) goto label1;
+ $stack4=this.latencyMax;
+ $stack7=$stack4[i];
+ $stack8=(currentLatency cmp $stack7);
+ if ($stack8<0) goto label2;
+ $stack4=this.notAvailableDuration;
+ currentLatency=$stack4[i];
+ return  currentLatency;
+ label2:i=(i+-1);
+ goto label0;
+ label1:return  0L;
+ } 
+

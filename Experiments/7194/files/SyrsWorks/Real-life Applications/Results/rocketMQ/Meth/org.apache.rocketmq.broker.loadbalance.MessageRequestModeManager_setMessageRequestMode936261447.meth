@@ -1,0 +1,20 @@
+void org.apache.rocketmq.broker.loadbalance.MessageRequestModeManager:setMessageRequestMode(java.lang.String topic,java.lang.String consumerGroup,org.apache.rocketmq.remoting.protocol.body.SetMessageRequestModeRequestBody requestBody)
+{
+java.util.concurrent.ConcurrentHashMap consumerGroup2ModeMap;
+  java.util.concurrent.ConcurrentHashMap pre;
+  java.lang.Object $stack7;
+  consumerGroup2ModeMap=this.messageRequestModeMap;
+ $stack7 = consumerGroup2ModeMap.get((java.lang.Object)topic);
+ consumerGroup2ModeMap=(java.util.concurrent.ConcurrentHashMap) $stack7;
+ if (consumerGroup2ModeMap!=null) goto label0;
+ consumerGroup2ModeMap=new java.util.concurrent.ConcurrentHashMap;
+ consumerGroup2ModeMap#java.util.concurrent.ConcurrentHashMap();
+ pre=this.messageRequestModeMap;
+ $stack7 = pre.putIfAbsent((java.lang.Object)topic,(java.lang.Object)consumerGroup2ModeMap);
+ pre=(java.util.concurrent.ConcurrentHashMap) $stack7;
+ if (pre==null) goto label0;
+ consumerGroup2ModeMap=pre;
+ label0:consumerGroup2ModeMap.put((java.lang.Object)consumerGroup,(java.lang.Object)requestBody);
+ return;
+ } 
+

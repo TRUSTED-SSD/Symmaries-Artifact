@@ -1,0 +1,16 @@
+long org.apache.bookkeeper.proto.BookieClientImpl:getNumPendingRequests(org.apache.bookkeeper.net.BookieId address,long ledgerId)
+{
+org.apache.bookkeeper.proto.PerChannelBookieClientPool pcbcPool;
+  boolean $stack6;
+  pcbcPool = this.lookupClient(address);
+ if (pcbcPool!=null) goto label0;
+ return  0L;
+ label0:$stack6 = pcbcPool.isWritable(ledgerId);
+ if ($stack6==0) goto label1;
+ ledgerId = pcbcPool.getNumPendingCompletionRequests();
+ return  ledgerId;
+ label1:ledgerId = pcbcPool.getNumPendingCompletionRequests();
+ ledgerId=(ledgerId | 4611686018427387904L);
+ return  ledgerId;
+ } 
+

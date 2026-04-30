@@ -1,0 +1,31 @@
+void org.apache.rocketmq.store.ha.autoswitch.EpochFileCache:initEntries(java.util.List entries)
+{
+org.apache.rocketmq.remoting.protocol.EpochEntry preEntry;
+  java.util.Iterator l3;
+  org.apache.rocketmq.remoting.protocol.EpochEntry entry;
+  java.util.TreeMap $stack5;
+  boolean $stack7;
+  java.lang.Object $stack8;
+  int $stack10;
+  java.lang.Integer $stack11;
+  long $stack14;
+  $stack5=this.epochMap;
+ $stack5.clear();
+ preEntry=null;
+ l3 = entries.iterator();
+ label0:$stack7 = l3.hasNext();
+ if ($stack7==0) goto label1;
+ $stack8 = l3.next();
+ entry=(org.apache.rocketmq.remoting.protocol.EpochEntry) $stack8;
+ $stack5=this.epochMap;
+ $stack10 = entry.getEpoch();
+ $stack11 = java.lang.Integer.valueOf($stack10);
+ $stack5.put((java.lang.Object)$stack11,(java.lang.Object)entry);
+ if (preEntry==null) goto label2;
+ $stack14 = entry.getStartOffset();
+ preEntry.setEndOffset($stack14);
+ label2:preEntry=entry;
+ goto label0;
+ label1:return;
+ } 
+

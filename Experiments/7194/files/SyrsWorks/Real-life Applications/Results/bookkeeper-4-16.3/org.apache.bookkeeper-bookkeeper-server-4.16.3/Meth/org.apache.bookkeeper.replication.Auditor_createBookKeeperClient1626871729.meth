@@ -1,0 +1,21 @@
+static org.apache.bookkeeper.client.BookKeeper org.apache.bookkeeper.replication.Auditor:createBookKeeperClient(org.apache.bookkeeper.conf.ServerConfiguration conf,org.apache.bookkeeper.stats.StatsLogger statsLogger)
+{
+org.apache.bookkeeper.conf.ClientConfiguration clientConfiguration;
+  org.apache.bookkeeper.client.BookKeeper$Builder $stack6;
+  org.apache.bookkeeper.client.BookKeeper $stack8;
+  org.apache.bookkeeper.client.BKException $stack9;
+  java.io.IOException $stack10;
+  clientConfiguration=new org.apache.bookkeeper.conf.ClientConfiguration;
+ clientConfiguration#org.apache.bookkeeper.conf.ClientConfiguration((org.apache.bookkeeper.conf.AbstractConfiguration)conf);
+ clientConfiguration.setClientRole("system");
+ label0:$stack6 = org.apache.bookkeeper.client.BookKeeper.forConfig(clientConfiguration);
+ $stack6 = $stack6.statsLogger(statsLogger);
+ $stack8 = $stack6.build();
+ label1:return  $stack8;
+ label2:$stack9 = catch;
+ $stack10=new java.io.IOException;
+ $stack10#java.io.IOException("Failed to create bookkeeper client",(java.lang.Throwable)$stack9);
+ throw $stack10;
+ catch org.apache.bookkeeper.client.BKException: label0 - label1 : label2;
+} 
+

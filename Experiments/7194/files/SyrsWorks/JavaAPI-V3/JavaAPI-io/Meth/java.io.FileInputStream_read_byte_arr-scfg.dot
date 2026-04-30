@@ -1,0 +1,26 @@
+digraph G {
+  node [shape=box, ];
+  "pc0_js1" [label="〈$i0 = #r1, js1〉", ];
+  "pc1_js1" [label="〈$i1 = this#java.io.FileInputStream.native_readBytes (r1, 0, $i0), js1〉\n\
+tt",
+             ];
+  "pc2_js1" [label="〈return $i1, js1〉", ];
+  "pc3_js1" [label="〈sink, js1〉\n\
+obj_level(r1) ⊑ ret(obj_level(r1))' ∧ obj_level(this) ⊑ ret(obj_level(this))' ∧ (ret(this.><r1)' ∨ ¬this.><r1) ∧ (ret(this.><this)' ∨ ¬this.><this) ∧ (ϕ ≠ S2 ∨ pc ⊔ level($i1) ⊑ ret(level())')",
+             ];
+  
+  
+  "pc0_js1" -> "pc1_js1" [label="tt,\n\
+{level($i0) := pc ⊔ level(r1) ⊔ obj_level(r1)}",
+                          ];
+  "pc1_js1" -> "pc2_js1" [label="tt,\n\
+{this.><r1 := tt,\n\
+ this.><this := tt,\n\
+ level($i1) := pc ⊔ level(r1) ⊔ level(this) ⊔ obj_level(r1) ⊔ obj_level(this),\n\
+ obj_level(r1) := p0 ⊔ pc ⊔ obj_level(r1),\n\
+ obj_level(this) := obj_level(this) ⊔ (if this.><r1 then p0 ⊔ pc else ⊥)}",
+                          ];
+  "pc2_js1" -> "pc3_js1" [label="tt,\n\
+{ϕ := S2}", ];
+  
+  }

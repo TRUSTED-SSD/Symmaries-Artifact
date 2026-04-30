@@ -1,0 +1,41 @@
+org.apache.rocketmq.store.PutMessageResult org.apache.rocketmq.broker.transaction.queue.TransactionalMessageBridge:putMessageReturnResult(org.apache.rocketmq.common.message.MessageExtBrokerInner messageInner)
+{
+org.apache.rocketmq.store.PutMessageResult result;
+  org.apache.rocketmq.logging.org.slf4j.Logger $stack3;
+  java.lang.Thread $stack5;
+  java.lang.String $stack6;
+  java.lang.String $stack7;
+  org.apache.rocketmq.store.MessageStore $stack8;
+  org.apache.rocketmq.store.PutMessageStatus $stack10;
+  org.apache.rocketmq.store.PutMessageStatus $stack11;
+  org.apache.rocketmq.broker.BrokerController $stack13;
+  org.apache.rocketmq.store.stats.BrokerStatsManager $stack14;
+  org.apache.rocketmq.store.AppendMessageResult $stack19;
+  int $stack20;
+  $stack3=org.apache.rocketmq.broker.transaction.queue.TransactionalMessageBridge.LOGGER;
+ $stack5 = java.lang.Thread.currentThread();
+ $stack6 = $stack5.getName();
+ $stack7 = messageInner.getMsgId();
+ $stack3.debug("[BUG-TO-FIX] Thread:{} msgID:{}",(java.lang.Object)$stack6,(java.lang.Object)$stack7);
+ $stack8=this.store;
+ result = $stack8.putMessage(messageInner);
+ if (result==null) goto label0;
+ $stack10 = result.getPutMessageStatus();
+ $stack11=org.apache.rocketmq.store.PutMessageStatus.PUT_OK;
+ if ($stack10!=$stack11) goto label0;
+ $stack13=this.brokerController;
+ $stack14 = $stack13.getBrokerStatsManager();
+ $stack6 = messageInner.getTopic();
+ $stack14.incTopicPutNums($stack6);
+ $stack13=this.brokerController;
+ $stack14 = $stack13.getBrokerStatsManager();
+ $stack6 = messageInner.getTopic();
+ $stack19 = result.getAppendMessageResult();
+ $stack20 = $stack19.getWroteBytes();
+ $stack14.incTopicPutSize($stack6,$stack20);
+ $stack13=this.brokerController;
+ $stack14 = $stack13.getBrokerStatsManager();
+ $stack14.incBrokerPutNums();
+ label0:return  result;
+ } 
+

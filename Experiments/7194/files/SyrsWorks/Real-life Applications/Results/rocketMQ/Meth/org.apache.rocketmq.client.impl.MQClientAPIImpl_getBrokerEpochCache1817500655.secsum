@@ -1,0 +1,8 @@
+org.apache.rocketmq.remoting.protocol.body.EpochEntryCache org.apache.rocketmq.client.impl.MQClientAPIImpl:getBrokerEpochCache (
+  java.lang.String @brokerAddr) {
+  guard = tt;
+  ret(level()) = pc ⊔ level(@brokerAddr) ⊔ level(this) ⊔ obj_level(@brokerAddr) ⊔ obj_level(this);
+  ret(obj_level()) = pc ⊔ level(@brokerAddr) ⊔ level(this) ⊔ obj_level(@brokerAddr) ⊔ obj_level(this);
+  ret(obj_level(@brokerAddr)) = if obj_level(@brokerAddr) = ⊤ ∨ pc ≠ ⊤ ∧ (if obj_level(this) = ⊤ then obj_level(@brokerAddr) = ⊥ else obj_level(@brokerAddr) = ⊥ ∧ obj_level(this) = ⊥ ∧ level(@brokerAddr) ⊔ level(this) = ⊤) then ⊤ else ⊥;
+  ret(obj_level(this)) = pc ⊔ level(@brokerAddr) ⊔ level(this) ⊔ obj_level(@brokerAddr) ⊔ obj_level(this);
+}

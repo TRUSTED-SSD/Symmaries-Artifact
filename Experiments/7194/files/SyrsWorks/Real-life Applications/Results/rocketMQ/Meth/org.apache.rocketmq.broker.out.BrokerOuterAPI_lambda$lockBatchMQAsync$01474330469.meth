@@ -1,0 +1,39 @@
+static void org.apache.rocketmq.broker.out.BrokerOuterAPI:lambda$lockBatchMQAsync$0(org.apache.rocketmq.common.LockCallback callback,org.apache.rocketmq.remoting.netty.ResponseFuture responseFuture)
+{
+java.lang.Object response;
+  org.apache.rocketmq.remoting.protocol.body.LockBatchResponseBody responseBody;
+  java.util.Set messageQueues;
+  int $stack6;
+  java.lang.String $stack9;
+  byte[] $stack10;
+  java.lang.Throwable $stack13;
+  org.apache.rocketmq.client.exception.MQBrokerException tmp$4498164;
+  org.apache.rocketmq.remoting.protocol.RemotingCommand tmp$1319961620;
+  if (callback!=null) goto label0;
+ return;
+ label0:response = responseFuture.getResponseCommand();
+ if (response==null) goto label1;
+ tmp$1319961620=(org.apache.rocketmq.remoting.protocol.RemotingCommand) response;
+ $stack6 = tmp$1319961620.getCode();
+ if ($stack6!=0) goto label2;
+ tmp$1319961620=(org.apache.rocketmq.remoting.protocol.RemotingCommand) response;
+ $stack10 = tmp$1319961620.getBody();
+ response = org.apache.rocketmq.remoting.protocol.RemotingSerializable.decode($stack10,org.apache.rocketmq.remoting.protocol.body.LockBatchResponseBody);
+ responseBody=(org.apache.rocketmq.remoting.protocol.body.LockBatchResponseBody) response;
+ messageQueues = responseBody.getLockOKMQSet();
+ callback.onSuccess(messageQueues);
+ goto label1;
+ label2:tmp$4498164=new org.apache.rocketmq.client.exception.MQBrokerException;
+ tmp$1319961620=(org.apache.rocketmq.remoting.protocol.RemotingCommand) response;
+ $stack6 = tmp$1319961620.getCode();
+ tmp$1319961620=(org.apache.rocketmq.remoting.protocol.RemotingCommand) response;
+ $stack9 = tmp$1319961620.getRemark();
+ tmp$4498164#org.apache.rocketmq.client.exception.MQBrokerException($stack6,$stack9);
+ callback.onException((java.lang.Throwable)tmp$4498164);
+ label1:goto label3;
+ label4:$stack13 = catch;
+ response=$stack13;
+ label3:return;
+ catch java.lang.Throwable: label0 - label1 : label4;
+} 
+

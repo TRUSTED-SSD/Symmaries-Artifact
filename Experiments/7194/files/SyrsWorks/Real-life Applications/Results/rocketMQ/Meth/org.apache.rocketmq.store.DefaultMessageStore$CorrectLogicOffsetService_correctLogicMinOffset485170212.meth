@@ -1,0 +1,44 @@
+void org.apache.rocketmq.store.DefaultMessageStore$CorrectLogicOffsetService:correctLogicMinOffset()
+{
+long lastForeCorrectTimeCurRun;
+  long minPhyOffset;
+  java.util.concurrent.ConcurrentMap tables;
+  java.util.Iterator l6;
+  java.util.Iterator l8;
+  org.apache.rocketmq.store.queue.ConsumeQueueInterface logic;
+  org.apache.rocketmq.store.DefaultMessageStore $stack10;
+  java.util.Collection $stack14;
+  boolean $stack16;
+  java.lang.Object $stack17;
+  org.apache.rocketmq.common.attribute.CQType $stack23;
+  org.apache.rocketmq.common.attribute.CQType $stack24;
+  lastForeCorrectTimeCurRun=this.lastForceCorrectTime;
+ $stack10=this.this$0;
+ minPhyOffset = $stack10.getMinPhyOffset();
+ $stack10=this.this$0;
+ tables = $stack10.getConsumeQueueTable();
+ $stack14 = tables.values();
+ l6 = $stack14.iterator();
+ label0:$stack16 = l6.hasNext();
+ if ($stack16==0) goto label1;
+ $stack17 = l6.next();
+ tables=(java.util.concurrent.ConcurrentMap) $stack17;
+ $stack14 = tables.values();
+ l8 = $stack14.iterator();
+ label2:$stack16 = l8.hasNext();
+ if ($stack16==0) goto label3;
+ $stack17 = l8.next();
+ logic=(org.apache.rocketmq.store.queue.ConsumeQueueInterface) $stack17;
+ $stack23=org.apache.rocketmq.common.attribute.CQType.SimpleCQ;
+ $stack24 = logic.getCQType();
+ $stack16 = java.util.Objects.equals((java.lang.Object)$stack23,(java.lang.Object)$stack24);
+ if ($stack16==0) goto label4;
+ goto label2;
+ label4:$stack16 = this#org.apache.rocketmq.store.DefaultMessageStore$CorrectLogicOffsetService:needCorrect(logic,minPhyOffset,lastForeCorrectTimeCurRun);
+ if ($stack16==0) goto label5;
+ this#org.apache.rocketmq.store.DefaultMessageStore$CorrectLogicOffsetService:doCorrect(logic,minPhyOffset);
+ label5:goto label2;
+ label3:goto label0;
+ label1:return;
+ } 
+

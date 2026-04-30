@@ -1,0 +1,19 @@
+org.apache.rocketmq.store.SelectMappedBufferResult org.apache.rocketmq.store.timer.TimerLog:getTimerMessage(long offsetPy)
+{
+org.apache.rocketmq.store.logfile.MappedFile mappedFile;
+  org.apache.rocketmq.store.MappedFileQueue $stack4;
+  int $stack6;
+  long $stack7;
+  org.apache.rocketmq.store.SelectMappedBufferResult $stack10;
+  $stack4=this.mappedFileQueue;
+ mappedFile = $stack4.findMappedFileByOffset(offsetPy);
+ if (null!=mappedFile) goto label0;
+ return  null;
+ label0:$stack6 = mappedFile.getFileSize();
+ $stack7=(long) $stack6;
+ offsetPy=(offsetPy%$stack7);
+ $stack6=(int) offsetPy;
+ $stack10 = mappedFile.selectMappedBuffer($stack6);
+ return  $stack10;
+ } 
+

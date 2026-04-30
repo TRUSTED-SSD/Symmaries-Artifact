@@ -1,0 +1,84 @@
+digraph G {
+  node [shape=box, ];
+  "pc0_js1" [label="〈if (r0 != null) goto label0, js1〉", ];
+  "pc1_js1" [label="〈$r1 = \"null\", js1〉", ];
+  "pc2_js1" [label="〈goto label1, js1〉", ];
+  "pc3_js1" [label="〈label0: $r1 = r0.toString (), js1〉\n\
+pc ⊔ level(r0) ⊔ obj_level(r0) ⊑ ⊥ ∧ level(r0) ⊔ obj_level(r0) ⊑ ⊥",
+             ];
+  "pc4_js1" [label="〈label1: return $r1, js1〉", ];
+  "pc4_js2" [label="〈label1: return $r1, js2〉", ];
+  "pc5_js1" [label="〈sink, js1〉\n\
+obj_level(r0) ⊑ ret(obj_level(r0))' ∧ (ret(r0.><r0)' ∨ ¬r0.><r0) ∧ (ϕ ≠ S4 ∨ obj_level($r1) ⊑ ret(obj_level())' ∧ pc ⊔ level($r1) ⊑ ret(level())' ∧ (ret(~r0)' ∨ ¬$r1~r0) ∧ (ret(.><r0)' ∨ ¬r0.><$r1) ∧ (ret(r0.><)' ∨ ¬$r1.><r0))",
+             ];
+  
+  
+  "pc0_js1" -> "pc1_js1" [label="υ ∧ ¬ω ∨ ¬τ ∧ ¬υ ∧ level(r0) ⊐ pc ∨ ¬τ ∧ ¬υ ∧ level(r0) ⊑ pc,\n\
+{$r1~r0' := if ¬(¬τ ∧ ¬υ ∧ level(r0) ⊐ pc) ∨ υ ∧ ¬ω then $r1~r0' else $r1~r0,\n\
+ $r1.><$r1' := if ¬(¬τ ∧ ¬υ ∧ level(r0) ⊐ pc) ∨ υ ∧ ¬ω then $r1.><$r1' else $r1.><$r1,\n\
+ $r1.><r0' := if ¬(¬τ ∧ ¬υ ∧ level(r0) ⊐ pc) ∨ υ ∧ ¬ω then $r1.><r0' else $r1.><r0,\n\
+ r0.><$r1' := if ¬(¬τ ∧ ¬υ ∧ level(r0) ⊐ pc) ∨ υ ∧ ¬ω then r0.><$r1' else r0.><$r1,\n\
+ r0.><r0' := if ¬(¬τ ∧ ¬υ ∧ level(r0) ⊐ pc) ∨ υ ∧ ¬ω then r0.><r0' else r0.><r0,\n\
+ pc := if ¬(¬τ ∧ ¬υ ∧ level(r0) ⊐ pc) ∨ υ ∧ ¬ω then pc else pc ⊔ level(r0),\n\
+ obj_level($r1)' := if ¬(¬τ ∧ ¬υ ∧ level(r0) ⊐ pc) ∨ υ ∧ ¬ω then obj_level($r1)' else obj_level($r1),\n\
+ obj_level(r0)' := if ¬(¬τ ∧ ¬υ ∧ level(r0) ⊐ pc) ∨ υ ∧ ¬ω then obj_level(r0)' else obj_level(r0),\n\
+ hr := if ¬(¬τ ∧ ¬υ ∧ level(r0) ⊐ pc) ∨ υ ∧ ¬ω then hr else P0}",
+                          ];
+  "pc0_js1" -> "pc3_js1" [label="υ ∧ ω ∨ τ ∧ ¬υ ∧ level(r0) ⊐ pc ∨ τ ∧ ¬υ ∧ level(r0) ⊑ pc,\n\
+{$r1~r0' := if ¬(τ ∧ ¬υ ∧ level(r0) ⊐ pc) ∨ υ ∧ ω then $r1~r0' else $r1~r0,\n\
+ $r1.><$r1' := if ¬(τ ∧ ¬υ ∧ level(r0) ⊐ pc) ∨ υ ∧ ω then $r1.><$r1' else $r1.><$r1,\n\
+ $r1.><r0' := if ¬(τ ∧ ¬υ ∧ level(r0) ⊐ pc) ∨ υ ∧ ω then $r1.><r0' else $r1.><r0,\n\
+ r0.><$r1' := if ¬(τ ∧ ¬υ ∧ level(r0) ⊐ pc) ∨ υ ∧ ω then r0.><$r1' else r0.><$r1,\n\
+ r0.><r0' := if ¬(τ ∧ ¬υ ∧ level(r0) ⊐ pc) ∨ υ ∧ ω then r0.><r0' else r0.><r0,\n\
+ pc := if ¬(τ ∧ ¬υ ∧ level(r0) ⊐ pc) ∨ υ ∧ ω then pc else pc ⊔ level(r0),\n\
+ obj_level($r1)' := if ¬(τ ∧ ¬υ ∧ level(r0) ⊐ pc) ∨ υ ∧ ω then obj_level($r1)' else obj_level($r1),\n\
+ obj_level(r0)' := if ¬(τ ∧ ¬υ ∧ level(r0) ⊐ pc) ∨ υ ∧ ω then obj_level(r0)' else obj_level(r0),\n\
+ hr := if ¬(τ ∧ ¬υ ∧ level(r0) ⊐ pc) ∨ υ ∧ ω then hr else P0}",
+                          ];
+  "pc1_js1" -> "pc2_js1" [label="tt,\n\
+{$r1~r0 := ff,\n\
+ $r1.><$r1 := ff,\n\
+ $r1.><r0 := ff,\n\
+ r0.><$r1 := ff,\n\
+ level($r1) := pc ⊔ (if υ then level($r1) else ⊥),\n\
+ obj_level($r1) := pc}",
+                          ];
+  "pc2_js1" -> "pc4_js1" [label="tt,\n\
+{}", ];
+  "pc3_js1" -> "pc4_js1" [label="tt,\n\
+{$r1~r0 := ff,\n\
+ $r1.><r0 := ff,\n\
+ r0.><$r1 := ff,\n\
+ r0.><r0 := tt,\n\
+ level($r1) := pc ⊔ (if υ then level($r1) else ⊤),\n\
+ obj_level($r1) := if ¬υ ∨ ⊤ ⊑ if υ then pc else ⊤ then ⊤ else pc,\n\
+ obj_level(r0) := obj_level(r0) ⊔ (if ¬υ ∨ ⊤ ⊑ if υ then pc else ⊤ then ⊤ else pc)}",
+                          ];
+  "pc4_js1" -> "pc0_js1" [label="¬υ ∧ hr = P0,\n\
+{υ := tt,\n\
+ $r1~r0 := $r1~r0',\n\
+ $r1.><$r1 := $r1.><$r1',\n\
+ $r1.><r0 := $r1.><r0',\n\
+ r0.><$r1 := r0.><$r1',\n\
+ r0.><r0 := r0.><r0',\n\
+ $r1~r0' := ff,\n\
+ $r1.><$r1' := $r1.><$r1,\n\
+ $r1.><r0' := ff,\n\
+ r0.><$r1' := ff,\n\
+ r0.><r0' := r0.><r0,\n\
+ obj_level($r1) := obj_level($r1)',\n\
+ obj_level(r0) := obj_level(r0)',\n\
+ obj_level($r1)' := obj_level($r1),\n\
+ obj_level(r0)' := obj_level(r0)}",
+                          ];
+  "pc4_js1" -> "pc4_js2" [label="hr ≠ P0 ∨ υ ∧ hr = P0,\n\
+{υ := υ ∧ ¬(υ ∧ hr = P0),\n\
+ pc := if υ ∧ hr = P0 then ⊥ else pc,\n\
+ obj_level($r1) := if υ ∧ hr = P0 then obj_level($r1) else obj_level($r1),\n\
+ obj_level(r0) := if υ ∧ hr = P0 then obj_level(r0) else obj_level(r0),\n\
+ hr := if υ ∧ hr = P0 then P. else hr}",
+                          ];
+  "pc4_js2" -> "pc5_js1" [label="tt,\n\
+{ϕ := S4}", ];
+  
+  }

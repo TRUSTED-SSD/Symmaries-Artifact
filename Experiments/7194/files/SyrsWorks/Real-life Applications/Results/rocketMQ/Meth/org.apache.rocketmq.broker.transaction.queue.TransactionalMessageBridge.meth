@@ -1,0 +1,35 @@
+org.apache.rocketmq.broker.transaction.queue.TransactionalMessageBridge(org.apache.rocketmq.broker.BrokerController brokerController,org.apache.rocketmq.store.MessageStore store)
+{
+java.lang.Exception e;
+  java.util.concurrent.ConcurrentHashMap $stack4;
+  java.net.InetSocketAddress $stack5;
+  org.apache.rocketmq.common.BrokerConfig $stack6;
+  java.lang.String $stack7;
+  org.apache.rocketmq.remoting.netty.NettyServerConfig $stack8;
+  int $stack9;
+  org.apache.rocketmq.logging.org.slf4j.Logger $stack11;
+  java.lang.RuntimeException $stack12;
+  this#java.lang.Object();
+ $stack4=new java.util.concurrent.ConcurrentHashMap;
+ $stack4#java.util.concurrent.ConcurrentHashMap();
+ this.opQueueMap=$stack4;
+ label0:this.brokerController=brokerController;
+ this.store=store;
+ $stack5=new java.net.InetSocketAddress;
+ $stack6 = brokerController.getBrokerConfig();
+ $stack7 = $stack6.getBrokerIP1();
+ $stack8 = brokerController.getNettyServerConfig();
+ $stack9 = $stack8.getListenPort();
+ $stack5#java.net.InetSocketAddress($stack7,$stack9);
+ this.storeHost=$stack5;
+ label1:goto label2;
+ label3:e = catch;
+ $stack11=org.apache.rocketmq.broker.transaction.queue.TransactionalMessageBridge.LOGGER;
+ $stack11.error("Init TransactionBridge error",(java.lang.Throwable)e);
+ $stack12=new java.lang.RuntimeException;
+ $stack12#java.lang.RuntimeException((java.lang.Throwable)e);
+ throw $stack12;
+ label2:return;
+ catch java.lang.Exception: label0 - label1 : label3;
+} 
+

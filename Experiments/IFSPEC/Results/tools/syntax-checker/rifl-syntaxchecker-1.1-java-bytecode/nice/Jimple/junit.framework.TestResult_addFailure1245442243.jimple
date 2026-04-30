@@ -1,0 +1,61 @@
+    public synchronized void addFailure(junit.framework.Test, junit.framework.AssertionFailedError)
+    {
+        junit.framework.TestResult this;
+        junit.framework.Test test;
+        junit.framework.AssertionFailedError e;
+        java.util.Iterator i$;
+        junit.framework.TestListener each;
+        junit.framework.TestFailure $stack5;
+        java.util.List $stack6;
+        boolean $stack7;
+        java.lang.Object $stack11;
+
+        this := @this: junit.framework.TestResult;
+
+        test := @parameter0: junit.framework.Test;
+
+        e := @parameter1: junit.framework.AssertionFailedError;
+
+        $stack6 = this.<junit.framework.TestResult: java.util.List fFailures>;
+/*48*/
+
+        $stack5 = new junit.framework.TestFailure;
+/*48*/
+
+        specialinvoke $stack5.<junit.framework.TestFailure: void <init>(junit.framework.Test,java.lang.Throwable)>(test, e);
+/*48*/
+
+        interfaceinvoke $stack6.<java.util.List: boolean add(java.lang.Object)>($stack5);
+/*48*/
+
+        $stack6 = specialinvoke this.<junit.framework.TestResult: java.util.List cloneListeners()>();
+/*49*/
+
+        i$ = interfaceinvoke $stack6.<java.util.List: java.util.Iterator iterator()>();
+/*49*/
+/*49*/
+
+     label1:
+        $stack7 = interfaceinvoke i$.<java.util.Iterator: boolean hasNext()>();
+/*49*/
+
+        if $stack7 == 0 goto label2;
+/*49*/
+
+        $stack11 = interfaceinvoke i$.<java.util.Iterator: java.lang.Object next()>();
+/*52*/
+
+        each = (junit.framework.TestListener) $stack11;
+/*52*/
+
+        interfaceinvoke each.<junit.framework.TestListener: void addFailure(junit.framework.Test,junit.framework.AssertionFailedError)>(test, e);
+/*50*/
+
+        goto label1;
+/*50*/
+
+     label2:
+        return;
+/*52*/
+    }
+

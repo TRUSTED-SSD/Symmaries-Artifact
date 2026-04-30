@@ -1,0 +1,33 @@
+void org.apache.rocketmq.proxy.service.transaction.TransactionDataManager$TransactionDataCleaner:run()
+{
+org.apache.rocketmq.logging.org.slf4j.Logger $stack1;
+  java.lang.StringBuilder $stack2;
+  java.lang.String $stack3;
+  boolean $stack7;
+  org.apache.rocketmq.proxy.config.ProxyConfig $stack14;
+  long $stack15;
+  $stack1 = org.apache.rocketmq.proxy.service.transaction.TransactionDataManager.access$000();
+ $stack2=new java.lang.StringBuilder;
+ $stack2#java.lang.StringBuilder();
+ $stack3 = this.getServiceName();
+ $stack2 = $stack2.append($stack3);
+ $stack2 = $stack2.append(" service started");
+ $stack3 = $stack2.toString();
+ $stack1.info($stack3);
+ label0:$stack7 = this.isStopped();
+ if ($stack7!=0) goto label1;
+ $stack14 = org.apache.rocketmq.proxy.config.ConfigurationManager.getProxyConfig();
+ $stack15 = $stack14.getTransactionDataExpireScanPeriodMillis();
+ this.waitForRunning($stack15);
+ goto label0;
+ label1:$stack1 = org.apache.rocketmq.proxy.service.transaction.TransactionDataManager.access$000();
+ $stack2=new java.lang.StringBuilder;
+ $stack2#java.lang.StringBuilder();
+ $stack3 = this.getServiceName();
+ $stack2 = $stack2.append($stack3);
+ $stack2 = $stack2.append(" service stopped");
+ $stack3 = $stack2.toString();
+ $stack1.info($stack3);
+ return;
+ } 
+

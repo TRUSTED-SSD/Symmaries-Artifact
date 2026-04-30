@@ -1,0 +1,21 @@
+org.apache.rocketmq.remoting.protocol.body.ConsumeMessageDirectlyResult org.apache.rocketmq.tools.admin.DefaultMQAdminExtImpl:consumeMessageDirectly(java.lang.String consumerGroup,java.lang.String clientId,java.lang.String msgId)
+{
+org.apache.rocketmq.common.message.MessageExt msg;
+  org.apache.rocketmq.client.impl.factory.MQClientInstance $stack6;
+  org.apache.rocketmq.client.impl.MQClientAPIImpl $stack7;
+  java.net.SocketAddress $stack8;
+  java.lang.String $stack9;
+  java.lang.String $stack10;
+  long $stack11;
+  org.apache.rocketmq.remoting.protocol.body.ConsumeMessageDirectlyResult $stack12;
+  msg = this.viewMessage(msgId);
+ $stack6=this.mqClientInstance;
+ $stack7 = $stack6.getMQClientAPIImpl();
+ $stack8 = msg.getStoreHost();
+ $stack9 = org.apache.rocketmq.common.utils.NetworkUtil.socketAddress2String($stack8);
+ $stack10 = msg.getTopic();
+ $stack11=this.timeoutMillis;
+ $stack12 = $stack7.consumeMessageDirectly($stack9,consumerGroup,clientId,$stack10,msgId,$stack11);
+ return  $stack12;
+ } 
+

@@ -1,0 +1,37 @@
+void org.apache.bookkeeper.client.LedgerChecker:verifyLedgerFragment(org.apache.bookkeeper.client.LedgerFragment fragment,org.apache.bookkeeper.proto.BookkeeperInternalCallbacks$GenericCallback cb,java.lang.Long percentageOfLedgerFragmentToBeVerified)
+{
+java.util.Set bookiesToCheck;
+  java.util.concurrent.atomic.AtomicInteger numBookies;
+  java.util.HashMap badBookies;
+  java.util.Iterator l7;
+  java.lang.Integer bookieIndex;
+  boolean $stack11;
+  int $stack13;
+  java.lang.Object $stack17;
+  org.apache.bookkeeper.client.LedgerChecker$LedgerFragmentCallback $stack18;
+  long $stack21;
+  bookiesToCheck = fragment.getBookiesIndexes();
+ $stack11 = bookiesToCheck.isEmpty();
+ if ($stack11==0) goto label0;
+ cb.operationComplete(0,(java.lang.Object)fragment);
+ return;
+ label0:numBookies=new java.util.concurrent.atomic.AtomicInteger;
+ $stack13 = bookiesToCheck.size();
+ numBookies#java.util.concurrent.atomic.AtomicInteger($stack13);
+ badBookies=new java.util.HashMap;
+ badBookies#java.util.HashMap();
+ l7 = bookiesToCheck.iterator();
+ label1:$stack11 = l7.hasNext();
+ if ($stack11==0) goto label2;
+ $stack17 = l7.next();
+ bookieIndex=(java.lang.Integer) $stack17;
+ $stack18=new org.apache.bookkeeper.client.LedgerChecker$LedgerFragmentCallback;
+ $stack13 = bookieIndex.intValue();
+ $stack18#org.apache.bookkeeper.client.LedgerChecker$LedgerFragmentCallback(fragment,$stack13,cb,(java.util.Map)badBookies,numBookies);
+ $stack13 = bookieIndex.intValue();
+ $stack21 = percentageOfLedgerFragmentToBeVerified.longValue();
+ this#org.apache.bookkeeper.client.LedgerChecker(fragment,$stack13,(org.apache.bookkeeper.proto.BookkeeperInternalCallbacks$GenericCallback)$stack18,$stack21);
+ goto label1;
+ label2:return;
+ } 
+

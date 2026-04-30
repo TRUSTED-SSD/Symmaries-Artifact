@@ -1,0 +1,28 @@
+void java.io.DataInputStream:readFully(byte[] r1,int i0,int i1)
+{
+int i2;
+  int $i3;
+  int $i4;
+  java.io.InputStream $r2;
+  java.io.EOFException $r3;
+  java.lang.IndexOutOfBoundsException $r4;
+  int i5;
+  if (i1>=0) goto label0;
+ $r4=new java.lang.IndexOutOfBoundsException;
+ $r4#java.lang.IndexOutOfBoundsException:init();
+ throw $r4;
+ label0:i5=0;
+ label1:if (i5>=i1) goto label2;
+ $r2=this.in;
+ $i4=(i0+i5);
+ $i3=(i1-i5);
+ i2 = $r2.read(r1,$i4,$i3);
+ if (i2>=0) goto label3;
+ $r3=new java.io.EOFException;
+ $r3#java.io.EOFException:init();
+ throw $r3;
+ label3:i5=(i5+i2);
+ goto label1;
+ label2:return;
+ }  
+

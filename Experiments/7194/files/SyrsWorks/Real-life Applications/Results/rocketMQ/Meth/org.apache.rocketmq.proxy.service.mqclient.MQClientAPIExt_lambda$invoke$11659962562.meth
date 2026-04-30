@@ -1,0 +1,13 @@
+static void org.apache.rocketmq.proxy.service.mqclient.MQClientAPIExt:lambda$invoke$11(java.util.concurrent.CompletableFuture future,org.apache.rocketmq.remoting.netty.ResponseFuture responseFuture)
+{
+org.apache.rocketmq.remoting.protocol.RemotingCommand response;
+  org.apache.rocketmq.client.exception.MQClientException $stack4;
+  response = responseFuture.getResponseCommand();
+ if (response==null) goto label0;
+ future.complete((java.lang.Object)response);
+ goto label1;
+ label0:$stack4 = org.apache.rocketmq.proxy.service.mqclient.MQClientAPIExt.processNullResponseErr(responseFuture);
+ future.completeExceptionally((java.lang.Throwable)$stack4);
+ label1:return;
+ } 
+

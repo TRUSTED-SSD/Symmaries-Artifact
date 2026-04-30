@@ -1,0 +1,16 @@
+void org.apache.bookkeeper.meta.CleanupLedgerManager:lambda$recordPromise$0(java.util.concurrent.CompletableFuture promise,java.lang.Object result,java.lang.Throwable exception)
+{
+java.util.Set $stack4;
+  org.slf4j.Logger $stack6;
+  int $stack8;
+  java.lang.Integer $stack9;
+  $stack4=this.futures;
+ $stack4.remove((java.lang.Object)promise);
+ if (exception==null) goto label0;
+ $stack6=org.apache.bookkeeper.meta.CleanupLedgerManager.log;
+ $stack8 = org.apache.bookkeeper.client.BKException.getExceptionCode(exception);
+ $stack9 = java.lang.Integer.valueOf($stack8);
+ $stack6.error("Failed on operating ledger metadata: {}",(java.lang.Object)$stack9);
+ label0:return;
+ } 
+

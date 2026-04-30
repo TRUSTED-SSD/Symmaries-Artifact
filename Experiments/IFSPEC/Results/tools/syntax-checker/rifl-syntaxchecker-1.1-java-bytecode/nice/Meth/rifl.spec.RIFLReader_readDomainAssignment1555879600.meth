@@ -1,0 +1,43 @@
+void rifl.spec.RIFLReader:readDomainAssignment(org.w3c.dom.Document doc,java.util.Map da)
+{
+org.w3c.dom.Element daElem;
+  java.util.Iterator l5;
+  rifl.spec.Assignable handle;
+  rifl.spec.Domain domain;
+  java.lang.String msg;
+  org.w3c.dom.NodeList $stack10;
+  java.lang.Iterable $stack11;
+  boolean $stack13;
+  java.lang.Object $stack14;
+  java.util.Map $stack15;
+  java.lang.Object[] $stack23;
+  rifl.spec.RIFLIntegrityException $stack25;
+  daElem = rifl.spec.RIFLReader.getElement(doc,"domainassignment");
+ $stack10 = daElem.getChildNodes();
+ $stack11 = rifl.spec.RIFLReader.getElementList($stack10);
+ l5 = $stack11.iterator();
+ goto label0;
+ label1:$stack14 = l5.next();
+ daElem=(org.w3c.dom.Element) $stack14;
+ $stack15=this.assignables;
+ msg = daElem.getAttribute("handle");
+ $stack14 = $stack15.get((java.lang.Object)msg);
+ handle=(rifl.spec.Assignable) $stack14;
+ $stack15=this.domains;
+ msg = daElem.getAttribute("domain");
+ $stack14 = $stack15.get((java.lang.Object)msg);
+ domain=(rifl.spec.Domain) $stack14;
+ $stack14 = da.put((java.lang.Object)handle,(java.lang.Object)domain);
+ if ($stack14==null) goto label0;
+ $stack23=new java.lang.Object[2];
+ $stack23[0]=handle;
+ $stack23[1]=domain;
+ msg = java.lang.String.format("Duplicate domain assignment: {%s -> %s}.",$stack23);
+ $stack25=new rifl.spec.RIFLIntegrityException;
+ $stack25#rifl.spec.RIFLIntegrityException(msg);
+ throw $stack25;
+ label0:$stack13 = l5.hasNext();
+ if ($stack13!=0) goto label1;
+ return;
+ } 
+

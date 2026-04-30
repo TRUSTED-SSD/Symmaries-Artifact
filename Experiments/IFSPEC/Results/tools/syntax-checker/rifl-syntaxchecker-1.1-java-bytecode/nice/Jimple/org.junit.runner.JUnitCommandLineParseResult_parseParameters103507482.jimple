@@ -1,0 +1,91 @@
+    void parseParameters(java.lang.String[])
+    {
+        org.junit.runner.JUnitCommandLineParseResult this;
+        java.lang.String[] args;
+        int len$, i$;
+        java.lang.String arg;
+        java.util.List $stack7;
+        java.lang.Class $stack8;
+        java.lang.ClassNotFoundException $stack12;
+        java.lang.IllegalArgumentException $stack13;
+        java.lang.StringBuilder $stack14;
+
+        this := @this: org.junit.runner.JUnitCommandLineParseResult;
+
+        args := @parameter0: java.lang.String[];
+
+        len$ = lengthof args;
+/*98*/
+
+        i$ = 0;
+/*98*/
+
+     label1:
+        if i$ >= len$ goto label6;
+/*98*/
+
+        arg = args[i$];
+/*105*/
+
+     label2:
+        $stack7 = this.<org.junit.runner.JUnitCommandLineParseResult: java.util.List classes>;
+/*100*/
+
+        $stack8 = staticinvoke <org.junit.internal.Classes: java.lang.Class getClass(java.lang.String)>(arg);
+/*100*/
+
+        interfaceinvoke $stack7.<java.util.List: boolean add(java.lang.Object)>($stack8);
+/*100*/
+
+     label3:
+        goto label5;
+/*103*/
+
+     label4:
+        $stack12 := @caughtexception;
+/*98*/
+
+        $stack7 = this.<org.junit.runner.JUnitCommandLineParseResult: java.util.List parserErrors>;
+/*102*/
+
+        $stack13 = new java.lang.IllegalArgumentException;
+/*102*/
+
+        $stack14 = new java.lang.StringBuilder;
+/*102*/
+
+        specialinvoke $stack14.<java.lang.StringBuilder: void <init>()>();
+/*102*/
+
+        $stack14 = virtualinvoke $stack14.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>("Could not find class [");
+/*102*/
+
+        $stack14 = virtualinvoke $stack14.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>(arg);
+/*102*/
+
+        $stack14 = virtualinvoke $stack14.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>("]");
+/*102*/
+
+        arg = virtualinvoke $stack14.<java.lang.StringBuilder: java.lang.String toString()>();
+/*102*/
+
+        specialinvoke $stack13.<java.lang.IllegalArgumentException: void <init>(java.lang.String,java.lang.Throwable)>(arg, $stack12);
+/*102*/
+
+        interfaceinvoke $stack7.<java.util.List: boolean add(java.lang.Object)>($stack13);
+/*102*/
+
+     label5:
+        i$ = i$ + 1;
+/*98*/
+
+        goto label1;
+/*98*/
+
+     label6:
+        return;
+/*105*/
+
+        catch java.lang.ClassNotFoundException from label2 to label3 with label4;
+    }
+

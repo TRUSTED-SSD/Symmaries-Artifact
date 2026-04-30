@@ -1,0 +1,53 @@
+rifl.spec.SrcSnk rifl.spec.abstractbytecode.AbstractBytecodeRIFLReader:read(org.w3c.dom.Element @elem,boolean isSource)
+{
+java.lang.String $stack4;
+  boolean $stack5;
+  rifl.spec.RIFLIntegrityException $stack14;
+  java.lang.Object[] $stack15;
+  rifl.spec.abstractbytecode.AbstractBytecodeAccessPath $stack23;
+  rifl.spec.abstractbytecode.AbstractBytecodeException $stack24;
+  rifl.spec.abstractbytecode.AbstractBytecodeReturnValue $stack25;
+  rifl.spec.abstractbytecode.AbstractBytecodeField $stack26;
+  rifl.spec.abstractbytecode.AbstractBytecodeParameter $stack27;
+  org.w3c.dom.Element elem;
+elem=@elem;
+elem = rifl.spec.RIFLReader.getChildElement(elem);
+ $stack4 = elem.getNodeName();
+ $stack5 = $stack4.equals((java.lang.Object)"parameter");
+ if ($stack5==0) goto label0;
+ $stack27 = this.readParameter(elem,isSource);
+ return  $stack27;
+ label0:$stack4 = elem.getNodeName();
+ $stack5 = $stack4.equals((java.lang.Object)"field");
+ if ($stack5==0) goto label1;
+ $stack26 = this.readField(elem,isSource);
+ return  $stack26;
+ label1:$stack4 = elem.getNodeName();
+ $stack5 = $stack4.equals((java.lang.Object)"returnvalue");
+ if ($stack5==0) goto label2;
+ $stack25 = this.readReturnValue(elem,isSource);
+ return  $stack25;
+ label2:$stack4 = elem.getNodeName();
+ $stack5 = $stack4.equals((java.lang.Object)"exception");
+ if ($stack5==0) goto label3;
+ $stack24 = this.readException(elem,isSource);
+ return  $stack24;
+ label3:$stack4 = elem.getNodeName();
+ $stack5 = $stack4.equals((java.lang.Object)"path");
+ if ($stack5==0) goto label4;
+ $stack23 = this.readAccessPath(elem,isSource);
+ return  $stack23;
+ label4:$stack14=new rifl.spec.RIFLIntegrityException;
+ $stack15=new java.lang.Object[2];
+ if (isSource==0) goto label5;
+ $stack4="source";
+ goto label6;
+ label5:$stack4="sink";
+ label6:$stack15[0]=$stack4;
+ $stack4 = elem.getNodeName();
+ $stack15[1]=$stack4;
+ $stack4 = java.lang.String.format("Unkown %s type: %s.",$stack15);
+ $stack14#rifl.spec.RIFLIntegrityException($stack4);
+ throw $stack14;
+ } 
+

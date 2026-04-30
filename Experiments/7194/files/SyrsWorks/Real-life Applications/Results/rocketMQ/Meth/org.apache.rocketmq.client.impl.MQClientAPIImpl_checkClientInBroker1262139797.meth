@@ -1,0 +1,42 @@
+void org.apache.rocketmq.client.impl.MQClientAPIImpl:checkClientInBroker(java.lang.String @brokerAddr,java.lang.String consumerGroup,java.lang.String clientId,org.apache.rocketmq.remoting.protocol.heartbeat.SubscriptionData subscriptionData,long timeoutMillis)
+{
+org.apache.rocketmq.remoting.protocol.RemotingCommand request;
+  org.apache.rocketmq.remoting.protocol.body.CheckClientRequestBody requestBody;
+  byte[] $stack12;
+  org.apache.rocketmq.client.ClientConfig $stack13;
+  org.apache.rocketmq.remoting.RemotingClient $stack14;
+  boolean $stack15;
+  int $stack20;
+  org.apache.rocketmq.client.exception.MQClientException $stack21;
+  java.lang.AssertionError $stack25;
+  java.lang.String brokerAddr;
+brokerAddr=@brokerAddr;
+request = org.apache.rocketmq.remoting.protocol.RemotingCommand.createRequestCommand(46,null);
+ requestBody=new org.apache.rocketmq.remoting.protocol.body.CheckClientRequestBody;
+ requestBody#org.apache.rocketmq.remoting.protocol.body.CheckClientRequestBody();
+ requestBody.setClientId(clientId);
+ requestBody.setGroup(consumerGroup);
+ requestBody.setSubscriptionData(subscriptionData);
+ $stack12 = requestBody.encode();
+ request.setBody($stack12);
+ $stack14=this.remotingClient;
+ $stack13=this.clientConfig;
+ $stack15 = $stack13.isVipChannelEnabled();
+ brokerAddr = org.apache.rocketmq.common.MixAll.brokerVIPChannel($stack15,brokerAddr);
+ request = $stack14.invokeSync(brokerAddr,request,timeoutMillis);
+ $stack15=org.apache.rocketmq.client.impl.MQClientAPIImpl.$assertionsDisabled;
+ if ($stack15!=0) goto label0;
+ if (request!=null) goto label0;
+ $stack25=new java.lang.AssertionError;
+ $stack25#java.lang.AssertionError();
+ throw $stack25;
+ label0:$stack20 = request.getCode();
+ if (0==$stack20) goto label1;
+ $stack21=new org.apache.rocketmq.client.exception.MQClientException;
+ $stack20 = request.getCode();
+ brokerAddr = request.getRemark();
+ $stack21#org.apache.rocketmq.client.exception.MQClientException($stack20,brokerAddr);
+ throw $stack21;
+ label1:return;
+ } 
+

@@ -1,0 +1,25 @@
+static org.apache.bookkeeper.common.util.affinity.impl.ProcessorsInfo org.apache.bookkeeper.common.util.affinity.impl.ProcessorsInfo:parseCpuInfo()
+{
+java.lang.String $stack1;
+  java.lang.String[] $stack2;
+  java.nio.file.Path $stack3;
+  byte[] $stack4;
+  java.nio.charset.Charset $stack5;
+  org.apache.bookkeeper.common.util.affinity.impl.ProcessorsInfo $stack6;
+  java.io.IOException $stack7;
+  java.lang.RuntimeException $stack8;
+  label0:$stack1=new java.lang.String;
+ $stack2=new java.lang.String[0];
+ $stack3 = java.nio.file.Paths.get("/proc/cpuinfo",$stack2);
+ $stack4 = java.nio.file.Files.readAllBytes($stack3);
+ $stack5=org.apache.bookkeeper.common.util.affinity.impl.ProcessorsInfo.ENCODING;
+ $stack1#java.lang.String($stack4,$stack5);
+ $stack6 = org.apache.bookkeeper.common.util.affinity.impl.ProcessorsInfo.parseCpuInfo($stack1);
+ label1:return  $stack6;
+ label2:$stack7 = catch;
+ $stack8=new java.lang.RuntimeException;
+ $stack8#java.lang.RuntimeException((java.lang.Throwable)$stack7);
+ throw $stack8;
+ catch java.io.IOException: label0 - label1 : label2;
+} 
+

@@ -1,0 +1,22 @@
+org.apache.bookkeeper.stream.storage.api.sc.StorageContainer org.apache.bookkeeper.stream.storage.impl.sc.ZkStorageContainerManager:addStorageContainer(long scId,org.apache.bookkeeper.stream.storage.api.sc.StorageContainer sc)
+{
+org.apache.bookkeeper.stream.storage.api.sc.StorageContainer oldSc;
+  java.util.Map $stack5;
+  java.lang.Long $stack6;
+  java.lang.Object $stack7;
+  org.slf4j.Logger $stack8;
+  $stack5=this.liveContainers;
+ $stack6 = java.lang.Long.valueOf(scId);
+ $stack7 = $stack5.putIfAbsent((java.lang.Object)$stack6,(java.lang.Object)sc);
+ oldSc=(org.apache.bookkeeper.stream.storage.api.sc.StorageContainer) $stack7;
+ if (null!=oldSc) goto label0;
+ $stack8=org.apache.bookkeeper.stream.storage.impl.sc.ZkStorageContainerManager.log;
+ dummyClass.lowSink("Storage container ({}) is added to live set.");
+$stack8.info("Storage container ({}) is added to live set.",(java.lang.Object)sc);
+ return  sc;
+ label0:$stack8=org.apache.bookkeeper.stream.storage.impl.sc.ZkStorageContainerManager.log;
+ $stack8.warn("Storage container ({}) has already been added to live set",(java.lang.Object)sc);
+ sc.stop();
+ return  oldSc;
+ } 
+

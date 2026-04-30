@@ -1,0 +1,9 @@
+org.apache.rocketmq.common.message.MessageExtBrokerInner org.apache.rocketmq.store.timer.TimerMessageStore:convert (
+  org.apache.rocketmq.common.message.MessageExt messageExt, long enqueueTime,
+  boolean needRoll) {
+  guard = tt;
+  ret(level()) = ⊥;
+  ret(obj_level()) = level(enqueueTime) ⊔ level(messageExt) ⊔ obj_level(messageExt);
+  ret(obj_level(messageExt)) = level(enqueueTime) ⊔ level(messageExt) ⊔ obj_level(messageExt) ⊔ obj_level(this);
+  ret(obj_level(this)) = level(enqueueTime) ⊔ level(messageExt) ⊔ obj_level(messageExt) ⊔ obj_level(this);
+}

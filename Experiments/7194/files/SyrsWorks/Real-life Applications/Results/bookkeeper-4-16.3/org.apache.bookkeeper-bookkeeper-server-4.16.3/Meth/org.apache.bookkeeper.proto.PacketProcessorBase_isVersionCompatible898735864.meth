@@ -1,0 +1,24 @@
+boolean org.apache.bookkeeper.proto.PacketProcessorBase:isVersionCompatible()
+{
+byte version;
+  org.apache.bookkeeper.proto.BookieProtocol$Request $stack2;
+  java.lang.StringBuilder $stack4;
+  org.slf4j.Logger $stack5;
+  java.lang.String $stack10;
+  $stack2=this.request;
+ version = $stack2.getProtocolVersion();
+ if (version<0) goto label0;
+ if (version<=2) goto label1;
+ label0:$stack5=org.apache.bookkeeper.proto.PacketProcessorBase.logger;
+ $stack4=new java.lang.StringBuilder;
+ $stack4#java.lang.StringBuilder();
+ $stack4 = $stack4.append("Invalid protocol version, expected something between 0 & 2. got ");
+ $stack2=this.request;
+ version = $stack2.getProtocolVersion();
+ $stack4 = $stack4.append((int)version);
+ $stack10 = $stack4.toString();
+ $stack5.error($stack10);
+ return  0;
+ label1:return  1;
+ } 
+

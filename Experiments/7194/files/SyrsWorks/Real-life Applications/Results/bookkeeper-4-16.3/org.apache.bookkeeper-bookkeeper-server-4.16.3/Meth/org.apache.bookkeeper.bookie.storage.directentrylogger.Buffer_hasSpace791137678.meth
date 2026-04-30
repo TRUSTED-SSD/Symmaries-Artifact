@@ -1,0 +1,30 @@
+boolean org.apache.bookkeeper.bookie.storage.directentrylogger.Buffer:hasSpace(int size)
+{
+int $stack2;
+  java.nio.ByteBuffer $stack3;
+  boolean $stack5;
+  java.io.IOException $stack6;
+  org.apache.bookkeeper.common.util.ExceptionMessageHelper $stack7;
+  java.lang.Integer $stack9;
+  java.lang.String $stack15;
+  $stack2=this.bufferSize;
+ if (size<=$stack2) goto label0;
+ $stack6=new java.io.IOException;
+ $stack7 = org.apache.bookkeeper.common.util.ExceptionMessageHelper.exMsg("Write too large");
+ $stack9 = java.lang.Integer.valueOf(size);
+ $stack7 = $stack7.kv("writeSize",(java.lang.Object)$stack9);
+ size=this.bufferSize;
+ $stack9 = java.lang.Integer.valueOf(size);
+ $stack7 = $stack7.kv("maxSize",(java.lang.Object)$stack9);
+ $stack15 = $stack7.toString();
+ $stack6#java.io.IOException($stack15);
+ throw $stack6;
+ label0:$stack3=this.byteBuffer;
+ $stack2 = $stack3.remaining();
+ if ($stack2<size) goto label1;
+ $stack5=1;
+ goto label2;
+ label1:$stack5=0;
+ label2:return  $stack5;
+ } 
+

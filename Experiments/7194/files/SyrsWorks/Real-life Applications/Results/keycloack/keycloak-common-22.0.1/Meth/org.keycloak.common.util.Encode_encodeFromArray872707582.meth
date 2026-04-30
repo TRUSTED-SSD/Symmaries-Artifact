@@ -1,0 +1,30 @@
+static java.lang.String org.keycloak.common.util.Encode:encodeFromArray(java.lang.String @segment,java.lang.String[] encodingMap,boolean encodePercent)
+{
+java.lang.StringBuilder result;
+  int i;
+  char currentChar;
+  java.lang.String encoding;
+  int $stack8;
+  java.lang.String segment;
+segment=@segment;
+result=new java.lang.StringBuilder;
+ result#java.lang.StringBuilder();
+ i=0;
+ label0:$stack8 = segment.length();
+ if (i>=$stack8) goto label1;
+ currentChar = segment.charAt(i);
+ if (encodePercent!=0) goto label2;
+ if (currentChar!=37) goto label2;
+ result.append(currentChar);
+ goto label3;
+ label2:encoding = org.keycloak.common.util.Encode.encode((int)currentChar,encodingMap);
+ if (encoding!=null) goto label4;
+ result.append(currentChar);
+ goto label3;
+ label4:result.append(encoding);
+ label3:i=(i+1);
+ goto label0;
+ label1:segment = result.toString();
+ return  segment;
+ } 
+

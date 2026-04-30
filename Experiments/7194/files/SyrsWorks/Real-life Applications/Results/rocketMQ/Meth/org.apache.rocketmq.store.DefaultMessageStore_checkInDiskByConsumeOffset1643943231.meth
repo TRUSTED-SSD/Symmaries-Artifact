@@ -1,0 +1,24 @@
+boolean org.apache.rocketmq.store.DefaultMessageStore:checkInDiskByConsumeOffset(java.lang.String topic,int queueId,long consumeOffset)
+{
+long maxOffsetPy;
+  org.apache.rocketmq.store.queue.ConsumeQueueInterface consumeQueue;
+  org.apache.rocketmq.store.queue.CqUnit cqUnit;
+  org.apache.rocketmq.store.CommitLog $stack11;
+  boolean $stack16;
+  $stack11=this.commitLog;
+ maxOffsetPy = $stack11.getMaxOffset();
+ consumeQueue = this.findConsumeQueue(topic,queueId);
+ if (consumeQueue==null) goto label0;
+ cqUnit = consumeQueue.get(consumeOffset);
+ if (cqUnit==null) goto label1;
+ consumeOffset = cqUnit.getPos();
+ $stack16 = this#org.apache.rocketmq.store.DefaultMessageStore:estimateInMemByCommitOffset(consumeOffset,maxOffsetPy);
+ if ($stack16!=0) goto label2;
+ $stack16=1;
+ goto label3;
+ label2:$stack16=0;
+ label3:return  $stack16;
+ label1:return  0;
+ label0:return  0;
+ } 
+

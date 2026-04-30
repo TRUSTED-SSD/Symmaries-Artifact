@@ -1,0 +1,36 @@
+static java.util.Map$Entry org.apache.rocketmq.remoting.protocol.statictopic.TopicQueueMappingUtils:findMaxEpochAndQueueNum(java.util.List mappingDetailList)
+{
+long epoch;
+  int queueNum;
+  java.util.Iterator l4;
+  org.apache.rocketmq.remoting.protocol.statictopic.TopicQueueMappingDetail mappingDetail;
+  boolean $stack7;
+  java.util.AbstractMap$SimpleImmutableEntry $stack8;
+  java.lang.Long $stack9;
+  java.lang.Integer $stack10;
+  java.lang.Object $stack11;
+  long $stack12;
+  byte $stack13;
+  int $stack14;
+  epoch=-1L;
+ queueNum=0;
+ l4 = mappingDetailList.iterator();
+ label0:$stack7 = l4.hasNext();
+ if ($stack7==0) goto label1;
+ $stack11 = l4.next();
+ mappingDetail=(org.apache.rocketmq.remoting.protocol.statictopic.TopicQueueMappingDetail) $stack11;
+ $stack12 = mappingDetail.getEpoch();
+ $stack13=($stack12 cmp epoch);
+ if ($stack13<=0) goto label2;
+ epoch = mappingDetail.getEpoch();
+ label2:$stack14 = mappingDetail.getTotalQueues();
+ if ($stack14<=queueNum) goto label3;
+ queueNum = mappingDetail.getTotalQueues();
+ label3:goto label0;
+ label1:$stack8=new java.util.AbstractMap$SimpleImmutableEntry;
+ $stack9 = java.lang.Long.valueOf(epoch);
+ $stack10 = java.lang.Integer.valueOf(queueNum);
+ $stack8#java.util.AbstractMap$SimpleImmutableEntry((java.lang.Object)$stack9,(java.lang.Object)$stack10);
+ return  $stack8;
+ } 
+

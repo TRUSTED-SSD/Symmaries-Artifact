@@ -1,0 +1,32 @@
+void org.apache.kerby.kerberos.kerb.admin.kadmin.local.LocalKadminImpl:updateKeys(java.lang.String @principal)
+{
+org.apache.kerby.kerberos.kerb.request.KrbIdentity identity;
+  java.util.List keys;
+  org.apache.kerby.kerberos.kerb.identity.backend.IdentityBackend $stack5;
+  org.apache.kerby.kerberos.kerb.server.KdcConfig $stack7;
+  org.apache.kerby.kerberos.kerb.KrbException $stack12;
+  java.lang.StringBuilder $stack13;
+  java.lang.String principal;
+principal=@principal;
+principal = this#org.apache.kerby.kerberos.kerb.admin.kadmin.local.LocalKadminImpl:fixPrincipal(principal);
+ $stack5=this.backend;
+ identity = $stack5.getIdentity(principal);
+ if (identity!=null) goto label0;
+ $stack12=new org.apache.kerby.kerberos.kerb.KrbException;
+ $stack13=new java.lang.StringBuilder;
+ $stack13#java.lang.StringBuilder();
+ $stack13 = $stack13.append("Principal ");
+ $stack13 = $stack13.append(principal);
+ $stack13 = $stack13.append("was not found. Please check the input and try again");
+ principal = $stack13.toString();
+ $stack12#org.apache.kerby.kerberos.kerb.KrbException(principal);
+ throw $stack12;
+ label0:$stack7 = this.getKdcConfig();
+ keys = $stack7.getEncryptionTypes();
+ keys = org.apache.kerby.kerberos.kerb.common.EncryptionUtil.generateKeys(keys);
+ identity.addKeys(keys);
+ $stack5=this.backend;
+ $stack5.updateIdentity(identity);
+ return;
+ } 
+

@@ -1,0 +1,93 @@
+    private java.lang.Throwable getResult(java.util.concurrent.FutureTask, java.lang.Thread)
+    {
+        org.junit.internal.runners.statements.FailOnTimeout this;
+        java.util.concurrent.FutureTask task;
+        java.lang.Thread thread;
+        java.util.concurrent.TimeoutException e;
+        long $stack4;
+        byte $stack5;
+        java.lang.Object $stack6;
+        java.lang.Throwable $stack7;
+        java.util.concurrent.TimeUnit $stack8;
+        java.lang.Exception $stack13;
+        java.util.concurrent.ExecutionException $stack14;
+        java.lang.InterruptedException $stack16;
+
+        this := @this: org.junit.internal.runners.statements.FailOnTimeout;
+
+        task := @parameter0: java.util.concurrent.FutureTask;
+
+        thread := @parameter1: java.lang.Thread;
+
+     label1:
+        $stack4 = this.<org.junit.internal.runners.statements.FailOnTimeout: long timeout>;
+/*140*/
+
+        $stack5 = $stack4 cmp 0L;
+/*140*/
+
+        if $stack5 <= 0 goto label3;
+/*140*/
+
+        $stack4 = this.<org.junit.internal.runners.statements.FailOnTimeout: long timeout>;
+/*141*/
+
+        $stack8 = this.<org.junit.internal.runners.statements.FailOnTimeout: java.util.concurrent.TimeUnit timeUnit>;
+/*141*/
+
+        $stack6 = virtualinvoke task.<java.util.concurrent.FutureTask: java.lang.Object get(long,java.util.concurrent.TimeUnit)>($stack4, $stack8);
+/*141*/
+
+        $stack7 = (java.lang.Throwable) $stack6;
+/*141*/
+
+     label2:
+        return $stack7;
+/*141*/
+
+     label3:
+        $stack6 = virtualinvoke task.<java.util.concurrent.FutureTask: java.lang.Object get()>();
+/*143*/
+
+        $stack7 = (java.lang.Throwable) $stack6;
+/*143*/
+
+     label4:
+        return $stack7;
+/*143*/
+
+     label5:
+        $stack16 := @caughtexception;
+/*149*/
+
+        return $stack16;
+/*146*/
+
+     label6:
+        $stack14 := @caughtexception;
+/*151*/
+
+        $stack7 = virtualinvoke $stack14.<java.util.concurrent.ExecutionException: java.lang.Throwable getCause()>();
+/*149*/
+
+        return $stack7;
+/*149*/
+
+     label7:
+        e := @caughtexception;
+/*141*/
+
+        $stack13 = specialinvoke this.<org.junit.internal.runners.statements.FailOnTimeout: java.lang.Exception createTimeoutException(java.lang.Thread)>(thread);
+/*151*/
+
+        return $stack13;
+/*151*/
+
+        catch java.lang.InterruptedException from label1 to label2 with label5;
+        catch java.lang.InterruptedException from label3 to label4 with label5;
+        catch java.util.concurrent.ExecutionException from label1 to label2 with label6;
+        catch java.util.concurrent.ExecutionException from label3 to label4 with label6;
+        catch java.util.concurrent.TimeoutException from label1 to label2 with label7;
+        catch java.util.concurrent.TimeoutException from label3 to label4 with label7;
+    }
+

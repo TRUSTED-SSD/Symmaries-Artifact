@@ -1,0 +1,58 @@
+org.apache.rocketmq.store.SelectMappedBufferResult org.apache.rocketmq.store.logfile.DefaultMappedFile:selectMappedBuffer(int pos,int size)
+{
+int readPosition;
+  java.nio.ByteBuffer byteBuffer;
+  int $stack7;
+  java.lang.StringBuilder $stack8;
+  org.apache.rocketmq.logging.org.slf4j.Logger $stack9;
+  long $stack15;
+  java.lang.String $stack17;
+  boolean $stack18;
+  java.nio.MappedByteBuffer $stack30;
+  org.apache.rocketmq.store.SelectMappedBufferResult $stack35;
+  long $stack37;
+  readPosition = this.getReadPosition();
+ $stack7=(pos+size);
+ if ($stack7>readPosition) goto label0;
+ $stack18 = this.hold();
+ if ($stack18==0) goto label1;
+ $stack15=this.mappedByteBufferAccessCountSinceLastSwap;
+ $stack15=($stack15+1L);
+ this.mappedByteBufferAccessCountSinceLastSwap=$stack15;
+ $stack30=this.mappedByteBuffer;
+ byteBuffer = $stack30.slice();
+ byteBuffer.position(pos);
+ byteBuffer = byteBuffer.slice();
+ byteBuffer.limit(size);
+ $stack35=new org.apache.rocketmq.store.SelectMappedBufferResult;
+ $stack37=this.fileFromOffset;
+ $stack15=(long) pos;
+ $stack15=($stack37+$stack15);
+ $stack35#org.apache.rocketmq.store.SelectMappedBufferResult($stack15,byteBuffer,size,(org.apache.rocketmq.store.logfile.MappedFile)this);
+ return  $stack35;
+ label1:$stack9=org.apache.rocketmq.store.logfile.DefaultMappedFile.log;
+ $stack8=new java.lang.StringBuilder;
+ $stack8#java.lang.StringBuilder();
+ $stack8 = $stack8.append("matched, but hold failed, request pos: ");
+ $stack8 = $stack8.append(pos);
+ $stack8 = $stack8.append(", fileFromOffset: ");
+ $stack15=this.fileFromOffset;
+ $stack8 = $stack8.append($stack15);
+ $stack17 = $stack8.toString();
+ $stack9.warn($stack17);
+ goto label2;
+ label0:$stack9=org.apache.rocketmq.store.logfile.DefaultMappedFile.log;
+ $stack8=new java.lang.StringBuilder;
+ $stack8#java.lang.StringBuilder();
+ $stack8 = $stack8.append("selectMappedBuffer request pos invalid, request pos: ");
+ $stack8 = $stack8.append(pos);
+ $stack8 = $stack8.append(", size: ");
+ $stack8 = $stack8.append(size);
+ $stack8 = $stack8.append(", fileFromOffset: ");
+ $stack15=this.fileFromOffset;
+ $stack8 = $stack8.append($stack15);
+ $stack17 = $stack8.toString();
+ $stack9.warn($stack17);
+ label2:return  null;
+ } 
+

@@ -1,0 +1,25 @@
+boolean org.apache.rocketmq.remoting.netty.NettyRemotingClient:isAddressReachable(java.lang.String addr)
+{
+io.netty.channel.Channel channel;
+  boolean $stack3;
+  java.lang.Exception $stack8;
+  org.apache.rocketmq.logging.org.slf4j.Logger $stack9;
+  if (addr==null) goto label0;
+ $stack3 = addr.isEmpty();
+ if ($stack3==0) goto label1;
+ label0:return  0;
+ label1:channel = this#org.apache.rocketmq.remoting.netty.NettyRemotingClient:getAndCreateChannel(addr);
+ if (channel==null) goto label2;
+ $stack3 = channel.isActive();
+ if ($stack3==0) goto label2;
+ $stack3=1;
+ goto label3;
+ label2:$stack3=0;
+ label3:return  $stack3;
+ label4:$stack8 = catch;
+ $stack9=org.apache.rocketmq.remoting.netty.NettyRemotingClient.LOGGER;
+ $stack9.warn("Get and create channel of {} failed",(java.lang.Object)addr,(java.lang.Object)$stack8);
+ return  0;
+ catch java.lang.Exception: label1 - label3 : label4;
+} 
+

@@ -1,0 +1,41 @@
+void org.junit.runner.notification.RunNotifier$SafeNotifier:run()
+{
+int capacity;
+  java.util.ArrayList safeListeners;
+  java.util.ArrayList failures;
+  java.util.Iterator i$;
+  org.junit.runner.notification.RunListener listener;
+  java.util.List $stack7;
+  boolean $stack13;
+  org.junit.runner.notification.RunNotifier $stack14;
+  java.lang.Object $stack15;
+  java.lang.Exception $stack18;
+  org.junit.runner.notification.Failure $stack19;
+  org.junit.runner.Description $stack20;
+  $stack7=this.currentListeners;
+ capacity = $stack7.size();
+ safeListeners=new java.util.ArrayList;
+ safeListeners#java.util.ArrayList(capacity);
+ failures=new java.util.ArrayList;
+ failures#java.util.ArrayList(capacity);
+ $stack7=this.currentListeners;
+ i$ = $stack7.iterator();
+ label0:$stack13 = i$.hasNext();
+ if ($stack13==0) goto label1;
+ $stack15 = i$.next();
+ listener=(org.junit.runner.notification.RunListener) $stack15;
+ label2:this.notifyListener(listener);
+ safeListeners.add((java.lang.Object)listener);
+ label3:goto label4;
+ label5:$stack18 = catch;
+ $stack19=new org.junit.runner.notification.Failure;
+ $stack20=org.junit.runner.Description.TEST_MECHANISM;
+ $stack19#org.junit.runner.notification.Failure($stack20,(java.lang.Throwable)$stack18);
+ failures.add((java.lang.Object)$stack19);
+ label4:goto label0;
+ label1:$stack14=this.this$0;
+ org.junit.runner.notification.RunNotifier.access$100($stack14,(java.util.List)safeListeners,(java.util.List)failures);
+ return;
+ catch java.lang.Exception: label2 - label3 : label5;
+} 
+

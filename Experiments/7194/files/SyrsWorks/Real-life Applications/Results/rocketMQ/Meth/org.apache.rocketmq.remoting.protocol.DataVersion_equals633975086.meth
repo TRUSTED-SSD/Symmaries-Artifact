@@ -1,0 +1,52 @@
+boolean org.apache.rocketmq.remoting.protocol.DataVersion:equals(java.lang.Object o)
+{
+org.apache.rocketmq.remoting.protocol.DataVersion version;
+  java.lang.Class $stack3;
+  java.lang.Class $stack4;
+  long $stack5;
+  long $stack6;
+  byte $stack7;
+  java.util.concurrent.atomic.AtomicLong $stack11;
+  boolean $stack14;
+  if (this!=o) goto label0;
+ return  1;
+ label0:if (o==null) goto label1;
+ $stack3 = this.getClass();
+ $stack4 = o.getClass();
+ if ($stack3==$stack4) goto label2;
+ label1:return  0;
+ label2:version=(org.apache.rocketmq.remoting.protocol.DataVersion) o;
+ $stack5 = this.getStateVersion();
+ $stack6 = version.getStateVersion();
+ $stack7=($stack5 cmp $stack6);
+ if ($stack7==0) goto label3;
+ return  0;
+ label3:$stack5 = this.getTimestamp();
+ $stack6 = version.getTimestamp();
+ $stack7=($stack5 cmp $stack6);
+ if ($stack7==0) goto label4;
+ return  0;
+ label4:$stack11=this.counter;
+ if ($stack11==null) goto label5;
+ $stack11=version.counter;
+ if ($stack11==null) goto label5;
+ $stack11=this.counter;
+ $stack5 = $stack11.longValue();
+ $stack11=version.counter;
+ $stack6 = $stack11.longValue();
+ $stack7=($stack5 cmp $stack6);
+ if ($stack7!=0) goto label6;
+ $stack14=1;
+ goto label7;
+ label6:$stack14=0;
+ label7:return  $stack14;
+ label5:$stack11=this.counter;
+ if (null!=$stack11) goto label8;
+ $stack11=version.counter;
+ if (null!=$stack11) goto label8;
+ $stack14=1;
+ goto label9;
+ label8:$stack14=0;
+ label9:return  $stack14;
+ } 
+

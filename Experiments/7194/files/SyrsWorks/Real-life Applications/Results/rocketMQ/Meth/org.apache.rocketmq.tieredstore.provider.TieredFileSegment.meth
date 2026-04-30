@@ -1,0 +1,62 @@
+org.apache.rocketmq.tieredstore.provider.TieredFileSegment(org.apache.rocketmq.tieredstore.provider.TieredFileSegment$FileSegmentType fileType,org.apache.rocketmq.common.message.MessageQueue messageQueue,long baseOffset,org.apache.rocketmq.tieredstore.common.TieredMessageStoreConfig storeConfig)
+{
+java.util.concurrent.locks.ReentrantLock $stack6;
+  java.util.concurrent.Semaphore $stack7;
+  java.util.ArrayList $stack8;
+  java.lang.Boolean $stack9;
+  java.util.concurrent.CompletableFuture $stack10;
+  int[] $stack11;
+  int $stack12;
+  java.lang.IllegalArgumentException $stack18;
+  java.lang.StringBuilder $stack19;
+  java.lang.String $stack22;
+  this#java.lang.Object();
+ this.closed=0;
+ $stack6=new java.util.concurrent.locks.ReentrantLock;
+ $stack6#java.util.concurrent.locks.ReentrantLock();
+ this.bufferLock=$stack6;
+ $stack7=new java.util.concurrent.Semaphore;
+ $stack7#java.util.concurrent.Semaphore(1);
+ this.commitLock=$stack7;
+ $stack8=new java.util.ArrayList;
+ $stack8#java.util.ArrayList();
+ this.uploadBufferList=$stack8;
+ this.beginTimestamp=9223372036854775807L;
+ this.endTimestamp=9223372036854775807L;
+ this.commitMsgQueueOffset=0L;
+ $stack9 = java.lang.Boolean.valueOf((boolean)0);
+ $stack10 = java.util.concurrent.CompletableFuture.completedFuture((java.lang.Object)$stack9);
+ this.inflightCommitRequest=$stack10;
+ this.fileType=fileType;
+ this.messageQueue=messageQueue;
+ this.storeConfig=storeConfig;
+ this.baseOffset=baseOffset;
+ this.commitPosition=0L;
+ this.appendPosition=0L;
+ $stack11=org.apache.rocketmq.tieredstore.provider.TieredFileSegment$1.$SwitchMap$org$apache$rocketmq$tieredstore$provider$TieredFileSegment$FileSegmentType;
+ $stack12 = fileType.ordinal();
+ $stack12=$stack11[$stack12];
+ switch [$stack12]
+if 0 goto label0;
+if 1 goto label1;
+if 2 goto label2;
+goto label3;
+ label0:baseOffset = storeConfig.getTieredStoreCommitLogMaxSize();
+ this.maxSize=baseOffset;
+ goto label4;
+ label1:baseOffset = storeConfig.getTieredStoreConsumeQueueMaxSize();
+ this.maxSize=baseOffset;
+ goto label4;
+ label2:this.maxSize=9223372036854775807L;
+ goto label4;
+ label3:$stack18=new java.lang.IllegalArgumentException;
+ $stack19=new java.lang.StringBuilder;
+ $stack19#java.lang.StringBuilder();
+ $stack19 = $stack19.append("Unsupported file type: ");
+ $stack19 = $stack19.append((java.lang.Object)fileType);
+ $stack22 = $stack19.toString();
+ $stack18#java.lang.IllegalArgumentException($stack22);
+ throw $stack18;
+ label4:return;
+ } 
+

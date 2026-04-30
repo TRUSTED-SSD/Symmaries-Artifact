@@ -1,0 +1,41 @@
+int[] com.google.zxing.common.BitMatrix:getTopLeftOnBit()
+{
+int bitsOffset;
+  int y;
+  int x;
+  int bit;
+  int[] $stack6;
+  int $stack14;
+  bitsOffset=0;
+ label0:$stack6=this.bits;
+ y=#$stack6;
+ if (bitsOffset>=y) goto label1;
+ $stack6=this.bits;
+ y=$stack6[bitsOffset];
+ if (y!=0) goto label1;
+ bitsOffset=(bitsOffset+1);
+ goto label0;
+ label1:$stack6=this.bits;
+ y=#$stack6;
+ if (bitsOffset!=y) goto label2;
+ return  null;
+ label2:y=this.rowSize;
+ y=(bitsOffset/y);
+ x=this.rowSize;
+ x=(bitsOffset%x);
+ x=(x * 32);
+ $stack6=this.bits;
+ bitsOffset=$stack6[bitsOffset];
+ bit=0;
+ label3:$stack14=(31-bit);
+ $stack14=(bitsOffset<<$stack14);
+ if ($stack14!=0) goto label4;
+ bit=(bit+1);
+ goto label3;
+ label4:x=(x+bit);
+ $stack6=new int[2];
+ $stack6[0]=x;
+ $stack6[1]=y;
+ return  $stack6;
+ } 
+

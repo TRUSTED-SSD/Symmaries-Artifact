@@ -1,0 +1,16 @@
+static java.lang.Object org.apache.rocketmq.common.utils.ConcurrentHashMapUtils:computeIfAbsent(java.util.concurrent.ConcurrentMap map,java.lang.Object @key,java.util.function.Function func)
+{
+java.lang.Object v;
+  boolean $stack4;
+  java.lang.Object key;
+key=@key;
+$stack4=org.apache.rocketmq.common.utils.ConcurrentHashMapUtils.isJdk8;
+ if ($stack4==0) goto label0;
+ v = map.get(key);
+ if (null!=v) goto label1;
+ v = map.computeIfAbsent(key,func);
+ label1:return  v;
+ label0:key = map.computeIfAbsent(key,func);
+ return  key;
+ } 
+

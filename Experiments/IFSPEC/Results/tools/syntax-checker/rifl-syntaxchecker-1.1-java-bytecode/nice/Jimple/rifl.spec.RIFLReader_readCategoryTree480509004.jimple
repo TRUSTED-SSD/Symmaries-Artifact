@@ -1,0 +1,83 @@
+    private rifl.spec.CatSrcSnk readCategoryTree(org.w3c.dom.Element) throws rifl.spec.RIFLIntegrityException
+    {
+        rifl.spec.RIFLReader this;
+        org.w3c.dom.Element catSrcSnkElem;
+        java.lang.String type;
+        boolean $stack4;
+        rifl.spec.RIFLIntegrityException $stack7;
+        java.lang.StringBuilder $stack8;
+        rifl.spec.SrcSnk $stack12;
+        rifl.spec.Category $stack14;
+
+        this := @this: rifl.spec.RIFLReader;
+
+        catSrcSnkElem := @parameter0: org.w3c.dom.Element;
+
+        type = interfaceinvoke catSrcSnkElem.<org.w3c.dom.Element: java.lang.String getNodeName()>();
+/*193*/
+/*193*/
+
+        $stack4 = virtualinvoke type.<java.lang.String: boolean equals(java.lang.Object)>("category");
+/*194*/
+
+        if $stack4 == 0 goto label1;
+/*194*/
+
+        $stack14 = specialinvoke this.<rifl.spec.RIFLReader: rifl.spec.Category readCategory(org.w3c.dom.Element)>(catSrcSnkElem);
+/*195*/
+
+        return $stack14;
+/*195*/
+
+     label1:
+        $stack4 = virtualinvoke type.<java.lang.String: boolean equals(java.lang.Object)>("source");
+/*196*/
+
+        if $stack4 == 0 goto label2;
+/*196*/
+
+        $stack12 = virtualinvoke this.<rifl.spec.RIFLReader: rifl.spec.SrcSnk readSource(org.w3c.dom.Element)>(catSrcSnkElem);
+/*197*/
+
+        return $stack12;
+/*197*/
+
+     label2:
+        $stack4 = virtualinvoke type.<java.lang.String: boolean equals(java.lang.Object)>("sink");
+/*198*/
+
+        if $stack4 == 0 goto label3;
+/*198*/
+
+        $stack12 = virtualinvoke this.<rifl.spec.RIFLReader: rifl.spec.SrcSnk readSink(org.w3c.dom.Element)>(catSrcSnkElem);
+/*199*/
+
+        return $stack12;
+/*199*/
+
+     label3:
+        $stack7 = new rifl.spec.RIFLIntegrityException;
+/*201*/
+
+        $stack8 = new java.lang.StringBuilder;
+/*201*/
+
+        specialinvoke $stack8.<java.lang.StringBuilder: void <init>(java.lang.String)>("Unknown element: ");
+/*201*/
+
+        type = interfaceinvoke catSrcSnkElem.<org.w3c.dom.Element: java.lang.String getLocalName()>();
+/*201*/
+
+        $stack8 = virtualinvoke $stack8.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>(type);
+/*201*/
+
+        type = virtualinvoke $stack8.<java.lang.StringBuilder: java.lang.String toString()>();
+/*201*/
+
+        specialinvoke $stack7.<rifl.spec.RIFLIntegrityException: void <init>(java.lang.String)>(type);
+/*201*/
+
+        throw $stack7;
+/*201*/
+    }
+

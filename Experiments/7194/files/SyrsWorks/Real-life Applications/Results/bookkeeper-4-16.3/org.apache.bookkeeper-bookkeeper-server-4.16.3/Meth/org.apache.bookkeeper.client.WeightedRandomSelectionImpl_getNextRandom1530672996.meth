@@ -1,0 +1,36 @@
+java.lang.Object org.apache.bookkeeper.client.WeightedRandomSelectionImpl:getNextRandom()
+{
+java.lang.Double randomNum;
+  java.lang.Object l3;
+  java.lang.Throwable l4;
+  java.util.concurrent.locks.ReadWriteLock $stack5;
+  java.util.concurrent.locks.Lock $stack6;
+  double $stack8;
+  double $stack9;
+  java.util.TreeMap $stack12;
+  $stack5=this.rwLock;
+ $stack6 = $stack5.readLock();
+ $stack6.lock();
+ label0:randomNum=this.randomMax;
+ $stack8 = randomNum.doubleValue();
+ $stack9 = java.lang.Math.random();
+ $stack8=($stack8 * $stack9);
+ randomNum = java.lang.Double.valueOf($stack8);
+ $stack12=this.cummulativeMap;
+ l3 = $stack12.floorKey((java.lang.Object)randomNum);
+ randomNum=(java.lang.Double) l3;
+ $stack12=this.cummulativeMap;
+ l3 = $stack12.get((java.lang.Object)randomNum);
+ label1:$stack5=this.rwLock;
+ $stack6 = $stack5.readLock();
+ $stack6.unlock();
+ return  l3;
+ label2:l4 = catch;
+ label3:$stack5=this.rwLock;
+ $stack6 = $stack5.readLock();
+ $stack6.unlock();
+ throw l4;
+ catch java.lang.Throwable: label0 - label1 : label2;
+catch java.lang.Throwable: label2 - label3 : label2;
+} 
+

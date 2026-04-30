@@ -1,0 +1,25 @@
+void com.google.zxing.oned.rss.expanded.decoders.AI01decoder:encodeCompressedGtinWithoutAI(java.lang.StringBuilder buf,int currentPos,int initialBufferPosition)
+{
+int i;
+  int currentBlock;
+  com.google.zxing.oned.rss.expanded.decoders.GeneralAppIdDecoder $stack6;
+  int $stack10;
+  i=0;
+ label0:if (i>=4) goto label1;
+ $stack6 = this.getGeneralDecoder();
+ currentBlock=(10 * i);
+ currentBlock=(currentPos+currentBlock);
+ currentBlock = $stack6.extractNumericValueFromBitArray(currentBlock,10);
+ $stack10=(currentBlock/100);
+ if ($stack10!=0) goto label2;
+ buf.append((char)48);
+ label2:$stack10=(currentBlock/10);
+ if ($stack10!=0) goto label3;
+ buf.append((char)48);
+ label3:buf.append(currentBlock);
+ i=(i+1);
+ goto label0;
+ label1:com.google.zxing.oned.rss.expanded.decoders.AI01decoder.appendCheckDigit(buf,initialBufferPosition);
+ return;
+ } 
+

@@ -1,0 +1,40 @@
+void org.apache.rocketmq.namesrv.route.ZoneRouteRPCHook:doAfterResponse(java.lang.String @remoteAddr,org.apache.rocketmq.remoting.protocol.RemotingCommand request,org.apache.rocketmq.remoting.protocol.RemotingCommand response)
+{
+boolean zoneMode;
+  org.apache.rocketmq.remoting.protocol.route.TopicRouteData topicRouteData;
+  int $stack8;
+  byte[] $stack9;
+  java.util.HashMap $stack12;
+  java.lang.Object $stack13;
+  java.lang.String remoteAddr;
+remoteAddr=@remoteAddr;
+$stack8 = request.getCode();
+ if (105==$stack8) goto label0;
+ return;
+ label0:if (response==null) goto label1;
+ $stack9 = response.getBody();
+ if ($stack9==null) goto label1;
+ $stack8 = response.getCode();
+ if (0==$stack8) goto label2;
+ label1:return;
+ label2:$stack12 = request.getExtFields();
+ $stack13 = $stack12.get((java.lang.Object)"__ZONE_MODE");
+ remoteAddr=(java.lang.String) $stack13;
+ zoneMode = java.lang.Boolean.parseBoolean(remoteAddr);
+ if (zoneMode!=0) goto label3;
+ return;
+ label3:$stack12 = request.getExtFields();
+ $stack13 = $stack12.get((java.lang.Object)"__ZONE_NAME");
+ remoteAddr=(java.lang.String) $stack13;
+ zoneMode = org.apache.commons.lang3.StringUtils.isBlank((java.lang.CharSequence)remoteAddr);
+ if (zoneMode==0) goto label4;
+ return;
+ label4:$stack9 = response.getBody();
+ $stack13 = org.apache.rocketmq.remoting.protocol.RemotingSerializable.decode($stack9,org.apache.rocketmq.remoting.protocol.route.TopicRouteData);
+ topicRouteData=(org.apache.rocketmq.remoting.protocol.route.TopicRouteData) $stack13;
+ topicRouteData = this#org.apache.rocketmq.namesrv.route.ZoneRouteRPCHook:filterByZoneName(topicRouteData,remoteAddr);
+ $stack9 = topicRouteData.encode();
+ response.setBody($stack9);
+ return;
+ } 
+

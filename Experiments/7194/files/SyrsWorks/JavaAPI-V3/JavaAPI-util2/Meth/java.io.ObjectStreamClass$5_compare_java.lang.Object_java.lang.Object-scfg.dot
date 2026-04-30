@@ -1,0 +1,71 @@
+digraph G {
+  node [shape=box, ];
+  "pc0_js1" [label="〈$r4 = (java.io.ObjectStreamClass$MemberSignature) r1, js1〉",
+             ];
+  "pc1_js1" [label="〈$r3 = (java.io.ObjectStreamClass$MemberSignature) r2, js1〉",
+             ];
+  "pc2_js1" [label="〈$i0 = this.compare ($r4, $r3), js1〉\n\
+tt", ];
+  "pc3_js1" [label="〈return $i0, js1〉", ];
+  "pc4_js1" [label="〈sink, js1〉\n\
+obj_level(r1) ⊑ ret(obj_level(r1))' ∧ obj_level(r2) ⊑ ret(obj_level(r2))' ∧ obj_level(this) ⊑ ret(obj_level(this))' ∧ (ret(r1.><r1)' ∨ ¬r1.><r1) ∧ (ret(r1.><r2)' ∨ ¬r1.><r2) ∧ (ret(r1.><this)' ∨ ¬r1.><this) ∧ (ret(r2.><r1)' ∨ ¬r2.><r1) ∧ (ret(r2.><r2)' ∨ ¬r2.><r2) ∧ (ret(r2.><this)' ∨ ¬r2.><this) ∧ (ϕ ≠ S3 ∨ pc ⊔ level($i0) ⊑ ret(level())')",
+             ];
+  
+  
+  "pc0_js1" -> "pc1_js1" [label="tt,\n\
+{$r3~$r4 := ff,\n\
+ $r4~r1 := tt,\n\
+ $r4~r2 := r1~r2,\n\
+ $r3.><$r4 := ff,\n\
+ $r4.><$r3 := ff,\n\
+ $r4.><$r4 := ff,\n\
+ $r4.><r1 := r1.><r1,\n\
+ $r4.><r2 := r1.><r2,\n\
+ $r4.><this := r1.><this,\n\
+ r1.><$r4 := r1.><r1,\n\
+ r2.><$r4 := r2.><r1,\n\
+ level($r4) := pc ⊔ level(r1),\n\
+ obj_level($r4) := obj_level(r1)}",
+                          ];
+  "pc1_js1" -> "pc2_js1" [label="tt,\n\
+{$r3~$r4 := r1~r2,\n\
+ $r3~r1 := r1~r2,\n\
+ $r3~r2 := tt,\n\
+ $r3.><$r3 := ff,\n\
+ $r3.><$r4 := r2.><r1,\n\
+ $r3.><r1 := r2.><r1,\n\
+ $r3.><r2 := r2.><r2,\n\
+ $r3.><this := r2.><this,\n\
+ $r4.><$r3 := r1.><r2,\n\
+ r1.><$r3 := r1.><r2,\n\
+ r2.><$r3 := r2.><r2,\n\
+ level($r3) := pc ⊔ level(r2),\n\
+ obj_level($r3) := obj_level(r2)}",
+                          ];
+  "pc2_js1" -> "pc3_js1" [label="tt,\n\
+{$r3.><$r3 := r1~r2 ∨ r2.><r1 ∨ r2.><this ∨ (r1~r2 ∨ r1.><r2) ∧ (r1~r2 ∨ r2.><r1) ∨ (r1~r2 ∨ r2.><r1) ∧ (r1~r2 ∨ r1.><r2 ∨ r2.><r1) ∨ r1.><this ∧ r2.><this ∧ (r1~r2 ∨ r2.><r1) ∨ (r1~r2 ∨ r1.><r2) ∧ (r1~r2 ∨ r2.><r1) ∧ (r1~r2 ∨ r1.><r2 ∨ r2.><r1),\n\
+ $r3.><$r4 := r1~r2 ∨ r2.><r1 ∨ (if r1.><this then r2.><r1 ∨ r1.><this ∧ (r1~r2 ∨ r2.><r1) else r2.><r1) ∨ (if r2.><this then r1.><this ∨ r2.><r1 else r2.><r1) ∨ (if r1~r2 ∨ r1.><r2 then r1~r2 ∨ r2.><r1 else r2.><r1) ∨ (if r1~r2 ∨ r1.><r2 then r2.><r1 ∨ (r1~r2 ∨ r2.><r1) ∧ (r1~r2 ∨ r1.><r2 ∨ r2.><r1) else r2.><r1) ∨ (if r1~r2 ∨ r2.><r1 then r1~r2 ∨ r1.><r2 ∨ r2.><r1 else r2.><r1),\n\
+ $r3.><r1 := r1~r2 ∨ r2.><r1 ∨ (if r1.><this then r2.><r1 ∨ (r1~r2 ∨ r2.><r1) ∧ (r1~this ∨ r1.><this) else r2.><r1) ∨ (if r2.><this then r1~this ∨ r1.><this ∨ r2.><r1 else r2.><r1) ∨ (if r1~r2 ∨ r1.><r2 then r1~r2 ∨ r2.><r1 else r2.><r1) ∨ (if r1~r2 ∨ r1.><r2 then r2.><r1 ∨ (r1~r2 ∨ r2.><r1) ∧ (r1~r2 ∨ r1.><r2 ∨ r2.><r1) else r2.><r1) ∨ (if r1~r2 ∨ r2.><r1 then r1~r2 ∨ r1.><r2 ∨ r2.><r1 else r2.><r1),\n\
+ $r3.><r2 := r1~r2 ∨ r2.><r1 ∨ r2.><r2 ∨ (if r1.><this then r2.><r2 ∨ (r1~r2 ∨ r2.><r1) ∧ (r2~this ∨ r2.><this) else r2.><r2) ∨ (if r2.><this then r2~this ∨ r2.><r2 ∨ r2.><this else r2.><r2) ∨ (if r1~r2 ∨ r1.><r2 then r2.><r2 ∨ (r1~r2 ∨ r2.><r1) ∧ (r1~r2 ∨ r1.><r2 ∨ r2.><r1) else r2.><r2) ∨ (if r1~r2 ∨ r1.><r2 then r1~r2 ∨ r2.><r1 ∨ r2.><r2 else r2.><r2) ∨ (if r1~r2 ∨ r2.><r1 then r1~r2 ∨ r1.><r2 ∨ r2.><r1 ∨ r2.><r2 else r2.><r2),\n\
+ $r3.><this := (if r1.><this then r1~r2 ∨ r2.><r1 ∨ r2.><this else r2.><this) ∨ (if r1~r2 ∨ r1.><r2 then r2.><this ∨ r1.><this ∧ (r1~r2 ∨ r2.><r1) else r2.><this) ∨ (if r1~r2 ∨ r1.><r2 then r2.><this ∨ r2.><this ∧ (r1~r2 ∨ r2.><r1) else r2.><this) ∨ (if r1~r2 ∨ r2.><r1 then r1.><this ∨ r2.><this else r2.><this),\n\
+ $r4.><$r3 := r1~r2 ∨ r1.><r2 ∨ (if r1.><this then r1.><r2 ∨ r2.><this else r1.><r2) ∨ (if r2.><this then r1.><r2 ∨ r2.><this ∧ (r1~r2 ∨ r1.><r2) else r1.><r2) ∨ (if r1~r2 ∨ r1.><r2 then r1~r2 ∨ r1.><r2 ∨ r2.><r1 else r1.><r2) ∨ (if r1~r2 ∨ r2.><r1 then r1~r2 ∨ r1.><r2 else r1.><r2) ∨ (if r1~r2 ∨ r2.><r1 then r1.><r2 ∨ (r1~r2 ∨ r1.><r2) ∧ (r1~r2 ∨ r1.><r2 ∨ r2.><r1) else r1.><r2),\n\
+ $r4.><$r4 := r1~r2 ∨ r1.><r2 ∨ r1.><this ∨ (r1~r2 ∨ r1.><r2) ∧ (r1~r2 ∨ r2.><r1) ∨ (r1~r2 ∨ r1.><r2) ∧ (r1~r2 ∨ r1.><r2 ∨ r2.><r1) ∨ r1.><this ∧ r2.><this ∧ (r1~r2 ∨ r1.><r2) ∨ (r1~r2 ∨ r1.><r2) ∧ (r1~r2 ∨ r2.><r1) ∧ (r1~r2 ∨ r1.><r2 ∨ r2.><r1),\n\
+ $r4.><r1 := r1~r2 ∨ r1.><r1 ∨ r1.><r2 ∨ (if r1.><this then r1~this ∨ r1.><r1 ∨ r1.><this else r1.><r1) ∨ (if r2.><this then r1.><r1 ∨ (r1~r2 ∨ r1.><r2) ∧ (r1~this ∨ r1.><this) else r1.><r1) ∨ (if r1~r2 ∨ r1.><r2 then r1~r2 ∨ r1.><r1 ∨ r1.><r2 ∨ r2.><r1 else r1.><r1) ∨ (if r1~r2 ∨ r2.><r1 then r1.><r1 ∨ (r1~r2 ∨ r1.><r2) ∧ (r1~r2 ∨ r1.><r2 ∨ r2.><r1) else r1.><r1) ∨ (if r1~r2 ∨ r2.><r1 then r1~r2 ∨ r1.><r1 ∨ r1.><r2 else r1.><r1),\n\
+ $r4.><r2 := r1~r2 ∨ r1.><r2 ∨ (if r1.><this then r2~this ∨ r1.><r2 ∨ r2.><this else r1.><r2) ∨ (if r2.><this then r1.><r2 ∨ (r1~r2 ∨ r1.><r2) ∧ (r2~this ∨ r2.><this) else r1.><r2) ∨ (if r1~r2 ∨ r1.><r2 then r1~r2 ∨ r1.><r2 ∨ r2.><r1 else r1.><r2) ∨ (if r1~r2 ∨ r2.><r1 then r1~r2 ∨ r1.><r2 else r1.><r2) ∨ (if r1~r2 ∨ r2.><r1 then r1.><r2 ∨ (r1~r2 ∨ r1.><r2) ∧ (r1~r2 ∨ r1.><r2 ∨ r2.><r1) else r1.><r2),\n\
+ $r4.><this := (if r2.><this then r1~r2 ∨ r1.><r2 ∨ r1.><this else r1.><this) ∨ (if r1~r2 ∨ r1.><r2 then r1.><this ∨ r2.><this else r1.><this) ∨ (if r1~r2 ∨ r2.><r1 then r1.><this ∨ r1.><this ∧ (r1~r2 ∨ r1.><r2) else r1.><this) ∨ (if r1~r2 ∨ r2.><r1 then r1.><this ∨ r2.><this ∧ (r1~r2 ∨ r1.><r2) else r1.><this),\n\
+ r1.><$r3 := r1~r2 ∨ r1.><r2 ∨ (if r1.><this then r1.><r2 ∨ r2.><this else r1.><r2) ∨ (if r2.><this then r1.><r2 ∨ r2.><this ∧ (r1~r2 ∨ r1.><r2) else r1.><r2) ∨ (if r1~r2 ∨ r1.><r2 then r1~r2 ∨ r1.><r2 ∨ r2.><r1 else r1.><r2) ∨ (if r1~r2 ∨ r2.><r1 then r1~r2 ∨ r1.><r2 else r1.><r2) ∨ (if r1~r2 ∨ r2.><r1 then r1.><r2 ∨ (r1~r2 ∨ r1.><r2) ∧ (r1~r2 ∨ r1.><r2 ∨ r2.><r1) else r1.><r2),\n\
+ r1.><$r4 := r1~r2 ∨ r1.><r1 ∨ r1.><r2 ∨ (if r1.><this then r1.><r1 ∨ r1.><this else r1.><r1) ∨ (if r2.><this then r1.><r1 ∨ r1.><this ∧ (r1~r2 ∨ r1.><r2) else r1.><r1) ∨ (if r1~r2 ∨ r1.><r2 then r1~r2 ∨ r1.><r1 ∨ r1.><r2 ∨ r2.><r1 else r1.><r1) ∨ (if r1~r2 ∨ r2.><r1 then r1.><r1 ∨ (r1~r2 ∨ r1.><r2) ∧ (r1~r2 ∨ r1.><r2 ∨ r2.><r1) else r1.><r1) ∨ (if r1~r2 ∨ r2.><r1 then r1~r2 ∨ r1.><r1 ∨ r1.><r2 else r1.><r1),\n\
+ r1.><r1 := r1~r2 ∨ r1.><r1 ∨ r1.><r2 ∨ (if r1.><this then r1~this ∨ r1.><r1 ∨ r1.><this else r1.><r1) ∨ (if r2.><this then r1.><r1 ∨ (r1~r2 ∨ r1.><r2) ∧ (r1~this ∨ r1.><this) else r1.><r1) ∨ (if r1~r2 ∨ r1.><r2 then r1~r2 ∨ r1.><r1 ∨ r1.><r2 ∨ r2.><r1 else r1.><r1) ∨ (if r1~r2 ∨ r2.><r1 then r1.><r1 ∨ (r1~r2 ∨ r1.><r2) ∧ (r1~r2 ∨ r1.><r2 ∨ r2.><r1) else r1.><r1) ∨ (if r1~r2 ∨ r2.><r1 then r1~r2 ∨ r1.><r1 ∨ r1.><r2 else r1.><r1),\n\
+ r1.><r2 := r1~r2 ∨ r1.><r2 ∨ (if r1.><this then r2~this ∨ r1.><r2 ∨ r2.><this else r1.><r2) ∨ (if r2.><this then r1.><r2 ∨ (r1~r2 ∨ r1.><r2) ∧ (r2~this ∨ r2.><this) else r1.><r2) ∨ (if r1~r2 ∨ r1.><r2 then r1~r2 ∨ r1.><r2 ∨ r2.><r1 else r1.><r2) ∨ (if r1~r2 ∨ r2.><r1 then r1~r2 ∨ r1.><r2 else r1.><r2) ∨ (if r1~r2 ∨ r2.><r1 then r1.><r2 ∨ (r1~r2 ∨ r1.><r2) ∧ (r1~r2 ∨ r1.><r2 ∨ r2.><r1) else r1.><r2),\n\
+ r1.><this := r1.><this ∨ (if r2.><this then r1~r2 ∨ r1.><r2 ∨ r1.><this else r1.><this) ∨ (if r1~r2 ∨ r1.><r2 then r1.><this ∨ r2.><this else r1.><this) ∨ (if r1~r2 ∨ r2.><r1 then r1.><this ∨ r1.><this ∧ (r1~r2 ∨ r1.><r2) else r1.><this) ∨ (if r1~r2 ∨ r2.><r1 then r1.><this ∨ r2.><this ∧ (r1~r2 ∨ r1.><r2) else r1.><this),\n\
+ r2.><$r3 := r1~r2 ∨ r2.><r1 ∨ r2.><r2 ∨ (if r1.><this then r2.><r2 ∨ r2.><this ∧ (r1~r2 ∨ r2.><r1) else r2.><r2) ∨ (if r2.><this then r2.><r2 ∨ r2.><this else r2.><r2) ∨ (if r1~r2 ∨ r1.><r2 then r2.><r2 ∨ (r1~r2 ∨ r2.><r1) ∧ (r1~r2 ∨ r1.><r2 ∨ r2.><r1) else r2.><r2) ∨ (if r1~r2 ∨ r1.><r2 then r1~r2 ∨ r2.><r1 ∨ r2.><r2 else r2.><r2) ∨ (if r1~r2 ∨ r2.><r1 then r1~r2 ∨ r1.><r2 ∨ r2.><r1 ∨ r2.><r2 else r2.><r2),\n\
+ r2.><$r4 := r1~r2 ∨ r2.><r1 ∨ (if r1.><this then r2.><r1 ∨ r1.><this ∧ (r1~r2 ∨ r2.><r1) else r2.><r1) ∨ (if r2.><this then r1.><this ∨ r2.><r1 else r2.><r1) ∨ (if r1~r2 ∨ r1.><r2 then r1~r2 ∨ r2.><r1 else r2.><r1) ∨ (if r1~r2 ∨ r1.><r2 then r2.><r1 ∨ (r1~r2 ∨ r2.><r1) ∧ (r1~r2 ∨ r1.><r2 ∨ r2.><r1) else r2.><r1) ∨ (if r1~r2 ∨ r2.><r1 then r1~r2 ∨ r1.><r2 ∨ r2.><r1 else r2.><r1),\n\
+ r2.><r1 := r1~r2 ∨ r2.><r1 ∨ (if r1.><this then r2.><r1 ∨ (r1~r2 ∨ r2.><r1) ∧ (r1~this ∨ r1.><this) else r2.><r1) ∨ (if r2.><this then r1~this ∨ r1.><this ∨ r2.><r1 else r2.><r1) ∨ (if r1~r2 ∨ r1.><r2 then r1~r2 ∨ r2.><r1 else r2.><r1) ∨ (if r1~r2 ∨ r1.><r2 then r2.><r1 ∨ (r1~r2 ∨ r2.><r1) ∧ (r1~r2 ∨ r1.><r2 ∨ r2.><r1) else r2.><r1) ∨ (if r1~r2 ∨ r2.><r1 then r1~r2 ∨ r1.><r2 ∨ r2.><r1 else r2.><r1),\n\
+ r2.><r2 := r1~r2 ∨ r2.><r1 ∨ r2.><r2 ∨ (if r1.><this then r2.><r2 ∨ (r1~r2 ∨ r2.><r1) ∧ (r2~this ∨ r2.><this) else r2.><r2) ∨ (if r2.><this then r2~this ∨ r2.><r2 ∨ r2.><this else r2.><r2) ∨ (if r1~r2 ∨ r1.><r2 then r2.><r2 ∨ (r1~r2 ∨ r2.><r1) ∧ (r1~r2 ∨ r1.><r2 ∨ r2.><r1) else r2.><r2) ∨ (if r1~r2 ∨ r1.><r2 then r1~r2 ∨ r2.><r1 ∨ r2.><r2 else r2.><r2) ∨ (if r1~r2 ∨ r2.><r1 then r1~r2 ∨ r1.><r2 ∨ r2.><r1 ∨ r2.><r2 else r2.><r2),\n\
+ r2.><this := r2.><this ∨ (if r1.><this then r1~r2 ∨ r2.><r1 ∨ r2.><this else r2.><this) ∨ (if r1~r2 ∨ r1.><r2 then r2.><this ∨ r1.><this ∧ (r1~r2 ∨ r2.><r1) else r2.><this) ∨ (if r1~r2 ∨ r1.><r2 then r2.><this ∨ r2.><this ∧ (r1~r2 ∨ r2.><r1) else r2.><this) ∨ (if r1~r2 ∨ r2.><r1 then r1.><this ∨ r2.><this else r2.><this),\n\
+ level($i0) := pc ⊔ level(r1) ⊔ level(r2) ⊔ obj_level(r1) ⊔ obj_level(r2)}",
+                          ];
+  "pc3_js1" -> "pc4_js1" [label="tt,\n\
+{ϕ := S3}", ];
+  
+  }

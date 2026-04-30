@@ -1,0 +1,22 @@
+org.apache.rocketmq.filter.parser.Token org.apache.rocketmq.filter.parser.SelectorParser:getToken(int index)
+{
+org.apache.rocketmq.filter.parser.Token t;
+  int i;
+  org.apache.rocketmq.filter.parser.Token $stack4;
+  org.apache.rocketmq.filter.parser.SelectorParserTokenManager $stack5;
+  t=this.token;
+ i=0;
+ label0:if (i>=index) goto label1;
+ $stack4=t.next;
+ if ($stack4==null) goto label2;
+ t=t.next;
+ goto label3;
+ label2:$stack5=this.tokenSource;
+ $stack4 = $stack5.getNextToken();
+ t.next=$stack4;
+ t=$stack4;
+ label3:i=(i+1);
+ goto label0;
+ label1:return  t;
+ } 
+

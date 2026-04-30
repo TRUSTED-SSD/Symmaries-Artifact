@@ -1,0 +1,18 @@
+org.keycloak.adapters.spi.AuthChallenge org.keycloak.adapters.OAuthRequestAuthenticator:loginRedirect()
+{
+java.lang.String state;
+  java.lang.String redirect;
+  org.keycloak.adapters.OAuthRequestAuthenticator$1 $stack5;
+  org.keycloak.adapters.OIDCAuthenticationError$Reason $stack6;
+  org.keycloak.adapters.spi.AuthChallenge $stack7;
+  state = this.getStateCode();
+ redirect = this.getRedirectUri(state);
+ if (redirect!=null) goto label0;
+ $stack6=org.keycloak.adapters.OIDCAuthenticationError$Reason.NO_REDIRECT_URI;
+ $stack7 = this.challenge(403,$stack6,null);
+ return  $stack7;
+ label0:$stack5=new org.keycloak.adapters.OAuthRequestAuthenticator$1;
+ $stack5#org.keycloak.adapters.OAuthRequestAuthenticator$1(this,redirect,state);
+ return  $stack5;
+ } 
+

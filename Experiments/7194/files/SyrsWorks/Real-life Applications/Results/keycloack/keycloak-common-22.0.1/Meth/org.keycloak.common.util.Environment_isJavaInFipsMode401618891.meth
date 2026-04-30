@@ -1,0 +1,31 @@
+static boolean org.keycloak.common.util.Environment:isJavaInFipsMode()
+{
+java.lang.String property;
+  java.security.Provider[] l1;
+  int l2;
+  int l3;
+  java.security.Provider provider;
+  boolean $stack8;
+  property = java.lang.System.getProperty("com.redhat.fips");
+ if (property==null) goto label0;
+ $stack8 = java.lang.Boolean.parseBoolean(property);
+ return  $stack8;
+ label0:l1 = java.security.Security.getProviders();
+ l2=#l1;
+ l3=0;
+ label1:if (l3>=l2) goto label2;
+ provider=l1[l3];
+ property = provider.getName();
+ $stack8 = property.equals((java.lang.Object)"BCFIPS");
+ if ($stack8==0) goto label3;
+ goto label4;
+ label3:property = provider.getName();
+ property = property.toUpperCase();
+ $stack8 = property.contains((java.lang.CharSequence)"FIPS");
+ if ($stack8==0) goto label4;
+ return  1;
+ label4:l3=(l3+1);
+ goto label1;
+ label2:return  0;
+ } 
+

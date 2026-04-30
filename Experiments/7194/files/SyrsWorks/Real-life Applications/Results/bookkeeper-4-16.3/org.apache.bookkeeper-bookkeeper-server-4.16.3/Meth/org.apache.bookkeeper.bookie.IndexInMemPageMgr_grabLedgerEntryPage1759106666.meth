@@ -1,0 +1,50 @@
+org.apache.bookkeeper.bookie.LedgerEntryPage org.apache.bookkeeper.bookie.IndexInMemPageMgr:grabLedgerEntryPage(long ledger,long pageEntry)
+{
+java.lang.Object lep;
+  java.lang.Object readPageStopwatch;
+  boolean isNewPage;
+  org.apache.bookkeeper.bookie.IndexPersistenceMgr $stack10;
+  org.apache.bookkeeper.bookie.IndexInMemPageMgr$InMemPageCollection $stack12;
+  org.apache.bookkeeper.bookie.LedgerEntryPage $stack13;
+  java.util.concurrent.TimeUnit $stack16;
+  org.apache.bookkeeper.stats.OpStatsLogger $stack17;
+  java.io.IOException $stack20;
+  com.google.common.base.Stopwatch tmp$2011134053;
+  lep = this#org.apache.bookkeeper.bookie.IndexInMemPageMgr:grabCleanPage(ledger,pageEntry);
+ label0:readPageStopwatch = com.google.common.base.Stopwatch.createStarted();
+ $stack10=this.indexPersistenceManager;
+ $stack13=(org.apache.bookkeeper.bookie.LedgerEntryPage) lep;
+ isNewPage = $stack10.updatePage($stack13);
+ if (isNewPage!=0) goto label1;
+ $stack17=this.ledgerCacheReadPageStats;
+ $stack16=java.util.concurrent.TimeUnit.MICROSECONDS;
+ tmp$2011134053=(com.google.common.base.Stopwatch) readPageStopwatch;
+ ledger = tmp$2011134053.elapsed($stack16);
+ $stack16=java.util.concurrent.TimeUnit.MICROSECONDS;
+ $stack17.registerSuccessfulEvent(ledger,$stack16);
+ label1:goto label2;
+ label3:$stack20 = catch;
+ $stack13=(org.apache.bookkeeper.bookie.LedgerEntryPage) lep;
+ $stack13.releasePageNoCallback();
+ $stack12=this.pageMapAndList;
+ $stack13=(org.apache.bookkeeper.bookie.LedgerEntryPage) lep;
+ $stack12.addToListOfFreePages($stack13);
+ throw $stack20;
+ label2:$stack12=this.pageMapAndList;
+ $stack13=(org.apache.bookkeeper.bookie.LedgerEntryPage) lep;
+ $stack13 = org.apache.bookkeeper.bookie.IndexInMemPageMgr$InMemPageCollection.access$400($stack12,$stack13);
+ readPageStopwatch=$stack13;
+ if (lep==$stack13) goto label4;
+ $stack13=(org.apache.bookkeeper.bookie.LedgerEntryPage) lep;
+ $stack13.releasePageNoCallback();
+ $stack12=this.pageMapAndList;
+ $stack13=(org.apache.bookkeeper.bookie.LedgerEntryPage) lep;
+ $stack12.addToListOfFreePages($stack13);
+ $stack13=(org.apache.bookkeeper.bookie.LedgerEntryPage) readPageStopwatch;
+ $stack13.usePage();
+ lep=readPageStopwatch;
+ label4:$stack13=(org.apache.bookkeeper.bookie.LedgerEntryPage) lep;
+ return  $stack13;
+ catch java.io.IOException: label0 - label1 : label3;
+} 
+

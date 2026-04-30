@@ -1,0 +1,38 @@
+long org.apache.rocketmq.store.CommitLog:pickupStoreTimestamp(long offset,int size)
+{
+org.apache.rocketmq.store.SelectMappedBufferResult result;
+  java.lang.Throwable l10;
+  long $stack11;
+  byte $stack12;
+  long $stack15;
+  java.nio.ByteBuffer $stack19;
+  $stack11 = this.getMinOffset();
+ $stack12=(offset cmp $stack11);
+ if ($stack12<0) goto label0;
+ $stack11=(long) size;
+ $stack11=(offset+$stack11);
+ $stack15 = this.getMaxOffset();
+ $stack12=($stack11 cmp $stack15);
+ if ($stack12>0) goto label0;
+ result = this.getMessage(offset,size);
+ if (null==result) goto label0;
+ label1:$stack19 = result.getByteBuffer();
+ size = $stack19.getInt(36);
+ size=(size & 16);
+ if (size!=0) goto label2;
+ $stack12=8;
+ goto label3;
+ label2:$stack12=20;
+ label3:$stack19 = result.getByteBuffer();
+ size=(48+$stack12);
+ offset = $stack19.getLong(size);
+ label4:result.release();
+ return  offset;
+ label5:l10 = catch;
+ label6:result.release();
+ throw l10;
+ label0:return  -1L;
+ catch java.lang.Throwable: label1 - label4 : label5;
+catch java.lang.Throwable: label5 - label6 : label5;
+} 
+

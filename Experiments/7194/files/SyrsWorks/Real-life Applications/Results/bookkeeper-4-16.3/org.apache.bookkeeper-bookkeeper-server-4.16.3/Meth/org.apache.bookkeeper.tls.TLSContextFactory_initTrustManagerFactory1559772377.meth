@@ -1,0 +1,28 @@
+javax.net.ssl.TrustManagerFactory org.apache.bookkeeper.tls.TLSContextFactory:initTrustManagerFactory(java.lang.String @trustStoreType,java.lang.String trustStoreLocation,java.lang.String trustStorePasswordPath)
+{
+javax.net.ssl.TrustManagerFactory tmf;
+  java.lang.String trustStorePassword;
+  java.security.KeyStore ts;
+  boolean $stack7;
+  org.slf4j.Logger $stack20;
+  org.apache.bookkeeper.tls.SecurityException $stack21;
+  java.lang.String trustStoreType;
+trustStoreType=@trustStoreType;
+$stack7 = com.google.common.base.Strings.isNullOrEmpty(trustStoreLocation);
+ if ($stack7==0) goto label0;
+ $stack20=org.apache.bookkeeper.tls.TLSContextFactory.log;
+ $stack20.error("Trust Store location cannot be empty!");
+ $stack21=new org.apache.bookkeeper.tls.SecurityException;
+ $stack21#org.apache.bookkeeper.tls.SecurityException("Trust Store location cannot be empty!");
+ throw $stack21;
+ label0:trustStorePassword="";
+ $stack7 = com.google.common.base.Strings.isNullOrEmpty(trustStorePasswordPath);
+ if ($stack7!=0) goto label1;
+ trustStorePassword = this#org.apache.bookkeeper.tls.TLSContextFactory:getPasswordFromFile(trustStorePasswordPath);
+ label1:ts = this#org.apache.bookkeeper.tls.TLSContextFactory:loadKeyStore(trustStoreType,trustStoreLocation,trustStorePassword);
+ trustStoreType = javax.net.ssl.TrustManagerFactory.getDefaultAlgorithm();
+ tmf = javax.net.ssl.TrustManagerFactory.getInstance(trustStoreType);
+ tmf.init(ts);
+ return  tmf;
+ } 
+

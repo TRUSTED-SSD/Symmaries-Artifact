@@ -1,0 +1,51 @@
+void org.apache.bookkeeper.proto.BookieRequestProcessor:processAddRequest(org.apache.bookkeeper.proto.BookieProtocol$ParsedAddRequest r,org.apache.bookkeeper.proto.BookieRequestHandler requestHandler)
+{
+org.apache.bookkeeper.proto.WriteEntryProcessor write;
+  org.apache.bookkeeper.common.util.OrderedExecutor threadPool;
+  java.util.concurrent.RejectedExecutionException e;
+  boolean $stack7;
+  long $stack8;
+  org.slf4j.Logger $stack12;
+  org.apache.bookkeeper.proto.RequestStats $stack14;
+  org.apache.bookkeeper.stats.Counter $stack15;
+  org.apache.bookkeeper.proto.BookieProtocol$Response $stack17;
+  org.apache.bookkeeper.stats.OpStatsLogger $stack19;
+  java.lang.Long $stack23;
+  java.lang.Long $stack25;
+  write = org.apache.bookkeeper.proto.WriteEntryProcessor.create(r,requestHandler,this);
+ $stack7 = r.isHighPriority();
+ if ($stack7==0) goto label0;
+ threadPool=this.highPriorityThreadPool;
+ goto label1;
+ label0:threadPool=this.writeThreadPool;
+ label1:if (null!=threadPool) goto label2;
+ write.run();
+ goto label3;
+ label2:$stack8 = r.getLedgerId();
+ threadPool.executeOrdered($stack8,(java.lang.Runnable)write);
+ label4:goto label3;
+ label5:e = catch;
+ $stack12=org.apache.bookkeeper.proto.BookieRequestProcessor.LOG;
+ $stack7 = $stack12.isDebugEnabled();
+ if ($stack7==0) goto label6;
+ $stack12=org.apache.bookkeeper.proto.BookieRequestProcessor.LOG;
+ $stack8=r.ledgerId;
+ $stack23 = java.lang.Long.valueOf($stack8);
+ $stack8=r.entryId;
+ $stack25 = java.lang.Long.valueOf($stack8);
+ dummyClass.lowSink("Failed to process request to add entry at {}:{}. Too many pending requests");
+$stack12.debug("Failed to process request to add entry at {}:{}. Too many pending requests",(java.lang.Object)$stack23,(java.lang.Object)$stack25);
+ label6:$stack14 = this.getRequestStats();
+ $stack15 = $stack14.getAddEntryRejectedCounter();
+ $stack15.inc();
+ $stack17 = org.apache.bookkeeper.proto.ResponseBuilder.buildErrorResponse(106,(org.apache.bookkeeper.proto.BookieProtocol$Request)r);
+ $stack14=this.requestStats;
+ $stack19 = $stack14.getAddRequestStats();
+ write.sendWriteReqResponse(106,(java.lang.Object)$stack17,$stack19);
+ r.release();
+ r.recycle();
+ write.recycle();
+ label3:return;
+ catch java.util.concurrent.RejectedExecutionException: label2 - label4 : label5;
+} 
+

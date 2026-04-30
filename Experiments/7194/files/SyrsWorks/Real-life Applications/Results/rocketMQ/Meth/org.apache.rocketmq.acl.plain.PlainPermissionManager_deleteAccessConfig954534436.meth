@@ -1,0 +1,49 @@
+boolean org.apache.rocketmq.acl.plain.PlainPermissionManager:deleteAccessConfig(java.lang.String accesskey)
+{
+java.lang.String aclFileName;
+  java.util.Map aclAccessConfigMap;
+  java.util.List accounts;
+  java.util.Iterator itemIterator;
+  boolean $stack6;
+  java.lang.Object $stack10;
+  org.apache.rocketmq.logging.org.slf4j.Logger $stack12;
+  java.util.Map $stack19;
+  $stack6 = org.apache.commons.lang3.StringUtils.isEmpty((java.lang.CharSequence)accesskey);
+ if ($stack6==0) goto label0;
+ $stack12=org.apache.rocketmq.acl.plain.PlainPermissionManager.log;
+ $stack12.error("Parameter value accesskey is null or empty String,Please check your parameter");
+ return  0;
+ label0:aclAccessConfigMap=this.accessKeyTable;
+ $stack6 = aclAccessConfigMap.containsKey((java.lang.Object)accesskey);
+ if ($stack6==0) goto label1;
+ aclAccessConfigMap=this.accessKeyTable;
+ $stack10 = aclAccessConfigMap.get((java.lang.Object)accesskey);
+ aclFileName=(java.lang.String) $stack10;
+ $stack10 = org.apache.rocketmq.acl.common.AclUtils.getYamlDataObject(aclFileName,java.util.Map);
+ aclAccessConfigMap=(java.util.Map) $stack10;
+ if (aclAccessConfigMap==null) goto label2;
+ $stack6 = aclAccessConfigMap.isEmpty();
+ if ($stack6==0) goto label3;
+ label2:$stack12=org.apache.rocketmq.acl.plain.PlainPermissionManager.log;
+ $stack12.warn("No data found in {} when deleting access config of {}",(java.lang.Object)aclFileName,(java.lang.Object)accesskey);
+ return  1;
+ label3:$stack10 = aclAccessConfigMap.get((java.lang.Object)"accounts");
+ accounts=(java.util.List) $stack10;
+ itemIterator = accounts.iterator();
+ label4:$stack6 = itemIterator.hasNext();
+ if ($stack6==0) goto label1;
+ $stack10 = itemIterator.next();
+ $stack19=(java.util.Map) $stack10;
+ $stack10 = $stack19.get((java.lang.Object)"accessKey");
+ $stack6 = $stack10.equals((java.lang.Object)accesskey);
+ if ($stack6==0) goto label4;
+ itemIterator.remove();
+ $stack19=this.accessKeyTable;
+ $stack19.remove((java.lang.Object)accesskey);
+ aclAccessConfigMap.put((java.lang.Object)"accounts",(java.lang.Object)accounts);
+ aclAccessConfigMap = this.updateAclConfigFileVersion(aclFileName,aclAccessConfigMap);
+ $stack6 = org.apache.rocketmq.acl.common.AclUtils.writeDataObject(aclFileName,aclAccessConfigMap);
+ return  $stack6;
+ label1:return  0;
+ } 
+

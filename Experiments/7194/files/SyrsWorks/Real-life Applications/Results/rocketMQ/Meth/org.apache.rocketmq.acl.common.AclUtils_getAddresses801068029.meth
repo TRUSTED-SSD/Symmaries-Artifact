@@ -1,0 +1,34 @@
+static java.lang.String[] org.apache.rocketmq.acl.common.AclUtils:getAddresses(java.lang.String @netaddress,java.lang.String @partialAddress)
+{
+java.lang.String[] parAddStrArray;
+  java.lang.String[] addreeStrArray;
+  int i;
+  int $stack15;
+  java.lang.StringBuilder $stack16;
+  java.lang.String partialAddress;
+java.lang.String netaddress;
+netaddress=@netaddress;
+partialAddress=@partialAddress;
+i = partialAddress.length();
+ i=(i-1);
+ partialAddress = partialAddress.substring(1,i);
+ parAddStrArray = org.apache.commons.lang3.StringUtils.split(partialAddress,",");
+ i = netaddress.indexOf("{");
+ netaddress = netaddress.substring(0,i);
+ i=#parAddStrArray;
+ addreeStrArray=new java.lang.String[i];
+ i=0;
+ label0:$stack15=#parAddStrArray;
+ if (i>=$stack15) goto label1;
+ $stack16=new java.lang.StringBuilder;
+ $stack16#java.lang.StringBuilder();
+ $stack16 = $stack16.append(netaddress);
+ partialAddress=parAddStrArray[i];
+ $stack16 = $stack16.append(partialAddress);
+ partialAddress = $stack16.toString();
+ addreeStrArray[i]=partialAddress;
+ i=(i+1);
+ goto label0;
+ label1:return  addreeStrArray;
+ } 
+

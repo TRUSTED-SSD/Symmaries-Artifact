@@ -1,0 +1,45 @@
+int com.google.zxing.qrcode.detector.FinderPatternFinder:findRowSkip()
+{
+int max;
+  com.google.zxing.qrcode.detector.FinderPattern firstConfirmedCenter;
+  java.util.Iterator l3;
+  com.google.zxing.qrcode.detector.FinderPattern center;
+  java.util.List $stack5;
+  boolean $stack9;
+  java.lang.Object $stack10;
+  float $stack13;
+  float $stack14;
+  float $stack18;
+  $stack5=this.possibleCenters;
+ max = $stack5.size();
+ if (max>1) goto label0;
+ return  0;
+ label0:firstConfirmedCenter=null;
+ $stack5=this.possibleCenters;
+ l3 = $stack5.iterator();
+ label1:$stack9 = l3.hasNext();
+ if ($stack9==0) goto label2;
+ $stack10 = l3.next();
+ center=(com.google.zxing.qrcode.detector.FinderPattern) $stack10;
+ max = center.getCount();
+ if (max<2) goto label3;
+ if (firstConfirmedCenter!=null) goto label4;
+ firstConfirmedCenter=center;
+ goto label3;
+ label4:this.hasSkipped=1;
+ $stack13 = firstConfirmedCenter.getX();
+ $stack14 = center.getX();
+ $stack13=($stack13-$stack14);
+ $stack13 = java.lang.Math.abs($stack13);
+ $stack14 = firstConfirmedCenter.getY();
+ $stack18 = center.getY();
+ $stack14=($stack14-$stack18);
+ $stack14 = java.lang.Math.abs($stack14);
+ $stack13=($stack13-$stack14);
+ max=(int) $stack13;
+ max=(max/2);
+ return  max;
+ label3:goto label1;
+ label2:return  0;
+ } 
+

@@ -1,0 +1,76 @@
+    protected rifl.spec.DeclassificationExpression readExpression(org.w3c.dom.Element) throws rifl.spec.RIFLIntegrityException
+    {
+        rifl.spec.java.JavaRIFLReader this;
+        org.w3c.dom.Element elem;
+        org.w3c.dom.Node childNode;
+        short $stack6;
+        java.lang.String $stack7;
+        rifl.spec.java.JavaDeclassificationExpression $stack9;
+        rifl.spec.RIFLIntegrityException $stack14;
+        org.w3c.dom.Text $stack17;
+
+        this := @this: rifl.spec.java.JavaRIFLReader;
+
+        elem := @parameter0: org.w3c.dom.Element;
+
+        childNode = interfaceinvoke elem.<org.w3c.dom.Element: org.w3c.dom.Node getFirstChild()>();
+/*199*/
+/*199*/
+
+        goto label2;
+/*202*/
+
+     label1:
+        childNode = interfaceinvoke childNode.<org.w3c.dom.Node: org.w3c.dom.Node getNextSibling()>();
+/*204*/
+/*204*/
+
+        if childNode != null goto label2;
+/*206*/
+
+        $stack14 = new rifl.spec.RIFLIntegrityException;
+/*207*/
+
+        specialinvoke $stack14.<rifl.spec.RIFLIntegrityException: void <init>(java.lang.String)>("No declassification expression given.");
+/*207*/
+
+        throw $stack14;
+/*207*/
+
+     label2:
+        $stack6 = interfaceinvoke childNode.<org.w3c.dom.Node: short getNodeType()>();
+/*202*/
+
+        if $stack6 == 4 goto label3;
+/*202*/
+
+        $stack6 = interfaceinvoke childNode.<org.w3c.dom.Node: short getNodeType()>();
+/*203*/
+
+        if $stack6 != 3 goto label1;
+/*203*/
+
+     label3:
+        $stack17 = (org.w3c.dom.Text) childNode;
+/*212*/
+/*211*/
+/*211*/
+
+        $stack7 = interfaceinvoke $stack17.<org.w3c.dom.Text: java.lang.String getData()>();
+/*212*/
+
+        $stack9 = new rifl.spec.java.JavaDeclassificationExpression;
+/*214*/
+
+        $stack7 = virtualinvoke $stack7.<java.lang.String: java.lang.String trim()>();
+/*214*/
+/*212*/
+/*212*/
+
+        specialinvoke $stack9.<rifl.spec.java.JavaDeclassificationExpression: void <init>(java.lang.String)>($stack7);
+/*214*/
+
+        return $stack9;
+/*214*/
+    }
+

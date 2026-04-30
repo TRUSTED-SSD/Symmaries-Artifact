@@ -1,0 +1,30 @@
+void org.apache.rocketmq.store.ha.autoswitch.AutoSwitchHAConnection:maybeExpandInSyncStateSet(long slaveMaxOffset)
+{
+boolean $stack5;
+  long $stack6;
+  byte $stack7;
+  org.apache.rocketmq.store.ha.autoswitch.AutoSwitchHAService $stack8;
+  org.apache.rocketmq.store.DefaultMessageStore $stack9;
+  java.lang.String $stack12;
+  $stack5=this.isAsyncLearner;
+ if ($stack5!=0) goto label0;
+ $stack6=this.lastMasterMaxOffset;
+ $stack7=(slaveMaxOffset cmp $stack6);
+ if ($stack7<0) goto label0;
+ $stack8=this.haService;
+ $stack9 = $stack8.getDefaultMessageStore();
+ $stack6 = $stack9.getMaxPhyOffset();
+ $stack7=($stack6 cmp slaveMaxOffset);
+ if ($stack7!=0) goto label1;
+ $stack6 = java.lang.System.currentTimeMillis();
+ goto label2;
+ label1:$stack6=this.lastTransferTimeMs;
+ label2:$stack8=this.haService;
+ $stack12=this.slaveAddress;
+ $stack8#org.apache.rocketmq.store.ha.autoswitch.AutoSwitchHAService($stack12,$stack6);
+ $stack8=this.haService;
+ $stack12=this.slaveAddress;
+ $stack8.maybeExpandInSyncStateSet($stack12,slaveMaxOffset);
+ label0:return;
+ } 
+

@@ -1,0 +1,16 @@
+void org.apache.bookkeeper.bookie.Journal$ForceWriteRequest:recycle()
+{
+org.apache.bookkeeper.common.collections.RecyclableArrayList $stack1;
+  io.netty.util.Recycler$Handle $stack2;
+  this.logFile=null;
+ this.flushed=0;
+ $stack1=this.forceWriteWaiters;
+ if ($stack1==null) goto label0;
+ $stack1=this.forceWriteWaiters;
+ $stack1.recycle();
+ this.forceWriteWaiters=null;
+ label0:$stack2=this.recyclerHandle;
+ $stack2.recycle((java.lang.Object)this);
+ return;
+ } 
+

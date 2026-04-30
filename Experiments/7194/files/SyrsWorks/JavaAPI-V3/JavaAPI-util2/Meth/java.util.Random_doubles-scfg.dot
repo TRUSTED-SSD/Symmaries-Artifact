@@ -1,0 +1,38 @@
+digraph G {
+  node [shape=box, ];
+  "pc0_js1" [label="〈$r1 = new java.util.Random$RandomDoublesSpliterator, js1〉",
+             ];
+  "pc1_js1" [label="〈$r1#java.util.Random$RandomDoublesSpliterator.init (this, 0L, 9223372036854775807L, 1.7976931348623157E308, 0.0), js1〉\n\
+tt",
+             ];
+  "pc2_js1" [label="〈$r2 = java.util.stream.StreamSupport.doubleStream ((java.util.Spliterator$OfDouble) $r1, (boolean) 0), js1〉\n\
+tt",
+             ];
+  "pc3_js1" [label="〈return $r2, js1〉", ];
+  "pc4_js1" [label="〈sink, js1〉\n\
+obj_level(this) ⊑ ret(obj_level(this))' ∧ (ret(this.><this)' ∨ ¬this.><this) ∧ (ϕ ≠ S3 ∨ obj_level($r2) ⊑ ret(obj_level())' ∧ pc ⊔ level($r2) ⊑ ret(level())')",
+             ];
+  
+  
+  "pc0_js1" -> "pc1_js1" [label="tt,\n\
+{$r1.><$r1 := ff,\n\
+ $r1.><this := ff,\n\
+ this.><$r1 := ff,\n\
+ level($r1) := pc,\n\
+ obj_level($r1) := pc}",
+                          ];
+  "pc1_js1" -> "pc2_js1" [label="tt,\n\
+{$r1.><$r1 := ff,\n\
+ $r1.><this := tt,\n\
+ this.><$r1 := ff,\n\
+ obj_level($r1) := pc ⊔ level(this) ⊔ obj_level(this)}",
+                          ];
+  "pc2_js1" -> "pc3_js1" [label="tt,\n\
+{$r1.><this := tt,\n\
+ level($r2) := pc ⊔ obj_level($r1),\n\
+ obj_level($r2) := pc ⊔ obj_level($r1)}",
+                          ];
+  "pc3_js1" -> "pc4_js1" [label="tt,\n\
+{ϕ := S3}", ];
+  
+  }

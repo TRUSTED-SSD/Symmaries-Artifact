@@ -1,0 +1,143 @@
+    protected rifl.spec.SrcSnk read(org.w3c.dom.Element, boolean) throws rifl.spec.RIFLIntegrityException
+    {
+        rifl.spec.java.JavaRIFLReader this;
+        org.w3c.dom.Element elem;
+        boolean isSource, $stack5;
+        java.lang.String $stack4;
+        rifl.spec.RIFLIntegrityException $stack14;
+        java.lang.Object[] $stack15;
+        rifl.spec.java.JavaAccessPath $stack23;
+        rifl.spec.java.JavaException $stack24;
+        rifl.spec.java.JavaReturnValue $stack25;
+        rifl.spec.java.JavaField $stack26;
+        rifl.spec.java.JavaParameter $stack27;
+
+        this := @this: rifl.spec.java.JavaRIFLReader;
+
+        elem := @parameter0: org.w3c.dom.Element;
+
+        isSource := @parameter1: boolean;
+
+        elem = staticinvoke <rifl.spec.java.JavaRIFLReader: org.w3c.dom.Element getChildElement(org.w3c.dom.Element)>(elem);
+/*75*/
+/*75*/
+
+        $stack4 = interfaceinvoke elem.<org.w3c.dom.Element: java.lang.String getNodeName()>();
+/*76*/
+
+        $stack5 = virtualinvoke $stack4.<java.lang.String: boolean equals(java.lang.Object)>("parameter");
+/*76*/
+
+        if $stack5 == 0 goto label1;
+/*76*/
+
+        $stack27 = virtualinvoke this.<rifl.spec.java.JavaRIFLReader: rifl.spec.java.JavaParameter readParameter(org.w3c.dom.Element,boolean)>(elem, isSource);
+/*77*/
+
+        return $stack27;
+/*77*/
+
+     label1:
+        $stack4 = interfaceinvoke elem.<org.w3c.dom.Element: java.lang.String getNodeName()>();
+/*78*/
+
+        $stack5 = virtualinvoke $stack4.<java.lang.String: boolean equals(java.lang.Object)>("field");
+/*78*/
+
+        if $stack5 == 0 goto label2;
+/*78*/
+
+        $stack26 = virtualinvoke this.<rifl.spec.java.JavaRIFLReader: rifl.spec.java.JavaField readField(org.w3c.dom.Element,boolean)>(elem, isSource);
+/*79*/
+
+        return $stack26;
+/*79*/
+
+     label2:
+        $stack4 = interfaceinvoke elem.<org.w3c.dom.Element: java.lang.String getNodeName()>();
+/*80*/
+
+        $stack5 = virtualinvoke $stack4.<java.lang.String: boolean equals(java.lang.Object)>("returnvalue");
+/*80*/
+
+        if $stack5 == 0 goto label3;
+/*80*/
+
+        $stack25 = virtualinvoke this.<rifl.spec.java.JavaRIFLReader: rifl.spec.java.JavaReturnValue readReturnValue(org.w3c.dom.Element,boolean)>(elem, isSource);
+/*81*/
+
+        return $stack25;
+/*81*/
+
+     label3:
+        $stack4 = interfaceinvoke elem.<org.w3c.dom.Element: java.lang.String getNodeName()>();
+/*82*/
+
+        $stack5 = virtualinvoke $stack4.<java.lang.String: boolean equals(java.lang.Object)>("exception");
+/*82*/
+
+        if $stack5 == 0 goto label4;
+/*82*/
+
+        $stack24 = virtualinvoke this.<rifl.spec.java.JavaRIFLReader: rifl.spec.java.JavaException readException(org.w3c.dom.Element,boolean)>(elem, isSource);
+/*83*/
+
+        return $stack24;
+/*83*/
+
+     label4:
+        $stack4 = interfaceinvoke elem.<org.w3c.dom.Element: java.lang.String getNodeName()>();
+/*84*/
+
+        $stack5 = virtualinvoke $stack4.<java.lang.String: boolean equals(java.lang.Object)>("path");
+/*84*/
+
+        if $stack5 == 0 goto label5;
+/*84*/
+
+        $stack23 = virtualinvoke this.<rifl.spec.java.JavaRIFLReader: rifl.spec.java.JavaAccessPath readAccessPath(org.w3c.dom.Element,boolean)>(elem, isSource);
+/*85*/
+
+        return $stack23;
+/*85*/
+
+     label5:
+        $stack14 = new rifl.spec.RIFLIntegrityException;
+/*87*/
+
+        $stack15 = newarray (java.lang.Object)[2];
+/*87*/
+
+        if isSource == 0 goto label6;
+/*88*/
+
+        $stack4 = "source";
+/*87*/
+
+        goto label7;
+/*87*/
+
+     label6:
+        $stack4 = "sink";
+/*87*/
+
+     label7:
+        $stack15[0] = $stack4;
+/*88*/
+
+        $stack4 = interfaceinvoke elem.<org.w3c.dom.Element: java.lang.String getNodeName()>();
+/*88*/
+
+        $stack15[1] = $stack4;
+/*88*/
+
+        $stack4 = staticinvoke <java.lang.String: java.lang.String format(java.lang.String,java.lang.Object[])>("Unkown %s type: %s.", $stack15);
+/*87*/
+
+        specialinvoke $stack14.<rifl.spec.RIFLIntegrityException: void <init>(java.lang.String)>($stack4);
+/*87*/
+
+        throw $stack14;
+/*87*/
+    }
+

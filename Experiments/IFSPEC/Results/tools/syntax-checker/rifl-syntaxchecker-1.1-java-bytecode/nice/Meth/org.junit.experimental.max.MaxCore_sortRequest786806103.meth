@@ -1,0 +1,19 @@
+org.junit.runner.Request org.junit.experimental.max.MaxCore:sortRequest(org.junit.runner.Request @request)
+{
+java.util.List leaves;
+  boolean $stack3;
+  org.junit.experimental.max.MaxHistory $stack5;
+  java.util.Comparator $stack6;
+  org.junit.runner.Request request;
+request=@request;
+$stack3=request instanceof org.junit.internal.requests.SortingRequest;
+ if ($stack3==0) goto label0;
+ return  request;
+ label0:leaves = this#org.junit.experimental.max.MaxCore:findLeaves(request);
+ $stack5=this.history;
+ $stack6 = $stack5.testComparator();
+ java.util.Collections.sort(leaves,$stack6);
+ request = this#org.junit.experimental.max.MaxCore:constructLeafRequest(leaves);
+ return  request;
+ } 
+

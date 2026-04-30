@@ -1,0 +1,21 @@
+void org.apache.rocketmq.store.StoreStatsService:setGetMessageEntireTimeMax(long value)
+{
+long $stack3;
+  byte $stack4;
+  java.util.concurrent.locks.ReentrantLock $stack5;
+  $stack3=this.getMessageEntireTimeMax;
+ $stack4=(value cmp $stack3);
+ if ($stack4<=0) goto label0;
+ $stack5=this.getLock;
+ $stack5.lock();
+ $stack3=this.getMessageEntireTimeMax;
+ $stack4=(value cmp $stack3);
+ if ($stack4<=0) goto label1;
+ goto label2;
+ label1:value=this.getMessageEntireTimeMax;
+ label2:this.getMessageEntireTimeMax=value;
+ $stack5=this.getLock;
+ $stack5.unlock();
+ label0:return;
+ } 
+

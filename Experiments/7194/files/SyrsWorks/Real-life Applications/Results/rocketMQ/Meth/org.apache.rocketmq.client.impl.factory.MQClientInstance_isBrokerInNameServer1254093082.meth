@@ -1,0 +1,37 @@
+boolean org.apache.rocketmq.client.impl.factory.MQClientInstance:isBrokerInNameServer(java.lang.String brokerAddr)
+{
+java.util.Iterator l2;
+  java.util.Map$Entry itNext;
+  java.util.List brokerDatas;
+  java.util.Iterator l5;
+  org.apache.rocketmq.remoting.protocol.route.BrokerData bd;
+  boolean contain;
+  java.util.concurrent.ConcurrentMap $stack8;
+  java.util.Set $stack9;
+  java.lang.Object $stack12;
+  org.apache.rocketmq.remoting.protocol.route.TopicRouteData $stack14;
+  java.util.HashMap $stack20;
+  $stack8=this.topicRouteTable;
+ $stack9 = $stack8.entrySet();
+ l2 = $stack9.iterator();
+ label0:contain = l2.hasNext();
+ if (contain==0) goto label1;
+ $stack12 = l2.next();
+ itNext=(java.util.Map$Entry) $stack12;
+ $stack12 = itNext.getValue();
+ $stack14=(org.apache.rocketmq.remoting.protocol.route.TopicRouteData) $stack12;
+ brokerDatas = $stack14.getBrokerDatas();
+ l5 = brokerDatas.iterator();
+ label2:contain = l5.hasNext();
+ if (contain==0) goto label3;
+ $stack12 = l5.next();
+ bd=(org.apache.rocketmq.remoting.protocol.route.BrokerData) $stack12;
+ $stack20 = bd.getBrokerAddrs();
+ contain = $stack20.containsValue((java.lang.Object)brokerAddr);
+ if (contain==0) goto label4;
+ return  1;
+ label4:goto label2;
+ label3:goto label0;
+ label1:return  0;
+ } 
+

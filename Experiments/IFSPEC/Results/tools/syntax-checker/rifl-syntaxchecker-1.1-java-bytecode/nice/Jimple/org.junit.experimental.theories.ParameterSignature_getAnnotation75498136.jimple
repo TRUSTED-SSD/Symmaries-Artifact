@@ -1,0 +1,58 @@
+    public java.lang.'annotation'.Annotation getAnnotation(java.lang.Class)
+    {
+        org.junit.experimental.theories.ParameterSignature this;
+        java.lang.Class annotationType;
+        java.util.Iterator i$;
+        java.lang.'annotation'.Annotation each;
+        java.util.List $stack4;
+        boolean $stack6;
+        java.lang.Object $stack7;
+
+        this := @this: org.junit.experimental.theories.ParameterSignature;
+
+        annotationType := @parameter0: java.lang.Class;
+
+        $stack4 = virtualinvoke this.<org.junit.experimental.theories.ParameterSignature: java.util.List getAnnotations()>();
+/*127*/
+
+        i$ = interfaceinvoke $stack4.<java.util.List: java.util.Iterator iterator()>();
+/*127*/
+/*127*/
+
+     label1:
+        $stack6 = interfaceinvoke i$.<java.util.Iterator: boolean hasNext()>();
+/*127*/
+
+        if $stack6 == 0 goto label3;
+/*127*/
+
+        $stack7 = interfaceinvoke i$.<java.util.Iterator: java.lang.Object next()>();
+/*132*/
+
+        each = (java.lang.'annotation'.Annotation) $stack7;
+/*132*/
+
+        $stack6 = virtualinvoke annotationType.<java.lang.Class: boolean isInstance(java.lang.Object)>(each);
+/*128*/
+
+        if $stack6 == 0 goto label2;
+/*128*/
+
+        $stack7 = virtualinvoke annotationType.<java.lang.Class: java.lang.Object cast(java.lang.Object)>(each);
+/*129*/
+
+        each = (java.lang.'annotation'.Annotation) $stack7;
+/*129*/
+
+        return each;
+/*129*/
+
+     label2:
+        goto label1;
+/*128*/
+
+     label3:
+        return null;
+/*132*/
+    }
+

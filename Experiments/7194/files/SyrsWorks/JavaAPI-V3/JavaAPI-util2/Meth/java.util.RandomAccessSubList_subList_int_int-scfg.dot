@@ -1,0 +1,33 @@
+digraph G {
+  node [shape=box, ];
+  "pc0_js1" [label="〈$r1 = new java.util.RandomAccessSubList, js1〉", ];
+  "pc1_js1" [label="〈$r1#java.util.RandomAccessSubList.init ((java.util.AbstractList) this, i0, i1), js1〉\n\
+pc ⊔ level($r1) ⊔ level(i0) ⊔ level(i1) ⊔ level(this) ⊔ obj_level($r1) ⊔ obj_level(this) = ⊥",
+             ];
+  "pc2_js1" [label="〈return $r1, js1〉", ];
+  "pc3_js1" [label="〈sink, js1〉\n\
+obj_level(this) ⊑ ret(obj_level(this))' ∧ (ret(this.><this)' ∨ ¬this.><this) ∧ (ϕ ≠ S2 ∨ obj_level($r1) ⊑ ret(obj_level())' ∧ pc ⊔ level($r1) ⊑ ret(level())' ∧ (ret(~this)' ∨ ¬$r1~this) ∧ (ret(.><this)' ∨ ¬this.><$r1) ∧ (ret(this.><)' ∨ ¬$r1.><this))",
+             ];
+  
+  
+  "pc0_js1" -> "pc1_js1" [label="tt,\n\
+{$r1~this := ff,\n\
+ $r1.><$r1 := ff,\n\
+ $r1.><this := ff,\n\
+ this.><$r1 := ff,\n\
+ level($r1) := pc,\n\
+ obj_level($r1) := pc}",
+                          ];
+  "pc1_js1" -> "pc2_js1" [label="tt,\n\
+{$r1~this := ff,\n\
+ $r1.><$r1 := tt,\n\
+ $r1.><this := tt,\n\
+ this.><$r1 := tt,\n\
+ this.><this := tt,\n\
+ obj_level($r1) := ⊤,\n\
+ obj_level(this) := ⊤}",
+                          ];
+  "pc2_js1" -> "pc3_js1" [label="tt,\n\
+{ϕ := S2}", ];
+  
+  }

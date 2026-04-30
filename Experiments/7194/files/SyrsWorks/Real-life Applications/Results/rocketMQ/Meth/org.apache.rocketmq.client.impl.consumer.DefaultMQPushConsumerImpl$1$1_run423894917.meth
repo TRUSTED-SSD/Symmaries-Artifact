@@ -1,0 +1,47 @@
+void org.apache.rocketmq.client.impl.consumer.DefaultMQPushConsumerImpl$1$1:run()
+{
+org.apache.rocketmq.client.impl.consumer.DefaultMQPushConsumerImpl$1 $stack2;
+  org.apache.rocketmq.client.impl.consumer.DefaultMQPushConsumerImpl $stack3;
+  org.apache.rocketmq.client.consumer.store.OffsetStore $stack4;
+  org.apache.rocketmq.client.impl.consumer.PullRequest $stack6;
+  org.apache.rocketmq.common.message.MessageQueue $stack7;
+  long $stack10;
+  org.apache.rocketmq.client.impl.consumer.RebalanceImpl $stack19;
+  org.apache.rocketmq.logging.org.slf4j.Logger $stack23;
+  java.lang.Throwable $stack26;
+  label0:$stack2=this.this$1;
+ $stack3=$stack2.this$0;
+ $stack4 = org.apache.rocketmq.client.impl.consumer.DefaultMQPushConsumerImpl.access$500($stack3);
+ $stack2=this.this$1;
+ $stack6=$stack2.val$pullRequest;
+ $stack7 = $stack6.getMessageQueue();
+ $stack2=this.this$1;
+ $stack6=$stack2.val$pullRequest;
+ $stack10 = $stack6.getNextOffset();
+ $stack4.updateOffset($stack7,$stack10,(boolean)0);
+ $stack2=this.this$1;
+ $stack3=$stack2.this$0;
+ $stack4 = org.apache.rocketmq.client.impl.consumer.DefaultMQPushConsumerImpl.access$500($stack3);
+ $stack2=this.this$1;
+ $stack6=$stack2.val$pullRequest;
+ $stack7 = $stack6.getMessageQueue();
+ $stack4.persist($stack7);
+ $stack2=this.this$1;
+ $stack3=$stack2.this$0;
+ $stack19 = org.apache.rocketmq.client.impl.consumer.DefaultMQPushConsumerImpl.access$600($stack3);
+ $stack2=this.this$1;
+ $stack6=$stack2.val$pullRequest;
+ $stack7 = $stack6.getMessageQueue();
+ $stack19.removeProcessQueue($stack7);
+ $stack23 = org.apache.rocketmq.client.impl.consumer.DefaultMQPushConsumerImpl.access$300();
+ $stack2=this.this$1;
+ $stack6=$stack2.val$pullRequest;
+ $stack23.warn("fix the pull request offset, {}",(java.lang.Object)$stack6);
+ label1:goto label2;
+ label3:$stack26 = catch;
+ $stack23 = org.apache.rocketmq.client.impl.consumer.DefaultMQPushConsumerImpl.access$300();
+ $stack23.error("executeTaskLater Exception",$stack26);
+ label2:return;
+ catch java.lang.Throwable: label0 - label1 : label3;
+} 
+

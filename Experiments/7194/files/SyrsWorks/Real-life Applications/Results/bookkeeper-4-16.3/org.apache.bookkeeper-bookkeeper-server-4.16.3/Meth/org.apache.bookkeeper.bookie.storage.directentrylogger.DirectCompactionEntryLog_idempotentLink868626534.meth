@@ -1,0 +1,37 @@
+static void org.apache.bookkeeper.bookie.storage.directentrylogger.DirectCompactionEntryLog:idempotentLink(java.io.File src,java.io.File dst)
+{
+boolean $stack2;
+  java.nio.file.Path $stack4;
+  java.nio.file.Path $stack5;
+  java.io.IOException $stack7;
+  org.apache.bookkeeper.common.util.ExceptionMessageHelper $stack8;
+  java.lang.String $stack11;
+  $stack2 = src.exists();
+ if ($stack2!=0) goto label0;
+ $stack7=new java.io.IOException;
+ $stack8 = org.apache.bookkeeper.common.util.ExceptionMessageHelper.exMsg("src doesn\'t exist, aborting link");
+ $stack8 = $stack8.kv("src",(java.lang.Object)src);
+ $stack8 = $stack8.kv("dst",(java.lang.Object)dst);
+ $stack11 = $stack8.toString();
+ $stack7#java.io.IOException($stack11);
+ throw $stack7;
+ label0:$stack2 = dst.exists();
+ if ($stack2!=0) goto label1;
+ $stack4 = dst.toPath();
+ $stack5 = src.toPath();
+ java.nio.file.Files.createLink($stack4,$stack5);
+ goto label2;
+ label1:$stack4 = src.toPath();
+ $stack5 = dst.toPath();
+ $stack2 = java.nio.file.Files.isSameFile($stack4,$stack5);
+ if ($stack2!=0) goto label2;
+ $stack7=new java.io.IOException;
+ $stack8 = org.apache.bookkeeper.common.util.ExceptionMessageHelper.exMsg("dst exists, but doesn\'t match src");
+ $stack8 = $stack8.kv("src",(java.lang.Object)src);
+ $stack8 = $stack8.kv("dst",(java.lang.Object)dst);
+ $stack11 = $stack8.toString();
+ $stack7#java.io.IOException($stack11);
+ throw $stack7;
+ label2:return;
+ } 
+

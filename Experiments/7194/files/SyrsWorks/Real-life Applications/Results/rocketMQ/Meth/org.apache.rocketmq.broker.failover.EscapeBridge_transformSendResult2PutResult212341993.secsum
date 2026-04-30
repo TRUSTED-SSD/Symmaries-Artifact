@@ -1,0 +1,8 @@
+org.apache.rocketmq.store.PutMessageResult org.apache.rocketmq.broker.failover.EscapeBridge:transformSendResult2PutResult (
+  org.apache.rocketmq.client.producer.SendResult sendResult) {
+  guard = tt;
+  ret(level()) = pc ⊔ level(sendResult) ⊔ obj_level(sendResult);
+  ret(obj_level()) = pc ⊔ level(sendResult) ⊔ obj_level(sendResult);
+  ret(obj_level(sendResult)) = pc ⊔ level(sendResult) ⊔ obj_level(sendResult);
+  ret(obj_level(this)) = pc ⊔ level(sendResult) ⊔ obj_level(sendResult) ⊔ obj_level(this);
+}

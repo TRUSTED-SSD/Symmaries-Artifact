@@ -1,0 +1,51 @@
+boolean com.google.zxing.oned.rss.expanded.RSSExpandedReader:checkChecksum()
+{
+com.google.zxing.oned.rss.expanded.ExpandedPair firstPair;
+  com.google.zxing.oned.rss.DataCharacter checkCharacter;
+  com.google.zxing.oned.rss.DataCharacter firstCharacter;
+  int checksum;
+  int s;
+  int i;
+  java.util.List $stack9;
+  java.lang.Object $stack10;
+  int $stack15;
+  boolean $stack19;
+  $stack9=this.pairs;
+ $stack10 = $stack9.get(0);
+ firstPair=(com.google.zxing.oned.rss.expanded.ExpandedPair) $stack10;
+ checkCharacter = firstPair.getLeftChar();
+ firstCharacter = firstPair.getRightChar();
+ if (firstCharacter!=null) goto label0;
+ return  0;
+ label0:checksum = firstCharacter.getChecksumPortion();
+ s=2;
+ i=1;
+ label1:$stack9=this.pairs;
+ $stack15 = $stack9.size();
+ if (i>=$stack15) goto label2;
+ $stack9=this.pairs;
+ $stack10 = $stack9.get(i);
+ firstPair=(com.google.zxing.oned.rss.expanded.ExpandedPair) $stack10;
+ firstCharacter = firstPair.getLeftChar();
+ $stack15 = firstCharacter.getChecksumPortion();
+ checksum=(checksum+$stack15);
+ s=(s+1);
+ firstCharacter = firstPair.getRightChar();
+ if (firstCharacter==null) goto label3;
+ $stack15 = firstCharacter.getChecksumPortion();
+ checksum=(checksum+$stack15);
+ s=(s+1);
+ label3:i=(i+1);
+ goto label1;
+ label2:checksum=(checksum%211);
+ i=(s-4);
+ i=(211 * i);
+ i=(i+checksum);
+ checksum = checkCharacter.getValue();
+ if (i!=checksum) goto label4;
+ $stack19=1;
+ goto label5;
+ label4:$stack19=0;
+ label5:return  $stack19;
+ } 
+

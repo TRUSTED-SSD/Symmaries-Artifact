@@ -1,0 +1,32 @@
+void org.apache.rocketmq.store.DefaultMessageStore$CleanCommitLogService:reDeleteHangedFile()
+{
+int interval;
+  long currentTimestamp;
+  org.apache.rocketmq.store.DefaultMessageStore $stack5;
+  org.apache.rocketmq.store.config.MessageStoreConfig $stack6;
+  long $stack9;
+  long $stack11;
+  byte $stack12;
+  org.apache.rocketmq.store.CommitLog $stack17;
+  boolean $stack19;
+  $stack5=this.this$0;
+ $stack6 = $stack5.getMessageStoreConfig();
+ interval = $stack6.getRedeleteHangedFileInterval();
+ currentTimestamp = java.lang.System.currentTimeMillis();
+ $stack9=this.lastRedeleteTimestamp;
+ $stack11=(currentTimestamp-$stack9);
+ $stack9=(long) interval;
+ $stack12=($stack11 cmp $stack9);
+ if ($stack12<=0) goto label0;
+ this.lastRedeleteTimestamp=currentTimestamp;
+ $stack5=this.this$0;
+ $stack6 = $stack5.getMessageStoreConfig();
+ interval = $stack6.getDestroyMapedFileIntervalForcibly();
+ $stack5=this.this$0;
+ $stack17 = org.apache.rocketmq.store.DefaultMessageStore.access$200($stack5);
+ currentTimestamp=(long) interval;
+ $stack19 = $stack17.retryDeleteFirstFile(currentTimestamp);
+ if ($stack19==0) goto label0;
+ label0:return;
+ } 
+

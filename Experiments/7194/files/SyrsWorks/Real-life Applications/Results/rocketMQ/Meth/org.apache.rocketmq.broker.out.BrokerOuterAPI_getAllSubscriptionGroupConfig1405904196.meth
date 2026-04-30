@@ -1,0 +1,36 @@
+org.apache.rocketmq.remoting.protocol.body.SubscriptionGroupWrapper org.apache.rocketmq.broker.out.BrokerOuterAPI:getAllSubscriptionGroupConfig(java.lang.String addr)
+{
+org.apache.rocketmq.remoting.protocol.RemotingCommand request;
+  org.apache.rocketmq.remoting.RemotingClient $stack5;
+  boolean $stack7;
+  int $stack8;
+  byte[] $stack9;
+  java.lang.Object $stack10;
+  org.apache.rocketmq.remoting.protocol.body.SubscriptionGroupWrapper $stack11;
+  org.apache.rocketmq.client.exception.MQBrokerException $stack12;
+  java.lang.String $stack14;
+  java.lang.AssertionError $stack16;
+  request = org.apache.rocketmq.remoting.protocol.RemotingCommand.createRequestCommand(201,null);
+ $stack5=this.remotingClient;
+ request = $stack5.invokeSync(addr,request,3000L);
+ $stack7=org.apache.rocketmq.broker.out.BrokerOuterAPI.$assertionsDisabled;
+ if ($stack7!=0) goto label0;
+ if (request!=null) goto label0;
+ $stack16=new java.lang.AssertionError;
+ $stack16#java.lang.AssertionError();
+ throw $stack16;
+ label0:$stack8 = request.getCode();
+ switch [$stack8]
+if 0 goto label1;
+goto label2;
+ label1:$stack9 = request.getBody();
+ $stack10 = org.apache.rocketmq.remoting.protocol.RemotingSerializable.decode($stack9,org.apache.rocketmq.remoting.protocol.body.SubscriptionGroupWrapper);
+ $stack11=(org.apache.rocketmq.remoting.protocol.body.SubscriptionGroupWrapper) $stack10;
+ return  $stack11;
+ label2:$stack12=new org.apache.rocketmq.client.exception.MQBrokerException;
+ $stack8 = request.getCode();
+ $stack14 = request.getRemark();
+ $stack12#org.apache.rocketmq.client.exception.MQBrokerException($stack8,$stack14,addr);
+ throw $stack12;
+ } 
+

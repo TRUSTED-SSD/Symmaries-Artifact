@@ -1,0 +1,47 @@
+void org.apache.rocketmq.store.queue.SparseConsumeQueue:cacheOffset(org.apache.rocketmq.store.logfile.MappedFile file,java.util.function.Function offsetGetFunc)
+{
+java.lang.Object offset;
+  java.util.concurrent.ConcurrentSkipListMap $stack5;
+  long $stack6;
+  java.lang.Long $stack7;
+  org.apache.rocketmq.store.logfile.MappedFile $stack8;
+  java.lang.Exception $stack15;
+  java.lang.Object[] $stack16;
+  java.lang.String $stack17;
+  int $stack18;
+  org.apache.rocketmq.logging.org.slf4j.Logger $stack19;
+  java.lang.Integer $stack22;
+  org.apache.rocketmq.store.queue.BatchOffsetIndex tmp$2102087767;
+  label0:offset = offsetGetFunc.apply((java.lang.Object)file);
+ offset=(org.apache.rocketmq.store.queue.BatchOffsetIndex) offset;
+ if (offset==null) goto label1;
+ $stack5=this.offsetCache;
+ tmp$2102087767=(org.apache.rocketmq.store.queue.BatchOffsetIndex) offset;
+ $stack6 = tmp$2102087767.getMsgOffset();
+ $stack7 = java.lang.Long.valueOf($stack6);
+ tmp$2102087767=(org.apache.rocketmq.store.queue.BatchOffsetIndex) offset;
+ $stack8 = tmp$2102087767.getMappedFile();
+ $stack5.put((java.lang.Object)$stack7,(java.lang.Object)$stack8);
+ $stack5=this.timeCache;
+ tmp$2102087767=(org.apache.rocketmq.store.queue.BatchOffsetIndex) offset;
+ $stack6 = tmp$2102087767.getStoreTimestamp();
+ $stack7 = java.lang.Long.valueOf($stack6);
+ tmp$2102087767=(org.apache.rocketmq.store.queue.BatchOffsetIndex) offset;
+ $stack8 = tmp$2102087767.getMappedFile();
+ $stack5.put((java.lang.Object)$stack7,(java.lang.Object)$stack8);
+ label1:goto label2;
+ label3:$stack15 = catch;
+ offset=$stack15;
+ $stack19=org.apache.rocketmq.store.queue.BatchConsumeQueue.log;
+ $stack16=new java.lang.Object[3];
+ $stack17=this.topic;
+ $stack16[0]=$stack17;
+ $stack18=this.queueId;
+ $stack22 = java.lang.Integer.valueOf($stack18);
+ $stack16[1]=$stack22;
+ $stack16[2]=file;
+ $stack19.error("Failed caching offset and time on BCQ [Topic: {}, QueueId: {}, File: {}]",$stack16);
+ label2:return;
+ catch java.lang.Exception: label0 - label1 : label3;
+} 
+

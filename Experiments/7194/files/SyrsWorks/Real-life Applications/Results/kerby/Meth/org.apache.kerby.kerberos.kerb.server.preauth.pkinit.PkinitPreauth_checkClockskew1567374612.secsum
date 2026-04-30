@@ -1,0 +1,9 @@
+boolean org.apache.kerby.kerberos.kerb.server.preauth.pkinit.PkinitPreauth:checkClockskew (
+  org.apache.kerby.kerberos.kerb.server.request.KdcRequest kdcRequest,
+  org.apache.kerby.kerberos.kerb.type.KerberosTime time) {
+  guard = tt;
+  ret(level()) = pc ⊔ level(kdcRequest) ⊔ obj_level(kdcRequest) ⊔ obj_level(time);
+  ret(obj_level(kdcRequest)) = pc ⊔ level(kdcRequest) ⊔ obj_level(kdcRequest) ⊔ obj_level(time);
+  ret(obj_level(this)) = pc ⊔ level(kdcRequest) ⊔ obj_level(kdcRequest) ⊔ obj_level(this) ⊔ obj_level(time);
+  ret(obj_level(time)) = pc ⊔ level(kdcRequest) ⊔ obj_level(kdcRequest) ⊔ obj_level(time);
+}

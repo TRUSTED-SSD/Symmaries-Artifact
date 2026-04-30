@@ -1,0 +1,10 @@
+org.apache.rocketmq.client.consumer.PullResult org.apache.rocketmq.broker.out.BrokerOuterAPI:processPullResult (
+  org.apache.rocketmq.client.impl.consumer.PullResultExt pullResult,
+  java.lang.String brokerName, int queueId) {
+  guard = tt;
+  ret(level()) = level(pullResult);
+  ret(obj_level()) = level(brokerName) ⊔ level(pullResult) ⊔ level(queueId) ⊔ obj_level(brokerName) ⊔ obj_level(pullResult);
+  ret(obj_level(brokerName)) = level(brokerName) ⊔ level(pullResult) ⊔ level(queueId) ⊔ obj_level(brokerName) ⊔ obj_level(pullResult);
+  ret(obj_level(pullResult)) = level(brokerName) ⊔ level(pullResult) ⊔ level(queueId) ⊔ obj_level(brokerName) ⊔ obj_level(pullResult);
+  ret(obj_level(this)) = level(brokerName) ⊔ level(pullResult) ⊔ level(queueId) ⊔ obj_level(brokerName) ⊔ obj_level(pullResult) ⊔ obj_level(this);
+}

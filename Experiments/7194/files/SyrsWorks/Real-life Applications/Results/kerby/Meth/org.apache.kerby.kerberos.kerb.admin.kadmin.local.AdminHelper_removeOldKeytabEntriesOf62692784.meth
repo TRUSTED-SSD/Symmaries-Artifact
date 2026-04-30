@@ -1,0 +1,38 @@
+static void org.apache.kerby.kerberos.kerb.admin.kadmin.local.AdminHelper:removeOldKeytabEntriesOf(java.io.File keytabFile,java.lang.String principalName)
+{
+org.apache.kerby.kerberos.kerb.keytab.Keytab keytab;
+  java.util.List entries;
+  int maxKvno;
+  java.util.Iterator l5;
+  org.apache.kerby.kerberos.kerb.keytab.KeytabEntry entry;
+  org.apache.kerby.kerberos.kerb.type.base.PrincipalName $stack8;
+  boolean $stack11;
+  java.lang.Object $stack14;
+  int $stack15;
+  keytab = org.apache.kerby.kerberos.kerb.admin.kadmin.local.AdminHelper.loadKeytab(keytabFile);
+ $stack8=new org.apache.kerby.kerberos.kerb.type.base.PrincipalName;
+ $stack8#org.apache.kerby.kerberos.kerb.type.base.PrincipalName(principalName);
+ entries = keytab.getKeytabEntries($stack8);
+ maxKvno=0;
+ l5 = entries.iterator();
+ label0:$stack11 = l5.hasNext();
+ if ($stack11==0) goto label1;
+ $stack14 = l5.next();
+ entry=(org.apache.kerby.kerberos.kerb.keytab.KeytabEntry) $stack14;
+ $stack15 = entry.getKvno();
+ if (maxKvno>=$stack15) goto label2;
+ maxKvno = entry.getKvno();
+ label2:goto label0;
+ label1:l5 = entries.iterator();
+ label3:$stack11 = l5.hasNext();
+ if ($stack11==0) goto label4;
+ $stack14 = l5.next();
+ entry=(org.apache.kerby.kerberos.kerb.keytab.KeytabEntry) $stack14;
+ $stack15 = entry.getKvno();
+ if ($stack15>=maxKvno) goto label5;
+ keytab.removeKeytabEntry(entry);
+ label5:goto label3;
+ label4:org.apache.kerby.kerberos.kerb.admin.kadmin.local.AdminHelper.storeKeytab(keytab,keytabFile);
+ return;
+ } 
+

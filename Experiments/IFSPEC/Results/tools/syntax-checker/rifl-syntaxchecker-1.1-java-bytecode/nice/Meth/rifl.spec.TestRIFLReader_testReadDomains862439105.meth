@@ -1,0 +1,28 @@
+void rifl.spec.TestRIFLReader:testReadDomains()
+{
+java.util.LinkedHashSet ids;
+  rifl.spec.RIFLReader $stack3;
+  org.w3c.dom.Document $stack4;
+  int $stack6;
+  long $stack7;
+  rifl.spec.Domain $stack8;
+  boolean $stack9;
+  ids=new java.util.LinkedHashSet;
+ ids#java.util.LinkedHashSet();
+ $stack3=this.reader;
+ $stack4 = rifl.spec.TestRIFLReader.toDoc("<riflspec><domains>  <domain name=\"top\"/>  <domain name=\"bottom\"/></domains></riflspec>");
+ $stack3.readDomains($stack4,(java.util.Set)ids);
+ $stack6 = ids.size();
+ $stack7=(long) $stack6;
+ org.junit.Assert.assertEquals(2L,$stack7);
+ $stack8=new rifl.spec.Domain;
+ $stack8#rifl.spec.Domain("top");
+ $stack9 = ids.contains((java.lang.Object)$stack8);
+ org.junit.Assert.assertTrue($stack9);
+ $stack8=new rifl.spec.Domain;
+ $stack8#rifl.spec.Domain("bottom");
+ $stack9 = ids.contains((java.lang.Object)$stack8);
+ org.junit.Assert.assertTrue($stack9);
+ return;
+ } 
+

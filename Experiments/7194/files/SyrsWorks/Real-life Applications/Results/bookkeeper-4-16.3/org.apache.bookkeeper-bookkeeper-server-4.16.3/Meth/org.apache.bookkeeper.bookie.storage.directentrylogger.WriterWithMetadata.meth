@@ -1,0 +1,26 @@
+org.apache.bookkeeper.bookie.storage.directentrylogger.WriterWithMetadata(org.apache.bookkeeper.bookie.storage.directentrylogger.LogWriter writer,org.apache.bookkeeper.bookie.EntryLogMetadata metadata,io.netty.buffer.ByteBufAllocator allocator)
+{
+io.netty.buffer.ByteBuf buf;
+  java.lang.Throwable l5;
+  int $stack7;
+  long $stack8;
+  this#java.lang.Object();
+ this.writer=writer;
+ this.metadata=metadata;
+ this.allocator=allocator;
+ buf = allocator.buffer(4096);
+ label0:org.apache.bookkeeper.bookie.storage.directentrylogger.Header.writeEmptyHeader(buf);
+ writer.writeAt(0L,buf);
+ $stack7 = buf.capacity();
+ $stack8=(long) $stack7;
+ writer.position($stack8);
+ label1:buf.release();
+ goto label2;
+ label3:l5 = catch;
+ label4:buf.release();
+ throw l5;
+ label2:return;
+ catch java.lang.Throwable: label0 - label1 : label3;
+catch java.lang.Throwable: label3 - label4 : label3;
+} 
+

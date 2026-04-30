@@ -1,0 +1,12 @@
+org.apache.bookkeeper.sasl.SaslServerState (org.apache.bookkeeper.conf.ServerConfiguration
+                                              serverConfiguration,
+                                            javax.security.auth.Subject
+                                              subject,
+                                            java.util.regex.Pattern
+                                              allowedIdsPattern) {
+  guard = pc ⊔ level(allowedIdsPattern) ⊔ level(this) ⊔ obj_level(allowedIdsPattern) ⊔ obj_level(subject) ⊔ obj_level(this) = ⊥;
+  ret(obj_level(allowedIdsPattern)) = level(subject) ⊔ obj_level(serverConfiguration);
+  ret(obj_level(serverConfiguration)) = level(subject) ⊔ obj_level(serverConfiguration);
+  ret(obj_level(subject)) = level(subject) ⊔ obj_level(serverConfiguration);
+  ret(obj_level(this)) = level(subject) ⊔ obj_level(serverConfiguration);
+}

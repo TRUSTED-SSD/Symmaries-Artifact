@@ -1,0 +1,24 @@
+void io.openmessaging.rocketmq.consumer.LocalMessageCache:ack(org.apache.rocketmq.common.message.MessageQueue messageQueue,org.apache.rocketmq.client.impl.consumer.ProcessQueue processQueue,org.apache.rocketmq.common.message.MessageExt messageExt)
+{
+long offset;
+  java.util.Map $stack7;
+  java.lang.String $stack8;
+  java.util.List $stack10;
+  org.apache.rocketmq.client.consumer.DefaultMQPullConsumer $stack12;
+  org.apache.rocketmq.client.exception.MQClientException $stack13;
+  org.apache.rocketmq.logging.org.slf4j.Logger $stack14;
+  $stack7=this.consumedRequest;
+ $stack8 = messageExt.getMsgId();
+ $stack7.remove((java.lang.Object)$stack8);
+ $stack10 = java.util.Collections.singletonList((java.lang.Object)messageExt);
+ offset = processQueue.removeMessage($stack10);
+ label0:$stack12=this.rocketmqPullConsumer;
+ $stack12.updateConsumeOffset(messageQueue,offset);
+ label1:goto label2;
+ label3:$stack13 = catch;
+ $stack14=io.openmessaging.rocketmq.consumer.LocalMessageCache.log;
+ $stack14.error("An error occurred in update consume offset process.",(java.lang.Throwable)$stack13);
+ label2:return;
+ catch org.apache.rocketmq.client.exception.MQClientException: label0 - label1 : label3;
+} 
+

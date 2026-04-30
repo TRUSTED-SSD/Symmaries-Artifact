@@ -1,0 +1,54 @@
+static void org.apache.bookkeeper.bookie.LegacyCookieValidation:verifyDirsForStorageExpansion(java.util.List missedCookieDirs,java.util.Set existingLedgerDirs)
+{
+java.util.ArrayList dirsMissingData;
+  java.util.ArrayList nonEmptyDirs;
+  java.util.Iterator l4;
+  java.io.File dir;
+  java.lang.String[] content;
+  boolean $stack10;
+  int $stack11;
+  java.lang.StringBuilder $stack12;
+  org.slf4j.Logger $stack13;
+  java.lang.String $stack18;
+  org.apache.bookkeeper.bookie.BookieException$InvalidCookieException $stack19;
+  java.lang.Object $stack25;
+  java.io.File $stack26;
+  dirsMissingData=new java.util.ArrayList;
+ dirsMissingData#java.util.ArrayList();
+ nonEmptyDirs=new java.util.ArrayList;
+ nonEmptyDirs#java.util.ArrayList();
+ l4 = missedCookieDirs.iterator();
+ label0:$stack10 = l4.hasNext();
+ if ($stack10==0) goto label1;
+ $stack25 = l4.next();
+ dir=(java.io.File) $stack25;
+ $stack26 = dir.getParentFile();
+ $stack10 = existingLedgerDirs.contains((java.lang.Object)$stack26);
+ if ($stack10==0) goto label2;
+ dirsMissingData.add((java.lang.Object)dir);
+ goto label0;
+ label2:content = dir.list();
+ if (content==null) goto label3;
+ $stack11=#content;
+ if ($stack11==0) goto label3;
+ nonEmptyDirs.add((java.lang.Object)dir);
+ label3:goto label0;
+ label1:$stack11 = dirsMissingData.size();
+ if ($stack11>0) goto label4;
+ $stack11 = nonEmptyDirs.size();
+ if ($stack11<=0) goto label5;
+ label4:$stack13=org.apache.bookkeeper.bookie.LegacyCookieValidation.log;
+ $stack12=new java.lang.StringBuilder;
+ $stack12#java.lang.StringBuilder();
+ $stack12 = $stack12.append("Either not all local directories have cookies or directories being added  newly are not empty. Directories missing cookie file are: ");
+ $stack12 = $stack12.append((java.lang.Object)dirsMissingData);
+ $stack12 = $stack12.append(" New directories that are not empty are: ");
+ $stack12 = $stack12.append((java.lang.Object)nonEmptyDirs);
+ $stack18 = $stack12.toString();
+ $stack13.error($stack18);
+ $stack19=new org.apache.bookkeeper.bookie.BookieException$InvalidCookieException;
+ $stack19#org.apache.bookkeeper.bookie.BookieException$InvalidCookieException();
+ throw $stack19;
+ label5:return;
+ } 
+

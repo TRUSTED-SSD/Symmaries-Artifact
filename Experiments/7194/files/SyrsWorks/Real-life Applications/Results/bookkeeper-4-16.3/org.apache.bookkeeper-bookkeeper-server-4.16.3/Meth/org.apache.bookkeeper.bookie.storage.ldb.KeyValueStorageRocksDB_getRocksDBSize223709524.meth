@@ -1,0 +1,24 @@
+long org.apache.bookkeeper.bookie.storage.ldb.KeyValueStorageRocksDB:getRocksDBSize()
+{
+java.util.List liveFilesMetaData;
+  long rocksDBFileSize;
+  java.util.Iterator l4;
+  org.rocksdb.LiveFileMetaData fileMetaData;
+  org.rocksdb.RocksDB $stack6;
+  boolean $stack9;
+  java.lang.Object $stack10;
+  long $stack11;
+  $stack6=this.db;
+ liveFilesMetaData = $stack6.getLiveFilesMetaData();
+ rocksDBFileSize=0L;
+ l4 = liveFilesMetaData.iterator();
+ label0:$stack9 = l4.hasNext();
+ if ($stack9==0) goto label1;
+ $stack10 = l4.next();
+ fileMetaData=(org.rocksdb.LiveFileMetaData) $stack10;
+ $stack11 = fileMetaData.size();
+ rocksDBFileSize=(rocksDBFileSize+$stack11);
+ goto label0;
+ label1:return  rocksDBFileSize;
+ } 
+

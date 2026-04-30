@@ -1,0 +1,35 @@
+boolean org.apache.rocketmq.broker.offset.ConsumerOrderInfoManager:checkBlock(java.lang.String @topic,java.lang.String group,int queueId,long invisibleTime)
+{
+java.lang.Object qs;
+  java.lang.Object old;
+  java.util.concurrent.ConcurrentHashMap $stack10;
+  java.lang.Integer $stack12;
+  boolean $stack14;
+  java.util.concurrent.ConcurrentHashMap tmp$1455473077;
+  org.apache.rocketmq.broker.offset.ConsumerOrderInfoManager$OrderInfo tmp$1600067720;
+  java.lang.String topic;
+topic=@topic;
+topic = org.apache.rocketmq.broker.offset.ConsumerOrderInfoManager.buildKey(topic,group);
+ $stack10=this.table;
+ qs = $stack10.get((java.lang.Object)topic);
+ qs=(java.util.concurrent.ConcurrentHashMap) qs;
+ if (qs!=null) goto label0;
+ tmp$1455473077=new java.util.concurrent.ConcurrentHashMap;
+ tmp$1455473077#java.util.concurrent.ConcurrentHashMap(16);
+ qs=tmp$1455473077;
+ $stack10=this.table;
+ old = $stack10.putIfAbsent((java.lang.Object)topic,(java.lang.Object)tmp$1455473077);
+ old=(java.util.concurrent.ConcurrentHashMap) old;
+ if (old==null) goto label0;
+ qs=old;
+ label0:$stack12 = java.lang.Integer.valueOf(queueId);
+ $stack10=(java.util.concurrent.ConcurrentHashMap) qs;
+ qs = $stack10.get((java.lang.Object)$stack12);
+ old=(org.apache.rocketmq.broker.offset.ConsumerOrderInfoManager$OrderInfo) qs;
+ if (old!=null) goto label1;
+ return  0;
+ label1:tmp$1600067720=(org.apache.rocketmq.broker.offset.ConsumerOrderInfoManager$OrderInfo) old;
+ $stack14 = tmp$1600067720.needBlock(invisibleTime);
+ return  $stack14;
+ } 
+

@@ -1,0 +1,26 @@
+org.apache.kerby.asn1.Asn1Dumper org.apache.kerby.asn1.Asn1Dumper:dumpParseResult(int indents,org.apache.kerby.asn1.parse.Asn1ParseResult value)
+{
+org.apache.kerby.asn1.Asn1Dumpable dumpable;
+  boolean $stack4;
+  org.apache.kerby.asn1.Asn1Dumper $stack6;
+  java.lang.String $stack10;
+  if (value!=null) goto label0;
+ $stack6 = this.indent(indents);
+ $stack6.append("Null");
+ goto label1;
+ label0:$stack4=value instanceof org.apache.kerby.asn1.parse.Asn1Item;
+ if ($stack4==0) goto label2;
+ $stack6 = this.indent(indents);
+ $stack10 = value.toString();
+ $stack6.append($stack10);
+ goto label1;
+ label2:$stack4=value instanceof org.apache.kerby.asn1.Asn1Dumpable;
+ if ($stack4==0) goto label3;
+ dumpable=(org.apache.kerby.asn1.Asn1Dumpable) value;
+ dumpable.dumpWith(this,indents);
+ goto label1;
+ label3:$stack6 = this.indent(indents);
+ $stack6.append("<Unknown>");
+ label1:return  this;
+ } 
+

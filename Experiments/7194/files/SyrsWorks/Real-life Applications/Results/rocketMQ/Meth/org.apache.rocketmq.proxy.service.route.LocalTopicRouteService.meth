@@ -1,0 +1,40 @@
+org.apache.rocketmq.proxy.service.route.LocalTopicRouteService(org.apache.rocketmq.broker.BrokerController @brokerController,org.apache.rocketmq.proxy.service.mqclient.MQClientAPIFactory mqClientAPIFactory)
+{
+org.apache.rocketmq.common.BrokerConfig brokerConfig;
+  java.util.HashMap brokerAddrs;
+  java.lang.Long $stack8;
+  java.lang.String $stack10;
+  org.apache.rocketmq.remoting.protocol.route.BrokerData[] $stack12;
+  org.apache.rocketmq.remoting.protocol.route.BrokerData $stack13;
+  java.lang.String $stack16;
+  java.util.ArrayList $stack17;
+  org.apache.rocketmq.proxy.config.ProxyConfig $stack18;
+  java.lang.Integer $stack19;
+  int $stack20;
+  org.apache.rocketmq.broker.BrokerController brokerController;
+brokerController=@brokerController;
+this#org.apache.rocketmq.proxy.service.route.TopicRouteService(mqClientAPIFactory);
+ this.brokerController=brokerController;
+ brokerController=this.brokerController;
+ brokerConfig = brokerController.getBrokerConfig();
+ brokerAddrs=new java.util.HashMap;
+ brokerAddrs#java.util.HashMap();
+ $stack8 = java.lang.Long.valueOf(0L);
+ brokerController=this.brokerController;
+ $stack10 = brokerController.getBrokerAddr();
+ brokerAddrs.put((java.lang.Object)$stack8,(java.lang.Object)$stack10);
+ $stack12=new org.apache.rocketmq.remoting.protocol.route.BrokerData[1];
+ $stack13=new org.apache.rocketmq.remoting.protocol.route.BrokerData;
+ $stack10 = brokerConfig.getBrokerClusterName();
+ $stack16 = brokerConfig.getBrokerName();
+ $stack13#org.apache.rocketmq.remoting.protocol.route.BrokerData($stack10,$stack16,brokerAddrs);
+ $stack12[0]=$stack13;
+ $stack17 = com.google.common.collect.Lists.newArrayList((java.lang.Object[])$stack12);
+ this.brokerDataList=$stack17;
+ $stack18 = org.apache.rocketmq.proxy.config.ConfigurationManager.getProxyConfig();
+ $stack19 = $stack18.getGrpcServerPort();
+ $stack20 = $stack19.intValue();
+ this.grpcPort=$stack20;
+ return;
+ } 
+

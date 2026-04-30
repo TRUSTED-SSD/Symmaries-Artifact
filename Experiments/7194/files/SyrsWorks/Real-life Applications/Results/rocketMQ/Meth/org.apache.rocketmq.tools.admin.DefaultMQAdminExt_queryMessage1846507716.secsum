@@ -1,0 +1,11 @@
+org.apache.rocketmq.common.message.MessageExt org.apache.rocketmq.tools.admin.DefaultMQAdminExt:queryMessage (
+  java.lang.String clusterName, java.lang.String topic,
+  java.lang.String msgId) {
+  guard = tt;
+  ret(level()) = pc ⊔ level(msgId) ⊔ level(this) ⊔ obj_level(msgId) ⊔ obj_level(this);
+  ret(obj_level()) = pc ⊔ level(msgId) ⊔ level(this) ⊔ obj_level(msgId) ⊔ obj_level(this);
+  ret(obj_level(clusterName)) = pc ⊔ level(msgId) ⊔ obj_level(clusterName) ⊔ obj_level(this);
+  ret(obj_level(msgId)) = pc ⊔ level(msgId) ⊔ obj_level(clusterName) ⊔ obj_level(this);
+  ret(obj_level(this)) = pc ⊔ level(msgId) ⊔ obj_level(clusterName) ⊔ obj_level(this);
+  ret(obj_level(topic)) = pc ⊔ level(msgId) ⊔ obj_level(clusterName) ⊔ obj_level(this);
+}

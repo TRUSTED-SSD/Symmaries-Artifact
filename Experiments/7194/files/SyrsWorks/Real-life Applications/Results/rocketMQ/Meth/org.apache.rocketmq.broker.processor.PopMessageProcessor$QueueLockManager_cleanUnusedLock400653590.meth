@@ -1,0 +1,53 @@
+int org.apache.rocketmq.broker.processor.PopMessageProcessor$QueueLockManager:cleanUnusedLock(long usedExpireMillis)
+{
+java.util.Iterator iterator;
+  int total;
+  java.util.Map$Entry entry;
+  java.util.concurrent.ConcurrentHashMap $stack6;
+  java.util.Set $stack7;
+  boolean $stack9;
+  java.lang.Object $stack10;
+  long $stack11;
+  org.apache.rocketmq.broker.processor.PopMessageProcessor$TimedLock $stack13;
+  long $stack14;
+  byte $stack16;
+  org.apache.rocketmq.logging.org.slf4j.Logger $stack18;
+  java.lang.Object[] $stack19;
+  java.lang.Long $stack27;
+  java.lang.Boolean $stack32;
+  $stack6=this.expiredLocalCache;
+ $stack7 = $stack6.entrySet();
+ iterator = $stack7.iterator();
+ total=0;
+ label0:$stack9 = iterator.hasNext();
+ if ($stack9==0) goto label1;
+ $stack10 = iterator.next();
+ entry=(java.util.Map$Entry) $stack10;
+ $stack11 = java.lang.System.currentTimeMillis();
+ $stack10 = entry.getValue();
+ $stack13=(org.apache.rocketmq.broker.processor.PopMessageProcessor$TimedLock) $stack10;
+ $stack14 = $stack13.getLockTime();
+ $stack11=($stack11-$stack14);
+ $stack16=($stack11 cmp usedExpireMillis);
+ if ($stack16<=0) goto label2;
+ iterator.remove();
+ $stack18 = org.apache.rocketmq.broker.processor.PopMessageProcessor.access$200();
+ $stack19=new java.lang.Object[3];
+ $stack10 = entry.getKey();
+ $stack19[0]=$stack10;
+ $stack10 = entry.getValue();
+ $stack13=(org.apache.rocketmq.broker.processor.PopMessageProcessor$TimedLock) $stack10;
+ $stack11 = $stack13.getLockTime();
+ $stack27 = java.lang.Long.valueOf($stack11);
+ $stack19[1]=$stack27;
+ $stack10 = entry.getValue();
+ $stack13=(org.apache.rocketmq.broker.processor.PopMessageProcessor$TimedLock) $stack10;
+ $stack9 = $stack13.isLock();
+ $stack32 = java.lang.Boolean.valueOf($stack9);
+ $stack19[2]=$stack32;
+ $stack18.info("Remove unused queue lock: {}, {}, {}",$stack19);
+ label2:total=(total+1);
+ goto label0;
+ label1:return  total;
+ } 
+

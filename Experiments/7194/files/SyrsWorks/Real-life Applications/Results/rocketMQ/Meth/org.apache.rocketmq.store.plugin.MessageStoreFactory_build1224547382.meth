@@ -1,0 +1,55 @@
+static org.apache.rocketmq.store.MessageStore org.apache.rocketmq.store.plugin.MessageStoreFactory:build(org.apache.rocketmq.store.plugin.MessageStorePluginContext context,org.apache.rocketmq.store.MessageStore @messageStore)
+{
+java.lang.String plugin;
+  java.lang.String[] pluginClasses;
+  int i;
+  java.lang.Class clazz;
+  java.lang.reflect.Constructor construct;
+  org.apache.rocketmq.common.BrokerConfig $stack9;
+  java.lang.String $stack11;
+  java.lang.Class[] $stack17;
+  java.lang.Object[] $stack19;
+  java.lang.Object $stack20;
+  java.lang.Throwable $stack22;
+  java.lang.RuntimeException $stack23;
+  java.lang.StringBuilder $stack24;
+  org.apache.rocketmq.store.MessageStore messageStore;
+messageStore=@messageStore;
+$stack9 = context.getBrokerConfig();
+ plugin = $stack9.getMessageStorePlugIn();
+ if (plugin==null) goto label0;
+ $stack11 = plugin.trim();
+ i = $stack11.length();
+ if (i==0) goto label0;
+ pluginClasses = plugin.split(",");
+ i=#pluginClasses;
+ i=(i-1);
+ label1:if (i<0) goto label0;
+ plugin=pluginClasses[i];
+ label2:clazz = java.lang.Class.forName(plugin);
+ $stack17=new java.lang.Class[2];
+ $stack17[0]=org.apache.rocketmq.store.plugin.MessageStorePluginContext;
+ $stack17[1]=org.apache.rocketmq.store.MessageStore;
+ construct = clazz.getConstructor($stack17);
+ $stack19=new java.lang.Object[2];
+ $stack19[0]=context;
+ $stack19[1]=messageStore;
+ $stack20 = construct.newInstance($stack19);
+ messageStore=(org.apache.rocketmq.store.plugin.AbstractPluginMessageStore) $stack20;
+ label3:goto label4;
+ label5:$stack22 = catch;
+ $stack23=new java.lang.RuntimeException;
+ $stack24=new java.lang.StringBuilder;
+ $stack24#java.lang.StringBuilder();
+ $stack24 = $stack24.append("Initialize plugin\'s class: ");
+ $stack24 = $stack24.append(plugin);
+ $stack24 = $stack24.append(" not found!");
+ plugin = $stack24.toString();
+ $stack23#java.lang.RuntimeException(plugin,$stack22);
+ throw $stack23;
+ label4:i=(i+-1);
+ goto label1;
+ label0:return  messageStore;
+ catch java.lang.Throwable: label2 - label3 : label5;
+} 
+

@@ -1,0 +1,38 @@
+int org.apache.bookkeeper.bookie.BookieShell$HelpCmd:runCmd(org.apache.commons.cli.CommandLine cmdLine)
+{
+java.lang.String[] args;
+  java.lang.String cmdName;
+  org.apache.bookkeeper.bookie.BookieShell$Command cmd;
+  int $stack6;
+  org.apache.bookkeeper.bookie.BookieShell $stack7;
+  java.util.Map $stack8;
+  java.lang.Object $stack9;
+  java.lang.StringBuilder $stack10;
+  java.io.PrintStream $stack11;
+  args = cmdLine.getArgs();
+ $stack6=#args;
+ if ($stack6!=0) goto label0;
+ $stack7=this.this$0;
+ org.apache.bookkeeper.bookie.BookieShell.access$300($stack7);
+ return  0;
+ label0:cmdName=args[0];
+ $stack7=this.this$0;
+ $stack8=$stack7.commands;
+ $stack9 = $stack8.get((java.lang.Object)cmdName);
+ cmd=(org.apache.bookkeeper.bookie.BookieShell$Command) $stack9;
+ if (null!=cmd) goto label1;
+ $stack11=java.lang.System.err;
+ $stack10=new java.lang.StringBuilder;
+ $stack10#java.lang.StringBuilder();
+ $stack10 = $stack10.append("Unknown command ");
+ $stack10 = $stack10.append(cmdName);
+ cmdName = $stack10.toString();
+ dummyClass.lowSink(cmdName);
+$stack11.println(cmdName);
+ $stack7=this.this$0;
+ org.apache.bookkeeper.bookie.BookieShell.access$300($stack7);
+ return  -1;
+ label1:cmd.printUsage();
+ return  0;
+ } 
+

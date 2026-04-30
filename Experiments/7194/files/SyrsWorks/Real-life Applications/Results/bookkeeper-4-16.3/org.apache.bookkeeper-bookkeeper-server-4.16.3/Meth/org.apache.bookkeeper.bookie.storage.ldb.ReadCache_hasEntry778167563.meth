@@ -1,0 +1,52 @@
+boolean org.apache.bookkeeper.bookie.storage.ldb.ReadCache:hasEntry(long ledgerId,long entryId)
+{
+int size;
+  int i;
+  int segmentIdx;
+  org.apache.bookkeeper.util.collections.ConcurrentLongLongPairHashMap$LongPair res;
+  boolean l9;
+  java.lang.Throwable l10;
+  java.util.concurrent.locks.ReentrantReadWriteLock $stack11;
+  java.util.concurrent.locks.ReentrantReadWriteLock$ReadLock $stack12;
+  java.util.List $stack13;
+  int $stack18;
+  java.lang.Object $stack21;
+  org.apache.bookkeeper.util.collections.ConcurrentLongLongPairHashMap $stack22;
+  $stack11=this.lock;
+ $stack12 = $stack11.readLock();
+ $stack12.lock();
+ label0:$stack13=this.cacheSegments;
+ size = $stack13.size();
+ i=0;
+ label1:if (i>=size) goto label2;
+ $stack18=this.currentSegmentIdx;
+ segmentIdx=(size-i);
+ segmentIdx=($stack18+segmentIdx);
+ segmentIdx=(segmentIdx%size);
+ $stack13=this.cacheIndexes;
+ $stack21 = $stack13.get(segmentIdx);
+ $stack22=(org.apache.bookkeeper.util.collections.ConcurrentLongLongPairHashMap) $stack21;
+ res = $stack22.get(ledgerId,entryId);
+ if (res==null) goto label3;
+ l9=1;
+ label4:$stack11=this.lock;
+ $stack12 = $stack11.readLock();
+ $stack12.unlock();
+ return  1;
+ label3:i=(i+1);
+ goto label1;
+ label2:$stack11=this.lock;
+ $stack12 = $stack11.readLock();
+ $stack12.unlock();
+ goto label5;
+ label6:l10 = catch;
+ label7:$stack11=this.lock;
+ $stack12 = $stack11.readLock();
+ $stack12.unlock();
+ throw l10;
+ label5:return  0;
+ catch java.lang.Throwable: label0 - label4 : label6;
+catch java.lang.Throwable: label3 - label2 : label6;
+catch java.lang.Throwable: label6 - label7 : label6;
+} 
+

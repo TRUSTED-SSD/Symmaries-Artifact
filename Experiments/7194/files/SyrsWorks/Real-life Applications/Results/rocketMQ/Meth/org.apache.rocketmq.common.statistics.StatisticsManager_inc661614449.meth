@@ -1,0 +1,39 @@
+boolean org.apache.rocketmq.common.statistics.StatisticsManager:inc(java.lang.String kind,java.lang.String key,long[] itemAccumulates)
+{
+java.util.concurrent.ConcurrentHashMap itemMap;
+  org.apache.rocketmq.common.statistics.StatisticsItem item;
+  org.apache.rocketmq.common.statistics.StatisticsItem oldItem;
+  java.lang.Object $stack8;
+  java.util.Map $stack11;
+  org.apache.rocketmq.common.statistics.StatisticsKindMeta $stack13;
+  java.lang.String[] $stack14;
+  org.apache.rocketmq.common.statistics.StatisticsBriefInterceptor $stack15;
+  org.apache.commons.lang3.tuple.Pair[] $stack16;
+  itemMap=this.statsTable;
+ $stack8 = itemMap.get((java.lang.Object)kind);
+ itemMap=(java.util.concurrent.ConcurrentHashMap) $stack8;
+ if (itemMap==null) goto label0;
+ $stack8 = itemMap.get((java.lang.Object)key);
+ item=(org.apache.rocketmq.common.statistics.StatisticsItem) $stack8;
+ if (item!=null) goto label1;
+ item=new org.apache.rocketmq.common.statistics.StatisticsItem;
+ $stack11=this.kindMetaMap;
+ $stack8 = $stack11.get((java.lang.Object)kind);
+ $stack13=(org.apache.rocketmq.common.statistics.StatisticsKindMeta) $stack8;
+ $stack14 = $stack13.getItemNames();
+ item#org.apache.rocketmq.common.statistics.StatisticsItem(kind,key,$stack14);
+ $stack15=new org.apache.rocketmq.common.statistics.StatisticsBriefInterceptor;
+ $stack16=this.briefMetas;
+ $stack15#org.apache.rocketmq.common.statistics.StatisticsBriefInterceptor(item,$stack16);
+ item.setInterceptor((org.apache.rocketmq.common.statistics.Interceptor)$stack15);
+ $stack8 = itemMap.putIfAbsent((java.lang.Object)key,(java.lang.Object)item);
+ oldItem=(org.apache.rocketmq.common.statistics.StatisticsItem) $stack8;
+ if (oldItem==null) goto label2;
+ item=oldItem;
+ goto label1;
+ label2:this#org.apache.rocketmq.common.statistics.StatisticsManager:scheduleStatisticsItem(item);
+ label1:item.incItems(itemAccumulates);
+ return  1;
+ label0:return  0;
+ } 
+

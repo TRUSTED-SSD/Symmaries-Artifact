@@ -1,0 +1,22 @@
+static long org.apache.rocketmq.common.MixAll:getPID()
+{
+java.lang.String processName;
+  java.lang.Exception e;
+  java.lang.management.RuntimeMXBean $stack2;
+  boolean $stack4;
+  java.lang.String[] $stack5;
+  long $stack7;
+  $stack2 = java.lang.management.ManagementFactory.getRuntimeMXBean();
+ processName = $stack2.getName();
+ $stack4 = org.apache.commons.lang3.StringUtils.isNotEmpty((java.lang.CharSequence)processName);
+ if ($stack4==0) goto label0;
+ label1:$stack5 = processName.split("@");
+ processName=$stack5[0];
+ $stack7 = java.lang.Long.parseLong(processName);
+ label2:return  $stack7;
+ label3:e = catch;
+ return  0L;
+ label0:return  0L;
+ catch java.lang.Exception: label1 - label2 : label3;
+} 
+

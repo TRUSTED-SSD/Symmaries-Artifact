@@ -1,0 +1,32 @@
+static int com.google.zxing.oned.Code128Reader:decodeCode(com.google.zxing.common.BitArray row,int[] counters,int rowOffset)
+{
+float bestVariance;
+  int d;
+  int[] pattern;
+  float variance;
+  int[][] $stack8;
+  int $stack9;
+  com.google.zxing.NotFoundException $stack10;
+  byte $stack13;
+  com.google.zxing.oned.OneDReader.recordPattern(row,rowOffset,counters);
+ bestVariance=0.25F;
+ rowOffset=-1;
+ d=0;
+ label0:$stack8=com.google.zxing.oned.Code128Reader.CODE_PATTERNS;
+ $stack9=#$stack8;
+ if (d>=$stack9) goto label1;
+ $stack8=com.google.zxing.oned.Code128Reader.CODE_PATTERNS;
+ pattern=$stack8[d];
+ variance = com.google.zxing.oned.OneDReader.patternMatchVariance(counters,pattern,0.7F);
+ $stack13=(variance cmpg bestVariance);
+ if ($stack13>=0) goto label2;
+ bestVariance=variance;
+ rowOffset=d;
+ label2:d=(d+1);
+ goto label0;
+ label1:if (rowOffset<0) goto label3;
+ return  rowOffset;
+ label3:$stack10 = com.google.zxing.NotFoundException.getNotFoundInstance();
+ throw $stack10;
+ } 
+

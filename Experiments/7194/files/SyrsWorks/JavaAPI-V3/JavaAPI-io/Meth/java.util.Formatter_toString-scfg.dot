@@ -1,0 +1,48 @@
+digraph G {
+  node [shape=box, ];
+  "pc0_js1" [label="〈this#java.util.Formatter.ensureOpen (), js1〉\n\
+tt", ];
+  "pc1_js1" [label="〈$r1 = this.a, js1〉", ];
+  "pc2_js1" [label="〈$r2 = $r1.toString (), js1〉\n\
+pc ⊔ level($r1) ⊔ obj_level($r1) = ⊥",
+             ];
+  "pc3_js1" [label="〈return $r2, js1〉", ];
+  "pc4_js1" [label="〈sink, js1〉\n\
+obj_level(this) ⊑ ret(obj_level(this))' ∧ (ret(this.><this)' ∨ ¬this.><this) ∧ (ϕ ≠ S3 ∨ obj_level($r2) ⊑ ret(obj_level())' ∧ pc ⊔ level($r2) ⊑ ret(level())' ∧ (ret(.><this)' ∨ ¬this.><$r2) ∧ (ret(this.><)' ∨ ¬$r2.><this))",
+             ];
+  
+  
+  "pc0_js1" -> "pc1_js1" [label="tt,\n\
+{$r1.><$r1 := ff,\n\
+ $r1.><$r2 := ff,\n\
+ $r2.><$r1 := ff,\n\
+ $r2.><$r2 := ff,\n\
+ this.><$r1 := ff,\n\
+ this.><$r2 := ff}",
+                          ];
+  "pc1_js1" -> "pc2_js1" [label="tt,\n\
+{$r1.><$r1 := ff,\n\
+ $r1.><$r2 := ff,\n\
+ $r1.><this := this.><this,\n\
+ $r2.><$r1 := ff,\n\
+ this.><$r1 := tt,\n\
+ level($r1) := pc ⊔ level(this) ⊔ obj_level(this),\n\
+ obj_level($r1) := obj_level(this)}",
+                          ];
+  "pc2_js1" -> "pc3_js1" [label="tt,\n\
+{$r1.><$r1 := tt,\n\
+ $r1.><$r2 := ff,\n\
+ $r1.><this := tt,\n\
+ $r2.><$r1 := ff,\n\
+ $r2.><this := ff,\n\
+ this.><$r2 := ff,\n\
+ this.><this := tt,\n\
+ level($r2) := pc ⊔ level(this) ⊔ obj_level(this),\n\
+ obj_level($r1) := ⊤,\n\
+ obj_level($r2) := ⊤,\n\
+ obj_level(this) := ⊤}",
+                          ];
+  "pc3_js1" -> "pc4_js1" [label="tt,\n\
+{ϕ := S3}", ];
+  
+  }

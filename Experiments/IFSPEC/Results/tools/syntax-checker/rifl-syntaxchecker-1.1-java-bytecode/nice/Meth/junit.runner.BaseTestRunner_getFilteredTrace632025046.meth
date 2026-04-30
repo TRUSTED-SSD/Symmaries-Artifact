@@ -1,0 +1,38 @@
+static java.lang.String junit.runner.BaseTestRunner:getFilteredTrace(java.lang.String @stack)
+{
+java.io.StringWriter sw;
+  java.io.PrintWriter pw;
+  java.io.BufferedReader br;
+  java.lang.String line;
+  java.lang.Exception IOException;
+  boolean $stack7;
+  java.io.StringReader $stack10;
+  java.lang.String $stack12;
+  java.lang.String stack;
+stack=@stack;
+$stack7 = junit.runner.BaseTestRunner.showStackRaw();
+ if ($stack7==0) goto label0;
+ return  stack;
+ label0:sw=new java.io.StringWriter;
+ sw#java.io.StringWriter();
+ pw=new java.io.PrintWriter;
+ pw#java.io.PrintWriter((java.io.Writer)sw);
+ $stack10=new java.io.StringReader;
+ $stack10#java.io.StringReader(stack);
+ br=new java.io.BufferedReader;
+ br#java.io.BufferedReader((java.io.Reader)$stack10);
+ label1:$stack12 = br.readLine();
+ line=$stack12;
+ if ($stack12==null) goto label2;
+ $stack7 = junit.runner.BaseTestRunner.filterLine($stack12);
+ if ($stack7!=0) goto label1;
+ pw.println($stack12);
+ goto label1;
+ label2:goto label3;
+ label4:IOException = catch;
+ return  stack;
+ label3:stack = sw.toString();
+ return  stack;
+ catch java.lang.Exception: label1 - label2 : label4;
+} 
+

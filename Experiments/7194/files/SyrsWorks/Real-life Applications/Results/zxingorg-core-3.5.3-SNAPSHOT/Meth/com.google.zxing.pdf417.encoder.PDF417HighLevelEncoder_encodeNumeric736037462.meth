@@ -1,0 +1,57 @@
+static void com.google.zxing.pdf417.encoder.PDF417HighLevelEncoder:encodeNumeric(com.google.zxing.common.ECIInput input,int startpos,int count,java.lang.StringBuilder sb)
+{
+int idx;
+  java.lang.StringBuilder tmp;
+  java.math.BigInteger num900;
+  java.math.BigInteger num0;
+  int len;
+  java.lang.String part;
+  java.math.BigInteger bigint;
+  int i;
+  java.lang.StringBuilder $stack19;
+  int $stack21;
+  java.lang.CharSequence $stack24;
+  java.math.BigInteger $stack28;
+  char $stack30;
+  boolean $stack33;
+  idx=0;
+ tmp=new java.lang.StringBuilder;
+ len=(count/3);
+ len=(len+1);
+ tmp#java.lang.StringBuilder(len);
+ num900 = java.math.BigInteger.valueOf(900L);
+ num0 = java.math.BigInteger.valueOf(0L);
+ label0:if (idx>=count) goto label1;
+ tmp.setLength(0);
+ len=(count-idx);
+ len = java.lang.Math.min(44,len);
+ $stack19=new java.lang.StringBuilder;
+ $stack19#java.lang.StringBuilder();
+ $stack19 = $stack19.append("1");
+ i=(startpos+idx);
+ $stack21=(startpos+idx);
+ $stack21=($stack21+len);
+ $stack24 = input.subSequence(i,$stack21);
+ $stack19 = $stack19.append((java.lang.Object)$stack24);
+ part = $stack19.toString();
+ bigint=new java.math.BigInteger;
+ bigint#java.math.BigInteger(part);
+ label2:$stack28 = bigint.mod(num900);
+ i = $stack28.intValue();
+ $stack30=(char) i;
+ tmp.append($stack30);
+ bigint = bigint.divide(num900);
+ $stack33 = bigint.equals((java.lang.Object)num0);
+ if ($stack33==0) goto label2;
+ i = tmp.length();
+ i=(i-1);
+ label3:if (i<0) goto label4;
+ $stack30 = tmp.charAt(i);
+ sb.append($stack30);
+ i=(i+-1);
+ goto label3;
+ label4:idx=(idx+len);
+ goto label0;
+ label1:return;
+ } 
+

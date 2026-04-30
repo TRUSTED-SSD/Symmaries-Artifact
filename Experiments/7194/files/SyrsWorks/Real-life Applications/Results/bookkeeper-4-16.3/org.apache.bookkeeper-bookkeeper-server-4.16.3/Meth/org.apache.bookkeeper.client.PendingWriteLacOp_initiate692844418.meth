@@ -1,0 +1,23 @@
+void org.apache.bookkeeper.client.PendingWriteLacOp:initiate(org.apache.bookkeeper.util.ByteBufList toSend)
+{
+int i;
+  org.apache.bookkeeper.client.LedgerHandle $stack3;
+  org.apache.bookkeeper.client.DistributionSchedule $stack4;
+  int $stack5;
+  long $stack7;
+  this.toSend=toSend;
+ i=0;
+ label0:$stack3=this.lh;
+ $stack4=$stack3.distributionSchedule;
+ $stack5 = $stack4.getWriteQuorumSize();
+ if (i>=$stack5) goto label1;
+ $stack3=this.lh;
+ $stack4=$stack3.distributionSchedule;
+ $stack7=this.lac;
+ $stack5 = $stack4.getWriteSetBookieIndex($stack7,i);
+ this.sendWriteLacRequest($stack5);
+ i=(i+1);
+ goto label0;
+ label1:return;
+ } 
+

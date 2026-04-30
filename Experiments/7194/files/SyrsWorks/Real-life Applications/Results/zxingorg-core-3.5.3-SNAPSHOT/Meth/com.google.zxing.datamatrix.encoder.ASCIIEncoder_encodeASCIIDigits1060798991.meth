@@ -1,0 +1,30 @@
+static char com.google.zxing.datamatrix.encoder.ASCIIEncoder:encodeASCIIDigits(char digit1,char digit2)
+{
+int num;
+  boolean $stack3;
+  java.lang.IllegalArgumentException $stack4;
+  java.lang.StringBuilder $stack5;
+  java.lang.String $stack9;
+  int $stack16;
+  $stack3 = com.google.zxing.datamatrix.encoder.HighLevelEncoder.isDigit(digit1);
+ if ($stack3==0) goto label0;
+ $stack3 = com.google.zxing.datamatrix.encoder.HighLevelEncoder.isDigit(digit2);
+ if ($stack3==0) goto label0;
+ num=(digit1-48);
+ $stack16=(num * 10);
+ num=(digit2-48);
+ num=($stack16+num);
+ num=(num+130);
+ digit1=(char) num;
+ return  digit1;
+ label0:$stack4=new java.lang.IllegalArgumentException;
+ $stack5=new java.lang.StringBuilder;
+ $stack5#java.lang.StringBuilder();
+ $stack5 = $stack5.append("not digits: ");
+ $stack5 = $stack5.append(digit1);
+ $stack5 = $stack5.append(digit2);
+ $stack9 = $stack5.toString();
+ $stack4#java.lang.IllegalArgumentException($stack9);
+ throw $stack4;
+ } 
+

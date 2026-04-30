@@ -1,0 +1,22 @@
+void org.apache.rocketmq.client.impl.consumer.DefaultMQPullConsumerImpl:subscriptionAutomatically(java.lang.String topic)
+{
+java.lang.Object subscriptionData;
+  org.apache.rocketmq.client.impl.consumer.RebalanceImpl $stack3;
+  java.util.concurrent.ConcurrentMap $stack4;
+  boolean $stack5;
+  java.lang.Exception $stack10;
+  $stack3=this.rebalanceImpl;
+ $stack4 = $stack3.getSubscriptionInner();
+ $stack5 = $stack4.containsKey((java.lang.Object)topic);
+ if ($stack5!=0) goto label0;
+ label1:subscriptionData = org.apache.rocketmq.remoting.protocol.filter.FilterAPI.buildSubscriptionData(topic,"*");
+ $stack3=this.rebalanceImpl;
+ $stack4=$stack3.subscriptionInner;
+ $stack4.putIfAbsent((java.lang.Object)topic,subscriptionData);
+ label2:goto label0;
+ label3:$stack10 = catch;
+ subscriptionData=$stack10;
+ label0:return;
+ catch java.lang.Exception: label1 - label2 : label3;
+} 
+

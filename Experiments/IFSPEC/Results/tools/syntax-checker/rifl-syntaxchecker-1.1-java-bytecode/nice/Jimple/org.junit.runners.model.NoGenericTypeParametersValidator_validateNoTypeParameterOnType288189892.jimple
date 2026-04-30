@@ -1,0 +1,115 @@
+    private void validateNoTypeParameterOnType(java.lang.reflect.Type, java.util.List)
+    {
+        org.junit.runners.model.NoGenericTypeParametersValidator this;
+        java.lang.reflect.Type type;
+        java.util.List errors;
+        boolean $stack3;
+        java.lang.reflect.GenericArrayType $stack7;
+        java.lang.reflect.WildcardType $stack8;
+        java.lang.reflect.ParameterizedType $stack9;
+        java.lang.Exception $stack10;
+        java.lang.StringBuilder $stack11;
+        java.lang.reflect.Method $stack13;
+        java.lang.String $stack14;
+
+        this := @this: org.junit.runners.model.NoGenericTypeParametersValidator;
+
+        type := @parameter0: java.lang.reflect.Type;
+
+        errors := @parameter1: java.util.List;
+
+        $stack3 = type instanceof java.lang.reflect.TypeVariable;
+/*25*/
+
+        if $stack3 == 0 goto label1;
+/*25*/
+
+        $stack10 = new java.lang.Exception;
+/*26*/
+
+        $stack11 = new java.lang.StringBuilder;
+/*26*/
+
+        specialinvoke $stack11.<java.lang.StringBuilder: void <init>()>();
+/*26*/
+
+        $stack11 = virtualinvoke $stack11.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>("Method ");
+/*26*/
+
+        $stack13 = this.<org.junit.runners.model.NoGenericTypeParametersValidator: java.lang.reflect.Method method>;
+/*26*/
+
+        $stack14 = virtualinvoke $stack13.<java.lang.reflect.Method: java.lang.String getName()>();
+/*26*/
+
+        $stack11 = virtualinvoke $stack11.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>($stack14);
+/*26*/
+
+        $stack11 = virtualinvoke $stack11.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>("() contains unresolved type variable ");
+/*26*/
+
+        $stack11 = virtualinvoke $stack11.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.Object)>(type);
+/*26*/
+
+        $stack14 = virtualinvoke $stack11.<java.lang.StringBuilder: java.lang.String toString()>();
+/*26*/
+
+        specialinvoke $stack10.<java.lang.Exception: void <init>(java.lang.String)>($stack14);
+/*26*/
+
+        interfaceinvoke errors.<java.util.List: boolean add(java.lang.Object)>($stack10);
+/*26*/
+
+        goto label4;
+/*26*/
+
+     label1:
+        $stack3 = type instanceof java.lang.reflect.ParameterizedType;
+/*28*/
+
+        if $stack3 == 0 goto label2;
+/*28*/
+
+        $stack9 = (java.lang.reflect.ParameterizedType) type;
+/*29*/
+
+        specialinvoke this.<org.junit.runners.model.NoGenericTypeParametersValidator: void validateNoTypeParameterOnParameterizedType(java.lang.reflect.ParameterizedType,java.util.List)>($stack9, errors);
+/*29*/
+
+        goto label4;
+/*29*/
+
+     label2:
+        $stack3 = type instanceof java.lang.reflect.WildcardType;
+/*30*/
+
+        if $stack3 == 0 goto label3;
+/*30*/
+
+        $stack8 = (java.lang.reflect.WildcardType) type;
+/*31*/
+
+        specialinvoke this.<org.junit.runners.model.NoGenericTypeParametersValidator: void validateNoTypeParameterOnWildcardType(java.lang.reflect.WildcardType,java.util.List)>($stack8, errors);
+/*31*/
+
+        goto label4;
+/*31*/
+
+     label3:
+        $stack3 = type instanceof java.lang.reflect.GenericArrayType;
+/*32*/
+
+        if $stack3 == 0 goto label4;
+/*32*/
+
+        $stack7 = (java.lang.reflect.GenericArrayType) type;
+/*33*/
+
+        specialinvoke this.<org.junit.runners.model.NoGenericTypeParametersValidator: void validateNoTypeParameterOnGenericArrayType(java.lang.reflect.GenericArrayType,java.util.List)>($stack7, errors);
+/*33*/
+
+     label4:
+        return;
+/*35*/
+    }
+

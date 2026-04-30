@@ -1,0 +1,30 @@
+static void org.apache.rocketmq.tools.admin.MQAdminUtils:refreshTopicRouteInfo(java.lang.String @topic,org.apache.rocketmq.tools.admin.DefaultMQAdminExt defaultMQAdminExt,org.apache.rocketmq.remoting.rpc.ClientMetadata clientMetadata)
+{
+org.apache.rocketmq.remoting.protocol.route.TopicRouteData routeData;
+  org.apache.rocketmq.client.exception.MQClientException exception;
+  java.util.List $stack6;
+  boolean $stack7;
+  int $stack9;
+  org.apache.rocketmq.client.exception.MQBrokerException $stack11;
+  java.lang.String topic;
+topic=@topic;
+routeData=null;
+ label0:routeData = defaultMQAdminExt.examineTopicRouteInfo(topic);
+ label1:goto label2;
+ label3:exception = catch;
+ $stack9 = exception.getResponseCode();
+ if ($stack9==17) goto label2;
+ $stack11=new org.apache.rocketmq.client.exception.MQBrokerException;
+ $stack9 = exception.getResponseCode();
+ topic = exception.getErrorMessage();
+ $stack11#org.apache.rocketmq.client.exception.MQBrokerException($stack9,topic);
+ throw $stack11;
+ label2:if (routeData==null) goto label4;
+ $stack6 = routeData.getQueueDatas();
+ $stack7 = $stack6.isEmpty();
+ if ($stack7!=0) goto label4;
+ clientMetadata.freshTopicRoute(topic,routeData);
+ label4:return;
+ catch org.apache.rocketmq.client.exception.MQClientException: label0 - label1 : label3;
+} 
+

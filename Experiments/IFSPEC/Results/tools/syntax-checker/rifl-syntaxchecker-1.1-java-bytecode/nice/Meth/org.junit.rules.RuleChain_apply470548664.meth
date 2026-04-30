@@ -1,0 +1,20 @@
+org.junit.runners.model.Statement org.junit.rules.RuleChain:apply(org.junit.runners.model.Statement @base,org.junit.runner.Description description)
+{
+java.util.Iterator i$;
+  org.junit.rules.TestRule each;
+  java.util.List $stack5;
+  boolean $stack7;
+  java.lang.Object $stack8;
+  org.junit.runners.model.Statement base;
+base=@base;
+$stack5=this.rulesStartingWithInnerMost;
+ i$ = $stack5.iterator();
+ label0:$stack7 = i$.hasNext();
+ if ($stack7==0) goto label1;
+ $stack8 = i$.next();
+ each=(org.junit.rules.TestRule) $stack8;
+ base = each.apply(base,description);
+ goto label0;
+ label1:return  base;
+ } 
+

@@ -1,0 +1,22 @@
+static void com.google.zxing.client.result.ResultParser:appendKeyValue(java.lang.CharSequence keyValue,java.util.Map result)
+{
+java.lang.String[] keyValueTokens;
+  java.lang.String key;
+  java.lang.String value;
+  java.lang.IllegalArgumentException l5;
+  java.util.regex.Pattern $stack6;
+  int $stack8;
+  $stack6=com.google.zxing.client.result.ResultParser.EQUALS;
+ keyValueTokens = $stack6.split(keyValue,2);
+ $stack8=#keyValueTokens;
+ if ($stack8!=2) goto label0;
+ key=keyValueTokens[0];
+ value=keyValueTokens[1];
+ label1:value = com.google.zxing.client.result.ResultParser.urlDecode(value);
+ result.put((java.lang.Object)key,(java.lang.Object)value);
+ label2:goto label0;
+ label3:l5 = catch;
+ label0:return;
+ catch java.lang.IllegalArgumentException: label1 - label2 : label3;
+} 
+

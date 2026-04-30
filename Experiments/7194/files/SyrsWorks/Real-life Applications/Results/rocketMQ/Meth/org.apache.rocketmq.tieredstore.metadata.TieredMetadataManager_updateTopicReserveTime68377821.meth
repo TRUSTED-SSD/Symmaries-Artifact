@@ -1,0 +1,13 @@
+void org.apache.rocketmq.tieredstore.metadata.TieredMetadataManager:updateTopicReserveTime(java.lang.String topic,long reserveTime)
+{
+org.apache.rocketmq.tieredstore.metadata.TopicMetadata metadata;
+  metadata = this.getTopic(topic);
+ if (metadata!=null) goto label0;
+ return;
+ label0:metadata.setReserveTime(reserveTime);
+ reserveTime = java.lang.System.currentTimeMillis();
+ metadata.setUpdateTimestamp(reserveTime);
+ this.persist();
+ return;
+ } 
+

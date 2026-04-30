@@ -1,0 +1,26 @@
+java.lang.String org.keycloak.adapters.jetty.spi.JettyHttpFacade$RequestFacade:getQueryParamValue(java.lang.String @paramName)
+{
+org.keycloak.adapters.jetty.spi.JettyHttpFacade $stack2;
+  org.keycloak.common.util.MultivaluedHashMap $stack3;
+  java.lang.Object $stack6;
+  org.eclipse.jetty.server.Request $stack9;
+  org.keycloak.adapters.jetty.spi.JettyHttpFacade $stack10;
+  java.lang.String $stack11;
+  java.lang.String paramName;
+paramName=@paramName;
+$stack2=this.this$0;
+ $stack3=$stack2.queryParameters;
+ if ($stack3!=null) goto label0;
+ $stack10=this.this$0;
+ $stack2=this.this$0;
+ $stack9=$stack2.request;
+ $stack11 = $stack9.getQueryString();
+ $stack3 = org.keycloak.common.util.UriUtils.decodeQueryString($stack11);
+ $stack10.queryParameters=$stack3;
+ label0:$stack2=this.this$0;
+ $stack3=$stack2.queryParameters;
+ $stack6 = $stack3.getFirst((java.lang.Object)paramName);
+ paramName=(java.lang.String) $stack6;
+ return  paramName;
+ } 
+

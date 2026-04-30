@@ -1,0 +1,33 @@
+void org.apache.rocketmq.broker.topic.TopicQueueMappingCleanService:run()
+{
+java.lang.Throwable t;
+  org.apache.rocketmq.logging.org.slf4j.Logger $stack2;
+  boolean $stack3;
+  java.lang.Throwable $stack6;
+  java.lang.Throwable $stack10;
+  $stack2=org.apache.rocketmq.broker.topic.TopicQueueMappingCleanService.log;
+ $stack2.info("Start topic queue mapping clean service thread!");
+ label0:$stack3 = this.isStopped();
+ if ($stack3!=0) goto label1;
+ label2:this.waitForRunning(300000L);
+ label3:goto label4;
+ label5:t = catch;
+ label4:this.cleanItemExpired();
+ label6:goto label7;
+ label8:$stack10 = catch;
+ $stack2=org.apache.rocketmq.broker.topic.TopicQueueMappingCleanService.log;
+ $stack2.error("topic queue mapping cleanItemExpired failed",$stack10);
+ label7:this.cleanItemListMoreThanSecondGen();
+ label9:goto label0;
+ label10:$stack6 = catch;
+ $stack2=org.apache.rocketmq.broker.topic.TopicQueueMappingCleanService.log;
+ $stack2.error("topic queue mapping cleanItemListMoreThanSecondGen failed",$stack6);
+ goto label0;
+ label1:$stack2=org.apache.rocketmq.broker.topic.TopicQueueMappingCleanService.log;
+ $stack2.info("End topic queue mapping clean service  thread!");
+ return;
+ catch java.lang.Throwable: label2 - label3 : label5;
+catch java.lang.Throwable: label4 - label6 : label8;
+catch java.lang.Throwable: label7 - label9 : label10;
+} 
+

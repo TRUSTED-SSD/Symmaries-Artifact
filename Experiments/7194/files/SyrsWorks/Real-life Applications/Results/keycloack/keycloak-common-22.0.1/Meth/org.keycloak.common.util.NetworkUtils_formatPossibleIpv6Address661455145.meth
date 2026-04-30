@@ -1,0 +1,30 @@
+static java.lang.String org.keycloak.common.util.NetworkUtils:formatPossibleIpv6Address(java.lang.String @address)
+{
+boolean $stack2;
+  java.lang.StringBuilder $stack4;
+  int $stack14;
+  java.lang.String address;
+address=@address;
+if (address!=null) goto label0;
+ return  null;
+ label0:$stack2 = address.startsWith("[");
+ if ($stack2==0) goto label1;
+ $stack2 = address.endsWith("]");
+ if ($stack2==0) goto label1;
+ $stack14 = address.lastIndexOf(93);
+ address = address.substring(0,$stack14);
+ address = address.substring(1);
+ goto label1;
+ label1:$stack2 = org.keycloak.common.util.NetworkUtils.mayBeIPv6Address(address);
+ if ($stack2!=0) goto label2;
+ return  address;
+ label2:$stack4=new java.lang.StringBuilder;
+ $stack4#java.lang.StringBuilder();
+ $stack4 = $stack4.append((char)91);
+ address = org.keycloak.common.util.NetworkUtils.canonize(address);
+ $stack4 = $stack4.append(address);
+ $stack4 = $stack4.append((char)93);
+ address = $stack4.toString();
+ return  address;
+ } 
+

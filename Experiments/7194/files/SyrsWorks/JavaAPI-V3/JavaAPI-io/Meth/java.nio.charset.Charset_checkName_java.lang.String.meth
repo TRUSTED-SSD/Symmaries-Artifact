@@ -1,0 +1,50 @@
+static void java.nio.charset.Charset:checkName(java.lang.String r0)
+{
+int i0;
+  char c1;
+  boolean $z0;
+  java.nio.charset.IllegalCharsetNameException $r1;
+  java.nio.charset.IllegalCharsetNameException $r2;
+  int i2;
+  i0 = r0.length();
+ $z0 = java.nio.charset.Charset.atBugLevel("1.4");
+ if ($z0!=0) goto label0;
+ if (i0!=0) goto label0;
+ $r2=new java.nio.charset.IllegalCharsetNameException;
+ $r2#java.nio.charset.IllegalCharsetNameException:init(r0);
+ throw $r2;
+ label0:i2=0;
+ label1:if (i2>=i0) goto label2;
+ c1 = r0.charAt(i2);
+ if (c1<65) goto label3;
+ if (c1>90) goto label3;
+ goto label4;
+ label3:if (c1<97) goto label5;
+ if (c1>122) goto label5;
+ goto label4;
+ label5:if (c1<48) goto label6;
+ if (c1>57) goto label6;
+ goto label4;
+ label6:if (c1!=45) goto label7;
+ if (i2==0) goto label7;
+ goto label4;
+ label7:if (c1!=43) goto label8;
+ if (i2==0) goto label8;
+ goto label4;
+ label8:if (c1!=58) goto label9;
+ if (i2==0) goto label9;
+ goto label4;
+ label9:if (c1!=95) goto label10;
+ if (i2==0) goto label10;
+ goto label4;
+ label10:if (c1!=46) goto label11;
+ if (i2==0) goto label11;
+ goto label4;
+ label11:$r1=new java.nio.charset.IllegalCharsetNameException;
+ $r1#java.nio.charset.IllegalCharsetNameException:init(r0);
+ throw $r1;
+ label4:i2=(i2+1);
+ goto label1;
+ label2:return;
+ }  
+

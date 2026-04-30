@@ -1,0 +1,48 @@
+static void org.apache.bookkeeper.bookie.storage.directentrylogger.LogReaderScan:scan(io.netty.buffer.ByteBufAllocator allocator,org.apache.bookkeeper.bookie.storage.directentrylogger.LogReader reader,org.apache.bookkeeper.bookie.storage.EntryLogScanner scanner)
+{
+int offset;
+  io.netty.buffer.ByteBuf entry;
+  int initOffset;
+  int entrySize;
+  long ledgerId;
+  java.lang.Throwable l9;
+  long $stack12;
+  byte $stack13;
+  boolean $stack14;
+  offset=1024;
+ entry = allocator.directBuffer(16777216);
+ label0:ledgerId=(long) offset;
+ $stack12 = reader.maxOffset();
+ $stack13=(ledgerId cmp $stack12);
+ if ($stack13>=0) goto label1;
+ initOffset=offset;
+ ledgerId=(long) offset;
+ entrySize = reader.readIntAt(ledgerId);
+ if (entrySize>=0) goto label2;
+ offset = org.apache.bookkeeper.bookie.storage.directentrylogger.Buffer.nextAlignment(offset);
+ goto label0;
+ label2:if (entrySize!=0) goto label3;
+ goto label1;
+ label3:offset=(offset+4);
+ entry.clear();
+ ledgerId=(long) offset;
+ reader.readIntoBufferAt(entry,ledgerId,entrySize);
+ ledgerId = entry.getLong(0);
+ $stack13=(ledgerId cmp 0L);
+ if ($stack13<0) goto label4;
+ $stack14 = scanner.accept(ledgerId);
+ if ($stack14==0) goto label4;
+ $stack12=(long) initOffset;
+ scanner.process(ledgerId,$stack12,entry);
+ label4:offset=(offset+entrySize);
+ goto label0;
+ label1:io.netty.util.ReferenceCountUtil.release((java.lang.Object)entry);
+ goto label5;
+ label6:l9 = catch;
+ label7:io.netty.util.ReferenceCountUtil.release((java.lang.Object)entry);
+ throw l9;
+ label5:return;
+ catch java.lang.Throwable: label0 - label1 : label6;
+catch java.lang.Throwable: label6 - label7 : label6;
+} 
+

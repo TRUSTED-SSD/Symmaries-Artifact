@@ -1,0 +1,112 @@
+    protected void doStart()
+    {
+        org.apache.bookkeeper.stream.server.service.BookieWatchService this;
+        org.apache.bookkeeper.conf.ClientConfiguration clientConf;
+        java.util.concurrent.ScheduledExecutorService executorService;
+        java.lang.Throwable l4, $stack14;
+        org.apache.bookkeeper.common.conf.ComponentConfiguration $stack6;
+        org.apache.bookkeeper.stream.server.conf.BookieConfiguration $stack7;
+        org.apache.commons.configuration.CompositeConfiguration $stack8;
+        java.util.function.Function $stack10;
+        java.lang.Object $stack11;
+        java.util.List $stack12;
+        java.lang.RuntimeException $stack19;
+
+        this := @this: org.apache.bookkeeper.stream.server.service.BookieWatchService;
+
+        clientConf = new org.apache.bookkeeper.conf.ClientConfiguration;
+/*57*/
+
+        specialinvoke clientConf.<org.apache.bookkeeper.conf.ClientConfiguration: void <init>()>();
+/*57*/
+
+        $stack6 = this.<org.apache.bookkeeper.stream.server.service.BookieWatchService: org.apache.bookkeeper.common.conf.ComponentConfiguration conf>;
+/*58*/
+
+        $stack7 = (org.apache.bookkeeper.stream.server.conf.BookieConfiguration) $stack6;
+/*58*/
+
+        $stack8 = virtualinvoke $stack7.<org.apache.bookkeeper.stream.server.conf.BookieConfiguration: org.apache.commons.configuration.CompositeConfiguration getUnderlyingConf()>();
+/*58*/
+
+        virtualinvoke clientConf.<org.apache.bookkeeper.conf.ClientConfiguration: void loadConf(org.apache.commons.configuration.CompositeConfiguration)>($stack8);
+/*58*/
+
+        executorService = staticinvoke <java.util.concurrent.Executors: java.util.concurrent.ScheduledExecutorService newSingleThreadScheduledExecutor()>();
+/*60*/
+/*60*/
+
+     label1:
+        $stack10 = dynamicinvoke "apply" <java.util.function.Function (org.apache.bookkeeper.stream.server.service.BookieWatchService)>(this) <java.lang.invoke.LambdaMetafactory: java.lang.invoke.CallSite metafactory(java.lang.invoke.MethodHandles$Lookup,java.lang.String,java.lang.invoke.MethodType,java.lang.invoke.MethodType,java.lang.invoke.MethodHandle,java.lang.invoke.MethodType)>(class "(Ljava/lang/Object;)Ljava/lang/Object;", handle: <org.apache.bookkeeper.stream.server.service.BookieWatchService: java.lang.Void lambda$doStart$0(org.apache.bookkeeper.meta.MetadataClientDriver)>, class "(Lorg/apache/bookkeeper/meta/MetadataClientDriver;)Ljava/lang/Void;");
+/*63*/
+
+        staticinvoke <org.apache.bookkeeper.meta.MetadataDrivers: java.lang.Object runFunctionWithMetadataClientDriver(org.apache.bookkeeper.conf.ClientConfiguration,java.util.function.Function,java.util.concurrent.ScheduledExecutorService)>(clientConf, $stack10, executorService);
+/*63*/
+
+     label2:
+        goto label4;
+/*75*/
+
+     label3:
+        l4 := @caughtexception;
+/*76*/
+
+        $stack19 = new java.lang.RuntimeException;
+/*74*/
+
+        specialinvoke $stack19.<java.lang.RuntimeException: void <init>(java.lang.String,java.lang.Throwable)>("Failed to start bookie watch service", l4);
+/*74*/
+
+        throw $stack19;
+/*74*/
+
+     label4:
+        $stack12 = staticinvoke <java.util.Collections: java.util.List singletonList(java.lang.Object)>(executorService);
+/*60*/
+
+        $stack11 = interfaceinvoke $stack12.<java.util.List: java.lang.Object get(int)>(0);
+/*60*/
+
+        if $stack11 == null goto label8;
+/*60*/
+
+        interfaceinvoke executorService.<java.util.concurrent.ScheduledExecutorService: void shutdown()>();
+/*76*/
+
+        goto label8;
+/*76*/
+
+     label5:
+        $stack14 := @caughtexception;
+/*76*/
+
+        l4 = $stack14;
+/*76*/
+
+     label6:
+        $stack12 = staticinvoke <java.util.Collections: java.util.List singletonList(java.lang.Object)>(executorService);
+/*76*/
+
+        $stack11 = interfaceinvoke $stack12.<java.util.List: java.lang.Object get(int)>(0);
+/*76*/
+
+        if $stack11 == null goto label7;
+/*76*/
+
+        interfaceinvoke executorService.<java.util.concurrent.ScheduledExecutorService: void shutdown()>();
+/*76*/
+
+     label7:
+        throw $stack14;
+/*76*/
+
+     label8:
+        return;
+/*76*/
+
+        catch org.apache.bookkeeper.meta.exceptions.MetadataException from label1 to label2 with label3;
+        catch java.util.concurrent.ExecutionException from label1 to label2 with label3;
+        catch java.lang.Throwable from label1 to label4 with label5;
+        catch java.lang.Throwable from label5 to label6 with label5;
+    }
+

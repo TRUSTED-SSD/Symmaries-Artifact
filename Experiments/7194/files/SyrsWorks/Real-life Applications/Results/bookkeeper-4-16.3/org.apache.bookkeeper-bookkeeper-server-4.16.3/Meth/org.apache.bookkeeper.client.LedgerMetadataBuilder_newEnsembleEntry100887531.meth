@@ -1,0 +1,36 @@
+org.apache.bookkeeper.client.LedgerMetadataBuilder org.apache.bookkeeper.client.LedgerMetadataBuilder:newEnsembleEntry(long firstEntry,java.util.List ensemble)
+{
+int $stack4;
+  int $stack5;
+  java.util.TreeMap $stack6;
+  boolean $stack7;
+  java.lang.Long $stack9;
+  java.lang.Object $stack10;
+  long $stack14;
+  byte $stack15;
+  $stack4 = ensemble.size();
+ $stack5=this.ensembleSize;
+ if ($stack4!=$stack5) goto label0;
+ $stack7=1;
+ goto label1;
+ label0:$stack7=0;
+ label1:com.google.common.base.Preconditions.checkArgument($stack7,(java.lang.Object)"Size of passed in ensemble must match the ensembleSize of the builder");
+ $stack6=this.ensembles;
+ $stack7 = $stack6.isEmpty();
+ if ($stack7!=0) goto label2;
+ $stack6=this.ensembles;
+ $stack10 = $stack6.lastKey();
+ $stack9=(java.lang.Long) $stack10;
+ $stack14 = $stack9.longValue();
+ $stack15=(firstEntry cmp $stack14);
+ if ($stack15<=0) goto label3;
+ label2:$stack7=1;
+ goto label4;
+ label3:$stack7=0;
+ label4:com.google.common.base.Preconditions.checkArgument($stack7,(java.lang.Object)"New entry must have a first entry greater than any existing ensemble key");
+ $stack6=this.ensembles;
+ $stack9 = java.lang.Long.valueOf(firstEntry);
+ $stack6.put((java.lang.Object)$stack9,(java.lang.Object)ensemble);
+ return  this;
+ } 
+

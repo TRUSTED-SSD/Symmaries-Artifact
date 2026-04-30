@@ -1,0 +1,69 @@
+    private static java.lang.Class[] filterAbstractClasses(java.lang.Class[])
+    {
+        java.lang.Class[] classes;
+        java.util.ArrayList filteredList;
+        int len$, i$, $stack12;
+        java.lang.Class clazz;
+        java.lang.Object[] $stack10;
+        boolean $stack13;
+
+        classes := @parameter0: java.lang.Class[];
+
+        filteredList = new java.util.ArrayList;
+/*35*/
+
+        len$ = lengthof classes;
+/*35*/
+
+        specialinvoke filteredList.<java.util.ArrayList: void <init>(int)>(len$);
+/*35*/
+
+        len$ = lengthof classes;
+/*37*/
+
+        i$ = 0;
+/*37*/
+
+     label1:
+        if i$ >= len$ goto label3;
+/*37*/
+
+        clazz = classes[i$];
+/*43*/
+
+        $stack12 = virtualinvoke clazz.<java.lang.Class: int getModifiers()>();
+/*38*/
+
+        $stack13 = staticinvoke <java.lang.reflect.Modifier: boolean isAbstract(int)>($stack12);
+/*38*/
+
+        if $stack13 != 0 goto label2;
+/*38*/
+
+        interfaceinvoke filteredList.<java.util.List: boolean add(java.lang.Object)>(clazz);
+/*39*/
+
+     label2:
+        i$ = i$ + 1;
+/*37*/
+
+        goto label1;
+/*37*/
+
+     label3:
+        len$ = interfaceinvoke filteredList.<java.util.List: int size()>();
+/*43*/
+
+        classes = newarray (java.lang.Class)[len$];
+/*43*/
+
+        $stack10 = interfaceinvoke filteredList.<java.util.List: java.lang.Object[] toArray(java.lang.Object[])>(classes);
+/*43*/
+
+        classes = (java.lang.Class[]) $stack10;
+/*43*/
+
+        return classes;
+/*43*/
+    }
+

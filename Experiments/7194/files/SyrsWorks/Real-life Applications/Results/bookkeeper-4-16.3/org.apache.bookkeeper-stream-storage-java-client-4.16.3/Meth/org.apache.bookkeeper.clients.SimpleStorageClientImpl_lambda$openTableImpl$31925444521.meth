@@ -1,0 +1,50 @@
+static java.util.concurrent.CompletionStage org.apache.bookkeeper.clients.SimpleStorageClientImpl:lambda$openTableImpl$3(java.lang.String @namespaceName,java.lang.String streamName,org.apache.bookkeeper.stream.proto.storage.GetStreamResponse resp)
+{
+org.apache.bookkeeper.stream.proto.StreamProperties streamProps;
+  org.apache.bookkeeper.stream.proto.storage.StatusCode $stack4;
+  org.apache.bookkeeper.stream.proto.storage.StatusCode $stack5;
+  java.lang.Throwable $stack7;
+  java.util.concurrent.CompletableFuture $stack8;
+  java.lang.Object[] $stack10;
+  org.slf4j.Logger $stack11;
+  org.apache.bookkeeper.stream.proto.StorageType $stack12;
+  org.apache.bookkeeper.stream.proto.StreamConfiguration $stack13;
+  org.apache.bookkeeper.stream.proto.StorageType $stack14;
+  org.apache.bookkeeper.api.exceptions.ApiException $stack16;
+  java.lang.StringBuilder $stack17;
+  java.lang.String namespaceName;
+namespaceName=@namespaceName;
+$stack4=org.apache.bookkeeper.stream.proto.storage.StatusCode.SUCCESS;
+ $stack5 = resp.getCode();
+ if ($stack4!=$stack5) goto label0;
+ streamProps = resp.getStreamProps();
+ $stack11=org.apache.bookkeeper.clients.SimpleStorageClientImpl.log;
+ $stack10=new java.lang.Object[3];
+ $stack10[0]=namespaceName;
+ $stack10[1]=streamName;
+ $stack10[2]=streamProps;
+ dummyClass.lowSink("Retrieved table properties for table {}/{} : {}");
+$stack11.info("Retrieved table properties for table {}/{} : {}",$stack10);
+ $stack12=org.apache.bookkeeper.stream.proto.StorageType.TABLE;
+ $stack13 = streamProps.getStreamConf();
+ $stack14 = $stack13.getStorageType();
+ if ($stack12==$stack14) goto label1;
+ $stack16=new org.apache.bookkeeper.api.exceptions.ApiException;
+ $stack17=new java.lang.StringBuilder;
+ $stack17#java.lang.StringBuilder();
+ $stack17 = $stack17.append("Can\'t open a non-table storage entity : ");
+ $stack13 = streamProps.getStreamConf();
+ $stack12 = $stack13.getStorageType();
+ $stack17 = $stack17.append((java.lang.Object)$stack12);
+ namespaceName = $stack17.toString();
+ $stack16#org.apache.bookkeeper.api.exceptions.ApiException(namespaceName);
+ $stack8 = org.apache.bookkeeper.common.concurrent.FutureUtils.exception((java.lang.Throwable)$stack16);
+ return  $stack8;
+ label1:$stack8 = org.apache.bookkeeper.common.concurrent.FutureUtils.value((java.lang.Object)streamProps);
+ return  $stack8;
+ label0:$stack4 = resp.getCode();
+ $stack7 = org.apache.bookkeeper.clients.impl.internal.ProtocolInternalUtils.createRootRangeException(namespaceName,$stack4);
+ $stack8 = org.apache.bookkeeper.common.concurrent.FutureUtils.exception($stack7);
+ return  $stack8;
+ } 
+

@@ -1,0 +1,47 @@
+void org.apache.bookkeeper.proto.BookieClientImpl:close()
+{
+java.util.Iterator l1;
+  org.apache.bookkeeper.proto.PerChannelBookieClientPool pool;
+  java.util.concurrent.locks.ReentrantReadWriteLock $stack4;
+  java.util.concurrent.locks.ReentrantReadWriteLock$WriteLock $stack5;
+  java.util.concurrent.ConcurrentHashMap $stack6;
+  java.util.Collection $stack7;
+  boolean $stack9;
+  org.apache.bookkeeper.auth.ClientAuthProvider$Factory $stack11;
+  java.util.concurrent.ScheduledFuture $stack12;
+  java.lang.Object $stack18;
+  java.lang.Throwable $stack20;
+  $stack4=this.closeLock;
+ $stack5 = $stack4.writeLock();
+ $stack5.lock();
+ label0:this.closed=1;
+ $stack6=this.channels;
+ $stack7 = $stack6.values();
+ l1 = $stack7.iterator();
+ label1:$stack9 = l1.hasNext();
+ if ($stack9==0) goto label2;
+ $stack18 = l1.next();
+ pool=(org.apache.bookkeeper.proto.PerChannelBookieClientPool) $stack18;
+ pool.close((boolean)1);
+ goto label1;
+ label2:$stack6=this.channels;
+ $stack6.clear();
+ $stack11=this.authProviderFactory;
+ $stack11.close();
+ $stack12=this.timeoutFuture;
+ if ($stack12==null) goto label3;
+ $stack12=this.timeoutFuture;
+ $stack12.cancel((boolean)0);
+ label3:$stack4=this.closeLock;
+ $stack5 = $stack4.writeLock();
+ $stack5.unlock();
+ goto label4;
+ label5:$stack20 = catch;
+ $stack4=this.closeLock;
+ $stack5 = $stack4.writeLock();
+ $stack5.unlock();
+ throw $stack20;
+ label4:return;
+ catch java.lang.Throwable: label0 - label3 : label5;
+} 
+

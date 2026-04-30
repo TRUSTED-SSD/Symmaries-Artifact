@@ -1,0 +1,50 @@
+long org.apache.rocketmq.common.statistics.StatisticsBrief:getTPValue(float ratio)
+{
+long count;
+  int tmp;
+  int i;
+  byte $stack8;
+  java.util.concurrent.atomic.AtomicLong $stack9;
+  float $stack11;
+  float $stack13;
+  java.util.concurrent.atomic.AtomicInteger[] $stack16;
+  java.util.concurrent.atomic.AtomicInteger $stack19;
+  int $stack20;
+  long $stack21;
+  $stack8=(ratio cmpg 0.0F);
+ if ($stack8<=0) goto label0;
+ $stack8=(ratio cmpl 1.0F);
+ if ($stack8<0) goto label1;
+ label0:ratio=0.99F;
+ label1:$stack9=this.totalCount;
+ count = $stack9.get();
+ $stack13=(float) count;
+ $stack11=(float) count;
+ ratio=($stack11 * ratio);
+ ratio=($stack13-ratio);
+ count=(long) ratio;
+ $stack8=(count cmp 0L);
+ if ($stack8!=0) goto label2;
+ count = this.getMax();
+ return  count;
+ label2:tmp=0;
+ $stack16=this.counts;
+ i=#$stack16;
+ i=(i-1);
+ label3:if (i<=0) goto label4;
+ $stack16=this.counts;
+ $stack19=$stack16[i];
+ $stack20 = $stack19.get();
+ tmp=(tmp+$stack20);
+ $stack21=(long) tmp;
+ $stack8=($stack21 cmp count);
+ if ($stack8<=0) goto label5;
+ count = this#org.apache.rocketmq.common.statistics.StatisticsBrief:getSlotTPValue(i);
+ $stack21 = this.getMax();
+ count = java.lang.Math.min(count,$stack21);
+ return  count;
+ label5:i=(i+-1);
+ goto label3;
+ label4:return  0L;
+ } 
+

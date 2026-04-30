@@ -1,0 +1,44 @@
+void junit.textui.ResultPrinter:printDefects(java.util.Enumeration booBoos,int count,java.lang.String @type)
+{
+java.io.PrintStream $stack5;
+  java.lang.StringBuilder $stack6;
+  boolean $stack13;
+  java.lang.Object $stack14;
+  junit.framework.TestFailure $stack15;
+  java.lang.String type;
+type=@type;
+if (count!=0) goto label0;
+ return;
+ label0:if (count!=1) goto label1;
+ $stack5 = this.getWriter();
+ $stack6=new java.lang.StringBuilder;
+ $stack6#java.lang.StringBuilder();
+ $stack6 = $stack6.append("There was ");
+ $stack6 = $stack6.append(count);
+ $stack6 = $stack6.append(" ");
+ $stack6 = $stack6.append(type);
+ $stack6 = $stack6.append(":");
+ type = $stack6.toString();
+ $stack5.println(type);
+ goto label2;
+ label1:$stack5 = this.getWriter();
+ $stack6=new java.lang.StringBuilder;
+ $stack6#java.lang.StringBuilder();
+ $stack6 = $stack6.append("There were ");
+ $stack6 = $stack6.append(count);
+ $stack6 = $stack6.append(" ");
+ $stack6 = $stack6.append(type);
+ $stack6 = $stack6.append("s:");
+ type = $stack6.toString();
+ $stack5.println(type);
+ label2:count=1;
+ label3:$stack13 = booBoos.hasMoreElements();
+ if ($stack13==0) goto label4;
+ $stack14 = booBoos.nextElement();
+ $stack15=(junit.framework.TestFailure) $stack14;
+ this.printDefect($stack15,count);
+ count=(count+1);
+ goto label3;
+ label4:return;
+ } 
+

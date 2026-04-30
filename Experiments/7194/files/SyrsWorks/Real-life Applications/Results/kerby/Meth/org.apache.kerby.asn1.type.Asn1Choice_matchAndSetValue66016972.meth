@@ -1,0 +1,46 @@
+boolean org.apache.kerby.asn1.type.Asn1Choice:matchAndSetValue(org.apache.kerby.asn1.Tag tag)
+{
+int foundPos;
+  int i;
+  org.apache.kerby.asn1.Asn1FieldInfo[] $stack4;
+  int $stack5;
+  org.apache.kerby.asn1.Asn1FieldInfo $stack7;
+  org.apache.kerby.asn1.type.Asn1Type $stack10;
+  boolean $stack11;
+  org.apache.kerby.asn1.Tag[] $stack12;
+  org.apache.kerby.asn1.Tag $stack13;
+  int $stack22;
+  foundPos=-1;
+ i=0;
+ label0:$stack4=this.fieldInfos;
+ $stack5=#$stack4;
+ if (i>=$stack5) goto label1;
+ $stack11 = tag.isContextSpecific();
+ if ($stack11==0) goto label2;
+ $stack4=this.fieldInfos;
+ $stack7=$stack4[i];
+ $stack5 = $stack7.getTagNo();
+ $stack22 = tag.tagNo();
+ if ($stack5!=$stack22) goto label3;
+ foundPos=i;
+ goto label1;
+ label2:$stack12=this.tags;
+ $stack13=$stack12[i];
+ $stack11 = $stack13.equals((java.lang.Object)tag);
+ if ($stack11==0) goto label3;
+ foundPos=i;
+ goto label1;
+ label3:i=(i+1);
+ goto label0;
+ label1:if (foundPos==-1) goto label4;
+ $stack4=this.fieldInfos;
+ $stack7=$stack4[foundPos];
+ this.chosenField=$stack7;
+ $stack4=this.fieldInfos;
+ $stack7=$stack4[foundPos];
+ $stack10 = $stack7.createFieldValue();
+ this.setValue((java.lang.Object)$stack10);
+ return  1;
+ label4:return  0;
+ } 
+

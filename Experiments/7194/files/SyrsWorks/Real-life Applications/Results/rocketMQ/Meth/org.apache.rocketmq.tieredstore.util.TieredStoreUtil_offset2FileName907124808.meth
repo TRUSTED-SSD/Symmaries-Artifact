@@ -1,0 +1,44 @@
+static java.lang.String org.apache.rocketmq.tieredstore.util.TieredStoreUtil:offset2FileName(long offset)
+{
+java.text.NumberFormat numberFormat;
+  java.lang.Object md;
+  byte[] digest;
+  java.lang.String hash;
+  java.nio.charset.Charset $stack9;
+  java.lang.Object[] $stack12;
+  java.lang.StringBuilder $stack18;
+  java.lang.Exception $stack23;
+  java.math.BigInteger tmp$1196305097;
+  java.security.MessageDigest tmp$462492416;
+  numberFormat = java.text.NumberFormat.getInstance();
+ numberFormat.setMinimumIntegerDigits(20);
+ numberFormat.setMaximumFractionDigits(0);
+ numberFormat.setGroupingUsed((boolean)0);
+ label0:md = java.security.MessageDigest.getInstance("MD5");
+ hash = java.lang.Long.toString(offset);
+ $stack9=java.nio.charset.StandardCharsets.UTF_8;
+ digest = hash.getBytes($stack9);
+ tmp$462492416=(java.security.MessageDigest) md;
+ tmp$462492416.update(digest);
+ tmp$462492416=(java.security.MessageDigest) md;
+ digest = tmp$462492416.digest();
+ $stack12=new java.lang.Object[1];
+ tmp$1196305097=new java.math.BigInteger;
+ tmp$1196305097#java.math.BigInteger(1,digest);
+ $stack12[0]=tmp$1196305097;
+ hash = java.lang.String.format("%032x",$stack12);
+ hash = hash.substring(0,8);
+ $stack18=new java.lang.StringBuilder;
+ $stack18#java.lang.StringBuilder();
+ $stack18 = $stack18.append(hash);
+ hash = numberFormat.format(offset);
+ $stack18 = $stack18.append(hash);
+ hash = $stack18.toString();
+ label1:return  hash;
+ label2:$stack23 = catch;
+ md=$stack23;
+ hash = numberFormat.format(offset);
+ return  hash;
+ catch java.lang.Exception: label0 - label1 : label2;
+} 
+

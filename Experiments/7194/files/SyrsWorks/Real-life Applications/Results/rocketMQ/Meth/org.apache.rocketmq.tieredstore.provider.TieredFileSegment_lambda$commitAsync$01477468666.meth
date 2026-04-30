@@ -1,0 +1,36 @@
+java.lang.Boolean org.apache.rocketmq.tieredstore.provider.TieredFileSegment:lambda$commitAsync$0(java.util.List bufferList,int finalBufferSize,org.apache.rocketmq.tieredstore.provider.TieredFileSegment$TieredFileSegmentInputStream inputStream,java.lang.Boolean @result)
+{
+boolean $stack5;
+  org.apache.rocketmq.tieredstore.provider.TieredFileSegment$FileSegmentType $stack7;
+  org.apache.rocketmq.tieredstore.provider.TieredFileSegment$FileSegmentType $stack8;
+  long $stack9;
+  long $stack10;
+  int $stack13;
+  java.lang.Object $stack19;
+  java.nio.ByteBuffer $stack20;
+  java.lang.Boolean result;
+result=@result;
+$stack5 = result.booleanValue();
+ if ($stack5==0) goto label0;
+ $stack8=this.fileType;
+ $stack7=org.apache.rocketmq.tieredstore.provider.TieredFileSegment$FileSegmentType.COMMIT_LOG;
+ if ($stack8!=$stack7) goto label1;
+ $stack13 = bufferList.size();
+ if ($stack13<=0) goto label1;
+ $stack13 = bufferList.size();
+ $stack13=($stack13-1);
+ $stack19 = bufferList.get($stack13);
+ $stack20=(java.nio.ByteBuffer) $stack19;
+ $stack9 = org.apache.rocketmq.tieredstore.util.MessageBufferUtil.getQueueOffset($stack20);
+ this.commitMsgQueueOffset=$stack9;
+ label1:$stack10=this.commitPosition;
+ $stack9=(long) finalBufferSize;
+ $stack9=($stack10+$stack9);
+ this.commitPosition=$stack9;
+ result = java.lang.Boolean.valueOf((boolean)1);
+ return  result;
+ label0:this#org.apache.rocketmq.tieredstore.provider.TieredFileSegment:sendBackBuffer(inputStream);
+ result = java.lang.Boolean.valueOf((boolean)0);
+ return  result;
+ } 
+

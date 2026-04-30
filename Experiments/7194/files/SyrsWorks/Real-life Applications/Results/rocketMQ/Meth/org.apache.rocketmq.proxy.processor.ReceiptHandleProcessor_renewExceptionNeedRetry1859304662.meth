@@ -1,0 +1,24 @@
+boolean org.apache.rocketmq.proxy.processor.ReceiptHandleProcessor:renewExceptionNeedRetry(java.lang.Throwable @t)
+{
+org.apache.rocketmq.proxy.common.ProxyException proxyException;
+  boolean $stack4;
+  org.apache.rocketmq.proxy.common.ProxyExceptionCode $stack5;
+  org.apache.rocketmq.proxy.common.ProxyExceptionCode $stack6;
+  java.lang.Throwable t;
+t=@t;
+t = org.apache.rocketmq.proxy.common.utils.ExceptionUtils.getRealException(t);
+ $stack4=t instanceof org.apache.rocketmq.proxy.common.ProxyException;
+ if ($stack4==0) goto label0;
+ proxyException=(org.apache.rocketmq.proxy.common.ProxyException) t;
+ $stack5=org.apache.rocketmq.proxy.common.ProxyExceptionCode.INVALID_BROKER_NAME;
+ $stack6 = proxyException.getCode();
+ $stack4 = $stack5.equals((java.lang.Object)$stack6);
+ if ($stack4!=0) goto label1;
+ $stack5=org.apache.rocketmq.proxy.common.ProxyExceptionCode.INVALID_RECEIPT_HANDLE;
+ $stack6 = proxyException.getCode();
+ $stack4 = $stack5.equals((java.lang.Object)$stack6);
+ if ($stack4==0) goto label0;
+ label1:return  0;
+ label0:return  1;
+ } 
+

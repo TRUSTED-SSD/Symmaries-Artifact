@@ -1,0 +1,52 @@
+static boolean BooleanOperations:leakyMethod (boolean l0) {
+  guard = tt;
+  ret(level()) = pc ⊔ level(l0);
+  exc(level()) = ⊥;
+  exc(obj_level()) = ⊥;
+}
+java.lang.Object java.lang.Object:clone () {
+  guard = tt;
+  ret(level()) = pc ⊔ level(this) ⊔ obj_level(this);
+  ret(obj_level()) = pc ⊔ level(this) ⊔ obj_level(this) ⊔ (if ret(~this) then obj_level(this) else ⊥) ⊔ (if exc(~this) then obj_level(this) else ⊥);
+  ret(obj_level(this)) = obj_level(this);
+  ret(~this) = tt;
+  exc(level()) = pc ⊔ level(this) ⊔ obj_level(this);
+  exc(obj_level()) = pc ⊔ level(this) ⊔ obj_level(this) ⊔ (if ret(~this) then obj_level(this) else ⊥) ⊔ (if exc(~this) then obj_level(this) else ⊥);
+  exc(obj_level(this)) = obj_level(this);
+  exc(~this) = tt;
+}
+boolean java.lang.Object:equals (java.lang.Object a0) {
+  guard = tt;
+  ret(level()) = pc ⊔ obj_level(a0) ⊔ obj_level(this);
+  ret(obj_level(a0)) = obj_level(a0);
+  ret(obj_level(this)) = obj_level(this);
+  exc(level()) = pc ⊔ obj_level(a0) ⊔ obj_level(this);
+  exc(obj_level()) = (if exc(~a0) then obj_level(a0) else ⊥) ⊔ (if exc(~this) then obj_level(this) else ⊥);
+  exc(obj_level(a0)) = obj_level(a0);
+  exc(obj_level(this)) = obj_level(this);
+  exc(~a0) = tt;
+  exc(~this) = tt;
+}
+void java.lang.Throwable:printStackTrace () {
+  guard = pc ⊑ ⊥ ∧ level(this) ⊔ obj_level(this) ⊑ ⊥;
+  ret(obj_level(this)) = obj_level(this);
+  exc(level()) = ⊥;
+  exc(obj_level()) = if exc(~this) then obj_level(this) else ⊥;
+  exc(obj_level(this)) = obj_level(this);
+  exc(~this) = tt;
+}
+BooleanOperations () {
+  guard = tt;
+  ret(obj_level(this)) = pc ⊔ level(this) ⊔ obj_level(this);
+  exc(level()) = ⊥;
+  exc(obj_level()) = ⊥;
+  exc(obj_level(this)) = pc ⊔ level(this) ⊔ obj_level(this);
+}
+java.lang.Object () {
+  guard = tt;
+  ret(obj_level(this)) = pc ⊔ level(this) ⊔ obj_level(this);
+  exc(level()) = ⊥;
+  exc(obj_level()) = if exc(~this) then obj_level(this) else ⊥;
+  exc(obj_level(this)) = pc ⊔ level(this) ⊔ obj_level(this);
+  exc(~this) = ff;
+}

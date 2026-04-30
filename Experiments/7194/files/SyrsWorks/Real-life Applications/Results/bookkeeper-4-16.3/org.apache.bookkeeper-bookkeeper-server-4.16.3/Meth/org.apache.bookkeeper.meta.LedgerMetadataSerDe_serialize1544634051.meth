@@ -1,0 +1,49 @@
+byte[] org.apache.bookkeeper.meta.LedgerMetadataSerDe:serialize(org.apache.bookkeeper.client.api.LedgerMetadata metadata)
+{
+int formatVersion;
+  byte[] serialized;
+  java.lang.String serializedStr;
+  org.slf4j.Logger $stack7;
+  boolean $stack8;
+  java.nio.charset.Charset $stack10;
+  java.lang.Integer $stack13;
+  java.util.Base64$Encoder $stack15;
+  java.lang.IllegalArgumentException $stack22;
+  java.lang.StringBuilder $stack23;
+  formatVersion = metadata.getMetadataFormatVersion();
+ switch [formatVersion]
+if 0 goto label0;
+if 1 goto label1;
+if 2 goto label2;
+goto label3;
+ label2:serialized = org.apache.bookkeeper.meta.LedgerMetadataSerDe.serializeVersion3(metadata);
+ goto label4;
+ label1:serialized = org.apache.bookkeeper.meta.LedgerMetadataSerDe.serializeVersion2(metadata);
+ goto label4;
+ label0:serialized = org.apache.bookkeeper.meta.LedgerMetadataSerDe.serializeVersion1(metadata);
+ goto label4;
+ label3:$stack22=new java.lang.IllegalArgumentException;
+ $stack23=new java.lang.StringBuilder;
+ $stack23#java.lang.StringBuilder();
+ $stack23 = $stack23.append("Invalid format version ");
+ $stack23 = $stack23.append(formatVersion);
+ serializedStr = $stack23.toString();
+ $stack22#java.lang.IllegalArgumentException(serializedStr);
+ throw $stack22;
+ label4:$stack7=org.apache.bookkeeper.meta.LedgerMetadataSerDe.log;
+ $stack8 = $stack7.isDebugEnabled();
+ if ($stack8==0) goto label5;
+ if (formatVersion<=2) goto label6;
+ $stack15 = java.util.Base64.getEncoder();
+ serializedStr = $stack15.encodeToString(serialized);
+ goto label7;
+ label6:serializedStr=new java.lang.String;
+ $stack10=java.nio.charset.StandardCharsets.UTF_8;
+ serializedStr#java.lang.String(serialized,$stack10);
+ label7:$stack7=org.apache.bookkeeper.meta.LedgerMetadataSerDe.log;
+ $stack13 = java.lang.Integer.valueOf(formatVersion);
+ dummyClass.lowSink("Serialized with format {}: {}");
+$stack7.debug("Serialized with format {}: {}",(java.lang.Object)$stack13,(java.lang.Object)serializedStr);
+ label5:return  serialized;
+ } 
+

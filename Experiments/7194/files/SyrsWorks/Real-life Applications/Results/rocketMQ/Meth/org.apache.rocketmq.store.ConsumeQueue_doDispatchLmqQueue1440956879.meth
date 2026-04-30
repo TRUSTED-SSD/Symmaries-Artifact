@@ -1,0 +1,58 @@
+void org.apache.rocketmq.store.ConsumeQueue:doDispatchLmqQueue(org.apache.rocketmq.store.DispatchRequest request,int maxRetries,java.lang.String queueName,long queueOffset,int queueId)
+{
+org.apache.rocketmq.store.ConsumeQueue $this;
+  org.apache.rocketmq.store.queue.ConsumeQueueInterface cq;
+  boolean canWrite;
+  int i;
+  boolean result;
+  org.apache.rocketmq.store.MessageStore $stack12;
+  org.apache.rocketmq.store.RunningFlags $stack15;
+  long $stack18;
+  int $stack19;
+  long $stack20;
+  java.lang.StringBuilder $stack22;
+  org.apache.rocketmq.logging.org.slf4j.Logger $stack23;
+  java.lang.String $stack34;
+  java.lang.InterruptedException $stack37;
+  $this= this;
+ $stack12=$this.messageStore;
+ cq = $stack12.findConsumeQueue(queueName,queueId);
+ $stack12=$this.messageStore;
+ $stack15 = $stack12.getRunningFlags();
+ canWrite = $stack15.isCQWriteable();
+ i=0;
+ label0:if (i>=maxRetries) goto label1;
+ if (canWrite==0) goto label1;
+ $this=(org.apache.rocketmq.store.ConsumeQueue) cq;
+ $stack18 = request.getCommitLogOffset();
+ $stack19 = request.getMsgSize();
+ $stack20 = request.getTagsCode();
+ result = $this#org.apache.rocketmq.store.ConsumeQueue:putMessagePositionInfo($stack18,$stack19,$stack20,queueOffset);
+ if (result==0) goto label2;
+ goto label1;
+ label2:$stack23=org.apache.rocketmq.store.ConsumeQueue.log;
+ $stack22=new java.lang.StringBuilder;
+ $stack22#java.lang.StringBuilder();
+ $stack22 = $stack22.append("[BUG]put commit log position info to ");
+ $stack22 = $stack22.append(queueName);
+ $stack22 = $stack22.append(":");
+ $stack22 = $stack22.append(queueId);
+ $stack22 = $stack22.append(" ");
+ $stack18 = request.getCommitLogOffset();
+ $stack22 = $stack22.append($stack18);
+ $stack22 = $stack22.append(" failed, retry ");
+ $stack22 = $stack22.append(i);
+ $stack22 = $stack22.append(" times");
+ $stack34 = $stack22.toString();
+ $stack23.warn($stack34);
+ label3:java.lang.Thread.sleep(1000L);
+ label4:goto label5;
+ label6:$stack37 = catch;
+ $stack23=org.apache.rocketmq.store.ConsumeQueue.log;
+ $stack23.warn("",(java.lang.Throwable)$stack37);
+ label5:i=(i+1);
+ goto label0;
+ label1:return;
+ catch java.lang.InterruptedException: label3 - label4 : label6;
+} 
+

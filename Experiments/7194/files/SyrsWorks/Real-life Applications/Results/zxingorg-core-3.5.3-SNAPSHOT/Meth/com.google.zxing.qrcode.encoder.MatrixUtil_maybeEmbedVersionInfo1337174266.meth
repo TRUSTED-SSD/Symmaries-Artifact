@@ -1,0 +1,36 @@
+static void com.google.zxing.qrcode.encoder.MatrixUtil:maybeEmbedVersionInfo(com.google.zxing.qrcode.decoder.Version version,com.google.zxing.qrcode.encoder.ByteMatrix matrix)
+{
+com.google.zxing.common.BitArray versionInfoBits;
+  int bitIndex;
+  int i;
+  int j;
+  boolean bit;
+  int $stack12;
+  bitIndex = version.getVersionNumber();
+ if (bitIndex>=7) goto label0;
+ return;
+ label0:versionInfoBits=new com.google.zxing.common.BitArray;
+ versionInfoBits#com.google.zxing.common.BitArray();
+ com.google.zxing.qrcode.encoder.MatrixUtil.makeVersionInfoBits(version,versionInfoBits);
+ bitIndex=17;
+ i=0;
+ label1:if (i>=6) goto label2;
+ j=0;
+ label3:if (j>=3) goto label4;
+ bit = versionInfoBits.get(bitIndex);
+ bitIndex=(bitIndex+-1);
+ $stack12 = matrix.getHeight();
+ $stack12=($stack12-11);
+ $stack12=($stack12+j);
+ matrix.set(i,$stack12,bit);
+ $stack12 = matrix.getHeight();
+ $stack12=($stack12-11);
+ $stack12=($stack12+j);
+ matrix.set($stack12,i,bit);
+ j=(j+1);
+ goto label3;
+ label4:i=(i+1);
+ goto label1;
+ label2:return;
+ } 
+

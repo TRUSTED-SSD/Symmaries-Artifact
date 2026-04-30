@@ -1,0 +1,26 @@
+java.io.FileInputStream java.io.FileInputStream:init (java.io.FileDescriptor r1)
+{
+java.lang.SecurityManager r2;
+  java.lang.Object $r3;
+  java.io.FileDescriptor $r4;
+  java.lang.NullPointerException $r5;
+  this#java.io.InputStream:init();
+ this.channel=null;
+ $r3=new java.lang.Object;
+ $r3#java.lang.Object:init();
+ this.closeLock=$r3;
+ this.closed=0;
+ r2 = java.lang.System.getSecurityManager();
+ if (r1!=null) goto label0;
+ $r5=new java.lang.NullPointerException;
+ $r5#java.lang.NullPointerException:init();
+ throw $r5;
+ label0:if (r2==null) goto label1;
+ r2.checkRead(r1);
+ label1:this.fd=r1;
+ this.path=null;
+ $r4=this.fd;
+ $r4.attach((java.io.Closeable)this);
+  return this;
+ }  
+

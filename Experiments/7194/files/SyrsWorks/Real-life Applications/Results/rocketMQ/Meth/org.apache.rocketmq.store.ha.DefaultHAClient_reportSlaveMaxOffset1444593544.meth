@@ -1,0 +1,58 @@
+boolean org.apache.rocketmq.store.ha.DefaultHAClient:reportSlaveMaxOffset(long maxOffset)
+{
+int i;
+  java.nio.ByteBuffer $stack5;
+  org.apache.rocketmq.store.DefaultMessageStore $stack15;
+  org.apache.rocketmq.common.SystemClock $stack16;
+  boolean $stack19;
+  java.nio.channels.SocketChannel $stack27;
+  java.io.IOException $stack31;
+  java.lang.StringBuilder $stack32;
+  org.apache.rocketmq.logging.org.slf4j.Logger $stack33;
+  java.lang.String $stack34;
+  $stack5=this.reportOffset;
+ $stack5.position(0);
+ $stack5=this.reportOffset;
+ $stack5.limit(8);
+ $stack5=this.reportOffset;
+ $stack5.putLong(maxOffset);
+ $stack5=this.reportOffset;
+ $stack5.position(0);
+ $stack5=this.reportOffset;
+ $stack5.limit(8);
+ i=0;
+ label0:if (i>=3) goto label1;
+ $stack5=this.reportOffset;
+ $stack19 = $stack5.hasRemaining();
+ if ($stack19==0) goto label1;
+ label2:$stack27=this.socketChannel;
+ $stack5=this.reportOffset;
+ dummyClass.lowSink($stack5);
+$stack27.write($stack5);
+ label3:goto label4;
+ label5:$stack31 = catch;
+ $stack33=org.apache.rocketmq.store.ha.DefaultHAClient.log;
+ $stack32=new java.lang.StringBuilder;
+ $stack32#java.lang.StringBuilder();
+ $stack34 = this.getServiceName();
+ $stack32 = $stack32.append($stack34);
+ $stack32 = $stack32.append("reportSlaveMaxOffset this.socketChannel.write exception");
+ $stack34 = $stack32.toString();
+ $stack33.error($stack34,(java.lang.Throwable)$stack31);
+ return  0;
+ label4:i=(i+1);
+ goto label0;
+ label1:$stack15=this.defaultMessageStore;
+ $stack16 = $stack15.getSystemClock();
+ maxOffset = $stack16.now();
+ this.lastWriteTimestamp=maxOffset;
+ $stack5=this.reportOffset;
+ $stack19 = $stack5.hasRemaining();
+ if ($stack19!=0) goto label6;
+ $stack19=1;
+ goto label7;
+ label6:$stack19=0;
+ label7:return  $stack19;
+ catch java.io.IOException: label2 - label3 : label5;
+} 
+

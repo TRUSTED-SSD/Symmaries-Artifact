@@ -1,0 +1,28 @@
+java.util.List org.junit.experimental.theories.internal.Assignments:generateAssignmentsFromTypeAlone(org.junit.experimental.theories.ParameterSignature unassigned)
+{
+java.lang.Class paramType;
+  boolean $stack4;
+  org.junit.experimental.theories.internal.BooleanSupplier $stack6;
+  java.util.List $stack7;
+  java.lang.Class $stack8;
+  org.junit.experimental.theories.internal.EnumSupplier $stack12;
+  paramType = unassigned.getType();
+ $stack4 = paramType.isEnum();
+ if ($stack4==0) goto label0;
+ $stack12=new org.junit.experimental.theories.internal.EnumSupplier;
+ $stack12#org.junit.experimental.theories.internal.EnumSupplier(paramType);
+ $stack7 = $stack12.getValueSources(unassigned);
+ return  $stack7;
+ label0:$stack4 = paramType.equals((java.lang.Object)java.lang.Boolean);
+ if ($stack4!=0) goto label1;
+ $stack8=java.lang.Boolean.TYPE;
+ $stack4 = paramType.equals((java.lang.Object)$stack8);
+ if ($stack4==0) goto label2;
+ label1:$stack6=new org.junit.experimental.theories.internal.BooleanSupplier;
+ $stack6#org.junit.experimental.theories.internal.BooleanSupplier();
+ $stack7 = $stack6.getValueSources(unassigned);
+ return  $stack7;
+ label2:$stack7 = java.util.Collections.emptyList();
+ return  $stack7;
+ } 
+

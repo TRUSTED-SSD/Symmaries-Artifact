@@ -1,0 +1,37 @@
+void org.apache.rocketmq.broker.metrics.BrokerMetricsManager:initRequestMetrics()
+{
+io.opentelemetry.api.metrics.Meter $stack1;
+  io.opentelemetry.api.metrics.LongCounterBuilder $stack2;
+  io.opentelemetry.api.metrics.LongCounter $stack4;
+  io.opentelemetry.api.metrics.DoubleHistogramBuilder $stack18;
+  io.opentelemetry.api.metrics.LongHistogramBuilder $stack20;
+  io.opentelemetry.api.metrics.LongHistogram $stack21;
+  $stack1=this.brokerMeter;
+ $stack2 = $stack1.counterBuilder("rocketmq_messages_in_total");
+ $stack2 = $stack2.setDescription("Total number of incoming messages");
+ $stack4 = $stack2.build();
+ org.apache.rocketmq.broker.metrics.BrokerMetricsManager.messagesInTotal=$stack4;
+ $stack1=this.brokerMeter;
+ $stack2 = $stack1.counterBuilder("rocketmq_messages_out_total");
+ $stack2 = $stack2.setDescription("Total number of outgoing messages");
+ $stack4 = $stack2.build();
+ org.apache.rocketmq.broker.metrics.BrokerMetricsManager.messagesOutTotal=$stack4;
+ $stack1=this.brokerMeter;
+ $stack2 = $stack1.counterBuilder("rocketmq_throughput_in_total");
+ $stack2 = $stack2.setDescription("Total traffic of incoming messages");
+ $stack4 = $stack2.build();
+ org.apache.rocketmq.broker.metrics.BrokerMetricsManager.throughputInTotal=$stack4;
+ $stack1=this.brokerMeter;
+ $stack2 = $stack1.counterBuilder("rocketmq_throughput_out_total");
+ $stack2 = $stack2.setDescription("Total traffic of outgoing messages");
+ $stack4 = $stack2.build();
+ org.apache.rocketmq.broker.metrics.BrokerMetricsManager.throughputOutTotal=$stack4;
+ $stack1=this.brokerMeter;
+ $stack18 = $stack1.histogramBuilder("rocketmq_message_size");
+ $stack18 = $stack18.setDescription("Incoming messages size");
+ $stack20 = $stack18.ofLongs();
+ $stack21 = $stack20.build();
+ org.apache.rocketmq.broker.metrics.BrokerMetricsManager.messageSize=$stack21;
+ return;
+ } 
+

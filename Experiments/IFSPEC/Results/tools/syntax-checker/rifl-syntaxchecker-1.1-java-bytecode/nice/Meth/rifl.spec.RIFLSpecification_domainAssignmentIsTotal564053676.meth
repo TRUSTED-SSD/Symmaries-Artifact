@@ -1,0 +1,30 @@
+void rifl.spec.RIFLSpecification:domainAssignmentIsTotal()
+{
+rifl.spec.Assignable assignable;
+  java.util.Iterator l2;
+  java.lang.String msg;
+  java.util.Set $stack4;
+  boolean $stack6;
+  java.lang.Object $stack7;
+  java.util.Map $stack8;
+  java.lang.Object[] $stack11;
+  rifl.spec.RIFLIntegrityException $stack13;
+  $stack4=this.interfaceSpec;
+ l2 = $stack4.iterator();
+ goto label0;
+ label1:$stack7 = l2.next();
+ assignable=(rifl.spec.Assignable) $stack7;
+ $stack8=this.domainAssignment;
+ $stack6 = $stack8.containsKey((java.lang.Object)assignable);
+ if ($stack6!=0) goto label0;
+ $stack11=new java.lang.Object[1];
+ $stack11[0]=assignable;
+ msg = java.lang.String.format("Domain assignment is not total: %s is missing.",$stack11);
+ $stack13=new rifl.spec.RIFLIntegrityException;
+ $stack13#rifl.spec.RIFLIntegrityException(msg);
+ throw $stack13;
+ label0:$stack6 = l2.hasNext();
+ if ($stack6!=0) goto label1;
+ return;
+ } 
+

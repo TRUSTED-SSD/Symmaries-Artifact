@@ -1,0 +1,25 @@
+digraph G {
+  node [shape=box, ];
+  "pc0_js1" [label="〈$l2 = java.lang.Math.floorDiv (l0, l1), js1〉\n\
+tt", ];
+  "pc1_js1" [label="〈$l3 = $l2 * l1, js1〉", ];
+  "pc2_js1" [label="〈$l4 = l0 - $l3, js1〉", ];
+  "pc3_js1" [label="〈return $l4, js1〉", ];
+  "pc4_js1" [label="〈sink, js1〉\n\
+ϕ ≠ S3 ∨ pc ⊔ level($l4) ⊑ ret(level())'",
+             ];
+  
+  
+  "pc0_js1" -> "pc1_js1" [label="tt,\n\
+{level($l2) := pc ⊔ level(l0) ⊔ level(l1)}",
+                          ];
+  "pc1_js1" -> "pc2_js1" [label="tt,\n\
+{level($l3) := pc ⊔ level(l0) ⊔ level(l1)}",
+                          ];
+  "pc2_js1" -> "pc3_js1" [label="tt,\n\
+{level($l4) := pc ⊔ level(l0) ⊔ level(l1)}",
+                          ];
+  "pc3_js1" -> "pc4_js1" [label="tt,\n\
+{ϕ := S3}", ];
+  
+  }

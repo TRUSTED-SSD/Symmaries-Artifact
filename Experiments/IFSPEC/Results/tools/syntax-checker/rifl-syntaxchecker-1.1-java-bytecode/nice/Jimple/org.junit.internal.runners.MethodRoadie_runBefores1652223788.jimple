@@ -1,0 +1,115 @@
+    private void runBefores() throws org.junit.internal.runners.FailedBefore
+    {
+        org.junit.internal.runners.MethodRoadie this;
+        java.lang.Object befores;
+        java.util.Iterator i$;
+        java.lang.reflect.Method before;
+        org.junit.internal.runners.TestMethod $stack4;
+        boolean $stack7;
+        java.lang.Object[] $stack9;
+        java.lang.Throwable $stack13;
+        org.junit.internal.AssumptionViolatedException $stack15;
+        java.lang.reflect.InvocationTargetException $stack17;
+        org.junit.internal.runners.FailedBefore tmp$517426641;
+        java.util.List tmp$152003521;
+
+        this := @this: org.junit.internal.runners.MethodRoadie;
+
+     label1:
+        $stack4 = this.<org.junit.internal.runners.MethodRoadie: org.junit.internal.runners.TestMethod testMethod>;
+/*131*/
+
+        befores = virtualinvoke $stack4.<org.junit.internal.runners.TestMethod: java.util.List getBefores()>();
+/*131*/
+/*131*/
+
+        tmp$152003521 = (java.util.List) befores;
+
+        i$ = interfaceinvoke tmp$152003521.<java.util.List: java.util.Iterator iterator()>();
+/*132*/
+/*132*/
+
+     label2:
+        $stack7 = interfaceinvoke i$.<java.util.Iterator: boolean hasNext()>();
+/*132*/
+
+        if $stack7 == 0 goto label3;
+/*132*/
+
+        befores = interfaceinvoke i$.<java.util.Iterator: java.lang.Object next()>();
+/*144*/
+
+        before = (java.lang.reflect.Method) befores;
+/*144*/
+
+        befores = this.<org.junit.internal.runners.MethodRoadie: java.lang.Object test>;
+/*133*/
+
+        $stack9 = newarray (java.lang.Object)[0];
+/*133*/
+
+        virtualinvoke before.<java.lang.reflect.Method: java.lang.Object invoke(java.lang.Object,java.lang.Object[])>(befores, $stack9);
+/*133*/
+
+        goto label2;
+/*133*/
+
+     label3:
+        goto label5;
+/*137*/
+
+     label4:
+        $stack17 := @caughtexception;
+/*139*/
+
+        $stack13 = virtualinvoke $stack17.<java.lang.reflect.InvocationTargetException: java.lang.Throwable getTargetException()>();
+/*136*/
+
+        throw $stack13;
+/*136*/
+
+     label5:
+        goto label8;
+/*143*/
+
+     label6:
+        $stack15 := @caughtexception;
+/*142*/
+
+        befores = $stack15;
+/*138*/
+
+        tmp$517426641 = new org.junit.internal.runners.FailedBefore;
+/*139*/
+
+        specialinvoke tmp$517426641.<org.junit.internal.runners.FailedBefore: void <init>()>();
+/*139*/
+
+        throw tmp$517426641;
+/*139*/
+
+     label7:
+        $stack13 := @caughtexception;
+/*133*/
+
+        virtualinvoke this.<org.junit.internal.runners.MethodRoadie: void addFailure(java.lang.Throwable)>($stack13);
+/*141*/
+
+        tmp$517426641 = new org.junit.internal.runners.FailedBefore;
+/*142*/
+
+        specialinvoke tmp$517426641.<org.junit.internal.runners.FailedBefore: void <init>()>();
+/*142*/
+
+        throw tmp$517426641;
+/*142*/
+
+     label8:
+        return;
+/*144*/
+
+        catch java.lang.reflect.InvocationTargetException from label1 to label3 with label4;
+        catch org.junit.internal.AssumptionViolatedException from label1 to label5 with label6;
+        catch java.lang.Throwable from label1 to label5 with label7;
+    }
+

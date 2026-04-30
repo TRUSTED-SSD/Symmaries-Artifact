@@ -1,0 +1,28 @@
+static boolean com.google.zxing.qrcode.encoder.Encoder:isOnlyDoubleByteKanji(java.lang.String content)
+{
+byte[] bytes;
+  int length;
+  int i;
+  short byte1;
+  java.nio.charset.Charset $stack5;
+  byte $stack8;
+  $stack5=com.google.zxing.common.StringUtils.SHIFT_JIS_CHARSET;
+ bytes = content.getBytes($stack5);
+ length=#bytes;
+ i=(length%2);
+ if (i==0) goto label0;
+ return  0;
+ label0:i=0;
+ label1:if (i>=length) goto label2;
+ $stack8=bytes[i];
+ byte1=($stack8 & 255);
+ if (byte1<129) goto label3;
+ if (byte1<=159) goto label4;
+ label3:if (byte1<224) goto label5;
+ if (byte1<=235) goto label4;
+ label5:return  0;
+ label4:i=(i+2);
+ goto label1;
+ label2:return  1;
+ } 
+

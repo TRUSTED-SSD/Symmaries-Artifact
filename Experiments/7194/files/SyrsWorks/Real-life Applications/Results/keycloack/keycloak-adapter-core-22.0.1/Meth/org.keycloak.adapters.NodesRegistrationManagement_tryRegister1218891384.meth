@@ -1,0 +1,18 @@
+void org.keycloak.adapters.NodesRegistrationManagement:tryRegister(org.keycloak.adapters.KeycloakDeployment resolvedDeployment)
+{
+java.lang.String registrationUri;
+  boolean $stack4;
+  org.keycloak.adapters.NodesRegistrationManagement$1 $stack7;
+  java.util.concurrent.ExecutorService $stack8;
+  $stack4 = resolvedDeployment.isRegisterNodeAtStartup();
+ if ($stack4==0) goto label0;
+ registrationUri = resolvedDeployment.getRegisterNodeUrl();
+ $stack4 = this#org.keycloak.adapters.NodesRegistrationManagement:needRefreshRegistration(registrationUri,resolvedDeployment);
+ if ($stack4==0) goto label0;
+ $stack7=new org.keycloak.adapters.NodesRegistrationManagement$1;
+ $stack7#org.keycloak.adapters.NodesRegistrationManagement$1(this,registrationUri,resolvedDeployment);
+ $stack8=this.executor;
+ $stack8.execute((java.lang.Runnable)$stack7);
+ label0:return;
+ } 
+

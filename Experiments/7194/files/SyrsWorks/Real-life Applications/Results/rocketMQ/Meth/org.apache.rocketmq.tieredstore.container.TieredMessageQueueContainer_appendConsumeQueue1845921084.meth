@@ -1,0 +1,29 @@
+org.apache.rocketmq.tieredstore.common.AppendResult org.apache.rocketmq.tieredstore.container.TieredMessageQueueContainer:appendConsumeQueue(org.apache.rocketmq.store.DispatchRequest request,boolean commit)
+{
+boolean $stack3;
+  long $stack4;
+  long $stack5;
+  byte $stack6;
+  org.apache.rocketmq.tieredstore.container.TieredConsumeQueue $stack7;
+  int $stack9;
+  long $stack11;
+  org.apache.rocketmq.tieredstore.common.AppendResult $stack12;
+  $stack3=this.closed;
+ if ($stack3==0) goto label0;
+ $stack12=org.apache.rocketmq.tieredstore.common.AppendResult.FILE_CLOSED;
+ return  $stack12;
+ label0:$stack4 = request.getConsumeQueueOffset();
+ $stack5 = this.getConsumeQueueMaxOffset();
+ $stack6=($stack4 cmp $stack5);
+ if ($stack6==0) goto label1;
+ $stack12=org.apache.rocketmq.tieredstore.common.AppendResult.OFFSET_INCORRECT;
+ return  $stack12;
+ label1:$stack7=this.consumeQueue;
+ $stack4 = request.getCommitLogOffset();
+ $stack9 = request.getMsgSize();
+ $stack5 = request.getTagsCode();
+ $stack11 = request.getStoreTimestamp();
+ $stack12 = $stack7.append($stack4,$stack9,$stack5,$stack11,commit);
+ return  $stack12;
+ } 
+

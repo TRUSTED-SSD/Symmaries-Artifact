@@ -1,0 +1,46 @@
+int org.apache.kerby.asn1.parse.Asn1Reader:readLength()
+{
+int result;
+  int length;
+  short tmp;
+  int i;
+  byte $stack5;
+  java.io.IOException $stack6;
+  java.lang.StringBuilder $stack7;
+  java.lang.String $stack10;
+  $stack5 = this.readByte();
+ result=($stack5 & 255);
+ if (result!=128) goto label0;
+ return  -1;
+ label0:if (result<=127) goto label1;
+ length=(result & 127);
+ if (length<=4) goto label2;
+ $stack6=new java.io.IOException;
+ $stack7=new java.lang.StringBuilder;
+ $stack7#java.lang.StringBuilder();
+ $stack7 = $stack7.append("Bad length of more than 4 bytes: ");
+ $stack7 = $stack7.append(length);
+ $stack10 = $stack7.toString();
+ $stack6#java.io.IOException($stack10);
+ throw $stack6;
+ label2:result=0;
+ i=0;
+ label3:if (i>=length) goto label1;
+ $stack5 = this.readByte();
+ tmp=($stack5 & 255);
+ result=(result<<8);
+ result=(result+tmp);
+ i=(i+1);
+ goto label3;
+ label1:if (result>=0) goto label4;
+ $stack6=new java.io.IOException;
+ $stack7=new java.lang.StringBuilder;
+ $stack7#java.lang.StringBuilder();
+ $stack7 = $stack7.append("Invalid length ");
+ $stack7 = $stack7.append(result);
+ $stack10 = $stack7.toString();
+ $stack6#java.io.IOException($stack10);
+ throw $stack6;
+ label4:return  result;
+ } 
+

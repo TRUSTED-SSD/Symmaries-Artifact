@@ -1,0 +1,23 @@
+org.apache.bookkeeper.stats.StatsLogger org.apache.bookkeeper.stats.CachingStatsLogger:scope(java.lang.String name)
+{
+org.apache.bookkeeper.stats.StatsLogger statsLogger;
+  org.apache.bookkeeper.stats.CachingStatsLogger newStatsLogger;
+  java.util.concurrent.ConcurrentMap $stack5;
+  java.lang.Object $stack6;
+  $stack5=this.scopeStatsLoggers;
+ $stack6 = $stack5.get((java.lang.Object)name);
+ statsLogger=(org.apache.bookkeeper.stats.StatsLogger) $stack6;
+ if (null!=statsLogger) goto label0;
+ newStatsLogger=new org.apache.bookkeeper.stats.CachingStatsLogger;
+ statsLogger=this.underlying;
+ statsLogger = statsLogger.scope(name);
+ newStatsLogger#org.apache.bookkeeper.stats.CachingStatsLogger(statsLogger);
+ $stack5=this.scopeStatsLoggers;
+ $stack6 = $stack5.putIfAbsent((java.lang.Object)name,(java.lang.Object)newStatsLogger);
+ statsLogger=(org.apache.bookkeeper.stats.StatsLogger) $stack6;
+ if (null!=statsLogger) goto label0;
+ statsLogger=newStatsLogger;
+ goto label0;
+ label0:return  statsLogger;
+ } 
+

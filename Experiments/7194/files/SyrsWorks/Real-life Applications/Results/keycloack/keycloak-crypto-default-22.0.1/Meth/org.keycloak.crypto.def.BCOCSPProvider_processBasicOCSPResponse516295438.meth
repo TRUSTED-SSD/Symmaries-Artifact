@@ -1,0 +1,35 @@
+org.keycloak.utils.OCSPProvider$OCSPRevocationStatus org.keycloak.crypto.def.BCOCSPProvider:processBasicOCSPResponse(java.security.cert.X509Certificate issuerCertificate,java.security.cert.X509Certificate responderCertificate,java.util.Date date,org.bouncycastle.cert.ocsp.jcajce.JcaCertificateID certificateID,java.math.BigInteger nounce,org.bouncycastle.cert.ocsp.BasicOCSPResp basicOcspResponse)
+{
+org.bouncycastle.cert.ocsp.SingleResp expectedResponse;
+  org.bouncycastle.cert.ocsp.SingleResp[] l8;
+  int l9;
+  int l10;
+  org.bouncycastle.cert.ocsp.SingleResp singleResponse;
+  java.security.cert.CertPathValidatorException $stack13;
+  byte[] $stack14;
+  org.keycloak.utils.OCSPProvider$OCSPRevocationStatus $stack15;
+  org.bouncycastle.cert.ocsp.CertificateID $stack16;
+  boolean $stack17;
+  expectedResponse=null;
+ l8 = basicOcspResponse.getResponses();
+ l9=#l8;
+ l10=0;
+ label0:if (l10>=l9) goto label1;
+ singleResponse=l8[l10];
+ $stack16 = singleResponse.getCertID();
+ $stack17 = this#org.keycloak.crypto.def.BCOCSPProvider:compareCertIDs(certificateID,$stack16);
+ if ($stack17==0) goto label2;
+ expectedResponse=singleResponse;
+ goto label1;
+ label2:l10=(l10+1);
+ goto label0;
+ label1:if (expectedResponse==null) goto label3;
+ $stack14 = nounce.toByteArray();
+ this#org.keycloak.crypto.def.BCOCSPProvider:verifyResponse(basicOcspResponse,issuerCertificate,responderCertificate,$stack14,date);
+ $stack15 = this#org.keycloak.crypto.def.BCOCSPProvider:singleResponseToRevocationStatus(expectedResponse);
+ return  $stack15;
+ label3:$stack13=new java.security.cert.CertPathValidatorException;
+ $stack13#java.security.cert.CertPathValidatorException("OCSP response does not include a response for a certificate supplied in the OCSP request");
+ throw $stack13;
+ } 
+

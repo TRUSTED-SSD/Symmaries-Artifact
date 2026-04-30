@@ -1,0 +1,49 @@
+org.apache.rocketmq.broker.BrokerController org.apache.rocketmq.container.BrokerContainer:removeBroker(org.apache.rocketmq.common.BrokerIdentity brokerIdentity)
+{
+org.apache.rocketmq.container.InnerBrokerController dLedgerController;
+  org.apache.rocketmq.container.InnerSalveBrokerController slaveBroker;
+  org.apache.rocketmq.broker.BrokerController masterBroker;
+  org.apache.rocketmq.broker.BrokerController nextMasterBroker;
+  java.util.Iterator l6;
+  java.util.concurrent.ConcurrentMap $stack8;
+  java.lang.Object $stack9;
+  java.util.Collection $stack15;
+  boolean $stack17;
+  org.apache.rocketmq.store.MessageStore $stack19;
+  org.apache.rocketmq.store.MessageStore $stack20;
+  $stack8=this.dLedgerBrokerControllers;
+ $stack9 = $stack8.remove((java.lang.Object)brokerIdentity);
+ dLedgerController=(org.apache.rocketmq.container.InnerBrokerController) $stack9;
+ if (dLedgerController==null) goto label0;
+ dLedgerController.shutdown();
+ return  dLedgerController;
+ label0:$stack8=this.slaveBrokerControllers;
+ $stack9 = $stack8.remove((java.lang.Object)brokerIdentity);
+ slaveBroker=(org.apache.rocketmq.container.InnerSalveBrokerController) $stack9;
+ if (slaveBroker==null) goto label1;
+ slaveBroker.shutdown();
+ return  slaveBroker;
+ label1:$stack8=this.masterBrokerControllers;
+ $stack9 = $stack8.remove((java.lang.Object)brokerIdentity);
+ masterBroker=(org.apache.rocketmq.broker.BrokerController) $stack9;
+ nextMasterBroker = this.peekMasterBroker();
+ $stack15 = this.getSlaveBrokers();
+ l6 = $stack15.iterator();
+ label2:$stack17 = l6.hasNext();
+ if ($stack17==0) goto label3;
+ $stack9 = l6.next();
+ slaveBroker=(org.apache.rocketmq.container.InnerSalveBrokerController) $stack9;
+ if (nextMasterBroker!=null) goto label4;
+ $stack19 = slaveBroker.getMessageStore();
+ $stack19.setMasterStoreInProcess(null);
+ goto label5;
+ label4:$stack19 = slaveBroker.getMessageStore();
+ $stack20 = nextMasterBroker.getMessageStore();
+ $stack19.setMasterStoreInProcess($stack20);
+ label5:goto label2;
+ label3:if (masterBroker==null) goto label6;
+ masterBroker.shutdown();
+ return  masterBroker;
+ label6:return  null;
+ } 
+

@@ -1,0 +1,22 @@
+static void com.google.zxing.oned.EAN13Reader:determineFirstDigit(java.lang.StringBuilder resultString,int lgPatternFound)
+{
+int d;
+  com.google.zxing.NotFoundException $stack3;
+  int[] $stack4;
+  int $stack5;
+  char $stack9;
+  d=0;
+ label0:if (d>=10) goto label1;
+ $stack4=com.google.zxing.oned.EAN13Reader.FIRST_DIGIT_ENCODINGS;
+ $stack5=$stack4[d];
+ if (lgPatternFound!=$stack5) goto label2;
+ lgPatternFound=(48+d);
+ $stack9=(char) lgPatternFound;
+ resultString.insert(0,$stack9);
+ return;
+ label2:d=(d+1);
+ goto label0;
+ label1:$stack3 = com.google.zxing.NotFoundException.getNotFoundInstance();
+ throw $stack3;
+ } 
+

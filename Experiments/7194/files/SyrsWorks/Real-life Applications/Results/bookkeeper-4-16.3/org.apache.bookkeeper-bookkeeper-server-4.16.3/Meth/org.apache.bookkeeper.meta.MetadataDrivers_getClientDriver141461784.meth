@@ -1,0 +1,32 @@
+static org.apache.bookkeeper.meta.MetadataClientDriver org.apache.bookkeeper.meta.MetadataDrivers:getClientDriver(java.lang.String @scheme)
+{
+org.apache.bookkeeper.meta.MetadataDrivers$MetadataClientDriverInfo driverInfo;
+  java.lang.Object $stack2;
+  java.util.concurrent.ConcurrentMap $stack3;
+  java.lang.String $stack4;
+  java.lang.Class $stack6;
+  org.apache.bookkeeper.meta.MetadataClientDriver $stack8;
+  java.lang.IllegalArgumentException $stack9;
+  java.lang.StringBuilder $stack10;
+  java.lang.String scheme;
+scheme=@scheme;
+com.google.common.base.Preconditions.checkNotNull((java.lang.Object)scheme,(java.lang.Object)"Client Driver Scheme is null");
+ $stack3=org.apache.bookkeeper.meta.MetadataDrivers.clientDrivers;
+ $stack4 = scheme.toLowerCase();
+ $stack2 = $stack3.get((java.lang.Object)$stack4);
+ driverInfo=(org.apache.bookkeeper.meta.MetadataDrivers$MetadataClientDriverInfo) $stack2;
+ if (null!=driverInfo) goto label0;
+ $stack9=new java.lang.IllegalArgumentException;
+ $stack10=new java.lang.StringBuilder;
+ $stack10#java.lang.StringBuilder();
+ $stack10 = $stack10.append("Unknown backend ");
+ $stack10 = $stack10.append(scheme);
+ scheme = $stack10.toString();
+ $stack9#java.lang.IllegalArgumentException(scheme);
+ throw $stack9;
+ label0:$stack6=driverInfo.driverClass;
+ $stack2 = org.apache.bookkeeper.common.util.ReflectionUtils.newInstance($stack6);
+ $stack8=(org.apache.bookkeeper.meta.MetadataClientDriver) $stack2;
+ return  $stack8;
+ } 
+

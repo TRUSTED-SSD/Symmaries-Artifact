@@ -1,0 +1,21 @@
+void org.apache.bookkeeper.bookie.GarbageCollectorThread:start()
+{
+long initialDelay;
+  java.util.concurrent.Future $stack3;
+  java.util.concurrent.TimeUnit $stack5;
+  long $stack6;
+  java.util.concurrent.ScheduledExecutorService $stack7;
+  java.util.concurrent.ScheduledFuture $stack8;
+  $stack3=this.scheduledFuture;
+ if ($stack3==null) goto label0;
+ $stack3=this.scheduledFuture;
+ $stack3.cancel((boolean)0);
+ label0:initialDelay = this.getModInitialDelay();
+ $stack7=this.gcExecutor;
+ $stack6=this.gcWaitTime;
+ $stack5=java.util.concurrent.TimeUnit.MILLISECONDS;
+ $stack8 = $stack7.scheduleAtFixedRate((java.lang.Runnable)this,initialDelay,$stack6,$stack5);
+ this.scheduledFuture=$stack8;
+ return;
+ } 
+

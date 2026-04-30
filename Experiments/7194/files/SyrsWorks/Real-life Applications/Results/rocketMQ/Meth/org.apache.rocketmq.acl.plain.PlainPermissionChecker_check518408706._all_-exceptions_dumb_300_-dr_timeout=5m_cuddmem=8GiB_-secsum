@@ -1,0 +1,9 @@
+void org.apache.rocketmq.acl.plain.PlainPermissionChecker:check (org.apache.rocketmq.acl.AccessResource
+                                                                   checkedAccess,
+                                                                 org.apache.rocketmq.acl.AccessResource
+                                                                   ownedAccess) {
+  guard = tt;
+  ret(obj_level(checkedAccess)) = level(checkedAccess) ⊔ level(ownedAccess) ⊔ obj_level(ownedAccess);
+  ret(obj_level(ownedAccess)) = level(checkedAccess) ⊔ level(ownedAccess) ⊔ obj_level(ownedAccess);
+  ret(obj_level(this)) = level(checkedAccess) ⊔ level(ownedAccess) ⊔ obj_level(ownedAccess) ⊔ obj_level(this);
+}

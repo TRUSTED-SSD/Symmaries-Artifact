@@ -1,0 +1,22 @@
+java.util.List org.apache.rocketmq.tieredstore.provider.TieredFileSegment:rollingUploadBuffer()
+{
+java.util.List tmp;
+  java.util.concurrent.locks.ReentrantLock $stack4;
+  java.util.ArrayList $stack5;
+  java.lang.Throwable $stack7;
+  $stack4=this.bufferLock;
+ $stack4.lock();
+ label0:tmp=this.uploadBufferList;
+ $stack5=new java.util.ArrayList;
+ $stack5#java.util.ArrayList();
+ this.uploadBufferList=$stack5;
+ label1:$stack4=this.bufferLock;
+ $stack4.unlock();
+ return  tmp;
+ label2:$stack7 = catch;
+ $stack4=this.bufferLock;
+ $stack4.unlock();
+ throw $stack7;
+ catch java.lang.Throwable: label0 - label1 : label2;
+} 
+

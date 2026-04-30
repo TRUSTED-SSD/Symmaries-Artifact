@@ -1,0 +1,14 @@
+org.apache.kerby.kerberos.kerb.request.KrbIdentity org.apache.kerby.kerberos.kerb.server.request.KdcRequest:getCrossRealmTgsEntry(java.lang.String @remoteRealm)
+{
+org.apache.kerby.kerberos.kerb.type.base.PrincipalName tgsPrincipal;
+  org.apache.kerby.kerberos.kerb.request.KrbIdentity tgsEntry;
+  java.lang.String remoteRealm;
+remoteRealm=@remoteRealm;
+tgsPrincipal = this.getCrossRealmTgsPrincipal(remoteRealm);
+ tgsEntry=null;
+ if (tgsPrincipal==null) goto label0;
+ remoteRealm = tgsPrincipal.getName();
+ tgsEntry = this.getEntry(remoteRealm);
+ label0:return  tgsEntry;
+ } 
+

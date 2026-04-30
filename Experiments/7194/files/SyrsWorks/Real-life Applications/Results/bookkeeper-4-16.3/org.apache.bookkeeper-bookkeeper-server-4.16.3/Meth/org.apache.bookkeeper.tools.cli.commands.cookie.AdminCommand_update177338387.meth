@@ -1,0 +1,45 @@
+boolean org.apache.bookkeeper.tools.cli.commands.cookie.AdminCommand:update(org.apache.bookkeeper.conf.ServerConfiguration conf,org.apache.bookkeeper.tools.cli.commands.cookie.AdminCommand$AdminFlags flags)
+{
+boolean useHostName;
+  boolean $stack5;
+  org.slf4j.Logger $stack13;
+  useHostName = org.apache.bookkeeper.tools.cli.commands.cookie.AdminCommand$AdminFlags.access$000(flags);
+ $stack5 = org.apache.bookkeeper.tools.cli.commands.cookie.AdminCommand$AdminFlags.access$000(flags);
+ if ($stack5!=0) goto label0;
+ $stack5 = org.apache.bookkeeper.tools.cli.commands.cookie.AdminCommand$AdminFlags.access$100(flags);
+ if ($stack5==0) goto label1;
+ label0:$stack5 = conf.getUseHostNameAsBookieID();
+ if ($stack5!=0) goto label2;
+ if (useHostName==0) goto label2;
+ $stack13=org.apache.bookkeeper.tools.cli.commands.cookie.AdminCommand.LOG;
+ $stack13.error("Expects configuration useHostNameAsBookieID=true as the option value");
+ return  0;
+ label2:$stack5 = conf.getUseHostNameAsBookieID();
+ if ($stack5==0) goto label3;
+ if (useHostName!=0) goto label3;
+ $stack13=org.apache.bookkeeper.tools.cli.commands.cookie.AdminCommand.LOG;
+ $stack13.error("Expects configuration useHostNameAsBookieID=false as the option value");
+ return  0;
+ label3:useHostName = org.apache.bookkeeper.tools.cli.commands.cookie.AdminCommand$AdminFlags.access$000(flags);
+ useHostName = this#org.apache.bookkeeper.tools.cli.commands.cookie.AdminCommand:updateBookieIdInCookie(conf,useHostName);
+ return  useHostName;
+ label1:useHostName = org.apache.bookkeeper.tools.cli.commands.cookie.AdminCommand$AdminFlags.access$200(flags);
+ if (useHostName==0) goto label4;
+ conf.setAllowStorageExpansion((boolean)1);
+ useHostName = this#org.apache.bookkeeper.tools.cli.commands.cookie.AdminCommand:expandStorage(conf);
+ return  useHostName;
+ label4:useHostName = org.apache.bookkeeper.tools.cli.commands.cookie.AdminCommand$AdminFlags.access$300(flags);
+ if (useHostName==0) goto label5;
+ useHostName = this#org.apache.bookkeeper.tools.cli.commands.cookie.AdminCommand:listOrDeleteCookies(conf,(boolean)0,(boolean)0);
+ return  useHostName;
+ label5:useHostName = org.apache.bookkeeper.tools.cli.commands.cookie.AdminCommand$AdminFlags.access$400(flags);
+ if (useHostName==0) goto label6;
+ useHostName = org.apache.bookkeeper.tools.cli.commands.cookie.AdminCommand$AdminFlags.access$500(flags);
+ useHostName = this#org.apache.bookkeeper.tools.cli.commands.cookie.AdminCommand:listOrDeleteCookies(conf,(boolean)1,useHostName);
+ return  useHostName;
+ label6:$stack13=org.apache.bookkeeper.tools.cli.commands.cookie.AdminCommand.LOG;
+ $stack13.error("Invalid command !");
+ this.usage();
+ return  0;
+ } 
+

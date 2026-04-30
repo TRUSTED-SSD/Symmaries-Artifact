@@ -1,0 +1,15 @@
+long org.apache.rocketmq.store.DefaultMessageStore:getOffsetInQueueByTime(java.lang.String topic,int queueId,long timestamp)
+{
+org.apache.rocketmq.store.queue.ConsumeQueueInterface logic;
+  long $stack10;
+  logic = this.findConsumeQueue(topic,queueId);
+ if (logic==null) goto label0;
+ timestamp = logic.getOffsetInQueueByTime(timestamp);
+ $stack10 = logic.getMinOffsetInQueue();
+ timestamp = java.lang.Math.max(timestamp,$stack10);
+ $stack10 = logic.getMaxOffsetInQueue();
+ timestamp = java.lang.Math.min(timestamp,$stack10);
+ return  timestamp;
+ label0:return  0L;
+ } 
+

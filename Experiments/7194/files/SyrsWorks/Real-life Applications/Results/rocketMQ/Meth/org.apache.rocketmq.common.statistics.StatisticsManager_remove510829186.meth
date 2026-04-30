@@ -1,0 +1,27 @@
+void org.apache.rocketmq.common.statistics.StatisticsManager:remove(org.apache.rocketmq.common.statistics.StatisticsItem item)
+{
+java.util.concurrent.ConcurrentHashMap itemMap;
+  org.apache.rocketmq.common.statistics.StatisticsKindMeta kindMeta;
+  java.lang.String $stack5;
+  java.lang.Object $stack6;
+  java.util.Map $stack7;
+  org.apache.rocketmq.common.statistics.StatisticsItemScheduledPrinter $stack10;
+  itemMap=this.statsTable;
+ $stack5 = item.getStatKind();
+ $stack6 = itemMap.get((java.lang.Object)$stack5);
+ itemMap=(java.util.concurrent.ConcurrentHashMap) $stack6;
+ if (itemMap==null) goto label0;
+ $stack5 = item.getStatObject();
+ itemMap.remove((java.lang.Object)$stack5,(java.lang.Object)item);
+ label0:$stack7=this.kindMetaMap;
+ $stack5 = item.getStatKind();
+ $stack6 = $stack7.get((java.lang.Object)$stack5);
+ kindMeta=(org.apache.rocketmq.common.statistics.StatisticsKindMeta) $stack6;
+ if (kindMeta==null) goto label1;
+ $stack10 = kindMeta.getScheduledPrinter();
+ if ($stack10==null) goto label1;
+ $stack10 = kindMeta.getScheduledPrinter();
+ $stack10.remove(item);
+ label1:return;
+ } 
+

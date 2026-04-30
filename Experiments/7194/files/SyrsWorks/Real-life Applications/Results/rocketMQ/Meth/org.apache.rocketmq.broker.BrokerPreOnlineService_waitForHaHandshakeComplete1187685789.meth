@@ -1,0 +1,36 @@
+java.util.concurrent.CompletableFuture org.apache.rocketmq.broker.BrokerPreOnlineService:waitForHaHandshakeComplete(java.lang.String @brokerAddr)
+{
+org.apache.rocketmq.store.ha.HAConnectionStateNotificationRequest request;
+  org.apache.rocketmq.logging.org.slf4j.Logger $stack3;
+  org.apache.rocketmq.store.ha.HAConnectionState $stack5;
+  org.apache.rocketmq.broker.BrokerController $stack7;
+  org.apache.rocketmq.store.MessageStore $stack8;
+  org.apache.rocketmq.store.ha.HAService $stack9;
+  java.util.concurrent.CompletableFuture $stack11;
+  java.lang.Boolean $stack12;
+  java.lang.String brokerAddr;
+brokerAddr=@brokerAddr;
+$stack3=org.apache.rocketmq.broker.BrokerPreOnlineService.LOGGER;
+ $stack3.info("wait for handshake completion with {}",(java.lang.Object)brokerAddr);
+ request=new org.apache.rocketmq.store.ha.HAConnectionStateNotificationRequest;
+ $stack5=org.apache.rocketmq.store.ha.HAConnectionState.TRANSFER;
+ brokerAddr = org.apache.rocketmq.remoting.common.RemotingHelper.parseHostFromAddress(brokerAddr);
+ request#org.apache.rocketmq.store.ha.HAConnectionStateNotificationRequest($stack5,brokerAddr,1);
+ $stack7=this.brokerController;
+ $stack8 = $stack7.getMessageStore();
+ $stack9 = $stack8.getHaService();
+ if ($stack9==null) goto label0;
+ $stack7=this.brokerController;
+ $stack8 = $stack7.getMessageStore();
+ $stack9 = $stack8.getHaService();
+ $stack9.putGroupConnectionStateRequest(request);
+ goto label1;
+ label0:$stack3=org.apache.rocketmq.broker.BrokerPreOnlineService.LOGGER;
+ $stack3.error("HAService is null, maybe broker config is wrong. For example, duplicationEnable is true");
+ $stack11 = request.getRequestFuture();
+ $stack12 = java.lang.Boolean.valueOf((boolean)0);
+ $stack11.complete((java.lang.Object)$stack12);
+ label1:$stack11 = request.getRequestFuture();
+ return  $stack11;
+ } 
+

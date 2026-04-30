@@ -1,0 +1,34 @@
+digraph G {
+  node [shape=box, ];
+  "pc0_js1" [label="〈this#java.security.Permission.init (r1), js1〉\n\
+tt",
+             ];
+  "pc1_js1" [label="〈this#java.security.BasicPermission.init (r1), js1〉\n\
+tt",
+             ];
+  "pc2_js1" [label="〈return this, js1〉", ];
+  "pc3_js1" [label="〈sink, js1〉\n\
+obj_level(r1) ⊑ ret(obj_level(r1))' ∧ obj_level(this) ⊑ ret(obj_level(this))' ∧ (ret(r1.><r1)' ∨ ¬r1.><r1) ∧ (ret(r1.><this)' ∨ ¬r1.><this) ∧ (ret(this.><r1)' ∨ ¬this.><r1) ∧ (ret(this.><this)' ∨ ¬this.><this) ∧ (ϕ ≠ S2 ∨ ret(~this)' ∧ obj_level(this) ⊑ ret(obj_level())' ∧ pc ⊔ level(this) ⊑ ret(level())' ∧ (ret(.><r1)' ∨ ¬r1.><this) ∧ (ret(.><this)' ∨ ¬this.><this) ∧ (ret(r1.><)' ∨ ¬this.><r1) ∧ (ret(this.><)' ∨ ¬this.><this))",
+             ];
+  
+  
+  "pc0_js1" -> "pc1_js1" [label="tt,\n\
+{r1.><r1 := r1.><r1 ∨ r1.><this ∨ (if this.><this then r1.><r1 ∨ r1.><this else r1.><r1) ∨ (if this.><r1 ∨ r1.><this ∧ this.><this then r1.><r1 ∨ r1.><this ∧ (r1.><this ∨ this.><r1) else r1.><r1),\n\
+ r1.><this := r1.><this ∨ r1.><this ∧ (r1.><this ∨ this.><r1) ∨ (if if this.><this then r1.><r1 ∨ r1.><this else r1.><r1 then r1.><this ∨ this.><r1 else r1.><this),\n\
+ this.><r1 := tt,\n\
+ this.><this := r1.><this ∨ this.><r1 ∨ this.><this ∨ r1.><this ∧ this.><this ∨ (if if this.><this then r1.><r1 ∨ r1.><this else r1.><r1 then this.><this ∨ this.><r1 ∧ (r1.><this ∨ this.><r1) else this.><this),\n\
+ obj_level(r1) := obj_level(r1) ⊔ (if this.><r1 then pc ⊔ level(r1) ⊔ obj_level(r1) ⊔ obj_level(this) else ⊥),\n\
+ obj_level(this) := pc ⊔ level(r1) ⊔ obj_level(r1) ⊔ obj_level(this)}",
+                          ];
+  "pc1_js1" -> "pc2_js1" [label="tt,\n\
+{r1.><r1 := r1.><r1 ∨ r1.><this,\n\
+ r1.><this := r1.><r1 ∨ r1.><this,\n\
+ this.><r1 := tt,\n\
+ this.><this := tt,\n\
+ obj_level(r1) := pc ⊔ level(r1) ⊔ obj_level(r1) ⊔ obj_level(this),\n\
+ obj_level(this) := pc ⊔ level(r1) ⊔ obj_level(r1) ⊔ obj_level(this)}",
+                          ];
+  "pc2_js1" -> "pc3_js1" [label="tt,\n\
+{ϕ := S2}", ];
+  
+  }

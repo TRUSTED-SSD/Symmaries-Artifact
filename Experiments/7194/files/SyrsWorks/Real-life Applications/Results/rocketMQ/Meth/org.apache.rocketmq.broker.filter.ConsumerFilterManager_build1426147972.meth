@@ -1,0 +1,45 @@
+static org.apache.rocketmq.broker.filter.ConsumerFilterData org.apache.rocketmq.broker.filter.ConsumerFilterManager:build(java.lang.String @topic,java.lang.String consumerGroup,java.lang.String expression,java.lang.String type,long clientVersion)
+{
+org.apache.rocketmq.broker.filter.ConsumerFilterData consumerFilterData;
+  boolean $stack8;
+  long $stack10;
+  org.apache.rocketmq.filter.FilterFactory $stack11;
+  org.apache.rocketmq.filter.FilterSpi $stack12;
+  org.apache.rocketmq.filter.expression.Expression $stack13;
+  java.lang.Throwable $stack14;
+  java.lang.Object[] $stack15;
+  org.apache.rocketmq.logging.org.slf4j.Logger $stack16;
+  java.lang.String topic;
+topic=@topic;
+$stack8 = org.apache.rocketmq.common.filter.ExpressionType.isTagType(type);
+ if ($stack8==0) goto label0;
+ return  null;
+ label0:consumerFilterData=new org.apache.rocketmq.broker.filter.ConsumerFilterData;
+ consumerFilterData#org.apache.rocketmq.broker.filter.ConsumerFilterData();
+ consumerFilterData.setTopic(topic);
+ consumerFilterData.setConsumerGroup(consumerGroup);
+ $stack10 = java.lang.System.currentTimeMillis();
+ consumerFilterData.setBornTime($stack10);
+ consumerFilterData.setDeadTime(0L);
+ consumerFilterData.setExpression(expression);
+ consumerFilterData.setExpressionType(type);
+ consumerFilterData.setClientVersion(clientVersion);
+ label1:$stack11=org.apache.rocketmq.filter.FilterFactory.INSTANCE;
+ $stack12 = $stack11.get(type);
+ $stack13 = $stack12.compile(expression);
+ consumerFilterData.setCompiledExpression($stack13);
+ label2:goto label3;
+ label4:$stack14 = catch;
+ $stack16=org.apache.rocketmq.broker.filter.ConsumerFilterManager.log;
+ $stack15=new java.lang.Object[4];
+ $stack15[0]=expression;
+ $stack15[1]=topic;
+ $stack15[2]=consumerGroup;
+ topic = $stack14.getMessage();
+ $stack15[3]=topic;
+ $stack16.error("parse error: expr={}, topic={}, group={}, error={}",$stack15);
+ return  null;
+ label3:return  consumerFilterData;
+ catch java.lang.Throwable: label1 - label2 : label4;
+} 
+

@@ -1,0 +1,30 @@
+long org.apache.rocketmq.broker.offset.ConsumerOffsetManager:queryPullOffset(java.lang.String group,java.lang.String topic,int queueId)
+{
+java.lang.String key;
+  java.lang.Long offset;
+  java.util.concurrent.ConcurrentMap map;
+  java.lang.StringBuilder $stack7;
+  java.lang.Object $stack13;
+  long $stack14;
+  java.lang.Integer $stack18;
+  $stack7=new java.lang.StringBuilder;
+ $stack7#java.lang.StringBuilder();
+ $stack7 = $stack7.append(topic);
+ $stack7 = $stack7.append("@");
+ $stack7 = $stack7.append(group);
+ key = $stack7.toString();
+ offset=null;
+ map=this.pullOffsetTable;
+ $stack13 = map.get((java.lang.Object)key);
+ map=(java.util.concurrent.ConcurrentMap) $stack13;
+ if (null==map) goto label0;
+ $stack18 = java.lang.Integer.valueOf(queueId);
+ $stack13 = map.get((java.lang.Object)$stack18);
+ offset=(java.lang.Long) $stack13;
+ label0:if (offset!=null) goto label1;
+ $stack14 = this.queryOffset(group,topic,queueId);
+ offset = java.lang.Long.valueOf($stack14);
+ label1:$stack14 = offset.longValue();
+ return  $stack14;
+ } 
+

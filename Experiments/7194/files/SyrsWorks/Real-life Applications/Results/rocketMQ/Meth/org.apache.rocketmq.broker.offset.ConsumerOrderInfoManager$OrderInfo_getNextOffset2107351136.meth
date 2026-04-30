@@ -1,0 +1,31 @@
+long org.apache.rocketmq.broker.offset.ConsumerOrderInfoManager$OrderInfo:getNextOffset()
+{
+int num;
+  int i;
+  java.util.List $stack3;
+  boolean $stack5;
+  long $stack8;
+  $stack3=this.offsetList;
+ if ($stack3==null) goto label0;
+ $stack3=this.offsetList;
+ $stack5 = $stack3.isEmpty();
+ if ($stack5==0) goto label1;
+ label0:return  -2L;
+ label1:$stack3=this.offsetList;
+ num = $stack3.size();
+ i=0;
+ label2:if (i>=num) goto label3;
+ $stack5 = this.isNotAck(i);
+ if ($stack5==0) goto label4;
+ goto label3;
+ label4:i=(i+1);
+ goto label2;
+ label3:if (i!=num) goto label5;
+ num=(num-1);
+ $stack8 = this.getQueueOffset(num);
+ $stack8=($stack8+1L);
+ return  $stack8;
+ label5:$stack8 = this.getQueueOffset(i);
+ return  $stack8;
+ } 
+

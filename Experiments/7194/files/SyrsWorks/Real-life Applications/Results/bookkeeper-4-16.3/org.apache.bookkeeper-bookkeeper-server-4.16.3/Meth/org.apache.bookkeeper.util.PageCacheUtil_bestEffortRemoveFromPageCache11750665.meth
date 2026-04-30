@@ -1,0 +1,23 @@
+static void org.apache.bookkeeper.util.PageCacheUtil:bestEffortRemoveFromPageCache(int fd,long offset,long len)
+{
+boolean $stack6;
+  org.apache.bookkeeper.common.util.nativeio.NativeIO $stack7;
+  java.lang.Throwable $stack9;
+  org.slf4j.Logger $stack10;
+  java.lang.String $stack12;
+  $stack6=org.apache.bookkeeper.util.PageCacheUtil.fadvisePossible;
+ if ($stack6==0) goto label0;
+ if (fd>=0) goto label1;
+ label0:return;
+ label1:$stack7=org.apache.bookkeeper.util.PageCacheUtil.NATIVE_IO;
+ $stack7.posix_fadvise(fd,offset,len,4);
+ label2:goto label3;
+ label4:$stack9 = catch;
+ $stack10=org.apache.bookkeeper.util.PageCacheUtil.log;
+ $stack12 = $stack9.getMessage();
+ $stack10.warn("Failed to perform posix_fadvise: {}",(java.lang.Object)$stack12);
+ org.apache.bookkeeper.util.PageCacheUtil.fadvisePossible=0;
+ label3:return;
+ catch java.lang.Throwable: label1 - label2 : label4;
+} 
+

@@ -1,0 +1,58 @@
+void org.apache.bookkeeper.bookie.ScanAndCompareGarbageCollector:lambda$removeOverReplicatedledgers$1(java.util.Set overReplicatedLedgers,java.lang.Long ledgerId,org.apache.bookkeeper.bookie.GarbageCollector$GarbageCleaner garbageCleaner,java.util.concurrent.Semaphore semaphore,java.util.concurrent.CountDownLatch latch,org.apache.bookkeeper.meta.LedgerUnderreplicationManager lum,org.apache.bookkeeper.versioning.Versioned metadata,java.lang.Throwable @exception)
+{
+boolean $stack12;
+  long $stack13;
+  java.lang.Object[] $stack14;
+  org.slf4j.Logger $stack15;
+  java.lang.Class $stack18;
+  java.lang.String $stack19;
+  java.lang.Throwable $stack29;
+  java.lang.Throwable $stack31;
+  java.lang.Throwable $stack33;
+  java.lang.Throwable exception;
+exception=@exception;
+label0:if (exception!=null) goto label1;
+ $stack12 = this#org.apache.bookkeeper.bookie.ScanAndCompareGarbageCollector:isNotBookieIncludedInLedgerEnsembles(metadata);
+ if ($stack12==0) goto label2;
+ overReplicatedLedgers.add((java.lang.Object)ledgerId);
+ $stack13 = ledgerId.longValue();
+ garbageCleaner.clean($stack13);
+ goto label2;
+ label1:$stack12=exception instanceof org.apache.bookkeeper.client.BKException$BKNoSuchLedgerExistsOnMetadataServerException;
+ if ($stack12!=0) goto label2;
+ $stack15=org.apache.bookkeeper.bookie.ScanAndCompareGarbageCollector.LOG;
+ $stack14=new java.lang.Object[3];
+ $stack14[0]=ledgerId;
+ $stack18 = exception.getClass();
+ $stack19 = $stack18.getName();
+ $stack14[1]=$stack19;
+ $stack19 = exception.getMessage();
+ $stack14[2]=$stack19;
+ $stack15.warn("Failed to get metadata for ledger {}. {}: {}",$stack14);
+ label2:semaphore.release();
+ latch.countDown();
+ label3:$stack13 = ledgerId.longValue();
+ lum.releaseUnderreplicatedLedger($stack13);
+ label4:goto label5;
+ label6:$stack31 = catch;
+ $stack15=org.apache.bookkeeper.bookie.ScanAndCompareGarbageCollector.LOG;
+ $stack15.error("Exception when removing underreplicated lock for ledger {}",(java.lang.Object)ledgerId,(java.lang.Object)$stack31);
+ goto label5;
+ label7:$stack29 = catch;
+ exception=$stack29;
+ label8:semaphore.release();
+ latch.countDown();
+ label9:$stack13 = ledgerId.longValue();
+ lum.releaseUnderreplicatedLedger($stack13);
+ label10:goto label11;
+ label12:$stack33 = catch;
+ $stack15=org.apache.bookkeeper.bookie.ScanAndCompareGarbageCollector.LOG;
+ $stack15.error("Exception when removing underreplicated lock for ledger {}",(java.lang.Object)ledgerId,(java.lang.Object)$stack33);
+ label11:throw $stack29;
+ label5:return;
+ catch java.lang.Throwable: label3 - label4 : label6;
+catch java.lang.Throwable: label0 - label2 : label7;
+catch java.lang.Throwable: label9 - label10 : label12;
+catch java.lang.Throwable: label7 - label8 : label7;
+} 
+

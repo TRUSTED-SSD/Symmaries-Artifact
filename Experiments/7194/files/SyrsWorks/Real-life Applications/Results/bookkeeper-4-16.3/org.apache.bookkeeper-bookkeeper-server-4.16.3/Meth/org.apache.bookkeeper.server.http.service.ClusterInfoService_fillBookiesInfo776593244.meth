@@ -1,0 +1,31 @@
+void org.apache.bookkeeper.server.http.service.ClusterInfoService:fillBookiesInfo(org.apache.bookkeeper.server.http.service.ClusterInfoService$ClusterInfo info)
+{
+int totalBookiesCount;
+  int writableBookiesCount;
+  int readonlyBookiesCount;
+  int unavailableBookiesCount;
+  org.apache.bookkeeper.client.BookKeeperAdmin $stack6;
+  java.util.Collection $stack7;
+  java.lang.Throwable $stack16;
+  label0:$stack6=this.bka;
+ $stack7 = $stack6.getAllBookies();
+ totalBookiesCount = $stack7.size();
+ $stack6=this.bka;
+ $stack7 = $stack6.getAvailableBookies();
+ writableBookiesCount = $stack7.size();
+ $stack6=this.bka;
+ $stack7 = $stack6.getReadOnlyBookies();
+ readonlyBookiesCount = $stack7.size();
+ unavailableBookiesCount=(totalBookiesCount-writableBookiesCount);
+ unavailableBookiesCount=(unavailableBookiesCount-readonlyBookiesCount);
+ info.setTotalBookiesCount(totalBookiesCount);
+ info.setWritableBookiesCount(writableBookiesCount);
+ info.setReadonlyBookiesCount(readonlyBookiesCount);
+ info.setUnavailableBookiesCount(unavailableBookiesCount);
+ label1:goto label2;
+ label3:$stack16 = catch;
+ throw $stack16;
+ label2:return;
+ catch java.lang.Throwable: label0 - label1 : label3;
+} 
+

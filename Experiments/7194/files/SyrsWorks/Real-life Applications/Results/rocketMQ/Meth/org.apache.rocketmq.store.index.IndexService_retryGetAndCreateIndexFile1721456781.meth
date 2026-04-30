@@ -1,0 +1,42 @@
+org.apache.rocketmq.store.index.IndexFile org.apache.rocketmq.store.index.IndexService:retryGetAndCreateIndexFile()
+{
+org.apache.rocketmq.store.index.IndexFile indexFile;
+  int times;
+  org.apache.rocketmq.store.DefaultMessageStore $stack4;
+  org.apache.rocketmq.store.RunningFlags $stack5;
+  org.apache.rocketmq.logging.org.slf4j.Logger $stack6;
+  java.lang.StringBuilder $stack11;
+  java.lang.String $stack16;
+  java.lang.InterruptedException $stack19;
+  indexFile=null;
+ times=0;
+ label0:if (null!=indexFile) goto label1;
+ if (times>=3) goto label1;
+ indexFile = this.getAndCreateLastIndexFile();
+ if (null==indexFile) goto label2;
+ goto label1;
+ label2:$stack6=org.apache.rocketmq.store.index.IndexService.LOGGER;
+ $stack11=new java.lang.StringBuilder;
+ $stack11#java.lang.StringBuilder();
+ $stack11 = $stack11.append("Tried to create index file ");
+ $stack11 = $stack11.append(times);
+ $stack11 = $stack11.append(" times");
+ $stack16 = $stack11.toString();
+ $stack6.info($stack16);
+ java.lang.Thread.sleep(1000L);
+ label3:goto label4;
+ label5:$stack19 = catch;
+ $stack6=org.apache.rocketmq.store.index.IndexService.LOGGER;
+ $stack6.error("Interrupted",(java.lang.Throwable)$stack19);
+ label4:times=(times+1);
+ goto label0;
+ label1:if (null!=indexFile) goto label6;
+ $stack4=this.defaultMessageStore;
+ $stack5 = $stack4.getRunningFlags();
+ $stack5.makeIndexFileError();
+ $stack6=org.apache.rocketmq.store.index.IndexService.LOGGER;
+ $stack6.error("Mark index file cannot build flag");
+ label6:return  indexFile;
+ catch java.lang.InterruptedException: label2 - label3 : label5;
+} 
+

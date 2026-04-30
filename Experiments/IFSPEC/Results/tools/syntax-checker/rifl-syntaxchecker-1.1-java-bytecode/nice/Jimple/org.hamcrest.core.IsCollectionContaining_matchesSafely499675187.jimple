@@ -1,0 +1,72 @@
+    protected boolean matchesSafely(java.lang.Iterable, org.hamcrest.Description)
+    {
+        org.hamcrest.core.IsCollectionContaining this;
+        java.lang.Iterable collection;
+        org.hamcrest.Description mismatchDescription;
+        boolean isPastFirst, $stack7;
+        java.util.Iterator i$;
+        java.lang.Object item;
+        org.hamcrest.Matcher $stack9;
+
+        this := @this: org.hamcrest.core.IsCollectionContaining;
+
+        collection := @parameter0: java.lang.Iterable;
+
+        mismatchDescription := @parameter1: org.hamcrest.Description;
+
+        isPastFirst = 0;
+/*23*/
+
+        i$ = interfaceinvoke collection.<java.lang.Iterable: java.util.Iterator iterator()>();
+/*24*/
+/*24*/
+
+     label1:
+        $stack7 = interfaceinvoke i$.<java.util.Iterator: boolean hasNext()>();
+/*24*/
+
+        if $stack7 == 0 goto label4;
+/*24*/
+
+        item = interfaceinvoke i$.<java.util.Iterator: java.lang.Object next()>();
+/*34*/
+/*34*/
+
+        $stack9 = this.<org.hamcrest.core.IsCollectionContaining: org.hamcrest.Matcher elementMatcher>;
+/*25*/
+
+        $stack7 = interfaceinvoke $stack9.<org.hamcrest.Matcher: boolean matches(java.lang.Object)>(item);
+/*25*/
+
+        if $stack7 == 0 goto label2;
+/*25*/
+
+        return 1;
+/*26*/
+
+     label2:
+        if isPastFirst == 0 goto label3;
+/*28*/
+
+        interfaceinvoke mismatchDescription.<org.hamcrest.Description: org.hamcrest.Description appendText(java.lang.String)>(", ");
+/*29*/
+
+     label3:
+        $stack9 = this.<org.hamcrest.core.IsCollectionContaining: org.hamcrest.Matcher elementMatcher>;
+/*31*/
+
+        interfaceinvoke $stack9.<org.hamcrest.Matcher: void describeMismatch(java.lang.Object,org.hamcrest.Description)>(item, mismatchDescription);
+/*31*/
+
+        isPastFirst = 1;
+/*32*/
+/*32*/
+
+        goto label1;
+/*32*/
+
+     label4:
+        return 0;
+/*34*/
+    }
+

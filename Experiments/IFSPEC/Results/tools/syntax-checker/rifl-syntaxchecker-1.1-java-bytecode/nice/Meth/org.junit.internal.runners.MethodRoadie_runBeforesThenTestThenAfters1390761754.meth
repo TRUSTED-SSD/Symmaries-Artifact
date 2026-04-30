@@ -1,0 +1,29 @@
+void org.junit.internal.runners.MethodRoadie:runBeforesThenTestThenAfters(java.lang.Runnable test)
+{
+java.lang.Exception e;
+  java.lang.Throwable l3;
+  java.lang.RuntimeException $stack5;
+  org.junit.internal.runners.FailedBefore $stack7;
+  label0:this#org.junit.internal.runners.MethodRoadie:runBefores();
+ test.run();
+ label1:this#org.junit.internal.runners.MethodRoadie:runAfters();
+ goto label2;
+ label3:$stack7 = catch;
+ e=$stack7;
+ label4:this#org.junit.internal.runners.MethodRoadie:runAfters();
+ goto label2;
+ label5:e = catch;
+ $stack5=new java.lang.RuntimeException;
+ $stack5#java.lang.RuntimeException("test should never throw an exception to this level");
+ throw $stack5;
+ label6:l3 = catch;
+ label7:this#org.junit.internal.runners.MethodRoadie:runAfters();
+ throw l3;
+ label2:return;
+ catch org.junit.internal.runners.FailedBefore: label0 - label1 : label3;
+catch java.lang.Exception: label0 - label1 : label5;
+catch java.lang.Throwable: label0 - label1 : label6;
+catch java.lang.Throwable: label3 - label4 : label6;
+catch java.lang.Throwable: label5 - label7 : label6;
+} 
+

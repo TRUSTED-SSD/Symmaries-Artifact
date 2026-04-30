@@ -1,0 +1,55 @@
+org.apache.rocketmq.remoting.protocol.RemotingCommand org.apache.rocketmq.container.BrokerContainerProcessor:updateBrokerConfig(io.netty.channel.ChannelHandlerContext ctx,org.apache.rocketmq.remoting.protocol.RemotingCommand request)
+{
+org.apache.rocketmq.remoting.protocol.RemotingCommand response;
+  byte[] body;
+  java.io.UnsupportedEncodingException bodyStr;
+  java.util.Properties properties;
+  org.apache.rocketmq.logging.org.slf4j.Logger $stack8;
+  io.netty.channel.Channel $stack10;
+  java.lang.String $stack11;
+  java.net.SocketAddress $stack19;
+  org.apache.rocketmq.container.BrokerContainer $stack20;
+  org.apache.rocketmq.remoting.Configuration $stack21;
+  java.lang.StringBuilder $stack29;
+  response = org.apache.rocketmq.remoting.protocol.RemotingCommand.createResponseCommand(null);
+ $stack8=org.apache.rocketmq.container.BrokerContainerProcessor.LOGGER;
+ $stack10 = ctx.channel();
+ $stack11 = org.apache.rocketmq.remoting.common.RemotingHelper.parseChannelRemoteAddr($stack10);
+ $stack8.info("updateSharedBrokerConfig called by {}",(java.lang.Object)$stack11);
+ body = request.getBody();
+ if (body==null) goto label0;
+ label1:$stack11=new java.lang.String;
+ $stack11#java.lang.String(body,"UTF-8");
+ properties = org.apache.rocketmq.common.MixAll.string2Properties($stack11);
+ if (properties==null) goto label2;
+ $stack8=org.apache.rocketmq.container.BrokerContainerProcessor.LOGGER;
+ $stack10 = ctx.channel();
+ $stack19 = $stack10.remoteAddress();
+ $stack8.info("updateSharedBrokerConfig, new config: [{}] client: {} ",(java.lang.Object)properties,(java.lang.Object)$stack19);
+ $stack20=this.brokerContainer;
+ $stack21 = $stack20.getConfiguration();
+ $stack21.update(properties);
+ goto label3;
+ label2:$stack8=org.apache.rocketmq.container.BrokerContainerProcessor.LOGGER;
+ $stack8.error("string2Properties error");
+ response.setCode(1);
+ response.setRemark("string2Properties error");
+ label4:return  response;
+ label3:goto label0;
+ label5:bodyStr = catch;
+ $stack8=org.apache.rocketmq.container.BrokerContainerProcessor.LOGGER;
+ $stack8.error("",(java.lang.Throwable)bodyStr);
+ response.setCode(1);
+ $stack29=new java.lang.StringBuilder;
+ $stack29#java.lang.StringBuilder();
+ $stack29 = $stack29.append("UnsupportedEncodingException ");
+ $stack29 = $stack29.append((java.lang.Object)bodyStr);
+ $stack11 = $stack29.toString();
+ response.setRemark($stack11);
+ return  response;
+ label0:response.setCode(0);
+ response.setRemark(null);
+ return  response;
+ catch java.io.UnsupportedEncodingException: label1 - label4 : label5;
+} 
+

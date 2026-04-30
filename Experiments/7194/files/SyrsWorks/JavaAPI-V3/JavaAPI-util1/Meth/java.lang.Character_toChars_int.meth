@@ -1,0 +1,24 @@
+static char[] java.lang.Character:toChars(int i0)
+{
+char[] r0;
+  boolean $z0;
+  boolean $z1;
+  java.lang.IllegalArgumentException $r1;
+  char[] $r2;
+  char $c1;
+  $z0 = java.lang.Character.isBmpCodePoint(i0);
+ if ($z0==0) goto label0;
+ $r2=new char[1];
+ $c1=(char) i0;
+ $r2[0]=$c1;
+ return  $r2;
+ label0:$z1 = java.lang.Character.isValidCodePoint(i0);
+ if ($z1==0) goto label1;
+ r0=new char[2];
+ java.lang.Character.toSurrogates(i0,r0,0);
+ return  r0;
+ label1:$r1=new java.lang.IllegalArgumentException;
+ $r1#java.lang.IllegalArgumentException:init();
+ throw $r1;
+ }  
+

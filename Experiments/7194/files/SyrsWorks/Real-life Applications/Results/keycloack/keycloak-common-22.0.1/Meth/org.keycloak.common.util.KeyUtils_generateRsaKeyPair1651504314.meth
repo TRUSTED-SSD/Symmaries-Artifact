@@ -1,0 +1,19 @@
+static java.security.KeyPair org.keycloak.common.util.KeyUtils:generateRsaKeyPair(int keysize)
+{
+java.security.KeyPairGenerator generator;
+  java.security.KeyPair keyPair;
+  org.keycloak.common.crypto.CryptoProvider $stack3;
+  java.lang.Exception $stack6;
+  java.lang.RuntimeException $stack7;
+  label0:$stack3 = org.keycloak.common.crypto.CryptoIntegration.getProvider();
+ generator = $stack3.getKeyPairGen("RSA");
+ generator.initialize(keysize);
+ keyPair = generator.generateKeyPair();
+ label1:return  keyPair;
+ label2:$stack6 = catch;
+ $stack7=new java.lang.RuntimeException;
+ $stack7#java.lang.RuntimeException((java.lang.Throwable)$stack6);
+ throw $stack7;
+ catch java.lang.Exception: label0 - label1 : label2;
+} 
+

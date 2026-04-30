@@ -1,0 +1,18 @@
+boolean org.apache.rocketmq.proxy.remoting.protocol.http2proxy.Http2ProtocolProxyHandler:match(io.netty.buffer.ByteBuf in)
+{
+org.apache.rocketmq.proxy.config.ProxyConfig $stack2;
+  boolean $stack3;
+  int $stack4;
+  $stack2 = org.apache.rocketmq.proxy.config.ConfigurationManager.getProxyConfig();
+ $stack3 = $stack2.isEnableRemotingLocalProxyGrpc();
+ if ($stack3!=0) goto label0;
+ return  0;
+ label0:$stack4 = in.readerIndex();
+ $stack4 = in.getInt($stack4);
+ if ($stack4!=1347569952) goto label1;
+ $stack3=1;
+ goto label2;
+ label1:$stack3=0;
+ label2:return  $stack3;
+ } 
+

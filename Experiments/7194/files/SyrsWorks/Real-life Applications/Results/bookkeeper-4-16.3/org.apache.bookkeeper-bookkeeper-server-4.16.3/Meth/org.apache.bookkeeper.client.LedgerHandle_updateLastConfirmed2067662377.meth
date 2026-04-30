@@ -1,0 +1,23 @@
+void org.apache.bookkeeper.client.LedgerHandle:updateLastConfirmed(long lac,long len)
+{
+long $stack5;
+  byte $stack6;
+  org.apache.bookkeeper.stats.Counter $stack7;
+  $stack5=this.lastAddConfirmed;
+ $stack6=(lac cmp $stack5);
+ if ($stack6<=0) goto label0;
+ this.lastAddConfirmed=lac;
+ $stack7=this.lacUpdateHitsCounter;
+ $stack7.inc();
+ goto label1;
+ label0:$stack7=this.lacUpdateMissesCounter;
+ $stack7.inc();
+ label1:$stack5=this.lastAddPushed;
+ lac = java.lang.Math.max($stack5,lac);
+ this.lastAddPushed=lac;
+ lac=this.length;
+ lac = java.lang.Math.max(lac,len);
+ this.length=lac;
+ return;
+ } 
+

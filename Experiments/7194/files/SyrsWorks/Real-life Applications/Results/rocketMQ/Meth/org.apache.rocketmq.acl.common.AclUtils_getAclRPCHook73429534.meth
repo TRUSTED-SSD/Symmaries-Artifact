@@ -1,0 +1,19 @@
+static org.apache.rocketmq.remoting.RPCHook org.apache.rocketmq.acl.common.AclUtils:getAclRPCHook(java.lang.String fileName)
+{
+com.alibaba.fastjson.JSONObject yamlDataObject;
+  java.lang.Object $stack3;
+  org.apache.rocketmq.remoting.RPCHook $stack4;
+  java.lang.Exception $stack5;
+  org.apache.rocketmq.logging.org.slf4j.Logger $stack6;
+  label0:$stack3 = org.apache.rocketmq.acl.common.AclUtils.getYamlDataObject(fileName,com.alibaba.fastjson.JSONObject);
+ yamlDataObject=(com.alibaba.fastjson.JSONObject) $stack3;
+ label1:goto label2;
+ label3:$stack5 = catch;
+ $stack6=org.apache.rocketmq.acl.common.AclUtils.log;
+ $stack6.error("Convert yaml file to data object error, ",(java.lang.Throwable)$stack5);
+ return  null;
+ label2:$stack4 = org.apache.rocketmq.acl.common.AclUtils.buildRpcHook(yamlDataObject);
+ return  $stack4;
+ catch java.lang.Exception: label0 - label1 : label3;
+} 
+

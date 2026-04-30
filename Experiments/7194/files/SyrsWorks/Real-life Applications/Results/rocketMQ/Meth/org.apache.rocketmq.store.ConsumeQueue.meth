@@ -1,0 +1,52 @@
+org.apache.rocketmq.store.ConsumeQueue(java.lang.String topic,int queueId,java.lang.String @storePath,int mappedFileSize,org.apache.rocketmq.store.MessageStore messageStore)
+{
+java.lang.StringBuilder $stack7;
+  org.apache.rocketmq.store.MappedFileQueue $stack17;
+  java.nio.ByteBuffer $stack18;
+  org.apache.rocketmq.store.config.MessageStoreConfig $stack19;
+  boolean $stack20;
+  org.apache.rocketmq.store.ConsumeQueueExt $stack21;
+  int $stack28;
+  java.lang.String storePath;
+storePath=@storePath;
+this#java.lang.Object();
+ this.maxPhysicOffset=-1L;
+ this.minLogicOffset=0L;
+ this.consumeQueueExt=null;
+ this.storePath=storePath;
+ this.mappedFileSize=mappedFileSize;
+ this.messageStore=messageStore;
+ this.topic=topic;
+ this.queueId=queueId;
+ $stack7=new java.lang.StringBuilder;
+ $stack7#java.lang.StringBuilder();
+ storePath=this.storePath;
+ $stack7 = $stack7.append(storePath);
+ storePath=java.io.File.separator;
+ $stack7 = $stack7.append(storePath);
+ $stack7 = $stack7.append(topic);
+ storePath=java.io.File.separator;
+ $stack7 = $stack7.append(storePath);
+ $stack7 = $stack7.append(queueId);
+ storePath = $stack7.toString();
+ $stack17=new org.apache.rocketmq.store.MappedFileQueue;
+ $stack17#org.apache.rocketmq.store.MappedFileQueue(storePath,mappedFileSize,null);
+ this.mappedFileQueue=$stack17;
+ $stack18 = java.nio.ByteBuffer.allocate(20);
+ this.byteBufferIndex=$stack18;
+ $stack19 = messageStore.getMessageStoreConfig();
+ $stack20 = $stack19.isEnableConsumeQueueExt();
+ if ($stack20==0) goto label0;
+ $stack21=new org.apache.rocketmq.store.ConsumeQueueExt;
+ $stack19 = messageStore.getMessageStoreConfig();
+ storePath = $stack19.getStorePathRootDir();
+ storePath = org.apache.rocketmq.store.config.StorePathConfigHelper.getStorePathConsumeQueueExt(storePath);
+ $stack19 = messageStore.getMessageStoreConfig();
+ mappedFileSize = $stack19.getMappedFileSizeConsumeQueueExt();
+ $stack19 = messageStore.getMessageStoreConfig();
+ $stack28 = $stack19.getBitMapLengthConsumeQueueExt();
+ $stack21#org.apache.rocketmq.store.ConsumeQueueExt(topic,queueId,storePath,mappedFileSize,$stack28);
+ this.consumeQueueExt=$stack21;
+ label0:return;
+ } 
+

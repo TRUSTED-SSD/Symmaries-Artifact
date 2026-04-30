@@ -1,0 +1,46 @@
+org.apache.bookkeeper.conf.ClientConfiguration org.apache.bookkeeper.conf.ClientConfiguration:setClientRole(java.lang.String @role)
+{
+java.lang.String l2;
+  byte l3;
+  int $stack4;
+  boolean $stack5;
+  java.lang.IllegalArgumentException $stack6;
+  java.lang.StringBuilder $stack7;
+  java.lang.NullPointerException $stack13;
+  java.lang.String role;
+role=@role;
+if (role!=null) goto label0;
+ $stack13=new java.lang.NullPointerException;
+ $stack13#java.lang.NullPointerException();
+ throw $stack13;
+ label0:l2=role;
+ l3=-1;
+ $stack4 = role.hashCode();
+ switch [$stack4]
+if 0 goto label1;
+if 1 goto label2;
+goto label3;
+ label2:$stack5 = role.equals((java.lang.Object)"standard");
+ if ($stack5==0) goto label3;
+ l3=0;
+ goto label3;
+ label1:$stack5 = role.equals((java.lang.Object)"system");
+ if ($stack5==0) goto label3;
+ l3=1;
+ label3:switch [l3]
+if 0 goto label4;
+if 1 goto label4;
+goto label5;
+ label4:goto label6;
+ label5:$stack6=new java.lang.IllegalArgumentException;
+ $stack7=new java.lang.StringBuilder;
+ $stack7#java.lang.StringBuilder();
+ $stack7 = $stack7.append("invalid role ");
+ $stack7 = $stack7.append(role);
+ role = $stack7.toString();
+ $stack6#java.lang.IllegalArgumentException(role);
+ throw $stack6;
+ label6:this.setProperty("clientRole",(java.lang.Object)role);
+ return  this;
+ } 
+

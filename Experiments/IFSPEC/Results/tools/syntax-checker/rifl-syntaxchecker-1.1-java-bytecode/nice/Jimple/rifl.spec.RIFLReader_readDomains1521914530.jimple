@@ -1,0 +1,94 @@
+    void readDomains(org.w3c.dom.Document, java.util.Set)
+    {
+        rifl.spec.RIFLReader this;
+        org.w3c.dom.Document doc;
+        java.util.Set domains;
+        org.w3c.dom.Element domainsElem;
+        java.util.Iterator l5;
+        rifl.spec.Domain domain;
+        org.w3c.dom.NodeList $stack8;
+        java.lang.Iterable $stack9;
+        boolean $stack11;
+        java.lang.Object $stack12;
+        java.lang.String $stack14;
+        java.util.Map $stack16;
+        java.lang.Object[] $stack20;
+
+        this := @this: rifl.spec.RIFLReader;
+
+        doc := @parameter0: org.w3c.dom.Document;
+
+        domains := @parameter1: java.util.Set;
+
+        domainsElem = staticinvoke <rifl.spec.RIFLReader: org.w3c.dom.Element getElement(org.w3c.dom.Document,java.lang.String)>(doc, "domains");
+/*153*/
+/*153*/
+
+        $stack8 = interfaceinvoke domainsElem.<org.w3c.dom.Element: org.w3c.dom.NodeList getChildNodes()>();
+/*154*/
+
+        $stack9 = staticinvoke <rifl.spec.RIFLReader: java.lang.Iterable getElementList(org.w3c.dom.NodeList)>($stack8);
+/*154*/
+
+        l5 = interfaceinvoke $stack9.<java.lang.Iterable: java.util.Iterator iterator()>();
+/*154*/
+/*154*/
+
+        goto label3;
+/*154*/
+
+     label1:
+        $stack12 = interfaceinvoke l5.<java.util.Iterator: java.lang.Object next()>();
+/*154*/
+
+        domainsElem = (org.w3c.dom.Element) $stack12;
+/*154*/
+
+        domain = new rifl.spec.Domain;
+/*155*/
+
+        $stack14 = interfaceinvoke domainsElem.<org.w3c.dom.Element: java.lang.String getAttribute(java.lang.String)>("name");
+/*155*/
+
+        specialinvoke domain.<rifl.spec.Domain: void <init>(java.lang.String)>($stack14);
+/*155*/
+
+        $stack11 = interfaceinvoke domains.<java.util.Set: boolean add(java.lang.Object)>(domain);
+/*156*/
+
+        if $stack11 != 0 goto label2;
+/*156*/
+
+        $stack20 = newarray (java.lang.Object)[1];
+/*157*/
+
+        $stack20[0] = domain;
+/*157*/
+
+        $stack14 = staticinvoke <java.lang.String: java.lang.String format(java.lang.String,java.lang.Object[])>("Duplicate declaration of domain \'%s\'. Duplicate ignored.", $stack20);
+/*157*/
+
+        staticinvoke <rifl.spec.RIFLReader: void warn(java.lang.String)>($stack14);
+/*157*/
+
+     label2:
+        $stack16 = this.<rifl.spec.RIFLReader: java.util.Map domains>;
+/*159*/
+
+        $stack14 = virtualinvoke domain.<rifl.spec.Domain: java.lang.String getName()>();
+/*159*/
+
+        interfaceinvoke $stack16.<java.util.Map: java.lang.Object put(java.lang.Object,java.lang.Object)>($stack14, domain);
+/*159*/
+
+     label3:
+        $stack11 = interfaceinvoke l5.<java.util.Iterator: boolean hasNext()>();
+/*154*/
+
+        if $stack11 != 0 goto label1;
+/*154*/
+
+        return;
+/*161*/
+    }
+

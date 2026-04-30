@@ -1,0 +1,36 @@
+static com.scurrilous.circe.HashProvider com.scurrilous.circe.HashProviders:best(com.scurrilous.circe.HashParameters params,java.util.EnumSet required)
+{
+com.scurrilous.circe.HashProvider result;
+  java.util.EnumSet resultSupport;
+  java.util.Iterator l4;
+  com.scurrilous.circe.HashProvider provider;
+  java.util.EnumSet support;
+  java.util.Collection $stack7;
+  boolean $stack9;
+  java.lang.UnsupportedOperationException $stack10;
+  java.lang.Object $stack11;
+  int $stack15;
+  result=null;
+ resultSupport=null;
+ $stack7=com.scurrilous.circe.HashProviders.ALL_PROVIDERS;
+ l4 = $stack7.iterator();
+ label0:$stack9 = l4.hasNext();
+ if ($stack9==0) goto label1;
+ $stack11 = l4.next();
+ provider=(com.scurrilous.circe.HashProvider) $stack11;
+ support = provider.querySupport(params);
+ $stack9 = support.containsAll((java.util.Collection)required);
+ if ($stack9==0) goto label2;
+ if (result==null) goto label3;
+ $stack15 = com.scurrilous.circe.HashSupport.compare(support,resultSupport);
+ if ($stack15>=0) goto label2;
+ label3:result=provider;
+ resultSupport=support;
+ label2:goto label0;
+ label1:if (result!=null) goto label4;
+ $stack10=new java.lang.UnsupportedOperationException;
+ $stack10#java.lang.UnsupportedOperationException();
+ throw $stack10;
+ label4:return  result;
+ } 
+

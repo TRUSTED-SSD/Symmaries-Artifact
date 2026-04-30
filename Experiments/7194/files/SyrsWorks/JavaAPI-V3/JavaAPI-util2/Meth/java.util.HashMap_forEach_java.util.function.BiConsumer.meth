@@ -1,0 +1,44 @@
+void java.util.HashMap:forEach(java.util.function.BiConsumer r1)
+{
+java.util.HashMap$Node[] r2;
+  int i0;
+  int $i1;
+  java.util.HashMap$Node[] $r3;
+  int $i2;
+  int $i3;
+  java.util.ConcurrentModificationException $r4;
+  java.lang.Object $r5;
+  java.lang.Object $r6;
+  java.lang.NullPointerException $r7;
+  int i4;
+  java.util.HashMap$Node r8;
+  if (r1!=null) goto label0;
+ $r7=new java.lang.NullPointerException;
+ $r7#java.lang.NullPointerException:init();
+ throw $r7;
+ label0:$i1=this.size;
+ if ($i1<=0) goto label1;
+ $r3=this.table;
+ r2=$r3;
+ if ($r3==null) goto label1;
+ i0=this.modCount;
+ i4=0;
+ label2:$i2=#r2;
+ if (i4>=$i2) goto label3;
+ r8=r2[i4];
+ label4:if (r8==null) goto label5;
+ $r6=r8.key;
+ $r5=r8.value;
+ r1.accept($r6,$r5);
+ r8=r8.next;
+ goto label4;
+ label5:i4=(i4+1);
+ goto label2;
+ label3:$i3=this.modCount;
+ if ($i3==i0) goto label1;
+ $r4=new java.util.ConcurrentModificationException;
+ $r4#java.util.ConcurrentModificationException:init();
+ throw $r4;
+ label1:return;
+ }  
+

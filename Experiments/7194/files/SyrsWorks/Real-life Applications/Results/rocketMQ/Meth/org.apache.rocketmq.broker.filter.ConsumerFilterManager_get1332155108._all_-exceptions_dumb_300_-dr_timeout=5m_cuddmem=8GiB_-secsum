@@ -1,0 +1,9 @@
+org.apache.rocketmq.broker.filter.ConsumerFilterData org.apache.rocketmq.broker.filter.ConsumerFilterManager:get (
+  java.lang.String topic, java.lang.String consumerGroup) {
+  guard = tt;
+  ret(level()) = level(consumerGroup) ⊔ level(this) ⊔ level(topic) ⊔ obj_level(consumerGroup) ⊔ obj_level(this);
+  ret(obj_level()) = level(consumerGroup) ⊔ level(this) ⊔ level(topic) ⊔ obj_level(consumerGroup) ⊔ obj_level(this);
+  ret(obj_level(consumerGroup)) = level(consumerGroup) ⊔ level(this) ⊔ level(topic) ⊔ obj_level(consumerGroup) ⊔ obj_level(this);
+  ret(obj_level(this)) = level(consumerGroup) ⊔ level(this) ⊔ level(topic) ⊔ obj_level(consumerGroup) ⊔ obj_level(this);
+  ret(obj_level(topic)) = level(consumerGroup) ⊔ level(this) ⊔ level(topic) ⊔ obj_level(consumerGroup) ⊔ obj_level(this);
+}

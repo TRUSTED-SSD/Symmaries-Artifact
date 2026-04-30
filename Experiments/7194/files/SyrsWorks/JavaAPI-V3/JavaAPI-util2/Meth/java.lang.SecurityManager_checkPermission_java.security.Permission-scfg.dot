@@ -1,0 +1,19 @@
+digraph G {
+  node [shape=box, ];
+  "pc0_js1" [label="〈java.security.AccessController.checkPermission (r1), js1〉\n\
+tt",
+             ];
+  "pc1_js1" [label="〈return, js1〉", ];
+  "pc2_js1" [label="〈sink, js1〉\n\
+obj_level(r1) ⊑ ret(obj_level(r1))' ∧ obj_level(this) ⊑ ret(obj_level(this))' ∧ (ret(r1.><r1)' ∨ ¬r1.><r1)",
+             ];
+  
+  
+  "pc0_js1" -> "pc1_js1" [label="tt,\n\
+{r1.><r1 := tt,\n\
+ obj_level(r1) := pc ⊔ level(r1) ⊔ obj_level(r1)}",
+                          ];
+  "pc1_js1" -> "pc2_js1" [label="tt,\n\
+{ϕ := S1}", ];
+  
+  }

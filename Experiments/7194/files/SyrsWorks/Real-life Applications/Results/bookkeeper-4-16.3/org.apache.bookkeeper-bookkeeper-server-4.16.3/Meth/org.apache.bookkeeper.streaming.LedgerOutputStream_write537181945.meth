@@ -1,0 +1,33 @@
+void org.apache.bookkeeper.streaming.LedgerOutputStream:write(byte[] b)
+{
+int $stack3;
+  boolean $stack4;
+  org.apache.bookkeeper.client.LedgerHandle $stack5;
+  java.nio.ByteBuffer $stack7;
+  org.apache.bookkeeper.client.BKException $stack9;
+  org.slf4j.Logger $stack10;
+  java.lang.InterruptedException $stack11;
+  java.lang.Thread $stack13;
+  $stack3=#b;
+ $stack4 = this#org.apache.bookkeeper.streaming.LedgerOutputStream:makeSpace($stack3);
+ if ($stack4==0) goto label0;
+ $stack7=this.bytebuff;
+ $stack7.put(b);
+ goto label1;
+ label0:$stack5=this.lh;
+ $stack5.addEntry(b);
+ label2:goto label1;
+ label3:$stack11 = catch;
+ $stack10=org.apache.bookkeeper.streaming.LedgerOutputStream.LOG;
+ $stack10.warn("Interrupted while writing",(java.lang.Throwable)$stack11);
+ $stack13 = java.lang.Thread.currentThread();
+ $stack13.interrupt();
+ goto label1;
+ label4:$stack9 = catch;
+ $stack10=org.apache.bookkeeper.streaming.LedgerOutputStream.LOG;
+ $stack10.warn("BookKeeper exception",(java.lang.Throwable)$stack9);
+ label1:return;
+ catch java.lang.InterruptedException: label0 - label2 : label3;
+catch org.apache.bookkeeper.client.BKException: label0 - label2 : label4;
+} 
+

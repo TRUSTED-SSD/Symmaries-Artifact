@@ -1,0 +1,33 @@
+static void org.keycloak.adapters.CookieTokenStore:setTokenCookie(org.keycloak.adapters.KeycloakDeployment deployment,org.keycloak.adapters.spi.HttpFacade facade,org.keycloak.adapters.RefreshableKeycloakSecurityContext session)
+{
+java.lang.String accessToken;
+  java.lang.String idToken;
+  java.lang.String refreshToken;
+  org.jboss.logging.Logger $stack8;
+  java.lang.StringBuilder $stack12;
+  org.keycloak.adapters.spi.HttpFacade$Response $stack19;
+  org.keycloak.common.enums.SslRequired $stack23;
+  org.keycloak.adapters.spi.HttpFacade$Request $stack24;
+  boolean $stack26;
+  $stack8=org.keycloak.adapters.CookieTokenStore.log;
+ $stack8.debugf("Set new %s cookie now",(java.lang.Object)"KEYCLOAK_ADAPTER_STATE");
+ accessToken = session.getTokenString();
+ idToken = session.getIdTokenString();
+ refreshToken = session.getRefreshToken();
+ $stack12=new java.lang.StringBuilder;
+ $stack12#java.lang.StringBuilder(accessToken);
+ $stack12 = $stack12.append("___");
+ $stack12 = $stack12.append(idToken);
+ $stack12 = $stack12.append("___");
+ $stack12 = $stack12.append(refreshToken);
+ accessToken = $stack12.toString();
+ idToken = org.keycloak.adapters.CookieTokenStore.getCookiePath(deployment,facade);
+ $stack19 = facade.getResponse();
+ $stack23 = deployment.getSslRequired();
+ $stack24 = facade.getRequest();
+ refreshToken = $stack24.getRemoteAddr();
+ $stack26 = $stack23.isRequired(refreshToken);
+ $stack19.setCookie("KEYCLOAK_ADAPTER_STATE",accessToken,idToken,null,-1,$stack26,(boolean)1);
+ return;
+ } 
+

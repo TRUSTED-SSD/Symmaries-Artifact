@@ -1,0 +1,46 @@
+static com.google.zxing.Result com.google.zxing.oned.rss.expanded.RSSExpandedReader:constructResult(java.util.List pairs)
+{
+com.google.zxing.common.BitArray binary;
+  com.google.zxing.oned.rss.expanded.decoders.AbstractExpandedDecoder decoder;
+  java.lang.String resultingString;
+  com.google.zxing.ResultPoint[] firstPoints;
+  com.google.zxing.ResultPoint[] lastPoints;
+  com.google.zxing.Result result;
+  java.lang.Object $stack10;
+  com.google.zxing.oned.rss.expanded.ExpandedPair $stack11;
+  com.google.zxing.oned.rss.FinderPattern $stack12;
+  int $stack14;
+  com.google.zxing.ResultPoint[] $stack21;
+  com.google.zxing.ResultPoint $stack22;
+  com.google.zxing.BarcodeFormat $stack26;
+  com.google.zxing.ResultMetadataType $stack27;
+  binary = com.google.zxing.oned.rss.expanded.BitArrayBuilder.buildBitArray(pairs);
+ decoder = com.google.zxing.oned.rss.expanded.decoders.AbstractExpandedDecoder.createDecoder(binary);
+ resultingString = decoder.parseInformation();
+ $stack10 = pairs.get(0);
+ $stack11=(com.google.zxing.oned.rss.expanded.ExpandedPair) $stack10;
+ $stack12 = $stack11.getFinderPattern();
+ firstPoints = $stack12.getResultPoints();
+ $stack14 = pairs.size();
+ $stack14=($stack14-1);
+ $stack10 = pairs.get($stack14);
+ $stack11=(com.google.zxing.oned.rss.expanded.ExpandedPair) $stack10;
+ $stack12 = $stack11.getFinderPattern();
+ lastPoints = $stack12.getResultPoints();
+ result=new com.google.zxing.Result;
+ $stack21=new com.google.zxing.ResultPoint[4];
+ $stack22=firstPoints[0];
+ $stack21[0]=$stack22;
+ $stack22=firstPoints[1];
+ $stack21[1]=$stack22;
+ $stack22=lastPoints[0];
+ $stack21[2]=$stack22;
+ $stack22=lastPoints[1];
+ $stack21[3]=$stack22;
+ $stack26=com.google.zxing.BarcodeFormat.RSS_EXPANDED;
+ result#com.google.zxing.Result(resultingString,null,$stack21,$stack26);
+ $stack27=com.google.zxing.ResultMetadataType.SYMBOLOGY_IDENTIFIER;
+ result.putMetadata($stack27,(java.lang.Object)"]e0");
+ return  result;
+ } 
+

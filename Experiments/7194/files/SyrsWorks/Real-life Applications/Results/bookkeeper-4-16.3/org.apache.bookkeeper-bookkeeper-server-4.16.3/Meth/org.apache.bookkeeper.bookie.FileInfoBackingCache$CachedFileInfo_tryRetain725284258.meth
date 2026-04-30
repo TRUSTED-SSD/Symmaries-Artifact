@@ -1,0 +1,18 @@
+boolean org.apache.bookkeeper.bookie.FileInfoBackingCache$CachedFileInfo:tryRetain()
+{
+int count;
+  java.util.concurrent.atomic.AtomicInteger $stack2;
+  int $stack4;
+  boolean $stack6;
+  label0:$stack2=this.refCount;
+ count = $stack2.get();
+ if (count>=0) goto label1;
+ return  0;
+ label1:$stack2=this.refCount;
+ $stack4=(count+1);
+ $stack6 = $stack2.compareAndSet(count,$stack4);
+ if ($stack6==0) goto label2;
+ return  1;
+ label2:goto label0;
+ } 
+

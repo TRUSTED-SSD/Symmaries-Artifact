@@ -1,0 +1,24 @@
+void org.apache.bookkeeper.util.SnapshotMap:put(java.lang.Object key,java.lang.Object value)
+{
+java.util.concurrent.locks.ReentrantReadWriteLock $stack4;
+  java.util.concurrent.locks.ReentrantReadWriteLock$ReadLock $stack5;
+  java.util.Map $stack6;
+  java.lang.Throwable $stack10;
+  $stack4=this.lock;
+ $stack5 = $stack4.readLock();
+ $stack5.lock();
+ label0:$stack6=this.updates;
+ $stack6.put(key,value);
+ label1:$stack4=this.lock;
+ $stack5 = $stack4.readLock();
+ $stack5.unlock();
+ goto label2;
+ label3:$stack10 = catch;
+ $stack4=this.lock;
+ $stack5 = $stack4.readLock();
+ $stack5.unlock();
+ throw $stack10;
+ label2:return;
+ catch java.lang.Throwable: label0 - label1 : label3;
+} 
+

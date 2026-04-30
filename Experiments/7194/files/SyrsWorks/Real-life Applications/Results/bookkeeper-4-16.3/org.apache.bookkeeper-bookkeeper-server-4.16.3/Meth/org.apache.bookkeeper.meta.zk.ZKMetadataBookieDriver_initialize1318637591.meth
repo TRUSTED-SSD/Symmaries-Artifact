@@ -1,0 +1,23 @@
+org.apache.bookkeeper.meta.MetadataBookieDriver org.apache.bookkeeper.meta.zk.ZKMetadataBookieDriver:initialize(org.apache.bookkeeper.conf.ServerConfiguration conf,org.apache.bookkeeper.stats.StatsLogger statsLogger)
+{
+org.apache.bookkeeper.stats.StatsLogger $stack3;
+  org.apache.bookkeeper.zookeeper.BoundExponentialBackoffRetryPolicy $stack4;
+  int $stack5;
+  long $stack6;
+  long $stack8;
+  java.util.Optional $stack10;
+  $stack3 = statsLogger.scope("bookie");
+ $stack4=new org.apache.bookkeeper.zookeeper.BoundExponentialBackoffRetryPolicy;
+ $stack5 = conf.getZkRetryBackoffStartMs();
+ $stack6=(long) $stack5;
+ $stack5 = conf.getZkRetryBackoffMaxMs();
+ $stack8=(long) $stack5;
+ $stack5 = conf.getZkRetryBackoffMaxRetries();
+ $stack4#org.apache.bookkeeper.zookeeper.BoundExponentialBackoffRetryPolicy($stack6,$stack8,$stack5);
+ $stack10 = java.util.Optional.empty();
+ this#org.apache.bookkeeper.meta.zk.ZKMetadataDriverBase:initialize((org.apache.bookkeeper.conf.AbstractConfiguration)conf,$stack3,(org.apache.bookkeeper.zookeeper.RetryPolicy)$stack4,$stack10);
+ this.serverConf=conf;
+ this.statsLogger=statsLogger;
+ return  this;
+ } 
+

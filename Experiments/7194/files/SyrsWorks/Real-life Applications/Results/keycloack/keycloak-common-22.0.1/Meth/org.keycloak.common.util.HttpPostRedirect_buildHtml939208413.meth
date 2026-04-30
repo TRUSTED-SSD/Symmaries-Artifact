@@ -1,0 +1,48 @@
+java.lang.String org.keycloak.common.util.HttpPostRedirect:buildHtml(java.lang.String @title,java.lang.String actionUrl,java.util.Map params)
+{
+java.lang.StringBuilder builder;
+  java.util.Iterator l5;
+  java.util.Map$Entry param;
+  java.lang.StringBuilder $stack8;
+  java.util.Set $stack15;
+  boolean $stack17;
+  java.lang.Object $stack24;
+  java.lang.String title;
+title=@title;
+builder=new java.lang.StringBuilder;
+ builder#java.lang.StringBuilder();
+ $stack8 = builder.append("<HTML>");
+ $stack8.append("<HEAD>");
+ if (title==null) goto label0;
+ builder.append("<TITLE>SAML HTTP Post Binding</TITLE>");
+ label0:$stack8 = builder.append("</HEAD>");
+ $stack8 = $stack8.append("<BODY Onload=\"document.forms[0].submit()\">");
+ $stack8 = $stack8.append("<FORM METHOD=\"POST\" ACTION=\"");
+ $stack8 = $stack8.append(actionUrl);
+ $stack8.append("\">");
+ $stack15 = params.entrySet();
+ l5 = $stack15.iterator();
+ label1:$stack17 = l5.hasNext();
+ if ($stack17==0) goto label2;
+ $stack24 = l5.next();
+ param=(java.util.Map$Entry) $stack24;
+ $stack8 = builder.append("<INPUT TYPE=\"HIDDEN\" NAME=\"");
+ $stack24 = param.getKey();
+ title=(java.lang.String) $stack24;
+ $stack8 = $stack8.append(title);
+ $stack8 = $stack8.append("\"");
+ $stack8 = $stack8.append(" VALUE=\"");
+ $stack24 = param.getValue();
+ title=(java.lang.String) $stack24;
+ $stack8 = $stack8.append(title);
+ $stack8.append("\"/>");
+ goto label1;
+ label2:$stack8 = builder.append("<NOSCRIPT>");
+ $stack8 = $stack8.append("<P>JavaScript is disabled. We strongly recommend to enable it. Click the button below to continue.</P>");
+ $stack8 = $stack8.append("<INPUT TYPE=\"SUBMIT\" VALUE=\"CONTINUE\" />");
+ $stack8 = $stack8.append("</NOSCRIPT>");
+ $stack8.append("</FORM></BODY></HTML>");
+ title = builder.toString();
+ return  title;
+ } 
+

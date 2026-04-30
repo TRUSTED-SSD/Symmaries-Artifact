@@ -1,0 +1,25 @@
+long org.apache.rocketmq.broker.processor.PopInflightMessageCounter:getGroupPopInFlightMessageNum(java.lang.String @topic,java.lang.String group,int queueId)
+{
+java.util.Map queueCounter;
+  java.util.concurrent.atomic.AtomicLong counter;
+  java.lang.Object $stack8;
+  java.lang.Integer $stack9;
+  long $stack12;
+  java.lang.String topic;
+topic=@topic;
+queueCounter=this.topicInFlightMessageNum;
+ topic = org.apache.rocketmq.broker.processor.PopInflightMessageCounter.buildKey(topic,group);
+ $stack8 = queueCounter.get((java.lang.Object)topic);
+ queueCounter=(java.util.Map) $stack8;
+ if (queueCounter!=null) goto label0;
+ return  0L;
+ label0:$stack9 = java.lang.Integer.valueOf(queueId);
+ $stack8 = queueCounter.get((java.lang.Object)$stack9);
+ counter=(java.util.concurrent.atomic.AtomicLong) $stack8;
+ if (counter!=null) goto label1;
+ return  0L;
+ label1:$stack12 = counter.get();
+ $stack12 = java.lang.Math.max(0L,$stack12);
+ return  $stack12;
+ } 
+

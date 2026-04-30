@@ -1,0 +1,38 @@
+apache.rocketmq.v2.Settings org.apache.rocketmq.proxy.grpc.v2.common.GrpcClientSettingsManager:lambda$onWaitEnd$1(java.lang.String clientId,java.lang.String @clientIdKey,apache.rocketmq.v2.Settings settings)
+{
+org.apache.rocketmq.broker.client.ConsumerGroupInfo consumerGroupInfo;
+  apache.rocketmq.v2.ClientType $stack6;
+  apache.rocketmq.v2.ClientType $stack7;
+  boolean $stack8;
+  org.apache.rocketmq.proxy.grpc.v2.common.GrpcConverter $stack9;
+  apache.rocketmq.v2.Subscription $stack10;
+  apache.rocketmq.v2.Resource $stack11;
+  org.apache.rocketmq.proxy.processor.MessagingProcessor $stack13;
+  org.apache.rocketmq.logging.org.slf4j.Logger $stack15;
+  org.apache.rocketmq.broker.client.ClientChannelInfo $stack16;
+  java.lang.String clientIdKey;
+clientIdKey=@clientIdKey;
+$stack6 = settings.getClientType();
+ $stack7=apache.rocketmq.v2.ClientType.PUSH_CONSUMER;
+ $stack8 = $stack6.equals((java.lang.Object)$stack7);
+ if ($stack8!=0) goto label0;
+ $stack6 = settings.getClientType();
+ $stack7=apache.rocketmq.v2.ClientType.SIMPLE_CONSUMER;
+ $stack8 = $stack6.equals((java.lang.Object)$stack7);
+ if ($stack8!=0) goto label0;
+ return  settings;
+ label0:$stack9 = org.apache.rocketmq.proxy.grpc.v2.common.GrpcConverter.getInstance();
+ $stack10 = settings.getSubscription();
+ $stack11 = $stack10.getGroup();
+ clientIdKey = $stack9.wrapResourceWithNamespace($stack11);
+ $stack13=this.messagingProcessor;
+ consumerGroupInfo = $stack13.getConsumerGroupInfo(clientIdKey);
+ if (consumerGroupInfo==null) goto label1;
+ $stack16 = consumerGroupInfo.findChannel(clientId);
+ if ($stack16!=null) goto label2;
+ label1:$stack15=org.apache.rocketmq.proxy.grpc.v2.common.GrpcClientSettingsManager.log;
+ $stack15.info("remove unused grpc client settings. group:{}, settings:{}",(java.lang.Object)consumerGroupInfo,(java.lang.Object)settings);
+ return  null;
+ label2:return  settings;
+ } 
+

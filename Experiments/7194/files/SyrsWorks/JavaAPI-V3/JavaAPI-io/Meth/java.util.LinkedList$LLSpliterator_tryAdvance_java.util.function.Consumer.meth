@@ -1,0 +1,41 @@
+boolean java.util.LinkedList$LLSpliterator:tryAdvance(java.util.function.Consumer r1)
+{
+java.util.LinkedList$Node r2;
+  java.lang.Object r3;
+  int $i0;
+  java.util.LinkedList$Node $r4;
+  int $i1;
+  int $i2;
+  java.util.LinkedList$Node $r5;
+  java.util.LinkedList $r6;
+  int $i3;
+  int $i4;
+  java.util.ConcurrentModificationException $r7;
+  java.lang.NullPointerException $r8;
+  if (r1!=null) goto label0;
+ $r8=new java.lang.NullPointerException;
+ $r8#java.lang.NullPointerException:init();
+ throw $r8;
+ label0:$i0 = this.getEst();
+ if ($i0<=0) goto label1;
+ $r4=this.current;
+ r2=$r4;
+ if ($r4==null) goto label1;
+ $i1=this.est;
+ $i2=($i1-1);
+ this.est=$i2;
+ r3=r2.item;
+ $r5=r2.next;
+ this.current=$r5;
+ r1.accept(r3);
+ $r6=this.list;
+ $i4=$r6.modCount;
+ $i3=this.expectedModCount;
+ if ($i4==$i3) goto label2;
+ $r7=new java.util.ConcurrentModificationException;
+ $r7#java.util.ConcurrentModificationException:init();
+ throw $r7;
+ label2:return  1;
+ label1:return  0;
+ }  
+

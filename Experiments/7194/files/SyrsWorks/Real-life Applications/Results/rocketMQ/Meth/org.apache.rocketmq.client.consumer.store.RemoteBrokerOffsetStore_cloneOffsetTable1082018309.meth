@@ -1,0 +1,43 @@
+java.util.Map org.apache.rocketmq.client.consumer.store.RemoteBrokerOffsetStore:cloneOffsetTable(java.lang.String topic)
+{
+java.util.HashMap cloneOffsetTable;
+  java.util.Iterator l3;
+  java.util.Map$Entry entry;
+  org.apache.rocketmq.common.message.MessageQueue mq;
+  java.util.concurrent.ConcurrentMap $stack7;
+  int $stack8;
+  java.util.Set $stack10;
+  boolean $stack12;
+  java.lang.Object $stack13;
+  java.util.concurrent.atomic.AtomicLong $stack17;
+  long $stack18;
+  java.lang.Long $stack19;
+  java.lang.String $stack22;
+  cloneOffsetTable=new java.util.HashMap;
+ $stack7=this.offsetTable;
+ $stack8 = $stack7.size();
+ cloneOffsetTable#java.util.HashMap($stack8,1.0F);
+ $stack7=this.offsetTable;
+ $stack10 = $stack7.entrySet();
+ l3 = $stack10.iterator();
+ label0:$stack12 = l3.hasNext();
+ if ($stack12==0) goto label1;
+ $stack13 = l3.next();
+ entry=(java.util.Map$Entry) $stack13;
+ $stack13 = entry.getKey();
+ mq=(org.apache.rocketmq.common.message.MessageQueue) $stack13;
+ $stack12 = org.apache.rocketmq.common.UtilAll.isBlank(topic);
+ if ($stack12!=0) goto label2;
+ $stack22 = mq.getTopic();
+ $stack12 = topic.equals((java.lang.Object)$stack22);
+ if ($stack12!=0) goto label2;
+ goto label0;
+ label2:$stack13 = entry.getValue();
+ $stack17=(java.util.concurrent.atomic.AtomicLong) $stack13;
+ $stack18 = $stack17.get();
+ $stack19 = java.lang.Long.valueOf($stack18);
+ cloneOffsetTable.put((java.lang.Object)mq,(java.lang.Object)$stack19);
+ goto label0;
+ label1:return  cloneOffsetTable;
+ } 
+

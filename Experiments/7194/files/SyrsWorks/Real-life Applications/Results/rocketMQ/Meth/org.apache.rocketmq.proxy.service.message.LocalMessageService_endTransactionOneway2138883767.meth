@@ -1,0 +1,27 @@
+java.util.concurrent.CompletableFuture org.apache.rocketmq.proxy.service.message.LocalMessageService:endTransactionOneway(org.apache.rocketmq.proxy.common.ProxyContext ctx,java.lang.String brokerName,org.apache.rocketmq.remoting.protocol.header.EndTransactionRequestHeader requestHeader,long timeoutMillis)
+{
+java.util.concurrent.CompletableFuture future;
+  org.apache.rocketmq.proxy.service.channel.SimpleChannel channel;
+  io.netty.channel.ChannelHandlerContext channelHandlerContext;
+  org.apache.rocketmq.proxy.service.message.LocalRemotingCommand command;
+  org.apache.rocketmq.proxy.service.channel.ChannelManager $stack12;
+  org.apache.rocketmq.broker.BrokerController $stack16;
+  org.apache.rocketmq.broker.processor.EndTransactionProcessor $stack17;
+  java.lang.Exception $stack20;
+  future=new java.util.concurrent.CompletableFuture;
+ future#java.util.concurrent.CompletableFuture();
+ $stack12=this.channelManager;
+ channel = $stack12.createChannel(ctx);
+ channelHandlerContext = channel.getChannelHandlerContext();
+ command = org.apache.rocketmq.proxy.service.message.LocalRemotingCommand.createRequestCommand(37,(org.apache.rocketmq.remoting.CommandCustomHeader)requestHeader);
+ label0:$stack16=this.brokerController;
+ $stack17 = $stack16.getEndTransactionProcessor();
+ $stack17.processRequest(channelHandlerContext,(org.apache.rocketmq.remoting.protocol.RemotingCommand)command);
+ future.complete(null);
+ label1:goto label2;
+ label3:$stack20 = catch;
+ future.completeExceptionally((java.lang.Throwable)$stack20);
+ label2:return  future;
+ catch java.lang.Exception: label0 - label1 : label3;
+} 
+

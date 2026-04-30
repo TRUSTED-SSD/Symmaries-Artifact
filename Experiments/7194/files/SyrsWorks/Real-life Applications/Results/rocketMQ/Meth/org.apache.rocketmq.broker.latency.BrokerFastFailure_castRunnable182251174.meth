@@ -1,0 +1,30 @@
+static org.apache.rocketmq.remoting.netty.RequestTask org.apache.rocketmq.broker.latency.BrokerFastFailure:castRunnable(java.lang.Runnable runnable)
+{
+org.apache.rocketmq.broker.latency.FutureTaskExt object;
+  boolean $stack2;
+  java.lang.Runnable $stack3;
+  org.apache.rocketmq.remoting.netty.RequestTask $stack4;
+  java.lang.Throwable $stack5;
+  java.lang.Object[] $stack6;
+  org.apache.rocketmq.logging.org.slf4j.Logger $stack7;
+  java.lang.Class $stack10;
+  java.lang.String $stack11;
+  label0:$stack2=runnable instanceof org.apache.rocketmq.broker.latency.FutureTaskExt;
+ if ($stack2==0) goto label1;
+ object=(org.apache.rocketmq.broker.latency.FutureTaskExt) runnable;
+ $stack3 = object.getRunnable();
+ $stack4=(org.apache.rocketmq.remoting.netty.RequestTask) $stack3;
+ label2:return  $stack4;
+ label1:goto label3;
+ label4:$stack5 = catch;
+ $stack7=org.apache.rocketmq.broker.latency.BrokerFastFailure.LOGGER;
+ $stack6=new java.lang.Object[1];
+ $stack10 = runnable.getClass();
+ $stack11 = $stack10.getName();
+ $stack6[0]=$stack11;
+ $stack11 = java.lang.String.format("castRunnable exception, %s",$stack6);
+ $stack7.error($stack11,$stack5);
+ label3:return  null;
+ catch java.lang.Throwable: label0 - label2 : label4;
+} 
+

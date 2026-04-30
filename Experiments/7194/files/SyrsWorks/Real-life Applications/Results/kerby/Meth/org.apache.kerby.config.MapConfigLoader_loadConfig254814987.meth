@@ -1,0 +1,53 @@
+void org.apache.kerby.config.MapConfigLoader:loadConfig(org.apache.kerby.config.ConfigImpl config,org.apache.kerby.config.Resource resource)
+{
+java.util.Map mapConfig;
+  java.util.Iterator iter;
+  java.util.Map$Entry entry;
+  java.lang.String key;
+  java.lang.Object value;
+  org.apache.kerby.config.ConfigImpl subConfig;
+  java.util.Set $stack10;
+  boolean $stack12;
+  java.lang.RuntimeException $stack19;
+  java.lang.StringBuilder $stack20;
+  java.lang.String $stack30;
+  value = resource.getResource();
+ mapConfig=(java.util.Map) value;
+ $stack10 = mapConfig.entrySet();
+ iter = $stack10.iterator();
+ label0:$stack12 = iter.hasNext();
+ if ($stack12==0) goto label1;
+ value = iter.next();
+ entry=(java.util.Map$Entry) value;
+ value = entry.getValue();
+ $stack12=value instanceof java.lang.String;
+ if ($stack12==0) goto label2;
+ value = entry.getKey();
+ key=(java.lang.String) value;
+ value = entry.getValue();
+ $stack30=(java.lang.String) value;
+ config.set(key,$stack30);
+ goto label3;
+ label2:value = entry.getKey();
+ key=(java.lang.String) value;
+ value = entry.getValue();
+ $stack12=value instanceof java.util.Map;
+ if ($stack12==0) goto label4;
+ subConfig=new org.apache.kerby.config.ConfigImpl;
+ subConfig#org.apache.kerby.config.ConfigImpl(key);
+ mapConfig=(java.util.Map) value;
+ this#org.apache.kerby.config.MapConfigLoader:loadSubmap(subConfig,mapConfig);
+ config.add((org.apache.kerby.config.Config)subConfig);
+ goto label3;
+ label4:$stack19=new java.lang.RuntimeException;
+ $stack20=new java.lang.StringBuilder;
+ $stack20#java.lang.StringBuilder();
+ $stack20 = $stack20.append("Unable to resolve config:");
+ $stack20 = $stack20.append(key);
+ key = $stack20.toString();
+ $stack19#java.lang.RuntimeException(key);
+ throw $stack19;
+ label3:goto label0;
+ label1:return;
+ } 
+

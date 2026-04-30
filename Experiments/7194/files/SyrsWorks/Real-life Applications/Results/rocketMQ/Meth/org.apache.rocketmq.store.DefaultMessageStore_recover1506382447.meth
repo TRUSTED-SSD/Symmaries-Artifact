@@ -1,0 +1,53 @@
+void org.apache.rocketmq.store.DefaultMessageStore:recover(boolean lastExitOK)
+{
+boolean recoverConcurrently;
+  long recoverConsumeQueueStart;
+  long maxPhyOffsetOfConsumeQueue;
+  long recoverConsumeQueueEnd;
+  long recoverConsumeOffsetEnd;
+  org.apache.rocketmq.common.BrokerConfig $stack13;
+  org.apache.rocketmq.logging.org.slf4j.Logger $stack15;
+  org.apache.rocketmq.store.CommitLog $stack19;
+  java.lang.Object[] $stack22;
+  long $stack23;
+  java.lang.Long $stack27;
+  java.lang.String $stack49;
+  $stack13=this.brokerConfig;
+ recoverConcurrently = $stack13.isRecoverConcurrently();
+ $stack15=org.apache.rocketmq.store.DefaultMessageStore.LOGGER;
+ if (recoverConcurrently==0) goto label0;
+ $stack49="concurrent";
+ goto label1;
+ label0:$stack49="normal";
+ label1:$stack15.info("message store recover mode: {}",(java.lang.Object)$stack49);
+ recoverConsumeQueueStart = java.lang.System.currentTimeMillis();
+ this#org.apache.rocketmq.store.DefaultMessageStore:recoverConsumeQueue();
+ maxPhyOffsetOfConsumeQueue = this#org.apache.rocketmq.store.DefaultMessageStore:getMaxOffsetInConsumeQueue();
+ recoverConsumeQueueEnd = java.lang.System.currentTimeMillis();
+ if (lastExitOK==0) goto label2;
+ $stack19=this.commitLog;
+ $stack19.recoverNormally(maxPhyOffsetOfConsumeQueue);
+ goto label3;
+ label2:$stack19=this.commitLog;
+ $stack19.recoverAbnormally(maxPhyOffsetOfConsumeQueue);
+ label3:maxPhyOffsetOfConsumeQueue = java.lang.System.currentTimeMillis();
+ this.recoverTopicQueueTable();
+ recoverConsumeOffsetEnd = java.lang.System.currentTimeMillis();
+ $stack15=org.apache.rocketmq.store.DefaultMessageStore.LOGGER;
+ $stack22=new java.lang.Object[4];
+ $stack23=(recoverConsumeOffsetEnd-recoverConsumeQueueStart);
+ $stack27 = java.lang.Long.valueOf($stack23);
+ $stack22[0]=$stack27;
+ recoverConsumeQueueStart=(recoverConsumeQueueEnd-recoverConsumeQueueStart);
+ $stack27 = java.lang.Long.valueOf(recoverConsumeQueueStart);
+ $stack22[1]=$stack27;
+ recoverConsumeQueueEnd=(maxPhyOffsetOfConsumeQueue-recoverConsumeQueueEnd);
+ $stack27 = java.lang.Long.valueOf(recoverConsumeQueueEnd);
+ $stack22[2]=$stack27;
+ recoverConsumeQueueEnd=(recoverConsumeOffsetEnd-maxPhyOffsetOfConsumeQueue);
+ $stack27 = java.lang.Long.valueOf(recoverConsumeQueueEnd);
+ $stack22[3]=$stack27;
+ $stack15.info("message store recover total cost: {} ms, recoverConsumeQueue: {} ms, recoverCommitLog: {} ms, recoverOffsetTable: {} ms",$stack22);
+ return;
+ } 
+

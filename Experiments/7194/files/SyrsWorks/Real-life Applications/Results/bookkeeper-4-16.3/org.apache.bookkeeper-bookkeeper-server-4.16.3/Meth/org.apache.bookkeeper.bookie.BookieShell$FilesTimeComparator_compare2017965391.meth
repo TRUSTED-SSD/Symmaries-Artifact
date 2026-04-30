@@ -1,0 +1,40 @@
+int org.apache.bookkeeper.bookie.BookieShell$FilesTimeComparator:compare(java.io.File file1,java.io.File file2)
+{
+java.nio.file.Path file1Path;
+  java.nio.file.Path file2Path;
+  java.lang.Object file1Attributes;
+  java.nio.file.attribute.BasicFileAttributes file2Attributes;
+  java.nio.file.attribute.FileTime file1CreationTime;
+  java.nio.file.attribute.FileTime file2CreationTime;
+  int compareValue;
+  java.lang.String $stack12;
+  java.lang.String[] $stack13;
+  java.nio.file.LinkOption[] $stack18;
+  java.io.IOException $stack29;
+  java.nio.file.attribute.BasicFileAttributes tmp$1614690931;
+  $stack12 = file1.getAbsolutePath();
+ $stack13=new java.lang.String[0];
+ file1Path = java.nio.file.Paths.get($stack12,$stack13);
+ $stack12 = file2.getAbsolutePath();
+ $stack13=new java.lang.String[0];
+ file2Path = java.nio.file.Paths.get($stack12,$stack13);
+ label0:$stack18=new java.nio.file.LinkOption[0];
+ file1Attributes = java.nio.file.Files.readAttributes(file1Path,java.nio.file.attribute.BasicFileAttributes,$stack18);
+ $stack18=new java.nio.file.LinkOption[0];
+ file2Attributes = java.nio.file.Files.readAttributes(file2Path,java.nio.file.attribute.BasicFileAttributes,$stack18);
+ tmp$1614690931=(java.nio.file.attribute.BasicFileAttributes) file1Attributes;
+ file1CreationTime = tmp$1614690931.creationTime();
+ file2CreationTime = file2Attributes.creationTime();
+ compareValue = file1CreationTime.compareTo(file2CreationTime);
+ if (compareValue!=0) goto label1;
+ tmp$1614690931=(java.nio.file.attribute.BasicFileAttributes) file1Attributes;
+ file1CreationTime = tmp$1614690931.lastModifiedTime();
+ file2CreationTime = file2Attributes.lastModifiedTime();
+ compareValue = file1CreationTime.compareTo(file2CreationTime);
+ label1:return  compareValue;
+ label2:$stack29 = catch;
+ file1Attributes=$stack29;
+ return  0;
+ catch java.io.IOException: label0 - label1 : label2;
+} 
+

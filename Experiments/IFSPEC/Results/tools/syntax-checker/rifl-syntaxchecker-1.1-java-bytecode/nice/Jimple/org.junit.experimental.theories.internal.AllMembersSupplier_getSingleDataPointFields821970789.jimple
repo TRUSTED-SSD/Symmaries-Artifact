@@ -1,0 +1,61 @@
+    protected java.util.Collection getSingleDataPointFields(org.junit.experimental.theories.ParameterSignature)
+    {
+        org.junit.experimental.theories.internal.AllMembersSupplier this;
+        org.junit.experimental.theories.ParameterSignature sig;
+        java.util.List fields;
+        java.util.ArrayList validFields;
+        java.util.Iterator i$;
+        org.junit.runners.model.FrameworkField frameworkField;
+        org.junit.runners.model.TestClass $stack6;
+        boolean $stack10;
+        java.lang.Object $stack11;
+        java.lang.reflect.Field $stack12;
+
+        this := @this: org.junit.experimental.theories.internal.AllMembersSupplier;
+
+        sig := @parameter0: org.junit.experimental.theories.ParameterSignature;
+
+        $stack6 = this.<org.junit.experimental.theories.internal.AllMembersSupplier: org.junit.runners.model.TestClass clazz>;
+/*179*/
+
+        fields = virtualinvoke $stack6.<org.junit.runners.model.TestClass: java.util.List getAnnotatedFields(java.lang.Class)>(class "Lorg/junit/experimental/theories/DataPoint;");
+/*179*/
+/*179*/
+
+        validFields = new java.util.ArrayList;
+/*180*/
+
+        specialinvoke validFields.<java.util.ArrayList: void <init>()>();
+/*180*/
+
+        i$ = interfaceinvoke fields.<java.util.List: java.util.Iterator iterator()>();
+/*182*/
+/*182*/
+
+     label1:
+        $stack10 = interfaceinvoke i$.<java.util.Iterator: boolean hasNext()>();
+/*182*/
+
+        if $stack10 == 0 goto label2;
+/*182*/
+
+        $stack11 = interfaceinvoke i$.<java.util.Iterator: java.lang.Object next()>();
+/*186*/
+
+        frameworkField = (org.junit.runners.model.FrameworkField) $stack11;
+/*186*/
+
+        $stack12 = virtualinvoke frameworkField.<org.junit.runners.model.FrameworkField: java.lang.reflect.Field getField()>();
+/*183*/
+
+        interfaceinvoke validFields.<java.util.Collection: boolean add(java.lang.Object)>($stack12);
+/*183*/
+
+        goto label1;
+/*183*/
+
+     label2:
+        return validFields;
+/*186*/
+    }
+

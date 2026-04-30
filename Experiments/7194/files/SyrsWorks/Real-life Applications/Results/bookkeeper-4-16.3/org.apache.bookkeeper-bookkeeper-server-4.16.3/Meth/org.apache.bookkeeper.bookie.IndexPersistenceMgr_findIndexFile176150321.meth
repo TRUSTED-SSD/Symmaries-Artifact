@@ -1,0 +1,28 @@
+java.io.File org.apache.bookkeeper.bookie.IndexPersistenceMgr:findIndexFile(long ledgerId)
+{
+java.lang.String ledgerName;
+  java.util.Iterator l4;
+  java.io.File d;
+  org.apache.bookkeeper.bookie.LedgerDirsManager $stack8;
+  java.util.List $stack9;
+  boolean $stack11;
+  java.lang.Object $stack12;
+  java.io.File $stack13;
+  ledgerName = org.apache.bookkeeper.bookie.IndexPersistenceMgr.getLedgerName(ledgerId);
+ $stack8=this.ledgerDirsManager;
+ $stack9 = $stack8.getAllLedgerDirs();
+ l4 = $stack9.iterator();
+ label0:$stack11 = l4.hasNext();
+ if ($stack11==0) goto label1;
+ $stack12 = l4.next();
+ d=(java.io.File) $stack12;
+ $stack13=new java.io.File;
+ $stack13#java.io.File(d,ledgerName);
+ d=$stack13;
+ $stack11 = $stack13.exists();
+ if ($stack11==0) goto label2;
+ return  $stack13;
+ label2:goto label0;
+ label1:return  null;
+ } 
+

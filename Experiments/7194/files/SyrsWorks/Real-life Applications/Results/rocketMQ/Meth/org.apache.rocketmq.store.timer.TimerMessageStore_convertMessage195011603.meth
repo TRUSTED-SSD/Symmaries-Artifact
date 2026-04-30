@@ -1,0 +1,53 @@
+org.apache.rocketmq.common.message.MessageExtBrokerInner org.apache.rocketmq.store.timer.TimerMessageStore:convertMessage(org.apache.rocketmq.common.message.MessageExt msgExt,boolean needRoll)
+{
+org.apache.rocketmq.common.message.MessageExtBrokerInner msgInner;
+  org.apache.rocketmq.common.TopicFilterType topicFilterType;
+  long tagsCodeValue;
+  byte[] $stack8;
+  int $stack9;
+  java.util.Map $stack10;
+  java.lang.String $stack13;
+  java.net.SocketAddress $stack19;
+  msgInner=new org.apache.rocketmq.common.message.MessageExtBrokerInner;
+ msgInner#org.apache.rocketmq.common.message.MessageExtBrokerInner();
+ $stack8 = msgExt.getBody();
+ msgInner.setBody($stack8);
+ $stack9 = msgExt.getFlag();
+ msgInner.setFlag($stack9);
+ $stack10 = msgExt.getProperties();
+ org.apache.rocketmq.common.message.MessageAccessor.setProperties((org.apache.rocketmq.common.message.Message)msgInner,$stack10);
+ $stack9 = msgInner.getSysFlag();
+ topicFilterType = org.apache.rocketmq.common.message.MessageExt.parseTopicFilterType($stack9);
+ $stack13 = msgInner.getTags();
+ tagsCodeValue = org.apache.rocketmq.common.message.MessageExtBrokerInner.tagsString2tagsCode(topicFilterType,$stack13);
+ msgInner.setTagsCode(tagsCodeValue);
+ $stack10 = msgExt.getProperties();
+ $stack13 = org.apache.rocketmq.common.message.MessageDecoder.messageProperties2String($stack10);
+ msgInner.setPropertiesString($stack13);
+ $stack9 = msgExt.getSysFlag();
+ msgInner.setSysFlag($stack9);
+ tagsCodeValue = msgExt.getBornTimestamp();
+ msgInner.setBornTimestamp(tagsCodeValue);
+ $stack19 = msgExt.getBornHost();
+ msgInner.setBornHost($stack19);
+ $stack19 = msgExt.getStoreHost();
+ msgInner.setStoreHost($stack19);
+ $stack9 = msgExt.getReconsumeTimes();
+ msgInner.setReconsumeTimes($stack9);
+ msgInner.setWaitStoreMsgOK((boolean)0);
+ if (needRoll==0) goto label0;
+ $stack13 = msgExt.getTopic();
+ msgInner.setTopic($stack13);
+ $stack9 = msgExt.getQueueId();
+ msgInner.setQueueId($stack9);
+ goto label1;
+ label0:$stack13 = msgInner.getProperty("REAL_TOPIC");
+ msgInner.setTopic($stack13);
+ $stack13 = msgInner.getProperty("REAL_QID");
+ $stack9 = java.lang.Integer.parseInt($stack13);
+ msgInner.setQueueId($stack9);
+ org.apache.rocketmq.common.message.MessageAccessor.clearProperty((org.apache.rocketmq.common.message.Message)msgInner,"REAL_TOPIC");
+ org.apache.rocketmq.common.message.MessageAccessor.clearProperty((org.apache.rocketmq.common.message.Message)msgInner,"REAL_QID");
+ label1:return  msgInner;
+ } 
+

@@ -1,0 +1,32 @@
+    static int test(int)
+    {
+        int l0;
+        Aliasing$A l1, l2;
+
+        l0 := @parameter0: int;
+
+        l1 = new Aliasing$A;
+/*14*/
+
+        specialinvoke l1.<Aliasing$A: void <init>()>();
+/*14*/
+
+        l2 = new Aliasing$A;
+/*15*/
+
+        specialinvoke l2.<Aliasing$A: void <init>()>();
+/*15*/
+
+        l2 = l1;
+/*16*/
+
+        staticinvoke <Aliasing: void set(Aliasing$A,Aliasing$A,int)>(l1, l1, l0);
+/*17*/
+
+        l0 = l1.<Aliasing$A: int i>;
+/*18*/
+
+        return l0;
+/*18*/
+    }
+

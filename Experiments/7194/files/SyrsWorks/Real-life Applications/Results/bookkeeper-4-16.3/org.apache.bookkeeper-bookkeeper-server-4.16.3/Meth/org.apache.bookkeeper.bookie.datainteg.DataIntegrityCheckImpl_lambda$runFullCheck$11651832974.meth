@@ -1,0 +1,43 @@
+java.util.concurrent.CompletionStage org.apache.bookkeeper.bookie.datainteg.DataIntegrityCheckImpl:lambda$runFullCheck$11(java.lang.String runId,java.util.Map ledgers)
+{
+java.util.concurrent.CompletableFuture promise;
+  java.io.IOException ioe;
+  org.apache.bookkeeper.bookie.LedgerStorage $stack6;
+  boolean $stack7;
+  org.apache.bookkeeper.bookie.datainteg.Events $stack8;
+  org.slf4j.Logger $stack9;
+  org.apache.bookkeeper.bookie.LedgerStorage$StorageState $stack13;
+  java.lang.Object[] $stack22;
+  promise=new java.util.concurrent.CompletableFuture;
+ promise#java.util.concurrent.CompletableFuture();
+ label0:$stack6=this.ledgerStorage;
+ $stack6.flush();
+ $stack7 = ledgers.isEmpty();
+ if ($stack7==0) goto label1;
+ $stack9=org.apache.bookkeeper.bookie.datainteg.DataIntegrityCheckImpl.log;
+ $stack8=org.apache.bookkeeper.bookie.datainteg.Events.CLEAR_INTEGCHECK_FLAG;
+ dummyClass.lowSink("Event: {}, runId: {}");
+$stack9.info("Event: {}, runId: {}",(java.lang.Object)$stack8,(java.lang.Object)runId);
+ $stack6=this.ledgerStorage;
+ $stack13=org.apache.bookkeeper.bookie.LedgerStorage$StorageState.NEEDS_INTEGRITY_CHECK;
+ $stack6.clearStorageStateFlag($stack13);
+ label1:this.updateMetadataCache(ledgers);
+ $stack9=org.apache.bookkeeper.bookie.datainteg.DataIntegrityCheckImpl.log;
+ $stack8=org.apache.bookkeeper.bookie.datainteg.Events.FULL_CHECK_COMPLETE;
+ dummyClass.lowSink("Event: {}, runId: {}");
+$stack9.info("Event: {}, runId: {}",(java.lang.Object)$stack8,(java.lang.Object)runId);
+ promise.complete(null);
+ label2:goto label3;
+ label4:ioe = catch;
+ $stack9=org.apache.bookkeeper.bookie.datainteg.DataIntegrityCheckImpl.log;
+ $stack22=new java.lang.Object[3];
+ $stack8=org.apache.bookkeeper.bookie.datainteg.Events.FULL_CHECK_ERROR;
+ $stack22[0]=$stack8;
+ $stack22[1]=runId;
+ $stack22[2]=ioe;
+ $stack9.error("Event: {}, runId: {}",$stack22);
+ promise.completeExceptionally((java.lang.Throwable)ioe);
+ label3:return  promise;
+ catch java.io.IOException: label0 - label2 : label4;
+} 
+

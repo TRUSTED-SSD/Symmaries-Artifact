@@ -1,0 +1,35 @@
+static void org.apache.kerby.kerberos.kerb.response.ApResponse:validate(org.apache.kerby.kerberos.kerb.type.base.EncryptionKey encKey,org.apache.kerby.kerberos.kerb.type.ap.ApRep apRep,org.apache.kerby.kerberos.kerb.type.ap.ApReq apReqSent)
+{
+org.apache.kerby.kerberos.kerb.type.ap.EncAPRepPart encPart;
+  org.apache.kerby.kerberos.kerb.type.ap.Authenticator auth;
+  org.apache.kerby.kerberos.kerb.type.base.EncryptedData $stack5;
+  org.apache.kerby.kerberos.kerb.type.base.KeyUsage $stack6;
+  org.apache.kerby.asn1.type.Asn1Type $stack7;
+  org.apache.kerby.kerberos.kerb.type.KerberosTime $stack9;
+  org.apache.kerby.kerberos.kerb.type.KerberosTime $stack10;
+  boolean $stack11;
+  org.apache.kerby.kerberos.kerb.KrbException $stack12;
+  org.apache.kerby.kerberos.kerb.KrbErrorCode $stack13;
+  int $stack14;
+  int $stack15;
+  $stack5 = apRep.getEncryptedEncPart();
+ $stack6=org.apache.kerby.kerberos.kerb.type.base.KeyUsage.AP_REP_ENCPART;
+ $stack7 = org.apache.kerby.kerberos.kerb.common.EncryptionUtil.unseal($stack5,encKey,$stack6,org.apache.kerby.kerberos.kerb.type.ap.EncAPRepPart);
+ encPart=(org.apache.kerby.kerberos.kerb.type.ap.EncAPRepPart) $stack7;
+ apRep.setEncRepPart(encPart);
+ if (apReqSent==null) goto label0;
+ auth = apReqSent.getAuthenticator();
+ $stack9 = encPart.getCtime();
+ $stack10 = auth.getCtime();
+ $stack11 = $stack9.equals((java.lang.Object)$stack10);
+ if ($stack11==0) goto label1;
+ $stack14 = encPart.getCusec();
+ $stack15 = auth.getCusec();
+ if ($stack14==$stack15) goto label0;
+ label1:$stack12=new org.apache.kerby.kerberos.kerb.KrbException;
+ $stack13=org.apache.kerby.kerberos.kerb.KrbErrorCode.KRB_AP_ERR_MUT_FAIL;
+ $stack12#org.apache.kerby.kerberos.kerb.KrbException($stack13);
+ throw $stack12;
+ label0:return;
+ } 
+

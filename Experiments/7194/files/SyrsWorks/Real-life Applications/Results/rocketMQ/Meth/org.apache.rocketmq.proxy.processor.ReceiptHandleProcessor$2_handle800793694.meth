@@ -1,0 +1,37 @@
+void org.apache.rocketmq.proxy.processor.ReceiptHandleProcessor$2:handle(org.apache.rocketmq.broker.client.ConsumerGroupEvent event,java.lang.String group,java.lang.Object[] args)
+{
+org.apache.rocketmq.broker.client.ClientChannelInfo clientChannelInfo;
+  org.apache.rocketmq.broker.client.ConsumerGroupEvent $stack5;
+  boolean $stack6;
+  int $stack7;
+  java.lang.Object $stack8;
+  io.netty.channel.Channel $stack11;
+  org.apache.rocketmq.proxy.processor.ReceiptHandleProcessor$ReceiptHandleGroupKey $stack13;
+  org.apache.rocketmq.proxy.processor.ReceiptHandleProcessor $stack14;
+  org.apache.rocketmq.logging.org.slf4j.Logger $stack16;
+  $stack5=org.apache.rocketmq.broker.client.ConsumerGroupEvent.CLIENT_UNREGISTER;
+ $stack6 = $stack5.equals((java.lang.Object)event);
+ if ($stack6==0) goto label0;
+ if (args==null) goto label1;
+ $stack7=#args;
+ if ($stack7>=1) goto label2;
+ label1:return;
+ label2:$stack8=args[0];
+ $stack6=$stack8 instanceof org.apache.rocketmq.broker.client.ClientChannelInfo;
+ if ($stack6==0) goto label0;
+ $stack8=args[0];
+ clientChannelInfo=(org.apache.rocketmq.broker.client.ClientChannelInfo) $stack8;
+ $stack11 = clientChannelInfo.getChannel();
+ $stack6 = org.apache.rocketmq.proxy.common.channel.ChannelHelper.isRemote($stack11);
+ if ($stack6==0) goto label3;
+ return;
+ label3:$stack14=this.this$0;
+ $stack13=new org.apache.rocketmq.proxy.processor.ReceiptHandleProcessor$ReceiptHandleGroupKey;
+ $stack11 = clientChannelInfo.getChannel();
+ $stack13#org.apache.rocketmq.proxy.processor.ReceiptHandleProcessor$ReceiptHandleGroupKey($stack11,group);
+ $stack14#org.apache.rocketmq.proxy.processor.ReceiptHandleProcessor($stack13);
+ $stack16=org.apache.rocketmq.proxy.processor.ReceiptHandleProcessor.log;
+ $stack16.info("clear handle of this client when client unregister. group:{}, clientChannelInfo:{}",(java.lang.Object)group,(java.lang.Object)clientChannelInfo);
+ label0:return;
+ } 
+

@@ -1,0 +1,25 @@
+byte[] org.apache.bookkeeper.client.LedgerEntry:getEntry()
+{
+byte[] entry;
+  io.netty.buffer.ByteBuf $stack2;
+  int $stack4;
+  boolean $stack8;
+  $stack2=this.data;
+ if (null==$stack2) goto label0;
+ $stack8=1;
+ goto label1;
+ label0:$stack8=0;
+ label1:com.google.common.base.Preconditions.checkState($stack8,(java.lang.Object)"entry content can be accessed only once");
+ $stack2=this.data;
+ $stack4 = $stack2.readableBytes();
+dummyClass.highSourceMut($stack4);
+ entry=new byte[$stack4];
+ $stack2=this.data;
+ dummyClass.highSourceMut(entry);
+$stack2.readBytes(entry);
+ $stack2=this.data;
+ $stack2.release();
+ this.data=null;
+ return  entry;
+ } 
+

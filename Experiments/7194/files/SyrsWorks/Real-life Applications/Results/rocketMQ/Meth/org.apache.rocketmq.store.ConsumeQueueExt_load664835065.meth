@@ -1,0 +1,30 @@
+boolean org.apache.rocketmq.store.ConsumeQueueExt:load()
+{
+boolean result;
+  org.apache.rocketmq.store.MappedFileQueue $stack2;
+  java.lang.StringBuilder $stack4;
+  org.apache.rocketmq.logging.org.slf4j.Logger $stack5;
+  java.lang.String $stack7;
+  int $stack10;
+  $stack2=this.mappedFileQueue;
+ result = $stack2.load();
+ $stack5=org.apache.rocketmq.store.ConsumeQueueExt.log;
+ $stack4=new java.lang.StringBuilder;
+ $stack4#java.lang.StringBuilder();
+ $stack4 = $stack4.append("load consume queue extend");
+ $stack7=this.topic;
+ $stack4 = $stack4.append($stack7);
+ $stack4 = $stack4.append("-");
+ $stack10=this.queueId;
+ $stack4 = $stack4.append($stack10);
+ $stack4 = $stack4.append(" ");
+ if (result==0) goto label0;
+ $stack7="OK";
+ goto label1;
+ label0:$stack7="Failed";
+ label1:$stack4 = $stack4.append($stack7);
+ $stack7 = $stack4.toString();
+ $stack5.info($stack7);
+ return  result;
+ } 
+

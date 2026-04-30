@@ -1,0 +1,23 @@
+void org.apache.rocketmq.common.statistics.FutureHolder:cancelAll(java.lang.Object @t,boolean mayInterruptIfRunning)
+{
+java.util.concurrent.BlockingQueue list;
+  java.util.Iterator l4;
+  java.util.concurrent.Future future;
+  java.util.concurrent.ConcurrentMap $stack6;
+  boolean $stack9;
+  java.lang.Object t;
+t=@t;
+$stack6=this.futureMap;
+ t = $stack6.get(t);
+ list=(java.util.concurrent.BlockingQueue) t;
+ if (list==null) goto label0;
+ l4 = list.iterator();
+ label1:$stack9 = l4.hasNext();
+ if ($stack9==0) goto label0;
+ t = l4.next();
+ future=(java.util.concurrent.Future) t;
+ future.cancel(mayInterruptIfRunning);
+ goto label1;
+ label0:return;
+ } 
+

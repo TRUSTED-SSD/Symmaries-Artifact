@@ -1,0 +1,20 @@
+org.apache.rocketmq.common.message.MessageExtBrokerInner org.apache.rocketmq.broker.transaction.queue.TransactionalMessageBridge:renewImmunityHalfMessageInner(org.apache.rocketmq.common.message.MessageExt msgExt)
+{
+org.apache.rocketmq.common.message.MessageExtBrokerInner msgInner;
+  java.lang.String queueOffsetFromPrepare;
+  long $stack7;
+  java.util.Map $stack9;
+  msgInner = this.renewHalfMessageInner(msgExt);
+ queueOffsetFromPrepare = msgExt.getUserProperty("TRAN_PREPARED_QUEUE_OFFSET");
+ if (null==queueOffsetFromPrepare) goto label0;
+ org.apache.rocketmq.common.message.MessageAccessor.putProperty((org.apache.rocketmq.common.message.Message)msgInner,"TRAN_PREPARED_QUEUE_OFFSET",queueOffsetFromPrepare);
+ goto label1;
+ label0:$stack7 = msgExt.getQueueOffset();
+ queueOffsetFromPrepare = java.lang.String.valueOf($stack7);
+ org.apache.rocketmq.common.message.MessageAccessor.putProperty((org.apache.rocketmq.common.message.Message)msgInner,"TRAN_PREPARED_QUEUE_OFFSET",queueOffsetFromPrepare);
+ label1:$stack9 = msgInner.getProperties();
+ queueOffsetFromPrepare = org.apache.rocketmq.common.message.MessageDecoder.messageProperties2String($stack9);
+ msgInner.setPropertiesString(queueOffsetFromPrepare);
+ return  msgInner;
+ } 
+

@@ -1,0 +1,31 @@
+boolean io.openmessaging.rocketmq.promise.DefaultPromise:cancel(java.lang.Exception e)
+{
+java.lang.Object l2;
+  java.lang.Throwable l3;
+  java.lang.Object $stack4;
+  boolean $stack5;
+  io.openmessaging.rocketmq.promise.FutureState $stack6;
+  $stack4=this.lock;
+ l2=$stack4;
+ monitorenter $stack4;
+ label0:$stack5 = this#io.openmessaging.rocketmq.promise.DefaultPromise:isDoing();
+ if ($stack5!=0) goto label1;
+ monitorexit $stack4;
+ label2:return  0;
+ label1:$stack6=io.openmessaging.rocketmq.promise.FutureState.CANCELLED;
+ this.state=$stack6;
+ this.exception=e;
+ $stack4=this.lock;
+ $stack4.notifyAll();
+ monitorexit l2;
+ label3:goto label4;
+ label5:l3 = catch;
+ monitorexit l2;
+ label6:throw l3;
+ label4:this#io.openmessaging.rocketmq.promise.DefaultPromise:notifyListeners();
+ return  1;
+ catch java.lang.Throwable: label0 - label2 : label5;
+catch java.lang.Throwable: label1 - label3 : label5;
+catch java.lang.Throwable: label5 - label6 : label5;
+} 
+

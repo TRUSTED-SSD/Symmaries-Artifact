@@ -1,0 +1,50 @@
+    private static java.lang.Class[] getAnnotatedClasses(java.lang.Class) throws org.junit.runners.model.InitializationError
+    {
+        java.lang.Class klass;
+        org.junit.runners.Suite$SuiteClasses 'annotation';
+        java.lang.'annotation'.Annotation $stack2;
+        java.lang.Class[] $stack3;
+        org.junit.runners.model.InitializationError $stack4;
+        java.lang.Object[] $stack5;
+        java.lang.String $stack8;
+
+        klass := @parameter0: java.lang.Class;
+
+        $stack2 = virtualinvoke klass.<java.lang.Class: java.lang.'annotation'.Annotation getAnnotation(java.lang.Class)>(class "Lorg/junit/runners/Suite$SuiteClasses;");
+/*54*/
+
+        'annotation' = (org.junit.runners.Suite$SuiteClasses) $stack2;
+/*54*/
+
+        if 'annotation' != null goto label1;
+/*55*/
+
+        $stack4 = new org.junit.runners.model.InitializationError;
+/*56*/
+
+        $stack5 = newarray (java.lang.Object)[1];
+/*56*/
+
+        $stack8 = virtualinvoke klass.<java.lang.Class: java.lang.String getName()>();
+/*56*/
+
+        $stack5[0] = $stack8;
+/*56*/
+
+        $stack8 = staticinvoke <java.lang.String: java.lang.String format(java.lang.String,java.lang.Object[])>("class \'%s\' must have a SuiteClasses annotation", $stack5);
+/*56*/
+
+        specialinvoke $stack4.<org.junit.runners.model.InitializationError: void <init>(java.lang.String)>($stack8);
+/*56*/
+
+        throw $stack4;
+/*56*/
+
+     label1:
+        $stack3 = interfaceinvoke 'annotation'.<org.junit.runners.Suite$SuiteClasses: java.lang.Class[] value()>();
+/*58*/
+
+        return $stack3;
+/*58*/
+    }
+

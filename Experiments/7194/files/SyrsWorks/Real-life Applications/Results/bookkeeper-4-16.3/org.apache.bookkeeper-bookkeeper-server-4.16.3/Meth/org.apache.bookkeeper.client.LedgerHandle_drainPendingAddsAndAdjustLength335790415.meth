@@ -1,0 +1,27 @@
+java.util.List org.apache.bookkeeper.client.LedgerHandle:drainPendingAddsAndAdjustLength()
+{
+org.apache.bookkeeper.client.PendingAddOp pendingAddOp;
+  java.util.ArrayList opsDrained;
+  java.util.Queue $stack4;
+  int $stack5;
+  java.lang.Object $stack7;
+  org.apache.bookkeeper.client.PendingAddOp $stack8;
+  long $stack11;
+  opsDrained=new java.util.ArrayList;
+ $stack4=this.pendingAddOps;
+ $stack5 = $stack4.size();
+ opsDrained#java.util.ArrayList($stack5);
+ label0:$stack4=this.pendingAddOps;
+ $stack7 = $stack4.poll();
+ $stack8=(org.apache.bookkeeper.client.PendingAddOp) $stack7;
+ pendingAddOp=$stack8;
+ if ($stack8==null) goto label1;
+ $stack5=$stack8.entryLength;
+ $stack5= ! ($stack5);
+ $stack11=(long) $stack5;
+ this.addToLength($stack11);
+ opsDrained.add((java.lang.Object)$stack8);
+ goto label0;
+ label1:return  opsDrained;
+ } 
+

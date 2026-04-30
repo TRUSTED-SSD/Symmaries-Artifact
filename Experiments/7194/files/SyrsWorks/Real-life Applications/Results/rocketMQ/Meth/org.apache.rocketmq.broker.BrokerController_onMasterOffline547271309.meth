@@ -1,0 +1,27 @@
+void org.apache.rocketmq.broker.BrokerController:onMasterOffline()
+{
+java.lang.String masterAddr;
+  org.apache.rocketmq.broker.slave.SlaveSynchronize $stack2;
+  org.apache.rocketmq.store.MessageStore $stack5;
+  org.apache.rocketmq.broker.out.BrokerOuterAPI $stack6;
+  org.apache.rocketmq.remoting.RemotingClient $stack7;
+  java.lang.String[] $stack8;
+  java.util.List $stack11;
+  $stack2=this.slaveSynchronize;
+ masterAddr = $stack2.getMasterAddr();
+ if (masterAddr==null) goto label0;
+ $stack6=this.brokerOuterAPI;
+ $stack7 = $stack6.getRemotingClient();
+ $stack8=new java.lang.String[2];
+ $stack8[0]=masterAddr;
+ masterAddr = org.apache.rocketmq.common.MixAll.brokerVIPChannel((boolean)1,masterAddr);
+ $stack8[1]=masterAddr;
+ $stack11 = java.util.Arrays.asList((java.lang.Object[])$stack8);
+ $stack7.closeChannels($stack11);
+ label0:$stack2=this.slaveSynchronize;
+ $stack2.setMasterAddr(null);
+ $stack5=this.messageStore;
+ $stack5.updateHaMasterAddress(null);
+ return;
+ } 
+

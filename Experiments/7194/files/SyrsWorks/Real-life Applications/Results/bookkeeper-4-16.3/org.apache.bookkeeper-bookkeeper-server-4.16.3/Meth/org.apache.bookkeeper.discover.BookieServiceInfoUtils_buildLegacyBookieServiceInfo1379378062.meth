@@ -1,0 +1,34 @@
+static org.apache.bookkeeper.discover.BookieServiceInfo org.apache.bookkeeper.discover.BookieServiceInfoUtils:buildLegacyBookieServiceInfo(java.lang.String @bookieId)
+{
+org.apache.bookkeeper.net.BookieSocketAddress address;
+  org.apache.bookkeeper.discover.BookieServiceInfo$Endpoint endpoint;
+  int $stack6;
+  java.util.List $stack7;
+  org.apache.bookkeeper.discover.BookieServiceInfo $stack9;
+  java.util.Map $stack10;
+  org.apache.bookkeeper.discover.BookieServiceInfo$Endpoint[] $stack11;
+  java.lang.String bookieId;
+bookieId=@bookieId;
+address=new org.apache.bookkeeper.net.BookieSocketAddress;
+ address#org.apache.bookkeeper.net.BookieSocketAddress(bookieId);
+ endpoint=new org.apache.bookkeeper.discover.BookieServiceInfo$Endpoint;
+ endpoint#org.apache.bookkeeper.discover.BookieServiceInfo$Endpoint();
+ endpoint.setId(bookieId);
+ bookieId = address.getHostName();
+ endpoint.setHost(bookieId);
+ $stack6 = address.getPort();
+ endpoint.setPort($stack6);
+ endpoint.setProtocol("bookie-rpc");
+ $stack7 = java.util.Collections.emptyList();
+ endpoint.setAuth($stack7);
+ $stack7 = java.util.Collections.emptyList();
+ endpoint.setExtensions($stack7);
+ $stack9=new org.apache.bookkeeper.discover.BookieServiceInfo;
+ $stack10 = java.util.Collections.emptyMap();
+ $stack11=new org.apache.bookkeeper.discover.BookieServiceInfo$Endpoint[1];
+ $stack11[0]=endpoint;
+ $stack7 = java.util.Arrays.asList((java.lang.Object[])$stack11);
+ $stack9#org.apache.bookkeeper.discover.BookieServiceInfo($stack10,$stack7);
+ return  $stack9;
+ } 
+

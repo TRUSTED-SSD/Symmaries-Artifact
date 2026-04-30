@@ -1,0 +1,57 @@
+org.apache.rocketmq.remoting.protocol.body.ConsumerRunningInfo org.apache.rocketmq.client.impl.factory.MQClientInstance:consumerRunningInfo(java.lang.String @consumerGroup)
+{
+org.apache.rocketmq.client.impl.consumer.MQConsumerInner mqConsumerInner;
+  org.apache.rocketmq.remoting.protocol.body.ConsumerRunningInfo consumerRunningInfo;
+  java.util.List nsList;
+  java.lang.StringBuilder strBuilder;
+  java.lang.Object nsAddr;
+  java.util.concurrent.ConcurrentMap $stack8;
+  org.apache.rocketmq.client.impl.MQClientAPIImpl $stack11;
+  org.apache.rocketmq.remoting.RemotingClient $stack12;
+  java.util.Properties $stack16;
+  org.apache.rocketmq.remoting.protocol.heartbeat.ConsumeType $stack20;
+  int $stack24;
+  boolean $stack29;
+  java.lang.Object $stack38;
+  java.lang.StringBuilder $stack39;
+  java.util.Iterator tmp$1396577153;
+  java.lang.String consumerGroup;
+consumerGroup=@consumerGroup;
+$stack8=this.consumerTable;
+ nsAddr = $stack8.get((java.lang.Object)consumerGroup);
+ mqConsumerInner=(org.apache.rocketmq.client.impl.consumer.MQConsumerInner) nsAddr;
+ if (mqConsumerInner!=null) goto label0;
+ return  null;
+ label0:consumerRunningInfo = mqConsumerInner.consumerRunningInfo();
+ $stack11=this.mQClientAPIImpl;
+ $stack12 = $stack11.getRemotingClient();
+ nsList = $stack12.getNameServerAddressList();
+ $stack39=new java.lang.StringBuilder;
+ strBuilder=$stack39;
+ $stack39#java.lang.StringBuilder();
+ strBuilder=$stack39;
+ if (nsList==null) goto label1;
+ nsAddr = nsList.iterator();
+ label2:tmp$1396577153=(java.util.Iterator) nsAddr;
+ $stack29 = tmp$1396577153.hasNext();
+ if ($stack29==0) goto label1;
+ tmp$1396577153=(java.util.Iterator) nsAddr;
+ $stack38 = tmp$1396577153.next();
+ consumerGroup=(java.lang.String) $stack38;
+ $stack39 = strBuilder.append(consumerGroup);
+ $stack39.append(";");
+ goto label2;
+ label1:nsAddr = strBuilder.toString();
+ $stack16 = consumerRunningInfo.getProperties();
+ $stack16.put((java.lang.Object)"PROP_NAMESERVER_ADDR",nsAddr);
+ $stack16 = consumerRunningInfo.getProperties();
+ $stack20 = mqConsumerInner.consumeType();
+ consumerGroup = $stack20.name();
+ $stack16.put((java.lang.Object)"PROP_CONSUME_TYPE",(java.lang.Object)consumerGroup);
+ $stack16 = consumerRunningInfo.getProperties();
+ $stack24=org.apache.rocketmq.common.MQVersion.CURRENT_VERSION;
+ consumerGroup = org.apache.rocketmq.common.MQVersion.getVersionDesc($stack24);
+ $stack16.put((java.lang.Object)"PROP_CLIENT_VERSION",(java.lang.Object)consumerGroup);
+ return  consumerRunningInfo;
+ } 
+

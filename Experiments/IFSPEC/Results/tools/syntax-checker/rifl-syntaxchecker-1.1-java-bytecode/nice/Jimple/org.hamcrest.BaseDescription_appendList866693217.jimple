@@ -1,0 +1,63 @@
+    private org.hamcrest.Description appendList(java.lang.String, java.lang.String, java.lang.String, java.util.Iterator)
+    {
+        org.hamcrest.BaseDescription this;
+        java.lang.String start, separator, end;
+        java.util.Iterator i;
+        boolean separate, $stack6;
+        java.lang.Object $stack7;
+        org.hamcrest.SelfDescribing $stack8;
+
+        this := @this: org.hamcrest.BaseDescription;
+
+        start := @parameter0: java.lang.String;
+
+        separator := @parameter1: java.lang.String;
+
+        end := @parameter2: java.lang.String;
+
+        i := @parameter3: java.util.Iterator;
+
+        separate = 0;
+/*89*/
+
+        virtualinvoke this.<org.hamcrest.BaseDescription: void append(java.lang.String)>(start);
+/*91*/
+
+     label1:
+        $stack6 = interfaceinvoke i.<java.util.Iterator: boolean hasNext()>();
+/*92*/
+
+        if $stack6 == 0 goto label3;
+/*92*/
+
+        if separate == 0 goto label2;
+/*93*/
+
+        virtualinvoke this.<org.hamcrest.BaseDescription: void append(java.lang.String)>(separator);
+/*92*/
+
+     label2:
+        $stack7 = interfaceinvoke i.<java.util.Iterator: java.lang.Object next()>();
+/*94*/
+
+        $stack8 = (org.hamcrest.SelfDescribing) $stack7;
+/*94*/
+
+        virtualinvoke this.<org.hamcrest.BaseDescription: org.hamcrest.Description appendDescriptionOf(org.hamcrest.SelfDescribing)>($stack8);
+/*94*/
+
+        separate = 1;
+/*95*/
+/*95*/
+
+        goto label1;
+/*95*/
+
+     label3:
+        virtualinvoke this.<org.hamcrest.BaseDescription: void append(java.lang.String)>(end);
+/*97*/
+
+        return this;
+/*99*/
+    }
+

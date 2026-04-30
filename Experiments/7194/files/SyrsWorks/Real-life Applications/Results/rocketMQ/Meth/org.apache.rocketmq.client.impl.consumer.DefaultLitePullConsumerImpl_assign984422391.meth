@@ -1,0 +1,25 @@
+void org.apache.rocketmq.client.impl.consumer.DefaultLitePullConsumerImpl:assign(java.util.Collection messageQueues)
+{
+java.lang.IllegalArgumentException $stack2;
+  boolean $stack3;
+  org.apache.rocketmq.client.impl.consumer.DefaultLitePullConsumerImpl$SubscriptionType $stack4;
+  org.apache.rocketmq.client.impl.consumer.AssignedMessageQueue $stack5;
+  org.apache.rocketmq.common.ServiceState $stack6;
+  org.apache.rocketmq.common.ServiceState $stack7;
+  if (messageQueues==null) goto label0;
+ $stack3 = messageQueues.isEmpty();
+ if ($stack3==0) goto label1;
+ label0:$stack2=new java.lang.IllegalArgumentException;
+ $stack2#java.lang.IllegalArgumentException("Message queues can not be null or empty.");
+ throw $stack2;
+ label1:$stack4=org.apache.rocketmq.client.impl.consumer.DefaultLitePullConsumerImpl$SubscriptionType.ASSIGN;
+ this#org.apache.rocketmq.client.impl.consumer.DefaultLitePullConsumerImpl:setSubscriptionType($stack4);
+ $stack5=this.assignedMessageQueue;
+ $stack5.updateAssignedMessageQueue(messageQueues);
+ $stack7=this.serviceState;
+ $stack6=org.apache.rocketmq.common.ServiceState.RUNNING;
+ if ($stack7!=$stack6) goto label2;
+ this#org.apache.rocketmq.client.impl.consumer.DefaultLitePullConsumerImpl:updateAssignPullTask(messageQueues);
+ label2:return;
+ } 
+

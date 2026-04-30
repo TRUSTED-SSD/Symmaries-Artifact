@@ -1,0 +1,39 @@
+org.apache.rocketmq.common.message.MessageExtBrokerInner org.apache.rocketmq.broker.transaction.queue.TransactionalMessageBridge:makeOpMessageInner(org.apache.rocketmq.common.message.Message message,org.apache.rocketmq.common.message.MessageQueue messageQueue)
+{
+org.apache.rocketmq.common.message.MessageExtBrokerInner msgInner;
+  java.lang.String $stack5;
+  byte[] $stack6;
+  int $stack7;
+  long $stack10;
+  java.util.Map $stack11;
+  java.net.SocketAddress $stack15;
+  msgInner=new org.apache.rocketmq.common.message.MessageExtBrokerInner;
+ msgInner#org.apache.rocketmq.common.message.MessageExtBrokerInner();
+ $stack5 = message.getTopic();
+ msgInner.setTopic($stack5);
+ $stack6 = message.getBody();
+ msgInner.setBody($stack6);
+ $stack7 = messageQueue.getQueueId();
+ msgInner.setQueueId($stack7);
+ $stack5 = message.getTags();
+ msgInner.setTags($stack5);
+ $stack5 = msgInner.getTags();
+ $stack10 = org.apache.rocketmq.common.message.MessageExtBrokerInner.tagsString2tagsCode($stack5);
+ msgInner.setTagsCode($stack10);
+ msgInner.setSysFlag(0);
+ $stack11 = message.getProperties();
+ org.apache.rocketmq.common.message.MessageAccessor.setProperties((org.apache.rocketmq.common.message.Message)msgInner,$stack11);
+ $stack11 = message.getProperties();
+ $stack5 = org.apache.rocketmq.common.message.MessageDecoder.messageProperties2String($stack11);
+ msgInner.setPropertiesString($stack5);
+ $stack10 = java.lang.System.currentTimeMillis();
+ msgInner.setBornTimestamp($stack10);
+ $stack15=this.storeHost;
+ msgInner.setBornHost($stack15);
+ $stack15=this.storeHost;
+ msgInner.setStoreHost($stack15);
+ msgInner.setWaitStoreMsgOK((boolean)0);
+ org.apache.rocketmq.common.message.MessageClientIDSetter.setUniqID((org.apache.rocketmq.common.message.Message)msgInner);
+ return  msgInner;
+ } 
+

@@ -1,0 +1,35 @@
+void com.google.zxing.common.BitArray:appendBits(int value,int numBits)
+{
+int nextSize;
+  java.lang.IllegalArgumentException $stack5;
+  int $stack6;
+  int[] $stack11;
+  int $stack12;
+  int $stack14;
+  if (numBits<0) goto label0;
+ if (numBits<=32) goto label1;
+ label0:$stack5=new java.lang.IllegalArgumentException;
+ $stack5#java.lang.IllegalArgumentException("Num bits must be between 0 and 32");
+ throw $stack5;
+ label1:nextSize=this.size;
+ $stack6=(nextSize+numBits);
+ this#com.google.zxing.common.BitArray($stack6);
+ numBits=(numBits-1);
+ label2:if (numBits<0) goto label3;
+ $stack6=(1<<numBits);
+ $stack6=(value & $stack6);
+ if ($stack6==0) goto label4;
+ $stack11=this.bits;
+ $stack6=(nextSize/32);
+ $stack14=$stack11[$stack6];
+ $stack12=(nextSize & 31);
+ $stack12=(1<<$stack12);
+ $stack14=($stack14 | $stack12);
+ $stack11[$stack6]=$stack14;
+ label4:nextSize=(nextSize+1);
+ numBits=(numBits+-1);
+ goto label2;
+ label3:this.size=nextSize;
+ return;
+ } 
+

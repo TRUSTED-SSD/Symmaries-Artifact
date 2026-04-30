@@ -1,0 +1,18 @@
+digraph G {
+  node [shape=box, ];
+  "pc0_js1" [label="〈this.write ((int) c0), js1〉\n\
+pc ⊑ ⊥ ∧ level(c0) ⊔ level(this) ⊔ obj_level(this) ⊑ ⊥",
+             ];
+  "pc1_js1" [label="〈return, js1〉", ];
+  "pc2_js1" [label="〈sink, js1〉\n\
+obj_level(this) ⊑ ret(obj_level(this))' ∧ (ret(this.><this)' ∨ ¬this.><this)",
+             ];
+  
+  
+  "pc0_js1" -> "pc1_js1" [label="tt,\n\
+{obj_level(this) := pc ⊔ level(c0) ⊔ level(this) ⊔ obj_level(this)}",
+                          ];
+  "pc1_js1" -> "pc2_js1" [label="tt,\n\
+{ϕ := S1}", ];
+  
+  }

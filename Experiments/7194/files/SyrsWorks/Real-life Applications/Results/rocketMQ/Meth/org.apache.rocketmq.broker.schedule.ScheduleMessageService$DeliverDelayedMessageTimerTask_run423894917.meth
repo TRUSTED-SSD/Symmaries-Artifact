@@ -1,0 +1,21 @@
+void org.apache.rocketmq.broker.schedule.ScheduleMessageService$DeliverDelayedMessageTimerTask:run()
+{
+org.apache.rocketmq.broker.schedule.ScheduleMessageService $stack2;
+  boolean $stack3;
+  java.lang.Exception $stack4;
+  org.apache.rocketmq.logging.org.slf4j.Logger $stack5;
+  long $stack6;
+  label0:$stack2=this.this$0;
+ $stack3 = $stack2.isStarted();
+ if ($stack3==0) goto label1;
+ this.executeOnTimeup();
+ label1:goto label2;
+ label3:$stack4 = catch;
+ $stack5 = org.apache.rocketmq.broker.schedule.ScheduleMessageService.access$000();
+ $stack5.error("ScheduleMessageService, executeOnTimeup exception",(java.lang.Throwable)$stack4);
+ $stack6=this.offset;
+ this.scheduleNextTimerTask($stack6,10000L);
+ label2:return;
+ catch java.lang.Exception: label0 - label1 : label3;
+} 
+

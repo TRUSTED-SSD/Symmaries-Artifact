@@ -1,0 +1,45 @@
+void org.apache.rocketmq.controller.ControllerManager:doNotifyBrokerRoleChanged(java.lang.String brokerAddr,java.lang.Long brokerId,org.apache.rocketmq.remoting.protocol.header.controller.ElectMasterResponseHeader responseHeader)
+{
+org.apache.rocketmq.remoting.protocol.RemotingCommand request;
+  java.lang.CharSequence[] $stack7;
+  boolean $stack8;
+  java.lang.Object[] $stack9;
+  org.apache.rocketmq.logging.org.slf4j.Logger $stack10;
+  org.apache.rocketmq.remoting.protocol.header.NotifyBrokerRoleChangedRequestHeader $stack11;
+  java.lang.String $stack12;
+  int $stack13;
+  int $stack14;
+  long $stack15;
+  org.apache.rocketmq.remoting.RemotingClient $stack17;
+  java.lang.Exception $stack18;
+  $stack7=new java.lang.CharSequence[1];
+ $stack7[0]=brokerAddr;
+ $stack8 = org.apache.commons.lang3.StringUtils.isNoneEmpty($stack7);
+ if ($stack8==0) goto label0;
+ $stack10=org.apache.rocketmq.controller.ControllerManager.log;
+ $stack9=new java.lang.Object[3];
+ $stack9[0]=brokerAddr;
+ $stack9[1]=brokerId;
+ $stack9[2]=responseHeader;
+ $stack10.info("Try notify broker {} with id {} that role changed, responseHeader:{}",$stack9);
+ $stack11=new org.apache.rocketmq.remoting.protocol.header.NotifyBrokerRoleChangedRequestHeader;
+ $stack12 = responseHeader.getNewMasterAddress();
+ $stack13 = responseHeader.getMasterEpoch();
+ $stack14 = responseHeader.getSyncStateSetEpoch();
+ $stack15 = brokerId.longValue();
+ $stack11#org.apache.rocketmq.remoting.protocol.header.NotifyBrokerRoleChangedRequestHeader($stack12,$stack13,$stack14,$stack15);
+ request = org.apache.rocketmq.remoting.protocol.RemotingCommand.createRequestCommand(1008,(org.apache.rocketmq.remoting.CommandCustomHeader)$stack11);
+ label1:$stack17=this.remotingClient;
+ $stack17.invokeOneway(brokerAddr,request,3000L);
+ label2:goto label0;
+ label3:$stack18 = catch;
+ $stack10=org.apache.rocketmq.controller.ControllerManager.log;
+ $stack9=new java.lang.Object[3];
+ $stack9[0]=brokerAddr;
+ $stack9[1]=brokerId;
+ $stack9[2]=$stack18;
+ $stack10.error("Failed to notify broker {} with id {} that role changed",$stack9);
+ label0:return;
+ catch java.lang.Exception: label1 - label2 : label3;
+} 
+

@@ -1,0 +1,45 @@
+void org.apache.bookkeeper.client.LedgerRecoveryOp:submitCallback(int rc)
+{
+org.apache.bookkeeper.client.ClientContext $stack2;
+  org.apache.bookkeeper.client.BookKeeperClientStats $stack3;
+  org.apache.bookkeeper.stats.OpStatsLogger $stack4;
+  java.util.concurrent.atomic.AtomicLong $stack5;
+  long $stack6;
+  java.util.concurrent.CompletableFuture $stack12;
+  org.apache.bookkeeper.client.BKException $stack13;
+  org.apache.bookkeeper.client.LedgerHandle $stack25;
+  if (0!=rc) goto label0;
+ $stack2=this.clientCtx;
+ $stack3 = $stack2.getClientStats();
+ $stack4 = $stack3.getRecoverAddCountLogger();
+ $stack5=this.writeCount;
+ $stack6 = $stack5.get();
+ $stack4.registerSuccessfulValue($stack6);
+ $stack2=this.clientCtx;
+ $stack3 = $stack2.getClientStats();
+ $stack4 = $stack3.getRecoverReadCountLogger();
+ $stack5=this.readCount;
+ $stack6 = $stack5.get();
+ $stack4.registerSuccessfulValue($stack6);
+ $stack12=this.promise;
+ $stack25=this.lh;
+ $stack12.complete((java.lang.Object)$stack25);
+ goto label1;
+ label0:$stack2=this.clientCtx;
+ $stack3 = $stack2.getClientStats();
+ $stack4 = $stack3.getRecoverAddCountLogger();
+ $stack5=this.writeCount;
+ $stack6 = $stack5.get();
+ $stack4.registerFailedValue($stack6);
+ $stack2=this.clientCtx;
+ $stack3 = $stack2.getClientStats();
+ $stack4 = $stack3.getRecoverReadCountLogger();
+ $stack5=this.readCount;
+ $stack6 = $stack5.get();
+ $stack4.registerFailedValue($stack6);
+ $stack12=this.promise;
+ $stack13 = org.apache.bookkeeper.client.BKException.create(rc);
+ $stack12.completeExceptionally((java.lang.Throwable)$stack13);
+ label1:return;
+ } 
+

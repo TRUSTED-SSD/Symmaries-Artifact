@@ -1,0 +1,47 @@
+static com.google.zxing.common.BitMatrix com.google.zxing.pdf417.PDF417Writer:bitMatrixFromEncoder(com.google.zxing.pdf417.encoder.PDF417 encoder,java.lang.String contents,int errorCorrectionLevel,int width,int height,int margin,boolean autoECI)
+{
+byte aspectRatio;
+  byte[][] originalScale;
+  com.google.zxing.pdf417.encoder.BarcodeMatrix $stack14;
+  byte[] $stack16;
+  int $stack18;
+  com.google.zxing.common.BitMatrix $stack23;
+  boolean $stack43;
+  boolean $stack44;
+  encoder.generateBarcodeLogic(contents,errorCorrectionLevel,autoECI);
+ aspectRatio=4;
+ $stack14 = encoder.getBarcodeMatrix();
+ originalScale = $stack14.getScaledMatrix(1,4);
+ autoECI=0;
+ if (height<=width) goto label0;
+ $stack44=1;
+ goto label1;
+ label0:$stack44=0;
+ label1:$stack16=originalScale[0];
+ $stack18=#$stack16;
+ errorCorrectionLevel=#originalScale;
+ if ($stack18>=errorCorrectionLevel) goto label2;
+ $stack43=1;
+ goto label3;
+ label2:$stack43=0;
+ label3:if ($stack44==$stack43) goto label4;
+ originalScale = com.google.zxing.pdf417.PDF417Writer.rotateArray(originalScale);
+ autoECI=1;
+ label4:$stack16=originalScale[0];
+ $stack18=#$stack16;
+ errorCorrectionLevel=#originalScale;
+ width=(width/$stack18);
+ errorCorrectionLevel=(height/errorCorrectionLevel);
+ errorCorrectionLevel = java.lang.Math.min(width,errorCorrectionLevel);
+ if (errorCorrectionLevel<=1) goto label5;
+ $stack14 = encoder.getBarcodeMatrix();
+ width=(errorCorrectionLevel * 4);
+ originalScale = $stack14.getScaledMatrix(errorCorrectionLevel,width);
+ if (autoECI==0) goto label6;
+ originalScale = com.google.zxing.pdf417.PDF417Writer.rotateArray(originalScale);
+ label6:$stack23 = com.google.zxing.pdf417.PDF417Writer.bitMatrixFromBitArray(originalScale,margin);
+ return  $stack23;
+ label5:$stack23 = com.google.zxing.pdf417.PDF417Writer.bitMatrixFromBitArray(originalScale,margin);
+ return  $stack23;
+ } 
+

@@ -1,0 +1,33 @@
+org.apache.bookkeeper.api.kv.impl.result.KeyValueImpl org.apache.bookkeeper.statelib.impl.mvcc.MVCCRecord:asKVRecord(org.apache.bookkeeper.api.kv.impl.result.KeyValueFactory recordFactory,java.lang.Object @key,org.apache.bookkeeper.common.coder.Coder valCoder)
+{
+org.apache.bookkeeper.api.kv.impl.result.KeyValueImpl $stack4;
+  io.netty.buffer.ByteBuf $stack6;
+  long $stack9;
+  org.apache.bookkeeper.stream.proto.kv.store.ValueType $stack15;
+  org.apache.bookkeeper.stream.proto.kv.store.ValueType $stack16;
+  boolean $stack20;
+  java.lang.Object key;
+key=@key;
+$stack4 = recordFactory.newKv();
+ $stack4 = $stack4.key(key);
+ $stack6=this.value;
+ key = valCoder.decode($stack6);
+ $stack4 = $stack4.value(key);
+ $stack9=this.createRev;
+ $stack4 = $stack4.createRevision($stack9);
+ $stack9=this.modRev;
+ $stack4 = $stack4.modifiedRevision($stack9);
+ $stack9=this.version;
+ $stack4 = $stack4.version($stack9);
+ $stack16=org.apache.bookkeeper.stream.proto.kv.store.ValueType.NUMBER;
+ $stack15=this.valueType;
+ if ($stack16!=$stack15) goto label0;
+ $stack20=1;
+ goto label1;
+ label0:$stack20=0;
+ label1:$stack4 = $stack4.isNumber($stack20);
+ $stack9=this.number;
+ $stack4 = $stack4.numberValue($stack9);
+ return  $stack4;
+ } 
+

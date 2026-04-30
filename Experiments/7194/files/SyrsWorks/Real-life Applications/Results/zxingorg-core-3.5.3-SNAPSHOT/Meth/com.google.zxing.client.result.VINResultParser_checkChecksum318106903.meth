@@ -1,0 +1,30 @@
+static boolean com.google.zxing.client.result.VINResultParser:checkChecksum(java.lang.CharSequence vin)
+{
+int sum;
+  int i;
+  char expectedCheckChar;
+  int $stack4;
+  boolean $stack8;
+  int $stack12;
+  sum=0;
+ i=0;
+ label0:$stack4 = vin.length();
+ if (i>=$stack4) goto label1;
+ $stack4=(i+1);
+ $stack4 = com.google.zxing.client.result.VINResultParser.vinPositionWeight($stack4);
+ expectedCheckChar = vin.charAt(i);
+ $stack12 = com.google.zxing.client.result.VINResultParser.vinCharValue(expectedCheckChar);
+ $stack4=($stack4 * $stack12);
+ sum=(sum+$stack4);
+ i=(i+1);
+ goto label0;
+ label1:i = vin.charAt(8);
+ sum=(sum%11);
+ expectedCheckChar = com.google.zxing.client.result.VINResultParser.checkChar(sum);
+ if (i!=expectedCheckChar) goto label2;
+ $stack8=1;
+ goto label3;
+ label2:$stack8=0;
+ label3:return  $stack8;
+ } 
+

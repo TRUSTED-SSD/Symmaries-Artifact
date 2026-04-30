@@ -1,0 +1,41 @@
+void org.apache.bookkeeper.client.PendingAddOp:sendWriteRequest(java.util.List ensemble,int bookieIndex)
+{
+boolean $stack4;
+  org.apache.bookkeeper.client.ClientContext $stack5;
+  org.apache.bookkeeper.proto.BookieClient $stack6;
+  java.lang.Object $stack7;
+  org.apache.bookkeeper.client.LedgerHandle $stack8;
+  org.apache.bookkeeper.net.BookieId $stack10;
+  long $stack11;
+  byte[] $stack12;
+  long $stack13;
+  io.netty.util.ReferenceCounted $stack14;
+  java.lang.Integer $stack15;
+  java.util.EnumSet $stack17;
+  byte $stack21;
+  $stack4=this.isRecoveryAdd;
+ if ($stack4==0) goto label0;
+ $stack21=6;
+ goto label1;
+ label0:$stack21=0;
+ label1:$stack5=this.clientCtx;
+ $stack6 = $stack5.getBookieClient();
+ $stack7 = ensemble.get(bookieIndex);
+ $stack10=(org.apache.bookkeeper.net.BookieId) $stack7;
+ $stack8=this.lh;
+ $stack11=$stack8.ledgerId;
+ $stack8=this.lh;
+ $stack12=$stack8.ledgerKey;
+ $stack13=this.entryId;
+ $stack14=this.toSend;
+ $stack15 = java.lang.Integer.valueOf(bookieIndex);
+ $stack4=this.allowFailFast;
+ $stack8=this.lh;
+ $stack17=$stack8.writeFlags;
+ $stack6.addEntry($stack10,$stack11,$stack12,$stack13,$stack14,(org.apache.bookkeeper.proto.BookkeeperInternalCallbacks$WriteCallback)this,(java.lang.Object)$stack15,(int)$stack21,$stack4,$stack17);
+ bookieIndex=this.pendingWriteRequests;
+ bookieIndex=(bookieIndex+1);
+ this.pendingWriteRequests=bookieIndex;
+ return;
+ } 
+

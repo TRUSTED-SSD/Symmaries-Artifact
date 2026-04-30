@@ -1,0 +1,50 @@
+static int org.apache.kerby.kerberos.kerb.crypto.util.BytesUtil:bytes2int(byte[] bytes,int offset,boolean bigEndian)
+{
+int val;
+  int $stack4;
+  byte $stack5;
+  short $stack6;
+  val=0;
+ if (bigEndian==0) goto label0;
+ $stack4=(offset+0);
+ $stack5=bytes[$stack4];
+ $stack6=($stack5 & 255);
+ $stack4=($stack6<<24);
+ val=(0+$stack4);
+ $stack4=(offset+1);
+ $stack5=bytes[$stack4];
+ $stack6=($stack5 & 255);
+ $stack4=($stack6<<16);
+ val=(val+$stack4);
+ $stack4=(offset+2);
+ $stack5=bytes[$stack4];
+ $stack6=($stack5 & 255);
+ $stack4=($stack6<<8);
+ val=(val+$stack4);
+ offset=(offset+3);
+ $stack5=bytes[offset];
+ $stack6=($stack5 & 255);
+ val=(val+$stack6);
+ goto label1;
+ label0:$stack4=(offset+3);
+ $stack5=bytes[$stack4];
+ $stack6=($stack5 & 255);
+ $stack4=($stack6<<24);
+ val=(0+$stack4);
+ $stack4=(offset+2);
+ $stack5=bytes[$stack4];
+ $stack6=($stack5 & 255);
+ $stack4=($stack6<<16);
+ val=(val+$stack4);
+ $stack4=(offset+1);
+ $stack5=bytes[$stack4];
+ $stack6=($stack5 & 255);
+ $stack4=($stack6<<8);
+ val=(val+$stack4);
+ offset=(offset+0);
+ $stack5=bytes[offset];
+ $stack6=($stack5 & 255);
+ val=(val+$stack6);
+ label1:return  val;
+ } 
+

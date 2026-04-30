@@ -1,0 +1,38 @@
+float java.io.ObjectInputStream$BlockDataInputStream:readFloat()
+{
+float f0;
+  boolean $z0;
+  int $i0;
+  int $i1;
+  int $i2;
+  int $i3;
+  byte[] $r1;
+  int $i4;
+  int $i5;
+  java.io.DataInputStream $r2;
+  float $f1;
+  byte[] $r3;
+  java.io.ObjectInputStream$PeekInputStream $r4;
+  $z0=this.blkmode;
+ if ($z0!=0) goto label0;
+ this.pos=0;
+ $r4=this.in;
+ $r3=this.buf;
+ $r4.readFully($r3,0,4);
+ goto label1;
+ label0:$i1=this.end;
+ $i0=this.pos;
+ $i2=($i1-$i0);
+ if ($i2>=4) goto label1;
+ $r2=this.din;
+ $f1 = $r2.readFloat();
+ return  $f1;
+ label1:$r1=this.buf;
+ $i3=this.pos;
+ f0 = java.io.Bits.getFloat($r1,$i3);
+ $i4=this.pos;
+ $i5=($i4+4);
+ this.pos=$i5;
+ return  f0;
+ }  
+

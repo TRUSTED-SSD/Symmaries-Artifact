@@ -1,0 +1,20 @@
+void org.apache.rocketmq.broker.topic.TopicConfigManager:initStateVersion()
+{
+org.apache.rocketmq.broker.BrokerController $stack3;
+  org.apache.rocketmq.store.MessageStore $stack4;
+  org.apache.rocketmq.remoting.protocol.DataVersion $stack5;
+  long $stack8;
+  $stack3=this.brokerController;
+ $stack4 = $stack3.getMessageStore();
+ if ($stack4==null) goto label0;
+ $stack3=this.brokerController;
+ $stack4 = $stack3.getMessageStore();
+ $stack8 = $stack4.getStateMachineVersion();
+ goto label1;
+ label0:$stack8=0L;
+ label1:$stack5=this.dataVersion;
+ $stack5.nextVersion($stack8);
+ this.persist();
+ return;
+ } 
+

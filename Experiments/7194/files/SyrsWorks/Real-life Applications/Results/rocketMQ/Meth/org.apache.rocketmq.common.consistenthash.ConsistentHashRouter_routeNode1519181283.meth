@@ -1,0 +1,34 @@
+org.apache.rocketmq.common.consistenthash.Node org.apache.rocketmq.common.consistenthash.ConsistentHashRouter:routeNode(java.lang.String objectKey)
+{
+java.lang.Long hashVal;
+  java.util.SortedMap tailMap;
+  boolean $stack6;
+  org.apache.rocketmq.common.consistenthash.HashFunction $stack7;
+  long $stack8;
+  java.lang.Object $stack14;
+  org.apache.rocketmq.common.consistenthash.VirtualNode $stack17;
+  org.apache.rocketmq.common.consistenthash.Node $stack18;
+  tailMap=this.ring;
+ $stack6 = tailMap.isEmpty();
+ if ($stack6==0) goto label0;
+ return  null;
+ label0:$stack7=this.hashFunction;
+ $stack8 = $stack7.hash(objectKey);
+ hashVal = java.lang.Long.valueOf($stack8);
+ tailMap=this.ring;
+ tailMap = tailMap.tailMap((java.lang.Object)hashVal);
+ $stack6 = tailMap.isEmpty();
+ if ($stack6!=0) goto label1;
+ $stack14 = tailMap.firstKey();
+ hashVal=(java.lang.Long) $stack14;
+ goto label2;
+ label1:tailMap=this.ring;
+ $stack14 = tailMap.firstKey();
+ hashVal=(java.lang.Long) $stack14;
+ label2:tailMap=this.ring;
+ $stack14 = tailMap.get((java.lang.Object)hashVal);
+ $stack17=(org.apache.rocketmq.common.consistenthash.VirtualNode) $stack14;
+ $stack18 = $stack17.getPhysicalNode();
+ return  $stack18;
+ } 
+

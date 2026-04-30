@@ -1,0 +1,39 @@
+java.lang.Object java.util.IdentityHashMap:remove(java.lang.Object r1)
+{
+java.lang.Object r2;
+  java.lang.Object[] r3;
+  int i0;
+  java.lang.Object r4;
+  java.lang.Object r5;
+  int $i1;
+  int $i2;
+  int $i3;
+  int $i4;
+  int $i5;
+  int $i6;
+  int i7;
+  r2 = java.util.IdentityHashMap.maskNull(r1);
+ r3=this.table;
+ i0=#r3;
+ i7 = java.util.IdentityHashMap.hash(r2,i0);
+ label0:r4=r3[i7];
+ if (r4!=r2) goto label1;
+ $i1=this.modCount;
+ $i2=($i1+1);
+ this.modCount=$i2;
+ $i3=this.size;
+ $i4=($i3-1);
+ this.size=$i4;
+ $i5=(i7+1);
+ r5=r3[$i5];
+ $i6=(i7+1);
+ r3[$i6]=null;
+ r3[i7]=null;
+ this#java.util.IdentityHashMap:closeDeletion(i7);
+ return  r5;
+ label1:if (r4!=null) goto label2;
+ return  null;
+ label2:i7 = java.util.IdentityHashMap.nextKeyIndex(i7,i0);
+ goto label0;
+ }  
+

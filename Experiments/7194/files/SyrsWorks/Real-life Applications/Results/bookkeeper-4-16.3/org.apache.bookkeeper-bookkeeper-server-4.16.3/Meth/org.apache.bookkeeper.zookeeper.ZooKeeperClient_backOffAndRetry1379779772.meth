@@ -1,0 +1,22 @@
+void org.apache.bookkeeper.zookeeper.ZooKeeperClient:backOffAndRetry(java.lang.Runnable r,long nextRetryWaitTimeMs)
+{
+java.util.concurrent.TimeUnit $stack5;
+  java.util.concurrent.ScheduledExecutorService $stack6;
+  java.util.concurrent.RejectedExecutionException $stack8;
+  java.util.concurrent.atomic.AtomicBoolean $stack9;
+  boolean $stack10;
+  org.slf4j.Logger $stack11;
+  label0:$stack6=this.retryExecutor;
+ $stack5=java.util.concurrent.TimeUnit.MILLISECONDS;
+ $stack6.schedule(r,nextRetryWaitTimeMs,$stack5);
+ label1:goto label2;
+ label3:$stack8 = catch;
+ $stack9=this.closed;
+ $stack10 = $stack9.get();
+ if ($stack10!=0) goto label2;
+ $stack11=org.apache.bookkeeper.zookeeper.ZooKeeperClient.logger;
+ $stack11.error("ZooKeeper Operation {} is rejected : ",(java.lang.Object)r,(java.lang.Object)$stack8);
+ label2:return;
+ catch java.util.concurrent.RejectedExecutionException: label0 - label1 : label3;
+} 
+

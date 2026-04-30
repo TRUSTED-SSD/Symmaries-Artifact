@@ -1,0 +1,38 @@
+void java.util.IdentityHashMap:replaceAll(java.util.function.BiFunction r1)
+{
+int i0;
+  java.lang.Object[] r2;
+  java.lang.Object r3;
+  int $i1;
+  int $i2;
+  java.util.ConcurrentModificationException $r5;
+  int $i3;
+  java.lang.Object $r6;
+  int $i4;
+  java.lang.Object $r7;
+  java.lang.Object $r8;
+  int i5;
+  java.util.Objects.requireNonNull((java.lang.Object)r1);
+ i0=this.modCount;
+ r2=this.table;
+ i5=0;
+ label0:$i1=#r2;
+ if (i5>=$i1) goto label1;
+ r3=r2[i5];
+ if (r3==null) goto label2;
+ $i3=(i5+1);
+ $r6 = java.util.IdentityHashMap.unmaskNull(r3);
+ $i4=(i5+1);
+ $r7=r2[$i4];
+ $r8 = r1.apply($r6,$r7);
+ r2[$i3]=$r8;
+ label2:$i2=this.modCount;
+ if ($i2==i0) goto label3;
+ $r5=new java.util.ConcurrentModificationException;
+ $r5#java.util.ConcurrentModificationException:init();
+ throw $r5;
+ label3:i5=(i5+2);
+ goto label0;
+ label1:return;
+ }  
+

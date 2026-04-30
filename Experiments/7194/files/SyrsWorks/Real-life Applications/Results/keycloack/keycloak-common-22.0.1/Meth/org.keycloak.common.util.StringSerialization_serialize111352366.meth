@@ -1,0 +1,30 @@
+static java.lang.String org.keycloak.common.util.StringSerialization:serialize(java.lang.Object[] toSerialize)
+{
+java.lang.StringBuilder sb;
+  int i;
+  java.lang.Object o;
+  java.lang.String stringO;
+  int $stack7;
+  java.util.regex.Pattern $stack10;
+  java.util.regex.Matcher $stack11;
+  sb=new java.lang.StringBuilder;
+ sb#java.lang.StringBuilder();
+ i=0;
+ label0:$stack7=#toSerialize;
+ if (i>=$stack7) goto label1;
+ o=toSerialize[i];
+ stringO = org.keycloak.common.util.StringSerialization.getStringFrom(o);
+ $stack10=org.keycloak.common.util.StringSerialization.ESCAPE_PATTERN;
+ $stack11 = $stack10.matcher((java.lang.CharSequence)stringO);
+ stringO = $stack11.replaceAll(";;");
+ sb.append(stringO);
+ $stack7=#toSerialize;
+ $stack7=($stack7-1);
+ if (i>=$stack7) goto label2;
+ sb.append(";");
+ label2:i=(i+1);
+ goto label0;
+ label1:stringO = sb.toString();
+ return  stringO;
+ } 
+

@@ -1,0 +1,26 @@
+static void org.apache.bookkeeper.bookie.JournalChannel:renameJournalFile(java.io.File source,java.io.File target)
+{
+org.slf4j.Logger $stack2;
+  java.io.IOException $stack3;
+  java.lang.StringBuilder $stack4;
+  java.lang.String $stack9;
+  boolean $stack17;
+  if (source==null) goto label0;
+ if (target==null) goto label0;
+ $stack17 = source.renameTo(target);
+ if ($stack17!=0) goto label1;
+ label0:$stack2=org.apache.bookkeeper.bookie.JournalChannel.LOG;
+ $stack2.error("Failed to rename file {} to {}",(java.lang.Object)source,(java.lang.Object)target);
+ $stack3=new java.io.IOException;
+ $stack4=new java.lang.StringBuilder;
+ $stack4#java.lang.StringBuilder();
+ $stack4 = $stack4.append("Failed to rename file ");
+ $stack4 = $stack4.append((java.lang.Object)source);
+ $stack4 = $stack4.append(" to ");
+ $stack4 = $stack4.append((java.lang.Object)target);
+ $stack9 = $stack4.toString();
+ $stack3#java.io.IOException($stack9);
+ throw $stack3;
+ label1:return;
+ } 
+

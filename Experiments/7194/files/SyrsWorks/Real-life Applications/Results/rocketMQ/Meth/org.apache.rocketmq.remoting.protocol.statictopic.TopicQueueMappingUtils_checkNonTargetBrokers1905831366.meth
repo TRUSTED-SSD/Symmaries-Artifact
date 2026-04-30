@@ -1,0 +1,21 @@
+static void org.apache.rocketmq.remoting.protocol.statictopic.TopicQueueMappingUtils:checkNonTargetBrokers(java.util.Set targetBrokers,java.util.Set nonTargetBrokers)
+{
+java.util.Iterator l2;
+  java.lang.String broker;
+  boolean $stack5;
+  java.lang.Object $stack6;
+  java.lang.RuntimeException $stack9;
+  l2 = nonTargetBrokers.iterator();
+ label0:$stack5 = l2.hasNext();
+ if ($stack5==0) goto label1;
+ $stack6 = l2.next();
+ broker=(java.lang.String) $stack6;
+ $stack5 = targetBrokers.contains((java.lang.Object)broker);
+ if ($stack5==0) goto label2;
+ $stack9=new java.lang.RuntimeException;
+ $stack9#java.lang.RuntimeException("The non-target broker exist in target broker");
+ throw $stack9;
+ label2:goto label0;
+ label1:return;
+ } 
+

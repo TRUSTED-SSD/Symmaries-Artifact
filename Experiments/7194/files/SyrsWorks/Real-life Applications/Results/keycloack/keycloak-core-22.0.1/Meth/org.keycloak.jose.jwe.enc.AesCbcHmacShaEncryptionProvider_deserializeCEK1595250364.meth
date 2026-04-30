@@ -1,0 +1,26 @@
+void org.keycloak.jose.jwe.enc.AesCbcHmacShaEncryptionProvider:deserializeCEK(org.keycloak.jose.jwe.JWEKeyStorage keyStorage)
+{
+byte[] cekBytes;
+  int cekLength;
+  byte[] cekMacKey;
+  int $stack10;
+  javax.crypto.spec.SecretKeySpec $stack14;
+  javax.crypto.spec.SecretKeySpec $stack15;
+  org.keycloak.jose.jwe.JWEKeyStorage$KeyUse $stack16;
+  cekBytes = keyStorage.getCekBytes();
+ cekLength = this.getExpectedCEKLength();
+ $stack10=(cekLength/2);
+ cekMacKey = java.util.Arrays.copyOf(cekBytes,$stack10);
+ $stack10=(cekLength/2);
+ cekBytes = java.util.Arrays.copyOfRange(cekBytes,$stack10,cekLength);
+ $stack14=new javax.crypto.spec.SecretKeySpec;
+ $stack14#javax.crypto.spec.SecretKeySpec(cekBytes,"AES");
+ $stack15=new javax.crypto.spec.SecretKeySpec;
+ $stack15#javax.crypto.spec.SecretKeySpec(cekMacKey,"HMACSHA2");
+ $stack16=org.keycloak.jose.jwe.JWEKeyStorage$KeyUse.ENCRYPTION;
+ keyStorage.setCEKKey((java.security.Key)$stack14,$stack16);
+ $stack16=org.keycloak.jose.jwe.JWEKeyStorage$KeyUse.SIGNATURE;
+ keyStorage.setCEKKey((java.security.Key)$stack15,$stack16);
+ return;
+ } 
+

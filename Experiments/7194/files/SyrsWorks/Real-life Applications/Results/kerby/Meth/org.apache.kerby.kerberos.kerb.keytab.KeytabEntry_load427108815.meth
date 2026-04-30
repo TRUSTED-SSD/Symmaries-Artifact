@@ -1,0 +1,43 @@
+void org.apache.kerby.kerberos.kerb.keytab.KeytabEntry:load(org.apache.kerby.kerberos.kerb.keytab.KeytabInputStream kis,int version,int entrySize)
+{
+int bytesLeft;
+  org.apache.kerby.kerberos.kerb.type.base.PrincipalName $stack8;
+  org.apache.kerby.kerberos.kerb.type.KerberosTime $stack9;
+  byte $stack10;
+  org.apache.kerby.kerberos.kerb.type.base.EncryptionKey $stack11;
+  java.io.IOException $stack14;
+  java.lang.Object[] $stack15;
+  java.lang.Integer $stack18;
+  java.lang.String $stack21;
+  bytesLeft = kis.available();
+ $stack8 = kis.readPrincipal(version);
+ this.principal=$stack8;
+ $stack9 = kis.readTime();
+ this.timestamp=$stack9;
+ $stack10 = kis.readByte();
+dummyClass.highSourceMut($stack10);
+ this.kvno=$stack10;
+ $stack11 = kis.readKey();
+ this.key=$stack11;
+ version = kis.available();
+ version=(bytesLeft-version);
+ bytesLeft=(version+4);
+ if (bytesLeft>entrySize) goto label0;
+ version = kis.readInt();
+dummyClass.highSourceMut(version);
+ if (version==0) goto label1;
+ this.kvno=version;
+ label1:goto label2;
+ label0:if (version==entrySize) goto label2;
+ $stack14=new java.io.IOException;
+ $stack15=new java.lang.Object[2];
+ $stack18 = java.lang.Integer.valueOf(version);
+ $stack15[0]=$stack18;
+ $stack18 = java.lang.Integer.valueOf(entrySize);
+ $stack15[1]=$stack18;
+ $stack21 = java.lang.String.format("Bad input stream with less data read [%d] than expected [%d] for keytab entry.",$stack15);
+ $stack14#java.io.IOException($stack21);
+ throw $stack14;
+ label2:return;
+ } 
+

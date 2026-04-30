@@ -1,0 +1,43 @@
+java.lang.Object java.util.Hashtable$Enumerator:nextElement()
+{
+java.util.Hashtable$Entry[] r1;
+  java.util.Hashtable$Entry r2;
+  java.util.NoSuchElementException $r3;
+  java.util.Hashtable$Entry $r4;
+  java.util.Hashtable$Entry $r5;
+  int $i0;
+  int $i1;
+  java.util.Hashtable$Entry r6;
+  int i2;
+  java.lang.Object $r7;
+  r6=this.entry;
+ i2=this.index;
+ r1=this.table;
+ label0:if (r6!=null) goto label1;
+ if (i2<=0) goto label1;
+ i2=(i2+-1);
+ r6=r1[i2];
+ goto label0;
+ label1:this.entry=r6;
+ this.index=i2;
+ if (r6==null) goto label2;
+ $r4=this.entry;
+ this.lastReturned=$r4;
+ r2=$r4;
+ $r5=r2.next;
+ this.entry=$r5;
+ $i0=this.type;
+ if ($i0!=0) goto label3;
+ $r7=r2.key;
+ goto label4;
+ label3:$i1=this.type;
+ if ($i1!=1) goto label5;
+ $r7=r2.value;
+ goto label4;
+ label5:$r7=r2;
+ label4:return  $r7;
+ label2:$r3=new java.util.NoSuchElementException;
+ $r3#java.util.NoSuchElementException:init("Hashtable Enumerator");
+ throw $r3;
+ }  
+

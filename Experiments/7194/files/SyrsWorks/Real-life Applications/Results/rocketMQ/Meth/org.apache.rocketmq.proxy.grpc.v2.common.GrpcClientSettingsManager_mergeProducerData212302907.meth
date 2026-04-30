@@ -1,0 +1,41 @@
+static apache.rocketmq.v2.Settings org.apache.rocketmq.proxy.grpc.v2.common.GrpcClientSettingsManager:mergeProducerData(apache.rocketmq.v2.Settings @settings)
+{
+org.apache.rocketmq.proxy.config.ProxyConfig config;
+  apache.rocketmq.v2.Settings$Builder builder;
+  apache.rocketmq.v2.RetryPolicy$Builder $stack5;
+  int $stack6;
+  apache.rocketmq.v2.ExponentialBackoff$Builder $stack8;
+  long $stack9;
+  com.google.protobuf.Duration $stack10;
+  float $stack16;
+  apache.rocketmq.v2.ExponentialBackoff $stack18;
+  apache.rocketmq.v2.Publishing$Builder $stack20;
+  boolean $stack21;
+  apache.rocketmq.v2.Settings settings;
+settings=@settings;
+config = org.apache.rocketmq.proxy.config.ConfigurationManager.getProxyConfig();
+ builder = settings.toBuilder();
+ $stack5 = builder.getBackoffPolicyBuilder();
+ $stack6 = config.getGrpcClientProducerMaxAttempts();
+ $stack5 = $stack5.setMaxAttempts($stack6);
+ $stack8 = apache.rocketmq.v2.ExponentialBackoff.newBuilder();
+ $stack9 = config.getGrpcClientProducerBackoffInitialMillis();
+ $stack10 = com.google.protobuf.util.Durations.fromMillis($stack9);
+ $stack8 = $stack8.setInitial($stack10);
+ $stack9 = config.getGrpcClientProducerBackoffMaxMillis();
+ $stack10 = com.google.protobuf.util.Durations.fromMillis($stack9);
+ $stack8 = $stack8.setMax($stack10);
+ $stack6 = config.getGrpcClientProducerBackoffMultiplier();
+ $stack16=(float) $stack6;
+ $stack8 = $stack8.setMultiplier($stack16);
+ $stack18 = $stack8.build();
+ $stack5.setExponentialBackoff($stack18);
+ $stack20 = builder.getPublishingBuilder();
+ $stack21 = config.isEnableTopicMessageTypeCheck();
+ $stack20 = $stack20.setValidateMessageType($stack21);
+ $stack6 = config.getMaxMessageSize();
+ $stack20.setMaxBodySize($stack6);
+ settings = builder.build();
+ return  settings;
+ } 
+

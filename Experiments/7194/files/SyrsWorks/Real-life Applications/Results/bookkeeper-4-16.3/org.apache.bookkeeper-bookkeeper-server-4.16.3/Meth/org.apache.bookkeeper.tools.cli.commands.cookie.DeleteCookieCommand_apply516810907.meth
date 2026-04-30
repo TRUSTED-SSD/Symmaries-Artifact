@@ -1,0 +1,47 @@
+void org.apache.bookkeeper.tools.cli.commands.cookie.DeleteCookieCommand:apply(org.apache.bookkeeper.discover.RegistrationManager rm,org.apache.bookkeeper.tools.cli.commands.cookie.DeleteCookieCommand$Flags cmdFlags)
+{
+org.apache.bookkeeper.net.BookieId bookieId;
+  org.apache.bookkeeper.bookie.BookieException cee;
+  org.apache.bookkeeper.versioning.LongVersion $stack6;
+  org.apache.bookkeeper.tools.framework.CliSpec $stack8;
+  java.io.PrintStream $stack9;
+  java.lang.StringBuilder $stack10;
+  java.lang.String $stack14;
+  org.apache.bookkeeper.bookie.BookieException$CookieNotFoundException $stack17;
+  bookieId = this.getBookieId((org.apache.bookkeeper.tools.framework.CliFlags)cmdFlags);
+ label0:$stack6=new org.apache.bookkeeper.versioning.LongVersion;
+ $stack6#org.apache.bookkeeper.versioning.LongVersion(-1L);
+ rm.removeCookie(bookieId,(org.apache.bookkeeper.versioning.Version)$stack6);
+ label1:goto label2;
+ label3:$stack17 = catch;
+ $stack8=this.spec;
+ $stack9 = $stack8.console();
+ $stack10=new java.lang.StringBuilder;
+ $stack10#java.lang.StringBuilder();
+ $stack10 = $stack10.append("Cookie not found for bookie \'");
+ $stack10 = $stack10.append((java.lang.Object)bookieId);
+ $stack10 = $stack10.append("\'");
+ $stack14 = $stack10.toString();
+ dummyClass.lowSink($stack14);
+$stack9.println($stack14);
+ throw $stack17;
+ label4:cee = catch;
+ $stack8=this.spec;
+ $stack9 = $stack8.console();
+ $stack10=new java.lang.StringBuilder;
+ $stack10#java.lang.StringBuilder();
+ $stack10 = $stack10.append("Exception on deleting cookie for bookie \'");
+ $stack10 = $stack10.append((java.lang.Object)bookieId);
+ $stack10 = $stack10.append("\'");
+ $stack14 = $stack10.toString();
+ dummyClass.lowSink($stack14);
+$stack9.println($stack14);
+ $stack8=this.spec;
+ $stack9 = $stack8.console();
+ cee.printStackTrace($stack9);
+ throw cee;
+ label2:return;
+ catch org.apache.bookkeeper.bookie.BookieException$CookieNotFoundException: label0 - label1 : label3;
+catch org.apache.bookkeeper.bookie.BookieException: label0 - label1 : label4;
+} 
+

@@ -1,0 +1,34 @@
+static void org.apache.rocketmq.proxy.service.mqclient.MQClientAPIExt:lambda$getMinOffset$7(java.util.concurrent.CompletableFuture future,org.apache.rocketmq.remoting.netty.ResponseFuture responseFuture)
+{
+org.apache.rocketmq.remoting.protocol.RemotingCommand response;
+  org.apache.rocketmq.remoting.protocol.header.GetMinOffsetResponseHeader responseHeader;
+  org.apache.rocketmq.client.exception.MQClientException $stack5;
+  int $stack8;
+  org.apache.rocketmq.client.exception.MQBrokerException $stack9;
+  java.lang.String $stack11;
+  org.apache.rocketmq.remoting.CommandCustomHeader $stack13;
+  java.lang.Long $stack14;
+  java.lang.Throwable $stack19;
+  response = responseFuture.getResponseCommand();
+ if (response==null) goto label0;
+ $stack8 = response.getCode();
+ if (0!=$stack8) goto label1;
+ label2:$stack13 = response.decodeCommandCustomHeader(org.apache.rocketmq.remoting.protocol.header.GetMinOffsetResponseHeader);
+ responseHeader=(org.apache.rocketmq.remoting.protocol.header.GetMinOffsetResponseHeader) $stack13;
+ $stack14 = responseHeader.getOffset();
+ future.complete((java.lang.Object)$stack14);
+ label3:goto label1;
+ label4:$stack19 = catch;
+ future.completeExceptionally($stack19);
+ label1:$stack9=new org.apache.rocketmq.client.exception.MQBrokerException;
+ $stack8 = response.getCode();
+ $stack11 = response.getRemark();
+ $stack9#org.apache.rocketmq.client.exception.MQBrokerException($stack8,$stack11);
+ future.completeExceptionally((java.lang.Throwable)$stack9);
+ goto label5;
+ label0:$stack5 = org.apache.rocketmq.proxy.service.mqclient.MQClientAPIExt.processNullResponseErr(responseFuture);
+ future.completeExceptionally((java.lang.Throwable)$stack5);
+ label5:return;
+ catch java.lang.Throwable: label2 - label3 : label4;
+} 
+

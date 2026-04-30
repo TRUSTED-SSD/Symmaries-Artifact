@@ -1,0 +1,13 @@
+void org.apache.bookkeeper.bookie.DefaultEntryLogger:checkEntry(long ledgerId,long entryId,long location)
+{
+long entryLogId;
+  org.apache.bookkeeper.bookie.BufferedReadChannel fc;
+  io.netty.buffer.ByteBuf sizeBuf;
+  entryLogId = org.apache.bookkeeper.bookie.DefaultEntryLogger.logIdForOffset(location);
+ location = org.apache.bookkeeper.bookie.DefaultEntryLogger.posForOffset(location);
+ fc = this#org.apache.bookkeeper.bookie.DefaultEntryLogger:getFCForEntryInternal(ledgerId,entryId,entryLogId,location);
+ sizeBuf = this#org.apache.bookkeeper.bookie.DefaultEntryLogger:readEntrySize(ledgerId,entryId,entryLogId,location,fc);
+ this#org.apache.bookkeeper.bookie.DefaultEntryLogger:validateEntry(ledgerId,entryId,entryLogId,location,sizeBuf);
+ return;
+ } 
+

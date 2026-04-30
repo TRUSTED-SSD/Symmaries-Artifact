@@ -1,0 +1,35 @@
+static java.lang.String com.scurrilous.circe.utils.NativeUtils:libType()
+{
+java.lang.String $stack0;
+  int $stack1;
+  java.lang.TypeNotPresentException $stack11;
+  java.lang.StringBuilder $stack12;
+  $stack0=com.scurrilous.circe.utils.NativeUtils.OS_NAME;
+ $stack1 = $stack0.indexOf("mac");
+ if ($stack1<0) goto label0;
+ return  "jnilib";
+ label0:$stack0=com.scurrilous.circe.utils.NativeUtils.OS_NAME;
+ $stack1 = $stack0.indexOf("nix");
+ if ($stack1>=0) goto label1;
+ $stack0=com.scurrilous.circe.utils.NativeUtils.OS_NAME;
+ $stack1 = $stack0.indexOf("nux");
+ if ($stack1>=0) goto label1;
+ $stack0=com.scurrilous.circe.utils.NativeUtils.OS_NAME;
+ $stack1 = $stack0.indexOf("aix");
+ if ($stack1<=0) goto label2;
+ label1:return  "so";
+ label2:$stack0=com.scurrilous.circe.utils.NativeUtils.OS_NAME;
+ $stack1 = $stack0.indexOf("win");
+ if ($stack1<0) goto label3;
+ return  "dll";
+ label3:$stack11=new java.lang.TypeNotPresentException;
+ $stack12=new java.lang.StringBuilder;
+ $stack12#java.lang.StringBuilder();
+ $stack0=com.scurrilous.circe.utils.NativeUtils.OS_NAME;
+ $stack12 = $stack12.append($stack0);
+ $stack12 = $stack12.append(" not supported");
+ $stack0 = $stack12.toString();
+ $stack11#java.lang.TypeNotPresentException($stack0,null);
+ throw $stack11;
+ } 
+

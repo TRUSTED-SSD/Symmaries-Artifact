@@ -1,0 +1,51 @@
+void com.google.zxing.common.BitMatrix:xor(com.google.zxing.common.BitMatrix mask)
+{
+com.google.zxing.common.BitArray rowArray;
+  int y;
+  int offset;
+  int[] row;
+  int x;
+  java.lang.IllegalArgumentException $stack9;
+  com.google.zxing.common.BitArray $stack19;
+  int $stack21;
+  int[] $stack25;
+  int $stack26;
+  int $stack27;
+  offset=this.width;
+ y=mask.width;
+ if (offset!=y) goto label0;
+ offset=this.height;
+ y=mask.height;
+ if (offset!=y) goto label0;
+ offset=this.rowSize;
+ y=mask.rowSize;
+ if (offset==y) goto label1;
+ label0:$stack9=new java.lang.IllegalArgumentException;
+ $stack9#java.lang.IllegalArgumentException("input matrix dimensions do not match");
+ throw $stack9;
+ label1:rowArray=new com.google.zxing.common.BitArray;
+ y=this.width;
+ rowArray#com.google.zxing.common.BitArray(y);
+ y=0;
+ label2:offset=this.height;
+ if (y>=offset) goto label3;
+ offset=this.rowSize;
+ offset=(y * offset);
+ $stack19 = mask.getRow(y,rowArray);
+ row = $stack19.getBitArray();
+ x=0;
+ label4:$stack21=this.rowSize;
+ if (x>=$stack21) goto label5;
+ $stack25=this.bits;
+ $stack21=(offset+x);
+ $stack27=$stack25[$stack21];
+ $stack26=row[x];
+ $stack26=(!$stack27 & $stack26) |(!$stack26 & $stack27);
+ $stack25[$stack21]=$stack26;
+ x=(x+1);
+ goto label4;
+ label5:y=(y+1);
+ goto label2;
+ label3:return;
+ } 
+

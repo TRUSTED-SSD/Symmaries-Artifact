@@ -1,0 +1,33 @@
+boolean org.apache.bookkeeper.bookie.DefaultEntryLogger:logExists(long logId)
+{
+java.util.Iterator l3;
+  java.io.File d;
+  org.apache.bookkeeper.bookie.LedgerDirsManager $stack6;
+  java.util.List $stack7;
+  boolean $stack9;
+  java.lang.Object $stack10;
+  java.io.File $stack11;
+  java.lang.StringBuilder $stack12;
+  java.lang.String $stack13;
+  $stack6=this.ledgerDirsManager;
+ $stack7 = $stack6.getAllLedgerDirs();
+ l3 = $stack7.iterator();
+ label0:$stack9 = l3.hasNext();
+ if ($stack9==0) goto label1;
+ $stack10 = l3.next();
+ d=(java.io.File) $stack10;
+ $stack11=new java.io.File;
+ $stack12=new java.lang.StringBuilder;
+ $stack12#java.lang.StringBuilder();
+ $stack13 = java.lang.Long.toHexString(logId);
+ $stack12 = $stack12.append($stack13);
+ $stack12 = $stack12.append(".log");
+ $stack13 = $stack12.toString();
+ $stack11#java.io.File(d,$stack13);
+ $stack9 = $stack11.exists();
+ if ($stack9==0) goto label2;
+ return  1;
+ label2:goto label0;
+ label1:return  0;
+ } 
+

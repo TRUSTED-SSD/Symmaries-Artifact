@@ -1,0 +1,31 @@
+int[] com.google.zxing.pdf417.decoder.ec.ErrorCorrection:findErrorLocations(com.google.zxing.pdf417.decoder.ec.ModulusPoly errorLocator)
+{
+int numErrors;
+  int[] result;
+  int e;
+  int i;
+  com.google.zxing.pdf417.decoder.ec.ModulusGF $stack7;
+  int $stack8;
+  com.google.zxing.ChecksumException $stack9;
+  numErrors = errorLocator.getDegree();
+ result=new int[numErrors];
+ e=0;
+ i=1;
+ label0:$stack7=this.field;
+ $stack8 = $stack7.getSize();
+ if (i>=$stack8) goto label1;
+ if (e>=numErrors) goto label1;
+ $stack8 = errorLocator.evaluateAt(i);
+ if ($stack8!=0) goto label2;
+ $stack7=this.field;
+ $stack8 = $stack7.inverse(i);
+ result[e]=$stack8;
+ e=(e+1);
+ label2:i=(i+1);
+ goto label0;
+ label1:if (e==numErrors) goto label3;
+ $stack9 = com.google.zxing.ChecksumException.getChecksumInstance();
+ throw $stack9;
+ label3:return  result;
+ } 
+

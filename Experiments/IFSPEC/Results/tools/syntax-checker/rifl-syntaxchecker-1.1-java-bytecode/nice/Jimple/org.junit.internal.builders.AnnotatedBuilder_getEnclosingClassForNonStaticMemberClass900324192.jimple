@@ -1,0 +1,37 @@
+    private java.lang.Class getEnclosingClassForNonStaticMemberClass(java.lang.Class)
+    {
+        org.junit.internal.builders.AnnotatedBuilder this;
+        java.lang.Class currentTestClass;
+        boolean $stack2;
+        int $stack3;
+
+        this := @this: org.junit.internal.builders.AnnotatedBuilder;
+
+        currentTestClass := @parameter0: java.lang.Class;
+
+        $stack2 = virtualinvoke currentTestClass.<java.lang.Class: boolean isMemberClass()>();
+/*94*/
+
+        if $stack2 == 0 goto label1;
+/*94*/
+
+        $stack3 = virtualinvoke currentTestClass.<java.lang.Class: int getModifiers()>();
+/*97*/
+
+        $stack2 = staticinvoke <java.lang.reflect.Modifier: boolean isStatic(int)>($stack3);
+/*97*/
+
+        if $stack2 != 0 goto label1;
+/*97*/
+
+        currentTestClass = virtualinvoke currentTestClass.<java.lang.Class: java.lang.Class getEnclosingClass()>();
+/*95*/
+
+        return currentTestClass;
+/*95*/
+
+     label1:
+        return null;
+/*97*/
+    }
+

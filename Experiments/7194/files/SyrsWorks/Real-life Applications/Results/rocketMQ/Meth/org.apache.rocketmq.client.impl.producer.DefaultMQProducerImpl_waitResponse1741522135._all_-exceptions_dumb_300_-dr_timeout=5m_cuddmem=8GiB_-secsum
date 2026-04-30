@@ -1,0 +1,12 @@
+org.apache.rocketmq.common.message.Message org.apache.rocketmq.client.impl.producer.DefaultMQProducerImpl:waitResponse (
+  org.apache.rocketmq.common.message.Message msg, long timeout,
+  org.apache.rocketmq.client.producer.RequestResponseFuture
+    requestResponseFuture,
+  long cost) {
+  guard = tt;
+  ret(level()) = level(cost) ⊔ level(requestResponseFuture) ⊔ level(timeout) ⊔ obj_level(requestResponseFuture);
+  ret(obj_level()) = level(cost) ⊔ level(msg) ⊔ level(requestResponseFuture) ⊔ level(timeout) ⊔ obj_level(msg) ⊔ obj_level(requestResponseFuture);
+  ret(obj_level(msg)) = level(cost) ⊔ level(msg) ⊔ level(requestResponseFuture) ⊔ level(timeout) ⊔ obj_level(msg) ⊔ obj_level(requestResponseFuture);
+  ret(obj_level(requestResponseFuture)) = level(cost) ⊔ level(msg) ⊔ level(requestResponseFuture) ⊔ level(timeout) ⊔ obj_level(msg) ⊔ obj_level(requestResponseFuture);
+  ret(obj_level(this)) = level(cost) ⊔ level(msg) ⊔ level(requestResponseFuture) ⊔ level(timeout) ⊔ obj_level(msg) ⊔ obj_level(requestResponseFuture) ⊔ obj_level(this);
+}

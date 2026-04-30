@@ -1,0 +1,45 @@
+void org.apache.rocketmq.tools.command.message.DecodeMessageIdCommond:execute(org.apache.commons.cli.CommandLine commandLine,org.apache.commons.cli.Options options,org.apache.rocketmq.remoting.RPCHook rpcHook)
+{
+java.lang.String messageId;
+  java.lang.Object[] $stack8;
+  java.io.PrintStream $stack9;
+  java.lang.String $stack12;
+  java.util.Date $stack14;
+  java.lang.Exception $stack19;
+  java.lang.Exception $stack26;
+  org.apache.rocketmq.tools.command.SubCommandException $stack27;
+  java.lang.StringBuilder $stack28;
+  java.lang.Class $stack29;
+  messageId = commandLine.getOptionValue((char)105);
+ messageId = messageId.trim();
+ label0:$stack9=java.lang.System.out;
+ $stack8=new java.lang.Object[1];
+ $stack12 = org.apache.rocketmq.common.message.MessageClientIDSetter.getIPStrFromID(messageId);
+ $stack8[0]=$stack12;
+ $stack9.printf("ip=%s",$stack8);
+ label1:goto label2;
+ label3:$stack19 = catch;
+ $stack19.printStackTrace();
+ label2:$stack14 = org.apache.rocketmq.common.message.MessageClientIDSetter.getNearlyTimeFromID(messageId);
+ messageId = org.apache.rocketmq.common.UtilAll.formatDate($stack14,"yyyy-MM-dd#HH:mm:ss:SSS");
+ $stack9=java.lang.System.out;
+ $stack8=new java.lang.Object[1];
+ $stack8[0]=messageId;
+ $stack9.printf("date=%s",$stack8);
+ label4:goto label5;
+ label6:$stack26 = catch;
+ $stack27=new org.apache.rocketmq.tools.command.SubCommandException;
+ $stack28=new java.lang.StringBuilder;
+ $stack28#java.lang.StringBuilder();
+ $stack29 = this.getClass();
+ messageId = $stack29.getSimpleName();
+ $stack28 = $stack28.append(messageId);
+ $stack28 = $stack28.append(" command failed");
+ messageId = $stack28.toString();
+ $stack27#org.apache.rocketmq.tools.command.SubCommandException(messageId,(java.lang.Throwable)$stack26);
+ throw $stack27;
+ label5:return;
+ catch java.lang.Exception: label0 - label1 : label3;
+catch java.lang.Exception: label2 - label4 : label6;
+} 
+

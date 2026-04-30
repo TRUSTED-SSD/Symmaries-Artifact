@@ -1,0 +1,36 @@
+void org.apache.bookkeeper.bookie.storage.ldb.SingleDirectoryDbLedgerStorage:lambda$triggerFlushAndAddEntry$7()
+{
+long startTime;
+  java.lang.Throwable l4;
+  org.apache.bookkeeper.stats.Counter $stack6;
+  java.util.concurrent.TimeUnit $stack8;
+  java.io.IOException $stack13;
+  org.slf4j.Logger $stack14;
+  startTime = java.lang.System.nanoTime();
+ label0:this.flush();
+ label1:$stack6=this.flushExecutorTime;
+ startTime = org.apache.bookkeeper.util.MathUtils.elapsedNanos(startTime);
+ $stack8=java.util.concurrent.TimeUnit.NANOSECONDS;
+ $stack6.addLatency(startTime,$stack8);
+ goto label2;
+ label3:$stack13 = catch;
+ $stack14=org.apache.bookkeeper.bookie.storage.ldb.SingleDirectoryDbLedgerStorage.log;
+ $stack14.error("Error during flush",(java.lang.Throwable)$stack13);
+ label4:$stack6=this.flushExecutorTime;
+ startTime = org.apache.bookkeeper.util.MathUtils.elapsedNanos(startTime);
+ $stack8=java.util.concurrent.TimeUnit.NANOSECONDS;
+ $stack6.addLatency(startTime,$stack8);
+ goto label2;
+ label5:l4 = catch;
+ label6:$stack6=this.flushExecutorTime;
+ startTime = org.apache.bookkeeper.util.MathUtils.elapsedNanos(startTime);
+ $stack8=java.util.concurrent.TimeUnit.NANOSECONDS;
+ $stack6.addLatency(startTime,$stack8);
+ throw l4;
+ label2:return;
+ catch java.io.IOException: label0 - label1 : label3;
+catch java.lang.Throwable: label0 - label1 : label5;
+catch java.lang.Throwable: label3 - label4 : label5;
+catch java.lang.Throwable: label5 - label6 : label5;
+} 
+

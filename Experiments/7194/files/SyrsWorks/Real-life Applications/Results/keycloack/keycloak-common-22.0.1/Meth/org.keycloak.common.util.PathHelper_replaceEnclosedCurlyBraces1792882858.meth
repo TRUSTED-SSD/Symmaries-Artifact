@@ -1,0 +1,32 @@
+static java.lang.String org.keycloak.common.util.PathHelper:replaceEnclosedCurlyBraces(java.lang.String @str)
+{
+char[] chars;
+  int open;
+  int i;
+  int $stack5;
+  char $stack7;
+  java.lang.String str;
+str=@str;
+chars = str.toCharArray();
+ open=0;
+ i=0;
+ label0:$stack5=#chars;
+ if (i>=$stack5) goto label1;
+ $stack7=chars[i];
+ if ($stack7!=123) goto label2;
+ if (open==0) goto label3;
+ chars[i]=6;
+ label3:open=(open+1);
+ goto label4;
+ label2:$stack7=chars[i];
+ if ($stack7!=125) goto label4;
+ open=(open+-1);
+ if (open==0) goto label4;
+ chars[i]=7;
+ label4:i=(i+1);
+ goto label0;
+ label1:str=new java.lang.String;
+ str#java.lang.String(chars);
+ return  str;
+ } 
+

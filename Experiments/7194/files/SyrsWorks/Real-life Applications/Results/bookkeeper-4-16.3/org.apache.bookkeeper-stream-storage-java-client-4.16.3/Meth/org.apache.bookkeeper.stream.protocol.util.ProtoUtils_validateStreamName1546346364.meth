@@ -1,0 +1,31 @@
+static boolean org.apache.bookkeeper.stream.protocol.util.ProtoUtils:validateStreamName(java.lang.String name)
+{
+int i;
+  char c;
+  boolean $stack3;
+  int $stack4;
+  $stack3 = com.google.common.base.Strings.isNullOrEmpty(name);
+ if ($stack3==0) goto label0;
+ return  0;
+ label0:i=0;
+ label1:$stack4 = name.length();
+ if (i>=$stack4) goto label2;
+ c = name.charAt(i);
+ if (c==0) goto label3;
+ if (c==32) goto label3;
+ if (c==60) goto label3;
+ if (c==62) goto label3;
+ if (c<=0) goto label4;
+ if (c<31) goto label3;
+ label4:if (c<=127) goto label5;
+ if (c<159) goto label3;
+ label5:if (c<=55296) goto label6;
+ if (c<63743) goto label3;
+ label6:if (c<=65520) goto label7;
+ if (c>=65535) goto label7;
+ label3:return  0;
+ label7:i=(i+1);
+ goto label1;
+ label2:return  1;
+ } 
+

@@ -1,0 +1,16 @@
+org.apache.bookkeeper.bookie.EntryMemTableWithParallelFlusher(org.apache.bookkeeper.conf.ServerConfiguration conf,org.apache.bookkeeper.bookie.CheckpointSource source,org.apache.bookkeeper.stats.StatsLogger statsLogger)
+{
+org.apache.bookkeeper.common.util.OrderedExecutor$Builder $stack4;
+  int $stack5;
+  org.apache.bookkeeper.common.util.OrderedExecutor$AbstractBuilder $stack6;
+  org.apache.bookkeeper.common.util.OrderedExecutor $stack8;
+  this#org.apache.bookkeeper.bookie.EntryMemTable(conf,source,statsLogger);
+ $stack4 = org.apache.bookkeeper.common.util.OrderedExecutor.newBuilder();
+ $stack5 = conf.getNumOfMemtableFlushThreads();
+ $stack6 = $stack4.numThreads($stack5);
+ $stack6 = $stack6.name("MemtableFlushThreads");
+ $stack8 = $stack6.build();
+ this.flushExecutor=$stack8;
+ return;
+ } 
+

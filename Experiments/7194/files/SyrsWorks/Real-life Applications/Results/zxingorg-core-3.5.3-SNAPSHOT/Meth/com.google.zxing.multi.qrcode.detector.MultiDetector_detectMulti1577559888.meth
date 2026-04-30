@@ -1,0 +1,55 @@
+com.google.zxing.common.DetectorResult[] com.google.zxing.multi.qrcode.detector.MultiDetector:detectMulti(java.util.Map hints)
+{
+com.google.zxing.common.BitMatrix image;
+  com.google.zxing.qrcode.detector.FinderPatternInfo[] infos;
+  java.util.ArrayList result;
+  int l8;
+  int l9;
+  com.google.zxing.qrcode.detector.FinderPatternInfo info;
+  com.google.zxing.ReaderException l11;
+  com.google.zxing.DecodeHintType $stack13;
+  java.lang.Object $stack14;
+  com.google.zxing.multi.qrcode.detector.MultiFinderPatternFinder $stack15;
+  boolean $stack19;
+  com.google.zxing.common.DetectorResult[] $stack20;
+  java.lang.Object[] $stack21;
+  com.google.zxing.common.DetectorResult $stack24;
+  com.google.zxing.NotFoundException $stack28;
+  com.google.zxing.ResultPointCallback $stack29;
+  image = this.getImage();
+ if (hints!=null) goto label0;
+ $stack29=null;
+ goto label1;
+ label0:$stack13=com.google.zxing.DecodeHintType.NEED_RESULT_POINT_CALLBACK;
+ $stack14 = hints.get((java.lang.Object)$stack13);
+ $stack29=(com.google.zxing.ResultPointCallback) $stack14;
+ label1:$stack15=new com.google.zxing.multi.qrcode.detector.MultiFinderPatternFinder;
+ $stack15#com.google.zxing.multi.qrcode.detector.MultiFinderPatternFinder(image,$stack29);
+ infos = $stack15.findMulti(hints);
+ l8=#infos;
+ if (l8!=0) goto label2;
+ $stack28 = com.google.zxing.NotFoundException.getNotFoundInstance();
+ throw $stack28;
+ label2:result=new java.util.ArrayList;
+ result#java.util.ArrayList();
+ l8=#infos;
+ l9=0;
+ label3:if (l9>=l8) goto label4;
+ info=infos[l9];
+ label5:$stack24 = this.processFinderPatternInfo(info);
+ result.add((java.lang.Object)$stack24);
+ label6:goto label7;
+ label8:l11 = catch;
+ label7:l9=(l9+1);
+ goto label3;
+ label4:$stack19 = result.isEmpty();
+ if ($stack19==0) goto label9;
+ $stack20=com.google.zxing.multi.qrcode.detector.MultiDetector.EMPTY_DETECTOR_RESULTS;
+ return  $stack20;
+ label9:$stack20=com.google.zxing.multi.qrcode.detector.MultiDetector.EMPTY_DETECTOR_RESULTS;
+ $stack21 = result.toArray((java.lang.Object[])$stack20);
+ $stack20=(com.google.zxing.common.DetectorResult[]) $stack21;
+ return  $stack20;
+ catch com.google.zxing.ReaderException: label5 - label6 : label8;
+} 
+

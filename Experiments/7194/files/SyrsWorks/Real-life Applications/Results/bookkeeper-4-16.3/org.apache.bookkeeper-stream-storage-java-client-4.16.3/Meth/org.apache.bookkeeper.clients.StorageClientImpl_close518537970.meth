@@ -1,0 +1,19 @@
+void org.apache.bookkeeper.clients.StorageClientImpl:close()
+{
+java.util.concurrent.TimeUnit $stack2;
+  org.apache.bookkeeper.common.util.OrderedScheduler $stack4;
+  java.lang.Exception $stack5;
+  org.slf4j.Logger $stack6;
+  label0:$stack2=java.util.concurrent.TimeUnit.SECONDS;
+ this#org.apache.bookkeeper.common.util.AutoAsyncCloseable(1L,$stack2);
+ label1:goto label2;
+ label3:$stack5 = catch;
+ $stack6=org.apache.bookkeeper.clients.StorageClientImpl.log;
+ $stack6.warn("Encountered exceptions on closing the storage client",(java.lang.Throwable)$stack5);
+ label2:$stack4=this.scheduler;
+ $stack2=java.util.concurrent.TimeUnit.MILLISECONDS;
+ $stack4.forceShutdown(100L,$stack2);
+ return;
+ catch java.lang.Exception: label0 - label1 : label3;
+} 
+

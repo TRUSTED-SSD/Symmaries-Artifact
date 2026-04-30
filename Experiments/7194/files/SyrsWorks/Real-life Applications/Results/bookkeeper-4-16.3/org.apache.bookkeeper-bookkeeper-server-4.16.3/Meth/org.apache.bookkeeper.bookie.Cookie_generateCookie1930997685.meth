@@ -1,0 +1,27 @@
+static org.apache.bookkeeper.bookie.Cookie$Builder org.apache.bookkeeper.bookie.Cookie:generateCookie(org.apache.bookkeeper.conf.ServerConfiguration conf)
+{
+org.apache.bookkeeper.bookie.Cookie$Builder builder;
+  org.apache.bookkeeper.net.BookieId $stack4;
+  java.lang.String $stack5;
+  com.google.common.base.Joiner $stack7;
+  java.lang.String[] $stack8;
+  builder = org.apache.bookkeeper.bookie.Cookie.newBuilder();
+ builder.setLayoutVersion(5);
+ $stack4 = org.apache.bookkeeper.bookie.BookieImpl.getBookieId(conf);
+ $stack5 = $stack4.toString();
+ builder.setBookieId($stack5);
+ $stack7 = com.google.common.base.Joiner.on((char)44);
+ $stack8 = conf.getJournalDirNames();
+ $stack5 = $stack7.join((java.lang.Object[])$stack8);
+ builder.setJournalDirs($stack5);
+ $stack8 = conf.getLedgerDirNames();
+ $stack5 = org.apache.bookkeeper.bookie.Cookie.encodeDirPaths($stack8);
+ builder.setLedgerDirs($stack5);
+ $stack8 = conf.getIndexDirNames();
+ if (null==$stack8) goto label0;
+ $stack8 = conf.getIndexDirNames();
+ $stack5 = org.apache.bookkeeper.bookie.Cookie.encodeDirPaths($stack8);
+ builder.setIndexDirs($stack5);
+ label0:return  builder;
+ } 
+

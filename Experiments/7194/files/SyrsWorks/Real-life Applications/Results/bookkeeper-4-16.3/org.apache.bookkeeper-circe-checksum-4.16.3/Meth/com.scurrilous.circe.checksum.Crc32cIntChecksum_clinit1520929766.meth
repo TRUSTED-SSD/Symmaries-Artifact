@@ -1,0 +1,24 @@
+static com.scurrilous.circe.checksum.Crc32cIntChecksum
+{
+boolean $stack0;
+  com.scurrilous.circe.checksum.Java8IntHash $stack2;
+  com.scurrilous.circe.checksum.Java9IntHash $stack3;
+  com.scurrilous.circe.checksum.JniIntHash $stack4;
+  $stack0 = com.scurrilous.circe.crc.Sse42Crc32C.isSupported();
+ if ($stack0==0) goto label0;
+ $stack4=new com.scurrilous.circe.checksum.JniIntHash;
+ $stack4#com.scurrilous.circe.checksum.JniIntHash();
+ com.scurrilous.circe.checksum.Crc32cIntChecksum.CRC32C_HASH=$stack4;
+ goto label1;
+ label0:$stack0=com.scurrilous.circe.checksum.Java9IntHash.HAS_JAVA9_CRC32C;
+ if ($stack0==0) goto label2;
+ $stack3=new com.scurrilous.circe.checksum.Java9IntHash;
+ $stack3#com.scurrilous.circe.checksum.Java9IntHash();
+ com.scurrilous.circe.checksum.Crc32cIntChecksum.CRC32C_HASH=$stack3;
+ goto label1;
+ label2:$stack2=new com.scurrilous.circe.checksum.Java8IntHash;
+ $stack2#com.scurrilous.circe.checksum.Java8IntHash();
+ com.scurrilous.circe.checksum.Crc32cIntChecksum.CRC32C_HASH=$stack2;
+ label1:return;
+ } 
+

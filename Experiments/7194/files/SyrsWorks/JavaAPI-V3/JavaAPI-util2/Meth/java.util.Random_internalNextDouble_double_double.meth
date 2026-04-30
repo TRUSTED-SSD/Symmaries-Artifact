@@ -1,0 +1,23 @@
+double java.util.Random:internalNextDouble(double d0,double d1)
+{
+byte $b0;
+  double $d2;
+  double $d3;
+  byte $b1;
+  long $l2;
+  long $l3;
+  double d4;
+  d4 = this.nextDouble();
+ $b0=(d0 cmpg d1);
+ if ($b0>=0) goto label0;
+ $d2=(d1-d0);
+ $d3=(d4 * $d2);
+ d4=($d3+d0);
+ $b1=(d4 cmpl d1);
+ if ($b1<0) goto label0;
+ $l2 = java.lang.Double.doubleToLongBits(d1);
+ $l3=($l2-1L);
+ d4 = java.lang.Double.native_longBitsToDouble($l3);
+ label0:return  d4;
+ }  
+

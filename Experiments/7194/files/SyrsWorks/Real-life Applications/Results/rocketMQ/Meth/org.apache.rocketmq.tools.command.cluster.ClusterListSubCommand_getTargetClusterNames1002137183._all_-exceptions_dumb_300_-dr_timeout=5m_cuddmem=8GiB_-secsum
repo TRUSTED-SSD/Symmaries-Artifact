@@ -1,0 +1,10 @@
+java.util.Set org.apache.rocketmq.tools.command.cluster.ClusterListSubCommand:getTargetClusterNames (
+  java.lang.String clusterName,
+  org.apache.rocketmq.remoting.protocol.body.ClusterInfo clusterInfo) {
+  guard = tt;
+  ret(level()) = level(clusterInfo) ⊔ level(clusterName) ⊔ obj_level(clusterInfo) ⊔ obj_level(clusterName);
+  ret(obj_level()) = level(clusterInfo) ⊔ level(clusterName) ⊔ obj_level(clusterInfo) ⊔ obj_level(clusterName);
+  ret(obj_level(clusterInfo)) = level(clusterInfo) ⊔ level(clusterName) ⊔ obj_level(clusterInfo) ⊔ obj_level(clusterName);
+  ret(obj_level(clusterName)) = level(clusterInfo) ⊔ level(clusterName) ⊔ obj_level(clusterInfo) ⊔ obj_level(clusterName);
+  ret(obj_level(this)) = level(clusterInfo) ⊔ level(clusterName) ⊔ obj_level(clusterInfo) ⊔ obj_level(clusterName) ⊔ obj_level(this);
+}

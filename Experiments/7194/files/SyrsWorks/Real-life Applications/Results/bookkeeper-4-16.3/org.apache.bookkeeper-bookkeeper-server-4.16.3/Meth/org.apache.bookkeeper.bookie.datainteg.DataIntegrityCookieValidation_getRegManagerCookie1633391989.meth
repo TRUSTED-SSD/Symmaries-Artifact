@@ -1,0 +1,18 @@
+java.util.Optional org.apache.bookkeeper.bookie.datainteg.DataIntegrityCookieValidation:getRegManagerCookie()
+{
+org.apache.bookkeeper.bookie.BookieException$CookieNotFoundException noCookieException;
+  org.apache.bookkeeper.net.BookieId $stack2;
+  org.apache.bookkeeper.discover.RegistrationManager $stack3;
+  org.apache.bookkeeper.versioning.Versioned $stack4;
+  java.util.Optional $stack5;
+  label0:$stack3=this.registrationManager;
+ $stack2=this.bookieId;
+ $stack4 = org.apache.bookkeeper.bookie.Cookie.readFromRegistrationManager($stack3,$stack2);
+ $stack5 = java.util.Optional.of((java.lang.Object)$stack4);
+ label1:return  $stack5;
+ label2:noCookieException = catch;
+ $stack5 = java.util.Optional.empty();
+ return  $stack5;
+ catch org.apache.bookkeeper.bookie.BookieException$CookieNotFoundException: label0 - label1 : label2;
+} 
+

@@ -1,0 +1,57 @@
+com.google.zxing.common.reedsolomon.GenericGFPoly[] com.google.zxing.common.reedsolomon.GenericGFPoly:divide(com.google.zxing.common.reedsolomon.GenericGFPoly other)
+{
+com.google.zxing.common.reedsolomon.GenericGFPoly quotient;
+  com.google.zxing.common.reedsolomon.GenericGFPoly remainder;
+  int denominatorLeadingTerm;
+  int degreeDifference;
+  int scale;
+  com.google.zxing.common.reedsolomon.GenericGFPoly term;
+  com.google.zxing.common.reedsolomon.GenericGFPoly iterationQuotient;
+  com.google.zxing.common.reedsolomon.GenericGF $stack10;
+  com.google.zxing.common.reedsolomon.GenericGF $stack11;
+  boolean $stack12;
+  com.google.zxing.common.reedsolomon.GenericGFPoly[] $stack22;
+  java.lang.IllegalArgumentException $stack42;
+  $stack11=this.field;
+ $stack10=other.field;
+ $stack12 = $stack11.equals((java.lang.Object)$stack10);
+ if ($stack12!=0) goto label0;
+ $stack42=new java.lang.IllegalArgumentException;
+ $stack42#java.lang.IllegalArgumentException("GenericGFPolys do not have same GenericGF field");
+ throw $stack42;
+ label0:$stack12 = other.isZero();
+ if ($stack12==0) goto label1;
+ $stack42=new java.lang.IllegalArgumentException;
+ $stack42#java.lang.IllegalArgumentException("Divide by 0");
+ throw $stack42;
+ label1:$stack10=this.field;
+ quotient = $stack10.getZero();
+ remainder=this;
+ denominatorLeadingTerm = other.getDegree();
+ denominatorLeadingTerm = other.getCoefficient(denominatorLeadingTerm);
+ $stack10=this.field;
+ denominatorLeadingTerm = $stack10.inverse(denominatorLeadingTerm);
+ label2:degreeDifference = remainder.getDegree();
+ scale = other.getDegree();
+ if (degreeDifference<scale) goto label3;
+ $stack12 = remainder.isZero();
+ if ($stack12!=0) goto label3;
+ degreeDifference = remainder.getDegree();
+ scale = other.getDegree();
+ degreeDifference=(degreeDifference-scale);
+ $stack10=this.field;
+ scale = remainder.getDegree();
+ scale = remainder.getCoefficient(scale);
+ scale = $stack10.multiply(scale,denominatorLeadingTerm);
+ term = other.multiplyByMonomial(degreeDifference,scale);
+ $stack10=this.field;
+ iterationQuotient = $stack10.buildMonomial(degreeDifference,scale);
+ quotient = quotient.addOrSubtract(iterationQuotient);
+ remainder = remainder.addOrSubtract(term);
+ goto label2;
+ label3:$stack22=new com.google.zxing.common.reedsolomon.GenericGFPoly[2];
+ $stack22[0]=quotient;
+ $stack22[1]=remainder;
+ return  $stack22;
+ } 
+

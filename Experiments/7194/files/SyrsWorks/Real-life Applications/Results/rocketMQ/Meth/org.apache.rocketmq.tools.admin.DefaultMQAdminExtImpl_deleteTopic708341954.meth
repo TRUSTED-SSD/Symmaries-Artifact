@@ -1,0 +1,29 @@
+void org.apache.rocketmq.tools.admin.DefaultMQAdminExtImpl:deleteTopic(java.lang.String topicName,java.lang.String @clusterName)
+{
+java.util.Set brokerAddressSet;
+  java.util.List nameServerList;
+  java.util.Iterator l6;
+  org.apache.rocketmq.tools.admin.DefaultMQAdminExt $stack8;
+  java.util.HashSet $stack11;
+  boolean $stack14;
+  java.lang.Object $stack15;
+  java.lang.String clusterName;
+clusterName=@clusterName;
+$stack8=this.defaultMQAdminExt;
+ brokerAddressSet = org.apache.rocketmq.tools.command.CommandUtil.fetchMasterAndSlaveAddrByClusterName((org.apache.rocketmq.tools.admin.MQAdminExt)$stack8,clusterName);
+ this.deleteTopicInBroker(brokerAddressSet,topicName);
+ nameServerList = this.getNameServerAddressList();
+ $stack11=new java.util.HashSet;
+ $stack11#java.util.HashSet((java.util.Collection)nameServerList);
+ this.deleteTopicInNameServer((java.util.Set)$stack11,topicName);
+ nameServerList=this.kvNamespaceToDeleteList;
+ l6 = nameServerList.iterator();
+ label0:$stack14 = l6.hasNext();
+ if ($stack14==0) goto label1;
+ $stack15 = l6.next();
+ clusterName=(java.lang.String) $stack15;
+ this.deleteKvConfig(clusterName,topicName);
+ goto label0;
+ label1:return;
+ } 
+

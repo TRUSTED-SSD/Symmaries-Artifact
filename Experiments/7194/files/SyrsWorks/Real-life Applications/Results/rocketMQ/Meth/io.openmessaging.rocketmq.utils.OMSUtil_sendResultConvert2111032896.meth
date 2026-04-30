@@ -1,0 +1,25 @@
+static io.openmessaging.producer.SendResult io.openmessaging.rocketmq.utils.OMSUtil:sendResultConvert(org.apache.rocketmq.client.producer.SendResult rmqResult)
+{
+boolean $stack1;
+  io.openmessaging.rocketmq.domain.SendResultImpl $stack2;
+  java.lang.String $stack3;
+  io.openmessaging.KeyValue $stack4;
+  org.apache.rocketmq.client.producer.SendStatus $stack5;
+  org.apache.rocketmq.client.producer.SendStatus $stack6;
+  java.lang.AssertionError $stack9;
+  $stack1=io.openmessaging.rocketmq.utils.OMSUtil.$assertionsDisabled;
+ if ($stack1!=0) goto label0;
+ $stack5 = rmqResult.getSendStatus();
+ $stack6=org.apache.rocketmq.client.producer.SendStatus.SEND_OK;
+ $stack1 = $stack5.equals((java.lang.Object)$stack6);
+ if ($stack1!=0) goto label0;
+ $stack9=new java.lang.AssertionError;
+ $stack9#java.lang.AssertionError();
+ throw $stack9;
+ label0:$stack2=new io.openmessaging.rocketmq.domain.SendResultImpl;
+ $stack3 = rmqResult.getMsgId();
+ $stack4 = io.openmessaging.OMS.newKeyValue();
+ $stack2#io.openmessaging.rocketmq.domain.SendResultImpl($stack3,$stack4);
+ return  $stack2;
+ } 
+

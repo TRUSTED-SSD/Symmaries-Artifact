@@ -1,0 +1,47 @@
+static void org.apache.bookkeeper.common.util.affinity.impl.CpuAffinityImpl:acquireCore()
+{
+int cpu;
+  boolean $stack1;
+  org.slf4j.Logger $stack5;
+  java.lang.Thread $stack7;
+  java.lang.String $stack8;
+  java.lang.Integer $stack9;
+  java.lang.RuntimeException $stack10;
+  java.io.IOException $stack12;
+  java.lang.StringBuilder $stack14;
+  $stack1=org.apache.bookkeeper.common.util.affinity.impl.CpuAffinityImpl.isInitialized;
+ if ($stack1!=0) goto label0;
+ org.apache.bookkeeper.common.util.affinity.impl.CpuAffinityImpl.init();
+ label0:$stack1=org.apache.bookkeeper.common.util.affinity.impl.CpuAffinityImpl.isSupported;
+ if ($stack1!=0) goto label1;
+ $stack10=new java.lang.RuntimeException;
+ $stack10#java.lang.RuntimeException("CPU Affinity not supported in current environment");
+ throw $stack10;
+ label1:$stack1 = org.apache.bookkeeper.common.util.affinity.impl.CpuAffinityJni.isRoot();
+ if ($stack1!=0) goto label2;
+ $stack10=new java.lang.RuntimeException;
+ $stack10#java.lang.RuntimeException("CPU Affinity can only be set if the process is running as root");
+ throw $stack10;
+ label2:cpu = org.apache.bookkeeper.common.util.affinity.impl.CpuAffinityImpl.pickAvailableCpu();
+ org.apache.bookkeeper.common.util.affinity.impl.CpuAffinityJni.setAffinity(cpu);
+ $stack5=org.apache.bookkeeper.common.util.affinity.impl.CpuAffinityImpl.log;
+ $stack7 = java.lang.Thread.currentThread();
+ $stack8 = $stack7.getName();
+ $stack9 = java.lang.Integer.valueOf(cpu);
+ dummyClass.lowSink("Thread {} has successfully acquired ownership of cpu {}");
+$stack5.info("Thread {} has successfully acquired ownership of cpu {}",(java.lang.Object)$stack8,(java.lang.Object)$stack9);
+ label3:goto label4;
+ label5:$stack12 = catch;
+ $stack10=new java.lang.RuntimeException;
+ $stack14=new java.lang.StringBuilder;
+ $stack14#java.lang.StringBuilder();
+ $stack14 = $stack14.append("Failed to acquire CPU core: ");
+ $stack8 = $stack12.getMessage();
+ $stack14 = $stack14.append($stack8);
+ $stack8 = $stack14.toString();
+ $stack10#java.lang.RuntimeException($stack8);
+ throw $stack10;
+ label4:return;
+ catch java.io.IOException: label2 - label3 : label5;
+} 
+

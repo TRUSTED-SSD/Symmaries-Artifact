@@ -1,0 +1,39 @@
+void org.apache.bookkeeper.bookie.Journal:shutdown()
+{
+boolean $stack2;
+  org.slf4j.Logger $stack3;
+  org.apache.bookkeeper.bookie.FileChannelProvider $stack4;
+  org.apache.bookkeeper.bookie.Journal$ForceWriteThread $stack5;
+  java.lang.Exception $stack14;
+  java.lang.Thread $stack15;
+  label0:$stack2=this.running;
+ if ($stack2!=0) goto label1;
+ label2:return;
+ label1:$stack3=org.apache.bookkeeper.bookie.Journal.LOG;
+ dummyClass.lowSink("Shutting down Journal");
+$stack3.info("Shutting down Journal");
+ $stack4=this.fileChannelProvider;
+ if ($stack4==null) goto label3;
+ $stack4=this.fileChannelProvider;
+ $stack4.close();
+ label3:$stack5=this.forceWriteThread;
+ $stack5.shutdown();
+ this.running=0;
+ this.interrupt();
+ this.join();
+ $stack3=org.apache.bookkeeper.bookie.Journal.LOG;
+ dummyClass.lowSink("Finished Shutting down Journal thread");
+$stack3.info("Finished Shutting down Journal thread");
+ label4:goto label5;
+ label6:$stack14 = catch;
+ $stack15 = java.lang.Thread.currentThread();
+ $stack15.interrupt();
+ $stack3=org.apache.bookkeeper.bookie.Journal.LOG;
+ $stack3.warn("Interrupted during shutting down journal : ",(java.lang.Throwable)$stack14);
+ label5:return;
+ catch java.io.IOException: label0 - label2 : label6;
+catch java.lang.InterruptedException: label0 - label2 : label6;
+catch java.io.IOException: label1 - label4 : label6;
+catch java.lang.InterruptedException: label1 - label4 : label6;
+} 
+

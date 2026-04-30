@@ -1,0 +1,17 @@
+long org.apache.rocketmq.store.DefaultMessageStore:getEarliestMessageTime()
+{
+long minPhyOffset;
+  byte size;
+  org.apache.rocketmq.store.CommitLog $stack5;
+  boolean $stack6;
+  minPhyOffset = this.getMinPhyOffset();
+ $stack5 = this.getCommitLog();
+ $stack6=$stack5 instanceof org.apache.rocketmq.store.dledger.DLedgerCommitLog;
+ if ($stack6==0) goto label0;
+ minPhyOffset=(minPhyOffset+48L);
+ label0:size=64;
+ $stack5 = this.getCommitLog();
+ minPhyOffset = $stack5.pickupStoreTimestamp(minPhyOffset,64);
+ return  minPhyOffset;
+ } 
+

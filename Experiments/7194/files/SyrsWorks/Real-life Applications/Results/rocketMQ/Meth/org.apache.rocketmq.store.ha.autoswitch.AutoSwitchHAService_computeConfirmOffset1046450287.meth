@@ -1,0 +1,32 @@
+long org.apache.rocketmq.store.ha.autoswitch.AutoSwitchHAService:computeConfirmOffset()
+{
+java.util.Set currentSyncStateSet;
+  long confirmOffset;
+  java.util.Iterator l4;
+  org.apache.rocketmq.store.ha.HAConnection connection;
+  java.lang.String slaveAddress;
+  org.apache.rocketmq.store.DefaultMessageStore $stack8;
+  java.util.List $stack10;
+  boolean $stack12;
+  java.lang.Object $stack13;
+  org.apache.rocketmq.store.ha.autoswitch.AutoSwitchHAConnection $stack14;
+  long $stack18;
+  currentSyncStateSet = this.getSyncStateSet();
+ $stack8=this.defaultMessageStore;
+ confirmOffset = $stack8.getMaxPhyOffset();
+ $stack10=this.connectionList;
+ l4 = $stack10.iterator();
+ label0:$stack12 = l4.hasNext();
+ if ($stack12==0) goto label1;
+ $stack13 = l4.next();
+ connection=(org.apache.rocketmq.store.ha.HAConnection) $stack13;
+ $stack14=(org.apache.rocketmq.store.ha.autoswitch.AutoSwitchHAConnection) connection;
+ slaveAddress = $stack14.getSlaveAddress();
+ $stack12 = currentSyncStateSet.contains((java.lang.Object)slaveAddress);
+ if ($stack12==0) goto label2;
+ $stack18 = connection.getSlaveAckOffset();
+ confirmOffset = java.lang.Math.min(confirmOffset,$stack18);
+ label2:goto label0;
+ label1:return  confirmOffset;
+ } 
+

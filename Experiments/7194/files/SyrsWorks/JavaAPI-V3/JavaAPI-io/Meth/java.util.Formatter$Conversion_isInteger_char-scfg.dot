@@ -1,0 +1,31 @@
+digraph G {
+  node [shape=box, ];
+  "pc0_js1" [label="〈switch [c0] {4 cases & 1 default}, js1〉", ];
+  "pc1_js1" [label="〈label0: return 1, js1〉", ];
+  "pc2_js1" [label="〈label1: return 0, js1〉", ];
+  "pc3_js1" [label="〈sink, js1〉", ];
+  "pc3_js2" [label="〈sink, js2〉\n\
+(ϕ ≠ S1 ∨ pc ⊑ ret(level())') ∧ (ϕ ≠ S2 ∨ pc ⊑ ret(level())')",
+             ];
+  
+  
+  "pc0_js1" -> "pc1_js1" [label="υ ∧ ω ∨ τ ∧ ¬υ ∧ level(c0) ⊐ pc ∨ τ ∧ ¬υ ∧ level(c0) ⊑ pc,\n\
+{pc := if ¬(τ ∧ ¬υ ∧ level(c0) ⊐ pc) ∨ υ ∧ ω then pc else pc ⊔ level(c0),\n\
+ hr := if ¬(τ ∧ ¬υ ∧ level(c0) ⊐ pc) ∨ υ ∧ ω then hr else P0}",
+                          ];
+  "pc0_js1" -> "pc2_js1" [label="υ ∧ ¬ω ∨ ¬τ ∧ ¬υ ∧ level(c0) ⊐ pc ∨ ¬τ ∧ ¬υ ∧ level(c0) ⊑ pc,\n\
+{pc := if ¬(¬τ ∧ ¬υ ∧ level(c0) ⊐ pc) ∨ υ ∧ ¬ω then pc else pc ⊔ level(c0),\n\
+ hr := if ¬(¬τ ∧ ¬υ ∧ level(c0) ⊐ pc) ∨ υ ∧ ¬ω then hr else P0}",
+                          ];
+  "pc1_js1" -> "pc3_js1" [label="tt,\n\
+{ϕ := S1}", ];
+  "pc2_js1" -> "pc3_js1" [label="tt,\n\
+{ϕ := S2}", ];
+  "pc3_js1" -> "pc0_js1" [label="¬υ ∧ hr = P0,\n\
+{υ := tt}", ];
+  "pc3_js1" -> "pc3_js2" [label="hr ≠ P0 ∨ υ ∧ hr = P0,\n\
+{υ := υ ∧ ¬(υ ∧ hr = P0),\n\
+ hr := if υ ∧ hr = P0 then P. else hr}",
+                          ];
+  
+  }

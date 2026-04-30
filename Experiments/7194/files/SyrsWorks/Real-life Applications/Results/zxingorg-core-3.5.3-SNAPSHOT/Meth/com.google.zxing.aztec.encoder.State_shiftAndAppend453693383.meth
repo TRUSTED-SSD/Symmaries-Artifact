@@ -1,0 +1,29 @@
+com.google.zxing.aztec.encoder.State com.google.zxing.aztec.encoder.State:shiftAndAppend(int mode,int value)
+{
+com.google.zxing.aztec.encoder.Token token;
+  byte thisModeBitCount;
+  int $stack5;
+  int[][] $stack7;
+  int[] $stack8;
+  com.google.zxing.aztec.encoder.State $stack12;
+  token=this.token;
+ $stack5=this.mode;
+ if ($stack5!=2) goto label0;
+ thisModeBitCount=4;
+ goto label1;
+ label0:thisModeBitCount=5;
+ label1:$stack7=com.google.zxing.aztec.encoder.HighLevelEncoder.SHIFT_TABLE;
+ $stack5=this.mode;
+ $stack8=$stack7[$stack5];
+ mode=$stack8[mode];
+ token = token.add(mode,(int)thisModeBitCount);
+ $stack12=new com.google.zxing.aztec.encoder.State;
+ token = token.add(value,5);
+ mode=this.mode;
+ value=this.bitCount;
+ value=(value+thisModeBitCount);
+ value=(value+5);
+ $stack12#com.google.zxing.aztec.encoder.State(token,mode,0,value);
+ return  $stack12;
+ } 
+

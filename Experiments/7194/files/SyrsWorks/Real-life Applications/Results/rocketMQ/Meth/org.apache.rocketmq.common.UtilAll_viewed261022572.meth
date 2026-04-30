@@ -1,0 +1,23 @@
+static java.nio.ByteBuffer org.apache.rocketmq.common.UtilAll:viewed(java.nio.ByteBuffer @buffer)
+{
+java.nio.ByteBuffer viewedBuffer;
+  boolean $stack2;
+  sun.nio.ch.DirectBuffer $stack3;
+  java.lang.Object $stack4;
+  java.lang.IllegalArgumentException $stack6;
+  java.nio.ByteBuffer buffer;
+buffer=@buffer;
+$stack2 = buffer.isDirect();
+ if ($stack2!=0) goto label0;
+ $stack6=new java.lang.IllegalArgumentException;
+ $stack6#java.lang.IllegalArgumentException("buffer is non-direct");
+ throw $stack6;
+ label0:$stack3=(sun.nio.ch.DirectBuffer) buffer;
+ $stack4 = $stack3.attachment();
+ viewedBuffer=(java.nio.ByteBuffer) $stack4;
+ if (viewedBuffer!=null) goto label1;
+ return  buffer;
+ label1:buffer = org.apache.rocketmq.common.UtilAll.viewed(viewedBuffer);
+ return  buffer;
+ } 
+

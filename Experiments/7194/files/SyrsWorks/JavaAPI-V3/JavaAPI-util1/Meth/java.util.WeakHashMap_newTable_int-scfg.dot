@@ -1,0 +1,34 @@
+digraph G {
+  node [shape=box, ];
+  "pc0_js1" [label="〈$r1 = new (java.util.WeakHashMap$Entry)[i0], js1〉", ];
+  "pc1_js1" [label="〈$r2 = (java.util.WeakHashMap$Entry[]) $r1, js1〉", ];
+  "pc2_js1" [label="〈return $r2, js1〉", ];
+  "pc3_js1" [label="〈sink, js1〉\n\
+obj_level(this) ⊑ ret(obj_level(this))' ∧ (ret(this.><this)' ∨ ¬this.><this) ∧ (ϕ ≠ S2 ∨ obj_level($r2) ⊑ ret(obj_level())' ∧ pc ⊔ level($r2) ⊑ ret(level())' ∧ (ret(.><this)' ∨ ¬this.><$r2) ∧ (ret(this.><)' ∨ ¬$r2.><this))",
+             ];
+  
+  
+  "pc0_js1" -> "pc1_js1" [label="tt,\n\
+{$r1~$r2 := ff,\n\
+ $r1.><$r1 := ff,\n\
+ $r1.><$r2 := ff,\n\
+ $r1.><this := ff,\n\
+ $r2.><$r1 := ff,\n\
+ this.><$r1 := ff,\n\
+ level($r1) := pc,\n\
+ obj_level($r1) := pc ⊔ level(i0)}",
+                          ];
+  "pc1_js1" -> "pc2_js1" [label="tt,\n\
+{$r1~$r2 := tt,\n\
+ $r1.><$r2 := ff,\n\
+ $r2.><$r1 := ff,\n\
+ $r2.><$r2 := ff,\n\
+ $r2.><this := ff,\n\
+ this.><$r2 := ff,\n\
+ level($r2) := pc,\n\
+ obj_level($r2) := pc ⊔ level(i0)}",
+                          ];
+  "pc2_js1" -> "pc3_js1" [label="tt,\n\
+{ϕ := S2}", ];
+  
+  }

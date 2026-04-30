@@ -1,0 +1,57 @@
+void org.keycloak.jose.jwe.enc.AesCbcHmacShaEncryptionProvider:encodeJwe(org.keycloak.jose.jwe.JWE jwe)
+{
+byte[] contentBytes;
+  byte[] initializationVector;
+  java.security.Key aesKey;
+  java.security.Key hmacShaKey;
+  int expectedAesKeyLength;
+  byte[] aad;
+  org.keycloak.jose.jwe.JWEKeyStorage $stack12;
+  org.keycloak.jose.jwe.JWEKeyStorage$KeyUse $stack13;
+  int $stack20;
+  java.lang.String $stack22;
+  java.nio.charset.Charset $stack23;
+  java.lang.IllegalStateException $stack26;
+  java.lang.StringBuilder $stack27;
+  java.lang.IllegalArgumentException $stack35;
+  contentBytes = jwe.getContent();
+ initializationVector = org.keycloak.jose.jwe.JWEUtils.generateSecret(16);
+ $stack12 = jwe.getKeyStorage();
+ $stack13=org.keycloak.jose.jwe.JWEKeyStorage$KeyUse.ENCRYPTION;
+ aesKey = $stack12.getCEKKey($stack13,(boolean)0);
+ if (aesKey!=null) goto label0;
+ $stack35=new java.lang.IllegalArgumentException;
+ $stack35#java.lang.IllegalArgumentException("AES CEK key not present");
+ throw $stack35;
+ label0:$stack12 = jwe.getKeyStorage();
+ $stack13=org.keycloak.jose.jwe.JWEKeyStorage$KeyUse.SIGNATURE;
+ hmacShaKey = $stack12.getCEKKey($stack13,(boolean)0);
+ if (hmacShaKey!=null) goto label1;
+ $stack35=new java.lang.IllegalArgumentException;
+ $stack35#java.lang.IllegalArgumentException("HMAC CEK key not present");
+ throw $stack35;
+ label1:expectedAesKeyLength = this.getExpectedAesKeyLength();
+ aad = aesKey.getEncoded();
+ $stack20=#aad;
+ if (expectedAesKeyLength==$stack20) goto label2;
+ $stack26=new java.lang.IllegalStateException;
+ $stack27=new java.lang.StringBuilder;
+ $stack27#java.lang.StringBuilder();
+ $stack27 = $stack27.append("Length of aes key should be ");
+ $stack27 = $stack27.append(expectedAesKeyLength);
+ $stack27 = $stack27.append(", but was ");
+ initializationVector = aesKey.getEncoded();
+ expectedAesKeyLength=#initializationVector;
+ $stack27 = $stack27.append(expectedAesKeyLength);
+ $stack22 = $stack27.toString();
+ $stack26#java.lang.IllegalStateException($stack22);
+ throw $stack26;
+ label2:contentBytes = this#org.keycloak.jose.jwe.enc.AesCbcHmacShaEncryptionProvider:encryptBytes(contentBytes,initializationVector,aesKey);
+ $stack22 = jwe.getBase64Header();
+ $stack23=java.nio.charset.StandardCharsets.UTF_8;
+ aad = $stack22.getBytes($stack23);
+ aad = this#org.keycloak.jose.jwe.enc.AesCbcHmacShaEncryptionProvider:computeAuthenticationTag(aad,initializationVector,contentBytes,hmacShaKey);
+ jwe.setEncryptedContentInfo(initializationVector,contentBytes,aad);
+ return;
+ } 
+

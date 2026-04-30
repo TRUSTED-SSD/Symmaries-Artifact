@@ -1,0 +1,33 @@
+void org.apache.bookkeeper.bookie.IndexPersistenceMgr:removeLedger(java.lang.Long ledgerId)
+{
+org.apache.bookkeeper.bookie.FileInfoBackingCache$CachedFileInfo fi;
+  java.lang.Throwable l3;
+  org.apache.bookkeeper.util.SnapshotMap $stack6;
+  com.google.common.cache.Cache $stack7;
+  fi=null;
+ label0:fi = this.getFileInfo(ledgerId,null);
+ fi.close((boolean)0);
+ fi.delete();
+ label1:if (fi==null) goto label2;
+ fi.release();
+ $stack6=this.activeLedgers;
+ $stack6.remove((java.lang.Object)ledgerId);
+ $stack7=this.writeFileInfoCache;
+ $stack7.invalidate((java.lang.Object)ledgerId);
+ $stack7=this.readFileInfoCache;
+ $stack7.invalidate((java.lang.Object)ledgerId);
+ goto label2;
+ label3:l3 = catch;
+ if (fi==null) goto label4;
+ fi.release();
+ $stack6=this.activeLedgers;
+ $stack6.remove((java.lang.Object)ledgerId);
+ $stack7=this.writeFileInfoCache;
+ $stack7.invalidate((java.lang.Object)ledgerId);
+ $stack7=this.readFileInfoCache;
+ $stack7.invalidate((java.lang.Object)ledgerId);
+ label4:throw l3;
+ label2:return;
+ catch java.lang.Throwable: label0 - label1 : label3;
+} 
+

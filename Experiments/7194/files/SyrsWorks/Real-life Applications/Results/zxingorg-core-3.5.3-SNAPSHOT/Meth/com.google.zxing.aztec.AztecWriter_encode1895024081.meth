@@ -1,0 +1,24 @@
+static com.google.zxing.common.BitMatrix com.google.zxing.aztec.AztecWriter:encode(java.lang.String @contents,com.google.zxing.BarcodeFormat format,int width,int height,java.nio.charset.Charset charset,int eccPercent,int layers)
+{
+com.google.zxing.aztec.encoder.AztecCode aztec;
+  com.google.zxing.BarcodeFormat $stack8;
+  com.google.zxing.common.BitMatrix $stack10;
+  java.lang.IllegalArgumentException $stack11;
+  java.lang.StringBuilder $stack12;
+  java.lang.String contents;
+contents=@contents;
+$stack8=com.google.zxing.BarcodeFormat.AZTEC;
+ if (format==$stack8) goto label0;
+ $stack11=new java.lang.IllegalArgumentException;
+ $stack12=new java.lang.StringBuilder;
+ $stack12#java.lang.StringBuilder();
+ $stack12 = $stack12.append("Can only encode AZTEC, but got ");
+ $stack12 = $stack12.append((java.lang.Object)format);
+ contents = $stack12.toString();
+ $stack11#java.lang.IllegalArgumentException(contents);
+ throw $stack11;
+ label0:aztec = com.google.zxing.aztec.encoder.Encoder.encode(contents,eccPercent,layers,charset);
+ $stack10 = com.google.zxing.aztec.AztecWriter.renderResult(aztec,width,height);
+ return  $stack10;
+ } 
+

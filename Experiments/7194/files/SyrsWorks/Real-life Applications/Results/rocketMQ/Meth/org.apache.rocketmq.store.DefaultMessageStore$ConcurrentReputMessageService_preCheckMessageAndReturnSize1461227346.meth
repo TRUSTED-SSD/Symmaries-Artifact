@@ -1,0 +1,31 @@
+int org.apache.rocketmq.store.DefaultMessageStore$ConcurrentReputMessageService:preCheckMessageAndReturnSize(java.nio.ByteBuffer byteBuffer)
+{
+int totalSize;
+  int magicCode;
+  long $stack6;
+  long $stack7;
+  org.apache.rocketmq.store.DefaultMessageStore $stack8;
+  byte $stack11;
+  byteBuffer.mark();
+ totalSize = byteBuffer.getInt();
+ $stack7=this.reputFromOffset;
+ $stack6=(long) totalSize;
+ $stack6=($stack7+$stack6);
+ $stack8=this.this$0;
+ $stack7 = $stack8.getConfirmOffset();
+ $stack11=($stack6 cmp $stack7);
+ if ($stack11<=0) goto label0;
+ return  -1;
+ label0:magicCode = byteBuffer.getInt();
+ switch [magicCode]
+if 0 goto label1;
+if 1 goto label2;
+if 2 goto label2;
+goto label3;
+ label2:goto label4;
+ label1:return  0;
+ label3:return  -1;
+ label4:byteBuffer.reset();
+ return  totalSize;
+ } 
+

@@ -1,0 +1,103 @@
+    void readInterfaceSpec(org.w3c.dom.Document, java.util.Set) throws rifl.spec.RIFLIntegrityException
+    {
+        rifl.spec.RIFLReader this;
+        org.w3c.dom.Document doc;
+        java.util.Set interfacespec;
+        org.w3c.dom.Element interfacespecElem;
+        java.util.Iterator l5;
+        java.lang.String handle;
+        rifl.spec.CatSrcSnk catSrcSnk;
+        rifl.spec.Assignable assignable;
+        org.w3c.dom.NodeList $stack10;
+        java.lang.Iterable $stack11;
+        boolean $stack13;
+        java.lang.Object $stack14;
+        java.util.Map $stack20;
+        java.lang.Object[] $stack24;
+
+        this := @this: rifl.spec.RIFLReader;
+
+        doc := @parameter0: org.w3c.dom.Document;
+
+        interfacespec := @parameter1: java.util.Set;
+
+        interfacespecElem = staticinvoke <rifl.spec.RIFLReader: org.w3c.dom.Element getElement(org.w3c.dom.Document,java.lang.String)>(doc, "interfacespec");
+/*180*/
+/*180*/
+
+        $stack10 = interfaceinvoke interfacespecElem.<org.w3c.dom.Element: org.w3c.dom.NodeList getChildNodes()>();
+/*181*/
+
+        $stack11 = staticinvoke <rifl.spec.RIFLReader: java.lang.Iterable getElementList(org.w3c.dom.NodeList)>($stack10);
+/*181*/
+
+        l5 = interfaceinvoke $stack11.<java.lang.Iterable: java.util.Iterator iterator()>();
+/*181*/
+/*181*/
+
+        goto label3;
+/*181*/
+
+     label1:
+        $stack14 = interfaceinvoke l5.<java.util.Iterator: java.lang.Object next()>();
+/*181*/
+
+        interfacespecElem = (org.w3c.dom.Element) $stack14;
+/*181*/
+
+        handle = interfaceinvoke interfacespecElem.<org.w3c.dom.Element: java.lang.String getAttribute(java.lang.String)>("handle");
+/*182*/
+/*182*/
+
+        interfacespecElem = staticinvoke <rifl.spec.RIFLReader: org.w3c.dom.Element getChildElement(org.w3c.dom.Element)>(interfacespecElem);
+/*183*/
+
+        catSrcSnk = specialinvoke this.<rifl.spec.RIFLReader: rifl.spec.CatSrcSnk readCategoryTree(org.w3c.dom.Element)>(interfacespecElem);
+/*183*/
+/*183*/
+
+        assignable = new rifl.spec.Assignable;
+/*184*/
+
+        specialinvoke assignable.<rifl.spec.Assignable: void <init>(java.lang.String,rifl.spec.CatSrcSnk)>(handle, catSrcSnk);
+/*184*/
+
+        $stack13 = interfaceinvoke interfacespec.<java.util.Set: boolean add(java.lang.Object)>(assignable);
+/*185*/
+
+        if $stack13 != 0 goto label2;
+/*185*/
+
+        $stack24 = newarray (java.lang.Object)[1];
+/*186*/
+
+        $stack24[0] = assignable;
+/*186*/
+
+        handle = staticinvoke <java.lang.String: java.lang.String format(java.lang.String,java.lang.Object[])>("Duplicate declaration of assignable \'%s\'. Duplicate ignored.", $stack24);
+/*186*/
+
+        staticinvoke <rifl.spec.RIFLReader: void warn(java.lang.String)>(handle);
+/*186*/
+
+     label2:
+        $stack20 = this.<rifl.spec.RIFLReader: java.util.Map assignables>;
+/*188*/
+
+        handle = virtualinvoke assignable.<rifl.spec.Assignable: java.lang.String getName()>();
+/*188*/
+
+        interfaceinvoke $stack20.<java.util.Map: java.lang.Object put(java.lang.Object,java.lang.Object)>(handle, assignable);
+/*188*/
+
+     label3:
+        $stack13 = interfaceinvoke l5.<java.util.Iterator: boolean hasNext()>();
+/*181*/
+
+        if $stack13 != 0 goto label1;
+/*181*/
+
+        return;
+/*190*/
+    }
+

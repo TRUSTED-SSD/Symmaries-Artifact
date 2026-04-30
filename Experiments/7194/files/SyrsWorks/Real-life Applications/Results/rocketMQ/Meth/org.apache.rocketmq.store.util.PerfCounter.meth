@@ -1,0 +1,41 @@
+org.apache.rocketmq.store.util.PerfCounter(int slots,org.apache.rocketmq.logging.org.slf4j.Logger logger,java.lang.String @prefix,int maxNumPerCount,int maxTimeMsPerCount)
+{
+long $stack6;
+  org.apache.rocketmq.store.util.PerfCounter$1 $stack7;
+  java.util.concurrent.atomic.AtomicInteger[] $stack8;
+  java.util.concurrent.atomic.AtomicLong $stack9;
+  java.lang.RuntimeException $stack15;
+  java.lang.StringBuilder $stack16;
+  java.lang.String prefix;
+prefix=@prefix;
+this#java.lang.Object();
+ $stack6 = java.lang.System.currentTimeMillis();
+ this.last=$stack6;
+ this.lastTps=0.0F;
+ $stack7=new org.apache.rocketmq.store.util.PerfCounter$1;
+ $stack7#org.apache.rocketmq.store.util.PerfCounter$1(this);
+ this.lastTickMs=$stack7;
+ this.prefix="DEFAULT";
+ if (slots>=3000) goto label0;
+ $stack15=new java.lang.RuntimeException;
+ $stack16=new java.lang.StringBuilder;
+ $stack16#java.lang.StringBuilder();
+ $stack16 = $stack16.append("slots must bigger than 3000, but:%s");
+ $stack16 = $stack16.append(slots);
+ prefix = $stack16.toString();
+ $stack15#java.lang.RuntimeException(prefix);
+ throw $stack15;
+ label0:$stack8=new java.util.concurrent.atomic.AtomicInteger[slots];
+ this.count=$stack8;
+ $stack9=new java.util.concurrent.atomic.AtomicLong;
+ $stack9#java.util.concurrent.atomic.AtomicLong(0L);
+ this.allCount=$stack9;
+ this.logger=logger;
+ if (prefix==null) goto label1;
+ this.prefix=prefix;
+ label1:this.maxNumPerCount=maxNumPerCount;
+ this.maxTimeMsPerCount=maxTimeMsPerCount;
+ this.reset();
+ return;
+ } 
+

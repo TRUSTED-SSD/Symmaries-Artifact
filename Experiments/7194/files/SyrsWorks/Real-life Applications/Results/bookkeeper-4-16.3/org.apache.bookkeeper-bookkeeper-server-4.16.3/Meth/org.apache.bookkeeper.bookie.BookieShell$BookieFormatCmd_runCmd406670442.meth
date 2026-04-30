@@ -1,0 +1,34 @@
+int org.apache.bookkeeper.bookie.BookieShell$BookieFormatCmd:runCmd(org.apache.commons.cli.CommandLine cmdLine)
+{
+boolean force;
+  boolean deletecookie;
+  org.apache.bookkeeper.tools.cli.commands.bookie.FormatCommand$Flags flags;
+  org.apache.bookkeeper.tools.cli.commands.bookie.FormatCommand $stack15;
+  org.apache.bookkeeper.bookie.BookieShell $stack16;
+  org.apache.bookkeeper.conf.ServerConfiguration $stack17;
+  byte $stack19;
+  boolean $stack20;
+  force = cmdLine.hasOption("n");
+ if (force!=0) goto label0;
+ $stack20=1;
+ goto label1;
+ label0:$stack20=0;
+ label1:force = cmdLine.hasOption("f");
+ deletecookie = cmdLine.hasOption("d");
+ flags=new org.apache.bookkeeper.tools.cli.commands.bookie.FormatCommand$Flags;
+ flags#org.apache.bookkeeper.tools.cli.commands.bookie.FormatCommand$Flags();
+ flags = flags.nonInteractive($stack20);
+ flags = flags.force(force);
+ flags = flags.deleteCookie(deletecookie);
+ $stack15=new org.apache.bookkeeper.tools.cli.commands.bookie.FormatCommand;
+ $stack15#org.apache.bookkeeper.tools.cli.commands.bookie.FormatCommand(flags);
+ $stack16=this.this$0;
+ $stack17=$stack16.bkConf;
+ force = $stack15.apply($stack17,flags);
+ if (force==0) goto label2;
+ $stack19=0;
+ goto label3;
+ label2:$stack19=1;
+ label3:return  $stack19;
+ } 
+

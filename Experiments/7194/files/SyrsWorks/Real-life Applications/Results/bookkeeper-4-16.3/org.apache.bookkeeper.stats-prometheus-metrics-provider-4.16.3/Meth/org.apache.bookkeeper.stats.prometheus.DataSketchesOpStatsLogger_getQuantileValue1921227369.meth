@@ -1,0 +1,14 @@
+double org.apache.bookkeeper.stats.prometheus.DataSketchesOpStatsLogger:getQuantileValue(boolean success,double quantile)
+{
+com.yahoo.sketches.quantiles.DoublesSketch s;
+  if (success==0) goto label0;
+ s=this.successResult;
+ goto label1;
+ label0:s=this.failResult;
+ label1:if (s==null) goto label2;
+ quantile = s.getQuantile(quantile);
+ goto label3;
+ label2:quantile=#NaN;
+ label3:return  quantile;
+ } 
+

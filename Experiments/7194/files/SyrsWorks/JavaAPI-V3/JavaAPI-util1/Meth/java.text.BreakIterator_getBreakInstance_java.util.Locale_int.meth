@@ -1,0 +1,40 @@
+static java.text.BreakIterator java.text.BreakIterator:getBreakInstance(java.util.Locale r0,int i0)
+{
+java.text.BreakIterator$BreakIteratorCache r1;
+  java.lang.ref.SoftReference[] $r2;
+  java.lang.ref.SoftReference $r3;
+  java.lang.ref.SoftReference[] $r4;
+  java.lang.ref.SoftReference $r5;
+  java.lang.Object $r6;
+  java.util.Locale $r7;
+  boolean $z0;
+  java.text.BreakIterator $r8;
+  java.text.BreakIterator$BreakIteratorCache r9;
+  java.text.BreakIterator r10;
+  java.text.BreakIterator$BreakIteratorCache $r11;
+  java.lang.ref.SoftReference[] $r12;
+  java.lang.ref.SoftReference $r13;
+  $r2=java.text.BreakIterator.iterCache;
+ $r3=$r2[i0];
+ if ($r3==null) goto label0;
+ $r4=java.text.BreakIterator.iterCache;
+ $r5=$r4[i0];
+ $r6 = $r5.get();
+ r9=(java.text.BreakIterator$BreakIteratorCache) $r6;
+ if (r9==null) goto label0;
+ $r7 = r9.getLocale();
+ $z0 = $r7.equals((java.lang.Object)r0);
+ if ($z0==0) goto label0;
+ $r8 = r9.createBreakInstance();
+ return  $r8;
+ label0:r10 = java.text.BreakIterator.createBreakInstance(r0,i0);
+ $r11=new java.text.BreakIterator$BreakIteratorCache;
+ $r11#java.text.BreakIterator$BreakIteratorCache:init(r0,r10);
+ r1=$r11;
+ $r12=java.text.BreakIterator.iterCache;
+ $r13=new java.lang.ref.SoftReference;
+ $r13#java.lang.ref.SoftReference:init((java.lang.Object)r1);
+ $r12[i0]=$r13;
+ return  r10;
+ }  
+

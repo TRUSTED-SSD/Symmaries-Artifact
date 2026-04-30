@@ -1,0 +1,19 @@
+int org.apache.rocketmq.store.kv.CompactionLog:getCompactionLogSize(int cqSize,int origLogSize)
+{
+int n;
+  int $stack7;
+  n=(origLogSize/cqSize);
+ if (n>=5) goto label0;
+ cqSize=(cqSize * 5);
+ return  cqSize;
+ label0:origLogSize=(origLogSize%cqSize);
+ if (origLogSize<=0) goto label1;
+ $stack7=(cqSize>>1);
+ if (origLogSize>=$stack7) goto label1;
+ cqSize=(n * cqSize);
+ return  cqSize;
+ label1:origLogSize=(n+1);
+ cqSize=(origLogSize * cqSize);
+ return  cqSize;
+ } 
+

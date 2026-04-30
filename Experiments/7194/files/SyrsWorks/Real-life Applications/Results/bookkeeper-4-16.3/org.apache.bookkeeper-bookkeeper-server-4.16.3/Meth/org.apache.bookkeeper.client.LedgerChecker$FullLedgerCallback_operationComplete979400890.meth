@@ -1,0 +1,25 @@
+void org.apache.bookkeeper.client.LedgerChecker$FullLedgerCallback:operationComplete(int rc,org.apache.bookkeeper.client.LedgerFragment result)
+{
+java.util.concurrent.atomic.AtomicLong $stack3;
+  long $stack4;
+  byte $stack5;
+  java.util.Set $stack6;
+  org.apache.bookkeeper.proto.BookkeeperInternalCallbacks$GenericCallback $stack7;
+  if (rc!=-19) goto label0;
+ $stack7=this.cb;
+ $stack6=this.badFragments;
+ $stack7.operationComplete(-19,(java.lang.Object)$stack6);
+ return;
+ label0:if (rc==0) goto label1;
+ $stack6=this.badFragments;
+ $stack6.add((java.lang.Object)result);
+ label1:$stack3=this.numFragments;
+ $stack4 = $stack3.decrementAndGet();
+ $stack5=($stack4 cmp 0L);
+ if ($stack5!=0) goto label2;
+ $stack7=this.cb;
+ $stack6=this.badFragments;
+ $stack7.operationComplete(0,(java.lang.Object)$stack6);
+ label2:return;
+ } 
+

@@ -1,0 +1,56 @@
+void org.junit.internal.runners.statements.ExpectException:evaluate()
+{
+boolean complete;
+  java.lang.Throwable e;
+  java.lang.String message;
+  org.junit.runners.model.Statement $stack4;
+  java.lang.AssertionError $stack5;
+  java.lang.StringBuilder $stack6;
+  java.lang.Class $stack8;
+  java.lang.Class $stack14;
+  boolean $stack15;
+  java.lang.Exception $stack28;
+  org.junit.internal.AssumptionViolatedException $stack29;
+  complete=0;
+ label0:$stack4=this.next;
+ $stack4.evaluate();
+ complete=1;
+ label1:goto label2;
+ label3:$stack29 = catch;
+ throw $stack29;
+ label4:e = catch;
+ $stack8=this.expected;
+ $stack14 = e.getClass();
+ $stack15 = $stack8.isAssignableFrom($stack14);
+ if ($stack15!=0) goto label2;
+ $stack6=new java.lang.StringBuilder;
+ $stack6#java.lang.StringBuilder();
+ $stack6 = $stack6.append("Unexpected exception, expected<");
+ $stack8=this.expected;
+ message = $stack8.getName();
+ $stack6 = $stack6.append(message);
+ $stack6 = $stack6.append("> but was<");
+ $stack8 = e.getClass();
+ message = $stack8.getName();
+ $stack6 = $stack6.append(message);
+ $stack6 = $stack6.append(">");
+ message = $stack6.toString();
+ $stack28=new java.lang.Exception;
+ $stack28#java.lang.Exception(message,e);
+ throw $stack28;
+ label2:if (complete==0) goto label5;
+ $stack5=new java.lang.AssertionError;
+ $stack6=new java.lang.StringBuilder;
+ $stack6#java.lang.StringBuilder();
+ $stack6 = $stack6.append("Expected exception: ");
+ $stack8=this.expected;
+ message = $stack8.getName();
+ $stack6 = $stack6.append(message);
+ message = $stack6.toString();
+ $stack5#java.lang.AssertionError((java.lang.Object)message);
+ throw $stack5;
+ label5:return;
+ catch org.junit.internal.AssumptionViolatedException: label0 - label1 : label3;
+catch java.lang.Throwable: label0 - label1 : label4;
+} 
+

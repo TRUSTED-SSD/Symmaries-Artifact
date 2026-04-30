@@ -1,0 +1,27 @@
+void org.apache.bookkeeper.bookie.BufferedChannel:flush()
+{
+java.nio.ByteBuffer toWrite;
+  io.netty.buffer.ByteBuf $stack2;
+  io.netty.buffer.ByteBuf $stack3;
+  int $stack5;
+  java.nio.channels.FileChannel $stack7;
+  boolean $stack9;
+  java.util.concurrent.atomic.AtomicLong $stack16;
+  long $stack17;
+  $stack3=this.writeBuffer;
+ $stack2=this.writeBuffer;
+ $stack5 = $stack2.writerIndex();
+ toWrite = $stack3.internalNioBuffer(0,$stack5);
+ label0:$stack7=this.fileChannel;
+ $stack7.write(toWrite);
+ $stack9 = toWrite.hasRemaining();
+ if ($stack9!=0) goto label0;
+ $stack2=this.writeBuffer;
+ $stack2.clear();
+ $stack16=this.writeBufferStartPosition;
+ $stack7=this.fileChannel;
+ $stack17 = $stack7.position();
+ $stack16.set($stack17);
+ return;
+ } 
+

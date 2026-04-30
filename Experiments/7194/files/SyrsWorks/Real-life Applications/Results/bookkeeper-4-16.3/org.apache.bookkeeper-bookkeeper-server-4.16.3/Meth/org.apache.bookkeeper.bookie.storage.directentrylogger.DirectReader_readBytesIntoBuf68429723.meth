@@ -1,0 +1,52 @@
+int org.apache.bookkeeper.bookie.storage.directentrylogger.DirectReader:readBytesIntoBuf(io.netty.buffer.ByteBuf buf,long offset,int size)
+{
+org.apache.bookkeeper.bookie.storage.directentrylogger.Buffer l5;
+  int offsetInBuffer;
+  java.lang.Throwable l8;
+  org.apache.bookkeeper.bookie.storage.directentrylogger.Buffer $stack9;
+  long $stack10;
+  byte $stack11;
+  java.io.EOFException $stack17;
+  org.apache.bookkeeper.common.util.ExceptionMessageHelper $stack18;
+  java.lang.String $stack19;
+  java.lang.Long $stack23;
+  java.lang.Integer $stack29;
+  int $stack39;
+  $stack9=this.nativeBuffer;
+ l5=$stack9;
+ monitorenter $stack9;
+ label0:$stack10=this.currentBlock;
+ $stack11=(offset cmp $stack10);
+ if ($stack11<0) goto label1;
+ $stack10=this.currentBlockEnd;
+ $stack11=(offset cmp $stack10);
+ if ($stack11<0) goto label2;
+ label1:this#org.apache.bookkeeper.bookie.storage.directentrylogger.DirectReader(offset);
+ label2:offsetInBuffer = this#org.apache.bookkeeper.bookie.storage.directentrylogger.DirectReader:offsetInBlock(offset);
+ $stack39 = this#org.apache.bookkeeper.bookie.storage.directentrylogger.DirectReader:sizeInBlock(offset,size);
+ if ($stack39>0) goto label3;
+ $stack17=new java.io.EOFException;
+ $stack18 = org.apache.bookkeeper.common.util.ExceptionMessageHelper.exMsg("Not enough bytes available");
+ $stack19=this.filename;
+ $stack18 = $stack18.kv("file",(java.lang.Object)$stack19);
+ $stack10=this.maxOffset;
+ $stack23 = java.lang.Long.valueOf($stack10);
+ $stack18 = $stack18.kv("fileSize",(java.lang.Object)$stack23);
+ $stack23 = java.lang.Long.valueOf(offset);
+ $stack18 = $stack18.kv("offset",(java.lang.Object)$stack23);
+ $stack29 = java.lang.Integer.valueOf(size);
+ $stack18 = $stack18.kv("size",(java.lang.Object)$stack29);
+ $stack19 = $stack18.toString();
+ $stack17#java.io.EOFException($stack19);
+ throw $stack17;
+ label3:$stack9=this.nativeBuffer;
+ size = $stack9.readByteBuf(buf,offsetInBuffer,size);
+ monitorexit l5;
+ label4:return  size;
+ label5:l8 = catch;
+ monitorexit l5;
+ label6:throw l8;
+ catch java.lang.Throwable: label0 - label4 : label5;
+catch java.lang.Throwable: label5 - label6 : label5;
+} 
+

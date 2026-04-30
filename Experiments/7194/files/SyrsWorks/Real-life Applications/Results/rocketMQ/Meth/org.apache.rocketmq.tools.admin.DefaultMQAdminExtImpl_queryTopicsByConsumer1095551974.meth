@@ -1,0 +1,39 @@
+org.apache.rocketmq.remoting.protocol.body.TopicList org.apache.rocketmq.tools.admin.DefaultMQAdminExtImpl:queryTopicsByConsumer(java.lang.String group)
+{
+java.lang.String retryTopic;
+  org.apache.rocketmq.remoting.protocol.route.TopicRouteData topicRouteData;
+  org.apache.rocketmq.remoting.protocol.body.TopicList result;
+  java.util.Iterator l5;
+  org.apache.rocketmq.remoting.protocol.route.BrokerData bd;
+  org.apache.rocketmq.remoting.protocol.body.TopicList topicList;
+  java.util.List $stack12;
+  boolean $stack14;
+  java.lang.Object $stack15;
+  org.apache.rocketmq.client.impl.factory.MQClientInstance $stack18;
+  org.apache.rocketmq.client.impl.MQClientAPIImpl $stack19;
+  long $stack20;
+  java.util.Set $stack22;
+  java.util.Set $stack23;
+  retryTopic = org.apache.rocketmq.common.MixAll.getRetryTopic(group);
+ topicRouteData = this.examineTopicRouteInfo(retryTopic);
+ result=new org.apache.rocketmq.remoting.protocol.body.TopicList;
+ result#org.apache.rocketmq.remoting.protocol.body.TopicList();
+ $stack12 = topicRouteData.getBrokerDatas();
+ l5 = $stack12.iterator();
+ label0:$stack14 = l5.hasNext();
+ if ($stack14==0) goto label1;
+ $stack15 = l5.next();
+ bd=(org.apache.rocketmq.remoting.protocol.route.BrokerData) $stack15;
+ retryTopic = bd.selectBrokerAddr();
+ if (retryTopic==null) goto label2;
+ $stack18=this.mqClientInstance;
+ $stack19 = $stack18.getMQClientAPIImpl();
+ $stack20=this.timeoutMillis;
+ topicList = $stack19.queryTopicsByConsumer(retryTopic,group,$stack20);
+ $stack22 = result.getTopicList();
+ $stack23 = topicList.getTopicList();
+ $stack22.addAll((java.util.Collection)$stack23);
+ label2:goto label0;
+ label1:return  result;
+ } 
+

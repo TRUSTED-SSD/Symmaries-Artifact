@@ -1,0 +1,32 @@
+void org.apache.rocketmq.controller.impl.DLedgerController$EventScheduler:run()
+{
+org.apache.rocketmq.controller.impl.DLedgerController$EventHandler handler;
+  java.lang.InterruptedException e;
+  org.apache.rocketmq.logging.org.slf4j.Logger $stack3;
+  boolean $stack4;
+  java.util.concurrent.TimeUnit $stack5;
+  java.util.concurrent.BlockingQueue $stack6;
+  java.lang.Object $stack7;
+  java.lang.Throwable $stack10;
+  $stack3 = org.apache.rocketmq.controller.impl.DLedgerController.access$000();
+ $stack3.info("Start event scheduler.");
+ label0:$stack4 = this.isStopped();
+ if ($stack4!=0) goto label1;
+ label2:$stack6=this.eventQueue;
+ $stack5=java.util.concurrent.TimeUnit.SECONDS;
+ $stack7 = $stack6.poll(5L,$stack5);
+ handler=(org.apache.rocketmq.controller.impl.DLedgerController$EventHandler) $stack7;
+ label3:goto label4;
+ label5:e = catch;
+ goto label0;
+ label4:if (handler==null) goto label6;
+ handler.run();
+ label6:goto label7;
+ label8:$stack10 = catch;
+ handler.handleException($stack10);
+ label7:goto label0;
+ label1:return;
+ catch java.lang.InterruptedException: label2 - label3 : label5;
+catch java.lang.Throwable: label4 - label6 : label8;
+} 
+

@@ -1,0 +1,30 @@
+void org.apache.bookkeeper.server.service.HttpService:doStart()
+{
+org.apache.bookkeeper.conf.ServerConfiguration serverConf;
+  org.apache.bookkeeper.common.conf.ComponentConfiguration $stack3;
+  org.apache.bookkeeper.server.conf.BookieConfiguration $stack4;
+  org.apache.bookkeeper.http.HttpServerConfiguration $stack6;
+  boolean $stack7;
+  java.lang.String $stack8;
+  java.lang.String $stack9;
+  java.lang.String $stack10;
+  java.lang.String $stack11;
+  org.apache.bookkeeper.http.HttpServer $stack12;
+  int $stack13;
+  $stack3=this.conf;
+ $stack4=(org.apache.bookkeeper.server.conf.BookieConfiguration) $stack3;
+ serverConf = $stack4.getServerConf();
+ $stack6=new org.apache.bookkeeper.http.HttpServerConfiguration;
+ $stack7 = serverConf.isHttpServerTlsEnable();
+ $stack8 = serverConf.getHttpServerKeystorePath();
+ $stack9 = serverConf.getHttpServerKeystorePassword();
+ $stack10 = serverConf.getHttpServerTrustStorePath();
+ $stack11 = serverConf.getHttpServerTrustStorePassword();
+ $stack6#org.apache.bookkeeper.http.HttpServerConfiguration($stack7,$stack8,$stack9,$stack10,$stack11);
+ $stack12=this.server;
+ $stack13 = serverConf.getHttpServerPort();
+ $stack8 = serverConf.getHttpServerHost();
+ $stack12.startServer($stack13,$stack8,$stack6);
+ return;
+ } 
+

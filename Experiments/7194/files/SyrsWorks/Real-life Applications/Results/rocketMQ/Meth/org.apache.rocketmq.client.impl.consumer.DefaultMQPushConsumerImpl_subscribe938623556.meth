@@ -1,0 +1,25 @@
+void org.apache.rocketmq.client.impl.consumer.DefaultMQPushConsumerImpl:subscribe(java.lang.String topic,java.lang.String subExpression)
+{
+org.apache.rocketmq.remoting.protocol.heartbeat.SubscriptionData subscriptionData;
+  org.apache.rocketmq.client.impl.consumer.RebalanceImpl $stack5;
+  java.util.concurrent.ConcurrentMap $stack6;
+  org.apache.rocketmq.client.impl.factory.MQClientInstance $stack8;
+  java.lang.Exception $stack10;
+  org.apache.rocketmq.client.exception.MQClientException $stack11;
+  label0:subscriptionData = org.apache.rocketmq.remoting.protocol.filter.FilterAPI.buildSubscriptionData(topic,subExpression);
+ $stack5=this.rebalanceImpl;
+ $stack6 = $stack5.getSubscriptionInner();
+ $stack6.put((java.lang.Object)topic,(java.lang.Object)subscriptionData);
+ $stack8=this.mQClientFactory;
+ if ($stack8==null) goto label1;
+ $stack8=this.mQClientFactory;
+ $stack8.sendHeartbeatToAllBrokerWithLock();
+ label1:goto label2;
+ label3:$stack10 = catch;
+ $stack11=new org.apache.rocketmq.client.exception.MQClientException;
+ $stack11#org.apache.rocketmq.client.exception.MQClientException("subscription exception",(java.lang.Throwable)$stack10);
+ throw $stack11;
+ label2:return;
+ catch java.lang.Exception: label0 - label1 : label3;
+} 
+

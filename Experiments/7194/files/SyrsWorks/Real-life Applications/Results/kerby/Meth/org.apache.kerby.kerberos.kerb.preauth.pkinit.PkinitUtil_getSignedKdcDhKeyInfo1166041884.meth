@@ -1,0 +1,16 @@
+static byte[] org.apache.kerby.kerberos.kerb.preauth.pkinit.PkinitUtil:getSignedKdcDhKeyInfo(java.security.PrivateKey privateKey,java.security.cert.X509Certificate certificate,org.apache.kerby.kerberos.kerb.type.pa.pkinit.KdcDhKeyInfo kdcDhKeyInfo)
+{
+byte[] dataToSign;
+  org.apache.kerby.pkix.PkiException $stack8;
+  org.apache.kerby.kerberos.kerb.KrbException $stack9;
+  dataToSign = org.apache.kerby.kerberos.kerb.KrbCodec.encode((org.apache.kerby.asn1.type.Asn1Type)kdcDhKeyInfo);
+ label0:dataToSign = org.apache.kerby.pkix.PkiUtil.getSignedData(privateKey,certificate,dataToSign,"1.3.6.1.5.2.3.1");
+ label1:goto label2;
+ label3:$stack8 = catch;
+ $stack9=new org.apache.kerby.kerberos.kerb.KrbException;
+ $stack9#org.apache.kerby.kerberos.kerb.KrbException("Failed to sign data",(java.lang.Throwable)$stack8);
+ throw $stack9;
+ label2:return  dataToSign;
+ catch org.apache.kerby.pkix.PkiException: label0 - label1 : label3;
+} 
+

@@ -1,0 +1,87 @@
+    private void addIterableValues(org.junit.experimental.theories.ParameterSignature, java.lang.String, java.util.List, java.lang.Iterable)
+    {
+        org.junit.experimental.theories.internal.AllMembersSupplier this;
+        org.junit.experimental.theories.ParameterSignature sig;
+        java.lang.String name, $stack18;
+        java.util.List list;
+        java.lang.Iterable iterable;
+        java.util.Iterator iterator;
+        int i;
+        java.lang.Object value;
+        boolean $stack9;
+        java.lang.StringBuilder $stack13;
+        org.junit.experimental.theories.PotentialAssignment $stack19;
+
+        this := @this: org.junit.experimental.theories.internal.AllMembersSupplier;
+
+        sig := @parameter0: org.junit.experimental.theories.ParameterSignature;
+
+        name := @parameter1: java.lang.String;
+
+        list := @parameter2: java.util.List;
+
+        iterable := @parameter3: java.lang.Iterable;
+
+        iterator = interfaceinvoke iterable.<java.lang.Iterable: java.util.Iterator iterator()>();
+/*142*/
+/*142*/
+
+        i = 0;
+/*143*/
+
+     label1:
+        $stack9 = interfaceinvoke iterator.<java.util.Iterator: boolean hasNext()>();
+/*144*/
+
+        if $stack9 == 0 goto label3;
+/*144*/
+
+        value = interfaceinvoke iterator.<java.util.Iterator: java.lang.Object next()>();
+/*145*/
+/*145*/
+
+        $stack9 = virtualinvoke sig.<org.junit.experimental.theories.ParameterSignature: boolean canAcceptValue(java.lang.Object)>(value);
+/*146*/
+
+        if $stack9 == 0 goto label2;
+/*146*/
+
+        $stack13 = new java.lang.StringBuilder;
+/*147*/
+
+        specialinvoke $stack13.<java.lang.StringBuilder: void <init>()>();
+/*147*/
+
+        $stack13 = virtualinvoke $stack13.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>(name);
+/*147*/
+
+        $stack13 = virtualinvoke $stack13.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>("[");
+/*147*/
+
+        $stack13 = virtualinvoke $stack13.<java.lang.StringBuilder: java.lang.StringBuilder append(int)>(i);
+/*147*/
+
+        $stack13 = virtualinvoke $stack13.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>("]");
+/*147*/
+
+        $stack18 = virtualinvoke $stack13.<java.lang.StringBuilder: java.lang.String toString()>();
+/*147*/
+
+        $stack19 = staticinvoke <org.junit.experimental.theories.PotentialAssignment: org.junit.experimental.theories.PotentialAssignment forValue(java.lang.String,java.lang.Object)>($stack18, value);
+/*147*/
+
+        interfaceinvoke list.<java.util.List: boolean add(java.lang.Object)>($stack19);
+/*147*/
+
+     label2:
+        i = i + 1;
+/*149*/
+
+        goto label1;
+/*150*/
+
+     label3:
+        return;
+/*151*/
+    }
+

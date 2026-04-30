@@ -1,0 +1,47 @@
+void org.apache.kerby.kerberos.kerb.server.request.TgsRequest:makeReply()
+{
+org.apache.kerby.kerberos.kerb.type.ticket.Ticket ticket;
+  org.apache.kerby.kerberos.kerb.type.kdc.TgsRep reply;
+  org.apache.kerby.kerberos.kerb.type.kdc.EncKdcRepPart encKdcRepPart;
+  org.apache.kerby.kerberos.kerb.type.base.EncryptionKey sessionKey;
+  org.apache.kerby.kerberos.kerb.request.KrbIdentity $stack8;
+  org.apache.kerby.kerberos.kerb.type.base.PrincipalName $stack10;
+  org.apache.kerby.kerberos.kerb.server.KdcContext $stack11;
+  java.lang.String $stack12;
+  org.apache.kerby.kerberos.kerb.type.base.AuthToken $stack14;
+  org.apache.kerby.kerberos.kerb.type.base.KeyUsage $stack16;
+  org.apache.kerby.kerberos.kerb.type.base.EncryptedData $stack21;
+  org.apache.kerby.kerberos.kerb.type.ticket.EncTicketPart $stack25;
+  ticket = this.getTicket();
+ reply=new org.apache.kerby.kerberos.kerb.type.kdc.TgsRep;
+ reply#org.apache.kerby.kerberos.kerb.type.kdc.TgsRep();
+ $stack8 = this.getClientEntry();
+ if ($stack8!=null) goto label0;
+ $stack25 = ticket.getEncPart();
+ $stack10 = $stack25.getCname();
+ reply.setCname($stack10);
+ $stack25 = ticket.getEncPart();
+ $stack12 = $stack25.getCrealm();
+ reply.setCrealm($stack12);
+ goto label1;
+ label0:$stack8 = this.getClientEntry();
+ $stack10 = $stack8.getPrincipal();
+ reply.setCname($stack10);
+ $stack11 = this.getKdcContext();
+ $stack12 = $stack11.getKdcRealm();
+ reply.setCrealm($stack12);
+ label1:reply.setTicket(ticket);
+ encKdcRepPart = this#org.apache.kerby.kerberos.kerb.server.request.TgsRequest:makeEncKdcRepPart();
+ reply.setEncPart(encKdcRepPart);
+ $stack14 = this.getToken();
+ if ($stack14==null) goto label2;
+ sessionKey = this.getSessionKey();
+ goto label3;
+ label2:sessionKey = this.getTgtSessionKey();
+ label3:$stack16=org.apache.kerby.kerberos.kerb.type.base.KeyUsage.TGS_REP_ENCPART_SESSKEY;
+ $stack21 = org.apache.kerby.kerberos.kerb.common.EncryptionUtil.seal((org.apache.kerby.asn1.type.Asn1Encodeable)encKdcRepPart,sessionKey,$stack16);
+ reply.setEncryptedEncPart($stack21);
+ this.setReply((org.apache.kerby.kerberos.kerb.type.kdc.KdcRep)reply);
+ return;
+ } 
+

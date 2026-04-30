@@ -1,0 +1,44 @@
+boolean org.apache.rocketmq.broker.filter.ConsumerFilterManager:register(java.lang.String @topic,java.lang.String consumerGroup,java.lang.String expression,java.lang.String type,long clientVersion)
+{
+org.apache.rocketmq.broker.filter.ConsumerFilterManager$FilterDataMapByTopic filterDataMapByTopic;
+  org.apache.rocketmq.broker.filter.ConsumerFilterManager$FilterDataMapByTopic prev;
+  boolean $stack10;
+  int $stack11;
+  java.util.concurrent.ConcurrentMap $stack12;
+  java.lang.Object $stack13;
+  java.lang.StringBuilder $stack14;
+  org.apache.rocketmq.filter.util.BloomFilter $stack15;
+  org.apache.rocketmq.filter.util.BloomFilterData $stack32;
+  java.lang.String topic;
+topic=@topic;
+$stack10 = org.apache.rocketmq.common.filter.ExpressionType.isTagType(type);
+ if ($stack10==0) goto label0;
+ return  0;
+ label0:if (expression==null) goto label1;
+ $stack11 = expression.length();
+ if ($stack11!=0) goto label2;
+ label1:return  0;
+ label2:$stack12=this.filterDataByTopic;
+ $stack13 = $stack12.get((java.lang.Object)topic);
+ filterDataMapByTopic=(org.apache.rocketmq.broker.filter.ConsumerFilterManager$FilterDataMapByTopic) $stack13;
+ if (filterDataMapByTopic!=null) goto label3;
+ filterDataMapByTopic=new org.apache.rocketmq.broker.filter.ConsumerFilterManager$FilterDataMapByTopic;
+ filterDataMapByTopic#org.apache.rocketmq.broker.filter.ConsumerFilterManager$FilterDataMapByTopic(topic);
+ $stack12=this.filterDataByTopic;
+ $stack13 = $stack12.putIfAbsent((java.lang.Object)topic,(java.lang.Object)filterDataMapByTopic);
+ prev=(org.apache.rocketmq.broker.filter.ConsumerFilterManager$FilterDataMapByTopic) $stack13;
+ if (prev==null) goto label3;
+ filterDataMapByTopic=prev;
+ goto label3;
+ label3:$stack15=this.bloomFilter;
+ $stack14=new java.lang.StringBuilder;
+ $stack14#java.lang.StringBuilder();
+ $stack14 = $stack14.append(consumerGroup);
+ $stack14 = $stack14.append("#");
+ $stack14 = $stack14.append(topic);
+ topic = $stack14.toString();
+ $stack32 = $stack15.generate(topic);
+ $stack10 = filterDataMapByTopic.register(consumerGroup,expression,type,$stack32,clientVersion);
+ return  $stack10;
+ } 
+

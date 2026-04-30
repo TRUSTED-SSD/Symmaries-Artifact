@@ -1,0 +1,51 @@
+static void org.apache.rocketmq.common.UtilAll:cleanBuffer(java.nio.ByteBuffer @buffer)
+{
+java.lang.reflect.Field field;
+  sun.misc.Unsafe unsafe;
+  java.lang.reflect.Method cleaner;
+  boolean $stack4;
+  int $stack5;
+  org.apache.commons.lang3.JavaVersion $stack6;
+  java.lang.Class[] $stack9;
+  java.lang.Object $stack10;
+  java.lang.Class $stack13;
+  java.lang.Object[] $stack18;
+  java.lang.Exception $stack22;
+  java.lang.IllegalStateException $stack23;
+  java.nio.ByteBuffer buffer;
+buffer=@buffer;
+if (buffer==null) goto label0;
+ $stack4 = buffer.isDirect();
+ if ($stack4==0) goto label0;
+ $stack5 = buffer.capacity();
+ if ($stack5!=0) goto label1;
+ label0:return;
+ label1:$stack6=org.apache.commons.lang3.JavaVersion.JAVA_9;
+ $stack4 = org.apache.commons.lang3.SystemUtils.isJavaVersionAtLeast($stack6);
+ if ($stack4==0) goto label2;
+ label3:$stack13=sun.misc.Unsafe;
+ field = $stack13.getDeclaredField("theUnsafe");
+ field.setAccessible((boolean)1);
+ $stack10 = field.get(null);
+ unsafe=(sun.misc.Unsafe) $stack10;
+ $stack9=new java.lang.Class[1];
+ $stack9[0]=java.nio.ByteBuffer;
+ cleaner = org.apache.rocketmq.common.UtilAll.method((java.lang.Object)unsafe,"invokeCleaner",$stack9);
+ $stack18=new java.lang.Object[1];
+ buffer = org.apache.rocketmq.common.UtilAll.viewed(buffer);
+ $stack18[0]=buffer;
+ cleaner.invoke((java.lang.Object)unsafe,$stack18);
+ label4:goto label5;
+ label6:$stack22 = catch;
+ $stack23=new java.lang.IllegalStateException;
+ $stack23#java.lang.IllegalStateException((java.lang.Throwable)$stack22);
+ throw $stack23;
+ label2:buffer = org.apache.rocketmq.common.UtilAll.viewed(buffer);
+ $stack9=new java.lang.Class[0];
+ $stack10 = org.apache.rocketmq.common.UtilAll.invoke((java.lang.Object)buffer,"cleaner",$stack9);
+ $stack9=new java.lang.Class[0];
+ org.apache.rocketmq.common.UtilAll.invoke($stack10,"clean",$stack9);
+ label5:return;
+ catch java.lang.Exception: label3 - label4 : label6;
+} 
+

@@ -1,0 +1,110 @@
+    protected rifl.spec.java.JavaAccessPath readAccessPath(org.w3c.dom.Element, boolean) throws rifl.spec.RIFLIntegrityException
+    {
+        rifl.spec.java.JavaRIFLReader this;
+        org.w3c.dom.Element elem;
+        boolean isSource;
+        org.w3c.dom.Node parameterNode, $stack17;
+        rifl.spec.java.JavaParameter parameter;
+        java.util.ArrayList fields;
+        rifl.spec.java.JavaField field;
+        short $stack9;
+        rifl.spec.java.JavaAccessPath $stack25;
+        rifl.spec.RIFLIntegrityException $stack26;
+
+        this := @this: rifl.spec.java.JavaRIFLReader;
+
+        elem := @parameter0: org.w3c.dom.Element;
+
+        isSource := @parameter1: boolean;
+
+        if isSource != 0 goto label1;
+/*170*/
+
+        $stack26 = new rifl.spec.RIFLIntegrityException;
+/*171*/
+
+        specialinvoke $stack26.<rifl.spec.RIFLIntegrityException: void <init>(java.lang.String)>("Access paths cannot be sinks!");
+/*171*/
+
+        throw $stack26;
+/*171*/
+
+     label1:
+        parameterNode = interfaceinvoke elem.<org.w3c.dom.Element: org.w3c.dom.Node getFirstChild()>();
+/*173*/
+/*173*/
+
+        goto label3;
+/*175*/
+
+     label2:
+        parameterNode = interfaceinvoke parameterNode.<org.w3c.dom.Node: org.w3c.dom.Node getNextSibling()>();
+/*176*/
+/*176*/
+
+     label3:
+        $stack9 = interfaceinvoke parameterNode.<org.w3c.dom.Node: short getNodeType()>();
+/*175*/
+
+        if $stack9 != 1 goto label2;
+/*175*/
+
+        elem = (org.w3c.dom.Element) parameterNode;
+/*179*/
+
+        parameter = virtualinvoke this.<rifl.spec.java.JavaRIFLReader: rifl.spec.java.JavaParameter readParameter(org.w3c.dom.Element,boolean)>(elem, 1);
+/*179*/
+/*179*/
+
+        fields = new java.util.ArrayList;
+/*181*/
+
+        specialinvoke fields.<java.util.ArrayList: void <init>()>();
+/*181*/
+
+        parameterNode = interfaceinvoke parameterNode.<org.w3c.dom.Node: org.w3c.dom.Node getNextSibling()>();
+/*182*/
+/*182*/
+
+        goto label6;
+/*184*/
+
+     label4:
+        $stack9 = interfaceinvoke parameterNode.<org.w3c.dom.Node: short getNodeType()>();
+/*185*/
+
+        if $stack9 != 1 goto label5;
+/*185*/
+
+        elem = (org.w3c.dom.Element) parameterNode;
+/*186*/
+
+        field = virtualinvoke this.<rifl.spec.java.JavaRIFLReader: rifl.spec.java.JavaField readField(org.w3c.dom.Element,boolean)>(elem, 1);
+/*186*/
+/*186*/
+
+        interfaceinvoke fields.<java.util.List: boolean add(java.lang.Object)>(field);
+/*187*/
+
+     label5:
+        parameterNode = interfaceinvoke parameterNode.<org.w3c.dom.Node: org.w3c.dom.Node getNextSibling()>();
+/*190*/
+/*190*/
+
+     label6:
+        $stack17 = interfaceinvoke parameterNode.<org.w3c.dom.Node: org.w3c.dom.Node getNextSibling()>();
+/*184*/
+
+        if $stack17 != null goto label4;
+/*184*/
+
+        $stack25 = new rifl.spec.java.JavaAccessPath;
+/*193*/
+
+        specialinvoke $stack25.<rifl.spec.java.JavaAccessPath: void <init>(rifl.spec.java.JavaParameter,java.util.List)>(parameter, fields);
+/*193*/
+
+        return $stack25;
+/*193*/
+    }
+

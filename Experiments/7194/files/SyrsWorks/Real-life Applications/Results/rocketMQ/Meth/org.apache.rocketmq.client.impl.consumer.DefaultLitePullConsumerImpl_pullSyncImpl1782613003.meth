@@ -1,0 +1,49 @@
+org.apache.rocketmq.client.consumer.PullResult org.apache.rocketmq.client.impl.consumer.DefaultLitePullConsumerImpl:pullSyncImpl(org.apache.rocketmq.common.message.MessageQueue mq,org.apache.rocketmq.remoting.protocol.heartbeat.SubscriptionData subscriptionData,long offset,int maxNums,boolean block,long timeout)
+{
+int sysFlag;
+  org.apache.rocketmq.client.consumer.PullResult pullResult;
+  byte $stack14;
+  java.lang.String $stack16;
+  org.apache.rocketmq.client.impl.consumer.PullAPIWrapper $stack18;
+  java.lang.String $stack20;
+  long $stack21;
+  org.apache.rocketmq.client.consumer.DefaultLitePullConsumer $stack22;
+  long $stack24;
+  org.apache.rocketmq.client.impl.CommunicationMode $stack25;
+  org.apache.rocketmq.client.exception.MQClientException $stack49;
+  if (null!=mq) goto label0;
+ $stack49=new org.apache.rocketmq.client.exception.MQClientException;
+ $stack49#org.apache.rocketmq.client.exception.MQClientException("mq is null",null);
+ throw $stack49;
+ label0:$stack14=(offset cmp 0L);
+ if ($stack14>=0) goto label1;
+ $stack49=new org.apache.rocketmq.client.exception.MQClientException;
+ $stack49#org.apache.rocketmq.client.exception.MQClientException("offset < 0",null);
+ throw $stack49;
+ label1:if (maxNums>0) goto label2;
+ $stack49=new org.apache.rocketmq.client.exception.MQClientException;
+ $stack49#org.apache.rocketmq.client.exception.MQClientException("maxNums <= 0",null);
+ throw $stack49;
+ label2:sysFlag = org.apache.rocketmq.common.sysflag.PullSysFlag.buildSysFlag((boolean)0,block,(boolean)1,(boolean)0,(boolean)1);
+ if (block==0) goto label3;
+ $stack22=this.defaultLitePullConsumer;
+ timeout = $stack22.getConsumerTimeoutMillisWhenSuspend();
+ goto label3;
+ label3:$stack16 = subscriptionData.getExpressionType();
+ block = org.apache.rocketmq.common.filter.ExpressionType.isTagType($stack16);
+ $stack18=this.pullAPIWrapper;
+ $stack16 = subscriptionData.getSubString();
+ $stack20 = subscriptionData.getExpressionType();
+ if (block==0) goto label4;
+ $stack21=0L;
+ goto label5;
+ label4:$stack21 = subscriptionData.getSubVersion();
+ label5:$stack22=this.defaultLitePullConsumer;
+ $stack24 = $stack22.getBrokerSuspendMaxTimeMillis();
+ $stack25=org.apache.rocketmq.client.impl.CommunicationMode.SYNC;
+ pullResult = $stack18.pullKernelImpl(mq,$stack16,$stack20,$stack21,offset,maxNums,sysFlag,0L,$stack24,timeout,$stack25,null);
+ $stack18=this.pullAPIWrapper;
+ $stack18.processPullResult(mq,pullResult,subscriptionData);
+ return  pullResult;
+ } 
+

@@ -1,0 +1,17 @@
+boolean org.apache.rocketmq.store.MappedFileQueue:shouldRoll(int msgSize)
+{
+org.apache.rocketmq.store.logfile.MappedFile mappedFileLast;
+  boolean $stack3;
+  int $stack5;
+  $stack3 = this.isEmptyOrCurrentFileFull();
+ if ($stack3==0) goto label0;
+ return  1;
+ label0:mappedFileLast = this.getLastMappedFile();
+ $stack5 = mappedFileLast.getWrotePosition();
+ msgSize=($stack5+msgSize);
+ $stack5 = mappedFileLast.getFileSize();
+ if (msgSize<=$stack5) goto label1;
+ return  1;
+ label1:return  0;
+ } 
+

@@ -1,0 +1,33 @@
+void org.apache.rocketmq.namesrv.routeinfo.RouteInfoManager:notifyMinBrokerIdChanged(java.util.Map needNotifyBrokerMap)
+{
+java.util.Iterator l2;
+  java.lang.String brokerName;
+  org.apache.rocketmq.namesrv.routeinfo.BrokerStatusChangeInfo brokerStatusChangeInfo;
+  org.apache.rocketmq.remoting.protocol.route.BrokerData brokerData;
+  java.util.Set $stack6;
+  boolean $stack8;
+  java.lang.Object $stack9;
+  java.util.Map $stack11;
+  java.lang.String $stack17;
+  $stack6 = needNotifyBrokerMap.keySet();
+ l2 = $stack6.iterator();
+ label0:$stack8 = l2.hasNext();
+ if ($stack8==0) goto label1;
+ $stack9 = l2.next();
+ brokerName=(java.lang.String) $stack9;
+ $stack9 = needNotifyBrokerMap.get((java.lang.Object)brokerName);
+ brokerStatusChangeInfo=(org.apache.rocketmq.namesrv.routeinfo.BrokerStatusChangeInfo) $stack9;
+ $stack11=this.brokerAddrTable;
+ $stack9 = $stack11.get((java.lang.Object)brokerName);
+ brokerData=(org.apache.rocketmq.remoting.protocol.route.BrokerData) $stack9;
+ if (brokerData==null) goto label2;
+ $stack8 = brokerData.isEnableActingMaster();
+ if ($stack8==0) goto label2;
+ $stack11 = brokerStatusChangeInfo.getBrokerAddrs();
+ brokerName = brokerStatusChangeInfo.getOfflineBrokerAddr();
+ $stack17 = brokerStatusChangeInfo.getHaBrokerAddr();
+ this#org.apache.rocketmq.namesrv.routeinfo.RouteInfoManager($stack11,brokerName,$stack17);
+ label2:goto label0;
+ label1:return;
+ } 
+

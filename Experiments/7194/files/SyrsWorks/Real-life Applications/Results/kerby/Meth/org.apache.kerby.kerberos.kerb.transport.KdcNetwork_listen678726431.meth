@@ -1,0 +1,31 @@
+void org.apache.kerby.kerberos.kerb.transport.KdcNetwork:listen(org.apache.kerby.kerberos.kerb.transport.TransportPair tpair)
+{
+java.net.InetSocketAddress $stack2;
+  java.nio.channels.DatagramChannel $stack4;
+  java.nio.ByteBuffer $stack10;
+  java.net.ServerSocket $stack11;
+  this.tpair=tpair;
+ $stack2=tpair.tcpAddress;
+ if ($stack2==null) goto label0;
+ $stack11=new java.net.ServerSocket;
+ $stack11#java.net.ServerSocket();
+ this.tcpServer=$stack11;
+ $stack11=this.tcpServer;
+ $stack11.setSoTimeout(100);
+ $stack11=this.tcpServer;
+ $stack2=tpair.tcpAddress;
+ $stack11.bind((java.net.SocketAddress)$stack2);
+ label0:$stack2=tpair.udpAddress;
+ if ($stack2==null) goto label1;
+ $stack4 = java.nio.channels.DatagramChannel.open();
+ this.udpServer=$stack4;
+ $stack4=this.udpServer;
+ $stack4.configureBlocking((boolean)0);
+ $stack4=this.udpServer;
+ $stack2=tpair.udpAddress;
+ $stack4.bind((java.net.SocketAddress)$stack2);
+ $stack10 = java.nio.ByteBuffer.allocate(65507);
+ this.recvBuffer=$stack10;
+ label1:return;
+ } 
+

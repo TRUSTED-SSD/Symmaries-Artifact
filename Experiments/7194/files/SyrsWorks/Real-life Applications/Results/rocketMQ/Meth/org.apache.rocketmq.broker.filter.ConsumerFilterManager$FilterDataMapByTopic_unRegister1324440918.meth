@@ -1,0 +1,28 @@
+void org.apache.rocketmq.broker.filter.ConsumerFilterManager$FilterDataMapByTopic:unRegister(java.lang.String consumerGroup)
+{
+org.apache.rocketmq.broker.filter.ConsumerFilterData data;
+  long now;
+  java.util.concurrent.ConcurrentMap $stack5;
+  boolean $stack6;
+  java.lang.Object $stack8;
+  org.apache.rocketmq.logging.org.slf4j.Logger $stack11;
+  java.lang.Long $stack13;
+  $stack5=this.groupFilterData;
+ $stack6 = $stack5.containsKey((java.lang.Object)consumerGroup);
+ if ($stack6!=0) goto label0;
+ return;
+ label0:$stack5=this.groupFilterData;
+ $stack8 = $stack5.get((java.lang.Object)consumerGroup);
+ data=(org.apache.rocketmq.broker.filter.ConsumerFilterData) $stack8;
+ if (data==null) goto label1;
+ $stack6 = data.isDead();
+ if ($stack6==0) goto label2;
+ label1:return;
+ label2:now = java.lang.System.currentTimeMillis();
+ $stack11 = org.apache.rocketmq.broker.filter.ConsumerFilterManager.access$000();
+ $stack13 = java.lang.Long.valueOf(now);
+ $stack11.info("Unregister consumer filter: {}, deadTime: {}",(java.lang.Object)data,(java.lang.Object)$stack13);
+ data.setDeadTime(now);
+ return;
+ } 
+

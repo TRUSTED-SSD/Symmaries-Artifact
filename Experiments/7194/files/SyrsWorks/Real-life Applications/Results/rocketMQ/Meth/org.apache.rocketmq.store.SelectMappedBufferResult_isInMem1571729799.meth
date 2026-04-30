@@ -1,0 +1,20 @@
+boolean org.apache.rocketmq.store.SelectMappedBufferResult:isInMem()
+{
+long pos;
+  org.apache.rocketmq.store.logfile.MappedFile $stack3;
+  long $stack6;
+  int $stack7;
+  boolean $stack9;
+  $stack3=this.mappedFile;
+ if ($stack3!=null) goto label0;
+ return  1;
+ label0:pos=this.startOffset;
+ $stack3=this.mappedFile;
+ $stack6 = $stack3.getFileFromOffset();
+ pos=(pos-$stack6);
+ $stack3=this.mappedFile;
+ $stack7=this.size;
+ $stack9 = $stack3.isLoaded(pos,$stack7);
+ return  $stack9;
+ } 
+

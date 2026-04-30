@@ -1,0 +1,27 @@
+void org.apache.rocketmq.broker.transaction.AbstractTransactionalMessageCheckListener:initExecutorService()
+{
+java.util.concurrent.ExecutorService $stack1;
+  java.util.concurrent.ThreadPoolExecutor $stack2;
+  java.util.concurrent.ArrayBlockingQueue $stack3;
+  java.util.concurrent.TimeUnit $stack7;
+  org.apache.rocketmq.common.ThreadFactoryImpl $stack8;
+  org.apache.rocketmq.broker.BrokerController $stack9;
+  org.apache.rocketmq.common.BrokerIdentity $stack11;
+  java.util.concurrent.ThreadPoolExecutor$CallerRunsPolicy $stack12;
+  $stack1=org.apache.rocketmq.broker.transaction.AbstractTransactionalMessageCheckListener.executorService;
+ if ($stack1!=null) goto label0;
+ $stack2=new java.util.concurrent.ThreadPoolExecutor;
+ $stack7=java.util.concurrent.TimeUnit.SECONDS;
+ $stack3=new java.util.concurrent.ArrayBlockingQueue;
+ $stack3#java.util.concurrent.ArrayBlockingQueue(2000);
+ $stack8=new org.apache.rocketmq.common.ThreadFactoryImpl;
+ $stack9=this.brokerController;
+ $stack11 = $stack9.getBrokerIdentity();
+ $stack8#org.apache.rocketmq.common.ThreadFactoryImpl("Transaction-msg-check-thread",$stack11);
+ $stack12=new java.util.concurrent.ThreadPoolExecutor$CallerRunsPolicy;
+ $stack12#java.util.concurrent.ThreadPoolExecutor$CallerRunsPolicy();
+ $stack2#java.util.concurrent.ThreadPoolExecutor(2,5,100L,$stack7,(java.util.concurrent.BlockingQueue)$stack3,(java.util.concurrent.ThreadFactory)$stack8,(java.util.concurrent.RejectedExecutionHandler)$stack12);
+ org.apache.rocketmq.broker.transaction.AbstractTransactionalMessageCheckListener.executorService=$stack2;
+ label0:return;
+ } 
+

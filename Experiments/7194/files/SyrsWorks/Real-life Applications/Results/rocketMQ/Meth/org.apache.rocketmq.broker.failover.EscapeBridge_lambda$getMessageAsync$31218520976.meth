@@ -1,0 +1,50 @@
+org.apache.rocketmq.common.Pair org.apache.rocketmq.broker.failover.EscapeBridge:lambda$getMessageAsync$3(java.lang.String topic,long offset,int queueId,boolean deCompressBody,org.apache.rocketmq.store.GetMessageResult result)
+{
+java.util.List list;
+  java.lang.Object[] $stack9;
+  org.apache.rocketmq.logging.org.slf4j.Logger $stack10;
+  java.lang.Long $stack13;
+  java.lang.Integer $stack15;
+  org.apache.rocketmq.common.Pair $stack16;
+  org.apache.rocketmq.store.GetMessageStatus $stack17;
+  java.lang.Object $stack21;
+  java.lang.String $stack32;
+  if (result!=null) goto label0;
+ $stack10=org.apache.rocketmq.broker.failover.EscapeBridge.LOG;
+ $stack9=new java.lang.Object[4];
+ $stack32=this.innerConsumerGroupName;
+ $stack9[0]=$stack32;
+ $stack9[1]=topic;
+ $stack13 = java.lang.Long.valueOf(offset);
+ $stack9[2]=$stack13;
+ $stack15 = java.lang.Integer.valueOf(queueId);
+ $stack9[3]=$stack15;
+ $stack10.warn("getMessageResult is null , innerConsumerGroupName {}, topic {}, offset {}, queueId {}",$stack9);
+ $stack16=new org.apache.rocketmq.common.Pair;
+ $stack17=org.apache.rocketmq.store.GetMessageStatus.MESSAGE_WAS_REMOVING;
+ $stack16#org.apache.rocketmq.common.Pair((java.lang.Object)$stack17,null);
+ return  $stack16;
+ label0:list = this.decodeMsgList(result,deCompressBody);
+ if (list==null) goto label1;
+ deCompressBody = list.isEmpty();
+ if (deCompressBody==0) goto label2;
+ label1:$stack10=org.apache.rocketmq.broker.failover.EscapeBridge.LOG;
+ $stack9=new java.lang.Object[4];
+ $stack9[0]=topic;
+ $stack13 = java.lang.Long.valueOf(offset);
+ $stack9[1]=$stack13;
+ $stack15 = java.lang.Integer.valueOf(queueId);
+ $stack9[2]=$stack15;
+ $stack9[3]=result;
+ $stack10.warn("Can not get msg , topic {}, offset {}, queueId {}, result is {}",$stack9);
+ $stack16=new org.apache.rocketmq.common.Pair;
+ $stack17 = result.getStatus();
+ $stack16#org.apache.rocketmq.common.Pair((java.lang.Object)$stack17,null);
+ return  $stack16;
+ label2:$stack16=new org.apache.rocketmq.common.Pair;
+ $stack17 = result.getStatus();
+ $stack21 = list.get(0);
+ $stack16#org.apache.rocketmq.common.Pair((java.lang.Object)$stack17,$stack21);
+ return  $stack16;
+ } 
+

@@ -1,0 +1,30 @@
+org.apache.kerby.kerberos.kerb.type.base.HostAddress org.apache.kerby.kerberos.kerb.ccache.CredCacheInputStream:readAddress()
+{
+short typeValue;
+  org.apache.kerby.kerberos.kerb.type.base.HostAddrType addrType;
+  byte[] addrData;
+  org.apache.kerby.kerberos.kerb.type.base.HostAddress addr;
+  java.lang.Integer $stack6;
+  org.apache.kerby.kerberos.kerb.type.base.HostAddrType $stack8;
+  java.io.IOException $stack11;
+  typeValue = this.readShort();
+dummyClass.highSourceMut(typeValue);
+ $stack6 = java.lang.Integer.valueOf((int)typeValue);
+ addrType = org.apache.kerby.kerberos.kerb.type.base.HostAddrType.fromValue($stack6);
+ $stack8=org.apache.kerby.kerberos.kerb.type.base.HostAddrType.NONE;
+ if (addrType!=$stack8) goto label0;
+ $stack11=new java.io.IOException;
+ $stack11#java.io.IOException("Invalid host address type");
+ throw $stack11;
+ label0:addrData = this.readCountedOctets();
+ if (addrData!=null) goto label1;
+ $stack11=new java.io.IOException;
+ $stack11#java.io.IOException("Invalid host address data");
+ throw $stack11;
+ label1:addr=new org.apache.kerby.kerberos.kerb.type.base.HostAddress;
+ addr#org.apache.kerby.kerberos.kerb.type.base.HostAddress();
+ addr.setAddrType(addrType);
+ addr.setAddress(addrData);
+ return  addr;
+ } 
+

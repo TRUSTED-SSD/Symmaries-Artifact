@@ -1,0 +1,45 @@
+boolean org.apache.rocketmq.store.ha.autoswitch.AutoSwitchHAClient:connectMaster()
+{
+java.lang.String addr;
+  java.net.SocketAddress socketAddress;
+  java.nio.channels.SocketChannel $stack3;
+  boolean $stack5;
+  java.util.concurrent.atomic.AtomicReference $stack6;
+  java.lang.Object $stack7;
+  org.apache.rocketmq.store.DefaultMessageStore $stack9;
+  long $stack10;
+  java.nio.channels.Selector $stack19;
+  org.apache.rocketmq.logging.org.slf4j.Logger $stack22;
+  org.apache.rocketmq.store.ha.HAConnectionState $stack23;
+  $stack3=this.socketChannel;
+ if (null!=$stack3) goto label0;
+ $stack6=this.masterHaAddress;
+ $stack7 = $stack6.get();
+ addr=(java.lang.String) $stack7;
+ $stack5 = org.apache.commons.lang3.StringUtils.isNotEmpty((java.lang.CharSequence)addr);
+ if ($stack5==0) goto label1;
+ socketAddress = org.apache.rocketmq.common.utils.NetworkUtil.string2SocketAddress(addr);
+ $stack3 = org.apache.rocketmq.remoting.common.RemotingHelper.connect(socketAddress);
+ this.socketChannel=$stack3;
+ $stack3=this.socketChannel;
+ if ($stack3==null) goto label1;
+ $stack3=this.socketChannel;
+ $stack19=this.selector;
+ $stack3.register($stack19,1);
+ $stack22=org.apache.rocketmq.store.ha.autoswitch.AutoSwitchHAClient.LOGGER;
+ $stack22.info("AutoSwitchHAClient connect to master {}",(java.lang.Object)addr);
+ $stack23=org.apache.rocketmq.store.ha.HAConnectionState.HANDSHAKE;
+ this.changeCurrentState($stack23);
+ label1:$stack9=this.messageStore;
+ $stack10 = $stack9.getMaxPhyOffset();
+ this.currentReportedOffset=$stack10;
+ $stack10 = java.lang.System.currentTimeMillis();
+ this.lastReadTimestamp=$stack10;
+ label0:$stack3=this.socketChannel;
+ if ($stack3==null) goto label2;
+ $stack5=1;
+ goto label3;
+ label2:$stack5=0;
+ label3:return  $stack5;
+ } 
+

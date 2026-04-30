@@ -1,0 +1,28 @@
+void org.apache.rocketmq.store.ha.DefaultHAClient:reallocateByteBuffer()
+{
+int remain;
+  java.nio.ByteBuffer $stack3;
+  int $stack7;
+  java.nio.ByteBuffer $stack15;
+  remain=this.dispatchPosition;
+ remain=(4194304-remain);
+ if (remain<=0) goto label0;
+ $stack3=this.byteBufferRead;
+ $stack7=this.dispatchPosition;
+ $stack3.position($stack7);
+ $stack3=this.byteBufferBackup;
+ $stack3.position(0);
+ $stack3=this.byteBufferBackup;
+ $stack3.limit(4194304);
+ $stack15=this.byteBufferBackup;
+ $stack3=this.byteBufferRead;
+ $stack15.put($stack3);
+ label0:this#org.apache.rocketmq.store.ha.DefaultHAClient:swapByteBuffer();
+ $stack3=this.byteBufferRead;
+ $stack3.position(remain);
+ $stack3=this.byteBufferRead;
+ $stack3.limit(4194304);
+ this.dispatchPosition=0;
+ return;
+ } 
+

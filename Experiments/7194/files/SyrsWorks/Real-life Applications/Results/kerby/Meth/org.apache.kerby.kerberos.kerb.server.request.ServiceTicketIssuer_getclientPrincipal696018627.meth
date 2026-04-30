@@ -1,0 +1,24 @@
+org.apache.kerby.kerberos.kerb.type.base.PrincipalName org.apache.kerby.kerberos.kerb.server.request.ServiceTicketIssuer:getclientPrincipal()
+{
+org.apache.kerby.kerberos.kerb.type.base.PrincipalName clientPrincipal;
+  org.apache.kerby.kerberos.kerb.type.base.AuthToken $stack2;
+  org.apache.kerby.kerberos.kerb.type.ticket.Ticket $stack3;
+  org.apache.kerby.kerberos.kerb.type.ticket.EncTicketPart $stack4;
+  java.lang.String $stack8;
+  $stack2=this.token;
+ if ($stack2==null) goto label0;
+ clientPrincipal=new org.apache.kerby.kerberos.kerb.type.base.PrincipalName;
+ $stack2=this.token;
+ $stack8 = $stack2.getSubject();
+ clientPrincipal#org.apache.kerby.kerberos.kerb.type.base.PrincipalName($stack8);
+ goto label1;
+ label0:$stack3=this.tgtTicket;
+ $stack4 = $stack3.getEncPart();
+ clientPrincipal = $stack4.getCname();
+ $stack3=this.tgtTicket;
+ $stack4 = $stack3.getEncPart();
+ $stack8 = $stack4.getCrealm();
+ clientPrincipal.setRealm($stack8);
+ label1:return  clientPrincipal;
+ } 
+

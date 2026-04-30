@@ -1,0 +1,44 @@
+static java.lang.String org.apache.rocketmq.tools.command.message.QueryMsgByIdSubCommand:createBodyFile(org.apache.rocketmq.common.message.MessageExt msg)
+{
+java.io.DataOutputStream dos;
+  java.lang.String bodyTmpFilePath;
+  java.io.File file;
+  java.lang.Throwable l5;
+  boolean $stack7;
+  java.lang.StringBuilder $stack8;
+  java.io.DataOutputStream $stack14;
+  java.io.FileOutputStream $stack15;
+  byte[] $stack16;
+  dos=null;
+ label0:bodyTmpFilePath="/tmp/rocketmq/msgbodys";
+ file=new java.io.File;
+ file#java.io.File("/tmp/rocketmq/msgbodys");
+ $stack7 = file.exists();
+ if ($stack7!=0) goto label1;
+ file.mkdirs();
+ label1:$stack8=new java.lang.StringBuilder;
+ $stack8#java.lang.StringBuilder();
+ $stack8 = $stack8.append("/tmp/rocketmq/msgbodys");
+ $stack8 = $stack8.append("/");
+ bodyTmpFilePath = msg.getMsgId();
+ $stack8 = $stack8.append(bodyTmpFilePath);
+ bodyTmpFilePath = $stack8.toString();
+ $stack14=new java.io.DataOutputStream;
+ $stack15=new java.io.FileOutputStream;
+ $stack15#java.io.FileOutputStream(bodyTmpFilePath);
+ $stack14#java.io.DataOutputStream((java.io.OutputStream)$stack15);
+ dos=$stack14;
+ $stack16 = msg.getBody();
+ dummyClass.lowSink($stack16);
+$stack14.write($stack16);
+ label2:if ($stack14==null) goto label3;
+ $stack14.close();
+ label3:return  bodyTmpFilePath;
+ label4:l5 = catch;
+ label5:if (dos==null) goto label6;
+ dos.close();
+ label6:throw l5;
+ catch java.lang.Throwable: label0 - label2 : label4;
+catch java.lang.Throwable: label4 - label5 : label4;
+} 
+

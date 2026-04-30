@@ -1,0 +1,51 @@
+java.util.Map org.apache.rocketmq.client.impl.MQClientAPIImpl:invokeBrokerToGetConsumerStatus(java.lang.String @addr,java.lang.String topic,java.lang.String group,java.lang.String clientAddr,long timeoutMillis)
+{
+org.apache.rocketmq.remoting.protocol.header.GetConsumerStatusRequestHeader requestHeader;
+  org.apache.rocketmq.remoting.protocol.RemotingCommand request;
+  org.apache.rocketmq.remoting.protocol.body.GetConsumerStatusBody body;
+  org.apache.rocketmq.client.ClientConfig $stack13;
+  org.apache.rocketmq.remoting.RemotingClient $stack14;
+  boolean $stack15;
+  int $stack19;
+  byte[] $stack20;
+  org.apache.rocketmq.client.exception.MQClientException $stack21;
+  java.lang.Object $stack25;
+  java.util.Map $stack26;
+  java.lang.AssertionError $stack30;
+  java.lang.String addr;
+addr=@addr;
+requestHeader=new org.apache.rocketmq.remoting.protocol.header.GetConsumerStatusRequestHeader;
+ requestHeader#org.apache.rocketmq.remoting.protocol.header.GetConsumerStatusRequestHeader();
+ requestHeader.setTopic(topic);
+ requestHeader.setGroup(group);
+ requestHeader.setClientAddr(clientAddr);
+ request = org.apache.rocketmq.remoting.protocol.RemotingCommand.createRequestCommand(223,(org.apache.rocketmq.remoting.CommandCustomHeader)requestHeader);
+ $stack14=this.remotingClient;
+ $stack13=this.clientConfig;
+ $stack15 = $stack13.isVipChannelEnabled();
+ addr = org.apache.rocketmq.common.MixAll.brokerVIPChannel($stack15,addr);
+ request = $stack14.invokeSync(addr,request,timeoutMillis);
+ $stack15=org.apache.rocketmq.client.impl.MQClientAPIImpl.$assertionsDisabled;
+ if ($stack15!=0) goto label0;
+ if (request!=null) goto label0;
+ $stack30=new java.lang.AssertionError;
+ $stack30#java.lang.AssertionError();
+ throw $stack30;
+ label0:$stack19 = request.getCode();
+ switch [$stack19]
+if 0 goto label1;
+goto label2;
+ label1:$stack20 = request.getBody();
+ if ($stack20==null) goto label2;
+ $stack20 = request.getBody();
+ $stack25 = org.apache.rocketmq.remoting.protocol.RemotingSerializable.decode($stack20,org.apache.rocketmq.remoting.protocol.body.GetConsumerStatusBody);
+ body=(org.apache.rocketmq.remoting.protocol.body.GetConsumerStatusBody) $stack25;
+ $stack26 = body.getConsumerTable();
+ return  $stack26;
+ label2:$stack21=new org.apache.rocketmq.client.exception.MQClientException;
+ $stack19 = request.getCode();
+ addr = request.getRemark();
+ $stack21#org.apache.rocketmq.client.exception.MQClientException($stack19,addr);
+ throw $stack21;
+ } 
+

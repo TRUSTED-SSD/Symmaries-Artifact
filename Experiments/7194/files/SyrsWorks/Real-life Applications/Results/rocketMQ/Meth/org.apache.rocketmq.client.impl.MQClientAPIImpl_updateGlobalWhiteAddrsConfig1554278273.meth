@@ -1,0 +1,40 @@
+void org.apache.rocketmq.client.impl.MQClientAPIImpl:updateGlobalWhiteAddrsConfig(java.lang.String @addr,java.lang.String globalWhiteAddrs,java.lang.String aclFileFullPath,long timeoutMillis)
+{
+org.apache.rocketmq.remoting.protocol.header.UpdateGlobalWhiteAddrsConfigRequestHeader requestHeader;
+  org.apache.rocketmq.remoting.protocol.RemotingCommand request;
+  org.apache.rocketmq.client.ClientConfig $stack11;
+  org.apache.rocketmq.remoting.RemotingClient $stack12;
+  boolean $stack13;
+  int $stack17;
+  org.apache.rocketmq.client.exception.MQClientException $stack18;
+  java.lang.AssertionError $stack22;
+  java.lang.String addr;
+addr=@addr;
+requestHeader=new org.apache.rocketmq.remoting.protocol.header.UpdateGlobalWhiteAddrsConfigRequestHeader;
+ requestHeader#org.apache.rocketmq.remoting.protocol.header.UpdateGlobalWhiteAddrsConfigRequestHeader();
+ requestHeader.setGlobalWhiteAddrs(globalWhiteAddrs);
+ requestHeader.setAclFileFullPath(aclFileFullPath);
+ request = org.apache.rocketmq.remoting.protocol.RemotingCommand.createRequestCommand(53,(org.apache.rocketmq.remoting.CommandCustomHeader)requestHeader);
+ $stack12=this.remotingClient;
+ $stack11=this.clientConfig;
+ $stack13 = $stack11.isVipChannelEnabled();
+ addr = org.apache.rocketmq.common.MixAll.brokerVIPChannel($stack13,addr);
+ request = $stack12.invokeSync(addr,request,timeoutMillis);
+ $stack13=org.apache.rocketmq.client.impl.MQClientAPIImpl.$assertionsDisabled;
+ if ($stack13!=0) goto label0;
+ if (request!=null) goto label0;
+ $stack22=new java.lang.AssertionError;
+ $stack22#java.lang.AssertionError();
+ throw $stack22;
+ label0:$stack17 = request.getCode();
+ switch [$stack17]
+if 0 goto label1;
+goto label2;
+ label1:return;
+ label2:$stack18=new org.apache.rocketmq.client.exception.MQClientException;
+ $stack17 = request.getCode();
+ addr = request.getRemark();
+ $stack18#org.apache.rocketmq.client.exception.MQClientException($stack17,addr);
+ throw $stack18;
+ } 
+

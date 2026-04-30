@@ -1,0 +1,43 @@
+void org.apache.rocketmq.client.impl.consumer.DefaultLitePullConsumerImpl:persistConsumerOffset()
+{
+java.util.HashSet mqs;
+  java.util.Set allocateMq;
+  org.apache.rocketmq.client.impl.consumer.DefaultLitePullConsumerImpl$SubscriptionType $stack4;
+  org.apache.rocketmq.client.impl.consumer.DefaultLitePullConsumerImpl$SubscriptionType $stack5;
+  org.apache.rocketmq.client.consumer.store.OffsetStore $stack8;
+  org.apache.rocketmq.client.impl.consumer.AssignedMessageQueue $stack9;
+  org.apache.rocketmq.client.impl.consumer.RebalanceImpl $stack14;
+  java.util.concurrent.ConcurrentMap $stack15;
+  java.lang.Exception $stack18;
+  org.apache.rocketmq.client.consumer.DefaultLitePullConsumer $stack19;
+  org.apache.rocketmq.logging.org.slf4j.Logger $stack20;
+  java.lang.String $stack22;
+  label0:this#org.apache.rocketmq.client.impl.consumer.DefaultLitePullConsumerImpl:checkServiceState();
+ mqs=new java.util.HashSet;
+ mqs#java.util.HashSet();
+ $stack5=this.subscriptionType;
+ $stack4=org.apache.rocketmq.client.impl.consumer.DefaultLitePullConsumerImpl$SubscriptionType.SUBSCRIBE;
+ if ($stack5!=$stack4) goto label1;
+ $stack14=this.rebalanceImpl;
+ $stack15 = $stack14.getProcessQueueTable();
+ allocateMq = $stack15.keySet();
+ mqs.addAll((java.util.Collection)allocateMq);
+ goto label2;
+ label1:$stack5=this.subscriptionType;
+ $stack4=org.apache.rocketmq.client.impl.consumer.DefaultLitePullConsumerImpl$SubscriptionType.ASSIGN;
+ if ($stack5!=$stack4) goto label2;
+ $stack9=this.assignedMessageQueue;
+ allocateMq = $stack9.getAssignedMessageQueues();
+ mqs.addAll((java.util.Collection)allocateMq);
+ label2:$stack8=this.offsetStore;
+ $stack8.persistAll((java.util.Set)mqs);
+ label3:goto label4;
+ label5:$stack18 = catch;
+ $stack20=org.apache.rocketmq.client.impl.consumer.DefaultLitePullConsumerImpl.log;
+ $stack19=this.defaultLitePullConsumer;
+ $stack22 = $stack19.getConsumerGroup();
+ $stack20.error("Persist consumer offset error for group: {} ",(java.lang.Object)$stack22,(java.lang.Object)$stack18);
+ label4:return;
+ catch java.lang.Exception: label0 - label3 : label5;
+} 
+

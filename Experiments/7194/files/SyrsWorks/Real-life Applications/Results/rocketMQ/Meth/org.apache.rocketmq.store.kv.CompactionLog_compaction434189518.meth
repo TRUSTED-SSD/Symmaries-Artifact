@@ -1,0 +1,53 @@
+void org.apache.rocketmq.store.kv.CompactionLog:compaction(java.util.List mappedFileList,org.apache.rocketmq.store.kv.CompactionLog$OffsetMap offsetMap)
+{
+java.util.Iterator l3;
+  org.apache.rocketmq.store.logfile.MappedFile mappedFile;
+  java.util.Iterator iterator;
+  org.apache.rocketmq.store.SelectMappedBufferResult smb;
+  org.apache.rocketmq.common.message.MessageExt msgExt;
+  java.lang.Throwable l8;
+  org.apache.rocketmq.store.kv.CompactionLog$TopicPartitionLog $stack9;
+  boolean $stack11;
+  org.apache.rocketmq.store.MappedFileQueue $stack13;
+  java.lang.Object $stack14;
+  java.nio.ByteBuffer $stack19;
+  $stack9=new org.apache.rocketmq.store.kv.CompactionLog$TopicPartitionLog;
+ $stack9#org.apache.rocketmq.store.kv.CompactionLog$TopicPartitionLog(this,"compacting");
+ this.compacting=$stack9;
+ l3 = mappedFileList.iterator();
+ label0:$stack11 = l3.hasNext();
+ if ($stack11==0) goto label1;
+ $stack14 = l3.next();
+ mappedFile=(org.apache.rocketmq.store.logfile.MappedFile) $stack14;
+ iterator = mappedFile.iterator(0);
+ label2:$stack11 = iterator.hasNext();
+ if ($stack11==0) goto label3;
+ smb=null;
+ label4:$stack14 = iterator.next();
+ smb=(org.apache.rocketmq.store.SelectMappedBufferResult) $stack14;
+ $stack19 = smb.getByteBuffer();
+ msgExt = org.apache.rocketmq.common.message.MessageDecoder.decode($stack19,(boolean)1,(boolean)1);
+ if (msgExt!=null) goto label5;
+ label6:if (smb==null) goto label3;
+ smb.release();
+ goto label3;
+ label5:$stack9=this.compacting;
+ this.checkAndPutMessage(smb,msgExt,offsetMap,$stack9);
+ label7:if (smb==null) goto label8;
+ smb.release();
+ goto label8;
+ label9:l8 = catch;
+ label10:if (smb==null) goto label11;
+ smb.release();
+ label11:throw l8;
+ label8:goto label2;
+ label3:goto label0;
+ label1:$stack9=this.compacting;
+ $stack13 = $stack9.getLog();
+ this.putEndMessage($stack13);
+ return;
+ catch java.lang.Throwable: label4 - label6 : label9;
+catch java.lang.Throwable: label5 - label7 : label9;
+catch java.lang.Throwable: label9 - label10 : label9;
+} 
+

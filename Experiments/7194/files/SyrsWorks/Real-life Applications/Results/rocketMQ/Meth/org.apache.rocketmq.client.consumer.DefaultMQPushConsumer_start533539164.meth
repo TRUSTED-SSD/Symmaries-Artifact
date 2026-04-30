@@ -1,0 +1,29 @@
+void org.apache.rocketmq.client.consumer.DefaultMQPushConsumer:start()
+{
+java.lang.String $stack2;
+  java.lang.String $stack3;
+  org.apache.rocketmq.client.impl.consumer.DefaultMQPushConsumerImpl $stack5;
+  org.apache.rocketmq.client.trace.TraceDispatcher $stack6;
+  org.apache.rocketmq.client.AccessChannel $stack9;
+  org.apache.rocketmq.client.exception.MQClientException $stack10;
+  org.apache.rocketmq.logging.org.slf4j.Logger $stack11;
+  $stack2 = this.getNamespace();
+ $stack3=this.consumerGroup;
+ $stack2 = org.apache.rocketmq.remoting.protocol.NamespaceUtil.wrapNamespace($stack2,$stack3);
+ this.setConsumerGroup($stack2);
+ $stack5=this.defaultMQPushConsumerImpl;
+ $stack5.start();
+ $stack6=this.traceDispatcher;
+ if (null==$stack6) goto label0;
+ label1:$stack6=this.traceDispatcher;
+ $stack2 = this.getNamesrvAddr();
+ $stack9 = this.getAccessChannel();
+ $stack6.start($stack2,$stack9);
+ label2:goto label0;
+ label3:$stack10 = catch;
+ $stack11=this.log;
+ $stack11.warn("trace dispatcher start failed ",(java.lang.Throwable)$stack10);
+ label0:return;
+ catch org.apache.rocketmq.client.exception.MQClientException: label1 - label2 : label3;
+} 
+

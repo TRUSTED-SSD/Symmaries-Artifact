@@ -1,0 +1,58 @@
+void org.apache.rocketmq.store.index.IndexService:deleteExpiredFile(java.util.List files)
+{
+java.util.Iterator e;
+  org.apache.rocketmq.store.index.IndexFile file;
+  boolean destroyed;
+  java.lang.Throwable l5;
+  java.util.concurrent.locks.ReadWriteLock $stack7;
+  java.util.concurrent.locks.Lock $stack8;
+  java.lang.Object $stack13;
+  org.apache.rocketmq.logging.org.slf4j.Logger $stack16;
+  java.util.ArrayList $stack18;
+  java.lang.Exception $stack25;
+  destroyed = files.isEmpty();
+ if (destroyed!=0) goto label0;
+ label1:$stack7=this.readWriteLock;
+ $stack8 = $stack7.writeLock();
+ $stack8.lock();
+ e = files.iterator();
+ label2:destroyed = e.hasNext();
+ if (destroyed==0) goto label3;
+ $stack13 = e.next();
+ file=(org.apache.rocketmq.store.index.IndexFile) $stack13;
+ destroyed = file.destroy(3000L);
+ if (destroyed==0) goto label4;
+ $stack18=this.indexFileList;
+ destroyed = $stack18.remove((java.lang.Object)file);
+ if (destroyed==0) goto label4;
+ destroyed=1;
+ goto label5;
+ label4:destroyed=0;
+ label5:if (destroyed!=0) goto label6;
+ $stack16=org.apache.rocketmq.store.index.IndexService.LOGGER;
+ $stack16.error("deleteExpiredFile remove failed.");
+ goto label3;
+ label6:goto label2;
+ label3:$stack7=this.readWriteLock;
+ $stack8 = $stack7.writeLock();
+ $stack8.unlock();
+ goto label0;
+ label7:$stack25 = catch;
+ $stack16=org.apache.rocketmq.store.index.IndexService.LOGGER;
+ $stack16.error("deleteExpiredFile has exception.",(java.lang.Throwable)$stack25);
+ label8:$stack7=this.readWriteLock;
+ $stack8 = $stack7.writeLock();
+ $stack8.unlock();
+ goto label0;
+ label9:l5 = catch;
+ label10:$stack7=this.readWriteLock;
+ $stack8 = $stack7.writeLock();
+ $stack8.unlock();
+ throw l5;
+ label0:return;
+ catch java.lang.Exception: label1 - label3 : label7;
+catch java.lang.Throwable: label1 - label3 : label9;
+catch java.lang.Throwable: label7 - label8 : label9;
+catch java.lang.Throwable: label9 - label10 : label9;
+} 
+

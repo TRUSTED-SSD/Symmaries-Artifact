@@ -1,0 +1,18 @@
+org.apache.rocketmq.remoting.protocol.RemotingCommand org.apache.rocketmq.broker.processor.AdminBrokerProcessor:getUnknownCmdResponse(io.netty.channel.ChannelHandlerContext ctx,org.apache.rocketmq.remoting.protocol.RemotingCommand @request)
+{
+java.lang.String error;
+  java.lang.StringBuilder $stack5;
+  int $stack7;
+  org.apache.rocketmq.remoting.protocol.RemotingCommand request;
+request=@request;
+$stack5=new java.lang.StringBuilder;
+ $stack5#java.lang.StringBuilder();
+ $stack5 = $stack5.append(" request type ");
+ $stack7 = request.getCode();
+ $stack5 = $stack5.append($stack7);
+ $stack5 = $stack5.append(" not supported");
+ error = $stack5.toString();
+ request = org.apache.rocketmq.remoting.protocol.RemotingCommand.createResponseCommand(3,error);
+ return  request;
+ } 
+

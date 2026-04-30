@@ -1,0 +1,40 @@
+org.apache.bookkeeper.bookie.EntryLoggerAllocator(org.apache.bookkeeper.conf.ServerConfiguration conf,org.apache.bookkeeper.bookie.LedgerDirsManager ledgerDirsManager,org.apache.bookkeeper.bookie.DefaultEntryLogger$RecentEntryLogsStatus recentlyCreatedEntryLogsStatus,long logId,io.netty.buffer.ByteBufAllocator byteBufAllocator)
+{
+java.lang.Object $stack7;
+  io.netty.buffer.ByteBuf $stack9;
+  boolean $stack10;
+  java.util.concurrent.ExecutorService $stack11;
+  java.nio.charset.Charset $stack12;
+  java.lang.String $stack13;
+  byte[] $stack15;
+  this#java.lang.Object();
+ this.preallocation=null;
+ $stack7=new java.lang.Object;
+ $stack7#java.lang.Object();
+ this.createEntryLogLock=$stack7;
+ $stack7=new java.lang.Object;
+ $stack7#java.lang.Object();
+ this.createCompactionLogLock=$stack7;
+ $stack9 = io.netty.buffer.Unpooled.buffer(1024);
+ this.logfileHeader=$stack9;
+ this.conf=conf;
+ this.byteBufAllocator=byteBufAllocator;
+ this.ledgerDirsManager=ledgerDirsManager;
+ this.preallocatedLogId=logId;
+ this.recentlyCreatedEntryLogsStatus=recentlyCreatedEntryLogsStatus;
+ $stack10 = conf.isEntryLogFilePreAllocationEnabled();
+ this.entryLogPreAllocationEnabled=$stack10;
+ $stack11 = java.util.concurrent.Executors.newSingleThreadExecutor();
+ this.allocatorExecutor=$stack11;
+ $stack9=this.logfileHeader;
+ $stack13="BKLO";
+ $stack12=java.nio.charset.StandardCharsets.UTF_8;
+ $stack15 = $stack13.getBytes($stack12);
+ $stack9.writeBytes($stack15);
+ $stack9=this.logfileHeader;
+ $stack9.writeInt(1);
+ $stack9=this.logfileHeader;
+ $stack9.writerIndex(1024);
+ return;
+ } 
+

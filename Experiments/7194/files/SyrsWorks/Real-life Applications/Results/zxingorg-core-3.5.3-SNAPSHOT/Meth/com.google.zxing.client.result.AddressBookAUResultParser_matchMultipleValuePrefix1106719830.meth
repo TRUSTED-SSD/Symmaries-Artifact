@@ -1,0 +1,34 @@
+static java.lang.String[] com.google.zxing.client.result.AddressBookAUResultParser:matchMultipleValuePrefix(java.lang.String prefix,java.lang.String rawText)
+{
+java.util.ArrayList values;
+  int i;
+  java.lang.String value;
+  java.lang.String[] $stack5;
+  java.lang.Object[] $stack6;
+  java.lang.StringBuilder $stack8;
+  values=null;
+ i=1;
+ label0:if (i>3) goto label1;
+ $stack8=new java.lang.StringBuilder;
+ $stack8#java.lang.StringBuilder();
+ $stack8 = $stack8.append(prefix);
+ $stack8 = $stack8.append(i);
+ $stack8 = $stack8.append((char)58);
+ value = $stack8.toString();
+ value = com.google.zxing.client.result.ResultParser.matchSinglePrefixedField(value,rawText,(char)13,(boolean)1);
+ if (value!=null) goto label2;
+ goto label1;
+ label2:if (values!=null) goto label3;
+ values=new java.util.ArrayList;
+ values#java.util.ArrayList(3);
+ label3:values.add((java.lang.Object)value);
+ i=(i+1);
+ goto label0;
+ label1:if (values!=null) goto label4;
+ return  null;
+ label4:$stack5=com.google.zxing.client.result.ResultParser.EMPTY_STR_ARRAY;
+ $stack6 = values.toArray((java.lang.Object[])$stack5);
+ $stack5=(java.lang.String[]) $stack6;
+ return  $stack5;
+ } 
+

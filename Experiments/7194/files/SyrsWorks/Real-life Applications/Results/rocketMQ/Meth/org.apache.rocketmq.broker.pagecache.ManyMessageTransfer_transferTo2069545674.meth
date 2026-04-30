@@ -1,0 +1,41 @@
+long org.apache.rocketmq.broker.pagecache.ManyMessageTransfer:transferTo(java.nio.channels.WritableByteChannel target,long position)
+{
+java.util.List messageBufferList;
+  java.util.Iterator l5;
+  java.nio.ByteBuffer bb;
+  boolean $stack8;
+  org.apache.rocketmq.store.GetMessageResult $stack9;
+  java.lang.Object $stack13;
+  int $stack17;
+  long $stack18;
+  bb=this.byteBufferHeader;
+ $stack8 = bb.hasRemaining();
+ if ($stack8==0) goto label0;
+ position=this.transferred;
+ bb=this.byteBufferHeader;
+ $stack17 = target.write(bb);
+ $stack18=(long) $stack17;
+ position=(position+$stack18);
+ this.transferred=position;
+ position=this.transferred;
+ return  position;
+ label0:$stack9=this.getMessageResult;
+ messageBufferList = $stack9.getMessageBufferList();
+ l5 = messageBufferList.iterator();
+ label1:$stack8 = l5.hasNext();
+ if ($stack8==0) goto label2;
+ $stack13 = l5.next();
+ bb=(java.nio.ByteBuffer) $stack13;
+ $stack8 = bb.hasRemaining();
+ if ($stack8==0) goto label3;
+ position=this.transferred;
+ $stack17 = target.write(bb);
+ $stack18=(long) $stack17;
+ position=(position+$stack18);
+ this.transferred=position;
+ position=this.transferred;
+ return  position;
+ label3:goto label1;
+ label2:return  0L;
+ } 
+

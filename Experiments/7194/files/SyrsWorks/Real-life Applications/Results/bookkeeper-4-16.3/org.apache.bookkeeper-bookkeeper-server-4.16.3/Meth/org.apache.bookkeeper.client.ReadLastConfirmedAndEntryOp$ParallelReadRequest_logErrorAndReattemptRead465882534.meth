@@ -1,0 +1,25 @@
+void org.apache.bookkeeper.client.ReadLastConfirmedAndEntryOp$ParallelReadRequest:logErrorAndReattemptRead(int bookieIndex,org.apache.bookkeeper.net.BookieId host,java.lang.String errMsg,int rc)
+{
+org.apache.bookkeeper.client.ReadLastConfirmedAndEntryOp $stack7;
+  this#org.apache.bookkeeper.client.ReadLastConfirmedAndEntryOp$ReadLACAndEntryRequest(bookieIndex,host,errMsg,rc);
+ bookieIndex=this.numPendings;
+ bookieIndex=(bookieIndex-1);
+ this.numPendings=bookieIndex;
+ rc=this.numMissedEntryReads;
+ $stack7=this.this$0;
+ bookieIndex=$stack7.maxMissedReadsAllowed;
+ if (rc>bookieIndex) goto label0;
+ bookieIndex=this.numPendings;
+ if (bookieIndex!=0) goto label1;
+ label0:bookieIndex=this.firstError;
+ if (-8!=bookieIndex) goto label2;
+ rc=this.numMissedEntryReads;
+ $stack7=this.this$0;
+ bookieIndex=$stack7.maxMissedReadsAllowed;
+ if (rc<=bookieIndex) goto label2;
+ this.firstError=-13;
+ label2:bookieIndex=this.firstError;
+ this.fail(bookieIndex);
+ label1:return;
+ } 
+

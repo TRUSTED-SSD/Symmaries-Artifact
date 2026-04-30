@@ -1,0 +1,37 @@
+static java.lang.String org.keycloak.common.util.Encode:decodePath(java.lang.String @path)
+{
+java.util.regex.Matcher matcher;
+  int start;
+  java.lang.StringBuilder builder;
+  java.nio.charset.CharsetDecoder decoder;
+  java.lang.String decoded;
+  java.util.regex.Pattern $stack6;
+  java.nio.charset.Charset $stack10;
+  boolean $stack12;
+  int $stack13;
+  java.lang.String path;
+path=@path;
+$stack6=org.keycloak.common.util.Encode.encodedCharsMulti;
+ matcher = $stack6.matcher((java.lang.CharSequence)path);
+ start=0;
+ builder=new java.lang.StringBuilder;
+ builder#java.lang.StringBuilder();
+ decoded=org.keycloak.common.util.Encode.UTF_8;
+ $stack10 = java.nio.charset.Charset.forName(decoded);
+ decoder = $stack10.newDecoder();
+ label0:$stack12 = matcher.find();
+ if ($stack12==0) goto label1;
+ $stack13 = matcher.start();
+ builder.append((java.lang.CharSequence)path,start,$stack13);
+ decoder.reset();
+ decoded = matcher.group(1);
+ decoded = org.keycloak.common.util.Encode.decodeBytes(decoded,decoder);
+ builder.append(decoded);
+ start = matcher.end();
+ goto label0;
+ label1:$stack13 = path.length();
+ builder.append((java.lang.CharSequence)path,start,$stack13);
+ path = builder.toString();
+ return  path;
+ } 
+

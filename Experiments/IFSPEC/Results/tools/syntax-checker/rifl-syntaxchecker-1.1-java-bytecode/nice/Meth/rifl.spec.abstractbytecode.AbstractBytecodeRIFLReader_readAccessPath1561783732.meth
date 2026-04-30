@@ -1,0 +1,39 @@
+rifl.spec.abstractbytecode.AbstractBytecodeAccessPath rifl.spec.abstractbytecode.AbstractBytecodeRIFLReader:readAccessPath(org.w3c.dom.Element @elem,boolean isSource)
+{
+org.w3c.dom.Node parameterNode;
+  rifl.spec.abstractbytecode.AbstractBytecodeParameter parameter;
+  java.util.ArrayList fields;
+  rifl.spec.abstractbytecode.AbstractBytecodeField field;
+  short $stack9;
+  org.w3c.dom.Node $stack17;
+  rifl.spec.abstractbytecode.AbstractBytecodeAccessPath $stack25;
+  rifl.spec.RIFLIntegrityException $stack26;
+  org.w3c.dom.Element elem;
+elem=@elem;
+if (isSource!=0) goto label0;
+ $stack26=new rifl.spec.RIFLIntegrityException;
+ $stack26#rifl.spec.RIFLIntegrityException("Access paths cannot be sinks!");
+ throw $stack26;
+ label0:parameterNode = elem.getFirstChild();
+ goto label1;
+ label2:parameterNode = parameterNode.getNextSibling();
+ label1:$stack9 = parameterNode.getNodeType();
+ if ($stack9!=1) goto label2;
+ elem=(org.w3c.dom.Element) parameterNode;
+ parameter = this.readParameter(elem,(boolean)1);
+ fields=new java.util.ArrayList;
+ fields#java.util.ArrayList();
+ parameterNode = parameterNode.getNextSibling();
+ goto label3;
+ label4:$stack9 = parameterNode.getNodeType();
+ if ($stack9!=1) goto label5;
+ elem=(org.w3c.dom.Element) parameterNode;
+ field = this.readField(elem,(boolean)1);
+ fields.add((java.lang.Object)field);
+ label5:parameterNode = parameterNode.getNextSibling();
+ label3:$stack17 = parameterNode.getNextSibling();
+ if ($stack17!=null) goto label4;
+ $stack25 = this.createAccessPath(parameter,(java.util.List)fields);
+ return  $stack25;
+ } 
+

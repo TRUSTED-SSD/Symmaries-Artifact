@@ -1,0 +1,45 @@
+void org.apache.bookkeeper.client.LedgerHandle:asyncReadPiggybackLastConfirmed(org.apache.bookkeeper.client.AsyncCallback$ReadLastConfirmedCallback cb,java.lang.Object ctx)
+{
+boolean isClosed;
+  long lastEntryId;
+  org.apache.bookkeeper.client.LedgerHandle innercb;
+  org.apache.bookkeeper.client.api.LedgerMetadata metadata;
+  java.lang.Throwable l8;
+  org.apache.bookkeeper.client.LedgerHandle$8 $stack14;
+  org.apache.bookkeeper.client.ReadLastConfirmedOp $stack15;
+  org.apache.bookkeeper.client.ClientContext $stack16;
+  org.apache.bookkeeper.proto.BookieClient $stack17;
+  org.apache.bookkeeper.client.DistributionSchedule $stack18;
+  org.apache.bookkeeper.proto.checksum.DigestManager $stack19;
+  java.util.List $stack21;
+  byte[] $stack22;
+  innercb=this;
+ monitorenter this;
+ label0:metadata = this.getLedgerMetadata();
+ isClosed = metadata.isClosed();
+ lastEntryId = metadata.getLastEntryId();
+ monitorexit this;
+ label1:goto label2;
+ label3:l8 = catch;
+ monitorexit this;
+ label4:throw l8;
+ label2:if (isClosed==0) goto label5;
+ cb.readLastConfirmedComplete(0,lastEntryId,ctx);
+ return;
+ label5:$stack14=new org.apache.bookkeeper.client.LedgerHandle$8;
+ $stack14#org.apache.bookkeeper.client.LedgerHandle$8(this,cb,ctx);
+ $stack15=new org.apache.bookkeeper.client.ReadLastConfirmedOp;
+ $stack16=this.clientCtx;
+ $stack17 = $stack16.getBookieClient();
+ $stack18=this.distributionSchedule;
+ $stack19=this.macManager;
+ lastEntryId=this.ledgerId;
+ $stack21 = this.getCurrentEnsemble();
+ $stack22=this.ledgerKey;
+ $stack15#org.apache.bookkeeper.client.ReadLastConfirmedOp($stack17,$stack18,$stack19,lastEntryId,$stack21,$stack22,(org.apache.bookkeeper.client.ReadLastConfirmedOp$LastConfirmedDataCallback)$stack14);
+ $stack15.initiate();
+ return;
+ catch java.lang.Throwable: label0 - label1 : label3;
+catch java.lang.Throwable: label3 - label4 : label3;
+} 
+

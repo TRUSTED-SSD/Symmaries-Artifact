@@ -1,0 +1,36 @@
+org.apache.rocketmq.common.TopicConfig org.apache.rocketmq.broker.BrokerController:lambda$registerIncrementBrokerData$1(org.apache.rocketmq.common.TopicConfig @topicConfig)
+{
+org.apache.rocketmq.common.BrokerConfig $stack3;
+  int $stack4;
+  boolean $stack5;
+  org.apache.rocketmq.common.TopicConfig $stack6;
+  java.lang.String $stack7;
+  int $stack9;
+  int $stack11;
+  int $stack12;
+  org.apache.rocketmq.common.TopicConfig topicConfig;
+topicConfig=@topicConfig;
+$stack3 = this.getBrokerConfig();
+ $stack4 = $stack3.getBrokerPermission();
+ $stack5 = org.apache.rocketmq.common.constant.PermName.isWriteable($stack4);
+ if ($stack5==0) goto label0;
+ $stack3 = this.getBrokerConfig();
+ $stack4 = $stack3.getBrokerPermission();
+ $stack5 = org.apache.rocketmq.common.constant.PermName.isReadable($stack4);
+ if ($stack5!=0) goto label1;
+ label0:$stack6=new org.apache.rocketmq.common.TopicConfig;
+ $stack7 = topicConfig.getTopicName();
+ $stack4 = topicConfig.getReadQueueNums();
+ $stack9 = topicConfig.getWriteQueueNums();
+ $stack3=this.brokerConfig;
+ $stack11 = $stack3.getBrokerPermission();
+ $stack12 = topicConfig.getTopicSysFlag();
+ $stack6#org.apache.rocketmq.common.TopicConfig($stack7,$stack4,$stack9,$stack11,$stack12);
+ topicConfig=$stack6;
+ goto label2;
+ label1:$stack6=new org.apache.rocketmq.common.TopicConfig;
+ $stack6#org.apache.rocketmq.common.TopicConfig(topicConfig);
+ topicConfig=$stack6;
+ label2:return  topicConfig;
+ } 
+

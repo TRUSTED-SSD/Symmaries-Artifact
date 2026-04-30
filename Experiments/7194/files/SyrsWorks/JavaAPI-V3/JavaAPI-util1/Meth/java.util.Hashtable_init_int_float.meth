@@ -1,0 +1,55 @@
+java.util.Hashtable java.util.Hashtable:init (int i2,float f0)
+{
+byte $b0;
+  java.lang.IllegalArgumentException $r1;
+  java.lang.StringBuilder $r2;
+  java.lang.StringBuilder $r3;
+  java.lang.StringBuilder $r4;
+  java.lang.String $r5;
+  boolean $z0;
+  java.util.Hashtable$Entry[] $r6;
+  float $f1;
+  float $f2;
+  float $f3;
+  int $i1;
+  java.lang.IllegalArgumentException $r7;
+  java.lang.StringBuilder $r8;
+  java.lang.StringBuilder $r9;
+  java.lang.StringBuilder $r10;
+  java.lang.String $r11;
+  this#java.util.Dictionary:init();
+ this.modCount=0;
+ if (i2>=0) goto label0;
+ $r7=new java.lang.IllegalArgumentException;
+ $r8=new java.lang.StringBuilder;
+ $r8#java.lang.StringBuilder:init();
+ $r9 = $r8.append("Illegal Capacity: ");
+ $r10 = $r9.append(i2);
+ $r11 = $r10.toString();
+ $r7#java.lang.IllegalArgumentException:init($r11);
+ throw $r7;
+ label0:$b0=(f0 cmpg 0.0F);
+ if ($b0<=0) goto label1;
+ $z0 = java.lang.Float.isNaN(f0);
+ if ($z0==0) goto label2;
+ label1:$r1=new java.lang.IllegalArgumentException;
+ $r2=new java.lang.StringBuilder;
+ $r2#java.lang.StringBuilder:init();
+ $r3 = $r2.append("Illegal Load: ");
+ $r4 = $r3.append(f0);
+ $r5 = $r4.toString();
+ $r1#java.lang.IllegalArgumentException:init($r5);
+ throw $r1;
+ label2:if (i2!=0) goto label3;
+ i2=1;
+ label3:this.loadFactor=f0;
+ $r6=new java.util.Hashtable$Entry[i2];
+ this.table=$r6;
+ $f1=(float) i2;
+ $f2=($f1 * f0);
+ $f3 = java.lang.Math.min($f2,2.14748365E9F);
+ $i1=(int) $f3;
+ this.threshold=$i1;
+  return this;
+ }  
+

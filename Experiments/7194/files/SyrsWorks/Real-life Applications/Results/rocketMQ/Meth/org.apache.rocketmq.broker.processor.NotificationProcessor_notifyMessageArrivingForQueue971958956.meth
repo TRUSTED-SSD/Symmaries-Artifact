@@ -1,0 +1,32 @@
+void org.apache.rocketmq.broker.processor.NotificationProcessor:notifyMessageArrivingForQueue(java.lang.String @topic,int queueId)
+{
+java.util.concurrent.ArrayBlockingQueue remotingCommands;
+  java.util.ArrayList c;
+  java.util.Iterator l5;
+  org.apache.rocketmq.broker.longpolling.NotificationRequest notificationRequest;
+  com.googlecode.concurrentlinkedhashmap.ConcurrentLinkedHashMap $stack7;
+  java.lang.Object $stack9;
+  boolean $stack13;
+  org.apache.rocketmq.logging.org.slf4j.Logger $stack15;
+  java.lang.String topic;
+topic=@topic;
+$stack7=this.pollingMap;
+ topic = org.apache.rocketmq.common.KeyBuilder.buildPollingNotificationKey(topic,queueId);
+ $stack9 = $stack7.get((java.lang.Object)topic);
+ remotingCommands=(java.util.concurrent.ArrayBlockingQueue) $stack9;
+ if (remotingCommands==null) goto label0;
+ c=new java.util.ArrayList;
+ c#java.util.ArrayList();
+ remotingCommands.drainTo((java.util.Collection)c);
+ l5 = c.iterator();
+ label1:$stack13 = l5.hasNext();
+ if ($stack13==0) goto label0;
+ $stack9 = l5.next();
+ notificationRequest=(org.apache.rocketmq.broker.longpolling.NotificationRequest) $stack9;
+ $stack15=org.apache.rocketmq.broker.processor.NotificationProcessor.POP_LOGGER;
+ $stack15.info("new msg arrive , wakeUp : {}",(java.lang.Object)notificationRequest);
+ this#org.apache.rocketmq.broker.processor.NotificationProcessor(notificationRequest);
+ goto label1;
+ label0:return;
+ } 
+

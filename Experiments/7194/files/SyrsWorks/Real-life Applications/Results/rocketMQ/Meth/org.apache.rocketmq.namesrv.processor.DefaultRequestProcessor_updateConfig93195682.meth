@@ -1,0 +1,58 @@
+org.apache.rocketmq.remoting.protocol.RemotingCommand org.apache.rocketmq.namesrv.processor.DefaultRequestProcessor:updateConfig(io.netty.channel.ChannelHandlerContext ctx,org.apache.rocketmq.remoting.protocol.RemotingCommand request)
+{
+org.apache.rocketmq.remoting.protocol.RemotingCommand response;
+  byte[] body;
+  java.lang.String bodyStr;
+  java.io.Serializable e;
+  org.apache.rocketmq.namesrv.NamesrvController $stack11;
+  org.apache.rocketmq.remoting.Configuration $stack12;
+  org.apache.rocketmq.logging.org.slf4j.Logger $stack18;
+  io.netty.channel.Channel $stack21;
+  java.io.UnsupportedEncodingException $stack26;
+  java.lang.StringBuilder $stack28;
+  java.lang.String tmp$954358562;
+  java.lang.Throwable tmp$944346396;
+  java.util.Properties tmp$977798189;
+  if (ctx==null) goto label0;
+ $stack18=org.apache.rocketmq.namesrv.processor.DefaultRequestProcessor.log;
+ $stack21 = ctx.channel();
+ bodyStr = org.apache.rocketmq.remoting.common.RemotingHelper.parseChannelRemoteAddr($stack21);
+ $stack18.info("updateConfig called by {}",(java.lang.Object)bodyStr);
+ label0:response = org.apache.rocketmq.remoting.protocol.RemotingCommand.createResponseCommand(null);
+ body = request.getBody();
+ if (body==null) goto label1;
+ label2:tmp$954358562=new java.lang.String;
+ bodyStr=tmp$954358562;
+ tmp$954358562#java.lang.String(body,"UTF-8");
+ bodyStr=tmp$954358562;
+ label3:goto label4;
+ label5:$stack26 = catch;
+ e=$stack26;
+ $stack18=org.apache.rocketmq.namesrv.processor.DefaultRequestProcessor.log;
+ tmp$944346396=(java.lang.Throwable) $stack26;
+ $stack18.error("updateConfig byte array to string error: ",tmp$944346396);
+ response.setCode(1);
+ $stack28=new java.lang.StringBuilder;
+ $stack28#java.lang.StringBuilder();
+ $stack28 = $stack28.append("UnsupportedEncodingException ");
+ $stack28 = $stack28.append((java.lang.Object)$stack26);
+ bodyStr = $stack28.toString();
+ response.setRemark(bodyStr);
+ return  response;
+ label4:e = org.apache.rocketmq.common.MixAll.string2Properties(tmp$954358562);
+ if (e!=null) goto label6;
+ $stack18=org.apache.rocketmq.namesrv.processor.DefaultRequestProcessor.log;
+ $stack18.error("updateConfig MixAll.string2Properties error {}",(java.lang.Object)tmp$954358562);
+ response.setCode(1);
+ response.setRemark("string2Properties error");
+ return  response;
+ label6:$stack11=this.namesrvController;
+ $stack12 = $stack11.getConfiguration();
+ tmp$977798189=(java.util.Properties) e;
+ $stack12.update(tmp$977798189);
+ label1:response.setCode(0);
+ response.setRemark(null);
+ return  response;
+ catch java.io.UnsupportedEncodingException: label2 - label3 : label5;
+} 
+

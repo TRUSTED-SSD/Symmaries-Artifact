@@ -1,0 +1,41 @@
+org.apache.bookkeeper.net.Node org.apache.bookkeeper.net.NetworkTopologyImpl:chooseRandom(java.lang.String scope,java.lang.String @excludedScope)
+{
+org.apache.bookkeeper.net.Node node;
+  org.apache.bookkeeper.net.NetworkTopologyImpl$InnerNode innerNode;
+  int numOfDatanodes;
+  boolean $stack8;
+  org.apache.bookkeeper.net.NetworkTopologyImpl$InnerNode $stack12;
+  int $stack13;
+  java.util.Random $stack14;
+  java.lang.String excludedScope;
+excludedScope=@excludedScope;
+if (excludedScope==null) goto label0;
+ $stack8 = scope.startsWith(excludedScope);
+ if ($stack8==0) goto label1;
+ return  null;
+ label1:$stack8 = excludedScope.startsWith(scope);
+ if ($stack8!=0) goto label0;
+ excludedScope=null;
+ label0:node = this.getNode(scope);
+ $stack8=node instanceof org.apache.bookkeeper.net.NetworkTopologyImpl$InnerNode;
+ if ($stack8!=0) goto label2;
+ return  node;
+ label2:innerNode=(org.apache.bookkeeper.net.NetworkTopologyImpl$InnerNode) node;
+ numOfDatanodes = innerNode.getNumOfLeaves();
+ if (excludedScope!=null) goto label3;
+ node=null;
+ goto label4;
+ label3:node = this.getNode(excludedScope);
+ $stack8=node instanceof org.apache.bookkeeper.net.NetworkTopologyImpl$InnerNode;
+ if ($stack8!=0) goto label5;
+ numOfDatanodes=(numOfDatanodes+-1);
+ goto label4;
+ label5:$stack12=(org.apache.bookkeeper.net.NetworkTopologyImpl$InnerNode) node;
+ $stack13 = $stack12.getNumOfLeaves();
+ numOfDatanodes=(numOfDatanodes-$stack13);
+ label4:$stack14=org.apache.bookkeeper.net.NetworkTopologyImpl.r;
+ numOfDatanodes = $stack14.nextInt(numOfDatanodes);
+ node = innerNode.getLeaf(numOfDatanodes,node);
+ return  node;
+ } 
+

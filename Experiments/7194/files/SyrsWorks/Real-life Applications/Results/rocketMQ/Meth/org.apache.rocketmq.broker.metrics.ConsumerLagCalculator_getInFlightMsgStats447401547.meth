@@ -1,0 +1,49 @@
+org.apache.rocketmq.common.Pair org.apache.rocketmq.broker.metrics.ConsumerLagCalculator:getInFlightMsgStats(java.lang.String group,java.lang.String topic,boolean isPop)
+{
+long total;
+  long earliestUnPulledTimestamp;
+  org.apache.rocketmq.common.TopicConfig topicConfig;
+  int queueId;
+  org.apache.rocketmq.common.Pair pair;
+  org.apache.rocketmq.broker.topic.TopicConfigManager $stack11;
+  org.apache.rocketmq.logging.org.slf4j.Logger $stack13;
+  byte $stack14;
+  java.lang.Long $stack16;
+  java.lang.Long $stack17;
+  int $stack22;
+  java.lang.Object $stack26;
+  long $stack28;
+  total=0L;
+ earliestUnPulledTimestamp=9223372036854775807L;
+ $stack11=this.topicConfigManager;
+ topicConfig = $stack11.selectTopicConfig(topic);
+ if (topicConfig==null) goto label0;
+ queueId=0;
+ label1:$stack22 = topicConfig.getWriteQueueNums();
+ if (queueId>=$stack22) goto label2;
+ pair = this.getInFlightMsgStats(group,topic,queueId,isPop);
+ $stack26 = pair.getObject1();
+ $stack16=(java.lang.Long) $stack26;
+ $stack28 = $stack16.longValue();
+ total=(total+$stack28);
+ $stack26 = pair.getObject2();
+ $stack16=(java.lang.Long) $stack26;
+ $stack28 = $stack16.longValue();
+ earliestUnPulledTimestamp = java.lang.Math.min(earliestUnPulledTimestamp,$stack28);
+ queueId=(queueId+1);
+ goto label1;
+ label2:goto label3;
+ label0:$stack13=org.apache.rocketmq.broker.metrics.ConsumerLagCalculator.LOGGER;
+ $stack13.warn("failed to get config of topic {}",(java.lang.Object)topic);
+ label3:$stack14=(earliestUnPulledTimestamp cmp 0L);
+ if ($stack14<0) goto label4;
+ $stack14=(earliestUnPulledTimestamp cmp 9223372036854775807L);
+ if ($stack14!=0) goto label5;
+ label4:earliestUnPulledTimestamp=0L;
+ label5:pair=new org.apache.rocketmq.common.Pair;
+ $stack16 = java.lang.Long.valueOf(total);
+ $stack17 = java.lang.Long.valueOf(earliestUnPulledTimestamp);
+ pair#org.apache.rocketmq.common.Pair((java.lang.Object)$stack16,(java.lang.Object)$stack17);
+ return  pair;
+ } 
+

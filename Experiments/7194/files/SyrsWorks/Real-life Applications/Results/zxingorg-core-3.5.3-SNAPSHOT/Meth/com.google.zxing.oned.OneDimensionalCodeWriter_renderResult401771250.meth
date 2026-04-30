@@ -1,0 +1,27 @@
+static com.google.zxing.common.BitMatrix com.google.zxing.oned.OneDimensionalCodeWriter:renderResult(boolean[] code,int width,int height,int sidesMargin)
+{
+int inputWidth;
+  int fullWidth;
+  com.google.zxing.common.BitMatrix output;
+  boolean $stack18;
+  inputWidth=#code;
+ fullWidth=(inputWidth+sidesMargin);
+ sidesMargin = java.lang.Math.max(width,fullWidth);
+ width = java.lang.Math.max(1,height);
+ height=(sidesMargin/fullWidth);
+ fullWidth=(inputWidth * height);
+ fullWidth=(sidesMargin-fullWidth);
+ output=new com.google.zxing.common.BitMatrix;
+ output#com.google.zxing.common.BitMatrix(sidesMargin,width);
+ sidesMargin=0;
+ fullWidth=(fullWidth/2);
+ label0:if (sidesMargin>=inputWidth) goto label1;
+ $stack18=code[sidesMargin];
+ if ($stack18==0) goto label2;
+ output.setRegion(fullWidth,0,height,width);
+ label2:sidesMargin=(sidesMargin+1);
+ fullWidth=(fullWidth+height);
+ goto label0;
+ label1:return  output;
+ } 
+

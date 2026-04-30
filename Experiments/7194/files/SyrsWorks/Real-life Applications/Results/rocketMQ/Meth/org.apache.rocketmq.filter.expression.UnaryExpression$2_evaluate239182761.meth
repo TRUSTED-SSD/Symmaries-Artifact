@@ -1,0 +1,33 @@
+java.lang.Object org.apache.rocketmq.filter.expression.UnaryExpression$2:evaluate(org.apache.rocketmq.filter.expression.EvaluationContext context)
+{
+java.lang.Object rvalue;
+  org.apache.rocketmq.filter.expression.Expression $stack3;
+  java.lang.Class $stack5;
+  java.util.Collection $stack6;
+  boolean $stack7;
+  java.lang.Boolean $stack9;
+  boolean $stack14;
+  $stack3=this.right;
+ rvalue = $stack3.evaluate(context);
+ if (rvalue!=null) goto label0;
+ return  null;
+ label0:$stack5 = rvalue.getClass();
+ if ($stack5==java.lang.String) goto label1;
+ return  null;
+ label1:$stack6=this.val$inList;
+ if ($stack6==null) goto label2;
+ $stack6=this.val$inList;
+ $stack7 = $stack6.contains(rvalue);
+ if ($stack7==0) goto label2;
+ $stack14=1;
+ goto label3;
+ label2:$stack14=0;
+ label3:$stack7=this.val$not;
+ $stack7=(!$stack14 & $stack7) |(!$stack7 & $stack14);
+ if ($stack7==0) goto label4;
+ $stack9=java.lang.Boolean.TRUE;
+ return  $stack9;
+ label4:$stack9=java.lang.Boolean.FALSE;
+ return  $stack9;
+ } 
+

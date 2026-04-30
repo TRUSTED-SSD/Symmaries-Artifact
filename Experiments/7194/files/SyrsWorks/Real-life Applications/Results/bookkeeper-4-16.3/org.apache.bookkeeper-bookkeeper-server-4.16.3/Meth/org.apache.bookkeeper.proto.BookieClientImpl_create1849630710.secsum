@@ -1,0 +1,13 @@
+org.apache.bookkeeper.proto.PerChannelBookieClient org.apache.bookkeeper.proto.BookieClientImpl:create (
+  org.apache.bookkeeper.net.BookieId address,
+  org.apache.bookkeeper.proto.PerChannelBookieClientPool pcbcPool,
+  org.apache.bookkeeper.tls.SecurityHandlerFactory shFactory,
+  boolean forceUseV3) {
+  guard = tt;
+  ret(level()) = pc;
+  ret(obj_level()) = pc;
+  ret(obj_level(address)) = if obj_level(address) = ⊤ ∨ pc ≠ ⊤ ∧ (if obj_level(this) = ⊥ then level(this) = ⊤ ∧ obj_level(address) = ⊥ else obj_level(address) = ⊥ ∧ obj_level(this) = ⊤) then ⊤ else ⊥;
+  ret(obj_level(pcbcPool)) = if level(forceUseV3) = ⊥ then pc ⊔ level(this) ⊔ obj_level(pcbcPool) ⊔ obj_level(this) else if level(forceUseV3) = ⊤ ∧ level(this) ⊔ obj_level(address) ⊔ obj_level(pcbcPool) ⊔ obj_level(shFactory) ⊔ obj_level(this) = ⊥ then pc else level(forceUseV3) ⊓ (level(this) ⊔ obj_level(address) ⊔ obj_level(pcbcPool) ⊔ obj_level(shFactory) ⊔ obj_level(this));
+  ret(obj_level(shFactory)) = pc ⊔ level(this) ⊔ obj_level(shFactory) ⊔ obj_level(this);
+  ret(obj_level(this)) = if level(forceUseV3) = ⊥ then pc ⊔ level(this) ⊔ obj_level(this) else if level(forceUseV3) = ⊤ ∧ level(this) ⊔ obj_level(address) ⊔ obj_level(pcbcPool) ⊔ obj_level(shFactory) ⊔ obj_level(this) = ⊥ then pc else level(forceUseV3) ⊓ (level(this) ⊔ obj_level(address) ⊔ obj_level(pcbcPool) ⊔ obj_level(shFactory) ⊔ obj_level(this));
+}

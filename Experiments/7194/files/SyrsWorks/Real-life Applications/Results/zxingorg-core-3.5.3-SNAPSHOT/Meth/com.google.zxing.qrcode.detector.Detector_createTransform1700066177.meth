@@ -1,0 +1,44 @@
+static com.google.zxing.common.PerspectiveTransform com.google.zxing.qrcode.detector.Detector:createTransform(com.google.zxing.ResultPoint topLeft,com.google.zxing.ResultPoint topRight,com.google.zxing.ResultPoint bottomLeft,com.google.zxing.ResultPoint alignmentPattern,int dimension)
+{
+float dimMinusThree;
+  float bottomRightX;
+  float bottomRightY;
+  float sourceBottomRightX;
+  float sourceBottomRightY;
+  float $stack23;
+  float $stack24;
+  float $stack25;
+  float $stack26;
+  float $stack27;
+  float $stack28;
+  com.google.zxing.common.PerspectiveTransform $stack29;
+  dimMinusThree=(float) dimension;
+ dimMinusThree=(dimMinusThree-3.5F);
+ if (alignmentPattern==null) goto label0;
+ bottomRightX = alignmentPattern.getX();
+ bottomRightY = alignmentPattern.getY();
+ sourceBottomRightX=(dimMinusThree-3.0F);
+ sourceBottomRightY=sourceBottomRightX;
+ goto label1;
+ label0:bottomRightX = topRight.getX();
+ bottomRightY = topLeft.getX();
+ bottomRightX=(bottomRightX-bottomRightY);
+ bottomRightY = bottomLeft.getX();
+ bottomRightX=(bottomRightX+bottomRightY);
+ bottomRightY = topRight.getY();
+ sourceBottomRightX = topLeft.getY();
+ bottomRightY=(bottomRightY-sourceBottomRightX);
+ sourceBottomRightX = bottomLeft.getY();
+ bottomRightY=(bottomRightY+sourceBottomRightX);
+ sourceBottomRightX=dimMinusThree;
+ sourceBottomRightY=dimMinusThree;
+ label1:$stack23 = topLeft.getX();
+ $stack24 = topLeft.getY();
+ $stack25 = topRight.getX();
+ $stack26 = topRight.getY();
+ $stack27 = bottomLeft.getX();
+ $stack28 = bottomLeft.getY();
+ $stack29 = com.google.zxing.common.PerspectiveTransform.quadrilateralToQuadrilateral(3.5F,3.5F,dimMinusThree,3.5F,sourceBottomRightX,sourceBottomRightY,3.5F,dimMinusThree,$stack23,$stack24,$stack25,$stack26,bottomRightX,bottomRightY,$stack27,$stack28);
+ return  $stack29;
+ } 
+

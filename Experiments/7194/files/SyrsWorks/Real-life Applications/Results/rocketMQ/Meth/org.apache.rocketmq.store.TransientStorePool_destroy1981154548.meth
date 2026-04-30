@@ -1,0 +1,33 @@
+void org.apache.rocketmq.store.TransientStorePool:destroy()
+{
+java.util.Iterator l1;
+  java.nio.ByteBuffer byteBuffer;
+  long address;
+  java.util.Deque $stack6;
+  boolean $stack8;
+  java.lang.Object $stack9;
+  sun.nio.ch.DirectBuffer $stack10;
+  com.sun.jna.Pointer $stack12;
+  com.sun.jna.NativeLong $stack13;
+  int $stack14;
+  org.apache.rocketmq.store.util.LibC $stack16;
+  $stack6=this.availableBuffers;
+ l1 = $stack6.iterator();
+ label0:$stack8 = l1.hasNext();
+ if ($stack8==0) goto label1;
+ $stack9 = l1.next();
+ byteBuffer=(java.nio.ByteBuffer) $stack9;
+ $stack10=(sun.nio.ch.DirectBuffer) byteBuffer;
+ address = $stack10.address();
+ $stack12=new com.sun.jna.Pointer;
+ $stack12#com.sun.jna.Pointer(address);
+ $stack16=org.apache.rocketmq.store.util.LibC.INSTANCE;
+ $stack13=new com.sun.jna.NativeLong;
+ $stack14=this.fileSize;
+ address=(long) $stack14;
+ $stack13#com.sun.jna.NativeLong(address);
+ $stack16.munlock($stack12,$stack13);
+ goto label0;
+ label1:return;
+ } 
+

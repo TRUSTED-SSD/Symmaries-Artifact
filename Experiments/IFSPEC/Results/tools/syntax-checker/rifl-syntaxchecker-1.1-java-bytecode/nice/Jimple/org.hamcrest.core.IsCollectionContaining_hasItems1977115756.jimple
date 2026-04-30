@@ -1,0 +1,55 @@
+    public static transient org.hamcrest.Matcher hasItems(org.hamcrest.Matcher[])
+    {
+        org.hamcrest.Matcher[] itemMatchers;
+        java.util.ArrayList all;
+        int len$, i$;
+        org.hamcrest.Matcher elementMatcher;
+        org.hamcrest.core.IsCollectionContaining $stack9;
+
+        itemMatchers := @parameter0: org.hamcrest.Matcher[];
+
+        all = new java.util.ArrayList;
+/*94*/
+
+        len$ = lengthof itemMatchers;
+/*94*/
+
+        specialinvoke all.<java.util.ArrayList: void <init>(int)>(len$);
+/*94*/
+
+        len$ = lengthof itemMatchers;
+/*96*/
+
+        i$ = 0;
+/*96*/
+
+     label1:
+        if i$ >= len$ goto label2;
+/*96*/
+
+        elementMatcher = itemMatchers[i$];
+/*101*/
+
+        $stack9 = new org.hamcrest.core.IsCollectionContaining;
+/*98*/
+
+        specialinvoke $stack9.<org.hamcrest.core.IsCollectionContaining: void <init>(org.hamcrest.Matcher)>(elementMatcher);
+/*98*/
+
+        interfaceinvoke all.<java.util.List: boolean add(java.lang.Object)>($stack9);
+/*98*/
+
+        i$ = i$ + 1;
+/*96*/
+
+        goto label1;
+/*96*/
+
+     label2:
+        elementMatcher = staticinvoke <org.hamcrest.core.AllOf: org.hamcrest.Matcher allOf(java.lang.Iterable)>(all);
+/*101*/
+
+        return elementMatcher;
+/*101*/
+    }
+

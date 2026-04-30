@@ -1,0 +1,45 @@
+java.lang.String org.apache.kerby.asn1.type.Asn1GeneralizedTime:getMillSeconds(java.lang.String @dateStr)
+{
+char[] millDigits;
+  int iPos;
+  char chr;
+  int i;
+  int $stack10;
+  java.lang.IllegalArgumentException $stack17;
+  java.lang.StringBuilder $stack18;
+  java.lang.String dateStr;
+dateStr=@dateStr;
+millDigits=new char[3];
+ millDigits[0]=48;
+ millDigits[1]=48;
+ millDigits[2]=48;
+ iPos = dateStr.indexOf(46);
+ if (iPos<=0) goto label0;
+ if (iPos==14) goto label1;
+ $stack17=new java.lang.IllegalArgumentException;
+ $stack18=new java.lang.StringBuilder;
+ $stack18#java.lang.StringBuilder();
+ $stack18 = $stack18.append("Bad generalized time string, with improper milli seconds ");
+ $stack18 = $stack18.append(dateStr);
+ dateStr = $stack18.toString();
+ $stack17#java.lang.IllegalArgumentException(dateStr);
+ throw $stack17;
+ label1:iPos=0;
+ i=15;
+ label2:$stack10 = dateStr.length();
+ if (i>=$stack10) goto label0;
+ $stack10=#millDigits;
+ if (iPos>=$stack10) goto label0;
+ chr = dateStr.charAt(i);
+ if (48>chr) goto label0;
+ if (chr>57) goto label0;
+ $stack10=iPos;
+ iPos=(iPos+1);
+ millDigits[$stack10]=chr;
+ i=(i+1);
+ goto label2;
+ label0:dateStr=new java.lang.String;
+ dateStr#java.lang.String(millDigits);
+ return  dateStr;
+ } 
+

@@ -1,0 +1,19 @@
+org.apache.rocketmq.remoting.protocol.RemotingCommand org.apache.rocketmq.broker.processor.AdminBrokerProcessor:getSystemTopicListFromBroker(io.netty.channel.ChannelHandlerContext ctx,org.apache.rocketmq.remoting.protocol.RemotingCommand @request)
+{
+java.util.Set topics;
+  org.apache.rocketmq.remoting.protocol.body.TopicList topicList;
+  byte[] $stack9;
+  org.apache.rocketmq.remoting.protocol.RemotingCommand request;
+request=@request;
+request = org.apache.rocketmq.remoting.protocol.RemotingCommand.createResponseCommand(null);
+ topics = org.apache.rocketmq.common.topic.TopicValidator.getSystemTopicSet();
+ topicList=new org.apache.rocketmq.remoting.protocol.body.TopicList;
+ topicList#org.apache.rocketmq.remoting.protocol.body.TopicList();
+ topicList.setTopicList(topics);
+ $stack9 = topicList.encode();
+ request.setBody($stack9);
+ request.setCode(0);
+ request.setRemark(null);
+ return  request;
+ } 
+

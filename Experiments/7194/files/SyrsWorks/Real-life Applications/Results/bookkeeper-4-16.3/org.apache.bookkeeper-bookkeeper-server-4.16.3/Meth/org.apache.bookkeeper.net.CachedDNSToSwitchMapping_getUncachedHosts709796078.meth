@@ -1,0 +1,25 @@
+java.util.List org.apache.bookkeeper.net.CachedDNSToSwitchMapping:getUncachedHosts(java.util.List names)
+{
+java.util.ArrayList unCachedHosts;
+  java.util.Iterator l3;
+  java.lang.String name;
+  int $stack6;
+  boolean $stack8;
+  java.lang.Object $stack9;
+  java.util.Map $stack10;
+  unCachedHosts=new java.util.ArrayList;
+ $stack6 = names.size();
+ unCachedHosts#java.util.ArrayList($stack6);
+ l3 = names.iterator();
+ label0:$stack8 = l3.hasNext();
+ if ($stack8==0) goto label1;
+ $stack9 = l3.next();
+ name=(java.lang.String) $stack9;
+ $stack10=this.cache;
+ $stack9 = $stack10.get((java.lang.Object)name);
+ if ($stack9!=null) goto label2;
+ unCachedHosts.add((java.lang.Object)name);
+ label2:goto label0;
+ label1:return  unCachedHosts;
+ } 
+

@@ -1,0 +1,20 @@
+static java.lang.String com.google.zxing.client.result.URIParsedResult:massageURI(java.lang.String @uri)
+{
+int protocolEnd;
+  java.lang.StringBuilder $stack4;
+  boolean $stack8;
+  java.lang.String uri;
+uri=@uri;
+uri = uri.trim();
+ protocolEnd = uri.indexOf(58);
+ if (protocolEnd<0) goto label0;
+ $stack8 = com.google.zxing.client.result.URIParsedResult.isColonFollowedByPortNumber(uri,protocolEnd);
+ if ($stack8==0) goto label1;
+ label0:$stack4=new java.lang.StringBuilder;
+ $stack4#java.lang.StringBuilder();
+ $stack4 = $stack4.append("http://");
+ $stack4 = $stack4.append(uri);
+ uri = $stack4.toString();
+ label1:return  uri;
+ } 
+

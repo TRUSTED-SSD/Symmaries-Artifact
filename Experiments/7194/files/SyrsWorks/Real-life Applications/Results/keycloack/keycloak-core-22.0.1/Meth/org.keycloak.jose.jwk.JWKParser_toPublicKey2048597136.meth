@@ -1,0 +1,28 @@
+java.security.PublicKey org.keycloak.jose.jwk.JWKParser:toPublicKey()
+{
+java.lang.String keyType;
+  org.keycloak.jose.jwk.JWK $stack2;
+  boolean $stack4;
+  java.lang.RuntimeException $stack6;
+  java.lang.StringBuilder $stack7;
+  java.security.PublicKey $stack11;
+  $stack2=this.jwk;
+ keyType = $stack2.getKeyType();
+ $stack4 = keyType.equals((java.lang.Object)"RSA");
+ if ($stack4==0) goto label0;
+ $stack11 = this#org.keycloak.jose.jwk.JWKParser:createRSAPublicKey();
+ return  $stack11;
+ label0:$stack4 = keyType.equals((java.lang.Object)"EC");
+ if ($stack4==0) goto label1;
+ $stack11 = this#org.keycloak.jose.jwk.JWKParser:createECPublicKey();
+ return  $stack11;
+ label1:$stack6=new java.lang.RuntimeException;
+ $stack7=new java.lang.StringBuilder;
+ $stack7#java.lang.StringBuilder();
+ $stack7 = $stack7.append("Unsupported keyType ");
+ $stack7 = $stack7.append(keyType);
+ keyType = $stack7.toString();
+ $stack6#java.lang.RuntimeException(keyType);
+ throw $stack6;
+ } 
+

@@ -1,0 +1,35 @@
+org.apache.rocketmq.tieredstore.provider.TieredFileSegment$TieredFileSegmentInputStream(org.apache.rocketmq.tieredstore.provider.TieredFileSegment$FileSegmentType fileType,long startOffset,java.util.List uploadBufferList,java.nio.ByteBuffer @codaBuffer,int contentLength)
+{
+java.nio.ByteBuffer $stack7;
+  org.apache.rocketmq.tieredstore.provider.TieredFileSegment$FileSegmentType $stack11;
+  org.apache.rocketmq.logging.org.slf4j.Logger $stack13;
+  java.lang.Object $stack14;
+  java.nio.ByteBuffer codaBuffer;
+codaBuffer=@codaBuffer;
+this#java.io.InputStream();
+ this.bufferReadIndex=0;
+ this.readOffset=0;
+ $stack7 = java.nio.ByteBuffer.allocate(8);
+ this.commitLogOffsetBuffer=$stack7;
+ this.readBytes=0;
+ this.fileType=fileType;
+ this.commitLogOffset=startOffset;
+ $stack7=this.commitLogOffsetBuffer;
+ $stack7.putLong(0,startOffset);
+ this.uploadBufferList=uploadBufferList;
+ this.codaBuffer=codaBuffer;
+ this.contentLength=contentLength;
+ contentLength = uploadBufferList.size();
+ if (contentLength<=0) goto label0;
+ $stack14 = uploadBufferList.get(0);
+ codaBuffer=(java.nio.ByteBuffer) $stack14;
+ this.curBuffer=codaBuffer;
+ label0:$stack11=org.apache.rocketmq.tieredstore.provider.TieredFileSegment$FileSegmentType.INDEX;
+ if (fileType!=$stack11) goto label1;
+ contentLength = uploadBufferList.size();
+ if (contentLength==1) goto label1;
+ $stack13 = org.apache.rocketmq.tieredstore.provider.TieredFileSegment.access$000();
+ $stack13.error("[Bug]TieredFileSegmentInputStream: index file must have only one buffer");
+ label1:return;
+ } 
+

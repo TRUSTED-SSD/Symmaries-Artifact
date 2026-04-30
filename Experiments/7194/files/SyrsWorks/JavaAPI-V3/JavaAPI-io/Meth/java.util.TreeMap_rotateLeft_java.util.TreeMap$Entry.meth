@@ -1,0 +1,39 @@
+void java.util.TreeMap:rotateLeft(java.util.TreeMap$Entry r1)
+{
+java.util.TreeMap$Entry r2;
+  java.util.TreeMap$Entry $r3;
+  java.util.TreeMap$Entry $r4;
+  java.util.TreeMap$Entry $r5;
+  java.util.TreeMap$Entry $r6;
+  java.util.TreeMap$Entry $r7;
+  java.util.TreeMap$Entry $r8;
+  java.util.TreeMap$Entry $r9;
+  java.util.TreeMap$Entry $r10;
+  java.util.TreeMap$Entry $r11;
+  if (r1==null) goto label0;
+ r2=r1.right;
+ $r3=r2.left;
+ r1.right=$r3;
+ $r4=r2.left;
+ if ($r4==null) goto label1;
+ $r11=r2.left;
+ $r11.parent=r1;
+ label1:$r5=r1.parent;
+ r2.parent=$r5;
+ $r6=r1.parent;
+ if ($r6!=null) goto label2;
+ this.root=r2;
+ goto label3;
+ label2:$r7=r1.parent;
+ $r8=$r7.left;
+ if ($r8!=r1) goto label4;
+ $r10=r1.parent;
+ $r10.left=r2;
+ goto label3;
+ label4:$r9=r1.parent;
+ $r9.right=r2;
+ label3:r2.left=r1;
+ r1.parent=r2;
+ label0:return;
+ }  
+

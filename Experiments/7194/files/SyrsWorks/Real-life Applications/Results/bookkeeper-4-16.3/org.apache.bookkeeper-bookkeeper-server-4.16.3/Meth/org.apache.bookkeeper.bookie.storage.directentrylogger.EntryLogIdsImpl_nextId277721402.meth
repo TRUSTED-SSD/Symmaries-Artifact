@@ -1,0 +1,31 @@
+int org.apache.bookkeeper.bookie.storage.directentrylogger.EntryLogIdsImpl:nextId()
+{
+org.apache.bookkeeper.bookie.storage.directentrylogger.EntryLogIdsImpl l1;
+  int current;
+  java.lang.Throwable l3;
+  int $stack5;
+  int $stack8;
+  label0:l1=this;
+ monitorenter this;
+ label1:current=this.nextId;
+ $stack5=this.nextId;
+ $stack5=($stack5+1);
+ this.nextId=$stack5;
+ $stack8=this.nextId;
+ $stack5=this.maxId;
+ if ($stack8!=$stack5) goto label2;
+ this#org.apache.bookkeeper.bookie.storage.directentrylogger.EntryLogIdsImpl:findLargestGap();
+ goto label3;
+ label2:monitorexit this;
+ label4:return  current;
+ label3:monitorexit this;
+ label5:goto label6;
+ label7:l3 = catch;
+ monitorexit this;
+ label8:throw l3;
+ label6:goto label0;
+ catch java.lang.Throwable: label1 - label4 : label7;
+catch java.lang.Throwable: label3 - label5 : label7;
+catch java.lang.Throwable: label7 - label8 : label7;
+} 
+

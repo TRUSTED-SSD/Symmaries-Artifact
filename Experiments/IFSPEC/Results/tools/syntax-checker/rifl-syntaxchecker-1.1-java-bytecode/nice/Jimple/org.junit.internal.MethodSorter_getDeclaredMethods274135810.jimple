@@ -1,0 +1,35 @@
+    public static java.lang.reflect.Method[] getDeclaredMethods(java.lang.Class)
+    {
+        java.lang.Class clazz;
+        java.util.Comparator comparator;
+        java.lang.reflect.Method[] methods;
+        java.lang.'annotation'.Annotation $stack3;
+        org.junit.FixMethodOrder $stack4;
+
+        clazz := @parameter0: java.lang.Class;
+
+        $stack3 = virtualinvoke clazz.<java.lang.Class: java.lang.'annotation'.Annotation getAnnotation(java.lang.Class)>(class "Lorg/junit/FixMethodOrder;");
+/*52*/
+
+        $stack4 = (org.junit.FixMethodOrder) $stack3;
+/*52*/
+
+        comparator = staticinvoke <org.junit.internal.MethodSorter: java.util.Comparator getSorter(org.junit.FixMethodOrder)>($stack4);
+/*52*/
+/*52*/
+
+        methods = virtualinvoke clazz.<java.lang.Class: java.lang.reflect.Method[] getDeclaredMethods()>();
+/*54*/
+/*54*/
+
+        if comparator == null goto label1;
+/*55*/
+
+        staticinvoke <java.util.Arrays: void sort(java.lang.Object[],java.util.Comparator)>(methods, comparator);
+/*56*/
+
+     label1:
+        return methods;
+/*59*/
+    }
+

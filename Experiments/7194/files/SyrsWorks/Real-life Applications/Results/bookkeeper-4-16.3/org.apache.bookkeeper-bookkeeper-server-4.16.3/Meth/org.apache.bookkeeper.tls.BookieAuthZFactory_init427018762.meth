@@ -1,0 +1,33 @@
+void org.apache.bookkeeper.tls.BookieAuthZFactory:init(org.apache.bookkeeper.conf.ServerConfiguration conf)
+{
+java.lang.String[] l2;
+  int l3;
+  int l4;
+  java.lang.String allowedRole;
+  java.lang.RuntimeException $stack8;
+  boolean $stack11;
+  l2 = conf.getAuthorizedRoles();
+ this.allowedRoles=l2;
+ l2=this.allowedRoles;
+ if (l2==null) goto label0;
+ l2=this.allowedRoles;
+ l3=#l2;
+ if (l3!=0) goto label1;
+ label0:$stack8=new java.lang.RuntimeException;
+ $stack8#java.lang.RuntimeException("Configuration option \'bookieAuthProviderFactoryClass\' is set to \'BookieAuthZFactory\' but no roles set for configuration field \'authorizedRoles\'.");
+ throw $stack8;
+ label1:l2=this.allowedRoles;
+ l3=#l2;
+ l4=0;
+ label2:if (l4>=l3) goto label3;
+ allowedRole=l2[l4];
+ $stack11 = com.google.common.base.Strings.isNullOrEmpty(allowedRole);
+ if ($stack11==0) goto label4;
+ $stack8=new java.lang.RuntimeException;
+ $stack8#java.lang.RuntimeException("Configuration option \'bookieAuthProviderFactoryClass\' is set to \'BookieAuthZFactory\' but no roles set for configuration field \'authorizedRoles\'.");
+ throw $stack8;
+ label4:l4=(l4+1);
+ goto label2;
+ label3:return;
+ } 
+

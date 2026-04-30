@@ -1,0 +1,8 @@
+org.apache.rocketmq.common.message.MessageExtBrokerInner org.apache.rocketmq.broker.transaction.queue.TransactionalMessageBridge:renewImmunityHalfMessageInner (
+  org.apache.rocketmq.common.message.MessageExt msgExt) {
+  guard = tt;
+  ret(level()) = ⊥;
+  ret(obj_level()) = level(msgExt) ⊔ obj_level(msgExt) ⊔ obj_level(this);
+  ret(obj_level(msgExt)) = level(msgExt) ⊔ obj_level(msgExt) ⊔ obj_level(this);
+  ret(obj_level(this)) = level(msgExt) ⊔ obj_level(msgExt) ⊔ obj_level(this);
+}

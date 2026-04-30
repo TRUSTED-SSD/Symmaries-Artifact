@@ -1,0 +1,16 @@
+void org.apache.rocketmq.tieredstore.container.TieredMessageQueueContainer:putInflightRequest(java.lang.String group,long offset,int requestMsgCount,java.util.List futureList)
+{
+org.apache.rocketmq.tieredstore.common.InflightRequestKey key;
+  java.util.concurrent.ConcurrentMap $stack8;
+  org.apache.rocketmq.tieredstore.common.InflightRequestFuture $stack10;
+  key=new org.apache.rocketmq.tieredstore.common.InflightRequestKey;
+ key#org.apache.rocketmq.tieredstore.common.InflightRequestKey(group,offset,requestMsgCount);
+ $stack8=this.inFlightRequestMap;
+ $stack8.remove((java.lang.Object)key);
+ $stack8=this.inFlightRequestMap;
+ $stack10=new org.apache.rocketmq.tieredstore.common.InflightRequestFuture;
+ $stack10#org.apache.rocketmq.tieredstore.common.InflightRequestFuture(offset,futureList);
+ $stack8.putIfAbsent((java.lang.Object)key,(java.lang.Object)$stack10);
+ return;
+ } 
+

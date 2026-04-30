@@ -1,0 +1,34 @@
+io.netty.buffer.ByteBuf org.apache.bookkeeper.bookie.storage.directentrylogger.Buffer:allocateAligned(int alignment,int bufferSize)
+{
+io.netty.buffer.ByteBuf buf;
+  long addr;
+  int $stack7;
+  io.netty.buffer.ByteBufAllocator $stack8;
+  long $stack12;
+  byte $stack14;
+  long $stack16;
+  $stack8=this.allocator;
+ $stack7=(bufferSize+alignment);
+ buf = $stack8.directBuffer($stack7);
+ addr = buf.memoryAddress();
+ $stack7=(alignment-1);
+ $stack12=(long) $stack7;
+ $stack12=(addr & $stack12);
+ $stack14=($stack12 cmp 0L);
+ if ($stack14!=0) goto label0;
+ this.pointer=addr;
+ buf = buf.slice(0,bufferSize);
+ return  buf;
+ label0:$stack12=(long) alignment;
+ alignment=(alignment-1);
+ $stack16=(long) alignment;
+ $stack16=(addr & $stack16);
+ $stack12=($stack12-$stack16);
+ alignment=(int) $stack12;
+ $stack12=(long) alignment;
+ addr=(addr+$stack12);
+ this.pointer=addr;
+ buf = buf.slice(alignment,bufferSize);
+ return  buf;
+ } 
+

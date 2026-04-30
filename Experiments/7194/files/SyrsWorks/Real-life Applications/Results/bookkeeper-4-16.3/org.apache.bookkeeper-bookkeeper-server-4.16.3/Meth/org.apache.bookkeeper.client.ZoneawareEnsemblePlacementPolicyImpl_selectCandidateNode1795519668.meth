@@ -1,0 +1,33 @@
+org.apache.bookkeeper.net.BookieNode org.apache.bookkeeper.client.ZoneawareEnsemblePlacementPolicyImpl:selectCandidateNode(java.util.Set bookiesToConsiderAfterExcludingUDs)
+{
+org.apache.bookkeeper.net.BookieNode candidate;
+  int randSelIndex;
+  int ind;
+  java.util.Iterator l5;
+  boolean $stack7;
+  org.apache.bookkeeper.client.WeightedRandomSelection $stack8;
+  java.lang.Object $stack9;
+  java.util.Random $stack10;
+  candidate=null;
+ $stack7=this.isWeighted;
+ if ($stack7!=0) goto label0;
+ $stack10=this.rand;
+ randSelIndex = bookiesToConsiderAfterExcludingUDs.size();
+ randSelIndex = $stack10.nextInt(randSelIndex);
+ ind=0;
+ l5 = bookiesToConsiderAfterExcludingUDs.iterator();
+ label1:$stack7 = l5.hasNext();
+ if ($stack7==0) goto label2;
+ $stack9 = l5.next();
+ if (ind!=randSelIndex) goto label3;
+ candidate=(org.apache.bookkeeper.net.BookieNode) $stack9;
+ goto label2;
+ label3:ind=(ind+1);
+ goto label1;
+ label2:goto label4;
+ label0:$stack8=this.weightedSelection;
+ $stack9 = $stack8.getNextRandom((java.util.Collection)bookiesToConsiderAfterExcludingUDs);
+ candidate=(org.apache.bookkeeper.net.BookieNode) $stack9;
+ label4:return  candidate;
+ } 
+

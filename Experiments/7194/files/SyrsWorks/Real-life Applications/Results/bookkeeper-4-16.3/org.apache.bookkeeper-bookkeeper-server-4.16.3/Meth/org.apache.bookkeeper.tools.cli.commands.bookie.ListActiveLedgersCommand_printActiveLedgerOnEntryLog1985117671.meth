@@ -1,0 +1,37 @@
+void org.apache.bookkeeper.tools.cli.commands.bookie.ListActiveLedgersCommand:printActiveLedgerOnEntryLog(long logId,java.util.List activeLedgers)
+{
+java.util.Iterator l4;
+  int $stack7;
+  org.slf4j.Logger $stack8;
+  java.lang.Long $stack10;
+  boolean $stack12;
+  java.lang.Object $stack13;
+  org.apache.bookkeeper.util.LedgerIdFormatter $stack16;
+  java.lang.String $stack19;
+  $stack7 = activeLedgers.size();
+ if ($stack7!=0) goto label0;
+ $stack8=org.apache.bookkeeper.tools.cli.commands.bookie.ListActiveLedgersCommand.LOG;
+ $stack10 = java.lang.Long.valueOf(logId);
+ dummyClass.lowSink("No active ledgers on log file {}");
+$stack8.info("No active ledgers on log file {}",(java.lang.Object)$stack10);
+ goto label1;
+ label0:$stack8=org.apache.bookkeeper.tools.cli.commands.bookie.ListActiveLedgersCommand.LOG;
+ $stack10 = java.lang.Long.valueOf(logId);
+ dummyClass.lowSink("Active ledgers on entry log {} as follow:");
+$stack8.info("Active ledgers on entry log {} as follow:",(java.lang.Object)$stack10);
+ label1:java.util.Collections.sort(activeLedgers);
+ l4 = activeLedgers.iterator();
+ label2:$stack12 = l4.hasNext();
+ if ($stack12==0) goto label3;
+ $stack13 = l4.next();
+ $stack10=(java.lang.Long) $stack13;
+ logId = $stack10.longValue();
+ $stack8=org.apache.bookkeeper.tools.cli.commands.bookie.ListActiveLedgersCommand.LOG;
+ $stack16=this.ledgerIdFormatter;
+ $stack19 = $stack16.formatLedgerId(logId);
+ dummyClass.lowSink("{} ");
+$stack8.info("{} ",(java.lang.Object)$stack19);
+ goto label2;
+ label3:return;
+ } 
+

@@ -1,0 +1,23 @@
+void java.io.ObjectOutputStream:defaultWriteObject()
+{
+java.io.SerialCallbackContext r1;
+  java.lang.Object r2;
+  java.io.ObjectStreamClass r3;
+  java.io.ObjectOutputStream$BlockDataOutputStream $r4;
+  java.io.ObjectOutputStream$BlockDataOutputStream $r5;
+  java.io.NotActiveException $r6;
+  r1=this.curContext;
+ if (r1!=null) goto label0;
+ $r6=new java.io.NotActiveException;
+ $r6#java.io.NotActiveException:init("not in call to writeObject");
+ throw $r6;
+ label0:r2 = r1.getObj();
+ r3 = r1.getDesc();
+ $r4=this.bout;
+ $r4.setBlockDataMode((boolean)0);
+ this#java.io.ObjectOutputStream:defaultWriteFields(r2,r3);
+ $r5=this.bout;
+ $r5.setBlockDataMode((boolean)1);
+ return;
+ }  
+

@@ -1,0 +1,10 @@
+boolean org.apache.rocketmq.store.ha.io.HAWriter:write (java.nio.channels.SocketChannel
+                                                          socketChannel,
+                                                        java.nio.ByteBuffer
+                                                          byteBufferWrite) {
+  guard = level(byteBufferWrite) ⊔ level(socketChannel) ⊔ level(this) ⊔ obj_level(byteBufferWrite) ⊔ obj_level(socketChannel) ⊔ obj_level(this) = ⊥;
+  ret(level()) = ⊥;
+  ret(obj_level(byteBufferWrite)) = ⊥;
+  ret(obj_level(socketChannel)) = ⊥;
+  ret(obj_level(this)) = ⊥;
+}

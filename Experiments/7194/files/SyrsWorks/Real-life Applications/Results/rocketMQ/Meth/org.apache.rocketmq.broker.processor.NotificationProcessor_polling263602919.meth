@@ -1,0 +1,54 @@
+boolean org.apache.rocketmq.broker.processor.NotificationProcessor:polling(io.netty.channel.Channel channel,org.apache.rocketmq.remoting.protocol.RemotingCommand remotingCommand,org.apache.rocketmq.remoting.protocol.header.NotificationRequestHeader requestHeader)
+{
+long expired;
+  org.apache.rocketmq.broker.longpolling.NotificationRequest request;
+  boolean result;
+  java.lang.String key;
+  java.util.concurrent.ArrayBlockingQueue queue;
+  byte $stack11;
+  long $stack13;
+  boolean $stack15;
+  org.apache.rocketmq.logging.org.slf4j.Logger $stack16;
+  java.lang.Boolean $stack18;
+  java.lang.Integer $stack20;
+  int $stack21;
+  com.googlecode.concurrentlinkedhashmap.ConcurrentLinkedHashMap $stack23;
+  java.lang.Object $stack24;
+  org.apache.rocketmq.broker.BrokerController $stack30;
+  org.apache.rocketmq.common.BrokerConfig $stack31;
+  expired = requestHeader.getPollTime();
+ $stack11=(expired cmp 0L);
+ if ($stack11>0) goto label0;
+ return  0;
+ label0:expired = requestHeader.getBornTime();
+ $stack13 = requestHeader.getPollTime();
+ expired=(expired+$stack13);
+ request=new org.apache.rocketmq.broker.longpolling.NotificationRequest;
+ request#org.apache.rocketmq.broker.longpolling.NotificationRequest(remotingCommand,channel,expired);
+ result=0;
+ $stack15 = request.isTimeout();
+ if ($stack15!=0) goto label1;
+ key = requestHeader.getTopic();
+ $stack20 = requestHeader.getQueueId();
+ $stack21 = $stack20.intValue();
+ key = org.apache.rocketmq.common.KeyBuilder.buildPollingNotificationKey(key,$stack21);
+ $stack23=this.pollingMap;
+ $stack24 = $stack23.get((java.lang.Object)key);
+ queue=(java.util.concurrent.ArrayBlockingQueue) $stack24;
+ if (queue!=null) goto label2;
+ queue=new java.util.concurrent.ArrayBlockingQueue;
+ $stack30=this.brokerController;
+ $stack31 = $stack30.getBrokerConfig();
+ $stack21 = $stack31.getPopPollingSize();
+ queue#java.util.concurrent.ArrayBlockingQueue($stack21);
+ $stack23=this.pollingMap;
+ $stack23.put((java.lang.Object)key,(java.lang.Object)queue);
+ result = queue.offer((java.lang.Object)request);
+ goto label1;
+ label2:result = queue.offer((java.lang.Object)request);
+ label1:$stack16=org.apache.rocketmq.broker.processor.NotificationProcessor.POP_LOGGER;
+ $stack18 = java.lang.Boolean.valueOf(result);
+ $stack16.info("polling {}, result {}",(java.lang.Object)remotingCommand,(java.lang.Object)$stack18);
+ return  result;
+ } 
+

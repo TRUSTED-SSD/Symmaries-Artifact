@@ -1,0 +1,17 @@
+static java.nio.ByteBuffer org.apache.kerby.kerberos.kerb.admin.message.KadminCode:encodeWrapMessage(org.apache.kerby.kerberos.kerb.admin.message.AdminMessage adminMessage,org.xnio.sasl.SaslWrapper sasl)
+{
+byte[] wrapBytes;
+  int length;
+  java.nio.ByteBuffer buffer;
+  int $stack7;
+  buffer = adminMessage.getMessageBuffer();
+ wrapBytes = sasl.wrap(buffer);
+ length=#wrapBytes;
+ $stack7=(length+4);
+ buffer = java.nio.ByteBuffer.allocate($stack7);
+ buffer.putInt(length);
+ buffer.put(wrapBytes);
+ buffer.flip();
+ return  buffer;
+ } 
+

@@ -1,0 +1,21 @@
+void org.apache.rocketmq.store.ha.autoswitch.AutoSwitchHAClient:handshakeWithMaster()
+{
+boolean result;
+  java.nio.channels.Selector $stack3;
+  java.nio.ByteBuffer $stack5;
+  java.nio.channels.SocketChannel $stack6;
+  org.apache.rocketmq.store.ha.io.AbstractHAReader $stack7;
+  result = this#org.apache.rocketmq.store.ha.autoswitch.AutoSwitchHAClient:sendHandshakeHeader();
+ if (result!=0) goto label0;
+ this.closeMasterAndWait();
+ label0:$stack3=this.selector;
+ $stack3.select(5000L);
+ $stack7=this.haReader;
+ $stack6=this.socketChannel;
+ $stack5=this.byteBufferRead;
+ result = $stack7.read($stack6,$stack5);
+ if (result!=0) goto label1;
+ this.closeMasterAndWait();
+ label1:return;
+ } 
+

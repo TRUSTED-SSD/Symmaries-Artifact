@@ -1,0 +1,36 @@
+void org.apache.rocketmq.store.kv.CompactionStore:shutdown()
+{
+java.lang.Object droppedTasks;
+  org.apache.rocketmq.store.kv.CompactionPositionMgr $stack2;
+  java.util.concurrent.ScheduledExecutorService $stack3;
+  java.util.concurrent.TimeUnit $stack4;
+  boolean $stack6;
+  org.apache.rocketmq.logging.org.slf4j.Logger $stack9;
+  int $stack11;
+  java.lang.Integer $stack12;
+  java.lang.InterruptedException $stack13;
+  java.util.List tmp$1454103045;
+  $stack2=this.positionMgr;
+ $stack2.persist();
+ $stack3=this.compactionSchedule;
+ $stack3.shutdown();
+ label0:$stack3=this.compactionSchedule;
+ $stack4=java.util.concurrent.TimeUnit.MILLISECONDS;
+ $stack6 = $stack3.awaitTermination(1000L,$stack4);
+ if ($stack6!=0) goto label1;
+ $stack3=this.compactionSchedule;
+ droppedTasks = $stack3.shutdownNow();
+ $stack9=org.apache.rocketmq.store.kv.CompactionStore.log;
+ tmp$1454103045=(java.util.List) droppedTasks;
+ $stack11 = tmp$1454103045.size();
+ $stack12 = java.lang.Integer.valueOf($stack11);
+ $stack9.warn("compactionSchedule was abruptly shutdown. {} tasks will not be executed.",(java.lang.Object)$stack12);
+ label1:goto label2;
+ label3:$stack13 = catch;
+ droppedTasks=$stack13;
+ $stack9=org.apache.rocketmq.store.kv.CompactionStore.log;
+ $stack9.warn("wait compaction schedule shutdown interrupted. ");
+ label2:return;
+ catch java.lang.InterruptedException: label0 - label1 : label3;
+} 
+

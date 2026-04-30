@@ -1,0 +1,67 @@
+void org.apache.rocketmq.tools.command.message.ConsumeMessageCommand:pullMessageByQueue(org.apache.rocketmq.common.message.MessageQueue mq,long minOffset,long maxOffset)
+{
+org.apache.rocketmq.client.consumer.PullResult pullResult;
+  byte $stack10;
+  long $stack11;
+  int $stack13;
+  org.apache.rocketmq.client.consumer.DefaultMQPullConsumer $stack14;
+  int[] $stack19;
+  org.apache.rocketmq.client.consumer.PullStatus $stack20;
+  java.io.PrintStream $stack23;
+  java.util.List $stack24;
+  java.lang.Object[] $stack25;
+  java.lang.Long $stack31;
+  java.lang.Exception $stack46;
+  label0:$stack10=(minOffset cmp maxOffset);
+ if ($stack10>0) goto label1;
+ pullResult=null;
+ label2:$stack14=this.defaultMQPullConsumer;
+ $stack11=(maxOffset-minOffset);
+ $stack11=($stack11+1L);
+ $stack13=(int) $stack11;
+ pullResult = $stack14.pull(mq,"*",minOffset,$stack13);
+ label3:goto label4;
+ label5:$stack46 = catch;
+ $stack46.printStackTrace();
+ return;
+ label4:if (pullResult==null) goto label6;
+ minOffset = pullResult.getNextBeginOffset();
+ $stack19=org.apache.rocketmq.tools.command.message.ConsumeMessageCommand$1.$SwitchMap$org$apache$rocketmq$client$consumer$PullStatus;
+ $stack20 = pullResult.getPullStatus();
+ $stack13 = $stack20.ordinal();
+ $stack13=$stack19[$stack13];
+ switch [$stack13]
+if 0 goto label7;
+if 1 goto label8;
+if 2 goto label9;
+if 3 goto label9;
+goto label6;
+ label7:$stack23=java.lang.System.out;
+ dummyClass.lowSink("Consume ok\n");
+$stack23.print("Consume ok\n");
+ $stack24 = pullResult.getMsgFoundList();
+ org.apache.rocketmq.tools.command.message.PrintMessageByQueueCommand.printMessage($stack24,"UTF-8",(boolean)1,(boolean)1);
+ goto label6;
+ label8:$stack23=java.lang.System.out;
+ $stack25=new java.lang.Object[3];
+ $stack25[0]=mq;
+ $stack20 = pullResult.getPullStatus();
+ $stack25[1]=$stack20;
+ $stack31 = java.lang.Long.valueOf(minOffset);
+ $stack25[2]=$stack31;
+ $stack23.printf("%s no matched msg. status=%s, offset=%s\n",$stack25);
+ goto label6;
+ label9:$stack23=java.lang.System.out;
+ $stack25=new java.lang.Object[3];
+ $stack25[0]=mq;
+ $stack20 = pullResult.getPullStatus();
+ $stack25[1]=$stack20;
+ $stack31 = java.lang.Long.valueOf(minOffset);
+ $stack25[2]=$stack31;
+ $stack23.printf("%s print msg finished. status=%s, offset=%s\n",$stack25);
+ goto label1;
+ label6:goto label0;
+ label1:return;
+ catch java.lang.Exception: label2 - label3 : label5;
+} 
+

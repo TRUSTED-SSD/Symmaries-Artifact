@@ -1,0 +1,40 @@
+static byte[] org.apache.kerby.util.HexUtil:hex2bytes(java.lang.String @hexString)
+{
+int len;
+  byte[] bytes;
+  char[] hexChars;
+  int i;
+  int j;
+  int $stack9;
+  char $stack10;
+  int $stack13;
+  byte $stack19;
+  java.lang.String hexString;
+hexString=@hexString;
+hexString = hexString.toUpperCase();
+ len = hexString.length();
+ len=(len/2);
+ bytes=new byte[len];
+ hexChars = hexString.toCharArray();
+ i=0;
+ j=0;
+ label0:if (i>=len) goto label1;
+ hexString="0123456789ABCDEF";
+ $stack9=j;
+ j=(j+1);
+ $stack10=hexChars[$stack9];
+ $stack9 = hexString.indexOf((int)$stack10);
+ $stack9=($stack9<<4);
+ hexString="0123456789ABCDEF";
+ $stack13=j;
+ j=(j+1);
+ $stack10=hexChars[$stack13];
+ $stack13 = hexString.indexOf((int)$stack10);
+ $stack9=($stack9+$stack13);
+ $stack19=(byte) $stack9;
+ bytes[i]=$stack19;
+ i=(i+1);
+ goto label0;
+ label1:return  bytes;
+ } 
+

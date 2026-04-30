@@ -1,0 +1,8 @@
+org.apache.rocketmq.common.message.MessageBatch org.apache.rocketmq.client.producer.DefaultMQProducer:batch (
+  java.util.Collection msgs) {
+  guard = tt;
+  ret(level()) = pc ⊔ level(msgs) ⊔ obj_level(msgs);
+  ret(obj_level()) = pc ⊔ level(msgs) ⊔ level(this) ⊔ obj_level(msgs) ⊔ obj_level(this);
+  ret(obj_level(msgs)) = pc ⊔ level(msgs) ⊔ level(this) ⊔ obj_level(msgs) ⊔ obj_level(this);
+  ret(obj_level(this)) = pc ⊔ level(msgs) ⊔ level(this) ⊔ obj_level(msgs) ⊔ obj_level(this);
+}

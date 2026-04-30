@@ -1,0 +1,57 @@
+void org.apache.rocketmq.controller.impl.manager.ReplicasInfoManager:handleElectMaster(org.apache.rocketmq.controller.impl.event.ElectMasterEvent event)
+{
+java.lang.String brokerName;
+  java.lang.String newMaster;
+  java.lang.Object syncStateInfo;
+  java.lang.Object newSyncStateSet;
+  boolean $stack9;
+  org.apache.rocketmq.controller.impl.manager.BrokerInfo $stack11;
+  java.lang.Long $stack12;
+  org.apache.rocketmq.controller.impl.manager.SyncStateInfo $stack13;
+  java.util.Map $stack14;
+  java.util.HashSet $stack21;
+  java.util.HashSet tmp$221494216;
+  org.apache.rocketmq.controller.impl.manager.BrokerInfo tmp$472008495;
+  java.util.Set tmp$1082508149;
+  java.lang.String tmp$1507822386;
+  brokerName = event.getBrokerName();
+ newMaster = event.getNewMasterAddress();
+ $stack9 = this#org.apache.rocketmq.controller.impl.manager.ReplicasInfoManager:isContainsBroker(brokerName);
+ if ($stack9==0) goto label0;
+ $stack14=this.syncStateSetInfoTable;
+ newSyncStateSet = $stack14.get((java.lang.Object)brokerName);
+ syncStateInfo=(org.apache.rocketmq.controller.impl.manager.SyncStateInfo) newSyncStateSet;
+ $stack9 = event.getNewMasterElected();
+ if ($stack9==0) goto label1;
+ $stack13=(org.apache.rocketmq.controller.impl.manager.SyncStateInfo) syncStateInfo;
+ $stack13.updateMasterInfo(newMaster);
+ tmp$221494216=new java.util.HashSet;
+ tmp$221494216#java.util.HashSet();
+ newSyncStateSet=tmp$221494216;
+ $stack21=(java.util.HashSet) tmp$221494216;
+ $stack21.add((java.lang.Object)newMaster);
+ $stack13=(org.apache.rocketmq.controller.impl.manager.SyncStateInfo) syncStateInfo;
+ tmp$1082508149=(java.util.Set) tmp$221494216;
+ $stack13.updateSyncStateSetInfo(tmp$1082508149);
+ goto label2;
+ label1:$stack13=(org.apache.rocketmq.controller.impl.manager.SyncStateInfo) syncStateInfo;
+ $stack13.updateMasterInfo("");
+ label2:goto label3;
+ label0:syncStateInfo = event.getClusterName();
+ tmp$472008495=new org.apache.rocketmq.controller.impl.manager.BrokerInfo;
+ tmp$1507822386=(java.lang.String) syncStateInfo;
+ tmp$472008495#org.apache.rocketmq.controller.impl.manager.BrokerInfo(tmp$1507822386,brokerName);
+ newSyncStateSet=tmp$472008495;
+ $stack12 = java.lang.Long.valueOf(1L);
+ $stack11=(org.apache.rocketmq.controller.impl.manager.BrokerInfo) tmp$472008495;
+ $stack11.addBroker(newMaster,$stack12);
+ $stack13=new org.apache.rocketmq.controller.impl.manager.SyncStateInfo;
+ tmp$1507822386=(java.lang.String) syncStateInfo;
+ $stack13#org.apache.rocketmq.controller.impl.manager.SyncStateInfo(tmp$1507822386,brokerName,newMaster);
+ $stack14=this.syncStateSetInfoTable;
+ $stack14.put((java.lang.Object)brokerName,(java.lang.Object)$stack13);
+ $stack14=this.replicaInfoTable;
+ $stack14.put((java.lang.Object)brokerName,(java.lang.Object)tmp$472008495);
+ label3:return;
+ } 
+

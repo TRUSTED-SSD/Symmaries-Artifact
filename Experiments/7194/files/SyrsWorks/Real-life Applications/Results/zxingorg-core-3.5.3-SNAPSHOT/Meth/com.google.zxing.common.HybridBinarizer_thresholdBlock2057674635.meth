@@ -1,0 +1,30 @@
+static void com.google.zxing.common.HybridBinarizer:thresholdBlock(byte[] luminances,int xoffset,int yoffset,int threshold,int stride,com.google.zxing.common.BitMatrix matrix)
+{
+int y;
+  int offset;
+  int x;
+  int $stack12;
+  byte $stack13;
+  short $stack14;
+  int $stack18;
+  y=0;
+ offset=(yoffset * stride);
+ offset=(offset+xoffset);
+ label0:if (y>=8) goto label1;
+ x=0;
+ label2:if (x>=8) goto label3;
+ $stack12=(offset+x);
+ $stack13=luminances[$stack12];
+ $stack14=($stack13 & 255);
+ if ($stack14>threshold) goto label4;
+ $stack18=(xoffset+x);
+ $stack12=(yoffset+y);
+ matrix.set($stack18,$stack12);
+ label4:x=(x+1);
+ goto label2;
+ label3:y=(y+1);
+ offset=(offset+stride);
+ goto label0;
+ label1:return;
+ } 
+

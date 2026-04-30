@@ -1,0 +1,18 @@
+static byte[] org.keycloak.jose.jws.crypto.HashUtils:hash(java.lang.String javaAlgorithmName,byte[] @inputBytes)
+{
+java.security.MessageDigest md;
+  java.lang.Exception $stack5;
+  org.keycloak.crypto.HashException $stack6;
+  byte[] inputBytes;
+inputBytes=@inputBytes;
+label0:md = java.security.MessageDigest.getInstance(javaAlgorithmName);
+ md.update(inputBytes);
+ inputBytes = md.digest();
+ label1:return  inputBytes;
+ label2:$stack5 = catch;
+ $stack6=new org.keycloak.crypto.HashException;
+ $stack6#org.keycloak.crypto.HashException("Error when creating token hash",(java.lang.Throwable)$stack5);
+ throw $stack6;
+ catch java.lang.Exception: label0 - label1 : label2;
+} 
+

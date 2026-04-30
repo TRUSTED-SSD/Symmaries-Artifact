@@ -1,0 +1,29 @@
+boolean org.apache.rocketmq.store.logfile.DefaultMappedFile:isAbleToCommit(int commitLeastPages)
+{
+int commit;
+  int write;
+  java.util.concurrent.atomic.AtomicIntegerFieldUpdater $stack4;
+  boolean $stack8;
+  $stack4=org.apache.rocketmq.store.logfile.DefaultMappedFile.COMMITTED_POSITION_UPDATER;
+ commit = $stack4.get((java.lang.Object)this);
+ $stack4=org.apache.rocketmq.store.logfile.DefaultMappedFile.WROTE_POSITION_UPDATER;
+ write = $stack4.get((java.lang.Object)this);
+ $stack8 = this.isFull();
+ if ($stack8==0) goto label0;
+ return  1;
+ label0:if (commitLeastPages<=0) goto label1;
+ write=(write/4096);
+ commit=(commit/4096);
+ commit=(write-commit);
+ if (commit<commitLeastPages) goto label2;
+ $stack8=1;
+ goto label3;
+ label2:$stack8=0;
+ label3:return  $stack8;
+ label1:if (write<=commit) goto label4;
+ $stack8=1;
+ goto label5;
+ label4:$stack8=0;
+ label5:return  $stack8;
+ } 
+

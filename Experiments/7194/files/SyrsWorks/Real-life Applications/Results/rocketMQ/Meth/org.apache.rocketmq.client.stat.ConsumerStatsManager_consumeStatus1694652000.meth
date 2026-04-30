@@ -1,0 +1,46 @@
+org.apache.rocketmq.remoting.protocol.body.ConsumeStatus org.apache.rocketmq.client.stat.ConsumerStatsManager:consumeStatus(java.lang.String @group,java.lang.String topic)
+{
+org.apache.rocketmq.remoting.protocol.body.ConsumeStatus cs;
+  org.apache.rocketmq.common.stats.StatsSnapshot ss;
+  java.lang.StringBuilder $stack11;
+  org.apache.rocketmq.common.stats.StatsItemSet $stack12;
+  long $stack18;
+  double $stack20;
+  java.lang.String group;
+group=@group;
+cs=new org.apache.rocketmq.remoting.protocol.body.ConsumeStatus;
+ cs#org.apache.rocketmq.remoting.protocol.body.ConsumeStatus();
+ ss = this#org.apache.rocketmq.client.stat.ConsumerStatsManager:getPullRT(group,topic);
+ if (ss==null) goto label0;
+ $stack20 = ss.getAvgpt();
+ cs.setPullRT($stack20);
+ label0:ss = this#org.apache.rocketmq.client.stat.ConsumerStatsManager:getPullTPS(group,topic);
+ if (ss==null) goto label1;
+ $stack20 = ss.getTps();
+ cs.setPullTPS($stack20);
+ label1:ss = this#org.apache.rocketmq.client.stat.ConsumerStatsManager:getConsumeRT(group,topic);
+ if (ss==null) goto label2;
+ $stack20 = ss.getAvgpt();
+ cs.setConsumeRT($stack20);
+ label2:ss = this#org.apache.rocketmq.client.stat.ConsumerStatsManager:getConsumeOKTPS(group,topic);
+ if (ss==null) goto label3;
+ $stack20 = ss.getTps();
+ cs.setConsumeOKTPS($stack20);
+ label3:ss = this#org.apache.rocketmq.client.stat.ConsumerStatsManager:getConsumeFailedTPS(group,topic);
+ if (ss==null) goto label4;
+ $stack20 = ss.getTps();
+ cs.setConsumeFailedTPS($stack20);
+ label4:$stack12=this.topicAndGroupConsumeFailedTPS;
+ $stack11=new java.lang.StringBuilder;
+ $stack11#java.lang.StringBuilder();
+ $stack11 = $stack11.append(topic);
+ $stack11 = $stack11.append("@");
+ $stack11 = $stack11.append(group);
+ group = $stack11.toString();
+ ss = $stack12.getStatsDataInHour(group);
+ if (ss==null) goto label5;
+ $stack18 = ss.getSum();
+ cs.setConsumeFailedMsgs($stack18);
+ label5:return  cs;
+ } 
+

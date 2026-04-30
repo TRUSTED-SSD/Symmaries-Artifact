@@ -1,0 +1,24 @@
+void org.apache.kerby.xdr.type.XdrUnsignedInteger:validateUnsignedInteger(java.lang.Long value)
+{
+long $stack2;
+  byte $stack3;
+  java.io.IOException $stack4;
+  java.lang.StringBuilder $stack5;
+  java.lang.String $stack8;
+  $stack2 = value.longValue();
+ $stack3=($stack2 cmp 0L);
+ if ($stack3<0) goto label0;
+ $stack2 = value.longValue();
+ $stack3=($stack2 cmp 4294967295L);
+ if ($stack3<=0) goto label1;
+ label0:$stack4=new java.io.IOException;
+ $stack5=new java.lang.StringBuilder;
+ $stack5#java.lang.StringBuilder();
+ $stack5 = $stack5.append("Invalid unsigned integer: ");
+ $stack5 = $stack5.append((java.lang.Object)value);
+ $stack8 = $stack5.toString();
+ $stack4#java.io.IOException($stack8);
+ throw $stack4;
+ label1:return;
+ } 
+

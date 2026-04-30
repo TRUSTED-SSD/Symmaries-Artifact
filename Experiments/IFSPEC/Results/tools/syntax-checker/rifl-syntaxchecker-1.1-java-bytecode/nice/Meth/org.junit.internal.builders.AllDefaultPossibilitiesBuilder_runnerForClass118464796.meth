@@ -1,0 +1,37 @@
+org.junit.runner.Runner org.junit.internal.builders.AllDefaultPossibilitiesBuilder:runnerForClass(java.lang.Class testClass)
+{
+java.util.List builders;
+  java.util.Iterator i$;
+  org.junit.runners.model.RunnerBuilder each;
+  org.junit.runner.Runner runner;
+  org.junit.runners.model.RunnerBuilder[] $stack6;
+  org.junit.internal.builders.IgnoredBuilder $stack8;
+  org.junit.internal.builders.AnnotatedBuilder $stack10;
+  org.junit.internal.builders.JUnit3Builder $stack14;
+  org.junit.internal.builders.JUnit4Builder $stack16;
+  boolean $stack19;
+  java.lang.Object $stack20;
+  $stack6=new org.junit.runners.model.RunnerBuilder[5];
+ $stack8 = this.ignoredBuilder();
+ $stack6[0]=$stack8;
+ $stack10 = this.annotatedBuilder();
+ $stack6[1]=$stack10;
+ each = this.suiteMethodBuilder();
+ $stack6[2]=each;
+ $stack14 = this.junit3Builder();
+ $stack6[3]=$stack14;
+ $stack16 = this.junit4Builder();
+ $stack6[4]=$stack16;
+ builders = java.util.Arrays.asList((java.lang.Object[])$stack6);
+ i$ = builders.iterator();
+ label0:$stack19 = i$.hasNext();
+ if ($stack19==0) goto label1;
+ $stack20 = i$.next();
+ each=(org.junit.runners.model.RunnerBuilder) $stack20;
+ runner = each.safeRunnerForClass(testClass);
+ if (runner==null) goto label2;
+ return  runner;
+ label2:goto label0;
+ label1:return  null;
+ } 
+

@@ -1,0 +1,8 @@
+java.util.List org.apache.rocketmq.broker.transaction.queue.TransactionalMessageBridge:decodeMsgList (
+  org.apache.rocketmq.store.GetMessageResult getMessageResult) {
+  guard = tt;
+  ret(level()) = ⊥;
+  ret(obj_level()) = level(getMessageResult) ⊔ obj_level(getMessageResult);
+  ret(obj_level(getMessageResult)) = level(getMessageResult) ⊔ obj_level(getMessageResult);
+  ret(obj_level(this)) = level(getMessageResult) ⊔ obj_level(getMessageResult) ⊔ obj_level(this);
+}

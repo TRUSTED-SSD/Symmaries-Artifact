@@ -1,0 +1,42 @@
+int org.apache.rocketmq.store.util.PerfCounter:getTPValue(float ratio)
+{
+long num;
+  int tmp;
+  int i;
+  byte $stack6;
+  java.util.concurrent.atomic.AtomicLong $stack7;
+  float $stack10;
+  java.util.concurrent.atomic.AtomicInteger[] $stack12;
+  java.util.concurrent.atomic.AtomicInteger $stack15;
+  int $stack16;
+  long $stack17;
+  $stack6=(ratio cmpg 0.0F);
+ if ($stack6<=0) goto label0;
+ $stack6=(ratio cmpl 1.0F);
+ if ($stack6<0) goto label1;
+ label0:ratio=0.99F;
+ label1:$stack7=this.allCount;
+ num = $stack7.get();
+ $stack10=(float) num;
+ ratio=(1.0F-ratio);
+ ratio=($stack10 * ratio);
+ num=(long) ratio;
+ tmp=0;
+ $stack12=this.count;
+ i=#$stack12;
+ i=(i-1);
+ label2:if (i<=0) goto label3;
+ $stack12=this.count;
+ $stack15=$stack12[i];
+ $stack16 = $stack15.get();
+ tmp=(tmp+$stack16);
+ $stack17=(long) tmp;
+ $stack6=($stack17 cmp num);
+ if ($stack6<=0) goto label4;
+ tmp = this#org.apache.rocketmq.store.util.PerfCounter:convert(i);
+ return  tmp;
+ label4:i=(i+-1);
+ goto label2;
+ label3:return  0;
+ } 
+

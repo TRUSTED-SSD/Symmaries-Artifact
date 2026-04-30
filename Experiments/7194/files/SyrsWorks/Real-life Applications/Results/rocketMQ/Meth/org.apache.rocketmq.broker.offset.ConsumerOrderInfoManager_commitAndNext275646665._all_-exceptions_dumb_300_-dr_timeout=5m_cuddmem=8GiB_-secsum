@@ -1,0 +1,9 @@
+long org.apache.rocketmq.broker.offset.ConsumerOrderInfoManager:commitAndNext (
+  java.lang.String topic, java.lang.String group, int queueId,
+  long queueOffset, long popTime) {
+  guard = tt;
+  ret(level()) = level(group) ⊔ level(queueId) ⊔ level(queueOffset) ⊔ level(this) ⊔ level(topic) ⊔ obj_level(this) ⊔ obj_level(topic);
+  ret(obj_level(group)) = level(group) ⊔ level(queueId) ⊔ level(this) ⊔ level(topic) ⊔ obj_level(group) ⊔ obj_level(this);
+  ret(obj_level(this)) = level(group) ⊔ level(popTime) ⊔ level(queueId) ⊔ level(queueOffset) ⊔ level(this) ⊔ level(topic) ⊔ obj_level(group) ⊔ obj_level(this);
+  ret(obj_level(topic)) = level(group) ⊔ level(queueId) ⊔ level(this) ⊔ level(topic) ⊔ obj_level(group) ⊔ obj_level(this);
+}

@@ -1,0 +1,49 @@
+int[] com.google.zxing.PlanarYUVLuminanceSource:renderThumbnail()
+{
+int width;
+  int height;
+  int[] pixels;
+  byte[] yuv;
+  int inputOffset;
+  int y;
+  int outputOffset;
+  int x;
+  short grey;
+  int $stack21;
+  byte $stack23;
+  int $stack24;
+  width = this.getWidth();
+ width=(width/2);
+ height = this.getHeight();
+ height=(height/2);
+ inputOffset=(width * height);
+ pixels=new int[inputOffset];
+ yuv=this.yuvData;
+ y=this.top;
+ inputOffset=this.dataWidth;
+ y=(y * inputOffset);
+ inputOffset=this.left;
+ inputOffset=(y+inputOffset);
+ y=0;
+ label0:if (y>=height) goto label1;
+ outputOffset=(y * width);
+ x=0;
+ label2:if (x>=width) goto label3;
+ $stack21=(x * 2);
+ $stack21=(inputOffset+$stack21);
+ $stack23=yuv[$stack21];
+ grey=($stack23 & 255);
+ $stack21=(outputOffset+x);
+ $stack24=(grey * 65793);
+ $stack24=(-16777216 | $stack24);
+ pixels[$stack21]=$stack24;
+ x=(x+1);
+ goto label2;
+ label3:outputOffset=this.dataWidth;
+ outputOffset=(outputOffset * 2);
+ inputOffset=(inputOffset+outputOffset);
+ y=(y+1);
+ goto label0;
+ label1:return  pixels;
+ } 
+

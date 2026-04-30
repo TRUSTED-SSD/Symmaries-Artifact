@@ -1,0 +1,31 @@
+apache.rocketmq.v2.Settings org.apache.rocketmq.proxy.grpc.v2.common.GrpcClientSettingsManager:getClientSettings(org.apache.rocketmq.proxy.common.ProxyContext ctx)
+{
+java.lang.String clientId;
+  apache.rocketmq.v2.Settings settings;
+  java.util.Map $stack5;
+  java.lang.Object $stack6;
+  boolean $stack7;
+  org.apache.rocketmq.proxy.grpc.v2.common.GrpcConverter $stack10;
+  apache.rocketmq.v2.Subscription $stack11;
+  apache.rocketmq.v2.Resource $stack12;
+  clientId = ctx.getClientID();
+ $stack5=org.apache.rocketmq.proxy.grpc.v2.common.GrpcClientSettingsManager.CLIENT_SETTINGS_MAP;
+ $stack6 = $stack5.get((java.lang.Object)clientId);
+ settings=(apache.rocketmq.v2.Settings) $stack6;
+ if (settings!=null) goto label0;
+ return  null;
+ label0:$stack7 = settings.hasPublishing();
+ if ($stack7==0) goto label1;
+ settings = org.apache.rocketmq.proxy.grpc.v2.common.GrpcClientSettingsManager.mergeProducerData(settings);
+ goto label2;
+ label1:$stack7 = settings.hasSubscription();
+ if ($stack7==0) goto label2;
+ $stack10 = org.apache.rocketmq.proxy.grpc.v2.common.GrpcConverter.getInstance();
+ $stack11 = settings.getSubscription();
+ $stack12 = $stack11.getGroup();
+ clientId = $stack10.wrapResourceWithNamespace($stack12);
+ settings = this.mergeSubscriptionData(ctx,settings,clientId);
+ label2:settings = this.mergeMetric(settings);
+ return  settings;
+ } 
+

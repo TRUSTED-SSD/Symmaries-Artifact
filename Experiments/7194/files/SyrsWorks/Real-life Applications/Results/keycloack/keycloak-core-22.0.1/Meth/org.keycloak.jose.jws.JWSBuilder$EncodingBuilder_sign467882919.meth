@@ -1,0 +1,22 @@
+java.lang.String org.keycloak.jose.jws.JWSBuilder$EncodingBuilder:sign(org.keycloak.jose.jws.Algorithm algorithm,java.security.PrivateKey privateKey)
+{
+java.lang.StringBuilder buffer;
+  byte[] data;
+  org.keycloak.jose.jws.JWSBuilder $stack7;
+  java.lang.String $stack10;
+  java.nio.charset.Charset $stack11;
+  buffer=new java.lang.StringBuilder;
+ buffer#java.lang.StringBuilder();
+ $stack7=this.this$0;
+ data = $stack7.marshalContent();
+ $stack7=this.this$0;
+ $stack7.encode(algorithm,data,buffer);
+ $stack10 = buffer.toString();
+ $stack11=java.nio.charset.StandardCharsets.UTF_8;
+ data = $stack10.getBytes($stack11);
+ data = org.keycloak.jose.jws.crypto.RSAProvider.sign(data,algorithm,privateKey);
+ $stack7=this.this$0;
+ $stack10 = $stack7.encodeAll(buffer,data);
+ return  $stack10;
+ } 
+

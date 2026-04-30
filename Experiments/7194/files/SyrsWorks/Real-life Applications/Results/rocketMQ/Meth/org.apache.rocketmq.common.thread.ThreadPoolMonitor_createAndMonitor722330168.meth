@@ -1,0 +1,47 @@
+static java.util.concurrent.ThreadPoolExecutor org.apache.rocketmq.common.thread.ThreadPoolMonitor:createAndMonitor(int corePoolSize,int maximumPoolSize,long keepAliveTime,java.util.concurrent.TimeUnit unit,java.lang.String name,int queueCapacity,java.util.List @threadPoolStatusMonitors)
+{
+org.apache.rocketmq.common.thread.FutureTaskExtThreadPoolExecutor executor;
+  java.util.ArrayList printers;
+  java.util.concurrent.LinkedBlockingQueue $stack11;
+  com.google.common.util.concurrent.ThreadFactoryBuilder $stack12;
+  java.lang.StringBuilder $stack13;
+  java.lang.String $stack16;
+  java.util.concurrent.ThreadFactory $stack18;
+  java.util.concurrent.ThreadPoolExecutor$DiscardOldestPolicy $stack19;
+  org.apache.rocketmq.common.thread.ThreadPoolStatusMonitor[] $stack20;
+  org.apache.rocketmq.common.thread.ThreadPoolQueueSizeMonitor $stack21;
+  org.apache.rocketmq.common.thread.ThreadPoolWrapper$ThreadPoolWrapperBuilder $stack26;
+  org.apache.rocketmq.common.thread.ThreadPoolWrapper $stack30;
+  java.util.List threadPoolStatusMonitors;
+threadPoolStatusMonitors=@threadPoolStatusMonitors;
+executor=new org.apache.rocketmq.common.thread.FutureTaskExtThreadPoolExecutor;
+ $stack11=new java.util.concurrent.LinkedBlockingQueue;
+ $stack11#java.util.concurrent.LinkedBlockingQueue(queueCapacity);
+ $stack12=new com.google.common.util.concurrent.ThreadFactoryBuilder;
+ $stack12#com.google.common.util.concurrent.ThreadFactoryBuilder();
+ $stack13=new java.lang.StringBuilder;
+ $stack13#java.lang.StringBuilder();
+ $stack13 = $stack13.append(name);
+ $stack13 = $stack13.append("-%d");
+ $stack16 = $stack13.toString();
+ $stack12 = $stack12.setNameFormat($stack16);
+ $stack18 = $stack12.build();
+ $stack19=new java.util.concurrent.ThreadPoolExecutor$DiscardOldestPolicy;
+ $stack19#java.util.concurrent.ThreadPoolExecutor$DiscardOldestPolicy();
+ executor#org.apache.rocketmq.common.thread.FutureTaskExtThreadPoolExecutor(corePoolSize,maximumPoolSize,keepAliveTime,unit,(java.util.concurrent.BlockingQueue)$stack11,$stack18,(java.util.concurrent.RejectedExecutionHandler)$stack19);
+ $stack20=new org.apache.rocketmq.common.thread.ThreadPoolStatusMonitor[1];
+ $stack21=new org.apache.rocketmq.common.thread.ThreadPoolQueueSizeMonitor;
+ $stack21#org.apache.rocketmq.common.thread.ThreadPoolQueueSizeMonitor(queueCapacity);
+ $stack20[0]=$stack21;
+ printers = com.google.common.collect.Lists.newArrayList((java.lang.Object[])$stack20);
+ printers.addAll((java.util.Collection)threadPoolStatusMonitors);
+ threadPoolStatusMonitors=org.apache.rocketmq.common.thread.ThreadPoolMonitor.MONITOR_EXECUTOR;
+ $stack26 = org.apache.rocketmq.common.thread.ThreadPoolWrapper.builder();
+ $stack26 = $stack26.name(name);
+ $stack26 = $stack26.threadPoolExecutor((java.util.concurrent.ThreadPoolExecutor)executor);
+ $stack26 = $stack26.statusPrinters((java.util.List)printers);
+ $stack30 = $stack26.build();
+ threadPoolStatusMonitors.add((java.lang.Object)$stack30);
+ return  executor;
+ } 
+

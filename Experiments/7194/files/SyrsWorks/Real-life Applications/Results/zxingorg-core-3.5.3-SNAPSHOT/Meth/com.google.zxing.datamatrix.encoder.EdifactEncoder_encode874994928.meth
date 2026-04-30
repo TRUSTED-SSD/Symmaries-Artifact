@@ -1,0 +1,36 @@
+void com.google.zxing.datamatrix.encoder.EdifactEncoder:encode(com.google.zxing.datamatrix.encoder.EncoderContext context)
+{
+java.lang.StringBuilder buffer;
+  char c;
+  int count;
+  boolean $stack7;
+  java.lang.String $stack14;
+  int $stack18;
+  buffer=new java.lang.StringBuilder;
+ buffer#java.lang.StringBuilder();
+ label0:$stack7 = context.hasMoreCharacters();
+ if ($stack7==0) goto label1;
+ c = context.getCurrentChar();
+ com.google.zxing.datamatrix.encoder.EdifactEncoder.encodeChar(c,buffer);
+ count=context.pos;
+ count=(count+1);
+ context.pos=count;
+ count = buffer.length();
+ if (count<4) goto label2;
+ $stack14 = com.google.zxing.datamatrix.encoder.EdifactEncoder.encodeToCodewords((java.lang.CharSequence)buffer);
+ context.writeCodewords($stack14);
+ buffer.delete(0,4);
+ $stack14 = context.getMessage();
+ count=context.pos;
+ $stack18 = this.getEncodingMode();
+ count = com.google.zxing.datamatrix.encoder.HighLevelEncoder.lookAheadTest((java.lang.CharSequence)$stack14,count,$stack18);
+ $stack18 = this.getEncodingMode();
+ if (count==$stack18) goto label2;
+ context.signalEncoderChange(0);
+ goto label1;
+ label2:goto label0;
+ label1:buffer.append((char)31);
+ com.google.zxing.datamatrix.encoder.EdifactEncoder.handleEOD(context,(java.lang.CharSequence)buffer);
+ return;
+ } 
+

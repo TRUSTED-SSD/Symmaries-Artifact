@@ -1,0 +1,63 @@
+    public boolean matches(java.lang.Object, org.hamcrest.Description)
+    {
+        org.hamcrest.core.AllOf this;
+        java.lang.Object o, $stack8;
+        org.hamcrest.Description mismatch, $stack11;
+        java.util.Iterator i$;
+        org.hamcrest.Matcher matcher;
+        java.lang.Iterable $stack5;
+        boolean $stack7;
+
+        this := @this: org.hamcrest.core.AllOf;
+
+        o := @parameter0: java.lang.Object;
+
+        mismatch := @parameter1: org.hamcrest.Description;
+
+        $stack5 = this.<org.hamcrest.core.AllOf: java.lang.Iterable matchers>;
+/*26*/
+
+        i$ = interfaceinvoke $stack5.<java.lang.Iterable: java.util.Iterator iterator()>();
+/*26*/
+/*26*/
+
+     label1:
+        $stack7 = interfaceinvoke i$.<java.util.Iterator: boolean hasNext()>();
+/*26*/
+
+        if $stack7 == 0 goto label3;
+/*26*/
+
+        $stack8 = interfaceinvoke i$.<java.util.Iterator: java.lang.Object next()>();
+/*33*/
+
+        matcher = (org.hamcrest.Matcher) $stack8;
+/*33*/
+
+        $stack7 = interfaceinvoke matcher.<org.hamcrest.Matcher: boolean matches(java.lang.Object)>(o);
+/*27*/
+
+        if $stack7 != 0 goto label2;
+/*27*/
+
+        $stack11 = interfaceinvoke mismatch.<org.hamcrest.Description: org.hamcrest.Description appendDescriptionOf(org.hamcrest.SelfDescribing)>(matcher);
+/*28*/
+
+        interfaceinvoke $stack11.<org.hamcrest.Description: org.hamcrest.Description appendText(java.lang.String)>(" ");
+/*28*/
+
+        interfaceinvoke matcher.<org.hamcrest.Matcher: void describeMismatch(java.lang.Object,org.hamcrest.Description)>(o, mismatch);
+/*29*/
+
+        return 0;
+/*30*/
+
+     label2:
+        goto label1;
+/*27*/
+
+     label3:
+        return 1;
+/*33*/
+    }
+

@@ -1,0 +1,47 @@
+    private static boolean areArrayElementsEqual(java.lang.Object, java.lang.Object)
+    {
+        java.lang.Object actualArray, expectedArray, $stack4, $stack5;
+        int i, $stack3;
+        boolean $stack6;
+
+        actualArray := @parameter0: java.lang.Object;
+
+        expectedArray := @parameter1: java.lang.Object;
+
+        i = 0;
+/*55*/
+
+     label1:
+        $stack3 = staticinvoke <java.lang.reflect.Array: int getLength(java.lang.Object)>(actualArray);
+/*55*/
+
+        if i >= $stack3 goto label3;
+/*55*/
+
+        $stack4 = staticinvoke <java.lang.reflect.Array: java.lang.Object get(java.lang.Object,int)>(actualArray, i);
+/*56*/
+
+        $stack5 = staticinvoke <java.lang.reflect.Array: java.lang.Object get(java.lang.Object,int)>(expectedArray, i);
+/*56*/
+
+        $stack6 = staticinvoke <org.hamcrest.core.IsEqual: boolean areEqual(java.lang.Object,java.lang.Object)>($stack4, $stack5);
+/*56*/
+
+        if $stack6 != 0 goto label2;
+/*56*/
+
+        return 0;
+/*57*/
+
+     label2:
+        i = i + 1;
+/*55*/
+
+        goto label1;
+/*55*/
+
+     label3:
+        return 1;
+/*60*/
+    }
+

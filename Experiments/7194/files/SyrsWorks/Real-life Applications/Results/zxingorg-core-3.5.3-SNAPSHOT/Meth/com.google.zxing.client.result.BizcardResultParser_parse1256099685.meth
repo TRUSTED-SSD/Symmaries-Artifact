@@ -1,0 +1,37 @@
+com.google.zxing.client.result.AddressBookParsedResult com.google.zxing.client.result.BizcardResultParser:parse(com.google.zxing.Result result)
+{
+java.lang.String rawText;
+  java.lang.String firstName;
+  java.lang.String lastName;
+  java.lang.String org;
+  java.lang.String[] addresses;
+  java.lang.String phoneNumber1;
+  java.lang.String phoneNumber2;
+  java.lang.String phoneNumber3;
+  boolean $stack14;
+  com.google.zxing.client.result.AddressBookParsedResult $stack25;
+  java.lang.String[] $stack26;
+  java.lang.String[] $stack29;
+  java.lang.String[] $stack31;
+  rawText = com.google.zxing.client.result.ResultParser.getMassagedText(result);
+ $stack14 = rawText.startsWith("BIZCARD:");
+ if ($stack14!=0) goto label0;
+ return  null;
+ label0:firstName = com.google.zxing.client.result.AbstractDoCoMoResultParser.matchSingleDoCoMoPrefixedField("N:",rawText,(boolean)1);
+ lastName = com.google.zxing.client.result.AbstractDoCoMoResultParser.matchSingleDoCoMoPrefixedField("X:",rawText,(boolean)1);
+ firstName = com.google.zxing.client.result.BizcardResultParser.buildName(firstName,lastName);
+ lastName = com.google.zxing.client.result.AbstractDoCoMoResultParser.matchSingleDoCoMoPrefixedField("T:",rawText,(boolean)1);
+ org = com.google.zxing.client.result.AbstractDoCoMoResultParser.matchSingleDoCoMoPrefixedField("C:",rawText,(boolean)1);
+ addresses = com.google.zxing.client.result.AbstractDoCoMoResultParser.matchDoCoMoPrefixedField("A:",rawText);
+ phoneNumber1 = com.google.zxing.client.result.AbstractDoCoMoResultParser.matchSingleDoCoMoPrefixedField("B:",rawText,(boolean)1);
+ phoneNumber2 = com.google.zxing.client.result.AbstractDoCoMoResultParser.matchSingleDoCoMoPrefixedField("M:",rawText,(boolean)1);
+ phoneNumber3 = com.google.zxing.client.result.AbstractDoCoMoResultParser.matchSingleDoCoMoPrefixedField("F:",rawText,(boolean)1);
+ rawText = com.google.zxing.client.result.AbstractDoCoMoResultParser.matchSingleDoCoMoPrefixedField("E:",rawText,(boolean)1);
+ $stack25=new com.google.zxing.client.result.AddressBookParsedResult;
+ $stack26 = com.google.zxing.client.result.ResultParser.maybeWrap(firstName);
+ $stack29 = com.google.zxing.client.result.BizcardResultParser.buildPhoneNumbers(phoneNumber1,phoneNumber2,phoneNumber3);
+ $stack31 = com.google.zxing.client.result.ResultParser.maybeWrap(rawText);
+ $stack25#com.google.zxing.client.result.AddressBookParsedResult($stack26,null,null,$stack29,null,$stack31,null,null,null,addresses,null,org,null,lastName,null,null);
+ return  $stack25;
+ } 
+

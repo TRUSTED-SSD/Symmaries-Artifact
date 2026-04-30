@@ -1,0 +1,18 @@
+void org.apache.bookkeeper.bookie.InterleavedStorageRegenerateIndexOp$RecoveryStats:registerEntry(long entryId)
+{
+long $stack3;
+  byte $stack6;
+  $stack3=this.numEntries;
+ $stack3=($stack3+1L);
+ this.numEntries=$stack3;
+ $stack3=this.firstEntry;
+ $stack6=(entryId cmp $stack3);
+ if ($stack6>=0) goto label0;
+ this.firstEntry=entryId;
+ label0:$stack3=this.lastEntry;
+ $stack6=(entryId cmp $stack3);
+ if ($stack6<=0) goto label1;
+ this.lastEntry=entryId;
+ label1:return;
+ } 
+

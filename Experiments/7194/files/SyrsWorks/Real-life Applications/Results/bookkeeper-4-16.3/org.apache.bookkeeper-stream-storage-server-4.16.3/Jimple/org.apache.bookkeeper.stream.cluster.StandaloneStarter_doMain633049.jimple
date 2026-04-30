@@ -1,0 +1,375 @@
+    static int doMain(java.lang.String[]) throws java.lang.Exception
+    {
+        java.lang.String[] args;
+        org.apache.bookkeeper.stream.cluster.StandaloneStarter$StarterArgs starterArgs, tmp$1083816103;
+        com.beust.jcommander.JCommander commander, tmp$1032036739;
+        java.lang.Object e, serviceURI;
+        org.apache.bookkeeper.stream.cluster.StreamClusterSpec propsConf;
+        java.util.concurrent.CountDownLatch liveLatch, tmp$390883621;
+        org.apache.bookkeeper.stream.cluster.StreamCluster cluster;
+        boolean $stack11;
+        java.lang.String $stack13;
+        org.apache.bookkeeper.stream.cluster.StreamClusterSpec$StreamClusterSpecBuilder $stack16;
+        org.apache.commons.configuration.CompositeConfiguration $stack18, tmp$361277543;
+        int $stack20;
+        java.lang.StringBuilder $stack21;
+        java.lang.Integer $stack30;
+        java.lang.Runtime $stack51;
+        java.lang.Runnable $stack53;
+        java.lang.InterruptedException $stack86;
+        org.slf4j.Logger $stack87;
+        java.lang.Exception $stack89;
+        org.apache.commons.configuration.PropertiesConfiguration tmp$1193103201;
+        java.io.File tmp$496402319;
+        java.lang.Thread tmp$1674203039;
+        org.apache.bookkeeper.common.net.ServiceURI tmp$1967289346;
+
+        args := @parameter0: java.lang.String[];
+
+        tmp$1083816103 = new org.apache.bookkeeper.stream.cluster.StandaloneStarter$StarterArgs;
+/*116*/
+
+        starterArgs = tmp$1083816103;
+
+        specialinvoke tmp$1083816103.<org.apache.bookkeeper.stream.cluster.StandaloneStarter$StarterArgs: void <init>(org.apache.bookkeeper.stream.cluster.StandaloneStarter$1)>(null);
+/*116*/
+
+        starterArgs = tmp$1083816103;
+/*116*/
+
+        tmp$1032036739 = new com.beust.jcommander.JCommander;
+/*118*/
+
+        commander = tmp$1032036739;
+
+        specialinvoke tmp$1032036739.<com.beust.jcommander.JCommander: void <init>()>();
+/*118*/
+
+        commander = tmp$1032036739;
+/*118*/
+
+     label01:
+        virtualinvoke tmp$1032036739.<com.beust.jcommander.JCommander: void setProgramName(java.lang.String)>("standalone-starter");
+/*120*/
+
+        virtualinvoke tmp$1032036739.<com.beust.jcommander.JCommander: void addObject(java.lang.Object)>(tmp$1083816103);
+/*121*/
+
+        virtualinvoke tmp$1032036739.<com.beust.jcommander.JCommander: void parse(java.lang.String[])>(args);
+/*122*/
+
+        $stack11 = tmp$1083816103.<org.apache.bookkeeper.stream.cluster.StandaloneStarter$StarterArgs: boolean help>;
+/*123*/
+
+        if $stack11 == 0 goto label03;
+/*123*/
+
+        virtualinvoke tmp$1032036739.<com.beust.jcommander.JCommander: void usage()>();
+/*124*/
+
+     label02:
+        return 0;
+/*125*/
+
+     label03:
+        goto label05;
+/*130*/
+
+     label04:
+        $stack89 := @caughtexception;
+/*185*/
+
+        e = $stack89;
+/*127*/
+
+        virtualinvoke tmp$1032036739.<com.beust.jcommander.JCommander: void usage()>();
+/*128*/
+
+        return -1;
+/*129*/
+
+     label05:
+        e = staticinvoke <org.apache.bookkeeper.stream.cluster.StreamClusterSpec: org.apache.bookkeeper.stream.cluster.StreamClusterSpec$StreamClusterSpecBuilder builder()>();
+/*132*/
+/*132*/
+
+        $stack13 = tmp$1083816103.<org.apache.bookkeeper.stream.cluster.StandaloneStarter$StarterArgs: java.lang.String metadataServiceUri>;
+/*133*/
+
+        if $stack13 != null goto label06;
+/*133*/
+
+        $stack20 = tmp$1083816103.<org.apache.bookkeeper.stream.cluster.StandaloneStarter$StarterArgs: int zkPort>;
+/*135*/
+
+        $stack16 = (org.apache.bookkeeper.stream.cluster.StreamClusterSpec$StreamClusterSpecBuilder) e;
+
+        $stack16 = virtualinvoke $stack16.<org.apache.bookkeeper.stream.cluster.StreamClusterSpec$StreamClusterSpecBuilder: org.apache.bookkeeper.stream.cluster.StreamClusterSpec$StreamClusterSpecBuilder zkPort(int)>($stack20);
+/*135*/
+
+        e = virtualinvoke $stack16.<org.apache.bookkeeper.stream.cluster.StreamClusterSpec$StreamClusterSpecBuilder: org.apache.bookkeeper.stream.cluster.StreamClusterSpec$StreamClusterSpecBuilder shouldStartZooKeeper(boolean)>(1);
+/*136*/
+/*136*/
+
+        goto label07;
+/*136*/
+
+     label06:
+        $stack13 = tmp$1083816103.<org.apache.bookkeeper.stream.cluster.StandaloneStarter$StarterArgs: java.lang.String metadataServiceUri>;
+/*138*/
+
+        serviceURI = staticinvoke <org.apache.bookkeeper.common.net.ServiceURI: org.apache.bookkeeper.common.net.ServiceURI create(java.lang.String)>($stack13);
+/*138*/
+/*138*/
+
+        $stack16 = (org.apache.bookkeeper.stream.cluster.StreamClusterSpec$StreamClusterSpecBuilder) e;
+
+        tmp$1967289346 = (org.apache.bookkeeper.common.net.ServiceURI) serviceURI;
+
+        $stack16 = virtualinvoke $stack16.<org.apache.bookkeeper.stream.cluster.StreamClusterSpec$StreamClusterSpecBuilder: org.apache.bookkeeper.stream.cluster.StreamClusterSpec$StreamClusterSpecBuilder metadataServiceUri(org.apache.bookkeeper.common.net.ServiceURI)>(tmp$1967289346);
+/*140*/
+
+        e = virtualinvoke $stack16.<org.apache.bookkeeper.stream.cluster.StreamClusterSpec$StreamClusterSpecBuilder: org.apache.bookkeeper.stream.cluster.StreamClusterSpec$StreamClusterSpecBuilder shouldStartZooKeeper(boolean)>(0);
+/*141*/
+/*141*/
+
+     label07:
+        tmp$361277543 = new org.apache.commons.configuration.CompositeConfiguration;
+/*144*/
+
+        specialinvoke tmp$361277543.<org.apache.commons.configuration.CompositeConfiguration: void <init>()>();
+/*144*/
+
+        serviceURI = tmp$361277543;
+/*144*/
+
+        $stack13 = tmp$1083816103.<org.apache.bookkeeper.stream.cluster.StandaloneStarter$StarterArgs: java.lang.String configFile>;
+/*145*/
+
+        if null == $stack13 goto label08;
+/*145*/
+
+        tmp$1193103201 = new org.apache.commons.configuration.PropertiesConfiguration;
+/*146*/
+
+        $stack13 = tmp$1083816103.<org.apache.bookkeeper.stream.cluster.StandaloneStarter$StarterArgs: java.lang.String configFile>;
+/*146*/
+
+        specialinvoke tmp$1193103201.<org.apache.commons.configuration.PropertiesConfiguration: void <init>(java.lang.String)>($stack13);
+/*146*/
+
+        $stack18 = (org.apache.commons.configuration.CompositeConfiguration) tmp$361277543;
+
+        virtualinvoke $stack18.<org.apache.commons.configuration.CompositeConfiguration: void addConfiguration(org.apache.commons.configuration.Configuration)>(tmp$1193103201);
+/*147*/
+
+     label08:
+        $stack20 = tmp$1083816103.<org.apache.bookkeeper.stream.cluster.StandaloneStarter$StarterArgs: int numBookies>;
+/*150*/
+
+        if $stack20 <= 0 goto label09;
+/*150*/
+
+        $stack11 = 1;
+/*184*/
+
+        goto label10;
+/*184*/
+
+     label09:
+        $stack11 = 0;
+/*150*/
+
+     label10:
+        $stack21 = new java.lang.StringBuilder;
+/*150*/
+
+        specialinvoke $stack21.<java.lang.StringBuilder: void <init>()>();
+/*150*/
+
+        $stack21 = virtualinvoke $stack21.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>("Invalid number of bookies : ");
+/*150*/
+
+        $stack20 = tmp$1083816103.<org.apache.bookkeeper.stream.cluster.StandaloneStarter$StarterArgs: int numBookies>;
+/*150*/
+
+        $stack21 = virtualinvoke $stack21.<java.lang.StringBuilder: java.lang.StringBuilder append(int)>($stack20);
+/*150*/
+
+        $stack13 = virtualinvoke $stack21.<java.lang.StringBuilder: java.lang.String toString()>();
+/*150*/
+
+        staticinvoke <com.google.common.base.Preconditions: void checkArgument(boolean,java.lang.Object)>($stack11, $stack13);
+/*150*/
+
+        $stack20 = tmp$1083816103.<org.apache.bookkeeper.stream.cluster.StandaloneStarter$StarterArgs: int numBookies>;
+/*151*/
+
+        if $stack20 != 1 goto label11;
+/*151*/
+
+        $stack30 = staticinvoke <java.lang.Integer: java.lang.Integer valueOf(int)>(1);
+/*152*/
+
+        $stack18 = (org.apache.commons.configuration.CompositeConfiguration) tmp$361277543;
+
+        virtualinvoke $stack18.<org.apache.commons.configuration.CompositeConfiguration: void setProperty(java.lang.String,java.lang.Object)>("dlog.bkcEnsembleSize", $stack30);
+/*152*/
+
+        $stack30 = staticinvoke <java.lang.Integer: java.lang.Integer valueOf(int)>(1);
+/*153*/
+
+        $stack18 = (org.apache.commons.configuration.CompositeConfiguration) tmp$361277543;
+
+        virtualinvoke $stack18.<org.apache.commons.configuration.CompositeConfiguration: void setProperty(java.lang.String,java.lang.Object)>("dlog.bkcWriteQuorumSize", $stack30);
+/*153*/
+
+        $stack30 = staticinvoke <java.lang.Integer: java.lang.Integer valueOf(int)>(1);
+/*154*/
+
+        $stack18 = (org.apache.commons.configuration.CompositeConfiguration) tmp$361277543;
+
+        virtualinvoke $stack18.<org.apache.commons.configuration.CompositeConfiguration: void setProperty(java.lang.String,java.lang.Object)>("dlog.bkcAckQuorumSize", $stack30);
+/*154*/
+
+        goto label12;
+/*154*/
+
+     label11:
+        $stack20 = tmp$1083816103.<org.apache.bookkeeper.stream.cluster.StandaloneStarter$StarterArgs: int numBookies>;
+/*156*/
+
+        $stack30 = staticinvoke <java.lang.Integer: java.lang.Integer valueOf(int)>($stack20);
+/*156*/
+
+        $stack18 = (org.apache.commons.configuration.CompositeConfiguration) tmp$361277543;
+
+        virtualinvoke $stack18.<org.apache.commons.configuration.CompositeConfiguration: void setProperty(java.lang.String,java.lang.Object)>("dlog.bkcEnsembleSize", $stack30);
+/*156*/
+
+        $stack20 = tmp$1083816103.<org.apache.bookkeeper.stream.cluster.StandaloneStarter$StarterArgs: int numBookies>;
+/*157*/
+
+        $stack30 = staticinvoke <java.lang.Integer: java.lang.Integer valueOf(int)>($stack20);
+/*157*/
+
+        $stack18 = (org.apache.commons.configuration.CompositeConfiguration) tmp$361277543;
+
+        virtualinvoke $stack18.<org.apache.commons.configuration.CompositeConfiguration: void setProperty(java.lang.String,java.lang.Object)>("dlog.bkcWriteQuorumSize", $stack30);
+/*157*/
+
+        $stack20 = tmp$1083816103.<org.apache.bookkeeper.stream.cluster.StandaloneStarter$StarterArgs: int numBookies>;
+/*158*/
+
+        $stack20 = $stack20 - 1;
+/*158*/
+
+        $stack30 = staticinvoke <java.lang.Integer: java.lang.Integer valueOf(int)>($stack20);
+/*158*/
+
+        $stack18 = (org.apache.commons.configuration.CompositeConfiguration) tmp$361277543;
+
+        virtualinvoke $stack18.<org.apache.commons.configuration.CompositeConfiguration: void setProperty(java.lang.String,java.lang.Object)>("dlog.bkcAckQuorumSize", $stack30);
+/*158*/
+
+     label12:
+        $stack16 = (org.apache.bookkeeper.stream.cluster.StreamClusterSpec$StreamClusterSpecBuilder) e;
+
+        $stack18 = (org.apache.commons.configuration.CompositeConfiguration) tmp$361277543;
+
+        $stack16 = virtualinvoke $stack16.<org.apache.bookkeeper.stream.cluster.StreamClusterSpec$StreamClusterSpecBuilder: org.apache.bookkeeper.stream.cluster.StreamClusterSpec$StreamClusterSpecBuilder baseConf(org.apache.commons.configuration.CompositeConfiguration)>($stack18);
+/*162*/
+
+        $stack20 = tmp$1083816103.<org.apache.bookkeeper.stream.cluster.StandaloneStarter$StarterArgs: int numBookies>;
+/*163*/
+
+        $stack16 = virtualinvoke $stack16.<org.apache.bookkeeper.stream.cluster.StreamClusterSpec$StreamClusterSpecBuilder: org.apache.bookkeeper.stream.cluster.StreamClusterSpec$StreamClusterSpecBuilder numServers(int)>($stack20);
+/*163*/
+
+        $stack20 = tmp$1083816103.<org.apache.bookkeeper.stream.cluster.StandaloneStarter$StarterArgs: int initialBookiePort>;
+/*164*/
+
+        $stack16 = virtualinvoke $stack16.<org.apache.bookkeeper.stream.cluster.StreamClusterSpec$StreamClusterSpecBuilder: org.apache.bookkeeper.stream.cluster.StreamClusterSpec$StreamClusterSpecBuilder initialBookiePort(int)>($stack20);
+/*164*/
+
+        $stack20 = tmp$1083816103.<org.apache.bookkeeper.stream.cluster.StandaloneStarter$StarterArgs: int initialBookieGrpcPort>;
+/*165*/
+
+        $stack16 = virtualinvoke $stack16.<org.apache.bookkeeper.stream.cluster.StreamClusterSpec$StreamClusterSpecBuilder: org.apache.bookkeeper.stream.cluster.StreamClusterSpec$StreamClusterSpecBuilder initialGrpcPort(int)>($stack20);
+/*165*/
+
+        tmp$496402319 = new java.io.File;
+/*165*/
+
+        $stack13 = tmp$1083816103.<org.apache.bookkeeper.stream.cluster.StandaloneStarter$StarterArgs: java.lang.String dataDir>;
+/*165*/
+
+        specialinvoke tmp$496402319.<java.io.File: void <init>(java.lang.String)>($stack13);
+/*165*/
+
+        $stack16 = virtualinvoke $stack16.<org.apache.bookkeeper.stream.cluster.StreamClusterSpec$StreamClusterSpecBuilder: org.apache.bookkeeper.stream.cluster.StreamClusterSpec$StreamClusterSpecBuilder storageRootDir(java.io.File)>(tmp$496402319);
+/*166*/
+
+        propsConf = virtualinvoke $stack16.<org.apache.bookkeeper.stream.cluster.StreamClusterSpec$StreamClusterSpecBuilder: org.apache.bookkeeper.stream.cluster.StreamClusterSpec build()>();
+/*167*/
+/*167*/
+
+        tmp$390883621 = new java.util.concurrent.CountDownLatch;
+/*169*/
+
+        liveLatch = tmp$390883621;
+
+        specialinvoke tmp$390883621.<java.util.concurrent.CountDownLatch: void <init>(int)>(1);
+/*169*/
+
+        liveLatch = tmp$390883621;
+/*169*/
+
+        cluster = staticinvoke <org.apache.bookkeeper.stream.cluster.StreamCluster: org.apache.bookkeeper.stream.cluster.StreamCluster build(org.apache.bookkeeper.stream.cluster.StreamClusterSpec)>(propsConf);
+/*171*/
+/*171*/
+
+        $stack51 = staticinvoke <java.lang.Runtime: java.lang.Runtime getRuntime()>();
+/*172*/
+
+        tmp$1674203039 = new java.lang.Thread;
+/*172*/
+
+        $stack53 = dynamicinvoke "run" <java.lang.Runnable (org.apache.bookkeeper.stream.cluster.StreamCluster,java.util.concurrent.CountDownLatch)>(cluster, tmp$390883621) <java.lang.invoke.LambdaMetafactory: java.lang.invoke.CallSite metafactory(java.lang.invoke.MethodHandles$Lookup,java.lang.String,java.lang.invoke.MethodType,java.lang.invoke.MethodType,java.lang.invoke.MethodHandle,java.lang.invoke.MethodType)>(class "()V", handle: <org.apache.bookkeeper.stream.cluster.StandaloneStarter: void lambda$doMain$0(org.apache.bookkeeper.stream.cluster.StreamCluster,java.util.concurrent.CountDownLatch)>, class "()V");
+/*172*/
+
+        specialinvoke tmp$1674203039.<java.lang.Thread: void <init>(java.lang.Runnable,java.lang.String)>($stack53, "Standalone-Shutdown-Thread");
+/*172*/
+
+        virtualinvoke $stack51.<java.lang.Runtime: void addShutdownHook(java.lang.Thread)>(tmp$1674203039);
+/*172*/
+
+        virtualinvoke cluster.<org.apache.bookkeeper.stream.cluster.StreamCluster: void start()>();
+/*178*/
+
+     label13:
+        virtualinvoke tmp$390883621.<java.util.concurrent.CountDownLatch: void await()>();
+/*181*/
+
+     label14:
+        goto label16;
+/*184*/
+
+     label15:
+        $stack86 := @caughtexception;
+/*125*/
+
+        $stack87 = <org.apache.bookkeeper.stream.cluster.StandaloneStarter: org.slf4j.Logger log>;
+/*183*/
+
+        interfaceinvoke $stack87.<org.slf4j.Logger: void error(java.lang.String,java.lang.Throwable)>("The standalone cluster is interrupted : ", $stack86);
+/*183*/
+
+     label16:
+        return 0;
+/*185*/
+
+        catch java.lang.Exception from label01 to label02 with label04;
+        catch java.lang.InterruptedException from label13 to label14 with label15;
+    }
+

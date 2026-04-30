@@ -1,0 +1,31 @@
+int org.apache.bookkeeper.bookie.EntryKeyValue:writeToByteBuffer(java.nio.ByteBuffer dst)
+{
+int $stack2;
+  int $stack3;
+  byte[] $stack4;
+  java.lang.IllegalArgumentException $stack9;
+  java.lang.StringBuilder $stack10;
+  java.lang.String $stack17;
+  $stack2 = dst.remaining();
+ $stack3 = this.getLength();
+ if ($stack2>=$stack3) goto label0;
+ $stack9=new java.lang.IllegalArgumentException;
+ $stack10=new java.lang.StringBuilder;
+ $stack10#java.lang.StringBuilder();
+ $stack10 = $stack10.append("Buffer size ");
+ $stack2 = dst.remaining();
+ $stack10 = $stack10.append($stack2);
+ $stack10 = $stack10.append(" < ");
+ $stack2 = this.getLength();
+ $stack10 = $stack10.append($stack2);
+ $stack17 = $stack10.toString();
+ $stack9#java.lang.IllegalArgumentException($stack17);
+ throw $stack9;
+ label0:$stack4 = this.getBuffer();
+ $stack2 = this.getOffset();
+ $stack3 = this.getLength();
+ dst.put($stack4,$stack2,$stack3);
+ $stack2 = this.getLength();
+ return  $stack2;
+ } 
+

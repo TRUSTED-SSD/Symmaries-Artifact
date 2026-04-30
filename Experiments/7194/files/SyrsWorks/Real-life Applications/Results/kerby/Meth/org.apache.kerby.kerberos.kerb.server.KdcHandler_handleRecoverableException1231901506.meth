@@ -1,0 +1,46 @@
+org.apache.kerby.kerberos.kerb.type.base.KrbMessage org.apache.kerby.kerberos.kerb.server.KdcHandler:handleRecoverableException(org.apache.kerby.kerberos.kerb.server.KdcRecoverableException e,org.apache.kerby.kerberos.kerb.server.request.KdcRequest kdcRequest)
+{
+org.apache.kerby.kerberos.kerb.type.base.KrbError error;
+  java.lang.StringBuilder $stack4;
+  org.slf4j.Logger $stack5;
+  java.lang.String $stack7;
+  org.apache.kerby.kerberos.kerb.type.KerberosTime $stack11;
+  org.apache.kerby.kerberos.kerb.type.base.KrbError $stack12;
+  org.apache.kerby.kerberos.kerb.KrbErrorCode $stack13;
+  org.apache.kerby.kerberos.kerb.server.KdcContext $stack14;
+  org.apache.kerby.kerberos.kerb.type.base.PrincipalName $stack16;
+  org.apache.kerby.kerberos.kerb.type.kdc.KdcReq $stack18;
+  org.apache.kerby.kerberos.kerb.type.kdc.KdcReqBody $stack19;
+  $stack5=org.apache.kerby.kerberos.kerb.server.KdcHandler.LOG;
+ $stack4=new java.lang.StringBuilder;
+ $stack4#java.lang.StringBuilder();
+ $stack4 = $stack4.append("KRB error occurred while processing request: ");
+ $stack7 = e.getMessage();
+ $stack4 = $stack4.append($stack7);
+ $stack7 = $stack4.toString();
+ dummyClass.lowSink($stack7);
+$stack5.info($stack7);
+ error = e.getKrbError();
+ $stack11 = org.apache.kerby.kerberos.kerb.type.KerberosTime.now();
+ error.setStime($stack11);
+ error.setSusec(100);
+ $stack12 = e.getKrbError();
+ $stack13 = $stack12.getErrorCode();
+ error.setErrorCode($stack13);
+ $stack14=this.kdcContext;
+ $stack7 = $stack14.getKdcRealm();
+ error.setRealm($stack7);
+ if (kdcRequest==null) goto label0;
+ $stack18 = kdcRequest.getKdcReq();
+ $stack19 = $stack18.getReqBody();
+ $stack16 = $stack19.getCname();
+ error.setSname($stack16);
+ goto label1;
+ label0:$stack16=new org.apache.kerby.kerberos.kerb.type.base.PrincipalName;
+ $stack16#org.apache.kerby.kerberos.kerb.type.base.PrincipalName("NONE");
+ error.setSname($stack16);
+ label1:$stack7 = e.getMessage();
+ error.setEtext($stack7);
+ return  error;
+ } 
+

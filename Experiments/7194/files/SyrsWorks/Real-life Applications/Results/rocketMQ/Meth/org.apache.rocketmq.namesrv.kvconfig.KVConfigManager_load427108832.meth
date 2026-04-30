@@ -1,0 +1,34 @@
+void org.apache.rocketmq.namesrv.kvconfig.KVConfigManager:load()
+{
+java.lang.String content;
+  org.apache.rocketmq.namesrv.kvconfig.KVConfigSerializeWrapper e;
+  org.apache.rocketmq.namesrv.NamesrvController $stack3;
+  org.apache.rocketmq.common.namesrv.NamesrvConfig $stack4;
+  java.lang.String $stack5;
+  java.lang.Object $stack7;
+  java.util.HashMap $stack8;
+  java.util.HashMap $stack9;
+  org.apache.rocketmq.logging.org.slf4j.Logger $stack10;
+  java.io.IOException $stack11;
+  content=null;
+ label0:$stack3=this.namesrvController;
+ $stack4 = $stack3.getNamesrvConfig();
+ $stack5 = $stack4.getKvConfigPath();
+ content = org.apache.rocketmq.common.MixAll.file2String($stack5);
+ label1:goto label2;
+ label3:$stack11 = catch;
+ $stack10=org.apache.rocketmq.namesrv.kvconfig.KVConfigManager.log;
+ $stack10.warn("Load KV config table exception",(java.lang.Throwable)$stack11);
+ label2:if (content==null) goto label4;
+ $stack7 = org.apache.rocketmq.remoting.protocol.RemotingSerializable.fromJson(content,org.apache.rocketmq.namesrv.kvconfig.KVConfigSerializeWrapper);
+ e=(org.apache.rocketmq.namesrv.kvconfig.KVConfigSerializeWrapper) $stack7;
+ if (null==e) goto label4;
+ $stack8=this.configTable;
+ $stack9 = e.getConfigTable();
+ $stack8.putAll((java.util.Map)$stack9);
+ $stack10=org.apache.rocketmq.namesrv.kvconfig.KVConfigManager.log;
+ $stack10.info("load KV config table OK");
+ label4:return;
+ catch java.io.IOException: label0 - label1 : label3;
+} 
+

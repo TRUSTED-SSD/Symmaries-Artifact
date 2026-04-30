@@ -1,0 +1,21 @@
+void org.apache.bookkeeper.proto.BookkeeperInternalCallbacks$FutureGetListOfEntriesOfLedger:getListOfEntriesOfLedgerComplete(int rc,long ledgerIdOfTheResponse,org.apache.bookkeeper.util.AvailabilityOfEntriesOfLedger availabilityOfEntriesOfLedger)
+{
+long $stack5;
+  byte $stack6;
+  org.slf4j.Logger $stack11;
+  java.lang.Long $stack13;
+  java.lang.Long $stack14;
+  if (rc!=0) goto label0;
+ $stack5=this.ledgerIdOfTheRequest;
+ $stack6=($stack5 cmp ledgerIdOfTheResponse);
+ if ($stack6==0) goto label0;
+ $stack11=org.apache.bookkeeper.proto.BookkeeperInternalCallbacks.LOG;
+ $stack5=this.ledgerIdOfTheRequest;
+ $stack13 = java.lang.Long.valueOf($stack5);
+ $stack14 = java.lang.Long.valueOf(ledgerIdOfTheResponse);
+ $stack11.error("For getListOfEntriesOfLedger expected ledgerId in the response: {} actual ledgerId: {}",(java.lang.Object)$stack13,(java.lang.Object)$stack14);
+ rc=-1;
+ label0:org.apache.bookkeeper.proto.BookkeeperInternalCallbacks.finish(rc,(java.lang.Object)availabilityOfEntriesOfLedger,(java.util.concurrent.CompletableFuture)this);
+ return;
+ } 
+

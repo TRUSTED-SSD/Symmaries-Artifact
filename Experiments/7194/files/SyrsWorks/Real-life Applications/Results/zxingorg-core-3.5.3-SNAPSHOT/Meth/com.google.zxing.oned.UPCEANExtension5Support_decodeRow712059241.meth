@@ -1,0 +1,42 @@
+com.google.zxing.Result com.google.zxing.oned.UPCEANExtension5Support:decodeRow(int rowNumber,com.google.zxing.common.BitArray row,int[] extensionStartRange)
+{
+java.lang.StringBuilder result;
+  int end;
+  java.lang.String resultString;
+  java.util.Map extensionData;
+  com.google.zxing.Result extensionResult;
+  com.google.zxing.ResultPoint[] $stack13;
+  com.google.zxing.ResultPoint $stack14;
+  int $stack15;
+  int $stack16;
+  float $stack18;
+  float $stack20;
+  com.google.zxing.BarcodeFormat $stack27;
+  result=this.decodeRowStringBuffer;
+ result.setLength(0);
+ end = this#com.google.zxing.oned.UPCEANExtension5Support:decodeMiddle(row,extensionStartRange,result);
+ resultString = result.toString();
+ extensionData = com.google.zxing.oned.UPCEANExtension5Support.parseExtensionString(resultString);
+ extensionResult=new com.google.zxing.Result;
+ $stack13=new com.google.zxing.ResultPoint[2];
+ $stack14=new com.google.zxing.ResultPoint;
+ $stack16=extensionStartRange[0];
+ $stack15=extensionStartRange[1];
+ $stack15=($stack16+$stack15);
+ $stack18=(float) $stack15;
+ $stack20=($stack18/2.0F);
+ $stack18=(float) rowNumber;
+ $stack14#com.google.zxing.ResultPoint($stack20,$stack18);
+ $stack13[0]=$stack14;
+ $stack14=new com.google.zxing.ResultPoint;
+ $stack20=(float) end;
+ $stack18=(float) rowNumber;
+ $stack14#com.google.zxing.ResultPoint($stack20,$stack18);
+ $stack13[1]=$stack14;
+ $stack27=com.google.zxing.BarcodeFormat.UPC_EAN_EXTENSION;
+ extensionResult#com.google.zxing.Result(resultString,null,$stack13,$stack27);
+ if (extensionData==null) goto label0;
+ extensionResult.putAllMetadata(extensionData);
+ label0:return  extensionResult;
+ } 
+

@@ -1,0 +1,72 @@
+    private org.junit.runner.Description removeIgnored(org.junit.runner.Description)
+    {
+        junit.framework.JUnit4TestAdapter this;
+        org.junit.runner.Description description, result;
+        java.util.Iterator i$;
+        boolean $stack6;
+        java.util.ArrayList $stack8;
+        java.lang.Object $stack11;
+
+        this := @this: junit.framework.JUnit4TestAdapter;
+
+        description := @parameter0: org.junit.runner.Description;
+
+        $stack6 = specialinvoke this.<junit.framework.JUnit4TestAdapter: boolean isIgnored(org.junit.runner.Description)>(description);
+/*57*/
+
+        if $stack6 == 0 goto label1;
+/*57*/
+
+        description = <org.junit.runner.Description: org.junit.runner.Description EMPTY>;
+/*58*/
+
+        return description;
+/*58*/
+
+     label1:
+        result = virtualinvoke description.<org.junit.runner.Description: org.junit.runner.Description childlessCopy()>();
+/*60*/
+/*60*/
+
+        $stack8 = virtualinvoke description.<org.junit.runner.Description: java.util.ArrayList getChildren()>();
+/*61*/
+
+        i$ = virtualinvoke $stack8.<java.util.ArrayList: java.util.Iterator iterator()>();
+/*61*/
+/*61*/
+
+     label2:
+        $stack6 = interfaceinvoke i$.<java.util.Iterator: boolean hasNext()>();
+/*61*/
+
+        if $stack6 == 0 goto label4;
+/*61*/
+
+        $stack11 = interfaceinvoke i$.<java.util.Iterator: java.lang.Object next()>();
+/*67*/
+
+        description = (org.junit.runner.Description) $stack11;
+/*67*/
+
+        description = specialinvoke this.<junit.framework.JUnit4TestAdapter: org.junit.runner.Description removeIgnored(org.junit.runner.Description)>(description);
+/*62*/
+/*62*/
+
+        $stack6 = virtualinvoke description.<org.junit.runner.Description: boolean isEmpty()>();
+/*63*/
+
+        if $stack6 != 0 goto label3;
+/*63*/
+
+        virtualinvoke result.<org.junit.runner.Description: void addChild(org.junit.runner.Description)>(description);
+/*64*/
+
+     label3:
+        goto label2;
+/*66*/
+
+     label4:
+        return result;
+/*67*/
+    }
+

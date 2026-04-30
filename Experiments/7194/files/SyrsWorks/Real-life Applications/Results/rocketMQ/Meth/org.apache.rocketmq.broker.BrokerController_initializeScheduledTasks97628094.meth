@@ -1,0 +1,42 @@
+void org.apache.rocketmq.broker.BrokerController:initializeScheduledTasks()
+{
+org.apache.rocketmq.broker.BrokerController$11 $stack1;
+  java.util.concurrent.ScheduledExecutorService $stack2;
+  java.util.concurrent.TimeUnit $stack3;
+  org.apache.rocketmq.common.BrokerConfig $stack5;
+  java.lang.String $stack6;
+  boolean $stack8;
+  org.apache.rocketmq.broker.BrokerController$13 $stack9;
+  org.apache.rocketmq.logging.org.slf4j.Logger $stack14;
+  org.apache.rocketmq.broker.BrokerController$12 $stack17;
+  this.initializeBrokerScheduledTasks();
+ $stack2=this.scheduledExecutorService;
+ $stack1=new org.apache.rocketmq.broker.BrokerController$11;
+ $stack1#org.apache.rocketmq.broker.BrokerController$11(this);
+ $stack3=java.util.concurrent.TimeUnit.SECONDS;
+ $stack2.scheduleAtFixedRate((java.lang.Runnable)$stack1,10L,5L,$stack3);
+ $stack5=this.brokerConfig;
+ $stack6 = $stack5.getNamesrvAddr();
+ if ($stack6==null) goto label0;
+ this#org.apache.rocketmq.broker.BrokerController:updateNamesrvAddr();
+ $stack14=org.apache.rocketmq.broker.BrokerController.LOG;
+ $stack5=this.brokerConfig;
+ $stack6 = $stack5.getNamesrvAddr();
+ $stack14.info("Set user specified name server address: {}",(java.lang.Object)$stack6);
+ $stack2=this.scheduledExecutorService;
+ $stack17=new org.apache.rocketmq.broker.BrokerController$12;
+ $stack17#org.apache.rocketmq.broker.BrokerController$12(this);
+ $stack3=java.util.concurrent.TimeUnit.MILLISECONDS;
+ $stack2.scheduleAtFixedRate((java.lang.Runnable)$stack17,10000L,120000L,$stack3);
+ goto label1;
+ label0:$stack5=this.brokerConfig;
+ $stack8 = $stack5.isFetchNamesrvAddrByAddressServer();
+ if ($stack8==0) goto label1;
+ $stack2=this.scheduledExecutorService;
+ $stack9=new org.apache.rocketmq.broker.BrokerController$13;
+ $stack9#org.apache.rocketmq.broker.BrokerController$13(this);
+ $stack3=java.util.concurrent.TimeUnit.MILLISECONDS;
+ $stack2.scheduleAtFixedRate((java.lang.Runnable)$stack9,10000L,120000L,$stack3);
+ label1:return;
+ } 
+

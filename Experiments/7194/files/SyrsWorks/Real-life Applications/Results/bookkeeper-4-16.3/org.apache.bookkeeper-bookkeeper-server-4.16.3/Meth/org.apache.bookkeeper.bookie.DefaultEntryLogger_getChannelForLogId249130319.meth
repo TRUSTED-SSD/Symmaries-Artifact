@@ -1,0 +1,34 @@
+org.apache.bookkeeper.bookie.BufferedReadChannel org.apache.bookkeeper.bookie.DefaultEntryLogger:getChannelForLogId(long entryLogId)
+{
+org.apache.bookkeeper.bookie.BufferedReadChannel fc;
+  java.io.File file;
+  java.nio.channels.FileChannel newFc;
+  java.nio.channels.FileChannel oldFc;
+  java.io.RandomAccessFile $stack9;
+  java.util.concurrent.ConcurrentMap $stack11;
+  java.lang.Long $stack12;
+  java.lang.Object $stack13;
+  org.apache.bookkeeper.conf.ServerConfiguration $stack15;
+  int $stack16;
+  fc = this.getFromChannels(entryLogId);
+ if (fc==null) goto label0;
+ return  fc;
+ label0:file = this#org.apache.bookkeeper.bookie.DefaultEntryLogger:findFile(entryLogId);
+ $stack9=new java.io.RandomAccessFile;
+ $stack9#java.io.RandomAccessFile(file,"r");
+ newFc = $stack9.getChannel();
+ $stack11=this.logid2FileChannel;
+ $stack12 = java.lang.Long.valueOf(entryLogId);
+ $stack13 = $stack11.putIfAbsent((java.lang.Object)$stack12,(java.lang.Object)newFc);
+ oldFc=(java.nio.channels.FileChannel) $stack13;
+ if (null==oldFc) goto label1;
+ newFc.close();
+ newFc=oldFc;
+ label1:fc=new org.apache.bookkeeper.bookie.BufferedReadChannel;
+ $stack15=this.conf;
+ $stack16 = $stack15.getReadBufferBytes();
+ fc#org.apache.bookkeeper.bookie.BufferedReadChannel(newFc,$stack16);
+ this.putInReadChannels(entryLogId,fc);
+ return  fc;
+ } 
+

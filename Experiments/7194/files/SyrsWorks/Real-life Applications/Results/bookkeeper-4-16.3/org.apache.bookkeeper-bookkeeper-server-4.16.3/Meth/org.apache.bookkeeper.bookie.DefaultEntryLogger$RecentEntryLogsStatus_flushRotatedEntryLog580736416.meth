@@ -1,0 +1,36 @@
+void org.apache.bookkeeper.bookie.DefaultEntryLogger$RecentEntryLogsStatus:flushRotatedEntryLog(java.lang.Long @entryLogId)
+{
+long leastFlushedLogId;
+  java.util.SortedMap $stack4;
+  java.lang.Boolean $stack5;
+  java.lang.Object $stack6;
+  boolean $stack8;
+  java.util.SortedMap $stack10;
+  java.lang.Long entryLogId;
+entryLogId=@entryLogId;
+$stack4=this.entryLogsStatusMap;
+ $stack5 = java.lang.Boolean.valueOf((boolean)1);
+ $stack4.replace((java.lang.Object)entryLogId,(java.lang.Object)$stack5);
+ label0:$stack4=this.entryLogsStatusMap;
+ $stack8 = $stack4.isEmpty();
+ if ($stack8!=0) goto label1;
+ $stack10=this.entryLogsStatusMap;
+ $stack4=this.entryLogsStatusMap;
+ $stack6 = $stack4.firstKey();
+ $stack6 = $stack10.get($stack6);
+ $stack5=(java.lang.Boolean) $stack6;
+ $stack8 = $stack5.booleanValue();
+ if ($stack8==0) goto label1;
+ $stack4=this.entryLogsStatusMap;
+ $stack6 = $stack4.firstKey();
+ entryLogId=(java.lang.Long) $stack6;
+ leastFlushedLogId = entryLogId.longValue();
+ $stack4=this.entryLogsStatusMap;
+ entryLogId = java.lang.Long.valueOf(leastFlushedLogId);
+ $stack4.remove((java.lang.Object)entryLogId);
+ leastFlushedLogId=(leastFlushedLogId+1L);
+ this.leastUnflushedLogId=leastFlushedLogId;
+ goto label0;
+ label1:return;
+ } 
+

@@ -1,0 +1,48 @@
+boolean org.keycloak.adapters.OAuthRequestAuthenticator$1:challenge(org.keycloak.adapters.spi.HttpFacade exchange)
+{
+org.keycloak.adapters.OAuthRequestAuthenticator $stack2;
+  org.keycloak.adapters.spi.AdapterSessionStore $stack3;
+  org.jboss.logging.Logger $stack4;
+  java.lang.StringBuilder $stack5;
+  java.lang.String $stack7;
+  org.keycloak.adapters.spi.HttpFacade$Response $stack10;
+  org.keycloak.adapters.KeycloakDeployment $stack13;
+  java.lang.String $stack17;
+  org.keycloak.common.enums.SslRequired $stack21;
+  org.keycloak.adapters.spi.HttpFacade $stack23;
+  org.keycloak.adapters.spi.HttpFacade$Request $stack24;
+  java.lang.String $stack25;
+  boolean $stack26;
+  $stack2=this.this$0;
+ $stack3=$stack2.tokenStore;
+ $stack3.saveRequest();
+ $stack4 = org.keycloak.adapters.OAuthRequestAuthenticator.access$000();
+ $stack5=new java.lang.StringBuilder;
+ $stack5#java.lang.StringBuilder();
+ $stack5 = $stack5.append("Sending redirect to login page: ");
+ $stack7=this.val$redirect;
+ $stack5 = $stack5.append($stack7);
+ $stack7 = $stack5.toString();
+ $stack4.debug((java.lang.Object)$stack7);
+ $stack10 = exchange.getResponse();
+ $stack10.setStatus(302);
+ $stack10 = exchange.getResponse();
+ $stack2=this.this$0;
+ $stack13=$stack2.deployment;
+ $stack7 = $stack13.getStateCookieName();
+ $stack17=this.val$state;
+ $stack2=this.this$0;
+ $stack13=$stack2.deployment;
+ $stack21 = $stack13.getSslRequired();
+ $stack2=this.this$0;
+ $stack23=$stack2.facade;
+ $stack24 = $stack23.getRequest();
+ $stack25 = $stack24.getRemoteAddr();
+ $stack26 = $stack21.isRequired($stack25);
+ $stack10.setCookie($stack7,$stack17,"/",null,-1,$stack26,(boolean)1);
+ $stack10 = exchange.getResponse();
+ $stack7=this.val$redirect;
+ $stack10.setHeader("Location",$stack7);
+ return  1;
+ } 
+

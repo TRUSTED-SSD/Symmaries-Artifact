@@ -1,0 +1,48 @@
+static void com.google.zxing.qrcode.encoder.Encoder:getNumDataBytesAndNumECBytesForBlockID(int numTotalBytes,int numDataBytes,int numRSBlocks,int blockID,int[] numDataBytesInBlock,int[] numECBytesInBlock)
+{
+int numRsBlocksInGroup2;
+  int numRsBlocksInGroup1;
+  int numTotalBytesInGroup1;
+  int numTotalBytesInGroup2;
+  int numDataBytesInGroup2;
+  int $stack14;
+  com.google.zxing.WriterException $stack20;
+  if (blockID<numRSBlocks) goto label0;
+ $stack20=new com.google.zxing.WriterException;
+ $stack20#com.google.zxing.WriterException("Block ID too large");
+ throw $stack20;
+ label0:numRsBlocksInGroup2=(numTotalBytes%numRSBlocks);
+ numRsBlocksInGroup1=(numRSBlocks-numRsBlocksInGroup2);
+ numTotalBytesInGroup1=(numTotalBytes/numRSBlocks);
+ numTotalBytesInGroup2=(numTotalBytesInGroup1+1);
+ numDataBytes=(numDataBytes/numRSBlocks);
+ numDataBytesInGroup2=(numDataBytes+1);
+ numTotalBytesInGroup1=(numTotalBytesInGroup1-numDataBytes);
+ numTotalBytesInGroup2=(numTotalBytesInGroup2-numDataBytesInGroup2);
+ if (numTotalBytesInGroup1==numTotalBytesInGroup2) goto label1;
+ $stack20=new com.google.zxing.WriterException;
+ $stack20#com.google.zxing.WriterException("EC bytes mismatch");
+ throw $stack20;
+ label1:$stack14=(numRsBlocksInGroup1+numRsBlocksInGroup2);
+ if (numRSBlocks==$stack14) goto label2;
+ $stack20=new com.google.zxing.WriterException;
+ $stack20#com.google.zxing.WriterException("RS blocks mismatch");
+ throw $stack20;
+ label2:numRSBlocks=(numDataBytes+numTotalBytesInGroup1);
+ numRSBlocks=(numRSBlocks * numRsBlocksInGroup1);
+ $stack14=(numDataBytesInGroup2+numTotalBytesInGroup2);
+ numRsBlocksInGroup2=($stack14 * numRsBlocksInGroup2);
+ numRSBlocks=(numRSBlocks+numRsBlocksInGroup2);
+ if (numTotalBytes==numRSBlocks) goto label3;
+ $stack20=new com.google.zxing.WriterException;
+ $stack20#com.google.zxing.WriterException("Total bytes mismatch");
+ throw $stack20;
+ label3:if (blockID>=numRsBlocksInGroup1) goto label4;
+ numDataBytesInBlock[0]=numDataBytes;
+ numECBytesInBlock[0]=numTotalBytesInGroup1;
+ goto label5;
+ label4:numDataBytesInBlock[0]=numDataBytesInGroup2;
+ numECBytesInBlock[0]=numTotalBytesInGroup2;
+ label5:return;
+ } 
+

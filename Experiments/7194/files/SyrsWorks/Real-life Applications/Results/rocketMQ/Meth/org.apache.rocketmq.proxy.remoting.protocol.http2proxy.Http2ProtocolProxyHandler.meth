@@ -1,0 +1,54 @@
+org.apache.rocketmq.proxy.remoting.protocol.http2proxy.Http2ProtocolProxyHandler()
+{
+java.io.Serializable tlsMode;
+  org.apache.rocketmq.remoting.common.TlsMode $stack2;
+  boolean $stack3;
+  io.netty.handler.ssl.SslContextBuilder $stack4;
+  io.netty.handler.ssl.SslProvider $stack5;
+  javax.net.ssl.TrustManagerFactory $stack7;
+  java.lang.String[] $stack10;
+  io.netty.handler.ssl.ApplicationProtocolConfig$SelectedListenerFailureBehavior $stack11;
+  io.netty.handler.ssl.ApplicationProtocolConfig$SelectorFailureBehavior $stack12;
+  io.netty.handler.ssl.ApplicationProtocolConfig$Protocol $stack13;
+  io.netty.handler.ssl.SslContext $stack15;
+  javax.net.ssl.SSLException $stack16;
+  org.apache.rocketmq.logging.org.slf4j.Logger $stack17;
+  io.netty.handler.ssl.ApplicationProtocolConfig tmp$77447694;
+  java.lang.RuntimeException tmp$1137657317;
+  java.lang.Throwable tmp$151379174;
+  this#java.lang.Object();
+ label0:tlsMode=org.apache.rocketmq.remoting.netty.TlsSystemConfig.tlsMode;
+ $stack2=org.apache.rocketmq.remoting.common.TlsMode.DISABLED;
+ $stack3 = $stack2.equals((java.lang.Object)tlsMode);
+ if ($stack3==0) goto label1;
+ this.sslContext=null;
+ goto label2;
+ label1:$stack4 = io.netty.handler.ssl.SslContextBuilder.forClient();
+ $stack5=io.netty.handler.ssl.SslProvider.OPENSSL;
+ $stack4 = $stack4.sslProvider($stack5);
+ $stack7=io.netty.handler.ssl.util.InsecureTrustManagerFactory.INSTANCE;
+ $stack4 = $stack4.trustManager($stack7);
+ tmp$77447694=new io.netty.handler.ssl.ApplicationProtocolConfig;
+ $stack13=io.netty.handler.ssl.ApplicationProtocolConfig$Protocol.ALPN;
+ $stack12=io.netty.handler.ssl.ApplicationProtocolConfig$SelectorFailureBehavior.NO_ADVERTISE;
+ $stack11=io.netty.handler.ssl.ApplicationProtocolConfig$SelectedListenerFailureBehavior.ACCEPT;
+ $stack10=new java.lang.String[1];
+ $stack10[0]="h2";
+ tmp$77447694#io.netty.handler.ssl.ApplicationProtocolConfig($stack13,$stack12,$stack11,$stack10);
+ $stack4 = $stack4.applicationProtocolConfig(tmp$77447694);
+ $stack15 = $stack4.build();
+ this.sslContext=$stack15;
+ label2:goto label3;
+ label4:$stack16 = catch;
+ tlsMode=$stack16;
+ $stack17=org.apache.rocketmq.proxy.remoting.protocol.http2proxy.Http2ProtocolProxyHandler.log;
+ tmp$151379174=(java.lang.Throwable) $stack16;
+ $stack17.error("Failed to create SSLContext for Http2ProtocolProxyHandler",tmp$151379174);
+ tmp$1137657317=new java.lang.RuntimeException;
+ tmp$151379174=(java.lang.Throwable) $stack16;
+ tmp$1137657317#java.lang.RuntimeException("Failed to create SSLContext for Http2ProtocolProxyHandler",tmp$151379174);
+ throw tmp$1137657317;
+ label3:return;
+ catch javax.net.ssl.SSLException: label0 - label2 : label4;
+} 
+

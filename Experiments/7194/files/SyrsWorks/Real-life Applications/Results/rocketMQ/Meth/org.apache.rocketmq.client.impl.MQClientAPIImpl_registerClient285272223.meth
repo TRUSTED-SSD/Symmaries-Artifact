@@ -1,0 +1,20 @@
+boolean org.apache.rocketmq.client.impl.MQClientAPIImpl:registerClient(java.lang.String addr,org.apache.rocketmq.remoting.protocol.heartbeat.HeartbeatData heartbeat,long timeoutMillis)
+{
+org.apache.rocketmq.remoting.protocol.RemotingCommand request;
+  byte[] $stack8;
+  org.apache.rocketmq.remoting.RemotingClient $stack9;
+  int $stack11;
+  boolean $stack12;
+  request = org.apache.rocketmq.remoting.protocol.RemotingCommand.createRequestCommand(34,null);
+ $stack8 = heartbeat.encode();
+ request.setBody($stack8);
+ $stack9=this.remotingClient;
+ request = $stack9.invokeSync(addr,request,timeoutMillis);
+ $stack11 = request.getCode();
+ if ($stack11!=0) goto label0;
+ $stack12=1;
+ goto label1;
+ label0:$stack12=0;
+ label1:return  $stack12;
+ } 
+

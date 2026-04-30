@@ -1,0 +1,91 @@
+    protected final void runLeaf(org.junit.runners.model.Statement, org.junit.runner.Description, org.junit.runner.notification.RunNotifier)
+    {
+        org.junit.runners.ParentRunner this;
+        org.junit.runners.model.Statement statement;
+        org.junit.runner.Description description;
+        org.junit.runner.notification.RunNotifier notifier;
+        org.junit.internal.runners.model.EachTestNotifier eachNotifier;
+        java.lang.Throwable l6, $stack10;
+        org.junit.internal.AssumptionViolatedException $stack9;
+
+        this := @this: org.junit.runners.ParentRunner;
+
+        statement := @parameter0: org.junit.runners.model.Statement;
+
+        description := @parameter1: org.junit.runner.Description;
+
+        notifier := @parameter2: org.junit.runner.notification.RunNotifier;
+
+        eachNotifier = new org.junit.internal.runners.model.EachTestNotifier;
+/*322*/
+
+        specialinvoke eachNotifier.<org.junit.internal.runners.model.EachTestNotifier: void <init>(org.junit.runner.notification.RunNotifier,org.junit.runner.Description)>(notifier, description);
+/*322*/
+
+        virtualinvoke eachNotifier.<org.junit.internal.runners.model.EachTestNotifier: void fireTestStarted()>();
+/*323*/
+
+     label1:
+        virtualinvoke statement.<org.junit.runners.model.Statement: void evaluate()>();
+/*325*/
+
+     label2:
+        virtualinvoke eachNotifier.<org.junit.internal.runners.model.EachTestNotifier: void fireTestFinished()>();
+/*331*/
+
+        goto label9;
+/*332*/
+
+     label3:
+        $stack9 := @caughtexception;
+/*333*/
+
+        virtualinvoke eachNotifier.<org.junit.internal.runners.model.EachTestNotifier: void addFailedAssumption(org.junit.internal.AssumptionViolatedException)>($stack9);
+/*327*/
+
+     label4:
+        virtualinvoke eachNotifier.<org.junit.internal.runners.model.EachTestNotifier: void fireTestFinished()>();
+/*331*/
+
+        goto label9;
+/*332*/
+
+     label5:
+        l6 := @caughtexception;
+/*333*/
+
+        virtualinvoke eachNotifier.<org.junit.internal.runners.model.EachTestNotifier: void addFailure(java.lang.Throwable)>(l6);
+/*329*/
+
+     label6:
+        virtualinvoke eachNotifier.<org.junit.internal.runners.model.EachTestNotifier: void fireTestFinished()>();
+/*331*/
+
+        goto label9;
+/*332*/
+
+     label7:
+        $stack10 := @caughtexception;
+/*333*/
+
+        l6 = $stack10;
+/*331*/
+
+     label8:
+        virtualinvoke eachNotifier.<org.junit.internal.runners.model.EachTestNotifier: void fireTestFinished()>();
+/*331*/
+
+        throw $stack10;
+/*331*/
+
+     label9:
+        return;
+/*333*/
+
+        catch org.junit.internal.AssumptionViolatedException from label1 to label2 with label3;
+        catch java.lang.Throwable from label1 to label2 with label5;
+        catch java.lang.Throwable from label3 to label4 with label7;
+        catch java.lang.Throwable from label5 to label6 with label7;
+        catch java.lang.Throwable from label7 to label8 with label7;
+    }
+

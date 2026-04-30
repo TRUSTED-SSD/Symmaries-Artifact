@@ -1,0 +1,36 @@
+static java.lang.String org.keycloak.common.util.Encode:decodeBytes(java.lang.String @enc,java.nio.charset.CharsetDecoder decoder)
+{
+java.util.regex.Matcher matcher;
+  java.nio.ByteBuffer bytes;
+  int b;
+  java.util.regex.Pattern $stack5;
+  boolean $stack10;
+  java.nio.CharBuffer $stack12;
+  byte $stack16;
+  java.nio.charset.CharacterCodingException $stack19;
+  java.lang.RuntimeException $stack20;
+  java.lang.String enc;
+enc=@enc;
+$stack5=org.keycloak.common.util.Encode.encodedChars;
+ matcher = $stack5.matcher((java.lang.CharSequence)enc);
+ b = enc.length();
+ b=(b/3);
+ bytes = java.nio.ByteBuffer.allocate(b);
+ label0:$stack10 = matcher.find();
+ if ($stack10==0) goto label1;
+ enc = matcher.group(1);
+ b = java.lang.Integer.parseInt(enc,16);
+ $stack16=(byte) b;
+ bytes.put($stack16);
+ goto label0;
+ label1:bytes.flip();
+ label2:$stack12 = decoder.decode(bytes);
+ enc = $stack12.toString();
+ label3:return  enc;
+ label4:$stack19 = catch;
+ $stack20=new java.lang.RuntimeException;
+ $stack20#java.lang.RuntimeException((java.lang.Throwable)$stack19);
+ throw $stack20;
+ catch java.nio.charset.CharacterCodingException: label2 - label3 : label4;
+} 
+

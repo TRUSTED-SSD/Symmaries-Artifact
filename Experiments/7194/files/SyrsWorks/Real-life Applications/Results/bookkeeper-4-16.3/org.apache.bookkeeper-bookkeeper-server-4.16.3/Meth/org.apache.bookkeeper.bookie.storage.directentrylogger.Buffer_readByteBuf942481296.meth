@@ -1,0 +1,54 @@
+int org.apache.bookkeeper.bookie.storage.directentrylogger.Buffer:readByteBuf(io.netty.buffer.ByteBuf buffer,int offset,int size)
+{
+int originalLimit;
+  int bytesToRead;
+  java.lang.Throwable l7;
+  java.nio.ByteBuffer $stack8;
+  int $stack16;
+  java.lang.Exception $stack23;
+  java.io.IOException $stack24;
+  org.apache.bookkeeper.common.util.ExceptionMessageHelper $stack25;
+  java.lang.String $stack28;
+  java.lang.Integer $stack31;
+  $stack8=this.byteBuffer;
+ originalLimit = $stack8.limit();
+ $stack8=this.byteBuffer;
+ $stack8.position(offset);
+ $stack8=this.byteBuffer;
+ bytesToRead = $stack8.capacity();
+ bytesToRead=(bytesToRead-offset);
+ bytesToRead = java.lang.Math.min(size,bytesToRead);
+ $stack8=this.byteBuffer;
+ $stack16=(offset+bytesToRead);
+ $stack8.limit($stack16);
+ label0:$stack8=this.byteBuffer;
+ buffer.writeBytes($stack8);
+ label1:$stack8=this.byteBuffer;
+ $stack8.limit(originalLimit);
+ goto label2;
+ label3:$stack23 = catch;
+ $stack24=new java.io.IOException;
+ $stack25 = org.apache.bookkeeper.common.util.ExceptionMessageHelper.exMsg("Error reading buffer");
+ $stack8=this.byteBuffer;
+ $stack28 = $stack8.toString();
+ $stack25 = $stack25.kv("byteBuffer",(java.lang.Object)$stack28);
+ $stack31 = java.lang.Integer.valueOf(offset);
+ $stack25 = $stack25.kv("offset",(java.lang.Object)$stack31);
+ $stack31 = java.lang.Integer.valueOf(size);
+ $stack25 = $stack25.kv("size",(java.lang.Object)$stack31);
+ offset=this.bufferSize;
+ $stack31 = java.lang.Integer.valueOf(offset);
+ $stack25 = $stack25.kv("bufferSize",(java.lang.Object)$stack31);
+ $stack28 = $stack25.toString();
+ $stack24#java.io.IOException($stack28,(java.lang.Throwable)$stack23);
+ throw $stack24;
+ label4:l7 = catch;
+ label5:$stack8=this.byteBuffer;
+ $stack8.limit(originalLimit);
+ throw l7;
+ label2:return  bytesToRead;
+ catch java.lang.Exception: label0 - label1 : label3;
+catch java.lang.Throwable: label0 - label1 : label4;
+catch java.lang.Throwable: label3 - label5 : label4;
+} 
+

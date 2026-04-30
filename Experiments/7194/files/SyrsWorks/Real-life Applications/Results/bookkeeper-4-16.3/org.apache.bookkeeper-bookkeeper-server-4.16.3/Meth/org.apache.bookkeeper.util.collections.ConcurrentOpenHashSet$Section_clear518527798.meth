@@ -1,0 +1,31 @@
+void org.apache.bookkeeper.util.collections.ConcurrentOpenHashSet$Section:clear()
+{
+long stamp;
+  boolean $stack5;
+  java.lang.Object[] $stack6;
+  java.lang.Object $stack7;
+  int $stack8;
+  int $stack9;
+  java.lang.Throwable $stack17;
+  stamp = this.writeLock();
+ label0:$stack5=this.autoShrink;
+ if ($stack5==0) goto label1;
+ $stack9=this.capacity;
+ $stack8=this.initCapacity;
+ if ($stack9<=$stack8) goto label1;
+ this#org.apache.bookkeeper.util.collections.ConcurrentOpenHashSet$Section:shrinkToInitCapacity();
+ goto label2;
+ label1:$stack6=this.values;
+ $stack7 = org.apache.bookkeeper.util.collections.ConcurrentOpenHashSet.access$500();
+ java.util.Arrays.fill($stack6,$stack7);
+ this.size=0;
+ this.usedBuckets=0;
+ label2:this.unlockWrite(stamp);
+ goto label3;
+ label4:$stack17 = catch;
+ this.unlockWrite(stamp);
+ throw $stack17;
+ label3:return;
+ catch java.lang.Throwable: label0 - label2 : label4;
+} 
+

@@ -1,0 +1,16 @@
+org.apache.bookkeeper.clients.impl.channel.StorageServerChannel org.apache.bookkeeper.clients.impl.channel.StorageServerChannelManager:getOrCreateChannel(org.apache.bookkeeper.stream.proto.common.Endpoint endpoint)
+{
+org.apache.bookkeeper.clients.impl.channel.StorageServerChannel channel;
+  java.util.function.Function $stack5;
+  java.lang.Object $stack6;
+  channel = this.getChannel(endpoint);
+ if (null==channel) goto label0;
+ return  channel;
+ label0:$stack5=this.channelFactory;
+ $stack6 = $stack5.apply((java.lang.Object)endpoint);
+ channel=(org.apache.bookkeeper.clients.impl.channel.StorageServerChannel) $stack6;
+ this.addStorageServer(endpoint,channel);
+ channel = this.getChannel(endpoint);
+ return  channel;
+ } 
+

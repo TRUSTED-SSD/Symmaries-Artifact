@@ -1,0 +1,49 @@
+java.lang.String org.apache.rocketmq.common.statistics.StatisticsItemScheduledIncrementPrinter:formatInterceptor(org.apache.rocketmq.common.statistics.Interceptor interceptor)
+{
+java.lang.StringBuilder sb;
+  org.apache.rocketmq.common.statistics.StatisticsBriefInterceptor briefInterceptor;
+  org.apache.rocketmq.common.statistics.StatisticsBrief[] l4;
+  int l5;
+  int l6;
+  org.apache.rocketmq.common.statistics.StatisticsBrief brief;
+  long max;
+  long tp999;
+  boolean $stack12;
+  java.lang.String $stack15;
+  java.lang.StringBuilder $stack19;
+  java.lang.Object[] $stack22;
+  double $stack25;
+  java.lang.Double $stack26;
+  if (interceptor!=null) goto label0;
+ return  "";
+ label0:$stack12=interceptor instanceof org.apache.rocketmq.common.statistics.StatisticsBriefInterceptor;
+ if ($stack12==0) goto label1;
+ sb=new java.lang.StringBuilder;
+ sb#java.lang.StringBuilder();
+ briefInterceptor=(org.apache.rocketmq.common.statistics.StatisticsBriefInterceptor) interceptor;
+ l4 = briefInterceptor.getStatisticsBriefs();
+ l5=#l4;
+ l6=0;
+ label2:if (l6>=l5) goto label3;
+ brief=l4[l6];
+ max = brief.getMax();
+ tp999 = brief.tp999();
+ tp999 = java.lang.Math.min(tp999,max);
+ $stack19 = sb.append("|");
+ $stack19.append(max);
+ $stack19 = sb.append("|");
+ $stack22=new java.lang.Object[1];
+ $stack25 = brief.getAvg();
+ $stack26 = java.lang.Double.valueOf($stack25);
+ $stack22[0]=$stack26;
+ $stack15 = java.lang.String.format("%.2f",$stack22);
+ $stack19.append($stack15);
+ $stack19 = sb.append("|");
+ $stack19.append(tp999);
+ l6=(l6+1);
+ goto label2;
+ label3:$stack15 = sb.toString();
+ return  $stack15;
+ label1:return  "";
+ } 
+

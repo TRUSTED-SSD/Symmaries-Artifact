@@ -1,0 +1,49 @@
+java.util.HashMap$Node java.util.HashMap$HashIterator:nextNode()
+{
+java.util.HashMap$Node[] r1;
+  java.util.HashMap$Node r2;
+  java.util.HashMap $r3;
+  int $i0;
+  int $i1;
+  java.util.HashMap$Node $r4;
+  java.util.HashMap $r5;
+  java.util.HashMap$Node[] $r6;
+  int $i2;
+  int $i3;
+  int $i4;
+  int $i5;
+  java.util.HashMap$Node $r7;
+  java.util.NoSuchElementException $r8;
+  java.util.ConcurrentModificationException $r9;
+  r2=this.next;
+ $r3=this.this$0;
+ $i1=$r3.modCount;
+ $i0=this.expectedModCount;
+ if ($i1==$i0) goto label0;
+ $r9=new java.util.ConcurrentModificationException;
+ $r9#java.util.ConcurrentModificationException:init();
+ throw $r9;
+ label0:if (r2!=null) goto label1;
+ $r8=new java.util.NoSuchElementException;
+ $r8#java.util.NoSuchElementException:init();
+ throw $r8;
+ label1:this.current=r2;
+ $r4=r2.next;
+ this.next=$r4;
+ if ($r4!=null) goto label2;
+ $r5=this.this$0;
+ $r6=$r5.table;
+ r1=$r6;
+ if ($r6==null) goto label2;
+ label3:$i3=this.index;
+ $i2=#r1;
+ if ($i3>=$i2) goto label2;
+ $i4=this.index;
+ $i5=($i4+1);
+ this.index=$i5;
+ $r7=r1[$i4];
+ this.next=$r7;
+ if ($r7==null) goto label3;
+ label2:return  r2;
+ }  
+

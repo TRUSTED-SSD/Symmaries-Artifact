@@ -1,0 +1,51 @@
+void org.apache.rocketmq.tieredstore.provider.posix.PosixFileSegment:createFile()
+{
+org.apache.rocketmq.tieredstore.provider.posix.PosixFileSegment l1;
+  java.io.File file;
+  java.io.File dir;
+  java.lang.Throwable l4;
+  java.lang.String $stack10;
+  boolean $stack12;
+  java.io.RandomAccessFile $stack14;
+  java.nio.channels.FileChannel $stack15;
+  java.lang.Exception $stack28;
+  org.apache.rocketmq.logging.org.slf4j.Logger $stack30;
+  file=this.file;
+ if (file!=null) goto label0;
+ l1=this;
+ monitorenter this;
+ label1:file=this.file;
+ if (file!=null) goto label2;
+ file=new java.io.File;
+ $stack10=this.filepath;
+ file#java.io.File($stack10);
+ label3:dir = file.getParentFile();
+ $stack12 = dir.exists();
+ if ($stack12!=0) goto label4;
+ dir.mkdirs();
+ label4:file.createNewFile();
+ $stack14=new java.io.RandomAccessFile;
+ $stack14#java.io.RandomAccessFile(file,"r");
+ $stack15 = $stack14.getChannel();
+ this.readFileChannel=$stack15;
+ $stack14=new java.io.RandomAccessFile;
+ $stack14#java.io.RandomAccessFile(file,"rwd");
+ $stack15 = $stack14.getChannel();
+ this.writeFileChannel=$stack15;
+ this.file=file;
+ label5:goto label2;
+ label6:$stack28 = catch;
+ $stack30=org.apache.rocketmq.tieredstore.provider.posix.PosixFileSegment.logger;
+ $stack10=this.filepath;
+ $stack30.error("PosixFileSegment#createFile: create file {} failed: ",(java.lang.Object)$stack10,(java.lang.Object)$stack28);
+ label2:monitorexit this;
+ label7:goto label0;
+ label8:l4 = catch;
+ monitorexit this;
+ label9:throw l4;
+ label0:return;
+ catch java.lang.Exception: label3 - label5 : label6;
+catch java.lang.Throwable: label1 - label7 : label8;
+catch java.lang.Throwable: label8 - label9 : label8;
+} 
+

@@ -1,0 +1,24 @@
+static java.util.List org.apache.bookkeeper.bookie.BookieShell:listFilesAndSort(java.io.File[] folderNames,java.lang.String[] extensions)
+{
+java.util.ArrayList completeFilesList;
+  int i;
+  java.util.Collection filesCollection;
+  int $stack6;
+  org.apache.bookkeeper.bookie.BookieShell$FilesTimeComparator $stack7;
+  java.io.File $stack8;
+  completeFilesList=new java.util.ArrayList;
+ completeFilesList#java.util.ArrayList();
+ i=0;
+ label0:$stack6=#folderNames;
+ if (i>=$stack6) goto label1;
+ $stack8=folderNames[i];
+ filesCollection = org.apache.commons.io.FileUtils.listFiles($stack8,extensions,(boolean)1);
+ completeFilesList.addAll(filesCollection);
+ i=(i+1);
+ goto label0;
+ label1:$stack7=new org.apache.bookkeeper.bookie.BookieShell$FilesTimeComparator;
+ $stack7#org.apache.bookkeeper.bookie.BookieShell$FilesTimeComparator(null);
+ java.util.Collections.sort((java.util.List)completeFilesList,(java.util.Comparator)$stack7);
+ return  completeFilesList;
+ } 
+

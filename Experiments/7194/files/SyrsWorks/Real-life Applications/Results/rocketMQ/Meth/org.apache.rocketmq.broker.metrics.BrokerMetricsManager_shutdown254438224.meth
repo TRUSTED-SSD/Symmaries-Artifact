@@ -1,0 +1,29 @@
+void org.apache.rocketmq.broker.metrics.BrokerMetricsManager:shutdown()
+{
+org.apache.rocketmq.common.BrokerConfig $stack1;
+  org.apache.rocketmq.common.BrokerConfig$MetricsExporterType $stack2;
+  org.apache.rocketmq.common.BrokerConfig$MetricsExporterType $stack3;
+  io.opentelemetry.exporter.prometheus.PrometheusHttpServer $stack7;
+  io.opentelemetry.sdk.metrics.export.PeriodicMetricReader $stack11;
+  io.opentelemetry.exporter.otlp.metrics.OtlpGrpcMetricExporter $stack15;
+  $stack1=this.brokerConfig;
+ $stack2 = $stack1.getMetricsExporterType();
+ $stack3=org.apache.rocketmq.common.BrokerConfig$MetricsExporterType.OTLP_GRPC;
+ if ($stack2!=$stack3) goto label0;
+ $stack11=this.periodicMetricReader;
+ $stack11.forceFlush();
+ $stack11=this.periodicMetricReader;
+ $stack11.shutdown();
+ $stack15=this.metricExporter;
+ $stack15.shutdown();
+ label0:$stack1=this.brokerConfig;
+ $stack2 = $stack1.getMetricsExporterType();
+ $stack3=org.apache.rocketmq.common.BrokerConfig$MetricsExporterType.PROM;
+ if ($stack2!=$stack3) goto label1;
+ $stack7=this.prometheusHttpServer;
+ $stack7.forceFlush();
+ $stack7=this.prometheusHttpServer;
+ $stack7.shutdown();
+ label1:return;
+ } 
+

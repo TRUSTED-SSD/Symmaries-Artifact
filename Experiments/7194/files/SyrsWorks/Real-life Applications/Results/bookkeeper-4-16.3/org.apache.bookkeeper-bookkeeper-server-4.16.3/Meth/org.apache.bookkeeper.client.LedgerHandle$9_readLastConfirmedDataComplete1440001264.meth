@@ -1,0 +1,31 @@
+void org.apache.bookkeeper.client.LedgerHandle$9:readLastConfirmedDataComplete(int rc,org.apache.bookkeeper.proto.checksum.DigestManager$RecoveryData data)
+{
+java.util.concurrent.atomic.AtomicBoolean $stack3;
+  boolean $stack4;
+  java.lang.Object $stack5;
+  org.apache.bookkeeper.client.AsyncCallback$ReadLastConfirmedCallback $stack6;
+  org.apache.bookkeeper.client.LedgerHandle $stack7;
+  long $stack8;
+  long $stack9;
+  if (rc!=0) goto label0;
+ $stack7=this.this$0;
+ $stack8 = data.getLastAddConfirmed();
+ $stack9 = data.getLength();
+ $stack7.updateLastConfirmed($stack8,$stack9);
+ $stack3=this.completed;
+ $stack4 = $stack3.compareAndSet((boolean)0,(boolean)1);
+ if ($stack4==0) goto label1;
+ $stack6=this.val$cb;
+ $stack8 = data.getLastAddConfirmed();
+ $stack5=this.val$ctx;
+ $stack6.readLastConfirmedComplete(rc,$stack8,$stack5);
+ goto label1;
+ label0:$stack3=this.completed;
+ $stack4 = $stack3.compareAndSet((boolean)0,(boolean)1);
+ if ($stack4==0) goto label1;
+ $stack6=this.val$cb;
+ $stack5=this.val$ctx;
+ $stack6.readLastConfirmedComplete(rc,-1L,$stack5);
+ label1:return;
+ } 
+

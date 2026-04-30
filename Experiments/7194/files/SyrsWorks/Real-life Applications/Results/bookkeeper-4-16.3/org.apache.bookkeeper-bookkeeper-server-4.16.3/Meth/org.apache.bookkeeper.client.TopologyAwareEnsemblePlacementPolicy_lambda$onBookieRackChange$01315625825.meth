@@ -1,0 +1,38 @@
+void org.apache.bookkeeper.client.TopologyAwareEnsemblePlacementPolicy:lambda$onBookieRackChange$0(org.apache.bookkeeper.net.BookieId bookieAddress)
+{
+org.apache.bookkeeper.net.BookieNode node;
+  org.apache.bookkeeper.net.BookieNode newNode;
+  java.util.Map $stack4;
+  java.lang.Object $stack5;
+  java.lang.String $stack7;
+  java.lang.String $stack8;
+  boolean $stack9;
+  org.apache.bookkeeper.net.NetworkTopology $stack10;
+  java.lang.RuntimeException $stack16;
+  org.slf4j.Logger $stack17;
+  label0:$stack4=this.knownBookies;
+ $stack5 = $stack4.get((java.lang.Object)bookieAddress);
+ node=(org.apache.bookkeeper.net.BookieNode) $stack5;
+ if (node==null) goto label1;
+ newNode = this.createBookieNode(bookieAddress);
+ $stack7 = newNode.getNetworkLocation();
+ $stack8 = node.getNetworkLocation();
+ $stack9 = $stack7.equals((java.lang.Object)$stack8);
+ if ($stack9!=0) goto label1;
+ $stack10=this.topology;
+ $stack10.remove((org.apache.bookkeeper.net.Node)node);
+ $stack10=this.topology;
+ $stack10.add((org.apache.bookkeeper.net.Node)newNode);
+ $stack4=this.knownBookies;
+ $stack4.put((java.lang.Object)bookieAddress,(java.lang.Object)newNode);
+ $stack4=this.historyBookies;
+ $stack4.put((java.lang.Object)bookieAddress,(java.lang.Object)newNode);
+ label1:goto label2;
+ label3:$stack16 = catch;
+ $stack17=org.apache.bookkeeper.client.TopologyAwareEnsemblePlacementPolicy.LOG;
+ $stack17.error("Failed to update bookie rack info: {} ",(java.lang.Object)bookieAddress,(java.lang.Object)$stack16);
+ label2:return;
+ catch java.lang.IllegalArgumentException: label0 - label1 : label3;
+catch org.apache.bookkeeper.net.NetworkTopologyImpl$InvalidTopologyException: label0 - label1 : label3;
+} 
+

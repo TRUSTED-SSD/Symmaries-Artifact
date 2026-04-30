@@ -1,0 +1,47 @@
+static void com.google.zxing.oned.OneDReader:recordPattern(com.google.zxing.common.BitArray row,int start,int[] counters)
+{
+int numCounters;
+  int end;
+  boolean isWhite;
+  int counterPosition;
+  com.google.zxing.NotFoundException $stack11;
+  boolean $stack12;
+  int $stack18;
+  numCounters=#counters;
+ java.util.Arrays.fill(counters,0,numCounters,0);
+ end = row.getSize();
+ if (start<end) goto label0;
+ $stack11 = com.google.zxing.NotFoundException.getNotFoundInstance();
+ throw $stack11;
+ label0:isWhite = row.get(start);
+ if (isWhite!=0) goto label1;
+ isWhite=1;
+ goto label2;
+ label1:isWhite=0;
+ label2:counterPosition=0;
+ label3:if (start>=end) goto label4;
+ $stack12 = row.get(start);
+ if ($stack12==isWhite) goto label5;
+ $stack18=counters[counterPosition];
+ $stack18=($stack18+1);
+ counters[counterPosition]=$stack18;
+ goto label6;
+ label5:counterPosition=(counterPosition+1);
+ if (counterPosition!=numCounters) goto label7;
+ goto label4;
+ label7:counters[counterPosition]=1;
+ if (isWhite!=0) goto label8;
+ isWhite=1;
+ goto label6;
+ label8:isWhite=0;
+ label6:start=(start+1);
+ goto label3;
+ label4:if (counterPosition==numCounters) goto label9;
+ numCounters=(numCounters-1);
+ if (counterPosition!=numCounters) goto label10;
+ if (start==end) goto label9;
+ label10:$stack11 = com.google.zxing.NotFoundException.getNotFoundInstance();
+ throw $stack11;
+ label9:return;
+ } 
+

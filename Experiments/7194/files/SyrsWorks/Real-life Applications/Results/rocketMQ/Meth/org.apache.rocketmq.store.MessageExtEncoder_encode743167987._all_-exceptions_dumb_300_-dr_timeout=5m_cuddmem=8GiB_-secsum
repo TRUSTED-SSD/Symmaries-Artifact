@@ -1,0 +1,10 @@
+java.nio.ByteBuffer org.apache.rocketmq.store.MessageExtEncoder:encode (
+  org.apache.rocketmq.common.message.MessageExtBatch messageExtBatch,
+  org.apache.rocketmq.store.PutMessageContext putMessageContext) {
+  guard = tt;
+  ret(level()) = level(messageExtBatch) ⊔ level(this) ⊔ obj_level(messageExtBatch) ⊔ obj_level(this);
+  ret(obj_level()) = level(messageExtBatch) ⊔ level(this) ⊔ obj_level(messageExtBatch) ⊔ obj_level(this);
+  ret(obj_level(messageExtBatch)) = level(messageExtBatch) ⊔ level(this) ⊔ obj_level(messageExtBatch) ⊔ obj_level(putMessageContext) ⊔ obj_level(this);
+  ret(obj_level(putMessageContext)) = level(messageExtBatch) ⊔ level(this) ⊔ obj_level(messageExtBatch) ⊔ obj_level(putMessageContext) ⊔ obj_level(this);
+  ret(obj_level(this)) = level(messageExtBatch) ⊔ level(this) ⊔ obj_level(messageExtBatch) ⊔ obj_level(this);
+}

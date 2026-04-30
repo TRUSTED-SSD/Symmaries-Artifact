@@ -1,0 +1,33 @@
+static java.util.Formatter$Flags java.util.Formatter$Flags:parse(java.lang.String r0)
+{
+char[] r1;
+  java.util.Formatter$Flags r2;
+  java.util.Formatter$Flags r3;
+  java.util.Formatter$Flags $r4;
+  int $i0;
+  char $c1;
+  boolean $z0;
+  java.util.DuplicateFormatFlagsException $r6;
+  java.lang.String $r7;
+  int i2;
+  r1 = r0.toCharArray();
+ $r4=new java.util.Formatter$Flags;
+ $r4#java.util.Formatter$Flags:init(0);
+ r2=$r4;
+ i2=0;
+ label0:$i0=#r1;
+ if (i2>=$i0) goto label1;
+ $c1=r1[i2];
+ r3 = java.util.Formatter$Flags.parse($c1);
+ $z0 = r2.contains(r3);
+ if ($z0==0) goto label2;
+ $r6=new java.util.DuplicateFormatFlagsException;
+ $r7 = r3.toString();
+ $r6#java.util.DuplicateFormatFlagsException:init($r7);
+ throw $r6;
+ label2:r2#java.util.Formatter$Flags:add(r3);
+ i2=(i2+1);
+ goto label0;
+ label1:return  r2;
+ }  
+

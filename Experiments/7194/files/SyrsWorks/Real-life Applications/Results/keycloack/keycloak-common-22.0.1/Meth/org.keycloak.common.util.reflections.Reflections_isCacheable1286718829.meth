@@ -1,0 +1,24 @@
+static boolean org.keycloak.common.util.reflections.Reflections:isCacheable(java.util.Set annotations)
+{
+java.util.Iterator l1;
+  java.lang.annotation.Annotation qualifier;
+  java.lang.Class clazz;
+  boolean $stack5;
+  java.lang.Object $stack6;
+  l1 = annotations.iterator();
+ label0:$stack5 = l1.hasNext();
+ if ($stack5==0) goto label1;
+ $stack6 = l1.next();
+ qualifier=(java.lang.annotation.Annotation) $stack6;
+ clazz = qualifier.getClass();
+ $stack5 = clazz.isAnonymousClass();
+ if ($stack5!=0) goto label2;
+ $stack5 = clazz.isMemberClass();
+ if ($stack5==0) goto label3;
+ $stack5 = org.keycloak.common.util.reflections.Reflections.isStatic(clazz);
+ if ($stack5==0) goto label3;
+ label2:return  0;
+ label3:goto label0;
+ label1:return  1;
+ } 
+

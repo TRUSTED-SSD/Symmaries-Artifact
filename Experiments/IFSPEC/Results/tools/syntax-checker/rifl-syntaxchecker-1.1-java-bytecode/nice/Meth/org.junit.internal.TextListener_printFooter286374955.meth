@@ -1,0 +1,50 @@
+void org.junit.internal.TextListener:printFooter(org.junit.runner.Result result)
+{
+boolean $stack2;
+  java.io.PrintStream $stack3;
+  java.lang.StringBuilder $stack6;
+  int $stack8;
+  java.lang.String $stack13;
+  $stack2 = result.wasSuccessful();
+ if ($stack2==0) goto label0;
+ $stack3 = this#org.junit.internal.TextListener:getWriter();
+ $stack3.println();
+ $stack3 = this#org.junit.internal.TextListener:getWriter();
+ $stack3.print("OK");
+ $stack3 = this#org.junit.internal.TextListener:getWriter();
+ $stack6=new java.lang.StringBuilder;
+ $stack6#java.lang.StringBuilder();
+ $stack6 = $stack6.append(" (");
+ $stack8 = result.getRunCount();
+ $stack6 = $stack6.append($stack8);
+ $stack6 = $stack6.append(" test");
+ $stack8 = result.getRunCount();
+ if ($stack8!=1) goto label1;
+ $stack13="";
+ goto label2;
+ label1:$stack13="s";
+ label2:$stack6 = $stack6.append($stack13);
+ $stack6 = $stack6.append(")");
+ $stack13 = $stack6.toString();
+ $stack3.println($stack13);
+ goto label3;
+ label0:$stack3 = this#org.junit.internal.TextListener:getWriter();
+ $stack3.println();
+ $stack3 = this#org.junit.internal.TextListener:getWriter();
+ $stack3.println("FAILURES!!!");
+ $stack3 = this#org.junit.internal.TextListener:getWriter();
+ $stack6=new java.lang.StringBuilder;
+ $stack6#java.lang.StringBuilder();
+ $stack6 = $stack6.append("Tests run: ");
+ $stack8 = result.getRunCount();
+ $stack6 = $stack6.append($stack8);
+ $stack6 = $stack6.append(",  Failures: ");
+ $stack8 = result.getFailureCount();
+ $stack6 = $stack6.append($stack8);
+ $stack13 = $stack6.toString();
+ $stack3.println($stack13);
+ label3:$stack3 = this#org.junit.internal.TextListener:getWriter();
+ $stack3.println();
+ return;
+ } 
+

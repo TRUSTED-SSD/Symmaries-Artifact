@@ -1,0 +1,27 @@
+java.lang.String com.google.zxing.oned.rss.expanded.decoders.GeneralAppIdDecoder:decodeAllCodes(java.lang.StringBuilder buff,int initialPosition)
+{
+java.lang.String remaining;
+  com.google.zxing.oned.rss.expanded.decoders.DecodedInformation info;
+  boolean $stack10;
+  int $stack11;
+  remaining=null;
+ label0:info = this.decodeGeneralPurposeField(initialPosition,remaining);
+ remaining = info.getNewString();
+ remaining = com.google.zxing.oned.rss.expanded.decoders.FieldParser.parseFieldsInGeneralPurpose(remaining);
+ if (remaining==null) goto label1;
+ buff.append(remaining);
+ label1:$stack10 = info.isRemaining();
+ if ($stack10==0) goto label2;
+ $stack11 = info.getRemainingValue();
+ remaining = java.lang.String.valueOf($stack11);
+ goto label3;
+ label2:remaining=null;
+ label3:$stack11 = info.getNewPosition();
+ if (initialPosition!=$stack11) goto label4;
+ goto label5;
+ label4:initialPosition = info.getNewPosition();
+ goto label0;
+ label5:remaining = buff.toString();
+ return  remaining;
+ } 
+

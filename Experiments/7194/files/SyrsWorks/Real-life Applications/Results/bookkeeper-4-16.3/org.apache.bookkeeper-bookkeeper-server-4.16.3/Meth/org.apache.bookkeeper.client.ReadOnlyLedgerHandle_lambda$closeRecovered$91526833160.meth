@@ -1,0 +1,28 @@
+void org.apache.bookkeeper.client.ReadOnlyLedgerHandle:lambda$closeRecovered$9(org.apache.bookkeeper.versioning.Versioned result,java.lang.Throwable @exception)
+{
+java.lang.Object l3;
+  java.lang.Object $stack5;
+  java.util.NavigableMap $stack6;
+  org.slf4j.Logger $stack8;
+  java.lang.Throwable $stack9;
+  java.lang.Throwable exception;
+exception=@exception;
+$stack5=this.metadataLock;
+ l3=$stack5;
+ monitorenter $stack5;
+ label0:$stack6=this.newEnsemblesFromRecovery;
+ $stack6.clear();
+ monitorexit $stack5;
+ label1:goto label2;
+ label3:$stack9 = catch;
+ exception=$stack9;
+ monitorexit $stack5;
+ label4:throw $stack9;
+ label2:if (exception==null) goto label5;
+ $stack8=org.apache.bookkeeper.client.ReadOnlyLedgerHandle.LOG;
+ $stack8.error("When closeRecovered,failed on clearing newEnsemblesFromRecovery.",exception);
+ label5:return;
+ catch java.lang.Throwable: label0 - label1 : label3;
+catch java.lang.Throwable: label3 - label4 : label3;
+} 
+

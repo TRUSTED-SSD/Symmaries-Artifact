@@ -1,0 +1,12 @@
+void org.apache.rocketmq.broker.client.net.Broker2Client:checkProducerTransactionState (
+  java.lang.String @group, io.netty.channel.Channel channel,
+  org.apache.rocketmq.remoting.protocol.header.CheckTransactionStateRequestHeader
+    requestHeader,
+  org.apache.rocketmq.common.message.MessageExt messageExt) {
+  guard = tt;
+  ret(obj_level(@group)) = level(messageExt) ⊔ level(requestHeader) ⊔ obj_level(@group) ⊔ obj_level(messageExt) ⊔ obj_level(requestHeader);
+  ret(obj_level(channel)) = level(messageExt) ⊔ level(requestHeader) ⊔ obj_level(channel) ⊔ obj_level(messageExt) ⊔ obj_level(requestHeader);
+  ret(obj_level(messageExt)) = level(messageExt) ⊔ level(requestHeader) ⊔ obj_level(messageExt) ⊔ obj_level(requestHeader);
+  ret(obj_level(requestHeader)) = level(messageExt) ⊔ level(requestHeader) ⊔ obj_level(messageExt) ⊔ obj_level(requestHeader);
+  ret(obj_level(this)) = level(messageExt) ⊔ level(requestHeader) ⊔ obj_level(messageExt) ⊔ obj_level(requestHeader) ⊔ obj_level(this);
+}

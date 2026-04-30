@@ -1,0 +1,20 @@
+void org.apache.rocketmq.client.impl.consumer.RebalanceLitePullImpl:messageQueueChanged(java.lang.String topic,java.util.Set mqAll,java.util.Set mqDivided)
+{
+org.apache.rocketmq.client.consumer.MessageQueueListener messageQueueListener;
+  org.apache.rocketmq.client.impl.consumer.DefaultLitePullConsumerImpl $stack6;
+  org.apache.rocketmq.client.consumer.DefaultLitePullConsumer $stack7;
+  java.lang.Throwable $stack9;
+  org.apache.rocketmq.logging.org.slf4j.Logger $stack10;
+  $stack6=this.litePullConsumerImpl;
+ $stack7 = $stack6.getDefaultLitePullConsumer();
+ messageQueueListener = $stack7.getMessageQueueListener();
+ if (messageQueueListener==null) goto label0;
+ label1:messageQueueListener.messageQueueChanged(topic,mqAll,mqDivided);
+ label2:goto label0;
+ label3:$stack9 = catch;
+ $stack10=org.apache.rocketmq.client.impl.consumer.RebalanceImpl.log;
+ $stack10.error("messageQueueChanged exception",$stack9);
+ label0:return;
+ catch java.lang.Throwable: label1 - label2 : label3;
+} 
+

@@ -1,0 +1,54 @@
+boolean org.apache.rocketmq.broker.offset.ConsumerOrderInfoManager$OrderInfo:needBlock(long currentInvisibleTime)
+{
+int num;
+  int i;
+  long nextVisibleTime;
+  java.lang.Long time;
+  java.util.List $stack10;
+  boolean $stack12;
+  long $stack23;
+  java.util.Map $stack24;
+  byte $stack25;
+  java.lang.Object $stack29;
+  $stack10=this.offsetList;
+ if ($stack10==null) goto label0;
+ $stack10=this.offsetList;
+ $stack12 = $stack10.isEmpty();
+ if ($stack12==0) goto label1;
+ label0:return  0;
+ label1:$stack10=this.offsetList;
+ num = $stack10.size();
+ i=0;
+ time=this.invisibleTime;
+ if (time==null) goto label2;
+ time=this.invisibleTime;
+ nextVisibleTime = time.longValue();
+ $stack25=(nextVisibleTime cmp 0L);
+ if ($stack25>0) goto label3;
+ label2:time = java.lang.Long.valueOf(currentInvisibleTime);
+ this.invisibleTime=time;
+ label3:currentInvisibleTime = java.lang.System.currentTimeMillis();
+ label4:if (i>=num) goto label5;
+ $stack12 = this.isNotAck(i);
+ if ($stack12==0) goto label6;
+ nextVisibleTime=this.popTime;
+ time=this.invisibleTime;
+ $stack23 = time.longValue();
+ nextVisibleTime=(nextVisibleTime+$stack23);
+ $stack24=this.offsetNextVisibleTime;
+ if ($stack24==null) goto label7;
+ $stack24=this.offsetNextVisibleTime;
+ $stack23 = this.getQueueOffset(i);
+ time = java.lang.Long.valueOf($stack23);
+ $stack29 = $stack24.get((java.lang.Object)time);
+ time=(java.lang.Long) $stack29;
+ if (time==null) goto label7;
+ nextVisibleTime = time.longValue();
+ label7:$stack25=(currentInvisibleTime cmp nextVisibleTime);
+ if ($stack25>=0) goto label6;
+ return  1;
+ label6:i=(i+1);
+ goto label4;
+ label5:return  0;
+ } 
+

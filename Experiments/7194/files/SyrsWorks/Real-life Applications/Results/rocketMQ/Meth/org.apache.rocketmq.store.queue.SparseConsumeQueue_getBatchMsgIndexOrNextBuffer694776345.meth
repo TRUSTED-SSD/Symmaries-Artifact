@@ -1,0 +1,49 @@
+org.apache.rocketmq.store.SelectMappedBufferResult org.apache.rocketmq.store.queue.SparseConsumeQueue:getBatchMsgIndexOrNextBuffer(long msgOffset)
+{
+org.apache.rocketmq.store.logfile.MappedFile targetBcq;
+  org.apache.rocketmq.store.queue.BatchOffsetIndex minOffset;
+  org.apache.rocketmq.store.queue.BatchOffsetIndex maxOffset;
+  org.apache.rocketmq.store.SelectMappedBufferResult sbr;
+  java.nio.ByteBuffer byteBuffer;
+  int left;
+  int right;
+  org.apache.rocketmq.store.SelectMappedBufferResult l11;
+  java.lang.Throwable l12;
+  long $stack13;
+  byte $stack14;
+  org.apache.rocketmq.store.MappedFileQueue $stack27;
+  $stack13=this.minOffsetInQueue;
+ $stack14=(msgOffset cmp $stack13);
+ if ($stack14>0) goto label0;
+ $stack27=this.mappedFileQueue;
+ targetBcq = $stack27.getFirstMappedFile();
+ goto label1;
+ label0:targetBcq = this.searchFileByOffsetOrRight(msgOffset);
+ label1:if (targetBcq!=null) goto label2;
+ return  null;
+ label2:minOffset = this.getMinMsgOffset(targetBcq,(boolean)0,(boolean)0);
+ maxOffset = this.getMaxMsgOffset(targetBcq,(boolean)0,(boolean)0);
+ if (null==minOffset) goto label3;
+ if (null!=maxOffset) goto label4;
+ label3:return  null;
+ label4:targetBcq = minOffset.getMappedFile();
+ sbr = targetBcq.selectMappedBuffer(0);
+ label5:byteBuffer = sbr.getByteBuffer();
+ left = minOffset.getIndexPos();
+ right = maxOffset.getIndexPos();
+ left = org.apache.rocketmq.store.queue.BatchConsumeQueue.binarySearchRight(byteBuffer,left,right,46,28,msgOffset);
+ if (left==-1) goto label6;
+ targetBcq = minOffset.getMappedFile();
+ l11 = targetBcq.selectMappedBuffer(left);
+ label7:sbr.release();
+ return  l11;
+ label6:sbr.release();
+ goto label8;
+ label9:l12 = catch;
+ label10:sbr.release();
+ throw l12;
+ label8:return  null;
+ catch java.lang.Throwable: label5 - label7 : label9;
+catch java.lang.Throwable: label9 - label10 : label9;
+} 
+

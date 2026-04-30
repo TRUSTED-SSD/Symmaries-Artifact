@@ -1,0 +1,29 @@
+static boolean com.google.zxing.oned.rss.RSS14Reader:checkChecksum(com.google.zxing.oned.rss.Pair leftPair,com.google.zxing.oned.rss.Pair rightPair)
+{
+int checkValue;
+  int targetCheckValue;
+  com.google.zxing.oned.rss.FinderPattern $stack10;
+  int $stack14;
+  boolean $stack15;
+  checkValue = leftPair.getChecksumPortion();
+ targetCheckValue = rightPair.getChecksumPortion();
+ targetCheckValue=(16 * targetCheckValue);
+ checkValue=(checkValue+targetCheckValue);
+ checkValue=(checkValue%79);
+ $stack10 = leftPair.getFinderPattern();
+ targetCheckValue = $stack10.getValue();
+ targetCheckValue=(9 * targetCheckValue);
+ $stack10 = rightPair.getFinderPattern();
+ $stack14 = $stack10.getValue();
+ targetCheckValue=(targetCheckValue+$stack14);
+ if (targetCheckValue<=72) goto label0;
+ targetCheckValue=(targetCheckValue+-1);
+ label0:if (targetCheckValue<=8) goto label1;
+ targetCheckValue=(targetCheckValue+-1);
+ label1:if (checkValue!=targetCheckValue) goto label2;
+ $stack15=1;
+ goto label3;
+ label2:$stack15=0;
+ label3:return  $stack15;
+ } 
+

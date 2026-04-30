@@ -1,0 +1,34 @@
+static org.apache.bookkeeper.clients.impl.internal.api.HashStreamRanges org.apache.bookkeeper.clients.impl.internal.api.StreamRanges:ofHash(org.apache.bookkeeper.stream.proto.RangeKeyType keyType,java.util.NavigableMap ranges)
+{
+java.util.NavigableMap readOnlyRanges;
+  long maxRangeId;
+  java.util.Iterator l5;
+  org.apache.bookkeeper.stream.proto.RangeProperties props;
+  org.apache.bookkeeper.stream.proto.RangeKeyType $stack7;
+  java.util.Collection $stack9;
+  boolean $stack11;
+  org.apache.bookkeeper.clients.impl.internal.api.HashStreamRanges $stack12;
+  java.lang.Object $stack13;
+  long $stack14;
+  $stack7=org.apache.bookkeeper.stream.proto.RangeKeyType.HASH;
+ if ($stack7!=keyType) goto label0;
+ $stack11=1;
+ goto label1;
+ label0:$stack11=0;
+ label1:com.google.common.base.Preconditions.checkArgument($stack11,"Only hash routing is supported now. %s is not supported.",(java.lang.Object)keyType);
+ readOnlyRanges = java.util.Collections.unmodifiableNavigableMap(ranges);
+ maxRangeId=0L;
+ $stack9 = ranges.values();
+ l5 = $stack9.iterator();
+ label2:$stack11 = l5.hasNext();
+ if ($stack11==0) goto label3;
+ $stack13 = l5.next();
+ props=(org.apache.bookkeeper.stream.proto.RangeProperties) $stack13;
+ $stack14 = props.getRangeId();
+ maxRangeId = java.lang.Math.max(maxRangeId,$stack14);
+ goto label2;
+ label3:$stack12=new org.apache.bookkeeper.clients.impl.internal.api.HashStreamRanges;
+ $stack12#org.apache.bookkeeper.clients.impl.internal.api.HashStreamRanges(readOnlyRanges,maxRangeId);
+ return  $stack12;
+ } 
+

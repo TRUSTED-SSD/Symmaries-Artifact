@@ -1,0 +1,61 @@
+void org.greenrobot.eventbus.EventBus:postToSubscription(org.greenrobot.eventbus.Subscription subscription,java.lang.Object event,boolean isMainThread)
+{
+org.greenrobot.eventbus.SubscriberMethod $stack4;
+  org.greenrobot.eventbus.ThreadMode $stack5;
+  int[] $stack6;
+  int $stack7;
+  org.greenrobot.eventbus.AsyncPoster $stack9;
+  org.greenrobot.eventbus.BackgroundPoster $stack10;
+  org.greenrobot.eventbus.Poster $stack11;
+  java.lang.IllegalStateException $stack17;
+  java.lang.StringBuilder $stack18;
+  java.lang.String $stack23;
+  $stack6=org.greenrobot.eventbus.EventBus$2.$SwitchMap$org$greenrobot$eventbus$ThreadMode;
+ $stack4=subscription.subscriberMethod;
+ $stack5=$stack4.threadMode;
+ $stack7 = $stack5.ordinal();
+ $stack7=$stack6[$stack7];
+ switch [$stack7]
+if 0 goto label0;
+if 1 goto label1;
+if 2 goto label2;
+if 3 goto label3;
+if 4 goto label4;
+goto label5;
+ label0:this.invokeSubscriber(subscription,event);
+ goto label6;
+ label1:if (isMainThread==0) goto label7;
+ this.invokeSubscriber(subscription,event);
+ goto label6;
+ label7:$stack11=this.mainThreadPoster;
+ $stack11.enqueue(subscription,event);
+ goto label6;
+ label2:$stack11=this.mainThreadPoster;
+ if ($stack11==null) goto label8;
+ $stack11=this.mainThreadPoster;
+ $stack11.enqueue(subscription,event);
+ goto label6;
+ label8:this.invokeSubscriber(subscription,event);
+ goto label6;
+ label3:if (isMainThread==0) goto label9;
+ $stack10=this.backgroundPoster;
+ $stack10.enqueue(subscription,event);
+ goto label6;
+ label9:this.invokeSubscriber(subscription,event);
+ goto label6;
+ label4:$stack9=this.asyncPoster;
+ $stack9.enqueue(subscription,event);
+ goto label6;
+ label5:$stack17=new java.lang.IllegalStateException;
+ $stack18=new java.lang.StringBuilder;
+ $stack18#java.lang.StringBuilder();
+ $stack18 = $stack18.append("Unknown thread mode: ");
+ $stack4=subscription.subscriberMethod;
+ $stack5=$stack4.threadMode;
+ $stack18 = $stack18.append((java.lang.Object)$stack5);
+ $stack23 = $stack18.toString();
+ $stack17#java.lang.IllegalStateException($stack23);
+ throw $stack17;
+ label6:return;
+ } 
+

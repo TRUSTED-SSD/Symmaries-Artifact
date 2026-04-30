@@ -1,0 +1,47 @@
+void org.apache.bookkeeper.statelib.impl.rocksdb.checkpoint.CheckpointFile:copyToRemoteWithoutChecksum(org.apache.bookkeeper.statelib.api.checkpoint.CheckpointStore checkpointStore,java.lang.String @dbPrefix,java.lang.String checkpointId)
+{
+java.io.OutputStream os;
+  java.lang.Throwable l6;
+  java.lang.Throwable l7;
+  java.io.File $stack12;
+  java.lang.Throwable $stack14;
+  java.lang.Throwable $stack15;
+  java.lang.Throwable $stack16;
+  java.lang.String dbPrefix;
+dbPrefix=@dbPrefix;
+dbPrefix = this.getRemoteSstPath(dbPrefix,(boolean)0);
+ os = checkpointStore.openOutputStream(dbPrefix);
+ l6=null;
+ label0:$stack12=this.file;
+ com.google.common.io.Files.copy($stack12,os);
+ label1:if (os==null) goto label2;
+ if (null==null) goto label3;
+ label4:os.close();
+ label5:goto label2;
+ label6:l7 = catch;
+ l6.addSuppressed(l7);
+ goto label2;
+ label3:os.close();
+ goto label2;
+ label7:$stack14 = catch;
+ l7=$stack14;
+ l6=$stack14;
+ throw $stack14;
+ label8:$stack16 = catch;
+ l7=$stack16;
+ label9:if (os==null) goto label10;
+ if (l6==null) goto label11;
+ label12:os.close();
+ label13:goto label10;
+ label14:$stack15 = catch;
+ l6.addSuppressed($stack15);
+ goto label10;
+ label11:os.close();
+ label10:throw $stack16;
+ label2:return;
+ catch java.lang.Throwable: label4 - label5 : label6;
+catch java.lang.Throwable: label0 - label1 : label7;
+catch java.lang.Throwable: label12 - label13 : label14;
+catch java.lang.Throwable: label7 - label9 : label8;
+} 
+

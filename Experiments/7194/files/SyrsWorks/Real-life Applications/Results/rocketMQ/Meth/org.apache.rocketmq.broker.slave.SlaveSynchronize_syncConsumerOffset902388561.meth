@@ -1,0 +1,47 @@
+void org.apache.rocketmq.broker.slave.SlaveSynchronize:syncConsumerOffset()
+{
+java.lang.String masterAddrBak;
+  org.apache.rocketmq.remoting.protocol.body.ConsumerOffsetSerializeWrapper offsetWrapper;
+  org.apache.rocketmq.broker.BrokerController $stack3;
+  java.lang.String $stack4;
+  boolean $stack5;
+  org.apache.rocketmq.broker.out.BrokerOuterAPI $stack7;
+  org.apache.rocketmq.broker.offset.ConsumerOffsetManager $stack10;
+  java.util.concurrent.ConcurrentMap $stack11;
+  java.util.concurrent.ConcurrentMap $stack12;
+  org.apache.rocketmq.remoting.protocol.DataVersion $stack15;
+  org.apache.rocketmq.remoting.protocol.DataVersion $stack16;
+  org.apache.rocketmq.logging.org.slf4j.Logger $stack19;
+  java.lang.Exception $stack20;
+  masterAddrBak=this.masterAddr;
+ if (masterAddrBak==null) goto label0;
+ $stack3=this.brokerController;
+ $stack4 = $stack3.getBrokerAddr();
+ $stack5 = masterAddrBak.equals((java.lang.Object)$stack4);
+ if ($stack5!=0) goto label0;
+ label1:$stack3=this.brokerController;
+ $stack7 = $stack3.getBrokerOuterAPI();
+ offsetWrapper = $stack7.getAllConsumerOffset(masterAddrBak);
+ $stack3=this.brokerController;
+ $stack10 = $stack3.getConsumerOffsetManager();
+ $stack11 = $stack10.getOffsetTable();
+ $stack12 = offsetWrapper.getOffsetTable();
+ $stack11.putAll((java.util.Map)$stack12);
+ $stack3=this.brokerController;
+ $stack10 = $stack3.getConsumerOffsetManager();
+ $stack15 = $stack10.getDataVersion();
+ $stack16 = offsetWrapper.getDataVersion();
+ $stack15.assignNewOne($stack16);
+ $stack3=this.brokerController;
+ $stack10 = $stack3.getConsumerOffsetManager();
+ $stack10.persist();
+ $stack19=org.apache.rocketmq.broker.slave.SlaveSynchronize.LOGGER;
+ $stack19.info("Update slave consumer offset from master, {}",(java.lang.Object)masterAddrBak);
+ label2:goto label0;
+ label3:$stack20 = catch;
+ $stack19=org.apache.rocketmq.broker.slave.SlaveSynchronize.LOGGER;
+ $stack19.error("SyncConsumerOffset Exception, {}",(java.lang.Object)masterAddrBak,(java.lang.Object)$stack20);
+ label0:return;
+ catch java.lang.Exception: label1 - label2 : label3;
+} 
+

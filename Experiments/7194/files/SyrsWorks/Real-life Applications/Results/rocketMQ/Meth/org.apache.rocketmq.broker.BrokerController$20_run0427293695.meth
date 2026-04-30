@@ -1,0 +1,44 @@
+void org.apache.rocketmq.broker.BrokerController$20:run0()
+{
+long $stack2;
+  org.apache.rocketmq.broker.BrokerController $stack3;
+  long $stack4;
+  byte $stack5;
+  boolean $stack7;
+  org.apache.rocketmq.common.BrokerConfig $stack9;
+  org.apache.rocketmq.broker.BrokerController $stack10;
+  org.apache.rocketmq.logging.org.slf4j.Logger $stack14;
+  java.lang.Long $stack19;
+  java.lang.Throwable $stack20;
+  label0:$stack2 = java.lang.System.currentTimeMillis();
+ $stack3=this.this$0;
+ $stack4=$stack3.shouldStartTime;
+ $stack5=($stack2 cmp $stack4);
+ if ($stack5>=0) goto label1;
+ $stack14=org.apache.rocketmq.broker.BrokerController.LOG;
+ $stack3=this.this$0;
+ $stack2=$stack3.shouldStartTime;
+ $stack19 = java.lang.Long.valueOf($stack2);
+ $stack14.info("Register to namesrv after {}",(java.lang.Object)$stack19);
+ label2:return;
+ label1:$stack3=this.this$0;
+ $stack7=$stack3.isIsolated;
+ if ($stack7==0) goto label3;
+ $stack14=org.apache.rocketmq.broker.BrokerController.LOG;
+ $stack14.info("Skip register for broker is isolated");
+ label4:return;
+ label3:$stack10=this.this$0;
+ $stack3=this.this$0;
+ $stack9=$stack3.brokerConfig;
+ $stack7 = $stack9.isForceRegister();
+ $stack10.registerBrokerAll((boolean)1,(boolean)0,$stack7);
+ label5:goto label6;
+ label7:$stack20 = catch;
+ $stack14=org.apache.rocketmq.broker.BrokerController.LOG;
+ $stack14.error("registerBrokerAll Exception",$stack20);
+ label6:return;
+ catch java.lang.Throwable: label0 - label2 : label7;
+catch java.lang.Throwable: label1 - label4 : label7;
+catch java.lang.Throwable: label3 - label5 : label7;
+} 
+

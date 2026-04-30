@@ -1,0 +1,33 @@
+static void org.apache.rocketmq.tools.admin.MQAdminUtils:updateTopicConfigMappingAll(java.util.Map brokerConfigMap,org.apache.rocketmq.tools.admin.DefaultMQAdminExt defaultMQAdminExt,boolean force)
+{
+org.apache.rocketmq.remoting.rpc.ClientMetadata clientMetadata;
+  java.util.Iterator l4;
+  java.util.Map$Entry entry;
+  java.lang.String broker;
+  org.apache.rocketmq.remoting.protocol.statictopic.TopicConfigAndQueueMapping configMapping;
+  java.util.Set $stack10;
+  boolean $stack13;
+  java.lang.Object $stack14;
+  java.lang.String $stack18;
+  org.apache.rocketmq.remoting.protocol.statictopic.TopicQueueMappingDetail $stack19;
+  clientMetadata = org.apache.rocketmq.tools.admin.MQAdminUtils.getBrokerMetadata(defaultMQAdminExt);
+ $stack10 = brokerConfigMap.keySet();
+ org.apache.rocketmq.tools.admin.MQAdminUtils.checkIfMasterAlive((java.util.Collection)$stack10,defaultMQAdminExt,clientMetadata);
+ $stack10 = brokerConfigMap.entrySet();
+ l4 = $stack10.iterator();
+ label0:$stack13 = l4.hasNext();
+ if ($stack13==0) goto label1;
+ $stack14 = l4.next();
+ entry=(java.util.Map$Entry) $stack14;
+ $stack14 = entry.getKey();
+ broker=(java.lang.String) $stack14;
+ broker = clientMetadata.findMasterBrokerAddr(broker);
+ $stack14 = entry.getValue();
+ configMapping=(org.apache.rocketmq.remoting.protocol.statictopic.TopicConfigAndQueueMapping) $stack14;
+ $stack18 = defaultMQAdminExt.getCreateTopicKey();
+ $stack19 = configMapping.getMappingDetail();
+ defaultMQAdminExt.createStaticTopic(broker,$stack18,(org.apache.rocketmq.common.TopicConfig)configMapping,$stack19,force);
+ goto label0;
+ label1:return;
+ } 
+

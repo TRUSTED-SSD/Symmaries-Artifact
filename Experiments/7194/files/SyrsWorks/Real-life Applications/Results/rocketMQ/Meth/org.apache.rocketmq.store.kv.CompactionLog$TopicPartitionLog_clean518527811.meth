@@ -1,0 +1,41 @@
+void org.apache.rocketmq.store.kv.CompactionLog$TopicPartitionLog:clean(org.apache.rocketmq.store.MappedFileQueue mappedFileQueue)
+{
+java.util.Iterator l2;
+  org.apache.rocketmq.store.logfile.MappedFile mf;
+  java.util.List $stack4;
+  boolean $stack6;
+  java.lang.Object $stack7;
+  java.io.File $stack8;
+  org.apache.rocketmq.logging.org.slf4j.Logger $stack11;
+  java.lang.String $stack13;
+  java.lang.String $stack14;
+  java.io.IOException $stack15;
+  java.lang.StringBuilder $stack16;
+  $stack4 = mappedFileQueue.getMappedFiles();
+ l2 = $stack4.iterator();
+ label0:$stack6 = l2.hasNext();
+ if ($stack6==0) goto label1;
+ $stack7 = l2.next();
+ mf=(org.apache.rocketmq.store.logfile.MappedFile) $stack7;
+ $stack8 = mf.getFile();
+ $stack6 = $stack8.exists();
+ if ($stack6==0) goto label2;
+ $stack11 = org.apache.rocketmq.store.kv.CompactionLog.access$100();
+ $stack13 = mappedFileQueue.getStorePath();
+ $stack14 = mf.getFileName();
+ $stack11.error("directory {} with {} not empty.",(java.lang.Object)$stack13,(java.lang.Object)$stack14);
+ $stack15=new java.io.IOException;
+ $stack16=new java.lang.StringBuilder;
+ $stack16#java.lang.StringBuilder();
+ $stack16 = $stack16.append("directory ");
+ $stack13 = mappedFileQueue.getStorePath();
+ $stack16 = $stack16.append($stack13);
+ $stack16 = $stack16.append(" not empty.");
+ $stack13 = $stack16.toString();
+ $stack15#java.io.IOException($stack13);
+ throw $stack15;
+ label2:goto label0;
+ label1:mappedFileQueue.destroy();
+ return;
+ } 
+

@@ -1,0 +1,58 @@
+void org.apache.bookkeeper.meta.MSLedgerManagerFactory$MsLedgerManager$7$1:processResult(int rc,java.lang.String @path,java.lang.Object @ctx)
+{
+org.apache.bookkeeper.meta.MSLedgerManagerFactory$MsLedgerManager$7 $stack4;
+  int $stack5;
+  org.apache.zookeeper.AsyncCallback$VoidCallback $stack16;
+  org.apache.bookkeeper.proto.BookkeeperInternalCallbacks$Processor $stack17;
+  org.apache.bookkeeper.metastore.MetastoreCursor $stack18;
+  org.apache.bookkeeper.meta.MSLedgerManagerFactory$MsLedgerManager $stack19;
+  org.slf4j.Logger $stack20;
+  java.lang.StringBuilder $stack21;
+  long $stack23;
+  java.lang.Long $stack24;
+  java.lang.Long $stack27;
+  java.lang.String path;
+java.lang.Object ctx;
+ctx=@ctx;
+path=@path;
+$stack4=this.this$1;
+ $stack5=$stack4.val$successRc;
+ if ($stack5==rc) goto label0;
+ $stack20 = org.apache.bookkeeper.meta.MSLedgerManagerFactory.access$000();
+ $stack21=new java.lang.StringBuilder;
+ $stack21#java.lang.StringBuilder();
+ $stack21 = $stack21.append("Failed when processing range ");
+ $stack23=this.val$startLedger;
+ $stack24 = java.lang.Long.valueOf($stack23);
+ $stack23=this.val$endLedger;
+ $stack27 = java.lang.Long.valueOf($stack23);
+ path = org.apache.bookkeeper.meta.MSLedgerManagerFactory.rangeToString($stack24,(boolean)1,$stack27,(boolean)1);
+ $stack21 = $stack21.append(path);
+ path = $stack21.toString();
+ $stack20.error(path);
+ $stack4=this.this$1;
+ $stack16=$stack4.val$finalCb;
+ $stack4=this.this$1;
+ rc=$stack4.val$failureRc;
+ $stack4=this.this$1;
+ ctx=$stack4.val$context;
+ $stack16.processResult(rc,null,ctx);
+ return;
+ label0:$stack4=this.this$1;
+ $stack19=$stack4.this$0;
+ $stack4=this.this$1;
+ $stack18=$stack4.val$cursor;
+ $stack4=this.this$1;
+ $stack17=$stack4.val$processor;
+ $stack4=this.this$1;
+ $stack16=$stack4.val$finalCb;
+ $stack4=this.this$1;
+ ctx=$stack4.val$context;
+ $stack4=this.this$1;
+ $stack5=$stack4.val$successRc;
+ $stack4=this.this$1;
+ rc=$stack4.val$failureRc;
+ $stack19.asyncProcessLedgers($stack18,$stack17,$stack16,ctx,$stack5,rc);
+ return;
+ } 
+

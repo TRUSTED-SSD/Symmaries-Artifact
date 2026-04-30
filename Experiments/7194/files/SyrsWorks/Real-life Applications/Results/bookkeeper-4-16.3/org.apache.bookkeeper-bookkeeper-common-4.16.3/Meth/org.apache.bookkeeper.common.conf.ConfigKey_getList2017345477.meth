@@ -1,0 +1,32 @@
+java.util.List org.apache.bookkeeper.common.conf.ConfigKey:getList(org.apache.commons.configuration.Configuration conf)
+{
+java.util.List list;
+  org.apache.bookkeeper.common.conf.Type $stack3;
+  org.apache.bookkeeper.common.conf.Type $stack4;
+  java.lang.StringBuilder $stack5;
+  boolean $stack6;
+  java.lang.String $stack8;
+  java.lang.Object $stack12;
+  $stack3 = this.type();
+ $stack4=org.apache.bookkeeper.common.conf.Type.LIST;
+ if ($stack3!=$stack4) goto label0;
+ $stack6=1;
+ goto label1;
+ label0:$stack6=0;
+ label1:$stack5=new java.lang.StringBuilder;
+ $stack5#java.lang.StringBuilder();
+ $stack5 = $stack5.append("\'");
+ $stack8 = this.name();
+ $stack5 = $stack5.append($stack8);
+ $stack5 = $stack5.append("\' is NOT a LIST setting");
+ $stack8 = $stack5.toString();
+ com.google.common.base.Preconditions.checkArgument($stack6,(java.lang.Object)$stack8);
+ $stack12 = this.defaultValue();
+ list=(java.util.List) $stack12;
+ if (null!=list) goto label2;
+ list = java.util.Collections.emptyList();
+ label2:$stack8 = this.name();
+ list = conf.getList($stack8,list);
+ return  list;
+ } 
+

@@ -1,0 +1,23 @@
+static java.io.File org.apache.bookkeeper.bookie.DefaultEntryLogger:compactedLogFileFromCompacting(java.io.File @compactionLogFile,long compactingLogId)
+{
+java.io.File dir;
+  java.lang.String filename;
+  java.lang.String newSuffix;
+  java.lang.StringBuilder $stack9;
+  java.io.File compactionLogFile;
+compactionLogFile=@compactionLogFile;
+dir = compactionLogFile.getParentFile();
+ filename = compactionLogFile.getName();
+ $stack9=new java.lang.StringBuilder;
+ $stack9#java.lang.StringBuilder();
+ $stack9 = $stack9.append(".log.");
+ newSuffix = org.apache.bookkeeper.bookie.DefaultEntryLogger.logId2HexString(compactingLogId);
+ $stack9 = $stack9.append(newSuffix);
+ $stack9 = $stack9.append(".compacted");
+ newSuffix = $stack9.toString();
+ filename = filename.replace((java.lang.CharSequence)".log.compacting",(java.lang.CharSequence)newSuffix);
+ compactionLogFile=new java.io.File;
+ compactionLogFile#java.io.File(dir,filename);
+ return  compactionLogFile;
+ } 
+

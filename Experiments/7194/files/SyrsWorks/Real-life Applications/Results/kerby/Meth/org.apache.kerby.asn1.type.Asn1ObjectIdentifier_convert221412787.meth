@@ -1,0 +1,26 @@
+java.math.BigInteger org.apache.kerby.asn1.type.Asn1ObjectIdentifier:convert(byte[] bytes)
+{
+java.math.BigInteger value;
+  int i;
+  byte $stack4;
+  long $stack6;
+  int $stack8;
+  java.math.BigInteger $stack13;
+  $stack4=bytes[0];
+ $stack4=($stack4 & 127);
+ $stack6=(long) $stack4;
+ value = java.math.BigInteger.valueOf($stack6);
+ i=1;
+ label0:$stack8=#bytes;
+ if (i>=$stack8) goto label1;
+ value = value.shiftLeft(7);
+ $stack4=bytes[i];
+ $stack4=($stack4 & 127);
+ $stack6=(long) $stack4;
+ $stack13 = java.math.BigInteger.valueOf($stack6);
+ value = value.or($stack13);
+ i=(i+1);
+ goto label0;
+ label1:return  value;
+ } 
+

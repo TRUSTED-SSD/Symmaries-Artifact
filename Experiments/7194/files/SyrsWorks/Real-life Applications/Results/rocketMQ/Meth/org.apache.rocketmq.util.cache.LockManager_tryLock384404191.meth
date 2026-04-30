@@ -1,0 +1,23 @@
+static boolean org.apache.rocketmq.util.cache.LockManager:tryLock(java.lang.String key,long lockTime)
+{
+java.util.concurrent.atomic.AtomicBoolean v;
+  org.apache.rocketmq.util.cache.ExpiredLocalCache $stack4;
+  java.lang.Object $stack5;
+  boolean $stack6;
+  $stack4=org.apache.rocketmq.util.cache.LockManager.expiredLocalCache;
+ $stack5 = $stack4.get((java.lang.Object)key);
+ v=(java.util.concurrent.atomic.AtomicBoolean) $stack5;
+ if (v!=null) goto label0;
+ $stack4=org.apache.rocketmq.util.cache.LockManager.expiredLocalCache;
+ v=new java.util.concurrent.atomic.AtomicBoolean;
+ v#java.util.concurrent.atomic.AtomicBoolean(0);
+ $stack5 = $stack4.putIfAbsent((java.lang.Object)key,(java.lang.Object)v,lockTime);
+ if ($stack5!=null) goto label1;
+ $stack6=1;
+ goto label2;
+ label1:$stack6=0;
+ label2:return  $stack6;
+ label0:$stack6 = v.compareAndSet((boolean)1,(boolean)0);
+ return  $stack6;
+ } 
+

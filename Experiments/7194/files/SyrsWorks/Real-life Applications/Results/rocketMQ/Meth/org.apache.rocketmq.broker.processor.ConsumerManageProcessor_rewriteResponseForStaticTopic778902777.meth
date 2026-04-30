@@ -1,0 +1,30 @@
+org.apache.rocketmq.remoting.protocol.RemotingCommand org.apache.rocketmq.broker.processor.ConsumerManageProcessor:rewriteResponseForStaticTopic(org.apache.rocketmq.remoting.protocol.header.QueryConsumerOffsetRequestHeader requestHeader,org.apache.rocketmq.remoting.protocol.header.QueryConsumerOffsetResponseHeader responseHeader,org.apache.rocketmq.remoting.protocol.statictopic.TopicQueueMappingContext mappingContext,int code)
+{
+org.apache.rocketmq.remoting.protocol.statictopic.LogicQueueMappingItem item;
+  org.apache.rocketmq.remoting.protocol.statictopic.TopicQueueMappingDetail $stack6;
+  java.lang.Long $stack8;
+  long $stack9;
+  java.lang.Throwable $stack12;
+  java.lang.String $stack14;
+  org.apache.rocketmq.remoting.protocol.RemotingCommand $stack15;
+  label0:$stack6 = mappingContext.getMappingDetail();
+ if ($stack6!=null) goto label1;
+ label2:return  null;
+ label1:if (code==0) goto label3;
+ label4:return  null;
+ label3:item = mappingContext.getCurrentItem();
+ $stack8 = responseHeader.getOffset();
+ $stack9 = $stack8.longValue();
+ $stack9 = item.computeStaticQueueOffsetStrictly($stack9);
+ $stack8 = java.lang.Long.valueOf($stack9);
+ responseHeader.setOffset($stack8);
+ label5:return  null;
+ label6:$stack12 = catch;
+ $stack14 = $stack12.getMessage();
+ $stack15 = org.apache.rocketmq.remoting.protocol.RemotingCommand.buildErrorResponse(1,$stack14);
+ return  $stack15;
+ catch java.lang.Throwable: label0 - label2 : label6;
+catch java.lang.Throwable: label1 - label4 : label6;
+catch java.lang.Throwable: label3 - label5 : label6;
+} 
+

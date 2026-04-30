@@ -1,0 +1,29 @@
+java.lang.Object org.apache.bookkeeper.clients.impl.kv.IncrementRequestProcessor:processResponse(org.apache.bookkeeper.stream.proto.kv.rpc.IncrementResponse response)
+{
+org.apache.bookkeeper.stream.proto.storage.StatusCode $stack2;
+  org.apache.bookkeeper.stream.proto.kv.rpc.ResponseHeader $stack3;
+  org.apache.bookkeeper.stream.proto.storage.StatusCode $stack4;
+  org.apache.bookkeeper.clients.exceptions.InternalServerException $stack5;
+  java.lang.StringBuilder $stack6;
+  java.lang.String $stack11;
+  java.util.function.Function $stack12;
+  java.lang.Object $stack13;
+  $stack2=org.apache.bookkeeper.stream.proto.storage.StatusCode.SUCCESS;
+ $stack3 = response.getHeader();
+ $stack4 = $stack3.getCode();
+ if ($stack2!=$stack4) goto label0;
+ $stack12=this.responseFunc;
+ $stack13 = $stack12.apply((java.lang.Object)response);
+ return  $stack13;
+ label0:$stack5=new org.apache.bookkeeper.clients.exceptions.InternalServerException;
+ $stack6=new java.lang.StringBuilder;
+ $stack6#java.lang.StringBuilder();
+ $stack6 = $stack6.append("Encountered internal server exception : code = ");
+ $stack3 = response.getHeader();
+ $stack2 = $stack3.getCode();
+ $stack6 = $stack6.append((java.lang.Object)$stack2);
+ $stack11 = $stack6.toString();
+ $stack5#org.apache.bookkeeper.clients.exceptions.InternalServerException($stack11);
+ throw $stack5;
+ } 
+

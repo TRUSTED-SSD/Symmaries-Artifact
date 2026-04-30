@@ -1,0 +1,20 @@
+void org.apache.rocketmq.proxy.service.mqclient.MQClientAPIExt:lambda$sendMessageAsync$2(java.util.concurrent.CompletableFuture future,java.lang.String brokerName,org.apache.rocketmq.common.message.MessageBatch msgBatch,java.lang.String brokerAddr,org.apache.rocketmq.remoting.netty.ResponseFuture responseFuture)
+{
+org.apache.rocketmq.remoting.protocol.RemotingCommand response;
+  org.apache.rocketmq.client.exception.MQClientException $stack9;
+  org.apache.rocketmq.client.producer.SendResult $stack11;
+  java.lang.Exception $stack13;
+  response = responseFuture.getResponseCommand();
+ if (response==null) goto label0;
+ label1:$stack11 = this.processSendResponse(brokerName,(org.apache.rocketmq.common.message.Message)msgBatch,response,brokerAddr);
+ future.complete((java.lang.Object)$stack11);
+ label2:goto label3;
+ label4:$stack13 = catch;
+ future.completeExceptionally((java.lang.Throwable)$stack13);
+ goto label3;
+ label0:$stack9 = org.apache.rocketmq.proxy.service.mqclient.MQClientAPIExt.processNullResponseErr(responseFuture);
+ future.completeExceptionally((java.lang.Throwable)$stack9);
+ label3:return;
+ catch java.lang.Exception: label1 - label2 : label4;
+} 
+

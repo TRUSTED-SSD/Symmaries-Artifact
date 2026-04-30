@@ -1,0 +1,18 @@
+static org.keycloak.representations.JsonWebToken org.keycloak.util.TokenUtil:jweDirectVerifyAndDecode(java.security.Key aesKey,java.security.Key hmacKey,java.lang.String jweStr,java.lang.Class expectedClass)
+{
+byte[] contentBytes;
+  java.lang.Object $stack7;
+  org.keycloak.representations.JsonWebToken $stack8;
+  java.io.IOException $stack9;
+  org.keycloak.jose.jwe.JWEException $stack10;
+  contentBytes = org.keycloak.util.TokenUtil.jweDirectVerifyAndDecode(aesKey,hmacKey,jweStr);
+ label0:$stack7 = org.keycloak.util.JsonSerialization.readValue(contentBytes,expectedClass);
+ $stack8=(org.keycloak.representations.JsonWebToken) $stack7;
+ label1:return  $stack8;
+ label2:$stack9 = catch;
+ $stack10=new org.keycloak.jose.jwe.JWEException;
+ $stack10#org.keycloak.jose.jwe.JWEException((java.lang.Throwable)$stack9);
+ throw $stack10;
+ catch java.io.IOException: label0 - label1 : label2;
+} 
+

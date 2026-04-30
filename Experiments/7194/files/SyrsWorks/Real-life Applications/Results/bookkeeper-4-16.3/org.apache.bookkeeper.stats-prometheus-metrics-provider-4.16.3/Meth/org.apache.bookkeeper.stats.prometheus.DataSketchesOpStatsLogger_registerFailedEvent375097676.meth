@@ -1,0 +1,40 @@
+void org.apache.bookkeeper.stats.prometheus.DataSketchesOpStatsLogger:registerFailedEvent(long eventLatency,java.util.concurrent.TimeUnit unit)
+{
+double valueMillis;
+  org.apache.bookkeeper.stats.prometheus.DataSketchesOpStatsLogger$LocalData localData;
+  java.lang.Throwable l9;
+  java.util.concurrent.atomic.LongAdder $stack12;
+  org.apache.bookkeeper.stats.prometheus.DataSketchesOpStatsLogger$ThreadLocalAccessor $stack15;
+  io.netty.util.concurrent.FastThreadLocal $stack16;
+  java.lang.Object $stack17;
+  java.util.concurrent.locks.StampedLock $stack18;
+  com.yahoo.sketches.quantiles.DoublesSketch $stack20;
+  eventLatency = unit.toMicros(eventLatency);
+ valueMillis=(double) eventLatency;
+ valueMillis=(valueMillis/1000.0);
+ $stack12=this.failCountAdder;
+ $stack12.increment();
+ $stack12=this.failSumAdder;
+ eventLatency=(long) valueMillis;
+ $stack12.add(eventLatency);
+ $stack15=this.current;
+ $stack16 = org.apache.bookkeeper.stats.prometheus.DataSketchesOpStatsLogger$ThreadLocalAccessor.access$100($stack15);
+ $stack17 = $stack16.get();
+ localData=(org.apache.bookkeeper.stats.prometheus.DataSketchesOpStatsLogger$LocalData) $stack17;
+ $stack18 = org.apache.bookkeeper.stats.prometheus.DataSketchesOpStatsLogger$LocalData.access$200(localData);
+ eventLatency = $stack18.readLock();
+dummyClass.highSourceMut(eventLatency);
+ label0:$stack20 = org.apache.bookkeeper.stats.prometheus.DataSketchesOpStatsLogger$LocalData.access$300(localData);
+ $stack20.update(valueMillis);
+ label1:$stack18 = org.apache.bookkeeper.stats.prometheus.DataSketchesOpStatsLogger$LocalData.access$200(localData);
+ $stack18.unlockRead(eventLatency);
+ goto label2;
+ label3:l9 = catch;
+ label4:$stack18 = org.apache.bookkeeper.stats.prometheus.DataSketchesOpStatsLogger$LocalData.access$200(localData);
+ $stack18.unlockRead(eventLatency);
+ throw l9;
+ label2:return;
+ catch java.lang.Throwable: label0 - label1 : label3;
+catch java.lang.Throwable: label3 - label4 : label3;
+} 
+

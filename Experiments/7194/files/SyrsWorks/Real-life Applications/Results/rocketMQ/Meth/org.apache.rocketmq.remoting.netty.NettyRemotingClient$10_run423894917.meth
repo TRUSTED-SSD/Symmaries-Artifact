@@ -1,0 +1,38 @@
+void org.apache.rocketmq.remoting.netty.NettyRemotingClient$10:run()
+{
+io.netty.channel.Channel channel;
+  java.lang.Boolean value;
+  java.lang.String $stack3;
+  org.apache.rocketmq.remoting.netty.NettyRemotingClient $stack4;
+  java.util.concurrent.ConcurrentMap $stack7;
+  java.lang.Object $stack9;
+  org.apache.rocketmq.logging.org.slf4j.Logger $stack10;
+  java.lang.Exception $stack17;
+  label0:$stack4=this.this$0;
+ $stack3=this.val$namesrvAddr;
+ channel = org.apache.rocketmq.remoting.netty.NettyRemotingClient.access$600($stack4,$stack3);
+ if (channel==null) goto label1;
+ $stack4=this.this$0;
+ $stack7 = org.apache.rocketmq.remoting.netty.NettyRemotingClient.access$700($stack4);
+ $stack3=this.val$namesrvAddr;
+ value = java.lang.Boolean.valueOf((boolean)1);
+ $stack7.putIfAbsent((java.lang.Object)$stack3,(java.lang.Object)value);
+ goto label2;
+ label1:$stack4=this.this$0;
+ $stack7 = org.apache.rocketmq.remoting.netty.NettyRemotingClient.access$700($stack4);
+ $stack3=this.val$namesrvAddr;
+ $stack9 = $stack7.remove((java.lang.Object)$stack3);
+ value=(java.lang.Boolean) $stack9;
+ if (value==null) goto label2;
+ $stack10 = org.apache.rocketmq.remoting.netty.NettyRemotingClient.access$200();
+ $stack3=this.val$namesrvAddr;
+ $stack10.warn("scanAvailableNameSrv remove unconnected address {}",(java.lang.Object)$stack3);
+ label2:goto label3;
+ label4:$stack17 = catch;
+ $stack10 = org.apache.rocketmq.remoting.netty.NettyRemotingClient.access$200();
+ $stack3=this.val$namesrvAddr;
+ $stack10.error("scanAvailableNameSrv get channel of {} failed, ",(java.lang.Object)$stack3,(java.lang.Object)$stack17);
+ label3:return;
+ catch java.lang.Exception: label0 - label2 : label4;
+} 
+

@@ -1,0 +1,24 @@
+boolean org.apache.bookkeeper.verifier.BookkeeperVerifier:checkReturn(long ledgerID,int rc)
+{
+java.lang.String error;
+  java.lang.Object[] $stack5;
+  java.lang.Integer $stack8;
+  java.lang.Long $stack10;
+  java.io.PrintStream $stack12;
+  org.apache.bookkeeper.client.BKException $stack13;
+  if (0==rc) goto label0;
+ $stack5=new java.lang.Object[2];
+ $stack8 = java.lang.Integer.valueOf(rc);
+ $stack5[0]=$stack8;
+ $stack10 = java.lang.Long.valueOf(ledgerID);
+ $stack5[1]=$stack10;
+ error = java.lang.String.format("Got error %d on ledger %d",$stack5);
+ $stack12=java.lang.System.out;
+ dummyClass.lowSink(error);
+$stack12.println(error);
+ $stack13 = org.apache.bookkeeper.client.BKException.create(rc);
+ this#org.apache.bookkeeper.verifier.BookkeeperVerifier:propagateExceptionToMain((java.lang.Exception)$stack13);
+ return  1;
+ label0:return  0;
+ } 
+

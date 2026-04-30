@@ -1,0 +1,9 @@
+boolean org.apache.rocketmq.broker.transaction.queue.TransactionalMessageBridge:writeOp (
+  java.lang.Integer queueId,
+  org.apache.rocketmq.common.message.Message message) {
+  guard = tt;
+  ret(level()) = ⊥;
+  ret(obj_level(message)) = level(message) ⊔ level(queueId) ⊔ level(this) ⊔ obj_level(message) ⊔ obj_level(queueId) ⊔ obj_level(this);
+  ret(obj_level(queueId)) = level(message) ⊔ level(queueId) ⊔ level(this) ⊔ obj_level(message) ⊔ obj_level(queueId) ⊔ obj_level(this);
+  ret(obj_level(this)) = level(message) ⊔ level(queueId) ⊔ level(this) ⊔ obj_level(message) ⊔ obj_level(queueId) ⊔ obj_level(this);
+}

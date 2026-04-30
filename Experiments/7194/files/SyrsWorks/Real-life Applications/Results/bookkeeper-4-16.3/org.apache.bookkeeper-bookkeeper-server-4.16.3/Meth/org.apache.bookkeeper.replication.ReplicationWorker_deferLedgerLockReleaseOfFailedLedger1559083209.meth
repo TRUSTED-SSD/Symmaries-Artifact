@@ -1,0 +1,44 @@
+void org.apache.bookkeeper.replication.ReplicationWorker:deferLedgerLockReleaseOfFailedLedger(long ledgerId)
+{
+int numOfTimesFailedSoFar;
+  long delayOfLedgerLockReleaseInMSecs;
+  com.google.common.cache.LoadingCache $stack7;
+  java.lang.Long $stack8;
+  java.lang.Object $stack9;
+  java.util.concurrent.atomic.AtomicInteger $stack10;
+  double $stack12;
+  int $stack15;
+  long $stack16;
+  java.lang.Object[] $stack17;
+  org.slf4j.Logger $stack18;
+  java.lang.Integer $stack23;
+  org.apache.bookkeeper.replication.ReplicationWorker$4 $stack26;
+  $stack7=this.replicationFailedLedgers;
+ $stack8 = java.lang.Long.valueOf(ledgerId);
+ $stack9 = $stack7.getUnchecked((java.lang.Object)$stack8);
+ $stack10=(java.util.concurrent.atomic.AtomicInteger) $stack9;
+ numOfTimesFailedSoFar = $stack10.getAndIncrement();
+ if (numOfTimesFailedSoFar<5) goto label0;
+ delayOfLedgerLockReleaseInMSecs=this.lockReleaseOfFailedLedgerGracePeriod;
+ goto label1;
+ label0:delayOfLedgerLockReleaseInMSecs=this.baseBackoffForLockReleaseOfFailedLedger;
+ $stack12=(double) numOfTimesFailedSoFar;
+ $stack12 = java.lang.Math.pow(2.0,$stack12);
+ $stack15=(int) $stack12;
+ $stack16=(long) $stack15;
+ delayOfLedgerLockReleaseInMSecs=(delayOfLedgerLockReleaseInMSecs * $stack16);
+ label1:$stack18=org.apache.bookkeeper.replication.ReplicationWorker.LOG;
+ $stack17=new java.lang.Object[3];
+ $stack8 = java.lang.Long.valueOf(ledgerId);
+ $stack17[0]=$stack8;
+ $stack23 = java.lang.Integer.valueOf(numOfTimesFailedSoFar);
+ $stack17[1]=$stack23;
+ $stack8 = java.lang.Long.valueOf(delayOfLedgerLockReleaseInMSecs);
+ $stack17[2]=$stack8;
+ $stack18.error("ReplicationWorker failed to replicate Ledger : {} for {} number of times, so deferring the ledger lock release by {} msecs",$stack17);
+ $stack26=new org.apache.bookkeeper.replication.ReplicationWorker$4;
+ $stack26#org.apache.bookkeeper.replication.ReplicationWorker$4(this,ledgerId);
+ this.scheduleTaskWithDelay((java.util.TimerTask)$stack26,delayOfLedgerLockReleaseInMSecs);
+ return;
+ } 
+

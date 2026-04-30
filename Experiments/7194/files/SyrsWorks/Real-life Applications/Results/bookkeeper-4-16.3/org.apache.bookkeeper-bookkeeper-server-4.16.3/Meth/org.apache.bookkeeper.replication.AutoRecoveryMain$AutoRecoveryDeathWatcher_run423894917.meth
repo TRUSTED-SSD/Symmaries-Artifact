@@ -1,0 +1,36 @@
+void org.apache.bookkeeper.replication.AutoRecoveryMain$AutoRecoveryDeathWatcher:run()
+{
+java.lang.InterruptedException ie;
+  int $stack2;
+  long $stack3;
+  org.apache.bookkeeper.replication.AutoRecoveryMain $stack4;
+  org.apache.bookkeeper.replication.AuditorElector $stack5;
+  boolean $stack6;
+  org.slf4j.Logger $stack7;
+  java.lang.RuntimeException $stack8;
+  org.apache.bookkeeper.replication.ReplicationWorker $stack10;
+  java.lang.Thread $stack16;
+  label0:$stack2=this.watchInterval;
+ $stack3=(long) $stack2;
+ java.lang.Thread.sleep($stack3);
+ label1:goto label2;
+ label3:ie = catch;
+ $stack16 = java.lang.Thread.currentThread();
+ $stack16.interrupt();
+ label2:$stack4=this.autoRecoveryMain;
+ $stack5=$stack4.auditorElector;
+ $stack6 = $stack5.isRunning();
+ if ($stack6==0) goto label4;
+ $stack4=this.autoRecoveryMain;
+ $stack10=$stack4.replicationWorker;
+ $stack6 = $stack10.isRunning();
+ if ($stack6!=0) goto label0;
+ label4:$stack7 = org.apache.bookkeeper.replication.AutoRecoveryMain.access$100();
+ dummyClass.lowSink("AutoRecoveryDeathWatcher noticed the AutoRecovery is not running any more,exiting the watch loop!");
+$stack7.info("AutoRecoveryDeathWatcher noticed the AutoRecovery is not running any more,exiting the watch loop!");
+ $stack8=new java.lang.RuntimeException;
+ $stack8#java.lang.RuntimeException("AutoRecovery is not running any more");
+ throw $stack8;
+ catch java.lang.InterruptedException: label0 - label1 : label3;
+} 
+

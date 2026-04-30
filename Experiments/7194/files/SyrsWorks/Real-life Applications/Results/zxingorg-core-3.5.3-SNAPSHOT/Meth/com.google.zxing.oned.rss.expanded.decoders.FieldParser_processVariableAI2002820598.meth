@@ -1,0 +1,33 @@
+static java.lang.String com.google.zxing.oned.rss.expanded.decoders.FieldParser:processVariableAI(int aiSize,int variableFieldSize,java.lang.String @rawInformation)
+{
+java.lang.String ai;
+  java.lang.String field;
+  int $stack10;
+  java.lang.StringBuilder $stack15;
+  java.lang.String rawInformation;
+rawInformation=@rawInformation;
+ai = rawInformation.substring(0,aiSize);
+ $stack10 = rawInformation.length();
+ variableFieldSize=(aiSize+variableFieldSize);
+ variableFieldSize = java.lang.Math.min($stack10,variableFieldSize);
+ field = rawInformation.substring(aiSize,variableFieldSize);
+ rawInformation = rawInformation.substring(variableFieldSize);
+ $stack15=new java.lang.StringBuilder;
+ $stack15#java.lang.StringBuilder();
+ $stack15 = $stack15.append((char)40);
+ $stack15 = $stack15.append(ai);
+ $stack15 = $stack15.append((char)41);
+ $stack15 = $stack15.append(field);
+ ai = $stack15.toString();
+ rawInformation = com.google.zxing.oned.rss.expanded.decoders.FieldParser.parseFieldsInGeneralPurpose(rawInformation);
+ if (rawInformation!=null) goto label0;
+ rawInformation=ai;
+ goto label1;
+ label0:$stack15=new java.lang.StringBuilder;
+ $stack15#java.lang.StringBuilder();
+ $stack15 = $stack15.append(ai);
+ $stack15 = $stack15.append(rawInformation);
+ rawInformation = $stack15.toString();
+ label1:return  rawInformation;
+ } 
+

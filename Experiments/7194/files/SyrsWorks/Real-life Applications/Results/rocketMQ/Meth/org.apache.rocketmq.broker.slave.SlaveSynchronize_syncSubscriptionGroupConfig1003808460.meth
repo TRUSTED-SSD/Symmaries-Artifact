@@ -1,0 +1,51 @@
+void org.apache.rocketmq.broker.slave.SlaveSynchronize:syncSubscriptionGroupConfig()
+{
+java.lang.String masterAddrBak;
+  org.apache.rocketmq.remoting.protocol.body.SubscriptionGroupWrapper subscriptionWrapper;
+  org.apache.rocketmq.broker.subscription.SubscriptionGroupManager subscriptionGroupManager;
+  org.apache.rocketmq.broker.BrokerController $stack4;
+  java.lang.String $stack5;
+  boolean $stack6;
+  org.apache.rocketmq.broker.out.BrokerOuterAPI $stack8;
+  org.apache.rocketmq.remoting.protocol.DataVersion $stack12;
+  org.apache.rocketmq.remoting.protocol.DataVersion $stack13;
+  java.util.concurrent.ConcurrentMap $stack19;
+  java.util.concurrent.ConcurrentMap $stack21;
+  org.apache.rocketmq.logging.org.slf4j.Logger $stack22;
+  java.lang.Exception $stack23;
+  masterAddrBak=this.masterAddr;
+ if (masterAddrBak==null) goto label0;
+ $stack4=this.brokerController;
+ $stack5 = $stack4.getBrokerAddr();
+ $stack6 = masterAddrBak.equals((java.lang.Object)$stack5);
+ if ($stack6!=0) goto label0;
+ label1:$stack4=this.brokerController;
+ $stack8 = $stack4.getBrokerOuterAPI();
+ subscriptionWrapper = $stack8.getAllSubscriptionGroupConfig(masterAddrBak);
+ $stack4=this.brokerController;
+ subscriptionGroupManager = $stack4.getSubscriptionGroupManager();
+ $stack12 = subscriptionGroupManager.getDataVersion();
+ $stack13 = subscriptionWrapper.getDataVersion();
+ $stack6 = $stack12.equals((java.lang.Object)$stack13);
+ if ($stack6!=0) goto label2;
+ $stack4=this.brokerController;
+ subscriptionGroupManager = $stack4.getSubscriptionGroupManager();
+ $stack12 = subscriptionGroupManager.getDataVersion();
+ $stack13 = subscriptionWrapper.getDataVersion();
+ $stack12.assignNewOne($stack13);
+ $stack19 = subscriptionGroupManager.getSubscriptionGroupTable();
+ $stack19.clear();
+ $stack19 = subscriptionGroupManager.getSubscriptionGroupTable();
+ $stack21 = subscriptionWrapper.getSubscriptionGroupTable();
+ $stack19.putAll((java.util.Map)$stack21);
+ subscriptionGroupManager.persist();
+ $stack22=org.apache.rocketmq.broker.slave.SlaveSynchronize.LOGGER;
+ $stack22.info("Update slave Subscription Group from master, {}",(java.lang.Object)masterAddrBak);
+ label2:goto label0;
+ label3:$stack23 = catch;
+ $stack22=org.apache.rocketmq.broker.slave.SlaveSynchronize.LOGGER;
+ $stack22.error("SyncSubscriptionGroup Exception, {}",(java.lang.Object)masterAddrBak,(java.lang.Object)$stack23);
+ label0:return;
+ catch java.lang.Exception: label1 - label2 : label3;
+} 
+

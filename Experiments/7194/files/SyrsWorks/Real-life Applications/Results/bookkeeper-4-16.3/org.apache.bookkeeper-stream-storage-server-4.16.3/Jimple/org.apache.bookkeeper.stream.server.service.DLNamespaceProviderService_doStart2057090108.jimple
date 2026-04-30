@@ -1,0 +1,113 @@
+    protected void doStart()
+    {
+        org.apache.bookkeeper.stream.server.service.DLNamespaceProviderService this;
+        java.net.URI uri;
+        org.apache.bookkeeper.conf.ServerConfiguration $stack4;
+        org.apache.distributedlog.api.namespace.NamespaceBuilder $stack6;
+        org.apache.bookkeeper.stats.StatsLogger $stack7;
+        org.apache.distributedlog.DistributedLogConfiguration $stack10;
+        org.apache.distributedlog.config.DynamicDistributedLogConfiguration $stack12;
+        org.apache.distributedlog.api.namespace.Namespace $stack15;
+        org.slf4j.Logger $stack16;
+        java.lang.Throwable $stack17;
+        java.lang.RuntimeException $stack18;
+        java.lang.StringBuilder $stack19;
+        java.lang.String $stack22;
+
+        this := @this: org.apache.bookkeeper.stream.server.service.DLNamespaceProviderService;
+
+     label1:
+        $stack4 = this.<org.apache.bookkeeper.stream.server.service.DLNamespaceProviderService: org.apache.bookkeeper.conf.ServerConfiguration bkServerConf>;
+/*113*/
+
+        uri = this.<org.apache.bookkeeper.stream.server.service.DLNamespaceProviderService: java.net.URI dlogUri>;
+/*113*/
+
+        uri = staticinvoke <org.apache.bookkeeper.stream.server.service.DLNamespaceProviderService: java.net.URI initializeNamespace(org.apache.bookkeeper.conf.ServerConfiguration,java.net.URI)>($stack4, uri);
+/*113*/
+/*113*/
+
+        $stack6 = staticinvoke <org.apache.distributedlog.api.namespace.NamespaceBuilder: org.apache.distributedlog.api.namespace.NamespaceBuilder newBuilder()>();
+/*114*/
+
+        $stack7 = virtualinvoke this.<org.apache.bookkeeper.stream.server.service.DLNamespaceProviderService: org.apache.bookkeeper.stats.StatsLogger getStatsLogger()>();
+/*115*/
+
+        $stack6 = virtualinvoke $stack6.<org.apache.distributedlog.api.namespace.NamespaceBuilder: org.apache.distributedlog.api.namespace.NamespaceBuilder statsLogger(org.apache.bookkeeper.stats.StatsLogger)>($stack7);
+/*115*/
+
+        $stack6 = virtualinvoke $stack6.<org.apache.distributedlog.api.namespace.NamespaceBuilder: org.apache.distributedlog.api.namespace.NamespaceBuilder clientId(java.lang.String)>("storage-server");
+/*116*/
+
+        $stack10 = this.<org.apache.bookkeeper.stream.server.service.DLNamespaceProviderService: org.apache.distributedlog.DistributedLogConfiguration dlConf>;
+/*117*/
+
+        $stack6 = virtualinvoke $stack6.<org.apache.distributedlog.api.namespace.NamespaceBuilder: org.apache.distributedlog.api.namespace.NamespaceBuilder conf(org.apache.distributedlog.DistributedLogConfiguration)>($stack10);
+/*117*/
+
+        $stack12 = this.<org.apache.bookkeeper.stream.server.service.DLNamespaceProviderService: org.apache.distributedlog.config.DynamicDistributedLogConfiguration dlDynConf>;
+/*118*/
+
+        $stack6 = virtualinvoke $stack6.<org.apache.distributedlog.api.namespace.NamespaceBuilder: org.apache.distributedlog.api.namespace.NamespaceBuilder dynConf(org.apache.distributedlog.config.DynamicDistributedLogConfiguration)>($stack12);
+/*118*/
+
+        $stack6 = virtualinvoke $stack6.<org.apache.distributedlog.api.namespace.NamespaceBuilder: org.apache.distributedlog.api.namespace.NamespaceBuilder uri(java.net.URI)>(uri);
+/*119*/
+
+        $stack15 = virtualinvoke $stack6.<org.apache.distributedlog.api.namespace.NamespaceBuilder: org.apache.distributedlog.api.namespace.Namespace build()>();
+/*120*/
+
+        this.<org.apache.bookkeeper.stream.server.service.DLNamespaceProviderService: org.apache.distributedlog.api.namespace.Namespace namespace> = $stack15;
+/*120*/
+
+     label2:
+        goto label4;
+/*124*/
+
+     label3:
+        $stack17 := @caughtexception;
+/*126*/
+
+        $stack18 = new java.lang.RuntimeException;
+/*122*/
+
+        $stack19 = new java.lang.StringBuilder;
+/*122*/
+
+        specialinvoke $stack19.<java.lang.StringBuilder: void <init>()>();
+/*122*/
+
+        $stack19 = virtualinvoke $stack19.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>("Failed to build the distributedlog namespace at ");
+/*122*/
+
+        $stack4 = this.<org.apache.bookkeeper.stream.server.service.DLNamespaceProviderService: org.apache.bookkeeper.conf.ServerConfiguration bkServerConf>;
+/*123*/
+
+        $stack22 = virtualinvoke $stack4.<org.apache.bookkeeper.conf.ServerConfiguration: java.lang.String getMetadataServiceUriUnchecked()>();
+/*123*/
+
+        $stack19 = virtualinvoke $stack19.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>($stack22);
+/*123*/
+
+        $stack22 = virtualinvoke $stack19.<java.lang.StringBuilder: java.lang.String toString()>();
+/*123*/
+
+        specialinvoke $stack18.<java.lang.RuntimeException: void <init>(java.lang.String,java.lang.Throwable)>($stack22, $stack17);
+/*123*/
+
+        throw $stack18;
+/*123*/
+
+     label4:
+        $stack16 = <org.apache.bookkeeper.stream.server.service.DLNamespaceProviderService: org.slf4j.Logger log>;
+/*125*/
+
+        interfaceinvoke $stack16.<org.slf4j.Logger: void info(java.lang.String,java.lang.Object)>("Provided distributedlog namespace at {}.", uri);
+/*125*/
+
+        return;
+/*126*/
+
+        catch java.lang.Throwable from label1 to label2 with label3;
+    }
+

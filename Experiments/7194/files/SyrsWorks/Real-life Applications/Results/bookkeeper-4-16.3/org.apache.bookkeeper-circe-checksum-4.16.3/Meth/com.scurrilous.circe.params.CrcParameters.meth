@@ -1,0 +1,27 @@
+com.scurrilous.circe.params.CrcParameters(java.lang.String name,int bitWidth,long polynomial,long initial,long xorOut,boolean reflected)
+{
+long mask;
+  java.lang.IllegalArgumentException $stack12;
+  this#java.lang.Object();
+ if (bitWidth<1) goto label0;
+ if (bitWidth<=64) goto label1;
+ label0:$stack12=new java.lang.IllegalArgumentException;
+ $stack12#java.lang.IllegalArgumentException();
+ throw $stack12;
+ label1:this.name=name;
+ this.bitWidth=bitWidth;
+ if (bitWidth>=64) goto label2;
+ mask=(1L<<bitWidth);
+ mask=(mask-1L);
+ goto label3;
+ label2:mask=-1L;
+ label3:polynomial=(polynomial & mask);
+ this.polynomial=polynomial;
+ polynomial=(initial & mask);
+ this.initial=polynomial;
+ polynomial=(xorOut & mask);
+ this.xorOut=polynomial;
+ this.reflected=reflected;
+ return;
+ } 
+

@@ -1,0 +1,31 @@
+boolean org.apache.bookkeeper.bookie.storage.ldb.SingleDirectoryDbLedgerStorage:ledgerExists(long ledgerId)
+{
+java.lang.Object ledgerData;
+  org.apache.bookkeeper.bookie.storage.ldb.LedgerMetadataIndex $stack4;
+  org.slf4j.Logger $stack6;
+  boolean $stack7;
+  java.lang.Long $stack11;
+  java.lang.Boolean $stack13;
+  org.apache.bookkeeper.bookie.Bookie$NoLedgerException $stack15;
+  org.apache.bookkeeper.bookie.storage.ldb.DbLedgerStorageDataFormats$LedgerData tmp$1939834494;
+  label0:$stack4=this.ledgerIndex;
+ ledgerData = $stack4.get(ledgerId);
+ $stack6=org.apache.bookkeeper.bookie.storage.ldb.SingleDirectoryDbLedgerStorage.log;
+ $stack7 = $stack6.isDebugEnabled();
+ if ($stack7==0) goto label1;
+ $stack6=org.apache.bookkeeper.bookie.storage.ldb.SingleDirectoryDbLedgerStorage.log;
+ $stack11 = java.lang.Long.valueOf(ledgerId);
+ tmp$1939834494=(org.apache.bookkeeper.bookie.storage.ldb.DbLedgerStorageDataFormats$LedgerData) ledgerData;
+ $stack7 = tmp$1939834494.getExists();
+ $stack13 = java.lang.Boolean.valueOf($stack7);
+ dummyClass.lowSink("Ledger exists. ledger: {} : {}");
+$stack6.debug("Ledger exists. ledger: {} : {}",(java.lang.Object)$stack11,(java.lang.Object)$stack13);
+ label1:tmp$1939834494=(org.apache.bookkeeper.bookie.storage.ldb.DbLedgerStorageDataFormats$LedgerData) ledgerData;
+ $stack7 = tmp$1939834494.getExists();
+ label2:return  $stack7;
+ label3:$stack15 = catch;
+ ledgerData=$stack15;
+ return  0;
+ catch org.apache.bookkeeper.bookie.Bookie$NoLedgerException: label0 - label2 : label3;
+} 
+

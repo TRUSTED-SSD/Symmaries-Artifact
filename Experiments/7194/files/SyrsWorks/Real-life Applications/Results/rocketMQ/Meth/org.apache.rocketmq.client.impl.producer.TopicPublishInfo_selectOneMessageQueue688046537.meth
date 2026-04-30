@@ -1,0 +1,19 @@
+org.apache.rocketmq.common.message.MessageQueue org.apache.rocketmq.client.impl.producer.TopicPublishInfo:selectOneMessageQueue()
+{
+int index;
+  org.apache.rocketmq.client.common.ThreadLocalIndex $stack3;
+  java.util.List $stack5;
+  int $stack6;
+  java.lang.Object $stack8;
+  org.apache.rocketmq.common.message.MessageQueue $stack9;
+  $stack3=this.sendWhichQueue;
+ index = $stack3.incrementAndGet();
+ $stack5=this.messageQueueList;
+ $stack6 = $stack5.size();
+ index=(index%$stack6);
+ $stack5=this.messageQueueList;
+ $stack8 = $stack5.get(index);
+ $stack9=(org.apache.rocketmq.common.message.MessageQueue) $stack8;
+ return  $stack9;
+ } 
+

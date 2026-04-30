@@ -1,0 +1,21 @@
+static void org.apache.bookkeeper.util.collections.ConcurrentLongHashMap$Section:insertKeyValueNoLock(long[] keys,java.lang.Object[] values,long key,java.lang.Object value)
+{
+int bucket;
+  long $stack7;
+  java.lang.Object $stack11;
+  java.lang.Object $stack17;
+  $stack7 = org.apache.bookkeeper.util.collections.ConcurrentLongHashMap.hash(key);
+ bucket=(int) $stack7;
+ label0:$stack7=(long) bucket;
+ bucket=#keys;
+ bucket = org.apache.bookkeeper.util.collections.ConcurrentLongHashMap.signSafeMod($stack7,bucket);
+ $stack17=values[bucket];
+ $stack11 = org.apache.bookkeeper.util.collections.ConcurrentLongHashMap.access$600();
+ if ($stack17!=$stack11) goto label1;
+ keys[bucket]=key;
+ values[bucket]=value;
+ return;
+ label1:bucket=(bucket+1);
+ goto label0;
+ } 
+

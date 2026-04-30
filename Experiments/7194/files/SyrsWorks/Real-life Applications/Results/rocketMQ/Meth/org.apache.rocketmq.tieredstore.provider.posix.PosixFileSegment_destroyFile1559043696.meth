@@ -1,0 +1,36 @@
+void org.apache.rocketmq.tieredstore.provider.posix.PosixFileSegment:destroyFile()
+{
+java.io.File $stack2;
+  boolean $stack3;
+  java.nio.channels.FileChannel $stack4;
+  java.io.IOException $stack16;
+  java.lang.String $stack17;
+  org.apache.rocketmq.logging.org.slf4j.Logger $stack18;
+  $stack2=this.file;
+ $stack3 = $stack2.exists();
+ if ($stack3==0) goto label0;
+ $stack2=this.file;
+ $stack2.delete();
+ label0:$stack4=this.readFileChannel;
+ if ($stack4==null) goto label1;
+ $stack4=this.readFileChannel;
+ $stack3 = $stack4.isOpen();
+ if ($stack3==0) goto label1;
+ $stack4=this.readFileChannel;
+ $stack4.close();
+ label1:$stack4=this.writeFileChannel;
+ if ($stack4==null) goto label2;
+ $stack4=this.writeFileChannel;
+ $stack3 = $stack4.isOpen();
+ if ($stack3==0) goto label2;
+ $stack4=this.writeFileChannel;
+ $stack4.close();
+ label2:goto label3;
+ label4:$stack16 = catch;
+ $stack18=org.apache.rocketmq.tieredstore.provider.posix.PosixFileSegment.logger;
+ $stack17=this.filepath;
+ $stack18.error("PosixFileSegment#destroyFile: destroy file {} failed: ",(java.lang.Object)$stack17,(java.lang.Object)$stack16);
+ label3:return;
+ catch java.io.IOException: label0 - label2 : label4;
+} 
+

@@ -1,0 +1,35 @@
+void org.apache.bookkeeper.server.http.service.RecoveryBookieService:lambda$null$0(java.lang.String bookieSrcSerialized,org.apache.bookkeeper.server.http.service.RecoveryBookieService$RecoveryRequestJsonBody requestJsonBody,org.apache.bookkeeper.discover.RegistrationManager rm)
+{
+org.apache.bookkeeper.net.BookieId bookieSrc;
+  boolean deleteCookie;
+  org.apache.bookkeeper.versioning.Versioned cookie;
+  org.slf4j.Logger $stack8;
+  org.apache.bookkeeper.client.BookKeeperAdmin $stack9;
+  java.lang.Object $stack12;
+  org.apache.bookkeeper.bookie.Cookie $stack13;
+  org.apache.bookkeeper.versioning.Version $stack14;
+  java.lang.Exception $stack16;
+  label0:bookieSrc = org.apache.bookkeeper.net.BookieId.parse(bookieSrcSerialized);
+ deleteCookie=requestJsonBody.deleteCookie;
+ $stack8=org.apache.bookkeeper.server.http.service.RecoveryBookieService.LOG;
+ dummyClass.lowSink("Start recovering bookie.");
+$stack8.info("Start recovering bookie.");
+ $stack9=this.bka;
+ $stack9#org.apache.bookkeeper.client.BookKeeperAdmin(bookieSrc);
+ if (deleteCookie==0) goto label1;
+ cookie = org.apache.bookkeeper.bookie.Cookie.readFromRegistrationManager(rm,bookieSrc);
+ $stack12 = cookie.getValue();
+ $stack13=(org.apache.bookkeeper.bookie.Cookie) $stack12;
+ $stack14 = cookie.getVersion();
+ $stack13.deleteFromRegistrationManager(rm,bookieSrc,$stack14);
+ label1:$stack8=org.apache.bookkeeper.server.http.service.RecoveryBookieService.LOG;
+ dummyClass.lowSink("Complete recovering bookie");
+$stack8.info("Complete recovering bookie");
+ label2:goto label3;
+ label4:$stack16 = catch;
+ $stack8=org.apache.bookkeeper.server.http.service.RecoveryBookieService.LOG;
+ $stack8.error("Exception occurred while recovering bookie",(java.lang.Throwable)$stack16);
+ label3:return;
+ catch java.lang.Exception: label0 - label2 : label4;
+} 
+

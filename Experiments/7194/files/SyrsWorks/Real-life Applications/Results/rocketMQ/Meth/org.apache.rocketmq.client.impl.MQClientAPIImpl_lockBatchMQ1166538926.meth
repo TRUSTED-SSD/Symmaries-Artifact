@@ -1,0 +1,37 @@
+java.util.Set org.apache.rocketmq.client.impl.MQClientAPIImpl:lockBatchMQ(java.lang.String addr,org.apache.rocketmq.remoting.protocol.body.LockBatchRequestBody requestBody,long timeoutMillis)
+{
+org.apache.rocketmq.remoting.protocol.RemotingCommand request;
+  org.apache.rocketmq.remoting.protocol.body.LockBatchResponseBody responseBody;
+  java.util.Set messageQueues;
+  byte[] $stack10;
+  org.apache.rocketmq.client.ClientConfig $stack11;
+  org.apache.rocketmq.remoting.RemotingClient $stack12;
+  boolean $stack13;
+  java.lang.String $stack14;
+  int $stack16;
+  java.lang.Object $stack18;
+  org.apache.rocketmq.client.exception.MQBrokerException $stack20;
+  request = org.apache.rocketmq.remoting.protocol.RemotingCommand.createRequestCommand(41,null);
+ $stack10 = requestBody.encode();
+ request.setBody($stack10);
+ $stack12=this.remotingClient;
+ $stack11=this.clientConfig;
+ $stack13 = $stack11.isVipChannelEnabled();
+ $stack14 = org.apache.rocketmq.common.MixAll.brokerVIPChannel($stack13,addr);
+ request = $stack12.invokeSync($stack14,request,timeoutMillis);
+ $stack16 = request.getCode();
+ switch [$stack16]
+if 0 goto label0;
+goto label1;
+ label0:$stack10 = request.getBody();
+ $stack18 = org.apache.rocketmq.remoting.protocol.RemotingSerializable.decode($stack10,org.apache.rocketmq.remoting.protocol.body.LockBatchResponseBody);
+ responseBody=(org.apache.rocketmq.remoting.protocol.body.LockBatchResponseBody) $stack18;
+ messageQueues = responseBody.getLockOKMQSet();
+ return  messageQueues;
+ label1:$stack20=new org.apache.rocketmq.client.exception.MQBrokerException;
+ $stack16 = request.getCode();
+ $stack14 = request.getRemark();
+ $stack20#org.apache.rocketmq.client.exception.MQBrokerException($stack16,$stack14,addr);
+ throw $stack20;
+ } 
+

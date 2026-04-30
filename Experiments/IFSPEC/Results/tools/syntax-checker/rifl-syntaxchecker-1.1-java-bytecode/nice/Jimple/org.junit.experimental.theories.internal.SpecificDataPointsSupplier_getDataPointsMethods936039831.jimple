@@ -1,0 +1,89 @@
+    protected java.util.Collection getDataPointsMethods(org.junit.experimental.theories.ParameterSignature)
+    {
+        org.junit.experimental.theories.internal.SpecificDataPointsSupplier this;
+        org.junit.experimental.theories.ParameterSignature sig;
+        java.util.Collection methods;
+        java.lang.String requestedName;
+        java.util.ArrayList methodsWithMatchingNames;
+        java.util.Iterator i$;
+        org.junit.runners.model.FrameworkMethod method;
+        java.lang.String[] methodNames;
+        java.lang.'annotation'.Annotation $stack9;
+        org.junit.experimental.theories.FromDataPoints $stack10;
+        boolean $stack14;
+        java.lang.Object $stack15;
+        org.junit.experimental.theories.DataPoints $stack17;
+        java.util.List $stack19;
+
+        this := @this: org.junit.experimental.theories.internal.SpecificDataPointsSupplier;
+
+        sig := @parameter0: org.junit.experimental.theories.ParameterSignature;
+
+        methods = specialinvoke this.<org.junit.experimental.theories.internal.AllMembersSupplier: java.util.Collection getDataPointsMethods(org.junit.experimental.theories.ParameterSignature)>(sig);
+/*75*/
+/*75*/
+
+        $stack9 = virtualinvoke sig.<org.junit.experimental.theories.ParameterSignature: java.lang.'annotation'.Annotation getAnnotation(java.lang.Class)>(class "Lorg/junit/experimental/theories/FromDataPoints;");
+/*76*/
+
+        $stack10 = (org.junit.experimental.theories.FromDataPoints) $stack9;
+/*76*/
+
+        requestedName = interfaceinvoke $stack10.<org.junit.experimental.theories.FromDataPoints: java.lang.String value()>();
+/*76*/
+/*76*/
+
+        methodsWithMatchingNames = new java.util.ArrayList;
+/*78*/
+
+        specialinvoke methodsWithMatchingNames.<java.util.ArrayList: void <init>()>();
+/*78*/
+
+        i$ = interfaceinvoke methods.<java.util.Collection: java.util.Iterator iterator()>();
+/*80*/
+/*80*/
+
+     label1:
+        $stack14 = interfaceinvoke i$.<java.util.Iterator: boolean hasNext()>();
+/*80*/
+
+        if $stack14 == 0 goto label3;
+/*80*/
+
+        $stack15 = interfaceinvoke i$.<java.util.Iterator: java.lang.Object next()>();
+/*87*/
+
+        method = (org.junit.runners.model.FrameworkMethod) $stack15;
+/*87*/
+
+        $stack9 = virtualinvoke method.<org.junit.runners.model.FrameworkMethod: java.lang.'annotation'.Annotation getAnnotation(java.lang.Class)>(class "Lorg/junit/experimental/theories/DataPoints;");
+/*81*/
+
+        $stack17 = (org.junit.experimental.theories.DataPoints) $stack9;
+/*81*/
+
+        methodNames = interfaceinvoke $stack17.<org.junit.experimental.theories.DataPoints: java.lang.String[] value()>();
+/*81*/
+/*81*/
+
+        $stack19 = staticinvoke <java.util.Arrays: java.util.List asList(java.lang.Object[])>(methodNames);
+/*82*/
+
+        $stack14 = interfaceinvoke $stack19.<java.util.List: boolean contains(java.lang.Object)>(requestedName);
+/*82*/
+
+        if $stack14 == 0 goto label2;
+/*82*/
+
+        interfaceinvoke methodsWithMatchingNames.<java.util.List: boolean add(java.lang.Object)>(method);
+/*83*/
+
+     label2:
+        goto label1;
+/*85*/
+
+     label3:
+        return methodsWithMatchingNames;
+/*87*/
+    }
+

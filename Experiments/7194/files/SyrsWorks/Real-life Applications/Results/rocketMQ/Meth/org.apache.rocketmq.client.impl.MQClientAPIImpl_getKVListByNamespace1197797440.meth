@@ -1,0 +1,41 @@
+org.apache.rocketmq.remoting.protocol.body.KVTable org.apache.rocketmq.client.impl.MQClientAPIImpl:getKVListByNamespace(java.lang.String @namespace,long timeoutMillis)
+{
+org.apache.rocketmq.remoting.protocol.header.namesrv.GetKVListByNamespaceRequestHeader requestHeader;
+  org.apache.rocketmq.remoting.protocol.RemotingCommand request;
+  org.apache.rocketmq.remoting.RemotingClient $stack9;
+  boolean $stack11;
+  int $stack12;
+  byte[] $stack13;
+  java.lang.Object $stack14;
+  org.apache.rocketmq.remoting.protocol.body.KVTable $stack15;
+  org.apache.rocketmq.client.exception.MQClientException $stack16;
+  java.lang.AssertionError $stack20;
+  java.lang.String namespace;
+namespace=@namespace;
+requestHeader=new org.apache.rocketmq.remoting.protocol.header.namesrv.GetKVListByNamespaceRequestHeader;
+ requestHeader#org.apache.rocketmq.remoting.protocol.header.namesrv.GetKVListByNamespaceRequestHeader();
+ requestHeader.setNamespace(namespace);
+ request = org.apache.rocketmq.remoting.protocol.RemotingCommand.createRequestCommand(219,(org.apache.rocketmq.remoting.CommandCustomHeader)requestHeader);
+ $stack9=this.remotingClient;
+ request = $stack9.invokeSync(null,request,timeoutMillis);
+ $stack11=org.apache.rocketmq.client.impl.MQClientAPIImpl.$assertionsDisabled;
+ if ($stack11!=0) goto label0;
+ if (request!=null) goto label0;
+ $stack20=new java.lang.AssertionError;
+ $stack20#java.lang.AssertionError();
+ throw $stack20;
+ label0:$stack12 = request.getCode();
+ switch [$stack12]
+if 0 goto label1;
+goto label2;
+ label1:$stack13 = request.getBody();
+ $stack14 = org.apache.rocketmq.remoting.protocol.RemotingSerializable.decode($stack13,org.apache.rocketmq.remoting.protocol.body.KVTable);
+ $stack15=(org.apache.rocketmq.remoting.protocol.body.KVTable) $stack14;
+ return  $stack15;
+ label2:$stack16=new org.apache.rocketmq.client.exception.MQClientException;
+ $stack12 = request.getCode();
+ namespace = request.getRemark();
+ $stack16#org.apache.rocketmq.client.exception.MQClientException($stack12,namespace);
+ throw $stack16;
+ } 
+

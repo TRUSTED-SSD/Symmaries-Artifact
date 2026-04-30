@@ -1,0 +1,31 @@
+boolean org.apache.bookkeeper.bookie.storage.directentrylogger.DirectEntryLogger:removeEntryLog(long entryLogId)
+{
+java.io.File file;
+  boolean result;
+  byte $stack5;
+  int $stack6;
+  org.apache.bookkeeper.slogger.Slogger $stack10;
+  java.lang.Long $stack13;
+  java.lang.Boolean $stack16;
+  org.apache.bookkeeper.bookie.storage.directentrylogger.Events $stack18;
+  $stack5=(entryLogId cmp 2147483647L);
+ if ($stack5>=0) goto label0;
+ result=1;
+ goto label1;
+ label0:result=0;
+ label1:com.google.common.base.Preconditions.checkArgument(result,"Entry log id must be an int [%d]",entryLogId);
+ file=this.ledgerDir;
+ $stack6=(int) entryLogId;
+ file = org.apache.bookkeeper.bookie.storage.directentrylogger.DirectEntryLogger.logFile(file,$stack6);
+ result = file.delete();
+ $stack10=this.slog;
+ $stack10 = $stack10.kv((java.lang.Object)"file",(java.lang.Object)file);
+ $stack13 = java.lang.Long.valueOf(entryLogId);
+ $stack10 = $stack10.kv((java.lang.Object)"logId",(java.lang.Object)$stack13);
+ $stack16 = java.lang.Boolean.valueOf(result);
+ $stack10 = $stack10.kv((java.lang.Object)"result",(java.lang.Object)$stack16);
+ $stack18=org.apache.bookkeeper.bookie.storage.directentrylogger.Events.LOG_DELETED;
+ $stack10.info((java.lang.Enum)$stack18);
+ return  result;
+ } 
+

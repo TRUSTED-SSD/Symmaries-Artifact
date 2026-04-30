@@ -1,0 +1,39 @@
+int org.apache.bookkeeper.bookie.BookieShell$ListBookiesCmd:runCmd(org.apache.commons.cli.CommandLine cmdLine)
+{
+int passedCommands;
+  boolean readwrite;
+  boolean readonly;
+  boolean all;
+  org.apache.bookkeeper.tools.cli.commands.bookies.ListBookiesCommand$Flags flags;
+  org.apache.bookkeeper.tools.cli.commands.bookies.ListBookiesCommand $stack15;
+  org.apache.bookkeeper.bookie.BookieShell $stack16;
+  org.apache.bookkeeper.conf.ServerConfiguration $stack17;
+  org.slf4j.Logger $stack19;
+  passedCommands=0;
+ readwrite = cmdLine.hasOption("rw");
+ if (readwrite==0) goto label0;
+ passedCommands=(0+1);
+ label0:readonly = cmdLine.hasOption("ro");
+ if (readonly==0) goto label1;
+ passedCommands=(passedCommands+1);
+ label1:all = cmdLine.hasOption("a");
+ if (all==0) goto label2;
+ passedCommands=(passedCommands+1);
+ label2:if (passedCommands==1) goto label3;
+ $stack19=org.apache.bookkeeper.bookie.BookieShell.LOG;
+ $stack19.error("One and only one of -readwrite, -readonly and -all must be specified");
+ this.printUsage();
+ return  1;
+ label3:flags=new org.apache.bookkeeper.tools.cli.commands.bookies.ListBookiesCommand$Flags;
+ flags#org.apache.bookkeeper.tools.cli.commands.bookies.ListBookiesCommand$Flags();
+ flags = flags.readwrite(readwrite);
+ flags = flags.readonly(readonly);
+ flags = flags.all(all);
+ $stack15=new org.apache.bookkeeper.tools.cli.commands.bookies.ListBookiesCommand;
+ $stack15#org.apache.bookkeeper.tools.cli.commands.bookies.ListBookiesCommand(flags);
+ $stack16=this.this$0;
+ $stack17=$stack16.bkConf;
+ readwrite = $stack15.apply($stack17,(org.apache.bookkeeper.tools.framework.CliFlags)flags);
+ return  0;
+ } 
+

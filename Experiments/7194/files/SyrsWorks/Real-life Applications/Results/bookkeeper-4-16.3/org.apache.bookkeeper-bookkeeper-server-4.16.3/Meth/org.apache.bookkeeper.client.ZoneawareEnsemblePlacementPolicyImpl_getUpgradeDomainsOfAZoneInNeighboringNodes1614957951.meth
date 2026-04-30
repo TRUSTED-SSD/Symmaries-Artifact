@@ -1,0 +1,38 @@
+java.util.Set org.apache.bookkeeper.client.ZoneawareEnsemblePlacementPolicyImpl:getUpgradeDomainsOfAZoneInNeighboringNodes(java.util.List currentEnsemble,int indexOfNode,int writeQuorumSize,java.lang.String zone)
+{
+int ensSize;
+  java.util.HashSet upgradeDomainsOfAZoneInNeighboringNodes;
+  int i;
+  int indexInEnsemble;
+  org.apache.bookkeeper.net.BookieId bookieAddr;
+  org.apache.bookkeeper.client.ZoneawareEnsemblePlacementPolicyImpl$ZoneAwareNodeLocation nodeLocation;
+  java.lang.Object $stack17;
+  java.lang.String $stack19;
+  boolean $stack20;
+  ensSize = currentEnsemble.size();
+ upgradeDomainsOfAZoneInNeighboringNodes=new java.util.HashSet;
+ upgradeDomainsOfAZoneInNeighboringNodes#java.util.HashSet();
+ i=(writeQuorumSize-1);
+ i= ! (i);
+ label0:indexInEnsemble=(writeQuorumSize-1);
+ if (i>indexInEnsemble) goto label1;
+ if (i!=0) goto label2;
+ goto label3;
+ label2:indexInEnsemble=(indexOfNode+i);
+ indexInEnsemble=(indexInEnsemble+ensSize);
+ indexInEnsemble=(indexInEnsemble%ensSize);
+ $stack17 = currentEnsemble.get(indexInEnsemble);
+ bookieAddr=(org.apache.bookkeeper.net.BookieId) $stack17;
+ if (bookieAddr!=null) goto label4;
+ goto label3;
+ label4:nodeLocation = this.getZoneAwareNodeLocation(bookieAddr);
+ $stack19 = nodeLocation.getZone();
+ $stack20 = $stack19.equals((java.lang.Object)zone);
+ if ($stack20==0) goto label3;
+ $stack19 = nodeLocation.getUpgradeDomain();
+ upgradeDomainsOfAZoneInNeighboringNodes.add((java.lang.Object)$stack19);
+ label3:i=(i+1);
+ goto label0;
+ label1:return  upgradeDomainsOfAZoneInNeighboringNodes;
+ } 
+

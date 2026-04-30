@@ -1,0 +1,32 @@
+static void org.apache.rocketmq.broker.filtersrv.FilterServerUtil:callShell(java.lang.String shellString,org.apache.rocketmq.logging.org.slf4j.Logger log)
+{
+java.lang.Process process;
+  java.lang.String[] cmdArray;
+  java.lang.Throwable l4;
+  java.lang.Runtime $stack6;
+  java.lang.Throwable $stack10;
+  process=null;
+ label0:cmdArray = org.apache.rocketmq.broker.filtersrv.FilterServerUtil.splitShellString(shellString);
+ $stack6 = java.lang.Runtime.getRuntime();
+ process = $stack6.exec(cmdArray);
+ process.waitFor();
+ log.info("CallShell: <{}> OK",(java.lang.Object)shellString);
+ label1:if (null==process) goto label2;
+ process.destroy();
+ goto label2;
+ label3:l4 = catch;
+ log.error("CallShell: readLine IOException, {}",(java.lang.Object)shellString,(java.lang.Object)l4);
+ label4:if (null==process) goto label2;
+ process.destroy();
+ goto label2;
+ label5:$stack10 = catch;
+ l4=$stack10;
+ label6:if (null==process) goto label7;
+ process.destroy();
+ label7:throw $stack10;
+ label2:return;
+ catch java.lang.Throwable: label0 - label1 : label3;
+catch java.lang.Throwable: label3 - label4 : label5;
+catch java.lang.Throwable: label5 - label6 : label5;
+} 
+

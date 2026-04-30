@@ -1,0 +1,19 @@
+org.apache.rocketmq.remoting.protocol.RemotingCommand org.apache.rocketmq.broker.processor.AdminBrokerProcessor:getBrokerRuntimeInfo(io.netty.channel.ChannelHandlerContext ctx,org.apache.rocketmq.remoting.protocol.RemotingCommand @request)
+{
+java.util.HashMap runtimeInfo;
+  org.apache.rocketmq.remoting.protocol.body.KVTable kvTable;
+  byte[] body;
+  org.apache.rocketmq.remoting.protocol.RemotingCommand request;
+request=@request;
+request = org.apache.rocketmq.remoting.protocol.RemotingCommand.createResponseCommand(null);
+ runtimeInfo = this#org.apache.rocketmq.broker.processor.AdminBrokerProcessor:prepareRuntimeInfo();
+ kvTable=new org.apache.rocketmq.remoting.protocol.body.KVTable;
+ kvTable#org.apache.rocketmq.remoting.protocol.body.KVTable();
+ kvTable.setTable(runtimeInfo);
+ body = kvTable.encode();
+ request.setBody(body);
+ request.setCode(0);
+ request.setRemark(null);
+ return  request;
+ } 
+

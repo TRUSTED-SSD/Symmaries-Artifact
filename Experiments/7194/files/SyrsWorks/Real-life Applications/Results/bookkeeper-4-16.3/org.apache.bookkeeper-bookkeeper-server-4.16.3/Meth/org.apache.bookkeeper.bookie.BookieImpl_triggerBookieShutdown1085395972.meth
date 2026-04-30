@@ -1,0 +1,27 @@
+void org.apache.bookkeeper.bookie.BookieImpl:triggerBookieShutdown(int exitCode)
+{
+java.util.concurrent.atomic.AtomicBoolean $stack3;
+  boolean $stack4;
+  org.apache.bookkeeper.conf.ServerConfiguration $stack5;
+  org.slf4j.Logger $stack6;
+  int $stack8;
+  java.lang.Integer $stack9;
+  java.lang.Integer $stack10;
+  org.apache.bookkeeper.bookie.BookieImpl$7 $stack11;
+  $stack3=this.shutdownTriggered;
+ $stack4 = $stack3.compareAndSet((boolean)0,(boolean)1);
+ if ($stack4!=0) goto label0;
+ return;
+ label0:$stack6=org.apache.bookkeeper.bookie.BookieImpl.LOG;
+ $stack5=this.conf;
+ $stack8 = $stack5.getBookiePort();
+ $stack9 = java.lang.Integer.valueOf($stack8);
+ $stack10 = java.lang.Integer.valueOf(exitCode);
+ dummyClass.lowSink("Triggering shutdown of Bookie-{} with exitCode {}");
+$stack6.info("Triggering shutdown of Bookie-{} with exitCode {}",(java.lang.Object)$stack9,(java.lang.Object)$stack10);
+ $stack11=new org.apache.bookkeeper.bookie.BookieImpl$7;
+ $stack11#org.apache.bookkeeper.bookie.BookieImpl$7(this,"BookieShutdownTrigger",exitCode);
+ $stack11.start();
+ return;
+ } 
+

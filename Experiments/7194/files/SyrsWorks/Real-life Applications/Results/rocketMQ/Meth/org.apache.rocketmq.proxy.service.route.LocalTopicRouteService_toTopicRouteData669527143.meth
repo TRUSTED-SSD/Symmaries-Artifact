@@ -1,0 +1,36 @@
+org.apache.rocketmq.remoting.protocol.route.TopicRouteData org.apache.rocketmq.proxy.service.route.LocalTopicRouteService:toTopicRouteData(org.apache.rocketmq.common.TopicConfig topicConfig)
+{
+org.apache.rocketmq.remoting.protocol.route.TopicRouteData topicRouteData;
+  org.apache.rocketmq.remoting.protocol.route.QueueData queueData;
+  java.util.List $stack5;
+  int $stack7;
+  org.apache.rocketmq.broker.BrokerController $stack11;
+  org.apache.rocketmq.common.BrokerConfig $stack12;
+  java.lang.String $stack13;
+  org.apache.rocketmq.remoting.protocol.route.QueueData[] $stack14;
+  java.util.ArrayList $stack15;
+  topicRouteData=new org.apache.rocketmq.remoting.protocol.route.TopicRouteData;
+ topicRouteData#org.apache.rocketmq.remoting.protocol.route.TopicRouteData();
+ $stack5=this.brokerDataList;
+ topicRouteData.setBrokerDatas($stack5);
+ queueData=new org.apache.rocketmq.remoting.protocol.route.QueueData;
+ queueData#org.apache.rocketmq.remoting.protocol.route.QueueData();
+ $stack7 = topicConfig.getPerm();
+ queueData.setPerm($stack7);
+ $stack7 = topicConfig.getReadQueueNums();
+ queueData.setReadQueueNums($stack7);
+ $stack7 = topicConfig.getWriteQueueNums();
+ queueData.setWriteQueueNums($stack7);
+ $stack7 = topicConfig.getTopicSysFlag();
+ queueData.setTopicSysFlag($stack7);
+ $stack11=this.brokerController;
+ $stack12 = $stack11.getBrokerConfig();
+ $stack13 = $stack12.getBrokerName();
+ queueData.setBrokerName($stack13);
+ $stack14=new org.apache.rocketmq.remoting.protocol.route.QueueData[1];
+ $stack14[0]=queueData;
+ $stack15 = com.google.common.collect.Lists.newArrayList((java.lang.Object[])$stack14);
+ topicRouteData.setQueueDatas((java.util.List)$stack15);
+ return  topicRouteData;
+ } 
+

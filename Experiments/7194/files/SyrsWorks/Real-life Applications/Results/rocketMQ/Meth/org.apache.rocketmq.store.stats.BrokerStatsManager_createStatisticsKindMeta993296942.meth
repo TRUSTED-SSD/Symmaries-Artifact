@@ -1,0 +1,29 @@
+org.apache.rocketmq.common.statistics.StatisticsKindMeta org.apache.rocketmq.store.stats.BrokerStatsManager:createStatisticsKindMeta(java.lang.String name,java.lang.String[] @itemNames,java.util.concurrent.ScheduledExecutorService executorService,org.apache.rocketmq.common.statistics.StatisticsItemFormatter formatter,org.apache.rocketmq.logging.org.slf4j.Logger log,long interval)
+{
+org.apache.rocketmq.common.BrokerConfig brokerConfig;
+  org.apache.rocketmq.common.statistics.StatisticsKindMeta kindMeta;
+  org.apache.rocketmq.common.statistics.StatisticsItemPrinter $stack11;
+  org.apache.rocketmq.common.statistics.StatisticsItemScheduledIncrementPrinter $stack13;
+  org.apache.rocketmq.store.stats.BrokerStatsManager$2 $stack14;
+  org.apache.rocketmq.store.stats.BrokerStatsManager$3 $stack17;
+  java.lang.String[] itemNames;
+itemNames=@itemNames;
+brokerConfig=this.brokerConfig;
+ $stack11=new org.apache.rocketmq.common.statistics.StatisticsItemPrinter;
+ $stack11#org.apache.rocketmq.common.statistics.StatisticsItemPrinter(formatter,log);
+ kindMeta=new org.apache.rocketmq.common.statistics.StatisticsKindMeta;
+ kindMeta#org.apache.rocketmq.common.statistics.StatisticsKindMeta();
+ kindMeta.setName(name);
+ kindMeta.setItemNames(itemNames);
+ $stack13=new org.apache.rocketmq.common.statistics.StatisticsItemScheduledIncrementPrinter;
+ $stack14=new org.apache.rocketmq.store.stats.BrokerStatsManager$2;
+ $stack14#org.apache.rocketmq.store.stats.BrokerStatsManager$2(this);
+ itemNames=new java.lang.String[1];
+ itemNames[0]="MSG_NUM";
+ $stack17=new org.apache.rocketmq.store.stats.BrokerStatsManager$3;
+ $stack17#org.apache.rocketmq.store.stats.BrokerStatsManager$3(this,brokerConfig);
+ $stack13#org.apache.rocketmq.common.statistics.StatisticsItemScheduledIncrementPrinter("Stat In One Minute: ",$stack11,executorService,(org.apache.rocketmq.common.statistics.StatisticsItemScheduledPrinter$InitialDelay)$stack14,interval,itemNames,(org.apache.rocketmq.common.statistics.StatisticsItemScheduledPrinter$Valve)$stack17);
+ kindMeta.setScheduledPrinter((org.apache.rocketmq.common.statistics.StatisticsItemScheduledPrinter)$stack13);
+ return  kindMeta;
+ } 
+

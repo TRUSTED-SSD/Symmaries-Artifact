@@ -1,0 +1,55 @@
+void org.apache.rocketmq.broker.BrokerController:protectBroker()
+{
+java.util.Iterator l1;
+  java.util.Map$Entry next;
+  long fallBehindBytes;
+  java.lang.String[] split;
+  java.lang.String group;
+  org.apache.rocketmq.common.BrokerConfig $stack7;
+  boolean $stack8;
+  org.apache.rocketmq.store.stats.BrokerStatsManager $stack9;
+  org.apache.rocketmq.common.stats.MomentStatsItemSet $stack10;
+  java.util.concurrent.ConcurrentMap $stack11;
+  java.util.Set $stack12;
+  java.lang.Object $stack15;
+  org.apache.rocketmq.common.stats.MomentStatsItem $stack17;
+  java.util.concurrent.atomic.AtomicLong $stack18;
+  long $stack21;
+  byte $stack22;
+  org.apache.rocketmq.logging.org.slf4j.Logger $stack28;
+  java.lang.Long $stack30;
+  org.apache.rocketmq.broker.subscription.SubscriptionGroupManager $stack31;
+  $stack7=this.brokerConfig;
+ $stack8 = $stack7.isDisableConsumeIfConsumerReadSlowly();
+ if ($stack8==0) goto label0;
+ $stack9=this.brokerStatsManager;
+ $stack10 = $stack9.getMomentStatsItemSetFallSize();
+ $stack11 = $stack10.getStatsItemTable();
+ $stack12 = $stack11.entrySet();
+ l1 = $stack12.iterator();
+ label1:$stack8 = l1.hasNext();
+ if ($stack8==0) goto label0;
+ $stack15 = l1.next();
+ next=(java.util.Map$Entry) $stack15;
+ $stack15 = next.getValue();
+ $stack17=(org.apache.rocketmq.common.stats.MomentStatsItem) $stack15;
+ $stack18 = $stack17.getValue();
+ fallBehindBytes = $stack18.get();
+ $stack7=this.brokerConfig;
+ $stack21 = $stack7.getConsumerFallbehindThreshold();
+ $stack22=(fallBehindBytes cmp $stack21);
+ if ($stack22<=0) goto label2;
+ $stack15 = next.getValue();
+ $stack17=(org.apache.rocketmq.common.stats.MomentStatsItem) $stack15;
+ group = $stack17.getStatsKey();
+ split = group.split("@");
+ group=split[2];
+ $stack28=org.apache.rocketmq.broker.BrokerController.LOG_PROTECTION;
+ $stack30 = java.lang.Long.valueOf(fallBehindBytes);
+ $stack28.info("[PROTECT_BROKER] the consumer[{}] consume slowly, {} bytes, disable it",(java.lang.Object)group,(java.lang.Object)$stack30);
+ $stack31=this.subscriptionGroupManager;
+ $stack31.disableConsume(group);
+ label2:goto label1;
+ label0:return;
+ } 
+

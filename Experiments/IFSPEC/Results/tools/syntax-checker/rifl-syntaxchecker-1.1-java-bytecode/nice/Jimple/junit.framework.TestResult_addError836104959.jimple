@@ -1,0 +1,61 @@
+    public synchronized void addError(junit.framework.Test, java.lang.Throwable)
+    {
+        junit.framework.TestResult this;
+        junit.framework.Test test;
+        java.lang.Throwable e;
+        java.util.Iterator i$;
+        junit.framework.TestListener each;
+        junit.framework.TestFailure $stack5;
+        java.util.List $stack6;
+        boolean $stack7;
+        java.lang.Object $stack11;
+
+        this := @this: junit.framework.TestResult;
+
+        test := @parameter0: junit.framework.Test;
+
+        e := @parameter1: java.lang.Throwable;
+
+        $stack6 = this.<junit.framework.TestResult: java.util.List fErrors>;
+/*37*/
+
+        $stack5 = new junit.framework.TestFailure;
+/*37*/
+
+        specialinvoke $stack5.<junit.framework.TestFailure: void <init>(junit.framework.Test,java.lang.Throwable)>(test, e);
+/*37*/
+
+        interfaceinvoke $stack6.<java.util.List: boolean add(java.lang.Object)>($stack5);
+/*37*/
+
+        $stack6 = specialinvoke this.<junit.framework.TestResult: java.util.List cloneListeners()>();
+/*38*/
+
+        i$ = interfaceinvoke $stack6.<java.util.List: java.util.Iterator iterator()>();
+/*38*/
+/*38*/
+
+     label1:
+        $stack7 = interfaceinvoke i$.<java.util.Iterator: boolean hasNext()>();
+/*38*/
+
+        if $stack7 == 0 goto label2;
+/*38*/
+
+        $stack11 = interfaceinvoke i$.<java.util.Iterator: java.lang.Object next()>();
+/*41*/
+
+        each = (junit.framework.TestListener) $stack11;
+/*41*/
+
+        interfaceinvoke each.<junit.framework.TestListener: void addError(junit.framework.Test,java.lang.Throwable)>(test, e);
+/*39*/
+
+        goto label1;
+/*39*/
+
+     label2:
+        return;
+/*41*/
+    }
+

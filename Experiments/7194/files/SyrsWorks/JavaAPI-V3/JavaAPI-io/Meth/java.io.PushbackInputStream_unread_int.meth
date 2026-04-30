@@ -1,0 +1,23 @@
+void java.io.PushbackInputStream:unread(int i0)
+{
+int $i1;
+  int $i2;
+  int $i3;
+  byte[] $r1;
+  byte $b4;
+  java.io.IOException $r2;
+  this#java.io.PushbackInputStream:ensureOpen();
+ $i1=this.pos;
+ if ($i1!=0) goto label0;
+ $r2=new java.io.IOException;
+ $r2#java.io.IOException:init("Push back buffer is full");
+ throw $r2;
+ label0:$r1=this.buf;
+ $i2=this.pos;
+ $i3=($i2-1);
+ this.pos=$i3;
+ $b4=(byte) i0;
+ $r1[$i3]=$b4;
+ return;
+ }  
+

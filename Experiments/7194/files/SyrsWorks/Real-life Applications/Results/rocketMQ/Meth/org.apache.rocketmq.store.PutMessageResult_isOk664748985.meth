@@ -1,0 +1,35 @@
+boolean org.apache.rocketmq.store.PutMessageResult:isOk()
+{
+boolean $stack1;
+  org.apache.rocketmq.store.AppendMessageResult $stack2;
+  org.apache.rocketmq.store.PutMessageStatus $stack6;
+  org.apache.rocketmq.store.PutMessageStatus $stack7;
+  $stack1=this.remotePut;
+ if ($stack1==0) goto label0;
+ $stack7=this.putMessageStatus;
+ $stack6=org.apache.rocketmq.store.PutMessageStatus.PUT_OK;
+ if ($stack7==$stack6) goto label1;
+ $stack7=this.putMessageStatus;
+ $stack6=org.apache.rocketmq.store.PutMessageStatus.FLUSH_DISK_TIMEOUT;
+ if ($stack7==$stack6) goto label1;
+ $stack7=this.putMessageStatus;
+ $stack6=org.apache.rocketmq.store.PutMessageStatus.FLUSH_SLAVE_TIMEOUT;
+ if ($stack7==$stack6) goto label1;
+ $stack7=this.putMessageStatus;
+ $stack6=org.apache.rocketmq.store.PutMessageStatus.SLAVE_NOT_AVAILABLE;
+ if ($stack7!=$stack6) goto label2;
+ label1:$stack1=1;
+ goto label3;
+ label2:$stack1=0;
+ label3:return  $stack1;
+ label0:$stack2=this.appendMessageResult;
+ if ($stack2==null) goto label4;
+ $stack2=this.appendMessageResult;
+ $stack1 = $stack2.isOk();
+ if ($stack1==0) goto label4;
+ $stack1=1;
+ goto label5;
+ label4:$stack1=0;
+ label5:return  $stack1;
+ } 
+

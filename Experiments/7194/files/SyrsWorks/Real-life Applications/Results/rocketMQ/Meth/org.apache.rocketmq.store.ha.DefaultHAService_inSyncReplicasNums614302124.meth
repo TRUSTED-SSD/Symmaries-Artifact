@@ -1,0 +1,22 @@
+int org.apache.rocketmq.store.ha.DefaultHAService:inSyncReplicasNums(long masterPutWhere)
+{
+int inSyncNums;
+  java.util.Iterator l4;
+  org.apache.rocketmq.store.ha.HAConnection conn;
+  java.util.List $stack6;
+  boolean $stack8;
+  java.lang.Object $stack9;
+  inSyncNums=1;
+ $stack6=this.connectionList;
+ l4 = $stack6.iterator();
+ label0:$stack8 = l4.hasNext();
+ if ($stack8==0) goto label1;
+ $stack9 = l4.next();
+ conn=(org.apache.rocketmq.store.ha.HAConnection) $stack9;
+ $stack8 = this.isInSyncSlave(masterPutWhere,conn);
+ if ($stack8==0) goto label2;
+ inSyncNums=(inSyncNums+1);
+ label2:goto label0;
+ label1:return  inSyncNums;
+ } 
+

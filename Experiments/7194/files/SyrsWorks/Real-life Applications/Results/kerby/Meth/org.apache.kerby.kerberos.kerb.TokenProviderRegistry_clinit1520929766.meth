@@ -1,0 +1,31 @@
+static org.apache.kerby.kerberos.kerb.TokenProviderRegistry
+{
+java.util.ServiceLoader providers;
+  java.util.Iterator l1;
+  org.apache.kerby.kerberos.kerb.provider.TokenProvider provider;
+  org.slf4j.Logger $stack3;
+  java.util.concurrent.ConcurrentHashMap $stack4;
+  boolean $stack7;
+  java.lang.Object $stack8;
+  java.util.Map $stack9;
+  java.lang.String $stack10;
+  java.lang.Class $stack11;
+  $stack3 = org.slf4j.LoggerFactory.getLogger(org.apache.kerby.kerberos.kerb.TokenProviderRegistry);
+ org.apache.kerby.kerberos.kerb.TokenProviderRegistry.LOG=$stack3;
+ $stack4=new java.util.concurrent.ConcurrentHashMap;
+ $stack4#java.util.concurrent.ConcurrentHashMap();
+ org.apache.kerby.kerberos.kerb.TokenProviderRegistry.allProvider=$stack4;
+ providers = java.util.ServiceLoader.load(org.apache.kerby.kerberos.kerb.provider.TokenProvider);
+ l1 = providers.iterator();
+ label0:$stack7 = l1.hasNext();
+ if ($stack7==0) goto label1;
+ $stack8 = l1.next();
+ provider=(org.apache.kerby.kerberos.kerb.provider.TokenProvider) $stack8;
+ $stack9=org.apache.kerby.kerberos.kerb.TokenProviderRegistry.allProvider;
+ $stack10 = provider.getTokenType();
+ $stack11 = provider.getClass();
+ $stack9.put((java.lang.Object)$stack10,(java.lang.Object)$stack11);
+ goto label0;
+ label1:return;
+ } 
+

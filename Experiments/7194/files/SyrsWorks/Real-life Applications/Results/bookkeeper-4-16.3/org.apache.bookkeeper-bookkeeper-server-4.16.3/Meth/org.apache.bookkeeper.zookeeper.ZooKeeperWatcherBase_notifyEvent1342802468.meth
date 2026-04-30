@@ -1,0 +1,25 @@
+void org.apache.bookkeeper.zookeeper.ZooKeeperWatcherBase:notifyEvent(org.apache.zookeeper.WatchedEvent event)
+{
+java.util.Iterator l2;
+  org.apache.zookeeper.Watcher w;
+  java.util.concurrent.CopyOnWriteArraySet $stack5;
+  boolean $stack7;
+  java.lang.Object $stack8;
+  java.lang.Exception $stack10;
+  org.slf4j.Logger $stack11;
+  $stack5=this.childWatchers;
+ l2 = $stack5.iterator();
+ label0:$stack7 = l2.hasNext();
+ if ($stack7==0) goto label1;
+ $stack8 = l2.next();
+ w=(org.apache.zookeeper.Watcher) $stack8;
+ label2:w.process(event);
+ label3:goto label4;
+ label5:$stack10 = catch;
+ $stack11=org.apache.bookkeeper.zookeeper.ZooKeeperWatcherBase.LOG;
+ $stack11.warn("Encountered unexpected exception from watcher {} : ",(java.lang.Object)w,(java.lang.Object)$stack10);
+ label4:goto label0;
+ label1:return;
+ catch java.lang.Exception: label2 - label3 : label5;
+} 
+

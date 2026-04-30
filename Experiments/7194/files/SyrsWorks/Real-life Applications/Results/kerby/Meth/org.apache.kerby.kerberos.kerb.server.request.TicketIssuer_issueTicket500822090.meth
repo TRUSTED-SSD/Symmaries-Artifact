@@ -1,0 +1,30 @@
+org.apache.kerby.kerberos.kerb.type.ticket.Ticket org.apache.kerby.kerberos.kerb.server.request.TicketIssuer:issueTicket()
+{
+org.apache.kerby.kerberos.kerb.type.kdc.KdcReq request;
+  org.apache.kerby.kerberos.kerb.type.ticket.Ticket issuedTicket;
+  org.apache.kerby.kerberos.kerb.type.base.PrincipalName serverPrincipal;
+  java.lang.String serverRealm;
+  org.apache.kerby.kerberos.kerb.type.ticket.EncTicketPart encTicketPart;
+  org.apache.kerby.kerberos.kerb.type.base.EncryptionKey encryptionKey;
+  org.apache.kerby.kerberos.kerb.type.base.EncryptedData encryptedData;
+  org.apache.kerby.kerberos.kerb.server.request.KdcRequest $stack8;
+  org.apache.kerby.kerberos.kerb.type.kdc.KdcReqBody $stack12;
+  org.apache.kerby.kerberos.kerb.type.base.KeyUsage $stack16;
+  $stack8=this.kdcRequest;
+ request = $stack8.getKdcReq();
+ issuedTicket=new org.apache.kerby.kerberos.kerb.type.ticket.Ticket;
+ issuedTicket#org.apache.kerby.kerberos.kerb.type.ticket.Ticket();
+ serverPrincipal = this.getServerPrincipal();
+ issuedTicket.setSname(serverPrincipal);
+ $stack12 = request.getReqBody();
+ serverRealm = $stack12.getRealm();
+ issuedTicket.setRealm(serverRealm);
+ encTicketPart = this.makeEncTicketPart();
+ encryptionKey = this.getTicketEncryptionKey();
+ $stack16=org.apache.kerby.kerberos.kerb.type.base.KeyUsage.KDC_REP_TICKET;
+ encryptedData = org.apache.kerby.kerberos.kerb.common.EncryptionUtil.seal((org.apache.kerby.asn1.type.Asn1Encodeable)encTicketPart,encryptionKey,$stack16);
+ issuedTicket.setEncryptedEncPart(encryptedData);
+ issuedTicket.setEncPart(encTicketPart);
+ return  issuedTicket;
+ } 
+

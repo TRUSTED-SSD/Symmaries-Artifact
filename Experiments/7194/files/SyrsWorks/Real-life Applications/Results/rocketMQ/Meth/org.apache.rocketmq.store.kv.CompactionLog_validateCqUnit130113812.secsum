@@ -1,0 +1,7 @@
+boolean org.apache.rocketmq.store.kv.CompactionLog:validateCqUnit (org.apache.rocketmq.store.queue.CqUnit
+                                                                    cqUnit) {
+  guard = tt;
+  ret(level()) = pc ⊔ level(cqUnit) ⊔ obj_level(cqUnit);
+  ret(obj_level(cqUnit)) = if obj_level(cqUnit) = ⊤ ∨ pc ≠ ⊤ ∧ level(cqUnit) = ⊤ ∧ obj_level(cqUnit) = ⊥ ∧ obj_level(this) = ⊤ then ⊤ else ⊥;
+  ret(obj_level(this)) = if obj_level(this) = ⊤ ∨ pc ≠ ⊤ ∧ obj_level(cqUnit) = ⊤ ∧ obj_level(this) = ⊥ then ⊤ else ⊥;
+}

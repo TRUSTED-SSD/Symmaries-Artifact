@@ -1,0 +1,12 @@
+long org.apache.bookkeeper.bookie.LedgerCacheImpl:getLastEntry(long ledgerId)
+{
+long lastEntryInMem;
+  org.apache.bookkeeper.bookie.IndexInMemPageMgr $stack7;
+  org.apache.bookkeeper.bookie.IndexPersistenceMgr $stack9;
+  $stack7=this.indexPageManager;
+ lastEntryInMem = $stack7.getLastEntryInMem(ledgerId);
+ $stack9=this.indexPersistenceManager;
+ ledgerId = $stack9.getPersistEntryBeyondInMem(ledgerId,lastEntryInMem);
+ return  ledgerId;
+ } 
+

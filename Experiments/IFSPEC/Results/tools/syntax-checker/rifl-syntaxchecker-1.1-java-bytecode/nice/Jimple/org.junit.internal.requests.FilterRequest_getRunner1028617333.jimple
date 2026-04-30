@@ -1,0 +1,84 @@
+    public org.junit.runner.Runner getRunner()
+    {
+        org.junit.internal.requests.FilterRequest this;
+        java.lang.Object runner;
+        org.junit.runner.Request $stack2;
+        org.junit.runner.manipulation.Filter $stack4;
+        org.junit.runner.manipulation.NoTestsRemainException $stack5;
+        java.lang.Object[] $stack8;
+        java.lang.String $stack13;
+        java.lang.Exception tmp$1215073360;
+        org.junit.internal.runners.ErrorReportingRunner tmp$1086143817;
+        org.junit.runner.Runner tmp$1598758615;
+
+        this := @this: org.junit.internal.requests.FilterRequest;
+
+     label1:
+        $stack2 = this.<org.junit.internal.requests.FilterRequest: org.junit.runner.Request request>;
+/*36*/
+
+        runner = virtualinvoke $stack2.<org.junit.runner.Request: org.junit.runner.Runner getRunner()>();
+/*36*/
+/*36*/
+
+        $stack4 = this.<org.junit.internal.requests.FilterRequest: org.junit.runner.manipulation.Filter fFilter>;
+/*37*/
+
+        virtualinvoke $stack4.<org.junit.runner.manipulation.Filter: void apply(java.lang.Object)>(runner);
+/*37*/
+
+     label2:
+        tmp$1598758615 = (org.junit.runner.Runner) runner;
+
+        return tmp$1598758615;
+/*38*/
+
+     label3:
+        $stack5 := @caughtexception;
+/*38*/
+
+        runner = $stack5;
+/*39*/
+
+        tmp$1086143817 = new org.junit.internal.runners.ErrorReportingRunner;
+/*40*/
+
+        tmp$1215073360 = new java.lang.Exception;
+/*40*/
+
+        $stack8 = newarray (java.lang.Object)[2];
+/*40*/
+
+        $stack4 = this.<org.junit.internal.requests.FilterRequest: org.junit.runner.manipulation.Filter fFilter>;
+/*40*/
+
+        $stack13 = virtualinvoke $stack4.<org.junit.runner.manipulation.Filter: java.lang.String describe()>();
+/*40*/
+
+        $stack8[0] = $stack13;
+/*40*/
+
+        $stack2 = this.<org.junit.internal.requests.FilterRequest: org.junit.runner.Request request>;
+/*40*/
+
+        $stack13 = virtualinvoke $stack2.<java.lang.Object: java.lang.String toString()>();
+/*40*/
+
+        $stack8[1] = $stack13;
+/*40*/
+
+        $stack13 = staticinvoke <java.lang.String: java.lang.String format(java.lang.String,java.lang.Object[])>("No tests found matching %s from %s", $stack8);
+/*40*/
+
+        specialinvoke tmp$1215073360.<java.lang.Exception: void <init>(java.lang.String)>($stack13);
+/*40*/
+
+        specialinvoke tmp$1086143817.<org.junit.internal.runners.ErrorReportingRunner: void <init>(java.lang.Class,java.lang.Throwable)>(class "Lorg/junit/runner/manipulation/Filter;", tmp$1215073360);
+/*40*/
+
+        return tmp$1086143817;
+/*40*/
+
+        catch org.junit.runner.manipulation.NoTestsRemainException from label1 to label2 with label3;
+    }
+

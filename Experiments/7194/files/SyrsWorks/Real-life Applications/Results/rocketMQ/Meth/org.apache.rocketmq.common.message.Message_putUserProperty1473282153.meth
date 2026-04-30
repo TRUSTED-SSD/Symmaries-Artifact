@@ -1,0 +1,34 @@
+void org.apache.rocketmq.common.message.Message:putUserProperty(java.lang.String @name,java.lang.String value)
+{
+java.util.HashSet $stack3;
+  boolean $stack4;
+  java.lang.IllegalArgumentException $stack5;
+  java.lang.String $stack6;
+  java.lang.RuntimeException $stack11;
+  java.lang.Object[] $stack12;
+  java.lang.String name;
+name=@name;
+$stack3=org.apache.rocketmq.common.message.MessageConst.STRING_HASH_SET;
+ $stack4 = $stack3.contains((java.lang.Object)name);
+ if ($stack4==0) goto label0;
+ $stack11=new java.lang.RuntimeException;
+ $stack12=new java.lang.Object[1];
+ $stack12[0]=name;
+ name = java.lang.String.format("The Property<%s> is used by system, input another please",$stack12);
+ $stack11#java.lang.RuntimeException(name);
+ throw $stack11;
+ label0:if (value==null) goto label1;
+ $stack6 = value.trim();
+ $stack4 = $stack6.isEmpty();
+ if ($stack4!=0) goto label1;
+ if (name==null) goto label1;
+ $stack6 = name.trim();
+ $stack4 = $stack6.isEmpty();
+ if ($stack4==0) goto label2;
+ label1:$stack5=new java.lang.IllegalArgumentException;
+ $stack5#java.lang.IllegalArgumentException("The name or value of property can not be null or blank string!");
+ throw $stack5;
+ label2:this.putProperty(name,value);
+ return;
+ } 
+

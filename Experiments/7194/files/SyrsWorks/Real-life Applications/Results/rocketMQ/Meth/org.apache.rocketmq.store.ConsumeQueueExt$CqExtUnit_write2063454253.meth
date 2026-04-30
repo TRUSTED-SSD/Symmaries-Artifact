@@ -1,0 +1,45 @@
+byte[] org.apache.rocketmq.store.ConsumeQueueExt$CqExtUnit:write(java.nio.ByteBuffer @container)
+{
+byte[] $stack3;
+  int $stack5;
+  short $stack6;
+  long $stack17;
+  java.nio.ByteBuffer container;
+container=@container;
+$stack3=this.filterBitMap;
+ if ($stack3!=null) goto label0;
+ $stack5=0;
+ goto label1;
+ label0:$stack3=this.filterBitMap;
+ $stack5=#$stack3;
+ label1:$stack6=(short) $stack5;
+ this.bitMapSize=$stack6;
+ $stack6=this.bitMapSize;
+ $stack5=(20+$stack6);
+ $stack6=(short) $stack5;
+ this.size=$stack6;
+ if (container==null) goto label2;
+ $stack5 = container.capacity();
+ $stack6=this.size;
+ if ($stack5>=$stack6) goto label3;
+ label2:$stack6=this.size;
+ container = java.nio.ByteBuffer.allocate((int)$stack6);
+ label3:container.flip();
+ $stack6=this.size;
+ container.limit((int)$stack6);
+ $stack6=this.size;
+ container.putShort($stack6);
+ $stack17=this.tagsCode;
+ container.putLong($stack17);
+ $stack17=this.msgStoreTime;
+ container.putLong($stack17);
+ $stack6=this.bitMapSize;
+ container.putShort($stack6);
+ $stack6=this.bitMapSize;
+ if ($stack6<=0) goto label4;
+ $stack3=this.filterBitMap;
+ container.put($stack3);
+ label4:$stack3 = container.array();
+ return  $stack3;
+ } 
+

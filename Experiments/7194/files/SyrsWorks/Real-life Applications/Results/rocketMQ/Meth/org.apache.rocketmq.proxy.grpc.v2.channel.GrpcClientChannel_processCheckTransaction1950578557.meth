@@ -1,0 +1,34 @@
+java.util.concurrent.CompletableFuture org.apache.rocketmq.proxy.grpc.v2.channel.GrpcClientChannel:processCheckTransaction(org.apache.rocketmq.remoting.protocol.header.CheckTransactionStateRequestHeader header,org.apache.rocketmq.common.message.MessageExt messageExt,org.apache.rocketmq.proxy.service.transaction.TransactionData transactionData,java.util.concurrent.CompletableFuture responseFuture)
+{
+java.util.concurrent.CompletableFuture writeFuture;
+  java.lang.Throwable t;
+  apache.rocketmq.v2.TelemetryCommand$Builder $stack8;
+  apache.rocketmq.v2.RecoverOrphanedTransactionCommand$Builder $stack9;
+  java.lang.String $stack10;
+  org.apache.rocketmq.proxy.grpc.v2.common.GrpcConverter $stack12;
+  apache.rocketmq.v2.Message $stack13;
+  apache.rocketmq.v2.RecoverOrphanedTransactionCommand $stack15;
+  apache.rocketmq.v2.TelemetryCommand $stack17;
+  writeFuture=new java.util.concurrent.CompletableFuture;
+ writeFuture#java.util.concurrent.CompletableFuture();
+ label0:$stack8 = apache.rocketmq.v2.TelemetryCommand.newBuilder();
+ $stack9 = apache.rocketmq.v2.RecoverOrphanedTransactionCommand.newBuilder();
+ $stack10 = transactionData.getTransactionId();
+ $stack9 = $stack9.setTransactionId($stack10);
+ $stack12 = org.apache.rocketmq.proxy.grpc.v2.common.GrpcConverter.getInstance();
+ $stack13 = $stack12.buildMessage(messageExt);
+ $stack9 = $stack9.setMessage($stack13);
+ $stack15 = $stack9.build();
+ $stack8 = $stack8.setRecoverOrphanedTransactionCommand($stack15);
+ $stack17 = $stack8.build();
+ this#org.apache.rocketmq.proxy.grpc.v2.channel.GrpcClientChannel($stack17);
+ responseFuture.complete(null);
+ writeFuture.complete(null);
+ label1:goto label2;
+ label3:t = catch;
+ responseFuture.completeExceptionally(t);
+ writeFuture.completeExceptionally(t);
+ label2:return  writeFuture;
+ catch java.lang.Throwable: label0 - label1 : label3;
+} 
+

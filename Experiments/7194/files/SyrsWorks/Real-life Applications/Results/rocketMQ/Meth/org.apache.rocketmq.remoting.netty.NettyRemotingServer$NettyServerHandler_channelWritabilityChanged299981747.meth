@@ -1,0 +1,34 @@
+void org.apache.rocketmq.remoting.netty.NettyRemotingServer$NettyServerHandler:channelWritabilityChanged(io.netty.channel.ChannelHandlerContext ctx)
+{
+io.netty.channel.Channel channel;
+  boolean $stack4;
+  io.netty.channel.ChannelConfig $stack5;
+  org.apache.rocketmq.logging.org.slf4j.Logger $stack7;
+  java.lang.String $stack9;
+  long $stack10;
+  java.lang.Long $stack11;
+  channel = ctx.channel();
+ $stack4 = channel.isWritable();
+ if ($stack4==0) goto label0;
+ $stack5 = channel.config();
+ $stack4 = $stack5.isAutoRead();
+ if ($stack4!=0) goto label1;
+ $stack5 = channel.config();
+ $stack5.setAutoRead((boolean)1);
+ $stack7 = org.apache.rocketmq.remoting.netty.NettyRemotingServer.access$100();
+ $stack9 = org.apache.rocketmq.remoting.common.RemotingHelper.parseChannelRemoteAddr(channel);
+ $stack10 = channel.bytesBeforeUnwritable();
+ $stack11 = java.lang.Long.valueOf($stack10);
+ $stack7.info("Channel[{}] turns writable, bytes to buffer before changing channel to un-writable: {}",(java.lang.Object)$stack9,(java.lang.Object)$stack11);
+ goto label1;
+ label0:$stack5 = channel.config();
+ $stack5.setAutoRead((boolean)0);
+ $stack7 = org.apache.rocketmq.remoting.netty.NettyRemotingServer.access$100();
+ $stack9 = org.apache.rocketmq.remoting.common.RemotingHelper.parseChannelRemoteAddr(channel);
+ $stack10 = channel.bytesBeforeWritable();
+ $stack11 = java.lang.Long.valueOf($stack10);
+ $stack7.warn("Channel[{}] auto-read is disabled, bytes to drain before it turns writable: {}",(java.lang.Object)$stack9,(java.lang.Object)$stack11);
+ label1:this#io.netty.channel.SimpleChannelInboundHandler:channelWritabilityChanged(ctx);
+ return;
+ } 
+

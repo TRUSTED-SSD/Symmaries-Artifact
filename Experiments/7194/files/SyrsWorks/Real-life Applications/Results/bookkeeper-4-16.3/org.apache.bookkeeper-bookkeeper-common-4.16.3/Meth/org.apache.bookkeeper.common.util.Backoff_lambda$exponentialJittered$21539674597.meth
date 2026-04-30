@@ -1,0 +1,25 @@
+static java.lang.Long org.apache.bookkeeper.common.util.Backoff:lambda$exponentialJittered$2(java.util.concurrent.atomic.AtomicLong attempts,long maxNanos,long startNanos,java.lang.Long @lastMs)
+{
+long shift;
+  int $stack14;
+  java.util.concurrent.TimeUnit $stack18;
+  java.util.concurrent.ThreadLocalRandom $stack19;
+  java.util.concurrent.TimeUnit $stack21;
+  java.lang.Long lastMs;
+lastMs=@lastMs;
+shift = attempts.get();
+ shift = java.lang.Math.min(shift,62L);
+ $stack14=(int) shift;
+ shift=(1L<<$stack14);
+ shift=(startNanos * shift);
+ maxNanos = java.lang.Math.min(maxNanos,shift);
+ $stack18=java.util.concurrent.TimeUnit.MILLISECONDS;
+ $stack19 = java.util.concurrent.ThreadLocalRandom.current();
+ maxNanos = $stack19.nextLong(startNanos,maxNanos);
+ $stack21=java.util.concurrent.TimeUnit.NANOSECONDS;
+ maxNanos = $stack18.convert(maxNanos,$stack21);
+ attempts.incrementAndGet();
+ lastMs = java.lang.Long.valueOf(maxNanos);
+ return  lastMs;
+ } 
+

@@ -1,0 +1,23 @@
+org.apache.rocketmq.client.consumer.AckResult org.apache.rocketmq.proxy.processor.ConsumerProcessor:lambda$changeInvisibleTime$1(long commitLogOffset,org.apache.rocketmq.client.consumer.AckResult ackResult)
+{
+org.apache.rocketmq.client.consumer.AckResult result;
+  java.lang.String $stack5;
+  boolean $stack6;
+  org.apache.rocketmq.client.consumer.AckStatus $stack8;
+  long $stack9;
+  $stack5 = ackResult.getExtraInfo();
+ $stack6 = org.apache.commons.lang3.StringUtils.isNotBlank((java.lang.CharSequence)$stack5);
+ if ($stack6==0) goto label0;
+ result=new org.apache.rocketmq.client.consumer.AckResult;
+ result#org.apache.rocketmq.client.consumer.AckResult();
+ $stack8 = ackResult.getStatus();
+ result.setStatus($stack8);
+ $stack9 = result.getPopTime();
+ result.setPopTime($stack9);
+ $stack5 = ackResult.getExtraInfo();
+ $stack5 = this.createHandle($stack5,commitLogOffset);
+ result.setExtraInfo($stack5);
+ return  result;
+ label0:return  ackResult;
+ } 
+

@@ -1,0 +1,12 @@
+java.util.List org.apache.rocketmq.broker.processor.QueryAssignmentProcessor:allocate (
+  java.lang.String consumerGroup, java.lang.String currentCID,
+  java.util.List mqAll, java.util.List cidAll) {
+  guard = tt;
+  ret(level()) = ⊥;
+  ret(obj_level()) = level(cidAll) ⊔ level(consumerGroup) ⊔ level(currentCID) ⊔ level(mqAll) ⊔ obj_level(cidAll) ⊔ obj_level(consumerGroup);
+  ret(obj_level(cidAll)) = level(cidAll) ⊔ level(consumerGroup) ⊔ level(currentCID) ⊔ level(mqAll) ⊔ obj_level(cidAll) ⊔ obj_level(consumerGroup);
+  ret(obj_level(consumerGroup)) = level(cidAll) ⊔ level(currentCID) ⊔ level(mqAll) ⊔ obj_level(cidAll) ⊔ obj_level(consumerGroup);
+  ret(obj_level(currentCID)) = level(cidAll) ⊔ level(currentCID) ⊔ level(mqAll) ⊔ obj_level(cidAll) ⊔ obj_level(currentCID);
+  ret(obj_level(mqAll)) = level(cidAll) ⊔ level(consumerGroup) ⊔ level(currentCID) ⊔ level(mqAll) ⊔ obj_level(cidAll) ⊔ obj_level(consumerGroup);
+  ret(obj_level(this)) = level(cidAll) ⊔ level(consumerGroup) ⊔ level(currentCID) ⊔ level(mqAll) ⊔ obj_level(cidAll) ⊔ obj_level(consumerGroup) ⊔ obj_level(this);
+}

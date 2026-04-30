@@ -1,0 +1,19 @@
+boolean java.io.File:setWritable(boolean z0,boolean z1)
+{
+java.lang.SecurityManager r1;
+  boolean $z2;
+  java.io.FileSystem $r2;
+  boolean $z3;
+  java.lang.String $r3;
+  r1 = java.lang.System.getSecurityManager();
+ if (r1==null) goto label0;
+ $r3=this.path;
+ r1.checkWrite($r3);
+ label0:$z2 = this.isInvalid();
+ if ($z2==0) goto label1;
+ return  0;
+ label1:$r2=java.io.File.fs;
+ $z3 = $r2.setPermission(this,2,z0,z1);
+ return  $z3;
+ }  
+

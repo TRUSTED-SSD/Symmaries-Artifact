@@ -1,0 +1,28 @@
+boolean org.apache.bookkeeper.bookie.datainteg.EntryCopierImpl$SinBin:addFailed(org.apache.bookkeeper.net.BookieId bookie)
+{
+long newDeadline;
+  java.lang.Long oldDeadline;
+  com.google.common.base.Ticker $stack5;
+  java.util.concurrent.TimeUnit $stack6;
+  long $stack9;
+  java.util.concurrent.ConcurrentMap $stack10;
+  java.lang.Object $stack12;
+  boolean $stack13;
+  $stack6=java.util.concurrent.TimeUnit.NANOSECONDS;
+ $stack5=this.ticker;
+ newDeadline = $stack5.read();
+dummyClass.highSourceMut(newDeadline);
+ newDeadline = $stack6.toMillis(newDeadline);
+ $stack9 = org.apache.bookkeeper.bookie.datainteg.EntryCopierImpl.access$400();
+ newDeadline=(newDeadline+$stack9);
+ $stack10=this.errorBookies;
+ oldDeadline = java.lang.Long.valueOf(newDeadline);
+ $stack12 = $stack10.put((java.lang.Object)bookie,(java.lang.Object)oldDeadline);
+ oldDeadline=(java.lang.Long) $stack12;
+ if (oldDeadline!=null) goto label0;
+ $stack13=1;
+ goto label1;
+ label0:$stack13=0;
+ label1:return  $stack13;
+ } 
+

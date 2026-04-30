@@ -1,0 +1,48 @@
+long org.apache.rocketmq.client.impl.MQClientAPIImpl:queryConsumerOffset(java.lang.String addr,org.apache.rocketmq.remoting.protocol.header.QueryConsumerOffsetRequestHeader requestHeader,long timeoutMillis)
+{
+org.apache.rocketmq.remoting.protocol.RemotingCommand request;
+  org.apache.rocketmq.remoting.protocol.header.QueryConsumerOffsetResponseHeader responseHeader;
+  org.apache.rocketmq.client.ClientConfig $stack9;
+  org.apache.rocketmq.remoting.RemotingClient $stack10;
+  boolean $stack11;
+  java.lang.String $stack12;
+  int $stack15;
+  org.apache.rocketmq.client.exception.OffsetNotFoundException $stack16;
+  org.apache.rocketmq.remoting.CommandCustomHeader $stack19;
+  java.lang.Long $stack20;
+  org.apache.rocketmq.client.exception.MQBrokerException $stack22;
+  java.lang.AssertionError $stack26;
+  request = org.apache.rocketmq.remoting.protocol.RemotingCommand.createRequestCommand(14,(org.apache.rocketmq.remoting.CommandCustomHeader)requestHeader);
+ $stack10=this.remotingClient;
+ $stack9=this.clientConfig;
+ $stack11 = $stack9.isVipChannelEnabled();
+ $stack12 = org.apache.rocketmq.common.MixAll.brokerVIPChannel($stack11,addr);
+ request = $stack10.invokeSync($stack12,request,timeoutMillis);
+ $stack11=org.apache.rocketmq.client.impl.MQClientAPIImpl.$assertionsDisabled;
+ if ($stack11!=0) goto label0;
+ if (request!=null) goto label0;
+ $stack26=new java.lang.AssertionError;
+ $stack26#java.lang.AssertionError();
+ throw $stack26;
+ label0:$stack15 = request.getCode();
+ switch [$stack15]
+if 0 goto label1;
+if 1 goto label2;
+goto label3;
+ label1:$stack19 = request.decodeCommandCustomHeader(org.apache.rocketmq.remoting.protocol.header.QueryConsumerOffsetResponseHeader);
+ responseHeader=(org.apache.rocketmq.remoting.protocol.header.QueryConsumerOffsetResponseHeader) $stack19;
+ $stack20 = responseHeader.getOffset();
+ timeoutMillis = $stack20.longValue();
+ return  timeoutMillis;
+ label2:$stack16=new org.apache.rocketmq.client.exception.OffsetNotFoundException;
+ $stack15 = request.getCode();
+ $stack12 = request.getRemark();
+ $stack16#org.apache.rocketmq.client.exception.OffsetNotFoundException($stack15,$stack12,addr);
+ throw $stack16;
+ label3:$stack22=new org.apache.rocketmq.client.exception.MQBrokerException;
+ $stack15 = request.getCode();
+ $stack12 = request.getRemark();
+ $stack22#org.apache.rocketmq.client.exception.MQBrokerException($stack15,$stack12,addr);
+ throw $stack22;
+ } 
+

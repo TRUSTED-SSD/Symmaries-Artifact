@@ -1,0 +1,40 @@
+void org.apache.rocketmq.proxy.grpc.OptionalSSLProtocolNegotiator$PortUnificationServerHandler:decode(io.grpc.netty.shaded.io.netty.channel.ChannelHandlerContext ctx,io.grpc.netty.shaded.io.netty.buffer.ByteBuf in,java.util.List out)
+{
+java.lang.Exception e;
+  int $stack5;
+  boolean $stack6;
+  io.grpc.netty.shaded.io.netty.channel.ChannelPipeline $stack7;
+  java.lang.String $stack8;
+  io.grpc.netty.shaded.io.netty.channel.ChannelHandler $stack9;
+  io.grpc.netty.shaded.io.grpc.netty.ProtocolNegotiationEvent $stack11;
+  org.apache.rocketmq.logging.org.slf4j.Logger $stack23;
+  label0:$stack5 = in.readableBytes();
+dummyClass.highSourceMut($stack5);
+ if ($stack5>=5) goto label1;
+ label2:return;
+ label1:$stack6 = io.grpc.netty.shaded.io.netty.handler.ssl.SslHandler.isEncrypted(in);
+ if ($stack6==0) goto label3;
+ $stack7 = ctx.pipeline();
+ $stack8 = ctx.name();
+ $stack9=this.ssl;
+ $stack7.addAfter($stack8,null,$stack9);
+ goto label4;
+ label3:$stack7 = ctx.pipeline();
+ $stack8 = ctx.name();
+ $stack9=this.plaintext;
+ $stack7.addAfter($stack8,null,$stack9);
+ label4:$stack11 = io.grpc.netty.shaded.io.grpc.netty.InternalProtocolNegotiationEvent.getDefault();
+ ctx.fireUserEventTriggered((java.lang.Object)$stack11);
+ $stack7 = ctx.pipeline();
+ $stack9=(io.grpc.netty.shaded.io.netty.channel.ChannelHandler) this;
+ $stack7.remove($stack9);
+ label5:goto label6;
+ label7:e = catch;
+ $stack23 = org.apache.rocketmq.proxy.grpc.OptionalSSLProtocolNegotiator.access$000();
+ $stack23.error("process protocol negotiator failed.",(java.lang.Throwable)e);
+ throw e;
+ label6:return;
+ catch java.lang.Exception: label0 - label2 : label7;
+catch java.lang.Exception: label1 - label5 : label7;
+} 
+

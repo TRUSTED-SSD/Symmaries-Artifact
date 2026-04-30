@@ -1,0 +1,23 @@
+void org.apache.bookkeeper.proto.ReadEntryProcessorV3:sendResponse(org.apache.bookkeeper.proto.BookkeeperProtocol$ReadResponse readResponse)
+{
+org.apache.bookkeeper.proto.BookkeeperProtocol$Response$Builder response;
+  org.apache.bookkeeper.proto.BookkeeperProtocol$BKPacketHeader $stack4;
+  org.apache.bookkeeper.proto.BookkeeperProtocol$StatusCode $stack6;
+  org.apache.bookkeeper.proto.BookkeeperProtocol$Response $stack10;
+  org.apache.bookkeeper.stats.OpStatsLogger $stack11;
+  org.apache.bookkeeper.proto.BookieRequestProcessor $stack12;
+  response = org.apache.bookkeeper.proto.BookkeeperProtocol$Response.newBuilder();
+ $stack4 = this.getHeader();
+ response = response.setHeader($stack4);
+ $stack6 = readResponse.getStatus();
+ response = response.setStatus($stack6);
+ response = response.setReadResponse(readResponse);
+ $stack6 = response.getStatus();
+ $stack10 = response.build();
+ $stack11=this.reqStats;
+ this#org.apache.bookkeeper.proto.PacketProcessorBaseV3($stack6,(java.lang.Object)$stack10,$stack11);
+ $stack12=this.requestProcessor;
+ $stack12.onReadRequestFinish();
+ return;
+ } 
+

@@ -1,0 +1,35 @@
+void org.apache.rocketmq.store.DefaultMessageStore:lambda$asyncPutMessages$1(long beginTime,org.apache.rocketmq.common.message.MessageExtBatch messageExtBatch,org.apache.rocketmq.store.PutMessageResult result)
+{
+org.apache.rocketmq.common.SystemClock $stack7;
+  long $stack8;
+  byte $stack9;
+  org.apache.rocketmq.store.StoreStatsService $stack10;
+  java.util.concurrent.atomic.LongAdder $stack12;
+  boolean $stack13;
+  org.apache.rocketmq.logging.org.slf4j.Logger $stack16;
+  java.lang.Long $stack18;
+  byte[] $stack19;
+  int $stack20;
+  java.lang.Integer $stack21;
+  $stack7 = this.getSystemClock();
+ $stack8 = $stack7.now();
+ beginTime=($stack8-beginTime);
+ $stack9=(beginTime cmp 500L);
+ if ($stack9<=0) goto label0;
+ $stack16=org.apache.rocketmq.store.DefaultMessageStore.LOGGER;
+ $stack18 = java.lang.Long.valueOf(beginTime);
+ $stack19 = messageExtBatch.getBody();
+ $stack20=#$stack19;
+ $stack21 = java.lang.Integer.valueOf($stack20);
+ $stack16.warn("not in lock eclipse time(ms)={}, bodyLength={}",(java.lang.Object)$stack18,(java.lang.Object)$stack21);
+ label0:$stack10=this.storeStatsService;
+ $stack10.setPutMessageEntireTimeMax(beginTime);
+ if (null==result) goto label1;
+ $stack13 = result.isOk();
+ if ($stack13!=0) goto label2;
+ label1:$stack10=this.storeStatsService;
+ $stack12 = $stack10.getPutMessageFailedTimes();
+ $stack12.add(1L);
+ label2:return;
+ } 
+

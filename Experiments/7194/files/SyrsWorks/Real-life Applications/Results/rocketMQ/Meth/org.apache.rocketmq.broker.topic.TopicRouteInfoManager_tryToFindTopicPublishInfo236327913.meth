@@ -1,0 +1,19 @@
+org.apache.rocketmq.client.impl.producer.TopicPublishInfo org.apache.rocketmq.broker.topic.TopicRouteInfoManager:tryToFindTopicPublishInfo(java.lang.String topic)
+{
+org.apache.rocketmq.client.impl.producer.TopicPublishInfo topicPublishInfo;
+  java.util.concurrent.ConcurrentMap $stack3;
+  java.lang.Object $stack4;
+  boolean $stack7;
+  $stack3=this.topicPublishInfoTable;
+ $stack4 = $stack3.get((java.lang.Object)topic);
+ topicPublishInfo=(org.apache.rocketmq.client.impl.producer.TopicPublishInfo) $stack4;
+ if (null==topicPublishInfo) goto label0;
+ $stack7 = topicPublishInfo.ok();
+ if ($stack7!=0) goto label1;
+ label0:this.updateTopicRouteInfoFromNameServer(topic,(boolean)1,(boolean)0);
+ $stack3=this.topicPublishInfoTable;
+ $stack4 = $stack3.get((java.lang.Object)topic);
+ topicPublishInfo=(org.apache.rocketmq.client.impl.producer.TopicPublishInfo) $stack4;
+ label1:return  topicPublishInfo;
+ } 
+

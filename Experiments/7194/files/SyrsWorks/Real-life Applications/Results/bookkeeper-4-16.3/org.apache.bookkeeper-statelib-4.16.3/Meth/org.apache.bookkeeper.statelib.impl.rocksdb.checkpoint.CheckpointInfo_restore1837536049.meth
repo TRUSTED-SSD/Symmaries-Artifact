@@ -1,0 +1,19 @@
+org.apache.bookkeeper.stream.proto.kv.store.CheckpointMetadata org.apache.bookkeeper.statelib.impl.rocksdb.checkpoint.CheckpointInfo:restore(java.io.File dbPath,org.apache.bookkeeper.statelib.impl.rocksdb.checkpoint.RocksdbRestoreTask task)
+{
+org.apache.bookkeeper.stream.proto.kv.store.CheckpointMetadata $stack3;
+  java.lang.String $stack4;
+  org.slf4j.Logger $stack5;
+  java.nio.file.Path $stack8;
+  $stack4=this.id;
+ $stack3=this.metadata;
+ task.restore($stack4,$stack3);
+ this.updateCurrent(dbPath);
+ $stack5=org.apache.bookkeeper.statelib.impl.rocksdb.checkpoint.CheckpointInfo.log;
+ $stack4=this.id;
+ $stack8 = this.getCheckpointPath(dbPath);
+ dummyClass.lowSink("Successfully restore checkpoint {} to {}");
+$stack5.info("Successfully restore checkpoint {} to {}",(java.lang.Object)$stack4,(java.lang.Object)$stack8);
+ $stack3=this.metadata;
+ return  $stack3;
+ } 
+

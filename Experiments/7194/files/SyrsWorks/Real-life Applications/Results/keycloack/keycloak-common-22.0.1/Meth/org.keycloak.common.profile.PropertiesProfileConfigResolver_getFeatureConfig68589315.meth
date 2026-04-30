@@ -1,0 +1,58 @@
+org.keycloak.common.profile.ProfileConfigResolver$FeatureConfig org.keycloak.common.profile.PropertiesProfileConfigResolver:getFeatureConfig(org.keycloak.common.Profile$Feature feature)
+{
+java.lang.String config;
+  java.lang.String l3;
+  byte l4;
+  java.lang.StringBuilder $stack5;
+  java.util.Properties $stack6;
+  org.keycloak.common.profile.ProfileConfigResolver$FeatureConfig $stack13;
+  int $stack14;
+  boolean $stack15;
+  org.keycloak.common.profile.ProfileException $stack18;
+  $stack6=this.properties;
+ $stack5=new java.lang.StringBuilder;
+ $stack5#java.lang.StringBuilder();
+ $stack5 = $stack5.append("keycloak.profile.feature.");
+ config = feature.name();
+ config = config.toLowerCase();
+ $stack5 = $stack5.append(config);
+ config = $stack5.toString();
+ config = $stack6.getProperty(config);
+ if (config==null) goto label0;
+ l3=config;
+ l4=-1;
+ $stack14 = config.hashCode();
+ switch [$stack14]
+if 0 goto label1;
+if 1 goto label2;
+goto label3;
+ label1:$stack15 = config.equals((java.lang.Object)"enabled");
+ if ($stack15==0) goto label3;
+ l4=0;
+ goto label3;
+ label2:$stack15 = config.equals((java.lang.Object)"disabled");
+ if ($stack15==0) goto label3;
+ l4=1;
+ label3:switch [l4]
+if 0 goto label4;
+if 1 goto label5;
+goto label6;
+ label4:$stack13=org.keycloak.common.profile.ProfileConfigResolver$FeatureConfig.ENABLED;
+ return  $stack13;
+ label5:$stack13=org.keycloak.common.profile.ProfileConfigResolver$FeatureConfig.DISABLED;
+ return  $stack13;
+ label6:$stack18=new org.keycloak.common.profile.ProfileException;
+ $stack5=new java.lang.StringBuilder;
+ $stack5#java.lang.StringBuilder();
+ $stack5 = $stack5.append("Invalid config value \'");
+ $stack5 = $stack5.append(config);
+ $stack5 = $stack5.append("\' for feature ");
+ config = feature.getKey();
+ $stack5 = $stack5.append(config);
+ config = $stack5.toString();
+ $stack18#org.keycloak.common.profile.ProfileException(config);
+ throw $stack18;
+ label0:$stack13=org.keycloak.common.profile.ProfileConfigResolver$FeatureConfig.UNCONFIGURED;
+ return  $stack13;
+ } 
+

@@ -1,0 +1,45 @@
+void org.apache.bookkeeper.statelib.impl.journal.AbstractStateStoreWithJournal$3:onSuccess(org.apache.distributedlog.LogRecordWithDLSN record)
+{
+org.slf4j.Logger $stack3;
+  boolean $stack4;
+  org.apache.bookkeeper.statelib.impl.journal.AbstractStateStoreWithJournal $stack5;
+  org.apache.bookkeeper.statelib.impl.journal.CommandProcessor $stack6;
+  long $stack7;
+  io.netty.buffer.ByteBuf $stack8;
+  org.apache.bookkeeper.statelib.api.StateStore $stack10;
+  org.apache.distributedlog.api.AsyncLogReader $stack11;
+  java.lang.Object[] $stack14;
+  org.apache.distributedlog.DLSN $stack17;
+  java.lang.String $stack20;
+  org.apache.bookkeeper.statelib.api.exceptions.StateStoreRuntimeException $stack27;
+  $stack3 = org.apache.bookkeeper.statelib.impl.journal.AbstractStateStoreWithJournal.access$100();
+ $stack4 = $stack3.isDebugEnabled();
+ if ($stack4==0) goto label0;
+ $stack3 = org.apache.bookkeeper.statelib.impl.journal.AbstractStateStoreWithJournal.access$100();
+ $stack14=new java.lang.Object[3];
+ $stack14[0]=record;
+ $stack17 = record.getDlsn();
+ $stack14[1]=$stack17;
+ $stack5=this.this$0;
+ $stack20 = $stack5.name();
+ $stack14[2]=$stack20;
+ dummyClass.lowSink("Received command record {} @ {} to replay at mvcc store {}");
+$stack3.debug("Received command record {} @ {} to replay at mvcc store {}",$stack14);
+ label0:$stack5=this.this$0;
+ $stack6 = org.apache.bookkeeper.statelib.impl.journal.AbstractStateStoreWithJournal.access$200($stack5);
+ $stack7 = record.getTransactionId();
+ $stack8 = record.getPayloadBuf();
+ $stack5=this.this$0;
+ $stack10=$stack5.localStore;
+ $stack6.applyCommand($stack7,$stack8,(java.lang.Object)$stack10);
+ $stack5=this.this$0;
+ $stack11=this.val$reader;
+ org.apache.bookkeeper.statelib.impl.journal.AbstractStateStoreWithJournal.access$500($stack5,$stack11);
+ label1:goto label2;
+ label3:$stack27 = catch;
+ $stack3 = org.apache.bookkeeper.statelib.impl.journal.AbstractStateStoreWithJournal.access$100();
+ $stack3.error("Fail to reply command record {}",(java.lang.Object)record,(java.lang.Object)$stack27);
+ label2:return;
+ catch org.apache.bookkeeper.statelib.api.exceptions.StateStoreRuntimeException: label0 - label1 : label3;
+} 
+

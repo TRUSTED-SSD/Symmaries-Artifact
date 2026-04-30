@@ -1,0 +1,29 @@
+static void org.apache.bookkeeper.common.util.affinity.impl.CpuAffinityImpl:init()
+{
+java.lang.Throwable e;
+  boolean $stack2;
+  org.slf4j.Logger $stack4;
+  java.lang.String $stack6;
+  java.lang.Throwable $stack7;
+  label0:org.apache.bookkeeper.common.util.affinity.impl.NativeUtils.loadLibraryFromJar("/lib/libcpu-affinity.so");
+ $stack2 = org.apache.bookkeeper.common.util.affinity.impl.CpuAffinityJni.isAvailable();
+ org.apache.bookkeeper.common.util.affinity.impl.CpuAffinityImpl.isSupported=$stack2;
+ label1:org.apache.bookkeeper.common.util.affinity.impl.CpuAffinityImpl.isInitialized=1;
+ goto label2;
+ label3:e = catch;
+ $stack4=org.apache.bookkeeper.common.util.affinity.impl.CpuAffinityImpl.log;
+ $stack6 = e.getMessage();
+ $stack4.warn("Unable to load CPU affinity library: {}",(java.lang.Object)$stack6,(java.lang.Object)e);
+ org.apache.bookkeeper.common.util.affinity.impl.CpuAffinityImpl.isSupported=0;
+ label4:org.apache.bookkeeper.common.util.affinity.impl.CpuAffinityImpl.isInitialized=1;
+ goto label2;
+ label5:$stack7 = catch;
+ org.apache.bookkeeper.common.util.affinity.impl.CpuAffinityImpl.isInitialized=1;
+ throw $stack7;
+ label2:return;
+ catch java.lang.Exception: label0 - label1 : label3;
+catch java.lang.UnsatisfiedLinkError: label0 - label1 : label3;
+catch java.lang.Throwable: label0 - label1 : label5;
+catch java.lang.Throwable: label3 - label4 : label5;
+} 
+

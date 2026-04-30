@@ -1,0 +1,33 @@
+org.apache.kerby.kerberos.kerb.server.preauth.PreauthContext org.apache.kerby.kerberos.kerb.server.preauth.PreauthHandler:preparePreauthContext(org.apache.kerby.kerberos.kerb.server.request.KdcRequest kdcRequest)
+{
+org.apache.kerby.kerberos.kerb.server.preauth.PreauthContext preauthContext;
+  org.apache.kerby.kerberos.kerb.server.KdcContext kdcContext;
+  java.util.Iterator l4;
+  org.apache.kerby.kerberos.kerb.server.preauth.KdcPreauth preauth;
+  org.apache.kerby.kerberos.kerb.server.preauth.PreauthHandle handle;
+  org.apache.kerby.kerberos.kerb.server.KdcConfig $stack9;
+  boolean $stack10;
+  java.util.List $stack11;
+  java.lang.Object $stack14;
+  preauthContext=new org.apache.kerby.kerberos.kerb.server.preauth.PreauthContext;
+ preauthContext#org.apache.kerby.kerberos.kerb.server.preauth.PreauthContext();
+ kdcContext = kdcRequest.getKdcContext();
+ this.initWith(kdcContext);
+ $stack9 = kdcContext.getConfig();
+ $stack10 = $stack9.isPreauthRequired();
+ preauthContext.setPreauthRequired($stack10);
+ $stack11=this.preauths;
+ l4 = $stack11.iterator();
+ label0:$stack10 = l4.hasNext();
+ if ($stack10==0) goto label1;
+ $stack14 = l4.next();
+ preauth=(org.apache.kerby.kerberos.kerb.server.preauth.KdcPreauth) $stack14;
+ handle=new org.apache.kerby.kerberos.kerb.server.preauth.PreauthHandle;
+ handle#org.apache.kerby.kerberos.kerb.server.preauth.PreauthHandle(preauth);
+ handle.initRequestContext(kdcRequest);
+ $stack11 = preauthContext.getHandles();
+ $stack11.add((java.lang.Object)handle);
+ goto label0;
+ label1:return  preauthContext;
+ } 
+

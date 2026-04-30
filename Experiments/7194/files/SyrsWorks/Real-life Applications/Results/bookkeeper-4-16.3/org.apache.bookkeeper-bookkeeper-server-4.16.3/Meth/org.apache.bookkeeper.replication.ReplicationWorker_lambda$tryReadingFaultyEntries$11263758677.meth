@@ -1,0 +1,30 @@
+static void org.apache.bookkeeper.replication.ReplicationWorker:lambda$tryReadingFaultyEntries$1(java.util.concurrent.ConcurrentSkipListSet entriesUnableToReadForThisLedger,java.util.concurrent.atomic.AtomicInteger numOfResponsesToWaitFor,java.util.concurrent.CountDownLatch multiReadComplete,long entryIdToRead,long ledgerId,java.util.concurrent.atomic.AtomicInteger returnRCValue,int rc,org.apache.bookkeeper.client.LedgerHandle ledHan,java.util.Enumeration seq,java.lang.Object ctx)
+{
+long thisEntryId;
+  java.lang.Long $stack14;
+  java.lang.Object[] $stack16;
+  org.slf4j.Logger $stack17;
+  java.lang.Integer $stack20;
+  $stack14=(java.lang.Long) ctx;
+ thisEntryId = $stack14.longValue();
+ if (rc!=0) goto label0;
+ $stack14 = java.lang.Long.valueOf(thisEntryId);
+ entriesUnableToReadForThisLedger.remove((java.lang.Object)$stack14);
+ rc = numOfResponsesToWaitFor.decrementAndGet();
+ if (rc!=0) goto label1;
+ multiReadComplete.countDown();
+ goto label1;
+ label0:$stack17=org.apache.bookkeeper.replication.ReplicationWorker.LOG;
+ $stack16=new java.lang.Object[3];
+ $stack20 = java.lang.Integer.valueOf(rc);
+ $stack16[0]=$stack20;
+ $stack14 = java.lang.Long.valueOf(entryIdToRead);
+ $stack16[1]=$stack14;
+ $stack14 = java.lang.Long.valueOf(ledgerId);
+ $stack16[2]=$stack14;
+ $stack17.error("Received error: {} while trying to read entry: {} of ledger: {} in ReplicationWorker",$stack16);
+ returnRCValue.compareAndSet(0,rc);
+ multiReadComplete.countDown();
+ label1:return;
+ } 
+

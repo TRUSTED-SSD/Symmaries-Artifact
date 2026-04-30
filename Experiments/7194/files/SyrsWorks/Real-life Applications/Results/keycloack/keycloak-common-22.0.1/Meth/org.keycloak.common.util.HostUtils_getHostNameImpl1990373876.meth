@@ -1,0 +1,32 @@
+static java.lang.String org.keycloak.common.util.HostUtils:getHostNameImpl()
+{
+java.lang.String bindAddr;
+  java.net.InetAddress $stack7;
+  java.lang.String $stack10;
+  boolean $stack11;
+  java.net.UnknownHostException $stack14;
+  bindAddr = java.lang.System.getProperty("jboss.bind.address");
+ if (bindAddr==null) goto label0;
+ $stack10 = bindAddr.trim();
+ $stack11 = $stack10.equals((java.lang.Object)"0.0.0.0");
+ if ($stack11!=0) goto label0;
+ return  bindAddr;
+ label0:bindAddr = java.lang.System.getProperty("jboss.qualified.host.name");
+ if (bindAddr==null) goto label1;
+ return  bindAddr;
+ label1:bindAddr = java.lang.System.getenv("HOSTNAME");
+ if (bindAddr==null) goto label2;
+ return  bindAddr;
+ label2:bindAddr = java.lang.System.getenv("COMPUTERNAME");
+ if (bindAddr==null) goto label3;
+ return  bindAddr;
+ label3:$stack7 = org.keycloak.common.util.HostUtils.getLocalHost();
+ bindAddr = $stack7.getHostName();
+ bindAddr = org.keycloak.common.util.NetworkUtils.canonize(bindAddr);
+ label4:return  bindAddr;
+ label5:$stack14 = catch;
+ $stack14.printStackTrace();
+ return  "unknown-host.unknown-domain";
+ catch java.net.UnknownHostException: label3 - label4 : label5;
+} 
+

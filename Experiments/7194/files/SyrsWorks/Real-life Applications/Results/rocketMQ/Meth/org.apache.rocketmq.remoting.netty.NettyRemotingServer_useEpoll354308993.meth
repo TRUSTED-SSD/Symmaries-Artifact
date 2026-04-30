@@ -1,0 +1,17 @@
+boolean org.apache.rocketmq.remoting.netty.NettyRemotingServer:useEpoll()
+{
+boolean $stack1;
+  org.apache.rocketmq.remoting.netty.NettyServerConfig $stack2;
+  $stack1 = org.apache.rocketmq.common.utils.NetworkUtil.isLinuxPlatform();
+ if ($stack1==0) goto label0;
+ $stack2=this.nettyServerConfig;
+ $stack1 = $stack2.isUseEpollNativeSelector();
+ if ($stack1==0) goto label0;
+ $stack1 = io.netty.channel.epoll.Epoll.isAvailable();
+ if ($stack1==0) goto label0;
+ $stack1=1;
+ goto label1;
+ label0:$stack1=0;
+ label1:return  $stack1;
+ } 
+

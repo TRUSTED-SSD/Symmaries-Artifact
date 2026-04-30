@@ -1,0 +1,60 @@
+    private junit.framework.Test testCaseForClass(java.lang.Class)
+    {
+        junit.framework.TestSuite $this;
+        java.lang.Class each, $stack2;
+        boolean $stack3;
+        java.lang.StringBuilder $stack4;
+        java.lang.String $stack5;
+        junit.framework.Test $stack9;
+
+        $this := @this: junit.framework.TestSuite;
+
+        each := @parameter0: java.lang.Class;
+
+        $stack2 = class "Ljunit/framework/TestCase;";
+/*188*/
+
+        $stack3 = virtualinvoke $stack2.<java.lang.Class: boolean isAssignableFrom(java.lang.Class)>(each);
+/*188*/
+
+        if $stack3 == 0 goto label1;
+/*188*/
+
+        $this = new junit.framework.TestSuite;
+/*189*/
+
+        each = virtualinvoke each.<java.lang.Class: java.lang.Class asSubclass(java.lang.Class)>(class "Ljunit/framework/TestCase;");
+/*189*/
+
+        specialinvoke $this.<junit.framework.TestSuite: void <init>(java.lang.Class)>(each);
+/*189*/
+
+        return $this;
+/*189*/
+
+     label1:
+        $stack4 = new java.lang.StringBuilder;
+/*191*/
+
+        specialinvoke $stack4.<java.lang.StringBuilder: void <init>()>();
+/*191*/
+
+        $stack5 = virtualinvoke each.<java.lang.Class: java.lang.String getCanonicalName()>();
+/*191*/
+
+        $stack4 = virtualinvoke $stack4.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>($stack5);
+/*191*/
+
+        $stack4 = virtualinvoke $stack4.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>(" does not extend TestCase");
+/*191*/
+
+        $stack5 = virtualinvoke $stack4.<java.lang.StringBuilder: java.lang.String toString()>();
+/*191*/
+
+        $stack9 = staticinvoke <junit.framework.TestSuite: junit.framework.Test warning(java.lang.String)>($stack5);
+/*191*/
+
+        return $stack9;
+/*191*/
+    }
+

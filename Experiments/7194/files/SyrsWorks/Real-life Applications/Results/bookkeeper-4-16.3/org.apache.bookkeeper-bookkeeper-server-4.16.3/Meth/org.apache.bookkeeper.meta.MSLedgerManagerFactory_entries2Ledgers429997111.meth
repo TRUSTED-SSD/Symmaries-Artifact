@@ -1,0 +1,29 @@
+static java.util.SortedSet org.apache.bookkeeper.meta.MSLedgerManagerFactory:entries2Ledgers(java.util.Iterator entries)
+{
+java.util.TreeSet ledgers;
+  org.apache.bookkeeper.metastore.MetastoreTableItem item;
+  java.lang.NumberFormatException nfe;
+  boolean $stack5;
+  java.lang.Object $stack6;
+  java.lang.String $stack7;
+  java.lang.Long $stack8;
+  org.slf4j.Logger $stack12;
+  ledgers=new java.util.TreeSet;
+ ledgers#java.util.TreeSet();
+ label0:$stack5 = entries.hasNext();
+ if ($stack5==0) goto label1;
+ $stack6 = entries.next();
+ item=(org.apache.bookkeeper.metastore.MetastoreTableItem) $stack6;
+ label2:$stack7 = item.getKey();
+ $stack8 = org.apache.bookkeeper.meta.MSLedgerManagerFactory.key2LedgerId($stack7);
+ ledgers.add((java.lang.Object)$stack8);
+ label3:goto label4;
+ label5:nfe = catch;
+ $stack12=org.apache.bookkeeper.meta.MSLedgerManagerFactory.LOG;
+ $stack7 = item.getKey();
+ $stack12.warn("Found invalid ledger key {}",(java.lang.Object)$stack7);
+ label4:goto label0;
+ label1:return  ledgers;
+ catch java.lang.NumberFormatException: label2 - label3 : label5;
+} 
+

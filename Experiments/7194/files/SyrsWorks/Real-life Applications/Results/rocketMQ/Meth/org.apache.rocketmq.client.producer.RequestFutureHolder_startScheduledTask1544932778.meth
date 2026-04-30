@@ -1,0 +1,23 @@
+void org.apache.rocketmq.client.producer.RequestFutureHolder:startScheduledTask(org.apache.rocketmq.client.impl.producer.DefaultMQProducerImpl producer)
+{
+java.util.Set $stack2;
+  java.util.concurrent.ScheduledExecutorService $stack4;
+  org.apache.rocketmq.common.ThreadFactoryImpl $stack5;
+  org.apache.rocketmq.client.producer.RequestFutureHolder$1 $stack7;
+  java.util.concurrent.TimeUnit $stack9;
+  $stack2=this.producerSet;
+ $stack2.add((java.lang.Object)producer);
+ $stack4=this.scheduledExecutorService;
+ if (null!=$stack4) goto label0;
+ $stack5=new org.apache.rocketmq.common.ThreadFactoryImpl;
+ $stack5#org.apache.rocketmq.common.ThreadFactoryImpl("RequestHouseKeepingService");
+ $stack4 = java.util.concurrent.Executors.newSingleThreadScheduledExecutor((java.util.concurrent.ThreadFactory)$stack5);
+ this.scheduledExecutorService=$stack4;
+ $stack4=this.scheduledExecutorService;
+ $stack7=new org.apache.rocketmq.client.producer.RequestFutureHolder$1;
+ $stack7#org.apache.rocketmq.client.producer.RequestFutureHolder$1(this);
+ $stack9=java.util.concurrent.TimeUnit.MILLISECONDS;
+ $stack4.scheduleAtFixedRate((java.lang.Runnable)$stack7,3000L,1000L,$stack9);
+ label0:return;
+ } 
+

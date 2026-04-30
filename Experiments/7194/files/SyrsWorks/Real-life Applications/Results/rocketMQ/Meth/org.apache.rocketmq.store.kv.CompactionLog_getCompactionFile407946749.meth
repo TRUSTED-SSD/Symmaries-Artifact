@@ -1,0 +1,56 @@
+org.apache.rocketmq.store.kv.CompactionLog$ProcessFileList org.apache.rocketmq.store.kv.CompactionLog:getCompactionFile()
+{
+java.util.ArrayList mappedFileList;
+  java.util.List toCompactFiles;
+  java.util.ArrayList newFiles;
+  int i;
+  org.apache.rocketmq.store.logfile.MappedFile mf;
+  long maxQueueOffsetInFile;
+  org.apache.rocketmq.store.MappedFileQueue $stack8;
+  int $stack17;
+  boolean $stack19;
+  org.apache.rocketmq.store.kv.CompactionLog$ProcessFileList $stack20;
+  java.lang.Object $stack21;
+  org.apache.rocketmq.store.queue.SparseConsumeQueue $stack22;
+  java.io.File $stack23;
+  java.lang.String $stack24;
+  org.apache.rocketmq.store.kv.CompactionPositionMgr $stack28;
+  long $stack29;
+  byte $stack30;
+  $stack8 = this.getLog();
+ toCompactFiles = $stack8.getMappedFiles();
+ mappedFileList = com.google.common.collect.Lists.newArrayList((java.lang.Iterable)toCompactFiles);
+ i = mappedFileList.size();
+ if (i>=2) goto label0;
+ return  null;
+ label0:i = mappedFileList.size();
+ i=(i-1);
+ toCompactFiles = mappedFileList.subList(0,i);
+ newFiles = com.google.common.collect.Lists.newArrayList();
+ i=0;
+ label1:$stack17 = mappedFileList.size();
+ $stack17=($stack17-1);
+ if (i>=$stack17) goto label2;
+ $stack21 = mappedFileList.get(i);
+ mf=(org.apache.rocketmq.store.logfile.MappedFile) $stack21;
+ $stack22 = this.getCQ();
+ $stack23 = mf.getFile();
+ $stack24 = $stack23.getName();
+ maxQueueOffsetInFile = $stack22.getMaxMsgOffsetFromFile($stack24);
+ $stack28=this.positionMgr;
+ $stack24=this.topic;
+ $stack17=this.queueId;
+ $stack29 = $stack28.getOffset($stack24,$stack17);
+ $stack30=(maxQueueOffsetInFile cmp $stack29);
+ if ($stack30<=0) goto label3;
+ newFiles.add((java.lang.Object)mf);
+ label3:i=(i+1);
+ goto label1;
+ label2:$stack19 = newFiles.isEmpty();
+ if ($stack19==0) goto label4;
+ return  null;
+ label4:$stack20=new org.apache.rocketmq.store.kv.CompactionLog$ProcessFileList;
+ $stack20#org.apache.rocketmq.store.kv.CompactionLog$ProcessFileList(toCompactFiles,(java.util.List)newFiles);
+ return  $stack20;
+ } 
+

@@ -1,0 +1,28 @@
+boolean org.apache.rocketmq.store.logfile.DefaultMappedFile:isAbleToFlush(int flushLeastPages)
+{
+int flush;
+  int write;
+  java.util.concurrent.atomic.AtomicIntegerFieldUpdater $stack4;
+  boolean $stack7;
+  $stack4=org.apache.rocketmq.store.logfile.DefaultMappedFile.FLUSHED_POSITION_UPDATER;
+ flush = $stack4.get((java.lang.Object)this);
+ write = this.getReadPosition();
+ $stack7 = this.isFull();
+ if ($stack7==0) goto label0;
+ return  1;
+ label0:if (flushLeastPages<=0) goto label1;
+ write=(write/4096);
+ flush=(flush/4096);
+ flush=(write-flush);
+ if (flush<flushLeastPages) goto label2;
+ $stack7=1;
+ goto label3;
+ label2:$stack7=0;
+ label3:return  $stack7;
+ label1:if (write<=flush) goto label4;
+ $stack7=1;
+ goto label5;
+ label4:$stack7=0;
+ label5:return  $stack7;
+ } 
+

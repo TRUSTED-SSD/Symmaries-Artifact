@@ -1,0 +1,30 @@
+int org.apache.rocketmq.namesrv.routeinfo.RouteInfoManager:addWritePermOfBrokerByLock(java.lang.String brokerName)
+{
+int e;
+  java.util.concurrent.locks.ReadWriteLock $stack4;
+  java.util.concurrent.locks.Lock $stack5;
+  java.lang.Exception $stack9;
+  org.apache.rocketmq.logging.org.slf4j.Logger $stack10;
+  java.lang.Throwable $stack11;
+  label0:$stack4=this.lock;
+ $stack5 = $stack4.writeLock();
+ $stack5.lockInterruptibly();
+ e = this#org.apache.rocketmq.namesrv.routeinfo.RouteInfoManager:operateWritePermOfBroker(brokerName,327);
+ label1:$stack4=this.lock;
+ $stack5 = $stack4.writeLock();
+ $stack5.unlock();
+ label2:return  e;
+ label3:$stack11 = catch;
+ $stack4=this.lock;
+ $stack5 = $stack4.writeLock();
+ $stack5.unlock();
+ throw $stack11;
+ label4:$stack9 = catch;
+ $stack10=org.apache.rocketmq.namesrv.routeinfo.RouteInfoManager.log;
+ $stack10.error("wipeWritePermOfBrokerByLock Exception",(java.lang.Throwable)$stack9);
+ return  0;
+ catch java.lang.Throwable: label0 - label1 : label3;
+catch java.lang.Exception: label0 - label2 : label4;
+catch java.lang.Exception: label3 - label4 : label4;
+} 
+

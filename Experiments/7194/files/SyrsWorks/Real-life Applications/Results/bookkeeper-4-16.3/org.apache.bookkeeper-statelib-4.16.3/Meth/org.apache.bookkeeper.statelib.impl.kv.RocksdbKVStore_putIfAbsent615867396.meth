@@ -1,0 +1,19 @@
+java.lang.Object org.apache.bookkeeper.statelib.impl.kv.RocksdbKVStore:putIfAbsent(java.lang.Object key,java.lang.Object value,long revision)
+{
+byte[] keyBytes;
+  java.lang.Object oldVal;
+  org.apache.bookkeeper.common.coder.Coder $stack8;
+  oldVal = com.google.common.base.Preconditions.checkNotNull(key,(java.lang.Object)"key cannot be null");
+ this.checkStoreOpen();
+ this#org.apache.bookkeeper.statelib.impl.kv.RocksdbKVStore:updateLastRevision(revision);
+ $stack8=this.keyCoder;
+ keyBytes = $stack8.encode(key);
+ oldVal = this#org.apache.bookkeeper.statelib.impl.kv.RocksdbKVStore:getRaw(key,keyBytes);
+ if (null==oldVal) goto label0;
+ return  oldVal;
+ label0:if (value!=null) goto label1;
+ return  null;
+ label1:this#org.apache.bookkeeper.statelib.impl.kv.RocksdbKVStore(key,keyBytes,value,revision);
+ return  null;
+ } 
+

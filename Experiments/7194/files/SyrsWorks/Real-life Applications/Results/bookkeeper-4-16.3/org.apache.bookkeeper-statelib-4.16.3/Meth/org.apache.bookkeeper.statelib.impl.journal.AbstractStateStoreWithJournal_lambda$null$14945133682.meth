@@ -1,0 +1,17 @@
+void org.apache.bookkeeper.statelib.impl.journal.AbstractStateStoreWithJournal:lambda$null$14(java.util.concurrent.CompletableFuture future)
+{
+boolean $stack2;
+  java.util.concurrent.ScheduledExecutorService $stack4;
+  this#org.apache.bookkeeper.statelib.impl.journal.AbstractStateStoreWithJournal:closeLocalStore();
+ $stack2=this.ownReadScheduler;
+ if ($stack2==0) goto label0;
+ $stack4=this.readIOScheduler;
+ $stack4.shutdown();
+ label0:$stack2=this.ownWriteScheduler;
+ if ($stack2==0) goto label1;
+ $stack4=this.writeIOScheduler;
+ $stack4.shutdown();
+ label1:org.apache.bookkeeper.common.concurrent.FutureUtils.complete(future,null);
+ return;
+ } 
+

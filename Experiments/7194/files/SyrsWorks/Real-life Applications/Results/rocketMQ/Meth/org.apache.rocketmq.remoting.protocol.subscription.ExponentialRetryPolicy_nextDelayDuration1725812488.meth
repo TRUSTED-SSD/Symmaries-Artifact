@@ -1,0 +1,23 @@
+long org.apache.rocketmq.remoting.protocol.subscription.ExponentialRetryPolicy:nextDelayDuration(int reconsumeTimes)
+{
+long $stack2;
+  double $stack3;
+  double $stack4;
+  long $stack5;
+  long $stack6;
+  if (reconsumeTimes>=0) goto label0;
+ reconsumeTimes=0;
+ label0:if (reconsumeTimes<=32) goto label1;
+ reconsumeTimes=32;
+ label1:$stack5=this.max;
+ $stack6=this.initial;
+ $stack2=this.multiplier;
+ $stack4=(double) $stack2;
+ $stack3=(double) reconsumeTimes;
+ $stack3 = java.lang.Math.pow($stack4,$stack3);
+ $stack2=(long) $stack3;
+ $stack6=($stack6 * $stack2);
+ $stack5 = java.lang.Math.min($stack5,$stack6);
+ return  $stack5;
+ } 
+

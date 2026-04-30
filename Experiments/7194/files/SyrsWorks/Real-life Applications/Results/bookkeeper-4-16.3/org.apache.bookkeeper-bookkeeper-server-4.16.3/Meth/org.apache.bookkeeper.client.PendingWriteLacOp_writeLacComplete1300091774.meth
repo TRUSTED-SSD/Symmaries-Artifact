@@ -1,0 +1,45 @@
+void org.apache.bookkeeper.client.PendingWriteLacOp:writeLacComplete(int rc,long ledgerId,org.apache.bookkeeper.net.BookieId addr,java.lang.Object ctx)
+{
+int bookieIndex;
+  java.lang.Integer $stack7;
+  boolean $stack9;
+  java.util.BitSet $stack10;
+  org.slf4j.Logger $stack11;
+  java.lang.Long $stack13;
+  org.apache.bookkeeper.client.LedgerHandle $stack16;
+  org.apache.bookkeeper.client.AsyncCallback$AddLacCallback $stack18;
+  org.apache.bookkeeper.client.DistributionSchedule$AckSet $stack19;
+  $stack7=(java.lang.Integer) ctx;
+ bookieIndex = $stack7.intValue();
+ $stack9=this.completed;
+ if ($stack9==0) goto label0;
+ return;
+ label0:if (0==rc) goto label1;
+ this.lastSeenError=rc;
+ label1:$stack10=this.receivedResponseSet;
+ $stack10.clear(bookieIndex);
+ if (rc!=0) goto label2;
+ $stack19=this.ackSet;
+ $stack9 = $stack19.completeBookieAndCheck(bookieIndex);
+ if ($stack9==0) goto label3;
+ $stack9=this.completed;
+ if ($stack9!=0) goto label3;
+ this.completed=1;
+ $stack18=this.cb;
+ $stack16=this.lh;
+ $stack18.addLacComplete(rc,$stack16,ctx);
+ return;
+ label2:$stack11=org.apache.bookkeeper.client.PendingWriteLacOp.LOG;
+ $stack13 = java.lang.Long.valueOf(ledgerId);
+ $stack11.warn("WriteLac did not succeed: Ledger {} on {}",(java.lang.Object)$stack13,(java.lang.Object)addr);
+ label3:$stack10=this.receivedResponseSet;
+ $stack9 = $stack10.isEmpty();
+ if ($stack9==0) goto label4;
+ this.completed=1;
+ $stack18=this.cb;
+ rc=this.lastSeenError;
+ $stack16=this.lh;
+ $stack18.addLacComplete(rc,$stack16,ctx);
+ label4:return;
+ } 
+

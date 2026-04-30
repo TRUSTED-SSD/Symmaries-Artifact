@@ -1,0 +1,33 @@
+java.util.List org.junit.runners.model.TestClass:getAnnotatedFieldValues(java.lang.Object test,java.lang.Class annotationClass,java.lang.Class valueClass)
+{
+java.util.ArrayList results;
+  java.util.Iterator i$;
+  org.junit.runners.model.FrameworkField each;
+  java.lang.Object fieldValue;
+  java.util.List $stack9;
+  boolean $stack11;
+  java.lang.IllegalAccessException $stack18;
+  java.lang.RuntimeException $stack19;
+  results=new java.util.ArrayList;
+ results#java.util.ArrayList();
+ $stack9 = this.getAnnotatedFields(annotationClass);
+ i$ = $stack9.iterator();
+ label0:$stack11 = i$.hasNext();
+ if ($stack11==0) goto label1;
+ fieldValue = i$.next();
+ each=(org.junit.runners.model.FrameworkField) fieldValue;
+ label2:fieldValue = each.get(test);
+ $stack11 = valueClass.isInstance(fieldValue);
+ if ($stack11==0) goto label3;
+ fieldValue = valueClass.cast(fieldValue);
+ results.add(fieldValue);
+ label3:goto label4;
+ label5:$stack18 = catch;
+ $stack19=new java.lang.RuntimeException;
+ $stack19#java.lang.RuntimeException("How did getFields return a field we couldn\'t access?",(java.lang.Throwable)$stack18);
+ throw $stack19;
+ label4:goto label0;
+ label1:return  results;
+ catch java.lang.IllegalAccessException: label2 - label3 : label5;
+} 
+

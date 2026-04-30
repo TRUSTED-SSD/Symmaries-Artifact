@@ -1,0 +1,32 @@
+static java.util.List org.apache.bookkeeper.bookie.FileSystemUpgrade:getAllDirectories(org.apache.bookkeeper.conf.ServerConfiguration conf)
+{
+java.util.ArrayList dirs;
+  java.io.File[] ledgerDirs;
+  java.io.File[] indexDirs;
+  java.util.ArrayList $stack6;
+  boolean $stack7;
+  int $stack11;
+  int $stack12;
+  java.util.List $stack16;
+  java.util.List $stack17;
+  dirs=new java.util.ArrayList;
+ dirs#java.util.ArrayList();
+ ledgerDirs = conf.getJournalDirs();
+ $stack6 = com.google.common.collect.Lists.newArrayList((java.lang.Object[])ledgerDirs);
+ dirs.addAll((java.util.Collection)$stack6);
+ ledgerDirs = conf.getLedgerDirs();
+ indexDirs = conf.getIndexDirs();
+ if (indexDirs==null) goto label0;
+ $stack12=#indexDirs;
+ $stack11=#ledgerDirs;
+ if ($stack12!=$stack11) goto label0;
+ $stack16 = java.util.Arrays.asList((java.lang.Object[])indexDirs);
+ $stack17 = java.util.Arrays.asList((java.lang.Object[])ledgerDirs);
+ $stack7 = $stack16.containsAll((java.util.Collection)$stack17);
+ if ($stack7!=0) goto label0;
+ $stack6 = com.google.common.collect.Lists.newArrayList((java.lang.Object[])indexDirs);
+ dirs.addAll((java.util.Collection)$stack6);
+ label0:java.util.Collections.addAll((java.util.Collection)dirs,(java.lang.Object[])ledgerDirs);
+ return  dirs;
+ } 
+

@@ -1,0 +1,18 @@
+static void org.apache.bookkeeper.util.ZkUtils$2:lambda$processResult$0(org.apache.zookeeper.ZooKeeper zk,java.lang.String parent,org.apache.zookeeper.AsyncCallback$VoidCallback callback,java.lang.String leafNodePath,java.lang.String path,int dRc,java.lang.String dPath,java.lang.Object dCtx,byte[] data,org.apache.zookeeper.data.Stat stat)
+{
+org.apache.zookeeper.KeeperException$Code $stack10;
+  int $stack11;
+  $stack10=org.apache.zookeeper.KeeperException$Code.OK;
+ $stack11 = $stack10.intValue();
+ if ($stack11!=dRc) goto label0;
+ if (stat==null) goto label0;
+ dRc = stat.getNumChildren();
+ if (dRc!=0) goto label0;
+ org.apache.bookkeeper.util.ZkUtils.asyncDeleteFullPathOptimistic(zk,parent,-1,callback,leafNodePath);
+ goto label1;
+ label0:$stack10=org.apache.zookeeper.KeeperException$Code.OK;
+ dRc = $stack10.intValue();
+ callback.processResult(dRc,path,(java.lang.Object)leafNodePath);
+ label1:return;
+ } 
+

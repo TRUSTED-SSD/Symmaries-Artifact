@@ -1,0 +1,18 @@
+java.util.List org.keycloak.common.util.ConcurrentMultivaluedHashMap:getList(java.lang.Object @key)
+{
+java.util.List list;
+  java.util.List existing;
+  java.lang.Object $stack4;
+  java.lang.Object key;
+key=@key;
+$stack4 = this.get(key);
+ list=(java.util.List) $stack4;
+ if (list!=null) goto label0;
+ list = this.createListInstance();
+ key = this.putIfAbsent(key,(java.lang.Object)list);
+ existing=(java.util.List) key;
+ if (existing==null) goto label0;
+ list=existing;
+ label0:return  list;
+ } 
+

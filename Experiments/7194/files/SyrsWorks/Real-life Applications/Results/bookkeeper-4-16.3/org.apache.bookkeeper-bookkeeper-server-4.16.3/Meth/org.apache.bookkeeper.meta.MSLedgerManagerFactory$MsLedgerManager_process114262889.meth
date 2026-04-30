@@ -1,0 +1,65 @@
+void org.apache.bookkeeper.meta.MSLedgerManagerFactory$MsLedgerManager:process(org.apache.bookkeeper.metastore.MSWatchedEvent e)
+{
+long ledgerId;
+  java.util.Set listenerSet;
+  java.util.Set l5;
+  java.util.Iterator l6;
+  org.apache.bookkeeper.proto.BookkeeperInternalCallbacks$LedgerMetadataListener l;
+  java.lang.Throwable l8;
+  java.lang.String $stack9;
+  java.lang.Long $stack10;
+  int[] $stack12;
+  org.apache.bookkeeper.metastore.MSWatchedEvent$EventType $stack13;
+  int $stack14;
+  java.util.concurrent.ConcurrentMap $stack16;
+  java.lang.Object $stack18;
+  boolean $stack21;
+  org.apache.bookkeeper.meta.MSLedgerManagerFactory$MsLedgerManager$ReadLedgerMetadataTask $stack25;
+  org.slf4j.Logger $stack29;
+  $stack9 = e.getKey();
+ $stack10 = org.apache.bookkeeper.meta.MSLedgerManagerFactory.key2LedgerId($stack9);
+ ledgerId = $stack10.longValue();
+ $stack12=org.apache.bookkeeper.meta.MSLedgerManagerFactory$1.$SwitchMap$org$apache$bookkeeper$metastore$MSWatchedEvent$EventType;
+ $stack13 = e.getType();
+ $stack14 = $stack13.ordinal();
+ $stack14=$stack12[$stack14];
+ switch [$stack14]
+if 0 goto label0;
+if 1 goto label1;
+goto label2;
+ label0:$stack25=new org.apache.bookkeeper.meta.MSLedgerManagerFactory$MsLedgerManager$ReadLedgerMetadataTask;
+ $stack9 = e.getKey();
+ $stack10 = org.apache.bookkeeper.meta.MSLedgerManagerFactory.key2LedgerId($stack9);
+ ledgerId = $stack10.longValue();
+ $stack25#org.apache.bookkeeper.meta.MSLedgerManagerFactory$MsLedgerManager$ReadLedgerMetadataTask(this,ledgerId);
+ $stack25#org.apache.bookkeeper.meta.MSLedgerManagerFactory$MsLedgerManager$ReadLedgerMetadataTask();
+ goto label3;
+ label1:$stack16=this.listeners;
+ $stack10 = java.lang.Long.valueOf(ledgerId);
+ $stack18 = $stack16.get((java.lang.Object)$stack10);
+ listenerSet=(java.util.Set) $stack18;
+ if (listenerSet==null) goto label3;
+ l5=listenerSet;
+ monitorenter listenerSet;
+ label4:l6 = listenerSet.iterator();
+ label5:$stack21 = l6.hasNext();
+ if ($stack21==0) goto label6;
+ $stack18 = l6.next();
+ l=(org.apache.bookkeeper.proto.BookkeeperInternalCallbacks$LedgerMetadataListener) $stack18;
+ this.unregisterLedgerMetadataListener(ledgerId,l);
+ l.onChanged(ledgerId,null);
+ goto label5;
+ label6:monitorexit listenerSet;
+ label7:goto label8;
+ label9:l8 = catch;
+ monitorexit listenerSet;
+ label10:throw l8;
+ label8:goto label3;
+ label2:$stack29 = org.apache.bookkeeper.meta.MSLedgerManagerFactory.access$000();
+ $stack13 = e.getType();
+ $stack29.warn("Unknown type: {}",(java.lang.Object)$stack13);
+ label3:return;
+ catch java.lang.Throwable: label4 - label7 : label9;
+catch java.lang.Throwable: label9 - label10 : label9;
+} 
+

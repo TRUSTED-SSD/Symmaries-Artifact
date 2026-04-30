@@ -1,0 +1,53 @@
+org.apache.rocketmq.controller.impl.event.ControllerResult org.apache.rocketmq.controller.impl.manager.ReplicasInfoManager:getReplicaInfo(org.apache.rocketmq.remoting.protocol.header.controller.GetReplicaInfoRequestHeader request)
+{
+java.lang.String brokerName;
+  org.apache.rocketmq.controller.impl.event.ControllerResult result;
+  org.apache.rocketmq.remoting.protocol.header.controller.GetReplicaInfoResponseHeader response;
+  org.apache.rocketmq.controller.impl.manager.SyncStateInfo syncStateInfo;
+  org.apache.rocketmq.controller.impl.manager.BrokerInfo brokerInfo;
+  java.lang.Object $stack11;
+  boolean $stack12;
+  java.util.Map $stack13;
+  int $stack18;
+  org.apache.rocketmq.remoting.protocol.body.SyncStateSet $stack21;
+  java.util.Set $stack22;
+  byte[] $stack24;
+  java.lang.Long $stack26;
+  long $stack27;
+  brokerName = request.getBrokerName();
+ result=new org.apache.rocketmq.controller.impl.event.ControllerResult;
+ response=new org.apache.rocketmq.remoting.protocol.header.controller.GetReplicaInfoResponseHeader;
+ response#org.apache.rocketmq.remoting.protocol.header.controller.GetReplicaInfoResponseHeader();
+ result#org.apache.rocketmq.controller.impl.event.ControllerResult((java.lang.Object)response);
+ $stack11 = result.getResponse();
+ response=(org.apache.rocketmq.remoting.protocol.header.controller.GetReplicaInfoResponseHeader) $stack11;
+ $stack12 = this#org.apache.rocketmq.controller.impl.manager.ReplicasInfoManager:isContainsBroker(brokerName);
+ if ($stack12==0) goto label0;
+ $stack13=this.syncStateSetInfoTable;
+ $stack11 = $stack13.get((java.lang.Object)brokerName);
+ syncStateInfo=(org.apache.rocketmq.controller.impl.manager.SyncStateInfo) $stack11;
+ $stack13=this.replicaInfoTable;
+ $stack11 = $stack13.get((java.lang.Object)brokerName);
+ brokerInfo=(org.apache.rocketmq.controller.impl.manager.BrokerInfo) $stack11;
+ brokerName = syncStateInfo.getMasterAddress();
+ response.setMasterAddress(brokerName);
+ $stack18 = syncStateInfo.getMasterEpoch();
+ response.setMasterEpoch($stack18);
+ brokerName = request.getBrokerAddress();
+ $stack12 = org.apache.commons.lang3.StringUtils.isNotEmpty((java.lang.CharSequence)brokerName);
+ if ($stack12==0) goto label1;
+ brokerName = request.getBrokerAddress();
+ $stack26 = brokerInfo.getBrokerId(brokerName);
+ $stack27 = $stack26.longValue();
+ response.setBrokerId($stack27);
+ label1:$stack21=new org.apache.rocketmq.remoting.protocol.body.SyncStateSet;
+ $stack22 = syncStateInfo.getSyncStateSet();
+ $stack18 = syncStateInfo.getSyncStateSetEpoch();
+ $stack21#org.apache.rocketmq.remoting.protocol.body.SyncStateSet($stack22,$stack18);
+ $stack24 = $stack21.encode();
+ result.setBody($stack24);
+ return  result;
+ label0:result.setCodeAndRemark(2008,"Broker metadata is not existed");
+ return  result;
+ } 
+

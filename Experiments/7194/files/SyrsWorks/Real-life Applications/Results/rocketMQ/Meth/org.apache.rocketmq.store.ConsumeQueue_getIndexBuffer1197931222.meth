@@ -1,0 +1,24 @@
+org.apache.rocketmq.store.SelectMappedBufferResult org.apache.rocketmq.store.ConsumeQueue:getIndexBuffer(long startIndex)
+{
+int mappedFileSize;
+  org.apache.rocketmq.store.logfile.MappedFile mappedFile;
+  long $stack7;
+  byte $stack8;
+  org.apache.rocketmq.store.MappedFileQueue $stack9;
+  org.apache.rocketmq.store.SelectMappedBufferResult $stack15;
+  mappedFileSize=this.mappedFileSize;
+ startIndex=(startIndex * 20L);
+ $stack7 = this.getMinLogicOffset();
+ $stack8=(startIndex cmp $stack7);
+ if ($stack8<0) goto label0;
+ $stack9=this.mappedFileQueue;
+ mappedFile = $stack9.findMappedFileByOffset(startIndex);
+ if (mappedFile==null) goto label0;
+ $stack7=(long) mappedFileSize;
+ startIndex=(startIndex%$stack7);
+ mappedFileSize=(int) startIndex;
+ $stack15 = mappedFile.selectMappedBuffer(mappedFileSize);
+ return  $stack15;
+ label0:return  null;
+ } 
+

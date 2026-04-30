@@ -1,0 +1,52 @@
+void org.apache.bookkeeper.client.BookKeeperAdmin:replicateLedgerFragment(org.apache.bookkeeper.client.LedgerHandle lh,org.apache.bookkeeper.client.LedgerFragment ledgerFragment,java.util.function.BiConsumer onReadEntryFailureCallback)
+{
+java.util.Map targetBookieAddresses;
+  java.util.Optional excludedBookies;
+  org.apache.bookkeeper.client.LedgerFragment$ReplicateType $stack6;
+  org.apache.bookkeeper.client.LedgerFragment$ReplicateType $stack7;
+  boolean $stack10;
+  org.slf4j.Logger $stack11;
+  long $stack14;
+  java.lang.Long $stack15;
+  org.apache.bookkeeper.client.BKException$BKLedgerRecoveryException $stack16;
+  java.util.List $stack17;
+  org.apache.bookkeeper.client.api.LedgerMetadata $stack18;
+  int $stack19;
+  int $stack21;
+  java.util.Set $stack23;
+  java.util.Set $stack24;
+  targetBookieAddresses=null;
+ $stack6=org.apache.bookkeeper.client.LedgerFragment$ReplicateType.DATA_LOSS;
+ $stack7 = ledgerFragment.getReplicateType();
+ if ($stack6!=$stack7) goto label0;
+ excludedBookies = java.util.Optional.empty();
+ $stack17 = ledgerFragment.getEnsemble();
+ $stack23 = ledgerFragment.getBookiesIndexes();
+ targetBookieAddresses = this#org.apache.bookkeeper.client.BookKeeperAdmin:getReplacementBookiesByIndexes(lh,$stack17,$stack23,excludedBookies);
+ goto label1;
+ label0:$stack6=org.apache.bookkeeper.client.LedgerFragment$ReplicateType.DATA_NOT_ADHERING_PLACEMENT;
+ $stack7 = ledgerFragment.getReplicateType();
+ if ($stack6!=$stack7) goto label1;
+ $stack17 = ledgerFragment.getEnsemble();
+ $stack18 = lh.getLedgerMetadata();
+ $stack19 = $stack18.getWriteQuorumSize();
+ $stack18 = lh.getLedgerMetadata();
+ $stack21 = $stack18.getAckQuorumSize();
+ targetBookieAddresses = this.replaceNotAdheringPlacementPolicyBookie($stack17,$stack19,$stack21);
+ $stack23 = ledgerFragment.getBookiesIndexes();
+ $stack24 = targetBookieAddresses.keySet();
+ $stack23.addAll((java.util.Collection)$stack24);
+ label1:$stack10 = org.apache.commons.collections4.MapUtils.isEmpty(targetBookieAddresses);
+ if ($stack10==0) goto label2;
+ $stack11=org.apache.bookkeeper.client.BookKeeperAdmin.LOG;
+ $stack6 = ledgerFragment.getReplicateType();
+ $stack14 = ledgerFragment.getLedgerId();
+ $stack15 = java.lang.Long.valueOf($stack14);
+ $stack11.warn("Could not replicate for {} ledger: {}, not find target bookie.",(java.lang.Object)$stack6,(java.lang.Object)$stack15);
+ $stack16=new org.apache.bookkeeper.client.BKException$BKLedgerRecoveryException;
+ $stack16#org.apache.bookkeeper.client.BKException$BKLedgerRecoveryException();
+ throw $stack16;
+ label2:this#org.apache.bookkeeper.client.BookKeeperAdmin:replicateLedgerFragment(lh,ledgerFragment,targetBookieAddresses,onReadEntryFailureCallback);
+ return;
+ } 
+

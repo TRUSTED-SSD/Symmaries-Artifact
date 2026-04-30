@@ -1,0 +1,27 @@
+void org.apache.bookkeeper.sasl.SASLBookieAuthProviderFactory:close()
+{
+org.apache.bookkeeper.sasl.TGTRefreshThread $stack2;
+  java.lang.InterruptedException $stack5;
+  java.lang.Thread $stack6;
+  org.slf4j.Logger $stack7;
+  boolean $stack8;
+  $stack2=this.ticketRefreshThread;
+ if ($stack2==null) goto label0;
+ $stack2=this.ticketRefreshThread;
+ $stack2.interrupt();
+ label1:$stack2=this.ticketRefreshThread;
+ $stack2.join(10000L);
+ label2:goto label0;
+ label3:$stack5 = catch;
+ $stack6 = java.lang.Thread.currentThread();
+ $stack6.interrupt();
+ $stack7=org.apache.bookkeeper.sasl.SASLBookieAuthProviderFactory.LOG;
+ $stack8 = $stack7.isDebugEnabled();
+ if ($stack8==0) goto label0;
+ $stack7=org.apache.bookkeeper.sasl.SASLBookieAuthProviderFactory.LOG;
+ dummyClass.lowSink("interrupted while waiting for TGT reresh thread to stop");
+$stack7.debug("interrupted while waiting for TGT reresh thread to stop",(java.lang.Throwable)$stack5);
+ label0:return;
+ catch java.lang.InterruptedException: label1 - label2 : label3;
+} 
+

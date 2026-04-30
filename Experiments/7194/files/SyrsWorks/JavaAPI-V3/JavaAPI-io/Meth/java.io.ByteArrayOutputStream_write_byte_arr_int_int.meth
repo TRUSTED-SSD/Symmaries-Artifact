@@ -1,0 +1,36 @@
+void java.io.ByteArrayOutputStream:write(byte[] r1,int i0,int i1)
+{
+int $i2;
+  int $i3;
+  int $i4;
+  int $i5;
+  int $i6;
+  int $i7;
+  int $i8;
+  byte[] $r2;
+  int $i9;
+  int $i10;
+  java.lang.IndexOutOfBoundsException $r3;
+  if (i0<0) goto label0;
+ $i2=#r1;
+ if (i0>$i2) goto label0;
+ if (i1<0) goto label0;
+ $i4=(i0+i1);
+ $i3=#r1;
+ $i5=($i4-$i3);
+ if ($i5<=0) goto label1;
+ label0:$r3=new java.lang.IndexOutOfBoundsException;
+ $r3#java.lang.IndexOutOfBoundsException:init();
+ throw $r3;
+ label1:$i6=this.count;
+ $i7=($i6+i1);
+ this#java.io.ByteArrayOutputStream:ensureCapacity($i7);
+ $r2=this.buf;
+ $i8=this.count;
+ java.lang.System.native_arraycopy((java.lang.Object)r1,i0,(java.lang.Object)$r2,$i8,i1);
+ $i9=this.count;
+ $i10=($i9+i1);
+ this.count=$i10;
+ return;
+ }  
+

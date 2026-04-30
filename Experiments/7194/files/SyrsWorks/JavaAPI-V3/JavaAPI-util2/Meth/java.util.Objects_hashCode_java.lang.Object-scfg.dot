@@ -1,0 +1,50 @@
+digraph G {
+  node [shape=box, ];
+  "pc0_js1" [label="〈if (r0 == null) goto label0, js1〉", ];
+  "pc1_js1" [label="〈$i0 = r0.native_hashCode (), js1〉\n\
+tt", ];
+  "pc2_js1" [label="〈goto label1, js1〉", ];
+  "pc3_js1" [label="〈label0: $i0 = 0, js1〉", ];
+  "pc4_js1" [label="〈label1: return $i0, js1〉", ];
+  "pc4_js2" [label="〈label1: return $i0, js2〉", ];
+  "pc5_js1" [label="〈sink, js1〉\n\
+obj_level(r0) ⊑ ret(obj_level(r0))' ∧ (ret(r0.><r0)' ∨ ¬r0.><r0) ∧ (ϕ ≠ S4 ∨ pc ⊔ level($i0) ⊑ ret(level())')",
+             ];
+  
+  
+  "pc0_js1" -> "pc1_js1" [label="υ ∧ ¬ω ∨ ¬τ ∧ ¬υ ∧ level(r0) ⊐ pc ∨ ¬τ ∧ ¬υ ∧ level(r0) ⊑ pc,\n\
+{r0.><r0' := if ¬(¬τ ∧ ¬υ ∧ level(r0) ⊐ pc) ∨ υ ∧ ¬ω then r0.><r0' else r0.><r0,\n\
+ pc := if ¬(¬τ ∧ ¬υ ∧ level(r0) ⊐ pc) ∨ υ ∧ ¬ω then pc else pc ⊔ level(r0),\n\
+ obj_level(r0)' := if ¬(¬τ ∧ ¬υ ∧ level(r0) ⊐ pc) ∨ υ ∧ ¬ω then obj_level(r0)' else obj_level(r0),\n\
+ hr := if ¬(¬τ ∧ ¬υ ∧ level(r0) ⊐ pc) ∨ υ ∧ ¬ω then hr else P0}",
+                          ];
+  "pc0_js1" -> "pc3_js1" [label="υ ∧ ω ∨ τ ∧ ¬υ ∧ level(r0) ⊐ pc ∨ τ ∧ ¬υ ∧ level(r0) ⊑ pc,\n\
+{r0.><r0' := if ¬(τ ∧ ¬υ ∧ level(r0) ⊐ pc) ∨ υ ∧ ω then r0.><r0' else r0.><r0,\n\
+ pc := if ¬(τ ∧ ¬υ ∧ level(r0) ⊐ pc) ∨ υ ∧ ω then pc else pc ⊔ level(r0),\n\
+ obj_level(r0)' := if ¬(τ ∧ ¬υ ∧ level(r0) ⊐ pc) ∨ υ ∧ ω then obj_level(r0)' else obj_level(r0),\n\
+ hr := if ¬(τ ∧ ¬υ ∧ level(r0) ⊐ pc) ∨ υ ∧ ω then hr else P0}",
+                          ];
+  "pc1_js1" -> "pc2_js1" [label="tt,\n\
+{level($i0) := pc ⊔ (if υ then level($i0) else pc ⊔ obj_level(r0))}",
+                          ];
+  "pc2_js1" -> "pc4_js1" [label="tt,\n\
+{}", ];
+  "pc3_js1" -> "pc4_js1" [label="tt,\n\
+{level($i0) := pc ⊔ (if υ then level($i0) else ⊥)}",
+                          ];
+  "pc4_js1" -> "pc0_js1" [label="¬υ ∧ hr = P0,\n\
+{υ := tt,\n\
+ r0.><r0 := r0.><r0',\n\
+ r0.><r0' := r0.><r0,\n\
+ obj_level(r0) := obj_level(r0)',\n\
+ obj_level(r0)' := obj_level(r0)}",
+                          ];
+  "pc4_js1" -> "pc4_js2" [label="hr ≠ P0 ∨ υ ∧ hr = P0,\n\
+{υ := υ ∧ ¬(υ ∧ hr = P0),\n\
+ pc := if υ ∧ hr = P0 then ⊥ else pc,\n\
+ hr := if υ ∧ hr = P0 then P. else hr}",
+                          ];
+  "pc4_js2" -> "pc5_js1" [label="tt,\n\
+{ϕ := S4}", ];
+  
+  }

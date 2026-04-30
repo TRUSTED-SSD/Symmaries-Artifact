@@ -1,0 +1,39 @@
+static void com.google.zxing.oned.rss.expanded.RSSExpandedReader:removePartialRows(java.util.Collection pairs,java.util.Collection rows)
+{
+java.util.Iterator iterator;
+  com.google.zxing.oned.rss.expanded.ExpandedRow r;
+  boolean allFound;
+  java.util.Iterator l5;
+  com.google.zxing.oned.rss.expanded.ExpandedPair p;
+  java.lang.Object $stack9;
+  java.util.List $stack10;
+  int $stack11;
+  int $stack12;
+  boolean $stack16;
+  iterator = rows.iterator();
+ label0:allFound = iterator.hasNext();
+ if (allFound==0) goto label1;
+ $stack9 = iterator.next();
+ r=(com.google.zxing.oned.rss.expanded.ExpandedRow) $stack9;
+ $stack10 = r.getPairs();
+ $stack11 = $stack10.size();
+ $stack12 = pairs.size();
+ if ($stack11==$stack12) goto label2;
+ allFound=1;
+ $stack10 = r.getPairs();
+ l5 = $stack10.iterator();
+ label3:$stack16 = l5.hasNext();
+ if ($stack16==0) goto label4;
+ $stack9 = l5.next();
+ p=(com.google.zxing.oned.rss.expanded.ExpandedPair) $stack9;
+ $stack16 = pairs.contains((java.lang.Object)p);
+ if ($stack16!=0) goto label5;
+ allFound=0;
+ goto label4;
+ label5:goto label3;
+ label4:if (allFound==0) goto label2;
+ iterator.remove();
+ label2:goto label0;
+ label1:return;
+ } 
+

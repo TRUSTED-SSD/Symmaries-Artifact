@@ -1,0 +1,12 @@
+int org.apache.kerby.asn1.type.Asn1Encodeable:encodingHeaderLength()
+{
+int headerLen;
+  int bodyLen;
+  headerLen = this.tagNo();
+ headerLen = org.apache.kerby.asn1.util.Asn1Util.lengthOfTagLength(headerLen);
+ bodyLen = this.getBodyLength();
+ bodyLen = org.apache.kerby.asn1.util.Asn1Util.lengthOfBodyLength(bodyLen);
+ headerLen=(headerLen+bodyLen);
+ return  headerLen;
+ } 
+

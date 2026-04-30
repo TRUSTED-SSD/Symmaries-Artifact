@@ -1,0 +1,33 @@
+static void org.apache.bookkeeper.bookie.Journal:writePaddingBytes(org.apache.bookkeeper.bookie.JournalChannel jc,io.netty.buffer.ByteBuf paddingBuffer,int journalAlignSize)
+{
+int bytesToAlign;
+  org.apache.bookkeeper.bookie.BufferedChannel $stack5;
+  long $stack6;
+  long $stack7;
+  $stack5=jc.bc;
+ $stack6 = $stack5.position();
+ $stack7=(long) journalAlignSize;
+ $stack6=($stack6%$stack7);
+ bytesToAlign=(int) $stack6;
+ if (0==bytesToAlign) goto label0;
+ bytesToAlign=(journalAlignSize-bytesToAlign);
+ if (bytesToAlign>=8) goto label1;
+ bytesToAlign=(8-bytesToAlign);
+ bytesToAlign=(journalAlignSize-bytesToAlign);
+ goto label2;
+ label1:bytesToAlign=(bytesToAlign+-8);
+ label2:paddingBuffer.clear();
+ paddingBuffer.writeInt(-256);
+ paddingBuffer.writeInt(bytesToAlign);
+ journalAlignSize = paddingBuffer.writerIndex();
+ journalAlignSize=(journalAlignSize+bytesToAlign);
+ paddingBuffer.writerIndex(journalAlignSize);
+ journalAlignSize = paddingBuffer.readableBytes();
+dummyClass.highSourceMut(journalAlignSize);
+ $stack6=(long) journalAlignSize;
+ jc.preAllocIfNeeded($stack6);
+ $stack5=jc.bc;
+ $stack5.write(paddingBuffer);
+ label0:return;
+ } 
+

@@ -1,0 +1,24 @@
+void org.apache.bookkeeper.meta.ZkLedgerUnderreplicationManager$5:process(org.apache.zookeeper.WatchedEvent e)
+{
+org.apache.zookeeper.Watcher$Event$EventType $stack2;
+  org.apache.zookeeper.Watcher$Event$EventType $stack3;
+  org.apache.bookkeeper.meta.ZkLedgerUnderreplicationManager $stack4;
+  java.util.regex.Pattern $stack5;
+  java.lang.String $stack6;
+  java.util.regex.Matcher $stack7;
+  boolean $stack8;
+  org.apache.bookkeeper.proto.BookkeeperInternalCallbacks$GenericCallback $stack9;
+  $stack2 = e.getType();
+ $stack3=org.apache.zookeeper.Watcher$Event$EventType.NodeDeleted;
+ if ($stack2!=$stack3) goto label0;
+ $stack4=this.this$0;
+ $stack5 = org.apache.bookkeeper.meta.ZkLedgerUnderreplicationManager.access$200($stack4);
+ $stack6 = e.getPath();
+ $stack7 = $stack5.matcher((java.lang.CharSequence)$stack6);
+ $stack8 = $stack7.find();
+ if ($stack8==0) goto label0;
+ $stack9=this.val$cb;
+ $stack9.operationComplete(0,null);
+ label0:return;
+ } 
+

@@ -1,0 +1,27 @@
+void org.apache.rocketmq.broker.subscription.SubscriptionGroupManager:printLoadDataWhenFirstBoot(org.apache.rocketmq.broker.subscription.SubscriptionGroupManager sgm)
+{
+java.util.Iterator it;
+  java.util.Map$Entry next;
+  java.util.concurrent.ConcurrentMap $stack4;
+  java.util.Set $stack5;
+  boolean $stack7;
+  java.lang.Object $stack8;
+  org.apache.rocketmq.logging.org.slf4j.Logger $stack9;
+  org.apache.rocketmq.remoting.protocol.subscription.SubscriptionGroupConfig $stack12;
+  java.lang.String $stack13;
+  $stack4 = sgm.getSubscriptionGroupTable();
+ $stack5 = $stack4.entrySet();
+ it = $stack5.iterator();
+ label0:$stack7 = it.hasNext();
+ if ($stack7==0) goto label1;
+ $stack8 = it.next();
+ next=(java.util.Map$Entry) $stack8;
+ $stack9=org.apache.rocketmq.broker.subscription.SubscriptionGroupManager.log;
+ $stack8 = next.getValue();
+ $stack12=(org.apache.rocketmq.remoting.protocol.subscription.SubscriptionGroupConfig) $stack8;
+ $stack13 = $stack12.toString();
+ $stack9.info("load exist subscription group, {}",(java.lang.Object)$stack13);
+ goto label0;
+ label1:return;
+ } 
+

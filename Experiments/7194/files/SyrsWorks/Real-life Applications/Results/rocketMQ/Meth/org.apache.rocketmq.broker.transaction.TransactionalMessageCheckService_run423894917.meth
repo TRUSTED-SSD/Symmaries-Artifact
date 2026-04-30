@@ -1,0 +1,21 @@
+void org.apache.rocketmq.broker.transaction.TransactionalMessageCheckService:run()
+{
+long checkInterval;
+  org.apache.rocketmq.logging.org.slf4j.Logger $stack3;
+  boolean $stack4;
+  org.apache.rocketmq.broker.BrokerController $stack6;
+  org.apache.rocketmq.common.BrokerConfig $stack7;
+  $stack3=org.apache.rocketmq.broker.transaction.TransactionalMessageCheckService.log;
+ $stack3.info("Start transaction check service thread!");
+ label0:$stack4 = this.isStopped();
+ if ($stack4!=0) goto label1;
+ $stack6=this.brokerController;
+ $stack7 = $stack6.getBrokerConfig();
+ checkInterval = $stack7.getTransactionCheckInterval();
+ this.waitForRunning(checkInterval);
+ goto label0;
+ label1:$stack3=org.apache.rocketmq.broker.transaction.TransactionalMessageCheckService.log;
+ $stack3.info("End transaction check service thread!");
+ return;
+ } 
+

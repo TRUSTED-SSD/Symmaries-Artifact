@@ -1,0 +1,46 @@
+static boolean java.lang.ConditionalSpecialCasing:isFinalCased(java.lang.String r0,int i0,java.util.Locale r1)
+{
+java.text.BreakIterator r2;
+  int i1;
+  boolean $z0;
+  boolean $z1;
+  int $i2;
+  int $i3;
+  int $i4;
+  boolean $z2;
+  boolean $z3;
+  int $i5;
+  int i6;
+  int i7;
+  int i8;
+  int i9;
+  r2 = java.text.BreakIterator.getWordInstance(r1);
+ r2.setText(r0);
+ i6=i0;
+ label0:if (i6<0) goto label1;
+ $z0 = r2.isBoundary(i6);
+ if ($z0!=0) goto label1;
+ i7 = r0.codePointBefore(i6);
+ $z1 = java.lang.ConditionalSpecialCasing.isCased(i7);
+ if ($z1==0) goto label2;
+ i1 = r0.length();
+ $i3 = r0.codePointAt(i0);
+ $i4 = java.lang.Character.charCount($i3);
+ i8=(i0+$i4);
+ label3:if (i8>=i1) goto label4;
+ $z2 = r2.isBoundary(i8);
+ if ($z2!=0) goto label4;
+ i9 = r0.codePointAt(i8);
+ $z3 = java.lang.ConditionalSpecialCasing.isCased(i9);
+ if ($z3==0) goto label5;
+ return  0;
+ label5:$i5 = java.lang.Character.charCount(i9);
+ i8=(i8+$i5);
+ goto label3;
+ label4:return  1;
+ label2:$i2 = java.lang.Character.charCount(i7);
+ i6=(i6-$i2);
+ goto label0;
+ label1:return  0;
+ }  
+

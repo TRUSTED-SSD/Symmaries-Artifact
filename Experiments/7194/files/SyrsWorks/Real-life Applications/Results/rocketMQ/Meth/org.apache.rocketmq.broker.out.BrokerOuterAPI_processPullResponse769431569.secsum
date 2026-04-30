@@ -1,0 +1,10 @@
+org.apache.rocketmq.client.impl.consumer.PullResultExt org.apache.rocketmq.broker.out.BrokerOuterAPI:processPullResponse (
+  org.apache.rocketmq.remoting.protocol.RemotingCommand response,
+  java.lang.String addr) {
+  guard = tt;
+  ret(level()) = pc ⊔ level(response) ⊔ obj_level(response);
+  ret(obj_level()) = pc ⊔ level(addr) ⊔ level(response) ⊔ obj_level(addr) ⊔ obj_level(response);
+  ret(obj_level(addr)) = pc ⊔ level(addr) ⊔ level(response) ⊔ obj_level(addr) ⊔ obj_level(response);
+  ret(obj_level(response)) = pc ⊔ level(addr) ⊔ level(response) ⊔ obj_level(addr) ⊔ obj_level(response);
+  ret(obj_level(this)) = pc ⊔ level(addr) ⊔ level(response) ⊔ obj_level(addr) ⊔ obj_level(response) ⊔ obj_level(this);
+}

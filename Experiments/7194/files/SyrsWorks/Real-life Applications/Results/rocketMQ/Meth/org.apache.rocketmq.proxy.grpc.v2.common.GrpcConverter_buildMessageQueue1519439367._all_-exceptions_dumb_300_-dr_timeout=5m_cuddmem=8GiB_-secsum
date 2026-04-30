@@ -1,0 +1,10 @@
+apache.rocketmq.v2.MessageQueue org.apache.rocketmq.proxy.grpc.v2.common.GrpcConverter:buildMessageQueue (
+  org.apache.rocketmq.common.message.MessageExt messageExt,
+  java.lang.String @brokerName) {
+  guard = tt;
+  ret(level()) = level(@brokerName) ⊔ level(messageExt) ⊔ obj_level(@brokerName) ⊔ obj_level(messageExt);
+  ret(obj_level()) = level(@brokerName) ⊔ level(messageExt) ⊔ obj_level(@brokerName) ⊔ obj_level(messageExt);
+  ret(obj_level(@brokerName)) = level(@brokerName) ⊔ level(messageExt) ⊔ obj_level(@brokerName) ⊔ obj_level(messageExt);
+  ret(obj_level(messageExt)) = level(@brokerName) ⊔ level(messageExt) ⊔ obj_level(@brokerName) ⊔ obj_level(messageExt);
+  ret(obj_level(this)) = obj_level(this);
+}

@@ -1,0 +1,25 @@
+static org.apache.rocketmq.remoting.protocol.RemotingCommand org.apache.rocketmq.remoting.rpc.RpcClientUtils:createCommandForRpcResponse(org.apache.rocketmq.remoting.rpc.RpcResponse rpcResponse)
+{
+org.apache.rocketmq.remoting.protocol.RemotingCommand cmd;
+  int $stack2;
+  org.apache.rocketmq.remoting.CommandCustomHeader $stack3;
+  org.apache.rocketmq.remoting.rpc.RpcException $stack5;
+  java.lang.String $stack7;
+  java.lang.Object $stack8;
+  byte[] $stack9;
+  $stack2 = rpcResponse.getCode();
+ $stack3 = rpcResponse.getHeader();
+ cmd = org.apache.rocketmq.remoting.protocol.RemotingCommand.createResponseCommandWithHeader($stack2,$stack3);
+ $stack5 = rpcResponse.getException();
+ if ($stack5!=null) goto label0;
+ $stack7="";
+ goto label1;
+ label0:$stack5 = rpcResponse.getException();
+ $stack7 = $stack5.getMessage();
+ label1:cmd.setRemark($stack7);
+ $stack8 = rpcResponse.getBody();
+ $stack9 = org.apache.rocketmq.remoting.rpc.RpcClientUtils.encodeBody($stack8);
+ cmd.setBody($stack9);
+ return  cmd;
+ } 
+

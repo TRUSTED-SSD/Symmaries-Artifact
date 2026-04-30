@@ -1,0 +1,42 @@
+boolean org.apache.bookkeeper.bookie.IndexPersistenceMgr:updatePage(org.apache.bookkeeper.bookie.LedgerEntryPage lep)
+{
+org.apache.bookkeeper.bookie.FileInfoBackingCache$CachedFileInfo fi;
+  long pos;
+  boolean l5;
+  java.lang.Throwable l6;
+  java.lang.Long $stack9;
+  long $stack12;
+  byte $stack13;
+  java.io.IOException $stack16;
+  l5 = lep.isClean();
+ if (l5!=0) goto label0;
+ $stack16=new java.io.IOException;
+ $stack16#java.io.IOException("Trying to update a dirty page");
+ throw $stack16;
+ label0:fi=null;
+ label1:pos = lep.getLedger();
+ $stack9 = java.lang.Long.valueOf(pos);
+ fi = this.getFileInfo($stack9,null);
+ pos = lep.getFirstEntryPosition();
+ $stack12 = fi.size();
+ $stack13=(pos cmp $stack12);
+ if ($stack13<0) goto label2;
+ lep.zeroPage();
+ l5=1;
+ label3:if (fi==null) goto label4;
+ fi.release();
+ label4:return  1;
+ label2:lep#org.apache.bookkeeper.bookie.LedgerEntryPage((org.apache.bookkeeper.bookie.FileInfo)fi);
+ l5=0;
+ label5:if (fi==null) goto label6;
+ fi.release();
+ label6:return  0;
+ label7:l6 = catch;
+ label8:if (fi==null) goto label9;
+ fi.release();
+ label9:throw l6;
+ catch java.lang.Throwable: label1 - label3 : label7;
+catch java.lang.Throwable: label2 - label5 : label7;
+catch java.lang.Throwable: label7 - label8 : label7;
+} 
+

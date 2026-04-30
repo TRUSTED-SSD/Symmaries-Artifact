@@ -1,0 +1,45 @@
+org.apache.rocketmq.proxy.grpc.v2.GrpcMessagingApplication(org.apache.rocketmq.proxy.grpc.v2.GrpcMessingActivity grpcMessingActivity)
+{
+org.apache.rocketmq.proxy.config.ProxyConfig config;
+  int $stack4;
+  int $stack5;
+  java.util.concurrent.TimeUnit $stack7;
+  int $stack9;
+  java.util.concurrent.ThreadPoolExecutor $stack10;
+  this#apache.rocketmq.v2.MessagingServiceGrpc$MessagingServiceImplBase();
+ this.grpcMessingActivity=grpcMessingActivity;
+ config = org.apache.rocketmq.proxy.config.ConfigurationManager.getProxyConfig();
+ $stack4 = config.getGrpcRouteThreadPoolNums();
+ $stack5 = config.getGrpcRouteThreadPoolNums();
+ $stack7=java.util.concurrent.TimeUnit.MINUTES;
+ $stack9 = config.getGrpcRouteThreadQueueCapacity();
+ $stack10 = org.apache.rocketmq.common.thread.ThreadPoolMonitor.createAndMonitor($stack4,$stack5,1L,$stack7,"GrpcRouteThreadPool",$stack9);
+ this.routeThreadPoolExecutor=$stack10;
+ $stack4 = config.getGrpcProducerThreadPoolNums();
+ $stack5 = config.getGrpcProducerThreadPoolNums();
+ $stack7=java.util.concurrent.TimeUnit.MINUTES;
+ $stack9 = config.getGrpcProducerThreadQueueCapacity();
+ $stack10 = org.apache.rocketmq.common.thread.ThreadPoolMonitor.createAndMonitor($stack4,$stack5,1L,$stack7,"GrpcProducerThreadPool",$stack9);
+ this.producerThreadPoolExecutor=$stack10;
+ $stack4 = config.getGrpcConsumerThreadPoolNums();
+ $stack5 = config.getGrpcConsumerThreadPoolNums();
+ $stack7=java.util.concurrent.TimeUnit.MINUTES;
+ $stack9 = config.getGrpcConsumerThreadQueueCapacity();
+ $stack10 = org.apache.rocketmq.common.thread.ThreadPoolMonitor.createAndMonitor($stack4,$stack5,1L,$stack7,"GrpcConsumerThreadPool",$stack9);
+ this.consumerThreadPoolExecutor=$stack10;
+ $stack4 = config.getGrpcClientManagerThreadPoolNums();
+ $stack5 = config.getGrpcClientManagerThreadPoolNums();
+ $stack7=java.util.concurrent.TimeUnit.MINUTES;
+ $stack9 = config.getGrpcClientManagerThreadQueueCapacity();
+ $stack10 = org.apache.rocketmq.common.thread.ThreadPoolMonitor.createAndMonitor($stack4,$stack5,1L,$stack7,"GrpcClientManagerThreadPool",$stack9);
+ this.clientManagerThreadPoolExecutor=$stack10;
+ $stack4 = config.getGrpcTransactionThreadPoolNums();
+ $stack5 = config.getGrpcTransactionThreadPoolNums();
+ $stack7=java.util.concurrent.TimeUnit.MINUTES;
+ $stack9 = config.getGrpcTransactionThreadQueueCapacity();
+ $stack10 = org.apache.rocketmq.common.thread.ThreadPoolMonitor.createAndMonitor($stack4,$stack5,1L,$stack7,"GrpcTransactionThreadPool",$stack9);
+ this.transactionThreadPoolExecutor=$stack10;
+ this.init();
+ return;
+ } 
+

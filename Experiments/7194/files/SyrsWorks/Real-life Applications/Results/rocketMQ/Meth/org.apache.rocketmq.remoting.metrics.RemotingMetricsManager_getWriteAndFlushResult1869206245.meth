@@ -1,0 +1,15 @@
+static java.lang.String org.apache.rocketmq.remoting.metrics.RemotingMetricsManager:getWriteAndFlushResult(io.netty.util.concurrent.Future future)
+{
+java.lang.String result;
+  boolean $stack2;
+  result="success";
+ $stack2 = future.isCancelled();
+ if ($stack2==0) goto label0;
+ result="cancelled";
+ goto label1;
+ label0:$stack2 = future.isSuccess();
+ if ($stack2!=0) goto label1;
+ result="write_channel_failed";
+ label1:return  result;
+ } 
+

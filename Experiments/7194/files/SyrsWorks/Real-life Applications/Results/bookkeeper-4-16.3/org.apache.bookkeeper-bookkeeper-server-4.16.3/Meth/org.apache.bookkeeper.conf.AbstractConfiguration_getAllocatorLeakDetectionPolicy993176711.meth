@@ -1,0 +1,24 @@
+org.apache.bookkeeper.common.allocator.LeakDetectionPolicy org.apache.bookkeeper.conf.AbstractConfiguration:getAllocatorLeakDetectionPolicy()
+{
+java.lang.String nettyLevelStr;
+  java.lang.String bkLevelStr;
+  org.apache.bookkeeper.common.allocator.LeakDetectionPolicy nettyLevel;
+  org.apache.bookkeeper.common.allocator.LeakDetectionPolicy bkLevel;
+  int $stack16;
+  int $stack17;
+  nettyLevel=org.apache.bookkeeper.common.allocator.LeakDetectionPolicy.Disabled;
+ nettyLevelStr = nettyLevel.name();
+ nettyLevelStr = java.lang.System.getProperty("io.netty.leakDetectionLevel",nettyLevelStr);
+ nettyLevelStr = java.lang.System.getProperty("io.netty.leakDetection.level",nettyLevelStr);
+ nettyLevel=org.apache.bookkeeper.common.allocator.LeakDetectionPolicy.Disabled;
+ bkLevelStr = nettyLevel.name();
+ bkLevelStr = this.getString("allocatorLeakDetectionPolicy",bkLevelStr);
+ nettyLevel = org.apache.bookkeeper.common.allocator.LeakDetectionPolicy.parseLevel(nettyLevelStr);
+ bkLevel = org.apache.bookkeeper.common.allocator.LeakDetectionPolicy.parseLevel(bkLevelStr);
+ $stack16 = nettyLevel.ordinal();
+ $stack17 = bkLevel.ordinal();
+ if ($stack16<$stack17) goto label0;
+ return  nettyLevel;
+ label0:return  bkLevel;
+ } 
+

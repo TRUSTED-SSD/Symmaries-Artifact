@@ -1,0 +1,26 @@
+void org.keycloak.common.util.DelegatingSerializationFilter:setFilter(java.io.ObjectInputStream ois,java.lang.String filterPattern)
+{
+java.lang.StringBuilder $stack3;
+  org.jboss.logging.Logger $stack4;
+  org.keycloak.common.util.DelegatingSerializationFilter$SerializationFilterAdapter $stack6;
+  java.lang.Class $stack7;
+  java.lang.String $stack8;
+  java.lang.Object $stack12;
+  $stack4=org.keycloak.common.util.DelegatingSerializationFilter.LOG;
+ $stack3=new java.lang.StringBuilder;
+ $stack3#java.lang.StringBuilder();
+ $stack3 = $stack3.append("Using: ");
+ $stack6=org.keycloak.common.util.DelegatingSerializationFilter.serializationFilterAdapter;
+ $stack7 = $stack6.getClass();
+ $stack8 = $stack7.getSimpleName();
+ $stack3 = $stack3.append($stack8);
+ $stack8 = $stack3.toString();
+ $stack4.debug((java.lang.Object)$stack8);
+ $stack6=org.keycloak.common.util.DelegatingSerializationFilter.serializationFilterAdapter;
+ $stack12 = $stack6.getObjectInputFilter(ois);
+ if ($stack12!=null) goto label0;
+ $stack6=org.keycloak.common.util.DelegatingSerializationFilter.serializationFilterAdapter;
+ $stack6.setObjectInputFilter(ois,filterPattern);
+ label0:return;
+ } 
+

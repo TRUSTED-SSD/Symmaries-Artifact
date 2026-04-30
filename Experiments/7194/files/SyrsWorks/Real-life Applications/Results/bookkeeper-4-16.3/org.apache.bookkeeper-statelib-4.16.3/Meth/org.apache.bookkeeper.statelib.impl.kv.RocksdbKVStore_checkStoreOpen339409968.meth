@@ -1,0 +1,33 @@
+void org.apache.bookkeeper.statelib.impl.kv.RocksdbKVStore:checkStoreOpen()
+{
+boolean $stack1;
+  org.apache.bookkeeper.statelib.api.exceptions.InvalidStateStoreException $stack3;
+  java.lang.StringBuilder $stack4;
+  java.lang.String $stack6;
+  $stack1=this.closed;
+ if ($stack1==0) goto label0;
+ $stack3=new org.apache.bookkeeper.statelib.api.exceptions.InvalidStateStoreException;
+ $stack4=new java.lang.StringBuilder;
+ $stack4#java.lang.StringBuilder();
+ $stack4 = $stack4.append("State store ");
+ $stack6=this.name;
+ $stack4 = $stack4.append($stack6);
+ $stack4 = $stack4.append(" is already closed");
+ $stack6 = $stack4.toString();
+ $stack3#org.apache.bookkeeper.statelib.api.exceptions.InvalidStateStoreException($stack6);
+ throw $stack3;
+ label0:$stack1=this.isInitialized;
+ if ($stack1!=0) goto label1;
+ $stack3=new org.apache.bookkeeper.statelib.api.exceptions.InvalidStateStoreException;
+ $stack4=new java.lang.StringBuilder;
+ $stack4#java.lang.StringBuilder();
+ $stack4 = $stack4.append("State Store ");
+ $stack6=this.name;
+ $stack4 = $stack4.append($stack6);
+ $stack4 = $stack4.append(" is not initialized yet");
+ $stack6 = $stack4.toString();
+ $stack3#org.apache.bookkeeper.statelib.api.exceptions.InvalidStateStoreException($stack6);
+ throw $stack3;
+ label1:return;
+ } 
+

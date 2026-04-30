@@ -1,0 +1,33 @@
+int org.apache.rocketmq.store.util.PerfCounter:getIndex(long cost)
+{
+int units;
+  byte $stack4;
+  java.util.concurrent.atomic.AtomicInteger[] $stack9;
+  int $stack10;
+  $stack4=(cost cmp 1000L);
+ if ($stack4>=0) goto label0;
+ units=(int) cost;
+ return  units;
+ label0:$stack4=(cost cmp 1000L);
+ if ($stack4<0) goto label1;
+ $stack4=(cost cmp 11000L);
+ if ($stack4>=0) goto label1;
+ cost=(cost-1000L);
+ cost=(cost/10L);
+ units=(int) cost;
+ units=(1000+units);
+ return  units;
+ label1:cost=(cost-1000L);
+ cost=(cost-10000L);
+ cost=(cost/100L);
+ units=(int) cost;
+ units=(2000+units);
+ $stack9=this.count;
+ $stack10=#$stack9;
+ if (units<$stack10) goto label2;
+ $stack9=this.count;
+ units=#$stack9;
+ units=(units-1);
+ label2:return  units;
+ } 
+

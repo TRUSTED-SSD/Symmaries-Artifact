@@ -1,0 +1,49 @@
+static void org.apache.rocketmq.acl.common.AclUtils:IPv6AddressCheck(java.lang.String @netaddress)
+{
+int asterisk;
+  int minus;
+  boolean $stack3;
+  org.apache.rocketmq.acl.common.AclException $stack10;
+  java.lang.Object[] $stack11;
+  int $stack17;
+  java.lang.String netaddress;
+netaddress=@netaddress;
+$stack3 = org.apache.rocketmq.acl.common.AclUtils.isAsterisk(netaddress);
+ if ($stack3!=0) goto label0;
+ $stack3 = org.apache.rocketmq.acl.common.AclUtils.isMinus(netaddress);
+ if ($stack3==0) goto label1;
+ label0:asterisk = netaddress.indexOf("*");
+ minus = netaddress.indexOf("-");
+ if (asterisk<=-1) goto label2;
+ $stack17 = netaddress.length();
+ $stack17=($stack17-1);
+ if (asterisk==$stack17) goto label2;
+ $stack10=new org.apache.rocketmq.acl.common.AclException;
+ $stack11=new java.lang.Object[1];
+ $stack11[0]=netaddress;
+ netaddress = java.lang.String.format("Netaddress examine scope Exception netaddress is %s",$stack11);
+ $stack10#org.apache.rocketmq.acl.common.AclException(netaddress);
+ throw $stack10;
+ label2:if (minus<=-1) goto label1;
+ if (asterisk!=-1) goto label3;
+ asterisk = netaddress.lastIndexOf(":");
+ if (minus>asterisk) goto label1;
+ $stack10=new org.apache.rocketmq.acl.common.AclException;
+ $stack11=new java.lang.Object[1];
+ $stack11[0]=netaddress;
+ netaddress = java.lang.String.format("Netaddress examine scope Exception netaddress is %s",$stack11);
+ $stack10#org.apache.rocketmq.acl.common.AclException(netaddress);
+ throw $stack10;
+ label3:asterisk = netaddress.lastIndexOf(":");
+ asterisk=(asterisk-1);
+ asterisk = netaddress.lastIndexOf(":",asterisk);
+ if (minus>asterisk) goto label1;
+ $stack10=new org.apache.rocketmq.acl.common.AclException;
+ $stack11=new java.lang.Object[1];
+ $stack11[0]=netaddress;
+ netaddress = java.lang.String.format("Netaddress examine scope Exception netaddress is %s",$stack11);
+ $stack10#org.apache.rocketmq.acl.common.AclException(netaddress);
+ throw $stack10;
+ label1:return;
+ } 
+

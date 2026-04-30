@@ -1,0 +1,17 @@
+void org.apache.bookkeeper.meta.ZkLedgerUnderreplicationManager$4:process(org.apache.zookeeper.WatchedEvent e)
+{
+org.apache.zookeeper.Watcher$Event$EventType $stack2;
+  org.apache.zookeeper.Watcher$Event$EventType $stack3;
+  org.slf4j.Logger $stack4;
+  org.apache.bookkeeper.proto.BookkeeperInternalCallbacks$GenericCallback $stack5;
+  $stack2 = e.getType();
+ $stack3=org.apache.zookeeper.Watcher$Event$EventType.NodeDeleted;
+ if ($stack2!=$stack3) goto label0;
+ $stack4=org.apache.bookkeeper.meta.ZkLedgerUnderreplicationManager.LOG;
+ dummyClass.lowSink("LedgerReplication is enabled externally through Zookeeper, since DISABLE_NODE ZNode is deleted");
+$stack4.info("LedgerReplication is enabled externally through Zookeeper, since DISABLE_NODE ZNode is deleted");
+ $stack5=this.val$cb;
+ $stack5.operationComplete(0,null);
+ label0:return;
+ } 
+

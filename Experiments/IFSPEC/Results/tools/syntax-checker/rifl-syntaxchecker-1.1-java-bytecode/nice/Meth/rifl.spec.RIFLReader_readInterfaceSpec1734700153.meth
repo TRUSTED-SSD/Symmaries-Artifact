@@ -1,0 +1,39 @@
+void rifl.spec.RIFLReader:readInterfaceSpec(org.w3c.dom.Document doc,java.util.Set interfacespec)
+{
+org.w3c.dom.Element interfacespecElem;
+  java.util.Iterator l5;
+  java.lang.String handle;
+  rifl.spec.CatSrcSnk catSrcSnk;
+  rifl.spec.Assignable assignable;
+  org.w3c.dom.NodeList $stack10;
+  java.lang.Iterable $stack11;
+  boolean $stack13;
+  java.lang.Object $stack14;
+  java.util.Map $stack20;
+  java.lang.Object[] $stack24;
+  interfacespecElem = rifl.spec.RIFLReader.getElement(doc,"interfacespec");
+ $stack10 = interfacespecElem.getChildNodes();
+ $stack11 = rifl.spec.RIFLReader.getElementList($stack10);
+ l5 = $stack11.iterator();
+ goto label0;
+ label1:$stack14 = l5.next();
+ interfacespecElem=(org.w3c.dom.Element) $stack14;
+ handle = interfacespecElem.getAttribute("handle");
+ interfacespecElem = rifl.spec.RIFLReader.getChildElement(interfacespecElem);
+ catSrcSnk = this#rifl.spec.RIFLReader:readCategoryTree(interfacespecElem);
+ assignable=new rifl.spec.Assignable;
+ assignable#rifl.spec.Assignable(handle,catSrcSnk);
+ $stack13 = interfacespec.add((java.lang.Object)assignable);
+ if ($stack13!=0) goto label2;
+ $stack24=new java.lang.Object[1];
+ $stack24[0]=assignable;
+ handle = java.lang.String.format("Duplicate declaration of assignable \'%s\'. Duplicate ignored.",$stack24);
+ rifl.spec.RIFLReader.warn(handle);
+ label2:$stack20=this.assignables;
+ handle = assignable.getName();
+ $stack20.put((java.lang.Object)handle,(java.lang.Object)assignable);
+ label0:$stack13 = l5.hasNext();
+ if ($stack13!=0) goto label1;
+ return;
+ } 
+

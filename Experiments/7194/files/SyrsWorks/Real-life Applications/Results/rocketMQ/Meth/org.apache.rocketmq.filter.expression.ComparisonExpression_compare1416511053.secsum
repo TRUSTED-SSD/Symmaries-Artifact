@@ -1,0 +1,9 @@
+java.lang.Boolean org.apache.rocketmq.filter.expression.ComparisonExpression:compare (
+  java.lang.Comparable lv, java.lang.Comparable rv) {
+  guard = tt;
+  ret(level()) = pc ⊔ level(lv) ⊔ level(rv) ⊔ level(this) ⊔ obj_level(lv) ⊔ obj_level(this);
+  ret(obj_level()) = if pc ≠ ⊤ ∧ level(lv) ⊔ level(rv) ⊔ level(this) ⊔ obj_level(lv) ⊔ obj_level(this) = ⊤ then ⊤ else ⊥;
+  ret(obj_level(lv)) = pc ⊔ level(lv) ⊔ level(rv) ⊔ level(this) ⊔ obj_level(lv) ⊔ obj_level(this);
+  ret(obj_level(rv)) = pc ⊔ level(lv) ⊔ level(rv) ⊔ level(this) ⊔ obj_level(lv) ⊔ obj_level(this);
+  ret(obj_level(this)) = pc ⊔ level(lv) ⊔ level(rv) ⊔ level(this) ⊔ obj_level(lv) ⊔ obj_level(this);
+}

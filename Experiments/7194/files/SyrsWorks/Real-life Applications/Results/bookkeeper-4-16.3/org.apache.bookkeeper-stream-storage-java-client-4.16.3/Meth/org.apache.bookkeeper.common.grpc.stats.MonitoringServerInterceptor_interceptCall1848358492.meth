@@ -1,0 +1,20 @@
+io.grpc.ServerCall$Listener org.apache.bookkeeper.common.grpc.stats.MonitoringServerInterceptor:interceptCall(io.grpc.ServerCall @call,io.grpc.Metadata headers,io.grpc.ServerCallHandler next)
+{
+io.grpc.MethodDescriptor method;
+  org.apache.bookkeeper.common.grpc.stats.ServerStats stats;
+  io.grpc.ServerCall$Listener $stack11;
+  org.apache.bookkeeper.common.grpc.stats.MonitoringServerCall tmp$1383993265;
+  org.apache.bookkeeper.common.grpc.stats.MonitoringServerCallListener tmp$1572210568;
+  io.grpc.ServerCall call;
+call=@call;
+method = call.getMethodDescriptor();
+ stats = this#org.apache.bookkeeper.common.grpc.stats.MonitoringServerInterceptor:getMethodStats(method);
+ tmp$1383993265=new org.apache.bookkeeper.common.grpc.stats.MonitoringServerCall;
+ tmp$1383993265#org.apache.bookkeeper.common.grpc.stats.MonitoringServerCall(call,stats);
+ tmp$1572210568=new org.apache.bookkeeper.common.grpc.stats.MonitoringServerCallListener;
+ call=(io.grpc.ServerCall) tmp$1383993265;
+ $stack11 = next.startCall(call,headers);
+ tmp$1572210568#org.apache.bookkeeper.common.grpc.stats.MonitoringServerCallListener($stack11,stats);
+ return  tmp$1572210568;
+ } 
+

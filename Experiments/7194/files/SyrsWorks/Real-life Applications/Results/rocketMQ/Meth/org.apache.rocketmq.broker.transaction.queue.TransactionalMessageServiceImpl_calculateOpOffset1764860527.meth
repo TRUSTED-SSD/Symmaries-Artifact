@@ -1,0 +1,23 @@
+long org.apache.rocketmq.broker.transaction.queue.TransactionalMessageServiceImpl:calculateOpOffset(java.util.List doneOffset,long oldOffset)
+{
+int i;
+  int $stack7;
+  java.lang.Object $stack8;
+  java.lang.Long $stack9;
+  long $stack10;
+  byte $stack11;
+  java.util.Collections.sort(doneOffset);
+ i=0;
+ label0:$stack7 = doneOffset.size();
+ if (i>=$stack7) goto label1;
+ $stack8 = doneOffset.get(i);
+ $stack9=(java.lang.Long) $stack8;
+ $stack10 = $stack9.longValue();
+ $stack11=($stack10 cmp oldOffset);
+ if ($stack11!=0) goto label1;
+ oldOffset=(oldOffset+1L);
+ i=(i+1);
+ goto label0;
+ label1:return  oldOffset;
+ } 
+

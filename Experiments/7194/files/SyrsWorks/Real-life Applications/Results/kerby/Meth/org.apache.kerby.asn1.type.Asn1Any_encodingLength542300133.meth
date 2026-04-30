@@ -1,0 +1,28 @@
+int org.apache.kerby.asn1.type.Asn1Any:encodingLength()
+{
+org.apache.kerby.asn1.type.Asn1Encodeable theValue;
+  org.apache.kerby.asn1.TaggingOption taggingOption;
+  java.lang.Object $stack3;
+  int $stack4;
+  boolean $stack5;
+  org.apache.kerby.asn1.Asn1FieldInfo $stack7;
+  $stack3 = this.getValue();
+ theValue=(org.apache.kerby.asn1.type.Asn1Encodeable) $stack3;
+ if (theValue==null) goto label0;
+ $stack5=this.isBlindlyDecoded;
+ if ($stack5!=0) goto label1;
+ $stack7=this.decodeInfo;
+ $stack5 = $stack7.isTagged();
+ if ($stack5==0) goto label2;
+ $stack7=this.decodeInfo;
+ taggingOption = $stack7.getTaggingOption();
+ $stack4 = theValue.taggedEncodingLength(taggingOption);
+ return  $stack4;
+ label2:$stack4 = theValue.encodingLength();
+ return  $stack4;
+ label1:$stack4 = theValue.encodingLength();
+ return  $stack4;
+ label0:$stack4 = this#org.apache.kerby.asn1.type.Asn1Encodeable:encodingLength();
+ return  $stack4;
+ } 
+

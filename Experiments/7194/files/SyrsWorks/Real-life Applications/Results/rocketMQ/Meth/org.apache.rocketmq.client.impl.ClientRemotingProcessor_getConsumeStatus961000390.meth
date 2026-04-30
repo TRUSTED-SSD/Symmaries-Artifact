@@ -1,0 +1,27 @@
+org.apache.rocketmq.remoting.protocol.RemotingCommand org.apache.rocketmq.client.impl.ClientRemotingProcessor:getConsumeStatus(io.netty.channel.ChannelHandlerContext ctx,org.apache.rocketmq.remoting.protocol.RemotingCommand request)
+{
+org.apache.rocketmq.remoting.protocol.RemotingCommand response;
+  org.apache.rocketmq.remoting.protocol.header.GetConsumerStatusRequestHeader requestHeader;
+  java.util.Map offsetTable;
+  org.apache.rocketmq.remoting.protocol.body.GetConsumerStatusBody body;
+  org.apache.rocketmq.remoting.CommandCustomHeader $stack8;
+  org.apache.rocketmq.client.impl.factory.MQClientInstance $stack9;
+  java.lang.String $stack10;
+  java.lang.String $stack11;
+  byte[] $stack14;
+  response = org.apache.rocketmq.remoting.protocol.RemotingCommand.createResponseCommand(null);
+ $stack8 = request.decodeCommandCustomHeader(org.apache.rocketmq.remoting.protocol.header.GetConsumerStatusRequestHeader);
+ requestHeader=(org.apache.rocketmq.remoting.protocol.header.GetConsumerStatusRequestHeader) $stack8;
+ $stack9=this.mqClientFactory;
+ $stack10 = requestHeader.getTopic();
+ $stack11 = requestHeader.getGroup();
+ offsetTable = $stack9.getConsumerStatus($stack10,$stack11);
+ body=new org.apache.rocketmq.remoting.protocol.body.GetConsumerStatusBody;
+ body#org.apache.rocketmq.remoting.protocol.body.GetConsumerStatusBody();
+ body.setMessageQueueTable(offsetTable);
+ $stack14 = body.encode();
+ response.setBody($stack14);
+ response.setCode(0);
+ return  response;
+ } 
+

@@ -1,0 +1,15 @@
+void org.apache.bookkeeper.proto.BookieRequestProcessor:processGetBookieInfoRequestV3(org.apache.bookkeeper.proto.BookkeeperProtocol$Request r,org.apache.bookkeeper.proto.BookieRequestHandler requestHandler)
+{
+org.apache.bookkeeper.proto.GetBookieInfoProcessorV3 getBookieInfo;
+  org.apache.bookkeeper.common.util.OrderedExecutor $stack5;
+  getBookieInfo=new org.apache.bookkeeper.proto.GetBookieInfoProcessorV3;
+ getBookieInfo#org.apache.bookkeeper.proto.GetBookieInfoProcessorV3(r,requestHandler,this);
+ $stack5=this.readThreadPool;
+ if (null!=$stack5) goto label0;
+ getBookieInfo.run();
+ goto label1;
+ label0:$stack5=this.readThreadPool;
+ $stack5.submit((java.lang.Runnable)getBookieInfo);
+ label1:return;
+ } 
+

@@ -1,0 +1,20 @@
+org.apache.rocketmq.proxy.service.route.MessageQueueView org.apache.rocketmq.proxy.service.route.LocalTopicRouteService:getCurrentMessageQueueView(java.lang.String topic)
+{
+org.apache.rocketmq.common.TopicConfig topicConfig;
+  org.apache.rocketmq.broker.BrokerController $stack3;
+  org.apache.rocketmq.broker.topic.TopicConfigManager $stack4;
+  java.util.concurrent.ConcurrentMap $stack5;
+  java.lang.Object $stack6;
+  org.apache.rocketmq.proxy.service.route.MessageQueueView $stack7;
+  org.apache.rocketmq.remoting.protocol.route.TopicRouteData $stack8;
+  $stack3=this.brokerController;
+ $stack4 = $stack3.getTopicConfigManager();
+ $stack5 = $stack4.getTopicConfigTable();
+ $stack6 = $stack5.get((java.lang.Object)topic);
+ topicConfig=(org.apache.rocketmq.common.TopicConfig) $stack6;
+ $stack7=new org.apache.rocketmq.proxy.service.route.MessageQueueView;
+ $stack8 = this.toTopicRouteData(topicConfig);
+ $stack7#org.apache.rocketmq.proxy.service.route.MessageQueueView(topic,$stack8);
+ return  $stack7;
+ } 
+

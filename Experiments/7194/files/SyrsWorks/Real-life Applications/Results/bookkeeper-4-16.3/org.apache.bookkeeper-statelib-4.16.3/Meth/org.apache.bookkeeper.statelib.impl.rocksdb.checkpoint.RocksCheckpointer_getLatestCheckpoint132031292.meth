@@ -1,0 +1,18 @@
+static org.apache.bookkeeper.statelib.impl.rocksdb.checkpoint.CheckpointInfo org.apache.bookkeeper.statelib.impl.rocksdb.checkpoint.RocksCheckpointer:getLatestCheckpoint(java.lang.String dbPrefix,org.apache.bookkeeper.statelib.api.checkpoint.CheckpointStore checkpointStore)
+{
+java.util.List checkpoints;
+  int $stack4;
+  java.lang.Object $stack5;
+  org.apache.bookkeeper.statelib.impl.rocksdb.checkpoint.CheckpointInfo $stack6;
+  java.lang.RuntimeException $stack7;
+  checkpoints = org.apache.bookkeeper.statelib.impl.rocksdb.checkpoint.RocksCheckpointer.getCheckpoints(dbPrefix,checkpointStore);
+ $stack4 = checkpoints.size();
+ if ($stack4>0) goto label0;
+ $stack7=new java.lang.RuntimeException;
+ $stack7#java.lang.RuntimeException("Checkpoint list can\'t be empty");
+ throw $stack7;
+ label0:$stack5 = checkpoints.get(0);
+ $stack6=(org.apache.bookkeeper.statelib.impl.rocksdb.checkpoint.CheckpointInfo) $stack5;
+ return  $stack6;
+ } 
+

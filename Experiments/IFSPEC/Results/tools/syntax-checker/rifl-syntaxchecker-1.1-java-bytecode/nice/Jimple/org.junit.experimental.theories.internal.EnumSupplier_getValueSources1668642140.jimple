@@ -1,0 +1,62 @@
+    public java.util.List getValueSources(org.junit.experimental.theories.ParameterSignature)
+    {
+        org.junit.experimental.theories.internal.EnumSupplier this;
+        org.junit.experimental.theories.ParameterSignature sig;
+        java.lang.Object[] enumValues;
+        java.util.ArrayList assignments;
+        int len$, i$;
+        java.lang.Object value;
+        java.lang.Class $stack8;
+        java.lang.String $stack11;
+        org.junit.experimental.theories.PotentialAssignment $stack12;
+
+        this := @this: org.junit.experimental.theories.internal.EnumSupplier;
+
+        sig := @parameter0: org.junit.experimental.theories.ParameterSignature;
+
+        $stack8 = this.<org.junit.experimental.theories.internal.EnumSupplier: java.lang.Class enumType>;
+/*20*/
+
+        enumValues = virtualinvoke $stack8.<java.lang.Class: java.lang.Object[] getEnumConstants()>();
+/*20*/
+/*20*/
+
+        assignments = new java.util.ArrayList;
+/*22*/
+
+        specialinvoke assignments.<java.util.ArrayList: void <init>()>();
+/*22*/
+
+        len$ = lengthof enumValues;
+/*23*/
+
+        i$ = 0;
+/*23*/
+
+     label1:
+        if i$ >= len$ goto label2;
+/*23*/
+
+        value = enumValues[i$];
+/*27*/
+
+        $stack11 = virtualinvoke value.<java.lang.Object: java.lang.String toString()>();
+/*24*/
+
+        $stack12 = staticinvoke <org.junit.experimental.theories.PotentialAssignment: org.junit.experimental.theories.PotentialAssignment forValue(java.lang.String,java.lang.Object)>($stack11, value);
+/*24*/
+
+        interfaceinvoke assignments.<java.util.List: boolean add(java.lang.Object)>($stack12);
+/*24*/
+
+        i$ = i$ + 1;
+/*23*/
+
+        goto label1;
+/*23*/
+
+     label2:
+        return assignments;
+/*27*/
+    }
+

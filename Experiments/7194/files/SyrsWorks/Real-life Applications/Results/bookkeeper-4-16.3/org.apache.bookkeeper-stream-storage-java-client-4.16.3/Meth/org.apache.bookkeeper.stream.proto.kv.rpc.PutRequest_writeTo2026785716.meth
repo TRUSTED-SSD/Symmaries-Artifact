@@ -1,0 +1,51 @@
+void org.apache.bookkeeper.stream.proto.kv.rpc.PutRequest:writeTo(com.google.protobuf.CodedOutputStream output)
+{
+com.google.protobuf.ByteString $stack2;
+  boolean $stack3;
+  long $stack6;
+  byte $stack7;
+  org.apache.bookkeeper.stream.proto.kv.rpc.RoutingHeader $stack11;
+  com.google.protobuf.UnknownFieldSet $stack14;
+  com.google.protobuf.MessageLite tmp$1631817270;
+  $stack2=this.key_;
+ $stack3 = $stack2.isEmpty();
+ if ($stack3!=0) goto label0;
+ $stack2=this.key_;
+ output.writeBytes(1,$stack2);
+ label0:$stack2=this.value_;
+ $stack3 = $stack2.isEmpty();
+ if ($stack3!=0) goto label1;
+ $stack2=this.value_;
+ output.writeBytes(2,$stack2);
+ label1:$stack6=this.lease_;
+ $stack7=($stack6 cmp 0L);
+ if ($stack7==0) goto label2;
+ $stack6=this.lease_;
+ output.writeInt64(3,$stack6);
+ label2:$stack3=this.prevKv_;
+ if ($stack3==0) goto label3;
+ $stack3=this.prevKv_;
+ output.writeBool(4,$stack3);
+ label3:$stack3=this.ignoreValue_;
+ if ($stack3==0) goto label4;
+ $stack3=this.ignoreValue_;
+ output.writeBool(5,$stack3);
+ label4:$stack3=this.ignoreLease_;
+ if ($stack3==0) goto label5;
+ $stack3=this.ignoreLease_;
+ output.writeBool(6,$stack3);
+ label5:$stack11=this.header_;
+ if ($stack11==null) goto label6;
+ $stack11 = this.getHeader();
+ tmp$1631817270=(com.google.protobuf.MessageLite) $stack11;
+ output.writeMessage(99,tmp$1631817270);
+ label6:$stack6=this.expectedVersion_;
+ $stack7=($stack6 cmp 0L);
+ if ($stack7==0) goto label7;
+ $stack6=this.expectedVersion_;
+ output.writeInt64(100,$stack6);
+ label7:$stack14 = this.getUnknownFields();
+ $stack14.writeTo(output);
+ return;
+ } 
+

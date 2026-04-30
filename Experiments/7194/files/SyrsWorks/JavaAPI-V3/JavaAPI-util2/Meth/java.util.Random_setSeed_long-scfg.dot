@@ -1,0 +1,33 @@
+digraph G {
+  node [shape=box, ];
+  "pc0_js1" [label="〈$r1 = this.seed, js1〉", ];
+  "pc1_js1" [label="〈$l1 = java.util.Random.initialScramble (l0), js1〉\n\
+tt",
+             ];
+  "pc2_js1" [label="〈$r1.set ($l1), js1〉\n\
+tt", ];
+  "pc3_js1" [label="〈this.haveNextNextGaussian = 0, js1〉", ];
+  "pc4_js1" [label="〈return, js1〉", ];
+  "pc5_js1" [label="〈sink, js1〉\n\
+obj_level(this) ⊑ ret(obj_level(this))' ∧ (ret(this.><this)' ∨ ¬this.><this)",
+             ];
+  
+  
+  "pc0_js1" -> "pc1_js1" [label="tt,\n\
+{this.><$r1 := tt,\n\
+ level($r1) := pc ⊔ level(this) ⊔ obj_level(this),\n\
+ obj_level($r1) := obj_level(this)}",
+                          ];
+  "pc1_js1" -> "pc2_js1" [label="tt,\n\
+{level($l1) := pc ⊔ level(l0)}", ];
+  "pc2_js1" -> "pc3_js1" [label="tt,\n\
+{obj_level($r1) := pc ⊔ level(l0) ⊔ level(this) ⊔ obj_level(this),\n\
+ obj_level(this) := pc ⊔ level(l0) ⊔ level(this) ⊔ obj_level(this)}",
+                          ];
+  "pc3_js1" -> "pc4_js1" [label="tt,\n\
+{obj_level(this) := pc ⊔ obj_level(this)}",
+                          ];
+  "pc4_js1" -> "pc5_js1" [label="tt,\n\
+{ϕ := S4}", ];
+  
+  }

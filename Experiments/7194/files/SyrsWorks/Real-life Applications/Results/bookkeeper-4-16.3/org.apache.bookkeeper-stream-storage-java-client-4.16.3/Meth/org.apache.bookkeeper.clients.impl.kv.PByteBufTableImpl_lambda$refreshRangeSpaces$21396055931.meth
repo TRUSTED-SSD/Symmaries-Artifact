@@ -1,0 +1,46 @@
+void org.apache.bookkeeper.clients.impl.kv.PByteBufTableImpl:lambda$refreshRangeSpaces$2(java.util.Set activeRanges,java.lang.Long @rk,org.apache.bookkeeper.stream.proto.RangeProperties range)
+{
+org.apache.bookkeeper.api.kv.PTable tableRange;
+  long $stack5;
+  boolean $stack7;
+  java.util.concurrent.ConcurrentMap $stack8;
+  org.apache.bookkeeper.api.kv.impl.result.KeyValueFactory $stack12;
+  org.apache.bookkeeper.api.kv.impl.result.ResultFactory $stack13;
+  org.apache.bookkeeper.api.kv.op.OpFactory $stack14;
+  java.util.concurrent.ScheduledExecutorService $stack15;
+  org.apache.bookkeeper.stream.proto.StreamProperties $stack16;
+  org.apache.bookkeeper.clients.impl.kv.TableRangeFactory $stack17;
+  org.slf4j.Logger $stack19;
+  java.lang.Long rk;
+rk=@rk;
+$stack5 = range.getRangeId();
+ rk = java.lang.Long.valueOf($stack5);
+ activeRanges.add((java.lang.Object)rk);
+ $stack8=this.tableRanges;
+ $stack5 = range.getRangeId();
+ rk = java.lang.Long.valueOf($stack5);
+ $stack7 = $stack8.containsKey((java.lang.Object)rk);
+ if ($stack7==0) goto label0;
+ return;
+ label0:$stack17=this.trFactory;
+ $stack16=this.props;
+ $stack15=this.executor;
+ $stack14=this.opFactory;
+ $stack13=this.resultFactory;
+ $stack12=this.kvFactory;
+ tableRange = $stack17.openTableRange($stack16,range,$stack15,$stack14,$stack13,$stack12);
+ $stack19=org.apache.bookkeeper.clients.impl.kv.PByteBufTableImpl.log;
+ $stack7 = $stack19.isInfoEnabled();
+ if ($stack7==0) goto label1;
+ $stack19=org.apache.bookkeeper.clients.impl.kv.PByteBufTableImpl.log;
+ $stack5 = range.getRangeId();
+ rk = java.lang.Long.valueOf($stack5);
+ dummyClass.lowSink("Create table range client for range {}");
+$stack19.info("Create table range client for range {}",(java.lang.Object)rk);
+ label1:$stack8=this.tableRanges;
+ $stack5 = range.getRangeId();
+ rk = java.lang.Long.valueOf($stack5);
+ $stack8.put((java.lang.Object)rk,(java.lang.Object)tableRange);
+ return;
+ } 
+

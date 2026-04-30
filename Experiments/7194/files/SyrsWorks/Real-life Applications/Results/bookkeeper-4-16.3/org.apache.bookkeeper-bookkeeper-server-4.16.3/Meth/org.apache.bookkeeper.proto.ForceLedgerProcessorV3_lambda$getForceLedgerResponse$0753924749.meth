@@ -1,0 +1,63 @@
+void org.apache.bookkeeper.proto.ForceLedgerProcessorV3:lambda$getForceLedgerResponse$0(long ledgerId,long startTimeNanos,org.apache.bookkeeper.proto.BookkeeperProtocol$ForceLedgerResponse$Builder forceLedgerResponse,int rc,long ledgerId1,long entryId,org.apache.bookkeeper.net.BookieId addr,java.lang.Object ctx)
+{
+org.apache.bookkeeper.proto.BookkeeperProtocol$StatusCode status;
+  byte $stack16;
+  org.apache.bookkeeper.proto.BookieRequestProcessor $stack18;
+  org.apache.bookkeeper.proto.RequestStats $stack19;
+  org.apache.bookkeeper.stats.OpStatsLogger $stack20;
+  java.util.concurrent.TimeUnit $stack22;
+  org.apache.bookkeeper.proto.BookkeeperProtocol$Response$Builder $stack24;
+  org.apache.bookkeeper.proto.BookkeeperProtocol$BKPacketHeader $stack25;
+  org.apache.bookkeeper.proto.BookkeeperProtocol$StatusCode $stack27;
+  org.apache.bookkeeper.proto.BookkeeperProtocol$Response $stack42;
+  boolean $stack50;
+  $stack16=(entryId cmp -16384L);
+ if ($stack16!=0) goto label0;
+ $stack50=1;
+ goto label1;
+ label0:$stack50=0;
+ label1:com.google.common.base.Preconditions.checkArgument($stack50,"entryId must be METAENTRY_ID_FORCE_LEDGER but was {}",entryId);
+ $stack16=(ledgerId1 cmp ledgerId);
+ if ($stack16!=0) goto label2;
+ $stack50=1;
+ goto label3;
+ label2:$stack50=0;
+ label3:com.google.common.base.Preconditions.checkArgument($stack50,"ledgerId must be {} but was {}",ledgerId,ledgerId1);
+ if (0!=rc) goto label4;
+ $stack18=this.requestProcessor;
+ $stack19 = $stack18.getRequestStats();
+ $stack20 = $stack19.getForceLedgerStats();
+ ledgerId = org.apache.bookkeeper.util.MathUtils.elapsedNanos(startTimeNanos);
+ $stack22=java.util.concurrent.TimeUnit.NANOSECONDS;
+ $stack20.registerSuccessfulEvent(ledgerId,$stack22);
+ goto label5;
+ label4:$stack18=this.requestProcessor;
+ $stack19 = $stack18.getRequestStats();
+ $stack20 = $stack19.getForceLedgerStats();
+ ledgerId = org.apache.bookkeeper.util.MathUtils.elapsedNanos(startTimeNanos);
+ $stack22=java.util.concurrent.TimeUnit.NANOSECONDS;
+ $stack20.registerFailedEvent(ledgerId,$stack22);
+ label5:switch [rc]
+if 0 goto label6;
+if 1 goto label7;
+goto label8;
+ label6:status=org.apache.bookkeeper.proto.BookkeeperProtocol$StatusCode.EOK;
+ goto label9;
+ label7:status=org.apache.bookkeeper.proto.BookkeeperProtocol$StatusCode.EIO;
+ goto label9;
+ label8:status=org.apache.bookkeeper.proto.BookkeeperProtocol$StatusCode.EUA;
+ label9:forceLedgerResponse.setStatus(status);
+ $stack24 = org.apache.bookkeeper.proto.BookkeeperProtocol$Response.newBuilder();
+ $stack25 = this.getHeader();
+ $stack24 = $stack24.setHeader($stack25);
+ $stack27 = forceLedgerResponse.getStatus();
+ $stack24 = $stack24.setStatus($stack27);
+ $stack24 = $stack24.setForceLedgerResponse(forceLedgerResponse);
+ $stack42 = $stack24.build();
+ $stack18=this.requestProcessor;
+ $stack19 = $stack18.getRequestStats();
+ $stack20 = $stack19.getForceLedgerRequestStats();
+ this.sendResponse(status,(java.lang.Object)$stack42,$stack20);
+ return;
+ } 
+

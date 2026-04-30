@@ -1,0 +1,20 @@
+static boolean org.keycloak.jose.jws.crypto.RSAProvider:verifyViaCertificate(org.keycloak.jose.jws.JWSInput input,java.lang.String cert)
+{
+java.security.cert.X509Certificate certificate;
+  java.security.PublicKey $stack5;
+  boolean $stack6;
+  java.lang.Exception $stack7;
+  java.lang.RuntimeException $stack8;
+  certificate=null;
+ label0:certificate = org.keycloak.common.util.PemUtils.decodeCertificate(cert);
+ label1:goto label2;
+ label3:$stack7 = catch;
+ $stack8=new java.lang.RuntimeException;
+ $stack8#java.lang.RuntimeException((java.lang.Throwable)$stack7);
+ throw $stack8;
+ label2:$stack5 = certificate.getPublicKey();
+ $stack6 = org.keycloak.jose.jws.crypto.RSAProvider.verify(input,$stack5);
+ return  $stack6;
+ catch java.lang.Exception: label0 - label1 : label3;
+} 
+

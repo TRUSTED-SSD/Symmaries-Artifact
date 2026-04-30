@@ -1,0 +1,33 @@
+org.apache.kerby.asn1.type.Asn1Type org.apache.kerby.kerberos.kerb.type.ad.AuthorizationDataEntry:getAuthzDataAs(java.lang.Class type)
+{
+org.apache.kerby.asn1.type.Asn1Type result;
+  byte[] authzBytes;
+  org.apache.kerby.kerberos.kerb.type.ad.AuthorizationDataEntry$AuthorizationDataEntryField $stack5;
+  java.lang.Object $stack7;
+  java.lang.Exception $stack9;
+  java.lang.StringBuilder $stack10;
+  org.slf4j.Logger $stack11;
+  java.lang.String $stack13;
+  result=null;
+ $stack5=org.apache.kerby.kerberos.kerb.type.ad.AuthorizationDataEntry$AuthorizationDataEntryField.AD_DATA;
+ authzBytes = this.getFieldAsOctets((org.apache.kerby.asn1.EnumType)$stack5);
+ if (authzBytes==null) goto label0;
+ label1:$stack7 = type.newInstance();
+ result=(org.apache.kerby.asn1.type.Asn1Type) $stack7;
+ result.decode(authzBytes);
+ label2:goto label0;
+ label3:$stack9 = catch;
+ $stack11=org.apache.kerby.kerberos.kerb.type.ad.AuthorizationDataEntry.LOG;
+ $stack10=new java.lang.StringBuilder;
+ $stack10#java.lang.StringBuilder();
+ $stack10 = $stack10.append("Failed to get the AD_DATA field. ");
+ $stack13 = $stack9.toString();
+ $stack10 = $stack10.append($stack13);
+ $stack13 = $stack10.toString();
+ $stack11.error($stack13);
+ label0:return  result;
+ catch java.lang.InstantiationException: label1 - label2 : label3;
+catch java.lang.IllegalAccessException: label1 - label2 : label3;
+catch java.io.IOException: label1 - label2 : label3;
+} 
+

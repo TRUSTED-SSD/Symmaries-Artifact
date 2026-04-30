@@ -1,0 +1,28 @@
+static void com.google.zxing.oned.rss.expanded.decoders.AI01decoder:appendCheckDigit(java.lang.StringBuilder buf,int currentPos)
+{
+int checkDigit;
+  int i;
+  int digit;
+  char $stack10;
+  int $stack11;
+  checkDigit=0;
+ i=0;
+ label0:if (i>=13) goto label1;
+ digit=(i+currentPos);
+ $stack10 = buf.charAt(digit);
+ digit=($stack10-48);
+ $stack11=(i & 1);
+ if ($stack11!=0) goto label2;
+ digit=(3 * digit);
+ goto label2;
+ label2:checkDigit=(checkDigit+digit);
+ i=(i+1);
+ goto label0;
+ label1:currentPos=(checkDigit%10);
+ checkDigit=(10-currentPos);
+ if (checkDigit!=10) goto label3;
+ checkDigit=0;
+ label3:buf.append(checkDigit);
+ return;
+ } 
+

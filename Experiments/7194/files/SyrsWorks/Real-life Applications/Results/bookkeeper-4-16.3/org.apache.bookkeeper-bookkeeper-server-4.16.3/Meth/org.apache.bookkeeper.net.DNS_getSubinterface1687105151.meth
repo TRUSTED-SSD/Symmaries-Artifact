@@ -1,0 +1,27 @@
+static java.net.NetworkInterface org.apache.bookkeeper.net.DNS:getSubinterface(java.lang.String strInterface)
+{
+java.util.Enumeration nifs;
+  java.util.Enumeration subNifs;
+  java.net.NetworkInterface nif;
+  boolean $stack5;
+  java.lang.Object $stack6;
+  java.lang.String $stack12;
+  nifs = java.net.NetworkInterface.getNetworkInterfaces();
+ label0:$stack5 = nifs.hasMoreElements();
+ if ($stack5==0) goto label1;
+ $stack6 = nifs.nextElement();
+ nif=(java.net.NetworkInterface) $stack6;
+ subNifs = nif.getSubInterfaces();
+ label2:$stack5 = subNifs.hasMoreElements();
+ if ($stack5==0) goto label3;
+ $stack6 = subNifs.nextElement();
+ nif=(java.net.NetworkInterface) $stack6;
+ $stack12 = nif.getName();
+ $stack5 = $stack12.equals((java.lang.Object)strInterface);
+ if ($stack5==0) goto label4;
+ return  nif;
+ label4:goto label2;
+ label3:goto label0;
+ label1:return  null;
+ } 
+

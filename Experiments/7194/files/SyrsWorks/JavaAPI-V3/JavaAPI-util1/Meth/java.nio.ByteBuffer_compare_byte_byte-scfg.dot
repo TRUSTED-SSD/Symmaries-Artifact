@@ -1,0 +1,17 @@
+digraph G {
+  node [shape=box, ];
+  "pc0_js1" [label="〈$i2 = java.lang.Byte.compare (b0, b1), js1〉\n\
+tt", ];
+  "pc1_js1" [label="〈return $i2, js1〉", ];
+  "pc2_js1" [label="〈sink, js1〉\n\
+ϕ ≠ S1 ∨ pc ⊔ level($i2) ⊑ ret(level())'",
+             ];
+  
+  
+  "pc0_js1" -> "pc1_js1" [label="tt,\n\
+{level($i2) := pc ⊔ level(b0) ⊔ level(b1)}",
+                          ];
+  "pc1_js1" -> "pc2_js1" [label="tt,\n\
+{ϕ := S1}", ];
+  
+  }

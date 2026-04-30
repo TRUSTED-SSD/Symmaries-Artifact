@@ -1,0 +1,46 @@
+boolean org.apache.bookkeeper.statelib.impl.mvcc.MVCCStoreImpl:processCompareOp(org.apache.bookkeeper.api.kv.op.CompareOp op)
+{
+org.apache.bookkeeper.statelib.impl.mvcc.MVCCRecord record;
+  java.lang.Object key;
+  byte[] rawKey;
+  boolean l5;
+  java.lang.Throwable l6;
+  org.apache.bookkeeper.common.coder.Coder $stack8;
+  org.apache.bookkeeper.api.kv.op.CompareTarget $stack13;
+  org.apache.bookkeeper.api.kv.op.CompareTarget $stack14;
+  org.apache.bookkeeper.statelib.api.exceptions.MVCCStoreException $stack20;
+  java.lang.StringBuilder $stack21;
+  org.apache.bookkeeper.api.kv.result.Code $stack22;
+  java.lang.String $stack24;
+  record=null;
+ key = op.key();
+ $stack8=this.keyCoder;
+ rawKey = $stack8.encode(key);
+ label0:record = this#org.apache.bookkeeper.statelib.impl.mvcc.MVCCStoreImpl:getKeyRecord(key,rawKey);
+ if (null!=record) goto label1;
+ $stack13=org.apache.bookkeeper.api.kv.op.CompareTarget.VALUE;
+ $stack14 = op.target();
+ if ($stack13==$stack14) goto label1;
+ $stack20=new org.apache.bookkeeper.statelib.api.exceptions.MVCCStoreException;
+ $stack22=org.apache.bookkeeper.api.kv.result.Code.KEY_NOT_FOUND;
+ $stack21=new java.lang.StringBuilder;
+ $stack21#java.lang.StringBuilder();
+ $stack21 = $stack21.append("Key \'");
+ $stack24 = com.google.protobuf.TextFormat.escapeBytes(rawKey);
+ $stack21 = $stack21.append($stack24);
+ $stack21 = $stack21.append("\' is not found");
+ $stack24 = $stack21.toString();
+ $stack20#org.apache.bookkeeper.statelib.api.exceptions.MVCCStoreException($stack22,$stack24);
+ throw $stack20;
+ label1:l5 = this.processCompareOp(record,op);
+ label2:if (null==record) goto label3;
+ record.recycle();
+ label3:return  l5;
+ label4:l6 = catch;
+ label5:if (null==record) goto label6;
+ record.recycle();
+ label6:throw l6;
+ catch java.lang.Throwable: label0 - label2 : label4;
+catch java.lang.Throwable: label4 - label5 : label4;
+} 
+

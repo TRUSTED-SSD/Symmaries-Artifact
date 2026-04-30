@@ -1,0 +1,49 @@
+void org.apache.bookkeeper.common.collections.GrowableMpScArrayConsumerBlockingQueue:expandArray()
+{
+long headLockStamp;
+  int size;
+  int newCapacity;
+  java.lang.Object[] newData;
+  int lenHeadToEnd;
+  java.lang.Throwable l8;
+  java.util.concurrent.locks.StampedLock $stack9;
+  java.util.concurrent.atomic.AtomicInteger $stack11;
+  org.apache.bookkeeper.common.collections.GrowableMpScArrayConsumerBlockingQueue$PaddedInt $stack16;
+  java.lang.Object[] $stack17;
+  $stack9=this.headLock;
+ headLockStamp = $stack9.writeLock();
+ label0:$stack11=this.size;
+ size = $stack11.get();
+ newData=this.data;
+ newCapacity=#newData;
+ newCapacity=(newCapacity * 2);
+ newData=new java.lang.Object[newCapacity];
+ newData=(java.lang.Object[]) newData;
+ $stack16=this.headIndex;
+ newCapacity=$stack16.value;
+ $stack17=this.data;
+ lenHeadToEnd=#$stack17;
+ lenHeadToEnd=(lenHeadToEnd-newCapacity);
+ lenHeadToEnd = java.lang.Math.min(size,lenHeadToEnd);
+ $stack17=this.data;
+ java.lang.System.arraycopy((java.lang.Object)$stack17,newCapacity,(java.lang.Object)newData,0,lenHeadToEnd);
+ $stack17=this.data;
+ newCapacity=(size-lenHeadToEnd);
+ java.lang.System.arraycopy((java.lang.Object)$stack17,0,(java.lang.Object)newData,lenHeadToEnd,newCapacity);
+ this.data=newData;
+ $stack16=this.headIndex;
+ $stack16.value=0;
+ $stack16=this.tailIndex;
+ $stack16.value=size;
+ label1:$stack9=this.headLock;
+ $stack9.unlockWrite(headLockStamp);
+ goto label2;
+ label3:l8 = catch;
+ label4:$stack9=this.headLock;
+ $stack9.unlockWrite(headLockStamp);
+ throw l8;
+ label2:return;
+ catch java.lang.Throwable: label0 - label1 : label3;
+catch java.lang.Throwable: label3 - label4 : label3;
+} 
+

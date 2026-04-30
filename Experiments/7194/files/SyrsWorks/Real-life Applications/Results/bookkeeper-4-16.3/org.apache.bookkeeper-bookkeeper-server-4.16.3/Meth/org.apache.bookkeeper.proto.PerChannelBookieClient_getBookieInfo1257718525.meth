@@ -1,0 +1,39 @@
+void org.apache.bookkeeper.proto.PerChannelBookieClient:getBookieInfo(long requested,org.apache.bookkeeper.proto.BookkeeperInternalCallbacks$GetBookieInfoCallback cb,java.lang.Object ctx)
+{
+long txnId;
+  org.apache.bookkeeper.proto.PerChannelBookieClient$V3CompletionKey completionKey;
+  org.apache.bookkeeper.proto.BookkeeperProtocol$BKPacketHeader$Builder headerBuilder;
+  org.apache.bookkeeper.proto.BookkeeperProtocol$GetBookieInfoRequest$Builder getBookieInfoBuilder;
+  org.apache.bookkeeper.proto.BookkeeperProtocol$Request getBookieInfoRequest;
+  org.apache.bookkeeper.proto.BookkeeperProtocol$OperationType $stack13;
+  org.apache.bookkeeper.proto.PerChannelBookieClient$GetBookieInfoCompletion $stack14;
+  org.apache.bookkeeper.util.collections.ConcurrentOpenHashMap $stack15;
+  org.apache.bookkeeper.proto.BookkeeperProtocol$ProtocolVersion $stack18;
+  org.apache.bookkeeper.proto.BookkeeperProtocol$Request$Builder $stack25;
+  io.netty.channel.Channel $stack30;
+  txnId = this#org.apache.bookkeeper.proto.PerChannelBookieClient:getTxnId();
+ completionKey=new org.apache.bookkeeper.proto.PerChannelBookieClient$V3CompletionKey;
+ $stack13=org.apache.bookkeeper.proto.BookkeeperProtocol$OperationType.GET_BOOKIE_INFO;
+ completionKey#org.apache.bookkeeper.proto.PerChannelBookieClient$V3CompletionKey(this,txnId,$stack13);
+ $stack15=this.completionObjects;
+ $stack14=new org.apache.bookkeeper.proto.PerChannelBookieClient$GetBookieInfoCompletion;
+ $stack14#org.apache.bookkeeper.proto.PerChannelBookieClient$GetBookieInfoCompletion(this,(org.apache.bookkeeper.proto.PerChannelBookieClient$CompletionKey)completionKey,cb,ctx);
+ $stack15.put((java.lang.Object)completionKey,(java.lang.Object)$stack14);
+ headerBuilder = org.apache.bookkeeper.proto.BookkeeperProtocol$BKPacketHeader.newBuilder();
+ $stack18=org.apache.bookkeeper.proto.BookkeeperProtocol$ProtocolVersion.VERSION_THREE;
+ headerBuilder = headerBuilder.setVersion($stack18);
+ $stack13=org.apache.bookkeeper.proto.BookkeeperProtocol$OperationType.GET_BOOKIE_INFO;
+ headerBuilder = headerBuilder.setOperation($stack13);
+ headerBuilder = headerBuilder.setTxnId(txnId);
+ getBookieInfoBuilder = org.apache.bookkeeper.proto.BookkeeperProtocol$GetBookieInfoRequest.newBuilder();
+ getBookieInfoBuilder = getBookieInfoBuilder.setRequested(requested);
+ $stack25 = org.apache.bookkeeper.proto.BookkeeperProtocol$Request.newBuilder();
+ $stack25 = this.withRequestContext($stack25);
+ $stack25 = $stack25.setHeader(headerBuilder);
+ $stack25 = $stack25.setGetBookieInfoRequest(getBookieInfoBuilder);
+ getBookieInfoRequest = $stack25.build();
+ $stack30=this.channel;
+ this#org.apache.bookkeeper.proto.PerChannelBookieClient:writeAndFlush($stack30,(org.apache.bookkeeper.proto.PerChannelBookieClient$CompletionKey)completionKey,(java.lang.Object)getBookieInfoRequest);
+ return;
+ } 
+

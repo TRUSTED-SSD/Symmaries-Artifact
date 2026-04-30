@@ -1,0 +1,29 @@
+org.apache.bookkeeper.bookie.LedgerEntryPage(int pageSize,int entriesPerPage,org.apache.bookkeeper.bookie.LEPStateChangeCallback callback)
+{
+org.apache.bookkeeper.bookie.EntryKey $stack4;
+  java.util.concurrent.atomic.AtomicInteger $stack5;
+  java.nio.ByteBuffer $stack7;
+  org.apache.bookkeeper.bookie.LEPStateChangeCallback $stack8;
+  this#java.lang.Object();
+ $stack4=new org.apache.bookkeeper.bookie.EntryKey;
+ $stack4#org.apache.bookkeeper.bookie.EntryKey(-1L,-1L);
+ this.entryKey=$stack4;
+ this.clean=1;
+ $stack5=new java.util.concurrent.atomic.AtomicInteger;
+ $stack5#java.util.concurrent.atomic.AtomicInteger(0);
+ this.useCount=$stack5;
+ $stack5=new java.util.concurrent.atomic.AtomicInteger;
+ $stack5#java.util.concurrent.atomic.AtomicInteger(0);
+ this.version=$stack5;
+ this.last=-1;
+ this.pageSize=pageSize;
+ this.entriesPerPage=entriesPerPage;
+ $stack7 = java.nio.ByteBuffer.allocateDirect(pageSize);
+ this.page=$stack7;
+ this.callback=callback;
+ $stack8=this.callback;
+ if (null==$stack8) goto label0;
+ callback.onResetInUse(this);
+ label0:return;
+ } 
+

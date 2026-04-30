@@ -1,0 +1,38 @@
+void org.apache.rocketmq.store.timer.TimerWheel:flush()
+{
+java.nio.ByteBuffer bf;
+  int i;
+  java.lang.ThreadLocal $stack3;
+  java.lang.Object $stack4;
+  java.nio.MappedByteBuffer $stack8;
+  int $stack13;
+  byte $stack16;
+  byte $stack18;
+  $stack3=this.localBuffer;
+ $stack4 = $stack3.get();
+ bf=(java.nio.ByteBuffer) $stack4;
+ bf.position(0);
+ i=this.wheelLength;
+ bf.limit(i);
+ $stack8=this.mappedByteBuffer;
+ $stack8.position(0);
+ $stack8=this.mappedByteBuffer;
+ i=this.wheelLength;
+ $stack8.limit(i);
+ i=0;
+ label0:$stack13=this.wheelLength;
+ if (i>=$stack13) goto label1;
+ $stack16 = bf.get(i);
+ $stack8=this.mappedByteBuffer;
+ $stack18 = $stack8.get(i);
+ if ($stack16==$stack18) goto label2;
+ $stack8=this.mappedByteBuffer;
+ $stack16 = bf.get(i);
+ $stack8.put(i,$stack16);
+ label2:i=(i+1);
+ goto label0;
+ label1:$stack8=this.mappedByteBuffer;
+ $stack8.force();
+ return;
+ } 
+

@@ -1,0 +1,44 @@
+void java.util.AbstractList$Itr:remove()
+{
+java.lang.IndexOutOfBoundsException r1;
+  int $i0;
+  int $i1;
+  java.util.AbstractList $r2;
+  int $i2;
+  int $i3;
+  java.util.AbstractList $r4;
+  int $i4;
+  int $i5;
+  int $i6;
+  java.lang.IllegalStateException $r5;
+  java.lang.IndexOutOfBoundsException $r6;
+  java.util.ConcurrentModificationException $r7;
+  $i0=this.lastRet;
+ if ($i0>=0) goto label0;
+ $r5=new java.lang.IllegalStateException;
+ $r5#java.lang.IllegalStateException:init();
+ throw $r5;
+ label0:this.checkForComodification();
+ label1:$r2=this.this$0;
+ $i1=this.lastRet;
+ $r2.remove($i1);
+ $i3=this.lastRet;
+ $i2=this.cursor;
+ if ($i3>=$i2) goto label2;
+ $i5=this.cursor;
+ $i6=($i5-1);
+ this.cursor=$i6;
+ label2:this.lastRet=-1;
+ $r4=this.this$0;
+ $i4=$r4.modCount;
+ this.expectedModCount=$i4;
+ label3:goto label4;
+ label5:$r6 = catch;
+ r1=$r6;
+ $r7=new java.util.ConcurrentModificationException;
+ $r7#java.util.ConcurrentModificationException:init();
+ throw $r7;
+ label4:return;
+ catch java.lang.IndexOutOfBoundsException: label1 - label3 : label5;
+}  
+

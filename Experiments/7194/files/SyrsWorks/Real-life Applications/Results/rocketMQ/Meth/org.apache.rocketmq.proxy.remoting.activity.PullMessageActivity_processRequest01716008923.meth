@@ -1,0 +1,52 @@
+org.apache.rocketmq.remoting.protocol.RemotingCommand org.apache.rocketmq.proxy.remoting.activity.PullMessageActivity:processRequest0(io.netty.channel.ChannelHandlerContext ctx,org.apache.rocketmq.remoting.protocol.RemotingCommand @request,org.apache.rocketmq.proxy.common.ProxyContext context)
+{
+org.apache.rocketmq.remoting.protocol.header.PullMessageRequestHeader requestHeader;
+  int sysFlag;
+  org.apache.rocketmq.broker.client.ConsumerGroupInfo consumerInfo;
+  org.apache.rocketmq.remoting.protocol.heartbeat.SubscriptionData subscriptionData;
+  org.apache.rocketmq.remoting.CommandCustomHeader $stack8;
+  java.lang.Integer $stack9;
+  boolean $stack11;
+  java.lang.Long $stack12;
+  long $stack13;
+  java.time.Duration $stack14;
+  long $stack15;
+  org.apache.rocketmq.proxy.processor.MessagingProcessor $stack17;
+  java.lang.String $stack18;
+  org.apache.rocketmq.remoting.protocol.RemotingCommand request;
+request=@request;
+$stack8 = request.decodeCommandCustomHeader(org.apache.rocketmq.remoting.protocol.header.PullMessageRequestHeader);
+ requestHeader=(org.apache.rocketmq.remoting.protocol.header.PullMessageRequestHeader) $stack8;
+ $stack9 = requestHeader.getSysFlag();
+ sysFlag = $stack9.intValue();
+ $stack11 = org.apache.rocketmq.common.sysflag.PullSysFlag.hasSubscriptionFlag(sysFlag);
+ if ($stack11!=0) goto label0;
+ $stack17=this.messagingProcessor;
+ $stack18 = requestHeader.getConsumerGroup();
+ consumerInfo = $stack17.getConsumerGroupInfo($stack18);
+ if (consumerInfo!=null) goto label1;
+ request = org.apache.rocketmq.remoting.protocol.RemotingCommand.buildErrorResponse(25,"the consumer\'s subscription not latest");
+ return  request;
+ label1:$stack18 = requestHeader.getTopic();
+ subscriptionData = consumerInfo.findSubscriptionData($stack18);
+ if (subscriptionData!=null) goto label2;
+ request = org.apache.rocketmq.remoting.protocol.RemotingCommand.buildErrorResponse(24,"the consumer\'s subscription not exist");
+ return  request;
+ label2:sysFlag = org.apache.rocketmq.common.sysflag.PullSysFlag.buildSysFlagWithSubscription(sysFlag);
+ $stack9 = java.lang.Integer.valueOf(sysFlag);
+ requestHeader.setSysFlag($stack9);
+ $stack18 = subscriptionData.getSubString();
+ requestHeader.setSubscription($stack18);
+ $stack18 = subscriptionData.getExpressionType();
+ requestHeader.setExpressionType($stack18);
+ request.writeCustomHeader((org.apache.rocketmq.remoting.CommandCustomHeader)requestHeader);
+ request.makeCustomHeaderToNet();
+ label0:$stack12 = requestHeader.getSuspendTimeoutMillis();
+ $stack13 = $stack12.longValue();
+ $stack14 = java.time.Duration.ofSeconds(10L);
+ $stack15 = $stack14.toMillis();
+ $stack13=($stack13+$stack15);
+ request = this.request(ctx,request,context,$stack13);
+ return  request;
+ } 
+

@@ -1,0 +1,18 @@
+org.apache.bookkeeper.server.service.HttpService(org.apache.bookkeeper.server.http.BKHttpServiceProvider provider,org.apache.bookkeeper.server.conf.BookieConfiguration conf,org.apache.bookkeeper.stats.StatsLogger statsLogger)
+{
+org.apache.bookkeeper.conf.ServerConfiguration $stack4;
+  org.apache.bookkeeper.http.HttpServer $stack5;
+  org.apache.commons.configuration.Configuration tmp$688581366;
+  this#org.apache.bookkeeper.server.component.ServerLifecycleComponent("http-service",conf,statsLogger);
+ $stack4 = conf.getServerConf();
+ tmp$688581366=(org.apache.commons.configuration.Configuration) $stack4;
+ org.apache.bookkeeper.http.HttpServerLoader.loadHttpServer(tmp$688581366);
+ $stack5 = org.apache.bookkeeper.http.HttpServerLoader.get();
+ this.server=$stack5;
+ $stack5=this.server;
+ com.google.common.base.Preconditions.checkNotNull((java.lang.Object)$stack5,(java.lang.Object)"httpServerClass is not configured or it could not be started, please check your configuration and logs");
+ $stack5=this.server;
+ $stack5.initialize((org.apache.bookkeeper.http.HttpServiceProvider)provider);
+ return;
+ } 
+

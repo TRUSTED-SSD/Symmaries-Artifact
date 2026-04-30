@@ -1,0 +1,47 @@
+void org.apache.rocketmq.store.index.IndexService:destroy()
+{
+java.util.Iterator e;
+  org.apache.rocketmq.store.index.IndexFile f;
+  java.util.concurrent.locks.ReadWriteLock $stack4;
+  java.util.concurrent.locks.Lock $stack5;
+  java.util.ArrayList $stack6;
+  boolean $stack8;
+  java.lang.Object $stack12;
+  java.lang.Exception $stack15;
+  org.apache.rocketmq.logging.org.slf4j.Logger $stack16;
+  java.lang.Throwable $stack19;
+  label0:$stack4=this.readWriteLock;
+ $stack5 = $stack4.writeLock();
+ $stack5.lock();
+ $stack6=this.indexFileList;
+ e = $stack6.iterator();
+ label1:$stack8 = e.hasNext();
+ if ($stack8==0) goto label2;
+ $stack12 = e.next();
+ f=(org.apache.rocketmq.store.index.IndexFile) $stack12;
+ f.destroy(3000L);
+ goto label1;
+ label2:$stack6=this.indexFileList;
+ $stack6.clear();
+ label3:$stack4=this.readWriteLock;
+ $stack5 = $stack4.writeLock();
+ $stack5.unlock();
+ goto label4;
+ label5:$stack15 = catch;
+ $stack16=org.apache.rocketmq.store.index.IndexService.LOGGER;
+ $stack16.error("destroy exception",(java.lang.Throwable)$stack15);
+ label6:$stack4=this.readWriteLock;
+ $stack5 = $stack4.writeLock();
+ $stack5.unlock();
+ goto label4;
+ label7:$stack19 = catch;
+ $stack4=this.readWriteLock;
+ $stack5 = $stack4.writeLock();
+ $stack5.unlock();
+ throw $stack19;
+ label4:return;
+ catch java.lang.Exception: label0 - label3 : label5;
+catch java.lang.Throwable: label0 - label3 : label7;
+catch java.lang.Throwable: label5 - label6 : label7;
+} 
+

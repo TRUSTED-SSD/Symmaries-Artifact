@@ -1,0 +1,24 @@
+void org.apache.rocketmq.proxy.grpc.v2.producer.SendMessageActivity:validateMessageKey(java.lang.String key)
+{
+boolean $stack2;
+  org.apache.rocketmq.proxy.grpc.v2.common.GrpcValidator $stack4;
+  org.apache.rocketmq.proxy.grpc.v2.common.GrpcProxyException $stack6;
+  apache.rocketmq.v2.Code $stack7;
+  $stack2 = org.apache.commons.lang3.StringUtils.isNotEmpty((java.lang.CharSequence)key);
+ if ($stack2==0) goto label0;
+ $stack2 = org.apache.commons.lang3.StringUtils.isBlank((java.lang.CharSequence)key);
+ if ($stack2==0) goto label1;
+ $stack6=new org.apache.rocketmq.proxy.grpc.v2.common.GrpcProxyException;
+ $stack7=apache.rocketmq.v2.Code.ILLEGAL_MESSAGE_KEY;
+ $stack6#org.apache.rocketmq.proxy.grpc.v2.common.GrpcProxyException($stack7,"key cannot be the char sequence of whitespace");
+ throw $stack6;
+ label1:$stack4 = org.apache.rocketmq.proxy.grpc.v2.common.GrpcValidator.getInstance();
+ $stack2 = $stack4.containControlCharacter(key);
+ if ($stack2==0) goto label0;
+ $stack6=new org.apache.rocketmq.proxy.grpc.v2.common.GrpcProxyException;
+ $stack7=apache.rocketmq.v2.Code.ILLEGAL_MESSAGE_KEY;
+ $stack6#org.apache.rocketmq.proxy.grpc.v2.common.GrpcProxyException($stack7,"key cannot contain control character");
+ throw $stack6;
+ label0:return;
+ } 
+

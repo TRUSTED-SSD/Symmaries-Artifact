@@ -1,0 +1,23 @@
+void org.apache.kerby.xdr.type.XdrLong:toValue()
+{
+byte[] longBytes;
+  int $stack3;
+  long $stack6;
+  java.lang.Long $stack7;
+  java.nio.ByteBuffer $stack8;
+  longBytes = this.getBytes();
+ $stack3=#longBytes;
+ if ($stack3==8) goto label0;
+ $stack8 = java.nio.ByteBuffer.allocate(8);
+ longBytes = this.getBytes();
+ $stack8 = $stack8.put(longBytes,0,8);
+ longBytes = $stack8.array();
+ this.setBytes(longBytes);
+ label0:longBytes = this.getBytes();
+ $stack8 = java.nio.ByteBuffer.wrap(longBytes);
+ $stack6 = $stack8.getLong();
+ $stack7 = java.lang.Long.valueOf($stack6);
+ this.setValue((java.lang.Object)$stack7);
+ return;
+ } 
+

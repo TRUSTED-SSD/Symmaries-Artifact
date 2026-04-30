@@ -1,0 +1,43 @@
+void org.apache.rocketmq.tools.command.broker.GetBrokerConfigCommand:getAndPrint(org.apache.rocketmq.tools.admin.MQAdminExt defaultMQAdminExt,java.lang.String printPrefix,java.lang.String addr)
+{
+java.util.Properties properties;
+  java.util.Iterator l5;
+  java.util.Map$Entry entry;
+  java.io.PrintStream $stack7;
+  boolean $stack8;
+  java.util.Set $stack10;
+  java.lang.Object[] $stack13;
+  java.lang.Object $stack16;
+  $stack7=java.lang.System.out;
+ dummyClass.lowSink(printPrefix);
+$stack7.print(printPrefix);
+ $stack8 = addr.equals((java.lang.Object)"NO_MASTER");
+ if ($stack8==0) goto label0;
+ return;
+ label0:properties = defaultMQAdminExt.getBrokerConfig(addr);
+ if (properties!=null) goto label1;
+ $stack7=java.lang.System.out;
+ $stack13=new java.lang.Object[1];
+ $stack13[0]=addr;
+ $stack7.printf("Broker[%s] has no config property!\n",$stack13);
+ return;
+ label1:$stack10 = properties.entrySet();
+ l5 = $stack10.iterator();
+ label2:$stack8 = l5.hasNext();
+ if ($stack8==0) goto label3;
+ $stack16 = l5.next();
+ entry=(java.util.Map$Entry) $stack16;
+ $stack7=java.lang.System.out;
+ $stack13=new java.lang.Object[2];
+ $stack16 = entry.getKey();
+ $stack13[0]=$stack16;
+ $stack16 = entry.getValue();
+ $stack13[1]=$stack16;
+ $stack7.printf("%-50s=  %s\n",$stack13);
+ goto label2;
+ label3:$stack7=java.lang.System.out;
+ $stack13=new java.lang.Object[0];
+ $stack7.printf("%n",$stack13);
+ return;
+ } 
+

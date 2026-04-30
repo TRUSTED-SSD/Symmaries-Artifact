@@ -1,0 +1,28 @@
+boolean org.keycloak.adapters.AuthenticatedActionsHandler:handledRequest()
+{
+java.lang.String requestUri;
+  org.keycloak.adapters.OIDCHttpFacade $stack2;
+  org.jboss.logging.Logger $stack3;
+  org.keycloak.adapters.spi.HttpFacade$Request $stack5;
+  boolean $stack7;
+  $stack3=org.keycloak.adapters.AuthenticatedActionsHandler.log;
+ $stack2=this.facade;
+ $stack5 = $stack2.getRequest();
+ requestUri = $stack5.getURI();
+ $stack3.debugv("AuthenticatedActionsValve.invoke {0}",(java.lang.Object)requestUri);
+ $stack7 = this.corsRequest();
+ if ($stack7==0) goto label0;
+ return  1;
+ label0:$stack2=this.facade;
+ $stack5 = $stack2.getRequest();
+ requestUri = $stack5.getURI();
+ $stack7 = requestUri.endsWith("k_query_bearer_token");
+ if ($stack7==0) goto label1;
+ this.queryBearerToken();
+ return  1;
+ label1:$stack7 = this#org.keycloak.adapters.AuthenticatedActionsHandler:isAuthorized();
+ if ($stack7!=0) goto label2;
+ return  1;
+ label2:return  0;
+ } 
+

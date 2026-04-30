@@ -1,0 +1,28 @@
+static boolean org.keycloak.jose.jws.crypto.HMACProvider:verify(org.keycloak.jose.jws.JWSInput input,javax.crypto.SecretKey key)
+{
+byte[] signature;
+  java.lang.String $stack3;
+  java.nio.charset.Charset $stack4;
+  org.keycloak.jose.jws.JWSHeader $stack6;
+  org.keycloak.jose.jws.Algorithm $stack7;
+  byte[] $stack10;
+  boolean $stack11;
+  java.lang.Exception $stack12;
+  java.lang.RuntimeException $stack13;
+  label0:$stack3 = input.getEncodedSignatureInput();
+ $stack4=java.nio.charset.StandardCharsets.UTF_8;
+ signature = $stack3.getBytes($stack4);
+ $stack6 = input.getHeader();
+ $stack7 = $stack6.getAlgorithm();
+ signature = org.keycloak.jose.jws.crypto.HMACProvider.sign(signature,$stack7,key);
+ $stack3 = input.getEncodedSignature();
+ $stack10 = org.keycloak.common.util.Base64Url.decode($stack3);
+ $stack11 = java.security.MessageDigest.isEqual(signature,$stack10);
+ label1:return  $stack11;
+ label2:$stack12 = catch;
+ $stack13=new java.lang.RuntimeException;
+ $stack13#java.lang.RuntimeException((java.lang.Throwable)$stack12);
+ throw $stack13;
+ catch java.lang.Exception: label0 - label1 : label2;
+} 
+

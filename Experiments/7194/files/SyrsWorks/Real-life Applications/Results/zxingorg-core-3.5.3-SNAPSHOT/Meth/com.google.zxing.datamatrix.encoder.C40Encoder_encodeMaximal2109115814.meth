@@ -1,0 +1,58 @@
+void com.google.zxing.datamatrix.encoder.C40Encoder:encodeMaximal(com.google.zxing.datamatrix.encoder.EncoderContext context)
+{
+java.lang.StringBuilder buffer;
+  int lastCharSize;
+  int backtrackStartPosition;
+  int backtrackBufferLength;
+  int c;
+  int rest;
+  boolean $stack11;
+  com.google.zxing.datamatrix.encoder.SymbolInfo $stack21;
+  char tmp;
+  buffer=new java.lang.StringBuilder;
+ buffer#java.lang.StringBuilder();
+ lastCharSize=0;
+ backtrackStartPosition=context.pos;
+ backtrackBufferLength=0;
+ label0:$stack11 = context.hasMoreCharacters();
+ if ($stack11==0) goto label1;
+ c = context.getCurrentChar();
+ lastCharSize=context.pos;
+ lastCharSize=(lastCharSize+1);
+ context.pos=lastCharSize;
+ tmp=(char) c;
+ lastCharSize = this.encodeChar(tmp,buffer);
+ c = buffer.length();
+ c=(c%3);
+ if (c!=0) goto label2;
+ backtrackStartPosition=context.pos;
+ backtrackBufferLength = buffer.length();
+ label2:goto label0;
+ label1:c = buffer.length();
+ if (backtrackBufferLength==c) goto label3;
+ c = buffer.length();
+ c=(c/3);
+ c=(c * 2);
+ rest = context.getCodewordCount();
+ c=(rest+c);
+ c=(c+1);
+ context.updateSymbolInfo(c);
+ $stack21 = context.getSymbolInfo();
+ rest = $stack21.getDataCapacity();
+ c=(rest-c);
+ rest = buffer.length();
+ rest=(rest%3);
+ if (rest!=2) goto label4;
+ if (c!=2) goto label5;
+ label4:if (rest!=1) goto label3;
+ if (lastCharSize>3) goto label5;
+ if (c==1) goto label3;
+ label5:buffer.setLength(backtrackBufferLength);
+ context.pos=backtrackStartPosition;
+ label3:backtrackStartPosition = buffer.length();
+ if (backtrackStartPosition<=0) goto label6;
+ context.writeCodeword((char)230);
+ label6:this.handleEOD(context,buffer);
+ return;
+ } 
+

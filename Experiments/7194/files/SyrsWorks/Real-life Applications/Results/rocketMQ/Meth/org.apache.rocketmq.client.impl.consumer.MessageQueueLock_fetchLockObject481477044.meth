@@ -1,0 +1,36 @@
+java.lang.Object org.apache.rocketmq.client.impl.consumer.MessageQueueLock:fetchLockObject(org.apache.rocketmq.common.message.MessageQueue mq,int shardingKeyIndex)
+{
+java.lang.Object objMap;
+  java.lang.Object prevObjMap;
+  java.util.concurrent.ConcurrentMap $stack6;
+  java.lang.Integer $stack8;
+  java.util.concurrent.ConcurrentHashMap tmp$699394340;
+  java.lang.Object tmp$214810271;
+  $stack6=this.mqLockTable;
+ objMap = $stack6.get((java.lang.Object)mq);
+ objMap=(java.util.concurrent.ConcurrentMap) objMap;
+ if (null!=objMap) goto label0;
+ tmp$699394340=new java.util.concurrent.ConcurrentHashMap;
+ tmp$699394340#java.util.concurrent.ConcurrentHashMap(32);
+ objMap=tmp$699394340;
+ $stack6=this.mqLockTable;
+ prevObjMap = $stack6.putIfAbsent((java.lang.Object)mq,(java.lang.Object)tmp$699394340);
+ prevObjMap=(java.util.concurrent.ConcurrentMap) prevObjMap;
+ if (prevObjMap==null) goto label0;
+ objMap=prevObjMap;
+ label0:$stack8 = java.lang.Integer.valueOf(shardingKeyIndex);
+ $stack6=(java.util.concurrent.ConcurrentMap) objMap;
+ prevObjMap = $stack6.get((java.lang.Object)$stack8);
+ if (null!=prevObjMap) goto label1;
+ tmp$214810271=new java.lang.Object;
+ prevObjMap=tmp$214810271;
+ tmp$214810271#java.lang.Object();
+ prevObjMap=tmp$214810271;
+ $stack8 = java.lang.Integer.valueOf(shardingKeyIndex);
+ $stack6=(java.util.concurrent.ConcurrentMap) objMap;
+ objMap = $stack6.putIfAbsent((java.lang.Object)$stack8,tmp$214810271);
+ if (objMap==null) goto label1;
+ prevObjMap=objMap;
+ label1:return  prevObjMap;
+ } 
+

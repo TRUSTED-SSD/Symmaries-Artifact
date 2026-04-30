@@ -1,0 +1,49 @@
+boolean org.keycloak.adapters.jaas.AbstractKeycloakLoginModule:logout()
+{
+java.lang.Object creds;
+  java.lang.Object principal;
+  javax.security.auth.Subject $stack6;
+  java.util.Set $stack7;
+  boolean $stack9;
+  java.lang.Class $stack20;
+  java.util.HashSet tmp$995699343;
+  java.util.Iterator tmp$64523696;
+  tmp$995699343=new java.util.HashSet;
+ $stack6=this.subject;
+ $stack7 = $stack6.getPrincipals();
+ tmp$995699343#java.util.HashSet((java.util.Collection)$stack7);
+ creds = tmp$995699343.iterator();
+ label0:tmp$64523696=(java.util.Iterator) creds;
+ $stack9 = tmp$64523696.hasNext();
+ if ($stack9==0) goto label1;
+ tmp$64523696=(java.util.Iterator) creds;
+ principal = tmp$64523696.next();
+ principal=(java.security.Principal) principal;
+ $stack20 = principal.getClass();
+ $stack9 = $stack20.equals((java.lang.Object)org.keycloak.KeycloakPrincipal);
+ if ($stack9!=0) goto label2;
+ $stack20 = principal.getClass();
+ $stack9 = $stack20.equals((java.lang.Object)org.keycloak.adapters.jaas.RolePrincipal);
+ if ($stack9==0) goto label3;
+ label2:$stack6=this.subject;
+ $stack7 = $stack6.getPrincipals();
+ $stack7.remove(principal);
+ label3:goto label0;
+ label1:$stack6=this.subject;
+ creds = $stack6.getPrivateCredentials();
+ $stack7=(java.util.Set) creds;
+ principal = $stack7.iterator();
+ label4:tmp$64523696=(java.util.Iterator) principal;
+ $stack9 = tmp$64523696.hasNext();
+ if ($stack9==0) goto label5;
+ tmp$64523696=(java.util.Iterator) principal;
+ creds = tmp$64523696.next();
+ $stack6=this.subject;
+ $stack7 = $stack6.getPrivateCredentials();
+ $stack7.remove(creds);
+ goto label4;
+ label5:this.subject=null;
+ this.callbackHandler=null;
+ return  1;
+ } 
+

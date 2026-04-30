@@ -1,0 +1,19 @@
+void org.apache.rocketmq.proxy.grpc.GrpcServer:shutdown()
+{
+io.grpc.Server $stack2;
+  java.util.concurrent.TimeUnit $stack4;
+  org.apache.rocketmq.logging.org.slf4j.Logger $stack6;
+  java.lang.Exception $stack7;
+  label0:$stack2=this.server;
+ $stack2 = $stack2.shutdown();
+ $stack4=java.util.concurrent.TimeUnit.SECONDS;
+ $stack2.awaitTermination(30L,$stack4);
+ $stack6=org.apache.rocketmq.proxy.grpc.GrpcServer.log;
+ $stack6.info("grpc server shutdown successfully.");
+ label1:goto label2;
+ label3:$stack7 = catch;
+ $stack7.printStackTrace();
+ label2:return;
+ catch java.lang.Exception: label0 - label1 : label3;
+} 
+

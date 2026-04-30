@@ -1,0 +1,23 @@
+void org.apache.rocketmq.common.statistics.StatisticsItemScheduledIncrementPrinter:setItemSnapshot(java.util.concurrent.ConcurrentHashMap @snapshots,org.apache.rocketmq.common.statistics.StatisticsItem item)
+{
+java.lang.String kind;
+  java.lang.String key;
+  java.util.concurrent.ConcurrentHashMap itemMap;
+  java.lang.Object $stack9;
+  java.util.concurrent.ConcurrentHashMap snapshots;
+snapshots=@snapshots;
+kind = item.getStatKind();
+ key = item.getStatObject();
+ $stack9 = snapshots.get((java.lang.Object)kind);
+ itemMap=(java.util.concurrent.ConcurrentHashMap) $stack9;
+ if (itemMap!=null) goto label0;
+ itemMap=new java.util.concurrent.ConcurrentHashMap;
+ itemMap#java.util.concurrent.ConcurrentHashMap();
+ $stack9 = snapshots.putIfAbsent((java.lang.Object)kind,(java.lang.Object)itemMap);
+ snapshots=(java.util.concurrent.ConcurrentHashMap) $stack9;
+ if (snapshots==null) goto label0;
+ itemMap=snapshots;
+ label0:itemMap.put((java.lang.Object)key,(java.lang.Object)item);
+ return;
+ } 
+

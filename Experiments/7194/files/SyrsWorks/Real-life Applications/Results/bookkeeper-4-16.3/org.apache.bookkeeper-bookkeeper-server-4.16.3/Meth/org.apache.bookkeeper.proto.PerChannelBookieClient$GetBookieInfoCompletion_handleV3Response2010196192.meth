@@ -1,0 +1,44 @@
+void org.apache.bookkeeper.proto.PerChannelBookieClient$GetBookieInfoCompletion:handleV3Response(org.apache.bookkeeper.proto.BookkeeperProtocol$Response response)
+{
+org.apache.bookkeeper.proto.BookkeeperProtocol$GetBookieInfoResponse getBookieInfoResponse;
+  org.apache.bookkeeper.proto.BookkeeperProtocol$StatusCode status;
+  long freeDiskSpace;
+  long totalDiskSpace;
+  int rc;
+  org.apache.bookkeeper.proto.BookkeeperProtocol$StatusCode $stack11;
+  org.slf4j.Logger $stack15;
+  boolean $stack16;
+  org.apache.bookkeeper.client.BookieInfoReader$BookieInfo $stack18;
+  org.apache.bookkeeper.proto.BookkeeperInternalCallbacks$GetBookieInfoCallback $stack19;
+  java.lang.Object $stack20;
+  java.lang.Object[] $stack21;
+  java.lang.Long $stack23;
+  getBookieInfoResponse = response.getGetBookieInfoResponse();
+ status = response.getStatus();
+ $stack11=org.apache.bookkeeper.proto.BookkeeperProtocol$StatusCode.EOK;
+ if (status!=$stack11) goto label0;
+ status = getBookieInfoResponse.getStatus();
+ goto label1;
+ label0:status = response.getStatus();
+ label1:freeDiskSpace = getBookieInfoResponse.getFreeDiskSpace();
+ totalDiskSpace = getBookieInfoResponse.getTotalDiskCapacity();
+ $stack15=org.apache.bookkeeper.proto.PerChannelBookieClient.LOG;
+ $stack16 = $stack15.isDebugEnabled();
+ if ($stack16==0) goto label2;
+ $stack21=new java.lang.Object[4];
+ $stack21[0]="freeDisk";
+ $stack23 = java.lang.Long.valueOf(freeDiskSpace);
+ $stack21[1]=$stack23;
+ $stack21[2]="totalDisk";
+ $stack23 = java.lang.Long.valueOf(totalDiskSpace);
+ $stack21[3]=$stack23;
+ this.logResponse(status,$stack21);
+ label2:rc = this.convertStatus(status,-1);
+ $stack19=this.cb;
+ $stack18=new org.apache.bookkeeper.client.BookieInfoReader$BookieInfo;
+ $stack18#org.apache.bookkeeper.client.BookieInfoReader$BookieInfo(totalDiskSpace,freeDiskSpace);
+ $stack20=this.ctx;
+ $stack19.getBookieInfoComplete(rc,$stack18,$stack20);
+ return;
+ } 
+

@@ -1,0 +1,27 @@
+java.lang.String org.apache.rocketmq.client.ClientConfig:getNamespace()
+{
+boolean $stack1;
+  java.lang.String $stack2;
+  $stack1=this.namespaceInitialized;
+ if ($stack1==0) goto label0;
+ $stack2=this.namespace;
+ return  $stack2;
+ label0:$stack2=this.namespace;
+ $stack1 = org.apache.commons.lang3.StringUtils.isNotEmpty((java.lang.CharSequence)$stack2);
+ if ($stack1==0) goto label1;
+ $stack2=this.namespace;
+ return  $stack2;
+ label1:$stack2=this.namesrvAddr;
+ $stack1 = org.apache.commons.lang3.StringUtils.isNotEmpty((java.lang.CharSequence)$stack2);
+ if ($stack1==0) goto label2;
+ $stack2=this.namesrvAddr;
+ $stack1 = org.apache.rocketmq.common.utils.NameServerAddressUtils.validateInstanceEndpoint($stack2);
+ if ($stack1==0) goto label2;
+ $stack2=this.namesrvAddr;
+ $stack2 = org.apache.rocketmq.common.utils.NameServerAddressUtils.parseInstanceIdFromEndpoint($stack2);
+ this.namespace=$stack2;
+ label2:this.namespaceInitialized=1;
+ $stack2=this.namespace;
+ return  $stack2;
+ } 
+

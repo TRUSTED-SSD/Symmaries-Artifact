@@ -1,0 +1,24 @@
+static boolean org.apache.rocketmq.remoting.protocol.body.ConsumerRunningInfo:isPushType(org.apache.rocketmq.remoting.protocol.body.ConsumerRunningInfo consumerRunningInfo)
+{
+java.lang.String property;
+  java.util.Properties $stack2;
+  org.apache.rocketmq.remoting.protocol.heartbeat.ConsumeType $stack4;
+  org.apache.rocketmq.remoting.protocol.heartbeat.ConsumeType $stack5;
+  boolean $stack6;
+  java.lang.Object $stack8;
+  $stack2 = consumerRunningInfo.getProperties();
+ property = $stack2.getProperty("PROP_CONSUME_TYPE");
+ if (property!=null) goto label0;
+ $stack2 = consumerRunningInfo.getProperties();
+ $stack8 = $stack2.get((java.lang.Object)"PROP_CONSUME_TYPE");
+ $stack4=(org.apache.rocketmq.remoting.protocol.heartbeat.ConsumeType) $stack8;
+ property = $stack4.name();
+ label0:$stack4 = org.apache.rocketmq.remoting.protocol.heartbeat.ConsumeType.valueOf(property);
+ $stack5=org.apache.rocketmq.remoting.protocol.heartbeat.ConsumeType.CONSUME_PASSIVELY;
+ if ($stack4!=$stack5) goto label1;
+ $stack6=1;
+ goto label2;
+ label1:$stack6=0;
+ label2:return  $stack6;
+ } 
+

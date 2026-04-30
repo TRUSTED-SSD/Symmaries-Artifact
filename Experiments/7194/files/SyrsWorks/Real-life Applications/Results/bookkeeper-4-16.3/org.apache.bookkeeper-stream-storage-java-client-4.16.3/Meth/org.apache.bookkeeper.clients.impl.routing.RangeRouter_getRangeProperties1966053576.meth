@@ -1,0 +1,57 @@
+org.apache.bookkeeper.stream.proto.RangeProperties org.apache.bookkeeper.clients.impl.routing.RangeRouter:getRangeProperties(java.lang.Object @key)
+{
+long routingKey;
+  org.apache.bookkeeper.clients.impl.internal.api.HashStreamRanges rs;
+  long stamp;
+  java.lang.Throwable ceilingEntry;
+  java.util.concurrent.ThreadLocalRandom $stack8;
+  java.util.concurrent.locks.StampedLock $stack10;
+  boolean $stack13;
+  java.util.NavigableMap $stack14;
+  java.lang.Long $stack15;
+  org.apache.bookkeeper.stream.proto.RangeProperties $stack18;
+  java.util.Map$Entry $stack23;
+  org.apache.bookkeeper.common.router.HashRouter $stack29;
+  java.lang.Object key;
+key=@key;
+if (null==key) goto label0;
+ $stack29=this.keyRouter;
+ key = $stack29.getRoutingKey(key);
+ $stack15=(java.lang.Long) key;
+ routingKey = $stack15.longValue();
+ goto label1;
+ label0:$stack8 = java.util.concurrent.ThreadLocalRandom.current();
+ routingKey = $stack8.nextLong();
+ label1:$stack10=this.lock;
+ stamp = $stack10.tryOptimisticRead();
+dummyClass.highSourceMut(stamp);
+ rs=this.ranges;
+ $stack10=this.lock;
+ $stack13 = $stack10.validate(stamp);
+ if ($stack13!=0) goto label2;
+ $stack10=this.lock;
+ stamp = $stack10.readLock();
+dummyClass.highSourceMut(stamp);
+ label3:rs=this.ranges;
+ label4:$stack10=this.lock;
+ $stack10.unlockRead(stamp);
+ goto label2;
+ label5:ceilingEntry = catch;
+ label6:$stack10=this.lock;
+ $stack10.unlockRead(stamp);
+ throw ceilingEntry;
+ label2:if (null==rs) goto label7;
+ $stack13=1;
+ goto label8;
+ label7:$stack13=0;
+ label8:com.google.common.base.Preconditions.checkState($stack13,(java.lang.Object)"No range is available");
+ $stack14 = rs.getRanges();
+ $stack15 = java.lang.Long.valueOf(routingKey);
+ $stack23 = $stack14.floorEntry((java.lang.Object)$stack15);
+ key = $stack23.getValue();
+ $stack18=(org.apache.bookkeeper.stream.proto.RangeProperties) key;
+ return  $stack18;
+ catch java.lang.Throwable: label3 - label4 : label5;
+catch java.lang.Throwable: label5 - label6 : label5;
+} 
+

@@ -1,0 +1,111 @@
+    private boolean hasCorrectCategoryAnnotation(org.junit.runner.Description)
+    {
+        org.junit.experimental.categories.Categories$CategoryFilter this;
+        org.junit.runner.Description description;
+        java.util.Set childCategories, $stack5;
+        boolean $stack4;
+
+        this := @this: org.junit.experimental.categories.Categories$CategoryFilter;
+
+        description := @parameter0: org.junit.runner.Description;
+
+        childCategories = staticinvoke <org.junit.experimental.categories.Categories$CategoryFilter: java.util.Set categories(org.junit.runner.Description)>(description);
+/*208*/
+/*208*/
+
+        $stack4 = interfaceinvoke childCategories.<java.util.Set: boolean isEmpty()>();
+/*211*/
+
+        if $stack4 == 0 goto label1;
+/*211*/
+
+        childCategories = this.<org.junit.experimental.categories.Categories$CategoryFilter: java.util.Set included>;
+/*212*/
+
+        $stack4 = interfaceinvoke childCategories.<java.util.Set: boolean isEmpty()>();
+/*212*/
+
+        return $stack4;
+/*212*/
+
+     label1:
+        $stack5 = this.<org.junit.experimental.categories.Categories$CategoryFilter: java.util.Set excluded>;
+/*215*/
+
+        $stack4 = interfaceinvoke $stack5.<java.util.Set: boolean isEmpty()>();
+/*215*/
+
+        if $stack4 != 0 goto label3;
+/*215*/
+
+        $stack4 = this.<org.junit.experimental.categories.Categories$CategoryFilter: boolean excludedAny>;
+/*216*/
+
+        if $stack4 == 0 goto label2;
+/*216*/
+
+        $stack5 = this.<org.junit.experimental.categories.Categories$CategoryFilter: java.util.Set excluded>;
+/*217*/
+
+        $stack4 = specialinvoke this.<org.junit.experimental.categories.Categories$CategoryFilter: boolean matchesAnyParentCategories(java.util.Set,java.util.Set)>(childCategories, $stack5);
+/*217*/
+
+        if $stack4 == 0 goto label3;
+/*217*/
+
+        return 0;
+/*218*/
+
+     label2:
+        $stack5 = this.<org.junit.experimental.categories.Categories$CategoryFilter: java.util.Set excluded>;
+/*221*/
+
+        $stack4 = specialinvoke this.<org.junit.experimental.categories.Categories$CategoryFilter: boolean matchesAllParentCategories(java.util.Set,java.util.Set)>(childCategories, $stack5);
+/*221*/
+
+        if $stack4 == 0 goto label3;
+/*221*/
+
+        return 0;
+/*222*/
+
+     label3:
+        $stack5 = this.<org.junit.experimental.categories.Categories$CategoryFilter: java.util.Set included>;
+/*227*/
+
+        $stack4 = interfaceinvoke $stack5.<java.util.Set: boolean isEmpty()>();
+/*227*/
+
+        if $stack4 == 0 goto label4;
+/*227*/
+
+        return 1;
+/*229*/
+
+     label4:
+        $stack4 = this.<org.junit.experimental.categories.Categories$CategoryFilter: boolean includedAny>;
+/*231*/
+
+        if $stack4 == 0 goto label5;
+/*231*/
+
+        $stack5 = this.<org.junit.experimental.categories.Categories$CategoryFilter: java.util.Set included>;
+/*232*/
+
+        $stack4 = specialinvoke this.<org.junit.experimental.categories.Categories$CategoryFilter: boolean matchesAnyParentCategories(java.util.Set,java.util.Set)>(childCategories, $stack5);
+/*232*/
+
+        return $stack4;
+/*232*/
+
+     label5:
+        $stack5 = this.<org.junit.experimental.categories.Categories$CategoryFilter: java.util.Set included>;
+/*234*/
+
+        $stack4 = specialinvoke this.<org.junit.experimental.categories.Categories$CategoryFilter: boolean matchesAllParentCategories(java.util.Set,java.util.Set)>(childCategories, $stack5);
+/*234*/
+
+        return $stack4;
+/*234*/
+    }
+

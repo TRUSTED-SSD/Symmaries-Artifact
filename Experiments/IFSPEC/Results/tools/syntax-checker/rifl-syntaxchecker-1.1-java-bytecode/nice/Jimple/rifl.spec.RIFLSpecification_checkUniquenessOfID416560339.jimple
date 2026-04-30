@@ -1,0 +1,47 @@
+    private void checkUniquenessOfID(java.lang.String, java.util.HashSet) throws rifl.spec.RIFLIntegrityException
+    {
+        rifl.spec.RIFLSpecification this;
+        java.lang.String id;
+        java.util.HashSet ids;
+        boolean $stack3;
+        rifl.spec.RIFLIntegrityException $stack5;
+        java.lang.Object[] $stack6;
+
+        this := @this: rifl.spec.RIFLSpecification;
+
+        id := @parameter0: java.lang.String;
+
+        ids := @parameter1: java.util.HashSet;
+
+        $stack3 = virtualinvoke ids.<java.util.HashSet: boolean contains(java.lang.Object)>(id);
+/*121*/
+
+        if $stack3 == 0 goto label1;
+/*121*/
+
+        $stack5 = new rifl.spec.RIFLIntegrityException;
+/*122*/
+
+        $stack6 = newarray (java.lang.Object)[1];
+/*122*/
+
+        $stack6[0] = id;
+/*122*/
+
+        id = staticinvoke <java.lang.String: java.lang.String format(java.lang.String,java.lang.Object[])>("Duplicate identifier: %s.", $stack6);
+/*122*/
+
+        specialinvoke $stack5.<rifl.spec.RIFLIntegrityException: void <init>(java.lang.String)>(id);
+/*122*/
+
+        throw $stack5;
+/*122*/
+
+     label1:
+        virtualinvoke ids.<java.util.HashSet: boolean add(java.lang.Object)>(id);
+/*124*/
+
+        return;
+/*126*/
+    }
+

@@ -1,0 +1,27 @@
+void org.apache.bookkeeper.replication.AuditorCheckAllLedgersTask:lambda$null$0(org.apache.bookkeeper.client.LedgerChecker checker,org.apache.bookkeeper.client.LedgerHandle lh,org.apache.zookeeper.AsyncCallback$VoidCallback callback)
+{
+org.apache.bookkeeper.replication.AuditorCheckAllLedgersTask$ProcessLostFragmentsCb $stack4;
+  org.apache.bookkeeper.conf.ServerConfiguration $stack5;
+  long $stack6;
+  org.apache.bookkeeper.replication.AuditorStats $stack7;
+  org.apache.bookkeeper.stats.OpStatsLogger $stack8;
+  org.apache.bookkeeper.stats.Counter $stack14;
+  $stack4=new org.apache.bookkeeper.replication.AuditorCheckAllLedgersTask$ProcessLostFragmentsCb;
+ $stack4#org.apache.bookkeeper.replication.AuditorCheckAllLedgersTask$ProcessLostFragmentsCb(this,lh,callback);
+ $stack5=this.conf;
+ $stack6 = $stack5.getAuditorLedgerVerificationPercentage();
+ checker#org.apache.bookkeeper.client.LedgerChecker(lh,(org.apache.bookkeeper.proto.BookkeeperInternalCallbacks$GenericCallback)$stack4,$stack6);
+ $stack7=this.auditorStats;
+ $stack8 = $stack7.getNumFragmentsPerLedger();
+ $stack6 = lh.getNumFragments();
+ $stack8.registerSuccessfulValue($stack6);
+ $stack7=this.auditorStats;
+ $stack8 = $stack7.getNumBookiesPerLedger();
+ $stack6 = lh.getNumBookies();
+ $stack8.registerSuccessfulValue($stack6);
+ $stack7=this.auditorStats;
+ $stack14 = $stack7.getNumLedgersChecked();
+ $stack14.inc();
+ return;
+ } 
+

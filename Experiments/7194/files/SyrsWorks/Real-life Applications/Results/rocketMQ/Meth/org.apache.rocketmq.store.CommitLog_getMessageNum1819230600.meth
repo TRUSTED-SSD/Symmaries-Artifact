@@ -1,0 +1,26 @@
+short org.apache.rocketmq.store.CommitLog:getMessageNum(org.apache.rocketmq.common.message.MessageExtBrokerInner msgInner)
+{
+short messageNum;
+  org.apache.rocketmq.common.attribute.CQType cqType;
+  int $stack5;
+  boolean $stack6;
+  java.lang.String $stack7;
+  org.apache.rocketmq.common.attribute.CQType $stack12;
+  messageNum=1;
+ cqType = this#org.apache.rocketmq.store.CommitLog:getCqType(msgInner);
+ $stack5 = msgInner.getSysFlag();
+ $stack6 = org.apache.rocketmq.common.sysflag.MessageSysFlag.check($stack5,128);
+ if ($stack6!=0) goto label0;
+ $stack12=org.apache.rocketmq.common.attribute.CQType.BatchCQ;
+ $stack6 = $stack12.equals((java.lang.Object)cqType);
+ if ($stack6==0) goto label1;
+ label0:$stack7 = msgInner.getProperty("INNER_NUM");
+ if ($stack7==null) goto label1;
+ $stack7 = msgInner.getProperty("INNER_NUM");
+ messageNum = java.lang.Short.parseShort($stack7);
+ if (messageNum<1) goto label2;
+ goto label1;
+ label2:messageNum=1;
+ label1:return  messageNum;
+ } 
+

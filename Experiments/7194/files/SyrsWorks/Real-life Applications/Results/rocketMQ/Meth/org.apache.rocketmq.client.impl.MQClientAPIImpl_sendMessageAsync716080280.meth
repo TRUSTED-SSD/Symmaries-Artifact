@@ -1,0 +1,23 @@
+void org.apache.rocketmq.client.impl.MQClientAPIImpl:sendMessageAsync(java.lang.String addr,java.lang.String brokerName,org.apache.rocketmq.common.message.Message msg,long timeoutMillis,org.apache.rocketmq.remoting.protocol.RemotingCommand request,org.apache.rocketmq.client.producer.SendCallback sendCallback,org.apache.rocketmq.client.impl.producer.TopicPublishInfo topicPublishInfo,org.apache.rocketmq.client.impl.factory.MQClientInstance instance,int retryTimesWhenSendFailed,java.util.concurrent.atomic.AtomicInteger times,org.apache.rocketmq.client.hook.SendMessageContext context,org.apache.rocketmq.client.impl.producer.DefaultMQProducerImpl producer)
+{
+long beginStartTime;
+  org.apache.rocketmq.client.impl.MQClientAPIImpl$1 $stack20;
+  org.apache.rocketmq.remoting.RemotingClient $stack21;
+  java.lang.Exception $stack22;
+  long $stack23;
+  beginStartTime = java.lang.System.currentTimeMillis();
+ label0:$stack21=this.remotingClient;
+ $stack20=new org.apache.rocketmq.client.impl.MQClientAPIImpl$1;
+ $stack20#org.apache.rocketmq.client.impl.MQClientAPIImpl$1(this,beginStartTime,sendCallback,brokerName,msg,addr,context,producer,timeoutMillis,request,topicPublishInfo,instance,retryTimesWhenSendFailed,times);
+ $stack21.invokeAsync(addr,request,timeoutMillis,(org.apache.rocketmq.remoting.InvokeCallback)$stack20);
+ label1:goto label2;
+ label3:$stack22 = catch;
+ $stack23 = java.lang.System.currentTimeMillis();
+ beginStartTime=($stack23-beginStartTime);
+ producer.updateFaultItem(brokerName,beginStartTime,(boolean)1);
+ timeoutMillis=(timeoutMillis-beginStartTime);
+ this#org.apache.rocketmq.client.impl.MQClientAPIImpl(brokerName,msg,timeoutMillis,request,sendCallback,topicPublishInfo,instance,retryTimesWhenSendFailed,times,$stack22,context,1,producer);
+ label2:return;
+ catch java.lang.Exception: label0 - label1 : label3;
+} 
+

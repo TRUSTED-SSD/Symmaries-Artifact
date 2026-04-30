@@ -1,0 +1,22 @@
+long org.apache.bookkeeper.bookie.InterleavedLedgerStorage:addEntry(io.netty.buffer.ByteBuf entry)
+{
+long ledgerId;
+  long entryId;
+  long lac;
+  int $stack8;
+  org.apache.bookkeeper.bookie.LedgerCache $stack17;
+  $stack8 = entry.readerIndex();
+ $stack8=($stack8+0);
+ ledgerId = entry.getLong($stack8);
+ $stack8 = entry.readerIndex();
+ $stack8=($stack8+8);
+ entryId = entry.getLong($stack8);
+ $stack8 = entry.readerIndex();
+ $stack8=($stack8+16);
+ lac = entry.getLong($stack8);
+ this.processEntry(ledgerId,entryId,entry);
+ $stack17=this.ledgerCache;
+ $stack17.updateLastAddConfirmed(ledgerId,lac);
+ return  entryId;
+ } 
+

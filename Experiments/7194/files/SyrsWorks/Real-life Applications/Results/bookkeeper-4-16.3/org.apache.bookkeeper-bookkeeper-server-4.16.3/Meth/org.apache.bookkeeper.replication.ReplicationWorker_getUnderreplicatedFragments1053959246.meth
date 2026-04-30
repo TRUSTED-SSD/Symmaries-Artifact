@@ -1,0 +1,25 @@
+java.util.Set org.apache.bookkeeper.replication.ReplicationWorker:getUnderreplicatedFragments(org.apache.bookkeeper.client.LedgerHandle lh,java.lang.Long ledgerVerificationPercentage)
+{
+java.util.HashSet underreplicatedFragments;
+  java.util.Set dataLossFragments;
+  java.util.Iterator l6;
+  org.apache.bookkeeper.client.LedgerFragment notAdheringFragment;
+  boolean $stack10;
+  java.lang.Object $stack14;
+  underreplicatedFragments=new java.util.HashSet;
+ underreplicatedFragments#java.util.HashSet();
+ dataLossFragments = this#org.apache.bookkeeper.replication.ReplicationWorker:getDataLossFragments(lh,ledgerVerificationPercentage);
+ underreplicatedFragments.addAll((java.util.Collection)dataLossFragments);
+ dataLossFragments = this#org.apache.bookkeeper.replication.ReplicationWorker:getNeedRepairedPlacementNotAdheringFragments(lh);
+ l6 = dataLossFragments.iterator();
+ label0:$stack10 = l6.hasNext();
+ if ($stack10==0) goto label1;
+ $stack14 = l6.next();
+ notAdheringFragment=(org.apache.bookkeeper.client.LedgerFragment) $stack14;
+ $stack10 = this#org.apache.bookkeeper.replication.ReplicationWorker:checkFragmentRepeat((java.util.Set)underreplicatedFragments,notAdheringFragment);
+ if ($stack10!=0) goto label2;
+ underreplicatedFragments.add((java.lang.Object)notAdheringFragment);
+ label2:goto label0;
+ label1:return  underreplicatedFragments;
+ } 
+

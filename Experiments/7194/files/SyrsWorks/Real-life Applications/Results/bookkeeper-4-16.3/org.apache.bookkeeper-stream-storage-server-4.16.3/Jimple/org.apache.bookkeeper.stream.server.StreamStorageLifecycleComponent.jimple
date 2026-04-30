@@ -1,0 +1,49 @@
+    public void <init>(org.apache.bookkeeper.server.conf.BookieConfiguration, org.apache.bookkeeper.stats.StatsLogger) throws java.lang.Exception
+    {
+        org.apache.bookkeeper.stream.server.StreamStorageLifecycleComponent this;
+        org.apache.bookkeeper.server.conf.BookieConfiguration conf;
+        org.apache.bookkeeper.stats.StatsLogger statsLogger;
+        org.apache.bookkeeper.stream.server.conf.StorageServerConfiguration ssConf;
+        org.apache.commons.configuration.CompositeConfiguration $stack4;
+        int $stack7;
+        boolean $stack8;
+        org.apache.bookkeeper.common.component.LifecycleComponent $stack11;
+
+        this := @this: org.apache.bookkeeper.stream.server.StreamStorageLifecycleComponent;
+
+        conf := @parameter0: org.apache.bookkeeper.server.conf.BookieConfiguration;
+
+        statsLogger := @parameter1: org.apache.bookkeeper.stats.StatsLogger;
+
+        specialinvoke this.<org.apache.bookkeeper.server.component.ServerLifecycleComponent: void <init>(java.lang.String,org.apache.bookkeeper.server.conf.BookieConfiguration,org.apache.bookkeeper.stats.StatsLogger)>("stream-storage", conf, statsLogger);
+/*36*/
+
+        $stack4 = virtualinvoke conf.<org.apache.bookkeeper.server.conf.BookieConfiguration: org.apache.commons.configuration.CompositeConfiguration getUnderlyingConf()>();
+/*38*/
+
+        ssConf = staticinvoke <org.apache.bookkeeper.stream.server.conf.StorageServerConfiguration: org.apache.bookkeeper.stream.server.conf.StorageServerConfiguration of(org.apache.commons.configuration.CompositeConfiguration)>($stack4);
+/*38*/
+/*38*/
+
+        $stack4 = virtualinvoke conf.<org.apache.bookkeeper.server.conf.BookieConfiguration: org.apache.commons.configuration.CompositeConfiguration getUnderlyingConf()>();
+/*41*/
+
+        $stack7 = virtualinvoke ssConf.<org.apache.bookkeeper.stream.server.conf.StorageServerConfiguration: int getGrpcPort()>();
+/*42*/
+
+        $stack8 = virtualinvoke ssConf.<org.apache.bookkeeper.stream.server.conf.StorageServerConfiguration: boolean getGrpcUseHostname()>();
+/*43*/
+
+        statsLogger = interfaceinvoke statsLogger.<org.apache.bookkeeper.stats.StatsLogger: org.apache.bookkeeper.stats.StatsLogger scope(java.lang.String)>("stream");
+/*45*/
+
+        $stack11 = staticinvoke <org.apache.bookkeeper.stream.server.StorageServer: org.apache.bookkeeper.common.component.LifecycleComponent buildStorageServer(org.apache.commons.configuration.CompositeConfiguration,int,boolean,boolean,org.apache.bookkeeper.stats.StatsLogger)>($stack4, $stack7, $stack8, 0, statsLogger);
+/*40*/
+
+        this.<org.apache.bookkeeper.stream.server.StreamStorageLifecycleComponent: org.apache.bookkeeper.common.component.LifecycleComponent streamStorage> = $stack11;
+/*40*/
+
+        return;
+/*46*/
+    }
+

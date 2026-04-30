@@ -1,0 +1,22 @@
+void org.apache.bookkeeper.net.StabilizeNetworkTopology:updateNode(org.apache.bookkeeper.net.Node node,boolean tentativeToRemove)
+{
+org.apache.bookkeeper.net.StabilizeNetworkTopology$NodeStatus ns;
+  org.apache.bookkeeper.net.StabilizeNetworkTopology$NodeStatus oldStatus;
+  java.util.concurrent.ConcurrentMap $stack6;
+  java.lang.Object $stack7;
+  $stack6=this.nodeStatuses;
+ $stack7 = $stack6.get((java.lang.Object)node);
+ ns=(org.apache.bookkeeper.net.StabilizeNetworkTopology$NodeStatus) $stack7;
+ if (null!=ns) goto label0;
+ ns=new org.apache.bookkeeper.net.StabilizeNetworkTopology$NodeStatus;
+ ns#org.apache.bookkeeper.net.StabilizeNetworkTopology$NodeStatus();
+ $stack6=this.nodeStatuses;
+ $stack7 = $stack6.putIfAbsent((java.lang.Object)node,(java.lang.Object)ns);
+ oldStatus=(org.apache.bookkeeper.net.StabilizeNetworkTopology$NodeStatus) $stack7;
+ if (null!=oldStatus) goto label1;
+ goto label0;
+ label1:ns=oldStatus;
+ label0:ns.updateStatus(tentativeToRemove);
+ return;
+ } 
+

@@ -1,0 +1,48 @@
+static java.util.Set org.apache.rocketmq.tools.admin.MQAdminUtils:getAllBrokersInSameCluster(java.util.Collection @brokers,org.apache.rocketmq.tools.admin.DefaultMQAdminExt defaultMQAdminExt)
+{
+org.apache.rocketmq.remoting.protocol.body.ClusterInfo clusterInfo;
+  java.util.HashSet allBrokers;
+  java.util.Iterator l4;
+  java.lang.String broker;
+  java.util.Iterator l6;
+  java.util.Set clusterBrokers;
+  java.lang.RuntimeException $stack9;
+  java.util.Map $stack10;
+  boolean $stack11;
+  java.lang.Object $stack15;
+  java.util.Collection brokers;
+brokers=@brokers;
+clusterInfo = defaultMQAdminExt.examineBrokerClusterInfo();
+ if (clusterInfo==null) goto label0;
+ $stack10 = clusterInfo.getClusterAddrTable();
+ $stack11 = $stack10.isEmpty();
+ if ($stack11==0) goto label1;
+ label0:$stack9=new java.lang.RuntimeException;
+ $stack9#java.lang.RuntimeException("The Cluster info is empty");
+ throw $stack9;
+ label1:allBrokers=new java.util.HashSet;
+ allBrokers#java.util.HashSet();
+ l4 = brokers.iterator();
+ label2:$stack11 = l4.hasNext();
+ if ($stack11==0) goto label3;
+ $stack15 = l4.next();
+ broker=(java.lang.String) $stack15;
+ $stack11 = allBrokers.contains((java.lang.Object)broker);
+ if ($stack11==0) goto label4;
+ goto label2;
+ label4:$stack10 = clusterInfo.getClusterAddrTable();
+ brokers = $stack10.values();
+ l6 = brokers.iterator();
+ label5:$stack11 = l6.hasNext();
+ if ($stack11==0) goto label6;
+ $stack15 = l6.next();
+ clusterBrokers=(java.util.Set) $stack15;
+ $stack11 = clusterBrokers.contains((java.lang.Object)broker);
+ if ($stack11==0) goto label7;
+ allBrokers.addAll((java.util.Collection)clusterBrokers);
+ goto label6;
+ label7:goto label5;
+ label6:goto label2;
+ label3:return  allBrokers;
+ } 
+

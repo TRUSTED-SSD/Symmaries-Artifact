@@ -1,0 +1,30 @@
+digraph G {
+  node [shape=box, ];
+  "pc0_js1" [label="〈$r2 = r0#java.util.EnumMap.unmaskNull (r1), js1〉\n\
+tt",
+             ];
+  "pc1_js1" [label="〈return $r2, js1〉", ];
+  "pc2_js1" [label="〈sink, js1〉\n\
+obj_level(r0) ⊑ ret(obj_level(r0))' ∧ obj_level(r1) ⊑ ret(obj_level(r1))' ∧ (ret(r0.><r0)' ∨ ¬r0.><r0) ∧ (ret(r0.><r1)' ∨ ¬r0.><r1) ∧ (ret(r1.><r0)' ∨ ¬r1.><r0) ∧ (ret(r1.><r1)' ∨ ¬r1.><r1) ∧ (ϕ ≠ S1 ∨ obj_level($r2) ⊑ ret(obj_level())' ∧ pc ⊔ level($r2) ⊑ ret(level())' ∧ (ret(~r0)' ∨ ¬$r2~r0) ∧ (ret(~r1)' ∨ ¬$r2~r1) ∧ (ret(.><r0)' ∨ ¬r0.><$r2) ∧ (ret(.><r1)' ∨ ¬r1.><$r2) ∧ (ret(r0.><)' ∨ ¬$r2.><r0) ∧ (ret(r1.><)' ∨ ¬$r2.><r1))",
+             ];
+  
+  
+  "pc0_js1" -> "pc1_js1" [label="tt,\n\
+{$r2~r0 := r0~r1,\n\
+ $r2~r1 := tt,\n\
+ r0~r1 := r0~r1 ∧ ¬r0~r1,\n\
+ $r2.><r0 := r1.><r0 ∨ r0~r1 ∧ r0.><r0,\n\
+ $r2.><r1 := r1.><r1 ∨ r0~r1 ∧ r0.><r1,\n\
+ r0.><$r2 := r0.><r1 ∨ r0~r1 ∧ r0.><r0,\n\
+ r0.><r0 := r0.><r0 ∧ ¬r0~r1 ∨ (if r0.><r1 then r0~r1 ∨ r0.><r0 ∨ r0.><r1 ∨ r1.><r0 else r0.><r0) ∨ (if r1.><r0 then r0~r1 ∨ r0.><r0 ∨ r0.><r1 else r0.><r0) ∨ (if r1.><r1 then r0.><r0 ∨ (r0~r1 ∨ r0.><r1) ∧ (r0~r1 ∨ r0.><r1 ∨ r1.><r0) else r0.><r0),\n\
+ r0.><r1 := r0.><r1 ∧ ¬r0~r1 ∨ (if r0.><r0 then r0~r1 ∨ r0.><r1 ∨ r1.><r0 else r0.><r1) ∨ (if r1.><r0 then r0.><r1 ∨ (r0~r1 ∨ r0.><r1) ∧ (r0~r1 ∨ r0.><r1 ∨ r1.><r0) else r0.><r1) ∨ (if r1.><r1 then r0~r1 ∨ r0.><r1 else r0.><r1),\n\
+ r1.><$r2 := r1.><r1 ∨ r0~r1 ∧ r1.><r0,\n\
+ r1.><r0 := r1.><r0 ∧ ¬r0~r1 ∨ (if r0.><r0 then r0~r1 ∨ r1.><r0 else r1.><r0) ∨ (if r0.><r1 then r1.><r0 ∨ (r0~r1 ∨ r1.><r0) ∧ (r0~r1 ∨ r0.><r1 ∨ r1.><r0) else r1.><r0) ∨ (if r1.><r1 then r0~r1 ∨ r0.><r1 ∨ r1.><r0 else r1.><r0),\n\
+ r1.><r1 := (if r0.><r0 then r1.><r1 ∨ (r0~r1 ∨ r1.><r0) ∧ (r0~r1 ∨ r0.><r1 ∨ r1.><r0) else r1.><r1) ∨ (if r0.><r1 then r0~r1 ∨ r1.><r0 ∨ r1.><r1 else r1.><r1) ∨ (if r1.><r0 then r0~r1 ∨ r0.><r1 ∨ r1.><r0 ∨ r1.><r1 else r1.><r1),\n\
+ level($r2) := pc ⊔ level(r1),\n\
+ obj_level($r2) := obj_level(r1)}",
+                          ];
+  "pc1_js1" -> "pc2_js1" [label="tt,\n\
+{ϕ := S1}", ];
+  
+  }

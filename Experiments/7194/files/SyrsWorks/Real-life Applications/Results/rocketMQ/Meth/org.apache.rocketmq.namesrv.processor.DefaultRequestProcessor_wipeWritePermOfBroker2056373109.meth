@@ -1,0 +1,41 @@
+org.apache.rocketmq.remoting.protocol.RemotingCommand org.apache.rocketmq.namesrv.processor.DefaultRequestProcessor:wipeWritePermOfBroker(io.netty.channel.ChannelHandlerContext ctx,org.apache.rocketmq.remoting.protocol.RemotingCommand request)
+{
+org.apache.rocketmq.remoting.protocol.RemotingCommand response;
+  org.apache.rocketmq.remoting.protocol.header.namesrv.WipeWritePermOfBrokerResponseHeader responseHeader;
+  org.apache.rocketmq.remoting.protocol.header.namesrv.WipeWritePermOfBrokerRequestHeader requestHeader;
+  int wipeTopicCnt;
+  org.apache.rocketmq.remoting.CommandCustomHeader $stack8;
+  org.apache.rocketmq.namesrv.NamesrvController $stack10;
+  org.apache.rocketmq.namesrv.routeinfo.RouteInfoManager $stack11;
+  java.lang.String $stack12;
+  java.lang.Integer $stack14;
+  java.lang.Object[] $stack15;
+  org.apache.rocketmq.logging.org.slf4j.Logger $stack16;
+  io.netty.channel.Channel $stack21;
+  response = org.apache.rocketmq.remoting.protocol.RemotingCommand.createResponseCommand(org.apache.rocketmq.remoting.protocol.header.namesrv.WipeWritePermOfBrokerResponseHeader);
+ $stack8 = response.readCustomHeader();
+ responseHeader=(org.apache.rocketmq.remoting.protocol.header.namesrv.WipeWritePermOfBrokerResponseHeader) $stack8;
+ $stack8 = request.decodeCommandCustomHeader(org.apache.rocketmq.remoting.protocol.header.namesrv.WipeWritePermOfBrokerRequestHeader);
+ requestHeader=(org.apache.rocketmq.remoting.protocol.header.namesrv.WipeWritePermOfBrokerRequestHeader) $stack8;
+ $stack10=this.namesrvController;
+ $stack11 = $stack10.getRouteInfoManager();
+ $stack12 = requestHeader.getBrokerName();
+ wipeTopicCnt = $stack11.wipeWritePermOfBrokerByLock($stack12);
+ if (ctx==null) goto label0;
+ $stack16=org.apache.rocketmq.namesrv.processor.DefaultRequestProcessor.log;
+ $stack15=new java.lang.Object[3];
+ $stack12 = requestHeader.getBrokerName();
+ $stack15[0]=$stack12;
+ $stack21 = ctx.channel();
+ $stack12 = org.apache.rocketmq.remoting.common.RemotingHelper.parseChannelRemoteAddr($stack21);
+ $stack15[1]=$stack12;
+ $stack14 = java.lang.Integer.valueOf(wipeTopicCnt);
+ $stack15[2]=$stack14;
+ $stack16.info("wipe write perm of broker[{}], client: {}, {}",$stack15);
+ label0:$stack14 = java.lang.Integer.valueOf(wipeTopicCnt);
+ responseHeader.setWipeTopicCount($stack14);
+ response.setCode(0);
+ response.setRemark(null);
+ return  response;
+ } 
+

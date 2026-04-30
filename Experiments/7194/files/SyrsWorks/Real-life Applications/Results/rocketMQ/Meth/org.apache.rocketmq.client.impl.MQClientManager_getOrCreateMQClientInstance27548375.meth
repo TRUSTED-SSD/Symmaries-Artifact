@@ -1,0 +1,35 @@
+org.apache.rocketmq.client.impl.factory.MQClientInstance org.apache.rocketmq.client.impl.MQClientManager:getOrCreateMQClientInstance(org.apache.rocketmq.client.ClientConfig @clientConfig,org.apache.rocketmq.remoting.RPCHook rpcHook)
+{
+java.lang.String clientId;
+  org.apache.rocketmq.client.impl.factory.MQClientInstance instance;
+  org.apache.rocketmq.client.impl.factory.MQClientInstance prev;
+  java.util.concurrent.ConcurrentMap $stack7;
+  java.lang.Object $stack8;
+  java.util.concurrent.atomic.AtomicInteger $stack11;
+  int $stack12;
+  org.apache.rocketmq.logging.org.slf4j.Logger $stack15;
+  org.apache.rocketmq.client.ClientConfig clientConfig;
+clientConfig=@clientConfig;
+clientId = clientConfig.buildMQClientId();
+ $stack7=this.factoryTable;
+ $stack8 = $stack7.get((java.lang.Object)clientId);
+ instance=(org.apache.rocketmq.client.impl.factory.MQClientInstance) $stack8;
+ if (null!=instance) goto label0;
+ instance=new org.apache.rocketmq.client.impl.factory.MQClientInstance;
+ clientConfig = clientConfig.cloneClientConfig();
+ $stack11=this.factoryIndexGenerator;
+ $stack12 = $stack11.getAndIncrement();
+ instance#org.apache.rocketmq.client.impl.factory.MQClientInstance(clientConfig,$stack12,clientId,rpcHook);
+ $stack7=this.factoryTable;
+ $stack8 = $stack7.putIfAbsent((java.lang.Object)clientId,(java.lang.Object)instance);
+ prev=(org.apache.rocketmq.client.impl.factory.MQClientInstance) $stack8;
+ if (prev==null) goto label1;
+ instance=prev;
+ $stack15=org.apache.rocketmq.client.impl.MQClientManager.log;
+ $stack15.warn("Returned Previous MQClientInstance for clientId:[{}]",(java.lang.Object)clientId);
+ goto label0;
+ label1:$stack15=org.apache.rocketmq.client.impl.MQClientManager.log;
+ $stack15.info("Created new MQClientInstance for clientId:[{}]",(java.lang.Object)clientId);
+ label0:return  instance;
+ } 
+

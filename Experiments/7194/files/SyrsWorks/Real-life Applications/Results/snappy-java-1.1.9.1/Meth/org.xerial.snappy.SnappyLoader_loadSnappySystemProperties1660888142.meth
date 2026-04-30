@@ -1,0 +1,51 @@
+static void org.xerial.snappy.SnappyLoader:loadSnappySystemProperties()
+{
+java.io.InputStream l0;
+  java.util.Properties l1;
+  java.util.Enumeration l2;
+  java.lang.String l3;
+  java.lang.Thread $stack4;
+  java.lang.ClassLoader $stack5;
+  boolean $stack9;
+  java.lang.Object $stack10;
+  java.lang.String $stack13;
+  java.lang.Throwable $stack16;
+  java.lang.StringBuilder $stack17;
+  java.io.PrintStream $stack18;
+  label0:$stack4 = java.lang.Thread.currentThread();
+ $stack5 = $stack4.getContextClassLoader();
+ l0 = $stack5.getResourceAsStream("org-xerial-snappy.properties");
+ if (l0!=null) goto label1;
+ label2:return;
+ label1:l1=new java.util.Properties;
+ l1#java.util.Properties();
+ l1.load(l0);
+ l0.close();
+ l2 = l1.propertyNames();
+ label3:$stack9 = l2.hasMoreElements();
+ if ($stack9==0) goto label4;
+ $stack10 = l2.nextElement();
+ l3=(java.lang.String) $stack10;
+ $stack9 = l3.startsWith("org.xerial.snappy.");
+ if ($stack9==0) goto label5;
+ $stack13 = java.lang.System.getProperty(l3);
+ if ($stack13!=null) goto label5;
+ $stack13 = l1.getProperty(l3);
+ java.lang.System.setProperty(l3,$stack13);
+ label5:goto label3;
+ label4:goto label6;
+ label7:$stack16 = catch;
+ $stack18=java.lang.System.err;
+ $stack17=new java.lang.StringBuilder;
+ $stack17#java.lang.StringBuilder();
+ $stack17 = $stack17.append("Could not load \'org-xerial-snappy.properties\' from classpath: ");
+ l3 = $stack16.toString();
+ $stack17 = $stack17.append(l3);
+ l3 = $stack17.toString();
+ dummyClass.lowSink(l3);
+$stack18.println(l3);
+ label6:return;
+ catch java.lang.Throwable: label0 - label2 : label7;
+catch java.lang.Throwable: label1 - label4 : label7;
+} 
+

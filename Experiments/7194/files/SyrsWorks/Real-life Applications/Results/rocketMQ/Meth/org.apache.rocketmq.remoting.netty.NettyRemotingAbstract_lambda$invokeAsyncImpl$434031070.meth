@@ -1,0 +1,16 @@
+void org.apache.rocketmq.remoting.netty.NettyRemotingAbstract:lambda$invokeAsyncImpl$4(org.apache.rocketmq.remoting.netty.ResponseFuture responseFuture,int opaque,io.netty.channel.Channel channel,io.netty.channel.ChannelFuture f)
+{
+boolean $stack5;
+  org.apache.rocketmq.logging.org.slf4j.Logger $stack6;
+  java.lang.String $stack8;
+  $stack5 = f.isSuccess();
+ if ($stack5==0) goto label0;
+ responseFuture.setSendRequestOK((boolean)1);
+ return;
+ label0:this#org.apache.rocketmq.remoting.netty.NettyRemotingAbstract:requestFail(opaque);
+ $stack6=org.apache.rocketmq.remoting.netty.NettyRemotingAbstract.log;
+ $stack8 = org.apache.rocketmq.remoting.common.RemotingHelper.parseChannelRemoteAddr(channel);
+ $stack6.warn("send a request command to channel <{}> failed.",(java.lang.Object)$stack8);
+ return;
+ } 
+

@@ -1,0 +1,38 @@
+void org.apache.rocketmq.remoting.netty.NettyRemotingClient:interruptPullRequests(java.util.Set brokerAddrSet)
+{
+java.util.Iterator l2;
+  org.apache.rocketmq.remoting.netty.ResponseFuture responseFuture;
+  org.apache.rocketmq.remoting.protocol.RemotingCommand cmd;
+  java.lang.String remoteAddr;
+  java.util.concurrent.ConcurrentMap $stack6;
+  java.util.Collection $stack7;
+  boolean $stack9;
+  java.lang.Object $stack10;
+  io.netty.channel.Channel $stack12;
+  int $stack16;
+  org.apache.rocketmq.logging.org.slf4j.Logger $stack17;
+  $stack6=this.responseTable;
+ $stack7 = $stack6.values();
+ l2 = $stack7.iterator();
+ label0:$stack9 = l2.hasNext();
+ if ($stack9==0) goto label1;
+ $stack10 = l2.next();
+ responseFuture=(org.apache.rocketmq.remoting.netty.ResponseFuture) $stack10;
+ cmd = responseFuture.getRequestCommand();
+ if (cmd!=null) goto label2;
+ goto label0;
+ label2:$stack12 = responseFuture.getChannel();
+ remoteAddr = org.apache.rocketmq.remoting.common.RemotingHelper.parseChannelRemoteAddr($stack12);
+ $stack9 = brokerAddrSet.contains((java.lang.Object)remoteAddr);
+ if ($stack9==0) goto label3;
+ $stack16 = cmd.getCode();
+ if ($stack16==11) goto label4;
+ $stack16 = cmd.getCode();
+ if ($stack16!=361) goto label3;
+ label4:$stack17=org.apache.rocketmq.remoting.netty.NettyRemotingClient.LOGGER;
+ $stack17.info("interrupt {}",(java.lang.Object)cmd);
+ responseFuture.interrupt();
+ label3:goto label0;
+ label1:return;
+ } 
+

@@ -1,0 +1,33 @@
+javax.security.auth.login.LoginContext org.apache.bookkeeper.sasl.SASLBookieAuthProviderFactory:loginServer()
+{
+javax.security.auth.login.AppConfigurationEntry[] entries;
+  javax.security.auth.login.LoginContext loginContext;
+  javax.security.auth.login.Configuration $stack3;
+  java.lang.String $stack4;
+  org.apache.bookkeeper.sasl.SASLBookieAuthProviderFactory$ClientCallbackHandler $stack7;
+  java.lang.StringBuilder $stack9;
+  org.slf4j.Logger $stack10;
+  $stack3 = javax.security.auth.login.Configuration.getConfiguration();
+ $stack4=this.loginContextName;
+ entries = $stack3.getAppConfigurationEntry($stack4);
+ if (entries!=null) goto label0;
+ $stack10=org.apache.bookkeeper.sasl.SASLBookieAuthProviderFactory.LOG;
+ $stack9=new java.lang.StringBuilder;
+ $stack9#java.lang.StringBuilder();
+ $stack9 = $stack9.append("JAAS not configured or no ");
+ $stack4=this.loginContextName;
+ $stack9 = $stack9.append($stack4);
+ $stack9 = $stack9.append(" present in JAAS Configuration file");
+ $stack4 = $stack9.toString();
+ dummyClass.lowSink($stack4);
+$stack10.info($stack4);
+ return  null;
+ label0:loginContext=new javax.security.auth.login.LoginContext;
+ $stack4=this.loginContextName;
+ $stack7=new org.apache.bookkeeper.sasl.SASLBookieAuthProviderFactory$ClientCallbackHandler;
+ $stack7#org.apache.bookkeeper.sasl.SASLBookieAuthProviderFactory$ClientCallbackHandler(null);
+ loginContext#javax.security.auth.login.LoginContext($stack4,(javax.security.auth.callback.CallbackHandler)$stack7);
+ loginContext.login();
+ return  loginContext;
+ } 
+

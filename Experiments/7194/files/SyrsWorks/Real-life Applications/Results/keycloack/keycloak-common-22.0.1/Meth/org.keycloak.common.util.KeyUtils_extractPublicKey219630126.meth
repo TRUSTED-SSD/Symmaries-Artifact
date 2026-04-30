@@ -1,0 +1,27 @@
+static java.security.PublicKey org.keycloak.common.util.KeyUtils:extractPublicKey(java.security.PrivateKey key)
+{
+java.security.interfaces.RSAPrivateCrtKey rsaPrivateCrtKey;
+  java.security.KeyFactory keyFactory;
+  java.security.spec.RSAPublicKeySpec $stack4;
+  java.math.BigInteger $stack5;
+  java.math.BigInteger $stack6;
+  java.security.PublicKey $stack8;
+  java.lang.Exception $stack9;
+  java.lang.RuntimeException $stack10;
+  if (key!=null) goto label0;
+ return  null;
+ label0:rsaPrivateCrtKey=(java.security.interfaces.RSAPrivateCrtKey) key;
+ $stack4=new java.security.spec.RSAPublicKeySpec;
+ $stack5 = rsaPrivateCrtKey.getModulus();
+ $stack6 = rsaPrivateCrtKey.getPublicExponent();
+ $stack4#java.security.spec.RSAPublicKeySpec($stack5,$stack6);
+ keyFactory = java.security.KeyFactory.getInstance("RSA");
+ $stack8 = keyFactory.generatePublic((java.security.spec.KeySpec)$stack4);
+ label1:return  $stack8;
+ label2:$stack9 = catch;
+ $stack10=new java.lang.RuntimeException;
+ $stack10#java.lang.RuntimeException((java.lang.Throwable)$stack9);
+ throw $stack10;
+ catch java.lang.Exception: label0 - label1 : label2;
+} 
+

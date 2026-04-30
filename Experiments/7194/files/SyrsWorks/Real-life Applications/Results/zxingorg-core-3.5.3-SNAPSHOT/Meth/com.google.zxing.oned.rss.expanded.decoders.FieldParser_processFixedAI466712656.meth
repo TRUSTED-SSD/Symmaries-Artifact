@@ -1,0 +1,43 @@
+static java.lang.String com.google.zxing.oned.rss.expanded.decoders.FieldParser:processFixedAI(int aiSize,int fieldSize,java.lang.String @rawInformation)
+{
+java.lang.String ai;
+  java.lang.String field;
+  int $stack8;
+  int $stack11;
+  java.lang.StringBuilder $stack16;
+  com.google.zxing.NotFoundException $stack27;
+  java.lang.String rawInformation;
+rawInformation=@rawInformation;
+$stack8 = rawInformation.length();
+ if ($stack8>=aiSize) goto label0;
+ $stack27 = com.google.zxing.NotFoundException.getNotFoundInstance();
+ throw $stack27;
+ label0:ai = rawInformation.substring(0,aiSize);
+ $stack8 = rawInformation.length();
+ $stack11=(aiSize+fieldSize);
+ if ($stack8>=$stack11) goto label1;
+ $stack27 = com.google.zxing.NotFoundException.getNotFoundInstance();
+ throw $stack27;
+ label1:$stack8=(aiSize+fieldSize);
+ field = rawInformation.substring(aiSize,$stack8);
+ aiSize=(aiSize+fieldSize);
+ rawInformation = rawInformation.substring(aiSize);
+ $stack16=new java.lang.StringBuilder;
+ $stack16#java.lang.StringBuilder();
+ $stack16 = $stack16.append((char)40);
+ $stack16 = $stack16.append(ai);
+ $stack16 = $stack16.append((char)41);
+ $stack16 = $stack16.append(field);
+ ai = $stack16.toString();
+ rawInformation = com.google.zxing.oned.rss.expanded.decoders.FieldParser.parseFieldsInGeneralPurpose(rawInformation);
+ if (rawInformation!=null) goto label2;
+ rawInformation=ai;
+ goto label3;
+ label2:$stack16=new java.lang.StringBuilder;
+ $stack16#java.lang.StringBuilder();
+ $stack16 = $stack16.append(ai);
+ $stack16 = $stack16.append(rawInformation);
+ rawInformation = $stack16.toString();
+ label3:return  rawInformation;
+ } 
+

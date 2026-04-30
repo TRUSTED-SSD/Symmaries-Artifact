@@ -1,0 +1,43 @@
+void org.apache.rocketmq.store.DefaultMessageStore$ConcurrentReputMessageService:shutdown()
+{
+int i;
+  java.lang.InterruptedException l2;
+  boolean $stack3;
+  org.apache.rocketmq.store.DefaultMessageStore$MainBatchDispatchRequestService $stack4;
+  org.apache.rocketmq.store.DefaultMessageStore$DispatchService $stack5;
+  org.apache.rocketmq.logging.org.slf4j.Logger $stack6;
+  org.apache.rocketmq.store.DefaultMessageStore $stack7;
+  org.apache.rocketmq.store.CommitLog $stack9;
+  long $stack10;
+  java.lang.Long $stack11;
+  java.lang.Long $stack13;
+  java.util.concurrent.TimeUnit $stack19;
+  i=0;
+ label0:if (i>=50) goto label1;
+ $stack3 = this.isCommitLogAvailable();
+ if ($stack3==0) goto label1;
+ label2:$stack19=java.util.concurrent.TimeUnit.MILLISECONDS;
+ $stack19.sleep(100L);
+ label3:goto label4;
+ label5:l2 = catch;
+ label4:i=(i+1);
+ goto label0;
+ label1:$stack3 = this.isCommitLogAvailable();
+ if ($stack3==0) goto label6;
+ $stack6 = org.apache.rocketmq.store.DefaultMessageStore.access$600();
+ $stack7=this.this$0;
+ $stack9 = org.apache.rocketmq.store.DefaultMessageStore.access$200($stack7);
+ $stack10 = $stack9.getMaxOffset();
+ $stack11 = java.lang.Long.valueOf($stack10);
+ $stack10=this.reputFromOffset;
+ $stack13 = java.lang.Long.valueOf($stack10);
+ $stack6.warn("shutdown concurrentReputMessageService, but CommitLog have not finish to be dispatched, CommitLog max offset={}, reputFromOffset={}",(java.lang.Object)$stack11,(java.lang.Object)$stack13);
+ label6:$stack4=this.mainBatchDispatchRequestService;
+ $stack4.shutdown();
+ $stack5=this.dispatchService;
+ $stack5.shutdown();
+ this#org.apache.rocketmq.store.DefaultMessageStore$ReputMessageService();
+ return;
+ catch java.lang.InterruptedException: label2 - label3 : label5;
+} 
+

@@ -1,0 +1,17 @@
+java.security.PublicKey org.keycloak.adapters.rotation.JWKPublicKeyLocator:lookupCachedKey(int publicKeyCacheTtl,int currentTime,java.lang.String kid)
+{
+int $stack4;
+  java.util.Map $stack7;
+  java.lang.Object $stack8;
+  java.security.PublicKey $stack9;
+  $stack4=this.lastRequestTime;
+ publicKeyCacheTtl=($stack4+publicKeyCacheTtl);
+ if (publicKeyCacheTtl<=currentTime) goto label0;
+ if (kid==null) goto label0;
+ $stack7=this.currentKeys;
+ $stack8 = $stack7.get((java.lang.Object)kid);
+ $stack9=(java.security.PublicKey) $stack8;
+ return  $stack9;
+ label0:return  null;
+ } 
+

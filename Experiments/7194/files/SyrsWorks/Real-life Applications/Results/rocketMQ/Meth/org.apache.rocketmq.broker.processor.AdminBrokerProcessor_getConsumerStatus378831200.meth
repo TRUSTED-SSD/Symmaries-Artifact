@@ -1,0 +1,35 @@
+org.apache.rocketmq.remoting.protocol.RemotingCommand org.apache.rocketmq.broker.processor.AdminBrokerProcessor:getConsumerStatus(io.netty.channel.ChannelHandlerContext ctx,org.apache.rocketmq.remoting.protocol.RemotingCommand @request)
+{
+org.apache.rocketmq.remoting.protocol.header.GetConsumerStatusRequestHeader requestHeader;
+  org.apache.rocketmq.remoting.CommandCustomHeader $stack4;
+  java.lang.Object[] $stack5;
+  org.apache.rocketmq.logging.org.slf4j.Logger $stack6;
+  io.netty.channel.Channel $stack9;
+  java.lang.String $stack10;
+  org.apache.rocketmq.broker.BrokerController $stack15;
+  org.apache.rocketmq.broker.client.net.Broker2Client $stack16;
+  java.lang.String $stack18;
+  java.lang.String $stack19;
+  org.apache.rocketmq.remoting.protocol.RemotingCommand request;
+request=@request;
+$stack4 = request.decodeCommandCustomHeader(org.apache.rocketmq.remoting.protocol.header.GetConsumerStatusRequestHeader);
+ requestHeader=(org.apache.rocketmq.remoting.protocol.header.GetConsumerStatusRequestHeader) $stack4;
+ $stack6=org.apache.rocketmq.broker.processor.AdminBrokerProcessor.LOGGER;
+ $stack5=new java.lang.Object[3];
+ $stack9 = ctx.channel();
+ $stack10 = org.apache.rocketmq.remoting.common.RemotingHelper.parseChannelRemoteAddr($stack9);
+ $stack5[0]=$stack10;
+ $stack10 = requestHeader.getTopic();
+ $stack5[1]=$stack10;
+ $stack10 = requestHeader.getGroup();
+ $stack5[2]=$stack10;
+ $stack6.info("[get-consumer-status] get consumer status by {}. topic={}, group={}",$stack5);
+ $stack15=this.brokerController;
+ $stack16 = $stack15.getBroker2Client();
+ $stack10 = requestHeader.getTopic();
+ $stack18 = requestHeader.getGroup();
+ $stack19 = requestHeader.getClientAddr();
+ request = $stack16.getConsumeStatus($stack10,$stack18,$stack19);
+ return  request;
+ } 
+

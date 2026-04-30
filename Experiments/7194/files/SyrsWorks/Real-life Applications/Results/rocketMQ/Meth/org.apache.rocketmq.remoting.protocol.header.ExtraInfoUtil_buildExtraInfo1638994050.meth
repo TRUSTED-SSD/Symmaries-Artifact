@@ -1,0 +1,30 @@
+static java.lang.String org.apache.rocketmq.remoting.protocol.header.ExtraInfoUtil:buildExtraInfo(long ckQueueOffset,long popTime,long invisibleTime,int reviveQid,java.lang.String @topic,java.lang.String brokerName,int queueId)
+{
+java.lang.String t;
+  boolean $stack11;
+  java.lang.StringBuilder $stack12;
+  java.lang.String topic;
+topic=@topic;
+t="0";
+ $stack11 = topic.startsWith("%RETRY%");
+ if ($stack11==0) goto label0;
+ t="1";
+ label0:$stack12=new java.lang.StringBuilder;
+ $stack12#java.lang.StringBuilder();
+ $stack12 = $stack12.append(ckQueueOffset);
+ $stack12 = $stack12.append(" ");
+ $stack12 = $stack12.append(popTime);
+ $stack12 = $stack12.append(" ");
+ $stack12 = $stack12.append(invisibleTime);
+ $stack12 = $stack12.append(" ");
+ $stack12 = $stack12.append(reviveQid);
+ $stack12 = $stack12.append(" ");
+ $stack12 = $stack12.append(t);
+ $stack12 = $stack12.append(" ");
+ $stack12 = $stack12.append(brokerName);
+ $stack12 = $stack12.append(" ");
+ $stack12 = $stack12.append(queueId);
+ topic = $stack12.toString();
+ return  topic;
+ } 
+

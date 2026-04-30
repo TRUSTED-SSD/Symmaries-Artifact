@@ -1,0 +1,158 @@
+    public void arrayEquals(java.lang.String, java.lang.Object, java.lang.Object) throws org.junit.internal.ArrayComparisonFailure
+    {
+        org.junit.internal.ComparisonCriteria this;
+        java.lang.String message, header;
+        java.lang.Object expecteds, actuals, expected, actual;
+        int expectedsLength, i;
+        org.junit.internal.ArrayComparisonFailure e;
+        java.lang.Object[] $stack10, $stack11;
+        boolean $stack12;
+        java.lang.StringBuilder $stack13;
+        java.lang.AssertionError $stack33;
+
+        this := @this: org.junit.internal.ComparisonCriteria;
+
+        message := @parameter0: java.lang.String;
+
+        expecteds := @parameter1: java.lang.Object;
+
+        actuals := @parameter2: java.lang.Object;
+
+        if expecteds == actuals goto label01;
+/*28*/
+
+        $stack10 = newarray (java.lang.Object)[1];
+/*33*/
+
+        $stack10[0] = expecteds;
+/*33*/
+
+        $stack11 = newarray (java.lang.Object)[1];
+/*33*/
+
+        $stack11[0] = actuals;
+/*33*/
+
+        $stack12 = staticinvoke <java.util.Arrays: boolean deepEquals(java.lang.Object[],java.lang.Object[])>($stack10, $stack11);
+/*33*/
+
+        if $stack12 == 0 goto label02;
+/*33*/
+
+     label01:
+        return;
+/*33*/
+
+     label02:
+        if message != null goto label03;
+/*35*/
+
+        header = "";
+/*40*/
+
+        goto label04;
+/*40*/
+
+     label03:
+        $stack13 = new java.lang.StringBuilder;
+/*35*/
+
+        specialinvoke $stack13.<java.lang.StringBuilder: void <init>()>();
+/*35*/
+
+        $stack13 = virtualinvoke $stack13.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>(message);
+/*35*/
+
+        $stack13 = virtualinvoke $stack13.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>(": ");
+/*35*/
+
+        header = virtualinvoke $stack13.<java.lang.StringBuilder: java.lang.String toString()>();
+/*35*/
+
+     label04:
+        expectedsLength = specialinvoke this.<org.junit.internal.ComparisonCriteria: int assertArraysAreSameLength(java.lang.Object,java.lang.Object,java.lang.String)>(expecteds, actuals, header);
+/*37*/
+/*37*/
+
+        i = 0;
+/*40*/
+/*40*/
+
+     label05:
+        if i >= expectedsLength goto label13;
+/*40*/
+
+        expected = staticinvoke <java.lang.reflect.Array: java.lang.Object get(java.lang.Object,int)>(expecteds, i);
+/*41*/
+/*41*/
+
+        actual = staticinvoke <java.lang.reflect.Array: java.lang.Object get(java.lang.Object,int)>(actuals, i);
+/*42*/
+/*42*/
+
+        $stack12 = specialinvoke this.<org.junit.internal.ComparisonCriteria: boolean isArray(java.lang.Object)>(expected);
+/*44*/
+
+        if $stack12 == 0 goto label09;
+/*44*/
+
+        $stack12 = specialinvoke this.<org.junit.internal.ComparisonCriteria: boolean isArray(java.lang.Object)>(actual);
+/*40*/
+
+        if $stack12 == 0 goto label09;
+/*40*/
+
+     label06:
+        virtualinvoke this.<org.junit.internal.ComparisonCriteria: void arrayEquals(java.lang.String,java.lang.Object,java.lang.Object)>(message, expected, actual);
+/*46*/
+
+     label07:
+        goto label12;
+/*50*/
+
+     label08:
+        e := @caughtexception;
+/*33*/
+
+        virtualinvoke e.<org.junit.internal.ArrayComparisonFailure: void addDimension(int)>(i);
+/*48*/
+
+        throw e;
+/*49*/
+
+     label09:
+        virtualinvoke this.<org.junit.internal.ComparisonCriteria: void assertElementsEqual(java.lang.Object,java.lang.Object)>(expected, actual);
+/*53*/
+
+     label10:
+        goto label12;
+/*56*/
+
+     label11:
+        $stack33 := @caughtexception;
+/*49*/
+
+        e = new org.junit.internal.ArrayComparisonFailure;
+/*55*/
+
+        specialinvoke e.<org.junit.internal.ArrayComparisonFailure: void <init>(java.lang.String,java.lang.AssertionError,int)>(header, $stack33, i);
+/*55*/
+
+        throw e;
+/*55*/
+
+     label12:
+        i = i + 1;
+/*40*/
+
+        goto label05;
+/*40*/
+
+     label13:
+        return;
+/*59*/
+
+        catch org.junit.internal.ArrayComparisonFailure from label06 to label07 with label08;
+        catch java.lang.AssertionError from label09 to label10 with label11;
+    }
+

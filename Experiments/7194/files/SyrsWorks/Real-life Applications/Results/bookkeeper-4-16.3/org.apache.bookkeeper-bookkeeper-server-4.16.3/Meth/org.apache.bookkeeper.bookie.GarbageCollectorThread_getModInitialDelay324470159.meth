@@ -1,0 +1,23 @@
+long org.apache.bookkeeper.bookie.GarbageCollectorThread:getModInitialDelay()
+{
+int ledgerDirsNum;
+  long splitTime;
+  long currentThreadNum;
+  org.apache.bookkeeper.conf.ServerConfiguration $stack6;
+  java.io.File[] $stack7;
+  long $stack8;
+  java.util.concurrent.atomic.AtomicLong $stack10;
+  $stack6=this.conf;
+ $stack7 = $stack6.getLedgerDirs();
+ ledgerDirsNum=#$stack7;
+ splitTime=this.gcWaitTime;
+ $stack8=(long) ledgerDirsNum;
+ splitTime=(splitTime/$stack8);
+ $stack10=org.apache.bookkeeper.bookie.GarbageCollectorThread.threadNum;
+ currentThreadNum = $stack10.incrementAndGet();
+ $stack8=this.gcWaitTime;
+ splitTime=(currentThreadNum * splitTime);
+ $stack8=($stack8+splitTime);
+ return  $stack8;
+ } 
+

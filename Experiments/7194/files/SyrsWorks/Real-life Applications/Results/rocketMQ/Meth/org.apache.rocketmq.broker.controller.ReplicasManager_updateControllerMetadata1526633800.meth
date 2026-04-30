@@ -1,0 +1,43 @@
+boolean org.apache.rocketmq.broker.controller.ReplicasManager:updateControllerMetadata()
+{
+java.util.Iterator l1;
+  java.lang.String address;
+  org.apache.rocketmq.remoting.protocol.header.controller.GetMetaDataResponseHeader responseHeader;
+  java.util.concurrent.ConcurrentMap $stack4;
+  java.util.Set $stack5;
+  boolean $stack7;
+  java.lang.Object $stack8;
+  org.apache.rocketmq.broker.out.BrokerOuterAPI $stack9;
+  java.lang.CharSequence[] $stack12;
+  org.apache.rocketmq.logging.org.slf4j.Logger $stack18;
+  java.lang.Exception $stack19;
+  $stack4=this.availableControllerAddresses;
+ $stack5 = $stack4.keySet();
+ l1 = $stack5.iterator();
+ label0:$stack7 = l1.hasNext();
+ if ($stack7==0) goto label1;
+ $stack8 = l1.next();
+ address=(java.lang.String) $stack8;
+ label2:$stack9=this.brokerOuterAPI;
+ responseHeader = $stack9.getControllerMetaData(address);
+ if (responseHeader==null) goto label3;
+ $stack12=new java.lang.CharSequence[1];
+ address = responseHeader.getControllerLeaderAddress();
+ $stack12[0]=address;
+ $stack7 = org.apache.commons.lang3.StringUtils.isNoneEmpty($stack12);
+ if ($stack7==0) goto label3;
+ address = responseHeader.getControllerLeaderAddress();
+ this.controllerLeaderAddress=address;
+ $stack18=org.apache.rocketmq.broker.controller.ReplicasManager.LOGGER;
+ address=this.controllerLeaderAddress;
+ $stack18.info("Update controller leader address to {}",(java.lang.Object)address);
+ label4:return  1;
+ label3:goto label5;
+ label6:$stack19 = catch;
+ $stack18=org.apache.rocketmq.broker.controller.ReplicasManager.LOGGER;
+ $stack18.error("Failed to update controller metadata",(java.lang.Throwable)$stack19);
+ label5:goto label0;
+ label1:return  0;
+ catch java.lang.Exception: label2 - label4 : label6;
+} 
+

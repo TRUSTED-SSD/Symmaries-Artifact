@@ -1,0 +1,33 @@
+org.apache.rocketmq.remoting.protocol.RemotingCommand org.apache.rocketmq.namesrv.processor.DefaultRequestProcessor:getTopicsByCluster(io.netty.channel.ChannelHandlerContext ctx,org.apache.rocketmq.remoting.protocol.RemotingCommand request)
+{
+org.apache.rocketmq.remoting.protocol.RemotingCommand response;
+  org.apache.rocketmq.remoting.protocol.header.GetTopicsByClusterRequestHeader requestHeader;
+  boolean enableTopicList;
+  org.apache.rocketmq.remoting.protocol.body.TopicList topicsByCluster;
+  byte[] body;
+  org.apache.rocketmq.remoting.CommandCustomHeader $stack9;
+  org.apache.rocketmq.namesrv.NamesrvController $stack10;
+  org.apache.rocketmq.common.namesrv.NamesrvConfig $stack11;
+  org.apache.rocketmq.namesrv.routeinfo.RouteInfoManager $stack14;
+  java.lang.String $stack15;
+  response = org.apache.rocketmq.remoting.protocol.RemotingCommand.createResponseCommand(null);
+ $stack9 = request.decodeCommandCustomHeader(org.apache.rocketmq.remoting.protocol.header.GetTopicsByClusterRequestHeader);
+ requestHeader=(org.apache.rocketmq.remoting.protocol.header.GetTopicsByClusterRequestHeader) $stack9;
+ $stack10=this.namesrvController;
+ $stack11 = $stack10.getNamesrvConfig();
+ enableTopicList = $stack11.isEnableTopicList();
+ if (enableTopicList==0) goto label0;
+ $stack10=this.namesrvController;
+ $stack14 = $stack10.getRouteInfoManager();
+ $stack15 = requestHeader.getCluster();
+ topicsByCluster = $stack14.getTopicsByCluster($stack15);
+ body = topicsByCluster.encode();
+ response.setBody(body);
+ response.setCode(0);
+ response.setRemark(null);
+ goto label1;
+ label0:response.setCode(1);
+ response.setRemark("disable");
+ label1:return  response;
+ } 
+

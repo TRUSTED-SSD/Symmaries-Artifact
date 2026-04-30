@@ -1,0 +1,41 @@
+void org.apache.bookkeeper.stream.proto.kv.rpc.RangeResponse:writeTo(com.google.protobuf.CodedOutputStream output)
+{
+int i;
+  org.apache.bookkeeper.stream.proto.kv.rpc.ResponseHeader $stack3;
+  java.util.List $stack4;
+  int $stack5;
+  boolean $stack6;
+  long $stack7;
+  byte $stack8;
+  com.google.protobuf.UnknownFieldSet $stack9;
+  java.lang.Object $stack18;
+  com.google.protobuf.MessageLite $stack19;
+  $stack3=this.header_;
+ if ($stack3==null) goto label0;
+ $stack3 = this.getHeader();
+ $stack19=(com.google.protobuf.MessageLite) $stack3;
+ output.writeMessage(1,$stack19);
+ label0:i=0;
+ label1:$stack4=this.kvs_;
+ $stack5 = $stack4.size();
+ if (i>=$stack5) goto label2;
+ $stack4=this.kvs_;
+ $stack18 = $stack4.get(i);
+ $stack19=(com.google.protobuf.MessageLite) $stack18;
+ output.writeMessage(2,$stack19);
+ i=(i+1);
+ goto label1;
+ label2:$stack6=this.more_;
+ if ($stack6==0) goto label3;
+ $stack6=this.more_;
+ output.writeBool(3,$stack6);
+ label3:$stack7=this.count_;
+ $stack8=($stack7 cmp 0L);
+ if ($stack8==0) goto label4;
+ $stack7=this.count_;
+ output.writeInt64(4,$stack7);
+ label4:$stack9 = this.getUnknownFields();
+ $stack9.writeTo(output);
+ return;
+ } 
+

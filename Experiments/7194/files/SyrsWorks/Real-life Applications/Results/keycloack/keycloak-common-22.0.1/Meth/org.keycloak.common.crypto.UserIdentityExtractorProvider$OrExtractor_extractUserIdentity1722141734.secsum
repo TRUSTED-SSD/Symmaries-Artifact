@@ -1,0 +1,8 @@
+java.lang.Object org.keycloak.common.crypto.UserIdentityExtractorProvider$OrExtractor:extractUserIdentity (
+  java.security.cert.X509Certificate[] certs) {
+  guard = tt;
+  ret(level()) = pc ⊔ level(certs) ⊔ level(this) ⊔ obj_level(certs) ⊔ obj_level(this);
+  ret(obj_level()) = pc ⊔ level(certs) ⊔ level(this) ⊔ obj_level(certs) ⊔ obj_level(this);
+  ret(obj_level(certs)) = if obj_level(certs) = ⊤ ∨ pc ≠ ⊤ ∧ (if obj_level(this) = ⊤ then obj_level(certs) = ⊥ else obj_level(certs) = ⊥ ∧ obj_level(this) = ⊥ ∧ level(certs) ⊔ level(this) = ⊤) then ⊤ else ⊥;
+  ret(obj_level(this)) = if obj_level(this) = ⊤ ∨ pc ≠ ⊤ ∧ obj_level(this) = ⊥ ∧ level(certs) ⊔ level(this) ⊔ obj_level(certs) = ⊤ then ⊤ else ⊥;
+}

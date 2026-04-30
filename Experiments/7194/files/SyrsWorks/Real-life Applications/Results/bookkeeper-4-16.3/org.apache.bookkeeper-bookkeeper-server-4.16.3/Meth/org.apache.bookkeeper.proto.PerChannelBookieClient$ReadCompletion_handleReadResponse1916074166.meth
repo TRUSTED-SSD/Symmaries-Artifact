@@ -1,0 +1,55 @@
+void org.apache.bookkeeper.proto.PerChannelBookieClient$ReadCompletion:handleReadResponse(long ledgerId,long entryId,org.apache.bookkeeper.proto.BookkeeperProtocol$StatusCode status,io.netty.buffer.ByteBuf @buffer,long maxLAC,long lacUpdateTimestamp)
+{
+int readableBytes;
+  org.slf4j.Logger $stack14;
+  boolean $stack15;
+  byte $stack17;
+  org.apache.bookkeeper.proto.BookkeeperInternalCallbacks$ReadEntryCallback $stack19;
+  java.lang.Object $stack21;
+  org.apache.bookkeeper.proto.ReadLastConfirmedAndEntryContext $stack31;
+  org.apache.bookkeeper.proto.BookkeeperInternalCallbacks$ReadEntryCallbackCtx $stack37;
+  java.lang.Object[] $stack38;
+  java.lang.Long $stack40;
+  java.lang.Integer $stack44;
+  io.netty.buffer.ByteBuf buffer;
+buffer=@buffer;
+readableBytes = buffer.readableBytes();
+dummyClass.highSourceMut(readableBytes);
+ $stack14=org.apache.bookkeeper.proto.PerChannelBookieClient.LOG;
+ $stack15 = $stack14.isDebugEnabled();
+ if ($stack15==0) goto label0;
+ $stack38=new java.lang.Object[6];
+ $stack38[0]="ledger";
+ $stack40 = java.lang.Long.valueOf(ledgerId);
+ $stack38[1]=$stack40;
+ $stack38[2]="entry";
+ $stack40 = java.lang.Long.valueOf(entryId);
+ $stack38[3]=$stack40;
+ $stack38[4]="entryLength";
+ $stack44 = java.lang.Integer.valueOf(readableBytes);
+ $stack38[5]=$stack44;
+ this.logResponse(status,$stack38);
+ label0:readableBytes = this.convertStatus(status,-1);
+ $stack17=(maxLAC cmp -1L);
+ if ($stack17<=0) goto label1;
+ $stack21=this.ctx;
+ $stack15=$stack21 instanceof org.apache.bookkeeper.proto.BookkeeperInternalCallbacks$ReadEntryCallbackCtx;
+ if ($stack15==0) goto label1;
+ $stack21=this.ctx;
+ $stack37=(org.apache.bookkeeper.proto.BookkeeperInternalCallbacks$ReadEntryCallbackCtx) $stack21;
+ $stack37.setLastAddConfirmed(maxLAC);
+ label1:$stack17=(lacUpdateTimestamp cmp -1L);
+ if ($stack17<=0) goto label2;
+ $stack21=this.ctx;
+ $stack15=$stack21 instanceof org.apache.bookkeeper.proto.ReadLastConfirmedAndEntryContext;
+ if ($stack15==0) goto label2;
+ $stack21=this.ctx;
+ $stack31=(org.apache.bookkeeper.proto.ReadLastConfirmedAndEntryContext) $stack21;
+ $stack31.setLacUpdateTimestamp(lacUpdateTimestamp);
+ label2:$stack19=this.cb;
+ buffer = buffer.slice();
+ $stack21=this.ctx;
+ $stack19.readEntryComplete(readableBytes,ledgerId,entryId,buffer,$stack21);
+ return;
+ } 
+

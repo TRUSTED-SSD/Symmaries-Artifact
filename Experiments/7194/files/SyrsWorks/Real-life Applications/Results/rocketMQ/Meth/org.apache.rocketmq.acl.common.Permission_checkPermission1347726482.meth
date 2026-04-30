@@ -1,0 +1,25 @@
+static boolean org.apache.rocketmq.acl.common.Permission:checkPermission(byte neededPerm,byte ownedPerm)
+{
+byte $stack2;
+  boolean $stack5;
+  $stack2=(ownedPerm & 1);
+ if ($stack2<=0) goto label0;
+ return  0;
+ label0:$stack2=(neededPerm & 2);
+ if ($stack2<=0) goto label1;
+ neededPerm=(ownedPerm & 4);
+ if (neededPerm>0) goto label2;
+ neededPerm=(ownedPerm & 8);
+ if (neededPerm<=0) goto label3;
+ label2:$stack5=1;
+ goto label4;
+ label3:$stack5=0;
+ label4:return  $stack5;
+ label1:neededPerm=(neededPerm & ownedPerm);
+ if (neededPerm<=0) goto label5;
+ $stack5=1;
+ goto label6;
+ label5:$stack5=0;
+ label6:return  $stack5;
+ } 
+

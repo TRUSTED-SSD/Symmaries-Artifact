@@ -1,0 +1,43 @@
+org.apache.kerby.kerberos.kerb.type.ad.AuthorizationData org.apache.kerby.kerberos.kerb.identity.backend.AbstractIdentityBackend:doGetIdentityAuthorizationData(org.apache.kerby.kerberos.kerb.request.KdcClientRequest kdcClientRequest,org.apache.kerby.kerberos.kerb.type.ticket.EncTicketPart encTicketPart)
+{
+org.apache.kerby.kerberos.kerb.type.ad.AdToken adToken;
+  org.apache.kerby.kerberos.kerb.type.ad.AuthorizationData authzData;
+  org.apache.kerby.kerberos.kerb.type.ad.AuthorizationDataEntry authzDataEntry;
+  boolean $stack8;
+  org.apache.kerby.kerberos.kerb.type.base.KrbToken $stack9;
+  org.apache.kerby.kerberos.kerb.type.base.AuthToken $stack10;
+  org.apache.kerby.kerberos.kerb.type.base.TokenFormat $stack11;
+  byte[] $stack15;
+  org.apache.kerby.kerberos.kerb.type.ad.AuthorizationType $stack16;
+  java.util.List $stack17;
+  java.io.IOException $stack18;
+  org.apache.kerby.kerberos.kerb.KrbException $stack19;
+  $stack8 = kdcClientRequest.isToken();
+ if ($stack8==0) goto label0;
+ $stack9=new org.apache.kerby.kerberos.kerb.type.base.KrbToken;
+ $stack10 = kdcClientRequest.getToken();
+ $stack11=org.apache.kerby.kerberos.kerb.type.base.TokenFormat.JWT;
+ $stack9#org.apache.kerby.kerberos.kerb.type.base.KrbToken($stack10,$stack11);
+ adToken=new org.apache.kerby.kerberos.kerb.type.ad.AdToken;
+ adToken#org.apache.kerby.kerberos.kerb.type.ad.AdToken();
+ adToken.setToken($stack9);
+ authzData=new org.apache.kerby.kerberos.kerb.type.ad.AuthorizationData;
+ authzData#org.apache.kerby.kerberos.kerb.type.ad.AuthorizationData();
+ authzDataEntry=new org.apache.kerby.kerberos.kerb.type.ad.AuthorizationDataEntry;
+ authzDataEntry#org.apache.kerby.kerberos.kerb.type.ad.AuthorizationDataEntry();
+ label1:$stack15 = adToken.encode();
+ authzDataEntry.setAuthzData($stack15);
+ label2:goto label3;
+ label4:$stack18 = catch;
+ $stack19=new org.apache.kerby.kerberos.kerb.KrbException;
+ $stack19#org.apache.kerby.kerberos.kerb.KrbException("Error encoding AdToken",(java.lang.Throwable)$stack18);
+ throw $stack19;
+ label3:$stack16=org.apache.kerby.kerberos.kerb.type.ad.AuthorizationType.AD_TOKEN;
+ authzDataEntry.setAuthzType($stack16);
+ $stack17 = java.util.Collections.singletonList((java.lang.Object)authzDataEntry);
+ authzData.setElements($stack17);
+ return  authzData;
+ label0:return  null;
+ catch java.io.IOException: label1 - label2 : label4;
+} 
+

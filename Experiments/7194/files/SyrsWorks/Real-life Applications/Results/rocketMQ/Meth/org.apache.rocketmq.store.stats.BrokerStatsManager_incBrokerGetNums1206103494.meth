@@ -1,0 +1,21 @@
+void org.apache.rocketmq.store.stats.BrokerStatsManager:incBrokerGetNums(java.lang.String topic,int incValue)
+{
+java.util.HashMap $stack3;
+  java.lang.Object $stack4;
+  java.lang.String $stack5;
+  org.apache.rocketmq.common.stats.StatsItemSet $stack6;
+  org.apache.rocketmq.common.stats.StatsItem $stack7;
+  java.util.concurrent.atomic.LongAdder $stack8;
+  long $stack9;
+  $stack3=this.statsTable;
+ $stack4 = $stack3.get((java.lang.Object)"BROKER_GET_NUMS");
+ $stack6=(org.apache.rocketmq.common.stats.StatsItemSet) $stack4;
+ $stack5=this.clusterName;
+ $stack7 = $stack6.getAndCreateStatsItem($stack5);
+ $stack8 = $stack7.getValue();
+ $stack9=(long) incValue;
+ $stack8.add($stack9);
+ this.incBrokerGetNumsWithoutSystemTopic(topic,incValue);
+ return;
+ } 
+

@@ -1,0 +1,42 @@
+static java.lang.String org.xerial.snappy.Snappy:getNativeLibraryVersion()
+{
+java.net.URL l0;
+  java.lang.String l1;
+  java.io.InputStream l2;
+  java.util.Properties l3;
+  java.lang.Throwable l4;
+  java.lang.Class $stack5;
+  boolean $stack10;
+  java.lang.String $stack11;
+  java.io.IOException $stack18;
+  $stack5=org.xerial.snappy.SnappyLoader;
+ l0 = $stack5.getResource("/org/xerial/snappy/VERSION");
+ l1="unknown";
+ label0:if (l0==null) goto label1;
+ l2=null;
+ label2:l3=new java.util.Properties;
+ l3#java.util.Properties();
+ l2 = l0.openStream();
+ l3.load(l2);
+ l1 = l3.getProperty("version","unknown");
+ $stack10 = l1.equals((java.lang.Object)"unknown");
+ if ($stack10==0) goto label3;
+ l1 = l3.getProperty("SNAPPY_VERSION",l1);
+ label3:$stack11 = l1.trim();
+ l1 = $stack11.replaceAll("[^0-9\\.]","");
+ label4:if (l2==null) goto label1;
+ l2.close();
+ goto label1;
+ label5:l4 = catch;
+ label6:if (l2==null) goto label7;
+ l2.close();
+ label7:throw l4;
+ label1:goto label8;
+ label9:$stack18 = catch;
+ $stack18.printStackTrace();
+ label8:return  l1;
+ catch java.lang.Throwable: label2 - label4 : label5;
+catch java.lang.Throwable: label5 - label6 : label5;
+catch java.io.IOException: label0 - label1 : label9;
+} 
+

@@ -1,0 +1,32 @@
+static org.apache.rocketmq.common.message.Message org.apache.rocketmq.client.utils.MessageUtil:createReplyMessage(org.apache.rocketmq.common.message.Message requestMessage,byte[] body)
+{
+org.apache.rocketmq.common.message.Message replyMessage;
+  java.lang.String cluster;
+  java.lang.String replyTo;
+  java.lang.String correlationId;
+  java.lang.String ttl;
+  org.apache.rocketmq.client.exception.MQClientException $stack8;
+  if (requestMessage==null) goto label0;
+ replyMessage=new org.apache.rocketmq.common.message.Message;
+ replyMessage#org.apache.rocketmq.common.message.Message();
+ cluster = requestMessage.getProperty("CLUSTER");
+ replyTo = requestMessage.getProperty("REPLY_TO_CLIENT");
+ correlationId = requestMessage.getProperty("CORRELATION_ID");
+ ttl = requestMessage.getProperty("TTL");
+ replyMessage.setBody(body);
+ if (cluster==null) goto label1;
+ cluster = org.apache.rocketmq.common.MixAll.getReplyTopic(cluster);
+ replyMessage.setTopic(cluster);
+ org.apache.rocketmq.common.message.MessageAccessor.putProperty(replyMessage,"MSG_TYPE","reply");
+ org.apache.rocketmq.common.message.MessageAccessor.putProperty(replyMessage,"CORRELATION_ID",correlationId);
+ org.apache.rocketmq.common.message.MessageAccessor.putProperty(replyMessage,"REPLY_TO_CLIENT",replyTo);
+ org.apache.rocketmq.common.message.MessageAccessor.putProperty(replyMessage,"TTL",ttl);
+ return  replyMessage;
+ label1:$stack8=new org.apache.rocketmq.client.exception.MQClientException;
+ $stack8#org.apache.rocketmq.client.exception.MQClientException(10007,"create reply message fail, requestMessage error, property[CLUSTER] is null.");
+ throw $stack8;
+ label0:$stack8=new org.apache.rocketmq.client.exception.MQClientException;
+ $stack8#org.apache.rocketmq.client.exception.MQClientException(10007,"create reply message fail, requestMessage cannot be null.");
+ throw $stack8;
+ } 
+

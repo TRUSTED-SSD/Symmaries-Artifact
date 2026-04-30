@@ -1,0 +1,23 @@
+boolean org.apache.rocketmq.tieredstore.common.InflightRequestFuture:isAllDone()
+{
+java.util.Iterator l1;
+  org.apache.commons.lang3.tuple.Pair pair;
+  java.util.List $stack3;
+  boolean $stack5;
+  java.lang.Object $stack6;
+  java.util.concurrent.CompletableFuture $stack8;
+  $stack3=this.futureList;
+ l1 = $stack3.iterator();
+ label0:$stack5 = l1.hasNext();
+ if ($stack5==0) goto label1;
+ $stack6 = l1.next();
+ pair=(org.apache.commons.lang3.tuple.Pair) $stack6;
+ $stack6 = pair.getRight();
+ $stack8=(java.util.concurrent.CompletableFuture) $stack6;
+ $stack5 = $stack8.isDone();
+ if ($stack5!=0) goto label2;
+ return  0;
+ label2:goto label0;
+ label1:return  1;
+ } 
+

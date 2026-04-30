@@ -1,0 +1,28 @@
+org.apache.bookkeeper.client.EnsemblePlacementPolicy org.apache.bookkeeper.bookie.LocalBookieEnsemblePlacementPolicy:initialize(org.apache.bookkeeper.conf.ClientConfiguration conf,java.util.Optional optionalDnsResolver,io.netty.util.HashedWheelTimer hashedWheelTimer,org.apache.bookkeeper.feature.FeatureProvider featureProvider,org.apache.bookkeeper.stats.StatsLogger statsLogger,org.apache.bookkeeper.proto.BookieAddressResolver bookieAddressResolver)
+{
+org.apache.bookkeeper.conf.ServerConfiguration serverConf;
+  java.net.UnknownHostException e;
+  org.apache.bookkeeper.net.BookieId $stack10;
+  org.slf4j.Logger $stack12;
+  org.apache.bookkeeper.conf.ServerConfiguration tmp$21590124;
+  java.lang.RuntimeException tmp$1172888147;
+  org.apache.commons.configuration.Configuration tmp$1684086550;
+  tmp$21590124=new org.apache.bookkeeper.conf.ServerConfiguration;
+ serverConf=tmp$21590124;
+ tmp$21590124#org.apache.bookkeeper.conf.ServerConfiguration();
+ serverConf=tmp$21590124;
+ tmp$1684086550=(org.apache.commons.configuration.Configuration) conf;
+ tmp$21590124.addConfiguration(tmp$1684086550);
+ label0:$stack10 = org.apache.bookkeeper.bookie.BookieImpl.getBookieId(tmp$21590124);
+ this.bookieAddress=$stack10;
+ label1:goto label2;
+ label3:e = catch;
+ $stack12=org.apache.bookkeeper.bookie.LocalBookieEnsemblePlacementPolicy.LOG;
+ $stack12.warn("Unable to get bookie address",(java.lang.Throwable)e);
+ tmp$1172888147=new java.lang.RuntimeException;
+ tmp$1172888147#java.lang.RuntimeException((java.lang.Throwable)e);
+ throw tmp$1172888147;
+ label2:return  this;
+ catch java.net.UnknownHostException: label0 - label1 : label3;
+} 
+

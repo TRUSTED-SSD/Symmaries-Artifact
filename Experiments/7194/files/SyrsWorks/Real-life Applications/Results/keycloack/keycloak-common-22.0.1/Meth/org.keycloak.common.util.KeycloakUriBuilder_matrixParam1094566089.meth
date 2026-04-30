@@ -1,0 +1,45 @@
+org.keycloak.common.util.KeycloakUriBuilder org.keycloak.common.util.KeycloakUriBuilder:matrixParam(java.lang.String name,java.lang.Object[] values)
+{
+int l4;
+  int l5;
+  java.lang.Object val;
+  java.lang.String $stack7;
+  java.lang.StringBuilder $stack8;
+  java.lang.IllegalArgumentException $stack21;
+  if (name!=null) goto label0;
+ $stack21=new java.lang.IllegalArgumentException;
+ $stack21#java.lang.IllegalArgumentException("name parameter is null");
+ throw $stack21;
+ label0:if (values!=null) goto label1;
+ $stack21=new java.lang.IllegalArgumentException;
+ $stack21#java.lang.IllegalArgumentException("values parameter is null");
+ throw $stack21;
+ label1:$stack7=this.path;
+ if ($stack7!=null) goto label2;
+ this.path="";
+ label2:l4=#values;
+ l5=0;
+ label3:if (l5>=l4) goto label4;
+ val=values[l5];
+ if (val!=null) goto label5;
+ $stack21=new java.lang.IllegalArgumentException;
+ $stack21#java.lang.IllegalArgumentException("null value");
+ throw $stack21;
+ label5:$stack8=new java.lang.StringBuilder;
+ $stack8#java.lang.StringBuilder();
+ $stack7=this.path;
+ $stack8 = $stack8.append($stack7);
+ $stack8 = $stack8.append(";");
+ $stack7 = org.keycloak.common.util.Encode.encodeMatrixParam(name);
+ $stack8 = $stack8.append($stack7);
+ $stack8 = $stack8.append("=");
+ $stack7 = val.toString();
+ $stack7 = org.keycloak.common.util.Encode.encodeMatrixParam($stack7);
+ $stack8 = $stack8.append($stack7);
+ $stack7 = $stack8.toString();
+ this.path=$stack7;
+ l5=(l5+1);
+ goto label3;
+ label4:return  this;
+ } 
+

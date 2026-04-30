@@ -1,0 +1,24 @@
+int org.apache.rocketmq.store.ha.FlowMonitor:canTransferMaxByteNum()
+{
+long res;
+  boolean $stack3;
+  java.util.concurrent.atomic.AtomicLong $stack5;
+  long $stack6;
+  byte $stack9;
+  int $stack10;
+  $stack3 = this.isFlowControlEnable();
+ if ($stack3==0) goto label0;
+ res = this.maxTransferByteInSecond();
+ $stack5=this.transferredByte;
+ $stack6 = $stack5.get();
+ res=(res-$stack6);
+ res = java.lang.Math.max(res,0L);
+ $stack9=(res cmp 2147483647L);
+ if ($stack9<=0) goto label1;
+ $stack10=2147483647;
+ goto label2;
+ label1:$stack10=(int) res;
+ label2:return  $stack10;
+ label0:return  2147483647;
+ } 
+

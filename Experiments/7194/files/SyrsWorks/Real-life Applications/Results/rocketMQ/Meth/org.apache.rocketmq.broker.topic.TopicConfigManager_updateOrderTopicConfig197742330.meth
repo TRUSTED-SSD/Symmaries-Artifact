@@ -1,0 +1,55 @@
+void org.apache.rocketmq.broker.topic.TopicConfigManager:updateOrderTopicConfig(org.apache.rocketmq.remoting.protocol.body.KVTable orderKVTableFromNs)
+{
+boolean isChange;
+  java.util.Set orderTopics;
+  java.util.Iterator stateMachineVersion;
+  java.lang.String topic;
+  org.apache.rocketmq.common.TopicConfig topicConfig;
+  java.util.HashMap $stack7;
+  boolean $stack11;
+  org.apache.rocketmq.broker.BrokerController $stack12;
+  org.apache.rocketmq.store.MessageStore $stack13;
+  org.apache.rocketmq.remoting.protocol.DataVersion $stack14;
+  long $stack17;
+  java.lang.Object $stack21;
+  java.util.concurrent.ConcurrentMap $stack22;
+  org.apache.rocketmq.logging.org.slf4j.Logger $stack26;
+  java.lang.Boolean $stack28;
+  if (orderKVTableFromNs==null) goto label0;
+ $stack7 = orderKVTableFromNs.getTable();
+ if ($stack7==null) goto label0;
+ isChange=0;
+ $stack7 = orderKVTableFromNs.getTable();
+ orderTopics = $stack7.keySet();
+ stateMachineVersion = orderTopics.iterator();
+ label1:$stack11 = stateMachineVersion.hasNext();
+ if ($stack11==0) goto label2;
+ $stack21 = stateMachineVersion.next();
+ topic=(java.lang.String) $stack21;
+ $stack22=this.topicConfigTable;
+ $stack21 = $stack22.get((java.lang.Object)topic);
+ topicConfig=(org.apache.rocketmq.common.TopicConfig) $stack21;
+ if (topicConfig==null) goto label3;
+ $stack11 = topicConfig.isOrder();
+ if ($stack11!=0) goto label3;
+ topicConfig.setOrder((boolean)1);
+ isChange=1;
+ $stack26=org.apache.rocketmq.broker.topic.TopicConfigManager.log;
+ $stack28 = java.lang.Boolean.valueOf((boolean)1);
+ $stack26.info("update order topic config, topic={}, order={}",(java.lang.Object)topic,(java.lang.Object)$stack28);
+ label3:goto label1;
+ label2:if (isChange==0) goto label0;
+ $stack12=this.brokerController;
+ $stack13 = $stack12.getMessageStore();
+ if ($stack13==null) goto label4;
+ $stack12=this.brokerController;
+ $stack13 = $stack12.getMessageStore();
+ $stack17 = $stack13.getStateMachineVersion();
+ goto label5;
+ label4:$stack17=0L;
+ label5:$stack14=this.dataVersion;
+ $stack14.nextVersion($stack17);
+ this.persist();
+ label0:return;
+ } 
+

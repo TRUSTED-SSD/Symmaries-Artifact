@@ -1,0 +1,35 @@
+org.apache.rocketmq.common.message.MessageExt io.openmessaging.rocketmq.consumer.LocalMessageCache:poll(long timeout)
+{
+java.lang.Object consumeRequest;
+  org.apache.rocketmq.common.message.MessageExt messageExt;
+  java.util.concurrent.TimeUnit $stack5;
+  java.util.concurrent.BlockingQueue $stack6;
+  java.lang.String $stack11;
+  java.util.Map $stack12;
+  java.lang.InterruptedException $stack15;
+  io.openmessaging.rocketmq.domain.ConsumeRequest tmp$716588431;
+  label0:$stack6=this.consumeRequestCache;
+ $stack5=java.util.concurrent.TimeUnit.MILLISECONDS;
+ consumeRequest = $stack6.poll(timeout,$stack5);
+ consumeRequest=(io.openmessaging.rocketmq.domain.ConsumeRequest) consumeRequest;
+ if (consumeRequest==null) goto label1;
+ tmp$716588431=(io.openmessaging.rocketmq.domain.ConsumeRequest) consumeRequest;
+ messageExt = tmp$716588431.getMessageExt();
+ timeout = java.lang.System.currentTimeMillis();
+ tmp$716588431=(io.openmessaging.rocketmq.domain.ConsumeRequest) consumeRequest;
+ tmp$716588431.setStartConsumeTimeMillis(timeout);
+ tmp$716588431=(io.openmessaging.rocketmq.domain.ConsumeRequest) consumeRequest;
+ timeout = tmp$716588431.getStartConsumeTimeMillis();
+ $stack11 = java.lang.String.valueOf(timeout);
+ org.apache.rocketmq.common.message.MessageAccessor.setConsumeStartTimeStamp((org.apache.rocketmq.common.message.Message)messageExt,$stack11);
+ $stack12=this.consumedRequest;
+ $stack11 = messageExt.getMsgId();
+ $stack12.put((java.lang.Object)$stack11,consumeRequest);
+ label2:return  messageExt;
+ label1:goto label3;
+ label4:$stack15 = catch;
+ consumeRequest=$stack15;
+ label3:return  null;
+ catch java.lang.InterruptedException: label0 - label2 : label4;
+} 
+

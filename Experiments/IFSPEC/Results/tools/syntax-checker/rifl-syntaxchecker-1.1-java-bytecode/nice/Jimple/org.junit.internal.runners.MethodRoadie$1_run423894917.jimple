@@ -1,0 +1,106 @@
+    public void run()
+    {
+        org.junit.internal.runners.MethodRoadie$1 this;
+        java.util.concurrent.ExecutorService service;
+        java.util.concurrent.Future result;
+        boolean terminated;
+        java.util.concurrent.TimeUnit $stack8;
+        long $stack9;
+        java.lang.Exception $stack16;
+        org.junit.internal.runners.MethodRoadie $stack17;
+        java.util.concurrent.TimeoutException $stack18;
+        org.junit.internal.runners.MethodRoadie$1$1 tmp$824907831;
+        org.junit.runners.model.TestTimedOutException tmp$249781375;
+
+        this := @this: org.junit.internal.runners.MethodRoadie$1;
+
+        service = staticinvoke <java.util.concurrent.Executors: java.util.concurrent.ExecutorService newSingleThreadExecutor()>();
+/*61*/
+/*61*/
+
+        tmp$824907831 = new org.junit.internal.runners.MethodRoadie$1$1;
+/*62*/
+
+        specialinvoke tmp$824907831.<org.junit.internal.runners.MethodRoadie$1$1: void <init>(org.junit.internal.runners.MethodRoadie$1)>(this);
+/*62*/
+
+        result = interfaceinvoke service.<java.util.concurrent.ExecutorService: java.util.concurrent.Future submit(java.util.concurrent.Callable)>(tmp$824907831);
+/*68*/
+/*68*/
+
+        interfaceinvoke service.<java.util.concurrent.ExecutorService: void shutdown()>();
+/*69*/
+
+     label1:
+        $stack9 = this.<org.junit.internal.runners.MethodRoadie$1: long val$timeout>;
+/*71*/
+
+        $stack8 = <java.util.concurrent.TimeUnit: java.util.concurrent.TimeUnit MILLISECONDS>;
+/*71*/
+
+        terminated = interfaceinvoke service.<java.util.concurrent.ExecutorService: boolean awaitTermination(long,java.util.concurrent.TimeUnit)>($stack9, $stack8);
+/*71*/
+/*71*/
+
+        if terminated != 0 goto label2;
+/*73*/
+
+        interfaceinvoke service.<java.util.concurrent.ExecutorService: java.util.List shutdownNow()>();
+/*74*/
+
+     label2:
+        $stack8 = <java.util.concurrent.TimeUnit: java.util.concurrent.TimeUnit MILLISECONDS>;
+/*76*/
+
+        interfaceinvoke result.<java.util.concurrent.Future: java.lang.Object get(long,java.util.concurrent.TimeUnit)>(0L, $stack8);
+/*76*/
+
+     label3:
+        goto label6;
+/*81*/
+
+     label4:
+        $stack18 := @caughtexception;
+/*82*/
+
+        terminated = (boolean) $stack18;
+
+        $stack17 = this.<org.junit.internal.runners.MethodRoadie$1: org.junit.internal.runners.MethodRoadie this$0>;
+/*78*/
+
+        tmp$249781375 = new org.junit.runners.model.TestTimedOutException;
+/*78*/
+
+        $stack9 = this.<org.junit.internal.runners.MethodRoadie$1: long val$timeout>;
+/*78*/
+
+        $stack8 = <java.util.concurrent.TimeUnit: java.util.concurrent.TimeUnit MILLISECONDS>;
+/*78*/
+
+        specialinvoke tmp$249781375.<org.junit.runners.model.TestTimedOutException: void <init>(long,java.util.concurrent.TimeUnit)>($stack9, $stack8);
+/*78*/
+
+        virtualinvoke $stack17.<org.junit.internal.runners.MethodRoadie: void addFailure(java.lang.Throwable)>(tmp$249781375);
+/*78*/
+
+        goto label6;
+/*81*/
+
+     label5:
+        $stack16 := @caughtexception;
+/*81*/
+
+        $stack17 = this.<org.junit.internal.runners.MethodRoadie$1: org.junit.internal.runners.MethodRoadie this$0>;
+/*80*/
+
+        virtualinvoke $stack17.<org.junit.internal.runners.MethodRoadie: void addFailure(java.lang.Throwable)>($stack16);
+/*80*/
+
+     label6:
+        return;
+/*82*/
+
+        catch java.util.concurrent.TimeoutException from label1 to label3 with label4;
+        catch java.lang.Exception from label1 to label3 with label5;
+    }
+

@@ -1,0 +1,19 @@
+java.lang.String org.apache.rocketmq.srvutil.AclFileWatchService:hash(java.lang.String @filePath)
+{
+java.nio.file.Path path;
+  byte[] hash;
+  java.lang.String[] $stack4;
+  java.security.MessageDigest $stack6;
+  java.lang.String filePath;
+filePath=@filePath;
+$stack4=new java.lang.String[0];
+ path = java.nio.file.Paths.get(filePath,$stack4);
+ $stack6=this.md;
+ hash = java.nio.file.Files.readAllBytes(path);
+ $stack6.update(hash);
+ $stack6=this.md;
+ hash = $stack6.digest();
+ filePath = org.apache.rocketmq.common.UtilAll.bytes2string(hash);
+ return  filePath;
+ } 
+

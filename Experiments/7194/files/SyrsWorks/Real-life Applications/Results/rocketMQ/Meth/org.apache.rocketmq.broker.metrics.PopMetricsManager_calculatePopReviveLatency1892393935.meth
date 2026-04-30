@@ -1,0 +1,30 @@
+static void org.apache.rocketmq.broker.metrics.PopMetricsManager:calculatePopReviveLatency(org.apache.rocketmq.broker.BrokerController brokerController,io.opentelemetry.api.metrics.ObservableLongMeasurement measurement)
+{
+org.apache.rocketmq.broker.processor.PopReviveService[] l3;
+  int l4;
+  int l5;
+  org.apache.rocketmq.broker.processor.PopReviveService popReviveService;
+  org.apache.rocketmq.broker.processor.AckMessageProcessor $stack7;
+  long $stack9;
+  io.opentelemetry.api.common.AttributesBuilder $stack10;
+  int $stack12;
+  long $stack13;
+  io.opentelemetry.api.common.Attributes $stack15;
+  $stack7 = brokerController.getAckMessageProcessor();
+ l3 = $stack7.getPopReviveServices();
+ l4=#l3;
+ l5=0;
+ label0:if (l5>=l4) goto label1;
+ popReviveService=l3[l5];
+ $stack9 = popReviveService.getReviveBehindMillis();
+ $stack10 = org.apache.rocketmq.broker.metrics.PopMetricsManager.newAttributesBuilder();
+ $stack12 = popReviveService.getQueueId();
+ $stack13=(long) $stack12;
+ $stack10 = $stack10.put("queue_id",$stack13);
+ $stack15 = $stack10.build();
+ measurement.record($stack9,$stack15);
+ l5=(l5+1);
+ goto label0;
+ label1:return;
+ } 
+

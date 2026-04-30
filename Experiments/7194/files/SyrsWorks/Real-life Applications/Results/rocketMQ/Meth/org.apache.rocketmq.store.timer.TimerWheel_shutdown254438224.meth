@@ -1,0 +1,23 @@
+void org.apache.rocketmq.store.timer.TimerWheel:shutdown(boolean flush)
+{
+java.nio.MappedByteBuffer $stack3;
+  java.nio.ByteBuffer $stack4;
+  java.nio.channels.FileChannel $stack5;
+  java.io.IOException $stack9;
+  org.apache.rocketmq.logging.org.slf4j.Logger $stack10;
+  if (flush==0) goto label0;
+ this.flush();
+ label0:$stack3=this.mappedByteBuffer;
+ org.apache.rocketmq.common.UtilAll.cleanBuffer((java.nio.ByteBuffer)$stack3);
+ $stack4=this.byteBuffer;
+ org.apache.rocketmq.common.UtilAll.cleanBuffer($stack4);
+ label1:$stack5=this.fileChannel;
+ $stack5.close();
+ label2:goto label3;
+ label4:$stack9 = catch;
+ $stack10=org.apache.rocketmq.store.timer.TimerWheel.log;
+ $stack10.error("Shutdown error in timer wheel",(java.lang.Throwable)$stack9);
+ label3:return;
+ catch java.io.IOException: label1 - label2 : label4;
+} 
+

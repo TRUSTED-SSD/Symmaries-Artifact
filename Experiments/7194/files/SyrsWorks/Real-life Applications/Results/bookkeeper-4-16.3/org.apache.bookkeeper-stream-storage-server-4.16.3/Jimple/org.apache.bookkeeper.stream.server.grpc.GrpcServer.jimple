@@ -1,0 +1,190 @@
+    public void <init>(org.apache.bookkeeper.stream.storage.api.StorageContainerStore, org.apache.bookkeeper.stream.server.conf.StorageServerConfiguration, org.apache.bookkeeper.stream.proto.common.Endpoint, java.lang.String, io.grpc.HandlerRegistry, org.apache.bookkeeper.stats.StatsLogger)
+    {
+        org.apache.bookkeeper.stream.server.grpc.GrpcServer this;
+        org.apache.bookkeeper.stream.storage.api.StorageContainerStore storageContainerStore;
+        org.apache.bookkeeper.stream.server.conf.StorageServerConfiguration conf;
+        org.apache.bookkeeper.stream.proto.common.Endpoint myEndpoint;
+        java.lang.String localServerName;
+        io.grpc.HandlerRegistry localHandlerRegistry;
+        org.apache.bookkeeper.stats.StatsLogger statsLogger;
+        java.lang.Object serverBuilder, locationService, $stack29;
+        org.apache.bookkeeper.common.grpc.proxy.ProxyHandlerRegistry$Builder proxyRegistryBuilder;
+        io.grpc.ServerServiceDefinition definition;
+        java.util.Collection $stack16;
+        boolean $stack18;
+        java.lang.Object[] $stack20;
+        int $stack23;
+        io.grpc.ServerBuilder $stack24;
+        org.apache.bookkeeper.common.grpc.proxy.ProxyHandlerRegistry $stack26;
+        io.grpc.Server $stack28;
+        io.grpc.inprocess.InProcessServerBuilder $stack34;
+        org.apache.bookkeeper.stream.server.grpc.GrpcStorageContainerService tmp$1200756048;
+        java.util.Iterator tmp$24349012;
+        io.grpc.ServerInterceptor[] tmp$988926269;
+        io.grpc.BindableService tmp$745219010;
+
+        this := @this: org.apache.bookkeeper.stream.server.grpc.GrpcServer;
+
+        storageContainerStore := @parameter0: org.apache.bookkeeper.stream.storage.api.StorageContainerStore;
+
+        conf := @parameter1: org.apache.bookkeeper.stream.server.conf.StorageServerConfiguration;
+
+        myEndpoint := @parameter2: org.apache.bookkeeper.stream.proto.common.Endpoint;
+
+        localServerName := @parameter3: java.lang.String;
+
+        localHandlerRegistry := @parameter4: io.grpc.HandlerRegistry;
+
+        statsLogger := @parameter5: org.apache.bookkeeper.stats.StatsLogger;
+
+        specialinvoke this.<org.apache.bookkeeper.common.component.AbstractLifecycleComponent: void <init>(java.lang.String,org.apache.bookkeeper.common.conf.ComponentConfiguration,org.apache.bookkeeper.stats.StatsLogger)>("range-grpc-server", conf, statsLogger);
+/*69*/
+
+        this.<org.apache.bookkeeper.stream.server.grpc.GrpcServer: org.apache.bookkeeper.stream.proto.common.Endpoint myEndpoint> = myEndpoint;
+/*70*/
+
+        if null == localServerName goto label2;
+/*71*/
+
+        $stack34 = staticinvoke <io.grpc.inprocess.InProcessServerBuilder: io.grpc.inprocess.InProcessServerBuilder forName(java.lang.String)>(localServerName);
+/*73*/
+
+        $stack24 = virtualinvoke $stack34.<io.grpc.inprocess.InProcessServerBuilder: io.grpc.ServerBuilder directExecutor()>();
+/*74*/
+
+        serverBuilder = (io.grpc.inprocess.InProcessServerBuilder) $stack24;
+/*74*/
+
+        if null == localHandlerRegistry goto label1;
+/*75*/
+
+        $stack34 = (io.grpc.inprocess.InProcessServerBuilder) serverBuilder;
+
+        $stack24 = virtualinvoke $stack34.<io.grpc.inprocess.InProcessServerBuilder: io.grpc.ServerBuilder fallbackHandlerRegistry(io.grpc.HandlerRegistry)>(localHandlerRegistry);
+/*76*/
+
+        serverBuilder = (io.grpc.inprocess.InProcessServerBuilder) $stack24;
+/*76*/
+
+     label1:
+        $stack34 = (io.grpc.inprocess.InProcessServerBuilder) serverBuilder;
+
+        $stack28 = virtualinvoke $stack34.<io.grpc.inprocess.InProcessServerBuilder: io.grpc.Server build()>();
+/*78*/
+
+        this.<org.apache.bookkeeper.stream.server.grpc.GrpcServer: io.grpc.Server grpcServer> = $stack28;
+/*78*/
+
+        goto label5;
+/*79*/
+
+     label2:
+        statsLogger = interfaceinvoke statsLogger.<org.apache.bookkeeper.stats.StatsLogger: org.apache.bookkeeper.stats.StatsLogger scope(java.lang.String)>("services");
+/*81*/
+
+        serverBuilder = staticinvoke <org.apache.bookkeeper.common.grpc.stats.MonitoringServerInterceptor: org.apache.bookkeeper.common.grpc.stats.MonitoringServerInterceptor create(org.apache.bookkeeper.stats.StatsLogger,boolean)>(statsLogger, 1);
+/*81*/
+/*81*/
+
+        proxyRegistryBuilder = staticinvoke <org.apache.bookkeeper.common.grpc.proxy.ProxyHandlerRegistry: org.apache.bookkeeper.common.grpc.proxy.ProxyHandlerRegistry$Builder newBuilder()>();
+/*82*/
+
+        proxyRegistryBuilder = virtualinvoke proxyRegistryBuilder.<org.apache.bookkeeper.common.grpc.proxy.ProxyHandlerRegistry$Builder: org.apache.bookkeeper.common.grpc.proxy.ProxyHandlerRegistry$Builder setChannelFinder(org.apache.bookkeeper.common.grpc.proxy.ChannelFinder)>(storageContainerStore);
+/*83*/
+/*83*/
+
+        $stack16 = staticinvoke <org.apache.bookkeeper.stream.storage.impl.grpc.GrpcServices: java.util.Collection create(org.apache.bookkeeper.stream.storage.api.metadata.RangeStoreService)>(null);
+/*84*/
+
+        locationService = interfaceinvoke $stack16.<java.util.Collection: java.util.Iterator iterator()>();
+/*84*/
+/*84*/
+
+     label3:
+        tmp$24349012 = (java.util.Iterator) locationService;
+
+        $stack18 = interfaceinvoke tmp$24349012.<java.util.Iterator: boolean hasNext()>();
+/*84*/
+
+        if $stack18 == 0 goto label4;
+/*84*/
+
+        tmp$24349012 = (java.util.Iterator) locationService;
+
+        $stack29 = interfaceinvoke tmp$24349012.<java.util.Iterator: java.lang.Object next()>();
+/*100*/
+
+        definition = (io.grpc.ServerServiceDefinition) $stack29;
+/*100*/
+
+        $stack20 = newarray (io.grpc.ServerInterceptor)[1];
+/*85*/
+
+        $stack20[0] = serverBuilder;
+/*85*/
+
+        tmp$988926269 = (io.grpc.ServerInterceptor[]) $stack20;
+
+        definition = staticinvoke <io.grpc.ServerInterceptors: io.grpc.ServerServiceDefinition intercept(io.grpc.ServerServiceDefinition,io.grpc.ServerInterceptor[])>(definition, tmp$988926269);
+/*85*/
+/*85*/
+
+        proxyRegistryBuilder = virtualinvoke proxyRegistryBuilder.<org.apache.bookkeeper.common.grpc.proxy.ProxyHandlerRegistry$Builder: org.apache.bookkeeper.common.grpc.proxy.ProxyHandlerRegistry$Builder addService(io.grpc.ServerServiceDefinition)>(definition);
+/*89*/
+/*89*/
+
+        goto label3;
+/*90*/
+
+     label4:
+        tmp$1200756048 = new org.apache.bookkeeper.stream.server.grpc.GrpcStorageContainerService;
+/*91*/
+
+        specialinvoke tmp$1200756048.<org.apache.bookkeeper.stream.server.grpc.GrpcStorageContainerService: void <init>(org.apache.bookkeeper.stream.storage.api.StorageContainerStore)>(storageContainerStore);
+/*91*/
+
+        $stack20 = newarray (io.grpc.ServerInterceptor)[1];
+/*91*/
+
+        $stack20[0] = serverBuilder;
+/*91*/
+
+        tmp$745219010 = (io.grpc.BindableService) tmp$1200756048;
+
+        tmp$988926269 = (io.grpc.ServerInterceptor[]) $stack20;
+
+        locationService = staticinvoke <io.grpc.ServerInterceptors: io.grpc.ServerServiceDefinition intercept(io.grpc.BindableService,io.grpc.ServerInterceptor[])>(tmp$745219010, tmp$988926269);
+/*91*/
+/*91*/
+
+        myEndpoint = this.<org.apache.bookkeeper.stream.server.grpc.GrpcServer: org.apache.bookkeeper.stream.proto.common.Endpoint myEndpoint>;
+/*95*/
+
+        $stack23 = virtualinvoke myEndpoint.<org.apache.bookkeeper.stream.proto.common.Endpoint: int getPort()>();
+/*95*/
+
+        $stack24 = staticinvoke <io.grpc.ServerBuilder: io.grpc.ServerBuilder forPort(int)>($stack23);
+/*95*/
+
+        definition = (io.grpc.ServerServiceDefinition) locationService;
+
+        $stack24 = virtualinvoke $stack24.<io.grpc.ServerBuilder: io.grpc.ServerBuilder addService(io.grpc.ServerServiceDefinition)>(definition);
+/*96*/
+
+        $stack26 = virtualinvoke proxyRegistryBuilder.<org.apache.bookkeeper.common.grpc.proxy.ProxyHandlerRegistry$Builder: org.apache.bookkeeper.common.grpc.proxy.ProxyHandlerRegistry build()>();
+/*97*/
+
+        $stack24 = virtualinvoke $stack24.<io.grpc.ServerBuilder: io.grpc.ServerBuilder fallbackHandlerRegistry(io.grpc.HandlerRegistry)>($stack26);
+/*97*/
+
+        $stack28 = virtualinvoke $stack24.<io.grpc.ServerBuilder: io.grpc.Server build()>();
+/*98*/
+
+        this.<org.apache.bookkeeper.stream.server.grpc.GrpcServer: io.grpc.Server grpcServer> = $stack28;
+/*98*/
+
+     label5:
+        return;
+/*100*/
+    }
+

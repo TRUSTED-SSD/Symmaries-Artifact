@@ -1,0 +1,36 @@
+static void com.google.zxing.pdf417.encoder.PDF417:encodeChar(int pattern,int len,com.google.zxing.pdf417.encoder.BarcodeRow logic)
+{
+int map;
+  boolean last;
+  int width;
+  int i;
+  boolean black;
+  int $stack10;
+  map=(len-1);
+ map=(1<<map);
+ width=(pattern & map);
+ if (width==0) goto label0;
+ last=1;
+ goto label1;
+ label0:last=0;
+ label1:width=0;
+ i=0;
+ label2:if (i>=len) goto label3;
+ $stack10=(pattern & map);
+ if ($stack10==0) goto label4;
+ black=1;
+ goto label5;
+ label4:black=0;
+ label5:if (last!=black) goto label6;
+ width=(width+1);
+ goto label7;
+ label6:logic.addBar(last,width);
+ last=black;
+ width=1;
+ label7:map=(map>>1);
+ i=(i+1);
+ goto label2;
+ label3:logic.addBar(last,width);
+ return;
+ } 
+

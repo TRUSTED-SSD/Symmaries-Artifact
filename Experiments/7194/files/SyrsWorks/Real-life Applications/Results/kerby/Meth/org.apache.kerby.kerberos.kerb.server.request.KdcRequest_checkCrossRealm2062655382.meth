@@ -1,0 +1,26 @@
+boolean org.apache.kerby.kerberos.kerb.server.request.KdcRequest:checkCrossRealm(java.lang.String remoteRealm)
+{
+org.apache.kerby.kerberos.kerb.KrbException $stack2;
+  org.apache.kerby.kerberos.kerb.server.KdcContext $stack3;
+  java.lang.String $stack4;
+  boolean $stack8;
+  if (remoteRealm==null) goto label0;
+ $stack3=this.kdcContext;
+ $stack4 = $stack3.getKdcRealm();
+ if ($stack4==null) goto label0;
+ $stack3=this.kdcContext;
+ $stack4 = $stack3.getKdcRealm();
+ $stack8 = $stack4.equals((java.lang.Object)remoteRealm);
+ if ($stack8!=0) goto label1;
+ $stack8=1;
+ goto label2;
+ label1:$stack8=0;
+ label2:this.isCrossRealm=$stack8;
+ this.remoteRealm=remoteRealm;
+ $stack8=this.isCrossRealm;
+ return  $stack8;
+ label0:$stack2=new org.apache.kerby.kerberos.kerb.KrbException;
+ $stack2#org.apache.kerby.kerberos.kerb.KrbException("Missing the realm.");
+ throw $stack2;
+ } 
+

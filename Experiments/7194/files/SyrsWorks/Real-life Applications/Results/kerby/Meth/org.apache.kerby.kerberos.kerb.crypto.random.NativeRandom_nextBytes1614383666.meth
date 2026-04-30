@@ -1,0 +1,30 @@
+void org.apache.kerby.kerberos.kerb.crypto.random.NativeRandom:nextBytes(byte[] bytes)
+{
+java.io.InputStream $stack3;
+  int $stack4;
+  java.io.IOException $stack5;
+  java.lang.StringBuilder $stack7;
+  org.slf4j.Logger $stack8;
+  java.lang.String $stack10;
+  label0:$stack3=this.input;
+ dummyClass.highSourceMut(bytes);
+$stack4 = $stack3.read(bytes);
+dummyClass.highSourceMut($stack4);
+ if ($stack4!=-1) goto label1;
+ $stack5=new java.io.IOException;
+ $stack5#java.io.IOException();
+ throw $stack5;
+ label1:goto label2;
+ label3:$stack5 = catch;
+ $stack8=org.apache.kerby.kerberos.kerb.crypto.random.NativeRandom.LOG;
+ $stack7=new java.lang.StringBuilder;
+ $stack7#java.lang.StringBuilder();
+ $stack7 = $stack7.append("Failed to read nextBytes. ");
+ $stack10 = $stack5.toString();
+ $stack7 = $stack7.append($stack10);
+ $stack10 = $stack7.toString();
+ $stack8.error($stack10);
+ label2:return;
+ catch java.io.IOException: label0 - label1 : label3;
+} 
+

@@ -1,0 +1,52 @@
+static org.apache.kerby.config.ConfigLoader org.apache.kerby.config.Conf:getLoader(org.apache.kerby.config.Resource resource)
+{
+org.apache.kerby.config.ConfigLoader loader;
+  java.lang.Class loaderClass;
+  java.lang.Exception e;
+  org.apache.kerby.config.Resource$Format $stack4;
+  java.lang.Object $stack6;
+  java.lang.StringBuilder $stack8;
+  org.slf4j.Logger $stack9;
+  java.lang.Class $stack11;
+  java.lang.Package $stack12;
+  java.lang.String $stack13;
+  java.lang.RuntimeException $stack19;
+  loader=null;
+ $stack4 = resource.getFormat();
+ loaderClass = $stack4.getLoaderClass();
+ label0:$stack6 = loaderClass.newInstance();
+ loader=(org.apache.kerby.config.ConfigLoader) $stack6;
+ label1:goto label2;
+ label3:e = catch;
+ $stack9=org.apache.kerby.config.Conf.LOGGER;
+ $stack8=new java.lang.StringBuilder;
+ $stack8#java.lang.StringBuilder();
+ $stack8 = $stack8.append("Failed to create ");
+ $stack11=org.apache.kerby.config.Conf;
+ $stack12 = $stack11.getPackage();
+ $stack13 = $stack12.getName();
+ $stack8 = $stack8.append($stack13);
+ $stack8 = $stack8.append(" for ");
+ $stack13 = loaderClass.getName();
+ $stack8 = $stack8.append($stack13);
+ $stack13 = $stack8.toString();
+ $stack9.error($stack13,(java.lang.Throwable)e);
+ $stack19=new java.lang.RuntimeException;
+ $stack8=new java.lang.StringBuilder;
+ $stack8#java.lang.StringBuilder();
+ $stack8 = $stack8.append("Failed to create ");
+ $stack11=org.apache.kerby.config.Conf;
+ $stack12 = $stack11.getPackage();
+ $stack13 = $stack12.getName();
+ $stack8 = $stack8.append($stack13);
+ $stack8 = $stack8.append(" for ");
+ $stack13 = loaderClass.getName();
+ $stack8 = $stack8.append($stack13);
+ $stack13 = $stack8.toString();
+ $stack19#java.lang.RuntimeException($stack13,(java.lang.Throwable)e);
+ throw $stack19;
+ label2:loader.setResource(resource);
+ return  loader;
+ catch java.lang.Exception: label0 - label1 : label3;
+} 
+

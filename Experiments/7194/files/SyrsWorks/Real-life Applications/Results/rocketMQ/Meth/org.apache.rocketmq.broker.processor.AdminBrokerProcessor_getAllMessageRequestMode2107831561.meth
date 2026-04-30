@@ -1,0 +1,50 @@
+org.apache.rocketmq.remoting.protocol.RemotingCommand org.apache.rocketmq.broker.processor.AdminBrokerProcessor:getAllMessageRequestMode(io.netty.channel.ChannelHandlerContext ctx,org.apache.rocketmq.remoting.protocol.RemotingCommand @request)
+{
+java.lang.String content;
+  java.io.UnsupportedEncodingException e;
+  org.apache.rocketmq.broker.BrokerController $stack7;
+  org.apache.rocketmq.broker.processor.QueryAssignmentProcessor $stack8;
+  org.apache.rocketmq.broker.loadbalance.MessageRequestModeManager $stack9;
+  org.apache.rocketmq.logging.org.slf4j.Logger $stack11;
+  io.netty.channel.Channel $stack13;
+  java.net.SocketAddress $stack14;
+  int $stack15;
+  byte[] $stack22;
+  java.lang.StringBuilder $stack25;
+  org.apache.rocketmq.remoting.protocol.RemotingCommand request;
+request=@request;
+request = org.apache.rocketmq.remoting.protocol.RemotingCommand.createResponseCommand(null);
+ $stack7=this.brokerController;
+ $stack8 = $stack7.getQueryAssignmentProcessor();
+ $stack9 = $stack8.getMessageRequestModeManager();
+ content = $stack9.encode();
+ if (content==null) goto label0;
+ $stack15 = content.length();
+ if ($stack15<=0) goto label0;
+ label1:$stack22 = content.getBytes("UTF-8");
+ request.setBody($stack22);
+ label2:goto label3;
+ label4:e = catch;
+ $stack11=org.apache.rocketmq.broker.processor.AdminBrokerProcessor.LOGGER;
+ $stack11.error("get all message request mode from master error.",(java.lang.Throwable)e);
+ request.setCode(1);
+ $stack25=new java.lang.StringBuilder;
+ $stack25#java.lang.StringBuilder();
+ $stack25 = $stack25.append("UnsupportedEncodingException ");
+ $stack25 = $stack25.append((java.lang.Object)e);
+ content = $stack25.toString();
+ request.setRemark(content);
+ return  request;
+ label0:$stack11=org.apache.rocketmq.broker.processor.AdminBrokerProcessor.LOGGER;
+ $stack13 = ctx.channel();
+ $stack14 = $stack13.remoteAddress();
+ $stack11.error("No message request mode in this broker, client: {} ",(java.lang.Object)$stack14);
+ request.setCode(1);
+ request.setRemark("No message request mode in this broker");
+ return  request;
+ label3:request.setCode(0);
+ request.setRemark(null);
+ return  request;
+ catch java.io.UnsupportedEncodingException: label1 - label2 : label4;
+} 
+

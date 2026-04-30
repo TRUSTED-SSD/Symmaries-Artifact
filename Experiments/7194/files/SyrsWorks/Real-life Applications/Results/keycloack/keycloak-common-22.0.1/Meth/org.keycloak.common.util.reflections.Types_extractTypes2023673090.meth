@@ -1,0 +1,21 @@
+static java.lang.reflect.Type[] org.keycloak.common.util.reflections.Types:extractTypes(java.util.Map typeVarMap,java.lang.reflect.Type genericSub)
+{
+java.lang.reflect.ParameterizedType param;
+  java.lang.reflect.Type[] types;
+  java.lang.reflect.Type[] returnTypes;
+  boolean $stack5;
+  int $stack8;
+  $stack5=genericSub instanceof java.lang.reflect.ParameterizedType;
+ if ($stack5==0) goto label0;
+ param=(java.lang.reflect.ParameterizedType) genericSub;
+ types = param.getActualTypeArguments();
+ $stack8=#types;
+ returnTypes=new java.lang.reflect.Type[$stack8];
+ $stack8=#types;
+ java.lang.System.arraycopy((java.lang.Object)types,0,(java.lang.Object)returnTypes,0,$stack8);
+ types = org.keycloak.common.util.reflections.Types.extractTypeVariables(typeVarMap,returnTypes);
+ return  returnTypes;
+ label0:returnTypes=org.keycloak.common.util.reflections.Types.EMPTY_TYPE_ARRAY;
+ return  returnTypes;
+ } 
+

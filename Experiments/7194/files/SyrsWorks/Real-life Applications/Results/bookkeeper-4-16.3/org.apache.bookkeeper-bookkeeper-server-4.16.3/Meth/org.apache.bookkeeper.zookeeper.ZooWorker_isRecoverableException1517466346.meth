@@ -1,0 +1,23 @@
+static boolean org.apache.bookkeeper.zookeeper.ZooWorker:isRecoverableException(int rc)
+{
+org.apache.zookeeper.KeeperException$Code $stack1;
+  int $stack2;
+  boolean $stack9;
+  $stack1=org.apache.zookeeper.KeeperException$Code.CONNECTIONLOSS;
+ $stack2 = $stack1.intValue();
+ if ($stack2==rc) goto label0;
+ $stack1=org.apache.zookeeper.KeeperException$Code.OPERATIONTIMEOUT;
+ $stack2 = $stack1.intValue();
+ if ($stack2==rc) goto label0;
+ $stack1=org.apache.zookeeper.KeeperException$Code.SESSIONMOVED;
+ $stack2 = $stack1.intValue();
+ if ($stack2==rc) goto label0;
+ $stack1=org.apache.zookeeper.KeeperException$Code.SESSIONEXPIRED;
+ $stack2 = $stack1.intValue();
+ if ($stack2!=rc) goto label1;
+ label0:$stack9=1;
+ goto label2;
+ label1:$stack9=0;
+ label2:return  $stack9;
+ } 
+

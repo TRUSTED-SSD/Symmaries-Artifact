@@ -1,0 +1,26 @@
+boolean com.google.zxing.datamatrix.decoder.BitMatrixParser:readModule(int row,int column,int numRows,int numColumns)
+{
+com.google.zxing.common.BitMatrix $stack5;
+  boolean $stack7;
+  int $stack19;
+  if (row>=0) goto label0;
+ row=(row+numRows);
+ $stack19=(numRows+4);
+ $stack19=($stack19 & 7);
+ $stack19=(4-$stack19);
+ column=(column+$stack19);
+ label0:if (column>=0) goto label1;
+ column=(column+numColumns);
+ numColumns=(numColumns+4);
+ numColumns=(numColumns & 7);
+ numColumns=(4-numColumns);
+ row=(row+numColumns);
+ label1:if (row<numRows) goto label2;
+ row=(row-numRows);
+ label2:$stack5=this.readMappingMatrix;
+ $stack5.set(column,row);
+ $stack5=this.mappingBitMatrix;
+ $stack7 = $stack5.get(column,row);
+ return  $stack7;
+ } 
+

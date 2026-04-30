@@ -1,0 +1,15 @@
+void org.apache.bookkeeper.bookie.LedgerEntryPage:usePage()
+{
+int oldVal;
+  java.util.concurrent.atomic.AtomicInteger $stack2;
+  org.apache.bookkeeper.bookie.LEPStateChangeCallback $stack4;
+  $stack2=this.useCount;
+ oldVal = $stack2.getAndIncrement();
+ if (0!=oldVal) goto label0;
+ $stack4=this.callback;
+ if (null==$stack4) goto label0;
+ $stack4=this.callback;
+ $stack4.onSetInUse(this);
+ label0:return;
+ } 
+

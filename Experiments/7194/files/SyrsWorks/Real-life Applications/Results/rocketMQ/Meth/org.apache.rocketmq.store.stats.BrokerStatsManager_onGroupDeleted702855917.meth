@@ -1,0 +1,40 @@
+void org.apache.rocketmq.store.stats.BrokerStatsManager:onGroupDeleted(java.lang.String group)
+{
+java.util.HashMap $stack2;
+  java.lang.Object $stack3;
+  org.apache.rocketmq.common.stats.StatsItemSet $stack4;
+  boolean $stack8;
+  org.apache.rocketmq.common.stats.MomentStatsItemSet $stack15;
+  $stack2=this.statsTable;
+ $stack3 = $stack2.get((java.lang.Object)"GROUP_GET_NUMS");
+ $stack4=(org.apache.rocketmq.common.stats.StatsItemSet) $stack3;
+ $stack4.delValueBySuffixKey(group,"@");
+ $stack2=this.statsTable;
+ $stack3 = $stack2.get((java.lang.Object)"GROUP_GET_SIZE");
+ $stack4=(org.apache.rocketmq.common.stats.StatsItemSet) $stack3;
+ $stack4.delValueBySuffixKey(group,"@");
+ $stack8=this.enableQueueStat;
+ if ($stack8==0) goto label0;
+ $stack2=this.statsTable;
+ $stack3 = $stack2.get((java.lang.Object)"QUEUE_GET_NUMS");
+ $stack4=(org.apache.rocketmq.common.stats.StatsItemSet) $stack3;
+ $stack4.delValueBySuffixKey(group,"@");
+ $stack2=this.statsTable;
+ $stack3 = $stack2.get((java.lang.Object)"QUEUE_GET_SIZE");
+ $stack4=(org.apache.rocketmq.common.stats.StatsItemSet) $stack3;
+ $stack4.delValueBySuffixKey(group,"@");
+ label0:$stack2=this.statsTable;
+ $stack3 = $stack2.get((java.lang.Object)"SNDBCK_PUT_NUMS");
+ $stack4=(org.apache.rocketmq.common.stats.StatsItemSet) $stack3;
+ $stack4.delValueBySuffixKey(group,"@");
+ $stack2=this.statsTable;
+ $stack3 = $stack2.get((java.lang.Object)"GROUP_GET_LATENCY");
+ $stack4=(org.apache.rocketmq.common.stats.StatsItemSet) $stack3;
+ $stack4.delValueBySuffixKey(group,"@");
+ $stack15=this.momentStatsItemSetFallSize;
+ $stack15.delValueBySuffixKey(group,"@");
+ $stack15=this.momentStatsItemSetFallTime;
+ $stack15.delValueBySuffixKey(group,"@");
+ return;
+ } 
+

@@ -1,0 +1,15 @@
+byte[] org.apache.kerby.kerberos.kerb.crypto.enc.DesCbcEnc:prf(byte[] key,byte[] @seed)
+{
+org.apache.kerby.kerberos.kerb.crypto.cksum.provider.Md5Provider md5Provider;
+  org.apache.kerby.kerberos.kerb.crypto.enc.EncryptProvider $stack7;
+  byte[] seed;
+seed=@seed;
+md5Provider=new org.apache.kerby.kerberos.kerb.crypto.cksum.provider.Md5Provider;
+ md5Provider#org.apache.kerby.kerberos.kerb.crypto.cksum.provider.Md5Provider();
+ md5Provider.hash(seed);
+ seed = md5Provider.output();
+ $stack7 = this.encProvider();
+ $stack7.encrypt(key,seed);
+ return  seed;
+ } 
+

@@ -1,0 +1,29 @@
+void org.apache.rocketmq.broker.client.net.Broker2Client:notifyConsumerIdsChanged(io.netty.channel.Channel channel,java.lang.String consumerGroup)
+{
+org.apache.rocketmq.remoting.protocol.header.NotifyConsumerIdsChangedRequestHeader requestHeader;
+  org.apache.rocketmq.remoting.protocol.RemotingCommand request;
+  org.apache.rocketmq.broker.BrokerController $stack8;
+  org.apache.rocketmq.remoting.RemotingServer $stack9;
+  org.apache.rocketmq.logging.org.slf4j.Logger $stack10;
+  java.lang.Exception $stack11;
+  java.lang.String $stack14;
+  if (null!=consumerGroup) goto label0;
+ $stack10=org.apache.rocketmq.broker.client.net.Broker2Client.log;
+ $stack10.error("notifyConsumerIdsChanged consumerGroup is null");
+ return;
+ label0:requestHeader=new org.apache.rocketmq.remoting.protocol.header.NotifyConsumerIdsChangedRequestHeader;
+ requestHeader#org.apache.rocketmq.remoting.protocol.header.NotifyConsumerIdsChangedRequestHeader();
+ requestHeader.setConsumerGroup(consumerGroup);
+ request = org.apache.rocketmq.remoting.protocol.RemotingCommand.createRequestCommand(40,(org.apache.rocketmq.remoting.CommandCustomHeader)requestHeader);
+ label1:$stack8=this.brokerController;
+ $stack9 = $stack8.getRemotingServer();
+ $stack9.invokeOneway(channel,request,10L);
+ label2:goto label3;
+ label4:$stack11 = catch;
+ $stack10=org.apache.rocketmq.broker.client.net.Broker2Client.log;
+ $stack14 = $stack11.toString();
+ $stack10.error("notifyConsumerIdsChanged exception. group={}, error={}",(java.lang.Object)consumerGroup,(java.lang.Object)$stack14);
+ label3:return;
+ catch java.lang.Exception: label1 - label2 : label4;
+} 
+

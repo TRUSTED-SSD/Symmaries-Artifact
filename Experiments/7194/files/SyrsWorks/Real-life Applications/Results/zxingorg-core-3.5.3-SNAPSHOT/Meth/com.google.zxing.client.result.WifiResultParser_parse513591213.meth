@@ -1,0 +1,51 @@
+com.google.zxing.client.result.WifiParsedResult com.google.zxing.client.result.WifiResultParser:parse(com.google.zxing.Result result)
+{
+java.lang.String rawText;
+  java.lang.String ssid;
+  java.lang.String pass;
+  java.lang.String type;
+  boolean hidden;
+  java.lang.String phase2Method;
+  java.lang.String hValue;
+  java.lang.String anonymousIdentity;
+  int $stack15;
+  com.google.zxing.client.result.WifiParsedResult $stack26;
+  boolean $stack49;
+  rawText = com.google.zxing.client.result.ResultParser.getMassagedText(result);
+ hidden = rawText.startsWith("WIFI:");
+ if (hidden!=0) goto label0;
+ return  null;
+ label0:ssid="WIFI:";
+ $stack15 = ssid.length();
+ rawText = rawText.substring($stack15);
+ ssid = com.google.zxing.client.result.ResultParser.matchSinglePrefixedField("S:",rawText,(char)59,(boolean)0);
+ if (ssid==null) goto label1;
+ hidden = ssid.isEmpty();
+ if (hidden==0) goto label2;
+ label1:return  null;
+ label2:pass = com.google.zxing.client.result.ResultParser.matchSinglePrefixedField("P:",rawText,(char)59,(boolean)0);
+ type = com.google.zxing.client.result.ResultParser.matchSinglePrefixedField("T:",rawText,(char)59,(boolean)0);
+ if (type!=null) goto label3;
+ type="nopass";
+ label3:hidden=0;
+ phase2Method = com.google.zxing.client.result.ResultParser.matchSinglePrefixedField("PH2:",rawText,(char)59,(boolean)0);
+ hValue = com.google.zxing.client.result.ResultParser.matchSinglePrefixedField("H:",rawText,(char)59,(boolean)0);
+ if (hValue==null) goto label4;
+ if (phase2Method!=null) goto label5;
+ anonymousIdentity="true";
+ $stack49 = anonymousIdentity.equalsIgnoreCase(hValue);
+ if ($stack49!=0) goto label5;
+ anonymousIdentity="false";
+ $stack49 = anonymousIdentity.equalsIgnoreCase(hValue);
+ if ($stack49==0) goto label6;
+ label5:hidden = java.lang.Boolean.parseBoolean(hValue);
+ goto label4;
+ label6:phase2Method=hValue;
+ label4:hValue = com.google.zxing.client.result.ResultParser.matchSinglePrefixedField("I:",rawText,(char)59,(boolean)0);
+ anonymousIdentity = com.google.zxing.client.result.ResultParser.matchSinglePrefixedField("A:",rawText,(char)59,(boolean)0);
+ $stack26=new com.google.zxing.client.result.WifiParsedResult;
+ rawText = com.google.zxing.client.result.ResultParser.matchSinglePrefixedField("E:",rawText,(char)59,(boolean)0);
+ $stack26#com.google.zxing.client.result.WifiParsedResult(type,ssid,pass,hidden,hValue,anonymousIdentity,rawText,phase2Method);
+ return  $stack26;
+ } 
+

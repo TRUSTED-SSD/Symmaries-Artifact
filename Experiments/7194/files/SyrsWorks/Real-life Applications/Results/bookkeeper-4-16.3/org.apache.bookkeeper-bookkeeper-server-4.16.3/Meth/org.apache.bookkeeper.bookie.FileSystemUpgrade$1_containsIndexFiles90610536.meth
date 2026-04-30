@@ -1,0 +1,45 @@
+boolean org.apache.bookkeeper.bookie.FileSystemUpgrade$1:containsIndexFiles(java.io.File @dir,java.lang.String @name)
+{
+java.io.Serializable d;
+  java.lang.String[] files;
+  int l6;
+  int l7;
+  boolean $stack9;
+  java.lang.NumberFormatException $stack17;
+  java.io.File tmp$1053059328;
+  java.io.File dir;
+java.lang.String name;
+name=@name;
+dir=@dir;
+$stack9 = name.endsWith(".idx");
+ if ($stack9==0) goto label0;
+ return  1;
+ label0:java.lang.Long.parseLong(name,16);
+ tmp$1053059328=new java.io.File;
+ tmp$1053059328#java.io.File(dir,name);
+ d=tmp$1053059328;
+ dir=(java.io.File) tmp$1053059328;
+ $stack9 = dir.isDirectory();
+ if ($stack9==0) goto label1;
+ dir=(java.io.File) tmp$1053059328;
+ files = dir.list();
+ if (files==null) goto label1;
+ l6=#files;
+ l7=0;
+ label2:if (l7>=l6) goto label1;
+ name=files[l7];
+ dir=(java.io.File) tmp$1053059328;
+ $stack9 = this#org.apache.bookkeeper.bookie.FileSystemUpgrade$1:containsIndexFiles(dir,name);
+ if ($stack9==0) goto label3;
+ label4:return  1;
+ label3:l7=(l7+1);
+ goto label2;
+ label1:goto label5;
+ label6:$stack17 = catch;
+ d=$stack17;
+ return  0;
+ label5:return  0;
+ catch java.lang.NumberFormatException: label0 - label4 : label6;
+catch java.lang.NumberFormatException: label3 - label1 : label6;
+} 
+

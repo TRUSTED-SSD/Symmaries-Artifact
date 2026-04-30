@@ -1,0 +1,44 @@
+org.apache.bookkeeper.client.LedgerFragmentReplicator(org.apache.bookkeeper.client.BookKeeper bkc,org.apache.bookkeeper.stats.StatsLogger @statsLogger,org.apache.bookkeeper.conf.ClientConfiguration conf)
+{
+org.apache.bookkeeper.stats.Counter $stack5;
+  org.apache.bookkeeper.stats.OpStatsLogger $stack7;
+  int $stack16;
+  java.util.concurrent.atomic.AtomicInteger $stack17;
+  org.apache.bookkeeper.client.LedgerFragmentReplicator$Throttler $stack18;
+  org.apache.bookkeeper.stats.StatsLogger statsLogger;
+statsLogger=@statsLogger;
+this#java.lang.Object();
+ this.replicationThrottle=null;
+ this.bkc=bkc;
+ this.statsLogger=statsLogger;
+ statsLogger=this.statsLogger;
+ $stack5 = statsLogger.getCounter("NUM_ENTRIES_READ");
+ this.numEntriesRead=$stack5;
+ statsLogger=this.statsLogger;
+ $stack7 = statsLogger.getOpStatsLogger("NUM_BYTES_READ");
+ this.numBytesRead=$stack7;
+ statsLogger=this.statsLogger;
+ $stack5 = statsLogger.getCounter("NUM_ENTRIES_WRITTEN");
+ this.numEntriesWritten=$stack5;
+ statsLogger=this.statsLogger;
+ $stack7 = statsLogger.getOpStatsLogger("NUM_BYTES_WRITTEN");
+ this.numBytesWritten=$stack7;
+ statsLogger=this.statsLogger;
+ $stack7 = statsLogger.getOpStatsLogger("READ_DATA_LATENCY");
+ this.readDataLatency=$stack7;
+ statsLogger=this.statsLogger;
+ $stack7 = statsLogger.getOpStatsLogger("WRITE_DATA_LATENCY");
+ this.writeDataLatency=$stack7;
+ $stack16 = conf.getReplicationRateByBytes();
+ if ($stack16<=0) goto label0;
+ $stack18=new org.apache.bookkeeper.client.LedgerFragmentReplicator$Throttler;
+ $stack16 = conf.getReplicationRateByBytes();
+ $stack18#org.apache.bookkeeper.client.LedgerFragmentReplicator$Throttler($stack16);
+ this.replicationThrottle=$stack18;
+ label0:$stack17=new java.util.concurrent.atomic.AtomicInteger;
+ $stack17#java.util.concurrent.atomic.AtomicInteger(1024);
+ this.averageEntrySize=$stack17;
+ this.conf=conf;
+ return;
+ } 
+

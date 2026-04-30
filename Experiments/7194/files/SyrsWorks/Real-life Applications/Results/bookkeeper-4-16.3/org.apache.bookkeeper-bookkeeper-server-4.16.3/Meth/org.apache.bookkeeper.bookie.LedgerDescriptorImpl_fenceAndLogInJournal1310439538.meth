@@ -1,0 +1,28 @@
+java.util.concurrent.CompletableFuture org.apache.bookkeeper.bookie.LedgerDescriptorImpl:fenceAndLogInJournal(org.apache.bookkeeper.bookie.Journal journal)
+{
+boolean success;
+  java.util.concurrent.CompletableFuture result;
+  java.lang.Boolean $stack7;
+  java.util.concurrent.atomic.AtomicBoolean $stack9;
+  success = this.setFenced();
+ if (success==0) goto label0;
+ result = this#org.apache.bookkeeper.bookie.LedgerDescriptorImpl:logFenceEntryInJournal(journal);
+ return  result;
+ label0:result=this.logFenceResult;
+ if (result==null) goto label1;
+ $stack9=this.fenceEntryPersisted;
+ success = $stack9.get();
+ if (success==0) goto label2;
+ label1:result = org.apache.bookkeeper.common.concurrent.FutureUtils.createFuture();
+ $stack7 = java.lang.Boolean.valueOf((boolean)1);
+ result.complete((java.lang.Object)$stack7);
+ return  result;
+ label2:result=this.logFenceResult;
+ success = result.isDone();
+ if (success==0) goto label3;
+ result = this#org.apache.bookkeeper.bookie.LedgerDescriptorImpl:logFenceEntryInJournal(journal);
+ return  result;
+ label3:result=this.logFenceResult;
+ return  result;
+ } 
+

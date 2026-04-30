@@ -1,0 +1,37 @@
+java.util.Collection org.apache.rocketmq.broker.filter.ConsumerFilterManager:getByGroup(java.lang.String consumerGroup)
+{
+java.util.HashSet ret;
+  java.util.Iterator topicIterator;
+  org.apache.rocketmq.broker.filter.ConsumerFilterManager$FilterDataMapByTopic filterDataMapByTopic;
+  java.util.Iterator filterDataIterator;
+  org.apache.rocketmq.broker.filter.ConsumerFilterData filterData;
+  java.util.concurrent.ConcurrentMap $stack8;
+  java.util.Collection $stack9;
+  boolean $stack11;
+  java.lang.Object $stack12;
+  java.lang.String $stack19;
+  ret=new java.util.HashSet;
+ ret#java.util.HashSet();
+ $stack8=this.filterDataByTopic;
+ $stack9 = $stack8.values();
+ topicIterator = $stack9.iterator();
+ label0:$stack11 = topicIterator.hasNext();
+ if ($stack11==0) goto label1;
+ $stack12 = topicIterator.next();
+ filterDataMapByTopic=(org.apache.rocketmq.broker.filter.ConsumerFilterManager$FilterDataMapByTopic) $stack12;
+ $stack8 = filterDataMapByTopic.getGroupFilterData();
+ $stack9 = $stack8.values();
+ filterDataIterator = $stack9.iterator();
+ label2:$stack11 = filterDataIterator.hasNext();
+ if ($stack11==0) goto label3;
+ $stack12 = filterDataIterator.next();
+ filterData=(org.apache.rocketmq.broker.filter.ConsumerFilterData) $stack12;
+ $stack19 = filterData.getConsumerGroup();
+ $stack11 = $stack19.equals((java.lang.Object)consumerGroup);
+ if ($stack11==0) goto label4;
+ ret.add((java.lang.Object)filterData);
+ label4:goto label2;
+ label3:goto label0;
+ label1:return  ret;
+ } 
+

@@ -1,0 +1,55 @@
+org.apache.rocketmq.remoting.protocol.admin.TopicStatsTable org.apache.rocketmq.tools.admin.DefaultMQAdminExtImpl:examineTopicStats(java.lang.String topic)
+{
+org.apache.rocketmq.remoting.protocol.route.TopicRouteData topicRouteData;
+  org.apache.rocketmq.remoting.protocol.admin.TopicStatsTable topicStatsTable;
+  java.lang.Object brokerConfigMap;
+  org.apache.rocketmq.remoting.protocol.route.BrokerData bd;
+  java.lang.String addr;
+  org.apache.rocketmq.remoting.protocol.admin.TopicStatsTable tst;
+  java.util.List $stack10;
+  boolean $stack12;
+  org.apache.rocketmq.tools.admin.DefaultMQAdminExt $stack13;
+  java.util.Map $stack15;
+  java.lang.Object $stack18;
+  org.apache.rocketmq.client.impl.factory.MQClientInstance $stack21;
+  org.apache.rocketmq.client.impl.MQClientAPIImpl $stack22;
+  long $stack23;
+  java.util.Map $stack26;
+  org.apache.rocketmq.client.exception.MQClientException tmp$1289824112;
+  java.util.Iterator tmp$835164203;
+  topicRouteData = this.examineTopicRouteInfo(topic);
+ tst=new org.apache.rocketmq.remoting.protocol.admin.TopicStatsTable;
+ topicStatsTable=tst;
+ tst#org.apache.rocketmq.remoting.protocol.admin.TopicStatsTable();
+ topicStatsTable=tst;
+ $stack10 = topicRouteData.getBrokerDatas();
+ brokerConfigMap = $stack10.iterator();
+ label0:tmp$835164203=(java.util.Iterator) brokerConfigMap;
+ $stack12 = tmp$835164203.hasNext();
+ if ($stack12==0) goto label1;
+ tmp$835164203=(java.util.Iterator) brokerConfigMap;
+ $stack18 = tmp$835164203.next();
+ bd=(org.apache.rocketmq.remoting.protocol.route.BrokerData) $stack18;
+ addr = bd.selectBrokerAddr();
+ if (addr==null) goto label2;
+ $stack21=this.mqClientInstance;
+ $stack22 = $stack21.getMQClientAPIImpl();
+ $stack23=this.timeoutMillis;
+ tst = $stack22.getTopicStatsInfo(addr,topic,$stack23);
+ $stack15 = topicStatsTable.getOffsetTable();
+ $stack26 = tst.getOffsetTable();
+ $stack15.putAll($stack26);
+ label2:goto label0;
+ label1:$stack13=this.defaultMQAdminExt;
+ brokerConfigMap = org.apache.rocketmq.tools.admin.MQAdminUtils.examineTopicConfigFromRoute(topic,topicRouteData,$stack13);
+ $stack15=(java.util.Map) brokerConfigMap;
+ org.apache.rocketmq.tools.admin.MQAdminUtils.convertPhysicalTopicStats(topic,$stack15,topicStatsTable);
+ $stack15 = topicStatsTable.getOffsetTable();
+ $stack12 = $stack15.isEmpty();
+ if ($stack12==0) goto label3;
+ tmp$1289824112=new org.apache.rocketmq.client.exception.MQClientException;
+ tmp$1289824112#org.apache.rocketmq.client.exception.MQClientException("Not found the topic stats info",null);
+ throw tmp$1289824112;
+ label3:return  topicStatsTable;
+ } 
+

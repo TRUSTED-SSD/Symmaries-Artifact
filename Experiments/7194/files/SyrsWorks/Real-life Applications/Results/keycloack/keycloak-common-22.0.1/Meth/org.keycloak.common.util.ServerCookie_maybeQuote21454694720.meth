@@ -1,0 +1,48 @@
+static void org.keycloak.common.util.ServerCookie:maybeQuote2(int version,java.lang.StringBuffer buf,java.lang.String @value)
+{
+int $stack4;
+  boolean $stack5;
+  java.lang.IllegalArgumentException $stack33;
+  java.lang.String value;
+value=@value;
+if (value==null) goto label0;
+ $stack4 = value.length();
+ if ($stack4!=0) goto label1;
+ label0:buf.append("\"\"");
+ goto label2;
+ label1:$stack5 = org.keycloak.common.util.ServerCookie.containsCTL(value,version);
+ if ($stack5==0) goto label3;
+ $stack33=new java.lang.IllegalArgumentException;
+ $stack33#java.lang.IllegalArgumentException("Control character in cookie value, consider BASE64 encoding your value");
+ throw $stack33;
+ label3:$stack5 = org.keycloak.common.util.ServerCookie.alreadyQuoted(value);
+ if ($stack5==0) goto label4;
+ buf.append((char)34);
+ version = value.length();
+ version=(version-1);
+ value = org.keycloak.common.util.ServerCookie.escapeDoubleQuotes(value,1,version);
+ buf.append(value);
+ buf.append((char)34);
+ goto label2;
+ label4:if (version!=0) goto label5;
+ $stack5 = org.keycloak.common.util.ServerCookie.isToken(value);
+ if ($stack5!=0) goto label5;
+ buf.append((char)34);
+ version = value.length();
+ value = org.keycloak.common.util.ServerCookie.escapeDoubleQuotes(value,0,version);
+ buf.append(value);
+ buf.append((char)34);
+ goto label2;
+ label5:if (version!=1) goto label6;
+ $stack5 = org.keycloak.common.util.ServerCookie.isToken2(value);
+ if ($stack5!=0) goto label6;
+ buf.append((char)34);
+ version = value.length();
+ value = org.keycloak.common.util.ServerCookie.escapeDoubleQuotes(value,0,version);
+ buf.append(value);
+ buf.append((char)34);
+ goto label2;
+ label6:buf.append(value);
+ label2:return;
+ } 
+

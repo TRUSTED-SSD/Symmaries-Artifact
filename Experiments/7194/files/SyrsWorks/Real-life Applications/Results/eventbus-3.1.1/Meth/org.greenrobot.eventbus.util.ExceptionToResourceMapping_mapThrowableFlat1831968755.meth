@@ -1,0 +1,39 @@
+java.lang.Integer org.greenrobot.eventbus.util.ExceptionToResourceMapping:mapThrowableFlat(java.lang.Throwable throwable)
+{
+java.lang.Class throwableClass;
+  java.lang.Integer resId;
+  java.lang.Class closestClass;
+  java.util.Set mappings;
+  java.util.Iterator l6;
+  java.util.Map$Entry mapping;
+  java.lang.Class candidate;
+  java.util.Map $stack10;
+  java.lang.Object $stack11;
+  boolean $stack15;
+  throwableClass = throwable.getClass();
+ $stack10=this.throwableToMsgIdMap;
+ $stack11 = $stack10.get((java.lang.Object)throwableClass);
+ resId=(java.lang.Integer) $stack11;
+ if (resId!=null) goto label0;
+ closestClass=null;
+ $stack10=this.throwableToMsgIdMap;
+ mappings = $stack10.entrySet();
+ l6 = mappings.iterator();
+ label1:$stack15 = l6.hasNext();
+ if ($stack15==0) goto label0;
+ $stack11 = l6.next();
+ mapping=(java.util.Map$Entry) $stack11;
+ $stack11 = mapping.getKey();
+ candidate=(java.lang.Class) $stack11;
+ $stack15 = candidate.isAssignableFrom(throwableClass);
+ if ($stack15==0) goto label2;
+ if (closestClass==null) goto label3;
+ $stack15 = closestClass.isAssignableFrom(candidate);
+ if ($stack15==0) goto label2;
+ label3:closestClass=candidate;
+ $stack11 = mapping.getValue();
+ resId=(java.lang.Integer) $stack11;
+ label2:goto label1;
+ label0:return  resId;
+ } 
+

@@ -1,0 +1,57 @@
+boolean org.apache.rocketmq.remoting.netty.RequestTask:equals(java.lang.Object o)
+{
+org.apache.rocketmq.remoting.netty.RequestTask that;
+  boolean $stack3;
+  long $stack4;
+  long $stack5;
+  byte $stack6;
+  boolean $stack8;
+  io.netty.channel.Channel $stack9;
+  org.apache.rocketmq.remoting.protocol.RemotingCommand $stack11;
+  int $stack15;
+  int $stack17;
+  io.netty.channel.Channel $stack19;
+  if (this!=o) goto label0;
+ return  1;
+ label0:$stack3=o instanceof org.apache.rocketmq.remoting.netty.RequestTask;
+ if ($stack3!=0) goto label1;
+ return  0;
+ label1:that=(org.apache.rocketmq.remoting.netty.RequestTask) o;
+ $stack4 = this.getCreateTimestamp();
+ $stack5 = that.getCreateTimestamp();
+ $stack6=($stack4 cmp $stack5);
+ if ($stack6==0) goto label2;
+ return  0;
+ label2:$stack3 = this.isStopRun();
+ $stack8 = that.isStopRun();
+ if ($stack3==$stack8) goto label3;
+ return  0;
+ label3:$stack9=this.channel;
+ if ($stack9==null) goto label4;
+ $stack19=this.channel;
+ $stack9=that.channel;
+ $stack3 = $stack19.equals((java.lang.Object)$stack9);
+ if ($stack3!=0) goto label5;
+ goto label6;
+ label4:$stack9=that.channel;
+ if ($stack9==null) goto label5;
+ label6:return  0;
+ label5:$stack11=this.request;
+ if ($stack11==null) goto label7;
+ $stack11=this.request;
+ $stack15 = $stack11.getOpaque();
+ $stack11=that.request;
+ $stack17 = $stack11.getOpaque();
+ if ($stack15!=$stack17) goto label8;
+ $stack3=1;
+ goto label9;
+ label8:$stack3=0;
+ goto label9;
+ label7:$stack11=that.request;
+ if ($stack11!=null) goto label10;
+ $stack3=1;
+ goto label9;
+ label10:$stack3=0;
+ label9:return  $stack3;
+ } 
+

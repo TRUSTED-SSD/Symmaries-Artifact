@@ -1,0 +1,27 @@
+static java.util.Map org.keycloak.common.util.reflections.Types:populateParameterizedMap(java.lang.Class root,java.lang.reflect.ParameterizedType rootType)
+{
+java.util.HashMap typeVarMap;
+  java.lang.reflect.TypeVariable[] vars;
+  int i;
+  int $stack7;
+  java.lang.reflect.TypeVariable $stack9;
+  java.lang.String $stack10;
+  java.lang.reflect.Type[] $stack11;
+  java.lang.reflect.Type $stack12;
+  typeVarMap=new java.util.HashMap;
+ typeVarMap#java.util.HashMap();
+ if (rootType==null) goto label0;
+ vars = root.getTypeParameters();
+ i=0;
+ label1:$stack7=#vars;
+ if (i>=$stack7) goto label0;
+ $stack9=vars[i];
+ $stack10 = $stack9.getName();
+ $stack11 = rootType.getActualTypeArguments();
+ $stack12=$stack11[i];
+ typeVarMap.put((java.lang.Object)$stack10,(java.lang.Object)$stack12);
+ i=(i+1);
+ goto label1;
+ label0:return  typeVarMap;
+ } 
+
