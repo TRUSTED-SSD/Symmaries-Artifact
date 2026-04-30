@@ -14,17 +14,18 @@ This artefact contains our experiments on specification inference for Java (byte
 	* `syrs.opt` and its dependancies: The binary of our tool.
 	* `Syrsworks/JavaAPI-V3/`: Experiments on the Java SDK for precision/scalability analysis.
 	* `Syrsworks/Real-life Applications/`: Experiments on open-source Java applications for scalability analysis.
-
-Each experiment folder contains:
-- Compiled application binaries or their source codes,
-- Input data generated from `.jar` files for our tool,
-- The tool output.
+	* 'Syrsworks/secstubs.xlsx' shows the AI command used to generate security stubs and the list of security stubs generated. Note that the tool by default constructs a security summary, and use these security stubs, if it fails to analyze a method or a method is excluded from analysis by the user, e.g., it's a native code.
 
 ---
 
-## Folder Structure
+Each experiment folder in Java API or Real-life Applications contains:
+	- Compiled application binaries or their source codes,
+	- Input data generated from `.jar` files for our tool,
+	- The tool output.
 
-In each application subfolder, the following structure is used:
+## Folder structure of the tool output
+
+In each application subfolder for the tool output, the following structure is used:
 
 | Folder/File           | Description                                                                |
 |-----------------------|----------------------------------------------------------------------------|
